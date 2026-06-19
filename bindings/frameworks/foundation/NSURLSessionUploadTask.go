@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A URL session task that uploads data to the network in a request body.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsessionuploadtask
 type NSURLSessionUploadTask struct {
 	NSURLSessionDataTask

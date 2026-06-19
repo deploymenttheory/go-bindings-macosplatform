@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A read-only proxy object that represents a Photos asset or collection to create.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phobjectplaceholder
 type PHObjectPlaceholder struct {
 	PHObject

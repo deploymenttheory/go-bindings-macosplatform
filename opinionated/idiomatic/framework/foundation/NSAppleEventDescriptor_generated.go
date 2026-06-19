@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A wrapper for the Apple event descriptor data type.
+//
 // AppleEventDescriptor wraps [raw.NSAppleEventDescriptor] with a fluent Go API.
 type AppleEventDescriptor struct {
 	inner *raw.NSAppleEventDescriptor
@@ -37,6 +39,8 @@ func NewAppleEventDescriptor() *AppleEventDescriptor {
 	return &AppleEventDescriptor{inner: raw.NSAppleEventDescriptorFromID(_id)}
 }
 
+// Initializes a newly allocated instance as a descriptor for the specified Carbon AEDesc structure.
+//
 // NewAppleEventDescriptorWithAEDescNoCopy creates a new [AppleEventDescriptor].
 func NewAppleEventDescriptorWithAEDescNoCopy(aeDesc *ae.AEDesc) *AppleEventDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAppleEventDescriptor")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func NewAppleEventDescriptorWithAEDescNoCopy(aeDesc *ae.AEDesc) *AppleEventDescr
 	return &AppleEventDescriptor{inner: raw.NSAppleEventDescriptorFromID(_id)}
 }
 
+// Initializes a newly allocated instance as a descriptor with the specified descriptor type and data (from an arbitrary sequence of bytes and a length count).
+//
 // NewAppleEventDescriptorWithDescriptorTypeBytesLength creates a new [AppleEventDescriptor].
 func NewAppleEventDescriptorWithDescriptorTypeBytesLength(descriptorType uint, bytes_ unsafe.Pointer, byteCount uint) *AppleEventDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAppleEventDescriptor")), objc.RegisterName("alloc"))
@@ -51,6 +57,8 @@ func NewAppleEventDescriptorWithDescriptorTypeBytesLength(descriptorType uint, b
 	return &AppleEventDescriptor{inner: raw.NSAppleEventDescriptorFromID(_id)}
 }
 
+// Initializes a newly allocated instance as a descriptor with the specified descriptor type and data (from an instance of NSData).
+//
 // NewAppleEventDescriptorWithDescriptorTypeData creates a new [AppleEventDescriptor].
 func NewAppleEventDescriptorWithDescriptorTypeData(descriptorType uint, data *raw.NSData) *AppleEventDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAppleEventDescriptor")), objc.RegisterName("alloc"))
@@ -58,6 +66,8 @@ func NewAppleEventDescriptorWithDescriptorTypeData(descriptorType uint, data *ra
 	return &AppleEventDescriptor{inner: raw.NSAppleEventDescriptorFromID(_id)}
 }
 
+// Initializes a newly allocated instance as a descriptor for an Apple event, initialized with the specified values.
+//
 // NewAppleEventDescriptorWithEventClassEventIDTargetDescriptorReturnIDTransactionID creates a new [AppleEventDescriptor].
 func NewAppleEventDescriptorWithEventClassEventIDTargetDescriptorReturnIDTransactionID(eventClass uint, eventID uint, targetDescriptor *raw.NSAppleEventDescriptor, returnID int16, transactionID int) *AppleEventDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAppleEventDescriptor")), objc.RegisterName("alloc"))
@@ -71,11 +81,15 @@ func (x *AppleEventDescriptor) WithScriptingProperties(scriptingProperties *raw.
 	return x
 }
 
+// Adds a descriptor to the receiver as an Apple event parameter identified by the specified keyword.
+//
 // SetParamDescriptorForKeyword calls the underlying SetParamDescriptorForKeyword.
 func (x *AppleEventDescriptor) SetParamDescriptorForKeyword(descriptor *raw.NSAppleEventDescriptor, keyword uint) {
 	x.inner.SetParamDescriptorForKeyword(descriptor, keyword)
 }
 
+// Returns a descriptor for the receiver’s Apple event parameter identified by the specified keyword.
+//
 // ParamDescriptorForKeyword calls the underlying ParamDescriptorForKeyword.
 func (x *AppleEventDescriptor) ParamDescriptorForKeyword(keyword uint) *AppleEventDescriptor {
 	_r := x.inner.ParamDescriptorForKeyword(keyword)
@@ -85,16 +99,22 @@ func (x *AppleEventDescriptor) ParamDescriptorForKeyword(keyword uint) *AppleEve
 	return &AppleEventDescriptor{inner: _r}
 }
 
+// Removes the receiver’s parameter descriptor identified by the specified keyword.
+//
 // RemoveParamDescriptorWithKeyword calls the underlying RemoveParamDescriptorWithKeyword.
 func (x *AppleEventDescriptor) RemoveParamDescriptorWithKeyword(keyword uint) {
 	x.inner.RemoveParamDescriptorWithKeyword(keyword)
 }
 
+// Adds a descriptor to the receiver as an attribute identified by the specified keyword.
+//
 // SetAttributeDescriptorForKeyword calls the underlying SetAttributeDescriptorForKeyword.
 func (x *AppleEventDescriptor) SetAttributeDescriptorForKeyword(descriptor *raw.NSAppleEventDescriptor, keyword uint) {
 	x.inner.SetAttributeDescriptorForKeyword(descriptor, keyword)
 }
 
+// Returns a descriptor for the receiver’s Apple event attribute identified by the specified keyword.
+//
 // AttributeDescriptorForKeyword calls the underlying AttributeDescriptorForKeyword.
 func (x *AppleEventDescriptor) AttributeDescriptorForKeyword(keyword uint) *AppleEventDescriptor {
 	_r := x.inner.AttributeDescriptorForKeyword(keyword)
@@ -104,6 +124,8 @@ func (x *AppleEventDescriptor) AttributeDescriptorForKeyword(keyword uint) *Appl
 	return &AppleEventDescriptor{inner: _r}
 }
 
+// Sends an Apple event.
+//
 // SendEventWithOptionsTimeoutError calls the underlying SendEventWithOptionsTimeoutError.
 func (x *AppleEventDescriptor) SendEventWithOptionsTimeoutError(sendOptions NSAppleEventSendOptions, timeoutInSeconds float64) (*AppleEventDescriptor, error) {
 	_r, _err := x.inner.SendEventWithOptionsTimeoutError(raw.NSAppleEventSendOptions(sendOptions), timeoutInSeconds)
@@ -116,11 +138,15 @@ func (x *AppleEventDescriptor) SendEventWithOptionsTimeoutError(sendOptions NSAp
 	return &AppleEventDescriptor{inner: _r}, nil
 }
 
+// Inserts a descriptor at the specified (one-based) position in the receiving descriptor list, replacing the existing descriptor, if any, at that position.
+//
 // InsertDescriptorAtIndex calls the underlying InsertDescriptorAtIndex.
 func (x *AppleEventDescriptor) InsertDescriptorAtIndex(descriptor *raw.NSAppleEventDescriptor, index int) {
 	x.inner.InsertDescriptorAtIndex(descriptor, index)
 }
 
+// Returns the descriptor at the specified (one-based) position in the receiving descriptor list.
+//
 // DescriptorAtIndex calls the underlying DescriptorAtIndex.
 func (x *AppleEventDescriptor) DescriptorAtIndex(index int) *AppleEventDescriptor {
 	_r := x.inner.DescriptorAtIndex(index)
@@ -130,16 +156,22 @@ func (x *AppleEventDescriptor) DescriptorAtIndex(index int) *AppleEventDescripto
 	return &AppleEventDescriptor{inner: _r}
 }
 
+// Removes the descriptor at the specified (one-based) position in the receiving descriptor list.
+//
 // RemoveDescriptorAtIndex calls the underlying RemoveDescriptorAtIndex.
 func (x *AppleEventDescriptor) RemoveDescriptorAtIndex(index int) {
 	x.inner.RemoveDescriptorAtIndex(index)
 }
 
+// Adds a descriptor, identified by a keyword, to the receiver.
+//
 // SetDescriptorForKeyword calls the underlying SetDescriptorForKeyword.
 func (x *AppleEventDescriptor) SetDescriptorForKeyword(descriptor *raw.NSAppleEventDescriptor, keyword uint) {
 	x.inner.SetDescriptorForKeyword(descriptor, keyword)
 }
 
+// Returns the receiver’s descriptor for the specified keyword.
+//
 // DescriptorForKeyword calls the underlying DescriptorForKeyword.
 func (x *AppleEventDescriptor) DescriptorForKeyword(keyword uint) *AppleEventDescriptor {
 	_r := x.inner.DescriptorForKeyword(keyword)
@@ -149,16 +181,22 @@ func (x *AppleEventDescriptor) DescriptorForKeyword(keyword uint) *AppleEventDes
 	return &AppleEventDescriptor{inner: _r}
 }
 
+// Removes the receiver’s descriptor identified by the specified keyword.
+//
 // RemoveDescriptorWithKeyword calls the underlying RemoveDescriptorWithKeyword.
 func (x *AppleEventDescriptor) RemoveDescriptorWithKeyword(keyword uint) {
 	x.inner.RemoveDescriptorWithKeyword(keyword)
 }
 
+// Returns the keyword for the descriptor at the specified (one-based) position in the receiver.
+//
 // KeywordForDescriptorAtIndex calls the underlying KeywordForDescriptorAtIndex.
 func (x *AppleEventDescriptor) KeywordForDescriptorAtIndex(index int) uint {
 	return x.inner.KeywordForDescriptorAtIndex(index)
 }
 
+// Returns a descriptor obtained by coercing the receiver to the specified type.
+//
 // CoerceToDescriptorType calls the underlying CoerceToDescriptorType.
 func (x *AppleEventDescriptor) CoerceToDescriptorType(descriptorType uint) *AppleEventDescriptor {
 	_r := x.inner.CoerceToDescriptorType(descriptorType)

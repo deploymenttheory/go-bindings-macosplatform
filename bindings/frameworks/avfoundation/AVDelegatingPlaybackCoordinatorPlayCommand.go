@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A command that indicates to play at a specific rate and time.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avdelegatingplaybackcoordinatorplaycommand
 type AVDelegatingPlaybackCoordinatorPlayCommand struct {
 	AVDelegatingPlaybackCoordinatorPlaybackControlCommand

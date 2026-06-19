@@ -39,7 +39,7 @@ func MTRUnitTestingClusterTestAddArgumentsResponseParamsFromID(id objc.ID) *MTRU
 // Initialize an MTRUnitTestingClusterTestAddArgumentsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 func (o *MTRUnitTestingClusterTestAddArgumentsResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRUnitTestingClusterTestAddArgumentsResponseParams, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestAddArgumentsResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestAddArgumentsResponseParamsSelInitWithResponseValueError, responseValue.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

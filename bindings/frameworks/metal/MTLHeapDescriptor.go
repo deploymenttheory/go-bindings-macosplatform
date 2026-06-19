@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration that customizes the behavior for a Metal memory heap.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlheapdescriptor
 type MTLHeapDescriptor struct {
 	foundation.NSObject

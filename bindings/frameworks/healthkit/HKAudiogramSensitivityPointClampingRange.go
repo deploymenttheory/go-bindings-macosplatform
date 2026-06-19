@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Defines the range within which an ear’s sensitivity point may have been clamped, if any.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkaudiogramsensitivitypointclampingrange
 type HKAudiogramSensitivityPointClampingRange struct {
 	foundation.NSObject

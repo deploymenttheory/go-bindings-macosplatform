@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An element that represents a media asset within project section content.
+//
 // Apple documentation: https://developer.apple.com/documentation/photosui/phprojectassetelement
 type PHProjectAssetElement struct {
 	PHProjectElement

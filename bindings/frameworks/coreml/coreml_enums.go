@@ -91,12 +91,17 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
+// The set of processing-unit configurations the model can use to make predictions.
 type MLComputeUnits int64
 
 const (
-	MLComputeUnitsCPUOnly            MLComputeUnits = 0
-	MLComputeUnitsCPUAndGPU          MLComputeUnits = 1
-	MLComputeUnitsAll                MLComputeUnits = 2
+	// The option you choose to limit the model to only use the CPU.
+	MLComputeUnitsCPUOnly MLComputeUnits = 0
+	// The option you choose to allow the model to use both the CPU and GPU, but not the neural engine.
+	MLComputeUnitsCPUAndGPU MLComputeUnits = 1
+	// The option you choose to allow the model to use all compute units available, including the neural engine.
+	MLComputeUnitsAll MLComputeUnits = 2
+	// The option you choose to allow the model to use both the CPU and neural engine, but not the GPU.
 	MLComputeUnitsCPUAndNeuralEngine MLComputeUnits = 3
 )
 
@@ -115,22 +120,25 @@ func (e MLComputeUnits) String() string {
 	}
 }
 
+// The possible types for feature values, input features, and output features.
 type MLFeatureType int64
 
 const (
+	// The type for invalid feature values.
 	MLFeatureTypeInvalid MLFeatureType = 0
-	// Discrete values, sometimes used to hold numeric encoding of a categorical value
+	// The type for integer features and feature values.
 	MLFeatureTypeInt64 MLFeatureType = 1
-	// Continuous values
+	// The type for double features and feature values.
 	MLFeatureTypeDouble MLFeatureType = 2
+	// The type for string features and feature values.
 	MLFeatureTypeString MLFeatureType = 3
-	// CVPixelBufferRef
+	// The type for image features and feature values.
 	MLFeatureTypeImage MLFeatureType = 4
-	// MLMultiArray
+	// The type for multidimensional array features and feature values.
 	MLFeatureTypeMultiArray MLFeatureType = 5
-	// Numerically weighted hashable objects (e.g. word counts)
+	// The type for dictionary features and feature values.
 	MLFeatureTypeDictionary MLFeatureType = 6
-	// MLSequence. Ordered collection of feature values with the same type
+	// The type for sequence features and feature values.
 	MLFeatureTypeSequence MLFeatureType = 7
 	// MLState. Represents a model state that may be updated in each inference.
 	MLFeatureTypeState MLFeatureType = 8
@@ -161,12 +169,16 @@ func (e MLFeatureType) String() string {
 	}
 }
 
+// The modes that determine how the model defines a feature’s image size constraint.
 type MLImageSizeConstraintType int64
 
 const (
+	// The image size constraint is not configured and should be ignored.
 	MLImageSizeConstraintTypeUnspecified MLImageSizeConstraintType = 0
-	MLImageSizeConstraintTypeEnumerated  MLImageSizeConstraintType = 2
-	MLImageSizeConstraintTypeRange       MLImageSizeConstraintType = 3
+	// The image feature accepts image sizes listed in an array.
+	MLImageSizeConstraintTypeEnumerated MLImageSizeConstraintType = 2
+	// The image feature accepts image sizes defined by a range of widths and a range of heights.
+	MLImageSizeConstraintTypeRange MLImageSizeConstraintType = 3
 )
 
 func (e MLImageSizeConstraintType) String() string {
@@ -182,6 +194,7 @@ func (e MLImageSizeConstraintType) String() string {
 	}
 }
 
+// Information about a Core ML model error.
 type MLModelError int64
 
 const (
@@ -238,16 +251,23 @@ func (e MLModelError) String() string {
 	}
 }
 
+// Constants that define the underlying element types a multiarray can store.
 type MLMultiArrayDataType int64
 
 const (
-	MLMultiArrayDataTypeDouble  MLMultiArrayDataType = 65600
+	// Designates the multiarray’s elements as doubles.
+	MLMultiArrayDataTypeDouble MLMultiArrayDataType = 65600
+	// Designates the multiarray’s elements as 64-bit floats.
 	MLMultiArrayDataTypeFloat64 MLMultiArrayDataType = 65600
+	// Designates the multiarray’s elements as 32-bit floats.
 	MLMultiArrayDataTypeFloat32 MLMultiArrayDataType = 65568
+	// Designates the multiarray’s elements as 16-bit floats.
 	MLMultiArrayDataTypeFloat16 MLMultiArrayDataType = 65552
-	MLMultiArrayDataTypeFloat   MLMultiArrayDataType = 65568
-	MLMultiArrayDataTypeInt32   MLMultiArrayDataType = 131104
-	MLMultiArrayDataTypeInt8    MLMultiArrayDataType = 131080
+	// Designates the multiarray’s elements as floats.
+	MLMultiArrayDataTypeFloat MLMultiArrayDataType = 65568
+	// Designates the multiarray’s elements as 32-bit integers.
+	MLMultiArrayDataTypeInt32 MLMultiArrayDataType = 131104
+	MLMultiArrayDataTypeInt8  MLMultiArrayDataType = 131080
 )
 
 func (e MLMultiArrayDataType) String() string {
@@ -267,12 +287,16 @@ func (e MLMultiArrayDataType) String() string {
 	}
 }
 
+// The possible types of shape constraints.
 type MLMultiArrayShapeConstraintType int64
 
 const (
+	// The constraint type is undefined.
 	MLMultiArrayShapeConstraintTypeUnspecified MLMultiArrayShapeConstraintType = 1
-	MLMultiArrayShapeConstraintTypeEnumerated  MLMultiArrayShapeConstraintType = 2
-	MLMultiArrayShapeConstraintTypeRange       MLMultiArrayShapeConstraintType = 3
+	// The constraint is an array of allowed shapes.
+	MLMultiArrayShapeConstraintTypeEnumerated MLMultiArrayShapeConstraintType = 2
+	// The constraint is a set of ranges allowed for the array shape.
+	MLMultiArrayShapeConstraintTypeRange MLMultiArrayShapeConstraintType = 3
 )
 
 func (e MLMultiArrayShapeConstraintType) String() string {
@@ -308,6 +332,7 @@ func (e MLReshapeFrequencyHint) String() string {
 	}
 }
 
+// The optimization strategy for the model specialization.
 type MLSpecializationStrategy int64
 
 const (
@@ -328,14 +353,20 @@ func (e MLSpecializationStrategy) String() string {
 	}
 }
 
+// The state of a machine learning task.
 type MLTaskState int64
 
 const (
-	MLTaskStateSuspended  MLTaskState = 1
-	MLTaskStateRunning    MLTaskState = 2
+	// The state of a machine learning task that’s paused.
+	MLTaskStateSuspended MLTaskState = 1
+	// The state of a machine learning task that’s executing.
+	MLTaskStateRunning MLTaskState = 2
+	// The state of a machine learning task that’s in mid-termination, before it could finish successfully.
 	MLTaskStateCancelling MLTaskState = 3
-	MLTaskStateCompleted  MLTaskState = 4
-	MLTaskStateFailed     MLTaskState = 5
+	// The state of a machine learning task that has finished successfully.
+	MLTaskStateCompleted MLTaskState = 4
+	// The state of a machine learning task that has terminated due to an error.
+	MLTaskStateFailed MLTaskState = 5
 )
 
 func (e MLTaskState) String() string {
@@ -355,12 +386,16 @@ func (e MLTaskState) String() string {
 	}
 }
 
+// A type of event during a model update task.
 type MLUpdateProgressEvent int64
 
 const (
+	// An event that represents the start of training.
 	MLUpdateProgressEventTrainingBegin MLUpdateProgressEvent = 1
-	MLUpdateProgressEventEpochEnd      MLUpdateProgressEvent = 2
-	MLUpdateProgressEventMiniBatchEnd  MLUpdateProgressEvent = 4
+	// An event that represents the end of training epoch.
+	MLUpdateProgressEventEpochEnd MLUpdateProgressEvent = 2
+	// An event that represents the end of a mini-batch within a training epoch.
+	MLUpdateProgressEventMiniBatchEnd MLUpdateProgressEvent = 4
 )
 
 func (e MLUpdateProgressEvent) String() string {

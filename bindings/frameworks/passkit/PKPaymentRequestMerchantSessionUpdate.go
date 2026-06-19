@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that updates a payment request with a merchant validation.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentrequestmerchantsessionupdate
 type PKPaymentRequestMerchantSessionUpdate struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func PKPaymentRequestMerchantSessionUpdateFromID(id objc.ID) *PKPaymentRequestMe
 	return o
 }
 
+// Creates a payment method update with the specified status and merchant session.
 func (o *PKPaymentRequestMerchantSessionUpdate) InitWithStatusMerchantSession(status PKPaymentAuthorizationStatus, session *PKPaymentMerchantSession) *PKPaymentRequestMerchantSessionUpdate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestMerchantSessionUpdateSelInitWithStatusMerchantSession, status, session.Ptr())
 	if _ret != 0 {

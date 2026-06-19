@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A sample that stores a prescription for glasses.
+//
 // GlassesPrescription wraps [raw.HKGlassesPrescription] with a fluent Go API.
 type GlassesPrescription struct {
 	inner *raw.HKGlassesPrescription

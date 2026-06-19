@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A shortcut the user added to Siri.
+//
 // VoiceShortcut wraps [raw.INVoiceShortcut] with a fluent Go API.
 type VoiceShortcut struct {
 	inner *raw.INVoiceShortcut

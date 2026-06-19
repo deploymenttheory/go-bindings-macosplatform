@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A record of the data that a particular website stores persistently.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkwebsitedatarecord
 type WKWebsiteDataRecord struct {
 	foundation.NSObject
@@ -42,6 +44,9 @@ func (o *WKWebsiteDataRecord) DisplayName() *foundation.NSString {
 
 // @abstract The various types of website data that exist for this data record.
 func (o *WKWebsiteDataRecord) DataTypes() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _wKWebsiteDataRecordSelDataTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebsiteDataRecordSelDataTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable string with associated attributes (such as visual style, hyperlinks, or accessibility data) for portions of its text.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmutableattributedstring
 type NSMutableAttributedString struct {
 	NSAttributedString
@@ -42,50 +44,62 @@ func NSMutableAttributedStringFromID(id objc.ID) *NSMutableAttributedString {
 	return o
 }
 
+// Replaces the characters in the given range with the characters of the given string.
 func (o *NSMutableAttributedString) ReplaceCharactersInRangeWithString(range_ NSRange, str *NSString) {
 	o.Ptr().Send(_nSMutableAttributedStringSelReplaceCharactersInRangeWithString, range_, str.Ptr())
 }
 
+// Sets the attributes for the characters in the specified range to the specified attributes.
 func (o *NSMutableAttributedString) SetAttributesRange(attrs *NSDictionary[*NSString, objc.ID], range_ NSRange) {
-	o.Ptr().Send(_nSMutableAttributedStringSelSetAttributesRange, attrs, range_)
+	o.Ptr().Send(_nSMutableAttributedStringSelSetAttributesRange, attrs.Ptr(), range_)
 }
 
+// Adds an attribute with the given name and value to the characters in the specified range.
 func (o *NSMutableAttributedString) AddAttributeValueRange(name *NSString, value objc.ID, range_ NSRange) {
 	o.Ptr().Send(_nSMutableAttributedStringSelAddAttributeValueRange, name.Ptr(), value, range_)
 }
 
+// Adds the given collection of attributes to the characters in the specified range.
 func (o *NSMutableAttributedString) AddAttributesRange(attrs *NSDictionary[*NSString, objc.ID], range_ NSRange) {
-	o.Ptr().Send(_nSMutableAttributedStringSelAddAttributesRange, attrs, range_)
+	o.Ptr().Send(_nSMutableAttributedStringSelAddAttributesRange, attrs.Ptr(), range_)
 }
 
+// Removes the named attribute from the characters in the specified range.
 func (o *NSMutableAttributedString) RemoveAttributeRange(name *NSString, range_ NSRange) {
 	o.Ptr().Send(_nSMutableAttributedStringSelRemoveAttributeRange, name.Ptr(), range_)
 }
 
+// Replaces the characters and attributes in a given range with the characters and attributes of the given attributed string.
 func (o *NSMutableAttributedString) ReplaceCharactersInRangeWithAttributedString(range_ NSRange, attrString *NSAttributedString) {
 	o.Ptr().Send(_nSMutableAttributedStringSelReplaceCharactersInRangeWithAttributedString, range_, attrString.Ptr())
 }
 
+// Inserts the characters and attributes of the given attributed string into the receiver at the given index.
 func (o *NSMutableAttributedString) InsertAttributedStringAtIndex(attrString *NSAttributedString, loc uint) {
 	o.Ptr().Send(_nSMutableAttributedStringSelInsertAttributedStringAtIndex, attrString.Ptr(), loc)
 }
 
+// Adds the characters and attributes of a given attributed string to the end of the receiver.
 func (o *NSMutableAttributedString) AppendAttributedString(attrString *NSAttributedString) {
 	o.Ptr().Send(_nSMutableAttributedStringSelAppendAttributedString, attrString.Ptr())
 }
 
+// Deletes the characters in the given range along with their associated attributes.
 func (o *NSMutableAttributedString) DeleteCharactersInRange(range_ NSRange) {
 	o.Ptr().Send(_nSMutableAttributedStringSelDeleteCharactersInRange, range_)
 }
 
+// Replaces the receiver’s entire contents with the characters and attributes of the given attributed string.
 func (o *NSMutableAttributedString) SetAttributedString(attrString *NSAttributedString) {
 	o.Ptr().Send(_nSMutableAttributedStringSelSetAttributedString, attrString.Ptr())
 }
 
+// Begins the buffering of changes to the string’s characters and attributes.
 func (o *NSMutableAttributedString) BeginEditing() {
 	o.Ptr().Send(_nSMutableAttributedStringSelBeginEditing)
 }
 
+// Ends the buffering of changes to the string’s characters and attributes.
 func (o *NSMutableAttributedString) EndEditing() {
 	o.Ptr().Send(_nSMutableAttributedStringSelEndEditing)
 }

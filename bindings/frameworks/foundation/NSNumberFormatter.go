@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A formatter that converts between numeric values and their textual representations.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsnumberformatter
 type NSNumberFormatter struct {
 	NSFormatter
@@ -280,12 +282,15 @@ func (o *NSNumberFormatter) SetNegativeFormat(negativeFormat *NSString) {
 }
 
 func (o *NSNumberFormatter) TextAttributesForNegativeValues() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSNumberFormatterSelTextAttributesForNegativeValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelTextAttributesForNegativeValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSNumberFormatter) SetTextAttributesForNegativeValues(textAttributesForNegativeValues *NSDictionary[*NSString, objc.ID]) {
-	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForNegativeValues, textAttributesForNegativeValues)
+	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForNegativeValues, textAttributesForNegativeValues.Ptr())
 }
 
 func (o *NSNumberFormatter) PositiveFormat() *NSString {
@@ -301,12 +306,15 @@ func (o *NSNumberFormatter) SetPositiveFormat(positiveFormat *NSString) {
 }
 
 func (o *NSNumberFormatter) TextAttributesForPositiveValues() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSNumberFormatterSelTextAttributesForPositiveValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelTextAttributesForPositiveValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSNumberFormatter) SetTextAttributesForPositiveValues(textAttributesForPositiveValues *NSDictionary[*NSString, objc.ID]) {
-	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForPositiveValues, textAttributesForPositiveValues)
+	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForPositiveValues, textAttributesForPositiveValues.Ptr())
 }
 
 func (o *NSNumberFormatter) AllowsFloats() bool {
@@ -385,12 +393,15 @@ func (o *NSNumberFormatter) SetZeroSymbol(zeroSymbol *NSString) {
 }
 
 func (o *NSNumberFormatter) TextAttributesForZero() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSNumberFormatterSelTextAttributesForZero)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelTextAttributesForZero)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSNumberFormatter) SetTextAttributesForZero(textAttributesForZero *NSDictionary[*NSString, objc.ID]) {
-	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForZero, textAttributesForZero)
+	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForZero, textAttributesForZero.Ptr())
 }
 
 func (o *NSNumberFormatter) NilSymbol() *NSString {
@@ -406,12 +417,15 @@ func (o *NSNumberFormatter) SetNilSymbol(nilSymbol *NSString) {
 }
 
 func (o *NSNumberFormatter) TextAttributesForNil() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSNumberFormatterSelTextAttributesForNil)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelTextAttributesForNil)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSNumberFormatter) SetTextAttributesForNil(textAttributesForNil *NSDictionary[*NSString, objc.ID]) {
-	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForNil, textAttributesForNil)
+	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForNil, textAttributesForNil.Ptr())
 }
 
 func (o *NSNumberFormatter) NotANumberSymbol() *NSString {
@@ -427,12 +441,15 @@ func (o *NSNumberFormatter) SetNotANumberSymbol(notANumberSymbol *NSString) {
 }
 
 func (o *NSNumberFormatter) TextAttributesForNotANumber() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSNumberFormatterSelTextAttributesForNotANumber)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelTextAttributesForNotANumber)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSNumberFormatter) SetTextAttributesForNotANumber(textAttributesForNotANumber *NSDictionary[*NSString, objc.ID]) {
-	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForNotANumber, textAttributesForNotANumber)
+	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForNotANumber, textAttributesForNotANumber.Ptr())
 }
 
 func (o *NSNumberFormatter) PositiveInfinitySymbol() *NSString {
@@ -448,12 +465,15 @@ func (o *NSNumberFormatter) SetPositiveInfinitySymbol(positiveInfinitySymbol *NS
 }
 
 func (o *NSNumberFormatter) TextAttributesForPositiveInfinity() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSNumberFormatterSelTextAttributesForPositiveInfinity)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelTextAttributesForPositiveInfinity)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSNumberFormatter) SetTextAttributesForPositiveInfinity(textAttributesForPositiveInfinity *NSDictionary[*NSString, objc.ID]) {
-	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForPositiveInfinity, textAttributesForPositiveInfinity)
+	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForPositiveInfinity, textAttributesForPositiveInfinity.Ptr())
 }
 
 func (o *NSNumberFormatter) NegativeInfinitySymbol() *NSString {
@@ -469,12 +489,15 @@ func (o *NSNumberFormatter) SetNegativeInfinitySymbol(negativeInfinitySymbol *NS
 }
 
 func (o *NSNumberFormatter) TextAttributesForNegativeInfinity() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSNumberFormatterSelTextAttributesForNegativeInfinity)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelTextAttributesForNegativeInfinity)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSNumberFormatter) SetTextAttributesForNegativeInfinity(textAttributesForNegativeInfinity *NSDictionary[*NSString, objc.ID]) {
-	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForNegativeInfinity, textAttributesForNegativeInfinity)
+	o.Ptr().Send(_nSNumberFormatterSelSetTextAttributesForNegativeInfinity, textAttributesForNegativeInfinity.Ptr())
 }
 
 func (o *NSNumberFormatter) PositivePrefix() *NSString {

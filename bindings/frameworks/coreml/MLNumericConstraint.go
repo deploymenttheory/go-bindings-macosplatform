@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The value limitations of a number.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlnumericconstraint
 type MLNumericConstraint struct {
 	foundation.NSObject
@@ -49,6 +51,9 @@ func (o *MLNumericConstraint) MaxNumber() *foundation.NSNumber {
 }
 
 func (o *MLNumericConstraint) EnumeratedNumbers() *foundation.NSSet[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSNumber]](o.Ptr(), _mLNumericConstraintSelEnumeratedNumbers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLNumericConstraintSelEnumeratedNumbers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSNumber](_ret)
 }

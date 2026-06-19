@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the presentation state of an asset track during playback.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayeritemtrack
 type AVPlayerItemTrack struct {
 	foundation.NSObject

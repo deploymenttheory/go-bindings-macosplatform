@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides configuration information for the related player item.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayervideooutputconfiguration
 type AVPlayerVideoOutputConfiguration struct {
 	foundation.NSObject
@@ -46,8 +48,11 @@ func (o *AVPlayerVideoOutputConfiguration) SourcePlayerItem() *AVPlayerItem {
 
 // @property	dataChannelDescriptions @abstract	List of data channels, represented as CMTagCollections, selected for this configuration. @discussion Returns an Array of CMTagCollections
 func (o *AVPlayerVideoOutputConfiguration) DataChannelDescriptions() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _aVPlayerVideoOutputConfigurationSelDataChannelDescriptions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerVideoOutputConfigurationSelDataChannelDescriptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @property	preferredTransform @abstract	The preferred transformation of the visual media data vended with this configuration. This transformation is acquired from the AVAssetTrack that was used to source the media data accompanying this configuration. @discussion If no transform was specified by the source track a default value of CGAffineTransformIdentity is returned.

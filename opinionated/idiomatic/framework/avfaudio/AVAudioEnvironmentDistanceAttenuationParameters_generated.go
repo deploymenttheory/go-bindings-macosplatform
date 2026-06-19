@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that specifies the amount of attenuation distance, the gradual loss in audio intensity, and other characteristics.
+//
 // AudioEnvironmentDistanceAttenuationParameters wraps [raw.AVAudioEnvironmentDistanceAttenuationParameters] with a fluent Go API.
 type AudioEnvironmentDistanceAttenuationParameters struct {
 	inner *raw.AVAudioEnvironmentDistanceAttenuationParameters
@@ -37,7 +39,7 @@ func NewAudioEnvironmentDistanceAttenuationParameters() *AudioEnvironmentDistanc
 	return &AudioEnvironmentDistanceAttenuationParameters{inner: raw.AVAudioEnvironmentDistanceAttenuationParametersFromID(_id)}
 }
 
-// @property distanceAttenuationModel @abstract Type of distance attenuation model @discussion Default:    AVAudioEnvironmentDistanceAttenuationModelInverse
+// The distance attenuation model that describes the drop-off in gain as the source moves away from the listener.
 //
 // WithDistanceAttenuationModel sets the distanceAttenuationModel property and returns the receiver for chaining.
 func (x *AudioEnvironmentDistanceAttenuationParameters) WithDistanceAttenuationModel(distanceAttenuationModel AVAudioEnvironmentDistanceAttenuationModel) *AudioEnvironmentDistanceAttenuationParameters {
@@ -45,7 +47,7 @@ func (x *AudioEnvironmentDistanceAttenuationParameters) WithDistanceAttenuationM
 	return x
 }
 
-// @property referenceDistance @abstract The minimum distance at which attenuation is applied @discussion Default:    1.0 meter Models:     AVAudioEnvironmentDistanceAttenuationModelInverse, AVAudioEnvironmentDistanceAttenuationModelLinear
+// The minimum distance at which the node applies attenuation, in meters.
 //
 // WithReferenceDistance sets the referenceDistance property and returns the receiver for chaining.
 func (x *AudioEnvironmentDistanceAttenuationParameters) WithReferenceDistance(referenceDistance float32) *AudioEnvironmentDistanceAttenuationParameters {
@@ -53,7 +55,7 @@ func (x *AudioEnvironmentDistanceAttenuationParameters) WithReferenceDistance(re
 	return x
 }
 
-// @property maximumDistance @abstract The distance beyond which no further attenuation is applied @discussion Default:    100000.0 meters Models:     AVAudioEnvironmentDistanceAttenuationModelLinear
+// The distance beyond which the node applies no further attenuation, in meters.
 //
 // WithMaximumDistance sets the maximumDistance property and returns the receiver for chaining.
 func (x *AudioEnvironmentDistanceAttenuationParameters) WithMaximumDistance(maximumDistance float32) *AudioEnvironmentDistanceAttenuationParameters {
@@ -61,7 +63,7 @@ func (x *AudioEnvironmentDistanceAttenuationParameters) WithMaximumDistance(maxi
 	return x
 }
 
-// @property rolloffFactor @abstract Determines the attenuation curve @discussion A higher value results in a steeper attenuation curve. The rolloff factor should be a value greater than 0. Default:    1.0 Models:     AVAudioEnvironmentDistanceAttenuationModelExponential AVAudioEnvironmentDistanceAttenuationModelInverse AVAudioEnvironmentDistanceAttenuationModelLinear
+// A factor that determines the attenuation curve.
 //
 // WithRolloffFactor sets the rolloffFactor property and returns the receiver for chaining.
 func (x *AudioEnvironmentDistanceAttenuationParameters) WithRolloffFactor(rolloffFactor float32) *AudioEnvironmentDistanceAttenuationParameters {

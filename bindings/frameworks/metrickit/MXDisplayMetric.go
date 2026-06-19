@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing metrics about the power used to display the app on the screen.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxdisplaymetric
 type MXDisplayMetric struct {
 	MXMetric

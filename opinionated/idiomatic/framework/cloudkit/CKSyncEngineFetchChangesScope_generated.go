@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A scope in which the sync engine will fetch changes from the server.
+//
 // SyncEngineFetchChangesScope wraps [raw.CKSyncEngineFetchChangesScope] with a fluent Go API.
 type SyncEngineFetchChangesScope struct {
 	inner *raw.CKSyncEngineFetchChangesScope

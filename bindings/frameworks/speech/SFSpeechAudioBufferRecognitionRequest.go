@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to recognize speech from captured audio content, such as audio from the device’s microphone.
+//
 // Apple documentation: https://developer.apple.com/documentation/speech/sfspeechaudiobufferrecognitionrequest
 type SFSpeechAudioBufferRecognitionRequest struct {
 	SFSpeechRecognitionRequest
@@ -35,17 +37,17 @@ func SFSpeechAudioBufferRecognitionRequestFromID(id objc.ID) *SFSpeechAudioBuffe
 	return o
 }
 
-// Appends audio in the PCM format to the end of the recognition request. The audio must be in a native format and uncompressed. - Parameters: - audioPCMBuffer: An audio buffer that contains audio in the PCM format.
+// Appends audio in the PCM format to the end of the recognition request.
 func (o *SFSpeechAudioBufferRecognitionRequest) AppendAudioPCMBuffer(audioPCMBuffer *avfaudio.AVAudioPCMBuffer) {
 	o.Ptr().Send(_sFSpeechAudioBufferRecognitionRequestSelAppendAudioPCMBuffer, audioPCMBuffer.Ptr())
 }
 
-// Appends audio to the end of the recognition request. The audio must be in a native format. - Parameters: - sampleBuffer: A buffer of audio.
+// Appends audio to the end of the recognition request.
 func (o *SFSpeechAudioBufferRecognitionRequest) AppendAudioSampleBuffer(sampleBuffer unsafe.Pointer) {
 	o.Ptr().Send(_sFSpeechAudioBufferRecognitionRequestSelAppendAudioSampleBuffer, sampleBuffer)
 }
 
-// Marks the end of audio input for the recognition request. Call this method explicitly to let the speech recognizer know that no more audio input is coming.
+// Marks the end of audio input for the recognition request.
 func (o *SFSpeechAudioBufferRecognitionRequest) EndAudio() {
 	o.Ptr().Send(_sFSpeechAudioBufferRecognitionRequestSelEndAudio)
 }

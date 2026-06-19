@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents odometer data for workouts.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremotion/cmodometerdata
 type CMOdometerData struct {
 	foundation.NSObject

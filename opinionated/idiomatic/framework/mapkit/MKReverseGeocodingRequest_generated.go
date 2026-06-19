@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A class that looks up address strings for the provided geographic coordinates.
+//
 // ReverseGeocodingRequest wraps [raw.MKReverseGeocodingRequest] with a fluent Go API.
 type ReverseGeocodingRequest struct {
 	inner *raw.MKReverseGeocodingRequest
@@ -33,6 +35,8 @@ func ReverseGeocodingRequestFromID(id objc.ID) *ReverseGeocodingRequest {
 	return &ReverseGeocodingRequest{inner: raw.MKReverseGeocodingRequestFromID(id)}
 }
 
+// Initializes a new reverse geocoder request object with the provided location.
+//
 // NewReverseGeocodingRequestWithLocation creates a new [ReverseGeocodingRequest].
 func NewReverseGeocodingRequestWithLocation(location unsafe.Pointer) *ReverseGeocodingRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKReverseGeocodingRequest")), objc.RegisterName("alloc"))
@@ -40,12 +44,16 @@ func NewReverseGeocodingRequestWithLocation(location unsafe.Pointer) *ReverseGeo
 	return &ReverseGeocodingRequest{inner: raw.MKReverseGeocodingRequestFromID(_id)}
 }
 
+// A value that indicates the preferred locale for the addresses the request returns, or nil if the framework should use the device locale.
+//
 // WithPreferredLocale sets the preferredLocale property and returns the receiver for chaining.
 func (x *ReverseGeocodingRequest) WithPreferredLocale(preferredLocale *foundation.NSLocale) *ReverseGeocodingRequest {
 	x.inner.SetPreferredLocale(preferredLocale)
 	return x
 }
 
+// Returns the map items relevant to the reverse geocoded location.
+//
 // GetMapItems blocks until the operation completes or ctx is cancelled.
 func (x *ReverseGeocodingRequest) GetMapItems(ctx context.Context) (*foundation.NSArray[*raw.MKMapItem], error) {
 	type _result struct {
@@ -70,6 +78,8 @@ func (x *ReverseGeocodingRequest) GetMapItems(ctx context.Context) (*foundation.
 	}
 }
 
+// A method you call to cancel a reverse geocoding request that’s in progress.
+//
 // Cancel calls the underlying Cancel.
 func (x *ReverseGeocodingRequest) Cancel() {
 	x.inner.Cancel()

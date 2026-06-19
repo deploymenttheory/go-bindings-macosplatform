@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents persistence activity for a highlight.
+//
 // HighlightPersistenceEvent wraps [raw.SWHighlightPersistenceEvent] with a fluent Go API.
 type HighlightPersistenceEvent struct {
 	inner *raw.SWHighlightPersistenceEvent
@@ -29,7 +31,7 @@ func HighlightPersistenceEventFromID(id objc.ID) *HighlightPersistenceEvent {
 	return &HighlightPersistenceEvent{inner: raw.SWHighlightPersistenceEventFromID(id)}
 }
 
-// Initializes a highlight persistence event object when the highlight persistence is changed. @param highlight The object on which the event occurred. @param trigger The trigger persistence event for the highlight.
+// Creates and initializes a persistence event.
 //
 // NewHighlightPersistenceEventWithHighlightTrigger creates a new [HighlightPersistenceEvent].
 func NewHighlightPersistenceEventWithHighlightTrigger(highlight *raw.SWHighlight, trigger SWHighlightPersistenceEventTrigger) *HighlightPersistenceEvent {

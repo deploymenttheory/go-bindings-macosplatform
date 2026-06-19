@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that controls swipe navigation and animations between views or view content.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspagecontroller
 type NSPageController struct {
 	NSViewController
@@ -43,22 +45,27 @@ func NSPageControllerFromID(id objc.ID) *NSPageController {
 	return o
 }
 
+// Navigates to the specific object.
 func (o *NSPageController) NavigateForwardToObject(object objc.ID) {
 	o.Ptr().Send(_nSPageControllerSelNavigateForwardToObject, object)
 }
 
+// Invoked when the page transition is completed.
 func (o *NSPageController) CompleteTransition() {
 	o.Ptr().Send(_nSPageControllerSelCompleteTransition)
 }
 
+// Navigates backwards in the page controller’s arranged objects array.
 func (o *NSPageController) NavigateBack(sender objc.ID) {
 	o.Ptr().Send(_nSPageControllerSelNavigateBack, sender)
 }
 
+// Navigates to the next object in the page controller’s arranged objects array, if appropriate.
 func (o *NSPageController) NavigateForward(sender objc.ID) {
 	o.Ptr().Send(_nSPageControllerSelNavigateForward, sender)
 }
 
+// Navigates to the selected index, which is taken from the sender.
 func (o *NSPageController) TakeSelectedIndexFrom(sender objc.ID) {
 	o.Ptr().Send(_nSPageControllerSelTakeSelectedIndexFrom, sender)
 }
@@ -90,12 +97,15 @@ func (o *NSPageController) SetTransitionStyle(transitionStyle NSPageControllerTr
 }
 
 func (o *NSPageController) ArrangedObjects() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSPageControllerSelArrangedObjects)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPageControllerSelArrangedObjects)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSPageController) SetArrangedObjects(arrangedObjects *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSPageControllerSelSetArrangedObjects, arrangedObjects)
+	o.Ptr().Send(_nSPageControllerSelSetArrangedObjects, arrangedObjects.Ptr())
 }
 
 func (o *NSPageController) SelectedIndex() int {

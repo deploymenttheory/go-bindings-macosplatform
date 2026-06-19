@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that uniquely identifies a push notification that a container sends.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cknotificationid
 type CKNotificationID struct {
 	foundation.NSObject

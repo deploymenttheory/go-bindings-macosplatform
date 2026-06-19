@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The data for a single motion update event.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremotion/cmmotionactivity
 type CMMotionActivity struct {
 	CMLogItem

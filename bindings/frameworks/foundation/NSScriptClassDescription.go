@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A scriptable class that a macOS app supports.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsscriptclassdescription
 type NSScriptClassDescription struct {
 	NSClassDescription
@@ -48,6 +50,7 @@ func NSScriptClassDescriptionFromID(id objc.ID) *NSScriptClassDescription {
 	return o
 }
 
+// Returns the class description for the specified class or, if it is not scriptable, for the first superclass that is.
 func NSScriptClassDescriptionClassDescriptionForClass(aClass objc.Class) *NSScriptClassDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScriptClassDescription), _nSScriptClassDescriptionSelClassDescriptionForClass, aClass)
 	if _ret != 0 {
@@ -56,29 +59,34 @@ func NSScriptClassDescriptionClassDescriptionForClass(aClass objc.Class) *NSScri
 	return NSScriptClassDescriptionFromID(_ret)
 }
 
+// Initializes and returns a newly allocated instance of NSScriptClassDescription.
 func (o *NSScriptClassDescription) InitWithSuiteNameClassNameDictionary(suiteName *NSString, className *NSString, classDeclaration *NSDictionary[objc.ID, objc.ID]) *NSScriptClassDescription {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelInitWithSuiteNameClassNameDictionary, suiteName.Ptr(), className.Ptr(), classDeclaration)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelInitWithSuiteNameClassNameDictionary, suiteName.Ptr(), className.Ptr(), classDeclaration.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSScriptClassDescriptionFromID(_ret)
 }
 
+// Returns a Boolean value indicating whether a primary or secondary Apple event code in the receiver matches the passed code.
 func (o *NSScriptClassDescription) MatchesAppleEventCode(appleEventCode uint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScriptClassDescriptionSelMatchesAppleEventCode, appleEventCode)
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the receiver or any superclass supports the specified command.
 func (o *NSScriptClassDescription) SupportsCommand(commandDescription *NSScriptCommandDescription) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScriptClassDescriptionSelSupportsCommand, commandDescription.Ptr())
 	return _ret
 }
 
+// Returns the selector associated with the receiver for the specified command description.
 func (o *NSScriptClassDescription) SelectorForCommand(commandDescription *NSScriptCommandDescription) objc.SEL {
 	_ret := objc.Send[objc.SEL](o.Ptr(), _nSScriptClassDescriptionSelSelectorForCommand, commandDescription.Ptr())
 	return _ret
 }
 
+// Returns the name of the declared type of the attribute or relationship identified by the passed key.
 func (o *NSScriptClassDescription) TypeForKey(key *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelTypeForKey, key.Ptr())
 	if _ret != 0 {
@@ -87,6 +95,7 @@ func (o *NSScriptClassDescription) TypeForKey(key *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the class description instance for the class type of the specified attribute or relationship.
 func (o *NSScriptClassDescription) ClassDescriptionForKey(key *NSString) *NSScriptClassDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelClassDescriptionForKey, key.Ptr())
 	if _ret != 0 {
@@ -95,11 +104,13 @@ func (o *NSScriptClassDescription) ClassDescriptionForKey(key *NSString) *NSScri
 	return NSScriptClassDescriptionFromID(_ret)
 }
 
+// Returns the Apple event code for the specified attribute or relationship in the receiver.
 func (o *NSScriptClassDescription) AppleEventCodeForKey(key *NSString) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSScriptClassDescriptionSelAppleEventCodeForKey, key.Ptr())
 	return _ret
 }
 
+// Given an Apple event code that identifies a property or element class, returns the key for the corresponding attribute, one-to-one relationship, or one-to-many relationship.
 func (o *NSScriptClassDescription) KeyWithAppleEventCode(appleEventCode uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptClassDescriptionSelKeyWithAppleEventCode, appleEventCode)
 	if _ret != 0 {
@@ -108,26 +119,31 @@ func (o *NSScriptClassDescription) KeyWithAppleEventCode(appleEventCode uint) *N
 	return NSStringFromID(_ret)
 }
 
+// Returns a Boolean value indicating whether an insertion location must be specified when creating a new object in the specified to-many relationship of the receiver.
 func (o *NSScriptClassDescription) IsLocationRequiredToCreateForKey(toManyRelationshipKey *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScriptClassDescriptionSelIsLocationRequiredToCreateForKey, toManyRelationshipKey.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the described class has a property identified by the specified key.
 func (o *NSScriptClassDescription) HasPropertyForKey(key *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScriptClassDescriptionSelHasPropertyForKey, key.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the described class has an ordered to-many relationship identified by the specified key.
 func (o *NSScriptClassDescription) HasOrderedToManyRelationshipForKey(key *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScriptClassDescriptionSelHasOrderedToManyRelationshipForKey, key.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the described class has a readable property identified by the specified key.
 func (o *NSScriptClassDescription) HasReadablePropertyForKey(key *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScriptClassDescriptionSelHasReadablePropertyForKey, key.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the described class has a writable property identified by the specified key.
 func (o *NSScriptClassDescription) HasWritablePropertyForKey(key *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScriptClassDescriptionSelHasWritablePropertyForKey, key.Ptr())
 	return _ret
@@ -170,6 +186,7 @@ func (o *NSScriptClassDescription) DefaultSubcontainerAttributeKey() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a Boolean value indicating whether a specified property in the receiver is read-only.
 // Deprecated: since macOS 10.5.
 func (o *NSScriptClassDescription) IsReadOnlyKey(key *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScriptClassDescriptionSelIsReadOnlyKey, key.Ptr())

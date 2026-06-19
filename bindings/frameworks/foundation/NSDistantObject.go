@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A proxy for objects in other applications or threads.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdistantobject
 // Deprecated: Use NSXPCConnection instead
 type NSDistantObject struct {
@@ -38,11 +40,13 @@ func NSDistantObjectFromID(id objc.ID) *NSDistantObject {
 	return o
 }
 
+// Returns a remote proxy for a given object and connection, creating the proxy if necessary.
 func NSDistantObjectProxyWithTargetConnection(target objc.ID, connection *NSConnection) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDistantObject), _nSDistantObjectSelProxyWithTargetConnection, target, connection.Ptr())
 	return _ret
 }
 
+// Initializes a newly allocated NSDistantObject as a remote proxy for target, which is an id in another thread or another application’s address space.
 func (o *NSDistantObject) InitWithTargetConnection(target objc.ID, connection *NSConnection) *NSDistantObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDistantObjectSelInitWithTargetConnection, target, connection.Ptr())
 	if _ret != 0 {
@@ -51,11 +55,13 @@ func (o *NSDistantObject) InitWithTargetConnection(target objc.ID, connection *N
 	return NSDistantObjectFromID(_ret)
 }
 
+// Returns a local proxy for a given object and connection, creating the proxy if necessary.
 func NSDistantObjectProxyWithLocalConnection(target objc.ID, connection *NSConnection) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDistantObject), _nSDistantObjectSelProxyWithLocalConnection, target, connection.Ptr())
 	return _ret
 }
 
+// Initializes an NSDistantObject object as a local proxy for a given object.
 func (o *NSDistantObject) InitWithLocalConnection(target objc.ID, connection *NSConnection) *NSDistantObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDistantObjectSelInitWithLocalConnection, target, connection.Ptr())
 	if _ret != 0 {
@@ -72,6 +78,7 @@ func (o *NSDistantObject) InitWithCoder(inCoder *NSCoder) *NSDistantObject {
 	return NSDistantObjectFromID(_ret)
 }
 
+// Sets the methods known to be handled by the receiver to those in a given protocol.
 func (o *NSDistantObject) SetProtocolForProxy(proto unsafe.Pointer) {
 	o.Ptr().Send(_nSDistantObjectSelSetProtocolForProxy, proto)
 }

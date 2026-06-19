@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container for a set of items that lays out the items along a path.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionlayoutgroup
 type NSCollectionLayoutGroup struct {
 	NSCollectionLayoutItem
@@ -39,6 +41,7 @@ func NSCollectionLayoutGroupFromID(id objc.ID) *NSCollectionLayoutGroup {
 	return o
 }
 
+// Creates a group of the specified size, containing an array of equally sized items arranged in a horizontal line up to the number specified by count.
 func NSCollectionLayoutGroupHorizontalGroupWithLayoutSizeSubitemCount(layoutSize *NSCollectionLayoutSize, subitem *NSCollectionLayoutItem, count int) *NSCollectionLayoutGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelHorizontalGroupWithLayoutSizeSubitemCount, layoutSize.Ptr(), subitem.Ptr(), count)
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func NSCollectionLayoutGroupHorizontalGroupWithLayoutSizeSubitemCount(layoutSize
 	return NSCollectionLayoutGroupFromID(_ret)
 }
 
+// Creates a group of the specified size, containing an array of items arranged in a horizontal line.
 func NSCollectionLayoutGroupHorizontalGroupWithLayoutSizeSubitems(layoutSize *NSCollectionLayoutSize, subitems *foundation.NSArray[*NSCollectionLayoutItem]) *NSCollectionLayoutGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelHorizontalGroupWithLayoutSizeSubitems, layoutSize.Ptr(), subitems.Ptr())
 	if _ret != 0 {
@@ -55,6 +59,7 @@ func NSCollectionLayoutGroupHorizontalGroupWithLayoutSizeSubitems(layoutSize *NS
 	return NSCollectionLayoutGroupFromID(_ret)
 }
 
+// Creates a group of the specified size, containing an array of equally sized items arranged in a vertical line up to the number specified by count.
 func NSCollectionLayoutGroupVerticalGroupWithLayoutSizeSubitemCount(layoutSize *NSCollectionLayoutSize, subitem *NSCollectionLayoutItem, count int) *NSCollectionLayoutGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelVerticalGroupWithLayoutSizeSubitemCount, layoutSize.Ptr(), subitem.Ptr(), count)
 	if _ret != 0 {
@@ -63,6 +68,7 @@ func NSCollectionLayoutGroupVerticalGroupWithLayoutSizeSubitemCount(layoutSize *
 	return NSCollectionLayoutGroupFromID(_ret)
 }
 
+// Creates a group of the specified size, containing an array of items arranged in a vertical line.
 func NSCollectionLayoutGroupVerticalGroupWithLayoutSizeSubitems(layoutSize *NSCollectionLayoutSize, subitems *foundation.NSArray[*NSCollectionLayoutItem]) *NSCollectionLayoutGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelVerticalGroupWithLayoutSizeSubitems, layoutSize.Ptr(), subitems.Ptr())
 	if _ret != 0 {
@@ -71,6 +77,7 @@ func NSCollectionLayoutGroupVerticalGroupWithLayoutSizeSubitems(layoutSize *NSCo
 	return NSCollectionLayoutGroupFromID(_ret)
 }
 
+// Creates a group of the specified size, with an item provider that creates a custom arrangement for those items.
 func NSCollectionLayoutGroupCustomGroupWithLayoutSizeItemProvider(layoutSize *NSCollectionLayoutSize, itemProvider objc.Block) *NSCollectionLayoutGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelCustomGroupWithLayoutSizeItemProvider, layoutSize.Ptr(), itemProvider)
 	if _ret != 0 {
@@ -79,6 +86,7 @@ func NSCollectionLayoutGroupCustomGroupWithLayoutSizeItemProvider(layoutSize *NS
 	return NSCollectionLayoutGroupFromID(_ret)
 }
 
+// Returns a string with an ASCII representation of the group.
 func (o *NSCollectionLayoutGroup) VisualDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutGroupSelVisualDescription)
 	if _ret != 0 {

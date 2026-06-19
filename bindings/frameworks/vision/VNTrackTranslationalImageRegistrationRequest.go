@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An image-analysis request, as a stateful request you track over time, that determines the affine transform necessary to align the content of two images.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vntracktranslationalimageregistrationrequest
 type VNTrackTranslationalImageRegistrationRequest struct {
 	VNStatefulRequest
@@ -32,7 +34,7 @@ func VNTrackTranslationalImageRegistrationRequestFromID(id objc.ID) *VNTrackTran
 	return o
 }
 
-// @brief Create a new request that can statefully track the translational registration of two images. @discussion This is a convenience initializer for a frame analysis spacing of kCMTimeZero and a nil completion handler.
+// Creates a new request that tracks the translational registration of two images.
 func (o *VNTrackTranslationalImageRegistrationRequest) Init() *VNTrackTranslationalImageRegistrationRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackTranslationalImageRegistrationRequestSelInit)
 	if _ret != 0 {
@@ -41,7 +43,7 @@ func (o *VNTrackTranslationalImageRegistrationRequest) Init() *VNTrackTranslatio
 	return VNTrackTranslationalImageRegistrationRequestFromID(_ret)
 }
 
-// @brief Create a new request that can statefully track the translational registration of two images. @discussion This is a convenience initializer for a frame analysis spacing of kCMTimeZero.
+// Creates a new request that tracks the translational registration of two images, with a system callback on completion.
 func (o *VNTrackTranslationalImageRegistrationRequest) InitWithCompletionHandler(completionHandler func(*VNRequest, unsafe.Pointer)) *VNTrackTranslationalImageRegistrationRequest {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

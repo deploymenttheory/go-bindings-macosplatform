@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a folder on a camera.
+//
 // Apple documentation: https://developer.apple.com/documentation/imagecapturecore/iccamerafolder
 type ICCameraFolder struct {
 	ICCameraItem

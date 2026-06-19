@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// The Monte Carlo Strategist is a generic AI that selects a game model update for a given player that results in the highest likelihood for that player to eventually win the game. It does this by sampling the updates available to the player in question. In doing this it will select the update it knows to produce the best result so far, expanding on this selection, simulating the rest of the game from that expansion, and then propogating the results (win or loss) upwards. It will do this until the budget has been reached, then returning the choice it has deemed best suited for the player in question.
+// An AI that chooses moves in turn-based games using a probabilistic strategy.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkmontecarlostrategist
 type GKMonteCarloStrategist struct {

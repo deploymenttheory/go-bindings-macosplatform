@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An optimization layer that performs an Adam pdate.
+//
 // NNOptimizerAdam wraps [raw.MPSNNOptimizerAdam] with a fluent Go API.
 type NNOptimizerAdam struct {
 	inner *raw.MPSNNOptimizerAdam
@@ -75,7 +77,7 @@ func (x *NNOptimizerAdam) WithApplyGradientClipping(applyGradientClipping bool) 
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NNOptimizerAdam) WithOptions(options mpscore.MPSKernelOptions) *NNOptimizerAdam {
@@ -83,7 +85,7 @@ func (x *NNOptimizerAdam) WithOptions(options mpscore.MPSKernelOptions) *NNOptim
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NNOptimizerAdam) WithLabel(label string) *NNOptimizerAdam {

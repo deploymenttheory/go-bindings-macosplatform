@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A reduction filter that returns the index of the location of the minimum value for each feature channel in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducefeaturechannelsargumentmin
 type MPSNNReduceFeatureChannelsArgumentMin struct {
 	mpsneuralnetwork.MPSNNReduceUnary

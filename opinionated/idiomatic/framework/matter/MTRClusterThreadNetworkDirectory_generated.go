@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Thread Network Directory Manages the names and credentials of Thread networks visible to the user.
+//
 // MTRClusterThreadNetworkDirectory wraps [raw.MTRClusterThreadNetworkDirectory] with a fluent Go API.
 type MTRClusterThreadNetworkDirectory struct {
 	inner *raw.MTRClusterThreadNetworkDirectory

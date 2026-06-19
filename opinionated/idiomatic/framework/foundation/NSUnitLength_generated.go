@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for length.
+//
 // UnitLength wraps [raw.NSUnitLength] with a fluent Go API.
 type UnitLength struct {
 	inner *raw.NSUnitLength

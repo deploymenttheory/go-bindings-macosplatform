@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object to initialize a mixer with a given configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasemixerdefinition
 type PHASEMixerDefinition struct {
 	PHASEDefinition

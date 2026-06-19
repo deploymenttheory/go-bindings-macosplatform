@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of metadata items associated with a timeline segment.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetadatagroup
 type AVMetadataGroup struct {
 	foundation.NSObject

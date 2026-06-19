@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Provides parameters for creating a resource view pool.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlresourceviewpooldescriptor
 type MTLResourceViewPoolDescriptor struct {
 	foundation.NSObject

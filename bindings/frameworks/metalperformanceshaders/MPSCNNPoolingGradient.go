@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A gradient pooling kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolinggradient
 type MPSCNNPoolingGradient struct {
 	mpsneuralnetwork.MPSCNNGradientKernel

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that indicates the user’s focus status is changing.
+//
 // ShareFocusStatusIntent wraps [raw.INShareFocusStatusIntent] with a fluent Go API.
 type ShareFocusStatusIntent struct {
 	inner *raw.INShareFocusStatusIntent
@@ -30,6 +32,8 @@ func ShareFocusStatusIntentFromID(id objc.ID) *ShareFocusStatusIntent {
 	return &ShareFocusStatusIntent{inner: raw.INShareFocusStatusIntentFromID(id)}
 }
 
+// Creates an intent with the specified focus status.
+//
 // NewShareFocusStatusIntentWithFocusStatus creates a new [ShareFocusStatusIntent].
 func NewShareFocusStatusIntentWithFocusStatus(focusStatus *raw.INFocusStatus) *ShareFocusStatusIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INShareFocusStatusIntent")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewShareFocusStatusIntentWithFocusStatus(focusStatus *raw.INFocusStatus) *S
 	return &ShareFocusStatusIntent{inner: raw.INShareFocusStatusIntentFromID(_id)}
 }
 
+// The intent’s display name.
+//
 // WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
 func (x *ShareFocusStatusIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *ShareFocusStatusIntent {
 	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))

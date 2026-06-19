@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates information about a resource request from a resource loader object.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetresourceloadingrequest
 type AVAssetResourceLoadingRequest struct {
 	foundation.NSObject
@@ -46,12 +48,12 @@ func AVAssetResourceLoadingRequestFromID(id objc.ID) *AVAssetResourceLoadingRequ
 	return o
 }
 
-// @method 		finishLoading @abstract		Causes the receiver to treat the processing of the request as complete. @discussion	If a dataRequest is present, and the resource does not contain the full extent of the data that has been requested according to the values of the requestedOffset and requestedLength properties of the dataRequest, or if requestsAllDataToEndOfResource has a value of YES, -finishLoading may be invoked after providing as much of the requested data as the resource contains. If the contentInformationRequest property is not nil and specifies a non-empty allowedContentTypes array, the contentInformationRequest's contentType property must be set to a value within allowedContentTypes. Otherwise, this method will throw an exception.
+// Causes the receiver to treat the processing of the request as complete.
 func (o *AVAssetResourceLoadingRequest) FinishLoading() {
 	o.Ptr().Send(_aVAssetResourceLoadingRequestSelFinishLoading)
 }
 
-// @method 		finishLoadingWithError: @abstract		Causes the receiver to treat the request as having failed. @param			error An instance of NSError indicating the reason for failure.
+// Causes the receiver to handle the failure to load a resource for which a resource loader’s delegate took responsibility.
 func (o *AVAssetResourceLoadingRequest) FinishLoadingWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_aVAssetResourceLoadingRequestSelFinishLoadingWithError, error_)
 }
@@ -130,11 +132,11 @@ func (o *AVAssetResourceLoadingRequest) Requestor() *AVAssetResourceLoadingReque
 	return AVAssetResourceLoadingRequestorFromID(_ret)
 }
 
-// @method 		streamingContentKeyRequestDataForApp:contentIdentifier:options:error: @abstract		Obtains a streaming content key request for a specific combination of application and content. @param			appIdentifier An opaque identifier for the application. The value of this identifier depends on the particular system used to provide the decryption key. @param			contentIdentifier An opaque identifier for the content. The value of this identifier depends on the particular system used to provide the decryption key. @param			options Additional information necessary to obtain the key, or nil if none. @param			outError If obtaining the streaming content key request fails, will be set to an instance of NSError describing the failure. @result		The key request data that must be transmitted to the key vendor to obtain the content key.
+// Obtains key request data for a specific combination of application and content.
 // Deprecated: Use -[AVContentKeyRequest makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:] instead
 func (o *AVAssetResourceLoadingRequest) StreamingContentKeyRequestDataForAppContentIdentifierOptionsError(appIdentifier *foundation.NSData, contentIdentifier *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoadingRequestSelStreamingContentKeyRequestDataForAppContentIdentifierOptionsError, appIdentifier.Ptr(), contentIdentifier.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoadingRequestSelStreamingContentKeyRequestDataForAppContentIdentifierOptionsError, appIdentifier.Ptr(), contentIdentifier.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -144,11 +146,11 @@ func (o *AVAssetResourceLoadingRequest) StreamingContentKeyRequestDataForAppCont
 	return foundation.NSDataFromID(_ret), nil
 }
 
-// @method 		persistentContentKeyFromKeyVendorResponse:options:error: @abstract		Obtains a persistable content key from a context. @param			keyVendorResponse The response returned from the key vendor as a result of a request generated from streamingContentKeyRequestDataForApp:contentIdentifier:options:error:. @param			options Additional information necessary to obtain the persistable content key, or nil if none. @param			outError If obtaining the persistable content key fails, will be set to an instance of NSError describing the failure. @result		The persistable content key data that may be stored offline to answer future loading requests of the same content key. @discussion	The data returned from this method may be used to immediately satisfy an AVAssetResourceLoadingDataRequest, as well as any subsequent requests for the same key url. The value of AVAssetResourceLoadingContentInformationRequest.contentType must be set to AVStreamingKeyDeliveryPersistentContentKeyType when responding with data created with this method.
+// Obtains a persistable content key from a context.
 // Deprecated: Use -[AVPersistableContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:] instead
 func (o *AVAssetResourceLoadingRequest) PersistentContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoadingRequestSelPersistentContentKeyFromKeyVendorResponseOptionsError, keyVendorResponse.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoadingRequestSelPersistentContentKeyFromKeyVendorResponseOptionsError, keyVendorResponse.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -158,7 +160,7 @@ func (o *AVAssetResourceLoadingRequest) PersistentContentKeyFromKeyVendorRespons
 	return foundation.NSDataFromID(_ret), nil
 }
 
-// @method 		finishLoadingWithResponse:data:redirect: @abstract		Causes the receiver to finish loading a resource that a delegate has previously assumed responsibility for loading by returning YES as the result of -resourceLoader:shouldWaitForLoadingOfRequestedResource:. @param			response The NSURLResponse for the NSURLRequest of the receiver. Should be nil if no response is required. @param			data An instance of NSData containing the data of the resource. Should be nil if no such data is available. @param			redirect An instance of NSURLRequest indicating a redirect of the loading request. Should be nil if no redirect is needed. @discussion	This method is deprecated. Use the following methods instead. -[AVAssetResourceLoadingRequest setResponse:] to set the response property, -[AVAssetResourceLoadingRequest setRedirect:] to set the redirect property, -[AVAssetResourceLoadingDataRequest respondWithData:] to provide data, and -[AVAssetResourceLoadingRequest finishLoading] to indicate that loading is finished.
+// Causes the receiver to finish loading a resource for which a resource loader’s delegate took responsibility .
 // Deprecated: Use -[AVAssetResourceLoadingRequest setResponse:], -[AVAssetResourceLoadingRequest setRedirect:], -[AVAssetResourceLoadingDataRequest respondWithData:], -[AVAssetResourceLoadingRequest finishLoading]
 func (o *AVAssetResourceLoadingRequest) FinishLoadingWithResponseDataRedirect(response *foundation.NSURLResponse, data *foundation.NSData, redirect *foundation.NSURLRequest) {
 	o.Ptr().Send(_aVAssetResourceLoadingRequestSelFinishLoadingWithResponseDataRedirect, response.Ptr(), data.Ptr(), redirect.Ptr())

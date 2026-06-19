@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class MPSCNNLossNode @discussion  This node calculates loss information during training typically immediately after the inference portion of network evaluation is performed. The result image of the loss operations is typically the first gradient image to be comsumed by the gradient passes that work their way back up the graph. In addition, the node will update the loss image in the MPSNNLabels with the desired estimate of correctness.
+// A representation of a loss kernel.
 //
 // CNNLossNode wraps [raw.MPSCNNLossNode] with a fluent Go API.
 type CNNLossNode struct {

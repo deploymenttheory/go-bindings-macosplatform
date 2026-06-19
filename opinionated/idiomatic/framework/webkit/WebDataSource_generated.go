@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// WebDataSource encapsulates the web content to be displayed in a web frame view. A WebDataSource object has a representation object, conforming to the WebDocumentRepresentation protocol, that holds the data in an appropriate format depending on the MIME type. You can extend WebKit to support new MIME types by implementing your own view and representation classes, and specifying the mapping between them using the registerViewClass:representationClass:forMIMEType: WebView class method.
+//
 // WebDataSource wraps [raw.WebDataSource] with a fluent Go API.
 type WebDataSource struct {
 	inner *raw.WebDataSource
@@ -37,7 +39,7 @@ func NewWebDataSource() *WebDataSource {
 	return &WebDataSource{inner: raw.WebDataSourceFromID(_id)}
 }
 
-// @method initWithRequest: @abstract The designated initializer for WebDataSource. @param request The request to use in creating a datasource. @result Returns an initialized WebDataSource.
+// initializes a data source with a URL request.
 //
 // NewWebDataSourceWithRequest creates a new [WebDataSource].
 func NewWebDataSourceWithRequest(request *foundation.NSURLRequest) *WebDataSource {
@@ -46,7 +48,7 @@ func NewWebDataSourceWithRequest(request *foundation.NSURLRequest) *WebDataSourc
 	return &WebDataSource{inner: raw.WebDataSourceFromID(_id)}
 }
 
-// method subresourceForURL: @abstract Returns a subresource for a given URL. @param URL The URL of the subresource. @description Returns non-nil if the data source has fully downloaded a subresource with the given URL.
+// Returns a subresource for the given URL.
 //
 // SubresourceForURL calls the underlying SubresourceForURL.
 func (x *WebDataSource) SubresourceForURL(uRL string) *WebResource {
@@ -57,7 +59,7 @@ func (x *WebDataSource) SubresourceForURL(uRL string) *WebResource {
 	return &WebResource{inner: _r}
 }
 
-// @method addSubresource: @abstract Adds a subresource to the data source. @param subresource The subresource to be added. @description addSubresource: adds a subresource to the data source's list of subresources. Later, if something causes the data source to load the URL of the subresource, the data source will load the data from the subresource instead of from the network. For example, if one wants to add an image that is already downloaded to a web page, addSubresource: can be called so that the data source uses the downloaded image rather than accessing the network. NOTE: If the data source already has a subresource with the same URL, addSubresource: will replace it.
+// Adds a resource to the data source’s list of subresources.
 //
 // AddSubresource calls the underlying AddSubresource.
 func (x *WebDataSource) AddSubresource(subresource *raw.WebResource) {

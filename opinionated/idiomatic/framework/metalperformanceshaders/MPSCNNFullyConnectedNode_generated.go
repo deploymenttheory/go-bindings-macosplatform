@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract   A MPSNNFilterNode representing a MPSCNNFullyConnected kernel
+// A representation of a fully connected convolution layer, also known as an inner product layer.
 //
 // CNNFullyConnectedNode wraps [raw.MPSCNNFullyConnectedNode] with a fluent Go API.
 type CNNFullyConnectedNode struct {

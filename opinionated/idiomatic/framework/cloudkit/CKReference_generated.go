@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A relationship between two records in a record zone.
+//
 // Reference wraps [raw.CKReference] with a fluent Go API.
 type Reference struct {
 	inner *raw.CKReference

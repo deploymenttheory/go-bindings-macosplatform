@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An optimization layer that performs a root mean square propagation update.
+//
 // NNOptimizerRMSProp wraps [raw.MPSNNOptimizerRMSProp] with a fluent Go API.
 type NNOptimizerRMSProp struct {
 	inner *raw.MPSNNOptimizerRMSProp
@@ -67,7 +69,7 @@ func (x *NNOptimizerRMSProp) WithApplyGradientClipping(applyGradientClipping boo
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NNOptimizerRMSProp) WithOptions(options mpscore.MPSKernelOptions) *NNOptimizerRMSProp {
@@ -75,7 +77,7 @@ func (x *NNOptimizerRMSProp) WithOptions(options mpscore.MPSKernelOptions) *NNOp
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NNOptimizerRMSProp) WithLabel(label string) *NNOptimizerRMSProp {

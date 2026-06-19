@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A bookmark for keeping track the most recent history that you’ve processed.
+//
 // PersistentHistoryToken wraps [raw.NSPersistentHistoryToken] with a fluent Go API.
 type PersistentHistoryToken struct {
 	inner *raw.NSPersistentHistoryToken

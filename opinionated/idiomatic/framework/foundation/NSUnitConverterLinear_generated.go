@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of how to convert between units using a linear equation.
+//
 // UnitConverterLinear wraps [raw.NSUnitConverterLinear] with a fluent Go API.
 type UnitConverterLinear struct {
 	inner *raw.NSUnitConverterLinear

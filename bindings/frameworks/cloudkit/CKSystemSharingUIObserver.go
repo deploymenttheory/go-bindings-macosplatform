@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object the system uses to monitor changes in sharing.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksystemsharinguiobserver
 type CKSystemSharingUIObserver struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func CKSystemSharingUIObserverFromID(id objc.ID) *CKSystemSharingUIObserver {
 	return o
 }
 
-// Creates and initializes an observer using the provided container. - Parameters: - container: The “CKContainer“ for the sharing observer.
+// Creates and initializes an observer using the provided container.
 func (o *CKSystemSharingUIObserver) InitWithContainer(container *CKContainer) *CKSystemSharingUIObserver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSystemSharingUIObserverSelInitWithContainer, container.Ptr())
 	if _ret != 0 {

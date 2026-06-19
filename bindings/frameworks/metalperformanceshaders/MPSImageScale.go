@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that resizes and changes the aspect ratio of an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagescale
 type MPSImageScale struct {
 	mpsimage.MPSUnaryImageKernel

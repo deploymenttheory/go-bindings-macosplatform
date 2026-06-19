@@ -60,12 +60,15 @@ func (o *AVSpatialVideoConfiguration) InitWithFormatDescription(formatDescriptio
 
 // Specifies intrinsic and extrinsic parameters for single or multiple lenses. The property value is an array of dictionaries describing the camera calibration data for each lens. The camera calibration data includes intrinsics and extrinics with other parameters.  This property is only applicable when the projection kind is kCMTagProjectionTypeParametricImmersive.  Can be nil if the value is unknown.
 func (o *AVSpatialVideoConfiguration) CameraCalibrationDataLensCollection() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _aVSpatialVideoConfigurationSelCameraCalibrationDataLensCollection)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpatialVideoConfigurationSelCameraCalibrationDataLensCollection)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *AVSpatialVideoConfiguration) SetCameraCalibrationDataLensCollection(cameraCalibrationDataLensCollection *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_aVSpatialVideoConfigurationSelSetCameraCalibrationDataLensCollection, cameraCalibrationDataLensCollection)
+	o.Ptr().Send(_aVSpatialVideoConfigurationSelSetCameraCalibrationDataLensCollection, cameraCalibrationDataLensCollection.Ptr())
 }
 
 // Specifies horizontal field of view in thousandths of a degree. Can be nil if the value is unknown.

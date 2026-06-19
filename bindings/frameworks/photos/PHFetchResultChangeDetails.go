@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of changes that occurred in the set of asset or collection objects listed in a fetch result.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phfetchresultchangedetails
 type PHFetchResultChangeDetails[ObjectType purego.AnyObject] struct {
 	foundation.NSObject
@@ -41,6 +43,7 @@ func PHFetchResultChangeDetailsFromID[ObjectType purego.AnyObject](id objc.ID) *
 	return o
 }
 
+// Runs the specified block for each case where an object has moved from one index to another in the fetch result.
 func (o *PHFetchResultChangeDetails[ObjectType]) EnumerateMovesWith(handler func(uint, uint)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -52,6 +55,7 @@ func (o *PHFetchResultChangeDetails[ObjectType]) EnumerateMovesWith(handler func
 	o.Ptr().Send(_pHFetchResultChangeDetailsSelEnumerateMovesWith, __block_handler)
 }
 
+// Creates a change details object that summarizes the differences between two fetch results.
 func PHFetchResultChangeDetailsChangeDetailsFromFetchResultToFetchResultChangedObjects(fromResult *PHFetchResult[objc.ID], toResult *PHFetchResult[objc.ID], changedObjects *foundation.NSArray[objc.ID]) *PHFetchResultChangeDetails[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHFetchResultChangeDetails), _pHFetchResultChangeDetailsSelChangeDetailsFromFetchResultToFetchResultChangedObjects, fromResult.Ptr(), toResult.Ptr(), changedObjects.Ptr())
 	if _ret != 0 {

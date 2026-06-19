@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that you use to configure a texture sampler.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlsamplerdescriptor
 type MTLSamplerDescriptor struct {
 	foundation.NSObject

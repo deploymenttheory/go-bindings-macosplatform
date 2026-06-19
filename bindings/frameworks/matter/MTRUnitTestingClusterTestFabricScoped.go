@@ -118,12 +118,15 @@ func (o *MTRUnitTestingClusterTestFabricScoped) SetFabricSensitiveStruct(fabricS
 }
 
 func (o *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveInt8uList() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterTestFabricScopedSelFabricSensitiveInt8uList)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestFabricScopedSelFabricSensitiveInt8uList)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterTestFabricScoped) SetFabricSensitiveInt8uList(fabricSensitiveInt8uList *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterTestFabricScopedSelSetFabricSensitiveInt8uList, fabricSensitiveInt8uList)
+	o.Ptr().Send(_mTRUnitTestingClusterTestFabricScopedSelSetFabricSensitiveInt8uList, fabricSensitiveInt8uList.Ptr())
 }
 
 func (o *MTRUnitTestingClusterTestFabricScoped) FabricIndex() *foundation.NSNumber {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class that adds a name to framework assets.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseasset
 type PHASEAsset struct {
 	foundation.NSObject

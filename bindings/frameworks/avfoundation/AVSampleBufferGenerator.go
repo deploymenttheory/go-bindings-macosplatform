@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that creates sample buffers.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avsamplebuffergenerator
 type AVSampleBufferGenerator struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func AVSampleBufferGeneratorFromID(id objc.ID) *AVSampleBufferGenerator {
 	return o
 }
 
-// @method		initWithAsset: timebase: @abstract		Creates an instance of AVSampleBufferGenerator to generate sample buffers from the specified asset. @param 		asset The asset from which sample buffers will be created. @param 		timebase The generator timebase, which governs when sample data for sample buffers is loaded. If NULL, sample data is loaded synchronously. @result		An instance of AVSampleBufferGenerator. @discussion	If the specified asset is an HTTP Live Streaming asset, the generator cannot create sample buffers.
+// Creates a new sample buffer generator.
 func (o *AVSampleBufferGenerator) InitWithAssetTimebase(asset *AVAsset, timebase unsafe.Pointer) *AVSampleBufferGenerator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleBufferGeneratorSelInitWithAssetTimebase, asset.Ptr(), timebase)
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func (o *AVSampleBufferGenerator) InitWithAssetTimebase(asset *AVAsset, timebase
 	return AVSampleBufferGeneratorFromID(_ret)
 }
 
-// @method		createSampleBufferForRequest: error: @abstract		Creates a sample buffer and if requested, attempts to load its data asynchronously. Attempt may fail based on generator configuration or file format. See [AVSampleBufferGenerator notifyOfDataReadyForSampleBuffer: completionHandler:] to get notified when the sample buffer data is available. @param		request An instance of AVSampleBufferRequest representing the CMSampleBuffer creation request. @param		outError A pointer to an NSError object that will be populated with failure information, if sample buffer creation fails. @result		A CMSampleBuffer object referencing the output sample buffer. @discussion	If the AVSampleBufferGenerator was created with a NULL timebase, any associated AVSampleBufferRequest will default to using AVSampleBufferRequestModeImmediate.
+// Creates a sample buffer, and attempts to load its data asynchronously if requested.
 func (o *AVSampleBufferGenerator) CreateSampleBufferForRequestError(request *AVSampleBufferRequest) (unsafe.Pointer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVSampleBufferGeneratorSelCreateSampleBufferForRequestError, request.Ptr(), unsafe.Pointer(&_nsErr))
@@ -56,13 +58,14 @@ func (o *AVSampleBufferGenerator) CreateSampleBufferForRequestError(request *AVS
 	return _ret, nil
 }
 
+// Creates a new sample buffer reference for the specified buffer request.
 // Deprecated: Use -createSampleBufferForRequest: error:, passing NULL for the error if not required
 func (o *AVSampleBufferGenerator) CreateSampleBufferForRequest(request *AVSampleBufferRequest) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVSampleBufferGeneratorSelCreateSampleBufferForRequest, request.Ptr())
 	return _ret
 }
 
-// @method		makeBatch @abstract		Creates a batch to handle multiple sample buffers, allowing to asynchronously load sample data and optimize I/O when possible. @result		An instance of an AVSampleBufferGeneratorBatch that can be used in calls to createSampleBufferForRequest:addingToBatch:error: of the same AVSampleBufferGenerator instance.
+// Creates a batch object to handle generating multiple sample buffers.
 func (o *AVSampleBufferGenerator) MakeBatch() *AVSampleBufferGeneratorBatch {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleBufferGeneratorSelMakeBatch)
 	if _ret != 0 {
@@ -71,7 +74,7 @@ func (o *AVSampleBufferGenerator) MakeBatch() *AVSampleBufferGeneratorBatch {
 	return AVSampleBufferGeneratorBatchFromID(_ret)
 }
 
-// @method		createSampleBufferForRequest: addingToBatch: error: @abstract		Creates a sample buffer and attempts to defer I/O for its data. Attempt may fail based on generator configuration or file format. The [AVSampleBufferGeneratorBatch makeDataReadyWithCompletionHandler:] should be called once to commence I/O and load sample data for all CMSampleBuffers within a batch. Any subsequent calls to createSampleBufferForRequest:addingToBatch:error: will throw an exception. @param		request An instance of AVSampleBufferRequest representing the CMSampleBuffer creation request @param		batch An instance of AVSampleBufferGeneratorBatch to contain the output sample buffer. If nil, an exception is thrown. Must be created by calling makeBatch on the same instance of AVSampleBufferGenerator. An exception will be thrown otherwise. @param		outError A pointer to an NSError object that will be populated with failure information, if sample buffer creation fails. @result		A CMSampleBuffer object referencing the output sample buffer. The generator may defer I/O to fetch sample data depending on the source of the sample data and the generator's timebase.
+// Creates a sample buffer and attempts to defer I/O for its data.
 func (o *AVSampleBufferGenerator) CreateSampleBufferForRequestAddingToBatchError(request *AVSampleBufferRequest, batch *AVSampleBufferGeneratorBatch) (unsafe.Pointer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVSampleBufferGeneratorSelCreateSampleBufferForRequestAddingToBatchError, request.Ptr(), batch.Ptr(), unsafe.Pointer(&_nsErr))
@@ -81,6 +84,7 @@ func (o *AVSampleBufferGenerator) CreateSampleBufferForRequestAddingToBatchError
 	return _ret, nil
 }
 
+// Notifies the sample buffer generator when data is ready for the sample buffer reference or an error has occurred.
 func AVSampleBufferGeneratorNotifyOfDataReadyForSampleBufferCompletionHandler(sbuf unsafe.Pointer, completionHandler func(bool, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

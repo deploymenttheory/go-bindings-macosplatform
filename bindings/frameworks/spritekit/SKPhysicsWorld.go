@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The driver of the physics engine in a scene; it exposes the ability for you to configure and query the physics system.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skphysicsworld
 type SKPhysicsWorld struct {
 	foundation.NSObject
@@ -48,23 +50,28 @@ func SKPhysicsWorldFromID(id objc.ID) *SKPhysicsWorld {
 	return o
 }
 
+// Adds a joint to the physics world.
 func (o *SKPhysicsWorld) AddJoint(joint *SKPhysicsJoint) {
 	o.Ptr().Send(_sKPhysicsWorldSelAddJoint, joint.Ptr())
 }
 
+// Removes a specific joint from the physics world.
 func (o *SKPhysicsWorld) RemoveJoint(joint *SKPhysicsJoint) {
 	o.Ptr().Send(_sKPhysicsWorldSelRemoveJoint, joint.Ptr())
 }
 
+// Removes all joints from the physics world.
 func (o *SKPhysicsWorld) RemoveAllJoints() {
 	o.Ptr().Send(_sKPhysicsWorldSelRemoveAllJoints)
 }
 
+// Samples all of the field nodes in the scene and returns the summation of their forces at that point.
 func (o *SKPhysicsWorld) SampleFieldsAt(position unsafe.Pointer) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKPhysicsWorldSelSampleFieldsAt, position)
 	return _ret
 }
 
+// Searches for the first physics body that contains a point.
 func (o *SKPhysicsWorld) BodyAtPoint(point corefoundation.CGPoint) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPhysicsWorldSelBodyAtPoint, point)
 	if _ret != 0 {
@@ -73,6 +80,7 @@ func (o *SKPhysicsWorld) BodyAtPoint(point corefoundation.CGPoint) *SKPhysicsBod
 	return SKPhysicsBodyFromID(_ret)
 }
 
+// Searches for the first physics body that intersects the specified rectangle.
 func (o *SKPhysicsWorld) BodyInRect(rect corefoundation.CGRect) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPhysicsWorldSelBodyInRect, rect)
 	if _ret != 0 {
@@ -81,6 +89,7 @@ func (o *SKPhysicsWorld) BodyInRect(rect corefoundation.CGRect) *SKPhysicsBody {
 	return SKPhysicsBodyFromID(_ret)
 }
 
+// Searches for the first physics body that intersects a ray.
 func (o *SKPhysicsWorld) BodyAlongRayStartEnd(start corefoundation.CGPoint, end corefoundation.CGPoint) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPhysicsWorldSelBodyAlongRayStartEnd, start, end)
 	if _ret != 0 {
@@ -89,6 +98,7 @@ func (o *SKPhysicsWorld) BodyAlongRayStartEnd(start corefoundation.CGPoint, end 
 	return SKPhysicsBodyFromID(_ret)
 }
 
+// Enumerates all the physics bodies in the scene that contain a point.
 func (o *SKPhysicsWorld) EnumerateBodiesAtPointUsing(point corefoundation.CGPoint, block func(*SKPhysicsBody, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -103,6 +113,7 @@ func (o *SKPhysicsWorld) EnumerateBodiesAtPointUsing(point corefoundation.CGPoin
 	o.Ptr().Send(_sKPhysicsWorldSelEnumerateBodiesAtPointUsing, point, __block_block)
 }
 
+// Enumerates all the physics bodies in the scene that intersect the specified rectangle.
 func (o *SKPhysicsWorld) EnumerateBodiesInRectUsing(rect corefoundation.CGRect, block func(*SKPhysicsBody, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -117,6 +128,7 @@ func (o *SKPhysicsWorld) EnumerateBodiesInRectUsing(rect corefoundation.CGRect, 
 	o.Ptr().Send(_sKPhysicsWorldSelEnumerateBodiesInRectUsing, rect, __block_block)
 }
 
+// Enumerates all the physics bodies in the scene that intersect a ray.
 func (o *SKPhysicsWorld) EnumerateBodiesAlongRayStartEndUsing(start corefoundation.CGPoint, end corefoundation.CGPoint, block objc.Block) {
 	o.Ptr().Send(_sKPhysicsWorldSelEnumerateBodiesAlongRayStartEndUsing, start, end, block)
 }

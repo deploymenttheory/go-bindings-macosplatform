@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract returns elementwise quotient of left / right
+// A representation of a division operator.
 //
 // NNDivisionNode wraps [raw.MPSNNDivisionNode] with a fluent Go API.
 type NNDivisionNode struct {

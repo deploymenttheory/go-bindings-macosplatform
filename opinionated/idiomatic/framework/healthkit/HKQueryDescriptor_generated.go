@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A descriptor that specifies a set of samples based on the data type and a predicate.
+//
 // QueryDescriptor wraps [raw.HKQueryDescriptor] with a fluent Go API.
 type QueryDescriptor struct {
 	inner *raw.HKQueryDescriptor
@@ -30,7 +32,7 @@ func QueryDescriptorFromID(id objc.ID) *QueryDescriptor {
 	return &QueryDescriptor{inner: raw.HKQueryDescriptorFromID(id)}
 }
 
-// @method        initWithSampleType:predicate: @abstract      Returns a query descriptor that describes a data type and predicate to be used in an HKQuery. @param         sampleType      The type of sample to retrieve. @param         predicate       The predicate which samples should match.
+// Creates a new descriptor for the data type and predicate you provided.
 //
 // NewQueryDescriptorWithSampleTypePredicate creates a new [QueryDescriptor].
 func NewQueryDescriptorWithSampleTypePredicate(sampleType *raw.HKSampleType, predicate *foundation.NSPredicate) *QueryDescriptor {

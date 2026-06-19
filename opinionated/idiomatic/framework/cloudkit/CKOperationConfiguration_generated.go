@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes how a CloudKit operation behaves.
+//
 // OperationConfiguration wraps [raw.CKOperationConfiguration] with a fluent Go API.
 type OperationConfiguration struct {
 	inner *raw.CKOperationConfiguration

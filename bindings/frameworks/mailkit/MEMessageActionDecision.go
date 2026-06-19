@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The action that the system performs on a message, or a request to ask the action handler again later when the message content is available.
+//
 // Apple documentation: https://developer.apple.com/documentation/mailkit/memessageactiondecision
 type MEMessageActionDecision struct {
 	foundation.NSObject

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of an array.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlarraytype
 type MTLArrayType struct {
 	MTLType
@@ -37,6 +39,7 @@ func MTLArrayTypeFromID(id objc.ID) *MTLArrayType {
 	return o
 }
 
+// Provides a description of the underlying struct type when an array holds structs as its elements.
 func (o *MTLArrayType) ElementStructType() *MTLStructType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLArrayTypeSelElementStructType)
 	if _ret != 0 {
@@ -45,6 +48,7 @@ func (o *MTLArrayType) ElementStructType() *MTLStructType {
 	return MTLStructTypeFromID(_ret)
 }
 
+// Provides a description of the underlying type when an array holds other arrays as its elements.
 func (o *MTLArrayType) ElementArrayType() *MTLArrayType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLArrayTypeSelElementArrayType)
 	if _ret != 0 {
@@ -53,6 +57,7 @@ func (o *MTLArrayType) ElementArrayType() *MTLArrayType {
 	return MTLArrayTypeFromID(_ret)
 }
 
+// Provides a description of the underlying texture type when an array holds textures as its elements.
 func (o *MTLArrayType) ElementTextureReferenceType() *MTLTextureReferenceType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLArrayTypeSelElementTextureReferenceType)
 	if _ret != 0 {
@@ -61,6 +66,7 @@ func (o *MTLArrayType) ElementTextureReferenceType() *MTLTextureReferenceType {
 	return MTLTextureReferenceTypeFromID(_ret)
 }
 
+// Provides a description of the underlying pointer type when an array holds pointers as its elements.
 func (o *MTLArrayType) ElementPointerType() *MTLPointerType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLArrayTypeSelElementPointerType)
 	if _ret != 0 {
@@ -69,7 +75,7 @@ func (o *MTLArrayType) ElementPointerType() *MTLPointerType {
 	return MTLPointerTypeFromID(_ret)
 }
 
-// Provides a description of the underlying tensor type when this array holds tensors as its elements. - Returns: A description of the tensor type that this array holds, or `nil` if this struct member doesn't hold a tensor.
+// Provides a description of the underlying tensor type when this array holds tensors as its elements.
 func (o *MTLArrayType) ElementTensorReferenceType() *MTLTensorReferenceType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLArrayTypeSelElementTensorReferenceType)
 	if _ret != 0 {

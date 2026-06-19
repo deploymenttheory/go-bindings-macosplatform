@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that enables you to participate in the migration between two versions of the same model.
+//
 // CustomMigrationStage wraps [raw.NSCustomMigrationStage] with a fluent Go API.
 type CustomMigrationStage struct {
 	inner *raw.NSCustomMigrationStage
@@ -31,6 +33,8 @@ func CustomMigrationStageFromID(id objc.ID) *CustomMigrationStage {
 	return &CustomMigrationStage{inner: raw.NSCustomMigrationStageFromID(id)}
 }
 
+// Creates a custom migration stage with the specified source and destination model references.
+//
 // NewCustomMigrationStageWithCurrentModelReferenceNextModelReference creates a new [CustomMigrationStage].
 func NewCustomMigrationStageWithCurrentModelReferenceNextModelReference(currentModel *raw.NSManagedObjectModelReference, nextModel *raw.NSManagedObjectModelReference) *CustomMigrationStage {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCustomMigrationStage")), objc.RegisterName("alloc"))
@@ -38,18 +42,24 @@ func NewCustomMigrationStageWithCurrentModelReferenceNextModelReference(currentM
 	return &CustomMigrationStage{inner: raw.NSCustomMigrationStageFromID(_id)}
 }
 
+// The handler to execute before the stage runs.
+//
 // WithWillMigrateHandler sets the willMigrateHandler property and returns the receiver for chaining.
 func (x *CustomMigrationStage) WithWillMigrateHandler(willMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool) *CustomMigrationStage {
 	x.inner.SetWillMigrateHandler(willMigrateHandler)
 	return x
 }
 
+// The handler to execute after the stage runs.
+//
 // WithDidMigrateHandler sets the didMigrateHandler property and returns the receiver for chaining.
 func (x *CustomMigrationStage) WithDidMigrateHandler(didMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool) *CustomMigrationStage {
 	x.inner.SetDidMigrateHandler(didMigrateHandler)
 	return x
 }
 
+// The textual description of the migration stage’s purpose.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CustomMigrationStage) WithLabel(label string) *CustomMigrationStage {
 	x.inner.NSMigrationStage.SetLabel(foundation.NSStringStringWithUTF8String(label))

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The type of map item detail accessory presentation to use.
+//
 // MapItemDetailSelectionAccessoryPresentationStyle wraps [raw.MKMapItemDetailSelectionAccessoryPresentationStyle] with a fluent Go API.
 type MapItemDetailSelectionAccessoryPresentationStyle struct {
 	inner *raw.MKMapItemDetailSelectionAccessoryPresentationStyle

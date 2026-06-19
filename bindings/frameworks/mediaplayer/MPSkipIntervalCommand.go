@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the skip intervals for the player.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpskipintervalcommand
 type MPSkipIntervalCommand struct {
 	MPRemoteCommand
@@ -32,10 +34,13 @@ func MPSkipIntervalCommandFromID(id objc.ID) *MPSkipIntervalCommand {
 }
 
 func (o *MPSkipIntervalCommand) PreferredIntervals() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mPSkipIntervalCommandSelPreferredIntervals)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSkipIntervalCommandSelPreferredIntervals)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *MPSkipIntervalCommand) SetPreferredIntervals(preferredIntervals *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_mPSkipIntervalCommandSelSetPreferredIntervals, preferredIntervals)
+	o.Ptr().Send(_mPSkipIntervalCommandSelSetPreferredIntervals, preferredIntervals.Ptr())
 }

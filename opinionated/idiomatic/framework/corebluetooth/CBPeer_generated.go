@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a remote device.
+//
 // Peer wraps [raw.CBPeer] with a fluent Go API.
 type Peer struct {
 	inner *raw.CBPeer

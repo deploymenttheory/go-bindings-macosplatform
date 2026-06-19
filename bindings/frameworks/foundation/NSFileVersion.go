@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A snapshot of a file at a specific point in time.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsfileversion
 type NSFileVersion struct {
 	NSObject
@@ -53,6 +55,7 @@ func NSFileVersionFromID(id objc.ID) *NSFileVersion {
 	return o
 }
 
+// Returns the most recent version object for the file at the specified URL.
 func NSFileVersionCurrentVersionOfItemAtURL(url *NSURL) *NSFileVersion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileVersion), _nSFileVersionSelCurrentVersionOfItemAtURL, url.Ptr())
 	if _ret != 0 {
@@ -61,6 +64,7 @@ func NSFileVersionCurrentVersionOfItemAtURL(url *NSURL) *NSFileVersion {
 	return NSFileVersionFromID(_ret)
 }
 
+// Returns all versions of the specified file except the current version.
 func NSFileVersionOtherVersionsOfItemAtURL(url *NSURL) *NSArray[*NSFileVersion] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileVersion), _nSFileVersionSelOtherVersionsOfItemAtURL, url.Ptr())
 	if _ret != 0 {
@@ -69,6 +73,7 @@ func NSFileVersionOtherVersionsOfItemAtURL(url *NSURL) *NSArray[*NSFileVersion] 
 	return NSArrayFromID[*NSFileVersion](_ret)
 }
 
+// Returns an array of version objects that are currently in conflict for the specified URL.
 func NSFileVersionUnresolvedConflictVersionsOfItemAtURL(url *NSURL) *NSArray[*NSFileVersion] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileVersion), _nSFileVersionSelUnresolvedConflictVersionsOfItemAtURL, url.Ptr())
 	if _ret != 0 {
@@ -77,6 +82,7 @@ func NSFileVersionUnresolvedConflictVersionsOfItemAtURL(url *NSURL) *NSArray[*NS
 	return NSArrayFromID[*NSFileVersion](_ret)
 }
 
+// Asynchronously returns an array of NSFileVersions associated with the file located by the given URL, or nil if there is no such file or another error occurs.
 func NSFileVersionGetNonlocalVersionsOfItemAtURLCompletionHandler(url *NSURL, completionHandler func(*NSArray[*NSFileVersion], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -91,6 +97,7 @@ func NSFileVersionGetNonlocalVersionsOfItemAtURLCompletionHandler(url *NSURL, co
 	objc.ID(_clsNSFileVersion).Send(_nSFileVersionSelGetNonlocalVersionsOfItemAtURLCompletionHandler, url.Ptr(), __block_completionHandler)
 }
 
+// Returns the version of the file that has the specified persistent ID.
 func NSFileVersionVersionOfItemAtURLForPersistentIdentifier(url *NSURL, persistentIdentifier objc.ID) *NSFileVersion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileVersion), _nSFileVersionSelVersionOfItemAtURLForPersistentIdentifier, url.Ptr(), persistentIdentifier)
 	if _ret != 0 {
@@ -99,6 +106,7 @@ func NSFileVersionVersionOfItemAtURLForPersistentIdentifier(url *NSURL, persiste
 	return NSFileVersionFromID(_ret)
 }
 
+// Creates a version of the file at the specified location.
 func NSFileVersionAddVersionOfItemAtURLWithContentsOfURLOptionsError(url *NSURL, contentsURL *NSURL, options NSFileVersionAddingOptions) (*NSFileVersion, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileVersion), _nSFileVersionSelAddVersionOfItemAtURLWithContentsOfURLOptionsError, url.Ptr(), contentsURL.Ptr(), options, unsafe.Pointer(&_nsErr))
@@ -111,6 +119,7 @@ func NSFileVersionAddVersionOfItemAtURLWithContentsOfURLOptionsError(url *NSURL,
 	return NSFileVersionFromID(_ret), nil
 }
 
+// Creates and returns a temporary directory to use for saving the contents of the file.
 func NSFileVersionTemporaryDirectoryURLForNewVersionOfItemAtURL(url *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileVersion), _nSFileVersionSelTemporaryDirectoryURLForNewVersionOfItemAtURL, url.Ptr())
 	if _ret != 0 {
@@ -119,6 +128,7 @@ func NSFileVersionTemporaryDirectoryURLForNewVersionOfItemAtURL(url *NSURL) *NSU
 	return NSURLFromID(_ret)
 }
 
+// Replace the contents of the specified file with the contents of the current version’s file.
 func (o *NSFileVersion) ReplaceItemAtURLOptionsError(url *NSURL, options NSFileVersionReplacingOptions) (*NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileVersionSelReplaceItemAtURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
@@ -131,6 +141,7 @@ func (o *NSFileVersion) ReplaceItemAtURLOptionsError(url *NSURL, options NSFileV
 	return NSURLFromID(_ret), nil
 }
 
+// Remove this version object and its associated file from the version store.
 func (o *NSFileVersion) RemoveAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFileVersionSelRemoveAndReturnError, unsafe.Pointer(&_nsErr))
@@ -140,6 +151,7 @@ func (o *NSFileVersion) RemoveAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
+// Removes all versions of a file, except the current one, from the version store.
 func NSFileVersionRemoveOtherVersionsOfItemAtURLError(url *NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsNSFileVersion), _nSFileVersionSelRemoveOtherVersionsOfItemAtURLError, url.Ptr(), unsafe.Pointer(&_nsErr))

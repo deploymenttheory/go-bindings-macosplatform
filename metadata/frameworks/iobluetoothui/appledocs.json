@@ -1,0 +1,315 @@
+{
+  "schema_version": 1,
+  "framework": "IOBluetoothUI",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "IOBluetoothAccessibilityIgnoredImageCell": {
+      "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothaccessibilityignoredimagecell"
+    },
+    "IOBluetoothAccessibilityIgnoredTextFieldCell": {
+      "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothaccessibilityignoredtextfieldcell"
+    },
+    "IOBluetoothDeviceSelectorController": {
+      "doc": "A NSWindowController subclass to display a window to initiate pairing to other bluetooth devices.",
+      "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller"
+    },
+    "IOBluetoothObjectPushUIController": {
+      "doc": "An NSWindowController subclass that supports the creation of an IOBluetoothObjectPushUIController object.",
+      "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothobjectpushuicontroller"
+    },
+    "IOBluetoothPairingController": {
+      "doc": "A NSWindowController subclass to display a window to initiate pairing to other bluetooth devices.",
+      "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller"
+    },
+    "IOBluetoothPasskeyDisplay": {
+      "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpasskeydisplay"
+    },
+    "IOBluetoothServiceBrowserController": {
+      "doc": "A NSWindowController subclass to display a window to search for and perform SDP queries on bluetooth devices within range.",
+      "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller"
+    }
+  },
+  "enums": {
+    "BluetoothKeyboardReturnType": {
+      "url": "https://developer.apple.com/documentation/iobluetoothui/bluetoothkeyboardreturntype"
+    }
+  },
+  "methods": {
+    "IOBluetoothDeviceSelectorController": {
+      "-addAllowedUUID:": {
+        "doc": "Adds a UUID to the list of UUIDs that are used to validate the user’s selection.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/addalloweduuid(_:)"
+      },
+      "-addAllowedUUIDArray:": {
+        "doc": "Adds an array of UUIDs to the list of UUIDs that are used to validate the user’s selection.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/addalloweduuidarray(_:)"
+      },
+      "-beginSheetModalForWindow:modalDelegate:didEndSelector:contextInfo:": {
+        "doc": "Runs the device selector panel as a sheet on the target window.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/beginsheetmodal(for:modaldelegate:didend:contextinfo:)"
+      },
+      "-clearAllowedUUIDs": {
+        "doc": "Resets the controller back to the default state where it will accept any device the user selects.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/clearalloweduuids()"
+      },
+      "-getCancel": {
+        "doc": "Returns the title of the default/cancel button in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/getcancel()"
+      },
+      "-getDescriptionText": {
+        "doc": "Returns the description text that appears in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/getdescriptiontext()"
+      },
+      "-getHeader": {
+        "doc": "Returns the header text that appears in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/getheader()"
+      },
+      "-getOptions": {
+        "doc": "Returns the option bits that control the panel’s behavior.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/getoptions()"
+      },
+      "-getPrompt": {
+        "doc": "Returns the title of the default/select button in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/getprompt()"
+      },
+      "-getResults": {
+        "doc": "Returns the result of the user’s selection.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/getresults()"
+      },
+      "-getSearchAttributes": {
+        "doc": "Returns the search attributes that control the panel’s search/inquiry behavior.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/getsearchattributes()"
+      },
+      "-getTitle": {
+        "doc": "Returns the title of the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/gettitle()"
+      },
+      "-runModal": {
+        "doc": "Runs the device selector panel in a modal session to allow the user to select a Bluetooth device.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/runmodal()"
+      },
+      "-setCancel:": {
+        "doc": "Sets the title of the default/cancel button in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/setcancel(_:)"
+      },
+      "-setDescriptionText:": {
+        "doc": "Sets the description text that appears in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/setdescriptiontext(_:)"
+      },
+      "-setHeader:": {
+        "doc": "Sets the header text that appears in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/setheader(_:)"
+      },
+      "-setOptions:": {
+        "doc": "Sets the option bits that control the panel’s behavior.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/setoptions(_:)"
+      },
+      "-setPrompt:": {
+        "doc": "Sets the title of the default/select button in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/setprompt(_:)"
+      },
+      "-setSearchAttributes:": {
+        "doc": "Sets the search attributes that control the panel’s search/inquiry behavior.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/setsearchattributes(_:)"
+      },
+      "-setTitle:": {
+        "doc": "Sets the title of the panel when not run as a sheet.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothdeviceselectorcontroller/settitle(_:)"
+      }
+    },
+    "IOBluetoothObjectPushUIController": {
+      "-beginSheetModalForWindow:modalDelegate:didEndSelector:contextInfo:": {
+        "doc": "Runs the transfer UI as a sheet on the target window.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothobjectpushuicontroller/beginsheetmodal(for:modaldelegate:didend:contextinfo:)"
+      },
+      "-getDevice": {
+        "doc": "Gets the object representing the remote target device in the transfer.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothobjectpushuicontroller/getdevice()"
+      },
+      "-getTitle": {
+        "doc": "Returns the title of the transfer panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothobjectpushuicontroller/gettitle()"
+      },
+      "-initObjectPushWithBluetoothDevice:withFiles:delegate:": {
+        "doc": "Creates and returns a new IOBluetoothObjectPush object",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothobjectpushuicontroller/init(objectpushwith:withfiles:delegate:)"
+      },
+      "-isTransferInProgress": {
+        "doc": "Gets state of the transfer",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothobjectpushuicontroller/istransferinprogress()"
+      },
+      "-runModal": {
+        "doc": "Runs the transfer UI panel in a modal session",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothobjectpushuicontroller/runmodal()"
+      },
+      "-runPanel": {
+        "doc": "Runs the transfer UI as a panel with no modal session",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothobjectpushuicontroller/runpanel()"
+      },
+      "-setIconImage:": {
+        "doc": "Manually sets the icon used in the panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothobjectpushuicontroller/seticonimage(_:)"
+      },
+      "-setTitle:": {
+        "doc": "Sets the title of the panel when not run as a sheet.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothobjectpushuicontroller/settitle(_:)"
+      },
+      "-stop": {
+        "doc": "Stops the transfer UI",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothobjectpushuicontroller/stop()"
+      }
+    },
+    "IOBluetoothPairingController": {
+      "-addAllowedUUID:": {
+        "doc": "Adds a UUID to the list of UUIDs that are used to validate the user’s selection.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller/addalloweduuid(_:)"
+      },
+      "-addAllowedUUIDArray:": {
+        "doc": "Adds an array of UUIDs to the list of UUIDs that are used to validate the user’s selection.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller/addalloweduuidarray(_:)"
+      },
+      "-clearAllowedUUIDs": {
+        "doc": "Resets the controller back to the default state where it will accept any device the user selects.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller/clearalloweduuids()"
+      },
+      "-getDescriptionText": {
+        "doc": "Returns the description text that appears in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller/getdescriptiontext()"
+      },
+      "-getOptions": {
+        "doc": "Returns the option bits that control the panel’s behavior.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller/getoptions()"
+      },
+      "-getPrompt": {
+        "doc": "Returns the title of the default/select button in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller/getprompt()"
+      },
+      "-getResults": {
+        "doc": "Returns an NSArray of the devices that were paired.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller/getresults()"
+      },
+      "-getSearchAttributes": {
+        "doc": "Returns the search attributes that control the panel’s search/inquiry behavior.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller/getsearchattributes()"
+      },
+      "-getTitle": {
+        "doc": "Returns the title of the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller/gettitle()"
+      },
+      "-runModal": {
+        "doc": "Runs the pairing panel in a modal session to allow the user to select a Bluetooth device.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller/runmodal()"
+      },
+      "-setDescriptionText:": {
+        "doc": "Sets the description text that appears in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller/setdescriptiontext(_:)"
+      },
+      "-setOptions:": {
+        "doc": "Sets the option bits that control the panel’s behavior.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller/setoptions(_:)"
+      },
+      "-setPrompt:": {
+        "doc": "Sets the title of the default/select button in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller/setprompt(_:)"
+      },
+      "-setSearchAttributes:": {
+        "doc": "Sets the search attributes that control the panel’s search/inquiry behavior.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller/setsearchattributes(_:)"
+      },
+      "-setTitle:": {
+        "doc": "Sets the title of the panel when not run as a sheet.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothpairingcontroller/settitle(_:)"
+      }
+    },
+    "IOBluetoothServiceBrowserController": {
+      "+serviceBrowserController:": {
+        "doc": "Allocator work Bluetooth Service Browser window controller.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/init(_:)"
+      },
+      "+withServiceBrowserControllerRef:": {
+        "doc": "Method call to convert an IOBluetoothServiceBrowserControllerRef into an IOBluetoothServiceBrowserController *.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/withservicebrowsercontrollerref(_:)"
+      },
+      "-addAllowedUUID:": {
+        "doc": "Adds a UUID to the list of UUIDs that are used to validate the user’s selection.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/addalloweduuid(_:)"
+      },
+      "-addAllowedUUIDArray:": {
+        "doc": "Adds an array of UUIDs to the list of UUIDs that are used to validate the user’s selection.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/addalloweduuidarray(_:)"
+      },
+      "-beginSheetModalForWindow:modalDelegate:didEndSelector:contextInfo:": {
+        "doc": "Runs the service browser panel as a sheet on the target window.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/beginsheetmodal(for:modaldelegate:didend:contextinfo:)"
+      },
+      "-clearAllowedUUIDs": {
+        "doc": "Resets the controller back to the default state where it will accept any device the user selects.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/clearalloweduuids()"
+      },
+      "-discover:": {
+        "doc": "Invoke an already created window controller to display, and run the modal dialog.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/discover:"
+      },
+      "-discoverAsSheetForWindow:withRecord:": {
+        "doc": "Invoke an already created window controller to display, and run the modal dialog.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/discoverassheetforwindow:withrecord:"
+      },
+      "-discoverWithDeviceAttributes:serviceList:serviceRecord:": {
+        "doc": "Invoke an already created window controller to display, and run the modal dialog.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/discoverwithdeviceattributes:servicelist:servicerecord:"
+      },
+      "-getDescriptionText": {
+        "doc": "Returns the description text that appears in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/getdescriptiontext()"
+      },
+      "-getOptions": {
+        "doc": "Returns the option bits that control the panel’s behavior.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/getoptions()"
+      },
+      "-getPrompt": {
+        "doc": "Returns the title of the default/select button in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/getprompt()"
+      },
+      "-getResults": {
+        "doc": "Returns the result of the user’s selection.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/getresults()"
+      },
+      "-getSearchAttributes": {
+        "doc": "Returns the search attributes that control the panel’s search/inquiry behavior.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/getsearchattributes()"
+      },
+      "-getServiceBrowserControllerRef": {
+        "doc": "Returns an IOBluetoothServiceBrowserControllerRef representation of the target IOBluetoothServiceBrowserController object.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/getref()"
+      },
+      "-getTitle": {
+        "doc": "Returns the title of the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/gettitle()"
+      },
+      "-runModal": {
+        "doc": "Runs the service browser panel in a modal session to allow the user to select a service on a Bluetooth device.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/runmodal()"
+      },
+      "-setDescriptionText:": {
+        "doc": "Sets the description text that appears in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/setdescriptiontext(_:)"
+      },
+      "-setOptions:": {
+        "doc": "Modify the options for the window controller.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/setoptions(_:)"
+      },
+      "-setPrompt:": {
+        "doc": "Sets the title of the default/select button in the device selector panel.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/setprompt(_:)"
+      },
+      "-setSearchAttributes:": {
+        "doc": "Sets the search attributes that control the panel’s search/inquiry behavior.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/setsearchattributes(_:)"
+      },
+      "-setTitle:": {
+        "doc": "Sets the title of the panel when not run as a sheet.",
+        "url": "https://developer.apple.com/documentation/iobluetoothui/iobluetoothservicebrowsercontroller/settitle(_:)"
+      }
+    }
+  }
+}

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A representation of a Photos asset grouping, such as a moment, user-created album, or smart album.
+//
 // AssetCollection wraps [raw.PHAssetCollection] with a fluent Go API.
 type AssetCollection struct {
 	inner *raw.PHAssetCollection

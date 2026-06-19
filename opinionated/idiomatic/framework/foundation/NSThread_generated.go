@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A thread of execution.
+//
 // Thread wraps [raw.NSThread] with a fluent Go API.
 type Thread struct {
 	inner *raw.NSThread

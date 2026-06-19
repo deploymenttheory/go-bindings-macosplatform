@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A simple, reusable audio source—music or sound effects loaded from a file—for use in positional audio playback.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnaudiosource
 type SCNAudioSource struct {
 	foundation.NSObject
@@ -45,7 +47,7 @@ func SCNAudioSourceFromID(id objc.ID) *SCNAudioSource {
 	return o
 }
 
-// @method initWithFileNamed: @abstract Convenience initializer that creates an AVAudioNode from the named audio asset in the main bundle.
+// Initializes an audio source from an audio file in the application’s main bundle.
 func (o *SCNAudioSource) InitWithFileNamed(name *foundation.NSString) *SCNAudioSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNAudioSourceSelInitWithFileNamed, name.Ptr())
 	if _ret != 0 {
@@ -54,7 +56,7 @@ func (o *SCNAudioSource) InitWithFileNamed(name *foundation.NSString) *SCNAudioS
 	return SCNAudioSourceFromID(_ret)
 }
 
-// @method initWithURL: @abstract Convenience initializer that creates an AVAudioNode from the URL that contain a audio asset.
+// Initializes an audio source from the specified audio file.
 func (o *SCNAudioSource) InitWithURL(url *foundation.NSURL) *SCNAudioSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNAudioSourceSelInitWithURL, url.Ptr())
 	if _ret != 0 {
@@ -63,7 +65,7 @@ func (o *SCNAudioSource) InitWithURL(url *foundation.NSURL) *SCNAudioSource {
 	return SCNAudioSourceFromID(_ret)
 }
 
-// @method audioSourceNamed: @abstract Convenience class initializer that caches audioSources.
+// Returns the audio source associated with the specified filename.
 func SCNAudioSourceAudioSourceNamed(fileName *foundation.NSString) *SCNAudioSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAudioSource), _sCNAudioSourceSelAudioSourceNamed, fileName.Ptr())
 	if _ret != 0 {
@@ -72,7 +74,7 @@ func SCNAudioSourceAudioSourceNamed(fileName *foundation.NSString) *SCNAudioSour
 	return SCNAudioSourceFromID(_ret)
 }
 
-// @method load @abstract Load and uncompress the audio source in memory. This method has no effect if "shouldStream" is set to YES or if the audio source is already loaded. @discussion This method let you preload your audio sources. If an audio source is not preloaded, it will be loaded anyway when playing it.
+// Loads audio data from the source and prepares it for playing.
 func (o *SCNAudioSource) Load() {
 	o.Ptr().Send(_sCNAudioSourceSelLoad)
 }

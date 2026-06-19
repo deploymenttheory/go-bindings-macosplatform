@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains information about an action that causes navigation to occur.
+//
 // WKNavigationAction wraps [raw.WKNavigationAction] with a fluent Go API.
 type WKNavigationAction struct {
 	inner *raw.WKNavigationAction

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that indicates the user’s focus status is changing.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/insharefocusstatusintent
 type INShareFocusStatusIntent struct {
 	INIntent
@@ -30,6 +32,7 @@ func INShareFocusStatusIntentFromID(id objc.ID) *INShareFocusStatusIntent {
 	return o
 }
 
+// Creates an intent with the specified focus status.
 func (o *INShareFocusStatusIntent) InitWithFocusStatus(focusStatus *INFocusStatus) *INShareFocusStatusIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNShareFocusStatusIntentSelInitWithFocusStatus, focusStatus.Ptr())
 	if _ret != 0 {

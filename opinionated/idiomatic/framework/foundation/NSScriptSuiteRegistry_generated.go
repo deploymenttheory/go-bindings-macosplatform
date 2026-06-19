@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The top-level repository of scriptability information for an app at runtime.
+//
 // ScriptSuiteRegistry wraps [raw.NSScriptSuiteRegistry] with a fluent Go API.
 type ScriptSuiteRegistry struct {
 	inner *raw.NSScriptSuiteRegistry
@@ -43,31 +45,43 @@ func (x *ScriptSuiteRegistry) WithScriptingProperties(scriptingProperties *raw.N
 	return x
 }
 
+// Loads the suite definitions in bundle aBundle, invoking loadSuiteWithDictionary:fromBundle: for each suite found.
+//
 // LoadSuitesFromBundle calls the underlying LoadSuitesFromBundle.
 func (x *ScriptSuiteRegistry) LoadSuitesFromBundle(bundle *raw.NSBundle) {
 	x.inner.LoadSuitesFromBundle(bundle)
 }
 
+// Loads the suite definition encapsulated in dictionary; previously, this suite definition was parsed from a .scriptSuite property list contained in a framework or in bundle.
+//
 // LoadSuiteWithDictionaryFromBundle calls the underlying LoadSuiteWithDictionaryFromBundle.
 func (x *ScriptSuiteRegistry) LoadSuiteWithDictionaryFromBundle(suiteDeclaration *raw.NSDictionary[objc.ID, objc.ID], bundle *raw.NSBundle) {
 	x.inner.LoadSuiteWithDictionaryFromBundle(suiteDeclaration, bundle)
 }
 
+// Registers class description classDescription for use by Cocoa’s built-in scripting support by storing it in a per-suite internal dictionary under the class name.
+//
 // RegisterClassDescription calls the underlying RegisterClassDescription.
 func (x *ScriptSuiteRegistry) RegisterClassDescription(classDescription *raw.NSScriptClassDescription) {
 	x.inner.RegisterClassDescription(classDescription)
 }
 
+// Registers command description commandDesc for use by Cocoa’s built-in scripting support by storing it in a per-suite internal dictionary under the command name.
+//
 // RegisterCommandDescription calls the underlying RegisterCommandDescription.
 func (x *ScriptSuiteRegistry) RegisterCommandDescription(commandDescription *raw.NSScriptCommandDescription) {
 	x.inner.RegisterCommandDescription(commandDescription)
 }
 
+// Returns the Apple event code associated with the suite named suiteName, such as ‘core’ for the Core suite.
+//
 // AppleEventCodeForSuite calls the underlying AppleEventCodeForSuite.
 func (x *ScriptSuiteRegistry) AppleEventCodeForSuite(suiteName string) uint {
 	return x.inner.AppleEventCodeForSuite(foundation.NSStringStringWithUTF8String(suiteName))
 }
 
+// Returns the bundle containing the suite-definition property list (extension .scriptSuite) identified by suiteName.
+//
 // BundleForSuite calls the underlying BundleForSuite.
 func (x *ScriptSuiteRegistry) BundleForSuite(suiteName string) *Bundle {
 	_r := x.inner.BundleForSuite(foundation.NSStringStringWithUTF8String(suiteName))
@@ -77,16 +91,22 @@ func (x *ScriptSuiteRegistry) BundleForSuite(suiteName string) *Bundle {
 	return &Bundle{inner: _r}
 }
 
+// Returns the class descriptions contained in the suite identified by suiteName.
+//
 // ClassDescriptionsInSuite calls the underlying ClassDescriptionsInSuite.
 func (x *ScriptSuiteRegistry) ClassDescriptionsInSuite(suiteName string) *raw.NSDictionary[*raw.NSString, *raw.NSScriptClassDescription] {
 	return x.inner.ClassDescriptionsInSuite(foundation.NSStringStringWithUTF8String(suiteName))
 }
 
+// Returns the command descriptions contained in the suite identified by suiteName.
+//
 // CommandDescriptionsInSuite calls the underlying CommandDescriptionsInSuite.
 func (x *ScriptSuiteRegistry) CommandDescriptionsInSuite(suiteName string) *raw.NSDictionary[*raw.NSString, *raw.NSScriptCommandDescription] {
 	return x.inner.CommandDescriptionsInSuite(foundation.NSStringStringWithUTF8String(suiteName))
 }
 
+// Returns the name of the suite definition associated with the given four-character Apple event code, code.
+//
 // SuiteForAppleEventCode calls the underlying SuiteForAppleEventCode.
 func (x *ScriptSuiteRegistry) SuiteForAppleEventCode(appleEventCode uint) *String {
 	_r := x.inner.SuiteForAppleEventCode(appleEventCode)
@@ -96,6 +116,8 @@ func (x *ScriptSuiteRegistry) SuiteForAppleEventCode(appleEventCode uint) *Strin
 	return &String{inner: _r}
 }
 
+// Returns the class description associated with the given four-character Apple event code, code.
+//
 // ClassDescriptionWithAppleEventCode calls the underlying ClassDescriptionWithAppleEventCode.
 func (x *ScriptSuiteRegistry) ClassDescriptionWithAppleEventCode(appleEventCode uint) *ScriptClassDescription {
 	_r := x.inner.ClassDescriptionWithAppleEventCode(appleEventCode)
@@ -105,6 +127,8 @@ func (x *ScriptSuiteRegistry) ClassDescriptionWithAppleEventCode(appleEventCode 
 	return &ScriptClassDescription{inner: _r}
 }
 
+// Returns the command description identified by a suite’s four-character Apple event code of the class (eventClass) and the four-character Apple event code of the command (commandCode).
+//
 // CommandDescriptionWithAppleEventClassAndAppleEventCode calls the underlying CommandDescriptionWithAppleEventClassAndAppleEventCode.
 func (x *ScriptSuiteRegistry) CommandDescriptionWithAppleEventClassAndAppleEventCode(appleEventClassCode uint, appleEventIDCode uint) *ScriptCommandDescription {
 	_r := x.inner.CommandDescriptionWithAppleEventClassAndAppleEventCode(appleEventClassCode, appleEventIDCode)
@@ -114,6 +138,8 @@ func (x *ScriptSuiteRegistry) CommandDescriptionWithAppleEventClassAndAppleEvent
 	return &ScriptCommandDescription{inner: _r}
 }
 
+// Returns an NSData object that contains data in 'aete' resource format describing the scriptability information currently known to the application.
+//
 // AeteResource calls the underlying AeteResource.
 func (x *ScriptSuiteRegistry) AeteResource(languageName string) *Data {
 	_r := x.inner.AeteResource(foundation.NSStringStringWithUTF8String(languageName))

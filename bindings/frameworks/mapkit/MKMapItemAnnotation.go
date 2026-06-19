@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An annotation that represents a map item
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapitemannotation
 type MKMapItemAnnotation struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func MKMapItemAnnotationFromID(id objc.ID) *MKMapItemAnnotation {
 	return o
 }
 
+// Creates a map item annotation
 func (o *MKMapItemAnnotation) InitWithMapItem(mapItem *MKMapItem) *MKMapItemAnnotation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemAnnotationSelInitWithMapItem, mapItem.Ptr())
 	if _ret != 0 {

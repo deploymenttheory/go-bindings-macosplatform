@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The visual representation for a single data element in a collection view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionviewitem
 type NSCollectionViewItem struct {
 	NSViewController

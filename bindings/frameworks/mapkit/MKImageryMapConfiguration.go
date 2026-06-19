@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The class that represents an imagery-based map presentation, such as one using satellite imagery.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkimagerymapconfiguration
 type MKImageryMapConfiguration struct {
 	MKMapConfiguration
@@ -30,6 +32,7 @@ func MKImageryMapConfigurationFromID(id objc.ID) *MKImageryMapConfiguration {
 	return o
 }
 
+// Creates a new imagery based map configuration.
 func (o *MKImageryMapConfiguration) Init() *MKImageryMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKImageryMapConfigurationSelInit)
 	if _ret != 0 {
@@ -38,6 +41,7 @@ func (o *MKImageryMapConfiguration) Init() *MKImageryMapConfiguration {
 	return MKImageryMapConfigurationFromID(_ret)
 }
 
+// Creates a new imagery based map configuration with the specified elevation style.
 func (o *MKImageryMapConfiguration) InitWithElevationStyle(elevationStyle MKMapElevationStyle) *MKImageryMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKImageryMapConfigurationSelInitWithElevationStyle, elevationStyle)
 	if _ret != 0 {

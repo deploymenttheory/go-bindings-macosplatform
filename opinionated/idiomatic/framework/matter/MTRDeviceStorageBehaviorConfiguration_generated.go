@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Class that configures how MTRDevice objects persist their attributes to storage, so as to not overwhelm the underlying storage system.
+//
 // MTRDeviceStorageBehaviorConfiguration wraps [raw.MTRDeviceStorageBehaviorConfiguration] with a fluent Go API.
 type MTRDeviceStorageBehaviorConfiguration struct {
 	inner *raw.MTRDeviceStorageBehaviorConfiguration
@@ -45,7 +47,7 @@ func (x *MTRDeviceStorageBehaviorConfiguration) WithDisableStorageBehaviorOptimi
 	return x
 }
 
-// If any of these properties are set to be out of the documented limits, these default values will be used to replace all of them: reportToPersistenceDelayTimeDefault (15) reportToPersistenceDelayTimeMaxDefault (20 * 15) recentReportTimesMaxCountDefault (12) timeBetweenReportsTooShortThresholdDefault (15) timeBetweenReportsTooShortMinThresholdDefault (5) reportToPersistenceDelayMaxMultiplierDefault (10) deviceReportingExcessivelyIntervalThresholdDefault (5 * 60)
+// If any of these properties are set to be out of the documented limits, these default values will be used to replace all of them:
 //
 // WithReportToPersistenceDelayTime sets the reportToPersistenceDelayTime property and returns the receiver for chaining.
 func (x *MTRDeviceStorageBehaviorConfiguration) WithReportToPersistenceDelayTime(reportToPersistenceDelayTime float64) *MTRDeviceStorageBehaviorConfiguration {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that represents a request to recognize speech from an audio source.
+//
 // Apple documentation: https://developer.apple.com/documentation/speech/sfspeechrecognitionrequest
 type SFSpeechRecognitionRequest struct {
 	foundation.NSObject
@@ -64,12 +66,15 @@ func (o *SFSpeechRecognitionRequest) SetShouldReportPartialResults(shouldReportP
 
 // An array of phrases that should be recognized, even if they are not in the system vocabulary. Use this property to specify short custom phrases that are unique to your app. You might include phrases with the names of characters, products, or places that are specific to your app. You might also include domain-specific terminology or unusual or made-up words. Assigning custom phrases to this property improves the likelihood of those phrases being recognized. Keep phrases relatively brief, limiting them to one or two words whenever possible. Lengthy phrases are less likely to be recognized. In addition, try to limit each phrase to something the user can say without pausing. Limit the total number of phrases to no more than 100.
 func (o *SFSpeechRecognitionRequest) ContextualStrings() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _sFSpeechRecognitionRequestSelContextualStrings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechRecognitionRequestSelContextualStrings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *SFSpeechRecognitionRequest) SetContextualStrings(contextualStrings *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_sFSpeechRecognitionRequestSelSetContextualStrings, contextualStrings)
+	o.Ptr().Send(_sFSpeechRecognitionRequestSelSetContextualStrings, contextualStrings.Ptr())
 }
 
 // An identifier string that you use to describe the type of interaction associated with the speech recognition request. If different parts of your app have different speech recognition needs, you can use this property to identify the part of your app that is making each request. For example, if one part of your app lets users speak phone numbers and another part lets users speak street addresses, consistently identifying the part of the app that makes a recognition request may help improve the accuracy of the results.

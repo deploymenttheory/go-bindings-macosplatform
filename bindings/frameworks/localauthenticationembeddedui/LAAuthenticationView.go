@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A graphical representation of the state of biometric authentication.
+//
 // Apple documentation: https://developer.apple.com/documentation/localauthenticationembeddedui/laauthenticationview
 type LAAuthenticationView struct {
 	appkit.NSView
@@ -34,7 +36,7 @@ func LAAuthenticationViewFromID(id objc.ID) *LAAuthenticationView {
 	return o
 }
 
-// @brief Creates a new view and pairs it with the specified authentication context. @discussion The authentication is controlled using the provided authentication context. When `evaluatePolicy` or `evaluateAccessControl` is called on this context, the UI will be presented using this view rather than using the standard authentication alert. Since the view is designed for authentication with Touch ID or Watch the only supported policies for calling `evaluatePolicy` on the context are - `LAPolicyDeviceOwnerAuthenticationWithBiometrics` - `LAPolicyDeviceOwnerAuthenticationWithCompanion` - `LAPolicyDeviceOwnerAuthenticationWitchBiometricsOrCompanion` - `LAPolicyDeviceOwnerAuthentication` (This one is supported just for convenience. If neither biometric nor watch authentication is available, the evaluation of the policy fails) @param context  @c LAContext instance to control the authentication.
+// Creates a new authentication icon that reflects the current authentication state.
 func (o *LAAuthenticationView) InitWithContext(context_ *localauthentication.LAContext) *LAAuthenticationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAAuthenticationViewSelInitWithContext, context_.Ptr())
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func (o *LAAuthenticationView) InitWithContext(context_ *localauthentication.LAC
 	return LAAuthenticationViewFromID(_ret)
 }
 
-// @brief Creates a new view and pairs it with the specified authentication context. @discussion The authentication is controlled using the provided authentication context. When `evaluatePolicy` or `evaluateAccessControl` is called on this context, the UI will be presented using this view rather than using the standard authentication alert. Since the view is designed for authentication with Touch ID or Watch the only supported policies for calling `evaluatePolicy` on the context are - `LAPolicyDeviceOwnerAuthenticationWithBiometrics` - `LAPolicyDeviceOwnerAuthenticationWithCompanion` - `LAPolicyDeviceOwnerAuthenticationWitchBiometricsOrCompanion` - `LAPolicyDeviceOwnerAuthentication` (This one is supported just for convenience. If neither biometric nor watch authentication is available, the evaluation of the policy fails) @param context  @c LAContext instance to control the authentication. @param controlSize Preferred size of @c LAAuthenticationView provided using @c NSControlSize
+// Creates a new authentication icon that reflects the current authentication state, using a specified size.
 func (o *LAAuthenticationView) InitWithContextControlSize(context_ *localauthentication.LAContext, controlSize appkit.NSControlSize) *LAAuthenticationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAAuthenticationViewSelInitWithContextControlSize, context_.Ptr(), controlSize)
 	if _ret != 0 {

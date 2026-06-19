@@ -8,15 +8,21 @@ import (
 	"fmt"
 )
 
+// Error codes for suspend-resume actions.
 type PGResumeErrorCode uint64
 
 const (
-	PGResumeErrorCodeInternalFault              PGResumeErrorCode = 0
+	// An internal error occurred.
+	PGResumeErrorCodeInternalFault PGResumeErrorCode = 0
+	// The suspend state version is incompatible with this framework version.
 	PGResumeErrorCodeInvalidSuspendStateVersion PGResumeErrorCode = 1
-	PGResumeErrorCodeInvalidContent             PGResumeErrorCode = 2
-	PGResumeErrorCodeInvalidGuestVersion        PGResumeErrorCode = 3
-	PGResumeErrorCodeIncompatibleDevice         PGResumeErrorCode = 4
-	PGResumeErrorCodeInvalidDisplayPortCount    PGResumeErrorCode = 5
+	// The content of the suspend state or the guest memory isn’t valid.
+	PGResumeErrorCodeInvalidContent PGResumeErrorCode = 2
+	// The guest version is incompatible with this framework version.
+	PGResumeErrorCodeInvalidGuestVersion PGResumeErrorCode = 3
+	// The resume device is missing capabilities that the suspended device provided.
+	PGResumeErrorCodeIncompatibleDevice      PGResumeErrorCode = 4
+	PGResumeErrorCodeInvalidDisplayPortCount PGResumeErrorCode = 5
 )
 
 func (e PGResumeErrorCode) String() string {

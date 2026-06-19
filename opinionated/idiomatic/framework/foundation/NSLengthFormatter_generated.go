@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A formatter that provides localized descriptions of linear distances, such as length and height measurements.
+//
 // LengthFormatter wraps [raw.NSLengthFormatter] with a fluent Go API.
 type LengthFormatter struct {
 	inner *raw.NSLengthFormatter

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class representing the compute plan of a model.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlcomputeplan
 type MLComputePlan struct {
 	foundation.NSObject

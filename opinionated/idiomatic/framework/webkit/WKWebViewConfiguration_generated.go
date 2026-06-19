@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of properties that you use to initialize a web view.
+//
 // WKWebViewConfiguration wraps [raw.WKWebViewConfiguration] with a fluent Go API.
 type WKWebViewConfiguration struct {
 	inner *raw.WKWebViewConfiguration
@@ -38,7 +40,7 @@ func NewWKWebViewConfiguration() *WKWebViewConfiguration {
 	return &WKWebViewConfiguration{inner: raw.WKWebViewConfigurationFromID(_id)}
 }
 
-// @abstract The process pool from which to obtain the view's web content process. @discussion When a web view is initialized, a new web content process will be created for it from the specified pool, or an existing process in that pool will be used.
+// The object that coordinates the processes the web view uses to render its web content and execute scripts.
 //
 // WithProcessPool sets the processPool property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithProcessPool(processPool *WKProcessPool) *WKWebViewConfiguration {
@@ -46,7 +48,7 @@ func (x *WKWebViewConfiguration) WithProcessPool(processPool *WKProcessPool) *WK
 	return x
 }
 
-// @abstract The preference settings to be used by the web view.
+// The object that manages the preference-related settings for the web view.
 //
 // WithPreferences sets the preferences property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithPreferences(preferences *WKPreferences) *WKWebViewConfiguration {
@@ -54,7 +56,7 @@ func (x *WKWebViewConfiguration) WithPreferences(preferences *WKPreferences) *WK
 	return x
 }
 
-// @abstract The user content controller to associate with the web view.
+// The object that coordinates interactions between your app’s native code and the webpage’s scripts and other content.
 //
 // WithUserContentController sets the userContentController property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithUserContentController(userContentController *WKUserContentController) *WKWebViewConfiguration {
@@ -70,7 +72,7 @@ func (x *WKWebViewConfiguration) WithWebExtensionController(webExtensionControll
 	return x
 }
 
-// @abstract The website data store to be used by the web view.
+// The object you use to get and set the site’s cookies and to track the cached data objects.
 //
 // WithWebsiteDataStore sets the websiteDataStore property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithWebsiteDataStore(websiteDataStore *WKWebsiteDataStore) *WKWebViewConfiguration {
@@ -78,7 +80,7 @@ func (x *WKWebViewConfiguration) WithWebsiteDataStore(websiteDataStore *WKWebsit
 	return x
 }
 
-// @abstract A Boolean value indicating whether the web view suppresses content rendering until it is fully loaded into memory. @discussion The default value is NO.
+// A Boolean value that indicates whether the web view suppresses content rendering until the content is fully loaded into memory.
 //
 // WithSuppressesIncrementalRendering sets the suppressesIncrementalRendering property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithSuppressesIncrementalRendering(suppressesIncrementalRendering bool) *WKWebViewConfiguration {
@@ -86,7 +88,7 @@ func (x *WKWebViewConfiguration) WithSuppressesIncrementalRendering(suppressesIn
 	return x
 }
 
-// @abstract The name of the application as used in the user agent string.
+// The app name that appears in the user agent string.
 //
 // WithApplicationNameForUserAgent sets the applicationNameForUserAgent property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithApplicationNameForUserAgent(applicationNameForUserAgent string) *WKWebViewConfiguration {
@@ -94,7 +96,7 @@ func (x *WKWebViewConfiguration) WithApplicationNameForUserAgent(applicationName
 	return x
 }
 
-// @abstract A Boolean value indicating whether AirPlay is allowed. @discussion The default value is YES.
+// A Boolean value that indicates whether the web view allows media playback over AirPlay.
 //
 // WithAllowsAirPlayForMediaPlayback sets the allowsAirPlayForMediaPlayback property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) *WKWebViewConfiguration {
@@ -110,7 +112,7 @@ func (x *WKWebViewConfiguration) WithShowsSystemScreenTimeBlockingView(showsSyst
 	return x
 }
 
-// @abstract A Boolean value indicating whether HTTP requests to servers known to support HTTPS should be automatically upgraded to HTTPS requests. @discussion The default value is YES.
+// A Boolean value that indicates whether the web view should automatically upgrade supported HTTP requests to HTTPS.
 //
 // WithUpgradeKnownHostsToHTTPS sets the upgradeKnownHostsToHTTPS property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithUpgradeKnownHostsToHTTPS(upgradeKnownHostsToHTTPS bool) *WKWebViewConfiguration {
@@ -118,13 +120,15 @@ func (x *WKWebViewConfiguration) WithUpgradeKnownHostsToHTTPS(upgradeKnownHostsT
 	return x
 }
 
+// The media types that require a user gesture to begin playing.
+//
 // WithMediaTypesRequiringUserActionForPlayback sets the mediaTypesRequiringUserActionForPlayback property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback WKAudiovisualMediaTypes) *WKWebViewConfiguration {
 	x.inner.SetMediaTypesRequiringUserActionForPlayback(raw.WKAudiovisualMediaTypes(mediaTypesRequiringUserActionForPlayback))
 	return x
 }
 
-// @abstract The set of default webpage preferences to use when loading and rendering content. @discussion These default webpage preferences are additionally passed to the navigation delegate in -webView:decidePolicyForNavigationAction:preferences:decisionHandler:.
+// The default preferences to use when loading and rendering content.
 //
 // WithDefaultWebpagePreferences sets the defaultWebpagePreferences property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithDefaultWebpagePreferences(defaultWebpagePreferences *WKWebpagePreferences) *WKWebViewConfiguration {
@@ -132,6 +136,8 @@ func (x *WKWebViewConfiguration) WithDefaultWebpagePreferences(defaultWebpagePre
 	return x
 }
 
+// A Boolean value that indicates whether the web view limits navigation to pages within the app’s domain.
+//
 // WithLimitsNavigationsToAppBoundDomains sets the limitsNavigationsToAppBoundDomains property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithLimitsNavigationsToAppBoundDomains(limitsNavigationsToAppBoundDomains bool) *WKWebViewConfiguration {
 	x.inner.SetLimitsNavigationsToAppBoundDomains(limitsNavigationsToAppBoundDomains)
@@ -146,7 +152,7 @@ func (x *WKWebViewConfiguration) WithAllowsInlinePredictions(allowsInlinePredict
 	return x
 }
 
-// @abstract The directionality of user interface elements. @discussion Possible values are described in WKUserInterfaceDirectionPolicy. The default value is WKUserInterfaceDirectionPolicyContent.
+// The directionality of user interface elements.
 //
 // WithUserInterfaceDirectionPolicy sets the userInterfaceDirectionPolicy property and returns the receiver for chaining.
 func (x *WKWebViewConfiguration) WithUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy WKUserInterfaceDirectionPolicy) *WKWebViewConfiguration {
@@ -170,11 +176,15 @@ func (x *WKWebViewConfiguration) WithWritingToolsBehavior(writingToolsBehavior a
 	return x
 }
 
+// Registers an object to load resources associated with the specified URL scheme.
+//
 // SetURLSchemeHandlerForURLScheme calls the underlying SetURLSchemeHandlerForURLScheme.
 func (x *WKWebViewConfiguration) SetURLSchemeHandlerForURLScheme(urlSchemeHandler raw.WKURLSchemeHandler, urlScheme string) {
 	x.inner.SetURLSchemeHandlerForURLScheme(urlSchemeHandler, foundation.NSStringStringWithUTF8String(urlScheme))
 }
 
+// Returns the currently registered handler object for the specified URL scheme.
+//
 // UrlSchemeHandlerForURLScheme calls the underlying UrlSchemeHandlerForURLScheme.
 func (x *WKWebViewConfiguration) UrlSchemeHandlerForURLScheme(urlScheme string) raw.WKURLSchemeHandler {
 	return x.inner.UrlSchemeHandlerForURLScheme(foundation.NSStringStringWithUTF8String(urlScheme))

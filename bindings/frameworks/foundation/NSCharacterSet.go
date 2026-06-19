@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing a fixed set of Unicode character values for use in search operations.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nscharacterset
 type NSCharacterSet struct {
 	NSObject
@@ -60,6 +62,7 @@ func NSCharacterSetFromID(id objc.ID) *NSCharacterSet {
 	return o
 }
 
+// Returns a character set containing characters with Unicode values in a given range.
 func NSCharacterSetCharacterSetWithRange(aRange NSRange) *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelCharacterSetWithRange, aRange)
 	if _ret != 0 {
@@ -68,6 +71,7 @@ func NSCharacterSetCharacterSetWithRange(aRange NSRange) *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing the characters in a given string.
 func NSCharacterSetCharacterSetWithCharactersInString(aString *NSString) *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelCharacterSetWithCharactersInString, aString.Ptr())
 	if _ret != 0 {
@@ -76,6 +80,7 @@ func NSCharacterSetCharacterSetWithCharactersInString(aString *NSString) *NSChar
 	return NSCharacterSetFromID(_ret)
 }
 
+// Returns a character set containing characters determined by a given bitmap representation.
 func NSCharacterSetCharacterSetWithBitmapRepresentation(data *NSData) *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelCharacterSetWithBitmapRepresentation, data.Ptr())
 	if _ret != 0 {
@@ -84,6 +89,7 @@ func NSCharacterSetCharacterSetWithBitmapRepresentation(data *NSData) *NSCharact
 	return NSCharacterSetFromID(_ret)
 }
 
+// Returns a character set read from the bitmap representation stored in the file a given path.
 func NSCharacterSetCharacterSetWithContentsOfFile(fName *NSString) *NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCharacterSet), _nSCharacterSetSelCharacterSetWithContentsOfFile, fName.Ptr())
 	if _ret != 0 {
@@ -100,21 +106,25 @@ func (o *NSCharacterSet) InitWithCoder(coder *NSCoder) *NSCharacterSet {
 	return NSCharacterSetFromID(_ret)
 }
 
+// Returns a Boolean value that indicates whether a given character is in the receiver.
 func (o *NSCharacterSet) CharacterIsMember(aCharacter uint16) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCharacterSetSelCharacterIsMember, aCharacter)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether a given long character is a member of the receiver.
 func (o *NSCharacterSet) LongCharacterIsMember(theLongChar uint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCharacterSetSelLongCharacterIsMember, theLongChar)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the receiver is a superset of another given character set.
 func (o *NSCharacterSet) IsSupersetOfSet(theOtherSet *NSCharacterSet) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCharacterSetSelIsSupersetOfSet, theOtherSet.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the receiver has at least one member in a given character plane.
 func (o *NSCharacterSet) HasMemberInPlane(thePlane uint8) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCharacterSetSelHasMemberInPlane, thePlane)
 	return _ret

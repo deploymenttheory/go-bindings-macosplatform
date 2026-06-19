@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Represents a summary metric event with aggregated metrics for the entire download task.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetricdownloadsummaryevent
 type AVMetricDownloadSummaryEvent struct {
 	AVMetricEvent

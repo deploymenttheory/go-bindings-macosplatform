@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Produces 3D cylindrical noise with an infinite number of cylinders-within-cyliners of constantly-increasing radius.
+// A procedural noise generator whose output is a 3D field of concentric cylindrical shells.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkcylindersnoisesource
 type GKCylindersNoiseSource struct {
@@ -34,6 +34,7 @@ func GKCylindersNoiseSourceFromID(id objc.ID) *GKCylindersNoiseSource {
 	return o
 }
 
+// Creates a cylinder noise source with the specified frequency.
 func GKCylindersNoiseSourceCylindersNoiseWithFrequency(frequency float64) *GKCylindersNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKCylindersNoiseSource), _gKCylindersNoiseSourceSelCylindersNoiseWithFrequency, frequency)
 	if _ret != 0 {
@@ -42,6 +43,7 @@ func GKCylindersNoiseSourceCylindersNoiseWithFrequency(frequency float64) *GKCyl
 	return GKCylindersNoiseSourceFromID(_ret)
 }
 
+// Initializes a cylinder noise source with the specified frequency.
 func (o *GKCylindersNoiseSource) InitWithFrequency(frequency float64) *GKCylindersNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKCylindersNoiseSourceSelInitWithFrequency, frequency)
 	if _ret != 0 {

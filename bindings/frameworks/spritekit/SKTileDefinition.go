@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A tile definition contains the information needed to represent a single type of tile within a tile map.
+// A single tile that can be repeated in a tile map.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/sktiledefinition
 type SKTileDefinition struct {
@@ -107,7 +107,7 @@ func SKTileDefinitionTileDefinitionWithTexturesNormalTexturesSizeTimePerFrame(te
 	return SKTileDefinitionFromID(_ret)
 }
 
-// Initilize a tile definition with an SKTexture, and set its size to the SKTexture's width/height. @param texture the texture to reference for size and content
+// Initializes a new tile definition with a single texture.
 func (o *SKTileDefinition) InitWithTexture(texture *SKTexture) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileDefinitionSelInitWithTexture, texture.Ptr())
 	if _ret != 0 {
@@ -116,7 +116,7 @@ func (o *SKTileDefinition) InitWithTexture(texture *SKTexture) *SKTileDefinition
 	return SKTileDefinitionFromID(_ret)
 }
 
-// Initilize a tile definition with an SKTexture and the specified size. @param texture the texture to reference for content @param size the size of the tile in points
+// Initializes a new tile definition of a specified size with a single texture.
 func (o *SKTileDefinition) InitWithTextureSize(texture *SKTexture, size corefoundation.CGSize) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileDefinitionSelInitWithTextureSize, texture.Ptr(), size)
 	if _ret != 0 {
@@ -125,7 +125,7 @@ func (o *SKTileDefinition) InitWithTextureSize(texture *SKTexture, size corefoun
 	return SKTileDefinitionFromID(_ret)
 }
 
-// Initilize a tile definition with an SKTexture and the specified size. @param texture the texture to reference for content @param normalTexture the normal texture to use for generating normals for lighting @param size the size of the tile in points
+// Initializes a new tile definition with a single texture and separate normal texture for simulating 3D lighting.
 func (o *SKTileDefinition) InitWithTextureNormalTextureSize(texture *SKTexture, normalTexture *SKTexture, size corefoundation.CGSize) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileDefinitionSelInitWithTextureNormalTextureSize, texture.Ptr(), normalTexture.Ptr(), size)
 	if _ret != 0 {
@@ -134,7 +134,7 @@ func (o *SKTileDefinition) InitWithTextureNormalTextureSize(texture *SKTexture, 
 	return SKTileDefinitionFromID(_ret)
 }
 
-// Initilize an animated tile definition with an array of SKTextures, the specified size, and the length of time each texture should be displayed for in the animation. @param textures the textures to reference for animated content @param size the size of the tile in points @param timePerFrame the duration, in seconds, that each texture in the textures array is displayed before switching to the next texture in the sequence
+// Initializes a new tile definition with an array of textures for animation.
 func (o *SKTileDefinition) InitWithTexturesSizeTimePerFrame(textures *foundation.NSArray[*SKTexture], size corefoundation.CGSize, timePerFrame float64) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileDefinitionSelInitWithTexturesSizeTimePerFrame, textures.Ptr(), size, timePerFrame)
 	if _ret != 0 {
@@ -143,7 +143,7 @@ func (o *SKTileDefinition) InitWithTexturesSizeTimePerFrame(textures *foundation
 	return SKTileDefinitionFromID(_ret)
 }
 
-// Initilize an animated tile definition with an array of SKTextures, the specified size, and the length of time each texture should be displayed for in the animation. @param textures the textures to reference for animated content @param normalTextures the normal textures to use for generating normals for lighting @param size the size of the tile in points @param timePerFrame the duration, in seconds, that each texture in the textures array is displayed before switching to the next texture in the sequence
+// Initializes a new tile definition with arrays of textures and normal textures for animation.
 func (o *SKTileDefinition) InitWithTexturesNormalTexturesSizeTimePerFrame(textures *foundation.NSArray[*SKTexture], normalTextures *foundation.NSArray[*SKTexture], size corefoundation.CGSize, timePerFrame float64) *SKTileDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileDefinitionSelInitWithTexturesNormalTexturesSizeTimePerFrame, textures.Ptr(), normalTextures.Ptr(), size, timePerFrame)
 	if _ret != 0 {
@@ -180,12 +180,15 @@ func (o *SKTileDefinition) SetNormalTextures(normalTextures *foundation.NSArray[
 
 // An optional dictionary that can be used to store your own data for each tile definition. Defaults to nil.
 func (o *SKTileDefinition) UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSMutableDictionary[objc.ID, objc.ID]](o.Ptr(), _sKTileDefinitionSelUserData)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileDefinitionSelUserData)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMutableDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *SKTileDefinition) SetUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_sKTileDefinitionSelSetUserData, userData)
+	o.Ptr().Send(_sKTileDefinitionSelSetUserData, userData.Ptr())
 }
 
 // Client-assignable name for the tile definition. Defaults to nil.

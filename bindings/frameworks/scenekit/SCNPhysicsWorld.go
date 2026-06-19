@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The global simulation of collisions, gravity, joints, and other physics effects in a scene.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnphysicsworld
 type SCNPhysicsWorld struct {
 	foundation.NSObject
@@ -47,50 +49,58 @@ func SCNPhysicsWorldFromID(id objc.ID) *SCNPhysicsWorld {
 	return o
 }
 
+// Adds a behavior to the physics world.
 func (o *SCNPhysicsWorld) AddBehavior(behavior *SCNPhysicsBehavior) {
 	o.Ptr().Send(_sCNPhysicsWorldSelAddBehavior, behavior.Ptr())
 }
 
+// Removes a behavior from the physics world.
 func (o *SCNPhysicsWorld) RemoveBehavior(behavior *SCNPhysicsBehavior) {
 	o.Ptr().Send(_sCNPhysicsWorldSelRemoveBehavior, behavior.Ptr())
 }
 
+// Removes all behaviors affecting bodies in the physics world.
 func (o *SCNPhysicsWorld) RemoveAllBehaviors() {
 	o.Ptr().Send(_sCNPhysicsWorldSelRemoveAllBehaviors)
 }
 
+// Searches for physics bodies along a line segment between two points in the physics world.
 func (o *SCNPhysicsWorld) RayTestWithSegmentFromPointToPointOptions(origin SCNVector3, dest SCNVector3, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*SCNHitTestResult] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsWorldSelRayTestWithSegmentFromPointToPointOptions, origin, dest, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsWorldSelRayTestWithSegmentFromPointToPointOptions, origin, dest, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*SCNHitTestResult](_ret)
 }
 
+// Checks for contacts between two physics bodies.
 func (o *SCNPhysicsWorld) ContactTestBetweenBodyAndBodyOptions(bodyA *SCNPhysicsBody, bodyB *SCNPhysicsBody, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*SCNPhysicsContact] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsWorldSelContactTestBetweenBodyAndBodyOptions, bodyA.Ptr(), bodyB.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsWorldSelContactTestBetweenBodyAndBodyOptions, bodyA.Ptr(), bodyB.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*SCNPhysicsContact](_ret)
 }
 
+// Checks for contacts between one physics body and any other bodies in the physics world.
 func (o *SCNPhysicsWorld) ContactTestWithBodyOptions(body *SCNPhysicsBody, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*SCNPhysicsContact] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsWorldSelContactTestWithBodyOptions, body.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsWorldSelContactTestWithBodyOptions, body.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*SCNPhysicsContact](_ret)
 }
 
+// Searches for physics bodies in the space formed by moving a convex shape through the physics world.
 func (o *SCNPhysicsWorld) ConvexSweepTestWithShapeFromTransformToTransformOptions(shape *SCNPhysicsShape, from quartzcore.CATransform3D, to quartzcore.CATransform3D, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*SCNPhysicsContact] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsWorldSelConvexSweepTestWithShapeFromTransformToTransformOptions, shape.Ptr(), from, to, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsWorldSelConvexSweepTestWithShapeFromTransformToTransformOptions, shape.Ptr(), from, to, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*SCNPhysicsContact](_ret)
 }
 
+// Forces the physics engine to reevaluate possible collisions between physics bodies.
 func (o *SCNPhysicsWorld) UpdateCollisionPairs() {
 	o.Ptr().Send(_sCNPhysicsWorldSelUpdateCollisionPairs)
 }

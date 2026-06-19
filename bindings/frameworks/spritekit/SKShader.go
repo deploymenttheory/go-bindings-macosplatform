@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that allows you to apply a custom fragment shader.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skshader
 type SKShader struct {
 	foundation.NSObject
@@ -44,7 +46,7 @@ func SKShaderFromID(id objc.ID) *SKShader {
 	return o
 }
 
-// Create a custom shader with source code. @param source the source code for the custom fragment shader.
+// Initializes a new shader object using the specified source code.
 func (o *SKShader) InitWithSource(source *foundation.NSString) *SKShader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKShaderSelInitWithSource, source.Ptr())
 	if _ret != 0 {
@@ -53,7 +55,7 @@ func (o *SKShader) InitWithSource(source *foundation.NSString) *SKShader {
 	return SKShaderFromID(_ret)
 }
 
-// Create a custom shader with source code and uniforms. @param source the source code for the custom fragment shader. @param uniforms the array of uniforms supplied to this shader
+// Initializes a new shader object using the specified source and uniform data.
 func (o *SKShader) InitWithSourceUniforms(source *foundation.NSString, uniforms *foundation.NSArray[*SKUniform]) *SKShader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKShaderSelInitWithSourceUniforms, source.Ptr(), uniforms.Ptr())
 	if _ret != 0 {
@@ -62,6 +64,7 @@ func (o *SKShader) InitWithSourceUniforms(source *foundation.NSString, uniforms 
 	return SKShaderFromID(_ret)
 }
 
+// Creates a new empty shader object.
 func SKShaderShader() *SKShader {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShader), _sKShaderSelShader)
 	if _ret != 0 {
@@ -70,6 +73,7 @@ func SKShaderShader() *SKShader {
 	return SKShaderFromID(_ret)
 }
 
+// Creates a new shader object using the specified source code.
 func SKShaderShaderWithSource(source *foundation.NSString) *SKShader {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShader), _sKShaderSelShaderWithSource, source.Ptr())
 	if _ret != 0 {
@@ -78,6 +82,7 @@ func SKShaderShaderWithSource(source *foundation.NSString) *SKShader {
 	return SKShaderFromID(_ret)
 }
 
+// Creates a new shader object using the specified source and uniform data.
 func SKShaderShaderWithSourceUniforms(source *foundation.NSString, uniforms *foundation.NSArray[*SKUniform]) *SKShader {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShader), _sKShaderSelShaderWithSourceUniforms, source.Ptr(), uniforms.Ptr())
 	if _ret != 0 {
@@ -86,7 +91,7 @@ func SKShaderShaderWithSourceUniforms(source *foundation.NSString, uniforms *fou
 	return SKShaderFromID(_ret)
 }
 
-// Loads a shader source file named 'name' from the main bundle. This is simpler yet functionally equivalent to the following code [SKShader shaderWithSource:[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:name ofType:@"fsh"] encoding:NSUTF8StringEncoding error:NULL]]; The encoding is assumed to be NSUTF8StringEncoding.
+// Creates a new shader object by loading the source for a fragment shader from a file stored in the app’s bundle.
 func SKShaderShaderWithFileNamed(name *foundation.NSString) *SKShader {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShader), _sKShaderSelShaderWithFileNamed, name.Ptr())
 	if _ret != 0 {
@@ -95,10 +100,12 @@ func SKShaderShaderWithFileNamed(name *foundation.NSString) *SKShader {
 	return SKShaderFromID(_ret)
 }
 
+// Adds a uniform to the shader.
 func (o *SKShader) AddUniform(uniform *SKUniform) {
 	o.Ptr().Send(_sKShaderSelAddUniform, uniform.Ptr())
 }
 
+// Returns the uniform object corresponding to a particular uniform variable.
 func (o *SKShader) UniformNamed(name *foundation.NSString) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKShaderSelUniformNamed, name.Ptr())
 	if _ret != 0 {
@@ -107,6 +114,7 @@ func (o *SKShader) UniformNamed(name *foundation.NSString) *SKUniform {
 	return SKUniformFromID(_ret)
 }
 
+// Removes a uniform from the shader.
 func (o *SKShader) RemoveUniformNamed(name *foundation.NSString) {
 	o.Ptr().Send(_sKShaderSelRemoveUniformNamed, name.Ptr())
 }

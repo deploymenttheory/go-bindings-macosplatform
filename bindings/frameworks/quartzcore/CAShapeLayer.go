@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that draws a cubic Bezier spline in its coordinate space.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/cashapelayer
 type CAShapeLayer struct {
 	CALayer
@@ -164,10 +166,13 @@ func (o *CAShapeLayer) SetLineDashPhase(lineDashPhase float64) {
 }
 
 func (o *CAShapeLayer) LineDashPattern() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _cAShapeLayerSelLineDashPattern)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cAShapeLayerSelLineDashPattern)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *CAShapeLayer) SetLineDashPattern(lineDashPattern *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_cAShapeLayerSelSetLineDashPattern, lineDashPattern)
+	o.Ptr().Send(_cAShapeLayerSelSetLineDashPattern, lineDashPattern.Ptr())
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The information that describes a ticketed event reservation.
+//
 // TicketedEventReservation wraps [raw.INTicketedEventReservation] with a fluent Go API.
 type TicketedEventReservation struct {
 	inner *raw.INTicketedEventReservation
@@ -30,6 +32,8 @@ func TicketedEventReservationFromID(id objc.ID) *TicketedEventReservation {
 	return &TicketedEventReservation{inner: raw.INTicketedEventReservationFromID(id)}
 }
 
+// Creates a ticketed event reservation with the specified contents and attributes.
+//
 // NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent creates a new [TicketedEventReservation].
 func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, reservedSeat *raw.INSeat, event *raw.INTicketedEvent) *TicketedEventReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INTicketedEventReservation")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeRes
 	return &TicketedEventReservation{inner: raw.INTicketedEventReservationFromID(_id)}
 }
 
+// Creates a new ticketed event reservation with the specified contents and attributes.
+//
 // NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatEvent creates a new [TicketedEventReservation].
 func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatEvent(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], reservedSeat *raw.INSeat, event *raw.INTicketedEvent) *TicketedEventReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INTicketedEventReservation")), objc.RegisterName("alloc"))

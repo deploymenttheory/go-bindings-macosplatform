@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that defines the interface for a metadata body object.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetadatabodyobject
 type AVMetadataBodyObject struct {
 	AVMetadataObject

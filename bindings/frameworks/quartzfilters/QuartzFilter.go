@@ -49,7 +49,7 @@ func QuartzFilterQuartzFilterWithURL(aURL *foundation.NSURL) *quartz.QuartzFilte
 }
 
 func QuartzFilterQuartzFilterWithProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) *quartz.QuartzFilter {
-	_ret := objc.Send[objc.ID](objc.ID(_clsQuartzFilter), _quartzFilterSelQuartzFilterWithProperties, properties)
+	_ret := objc.Send[objc.ID](objc.ID(_clsQuartzFilter), _quartzFilterSelQuartzFilterWithProperties, properties.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -57,7 +57,7 @@ func QuartzFilterQuartzFilterWithProperties(properties *foundation.NSDictionary[
 }
 
 func QuartzFilterQuartzFilterWithOutputIntents(outputIntents *foundation.NSArray[objc.ID]) *quartz.QuartzFilter {
-	_ret := objc.Send[objc.ID](objc.ID(_clsQuartzFilter), _quartzFilterSelQuartzFilterWithOutputIntents, outputIntents)
+	_ret := objc.Send[objc.ID](objc.ID(_clsQuartzFilter), _quartzFilterSelQuartzFilterWithOutputIntents, outputIntents.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -65,8 +65,11 @@ func QuartzFilterQuartzFilterWithOutputIntents(outputIntents *foundation.NSArray
 }
 
 func (o *QuartzFilter) Properties() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _quartzFilterSelProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _quartzFilterSelProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *QuartzFilter) Url() *foundation.NSURL {

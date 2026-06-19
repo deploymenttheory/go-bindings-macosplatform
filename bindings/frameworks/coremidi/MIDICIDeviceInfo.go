@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides basic information about a MIDI-CI device.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremidi/midicideviceinfo
 type MIDICIDeviceInfo struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func MIDICIDeviceInfoFromID(id objc.ID) *MIDICIDeviceInfo {
 	return o
 }
 
+// Creates a new device information instance.
 func (o *MIDICIDeviceInfo) InitWithDestinationManufacturerFamilyModelRevision(midiDestination uint, manufacturer *foundation.NSData, family *foundation.NSData, modelNumber *foundation.NSData, revisionLevel *foundation.NSData) *MIDICIDeviceInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIDeviceInfoSelInitWithDestinationManufacturerFamilyModelRevision, midiDestination, manufacturer.Ptr(), family.Ptr(), modelNumber.Ptr(), revisionLevel.Ptr())
 	if _ret != 0 {

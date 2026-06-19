@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of changes that occurred in an asset or collection object.
+//
 // ObjectChangeDetails wraps [raw.PHObjectChangeDetails] with a fluent Go API.
 type ObjectChangeDetails struct {
 	inner *raw.PHObjectChangeDetails[objc.ID]

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The travel-time information that Apple servers return.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mketaresponse
 type MKETAResponse struct {
 	foundation.NSObject

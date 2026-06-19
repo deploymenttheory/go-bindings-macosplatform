@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A formatter that creates string representations of time intervals.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdateintervalformatter
 type NSDateIntervalFormatter struct {
 	NSFormatter

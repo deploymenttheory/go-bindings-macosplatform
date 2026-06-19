@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An operation that modifies one or more records.
+//
 // ModifyRecordsOperation wraps [raw.CKModifyRecordsOperation] with a fluent Go API.
 type ModifyRecordsOperation struct {
 	inner *raw.CKModifyRecordsOperation
@@ -39,7 +41,7 @@ func NewModifyRecordsOperation() *ModifyRecordsOperation {
 	return &ModifyRecordsOperation{inner: raw.CKModifyRecordsOperationFromID(_id)}
 }
 
-// Creates an operation for modifying the specified records. - Parameters: - records: The records to save. You can specify `nil` for this parameter. - recordIDs: The IDs of the records to delete. You can specify `nil` for this parameter. The records that you intend to save or delete must all reside in the same database, which you specify when you configure the operation. If your app saves a record in a database that doesn't exist, the server creates the database.
+// Creates an operation for modifying the specified records.
 //
 // NewModifyRecordsOperationWithRecordsToSaveRecordIDsToDelete creates a new [ModifyRecordsOperation].
 func NewModifyRecordsOperationWithRecordsToSaveRecordIDsToDelete(records *foundation.NSArray[*raw.CKRecord], recordIDs *foundation.NSArray[*raw.CKRecordID]) *ModifyRecordsOperation {
@@ -48,7 +50,7 @@ func NewModifyRecordsOperationWithRecordsToSaveRecordIDsToDelete(records *founda
 	return &ModifyRecordsOperation{inner: raw.CKModifyRecordsOperationFromID(_id)}
 }
 
-// The records to save to the database. The initial value of the property is the array that you provide to the “CKModifyRecordsOperation/init(recordsToSave:recordIDsToDelete:)“ method. You can modify this array as necessary before you execute the operation. The records must all target the same database, but can belong to different record zones. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
+// The records to save to the database.
 //
 // WithRecordsToSave sets the collection, converting the Go slice to an NSArray.
 func (x *ModifyRecordsOperation) WithRecordsToSave(items ...RecordProvider) *ModifyRecordsOperation {
@@ -71,7 +73,7 @@ func (x *ModifyRecordsOperation) WithRecordsToSave(items ...RecordProvider) *Mod
 	return x
 }
 
-// The IDs of the records to delete permanently from the database. An array of “CKRecord/ID“ objects that identifies the records to delete. The initial value of the property is the array of record IDs that you provide to the “CKModifyRecordsOperation/init(recordsToSave:recordIDsToDelete:)“ method. When deleting records, the operation reports progress only on the records with the IDs that you specify in this property. Deleting records can trigger the deletion of related records if there is an owner-owned relationship between the records involving a “CKRecord/Reference“ object. When additional deletions occur, CloudKit doesn't pass them to the progress handler of the operation. For that reason, it's important to understand the implications of the ownership model you use when you relate records to each other through a “CKRecord/Reference“ object. For more information about owner-owned relationships, see “CKRecord/Reference“. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
+// The IDs of the records to delete permanently from the database.
 //
 // WithRecordIDsToDelete sets the collection, converting the Go slice to an NSArray.
 func (x *ModifyRecordsOperation) WithRecordIDsToDelete(items ...*raw.CKRecordID) *ModifyRecordsOperation {
@@ -94,7 +96,7 @@ func (x *ModifyRecordsOperation) WithRecordIDsToDelete(items ...*raw.CKRecordID)
 	return x
 }
 
-// The policy to use when saving changes to records. The server uses this property to determine how to proceed when saving record changes. The exact behavior depends on the policy you choose: - Use “CKModifyRecordsOperation/RecordSavePolicy/ifServerRecordUnchanged“ to only save a record when the change tag of the local copy matches that of the server's copy. If the server record's change tag is more recent, CloudKit discards the save and returns a “CKError/Code/serverRecordChanged“ error. - Use “CKModifyRecordsOperation/RecordSavePolicy/changedKeys“ to save only the fields of the record that contain changes. The server doesn't compare record change tags when using this policy. - Use “CKModifyRecordsOperation/RecordSavePolicy/allKeys“ to save every field of the record, even those without changes. The server doesn't compare record change tags when using this policy. If you change the property's value, do so before you execute the operation or submit the operation to a queue. The default value is “CKModifyRecordsOperation/RecordSavePolicy/ifServerRecordUnchanged“.
+// The policy to use when saving changes to records.
 //
 // WithSavePolicy sets the savePolicy property and returns the receiver for chaining.
 func (x *ModifyRecordsOperation) WithSavePolicy(savePolicy CKRecordSavePolicy) *ModifyRecordsOperation {
@@ -102,7 +104,7 @@ func (x *ModifyRecordsOperation) WithSavePolicy(savePolicy CKRecordSavePolicy) *
 	return x
 }
 
-// A token that tracks local changes to records. The default value is `nil`. When you modify records from a fetch operation, specify a token using this property to indicate which version of the record you most recently modified. Compare the token you supply to the token in the next record fetch to confirm the server  successfully receives the device's most recent modify request. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
+// A token that tracks local changes to records.
 //
 // WithClientChangeTokenData sets the clientChangeTokenData property and returns the receiver for chaining.
 func (x *ModifyRecordsOperation) WithClientChangeTokenData(clientChangeTokenData *foundation.NSData) *ModifyRecordsOperation {
@@ -110,7 +112,7 @@ func (x *ModifyRecordsOperation) WithClientChangeTokenData(clientChangeTokenData
 	return x
 }
 
-// A Boolean value that indicates whether the entire operation fails when CloudKit can't update one or more records in a record zone. Modifying records atomically prevents you from updating your data in a way that leaves it in an inconsistent state. You use atomic updates when you want to write multiple records to the same record zone. If there's a failure to modify any of the records in a zone, CloudKit doesn't change the other records in that same zone. The record zone must have the “CKRecordZone/Capabilities/atomic“ capability for this behavior to apply. If a record zone doesn't support the atomic capability, setting this property has no effect. The default value of this property is <doc://com.apple.documentation/documentation/swift/true>, which causes all modifications within a single record zone to occur atomically. If your operation contains records in multiple record zones, a failure in one zone doesn't prevent modifications to records in a different zone. Changing the value of this property to <doc://com.apple.documentation/documentation/swift/false> causes CloudKit to modify records individually, regardless of whether the record zone supports atomic modifications.
+// A Boolean value that indicates whether the entire operation fails when CloudKit can’t update one or more records in a record zone.
 //
 // WithAtomic sets the atomic property and returns the receiver for chaining.
 func (x *ModifyRecordsOperation) WithAtomic(atomic bool) *ModifyRecordsOperation {
@@ -118,7 +120,7 @@ func (x *ModifyRecordsOperation) WithAtomic(atomic bool) *ModifyRecordsOperation
 	return x
 }
 
-// The closure to execute with progress information for individual records. This property is a closure that returns no value and has the following parameters: - The record that CloudKit saves. - The amount of data, as a percentage, that CloudKit saves for the record. The range is `0.0` to `1.0`, where `0.0` indicates that CloudKit hasn't saved any data, and `1.0` means that CloudKit has saved the entire record. The modify records operation executes this closure one or more times for each record in the “CKModifyRecordsOperation/recordsToSave“ property. Each time the closure executes, it executes serially with respect to the other progress closures of the operation. You can use this closure to track the ongoing progress of the operation. If you intend to use this closure to process results, set it before you execute the operation or add the operation to a queue.
+// The closure to execute with progress information for individual records.
 //
 // WithPerRecordProgressBlock sets the perRecordProgressBlock property and returns the receiver for chaining.
 func (x *ModifyRecordsOperation) WithPerRecordProgressBlock(perRecordProgressBlock func(*raw.CKRecord, float64)) *ModifyRecordsOperation {
@@ -126,7 +128,7 @@ func (x *ModifyRecordsOperation) WithPerRecordProgressBlock(perRecordProgressBlo
 	return x
 }
 
-// The closure to execute when CloudKit saves a record. This property is a closure that returns no value and has the following parameters: - The record that CloudKit saves. - If CloudKit can't save the record, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each record in the “CKModifyRecordsOperation/recordsToSave“ property. Each time the closure executes, it executes serially with respect to the other record completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute when CloudKit saves a record.
 //
 // WithPerRecordCompletionBlock sets the perRecordCompletionBlock property and returns the receiver for chaining.
 func (x *ModifyRecordsOperation) WithPerRecordCompletionBlock(perRecordCompletionBlock func(*raw.CKRecord, unsafe.Pointer)) *ModifyRecordsOperation {
@@ -134,7 +136,7 @@ func (x *ModifyRecordsOperation) WithPerRecordCompletionBlock(perRecordCompletio
 	return x
 }
 
-// The closure to execute when CloudKit saves a record. This property is a closure that returns no value and has the following parameters: - The ID of the record that CloudKit saves. - The record that CloudKit saves, or `nil` if CloudKit can't save the record. - If CloudKit can't save the record, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each record in the “CKModifyRecordsOperation/recordsToSave“ property. Each time the closure executes, it executes serially with respect to the other record completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute when CloudKit saves a record.
 //
 // WithPerRecordSaveBlock sets the perRecordSaveBlock property and returns the receiver for chaining.
 func (x *ModifyRecordsOperation) WithPerRecordSaveBlock(perRecordSaveBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) *ModifyRecordsOperation {
@@ -142,7 +144,7 @@ func (x *ModifyRecordsOperation) WithPerRecordSaveBlock(perRecordSaveBlock func(
 	return x
 }
 
-// The closure to execute when CloudKit deletes a record. This property is a closure that returns no value and has the following parameters: - The ID of the record that CloudKit deletes. - If CloudKit can't delete the record, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each record in the “CKModifyRecordsOperation/recordIDsToDelete“ property. Each time the closure executes, it executes serially with respect to the other record completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute when CloudKit deletes a record.
 //
 // WithPerRecordDeleteBlock sets the perRecordDeleteBlock property and returns the receiver for chaining.
 func (x *ModifyRecordsOperation) WithPerRecordDeleteBlock(perRecordDeleteBlock func(*raw.CKRecordID, unsafe.Pointer)) *ModifyRecordsOperation {
@@ -150,7 +152,7 @@ func (x *ModifyRecordsOperation) WithPerRecordDeleteBlock(perRecordDeleteBlock f
 	return x
 }
 
-// The closure to execute after CloudKit modifies all of the records. This property is a closure that returns no value and has the following parameters: - The records that CloudKit saves. - The IDs of the records that CloudKit deletes. - If CloudKit can't modify any of the records, this parameter provides information about the failure; otherwise, it's `nil`. The closure executes only once, and represents your final opportunity to process the operation's results. It executes after all record progress closures and record completion closures finish. The closure executes serially with respect to the other closures of the operation. Although this closure executes after the modification of records completes, it executes prior to the indexing of queries for those modified records. Therefore, if a query executes in this completion closure, the results of that query might not include the changes from this operation. Conversely, records that CloudKit fetches in the completion closure are up to date with the changes from the associated operation. The closure reports an error of type “CKError/Code/partialFailure“ when it modifies only some of the records successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the records that the operation can't modify, and the corresponding values are errors that contain information about the failures. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute after CloudKit modifies all of the records.
 //
 // WithModifyRecordsCompletionBlock sets the modifyRecordsCompletionBlock property and returns the receiver for chaining.
 func (x *ModifyRecordsOperation) WithModifyRecordsCompletionBlock(modifyRecordsCompletionBlock func(*foundation.NSArray[*raw.CKRecord], *foundation.NSArray[*raw.CKRecordID], unsafe.Pointer)) *ModifyRecordsOperation {
@@ -158,7 +160,7 @@ func (x *ModifyRecordsOperation) WithModifyRecordsCompletionBlock(modifyRecordsC
 	return x
 }
 
-// The database that the operation uses. For operations that you execute in a custom queue, use this property to specify the target database. Setting the database also sets the corresponding container, which it inherits from “CKOperation“. If this property's value is `nil`, the operation targets the user's private database. The default value is `nil`.
+// The database that the operation uses.
 //
 // WithDatabase sets the database property and returns the receiver for chaining.
 func (x *ModifyRecordsOperation) WithDatabase(database *Database) *ModifyRecordsOperation {
@@ -166,7 +168,7 @@ func (x *ModifyRecordsOperation) WithDatabase(database *Database) *ModifyRecords
 	return x
 }
 
-// The operation's configuration.
+// The operation’s configuration.
 //
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *ModifyRecordsOperation) WithConfiguration(configuration *OperationConfiguration) *ModifyRecordsOperation {
@@ -174,7 +176,7 @@ func (x *ModifyRecordsOperation) WithConfiguration(configuration *OperationConfi
 	return x
 }
 
-// The operation's group.
+// The operation’s group.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *ModifyRecordsOperation) WithGroup(group *OperationGroup) *ModifyRecordsOperation {
@@ -182,7 +184,7 @@ func (x *ModifyRecordsOperation) WithGroup(group *OperationGroup) *ModifyRecords
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *ModifyRecordsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifyRecordsOperation {
@@ -206,7 +208,7 @@ func (x *ModifyRecordsOperation) WithAllowsCellularAccess(allowsCellularAccess b
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A Boolean value that indicates whether the operation is long-lived.
 //
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *ModifyRecordsOperation) WithLongLived(longLived bool) *ModifyRecordsOperation {

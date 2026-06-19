@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Encapsulates the frame-level parameters necessary for processing a source frame using temporal noise-filter processor.
+//
 // Apple documentation: https://developer.apple.com/documentation/videotoolbox/vttemporalnoisefilterparameters
 type VTTemporalNoiseFilterParameters struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func VTTemporalNoiseFilterParametersFromID(id objc.ID) *VTTemporalNoiseFilterPar
 	return o
 }
 
-// Creates a new `VTTemporalNoiseFilterParameters` object. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrames: Future reference frames in presentation time order to use for processing the source frame. The number of frames can vary from 0 to the number specified by “VTTemporalNoiseFilterConfiguration/nextFrameCount“ property. - previousFrames: Past reference frames in presentation time order to use for processing the source frame. The number of frames can vary from 0 to the number specified by “VTTemporalNoiseFilterConfiguration/previousFrameCount“ property. - destinationFrame: User-allocated pixel buffer that receives the output frame. The pixel format of `destinationFrame` must match with that of the `sourceFrame`. - filterStrength: Strength of the noise-filtering to use. The value can range from the minimum strength of 0.0 to the maximum strength of 1.0. Change in filter strength causes the processor to flush all frames in the queue prior to processing the source frame. - hasDiscontinuity: Marks sequence discontinuity, forcing the processor to reset prior to processing the source frame.
+// Creates a new VTTemporalNoiseFilterParameters object.
 func (o *VTTemporalNoiseFilterParameters) InitWithSourceFrameNextFramesPreviousFramesDestinationFrameFilterStrengthHasDiscontinuity(sourceFrame *VTFrameProcessorFrame, nextFrames *foundation.NSArray[*VTFrameProcessorFrame], previousFrames *foundation.NSArray[*VTFrameProcessorFrame], destinationFrame *VTFrameProcessorFrame, filterStrength float32, hasDiscontinuity uint8) *VTTemporalNoiseFilterParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTTemporalNoiseFilterParametersSelInitWithSourceFrameNextFramesPreviousFramesDestinationFrameFilterStrengthHasDiscontinuity, sourceFrame.Ptr(), nextFrames.Ptr(), previousFrames.Ptr(), destinationFrame.Ptr(), filterStrength, hasDiscontinuity)
 	if _ret != 0 {

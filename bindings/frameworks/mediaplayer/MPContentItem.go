@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the information for a displayed media item.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpcontentitem
 type MPContentItem struct {
 	foundation.NSObject
@@ -47,7 +49,7 @@ func MPContentItemFromID(id objc.ID) *MPContentItem {
 	return o
 }
 
-// Designated initializer. A unique identifier is required to identify the item for later use.
+// Sets the identifier for a media item.
 func (o *MPContentItem) InitWithIdentifier(identifier *foundation.NSString) *MPContentItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPContentItemSelInitWithIdentifier, identifier.Ptr())
 	if _ret != 0 {

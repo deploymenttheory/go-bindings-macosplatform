@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An area of your app that represents an assignable task, like a quiz or a chapter.
+//
 // Context wraps [raw.CLSContext] with a fluent Go API.
 type Context struct {
 	inner *raw.CLSContext
@@ -33,7 +35,7 @@ func ContextFromID(id objc.ID) *Context {
 	return &Context{inner: raw.CLSContextFromID(id)}
 }
 
-// @abstract      Initialize and configure the type of content this context represents. @param         identifier     App-assigned identifier for this context. 256 characters max length. @param         type           The type of content this context represents. @param         title          Title for what this context represents. 256 characters max length.
+// Initializes a new context.
 //
 // NewContextWithTypeIdentifierTitle creates a new [Context].
 func NewContextWithTypeIdentifierTitle(type_ CLSContextType, identifier string, title string) *Context {
@@ -42,7 +44,7 @@ func NewContextWithTypeIdentifierTitle(type_ CLSContextType, identifier string, 
 	return &Context{inner: raw.CLSContextFromID(_id)}
 }
 
-// @abstract      Alternative deep link URL using universal links. @discussion    If your app supports universal links, you can supply them here to link the content this context represents.
+// A URL that leads to the content in your app associated with the current context.
 //
 // WithUniversalLinkURL sets the universalLinkURL property and returns the receiver for chaining.
 func (x *Context) WithUniversalLinkURL(universalLinkURL string) *Context {
@@ -50,7 +52,7 @@ func (x *Context) WithUniversalLinkURL(universalLinkURL string) *Context {
 	return x
 }
 
-// @abstract      Type of this context @discussion    The type that best describes this context.
+// The kind of content a context represents.
 //
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *Context) WithType(type_ CLSContextType) *Context {
@@ -58,7 +60,7 @@ func (x *Context) WithType(type_ CLSContextType) *Context {
 	return x
 }
 
-// @abstract      An optional user-visible name for the context if its type is CLSContextTypeCustom. @discussion    This property is relevant only if the type is CLSContextTypeCustom. This string should be localized. If this property is not set for a context of type CLSContextTypeCustom, Schoolwork app will use a default localized string ‘Custom’ as the name of the activity representing this context.
+// An optional name that the system presents to the user if you choose the custom context type.
 //
 // WithCustomTypeName sets the customTypeName property and returns the receiver for chaining.
 func (x *Context) WithCustomTypeName(customTypeName string) *Context {
@@ -66,7 +68,7 @@ func (x *Context) WithCustomTypeName(customTypeName string) *Context {
 	return x
 }
 
-// @abstract      Title of this context. @discussion    For example: @em Level 1 @em.
+// The name of the context as it appears to users.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Context) WithTitle(title string) *Context {
@@ -74,7 +76,7 @@ func (x *Context) WithTitle(title string) *Context {
 	return x
 }
 
-// @abstract      The displayOrder is by default sorted ascending. @discussion    Set the displayOrder if you want your contexts to be displayed in a particular order. The sort key is used as a way to sort sibling contexts in a particular order.
+// The position of a context relative to its siblings.
 //
 // WithDisplayOrder sets the displayOrder property and returns the receiver for chaining.
 func (x *Context) WithDisplayOrder(displayOrder int) *Context {
@@ -82,7 +84,7 @@ func (x *Context) WithDisplayOrder(displayOrder int) *Context {
 	return x
 }
 
-// @abstract      Topic associated with this context. @discussion    See above for valid, predefined topics.
+// The area of study to which a context relates.
 //
 // WithTopic sets the topic property and returns the receiver for chaining.
 func (x *Context) WithTopic(topic *foundation.NSString) *Context {
@@ -90,7 +92,7 @@ func (x *Context) WithTopic(topic *foundation.NSString) *Context {
 	return x
 }
 
-// @abstract      This property is true if the context can be assigned as an activity. @discussion    The default value of this property is true. This should be set to false for a context that is used as a container for other contexts, but by itself, is not an assignable activity.
+// A Boolean that indicates whether teachers can assign the context as a task.
 //
 // WithAssignable sets the assignable property and returns the receiver for chaining.
 func (x *Context) WithAssignable(assignable bool) *Context {
@@ -98,7 +100,7 @@ func (x *Context) WithAssignable(assignable bool) *Context {
 	return x
 }
 
-// @abstract      Suggested age range of students, expressed in years, for whom this context is suitable. This information is intended to help teachers to choose age-appropriate activities for their students. @discussion    The default value is [0, NSIntegerMax - 1]. This is @em NSRange(0...Int.max-1) in @em Swift or @em NSMakeRange(0,NSIntegerMax) in @em Objective-C. Set the lower bound to 0 to specify no minimum age limit and set the upper bound to NSIntegerMax - 1 to specify no maximum age limit. @example       An age range of 4 to 6 years is expressed by @em NSRange(4...6) in @em Swift or by @em NSMakeRange(4,3) in @Objective-C. @example       An age range of up 10 years is expressed by @em NSRange(0...10) in @em Swift or by @em NSMakeRange(0,11) in @Objective-C. @example       An age range of 18 years or above is expressed by @em NSRange(18...Int.max-1) in @em Swift or by @em NSMakeRange(18,NSIntegerMax-18) in @Objective-C.
+// The range of ages, measured in years, for which you deem a context’s content suitable.
 //
 // WithSuggestedAge sets the suggestedAge property and returns the receiver for chaining.
 func (x *Context) WithSuggestedAge(suggestedAge foundation.NSRange) *Context {
@@ -106,7 +108,7 @@ func (x *Context) WithSuggestedAge(suggestedAge foundation.NSRange) *Context {
 	return x
 }
 
-// @abstract      Suggested time range, expressed in minutes, to complete the activity. This information will help teachers as they choose activities for their students. @discussion    The default value is [0, NSIntegerMax - 1]. This is @em NSRange(0...Int.max-1) in @em Swift or @em NSMakeRange(0,NSIntegerMax) in @em Objective-C. Set the lower bound value to 0 to specify no minimum time limit and set the upper bound to NSIntegerMax - 1 to specify no maximum time limit. @example       An time range of 10 to 15 minutes is expressed by @em NSRange(10...15) in @em Swift or by @em NSMakeRange(10,6) in @Objective-C. @example       An time range of up to 10 minutes is expressed by @em NSRange(0...10) in @em Swift or by @em NSMakeRange(0,11) in @Objective-C. @example       An time range of at least 20 minutes is expressed by @em NSRange(20...Int.max-1) in @em Swift or by @em NSMakeRange(20,NSIntegerMax-20) in @Objective-C.
+// A suggested time range to complete a task, measured in minutes.
 //
 // WithSuggestedCompletionTime sets the suggestedCompletionTime property and returns the receiver for chaining.
 func (x *Context) WithSuggestedCompletionTime(suggestedCompletionTime foundation.NSRange) *Context {
@@ -114,7 +116,7 @@ func (x *Context) WithSuggestedCompletionTime(suggestedCompletionTime foundation
 	return x
 }
 
-// @abstract      An optional user-visible summary describing the context limited to 4000 characters in length. @discussion    This may be used to provide information about the types of activities available under a given context or the context itself. This string should be localized.
+// An optional, user-visible description of the context.
 //
 // WithSummary sets the summary property and returns the receiver for chaining.
 func (x *Context) WithSummary(summary string) *Context {
@@ -122,35 +124,35 @@ func (x *Context) WithSummary(summary string) *Context {
 	return x
 }
 
-// @abstract      Marks contexts as active. @discussion    If a context is already active, it will remain active. If another context is active, the other will resign active before this one becomes active.
+// Tells a context to become the active context.
 //
 // BecomeActive calls the underlying BecomeActive.
 func (x *Context) BecomeActive() {
 	x.inner.BecomeActive()
 }
 
-// @abstract      Resign being active. @discussion    This method does nothing if the reciever of the message is not active.
+// Tells a context to stop being the active context.
 //
 // ResignActive calls the underlying ResignActive.
 func (x *Context) ResignActive() {
 	x.inner.ResignActive()
 }
 
-// @abstract      Sets the type. @discussion    Use this to update a previously saved context.
+// Updates the kind of content that a context represents.
 //
 // SetType calls the underlying SetType.
 func (x *Context) SetType(type_ CLSContextType) {
 	x.inner.SetType(raw.CLSContextType(type_))
 }
 
-// @abstract      Add or replace additional progress reporting capabilities of the app for this context. @discussion    If this parameter contains multiple items with the same value for kind, then one of them will be arbitrarily selected and used. If this parameter contains a capability of kind CLSProgressReportingCapabilityKindDuration, it will be ignored. @param         capabilities    Progress reporting capabilities to add or replace existing capabilties.
+// Adds a progress reporting capability to the set of capabilities for the context.
 //
 // AddProgressReportingCapabilities calls the underlying AddProgressReportingCapabilities.
 func (x *Context) AddProgressReportingCapabilities(capabilities *foundation.NSSet[*raw.CLSProgressReportingCapability]) {
 	x.inner.AddProgressReportingCapabilities(capabilities)
 }
 
-// @abstract      Clears CLSProgressReportingCapability objects added to the receiver. @discussion    Removes all capabilities added via '-addProgressReportingCapabilities:'. The context will have the default progress reporting capability of kind CLSProgressReportingCapabilityKindDuration.
+// Resets the set of capabilities for the context.
 //
 // ResetProgressReportingCapabilities calls the underlying ResetProgressReportingCapabilities.
 func (x *Context) ResetProgressReportingCapabilities() {
@@ -338,21 +340,21 @@ func (x *Context) IsActive() bool {
 	return x.inner.IsActive()
 }
 
-// @abstract      Removes this child context from its parent. @discussion    If you remove a context from its parent and do not add it as a child of another context, it will be deleted when you call -save on the dataStore.
+// Removes the context from its parent.
 //
 // RemoveFromParent calls the underlying RemoveFromParent.
 func (x *Context) RemoveFromParent() {
 	x.inner.RemoveFromParent()
 }
 
-// @abstract      Adds a child context. @discussion    A context can only have a single parent. @note          objectID of child context may change after it's been added.
+// Adds the specifed context as a child of the context receiving the method call.
 //
 // AddChildContext calls the underlying AddChildContext.
 func (x *Context) AddChildContext(child *raw.CLSContext) {
 	x.inner.AddChildContext(child)
 }
 
-// @abstract      Returns a descendant of this context matching the context path you provide. Context path must start with an identifier of a child context of the context to which this message is sent. @discussion    If there are any missing contexts, they will be filled in by calling the following method on the context's data store's delegate: @code -[CLSDataStoreDelegate createContextForIdentifier:parentContext:parentIdentifierPath:] @endcode If the dataStore does not have a delegate and there are missing contexts then an incomplete list of contexts will be passed to the completion handler. Completion block is called on a background thread.
+// Finds the context with the given identifier path relative to this context.
 //
 // DescendantMatchingIdentifierPathCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Context) DescendantMatchingIdentifierPathCompletion(ctx context.Context, identifierPath *foundation.NSArray[*foundation.NSString]) (*Context, error) {
@@ -380,14 +382,14 @@ func (x *Context) DescendantMatchingIdentifierPathCompletion(ctx context.Context
 	}
 }
 
-// @abstract      Adds a child context to specify the user can navigate to the child from this context. @discussion    Used only for presentation purpose. Unlike @code -[CLSContext addChildContext:] @endcode, this method does not affect the identifierPath.
+// Adds a child context that users can navigate to from this context.
 //
 // AddNavigationChildContext calls the underlying AddNavigationChildContext.
 func (x *Context) AddNavigationChildContext(child *raw.CLSContext) {
 	x.inner.AddNavigationChildContext(child)
 }
 
-// @abstract      Removes the navigation path to the child context from this context. @discussion    Used only for presentation purpose. Unlike @code -[CLSContext removeFromParent:] @endcode, this method does not affect the identiferPath.
+// Removes the specified context as a presentable child of this context.
 //
 // RemoveNavigationChildContext calls the underlying RemoveNavigationChildContext.
 func (x *Context) RemoveNavigationChildContext(child *raw.CLSContext) {
@@ -418,7 +420,7 @@ func (x *Context) NavigationChildContexts() []*Context {
 	})
 }
 
-// @abstract      Creates a new activity @discussion    Creates a new activity and sets it as the current activity.
+// Creates and returns a new activity instance for the context.
 //
 // CreateNewActivity calls the underlying CreateNewActivity.
 func (x *Context) CreateNewActivity() *Activity {

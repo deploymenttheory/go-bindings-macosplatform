@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable description of how to order a collection of objects according to a property common to all the objects.
+//
 // SortDescriptor wraps [raw.NSSortDescriptor] with a fluent Go API.
 type SortDescriptor struct {
 	inner *raw.NSSortDescriptor
@@ -30,6 +32,8 @@ func SortDescriptorFromID(id objc.ID) *SortDescriptor {
 	return &SortDescriptor{inner: raw.NSSortDescriptorFromID(id)}
 }
 
+// Creates a sort descriptor with a specified string key path and sort order.
+//
 // NewSortDescriptorWithKeyAscending creates a new [SortDescriptor].
 func NewSortDescriptorWithKeyAscending(key string, ascending bool) *SortDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSortDescriptor")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewSortDescriptorWithKeyAscending(key string, ascending bool) *SortDescript
 	return &SortDescriptor{inner: raw.NSSortDescriptorFromID(_id)}
 }
 
+// Creates a sort descriptor with a specified string key path, ordering, and comparison selector.
+//
 // NewSortDescriptorWithKeyAscendingSelector creates a new [SortDescriptor].
 func NewSortDescriptorWithKeyAscendingSelector(key string, ascending bool, selector objc.SEL) *SortDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSortDescriptor")), objc.RegisterName("alloc"))
@@ -44,6 +50,8 @@ func NewSortDescriptorWithKeyAscendingSelector(key string, ascending bool, selec
 	return &SortDescriptor{inner: raw.NSSortDescriptorFromID(_id)}
 }
 
+// Creates a sort descriptor by decoding from the coder you specify.
+//
 // NewSortDescriptorWithCoder creates a new [SortDescriptor].
 func NewSortDescriptorWithCoder(coder *raw.NSCoder) *SortDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSortDescriptor")), objc.RegisterName("alloc"))
@@ -51,6 +59,8 @@ func NewSortDescriptorWithCoder(coder *raw.NSCoder) *SortDescriptor {
 	return &SortDescriptor{inner: raw.NSSortDescriptorFromID(_id)}
 }
 
+// Creates a sort descriptor with a specified string key path and ordering, and a comparator block.
+//
 // NewSortDescriptorWithKeyAscendingComparator creates a new [SortDescriptor].
 func NewSortDescriptorWithKeyAscendingComparator(key string, ascending bool, cmptr func(objc.ID, objc.ID) NSComparisonResult) *SortDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSortDescriptor")), objc.RegisterName("alloc"))
@@ -64,11 +74,15 @@ func (x *SortDescriptor) WithScriptingProperties(scriptingProperties *raw.NSDict
 	return x
 }
 
+// Forces a securely decoded sort descriptor to allow evaluation.
+//
 // AllowEvaluation calls the underlying AllowEvaluation.
 func (x *SortDescriptor) AllowEvaluation() {
 	x.inner.AllowEvaluation()
 }
 
+// Returns a comparison result value that indicates the sort order of two objects.
+//
 // CompareObjectToObject calls the underlying CompareObjectToObject.
 func (x *SortDescriptor) CompareObjectToObject(object1 objc.ID, object2 objc.ID) NSComparisonResult {
 	return NSComparisonResult(x.inner.CompareObjectToObject(object1, object2))

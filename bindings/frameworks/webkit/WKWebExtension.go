@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates a web extension’s resources that the manifest file defines.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkwebextension
 type WKWebExtension struct {
 	foundation.NSObject
@@ -59,7 +61,7 @@ func WKWebExtensionFromID(id objc.ID) *WKWebExtension {
 	return o
 }
 
-// @abstract Returns a web extension initialized with a specified app extension bundle. @param appExtensionBundle The bundle to use for the new web extension. @param completionHandler A block to be called with an initialized web extension, or \c nil if the object could not be initialized due to an error. @discussion The app extension bundle must contain a `manifest.json` file in its resources directory. If the manifest is invalid or missing, or the bundle is otherwise improperly configured, an error will be returned.
+// Returns a web extension initialized with a specified app extension bundle.
 func WKWebExtensionExtensionWithAppExtensionBundleCompletionHandler(appExtensionBundle *foundation.NSBundle, completionHandler func(*WKWebExtension, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -74,7 +76,7 @@ func WKWebExtensionExtensionWithAppExtensionBundleCompletionHandler(appExtension
 	objc.ID(_clsWKWebExtension).Send(_wKWebExtensionSelExtensionWithAppExtensionBundleCompletionHandler, appExtensionBundle.Ptr(), __block_completionHandler)
 }
 
-// @abstract Returns a web extension initialized with a specified resource base URL, which can point to either a directory or a ZIP archive. @param resourceBaseURL The file URL to use for the new web extension. @param completionHandler A block to be called with an initialized web extension, or \c nil if the object could not be initialized due to an error. @discussion The URL must be a file URL that points to either a directory with a `manifest.json` file or a ZIP archive containing a `manifest.json` file. If the manifest is invalid or missing, or the URL points to an unsupported format or invalid archive, an error will be returned.
+// Returns a web extension initialized with a specified resource base URL, which can point to either a directory or a ZIP archive.
 func WKWebExtensionExtensionWithResourceBaseURLCompletionHandler(resourceBaseURL *foundation.NSURL, completionHandler func(*WKWebExtension, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -89,12 +91,13 @@ func WKWebExtensionExtensionWithResourceBaseURLCompletionHandler(resourceBaseURL
 	objc.ID(_clsWKWebExtension).Send(_wKWebExtensionSelExtensionWithResourceBaseURLCompletionHandler, resourceBaseURL.Ptr(), __block_completionHandler)
 }
 
-// @abstract Checks if a manifest version is supported by the extension. @param manifestVersion The version number to check. @result Returns `YES` if the extension specified a manifest version that is greater than or equal to `manifestVersion`.
+// Checks if a manifest version is supported by the extension.
 func (o *WKWebExtension) SupportsManifestVersion(manifestVersion float64) bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionSelSupportsManifestVersion, manifestVersion)
 	return _ret
 }
 
+// Returns the extension’s icon image for the specified size.
 func (o *WKWebExtension) IconForSize(size corefoundation.CGSize) *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelIconForSize, size)
 	if _ret != 0 {
@@ -103,6 +106,7 @@ func (o *WKWebExtension) IconForSize(size corefoundation.CGSize) *appkit.NSImage
 	return appkit.NSImageFromID(_ret)
 }
 
+// Returns the default action icon for the specified size.
 func (o *WKWebExtension) ActionIconForSize(size corefoundation.CGSize) *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelActionIconForSize, size)
 	if _ret != 0 {
@@ -113,14 +117,20 @@ func (o *WKWebExtension) ActionIconForSize(size corefoundation.CGSize) *appkit.N
 
 // @abstract An array of all errors that occurred during the processing of the extension. @discussion Provides an array of all parse-time errors for the extension, with repeat errors consolidated into a single entry for the original occurrence only. If no errors occurred, an empty array is returned. @note Once the extension is loaded, use the “errors“ property on an extension context to monitor any runtime errors, as they can occur after the extension is loaded.
 func (o *WKWebExtension) Errors() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _wKWebExtensionSelErrors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelErrors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @abstract The parsed manifest as a dictionary.
 func (o *WKWebExtension) Manifest() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _wKWebExtensionSelManifest)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelManifest)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // @abstract The parsed manifest version, or `0` if there is no version specified in the manifest. @note An “WKWebExtensionErrorUnsupportedManifestVersion“ error will be reported if the manifest version isn't specified.
@@ -185,14 +195,20 @@ func (o *WKWebExtension) DisplayActionLabel() *foundation.NSString {
 
 // @abstract The set of permissions that the extension requires for its base functionality.
 func (o *WKWebExtension) RequestedPermissions() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _wKWebExtensionSelRequestedPermissions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelRequestedPermissions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 // @abstract The set of permissions that the extension may need for optional functionality. These permissions can be requested by the extension at a later time.
 func (o *WKWebExtension) OptionalPermissions() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _wKWebExtensionSelOptionalPermissions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionSelOptionalPermissions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 // @abstract The set of websites that the extension requires access to for its base functionality.

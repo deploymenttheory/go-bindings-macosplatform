@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An GKAchievementViewController object provides a standard user interface to display achievement progress for the local player. If the GKGameCenterViewController class is available, you should use it instead.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkachievementviewcontroller
 // Deprecated: since macOS 10.10.
 type GKAchievementViewController struct {

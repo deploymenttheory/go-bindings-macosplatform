@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines a shipping method for delivering physical goods.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkshippingmethod
 type PKShippingMethod struct {
 	PKPaymentSummaryItem

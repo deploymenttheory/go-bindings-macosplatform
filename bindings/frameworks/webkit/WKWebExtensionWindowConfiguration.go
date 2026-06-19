@@ -57,8 +57,11 @@ func (o *WKWebExtensionWindowConfiguration) Frame() corefoundation.CGRect {
 
 // @abstract Indicates the URLs that the window should initially load as tabs. @discussion If “tabURLs“ and “tabs“ are both empty, the app's default "start page" should appear in a tab. @seealso tabs
 func (o *WKWebExtensionWindowConfiguration) TabURLs() *foundation.NSArray[*foundation.NSURL] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURL]](o.Ptr(), _wKWebExtensionWindowConfigurationSelTabURLs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionWindowConfigurationSelTabURLs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURL](_ret)
 }
 
 // @abstract Indicates the existing tabs that should be moved to the window. @discussion If “tabs“ and “tabURLs“ are both empty, the app's default "start page" should appear in a tab. @seealso tabURLs

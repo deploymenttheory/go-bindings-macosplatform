@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object for configuring a location monitor instance.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clmonitorconfiguration
 type CLMonitorConfiguration struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func CLMonitorConfigurationFromID(id objc.ID) *CLMonitorConfiguration {
 	return o
 }
 
+// Creates a location monitor instance with the name, dispatch queue, and event handler you specify.
 func CLMonitorConfigurationConfigWithMonitorNameQueueEventHandler(name *foundation.NSString, queue *foundation.NSObject, eventHandler func(*CLMonitor, *CLMonitoringEvent)) *CLMonitorConfiguration {
 	var __block_eventHandler objc.Block
 	if eventHandler != nil {

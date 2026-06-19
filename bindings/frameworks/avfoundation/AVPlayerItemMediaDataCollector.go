@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract base for media data collectors.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayeritemmediadatacollector
 type AVPlayerItemMediaDataCollector struct {
 	foundation.NSObject

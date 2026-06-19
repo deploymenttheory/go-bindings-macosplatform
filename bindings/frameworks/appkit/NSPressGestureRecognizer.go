@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A discrete gesture recognizer that tracks whether the user holds down a mouse button for a minimum amount of time before releasing it.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspressgesturerecognizer
 type NSPressGestureRecognizer struct {
 	NSGestureRecognizer

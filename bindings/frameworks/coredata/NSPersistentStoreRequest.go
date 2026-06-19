@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Criteria used to retrieve data from or save data to a persistent store.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistentstorerequest
 type NSPersistentStoreRequest struct {
 	foundation.NSObject

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A circular geographic region that a center point and radius deine.
+//
 // CircularRegion wraps [raw.CLCircularRegion] with a fluent Go API.
 type CircularRegion struct {
 	inner *raw.CLCircularRegion
@@ -31,6 +33,8 @@ func CircularRegionFromID(id objc.ID) *CircularRegion {
 	return &CircularRegion{inner: raw.CLCircularRegionFromID(id)}
 }
 
+// Creates and returns a region object defining a circular geographic area.
+//
 // NewCircularRegionWithCenterRadiusIdentifier creates a new [CircularRegion].
 func NewCircularRegionWithCenterRadiusIdentifier(center unsafe.Pointer, radius unsafe.Pointer, identifier string) *CircularRegion {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLCircularRegion")), objc.RegisterName("alloc"))
@@ -38,12 +42,16 @@ func NewCircularRegionWithCenterRadiusIdentifier(center unsafe.Pointer, radius u
 	return &CircularRegion{inner: raw.CLCircularRegionFromID(_id)}
 }
 
+// A Boolean indicating that notifications are generated upon entry into the region.
+//
 // WithNotifyOnEntry sets the notifyOnEntry property and returns the receiver for chaining.
 func (x *CircularRegion) WithNotifyOnEntry(notifyOnEntry bool) *CircularRegion {
 	x.inner.CLRegion.SetNotifyOnEntry(notifyOnEntry)
 	return x
 }
 
+// A Boolean indicating that notifications are generated upon exit from the region.
+//
 // WithNotifyOnExit sets the notifyOnExit property and returns the receiver for chaining.
 func (x *CircularRegion) WithNotifyOnExit(notifyOnExit bool) *CircularRegion {
 	x.inner.CLRegion.SetNotifyOnExit(notifyOnExit)

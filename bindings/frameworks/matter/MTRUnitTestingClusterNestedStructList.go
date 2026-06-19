@@ -80,37 +80,49 @@ func (o *MTRUnitTestingClusterNestedStructList) SetC(c *MTRUnitTestingClusterSim
 }
 
 func (o *MTRUnitTestingClusterNestedStructList) D() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterNestedStructListSelD)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNestedStructListSelD)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterNestedStructList) SetD(d *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterNestedStructListSelSetD, d)
+	o.Ptr().Send(_mTRUnitTestingClusterNestedStructListSelSetD, d.Ptr())
 }
 
 func (o *MTRUnitTestingClusterNestedStructList) E() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterNestedStructListSelE)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNestedStructListSelE)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterNestedStructList) SetE(e *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterNestedStructListSelSetE, e)
+	o.Ptr().Send(_mTRUnitTestingClusterNestedStructListSelSetE, e.Ptr())
 }
 
 func (o *MTRUnitTestingClusterNestedStructList) F() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterNestedStructListSelF)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNestedStructListSelF)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterNestedStructList) SetF(f *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterNestedStructListSelSetF, f)
+	o.Ptr().Send(_mTRUnitTestingClusterNestedStructListSelSetF, f.Ptr())
 }
 
 func (o *MTRUnitTestingClusterNestedStructList) G() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterNestedStructListSelG)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNestedStructListSelG)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterNestedStructList) SetG(g *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterNestedStructListSelSetG, g)
+	o.Ptr().Send(_mTRUnitTestingClusterNestedStructListSelSetG, g.Ptr())
 }

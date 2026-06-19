@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer for training recurrent neural networks on Metal Performance Shaders matrices.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsrnnmatrixtraininglayer
 type MPSRNNMatrixTrainingLayer struct {
 	mpscore.MPSKernel
@@ -57,7 +59,7 @@ func MPSRNNMatrixTrainingLayerFromID(id objc.ID) *MPSRNNMatrixTrainingLayer {
 
 // @abstract   Initializes a linear (fully connected) RNN kernel for training @param      device                      The MTLDevice on which this MPSRNNMatrixLayer filter will be used @param      rnnDescriptor               The descriptor that defines the RNN layer @param      trainableWeights            An array where to store the weights of the layer as MPSMatrices. NOTE: The exact layout and number of matrices may vary between platforms and therefore you should not save out these weights directly, but instead use the function encodeCopyWeightsToCommandBuffer to identify the weights and biases for serialization. Typically you should pass here an initialized but empty NSMutableArray and when this function returns the array will have been populated with the weight matrices needed in the encode-calls, by using initial values from the datasources in rnnDescriptor. @return     A valid MPSRNNMatrixTrainingLayer object or nil, if failure.
 func (o *MPSRNNMatrixTrainingLayer) InitWithDeviceRnnDescriptorTrainableWeights(device metal.MTLDevice, rnnDescriptor *mpsneuralnetwork.MPSRNNDescriptor, trainableWeights *foundation.NSMutableArray[*mpscore.MPSMatrix]) *MPSRNNMatrixTrainingLayer {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNMatrixTrainingLayerSelInitWithDeviceRnnDescriptorTrainableWeights, device, rnnDescriptor.Ptr(), trainableWeights)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNMatrixTrainingLayerSelInitWithDeviceRnnDescriptorTrainableWeights, device, rnnDescriptor.Ptr(), trainableWeights.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -66,37 +68,37 @@ func (o *MPSRNNMatrixTrainingLayer) InitWithDeviceRnnDescriptorTrainableWeights(
 
 // @abstract   Initializes a set of matrices that can be used in training for weight and bias gradient outputs in @see encodeBackwardSequenceToCommandBuffer. Can be also used to easily create auxiliary matrices for example for ADAM and other advanced optimization schemes. The layout and number of matrices is the same as for the outputs of @see initWithDevice, but the data type may differ. NOTE: These matrices cannot be used as weight matrices in the forward and backward encode calls, but matrices from initWithDevice() or createWeightMatrices() should be used instead. @param      matricesOut                 An array where the newly created matrices will be stored, will be initialized to zero. @param      dataType                    Datatype for the entries - currently MPSDataTypeFloat32 and MPSDataTypeFloat16 are supported.
 func (o *MPSRNNMatrixTrainingLayer) CreateWeightGradientMatricesDataType(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix], dataType mpscore.MPSDataType) {
-	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelCreateWeightGradientMatricesDataType, matricesOut, dataType)
+	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelCreateWeightGradientMatricesDataType, matricesOut.Ptr(), dataType)
 }
 
 // @abstract   As @ref createWeightGradientMatrices, but the matrices will be temporary with readCount = 1, which means that they become invalid after the first encode call that reads them. Note also that as the matrices are temporary, their storage mode will be private which means that you can only access the data using a kernel on the GPU. @param      matricesOut                 An array where the newly created matrices will be stored, will be initialized to zero. @param      dataType                    Datatype for the entries - currently MPSDataTypeFloat32 and MPSDataTypeFloat16 are supported. @param      commandBuffer               The command buffer that the temporary matrices will live on.
 func (o *MPSRNNMatrixTrainingLayer) CreateTemporaryWeightGradientMatricesDataTypeCommandBuffer(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix], dataType mpscore.MPSDataType, commandBuffer metal.MTLCommandBuffer) {
-	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelCreateTemporaryWeightGradientMatricesDataTypeCommandBuffer, matricesOut, dataType, commandBuffer)
+	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelCreateTemporaryWeightGradientMatricesDataTypeCommandBuffer, matricesOut.Ptr(), dataType, commandBuffer)
 }
 
 // @abstract   Initializes a set of matrices that can be used in training for weight and bias matrices in the forward and backward passes. The layout, datatype and number of matrices is the same as for the outputs of @see initWithDevice. @param      matricesOut                 An array where the newly created matrices will be stored, will be initialized to zero.
 func (o *MPSRNNMatrixTrainingLayer) CreateWeightMatrices(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix]) {
-	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelCreateWeightMatrices, matricesOut)
+	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelCreateWeightMatrices, matricesOut.Ptr())
 }
 
 func (o *MPSRNNMatrixTrainingLayer) EncodeCopyWeightsToCommandBufferWeightsMatrixIdMatrixCopyFromWeightsToMatrixMatrixOffset(commandBuffer metal.MTLCommandBuffer, weights *foundation.NSArray[*mpscore.MPSMatrix], matrixId mpsneuralnetwork.MPSRNNMatrixId, matrix *mpscore.MPSMatrix, copyFromWeightsToMatrix bool, matrixOffset metal.MTLOrigin) {
-	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelEncodeCopyWeightsToCommandBufferWeightsMatrixIdMatrixCopyFromWeightsToMatrixMatrixOffset, commandBuffer, weights, matrixId, matrix.Ptr(), copyFromWeightsToMatrix, matrixOffset)
+	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelEncodeCopyWeightsToCommandBufferWeightsMatrixIdMatrixCopyFromWeightsToMatrixMatrixOffset, commandBuffer, weights.Ptr(), matrixId, matrix.Ptr(), copyFromWeightsToMatrix, matrixOffset)
 }
 
 func (o *MPSRNNMatrixTrainingLayer) EncodeForwardSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], sourceOffsets *uint, destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, trainingStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNMatrixTrainingState], recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentMatrixState], weights *foundation.NSArray[*mpscore.MPSMatrix]) {
-	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelEncodeForwardSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights, commandBuffer, sourceMatrices, sourceOffsets, destinationMatrices, destinationOffsets, trainingStates, recurrentInputState.Ptr(), recurrentOutputStates, weights)
+	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelEncodeForwardSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights, commandBuffer, sourceMatrices.Ptr(), sourceOffsets, destinationMatrices.Ptr(), destinationOffsets, trainingStates.Ptr(), recurrentInputState.Ptr(), recurrentOutputStates.Ptr(), weights.Ptr())
 }
 
 func (o *MPSRNNMatrixTrainingLayer) EncodeForwardSequenceToCommandBufferSourceMatricesDestinationMatricesTrainingStatesWeights(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], trainingStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNMatrixTrainingState], weights *foundation.NSArray[*mpscore.MPSMatrix]) {
-	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelEncodeForwardSequenceToCommandBufferSourceMatricesDestinationMatricesTrainingStatesWeights, commandBuffer, sourceMatrices, destinationMatrices, trainingStates, weights)
+	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelEncodeForwardSequenceToCommandBufferSourceMatricesDestinationMatricesTrainingStatesWeights, commandBuffer, sourceMatrices.Ptr(), destinationMatrices.Ptr(), trainingStates.Ptr(), weights.Ptr())
 }
 
 func (o *MPSRNNMatrixTrainingLayer) EncodeGradientSequenceToCommandBufferForwardSourcesForwardSourceOffsetsSourceGradientsSourceGradientOffsetsDestinationGradientsDestinationOffsetsWeightGradientsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights(commandBuffer metal.MTLCommandBuffer, forwardSources *foundation.NSArray[*mpscore.MPSMatrix], forwardSourceOffsets *uint, sourceGradients *foundation.NSArray[*mpscore.MPSMatrix], sourceGradientOffsets *uint, destinationGradients *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, weightGradients *foundation.NSArray[*mpscore.MPSMatrix], trainingStates *foundation.NSArray[*mpsneuralnetwork.MPSRNNMatrixTrainingState], recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentMatrixState], weights *foundation.NSArray[*mpscore.MPSMatrix]) {
-	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelEncodeGradientSequenceToCommandBufferForwardSourcesForwardSourceOffsetsSourceGradientsSourceGradientOffsetsDestinationGradientsDestinationOffsetsWeightGradientsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights, commandBuffer, forwardSources, forwardSourceOffsets, sourceGradients, sourceGradientOffsets, destinationGradients, destinationOffsets, weightGradients, trainingStates, recurrentInputState.Ptr(), recurrentOutputStates, weights)
+	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelEncodeGradientSequenceToCommandBufferForwardSourcesForwardSourceOffsetsSourceGradientsSourceGradientOffsetsDestinationGradientsDestinationOffsetsWeightGradientsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights, commandBuffer, forwardSources.Ptr(), forwardSourceOffsets, sourceGradients.Ptr(), sourceGradientOffsets, destinationGradients.Ptr(), destinationOffsets, weightGradients.Ptr(), trainingStates.Ptr(), recurrentInputState.Ptr(), recurrentOutputStates.Ptr(), weights.Ptr())
 }
 
 func (o *MPSRNNMatrixTrainingLayer) EncodeGradientSequenceToCommandBufferForwardSourcesSourceGradientsDestinationGradientsWeightGradientsTrainingStatesWeights(commandBuffer metal.MTLCommandBuffer, forwardSources *foundation.NSArray[*mpscore.MPSMatrix], sourceGradients *foundation.NSArray[*mpscore.MPSMatrix], destinationGradients *foundation.NSArray[*mpscore.MPSMatrix], weightGradients *foundation.NSArray[*mpscore.MPSMatrix], trainingStates *foundation.NSArray[*mpsneuralnetwork.MPSRNNMatrixTrainingState], weights *foundation.NSArray[*mpscore.MPSMatrix]) {
-	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelEncodeGradientSequenceToCommandBufferForwardSourcesSourceGradientsDestinationGradientsWeightGradientsTrainingStatesWeights, commandBuffer, forwardSources, sourceGradients, destinationGradients, weightGradients, trainingStates, weights)
+	o.Ptr().Send(_mPSRNNMatrixTrainingLayerSelEncodeGradientSequenceToCommandBufferForwardSourcesSourceGradientsDestinationGradientsWeightGradientsTrainingStatesWeights, commandBuffer, forwardSources.Ptr(), sourceGradients.Ptr(), destinationGradients.Ptr(), weightGradients.Ptr(), trainingStates.Ptr(), weights.Ptr())
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSRNNMatrixTrainingLayer @param      device      The MTLDevice on which to make the MPSRNNMatrixTrainingLayer @return     A new MPSRNNMatrixTrainingLayer object, or nil if failure.

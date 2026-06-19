@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A piece of data that can be stored inside the HealthKit store.
+//
 // Object wraps [raw.HKObject] with a fluent Go API.
 type Object struct {
 	inner *raw.HKObject

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A decoder that restores data from an archive.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunarchiver
 // Deprecated: Use NSKeyedUnarchiver instead
 type NSUnarchiver struct {
@@ -36,6 +38,7 @@ func NSUnarchiverFromID(id objc.ID) *NSUnarchiver {
 	return o
 }
 
+// Returns an NSUnarchiver object initialized to read an archive from a given data object.
 func (o *NSUnarchiver) InitForReadingWithData(data *NSData) *NSUnarchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUnarchiverSelInitForReadingWithData, data.Ptr())
 	if _ret != 0 {
@@ -44,24 +47,29 @@ func (o *NSUnarchiver) InitForReadingWithData(data *NSData) *NSUnarchiver {
 	return NSUnarchiverFromID(_ret)
 }
 
+// Decodes and returns the object archived in a given NSData object.
 func NSUnarchiverUnarchiveObjectWithData(data *NSData) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnarchiver), _nSUnarchiverSelUnarchiveObjectWithData, data.Ptr())
 	return _ret
 }
 
+// Decodes and returns the object archived in the file path.
 func NSUnarchiverUnarchiveObjectWithFile(path *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnarchiver), _nSUnarchiverSelUnarchiveObjectWithFile, path.Ptr())
 	return _ret
 }
 
+// Instructs instances of NSUnarchiver to use the class with a given name when instantiating objects whose ostensible class, according to the archived data, is another given name.
 func NSUnarchiverDecodeClassNameAsClassName(inArchiveName *NSString, trueName *NSString) {
 	objc.ID(_clsNSUnarchiver).Send(_nSUnarchiverSelDecodeClassNameAsClassName, inArchiveName.Ptr(), trueName.Ptr())
 }
 
+// Instructs the receiver to use the class with a given name when instantiating objects whose ostensible class, according to the archived data, is another given name.
 func (o *NSUnarchiver) DecodeClassNameAsClassName(inArchiveName *NSString, trueName *NSString) {
 	o.Ptr().Send(_nSUnarchiverSelDecodeClassNameAsClassName, inArchiveName.Ptr(), trueName.Ptr())
 }
 
+// Returns the name of the class used when instantiating objects whose ostensible class, according to the archived data, is a given name.
 func NSUnarchiverClassNameDecodedForArchiveClassName(inArchiveName *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnarchiver), _nSUnarchiverSelClassNameDecodedForArchiveClassName, inArchiveName.Ptr())
 	if _ret != 0 {
@@ -70,6 +78,7 @@ func NSUnarchiverClassNameDecodedForArchiveClassName(inArchiveName *NSString) *N
 	return NSStringFromID(_ret)
 }
 
+// Returns the name of the class that will be used when instantiating objects whose ostensible class, according to the archived data, is a given name.
 func (o *NSUnarchiver) ClassNameDecodedForArchiveClassName(inArchiveName *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUnarchiverSelClassNameDecodedForArchiveClassName, inArchiveName.Ptr())
 	if _ret != 0 {
@@ -78,6 +87,7 @@ func (o *NSUnarchiver) ClassNameDecodedForArchiveClassName(inArchiveName *NSStri
 	return NSStringFromID(_ret)
 }
 
+// Causes the receiver to substitute one given object for another whenever the latter is extracted from the archive.
 func (o *NSUnarchiver) ReplaceObjectWithObject(object objc.ID, newObject objc.ID) {
 	o.Ptr().Send(_nSUnarchiverSelReplaceObjectWithObject, object, newObject)
 }

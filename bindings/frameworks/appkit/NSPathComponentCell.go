@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A component of a path.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspathcomponentcell
 type NSPathComponentCell struct {
 	NSTextFieldCell

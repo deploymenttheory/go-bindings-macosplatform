@@ -7,12 +7,14 @@ import (
 	"unsafe"
 )
 
+// The structure for an OID descriptor that exchanges object identifiers with many GSS-API functions.
 // C struct: gss_OID_desc_struct
 type GssOIDDescStruct struct {
 	Length   uint32
 	Elements unsafe.Pointer
 }
 
+// The structure for an OID set descriptor that manages an array of OID descriptors.
 // C struct: gss_OID_set_desc_struct
 type GssOIDSetDescStruct struct {
 	Count    uint
@@ -23,18 +25,21 @@ type GssOIDSetDescStruct struct {
 // GssAuthIdentity is an opaque type.
 type GssAuthIdentity struct{}
 
+// The structure for a buffer descriptor that you use to exchange octet streams with many GSS-API functions.
 // C struct: gss_buffer_desc_struct
 type GssBufferDescStruct struct {
 	Length uint
 	Value  unsafe.Pointer
 }
 
+// The structure for a buffer set descriptor that you use to manage an array of buffer descriptors.
 // C struct: gss_buffer_set_desc_struct
 type GssBufferSetDescStruct struct {
 	Count    uint
 	Elements *GssBufferDescStruct
 }
 
+// The structure defining a channel bindings descriptor that specifies the communications channel used to carry a context.
 // C struct: gss_channel_bindings_struct
 type GssChannelBindingsStruct struct {
 	Initiator_addrtype uint32
@@ -52,6 +57,7 @@ type GssCredIdTDescStruct struct{}
 // GssCtxIdTDescStruct is an opaque type.
 type GssCtxIdTDescStruct struct{}
 
+// The structure for a vectored I/O buffer and its defined type.
 // C struct: gss_iov_buffer_desc_struct
 type GssIovBufferDescStruct struct {
 	Type   uint32

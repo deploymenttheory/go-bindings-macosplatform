@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that reshapes a tensor with the shape you specify.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcreshapelayer
 type MLCReshapeLayer struct {
 	MLCLayer
@@ -31,9 +33,9 @@ func MLCReshapeLayerFromID(id objc.ID) *MLCReshapeLayer {
 	return o
 }
 
-// @abstract   Creates a reshape layer with the shape you specify. @param      shape An array that contains the sizes of each dimension. @return     A new reshape layer.
+// Creates a reshape layer with the shape you specify.
 func MLCReshapeLayerLayerWithShape(shape *foundation.NSArray[*foundation.NSNumber]) *MLCReshapeLayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLCReshapeLayer), _mLCReshapeLayerSelLayerWithShape, shape)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLCReshapeLayer), _mLCReshapeLayerSelLayerWithShape, shape.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -42,6 +44,9 @@ func MLCReshapeLayerLayerWithShape(shape *foundation.NSArray[*foundation.NSNumbe
 
 // @property   shape @abstract   The target shape.
 func (o *MLCReshapeLayer) Shape() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCReshapeLayerSelShape)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCReshapeLayerSelShape)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

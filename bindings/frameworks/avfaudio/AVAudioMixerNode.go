@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that takes any number of inputs and converts them into a single output.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiomixernode
 type AVAudioMixerNode struct {
 	AVAudioNode
@@ -32,6 +34,7 @@ func AVAudioMixerNodeFromID(id objc.ID) *AVAudioMixerNode {
 	return o
 }
 
+// Creates an audio mixer node.
 func (o *AVAudioMixerNode) Init() *AVAudioMixerNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioMixerNodeSelInit)
 	if _ret != 0 {

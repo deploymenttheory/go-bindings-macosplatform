@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that can render an image from a Core Image object.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsciimagerep
 type NSCIImageRep struct {
 	NSImageRep
@@ -32,6 +34,7 @@ func NSCIImageRepFromID(id objc.ID) *NSCIImageRep {
 	return o
 }
 
+// Creates and returns a representation of an image initialized to the specified Core Image instance.
 func NSCIImageRepImageRepWithCIImage(image *coreimage.CIImage) *NSCIImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCIImageRep), _nSCIImageRepSelImageRepWithCIImage, image.Ptr())
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func NSCIImageRepImageRepWithCIImage(image *coreimage.CIImage) *NSCIImageRep {
 	return NSCIImageRepFromID(_ret)
 }
 
+// Returns a representation of an image initialized to the specified Core Image instance.
 func (o *NSCIImageRep) InitWithCIImage(image *coreimage.CIImage) *NSCIImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCIImageRepSelInitWithCIImage, image.Ptr())
 	if _ret != 0 {

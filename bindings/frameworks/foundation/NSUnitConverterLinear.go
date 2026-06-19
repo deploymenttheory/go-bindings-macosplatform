@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of how to convert between units using a linear equation.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitconverterlinear
 type NSUnitConverterLinear struct {
 	NSUnitConverter

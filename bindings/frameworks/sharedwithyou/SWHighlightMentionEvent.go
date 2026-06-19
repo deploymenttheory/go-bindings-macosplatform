@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents mention activity for a highlight.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyou/swhighlightmentionevent
 type SWHighlightMentionEvent struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func SWHighlightMentionEventFromID(id objc.ID) *SWHighlightMentionEvent {
 	return o
 }
 
-// Initializes a highlight mention event object when the sender mentions another participant. @param highlight The object on which the event occurred. @param handle The CloudKit handle of the person being mentioned by the sender.
+// Creates and initializes a mention event.
 func (o *SWHighlightMentionEvent) InitWithHighlightMentionedPersonCloudKitShareHandle(highlight *SWHighlight, handle *foundation.NSString) *SWHighlightMentionEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightMentionEventSelInitWithHighlightMentionedPersonCloudKitShareHandle, highlight.Ptr(), handle.Ptr())
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func (o *SWHighlightMentionEvent) InitWithHighlightMentionedPersonCloudKitShareH
 	return SWHighlightMentionEventFromID(_ret)
 }
 
-// Initializes a highlight mention event object when the sender mentions another participant. @param highlight The object on which the event occurred. @param identity The identity of the person being mentioned by the sender.
+// Creates and initializes a mention event.
 func (o *SWHighlightMentionEvent) InitWithHighlightMentionedPersonIdentity(highlight *SWHighlight, identity *sharedwithyoucore.SWPersonIdentity) *SWHighlightMentionEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightMentionEventSelInitWithHighlightMentionedPersonIdentity, highlight.Ptr(), identity.Ptr())
 	if _ret != 0 {

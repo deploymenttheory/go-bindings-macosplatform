@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A utility object for initiating map-based searches and processing the results.
+//
 // LocalSearch wraps [raw.MKLocalSearch] with a fluent Go API.
 type LocalSearch struct {
 	inner *raw.MKLocalSearch
@@ -30,6 +32,8 @@ func LocalSearchFromID(id objc.ID) *LocalSearch {
 	return &LocalSearch{inner: raw.MKLocalSearchFromID(id)}
 }
 
+// Creates and returns a search object with the specified parameters.
+//
 // NewLocalSearchWithRequest creates a new [LocalSearch].
 func NewLocalSearchWithRequest(request *raw.MKLocalSearchRequest) *LocalSearch {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLocalSearch")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewLocalSearchWithRequest(request *raw.MKLocalSearchRequest) *LocalSearch {
 	return &LocalSearch{inner: raw.MKLocalSearchFromID(_id)}
 }
 
+// Creates and returns a search object for fetching points of interest.
+//
 // NewLocalSearchWithPointsOfInterestRequest creates a new [LocalSearch].
 func NewLocalSearchWithPointsOfInterestRequest(request *raw.MKLocalPointsOfInterestRequest) *LocalSearch {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLocalSearch")), objc.RegisterName("alloc"))
@@ -44,11 +50,15 @@ func NewLocalSearchWithPointsOfInterestRequest(request *raw.MKLocalPointsOfInter
 	return &LocalSearch{inner: raw.MKLocalSearchFromID(_id)}
 }
 
+// Starts the search and delivers the results to the specified completion handler.
+//
 // StartWithCompletionHandler calls the underlying StartWithCompletionHandler.
 func (x *LocalSearch) StartWithCompletionHandler(completionHandler func(*raw.MKLocalSearchResponse, unsafe.Pointer)) {
 	x.inner.StartWithCompletionHandler(completionHandler)
 }
 
+// Cancels an in-progress search operation.
+//
 // Cancel calls the underlying Cancel.
 func (x *LocalSearch) Cancel() {
 	x.inner.Cancel()

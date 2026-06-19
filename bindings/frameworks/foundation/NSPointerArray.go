@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection similar to an array, but with a broader range of available memory semantics.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nspointerarray
 type NSPointerArray struct {
 	NSObject
@@ -48,6 +50,7 @@ func NSPointerArrayFromID(id objc.ID) *NSPointerArray {
 	return o
 }
 
+// Initializes the receiver to use the given options.
 func (o *NSPointerArray) InitWithOptions(options NSPointerFunctionsOptions) *NSPointerArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPointerArraySelInitWithOptions, options)
 	if _ret != 0 {
@@ -56,6 +59,7 @@ func (o *NSPointerArray) InitWithOptions(options NSPointerFunctionsOptions) *NSP
 	return NSPointerArrayFromID(_ret)
 }
 
+// Initializes the receiver to use the given functions.
 func (o *NSPointerArray) InitWithPointerFunctions(functions *NSPointerFunctions) *NSPointerArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPointerArraySelInitWithPointerFunctions, functions.Ptr())
 	if _ret != 0 {
@@ -64,6 +68,7 @@ func (o *NSPointerArray) InitWithPointerFunctions(functions *NSPointerFunctions)
 	return NSPointerArrayFromID(_ret)
 }
 
+// Returns a new pointer array initialized to use the given options.
 func NSPointerArrayPointerArrayWithOptions(options NSPointerFunctionsOptions) *NSPointerArray {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPointerArray), _nSPointerArraySelPointerArrayWithOptions, options)
 	if _ret != 0 {
@@ -72,6 +77,7 @@ func NSPointerArrayPointerArrayWithOptions(options NSPointerFunctionsOptions) *N
 	return NSPointerArrayFromID(_ret)
 }
 
+// A new pointer array initialized to use the given functions.
 func NSPointerArrayPointerArrayWithPointerFunctions(functions *NSPointerFunctions) *NSPointerArray {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPointerArray), _nSPointerArraySelPointerArrayWithPointerFunctions, functions.Ptr())
 	if _ret != 0 {
@@ -80,27 +86,33 @@ func NSPointerArrayPointerArrayWithPointerFunctions(functions *NSPointerFunction
 	return NSPointerArrayFromID(_ret)
 }
 
+// Returns the pointer at a given index.
 func (o *NSPointerArray) PointerAtIndex(index uint) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSPointerArraySelPointerAtIndex, index)
 	return _ret
 }
 
+// Adds a given pointer to the receiver.
 func (o *NSPointerArray) AddPointer(pointer unsafe.Pointer) {
 	o.Ptr().Send(_nSPointerArraySelAddPointer, pointer)
 }
 
+// Removes the pointer at a given index.
 func (o *NSPointerArray) RemovePointerAtIndex(index uint) {
 	o.Ptr().Send(_nSPointerArraySelRemovePointerAtIndex, index)
 }
 
+// Inserts a pointer at a given index.
 func (o *NSPointerArray) InsertPointerAtIndex(item unsafe.Pointer, index uint) {
 	o.Ptr().Send(_nSPointerArraySelInsertPointerAtIndex, item, index)
 }
 
+// Replaces the pointer at a given index.
 func (o *NSPointerArray) ReplacePointerAtIndexWithPointer(index uint, item unsafe.Pointer) {
 	o.Ptr().Send(_nSPointerArraySelReplacePointerAtIndexWithPointer, index, item)
 }
 
+// Removes NULL values from the receiver.
 func (o *NSPointerArray) Compact() {
 	o.Ptr().Send(_nSPointerArraySelCompact)
 }
@@ -122,18 +134,21 @@ func (o *NSPointerArray) SetCount(count uint) {
 	o.Ptr().Send(_nSPointerArraySelSetCount, count)
 }
 
+// Returns a new pointer array that maintains strong references to its elements.
 // Deprecated: GC no longer supported
 func NSPointerArrayPointerArrayWithStrongObjects() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPointerArray), _nSPointerArraySelPointerArrayWithStrongObjects)
 	return _ret
 }
 
+// Returns a new pointer array that maintains weak references to its elements.
 // Deprecated: GC no longer supported
 func NSPointerArrayPointerArrayWithWeakObjects() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPointerArray), _nSPointerArraySelPointerArrayWithWeakObjects)
 	return _ret
 }
 
+// Returns a new pointer array that maintains strong references to its elements.
 func NSPointerArrayStrongObjectsPointerArray() *NSPointerArray {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPointerArray), _nSPointerArraySelStrongObjectsPointerArray)
 	if _ret != 0 {
@@ -142,6 +157,7 @@ func NSPointerArrayStrongObjectsPointerArray() *NSPointerArray {
 	return NSPointerArrayFromID(_ret)
 }
 
+// Returns a new pointer array that maintains weak references to its elements.
 func NSPointerArrayWeakObjectsPointerArray() *NSPointerArray {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPointerArray), _nSPointerArraySelWeakObjectsPointerArray)
 	if _ret != 0 {
@@ -151,6 +167,9 @@ func NSPointerArrayWeakObjectsPointerArray() *NSPointerArray {
 }
 
 func (o *NSPointerArray) AllObjects() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSPointerArraySelAllObjects)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPointerArraySelAllObjects)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object indicating the app or device that created a HealthKit sample
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hksource
 type HKSource struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func HKSourceFromID(id objc.ID) *HKSource {
 	return o
 }
 
-// @method    defaultSource @abstract  Returns the source representing the calling application.
+// Returns a source object for the current app.
 func HKSourceDefaultSource() *HKSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKSource), _hKSourceSelDefaultSource)
 	if _ret != 0 {

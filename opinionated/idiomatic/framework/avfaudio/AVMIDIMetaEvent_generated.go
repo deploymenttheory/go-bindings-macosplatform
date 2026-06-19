@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents MIDI meta event messages.
+//
 // MIDIMetaEvent wraps [raw.AVMIDIMetaEvent] with a fluent Go API.
 type MIDIMetaEvent struct {
 	inner *raw.AVMIDIMetaEvent
@@ -30,7 +32,7 @@ func MIDIMetaEventFromID(id objc.ID) *MIDIMetaEvent {
 	return &MIDIMetaEvent{inner: raw.AVMIDIMetaEventFromID(id)}
 }
 
-// @method initWithType:data @abstract Initialize the event with a MIDI Meta-Event type and an NSData. @param type A AVMIDIMetaEventType indicating which type of Meta-Event. @param data An NSData object containing the raw contents of the Meta-Event.
+// Creates an event with a MIDI meta event type and data.
 //
 // NewMIDIMetaEventWithTypeData creates a new [MIDIMetaEvent].
 func NewMIDIMetaEventWithTypeData(type_ AVMIDIMetaEventType, data *foundation.NSData) *MIDIMetaEvent {

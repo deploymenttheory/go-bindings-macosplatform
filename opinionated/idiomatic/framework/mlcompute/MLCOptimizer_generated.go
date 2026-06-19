@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for all framework optimizers.
+//
 // Optimizer wraps [raw.MLCOptimizer] with a fluent Go API.
 type Optimizer struct {
 	inner *raw.MLCOptimizer
@@ -35,7 +37,7 @@ func NewOptimizer() *Optimizer {
 	return &Optimizer{inner: raw.MLCOptimizerFromID(_id)}
 }
 
-// @property   learningRate @abstract   The learning rate.  This property is 'readwrite' so that callers can implement a 'decay' during training
+// The learning rate.
 //
 // WithLearningRate sets the learningRate property and returns the receiver for chaining.
 func (x *Optimizer) WithLearningRate(learningRate float32) *Optimizer {
@@ -43,7 +45,7 @@ func (x *Optimizer) WithLearningRate(learningRate float32) *Optimizer {
 	return x
 }
 
-// @property   appliesGradientClipping @abstract   Whether gradient clipping should be applied or not.
+// A Boolean value that indicates whether you apply gradient clipping.
 //
 // WithAppliesGradientClipping sets the appliesGradientClipping property and returns the receiver for chaining.
 func (x *Optimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *Optimizer {

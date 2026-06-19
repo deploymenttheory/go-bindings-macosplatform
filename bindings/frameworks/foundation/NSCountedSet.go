@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable, unordered collection of distinct objects that may appear more than once in the collection.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nscountedset
 type NSCountedSet[ObjectType purego.AnyObject] struct {
 	NSMutableSet[ObjectType]
@@ -32,6 +34,7 @@ func NSCountedSetFromID[ObjectType purego.AnyObject](id objc.ID) *NSCountedSet[O
 	return o
 }
 
+// Returns a counted set object initialized with enough memory to hold a given number of objects.
 func (o *NSCountedSet[ObjectType]) InitWithCapacity(numItems uint) *NSCountedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCountedSetSelInitWithCapacity, numItems)
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func (o *NSCountedSet[ObjectType]) InitWithCapacity(numItems uint) *NSCountedSet
 	return NSCountedSetFromID[ObjectType](_ret)
 }
 
+// Returns a counted set object initialized with the contents of a given array.
 func (o *NSCountedSet[ObjectType]) InitWithArray(array *NSArray[ObjectType]) *NSCountedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCountedSetSelInitWithArray, array.Ptr())
 	if _ret != 0 {
@@ -48,6 +52,7 @@ func (o *NSCountedSet[ObjectType]) InitWithArray(array *NSArray[ObjectType]) *NS
 	return NSCountedSetFromID[ObjectType](_ret)
 }
 
+// Returns a counted set object initialized with the contents of a given set.
 func (o *NSCountedSet[ObjectType]) InitWithSet(set *NSSet[ObjectType]) *NSCountedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCountedSetSelInitWithSet, set.Ptr())
 	if _ret != 0 {
@@ -56,6 +61,7 @@ func (o *NSCountedSet[ObjectType]) InitWithSet(set *NSSet[ObjectType]) *NSCounte
 	return NSCountedSetFromID[ObjectType](_ret)
 }
 
+// Returns the count associated with a given object in the set.
 func (o *NSCountedSet[ObjectType]) CountForObject(object ObjectType) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSCountedSetSelCountForObject, object)
 	return _ret

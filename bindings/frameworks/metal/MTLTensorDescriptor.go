@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration type for creating new tensor instances.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtltensordescriptor
 type MTLTensorDescriptor struct {
 	foundation.NSObject

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A query for reading activity summary objects from the HealthKit store.
+//
 // ActivitySummaryQuery wraps [raw.HKActivitySummaryQuery] with a fluent Go API.
 type ActivitySummaryQuery struct {
 	inner *raw.HKActivitySummaryQuery
@@ -31,7 +33,7 @@ func ActivitySummaryQueryFromID(id objc.ID) *ActivitySummaryQuery {
 	return &ActivitySummaryQuery{inner: raw.HKActivitySummaryQueryFromID(id)}
 }
 
-// @method        initWithPredicate:resultsHandler: @abstract      Returns a query that will retrieve HKActivitySummaries matching the given predicate. @discussion    If no updateHandler is set on the query, the query will automatically stop after calling resultsHandler. Otherwise, the query continues to run and calls the updateHandler as HKActivitySummaries matching the predicate are updated. @param         predicate  The predicate which HKActivitySummaries should match. @param         handler    The block to invoke with results when the query has finished.
+// Initializes a new active summary query.
 //
 // NewActivitySummaryQueryWithPredicateResultsHandler creates a new [ActivitySummaryQuery].
 func NewActivitySummaryQueryWithPredicateResultsHandler(predicate *foundation.NSPredicate, handler func(*raw.HKActivitySummaryQuery, *foundation.NSArray[*raw.HKActivitySummary], unsafe.Pointer)) *ActivitySummaryQuery {
@@ -40,7 +42,7 @@ func NewActivitySummaryQueryWithPredicateResultsHandler(predicate *foundation.NS
 	return &ActivitySummaryQuery{inner: raw.HKActivitySummaryQueryFromID(_id)}
 }
 
-// @property      updateHandler @abstract      An optional handler to be called when activity summaries matching the given predicate are updated. @discussion    This property may not be modified once the query has been executed. If this property is nonnull, then the query must be manually stopped.
+// The handler for monitoring updates to activity summaries saved in the HealthKit store.
 //
 // WithUpdateHandler sets the updateHandler property and returns the receiver for chaining.
 func (x *ActivitySummaryQuery) WithUpdateHandler(updateHandler func(*raw.HKActivitySummaryQuery, *foundation.NSArray[*raw.HKActivitySummary], unsafe.Pointer)) *ActivitySummaryQuery {

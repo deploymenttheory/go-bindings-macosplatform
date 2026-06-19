@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container for the vertex data of a Model I/O mesh, suitable for use in a Metal app.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalkit/mtkmesh
 type MTKMesh struct {
 	foundation.NSObject
@@ -41,7 +43,7 @@ func MTKMeshFromID(id objc.ID) *MTKMesh {
 	return o
 }
 
-// @method initWithMesh:device:error: @abstract Initialize the mesh and the mesh's submeshes. @param mesh Model I/O Mesh from which to create this MetalKit mesh @param device Metal device on which to create mesh resources @param error Pointer to an NSError object set if an error occurred @discussion The designated initializer for this class.  This does NOT initialize any meshes that are children of the Model I/O mesh, only submeshes that are part of the given mesh.  An exception is raised if vertexBuffer objects in the given mesh and the indexBuffer of any submesh in this mesh have not been created with a MTKMeshBufferAllocator object.  If a submesh using MDLGeometryTypeQuads or MDLGeometryTypeTopology is used, that submesh will be copied, and recreated to use MDLGeometryTypeTriangles, before this routine creates the MTKSubmesh.
+// Initializes a MetalKit mesh and its submeshes from a Model I/O mesh.
 func (o *MTKMesh) InitWithMeshDeviceError(mesh *modelio.MDLMesh, device metal.MTLDevice) (*MTKMesh, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKMeshSelInitWithMeshDeviceError, mesh.Ptr(), device, unsafe.Pointer(&_nsErr))
@@ -54,10 +56,10 @@ func (o *MTKMesh) InitWithMeshDeviceError(mesh *modelio.MDLMesh, device metal.MT
 	return MTKMeshFromID(_ret), nil
 }
 
-// @method newMeshesFromAsset:device:sourceMeshes:error: @abstract Initialize all meshes in a Model I/O asset. @param asset Model I/O asset from which to create MetalKit meshes @param device Metal device on which to create mesh resources @param sourceMeshes Array built by this method containing MDLMesh objects corresponding the returned MTKMesh objects @param error Pointer to an NSError object set if an error occurred @return MetalKit Meshes created from the Model I/O asset @discussion A convenience method to create MetalKit meshes from each mesh in a Model I/O asset.  resulting meshes are returned while the corresponding Model I/O meshes from which they were generated will appear in the sourceMeshes array.  All vertexBuffer objects in each MDLMesh object in the asset and the indexBuffer of each submesh within each of these meshes must have been created using a MTKMeshBufferAllocator object.  Thus
+// Creates and initializes MetalKit meshes from all Model I/O meshes in a Model I/O asset.
 func MTKMeshNewMeshesFromAssetDeviceSourceMeshesError(asset *modelio.MDLAsset, device metal.MTLDevice, sourceMeshes *foundation.NSArray[*modelio.MDLMesh]) (*foundation.NSArray[*MTKMesh], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsMTKMesh), _mTKMeshSelNewMeshesFromAssetDeviceSourceMeshesError, asset.Ptr(), device, sourceMeshes, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsMTKMesh), _mTKMeshSelNewMeshesFromAssetDeviceSourceMeshesError, asset.Ptr(), device, sourceMeshes.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

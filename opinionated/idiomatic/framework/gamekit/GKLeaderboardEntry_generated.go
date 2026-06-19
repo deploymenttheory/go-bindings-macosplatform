@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about a single score by a player on a leaderboard.
+//
 // LeaderboardEntry wraps [raw.GKLeaderboardEntry] with a fluent Go API.
 type LeaderboardEntry struct {
 	inner *raw.GKLeaderboardEntry
@@ -77,7 +79,7 @@ func (x *LeaderboardEntry) Date() *foundation.NSDate {
 }
 
 // ChallengeComposeControllerWithMessagePlayersCompletionHandler calls the underlying ChallengeComposeControllerWithMessagePlayersCompletionHandler.
-func (x *LeaderboardEntry) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler objc.Block) *appkit.NSViewController {
+func (x *LeaderboardEntry) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*foundation.NSString])) *appkit.NSViewController {
 	return x.inner.ChallengeComposeControllerWithMessagePlayersCompletionHandler(foundation.NSStringStringWithUTF8String(message), players, completionHandler)
 }
 
@@ -95,7 +97,7 @@ type LeaderboardEntryable interface {
 	FormattedScore() string
 	Context() uint
 	Date() *foundation.NSDate
-	ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler objc.Block) *appkit.NSViewController
+	ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*foundation.NSString])) *appkit.NSViewController
 	ChallengeComposeControllerWithMessagePlayersCompletion(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*raw.GKPlayer])) *appkit.NSViewController
 }
 

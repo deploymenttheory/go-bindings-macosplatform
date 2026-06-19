@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// WebPreferences encapsulates the preferences you can change per WebView object. These preferences include font, text encoding, and image settings. Normally a WebView object uses the standard preferences returned by the standardPreferences class method. However, you can modify the preferences for individual WebView instances too. Use the preferencesIdentifier WebView method to change a WebView object’s preferences, or to share preferences between WebView objects. Use the autosaves method to specify if the preferences object should be automatically saved to the user defaults database.
+//
 // WebPreferences wraps [raw.WebPreferences] with a fluent Go API.
 type WebPreferences struct {
 	inner *raw.WebPreferences
@@ -31,7 +33,7 @@ func WebPreferencesFromID(id objc.ID) *WebPreferences {
 	return &WebPreferences{inner: raw.WebPreferencesFromID(id)}
 }
 
-// @method initWithIdentifier: @param anIdentifier A string used to identify the WebPreferences. @discussion WebViews can share instances of WebPreferences by using an instance of WebPreferences with the same identifier.  Typically, instance are not created directly.  Instead you set the preferences identifier on a WebView.  The identifier is used as a prefix that is added to the user defaults keys for the WebPreferences. @result Returns a new instance of WebPreferences or a previously allocated instance with the same identifier.
+// Returns an initialized WebPreferences object, creating one if it does not exist.
 //
 // NewWebPreferencesWithIdentifier creates a new [WebPreferences].
 func NewWebPreferencesWithIdentifier(anIdentifier string) *WebPreferences {
@@ -40,7 +42,7 @@ func NewWebPreferencesWithIdentifier(anIdentifier string) *WebPreferences {
 	return &WebPreferences{inner: raw.WebPreferencesFromID(_id)}
 }
 
-// @property standardFontFamily
+// The standard font family of the web view.
 //
 // WithStandardFontFamily sets the standardFontFamily property and returns the receiver for chaining.
 func (x *WebPreferences) WithStandardFontFamily(standardFontFamily string) *WebPreferences {
@@ -48,7 +50,7 @@ func (x *WebPreferences) WithStandardFontFamily(standardFontFamily string) *WebP
 	return x
 }
 
-// @property fixedFontFamily
+// The fixed font family of the web view.
 //
 // WithFixedFontFamily sets the fixedFontFamily property and returns the receiver for chaining.
 func (x *WebPreferences) WithFixedFontFamily(fixedFontFamily string) *WebPreferences {
@@ -56,7 +58,7 @@ func (x *WebPreferences) WithFixedFontFamily(fixedFontFamily string) *WebPrefere
 	return x
 }
 
-// @property serifFontFamily
+// The serif font family of the web view.
 //
 // WithSerifFontFamily sets the serifFontFamily property and returns the receiver for chaining.
 func (x *WebPreferences) WithSerifFontFamily(serifFontFamily string) *WebPreferences {
@@ -64,7 +66,7 @@ func (x *WebPreferences) WithSerifFontFamily(serifFontFamily string) *WebPrefere
 	return x
 }
 
-// @property sansSerifFontFamily
+// The sans serif font family of the web view.
 //
 // WithSansSerifFontFamily sets the sansSerifFontFamily property and returns the receiver for chaining.
 func (x *WebPreferences) WithSansSerifFontFamily(sansSerifFontFamily string) *WebPreferences {
@@ -72,7 +74,7 @@ func (x *WebPreferences) WithSansSerifFontFamily(sansSerifFontFamily string) *We
 	return x
 }
 
-// @property cursiveFontFamily
+// The cursive font family of the web view.
 //
 // WithCursiveFontFamily sets the cursiveFontFamily property and returns the receiver for chaining.
 func (x *WebPreferences) WithCursiveFontFamily(cursiveFontFamily string) *WebPreferences {
@@ -80,7 +82,7 @@ func (x *WebPreferences) WithCursiveFontFamily(cursiveFontFamily string) *WebPre
 	return x
 }
 
-// @property fantasyFontFamily
+// The fantasy font family of the web view.
 //
 // WithFantasyFontFamily sets the fantasyFontFamily property and returns the receiver for chaining.
 func (x *WebPreferences) WithFantasyFontFamily(fantasyFontFamily string) *WebPreferences {
@@ -88,7 +90,7 @@ func (x *WebPreferences) WithFantasyFontFamily(fantasyFontFamily string) *WebPre
 	return x
 }
 
-// @property defaultFontSize
+// The default font size of the web view.
 //
 // WithDefaultFontSize sets the defaultFontSize property and returns the receiver for chaining.
 func (x *WebPreferences) WithDefaultFontSize(defaultFontSize int) *WebPreferences {
@@ -96,7 +98,7 @@ func (x *WebPreferences) WithDefaultFontSize(defaultFontSize int) *WebPreference
 	return x
 }
 
-// @property defaultFixedFontSize
+// The default fixed font size of the web view.
 //
 // WithDefaultFixedFontSize sets the defaultFixedFontSize property and returns the receiver for chaining.
 func (x *WebPreferences) WithDefaultFixedFontSize(defaultFixedFontSize int) *WebPreferences {
@@ -104,7 +106,7 @@ func (x *WebPreferences) WithDefaultFixedFontSize(defaultFixedFontSize int) *Web
 	return x
 }
 
-// @property minimumFontSize
+// The minimum font size of the web view.
 //
 // WithMinimumFontSize sets the minimumFontSize property and returns the receiver for chaining.
 func (x *WebPreferences) WithMinimumFontSize(minimumFontSize int) *WebPreferences {
@@ -112,7 +114,7 @@ func (x *WebPreferences) WithMinimumFontSize(minimumFontSize int) *WebPreference
 	return x
 }
 
-// @property minimumLogicalFontSize
+// The minimum logical font size of the web view.
 //
 // WithMinimumLogicalFontSize sets the minimumLogicalFontSize property and returns the receiver for chaining.
 func (x *WebPreferences) WithMinimumLogicalFontSize(minimumLogicalFontSize int) *WebPreferences {
@@ -120,7 +122,7 @@ func (x *WebPreferences) WithMinimumLogicalFontSize(minimumLogicalFontSize int) 
 	return x
 }
 
-// @property defaultTextEncodingName
+// The default text encoding of the web view.
 //
 // WithDefaultTextEncodingName sets the defaultTextEncodingName property and returns the receiver for chaining.
 func (x *WebPreferences) WithDefaultTextEncodingName(defaultTextEncodingName string) *WebPreferences {
@@ -128,7 +130,7 @@ func (x *WebPreferences) WithDefaultTextEncodingName(defaultTextEncodingName str
 	return x
 }
 
-// @property userStyleSheetEnabled
+// A Boolean that indicates whether or not user style sheets are enabled in the web view.
 //
 // WithUserStyleSheetEnabled sets the userStyleSheetEnabled property and returns the receiver for chaining.
 func (x *WebPreferences) WithUserStyleSheetEnabled(userStyleSheetEnabled bool) *WebPreferences {
@@ -144,7 +146,7 @@ func (x *WebPreferences) WithUserStyleSheetLocation(userStyleSheetLocation strin
 	return x
 }
 
-// @property javaEnabled @discussion Deprecated function that does nothing and always returns false.
+// A Boolean that indicates whether or not the web view allows Java.
 //
 // WithJavaEnabled sets the javaEnabled property and returns the receiver for chaining.
 func (x *WebPreferences) WithJavaEnabled(javaEnabled bool) *WebPreferences {
@@ -152,7 +154,7 @@ func (x *WebPreferences) WithJavaEnabled(javaEnabled bool) *WebPreferences {
 	return x
 }
 
-// @property javaScriptEnabled
+// A Boolean that indicates whether or not the web view allows JavaScript.
 //
 // WithJavaScriptEnabled sets the javaScriptEnabled property and returns the receiver for chaining.
 func (x *WebPreferences) WithJavaScriptEnabled(javaScriptEnabled bool) *WebPreferences {
@@ -160,7 +162,7 @@ func (x *WebPreferences) WithJavaScriptEnabled(javaScriptEnabled bool) *WebPrefe
 	return x
 }
 
-// @property javaScriptCanOpenWindowsAutomatically
+// A Boolean that indicates whether or not the web view allows JavaScript to open windows automatically.
 //
 // WithJavaScriptCanOpenWindowsAutomatically sets the javaScriptCanOpenWindowsAutomatically property and returns the receiver for chaining.
 func (x *WebPreferences) WithJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool) *WebPreferences {
@@ -168,7 +170,7 @@ func (x *WebPreferences) WithJavaScriptCanOpenWindowsAutomatically(javaScriptCan
 	return x
 }
 
-// @property plugInsEnabled
+// A Boolean that indicates whether or not the web view allows plug-ins.
 //
 // WithPlugInsEnabled sets the plugInsEnabled property and returns the receiver for chaining.
 func (x *WebPreferences) WithPlugInsEnabled(plugInsEnabled bool) *WebPreferences {
@@ -176,7 +178,7 @@ func (x *WebPreferences) WithPlugInsEnabled(plugInsEnabled bool) *WebPreferences
 	return x
 }
 
-// @property allowsAnimatedImages
+// A Boolean that indicates whether or not the receiver allows animated images.
 //
 // WithAllowsAnimatedImages sets the allowsAnimatedImages property and returns the receiver for chaining.
 func (x *WebPreferences) WithAllowsAnimatedImages(allowsAnimatedImages bool) *WebPreferences {
@@ -184,7 +186,7 @@ func (x *WebPreferences) WithAllowsAnimatedImages(allowsAnimatedImages bool) *We
 	return x
 }
 
-// @property allowsAnimatedImageLooping
+// A Boolean that indicates whether or not the receiver allows animated images to loop.
 //
 // WithAllowsAnimatedImageLooping sets the allowsAnimatedImageLooping property and returns the receiver for chaining.
 func (x *WebPreferences) WithAllowsAnimatedImageLooping(allowsAnimatedImageLooping bool) *WebPreferences {
@@ -192,7 +194,7 @@ func (x *WebPreferences) WithAllowsAnimatedImageLooping(allowsAnimatedImageLoopi
 	return x
 }
 
-// @property willLoadImagesAutomatically
+// A Boolean that indicates whether or not the web view allows images to be loaded automatically.
 //
 // WithLoadsImagesAutomatically sets the loadsImagesAutomatically property and returns the receiver for chaining.
 func (x *WebPreferences) WithLoadsImagesAutomatically(loadsImagesAutomatically bool) *WebPreferences {
@@ -200,7 +202,7 @@ func (x *WebPreferences) WithLoadsImagesAutomatically(loadsImagesAutomatically b
 	return x
 }
 
-// @property autosaves @discussion If autosaves is YES the settings represented by WebPreferences will be stored in the user defaults database.
+// A Boolean that indicates whether or not the receiver’s attributes are automatically stored in the user defaults database.
 //
 // WithAutosaves sets the autosaves property and returns the receiver for chaining.
 func (x *WebPreferences) WithAutosaves(autosaves bool) *WebPreferences {
@@ -208,7 +210,7 @@ func (x *WebPreferences) WithAutosaves(autosaves bool) *WebPreferences {
 	return x
 }
 
-// @property shouldPrintBackgrounds
+// A Boolean that indicates whether or not the web view should include backgrounds when printing.
 //
 // WithShouldPrintBackgrounds sets the shouldPrintBackgrounds property and returns the receiver for chaining.
 func (x *WebPreferences) WithShouldPrintBackgrounds(shouldPrintBackgrounds bool) *WebPreferences {
@@ -216,7 +218,7 @@ func (x *WebPreferences) WithShouldPrintBackgrounds(shouldPrintBackgrounds bool)
 	return x
 }
 
-// @property privateBrowsingEnabled: @abstract If private browsing is enabled, WebKit will not store information about sites the user visits.
+// A Boolean that indicates whether or not private browsing is enabled.
 //
 // WithPrivateBrowsingEnabled sets the privateBrowsingEnabled property and returns the receiver for chaining.
 func (x *WebPreferences) WithPrivateBrowsingEnabled(privateBrowsingEnabled bool) *WebPreferences {
@@ -224,7 +226,7 @@ func (x *WebPreferences) WithPrivateBrowsingEnabled(privateBrowsingEnabled bool)
 	return x
 }
 
-// @property tabsToLinks @abstract If tabsToLinks is YES, the tab key will focus links and form controls. The option key temporarily reverses this preference.
+// A Boolean that indicates whether or not the tab key will focus links.
 //
 // WithTabsToLinks sets the tabsToLinks property and returns the receiver for chaining.
 func (x *WebPreferences) WithTabsToLinks(tabsToLinks bool) *WebPreferences {
@@ -232,7 +234,7 @@ func (x *WebPreferences) WithTabsToLinks(tabsToLinks bool) *WebPreferences {
 	return x
 }
 
-// @property usesPageCache @abstract Whether the receiver's associated WebViews use the shared page cache. @discussion Pages are cached as they are added to a WebBackForwardList, and removed from the cache as they are removed from a WebBackForwardList. Because the page cache is global, caching a page in one WebBackForwardList may cause a page in another WebBackForwardList to be evicted from the cache.
+// A Boolean that indicates whether the web views associated with the receiver should use the shared page cache.
 //
 // WithUsesPageCache sets the usesPageCache property and returns the receiver for chaining.
 func (x *WebPreferences) WithUsesPageCache(usesPageCache bool) *WebPreferences {
@@ -240,7 +242,7 @@ func (x *WebPreferences) WithUsesPageCache(usesPageCache bool) *WebPreferences {
 	return x
 }
 
-// @property cacheModel @abstract Specifies a usage model for a WebView, which WebKit will use to determine its caching behavior. If necessary, WebKit will prune its caches to match cacheModel when set. @discussion Research indicates that users tend to browse within clusters of documents that hold resources in common, and to revisit previously visited documents. WebKit and the frameworks below it include built-in caches that take advantage of these patterns, substantially improving document load speed in browsing situations. The WebKit cache model controls the behaviors of all of these caches, including NSURLCache and the various WebCore caches. Applications with a browsing interface can improve document load speed substantially by specifying WebCacheModelDocumentBrowser. Applications without a browsing interface can reduce memory usage substantially by specifying WebCacheModelDocumentViewer. If cacheModel is not set, WebKit will select a cache model automatically.
+// The cache model for the web views associated with the receiver.
 //
 // WithCacheModel sets the cacheModel property and returns the receiver for chaining.
 func (x *WebPreferences) WithCacheModel(cacheModel WebCacheModel) *WebPreferences {
@@ -248,7 +250,7 @@ func (x *WebPreferences) WithCacheModel(cacheModel WebCacheModel) *WebPreference
 	return x
 }
 
-// @property suppressesIncrementalRendering
+// A Boolean that indicates whether incremental rendering should be suppressed.
 //
 // WithSuppressesIncrementalRendering sets the suppressesIncrementalRendering property and returns the receiver for chaining.
 func (x *WebPreferences) WithSuppressesIncrementalRendering(suppressesIncrementalRendering bool) *WebPreferences {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A node that passes invocation to only one of its child nodes.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseswitchnodedefinition
 type PHASESwitchNodeDefinition struct {
 	PHASESoundEventNodeDefinition
@@ -33,7 +35,7 @@ func PHASESwitchNodeDefinitionFromID(id objc.ID) *PHASESwitchNodeDefinition {
 	return o
 }
 
-// @method initWithSwitchMetaParameterDefinition:identifier @abstract Create a switch node definition @param switchMetaParameterDefinition A metaparameter definition that wil be used to control the parameter of the switch node at runtime. @param identifier An optional custom identifier to give to this object @return A new PHASESwitchNodeDefinition object
+// Creates a named node that invokes a child node based on the value of the given parameter.
 func (o *PHASESwitchNodeDefinition) InitWithSwitchMetaParameterDefinitionIdentifier(switchMetaParameterDefinition *PHASEStringMetaParameterDefinition, identifier *foundation.NSString) *PHASESwitchNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESwitchNodeDefinitionSelInitWithSwitchMetaParameterDefinitionIdentifier, switchMetaParameterDefinition.Ptr(), identifier.Ptr())
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func (o *PHASESwitchNodeDefinition) InitWithSwitchMetaParameterDefinitionIdentif
 	return PHASESwitchNodeDefinitionFromID(_ret)
 }
 
-// @method initWithSwitchMetaParameterDefinition @abstract Create a switch node definition @param switchMetaParameterDefinition A metaparameter definition that wil be used to control the parameter of the switch node at runtime. @return A new PHASESwitchNodeDefinition object
+// Creates a node that invokes a child node based on the value of the given parameter.
 func (o *PHASESwitchNodeDefinition) InitWithSwitchMetaParameterDefinition(switchMetaParameterDefinition *PHASEStringMetaParameterDefinition) *PHASESwitchNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESwitchNodeDefinitionSelInitWithSwitchMetaParameterDefinition, switchMetaParameterDefinition.Ptr())
 	if _ret != 0 {
@@ -51,7 +53,7 @@ func (o *PHASESwitchNodeDefinition) InitWithSwitchMetaParameterDefinition(switch
 	return PHASESwitchNodeDefinitionFromID(_ret)
 }
 
-// @method addSubtree @abstract Add a subtree to a switch node @param subtree A PHASESoundEventNodeDefinition that will be a child node of this switch node @param switchValue A string value that the metaparameter will use to activate this subtree
+// Adds a child node with the given switch value.
 func (o *PHASESwitchNodeDefinition) AddSubtreeSwitchValue(subtree *PHASESoundEventNodeDefinition, switchValue *foundation.NSString) {
 	o.Ptr().Send(_pHASESwitchNodeDefinitionSelAddSubtreeSwitchValue, subtree.Ptr(), switchValue.Ptr())
 }

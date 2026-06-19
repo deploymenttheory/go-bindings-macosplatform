@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that renders an image from a PICT format data stream of version 1, version 2, and extended version 2.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspictimagerep
 type NSPICTImageRep struct {
 	NSImageRep
@@ -34,6 +36,7 @@ func NSPICTImageRepFromID(id objc.ID) *NSPICTImageRep {
 	return o
 }
 
+// Creates and returns a representation of an image from the specified data in the PICT file format.
 func NSPICTImageRepImageRepWithData(pictData *foundation.NSData) *NSPICTImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPICTImageRep), _nSPICTImageRepSelImageRepWithData, pictData.Ptr())
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func NSPICTImageRepImageRepWithData(pictData *foundation.NSData) *NSPICTImageRep
 	return NSPICTImageRepFromID(_ret)
 }
 
+// Returns a representation of an image from the specified data in the PICT file format.
 func (o *NSPICTImageRep) InitWithData(pictData *foundation.NSData) *NSPICTImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPICTImageRepSelInitWithData, pictData.Ptr())
 	if _ret != 0 {

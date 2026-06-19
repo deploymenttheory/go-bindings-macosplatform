@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A class that represents odometer data for workouts.
+//
 // OdometerData wraps [raw.CMOdometerData] with a fluent Go API.
 type OdometerData struct {
 	inner *raw.CMOdometerData

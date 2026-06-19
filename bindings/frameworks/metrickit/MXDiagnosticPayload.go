@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates a diagnostic report.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxdiagnosticpayload
 type MXDiagnosticPayload struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func MXDiagnosticPayloadFromID(id objc.ID) *MXDiagnosticPayload {
 	return o
 }
 
-// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this diagnostic payload. @result        An NSData object containing the JSON representation
+// Returns the contents of the payload in JSON format.
 func (o *MXDiagnosticPayload) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticPayloadSelJSONRepresentation)
 	if _ret != 0 {
@@ -46,10 +48,13 @@ func (o *MXDiagnosticPayload) JSONRepresentation() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
-// @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this diagnostic payload. @result        An NSDictionary object containing the dictionary representation
+// Returns the results of the payload as a dictionary.
 func (o *MXDiagnosticPayload) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _mXDiagnosticPayloadSelDictionaryRepresentation)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticPayloadSelDictionaryRepresentation)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @property      cpuExceptionDiagnostics @abstract      An array containing CPU exception diagnostics for this application.

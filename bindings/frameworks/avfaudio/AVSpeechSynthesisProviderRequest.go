@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the text to synthesize and the voice to use.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avspeechsynthesisproviderrequest
 type AVSpeechSynthesisProviderRequest struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func AVSpeechSynthesisProviderRequestFromID(id objc.ID) *AVSpeechSynthesisProvid
 	return o
 }
 
+// Creates a request with a voice and a description.
 func (o *AVSpeechSynthesisProviderRequest) InitWithSSMLRepresentationVoice(text *foundation.NSString, voice *AVSpeechSynthesisProviderVoice) *AVSpeechSynthesisProviderRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisProviderRequestSelInitWithSSMLRepresentationVoice, text.Ptr(), voice.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Additional information about data flowing through a per-app VPN provider.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neflowmetadata
 type NEFlowMetaData struct {
 	foundation.NSObject

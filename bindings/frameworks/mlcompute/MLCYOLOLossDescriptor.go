@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration object you use to create the YOLO loss layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcyololossdescriptor
 type MLCYOLOLossDescriptor struct {
 	foundation.NSObject
@@ -48,7 +50,7 @@ func MLCYOLOLossDescriptorFromID(id objc.ID) *MLCYOLOLossDescriptor {
 	return o
 }
 
-// @abstract  Create a YOLO loss descriptor object @param     anchorBoxes       The anchor box data @param     anchorBoxCount    The number of anchor boxes @return    A new MLCYOLOLossDescriptor object.
+// Creates a YOLO loss filter descriptor with the anchor box data and number of anchor boxes you specify.
 func MLCYOLOLossDescriptorDescriptorWithAnchorBoxesAnchorBoxCount(anchorBoxes *foundation.NSData, anchorBoxCount uint) *MLCYOLOLossDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCYOLOLossDescriptor), _mLCYOLOLossDescriptorSelDescriptorWithAnchorBoxesAnchorBoxCount, anchorBoxes.Ptr(), anchorBoxCount)
 	if _ret != 0 {

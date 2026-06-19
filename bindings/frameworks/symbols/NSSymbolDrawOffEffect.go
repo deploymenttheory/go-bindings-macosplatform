@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A symbol effect that applies the DrawOff animation to symbol images.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymboldrawoffeffect
 type NSSymbolDrawOffEffect struct {
 	NSSymbolEffect

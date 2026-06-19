@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to Core Data to do a batch update of data in a persistent store without loading any data into memory.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsbatchupdaterequest
 type NSBatchUpdateRequest struct {
 	NSPersistentStoreRequest
@@ -42,6 +44,7 @@ func NSBatchUpdateRequestFromID(id objc.ID) *NSBatchUpdateRequest {
 	return o
 }
 
+// Creates a batch-update request for a named managed entity.
 func NSBatchUpdateRequestBatchUpdateRequestWithEntityName(entityName *foundation.NSString) *NSBatchUpdateRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBatchUpdateRequest), _nSBatchUpdateRequestSelBatchUpdateRequestWithEntityName, entityName.Ptr())
 	if _ret != 0 {
@@ -50,6 +53,7 @@ func NSBatchUpdateRequestBatchUpdateRequestWithEntityName(entityName *foundation
 	return NSBatchUpdateRequestFromID(_ret)
 }
 
+// Creates a batch-update request for a named managed entity.
 func (o *NSBatchUpdateRequest) InitWithEntityName(entityName *foundation.NSString) *NSBatchUpdateRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchUpdateRequestSelInitWithEntityName, entityName.Ptr())
 	if _ret != 0 {
@@ -58,6 +62,7 @@ func (o *NSBatchUpdateRequest) InitWithEntityName(entityName *foundation.NSStrin
 	return NSBatchUpdateRequestFromID(_ret)
 }
 
+// Creates a batch-update request for a managed entity.
 func (o *NSBatchUpdateRequest) InitWithEntity(entity *NSEntityDescription) *NSBatchUpdateRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchUpdateRequestSelInitWithEntity, entity.Ptr())
 	if _ret != 0 {
@@ -113,10 +118,13 @@ func (o *NSBatchUpdateRequest) SetResultType(resultType NSBatchUpdateRequestResu
 }
 
 func (o *NSBatchUpdateRequest) PropertiesToUpdate() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSBatchUpdateRequestSelPropertiesToUpdate)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchUpdateRequestSelPropertiesToUpdate)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSBatchUpdateRequest) SetPropertiesToUpdate(propertiesToUpdate *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSBatchUpdateRequestSelSetPropertiesToUpdate, propertiesToUpdate)
+	o.Ptr().Send(_nSBatchUpdateRequestSelSetPropertiesToUpdate, propertiesToUpdate.Ptr())
 }

@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains information about an input action, such as a mouse click or a key press.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsevent
 type NSEvent struct {
 	foundation.NSObject
@@ -113,6 +115,7 @@ func NSEventFromID(id objc.ID) *NSEvent {
 	return o
 }
 
+// Returns the new characters that result if you apply the specified modifier keys to the event.
 func (o *NSEvent) CharactersByApplyingModifiers(modifiers NSEventModifierFlags) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEventSelCharactersByApplyingModifiers, modifiers)
 	if _ret != 0 {
@@ -121,6 +124,7 @@ func (o *NSEvent) CharactersByApplyingModifiers(modifiers NSEventModifierFlags) 
 	return foundation.NSStringFromID(_ret)
 }
 
+// Creates and returns a new event object for a Carbon event.
 func NSEventEventWithEventRef(eventRef unsafe.Pointer) *NSEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEvent), _nSEventSelEventWithEventRef, eventRef)
 	if _ret != 0 {
@@ -129,6 +133,7 @@ func NSEventEventWithEventRef(eventRef unsafe.Pointer) *NSEvent {
 	return NSEventFromID(_ret)
 }
 
+// Creates and returns an event object for a Core Graphics event.
 func NSEventEventWithCGEvent(cgEvent unsafe.Pointer) *NSEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEvent), _nSEventSelEventWithCGEvent, cgEvent)
 	if _ret != 0 {
@@ -137,6 +142,7 @@ func NSEventEventWithCGEvent(cgEvent unsafe.Pointer) *NSEvent {
 	return NSEventFromID(_ret)
 }
 
+// Returns the touch objects associated with the specified phase.
 func (o *NSEvent) TouchesMatchingPhaseInView(phase NSTouchPhase, view *NSView) *foundation.NSSet[*NSTouch] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEventSelTouchesMatchingPhaseInView, phase, view.Ptr())
 	if _ret != 0 {
@@ -145,6 +151,7 @@ func (o *NSEvent) TouchesMatchingPhaseInView(phase NSTouchPhase, view *NSView) *
 	return foundation.NSSetFromID[*NSTouch](_ret)
 }
 
+// Returns all touch objects associated with the event.
 func (o *NSEvent) AllTouches() *foundation.NSSet[*NSTouch] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEventSelAllTouches)
 	if _ret != 0 {
@@ -153,6 +160,7 @@ func (o *NSEvent) AllTouches() *foundation.NSSet[*NSTouch] {
 	return foundation.NSSetFromID[*NSTouch](_ret)
 }
 
+// Returns the touch objects from the event that belong to the specified view.
 func (o *NSEvent) TouchesForView(view *NSView) *foundation.NSSet[*NSTouch] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEventSelTouchesForView, view.Ptr())
 	if _ret != 0 {
@@ -161,6 +169,7 @@ func (o *NSEvent) TouchesForView(view *NSView) *foundation.NSSet[*NSTouch] {
 	return foundation.NSSetFromID[*NSTouch](_ret)
 }
 
+// Returns all of the touch objects associated with the specified main touch.
 func (o *NSEvent) CoalescedTouchesForTouch(touch *NSTouch) *foundation.NSArray[*NSTouch] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEventSelCoalescedTouchesForTouch, touch.Ptr())
 	if _ret != 0 {
@@ -169,6 +178,7 @@ func (o *NSEvent) CoalescedTouchesForTouch(touch *NSTouch) *foundation.NSArray[*
 	return foundation.NSArrayFromID[*NSTouch](_ret)
 }
 
+// Allows tracking and user interface feedback of scroll wheel events.
 func (o *NSEvent) TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler(options NSEventSwipeTrackingOptions, minDampenThreshold float64, maxDampenThreshold float64, trackingHandler func(float64, NSEventPhase, bool, *bool)) {
 	var __block_trackingHandler objc.Block
 	if trackingHandler != nil {
@@ -180,14 +190,17 @@ func (o *NSEvent) TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHand
 	o.Ptr().Send(_nSEventSelTrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler, options, minDampenThreshold, maxDampenThreshold, __block_trackingHandler)
 }
 
+// Begins generating periodic events for the current thread.
 func NSEventStartPeriodicEventsAfterDelayWithPeriod(delay float64, period float64) {
 	objc.ID(_clsNSEvent).Send(_nSEventSelStartPeriodicEventsAfterDelayWithPeriod, delay, period)
 }
 
+// Stops generating periodic events for the current thread and discards any periodic events remaining in the queue.
 func NSEventStopPeriodicEvents() {
 	objc.ID(_clsNSEvent).Send(_nSEventSelStopPeriodicEvents)
 }
 
+// Creates and returns a new event object that describes a mouse-down, -up, -moved, or -dragged event.
 func NSEventMouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberClickCountPressure(type_ NSEventType, location corefoundation.CGPoint, flags NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *NSGraphicsContext, eNum int, cNum int, pressure float32) *NSEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEvent), _nSEventSelMouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberClickCountPressure, type_, location, flags, time_, wNum, unusedPassNil.Ptr(), eNum, cNum, pressure)
 	if _ret != 0 {
@@ -196,6 +209,7 @@ func NSEventMouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextE
 	return NSEventFromID(_ret)
 }
 
+// Creates and returns a new event object that describes a key event.
 func NSEventKeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharactersCharactersIgnoringModifiersIsARepeatKeyCode(type_ NSEventType, location corefoundation.CGPoint, flags NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *NSGraphicsContext, keys *foundation.NSString, ukeys *foundation.NSString, flag bool, code uint16) *NSEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEvent), _nSEventSelKeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharactersCharactersIgnoringModifiersIsARepeatKeyCode, type_, location, flags, time_, wNum, unusedPassNil.Ptr(), keys.Ptr(), ukeys.Ptr(), flag, code)
 	if _ret != 0 {
@@ -204,6 +218,7 @@ func NSEventKeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCha
 	return NSEventFromID(_ret)
 }
 
+// Creates and returns a new event object that describes a tracking-rectangle or cursor-update event.
 func NSEventEnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData(type_ NSEventType, location corefoundation.CGPoint, flags NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *NSGraphicsContext, eNum int, tNum int, data unsafe.Pointer) *NSEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEvent), _nSEventSelEnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData, type_, location, flags, time_, wNum, unusedPassNil.Ptr(), eNum, tNum, data)
 	if _ret != 0 {
@@ -212,6 +227,7 @@ func NSEventEnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberCont
 	return NSEventFromID(_ret)
 }
 
+// Creates and returns a new event object that describes a custom event.
 func NSEventOtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeData1Data2(type_ NSEventType, location corefoundation.CGPoint, flags NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *NSGraphicsContext, subtype int16, d1 int, d2 int) *NSEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEvent), _nSEventSelOtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeData1Data2, type_, location, flags, time_, wNum, unusedPassNil.Ptr(), subtype, d1, d2)
 	if _ret != 0 {
@@ -220,6 +236,7 @@ func NSEventOtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextS
 	return NSEventFromID(_ret)
 }
 
+// Installs an event monitor that receives copies of events the system posts to other applications.
 func NSEventAddGlobalMonitorForEventsMatchingMaskHandler(mask NSEventMask, block func(*NSEvent)) objc.ID {
 	var __block_block objc.Block
 	if block != nil {
@@ -235,11 +252,13 @@ func NSEventAddGlobalMonitorForEventsMatchingMaskHandler(mask NSEventMask, block
 	return _ret
 }
 
+// Installs an event monitor that receives copies of events the system posts to this app prior to their dispatch.
 func NSEventAddLocalMonitorForEventsMatchingMaskHandler(mask NSEventMask, block objc.Block) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEvent), _nSEventSelAddLocalMonitorForEventsMatchingMaskHandler, mask, block)
 	return _ret
 }
 
+// Removes the specified event monitor.
 func NSEventRemoveMonitor(eventMonitor objc.ID) {
 	objc.ID(_clsNSEvent).Send(_nSEventSelRemoveMonitor, eventMonitor)
 }

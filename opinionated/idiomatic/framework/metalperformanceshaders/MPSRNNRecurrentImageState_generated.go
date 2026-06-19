@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that holds all the data that’s passed from one sequence iteration of the image-based recurrent neural network layer (stack) to the next.
+//
 // RNNRecurrentImageState wraps [raw.MPSRNNRecurrentImageState] with a fluent Go API.
 type RNNRecurrentImageState struct {
 	inner *raw.MPSRNNRecurrentImageState

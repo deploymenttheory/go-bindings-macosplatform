@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract request type that builds evidence of a condition over time.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnstatefulrequest
 type VNStatefulRequest struct {
 	VNImageBasedRequest
@@ -34,7 +36,7 @@ func VNStatefulRequestFromID(id objc.ID) *VNStatefulRequest {
 	return o
 }
 
-// @brief Create a new video-based stateful request. @param frameAnalysisSpacing The reciprocal of maximum rate at which buffers will be processed. The request will not process buffers that fall within the frameAnalysisSpacing after it has performed the analysis. The analysis is not done by wall time but by analysis of of the time stamps of the samplebuffers being processed. @param completionHandler The block to be invoked after the request has completed its processing. The completion handler gets executed on the same dispatch queue as the request being executed.
+// Initializes a video-based request.
 func (o *VNStatefulRequest) InitWithFrameAnalysisSpacingCompletionHandler(frameAnalysisSpacing coremedia.CMTime, completionHandler func(*VNRequest, unsafe.Pointer)) *VNStatefulRequest {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

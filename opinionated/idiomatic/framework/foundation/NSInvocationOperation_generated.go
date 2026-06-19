@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An operation that manages the execution of a single encapsulated task specified as an invocation.
+//
 // InvocationOperation wraps [raw.NSInvocationOperation] with a fluent Go API.
 type InvocationOperation struct {
 	inner *raw.NSInvocationOperation
@@ -30,6 +32,8 @@ func InvocationOperationFromID(id objc.ID) *InvocationOperation {
 	return &InvocationOperation{inner: raw.NSInvocationOperationFromID(id)}
 }
 
+// Returns an NSInvocationOperation object initialized with the specified target and selector.
+//
 // NewInvocationOperationWithTargetSelectorObject creates a new [InvocationOperation].
 func NewInvocationOperationWithTargetSelectorObject(target objc.ID, sel objc.SEL, arg objc.ID) *InvocationOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSInvocationOperation")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewInvocationOperationWithTargetSelectorObject(target objc.ID, sel objc.SEL
 	return &InvocationOperation{inner: raw.NSInvocationOperationFromID(_id)}
 }
 
+// Returns an NSInvocationOperation object initialized with the specified invocation object.
+//
 // NewInvocationOperationWithInvocation creates a new [InvocationOperation].
 func NewInvocationOperationWithInvocation(inv *raw.NSInvocation) *InvocationOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSInvocationOperation")), objc.RegisterName("alloc"))

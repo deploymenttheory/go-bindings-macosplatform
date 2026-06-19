@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @brief Builds requirements that can be used for protecting a @c LARight
+// A set of requirements that protect a right.
 //
 // Apple documentation: https://developer.apple.com/documentation/localauthentication/laauthenticationrequirement
 type LAAuthenticationRequirement struct {
@@ -35,7 +35,7 @@ func LAAuthenticationRequirementFromID(id objc.ID) *LAAuthenticationRequirement 
 	return o
 }
 
-// @brief Requires biometric authentication or the given fallback method. @param fallback Fallback used in case biometry authentication fails, is not available or not preferred by the user. @return @c LAAuthenticationRequirement instance
+// Creates a requirement that requires biometric authentication or a fallback requirement that you specify.
 func LAAuthenticationRequirementBiometryRequirementWithFallback(fallback *LABiometryFallbackRequirement) *LAAuthenticationRequirement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsLAAuthenticationRequirement), _lAAuthenticationRequirementSelBiometryRequirementWithFallback, fallback.Ptr())
 	if _ret != 0 {

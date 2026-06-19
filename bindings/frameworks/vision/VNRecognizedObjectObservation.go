@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A detected object observation with an array of classification labels that classify the recognized object.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnrecognizedobjectobservation
 type VNRecognizedObjectObservation struct {
 	VNDetectedObjectObservation

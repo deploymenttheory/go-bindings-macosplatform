@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An obstacle with an impassible closed polygon
+// A polygon-shaped impassable area in a 2D game world.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkpolygonobstacle
 type GKPolygonObstacle struct {
@@ -36,7 +36,7 @@ func GKPolygonObstacleFromID(id objc.ID) *GKPolygonObstacle {
 	return o
 }
 
-// Creates a polygon obstacle with an array of points. @param points array of points in counter-clockwise order that are the vertices of a convex polygon @param numPoints the number of points in the array
+// Creates a polygon obstacle with the specified list of vertices.
 func GKPolygonObstacleObstacleWithPointsCount(points unsafe.Pointer, numPoints uint) *GKPolygonObstacle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKPolygonObstacle), _gKPolygonObstacleSelObstacleWithPointsCount, points, numPoints)
 	if _ret != 0 {
@@ -45,6 +45,7 @@ func GKPolygonObstacleObstacleWithPointsCount(points unsafe.Pointer, numPoints u
 	return GKPolygonObstacleFromID(_ret)
 }
 
+// Initializes a polygon obstacle with the specified list of vertices.
 func (o *GKPolygonObstacle) InitWithPointsCount(points unsafe.Pointer, numPoints uint) *GKPolygonObstacle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKPolygonObstacleSelInitWithPointsCount, points, numPoints)
 	if _ret != 0 {
@@ -53,7 +54,7 @@ func (o *GKPolygonObstacle) InitWithPointsCount(points unsafe.Pointer, numPoints
 	return GKPolygonObstacleFromID(_ret)
 }
 
-// Returns the vertex at the indicated index @param index index of the vertex to retrieve
+// Returns the point coordinates of the specified vertex.
 func (o *GKPolygonObstacle) VertexAtIndex(index uint) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _gKPolygonObstacleSelVertexAtIndex, index)
 	return _ret

@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that displays the contents of a certificate, with options to display certificate details, display trust settings, and allow users to edit a certificate’s trust settings.
+//
 // Apple documentation: https://developer.apple.com/documentation/securityinterface/sfcertificateview
 type SFCertificateView struct {
 	appkit.NSVisualEffectView
@@ -47,83 +49,86 @@ func SFCertificateViewFromID(id objc.ID) *SFCertificateView {
 	return o
 }
 
-// @method setCertificate: @abstract Specifies the certificate that's displayed in the view. @param certificate The new certificate for the view.
+// Specifies the certificate that’s displayed in the view.
 func (o *SFCertificateView) SetCertificate(certificate unsafe.Pointer) {
 	o.Ptr().Send(_sFCertificateViewSelSetCertificate, certificate)
 }
 
-// @method certificate @abstract Returns the certificate currently displayed in the view.
+// Returns the certificate currently displayed in the view.
 func (o *SFCertificateView) Certificate() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFCertificateViewSelCertificate)
 	return _ret
 }
 
-// @method setPolicies: @abstract Specifies one or more policies that apply to the displayed certificate. @param policies The policies to use when evaluating this certificate's status. You can pass either a SecPolicyRef or a NSArray (containing one or more SecPolicyRef instances) in this parameter. If policies is set to nil, the Apple X.509 Basic Policy will be used. @discussion Applications will typically display a SFCertificateView in the context of a specific usage, such as SSL or S/MIME. You should set only the policy references which apply to your intended usage.
+// Specifies the policies to use when evaluating this certificate’s status.
 func (o *SFCertificateView) SetPolicies(policies objc.ID) {
 	o.Ptr().Send(_sFCertificateViewSelSetPolicies, policies)
 }
 
-// @method policies @abstract Returns an array of policies used to evaluate the status of the displayed certificate. @discussion This method returns an autoreleased NSArray containing one or more SecPolicyRef instances, as set by a previous setPolicies: call. The array will always contain at least one item (the Apple X.509 Basic Policy).
+// Returns an array of policies used to evaluate the status of the displayed certificate.
 func (o *SFCertificateView) Policies() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _sFCertificateViewSelPolicies)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificateViewSelPolicies)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
-// @method setEditableTrust: @abstract Specifies whether the user can edit the certificate's trust settings. @param editable Pass YES if the trust settings should be editable.
+// Specifies whether the user can edit the certificate’s trust settings.
 func (o *SFCertificateView) SetEditableTrust(editable bool) {
 	o.Ptr().Send(_sFCertificateViewSelSetEditableTrust, editable)
 }
 
-// @method isEditable @abstract Indicates if the view allows the user to edit the certificate's trust.
+// Indicates if the view allows the user to edit the certificate’s trust.
 func (o *SFCertificateView) IsEditable() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelIsEditable)
 	return _ret
 }
 
-// @method setDisplayTrust: @abstract Specifies whether the user can see the certificate's trust settings. @param display Pass YES to display the trust settings, or NO to hide them. @discussion Certificate trust settings are not displayed by default. To show the certificate's trust settings, you must explicitly set the display value to YES.
+// Specifies whether the user can see the certificate’s trust settings.
 func (o *SFCertificateView) SetDisplayTrust(display bool) {
 	o.Ptr().Send(_sFCertificateViewSelSetDisplayTrust, display)
 }
 
-// @method isTrustDisplayed @abstract Indicates if the view currently shows the certificate's trust settings.
+// Indicates if the view currently shows the certificate’s trust settings.
 func (o *SFCertificateView) IsTrustDisplayed() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelIsTrustDisplayed)
 	return _ret
 }
 
-// @method saveTrustSettings @abstract Saves the user's current trust settings for the displayed certificate. @discussion If trust settings are not editable, this method effectively does nothing. You can use SecTrustGetUserTrust (see <Security/SecTrust.h>) to subsequently retrieve the trust settings.
+// Saves the user’s current trust settings for the displayed certificate.
 func (o *SFCertificateView) SaveTrustSettings() {
 	o.Ptr().Send(_sFCertificateViewSelSaveTrustSettings)
 }
 
-// @method setDisplayDetails: @abstract Specifies whether the user can see the certificate's entire contents. @param display Pass YES to display the certificate's details, or NO to hide them. @discussion For behavioral compatibility with Panther, certificate details are displayed by default. To hide the details of a certificate, you must explicitly set the display value to NO.
+// Specifies whether the user can see the certificate details.
 func (o *SFCertificateView) SetDisplayDetails(display bool) {
 	o.Ptr().Send(_sFCertificateViewSelSetDisplayDetails, display)
 }
 
-// @method detailsDisplayed @abstract Indicates if the view currently shows the certificate's details.
+// Indicates if the view currently shows the certificate’s details.
 func (o *SFCertificateView) DetailsDisplayed() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelDetailsDisplayed)
 	return _ret
 }
 
-// @method setDetailsDisclosed: @abstract Specifies whether the certificate details subview is disclosed (i.e. the triangle is turned down). @param disclosed Pass YES to disclose the certificate details subview, or NO to collapse it. @discussion By default, the certificate details subview is not disclosed. Note that changing the disclosure state of a line item does not affect whether the item itself is shown; use setDisplayDetails: to cause it to be displayed or hidden.
+// Sets whether the certificate details subview is disclosed.
 func (o *SFCertificateView) SetDetailsDisclosed(disclosed bool) {
 	o.Ptr().Send(_sFCertificateViewSelSetDetailsDisclosed, disclosed)
 }
 
-// @method detailsDisclosed @abstract Indicates if the view currently discloses the certificate's details.
+// Returns whether the view currently shows the certificate’s details.
 func (o *SFCertificateView) DetailsDisclosed() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelDetailsDisclosed)
 	return _ret
 }
 
-// @method setPoliciesDisclosed: @abstract Specifies whether the trust policy settings are disclosed (i.e. the triangle is turned down). @param disclosed Pass YES to disclose the trust policies subview, or NO to collapse it. @discussion By default, the trust policies subview is not disclosed. Note that changing the disclosure state of a line item does not affect whether the item itself is shown; use setDisplayTrust: to cause it to be displayed or hidden.
+// Specifies whether the trust policy settings subview is disclosed.
 func (o *SFCertificateView) SetPoliciesDisclosed(disclosed bool) {
 	o.Ptr().Send(_sFCertificateViewSelSetPoliciesDisclosed, disclosed)
 }
 
-// @method policiesDisclosed @abstract Indicates if the view currently discloses the trust policy settings.
+// Returns whether the trust policy subview is disclosed.
 func (o *SFCertificateView) PoliciesDisclosed() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelPoliciesDisclosed)
 	return _ret

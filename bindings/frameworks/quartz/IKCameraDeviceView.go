@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The IKCameraDeviceView class displays the contents of the selected camera.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/ikcameradeviceview
 type IKCameraDeviceView struct {
 	appkit.NSView
@@ -74,7 +76,7 @@ func IKCameraDeviceViewFromID(id objc.ID) *IKCameraDeviceView {
 	return o
 }
 
-// @method selectedIndexes @abstract current user selection.
+// The selected indexes of the camera files.
 func (o *IKCameraDeviceView) SelectedIndexes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelSelectedIndexes)
 	if _ret != 0 {
@@ -83,32 +85,32 @@ func (o *IKCameraDeviceView) SelectedIndexes() *foundation.NSIndexSet {
 	return foundation.NSIndexSetFromID(_ret)
 }
 
-// @method selectIndexes:byExtendingSelection: @abstract setting current user selection.
+// Invoked to select the specified files, extending the selection if specified.
 func (o *IKCameraDeviceView) SelectIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool) {
 	o.Ptr().Send(_iKCameraDeviceViewSelSelectIndexesByExtendingSelection, indexes.Ptr(), extend)
 }
 
-// @method rotateLeft: @abstract rotate selected items left.
+// Rotates the selected image to the left.
 func (o *IKCameraDeviceView) RotateLeft(sender objc.ID) {
 	o.Ptr().Send(_iKCameraDeviceViewSelRotateLeft, sender)
 }
 
-// @method rotateRight: @abstract rotate selected items right.
+// Rotates the selected image to the right.
 func (o *IKCameraDeviceView) RotateRight(sender objc.ID) {
 	o.Ptr().Send(_iKCameraDeviceViewSelRotateRight, sender)
 }
 
-// @method deleteSelectedItems: @abstract delete selected items.
+// Deletes the currently selected items.
 func (o *IKCameraDeviceView) DeleteSelectedItems(sender objc.ID) {
 	o.Ptr().Send(_iKCameraDeviceViewSelDeleteSelectedItems, sender)
 }
 
-// @method downloadSelectedItems: @abstract download selected items.
+// Deletes the selected items from the camera.
 func (o *IKCameraDeviceView) DownloadSelectedItems(sender objc.ID) {
 	o.Ptr().Send(_iKCameraDeviceViewSelDownloadSelectedItems, sender)
 }
 
-// @method downloadAllItems: @abstract download all items.
+// Downloads all the items.
 func (o *IKCameraDeviceView) DownloadAllItems(sender objc.ID) {
 	o.Ptr().Send(_iKCameraDeviceViewSelDownloadAllItems, sender)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Class that configures how MTRDevice objects persist their attributes to storage, so as to not overwhelm the underlying storage system.
+//
 // Apple documentation: https://developer.apple.com/documentation/matter/mtrdevicestoragebehaviorconfiguration
 type MTRDeviceStorageBehaviorConfiguration struct {
 	foundation.NSObject

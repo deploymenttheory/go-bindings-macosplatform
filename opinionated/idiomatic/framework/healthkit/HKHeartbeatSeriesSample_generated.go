@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A sample that represents a series of heartbeats.
+//
 // HeartbeatSeriesSample wraps [raw.HKHeartbeatSeriesSample] with a fluent Go API.
 type HeartbeatSeriesSample struct {
 	inner *raw.HKHeartbeatSeriesSample

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A parametric ReLU (Rectified Linear Unit) neuron filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronprelu
 type MPSCNNNeuronPReLU struct {
 	mpsneuralnetwork.MPSCNNNeuron

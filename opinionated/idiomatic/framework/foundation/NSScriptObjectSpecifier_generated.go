@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class used to represent natural language expressions.
+//
 // ScriptObjectSpecifier wraps [raw.NSScriptObjectSpecifier] with a fluent Go API.
 type ScriptObjectSpecifier struct {
 	inner *raw.NSScriptObjectSpecifier
@@ -30,6 +32,8 @@ func ScriptObjectSpecifierFromID(id objc.ID) *ScriptObjectSpecifier {
 	return &ScriptObjectSpecifier{inner: raw.NSScriptObjectSpecifierFromID(id)}
 }
 
+// Returns an NSScriptObjectSpecifier object initialized with a given container specifier and key.
+//
 // NewScriptObjectSpecifierWithContainerSpecifierKey creates a new [ScriptObjectSpecifier].
 func NewScriptObjectSpecifierWithContainerSpecifierKey(container *raw.NSScriptObjectSpecifier, property string) *ScriptObjectSpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScriptObjectSpecifier")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewScriptObjectSpecifierWithContainerSpecifierKey(container *raw.NSScriptOb
 	return &ScriptObjectSpecifier{inner: raw.NSScriptObjectSpecifierFromID(_id)}
 }
 
+// Returns an NSScriptObjectSpecifier object initialized with the given attributes.
+//
 // NewScriptObjectSpecifierWithContainerClassDescriptionContainerSpecifierKey creates a new [ScriptObjectSpecifier].
 func NewScriptObjectSpecifierWithContainerClassDescriptionContainerSpecifierKey(classDesc *raw.NSScriptClassDescription, container *raw.NSScriptObjectSpecifier, property string) *ScriptObjectSpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScriptObjectSpecifier")), objc.RegisterName("alloc"))
@@ -51,42 +57,56 @@ func NewScriptObjectSpecifierWithCoder(inCoder *raw.NSCoder) *ScriptObjectSpecif
 	return &ScriptObjectSpecifier{inner: raw.NSScriptObjectSpecifierFromID(_id)}
 }
 
+// Sets the receiver’s child reference.
+//
 // WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
 func (x *ScriptObjectSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *ScriptObjectSpecifier {
 	x.inner.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets the container specifier of the receiver.
+//
 // WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
 func (x *ScriptObjectSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *ScriptObjectSpecifier {
 	x.inner.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
+//
 // WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
 func (x *ScriptObjectSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *ScriptObjectSpecifier {
 	x.inner.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
 	return x
 }
 
+// Sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
+//
 // WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
 func (x *ScriptObjectSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *ScriptObjectSpecifier {
 	x.inner.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
 	return x
 }
 
+// Sets the key of the receiver.
+//
 // WithKey sets the key property and returns the receiver for chaining.
 func (x *ScriptObjectSpecifier) WithKey(key string) *ScriptObjectSpecifier {
 	x.inner.SetKey(foundation.NSStringStringWithUTF8String(key))
 	return x
 }
 
+// Sets the class description of the receiver’s container specifier to a given specifier.
+//
 // WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
 func (x *ScriptObjectSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *ScriptObjectSpecifier {
 	x.inner.SetContainerClassDescription(containerClassDescription.Unwrap())
 	return x
 }
 
+// Sets the value of the evaluation error.
+//
 // WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
 func (x *ScriptObjectSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *ScriptObjectSpecifier {
 	x.inner.SetEvaluationErrorNumber(evaluationErrorNumber)
@@ -99,11 +119,15 @@ func (x *ScriptObjectSpecifier) WithScriptingProperties(scriptingProperties *raw
 	return x
 }
 
+// This primitive method must be overridden by subclasses to return a pointer to an array of indices identifying objects in the key of a given container that are identified by the receiver of the message.
+//
 // IndicesOfObjectsByEvaluatingWithContainerCount calls the underlying IndicesOfObjectsByEvaluatingWithContainerCount.
 func (x *ScriptObjectSpecifier) IndicesOfObjectsByEvaluatingWithContainerCount(container objc.ID, count *int64) *int64 {
 	return x.inner.IndicesOfObjectsByEvaluatingWithContainerCount(container, count)
 }
 
+// Returns the actual object or objects specified by the receiver as evaluated in the context of given container object.
+//
 // ObjectsByEvaluatingWithContainers calls the underlying ObjectsByEvaluatingWithContainers.
 func (x *ScriptObjectSpecifier) ObjectsByEvaluatingWithContainers(containers objc.ID) objc.ID {
 	return x.inner.ObjectsByEvaluatingWithContainers(containers)

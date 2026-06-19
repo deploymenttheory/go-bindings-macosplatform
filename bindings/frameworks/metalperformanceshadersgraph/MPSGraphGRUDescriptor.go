@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The class that defines the parameters for a gated recurrent unit (GRU) operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphgrudescriptor
 type MPSGraphGRUDescriptor struct {
 	MPSGraphObject

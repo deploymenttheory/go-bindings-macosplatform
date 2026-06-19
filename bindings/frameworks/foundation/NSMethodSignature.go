@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A record of the type information for the return value and parameters of a method.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmethodsignature
 type NSMethodSignature struct {
 	NSObject
@@ -37,6 +39,7 @@ func NSMethodSignatureFromID(id objc.ID) *NSMethodSignature {
 	return o
 }
 
+// Returns an NSMethodSignature object for the given Objective-C method type string.
 func NSMethodSignatureSignatureWithObjCTypes(types string) *NSMethodSignature {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMethodSignature), _nSMethodSignatureSelSignatureWithObjCTypes, types)
 	if _ret != 0 {
@@ -45,11 +48,13 @@ func NSMethodSignatureSignatureWithObjCTypes(types string) *NSMethodSignature {
 	return NSMethodSignatureFromID(_ret)
 }
 
+// Returns the type encoding for the argument at a given index.
 func (o *NSMethodSignature) GetArgumentTypeAtIndex(idx uint) string {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMethodSignatureSelGetArgumentTypeAtIndex, idx)
 	return purego.GoString(_ret)
 }
 
+// Whether the receiver is asynchronous when invoked through distributed objects.
 func (o *NSMethodSignature) IsOneway() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMethodSignatureSelIsOneway)
 	return _ret

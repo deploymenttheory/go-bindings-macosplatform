@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the parameters that you apply when adding an audio track to a mix.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avaudiomixinputparameters
 type AVAudioMixInputParameters struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func AVAudioMixInputParametersFromID(id objc.ID) *AVAudioMixInputParameters {
 	return o
 }
 
+// Retrieves the volume ramp that includes the specified time.
 func (o *AVAudioMixInputParameters) GetVolumeRampForTimeStartVolumeEndVolumeTimeRange(time_ coremedia.CMTime, startVolume *float32, endVolume *float32, timeRange *coremedia.CMTimeRange) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioMixInputParametersSelGetVolumeRampForTimeStartVolumeEndVolumeTimeRange, time_, startVolume, endVolume, timeRange)
 	return _ret

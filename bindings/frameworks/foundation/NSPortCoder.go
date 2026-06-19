@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A coder used to transmit object proxies (and sometimes objects themselves) between connections.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsportcoder
 // Deprecated: Use NSXPCConnection instead
 type NSPortCoder struct {
@@ -37,21 +39,25 @@ func NSPortCoderFromID(id objc.ID) *NSPortCoder {
 	return o
 }
 
+// Returns a Boolean value that indicates whether the receiver is encoding an object by copying it.
 // Deprecated: Use NSXPCConnection instead
 func (o *NSPortCoder) IsBycopy() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPortCoderSelIsBycopy)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the receiver is encoding an object by reference.
 func (o *NSPortCoder) IsByref() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPortCoderSelIsByref)
 	return _ret
 }
 
+// Encodes a given port so it can be properly reconstituted in the receiving process or thread.
 func (o *NSPortCoder) EncodePortObject(aport *NSPort) {
 	o.Ptr().Send(_nSPortCoderSelEncodePortObject, aport.Ptr())
 }
 
+// Decodes and returns an NSPort object that was previously encoded with any of the general encode...Object: messages.
 func (o *NSPortCoder) DecodePortObject() *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortCoderSelDecodePortObject)
 	if _ret != 0 {
@@ -60,6 +66,7 @@ func (o *NSPortCoder) DecodePortObject() *NSPort {
 	return NSPortFromID(_ret)
 }
 
+// Returns the NSConnection object that uses the receiver.
 // Deprecated: since macOS 10.7.
 func (o *NSPortCoder) Connection() *NSConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortCoderSelConnection)
@@ -69,18 +76,21 @@ func (o *NSPortCoder) Connection() *NSConnection {
 	return NSConnectionFromID(_ret)
 }
 
+// Creates and returns a new NSPortCoder object.
 // Deprecated: since macOS 10.7.
 func NSPortCoderPortCoderWithReceivePortSendPortComponents(rcvPort *NSPort, sndPort *NSPort, comps *NSArray[objc.ID]) objc.ID {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPortCoder), _nSPortCoderSelPortCoderWithReceivePortSendPortComponents, rcvPort.Ptr(), sndPort.Ptr(), comps)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPortCoder), _nSPortCoderSelPortCoderWithReceivePortSendPortComponents, rcvPort.Ptr(), sndPort.Ptr(), comps.Ptr())
 	return _ret
 }
 
+// Initializes and returns an NSPortCoder object.
 // Deprecated: since macOS 10.7.
 func (o *NSPortCoder) InitWithReceivePortSendPortComponents(rcvPort *NSPort, sndPort *NSPort, comps *NSArray[objc.ID]) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortCoderSelInitWithReceivePortSendPortComponents, rcvPort.Ptr(), sndPort.Ptr(), comps)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortCoderSelInitWithReceivePortSendPortComponents, rcvPort.Ptr(), sndPort.Ptr(), comps.Ptr())
 	return _ret
 }
 
+// Processes and acts upon the distributed object message with which the receiver was initialized.
 // Deprecated: since macOS 10.7.
 func (o *NSPortCoder) Dispatch() {
 	o.Ptr().Send(_nSPortCoderSelDispatch)

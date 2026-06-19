@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The result of translation or back-translation.
+//
 // Apple documentation: https://developer.apple.com/documentation/accessibility/axbrailletranslationresult
 type AXBrailleTranslationResult struct {
 	foundation.NSObject
@@ -42,6 +44,9 @@ func (o *AXBrailleTranslationResult) ResultString() *foundation.NSString {
 
 // An array of integers that has the same length as the resultString. locationMap[i]-th character in the input string corresponds to resultString[i].
 func (o *AXBrailleTranslationResult) LocationMap() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aXBrailleTranslationResultSelLocationMap)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aXBrailleTranslationResultSelLocationMap)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

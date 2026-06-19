@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A subscription that generates push notifications when CloudKit modifies records in a database.
+//
 // DatabaseSubscription wraps [raw.CKDatabaseSubscription] with a fluent Go API.
 type DatabaseSubscription struct {
 	inner *raw.CKDatabaseSubscription
@@ -37,7 +39,7 @@ func NewDatabaseSubscription() *DatabaseSubscription {
 	return &DatabaseSubscription{inner: raw.CKDatabaseSubscriptionFromID(_id)}
 }
 
-// Creates a named subscription for all records in a database. - Parameters: - subscriptionID: The subscription's name. It must be unique in the container, and must not be `nil` or an empty string.
+// Creates a named subscription for all records in a database.
 //
 // NewDatabaseSubscriptionWithSubscriptionID creates a new [DatabaseSubscription].
 func NewDatabaseSubscriptionWithSubscriptionID(subscriptionID *foundation.NSString) *DatabaseSubscription {
@@ -46,7 +48,7 @@ func NewDatabaseSubscriptionWithSubscriptionID(subscriptionID *foundation.NSStri
 	return &DatabaseSubscription{inner: raw.CKDatabaseSubscriptionFromID(_id)}
 }
 
-// Creates a database subscription from a serialized instance. - Parameters: - aDecoder: The object that decodes the serialized database subscription.
+// Creates a database subscription from a serialized instance.
 //
 // NewDatabaseSubscriptionWithCoder creates a new [DatabaseSubscription].
 func NewDatabaseSubscriptionWithCoder(aDecoder *foundation.NSCoder) *DatabaseSubscription {
@@ -63,7 +65,7 @@ func (x *DatabaseSubscription) WithRecordType(recordType *foundation.NSString) *
 	return x
 }
 
-// The configuration for a subscription's push notifications. If you want the system to display your subscription's push notifications, assign a value to this property. The server uses the configuration you provide to determine the delivery options for notifications. For example, you can specify the text to display to the user, and the sound to play. You can also specify which fields of the record to include in the notification's payload. If you don't assign a value to this property, CloudKit still sends push notifications, but the system doesn't display them to the user. The default value of this property is `nil`.
+// The configuration for a subscription’s push notifications.
 //
 // WithNotificationInfo sets the notificationInfo property and returns the receiver for chaining.
 func (x *DatabaseSubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *DatabaseSubscription {

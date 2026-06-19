@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter provider that evaluates network packets and decides whether to block, allow, or delay the packets.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nefilterpacketprovider
 type NEFilterPacketProvider struct {
 	NEFilterProvider
@@ -35,7 +37,7 @@ func NEFilterPacketProviderFromID(id objc.ID) *NEFilterPacketProvider {
 	return o
 }
 
-// @method delayCurrentPacket @discussion This function is used to delay a packet currently presented by packetHandler. This function is only valid within the packetHandler block and a verdict of NEFilterPacketProviderVerdictDelay must be returned after a packet is delayed.  A delayed packet will be prevented from continuing its journey through the networking stack until it is either allowed by calling allow() or is dropped by being released. @param context The context of the current packet filter which is passed to the packetHandler block. The packetHandler block must pass this context when calling delayCurrentPacket().
+// Delay a packet currently processed by a packet handler.
 func (o *NEFilterPacketProvider) DelayCurrentPacket(context_ *NEFilterPacketContext) *NEPacket {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterPacketProviderSelDelayCurrentPacket, context_.Ptr())
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *NEFilterPacketProvider) DelayCurrentPacket(context_ *NEFilterPacketCont
 	return NEPacketFromID(_ret)
 }
 
-// @method allowPacket: @discussion This function is used to allow a previously-delayed packet to continue its journey into or out of the networking stack. @param packet A NEPacket object that contains the data of the packet that was previously delayed by the NEFilterPacketProvider.
+// Allow delivery of a previously-delayed packet.
 func (o *NEFilterPacketProvider) AllowPacket(packet *NEPacket) {
 	o.Ptr().Send(_nEFilterPacketProviderSelAllowPacket, packet.Ptr())
 }

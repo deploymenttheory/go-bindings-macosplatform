@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layout that organizes items into a flexible and configurable arrangement.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionviewflowlayout
 type NSCollectionViewFlowLayout struct {
 	NSCollectionViewLayout

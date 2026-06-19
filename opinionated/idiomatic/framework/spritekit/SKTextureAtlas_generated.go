@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of textures optimized for storage and drawing performance.
+//
 // TextureAtlas wraps [raw.SKTextureAtlas] with a fluent Go API.
 type TextureAtlas struct {
 	inner *raw.SKTextureAtlas
@@ -38,6 +40,8 @@ func NewTextureAtlas() *TextureAtlas {
 	return &TextureAtlas{inner: raw.SKTextureAtlasFromID(_id)}
 }
 
+// Creates a texture from data stored in the texture atlas.
+//
 // TextureNamed calls the underlying TextureNamed.
 func (x *TextureAtlas) TextureNamed(name string) *Texture {
 	_r := x.inner.TextureNamed(foundation.NSStringStringWithUTF8String(name))
@@ -47,7 +51,7 @@ func (x *TextureAtlas) TextureNamed(name string) *Texture {
 	return &Texture{inner: _r}
 }
 
-// Request that this texture atlas be loaded into vram on the next render update, with a callback handler.
+// Loads an atlas object’s textures into memory, calling a completion handler after the task completes.
 //
 // Preload blocks until the operation completes or ctx is cancelled.
 func (x *TextureAtlas) Preload(ctx context.Context) error {

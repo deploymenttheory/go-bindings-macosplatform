@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object you use to read and write packets to and from the tunnel’s virtual interface.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nepackettunnelflow
 type NEPacketTunnelFlow struct {
 	foundation.NSObject
@@ -33,18 +35,31 @@ func NEPacketTunnelFlowFromID(id objc.ID) *NEPacketTunnelFlow {
 	return o
 }
 
-// @method readPacketsWithCompletionHandler: @discussion Read available IP packets from the flow. @param completionHandler A block that will be executed to handle the packets. This block takes an array of NSData objects and an array of NSNumber objects. The NSData and NSNumber in corresponding indicies in the array represent one packet. If after handling the packets the caller wants to read more packets then the caller must call this method again.
-func (o *NEPacketTunnelFlow) ReadPacketsWithCompletionHandler(completionHandler objc.Block) {
-	o.Ptr().Send(_nEPacketTunnelFlowSelReadPacketsWithCompletionHandler, completionHandler)
+// Reads IP packets from the TUN interface.
+func (o *NEPacketTunnelFlow) ReadPacketsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSData], *foundation.NSArray[*foundation.NSNumber])) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[*foundation.NSData](blockParam0), foundation.NSArrayFromID[*foundation.NSNumber](blockParam1))
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_nEPacketTunnelFlowSelReadPacketsWithCompletionHandler, __block_completionHandler)
 }
 
-// @method writePackets:completionHandler: @discussion Write multiple IP packets to the flow. @param packets An array of NSData objects, each containing packet data to be written. @param protocols An array of NSNumber objects. Each number contains the protocol of the packet in the corresponding index in the packets array.
+// Writes IP packets to the TUN interface.
 func (o *NEPacketTunnelFlow) WritePacketsWithProtocols(packets *foundation.NSArray[*foundation.NSData], protocols *foundation.NSArray[*foundation.NSNumber]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nEPacketTunnelFlowSelWritePacketsWithProtocols, packets, protocols)
+	_ret := objc.Send[bool](o.Ptr(), _nEPacketTunnelFlowSelWritePacketsWithProtocols, packets.Ptr(), protocols.Ptr())
 	return _ret
 }
 
-// @method readPacketObjectsWithCompletionHandler: @discussion Read available IP packets from the flow. @param completionHandler A block that will be executed to handle the packets. This block takes an array of NEPacket objects. If after handling the packets the caller wants to read more packets then the caller must call this method again.
+// Read multiple IP packets from the TUN interface.
 func (o *NEPacketTunnelFlow) ReadPacketObjectsWithCompletionHandler(completionHandler func(*foundation.NSArray[*NEPacket])) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -59,7 +74,7 @@ func (o *NEPacketTunnelFlow) ReadPacketObjectsWithCompletionHandler(completionHa
 	o.Ptr().Send(_nEPacketTunnelFlowSelReadPacketObjectsWithCompletionHandler, __block_completionHandler)
 }
 
-// @method writePacketObjects: @discussion Write multiple IP packets to the flow. @param packets An array of NEPacket objects, each containing packet data and protocol family to be written.
+// Write multiple IP packets to the TUN interface.
 func (o *NEPacketTunnelFlow) WritePacketObjects(packets *foundation.NSArray[*NEPacket]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nEPacketTunnelFlowSelWritePacketObjects, packets.Ptr())
 	return _ret

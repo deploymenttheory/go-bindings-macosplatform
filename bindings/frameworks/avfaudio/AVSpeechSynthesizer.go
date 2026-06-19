@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that produces synthesized speech from text utterances and enables monitoring or controlling of ongoing speech.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avspeechsynthesizer
 type AVSpeechSynthesizer struct {
 	foundation.NSObject
@@ -41,10 +43,12 @@ func AVSpeechSynthesizerFromID(id objc.ID) *AVSpeechSynthesizer {
 	return o
 }
 
+// Adds the utterance you specify to the speech synthesizer’s queue.
 func (o *AVSpeechSynthesizer) SpeakUtterance(utterance *AVSpeechUtterance) {
 	o.Ptr().Send(_aVSpeechSynthesizerSelSpeakUtterance, utterance.Ptr())
 }
 
+// Generates speech for the utterance and invokes the callback with the audio buffer.
 func (o *AVSpeechSynthesizer) WriteUtteranceToBufferCallback(utterance *AVSpeechUtterance, bufferCallback func(*AVAudioBuffer)) {
 	var __block_bufferCallback objc.Block
 	if bufferCallback != nil {
@@ -59,7 +63,7 @@ func (o *AVSpeechSynthesizer) WriteUtteranceToBufferCallback(utterance *AVSpeech
 	o.Ptr().Send(_aVSpeechSynthesizerSelWriteUtteranceToBufferCallback, utterance.Ptr(), __block_bufferCallback)
 }
 
-// Use this method to receive audio buffers and associated metadata that can be used to store or further process synthesized speech. The dictionary provided by -[AVSpeechSynthesisVoice audioFileSettings] can be used to create an AVAudioFile.
+// Generates audio buffers and associated metadata for storage or further speech synthesis processing.
 func (o *AVSpeechSynthesizer) WriteUtteranceToBufferCallbackToMarkerCallback(utterance *AVSpeechUtterance, bufferCallback func(*AVAudioBuffer), markerCallback func(*foundation.NSArray[*AVSpeechSynthesisMarker])) {
 	var __block_bufferCallback objc.Block
 	if bufferCallback != nil {
@@ -84,22 +88,25 @@ func (o *AVSpeechSynthesizer) WriteUtteranceToBufferCallbackToMarkerCallback(utt
 	o.Ptr().Send(_aVSpeechSynthesizerSelWriteUtteranceToBufferCallbackToMarkerCallback, utterance.Ptr(), __block_bufferCallback, __block_markerCallback)
 }
 
+// Stops speech at the boundary you specify.
 func (o *AVSpeechSynthesizer) StopSpeakingAtBoundary(boundary AVSpeechBoundary) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVSpeechSynthesizerSelStopSpeakingAtBoundary, boundary)
 	return _ret
 }
 
+// Pauses speech at the boundary you specify.
 func (o *AVSpeechSynthesizer) PauseSpeakingAtBoundary(boundary AVSpeechBoundary) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVSpeechSynthesizerSelPauseSpeakingAtBoundary, boundary)
 	return _ret
 }
 
+// Resumes speech from its paused point.
 func (o *AVSpeechSynthesizer) ContinueSpeaking() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVSpeechSynthesizerSelContinueSpeaking)
 	return _ret
 }
 
-// Asks the user to allow your app to use personal voices for speech synthesis Call this method before performing any other tasks associated with speech synthesis using personal voices. This method executes asynchronously, returning shortly after you call it. At some point later, the system calls the provided handler block with the results. When your app's authorization status is PersonalVoiceAuthorizationStatus.notDetermined, this method causes the system to prompt the user to grant or deny permission for your app to use personal voices. The user's response is saved so that future calls to this method do not prompt the user again.
+// Prompts the user to authorize your app to use personal voices.
 func AVSpeechSynthesizerRequestPersonalVoiceAuthorizationWithCompletionHandler(handler func(AVSpeechSynthesisPersonalVoiceAuthorizationStatus)) {
 	var __block_handler objc.Block
 	if handler != nil {

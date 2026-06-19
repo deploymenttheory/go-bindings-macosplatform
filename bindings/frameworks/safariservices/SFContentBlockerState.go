@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The state of a content blocker extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/safariservices/sfcontentblockerstate
 type SFContentBlockerState struct {
 	foundation.NSObject

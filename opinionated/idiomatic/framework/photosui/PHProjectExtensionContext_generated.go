@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides Photos project extensions with access to the underlying project, as well as to the user’s photo library for editing.
+//
 // ProjectExtensionContext wraps [raw.PHProjectExtensionContext] with a fluent Go API.
 type ProjectExtensionContext struct {
 	inner *raw.PHProjectExtensionContext
@@ -37,14 +39,14 @@ func NewProjectExtensionContext() *ProjectExtensionContext {
 	return &ProjectExtensionContext{inner: raw.PHProjectExtensionContextFromID(_id)}
 }
 
-// Invokes the Photos Editor for the given asset. @param asset The asset to edit. @note The extension should observe library changes to get notified when assets are changed/edited. @see PHPhotoLibraryChangeObserver
+// Invokes the built-in photo editor for the given asset.
 //
 // ShowEditorForAsset calls the underlying ShowEditorForAsset.
 func (x *ProjectExtensionContext) ShowEditorForAsset(asset *photos.PHAsset) {
 	x.inner.ShowEditorForAsset(asset)
 }
 
-// Creates an updated PHProjectInfo from the given projectInfo and the current assets in the PHProject. If the existingProjectInfo is not nil the extension sections will be update to reflect any deletions from the photo library and a new section is appended for any assets in the project which weren't referenced in existingProjectInfo. @param existingProjectInfo PHProjectInfo to update. If existingProjectInfo is nil a new PHProjectInfo will be created from all assets in the PHProject. @param completion          Completion block that is called with the update result. updatedProjectInfo is the updated project info, if the update was cancelled it might be nil. @return NSProgress which can be observed, if it's canceled the original project info is returned.
+// Creates an updated PHProjectInfo instance from existing project information and current assets.
 //
 // UpdatedProjectInfoFromProjectInfoCompletion calls the underlying UpdatedProjectInfoFromProjectInfoCompletion.
 func (x *ProjectExtensionContext) UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo *raw.PHProjectInfo, completion func(*raw.PHProjectInfo)) *foundation.NSProgress {

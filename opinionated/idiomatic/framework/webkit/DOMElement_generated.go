@@ -486,6 +486,8 @@ func (x *DOMElement) ScrollByPages(pages int) {
 	x.inner.ScrollByPages(pages)
 }
 
+// Returns an image associated with the receiver.
+//
 // Image calls the underlying Image.
 func (x *DOMElement) Image() *appkit.NSImage {
 	return x.inner.Image()

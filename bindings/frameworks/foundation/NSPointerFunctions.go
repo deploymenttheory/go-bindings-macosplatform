@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance of NSPointerFunctions defines callout functions appropriate for managing a pointer reference held somewhere else.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nspointerfunctions
 type NSPointerFunctions struct {
 	NSObject
@@ -48,6 +50,7 @@ func NSPointerFunctionsFromID(id objc.ID) *NSPointerFunctions {
 	return o
 }
 
+// Returns an NSPointerFunctions object initialized with the given options.
 func (o *NSPointerFunctions) InitWithOptions(options NSPointerFunctionsOptions) *NSPointerFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPointerFunctionsSelInitWithOptions, options)
 	if _ret != 0 {
@@ -56,6 +59,7 @@ func (o *NSPointerFunctions) InitWithOptions(options NSPointerFunctionsOptions) 
 	return NSPointerFunctionsFromID(_ret)
 }
 
+// Returns a new NSPointerFunctions object initialized with the given options.
 func NSPointerFunctionsPointerFunctionsWithOptions(options NSPointerFunctionsOptions) *NSPointerFunctions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPointerFunctions), _nSPointerFunctionsSelPointerFunctionsWithOptions, options)
 	if _ret != 0 {

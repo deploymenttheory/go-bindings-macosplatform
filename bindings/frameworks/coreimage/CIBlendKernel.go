@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A GPU-based image-processing routine that is optimized for blending two images.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/ciblendkernel
 type CIBlendKernel struct {
 	CIColorKernel
@@ -75,6 +77,7 @@ func CIBlendKernelFromID(id objc.ID) *CIBlendKernel {
 	return o
 }
 
+// Creates a custom blend kernel from a program string.
 func CIBlendKernelKernelWithString(string_ *foundation.NSString) *CIBlendKernel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIBlendKernel), _cIBlendKernelSelKernelWithString, string_.Ptr())
 	if _ret != 0 {
@@ -83,6 +86,7 @@ func CIBlendKernelKernelWithString(string_ *foundation.NSString) *CIBlendKernel 
 	return CIBlendKernelFromID(_ret)
 }
 
+// Creates a new image using the blend kernel and specified foreground and background images.
 func (o *CIBlendKernel) ApplyWithForegroundBackground(foreground *CIImage, background *CIImage) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIBlendKernelSelApplyWithForegroundBackground, foreground.Ptr(), background.Ptr())
 	if _ret != 0 {

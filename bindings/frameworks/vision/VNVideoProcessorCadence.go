@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the cadence at which to process video.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnvideoprocessorcadence
 type VNVideoProcessorCadence struct {
 	foundation.NSObject

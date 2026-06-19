@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A CBIdentityPicker object allows a user to select identities—for example, user or group objects—that it wants one or more services or shared resources to have access to. An identity picker can be displayed either as an application-modal dialog or as a sheet attached to a document window. An identity picker returns the selected records to be added to access control lists using Collaboration. If a selected record is not a user or group identity, then an identity picker prompts the user for additional information—such as a password—to promote that record to a sharing account.
+//
 // Apple documentation: https://developer.apple.com/documentation/collaboration/cbidentitypicker
 type CBIdentityPicker struct {
 	foundation.NSObject
@@ -40,19 +42,19 @@ func CBIdentityPickerFromID(id objc.ID) *CBIdentityPicker {
 	return o
 }
 
-// Runs the receiver as an application-modal dialog. The receiver may create identities for selected records if necessary. - Returns: `NSOKButton` if the user selected OK; otherwise, `NSCancelButton`.
+// Runs the receiver as an application-modal dialog.
 func (o *CBIdentityPicker) RunModal() int {
 	_ret := objc.Send[int](o.Ptr(), _cBIdentityPickerSelRunModal)
 	return _ret
 }
 
-// Runs the receiver modally as a sheet attached to a specified window. The `didEndSelector` parameter is a selector that takes three arguments. The corresponding method should have a declaration modeled on the following example: ```swift - (void)identityPickerDidEnd:(CBIdentityPicker *)identityPicker returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo; ``` where the `identityPicker` argument is the identity picker object, the `returnCode` argument is the button the user clicked, and `contextInfo` is the same `contextInfo` argument that was passed in the original message. - Parameters: - window: The parent window for the sheet. - delegate: The delegate for the modal session. - didEndSelector: A message sent to the delegate after the user responds but before the sheet is dismissed. - contextInfo: Contextual data passed to the delegate in the `didEndSelector` message.
+// Runs the receiver modally as a sheet attached to a specified window.
 // Deprecated: since macOS 10.11.
 func (o *CBIdentityPicker) RunModalForWindowModalDelegateDidEndSelectorContextInfo(window *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_cBIdentityPickerSelRunModalForWindowModalDelegateDidEndSelectorContextInfo, window.Ptr(), delegate, didEndSelector, contextInfo)
 }
 
-// Runs the identity picker modally as a sheet attached to a specified window. - Parameters: - window: The parent window for the sheet. - completionHandler: The handler to run after the return value is known, but before the sheet is dismissed.
+// Runs the identity picker modally as a sheet attached to a specified window.
 func (o *CBIdentityPicker) RunModalForWindowCompletionHandler(window *appkit.NSWindow, completionHandler func(int)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

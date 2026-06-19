@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A query for reading activity summary objects from the HealthKit store.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkactivitysummaryquery
 type HKActivitySummaryQuery struct {
 	HKQuery
@@ -34,7 +36,7 @@ func HKActivitySummaryQueryFromID(id objc.ID) *HKActivitySummaryQuery {
 	return o
 }
 
-// @method        initWithPredicate:resultsHandler: @abstract      Returns a query that will retrieve HKActivitySummaries matching the given predicate. @discussion    If no updateHandler is set on the query, the query will automatically stop after calling resultsHandler. Otherwise, the query continues to run and calls the updateHandler as HKActivitySummaries matching the predicate are updated. @param         predicate  The predicate which HKActivitySummaries should match. @param         handler    The block to invoke with results when the query has finished.
+// Initializes a new active summary query.
 func (o *HKActivitySummaryQuery) InitWithPredicateResultsHandler(predicate *foundation.NSPredicate, handler func(*HKActivitySummaryQuery, *foundation.NSArray[*HKActivitySummary], unsafe.Pointer)) *HKActivitySummaryQuery {
 	var __block_handler objc.Block
 	if handler != nil {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request to fulfill in your app or Intents extension.
+//
 // Intent wraps [raw.INIntent] with a fluent Go API.
 type Intent struct {
 	inner *raw.INIntent
@@ -37,6 +39,8 @@ func NewIntent() *Intent {
 	return &Intent{inner: raw.INIntentFromID(_id)}
 }
 
+// The intent’s display name.
+//
 // WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
 func (x *Intent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *Intent {
 	x.inner.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
@@ -49,11 +53,15 @@ func (x *Intent) WithDonationMetadata(donationMetadata IntentDonationMetadataPro
 	return x
 }
 
+// Sets the image to use for the specified parameter.
+//
 // SetImageForParameterNamed calls the underlying SetImageForParameterNamed.
 func (x *Intent) SetImageForParameterNamed(image *raw.INImage, parameterName string) {
 	x.inner.SetImageForParameterNamed(image, foundation.NSStringStringWithUTF8String(parameterName))
 }
 
+// Returns the image associated with the specified parameter.
+//
 // ImageForParameterNamed calls the underlying ImageForParameterNamed.
 func (x *Intent) ImageForParameterNamed(parameterName string) *Image {
 	_r := x.inner.ImageForParameterNamed(foundation.NSStringStringWithUTF8String(parameterName))
@@ -63,6 +71,8 @@ func (x *Intent) ImageForParameterNamed(parameterName string) *Image {
 	return &Image{inner: _r}
 }
 
+// The most relevant image to display to the user.
+//
 // KeyImage calls the underlying KeyImage.
 func (x *Intent) KeyImage() *Image {
 	_r := x.inner.KeyImage()

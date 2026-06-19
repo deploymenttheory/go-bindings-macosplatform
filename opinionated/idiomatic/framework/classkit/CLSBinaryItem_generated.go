@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Activity information that is true or false, pass or fail, yes or no.
+//
 // BinaryItem wraps [raw.CLSBinaryItem] with a fluent Go API.
 type BinaryItem struct {
 	inner *raw.CLSBinaryItem
@@ -30,7 +32,7 @@ func BinaryItemFromID(id objc.ID) *BinaryItem {
 	return &BinaryItem{inner: raw.CLSBinaryItemFromID(id)}
 }
 
-// @abstract      Create an item that represents a binary value @param         title           Title of the CLSBinaryItem. @param         identifier      An identifier that is unique within its owning activity. @param         valueType       The type of binary value. Ex. pass or fail.
+// Initializes a new binary activity item of the given type.
 //
 // NewBinaryItemWithIdentifierTitleType creates a new [BinaryItem].
 func NewBinaryItemWithIdentifierTitleType(identifier string, title string, valueType CLSBinaryValueType) *BinaryItem {
@@ -39,7 +41,7 @@ func NewBinaryItemWithIdentifierTitleType(identifier string, title string, value
 	return &BinaryItem{inner: raw.CLSBinaryItemFromID(_id)}
 }
 
-// @abstract      True or false value.
+// The value that the binary activity item takes.
 //
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *BinaryItem) WithValue(value bool) *BinaryItem {
@@ -47,7 +49,7 @@ func (x *BinaryItem) WithValue(value bool) *BinaryItem {
 	return x
 }
 
-// @abstract      Title of what this ActivityItem represents. @discussion    This will be the title associated with the activity item in the generated progress report.
+// A human readable name for the activity item.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *BinaryItem) WithTitle(title string) *BinaryItem {

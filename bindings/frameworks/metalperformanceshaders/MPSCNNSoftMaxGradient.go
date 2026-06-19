@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A gradient softmax filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnsoftmaxgradient
 type MPSCNNSoftMaxGradient struct {
 	mpsneuralnetwork.MPSCNNGradientKernel

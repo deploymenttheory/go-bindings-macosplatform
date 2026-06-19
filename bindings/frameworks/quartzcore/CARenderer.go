@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that allows an application to render a layer tree into a Core OpenGL context.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/carenderer
 type CARenderer struct {
 	foundation.NSObject
@@ -47,44 +49,52 @@ func CARendererFromID(id objc.ID) *CARenderer {
 	return o
 }
 
+// Creates and returns a CARenderer instance with the render target specified by the Core OpenGL context.
 func CARendererRendererWithCGLContextOptions(ctx unsafe.Pointer, dict *foundation.NSDictionary[objc.ID, objc.ID]) *CARenderer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCARenderer), _cARendererSelRendererWithCGLContextOptions, ctx, dict)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCARenderer), _cARendererSelRendererWithCGLContextOptions, ctx, dict.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CARendererFromID(_ret)
 }
 
+// Creates a layer renderer from a Metal texture.
 func CARendererRendererWithMTLTextureOptions(tex metal.MTLTexture, dict *foundation.NSDictionary[objc.ID, objc.ID]) *CARenderer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCARenderer), _cARendererSelRendererWithMTLTextureOptions, tex, dict)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCARenderer), _cARendererSelRendererWithMTLTextureOptions, tex, dict.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CARendererFromID(_ret)
 }
 
+// Begin rendering a frame at the specified time.
 func (o *CARenderer) BeginFrameAtTimeTimeStamp(t float64, ts *corevideo.CVTimeStamp) {
 	o.Ptr().Send(_cARendererSelBeginFrameAtTimeTimeStamp, t, ts)
 }
 
+// Returns the bounds of the update region that contains all pixels that will be rendered by the current frame.
 func (o *CARenderer) UpdateBounds() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _cARendererSelUpdateBounds)
 	return _ret
 }
 
+// Adds the rectangle to the update region of the current frame.
 func (o *CARenderer) AddUpdateRect(r corefoundation.CGRect) {
 	o.Ptr().Send(_cARendererSelAddUpdateRect, r)
 }
 
+// Render the update region of the current frame to the target context.
 func (o *CARenderer) Render() {
 	o.Ptr().Send(_cARendererSelRender)
 }
 
+// Returns the time at which the next update should happen.
 func (o *CARenderer) NextFrameTime() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _cARendererSelNextFrameTime)
 	return _ret
 }
 
+// Release any data associated with the current frame.
 func (o *CARenderer) EndFrame() {
 	o.Ptr().Send(_cARendererSelEndFrame)
 }

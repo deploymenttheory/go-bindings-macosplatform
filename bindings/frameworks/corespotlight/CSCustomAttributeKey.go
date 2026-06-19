@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A key associated with a custom attribute for a searchable item.
+//
 // Apple documentation: https://developer.apple.com/documentation/corespotlight/cscustomattributekey
 type CSCustomAttributeKey struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func CSCustomAttributeKeyFromID(id objc.ID) *CSCustomAttributeKey {
 	return o
 }
 
+// Returns a new custom attribute key with the specified name.
 func (o *CSCustomAttributeKey) InitWithKeyName(keyName *foundation.NSString) *CSCustomAttributeKey {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSCustomAttributeKeySelInitWithKeyName, keyName.Ptr())
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func (o *CSCustomAttributeKey) InitWithKeyName(keyName *foundation.NSString) *CS
 	return CSCustomAttributeKeyFromID(_ret)
 }
 
+// Returns a new custom attribute key with the specified name and properties.
 func (o *CSCustomAttributeKey) InitWithKeyNameSearchableSearchableByDefaultUniqueMultiValued(keyName *foundation.NSString, searchable bool, searchableByDefault bool, unique bool, multiValued bool) *CSCustomAttributeKey {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSCustomAttributeKeySelInitWithKeyNameSearchableSearchableByDefaultUniqueMultiValued, keyName.Ptr(), searchable, searchableByDefault, unique, multiValued)
 	if _ret != 0 {

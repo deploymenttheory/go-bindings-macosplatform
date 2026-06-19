@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for gradient arithmetic operators.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnarithmeticgradient
 type MPSCNNArithmeticGradient struct {
 	mpsneuralnetwork.MPSCNNGradientKernel

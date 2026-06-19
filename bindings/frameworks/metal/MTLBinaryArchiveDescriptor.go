@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a binary shader archive that you want to create.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlbinaryarchivedescriptor
 type MTLBinaryArchiveDescriptor struct {
 	foundation.NSObject

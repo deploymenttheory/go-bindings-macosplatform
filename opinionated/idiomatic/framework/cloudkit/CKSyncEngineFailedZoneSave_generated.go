@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that describes an unsuccessful attempt to modify a single record zone.
+//
 // SyncEngineFailedZoneSave wraps [raw.CKSyncEngineFailedZoneSave] with a fluent Go API.
 type SyncEngineFailedZoneSave struct {
 	inner *raw.CKSyncEngineFailedZoneSave

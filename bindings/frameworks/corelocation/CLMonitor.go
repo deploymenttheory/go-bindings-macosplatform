@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that monitors the conditions you add to it.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clmonitor
 type CLMonitor struct {
 	foundation.NSObject
@@ -79,6 +81,9 @@ func (o *CLMonitor) Name() *foundation.NSString {
 }
 
 func (o *CLMonitor) MonitoredIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cLMonitorSelMonitoredIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cLMonitorSelMonitoredIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

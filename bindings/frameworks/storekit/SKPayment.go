@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to the App Store to process payment for additional functionality that your app offers.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skpayment
 // Deprecated: Use Product.purchase(confirmIn:options:).
 type SKPayment struct {
@@ -36,6 +38,7 @@ func SKPaymentFromID(id objc.ID) *SKPayment {
 	return o
 }
 
+// Returns a new payment for the specified product.
 func SKPaymentPaymentWithProduct(product *SKProduct) *SKPayment {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPayment), _sKPaymentSelPaymentWithProduct, product.Ptr())
 	if _ret != 0 {

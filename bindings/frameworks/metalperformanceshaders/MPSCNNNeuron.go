@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that applies a neuron activation function.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuron
 type MPSCNNNeuron struct {
 	mpsneuralnetwork.MPSCNNKernel

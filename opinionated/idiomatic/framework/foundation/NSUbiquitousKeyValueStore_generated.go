@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An iCloud-based container of key-value pairs you share among instances of your app running on a person’s devices.
+//
 // UbiquitousKeyValueStore wraps [raw.NSUbiquitousKeyValueStore] with a fluent Go API.
 type UbiquitousKeyValueStore struct {
 	inner *raw.NSUbiquitousKeyValueStore
@@ -42,21 +44,29 @@ func (x *UbiquitousKeyValueStore) WithScriptingProperties(scriptingProperties *r
 	return x
 }
 
+// Returns the object associated with the specified key.
+//
 // ObjectForKey calls the underlying ObjectForKey.
 func (x *UbiquitousKeyValueStore) ObjectForKey(aKey string) objc.ID {
 	return x.inner.ObjectForKey(foundation.NSStringStringWithUTF8String(aKey))
 }
 
+// Sets the value of the specified key to a property list object.
+//
 // SetObjectForKey calls the underlying SetObjectForKey.
 func (x *UbiquitousKeyValueStore) SetObjectForKey(anObject objc.ID, aKey string) {
 	x.inner.SetObjectForKey(anObject, foundation.NSStringStringWithUTF8String(aKey))
 }
 
+// Removes the value for the specified key from the iCloud key-value store.
+//
 // RemoveObjectForKey calls the underlying RemoveObjectForKey.
 func (x *UbiquitousKeyValueStore) RemoveObjectForKey(aKey string) {
 	x.inner.RemoveObjectForKey(foundation.NSStringStringWithUTF8String(aKey))
 }
 
+// Returns the string associated with the specified key.
+//
 // StringForKey calls the underlying StringForKey.
 func (x *UbiquitousKeyValueStore) StringForKey(aKey string) *String {
 	_r := x.inner.StringForKey(foundation.NSStringStringWithUTF8String(aKey))
@@ -66,16 +76,22 @@ func (x *UbiquitousKeyValueStore) StringForKey(aKey string) *String {
 	return &String{inner: _r}
 }
 
+// Returns the array associated with the specified key.
+//
 // ArrayForKey calls the underlying ArrayForKey.
 func (x *UbiquitousKeyValueStore) ArrayForKey(aKey string) *raw.NSArray[objc.ID] {
 	return x.inner.ArrayForKey(foundation.NSStringStringWithUTF8String(aKey))
 }
 
+// Returns the dictionary object associated with the specified key.
+//
 // DictionaryForKey calls the underlying DictionaryForKey.
 func (x *UbiquitousKeyValueStore) DictionaryForKey(aKey string) *raw.NSDictionary[*raw.NSString, objc.ID] {
 	return x.inner.DictionaryForKey(foundation.NSStringStringWithUTF8String(aKey))
 }
 
+// Returns the data object associated with the specified key.
+//
 // DataForKey calls the underlying DataForKey.
 func (x *UbiquitousKeyValueStore) DataForKey(aKey string) *Data {
 	_r := x.inner.DataForKey(foundation.NSStringStringWithUTF8String(aKey))
@@ -85,56 +101,78 @@ func (x *UbiquitousKeyValueStore) DataForKey(aKey string) *Data {
 	return &Data{inner: _r}
 }
 
+// Returns the 64-bit integer value associated with the specified key.
+//
 // LongLongForKey calls the underlying LongLongForKey.
 func (x *UbiquitousKeyValueStore) LongLongForKey(aKey string) int64 {
 	return x.inner.LongLongForKey(foundation.NSStringStringWithUTF8String(aKey))
 }
 
+// Returns the double value associated with the specified key.
+//
 // DoubleForKey calls the underlying DoubleForKey.
 func (x *UbiquitousKeyValueStore) DoubleForKey(aKey string) float64 {
 	return x.inner.DoubleForKey(foundation.NSStringStringWithUTF8String(aKey))
 }
 
+// Returns the Boolean value associated with the specified key.
+//
 // BoolForKey calls the underlying BoolForKey.
 func (x *UbiquitousKeyValueStore) BoolForKey(aKey string) bool {
 	return x.inner.BoolForKey(foundation.NSStringStringWithUTF8String(aKey))
 }
 
+// Sets the value of the specified key to a string value.
+//
 // SetStringForKey calls the underlying SetStringForKey.
 func (x *UbiquitousKeyValueStore) SetStringForKey(aString string, aKey string) {
 	x.inner.SetStringForKey(foundation.NSStringStringWithUTF8String(aString), foundation.NSStringStringWithUTF8String(aKey))
 }
 
+// Sets the value of the specified key to a data object.
+//
 // SetDataForKey calls the underlying SetDataForKey.
 func (x *UbiquitousKeyValueStore) SetDataForKey(aData *raw.NSData, aKey string) {
 	x.inner.SetDataForKey(aData, foundation.NSStringStringWithUTF8String(aKey))
 }
 
+// Sets the value of the specified key to an array of property list objects.
+//
 // SetArrayForKey calls the underlying SetArrayForKey.
 func (x *UbiquitousKeyValueStore) SetArrayForKey(anArray *raw.NSArray[objc.ID], aKey string) {
 	x.inner.SetArrayForKey(anArray, foundation.NSStringStringWithUTF8String(aKey))
 }
 
+// Sets the value of the specified key to a dictionary of property list objects.
+//
 // SetDictionaryForKey calls the underlying SetDictionaryForKey.
 func (x *UbiquitousKeyValueStore) SetDictionaryForKey(aDictionary *raw.NSDictionary[*raw.NSString, objc.ID], aKey string) {
 	x.inner.SetDictionaryForKey(aDictionary, foundation.NSStringStringWithUTF8String(aKey))
 }
 
+// Sets the value of the specified key to a 64-bit integer value.
+//
 // SetLongLongForKey calls the underlying SetLongLongForKey.
 func (x *UbiquitousKeyValueStore) SetLongLongForKey(value int64, aKey string) {
 	x.inner.SetLongLongForKey(value, foundation.NSStringStringWithUTF8String(aKey))
 }
 
+// Sets the value of the specified key to a double value.
+//
 // SetDoubleForKey calls the underlying SetDoubleForKey.
 func (x *UbiquitousKeyValueStore) SetDoubleForKey(value float64, aKey string) {
 	x.inner.SetDoubleForKey(value, foundation.NSStringStringWithUTF8String(aKey))
 }
 
+// Sets the value of the specified key to a Boolean value.
+//
 // SetBoolForKey calls the underlying SetBoolForKey.
 func (x *UbiquitousKeyValueStore) SetBoolForKey(value bool, aKey string) {
 	x.inner.SetBoolForKey(value, foundation.NSStringStringWithUTF8String(aKey))
 }
 
+// Synchronizes the in-memory keys and values with the ones stored in iCloud.
+//
 // Synchronize calls the underlying Synchronize.
 func (x *UbiquitousKeyValueStore) Synchronize() bool {
 	return x.inner.Synchronize()

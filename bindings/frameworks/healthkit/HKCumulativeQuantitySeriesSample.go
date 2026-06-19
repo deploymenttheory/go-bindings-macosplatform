@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sample representing a series of cumulative quantity values.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkcumulativequantityseriessample
 type HKCumulativeQuantitySeriesSample struct {
 	HKCumulativeQuantitySample

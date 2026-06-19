@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specification for dynamic per-node data used with a custom shader.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skattribute
 type SKAttribute struct {
 	foundation.NSObject
@@ -41,6 +43,7 @@ func SKAttributeAttributeWithNameType(name *foundation.NSString, type_ SKAttribu
 	return SKAttributeFromID(_ret)
 }
 
+// Creates and initializes a new attribute object of a specified type with a name that can be referenced within the shader.
 func (o *SKAttribute) InitWithNameType(name *foundation.NSString, type_ SKAttributeType) *SKAttribute {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKAttributeSelInitWithNameType, name.Ptr(), type_)
 	if _ret != 0 {

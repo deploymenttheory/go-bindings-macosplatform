@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that performs offline analysis of video content.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnvideoprocessor
 type VNVideoProcessor struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func VNVideoProcessorFromID(id objc.ID) *VNVideoProcessor {
 	return o
 }
 
-// @brief Creates a VNVideoProcessor to be used for performing requests against a video asset specified by it's URL. @param videoURL A URL pointing at a video asset on which the requests will be performed. The video format has to be supported by AVFoundation.
+// Creates a video processor to perform Vision requests against the specified video asset.
 func (o *VNVideoProcessor) InitWithURL(videoURL *foundation.NSURL) *VNVideoProcessor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNVideoProcessorSelInitWithURL, videoURL.Ptr())
 	if _ret != 0 {
@@ -48,7 +50,7 @@ func (o *VNVideoProcessor) InitWithURL(videoURL *foundation.NSURL) *VNVideoProce
 	return VNVideoProcessorFromID(_ret)
 }
 
-// @brief Add a VNRequest with the specified processing options to be performed on the video. @details This method can be called either before calling -analyzeTimeRange:error: or from within one of the already associated request's completion handlers. @param request The VNRequest to be added to the processing pipeline. If added from within a completionHandler, it will be processed on the same frame that is currently being processed. @param processingOptions The options applied to the request's processing of the video. @param error Returns an error that happened during scheduling of the requests. Check individual requests results and errors for their respective success and failures. This parameter is optional. @return Returns true if the request added to the processing pipeline. @note   The VNRequest must have completion handler set otherwise no results can be returned.
+// Adds a request with processing options to the video processor.
 func (o *VNVideoProcessor) AddRequestProcessingOptionsError(request *VNRequest, processingOptions *VNVideoProcessorRequestProcessingOptions) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNVideoProcessorSelAddRequestProcessingOptionsError, request.Ptr(), processingOptions.Ptr(), unsafe.Pointer(&_nsErr))
@@ -58,17 +60,18 @@ func (o *VNVideoProcessor) AddRequestProcessingOptionsError(request *VNRequest, 
 	return _ret, nil
 }
 
+// Adds a Vision request to perform with the specified configuration.
 // Deprecated: since macOS 11.0.
 func (o *VNVideoProcessor) AddRequestWithProcessingOptionsError(request *VNRequest, processingOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _vNVideoProcessorSelAddRequestWithProcessingOptionsError, request.Ptr(), processingOptions, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _vNVideoProcessorSelAddRequestWithProcessingOptionsError, request.Ptr(), processingOptions.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
-// @brief Remove a VNRequest from the video processor, which means it won't be performed anymore. @details This method can be called either before calling -analyzeTimeRange:error: or from within one of the already associated request's completion handlers. @param request The VNRequest to be removed from the processing pipeline. @param error Returns an error that happened during processing of the request, such as if the request was not found in the processing queue. This parameter is optional. @return Returns true if the request was found and removed from the processing pipeline.
+// Removes a Vision request from the video processor’s request queue.
 func (o *VNVideoProcessor) RemoveRequestError(request *VNRequest) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNVideoProcessorSelRemoveRequestError, request.Ptr(), unsafe.Pointer(&_nsErr))
@@ -78,7 +81,7 @@ func (o *VNVideoProcessor) RemoveRequestError(request *VNRequest) (bool, error) 
 	return _ret, nil
 }
 
-// @brief Processes the video over the specified time range. @details This call is synchronous and only returns after the video is processed through its duration or an error prevented the processing. @param timeRange  Start and duration of the timerange within video to process. If the duration is longer than the video (e.g., kCMTimeIndefinite) the processing stops at the end of the video. @param error Returns an error that happened during the starting of the processing queue (for instance if the time range is not valid for the video asset). This parameter is optional. @return Returns true if all requests were scheduled and performed. Check individual requests results and errors for their respective success and failures. @note   The intersection of the CMTimeRangeMake(start, duration) and CMTimeRangeMake(kCMTimeZero, asset.duration) will determine the timerange of the video to process
+// Analyzes a time range of video content.
 func (o *VNVideoProcessor) AnalyzeTimeRangeError(timeRange coremedia.CMTimeRange) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNVideoProcessorSelAnalyzeTimeRangeError, timeRange, unsafe.Pointer(&_nsErr))
@@ -88,6 +91,7 @@ func (o *VNVideoProcessor) AnalyzeTimeRangeError(timeRange coremedia.CMTimeRange
 	return _ret, nil
 }
 
+// Analyzes the specifed time range of the video content.
 // Deprecated: since macOS 11.0.
 func (o *VNVideoProcessor) AnalyzeWithTimeRangeError(timeRange coremedia.CMTimeRange) (bool, error) {
 	var _nsErr uintptr
@@ -98,7 +102,7 @@ func (o *VNVideoProcessor) AnalyzeWithTimeRangeError(timeRange coremedia.CMTimeR
 	return _ret, nil
 }
 
-// @brief Cancel the processing of the video. This can return before the last request has completed.
+// Cancels the video processing.
 func (o *VNVideoProcessor) Cancel() {
 	o.Ptr().Send(_vNVideoProcessorSelCancel)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A single item in a player item’s error log.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayeritemerrorlogevent
 type AVPlayerItemErrorLogEvent struct {
 	foundation.NSObject
@@ -99,6 +101,9 @@ func (o *AVPlayerItemErrorLogEvent) ErrorComment() *foundation.NSString {
 
 // The HTTP header fields returned by the server, if an HTTP response was received as part of this error. See -[NSHTTPURLResponse allHeaderFields] for more information.
 func (o *AVPlayerItemErrorLogEvent) AllHTTPResponseHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _aVPlayerItemErrorLogEventSelAllHTTPResponseHeaderFields)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemErrorLogEventSelAllHTTPResponseHeaderFields)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }

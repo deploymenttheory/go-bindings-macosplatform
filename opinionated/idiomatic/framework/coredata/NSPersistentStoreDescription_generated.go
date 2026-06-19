@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description object used to create and load a persistent store.
+//
 // PersistentStoreDescription wraps [raw.NSPersistentStoreDescription] with a fluent Go API.
 type PersistentStoreDescription struct {
 	inner *raw.NSPersistentStoreDescription
@@ -31,6 +33,8 @@ func PersistentStoreDescriptionFromID(id objc.ID) *PersistentStoreDescription {
 	return &PersistentStoreDescription{inner: raw.NSPersistentStoreDescriptionFromID(id)}
 }
 
+// Initializes the receiver with a URL for the store.
+//
 // NewPersistentStoreDescriptionWithURL creates a new [PersistentStoreDescription].
 func NewPersistentStoreDescriptionWithURL(url string) *PersistentStoreDescription {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentStoreDescription")), objc.RegisterName("alloc"))
@@ -38,55 +42,71 @@ func NewPersistentStoreDescriptionWithURL(url string) *PersistentStoreDescriptio
 	return &PersistentStoreDescription{inner: raw.NSPersistentStoreDescriptionFromID(_id)}
 }
 
+// The type of store this description represents.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *PersistentStoreDescription) WithType(type_ string) *PersistentStoreDescription {
 	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
 	return x
 }
 
+// The name of the configuration used by this store.
+//
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *PersistentStoreDescription) WithConfiguration(configuration string) *PersistentStoreDescription {
 	x.inner.SetConfiguration(foundation.NSStringStringWithUTF8String(configuration))
 	return x
 }
 
+// The URL that the store will use for its location.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *PersistentStoreDescription) WithURL(uRL string) *PersistentStoreDescription {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// A flag that indicates whether this store will be read-only.
+//
 // WithReadOnly sets the readOnly property and returns the receiver for chaining.
 func (x *PersistentStoreDescription) WithReadOnly(readOnly bool) *PersistentStoreDescription {
 	x.inner.SetReadOnly(readOnly)
 	return x
 }
 
+// The connection timeout for the associated store.
+//
 // WithTimeout sets the timeout property and returns the receiver for chaining.
 func (x *PersistentStoreDescription) WithTimeout(timeout float64) *PersistentStoreDescription {
 	x.inner.SetTimeout(timeout)
 	return x
 }
 
+// A flag that determines whether the store is added asynchronously.
+//
 // WithShouldAddStoreAsynchronously sets the shouldAddStoreAsynchronously property and returns the receiver for chaining.
 func (x *PersistentStoreDescription) WithShouldAddStoreAsynchronously(shouldAddStoreAsynchronously bool) *PersistentStoreDescription {
 	x.inner.SetShouldAddStoreAsynchronously(shouldAddStoreAsynchronously)
 	return x
 }
 
+// A flag indicating whether the associated persistent store should be migrated automatically.
+//
 // WithShouldMigrateStoreAutomatically sets the shouldMigrateStoreAutomatically property and returns the receiver for chaining.
 func (x *PersistentStoreDescription) WithShouldMigrateStoreAutomatically(shouldMigrateStoreAutomatically bool) *PersistentStoreDescription {
 	x.inner.SetShouldMigrateStoreAutomatically(shouldMigrateStoreAutomatically)
 	return x
 }
 
+// A flag indicating whether a mapping model should be created automatically.
+//
 // WithShouldInferMappingModelAutomatically sets the shouldInferMappingModelAutomatically property and returns the receiver for chaining.
 func (x *PersistentStoreDescription) WithShouldInferMappingModelAutomatically(shouldInferMappingModelAutomatically bool) *PersistentStoreDescription {
 	x.inner.SetShouldInferMappingModelAutomatically(shouldInferMappingModelAutomatically)
 	return x
 }
 
-// Use this property to apply customized instances of NSPersistentCloudKitContainerOptions to a store description you wish to use with CloudKit.
+// Options that customize how this store description aligns with a CloudKit database.
 //
 // WithCloudKitContainerOptions sets the cloudKitContainerOptions property and returns the receiver for chaining.
 func (x *PersistentStoreDescription) WithCloudKitContainerOptions(cloudKitContainerOptions *PersistentCloudKitContainerOptions) *PersistentStoreDescription {
@@ -94,11 +114,15 @@ func (x *PersistentStoreDescription) WithCloudKitContainerOptions(cloudKitContai
 	return x
 }
 
+// Sets an option on the store.
+//
 // SetOptionForKey calls the underlying SetOptionForKey.
 func (x *PersistentStoreDescription) SetOptionForKey(option *foundation.NSObject, key string) {
 	x.inner.SetOptionForKey(option, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Allows you to set pragmas for the SQLite store.
+//
 // SetValueForPragmaNamed calls the underlying SetValueForPragmaNamed.
 func (x *PersistentStoreDescription) SetValueForPragmaNamed(value *foundation.NSObject, name string) {
 	x.inner.SetValueForPragmaNamed(value, foundation.NSStringStringWithUTF8String(name))

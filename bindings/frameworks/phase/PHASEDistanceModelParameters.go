@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class for a sound’s rate of change over distance.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasedistancemodelparameters
 type PHASEDistanceModelParameters struct {
 	foundation.NSObject

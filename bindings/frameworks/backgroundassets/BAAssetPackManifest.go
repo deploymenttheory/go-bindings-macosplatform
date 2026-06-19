@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A manifest of asset packs that are available to download.
+//
 // Apple documentation: https://developer.apple.com/documentation/backgroundassets/baassetpackmanifest
 type BAAssetPackManifest struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func BAAssetPackManifestFromID(id objc.ID) *BAAssetPackManifest {
 	return o
 }
 
-// Initializes a representation of a manifest in memory given a URL to the manifest’s representation as a JSON file on disk. - Parameters: - URL: A URL to a local JSON file. - applicationGroupIdentifier: The identifier of the application group in which to store unmanaged asset packs that are downloaded from the manifest. - error: A pointer to an error that will be set if an error occurs.
+// Initializes a representation of a manifest in memory given a URL to the manifest’s representation as a JSON file on disk.
 func (o *BAAssetPackManifest) InitWithContentsOfURLApplicationGroupIdentifierError(uRL *foundation.NSURL, applicationGroupIdentifier *foundation.NSString) (*BAAssetPackManifest, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelInitWithContentsOfURLApplicationGroupIdentifierError, uRL.Ptr(), applicationGroupIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
@@ -49,7 +51,7 @@ func (o *BAAssetPackManifest) InitWithContentsOfURLApplicationGroupIdentifierErr
 	return BAAssetPackManifestFromID(_ret), nil
 }
 
-// Initializes a representation of a manifest in memory from JSON-encoded data. - Parameters: - data: JSON-encoded data. - applicationGroupIdentifier: The identifier of the application group in which to store unmanaged asset packs that are downloaded from the manifest. - error: A pointer to an error that will be set if an error occurs.
+// Initializes a representation of a manifest in memory from JSON-encoded data.
 func (o *BAAssetPackManifest) InitFromDataApplicationGroupIdentifierError(data *foundation.NSData, applicationGroupIdentifier *foundation.NSString) (*BAAssetPackManifest, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelInitFromDataApplicationGroupIdentifierError, data.Ptr(), applicationGroupIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
@@ -62,7 +64,7 @@ func (o *BAAssetPackManifest) InitFromDataApplicationGroupIdentifierError(data *
 	return BAAssetPackManifestFromID(_ret), nil
 }
 
-// Creates download objects for every asset pack in this manifest. The returned download objects can be scheduled with the download manager. - Returns: A collection of download objects. - Remark: Use this method in your main application; use “allDownloadsForContentRequest:“ in your downloader extension.
+// Creates download objects for every asset pack in this manifest.
 func (o *BAAssetPackManifest) AllDownloads() *foundation.NSSet[*BADownload] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelAllDownloads)
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func (o *BAAssetPackManifest) AllDownloads() *foundation.NSSet[*BADownload] {
 	return foundation.NSSetFromID[*BADownload](_ret)
 }
 
-// Creates download objects for every asset pack in this manifest. The returned download objects can be scheduled with the download manager. - Parameter contentRequest: The content request for the current extension invocation. - Returns: A collection of download objects. - Remark: Use this method in your downloader extension; use “allDownloads“ instead in your main application.
+// Creates download objects for every asset pack in this manifest.
 func (o *BAAssetPackManifest) AllDownloadsForContentRequest(contentRequest BAContentRequest) *foundation.NSSet[*BADownload] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelAllDownloadsForContentRequest, contentRequest)
 	if _ret != 0 {

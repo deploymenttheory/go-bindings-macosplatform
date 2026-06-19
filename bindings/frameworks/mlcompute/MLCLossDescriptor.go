@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object you use to create a loss layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlclossdescriptor
 type MLCLossDescriptor struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func MLCLossDescriptorFromID(id objc.ID) *MLCLossDescriptor {
 	return o
 }
 
-// @abstract   Create a loss descriptor object @param      lossType        The loss function. @param      reductionType   The reduction operation @return     A new MLCLossDescriptor object
+// Creates a loss descriptor with the loss function and reduction type you specify.
 func MLCLossDescriptorDescriptorWithTypeReductionType(lossType MLCLossType, reductionType MLCReductionType) *MLCLossDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossDescriptor), _mLCLossDescriptorSelDescriptorWithTypeReductionType, lossType, reductionType)
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func MLCLossDescriptorDescriptorWithTypeReductionType(lossType MLCLossType, redu
 	return MLCLossDescriptorFromID(_ret)
 }
 
-// @abstract   Create a loss descriptor object @param      lossType        The loss function. @param      reductionType   The reduction operation @param      weight          The scale factor to apply to each element of a result. @return     A new MLCLossDescriptor object
+// Creates a loss descriptor with the loss function, reduction type, and weight you specify.
 func MLCLossDescriptorDescriptorWithTypeReductionTypeWeight(lossType MLCLossType, reductionType MLCReductionType, weight float32) *MLCLossDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossDescriptor), _mLCLossDescriptorSelDescriptorWithTypeReductionTypeWeight, lossType, reductionType, weight)
 	if _ret != 0 {
@@ -58,7 +60,7 @@ func MLCLossDescriptorDescriptorWithTypeReductionTypeWeight(lossType MLCLossType
 	return MLCLossDescriptorFromID(_ret)
 }
 
-// @abstract   Create a loss descriptor object @param      lossType           The loss function. @param      reductionType         The reduction operation @param      weight             The scale factor to apply to each element of a result. @param      labelSmoothing     The label smoothing parameter. @param      classCount         The number of classes parameter. @return     A new MLCLossDescriptor object
+// Creates a loss descriptor with the loss function, reduction type, weight, label smoothing, and number of classes you specify.
 func MLCLossDescriptorDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount(lossType MLCLossType, reductionType MLCReductionType, weight float32, labelSmoothing float32, classCount uint) *MLCLossDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossDescriptor), _mLCLossDescriptorSelDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount, lossType, reductionType, weight, labelSmoothing, classCount)
 	if _ret != 0 {
@@ -67,7 +69,7 @@ func MLCLossDescriptorDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCo
 	return MLCLossDescriptorFromID(_ret)
 }
 
-// @abstract   Create a loss descriptor object @param      lossType            The loss function. @param      reductionType          The reduction operation @param      weight              The scale factor to apply to each element of a result. @param      labelSmoothing      The label smoothing parameter. @param      classCount          The number of classes parameter. @param      epsilon             The epsilon used by LogLoss @param      delta               The delta parameter used by Huber loss @return     A new MLCLossDescriptor object
+// Creates a loss descriptor with the loss function, reduction type, weight, label smoothing, and number of classes, epsilon, and delta that you specify.
 func MLCLossDescriptorDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta(lossType MLCLossType, reductionType MLCReductionType, weight float32, labelSmoothing float32, classCount uint, epsilon float32, delta float32) *MLCLossDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossDescriptor), _mLCLossDescriptorSelDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta, lossType, reductionType, weight, labelSmoothing, classCount, epsilon, delta)
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A lighting and shading system that supports reflection mapping for use in shader-based OpenGL rendering.
+//
 // Apple documentation: https://developer.apple.com/documentation/glkit/glkreflectionmapeffect
 type GLKReflectionMapEffect struct {
 	GLKBaseEffect

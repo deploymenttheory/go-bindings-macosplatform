@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation that uses the provided criteria to search for discoverable iCloud users.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckdiscoveruseridentitiesoperation
 // Deprecated: No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.
 type CKDiscoverUserIdentitiesOperation struct {
@@ -40,7 +42,7 @@ func CKDiscoverUserIdentitiesOperationFromID(id objc.ID) *CKDiscoverUserIdentiti
 	return o
 }
 
-// Creates an operation for discovering user identities. You can use the operation only once. Create a new operation for each subsequent search.
+// Creates an operation for discovering user identities.
 func (o *CKDiscoverUserIdentitiesOperation) Init() *CKDiscoverUserIdentitiesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKDiscoverUserIdentitiesOperationSelInit)
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func (o *CKDiscoverUserIdentitiesOperation) Init() *CKDiscoverUserIdentitiesOper
 	return CKDiscoverUserIdentitiesOperationFromID(_ret)
 }
 
-// Creates an operation for discovering the user identities of the specified lookup infos. - Parameters: - userIdentityLookupInfos: An array that contains instances of “CKUserIdentity/LookupInfo“. CloudKit uses this parameter as the default value for the “CKDiscoverUserIdentitiesOperation/userIdentityLookupInfos“ property. If you specify `nil`, you must assign a value to that property before you execute the operation. After you create the operation, assign a handler to “CKDiscoverUserIdentitiesOperation/discoverUserIdentitiesCompletionBlock“ so that you can process the search results.
+// Creates an operation for discovering the user identities of the specified lookup infos.
 func (o *CKDiscoverUserIdentitiesOperation) InitWithUserIdentityLookupInfos(userIdentityLookupInfos *foundation.NSArray[*CKUserIdentityLookupInfo]) *CKDiscoverUserIdentitiesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKDiscoverUserIdentitiesOperationSelInitWithUserIdentityLookupInfos, userIdentityLookupInfos.Ptr())
 	if _ret != 0 {

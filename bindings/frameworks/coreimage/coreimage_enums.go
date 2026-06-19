@@ -29,6 +29,7 @@ func (e CGLCPContextPriorityRequest) String() string {
 	}
 }
 
+// Constants indicating the Data Matrix code ECC version.
 type CIDataMatrixCodeECCVersion int64
 
 const (
@@ -65,6 +66,7 @@ func (e CIDataMatrixCodeECCVersion) String() string {
 	}
 }
 
+// Constants indicating the percentage of the symbol that is dedicated to error correction.
 type CIQRCodeErrorCorrectionLevel int64
 
 const (
@@ -93,11 +95,15 @@ func (e CIQRCodeErrorCorrectionLevel) String() string {
 	}
 }
 
+// Different ways of representing alpha.
 type CIRenderDestinationAlphaMode uint64
 
 const (
-	CIRenderDestinationAlphaNone            CIRenderDestinationAlphaMode = 0
-	CIRenderDestinationAlphaPremultiplied   CIRenderDestinationAlphaMode = 1
+	// Designates a destination with no alpha compositing.
+	CIRenderDestinationAlphaNone CIRenderDestinationAlphaMode = 0
+	// Designates a destination that expects premultiplied alpha values.
+	CIRenderDestinationAlphaPremultiplied CIRenderDestinationAlphaMode = 1
+	// Designates a destination that expects non-premultiplied alpha values.
 	CIRenderDestinationAlphaUnpremultiplied CIRenderDestinationAlphaMode = 2
 )
 

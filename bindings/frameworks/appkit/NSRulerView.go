@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A ruler and the markers above or to the side of a scroll view’s document view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsrulerview
 type NSRulerView struct {
 	NSView
@@ -62,8 +64,9 @@ func NSRulerViewFromID(id objc.ID) *NSRulerView {
 	return o
 }
 
+// Registers a new unit of measurement with the NSRulerView class, making it available to all instances of NSRulerView.
 func NSRulerViewRegisterUnitWithNameAbbreviationUnitToPointsConversionFactorStepUpCycleStepDownCycle(unitName *foundation.NSString, abbreviation *foundation.NSString, conversionFactor float64, stepUpCycle *foundation.NSArray[*foundation.NSNumber], stepDownCycle *foundation.NSArray[*foundation.NSNumber]) {
-	objc.ID(_clsNSRulerView).Send(_nSRulerViewSelRegisterUnitWithNameAbbreviationUnitToPointsConversionFactorStepUpCycleStepDownCycle, unitName.Ptr(), abbreviation.Ptr(), conversionFactor, stepUpCycle, stepDownCycle)
+	objc.ID(_clsNSRulerView).Send(_nSRulerViewSelRegisterUnitWithNameAbbreviationUnitToPointsConversionFactorStepUpCycleStepDownCycle, unitName.Ptr(), abbreviation.Ptr(), conversionFactor, stepUpCycle.Ptr(), stepDownCycle.Ptr())
 }
 
 func (o *NSRulerView) InitWithCoder(coder *foundation.NSCoder) *NSRulerView {
@@ -74,6 +77,7 @@ func (o *NSRulerView) InitWithCoder(coder *foundation.NSCoder) *NSRulerView {
 	return NSRulerViewFromID(_ret)
 }
 
+// Initializes a newly allocated NSRulerView to have orientation (NSHorizontalRuler or NSVerticalRuler) within aScrollView.
 func (o *NSRulerView) InitWithScrollViewOrientation(scrollView *NSScrollView, orientation NSRulerOrientation) *NSRulerView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelInitWithScrollViewOrientation, scrollView.Ptr(), orientation)
 	if _ret != 0 {
@@ -82,31 +86,38 @@ func (o *NSRulerView) InitWithScrollViewOrientation(scrollView *NSScrollView, or
 	return NSRulerViewFromID(_ret)
 }
 
+// Adds aMarker to the receiver, without consulting the client view for approval.
 func (o *NSRulerView) AddMarker(marker *NSRulerMarker) {
 	o.Ptr().Send(_nSRulerViewSelAddMarker, marker.Ptr())
 }
 
+// Removes aMarker from the receiver, without consulting the client view for approval.
 func (o *NSRulerView) RemoveMarker(marker *NSRulerMarker) {
 	o.Ptr().Send(_nSRulerViewSelRemoveMarker, marker.Ptr())
 }
 
+// Tracks the mouse to add aMarker based on the initial mouse-down or mouse-dragged event theEvent.
 func (o *NSRulerView) TrackMarkerWithMouseEvent(marker *NSRulerMarker, event *NSEvent) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSRulerViewSelTrackMarkerWithMouseEvent, marker.Ptr(), event.Ptr())
 	return _ret
 }
 
+// Draws temporary lines in the ruler area.
 func (o *NSRulerView) MoveRulerlineFromLocationToLocation(oldLocation float64, newLocation float64) {
 	o.Ptr().Send(_nSRulerViewSelMoveRulerlineFromLocationToLocation, oldLocation, newLocation)
 }
 
+// Forces recalculation of the hash mark spacing for the next time the receiver is displayed.
 func (o *NSRulerView) InvalidateHashMarks() {
 	o.Ptr().Send(_nSRulerViewSelInvalidateHashMarks)
 }
 
+// Draws the receiver’s hash marks and labels in aRect, which is expressed in the receiver’s coordinate system.
 func (o *NSRulerView) DrawHashMarksAndLabelsInRect(rect corefoundation.CGRect) {
 	o.Ptr().Send(_nSRulerViewSelDrawHashMarksAndLabelsInRect, rect)
 }
 
+// Draws the receiver’s markers in aRect, which is expressed in the receiver’s coordinate system.
 func (o *NSRulerView) DrawMarkersInRect(rect corefoundation.CGRect) {
 	o.Ptr().Send(_nSRulerViewSelDrawMarkersInRect, rect)
 }

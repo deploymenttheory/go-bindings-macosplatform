@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The information that describes a rental car.
+//
 // RentalCar wraps [raw.INRentalCar] with a fluent Go API.
 type RentalCar struct {
 	inner *raw.INRentalCar
@@ -31,6 +33,8 @@ func RentalCarFromID(id objc.ID) *RentalCar {
 	return &RentalCar{inner: raw.INRentalCarFromID(id)}
 }
 
+// Creates a new rental car object with the specified contents and attributes.
+//
 // NewRentalCarWithRentalCompanyNameTypeMakeModelRentalCarDescription creates a new [RentalCar].
 func NewRentalCarWithRentalCompanyNameTypeMakeModelRentalCarDescription(rentalCompanyName string, type_ string, make_ string, model string, rentalCarDescription string) *RentalCar {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INRentalCar")), objc.RegisterName("alloc"))

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An absolute neuron filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronabsolute
 type MPSCNNNeuronAbsolute struct {
 	mpsneuralnetwork.MPSCNNNeuron
@@ -31,7 +33,7 @@ func MPSCNNNeuronAbsoluteFromID(id objc.ID) *MPSCNNNeuronAbsolute {
 	return o
 }
 
-// @abstract  Initialize a neuron filter @param      device          The device the filter will run on @return     A valid MPSCNNNeuronAbsolute object or nil, if failure.
+// Initializes an absolute neuron filter.
 func (o *MPSCNNNeuronAbsolute) InitWithDevice(device metal.MTLDevice) *MPSCNNNeuronAbsolute {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronAbsoluteSelInitWithDevice, device)
 	if _ret != 0 {

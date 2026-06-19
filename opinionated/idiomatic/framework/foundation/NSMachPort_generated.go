@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A port that can be used as an endpoint for distributed object connections (or raw messaging).
+//
 // MachPort wraps [raw.NSMachPort] with a fluent Go API.
 type MachPort struct {
 	inner *raw.NSMachPort
@@ -29,6 +31,8 @@ func MachPortFromID(id objc.ID) *MachPort {
 	return &MachPort{inner: raw.NSMachPortFromID(id)}
 }
 
+// Initializes a newly allocated NSMachPort object with a given Mach port.
+//
 // NewMachPortWithMachPort creates a new [MachPort].
 func NewMachPortWithMachPort(machPort uint32) *MachPort {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMachPort")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewMachPortWithMachPort(machPort uint32) *MachPort {
 	return &MachPort{inner: raw.NSMachPortFromID(_id)}
 }
 
+// Initializes a newly allocated NSMachPort object with a given Mach port and the specified options.
+//
 // NewMachPortWithMachPortOptions creates a new [MachPort].
 func NewMachPortWithMachPortOptions(machPort uint32, f NSMachPortOptions) *MachPort {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMachPort")), objc.RegisterName("alloc"))

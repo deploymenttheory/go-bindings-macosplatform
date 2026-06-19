@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the state of the collaboration options for the document.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationshareoptions
 type SWCollaborationShareOptions struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func SWCollaborationShareOptionsFromID(id objc.ID) *SWCollaborationShareOptions 
 	return o
 }
 
-// @abstract Initializes a shareOptions object to represent the available collaboration options for the document and a summary of the selected options @param optionsGroups SWCollaborationOptionsGroups to customize how the collaboration will be shared @param summary localized string to summarize the selected collaboration options
+// Creates and initializes a collaboration share options object the array of groups and a summary string.
 func (o *SWCollaborationShareOptions) InitWithOptionsGroupsSummary(optionsGroups *foundation.NSArray[*SWCollaborationOptionsGroup], summary *foundation.NSString) *SWCollaborationShareOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationShareOptionsSelInitWithOptionsGroupsSummary, optionsGroups.Ptr(), summary.Ptr())
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *SWCollaborationShareOptions) InitWithOptionsGroupsSummary(optionsGroups
 	return SWCollaborationShareOptionsFromID(_ret)
 }
 
-// @abstract Initializes a shareOptions object to represent the available collaboration options for the document and the default summary string "Share Options" @param optionsGroups SWCollaborationOptionsGroups to customize how the collaboration will be shared
+// Creates and initializes a collaboration share options object with the array of groups.
 func (o *SWCollaborationShareOptions) InitWithOptionsGroups(optionsGroups *foundation.NSArray[*SWCollaborationOptionsGroup]) *SWCollaborationShareOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationShareOptionsSelInitWithOptionsGroups, optionsGroups.Ptr())
 	if _ret != 0 {
@@ -56,7 +58,7 @@ func (o *SWCollaborationShareOptions) InitWithOptionsGroups(optionsGroups *found
 	return SWCollaborationShareOptionsFromID(_ret)
 }
 
-// @abstract Creates a shareOptions object to represent the available collaboration options for the document and a summary of the selected options @param optionsGroups SWCollaborationOptionsGroups to customize how the collaboration will be shared @param summary localized string to summarize the selected collaboration options
+// Creates and initializes a collaboration share options object the array of groups and a summary string.
 func SWCollaborationShareOptionsShareOptionsWithOptionsGroupsSummary(optionsGroups *foundation.NSArray[*SWCollaborationOptionsGroup], summary *foundation.NSString) *SWCollaborationShareOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSWCollaborationShareOptions), _sWCollaborationShareOptionsSelShareOptionsWithOptionsGroupsSummary, optionsGroups.Ptr(), summary.Ptr())
 	if _ret != 0 {
@@ -65,6 +67,7 @@ func SWCollaborationShareOptionsShareOptionsWithOptionsGroupsSummary(optionsGrou
 	return SWCollaborationShareOptionsFromID(_ret)
 }
 
+// Creates and initializes a collaboration share options object with the array of groups.
 func SWCollaborationShareOptionsShareOptionsWithOptionsGroups(optionsGroups *foundation.NSArray[*SWCollaborationOptionsGroup]) *SWCollaborationShareOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSWCollaborationShareOptions), _sWCollaborationShareOptionsSelShareOptionsWithOptionsGroups, optionsGroups.Ptr())
 	if _ret != 0 {
@@ -73,6 +76,7 @@ func SWCollaborationShareOptionsShareOptionsWithOptionsGroups(optionsGroups *fou
 	return SWCollaborationShareOptionsFromID(_ret)
 }
 
+// Creates and initializes a collaboration share options object.
 func (o *SWCollaborationShareOptions) InitWithCoder(coder *foundation.NSCoder) *SWCollaborationShareOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationShareOptionsSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {

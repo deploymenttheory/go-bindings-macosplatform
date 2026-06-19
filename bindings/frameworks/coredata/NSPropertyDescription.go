@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a single property belonging to an entity.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspropertydescription
 type NSPropertyDescription struct {
 	foundation.NSObject
@@ -52,8 +54,9 @@ func NSPropertyDescriptionFromID(id objc.ID) *NSPropertyDescription {
 	return o
 }
 
+// Sets the validation predicates and warnings of the receiver.
 func (o *NSPropertyDescription) SetValidationPredicatesWithValidationWarnings(validationPredicates *foundation.NSArray[*foundation.NSPredicate], validationWarnings *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSPropertyDescriptionSelSetValidationPredicatesWithValidationWarnings, validationPredicates, validationWarnings)
+	o.Ptr().Send(_nSPropertyDescriptionSelSetValidationPredicatesWithValidationWarnings, validationPredicates.Ptr(), validationWarnings.Ptr())
 }
 
 func (o *NSPropertyDescription) Entity() *NSEntityDescription {
@@ -95,22 +98,31 @@ func (o *NSPropertyDescription) SetTransient(transient bool) {
 }
 
 func (o *NSPropertyDescription) ValidationPredicates() *foundation.NSArray[*foundation.NSPredicate] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSPredicate]](o.Ptr(), _nSPropertyDescriptionSelValidationPredicates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPropertyDescriptionSelValidationPredicates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSPredicate](_ret)
 }
 
 func (o *NSPropertyDescription) ValidationWarnings() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSPropertyDescriptionSelValidationWarnings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPropertyDescriptionSelValidationWarnings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSPropertyDescription) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSPropertyDescriptionSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPropertyDescriptionSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSPropertyDescription) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSPropertyDescriptionSelSetUserInfo, userInfo)
+	o.Ptr().Send(_nSPropertyDescriptionSelSetUserInfo, userInfo.Ptr())
 }
 
 // Deprecated: Use NSEntityDescription.indexes instead

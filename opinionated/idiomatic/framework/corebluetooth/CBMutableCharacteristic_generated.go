@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A characteristic of a local peripheral’s service.
+//
 // MutableCharacteristic wraps [raw.CBMutableCharacteristic] with a fluent Go API.
 type MutableCharacteristic struct {
 	inner *raw.CBMutableCharacteristic
@@ -32,7 +34,7 @@ func MutableCharacteristicFromID(id objc.ID) *MutableCharacteristic {
 	return &MutableCharacteristic{inner: raw.CBMutableCharacteristicFromID(id)}
 }
 
-// @method initWithType:properties:value:permissions @param UUID			The Bluetooth UUID of the characteristic. @param properties	The properties of the characteristic. @param value		The characteristic value to be cached. If <i>nil</i>, the value will be dynamic and requested on-demand. @param permissions	The permissions of the characteristic value. @discussion			Returns an initialized characteristic.
+// Creates a mutable characteristic with specified permissions, properties, and value.
 //
 // NewMutableCharacteristicWithTypePropertiesValuePermissions creates a new [MutableCharacteristic].
 func NewMutableCharacteristicWithTypePropertiesValuePermissions(uUID *raw.CBUUID, properties CBCharacteristicProperties, value *foundation.NSData, permissions CBAttributePermissions) *MutableCharacteristic {
@@ -41,7 +43,7 @@ func NewMutableCharacteristicWithTypePropertiesValuePermissions(uUID *raw.CBUUID
 	return &MutableCharacteristic{inner: raw.CBMutableCharacteristicFromID(_id)}
 }
 
-// @property permissions @discussion The permissions of the characteristic value. @see		CBAttributePermissions
+// The permissions of the characteristic value.
 //
 // WithPermissions sets the permissions property and returns the receiver for chaining.
 func (x *MutableCharacteristic) WithPermissions(permissions CBAttributePermissions) *MutableCharacteristic {
@@ -49,18 +51,24 @@ func (x *MutableCharacteristic) WithPermissions(permissions CBAttributePermissio
 	return x
 }
 
+// The properties of the characteristic.
+//
 // WithProperties sets the properties property and returns the receiver for chaining.
 func (x *MutableCharacteristic) WithProperties(properties CBCharacteristicProperties) *MutableCharacteristic {
 	x.inner.SetProperties(raw.CBCharacteristicProperties(properties))
 	return x
 }
 
+// The value of the characteristic.
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *MutableCharacteristic) WithValue(value *foundation.NSData) *MutableCharacteristic {
 	x.inner.SetValue(value)
 	return x
 }
 
+// An array of the characteristic’s descriptors.
+//
 // WithDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MutableCharacteristic) WithDescriptors(items ...DescriptorProvider) *MutableCharacteristic {
 	if len(items) == 0 {

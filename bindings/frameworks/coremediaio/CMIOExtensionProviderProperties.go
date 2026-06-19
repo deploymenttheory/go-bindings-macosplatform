@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages the properties of an extension provider.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremediaio/cmioextensionproviderproperties
 type CMIOExtensionProviderProperties struct {
 	foundation.NSObject
@@ -38,27 +40,27 @@ func CMIOExtensionProviderPropertiesFromID(id objc.ID) *CMIOExtensionProviderPro
 	return o
 }
 
-// @method providerPropertiesWithDictionary: @abstract Return a provider properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionProviderProperties instance.
+// Returns a new provider properties object with the specified properties.
 func CMIOExtensionProviderPropertiesProviderPropertiesWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CMIOExtensionProviderProperties {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionProviderProperties), _cMIOExtensionProviderPropertiesSelProviderPropertiesWithDictionary, propertiesDictionary)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionProviderProperties), _cMIOExtensionProviderPropertiesSelProviderPropertiesWithDictionary, propertiesDictionary.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CMIOExtensionProviderPropertiesFromID(_ret)
 }
 
-// @method initWithDictionary: @abstract Initialize a provider properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionProviderProperties instance.
+// Creates a provider properties object with the specified properties.
 func (o *CMIOExtensionProviderProperties) InitWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CMIOExtensionProviderProperties {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionProviderPropertiesSelInitWithDictionary, propertiesDictionary)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionProviderPropertiesSelInitWithDictionary, propertiesDictionary.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CMIOExtensionProviderPropertiesFromID(_ret)
 }
 
-// @property setPropertyState:forProperty: @abstract Set the property value. @param propertyState The property state. @param property The property key. @discussion Setting nil to propertyState does remove the property.
+// Sets a state value for the specified property.
 func (o *CMIOExtensionProviderProperties) SetPropertyStateForProperty(propertyState *CMIOExtensionPropertyState[objc.ID], property *foundation.NSString) {
-	o.Ptr().Send(_cMIOExtensionProviderPropertiesSelSetPropertyStateForProperty, propertyState, property.Ptr())
+	o.Ptr().Send(_cMIOExtensionProviderPropertiesSelSetPropertyStateForProperty, propertyState.Ptr(), property.Ptr())
 }
 
 // @property name @abstract The provider name. @discussion The property key is CMIOExtensionPropertyProviderName.
@@ -89,10 +91,13 @@ func (o *CMIOExtensionProviderProperties) SetManufacturer(manufacturer *foundati
 
 // @property propertiesDictionary @abstract The dictionary of properties. @discussion The dictionary containing all keys and values.
 func (o *CMIOExtensionProviderProperties) PropertiesDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _cMIOExtensionProviderPropertiesSelPropertiesDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionProviderPropertiesSelPropertiesDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *CMIOExtensionProviderProperties) SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_cMIOExtensionProviderPropertiesSelSetPropertiesDictionary, propertiesDictionary)
+	o.Ptr().Send(_cMIOExtensionProviderPropertiesSelSetPropertiesDictionary, propertiesDictionary.Ptr())
 }

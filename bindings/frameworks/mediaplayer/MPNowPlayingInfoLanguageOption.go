@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of interfaces for setting the language option for the Now Playing item.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfolanguageoption
 type MPNowPlayingInfoLanguageOption struct {
 	foundation.NSObject
@@ -37,21 +39,22 @@ func MPNowPlayingInfoLanguageOptionFromID(id objc.ID) *MPNowPlayingInfoLanguageO
 	return o
 }
 
+// Creates a single language option.
 func (o *MPNowPlayingInfoLanguageOption) InitWithTypeLanguageTagCharacteristicsDisplayNameIdentifier(languageOptionType MPNowPlayingInfoLanguageOptionType, languageTag *foundation.NSString, languageOptionCharacteristics *foundation.NSArray[*foundation.NSString], displayName *foundation.NSString, identifier *foundation.NSString) *MPNowPlayingInfoLanguageOption {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPNowPlayingInfoLanguageOptionSelInitWithTypeLanguageTagCharacteristicsDisplayNameIdentifier, languageOptionType, languageTag.Ptr(), languageOptionCharacteristics, displayName.Ptr(), identifier.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPNowPlayingInfoLanguageOptionSelInitWithTypeLanguageTagCharacteristicsDisplayNameIdentifier, languageOptionType, languageTag.Ptr(), languageOptionCharacteristics.Ptr(), displayName.Ptr(), identifier.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MPNowPlayingInfoLanguageOptionFromID(_ret)
 }
 
-// Represents a special case that is used to represent the best legible language option based on system preferences. See AVPlayerItem-selectMediaOptionAutomaticallyInMediaSelectionGroup
+// Returns a Boolean value that determines whether to use the best legible language option based on the system preferences.
 func (o *MPNowPlayingInfoLanguageOption) IsAutomaticLegibleLanguageOption() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mPNowPlayingInfoLanguageOptionSelIsAutomaticLegibleLanguageOption)
 	return _ret
 }
 
-// Represents a special case that is used to represent the best audible language option based on system preferences. See AVPlayerItem-selectMediaOptionAutomaticallyInMediaSelectionGroup
+// Returns a Boolean value that determines whether to use the best audible language option based on the system preferences.
 func (o *MPNowPlayingInfoLanguageOption) IsAutomaticAudibleLanguageOption() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mPNowPlayingInfoLanguageOptionSelIsAutomaticAudibleLanguageOption)
 	return _ret
@@ -74,8 +77,11 @@ func (o *MPNowPlayingInfoLanguageOption) LanguageTag() *foundation.NSString {
 
 // Characteristics describing the content of the language options. See the LanguageOptionCharacteristics for the most commonly used values.
 func (o *MPNowPlayingInfoLanguageOption) LanguageOptionCharacteristics() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mPNowPlayingInfoLanguageOptionSelLanguageOptionCharacteristics)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPNowPlayingInfoLanguageOptionSelLanguageOptionCharacteristics)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // A user presentable display name for this option.

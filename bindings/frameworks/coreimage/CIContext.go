@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The Core Image context class provides an evaluation context for Core Image processing with Metal, OpenGL, or OpenCL.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cicontext
 type CIContext struct {
 	foundation.NSObject
@@ -89,38 +91,43 @@ func CIContextFromID(id objc.ID) *CIContext {
 	return o
 }
 
+// Creates a Core Image context from a CGL context, using the specified options, color space, and pixel format object.
 func CIContextContextWithCGLContextPixelFormatColorSpaceOptions(cglctx unsafe.Pointer, pixelFormat unsafe.Pointer, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIContext {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContextWithCGLContextPixelFormatColorSpaceOptions, cglctx, pixelFormat, colorSpace, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContextWithCGLContextPixelFormatColorSpaceOptions, cglctx, pixelFormat, colorSpace, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIContextFromID(_ret)
 }
 
+// Creates a Core Image context from a CGL context, using the specified options and pixel format object.
 func CIContextContextWithCGLContextPixelFormatOptions(cglctx unsafe.Pointer, pixelFormat unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIContext {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContextWithCGLContextPixelFormatOptions, cglctx, pixelFormat, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContextWithCGLContextPixelFormatOptions, cglctx, pixelFormat, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIContextFromID(_ret)
 }
 
+// Creates a Core Image context from a Quartz context, using the specified options.
 func CIContextContextWithCGContextOptions(cgctx unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIContext {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContextWithCGContextOptions, cgctx, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContextWithCGContextOptions, cgctx, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIContextFromID(_ret)
 }
 
+// Initializes a context without a specific rendering destination, using the specified options.
 func CIContextContextWithOptions(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIContext {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContextWithOptions, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContextWithOptions, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIContextFromID(_ret)
 }
 
+// Creates a context without a specific rendering destination, using default options.
 func CIContextContext() *CIContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContext)
 	if _ret != 0 {
@@ -129,14 +136,16 @@ func CIContextContext() *CIContext {
 	return CIContextFromID(_ret)
 }
 
+// Initializes a context without a specific rendering destination, using the specified options.
 func (o *CIContext) InitWithOptions(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIContext {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelInitWithOptions, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelInitWithOptions, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIContextFromID(_ret)
 }
 
+// Initializes a context without a specific rendering destination, using default options.
 func (o *CIContext) Init() *CIContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelInit)
 	if _ret != 0 {
@@ -145,6 +154,7 @@ func (o *CIContext) Init() *CIContext {
 	return CIContextFromID(_ret)
 }
 
+// Creates a Core Image context using the specified Metal device.
 func CIContextContextWithMTLDevice(device metal.MTLDevice) *CIContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContextWithMTLDevice, device)
 	if _ret != 0 {
@@ -153,8 +163,9 @@ func CIContextContextWithMTLDevice(device metal.MTLDevice) *CIContext {
 	return CIContextFromID(_ret)
 }
 
+// Creates a Core Image context using the specified Metal device and options.
 func CIContextContextWithMTLDeviceOptions(device metal.MTLDevice, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIContext {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContextWithMTLDeviceOptions, device, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContextWithMTLDeviceOptions, device, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -170,53 +181,63 @@ func CIContextContextWithMTLCommandQueue(commandQueue metal.MTLCommandQueue) *CI
 }
 
 func CIContextContextWithMTLCommandQueueOptions(commandQueue metal.MTLCommandQueue, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIContext {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContextWithMTLCommandQueueOptions, commandQueue, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContextWithMTLCommandQueueOptions, commandQueue, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIContextFromID(_ret)
 }
 
+// Renders a region of an image to a point in the context destination.
 // Deprecated: since macOS 10.8.
 func (o *CIContext) DrawImageAtPointFromRect(image *CIImage, atPoint corefoundation.CGPoint, fromRect corefoundation.CGRect) {
 	o.Ptr().Send(_cIContextSelDrawImageAtPointFromRect, image.Ptr(), atPoint, fromRect)
 }
 
+// Renders a region of an image to a rectangle in the context destination.
 // Deprecated: since macOS 10.8.
 func (o *CIContext) DrawImageInRectFromRect(image *CIImage, inRect corefoundation.CGRect, fromRect corefoundation.CGRect) {
 	o.Ptr().Send(_cIContextSelDrawImageInRectFromRect, image.Ptr(), inRect, fromRect)
 }
 
+// Creates a CGLayer object from the provided parameters.
 // Deprecated: since macOS 10.11.
 func (o *CIContext) CreateCGLayerWithSizeInfo(size corefoundation.CGSize, info unsafe.Pointer) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cIContextSelCreateCGLayerWithSizeInfo, size, info)
 	return _ret
 }
 
+// Renders to the given bitmap.
 func (o *CIContext) RenderToBitmapRowBytesBoundsFormatColorSpace(image *CIImage, data unsafe.Pointer, rowBytes int, bounds corefoundation.CGRect, format int, colorSpace unsafe.Pointer) {
 	o.Ptr().Send(_cIContextSelRenderToBitmapRowBytesBoundsFormatColorSpace, image.Ptr(), data, rowBytes, bounds, format, colorSpace)
 }
 
+// Renders a region of an image into an IOSurface object.
 func (o *CIContext) RenderToIOSurfaceBoundsColorSpace(image *CIImage, surface unsafe.Pointer, bounds corefoundation.CGRect, colorSpace unsafe.Pointer) {
 	o.Ptr().Send(_cIContextSelRenderToIOSurfaceBoundsColorSpace, image.Ptr(), surface, bounds, colorSpace)
 }
 
+// Renders an image into a pixel buffer.
 func (o *CIContext) RenderToCVPixelBuffer(image *CIImage, buffer unsafe.Pointer) {
 	o.Ptr().Send(_cIContextSelRenderToCVPixelBuffer, image.Ptr(), buffer)
 }
 
+// Renders a region of an image into a pixel buffer.
 func (o *CIContext) RenderToCVPixelBufferBoundsColorSpace(image *CIImage, buffer unsafe.Pointer, bounds corefoundation.CGRect, colorSpace unsafe.Pointer) {
 	o.Ptr().Send(_cIContextSelRenderToCVPixelBufferBoundsColorSpace, image.Ptr(), buffer, bounds, colorSpace)
 }
 
+// Renders a region of an image to a Metal texture.
 func (o *CIContext) RenderToMTLTextureCommandBufferBoundsColorSpace(image *CIImage, texture metal.MTLTexture, commandBuffer metal.MTLCommandBuffer, bounds corefoundation.CGRect, colorSpace unsafe.Pointer) {
 	o.Ptr().Send(_cIContextSelRenderToMTLTextureCommandBufferBoundsColorSpace, image.Ptr(), texture, commandBuffer, bounds, colorSpace)
 }
 
+// Runs the garbage collector to reclaim any resources that the context no longer requires.
 func (o *CIContext) ReclaimResources() {
 	o.Ptr().Send(_cIContextSelReclaimResources)
 }
 
+// Frees any cached data, such as temporary images, associated with the context and runs the garbage collector.
 func (o *CIContext) ClearCaches() {
 	o.Ptr().Send(_cIContextSelClearCaches)
 }
@@ -233,47 +254,47 @@ func (o *CIContext) WorkingFormat() int {
 	return _ret
 }
 
-// Creates a Core Graphics image from a region of a Core Image image instance. The color space of the created `CGImage` will be sRGB unless the receiving “CIContext“ was created with a `kCIContextOutputColorSpace` option. Normally the pixel format of the created CGImage will be 8 bits-per-component. It will be 16 bits-per-component float if the above color space is HDR. - Parameters: - image: A “CIImage“ image instance for which to create a `CGImage`. - fromRect: The `CGRect` region of the `image` to use. This region relative to the cartesean coordinate system of `image`. This region will be intersected with integralized and intersected with `image.extent`. - Returns: Returns a new `CGImage` instance. You are responsible for releasing the returned image when you no longer need it. The returned value will be `null` if the extent is empty or too big.
+// Creates a Core Graphics image from a region of a Core Image image instance.
 func (o *CIContext) CreateCGImageFromRect(image *CIImage, fromRect corefoundation.CGRect) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cIContextSelCreateCGImageFromRect, image.Ptr(), fromRect)
 	return _ret
 }
 
-// Creates a Core Graphics image from a region of a Core Image image instance with an option for controlling the pixel format and color space of the `CGImage`. - Parameters: - image: A “CIImage“ image instance for which to create a `CGImage`. - fromRect: The `CGRect` region of the `image` to use. This region relative to the cartesean coordinate system of `image`. This region will be intersected with integralized and intersected with `image.extent`. - format: A “CIFormat“ to specify the pixel format of the created `CGImage`. For example, if `kCIFormatRGBX16` is specified, then the created `CGImage` will be 16 bits-per-component and opaque. - colorSpace: The `CGColorSpace` for the output image. This color space must have either `CGColorSpaceModel.rgb` or `CGColorSpaceModel.monochrome` and be compatible with the specified pixel format. - Returns: Returns a new `CGImage` instance. You are responsible for releasing the returned image when you no longer need it. The returned value will be `null` if the extent is empty or too big.
+// Creates a Core Graphics image from a region of a Core Image image instance with an option for controlling the pixel format and color space of the CGImage.
 func (o *CIContext) CreateCGImageFromRectFormatColorSpace(image *CIImage, fromRect corefoundation.CGRect, format int, colorSpace unsafe.Pointer) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cIContextSelCreateCGImageFromRectFormatColorSpace, image.Ptr(), fromRect, format, colorSpace)
 	return _ret
 }
 
-// Creates a Core Graphics image from a region of a Core Image image instance with an option for controlling when the image is rendered. - Parameters: - image: A “CIImage“ image instance for which to create a `CGImage`. - fromRect: The `CGRect` region of the `image` to use. This region relative to the cartesean coordinate system of `image`. This region will be intersected with integralized and intersected with `image.extent`. - format: A “CIFormat“ to specify the pixel format of the created `CGImage`. For example, if `kCIFormatRGBX16` is specified, then the created `CGImage` will be 16 bits-per-component and opaque. - colorSpace: The `CGColorSpace` for the output image. This color space must have either `CGColorSpaceModel.rgb` or `CGColorSpaceModel.monochrome` and be compatible with the specified pixel format. - deferred: Controls when Core Image renders `image`. * True: rendering of `image` is deferred until the created `CGImage` rendered. * False: the `image` is rendered immediately. - Returns: Returns a new `CGImage` instance. You are responsible for releasing the returned image when you no longer need it. The returned value will be `null` if the extent is empty or too big.
+// Creates a Core Graphics image from a region of a Core Image image instance with an option for controlling when the image is rendered.
 func (o *CIContext) CreateCGImageFromRectFormatColorSpaceDeferred(image *CIImage, fromRect corefoundation.CGRect, format int, colorSpace unsafe.Pointer, deferred bool) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cIContextSelCreateCGImageFromRectFormatColorSpaceDeferred, image.Ptr(), fromRect, format, colorSpace, deferred)
 	return _ret
 }
 
-// Creates a Core Graphics image from a region of a Core Image image instance with an option for calculating HDR statistics. - Parameters: - image: A “CIImage“ image instance for which to create a `CGImage`. - fromRect: The `CGRect` region of the `image` to use. This region relative to the cartesean coordinate system of `image`. This region will be intersected with integralized and intersected with `image.extent`. - format: A “CIFormat“ to specify the pixel format of the created `CGImage`. For example, if `kCIFormatRGBX16` is specified, then the created `CGImage` will be 16 bits-per-component and opaque. - colorSpace: The `CGColorSpace` for the output image. This color space must have either `CGColorSpaceModel.rgb` or `CGColorSpaceModel.monochrome` and be compatible with the specified pixel format. - deferred: Controls when Core Image renders `image`. * True: rendering of `image` is deferred until the created `CGImage` rendered. * False: the `image` is rendered immediately. - calculateHDRStats: Controls if Core Image calculates HDR statistics. * True: Core Image will immediately render `image`, calculate the HDR statistics and create a `CGImage` that has the calculated values. * False:  the created `CGImage` will not have any HDR statistics. - Returns: Returns a new `CGImage` instance. You are responsible for releasing the returned image when you no longer need it. The returned value will be `null` if the extent is empty or too big.
+// Creates a Core Graphics image from a region of a Core Image image instance with an option for calculating HDR statistics.
 func (o *CIContext) CreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats(image *CIImage, fromRect corefoundation.CGRect, format int, colorSpace unsafe.Pointer, deferred bool, calculateHDRStats bool) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cIContextSelCreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats, image.Ptr(), fromRect, format, colorSpace, deferred, calculateHDRStats)
 	return _ret
 }
 
-// Given an IOSurface, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then update the surface's attachments to store the values. If the `IOSurface` has a Clean Aperture rectangle then only pixels within that rectangle are considered. - Parameters: - surface: A mutable `IOSurfaceRef` for which to calculate and attach statistics.
+// Given an IOSurface, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then update the surface’s attachments to store the values.
 func (o *CIContext) CalculateHDRStatsForIOSurface(surface unsafe.Pointer) {
 	o.Ptr().Send(_cIContextSelCalculateHDRStatsForIOSurface, surface)
 }
 
-// Given a CVPixelBuffer, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then update the buffers's attachments to store the values. If the `CVPixelBuffer` has a Clean Aperture rectangle then only pixels within that rectangle are considered. - Parameters: - buffer: A mutable `CVPixelBuffer` for which to calculate and attach statistics.
+// Given a CVPixelBuffer, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then update the buffer’s attachments to store the values.
 func (o *CIContext) CalculateHDRStatsForCVPixelBuffer(buffer unsafe.Pointer) {
 	o.Ptr().Send(_cIContextSelCalculateHDRStatsForCVPixelBuffer, buffer)
 }
 
-// Given a Core Graphics image, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then return a new Core Graphics image that has the calculated values. - Parameters: - cgimage: An immutable `CGImage` for which to calculate statistics. - Returns: Returns a new `CGImage` instance that has the calculated statistics attached.
+// Given a Core Graphics image, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then return a new Core Graphics image that has the calculated values.
 func (o *CIContext) CalculateHDRStatsForCGImage(cgimage unsafe.Pointer) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cIContextSelCalculateHDRStatsForCGImage, cgimage)
 	return _ret
 }
 
-// Given a Core Image image, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then return a new Core Image image that has the calculated values. If the image extent is not finite, then nil will be returned. - Parameters: - image: An immutable “CIImage“ for which to calculate statistics. - Returns: Returns a new “CIImage“ instance that has the calculated statistics attached.
+// Given a Core Image image, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then return a new Core Image image that has the calculated values.
 func (o *CIContext) CalculateHDRStatsForImage(image *CIImage) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelCalculateHDRStatsForImage, image.Ptr())
 	if _ret != 0 {
@@ -282,6 +303,7 @@ func (o *CIContext) CalculateHDRStatsForImage(image *CIImage) *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Returns the number of GPUs not currently driving a display.
 func CIContextOfflineGPUCount() uint {
 	_ret := objc.Send[uint](objc.ID(_clsCIContext), _cIContextSelOfflineGPUCount)
 	return _ret
@@ -296,40 +318,44 @@ func CIContextContextForOfflineGPUAtIndex(index uint) *CIContext {
 }
 
 func CIContextContextForOfflineGPUAtIndexColorSpaceOptionsSharedContext(index uint, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID], sharedContext unsafe.Pointer) *CIContext {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContextForOfflineGPUAtIndexColorSpaceOptionsSharedContext, index, colorSpace, options, sharedContext)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIContext), _cIContextSelContextForOfflineGPUAtIndexColorSpaceOptionsSharedContext, index, colorSpace, options.Ptr(), sharedContext)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIContextFromID(_ret)
 }
 
+// Renders the image and exports the resulting image data in TIFF format.
 func (o *CIContext) TIFFRepresentationOfImageFormatColorSpaceOptions(image *CIImage, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelTIFFRepresentationOfImageFormatColorSpaceOptions, image.Ptr(), format, colorSpace, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelTIFFRepresentationOfImageFormatColorSpaceOptions, image.Ptr(), format, colorSpace, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSDataFromID(_ret)
 }
 
+// Renders the image and exports the resulting image data in JPEG format.
 func (o *CIContext) JPEGRepresentationOfImageColorSpaceOptions(image *CIImage, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelJPEGRepresentationOfImageColorSpaceOptions, image.Ptr(), colorSpace, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelJPEGRepresentationOfImageColorSpaceOptions, image.Ptr(), colorSpace, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSDataFromID(_ret)
 }
 
+// Renders the image and exports the resulting image data in HEIF format.
 func (o *CIContext) HEIFRepresentationOfImageFormatColorSpaceOptions(image *CIImage, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelHEIFRepresentationOfImageFormatColorSpaceOptions, image.Ptr(), format, colorSpace, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelHEIFRepresentationOfImageFormatColorSpaceOptions, image.Ptr(), format, colorSpace, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSDataFromID(_ret)
 }
 
+// Renders the image and exports the resulting image data in HEIF10 format.
 func (o *CIContext) HEIF10RepresentationOfImageColorSpaceOptionsError(image *CIImage, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelHEIF10RepresentationOfImageColorSpaceOptionsError, image.Ptr(), colorSpace, options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelHEIF10RepresentationOfImageColorSpaceOptionsError, image.Ptr(), colorSpace, options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -339,17 +365,19 @@ func (o *CIContext) HEIF10RepresentationOfImageColorSpaceOptionsError(image *CII
 	return foundation.NSDataFromID(_ret), nil
 }
 
+// Renders the image and exports the resulting image data in PNG format.
 func (o *CIContext) PNGRepresentationOfImageFormatColorSpaceOptions(image *CIImage, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelPNGRepresentationOfImageFormatColorSpaceOptions, image.Ptr(), format, colorSpace, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelPNGRepresentationOfImageFormatColorSpaceOptions, image.Ptr(), format, colorSpace, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSDataFromID(_ret)
 }
 
+// Renders the image and exports the resulting image data in open EXR format.
 func (o *CIContext) OpenEXRRepresentationOfImageOptionsError(image *CIImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelOpenEXRRepresentationOfImageOptionsError, image.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelOpenEXRRepresentationOfImageOptionsError, image.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -359,100 +387,112 @@ func (o *CIContext) OpenEXRRepresentationOfImageOptionsError(image *CIImage, opt
 	return foundation.NSDataFromID(_ret), nil
 }
 
+// Renders the image and exports the resulting image data as a file in TIFF format.
 func (o *CIContext) WriteTIFFRepresentationOfImageToURLFormatColorSpaceOptionsError(image *CIImage, url *foundation.NSURL, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWriteTIFFRepresentationOfImageToURLFormatColorSpaceOptionsError, image.Ptr(), url.Ptr(), format, colorSpace, options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWriteTIFFRepresentationOfImageToURLFormatColorSpaceOptionsError, image.Ptr(), url.Ptr(), format, colorSpace, options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Renders the image and exports the resulting image data as a file in PNG format.
 func (o *CIContext) WritePNGRepresentationOfImageToURLFormatColorSpaceOptionsError(image *CIImage, url *foundation.NSURL, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWritePNGRepresentationOfImageToURLFormatColorSpaceOptionsError, image.Ptr(), url.Ptr(), format, colorSpace, options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWritePNGRepresentationOfImageToURLFormatColorSpaceOptionsError, image.Ptr(), url.Ptr(), format, colorSpace, options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Renders the image and exports the resulting image data as a file in JPEG format.
 func (o *CIContext) WriteJPEGRepresentationOfImageToURLColorSpaceOptionsError(image *CIImage, url *foundation.NSURL, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWriteJPEGRepresentationOfImageToURLColorSpaceOptionsError, image.Ptr(), url.Ptr(), colorSpace, options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWriteJPEGRepresentationOfImageToURLColorSpaceOptionsError, image.Ptr(), url.Ptr(), colorSpace, options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Renders the image and exports the resulting image data as a file in HEIF format.
 func (o *CIContext) WriteHEIFRepresentationOfImageToURLFormatColorSpaceOptionsError(image *CIImage, url *foundation.NSURL, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWriteHEIFRepresentationOfImageToURLFormatColorSpaceOptionsError, image.Ptr(), url.Ptr(), format, colorSpace, options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWriteHEIFRepresentationOfImageToURLFormatColorSpaceOptionsError, image.Ptr(), url.Ptr(), format, colorSpace, options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Renders the image and exports the resulting image data as a file in HEIF10 format.
 func (o *CIContext) WriteHEIF10RepresentationOfImageToURLColorSpaceOptionsError(image *CIImage, url *foundation.NSURL, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWriteHEIF10RepresentationOfImageToURLColorSpaceOptionsError, image.Ptr(), url.Ptr(), colorSpace, options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWriteHEIF10RepresentationOfImageToURLColorSpaceOptionsError, image.Ptr(), url.Ptr(), colorSpace, options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Renders the image and exports the resulting image data as a file in open EXR format.
 func (o *CIContext) WriteOpenEXRRepresentationOfImageToURLOptionsError(image *CIImage, url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWriteOpenEXRRepresentationOfImageToURLOptionsError, image.Ptr(), url.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _cIContextSelWriteOpenEXRRepresentationOfImageToURLOptionsError, image.Ptr(), url.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Create a CIFilter instance for the supplied image URL that can be used to apply a depth blur effect.
 func (o *CIContext) DepthBlurEffectFilterForImageURLOptions(url *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) *CIFilter {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelDepthBlurEffectFilterForImageURLOptions, url.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelDepthBlurEffectFilterForImageURLOptions, url.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIFilterFromID(_ret)
 }
 
+// Create a CIFilter instance for the supplied image data that can be used to apply a depth blur effect.
 func (o *CIContext) DepthBlurEffectFilterForImageDataOptions(data *foundation.NSData, options *foundation.NSDictionary[objc.ID, objc.ID]) *CIFilter {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelDepthBlurEffectFilterForImageDataOptions, data.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelDepthBlurEffectFilterForImageDataOptions, data.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIFilterFromID(_ret)
 }
 
+// Create a CIFilter instance for the supplied image data that can be used to apply a depth blur effect created with the supplied auxiliary images.
 func (o *CIContext) DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteOrientationOptions(image *CIImage, disparityImage *CIImage, portraitEffectsMatte *CIImage, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[objc.ID, objc.ID]) *CIFilter {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelDepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteOrientationOptions, image.Ptr(), disparityImage.Ptr(), portraitEffectsMatte.Ptr(), orientation, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelDepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteOrientationOptions, image.Ptr(), disparityImage.Ptr(), portraitEffectsMatte.Ptr(), orientation, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIFilterFromID(_ret)
 }
 
+// Create a CIFilter instance for the supplied image data that can be used to apply a depth blur effect created with the supplied auxiliary images.
 func (o *CIContext) DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationOrientationOptions(image *CIImage, disparityImage *CIImage, portraitEffectsMatte *CIImage, hairSemanticSegmentation *CIImage, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[objc.ID, objc.ID]) *CIFilter {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelDepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationOrientationOptions, image.Ptr(), disparityImage.Ptr(), portraitEffectsMatte.Ptr(), hairSemanticSegmentation.Ptr(), orientation, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelDepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationOrientationOptions, image.Ptr(), disparityImage.Ptr(), portraitEffectsMatte.Ptr(), hairSemanticSegmentation.Ptr(), orientation, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIFilterFromID(_ret)
 }
 
+// Create a CIFilter instance for the supplied image data that can be used to apply a depth blur effect created with the supplied auxiliary images.
 func (o *CIContext) DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationGlassesMatteGainMapOrientationOptions(image *CIImage, disparityImage *CIImage, portraitEffectsMatte *CIImage, hairSemanticSegmentation *CIImage, glassesMatte *CIImage, gainMap *CIImage, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[objc.ID, objc.ID]) *CIFilter {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelDepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationGlassesMatteGainMapOrientationOptions, image.Ptr(), disparityImage.Ptr(), portraitEffectsMatte.Ptr(), hairSemanticSegmentation.Ptr(), glassesMatte.Ptr(), gainMap.Ptr(), orientation, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelDepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationGlassesMatteGainMapOrientationOptions, image.Ptr(), disparityImage.Ptr(), portraitEffectsMatte.Ptr(), hairSemanticSegmentation.Ptr(), glassesMatte.Ptr(), gainMap.Ptr(), orientation, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CIFilterFromID(_ret)
 }
 
+// Renders a portion of an image to a point in the destination.
 func (o *CIContext) StartTaskToRenderFromRectToDestinationAtPointError(image *CIImage, fromRect corefoundation.CGRect, destination *CIRenderDestination, atPoint corefoundation.CGPoint) (*CIRenderTask, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelStartTaskToRenderFromRectToDestinationAtPointError, image.Ptr(), fromRect, destination.Ptr(), atPoint, unsafe.Pointer(&_nsErr))
@@ -465,6 +505,7 @@ func (o *CIContext) StartTaskToRenderFromRectToDestinationAtPointError(image *CI
 	return CIRenderTaskFromID(_ret), nil
 }
 
+// Renders an image to a destination so that point (0, 0) of the image maps to point (0, 0) of the destination.
 func (o *CIContext) StartTaskToRenderToDestinationError(image *CIImage, destination *CIRenderDestination) (*CIRenderTask, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelStartTaskToRenderToDestinationError, image.Ptr(), destination.Ptr(), unsafe.Pointer(&_nsErr))
@@ -477,6 +518,7 @@ func (o *CIContext) StartTaskToRenderToDestinationError(image *CIImage, destinat
 	return CIRenderTaskFromID(_ret), nil
 }
 
+// An optional call to warm up a CIContext so that subsequent calls to render with the same arguments run more efficiently.
 func (o *CIContext) PrepareRenderFromRectToDestinationAtPointError(image *CIImage, fromRect corefoundation.CGRect, destination *CIRenderDestination, atPoint corefoundation.CGPoint) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cIContextSelPrepareRenderFromRectToDestinationAtPointError, image.Ptr(), fromRect, destination.Ptr(), atPoint, unsafe.Pointer(&_nsErr))
@@ -486,6 +528,7 @@ func (o *CIContext) PrepareRenderFromRectToDestinationAtPointError(image *CIImag
 	return _ret, nil
 }
 
+// Fills the entire destination with black or clear depending on its alphaMode.
 func (o *CIContext) StartTaskToClearError(destination *CIRenderDestination) (*CIRenderTask, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIContextSelStartTaskToClearError, destination.Ptr(), unsafe.Pointer(&_nsErr))

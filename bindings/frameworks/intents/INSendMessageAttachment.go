@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A file to include in a message.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/insendmessageattachment
 type INSendMessageAttachment struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func INSendMessageAttachmentFromID(id objc.ID) *INSendMessageAttachment {
 	return o
 }
 
+// Creates a message attachment with an audio file.
 func INSendMessageAttachmentAttachmentWithAudioMessageFile(audioMessageFile *INFile) *INSendMessageAttachment {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINSendMessageAttachment), _iNSendMessageAttachmentSelAttachmentWithAudioMessageFile, audioMessageFile.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object for registering a new security key credential.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialregistrationrequest
 type ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest struct {
 	ASAuthorizationRequest

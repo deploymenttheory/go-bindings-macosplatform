@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A node that smoothly fades between the audio of its child nodes.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseblendnodedefinition
 type PHASEBlendNodeDefinition struct {
 	PHASESoundEventNodeDefinition
@@ -39,7 +41,7 @@ func PHASEBlendNodeDefinitionFromID(id objc.ID) *PHASEBlendNodeDefinition {
 	return o
 }
 
-// @method initWithBlendMetaParameterDefinition:identifier @abstract Create a blend node definition @param blendMetaParameterDefinition A metaparameter definition that wil be used to control the parameter of the blend node at runtime. @param identifier An optional custom identifier to give to this object @return A new PHASEBlendNodeDefinition object
+// Creates a named blend node with a maxiumum blend range value.
 func (o *PHASEBlendNodeDefinition) InitWithBlendMetaParameterDefinitionIdentifier(blendMetaParameterDefinition *PHASENumberMetaParameterDefinition, identifier *foundation.NSString) *PHASEBlendNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEBlendNodeDefinitionSelInitWithBlendMetaParameterDefinitionIdentifier, blendMetaParameterDefinition.Ptr(), identifier.Ptr())
 	if _ret != 0 {
@@ -48,7 +50,7 @@ func (o *PHASEBlendNodeDefinition) InitWithBlendMetaParameterDefinitionIdentifie
 	return PHASEBlendNodeDefinitionFromID(_ret)
 }
 
-// @method initWithBlendMetaParameterDefinition @abstract Create a blend node definition @param blendMetaParameterDefinition A metaparameter definition that wil be used to control the parameter of the blend node at runtime. @return A new PHASEBlendNodeDefinition object
+// Creates a blend node with a maxiumum blend range value.
 func (o *PHASEBlendNodeDefinition) InitWithBlendMetaParameterDefinition(blendMetaParameterDefinition *PHASENumberMetaParameterDefinition) *PHASEBlendNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEBlendNodeDefinitionSelInitWithBlendMetaParameterDefinition, blendMetaParameterDefinition.Ptr())
 	if _ret != 0 {
@@ -57,7 +59,7 @@ func (o *PHASEBlendNodeDefinition) InitWithBlendMetaParameterDefinition(blendMet
 	return PHASEBlendNodeDefinitionFromID(_ret)
 }
 
-// @method initDistanceBlendWithSpatialMixerDefinition:identifier @abstract Create a blend node definition @param spatialMixerDefinition A PHASESpatialMixerDefinition that will bind the blend parameter to the distance between the source and listener. @param identifier An optional custom identifier to give to this object @return A new PHASEBlendNodeDefinition object
+// Creates a named blend node for spatial audio output.
 func (o *PHASEBlendNodeDefinition) InitDistanceBlendWithSpatialMixerDefinitionIdentifier(spatialMixerDefinition *PHASESpatialMixerDefinition, identifier *foundation.NSString) *PHASEBlendNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEBlendNodeDefinitionSelInitDistanceBlendWithSpatialMixerDefinitionIdentifier, spatialMixerDefinition.Ptr(), identifier.Ptr())
 	if _ret != 0 {
@@ -66,7 +68,7 @@ func (o *PHASEBlendNodeDefinition) InitDistanceBlendWithSpatialMixerDefinitionId
 	return PHASEBlendNodeDefinitionFromID(_ret)
 }
 
-// @method initDistanceBlendWithSpatialMixerDefinition @abstract Create a blend node definition @param spatialMixerDefinition A PHASESpatialMixerDefinition that will bind the blend parameter to the distance between the source and listener. @return A new PHASEBlendNodeDefinition object
+// Creates a blend node for spatial audio output.
 func (o *PHASEBlendNodeDefinition) InitDistanceBlendWithSpatialMixerDefinition(spatialMixerDefinition *PHASESpatialMixerDefinition) *PHASEBlendNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEBlendNodeDefinitionSelInitDistanceBlendWithSpatialMixerDefinition, spatialMixerDefinition.Ptr())
 	if _ret != 0 {
@@ -75,22 +77,22 @@ func (o *PHASEBlendNodeDefinition) InitDistanceBlendWithSpatialMixerDefinition(s
 	return PHASEBlendNodeDefinitionFromID(_ret)
 }
 
-// @method addRangeForInputValuesBelow:fullGainAtValue:fadeCurveType:subtree @abstract Create a blend range that is active for all values below a given threshold. @param value The value for which the range will be active if the blend node's input value is below this threshold. @param fullGainAtValue This value defines a threshold for which a fade curve will be applied to the gain, when the input value is between "value" and "fullGainAtValue". @param fadeCurveType A curve type that defines which kind of fade curve to apply. @param subtree A PHASESoundEventNodeDefinition subtree that will be active for this range.
+// Adds a child node that blends below a given value.
 func (o *PHASEBlendNodeDefinition) AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType PHASECurveType, subtree *PHASESoundEventNodeDefinition) {
 	o.Ptr().Send(_pHASEBlendNodeDefinitionSelAddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree, value, fullGainAtValue, fadeCurveType, subtree.Ptr())
 }
 
-// @method addRangeForInputValuesBetween:highValue:fullGainAtLowValue:fullGainAtHighValue:lowFadeCurveType:highFadeCurveType:subtree @abstract Create a blend range that is active for all input values between lowValue and highValue @param lowValue The lower bound for which this range is active. @param highValue The upper bound for which this range is active. @param fullGainAtLowValue The threshold for which a fade curve defined by lowFadeCurveType will be applied to the gain when the input value is between lowValue and fullGainAtLowValue @param fullGainAtHighValue The threshold for which a fade curve defined by highFadeCurveType will be applied to the gain when the input value is between highValue and fullGainAtHighValue @param lowFadeCurveType A curve type that defines which kind of fade curve to apply for the low fade range. @param highFadeCurveType A curve type that defines which kind of fade curve to apply for the high fade range.. @param subtree A PHASESoundEventNodeDefinition subtree that will be active for this range.
+// Adds a child node that blends between a given high and low value.
 func (o *PHASEBlendNodeDefinition) AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue float64, highValue float64, fullGainAtLowValue float64, fullGainAtHighValue float64, lowFadeCurveType PHASECurveType, highFadeCurveType PHASECurveType, subtree *PHASESoundEventNodeDefinition) {
 	o.Ptr().Send(_pHASEBlendNodeDefinitionSelAddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree, lowValue, highValue, fullGainAtLowValue, fullGainAtHighValue, lowFadeCurveType, highFadeCurveType, subtree.Ptr())
 }
 
-// @method addRangeForInputValuesAbove:fullGainAtValue:fadeCurveType:subtree @abstract Create a blend range that is active for all values above a given threshold. @param value The value for which the range will be active if the blend node's input value is above this threshold. @param fullGainAtValue This value defines a threshold for which a fade curve will be applied to the gain, when the input value is between "value" and "fullGainAtValue". @param fadeCurveType A curve type that defines which kind of fade curve to apply. @param subtree A PHASESoundEventNodeDefinition subtree that will be active for this range.
+// Adds a child node that blends above a given value.
 func (o *PHASEBlendNodeDefinition) AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType PHASECurveType, subtree *PHASESoundEventNodeDefinition) {
 	o.Ptr().Send(_pHASEBlendNodeDefinitionSelAddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree, value, fullGainAtValue, fadeCurveType, subtree.Ptr())
 }
 
-// @method addRangeWithEnvelope:subtree @abstract Create a blend range defined by a PHASEEnvelope object. @param envelope The PHASEEnvelope object that defines the output gain for a range. @param subtree A PHASESoundEventNodeDefinition subtree that will be active for this range.
+// Adds a child node with an envelope.
 func (o *PHASEBlendNodeDefinition) AddRangeWithEnvelopeSubtree(envelope *PHASEEnvelope, subtree *PHASESoundEventNodeDefinition) {
 	o.Ptr().Send(_pHASEBlendNodeDefinitionSelAddRangeWithEnvelopeSubtree, envelope.Ptr(), subtree.Ptr())
 }

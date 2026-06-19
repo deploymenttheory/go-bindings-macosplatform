@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a Lanczos resampling filter.
+//
 // NNLanczosScaleNode wraps [raw.MPSNNLanczosScaleNode] with a fluent Go API.
 type NNLanczosScaleNode struct {
 	inner *raw.MPSNNLanczosScaleNode

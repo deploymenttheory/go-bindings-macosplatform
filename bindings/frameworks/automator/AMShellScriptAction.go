@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents Automator actions whose runtime behavior is driven by a shell script or by a Perl or Python script.
+//
 // Apple documentation: https://developer.apple.com/documentation/automator/amshellscriptaction
 type AMShellScriptAction struct {
 	AMBundleAction

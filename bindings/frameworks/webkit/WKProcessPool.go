@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An opaque token that you use to run multiple web views in a single process.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkprocesspool
 // Deprecated: Creating and using multiple instances of WKProcessPool no longer has any effect.
 type WKProcessPool struct {

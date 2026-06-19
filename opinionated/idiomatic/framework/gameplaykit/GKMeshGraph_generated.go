@@ -12,7 +12,7 @@ import (
 	"unsafe"
 )
 
-// A collection of GKGraphNodes that are governed by a mesh formed by the space between a set of GKPolygonObstacles
+// A navigation graph for 2D game worlds that creates a space-filling network for smooth pathfinding around obstacles.
 //
 // MeshGraph wraps [raw.GKMeshGraph] with a fluent Go API.
 type MeshGraph struct {
@@ -34,6 +34,8 @@ func MeshGraphFromID(id objc.ID) *MeshGraph {
 	return &MeshGraph{inner: raw.GKMeshGraphFromID[objc.ID](id)}
 }
 
+// Initializes a graph to cover the specified area, using the specified node class.
+//
 // NewMeshGraphWithBufferRadiusMinCoordinateMaxCoordinateNodeClass creates a new [MeshGraph].
 func NewMeshGraphWithBufferRadiusMinCoordinateMaxCoordinateNodeClass(bufferRadius float32, min unsafe.Pointer, max unsafe.Pointer, nodeClass objc.Class) *MeshGraph {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKMeshGraph")), objc.RegisterName("alloc"))
@@ -41,6 +43,8 @@ func NewMeshGraphWithBufferRadiusMinCoordinateMaxCoordinateNodeClass(bufferRadiu
 	return &MeshGraph{inner: raw.GKMeshGraphFromID[objc.ID](_id)}
 }
 
+// Initializes a graph to cover the specified area.
+//
 // NewMeshGraphWithBufferRadiusMinCoordinateMaxCoordinate creates a new [MeshGraph].
 func NewMeshGraphWithBufferRadiusMinCoordinateMaxCoordinate(bufferRadius float32, min unsafe.Pointer, max unsafe.Pointer) *MeshGraph {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKMeshGraph")), objc.RegisterName("alloc"))
@@ -48,7 +52,7 @@ func NewMeshGraphWithBufferRadiusMinCoordinateMaxCoordinate(bufferRadius float32
 	return &MeshGraph{inner: raw.GKMeshGraphFromID[objc.ID](_id)}
 }
 
-// Specifies how graph nodes are generated when you triangulate this graph. You can combine triangulation modes using the | (OR) operator @see GKMeshGraphTriangulationMode
+// A set of options for how to place graph nodes when triangulating the graph.
 //
 // WithTriangulationMode sets the triangulationMode property and returns the receiver for chaining.
 func (x *MeshGraph) WithTriangulationMode(triangulationMode GKMeshGraphTriangulationMode) *MeshGraph {
@@ -56,35 +60,35 @@ func (x *MeshGraph) WithTriangulationMode(triangulationMode GKMeshGraphTriangula
 	return x
 }
 
-// Adds obstacles to this mesh graph.  Only reflected after the next triangulate call.
+// Adds new obstacles to the graph.
 //
 // AddObstacles calls the underlying AddObstacles.
 func (x *MeshGraph) AddObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle]) {
 	x.inner.AddObstacles(obstacles)
 }
 
-// Removes obstacles from this graph.  Only reflected after the next triangulate call.
+// Removes the specified obstacle from the graph.
 //
 // RemoveObstacles calls the underlying RemoveObstacles.
 func (x *MeshGraph) RemoveObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle]) {
 	x.inner.RemoveObstacles(obstacles)
 }
 
-// Connects the node to this graph by inserting it into an existing triangle and making the appropriate connections Node must be in the space defined by the min and max coordinates of this graph. @param node the node to connect
+// Adds the specified node to the graph, connecting it to its nearest neighbors without creating connections that pass through obstacles or their buffer regions.
 //
 // ConnectNodeUsingObstacles calls the underlying ConnectNodeUsingObstacles.
 func (x *MeshGraph) ConnectNodeUsingObstacles(node objc.ID) {
 	x.inner.ConnectNodeUsingObstacles(node)
 }
 
-// Generates a new triangle mesh for the given obstacles. This should be called after some number of calls to addObstacle The negative space between all input obstacles are triangulated to create a mesh This mesh is turned into a set of connected graph nodes based on
+// Creates or updates the graph with a network of nodes that describes the open space around its obstacles.
 //
 // Triangulate calls the underlying Triangulate.
 func (x *MeshGraph) Triangulate() {
 	x.inner.Triangulate()
 }
 
-// Returns the triangle at the given index @see numTriangles @param index the index of the triangle to be returned @return the triangle at the given index
+// The triangle definition at the specified index.
 //
 // TriangleAtIndex calls the underlying TriangleAtIndex.
 func (x *MeshGraph) TriangleAtIndex(index uint) raw.GKTriangle {

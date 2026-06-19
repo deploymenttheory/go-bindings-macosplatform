@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "framework": "MediaLibrary",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "MLMediaGroup": {
+      "doc": "The MLMediaGroup class provides groupings for media objects from a single source of media, such as iTunes or Aperture. The media objects—individual files containing a piece of media such as a photo, song, or movie—are referenced by one or more groups within each media source. These groupings serve as filters, providing hierarchical structure to the collection of objects in each source.",
+      "url": "https://developer.apple.com/documentation/medialibrary/mlmediagroup"
+    },
+    "MLMediaLibrary": {
+      "doc": "The MLMediaLibrary class provides an interface for accessing a collection of media objects from various sources. It serves as the initial access point of the Media Library framework.",
+      "url": "https://developer.apple.com/documentation/medialibrary/mlmedialibrary"
+    },
+    "MLMediaObject": {
+      "doc": "The MLMediaObject class describes a single media file, such as a photo, song, or movie. Each media object contains basic metadata including a name, media type, URL, and so on. Additional information about each object is stored in its list of attributes. For a list of possible object attribute keys, see Media Object Attribute Keys.",
+      "url": "https://developer.apple.com/documentation/medialibrary/mlmediaobject"
+    },
+    "MLMediaSource": {
+      "doc": "The MLMediaSource class identifies a specific provider of media. Conceptually, a media source respresents a single app, such as iTunes or Aperture. Each media source contains multiple groups of media objects—individual files containing a piece of media such as a photo, song, or movie.",
+      "url": "https://developer.apple.com/documentation/medialibrary/mlmediasource"
+    }
+  },
+  "enums": {
+    "MLMediaSourceType": {
+      "doc": "Specifies the source type associated with a particular media source. Source type reflects the primary type of media within the source. These constants are used to specify values for MLMediaLoadSourceTypesKey in the initWithOptions: method of MLMediaLibrary.",
+      "url": "https://developer.apple.com/documentation/medialibrary/mlmediasourcetype",
+      "members": {
+        "MLMediaSourceTypeAudio": {
+          "doc": "Audio source type. Includes iTunes, GarageBand, and Logic.",
+          "url": "https://developer.apple.com/documentation/medialibrary/mlmediasourcetype/audio"
+        },
+        "MLMediaSourceTypeImage": {
+          "doc": "Image source type. Includes iPhoto, Aperture, and Photo Booth.",
+          "url": "https://developer.apple.com/documentation/medialibrary/mlmediasourcetype/image"
+        },
+        "MLMediaSourceTypeMovie": {
+          "doc": "Movie source type. Includes iMovie and Final Cut Pro.",
+          "url": "https://developer.apple.com/documentation/medialibrary/mlmediasourcetype/movie"
+        }
+      }
+    },
+    "MLMediaType": {
+      "doc": "Specifies the media type associated with a particular media object. These constants are used to specify a media object’s mediaType attribute.",
+      "url": "https://developer.apple.com/documentation/medialibrary/mlmediatype",
+      "members": {
+        "MLMediaTypeAudio": {
+          "doc": "Audio media type.",
+          "url": "https://developer.apple.com/documentation/medialibrary/mlmediatype/audio"
+        },
+        "MLMediaTypeImage": {
+          "doc": "Image media type.",
+          "url": "https://developer.apple.com/documentation/medialibrary/mlmediatype/image"
+        },
+        "MLMediaTypeMovie": {
+          "doc": "Video media type.",
+          "url": "https://developer.apple.com/documentation/medialibrary/mlmediatype/movie"
+        }
+      }
+    }
+  },
+  "methods": {
+    "MLMediaLibrary": {
+      "-initWithOptions:": {
+        "doc": "Initializes the media library based on the specified load options.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmedialibrary/init(options:)"
+      }
+    },
+    "MLMediaSource": {
+      "-mediaGroupForIdentifier:": {
+        "doc": "Returns the media group with the specified identifier.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediasource/mediagroup(foridentifier:)"
+      },
+      "-mediaGroupsForIdentifiers:": {
+        "doc": "Returns the media groups with the specified identifiers.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediasource/mediagroups(foridentifiers:)"
+      },
+      "-mediaObjectForIdentifier:": {
+        "doc": "Returns the media object with the specified identifier.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediasource/mediaobject(foridentifier:)"
+      },
+      "-mediaObjectsForIdentifiers:": {
+        "doc": "Returns the media objects with the specified identifiers.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediasource/mediaobjects(foridentifiers:)"
+      }
+    }
+  },
+  "properties": {
+    "MLMediaGroup": {
+      "URL": {
+        "doc": "The location of the media group.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediagroup/url"
+      },
+      "attributes": {
+        "doc": "A dictionary of attributes describing the media group.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediagroup/attributes"
+      },
+      "childGroups": {
+        "doc": "A list of child groups contained in the media group.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediagroup/childgroups"
+      },
+      "iconImage": {
+        "doc": "The media group’s icon.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediagroup/iconimage"
+      },
+      "identifier": {
+        "doc": "An identifier for the media group.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediagroup/identifier"
+      },
+      "mediaLibrary": {
+        "doc": "A pointer to the media library instance that loaded the media group’s source.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediagroup/medialibrary"
+      },
+      "mediaObjects": {
+        "doc": "A list of media objects in the media group.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediagroup/mediaobjects"
+      },
+      "mediaSourceIdentifier": {
+        "doc": "An identifier for the source that loaded the media group.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediagroup/mediasourceidentifier"
+      },
+      "modificationDate": {
+        "doc": "The date and time when the media group was last altered.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediagroup/modificationdate"
+      },
+      "name": {
+        "doc": "The name of the media group.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediagroup/name"
+      },
+      "parent": {
+        "doc": "The media group’s parent group.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediagroup/parent"
+      },
+      "typeIdentifier": {
+        "doc": "An identifier for the media group’s type.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediagroup/typeidentifier"
+      }
+    },
+    "MLMediaLibrary": {
+      "mediaSources": {
+        "doc": "Returns a dictionary of media sources by identifier.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmedialibrary/mediasources"
+      }
+    },
+    "MLMediaObject": {
+      "URL": {
+        "doc": "The location of the media object.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediaobject/url"
+      },
+      "artworkImage": {
+        "doc": "Album artwork associated with the media object.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediaobject/artworkimage"
+      },
+      "attributes": {
+        "doc": "A dictionary of attributes describing the media object.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediaobject/attributes"
+      },
+      "contentType": {
+        "doc": "The UTI associated with the media object.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediaobject/contenttype"
+      },
+      "fileSize": {
+        "doc": "The size, in bytes, of the media object.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediaobject/filesize"
+      },
+      "identifier": {
+        "doc": "An identifier for the media object.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediaobject/identifier"
+      },
+      "mediaLibrary": {
+        "doc": "A pointer to the media library instance that loaded the media object’s source.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediaobject/medialibrary"
+      },
+      "mediaSourceIdentifier": {
+        "doc": "An identifier for the source that loaded the media object.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediaobject/mediasourceidentifier"
+      },
+      "mediaType": {
+        "doc": "The media object’s type of media (image, audio, or movie).",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediaobject/mediatype"
+      },
+      "modificationDate": {
+        "doc": "The date and time when the media object was last altered.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediaobject/modificationdate"
+      },
+      "name": {
+        "doc": "The name of the media object.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediaobject/name"
+      },
+      "originalURL": {
+        "doc": "The location of the original media object, if URL is not the original location.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediaobject/originalurl"
+      },
+      "thumbnailURL": {
+        "doc": "The location of the media object’s thumbnail image.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediaobject/thumbnailurl"
+      }
+    },
+    "MLMediaSource": {
+      "attributes": {
+        "doc": "A list of attributes describing the media source.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediasource/attributes"
+      },
+      "mediaLibrary": {
+        "doc": "A pointer to the media library instance that loaded this media source.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediasource/medialibrary"
+      },
+      "mediaSourceIdentifier": {
+        "doc": "A unique identifier for the media source.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediasource/mediasourceidentifier"
+      },
+      "rootMediaGroup": {
+        "doc": "The base media group in the media source that contains all other groups within the source as descendant elements.",
+        "url": "https://developer.apple.com/documentation/medialibrary/mlmediasource/rootmediagroup"
+      }
+    }
+  }
+}

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of information about the current process.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsprocessinfo
 type NSProcessInfo struct {
 	NSObject

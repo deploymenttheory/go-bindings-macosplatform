@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information that describes a rental car reservation.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inrentalcarreservation
 type INRentalCarReservation struct {
 	INReservation
@@ -36,6 +38,7 @@ func INRentalCarReservationFromID(id objc.ID) *INRentalCarReservation {
 	return o
 }
 
+// Creates a rental car reservation with the specified contents and attributes.
 func (o *INRentalCarReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLRentalCarRentalDurationPickupLocationDropOffLocation(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], uRL *foundation.NSURL, rentalCar *INRentalCar, rentalDuration *INDateComponentsRange, pickupLocation *corelocation.CLPlacemark, dropOffLocation *corelocation.CLPlacemark) *INRentalCarReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRentalCarReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLRentalCarRentalDurationPickupLocationDropOffLocation, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), uRL.Ptr(), rentalCar.Ptr(), rentalDuration.Ptr(), pickupLocation.Ptr(), dropOffLocation.Ptr())
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func (o *INRentalCarReservation) InitWithItemReferenceReservationNumberBookingTi
 	return INRentalCarReservationFromID(_ret)
 }
 
+// Creates a new rental car reservation with the specified contents and attributes.
 func (o *INRentalCarReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsRentalCarRentalDurationPickupLocationDropOffLocation(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], rentalCar *INRentalCar, rentalDuration *INDateComponentsRange, pickupLocation *corelocation.CLPlacemark, dropOffLocation *corelocation.CLPlacemark) *INRentalCarReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRentalCarReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsRentalCarRentalDurationPickupLocationDropOffLocation, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), rentalCar.Ptr(), rentalDuration.Ptr(), pickupLocation.Ptr(), dropOffLocation.Ptr())
 	if _ret != 0 {

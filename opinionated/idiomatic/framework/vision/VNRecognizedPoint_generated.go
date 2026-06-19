@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a normalized point in an image, along with an identifier label and a confidence value.
+//
 // RecognizedPoint wraps [raw.VNRecognizedPoint] with a fluent Go API.
 type RecognizedPoint struct {
 	inner *raw.VNRecognizedPoint

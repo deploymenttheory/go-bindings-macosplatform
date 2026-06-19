@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of an attribute that derives its value by composing other attributes.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nscompositeattributedescription
 type NSCompositeAttributeDescription struct {
 	NSAttributeDescription

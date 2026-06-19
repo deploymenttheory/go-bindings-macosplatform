@@ -1,0 +1,944 @@
+{
+  "schema_version": 1,
+  "framework": "StoreKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SKAdImpression": {
+      "doc": "A class that defines an ad impression for a view-through ad.",
+      "url": "https://developer.apple.com/documentation/storekit/skadimpression"
+    },
+    "SKAdNetwork": {
+      "doc": "A class that validates advertisement-driven app installations.",
+      "url": "https://developer.apple.com/documentation/storekit/skadnetwork"
+    },
+    "SKArcadeService": {
+      "url": "https://developer.apple.com/documentation/storekit/skarcadeservice"
+    },
+    "SKCloudServiceController": {
+      "doc": "An object that determines the current capabilities of a person’s Music library.",
+      "url": "https://developer.apple.com/documentation/storekit/skcloudservicecontroller"
+    },
+    "SKCloudServiceSetupViewController": {
+      "doc": "A view controller that helps people perform setup for a cloud service, like an Apple Music subscription.",
+      "url": "https://developer.apple.com/documentation/storekit/skcloudservicesetupviewcontroller"
+    },
+    "SKDownload": {
+      "doc": "Downloadable content associated with a product.",
+      "url": "https://developer.apple.com/documentation/storekit/skdownload"
+    },
+    "SKMutablePayment": {
+      "doc": "A mutable request to the App Store to process payment for additional functionality that your app offers.",
+      "url": "https://developer.apple.com/documentation/storekit/skmutablepayment"
+    },
+    "SKOverlay": {
+      "doc": "A class that displays an overlay you can use to recommend another app or an App Clip’s corresponding full app.",
+      "url": "https://developer.apple.com/documentation/storekit/skoverlay"
+    },
+    "SKOverlayAppClipConfiguration": {
+      "doc": "An object that represents the attributes of an overlay you use to recommend an App Clip’s corresponding full app.",
+      "url": "https://developer.apple.com/documentation/storekit/skoverlayappclipconfiguration"
+    },
+    "SKOverlayAppConfiguration": {
+      "doc": "An object that represents the attributes of an overlay you use to recommend another app on the App Store.",
+      "url": "https://developer.apple.com/documentation/storekit/skoverlayappconfiguration"
+    },
+    "SKOverlayConfiguration": {
+      "doc": "The abstract superclass for all classes that represent an overlay’s attributes.",
+      "url": "https://developer.apple.com/documentation/storekit/skoverlayconfiguration"
+    },
+    "SKOverlayTransitionContext": {
+      "doc": "A context object you can use to animate UI changes while the platform presents or dismisses an overlay.",
+      "url": "https://developer.apple.com/documentation/storekit/skoverlaytransitioncontext"
+    },
+    "SKPayment": {
+      "doc": "A request to the App Store to process payment for additional functionality that your app offers.",
+      "url": "https://developer.apple.com/documentation/storekit/skpayment"
+    },
+    "SKPaymentDiscount": {
+      "doc": "The signed discount to apply to a payment.",
+      "url": "https://developer.apple.com/documentation/storekit/skpaymentdiscount"
+    },
+    "SKPaymentQueue": {
+      "doc": "A queue of payment transactions for the App Store to process.",
+      "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue"
+    },
+    "SKPaymentTransaction": {
+      "doc": "An object in the payment queue.",
+      "url": "https://developer.apple.com/documentation/storekit/skpaymenttransaction"
+    },
+    "SKProduct": {
+      "doc": "Information about a registered product in App Store Connect.",
+      "url": "https://developer.apple.com/documentation/storekit/skproduct"
+    },
+    "SKProductDiscount": {
+      "doc": "The details of an introductory offer or a promotional offer for an auto-renewable subscription.",
+      "url": "https://developer.apple.com/documentation/storekit/skproductdiscount"
+    },
+    "SKProductStorePromotionController": {
+      "doc": "A product promotion controller for customizing the order and visibility of In-App Purchases per device.",
+      "url": "https://developer.apple.com/documentation/storekit/skproductstorepromotioncontroller"
+    },
+    "SKProductSubscriptionPeriod": {
+      "doc": "An object containing the subscription period duration information.",
+      "url": "https://developer.apple.com/documentation/storekit/skproductsubscriptionperiod"
+    },
+    "SKProductsRequest": {
+      "doc": "An object that can retrieve localized information from the App Store about a specified list of products.",
+      "url": "https://developer.apple.com/documentation/storekit/skproductsrequest"
+    },
+    "SKProductsResponse": {
+      "doc": "An App Store response to a request for information about a list of products.",
+      "url": "https://developer.apple.com/documentation/storekit/skproductsresponse"
+    },
+    "SKReceiptRefreshRequest": {
+      "doc": "A request to the App Store to get the app receipt, which represents the customer’s transactions with your app.",
+      "url": "https://developer.apple.com/documentation/storekit/skreceiptrefreshrequest"
+    },
+    "SKRequest": {
+      "doc": "An abstract class that represents a request to the App Store.",
+      "url": "https://developer.apple.com/documentation/storekit/skrequest"
+    },
+    "SKStoreProductViewController": {
+      "doc": "A view controller that provides a page where customers can purchase media from the App Store.",
+      "url": "https://developer.apple.com/documentation/storekit/skstoreproductviewcontroller"
+    },
+    "SKStoreReviewController": {
+      "doc": "An object that controls the process of requesting App Store ratings and reviews from customers.",
+      "url": "https://developer.apple.com/documentation/storekit/skstorereviewcontroller"
+    },
+    "SKStorefront": {
+      "doc": "An object containing the location and unique identifier of an Apple App Store storefront.",
+      "url": "https://developer.apple.com/documentation/storekit/skstorefront"
+    }
+  },
+  "protocols": {
+    "SKCloudServiceSetupViewControllerDelegate": {
+      "doc": "A protocol that defines the methods a cloud service setup view controller can use to get the status of the view, including when it is dismissed.",
+      "url": "https://developer.apple.com/documentation/storekit/skcloudservicesetupviewcontrollerdelegate"
+    },
+    "SKDownloaderExtension": {
+      "doc": "An application extension that uses the system implementation to schedule Apple-hosted asset-pack downloads automatically.",
+      "url": "https://developer.apple.com/documentation/storekit/skdownloaderextension"
+    },
+    "SKOverlayDelegate": {
+      "doc": "Methods for responding to the overlay’s appearance, dismissal, or failure to load.",
+      "url": "https://developer.apple.com/documentation/storekit/skoverlaydelegate"
+    },
+    "SKPaymentQueueDelegate": {
+      "doc": "The protocol that provides information needed to complete transactions.",
+      "url": "https://developer.apple.com/documentation/storekit/skpaymentqueuedelegate"
+    },
+    "SKPaymentTransactionObserver": {
+      "doc": "A set of methods that process transactions, unlock purchased functionality, and continue promoted In-App Purchases.",
+      "url": "https://developer.apple.com/documentation/storekit/skpaymenttransactionobserver"
+    },
+    "SKProductsRequestDelegate": {
+      "doc": "A set of methods the delegate implements so it receives the product information your app requests.",
+      "url": "https://developer.apple.com/documentation/storekit/skproductsrequestdelegate"
+    },
+    "SKRequestDelegate": {
+      "doc": "Common methods that are implemented by delegates for any subclass of the SKRequest abstract class.",
+      "url": "https://developer.apple.com/documentation/storekit/skrequestdelegate"
+    },
+    "SKStoreProductViewControllerDelegate": {
+      "doc": "A protocol to call when the customer dismisses the store screen.",
+      "url": "https://developer.apple.com/documentation/storekit/skstoreproductviewcontrollerdelegate"
+    }
+  },
+  "enums": {
+    "SKANError": {
+      "doc": "An error that an ad network attribution operation returns.",
+      "url": "https://developer.apple.com/documentation/storekit/skanerror"
+    },
+    "SKCloudServiceAuthorizationStatus": {
+      "doc": "Constants that indicate the type of authorization the customer has for accessing the Music library.",
+      "url": "https://developer.apple.com/documentation/storekit/skcloudserviceauthorizationstatus",
+      "members": {
+        "SKCloudServiceAuthorizationStatusAuthorized": {
+          "doc": "The user authorizes playback of Apple Music tracks and the addition of tracks to their music library.",
+          "url": "https://developer.apple.com/documentation/storekit/skcloudserviceauthorizationstatus/authorized"
+        },
+        "SKCloudServiceAuthorizationStatusDenied": {
+          "doc": "The user does not authorize any access to their music library.",
+          "url": "https://developer.apple.com/documentation/storekit/skcloudserviceauthorizationstatus/denied"
+        },
+        "SKCloudServiceAuthorizationStatusNotDetermined": {
+          "doc": "The authorization type cannot be determined.",
+          "url": "https://developer.apple.com/documentation/storekit/skcloudserviceauthorizationstatus/notdetermined"
+        },
+        "SKCloudServiceAuthorizationStatusRestricted": {
+          "doc": "Access to the music library is restricted in a way that the user cannot change, so your app should not prompt for authorization. An example of this situation is if the device is in an education mode.",
+          "url": "https://developer.apple.com/documentation/storekit/skcloudserviceauthorizationstatus/restricted"
+        }
+      }
+    },
+    "SKCloudServiceCapability": {
+      "doc": "Constants that specify the current capabilities of the customer’s Music library on the device.",
+      "url": "https://developer.apple.com/documentation/storekit/skcloudservicecapability",
+      "members": {
+        "SKCloudServiceCapabilityAddToCloudMusicLibrary": {
+          "doc": "The device allows tracks to be added to the user’s music library.",
+          "url": "https://developer.apple.com/documentation/storekit/skcloudservicecapability/addtocloudmusiclibrary"
+        },
+        "SKCloudServiceCapabilityMusicCatalogPlayback": {
+          "doc": "The device allows playback of Apple Music catalog tracks.",
+          "url": "https://developer.apple.com/documentation/storekit/skcloudservicecapability/musiccatalogplayback"
+        },
+        "SKCloudServiceCapabilityMusicCatalogSubscriptionEligible": {
+          "doc": "The device allows subscription to the Apple Music catalog.",
+          "url": "https://developer.apple.com/documentation/storekit/skcloudservicecapability/musiccatalogsubscriptioneligible"
+        },
+        "SKCloudServiceCapabilityNone": {
+          "doc": "The device does not allow playback of Apple Music content or the addition of tracks to the music library.",
+          "url": "https://developer.apple.com/documentation/storekit/skcloudservicecapability/skcloudservicecapabilitynone"
+        },
+        "init(rawValue:)": {
+          "doc": "Initializes a cloud service capability with the provided raw value.",
+          "url": "https://developer.apple.com/documentation/storekit/skcloudservicecapability/init(rawvalue:)"
+        }
+      }
+    },
+    "SKDownloadState": {
+      "doc": "The states that a download operation can be in.",
+      "url": "https://developer.apple.com/documentation/storekit/skdownloadstate",
+      "members": {
+        "SKDownloadStateActive": {
+          "doc": "Indicates that the content is currently being downloaded.",
+          "url": "https://developer.apple.com/documentation/storekit/skdownloadstate/active"
+        },
+        "SKDownloadStateCancelled": {
+          "doc": "Indicates that your app canceled the download.",
+          "url": "https://developer.apple.com/documentation/storekit/skdownloadstate/cancelled"
+        },
+        "SKDownloadStateFailed": {
+          "doc": "Indicates that an error occurred while the file was being downloaded.",
+          "url": "https://developer.apple.com/documentation/storekit/skdownloadstate/failed"
+        },
+        "SKDownloadStateFinished": {
+          "doc": "Indicates that the content was successfully downloaded.",
+          "url": "https://developer.apple.com/documentation/storekit/skdownloadstate/finished"
+        },
+        "SKDownloadStatePaused": {
+          "doc": "Indicates that your app paused the download.",
+          "url": "https://developer.apple.com/documentation/storekit/skdownloadstate/paused"
+        },
+        "SKDownloadStateWaiting": {
+          "doc": "Indicates that the download has not started yet.",
+          "url": "https://developer.apple.com/documentation/storekit/skdownloadstate/waiting"
+        }
+      }
+    },
+    "SKErrorCode": {
+      "doc": "Error codes for StoreKit errors.",
+      "url": "https://developer.apple.com/documentation/storekit/skerrorcode"
+    },
+    "SKOverlayPosition": {
+      "doc": "Constants that identify the position of an overlay on the screen.",
+      "url": "https://developer.apple.com/documentation/storekit/skoverlayposition"
+    },
+    "SKPaymentTransactionState": {
+      "doc": "Values representing the state of a transaction.",
+      "url": "https://developer.apple.com/documentation/storekit/skpaymenttransactionstate",
+      "members": {
+        "SKPaymentTransactionStateDeferred": {
+          "doc": "A transaction that is in the queue, but its final status is pending external action such as Ask to Buy.",
+          "url": "https://developer.apple.com/documentation/storekit/skpaymenttransactionstate/deferred"
+        },
+        "SKPaymentTransactionStateFailed": {
+          "doc": "A failed transaction.",
+          "url": "https://developer.apple.com/documentation/storekit/skpaymenttransactionstate/failed"
+        },
+        "SKPaymentTransactionStatePurchased": {
+          "doc": "A successfully processed transaction.",
+          "url": "https://developer.apple.com/documentation/storekit/skpaymenttransactionstate/purchased"
+        },
+        "SKPaymentTransactionStatePurchasing": {
+          "doc": "A transaction that is being processed by the App Store.",
+          "url": "https://developer.apple.com/documentation/storekit/skpaymenttransactionstate/purchasing"
+        },
+        "SKPaymentTransactionStateRestored": {
+          "doc": "A transaction that restores content previously purchased by the user.",
+          "url": "https://developer.apple.com/documentation/storekit/skpaymenttransactionstate/restored"
+        }
+      }
+    },
+    "SKProductDiscountPaymentMode": {
+      "doc": "Values representing the payment modes for a product discount.",
+      "url": "https://developer.apple.com/documentation/storekit/skproductdiscountpaymentmode"
+    },
+    "SKProductDiscountType": {
+      "doc": "Values representing the types of discount offers an app can present.",
+      "url": "https://developer.apple.com/documentation/storekit/skproductdiscounttype"
+    },
+    "SKProductPeriodUnit": {
+      "doc": "Values representing the duration of an interval, from a day up to a year.",
+      "url": "https://developer.apple.com/documentation/storekit/skproductperiodunit"
+    },
+    "SKProductStorePromotionVisibility": {
+      "doc": "The visibility settings that determine if an in-app purchase is visible on a device.",
+      "url": "https://developer.apple.com/documentation/storekit/skproductstorepromotionvisibility",
+      "members": {
+        "SKProductStorePromotionVisibilityDefault": {
+          "doc": "Indicates product visibility is the same as the default value set in App Store Connect.",
+          "url": "https://developer.apple.com/documentation/storekit/skproductstorepromotionvisibility/default"
+        },
+        "SKProductStorePromotionVisibilityHide": {
+          "doc": "Indicates product is hidden.",
+          "url": "https://developer.apple.com/documentation/storekit/skproductstorepromotionvisibility/hide"
+        },
+        "SKProductStorePromotionVisibilityShow": {
+          "doc": "Indicates product is shown.",
+          "url": "https://developer.apple.com/documentation/storekit/skproductstorepromotionvisibility/show"
+        }
+      }
+    }
+  },
+  "methods": {
+    "SKAdImpression": {
+      "-initWithSourceAppStoreItemIdentifier:advertisedAppStoreItemIdentifier:adNetworkIdentifier:adCampaignIdentifier:adImpressionIdentifier:timestamp:signature:version:": {
+        "doc": "Creates an ad impression object using the supplied values.",
+        "url": "https://developer.apple.com/documentation/storekit/skadimpression/init(sourceappstoreitemidentifier:advertisedappstoreitemidentifier:adnetworkidentifier:adcampaignidentifier:adimpressionidentifier:timestamp:signature:version:)"
+      }
+    },
+    "SKAdNetwork": {
+      "+endImpression:completionHandler:": {
+        "doc": "Indicates that your app is no longer presenting a view-through ad to the user.",
+        "url": "https://developer.apple.com/documentation/storekit/skadnetwork/endimpression(_:completionhandler:)"
+      },
+      "+registerAppForAdNetworkAttribution": {
+        "doc": "Verifies the first launch of an app installed as a result of an ad.",
+        "url": "https://developer.apple.com/documentation/storekit/skadnetwork/registerappforadnetworkattribution()"
+      },
+      "+startImpression:completionHandler:": {
+        "doc": "Indicates that your app is presenting a view-through ad to the user.",
+        "url": "https://developer.apple.com/documentation/storekit/skadnetwork/startimpression(_:completionhandler:)"
+      },
+      "+updateConversionValue:": {
+        "doc": "Updates the conversion value and verifies the first launch of an app installed as a result of an ad.",
+        "url": "https://developer.apple.com/documentation/storekit/skadnetwork/updateconversionvalue(_:)"
+      },
+      "+updatePostbackConversionValue:coarseValue:completionHandler:": {
+        "doc": "Updates the fine and coarse conversion values, and calls a completion handler if the update fails.",
+        "url": "https://developer.apple.com/documentation/storekit/skadnetwork/updatepostbackconversionvalue(_:coarsevalue:completionhandler:)"
+      },
+      "+updatePostbackConversionValue:coarseValue:lockWindow:completionHandler:": {
+        "doc": "Updates the fine and coarse conversion values and indicates whether to send the postback before the conversion window ends, and calls a completion handler if the update fails.",
+        "url": "https://developer.apple.com/documentation/storekit/skadnetwork/updatepostbackconversionvalue(_:coarsevalue:lockwindow:completionhandler:)"
+      },
+      "+updatePostbackConversionValue:completionHandler:": {
+        "doc": "Verifies the first launch of an advertised app and, on subsequent calls, updates the conversion value or calls a completion handler if the update fails.",
+        "url": "https://developer.apple.com/documentation/storekit/skadnetwork/updatepostbackconversionvalue(_:completionhandler:)"
+      }
+    },
+    "SKCloudServiceController": {
+      "+authorizationStatus": {
+        "doc": "Returns the type of authorization the customer has for accessing the Music library on the device.",
+        "url": "https://developer.apple.com/documentation/storekit/skcloudservicecontroller/authorizationstatus()"
+      },
+      "+requestAuthorization:": {
+        "doc": "Asks the customer for permission to access the Music library on the device.",
+        "url": "https://developer.apple.com/documentation/storekit/skcloudservicecontroller/requestauthorization(_:)"
+      },
+      "-requestCapabilitiesWithCompletionHandler:": {
+        "doc": "Gets the current capabilities associated with the Music library on the device.",
+        "url": "https://developer.apple.com/documentation/storekit/skcloudservicecontroller/requestcapabilities(completionhandler:)"
+      },
+      "-requestStorefrontCountryCodeWithCompletionHandler:": {
+        "doc": "Gets the country code for the storefront associated with a customer’s iTunes account.",
+        "url": "https://developer.apple.com/documentation/storekit/skcloudservicecontroller/requeststorefrontcountrycode(completionhandler:)"
+      },
+      "-requestStorefrontIdentifierWithCompletionHandler:": {
+        "doc": "Gets the device’s storefront identifier.",
+        "url": "https://developer.apple.com/documentation/storekit/skcloudservicecontroller/requeststorefrontidentifier(completionhandler:)"
+      },
+      "-requestUserTokenForDeveloperToken:completionHandler:": {
+        "doc": "Returns a user token that you use to access personalized Apple Music content.",
+        "url": "https://developer.apple.com/documentation/storekit/skcloudservicecontroller/requestusertoken(fordevelopertoken:completionhandler:)"
+      }
+    },
+    "SKCloudServiceSetupViewController": {
+      "-loadWithOptions:completionHandler:": {
+        "doc": "Loads the cloud service setup view with the specified options.",
+        "url": "https://developer.apple.com/documentation/storekit/skcloudservicesetupviewcontroller/load(options:completionhandler:)"
+      }
+    },
+    "SKDownload": {
+      "+contentURLForProductID:": {
+        "doc": "Returns the local location for the previously downloaded flie.",
+        "url": "https://developer.apple.com/documentation/storekit/skdownload/contenturl(forproductid:)"
+      },
+      "+deleteContentForProductID:": {
+        "doc": "Deletes the previously downloaded file.",
+        "url": "https://developer.apple.com/documentation/storekit/skdownload/deletecontent(forproductid:)"
+      }
+    },
+    "SKOverlay": {
+      "+dismissOverlayInScene:": {
+        "doc": "Dismisses an App Store overlay.",
+        "url": "https://developer.apple.com/documentation/storekit/skoverlay/dismiss(in:)"
+      },
+      "-initWithConfiguration:": {
+        "doc": "Creates an overlay you use to recommend another app on the App Store.",
+        "url": "https://developer.apple.com/documentation/storekit/skoverlay/init(configuration:)"
+      },
+      "-presentInScene:": {
+        "doc": "Presents an overlay in a window scene.",
+        "url": "https://developer.apple.com/documentation/storekit/skoverlay/present(in:)"
+      }
+    },
+    "SKPayment": {
+      "+paymentWithProduct:": {
+        "doc": "Returns a new payment for the specified product.",
+        "url": "https://developer.apple.com/documentation/storekit/skpayment/init(product:)"
+      },
+      "+paymentWithProductIdentifier:": {
+        "doc": "Returns a new payment with the specified product identifier.",
+        "url": "https://developer.apple.com/documentation/storekit/skpayment/paymentwithproductidentifier:"
+      }
+    },
+    "SKPaymentDiscount": {
+      "-initWithIdentifier:keyIdentifier:nonce:signature:timestamp:": {
+        "doc": "Initializes the payment discount with a signature and the parameters used by the signature.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentdiscount/init(identifier:keyidentifier:nonce:signature:timestamp:)"
+      }
+    },
+    "SKPaymentQueue": {
+      "+canMakePayments": {
+        "doc": "A method that indicates whether the person can make purchases.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/canmakepayments()"
+      },
+      "+defaultQueue": {
+        "doc": "Returns the default payment queue instance.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/default()"
+      },
+      "-addPayment:": {
+        "doc": "Adds a payment request to the queue.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/add(_:)-4vct1"
+      },
+      "-addTransactionObserver:": {
+        "doc": "Adds an observer to the payment queue.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/add(_:)-5ciz2"
+      },
+      "-cancelDownloads:": {
+        "doc": "Removes a set of downloads from the download list.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/cancel(_:)"
+      },
+      "-finishTransaction:": {
+        "doc": "Notifies the App Store that the app finished processing the transaction.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/finishtransaction(_:)"
+      },
+      "-pauseDownloads:": {
+        "doc": "Pauses a set of downloads.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/pause(_:)"
+      },
+      "-presentCodeRedemptionSheet": {
+        "doc": "Displays a sheet that enables customers to redeem offer codes that you configure in App Store Connect.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/presentcoderedemptionsheet()"
+      },
+      "-removeTransactionObserver:": {
+        "doc": "Removes an observer from the payment queue.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/remove(_:)"
+      },
+      "-restoreCompletedTransactions": {
+        "doc": "Asks the payment queue to restore previously completed purchases.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/restorecompletedtransactions()"
+      },
+      "-restoreCompletedTransactionsWithApplicationUsername:": {
+        "doc": "Asks the payment queue to restore previously completed purchases, providing an opaque identifier for the user’s account.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/restorecompletedtransactions(withapplicationusername:)"
+      },
+      "-resumeDownloads:": {
+        "doc": "Resumes a set of downloads.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/resume(_:)"
+      },
+      "-showPriceConsentIfNeeded": {
+        "doc": "Asks the system to display the price consent sheet if the user hasn’t yet responded to a subscription price increase.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/showpriceconsentifneeded()"
+      },
+      "-startDownloads:": {
+        "doc": "Adds a set of downloads to the download list.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/start(_:)"
+      }
+    },
+    "SKProductStorePromotionController": {
+      "+defaultController": {
+        "doc": "Returns the default product store promotion controller.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductstorepromotioncontroller/default()"
+      },
+      "-fetchStorePromotionOrderWithCompletionHandler:": {
+        "doc": "Reads the product order override that determines the promoted product order on this device.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductstorepromotioncontroller/fetchstorepromotionorder(completionhandler:)"
+      },
+      "-fetchStorePromotionVisibilityForProduct:completionHandler:": {
+        "doc": "Reads the visibility setting of a promoted product in the App Store for this device.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductstorepromotioncontroller/fetchstorepromotionvisibility(for:completionhandler:)"
+      },
+      "-updateStorePromotionOrder:completionHandler:": {
+        "doc": "Overrides the promoted product order on this device.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductstorepromotioncontroller/update(storepromotionorder:completionhandler:)"
+      },
+      "-updateStorePromotionVisibility:forProduct:completionHandler:": {
+        "doc": "Updates the visibility of the product on the App Store, per device.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductstorepromotioncontroller/update(storepromotionvisibility:for:completionhandler:)"
+      }
+    },
+    "SKProductsRequest": {
+      "-initWithProductIdentifiers:": {
+        "doc": "Initializes the request with the set of product identifiers.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductsrequest/init(productidentifiers:)"
+      }
+    },
+    "SKReceiptRefreshRequest": {
+      "-initWithReceiptProperties:": {
+        "doc": "Creates a receipt refresh request with optional properties.",
+        "url": "https://developer.apple.com/documentation/storekit/skreceiptrefreshrequest/init(receiptproperties:)"
+      }
+    },
+    "SKRequest": {
+      "-cancel": {
+        "doc": "Cancels a previously started request.",
+        "url": "https://developer.apple.com/documentation/storekit/skrequest/cancel()"
+      },
+      "-start": {
+        "doc": "Sends the request to the Apple App Store.",
+        "url": "https://developer.apple.com/documentation/storekit/skrequest/start()"
+      }
+    },
+    "SKStoreProductViewController": {
+      "-loadProductWithParameters:completionBlock:": {
+        "doc": "Loads a new product screen to display.",
+        "url": "https://developer.apple.com/documentation/storekit/skstoreproductviewcontroller/loadproduct(withparameters:completionblock:)"
+      }
+    },
+    "SKStoreReviewController": {
+      "+requestReview": {
+        "doc": "Tells StoreKit to ask the customer to rate or review your app, if appropriate.",
+        "url": "https://developer.apple.com/documentation/storekit/skstorereviewcontroller/requestreview()"
+      },
+      "+requestReviewInScene:": {
+        "doc": "Tells StoreKit to ask the customer to rate or review the app, if appropriate, using the specified scene.",
+        "url": "https://developer.apple.com/documentation/storekit/skstorereviewcontroller/requestreview(in:)"
+      }
+    }
+  },
+  "properties": {
+    "SKAdImpression": {
+      "adCampaignIdentifier": {
+        "doc": "A number that represents the advertising network’s campaign.",
+        "url": "https://developer.apple.com/documentation/storekit/skadimpression/adcampaignidentifier"
+      },
+      "adDescription": {
+        "doc": "A human-readable description of the ad.",
+        "url": "https://developer.apple.com/documentation/storekit/skadimpression/addescription"
+      },
+      "adImpressionIdentifier": {
+        "doc": "A random value to use for added security.",
+        "url": "https://developer.apple.com/documentation/storekit/skadimpression/adimpressionidentifier"
+      },
+      "adNetworkIdentifier": {
+        "doc": "A string that represents the advertising network’s unique identifier.",
+        "url": "https://developer.apple.com/documentation/storekit/skadimpression/adnetworkidentifier"
+      },
+      "adPurchaserName": {
+        "doc": "The name of the entity that purchased the ad.",
+        "url": "https://developer.apple.com/documentation/storekit/skadimpression/adpurchasername"
+      },
+      "adType": {
+        "doc": "The type of the ad.",
+        "url": "https://developer.apple.com/documentation/storekit/skadimpression/adtype"
+      },
+      "advertisedAppStoreItemIdentifier": {
+        "doc": "The App Store ID of the app that the ad impression advertises.",
+        "url": "https://developer.apple.com/documentation/storekit/skadimpression/advertisedappstoreitemidentifier"
+      },
+      "signature": {
+        "doc": "The advertising network’s cryptographic signature for the ad impression.",
+        "url": "https://developer.apple.com/documentation/storekit/skadimpression/signature"
+      },
+      "sourceAppStoreItemIdentifier": {
+        "doc": "The App Store ID of the app that displays the ad.",
+        "url": "https://developer.apple.com/documentation/storekit/skadimpression/sourceappstoreitemidentifier"
+      },
+      "sourceIdentifier": {
+        "doc": "A four-digit integer that ad networks define to represent the ad campaign.",
+        "url": "https://developer.apple.com/documentation/storekit/skadimpression/sourceidentifier"
+      },
+      "timestamp": {
+        "doc": "A number that represents the UNIX time, in milliseconds, of the ad impression.",
+        "url": "https://developer.apple.com/documentation/storekit/skadimpression/timestamp"
+      },
+      "version": {
+        "doc": "The version of the SKAdNetwork API.",
+        "url": "https://developer.apple.com/documentation/storekit/skadimpression/version"
+      }
+    },
+    "SKAdNetwork": {
+      "SKAdNetworkCoarseConversionValue": {
+        "doc": "Coarse values to use for updating conversion values.",
+        "url": "https://developer.apple.com/documentation/storekit/skadnetwork/coarseconversionvalue"
+      }
+    },
+    "SKCloudServiceSetupViewController": {
+      "delegate": {
+        "doc": "The cloud service view controller’s delegate.",
+        "url": "https://developer.apple.com/documentation/storekit/skcloudservicesetupviewcontroller/delegate"
+      }
+    },
+    "SKDownload": {
+      "contentIdentifier": {
+        "doc": "A string that uniquely identifies the downloadable content.",
+        "url": "https://developer.apple.com/documentation/storekit/skdownload/contentidentifier"
+      },
+      "contentLength": {
+        "doc": "The length of the downloadable content, in bytes.",
+        "url": "https://developer.apple.com/documentation/storekit/skdownload/contentlength"
+      },
+      "contentURL": {
+        "doc": "The local location of the downloaded file.",
+        "url": "https://developer.apple.com/documentation/storekit/skdownload/contenturl"
+      },
+      "contentVersion": {
+        "doc": "A string that identifies which version of the content is available for download.",
+        "url": "https://developer.apple.com/documentation/storekit/skdownload/contentversion"
+      },
+      "downloadState": {
+        "doc": "The current state of the download object.",
+        "url": "https://developer.apple.com/documentation/storekit/skdownload/downloadstate"
+      },
+      "error": {
+        "doc": "The error that prevented the content from being downloaded.",
+        "url": "https://developer.apple.com/documentation/storekit/skdownload/error"
+      },
+      "expectedContentLength": {
+        "doc": "The length of the downloadable content, in bytes.",
+        "url": "https://developer.apple.com/documentation/storekit/skdownload/expectedcontentlength"
+      },
+      "progress": {
+        "doc": "A value that indicates how much of the file has been downloaded.",
+        "url": "https://developer.apple.com/documentation/storekit/skdownload/progress"
+      },
+      "state": {
+        "doc": "The current state of the download object.",
+        "url": "https://developer.apple.com/documentation/storekit/skdownload/state"
+      },
+      "timeRemaining": {
+        "doc": "An estimated time, in seconds, to finish downloading the content.",
+        "url": "https://developer.apple.com/documentation/storekit/skdownload/timeremaining"
+      },
+      "transaction": {
+        "doc": "The transaction associated with the downloadable file.",
+        "url": "https://developer.apple.com/documentation/storekit/skdownload/transaction"
+      }
+    },
+    "SKMutablePayment": {
+      "applicationUsername": {
+        "doc": "A string that associates the transaction with a user account on your service.",
+        "url": "https://developer.apple.com/documentation/storekit/skmutablepayment/applicationusername"
+      },
+      "paymentDiscount": {
+        "doc": "The details of the discount offer to apply to the payment.",
+        "url": "https://developer.apple.com/documentation/storekit/skmutablepayment/paymentdiscount"
+      },
+      "productIdentifier": {
+        "doc": "A string that identifies a product that can be purchased from within your app.",
+        "url": "https://developer.apple.com/documentation/storekit/skmutablepayment/productidentifier"
+      },
+      "quantity": {
+        "doc": "The number of items the user wants to purchase.",
+        "url": "https://developer.apple.com/documentation/storekit/skmutablepayment/quantity"
+      },
+      "requestData": {
+        "doc": "Reserved for future use.",
+        "url": "https://developer.apple.com/documentation/storekit/skmutablepayment/requestdata"
+      },
+      "simulatesAskToBuyInSandbox": {
+        "doc": "A Boolean value that produces an “ask to buy” flow for this payment in the sandbox.",
+        "url": "https://developer.apple.com/documentation/storekit/skmutablepayment/simulatesasktobuyinsandbox"
+      }
+    },
+    "SKOverlay": {
+      "SKOverlayAppClipConfiguration": {
+        "doc": "An object that represents the attributes of an overlay you use to recommend an App Clip’s corresponding full app.",
+        "url": "https://developer.apple.com/documentation/storekit/skoverlay/appclipconfiguration"
+      },
+      "SKOverlayAppConfiguration": {
+        "doc": "An object that represents the attributes of an overlay you use to recommend another app on the App Store.",
+        "url": "https://developer.apple.com/documentation/storekit/skoverlay/appconfiguration"
+      },
+      "SKOverlayConfiguration": {
+        "doc": "The abstract superclass for all classes that represent an overlay’s attributes.",
+        "url": "https://developer.apple.com/documentation/storekit/skoverlay/configuration-swift.class"
+      },
+      "configuration": {
+        "doc": "An overlay’s attributes; for example, its position on the screen.",
+        "url": "https://developer.apple.com/documentation/storekit/skoverlay/configuration-swift.property"
+      },
+      "delegate": {
+        "doc": "The overlay’s delegate.",
+        "url": "https://developer.apple.com/documentation/storekit/skoverlay/delegate"
+      }
+    },
+    "SKPayment": {
+      "applicationUsername": {
+        "doc": "A string that associates the transaction with a user account on your service.",
+        "url": "https://developer.apple.com/documentation/storekit/skpayment/applicationusername"
+      },
+      "paymentDiscount": {
+        "doc": "The details of the discount offer to apply to the payment.",
+        "url": "https://developer.apple.com/documentation/storekit/skpayment/paymentdiscount"
+      },
+      "productIdentifier": {
+        "doc": "A string used to identify a product that can be purchased from within your app.",
+        "url": "https://developer.apple.com/documentation/storekit/skpayment/productidentifier"
+      },
+      "quantity": {
+        "doc": "The number of items the user wants to purchase.",
+        "url": "https://developer.apple.com/documentation/storekit/skpayment/quantity"
+      },
+      "requestData": {
+        "doc": "Reserved for future use.",
+        "url": "https://developer.apple.com/documentation/storekit/skpayment/requestdata"
+      },
+      "simulatesAskToBuyInSandbox": {
+        "doc": "A Boolean value that produces an “ask to buy” flow for this payment in the sandbox.",
+        "url": "https://developer.apple.com/documentation/storekit/skpayment/simulatesasktobuyinsandbox"
+      }
+    },
+    "SKPaymentDiscount": {
+      "identifier": {
+        "doc": "A string used to uniquely identify a discount offer for a product.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentdiscount/identifier"
+      },
+      "keyIdentifier": {
+        "doc": "A string that identifies the key used to generate the signature.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentdiscount/keyidentifier"
+      },
+      "nonce": {
+        "doc": "A universally unique ID (UUID) value that you define.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentdiscount/nonce"
+      },
+      "signature": {
+        "doc": "A string representing the properties of a specific promotional offer, cryptographically signed.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentdiscount/signature"
+      },
+      "timestamp": {
+        "doc": "The date and time of the signature’s creation in milliseconds, formatted in Unix epoch time.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentdiscount/timestamp"
+      }
+    },
+    "SKPaymentQueue": {
+      "delegate": {
+        "doc": "A delegate that provides information needed to complete transactions.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/delegate"
+      },
+      "storefront": {
+        "doc": "The App Store storefront of the device.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/storefront"
+      },
+      "transactionObservers": {
+        "doc": "An array of all active payment queue observers.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/transactionobservers"
+      },
+      "transactions": {
+        "doc": "Returns an array of pending transactions.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymentqueue/transactions"
+      }
+    },
+    "SKPaymentTransaction": {
+      "downloads": {
+        "doc": "An array of download objects representing the downloadable content associated with the transaction.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymenttransaction/downloads"
+      },
+      "error": {
+        "doc": "An object describing the error that occurred while processing the transaction.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymenttransaction/error"
+      },
+      "originalTransaction": {
+        "doc": "The transaction that was restored by the App Store.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymenttransaction/original"
+      },
+      "payment": {
+        "doc": "The payment for the transaction.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymenttransaction/payment"
+      },
+      "transactionDate": {
+        "doc": "The date the transaction was added to the App Store’s payment queue.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymenttransaction/transactiondate"
+      },
+      "transactionIdentifier": {
+        "doc": "A string that uniquely identifies a successful payment transaction.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymenttransaction/transactionidentifier"
+      },
+      "transactionReceipt": {
+        "doc": "A signed receipt that records all information about a successful payment transaction.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymenttransaction/transactionreceipt"
+      },
+      "transactionState": {
+        "doc": "The current state of the transaction.",
+        "url": "https://developer.apple.com/documentation/storekit/skpaymenttransaction/transactionstate"
+      }
+    },
+    "SKProduct": {
+      "SKProductPeriodUnit": {
+        "doc": "Values representing the duration of an interval, from a day up to a year.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/periodunit"
+      },
+      "contentLengths": {
+        "doc": "The total size of the content, in bytes.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/contentlengths"
+      },
+      "contentVersion": {
+        "doc": "A string that identifies the version of the content.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/contentversion"
+      },
+      "discounts": {
+        "doc": "An array of subscription offers available for the auto-renewable subscription.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/discounts"
+      },
+      "downloadContentLengths": {
+        "doc": "The lengths of the downloadable files available for this product.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/downloadcontentlengths"
+      },
+      "downloadContentVersion": {
+        "doc": "A string that identifies which version of the content is available for download.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/downloadcontentversion"
+      },
+      "downloadable": {
+        "doc": "A Boolean value that indicates whether the App Store has downloadable content for this product.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/downloadable"
+      },
+      "introductoryPrice": {
+        "doc": "The object containing introductory price information for the product.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/introductoryprice"
+      },
+      "isDownloadable": {
+        "doc": "A Boolean value that indicates whether the App Store has downloadable content for this product.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/isdownloadable"
+      },
+      "isFamilyShareable": {
+        "doc": "A Boolean value that indicates whether the product is available for Family Sharing in App Store Connect.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/isfamilyshareable"
+      },
+      "localizedDescription": {
+        "doc": "A description of the product.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/localizeddescription"
+      },
+      "localizedTitle": {
+        "doc": "The name of the product.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/localizedtitle"
+      },
+      "price": {
+        "doc": "The cost of the product in the local currency.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/price"
+      },
+      "priceLocale": {
+        "doc": "The locale used to format the price of the product.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/pricelocale"
+      },
+      "productIdentifier": {
+        "doc": "The string that identifies the product to the Apple App Store.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/productidentifier"
+      },
+      "subscriptionGroupIdentifier": {
+        "doc": "The identifier of the subscription group to which the subscription belongs.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/subscriptiongroupidentifier"
+      },
+      "subscriptionPeriod": {
+        "doc": "The period details for products that are subscriptions.",
+        "url": "https://developer.apple.com/documentation/storekit/skproduct/subscriptionperiod"
+      }
+    },
+    "SKProductDiscount": {
+      "SKProductDiscountPaymentMode": {
+        "doc": "Values representing the payment modes for a product discount.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductdiscount/paymentmode-swift.enum"
+      },
+      "SKProductDiscountType": {
+        "doc": "Values representing the types of discount offers an app can present.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductdiscount/type-swift.enum"
+      },
+      "identifier": {
+        "doc": "A string used to uniquely identify a discount offer for a product.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductdiscount/identifier"
+      },
+      "numberOfPeriods": {
+        "doc": "An integer that indicates the number of periods the product discount is available.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductdiscount/numberofperiods"
+      },
+      "paymentMode": {
+        "doc": "The payment mode for this product discount.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductdiscount/paymentmode-swift.property"
+      },
+      "price": {
+        "doc": "The discount price of the product in the local currency.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductdiscount/price"
+      },
+      "priceLocale": {
+        "doc": "The locale used to format the discount price of the product.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductdiscount/pricelocale"
+      },
+      "subscriptionPeriod": {
+        "doc": "An object that defines the period for the product discount.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductdiscount/subscriptionperiod"
+      },
+      "type": {
+        "doc": "The type of discount offer.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductdiscount/type-swift.property"
+      }
+    },
+    "SKProductSubscriptionPeriod": {
+      "numberOfUnits": {
+        "doc": "The number of units per subscription period.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductsubscriptionperiod/numberofunits"
+      },
+      "unit": {
+        "doc": "The increment of time that a subscription period is specified in.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductsubscriptionperiod/unit"
+      }
+    },
+    "SKProductsRequest": {
+      "delegate": {
+        "doc": "The delegate that receives the response of the app’s products request.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductsrequest/delegate"
+      }
+    },
+    "SKProductsResponse": {
+      "invalidProductIdentifiers": {
+        "doc": "An array of product identifier strings that the App Store doesn’t recognize.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductsresponse/invalidproductidentifiers"
+      },
+      "products": {
+        "doc": "A list of products, one product for each valid product identifier provided in the original request.",
+        "url": "https://developer.apple.com/documentation/storekit/skproductsresponse/products"
+      }
+    },
+    "SKReceiptRefreshRequest": {
+      "receiptProperties": {
+        "doc": "The properties of the receipt.",
+        "url": "https://developer.apple.com/documentation/storekit/skreceiptrefreshrequest/receiptproperties"
+      }
+    },
+    "SKRequest": {
+      "delegate": {
+        "doc": "The delegate of the request object.",
+        "url": "https://developer.apple.com/documentation/storekit/skrequest/delegate"
+      }
+    },
+    "SKStoreProductViewController": {
+      "delegate": {
+        "doc": "The store view controller’s delegate.",
+        "url": "https://developer.apple.com/documentation/storekit/skstoreproductviewcontroller/delegate"
+      }
+    },
+    "SKStorefront": {
+      "countryCode": {
+        "doc": "The three-letter code representing the country or region associated with the App Store storefront.",
+        "url": "https://developer.apple.com/documentation/storekit/skstorefront/countrycode"
+      },
+      "identifier": {
+        "doc": "A value defined by Apple that uniquely identifies an App Store storefront.",
+        "url": "https://developer.apple.com/documentation/storekit/skstorefront/identifier"
+      }
+    }
+  }
+}

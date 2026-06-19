@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents membership activity for a highlight.
+//
 // HighlightMembershipEvent wraps [raw.SWHighlightMembershipEvent] with a fluent Go API.
 type HighlightMembershipEvent struct {
 	inner *raw.SWHighlightMembershipEvent
@@ -29,7 +31,7 @@ func HighlightMembershipEventFromID(id objc.ID) *HighlightMembershipEvent {
 	return &HighlightMembershipEvent{inner: raw.SWHighlightMembershipEventFromID(id)}
 }
 
-// Initializes a highlight membership event object to represent changes to a highlight membership. @param highlight The object on which the event occurred. @param trigger The trigger membership event for the highlight.
+// Creates and initializes a membership event.
 //
 // NewHighlightMembershipEventWithHighlightTrigger creates a new [HighlightMembershipEvent].
 func NewHighlightMembershipEventWithHighlightTrigger(highlight *raw.SWHighlight, trigger SWHighlightMembershipEventTrigger) *HighlightMembershipEvent {

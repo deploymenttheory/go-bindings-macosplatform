@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that encapsualtes the performance metrics collected by the URL Loading System during the execution of a session task.
+//
 // URLSessionTaskTransactionMetrics wraps [raw.NSURLSessionTaskTransactionMetrics] with a fluent Go API.
 type URLSessionTaskTransactionMetrics struct {
 	inner *raw.NSURLSessionTaskTransactionMetrics

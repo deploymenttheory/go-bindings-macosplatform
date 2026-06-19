@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An agent is a point mass whose local coordinate system is aligned to its velocity.  Agents have a variety of steering functions that can be used to simulate vehicles or entities with agency. The units of mass, velocity and radius are dimensionless but related. The visual representation of these values are specific to each game's own situation. @discussion Values close to 1.0 should be canonical and are expected to yield pleasing results. When applied to visuals these values should be scaled and biased into their target coordinate system and a simple filter on top ensures any noise generated from the steering logic doesn't affect the visual represtentation.
+// A component that moves a game entity according to a set of goals and realistic constraints.
 //
 // Agent wraps [raw.GKAgent] with a fluent Go API.
 type Agent struct {
@@ -37,7 +37,7 @@ func NewAgent() *Agent {
 	return &Agent{inner: raw.GKAgentFromID(_id)}
 }
 
-// Object which has agentDidUpdate called on it during this agent's behavior updatekbeha
+// An object that prepares for or responds to updates in the agent simulation.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Agent) WithDelegate(delegate raw.GKAgentDelegate) *Agent {
@@ -45,7 +45,7 @@ func (x *Agent) WithDelegate(delegate raw.GKAgentDelegate) *Agent {
 	return x
 }
 
-// The behavior to apply when updateWithDeltaTime is called. All forces from the goals in the behavior are summed and then applied.
+// A weighted collection of goals that influence the agent’s movement.
 //
 // WithBehavior sets the behavior property and returns the receiver for chaining.
 func (x *Agent) WithBehavior(behavior BehaviorProvider) *Agent {
@@ -53,7 +53,7 @@ func (x *Agent) WithBehavior(behavior BehaviorProvider) *Agent {
 	return x
 }
 
-// Agent's mass. Used for agent impulse application purposes. Defaults to 1.0
+// The resistance of the agent to changes in speed or direction.
 //
 // WithMass sets the mass property and returns the receiver for chaining.
 func (x *Agent) WithMass(mass float32) *Agent {
@@ -61,7 +61,7 @@ func (x *Agent) WithMass(mass float32) *Agent {
 	return x
 }
 
-// Radius of the agent's bounding circle.  Used by the agent avoid steering functions. Defaults to 0.5 for a canonical diameter of 1.0
+// The agent’s radius.
 //
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *Agent) WithRadius(radius float32) *Agent {
@@ -69,7 +69,7 @@ func (x *Agent) WithRadius(radius float32) *Agent {
 	return x
 }
 
-// Current speed of the agent along its foward direction. Defaults to 0.0
+// The agent’s current forward speed, in units per second.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *Agent) WithSpeed(speed float32) *Agent {
@@ -77,7 +77,7 @@ func (x *Agent) WithSpeed(speed float32) *Agent {
 	return x
 }
 
-// Maximum amount of acceleration that can be applied to this agent.  All applied impulses are clipped to this amount. Defaults to 1.0
+// The upper limit to changes in the agent’s speed or direction.
 //
 // WithMaxAcceleration sets the maxAcceleration property and returns the receiver for chaining.
 func (x *Agent) WithMaxAcceleration(maxAcceleration float32) *Agent {
@@ -85,7 +85,7 @@ func (x *Agent) WithMaxAcceleration(maxAcceleration float32) *Agent {
 	return x
 }
 
-// Maximum speed of this agent. Impulses cannot cause the agents speed to ever be greater than this value. Defaults to 1.0
+// The agent’s maximum forward speed, in units per second.
 //
 // WithMaxSpeed sets the maxSpeed property and returns the receiver for chaining.
 func (x *Agent) WithMaxSpeed(maxSpeed float32) *Agent {

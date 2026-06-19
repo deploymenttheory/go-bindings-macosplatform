@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A geometry based on a two-dimensional path, optionally extruded to create a three-dimensional object.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnshape
 type SCNShape struct {
 	SCNGeometry
@@ -40,7 +42,7 @@ func SCNShapeFromID(id objc.ID) *SCNShape {
 	return o
 }
 
-// @method shapeWithPath:extrusionDepth: @abstract Creates and returns a 3D representation of the given shape with the given extrusion depth. @param path The cubic Bezier spline to extrude. @param extrusionDepth The extrusion depth.
+// Creates a shape geometry with the specified path and extrusion depth.
 func SCNShapeShapeWithPathExtrusionDepth(path *appkit.NSBezierPath, extrusionDepth float64) *SCNShape {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNShape), _sCNShapeSelShapeWithPathExtrusionDepth, path.Ptr(), extrusionDepth)
 	if _ret != 0 {

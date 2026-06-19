@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A command that closes one or more scriptable objects.
+//
 // CloseCommand wraps [raw.NSCloseCommand] with a fluent Go API.
 type CloseCommand struct {
 	inner *raw.NSCloseCommand
@@ -36,42 +38,56 @@ func NewCloseCommand() *CloseCommand {
 	return &CloseCommand{inner: raw.NSCloseCommandFromID(_id)}
 }
 
+// Sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
+//
 // WithDirectParameter sets the directParameter property and returns the receiver for chaining.
 func (x *CloseCommand) WithDirectParameter(directParameter objc.ID) *CloseCommand {
 	x.inner.NSScriptCommand.SetDirectParameter(directParameter)
 	return x
 }
 
+// Sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
+//
 // WithReceiversSpecifier sets the receiversSpecifier property and returns the receiver for chaining.
 func (x *CloseCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CloseCommand {
 	x.inner.NSScriptCommand.SetReceiversSpecifier(receiversSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets the arguments of the command to args.
+//
 // WithArguments sets the arguments property and returns the receiver for chaining.
 func (x *CloseCommand) WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *CloseCommand {
 	x.inner.NSScriptCommand.SetArguments(arguments)
 	return x
 }
 
+// Sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
+//
 // WithScriptErrorNumber sets the scriptErrorNumber property and returns the receiver for chaining.
 func (x *CloseCommand) WithScriptErrorNumber(scriptErrorNumber int) *CloseCommand {
 	x.inner.NSScriptCommand.SetScriptErrorNumber(scriptErrorNumber)
 	return x
 }
 
+// Sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+//
 // WithScriptErrorOffendingObjectDescriptor sets the scriptErrorOffendingObjectDescriptor property and returns the receiver for chaining.
 func (x *CloseCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *CloseCommand {
 	x.inner.NSScriptCommand.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor.Unwrap())
 	return x
 }
 
+// Sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+//
 // WithScriptErrorExpectedTypeDescriptor sets the scriptErrorExpectedTypeDescriptor property and returns the receiver for chaining.
 func (x *CloseCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *CloseCommand {
 	x.inner.NSScriptCommand.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor.Unwrap())
 	return x
 }
 
+// Sets a script error string that is associated with execution of the command.
+//
 // WithScriptErrorString sets the scriptErrorString property and returns the receiver for chaining.
 func (x *CloseCommand) WithScriptErrorString(scriptErrorString string) *CloseCommand {
 	x.inner.NSScriptCommand.SetScriptErrorString(foundation.NSStringStringWithUTF8String(scriptErrorString))

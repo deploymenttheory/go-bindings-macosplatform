@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Representation of a directed graph of GKGraphNodes
+// A collection of nodes that describes the navigability of a game world and provides pathfinding methods to search for routes through that space.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkgraph
 type GKGraph struct {
@@ -38,7 +38,7 @@ func GKGraphFromID(id objc.ID) *GKGraph {
 	return o
 }
 
-// Creates a graph with the provided array of nodes. @params nodes the nodes to create the graph with
+// Creates a graph with the specified list of nodes.
 func GKGraphGraphWithNodes(nodes *foundation.NSArray[*GKGraphNode]) *GKGraph {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGraph), _gKGraphSelGraphWithNodes, nodes.Ptr())
 	if _ret != 0 {
@@ -47,6 +47,7 @@ func GKGraphGraphWithNodes(nodes *foundation.NSArray[*GKGraphNode]) *GKGraph {
 	return GKGraphFromID(_ret)
 }
 
+// Initializes a graph with the specified list of nodes.
 func (o *GKGraph) InitWithNodes(nodes *foundation.NSArray[*GKGraphNode]) *GKGraph {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGraphSelInitWithNodes, nodes.Ptr())
 	if _ret != 0 {
@@ -55,22 +56,22 @@ func (o *GKGraph) InitWithNodes(nodes *foundation.NSArray[*GKGraphNode]) *GKGrap
 	return GKGraphFromID(_ret)
 }
 
-// Connects the node to this graph via the lowest cost node to reach in this graph @param node the node to connect @param bidirectional should the connection be bidirectional? Otherwise it is one way connected into the graph
+// Adds a node to the graph, connecting it to the node already in the graph for which the connection has the lowest cost.
 func (o *GKGraph) ConnectNodeToLowestCostNodeBidirectional(node *GKGraphNode, bidirectional bool) {
 	o.Ptr().Send(_gKGraphSelConnectNodeToLowestCostNodeBidirectional, node.Ptr(), bidirectional)
 }
 
-// Removes nodes from this graph. All connections starting and/or ending with this node are removed. @param nodes an array of nodes to be removed
+// Removes the specified nodes from the graph.
 func (o *GKGraph) RemoveNodes(nodes *foundation.NSArray[*GKGraphNode]) {
 	o.Ptr().Send(_gKGraphSelRemoveNodes, nodes.Ptr())
 }
 
-// Adds nodes to this graph.  No new connections are added. If the node already exists in this graph this does nothing. @param nodes and array of nodes to be added
+// Adds the specified nodes to the graph.
 func (o *GKGraph) AddNodes(nodes *foundation.NSArray[*GKGraphNode]) {
 	o.Ptr().Send(_gKGraphSelAddNodes, nodes.Ptr())
 }
 
-// Attempts to find the optimal path between the two nodes indicated. If such a path exists, it is returned in start to end order. If it doesn't exist, the array returned will be empty. Asserts if neither of these nodes are in this graph.  Use [GKGraphNode findPathFromNode:] instead. @param startNode node to start pathing from @param endNode goal node of the pathfinding attempt
+// Computes and returns a sequence of nodes that represents the shortest traversal of the graph between the specified nodes.
 func (o *GKGraph) FindPathFromNodeToNode(startNode *GKGraphNode, endNode *GKGraphNode) *foundation.NSArray[*GKGraphNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGraphSelFindPathFromNodeToNode, startNode.Ptr(), endNode.Ptr())
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A discrete gesture recognizer that tracks a specified number of mouse clicks.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsclickgesturerecognizer
 type NSClickGestureRecognizer struct {
 	NSGestureRecognizer

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The voltage for all leads at a single point in time.
+//
 // ElectrocardiogramVoltageMeasurement wraps [raw.HKElectrocardiogramVoltageMeasurement] with a fluent Go API.
 type ElectrocardiogramVoltageMeasurement struct {
 	inner *raw.HKElectrocardiogramVoltageMeasurement

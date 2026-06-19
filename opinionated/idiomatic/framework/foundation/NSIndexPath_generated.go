@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A list of indexes that together represent the path to a specific location in a tree of nested arrays.
+//
 // IndexPath wraps [raw.NSIndexPath] with a fluent Go API.
 type IndexPath struct {
 	inner *raw.NSIndexPath
@@ -29,6 +31,8 @@ func IndexPathFromID(id objc.ID) *IndexPath {
 	return &IndexPath{inner: raw.NSIndexPathFromID(id)}
 }
 
+// Initializes an index path with the given nodes and length.
+//
 // NewIndexPathWithIndexesLength creates a new [IndexPath].
 func NewIndexPathWithIndexesLength(indexes *uint, length uint) *IndexPath {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSIndexPath")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewIndexPathWithIndexesLength(indexes *uint, length uint) *IndexPath {
 	return &IndexPath{inner: raw.NSIndexPathFromID(_id)}
 }
 
+// Initializes an index path with a single node.
+//
 // NewIndexPathWithIndex creates a new [IndexPath].
 func NewIndexPathWithIndex(index uint) *IndexPath {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSIndexPath")), objc.RegisterName("alloc"))
@@ -49,6 +55,8 @@ func (x *IndexPath) WithScriptingProperties(scriptingProperties *raw.NSDictionar
 	return x
 }
 
+// Returns an index path containing the nodes in the receiving index path plus another given index.
+//
 // IndexPathByAddingIndex calls the underlying IndexPathByAddingIndex.
 func (x *IndexPath) IndexPathByAddingIndex(index uint) *IndexPath {
 	_r := x.inner.IndexPathByAddingIndex(index)
@@ -58,6 +66,8 @@ func (x *IndexPath) IndexPathByAddingIndex(index uint) *IndexPath {
 	return &IndexPath{inner: _r}
 }
 
+// Returns an index path with the nodes in the receiving index path, excluding the last one.
+//
 // IndexPathByRemovingLastIndex calls the underlying IndexPathByRemovingLastIndex.
 func (x *IndexPath) IndexPathByRemovingLastIndex() *IndexPath {
 	_r := x.inner.IndexPathByRemovingLastIndex()
@@ -67,18 +77,22 @@ func (x *IndexPath) IndexPathByRemovingLastIndex() *IndexPath {
 	return &IndexPath{inner: _r}
 }
 
+// Provides the value at a particular node in the index path.
+//
 // IndexAtPosition calls the underlying IndexAtPosition.
 func (x *IndexPath) IndexAtPosition(position uint) uint {
 	return x.inner.IndexAtPosition(position)
 }
 
-// @abstract Copies the indexes stored in this index path from the positions specified by positionRange into indexes. @param indexes Buffer of at least as many NSUIntegers as specified by the length of positionRange. On return, this memory will hold the index path's indexes. @param positionRange A range of valid positions within this index path.  If the location plus the length of positionRange is greater than the length of this index path, this method raises an NSRangeException. @discussion It is the developer’s responsibility to allocate the memory for the C array.
+// Copies the indexes stored in the index path from the positions specified by the position range into the specified indexes.
 //
 // GetIndexesRange calls the underlying GetIndexesRange.
 func (x *IndexPath) GetIndexesRange(indexes *uint, positionRange raw.NSRange) {
 	x.inner.GetIndexesRange(indexes, positionRange)
 }
 
+// Indicates the depth-first traversal order of the receiving index path and another index path.
+//
 // Compare calls the underlying Compare.
 func (x *IndexPath) Compare(otherObject *raw.NSIndexPath) NSComparisonResult {
 	return NSComparisonResult(x.inner.Compare(otherObject))
@@ -89,7 +103,7 @@ func (x *IndexPath) Length() uint {
 	return x.inner.Length()
 }
 
-// This method is unsafe because it could potentially cause buffer overruns. You should use -getIndexes:range: instead.
+// Copies the objects contained in the index path into indexes.
 //
 // GetIndexes calls the underlying GetIndexes.
 func (x *IndexPath) GetIndexes(indexes *uint) {

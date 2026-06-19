@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a universal link to share by any number of contacts in one or more conversations.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyou/swhighlight
 type SWHighlight struct {
 	foundation.NSObject

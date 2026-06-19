@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates information about a content decryption key request issued from a content key session object.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcontentkeyrequest
 type AVContentKeyRequest struct {
 	foundation.NSObject
@@ -45,7 +47,7 @@ func AVContentKeyRequestFromID(id objc.ID) *AVContentKeyRequest {
 	return o
 }
 
-// Obtains a content key request data for a specific combination of application and content. If option AVContentKeyRequestProtocolVersionsKey is not specified the default protocol version of 1 is assumed. - Parameter appIdentifier: An opaque identifier for the application. The value of this identifier depends on the particular system used to provide the content key. - Parameter contentIdentifier: An optional opaque identifier for the content. The value of this identifier depends on the particular system used to provide the content key. - Parameter options: Additional information necessary to obtain the key, or nil if none. See AVContentKeyRequest*Key below. - Parameter handler: Once the streaming content key request is prepared, this block will be called with the request data or an error describing the failure.
+// Obtains encrypted key request data for a specific combination of app and content.
 func (o *AVContentKeyRequest) MakeStreamingContentKeyRequestDataForAppContentIdentifierOptionsCompletionHandler(appIdentifier *foundation.NSData, contentIdentifier *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID], handler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -57,20 +59,20 @@ func (o *AVContentKeyRequest) MakeStreamingContentKeyRequestDataForAppContentIde
 		})
 		defer __block_handler.Release()
 	}
-	o.Ptr().Send(_aVContentKeyRequestSelMakeStreamingContentKeyRequestDataForAppContentIdentifierOptionsCompletionHandler, appIdentifier.Ptr(), contentIdentifier.Ptr(), options, __block_handler)
+	o.Ptr().Send(_aVContentKeyRequestSelMakeStreamingContentKeyRequestDataForAppContentIdentifierOptionsCompletionHandler, appIdentifier.Ptr(), contentIdentifier.Ptr(), options.Ptr(), __block_handler)
 }
 
-// Informs the receiver to process the specified content key response. After you receive an AVContentKeyRequest via -contentKeySession:didProvideContentKeyRequest: and after you invoke -[AVContentKeyRequest makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:] on that request, you must obtain a response to the request in accordance with the protocol in use by the entity that controls the use of the media data. This is the method you use to provide the content key response to make protected content available for processing. If obtaining the content key response fails, use -processContentKeyResponseError:. - Parameter keyResponse: An instance of AVContentKeyResponse carrying a response to a content key request.
+// Sends the specified content key response to the receiver for processing.
 func (o *AVContentKeyRequest) ProcessContentKeyResponse(keyResponse *AVContentKeyResponse) {
 	o.Ptr().Send(_aVContentKeyRequestSelProcessContentKeyResponse, keyResponse.Ptr())
 }
 
-// Informs the receiver that obtaining a content key response has failed, resulting in failure handling. - Parameter error: An instance of NSError that describes the specific failure that occurred.
+// Tells the receiver that the app was unable to obtain a content key response.
 func (o *AVContentKeyRequest) ProcessContentKeyResponseError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_aVContentKeyRequestSelProcessContentKeyResponseError, error_)
 }
 
-// Informs the receiver to process a persistable content key request. When you receive an AVContentKeyRequest via -contentKeySession:didProvideContentKeyRequest: and you want the resulting key response to produce a key that can persist across multiple playback sessions, you must invoke -respondByRequestingPersistableContentKeyRequest on that AVContentKeyRequest in order to signal that you want to process an AVPersistableContentKeyRequest instead. If the underlying protocol supports persistable content keys, in response your delegate will receive an AVPersistableContentKeyRequest via -contentKeySession:didProvidePersistableContentKeyRequest:. NSInternalInconsistencyException will be raised, if you are attempting to create and use a persistable key but your AVContentKeySession delegate does not respond to contentKeySession:didProvidePersistableContentKeyRequest:. - Parameter outError: The error returned if a persistable content key request cannot be requested. - Returns: YES if sucessful. If NO, this request should be responded to via processContentKeyResponse: or processContentKeyResponseError:.
+// Tells the receiver that the app requires a persistable content key request object for processing.
 func (o *AVContentKeyRequest) RespondByRequestingPersistableContentKeyRequestAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVContentKeyRequestSelRespondByRequestingPersistableContentKeyRequestAndReturnError, unsafe.Pointer(&_nsErr))
@@ -108,8 +110,11 @@ func (o *AVContentKeyRequest) InitializationData() *foundation.NSData {
 
 // Additional information specified while initiaing key loading using -processContentKeyRequestWithIdentifier:initializationData:options:.
 func (o *AVContentKeyRequest) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVContentKeyRequestSelOptions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVContentKeyRequestSelOptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // When the value of this property is YES, you can use the method -persistableContentKeyFromKeyVendorResponse:options:error: to create a persistable content key from the content key response. The value of this property will be YES only when the receiver is provided to your AVContentKeySession delegate via the method -contentKeySession:didProvidePersistableContentKeyRequest:. If you have an AVContentKeyRequest for which the value of canProvidePersistableContentKey is NO, but you wish to obtain a persistable content key, send the AVContentKeyRequest the message -respondByRequestingPersistableContentKeyRequest.

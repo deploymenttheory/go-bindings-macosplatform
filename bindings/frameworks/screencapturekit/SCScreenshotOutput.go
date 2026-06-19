@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains all images requested by the client.
+//
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/scscreenshotoutput
 type SCScreenshotOutput struct {
 	foundation.NSObject

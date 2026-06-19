@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The start and end points of a route, along with the planned mode of transportation.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkdirectionsrequest
 type MKDirectionsRequest struct {
 	foundation.NSObject

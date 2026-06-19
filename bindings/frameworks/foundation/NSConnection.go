@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages the communication between objects in different threads or between a thread and a process running on a local or remote system.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsconnection
 // Deprecated: Use NSXPCConnection instead
 type NSConnection struct {
@@ -69,6 +71,7 @@ func NSConnectionFromID(id objc.ID) *NSConnection {
 	return o
 }
 
+// Returns all valid NSConnection objects in the process.
 func NSConnectionAllConnections() *NSArray[*NSConnection] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelAllConnections)
 	if _ret != 0 {
@@ -77,6 +80,7 @@ func NSConnectionAllConnections() *NSArray[*NSConnection] {
 	return NSArrayFromID[*NSConnection](_ret)
 }
 
+// Returns the default NSConnection object for the current thread.
 // Deprecated: since macOS 10.6.
 func NSConnectionDefaultConnection() *NSConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelDefaultConnection)
@@ -86,6 +90,7 @@ func NSConnectionDefaultConnection() *NSConnection {
 	return NSConnectionFromID(_ret)
 }
 
+// Returns the NSConnection object whose send port links it to the NSConnection object registered with the default NSPortNameServer under a given name on a given host.
 // Deprecated: since macOS 10.6.
 func NSConnectionConnectionWithRegisteredNameHost(name *NSString, hostName *NSString) *NSConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelConnectionWithRegisteredNameHost, name.Ptr(), hostName.Ptr())
@@ -95,6 +100,7 @@ func NSConnectionConnectionWithRegisteredNameHost(name *NSString, hostName *NSSt
 	return NSConnectionFromID(_ret)
 }
 
+// Returns the NSConnection object whose send port links it to the NSConnection object registered under a given name with a given server on a given host.
 // Deprecated: since macOS 10.6.
 func NSConnectionConnectionWithRegisteredNameHostUsingNameServer(name *NSString, hostName *NSString, server *NSPortNameServer) *NSConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelConnectionWithRegisteredNameHostUsingNameServer, name.Ptr(), hostName.Ptr(), server.Ptr())
@@ -104,6 +110,7 @@ func NSConnectionConnectionWithRegisteredNameHostUsingNameServer(name *NSString,
 	return NSConnectionFromID(_ret)
 }
 
+// Returns a proxy for the root object of the NSConnection object registered with the default NSPortNameServer under a given name on a given host.
 // Deprecated: since macOS 10.6.
 func NSConnectionRootProxyForConnectionWithRegisteredNameHost(name *NSString, hostName *NSString) *NSDistantObject {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelRootProxyForConnectionWithRegisteredNameHost, name.Ptr(), hostName.Ptr())
@@ -113,6 +120,7 @@ func NSConnectionRootProxyForConnectionWithRegisteredNameHost(name *NSString, ho
 	return NSDistantObjectFromID(_ret)
 }
 
+// Returns a proxy for the root object of the NSConnection object registered with server under name on a given host.
 func NSConnectionRootProxyForConnectionWithRegisteredNameHostUsingNameServer(name *NSString, hostName *NSString, server *NSPortNameServer) *NSDistantObject {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelRootProxyForConnectionWithRegisteredNameHostUsingNameServer, name.Ptr(), hostName.Ptr(), server.Ptr())
 	if _ret != 0 {
@@ -121,6 +129,7 @@ func NSConnectionRootProxyForConnectionWithRegisteredNameHostUsingNameServer(nam
 	return NSDistantObjectFromID(_ret)
 }
 
+// Creates and returns a new connection object representing a vended service on the specified port name server.
 func NSConnectionServiceConnectionWithNameRootObjectUsingNameServer(name *NSString, root objc.ID, server *NSPortNameServer) *NSConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelServiceConnectionWithNameRootObjectUsingNameServer, name.Ptr(), root, server.Ptr())
 	if _ret != 0 {
@@ -129,6 +138,7 @@ func NSConnectionServiceConnectionWithNameRootObjectUsingNameServer(name *NSStri
 	return NSConnectionFromID(_ret)
 }
 
+// Creates and returns a new connection object representing a vended service on the default system port name server.
 func NSConnectionServiceConnectionWithNameRootObject(name *NSString, root objc.ID) *NSConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelServiceConnectionWithNameRootObject, name.Ptr(), root)
 	if _ret != 0 {
@@ -137,28 +147,34 @@ func NSConnectionServiceConnectionWithNameRootObject(name *NSString, root objc.I
 	return NSConnectionFromID(_ret)
 }
 
+// Invalidates the receiver.
 func (o *NSConnection) Invalidate() {
 	o.Ptr().Send(_nSConnectionSelInvalidate)
 }
 
+// Adds mode to the set of run-loop input modes that the receiver uses for connection requests.
 func (o *NSConnection) AddRequestMode(rmode *NSString) {
 	o.Ptr().Send(_nSConnectionSelAddRequestMode, rmode.Ptr())
 }
 
+// Removes mode from the set of run-loop input modes the receiver uses for connection requests.
 func (o *NSConnection) RemoveRequestMode(rmode *NSString) {
 	o.Ptr().Send(_nSConnectionSelRemoveRequestMode, rmode.Ptr())
 }
 
+// Registers the specified service using with the default system port name server.
 func (o *NSConnection) RegisterName(name *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSConnectionSelRegisterName, name.Ptr())
 	return _ret
 }
 
+// Registers a service with the specified port name server.
 func (o *NSConnection) RegisterNameWithNameServer(name *NSString, server *NSPortNameServer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSConnectionSelRegisterNameWithNameServer, name.Ptr(), server.Ptr())
 	return _ret
 }
 
+// Returns an NSConnection object that communicates using given send and receive ports.
 func NSConnectionConnectionWithReceivePortSendPort(receivePort *NSPort, sendPort *NSPort) *NSConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelConnectionWithReceivePortSendPort, receivePort.Ptr(), sendPort.Ptr())
 	if _ret != 0 {
@@ -167,11 +183,13 @@ func NSConnectionConnectionWithReceivePortSendPort(receivePort *NSPort, sendPort
 	return NSConnectionFromID(_ret)
 }
 
+// Returns a token object representing any conversation in progress in the current thread.
 func NSConnectionCurrentConversation() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSConnection), _nSConnectionSelCurrentConversation)
 	return _ret
 }
 
+// Returns an NSConnection object initialized with given send and receive ports.
 func (o *NSConnection) InitWithReceivePortSendPort(receivePort *NSPort, sendPort *NSPort) *NSConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelInitWithReceivePortSendPort, receivePort.Ptr(), sendPort.Ptr())
 	if _ret != 0 {
@@ -180,24 +198,29 @@ func (o *NSConnection) InitWithReceivePortSendPort(receivePort *NSPort, sendPort
 	return NSConnectionFromID(_ret)
 }
 
+// Configures the receiver to allow requests from multiple threads to the remote object, without requiring each thread to each maintain its own connection.
 func (o *NSConnection) EnableMultipleThreads() {
 	o.Ptr().Send(_nSConnectionSelEnableMultipleThreads)
 }
 
+// Adds the specified run loop to the list of run loops the receiver monitors and from which it responds to requests.
 func (o *NSConnection) AddRunLoop(runloop *NSRunLoop) {
 	o.Ptr().Send(_nSConnectionSelAddRunLoop, runloop.Ptr())
 }
 
+// Removes a given NSRunLoop object from the list of run loops the receiver monitors and from which it responds to requests.
 func (o *NSConnection) RemoveRunLoop(runloop *NSRunLoop) {
 	o.Ptr().Send(_nSConnectionSelRemoveRunLoop, runloop.Ptr())
 }
 
+// Creates and starts a new NSThread object and then runs the receiving connection in the new thread.
 func (o *NSConnection) RunInNewThread() {
 	o.Ptr().Send(_nSConnectionSelRunInNewThread)
 }
 
+// Allows subclasses to ask a connection object to dispatch component data.
 func (o *NSConnection) DispatchWithComponents(components *NSArray[objc.ID]) {
-	o.Ptr().Send(_nSConnectionSelDispatchWithComponents, components)
+	o.Ptr().Send(_nSConnectionSelDispatchWithComponents, components.Ptr())
 }
 
 func (o *NSConnection) Statistics() *NSDictionary[*NSString, *NSNumber] {
@@ -296,11 +319,17 @@ func (o *NSConnection) MultipleThreadsEnabled() bool {
 }
 
 func (o *NSConnection) RemoteObjects() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSConnectionSelRemoteObjects)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelRemoteObjects)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSConnection) LocalObjects() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSConnectionSelLocalObjects)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSConnectionSelLocalObjects)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }

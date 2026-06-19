@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The options for each band of data that the scanner reads.
+//
 // Apple documentation: https://developer.apple.com/documentation/imagecapturecore/icscannerbanddata
 type ICScannerBandData struct {
 	foundation.NSObject

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class you use to request a LookAround scene at the location you specify.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mklookaroundscenerequest
 type MKLookAroundSceneRequest struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func MKLookAroundSceneRequestFromID(id objc.ID) *MKLookAroundSceneRequest {
 	return o
 }
 
+// Creates a LookAround scene at the specified coordinates.
 func (o *MKLookAroundSceneRequest) InitWithCoordinate(coordinate unsafe.Pointer) *MKLookAroundSceneRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundSceneRequestSelInitWithCoordinate, coordinate)
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func (o *MKLookAroundSceneRequest) InitWithCoordinate(coordinate unsafe.Pointer)
 	return MKLookAroundSceneRequestFromID(_ret)
 }
 
+// Creates a LookAround scene with the location described by the specified map item.
 func (o *MKLookAroundSceneRequest) InitWithMapItem(mapItem *MKMapItem) *MKLookAroundSceneRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundSceneRequestSelInitWithMapItem, mapItem.Ptr())
 	if _ret != 0 {
@@ -55,6 +59,7 @@ func (o *MKLookAroundSceneRequest) InitWithMapItem(mapItem *MKMapItem) *MKLookAr
 	return MKLookAroundSceneRequestFromID(_ret)
 }
 
+// Requests a LookAround scene and calls the specified completion handler.
 func (o *MKLookAroundSceneRequest) GetSceneWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -66,6 +71,7 @@ func (o *MKLookAroundSceneRequest) GetSceneWithCompletionHandler(completionHandl
 	o.Ptr().Send(_mKLookAroundSceneRequestSelGetSceneWithCompletionHandler, __block_completionHandler)
 }
 
+// Cancels the pending scene request.
 func (o *MKLookAroundSceneRequest) Cancel() {
 	o.Ptr().Send(_mKLookAroundSceneRequestSelCancel)
 }

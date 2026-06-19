@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages a collection of status items displayed within the system-wide menu bar.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsstatusbar
 type NSStatusBar struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func NSStatusBarFromID(id objc.ID) *NSStatusBar {
 	return o
 }
 
+// Returns a newly created status item that has been allotted a specified space within the status bar.
 func (o *NSStatusBar) StatusItemWithLength(length float64) *NSStatusItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusBarSelStatusItemWithLength, length)
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func (o *NSStatusBar) StatusItemWithLength(length float64) *NSStatusItem {
 	return NSStatusItemFromID(_ret)
 }
 
+// Removes the specified status item from the receiver.
 func (o *NSStatusBar) RemoveStatusItem(item *NSStatusItem) {
 	o.Ptr().Send(_nSStatusBarSelRemoveStatusItem, item.Ptr())
 }

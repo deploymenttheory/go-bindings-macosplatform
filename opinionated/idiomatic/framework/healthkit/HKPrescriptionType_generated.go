@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that identifies samples that store a prescription.
+//
 // PrescriptionType wraps [raw.HKPrescriptionType] with a fluent Go API.
 type PrescriptionType struct {
 	inner *raw.HKPrescriptionType

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that allows control of the playback rate.
+//
 // AudioUnitVarispeed wraps [raw.AVAudioUnitVarispeed] with a fluent Go API.
 type AudioUnitVarispeed struct {
 	inner *raw.AVAudioUnitVarispeed
@@ -35,7 +37,7 @@ func NewAudioUnitVarispeed() *AudioUnitVarispeed {
 	return &AudioUnitVarispeed{inner: raw.AVAudioUnitVarispeedFromID(_id)}
 }
 
-// @property rate @abstract controls the playback rate of the audio signal @discussion Since this unit resamples the input signal, changing the playback rate also changes the pitch. i.e. changing the rate to 2.0 results in the output audio playing one octave higher. Similarly changing the rate to 0.5, results in the output audio playing one octave lower. The playback rate and pitch can be calculated as rate  = pow(2, cents/1200.0) pitch in cents  = 1200.0 * log2(rate) Where,    1 octave  = 1200 cents 1 musical semitone  = 100 cents Range:      0.25 -> 4.0 Default:    1.0 Unit:       Generic
+// The audio playback rate.
 //
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *AudioUnitVarispeed) WithRate(rate float32) *AudioUnitVarispeed {
@@ -43,7 +45,7 @@ func (x *AudioUnitVarispeed) WithRate(rate float32) *AudioUnitVarispeed {
 	return x
 }
 
-// @property bypass @abstract bypass state of the audio unit
+// The bypass state of the audio unit.
 //
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitVarispeed) WithBypass(bypass bool) *AudioUnitVarispeed {

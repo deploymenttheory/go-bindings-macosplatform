@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of the features and settings in use for an in-progress or complete photo capture request.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptureresolvedphotosettings
 type AVCaptureResolvedPhotoSettings struct {
 	foundation.NSObject

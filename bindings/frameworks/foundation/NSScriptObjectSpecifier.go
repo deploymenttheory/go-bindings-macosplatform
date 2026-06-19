@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class used to represent natural language expressions.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsscriptobjectspecifier
 type NSScriptObjectSpecifier struct {
 	NSObject
@@ -52,6 +54,7 @@ func NSScriptObjectSpecifierFromID(id objc.ID) *NSScriptObjectSpecifier {
 	return o
 }
 
+// Returns a new object specifier for an Apple event descriptor.
 func NSScriptObjectSpecifierObjectSpecifierWithDescriptor(descriptor *NSAppleEventDescriptor) *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScriptObjectSpecifier), _nSScriptObjectSpecifierSelObjectSpecifierWithDescriptor, descriptor.Ptr())
 	if _ret != 0 {
@@ -60,6 +63,7 @@ func NSScriptObjectSpecifierObjectSpecifierWithDescriptor(descriptor *NSAppleEve
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
+// Returns an NSScriptObjectSpecifier object initialized with a given container specifier and key.
 func (o *NSScriptObjectSpecifier) InitWithContainerSpecifierKey(container *NSScriptObjectSpecifier, property *NSString) *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelInitWithContainerSpecifierKey, container.Ptr(), property.Ptr())
 	if _ret != 0 {
@@ -68,6 +72,7 @@ func (o *NSScriptObjectSpecifier) InitWithContainerSpecifierKey(container *NSScr
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
+// Returns an NSScriptObjectSpecifier object initialized with the given attributes.
 func (o *NSScriptObjectSpecifier) InitWithContainerClassDescriptionContainerSpecifierKey(classDesc *NSScriptClassDescription, container *NSScriptObjectSpecifier, property *NSString) *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKey, classDesc.Ptr(), container.Ptr(), property.Ptr())
 	if _ret != 0 {
@@ -84,11 +89,13 @@ func (o *NSScriptObjectSpecifier) InitWithCoder(inCoder *NSCoder) *NSScriptObjec
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
+// This primitive method must be overridden by subclasses to return a pointer to an array of indices identifying objects in the key of a given container that are identified by the receiver of the message.
 func (o *NSScriptObjectSpecifier) IndicesOfObjectsByEvaluatingWithContainerCount(container objc.ID, count *int64) *int64 {
 	_ret := objc.Send[*int64](o.Ptr(), _nSScriptObjectSpecifierSelIndicesOfObjectsByEvaluatingWithContainerCount, container, count)
 	return _ret
 }
 
+// Returns the actual object or objects specified by the receiver as evaluated in the context of given container object.
 func (o *NSScriptObjectSpecifier) ObjectsByEvaluatingWithContainers(containers objc.ID) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelObjectsByEvaluatingWithContainers, containers)
 	return _ret

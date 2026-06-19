@@ -11,7 +11,7 @@ import (
 	"unsafe"
 )
 
-// A tree data structure where each level has 4 children that subdivide a given space into the four quadrants. Stores arbitrary NSObject data via points and quads.
+// A data structure for organizing objects based on their locations in a two-dimensional space.
 //
 // Quadtree wraps [raw.GKQuadtree] with a fluent Go API.
 type Quadtree struct {
@@ -33,6 +33,8 @@ func QuadtreeFromID(id objc.ID) *Quadtree {
 	return &Quadtree{inner: raw.GKQuadtreeFromID[objc.ID](id)}
 }
 
+// Initializes a quadtree with the specified dimensions.
+//
 // NewQuadtreeWithBoundingQuadMinimumCellSize creates a new [Quadtree].
 func NewQuadtreeWithBoundingQuadMinimumCellSize(quad raw.GKQuad, minCellSize float32) *Quadtree {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKQuadtree")), objc.RegisterName("alloc"))
@@ -40,7 +42,7 @@ func NewQuadtreeWithBoundingQuadMinimumCellSize(quad raw.GKQuad, minCellSize flo
 	return &Quadtree{inner: raw.GKQuadtreeFromID[objc.ID](_id)}
 }
 
-// Adds an NSObject to this quadtree with a given point. This data will always reside in the leaf node its point is in. @param element the element to store @param point the point associated with the element you want to store @return the quadtree node the element was added to
+// Adds an object to the tree corresponding to the specified point in 2D space.
 //
 // AddElementWithPoint calls the underlying AddElementWithPoint.
 func (x *Quadtree) AddElementWithPoint(element objc.ID, point unsafe.Pointer) *QuadtreeNode {
@@ -51,7 +53,7 @@ func (x *Quadtree) AddElementWithPoint(element objc.ID, point unsafe.Pointer) *Q
 	return &QuadtreeNode{inner: _r}
 }
 
-// Adds an NSObject to this quadtree with a given quad. This data will reside in the lowest node that its quad fits in completely. @param element the element to store @param quad the quad associated with the element you want to store @return the quad tree node the element was added to
+// Adds an object to the tree corresponding to the specified region of 2D space.
 //
 // AddElementWithQuad calls the underlying AddElementWithQuad.
 func (x *Quadtree) AddElementWithQuad(element objc.ID, quad raw.GKQuad) *QuadtreeNode {
@@ -62,28 +64,28 @@ func (x *Quadtree) AddElementWithQuad(element objc.ID, quad raw.GKQuad) *Quadtre
 	return &QuadtreeNode{inner: _r}
 }
 
-// Returns all of the elements in the quadtree node this point would be placed in @param point the point to query @return an NSArray of all the data found at the quad tree node this point would be placed in
+// Returns all objects whose corresponding locations overlap the specified point.
 //
 // ElementsAtPoint calls the underlying ElementsAtPoint.
 func (x *Quadtree) ElementsAtPoint(point unsafe.Pointer) *foundation.NSArray[objc.ID] {
 	return x.inner.ElementsAtPoint(point)
 }
 
-// Returns all of the elements that resides in quad tree nodes which intersect the given quad @param quad the quad you want to test @return an NSArray of all the elements in all of the nodes that intersect the given quad
+// Returns all objects whose corresponding locations overlap the specified region.
 //
 // ElementsInQuad calls the underlying ElementsInQuad.
 func (x *Quadtree) ElementsInQuad(quad raw.GKQuad) *foundation.NSArray[objc.ID] {
 	return x.inner.ElementsInQuad(quad)
 }
 
-// Removes the given NSObject from this quad tree. Note that this is an exhaustive search and is slow. Cache the relevant GKQuadTreeNode and use removeElement:WithNode: for better performance. @param element the data to be removed @return returns YES if the data was removed, NO otherwise
+// Searches for the specified object and removes it from the tree.
 //
 // RemoveElement calls the underlying RemoveElement.
 func (x *Quadtree) RemoveElement(element objc.ID) bool {
 	return x.inner.RemoveElement(element)
 }
 
-// Removes the given NSObject from the given quadtree node Note that this is not an exhaustive search and is faster than removeData: @param data the data to be removed @param node the node in which this data resides @return returns YES if the data was removed, NO otherwise
+// Removes the specified object from the tree, using a reference to its containing node.
 //
 // RemoveElementWithNode calls the underlying RemoveElementWithNode.
 func (x *Quadtree) RemoveElementWithNode(data objc.ID, node *raw.GKQuadtreeNode) bool {

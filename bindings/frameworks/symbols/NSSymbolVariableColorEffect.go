@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that replaces the opacity of variable layers in a symbol-based image in a repeatable sequence.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymbolvariablecoloreffect
 type NSSymbolVariableColorEffect struct {
 	NSSymbolEffect
@@ -35,7 +37,7 @@ func NSSymbolVariableColorEffectFromID(id objc.ID) *NSSymbolVariableColorEffect 
 	return o
 }
 
-// The default variable color effect, determined by the system.
+// An animation that replaces the opacity of variable layers in a symbol-based image in a repeatable sequence.
 func NSSymbolVariableColorEffectEffect() *NSSymbolVariableColorEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolVariableColorEffect), _nSSymbolVariableColorEffectSelEffect)
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func NSSymbolVariableColorEffectEffect() *NSSymbolVariableColorEffect {
 	return NSSymbolVariableColorEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that activates one layer at a time. This cancels the cumulative variant.
+// An effect that momentarily enables each layer of a symbol-based image in sequence.
 func (o *NSSymbolVariableColorEffect) EffectWithIterative() *NSSymbolVariableColorEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolVariableColorEffectSelEffectWithIterative)
 	if _ret != 0 {
@@ -53,7 +55,7 @@ func (o *NSSymbolVariableColorEffect) EffectWithIterative() *NSSymbolVariableCol
 	return NSSymbolVariableColorEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that activates each layer until all layers are active. This cancels the iterative variant.
+// An effect that enables each layer of a symbol-based image in sequence.
 func (o *NSSymbolVariableColorEffect) EffectWithCumulative() *NSSymbolVariableColorEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolVariableColorEffectSelEffectWithCumulative)
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func (o *NSSymbolVariableColorEffect) EffectWithCumulative() *NSSymbolVariableCo
 	return NSSymbolVariableColorEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that animates in reverse after fully executing. This cancels the nonReversing variant.
+// An effect that reverses each time it repeats.
 func (o *NSSymbolVariableColorEffect) EffectWithReversing() *NSSymbolVariableColorEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolVariableColorEffectSelEffectWithReversing)
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func (o *NSSymbolVariableColorEffect) EffectWithReversing() *NSSymbolVariableCol
 	return NSSymbolVariableColorEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that only animates forwards before restarting. This cancels the reversing variant.
+// An effect that doesn’t reverse each time it repeats.
 func (o *NSSymbolVariableColorEffect) EffectWithNonReversing() *NSSymbolVariableColorEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolVariableColorEffectSelEffectWithNonReversing)
 	if _ret != 0 {
@@ -80,7 +82,7 @@ func (o *NSSymbolVariableColorEffect) EffectWithNonReversing() *NSSymbolVariable
 	return NSSymbolVariableColorEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that hides layers when they are inactive.
+// An effect that hides inactive layers in a symbol-based image.
 func (o *NSSymbolVariableColorEffect) EffectWithHideInactiveLayers() *NSSymbolVariableColorEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolVariableColorEffectSelEffectWithHideInactiveLayers)
 	if _ret != 0 {
@@ -89,7 +91,7 @@ func (o *NSSymbolVariableColorEffect) EffectWithHideInactiveLayers() *NSSymbolVa
 	return NSSymbolVariableColorEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that draws layers with reduced (but non-zero) opacity when they are inactive.
+// An effect that dims inactive layers in a symbol-based image.
 func (o *NSSymbolVariableColorEffect) EffectWithDimInactiveLayers() *NSSymbolVariableColorEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolVariableColorEffectSelEffectWithDimInactiveLayers)
 	if _ret != 0 {

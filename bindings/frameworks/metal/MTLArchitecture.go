@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that contains the architectural details of a GPU device.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlarchitecture
 type MTLArchitecture struct {
 	foundation.NSObject

@@ -7,7 +7,7 @@ import (
 	"unsafe"
 )
 
-// @typedef SCDynamicStoreContext @discussion Structure containing user-specified data and callbacks for an SCDynamicStore session. @field version The version number of the structure type being passed in as a parameter to the SCDynamicStore creation function. This structure is version 0. @field info A C pointer to a user-specified block of data. @field retain The callback used to add a retain for the info field. If this parameter is not a pointer to a function of the correct prototype, the behavior is undefined.  The value may be NULL. @field release The calllback used to remove a retain previously added for the info field.  If this parameter is not a pointer to a function of the correct prototype, the behavior is undefined. The value may be NULL. @field copyDescription The callback used to provide a description of the info field.
+// Structure containing user-specified data and callbacks for a dynamic store session.
 type SCDynamicStoreContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -16,7 +16,7 @@ type SCDynamicStoreContext struct {
 	CopyDescription unsafe.Pointer
 }
 
-// @typedef SCNetworkConnectionContext @discussion Structure containing user-specified data and callbacks for a SCNetworkConnection. @field version The version number of the structure type being passed in as a parameter to the SCNetworkConnectionCreateWithServiceID function.  This structure is version 0. @field info A C pointer to a user-specified block of data. @field retain The callback used to add a retain for the info field. If this parameter is not a pointer to a function of the correct prototype, the behavior is undefined.  The value may be NULL. @field release The calllback used to remove a retain previously added for the info field.  If this parameter is not a pointer to a function of the correct prototype, the behavior is undefined. The value may be NULL. @field copyDescription The callback used to provide a description of the info field.
+// A structure containing user-specified data and callbacks for a network connection.
 type SCNetworkConnectionContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -25,7 +25,7 @@ type SCNetworkConnectionContext struct {
 	CopyDescription unsafe.Pointer
 }
 
-// @typedef SCNetworkReachabilityContext Structure containing user-specified data and callbacks for SCNetworkReachability. @field version The version number of the structure type being passed in as a parameter to the SCDynamicStore creation function. This structure is version 0. @field info A C pointer to a user-specified block of data. @field retain The callback used to add a retain for the info field. If this parameter is not a pointer to a function of the correct prototype, the behavior is undefined.  The value may be NULL. @field release The calllback used to remove a retain previously added for the info field.  If this parameter is not a pointer to a function of the correct prototype, the behavior is undefined. The value may be NULL. @field copyDescription The callback used to provide a description of the info field.
+// Structure containing user-specified data and callbacks used with SCNetworkReachabilitySetCallback.
 type SCNetworkReachabilityContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -34,7 +34,7 @@ type SCNetworkReachabilityContext struct {
 	CopyDescription unsafe.Pointer
 }
 
-// @typedef SCPreferencesContext Structure containing user-specified data and callbacks for SCPreferences. @field version The version number of the structure type being passed in as a parameter to the SCPreferencesSetCallback function. This structure is version 0. @field info A C pointer to a user-specified block of data. @field retain The callback used to add a retain for the info field. If this parameter is not a pointer to a function of the correct prototype, the behavior is undefined. The value may be NULL. @field release The calllback used to remove a retain previously added for the info field. If this parameter is not a pointer to a function of the correct prototype, the behavior is undefined. The value may be NULL. @field copyDescription The callback used to provide a description of the info field.
+// A structure containing user-specified data and callbacks for accessing system configuration preferences.
 type SCPreferencesContext struct {
 	Version         int
 	Info            unsafe.Pointer

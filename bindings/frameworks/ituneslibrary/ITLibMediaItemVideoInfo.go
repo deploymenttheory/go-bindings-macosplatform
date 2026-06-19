@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// This class encapsulates the video information of a video media item.
+//
 // Apple documentation: https://developer.apple.com/documentation/ituneslibrary/itlibmediaitemvideoinfo
 type ITLibMediaItemVideoInfo struct {
 	foundation.NSObject

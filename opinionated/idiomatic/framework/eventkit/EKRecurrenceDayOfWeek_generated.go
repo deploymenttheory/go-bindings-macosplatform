@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents the day of the week.
+//
 // RecurrenceDayOfWeek wraps [raw.EKRecurrenceDayOfWeek] with a fluent Go API.
 type RecurrenceDayOfWeek struct {
 	inner *raw.EKRecurrenceDayOfWeek
@@ -29,7 +31,7 @@ func RecurrenceDayOfWeekFromID(id objc.ID) *RecurrenceDayOfWeek {
 	return &RecurrenceDayOfWeek{inner: raw.EKRecurrenceDayOfWeekFromID(id)}
 }
 
-// @method     initWithDayOfTheWeek:weekNumber: @abstract   Creates an day-of-week object with a specific day of week and week number.
+// Initializes and returns a day of the week with a given day and week number.
 //
 // NewRecurrenceDayOfWeekWithDayOfTheWeekWeekNumber creates a new [RecurrenceDayOfWeek].
 func NewRecurrenceDayOfWeekWithDayOfTheWeekWeekNumber(dayOfTheWeek EKWeekday, weekNumber int) *RecurrenceDayOfWeek {

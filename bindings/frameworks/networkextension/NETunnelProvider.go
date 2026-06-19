@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class shared by NEPacketTunnelProvider and NEAppProxyProvider.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/netunnelprovider
 type NETunnelProvider struct {
 	NEProvider
@@ -38,7 +40,7 @@ func NETunnelProviderFromID(id objc.ID) *NETunnelProvider {
 	return o
 }
 
-// @method handleAppMessage:completionHandler: @discussion This function is called by the framework when the container app sends a message to the provider. Subclasses should override this method to handle the message and optionally send a response. @param messageData An NSData object containing the message sent by the container app. @param completionHandler A block that the method can execute to send a response to the container app. If this parameter is non-nil then the method implementation should always execute the block. If this parameter is nil then the method implementation should treat this as an indication that the container app is not expecting a response.
+// Handle messages sent by the tunnel provider extension’s containing app.
 func (o *NETunnelProvider) HandleAppMessageCompletionHandler(messageData *foundation.NSData, completionHandler func(*foundation.NSData)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -53,7 +55,7 @@ func (o *NETunnelProvider) HandleAppMessageCompletionHandler(messageData *founda
 	o.Ptr().Send(_nETunnelProviderSelHandleAppMessageCompletionHandler, messageData.Ptr(), __block_completionHandler)
 }
 
-// @method setTunnelNetworkSettings:completionHandler: @discussion This function is called by tunnel provider implementations to set the network settings of the tunnel, including IP routes, DNS servers, and virtual interface addresses depending on the tunnel type. Subclasses should not override this method. This method can be called multiple times during the lifetime of a particular tunnel. It is not necessary to call this function with nil to clear out the existing settings before calling this function with a non-nil configuration. @param tunnelNetworkSettings An NETunnelNetworkSettings object containing all of the desired network settings for the tunnel. Pass nil to clear out the current network settings. @param completionHandler A block that will be called by the framework when the process of setting or clearing the network settings is complete. If an error occurred during the process of setting or clearing the IP network settings then a non-nill NSError object will be passed to this block containing error details.
+// Specify the network settings for the current tunneling session.
 func (o *NETunnelProvider) SetTunnelNetworkSettingsCompletionHandler(tunnelNetworkSettings *NETunnelNetworkSettings, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

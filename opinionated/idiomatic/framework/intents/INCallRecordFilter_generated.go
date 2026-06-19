@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Filters a user specifies to redial a call.
+//
 // CallRecordFilter wraps [raw.INCallRecordFilter] with a fluent Go API.
 type CallRecordFilter struct {
 	inner *raw.INCallRecordFilter
@@ -31,6 +33,8 @@ func CallRecordFilterFromID(id objc.ID) *CallRecordFilter {
 	return &CallRecordFilter{inner: raw.INCallRecordFilterFromID(id)}
 }
 
+// Creates a filtered call record with the details about a call.
+//
 // NewCallRecordFilterWithParticipantsCallTypesCallCapability creates a new [CallRecordFilter].
 func NewCallRecordFilterWithParticipantsCallTypesCallCapability(participants *foundation.NSArray[*raw.INPerson], callTypes INCallRecordTypeOptions, callCapability INCallCapability) *CallRecordFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallRecordFilter")), objc.RegisterName("alloc"))

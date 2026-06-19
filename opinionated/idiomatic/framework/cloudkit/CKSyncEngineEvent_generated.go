@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event that occurs during a sync operation.
+//
 // SyncEngineEvent wraps [raw.CKSyncEngineEvent] with a fluent Go API.
 type SyncEngineEvent struct {
 	inner *raw.CKSyncEngineEvent

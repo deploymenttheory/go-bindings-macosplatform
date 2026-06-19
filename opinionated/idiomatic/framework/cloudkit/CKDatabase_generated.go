@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a collection of record zones and subscriptions.
+//
 // Database wraps [raw.CKDatabase] with a fluent Go API.
 type Database struct {
 	inner *raw.CKDatabase
@@ -39,7 +41,7 @@ func NewDatabase() *Database {
 	return &Database{inner: raw.CKDatabaseFromID(_id)}
 }
 
-// Executes the specified operation in the current database. - Parameters: - operation: The operation to execute. Configure the operation fully before you call this method. Prior to the operation executing, CloudKit sets its “CKDatabaseOperation/database“ property to the current database. The operation executes at the priority and quality of service (QoS) that you specify using the <doc://com.apple.documentation/documentation/foundation/operation/queuepriority-swift.property> and <doc://com.apple.documentation/documentation/foundation/operation/qualityofservice> properties.
+// Executes the specified operation in the current database.
 //
 // AddOperation calls the underlying AddOperation.
 func (x *Database) AddOperation(operation *raw.CKDatabaseOperation) {
@@ -51,7 +53,7 @@ func (x *Database) DatabaseScope() CKDatabaseScope {
 	return CKDatabaseScope(x.inner.DatabaseScope())
 }
 
-// Fetches a specific record. - Parameters: - recordID: The identifier of the record to fetch. - completionHandler: The closure to execute with the fetch results. The completion handler takes the following parameters: - The requested record, or `nil` if CloudKit can't provide that record. - An error if a problem occurs, or `nil` if the fetch completes successfully. For information on a more convenient way to fetch specific records, see “CKDatabase/records(for:desiredKeys:)“.
+// Fetches a specific record.
 //
 // FetchRecordWithID blocks until the operation completes or ctx is cancelled.
 func (x *Database) FetchRecordWithID(ctx context.Context, recordID *raw.CKRecordID) (*Record, error) {
@@ -79,7 +81,7 @@ func (x *Database) FetchRecordWithID(ctx context.Context, recordID *raw.CKRecord
 	}
 }
 
-// Saves a specific record. - Parameters: - record: The record to save. - completionHandler: The closure to execute after CloudKit saves the record. The completion handler takes the following parameters: - The saved record (as it appears on the server), or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully saves the record. The save succeeds only when the specified record is new, or is a more recent version than the one on the server. For information on a more convenient way to save records, see “CKDatabase/modifyRecords(saving:deleting:savePolicy:atomically:)“.
+// Saves a specific record.
 //
 // SaveRecord blocks until the operation completes or ctx is cancelled.
 func (x *Database) SaveRecord(ctx context.Context, record *raw.CKRecord) (*Record, error) {
@@ -107,7 +109,7 @@ func (x *Database) SaveRecord(ctx context.Context, record *raw.CKRecord) (*Recor
 	}
 }
 
-// Deletes a specific record. - Parameters: - recordID: The identifier of the record to delete. - completionHandler: The closure to execute after CloudKit deletes the record. The completion handler takes the following parameters: - The identifier of the deleted record, or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully deletes the record. Deleting a record may cause additional deletions if other records in the database reference the deleted record. CloudKit doesn't provide the identifiers of any additional records it deletes. For information on a more convenient way to delete records, see “CKDatabase/modifyRecords(saving:deleting:savePolicy:atomically:)“.
+// Deletes a specific record.
 //
 // DeleteRecordWithID blocks until the operation completes or ctx is cancelled.
 func (x *Database) DeleteRecordWithID(ctx context.Context, recordID *raw.CKRecordID) (*RecordID, error) {
@@ -135,7 +137,7 @@ func (x *Database) DeleteRecordWithID(ctx context.Context, recordID *raw.CKRecor
 	}
 }
 
-// Searches for records matching a predicate in the specified record zone. - Parameters: - query: The query that contains the search parameters. For more information, see “CKQuery“. - zoneID: The identifier of the record zone to search. If you're searching a shared database, provide a record zone identifier; otherwise, you can specify `nil` to search all record zones in the database. - completionHandler: The closure to execute with the search results. The completion handler takes the following parameters: - The records that match the specified query, or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit completes the search successfully. For information on a more convenient way to search a database, see “CKDatabase/records(matching:inZoneWith:desiredKeys:resultsLimit:)“.
+// Searches for records matching a predicate in the specified record zone.
 //
 // PerformQueryInZoneWithID blocks until the operation completes or ctx is cancelled.
 func (x *Database) PerformQueryInZoneWithID(ctx context.Context, query *raw.CKQuery, zoneID *raw.CKRecordZoneID) (*foundation.NSArray[*raw.CKRecord], error) {
@@ -161,7 +163,7 @@ func (x *Database) PerformQueryInZoneWithID(ctx context.Context, query *raw.CKQu
 	}
 }
 
-// Fetches all record zones from the current database. - Parameters: - completionHandler: The closure to execute with the fetch results. The completion handler takes the following parameters: - An array of fetched record zones, or `nil` if there's an error. When present, the array contains at least one record zone, the default zone. - An error if a problem occurs, or `nil` if CloudKit successfully fetches all record zones.
+// Fetches all record zones from the current database.
 //
 // FetchAllRecordZones blocks until the operation completes or ctx is cancelled.
 func (x *Database) FetchAllRecordZones(ctx context.Context) (*foundation.NSArray[*raw.CKRecordZone], error) {
@@ -187,7 +189,7 @@ func (x *Database) FetchAllRecordZones(ctx context.Context) (*foundation.NSArray
 	}
 }
 
-// Fetches a specific record zone. - Parameters: - zoneID: The identifier of the record zone to fetch. - completionHandler: The closure to execute with the fetch results. The completion handler takes the following parameters: - The fetched record zone, or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully fetches the specified record zone. For information on a more convenient way to fetch specific record zones, see “CKDatabase/recordZones(for:)“ in Swift or “CKFetchRecordZonesOperation“ in Objective-C.
+// Fetches a specific record zone.
 //
 // FetchRecordZoneWithID blocks until the operation completes or ctx is cancelled.
 func (x *Database) FetchRecordZoneWithID(ctx context.Context, zoneID *raw.CKRecordZoneID) (*RecordZone, error) {
@@ -215,7 +217,7 @@ func (x *Database) FetchRecordZoneWithID(ctx context.Context, zoneID *raw.CKReco
 	}
 }
 
-// Saves a specific record zone. - Parameters: - zone: The record zone to save. - completionHandler: The closure to execute after CloudKit saves the record. The completion handler takes the following parameters: - The saved record zone (as it appears on the server), or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully saves the record zone. For information on a more convenient way to save record zones, see “CKDatabase/modifyRecordZones(saving:deleting:)“.
+// Saves a specific record zone.
 //
 // SaveRecordZone blocks until the operation completes or ctx is cancelled.
 func (x *Database) SaveRecordZone(ctx context.Context, zone *raw.CKRecordZone) (*RecordZone, error) {
@@ -243,7 +245,7 @@ func (x *Database) SaveRecordZone(ctx context.Context, zone *raw.CKRecordZone) (
 	}
 }
 
-// Deletes a specific record zone. - Parameters: - zoneID: The identifier of the record zone to delete. - completionHandler: The closure to execute after CloudKit deletes the record zone. - Warning: Deleting a record zone is a permanent action that deletes every record in that zone. You can't restore a deleted record zone. The completion handler takes the following parameters: - The identifier of the deleted record zone, or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully deletes the record zone. For information on a more convenient way to delete record zones, see “CKDatabase/modifyRecordZones(saving:deleting:)“.
+// Deletes a specific record zone.
 //
 // DeleteRecordZoneWithID blocks until the operation completes or ctx is cancelled.
 func (x *Database) DeleteRecordZoneWithID(ctx context.Context, zoneID *raw.CKRecordZoneID) (*RecordZoneID, error) {
@@ -271,7 +273,7 @@ func (x *Database) DeleteRecordZoneWithID(ctx context.Context, zoneID *raw.CKRec
 	}
 }
 
-// Fetches a specific subscription and delivers it to a completion handler. - Parameters: - subscriptionID: The identifier of the subscription to fetch. - completionHandler: The block to execute with the fetch results. The completion handler takes the following parameters: - term `subscription`: The requested subscription, or `nil` if CloudKit can't provide that subscription. - term `error`: An error if a problem occurs, or `nil` if the fetch completes successfully. For information on a more configurable way to fetch specific subscriptions, see “CKFetchSubscriptionsOperation“.
+// Fetches a specific subscription and delivers it to a completion handler.
 //
 // FetchSubscriptionWithID blocks until the operation completes or ctx is cancelled.
 func (x *Database) FetchSubscriptionWithID(ctx context.Context, subscriptionID *foundation.NSString) (*Subscription, error) {
@@ -299,7 +301,7 @@ func (x *Database) FetchSubscriptionWithID(ctx context.Context, subscriptionID *
 	}
 }
 
-// Fetches all subscriptions from the current database. - Parameters: - completionHandler: The closure to execute with the fetch results. The completion handler takes the following parameters: - The database's subscriptions, or `nil` if CloudKit can't provide the subscriptions. - An error if a problem occurs, or `nil` if the fetch completes successfully. For information on a more configurable way to fetch all subscriptions from a specific database, see “CKFetchSubscriptionsOperation/fetchAllSubscriptionsOperation()“.
+// Fetches all subscriptions from the current database.
 //
 // FetchAllSubscriptions blocks until the operation completes or ctx is cancelled.
 func (x *Database) FetchAllSubscriptions(ctx context.Context) (*foundation.NSArray[*raw.CKSubscription], error) {
@@ -325,7 +327,7 @@ func (x *Database) FetchAllSubscriptions(ctx context.Context) (*foundation.NSArr
 	}
 }
 
-// Saves a specific subscription. - Parameters: - subscription: The subscription to save. - completionHandler: The closure to execute after CloudKit saves the subscription. The completion handler takes the following parameters: - The saved subscription (as it appears on the server), or `nil` if there's an error. - An error if a problem occurs, or `nil` if CloudKit successfully saves the subscription. For information on a more convenient way to save subscriptions, see “CKDatabase/modifySubscriptions(saving:deleting:)“.
+// Saves a specific subscription.
 //
 // SaveSubscription blocks until the operation completes or ctx is cancelled.
 func (x *Database) SaveSubscription(ctx context.Context, subscription *raw.CKSubscription) (*Subscription, error) {
@@ -353,7 +355,7 @@ func (x *Database) SaveSubscription(ctx context.Context, subscription *raw.CKSub
 	}
 }
 
-// Deletes a specific subscription and delivers the deleted subscription's identifier to a completion handler. - Parameters: - subscriptionID: The identifier of the subscription to delete. - completionHandler: The block to execute after CloudKit deletes the subscription. The completion handler takes the following parameters: - term `subscriptionID`: The identifier of the deleted subscription, or `nil` if there's an error. - term `error`: An error if a problem occurs, or `nil` if CloudKit successfully deletes the subscription. For information on a more configurable way to delete subscriptions, see “CKModifySubscriptionsOperation“.
+// Deletes a specific subscription and delivers the deleted subscription’s identifier to a completion handler.
 //
 // DeleteSubscriptionWithID blocks until the operation completes or ctx is cancelled.
 func (x *Database) DeleteSubscriptionWithID(ctx context.Context, subscriptionID *foundation.NSString) (string, error) {

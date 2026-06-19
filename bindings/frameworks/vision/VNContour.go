@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a detected contour in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vncontour
 type VNContour struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func VNContourFromID(id objc.ID) *VNContour {
 	return o
 }
 
-// @brief Returns a VNContour object that is a child of this VNContour at the specified index. @param childContourIndex The index into the childContours array. @param error The error returned if the child contour cannot be provided. @return The VNContour object at the specified index path, or nil of a failure occurs.
+// Retrieves the child contour object at the specified index.
 func (o *VNContour) ChildContourAtIndexError(childContourIndex uint) (*VNContour, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNContourSelChildContourAtIndexError, childContourIndex, unsafe.Pointer(&_nsErr))
@@ -53,7 +55,7 @@ func (o *VNContour) ChildContourAtIndexError(childContourIndex uint) (*VNContour
 	return VNContourFromID(_ret), nil
 }
 
-// @brief Simplifies the contour's collection of points into a polygon using the Ramer Douglas Peucker Algorithm. @discussion See <https://en.wikipedia.org/wiki/Ramer–Douglas–Peucker_algorithm> @param epsilon Points that have a perpendicular distance to the line segment they are on which are greater than epsilon are kept, others are eliminated. @param error The error returned if a simplified contour cannot be created. @return A new VNContour object with a simplified polygon consisting of a subset of the points that defined the original VNContour.
+// Simplifies the contour to a polygon using a Ramer-Douglas-Peucker algorithm.
 func (o *VNContour) PolygonApproximationWithEpsilonError(epsilon float32) (*VNContour, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNContourSelPolygonApproximationWithEpsilonError, epsilon, unsafe.Pointer(&_nsErr))

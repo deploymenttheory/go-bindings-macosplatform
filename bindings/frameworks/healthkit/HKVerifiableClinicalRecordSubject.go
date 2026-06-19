@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The subject associated with a signed clinical record.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkverifiableclinicalrecordsubject
 type HKVerifiableClinicalRecordSubject struct {
 	foundation.NSObject

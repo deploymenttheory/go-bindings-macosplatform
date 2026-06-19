@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration that instructs the GPU where to store counter data from the beginning and end of a blit pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlblitpasssamplebufferattachmentdescriptor
 type MTLBlitPassSampleBufferAttachmentDescriptor struct {
 	foundation.NSObject

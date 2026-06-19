@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A scene stores and handles loading of data related to a particular scene.
+// A container for associating GameplayKit objects with a SpriteKit scene.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkscene
 type GKScene struct {
@@ -41,7 +41,7 @@ func GKSceneFromID(id objc.ID) *GKScene {
 	return o
 }
 
-// Loads a scene from a file contained within the bundle.
+// Loads the specified SpriteKit scene file, creating a GKScene object containing the SpriteKit scene and associated GameplayKit objects.
 func GKSceneSceneWithFileNamed(filename *foundation.NSString) *GKScene {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKScene), _gKSceneSelSceneWithFileNamed, filename.Ptr())
 	if _ret != 0 {
@@ -59,12 +59,12 @@ func GKSceneSceneWithFileNamedRootNode(filename *foundation.NSString, rootNode G
 	return GKSceneFromID(_ret)
 }
 
-// Adds an entity to the scene's list of entities. @param entity the entity to add.
+// Adds a GameplayKit entity to the list of entities managed by the scene.
 func (o *GKScene) AddEntity(entity *GKEntity) {
 	o.Ptr().Send(_gKSceneSelAddEntity, entity.Ptr())
 }
 
-// Removes an entity from the scene's list of entities. @param entity the entity to remove.
+// Removes a GameplayKit entity from the list of entities managed by the scene.
 func (o *GKScene) RemoveEntity(entity *GKEntity) {
 	o.Ptr().Send(_gKSceneSelRemoveEntity, entity.Ptr())
 }
@@ -74,7 +74,7 @@ func (o *GKScene) AddGraphName(graph *GKGraph, name *foundation.NSString) {
 	o.Ptr().Send(_gKSceneSelAddGraphName, graph.Ptr(), name.Ptr())
 }
 
-// Removes a graph from the scene's list of graphs. @param name the name of the corresponding graph as added via addGraph:
+// Removes a pathfinding graph from the list of graphs managed by the scene.
 func (o *GKScene) RemoveGraph(name *foundation.NSString) {
 	o.Ptr().Send(_gKSceneSelRemoveGraph, name.Ptr())
 }
@@ -100,6 +100,9 @@ func (o *GKScene) SetRootNode(rootNode GKSceneRootNodeType) {
 
 // The navigational graphs of this scene.
 func (o *GKScene) Graphs() *foundation.NSDictionary[*foundation.NSString, *GKGraph] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *GKGraph]](o.Ptr(), _gKSceneSelGraphs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKSceneSelGraphs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *GKGraph](_ret)
 }

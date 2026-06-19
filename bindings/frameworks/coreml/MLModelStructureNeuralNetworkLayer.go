@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class representing a layer in a NeuralNetwork.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmodelstructureneuralnetworklayer
 type MLModelStructureNeuralNetworkLayer struct {
 	foundation.NSObject
@@ -53,12 +55,18 @@ func (o *MLModelStructureNeuralNetworkLayer) Type() *foundation.NSString {
 
 // The input names.
 func (o *MLModelStructureNeuralNetworkLayer) InputNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mLModelStructureNeuralNetworkLayerSelInputNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureNeuralNetworkLayerSelInputNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // The output names.
 func (o *MLModelStructureNeuralNetworkLayer) OutputNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mLModelStructureNeuralNetworkLayerSelOutputNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureNeuralNetworkLayerSelOutputNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

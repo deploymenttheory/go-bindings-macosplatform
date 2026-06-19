@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A concrete class used to represent the results of an asynchronous request.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistentstoreasynchronousresult
 type NSPersistentStoreAsynchronousResult struct {
 	NSPersistentStoreResult
@@ -35,6 +37,7 @@ func NSPersistentStoreAsynchronousResultFromID(id objc.ID) *NSPersistentStoreAsy
 	return o
 }
 
+// Cancels the asynchronous fetch request.
 func (o *NSPersistentStoreAsynchronousResult) Cancel() {
 	o.Ptr().Send(_nSPersistentStoreAsynchronousResultSelCancel)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for a currency amount associated with an intent.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/incurrencyamountresolutionresult
 type INCurrencyAmountResolutionResult struct {
 	INIntentResolutionResult
@@ -32,6 +34,7 @@ func INCurrencyAmountResolutionResultFromID(id objc.ID) *INCurrencyAmountResolut
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INCurrencyAmountResolutionResultSuccessWithResolvedCurrencyAmount(resolvedCurrencyAmount *INCurrencyAmount) *INCurrencyAmountResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCurrencyAmountResolutionResult), _iNCurrencyAmountResolutionResultSelSuccessWithResolvedCurrencyAmount, resolvedCurrencyAmount.Ptr())
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func INCurrencyAmountResolutionResultSuccessWithResolvedCurrencyAmount(resolvedC
 	return INCurrencyAmountResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires the user to select from among the specified objects.
 func INCurrencyAmountResolutionResultDisambiguationWithCurrencyAmountsToDisambiguate(currencyAmountsToDisambiguate *foundation.NSArray[*INCurrencyAmount]) *INCurrencyAmountResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCurrencyAmountResolutionResult), _iNCurrencyAmountResolutionResultSelDisambiguationWithCurrencyAmountsToDisambiguate, currencyAmountsToDisambiguate.Ptr())
 	if _ret != 0 {
@@ -48,6 +52,7 @@ func INCurrencyAmountResolutionResultDisambiguationWithCurrencyAmountsToDisambig
 	return INCurrencyAmountResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INCurrencyAmountResolutionResultConfirmationRequiredWithCurrencyAmountToConfirm(currencyAmountToConfirm *INCurrencyAmount) *INCurrencyAmountResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCurrencyAmountResolutionResult), _iNCurrencyAmountResolutionResultSelConfirmationRequiredWithCurrencyAmountToConfirm, currencyAmountToConfirm.Ptr())
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A light source for use in shading models based on real-world physics.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlphysicallyplausiblelight
 type MDLPhysicallyPlausibleLight struct {
 	MDLLight
@@ -43,7 +45,7 @@ func MDLPhysicallyPlausibleLightFromID(id objc.ID) *MDLPhysicallyPlausibleLight 
 	return o
 }
 
-// Light color specified by color temperature, in degrees Kelvin @discussion default color is 6500K, cool daylight.
+// Sets the light’s color based on a black-body temperature.
 func (o *MDLPhysicallyPlausibleLight) SetColorByTemperature(temperature float32) {
 	o.Ptr().Send(_mDLPhysicallyPlausibleLightSelSetColorByTemperature, temperature)
 }

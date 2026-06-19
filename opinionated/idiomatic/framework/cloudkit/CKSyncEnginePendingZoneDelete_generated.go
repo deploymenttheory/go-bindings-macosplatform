@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes an unsent record zone deletion.
+//
 // SyncEnginePendingZoneDelete wraps [raw.CKSyncEnginePendingZoneDelete] with a fluent Go API.
 type SyncEnginePendingZoneDelete struct {
 	inner *raw.CKSyncEnginePendingZoneDelete
@@ -29,7 +31,7 @@ func SyncEnginePendingZoneDeleteFromID(id objc.ID) *SyncEnginePendingZoneDelete 
 	return &SyncEnginePendingZoneDelete{inner: raw.CKSyncEnginePendingZoneDeleteFromID(id)}
 }
 
-// Creates a pending zone delete for the specified record zone identifier. - Parameters: - zoneID: The unique identifier of the record zone to delete. - Returns: An initialized pending zone delete.
+// Creates a pending zone delete for the specified record zone identifier.
 //
 // NewSyncEnginePendingZoneDeleteWithZoneID creates a new [SyncEnginePendingZoneDelete].
 func NewSyncEnginePendingZoneDeleteWithZoneID(zoneID *raw.CKRecordZoneID) *SyncEnginePendingZoneDelete {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A token that indicates which generation of the persistent store is being accessed.
+//
 // QueryGenerationToken wraps [raw.NSQueryGenerationToken] with a fluent Go API.
 type QueryGenerationToken struct {
 	inner *raw.NSQueryGenerationToken

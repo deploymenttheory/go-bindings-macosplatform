@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class that represents the smallest units of text layout such as paragraphs or attachments.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextelement
 type NSTextElement struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func NSTextElementFromID(id objc.ID) *NSTextElement {
 	return o
 }
 
+// Creates a new text element with the content manager you provide.
 func (o *NSTextElement) InitWithTextContentManager(textContentManager *NSTextContentManager) *NSTextElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextElementSelInitWithTextContentManager, textContentManager.Ptr())
 	if _ret != 0 {

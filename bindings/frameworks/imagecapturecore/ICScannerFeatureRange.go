@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A feature with a value that lies within a range.
+//
 // Apple documentation: https://developer.apple.com/documentation/imagecapturecore/icscannerfeaturerange
 type ICScannerFeatureRange struct {
 	ICScannerFeature

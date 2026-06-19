@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A visual representation of a level or quantity, using discrete values.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nslevelindicator
 type NSLevelIndicator struct {
 	NSControl
@@ -63,11 +65,13 @@ func NSLevelIndicatorFromID(id objc.ID) *NSLevelIndicator {
 	return o
 }
 
+// Returns the receiver’s value represented by the tick mark at the specified index (the minimum-value tick mark has an index of 0).
 func (o *NSLevelIndicator) TickMarkValueAtIndex(index int) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorSelTickMarkValueAtIndex, index)
 	return _ret
 }
 
+// Returns the bounding rectangle of the tick mark identified by the specified index (the minimum-value tick mark is at index 0).
 func (o *NSLevelIndicator) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSLevelIndicatorSelRectOfTickMarkAtIndex, index)
 	return _ret

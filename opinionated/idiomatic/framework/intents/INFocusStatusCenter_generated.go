@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that maintains the user’s current focus status and your app’s ability to access it.
+//
 // FocusStatusCenter wraps [raw.INFocusStatusCenter] with a fluent Go API.
 type FocusStatusCenter struct {
 	inner *raw.INFocusStatusCenter
@@ -35,6 +37,8 @@ func NewFocusStatusCenter() *FocusStatusCenter {
 	return &FocusStatusCenter{inner: raw.INFocusStatusCenterFromID(_id)}
 }
 
+// Asks the system for access to the user’s focus status.
+//
 // RequestAuthorizationWithCompletionHandler calls the underlying RequestAuthorizationWithCompletionHandler.
 func (x *FocusStatusCenter) RequestAuthorizationWithCompletionHandler(completionHandler func(INFocusStatusAuthorizationStatus)) {
 	x.inner.RequestAuthorizationWithCompletionHandler(func(_a0 raw.INFocusStatusAuthorizationStatus) {

@@ -90,19 +90,25 @@ func (o *MTRUnitTestingClusterTestEventEvent) SetArg4(arg4 *MTRUnitTestingCluste
 }
 
 func (o *MTRUnitTestingClusterTestEventEvent) Arg5() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterTestEventEventSelArg5)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestEventEventSelArg5)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterTestEventEvent) SetArg5(arg5 *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterTestEventEventSelSetArg5, arg5)
+	o.Ptr().Send(_mTRUnitTestingClusterTestEventEventSelSetArg5, arg5.Ptr())
 }
 
 func (o *MTRUnitTestingClusterTestEventEvent) Arg6() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterTestEventEventSelArg6)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestEventEventSelArg6)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterTestEventEvent) SetArg6(arg6 *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterTestEventEventSelSetArg6, arg6)
+	o.Ptr().Send(_mTRUnitTestingClusterTestEventEventSelSetArg6, arg6.Ptr())
 }

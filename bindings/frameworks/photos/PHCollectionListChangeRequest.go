@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to create, delete, or modify a Photos collection list, for use in a photo library change block.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phcollectionlistchangerequest
 type PHCollectionListChangeRequest struct {
 	PHChangeRequest
@@ -43,6 +45,7 @@ func PHCollectionListChangeRequestFromID(id objc.ID) *PHCollectionListChangeRequ
 	return o
 }
 
+// Creates a request for adding a new collection list to the Photos library.
 func PHCollectionListChangeRequestCreationRequestForCollectionListWithTitle(title *foundation.NSString) *PHCollectionListChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionListChangeRequest), _pHCollectionListChangeRequestSelCreationRequestForCollectionListWithTitle, title.Ptr())
 	if _ret != 0 {
@@ -51,10 +54,12 @@ func PHCollectionListChangeRequestCreationRequestForCollectionListWithTitle(titl
 	return PHCollectionListChangeRequestFromID(_ret)
 }
 
+// Requests to delete the specified asset collections.
 func PHCollectionListChangeRequestDeleteCollectionLists(collectionLists foundation.NSFastEnumeration) {
 	objc.ID(_clsPHCollectionListChangeRequest).Send(_pHCollectionListChangeRequestSelDeleteCollectionLists, collectionLists)
 }
 
+// Creates a request for modifying the specified collection list.
 func PHCollectionListChangeRequestChangeRequestForCollectionList(collectionList *PHCollectionList) *PHCollectionListChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionListChangeRequest), _pHCollectionListChangeRequestSelChangeRequestForCollectionList, collectionList.Ptr())
 	if _ret != 0 {
@@ -63,6 +68,7 @@ func PHCollectionListChangeRequestChangeRequestForCollectionList(collectionList 
 	return PHCollectionListChangeRequestFromID(_ret)
 }
 
+// Creates a request for modifying the specified collection list, with a fetch result for tracking changes.
 func PHCollectionListChangeRequestChangeRequestForCollectionListChildCollections(collectionList *PHCollectionList, childCollections *PHFetchResult[*PHCollection]) *PHCollectionListChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionListChangeRequest), _pHCollectionListChangeRequestSelChangeRequestForCollectionListChildCollections, collectionList.Ptr(), childCollections.Ptr())
 	if _ret != 0 {
@@ -71,6 +77,7 @@ func PHCollectionListChangeRequestChangeRequestForCollectionListChildCollections
 	return PHCollectionListChangeRequestFromID(_ret)
 }
 
+// Creates a request to add, remove, or rearrange child collections in the top-level collection list.
 func PHCollectionListChangeRequestChangeRequestForTopLevelCollectionListUserCollections(childCollections *PHFetchResult[*PHCollection]) *PHCollectionListChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionListChangeRequest), _pHCollectionListChangeRequestSelChangeRequestForTopLevelCollectionListUserCollections, childCollections.Ptr())
 	if _ret != 0 {
@@ -79,26 +86,32 @@ func PHCollectionListChangeRequestChangeRequestForTopLevelCollectionListUserColl
 	return PHCollectionListChangeRequestFromID(_ret)
 }
 
+// Adds the specified collections as children of the collection list.
 func (o *PHCollectionListChangeRequest) AddChildCollections(collections foundation.NSFastEnumeration) {
 	o.Ptr().Send(_pHCollectionListChangeRequestSelAddChildCollections, collections)
 }
 
+// Inserts the specified collections into the collection list at the specified indexes.
 func (o *PHCollectionListChangeRequest) InsertChildCollectionsAtIndexes(collections foundation.NSFastEnumeration, indexes *foundation.NSIndexSet) {
 	o.Ptr().Send(_pHCollectionListChangeRequestSelInsertChildCollectionsAtIndexes, collections, indexes.Ptr())
 }
 
+// Removes the specified child collections from the collection list.
 func (o *PHCollectionListChangeRequest) RemoveChildCollections(collections foundation.NSFastEnumeration) {
 	o.Ptr().Send(_pHCollectionListChangeRequestSelRemoveChildCollections, collections)
 }
 
+// Removes the child collections at the specified indexes from the collection list.
 func (o *PHCollectionListChangeRequest) RemoveChildCollectionsAtIndexes(indexes *foundation.NSIndexSet) {
 	o.Ptr().Send(_pHCollectionListChangeRequestSelRemoveChildCollectionsAtIndexes, indexes.Ptr())
 }
 
+// Replaces the child collections at the specified indexes in the collection list with the specified collections.
 func (o *PHCollectionListChangeRequest) ReplaceChildCollectionsAtIndexesWithChildCollections(indexes *foundation.NSIndexSet, collections foundation.NSFastEnumeration) {
 	o.Ptr().Send(_pHCollectionListChangeRequestSelReplaceChildCollectionsAtIndexesWithChildCollections, indexes.Ptr(), collections)
 }
 
+// Moves the child collections at the specified indexes in the collection list to a new index.
 func (o *PHCollectionListChangeRequest) MoveChildCollectionsAtIndexesToIndex(indexes *foundation.NSIndexSet, toIndex uint) {
 	o.Ptr().Send(_pHCollectionListChangeRequestSelMoveChildCollectionsAtIndexesToIndex, indexes.Ptr(), toIndex)
 }

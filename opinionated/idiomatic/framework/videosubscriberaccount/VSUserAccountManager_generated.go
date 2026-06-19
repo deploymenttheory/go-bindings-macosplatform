@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// The object that coordinates your app’s user account actions.
+//
 // VSUserAccountManager wraps [raw.VSUserAccountManager] with a fluent Go API.
 type VSUserAccountManager struct {
 	inner *raw.VSUserAccountManager
@@ -39,6 +41,8 @@ func NewVSUserAccountManager() *VSUserAccountManager {
 	return &VSUserAccountManager{inner: raw.VSUserAccountManagerFromID(_id)}
 }
 
+// Registers a new user account.
+//
 // UpdateUserAccountCompletion blocks until the operation completes or ctx is cancelled.
 func (x *VSUserAccountManager) UpdateUserAccountCompletion(ctx context.Context, account *raw.VSUserAccount) error {
 	_ch := make(chan error, 1)
@@ -57,6 +61,8 @@ func (x *VSUserAccountManager) UpdateUserAccountCompletion(ctx context.Context, 
 	}
 }
 
+// Returns a list of registered user accounts for your app.
+//
 // QueryUserAccountsWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *VSUserAccountManager) QueryUserAccountsWithOptionsCompletion(ctx context.Context, options VSUserAccountQueryOptions) (*foundation.NSArray[*raw.VSUserAccount], error) {
 	type _result struct {
@@ -81,7 +87,7 @@ func (x *VSUserAccountManager) QueryUserAccountsWithOptionsCompletion(ctx contex
 	}
 }
 
-// Query the auto sign in token and authorization state.
+// Retrieves the current Automatic Sign-In token.
 //
 // QueryAutoSignInToken blocks until the operation completes or ctx is cancelled.
 func (x *VSUserAccountManager) QueryAutoSignInToken(ctx context.Context) (*VSAutoSignInToken, error) {
@@ -109,7 +115,7 @@ func (x *VSUserAccountManager) QueryAutoSignInToken(ctx context.Context) (*VSAut
 	}
 }
 
-// Deletes the auto sign in token.
+// Deletes the value of the current Automatic Sign-In token.
 //
 // DeleteAutoSignInToken blocks until the operation completes or ctx is cancelled.
 func (x *VSUserAccountManager) DeleteAutoSignInToken(ctx context.Context) error {

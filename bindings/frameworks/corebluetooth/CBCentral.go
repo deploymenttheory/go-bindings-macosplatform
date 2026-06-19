@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A remote device connected to a local app, which is acting as a peripheral.
+//
 // Apple documentation: https://developer.apple.com/documentation/corebluetooth/cbcentral
 type CBCentral struct {
 	CBPeer

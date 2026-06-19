@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages the sync engine’s state.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginestate
 type CKSyncEngineState struct {
 	foundation.NSObject
@@ -38,22 +40,22 @@ func CKSyncEngineStateFromID(id objc.ID) *CKSyncEngineState {
 	return o
 }
 
-// Adds the specified record zone changes to the state. - Parameters: - changes: An array of record zone changes. Use this method to enable the sync engine to manage your pending record zone changes. For example, when someone makes a change that your app needs to send to the server, use this method to record the change. Then, when creating the change batch for the next send operation, retrieve the pending changes from the “CKSyncEngineState/pendingRecordZoneChanges“ property. If there are no scheduled sync operations when you invoke this method, the sync engine automatically schedules one to send the changes. After the engine sends those changes, it notifies your app's sync delegate with an event of type “CKSyncEngineSentRecordZoneChangesEvent“. The sync engine maintains a consistent collection of tracked pending changes, deduplicating them as necessary. The engine removes changes from the list as it sends them, but retains any that fail due to a recoverable error, such as a network issue or exceeding the rate limit. - Note: The order in which you apply record zone changes is important. For example: - If you add a `CKSyncEnginePendingRecordZoneChange` with type `CKSyncEnginePendingRecordZoneChangeTypeSaveRecord` for recordA then another with type `CKSyncEnginePendingRecordZoneChangeTypeDeleteRecord`, the sync engine discards the save and sends only the delete change. - If you add a `CKSyncEnginePendingRecordZoneChange` with type `CKSyncEnginePendingRecordZoneChangeTypeDeleteRecord` for recordA then another with type `CKSyncEnginePendingRecordZoneChangeTypeSaveRecord`, the sync engine discards the delete and sends only the save change.
+// Adds the specified record zone changes to the state.
 func (o *CKSyncEngineState) AddPendingRecordZoneChanges(changes *foundation.NSArray[*CKSyncEnginePendingRecordZoneChange]) {
 	o.Ptr().Send(_cKSyncEngineStateSelAddPendingRecordZoneChanges, changes.Ptr())
 }
 
-// Removes the specified record zone changes from the state. - Parameters: - changes: An array of record zone changes. Use this method when you no longer want the sync engine to send certain pending changes.
+// Removes the specified record zone changes from the state.
 func (o *CKSyncEngineState) RemovePendingRecordZoneChanges(changes *foundation.NSArray[*CKSyncEnginePendingRecordZoneChange]) {
 	o.Ptr().Send(_cKSyncEngineStateSelRemovePendingRecordZoneChanges, changes.Ptr())
 }
 
-// Adds the specified database changes to the state. - Parameters: - changes: An array of database changes. Use this method to enable the sync engine to manage your pending database changes. For example, when someone makes a change that your app needs to send to the server, use this method to record the change. If there are no scheduled sync operations when you invoke this method, the sync engine automatically schedules one to send the changes. After the engine sends those changes, it notifies your app's sync delegate with an event of type “CKSyncEngineSentDatabaseChangesEvent“. The sync engine maintains a consistent collection of tracked pending changes, deduplicating them as necessary. The engine removes changes from the list as it sends them, but retains any that fail due to a recoverable error, such as a network issue, or exceeding the rate limit. - Note: The order in which you apply database changes is important. For example: - If you add a `CKSyncEnginePendingDatabaseChange` with type `CKSyncEnginePendingDatabaseChangeTypeSaveZone` for zoneA then another with type `CKSyncEnginePendingDatabaseChangeTypeDeleteZone`, the sync engine discards the save and sends only the delete change. - If you add a `CKSyncEnginePendingDatabaseChange` with type `CKSyncEnginePendingDatabaseChangeTypeDeleteZone` for zoneA then another with type `CKSyncEnginePendingDatabaseChangeTypeSaveZone`, the sync engine discards the delete and sends only the save change.
+// Adds the specified database changes to the state.
 func (o *CKSyncEngineState) AddPendingDatabaseChanges(changes *foundation.NSArray[*CKSyncEnginePendingDatabaseChange]) {
 	o.Ptr().Send(_cKSyncEngineStateSelAddPendingDatabaseChanges, changes.Ptr())
 }
 
-// Removes the specified database changes from the state. - Parameters: - changes: An array of database changes. Use this method when you no longer want the sync engine to send certain pending changes.
+// Removes the specified database changes from the state.
 func (o *CKSyncEngineState) RemovePendingDatabaseChanges(changes *foundation.NSArray[*CKSyncEnginePendingDatabaseChange]) {
 	o.Ptr().Send(_cKSyncEngineStateSelRemovePendingDatabaseChanges, changes.Ptr())
 }

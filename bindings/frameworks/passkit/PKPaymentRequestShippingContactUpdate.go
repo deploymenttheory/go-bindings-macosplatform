@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that updates the payment request after the shipping contact information changes.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentrequestshippingcontactupdate
 type PKPaymentRequestShippingContactUpdate struct {
 	PKPaymentRequestUpdate
@@ -34,8 +36,9 @@ func PKPaymentRequestShippingContactUpdateFromID(id objc.ID) *PKPaymentRequestSh
 	return o
 }
 
+// Creates a shipping contact update with your specified payment summary items and shipping methods.
 func (o *PKPaymentRequestShippingContactUpdate) InitWithErrorsPaymentSummaryItemsShippingMethods(errors_ *foundation.NSArray[objc.ID], paymentSummaryItems *foundation.NSArray[*PKPaymentSummaryItem], shippingMethods *foundation.NSArray[*PKShippingMethod]) *PKPaymentRequestShippingContactUpdate {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestShippingContactUpdateSelInitWithErrorsPaymentSummaryItemsShippingMethods, errors_, paymentSummaryItems.Ptr(), shippingMethods.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestShippingContactUpdateSelInitWithErrorsPaymentSummaryItemsShippingMethods, errors_.Ptr(), paymentSummaryItems.Ptr(), shippingMethods.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -43,8 +46,11 @@ func (o *PKPaymentRequestShippingContactUpdate) InitWithErrorsPaymentSummaryItem
 }
 
 func (o *PKPaymentRequestShippingContactUpdate) Errors() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _pKPaymentRequestShippingContactUpdateSelErrors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestShippingContactUpdateSelErrors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *PKPaymentRequestShippingContactUpdate) SetErrors() error {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of metadata items that are valid for use within a specific date range.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avdaterangemetadatagroup
 type AVDateRangeMetadataGroup struct {
 	AVMetadataGroup
@@ -32,7 +34,7 @@ func AVDateRangeMetadataGroupFromID(id objc.ID) *AVDateRangeMetadataGroup {
 	return o
 }
 
-// @method		initWithItems:startDate:endDate: @abstract	Initializes an instance of AVDateRangeMetadataGroup with a collection of metadata items. @param		items An NSArray of AVMetadataItems. @param		startDate The start date of the collection of AVMetadataItems. @param		endDate The end date of the collection of AVMetadataItems. If the receiver is intended to represent information about an instantaneous event, the value of endDate should be equal to the value of startDate. A value of nil for endDate indicates that the endDate is indefinite. @result		An instance of AVDateRangeMetadataGroup.
+// Initializes an instance of AVDateRangeMetadataGroup with a collection of metadata items.
 func (o *AVDateRangeMetadataGroup) InitWithItemsStartDateEndDate(items *foundation.NSArray[*AVMetadataItem], startDate *foundation.NSDate, endDate *foundation.NSDate) *AVDateRangeMetadataGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDateRangeMetadataGroupSelInitWithItemsStartDateEndDate, items.Ptr(), startDate.Ptr(), endDate.Ptr())
 	if _ret != 0 {

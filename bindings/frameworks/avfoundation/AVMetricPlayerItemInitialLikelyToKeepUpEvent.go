@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event that represents the initial state for whether playback is likely to continue without stalling.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetricplayeriteminitiallikelytokeepupevent
 type AVMetricPlayerItemInitialLikelyToKeepUpEvent struct {
 	AVMetricPlayerItemLikelyToKeepUpEvent

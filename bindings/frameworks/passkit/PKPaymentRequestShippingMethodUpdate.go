@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that updates the payment request after the shipping method changed.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentrequestshippingmethodupdate
 type PKPaymentRequestShippingMethodUpdate struct {
 	PKPaymentRequestUpdate

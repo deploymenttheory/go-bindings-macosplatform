@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Parameters used to perform specific key exchange operations.
+//
 // TokenKeyExchangeParameters wraps [raw.TKTokenKeyExchangeParameters] with a fluent Go API.
 type TokenKeyExchangeParameters struct {
 	inner *raw.TKTokenKeyExchangeParameters

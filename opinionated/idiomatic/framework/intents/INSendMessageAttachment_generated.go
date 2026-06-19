@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A file to include in a message.
+//
 // SendMessageAttachment wraps [raw.INSendMessageAttachment] with a fluent Go API.
 type SendMessageAttachment struct {
 	inner *raw.INSendMessageAttachment

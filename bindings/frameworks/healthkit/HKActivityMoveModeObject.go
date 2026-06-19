@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains a movement mode value.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkactivitymovemodeobject
 type HKActivityMoveModeObject struct {
 	foundation.NSObject

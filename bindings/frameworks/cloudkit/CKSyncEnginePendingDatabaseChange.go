@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes an unsent database modification.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginependingdatabasechange
 type CKSyncEnginePendingDatabaseChange struct {
 	foundation.NSObject

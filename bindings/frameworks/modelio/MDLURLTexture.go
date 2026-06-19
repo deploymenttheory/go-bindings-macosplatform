@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A lightweight reference to a URL from which to load texture data.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlurltexture
 type MDLURLTexture struct {
 	MDLTexture
@@ -32,6 +34,7 @@ func MDLURLTextureFromID(id objc.ID) *MDLURLTexture {
 	return o
 }
 
+// Initializes a texture that loads its texel data from a file at the specified URL.
 func (o *MDLURLTexture) InitWithURLName(uRL *foundation.NSURL, name *foundation.NSString) *MDLURLTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLURLTextureSelInitWithURLName, uRL.Ptr(), name.Ptr())
 	if _ret != 0 {

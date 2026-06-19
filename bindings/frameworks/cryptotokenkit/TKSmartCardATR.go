@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A parsed ATR (Answer To Reset) message from a Smart Card.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tksmartcardatr
 type TKSmartCardATR struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func TKSmartCardATRFromID(id objc.ID) *TKSmartCardATR {
 	return o
 }
 
-// Parses ATR from binary data block @param bytes Data containing full valid ATR @return Parsed ATR instance, or nil when #bytes do not contain valid ATR.
+// Initializes a TKSmartCardATR object from a provided data object.
 func (o *TKSmartCardATR) InitWithBytes(bytes_ *foundation.NSData) *TKSmartCardATR {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardATRSelInitWithBytes, bytes_.Ptr())
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func (o *TKSmartCardATR) InitWithBytes(bytes_ *foundation.NSData) *TKSmartCardAT
 	return TKSmartCardATRFromID(_ret)
 }
 
-// Parses ATR from stream. @param source Provides one byte of ATR from the stream or -1 in case of an error @return Parsed ATR instance, or nil when #source method failed or an invalid ATR is detected
+// Initializes a TKSmartCardATR object from a provided data source.
 func (o *TKSmartCardATR) InitWithSource(source func() int) *TKSmartCardATR {
 	var __block_source objc.Block
 	if source != nil {
@@ -62,7 +64,7 @@ func (o *TKSmartCardATR) InitWithSource(source func() int) *TKSmartCardATR {
 	return TKSmartCardATRFromID(_ret)
 }
 
-// Retrieves interface group with specified index. @param index Index of the requested interface group.  Indexing conforms to ISO7816-3, i.e. starts from 1. @return Interface group with given index, or nil of no such group was present.
+// Returns the interface group at the specified index.
 func (o *TKSmartCardATR) InterfaceGroupAtIndex(index int) *TKSmartCardATRInterfaceGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardATRSelInterfaceGroupAtIndex, index)
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func (o *TKSmartCardATR) InterfaceGroupAtIndex(index int) *TKSmartCardATRInterfa
 	return TKSmartCardATRInterfaceGroupFromID(_ret)
 }
 
-// @param protocol Protocol number for which the interface group is requested.
+// Returns the interface group with the specified protocol.
 func (o *TKSmartCardATR) InterfaceGroupForProtocol(protocol TKSmartCardProtocol) *TKSmartCardATRInterfaceGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardATRSelInterfaceGroupForProtocol, protocol)
 	if _ret != 0 {
@@ -91,8 +93,11 @@ func (o *TKSmartCardATR) Bytes() *foundation.NSData {
 
 // Array of NSNumber of protocols indicated in ATR, in the correct order (i.e. the default protocol comes first), duplicates sorted out.
 func (o *TKSmartCardATR) Protocols() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _tKSmartCardATRSelProtocols)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardATRSelProtocols)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Just historical bytes of ATR, without Tck and interface bytes.

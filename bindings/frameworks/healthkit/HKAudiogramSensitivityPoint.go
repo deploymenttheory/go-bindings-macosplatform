@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A hearing sensitivity reading associated with a hearing test.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkaudiogramsensitivitypoint
 type HKAudiogramSensitivityPoint struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func HKAudiogramSensitivityPointFromID(id objc.ID) *HKAudiogramSensitivityPoint 
 	return o
 }
 
-// @method                    sensitivityPointWithFrequency:leftEarSensitivity:rightEarSensitivity:error: @abstract                  Creates a point that can be included in a audiogram. @param frequency           Frequency where sensitivity was measured. @param leftEarSensitivity  Left ear sensitivity measured in dB from a baseline of 0 dB. Reduced hearing sensitivity corresponds to an increase from 0 dB. @param rightEarSensitivity Right ear sensitivity measured in dB from a baseline of 0 dB. Reduced hearing sensitivity corresponds to an increase from 0 dB. @param error               If there was a problem creating this instance this will contain the error. @return                    New instance of a sensitivity point or nil if there were problems creating the instance.  Errors may include incorrect quantity units or data that is out of an expected range.
+// Creates a new sensitivity point.
 func HKAudiogramSensitivityPointSensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError(frequency *HKQuantity, leftEarSensitivity *HKQuantity, rightEarSensitivity *HKQuantity) (*HKAudiogramSensitivityPoint, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKAudiogramSensitivityPoint), _hKAudiogramSensitivityPointSelSensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError, frequency.Ptr(), leftEarSensitivity.Ptr(), rightEarSensitivity.Ptr(), unsafe.Pointer(&_nsErr))

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for pressure.
+//
 // UnitPressure wraps [raw.NSUnitPressure] with a fluent Go API.
 type UnitPressure struct {
 	inner *raw.NSUnitPressure

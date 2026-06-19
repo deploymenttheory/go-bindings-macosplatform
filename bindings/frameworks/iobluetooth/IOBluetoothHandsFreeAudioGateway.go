@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that sends data to a connected Bluetooth hands-free phone or headset and processes commands from it.
+//
 // Apple documentation: https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreeaudiogateway
 type IOBluetoothHandsFreeAudioGateway struct {
 	IOBluetoothHandsFree
@@ -35,7 +37,7 @@ func IOBluetoothHandsFreeAudioGatewayFromID(id objc.ID) *IOBluetoothHandsFreeAud
 	return o
 }
 
-// @method		initWithDevice:delegate: @abstract		Create a new IOBluetoothHandsFreeAudioGateway to act as a hands free gateway @discussion	This will register a listener for incoming connections. @param			device An IOBluetoothDevice @param			inDelegate An object to act as delegate @result		A newly created IOBluetoothHandsFreeAudioGateway object on success, nil on failure
+// Creates an object that controls a connected Bluetooth hands-free phone or headset.
 func (o *IOBluetoothHandsFreeAudioGateway) InitWithDeviceDelegate(device *IOBluetoothDevice, inDelegate objc.ID) *IOBluetoothHandsFreeAudioGateway {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothHandsFreeAudioGatewaySelInitWithDeviceDelegate, device.Ptr(), inDelegate)
 	if _ret != 0 {
@@ -44,27 +46,27 @@ func (o *IOBluetoothHandsFreeAudioGateway) InitWithDeviceDelegate(device *IOBlue
 	return IOBluetoothHandsFreeAudioGatewayFromID(_ret)
 }
 
-// @method		createIndicator:indicatorName:min:max:currentValue @abstract		Create an indicator @discussion	Creates an indicator with min and max values and sets the current value. The current value must be valid. @param			indicatorName  See  �Hands free indicator constants," for standard indicator names. @param			minValue Minimum value allowed for the indicator @param			maxValue Maximum value allowed for the indicator @param			currentValue The current indicator value. Must be within the min and max values passed in or the indicator will not be created.
+// Sends a request to the Bluetooth device to show or update a status indicator.
 func (o *IOBluetoothHandsFreeAudioGateway) CreateIndicatorMinMaxCurrentValue(indicatorName *foundation.NSString, minValue int, maxValue int, currentValue int) {
 	o.Ptr().Send(_iOBluetoothHandsFreeAudioGatewaySelCreateIndicatorMinMaxCurrentValue, indicatorName.Ptr(), minValue, maxValue, currentValue)
 }
 
-// @method		processATCommand:atCommand @abstract		Handles AT commands sent from the hands free device @discussion	Implement this in a subclass if you wish to respond to additional AT commands or to change the default response. @param			atCommand The at command from the hands free device
+// Processes a command from a connected Bluetooth hands-free phone or headset.
 func (o *IOBluetoothHandsFreeAudioGateway) ProcessATCommand(atCommand *foundation.NSString) {
 	o.Ptr().Send(_iOBluetoothHandsFreeAudioGatewaySelProcessATCommand, atCommand.Ptr())
 }
 
-// @method		sendOKResponse @abstract		Sends an OK response @discussion	Use this to respond OK.
+// Sends a success message to a connected Bluetooth hands-free phone or headset.
 func (o *IOBluetoothHandsFreeAudioGateway) SendOKResponse() {
 	o.Ptr().Send(_iOBluetoothHandsFreeAudioGatewaySelSendOKResponse)
 }
 
-// @method		sendResponse:response @abstract		Sends a response to the hands free device @discussion	Use this to send a response followed by an OK. Equivalent to [sendResponse:response withOK:YES]. @param			response The response to send to the hands free device
+// Sends data followed by a success message to a connected Bluetooth hands-free phone or headset.
 func (o *IOBluetoothHandsFreeAudioGateway) SendResponse(response *foundation.NSString) {
 	o.Ptr().Send(_iOBluetoothHandsFreeAudioGatewaySelSendResponse, response.Ptr())
 }
 
-// @method		sendResponse:response:withOK @abstract		Sends a response to the hands free device @discussion	Use this to send a response and optionally followed by an OK. @param			response The response to send to the hands free device @param			withOK If yes, an OK response will also be sent.
+// Sends data followed by an optional success message to a connected Bluetooth hands-free phone or headset.
 func (o *IOBluetoothHandsFreeAudioGateway) SendResponseWithOK(response *foundation.NSString, withOK bool) {
 	o.Ptr().Send(_iOBluetoothHandsFreeAudioGatewaySelSendResponseWithOK, response.Ptr(), withOK)
 }

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A physics behavior that connects two bodies and allows them to pivot around each other on a single axis.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnphysicshingejoint
 type SCNPhysicsHingeJoint struct {
 	SCNPhysicsBehavior
@@ -40,6 +42,7 @@ func SCNPhysicsHingeJointFromID(id objc.ID) *SCNPhysicsHingeJoint {
 	return o
 }
 
+// Creates a hinge joint connecting two physics bodies.
 func SCNPhysicsHingeJointJointWithBodyAAxisAAnchorABodyBAxisBAnchorB(bodyA *SCNPhysicsBody, axisA SCNVector3, anchorA SCNVector3, bodyB *SCNPhysicsBody, axisB SCNVector3, anchorB SCNVector3) *SCNPhysicsHingeJoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsHingeJoint), _sCNPhysicsHingeJointSelJointWithBodyAAxisAAnchorABodyBAxisBAnchorB, bodyA.Ptr(), axisA, anchorA, bodyB.Ptr(), axisB, anchorB)
 	if _ret != 0 {
@@ -48,6 +51,7 @@ func SCNPhysicsHingeJointJointWithBodyAAxisAAnchorABodyBAxisBAnchorB(bodyA *SCNP
 	return SCNPhysicsHingeJointFromID(_ret)
 }
 
+// Creates a hinge joint that anchors a single physics body in space and lets it rotate around a specific axis.
 func SCNPhysicsHingeJointJointWithBodyAxisAnchor(body *SCNPhysicsBody, axis SCNVector3, anchor SCNVector3) *SCNPhysicsHingeJoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsHingeJoint), _sCNPhysicsHingeJointSelJointWithBodyAxisAnchor, body.Ptr(), axis, anchor)
 	if _ret != 0 {

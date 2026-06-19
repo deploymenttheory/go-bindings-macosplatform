@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance that represents a set of displays, apps, and windows that your app can capture.
+//
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/scshareablecontent
 type SCShareableContent struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func SCShareableContentFromID(id objc.ID) *SCShareableContent {
 	return o
 }
 
-// @abstract getShareableContentWithCompletionHandler:completionHandler @param completionHandler the call back that will hand you back a SCShareableContent object @discussion this method will create a SCShareableContent object that is called on the supplied queue. The SCShareableContent will contain the windows, displays and applications that are available to capture
+// Retrieves the displays, apps, and windows that your app can capture.
 func SCShareableContentGetShareableContentWithCompletionHandler(completionHandler func(*SCShareableContent, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -70,7 +72,7 @@ func SCShareableContentGetCurrentProcessShareableContentWithCompletionHandler(co
 	objc.ID(_clsSCShareableContent).Send(_sCShareableContentSelGetCurrentProcessShareableContentWithCompletionHandler, __block_completionHandler)
 }
 
-// @abstract getShareableContentExcludingDesktopWindows:onScreenWindowsOnly:completionHandler @param excludeDesktopWindows a BOOL indicating if we should exclude desktop windows @param onScreenWindowsOnly filter only windows that are on screen @param completionHandler the call back that will hand you back a SCShareableContent object @discussion this method will create a SCShareableContent object that is called on the supplied queue. The SCShareableContent will contain the windows, displays and applications that are available to capture
+// Retrieves the displays, apps, and windows that match your criteria.
 func SCShareableContentGetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyCompletionHandler(excludeDesktopWindows bool, onScreenWindowsOnly bool, completionHandler func(*SCShareableContent, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -85,7 +87,7 @@ func SCShareableContentGetShareableContentExcludingDesktopWindowsOnScreenWindows
 	objc.ID(_clsSCShareableContent).Send(_sCShareableContentSelGetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyCompletionHandler, excludeDesktopWindows, onScreenWindowsOnly, __block_completionHandler)
 }
 
-// @abstract getShareableContentExcludingDesktopWindows:onScreenWindowsOnlyBelowWindow:completionHandler @param excludeDesktopWindows a BOOL indicating if we should exclude desktop windows @param window filter only windows below this SCWindow @param completionHandler the call back that will hand you back a SCShareableContent object @discussion this method will create a SCShareableContent object that is called on the supplied queue. The SCShareableContent will contain the windows, displays and applications that are available to capture
+// Retrieves the displays, apps, and windows that are behind the specified window.
 func SCShareableContentGetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindowCompletionHandler(excludeDesktopWindows bool, window *SCWindow, completionHandler func(*SCShareableContent, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -100,7 +102,7 @@ func SCShareableContentGetShareableContentExcludingDesktopWindowsOnScreenWindows
 	objc.ID(_clsSCShareableContent).Send(_sCShareableContentSelGetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyBelowWindowCompletionHandler, excludeDesktopWindows, window.Ptr(), __block_completionHandler)
 }
 
-// @abstract getShareableContentExcludingDesktopWindows:onScreenWindowsOnlyAboveWindow:completionHandler @param excludeDesktopWindows a BOOL indicating if we should exclude desktop windows @param window filter only windows above this SCWindow @param completionHandler the call back that will hand you back a SCShareableContent object @discussion this method will create a SCShareableContent object that is called on the supplied queue. The SCShareableContent will contain the windows, displays and applications that are available to capture
+// Retrieves the displays, apps, and windows that are in front of the specified window.
 func SCShareableContentGetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindowCompletionHandler(excludeDesktopWindows bool, window *SCWindow, completionHandler func(*SCShareableContent, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -115,7 +117,7 @@ func SCShareableContentGetShareableContentExcludingDesktopWindowsOnScreenWindows
 	objc.ID(_clsSCShareableContent).Send(_sCShareableContentSelGetShareableContentExcludingDesktopWindowsOnScreenWindowsOnlyAboveWindowCompletionHandler, excludeDesktopWindows, window.Ptr(), __block_completionHandler)
 }
 
-// @abstract infoForFilter: @param filter content filter to translate to content details @discussion this method will create a SCShareableContentInformation object given a filter
+// Retrieves any available sharable content information that matches the provided filter.
 func SCShareableContentInfoForFilter(filter *SCContentFilter) *SCShareableContentInfo {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCShareableContent), _sCShareableContentSelInfoForFilter, filter.Ptr())
 	if _ret != 0 {

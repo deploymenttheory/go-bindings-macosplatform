@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An App Store response to a request for information about a list of products.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skproductsresponse
 // Deprecated: Get products using Product.products(for:).
 type SKProductsResponse struct {
@@ -41,6 +43,9 @@ func (o *SKProductsResponse) Products() *foundation.NSArray[*SKProduct] {
 }
 
 func (o *SKProductsResponse) InvalidProductIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _sKProductsResponseSelInvalidProductIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductsResponseSelInvalidProductIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

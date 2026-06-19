@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A text field that hides the typed text.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssecuretextfield
 type NSSecureTextField struct {
 	NSTextField

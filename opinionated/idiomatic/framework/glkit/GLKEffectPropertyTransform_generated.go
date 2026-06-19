@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// Coordinate transform information for use in GLKit rendering effects.
+//
 // EffectPropertyTransform wraps [raw.GLKEffectPropertyTransform] with a fluent Go API.
 type EffectPropertyTransform struct {
 	inner *raw.GLKEffectPropertyTransform

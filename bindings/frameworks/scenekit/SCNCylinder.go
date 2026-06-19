@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A right circular cylinder geometry.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scncylinder
 type SCNCylinder struct {
 	SCNGeometry
@@ -37,7 +39,7 @@ func SCNCylinderFromID(id objc.ID) *SCNCylinder {
 	return o
 }
 
-// @method cylinderWithRadius:height: @abstract Creates and returns a cylinder with given radius and height. @param radius The radius of the cylinder. @param height The height of the cylinder.
+// Creates a cylinder geometry with the specified radius and height.
 func SCNCylinderCylinderWithRadiusHeight(radius float64, height float64) *SCNCylinder {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNCylinder), _sCNCylinderSelCylinderWithRadiusHeight, radius, height)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Configuration information for an assessment session.
+//
 // Apple documentation: https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentconfiguration
 type AEAssessmentConfiguration struct {
 	foundation.NSObject
@@ -49,12 +51,12 @@ func AEAssessmentConfigurationFromID(id objc.ID) *AEAssessmentConfiguration {
 	return o
 }
 
-// Adds an app to the list of apps available during an assessment. Use this method to make an app besides your own available during an assessment. Create a representation of the app that you want to allow as an “AEAssessmentApplication“ instance, and the configuration for that app using an “AEAssessmentParticipantConfiguration“ instance: ```swift let calculator = AEAssessmentApplication(bundleIdentifier: "com.apple.calculator") let calculatorConfig = AEAssessmentParticipantConfiguration() calculatorConfig.allowsNetworkAccess = false // Calculator doesn't need the network. ``` Use the app and its configuration to create an assessment configuration, and either create an assessment session with that, or update an existing session as shown below: ```swift let configuration = AEAssessmentConfiguration() configuration.setConfiguration(calculatorConfig, for: calculator) session.update(to: configuration) ``` You can get a list of the currently allowed apps by accessing the “AEAssessmentConfiguration/configurationsByApplication“ property. You can disallow a previously allowed app by using the “AEAssessmentConfiguration/remove(_:)“ method. - Parameters: - configuration: The configuration of the secondary app. - application: The app that you want to configure.
+// Adds an app to the list of apps available during an assessment.
 func (o *AEAssessmentConfiguration) SetConfigurationForApplication(configuration *AEAssessmentParticipantConfiguration, application *AEAssessmentApplication) {
 	o.Ptr().Send(_aEAssessmentConfigurationSelSetConfigurationForApplication, configuration.Ptr(), application.Ptr())
 }
 
-// Removes the availability of a previously allowed app. Use this method to remove apps that you previously added to the list of apps that are available during an assessment with the “AEAssessmentConfiguration/setConfiguration(_:for:)“ method. You can get the list of currently allowed apps by accessing the configuration's “AEAssessmentConfiguration/configurationsByApplication“ property. - Parameters: - application: The app that you want to remove from the list of allowed secondary apps.
+// Removes the availability of a previously allowed app.
 func (o *AEAssessmentConfiguration) RemoveApplication(application *AEAssessmentApplication) {
 	o.Ptr().Send(_aEAssessmentConfigurationSelRemoveApplication, application.Ptr())
 }

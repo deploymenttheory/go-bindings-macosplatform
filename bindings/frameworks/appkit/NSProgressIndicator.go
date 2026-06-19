@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface that provides visual feedback to the user about the status of an ongoing task.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsprogressindicator
 type NSProgressIndicator struct {
 	NSView
@@ -58,18 +60,22 @@ func NSProgressIndicatorFromID(id objc.ID) *NSProgressIndicator {
 	return o
 }
 
+// Advances the progress bar of a determinate progress indicator by the specified amount.
 func (o *NSProgressIndicator) IncrementBy(delta float64) {
 	o.Ptr().Send(_nSProgressIndicatorSelIncrementBy, delta)
 }
 
+// Starts the animation of an indeterminate progress indicator.
 func (o *NSProgressIndicator) StartAnimation(sender objc.ID) {
 	o.Ptr().Send(_nSProgressIndicatorSelStartAnimation, sender)
 }
 
+// Stops the animation of an indeterminate progress indicator.
 func (o *NSProgressIndicator) StopAnimation(sender objc.ID) {
 	o.Ptr().Send(_nSProgressIndicatorSelStopAnimation, sender)
 }
 
+// This action method resizes the progress indicator to an appropriate size depending on the value of style.
 func (o *NSProgressIndicator) SizeToFit() {
 	o.Ptr().Send(_nSProgressIndicatorSelSizeToFit)
 }
@@ -158,17 +164,20 @@ func (o *NSProgressIndicator) SetDisplayedWhenStopped(displayedWhenStopped bool)
 	o.Ptr().Send(_nSProgressIndicatorSelSetDisplayedWhenStopped, displayedWhenStopped)
 }
 
+// Returns the delay, in seconds, between animation steps for an indeterminate progress indicator.
 // Deprecated: The animationDelay property does nothing.
 func (o *NSProgressIndicator) AnimationDelay() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSProgressIndicatorSelAnimationDelay)
 	return _ret
 }
 
+// Sets the delay, in seconds, between animation steps for an indeterminate progress indicator.
 // Deprecated: The animationDelay property does nothing.
 func (o *NSProgressIndicator) SetAnimationDelay(delay float64) {
 	o.Ptr().Send(_nSProgressIndicatorSelSetAnimationDelay, delay)
 }
 
+// This action method advances the progress animation of an indeterminate progress animator by one step.
 // Deprecated: Use -startAnimation and -stopAnimation instead.
 func (o *NSProgressIndicator) Animate(sender objc.ID) {
 	o.Ptr().Send(_nSProgressIndicatorSelAnimate, sender)

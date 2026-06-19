@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A Smart Card PIN authentication operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktokensmartcardpinauthoperation
 type TKTokenSmartCardPINAuthOperation struct {
 	TKTokenAuthOperation

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request that detects a human hand pose.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetecthumanhandposerequest
 type VNDetectHumanHandPoseRequest struct {
 	VNImageBasedRequest
@@ -37,46 +39,58 @@ func VNDetectHumanHandPoseRequestFromID(id objc.ID) *VNDetectHumanHandPoseReques
 	return o
 }
 
-// @brief Obtain the collection of human hand joint names that are supported by a given request revision. @param revision The revision of VNDetectHumanHandPoseRequest being queried. @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed. @return An array of VNHumanHandPoseObservationJointName symbols that are supported by the request revision, or nil if a failure occurs.
+// Retrieves the supported joint names for a revision.
 // Deprecated: since macOS 14.0.
 func VNDetectHumanHandPoseRequestSupportedJointNamesForRevisionError(revision uint) (*foundation.NSArray[*foundation.NSString], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsVNDetectHumanHandPoseRequest), _vNDetectHumanHandPoseRequestSelSupportedJointNamesForRevisionError, revision, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsVNDetectHumanHandPoseRequest), _vNDetectHumanHandPoseRequestSelSupportedJointNamesForRevisionError, revision, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[*foundation.NSString](_ret), nil
 }
 
-// @brief Obtain the collection of human hand joint names that are supported by a given request object configured with a specific revision. @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed. @return An array of VNHumanHandPoseObservationJointName symbols that are supported by the request revision, or nil if a failure occurs.
+// Retrieves the supported joint names.
 func (o *VNDetectHumanHandPoseRequest) SupportedJointNamesAndReturnError() (*foundation.NSArray[*foundation.NSString], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNDetectHumanHandPoseRequestSelSupportedJointNamesAndReturnError, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNDetectHumanHandPoseRequestSelSupportedJointNamesAndReturnError, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[*foundation.NSString](_ret), nil
 }
 
-// @brief Obtain the collection of human hand joints group names that are supported by a given request revision. @param revision The revision of VNDetectHumanHandPoseRequest being queried. @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed. @return An array of VNHumanHandPoseObservationJointsGroupName symbols that are supported by the request revision, or nil if a failure occurs.
+// Retrieves the supported joint group names for a revision.
 // Deprecated: since macOS 14.0.
 func VNDetectHumanHandPoseRequestSupportedJointsGroupNamesForRevisionError(revision uint) (*foundation.NSArray[*foundation.NSString], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsVNDetectHumanHandPoseRequest), _vNDetectHumanHandPoseRequestSelSupportedJointsGroupNamesForRevisionError, revision, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsVNDetectHumanHandPoseRequest), _vNDetectHumanHandPoseRequestSelSupportedJointsGroupNamesForRevisionError, revision, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[*foundation.NSString](_ret), nil
 }
 
-// @brief Obtain the collection of human hand joints group names that are supported by a given request object configured with a specific revision. @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed. @return An array of VNHumanHandPoseObservationJointsGroupName symbols that are supported by the request revision, or nil if a failure occurs.
+// Retrieves the supported joint group names.
 func (o *VNDetectHumanHandPoseRequest) SupportedJointsGroupNamesAndReturnError() (*foundation.NSArray[*foundation.NSString], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNDetectHumanHandPoseRequestSelSupportedJointsGroupNamesAndReturnError, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNDetectHumanHandPoseRequestSelSupportedJointsGroupNamesAndReturnError, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[*foundation.NSString](_ret), nil
 }
 
 // @brief Defines an upper bounds to the maximum number of hands that will be processed for key points in an image. @discussion The complexity in key points determination is scalable by the number of hands to be processed.  All hands detected in an image will be ordered by relative size, with only the N largest ones having key points determined.  The default value for this property is 2. The maximum value for VNDetectHumanHandPoseRequestRevision1 is 6.

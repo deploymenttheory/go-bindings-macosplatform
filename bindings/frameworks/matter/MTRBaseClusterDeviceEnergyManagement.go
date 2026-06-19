@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Cluster Device Energy Management
+//
 // Apple documentation: https://developer.apple.com/documentation/matter/mtrbaseclusterdeviceenergymanagement
 type MTRBaseClusterDeviceEnergyManagement struct {
 	MTRGenericBaseCluster
@@ -82,7 +84,7 @@ func MTRBaseClusterDeviceEnergyManagementFromID(id objc.ID) *MTRBaseClusterDevic
 	return o
 }
 
-// Command PowerAdjustRequest Allows a client to request an adjustment in the power consumption of an ESA for a specified duration.
+// Command PowerAdjustRequest
 func (o *MTRBaseClusterDeviceEnergyManagement) PowerAdjustRequestWithParamsCompletion(params *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -94,7 +96,7 @@ func (o *MTRBaseClusterDeviceEnergyManagement) PowerAdjustRequestWithParamsCompl
 	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelPowerAdjustRequestWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command CancelPowerAdjustRequest Allows a client to cancel an ongoing PowerAdjustmentRequest operation.
+// Command CancelPowerAdjustRequest
 func (o *MTRBaseClusterDeviceEnergyManagement) CancelPowerAdjustRequestWithParamsCompletion(params *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -117,7 +119,7 @@ func (o *MTRBaseClusterDeviceEnergyManagement) CancelPowerAdjustRequestWithCompl
 	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelCancelPowerAdjustRequestWithCompletion, __block_completion)
 }
 
-// Command StartTimeAdjustRequest Allows a client to adjust the start time of a Forecast sequence that has not yet started operation (i.e. where the current Forecast StartTime is in the future).
+// Command StartTimeAdjustRequest
 func (o *MTRBaseClusterDeviceEnergyManagement) StartTimeAdjustRequestWithParamsCompletion(params *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -129,7 +131,7 @@ func (o *MTRBaseClusterDeviceEnergyManagement) StartTimeAdjustRequestWithParamsC
 	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelStartTimeAdjustRequestWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command PauseRequest Allows a client to temporarily pause an operation and reduce the ESAs energy demand.
+// Command PauseRequest
 func (o *MTRBaseClusterDeviceEnergyManagement) PauseRequestWithParamsCompletion(params *MTRDeviceEnergyManagementClusterPauseRequestParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -141,7 +143,7 @@ func (o *MTRBaseClusterDeviceEnergyManagement) PauseRequestWithParamsCompletion(
 	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelPauseRequestWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command ResumeRequest Allows a client to cancel the PauseRequest command and enable earlier resumption of operation.
+// Command ResumeRequest
 func (o *MTRBaseClusterDeviceEnergyManagement) ResumeRequestWithParamsCompletion(params *MTRDeviceEnergyManagementClusterResumeRequestParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -164,7 +166,7 @@ func (o *MTRBaseClusterDeviceEnergyManagement) ResumeRequestWithCompletion(compl
 	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelResumeRequestWithCompletion, __block_completion)
 }
 
-// Command ModifyForecastRequest Allows a client to modify a Forecast within the limits allowed by the ESA.
+// Command ModifyForecastRequest
 func (o *MTRBaseClusterDeviceEnergyManagement) ModifyForecastRequestWithParamsCompletion(params *MTRDeviceEnergyManagementClusterModifyForecastRequestParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -176,7 +178,7 @@ func (o *MTRBaseClusterDeviceEnergyManagement) ModifyForecastRequestWithParamsCo
 	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelModifyForecastRequestWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command RequestConstraintBasedForecast Allows a client to ask the ESA to recompute its Forecast based on power and time constraints.
+// Command RequestConstraintBasedForecast
 func (o *MTRBaseClusterDeviceEnergyManagement) RequestConstraintBasedForecastWithParamsCompletion(params *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -188,7 +190,7 @@ func (o *MTRBaseClusterDeviceEnergyManagement) RequestConstraintBasedForecastWit
 	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelRequestConstraintBasedForecastWithParamsCompletion, params.Ptr(), __block_completion)
 }
 
-// Command CancelRequest Allows a client to request cancellation of a previous adjustment request in a StartTimeAdjustRequest, ModifyForecastRequest or RequestConstraintBasedForecast command.
+// Command CancelRequest
 func (o *MTRBaseClusterDeviceEnergyManagement) CancelRequestWithParamsCompletion(params *MTRDeviceEnergyManagementClusterCancelRequestParams, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -603,11 +605,21 @@ func MTRBaseClusterDeviceEnergyManagementReadAttributeOptOutStateWithClusterStat
 	objc.ID(_clsMTRBaseClusterDeviceEnergyManagement).Send(_mTRBaseClusterDeviceEnergyManagementSelReadAttributeOptOutStateWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
-func (o *MTRBaseClusterDeviceEnergyManagement) ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelReadAttributeGeneratedCommandListWithCompletion, completion)
+func (o *MTRBaseClusterDeviceEnergyManagement) ReadAttributeGeneratedCommandListWithCompletion(completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelReadAttributeGeneratedCommandListWithCompletion, __block_completion)
 }
 
-func (o *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablished objc.Block
 	if subscriptionEstablished != nil {
 		__block_subscriptionEstablished = objc.NewBlock(func(_ objc.Block) {
@@ -615,18 +627,48 @@ func (o *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeGeneratedComman
 		})
 		defer __block_subscriptionEstablished.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, __block_reportHandler)
 }
 
-func MTRBaseClusterDeviceEnergyManagementReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	objc.ID(_clsMTRBaseClusterDeviceEnergyManagement).Send(_mTRBaseClusterDeviceEnergyManagementSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completion)
+func MTRBaseClusterDeviceEnergyManagementReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	objc.ID(_clsMTRBaseClusterDeviceEnergyManagement).Send(_mTRBaseClusterDeviceEnergyManagementSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
-func (o *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelReadAttributeAcceptedCommandListWithCompletion, completion)
+func (o *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAcceptedCommandListWithCompletion(completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelReadAttributeAcceptedCommandListWithCompletion, __block_completion)
 }
 
-func (o *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablished objc.Block
 	if subscriptionEstablished != nil {
 		__block_subscriptionEstablished = objc.NewBlock(func(_ objc.Block) {
@@ -634,18 +676,48 @@ func (o *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAcceptedCommand
 		})
 		defer __block_subscriptionEstablished.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, __block_reportHandler)
 }
 
-func MTRBaseClusterDeviceEnergyManagementReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	objc.ID(_clsMTRBaseClusterDeviceEnergyManagement).Send(_mTRBaseClusterDeviceEnergyManagementSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completion)
+func MTRBaseClusterDeviceEnergyManagementReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	objc.ID(_clsMTRBaseClusterDeviceEnergyManagement).Send(_mTRBaseClusterDeviceEnergyManagementSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
-func (o *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAttributeListWithCompletion(completion objc.Block) {
-	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelReadAttributeAttributeListWithCompletion, completion)
+func (o *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAttributeListWithCompletion(completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelReadAttributeAttributeListWithCompletion, __block_completion)
 }
 
-func (o *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+func (o *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *MTRSubscribeParams, subscriptionEstablished func(), reportHandler func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	var __block_subscriptionEstablished objc.Block
 	if subscriptionEstablished != nil {
 		__block_subscriptionEstablished = objc.NewBlock(func(_ objc.Block) {
@@ -653,11 +725,31 @@ func (o *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAttributeListWi
 		})
 		defer __block_subscriptionEstablished.Release()
 	}
-	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, reportHandler)
+	var __block_reportHandler objc.Block
+	if reportHandler != nil {
+		__block_reportHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			reportHandler(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_reportHandler.Release()
+	}
+	o.Ptr().Send(_mTRBaseClusterDeviceEnergyManagementSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler, params.Ptr(), __block_subscriptionEstablished, __block_reportHandler)
 }
 
-func MTRBaseClusterDeviceEnergyManagementReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
-	objc.ID(_clsMTRBaseClusterDeviceEnergyManagement).Send(_mTRBaseClusterDeviceEnergyManagementSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), completion)
+func MTRBaseClusterDeviceEnergyManagementReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion(clusterStateCacheContainer *MTRClusterStateCacheContainer, endpoint *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	objc.ID(_clsMTRBaseClusterDeviceEnergyManagement).Send(_mTRBaseClusterDeviceEnergyManagementSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion, clusterStateCacheContainer.Ptr(), endpoint.Ptr(), queue.Ptr(), __block_completion)
 }
 
 func (o *MTRBaseClusterDeviceEnergyManagement) ReadAttributeFeatureMapWithCompletion(completion func(*foundation.NSNumber, unsafe.Pointer)) {

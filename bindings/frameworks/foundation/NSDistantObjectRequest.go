@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object used by the distributed objects system to help handle invocations between different processes.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdistantobjectrequest
 // Deprecated: Use NSXPCConnection instead
 type NSDistantObjectRequest struct {
@@ -33,6 +35,7 @@ func NSDistantObjectRequestFromID(id objc.ID) *NSDistantObjectRequest {
 	return o
 }
 
+// Sends a reply back to the remote object making the distant object request.
 func (o *NSDistantObjectRequest) ReplyWithException(exception *NSException) {
 	o.Ptr().Send(_nSDistantObjectRequestSelReplyWithException, exception.Ptr())
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The IPv4 settings of an IP layer network tunnel.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neipv4settings
 type NEIPv4Settings struct {
 	foundation.NSObject
@@ -38,9 +40,9 @@ func NEIPv4SettingsFromID(id objc.ID) *NEIPv4Settings {
 	return o
 }
 
-// @method initWithAddresses:subnetMasks: @discussion Initialize a newly-allocated NEIPv4Settings object. @param addresses An array of IPv4 addresses represented as dotted decimal strings. @param subnetMasks An array of IPv4 subnet masks represented as dotted decimal strings. @return The initialized object.
+// Initializes an IPv4 settings object.
 func (o *NEIPv4Settings) InitWithAddressesSubnetMasks(addresses *foundation.NSArray[*foundation.NSString], subnetMasks *foundation.NSArray[*foundation.NSString]) *NEIPv4Settings {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv4SettingsSelInitWithAddressesSubnetMasks, addresses, subnetMasks)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv4SettingsSelInitWithAddressesSubnetMasks, addresses.Ptr(), subnetMasks.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -49,14 +51,20 @@ func (o *NEIPv4Settings) InitWithAddressesSubnetMasks(addresses *foundation.NSAr
 
 // @property addresses @discussion An array of IPv4 addresses represented as dotted decimal strings. These addresses will be set on the virtual interface used by the VPN tunnel.
 func (o *NEIPv4Settings) Addresses() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nEIPv4SettingsSelAddresses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv4SettingsSelAddresses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property subnetMasks @discussion An array of IPv4 subnet masks represented as dotted decimal strings. These subnet masks will be set along with their corresponding addresses from the addresses array on the virtual interface used by the VPN tunnel.
 func (o *NEIPv4Settings) SubnetMasks() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nEIPv4SettingsSelSubnetMasks)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv4SettingsSelSubnetMasks)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property router @discussion The address of the next-hop gateway router represented as a dotted decimal string. This property is ignored for TUN interfaces.

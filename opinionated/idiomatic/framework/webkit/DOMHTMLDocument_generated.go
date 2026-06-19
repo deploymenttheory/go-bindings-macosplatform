@@ -324,6 +324,8 @@ func (x *DOMHTMLDocument) SetVlinkColor(vlinkColor string) {
 	x.inner.SetVlinkColor(foundation.NSStringStringWithUTF8String(vlinkColor))
 }
 
+// Creates a document fragment containing the given HTML markup.
+//
 // CreateDocumentFragmentWithMarkupStringBaseURL calls the underlying CreateDocumentFragmentWithMarkupStringBaseURL.
 func (x *DOMHTMLDocument) CreateDocumentFragmentWithMarkupStringBaseURL(markupString string, baseURL string) *DOMDocumentFragment {
 	_r := x.inner.CreateDocumentFragmentWithMarkupStringBaseURL(foundation.NSStringStringWithUTF8String(markupString), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))
@@ -333,6 +335,8 @@ func (x *DOMHTMLDocument) CreateDocumentFragmentWithMarkupStringBaseURL(markupSt
 	return &DOMDocumentFragment{inner: _r}
 }
 
+// Creates a document fragment containing the given text.
+//
 // CreateDocumentFragmentWithText calls the underlying CreateDocumentFragmentWithText.
 func (x *DOMHTMLDocument) CreateDocumentFragmentWithText(text string) *DOMDocumentFragment {
 	_r := x.inner.CreateDocumentFragmentWithText(foundation.NSStringStringWithUTF8String(text))

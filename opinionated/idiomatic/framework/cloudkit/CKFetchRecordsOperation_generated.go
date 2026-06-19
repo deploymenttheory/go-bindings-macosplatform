@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An operation for retrieving records from a database.
+//
 // FetchRecordsOperation wraps [raw.CKFetchRecordsOperation] with a fluent Go API.
 type FetchRecordsOperation struct {
 	inner *raw.CKFetchRecordsOperation
@@ -38,7 +40,7 @@ func NewFetchRecordsOperation() *FetchRecordsOperation {
 	return &FetchRecordsOperation{inner: raw.CKFetchRecordsOperationFromID(_id)}
 }
 
-// Creates a fetch operation for retrieving the records with the specified IDs. - Parameters: - recordIDs: An array of “CKRecord/ID“ objects that represents the records you want to retrieve. If you provide an empty array, you must set the “CKFetchRecordsOperation/recordIDs“ property before you execute the operation. A fetch operation retrieves all of a record's fields, including any assets that those fields reference. If you want to minimize the amount of data that the operation returns, configure the “CKFetchRecordsOperation/desiredKeys-34l1l“ property with only the keys that contain the values that you have an interest in. After initializing the operation, you must associate at least one progress handler with the operation (excluding the completion handler) to process the results.
+// Creates a fetch operation for retrieving the records with the specified IDs.
 //
 // NewFetchRecordsOperationWithRecordIDs creates a new [FetchRecordsOperation].
 func NewFetchRecordsOperationWithRecordIDs(recordIDs *foundation.NSArray[*raw.CKRecordID]) *FetchRecordsOperation {
@@ -47,7 +49,7 @@ func NewFetchRecordsOperationWithRecordIDs(recordIDs *foundation.NSArray[*raw.CK
 	return &FetchRecordsOperation{inner: raw.CKFetchRecordsOperationFromID(_id)}
 }
 
-// The record IDs of the records to fetch. Use this property to view or change the IDs of the records you want to retrieve. If you use the operation that “CKFetchRecordsOperation/fetchCurrentUserRecordOperation()“ returns, CloudKit ignores the contents of this property and sets its value to `nil`. If you intend to specify a value other than `nil`, do so before you execute the operation or add the operation to a queue. The records you fetch don't need to be in the same record zone. The record ID for each record provides the zone information that CloudKit needs to fetch the corresponding record.
+// The record IDs of the records to fetch.
 //
 // WithRecordIDs sets the collection, converting the Go slice to an NSArray.
 func (x *FetchRecordsOperation) WithRecordIDs(items ...*raw.CKRecordID) *FetchRecordsOperation {
@@ -70,7 +72,7 @@ func (x *FetchRecordsOperation) WithRecordIDs(items ...*raw.CKRecordID) *FetchRe
 	return x
 }
 
-// The fields of the records to fetch. Use this property to limit the amount of data that CloudKit returns for each record during the fetch operation. When CloudKit returns a record, it only includes fields with names that match one of the keys in this property. The property's default value is `nil`, which instructs CloudKit to return all of a record's keys. If you're retrieving records of different types, make sure the array includes the fields you want from all of the various record types that the operation can return. If you intend to specify a value other than `nil`, do so before you execute the operation or add the operation to a queue.
+// The fields of the records to fetch.
 //
 // WithDesiredKeys sets the collection, converting the Go slice to an NSArray.
 func (x *FetchRecordsOperation) WithDesiredKeys(items ...*foundation.NSString) *FetchRecordsOperation {
@@ -93,7 +95,7 @@ func (x *FetchRecordsOperation) WithDesiredKeys(items ...*foundation.NSString) *
 	return x
 }
 
-// The closure to execute with progress information for individual records. This property is a closure that returns no value and has the following parameters: - The ID of the record to retrieve. - The amount of data, as a percentage, that CloudKit downloads for the record. The range is `0.0` to `1.0`, where `0.0` indicates that CloudKit hasn't downloaded anything, and `1.0` means the download is complete. The fetch operation executes this closure one or more times for each record ID in the “CKFetchRecordsOperation/recordIDs“ property. Each time the closure executes, it executes serially with respect to the other progress closures of the operation. You can use this closure to track the ongoing progress of the download operation. If you intend to use this closure to process results, set it before you execute the operation or add the operation to a queue.
+// The closure to execute with progress information for individual records.
 //
 // WithPerRecordProgressBlock sets the perRecordProgressBlock property and returns the receiver for chaining.
 func (x *FetchRecordsOperation) WithPerRecordProgressBlock(perRecordProgressBlock func(*raw.CKRecordID, float64)) *FetchRecordsOperation {
@@ -101,7 +103,7 @@ func (x *FetchRecordsOperation) WithPerRecordProgressBlock(perRecordProgressBloc
 	return x
 }
 
-// The closure to execute when a record becomes available. This property is a closure that returns no value and has the following parameters: - The record, or `nil` if CloudKit can't retrieve the record. - The ID of the record. - If CloudKit can't retrieve the record, an error that provides information about the failure; otherwise, `nil`. The fetch operation executes this closure once for each record ID in the “CKFetchRecordsOperation/recordIDs“ property. Each time the closure executes, it executes serially with respect to the other progress closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute when a record becomes available.
 //
 // WithPerRecordCompletionBlock sets the perRecordCompletionBlock property and returns the receiver for chaining.
 func (x *FetchRecordsOperation) WithPerRecordCompletionBlock(perRecordCompletionBlock func(*raw.CKRecord, *raw.CKRecordID, unsafe.Pointer)) *FetchRecordsOperation {
@@ -109,7 +111,7 @@ func (x *FetchRecordsOperation) WithPerRecordCompletionBlock(perRecordCompletion
 	return x
 }
 
-// The closure to execute after CloudKit retrieves all of the records. This property is a closure that returns no value and has the following parameters: - A dictionary that contains the records that CloudKit retrieves. Each key in the dictionary is a “CKRecord/ID“ object that corresponds to a record you request. The value of each key is the actual “CKRecord“ object that CloudKit returns. - If CloudKit can't retrieve any of the records, an error that provides information about the failure; otherwise, `nil`. The fetch operation executes this closure only once, and it's your final opportunity to process the results. The closure executes after all of the individual progress closures, but before the operation's completion closure. The closure executes serially with respect to the other progress closures of the operation. The closure reports an error of type “CKError/Code/partialFailure“ when it retrieves only some of the records successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the records that the operation can't retrieve, and the corresponding values are errors that contain information about the failures. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute after CloudKit retrieves all of the records.
 //
 // WithFetchRecordsCompletionBlock sets the fetchRecordsCompletionBlock property and returns the receiver for chaining.
 func (x *FetchRecordsOperation) WithFetchRecordsCompletionBlock(fetchRecordsCompletionBlock func(*foundation.NSDictionary[*raw.CKRecordID, *raw.CKRecord], unsafe.Pointer)) *FetchRecordsOperation {
@@ -117,7 +119,7 @@ func (x *FetchRecordsOperation) WithFetchRecordsCompletionBlock(fetchRecordsComp
 	return x
 }
 
-// The database that the operation uses. For operations that you execute in a custom queue, use this property to specify the target database. Setting the database also sets the corresponding container, which it inherits from “CKOperation“. If this property's value is `nil`, the operation targets the user's private database. The default value is `nil`.
+// The database that the operation uses.
 //
 // WithDatabase sets the database property and returns the receiver for chaining.
 func (x *FetchRecordsOperation) WithDatabase(database *Database) *FetchRecordsOperation {
@@ -125,7 +127,7 @@ func (x *FetchRecordsOperation) WithDatabase(database *Database) *FetchRecordsOp
 	return x
 }
 
-// The operation's configuration.
+// The operation’s configuration.
 //
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *FetchRecordsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordsOperation {
@@ -133,7 +135,7 @@ func (x *FetchRecordsOperation) WithConfiguration(configuration *OperationConfig
 	return x
 }
 
-// The operation's group.
+// The operation’s group.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *FetchRecordsOperation) WithGroup(group *OperationGroup) *FetchRecordsOperation {
@@ -141,7 +143,7 @@ func (x *FetchRecordsOperation) WithGroup(group *OperationGroup) *FetchRecordsOp
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *FetchRecordsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordsOperation {
@@ -165,7 +167,7 @@ func (x *FetchRecordsOperation) WithAllowsCellularAccess(allowsCellularAccess bo
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A Boolean value that indicates whether the operation is long-lived.
 //
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *FetchRecordsOperation) WithLongLived(longLived bool) *FetchRecordsOperation {

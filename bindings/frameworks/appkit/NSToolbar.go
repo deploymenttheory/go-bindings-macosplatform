@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages the space above your app’s custom content and either below or integrated with the window’s title bar.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstoolbar
 // Deprecated: NSToolbarSizeMode is no longer recommended and will be ignored in the future
 type NSToolbar struct {
@@ -75,7 +77,7 @@ func NSToolbarFromID(id objc.ID) *NSToolbar {
 	return o
 }
 
-// The identifier is used to form the toolbar's autosave name. Toolbars with the same identifier are implicitly synchronized so that they maintain the same state.
+// Creates a newly allocated toolbar with the specified identifier.
 func (o *NSToolbar) InitWithIdentifier(identifier *foundation.NSString) *NSToolbar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelInitWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -84,7 +86,7 @@ func (o *NSToolbar) InitWithIdentifier(identifier *foundation.NSString) *NSToolb
 	return NSToolbarFromID(_ret)
 }
 
-// Calls through to -initWithIdentifier: with an empty string identifier. Customizable toolbars should use `-initWithIdentifier:` with a unique identifier instead.
+// Creates a new toolbar with an empty identifier string.
 func (o *NSToolbar) Init() *NSToolbar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelInit)
 	if _ret != 0 {
@@ -93,27 +95,27 @@ func (o *NSToolbar) Init() *NSToolbar {
 	return NSToolbarFromID(_ret)
 }
 
-// Inserts an item with the specified identifier in the receiving toolbar at the specified index. Any change made will be propagated immediately to all other toolbars with the same identifier.
+// Inserts an item into the toolbar at the specified index.
 func (o *NSToolbar) InsertItemWithItemIdentifierAtIndex(itemIdentifier *foundation.NSString, index int) {
 	o.Ptr().Send(_nSToolbarSelInsertItemWithItemIdentifierAtIndex, itemIdentifier.Ptr(), index)
 }
 
-// Removes the item at the specified index in the receiving toolbar. Any change made will be propagated immediately to all other toolbars with the same identifier.
+// Removes the item at the specified index in the toolbar.
 func (o *NSToolbar) RemoveItemAtIndex(index int) {
 	o.Ptr().Send(_nSToolbarSelRemoveItemAtIndex, index)
 }
 
-// Removes the item with matching `itemIdentifier` in the receiving toolbar. If multiple items share the same identifier (as is the case with space items) all matching items will be removed. To remove only a single space item, use `-removeItemAtIndex:` instead. Any change made will be propagated immediately to all other toolbars with the same identifier.
+// Removes the item with matching itemIdentifier in the receiving toolbar. If multiple items share the same identifier (as is the case with space items) all matching items will be removed. To remove only a single space item, use -removeItemAtIndex: instead.
 func (o *NSToolbar) RemoveItemWithItemIdentifier(itemIdentifier *foundation.NSString) {
 	o.Ptr().Send(_nSToolbarSelRemoveItemWithItemIdentifier, itemIdentifier.Ptr())
 }
 
-// Customizable toolbars (those with delegates) can show a palette which allows users to populate the toolbar with individual items or to reset the toolbar to some default set of items. The items and item sets in the palette are specified by the delegate (`-toolbarAllowedItemIdentifiers:` and `-toolbarDefaultItemIdentifiers:`). When the user is done configuring, they will dismiss the palette.
+// Displays the toolbar’s customization palette and handles any user-initiated customizations.
 func (o *NSToolbar) RunCustomizationPalette(sender objc.ID) {
 	o.Ptr().Send(_nSToolbarSelRunCustomizationPalette, sender)
 }
 
-// Typically you should not invoke this method. This method is called on window updates with the purpose of validating each of the visible items. The toolbar will iterate through the list of visible items, sending each a `-validate` message. If this method is invoked directly, all visible items including those with `autovalidates` disabled will get a `-validate` message.
+// Validates the toolbar’s visible items during a window update.
 func (o *NSToolbar) ValidateVisibleItems() {
 	o.Ptr().Send(_nSToolbarSelValidateVisibleItems)
 }
@@ -216,22 +218,28 @@ func (o *NSToolbar) VisibleItems() *foundation.NSArray[*NSToolbarItem] {
 
 // An array of itemIdentifiers that represent the current items in the toolbar. Setting this property will set the current items in the toolbar by diffing against items that already exist. Use this with great caution if `allowsUserCustomization` is enabled as it will override any customizations the user has made. This property is key value observable.
 func (o *NSToolbar) ItemIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSToolbarSelItemIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelItemIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSToolbar) SetItemIdentifiers(itemIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSToolbarSelSetItemIdentifiers, itemIdentifiers)
+	o.Ptr().Send(_nSToolbarSelSetItemIdentifiers, itemIdentifiers.Ptr())
 }
 
 // Items with centered identifiers will be centered together in the Toolbar relative to the window assuming space allows. The order of items is initially defined by the default set of identifiers, but may be customized by the user. Centered items may not be moved outside of the center set of items by the user. This property is archived.
 func (o *NSToolbar) CenteredItemIdentifiers() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _nSToolbarSelCenteredItemIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelCenteredItemIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSToolbar) SetCenteredItemIdentifiers(centeredItemIdentifiers *foundation.NSSet[*foundation.NSString]) {
-	o.Ptr().Send(_nSToolbarSelSetCenteredItemIdentifiers, centeredItemIdentifiers)
+	o.Ptr().Send(_nSToolbarSelSetCenteredItemIdentifiers, centeredItemIdentifiers.Ptr())
 }
 
 // If `autosavesConfiguration` is YES, the toolbar will automatically write changes the user makes to user defaults. Customizable toolbars will want to set this flag to YES. Setting this to NO means changes in configuration are not written automatically, however you can use the `configurationDictionary` method to do it yourself. Default is NO.
@@ -254,9 +262,10 @@ func (o *NSToolbar) SetAllowsExtensionItems(allowsExtensionItems bool) {
 	o.Ptr().Send(_nSToolbarSelSetAllowsExtensionItems, allowsExtensionItems)
 }
 
+// Specifies the new configuration details for the toolbar.
 // Deprecated: Use -setItemIdentifiers: and -setDisplayMode: instead.
 func (o *NSToolbar) SetConfigurationFromDictionary(configDict *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSToolbarSelSetConfigurationFromDictionary, configDict)
+	o.Ptr().Send(_nSToolbarSelSetConfigurationFromDictionary, configDict.Ptr())
 }
 
 // Deprecated: NSToolbarSizeMode is no longer recommended and will be ignored in the future
@@ -333,6 +342,9 @@ func (o *NSToolbar) SetShowsBaselineSeparator(showsBaselineSeparator bool) {
 
 // Deprecated: Use -itemIdentifiers and -displayMode instead.
 func (o *NSToolbar) ConfigurationDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSToolbarSelConfigurationDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelConfigurationDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }

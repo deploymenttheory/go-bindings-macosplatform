@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A concrete layout object that sizes each item to some fraction of the scrubber’s visible size.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsscrubberproportionallayout
 type NSScrubberProportionalLayout struct {
 	NSScrubberLayout
@@ -33,6 +35,7 @@ func NSScrubberProportionalLayoutFromID(id objc.ID) *NSScrubberProportionalLayou
 	return o
 }
 
+// Initializes and returns a newly allocated proportional layout, configured to display the given number of items.
 func (o *NSScrubberProportionalLayout) InitWithNumberOfVisibleItems(numberOfVisibleItems int) *NSScrubberProportionalLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberProportionalLayoutSelInitWithNumberOfVisibleItems, numberOfVisibleItems)
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func (o *NSScrubberProportionalLayout) InitWithNumberOfVisibleItems(numberOfVisi
 	return NSScrubberProportionalLayoutFromID(_ret)
 }
 
+// Initializes and returns a newly allocated proprotional layout object from a storyboard or nib file.
 func (o *NSScrubberProportionalLayout) InitWithCoder(coder *foundation.NSCoder) *NSScrubberProportionalLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberProportionalLayoutSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {

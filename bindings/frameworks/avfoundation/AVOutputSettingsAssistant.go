@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that builds audio and video output settings dictionaries.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avoutputsettingsassistant
 type AVOutputSettingsAssistant struct {
 	foundation.NSObject
@@ -45,13 +47,16 @@ func AVOutputSettingsAssistantFromID(id objc.ID) *AVOutputSettingsAssistant {
 	return o
 }
 
-// @method availableOutputSettingsPresets @abstract Returns the list of presets that can be used to create an instance of AVOutputSettingsAssistant @result An NSArray of NSString objects, each of which is a preset identifier @discussion Each preset in the returned list can be passed in to +outputSettingsAssistantWithPreset: to create a new instance of AVOutputSettingsAssistant. On iOS, the returned array may be different between different device models.
+// Returns an array of preset values to use to initialize an output settings assistant.
 func AVOutputSettingsAssistantAvailableOutputSettingsPresets() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsAVOutputSettingsAssistant), _aVOutputSettingsAssistantSelAvailableOutputSettingsPresets)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVOutputSettingsAssistant), _aVOutputSettingsAssistantSelAvailableOutputSettingsPresets)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-// @method outputSettingsAssistantWithPreset: @abstract Returns an instance of AVOutputSettingsAssistant corresponding to the given preset @param presetIdentifier The string identifier, for example AVOutputSettingsPreset1280x720, for the desired preset @result An instance of AVOutputSettingsAssistant with properties corresponding to the given preset, or nil if there is no such available preset. @discussion The properties of the returned object can be used as a guide for creating and configuring an AVAssetWriter object and one or more AVAssetWriterInput objects.  If all the suggested properties are respected in creating the AVAssetWriter, the resulting media file will conform to the criteria implied by the preset. Use +availableOutputSettingsPresets to get a list of presets identifiers that can be used with this method.
+// Creates an output setting assistant with a preset configuration.
 func AVOutputSettingsAssistantOutputSettingsAssistantWithPreset(presetIdentifier *foundation.NSString) *AVOutputSettingsAssistant {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVOutputSettingsAssistant), _aVOutputSettingsAssistantSelOutputSettingsAssistantWithPreset, presetIdentifier.Ptr())
 	if _ret != 0 {
@@ -62,14 +67,20 @@ func AVOutputSettingsAssistantOutputSettingsAssistantWithPreset(presetIdentifier
 
 // @property audioSettings @abstract A dictionary of key/value pairs, as specified in AVAudioSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput @discussion The value of this property may change as a result of setting a new value for the sourceAudioFormat property.
 func (o *AVOutputSettingsAssistant) AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVOutputSettingsAssistantSelAudioSettings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVOutputSettingsAssistantSelAudioSettings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // @property videoSettings @abstract A dictionary of key/value pairs, as specified in AVVideoSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput @discussion The value of this property may change as a result of setting a new value for the sourceVideoFormat property.
 func (o *AVOutputSettingsAssistant) VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVOutputSettingsAssistantSelVideoSettings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVOutputSettingsAssistantSelVideoSettings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // @property outputFileType @abstract A UTI indicating the type of file to be written, to be used when e.g. creating an instance of AVAssetWriter @discussion Use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to get a suitable file extension for a given file type.

@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The local player who signs in to Game Center on the device running the game.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gklocalplayer
 type GKLocalPlayer struct {
 	GKPlayer
@@ -64,7 +66,7 @@ func GKLocalPlayerFromID(id objc.ID) *GKLocalPlayer {
 	return o
 }
 
-// Asynchronously load the recent players list as an array of GKPlayer.  A recent player is someone that you have played a game with or is a legacy game center friend.  Calls completionHandler when finished. Error will be nil on success. Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+// Loads players from the friends list or players that recently participated in a game with the local player.
 func (o *GKLocalPlayer) LoadRecentPlayersWithCompletionHandler(completionHandler func(*foundation.NSArray[*GKPlayer], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -79,7 +81,7 @@ func (o *GKLocalPlayer) LoadRecentPlayersWithCompletionHandler(completionHandler
 	o.Ptr().Send(_gKLocalPlayerSelLoadRecentPlayersWithCompletionHandler, __block_completionHandler)
 }
 
-// Asynchronously load the challengable friends list as an array of GKPlayer.  A challengable player is a friend player with friend level FL1 and FL2.  Calls completionHandler when finished. Error will be nil on success. Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+// Loads players to whom the local player can issue a challenge.
 func (o *GKLocalPlayer) LoadChallengableFriendsWithCompletionHandler(completionHandler func(*foundation.NSArray[*GKPlayer], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -94,7 +96,7 @@ func (o *GKLocalPlayer) LoadChallengableFriendsWithCompletionHandler(completionH
 	o.Ptr().Send(_gKLocalPlayerSelLoadChallengableFriendsWithCompletionHandler, __block_completionHandler)
 }
 
-// Generates a signature allowing 3rd party server to authenticate the GKLocalPlayer Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+// Generates a signature that you can use to authenticate the local player on your own server.
 func (o *GKLocalPlayer) FetchItemsForIdentityVerificationSignature(completionHandler func(*foundation.NSURL, *foundation.NSData, *foundation.NSData, uint64, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -156,15 +158,17 @@ func (o *GKLocalPlayer) IsPersonalizedCommunicationRestricted() bool {
 	return _ret
 }
 
-// A single listener may be registered once. Registering multiple times results in undefined behavior. The registered listener will receive callbacks for any selector it responds to.
+// Registers a listener for a particular event.
 func (o *GKLocalPlayer) RegisterListener(listener GKLocalPlayerListener) {
 	o.Ptr().Send(_gKLocalPlayerSelRegisterListener, listener)
 }
 
+// Unregisters a listener object.
 func (o *GKLocalPlayer) UnregisterListener(listener GKLocalPlayerListener) {
 	o.Ptr().Send(_gKLocalPlayerSelUnregisterListener, listener)
 }
 
+// Unregisters all listeners in your game.
 func (o *GKLocalPlayer) UnregisterAllListeners() {
 	o.Ptr().Send(_gKLocalPlayerSelUnregisterAllListeners)
 }
@@ -245,7 +249,7 @@ func (o *GKLocalPlayer) GenerateIdentityVerificationSignatureWithCompletionHandl
 	o.Ptr().Send(_gKLocalPlayerSelGenerateIdentityVerificationSignatureWithCompletionHandler, __block_completionHandler)
 }
 
-// Load the default leaderboard identifier for the local player Possible reasons for error: 1. Communications problem 2. Unauthenticated player 3. Leaderboard not present
+// Loads the identifier for the local player’s default leaderboard.
 // Deprecated: No longer supported
 func (o *GKLocalPlayer) LoadDefaultLeaderboardIdentifierWithCompletionHandler(completionHandler func(*foundation.NSString, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -261,7 +265,7 @@ func (o *GKLocalPlayer) LoadDefaultLeaderboardIdentifierWithCompletionHandler(co
 	o.Ptr().Send(_gKLocalPlayerSelLoadDefaultLeaderboardIdentifierWithCompletionHandler, __block_completionHandler)
 }
 
-// Set the default leaderboard for the current game Possible reasons for error: 1. Communications problem 2. Unauthenticated player 3. Leaderboard not present
+// Sets the local player’s default leaderboard.
 // Deprecated: No longer supported
 func (o *GKLocalPlayer) SetDefaultLeaderboardIdentifierCompletionHandler(leaderboardIdentifier *foundation.NSString, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -276,16 +280,30 @@ func (o *GKLocalPlayer) SetDefaultLeaderboardIdentifierCompletionHandler(leaderb
 
 // This method is obsolete. It will never be invoked and its implementation does nothing**
 // Deprecated: since macOS 10.10.
-func (o *GKLocalPlayer) LoadFriendsWithCompletionHandler(completionHandler objc.Block) {
-	o.Ptr().Send(_gKLocalPlayerSelLoadFriendsWithCompletionHandler, completionHandler)
+func (o *GKLocalPlayer) LoadFriendsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSString], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[*foundation.NSString](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_gKLocalPlayerSelLoadFriendsWithCompletionHandler, __block_completionHandler)
 }
 
 // Deprecated: since macOS 10.10.
 func (o *GKLocalPlayer) Friends() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _gKLocalPlayerSelFriends)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKLocalPlayerSelFriends)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Returns whether the player authorizes your game to access their friends list.
 func (o *GKLocalPlayer) LoadFriendsAuthorizationStatus(completionHandler func(GKFriendsAuthorizationStatus, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -297,6 +315,7 @@ func (o *GKLocalPlayer) LoadFriendsAuthorizationStatus(completionHandler func(GK
 	o.Ptr().Send(_gKLocalPlayerSelLoadFriendsAuthorizationStatus, __block_completionHandler)
 }
 
+// Loads the local player’s friends list if the local player and their friends grant access.
 func (o *GKLocalPlayer) LoadFriends(completionHandler func(*foundation.NSArray[*GKPlayer], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -311,6 +330,7 @@ func (o *GKLocalPlayer) LoadFriends(completionHandler func(*foundation.NSArray[*
 	o.Ptr().Send(_gKLocalPlayerSelLoadFriends, __block_completionHandler)
 }
 
+// Loads the player’s friends list, scoped by the identifiers, if the player and their friends grant access.
 func (o *GKLocalPlayer) LoadFriendsWithIdentifiersCompletionHandler(identifiers *foundation.NSArray[*foundation.NSString], completionHandler func(*foundation.NSArray[*GKPlayer], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -322,10 +342,10 @@ func (o *GKLocalPlayer) LoadFriendsWithIdentifiersCompletionHandler(identifiers 
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_gKLocalPlayerSelLoadFriendsWithIdentifiersCompletionHandler, identifiers, __block_completionHandler)
+	o.Ptr().Send(_gKLocalPlayerSelLoadFriendsWithIdentifiersCompletionHandler, identifiers.Ptr(), __block_completionHandler)
 }
 
-// presentFriendRequestCreatorFromWindow: Discussion: MacOS only. When invoked, if no error is encountered, the caller application is backgrounded and the 'Messages' application is launched/foregrounded, with a formatted friend request message. If an error occurs, controls are returned to the caller application, with an error describing the error. Possible reasons for error: - The local player user account is not allowed to add friends - The device is not allowing outgoing traffic at the time of the operation
+// Opens the Messages app with a sheet for the player to request friends.
 func (o *GKLocalPlayer) PresentFriendRequestCreatorFromWindowError(window *appkit.NSWindow) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _gKLocalPlayerSelPresentFriendRequestCreatorFromWindowError, window.Ptr(), unsafe.Pointer(&_nsErr))
@@ -360,7 +380,7 @@ func (o *GKLocalPlayer) IsPresentingFriendRequestViewController() bool {
 	return _ret
 }
 
-// Asynchronously fetch saved games. The handler is called with an array of GKSavedGame objects or an error. If there is more than one saved game with the same name then a conflict exists. The application should determine the correct data to use and call resolveConflictingSavedGames:withData:completionHandler:. This may require data merging or asking the user.
+// Retrieves all available saved games.
 func (o *GKLocalPlayer) FetchSavedGamesWithCompletionHandler(handler func(*foundation.NSArray[*GKSavedGame], unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -375,7 +395,7 @@ func (o *GKLocalPlayer) FetchSavedGamesWithCompletionHandler(handler func(*found
 	o.Ptr().Send(_gKLocalPlayerSelFetchSavedGamesWithCompletionHandler, __block_handler)
 }
 
-// Asynchronously save game data. If a saved game with that name already exists it is overwritten, otherwise a new one is created. The completion handler is called with the new / modified GKSavedGame or an error. If the saved game was in conflict then the overwritten version will be the one with the same deviceName if present, otherwise the most recent overall.
+// Saves game data with the specified name.
 func (o *GKLocalPlayer) SaveGameDataWithNameCompletionHandler(data *foundation.NSData, name *foundation.NSString, handler func(*GKSavedGame, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -390,7 +410,7 @@ func (o *GKLocalPlayer) SaveGameDataWithNameCompletionHandler(data *foundation.N
 	o.Ptr().Send(_gKLocalPlayerSelSaveGameDataWithNameCompletionHandler, data.Ptr(), name.Ptr(), __block_handler)
 }
 
-// Asynchronously delete saved games with the given name. The completion handler will indicate whether or not the deletion was successful.
+// Deletes saved games with the specified filename.
 func (o *GKLocalPlayer) DeleteSavedGamesWithNameCompletionHandler(name *foundation.NSString, handler func(unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -402,7 +422,7 @@ func (o *GKLocalPlayer) DeleteSavedGamesWithNameCompletionHandler(name *foundati
 	o.Ptr().Send(_gKLocalPlayerSelDeleteSavedGamesWithNameCompletionHandler, name.Ptr(), __block_handler)
 }
 
-// Asynchronously resolve a saved game conflict. This deletes all versions included in conflictingSavedGames and creates a new version with the given data. The completion handler is called with the newly created save and all other remaining versions or an error.
+// Replaces duplicate saved games that use the same filename with one file containing the specified game data.
 func (o *GKLocalPlayer) ResolveConflictingSavedGamesWithDataCompletionHandler(conflictingSavedGames *foundation.NSArray[*GKSavedGame], data *foundation.NSData, handler func(*foundation.NSArray[*GKSavedGame], unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {

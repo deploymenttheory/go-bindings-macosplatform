@@ -1,0 +1,1257 @@
+{
+  "schema_version": 1,
+  "framework": "SensorKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SRAcousticSettings": {
+      "url": "https://developer.apple.com/documentation/sensorkit/sracousticsettings"
+    },
+    "SRAmbientLightSample": {
+      "doc": "The amount of ambient light in the user’s environment.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srambientlightsample"
+    },
+    "SRApplicationUsage": {
+      "doc": "An object that describes the user’s app activity over a period of time.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srapplicationusage"
+    },
+    "SRAudioLevel": {
+      "doc": "An object that represents the audio level for a range of speech.",
+      "url": "https://developer.apple.com/documentation/sensorkit/sraudiolevel"
+    },
+    "SRDeletionRecord": {
+      "doc": "An object that describes the reason the framework deletes samples.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srdeletionrecord"
+    },
+    "SRDevice": {
+      "doc": "A representation of a device that provides sample data.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srdevice"
+    },
+    "SRDeviceUsageReport": {
+      "doc": "The frequency and relative duration that the user uses their device, particular Apple apps, or websites.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srdeviceusagereport"
+    },
+    "SRElectrocardiogramData": {
+      "doc": "A representation of the ECG data that the sensor records.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramdata"
+    },
+    "SRElectrocardiogramSample": {
+      "doc": "The sample electrocardiogram sensor data.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsample"
+    },
+    "SRElectrocardiogramSession": {
+      "doc": "An object that represents ECG data that a device records during a period of time.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsession"
+    },
+    "SRFaceMetrics": {
+      "doc": "An object that represents metrics about the user’s face.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srfacemetrics"
+    },
+    "SRFaceMetricsExpression": {
+      "doc": "An object that represents a facial expression.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srfacemetricsexpression"
+    },
+    "SRFetchRequest": {
+      "doc": "An object that defines the criteria for a sample query.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srfetchrequest"
+    },
+    "SRFetchResult": {
+      "doc": "Recorded data that a sensor reader fetches.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srfetchresult"
+    },
+    "SRKeyboardMetrics": {
+      "doc": "The configuration of a device’s keyboard and its usage patterns.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics"
+    },
+    "SRKeyboardProbabilityMetric": {
+      "doc": "A likelihood of occurrence.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardprobabilitymetric"
+    },
+    "SRMediaEvent": {
+      "doc": "A user interaction with a media object, such as an image or a video.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srmediaevent"
+    },
+    "SRMessagesUsageReport": {
+      "doc": "An object that describes the user’s Messages app activity over a period of time.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srmessagesusagereport"
+    },
+    "SRNotificationUsage": {
+      "doc": "An object that describes notification frequency and the manner in which the user interacts with notifications.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srnotificationusage"
+    },
+    "SRPhoneUsageReport": {
+      "doc": "An object that describes the user’s phone activity over a period of time.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srphoneusagereport"
+    },
+    "SRPhotoplethysmogramAccelerometerSample": {
+      "doc": "A data sample from the photoplethysmogram (PPG) accelerometer.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramaccelerometersample"
+    },
+    "SRPhotoplethysmogramOpticalSample": {
+      "doc": "A data sample from the photoplethysmogram (PPG) optical sensor.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample"
+    },
+    "SRPhotoplethysmogramSample": {
+      "doc": "The sample photoplethysmogram (PPG) sensor data.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramsample"
+    },
+    "SRSensorReader": {
+      "doc": "An object that establishes user authorization and records data for a particular sensor.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srsensorreader"
+    },
+    "SRSleepSession": {
+      "url": "https://developer.apple.com/documentation/sensorkit/srsleepsession"
+    },
+    "SRSpeechExpression": {
+      "doc": "An object that represents the metrics and voice analytics for a range of speech.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srspeechexpression"
+    },
+    "SRSpeechMetrics": {
+      "doc": "An object that represents metrics about a range of speech.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srspeechmetrics"
+    },
+    "SRSupplementalCategory": {
+      "doc": "A more detailed category that provides additional context to the app category.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srsupplementalcategory"
+    },
+    "SRTextInputSession": {
+      "doc": "The characters a user types for a particular keyboard.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srtextinputsession"
+    },
+    "SRVisit": {
+      "doc": "The user’s progress in their daily travel routine.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srvisit"
+    },
+    "SRWebUsage": {
+      "doc": "An object that describes a user’s website usage.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srwebusage"
+    },
+    "SRWristDetection": {
+      "doc": "The configuration of a watch on the wearer’s wrist.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srwristdetection"
+    },
+    "SRWristTemperature": {
+      "doc": "The temperature of the user’s wrist while the user sleeps.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperature"
+    },
+    "SRWristTemperatureSession": {
+      "doc": "An object that represents wrist temperatures that a device records during a period of time.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperaturesession"
+    }
+  },
+  "protocols": {
+    "SRSensorReaderDelegate": {
+      "doc": "A set of callbacks the framework invokes to notify the app of sensor-related events.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srsensorreaderdelegate"
+    }
+  },
+  "enums": {
+    "SRAmbientLightSensorPlacement": {
+      "doc": "Directional values that describe light-source location with respect to the sensor.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srambientlightsensorplacement"
+    },
+    "SRAuthorizationStatus": {
+      "doc": "The states that model whether the user approves the app to read a particular sensor.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srauthorizationstatus",
+      "members": {
+        "SRAuthorizationStatusAuthorized": {
+          "doc": "User has granted authorization to this application",
+          "url": "https://developer.apple.com/documentation/sensorkit/srauthorizationstatus/authorized"
+        },
+        "SRAuthorizationStatusDenied": {
+          "doc": "User has denied authorization to this application or data collection is disabled in Settings.",
+          "url": "https://developer.apple.com/documentation/sensorkit/srauthorizationstatus/denied"
+        },
+        "SRAuthorizationStatusNotDetermined": {
+          "doc": "User has not yet made a choice regarding this application",
+          "url": "https://developer.apple.com/documentation/sensorkit/srauthorizationstatus/notdetermined"
+        }
+      }
+    },
+    "SRCrownOrientation": {
+      "doc": "Directions the Digital Crown can face with respect to the wearer.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srcrownorientation"
+    },
+    "SRDeletionReason": {
+      "doc": "Reasons that the framework deletes samples.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srdeletionreason",
+      "members": {
+        "SRDeletionReasonAgeLimit": {
+          "doc": "Indicates that the sample outlived the framework’s retention limit.",
+          "url": "https://developer.apple.com/documentation/sensorkit/srdeletionreason/agelimit"
+        },
+        "SRDeletionReasonLowDiskSpace": {
+          "doc": "Indicates that the system’s disk space is low.",
+          "url": "https://developer.apple.com/documentation/sensorkit/srdeletionreason/lowdiskspace"
+        },
+        "SRDeletionReasonNoInterestedClients": {
+          "doc": "Indicates that the sensor has no active stakeholders.",
+          "url": "https://developer.apple.com/documentation/sensorkit/srdeletionreason/nointerestedclients"
+        },
+        "SRDeletionReasonSystemInitiated": {
+          "doc": "Indicates that the system requests deletion.",
+          "url": "https://developer.apple.com/documentation/sensorkit/srdeletionreason/systeminitiated"
+        },
+        "SRDeletionReasonUserInitiated": {
+          "doc": "Indicates that the user requests deletion.",
+          "url": "https://developer.apple.com/documentation/sensorkit/srdeletionreason/userinitiated"
+        }
+      }
+    },
+    "SRElectrocardiogramDataFlags": {
+      "doc": "Sensor context or events that occur during a sample ECG data reading.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramdataflags",
+      "members": {
+        "SRElectrocardiogramDataFlagsNone": {
+          "doc": "Flag that indicates no context or events occur.",
+          "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramdataflags/srelectrocardiogramdataflagsnone"
+        }
+      }
+    },
+    "SRElectrocardiogramLead": {
+      "doc": "The location of the lead that a person uses to record the ECG data.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramlead"
+    },
+    "SRElectrocardiogramSessionGuidance": {
+      "doc": "The type of session guidance used to record a ECG sample.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsessionguidance"
+    },
+    "SRElectrocardiogramSessionState": {
+      "doc": "The state of a session used to record a ECG sample.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsessionstate"
+    },
+    "SRErrorCode": {
+      "doc": "The kinds of problems that stop a recording or a fetch.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srerrorcode"
+    },
+    "SRFaceMetricsContext": {
+      "doc": "The context of the system during the camera session.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srfacemetricscontext"
+    },
+    "SRKeyboardMetricsSentimentCategory": {
+      "doc": "Moods that the framework determines by analyzing the user’s input.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetricssentimentcategory"
+    },
+    "SRLocationCategory": {
+      "doc": "Types of locations.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srlocationcategory"
+    },
+    "SRMediaEventType": {
+      "doc": "The types of user interaction with media that the sensor tracks.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srmediaeventtype",
+      "members": {
+        "SRMediaEventOffScreen": {
+          "doc": "An event that occurs when the media disappears from the screen.",
+          "url": "https://developer.apple.com/documentation/sensorkit/srmediaeventtype/offscreen"
+        },
+        "SRMediaEventOnScreen": {
+          "doc": "An event that occurs when the media appears on the screen.",
+          "url": "https://developer.apple.com/documentation/sensorkit/srmediaeventtype/onscreen"
+        }
+      }
+    },
+    "SRNotificationEvent": {
+      "doc": "The ways that a user interacts with notifications.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srnotificationevent"
+    },
+    "SRSpeechMetricsSessionFlags": {
+      "doc": "Possible details about processing an audio stream.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srspeechmetricssessionflags",
+      "members": {
+        "SRSpeechMetricsSessionFlagsDefault": {
+          "doc": "Audio processing went through the system voice processor.",
+          "url": "https://developer.apple.com/documentation/sensorkit/srspeechmetricssessionflags/srspeechmetricssessionflagsdefault"
+        }
+      }
+    },
+    "SRTextInputSessionType": {
+      "doc": "Methods to input text during a session.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srtextinputsessiontype"
+    },
+    "SRWristLocation": {
+      "doc": "Preferences for where a user wears a watch.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srwristlocation"
+    },
+    "SRWristTemperatureCondition": {
+      "doc": "The user activities with the watch that can impact the temperature measurement.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperaturecondition"
+    }
+  },
+  "structs": {
+    "SRAmbientLightChromaticity": {
+      "doc": "A coordinate pair that describes light brightness and tint.",
+      "url": "https://developer.apple.com/documentation/sensorkit/srambientlightchromaticity"
+    }
+  },
+  "methods": {
+    "SRKeyboardMetrics": {
+      "-emojiCountForSentimentCategory:": {
+        "doc": "Provides the number of typed emojis for the specified sentiment in the report.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/emojicount(for:)"
+      },
+      "-wordCountForSentimentCategory:": {
+        "doc": "Provides the number of typed words for the specified sentiment in the report.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/wordcount(for:)"
+      }
+    },
+    "SRSensorReader": {
+      "+requestAuthorizationForSensors:completion:": {
+        "doc": "Requests user permission to read one or more sensors.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srsensorreader/requestauthorization(sensors:completion:)"
+      },
+      "-fetch:": {
+        "doc": "Fetches the samples that a fetch request specifies.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srsensorreader/fetch(_:)"
+      },
+      "-fetchDevices": {
+        "doc": "Acquires device information for all devices that store data for this reader’s sensor.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srsensorreader/fetchdevices()"
+      },
+      "-initWithSensor:": {
+        "doc": "Initializes a new sensor reader object.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srsensorreader/init(sensor:)"
+      },
+      "-startRecording": {
+        "doc": "Starts recording sensor data.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srsensorreader/startrecording()"
+      },
+      "-stopRecording": {
+        "doc": "Stops recording sensor data.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srsensorreader/stoprecording()"
+      }
+    }
+  },
+  "properties": {
+    "SRAmbientLightSample": {
+      "SRAmbientLightChromaticity": {
+        "doc": "A coordinate pair that describes light brightness and tint.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srambientlightsample/chromaticity-swift.struct"
+      },
+      "SRAmbientLightSensorPlacement": {
+        "doc": "Directional values that describe light-source location with respect to the sensor.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srambientlightsample/sensorplacement"
+      },
+      "chromaticity": {
+        "doc": "A coordinate pair that describes the sample’s light brightness and tint.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srambientlightsample/chromaticity-swift.property"
+      },
+      "lux": {
+        "doc": "An object that describes the sample’s luminous flux.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srambientlightsample/lux"
+      },
+      "placement": {
+        "doc": "The light’s location relative to the sensor.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srambientlightsample/placement"
+      }
+    },
+    "SRAudioLevel": {
+      "loudness": {
+        "doc": "The measure of the audio level in decibels.",
+        "url": "https://developer.apple.com/documentation/sensorkit/sraudiolevel/loudness"
+      },
+      "timeRange": {
+        "doc": "The time range in the audio stream that the level applies to.",
+        "url": "https://developer.apple.com/documentation/sensorkit/sraudiolevel/timerange"
+      }
+    },
+    "SRDeletionRecord": {
+      "endTime": {
+        "doc": "The time the framework finishes deleting samples.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdeletionrecord/endtime"
+      },
+      "reason": {
+        "doc": "The reason the framework deletes samples.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdeletionrecord/reason"
+      },
+      "startTime": {
+        "doc": "The time the framework begins deleting samples.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdeletionrecord/starttime"
+      }
+    },
+    "SRDevice": {
+      "currentDevice": {
+        "doc": "The device that runs the app.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdevice/current"
+      },
+      "model": {
+        "doc": "The user-defined name of the device.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdevice/model"
+      },
+      "name": {
+        "doc": "The framework-defined name of the device.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdevice/name"
+      },
+      "productType": {
+        "doc": "A string that identifies the device used to save a sample.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdevice/producttype"
+      },
+      "systemName": {
+        "doc": "The device’s operating system.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdevice/systemname"
+      },
+      "systemVersion": {
+        "doc": "The device’s operating system version.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdevice/systemversion"
+      }
+    },
+    "SRDeviceUsageReport": {
+      "SRApplicationUsage": {
+        "doc": "An object that describes the user’s app activity over a period of time.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdeviceusagereport/applicationusage"
+      },
+      "SRDeviceUsageCategoryKey": {
+        "doc": "Categories of apps or websites that the user uses.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdeviceusagereport/categorykey"
+      },
+      "SRNotificationUsage": {
+        "doc": "An object that describes notification frequency and the manner in which the user interacts with notifications.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdeviceusagereport/notificationusage"
+      },
+      "SRWebUsage": {
+        "doc": "An object that describes a user’s website usage.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdeviceusagereport/webusage"
+      },
+      "applicationUsageByCategory": {
+        "doc": "The usage time of apps per category.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdeviceusagereport/applicationusagebycategory"
+      },
+      "duration": {
+        "doc": "The duration that the report spans.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdeviceusagereport/duration"
+      },
+      "notificationUsageByCategory": {
+        "doc": "The frequency of notifications per category.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdeviceusagereport/notificationusagebycategory"
+      },
+      "totalScreenWakes": {
+        "doc": "The total number of screen wakes for the device.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdeviceusagereport/totalscreenwakes"
+      },
+      "totalUnlockDuration": {
+        "doc": "The duration of time the device is in an unlocked state.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdeviceusagereport/totalunlockduration"
+      },
+      "totalUnlocks": {
+        "doc": "The total number of unlocks for the device.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdeviceusagereport/totalunlocks"
+      },
+      "version": {
+        "doc": "The version of the algorithm that the system uses to generate the report.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdeviceusagereport/version"
+      },
+      "webUsageByCategory": {
+        "doc": "The amount of time the user accesses domains per category.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srdeviceusagereport/webusagebycategory"
+      }
+    },
+    "SRElectrocardiogramData": {
+      "SRElectrocardiogramDataFlags": {
+        "doc": "Sensor context or events that occur during a sample ECG data reading.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramdata/flags-swift.struct"
+      },
+      "value": {
+        "doc": "The electrocardiogram data in microvolts.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramdata/value"
+      }
+    },
+    "SRElectrocardiogramSample": {
+      "SRElectrocardiogramLead": {
+        "doc": "The location of the lead that a person uses to record the ECG data.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsample/lead-swift.enum"
+      },
+      "data": {
+        "doc": "The data that the sensor records.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsample/data"
+      },
+      "date": {
+        "doc": "The start date of the ECG sensor data recording, not the start of the session.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsample/date"
+      },
+      "frequency": {
+        "doc": "The frequency in hertz that the ECG sensor records the data.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsample/frequency"
+      },
+      "lead": {
+        "doc": "The lead used to record the ECG data.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsample/lead-swift.property"
+      },
+      "session": {
+        "doc": "The session where this sample occurs.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsample/session"
+      }
+    },
+    "SRElectrocardiogramSession": {
+      "SRElectrocardiogramSessionGuidance": {
+        "doc": "The type of session guidance used to record a ECG sample.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsession/sessionguidance-swift.enum"
+      },
+      "SRElectrocardiogramSessionState": {
+        "doc": "The state of a session used to record a ECG sample.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsession/state-swift.enum"
+      },
+      "identifier": {
+        "doc": "A unique identifier for the ECG session.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsession/identifier"
+      },
+      "sessionGuidance": {
+        "doc": "The type of session used to record the sample.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsession/sessionguidance-swift.property"
+      },
+      "state": {
+        "doc": "The state of the session used to record the sample.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srelectrocardiogramsession/state-swift.property"
+      }
+    },
+    "SRFaceMetrics": {
+      "SRFaceMetricsContext": {
+        "doc": "The context of the system during the camera session.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srfacemetrics/context-swift.struct"
+      },
+      "context": {
+        "doc": "The context of the system during the camera session.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srfacemetrics/context-swift.property"
+      },
+      "faceAnchor": {
+        "doc": "The anchor for the face that the sensor detects in front of the camera.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srfacemetrics/faceanchor"
+      },
+      "partialFaceExpressions": {
+        "doc": "The partial face expressions that the algorithm detects.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srfacemetrics/partialfaceexpressions"
+      },
+      "sessionIdentifier": {
+        "doc": "An identifier for the camera session.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srfacemetrics/sessionidentifier"
+      },
+      "version": {
+        "doc": "The version of the algorithm that the system uses to generate the face metrics and analytics.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srfacemetrics/version"
+      },
+      "wholeFaceExpressions": {
+        "doc": "The whole face expressions that the algorithm detects.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srfacemetrics/wholefaceexpressions"
+      }
+    },
+    "SRFaceMetricsExpression": {
+      "identifier": {
+        "doc": "An identifier for the facial expression.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srfacemetricsexpression/identifier"
+      },
+      "value": {
+        "doc": "The current position of the expression.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srfacemetricsexpression/value"
+      }
+    },
+    "SRFetchRequest": {
+      "device": {
+        "doc": "The device to query for sample data.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srfetchrequest/device"
+      },
+      "from": {
+        "doc": "Fetches sample information that occurs after this time.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srfetchrequest/from"
+      },
+      "to": {
+        "doc": "Fetches sample information that occurs before this time.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srfetchrequest/to"
+      }
+    },
+    "SRFetchResult": {
+      "sample": {
+        "doc": "A recording that the sensor reader fetches.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srfetchresult/sample"
+      },
+      "timestamp": {
+        "doc": "The time when the framework records the sample.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srfetchresult/timestamp"
+      }
+    },
+    "SRKeyboardMetrics": {
+      "SRKeyboardMetricsSentimentCategory": {
+        "doc": "Moods that the framework determines by analyzing the user’s input.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/sentimentcategory"
+      },
+      "SRKeyboardProbabilityMetric": {
+        "doc": "A likelihood of occurrence.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/probabilitymetric"
+      },
+      "anyTapToCharKey": {
+        "doc": "The duration between touch up of any key and touch down on a sequential character key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/anytaptocharkey"
+      },
+      "anyTapToPlaneChangeKey": {
+        "doc": "The duration between touch up of any key and touch down on a plane change key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/anytaptoplanechangekey"
+      },
+      "charKeyToAnyTapKey": {
+        "doc": "The duration between touch up on a character key and touch down on the next sequential key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/charkeytoanytapkey"
+      },
+      "charKeyToDelete": {
+        "doc": "The duration between touch up of a character key and touch down of a sequential Delete key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/charkeytodelete"
+      },
+      "charKeyToPlaneChangeKey": {
+        "doc": "The duration between touch up of a character key and touch down of a sequential plane change key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/charkeytoplanechangekey"
+      },
+      "charKeyToPrediction": {
+        "doc": "The duration between touch up on a character key and touch down on a word in the prediction bar.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/charkeytoprediction"
+      },
+      "charKeyToSpaceKey": {
+        "doc": "The duration between touch up of a character key and touch down of a sequential Space bar.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/charkeytospacekey"
+      },
+      "deleteDownErrorDistance": {
+        "doc": "The distance from the touch down to the center of the Delete key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/deletedownerrordistance"
+      },
+      "deleteToCharKey": {
+        "doc": "The duration between touch up of the Delete key and touch down of a sequential character key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/deletetocharkey"
+      },
+      "deleteToDelete": {
+        "doc": "The duration between touch up of the Delete key and touch down of a sequential Delete key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/deletetodelete"
+      },
+      "deleteToDeletes": {
+        "doc": "The duration between touch up of the Delete key and touch down of a sequential Delete key for an entire word.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/deletetodeletes"
+      },
+      "deleteToPath": {
+        "doc": "The duration between touch up of the Delete key and touch down of a sequential path.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/deletetopath"
+      },
+      "deleteToPlaneChangeKey": {
+        "doc": "The duration between touch up of the Delete key and touch down of a sequential plane change key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/deletetoplanechangekey"
+      },
+      "deleteToShiftKey": {
+        "doc": "The duration between touch up of the Delete key and touch down of a sequential Shift key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/deletetoshiftkey"
+      },
+      "deleteToSpaceKey": {
+        "doc": "The duration between touch up of the Delete key and touch down of a sequential Space bar.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/deletetospacekey"
+      },
+      "deleteTouchDownUp": {
+        "doc": "The duration between touch down and touch up of all Delete key events for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/deletetouchdownup"
+      },
+      "deleteUpErrorDistance": {
+        "doc": "The distance from the touch up to the center of the Delete key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/deleteuperrordistance"
+      },
+      "downErrorDistance": {
+        "doc": "The distance from the touch down to the center of any key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/downerrordistance"
+      },
+      "duration": {
+        "doc": "The duration that the report spans.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/duration"
+      },
+      "height": {
+        "doc": "The height, in millimeters, of the keyboard in the report.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/height"
+      },
+      "inputModes": {
+        "doc": "The active keyboard languages in the session.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/inputmodes"
+      },
+      "keyboardIdentifier": {
+        "doc": "The identifier of the keyboard in the keyboard list.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/keyboardidentifier"
+      },
+      "longWordDownErrorDistance": {
+        "doc": "The distance from the touch down to the center of the intended key of the characters of a long word.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/longworddownerrordistance"
+      },
+      "longWordTouchDownDown": {
+        "doc": "The duration between touch down and touch down of the character keys of all the long words in the session.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/longwordtouchdowndown"
+      },
+      "longWordTouchDownUp": {
+        "doc": "The duration between touch down and touch up of the character keys of all the long words in the session.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/longwordtouchdownup"
+      },
+      "longWordTouchUpDown": {
+        "doc": "The duration between touch up and touch down of the character keys of all the long words in the session.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/longwordtouchupdown"
+      },
+      "longWordUpErrorDistance": {
+        "doc": "The distance from the touch up to the center of the intended key of the characters of a long word.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/longworduperrordistance"
+      },
+      "pathErrorDistanceRatio": {
+        "doc": "Sample values of the ratio of error distance between the intended and actual path.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/patherrordistanceratio"
+      },
+      "pathToDelete": {
+        "doc": "The duration between touch up of the Delete key and touch down of a continuous path.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/pathtodelete"
+      },
+      "pathToPath": {
+        "doc": "The duration between touch up of a path and touch down of a sequential path.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/pathtopath"
+      },
+      "pathToSpace": {
+        "doc": "The duration between touch up of a path and touch down of a sequential Space bar.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/pathtospace"
+      },
+      "pathTypingSpeed": {
+        "doc": "The QuickType words per minute in the session.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/pathtypingspeed"
+      },
+      "planeChangeKeyToCharKey": {
+        "doc": "The duration between touch up of a plane change key and touch down of any key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/planechangekeytocharkey"
+      },
+      "planeChangeToAnyTap": {
+        "doc": "The duration between touch up on a plane change key and touch down on the next sequential key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/planechangetoanytap"
+      },
+      "sessionIdentifiers": {
+        "doc": "The identifiers for the keyboard sessions that report metrics to the sample.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/sessionidentifiers"
+      },
+      "shortWordCharKeyDownErrorDistance": {
+        "doc": "The distance from the touch down to the center of the intended key of a character in a short word.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/shortwordcharkeydownerrordistance"
+      },
+      "shortWordCharKeyToCharKey": {
+        "doc": "The duration between touch up on a character key and touch down on any sequential character key in a short word.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/shortwordcharkeytocharkey"
+      },
+      "shortWordCharKeyTouchDownUp": {
+        "doc": "The duration between touch down and touch up of all character keys in short words for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/shortwordcharkeytouchdownup"
+      },
+      "shortWordCharKeyUpErrorDistance": {
+        "doc": "The distance from the touch up to the center of the intended key of a character in a short word.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/shortwordcharkeyuperrordistance"
+      },
+      "spaceDownErrorDistance": {
+        "doc": "The distance from the touch down to the right centroid of the Space bar.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/spacedownerrordistance"
+      },
+      "spaceToCharKey": {
+        "doc": "The duration between touch up of the Space bar and touch down of a sequential character key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/spacetocharkey"
+      },
+      "spaceToDeleteKey": {
+        "doc": "The duration between touch up of the Space bar and touch down of a sequential Delete key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/spacetodeletekey"
+      },
+      "spaceToPath": {
+        "doc": "The duration between touch up of the Space bar and touch down to begin a sequential path.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/spacetopath"
+      },
+      "spaceToPlaneChangeKey": {
+        "doc": "The duration between touch up of the Space bar and touch down of a sequential plane change key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/spacetoplanechangekey"
+      },
+      "spaceToPredictionKey": {
+        "doc": "The duration between touch up of the Space bar and touch down of a sequential selection from the prediction bar.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/spacetopredictionkey"
+      },
+      "spaceToShiftKey": {
+        "doc": "The duration between touch up of the Space bar and touch down of a sequential Shift key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/spacetoshiftkey"
+      },
+      "spaceToSpaceKey": {
+        "doc": "The duration between touch up of the Space bar and touch down of a sequential Space bar.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/spacetospacekey"
+      },
+      "spaceTouchDownUp": {
+        "doc": "The duration between touch down and touch up of all Space bar events for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/spacetouchdownup"
+      },
+      "spaceUpErrorDistance": {
+        "doc": "The distance from the touch up to the right centroid of the Space bar.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/spaceuperrordistance"
+      },
+      "totalAlteredWords": {
+        "doc": "The total number of altered words for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalalteredwords"
+      },
+      "totalAutoCorrections": {
+        "doc": "The total number of autocorrections for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalautocorrections"
+      },
+      "totalDeletes": {
+        "doc": "The total number of deletions for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totaldeletes"
+      },
+      "totalDrags": {
+        "doc": "The total number of drags for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totaldrags"
+      },
+      "totalEmojis": {
+        "doc": "The total number of emojis for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalemojis"
+      },
+      "totalHitTestCorrections": {
+        "doc": "The total number of hit test corrections for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalhittestcorrections"
+      },
+      "totalInsertKeyCorrections": {
+        "doc": "The total number of Insert key corrections for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalinsertkeycorrections"
+      },
+      "totalNearKeyCorrections": {
+        "doc": "The total number of near key corrections for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalnearkeycorrections"
+      },
+      "totalPathLength": {
+        "doc": "The total length of completed paths for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalpathlength"
+      },
+      "totalPathPauses": {
+        "doc": "The total number of pauses while drawing a path for a word.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalpathpauses"
+      },
+      "totalPathTime": {
+        "doc": "The total time to complete paths for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalpathtime"
+      },
+      "totalPaths": {
+        "doc": "The total number of completed paths for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalpaths"
+      },
+      "totalPauses": {
+        "doc": "The total number of pauses during the session.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalpauses"
+      },
+      "totalRetroCorrections": {
+        "doc": "The total number of retro corrections for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalretrocorrections"
+      },
+      "totalSkipTouchCorrections": {
+        "doc": "The total number of skip touch corrections for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalskiptouchcorrections"
+      },
+      "totalSpaceCorrections": {
+        "doc": "The total number of space corrections for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalspacecorrections"
+      },
+      "totalSubstitutionCorrections": {
+        "doc": "The total number of substitution corrections for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalsubstitutioncorrections"
+      },
+      "totalTaps": {
+        "doc": "The total number of taps for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totaltaps"
+      },
+      "totalTranspositionCorrections": {
+        "doc": "The total number of transposition corrections for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totaltranspositioncorrections"
+      },
+      "totalTypingDuration": {
+        "doc": "The total amount of typing time for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totaltypingduration"
+      },
+      "totalTypingEpisodes": {
+        "doc": "The total number of continuous typing episodes during the session.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totaltypingepisodes"
+      },
+      "totalWords": {
+        "doc": "The total number of typed words for the keyboard.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/totalwords"
+      },
+      "touchDownDown": {
+        "doc": "The duration between touch down and touch down for any key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/touchdowndown"
+      },
+      "touchDownUp": {
+        "doc": "The duration between touch down to touch up for any key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/touchdownup"
+      },
+      "touchUpDown": {
+        "doc": "The duration between touch up and touch down for any key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/touchupdown"
+      },
+      "typingSpeed": {
+        "doc": "The user’s typing rate in characters per second.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/typingspeed"
+      },
+      "upErrorDistance": {
+        "doc": "The distance from the touch up to the center of any key.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/uperrordistance"
+      },
+      "version": {
+        "doc": "The version of keyboard metrics.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/version"
+      },
+      "width": {
+        "doc": "The width, in millimeters, of the keyboard in the report.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srkeyboardmetrics/width"
+      }
+    },
+    "SRMediaEvent": {
+      "eventType": {
+        "doc": "The type of user interaction with the media.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srmediaevent/eventtype"
+      },
+      "mediaIdentifier": {
+        "doc": "A unique identifier for the media object.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srmediaevent/mediaidentifier"
+      }
+    },
+    "SRMessagesUsageReport": {
+      "duration": {
+        "doc": "The duration that the report spans.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srmessagesusagereport/duration"
+      },
+      "totalIncomingMessages": {
+        "doc": "The number of messages the user receives.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srmessagesusagereport/totalincomingmessages"
+      },
+      "totalOutgoingMessages": {
+        "doc": "The number of messages the user sends.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srmessagesusagereport/totaloutgoingmessages"
+      },
+      "totalUniqueContacts": {
+        "doc": "The user’s number of contacts.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srmessagesusagereport/totaluniquecontacts"
+      }
+    },
+    "SRPhoneUsageReport": {
+      "duration": {
+        "doc": "The duration that the report spans.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphoneusagereport/duration"
+      },
+      "totalIncomingCalls": {
+        "doc": "The number of calls the user receives.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphoneusagereport/totalincomingcalls"
+      },
+      "totalOutgoingCalls": {
+        "doc": "The number of calls the user makes.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphoneusagereport/totaloutgoingcalls"
+      },
+      "totalPhoneCallDuration": {
+        "doc": "The total duration of all calls.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphoneusagereport/totalphonecallduration"
+      },
+      "totalUniqueContacts": {
+        "doc": "The user’s number of contacts.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphoneusagereport/totaluniquecontacts"
+      }
+    },
+    "SRPhotoplethysmogramAccelerometerSample": {
+      "nanosecondsSinceStart": {
+        "doc": "The time in nanoseconds since the start of the accelerometer data recording.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramaccelerometersample/nanosecondssincestart"
+      },
+      "samplingFrequency": {
+        "doc": "The frequency of the accelerometer data recording in hertz.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramaccelerometersample/samplingfrequency"
+      },
+      "x": {
+        "doc": "The x-axis acceleration in G’s (gravitational force).",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramaccelerometersample/x"
+      },
+      "y": {
+        "doc": "The y-axis acceleration in G’s (gravitational force).",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramaccelerometersample/y"
+      },
+      "z": {
+        "doc": "The z-axis acceleration in G’s (gravitational force).",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramaccelerometersample/z"
+      }
+    },
+    "SRPhotoplethysmogramOpticalSample": {
+      "SRPhotoplethysmogramOpticalSample.NoiseTerms": {
+        "doc": "The mathematical terms that you use to compute the photoplethysmogram (PPG) noise.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/noiseterms-swift.struct"
+      },
+      "SRPhotoplethysmogramOpticalSampleCondition": {
+        "doc": "The conditions that may occur when recording photoplethysmogram optical data.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/condition"
+      },
+      "activePhotodiodeIndexes": {
+        "doc": "The set of photodiodes in use during the sample.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/activephotodiodeindexes"
+      },
+      "backgroundNoise": {
+        "doc": "An estimated timeseries of ambient noise intrusion.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/backgroundnoise"
+      },
+      "backgroundNoiseOffset": {
+        "doc": "The white noise variance estimate in the background noise signal.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/backgroundnoiseoffset"
+      },
+      "conditions": {
+        "doc": "The sensor context or conditions that may affect the sample.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/conditions"
+      },
+      "effectiveWavelength": {
+        "doc": "A temperature-compensated wavelength estimate in nanometers that the emitter produces.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/effectivewavelength"
+      },
+      "emitter": {
+        "doc": "The index of the LED in use during the sample.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/emitter"
+      },
+      "nanosecondsSinceStart": {
+        "doc": "The time in nanoseconds since the system turns on the sensor.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/nanosecondssincestart"
+      },
+      "noiseTerms": {
+        "doc": "The mathematical terms for computing the noise in this sample.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/noiseterms-swift.property"
+      },
+      "nominalWavelength": {
+        "doc": "The wavelength in nanometers that the emitter produces while operating at a specific temperature.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/nominalwavelength"
+      },
+      "normalizedReflectance": {
+        "doc": "The photoplethysmogram waveform in normalized units.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/normalizedreflectance-9aidm"
+      },
+      "pinkNoise": {
+        "doc": "An estimate of the pink noise of the sensor.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/pinknoise"
+      },
+      "samplingFrequency": {
+        "doc": "The sampling frequency of the photoplethysmogram (PPG) data in hertz.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/samplingfrequency"
+      },
+      "signalIdentifier": {
+        "doc": "The identifier for a signal that photodiodes and emitters produce.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/signalidentifier"
+      },
+      "whiteNoise": {
+        "doc": "An estimate of the white noise of the sensor.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramopticalsample/whitenoise"
+      }
+    },
+    "SRPhotoplethysmogramSample": {
+      "SRPhotoplethysmogramSampleUsage": {
+        "doc": "The possible ways that a person or the system may take a photoplethysmogram (PPG) reading.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramsample/usage-swift.struct"
+      },
+      "accelerometerSamples": {
+        "doc": "The samples recorded by the photoplethysmogram (PPG) accelerometer.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramsample/accelerometersamples"
+      },
+      "nanosecondsSinceStart": {
+        "doc": "The time in nanoseconds since the start of the data recording.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramsample/nanosecondssincestart"
+      },
+      "opticalSamples": {
+        "doc": "The samples recorded by the photoplethysmogram (PPG) optical sensor.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramsample/opticalsamples"
+      },
+      "startDate": {
+        "doc": "The start date of the photoplethysmogram (PPG) sensor data recording.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramsample/startdate"
+      },
+      "temperature": {
+        "doc": "The samples recorded by the photoplethysmogram (PPG) thermometer.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramsample/temperature"
+      },
+      "usage": {
+        "doc": "The method that the person or system uses to take the reading.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srphotoplethysmogramsample/usage-swift.property"
+      }
+    },
+    "SRSensorReader": {
+      "authorizationStatus": {
+        "doc": "The status of the user’s agreement to let the app access this reader’s sensor.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srsensorreader/authorizationstatus"
+      },
+      "delegate": {
+        "doc": "An object that responds to sensor-related events.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srsensorreader/delegate"
+      },
+      "sensor": {
+        "doc": "The particular sensor that this object reads.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srsensorreader/sensor"
+      }
+    },
+    "SRSpeechExpression": {
+      "activation": {
+        "doc": "The level of energy or activation of the speaker.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechexpression/activation"
+      },
+      "confidence": {
+        "doc": "The level of confidence of the speaker.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechexpression/confidence"
+      },
+      "dominance": {
+        "doc": "The degree of how strong or meek the speaker sounds.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechexpression/dominance"
+      },
+      "mood": {
+        "doc": "An indication of how slurry, tired, or exhausted the speaker sounds compared to normal speech.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechexpression/mood"
+      },
+      "timeRange": {
+        "doc": "The time range in the audio stream that the metrics and analytics apply to.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechexpression/timerange"
+      },
+      "valence": {
+        "doc": "The degree of positive or negative emotion or sentiment of the speaker.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechexpression/valence"
+      },
+      "version": {
+        "doc": "The version of the algorithm that the system uses to generate the metrics and analytics.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechexpression/version"
+      }
+    },
+    "SRSpeechMetrics": {
+      "SRSpeechMetricsSessionFlags": {
+        "doc": "Possible details about processing an audio stream.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechmetrics/sessionflags-swift.struct"
+      },
+      "audioLevel": {
+        "doc": "The audio level of the speech.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechmetrics/audiolevel"
+      },
+      "sessionFlags": {
+        "doc": "Details about the audio processing.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechmetrics/sessionflags-swift.property"
+      },
+      "sessionIdentifier": {
+        "doc": "An identifier for the audio session.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechmetrics/sessionidentifier"
+      },
+      "soundClassification": {
+        "doc": "The highest-ranking classifications in the time range.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechmetrics/soundclassification"
+      },
+      "speechExpression": {
+        "doc": "The metrics and voice analytics for the range of speech.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechmetrics/speechexpression"
+      },
+      "speechRecognition": {
+        "doc": "The partial or final results of the speech recognition request.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechmetrics/speechrecognition"
+      },
+      "timeSinceAudioStart": {
+        "doc": "The number of seconds since the start of the audio stream.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechmetrics/timesinceaudiostart"
+      },
+      "timestamp": {
+        "doc": "The date and time when the speech occurs.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srspeechmetrics/timestamp"
+      }
+    },
+    "SRSupplementalCategory": {
+      "identifier": {
+        "doc": "A unique identifier for the supplemental category.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srsupplementalcategory/identifier"
+      }
+    },
+    "SRTextInputSession": {
+      "SRTextInputSessionType": {
+        "doc": "Methods to input text during a session.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srtextinputsession/sessiontype-swift.enum"
+      },
+      "duration": {
+        "doc": "The length of time, in seconds, that the session spans.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srtextinputsession/duration"
+      },
+      "sessionIdentifier": {
+        "doc": "A unique identifier for the keyboard session.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srtextinputsession/sessionidentifier"
+      }
+    },
+    "SRVisit": {
+      "SRLocationCategory": {
+        "doc": "Types of locations.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srvisit/locationcategory-swift.enum"
+      },
+      "arrivalDateInterval": {
+        "doc": "A range of time within which the user arrives at a location of interest.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srvisit/arrivaldateinterval"
+      },
+      "departureDateInterval": {
+        "doc": "A range of time within which the user departs from a location of interest.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srvisit/departuredateinterval"
+      },
+      "distanceFromHome": {
+        "doc": "The location’s distance from the home-category location.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srvisit/distancefromhome"
+      },
+      "identifier": {
+        "doc": "A value that maps to a unique geographic location.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srvisit/identifier"
+      },
+      "locationCategory": {
+        "doc": "The location’s type.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srvisit/locationcategory-swift.property"
+      }
+    },
+    "SRWristDetection": {
+      "SRCrownOrientation": {
+        "doc": "Directions the Digital Crown can face with respect to the wearer.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristdetection/crownorientation-swift.enum"
+      },
+      "SRWristLocation": {
+        "doc": "Preferences for where a user wears a watch.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristdetection/wristlocation-swift.enum"
+      },
+      "crownOrientation": {
+        "doc": "A value that indicates the direction the Digital Crown faces with respect to the user.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristdetection/crownorientation-swift.property"
+      },
+      "offWristDate": {
+        "doc": "The date and time that the user takes their Apple Watch off their wrist.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristdetection/offwristdate"
+      },
+      "onWrist": {
+        "doc": "A value that indicates whether the watch is on the user’s wrist.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristdetection/onwrist"
+      },
+      "onWristDate": {
+        "doc": "The date and time that the user puts their Apple Watch on their wrist.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristdetection/onwristdate"
+      },
+      "wristLocation": {
+        "doc": "A value that indicates the wrist where the user wears the watch.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristdetection/wristlocation-swift.property"
+      }
+    },
+    "SRWristTemperature": {
+      "SRWristTemperatureCondition": {
+        "doc": "The user activities with the watch that can impact the temperature measurement.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperature/condition-swift.struct"
+      },
+      "condition": {
+        "doc": "The condition of the measurement that impacts its accuracy.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperature/condition-swift.property"
+      },
+      "errorEstimate": {
+        "doc": "An estimate of the amount of error in the temperature measurement.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperature/errorestimate"
+      },
+      "timestamp": {
+        "doc": "The date and time when the device records the temperature.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperature/timestamp"
+      },
+      "value": {
+        "doc": "The temperature sensor value in celsius.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperature/value"
+      }
+    },
+    "SRWristTemperatureSession": {
+      "duration": {
+        "doc": "The number of seconds that the device records the temperature.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperaturesession/duration"
+      },
+      "startDate": {
+        "doc": "The time that the device records the wrist temperature.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperaturesession/startdate"
+      },
+      "temperatures": {
+        "doc": "An enumerator that you use to get the wrist temperatures and their accuracies.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperaturesession/temperatures-7p7du"
+      },
+      "version": {
+        "doc": "The version of the algorithm that analyzes the temperature.",
+        "url": "https://developer.apple.com/documentation/sensorkit/srwristtemperaturesession/version"
+      }
+    }
+  }
+}

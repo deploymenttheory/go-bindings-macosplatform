@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A constraint that orients a node to always point toward a specified other node.
+//
 // LookAtConstraint wraps [raw.SCNLookAtConstraint] with a fluent Go API.
 type LookAtConstraint struct {
 	inner *raw.SCNLookAtConstraint
@@ -35,7 +37,7 @@ func NewLookAtConstraint() *LookAtConstraint {
 	return &LookAtConstraint{inner: raw.SCNLookAtConstraintFromID(_id)}
 }
 
-// @property target @abstract Defines the target node to look at.
+// The node toward which constrained nodes will point after being reoriented.
 //
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *LookAtConstraint) WithTarget(target NodeProvider) *LookAtConstraint {
@@ -67,7 +69,7 @@ func (x *LookAtConstraint) WithWorldUp(worldUp raw.SCNVector3) *LookAtConstraint
 	return x
 }
 
-// @property gimbalLockEnabled @abstract Specifies whether the receiver enables the gimbal lock. Defaults to NO. @discussion Enabling the gimbal lock prevents the receiver from rotating the constrained node around to roll axis.
+// A Boolean value that specifies whether constrained nodes are allowed to rotate.
 //
 // WithGimbalLockEnabled sets the gimbalLockEnabled property and returns the receiver for chaining.
 func (x *LookAtConstraint) WithGimbalLockEnabled(gimbalLockEnabled bool) *LookAtConstraint {
@@ -83,7 +85,7 @@ func (x *LookAtConstraint) WithEnabled(enabled bool) *LookAtConstraint {
 	return x
 }
 
-// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+// The influence of the constraint on the node’s transformation.
 //
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *LookAtConstraint) WithInfluenceFactor(influenceFactor float64) *LookAtConstraint {

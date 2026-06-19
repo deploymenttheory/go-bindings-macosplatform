@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An asset with a duration that the system can extend without modifying its existing media data.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avfragmentedasset
 type AVFragmentedAsset struct {
 	AVURLAsset
@@ -30,9 +32,9 @@ func AVFragmentedAssetFromID(id objc.ID) *AVFragmentedAsset {
 	return o
 }
 
-// Returns an instance of AVFragmentedAsset for inspection of a fragmented media resource. - Parameter URL: An instance of NSURL that references a media resource. - Parameter options: An instance of NSDictionary that contains keys for specifying options for the initialization of the AVFragmentedAsset. See AVURLAssetPreferPreciseDurationAndTimingKey and AVURLAssetReferenceRestrictionsKey above. - Returns: An instance of AVFragmentedAsset.
+// Creates a fragmented asset for the media at the specified URL.
 func AVFragmentedAssetFragmentedAssetWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVFragmentedAsset {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVFragmentedAsset), _aVFragmentedAssetSelFragmentedAssetWithURLOptions, uRL.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVFragmentedAsset), _aVFragmentedAssetSelFragmentedAssetWithURLOptions, uRL.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A clinical coding that represents a medical concept using a standardized coding system.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkclinicalcoding
 type HKClinicalCoding struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func HKClinicalCodingFromID(id objc.ID) *HKClinicalCoding {
 	return o
 }
 
-// Creates a clinical coding with the specified system, version, and code. @param system  The string that identifies the coding system, typically a HL7 URL. @param version The version of the system, if applicable. @param code    The clinical code string that represents the medical concept. Use when you need to explicitly construct a coding object to associate a HealthKit concept with a standardized medical code.
+// Creates a clinical coding with the specified system, version, and code.
 func (o *HKClinicalCoding) InitWithSystemVersionCode(system *foundation.NSString, version *foundation.NSString, code *foundation.NSString) *HKClinicalCoding {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKClinicalCodingSelInitWithSystemVersionCode, system.Ptr(), version.Ptr(), code.Ptr())
 	if _ret != 0 {

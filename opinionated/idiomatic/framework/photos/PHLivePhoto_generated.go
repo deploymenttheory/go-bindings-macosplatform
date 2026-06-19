@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A displayable representation of a Live Photo—a picture that includes motion and sound from the moments just before and after its capture.
+//
 // LivePhoto wraps [raw.PHLivePhoto] with a fluent Go API.
 type LivePhoto struct {
 	inner *raw.PHLivePhoto

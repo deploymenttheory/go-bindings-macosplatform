@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A gradient addition operator.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnaddgradient
 type MPSCNNAddGradient struct {
 	mpsneuralnetwork.MPSCNNArithmeticGradient

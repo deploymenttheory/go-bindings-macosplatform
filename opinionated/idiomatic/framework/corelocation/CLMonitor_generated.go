@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that monitors the conditions you add to it.
+//
 // Monitor wraps [raw.CLMonitor] with a fluent Go API.
 type Monitor struct {
 	inner *raw.CLMonitor

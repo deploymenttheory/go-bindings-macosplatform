@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A query for one-time access to a SMART Health Card or EU Digital COVID Certificate.
+//
 // VerifiableClinicalRecordQuery wraps [raw.HKVerifiableClinicalRecordQuery] with a fluent Go API.
 type VerifiableClinicalRecordQuery struct {
 	inner *raw.HKVerifiableClinicalRecordQuery
@@ -32,7 +34,7 @@ func VerifiableClinicalRecordQueryFromID(id objc.ID) *VerifiableClinicalRecordQu
 	return &VerifiableClinicalRecordQuery{inner: raw.HKVerifiableClinicalRecordQueryFromID(id)}
 }
 
-// @method        initWithRecordTypes:predicate:resultsHandler: @abstract      Returns an one-time query that will ask for access to verifiable clinical records that match the query. @param         recordTypes     The record types that need to be present on a verifiable clinical record. @param         predicate       The predicate which records should match. @param         resultsHandler  The block to invoke with the verifiable clinical records from the query.
+// Creates a query for one-time access to a SMART Health Card.
 //
 // NewVerifiableClinicalRecordQueryWithRecordTypesPredicateResultsHandler creates a new [VerifiableClinicalRecordQuery].
 func NewVerifiableClinicalRecordQueryWithRecordTypesPredicateResultsHandler(recordTypes *foundation.NSArray[*foundation.NSString], predicate *foundation.NSPredicate, resultsHandler func(*raw.HKVerifiableClinicalRecordQuery, *foundation.NSArray[*raw.HKVerifiableClinicalRecord], unsafe.Pointer)) *VerifiableClinicalRecordQuery {
@@ -41,7 +43,7 @@ func NewVerifiableClinicalRecordQueryWithRecordTypesPredicateResultsHandler(reco
 	return &VerifiableClinicalRecordQuery{inner: raw.HKVerifiableClinicalRecordQueryFromID(_id)}
 }
 
-// @method        initWithRecordTypes:sourceTypes:predicate:resultsHandler: @abstract      Returns a one-time query that will ask for access to and return verifiable clinical records that match the query. @param         recordTypes     The record types that need to be present on a verifiable clinical record. @param         sourceTypes     The source type(s) of the records. @param         predicate       The predicate which records should match. @param         resultsHandler  The block to invoke with the verifiable clinical records from the query.
+// Creates a query for one-time access to a verifiable clinical record.
 //
 // NewVerifiableClinicalRecordQueryWithRecordTypesSourceTypesPredicateResultsHandler creates a new [VerifiableClinicalRecordQuery].
 func NewVerifiableClinicalRecordQueryWithRecordTypesSourceTypesPredicateResultsHandler(recordTypes *foundation.NSArray[*foundation.NSString], sourceTypes *foundation.NSArray[*foundation.NSString], predicate *foundation.NSPredicate, resultsHandler func(*raw.HKVerifiableClinicalRecordQuery, *foundation.NSArray[*raw.HKVerifiableClinicalRecord], unsafe.Pointer)) *VerifiableClinicalRecordQuery {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An individual content area within a grid view, typically at the intersection of a row and a column.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsgridcell
 type NSGridCell struct {
 	foundation.NSObject

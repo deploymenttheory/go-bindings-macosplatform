@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Display one or more buttons in a single horizontal group.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssegmentedcontrol
 type NSSegmentedControl struct {
 	NSControl
@@ -76,24 +78,29 @@ func NSSegmentedControlFromID(id objc.ID) *NSSegmentedControl {
 	return o
 }
 
+// Selects the segment with the specified tag.
 func (o *NSSegmentedControl) SelectSegmentWithTag(tag int) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSegmentedControlSelSelectSegmentWithTag, tag)
 	return _ret
 }
 
+// Sets the width of the specified segment.
 func (o *NSSegmentedControl) SetWidthForSegment(width float64, segment int) {
 	o.Ptr().Send(_nSSegmentedControlSelSetWidthForSegment, width, segment)
 }
 
+// Returns the width of the specified segment.
 func (o *NSSegmentedControl) WidthForSegment(segment int) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSSegmentedControlSelWidthForSegment, segment)
 	return _ret
 }
 
+// Sets the image for the specified segment.
 func (o *NSSegmentedControl) SetImageForSegment(image *NSImage, segment int) {
 	o.Ptr().Send(_nSSegmentedControlSelSetImageForSegment, image.Ptr(), segment)
 }
 
+// Returns the image associated with the specified segment.
 func (o *NSSegmentedControl) ImageForSegment(segment int) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelImageForSegment, segment)
 	if _ret != 0 {
@@ -102,19 +109,23 @@ func (o *NSSegmentedControl) ImageForSegment(segment int) *NSImage {
 	return NSImageFromID(_ret)
 }
 
+// Sets the scaling mode used to display the specified segment’s image.
 func (o *NSSegmentedControl) SetImageScalingForSegment(scaling NSImageScaling, segment int) {
 	o.Ptr().Send(_nSSegmentedControlSelSetImageScalingForSegment, scaling, segment)
 }
 
+// Returns the scaling mode used to display the specified segment’s image.
 func (o *NSSegmentedControl) ImageScalingForSegment(segment int) NSImageScaling {
 	_ret := objc.Send[NSImageScaling](o.Ptr(), _nSSegmentedControlSelImageScalingForSegment, segment)
 	return _ret
 }
 
+// Sets the label for the specified segment.
 func (o *NSSegmentedControl) SetLabelForSegment(label *foundation.NSString, segment int) {
 	o.Ptr().Send(_nSSegmentedControlSelSetLabelForSegment, label.Ptr(), segment)
 }
 
+// Returns the label of the specified segment.
 func (o *NSSegmentedControl) LabelForSegment(segment int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelLabelForSegment, segment)
 	if _ret != 0 {
@@ -123,10 +134,12 @@ func (o *NSSegmentedControl) LabelForSegment(segment int) *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Sets the menu for the specified segment.
 func (o *NSSegmentedControl) SetMenuForSegment(menu *NSMenu, segment int) {
 	o.Ptr().Send(_nSSegmentedControlSelSetMenuForSegment, menu.Ptr(), segment)
 }
 
+// Returns the menu for the specified segment.
 func (o *NSSegmentedControl) MenuForSegment(segment int) *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSegmentedControlSelMenuForSegment, segment)
 	if _ret != 0 {
@@ -135,19 +148,23 @@ func (o *NSSegmentedControl) MenuForSegment(segment int) *NSMenu {
 	return NSMenuFromID(_ret)
 }
 
+// Sets the selection state of the specified segment.
 func (o *NSSegmentedControl) SetSelectedForSegment(selected bool, segment int) {
 	o.Ptr().Send(_nSSegmentedControlSelSetSelectedForSegment, selected, segment)
 }
 
+// Returns a Boolean value indicating whether the specified segment is selected.
 func (o *NSSegmentedControl) IsSelectedForSegment(segment int) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSegmentedControlSelIsSelectedForSegment, segment)
 	return _ret
 }
 
+// Sets the enabled state of the specified segment
 func (o *NSSegmentedControl) SetEnabledForSegment(enabled bool, segment int) {
 	o.Ptr().Send(_nSSegmentedControlSelSetEnabledForSegment, enabled, segment)
 }
 
+// Returns a Boolean value indicating whether the specified segment is enabled.
 func (o *NSSegmentedControl) IsEnabledForSegment(segment int) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSegmentedControlSelIsEnabledForSegment, segment)
 	return _ret
@@ -294,16 +311,16 @@ func (o *NSSegmentedControl) SetBorderShape(borderShape NSControlBorderShape) {
 	o.Ptr().Send(_nSSegmentedControlSelSetBorderShape, borderShape)
 }
 
-// Creates a standard segmented control containing one segment for each of the provided labels. @param labels An array of localized label strings to use for the control's segments. @param trackingMode The selection mode for the control. The NSSegmentSwitchTracking enum describes the possible values and their effects. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized segmented control.
+// Creates a standard segmented control containing one segment for each of the provided labels.
 func NSSegmentedControlSegmentedControlWithLabelsTrackingModeTargetAction(labels *foundation.NSArray[*foundation.NSString], trackingMode NSSegmentSwitchTracking, target objc.ID, action objc.SEL) *NSSegmentedControl {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSSegmentedControl), _nSSegmentedControlSelSegmentedControlWithLabelsTrackingModeTargetAction, labels, trackingMode, target, action)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSSegmentedControl), _nSSegmentedControlSelSegmentedControlWithLabelsTrackingModeTargetAction, labels.Ptr(), trackingMode, target, action)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSSegmentedControlFromID(_ret)
 }
 
-// Creates a standard segmented control containing one segment for each of the provided images. To ensure accessibility for this control, set the `accessibilityDescription` property on each of the provided images. @param images An array of image objects to use for the control's segments. @param trackingMode The selection mode for the control. The NSSegmentSwitchTracking enum describes the possible values and their effects. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized segmented control.
+// Creates a standard segmented control containing one segment for each of the provided images.
 func NSSegmentedControlSegmentedControlWithImagesTrackingModeTargetAction(images *foundation.NSArray[*NSImage], trackingMode NSSegmentSwitchTracking, target objc.ID, action objc.SEL) *NSSegmentedControl {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSegmentedControl), _nSSegmentedControlSelSegmentedControlWithImagesTrackingModeTargetAction, images.Ptr(), trackingMode, target, action)
 	if _ret != 0 {

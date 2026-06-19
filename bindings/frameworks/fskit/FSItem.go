@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A distinct object in a file hierarchy, such as a file, directory, symlink, socket, and more.
+//
 // Apple documentation: https://developer.apple.com/documentation/fskit/fsitem
 type FSItem struct {
 	foundation.NSObject

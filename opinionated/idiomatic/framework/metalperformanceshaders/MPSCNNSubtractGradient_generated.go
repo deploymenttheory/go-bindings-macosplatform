@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gradient subtraction operator.
+//
 // CNNSubtractGradient wraps [raw.MPSCNNSubtractGradient] with a fluent Go API.
 type CNNSubtractGradient struct {
 	inner *raw.MPSCNNSubtractGradient
@@ -228,7 +230,7 @@ func (x *CNNSubtractGradient) WithDestinationImageAllocator(destinationImageAllo
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNSubtractGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNSubtractGradient {
@@ -236,7 +238,7 @@ func (x *CNNSubtractGradient) WithOptions(options mpscore.MPSKernelOptions) *CNN
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNSubtractGradient) WithLabel(label string) *CNNSubtractGradient {

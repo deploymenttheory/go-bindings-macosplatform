@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A division operator.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnndivide
 type MPSCNNDivide struct {
 	mpsneuralnetwork.MPSCNNArithmetic

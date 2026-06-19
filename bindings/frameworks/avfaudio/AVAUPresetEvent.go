@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a preset load and change on the music track’s destination audio unit.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaupresetevent
 type AVAUPresetEvent struct {
 	AVMusicEvent
@@ -35,9 +37,9 @@ func AVAUPresetEventFromID(id objc.ID) *AVAUPresetEvent {
 	return o
 }
 
-// @method initWithScope:element:dictionary @abstract Initialize the event with the scope, element, and dictionary for the preset. @param scope The audio unit scope for the parameter (see AudioUnitScope).  This should always be set to Global. @param element The element index within the scope (see AudioUnitElement).  This should usually be set to 0. @param presetDictionary An NSDictionary containing the preset.  The audio unit will expect this to be a dictionary structured as an appropriate audio unit preset. @discussion The dictionary passed to this initializer will be copied and is not editable once the event is created.
+// Creates an event with the scope, element, and dictionary for the preset.
 func (o *AVAUPresetEvent) InitWithScopeElementDictionary(scope uint, element uint, presetDictionary *foundation.NSDictionary[objc.ID, objc.ID]) *AVAUPresetEvent {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVAUPresetEventSelInitWithScopeElementDictionary, scope, element, presetDictionary)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAUPresetEventSelInitWithScopeElementDictionary, scope, element, presetDictionary.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -66,6 +68,9 @@ func (o *AVAUPresetEvent) SetElement(element uint) {
 
 // @property presetDictionary An NSDictionary containing the preset.
 func (o *AVAUPresetEvent) PresetDictionary() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _aVAUPresetEventSelPresetDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAUPresetEventSelPresetDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }

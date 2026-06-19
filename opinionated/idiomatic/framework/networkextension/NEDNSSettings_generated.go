@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The DNS resolver settings of a network tunnel or a system-wide configuration.
+//
 // NEDNSSettings wraps [raw.NEDNSSettings] with a fluent Go API.
 type NEDNSSettings struct {
 	inner *raw.NEDNSSettings
@@ -32,7 +34,7 @@ func NEDNSSettingsFromID(id objc.ID) *NEDNSSettings {
 	return &NEDNSSettings{inner: raw.NEDNSSettingsFromID(id)}
 }
 
-// @method initWithServers: @discussion Initialize a newly-allocated NEDNSSettings object. @param servers An array of DNS server IP address strings.
+// Initialize the NEDNSSetting object.
 //
 // NewNEDNSSettingsWithServers creates a new [NEDNSSettings].
 func NewNEDNSSettingsWithServers(servers *foundation.NSArray[*foundation.NSString]) *NEDNSSettings {
@@ -41,7 +43,7 @@ func NewNEDNSSettingsWithServers(servers *foundation.NSArray[*foundation.NSStrin
 	return &NEDNSSettings{inner: raw.NEDNSSettingsFromID(_id)}
 }
 
-// @property searchDomains @discussion An array of DNS server search domain strings.
+// A list of domain strings used to fully qualify single-label host names.
 //
 // WithSearchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSSettings) WithSearchDomains(items ...*foundation.NSString) *NEDNSSettings {
@@ -64,7 +66,7 @@ func (x *NEDNSSettings) WithSearchDomains(items ...*foundation.NSString) *NEDNSS
 	return x
 }
 
-// @property domainName @discussion A string containing the DNS domain.
+// The primary domain of the tunnel.
 //
 // WithDomainName sets the domainName property and returns the receiver for chaining.
 func (x *NEDNSSettings) WithDomainName(domainName string) *NEDNSSettings {
@@ -72,7 +74,7 @@ func (x *NEDNSSettings) WithDomainName(domainName string) *NEDNSSettings {
 	return x
 }
 
-// @property matchDomains @discussion An array of strings containing domain strings. If this property is non-nil, the DNS settings will only be used to resolve host names within the specified domains.
+// A list of domain strings used to determine which DNS queries will use the DNS resolver settings contained in this object.
 //
 // WithMatchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSSettings) WithMatchDomains(items ...*foundation.NSString) *NEDNSSettings {
@@ -95,7 +97,7 @@ func (x *NEDNSSettings) WithMatchDomains(items ...*foundation.NSString) *NEDNSSe
 	return x
 }
 
-// @property matchDomainsNoSearch @discussion A boolean indicating if the match domains should be appended to the search domain list.  Default is NO (match domains will be appended to the search domain list).
+// A Boolean that specifies if the domains in the matchDomains list should not be appended to the resolver’s list of search domains.
 //
 // WithMatchDomainsNoSearch sets the matchDomainsNoSearch property and returns the receiver for chaining.
 func (x *NEDNSSettings) WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSSettings {

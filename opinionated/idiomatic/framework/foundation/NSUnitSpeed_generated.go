@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for speed.
+//
 // UnitSpeed wraps [raw.NSUnitSpeed] with a fluent Go API.
 type UnitSpeed struct {
 	inner *raw.NSUnitSpeed

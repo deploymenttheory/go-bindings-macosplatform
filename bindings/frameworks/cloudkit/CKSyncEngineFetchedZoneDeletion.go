@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes the deletion of a record zone.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginefetchedzonedeletion
 type CKSyncEngineFetchedZoneDeletion struct {
 	foundation.NSObject

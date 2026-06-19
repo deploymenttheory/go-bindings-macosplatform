@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a sample that has been deleted from the HealthKit store.
+//
 // DeletedObject wraps [raw.HKDeletedObject] with a fluent Go API.
 type DeletedObject struct {
 	inner *raw.HKDeletedObject

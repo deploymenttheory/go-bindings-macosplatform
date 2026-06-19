@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specialized predicate that evaluates logical combinations of other predicates.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nscompoundpredicate
 type NSCompoundPredicate struct {
 	NSPredicate
@@ -35,6 +37,7 @@ func NSCompoundPredicateFromID(id objc.ID) *NSCompoundPredicate {
 	return o
 }
 
+// Returns the receiver that a specified type initializes using predicates from a specified array.
 func (o *NSCompoundPredicate) InitWithTypeSubpredicates(type_ NSCompoundPredicateType, subpredicates *NSArray[*NSPredicate]) *NSCompoundPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCompoundPredicateSelInitWithTypeSubpredicates, type_, subpredicates.Ptr())
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func (o *NSCompoundPredicate) InitWithTypeSubpredicates(type_ NSCompoundPredicat
 	return NSCompoundPredicateFromID(_ret)
 }
 
+// Creates a predicate by decoding from the coder you specify.
 func (o *NSCompoundPredicate) InitWithCoder(coder *NSCoder) *NSCompoundPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCompoundPredicateSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -51,7 +55,7 @@ func (o *NSCompoundPredicate) InitWithCoder(coder *NSCoder) *NSCompoundPredicate
 	return NSCompoundPredicateFromID(_ret)
 }
 
-// * Convenience Methods **
+// Returns a new predicate that you form using an AND operation on the predicates in a specified array.
 func NSCompoundPredicateAndPredicateWithSubpredicates(subpredicates *NSArray[*NSPredicate]) *NSCompoundPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCompoundPredicate), _nSCompoundPredicateSelAndPredicateWithSubpredicates, subpredicates.Ptr())
 	if _ret != 0 {
@@ -60,6 +64,7 @@ func NSCompoundPredicateAndPredicateWithSubpredicates(subpredicates *NSArray[*NS
 	return NSCompoundPredicateFromID(_ret)
 }
 
+// Returns a new predicate that you form using an OR operation on the predicates in a specified array.
 func NSCompoundPredicateOrPredicateWithSubpredicates(subpredicates *NSArray[*NSPredicate]) *NSCompoundPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCompoundPredicate), _nSCompoundPredicateSelOrPredicateWithSubpredicates, subpredicates.Ptr())
 	if _ret != 0 {
@@ -68,6 +73,7 @@ func NSCompoundPredicateOrPredicateWithSubpredicates(subpredicates *NSArray[*NSP
 	return NSCompoundPredicateFromID(_ret)
 }
 
+// Returns a new predicate that you form using a NOT operation on a specified predicate.
 func NSCompoundPredicateNotPredicateWithSubpredicate(predicate *NSPredicate) *NSCompoundPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCompoundPredicate), _nSCompoundPredicateSelNotPredicateWithSubpredicate, predicate.Ptr())
 	if _ret != 0 {
@@ -82,6 +88,9 @@ func (o *NSCompoundPredicate) CompoundPredicateType() NSCompoundPredicateType {
 }
 
 func (o *NSCompoundPredicate) Subpredicates() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSCompoundPredicateSelSubpredicates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCompoundPredicateSelSubpredicates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }

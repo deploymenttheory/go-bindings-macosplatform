@@ -112,6 +112,7 @@ func (e NXMouseButton) String() string {
 	}
 }
 
+// Error information that might return when you generate a thumbnail.
 type QLThumbnailError int64
 
 const (
@@ -142,6 +143,7 @@ func (e QLThumbnailError) String() string {
 	}
 }
 
+// The various types of thumbnails that you can request.
 type QLThumbnailGenerationRequestRepresentationTypes uint64
 
 const (
@@ -171,6 +173,7 @@ func (e QLThumbnailGenerationRequestRepresentationTypes) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The different types of thumbnails that you can create.
 type QLThumbnailRepresentationType int64
 
 const (

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for binary reduction filters.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducebinary
 type MPSNNReduceBinary struct {
 	mpsneuralnetwork.MPSCNNBinaryKernel

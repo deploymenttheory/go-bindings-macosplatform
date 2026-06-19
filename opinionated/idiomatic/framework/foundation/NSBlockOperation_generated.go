@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An operation that manages the concurrent execution of one or more blocks.
+//
 // BlockOperation wraps [raw.NSBlockOperation] with a fluent Go API.
 type BlockOperation struct {
 	inner *raw.NSBlockOperation

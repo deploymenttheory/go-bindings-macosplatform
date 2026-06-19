@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A gradient local-contrast normalization kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlocalcontrastnormalizationgradient
 type MPSCNNLocalContrastNormalizationGradient struct {
 	mpsneuralnetwork.MPSCNNGradientKernel

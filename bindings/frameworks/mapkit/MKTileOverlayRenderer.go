@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The renderer for a tile overlay that handles the drawing of bitmap images on the map surface.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mktileoverlayrenderer
 type MKTileOverlayRenderer struct {
 	MKOverlayRenderer
@@ -30,6 +32,7 @@ func MKTileOverlayRendererFromID(id objc.ID) *MKTileOverlayRenderer {
 	return o
 }
 
+// Initializes and returns a tile renderer with the specified overlay object.
 func (o *MKTileOverlayRenderer) InitWithTileOverlay(overlay *MKTileOverlay) *MKTileOverlayRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKTileOverlayRendererSelInitWithTileOverlay, overlay.Ptr())
 	if _ret != 0 {
@@ -38,6 +41,7 @@ func (o *MKTileOverlayRenderer) InitWithTileOverlay(overlay *MKTileOverlay) *MKT
 	return MKTileOverlayRendererFromID(_ret)
 }
 
+// Forces the tile overlay renderer to reload and redisplay the tiles.
 func (o *MKTileOverlayRenderer) ReloadData() {
 	o.Ptr().Send(_mKTileOverlayRendererSelReloadData)
 }

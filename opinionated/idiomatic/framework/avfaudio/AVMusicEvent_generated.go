@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class for the events you associate with a music track.
+//
 // MusicEvent wraps [raw.AVMusicEvent] with a fluent Go API.
 type MusicEvent struct {
 	inner *raw.AVMusicEvent

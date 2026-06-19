@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container for vertex data forming part of the definition for a three-dimensional object, or geometry.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scngeometrysource
 type SCNGeometrySource struct {
 	foundation.NSObject
@@ -44,7 +46,7 @@ func SCNGeometrySourceFromID(id objc.ID) *SCNGeometrySource {
 	return o
 }
 
-// @method geometrySourceWithData:semantic:vectorCount:floatComponents:componentsPerVector:bytesPerComponent:dataOffset:dataStride: @abstract Creates and returns a geometry source from the given data and parameters. @param data The geometry data. @param semantic The semantic of the geometry source. @param vectorCount The number of geometry source vectors. @param floatComponents A flag that indicates if vector components are floating point values. @param componentsPerVector The number of scalar components in a vector. @param bytesPerComponent The number of bytes that represent a vector component. @param offset The offset from the beginning of the data. In bytes. @param stride The number of bytes from a vector to the next one in the data.
+// Creates a geometry source from the specified data and options.
 func SCNGeometrySourceGeometrySourceWithDataSemanticVectorCountFloatComponentsComponentsPerVectorBytesPerComponentDataOffsetDataStride(data *foundation.NSData, semantic *foundation.NSString, vectorCount int, floatComponents bool, componentsPerVector int, bytesPerComponent int, offset int, stride int) *SCNGeometrySource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometrySource), _sCNGeometrySourceSelGeometrySourceWithDataSemanticVectorCountFloatComponentsComponentsPerVectorBytesPerComponentDataOffsetDataStride, data.Ptr(), semantic.Ptr(), vectorCount, floatComponents, componentsPerVector, bytesPerComponent, offset, stride)
 	if _ret != 0 {
@@ -53,7 +55,7 @@ func SCNGeometrySourceGeometrySourceWithDataSemanticVectorCountFloatComponentsCo
 	return SCNGeometrySourceFromID(_ret)
 }
 
-// @method geometrySourceWithVertices:count: @abstract Creates and returns a geometry source from vertices stored in a buffer of SCNVector3 values. @param vertices The buffer of vertices. @param count The number of vertices. @discussion Input vertices are copied to an optimized data format. The actual format is described by the properties of the resulting instance.
+// Creates a geometry source from an array of vertex positions.
 func SCNGeometrySourceGeometrySourceWithVerticesCount(vertices *SCNVector3, count int) *SCNGeometrySource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometrySource), _sCNGeometrySourceSelGeometrySourceWithVerticesCount, vertices, count)
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func SCNGeometrySourceGeometrySourceWithVerticesCount(vertices *SCNVector3, coun
 	return SCNGeometrySourceFromID(_ret)
 }
 
-// @method geometrySourceWithNormals:count: @abstract Creates and returns a geometry source from normals stored in a buffer of SCNVector3 values. @param normals The buffer of normals. @param count The number of normals. @discussion Input normals are copied to an optimized data format. The actual format is described by the properties of the resulting instance.
+// Creates a geometry source from an array of normal vectors.
 func SCNGeometrySourceGeometrySourceWithNormalsCount(normals *SCNVector3, count int) *SCNGeometrySource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometrySource), _sCNGeometrySourceSelGeometrySourceWithNormalsCount, normals, count)
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func SCNGeometrySourceGeometrySourceWithNormalsCount(normals *SCNVector3, count 
 	return SCNGeometrySourceFromID(_ret)
 }
 
-// @method geometrySourceWithTextureCoordinates:count: @abstract Creates and returns a geometry source from texture coordinates stored in a buffer of CGPoint values. @param texcoord The buffer of texture coordinates. @param count The number of texture coordinate points. @discussion Input texture coordinates are copied to an optimized data format. The actual format is described by the properties of the resulting instance.
+// Creates a geometry source from an array of texture coordinate points.
 func SCNGeometrySourceGeometrySourceWithTextureCoordinatesCount(texcoord *corefoundation.CGPoint, count int) *SCNGeometrySource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometrySource), _sCNGeometrySourceSelGeometrySourceWithTextureCoordinatesCount, texcoord, count)
 	if _ret != 0 {
@@ -80,7 +82,7 @@ func SCNGeometrySourceGeometrySourceWithTextureCoordinatesCount(texcoord *corefo
 	return SCNGeometrySourceFromID(_ret)
 }
 
-// @method geometrySourceWithBuffer:semantic:vectorCount:floatComponents:componentsPerVector:bytesPerComponent:dataOffset:dataStride: @abstract Creates and returns a geometry source from the given data and parameters. @param buffer A Metal buffer. @param vertexFormat The vertex format. @param semantic The semantic of the geometry source. @param vertexCount The number of vertex. @param offset The offset from the beginning of the data. In bytes. @param stride The number of bytes from a vector to the next one in the data. @discussion Attempting to modify the Metal buffer outside the SCNSceneRenderer delegate callbacks is undefined. The typical usage it to modify the MTLBuffer within the willRenderScene callback, using a compute kernel or a vertex function in the user own command buffer. So something like: - (void)renderer:(id <SCNSceneRenderer>)aRenderer willRenderScene:(SCNScene *)scene atTime:(NSTimeInterval)time { // ask for a new command buffer id <MTLCommandBuffer> myCommandBuffer = [aRenderer.commandQueue commandBuffer]; // get a compute command encoder id <MTLComputeCommandEncoder> myComputeCommandEncoder = [myCommandBuffer computeCommandEncoder]; // configure the compute command encoder's pipeline state, buffer inputs etc... //... // dispatch the [myComputeCommandEncoder dispatchThreadgroups:numberOfWorkingGroups threadsPerThreadgroup:numberOfThreads]; [myComputeCommandEncoder endEncoding]; [myCommandBuffer commit]; }
+// Creates a geometry source whose vertex data resides in the specified Metal buffer, allowing modification through a Metal compute shader.
 func SCNGeometrySourceGeometrySourceWithBufferVertexFormatSemanticVertexCountDataOffsetDataStride(buffer metal.MTLBuffer, vertexFormat metal.MTLVertexFormat, semantic *foundation.NSString, vertexCount int, offset int, stride int) *SCNGeometrySource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometrySource), _sCNGeometrySourceSelGeometrySourceWithBufferVertexFormatSemanticVertexCountDataOffsetDataStride, buffer, vertexFormat, semantic.Ptr(), vertexCount, offset, stride)
 	if _ret != 0 {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation for retrieving records from a database.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckfetchrecordsoperation
 type CKFetchRecordsOperation struct {
 	CKDatabaseOperation
@@ -44,7 +46,7 @@ func CKFetchRecordsOperationFromID(id objc.ID) *CKFetchRecordsOperation {
 	return o
 }
 
-// Creates an empty fetch operation. You must set the “CKFetchRecordsOperation/recordIDs“ property before you execute the operation. A fetch operation retrieves all of a record's fields, including any assets that those fields reference. If you want to minimize the amount of data that the operation returns, configure the “CKFetchRecordsOperation/desiredKeys-34l1l“ property with only the keys that contain the values that you have an interest in. After initializing the operation, you must associate at least one progress handler with the operation (excluding the completion handler) to process the results.
+// Creates an empty fetch operation.
 func (o *CKFetchRecordsOperation) Init() *CKFetchRecordsOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordsOperationSelInit)
 	if _ret != 0 {
@@ -53,7 +55,7 @@ func (o *CKFetchRecordsOperation) Init() *CKFetchRecordsOperation {
 	return CKFetchRecordsOperationFromID(_ret)
 }
 
-// Creates a fetch operation for retrieving the records with the specified IDs. - Parameters: - recordIDs: An array of “CKRecord/ID“ objects that represents the records you want to retrieve. If you provide an empty array, you must set the “CKFetchRecordsOperation/recordIDs“ property before you execute the operation. A fetch operation retrieves all of a record's fields, including any assets that those fields reference. If you want to minimize the amount of data that the operation returns, configure the “CKFetchRecordsOperation/desiredKeys-34l1l“ property with only the keys that contain the values that you have an interest in. After initializing the operation, you must associate at least one progress handler with the operation (excluding the completion handler) to process the results.
+// Creates a fetch operation for retrieving the records with the specified IDs.
 func (o *CKFetchRecordsOperation) InitWithRecordIDs(recordIDs *foundation.NSArray[*CKRecordID]) *CKFetchRecordsOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordsOperationSelInitWithRecordIDs, recordIDs.Ptr())
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func (o *CKFetchRecordsOperation) InitWithRecordIDs(recordIDs *foundation.NSArra
 	return CKFetchRecordsOperationFromID(_ret)
 }
 
-// Returns a fetch operation for retrieving the current user record. The returned operation object searches for the single record that corresponds to the current user record. You must associate at least one progress handler with the operation object (excluding the completion handler) to process the results.
+// Returns a fetch operation for retrieving the current user record.
 func CKFetchRecordsOperationFetchCurrentUserRecordOperation() *CKFetchRecordsOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCKFetchRecordsOperation), _cKFetchRecordsOperationSelFetchCurrentUserRecordOperation)
 	if _ret != 0 {
@@ -86,12 +88,15 @@ func (o *CKFetchRecordsOperation) SetRecordIDs(recordIDs *foundation.NSArray[*CK
 
 // The fields of the records to fetch. Use this property to limit the amount of data that CloudKit returns for each record during the fetch operation. When CloudKit returns a record, it only includes fields with names that match one of the keys in this property. The property's default value is `nil`, which instructs CloudKit to return all of a record's keys. If you're retrieving records of different types, make sure the array includes the fields you want from all of the various record types that the operation can return. If you intend to specify a value other than `nil`, do so before you execute the operation or add the operation to a queue.
 func (o *CKFetchRecordsOperation) DesiredKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKFetchRecordsOperationSelDesiredKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordsOperationSelDesiredKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CKFetchRecordsOperation) SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cKFetchRecordsOperationSelSetDesiredKeys, desiredKeys)
+	o.Ptr().Send(_cKFetchRecordsOperationSelSetDesiredKeys, desiredKeys.Ptr())
 }
 
 // The closure to execute with progress information for individual records. This property is a closure that returns no value and has the following parameters: - The ID of the record to retrieve. - The amount of data, as a percentage, that CloudKit downloads for the record. The range is `0.0` to `1.0`, where `0.0` indicates that CloudKit hasn't downloaded anything, and `1.0` means the download is complete. The fetch operation executes this closure one or more times for each record ID in the “CKFetchRecordsOperation/recordIDs“ property. Each time the closure executes, it executes serially with respect to the other progress closures of the operation. You can use this closure to track the ongoing progress of the download operation. If you intend to use this closure to process results, set it before you execute the operation or add the operation to a queue.

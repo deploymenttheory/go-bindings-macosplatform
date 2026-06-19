@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that encapsulates information about all accounts of a particular type.
+//
 // AccountType wraps [raw.ACAccountType] with a fluent Go API.
 type AccountType struct {
 	inner *raw.ACAccountType

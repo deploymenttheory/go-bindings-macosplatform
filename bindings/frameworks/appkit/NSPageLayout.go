@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A panel that queries the user for information such as paper type and orientation.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspagelayout
 type NSPageLayout struct {
 	foundation.NSObject
@@ -44,6 +46,7 @@ func NSPageLayoutFromID(id objc.ID) *NSPageLayout {
 	return o
 }
 
+// Returns a newly created page layout object.
 func NSPageLayoutPageLayout() *NSPageLayout {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPageLayout), _nSPageLayoutSelPageLayout)
 	if _ret != 0 {
@@ -52,10 +55,12 @@ func NSPageLayoutPageLayout() *NSPageLayout {
 	return NSPageLayoutFromID(_ret)
 }
 
+// Adds the specified controller of an accessory view to be presented in the page setup panel.
 func (o *NSPageLayout) AddAccessoryController(accessoryController *NSViewController) {
 	o.Ptr().Send(_nSPageLayoutSelAddAccessoryController, accessoryController.Ptr())
 }
 
+// Removes the specified controller of an accessory view.
 func (o *NSPageLayout) RemoveAccessoryController(accessoryController *NSViewController) {
 	o.Ptr().Send(_nSPageLayoutSelRemoveAccessoryController, accessoryController.Ptr())
 }
@@ -71,17 +76,20 @@ func (o *NSPageLayout) BeginSheetUsingPrintInfoOnWindowCompletionHandler(printIn
 	o.Ptr().Send(_nSPageLayoutSelBeginSheetUsingPrintInfoOnWindowCompletionHandler, printInfo.Ptr(), parentWindow.Ptr(), __block_handler)
 }
 
+// Presents a page setup sheet for the specified print info object, document-modal relative to the specified window.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSPageLayout) BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo *NSPrintInfo, docWindow *NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSPageLayoutSelBeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo, printInfo.Ptr(), docWindow.Ptr(), delegate, didEndSelector, contextInfo)
 }
 
+// Displays the page layout panel and begins the modal loop using the specified print info object.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSPageLayout) RunModalWithPrintInfo(printInfo *NSPrintInfo) int {
 	_ret := objc.Send[int](o.Ptr(), _nSPageLayoutSelRunModalWithPrintInfo, printInfo.Ptr())
 	return _ret
 }
 
+// Displays the page layout panel and begins the modal loop using the shared print info object.
 func (o *NSPageLayout) RunModal() int {
 	_ret := objc.Send[int](o.Ptr(), _nSPageLayoutSelRunModal)
 	return _ret
@@ -103,11 +111,13 @@ func (o *NSPageLayout) PrintInfo() *NSPrintInfo {
 	return NSPrintInfoFromID(_ret)
 }
 
+// Adds a view object to the page layout panel.
 // Deprecated: since macOS 10.5.
 func (o *NSPageLayout) SetAccessoryView(accessoryView *NSView) {
 	o.Ptr().Send(_nSPageLayoutSelSetAccessoryView, accessoryView.Ptr())
 }
 
+// Returns the page layout panel’s accessory view.
 // Deprecated: since macOS 10.5.
 func (o *NSPageLayout) AccessoryView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPageLayoutSelAccessoryView)
@@ -117,11 +127,13 @@ func (o *NSPageLayout) AccessoryView() *NSView {
 	return NSViewFromID(_ret)
 }
 
+// Sets the page layout’s values to those stored in the print info object used when the page layout panel is run.
 // Deprecated: since macOS 10.5.
 func (o *NSPageLayout) ReadPrintInfo() {
 	o.Ptr().Send(_nSPageLayoutSelReadPrintInfo)
 }
 
+// Writes the page layout’s values to the print info object used when the page layout panel is run.
 // Deprecated: since macOS 10.5.
 func (o *NSPageLayout) WritePrintInfo() {
 	o.Ptr().Send(_nSPageLayoutSelWritePrintInfo)

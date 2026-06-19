@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of GKGoals or GKBehaviors with weights that can be applied to a GKAgent The sub-goals or sub-behaviors are summed to produce a total force to be applied to an agent
+// A set of goals that together influence the movement of an agent.
 //
 // Behavior wraps [raw.GKBehavior] with a fluent Go API.
 type Behavior struct {
@@ -38,35 +38,35 @@ func NewBehavior() *Behavior {
 	return &Behavior{inner: raw.GKBehaviorFromID(_id)}
 }
 
-// Adds a new goal or changes the weight of the existing goal in this behavior. If the goal does not exist in this behavior, it is added. @param weight the weight for this goal @param goal the goal who's weight to change
+// Sets the weight for the specified goal’s influence on agents, adding that goal to the behavior if not already present.
 //
 // SetWeightForGoal calls the underlying SetWeightForGoal.
 func (x *Behavior) SetWeightForGoal(weight float32, goal *raw.GKGoal) {
 	x.inner.SetWeightForGoal(weight, goal)
 }
 
-// Gets the current weight for a given goal. @return the weight of the goal, or 0 if there is no such goal on this behavior
+// Returns the weight for the specified goal’s influence on agents.
 //
 // WeightForGoal calls the underlying WeightForGoal.
 func (x *Behavior) WeightForGoal(goal *raw.GKGoal) float32 {
 	return x.inner.WeightForGoal(goal)
 }
 
-// Remove the indicated goal from this behavior. @param goal the goal to be removed
+// Removes the specified goal from the behavior.
 //
 // RemoveGoal calls the underlying RemoveGoal.
 func (x *Behavior) RemoveGoal(goal *raw.GKGoal) {
 	x.inner.RemoveGoal(goal)
 }
 
-// Removes all the goals on the behavior.
+// Removes all goals from the behavior.
 //
 // RemoveAllGoals calls the underlying RemoveAllGoals.
 func (x *Behavior) RemoveAllGoals() {
 	x.inner.RemoveAllGoals()
 }
 
-// Supports getting goals via a [int] subscript.
+// Returns the goal at the specified index in the behavior’s list of goals.
 //
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *Behavior) ObjectAtIndexedSubscript(idx uint) *Goal {
@@ -77,14 +77,14 @@ func (x *Behavior) ObjectAtIndexedSubscript(idx uint) *Goal {
 	return &Goal{inner: _r}
 }
 
-// Supports setting a weight via a [goal] subscript.
+// Sets the weight for the goal specified by subscript syntax.
 //
 // SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
 func (x *Behavior) SetObjectForKeyedSubscript(weight *foundation.NSNumber, goal *raw.GKGoal) {
 	x.inner.SetObjectForKeyedSubscript(weight, goal)
 }
 
-// Supports getting a weight via a [goal] subscript.
+// Returns the weight associated with the goal specified by subscript syntax.
 //
 // ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
 func (x *Behavior) ObjectForKeyedSubscript(goal *raw.GKGoal) *foundation.NSNumber {

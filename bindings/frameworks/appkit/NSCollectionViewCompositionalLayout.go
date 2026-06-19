@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layout object that lets you combine items in highly adaptive and flexible visual arrangements.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionviewcompositionallayout
 type NSCollectionViewCompositionalLayout struct {
 	NSCollectionViewLayout
@@ -34,6 +36,7 @@ func NSCollectionViewCompositionalLayoutFromID(id objc.ID) *NSCollectionViewComp
 	return o
 }
 
+// Creates a compositional layout object with a single section.
 func (o *NSCollectionViewCompositionalLayout) InitWithSection(section *NSCollectionLayoutSection) *NSCollectionViewCompositionalLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSection, section.Ptr())
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func (o *NSCollectionViewCompositionalLayout) InitWithSection(section *NSCollect
 	return NSCollectionViewCompositionalLayoutFromID(_ret)
 }
 
+// Creates a compositional layout object with a single section and an additional configuration.
 func (o *NSCollectionViewCompositionalLayout) InitWithSectionConfiguration(section *NSCollectionLayoutSection, configuration *NSCollectionViewCompositionalLayoutConfiguration) *NSCollectionViewCompositionalLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSectionConfiguration, section.Ptr(), configuration.Ptr())
 	if _ret != 0 {
@@ -50,6 +54,7 @@ func (o *NSCollectionViewCompositionalLayout) InitWithSectionConfiguration(secti
 	return NSCollectionViewCompositionalLayoutFromID(_ret)
 }
 
+// Creates a compositional layout object with a section provider to supply the layout’s sections.
 func (o *NSCollectionViewCompositionalLayout) InitWithSectionProvider(sectionProvider objc.Block) *NSCollectionViewCompositionalLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSectionProvider, sectionProvider)
 	if _ret != 0 {
@@ -58,6 +63,7 @@ func (o *NSCollectionViewCompositionalLayout) InitWithSectionProvider(sectionPro
 	return NSCollectionViewCompositionalLayoutFromID(_ret)
 }
 
+// Creates a compositional layout object with a section provider and an additional configuration.
 func (o *NSCollectionViewCompositionalLayout) InitWithSectionProviderConfiguration(sectionProvider objc.Block, configuration *NSCollectionViewCompositionalLayoutConfiguration) *NSCollectionViewCompositionalLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewCompositionalLayoutSelInitWithSectionProviderConfiguration, sectionProvider, configuration.Ptr())
 	if _ret != 0 {

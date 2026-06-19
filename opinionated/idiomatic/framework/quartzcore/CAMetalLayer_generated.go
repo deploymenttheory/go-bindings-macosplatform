@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A Core Animation layer that Metal can render into, typically displayed onscreen.
+//
 // MetalLayer wraps [raw.CAMetalLayer] with a fluent Go API.
 type MetalLayer struct {
 	inner *raw.CAMetalLayer
@@ -39,126 +41,168 @@ func NewMetalLayer() *MetalLayer {
 	return &MetalLayer{inner: raw.CAMetalLayerFromID(_id)}
 }
 
+// The Metal device responsible for the layer’s drawable resources.
+//
 // WithDevice sets the device property and returns the receiver for chaining.
 func (x *MetalLayer) WithDevice(device metal.MTLDevice) *MetalLayer {
 	x.inner.SetDevice(device)
 	return x
 }
 
+// The pixel format of the layer’s textures.
+//
 // WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
 func (x *MetalLayer) WithPixelFormat(pixelFormat metal.MTLPixelFormat) *MetalLayer {
 	x.inner.SetPixelFormat(pixelFormat)
 	return x
 }
 
+// A Boolean value that determines whether the layer’s textures are used only for rendering.
+//
 // WithFramebufferOnly sets the framebufferOnly property and returns the receiver for chaining.
 func (x *MetalLayer) WithFramebufferOnly(framebufferOnly bool) *MetalLayer {
 	x.inner.SetFramebufferOnly(framebufferOnly)
 	return x
 }
 
+// The size, in pixels, of textures for rendering layer content.
+//
 // WithDrawableSize sets the drawableSize property and returns the receiver for chaining.
 func (x *MetalLayer) WithDrawableSize(drawableSize corefoundation.CGSize) *MetalLayer {
 	x.inner.SetDrawableSize(drawableSize)
 	return x
 }
 
+// The number of Metal drawables in the resource pool managed by Core Animation.
+//
 // WithMaximumDrawableCount sets the maximumDrawableCount property and returns the receiver for chaining.
 func (x *MetalLayer) WithMaximumDrawableCount(maximumDrawableCount uint) *MetalLayer {
 	x.inner.SetMaximumDrawableCount(maximumDrawableCount)
 	return x
 }
 
+// A Boolean value that determines whether the layer presents its content using a Core Animation transaction.
+//
 // WithPresentsWithTransaction sets the presentsWithTransaction property and returns the receiver for chaining.
 func (x *MetalLayer) WithPresentsWithTransaction(presentsWithTransaction bool) *MetalLayer {
 	x.inner.SetPresentsWithTransaction(presentsWithTransaction)
 	return x
 }
 
+// Metadata describing the tone mapping to apply to the extended dynamic range (EDR) values in the layer.
+//
 // WithEDRMetadata sets the eDRMetadata property and returns the receiver for chaining.
 func (x *MetalLayer) WithEDRMetadata(eDRMetadata *EDRMetadata) *MetalLayer {
 	x.inner.SetEDRMetadata(eDRMetadata.Unwrap())
 	return x
 }
 
+// A Boolean value that determines whether the layer synchronizes its updates to the display’s refresh rate.
+//
 // WithDisplaySyncEnabled sets the displaySyncEnabled property and returns the receiver for chaining.
 func (x *MetalLayer) WithDisplaySyncEnabled(displaySyncEnabled bool) *MetalLayer {
 	x.inner.SetDisplaySyncEnabled(displaySyncEnabled)
 	return x
 }
 
+// A Boolean value that determines whether requests for a new buffer expire if the system can’t satisfy them.
+//
 // WithAllowsNextDrawableTimeout sets the allowsNextDrawableTimeout property and returns the receiver for chaining.
 func (x *MetalLayer) WithAllowsNextDrawableTimeout(allowsNextDrawableTimeout bool) *MetalLayer {
 	x.inner.SetAllowsNextDrawableTimeout(allowsNextDrawableTimeout)
 	return x
 }
 
+// The properties of the Metal performance heads-up display.
+//
 // WithDeveloperHUDProperties sets the developerHUDProperties property and returns the receiver for chaining.
 func (x *MetalLayer) WithDeveloperHUDProperties(developerHUDProperties *foundation.NSDictionary[objc.ID, objc.ID]) *MetalLayer {
 	x.inner.SetDeveloperHUDProperties(developerHUDProperties)
 	return x
 }
 
+// The layer’s bounds rectangle. Animatable.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *MetalLayer) WithBounds(bounds corefoundation.CGRect) *MetalLayer {
 	x.inner.CALayer.SetBounds(bounds)
 	return x
 }
 
+// The layer’s position in its superlayer’s coordinate space. Animatable.
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *MetalLayer) WithPosition(position corefoundation.CGPoint) *MetalLayer {
 	x.inner.CALayer.SetPosition(position)
 	return x
 }
 
+// The layer’s position on the z axis. Animatable.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *MetalLayer) WithZPosition(zPosition float64) *MetalLayer {
 	x.inner.CALayer.SetZPosition(zPosition)
 	return x
 }
 
+// Defines the anchor point of the layer’s bounds rectangle. Animatable.
+//
 // WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
 func (x *MetalLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *MetalLayer {
 	x.inner.CALayer.SetAnchorPoint(anchorPoint)
 	return x
 }
 
+// The anchor point for the layer’s position along the z axis. Animatable.
+//
 // WithAnchorPointZ sets the anchorPointZ property and returns the receiver for chaining.
 func (x *MetalLayer) WithAnchorPointZ(anchorPointZ float64) *MetalLayer {
 	x.inner.CALayer.SetAnchorPointZ(anchorPointZ)
 	return x
 }
 
+// The transform applied to the layer’s contents. Animatable.
+//
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *MetalLayer) WithTransform(transform raw.CATransform3D) *MetalLayer {
 	x.inner.CALayer.SetTransform(transform)
 	return x
 }
 
+// The layer’s frame rectangle.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *MetalLayer) WithFrame(frame corefoundation.CGRect) *MetalLayer {
 	x.inner.CALayer.SetFrame(frame)
 	return x
 }
 
+// A Boolean indicating whether the layer is displayed. Animatable.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *MetalLayer) WithHidden(hidden bool) *MetalLayer {
 	x.inner.CALayer.SetHidden(hidden)
 	return x
 }
 
+// A Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
+//
 // WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
 func (x *MetalLayer) WithDoubleSided(doubleSided bool) *MetalLayer {
 	x.inner.CALayer.SetDoubleSided(doubleSided)
 	return x
 }
 
+// A Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
+//
 // WithGeometryFlipped sets the geometryFlipped property and returns the receiver for chaining.
 func (x *MetalLayer) WithGeometryFlipped(geometryFlipped bool) *MetalLayer {
 	x.inner.CALayer.SetGeometryFlipped(geometryFlipped)
 	return x
 }
 
+// An array containing the layer’s sublayers.
+//
 // WithSublayers sets the collection, converting the Go slice to an NSArray.
 func (x *MetalLayer) WithSublayers(items ...LayerProvider) *MetalLayer {
 	if len(items) == 0 {
@@ -180,54 +224,72 @@ func (x *MetalLayer) WithSublayers(items ...LayerProvider) *MetalLayer {
 	return x
 }
 
+// Specifies the transform to apply to sublayers when rendering. Animatable.
+//
 // WithSublayerTransform sets the sublayerTransform property and returns the receiver for chaining.
 func (x *MetalLayer) WithSublayerTransform(sublayerTransform raw.CATransform3D) *MetalLayer {
 	x.inner.CALayer.SetSublayerTransform(sublayerTransform)
 	return x
 }
 
+// An optional layer whose alpha channel is used to mask the layer’s content.
+//
 // WithMask sets the mask property and returns the receiver for chaining.
 func (x *MetalLayer) WithMask(mask LayerProvider) *MetalLayer {
 	x.inner.CALayer.SetMask(mask.asLayer())
 	return x
 }
 
+// A Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
+//
 // WithMasksToBounds sets the masksToBounds property and returns the receiver for chaining.
 func (x *MetalLayer) WithMasksToBounds(masksToBounds bool) *MetalLayer {
 	x.inner.CALayer.SetMasksToBounds(masksToBounds)
 	return x
 }
 
+// An object that provides the contents of the layer. Animatable.
+//
 // WithContents sets the contents property and returns the receiver for chaining.
 func (x *MetalLayer) WithContents(contents objc.ID) *MetalLayer {
 	x.inner.CALayer.SetContents(contents)
 	return x
 }
 
+// The rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
+//
 // WithContentsRect sets the contentsRect property and returns the receiver for chaining.
 func (x *MetalLayer) WithContentsRect(contentsRect corefoundation.CGRect) *MetalLayer {
 	x.inner.CALayer.SetContentsRect(contentsRect)
 	return x
 }
 
+// A constant that specifies how the layer’s contents are positioned or scaled within its bounds.
+//
 // WithContentsGravity sets the contentsGravity property and returns the receiver for chaining.
 func (x *MetalLayer) WithContentsGravity(contentsGravity *foundation.NSString) *MetalLayer {
 	x.inner.CALayer.SetContentsGravity(contentsGravity)
 	return x
 }
 
+// The scale factor applied to the layer.
+//
 // WithContentsScale sets the contentsScale property and returns the receiver for chaining.
 func (x *MetalLayer) WithContentsScale(contentsScale float64) *MetalLayer {
 	x.inner.CALayer.SetContentsScale(contentsScale)
 	return x
 }
 
+// The rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
+//
 // WithContentsCenter sets the contentsCenter property and returns the receiver for chaining.
 func (x *MetalLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *MetalLayer {
 	x.inner.CALayer.SetContentsCenter(contentsCenter)
 	return x
 }
 
+// A hint for the desired storage format of the layer contents.
+//
 // WithContentsFormat sets the contentsFormat property and returns the receiver for chaining.
 func (x *MetalLayer) WithContentsFormat(contentsFormat *foundation.NSString) *MetalLayer {
 	x.inner.CALayer.SetContentsFormat(contentsFormat)
@@ -258,54 +320,72 @@ func (x *MetalLayer) WithContentsHeadroom(contentsHeadroom float64) *MetalLayer 
 	return x
 }
 
+// The filter used when reducing the size of the content.
+//
 // WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
 func (x *MetalLayer) WithMinificationFilter(minificationFilter *foundation.NSString) *MetalLayer {
 	x.inner.CALayer.SetMinificationFilter(minificationFilter)
 	return x
 }
 
+// The filter used when increasing the size of the content.
+//
 // WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
 func (x *MetalLayer) WithMagnificationFilter(magnificationFilter *foundation.NSString) *MetalLayer {
 	x.inner.CALayer.SetMagnificationFilter(magnificationFilter)
 	return x
 }
 
+// The bias factor used by the minification filter to determine the levels of detail.
+//
 // WithMinificationFilterBias sets the minificationFilterBias property and returns the receiver for chaining.
 func (x *MetalLayer) WithMinificationFilterBias(minificationFilterBias float32) *MetalLayer {
 	x.inner.CALayer.SetMinificationFilterBias(minificationFilterBias)
 	return x
 }
 
+// A Boolean value indicating whether the layer contains completely opaque content.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *MetalLayer) WithOpaque(opaque bool) *MetalLayer {
 	x.inner.CALayer.SetOpaque(opaque)
 	return x
 }
 
+// A Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
+//
 // WithNeedsDisplayOnBoundsChange sets the needsDisplayOnBoundsChange property and returns the receiver for chaining.
 func (x *MetalLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *MetalLayer {
 	x.inner.CALayer.SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange)
 	return x
 }
 
+// A Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
+//
 // WithDrawsAsynchronously sets the drawsAsynchronously property and returns the receiver for chaining.
 func (x *MetalLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *MetalLayer {
 	x.inner.CALayer.SetDrawsAsynchronously(drawsAsynchronously)
 	return x
 }
 
+// A bitmask defining how the edges of the receiver are rasterized.
+//
 // WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
 func (x *MetalLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *MetalLayer {
 	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 	return x
 }
 
+// A Boolean indicating whether the layer is allowed to perform edge antialiasing.
+//
 // WithAllowsEdgeAntialiasing sets the allowsEdgeAntialiasing property and returns the receiver for chaining.
 func (x *MetalLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *MetalLayer {
 	x.inner.CALayer.SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing)
 	return x
 }
 
+// The radius to use when drawing rounded corners for the layer’s background. Animatable.
+//
 // WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
 func (x *MetalLayer) WithCornerRadius(cornerRadius float64) *MetalLayer {
 	x.inner.CALayer.SetCornerRadius(cornerRadius)
@@ -324,96 +404,128 @@ func (x *MetalLayer) WithCornerCurve(cornerCurve *foundation.NSString) *MetalLay
 	return x
 }
 
+// The width of the layer’s border. Animatable.
+//
 // WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
 func (x *MetalLayer) WithBorderWidth(borderWidth float64) *MetalLayer {
 	x.inner.CALayer.SetBorderWidth(borderWidth)
 	return x
 }
 
+// The opacity of the receiver. Animatable.
+//
 // WithOpacity sets the opacity property and returns the receiver for chaining.
 func (x *MetalLayer) WithOpacity(opacity float32) *MetalLayer {
 	x.inner.CALayer.SetOpacity(opacity)
 	return x
 }
 
+// A Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
+//
 // WithAllowsGroupOpacity sets the allowsGroupOpacity property and returns the receiver for chaining.
 func (x *MetalLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *MetalLayer {
 	x.inner.CALayer.SetAllowsGroupOpacity(allowsGroupOpacity)
 	return x
 }
 
+// A CoreImage filter used to composite the layer and the content behind it. Animatable.
+//
 // WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
 func (x *MetalLayer) WithCompositingFilter(compositingFilter objc.ID) *MetalLayer {
 	x.inner.CALayer.SetCompositingFilter(compositingFilter)
 	return x
 }
 
+// A Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
+//
 // WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
 func (x *MetalLayer) WithShouldRasterize(shouldRasterize bool) *MetalLayer {
 	x.inner.CALayer.SetShouldRasterize(shouldRasterize)
 	return x
 }
 
+// The scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
+//
 // WithRasterizationScale sets the rasterizationScale property and returns the receiver for chaining.
 func (x *MetalLayer) WithRasterizationScale(rasterizationScale float64) *MetalLayer {
 	x.inner.CALayer.SetRasterizationScale(rasterizationScale)
 	return x
 }
 
+// The opacity of the layer’s shadow. Animatable.
+//
 // WithShadowOpacity sets the shadowOpacity property and returns the receiver for chaining.
 func (x *MetalLayer) WithShadowOpacity(shadowOpacity float32) *MetalLayer {
 	x.inner.CALayer.SetShadowOpacity(shadowOpacity)
 	return x
 }
 
+// The offset (in points) of the layer’s shadow. Animatable.
+//
 // WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
 func (x *MetalLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *MetalLayer {
 	x.inner.CALayer.SetShadowOffset(shadowOffset)
 	return x
 }
 
+// The blur radius (in points) used to render the layer’s shadow. Animatable.
+//
 // WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
 func (x *MetalLayer) WithShadowRadius(shadowRadius float64) *MetalLayer {
 	x.inner.CALayer.SetShadowRadius(shadowRadius)
 	return x
 }
 
+// A bitmask defining how the layer is resized when the bounds of its superlayer changes.
+//
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
 func (x *MetalLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *MetalLayer {
 	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 	return x
 }
 
+// The object responsible for laying out the layer’s sublayers.
+//
 // WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
 func (x *MetalLayer) WithLayoutManager(layoutManager raw.CALayoutManager) *MetalLayer {
 	x.inner.CALayer.SetLayoutManager(layoutManager)
 	return x
 }
 
+// A dictionary containing layer actions.
+//
 // WithActions sets the actions property and returns the receiver for chaining.
 func (x *MetalLayer) WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *MetalLayer {
 	x.inner.CALayer.SetActions(actions)
 	return x
 }
 
+// The name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *MetalLayer) WithName(name string) *MetalLayer {
 	x.inner.CALayer.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// The layer’s delegate object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *MetalLayer) WithDelegate(delegate raw.CALayerDelegate) *MetalLayer {
 	x.inner.CALayer.SetDelegate(delegate)
 	return x
 }
 
+// An optional dictionary used to store property values that aren’t explicitly defined by the layer.
+//
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *MetalLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *MetalLayer {
 	x.inner.CALayer.SetStyle(style)
 	return x
 }
 
+// The constraints used to position current layer’s sublayers.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *MetalLayer) WithConstraints(items ...*raw.CAConstraint) *MetalLayer {
 	if len(items) == 0 {
@@ -435,6 +547,8 @@ func (x *MetalLayer) WithConstraints(items ...*raw.CAConstraint) *MetalLayer {
 	return x
 }
 
+// Waits until a Metal drawable is available, and then returns it.
+//
 // NextDrawable calls the underlying NextDrawable.
 func (x *MetalLayer) NextDrawable() raw.CAMetalDrawable {
 	return x.inner.NextDrawable()

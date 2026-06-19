@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines a summary item for a payment that occurs at a later date, such as a pre-order.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkdeferredpaymentsummaryitem
 type PKDeferredPaymentSummaryItem struct {
 	PKPaymentSummaryItem

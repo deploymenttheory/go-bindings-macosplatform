@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to create a new Photos asset from underlying data resources, for use in a photo library change block.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phassetcreationrequest
 type PHAssetCreationRequest struct {
 	PHAssetChangeRequest
@@ -33,6 +35,7 @@ func PHAssetCreationRequestFromID(id objc.ID) *PHAssetCreationRequest {
 	return o
 }
 
+// Creates a request for adding a new asset to the Photos library using asset resources.
 func PHAssetCreationRequestCreationRequestForAsset() *PHAssetCreationRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCreationRequest), _pHAssetCreationRequestSelCreationRequestForAsset)
 	if _ret != 0 {
@@ -41,15 +44,18 @@ func PHAssetCreationRequestCreationRequestForAsset() *PHAssetCreationRequest {
 	return PHAssetCreationRequestFromID(_ret)
 }
 
+// Returns a Boolean value indicating whether Photos supports creating an asset with the specified combination of resource types.
 func PHAssetCreationRequestSupportsAssetResourceTypes(types *foundation.NSArray[*foundation.NSNumber]) bool {
-	_ret := objc.Send[bool](objc.ID(_clsPHAssetCreationRequest), _pHAssetCreationRequestSelSupportsAssetResourceTypes, types)
+	_ret := objc.Send[bool](objc.ID(_clsPHAssetCreationRequest), _pHAssetCreationRequestSelSupportsAssetResourceTypes, types.Ptr())
 	return _ret
 }
 
+// Adds a data resource to the asset being created, using the file at the specified URL.
 func (o *PHAssetCreationRequest) AddResourceWithTypeFileURLOptions(type_ PHAssetResourceType, fileURL *foundation.NSURL, options *PHAssetResourceCreationOptions) {
 	o.Ptr().Send(_pHAssetCreationRequestSelAddResourceWithTypeFileURLOptions, type_, fileURL.Ptr(), options.Ptr())
 }
 
+// Adds a data resource to the asset being created, using the specified data.
 func (o *PHAssetCreationRequest) AddResourceWithTypeDataOptions(type_ PHAssetResourceType, data *foundation.NSData, options *PHAssetResourceCreationOptions) {
 	o.Ptr().Send(_pHAssetCreationRequestSelAddResourceWithTypeDataOptions, type_, data.Ptr(), options.Ptr())
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class representing a named value type in a Program.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmodelstructureprogramnamedvaluetype
 type MLModelStructureProgramNamedValueType struct {
 	foundation.NSObject

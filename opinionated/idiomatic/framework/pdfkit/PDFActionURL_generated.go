@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// PDFActionURL, a subclass of PDFAction, defines methods for getting and setting the URL associated with a URL action.
+//
 // ActionURL wraps [raw.PDFActionURL] with a fluent Go API.
 type ActionURL struct {
 	inner *raw.PDFActionURL
@@ -30,6 +32,8 @@ func ActionURLFromID(id objc.ID) *ActionURL {
 	return &ActionURL{inner: raw.PDFActionURLFromID(id)}
 }
 
+// Initializes a URL action with the specified URL.
+//
 // NewActionURLWithURL creates a new [ActionURL].
 func NewActionURLWithURL(url string) *ActionURL {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFActionURL")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewActionURLWithURL(url string) *ActionURL {
 	return &ActionURL{inner: raw.PDFActionURLFromID(_id)}
 }
 
+// Returns the URL associated with the URL action.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *ActionURL) WithURL(uRL string) *ActionURL {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))

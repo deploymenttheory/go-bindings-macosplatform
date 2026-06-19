@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// WebPreferences encapsulates the preferences you can change per WebView object. These preferences include font, text encoding, and image settings. Normally a WebView object uses the standard preferences returned by the standardPreferences class method. However, you can modify the preferences for individual WebView instances too. Use the preferencesIdentifier WebView method to change a WebView object’s preferences, or to share preferences between WebView objects. Use the autosaves method to specify if the preferences object should be automatically saved to the user defaults database.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/webpreferences
 type WebPreferences struct {
 	foundation.NSObject
@@ -88,7 +90,7 @@ func WebPreferencesFromID(id objc.ID) *WebPreferences {
 	return o
 }
 
-// @method standardPreferences
+// Returns the standard set of preferences that may be used by all WebView objects.
 func WebPreferencesStandardPreferences() *WebPreferences {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWebPreferences), _webPreferencesSelStandardPreferences)
 	if _ret != 0 {
@@ -97,7 +99,7 @@ func WebPreferencesStandardPreferences() *WebPreferences {
 	return WebPreferencesFromID(_ret)
 }
 
-// @method initWithIdentifier: @param anIdentifier A string used to identify the WebPreferences. @discussion WebViews can share instances of WebPreferences by using an instance of WebPreferences with the same identifier.  Typically, instance are not created directly.  Instead you set the preferences identifier on a WebView.  The identifier is used as a prefix that is added to the user defaults keys for the WebPreferences. @result Returns a new instance of WebPreferences or a previously allocated instance with the same identifier.
+// Returns an initialized WebPreferences object, creating one if it does not exist.
 func (o *WebPreferences) InitWithIdentifier(anIdentifier *foundation.NSString) *WebPreferences {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webPreferencesSelInitWithIdentifier, anIdentifier.Ptr())
 	if _ret != 0 {

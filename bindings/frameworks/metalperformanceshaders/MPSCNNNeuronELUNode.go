@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract   A node representing a MPSCNNNeuronELU kernel @discussion For each pixel, applies the following function: @code f(x) = a * exp(x) - 1, x <  0 x             , x >= 0 @endcode
+// A representation of a parametric ELU neuron filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronelunode
 type MPSCNNNeuronELUNode struct {

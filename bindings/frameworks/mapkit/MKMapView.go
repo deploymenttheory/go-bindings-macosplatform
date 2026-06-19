@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An embeddable map interface, similar to the one that the Maps app provides.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapview
 type MKMapView struct {
 	appkit.NSView
@@ -131,89 +133,109 @@ func MKMapViewFromID(id objc.ID) *MKMapView {
 	return o
 }
 
+// Changes the currently visible region, and optionally animates the change.
 func (o *MKMapView) SetRegionAnimated(region MKCoordinateRegion, animated bool) {
 	o.Ptr().Send(_mKMapViewSelSetRegionAnimated, region, animated)
 }
 
+// Changes the center coordinate of the map, and optionally animates the change.
 func (o *MKMapView) SetCenterCoordinateAnimated(coordinate unsafe.Pointer, animated bool) {
 	o.Ptr().Send(_mKMapViewSelSetCenterCoordinateAnimated, coordinate, animated)
 }
 
+// Adjusts the aspect ratio of the specified region to ensure that it fits in the map view’s frame.
 func (o *MKMapView) RegionThatFits(region MKCoordinateRegion) MKCoordinateRegion {
 	_ret := objc.Send[MKCoordinateRegion](o.Ptr(), _mKMapViewSelRegionThatFits, region)
 	return _ret
 }
 
+// Changes the currently visible portion of the map, and optionally animates the change.
 func (o *MKMapView) SetVisibleMapRectAnimated(mapRect MKMapRect, animate bool) {
 	o.Ptr().Send(_mKMapViewSelSetVisibleMapRectAnimated, mapRect, animate)
 }
 
+// Returns a centered map rectangle with the same aspect ratio as the map view’s frame.
 func (o *MKMapView) MapRectThatFits(mapRect MKMapRect) MKMapRect {
 	_ret := objc.Send[MKMapRect](o.Ptr(), _mKMapViewSelMapRectThatFits, mapRect)
 	return _ret
 }
 
+// Changes the currently visible portion of the map, allowing you to specify additional space around the edges.
 func (o *MKMapView) SetVisibleMapRectEdgePaddingAnimated(mapRect MKMapRect, insets foundation.NSEdgeInsets, animate bool) {
 	o.Ptr().Send(_mKMapViewSelSetVisibleMapRectEdgePaddingAnimated, mapRect, insets, animate)
 }
 
+// Returns a centered, inset map rectangle with the same aspect ratio as the map view’s frame.
 func (o *MKMapView) MapRectThatFitsEdgePadding(mapRect MKMapRect, insets foundation.NSEdgeInsets) MKMapRect {
 	_ret := objc.Send[MKMapRect](o.Ptr(), _mKMapViewSelMapRectThatFitsEdgePadding, mapRect, insets)
 	return _ret
 }
 
+// Changes the camera to use for determining the map’s viewing parameters, and optionally animates the change.
 func (o *MKMapView) SetCameraAnimated(camera *MKMapCamera, animated bool) {
 	o.Ptr().Send(_mKMapViewSelSetCameraAnimated, camera.Ptr(), animated)
 }
 
+// Sets the camera zoom range for the map view, specifying whether to use animation.
 func (o *MKMapView) SetCameraZoomRangeAnimated(cameraZoomRange *MKMapCameraZoomRange, animated bool) {
 	o.Ptr().Send(_mKMapViewSelSetCameraZoomRangeAnimated, cameraZoomRange.Ptr(), animated)
 }
 
+// Sets the camera boundary for the map view, specifying whether to use animation.
 func (o *MKMapView) SetCameraBoundaryAnimated(cameraBoundary *MKMapCameraBoundary, animated bool) {
 	o.Ptr().Send(_mKMapViewSelSetCameraBoundaryAnimated, cameraBoundary.Ptr(), animated)
 }
 
+// Converts a map coordinate to a point in the specified view.
 func (o *MKMapView) ConvertCoordinateToPointToView(coordinate unsafe.Pointer, view *appkit.NSView) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _mKMapViewSelConvertCoordinateToPointToView, coordinate, view.Ptr())
 	return _ret
 }
 
+// Converts a point in the specified view’s coordinate system to a map coordinate.
 func (o *MKMapView) ConvertPointToCoordinateFromView(point corefoundation.CGPoint, view *appkit.NSView) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mKMapViewSelConvertPointToCoordinateFromView, point, view.Ptr())
 	return _ret
 }
 
+// Converts a map region to a rectangle in the specified view.
 func (o *MKMapView) ConvertRegionToRectToView(region MKCoordinateRegion, view *appkit.NSView) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _mKMapViewSelConvertRegionToRectToView, region, view.Ptr())
 	return _ret
 }
 
+// Converts a rectangle in the specified view’s coordinate system to a map region.
 func (o *MKMapView) ConvertRectToRegionFromView(rect corefoundation.CGRect, view *appkit.NSView) MKCoordinateRegion {
 	_ret := objc.Send[MKCoordinateRegion](o.Ptr(), _mKMapViewSelConvertRectToRegionFromView, rect, view.Ptr())
 	return _ret
 }
 
+// Sets the mode to use for tracking the user’s location, with optional animation.
 func (o *MKMapView) SetUserTrackingModeAnimated(mode MKUserTrackingMode, animated bool) {
 	o.Ptr().Send(_mKMapViewSelSetUserTrackingModeAnimated, mode, animated)
 }
 
+// Adds the specified annotation to the map view.
 func (o *MKMapView) AddAnnotation(annotation MKAnnotation) {
 	o.Ptr().Send(_mKMapViewSelAddAnnotation, annotation)
 }
 
+// Adds an array of annotation objects to the map view.
 func (o *MKMapView) AddAnnotations(annotations *foundation.NSArray[MKAnnotation]) {
 	o.Ptr().Send(_mKMapViewSelAddAnnotations, annotations.Ptr())
 }
 
+// Removes the specified annotation object from the map view.
 func (o *MKMapView) RemoveAnnotation(annotation MKAnnotation) {
 	o.Ptr().Send(_mKMapViewSelRemoveAnnotation, annotation)
 }
 
+// Removes an array of annotation objects from the map view.
 func (o *MKMapView) RemoveAnnotations(annotations *foundation.NSArray[MKAnnotation]) {
 	o.Ptr().Send(_mKMapViewSelRemoveAnnotations, annotations.Ptr())
 }
 
+// Returns the annotation objects within the specified map rectangle.
 func (o *MKMapView) AnnotationsInMapRect(mapRect MKMapRect) *foundation.NSSet[MKAnnotation] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelAnnotationsInMapRect, mapRect)
 	if _ret != 0 {
@@ -222,6 +244,7 @@ func (o *MKMapView) AnnotationsInMapRect(mapRect MKMapRect) *foundation.NSSet[MK
 	return foundation.NSSetFromID[MKAnnotation](_ret)
 }
 
+// Returns the annotation view associated with the specified annotation object, if any.
 func (o *MKMapView) ViewForAnnotation(annotation MKAnnotation) *MKAnnotationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelViewForAnnotation, annotation)
 	if _ret != 0 {
@@ -230,6 +253,7 @@ func (o *MKMapView) ViewForAnnotation(annotation MKAnnotation) *MKAnnotationView
 	return MKAnnotationViewFromID(_ret)
 }
 
+// Returns a reusable annotation view using its identifier.
 func (o *MKMapView) DequeueReusableAnnotationViewWithIdentifier(identifier *foundation.NSString) *MKAnnotationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelDequeueReusableAnnotationViewWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -238,6 +262,7 @@ func (o *MKMapView) DequeueReusableAnnotationViewWithIdentifier(identifier *foun
 	return MKAnnotationViewFromID(_ret)
 }
 
+// Returns a reusable annotation view using the specified identifier with a specified existing annotation view, if possible.
 func (o *MKMapView) DequeueReusableAnnotationViewWithIdentifierForAnnotation(identifier *foundation.NSString, annotation MKAnnotation) *MKAnnotationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelDequeueReusableAnnotationViewWithIdentifierForAnnotation, identifier.Ptr(), annotation)
 	if _ret != 0 {
@@ -246,18 +271,22 @@ func (o *MKMapView) DequeueReusableAnnotationViewWithIdentifierForAnnotation(ide
 	return MKAnnotationViewFromID(_ret)
 }
 
+// Registers an annotation view class that the map can create automatically.
 func (o *MKMapView) RegisterClassForAnnotationViewWithReuseIdentifier(viewClass objc.Class, identifier *foundation.NSString) {
 	o.Ptr().Send(_mKMapViewSelRegisterClassForAnnotationViewWithReuseIdentifier, viewClass, identifier.Ptr())
 }
 
+// Selects the specified annotation and displays a callout view for it.
 func (o *MKMapView) SelectAnnotationAnimated(annotation MKAnnotation, animated bool) {
 	o.Ptr().Send(_mKMapViewSelSelectAnnotationAnimated, annotation, animated)
 }
 
+// Deselects the specified annotation and hides its callout view.
 func (o *MKMapView) DeselectAnnotationAnimated(annotation MKAnnotation, animated bool) {
 	o.Ptr().Send(_mKMapViewSelDeselectAnnotationAnimated, annotation, animated)
 }
 
+// Sets the visible region so that the map displays the specified annotations.
 func (o *MKMapView) ShowAnnotationsAnimated(annotations *foundation.NSArray[MKAnnotation], animated bool) {
 	o.Ptr().Send(_mKMapViewSelShowAnnotationsAnimated, annotations.Ptr(), animated)
 }
@@ -551,38 +580,47 @@ func (o *MKMapView) AnnotationVisibleRect() corefoundation.CGRect {
 	return _ret
 }
 
+// Adds the overlay object to the map at the specified level.
 func (o *MKMapView) AddOverlayLevel(overlay MKOverlay, level MKOverlayLevel) {
 	o.Ptr().Send(_mKMapViewSelAddOverlayLevel, overlay, level)
 }
 
+// Adds an array of overlay objects to the map at the specified level.
 func (o *MKMapView) AddOverlaysLevel(overlays *foundation.NSArray[MKOverlay], level MKOverlayLevel) {
 	o.Ptr().Send(_mKMapViewSelAddOverlaysLevel, overlays.Ptr(), level)
 }
 
+// Removes a single overlay object from the map.
 func (o *MKMapView) RemoveOverlay(overlay MKOverlay) {
 	o.Ptr().Send(_mKMapViewSelRemoveOverlay, overlay)
 }
 
+// Removes one or more overlay objects from the map.
 func (o *MKMapView) RemoveOverlays(overlays *foundation.NSArray[MKOverlay]) {
 	o.Ptr().Send(_mKMapViewSelRemoveOverlays, overlays.Ptr())
 }
 
+// Inserts an overlay object into the level at the specified index.
 func (o *MKMapView) InsertOverlayAtIndexLevel(overlay MKOverlay, index uint, level MKOverlayLevel) {
 	o.Ptr().Send(_mKMapViewSelInsertOverlayAtIndexLevel, overlay, index, level)
 }
 
+// Inserts one overlay object above another.
 func (o *MKMapView) InsertOverlayAboveOverlay(overlay MKOverlay, sibling MKOverlay) {
 	o.Ptr().Send(_mKMapViewSelInsertOverlayAboveOverlay, overlay, sibling)
 }
 
+// Inserts one overlay object below another.
 func (o *MKMapView) InsertOverlayBelowOverlay(overlay MKOverlay, sibling MKOverlay) {
 	o.Ptr().Send(_mKMapViewSelInsertOverlayBelowOverlay, overlay, sibling)
 }
 
+// Exchanges the positions of two overlay objects.
 func (o *MKMapView) ExchangeOverlayWithOverlay(overlay1 MKOverlay, overlay2 MKOverlay) {
 	o.Ptr().Send(_mKMapViewSelExchangeOverlayWithOverlay, overlay1, overlay2)
 }
 
+// Returns overlay objects in the specified level of the map.
 func (o *MKMapView) OverlaysInLevel(level MKOverlayLevel) *foundation.NSArray[MKOverlay] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelOverlaysInLevel, level)
 	if _ret != 0 {
@@ -591,6 +629,7 @@ func (o *MKMapView) OverlaysInLevel(level MKOverlayLevel) *foundation.NSArray[MK
 	return foundation.NSArrayFromID[MKOverlay](_ret)
 }
 
+// Returns the renderer object for drawing the contents of the specified overlay object.
 func (o *MKMapView) RendererForOverlay(overlay MKOverlay) *MKOverlayRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapViewSelRendererForOverlay, overlay)
 	if _ret != 0 {
@@ -599,18 +638,22 @@ func (o *MKMapView) RendererForOverlay(overlay MKOverlay) *MKOverlayRenderer {
 	return MKOverlayRendererFromID(_ret)
 }
 
+// Adds a single overlay object to the map.
 func (o *MKMapView) AddOverlay(overlay MKOverlay) {
 	o.Ptr().Send(_mKMapViewSelAddOverlay, overlay)
 }
 
+// Adds an array of overlay objects to the map.
 func (o *MKMapView) AddOverlays(overlays *foundation.NSArray[MKOverlay]) {
 	o.Ptr().Send(_mKMapViewSelAddOverlays, overlays.Ptr())
 }
 
+// Inserts an overlay object into the list associated with the map.
 func (o *MKMapView) InsertOverlayAtIndex(overlay MKOverlay, index uint) {
 	o.Ptr().Send(_mKMapViewSelInsertOverlayAtIndex, overlay, index)
 }
 
+// Exchanges the position of two overlay objects at the specified index.
 func (o *MKMapView) ExchangeOverlayAtIndexWithOverlayAtIndex(index1 uint, index2 uint) {
 	o.Ptr().Send(_mKMapViewSelExchangeOverlayAtIndexWithOverlayAtIndex, index1, index2)
 }

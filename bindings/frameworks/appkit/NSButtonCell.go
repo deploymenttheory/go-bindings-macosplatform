@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the user interface of a button or other clickable region of a view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsbuttoncell
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 type NSButtonCell struct {
@@ -105,30 +107,37 @@ func (o *NSButtonCell) InitWithCoder(coder *foundation.NSCoder) *NSButtonCell {
 	return NSButtonCellFromID(_ret)
 }
 
+// Sets how the button highlights while pressed and how it shows its state.
 func (o *NSButtonCell) SetButtonType(type_ NSButtonType) {
 	o.Ptr().Send(_nSButtonCellSelSetButtonType, type_)
 }
 
+// Sets the message delay and interval for the button.
 func (o *NSButtonCell) SetPeriodicDelayInterval(delay float32, interval float32) {
 	o.Ptr().Send(_nSButtonCellSelSetPeriodicDelayInterval, delay, interval)
 }
 
+// Draws the button’s border.
 func (o *NSButtonCell) MouseEntered(event *NSEvent) {
 	o.Ptr().Send(_nSButtonCellSelMouseEntered, event.Ptr())
 }
 
+// Erases the button’s border.
 func (o *NSButtonCell) MouseExited(event *NSEvent) {
 	o.Ptr().Send(_nSButtonCellSelMouseExited, event.Ptr())
 }
 
+// Draws the border of the button using the current bezel style.
 func (o *NSButtonCell) DrawBezelWithFrameInView(frame corefoundation.CGRect, controlView *NSView) {
 	o.Ptr().Send(_nSButtonCellSelDrawBezelWithFrameInView, frame, controlView.Ptr())
 }
 
+// Draws the image associated with the button’s current state.
 func (o *NSButtonCell) DrawImageWithFrameInView(image *NSImage, frame corefoundation.CGRect, controlView *NSView) {
 	o.Ptr().Send(_nSButtonCellSelDrawImageWithFrameInView, image.Ptr(), frame, controlView.Ptr())
 }
 
+// Draws the button’s title centered vertically in a specified rectangle.
 func (o *NSButtonCell) DrawTitleWithFrameInView(title *foundation.NSAttributedString, frame corefoundation.CGRect, controlView *NSView) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSButtonCellSelDrawTitleWithFrameInView, title.Ptr(), frame, controlView.Ptr())
 	return _ret
@@ -291,22 +300,26 @@ func (o *NSButtonCell) SetBackgroundColor(backgroundColor *NSColor) {
 	o.Ptr().Send(_nSButtonCellSelSetBackgroundColor, backgroundColor.Ptr())
 }
 
+// Sets the title the button displays when it’s in its alternate state to the given string with an embedded mnemonic.
 // Deprecated: Mnemonics are not used on macOS. Set the alternateTitle property directly instead.
 func (o *NSButtonCell) SetAlternateTitleWithMnemonic(stringWithAmpersand *foundation.NSString) {
 	o.Ptr().Send(_nSButtonCellSelSetAlternateTitleWithMnemonic, stringWithAmpersand.Ptr())
 }
 
+// Sets the character in the alternate title that should be the “keyboard mnemonic.”
 // Deprecated: Mnemonics are not used on macOS. Calling this method has no effect.
 func (o *NSButtonCell) SetAlternateMnemonicLocation(location uint) {
 	o.Ptr().Send(_nSButtonCellSelSetAlternateMnemonicLocation, location)
 }
 
+// Returns an unsigned integer indicating the character in the alternate title that’s marked as the “keyboard mnemonic.”
 // Deprecated: Mnemonics are not used on macOS. This property always returns NSNotFound.
 func (o *NSButtonCell) AlternateMnemonicLocation() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSButtonCellSelAlternateMnemonicLocation)
 	return _ret
 }
 
+// Returns the character in the alternate title that’s marked as the “keyboard mnemonic.”
 // Deprecated: Mnemonics are not used on macOS. This property always returns an empty string.
 func (o *NSButtonCell) AlternateMnemonic() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAlternateMnemonic)
@@ -316,6 +329,7 @@ func (o *NSButtonCell) AlternateMnemonic() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Sets by name and size of the font used to draw the key equivalent.
 // Deprecated: The keyEquivalentFont property is no longer used. Setting it has no effect.
 func (o *NSButtonCell) SetKeyEquivalentFontSize(fontName *foundation.NSString, fontSize float64) {
 	o.Ptr().Send(_nSButtonCellSelSetKeyEquivalentFontSize, fontName.Ptr(), fontSize)

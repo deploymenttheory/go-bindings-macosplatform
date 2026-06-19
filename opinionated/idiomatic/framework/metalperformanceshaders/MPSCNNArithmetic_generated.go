@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// The base class for arithmetic operators.
+//
 // CNNArithmetic wraps [raw.MPSCNNArithmetic] with a fluent Go API.
 type CNNArithmetic struct {
 	inner *raw.MPSCNNArithmetic
@@ -218,7 +220,7 @@ func (x *CNNArithmetic) WithDestinationImageAllocator(destinationImageAllocator 
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNArithmetic) WithOptions(options mpscore.MPSKernelOptions) *CNNArithmetic {
@@ -226,7 +228,7 @@ func (x *CNNArithmetic) WithOptions(options mpscore.MPSKernelOptions) *CNNArithm
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNArithmetic) WithLabel(label string) *CNNArithmetic {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A definition of a range of floating-point values.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skrange
 type SKRange struct {
 	foundation.NSObject
@@ -40,6 +42,7 @@ func SKRangeFromID(id objc.ID) *SKRange {
 	return o
 }
 
+// Initializes a new range object.
 func (o *SKRange) InitWithLowerLimitUpperLimit(lower float64, upper float64) *SKRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRangeSelInitWithLowerLimitUpperLimit, lower, upper)
 	if _ret != 0 {
@@ -48,6 +51,7 @@ func (o *SKRange) InitWithLowerLimitUpperLimit(lower float64, upper float64) *SK
 	return SKRangeFromID(_ret)
 }
 
+// Creates and initializes a new range object.
 func SKRangeRangeWithLowerLimitUpperLimit(lower float64, upper float64) *SKRange {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRange), _sKRangeSelRangeWithLowerLimitUpperLimit, lower, upper)
 	if _ret != 0 {
@@ -56,6 +60,7 @@ func SKRangeRangeWithLowerLimitUpperLimit(lower float64, upper float64) *SKRange
 	return SKRangeFromID(_ret)
 }
 
+// Creates and initializes a new range object that specifies only a minimum value.
 func SKRangeRangeWithLowerLimit(lower float64) *SKRange {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRange), _sKRangeSelRangeWithLowerLimit, lower)
 	if _ret != 0 {
@@ -64,6 +69,7 @@ func SKRangeRangeWithLowerLimit(lower float64) *SKRange {
 	return SKRangeFromID(_ret)
 }
 
+// Creates and initializes a new range object that specifies only a maximum value.
 func SKRangeRangeWithUpperLimit(upper float64) *SKRange {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRange), _sKRangeSelRangeWithUpperLimit, upper)
 	if _ret != 0 {
@@ -72,6 +78,7 @@ func SKRangeRangeWithUpperLimit(upper float64) *SKRange {
 	return SKRangeFromID(_ret)
 }
 
+// Creates and initializes a new range object that specifies a constant value.
 func SKRangeRangeWithConstantValue(value float64) *SKRange {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRange), _sKRangeSelRangeWithConstantValue, value)
 	if _ret != 0 {
@@ -80,6 +87,7 @@ func SKRangeRangeWithConstantValue(value float64) *SKRange {
 	return SKRangeFromID(_ret)
 }
 
+// Creates and initializes a new range object using a value and a maximum distance from that value.
 func SKRangeRangeWithValueVariance(value float64, variance float64) *SKRange {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRange), _sKRangeSelRangeWithValueVariance, value, variance)
 	if _ret != 0 {
@@ -88,6 +96,7 @@ func SKRangeRangeWithValueVariance(value float64, variance float64) *SKRange {
 	return SKRangeFromID(_ret)
 }
 
+// Creates and initializes a new range object that encompasses all possible values.
 func SKRangeRangeWithNoLimits() *SKRange {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRange), _sKRangeSelRangeWithNoLimits)
 	if _ret != 0 {

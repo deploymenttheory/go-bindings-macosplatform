@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The device’s orientation relative to a known frame of reference at a point in time.
+//
 // Attitude wraps [raw.CMAttitude] with a fluent Go API.
 type Attitude struct {
 	inner *raw.CMAttitude
@@ -35,6 +37,8 @@ func NewAttitude() *Attitude {
 	return &Attitude{inner: raw.CMAttitudeFromID(_id)}
 }
 
+// Yields the change in attitude given a specific attitude.
+//
 // MultiplyByInverseOfAttitude calls the underlying MultiplyByInverseOfAttitude.
 func (x *Attitude) MultiplyByInverseOfAttitude(attitude *raw.CMAttitude) {
 	x.inner.MultiplyByInverseOfAttitude(attitude)

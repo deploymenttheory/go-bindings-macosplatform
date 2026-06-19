@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that splits a tensor value into a list of subtensors.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcsplitlayer
 type MLCSplitLayer struct {
 	MLCLayer
@@ -34,7 +36,7 @@ func MLCSplitLayerFromID(id objc.ID) *MLCSplitLayer {
 	return o
 }
 
-// @abstract   Create a split layer @param      splitCount  The number of splits. @param      dimension   The dimension along which the tensor should be split. @return     A new split layer
+// Creates a split layer with the number of splits and dimension you specify.
 func MLCSplitLayerLayerWithSplitCountDimension(splitCount uint, dimension uint) *MLCSplitLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSplitLayer), _mLCSplitLayerSelLayerWithSplitCountDimension, splitCount, dimension)
 	if _ret != 0 {
@@ -43,9 +45,9 @@ func MLCSplitLayerLayerWithSplitCountDimension(splitCount uint, dimension uint) 
 	return MLCSplitLayerFromID(_ret)
 }
 
-// @abstract   Create a split layer @param      splitSectionLengths   Lengths of each split section. @param      dimension             The dimension along which the tensor should be split. @return     A new split layer
+// Creates a split layer with the lengths of each split section and dimension you specify.
 func MLCSplitLayerLayerWithSplitSectionLengthsDimension(splitSectionLengths *foundation.NSArray[*foundation.NSNumber], dimension uint) *MLCSplitLayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSplitLayer), _mLCSplitLayerSelLayerWithSplitSectionLengthsDimension, splitSectionLengths, dimension)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSplitLayer), _mLCSplitLayerSelLayerWithSplitSectionLengthsDimension, splitSectionLengths.Ptr(), dimension)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -66,6 +68,9 @@ func (o *MLCSplitLayer) SplitCount() uint {
 
 // @property   splitSectionLengths @abstract   Lengths of each split section. @discussion The tensor will be split into chunks along dimensions with sizes given in \p splitSectionLengths .
 func (o *MLCSplitLayer) SplitSectionLengths() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCSplitLayerSelSplitSectionLengths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCSplitLayerSelSplitSectionLengths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

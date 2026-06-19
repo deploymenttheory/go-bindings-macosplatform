@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object that contains variant qualifiers and media options.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetdownloadcontentconfiguration
 type AVAssetDownloadContentConfiguration struct {
 	foundation.NSObject

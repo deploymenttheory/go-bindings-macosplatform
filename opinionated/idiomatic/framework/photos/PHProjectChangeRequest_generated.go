@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request to change asset data in a Photos project extension.
+//
 // ProjectChangeRequest wraps [raw.PHProjectChangeRequest] with a fluent Go API.
 type ProjectChangeRequest struct {
 	inner *raw.PHProjectChangeRequest
@@ -32,6 +34,8 @@ func ProjectChangeRequestFromID(id objc.ID) *ProjectChangeRequest {
 	return &ProjectChangeRequest{inner: raw.PHProjectChangeRequestFromID(id)}
 }
 
+// Creates a change request around the specified project.
+//
 // NewProjectChangeRequestWithProject creates a new [ProjectChangeRequest].
 func NewProjectChangeRequestWithProject(project *raw.PHProject) *ProjectChangeRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHProjectChangeRequest")), objc.RegisterName("alloc"))
@@ -39,13 +43,15 @@ func NewProjectChangeRequestWithProject(project *raw.PHProject) *ProjectChangeRe
 	return &ProjectChangeRequest{inner: raw.PHProjectChangeRequestFromID(_id)}
 }
 
+// The title of the change request.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ProjectChangeRequest) WithTitle(title string) *ProjectChangeRequest {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
-// The projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
+// Compressed project-specific data to use in the change request.
 //
 // WithProjectExtensionData sets the projectExtensionData property and returns the receiver for chaining.
 func (x *ProjectChangeRequest) WithProjectExtensionData(projectExtensionData *foundation.NSData) *ProjectChangeRequest {
@@ -53,19 +59,21 @@ func (x *ProjectChangeRequest) WithProjectExtensionData(projectExtensionData *fo
 	return x
 }
 
-// Sets the key asset representing the project. Deprecated in macOS 10.14, please use -[PHProjectChangeRequest setProjectPreviewImage:] to provide a rendered preview instead.
+// Sets the key asset representing the project.
 //
 // SetKeyAsset calls the underlying SetKeyAsset.
 func (x *ProjectChangeRequest) SetKeyAsset(keyAsset *raw.PHAsset) {
 	x.inner.SetKeyAsset(keyAsset)
 }
 
+// Updates the project preview in Photos.
+//
 // SetProjectPreviewImage calls the underlying SetProjectPreviewImage.
 func (x *ProjectChangeRequest) SetProjectPreviewImage(previewImage *appkit.NSImage) {
 	x.inner.SetProjectPreviewImage(previewImage)
 }
 
-// Removes the specified assets from the project. @param assets A collection of PHAsset objects to be removed from the project.
+// Removes the specified assets from the project.
 //
 // RemoveAssets calls the underlying RemoveAssets.
 func (x *ProjectChangeRequest) RemoveAssets(assets foundation.NSFastEnumeration) {

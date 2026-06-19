@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// The visual representation of a path-based overlay.
+//
 // OverlayPathRenderer wraps [raw.MKOverlayPathRenderer] with a fluent Go API.
 type OverlayPathRenderer struct {
 	inner *raw.MKOverlayPathRenderer
@@ -40,48 +42,64 @@ func NewOverlayPathRenderer() *OverlayPathRenderer {
 	return &OverlayPathRenderer{inner: raw.MKOverlayPathRendererFromID(_id)}
 }
 
+// The fill color to use for the path.
+//
 // WithFillColor sets the fillColor property and returns the receiver for chaining.
 func (x *OverlayPathRenderer) WithFillColor(fillColor *appkit.NSColor) *OverlayPathRenderer {
 	x.inner.SetFillColor(fillColor)
 	return x
 }
 
+// The stroke color to use for the path.
+//
 // WithStrokeColor sets the strokeColor property and returns the receiver for chaining.
 func (x *OverlayPathRenderer) WithStrokeColor(strokeColor *appkit.NSColor) *OverlayPathRenderer {
 	x.inner.SetStrokeColor(strokeColor)
 	return x
 }
 
+// The stroke width to use for the path.
+//
 // WithLineWidth sets the lineWidth property and returns the receiver for chaining.
 func (x *OverlayPathRenderer) WithLineWidth(lineWidth float64) *OverlayPathRenderer {
 	x.inner.SetLineWidth(lineWidth)
 	return x
 }
 
+// The line join style to apply to the corners of the path.
+//
 // WithLineJoin sets the lineJoin property and returns the receiver for chaining.
 func (x *OverlayPathRenderer) WithLineJoin(lineJoin coregraphics.CGLineJoin) *OverlayPathRenderer {
 	x.inner.SetLineJoin(lineJoin)
 	return x
 }
 
+// The line cap style to apply to the open ends of the path.
+//
 // WithLineCap sets the lineCap property and returns the receiver for chaining.
 func (x *OverlayPathRenderer) WithLineCap(lineCap coregraphics.CGLineCap) *OverlayPathRenderer {
 	x.inner.SetLineCap(lineCap)
 	return x
 }
 
+// The limiting value that helps avoid spikes at junctions between connected line segments.
+//
 // WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
 func (x *OverlayPathRenderer) WithMiterLimit(miterLimit float64) *OverlayPathRenderer {
 	x.inner.SetMiterLimit(miterLimit)
 	return x
 }
 
+// The offset (in points) at which to start drawing the dash pattern.
+//
 // WithLineDashPhase sets the lineDashPhase property and returns the receiver for chaining.
 func (x *OverlayPathRenderer) WithLineDashPhase(lineDashPhase float64) *OverlayPathRenderer {
 	x.inner.SetLineDashPhase(lineDashPhase)
 	return x
 }
 
+// An array of numbers specifying the dash pattern to use for the path.
+//
 // WithLineDashPattern sets the collection, converting the Go slice to an NSArray.
 func (x *OverlayPathRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *OverlayPathRenderer {
 	if len(items) == 0 {
@@ -103,43 +121,59 @@ func (x *OverlayPathRenderer) WithLineDashPattern(items ...*foundation.NSNumber)
 	return x
 }
 
+// A Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
+//
 // WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
 func (x *OverlayPathRenderer) WithShouldRasterize(shouldRasterize bool) *OverlayPathRenderer {
 	x.inner.SetShouldRasterize(shouldRasterize)
 	return x
 }
 
+// The amount of transparency to apply to the overlay.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *OverlayPathRenderer) WithAlpha(alpha float64) *OverlayPathRenderer {
 	x.inner.MKOverlayRenderer.SetAlpha(alpha)
 	return x
 }
 
+// Creates the path for the overlay.
+//
 // CreatePath calls the underlying CreatePath.
 func (x *OverlayPathRenderer) CreatePath() {
 	x.inner.CreatePath()
 }
 
+// Updates the path associated with the overlay renderer.
+//
 // InvalidatePath calls the underlying InvalidatePath.
 func (x *OverlayPathRenderer) InvalidatePath() {
 	x.inner.InvalidatePath()
 }
 
+// Applies the renderer’s stroke-related drawing properties to the specified graphics context.
+//
 // ApplyStrokePropertiesToContextAtZoomScale calls the underlying ApplyStrokePropertiesToContextAtZoomScale.
 func (x *OverlayPathRenderer) ApplyStrokePropertiesToContextAtZoomScale(context_ unsafe.Pointer, zoomScale float64) {
 	x.inner.ApplyStrokePropertiesToContextAtZoomScale(context_, zoomScale)
 }
 
+// Applies the receiver’s fill-related drawing properties to the specified graphics context.
+//
 // ApplyFillPropertiesToContextAtZoomScale calls the underlying ApplyFillPropertiesToContextAtZoomScale.
 func (x *OverlayPathRenderer) ApplyFillPropertiesToContextAtZoomScale(context_ unsafe.Pointer, zoomScale float64) {
 	x.inner.ApplyFillPropertiesToContextAtZoomScale(context_, zoomScale)
 }
 
+// Draws a line along the specified path.
+//
 // StrokePathInContext calls the underlying StrokePathInContext.
 func (x *OverlayPathRenderer) StrokePathInContext(path unsafe.Pointer, context_ unsafe.Pointer) {
 	x.inner.StrokePathInContext(path, context_)
 }
 
+// Fills the area that the specified path encloses.
+//
 // FillPathInContext calls the underlying FillPathInContext.
 func (x *OverlayPathRenderer) FillPathInContext(path unsafe.Pointer, context_ unsafe.Pointer) {
 	x.inner.FillPathInContext(path, context_)

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The context of an attempt to send changes to the server.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginesendchangescontext
 type CKSyncEngineSendChangesContext struct {
 	foundation.NSObject

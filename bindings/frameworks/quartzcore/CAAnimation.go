@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for animations in Core Animation.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/caanimation
 type CAAnimation struct {
 	foundation.NSObject
@@ -40,6 +42,7 @@ func CAAnimationFromID(id objc.ID) *CAAnimation {
 	return o
 }
 
+// Creates and returns a new CAAnimation instance.
 func CAAnimationAnimation() *CAAnimation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAAnimation), _cAAnimationSelAnimation)
 	if _ret != 0 {
@@ -48,11 +51,13 @@ func CAAnimationAnimation() *CAAnimation {
 	return CAAnimationFromID(_ret)
 }
 
+// Specifies the default value of the property with the specified key.
 func CAAnimationDefaultValueForKey(key *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAAnimation), _cAAnimationSelDefaultValueForKey, key.Ptr())
 	return _ret
 }
 
+// Specifies whether the value of the property for a given key is archived.
 func (o *CAAnimation) ShouldArchiveValueForKey(key *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cAAnimationSelShouldArchiveValueForKey, key.Ptr())
 	return _ret

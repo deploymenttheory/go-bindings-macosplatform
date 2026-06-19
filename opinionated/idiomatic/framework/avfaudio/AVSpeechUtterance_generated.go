@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that encapsulates the text for speech synthesis and parameters that affect the speech.
+//
 // SpeechUtterance wraps [raw.AVSpeechUtterance] with a fluent Go API.
 type SpeechUtterance struct {
 	inner *raw.AVSpeechUtterance
@@ -31,6 +33,8 @@ func SpeechUtteranceFromID(id objc.ID) *SpeechUtterance {
 	return &SpeechUtterance{inner: raw.AVSpeechUtteranceFromID(id)}
 }
 
+// Creates an utterance with the text string that you specify for the speech synthesizer to speak.
+//
 // NewSpeechUtteranceWithString creates a new [SpeechUtterance].
 func NewSpeechUtteranceWithString(string_ string) *SpeechUtterance {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechUtterance")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewSpeechUtteranceWithString(string_ string) *SpeechUtterance {
 	return &SpeechUtterance{inner: raw.AVSpeechUtteranceFromID(_id)}
 }
 
+// Creates an utterance with the attributed text string that you specify for the speech synthesizer to speak.
+//
 // NewSpeechUtteranceWithAttributedString creates a new [SpeechUtterance].
 func NewSpeechUtteranceWithAttributedString(string_ *foundation.NSAttributedString) *SpeechUtterance {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechUtterance")), objc.RegisterName("alloc"))
@@ -45,7 +51,7 @@ func NewSpeechUtteranceWithAttributedString(string_ *foundation.NSAttributedStri
 	return &SpeechUtterance{inner: raw.AVSpeechUtteranceFromID(_id)}
 }
 
-// @abstract A speech utterance that expects markup written using the Speech Synthesis Markup Language (SSML)  standard. @discussion Uses SSML markup to add attributes. If using SSML to request voices that fall under certain attributes, a single utterance may be split into multiple parts, each sent to the appropriate synthesizer. If no voice matches the properties, the voice in the @c voice property of the utterance will be used. If no @c voice is specified, the system's default will be used. @c AVSpeechUtterance properties that affect the prosidy of a voice such as @c rate, @c pitchMultiplier, @c pitchMultiplier will not apply to an utterance that uses an SSML representation. Returns nil if invalid SSML is passed in.
+// Creates a speech utterance with an Speech Synthesis Markup Language (SSML) string.
 //
 // NewSpeechUtteranceWithSSMLRepresentation creates a new [SpeechUtterance].
 func NewSpeechUtteranceWithSSMLRepresentation(string_ string) *SpeechUtterance {
@@ -54,42 +60,56 @@ func NewSpeechUtteranceWithSSMLRepresentation(string_ string) *SpeechUtterance {
 	return &SpeechUtterance{inner: raw.AVSpeechUtteranceFromID(_id)}
 }
 
+// The voice the speech synthesizer uses when speaking the utterance.
+//
 // WithVoice sets the voice property and returns the receiver for chaining.
 func (x *SpeechUtterance) WithVoice(voice *SpeechSynthesisVoice) *SpeechUtterance {
 	x.inner.SetVoice(voice.Unwrap())
 	return x
 }
 
+// The rate the speech synthesizer uses when speaking the utterance.
+//
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *SpeechUtterance) WithRate(rate float32) *SpeechUtterance {
 	x.inner.SetRate(rate)
 	return x
 }
 
+// The baseline pitch the speech synthesizer uses when speaking the utterance.
+//
 // WithPitchMultiplier sets the pitchMultiplier property and returns the receiver for chaining.
 func (x *SpeechUtterance) WithPitchMultiplier(pitchMultiplier float32) *SpeechUtterance {
 	x.inner.SetPitchMultiplier(pitchMultiplier)
 	return x
 }
 
+// The volume the speech synthesizer uses when speaking the utterance.
+//
 // WithVolume sets the volume property and returns the receiver for chaining.
 func (x *SpeechUtterance) WithVolume(volume float32) *SpeechUtterance {
 	x.inner.SetVolume(volume)
 	return x
 }
 
+// A Boolean that specifies whether assistive technology settings take precedence over the property values of this utterance.
+//
 // WithPrefersAssistiveTechnologySettings sets the prefersAssistiveTechnologySettings property and returns the receiver for chaining.
 func (x *SpeechUtterance) WithPrefersAssistiveTechnologySettings(prefersAssistiveTechnologySettings bool) *SpeechUtterance {
 	x.inner.SetPrefersAssistiveTechnologySettings(prefersAssistiveTechnologySettings)
 	return x
 }
 
+// The amount of time the speech synthesizer pauses before speaking the utterance.
+//
 // WithPreUtteranceDelay sets the preUtteranceDelay property and returns the receiver for chaining.
 func (x *SpeechUtterance) WithPreUtteranceDelay(preUtteranceDelay float64) *SpeechUtterance {
 	x.inner.SetPreUtteranceDelay(preUtteranceDelay)
 	return x
 }
 
+// The amount of time the speech synthesizer pauses after speaking an utterance before handling the next utterance in the queue.
+//
 // WithPostUtteranceDelay sets the postUtteranceDelay property and returns the receiver for chaining.
 func (x *SpeechUtterance) WithPostUtteranceDelay(postUtteranceDelay float64) *SpeechUtterance {
 	x.inner.SetPostUtteranceDelay(postUtteranceDelay)

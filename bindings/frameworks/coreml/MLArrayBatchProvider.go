@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A convenience wrapper for batches of feature providers.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlarraybatchprovider
 type MLArrayBatchProvider struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func MLArrayBatchProviderFromID(id objc.ID) *MLArrayBatchProvider {
 	return o
 }
 
-// Initalize with an array of feature providers
+// Creates the batch provider based on the array of feature providers.
 func (o *MLArrayBatchProvider) InitWithFeatureProviderArray(array *foundation.NSArray[MLFeatureProvider]) *MLArrayBatchProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLArrayBatchProviderSelInitWithFeatureProviderArray, array.Ptr())
 	if _ret != 0 {
@@ -43,10 +45,10 @@ func (o *MLArrayBatchProvider) InitWithFeatureProviderArray(array *foundation.NS
 	return MLArrayBatchProviderFromID(_ret)
 }
 
-// Initialize with a dictionary which maps feature names to an array of values [String : [Any]] Error is returned if all arrays do not have equal length or if array values for a specific feature name do not have the same type or not expressible as MLFeatureValue
+// Creates a batch provider based on feature names and their associated arrays of data.
 func (o *MLArrayBatchProvider) InitWithDictionaryError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLArrayBatchProvider, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _mLArrayBatchProviderSelInitWithDictionaryError, dictionary, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLArrayBatchProviderSelInitWithDictionaryError, dictionary.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An identity authority is a database that stores information about identities. The CBIdentityAuthority class defines one or more identity authorities. You can search this database for identities in conjunction with the CBIdentity class factory methods.
+//
 // Apple documentation: https://developer.apple.com/documentation/collaboration/cbidentityauthority
 type CBIdentityAuthority struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func CBIdentityAuthorityFromID(id objc.ID) *CBIdentityAuthority {
 	return o
 }
 
-// Returns the identity authority on the local system. Any identities stored on the local system are contained within this identity authority. - Returns: The identity authority on the local system.
+// Returns the identity authority on the local system.
 func CBIdentityAuthorityLocalIdentityAuthority() *CBIdentityAuthority {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBIdentityAuthority), _cBIdentityAuthoritySelLocalIdentityAuthority)
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func CBIdentityAuthorityLocalIdentityAuthority() *CBIdentityAuthority {
 	return CBIdentityAuthorityFromID(_ret)
 }
 
-// Returns the identity authority that contains all the identities in bound network directory servers. If you are bound to a network directory server (such as an LDAP server) that has an identity authority, use this method to search those authorities. - Returns: The identity authorities in bound network directory servers.
+// Returns the identity authority that contains all the identities in bound network directory servers.
 func CBIdentityAuthorityManagedIdentityAuthority() *CBIdentityAuthority {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBIdentityAuthority), _cBIdentityAuthoritySelManagedIdentityAuthority)
 	if _ret != 0 {
@@ -55,7 +57,7 @@ func CBIdentityAuthorityManagedIdentityAuthority() *CBIdentityAuthority {
 	return CBIdentityAuthorityFromID(_ret)
 }
 
-// Returns an identity authority that contains the identities in both the local and the network-bound authorities. The default identity authority is the logical union of the identities in the local and managed authorities. - Returns: The local and network-bound identity authorities.
+// Returns an identity authority that contains the identities in both the local and the network-bound authorities.
 func CBIdentityAuthorityDefaultIdentityAuthority() *CBIdentityAuthority {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBIdentityAuthority), _cBIdentityAuthoritySelDefaultIdentityAuthority)
 	if _ret != 0 {
@@ -64,7 +66,7 @@ func CBIdentityAuthorityDefaultIdentityAuthority() *CBIdentityAuthority {
 	return CBIdentityAuthorityFromID(_ret)
 }
 
-// Returns an identity authority specified by a given Core Services Identity authority object. This method, along with “CBIdentityAuthority/CSIdentityAuthority“, is used for interoperability with the Core Services Identity API. - Parameters: - CSIdentityAuthority: The Core Services Identity opaque object. - Returns: The identity authority object for use with the Collaboration framework.
+// Returns an identity authority specified by a given Core Services Identity authority object.
 func CBIdentityAuthorityIdentityAuthorityWithCSIdentityAuthority(cSIdentityAuthority unsafe.Pointer) *CBIdentityAuthority {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBIdentityAuthority), _cBIdentityAuthoritySelIdentityAuthorityWithCSIdentityAuthority, cSIdentityAuthority)
 	if _ret != 0 {

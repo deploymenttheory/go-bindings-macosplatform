@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that maintains the user’s current focus status and your app’s ability to access it.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/infocusstatuscenter
 type INFocusStatusCenter struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func INFocusStatusCenterFromID(id objc.ID) *INFocusStatusCenter {
 	return o
 }
 
+// Asks the system for access to the user’s focus status.
 func (o *INFocusStatusCenter) RequestAuthorizationWithCompletionHandler(completionHandler func(INFocusStatusAuthorizationStatus)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

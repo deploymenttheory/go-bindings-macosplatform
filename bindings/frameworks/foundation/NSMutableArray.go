@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A dynamic ordered collection of objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmutablearray
 type NSMutableArray[ObjectType purego.AnyObject] struct {
 	NSArray[ObjectType]
@@ -67,26 +69,32 @@ func NSMutableArrayFromID[ObjectType purego.AnyObject](id objc.ID) *NSMutableArr
 	return o
 }
 
+// Inserts a given object at the end of the array.
 func (o *NSMutableArray[ObjectType]) AddObject(anObject ObjectType) {
 	o.Ptr().Send(_nSMutableArraySelAddObject, anObject)
 }
 
+// Inserts a given object into the array’s contents at a given index.
 func (o *NSMutableArray[ObjectType]) InsertObjectAtIndex(anObject ObjectType, index uint) {
 	o.Ptr().Send(_nSMutableArraySelInsertObjectAtIndex, anObject, index)
 }
 
+// Removes the object with the highest-valued index in the array
 func (o *NSMutableArray[ObjectType]) RemoveLastObject() {
 	o.Ptr().Send(_nSMutableArraySelRemoveLastObject)
 }
 
+// Removes the object at index .
 func (o *NSMutableArray[ObjectType]) RemoveObjectAtIndex(index uint) {
 	o.Ptr().Send(_nSMutableArraySelRemoveObjectAtIndex, index)
 }
 
+// Replaces the object at index with anObject.
 func (o *NSMutableArray[ObjectType]) ReplaceObjectAtIndexWithObject(index uint, anObject ObjectType) {
 	o.Ptr().Send(_nSMutableArraySelReplaceObjectAtIndexWithObject, index, anObject)
 }
 
+// Initializes a newly allocated array.
 func (o *NSMutableArray[ObjectType]) Init() *NSMutableArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableArraySelInit)
 	if _ret != 0 {
@@ -95,6 +103,7 @@ func (o *NSMutableArray[ObjectType]) Init() *NSMutableArray[ObjectType] {
 	return NSMutableArrayFromID[ObjectType](_ret)
 }
 
+// Returns an array, initialized with enough memory to initially hold a given number of objects.
 func (o *NSMutableArray[ObjectType]) InitWithCapacity(numItems uint) *NSMutableArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableArraySelInitWithCapacity, numItems)
 	if _ret != 0 {
@@ -111,87 +120,107 @@ func (o *NSMutableArray[ObjectType]) InitWithCoder(coder *NSCoder) *NSMutableArr
 	return NSMutableArrayFromID[ObjectType](_ret)
 }
 
+// Adds the objects contained in another given array to the end of the receiving array’s content.
 func (o *NSMutableArray[ObjectType]) AddObjectsFromArray(otherArray *NSArray[ObjectType]) {
 	o.Ptr().Send(_nSMutableArraySelAddObjectsFromArray, otherArray.Ptr())
 }
 
+// Exchanges the objects in the array at given indexes.
 func (o *NSMutableArray[ObjectType]) ExchangeObjectAtIndexWithObjectAtIndex(idx1 uint, idx2 uint) {
 	o.Ptr().Send(_nSMutableArraySelExchangeObjectAtIndexWithObjectAtIndex, idx1, idx2)
 }
 
+// Empties the array of all its elements.
 func (o *NSMutableArray[ObjectType]) RemoveAllObjects() {
 	o.Ptr().Send(_nSMutableArraySelRemoveAllObjects)
 }
 
+// Removes all occurrences within a specified range in the array of a given object.
 func (o *NSMutableArray[ObjectType]) RemoveObjectInRange(anObject ObjectType, range_ NSRange) {
 	o.Ptr().Send(_nSMutableArraySelRemoveObjectInRange, anObject, range_)
 }
 
+// Removes all occurrences in the array of a given object.
 func (o *NSMutableArray[ObjectType]) RemoveObject(anObject ObjectType) {
 	o.Ptr().Send(_nSMutableArraySelRemoveObject, anObject)
 }
 
+// Removes all occurrences of anObject within the specified range in the array.
 func (o *NSMutableArray[ObjectType]) RemoveObjectIdenticalToInRange(anObject ObjectType, range_ NSRange) {
 	o.Ptr().Send(_nSMutableArraySelRemoveObjectIdenticalToInRange, anObject, range_)
 }
 
+// Removes all occurrences of a given object in the array.
 func (o *NSMutableArray[ObjectType]) RemoveObjectIdenticalTo(anObject ObjectType) {
 	o.Ptr().Send(_nSMutableArraySelRemoveObjectIdenticalTo, anObject)
 }
 
+// Removes the specified number of objects from the array, beginning at the specified index.
 // Deprecated: Not supported
 func (o *NSMutableArray[ObjectType]) RemoveObjectsFromIndicesNumIndices(indices *uint, cnt uint) {
 	o.Ptr().Send(_nSMutableArraySelRemoveObjectsFromIndicesNumIndices, indices, cnt)
 }
 
+// Removes from the receiving array the objects in another given array.
 // Deprecated: Not supported
 func (o *NSMutableArray[ObjectType]) RemoveObjectsInArray(otherArray *NSArray[ObjectType]) {
 	o.Ptr().Send(_nSMutableArraySelRemoveObjectsInArray, otherArray.Ptr())
 }
 
+// Removes from the array each of the objects within a given range.
 // Deprecated: Not supported
 func (o *NSMutableArray[ObjectType]) RemoveObjectsInRange(range_ NSRange) {
 	o.Ptr().Send(_nSMutableArraySelRemoveObjectsInRange, range_)
 }
 
+// Replaces the objects in the receiving array specified by one given range with the objects in another array specified by another range.
 // Deprecated: Not supported
 func (o *NSMutableArray[ObjectType]) ReplaceObjectsInRangeWithObjectsFromArrayRange(range_ NSRange, otherArray *NSArray[ObjectType], otherRange NSRange) {
 	o.Ptr().Send(_nSMutableArraySelReplaceObjectsInRangeWithObjectsFromArrayRange, range_, otherArray.Ptr(), otherRange)
 }
 
+// Replaces the objects in the receiving array specified by a given range with all of the objects from a given array.
 // Deprecated: Not supported
 func (o *NSMutableArray[ObjectType]) ReplaceObjectsInRangeWithObjectsFromArray(range_ NSRange, otherArray *NSArray[ObjectType]) {
 	o.Ptr().Send(_nSMutableArraySelReplaceObjectsInRangeWithObjectsFromArray, range_, otherArray.Ptr())
 }
 
+// Sets the receiving array’s elements to those in another given array.
 func (o *NSMutableArray[ObjectType]) SetArray(otherArray *NSArray[ObjectType]) {
 	o.Ptr().Send(_nSMutableArraySelSetArray, otherArray.Ptr())
 }
 
+// Sorts the receiver in ascending order as defined by the comparison function compare.
 func (o *NSMutableArray[ObjectType]) SortUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer) {
 	o.Ptr().Send(_nSMutableArraySelSortUsingFunctionContext, compare, context_)
 }
 
+// Sorts the receiver in ascending order, as determined by the comparison method specified by a given selector.
 func (o *NSMutableArray[ObjectType]) SortUsingSelector(comparator objc.SEL) {
 	o.Ptr().Send(_nSMutableArraySelSortUsingSelector, comparator)
 }
 
+// Inserts the objects in the provided array into the receiving array at the specified indexes.
 func (o *NSMutableArray[ObjectType]) InsertObjectsAtIndexes(objects *NSArray[ObjectType], indexes *NSIndexSet) {
 	o.Ptr().Send(_nSMutableArraySelInsertObjectsAtIndexes, objects.Ptr(), indexes.Ptr())
 }
 
+// Removes the objects at the specified indexes from the array.
 func (o *NSMutableArray[ObjectType]) RemoveObjectsAtIndexes(indexes *NSIndexSet) {
 	o.Ptr().Send(_nSMutableArraySelRemoveObjectsAtIndexes, indexes.Ptr())
 }
 
+// Replaces the objects in the receiving array at locations specified with the objects from a given array.
 func (o *NSMutableArray[ObjectType]) ReplaceObjectsAtIndexesWithObjects(indexes *NSIndexSet, objects *NSArray[ObjectType]) {
 	o.Ptr().Send(_nSMutableArraySelReplaceObjectsAtIndexesWithObjects, indexes.Ptr(), objects.Ptr())
 }
 
+// Replaces the object at the index with the new object, possibly adding the object.
 func (o *NSMutableArray[ObjectType]) SetObjectAtIndexedSubscript(obj ObjectType, idx uint) {
 	o.Ptr().Send(_nSMutableArraySelSetObjectAtIndexedSubscript, obj, idx)
 }
 
+// Sorts the receiver in ascending order using the comparison method specified by a given NSComparator block.
 func (o *NSMutableArray[ObjectType]) SortUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) {
 	var __block_cmptr objc.Block
 	if cmptr != nil {
@@ -203,6 +232,7 @@ func (o *NSMutableArray[ObjectType]) SortUsingComparator(cmptr func(objc.ID, obj
 	o.Ptr().Send(_nSMutableArraySelSortUsingComparator, __block_cmptr)
 }
 
+// Sorts the receiver in ascending order using the specified options and the comparison method specified by a given NSComparator block.
 func (o *NSMutableArray[ObjectType]) SortWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) {
 	var __block_cmptr objc.Block
 	if cmptr != nil {
@@ -214,6 +244,7 @@ func (o *NSMutableArray[ObjectType]) SortWithOptionsUsingComparator(opts NSSortO
 	o.Ptr().Send(_nSMutableArraySelSortWithOptionsUsingComparator, opts, __block_cmptr)
 }
 
+// Creates and returns an NSMutableArray object with enough allocated memory to initially hold a given number of objects.
 func NSMutableArrayArrayWithCapacity(numItems uint) *NSMutableArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableArray), _nSMutableArraySelArrayWithCapacity, numItems)
 	if _ret != 0 {
@@ -222,6 +253,7 @@ func NSMutableArrayArrayWithCapacity(numItems uint) *NSMutableArray[objc.ID] {
 	return NSMutableArrayFromID[objc.ID](_ret)
 }
 
+// Creates and returns a mutable array containing the contents of the file specified by the given path.
 func NSMutableArrayArrayWithContentsOfFile(path *NSString) *NSMutableArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableArray), _nSMutableArraySelArrayWithContentsOfFile, path.Ptr())
 	if _ret != 0 {
@@ -230,6 +262,7 @@ func NSMutableArrayArrayWithContentsOfFile(path *NSString) *NSMutableArray[objc.
 	return NSMutableArrayFromID[objc.ID](_ret)
 }
 
+// Creates and returns a mutable array containing the contents specified by a given URL.
 func NSMutableArrayArrayWithContentsOfURL(url *NSURL) *NSMutableArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableArray), _nSMutableArraySelArrayWithContentsOfURL, url.Ptr())
 	if _ret != 0 {
@@ -238,6 +271,7 @@ func NSMutableArrayArrayWithContentsOfURL(url *NSURL) *NSMutableArray[objc.ID] {
 	return NSMutableArrayFromID[objc.ID](_ret)
 }
 
+// Initializes a newly allocated mutable array with the contents of the file specified by a given path
 func (o *NSMutableArray[ObjectType]) InitWithContentsOfFile(path *NSString) *NSMutableArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableArraySelInitWithContentsOfFile, path.Ptr())
 	if _ret != 0 {
@@ -246,6 +280,7 @@ func (o *NSMutableArray[ObjectType]) InitWithContentsOfFile(path *NSString) *NSM
 	return NSMutableArrayFromID[ObjectType](_ret)
 }
 
+// Initialized a newly allocated mutable array with the contents of the location specified by a given URL.
 func (o *NSMutableArray[ObjectType]) InitWithContentsOfURL(url *NSURL) *NSMutableArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableArraySelInitWithContentsOfURL, url.Ptr())
 	if _ret != 0 {
@@ -258,10 +293,12 @@ func (o *NSMutableArray[ObjectType]) ApplyDifference(difference *NSOrderedCollec
 	o.Ptr().Send(_nSMutableArraySelApplyDifference, difference.Ptr())
 }
 
+// Sorts the receiver using a given array of sort descriptors.
 func (o *NSMutableArray[ObjectType]) SortUsingDescriptors(sortDescriptors *NSArray[*NSSortDescriptor]) {
 	o.Ptr().Send(_nSMutableArraySelSortUsingDescriptors, sortDescriptors.Ptr())
 }
 
+// Evaluates a given predicate against the array’s content and leaves only objects that match.
 func (o *NSMutableArray[ObjectType]) FilterUsingPredicate(predicate *NSPredicate) {
 	o.Ptr().Send(_nSMutableArraySelFilterUsingPredicate, predicate.Ptr())
 }

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract base class for all Core Data persistent stores.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistentstore
 type NSPersistentStore struct {
 	foundation.NSObject
@@ -51,37 +53,45 @@ func NSPersistentStoreFromID(id objc.ID) *NSPersistentStore {
 	return o
 }
 
+// Returns the metadata from the persistent store at the given URL.
 func NSPersistentStoreMetadataForPersistentStoreWithURLError(url *foundation.NSURL) (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](objc.ID(_clsNSPersistentStore), _nSPersistentStoreSelMetadataForPersistentStoreWithURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentStore), _nSPersistentStoreSelMetadataForPersistentStoreWithURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret), nil
 }
 
+// Sets the metadata for the store at a given URL.
 func NSPersistentStoreSetMetadataForPersistentStoreWithURLError(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], url *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](objc.ID(_clsNSPersistentStore), _nSPersistentStoreSelSetMetadataForPersistentStoreWithURLError, metadata, url.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](objc.ID(_clsNSPersistentStore), _nSPersistentStoreSelSetMetadataForPersistentStoreWithURLError, metadata.Ptr(), url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Returns the migration manager class for this store class.
 func NSPersistentStoreMigrationManagerClass() objc.Class {
 	_ret := objc.Send[objc.Class](objc.ID(_clsNSPersistentStore), _nSPersistentStoreSelMigrationManagerClass)
 	return _ret
 }
 
+// Returns a store initialized with the given arguments.
 func (o *NSPersistentStore) InitWithPersistentStoreCoordinatorConfigurationNameURLOptions(root *NSPersistentStoreCoordinator, name *foundation.NSString, url *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) *NSPersistentStore {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreSelInitWithPersistentStoreCoordinatorConfigurationNameURLOptions, root.Ptr(), name.Ptr(), url.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreSelInitWithPersistentStoreCoordinatorConfigurationNameURLOptions, root.Ptr(), name.Ptr(), url.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSPersistentStoreFromID(_ret)
 }
 
+// Instructs the persistent store to load its metadata.
 func (o *NSPersistentStore) LoadMetadata() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentStoreSelLoadMetadata, unsafe.Pointer(&_nsErr))
@@ -91,10 +101,12 @@ func (o *NSPersistentStore) LoadMetadata() (bool, error) {
 	return _ret, nil
 }
 
+// Invoked after the persistent store has been added to the persistent store coordinator.
 func (o *NSPersistentStore) DidAddToPersistentStoreCoordinator(coordinator *NSPersistentStoreCoordinator) {
 	o.Ptr().Send(_nSPersistentStoreSelDidAddToPersistentStoreCoordinator, coordinator.Ptr())
 }
 
+// Invoked before the persistent store is removed from the persistent store coordinator.
 func (o *NSPersistentStore) WillRemoveFromPersistentStoreCoordinator(coordinator *NSPersistentStoreCoordinator) {
 	o.Ptr().Send(_nSPersistentStoreSelWillRemoveFromPersistentStoreCoordinator, coordinator.Ptr())
 }
@@ -116,8 +128,11 @@ func (o *NSPersistentStore) ConfigurationName() *foundation.NSString {
 }
 
 func (o *NSPersistentStore) Options() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSPersistentStoreSelOptions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreSelOptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSPersistentStore) URL() *foundation.NSURL {
@@ -162,12 +177,15 @@ func (o *NSPersistentStore) SetReadOnly(readOnly bool) {
 }
 
 func (o *NSPersistentStore) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSPersistentStoreSelMetadata)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreSelMetadata)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSPersistentStore) SetMetadata(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSPersistentStoreSelSetMetadata, metadata)
+	o.Ptr().Send(_nSPersistentStoreSelSetMetadata, metadata.Ptr())
 }
 
 func (o *NSPersistentStore) CoreSpotlightExporter() *NSCoreDataCoreSpotlightDelegate {

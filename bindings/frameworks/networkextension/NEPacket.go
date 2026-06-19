@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A network packet and its associated properties.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nepacket
 type NEPacket struct {
 	foundation.NSObject

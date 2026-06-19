@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A notification that triggers when the contents of a database change.
+//
 // DatabaseNotification wraps [raw.CKDatabaseNotification] with a fluent Go API.
 type DatabaseNotification struct {
 	inner *raw.CKDatabaseNotification

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation that uses the device’s contacts to search for discoverable iCloud users.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckdiscoveralluseridentitiesoperation
 // Deprecated: No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.
 type CKDiscoverAllUserIdentitiesOperation struct {
@@ -36,7 +38,7 @@ func CKDiscoverAllUserIdentitiesOperationFromID(id objc.ID) *CKDiscoverAllUserId
 	return o
 }
 
-// Creates an operation for searching the device's contacts. You can use the operation only once. Create a new operation for each subsequent search.
+// Creates an operation for searching the device’s contacts.
 func (o *CKDiscoverAllUserIdentitiesOperation) Init() *CKDiscoverAllUserIdentitiesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKDiscoverAllUserIdentitiesOperationSelInit)
 	if _ret != 0 {

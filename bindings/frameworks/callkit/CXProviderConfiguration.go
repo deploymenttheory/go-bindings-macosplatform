@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An encapsulation of the configuration of a provider object.
+//
 // Apple documentation: https://developer.apple.com/documentation/callkit/cxproviderconfiguration
 type CXProviderConfiguration struct {
 	foundation.NSObject
@@ -48,6 +50,7 @@ func CXProviderConfigurationFromID(id objc.ID) *CXProviderConfiguration {
 	return o
 }
 
+// Creates the configuration of a provider object.
 func (o *CXProviderConfiguration) Init() *CXProviderConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cXProviderConfigurationSelInit)
 	if _ret != 0 {
@@ -56,6 +59,7 @@ func (o *CXProviderConfiguration) Init() *CXProviderConfiguration {
 	return CXProviderConfigurationFromID(_ret)
 }
 
+// Initializes a configuration with the specified localized name.
 // Deprecated: since macOS 11.0.
 func (o *CXProviderConfiguration) InitWithLocalizedName(localizedName *foundation.NSString) *CXProviderConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cXProviderConfigurationSelInitWithLocalizedName, localizedName.Ptr())
@@ -148,10 +152,13 @@ func (o *CXProviderConfiguration) SetSupportsAudioTranslation(supportsAudioTrans
 }
 
 func (o *CXProviderConfiguration) SupportedHandleTypes() *foundation.NSSet[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSNumber]](o.Ptr(), _cXProviderConfigurationSelSupportedHandleTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cXProviderConfigurationSelSupportedHandleTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *CXProviderConfiguration) SetSupportedHandleTypes(supportedHandleTypes *foundation.NSSet[*foundation.NSNumber]) {
-	o.Ptr().Send(_cXProviderConfigurationSelSetSupportedHandleTypes, supportedHandleTypes)
+	o.Ptr().Send(_cXProviderConfigurationSelSetSupportedHandleTypes, supportedHandleTypes.Ptr())
 }

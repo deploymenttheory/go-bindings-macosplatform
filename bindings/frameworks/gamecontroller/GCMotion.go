@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller profile that supports orientation and motion.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcmotion
 type GCMotion struct {
 	foundation.NSObject
@@ -50,32 +52,32 @@ func GCMotionFromID(id objc.ID) *GCMotion {
 	return o
 }
 
-// Sets the gravity vector expressed in the controller's reference frame. @note If the controller's snapshot flag is set to NO, this method has no effect. @see gravity
+// Sets the controller’s gravity data.
 func (o *GCMotion) SetGravity(gravity GCAcceleration) {
 	o.Ptr().Send(_gCMotionSelSetGravity, gravity)
 }
 
-// Sets the acceleration that the user is giving to the controller. @note If the controller's snapshot flag is set to NO, this method has no effect. @see userAcceleration
+// Sets the acceleration the user applies to the controller.
 func (o *GCMotion) SetUserAcceleration(userAcceleration GCAcceleration) {
 	o.Ptr().Send(_gCMotionSelSetUserAcceleration, userAcceleration)
 }
 
-// Sets the acceleration that the user is giving to the controller. @note If the controller's snapshot flag is set to NO, this method has no effect. @see userAcceleration
+// Sets the total acceleration of the controller that includes gravity and the user’s acceleration.
 func (o *GCMotion) SetAcceleration(acceleration GCAcceleration) {
 	o.Ptr().Send(_gCMotionSelSetAcceleration, acceleration)
 }
 
-// Sets the current rotation rate of the controller. @note If the controller's snapshot flag is set to NO, this method has no effect. @see attitude
+// Sets the controller’s attitude.
 func (o *GCMotion) SetAttitude(attitude GCQuaternion) {
 	o.Ptr().Send(_gCMotionSelSetAttitude, attitude)
 }
 
-// Sets the current rotation rate of the controller. @note If the controller's snapshot flag is set to NO, this method has no effect. @see rotationRate
+// Sets the controller’s rotation rate.
 func (o *GCMotion) SetRotationRate(rotationRate GCRotationRate) {
 	o.Ptr().Send(_gCMotionSelSetRotationRate, rotationRate)
 }
 
-// Sets the state vector of the motion profile to a copy of the input motion profile's state vector. @note If the controller's snapshot flag is set to NO, this method has no effect. @see GCController.snapshot
+// Copies the input values from a specified motion profile to a snapshot of a motion profile.
 func (o *GCMotion) SetStateFromMotion(motion *GCMotion) {
 	o.Ptr().Send(_gCMotionSelSetStateFromMotion, motion.Ptr())
 }

@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract virtual base class for basic arithmetic nodes
+// Virtual base class for basic arithmetic nodes.
 //
 // NNBinaryArithmeticNode wraps [raw.MPSNNBinaryArithmeticNode] with a fluent Go API.
 type NNBinaryArithmeticNode struct {

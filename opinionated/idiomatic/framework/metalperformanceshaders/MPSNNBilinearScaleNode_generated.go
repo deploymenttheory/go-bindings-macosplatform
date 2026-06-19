@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a bilinear resampling filter.
+//
 // NNBilinearScaleNode wraps [raw.MPSNNBilinearScaleNode] with a fluent Go API.
 type NNBilinearScaleNode struct {
 	inner *raw.MPSNNBilinearScaleNode

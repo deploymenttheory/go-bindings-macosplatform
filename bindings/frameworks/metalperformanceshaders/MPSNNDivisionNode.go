@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract returns elementwise quotient of left / right
+// A representation of a division operator.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnndivisionnode
 type MPSNNDivisionNode struct {

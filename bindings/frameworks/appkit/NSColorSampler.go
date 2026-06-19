@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that displays the system’s color-sampling interface and returns the selected color to your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscolorsampler
 type NSColorSampler struct {
 	foundation.NSObject
@@ -30,7 +32,7 @@ func NSColorSamplerFromID(id objc.ID) *NSColorSampler {
 	return o
 }
 
-// The primary method for NSColorSampler. Begins or attaches to an existing color sampling session which presents UI to the user for selecting a color from their screen. The handler will be called on the main thread when the user completes the session (either by selection, or cancelation). In the event of user-cancellation, `colorSelectionHandler` will be called with `nil`. The calling NSColorSampler instance is retained until the sampling session is completed.
+// Displays the system color-sampling interface asynchronously and reports the selected color back to your app.
 func (o *NSColorSampler) ShowSamplerWithSelectionHandler(selectionHandler func(*NSColor)) {
 	var __block_selectionHandler objc.Block
 	if selectionHandler != nil {

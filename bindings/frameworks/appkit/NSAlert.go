@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A modal dialog or sheet attached to a document window.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsalert
 type NSAlert struct {
 	foundation.NSObject
@@ -59,7 +61,7 @@ func NSAlertFromID(id objc.ID) *NSAlert {
 	return o
 }
 
-// Returns an alert initialized from information in an error object. - Parameter error: Error information to display. - Returns: An initialized alert. - Note: The `NSAlert` class extracts the localized error description, recovery suggestion, and recovery options from the error parameter and uses them as the alert’s message text, informative text, and button titles, respectively.
+// Returns an alert initialized from information in an error object.
 func NSAlertAlertWithError(error_ unsafe.Pointer) *NSAlert {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAlert), _nSAlertSelAlertWithError, error_)
 	if _ret != 0 {
@@ -68,7 +70,7 @@ func NSAlertAlertWithError(error_ unsafe.Pointer) *NSAlert {
 	return NSAlertFromID(_ret)
 }
 
-// Adds a button with a given title to the alert. Buttons should be added from most-to-least prominent. The exact visual arrangement of the buttons is determined by `NSAlert` internally. In general, they are arranged from trailing-to-leading edge when laid out horizontally, and top-to-bottom when laid out vertically, with some exceptions for buttons like “Cancel”. The first three buttons are identified by the order in which they are added (not the order in which they may appear visually) as `NSAlertFirstButtonReturn`, `NSAlertSecondButtonReturn`, `NSAlertThirdButtonReturn` in the return-code parameter. Subsequent buttons are identified as `NSAlertThirdButtonReturn` + *n*, where *n* is an integer. By default, the first button has a key equivalent of Return, any button with a title of “Cancel” has a key equivalent of Escape, and any button with the title “Don’t Save” has a key equivalent of Command-D (but only if it’s not the first button). You can also assign different key equivalents for the buttons using the `keyEquivalent` method of the `NSButton` class. In addition, you can use the `tag` property of the `NSButton` class to set the alert presentation’s return-code. The framework reserves the use of the button’s `target` and `action`. - Parameter title: Title of the button to add to the alert. - Returns: The button that was added to the alert.
+// Adds a button with a given title to the alert.
 func (o *NSAlert) AddButtonWithTitle(title *foundation.NSString) *NSButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelAddButtonWithTitle, title.Ptr())
 	if _ret != 0 {
@@ -77,7 +79,7 @@ func (o *NSAlert) AddButtonWithTitle(title *foundation.NSString) *NSButton {
 	return NSButtonFromID(_ret)
 }
 
-// Specifies that the alert must do immediate layout instead of lazily just before display. Used to indicate that the alert panel should do immediate layout, overriding the default behavior of laying out lazily just before showing panel. Only call this method if wanting to do custom layout after it returns. Call this method only after the alert’s other customization, including setting message and informative text, and adding buttons and an accessory view if needed. Layout changes can be made after this method returns, in particular to adjust the frame of an accessory view. Note that the standard layout of the alert may change in the future, so layout customization should be done with caution.
+// Specifies that the alert must do immediate layout instead of lazily just before display.
 func (o *NSAlert) Layout() {
 	o.Ptr().Send(_nSAlertSelLayout)
 }
@@ -88,7 +90,7 @@ func (o *NSAlert) RunModal() int {
 	return _ret
 }
 
-// Runs the alert modally as a sheet attached to the specified window. - Parameters: - sheetWindow: The window on which to display the sheet. - handler: The completion handler that gets called when the sheet’s modal session ends. This method uses the `NSWindow` sheet methods to display the alert. If the alert has an alert style of `NSCriticalAlertStyle`, it is presented as a critical sheet, which means that it can display on top of other sheets that might already be attached to the window. Otherwise, it is presented--or queued for presentation--as a standard sheet. Note that `-orderOut:` no longer needs to be called in the completion handler. If the alert isn’t  don’t dismiss the alert, it will be done for you after the completion handler finishes.
+// Runs the alert modally as a sheet attached to the specified window.
 func (o *NSAlert) BeginSheetModalForWindowCompletionHandler(sheetWindow *NSWindow, handler func(int)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -241,6 +243,7 @@ func (o *NSAlert) Window() *NSWindow {
 	return NSWindowFromID(_ret)
 }
 
+// Creates an alert compatible with alerts created using the NSRunAlertPanel function for display as a warning-style alert.
 // Deprecated: Use -init instead
 func NSAlertAlertWithMessageTextDefaultButtonAlternateButtonOtherButtonInformativeTextWithFormat(message *foundation.NSString, defaultButton *foundation.NSString, alternateButton *foundation.NSString, otherButton *foundation.NSString, format *foundation.NSString) *NSAlert {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAlert), _nSAlertSelAlertWithMessageTextDefaultButtonAlternateButtonOtherButtonInformativeTextWithFormat, message.Ptr(), defaultButton.Ptr(), alternateButton.Ptr(), otherButton.Ptr(), format.Ptr())
@@ -250,6 +253,7 @@ func NSAlertAlertWithMessageTextDefaultButtonAlternateButtonOtherButtonInformati
 	return NSAlertFromID(_ret)
 }
 
+// Runs the alert modally as an alert sheet attached to a specified window.
 // Deprecated: Use -beginSheetModalForWindow:completionHandler: instead
 func (o *NSAlert) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(window *NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSAlertSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo, window.Ptr(), delegate, didEndSelector, contextInfo)

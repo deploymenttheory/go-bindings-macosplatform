@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for the call types to include in a search.
+//
 // CallRecordTypeOptionsResolutionResult wraps [raw.INCallRecordTypeOptionsResolutionResult] with a fluent Go API.
 type CallRecordTypeOptionsResolutionResult struct {
 	inner *raw.INCallRecordTypeOptionsResolutionResult

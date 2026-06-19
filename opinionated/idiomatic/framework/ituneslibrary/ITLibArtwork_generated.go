@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// This class represents the artwork for a media item.
+//
 // LibArtwork wraps [raw.ITLibArtwork] with a fluent Go API.
 type LibArtwork struct {
 	inner *raw.ITLibArtwork

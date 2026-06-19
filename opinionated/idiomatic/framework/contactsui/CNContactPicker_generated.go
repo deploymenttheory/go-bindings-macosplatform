@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A popover-based interface for selecting a contact.
+//
 // ContactPicker wraps [raw.CNContactPicker] with a fluent Go API.
 type ContactPicker struct {
 	inner *raw.CNContactPicker
@@ -40,7 +42,7 @@ func NewContactPicker() *ContactPicker {
 	return &ContactPicker{inner: raw.CNContactPickerFromID(_id)}
 }
 
-// @abstract The CNContact keys to display when a contact is expanded. @discussion If no keys are provided, the picker will select contacts instead of values.
+// The keys to be displayed when a contact is expanded.
 //
 // WithDisplayedKeys sets the collection, converting the Go slice to an NSArray.
 func (x *ContactPicker) WithDisplayedKeys(items ...*foundation.NSString) *ContactPicker {
@@ -63,7 +65,7 @@ func (x *ContactPicker) WithDisplayedKeys(items ...*foundation.NSString) *Contac
 	return x
 }
 
-// @abstract The picker delegate to be notified when the user chooses a contact or value.
+// The picker delegate to be notified when the user chooses a contact.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *ContactPicker) WithDelegate(delegate raw.CNContactPickerDelegate) *ContactPicker {
@@ -71,14 +73,14 @@ func (x *ContactPicker) WithDelegate(delegate raw.CNContactPickerDelegate) *Cont
 	return x
 }
 
-// @abstract Shows the picker popover relative to a positioning rect for a view with a preferred edge. See NSPopover for more information.
+// Shows the picker popover anchored to the specified view.
 //
 // ShowRelativeToRectOfViewPreferredEdge calls the underlying ShowRelativeToRectOfViewPreferredEdge.
 func (x *ContactPicker) ShowRelativeToRectOfViewPreferredEdge(positioningRect corefoundation.CGRect, positioningView *appkit.NSView, preferredEdge foundation.NSRectEdge) {
 	x.inner.ShowRelativeToRectOfViewPreferredEdge(positioningRect, positioningView, preferredEdge)
 }
 
-// @abstract Closes the popover.
+// Closes the popover.
 //
 // Close calls the underlying Close.
 func (x *ContactPicker) Close() {

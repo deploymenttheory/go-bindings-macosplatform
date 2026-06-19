@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that summarizes the average presence of a feature.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcpoolinglayer
 type MLCPoolingLayer struct {
 	MLCLayer
@@ -30,7 +32,7 @@ func MLCPoolingLayerFromID(id objc.ID) *MLCPoolingLayer {
 	return o
 }
 
-// @abstract   Create a pooling layer @param      descriptor  The pooling descriptor @return     A new pooling layer
+// Creates a pooling layer with the descriptor you specify.
 func MLCPoolingLayerLayerWithDescriptor(descriptor *MLCPoolingDescriptor) *MLCPoolingLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPoolingLayer), _mLCPoolingLayerSelLayerWithDescriptor, descriptor.Ptr())
 	if _ret != 0 {

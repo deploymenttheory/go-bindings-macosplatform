@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A filter that returns the element-wise difference of its two input images.
+//
 // ImageSubtract wraps [raw.MPSImageSubtract] with a fluent Go API.
 type ImageSubtract struct {
 	inner *raw.MPSImageSubtract
@@ -92,7 +94,7 @@ func (x *ImageSubtract) WithMaximumValue(maximumValue float32) *ImageSubtract {
 	return x
 }
 
-// @property   primaryOffset @abstract   The position of the destination clip rectangle origin relative to the primary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also: @ref MetalPerformanceShaders.h  subsubsection_mpsoffset
+// The position of the destination clip rectangle origin relative to the primary source buffer.
 //
 // WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
 func (x *ImageSubtract) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageSubtract {
@@ -100,7 +102,7 @@ func (x *ImageSubtract) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *Imag
 	return x
 }
 
-// @property   secondaryOffset @abstract   The position of the destination clip rectangle origin relative to the secondary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also: @ref MetalPerformanceShaders.h  subsubsection_mpsoffset
+// The position of the destination clip rectangle origin relative to the secondary source buffer.
 //
 // WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
 func (x *ImageSubtract) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageSubtract {
@@ -108,7 +110,7 @@ func (x *ImageSubtract) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *
 	return x
 }
 
-// @property   primaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of a source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h  subsubsection_edgemode
+// The edge mode to use when texture reads stray off the edge of the primary source image.
 //
 // WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
 func (x *ImageSubtract) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *ImageSubtract {
@@ -116,7 +118,7 @@ func (x *ImageSubtract) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdge
 	return x
 }
 
-// @property   secondaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the secondary source image @discussion Most MPSKernel objects can read off the edge of a source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h  subsubsection_edgemode
+// The edge mode to use when texture reads stray off the edge of the secondary source image.
 //
 // WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
 func (x *ImageSubtract) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *ImageSubtract {
@@ -124,7 +126,7 @@ func (x *ImageSubtract) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImage
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 //
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageSubtract) WithClipRect(clipRect metal.MTLRegion) *ImageSubtract {
@@ -132,7 +134,7 @@ func (x *ImageSubtract) WithClipRect(clipRect metal.MTLRegion) *ImageSubtract {
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageSubtract) WithOptions(options mpscore.MPSKernelOptions) *ImageSubtract {
@@ -140,7 +142,7 @@ func (x *ImageSubtract) WithOptions(options mpscore.MPSKernelOptions) *ImageSubt
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageSubtract) WithLabel(label string) *ImageSubtract {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that is run by a node to change its structure or content.
+//
 // Action wraps [raw.SKAction] with a fluent Go API.
 type Action struct {
 	inner *raw.SKAction
@@ -35,7 +37,7 @@ func NewAction() *Action {
 	return &Action{inner: raw.SKActionFromID(_id)}
 }
 
-// The duration required to complete an action, in seconds.
+// The duration required to complete an action.
 //
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *Action) WithDuration(duration float64) *Action {
@@ -43,7 +45,7 @@ func (x *Action) WithDuration(duration float64) *Action {
 	return x
 }
 
-// The timing mode used to execute an action @see SKActionTimingMode
+// A setting that controls the speed curve of an animation.
 //
 // WithTimingMode sets the timingMode property and returns the receiver for chaining.
 func (x *Action) WithTimingMode(timingMode SKActionTimingMode) *Action {
@@ -51,7 +53,7 @@ func (x *Action) WithTimingMode(timingMode SKActionTimingMode) *Action {
 	return x
 }
 
-// When set, prodives a custom timing via a block. Applies after the 'timingMode' property is taken into account, defaults to nil @see SKActionTimingFunction
+// A block used to customize the timing function.
 //
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
 func (x *Action) WithTimingFunction(timingFunction objc.Block) *Action {
@@ -59,7 +61,7 @@ func (x *Action) WithTimingFunction(timingFunction objc.Block) *Action {
 	return x
 }
 
-// A speed factor that modifies how fast an action runs. Default value is 1.0
+// A speed factor that modifies how fast an action runs.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *Action) WithSpeed(speed float64) *Action {

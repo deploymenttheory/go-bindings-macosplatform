@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides basic, single-keyframe animation capabilities for a layer property.
+//
 // BasicAnimation wraps [raw.CABasicAnimation] with a fluent Go API.
 type BasicAnimation struct {
 	inner *raw.CABasicAnimation
@@ -36,60 +38,80 @@ func NewBasicAnimation() *BasicAnimation {
 	return &BasicAnimation{inner: raw.CABasicAnimationFromID(_id)}
 }
 
+// Defines the value the receiver uses to start interpolation.
+//
 // WithFromValue sets the fromValue property and returns the receiver for chaining.
 func (x *BasicAnimation) WithFromValue(fromValue objc.ID) *BasicAnimation {
 	x.inner.SetFromValue(fromValue)
 	return x
 }
 
+// Defines the value the receiver uses to end interpolation.
+//
 // WithToValue sets the toValue property and returns the receiver for chaining.
 func (x *BasicAnimation) WithToValue(toValue objc.ID) *BasicAnimation {
 	x.inner.SetToValue(toValue)
 	return x
 }
 
+// Defines the value the receiver uses to perform relative interpolation.
+//
 // WithByValue sets the byValue property and returns the receiver for chaining.
 func (x *BasicAnimation) WithByValue(byValue objc.ID) *BasicAnimation {
 	x.inner.SetByValue(byValue)
 	return x
 }
 
+// Specifies the key path the receiver animates.
+//
 // WithKeyPath sets the keyPath property and returns the receiver for chaining.
 func (x *BasicAnimation) WithKeyPath(keyPath string) *BasicAnimation {
 	x.inner.CAPropertyAnimation.SetKeyPath(foundation.NSStringStringWithUTF8String(keyPath))
 	return x
 }
 
+// Determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
+//
 // WithAdditive sets the additive property and returns the receiver for chaining.
 func (x *BasicAnimation) WithAdditive(additive bool) *BasicAnimation {
 	x.inner.CAPropertyAnimation.SetAdditive(additive)
 	return x
 }
 
+// Determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
+//
 // WithCumulative sets the cumulative property and returns the receiver for chaining.
 func (x *BasicAnimation) WithCumulative(cumulative bool) *BasicAnimation {
 	x.inner.CAPropertyAnimation.SetCumulative(cumulative)
 	return x
 }
 
+// An optional value function that is applied to interpolated values.
+//
 // WithValueFunction sets the valueFunction property and returns the receiver for chaining.
 func (x *BasicAnimation) WithValueFunction(valueFunction *ValueFunction) *BasicAnimation {
 	x.inner.CAPropertyAnimation.SetValueFunction(valueFunction.Unwrap())
 	return x
 }
 
+// An optional timing function defining the pacing of the animation.
+//
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
 func (x *BasicAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *BasicAnimation {
 	x.inner.CAPropertyAnimation.CAAnimation.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
+// Specifies the receiver’s delegate object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *BasicAnimation) WithDelegate(delegate raw.CAAnimationDelegate) *BasicAnimation {
 	x.inner.CAPropertyAnimation.CAAnimation.SetDelegate(delegate)
 	return x
 }
 
+// Determines if the animation is removed from the target layer’s animations upon completion.
+//
 // WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
 func (x *BasicAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *BasicAnimation {
 	x.inner.CAPropertyAnimation.CAAnimation.SetRemovedOnCompletion(removedOnCompletion)

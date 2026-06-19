@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A view for displaying 3D SceneKit content.
+//
 // View wraps [raw.SCNView] with a fluent Go API.
 type View struct {
 	inner *raw.SCNView
@@ -33,7 +35,7 @@ func ViewFromID(id objc.ID) *View {
 	return &View{inner: raw.SCNViewFromID(id)}
 }
 
-// @method initWithFrame:options: @abstract Initializes and returns a newly allocated SCNView object with a specified frame rectangle. @param frame The frame rectangle for the created view object. @param options An optional dictionary. See "View initialization options" above.
+// Initializes and returns a newly allocated SceneKit view object with the specified frame rectangle and options.
 //
 // NewViewWithFrameOptions creates a new [View].
 func NewViewWithFrameOptions(frame corefoundation.CGRect, options purego.IDer) *View {
@@ -42,7 +44,7 @@ func NewViewWithFrameOptions(frame corefoundation.CGRect, options purego.IDer) *
 	return &View{inner: raw.SCNViewFromID(_id)}
 }
 
-// @property scene @abstract Specifies the scene of the receiver
+// The scene to be displayed in the view.
 //
 // WithScene sets the scene property and returns the receiver for chaining.
 func (x *View) WithScene(scene *Scene) *View {
@@ -50,7 +52,7 @@ func (x *View) WithScene(scene *Scene) *View {
 	return x
 }
 
-// @property rendersContinuously @abstract When set to YES, the view continously redraw at the display link frame rate. When set to NO the view will only redraw when something change or animates in the receiver's scene. Defaults to NO.
+// A Boolean value that determines whether the view always renders at its preferred frame rate or only when its visible content changes.
 //
 // WithRendersContinuously sets the rendersContinuously property and returns the receiver for chaining.
 func (x *View) WithRendersContinuously(rendersContinuously bool) *View {
@@ -58,7 +60,7 @@ func (x *View) WithRendersContinuously(rendersContinuously bool) *View {
 	return x
 }
 
-// @property backgroundColor @abstract Specifies the background color of the receiver. Defaults to opaque white.
+// The background color of the view.
 //
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *View) WithBackgroundColor(backgroundColor *appkit.NSColor) *View {
@@ -66,7 +68,7 @@ func (x *View) WithBackgroundColor(backgroundColor *appkit.NSColor) *View {
 	return x
 }
 
-// @property allowsCameraControl @abstract A Boolean value that determines whether the user can manipulate the point of view used to render the scene. @discussion  When set to YES, the user can manipulate the current point of view with the mouse or the trackpad. The scene graph and existing cameras won't be modified by this action. The default value of this property is NO. Note that the primary purpose of this property is to aid in debugging your application. You may want to implement your own camera controller suitable for your application. The built-in camera controller let you: - drag the mouse to rotate the camera around the scene - drag+cmd to rotate the camera in local space - drag+shift to rotate using sticky axis - use the scroll wheel or alt+drag the mouse to translate the camera on its local X,Y plan - alt+scroll wheel to move the camera forward/backward - rotate gesture (trackpad only) to roll the camera (rotation around the Z axis) - pinch gesture (trackpad only) move the camera forward/backward - alt + pinch gesture (trackpad only) to zoom-in / zoom-out (change the field of view of the camera)
+// A Boolean value that determines whether the user can manipulate the current point of view that is used to render the scene.
 //
 // WithAllowsCameraControl sets the allowsCameraControl property and returns the receiver for chaining.
 func (x *View) WithAllowsCameraControl(allowsCameraControl bool) *View {
@@ -74,7 +76,7 @@ func (x *View) WithAllowsCameraControl(allowsCameraControl bool) *View {
 	return x
 }
 
-// @property preferredFramesPerSecond @abstract The rate you want the view to redraw its contents. @discussion When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain. The default value is 0 which means the display link will fire at the native cadence of the display hardware.
+// The animation frame rate that the view uses to render its scene.
 //
 // WithPreferredFramesPerSecond sets the preferredFramesPerSecond property and returns the receiver for chaining.
 func (x *View) WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View {
@@ -90,7 +92,7 @@ func (x *View) WithDrawableResizesAsynchronously(drawableResizesAsynchronously b
 	return x
 }
 
-// @property antialiasingMode @abstract Defaults to SCNAntialiasingModeMultisampling4X on macOS and SCNAntialiasingModeNone on iOS.
+// The antialiasing mode used for rendering the view’s scene.
 //
 // WithAntialiasingMode sets the antialiasingMode property and returns the receiver for chaining.
 func (x *View) WithAntialiasingMode(antialiasingMode SCNAntialiasingMode) *View {
@@ -98,28 +100,28 @@ func (x *View) WithAntialiasingMode(antialiasingMode SCNAntialiasingMode) *View 
 	return x
 }
 
-// @property snapshot @abstract Draws the contents of the view and returns them as a new image object @discussion This method is thread-safe and may be called at any time.
+// Renders the view’s scene into a new image object.
 //
 // Snapshot calls the underlying Snapshot.
 func (x *View) Snapshot() *appkit.NSImage {
 	return x.inner.Snapshot()
 }
 
-// @method play: @abstract This action method begins playing the scene at its current location. @param sender The object (such as a button or menu item) sending the message to play the scene. @discussion This method does not do anything if the scene is already playing.
+// Resumes playback of the view’s scene.
 //
 // Play calls the underlying Play.
 func (x *View) Play(sender objc.ID) {
 	x.inner.Play(sender)
 }
 
-// @method pause: @abstract This action method pauses the scene playback. @param sender The object (such as a button or menu item) sending the message to pause the scene. @discussion This method does not do anything if the scene is already paused.
+// Pauses playback of the view’s scene.
 //
 // Pause calls the underlying Pause.
 func (x *View) Pause(sender objc.ID) {
 	x.inner.Pause(sender)
 }
 
-// @method stop: @abstract This action method stops the scene playback and resets the current time to the start time of the scene. @param sender The object (such as a button or menu item) sending the message to stop playing the scene.
+// Stops playback of the view’s scene and resets the scene time to its start time.
 //
 // Stop calls the underlying Stop.
 func (x *View) Stop(sender objc.ID) {

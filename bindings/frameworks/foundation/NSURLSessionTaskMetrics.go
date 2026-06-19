@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object encapsulating the metrics for a session task.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsessiontaskmetrics
 type NSURLSessionTaskMetrics struct {
 	NSObject

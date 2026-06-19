@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view that displays the sender who shares a highlight and provides related actions.
+//
 // AttributionView wraps [raw.SWAttributionView] with a fluent Go API.
 type AttributionView struct {
 	inner *raw.SWAttributionView
@@ -38,7 +40,7 @@ func NewAttributionView() *AttributionView {
 	return &AttributionView{inner: raw.SWAttributionViewFromID(_id)}
 }
 
-// @abstract The SWHighlight to use for displaying this attribution. When this property is set to a new highlight, the contents of the view will be reloaded.
+// The highlight you use to display this attribution.
 //
 // WithHighlight sets the highlight property and returns the receiver for chaining.
 func (x *AttributionView) WithHighlight(highlight HighlightProvider) *AttributionView {
@@ -46,7 +48,7 @@ func (x *AttributionView) WithHighlight(highlight HighlightProvider) *Attributio
 	return x
 }
 
-// @abstract The context for the content being displayed with this view. Set this prior to adding this view to your view hierarchy.
+// The context for the content the system displays with this view.
 //
 // WithDisplayContext sets the displayContext property and returns the receiver for chaining.
 func (x *AttributionView) WithDisplayContext(displayContext SWAttributionViewDisplayContext) *AttributionView {
@@ -54,7 +56,7 @@ func (x *AttributionView) WithDisplayContext(displayContext SWAttributionViewDis
 	return x
 }
 
-// @abstract The horizontal alignment of the view. You should specify a value, in case the internal default ever changes. @discussion This value specifies the horizontal anchor for the view's contents. This only has an effect when the width of the contents are less than the available width.
+// The horizontal alignment of the view.
 //
 // WithHorizontalAlignment sets the horizontalAlignment property and returns the receiver for chaining.
 func (x *AttributionView) WithHorizontalAlignment(horizontalAlignment SWAttributionViewHorizontalAlignment) *AttributionView {
@@ -62,7 +64,7 @@ func (x *AttributionView) WithHorizontalAlignment(horizontalAlignment SWAttribut
 	return x
 }
 
-// @abstract The background style of the inner view containing names and avatars. @discussion If you do not specify a background style, one will be chosen automatically. In general, .color looks best on monochrome backgrounds, while .material looks better on colored backgrounds.
+// The background style of the child view that contains names and avatars.
 //
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
 func (x *AttributionView) WithBackgroundStyle(backgroundStyle SWAttributionViewBackgroundStyle) *AttributionView {
@@ -70,7 +72,7 @@ func (x *AttributionView) WithBackgroundStyle(backgroundStyle SWAttributionViewB
 	return x
 }
 
-// @abstract For use when embedding this view in a SwiftUI view representable. @discussion When using this view in SwiftUI, this view will constrain its contents to this width. If you are not using SwiftUI this property should not be necessary, as SWAttributionView otherwise derives the maximum width from the frame or constraints you set.
+// A width the system uses to constrain the view contents.
 //
 // WithPreferredMaxLayoutWidth sets the preferredMaxLayoutWidth property and returns the receiver for chaining.
 func (x *AttributionView) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *AttributionView {
@@ -78,7 +80,7 @@ func (x *AttributionView) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth fl
 	return x
 }
 
-// @abstract A custom localized string to be used as the title for the "Hide" menu item title. A nil value will result in the default title. @discussion SWAttributionView manages a context menu which includes the option for the user to hide the content for the SWHighlight represented by this view. Set a title to be used as the title for that context menu. An app that displays articles, for example, might set @"Hide Article", localized to the current language. The string should include the word "Hide", localized correctly with the custom content type.
+// A localized string the system uses as a custom title for the hide menu item.
 //
 // WithMenuTitleForHideAction sets the menuTitleForHideAction property and returns the receiver for chaining.
 func (x *AttributionView) WithMenuTitleForHideAction(menuTitleForHideAction string) *AttributionView {
@@ -86,6 +88,8 @@ func (x *AttributionView) WithMenuTitleForHideAction(menuTitleForHideAction stri
 	return x
 }
 
+// A supplemental menu to augment the attribution view’s existing menu.
+//
 // WithSupplementalMenu sets the supplementalMenu property and returns the receiver for chaining.
 func (x *AttributionView) WithSupplementalMenu(supplementalMenu *appkit.NSMenuItem) *AttributionView {
 	x.inner.SetSupplementalMenu(supplementalMenu)

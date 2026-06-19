@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides a constraint-based layout manager.
+//
 // ConstraintLayoutManager wraps [raw.CAConstraintLayoutManager] with a fluent Go API.
 type ConstraintLayoutManager struct {
 	inner *raw.CAConstraintLayoutManager

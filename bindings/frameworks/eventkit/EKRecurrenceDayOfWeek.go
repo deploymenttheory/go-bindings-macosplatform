@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents the day of the week.
+//
 // Apple documentation: https://developer.apple.com/documentation/eventkit/ekrecurrencedayofweek
 type EKRecurrenceDayOfWeek struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func EKRecurrenceDayOfWeekFromID(id objc.ID) *EKRecurrenceDayOfWeek {
 	return o
 }
 
-// @method     dayOfWeek: @abstract   Creates an autoreleased object with a day of the week and week number of zero.
+// Creates and returns a day of the week with a given day.
 func EKRecurrenceDayOfWeekDayOfWeek(dayOfTheWeek EKWeekday) *EKRecurrenceDayOfWeek {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKRecurrenceDayOfWeek), _eKRecurrenceDayOfWeekSelDayOfWeek, dayOfTheWeek)
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func EKRecurrenceDayOfWeekDayOfWeek(dayOfTheWeek EKWeekday) *EKRecurrenceDayOfWe
 	return EKRecurrenceDayOfWeekFromID(_ret)
 }
 
-// @method     dayOfWeek:weekNumber: @abstract   Creates an autoreleased object with a specific day of week and week number.
+// Creates and returns an autoreleased day of the week with a given day and week number.
 func EKRecurrenceDayOfWeekDayOfWeekWeekNumber(dayOfTheWeek EKWeekday, weekNumber int) *EKRecurrenceDayOfWeek {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKRecurrenceDayOfWeek), _eKRecurrenceDayOfWeekSelDayOfWeekWeekNumber, dayOfTheWeek, weekNumber)
 	if _ret != 0 {
@@ -52,7 +54,7 @@ func EKRecurrenceDayOfWeekDayOfWeekWeekNumber(dayOfTheWeek EKWeekday, weekNumber
 	return EKRecurrenceDayOfWeekFromID(_ret)
 }
 
-// @method     initWithDayOfTheWeek:weekNumber: @abstract   Creates an day-of-week object with a specific day of week and week number.
+// Initializes and returns a day of the week with a given day and week number.
 func (o *EKRecurrenceDayOfWeek) InitWithDayOfTheWeekWeekNumber(dayOfTheWeek EKWeekday, weekNumber int) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKRecurrenceDayOfWeekSelInitWithDayOfTheWeekWeekNumber, dayOfTheWeek, weekNumber)
 	return _ret

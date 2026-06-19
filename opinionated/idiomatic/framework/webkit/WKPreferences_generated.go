@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that encapsulates the standard behaviors to apply to websites.
+//
 // WKPreferences wraps [raw.WKPreferences] with a fluent Go API.
 type WKPreferences struct {
 	inner *raw.WKPreferences
@@ -35,7 +37,7 @@ func NewWKPreferences() *WKPreferences {
 	return &WKPreferences{inner: raw.WKPreferencesFromID(_id)}
 }
 
-// @abstract The minimum font size in points. @discussion The default value is 0.
+// The minimum font size, in points.
 //
 // WithMinimumFontSize sets the minimumFontSize property and returns the receiver for chaining.
 func (x *WKPreferences) WithMinimumFontSize(minimumFontSize float64) *WKPreferences {
@@ -43,7 +45,7 @@ func (x *WKPreferences) WithMinimumFontSize(minimumFontSize float64) *WKPreferen
 	return x
 }
 
-// @abstract A Boolean value indicating whether JavaScript can open windows without user interaction. @discussion The default value is NO in iOS and YES in OS X.
+// A Boolean value that indicates whether JavaScript can open windows without user interaction.
 //
 // WithJavaScriptCanOpenWindowsAutomatically sets the javaScriptCanOpenWindowsAutomatically property and returns the receiver for chaining.
 func (x *WKPreferences) WithJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool) *WKPreferences {
@@ -51,7 +53,7 @@ func (x *WKPreferences) WithJavaScriptCanOpenWindowsAutomatically(javaScriptCanO
 	return x
 }
 
-// @abstract A Boolean value indicating whether warnings should be shown for suspected fraudulent content such as phishing or malware. @discussion The default value is YES.
+// A Boolean value that indicates whether the web view shows warnings for suspected fraudulent content, such as malware or phishing attemps.
 //
 // WithFraudulentWebsiteWarningEnabled sets the fraudulentWebsiteWarningEnabled property and returns the receiver for chaining.
 func (x *WKPreferences) WithFraudulentWebsiteWarningEnabled(fraudulentWebsiteWarningEnabled bool) *WKPreferences {
@@ -59,7 +61,7 @@ func (x *WKPreferences) WithFraudulentWebsiteWarningEnabled(fraudulentWebsiteWar
 	return x
 }
 
-// @abstract A Boolean value indicating whether the web view should include backgrounds when printing. @discussion The default value is `NO`.
+// A Boolean value that indicates whether to include any background color or graphics when printing content.
 //
 // WithShouldPrintBackgrounds sets the shouldPrintBackgrounds property and returns the receiver for chaining.
 func (x *WKPreferences) WithShouldPrintBackgrounds(shouldPrintBackgrounds bool) *WKPreferences {
@@ -67,7 +69,7 @@ func (x *WKPreferences) WithShouldPrintBackgrounds(shouldPrintBackgrounds bool) 
 	return x
 }
 
-// @property tabFocusesLinks @abstract If tabFocusesLinks is YES, the tab key will focus links and form controls. The Option key temporarily reverses this preference.
+// A Boolean value that indicates whether pressing the tab key changes the focus to links and form controls.
 //
 // WithTabFocusesLinks sets the tabFocusesLinks property and returns the receiver for chaining.
 func (x *WKPreferences) WithTabFocusesLinks(tabFocusesLinks bool) *WKPreferences {
@@ -75,7 +77,7 @@ func (x *WKPreferences) WithTabFocusesLinks(tabFocusesLinks bool) *WKPreferences
 	return x
 }
 
-// @abstract A Boolean value indicating whether text interaction is disabled.
+// A Boolean value that indicates whether to allow people to select or otherwise interact with text.
 //
 // WithTextInteractionEnabled sets the textInteractionEnabled property and returns the receiver for chaining.
 func (x *WKPreferences) WithTextInteractionEnabled(textInteractionEnabled bool) *WKPreferences {
@@ -83,7 +85,7 @@ func (x *WKPreferences) WithTextInteractionEnabled(textInteractionEnabled bool) 
 	return x
 }
 
-// @abstract A Boolean value indicating whether WebKit will apply built-in workarounds (quirks) to improve compatibility with certain known websites. You can disable site-specific quirks to help test your website without these workarounds. Enabled by default.
+// A Boolean that indicates whether to apply site-specific compatibility workarounds.
 //
 // WithSiteSpecificQuirksModeEnabled sets the siteSpecificQuirksModeEnabled property and returns the receiver for chaining.
 func (x *WKPreferences) WithSiteSpecificQuirksModeEnabled(siteSpecificQuirksModeEnabled bool) *WKPreferences {
@@ -91,7 +93,7 @@ func (x *WKPreferences) WithSiteSpecificQuirksModeEnabled(siteSpecificQuirksMode
 	return x
 }
 
-// @abstract A Boolean value indicating whether Fullscreen API is enabled. @discussion The default value is NO. We can set it to YES to enable support for the fullscreen API.
+// A Boolean value that indicates whether a web view can display content full screen.
 //
 // WithElementFullscreenEnabled sets the elementFullscreenEnabled property and returns the receiver for chaining.
 func (x *WKPreferences) WithElementFullscreenEnabled(elementFullscreenEnabled bool) *WKPreferences {
@@ -99,7 +101,7 @@ func (x *WKPreferences) WithElementFullscreenEnabled(elementFullscreenEnabled bo
 	return x
 }
 
-// @abstract Specify the scheduling policy for the web view when it is inactive and detached from the view hierarchy. Web views are not considered idle when playing media or loading web pages. A suspended web view will pause JavaScript execution and page layout.
+// A policy you set to specify how a web view that’s not in a window handles tasks.
 //
 // WithInactiveSchedulingPolicy sets the inactiveSchedulingPolicy property and returns the receiver for chaining.
 func (x *WKPreferences) WithInactiveSchedulingPolicy(inactiveSchedulingPolicy WKInactiveSchedulingPolicy) *WKPreferences {
@@ -107,18 +109,24 @@ func (x *WKPreferences) WithInactiveSchedulingPolicy(inactiveSchedulingPolicy WK
 	return x
 }
 
+// A Boolean value that indicates whether Java is enabled.
+//
 // WithJavaEnabled sets the javaEnabled property and returns the receiver for chaining.
 func (x *WKPreferences) WithJavaEnabled(javaEnabled bool) *WKPreferences {
 	x.inner.SetJavaEnabled(javaEnabled)
 	return x
 }
 
+// A Boolean value that indicates whether plug-ins are enabled.
+//
 // WithPlugInsEnabled sets the plugInsEnabled property and returns the receiver for chaining.
 func (x *WKPreferences) WithPlugInsEnabled(plugInsEnabled bool) *WKPreferences {
 	x.inner.SetPlugInsEnabled(plugInsEnabled)
 	return x
 }
 
+// A Boolean value that indicates whether JavaScript is enabled.
+//
 // WithJavaScriptEnabled sets the javaScriptEnabled property and returns the receiver for chaining.
 func (x *WKPreferences) WithJavaScriptEnabled(javaScriptEnabled bool) *WKPreferences {
 	x.inner.SetJavaScriptEnabled(javaScriptEnabled)

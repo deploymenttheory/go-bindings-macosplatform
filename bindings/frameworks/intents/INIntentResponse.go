@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Your response to an intent object.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inintentresponse
 type INIntentResponse struct {
 	foundation.NSObject

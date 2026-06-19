@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that divides the channels into groups for normalization.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcgroupnormalizationlayer
 type MLCGroupNormalizationLayer struct {
 	MLCLayer
@@ -36,7 +38,7 @@ func MLCGroupNormalizationLayerFromID(id objc.ID) *MLCGroupNormalizationLayer {
 	return o
 }
 
-// @abstract Create a group normalization layer @param featureChannelCount  The number of feature channels @param beta  Training parameter @param gamma  Training parameter @param groupCount  The number of groups to divide the feature channels into @param varianceEpsilon  A small numerical value added to variance for stability @return A new group normalization layer.
+// Creates a group normalization layer with the number of feature channels and groups, beta and gamma tensors, and variance epsilon you specify.
 func MLCGroupNormalizationLayerLayerWithFeatureChannelCountGroupCountBetaGammaVarianceEpsilon(featureChannelCount uint, groupCount uint, beta *MLCTensor, gamma *MLCTensor, varianceEpsilon float32) *MLCGroupNormalizationLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCGroupNormalizationLayer), _mLCGroupNormalizationLayerSelLayerWithFeatureChannelCountGroupCountBetaGammaVarianceEpsilon, featureChannelCount, groupCount, beta.Ptr(), gamma.Ptr(), varianceEpsilon)
 	if _ret != 0 {

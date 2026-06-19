@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A unit of measure for concentration of mass.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitconcentrationmass
 type NSUnitConcentrationMass struct {
 	NSDimension

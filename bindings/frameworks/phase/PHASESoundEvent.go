@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that determines which audio to play.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasesoundevent
 type PHASESoundEvent struct {
 	foundation.NSObject
@@ -50,7 +52,7 @@ func PHASESoundEventFromID(id objc.ID) *PHASESoundEvent {
 	return o
 }
 
-// @method initWithEngine:assetIdentifier:mixerParameters:error @abstract Creates a new sound event instance @param engine The PHASEEngine object that the sound event will be played by. @param assetIdentifier The identifier registered with the Asset Registry for the particular PHASESoundEventNodeAsset that this sound instance will play. If the asset identifier is not registered, this function will fail. @param mixerParameters A dictionary of PHASEMixerParameters objects with keys that match the identifiers of the spatial mixers in the sound event @discussion This will look up the asset in the asset registry and create the necessary objects to play the sound event
+// Creates a sound event node with the given asset and mixer parameters.
 func (o *PHASESoundEvent) InitWithEngineAssetIdentifierMixerParametersError(engine *PHASEEngine, assetIdentifier *foundation.NSString, mixerParameters *PHASEMixerParameters) (*PHASESoundEvent, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESoundEventSelInitWithEngineAssetIdentifierMixerParametersError, engine.Ptr(), assetIdentifier.Ptr(), mixerParameters.Ptr(), unsafe.Pointer(&_nsErr))
@@ -63,7 +65,7 @@ func (o *PHASESoundEvent) InitWithEngineAssetIdentifierMixerParametersError(engi
 	return PHASESoundEventFromID(_ret), nil
 }
 
-// @method initWithEngine:assetIdentifier:error @abstract Creates a new sound event instance @param engine The PHASEEngine object that the sound event will be played by. @param assetIdentifier The identifier registered with the Asset Registry for the particular PHASESoundEventNodeAsset that this sound event will play. If the asset identifier is not registered, this function will fail. @discussion This will look up the asset in the asset registry and create the necessary objects to play the sound event
+// Creates a sound event node with the given asset.
 func (o *PHASESoundEvent) InitWithEngineAssetIdentifierError(engine *PHASEEngine, assetIdentifier *foundation.NSString) (*PHASESoundEvent, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESoundEventSelInitWithEngineAssetIdentifierError, engine.Ptr(), assetIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
@@ -76,7 +78,7 @@ func (o *PHASESoundEvent) InitWithEngineAssetIdentifierError(engine *PHASEEngine
 	return PHASESoundEventFromID(_ret), nil
 }
 
-// @method prepareWithCompletion @abstract Prepare the sound event @param handler The block that will be called when the PHASESoundEvent has finished preparing and is ready to start. Pass in nil for no handler. @discussion This function notifies the engine to begin preparing a sound event, then returns immediately. Once the sound event is prepared (or has failed to prepare), you will receive a callback via the completion. If you call startWithCompletion() before receiving the callback, the sound event will start as soon as it's prepared.
+// Enables a sound event to play and runs the argument code when the sound event plays back.
 func (o *PHASESoundEvent) PrepareWithCompletion(handler func(PHASESoundEventPrepareHandlerReason)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -88,7 +90,7 @@ func (o *PHASESoundEvent) PrepareWithCompletion(handler func(PHASESoundEventPrep
 	o.Ptr().Send(_pHASESoundEventSelPrepareWithCompletion, __block_handler)
 }
 
-// @method startWithCompletion @abstract Start the sound event @param handler The block that will be called when the sound event has stopped. @discussion This function notifies the engine to start the sound event, then returns immediately. Once the sound event is playing (or has failed to start), you will receive a callback via the completion. Playback will begin immediately if the sound event has been prepared; otherwise, it will start as soon as it is finished preparing.
+// Invokes the sound event and runs the specified code on completion.
 func (o *PHASESoundEvent) StartWithCompletion(handler func(PHASESoundEventStartHandlerReason)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -112,7 +114,7 @@ func (o *PHASESoundEvent) StartAtTimeCompletion(when *avfaudio.AVAudioTime, hand
 	o.Ptr().Send(_pHASESoundEventSelStartAtTimeCompletion, when.Ptr(), __block_handler)
 }
 
-// @method seekToTime:completion @abstract Seeks all leaf nodes in a PHASESoundEvent to a specified time relative to the start of the sound event. @discussion This function notifies the engine to seek the sound event, then returns immediately. Once the sound event has seeked to the new offset (or has failed to seek), you will receive a callback via the completion. If any leaf nodes do not support seeking, those nodes will ignore this command. Nodes that have finished playing or have stopped will not seek. Nodes that are sleeping will seek, and will resume at the correct time when they wake up. @note The time is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
+// Advances the sound event’s playback position to a specific time.
 func (o *PHASESoundEvent) SeekToTimeCompletion(time_ float64, handler func(PHASESoundEventSeekHandlerReason)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -136,12 +138,12 @@ func (o *PHASESoundEvent) SeekToTimeResumeAtEngineTimeCompletion(time_ float64, 
 	o.Ptr().Send(_pHASESoundEventSelSeekToTimeResumeAtEngineTimeCompletion, time_, engineTime.Ptr(), __block_handler)
 }
 
-// @method pause @abstract Pause the sound event.
+// Pauses the sound event.
 func (o *PHASESoundEvent) Pause() {
 	o.Ptr().Send(_pHASESoundEventSelPause)
 }
 
-// @method resume @abstract Resume the sound event.
+// Resumes the sound event.
 func (o *PHASESoundEvent) Resume() {
 	o.Ptr().Send(_pHASESoundEventSelResume)
 }
@@ -151,7 +153,7 @@ func (o *PHASESoundEvent) ResumeAtTime(time_ *avfaudio.AVAudioTime) {
 	o.Ptr().Send(_pHASESoundEventSelResumeAtTime, time_.Ptr())
 }
 
-// @method stopAndInvalidate @abstract stop and invalidate the sound event
+// Stops a sound event and prevents it from resuming.
 func (o *PHASESoundEvent) StopAndInvalidate() {
 	o.Ptr().Send(_pHASESoundEventSelStopAndInvalidate)
 }
@@ -170,26 +172,38 @@ func (o *PHASESoundEvent) PrepareState() PHASESoundEventPrepareState {
 
 // @property metaParameters @abstract A Dictionary containing the MetaParameters associated with this sound event
 func (o *PHASESoundEvent) MetaParameters() *foundation.NSDictionary[*foundation.NSString, *PHASEMetaParameter] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *PHASEMetaParameter]](o.Ptr(), _pHASESoundEventSelMetaParameters)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESoundEventSelMetaParameters)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *PHASEMetaParameter](_ret)
 }
 
 // @property mixNodes @abstract A Dictionary containing the mix nodes associated with this sound event
 func (o *PHASESoundEvent) Mixers() *foundation.NSDictionary[*foundation.NSString, *PHASEMixer] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *PHASEMixer]](o.Ptr(), _pHASESoundEventSelMixers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESoundEventSelMixers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *PHASEMixer](_ret)
 }
 
 // @property pushStreamNodes @abstract A Dictionary containing the push stream nodes associated with this sound event, for pushing buffers to.
 func (o *PHASESoundEvent) PushStreamNodes() *foundation.NSDictionary[*foundation.NSString, *PHASEPushStreamNode] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *PHASEPushStreamNode]](o.Ptr(), _pHASESoundEventSelPushStreamNodes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESoundEventSelPushStreamNodes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *PHASEPushStreamNode](_ret)
 }
 
 // @property pullStreamNodes @abstract A Dictionary containing the pull stream nodes associated with this sound event, for setting renderBlocks on.
 func (o *PHASESoundEvent) PullStreamNodes() *foundation.NSDictionary[*foundation.NSString, *PHASEPullStreamNode] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *PHASEPullStreamNode]](o.Ptr(), _pHASESoundEventSelPullStreamNodes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESoundEventSelPullStreamNodes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *PHASEPullStreamNode](_ret)
 }
 
 // @property indefinite @abstract A boolean that tell if this sound event will run indefinitely, or finish executing on its own

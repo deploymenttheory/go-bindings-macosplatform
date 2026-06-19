@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the options to use when fetching contacts.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cncontactfetchrequest
 type CNContactFetchRequest struct {
 	CNFetchRequest
@@ -40,7 +42,7 @@ func CNContactFetchRequestFromID(id objc.ID) *CNContactFetchRequest {
 	return o
 }
 
-// @param      keysToFetch The properties to fetch for the returned contacts. @discussion Only fetch the properties that will be used.
+// Creates a fetch request for the specified keys.
 func (o *CNContactFetchRequest) InitWithKeysToFetch(keysToFetch *foundation.NSArray[CNKeyDescriptor]) *CNContactFetchRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactFetchRequestSelInitWithKeysToFetch, keysToFetch.Ptr())
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A light source that illuminates a 3D scene from an area with a specific shape.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlarealight
 type MDLAreaLight struct {
 	MDLPhysicallyPlausibleLight

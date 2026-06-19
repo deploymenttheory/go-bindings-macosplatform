@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides access to accelerated offscreen rendering.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsopenglpixelbuffer
 // Deprecated: Use GL_EXT_framebuffer_object instead
 type NSOpenGLPixelBuffer struct {
@@ -40,6 +42,7 @@ func NSOpenGLPixelBufferFromID(id objc.ID) *NSOpenGLPixelBuffer {
 	return o
 }
 
+// Returns an NSOpenGLPixelBuffer object initialized with the specified parameters.
 // Deprecated: since macOS 10.7.
 func (o *NSOpenGLPixelBuffer) InitWithTextureTargetTextureInternalFormatTextureMaxMipMapLevelPixelsWidePixelsHigh(target uint32, format uint32, maxLevel int32, pixelsWide int32, pixelsHigh int32) *NSOpenGLPixelBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLPixelBufferSelInitWithTextureTargetTextureInternalFormatTextureMaxMipMapLevelPixelsWidePixelsHigh, target, format, maxLevel, pixelsWide, pixelsHigh)
@@ -49,6 +52,7 @@ func (o *NSOpenGLPixelBuffer) InitWithTextureTargetTextureInternalFormatTextureM
 	return NSOpenGLPixelBufferFromID(_ret)
 }
 
+// Initializes and returns an OpenGL pixel buffer object that encapsulates an existing CGL pixel buffer object.
 // Deprecated: since macOS 10.7.
 func (o *NSOpenGLPixelBuffer) InitWithCGLPBufferObj(pbuffer unsafe.Pointer) *NSOpenGLPixelBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLPixelBufferSelInitWithCGLPBufferObj, pbuffer)

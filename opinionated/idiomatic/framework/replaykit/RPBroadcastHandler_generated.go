@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that sends messages to the broadcasting app.
+//
 // BroadcastHandler wraps [raw.RPBroadcastHandler] with a fluent Go API.
 type BroadcastHandler struct {
 	inner *raw.RPBroadcastHandler
@@ -36,14 +38,14 @@ func NewBroadcastHandler() *BroadcastHandler {
 	return &BroadcastHandler{inner: raw.RPBroadcastHandlerFromID(_id)}
 }
 
-// @abstract Call this method, supplying it with a dictionary defined by the service, to populate the serviceInfo property on RPBroadcastController. This can be used to communicate viewing stats or messages back to the broadcasting app. @param serviceInfo Dictionary that can be passed back to the broadcasting app that may contain information about the ongoing broadcast.
+// Sends information about the current broadcast to the broadcasting app.
 //
 // UpdateServiceInfo calls the underlying UpdateServiceInfo.
 func (x *BroadcastHandler) UpdateServiceInfo(serviceInfo *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) {
 	x.inner.UpdateServiceInfo(serviceInfo)
 }
 
-// @abstract Call this method, supplying it with a URL to update the broadcastURL property on RPBroadcastController. @param broadcastURL URL of the resource where broadcast can be viewed which will be passed to the broadcasting app.
+// Sends the current broadcast URL to the broadcast controller.
 //
 // UpdateBroadcastURL calls the underlying UpdateBroadcastURL.
 func (x *BroadcastHandler) UpdateBroadcastURL(broadcastURL string) {

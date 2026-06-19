@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides a device or communicates its change in status.
+//
 // Apple documentation: https://developer.apple.com/documentation/devicediscoveryextension/dddeviceevent
 type DDDeviceEvent struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func DDDeviceEventFromID(id objc.ID) *DDDeviceEvent {
 	return o
 }
 
-// Initializes a device event.
+// Creates an event object that conveys status for a discovered device of interest.
 func (o *DDDeviceEvent) InitWithEventTypeDevice(type_ DDEventType, device *DDDevice) *DDDeviceEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceEventSelInitWithEventTypeDevice, type_, device.Ptr())
 	if _ret != 0 {

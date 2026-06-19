@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A kernel that computes the YOLO loss and loss gradient between specified predictions and labels.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnyololoss
 type MPSCNNYOLOLoss struct {
 	mpsneuralnetwork.MPSCNNKernel

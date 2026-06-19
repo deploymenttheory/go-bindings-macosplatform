@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a 3D point in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnpoint3d
 type VNPoint3D struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func VNPoint3DFromID(id objc.ID) *VNPoint3D {
 	return o
 }
 
+// Creates a point object with the position you specify.
 func (o *VNPoint3D) InitWithPosition(position unsafe.Pointer) *VNPoint3D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNPoint3DSelInitWithPosition, position)
 	if _ret != 0 {

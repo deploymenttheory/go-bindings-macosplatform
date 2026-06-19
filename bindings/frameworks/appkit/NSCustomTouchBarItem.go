@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bar item that contains a responder of your choice, such as a view, a button, or a scrubber.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscustomtouchbaritem
 type NSCustomTouchBarItem struct {
 	NSTouchBarItem

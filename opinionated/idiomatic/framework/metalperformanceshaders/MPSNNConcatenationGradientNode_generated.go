@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class MPSNNConcatenationGradientNode @abstract  A MPSNNSlice filter that operates as the conjugate computation for concatentation operators during training @discussion As concatenation is formally just a copy and not a computation, there isn't a lot of arithmetic for the slice operator to do, but we still need to extract out the relevant portion of the gradient of the input signal that went into the corresponding concatenation destination image.
+// A representation of the results from one or more gradient kernels.
 //
 // NNConcatenationGradientNode wraps [raw.MPSNNConcatenationGradientNode] with a fluent Go API.
 type NNConcatenationGradientNode struct {

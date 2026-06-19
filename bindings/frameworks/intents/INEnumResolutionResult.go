@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for an enumeration associated with an intent.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inenumresolutionresult
 type INEnumResolutionResult struct {
 	INIntentResolutionResult
@@ -30,6 +32,7 @@ func INEnumResolutionResultFromID(id objc.ID) *INEnumResolutionResult {
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INEnumResolutionResultSuccessWithResolvedValue(resolvedValue int) *INEnumResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINEnumResolutionResult), _iNEnumResolutionResultSelSuccessWithResolvedValue, resolvedValue)
 	if _ret != 0 {
@@ -38,6 +41,7 @@ func INEnumResolutionResultSuccessWithResolvedValue(resolvedValue int) *INEnumRe
 	return INEnumResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INEnumResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm int) *INEnumResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINEnumResolutionResult), _iNEnumResolutionResultSelConfirmationRequiredWithValueToConfirm, valueToConfirm)
 	if _ret != 0 {

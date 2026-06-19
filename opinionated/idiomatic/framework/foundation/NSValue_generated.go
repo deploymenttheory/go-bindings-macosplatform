@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A simple container for a single C or Objective-C data item.
+//
 // Value wraps [raw.NSValue] with a fluent Go API.
 type Value struct {
 	inner *raw.NSValue
@@ -31,6 +33,8 @@ func ValueFromID(id objc.ID) *Value {
 	return &Value{inner: raw.NSValueFromID(id)}
 }
 
+// Initializes a value object to contain the specified value, interpreted with the specified Objective-C type.
+//
 // NewValueWithBytesObjCType creates a new [Value].
 func NewValueWithBytesObjCType(value unsafe.Pointer, type_ string) *Value {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSValue")), objc.RegisterName("alloc"))
@@ -51,6 +55,8 @@ func (x *Value) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*r
 	return x
 }
 
+// Copies the value into the specified buffer.
+//
 // GetValueSize calls the underlying GetValueSize.
 func (x *Value) GetValueSize(value unsafe.Pointer, size uint) {
 	x.inner.GetValueSize(value, size)
@@ -61,6 +67,8 @@ func (x *Value) ObjCType() unsafe.Pointer {
 	return x.inner.ObjCType()
 }
 
+// Returns a Boolean value that indicates whether the value object and another value object are equal.
+//
 // IsEqualToValue calls the underlying IsEqualToValue.
 func (x *Value) IsEqualToValue(value *raw.NSValue) bool {
 	return x.inner.IsEqualToValue(value)
@@ -76,6 +84,8 @@ func (x *Value) PointerValue() unsafe.Pointer {
 	return x.inner.PointerValue()
 }
 
+// Copies the value into the specified buffer.
+//
 // GetValue calls the underlying GetValue.
 func (x *Value) GetValue(value unsafe.Pointer) {
 	x.inner.GetValue(value)

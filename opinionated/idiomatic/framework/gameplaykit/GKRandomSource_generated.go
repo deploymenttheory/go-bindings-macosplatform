@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A concrete random source that can generate random numbers. The implementation details are up to the system and if a particular algorithm is needed then use one of the provided subclasses. For certain specialized applications a shared system source may be needed and for those instances there is a wrapped interface over arc4random_*, accessible via +[GKRandomSource sharedRandom]. @see GKARC4RandomSource @see GKLinearCongruentialRandomSource @see GKMersenneTwisterRandomSource @see GKRandomSource.systemRandom
+// The superclass for all basic randomization classes in GameplayKit.
 //
 // RandomSource wraps [raw.GKRandomSource] with a fluent Go API.
 type RandomSource struct {
@@ -47,7 +47,7 @@ func NewRandomSourceWithCoder(aDecoder *foundation.NSCoder) *RandomSource {
 	return &RandomSource{inner: raw.GKRandomSourceFromID(_id)}
 }
 
-// Returns a shuffled instance of the given array. The objects in the array are shuffled based on a Fisher-Yates shuffle. Any random, be it custom, source or a distribution, that can provide a number with an upper bound of at least the array.count is suitable for this shuffle.
+// Returns an array whose contents are the same as those of the specified array, but in a random order determined by the random source.
 //
 // ArrayByShufflingObjectsInArray calls the underlying ArrayByShufflingObjectsInArray.
 func (x *RandomSource) ArrayByShufflingObjectsInArray(array *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {

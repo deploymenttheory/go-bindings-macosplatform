@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A subtraction operator.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnsubtract
 type MPSCNNSubtract struct {
 	mpsneuralnetwork.MPSCNNArithmetic

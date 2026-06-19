@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance that provides information for the content in a given stream.
+//
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/scshareablecontentinfo
 type SCShareableContentInfo struct {
 	foundation.NSObject

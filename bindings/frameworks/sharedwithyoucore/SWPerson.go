@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that tracks participants in a collaboration.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyoucore/swperson
 type SWPerson struct {
 	foundation.NSObject
@@ -30,7 +32,7 @@ func SWPersonFromID(id objc.ID) *SWPerson {
 	return o
 }
 
-// @abstract An initializer @param handle The phone number or email address for this person. @param identity The identity of this person. @param displayName The name of this person. @param thumbnailImageData Optional thumbnail image data for this person. If nil, this will be inferred by the system.
+// Creates and initializes a person object.
 func (o *SWPerson) InitWithHandleIdentityDisplayNameThumbnailImageData(handle *foundation.NSString, identity *SWPersonIdentity, displayName *foundation.NSString, thumbnailImageData *foundation.NSData) *SWPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWPersonSelInitWithHandleIdentityDisplayNameThumbnailImageData, handle.Ptr(), identity.Ptr(), displayName.Ptr(), thumbnailImageData.Ptr())
 	if _ret != 0 {

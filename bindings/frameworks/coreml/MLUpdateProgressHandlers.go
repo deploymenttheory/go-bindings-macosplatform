@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of closures an update task uses to notify your app of its progress.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlupdateprogresshandlers
 type MLUpdateProgressHandlers struct {
 	foundation.NSObject
@@ -30,6 +32,7 @@ func MLUpdateProgressHandlersFromID(id objc.ID) *MLUpdateProgressHandlers {
 	return o
 }
 
+// Creates the collection of closures an update task uses to notify your app of its progress.
 func (o *MLUpdateProgressHandlers) InitForEventsProgressHandlerCompletionHandler(interestedEvents MLUpdateProgressEvent, progressHandler func(*MLUpdateContext), completionHandler func(*MLUpdateContext)) *MLUpdateProgressHandlers {
 	var __block_progressHandler objc.Block
 	if progressHandler != nil {

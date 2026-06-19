@@ -60,10 +60,13 @@ func (o *MTRWaterHeaterModeClusterModeOptionStruct) SetMode(mode *foundation.NSN
 }
 
 func (o *MTRWaterHeaterModeClusterModeOptionStruct) ModeTags() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRWaterHeaterModeClusterModeOptionStructSelModeTags)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterModeClusterModeOptionStructSelModeTags)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRWaterHeaterModeClusterModeOptionStruct) SetModeTags(modeTags *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRWaterHeaterModeClusterModeOptionStructSelSetModeTags, modeTags)
+	o.Ptr().Send(_mTRWaterHeaterModeClusterModeOptionStructSelSetModeTags, modeTags.Ptr())
 }

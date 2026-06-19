@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request for details about one or more reservations.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/ingetreservationdetailsintent
 type INGetReservationDetailsIntent struct {
 	INIntent
@@ -32,6 +34,7 @@ func INGetReservationDetailsIntentFromID(id objc.ID) *INGetReservationDetailsInt
 	return o
 }
 
+// Creates an intent that describes the reservation.
 func (o *INGetReservationDetailsIntent) InitWithReservationContainerReferenceReservationItemReferences(reservationContainerReference *INSpeakableString, reservationItemReferences *foundation.NSArray[*INSpeakableString]) *INGetReservationDetailsIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNGetReservationDetailsIntentSelInitWithReservationContainerReferenceReservationItemReferences, reservationContainerReference.Ptr(), reservationItemReferences.Ptr())
 	if _ret != 0 {

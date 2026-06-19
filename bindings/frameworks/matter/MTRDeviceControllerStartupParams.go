@@ -127,12 +127,15 @@ func (o *MTRDeviceControllerStartupParams) SetNodeID(nodeID *foundation.NSNumber
 }
 
 func (o *MTRDeviceControllerStartupParams) CaseAuthenticatedTags() *foundation.NSSet[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSNumber]](o.Ptr(), _mTRDeviceControllerStartupParamsSelCaseAuthenticatedTags)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerStartupParamsSelCaseAuthenticatedTags)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *MTRDeviceControllerStartupParams) SetCaseAuthenticatedTags(caseAuthenticatedTags *foundation.NSSet[*foundation.NSNumber]) {
-	o.Ptr().Send(_mTRDeviceControllerStartupParamsSelSetCaseAuthenticatedTags, caseAuthenticatedTags)
+	o.Ptr().Send(_mTRDeviceControllerStartupParamsSelSetCaseAuthenticatedTags, caseAuthenticatedTags.Ptr())
 }
 
 // Root certificate, in X.509 DER form, to use. Must not be nil if an intermediate CA is being used, to allow determination of the root public key. If not nil, and if an intermediate CA is not being used, the public key of this certificate must match the public key of nocSigner, if nocSigner is not nil. When creating a new fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case the nocSigner keypair, which is the keypair for the root certificate, will be used to generate and sign a root certificate, with a random issuer id.  In this case, the fabricID will be included in the root certificate's subject DN. When using an existing fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case, the existing root certificate for the fabric will be used. * If not nil must satisfy the following properties: 1) The public key must match the public key of the existing root certificate. 2) The subject DN must match the subject DN of the existing root certificate.

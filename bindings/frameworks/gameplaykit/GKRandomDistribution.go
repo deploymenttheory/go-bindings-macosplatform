@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A random distribution is a random source itself with a specific mapping from the input source to the output values. The distribution is uniform, meaning there is no bias towards any of the possible outcomes.
+// A generator for random numbers that fall within a specific range and that exhibit a specific distribution over multiple samplings.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkrandomdistribution
 type GKRandomDistribution struct {
@@ -43,7 +43,7 @@ func GKRandomDistributionFromID(id objc.ID) *GKRandomDistribution {
 	return o
 }
 
-// Initializes a random distribution within the range [lowest, highest] using a source to grab input values from.
+// Initializes a uniform random distribution with the specified lower and upper bounds, using the specified source randomizer.
 func (o *GKRandomDistribution) InitWithRandomSourceLowestValueHighestValue(source GKRandom, lowestInclusive int, highestInclusive int) *GKRandomDistribution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRandomDistributionSelInitWithRandomSourceLowestValueHighestValue, source, lowestInclusive, highestInclusive)
 	if _ret != 0 {
@@ -52,31 +52,31 @@ func (o *GKRandomDistribution) InitWithRandomSourceLowestValueHighestValue(sourc
 	return GKRandomDistributionFromID(_ret)
 }
 
-// Returns the next integer in the distribution sequence and moves ahead to the next one. The value is in the range of [lowest, highest].
+// Generates and returns a new random integer within the bounds of the distribution.
 func (o *GKRandomDistribution) NextInt() int {
 	_ret := objc.Send[int](o.Ptr(), _gKRandomDistributionSelNextInt)
 	return _ret
 }
 
-// Returns the next unsigned value in the distribution sequence that is less than upperBound. The value never equals or exceeeds upperBounds, and in this case it will also never exceed the highest value of the distribution.
+// Generates and returns a new random integer within the bounds of the distribution and less than the specified limit.
 func (o *GKRandomDistribution) NextIntWithUpperBound(upperBound uint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _gKRandomDistributionSelNextIntWithUpperBound, upperBound)
 	return _ret
 }
 
-// Returns the next uniform float in the random sequence and moves ahead to the next one. The value is in the range of [lowest / higest, 1.0]. The value is quantized to the distribution's lowest and highest bounds. Thus on a d20 distribution the value is quantized to 5% increments. The output value 0 is not possible to get unless the lowest value bound is also 0 or below. @see nextInt
+// Generates and returns a new random floating-point value within the characteristics of the distribution.
 func (o *GKRandomDistribution) NextUniform() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _gKRandomDistributionSelNextUniform)
 	return _ret
 }
 
-// Returns the next true or false value in the distribution sequence and moves ahead to the next one. The value is either nonzero (true) or zero (false). Use this for simple boolean switches in logic that don't require fuzzy evaluation. For fuzzy evaluation use nextUniform. By default this is based on the referenced source's definition of nextBool. @see GKRandomSource.nextBool
+// Generates and returns a new random Boolean value within the characteristics of the distribution.
 func (o *GKRandomDistribution) NextBool() bool {
 	_ret := objc.Send[bool](o.Ptr(), _gKRandomDistributionSelNextBool)
 	return _ret
 }
 
-// Convenience creation of random distribution within the range [lowest, highest] using an isolated source to grab input values from. This is equivalent to calling alloc followed by initWithSource:lowest:highest:, where source is [[GKRandomSource alloc] init]. @see initWithRandomSource:lowestValue:highestValue:
+// Creates a random distribution with the specified lower and upper bounds, using the Arc4 randomizer.
 func GKRandomDistributionDistributionWithLowestValueHighestValue(lowestInclusive int, highestInclusive int) *GKRandomDistribution {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRandomDistribution), _gKRandomDistributionSelDistributionWithLowestValueHighestValue, lowestInclusive, highestInclusive)
 	if _ret != 0 {
@@ -85,7 +85,7 @@ func GKRandomDistributionDistributionWithLowestValueHighestValue(lowestInclusive
 	return GKRandomDistributionFromID(_ret)
 }
 
-// Convenience creation of random distribution with the die like range [1, sideCount] using an isolated source to grab input values from. This is equivalent to calling alloc followed by initWithSource:lowest:highest:, where source is [[GKRandomSource alloc] init]. @see initWithRandomSource:lowestValue:highestValue:
+// Creates a random distribution equivalent to a die with the specified number of sides.
 func GKRandomDistributionDistributionForDieWithSideCount(sideCount int) *GKRandomDistribution {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRandomDistribution), _gKRandomDistributionSelDistributionForDieWithSideCount, sideCount)
 	if _ret != 0 {
@@ -94,7 +94,7 @@ func GKRandomDistributionDistributionForDieWithSideCount(sideCount int) *GKRando
 	return GKRandomDistributionFromID(_ret)
 }
 
-// Convenience creation for the very common d6 range [1, 6] with an isolated random source shielded from outside sources.
+// Creates a random distribution equivalent to a six-sided die.
 func GKRandomDistributionD6() *GKRandomDistribution {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRandomDistribution), _gKRandomDistributionSelD6)
 	if _ret != 0 {
@@ -103,7 +103,7 @@ func GKRandomDistributionD6() *GKRandomDistribution {
 	return GKRandomDistributionFromID(_ret)
 }
 
-// Convenience creation for the very common d20 range [1, 20] with an isolated random source shielded from outside sources.
+// Creates a random distribution equivalent to a twenty-sided die.
 func GKRandomDistributionD20() *GKRandomDistribution {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRandomDistribution), _gKRandomDistributionSelD20)
 	if _ret != 0 {

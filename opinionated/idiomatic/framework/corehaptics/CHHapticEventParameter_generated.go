@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A static parameter value that represents a single property of the haptic pattern.
+//
 // HapticEventParameter wraps [raw.CHHapticEventParameter] with a fluent Go API.
 type HapticEventParameter struct {
 	inner *raw.CHHapticEventParameter
@@ -31,6 +33,8 @@ func HapticEventParameterFromID(id objc.ID) *HapticEventParameter {
 	return &HapticEventParameter{inner: raw.CHHapticEventParameterFromID(id)}
 }
 
+// Creates a haptic event parameter from its ID and value.
+//
 // NewHapticEventParameterWithParameterIDValue creates a new [HapticEventParameter].
 func NewHapticEventParameterWithParameterIDValue(parameterID *foundation.NSString, value float32) *HapticEventParameter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticEventParameter")), objc.RegisterName("alloc"))
@@ -38,7 +42,7 @@ func NewHapticEventParameterWithParameterIDValue(parameterID *foundation.NSStrin
 	return &HapticEventParameter{inner: raw.CHHapticEventParameterFromID(_id)}
 }
 
-// @property value The value of the event parameter.
+// The value of the parameter.
 //
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *HapticEventParameter) WithValue(value float32) *HapticEventParameter {

@@ -1,0 +1,2177 @@
+{
+  "schema_version": 1,
+  "framework": "Photos",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "PHAdjustmentData": {
+      "doc": "A description of the edits made to an asset’s photo, video, or Live Photo content, which allows your app to reconstruct or revert the effects of prior editing sessions.",
+      "url": "https://developer.apple.com/documentation/photos/phadjustmentdata"
+    },
+    "PHAsset": {
+      "doc": "A representation of an image, video, or Live Photo in the Photos library.",
+      "url": "https://developer.apple.com/documentation/photos/phasset"
+    },
+    "PHAssetChangeRequest": {
+      "doc": "A request to create, delete, change metadata for, or edit the content of a Photos asset, for use in a photo library change block.",
+      "url": "https://developer.apple.com/documentation/photos/phassetchangerequest"
+    },
+    "PHAssetCollection": {
+      "doc": "A representation of a Photos asset grouping, such as a moment, user-created album, or smart album.",
+      "url": "https://developer.apple.com/documentation/photos/phassetcollection"
+    },
+    "PHAssetCollectionChangeRequest": {
+      "doc": "A request to create, delete, or modify a Photos asset collection, for use in a photo library change block.",
+      "url": "https://developer.apple.com/documentation/photos/phassetcollectionchangerequest"
+    },
+    "PHAssetCreationRequest": {
+      "doc": "A request to create a new Photos asset from underlying data resources, for use in a photo library change block.",
+      "url": "https://developer.apple.com/documentation/photos/phassetcreationrequest"
+    },
+    "PHAssetResource": {
+      "doc": "An underlying data resource associated with a photo, video, or Live Photo asset in the Photos library.",
+      "url": "https://developer.apple.com/documentation/photos/phassetresource"
+    },
+    "PHAssetResourceCreationOptions": {
+      "doc": "A set of options affecting the creation of a new Photos asset from underlying resources.",
+      "url": "https://developer.apple.com/documentation/photos/phassetresourcecreationoptions"
+    },
+    "PHAssetResourceManager": {
+      "doc": "A resource manager for the data storage underlying a Photos asset.",
+      "url": "https://developer.apple.com/documentation/photos/phassetresourcemanager"
+    },
+    "PHAssetResourceRequestOptions": {
+      "doc": "A set of options affecting the delivery of underlying asset data that you request from the asset resource manager.",
+      "url": "https://developer.apple.com/documentation/photos/phassetresourcerequestoptions"
+    },
+    "PHAssetResourceUploadJob": {
+      "doc": "An object that represents a request to upload an asset resource.",
+      "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjob"
+    },
+    "PHAssetResourceUploadJobChangeRequest": {
+      "doc": "Use within an application’s com.apple.photos.background-upload extension to create and change PHAssetResourceUploadJob records.",
+      "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjobchangerequest"
+    },
+    "PHCachingImageManager": {
+      "doc": "An object that facilitates retrieving or generating preview thumbnails, optimized for batch preloading large numbers of assets.",
+      "url": "https://developer.apple.com/documentation/photos/phcachingimagemanager"
+    },
+    "PHChange": {
+      "doc": "A description of a change that occurred in the photo library.",
+      "url": "https://developer.apple.com/documentation/photos/phchange"
+    },
+    "PHChangeRequest": {
+      "doc": "The abstract base class of the framework’s photo library change requests.",
+      "url": "https://developer.apple.com/documentation/photos/phchangerequest"
+    },
+    "PHCloudIdentifier": {
+      "doc": "An object that identifies an asset or collection that syncs through iCloud Photos.",
+      "url": "https://developer.apple.com/documentation/photos/phcloudidentifier"
+    },
+    "PHCloudIdentifierMapping": {
+      "doc": "An object that contains the cloud identifier result from looking up a local identifier, or an error indicating why the lookup failed.",
+      "url": "https://developer.apple.com/documentation/photos/phcloudidentifiermapping"
+    },
+    "PHCollection": {
+      "doc": "The abstract superclass for Photos asset collections and collection lists.",
+      "url": "https://developer.apple.com/documentation/photos/phcollection"
+    },
+    "PHCollectionList": {
+      "doc": "A group containing Photos asset collections, such as Moments, Years, or folders of user-created albums.",
+      "url": "https://developer.apple.com/documentation/photos/phcollectionlist"
+    },
+    "PHCollectionListChangeRequest": {
+      "doc": "A request to create, delete, or modify a Photos collection list, for use in a photo library change block.",
+      "url": "https://developer.apple.com/documentation/photos/phcollectionlistchangerequest"
+    },
+    "PHContentEditingInput": {
+      "doc": "A container that provides information about and access to the image, video, or Live Photo content of an asset to be edited.",
+      "url": "https://developer.apple.com/documentation/photos/phcontenteditinginput"
+    },
+    "PHContentEditingInputRequestOptions": {
+      "doc": "A set of options affecting the delivery of image or video data when you request to edit the content of a Photos asset.",
+      "url": "https://developer.apple.com/documentation/photos/phcontenteditinginputrequestoptions"
+    },
+    "PHContentEditingOutput": {
+      "doc": "A container to which you provide the results of editing the photo, video, or Live Photo content of a Photos asset.",
+      "url": "https://developer.apple.com/documentation/photos/phcontenteditingoutput"
+    },
+    "PHFetchOptions": {
+      "doc": "A set of options that affect the filtering, sorting, and management of results that Photos returns when you fetch asset or collection objects.",
+      "url": "https://developer.apple.com/documentation/photos/phfetchoptions"
+    },
+    "PHFetchResult": {
+      "doc": "An ordered list of assets or collections returned from a Photos fetch method.",
+      "url": "https://developer.apple.com/documentation/photos/phfetchresult"
+    },
+    "PHFetchResultChangeDetails": {
+      "doc": "A description of changes that occurred in the set of asset or collection objects listed in a fetch result.",
+      "url": "https://developer.apple.com/documentation/photos/phfetchresultchangedetails"
+    },
+    "PHImageManager": {
+      "doc": "An object that facilitates retrieving or generating preview thumbnails and asset data.",
+      "url": "https://developer.apple.com/documentation/photos/phimagemanager"
+    },
+    "PHImageRequestOptions": {
+      "doc": "A set of options affecting the delivery of still image representations of Photos assets you request from an image manager.",
+      "url": "https://developer.apple.com/documentation/photos/phimagerequestoptions"
+    },
+    "PHLivePhoto": {
+      "doc": "A displayable representation of a Live Photo—a picture that includes motion and sound from the moments just before and after its capture.",
+      "url": "https://developer.apple.com/documentation/photos/phlivephoto"
+    },
+    "PHLivePhotoEditingContext": {
+      "doc": "An editing session for modifying the photo, video, and audio content of a Live Photo.",
+      "url": "https://developer.apple.com/documentation/photos/phlivephotoeditingcontext"
+    },
+    "PHLivePhotoRequestOptions": {
+      "doc": "A set of options affecting the delivery of Live Photo assets you request from an image manager.",
+      "url": "https://developer.apple.com/documentation/photos/phlivephotorequestoptions"
+    },
+    "PHLocalIdentifierMapping": {
+      "doc": "An object that contains the local identifier result from looking up a cloud identifier, or an error indicating why the lookup failed.",
+      "url": "https://developer.apple.com/documentation/photos/phlocalidentifiermapping"
+    },
+    "PHObject": {
+      "doc": "The abstract superclass for Photos model objects (assets and collections).",
+      "url": "https://developer.apple.com/documentation/photos/phobject"
+    },
+    "PHObjectChangeDetails": {
+      "doc": "A description of changes that occurred in an asset or collection object.",
+      "url": "https://developer.apple.com/documentation/photos/phobjectchangedetails"
+    },
+    "PHObjectPlaceholder": {
+      "doc": "A read-only proxy object that represents a Photos asset or collection to create.",
+      "url": "https://developer.apple.com/documentation/photos/phobjectplaceholder"
+    },
+    "PHPersistentChange": {
+      "doc": "An object that represents a change in the Photos library, and allows for requesting local identifiers that identify the changes for a library object.",
+      "url": "https://developer.apple.com/documentation/photos/phpersistentchange"
+    },
+    "PHPersistentChangeFetchResult": {
+      "doc": "An object that represents a fetch result and allows you to enumerate a very large set of change records.",
+      "url": "https://developer.apple.com/documentation/photos/phpersistentchangefetchresult"
+    },
+    "PHPersistentChangeToken": {
+      "doc": "An opaque object that tracks the state of the Photos library between runs, and that you can copy and serialize for future use.",
+      "url": "https://developer.apple.com/documentation/photos/phpersistentchangetoken"
+    },
+    "PHPersistentObjectChangeDetails": {
+      "doc": "An object that represents the local identifiers that change between requests using a change token.",
+      "url": "https://developer.apple.com/documentation/photos/phpersistentobjectchangedetails"
+    },
+    "PHPhotoLibrary": {
+      "doc": "An object that manages access and changes to the user’s photo library.",
+      "url": "https://developer.apple.com/documentation/photos/phphotolibrary"
+    },
+    "PHProject": {
+      "doc": "A representation of a Photos app project extension.",
+      "url": "https://developer.apple.com/documentation/photos/phproject"
+    },
+    "PHProjectChangeRequest": {
+      "doc": "A request to change asset data in a Photos project extension.",
+      "url": "https://developer.apple.com/documentation/photos/phprojectchangerequest"
+    },
+    "PHVideoRequestOptions": {
+      "doc": "A set of options affecting the delivery of video asset data that you request from an image manager.",
+      "url": "https://developer.apple.com/documentation/photos/phvideorequestoptions"
+    }
+  },
+  "protocols": {
+    "PHLivePhotoFrame": {
+      "doc": "A container that provides image content for a single frame of a Live Photo in an editing context.",
+      "url": "https://developer.apple.com/documentation/photos/phlivephotoframe"
+    },
+    "PHPhotoLibraryAvailabilityObserver": {
+      "doc": "A protocol to adopt to have the system notify your app when the availability of a photo library changes.",
+      "url": "https://developer.apple.com/documentation/photos/phphotolibraryavailabilityobserver"
+    },
+    "PHPhotoLibraryChangeObserver": {
+      "doc": "A protocol to adopt to have the system notify your app of changes to the photo library.",
+      "url": "https://developer.apple.com/documentation/photos/phphotolibrarychangeobserver"
+    }
+  },
+  "enums": {
+    "PHAccessLevel": {
+      "doc": "The app’s level of access to the user’s photo library.",
+      "url": "https://developer.apple.com/documentation/photos/phaccesslevel",
+      "members": {
+        "PHAccessLevelAddOnly": {
+          "doc": "A value that indicates the app may only add to the user’s photo library.",
+          "url": "https://developer.apple.com/documentation/photos/phaccesslevel/addonly"
+        },
+        "PHAccessLevelReadWrite": {
+          "doc": "A value that indicates the app can read from and write to the user’s photo library.",
+          "url": "https://developer.apple.com/documentation/photos/phaccesslevel/readwrite"
+        }
+      }
+    },
+    "PHAssetBurstSelectionType": {
+      "doc": "Bit mask values indicating whether and how an asset is marked as a favorite member of a burst photo sequence. Used by the burstSelectionTypes property.",
+      "url": "https://developer.apple.com/documentation/photos/phassetburstselectiontype",
+      "members": {
+        "PHAssetBurstSelectionTypeAutoPick": {
+          "doc": "Photos has automatically identified the asset as a potential user favorite.",
+          "url": "https://developer.apple.com/documentation/photos/phassetburstselectiontype/autopick"
+        },
+        "PHAssetBurstSelectionTypeNone": {
+          "doc": "The asset is not marked as a favorite member of its burst sequence or is not a member of a burst sequence.",
+          "url": "https://developer.apple.com/documentation/photos/phassetburstselectiontype/phassetburstselectiontypenone"
+        },
+        "PHAssetBurstSelectionTypeUserPick": {
+          "doc": "The user has marked the asset as a favorite member of its burst sequence.",
+          "url": "https://developer.apple.com/documentation/photos/phassetburstselectiontype/userpick"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates an asset burst selection type from a raw value.",
+          "url": "https://developer.apple.com/documentation/photos/phassetburstselectiontype/init(rawvalue:)"
+        }
+      }
+    },
+    "PHAssetCollectionSubtype": {
+      "doc": "Minor distinctions between kinds of asset collections, used by the assetCollectionSubtype property and the fetchAssetCollectionsWithType:subtype:options: method.",
+      "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype",
+      "members": {
+        "PHAssetCollectionSubtypeAlbumCloudShared": {
+          "doc": "An iCloud Shared Photo Stream.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/albumcloudshared"
+        },
+        "PHAssetCollectionSubtypeAlbumImported": {
+          "doc": "An album imported from a camera or external storage.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/albumimported"
+        },
+        "PHAssetCollectionSubtypeAlbumMyPhotoStream": {
+          "doc": "The user’s personal iCloud Photo Stream.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/albummyphotostream"
+        },
+        "PHAssetCollectionSubtypeAlbumRegular": {
+          "doc": "An album created in the Photos app.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/albumregular"
+        },
+        "PHAssetCollectionSubtypeAlbumSyncedAlbum": {
+          "doc": "An album synced to the device from iPhoto.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/albumsyncedalbum"
+        },
+        "PHAssetCollectionSubtypeAlbumSyncedEvent": {
+          "doc": "An Event synced to the device from iPhoto.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/albumsyncedevent"
+        },
+        "PHAssetCollectionSubtypeAlbumSyncedFaces": {
+          "doc": "A Faces group synced to the device from iPhoto.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/albumsyncedfaces"
+        },
+        "PHAssetCollectionSubtypeAny": {
+          "doc": "A bit mask representing all possible subtypes.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/any"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumAllHidden": {
+          "doc": "A Smart Album that groups all assets hidden from the Moments view in the Photos app.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumallhidden"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumAnimated": {
+          "doc": "A Smart Album that groups all image animation assets.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumanimated"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumBursts": {
+          "doc": "A Smart Album that groups all burst photo sequences in the photo library.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumbursts"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumCinematic": {
+          "doc": "A Smart Album that groups all cinematic photo assets.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumcinematic"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumDepthEffect": {
+          "doc": "A Smart Album that groups all images captured using the Depth Effect camera mode on compatible devices.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumdeptheffect"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumFavorites": {
+          "doc": "A Smart Album that groups all assets that the user marks as favorites.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumfavorites"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumGeneric": {
+          "doc": "A Smart Album without a more-specific subtype.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumgeneric"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumLivePhotos": {
+          "doc": "A Smart Album that groups all Live Photos assets.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumlivephotos"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumLongExposures": {
+          "doc": "A Smart Album that groups all Live Photos assets where the Long Exposure variation is in an enabled state.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumlongexposures"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumPanoramas": {
+          "doc": "A Smart Album that groups all panorama photos in the photo library.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumpanoramas"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumRAW": {
+          "doc": "A Smart Album that groups all RAW assets in the photo library.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumraw"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumRecentlyAdded": {
+          "doc": "A Smart Album that groups all recently added assets in the photo library.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumrecentlyadded"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumScreenshots": {
+          "doc": "A Smart Album that groups all images captured using the device’s screenshot function.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumscreenshots"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumSelfPortraits": {
+          "doc": "A Smart Album that groups all photos and videos captured using the device’s front-facing camera.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumselfportraits"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumSlomoVideos": {
+          "doc": "A Smart Album that groups all Slow-Mo videos in the photo library.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumslomovideos"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumTimelapses": {
+          "doc": "A Smart Album that groups all time-lapse videos in the photo library.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumtimelapses"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumUnableToUpload": {
+          "doc": "A Smart Album that groups all assets that the system can’t upload to iCloud.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumunabletoupload"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumUserLibrary": {
+          "doc": "A Smart Album that groups all assets that originate in the user’s own library (as opposed to assets from iCloud Shared Albums).",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumuserlibrary"
+        },
+        "PHAssetCollectionSubtypeSmartAlbumVideos": {
+          "doc": "A Smart Album that groups all video assets in the photo library.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectionsubtype/smartalbumvideos"
+        }
+      }
+    },
+    "PHAssetCollectionType": {
+      "doc": "Major distinctions between kinds of asset collections, used by the assetCollectionType property and the fetchAssetCollectionsContainingAsset:withType:options: and fetchAssetCollectionsWithType:subtype:options: methods.",
+      "url": "https://developer.apple.com/documentation/photos/phassetcollectiontype",
+      "members": {
+        "PHAssetCollectionTypeAlbum": {
+          "doc": "An album in the Photos app.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectiontype/album"
+        },
+        "PHAssetCollectionTypeMoment": {
+          "doc": "A moment in the Photos app.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectiontype/moment"
+        },
+        "PHAssetCollectionTypeSmartAlbum": {
+          "doc": "A smart album whose contents update dynamically.",
+          "url": "https://developer.apple.com/documentation/photos/phassetcollectiontype/smartalbum"
+        }
+      }
+    },
+    "PHAssetEditOperation": {
+      "doc": "Values identifying possible actions an asset can support, used by the canPerformEditOperation: method.",
+      "url": "https://developer.apple.com/documentation/photos/phasseteditoperation",
+      "members": {
+        "PHAssetEditOperationContent": {
+          "doc": "The asset’s photo or video content can be edited.",
+          "url": "https://developer.apple.com/documentation/photos/phasseteditoperation/content"
+        },
+        "PHAssetEditOperationDelete": {
+          "doc": "The asset can be deleted from the photo library.",
+          "url": "https://developer.apple.com/documentation/photos/phasseteditoperation/delete"
+        },
+        "PHAssetEditOperationProperties": {
+          "doc": "The asset’s metadata properties can be edited.",
+          "url": "https://developer.apple.com/documentation/photos/phasseteditoperation/properties"
+        }
+      }
+    },
+    "PHAssetMediaSubtype": {
+      "doc": "Constants identifying specific variations of asset media, such as panorama or screenshot photos, and time-lapse or high-frame-rate video.",
+      "url": "https://developer.apple.com/documentation/photos/phassetmediasubtype",
+      "members": {
+        "PHAssetMediaSubtypeNone": {
+          "doc": "The asset has no subtype.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediasubtype/phassetmediasubtypenone"
+        },
+        "PHAssetMediaSubtypePhotoDepthEffect": {
+          "doc": "The asset is a photo captured with the Camera app’s Portrait mode depth effect.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediasubtype/photodeptheffect"
+        },
+        "PHAssetMediaSubtypePhotoHDR": {
+          "doc": "The asset is a high-dynamic range photo.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediasubtype/photohdr"
+        },
+        "PHAssetMediaSubtypePhotoLive": {
+          "doc": "The asset is a Live Photo that includes movement and sounds from the moments just before and after its capture.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediasubtype/photolive"
+        },
+        "PHAssetMediaSubtypePhotoPanorama": {
+          "doc": "The asset is a large-format panorama photo.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediasubtype/photopanorama"
+        },
+        "PHAssetMediaSubtypePhotoScreenshot": {
+          "doc": "The asset is an image captured with the device’s screenshot feature.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediasubtype/photoscreenshot"
+        },
+        "PHAssetMediaSubtypeVideoCinematic": {
+          "doc": "The asset is a cinematic video.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediasubtype/videocinematic"
+        },
+        "PHAssetMediaSubtypeVideoHighFrameRate": {
+          "doc": "The asset is a high-frame-rate video.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediasubtype/videohighframerate"
+        },
+        "PHAssetMediaSubtypeVideoScreenRecording": {
+          "doc": "The media subtype is a photo animation such as a GIF, animated PNGs, etc.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediasubtype/videoscreenrecording"
+        },
+        "PHAssetMediaSubtypeVideoStreamed": {
+          "doc": "The asset is a video with contents that always stream over a network connection.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediasubtype/videostreamed"
+        },
+        "PHAssetMediaSubtypeVideoTimelapse": {
+          "doc": "The asset is a time-lapse video.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediasubtype/videotimelapse"
+        },
+        "init(rawValue:)": {
+          "doc": "Initializes a media subtype from a raw value.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediasubtype/init(rawvalue:)"
+        }
+      }
+    },
+    "PHAssetMediaType": {
+      "doc": "Identifies the general type of an asset, such as image or video.",
+      "url": "https://developer.apple.com/documentation/photos/phassetmediatype",
+      "members": {
+        "PHAssetMediaTypeAudio": {
+          "doc": "The asset is an audio file.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediatype/audio"
+        },
+        "PHAssetMediaTypeImage": {
+          "doc": "The asset is a photo or other static image.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediatype/image"
+        },
+        "PHAssetMediaTypeUnknown": {
+          "doc": "The asset’s type is unknown.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediatype/unknown"
+        },
+        "PHAssetMediaTypeVideo": {
+          "doc": "The asset is a video file.",
+          "url": "https://developer.apple.com/documentation/photos/phassetmediatype/video"
+        }
+      }
+    },
+    "PHAssetPlaybackStyle": {
+      "doc": "An enumeration of asset playback styles that dictate how to present an asset to the user.",
+      "url": "https://developer.apple.com/documentation/photos/phassetplaybackstyle"
+    },
+    "PHAssetResourceType": {
+      "doc": "Describes the relationship of an asset resource to its owning asset.",
+      "url": "https://developer.apple.com/documentation/photos/phassetresourcetype",
+      "members": {
+        "PHAssetResourceTypeAdjustmentBasePairedVideo": {
+          "doc": "Provides an unaltered version of the video data for a Live Photo asset for use in reconstructing recent edits.",
+          "url": "https://developer.apple.com/documentation/photos/phassetresourcetype/adjustmentbasepairedvideo"
+        },
+        "PHAssetResourceTypeAdjustmentBasePhoto": {
+          "doc": "Provides an unaltered version of its photo asset for use in for use in reconstructing recent edits.",
+          "url": "https://developer.apple.com/documentation/photos/phassetresourcetype/adjustmentbasephoto"
+        },
+        "PHAssetResourceTypeAdjustmentBaseVideo": {
+          "doc": "Provides an unaltered version of its video asset.",
+          "url": "https://developer.apple.com/documentation/photos/phassetresourcetype/adjustmentbasevideo"
+        },
+        "PHAssetResourceTypeAdjustmentData": {
+          "doc": "Provides data for use in reconstructing recent edits to its asset.",
+          "url": "https://developer.apple.com/documentation/photos/phassetresourcetype/adjustmentdata"
+        },
+        "PHAssetResourceTypeAlternatePhoto": {
+          "doc": "Provides photo data that isn’t the primary form of its asset.",
+          "url": "https://developer.apple.com/documentation/photos/phassetresourcetype/alternatephoto"
+        },
+        "PHAssetResourceTypeAudio": {
+          "doc": "Provides the original audio data for its asset.",
+          "url": "https://developer.apple.com/documentation/photos/phassetresourcetype/audio"
+        },
+        "PHAssetResourceTypeFullSizePairedVideo": {
+          "doc": "Provides the current video data component of a Live Photo asset.",
+          "url": "https://developer.apple.com/documentation/photos/phassetresourcetype/fullsizepairedvideo"
+        },
+        "PHAssetResourceTypeFullSizePhoto": {
+          "doc": "Provides a modified version of the original photo asset.",
+          "url": "https://developer.apple.com/documentation/photos/phassetresourcetype/fullsizephoto"
+        },
+        "PHAssetResourceTypeFullSizeVideo": {
+          "doc": "Provides a modified version of the original video asset.",
+          "url": "https://developer.apple.com/documentation/photos/phassetresourcetype/fullsizevideo"
+        },
+        "PHAssetResourceTypePairedVideo": {
+          "doc": "Provides the original video data component of a Live Photo asset.",
+          "url": "https://developer.apple.com/documentation/photos/phassetresourcetype/pairedvideo"
+        },
+        "PHAssetResourceTypePhoto": {
+          "doc": "Provides the original photo data for its asset.",
+          "url": "https://developer.apple.com/documentation/photos/phassetresourcetype/photo"
+        },
+        "PHAssetResourceTypeVideo": {
+          "doc": "Provides the original video data for its asset.",
+          "url": "https://developer.apple.com/documentation/photos/phassetresourcetype/video"
+        }
+      }
+    },
+    "PHAssetSourceType": {
+      "doc": "The means by which an asset enters the Photos library.",
+      "url": "https://developer.apple.com/documentation/photos/phassetsourcetype",
+      "members": {
+        "PHAssetSourceTypeCloudShared": {
+          "doc": "The asset originates from an iCloud Shared Album.",
+          "url": "https://developer.apple.com/documentation/photos/phassetsourcetype/typecloudshared"
+        },
+        "PHAssetSourceTypeNone": {
+          "doc": "Source information is not available for the asset.",
+          "url": "https://developer.apple.com/documentation/photos/phassetsourcetype/phassetsourcetypenone"
+        },
+        "PHAssetSourceTypeUserLibrary": {
+          "doc": "The asset is part of the user’s main Photos library.",
+          "url": "https://developer.apple.com/documentation/photos/phassetsourcetype/typeuserlibrary"
+        },
+        "PHAssetSourceTypeiTunesSynced": {
+          "doc": "The asset originates from a Mac or PC and is present on the device through iTunes sync.",
+          "url": "https://developer.apple.com/documentation/photos/phassetsourcetype/typeitunessynced"
+        },
+        "init(rawValue:)": {
+          "doc": "Initializes an asset source type from a raw value.",
+          "url": "https://developer.apple.com/documentation/photos/phassetsourcetype/init(rawvalue:)"
+        }
+      }
+    },
+    "PHAuthorizationStatus": {
+      "doc": "Information about your app’s authorization to access the user’s photo library.",
+      "url": "https://developer.apple.com/documentation/photos/phauthorizationstatus",
+      "members": {
+        "PHAuthorizationStatusAuthorized": {
+          "doc": "The user explicitly granted this app access to the photo library.",
+          "url": "https://developer.apple.com/documentation/photos/phauthorizationstatus/authorized"
+        },
+        "PHAuthorizationStatusDenied": {
+          "doc": "The user explicitly denied this app access to the photo library.",
+          "url": "https://developer.apple.com/documentation/photos/phauthorizationstatus/denied"
+        },
+        "PHAuthorizationStatusLimited": {
+          "doc": "The user authorized this app for limited photo library access.",
+          "url": "https://developer.apple.com/documentation/photos/phauthorizationstatus/limited"
+        },
+        "PHAuthorizationStatusNotDetermined": {
+          "doc": "The user hasn’t set the app’s authorization status.",
+          "url": "https://developer.apple.com/documentation/photos/phauthorizationstatus/notdetermined"
+        },
+        "PHAuthorizationStatusRestricted": {
+          "doc": "The app isn’t authorized to access the photo library, and the user can’t grant such permission.",
+          "url": "https://developer.apple.com/documentation/photos/phauthorizationstatus/restricted"
+        }
+      }
+    },
+    "PHCollectionEditOperation": {
+      "doc": "Values identifying possible actions that a collection can support, used by the canPerformEditOperation: method.",
+      "url": "https://developer.apple.com/documentation/photos/phcollectioneditoperation",
+      "members": {
+        "PHCollectionEditOperationAddContent": {
+          "doc": "The collection supports adding items that already exist elsewhere in the photo library.",
+          "url": "https://developer.apple.com/documentation/photos/phcollectioneditoperation/addcontent"
+        },
+        "PHCollectionEditOperationCreateContent": {
+          "doc": "The collection supports creating new items.",
+          "url": "https://developer.apple.com/documentation/photos/phcollectioneditoperation/createcontent"
+        },
+        "PHCollectionEditOperationDelete": {
+          "doc": "The collection itself can be deleted.",
+          "url": "https://developer.apple.com/documentation/photos/phcollectioneditoperation/delete"
+        },
+        "PHCollectionEditOperationDeleteContent": {
+          "doc": "The collection supports deleting the items it contains.",
+          "url": "https://developer.apple.com/documentation/photos/phcollectioneditoperation/deletecontent"
+        },
+        "PHCollectionEditOperationRearrangeContent": {
+          "doc": "The collection supports reordering the arrangement of items it contains.",
+          "url": "https://developer.apple.com/documentation/photos/phcollectioneditoperation/rearrangecontent"
+        },
+        "PHCollectionEditOperationRemoveContent": {
+          "doc": "The collection supports removing the items it contains.",
+          "url": "https://developer.apple.com/documentation/photos/phcollectioneditoperation/removecontent"
+        },
+        "PHCollectionEditOperationRename": {
+          "doc": "The collection itself can be renamed.",
+          "url": "https://developer.apple.com/documentation/photos/phcollectioneditoperation/rename"
+        }
+      }
+    },
+    "PHCollectionListSubtype": {
+      "doc": "Major distinctions between kinds of collection list, used by the collectionListSubtype property and fetchCollectionListsWithType:subtype:options:, fetchMomentListsWithSubtype:containingMoment:options:, and fetchMomentListsWithSubtype:options: methods.",
+      "url": "https://developer.apple.com/documentation/photos/phcollectionlistsubtype",
+      "members": {
+        "PHCollectionListSubtypeAny": {
+          "doc": "Use this value to fetch collection lists of all possible subtypes.",
+          "url": "https://developer.apple.com/documentation/photos/phcollectionlistsubtype/any"
+        },
+        "PHCollectionListSubtypeMomentListCluster": {
+          "doc": "The collection list is a moment cluster, grouping several related moments.",
+          "url": "https://developer.apple.com/documentation/photos/phcollectionlistsubtype/momentlistcluster"
+        },
+        "PHCollectionListSubtypeMomentListYear": {
+          "doc": "The collection list is a moment year, grouping all moments from one or more calendar years.",
+          "url": "https://developer.apple.com/documentation/photos/phcollectionlistsubtype/momentlistyear"
+        },
+        "PHCollectionListSubtypeRegularFolder": {
+          "doc": "The collection list is a folder containing albums or other folders.",
+          "url": "https://developer.apple.com/documentation/photos/phcollectionlistsubtype/regularfolder"
+        },
+        "PHCollectionListSubtypeSmartFolderEvents": {
+          "doc": "The collection list is a smart folder containing one or more Events synced from iPhoto.",
+          "url": "https://developer.apple.com/documentation/photos/phcollectionlistsubtype/smartfolderevents"
+        },
+        "PHCollectionListSubtypeSmartFolderFaces": {
+          "doc": "The collection list is a smart folder containing one or more Faces synced from iPhoto.",
+          "url": "https://developer.apple.com/documentation/photos/phcollectionlistsubtype/smartfolderfaces"
+        }
+      }
+    },
+    "PHCollectionListType": {
+      "doc": "Major distinctions between kinds of collection list, used by the collectionListType property and fetchCollectionListsWithType:subtype:options: method.",
+      "url": "https://developer.apple.com/documentation/photos/phcollectionlisttype",
+      "members": {
+        "PHCollectionListTypeFolder": {
+          "doc": "A folder containing asset collections of type PHAssetCollectionTypeAlbum or PHAssetCollectionTypeSmartAlbum.",
+          "url": "https://developer.apple.com/documentation/photos/phcollectionlisttype/folder"
+        },
+        "PHCollectionListTypeMomentList": {
+          "doc": "A group of asset collections of type PHAssetCollectionTypeMoment.",
+          "url": "https://developer.apple.com/documentation/photos/phcollectionlisttype/momentlist"
+        },
+        "PHCollectionListTypeSmartFolder": {
+          "doc": "A smart folder synced to the device from .",
+          "url": "https://developer.apple.com/documentation/photos/phcollectionlisttype/smartfolder"
+        }
+      }
+    },
+    "PHImageContentMode": {
+      "doc": "Options for fitting an image’s aspect ratio to a requested size, used by the requestImageForAsset:targetSize:contentMode:options:resultHandler: method.",
+      "url": "https://developer.apple.com/documentation/photos/phimagecontentmode",
+      "members": {
+        "PHImageContentModeAspectFill": {
+          "doc": "Scales the image so that it completely fills the target size.",
+          "url": "https://developer.apple.com/documentation/photos/phimagecontentmode/aspectfill"
+        },
+        "PHImageContentModeAspectFit": {
+          "doc": "Scales the image so that its larger dimension fits the target size.",
+          "url": "https://developer.apple.com/documentation/photos/phimagecontentmode/aspectfit"
+        },
+        "PHImageContentModeDefault": {
+          "doc": "Fits the image to the requested size using the default option, PHImageContentModeAspectFit.",
+          "url": "https://developer.apple.com/documentation/photos/phimagecontentmode/default"
+        }
+      }
+    },
+    "PHImageRequestOptionsDeliveryMode": {
+      "doc": "Options for delivering requested image data, used by the deliveryMode property.",
+      "url": "https://developer.apple.com/documentation/photos/phimagerequestoptionsdeliverymode",
+      "members": {
+        "PHImageRequestOptionsDeliveryModeFastFormat": {
+          "doc": "Photos provides only a fast-loading image, possibly sacrificing image quality.",
+          "url": "https://developer.apple.com/documentation/photos/phimagerequestoptionsdeliverymode/fastformat"
+        },
+        "PHImageRequestOptionsDeliveryModeHighQualityFormat": {
+          "doc": "Photos provides only the highest-quality image available, regardless of how much time it takes to load.",
+          "url": "https://developer.apple.com/documentation/photos/phimagerequestoptionsdeliverymode/highqualityformat"
+        },
+        "PHImageRequestOptionsDeliveryModeOpportunistic": {
+          "doc": "Photos automatically provides one or more results in order to balance image quality and responsiveness.",
+          "url": "https://developer.apple.com/documentation/photos/phimagerequestoptionsdeliverymode/opportunistic"
+        }
+      }
+    },
+    "PHImageRequestOptionsResizeMode": {
+      "doc": "Options for how to resize the requested image to fit a target size, used by the resizeMode property.",
+      "url": "https://developer.apple.com/documentation/photos/phimagerequestoptionsresizemode",
+      "members": {
+        "PHImageRequestOptionsResizeModeExact": {
+          "doc": "Photos resizes the image to match the target size exactly.",
+          "url": "https://developer.apple.com/documentation/photos/phimagerequestoptionsresizemode/exact"
+        },
+        "PHImageRequestOptionsResizeModeFast": {
+          "doc": "Photos efficiently resizes the image to a size similar to, or slightly larger than, the target size.",
+          "url": "https://developer.apple.com/documentation/photos/phimagerequestoptionsresizemode/fast"
+        },
+        "PHImageRequestOptionsResizeModeNone": {
+          "doc": "Photos does not resize the image asset.",
+          "url": "https://developer.apple.com/documentation/photos/phimagerequestoptionsresizemode/none"
+        }
+      }
+    },
+    "PHImageRequestOptionsVersion": {
+      "doc": "Options for requesting an image asset with or without adjustments, used by the version property.",
+      "url": "https://developer.apple.com/documentation/photos/phimagerequestoptionsversion",
+      "members": {
+        "PHImageRequestOptionsVersionCurrent": {
+          "doc": "Request the most recent version of the image asset (the one that reflects all edits).",
+          "url": "https://developer.apple.com/documentation/photos/phimagerequestoptionsversion/current"
+        },
+        "PHImageRequestOptionsVersionOriginal": {
+          "doc": "Request the original, highest-fidelity version of the image asset.",
+          "url": "https://developer.apple.com/documentation/photos/phimagerequestoptionsversion/original"
+        },
+        "PHImageRequestOptionsVersionUnadjusted": {
+          "doc": "Request a version of the image asset without adjustments.",
+          "url": "https://developer.apple.com/documentation/photos/phimagerequestoptionsversion/unadjusted"
+        }
+      }
+    },
+    "PHLivePhotoEditingErrorCode": {
+      "doc": "Error codes for Live Photo editing errors.",
+      "url": "https://developer.apple.com/documentation/photos/phlivephotoeditingerrorcode",
+      "members": {
+        "PHLivePhotoEditingErrorCodeAborted": {
+          "doc": "Live Photo processing was canceled by the Processing an Editing Context’s Live Photo method.",
+          "url": "https://developer.apple.com/documentation/photos/phlivephotoeditingerrorcode/aborted"
+        },
+        "PHLivePhotoEditingErrorCodeUnknown": {
+          "doc": "No further information is available about the cause of the error.",
+          "url": "https://developer.apple.com/documentation/photos/phlivephotoeditingerrorcode/unknown"
+        }
+      }
+    },
+    "PHLivePhotoFrameType": {
+      "doc": "Identifiers for the type of frame image to be processed. Used with the type property.",
+      "url": "https://developer.apple.com/documentation/photos/phlivephotoframetype",
+      "members": {
+        "PHLivePhotoFrameTypePhoto": {
+          "doc": "The image is a still photo.",
+          "url": "https://developer.apple.com/documentation/photos/phlivephotoframetype/photo"
+        },
+        "PHLivePhotoFrameTypeVideo": {
+          "doc": "The image is a single frame from the Live Photo’s video content.",
+          "url": "https://developer.apple.com/documentation/photos/phlivephotoframetype/video"
+        }
+      }
+    },
+    "PHObjectType": {
+      "doc": "Identifies the type of objects in a change request.",
+      "url": "https://developer.apple.com/documentation/photos/phobjecttype",
+      "members": {
+        "PHObjectTypeAsset": {
+          "doc": "A type that represents an asset.",
+          "url": "https://developer.apple.com/documentation/photos/phobjecttype/asset"
+        },
+        "PHObjectTypeAssetCollection": {
+          "doc": "A type that represents a collection of assets.",
+          "url": "https://developer.apple.com/documentation/photos/phobjecttype/assetcollection"
+        },
+        "PHObjectTypeCollectionList": {
+          "doc": "A type that represents a collection list.",
+          "url": "https://developer.apple.com/documentation/photos/phobjecttype/collectionlist"
+        }
+      }
+    },
+    "PHVideoRequestOptionsDeliveryMode": {
+      "doc": "Options for delivering requested video data, used by the deliveryMode property.",
+      "url": "https://developer.apple.com/documentation/photos/phvideorequestoptionsdeliverymode",
+      "members": {
+        "PHVideoRequestOptionsDeliveryModeAutomatic": {
+          "doc": "Photos automatically determines which quality of video data to provide based on the request and current conditions.",
+          "url": "https://developer.apple.com/documentation/photos/phvideorequestoptionsdeliverymode/automatic"
+        },
+        "PHVideoRequestOptionsDeliveryModeFastFormat": {
+          "doc": "Photos provides whatever quality of video can be most quickly loaded.",
+          "url": "https://developer.apple.com/documentation/photos/phvideorequestoptionsdeliverymode/fastformat"
+        },
+        "PHVideoRequestOptionsDeliveryModeHighQualityFormat": {
+          "doc": "Photos provides only the highest quality video available.",
+          "url": "https://developer.apple.com/documentation/photos/phvideorequestoptionsdeliverymode/highqualityformat"
+        },
+        "PHVideoRequestOptionsDeliveryModeMediumQualityFormat": {
+          "doc": "Photos provides a video of moderate quality unless a higher quality version is locally cached.",
+          "url": "https://developer.apple.com/documentation/photos/phvideorequestoptionsdeliverymode/mediumqualityformat"
+        }
+      }
+    },
+    "PHVideoRequestOptionsVersion": {
+      "doc": "Options for requesting a video asset with or without adjustments, used by the version property.",
+      "url": "https://developer.apple.com/documentation/photos/phvideorequestoptionsversion",
+      "members": {
+        "PHVideoRequestOptionsVersionCurrent": {
+          "doc": "Request the most recent version of the video asset, reflecting all edits.",
+          "url": "https://developer.apple.com/documentation/photos/phvideorequestoptionsversion/current"
+        },
+        "PHVideoRequestOptionsVersionOriginal": {
+          "doc": "Request a version of the video asset without adjustments.",
+          "url": "https://developer.apple.com/documentation/photos/phvideorequestoptionsversion/original"
+        }
+      }
+    }
+  },
+  "methods": {
+    "PHAdjustmentData": {
+      "-initWithFormatIdentifier:formatVersion:data:": {
+        "doc": "Initializes an adjustment object with the specified format and data.",
+        "url": "https://developer.apple.com/documentation/photos/phadjustmentdata/init(formatidentifier:formatversion:data:)"
+      }
+    },
+    "PHAsset": {
+      "+fetchAssetsInAssetCollection:options:": {
+        "doc": "Retrieves assets from the specified asset collection.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/fetchassets(in:options:)"
+      },
+      "+fetchAssetsWithALAssetURLs:options:": {
+        "doc": "Retrieves assets using URLs provided by the Assets Library framework.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/fetchassets(withalasseturls:options:)"
+      },
+      "+fetchAssetsWithBurstIdentifier:options:": {
+        "doc": "Retrieves assets with the specified burst photo sequence identifier.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/fetchassets(withburstidentifier:options:)"
+      },
+      "+fetchAssetsWithLocalIdentifiers:options:": {
+        "doc": "Retrieves assets with the specified local-device-specific unique identifiers.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/fetchassets(withlocalidentifiers:options:)"
+      },
+      "+fetchAssetsWithMediaType:options:": {
+        "doc": "Retrieves assets with the specified media type.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/fetchassets(with:options:)"
+      },
+      "+fetchAssetsWithOptions:": {
+        "doc": "Retrieves all assets matching the specified options.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/fetchassets(with:)"
+      },
+      "+fetchKeyAssetsInAssetCollection:options:": {
+        "doc": "Retrieves assets marked as key assets in the specified asset collection.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/fetchkeyassets(in:options:)"
+      },
+      "-canPerformEditOperation:": {
+        "doc": "Returns whether the asset supports the specified editing operation.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/canperform(_:)"
+      },
+      "-cancelContentEditingInputRequest:": {
+        "doc": "Cancels a request for editing the asset’s content.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/cancelcontenteditinginputrequest(_:)"
+      },
+      "-requestContentEditingInputWithOptions:completionHandler:": {
+        "doc": "Requests asset information for beginning a content editing session.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/requestcontenteditinginput(with:completionhandler:)"
+      }
+    },
+    "PHAssetChangeRequest": {
+      "+changeRequestForAsset:": {
+        "doc": "Creates a request for modifying the specified asset.",
+        "url": "https://developer.apple.com/documentation/photos/phassetchangerequest/init(for:)"
+      },
+      "+creationRequestForAssetFromImage:": {
+        "doc": "Creates a request for adding a new image asset to the Photos library.",
+        "url": "https://developer.apple.com/documentation/photos/phassetchangerequest/creationrequestforasset(from:)"
+      },
+      "+creationRequestForAssetFromImageAtFileURL:": {
+        "doc": "Creates a request for adding a new image asset to the Photos library, using the image file at the specified URL.",
+        "url": "https://developer.apple.com/documentation/photos/phassetchangerequest/creationrequestforassetfromimage(atfileurl:)"
+      },
+      "+creationRequestForAssetFromVideoAtFileURL:": {
+        "doc": "Creates a request for adding a new video asset to the Photos library, using the video file at the specified URL.",
+        "url": "https://developer.apple.com/documentation/photos/phassetchangerequest/creationrequestforassetfromvideo(atfileurl:)"
+      },
+      "+deleteAssets:": {
+        "doc": "Requests that the specified assets be deleted.",
+        "url": "https://developer.apple.com/documentation/photos/phassetchangerequest/deleteassets(_:)"
+      },
+      "-revertAssetContentToOriginal": {
+        "doc": "Request to revert any edits made to the asset’s content.",
+        "url": "https://developer.apple.com/documentation/photos/phassetchangerequest/revertassetcontenttooriginal()"
+      },
+      "-setLivePhotoVideoPlaybackEnabled:": {
+        "doc": "Disable or enable the video part of a Live Photo so it just appears as a still image (disabled) or a Live Photo (enabled)",
+        "url": "https://developer.apple.com/documentation/photos/phassetchangerequest/setlivephotovideoplaybackenabled(_:)"
+      }
+    },
+    "PHAssetCollection": {
+      "+fetchAssetCollectionsContainingAsset:withType:options:": {
+        "doc": "Retrieves asset collections of the specified type containing the specified asset.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollection/fetchassetcollectionscontaining(_:with:options:)"
+      },
+      "+fetchAssetCollectionsWithALAssetGroupURLs:options:": {
+        "doc": "Retrieves asset collections using URLs provided by the Assets Library framework.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollection/fetchassetcollections(withalassetgroupurls:options:)"
+      },
+      "+fetchAssetCollectionsWithLocalIdentifiers:options:": {
+        "doc": "Retrieves asset collections with the specified unique identifiers.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollection/fetchassetcollections(withlocalidentifiers:options:)"
+      },
+      "+fetchAssetCollectionsWithType:subtype:options:": {
+        "doc": "Retrieves asset collections of the specified type and subtype.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollection/fetchassetcollections(with:subtype:options:)"
+      },
+      "+fetchMomentsInMomentList:options:": {
+        "doc": "Retrieves asset collections in the specified moment list collection.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollection/fetchmoments(inmomentlist:options:)"
+      },
+      "+fetchMomentsWithOptions:": {
+        "doc": "Retrieves asset collections corresponding to moments seen in the Photos app.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollection/fetchmoments(with:)"
+      },
+      "+transientAssetCollectionWithAssetFetchResult:title:": {
+        "doc": "Creates a temporary asset collection containing the assets from the specified fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollection/transientassetcollection(withassetfetchresult:title:)"
+      },
+      "+transientAssetCollectionWithAssets:title:": {
+        "doc": "Creates a temporary asset collection containing the specified assets.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollection/transientassetcollection(with:title:)"
+      }
+    },
+    "PHAssetCollectionChangeRequest": {
+      "+changeRequestForAssetCollection:": {
+        "doc": "Creates a request for modifying the specified asset collection.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollectionchangerequest/init(for:)"
+      },
+      "+changeRequestForAssetCollection:assets:": {
+        "doc": "Creates a request for modifying the specified asset collection, with a fetch result for tracking changes.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollectionchangerequest/init(for:assets:)"
+      },
+      "+creationRequestForAssetCollectionWithTitle:": {
+        "doc": "Creates a request for adding a new asset collection to the Photos library.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollectionchangerequest/creationrequestforassetcollection(withtitle:)"
+      },
+      "+deleteAssetCollections:": {
+        "doc": "Requests that the specified asset collections be deleted.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollectionchangerequest/deleteassetcollections(_:)"
+      },
+      "-addAssets:": {
+        "doc": "Adds the specified assets to the asset collection.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollectionchangerequest/addassets(_:)"
+      },
+      "-insertAssets:atIndexes:": {
+        "doc": "Inserts the specified assets into the collection at the specified indexes.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollectionchangerequest/insertassets(_:at:)"
+      },
+      "-moveAssetsAtIndexes:toIndex:": {
+        "doc": "Moves the assets at the specified indexes in the asset collection to a new index.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollectionchangerequest/moveassets(at:to:)"
+      },
+      "-removeAssets:": {
+        "doc": "Removes the specified assets from the asset collection.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollectionchangerequest/removeassets(_:)"
+      },
+      "-removeAssetsAtIndexes:": {
+        "doc": "Removes the assets at the specified indexes from the asset collection.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollectionchangerequest/removeassets(at:)"
+      },
+      "-replaceAssetsAtIndexes:withAssets:": {
+        "doc": "Replaces the assets at the specified indexes in the asset collection with the specified assets.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollectionchangerequest/replaceassets(at:withassets:)"
+      }
+    },
+    "PHAssetCreationRequest": {
+      "+creationRequestForAsset": {
+        "doc": "Creates a request for adding a new asset to the Photos library using asset resources.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcreationrequest/forasset()"
+      },
+      "+supportsAssetResourceTypes:": {
+        "doc": "Returns a Boolean value indicating whether Photos supports creating an asset with the specified combination of resource types.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcreationrequest/supportsassetresourcetypes(_:)"
+      },
+      "-addResourceWithType:data:options:": {
+        "doc": "Adds a data resource to the asset being created, using the specified data.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcreationrequest/addresource(with:data:options:)"
+      },
+      "-addResourceWithType:fileURL:options:": {
+        "doc": "Adds a data resource to the asset being created, using the file at the specified URL.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcreationrequest/addresource(with:fileurl:options:)"
+      }
+    },
+    "PHAssetResource": {
+      "+assetResourceForUploadJob:": {
+        "doc": "Returns the asset resource associated with the given upload job.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresource/assetresource(foruploadjob:)"
+      },
+      "+assetResourcesForAsset:": {
+        "doc": "Returns the list of data resources associated with an asset.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresource/assetresources(for:)-27o4l"
+      },
+      "+assetResourcesForLivePhoto:": {
+        "doc": "Returns the list of data resources associated with a Live Photo object.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresource/assetresources(for:)-2fedw"
+      }
+    },
+    "PHAssetResourceManager": {
+      "+defaultManager": {
+        "doc": "Returns the shared asset resource manager object.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourcemanager/default()"
+      },
+      "-cancelDataRequest:": {
+        "doc": "Cancels an asynchronous request.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourcemanager/canceldatarequest(_:)"
+      },
+      "-requestDataForAssetResource:options:dataReceivedHandler:completionHandler:": {
+        "doc": "Requests the underlying data for the specified asset resource, to be delivered asynchronously.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourcemanager/requestdata(for:options:datareceivedhandler:completionhandler:)"
+      },
+      "-writeDataForAssetResource:toFile:options:completionHandler:": {
+        "doc": "Requests the underlying data for the specified asset resource, to be asynchronously written to a local file.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourcemanager/writedata(for:tofile:options:completionhandler:)"
+      }
+    },
+    "PHAssetResourceUploadJob": {
+      "+fetchJobsWithAction:options:": {
+        "doc": "Returns all asset resource upload jobs applicable for a given action.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjob/fetchjobs(action:options:)"
+      }
+    },
+    "PHAssetResourceUploadJobChangeRequest": {
+      "+changeRequestForUploadJob:": {
+        "doc": "Creates a request for modifying the specified upload job.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjobchangerequest/init(for:)"
+      },
+      "+createJobWithDestination:resource:": {
+        "doc": "Creates an asset resource upload job.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjobchangerequest/createjob(destination:resource:)"
+      },
+      "+creationRequestForDownloadJobWithResource:": {
+        "doc": "Creates a download-only job request for the specified asset resource.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjobchangerequest/creationrequestfordownloadjob(resource:)"
+      },
+      "+creationRequestForJobWithDestination:resource:": {
+        "doc": "Creates an asset resource upload job and returns the change request.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjobchangerequest/creationrequestforjob(destination:resource:)"
+      },
+      "-acknowledge": {
+        "doc": "Acknowledges a successful or failed job. Jobs must be acknowledged to free up space for jobLimit.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjobchangerequest/acknowledge()"
+      },
+      "-cancel": {
+        "doc": "Cancels an upload job that is registered or pending.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjobchangerequest/cancel()"
+      },
+      "-retryWithDestination:": {
+        "doc": "Retries a job that is failed, unacknowledged, and has not been retried before. Successful retries also free up space for jobLimit.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjobchangerequest/retry(destination:)"
+      }
+    },
+    "PHCachingImageManager": {
+      "-startCachingImagesForAssets:targetSize:contentMode:options:": {
+        "doc": "Prepares image representations of the specified assets for later use.",
+        "url": "https://developer.apple.com/documentation/photos/phcachingimagemanager/startcachingimages(for:targetsize:contentmode:options:)"
+      },
+      "-stopCachingImagesForAllAssets": {
+        "doc": "Cancels all image preparation that is currently in progress.",
+        "url": "https://developer.apple.com/documentation/photos/phcachingimagemanager/stopcachingimagesforallassets()"
+      },
+      "-stopCachingImagesForAssets:targetSize:contentMode:options:": {
+        "doc": "Cancels image preparation for the specified assets and options.",
+        "url": "https://developer.apple.com/documentation/photos/phcachingimagemanager/stopcachingimages(for:targetsize:contentmode:options:)"
+      }
+    },
+    "PHChange": {
+      "-changeDetailsForFetchResult:": {
+        "doc": "Returns detailed change information for a fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phchange/changedetailsforfetchresult:"
+      },
+      "-changeDetailsForObject:": {
+        "doc": "Returns detailed change information for the specified asset or collection.",
+        "url": "https://developer.apple.com/documentation/photos/phchange/changedetailsforobject:"
+      }
+    },
+    "PHCloudIdentifier": {
+      "-initWithArchivalStringValue:": {
+        "doc": "Archival string can be used to serialize and deserialize the PHCloudIdentifier (Note the archival format is compatible with strings archived via the deprecated API stringValue)",
+        "url": "https://developer.apple.com/documentation/photos/phcloudidentifier/init(archivalstringvalue:)"
+      },
+      "-initWithStringValue:": {
+        "doc": "Deserializes a cloud identifier from its string value.",
+        "url": "https://developer.apple.com/documentation/photos/phcloudidentifier/init(stringvalue:)"
+      }
+    },
+    "PHCollection": {
+      "+fetchCollectionsInCollectionList:options:": {
+        "doc": "Retrieves collections from the specified collection list.",
+        "url": "https://developer.apple.com/documentation/photos/phcollection/fetchcollections(in:options:)"
+      },
+      "+fetchTopLevelUserCollectionsWithOptions:": {
+        "doc": "Retrieves collections from the root of the photo library’s hierarchy of user-created albums and folders.",
+        "url": "https://developer.apple.com/documentation/photos/phcollection/fetchtoplevelusercollections(with:)"
+      },
+      "-canPerformEditOperation:": {
+        "doc": "Returns whether the collection supports the specified editing operation.",
+        "url": "https://developer.apple.com/documentation/photos/phcollection/canperform(_:)"
+      }
+    },
+    "PHCollectionList": {
+      "+fetchCollectionListsContainingCollection:options:": {
+        "doc": "Retrieves collection lists that contain the specified collection.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlist/fetchcollectionlistscontaining(_:options:)"
+      },
+      "+fetchCollectionListsWithLocalIdentifiers:options:": {
+        "doc": "Retrieves collection lists with the specified local-device-specific unique identifiers.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlist/fetchcollectionlists(withlocalidentifiers:options:)"
+      },
+      "+fetchCollectionListsWithType:subtype:options:": {
+        "doc": "Retrieves collection lists of the specified type.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlist/fetchcollectionlists(with:subtype:options:)"
+      },
+      "+fetchMomentListsWithSubtype:containingMoment:options:": {
+        "doc": "Retrieves collection lists of the specified moment list type containing the specified moment.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlist/fetchmomentlists(with:containingmoment:options:)"
+      },
+      "+fetchMomentListsWithSubtype:options:": {
+        "doc": "Retrieves collection lists of the specified moment list type.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlist/fetchmomentlists(with:options:)"
+      },
+      "+transientCollectionListWithCollections:title:": {
+        "doc": "Creates a temporary collection list that contains the specified asset collections.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlist/transientcollectionlist(with:title:)"
+      },
+      "+transientCollectionListWithCollectionsFetchResult:title:": {
+        "doc": "Creates a temporary collection list containing the asset collections in the specified fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlist/transientcollectionlist(withcollectionsfetchresult:title:)"
+      }
+    },
+    "PHCollectionListChangeRequest": {
+      "+changeRequestForCollectionList:": {
+        "doc": "Creates a request for modifying the specified collection list.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlistchangerequest/init(for:)"
+      },
+      "+changeRequestForCollectionList:childCollections:": {
+        "doc": "Creates a request for modifying the specified collection list, with a fetch result for tracking changes.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlistchangerequest/init(for:childcollections:)"
+      },
+      "+changeRequestForTopLevelCollectionListUserCollections:": {
+        "doc": "Creates a request to add, remove, or rearrange child collections in the top-level collection list.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlistchangerequest/init(fortoplevelcollectionlistusercollections:)"
+      },
+      "+creationRequestForCollectionListWithTitle:": {
+        "doc": "Creates a request for adding a new collection list to the Photos library.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlistchangerequest/creationrequestforcollectionlist(withtitle:)"
+      },
+      "+deleteCollectionLists:": {
+        "doc": "Requests to delete the specified asset collections.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlistchangerequest/deletecollectionlists(_:)"
+      },
+      "-addChildCollections:": {
+        "doc": "Adds the specified collections as children of the collection list.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlistchangerequest/addchildcollections(_:)"
+      },
+      "-insertChildCollections:atIndexes:": {
+        "doc": "Inserts the specified collections into the collection list at the specified indexes.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlistchangerequest/insertchildcollections(_:at:)"
+      },
+      "-moveChildCollectionsAtIndexes:toIndex:": {
+        "doc": "Moves the child collections at the specified indexes in the collection list to a new index.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlistchangerequest/movechildcollections(at:to:)"
+      },
+      "-removeChildCollections:": {
+        "doc": "Removes the specified child collections from the collection list.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlistchangerequest/removechildcollections(_:)"
+      },
+      "-removeChildCollectionsAtIndexes:": {
+        "doc": "Removes the child collections at the specified indexes from the collection list.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlistchangerequest/removechildcollections(at:)"
+      },
+      "-replaceChildCollectionsAtIndexes:withChildCollections:": {
+        "doc": "Replaces the child collections at the specified indexes in the collection list with the specified collections.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlistchangerequest/replacechildcollections(at:withchildcollections:)"
+      }
+    },
+    "PHContentEditingOutput": {
+      "-initWithContentEditingInput:": {
+        "doc": "Creates an editing output from the specified editing input.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditingoutput/init(contenteditinginput:)"
+      },
+      "-initWithPlaceholderForCreatedAsset:": {
+        "doc": "Creates an editing output for use in adding a new asset to the photo library.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditingoutput/init(placeholderforcreatedasset:)"
+      }
+    },
+    "PHFetchResult": {
+      "-containsObject:": {
+        "doc": "Returns whether the specified object is present in the fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresult/contains(_:)"
+      },
+      "-countOfAssetsWithMediaType:": {
+        "doc": "Returns the number of assets in the fetch result of a specified type.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresult/countofassets(with:)"
+      },
+      "-enumerateObjectsAtIndexes:options:usingBlock:": {
+        "doc": "Executes the specified block using the objects in the fetch result at the specified indexes.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresult/enumerateobjects(at:options:using:)"
+      },
+      "-enumerateObjectsUsingBlock:": {
+        "doc": "Executes the specified block using each object in the fetch result, starting with the first object and continuing in order to the last object.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresult/enumerateobjects(_:)"
+      },
+      "-enumerateObjectsWithOptions:usingBlock:": {
+        "doc": "Executes the specified block using each object in the fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresult/enumerateobjects(options:using:)"
+      },
+      "-indexOfObject:": {
+        "doc": "Returns the lowest index whose corresponding object in the fetch result is equal to the specified object.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresult/index(of:)"
+      },
+      "-indexOfObject:inRange:": {
+        "doc": "Returns the lowest index within the specified range whose corresponding object in the fetch result is equal to the specified object.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresult/index(of:in:)"
+      },
+      "-objectAtIndex:": {
+        "doc": "Returns the object located at the specified index.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresult/object(at:)"
+      },
+      "-objectAtIndexedSubscript:": {
+        "doc": "Returns the object located at the specified index.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresult/subscript(_:)"
+      },
+      "-objectsAtIndexes:": {
+        "doc": "Returns an array containing the objects in the fetch result at the indexes in the specified index set.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresult/objects(at:)"
+      }
+    },
+    "PHFetchResultChangeDetails": {
+      "+changeDetailsFromFetchResult:toFetchResult:changedObjects:": {
+        "doc": "Creates a change details object that summarizes the differences between two fetch results.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresultchangedetails/init(from:to:changedobjects:)"
+      },
+      "-enumerateMovesWithBlock:": {
+        "doc": "Runs the specified block for each case where an object has moved from one index to another in the fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresultchangedetails/enumeratemoves(_:)"
+      }
+    },
+    "PHImageManager": {
+      "+defaultManager": {
+        "doc": "Returns the shared image manager object.",
+        "url": "https://developer.apple.com/documentation/photos/phimagemanager/default()"
+      },
+      "-cancelImageRequest:": {
+        "doc": "Cancels an asynchronous request",
+        "url": "https://developer.apple.com/documentation/photos/phimagemanager/cancelimagerequest(_:)"
+      },
+      "-requestAVAssetForVideo:options:resultHandler:": {
+        "doc": "Requests AVFoundation objects representing the video asset’s content and state, to be loaded asynchronously.",
+        "url": "https://developer.apple.com/documentation/photos/phimagemanager/requestavasset(forvideo:options:resulthandler:)"
+      },
+      "-requestExportSessionForVideo:options:exportPreset:resultHandler:": {
+        "doc": "Requests an export session for writing the video asset’s data to a file, to be loaded asynchronously.",
+        "url": "https://developer.apple.com/documentation/photos/phimagemanager/requestexportsession(forvideo:options:exportpreset:resulthandler:)"
+      },
+      "-requestImageDataAndOrientationForAsset:options:resultHandler:": {
+        "doc": "Requests the largest represented image as data bytes and EXIF orientation for the specified asset.",
+        "url": "https://developer.apple.com/documentation/photos/phimagemanager/requestimagedataandorientation(for:options:resulthandler:)"
+      },
+      "-requestImageDataForAsset:options:resultHandler:": {
+        "doc": "Requests full-sized image data for the specified asset.",
+        "url": "https://developer.apple.com/documentation/photos/phimagemanager/requestimagedataforasset:options:resulthandler:"
+      },
+      "-requestImageForAsset:targetSize:contentMode:options:resultHandler:": {
+        "doc": "Requests an image representation for the specified asset.",
+        "url": "https://developer.apple.com/documentation/photos/phimagemanager/requestimage(for:targetsize:contentmode:options:resulthandler:)"
+      },
+      "-requestLivePhotoForAsset:targetSize:contentMode:options:resultHandler:": {
+        "doc": "Requests a Live Photo representation for the specified asset.",
+        "url": "https://developer.apple.com/documentation/photos/phimagemanager/requestlivephoto(for:targetsize:contentmode:options:resulthandler:)"
+      },
+      "-requestPlayerItemForVideo:options:resultHandler:": {
+        "doc": "Requests a representation of the video asset for playback, to be loaded asynchronously.",
+        "url": "https://developer.apple.com/documentation/photos/phimagemanager/requestplayeritem(forvideo:options:resulthandler:)"
+      }
+    },
+    "PHLivePhoto": {
+      "+cancelLivePhotoRequestWithRequestID:": {
+        "doc": "Cancels an asynchronous request",
+        "url": "https://developer.apple.com/documentation/photos/phlivephoto/cancelrequest(withrequestid:)"
+      },
+      "+requestLivePhotoWithResourceFileURLs:placeholderImage:targetSize:contentMode:resultHandler:": {
+        "doc": "Asynchronously loads a Live Photo from the specified resource files.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephoto/request(withresourcefileurls:placeholderimage:targetsize:contentmode:resulthandler:)"
+      }
+    },
+    "PHLivePhotoEditingContext": {
+      "-cancel": {
+        "doc": "Aborts any Live Photo processing in progress.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephotoeditingcontext/cancel()"
+      },
+      "-initWithLivePhotoEditingInput:": {
+        "doc": "Creates a Live Photo editing context for the specified editing input.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephotoeditingcontext/init(livephotoeditinginput:)"
+      },
+      "-prepareLivePhotoForPlaybackWithTargetSize:options:completionHandler:": {
+        "doc": "Processes a Live Photo with your edits for viewing.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephotoeditingcontext/preparelivephotoforplayback(withtargetsize:options:completionhandler:)"
+      },
+      "-saveLivePhotoToOutput:options:completionHandler:": {
+        "doc": "Processes and saves a full-quality Live Photo as the output of your editing session.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephotoeditingcontext/savelivephoto(to:options:completionhandler:)"
+      }
+    },
+    "PHPersistentChange": {
+      "-changeDetailsForObjectType:error:": {
+        "doc": "Returns the change history that contains the local identifiers for object inserts, updates, and deletes.",
+        "url": "https://developer.apple.com/documentation/photos/phpersistentchange/changedetails(for:)"
+      }
+    },
+    "PHPersistentChangeFetchResult": {
+      "-enumerateChangesWithBlock:": {
+        "doc": "Executes the block you specify by using the objects in the fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phpersistentchangefetchresult/enumeratechangeswithblock:"
+      }
+    },
+    "PHPhotoLibrary": {
+      "+authorizationStatus": {
+        "doc": "Returns information about your app’s authorization to access the user’s photo library.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/authorizationstatus()"
+      },
+      "+authorizationStatusForAccessLevel:": {
+        "doc": "Returns the app’s authorization to access the user’s photo library for the specified access level.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/authorizationstatus(for:)"
+      },
+      "+requestAuthorization:": {
+        "doc": "Requests the user’s permission, if needed, to access the photo library.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/requestauthorization(_:)"
+      },
+      "+requestAuthorizationForAccessLevel:handler:": {
+        "doc": "Prompts the user to grant the app permission to access the photo library.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/requestauthorization(for:handler:)"
+      },
+      "+sharedPhotoLibrary": {
+        "doc": "Retrieves the shared photo library object.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/shared()"
+      },
+      "-cloudIdentifierMappingsForLocalIdentifiers:": {
+        "doc": "Retrieves the cloud identifier mappings for the list of local identifiers.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/cloudidentifiermappingsforlocalidentifiers:"
+      },
+      "-cloudIdentifiersForLocalIdentifiers:": {
+        "doc": "Retrieves the equivalent iCloud identifiers for the list of local identifiers.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/cloudidentifiers(forlocalidentifiers:)"
+      },
+      "-fetchPersistentChangesSinceToken:error:": {
+        "doc": "Retrieves the Photos library changes since the token you specify.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/fetchpersistentchanges(since:)"
+      },
+      "-localIdentifierMappingsForCloudIdentifiers:": {
+        "doc": "Retrieves the local identifier mappings for the list of cloud identifiers.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/localidentifiermappingsforcloudidentifiers:"
+      },
+      "-localIdentifierMappingsForSyncedCloudIdentifiers:": {
+        "doc": "Returns a dictionary that maps each cloud identifier from the provided array to a PHLocalIdentifierMapping result containing the local identifier found for that cloud identifier if that cloud identifier is a known synced identifier.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/localidentifiermappingsforsyncedcloudidentifiers:"
+      },
+      "-localIdentifiersForCloudIdentifiers:": {
+        "doc": "Retrieves the equivalent local identifiers for the list of iCloud identifiers.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/localidentifiers(for:)"
+      },
+      "-performChanges:completionHandler:": {
+        "doc": "Asynchronously runs a block that requests changes to the photo library.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/performchanges(_:completionhandler:)"
+      },
+      "-performChangesAndWait:error:": {
+        "doc": "Synchronously runs a block that requests changes to be performed in the photo library.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/performchangesandwait(_:)"
+      },
+      "-presentLimitedLibraryPickerFromViewController:": {
+        "doc": "Prompts the user to update their limited library selection.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/presentlimitedlibrarypicker(from:)"
+      },
+      "-presentLimitedLibraryPickerFromViewController:completionHandler:": {
+        "doc": "Prompts the user to update their limited library selection with a callback providing newly selected identifiers.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/presentlimitedlibrarypicker(from:completionhandler:)"
+      },
+      "-registerAvailabilityObserver:": {
+        "doc": "Registers an object to observe changes to the photo library’s availability.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/register(_:)-gm0a"
+      },
+      "-registerChangeObserver:": {
+        "doc": "Registers an object to receive messages when objects in the photo library change.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/register(_:)-6y3b9"
+      },
+      "-registerPersistentChangesObserver:": {
+        "doc": "Registers an observer to be notified when persistent changes occur in the photo library.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/register(_:)-7lhue"
+      },
+      "-setUploadJobExtensionEnabled:error:": {
+        "doc": "Enables or disables the background asset resource upload job feature.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/setuploadjobextensionenabled(_:)"
+      },
+      "-unregisterAvailabilityObserver:": {
+        "doc": "Unregisters an object from observing changes to the photo library’s availability.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/unregisteravailabilityobserver(_:)"
+      },
+      "-unregisterChangeObserver:": {
+        "doc": "Unregisters an object so that it no longer receives change messages.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/unregisterchangeobserver(_:)"
+      },
+      "-unregisterPersistentChangesObserver:": {
+        "doc": "Unregisters a previously registered persistent changes observer.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/unregisterpersistentchangesobserver(_:)"
+      }
+    },
+    "PHProjectChangeRequest": {
+      "-initWithProject:": {
+        "doc": "Creates a change request around the specified project.",
+        "url": "https://developer.apple.com/documentation/photos/phprojectchangerequest/init(project:)"
+      },
+      "-removeAssets:": {
+        "doc": "Removes the specified assets from the project.",
+        "url": "https://developer.apple.com/documentation/photos/phprojectchangerequest/removeassets:"
+      },
+      "-setKeyAsset:": {
+        "doc": "Sets the key asset representing the project.",
+        "url": "https://developer.apple.com/documentation/photos/phprojectchangerequest/setkeyasset(_:)"
+      },
+      "-setProjectPreviewImage:": {
+        "doc": "Updates the project preview in Photos.",
+        "url": "https://developer.apple.com/documentation/photos/phprojectchangerequest/setprojectpreviewimage(_:)"
+      }
+    }
+  },
+  "properties": {
+    "PHAdjustmentData": {
+      "data": {
+        "doc": "Data that contains the information necessary to reconstruct the adjustment.",
+        "url": "https://developer.apple.com/documentation/photos/phadjustmentdata/data"
+      },
+      "formatIdentifier": {
+        "doc": "A string uniquely identifying the format of the adjustment data.",
+        "url": "https://developer.apple.com/documentation/photos/phadjustmentdata/formatidentifier"
+      },
+      "formatVersion": {
+        "doc": "A version number for the adjustment data format.",
+        "url": "https://developer.apple.com/documentation/photos/phadjustmentdata/formatversion"
+      }
+    },
+    "PHAsset": {
+      "PHAssetPlaybackStyle": {
+        "doc": "An enumeration of asset playback styles that dictate how to present an asset to the user.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/playbackstyle-swift.enum"
+      },
+      "PHAssetRating": {
+        "doc": "Describes a rating for an asset.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/rating-swift.enum"
+      },
+      "addedDate": {
+        "doc": "The date and time this asset was added to the photo library (from the device that was used to add this asset)",
+        "url": "https://developer.apple.com/documentation/photos/phasset/addeddate"
+      },
+      "adjustmentFormatIdentifier": {
+        "doc": "The identifier that describes the adjustment format.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/adjustmentformatidentifier"
+      },
+      "adjustmentTimestamp": {
+        "doc": "The date when the asset was last edited.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/adjustmenttimestamp"
+      },
+      "burstIdentifier": {
+        "doc": "The unique identifier shared by photo assets from the same burst sequence.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/burstidentifier"
+      },
+      "burstSelectionTypes": {
+        "doc": "The selection type of the asset in a burst photo sequence.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/burstselectiontypes"
+      },
+      "contentType": {
+        "doc": "The type of image or video data that is presented for the asset",
+        "url": "https://developer.apple.com/documentation/photos/phasset/contenttype"
+      },
+      "creationDate": {
+        "doc": "The date and time of the asset’s creation.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/creationdate"
+      },
+      "duration": {
+        "doc": "The duration, in seconds, of the video asset.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/duration"
+      },
+      "favorite": {
+        "doc": "A Boolean value that indicates whether the user marks the asset as a favorite.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/isfavorite"
+      },
+      "hasAdjustments": {
+        "doc": "A Boolean value that indicates whether the asset contains adjustment data.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/hasadjustments"
+      },
+      "hidden": {
+        "doc": "A Boolean value that indicates whether the user hides the asset.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/ishidden"
+      },
+      "location": {
+        "doc": "The location information for the asset.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/location"
+      },
+      "mediaSubtypes": {
+        "doc": "The subtypes of the asset, identifying special kinds of assets, such as panoramic photo or high-frame-rate video.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/mediasubtypes"
+      },
+      "mediaType": {
+        "doc": "The type of the asset, such as video or audio.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/mediatype"
+      },
+      "modificationDate": {
+        "doc": "The date and time of the asset’s last modification.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/modificationdate"
+      },
+      "pixelHeight": {
+        "doc": "The height, in pixels, of the asset’s image or video data.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/pixelheight"
+      },
+      "pixelWidth": {
+        "doc": "The width, in pixels, of the asset’s image or video data.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/pixelwidth"
+      },
+      "playbackStyle": {
+        "doc": "An enumerated value that describes how to present an asset to the user.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/playbackstyle-swift.property"
+      },
+      "rating": {
+        "doc": "The rating of this PHAsset.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/rating-swift.property"
+      },
+      "representsBurst": {
+        "doc": "A Boolean value that indicates whether the asset is the representative photo from a burst photo sequence.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/representsburst"
+      },
+      "sourceType": {
+        "doc": "The means by which the asset enters the user’s Photos library.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/sourcetype"
+      },
+      "syncFailureHidden": {
+        "doc": "A Boolean value that indicates whether the user hides the sync failure message.",
+        "url": "https://developer.apple.com/documentation/photos/phasset/issyncfailurehidden"
+      }
+    },
+    "PHAssetChangeRequest": {
+      "contentEditingOutput": {
+        "doc": "The output of an asset content editing session.",
+        "url": "https://developer.apple.com/documentation/photos/phassetchangerequest/contenteditingoutput"
+      },
+      "creationDate": {
+        "doc": "The date and time at which the asset claims to have been originally created.",
+        "url": "https://developer.apple.com/documentation/photos/phassetchangerequest/creationdate"
+      },
+      "favorite": {
+        "doc": "A Boolean value that indicates whether the asset is marked as one of the user’s favorites.",
+        "url": "https://developer.apple.com/documentation/photos/phassetchangerequest/isfavorite"
+      },
+      "hidden": {
+        "doc": "A Boolean value that indicates whether the asset is hidden in collections.",
+        "url": "https://developer.apple.com/documentation/photos/phassetchangerequest/ishidden"
+      },
+      "location": {
+        "doc": "The location information saved with the asset.",
+        "url": "https://developer.apple.com/documentation/photos/phassetchangerequest/location"
+      },
+      "placeholderForCreatedAsset": {
+        "doc": "A placeholder object for the asset that the change request creates.",
+        "url": "https://developer.apple.com/documentation/photos/phassetchangerequest/placeholderforcreatedasset"
+      }
+    },
+    "PHAssetCollection": {
+      "approximateLocation": {
+        "doc": "A location representing those of all assets in the collection.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollection/approximatelocation"
+      },
+      "assetCollectionSubtype": {
+        "doc": "The subtype of the asset collection.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollection/assetcollectionsubtype"
+      },
+      "assetCollectionType": {
+        "doc": "The type of the asset collection, such as an album or a moment.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollection/assetcollectiontype"
+      },
+      "endDate": {
+        "doc": "The latest creation date among all assets in the asset collection.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollection/enddate"
+      },
+      "estimatedAssetCount": {
+        "doc": "The estimated number of assets in the asset collection.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollection/estimatedassetcount"
+      },
+      "localizedLocationNames": {
+        "doc": "The names of locations grouped by the collection (an array of NSString objects).",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollection/localizedlocationnames"
+      },
+      "startDate": {
+        "doc": "The earliest creation date among all assets in the asset collection.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollection/startdate"
+      }
+    },
+    "PHAssetCollectionChangeRequest": {
+      "placeholderForCreatedAssetCollection": {
+        "doc": "A placeholder object for the asset collection that the change request creates.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollectionchangerequest/placeholderforcreatedassetcollection"
+      },
+      "title": {
+        "doc": "The displayed name of the asset collection.",
+        "url": "https://developer.apple.com/documentation/photos/phassetcollectionchangerequest/title"
+      }
+    },
+    "PHAssetResource": {
+      "assetLocalIdentifier": {
+        "doc": "The unique identifier the system associates for a local asset object.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresource/assetlocalidentifier"
+      },
+      "contentType": {
+        "doc": "The content type of the data associated with this asset resource (the data can be retrieved via PHAssetResourceManager)",
+        "url": "https://developer.apple.com/documentation/photos/phassetresource/contenttype"
+      },
+      "dataSize": {
+        "doc": "The size of the resource in bytes if known, nil if unavailable (may not be available until resource download/processing is complete)",
+        "url": "https://developer.apple.com/documentation/photos/phassetresource/datasize-6cf5k"
+      },
+      "originalFilename": {
+        "doc": "The original filename of the asset resource from when it was created or imported.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresource/originalfilename"
+      },
+      "pixelHeight": {
+        "doc": "The height of the resource, in pixels.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresource/pixelheight"
+      },
+      "pixelWidth": {
+        "doc": "The width of the resource, in pixels.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresource/pixelwidth"
+      },
+      "type": {
+        "doc": "The relationship of an asset resource to its owning asset.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresource/type"
+      },
+      "uniformTypeIdentifier": {
+        "doc": "The uniform type identifier for the asset resource’s image or video data.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresource/uniformtypeidentifier"
+      }
+    },
+    "PHAssetResourceCreationOptions": {
+      "contentType": {
+        "doc": "The type of data being provided for this asset resource. If not specified, one will be inferred from the PHAssetResourceType or file URL extension (if provided).",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourcecreationoptions/contenttype"
+      },
+      "originalFilename": {
+        "doc": "The filename for the asset resource being created.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourcecreationoptions/originalfilename"
+      },
+      "shouldMoveFile": {
+        "doc": "A Boolean value that determines whether Photos moves or duplicates files when creating an asset resource.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourcecreationoptions/shouldmovefile"
+      },
+      "uniformTypeIdentifier": {
+        "doc": "The uniform type identifier for the resource.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourcecreationoptions/uniformtypeidentifier"
+      }
+    },
+    "PHAssetResourceManager": {
+      "exportedAssetID(for:)": {
+        "doc": "Returns the exported asset ID for the specified asset resource.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourcemanager/exportedassetid(for:)"
+      }
+    },
+    "PHAssetResourceRequestOptions": {
+      "networkAccessAllowed": {
+        "doc": "A Boolean value that specifies whether Photos can download the requested asset resource data from iCloud.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourcerequestoptions/isnetworkaccessallowed"
+      },
+      "progressHandler": {
+        "doc": "A block that Photos calls periodically while downloading the asset resource data.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourcerequestoptions/progresshandler"
+      }
+    },
+    "PHAssetResourceUploadJob": {
+      "PHAssetResourceUploadJobAction": {
+        "doc": "An action to perform on an upload job.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjob/action"
+      },
+      "PHAssetResourceUploadJobState": {
+        "doc": "The stages of an upload job’s life cycle, from registered with the system through to completion.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjob/state-swift.enum"
+      },
+      "PHAssetResourceUploadJobType": {
+        "doc": "Indicates whether a job downloads and then uploads an asset to the server or only downloads it.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjob/type-swift.enum"
+      },
+      "destination": {
+        "doc": "The destination to send the job’s resource.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjob/destination"
+      },
+      "error": {
+        "doc": "The error that caused the job to fail.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjob/error"
+      },
+      "jobLimit": {
+        "doc": "The maximum number of unacknowledged upload jobs allowed.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjob/joblimit"
+      },
+      "resource": {
+        "doc": "The asset resource this job promises to upload.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjob/resource"
+      },
+      "responseHeaderFields": {
+        "doc": "The HTTP response headers received from the server upon completion of the upload.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjob/responseheaderfields"
+      },
+      "state": {
+        "doc": "The state of this upload job.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjob/state-swift.property"
+      },
+      "type": {
+        "doc": "The type of this upload job.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjob/type-swift.property"
+      }
+    },
+    "PHAssetResourceUploadJobChangeRequest": {
+      "placeholderForCreatedAssetResourceUploadJob": {
+        "doc": "A placeholder for the asset resource upload job created by this request.",
+        "url": "https://developer.apple.com/documentation/photos/phassetresourceuploadjobchangerequest/placeholderforcreatedassetresourceuploadjob"
+      }
+    },
+    "PHCachingImageManager": {
+      "allowsCachingHighQualityImages": {
+        "doc": "A Boolean value that determines whether the image manager prepares high-quality images.",
+        "url": "https://developer.apple.com/documentation/photos/phcachingimagemanager/allowscachinghighqualityimages"
+      }
+    },
+    "PHChange": {
+      "changeDetails(for:)": {
+        "doc": "Returns detailed change information for the specified asset or collection.",
+        "url": "https://developer.apple.com/documentation/photos/phchange/changedetails(for:)-536rd"
+      }
+    },
+    "PHCloudIdentifier": {
+      "notFoundIdentifier": {
+        "doc": "The global identifier used in an array slot for items that couldn’t be found.",
+        "url": "https://developer.apple.com/documentation/photos/phcloudidentifier/notfound"
+      },
+      "stringValue": {
+        "doc": "A string version of the cloud identifier to use in serialization.",
+        "url": "https://developer.apple.com/documentation/photos/phcloudidentifier/stringvalue"
+      }
+    },
+    "PHCloudIdentifierMapping": {
+      "cloudIdentifier": {
+        "doc": "The iCloud identifier associated with the local identifier.",
+        "url": "https://developer.apple.com/documentation/photos/phcloudidentifiermapping/cloudidentifier"
+      },
+      "error": {
+        "doc": "An error indicating why the iCloud identifier lookup failed.",
+        "url": "https://developer.apple.com/documentation/photos/phcloudidentifiermapping/error"
+      }
+    },
+    "PHCollection": {
+      "canContainAssets": {
+        "doc": "A Boolean value indicating whether the collection can contain assets.",
+        "url": "https://developer.apple.com/documentation/photos/phcollection/cancontainassets"
+      },
+      "canContainCollections": {
+        "doc": "A Boolean value indicating whether the collection can contain other collections.",
+        "url": "https://developer.apple.com/documentation/photos/phcollection/cancontaincollections"
+      },
+      "localizedTitle": {
+        "doc": "The localized name of the collection.",
+        "url": "https://developer.apple.com/documentation/photos/phcollection/localizedtitle"
+      },
+      "modificationDate": {
+        "doc": "The last date at which this collection was modified.",
+        "url": "https://developer.apple.com/documentation/photos/phcollection/modificationdate"
+      }
+    },
+    "PHCollectionList": {
+      "collectionListSubtype": {
+        "doc": "The type of asset collection grouping the collection list represents.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlist/collectionlistsubtype"
+      },
+      "collectionListType": {
+        "doc": "The type of asset collection group that the collection list represents.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlist/collectionlisttype"
+      },
+      "endDate": {
+        "doc": "The latest creation date among all assets in the collection list.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlist/enddate"
+      },
+      "localizedLocationNames": {
+        "doc": "The names of locations grouped by the collection (an array of NSString objects).",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlist/localizedlocationnames"
+      },
+      "startDate": {
+        "doc": "The earliest creation date among all assets in the collection list.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlist/startdate"
+      }
+    },
+    "PHCollectionListChangeRequest": {
+      "placeholderForCreatedCollectionList": {
+        "doc": "A placeholder object for the collection list that the change request creates.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlistchangerequest/placeholderforcreatedcollectionlist"
+      },
+      "title": {
+        "doc": "The displayed name of the collection list.",
+        "url": "https://developer.apple.com/documentation/photos/phcollectionlistchangerequest/title"
+      }
+    },
+    "PHContentEditingInput": {
+      "adjustmentData": {
+        "doc": "An object that describes the most recent edit to the asset’s content.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginput/adjustmentdata"
+      },
+      "audiovisualAsset": {
+        "doc": "The video asset, as an AVAsset object.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginput/audiovisualasset"
+      },
+      "avAsset": {
+        "doc": "The video asset, as an AVAsset object.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginput/avasset"
+      },
+      "contentType": {
+        "doc": "The type of data provided as the asset’s content editing input image or video.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginput/contenttype"
+      },
+      "creationDate": {
+        "doc": "The date and time when the asset was originally created.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginput/creationdate"
+      },
+      "displaySizeImage": {
+        "doc": "An image of the asset’s contents, appropriately sized for display.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginput/displaysizeimage"
+      },
+      "fullSizeImageOrientation": {
+        "doc": "The Exif display orientation of the full-size image file.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginput/fullsizeimageorientation"
+      },
+      "fullSizeImageURL": {
+        "doc": "The URL to a file that contains the full-sized image data.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginput/fullsizeimageurl"
+      },
+      "livePhoto": {
+        "doc": "The unedited Live Photo content of the editing input.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginput/livephoto"
+      },
+      "location": {
+        "doc": "The location information that was saved with the asset.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginput/location"
+      },
+      "mediaSubtypes": {
+        "doc": "The subtypes of the asset, identifying special kinds of assets such as a panoramic photo or a high-frame-rate video.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginput/mediasubtypes"
+      },
+      "mediaType": {
+        "doc": "The type of the asset, such as video or audio.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginput/mediatype"
+      },
+      "playbackStyle": {
+        "doc": "The style in which to present this content to the user.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginput/playbackstyle"
+      },
+      "uniformTypeIdentifier": {
+        "doc": "The uniform type identifier for the asset’s image or video data.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginput/uniformtypeidentifier"
+      }
+    },
+    "PHContentEditingInputRequestOptions": {
+      "canHandleAdjustmentData": {
+        "doc": "A block to be called when Photos needs to determine whether your app can continue previous edits made to an asset.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginputrequestoptions/canhandleadjustmentdata"
+      },
+      "networkAccessAllowed": {
+        "doc": "A Boolean value that specifies whether Photos can download the asset from iCloud.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginputrequestoptions/isnetworkaccessallowed"
+      },
+      "progressHandler": {
+        "doc": "A block Photos calls periodically while downloading the asset.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginputrequestoptions/progresshandler"
+      },
+      "skipsDisplaySizeImage": {
+        "doc": "Set this value to true if you don’t want a displaySizeImage on the PHContentEditingInput. This can give performance wins when the image will not be used.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditinginputrequestoptions/skipsdisplaysizeimage"
+      }
+    },
+    "PHContentEditingOutput": {
+      "adjustmentData": {
+        "doc": "An object describing the changes made to the asset.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditingoutput/adjustmentdata"
+      },
+      "renderedContentURL": {
+        "doc": "The URL at which to write a file containing edited asset content.",
+        "url": "https://developer.apple.com/documentation/photos/phcontenteditingoutput/renderedcontenturl"
+      }
+    },
+    "PHFetchOptions": {
+      "fetchLimit": {
+        "doc": "The maximum number of objects to include in the fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchoptions/fetchlimit"
+      },
+      "includeAllBurstAssets": {
+        "doc": "A Boolean value that determines whether the fetch result includes all assets from burst photo sequences.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchoptions/includeallburstassets"
+      },
+      "includeAssetSourceTypes": {
+        "doc": "The set of source types for which to include assets in the fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchoptions/includeassetsourcetypes"
+      },
+      "includeHiddenAssets": {
+        "doc": "A Boolean value that determines whether the fetch result includes assets marked as hidden.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchoptions/includehiddenassets"
+      },
+      "predicate": {
+        "doc": "A predicate that specifies which properties to select results by and that also specifies any constraints on selection.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchoptions/predicate"
+      },
+      "sortDescriptors": {
+        "doc": "A list of sort descriptors, specifying an order for the fetched objects.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchoptions/sortdescriptors"
+      },
+      "wantsIncrementalChangeDetails": {
+        "doc": "A Boolean value that determines whether your app receives detailed change information for the objects in the fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchoptions/wantsincrementalchangedetails"
+      }
+    },
+    "PHFetchResult": {
+      "count": {
+        "doc": "The number of objects in the fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresult/count"
+      },
+      "firstObject": {
+        "doc": "The first object in the fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresult/firstobject"
+      },
+      "lastObject": {
+        "doc": "The last object in the fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresult/lastobject"
+      }
+    },
+    "PHFetchResultChangeDetails": {
+      "changedIndexes": {
+        "doc": "The indexes of objects in the fetch result whose content or metadata have been updated.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresultchangedetails/changedindexes"
+      },
+      "changedObjects": {
+        "doc": "The objects in the fetch result whose content or metadata have been updated.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresultchangedetails/changedobjects"
+      },
+      "fetchResultAfterChanges": {
+        "doc": "The current fetch result, incorporating recent changes.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresultchangedetails/fetchresultafterchanges"
+      },
+      "fetchResultBeforeChanges": {
+        "doc": "The original fetch result, without recent changes.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresultchangedetails/fetchresultbeforechanges"
+      },
+      "hasIncrementalChanges": {
+        "doc": "A Boolean value that indicates whether changes to the fetch result can be described incrementally.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresultchangedetails/hasincrementalchanges"
+      },
+      "hasMoves": {
+        "doc": "A Boolean value that indicates whether objects have been rearranged in the fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresultchangedetails/hasmoves"
+      },
+      "insertedIndexes": {
+        "doc": "The indexes where new objects have been inserted in the fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresultchangedetails/insertedindexes"
+      },
+      "insertedObjects": {
+        "doc": "The new items that have been inserted in the fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresultchangedetails/insertedobjects"
+      },
+      "removedIndexes": {
+        "doc": "The indexes from which objects have been removed from the fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresultchangedetails/removedindexes"
+      },
+      "removedObjects": {
+        "doc": "The items that have been removed from the fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phfetchresultchangedetails/removedobjects"
+      }
+    },
+    "PHImageRequestOptions": {
+      "deliveryMode": {
+        "doc": "The requested image quality and delivery priority.",
+        "url": "https://developer.apple.com/documentation/photos/phimagerequestoptions/deliverymode"
+      },
+      "networkAccessAllowed": {
+        "doc": "A Boolean value that specifies whether Photos can download the requested image from iCloud.",
+        "url": "https://developer.apple.com/documentation/photos/phimagerequestoptions/isnetworkaccessallowed"
+      },
+      "normalizedCropRect": {
+        "doc": "A rectangle for requesting a cropped version of the original image.",
+        "url": "https://developer.apple.com/documentation/photos/phimagerequestoptions/normalizedcroprect"
+      },
+      "preferHDR": {
+        "doc": "Request HDR image data if available (such as PQ/HLG formats).",
+        "url": "https://developer.apple.com/documentation/photos/phimagerequestoptions/preferhdr"
+      },
+      "progressHandler": {
+        "doc": "A block that Photos calls periodically while downloading the image.",
+        "url": "https://developer.apple.com/documentation/photos/phimagerequestoptions/progresshandler"
+      },
+      "resizeMode": {
+        "doc": "A mode that specifies how to resize the requested image.",
+        "url": "https://developer.apple.com/documentation/photos/phimagerequestoptions/resizemode"
+      },
+      "synchronous": {
+        "doc": "A Boolean value that determines whether Photos processes the image request synchronously.",
+        "url": "https://developer.apple.com/documentation/photos/phimagerequestoptions/issynchronous"
+      },
+      "targetHDRHeadroom": {
+        "doc": "Target HDR headroom for image rendering.",
+        "url": "https://developer.apple.com/documentation/photos/phimagerequestoptions/targethdrheadroom"
+      },
+      "version": {
+        "doc": "The version of the image to be requested.",
+        "url": "https://developer.apple.com/documentation/photos/phimagerequestoptions/version"
+      }
+    },
+    "PHLivePhoto": {
+      "size": {
+        "doc": "The size, in pixels, of the Live Photo.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephoto/size"
+      }
+    },
+    "PHLivePhotoEditingContext": {
+      "audioVolume": {
+        "doc": "The audio gain to apply to the processed Live Photo.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephotoeditingcontext/audiovolume"
+      },
+      "duration": {
+        "doc": "The duration, in seconds, of the Live Photo.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephotoeditingcontext/duration"
+      },
+      "frameProcessor": {
+        "doc": "A block to be called by Photos for processing each frame of the Live Photo’s visual content.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephotoeditingcontext/frameprocessor"
+      },
+      "fullSizeImage": {
+        "doc": "The unedited still photo content of the Live Photo.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephotoeditingcontext/fullsizeimage"
+      },
+      "orientation": {
+        "doc": "The image orientation of the Live Photo.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephotoeditingcontext/orientation"
+      },
+      "photoTime": {
+        "doc": "The offset, in seconds, from the beginning of the Live Photo’s duration to the time corresponding to its still photo.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephotoeditingcontext/phototime"
+      }
+    },
+    "PHLivePhotoRequestOptions": {
+      "deliveryMode": {
+        "doc": "The requested Live Photo quality and delivery priority.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephotorequestoptions/deliverymode"
+      },
+      "networkAccessAllowed": {
+        "doc": "A Boolean value that specifies whether Photos can download the requested Live Photo data from iCloud.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephotorequestoptions/isnetworkaccessallowed"
+      },
+      "progressHandler": {
+        "doc": "A block that Photos calls periodically while downloading the Live Photo.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephotorequestoptions/progresshandler"
+      },
+      "version": {
+        "doc": "The version of the Live Photo to be requested.",
+        "url": "https://developer.apple.com/documentation/photos/phlivephotorequestoptions/version"
+      }
+    },
+    "PHLocalIdentifierMapping": {
+      "error": {
+        "doc": "An error indicating why the local identifier lookup failed.",
+        "url": "https://developer.apple.com/documentation/photos/phlocalidentifiermapping/error"
+      },
+      "localIdentifier": {
+        "doc": "The local identifier associated with a iCloud identifier.",
+        "url": "https://developer.apple.com/documentation/photos/phlocalidentifiermapping/localidentifier"
+      }
+    },
+    "PHObject": {
+      "localIdentifier": {
+        "doc": "A unique string that persistently identifies the object.",
+        "url": "https://developer.apple.com/documentation/photos/phobject/localidentifier"
+      }
+    },
+    "PHObjectChangeDetails": {
+      "assetContentChanged": {
+        "doc": "A Boolean value that indicates whether the asset’s photo or video content has changed.",
+        "url": "https://developer.apple.com/documentation/photos/phobjectchangedetails/assetcontentchanged"
+      },
+      "objectAfterChanges": {
+        "doc": "An object that reflects the current state of the asset or collection it represents.",
+        "url": "https://developer.apple.com/documentation/photos/phobjectchangedetails/objectafterchanges"
+      },
+      "objectBeforeChanges": {
+        "doc": "An object that reflects the original state of the asset or collection it represents.",
+        "url": "https://developer.apple.com/documentation/photos/phobjectchangedetails/objectbeforechanges"
+      },
+      "objectWasDeleted": {
+        "doc": "A Boolean value that indicates whether the object has been deleted from the Photos library.",
+        "url": "https://developer.apple.com/documentation/photos/phobjectchangedetails/objectwasdeleted"
+      }
+    },
+    "PHPersistentChange": {
+      "changeToken": {
+        "doc": "An opaque object that represents the state of Photos library.",
+        "url": "https://developer.apple.com/documentation/photos/phpersistentchange/changetoken"
+      }
+    },
+    "PHPersistentObjectChangeDetails": {
+      "deletedLocalIdentifiers": {
+        "doc": "The local identifiers the system deletes since the change token you specify.",
+        "url": "https://developer.apple.com/documentation/photos/phpersistentobjectchangedetails/deletedlocalidentifiers"
+      },
+      "insertedLocalIdentifiers": {
+        "doc": "The local identifiers the system inserts since the change token you specify.",
+        "url": "https://developer.apple.com/documentation/photos/phpersistentobjectchangedetails/insertedlocalidentifiers"
+      },
+      "objectType": {
+        "doc": "The model type the change represents.",
+        "url": "https://developer.apple.com/documentation/photos/phpersistentobjectchangedetails/objecttype"
+      },
+      "updatedLocalIdentifiers": {
+        "doc": "The local identifiers the system updates since the change token you specify.",
+        "url": "https://developer.apple.com/documentation/photos/phpersistentobjectchangedetails/updatedlocalidentifiers"
+      }
+    },
+    "PHPhotoLibrary": {
+      "cloudIdentifierMappings(forLocalIdentifiers:)": {
+        "doc": "Retrieves the cloud identifier mappings for the list of local identifiers.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/cloudidentifiermappings(forlocalidentifiers:)"
+      },
+      "currentChangeToken": {
+        "doc": "The opaque token that represents the current state of the Photos library.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/currentchangetoken"
+      },
+      "localIdentifierMappings(for:)": {
+        "doc": "Retrieves the local identifier mappings for the list of cloud identifiers.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/localidentifiermappings(for:)"
+      },
+      "unavailabilityReason": {
+        "doc": "An error that describes the reason the photo library isn’t available.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/unavailabilityreason"
+      },
+      "uploadJobExtensionEnabled": {
+        "doc": "A Boolean value that indicates whether background asset resource uploading is enabled.",
+        "url": "https://developer.apple.com/documentation/photos/phphotolibrary/uploadjobextensionenabled"
+      }
+    },
+    "PHProject": {
+      "hasProjectPreview": {
+        "doc": "A property that indicates whether a project preview was previously set.",
+        "url": "https://developer.apple.com/documentation/photos/phproject/hasprojectpreview"
+      },
+      "projectExtensionData": {
+        "doc": "Data associated with the project extension.",
+        "url": "https://developer.apple.com/documentation/photos/phproject/projectextensiondata"
+      }
+    },
+    "PHProjectChangeRequest": {
+      "projectExtensionData": {
+        "doc": "Compressed project-specific data to use in the change request.",
+        "url": "https://developer.apple.com/documentation/photos/phprojectchangerequest/projectextensiondata"
+      },
+      "removeAssets(_:)": {
+        "doc": "Removes assets of a certain type from the collection.",
+        "url": "https://developer.apple.com/documentation/photos/phprojectchangerequest/removeassets(_:)-n825"
+      },
+      "title": {
+        "doc": "The title of the change request.",
+        "url": "https://developer.apple.com/documentation/photos/phprojectchangerequest/title"
+      }
+    },
+    "PHVideoRequestOptions": {
+      "deliveryMode": {
+        "doc": "A mode specifying the requested video quality and delivery priority.",
+        "url": "https://developer.apple.com/documentation/photos/phvideorequestoptions/deliverymode"
+      },
+      "networkAccessAllowed": {
+        "doc": "A Boolean value that specifies whether Photos can download the requested video from iCloud.",
+        "url": "https://developer.apple.com/documentation/photos/phvideorequestoptions/isnetworkaccessallowed"
+      },
+      "progressHandler": {
+        "doc": "A block Photos calls periodically while downloading the video.",
+        "url": "https://developer.apple.com/documentation/photos/phvideorequestoptions/progresshandler"
+      },
+      "version": {
+        "doc": "The version of the video to request.",
+        "url": "https://developer.apple.com/documentation/photos/phvideorequestoptions/version"
+      }
+    }
+  }
+}

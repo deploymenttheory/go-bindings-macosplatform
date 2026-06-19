@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter subclass that produces an image by manipulating RAW image sensor data from a digital camera or scanner.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cirawfilter
 type CIRAWFilter struct {
 	CIFilter
@@ -106,6 +108,7 @@ func CIRAWFilterFromID(id objc.ID) *CIRAWFilter {
 	return o
 }
 
+// Creates a RAW filter from the image at the URL location that you specify.
 func CIRAWFilterFilterWithImageURL(url *foundation.NSURL) *CIRAWFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIRAWFilter), _cIRAWFilterSelFilterWithImageURL, url.Ptr())
 	if _ret != 0 {
@@ -114,6 +117,7 @@ func CIRAWFilterFilterWithImageURL(url *foundation.NSURL) *CIRAWFilter {
 	return CIRAWFilterFromID(_ret)
 }
 
+// Creates a RAW filter from the image data and type hint that you specify.
 func CIRAWFilterFilterWithImageDataIdentifierHint(data *foundation.NSData, identifierHint *foundation.NSString) *CIRAWFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIRAWFilter), _cIRAWFilterSelFilterWithImageDataIdentifierHint, data.Ptr(), identifierHint.Ptr())
 	if _ret != 0 {
@@ -122,8 +126,9 @@ func CIRAWFilterFilterWithImageDataIdentifierHint(data *foundation.NSData, ident
 	return CIRAWFilterFromID(_ret)
 }
 
+// Creates a RAW filter from the pixel buffer and its properties that you specify.
 func CIRAWFilterFilterWithCVPixelBufferProperties(buffer unsafe.Pointer, properties *foundation.NSDictionary[objc.ID, objc.ID]) *CIRAWFilter {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIRAWFilter), _cIRAWFilterSelFilterWithCVPixelBufferProperties, buffer, properties)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIRAWFilter), _cIRAWFilterSelFilterWithCVPixelBufferProperties, buffer, properties.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -131,13 +136,19 @@ func CIRAWFilterFilterWithCVPixelBufferProperties(buffer unsafe.Pointer, propert
 }
 
 func CIRAWFilterSupportedCameraModels() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsCIRAWFilter), _cIRAWFilterSelSupportedCameraModels)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIRAWFilter), _cIRAWFilterSelSupportedCameraModels)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CIRAWFilter) SupportedDecoderVersions() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cIRAWFilterSelSupportedDecoderVersions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIRAWFilterSelSupportedDecoderVersions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CIRAWFilter) NativeSize() corefoundation.CGSize {
@@ -146,8 +157,11 @@ func (o *CIRAWFilter) NativeSize() corefoundation.CGSize {
 }
 
 func (o *CIRAWFilter) Properties() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _cIRAWFilterSelProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIRAWFilterSelProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *CIRAWFilter) Orientation() imageio.CGImagePropertyOrientation {

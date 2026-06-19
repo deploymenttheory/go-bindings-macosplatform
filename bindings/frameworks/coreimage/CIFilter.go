@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An image processor that produces an image by manipulating one or more input images or by generating new image data.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cifilter
 type CIFilter struct {
 	foundation.NSObject
@@ -76,7 +78,7 @@ func (o *CIFilter) SetDefaults() {
 
 // Used by CIFilter subclasses to apply the array of argument values 'args' to the kernel function 'k'. The supplied arguments must be type-compatible with the function signature of the kernel. The key-value pairs defined by 'dict' (if non-nil) are used to control exactly how the kernel is evaluated. Valid keys include: kCIApplyOptionExtent: the size of the produced image. Value is a four element NSArray [X Y WIDTH HEIGHT]. kCIApplyOptionDefinition: the Domain of Definition of the produced image. Value is either a CIFilterShape object, or a four element NSArray defining a rectangle. @param  k         CIKernel of the filter @param  args      Array of arguments that are applied to the kernel @param  dict      Array of additional options
 func (o *CIFilter) ApplyArgumentsOptions(k *CIKernel, args *foundation.NSArray[objc.ID], dict *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterSelApplyArgumentsOptions, k.Ptr(), args, dict)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterSelApplyArgumentsOptions, k.Ptr(), args.Ptr(), dict.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -102,20 +104,29 @@ func (o *CIFilter) SetEnabled(enabled bool) {
 
 // Returns an array containing the names of all inputs in the filter.
 func (o *CIFilter) InputKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cIFilterSelInputKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterSelInputKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // Returns an array containing the names of all outputs in the filter.
 func (o *CIFilter) OutputKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cIFilterSelOutputKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterSelOutputKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // Returns a dictionary containing key/value pairs describing the filter. (see description of keys below)
 func (o *CIFilter) Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _cIFilterSelAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIFilterSelAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Creates a new filter of type 'name'. On OSX, all input values will be undefined. On iOS, all input values will be set to default values.
@@ -129,7 +140,7 @@ func CIFilterFilterWithName(name *foundation.NSString) *CIFilter {
 
 // Creates a new filter of type 'name'. The filter's input parameters are set from the dictionary of key-value pairs. On OSX, any of the filter input parameters not specified in the dictionary will be undefined. On iOS, any of the filter input parameters not specified in the dictionary will be set to default values.
 func CIFilterFilterWithNameWithInputParameters(name *foundation.NSString, params *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIFilter {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterWithNameWithInputParameters, name.Ptr(), params)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterWithNameWithInputParameters, name.Ptr(), params.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -138,19 +149,25 @@ func CIFilterFilterWithNameWithInputParameters(name *foundation.NSString, params
 
 // Returns an array containing all published filter names in a category.
 func CIFilterFilterNamesInCategory(category *foundation.NSString) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsCIFilter), _cIFilterSelFilterNamesInCategory, category.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterNamesInCategory, category.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // Returns an array containing all published filter names that belong to all listed categories.
 func CIFilterFilterNamesInCategories(categories *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsCIFilter), _cIFilterSelFilterNamesInCategories, categories)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterNamesInCategories, categories.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // Publishes a new filter called 'name'. The constructor object 'anObject' should implement the filterWithName: method. That method will be invoked with the name of the filter to create. The class attributes must have a kCIAttributeFilterCategories key associated with a set of categories. @param   attributes    Dictionary of the registration attributes of the filter. See below for attribute keys.
 func CIFilterRegisterFilterNameConstructorClassAttributes(name *foundation.NSString, anObject CIFilterConstructor, attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	objc.ID(_clsCIFilter).Send(_cIFilterSelRegisterFilterNameConstructorClassAttributes, name.Ptr(), anObject, attributes)
+	objc.ID(_clsCIFilter).Send(_cIFilterSelRegisterFilterNameConstructorClassAttributes, name.Ptr(), anObject, attributes.Ptr())
 }
 
 // Returns the localized name of a filter for display in the UI.
@@ -214,7 +231,7 @@ func CIFilterFilterArrayFromSerializedXMPInputImageExtentError(xmpData *foundati
 // Returns a CIFilter that will in turn return a properly processed CIImage as "outputImage".
 // Deprecated: Use new CIRAWFilter class instead.
 func CIFilterFilterWithImageURLOptions(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIFilter {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterWithImageURLOptions, url.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterWithImageURLOptions, url.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -224,7 +241,7 @@ func CIFilterFilterWithImageURLOptions(url *foundation.NSURL, options *foundatio
 // Returns a CIFilter that will in turn return a properly processed CIImage as "outputImage". Note that when using this initializer, you should pass in a source type identifier hint (kCGImageSourceTypeIdentifierHint) key/value pair in order to help the decoder determine the file type, as otherwise confusion and incorrect results are possible.
 // Deprecated: Use new CIRAWFilter class instead.
 func CIFilterFilterWithImageDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIFilter {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterWithImageDataOptions, data.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterWithImageDataOptions, data.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -234,7 +251,7 @@ func CIFilterFilterWithImageDataOptions(data *foundation.NSData, options *founda
 // Returns a CIFilter that will in turn return a properly processed CIImage as "outputImage". Note that when using this initializer, you should pass in a CVPixelBufferRef with one of the following Raw pixel format types kCVPixelFormatType_14Bayer_GRBG, kCVPixelFormatType_14Bayer_RGGB, kCVPixelFormatType_14Bayer_BGGR, kCVPixelFormatType_14Bayer_GBRG as well as the root properties attachment from the CMSampleBufferRef.
 // Deprecated: Use new CIRAWFilter class instead.
 func CIFilterFilterWithCVPixelBufferPropertiesOptions(pixelBuffer unsafe.Pointer, properties *foundation.NSDictionary[objc.ID, objc.ID], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CIFilter {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterWithCVPixelBufferPropertiesOptions, pixelBuffer, properties, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelFilterWithCVPixelBufferPropertiesOptions, pixelBuffer, properties.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -244,6 +261,9 @@ func CIFilterFilterWithCVPixelBufferPropertiesOptions(pixelBuffer unsafe.Pointer
 // Returns a NSArray containing the names of all supported RAW cameras.
 // Deprecated: Use new CIRAWFilter class instead.
 func CIFilterSupportedRawCameraModels() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsCIFilter), _cIFilterSelSupportedRawCameraModels)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIFilter), _cIFilterSelSupportedRawCameraModels)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

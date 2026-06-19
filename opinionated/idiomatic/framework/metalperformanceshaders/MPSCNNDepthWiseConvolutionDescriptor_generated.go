@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a convolution object that does depthwise convolution.
+//
 // CNNDepthWiseConvolutionDescriptor wraps [raw.MPSCNNDepthWiseConvolutionDescriptor] with a fluent Go API.
 type CNNDepthWiseConvolutionDescriptor struct {
 	inner *raw.MPSCNNDepthWiseConvolutionDescriptor
@@ -38,7 +40,7 @@ func NewCNNDepthWiseConvolutionDescriptor() *CNNDepthWiseConvolutionDescriptor {
 	return &CNNDepthWiseConvolutionDescriptor{inner: raw.MPSCNNDepthWiseConvolutionDescriptorFromID(_id)}
 }
 
-// @property   kernelWidth @abstract   The width of the filter window.  The default value is 3. Any positive non-zero value is valid, including even values. The position of the left edge of the filter window is given by offset.x - (kernelWidth>>1)
+// The width of the kernel window.
 //
 // WithKernelWidth sets the kernelWidth property and returns the receiver for chaining.
 func (x *CNNDepthWiseConvolutionDescriptor) WithKernelWidth(kernelWidth uint) *CNNDepthWiseConvolutionDescriptor {
@@ -46,7 +48,7 @@ func (x *CNNDepthWiseConvolutionDescriptor) WithKernelWidth(kernelWidth uint) *C
 	return x
 }
 
-// @property   kernelHeight @abstract   The height of the filter window.  The default value is 3. Any positive non-zero value is valid, including even values. The position of the top edge of the filter window is given by offset.y - (kernelHeight>>1)
+// The height of the kernel window.
 //
 // WithKernelHeight sets the kernelHeight property and returns the receiver for chaining.
 func (x *CNNDepthWiseConvolutionDescriptor) WithKernelHeight(kernelHeight uint) *CNNDepthWiseConvolutionDescriptor {
@@ -54,7 +56,7 @@ func (x *CNNDepthWiseConvolutionDescriptor) WithKernelHeight(kernelHeight uint) 
 	return x
 }
 
-// @property   inputFeatureChannels @abstract   The number of feature channels per pixel in the input image.
+// The number of feature channels per pixel in the input image.
 //
 // WithInputFeatureChannels sets the inputFeatureChannels property and returns the receiver for chaining.
 func (x *CNNDepthWiseConvolutionDescriptor) WithInputFeatureChannels(inputFeatureChannels uint) *CNNDepthWiseConvolutionDescriptor {
@@ -62,7 +64,7 @@ func (x *CNNDepthWiseConvolutionDescriptor) WithInputFeatureChannels(inputFeatur
 	return x
 }
 
-// @property   outputFeatureChannels @abstract   The number of feature channels per pixel in the output image.
+// The number of feature channels per pixel in the output image.
 //
 // WithOutputFeatureChannels sets the outputFeatureChannels property and returns the receiver for chaining.
 func (x *CNNDepthWiseConvolutionDescriptor) WithOutputFeatureChannels(outputFeatureChannels uint) *CNNDepthWiseConvolutionDescriptor {
@@ -70,7 +72,7 @@ func (x *CNNDepthWiseConvolutionDescriptor) WithOutputFeatureChannels(outputFeat
 	return x
 }
 
-// @property   strideInPixelsX @abstract   The output stride (downsampling factor) in the x dimension. The default value is 1.
+// The output stride (downsampling factor) in the x dimension.
 //
 // WithStrideInPixelsX sets the strideInPixelsX property and returns the receiver for chaining.
 func (x *CNNDepthWiseConvolutionDescriptor) WithStrideInPixelsX(strideInPixelsX uint) *CNNDepthWiseConvolutionDescriptor {
@@ -78,7 +80,7 @@ func (x *CNNDepthWiseConvolutionDescriptor) WithStrideInPixelsX(strideInPixelsX 
 	return x
 }
 
-// @property   strideInPixelsY @abstract   The output stride (downsampling factor) in the y dimension. The default value is 1.
+// The output stride (downsampling factor) in the y dimension.
 //
 // WithStrideInPixelsY sets the strideInPixelsY property and returns the receiver for chaining.
 func (x *CNNDepthWiseConvolutionDescriptor) WithStrideInPixelsY(strideInPixelsY uint) *CNNDepthWiseConvolutionDescriptor {
@@ -86,7 +88,7 @@ func (x *CNNDepthWiseConvolutionDescriptor) WithStrideInPixelsY(strideInPixelsY 
 	return x
 }
 
-// @property   groups @abstract   Number of groups input and output channels are divided into. The default value is 1. Groups lets you reduce the parameterization. If groups is set to n, input is divided into n groups with inputFeatureChannels/n channels in each group. Similarly output is divided into n groups with outputFeatureChannels/n channels in each group. ith group in input is only connected to ith group in output so number of weights (parameters) needed is reduced by factor of n. Both inputFeatureChannels and outputFeatureChannels must be divisible by n and number of channels in each group must be multiple of 4.
+// The number of groups that the input and output channels are divided into.
 //
 // WithGroups sets the groups property and returns the receiver for chaining.
 func (x *CNNDepthWiseConvolutionDescriptor) WithGroups(groups uint) *CNNDepthWiseConvolutionDescriptor {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An OpenID authorization request that relies on the user’s Apple ID.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidrequest
 type ASAuthorizationAppleIDRequest struct {
 	ASAuthorizationOpenIDRequest

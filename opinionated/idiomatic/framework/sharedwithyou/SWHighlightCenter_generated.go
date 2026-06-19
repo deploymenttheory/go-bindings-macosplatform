@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An object that contains a priority-ordered list of universal links to share with the current user.
+//
 // HighlightCenter wraps [raw.SWHighlightCenter] with a fluent Go API.
 type HighlightCenter struct {
 	inner *raw.SWHighlightCenter
@@ -40,7 +42,7 @@ func NewHighlightCenter() *HighlightCenter {
 	return &HighlightCenter{inner: raw.SWHighlightCenterFromID(_id)}
 }
 
-// @abstract The highlight center's delegate
+// The delegate object for the highlight center.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *HighlightCenter) WithDelegate(delegate raw.SWHighlightCenterDelegate) *HighlightCenter {
@@ -48,7 +50,7 @@ func (x *HighlightCenter) WithDelegate(delegate raw.SWHighlightCenterDelegate) *
 	return x
 }
 
-// @abstract A convenience method to get a SWHighlight for a given URL @param URL The URL used to find the SWHighlight @param completionHandler an SWHighlight if it  was fetched. The completion handler will always be invoked on the main queue
+// Returns a highlight for a specified URL.
 //
 // GetHighlightForURL blocks until the operation completes or ctx is cancelled.
 func (x *HighlightCenter) GetHighlightForURL(ctx context.Context, uRL string) (*Highlight, error) {
@@ -76,6 +78,8 @@ func (x *HighlightCenter) GetHighlightForURL(ctx context.Context, uRL string) (*
 	}
 }
 
+// Returns a collaboration highlight for a specified collaboration identifier.
+//
 // CollaborationHighlightForIdentifierError calls the underlying CollaborationHighlightForIdentifierError.
 func (x *HighlightCenter) CollaborationHighlightForIdentifierError(collaborationIdentifier *foundation.NSString) (*CollaborationHighlight, error) {
 	_r, _err := x.inner.CollaborationHighlightForIdentifierError(collaborationIdentifier)
@@ -88,7 +92,7 @@ func (x *HighlightCenter) CollaborationHighlightForIdentifierError(collaboration
 	return &CollaborationHighlight{inner: _r}, nil
 }
 
-// @abstract A convenience method to get an SWCollaborationHighlight for a given URL @param URL The URL used to find the SWCollaborationHighlight @param completionHandler  an SWCollaborationHighlight if it was fetched. The completion handler will always be invoked on the main queue
+// Returns a collaboration highlight for a specified URL.
 //
 // GetCollaborationHighlightForURL blocks until the operation completes or ctx is cancelled.
 func (x *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, uRL string) (*CollaborationHighlight, error) {
@@ -116,21 +120,21 @@ func (x *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, u
 	}
 }
 
-// @abstract Post a given event to the highlight center for display in Messages. @param event The event to add for a specific highlight
+// Posts a specified event to the highlight center for display.
 //
 // PostNoticeForHighlightEvent calls the underlying PostNoticeForHighlightEvent.
 func (x *HighlightCenter) PostNoticeForHighlightEvent(event raw.SWHighlightEvent) {
 	x.inner.PostNoticeForHighlightEvent(event)
 }
 
-// @abstract Clear notices for a given collaboration highlight in Messages. @param highlight The highlight to clear notices from.
+// Clears the notices for a specified collaboration highlight.
 //
 // ClearNoticesForHighlight calls the underlying ClearNoticesForHighlight.
 func (x *HighlightCenter) ClearNoticesForHighlight(highlight *raw.SWCollaborationHighlight) {
 	x.inner.ClearNoticesForHighlight(highlight)
 }
 
-// @abstract Method to sign passed in data with local device's private key @param data NSData that needs to be signed @param collaborationHighlight The corresponding collaboration highlight. @param completionHandler Signed data along with proof of inclusion for merkle if signing succeeded, otherwise an error. The completion handler will always be invoked on main queue
+// Signs passed-in data with the local device’s private key.
 //
 // GetSignedIdentityProofForCollaborationHighlightUsingData blocks until the operation completes or ctx is cancelled.
 func (x *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingData(ctx context.Context, collaborationHighlight *raw.SWCollaborationHighlight, data *foundation.NSData) (*sharedwithyoucore.SWSignedPersonIdentityProof, error) {

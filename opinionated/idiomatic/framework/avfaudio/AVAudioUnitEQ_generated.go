@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that implements a multiband equalizer.
+//
 // AudioUnitEQ wraps [raw.AVAudioUnitEQ] with a fluent Go API.
 type AudioUnitEQ struct {
 	inner *raw.AVAudioUnitEQ
@@ -30,7 +32,7 @@ func AudioUnitEQFromID(id objc.ID) *AudioUnitEQ {
 	return &AudioUnitEQ{inner: raw.AVAudioUnitEQFromID(id)}
 }
 
-// @method initWithNumberOfBands: @abstract Initialize the EQ with number of bands. @param numberOfBands The number of bands created by the EQ.
+// Creates an audio unit equalizer object with the specified number of bands.
 //
 // NewAudioUnitEQWithNumberOfBands creates a new [AudioUnitEQ].
 func NewAudioUnitEQWithNumberOfBands(numberOfBands uint) *AudioUnitEQ {
@@ -39,7 +41,7 @@ func NewAudioUnitEQWithNumberOfBands(numberOfBands uint) *AudioUnitEQ {
 	return &AudioUnitEQ{inner: raw.AVAudioUnitEQFromID(_id)}
 }
 
-// @property globalGain @abstract Overall gain adjustment applied to the signal. @discussion Range:     -96 -> 24 Default:   0 Unit:      dB
+// The overall gain adjustment that the audio unit applies to the signal, in decibels.
 //
 // WithGlobalGain sets the globalGain property and returns the receiver for chaining.
 func (x *AudioUnitEQ) WithGlobalGain(globalGain float32) *AudioUnitEQ {
@@ -47,7 +49,7 @@ func (x *AudioUnitEQ) WithGlobalGain(globalGain float32) *AudioUnitEQ {
 	return x
 }
 
-// @property bypass @abstract Bypass state of the audio unit.
+// The bypass state of the audio unit.
 //
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitEQ) WithBypass(bypass bool) *AudioUnitEQ {

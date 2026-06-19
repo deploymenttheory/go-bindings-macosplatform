@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Stores information about a single update from a Metal display link instance.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/cametaldisplaylinkupdate
 type CAMetalDisplayLinkUpdate struct {
 	foundation.NSObject

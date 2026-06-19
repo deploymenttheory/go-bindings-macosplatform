@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A port name server that takes and returns Mach port objects.
+//
 // MachBootstrapServer wraps [raw.NSMachBootstrapServer] with a fluent Go API.
 type MachBootstrapServer struct {
 	inner *raw.NSMachBootstrapServer
@@ -42,6 +44,8 @@ func (x *MachBootstrapServer) WithScriptingProperties(scriptingProperties *raw.N
 	return x
 }
 
+// Looks up and returns the port for the vended service that is registered under the specified name.
+//
 // ServicePortWithName calls the underlying ServicePortWithName.
 func (x *MachBootstrapServer) ServicePortWithName(name string) *Port {
 	_r := x.inner.ServicePortWithName(foundation.NSStringStringWithUTF8String(name))

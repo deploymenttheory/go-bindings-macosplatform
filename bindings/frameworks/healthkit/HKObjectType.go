@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract superclass with subclasses that identify a specific type of data for the HealthKit store.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkobjecttype
 type HKObjectType struct {
 	foundation.NSObject
@@ -47,6 +49,7 @@ func HKObjectTypeFromID(id objc.ID) *HKObjectType {
 	return o
 }
 
+// Returns the shared quantity type for the provided identifier.
 func HKObjectTypeQuantityTypeForIdentifier(identifier *foundation.NSString) *HKQuantityType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelQuantityTypeForIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -55,6 +58,7 @@ func HKObjectTypeQuantityTypeForIdentifier(identifier *foundation.NSString) *HKQ
 	return HKQuantityTypeFromID(_ret)
 }
 
+// Returns the shared category type for the provided identifier.
 func HKObjectTypeCategoryTypeForIdentifier(identifier *foundation.NSString) *HKCategoryType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelCategoryTypeForIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -63,6 +67,7 @@ func HKObjectTypeCategoryTypeForIdentifier(identifier *foundation.NSString) *HKC
 	return HKCategoryTypeFromID(_ret)
 }
 
+// Returns the shared characteristic type for the provided identifier.
 func HKObjectTypeCharacteristicTypeForIdentifier(identifier *foundation.NSString) *HKCharacteristicType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelCharacteristicTypeForIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -71,6 +76,7 @@ func HKObjectTypeCharacteristicTypeForIdentifier(identifier *foundation.NSString
 	return HKCharacteristicTypeFromID(_ret)
 }
 
+// Returns the shared correlation type for the provided identifier.
 func HKObjectTypeCorrelationTypeForIdentifier(identifier *foundation.NSString) *HKCorrelationType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelCorrelationTypeForIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -79,6 +85,7 @@ func HKObjectTypeCorrelationTypeForIdentifier(identifier *foundation.NSString) *
 	return HKCorrelationTypeFromID(_ret)
 }
 
+// Returns the shared document type for the provided identifier.
 func HKObjectTypeDocumentTypeForIdentifier(identifier *foundation.NSString) *HKDocumentType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelDocumentTypeForIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -95,6 +102,7 @@ func HKObjectTypeScoredAssessmentTypeForIdentifier(identifier *foundation.NSStri
 	return HKScoredAssessmentTypeFromID(_ret)
 }
 
+// Returns the shared series type for the provided identifier.
 func HKObjectTypeSeriesTypeForIdentifier(identifier *foundation.NSString) *HKSeriesType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelSeriesTypeForIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -103,6 +111,7 @@ func HKObjectTypeSeriesTypeForIdentifier(identifier *foundation.NSString) *HKSer
 	return HKSeriesTypeFromID(_ret)
 }
 
+// Returns the shared HKWorkoutType object.
 func HKObjectTypeWorkoutType() *HKWorkoutType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelWorkoutType)
 	if _ret != 0 {
@@ -111,6 +120,7 @@ func HKObjectTypeWorkoutType() *HKWorkoutType {
 	return HKWorkoutTypeFromID(_ret)
 }
 
+// Returns the shared activity summary type.
 func HKObjectTypeActivitySummaryType() *HKActivitySummaryType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelActivitySummaryType)
 	if _ret != 0 {
@@ -119,6 +129,7 @@ func HKObjectTypeActivitySummaryType() *HKActivitySummaryType {
 	return HKActivitySummaryTypeFromID(_ret)
 }
 
+// Returns an audiogram sample type.
 func HKObjectTypeAudiogramSampleType() *HKAudiogramSampleType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelAudiogramSampleType)
 	if _ret != 0 {
@@ -127,6 +138,7 @@ func HKObjectTypeAudiogramSampleType() *HKAudiogramSampleType {
 	return HKAudiogramSampleTypeFromID(_ret)
 }
 
+// Returns the shared electrocardiogram type.
 func HKObjectTypeElectrocardiogramType() *HKElectrocardiogramType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelElectrocardiogramType)
 	if _ret != 0 {
@@ -143,6 +155,7 @@ func HKObjectTypeMedicationDoseEventType() *HKMedicationDoseEventType {
 	return HKMedicationDoseEventTypeFromID(_ret)
 }
 
+// Returns a shared vision prescription type object.
 func HKObjectTypeVisionPrescriptionType() *HKPrescriptionType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelVisionPrescriptionType)
 	if _ret != 0 {
@@ -167,7 +180,7 @@ func HKObjectTypeUserAnnotatedMedicationType() *HKUserAnnotatedMedicationType {
 	return HKUserAnnotatedMedicationTypeFromID(_ret)
 }
 
-// @method        requiresPerObjectAuthorization @abstract      Returns YES if the authorization for the object type needs to be requested on per object basis.
+// Returns a Boolean that indicates whether the data type requires per-object authorization.
 func (o *HKObjectType) RequiresPerObjectAuthorization() bool {
 	_ret := objc.Send[bool](o.Ptr(), _hKObjectTypeSelRequiresPerObjectAuthorization)
 	return _ret
@@ -182,6 +195,7 @@ func (o *HKObjectType) Identifier() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns the shared clinical type for the provided identifier.
 func HKObjectTypeClinicalTypeForIdentifier(identifier *foundation.NSString) *HKClinicalType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKObjectType), _hKObjectTypeSelClinicalTypeForIdentifier, identifier.Ptr())
 	if _ret != 0 {

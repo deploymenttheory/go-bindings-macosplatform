@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for an item in the tool picker.
+//
 // ToolPickerItem wraps [raw.PKToolPickerItem] with a fluent Go API.
 type ToolPickerItem struct {
 	inner *raw.PKToolPickerItem

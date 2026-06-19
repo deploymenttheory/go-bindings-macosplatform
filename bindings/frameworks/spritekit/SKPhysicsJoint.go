@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for objects that connect physics bodies.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skphysicsjoint
 type SKPhysicsJoint struct {
 	foundation.NSObject

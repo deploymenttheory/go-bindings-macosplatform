@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that converts streams of audio between formats.
+//
 // AudioConverter wraps [raw.AVAudioConverter] with a fluent Go API.
 type AudioConverter struct {
 	inner *raw.AVAudioConverter
@@ -32,7 +34,7 @@ func AudioConverterFromID(id objc.ID) *AudioConverter {
 	return &AudioConverter{inner: raw.AVAudioConverterFromID(id)}
 }
 
-// @method initFromFormat:toFormat: @abstract Initialize from input and output formats. @param fromFormat The input format. @param toFormat The output format. @discussion Returns nil if the format conversion is not possible.
+// Creates an audio converter object from the specified input and output formats.
 //
 // NewAudioConverterFromFormatToFormat creates a new [AudioConverter].
 func NewAudioConverterFromFormatToFormat(fromFormat *raw.AVAudioFormat, toFormat *raw.AVAudioFormat) *AudioConverter {
@@ -41,7 +43,7 @@ func NewAudioConverterFromFormatToFormat(fromFormat *raw.AVAudioFormat, toFormat
 	return &AudioConverter{inner: raw.AVAudioConverterFromID(_id)}
 }
 
-// @property channelMap @abstract An array of integers indicating from which input to derive each output. @discussion The array has size equal to the number of output channels. Each element's value is the input channel number, starting with zero, that is to be copied to that output. A negative value means that the output channel will have no source and will be silent. Setting a channel map overrides channel mapping due to any channel layouts in the input and output formats that may have been supplied.
+// An array of integers that indicates which input to derive each output from.
 //
 // WithChannelMap sets the collection, converting the Go slice to an NSArray.
 func (x *AudioConverter) WithChannelMap(items ...*foundation.NSNumber) *AudioConverter {
@@ -64,7 +66,7 @@ func (x *AudioConverter) WithChannelMap(items ...*foundation.NSNumber) *AudioCon
 	return x
 }
 
-// @property	magicCookie @abstract	Decoders require some data in the form of a magicCookie in order to decode properly. Encoders will produce a magicCookie.
+// An object that contains metadata for encoders and decoders.
 //
 // WithMagicCookie sets the magicCookie property and returns the receiver for chaining.
 func (x *AudioConverter) WithMagicCookie(magicCookie *foundation.NSData) *AudioConverter {
@@ -72,7 +74,7 @@ func (x *AudioConverter) WithMagicCookie(magicCookie *foundation.NSData) *AudioC
 	return x
 }
 
-// @property	downmix @abstract	If YES and channel remapping is necessary, then channels will be mixed as appropriate instead of remapped. Default value is NO.
+// A Boolean value that indicates whether the framework mixes the channels instead of remapping.
 //
 // WithDownmix sets the downmix property and returns the receiver for chaining.
 func (x *AudioConverter) WithDownmix(downmix bool) *AudioConverter {
@@ -80,7 +82,7 @@ func (x *AudioConverter) WithDownmix(downmix bool) *AudioConverter {
 	return x
 }
 
-// @property	dither @abstract	Setting YES will turn on dither, if dither makes sense in given the current formats and settings. Default value is NO.
+// A Boolean value that indicates whether dither is on.
 //
 // WithDither sets the dither property and returns the receiver for chaining.
 func (x *AudioConverter) WithDither(dither bool) *AudioConverter {
@@ -88,7 +90,7 @@ func (x *AudioConverter) WithDither(dither bool) *AudioConverter {
 	return x
 }
 
-// @property	sampleRateConverterQuality @abstract	An AVAudioQuality value as defined in AVAudioSettings.h.
+// A sample rate converter algorithm key value.
 //
 // WithSampleRateConverterQuality sets the sampleRateConverterQuality property and returns the receiver for chaining.
 func (x *AudioConverter) WithSampleRateConverterQuality(sampleRateConverterQuality int) *AudioConverter {
@@ -96,7 +98,7 @@ func (x *AudioConverter) WithSampleRateConverterQuality(sampleRateConverterQuali
 	return x
 }
 
-// @property	sampleRateConverterAlgorithm @abstract	An AVSampleRateConverterAlgorithmKey value as defined in AVAudioSettings.h.
+// The priming method the sample rate converter or decoder uses.
 //
 // WithSampleRateConverterAlgorithm sets the sampleRateConverterAlgorithm property and returns the receiver for chaining.
 func (x *AudioConverter) WithSampleRateConverterAlgorithm(sampleRateConverterAlgorithm string) *AudioConverter {
@@ -104,7 +106,7 @@ func (x *AudioConverter) WithSampleRateConverterAlgorithm(sampleRateConverterAlg
 	return x
 }
 
-// @property	primeMethod @abstract	Indicates the priming method to be used by the sample rate converter or decoder.
+// The priming method the sample rate converter or decoder uses.
 //
 // WithPrimeMethod sets the primeMethod property and returns the receiver for chaining.
 func (x *AudioConverter) WithPrimeMethod(primeMethod AVAudioConverterPrimeMethod) *AudioConverter {
@@ -112,7 +114,7 @@ func (x *AudioConverter) WithPrimeMethod(primeMethod AVAudioConverterPrimeMethod
 	return x
 }
 
-// @property	primeInfo @abstract	Indicates the the number of priming frames.
+// The number of priming frames the converter uses.
 //
 // WithPrimeInfo sets the primeInfo property and returns the receiver for chaining.
 func (x *AudioConverter) WithPrimeInfo(primeInfo raw.AVAudioConverterPrimeInfo) *AudioConverter {
@@ -144,7 +146,7 @@ func (x *AudioConverter) WithDynamicRangeControlConfiguration(dynamicRangeContro
 	return x
 }
 
-// @property bitRate @abstract bitRate in bits per second. Only applies when encoding.
+// The bit rate, in bits per second.
 //
 // WithBitRate sets the bitRate property and returns the receiver for chaining.
 func (x *AudioConverter) WithBitRate(bitRate int) *AudioConverter {
@@ -152,7 +154,7 @@ func (x *AudioConverter) WithBitRate(bitRate int) *AudioConverter {
 	return x
 }
 
-// @property bitRateStrategy @abstract When encoding, an AVEncoderBitRateStrategyKey value constant as defined in AVAudioSettings.h. Returns nil if not encoding.
+// A key value constant the framework uses during encoding.
 //
 // WithBitRateStrategy sets the bitRateStrategy property and returns the receiver for chaining.
 func (x *AudioConverter) WithBitRateStrategy(bitRateStrategy string) *AudioConverter {
@@ -160,21 +162,21 @@ func (x *AudioConverter) WithBitRateStrategy(bitRateStrategy string) *AudioConve
 	return x
 }
 
-// @method reset @abstract Resets the converter so that a new stream may be converted.
+// Resets the converter so you can convert a new audio stream.
 //
 // Reset calls the underlying Reset.
 func (x *AudioConverter) Reset() {
 	x.inner.Reset()
 }
 
-// @method convertToBuffer:fromBuffer:error: @abstract Perform a simple conversion. That is, a conversion which does not involve codecs or sample rate conversion. @param inputBuffer The input buffer. @param outputBuffer The output buffer. @param outError An error if the conversion fails. @return YES is returned on success, NO when an error has occurred. @discussion The output buffer's frameCapacity should be at least at large as the inputBuffer's frameLength. If the conversion involves a codec or sample rate conversion, you instead must use convertToBuffer:error:withInputFromBlock:.
+// Performs a basic conversion between audio formats that doesn’t involve converting codecs or sample rates.
 //
 // ConvertToBufferFromBufferError calls the underlying ConvertToBufferFromBufferError.
 func (x *AudioConverter) ConvertToBufferFromBufferError(outputBuffer *raw.AVAudioPCMBuffer, inputBuffer *raw.AVAudioPCMBuffer) (bool, error) {
 	return x.inner.ConvertToBufferFromBufferError(outputBuffer, inputBuffer)
 }
 
-// @method convertToBuffer:error:withInputFromBlock: @abstract Perform any supported conversion. @param inputBlock A block which will be called to get input data as needed. See description for AVAudioConverterInputBlock. @param outputBuffer The output buffer. @param outError An error if the conversion fails. @return An AVAudioConverterOutputStatus is returned. @discussion It attempts to fill the buffer to its capacity. On return, the buffer's length indicates the number of sample frames successfully converted.
+// Performs a conversion between audio formats, if the system supports it.
 //
 // ConvertToBufferErrorWithInputFromBlock calls the underlying ConvertToBufferErrorWithInputFromBlock.
 func (x *AudioConverter) ConvertToBufferErrorWithInputFromBlock(outputBuffer *raw.AVAudioBuffer, outError unsafe.Pointer, inputBlock objc.Block) AVAudioConverterOutputStatus {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller profile that supports the Siri Remote.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcmicrogamepad
 type GCMicroGamepad struct {
 	GCPhysicalInputProfile
@@ -41,7 +43,7 @@ func GCMicroGamepadFromID(id objc.ID) *GCMicroGamepad {
 	return o
 }
 
-// Polls the state vector of the controller and saves it to a snapshot. The snapshot is stored in a device independent format that can be serialized and used at a later date. This is useful for features such as quality assurance, save game or replay functionality among many. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken. @see GCMicroGamepadSnapshot
+// Saves a snapshot of all of the profile’s elements.
 // Deprecated: Use the -[GCController capture] method instead
 func (o *GCMicroGamepad) SaveSnapshot() *GCMicroGamepadSnapshot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMicroGamepadSelSaveSnapshot)
@@ -51,7 +53,7 @@ func (o *GCMicroGamepad) SaveSnapshot() *GCMicroGamepadSnapshot {
 	return GCMicroGamepadSnapshotFromID(_ret)
 }
 
-// Sets the state vector of the micro gamepad to a copy of the input micro gamepad's state vector. @note If the controller's snapshot flag is set to NO, this method has no effect. @see GCController.snapshot
+// Copies the input values from a specified micro gamepad to a snapshot of a micro gamepad.
 func (o *GCMicroGamepad) SetStateFromMicroGamepad(microGamepad *GCMicroGamepad) {
 	o.Ptr().Send(_gCMicroGamepadSelSetStateFromMicroGamepad, microGamepad.Ptr())
 }

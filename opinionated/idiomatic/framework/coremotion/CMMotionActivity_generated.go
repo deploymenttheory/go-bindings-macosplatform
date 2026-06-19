@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The data for a single motion update event.
+//
 // MotionActivity wraps [raw.CMMotionActivity] with a fluent Go API.
 type MotionActivity struct {
 	inner *raw.CMMotionActivity

@@ -11,17 +11,17 @@ import (
 type GSSyncState int64
 
 const (
-	// The directory is fully synced and ready to use. In this state, the value of ``GSSyncedDirectoryState/url`` is nonnull.
+	// The directory is fully synced and ready to use.
 	GSSyncStateReady GSSyncState = 0
-	// The directory is available locally, but not fully synced because the device is offline. In this state, the value of ``GSSyncedDirectoryState/url`` is nonnull.
+	// The directory is available locally, but not fully synced because the device is offline.
 	GSSyncStateOffline GSSyncState = 1
-	// The directory is local-only and not synced to iCloud. In this state, the value of ``GSSyncedDirectoryState/url`` is nonnull.
+	// The directory is local-only and not synced to iCloud.
 	GSSyncStateLocal GSSyncState = 2
 	// The directory is currently syncing and is not ready yet.
 	GSSyncStateSyncing GSSyncState = 3
-	// The directory has conflicts with the cloud, which the game needs to resolve. In this state, the value of ``GSSyncedDirectoryState/conflictedVersions`` is nonnull.
+	// The directory has conflicts with the cloud, which the game needs to resolve.
 	GSSyncStateConflicted GSSyncState = 4
-	// The directory is in error state and can't be used. In this state, the value of ``GSSyncedDirectoryState/error`` is nonnull.
+	// The directory is in error state and can’t be used.
 	GSSyncStateError GSSyncState = 5
 	// The directory is closed.
 	GSSyncStateClosed GSSyncState = 6

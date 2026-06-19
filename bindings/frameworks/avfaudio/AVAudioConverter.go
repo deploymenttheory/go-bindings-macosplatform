@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that converts streams of audio between formats.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudioconverter
 type AVAudioConverter struct {
 	foundation.NSObject
@@ -69,7 +71,7 @@ func AVAudioConverterFromID(id objc.ID) *AVAudioConverter {
 	return o
 }
 
-// @method initFromFormat:toFormat: @abstract Initialize from input and output formats. @param fromFormat The input format. @param toFormat The output format. @discussion Returns nil if the format conversion is not possible.
+// Creates an audio converter object from the specified input and output formats.
 func (o *AVAudioConverter) InitFromFormatToFormat(fromFormat *AVAudioFormat, toFormat *AVAudioFormat) *AVAudioConverter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConverterSelInitFromFormatToFormat, fromFormat.Ptr(), toFormat.Ptr())
 	if _ret != 0 {
@@ -78,12 +80,12 @@ func (o *AVAudioConverter) InitFromFormatToFormat(fromFormat *AVAudioFormat, toF
 	return AVAudioConverterFromID(_ret)
 }
 
-// @method reset @abstract Resets the converter so that a new stream may be converted.
+// Resets the converter so you can convert a new audio stream.
 func (o *AVAudioConverter) Reset() {
 	o.Ptr().Send(_aVAudioConverterSelReset)
 }
 
-// @method convertToBuffer:fromBuffer:error: @abstract Perform a simple conversion. That is, a conversion which does not involve codecs or sample rate conversion. @param inputBuffer The input buffer. @param outputBuffer The output buffer. @param outError An error if the conversion fails. @return YES is returned on success, NO when an error has occurred. @discussion The output buffer's frameCapacity should be at least at large as the inputBuffer's frameLength. If the conversion involves a codec or sample rate conversion, you instead must use convertToBuffer:error:withInputFromBlock:.
+// Performs a basic conversion between audio formats that doesn’t involve converting codecs or sample rates.
 func (o *AVAudioConverter) ConvertToBufferFromBufferError(outputBuffer *AVAudioPCMBuffer, inputBuffer *AVAudioPCMBuffer) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioConverterSelConvertToBufferFromBufferError, outputBuffer.Ptr(), inputBuffer.Ptr(), unsafe.Pointer(&_nsErr))
@@ -93,7 +95,7 @@ func (o *AVAudioConverter) ConvertToBufferFromBufferError(outputBuffer *AVAudioP
 	return _ret, nil
 }
 
-// @method convertToBuffer:error:withInputFromBlock: @abstract Perform any supported conversion. @param inputBlock A block which will be called to get input data as needed. See description for AVAudioConverterInputBlock. @param outputBuffer The output buffer. @param outError An error if the conversion fails. @return An AVAudioConverterOutputStatus is returned. @discussion It attempts to fill the buffer to its capacity. On return, the buffer's length indicates the number of sample frames successfully converted.
+// Performs a conversion between audio formats, if the system supports it.
 func (o *AVAudioConverter) ConvertToBufferErrorWithInputFromBlock(outputBuffer *AVAudioBuffer, outError unsafe.Pointer, inputBlock objc.Block) AVAudioConverterOutputStatus {
 	_ret := objc.Send[AVAudioConverterOutputStatus](o.Ptr(), _aVAudioConverterSelConvertToBufferErrorWithInputFromBlock, outputBuffer.Ptr(), outError, inputBlock)
 	return _ret
@@ -119,12 +121,15 @@ func (o *AVAudioConverter) OutputFormat() *AVAudioFormat {
 
 // @property channelMap @abstract An array of integers indicating from which input to derive each output. @discussion The array has size equal to the number of output channels. Each element's value is the input channel number, starting with zero, that is to be copied to that output. A negative value means that the output channel will have no source and will be silent. Setting a channel map overrides channel mapping due to any channel layouts in the input and output formats that may have been supplied.
 func (o *AVAudioConverter) ChannelMap() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAudioConverterSelChannelMap)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConverterSelChannelMap)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *AVAudioConverter) SetChannelMap(channelMap *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_aVAudioConverterSelSetChannelMap, channelMap)
+	o.Ptr().Send(_aVAudioConverterSelSetChannelMap, channelMap.Ptr())
 }
 
 // @property	magicCookie @abstract	Decoders require some data in the form of a magicCookie in order to decode properly. Encoders will produce a magicCookie.
@@ -264,30 +269,45 @@ func (o *AVAudioConverter) MaximumOutputPacketSize() int {
 
 // @property availableEncodeBitRates @abstract When encoding, an NSArray of NSNumber of all bit rates provided by the codec. Returns nil if not encoding.
 func (o *AVAudioConverter) AvailableEncodeBitRates() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAudioConverterSelAvailableEncodeBitRates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConverterSelAvailableEncodeBitRates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property applicableEncodeBitRates @abstract When encoding, an NSArray of NSNumber of bit rates that can be applied based on the current formats and settings. Returns nil if not encoding.
 func (o *AVAudioConverter) ApplicableEncodeBitRates() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAudioConverterSelApplicableEncodeBitRates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConverterSelApplicableEncodeBitRates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property availableEncodeSampleRates @abstract When encoding, an NSArray of NSNumber of all output sample rates provided by the codec. Returns nil if not encoding.
 func (o *AVAudioConverter) AvailableEncodeSampleRates() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAudioConverterSelAvailableEncodeSampleRates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConverterSelAvailableEncodeSampleRates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property applicableEncodeSampleRates @abstract When encoding, an NSArray of NSNumber of output sample rates that can be applied based on the current formats and settings. Returns nil if not encoding.
 func (o *AVAudioConverter) ApplicableEncodeSampleRates() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAudioConverterSelApplicableEncodeSampleRates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConverterSelApplicableEncodeSampleRates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property availableEncodeChannelLayoutTags @abstract When encoding, an NSArray of NSNumber of all output channel layout tags provided by the codec. Returns nil if not encoding.
 func (o *AVAudioConverter) AvailableEncodeChannelLayoutTags() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAudioConverterSelAvailableEncodeChannelLayoutTags)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConverterSelAvailableEncodeChannelLayoutTags)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

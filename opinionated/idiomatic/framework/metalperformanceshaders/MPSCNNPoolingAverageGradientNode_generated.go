@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a gradient average pooling filter.
+//
 // CNNPoolingAverageGradientNode wraps [raw.MPSCNNPoolingAverageGradientNode] with a fluent Go API.
 type CNNPoolingAverageGradientNode struct {
 	inner *raw.MPSCNNPoolingAverageGradientNode

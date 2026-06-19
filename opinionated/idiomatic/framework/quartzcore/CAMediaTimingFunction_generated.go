@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A function that defines the pacing of an animation as a timing curve.
+//
 // MediaTimingFunction wraps [raw.CAMediaTimingFunction] with a fluent Go API.
 type MediaTimingFunction struct {
 	inner *raw.CAMediaTimingFunction
@@ -29,6 +31,8 @@ func MediaTimingFunctionFromID(id objc.ID) *MediaTimingFunction {
 	return &MediaTimingFunction{inner: raw.CAMediaTimingFunctionFromID(id)}
 }
 
+// Returns an initialized timing function modeled as a cubic Bézier curve using the specified control points.
+//
 // NewMediaTimingFunctionWithControlPoints creates a new [MediaTimingFunction].
 func NewMediaTimingFunctionWithControlPoints(c1x float32, c1y float32, c2x float32, c2y float32) *MediaTimingFunction {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CAMediaTimingFunction")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewMediaTimingFunctionWithControlPoints(c1x float32, c1y float32, c2x float
 	return &MediaTimingFunction{inner: raw.CAMediaTimingFunctionFromID(_id)}
 }
 
+// Returns the control point for the specified index.
+//
 // GetControlPointAtIndexValues calls the underlying GetControlPointAtIndexValues.
 func (x *MediaTimingFunction) GetControlPointAtIndexValues(idx uint, ptr *float32) {
 	x.inner.GetControlPointAtIndexValues(idx, ptr)

@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A renderer for displaying a SpriteKit scene in an existing Metal workflow.
+// An object that renders a scene into a custom Metal rendering pipeline and drives the scene update cycle.
 //
 // Renderer wraps [raw.SKRenderer] with a fluent Go API.
 type Renderer struct {
@@ -39,7 +39,7 @@ func NewRenderer() *Renderer {
 	return &Renderer{inner: raw.SKRendererFromID(_id)}
 }
 
-// The currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
+// The scene this renderer will draw into the Metal command buffer.
 //
 // WithScene sets the scene property and returns the receiver for chaining.
 func (x *Renderer) WithScene(scene *Scene) *Renderer {
@@ -63,7 +63,7 @@ func (x *Renderer) WithShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool)
 	return x
 }
 
-// Toggles display of performance stats when rendering. All default to false.
+// A Boolean value that indicates whether the view displays the number of drawing passes it needed to render the view.
 //
 // WithShowsDrawCount sets the showsDrawCount property and returns the receiver for chaining.
 func (x *Renderer) WithShowsDrawCount(showsDrawCount bool) *Renderer {
@@ -71,24 +71,32 @@ func (x *Renderer) WithShowsDrawCount(showsDrawCount bool) *Renderer {
 	return x
 }
 
+// A Boolean value that indicates whether the view displays an overlay that shows physics bodies that are visible in the scene.
+//
 // WithShowsNodeCount sets the showsNodeCount property and returns the receiver for chaining.
 func (x *Renderer) WithShowsNodeCount(showsNodeCount bool) *Renderer {
 	x.inner.SetShowsNodeCount(showsNodeCount)
 	return x
 }
 
+// A Boolean value that indicates whether the view displays the number of rectangles used to render the scene.
+//
 // WithShowsQuadCount sets the showsQuadCount property and returns the receiver for chaining.
 func (x *Renderer) WithShowsQuadCount(showsQuadCount bool) *Renderer {
 	x.inner.SetShowsQuadCount(showsQuadCount)
 	return x
 }
 
+// A Boolean value that indicates whether the view displays physics-related debugging information.
+//
 // WithShowsPhysics sets the showsPhysics property and returns the receiver for chaining.
 func (x *Renderer) WithShowsPhysics(showsPhysics bool) *Renderer {
 	x.inner.SetShowsPhysics(showsPhysics)
 	return x
 }
 
+// A Boolean value that indicates whether the view displays information about physics fields in the scene.
+//
 // WithShowsFields sets the showsFields property and returns the receiver for chaining.
 func (x *Renderer) WithShowsFields(showsFields bool) *Renderer {
 	x.inner.SetShowsFields(showsFields)

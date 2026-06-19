@@ -8,13 +8,18 @@ import (
 	"strings"
 )
 
+// Constants that describe the capture view’s supported controls styles.
 type AVCaptureViewControlsStyle int64
 
 const (
-	AVCaptureViewControlsStyleInline                AVCaptureViewControlsStyle = 0
-	AVCaptureViewControlsStyleFloating              AVCaptureViewControlsStyle = 1
+	// The view’s inline controls style.
+	AVCaptureViewControlsStyleInline AVCaptureViewControlsStyle = 0
+	// The view’s floating controls style, which matches the user interface of QuickTime Player.
+	AVCaptureViewControlsStyleFloating AVCaptureViewControlsStyle = 1
+	// The view’s inline device selection style.
 	AVCaptureViewControlsStyleInlineDeviceSelection AVCaptureViewControlsStyle = 2
-	AVCaptureViewControlsStyleDefault               AVCaptureViewControlsStyle = 0
+	// The view’s default controls style.
+	AVCaptureViewControlsStyleDefault AVCaptureViewControlsStyle = 0
 )
 
 func (e AVCaptureViewControlsStyle) String() string {
@@ -30,6 +35,7 @@ func (e AVCaptureViewControlsStyle) String() string {
 	}
 }
 
+// Describes how High Dynamic Range (HDR) video content renders.
 type AVDisplayDynamicRange int64
 
 const (
@@ -101,14 +107,20 @@ func (e AVLegibleMediaOptionsMenuStateChangeReason) String() string {
 	}
 }
 
+// Constants that indicate which user interface controls the view displays.
 type AVPlayerViewControlsStyle int64
 
 const (
-	AVPlayerViewControlsStyleNone     AVPlayerViewControlsStyle = 0
-	AVPlayerViewControlsStyleInline   AVPlayerViewControlsStyle = 1
+	// The view displays no playback controls.
+	AVPlayerViewControlsStyleNone AVPlayerViewControlsStyle = 0
+	// The view displays playback controls in a bar along the view’s bottom edge.
+	AVPlayerViewControlsStyleInline AVPlayerViewControlsStyle = 1
+	// The view displays playback controls in a floating window over the video content.
 	AVPlayerViewControlsStyleFloating AVPlayerViewControlsStyle = 2
-	AVPlayerViewControlsStyleMinimal  AVPlayerViewControlsStyle = 3
-	AVPlayerViewControlsStyleDefault  AVPlayerViewControlsStyle = 1
+	// The view presents basic controls to play and pause playback.
+	AVPlayerViewControlsStyleMinimal AVPlayerViewControlsStyle = 3
+	// The view’s default controls style.
+	AVPlayerViewControlsStyleDefault AVPlayerViewControlsStyle = 1
 )
 
 func (e AVPlayerViewControlsStyle) String() string {
@@ -126,10 +138,13 @@ func (e AVPlayerViewControlsStyle) String() string {
 	}
 }
 
+// Constants that specify an action a user takes when trimming media in a player view.
 type AVPlayerViewTrimResult int64
 
 const (
-	AVPlayerViewTrimOKButton     AVPlayerViewTrimResult = 0
+	// The user clicked the Trim button.
+	AVPlayerViewTrimOKButton AVPlayerViewTrimResult = 0
+	// The user clicked the Cancel button.
 	AVPlayerViewTrimCancelButton AVPlayerViewTrimResult = 1
 )
 
@@ -144,6 +159,7 @@ func (e AVPlayerViewTrimResult) String() string {
 	}
 }
 
+// Constants that describe the available button states.
 type AVRoutePickerViewButtonState int64
 
 const (
@@ -168,13 +184,19 @@ func (e AVRoutePickerViewButtonState) String() string {
 	}
 }
 
+// Constants that define the types of analysis a player view controller may perform on a paused video frame.
 type AVVideoFrameAnalysisType uint64
 
 const (
-	AVVideoFrameAnalysisTypeNone         AVVideoFrameAnalysisType = 0
-	AVVideoFrameAnalysisTypeDefault      AVVideoFrameAnalysisType = 1
-	AVVideoFrameAnalysisTypeText         AVVideoFrameAnalysisType = 2
-	AVVideoFrameAnalysisTypeSubject      AVVideoFrameAnalysisType = 4
+	// A type that performs no analysis.
+	AVVideoFrameAnalysisTypeNone AVVideoFrameAnalysisType = 0
+	// The default types of analysis to perform.
+	AVVideoFrameAnalysisTypeDefault AVVideoFrameAnalysisType = 1
+	// A type that finds text in a paused video frame.
+	AVVideoFrameAnalysisTypeText AVVideoFrameAnalysisType = 2
+	// A type that finds a subject that a user can copy out of frame.
+	AVVideoFrameAnalysisTypeSubject AVVideoFrameAnalysisType = 4
+	// A type that identifies objects, landmarks, art, and so on.
 	AVVideoFrameAnalysisTypeVisualSearch AVVideoFrameAnalysisType = 8
 )
 

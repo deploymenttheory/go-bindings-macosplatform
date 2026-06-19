@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that coordinates the reading and writing of files and directories among file presenters.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsfilecoordinator
 type NSFileCoordinator struct {
 	NSObject
@@ -46,14 +48,17 @@ func NSFileCoordinatorFromID(id objc.ID) *NSFileCoordinator {
 	return o
 }
 
+// Registers the specified file presenter object so that it can receive notifications.
 func NSFileCoordinatorAddFilePresenter(filePresenter NSFilePresenter) {
 	objc.ID(_clsNSFileCoordinator).Send(_nSFileCoordinatorSelAddFilePresenter, filePresenter)
 }
 
+// Unregisters the specified file presenter object.
 func NSFileCoordinatorRemoveFilePresenter(filePresenter NSFilePresenter) {
 	objc.ID(_clsNSFileCoordinator).Send(_nSFileCoordinatorSelRemoveFilePresenter, filePresenter)
 }
 
+// Initializes and returns a file coordinator object using the specified file presenter.
 func (o *NSFileCoordinator) InitWithFilePresenter(filePresenterOrNil NSFilePresenter) *NSFileCoordinator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileCoordinatorSelInitWithFilePresenter, filePresenterOrNil)
 	if _ret != 0 {
@@ -62,6 +67,7 @@ func (o *NSFileCoordinator) InitWithFilePresenter(filePresenterOrNil NSFilePrese
 	return NSFileCoordinatorFromID(_ret)
 }
 
+// Performs a number of coordinated-read or -write operations asynchronously.
 func (o *NSFileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(intents *NSArray[*NSFileAccessIntent], queue *NSOperationQueue, accessor func(unsafe.Pointer)) {
 	var __block_accessor objc.Block
 	if accessor != nil {
@@ -73,6 +79,7 @@ func (o *NSFileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(intents *
 	o.Ptr().Send(_nSFileCoordinatorSelCoordinateAccessWithIntentsQueueByAccessor, intents.Ptr(), queue.Ptr(), __block_accessor)
 }
 
+// Initiates a read operation on a single file or directory using the specified options.
 func (o *NSFileCoordinator) CoordinateReadingItemAtURLOptionsErrorByAccessor(url *NSURL, options NSFileCoordinatorReadingOptions, outError unsafe.Pointer, reader func(*NSURL)) {
 	var __block_reader objc.Block
 	if reader != nil {
@@ -87,6 +94,7 @@ func (o *NSFileCoordinator) CoordinateReadingItemAtURLOptionsErrorByAccessor(url
 	o.Ptr().Send(_nSFileCoordinatorSelCoordinateReadingItemAtURLOptionsErrorByAccessor, url.Ptr(), options, outError, __block_reader)
 }
 
+// Initiates a write operation on a single file or directory using the specified options.
 func (o *NSFileCoordinator) CoordinateWritingItemAtURLOptionsErrorByAccessor(url *NSURL, options NSFileCoordinatorWritingOptions, outError unsafe.Pointer, writer func(*NSURL)) {
 	var __block_writer objc.Block
 	if writer != nil {
@@ -101,6 +109,7 @@ func (o *NSFileCoordinator) CoordinateWritingItemAtURLOptionsErrorByAccessor(url
 	o.Ptr().Send(_nSFileCoordinatorSelCoordinateWritingItemAtURLOptionsErrorByAccessor, url.Ptr(), options, outError, __block_writer)
 }
 
+// Initiates a read operation that contains a follow-up write operation.
 func (o *NSFileCoordinator) CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(readingURL *NSURL, readingOptions NSFileCoordinatorReadingOptions, writingURL *NSURL, writingOptions NSFileCoordinatorWritingOptions, outError unsafe.Pointer, readerWriter func(*NSURL, *NSURL)) {
 	var __block_readerWriter objc.Block
 	if readerWriter != nil {
@@ -118,6 +127,7 @@ func (o *NSFileCoordinator) CoordinateReadingItemAtURLOptionsWritingItemAtURLOpt
 	o.Ptr().Send(_nSFileCoordinatorSelCoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor, readingURL.Ptr(), readingOptions, writingURL.Ptr(), writingOptions, outError, __block_readerWriter)
 }
 
+// Initiates a write operation that involves a secondary write operation.
 func (o *NSFileCoordinator) CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(url1 *NSURL, options1 NSFileCoordinatorWritingOptions, url2 *NSURL, options2 NSFileCoordinatorWritingOptions, outError unsafe.Pointer, writer func(*NSURL, *NSURL)) {
 	var __block_writer objc.Block
 	if writer != nil {
@@ -135,6 +145,7 @@ func (o *NSFileCoordinator) CoordinateWritingItemAtURLOptionsWritingItemAtURLOpt
 	o.Ptr().Send(_nSFileCoordinatorSelCoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor, url1.Ptr(), options1, url2.Ptr(), options2, outError, __block_writer)
 }
 
+// Prepare to read or write from multiple files in a single batch operation.
 func (o *NSFileCoordinator) PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs *NSArray[*NSURL], readingOptions NSFileCoordinatorReadingOptions, writingURLs *NSArray[*NSURL], writingOptions NSFileCoordinatorWritingOptions, outError unsafe.Pointer, batchAccessor func(objc.Block)) {
 	var __block_batchAccessor objc.Block
 	if batchAccessor != nil {
@@ -146,18 +157,22 @@ func (o *NSFileCoordinator) PrepareForReadingItemsAtURLsOptionsWritingItemsAtURL
 	o.Ptr().Send(_nSFileCoordinatorSelPrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor, readingURLs.Ptr(), readingOptions, writingURLs.Ptr(), writingOptions, outError, __block_batchAccessor)
 }
 
+// Announces that your app is moving a file to a new URL.
 func (o *NSFileCoordinator) ItemAtURLWillMoveToURL(oldURL *NSURL, newURL *NSURL) {
 	o.Ptr().Send(_nSFileCoordinatorSelItemAtURLWillMoveToURL, oldURL.Ptr(), newURL.Ptr())
 }
 
+// Notifies relevant file presenters that the location of a file or directory changed.
 func (o *NSFileCoordinator) ItemAtURLDidMoveToURL(oldURL *NSURL, newURL *NSURL) {
 	o.Ptr().Send(_nSFileCoordinatorSelItemAtURLDidMoveToURL, oldURL.Ptr(), newURL.Ptr())
 }
 
+// Tells observing file providers that the item’s ubiquity attributes have changed.
 func (o *NSFileCoordinator) ItemAtURLDidChangeUbiquityAttributes(url *NSURL, attributes *NSSet[*NSString]) {
 	o.Ptr().Send(_nSFileCoordinatorSelItemAtURLDidChangeUbiquityAttributes, url.Ptr(), attributes.Ptr())
 }
 
+// Cancels any active file coordination calls.
 func (o *NSFileCoordinator) Cancel() {
 	o.Ptr().Send(_nSFileCoordinatorSelCancel)
 }

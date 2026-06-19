@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of shading attributes that define the appearance of a geometry’s surface when rendered.
+//
 // Material wraps [raw.SCNMaterial] with a fluent Go API.
 type Material struct {
 	inner *raw.SCNMaterial
@@ -37,7 +39,7 @@ func NewMaterial() *Material {
 	return &Material{inner: raw.SCNMaterialFromID(_id)}
 }
 
-// @property name @abstract Determines the name of the receiver.
+// A name associated with the material.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Material) WithName(name string) *Material {
@@ -45,7 +47,7 @@ func (x *Material) WithName(name string) *Material {
 	return x
 }
 
-// @property shininess @abstract Specifies the receiver's shininess value. Defaults to 1.0. Animatable.
+// The sharpness of specular highlights. Animatable.
 //
 // WithShininess sets the shininess property and returns the receiver for chaining.
 func (x *Material) WithShininess(shininess float64) *Material {
@@ -53,7 +55,7 @@ func (x *Material) WithShininess(shininess float64) *Material {
 	return x
 }
 
-// @property transparency @abstract Specifies the receiver's transparency value. Defaults to 1.0. Animatable. @discussion The color of the transparent property is multiplied by this property. The result is then used to produce the final transparency according to the rule defined by the transparencyMode property.
+// The uniform transparency of the material. Animatable.
 //
 // WithTransparency sets the transparency property and returns the receiver for chaining.
 func (x *Material) WithTransparency(transparency float64) *Material {
@@ -61,7 +63,7 @@ func (x *Material) WithTransparency(transparency float64) *Material {
 	return x
 }
 
-// @property lightingModelName @abstract Determines the receiver's lighting model. See above for the list of lighting models. Defaults to SCNLightingModelBlinn.
+// The lighting formula that SceneKit uses to render the material.
 //
 // WithLightingModelName sets the lightingModelName property and returns the receiver for chaining.
 func (x *Material) WithLightingModelName(lightingModelName *foundation.NSString) *Material {
@@ -69,7 +71,7 @@ func (x *Material) WithLightingModelName(lightingModelName *foundation.NSString)
 	return x
 }
 
-// @property litPerPixel @abstract Determines whether the receiver is lit per pixel. Defaults to YES. Animatable.
+// A Boolean value that determines whether SceneKit performs lighting calculations per vertex or per pixel. Animatable.
 //
 // WithLitPerPixel sets the litPerPixel property and returns the receiver for chaining.
 func (x *Material) WithLitPerPixel(litPerPixel bool) *Material {
@@ -77,7 +79,7 @@ func (x *Material) WithLitPerPixel(litPerPixel bool) *Material {
 	return x
 }
 
-// @property doubleSided @abstract Determines whether the receiver is double sided. Defaults to NO. Animatable.
+// A Boolean value that determines whether SceneKit renders both front and back faces of a surface.
 //
 // WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
 func (x *Material) WithDoubleSided(doubleSided bool) *Material {
@@ -93,7 +95,7 @@ func (x *Material) WithFillMode(fillMode SCNFillMode) *Material {
 	return x
 }
 
-// @property cullMode @abstract Determines the culling mode of the receiver. Defaults to SCNCullModeBack. Animatable.
+// The mode determining which faces of a surface SceneKit renders. Animatable.
 //
 // WithCullMode sets the cullMode property and returns the receiver for chaining.
 func (x *Material) WithCullMode(cullMode SCNCullMode) *Material {
@@ -101,7 +103,7 @@ func (x *Material) WithCullMode(cullMode SCNCullMode) *Material {
 	return x
 }
 
-// @property transparencyMode @abstract Determines the transparency mode of the receiver. See above for the transparency modes. Defaults to SCNTransparencyModeDefault.
+// The mode SceneKit uses to calculate transparency for the material.
 //
 // WithTransparencyMode sets the transparencyMode property and returns the receiver for chaining.
 func (x *Material) WithTransparencyMode(transparencyMode SCNTransparencyMode) *Material {
@@ -109,7 +111,7 @@ func (x *Material) WithTransparencyMode(transparencyMode SCNTransparencyMode) *M
 	return x
 }
 
-// @property locksAmbientWithDiffuse @abstract Makes the ambient property automatically match the diffuse property. Defaults to NO on 10.9 and before, defaults to YES otherwise. Animatable.
+// A Boolean value that determines whether the material responds identically to both ambient and diffuse lighting. Animatable.
 //
 // WithLocksAmbientWithDiffuse sets the locksAmbientWithDiffuse property and returns the receiver for chaining.
 func (x *Material) WithLocksAmbientWithDiffuse(locksAmbientWithDiffuse bool) *Material {
@@ -117,7 +119,7 @@ func (x *Material) WithLocksAmbientWithDiffuse(locksAmbientWithDiffuse bool) *Ma
 	return x
 }
 
-// @property writeToDepthBuffer @abstract Determines whether the receiver writes to the depth buffer when rendered. Defaults to YES.
+// A Boolean value that determines whether SceneKit produces depth information when rendering the material.
 //
 // WithWritesToDepthBuffer sets the writesToDepthBuffer property and returns the receiver for chaining.
 func (x *Material) WithWritesToDepthBuffer(writesToDepthBuffer bool) *Material {
@@ -133,7 +135,7 @@ func (x *Material) WithColorBufferWriteMask(colorBufferWriteMask SCNColorMask) *
 	return x
 }
 
-// @property readsFromDepthBuffer @abstract Determines whether the receiver reads from the depth buffer when rendered. Defaults to YES.
+// A Boolean value that determines whether SceneKit uses depth information when rendering the material.
 //
 // WithReadsFromDepthBuffer sets the readsFromDepthBuffer property and returns the receiver for chaining.
 func (x *Material) WithReadsFromDepthBuffer(readsFromDepthBuffer bool) *Material {
@@ -141,7 +143,7 @@ func (x *Material) WithReadsFromDepthBuffer(readsFromDepthBuffer bool) *Material
 	return x
 }
 
-// @property fresnelExponent @abstract Specifies the receiver's fresnel exponent value. Defaults to 0.0. Animatable. @discussion The effect of the reflectivity property is modulated by this property. The fresnelExponent changes the exponent of the reflectance. The bigger the exponent, the more concentrated the reflection is around the edges.
+// A factor affecting the material’s reflectivity. Animatable.
 //
 // WithFresnelExponent sets the fresnelExponent property and returns the receiver for chaining.
 func (x *Material) WithFresnelExponent(fresnelExponent float64) *Material {
@@ -149,7 +151,7 @@ func (x *Material) WithFresnelExponent(fresnelExponent float64) *Material {
 	return x
 }
 
-// @property blendMode @abstract Specifies the receiver's blend mode. Defaults to SCNBlendModeAlpha.
+// The mode that determines how pixel colors rendered using this material blend with other pixel colors in the rendering target.
 //
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
 func (x *Material) WithBlendMode(blendMode SCNBlendMode) *Material {

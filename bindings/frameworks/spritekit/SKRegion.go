@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The definition of an arbitrary area.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skregion
 type SKRegion struct {
 	foundation.NSObject
@@ -42,7 +44,7 @@ func SKRegionFromID(id objc.ID) *SKRegion {
 	return o
 }
 
-// A shared infinite region
+// Returns a region that defines a region that includes all points.
 func SKRegionInfiniteRegion() *SKRegion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRegion), _sKRegionSelInfiniteRegion)
 	if _ret != 0 {
@@ -51,7 +53,7 @@ func SKRegionInfiniteRegion() *SKRegion {
 	return SKRegionFromID(_ret)
 }
 
-// Create a circular region with radius
+// Initializes a new region with a circular area.
 func (o *SKRegion) InitWithRadius(radius float32) *SKRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRegionSelInitWithRadius, radius)
 	if _ret != 0 {
@@ -60,7 +62,7 @@ func (o *SKRegion) InitWithRadius(radius float32) *SKRegion {
 	return SKRegionFromID(_ret)
 }
 
-// Create a rectangular region of size
+// Initializes a new region with a rectangular area.
 func (o *SKRegion) InitWithSize(size corefoundation.CGSize) *SKRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRegionSelInitWithSize, size)
 	if _ret != 0 {
@@ -69,7 +71,7 @@ func (o *SKRegion) InitWithSize(size corefoundation.CGSize) *SKRegion {
 	return SKRegionFromID(_ret)
 }
 
-// Create a region bounded by a CGPath. Note that this option can be costly to evaluate.
+// Initializes a new region using a Core Graphics path.
 func (o *SKRegion) InitWithPath(path unsafe.Pointer) *SKRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRegionSelInitWithPath, path)
 	if _ret != 0 {
@@ -78,7 +80,7 @@ func (o *SKRegion) InitWithPath(path unsafe.Pointer) *SKRegion {
 	return SKRegionFromID(_ret)
 }
 
-// Create a new region that is the inverse of the current region. The inverse of the infiniteRegion is an empty region. Subclasses of SKRegion need to provide an implementation of inverseRegion.
+// Returns a new region that is the mathematical inverse of an existing region.
 func (o *SKRegion) InverseRegion() *SKRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRegionSelInverseRegion)
 	if _ret != 0 {
@@ -87,7 +89,7 @@ func (o *SKRegion) InverseRegion() *SKRegion {
 	return SKRegionFromID(_ret)
 }
 
-// Create a new region that is the original region plus the supplied region
+// Returns a new region created by combining the contents of this region with another region.
 func (o *SKRegion) RegionByUnionWithRegion(region *SKRegion) *SKRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRegionSelRegionByUnionWithRegion, region.Ptr())
 	if _ret != 0 {
@@ -96,7 +98,7 @@ func (o *SKRegion) RegionByUnionWithRegion(region *SKRegion) *SKRegion {
 	return SKRegionFromID(_ret)
 }
 
-// Create a new region that is the original region minus the supplied region
+// Returns a new region created by subtracting the contents of another region from this region.
 func (o *SKRegion) RegionByDifferenceFromRegion(region *SKRegion) *SKRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRegionSelRegionByDifferenceFromRegion, region.Ptr())
 	if _ret != 0 {
@@ -105,7 +107,7 @@ func (o *SKRegion) RegionByDifferenceFromRegion(region *SKRegion) *SKRegion {
 	return SKRegionFromID(_ret)
 }
 
-// Create a new region that is the region covered by the original region and the supplied region
+// Returns a new region created by intersecting the contents of this region with another region.
 func (o *SKRegion) RegionByIntersectionWithRegion(region *SKRegion) *SKRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRegionSelRegionByIntersectionWithRegion, region.Ptr())
 	if _ret != 0 {
@@ -114,7 +116,7 @@ func (o *SKRegion) RegionByIntersectionWithRegion(region *SKRegion) *SKRegion {
 	return SKRegionFromID(_ret)
 }
 
-// Test for containment
+// Returns a Boolean value that indicates whether a particular point is contained in the region.
 func (o *SKRegion) ContainsPoint(point corefoundation.CGPoint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _sKRegionSelContainsPoint, point)
 	return _ret

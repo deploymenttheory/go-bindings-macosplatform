@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that displays compressed or uncompressed video frames.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avsamplebufferdisplaylayer
 type AVSampleBufferDisplayLayer struct {
 	quartzcore.CALayer

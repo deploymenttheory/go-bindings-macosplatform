@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// WebHistoryItem objects encapsulate information about visiting a page so that users can return to that page. WebHistory and WebBackForwardList objects manage lists of WebHistoryItem objects. WebHistoryItem objects are created and added to these lists automatically when loading pages, so you do not need to create WebHistoryItem objects directly.
+//
 // WebHistoryItem wraps [raw.WebHistoryItem] with a fluent Go API.
 type WebHistoryItem struct {
 	inner *raw.WebHistoryItem
@@ -32,7 +34,7 @@ func WebHistoryItemFromID(id objc.ID) *WebHistoryItem {
 	return &WebHistoryItem{inner: raw.WebHistoryItemFromID(id)}
 }
 
-// @method initWithURLString:title:lastVisitedTimeInterval: @param URLString The URL string for the item. @param title The title to use for the item.  This is normally the <title> of a page. @param time The time used to indicate when the item was used. @abstract Initialize a new WebHistoryItem @discussion WebHistoryItems are normally created for you by the WebKit. You may use this method to prepopulate a WebBackForwardList, or create 'artificial' items to add to a WebBackForwardList.  When first initialized the URLString and originalURLString will be the same.
+// Initializes the receiver with a URL,URLString, a title specified by title and the last time this item was visited specified by time title, and time last visited.
 //
 // NewWebHistoryItemWithURLStringTitleLastVisitedTimeInterval creates a new [WebHistoryItem].
 func NewWebHistoryItemWithURLStringTitleLastVisitedTimeInterval(uRLString string, title string, time_ float64) *WebHistoryItem {
@@ -41,6 +43,8 @@ func NewWebHistoryItemWithURLStringTitleLastVisitedTimeInterval(uRLString string
 	return &WebHistoryItem{inner: raw.WebHistoryItemFromID(_id)}
 }
 
+// An alternate title that may be used in place of the receiver’s page title.
+//
 // WithAlternateTitle sets the alternateTitle property and returns the receiver for chaining.
 func (x *WebHistoryItem) WithAlternateTitle(alternateTitle string) *WebHistoryItem {
 	x.inner.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))

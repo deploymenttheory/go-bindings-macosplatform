@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a request made for subscriber account information.
+//
 // Apple documentation: https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmanagerresult
 type VSAccountManagerResult struct {
 	foundation.NSObject
@@ -30,7 +32,7 @@ func VSAccountManagerResultFromID(id objc.ID) *VSAccountManagerResult {
 	return o
 }
 
-// Advise the account manager that the app no longer needs the requested work to be done.
+// Cancels an in-progress request for subscriber account information.
 func (o *VSAccountManagerResult) Cancel() {
 	o.Ptr().Send(_vSAccountManagerResultSelCancel)
 }

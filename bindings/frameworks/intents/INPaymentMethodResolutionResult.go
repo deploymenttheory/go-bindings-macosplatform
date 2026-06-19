@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Describes the result of resolving a payment method.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inpaymentmethodresolutionresult
 type INPaymentMethodResolutionResult struct {
 	INIntentResolutionResult
@@ -32,6 +34,7 @@ func INPaymentMethodResolutionResultFromID(id objc.ID) *INPaymentMethodResolutio
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INPaymentMethodResolutionResultSuccessWithResolvedPaymentMethod(resolvedPaymentMethod *INPaymentMethod) *INPaymentMethodResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPaymentMethodResolutionResult), _iNPaymentMethodResolutionResultSelSuccessWithResolvedPaymentMethod, resolvedPaymentMethod.Ptr())
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func INPaymentMethodResolutionResultSuccessWithResolvedPaymentMethod(resolvedPay
 	return INPaymentMethodResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires the user to select from among the specified objects.
 func INPaymentMethodResolutionResultDisambiguationWithPaymentMethodsToDisambiguate(paymentMethodsToDisambiguate *foundation.NSArray[*INPaymentMethod]) *INPaymentMethodResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPaymentMethodResolutionResult), _iNPaymentMethodResolutionResultSelDisambiguationWithPaymentMethodsToDisambiguate, paymentMethodsToDisambiguate.Ptr())
 	if _ret != 0 {
@@ -48,6 +52,7 @@ func INPaymentMethodResolutionResultDisambiguationWithPaymentMethodsToDisambigua
 	return INPaymentMethodResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INPaymentMethodResolutionResultConfirmationRequiredWithPaymentMethodToConfirm(paymentMethodToConfirm *INPaymentMethod) *INPaymentMethodResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPaymentMethodResolutionResult), _iNPaymentMethodResolutionResultSelConfirmationRequiredWithPaymentMethodToConfirm, paymentMethodToConfirm.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view controller that delivers input either from the responder chain to views, or from game controllers to profiles.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gceventviewcontroller
 type GCEventViewController struct {
 	appkit.NSViewController

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An observation that provides the 3D points for a request.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnrecognizedpoints3dobservation
 type VNRecognizedPoints3DObservation struct {
 	VNObservation
@@ -35,7 +37,7 @@ func VNRecognizedPoints3DObservationFromID(id objc.ID) *VNRecognizedPoints3DObse
 	return o
 }
 
-// @brief Obtains a specific normalized recognized point. @param pointKey The key specifying the desired recognized point. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the recognized point, or nil if the specific point is not defined.
+// Returns a point for a key you specify.
 func (o *VNRecognizedPoints3DObservation) RecognizedPointForKeyError(pointKey *foundation.NSString) (*VNRecognizedPoint3D, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPoints3DObservationSelRecognizedPointForKeyError, pointKey.Ptr(), unsafe.Pointer(&_nsErr))
@@ -48,24 +50,33 @@ func (o *VNRecognizedPoints3DObservation) RecognizedPointForKeyError(pointKey *f
 	return VNRecognizedPoint3DFromID(_ret), nil
 }
 
-// @brief Obtains the collection of points associated with an identified grouping. @discussion The obtained collection is a dictionary that provides the mapping of a recognized point's key to the recognized point. @param groupKey The key representing a specific grouping of points. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the dictionary of recognized points in the group, or nil if an error was encountered.
+// Returns a point for a group key you specify.
 func (o *VNRecognizedPoints3DObservation) RecognizedPointsForGroupKeyError(groupKey *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *VNRecognizedPoint3D], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *VNRecognizedPoint3D]](o.Ptr(), _vNRecognizedPoints3DObservationSelRecognizedPointsForGroupKeyError, groupKey.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPoints3DObservationSelRecognizedPointsForGroupKeyError, groupKey.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSDictionaryFromID[*foundation.NSString, *VNRecognizedPoint3D](_ret), nil
 }
 
 // @brief Returns all of the point group keys available in the observation.
 func (o *VNRecognizedPoints3DObservation) AvailableKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNRecognizedPoints3DObservationSelAvailableKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPoints3DObservationSelAvailableKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @brief The availableGroupKeys property returns all of the point group labels usable with the observation.
 func (o *VNRecognizedPoints3DObservation) AvailableGroupKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNRecognizedPoints3DObservationSelAvailableGroupKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPoints3DObservationSelAvailableGroupKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

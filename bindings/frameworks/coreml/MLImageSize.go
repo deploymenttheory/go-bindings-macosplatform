@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The width and height of an image feature size.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlimagesize
 type MLImageSize struct {
 	foundation.NSObject

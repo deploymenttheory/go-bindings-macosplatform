@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// This object contains both input and output parameters necessary to run the motion blur processor on a frame.
+//
 // Apple documentation: https://developer.apple.com/documentation/videotoolbox/vtmotionblurparameters
 type VTMotionBlurParameters struct {
 	foundation.NSObject

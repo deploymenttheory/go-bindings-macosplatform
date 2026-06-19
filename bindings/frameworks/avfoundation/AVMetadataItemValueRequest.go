@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that responds to a request to load the value of a metadata item.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetadataitemvaluerequest
 type AVMetadataItemValueRequest struct {
 	foundation.NSObject
@@ -34,12 +36,12 @@ func AVMetadataItemValueRequestFromID(id objc.ID) *AVMetadataItemValueRequest {
 	return o
 }
 
-// @method			respondWithValue: @abstract		Allows you to respond to an AVMetadataItemValueRequest by providing a value. @param			value The value of the AVMetadataItem.
+// Returns the metadata item’s value.
 func (o *AVMetadataItemValueRequest) RespondWithValue(value objc.ID) {
 	o.Ptr().Send(_aVMetadataItemValueRequestSelRespondWithValue, value)
 }
 
-// @method			respondWithError: @abstract		Allows you to respond to an AVMetadataItemValueRequest in the case of failure. @param			error An instance of NSError that describes a failure encountered while loading the value of an AVMetadataItem.
+// Returns an error when the system fails to load the value.
 func (o *AVMetadataItemValueRequest) RespondWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_aVMetadataItemValueRequestSelRespondWithError, error_)
 }

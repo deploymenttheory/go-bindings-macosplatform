@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bilinear spatial upsampling filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingbilinear
 type MPSCNNUpsamplingBilinear struct {
 	mpsneuralnetwork.MPSCNNUpsampling
@@ -32,7 +34,7 @@ func MPSCNNUpsamplingBilinearFromID(id objc.ID) *MPSCNNUpsamplingBilinear {
 	return o
 }
 
-// @abstract  Initialize the bilinear spatial upsampling filter. @param     device                   The device the filter will run on. @param     integerScaleFactorX      The upsampling factor for the x dimension. @param     integerScaleFactorY      The upsampling factor for the y dimension. @return    A valid MPSCNNUpsamplingBilinear object or nil, if failure.
+// Initializes a bilinear spatial upsampling filter.
 func (o *MPSCNNUpsamplingBilinear) InitWithDeviceIntegerScaleFactorXIntegerScaleFactorY(device metal.MTLDevice, integerScaleFactorX uint, integerScaleFactorY uint) *MPSCNNUpsamplingBilinear {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNUpsamplingBilinearSelInitWithDeviceIntegerScaleFactorXIntegerScaleFactorY, device, integerScaleFactorX, integerScaleFactorY)
 	if _ret != 0 {

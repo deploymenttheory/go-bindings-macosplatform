@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Surface appearance properties for use in GLKit rendering effects.
+//
 // Apple documentation: https://developer.apple.com/documentation/glkit/glkeffectpropertymaterial
 type GLKEffectPropertyMaterial struct {
 	GLKEffectProperty

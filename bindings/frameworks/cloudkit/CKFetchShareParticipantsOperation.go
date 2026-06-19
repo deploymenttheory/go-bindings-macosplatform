@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation that converts user identities into share participants.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckfetchshareparticipantsoperation
 type CKFetchShareParticipantsOperation struct {
 	CKOperation
@@ -41,7 +43,7 @@ func CKFetchShareParticipantsOperationFromID(id objc.ID) *CKFetchShareParticipan
 	return o
 }
 
-// Creates an empty operation. You can use this operation only once. - Note: If you don't set “CKFetchShareParticipantsOperation/userIdentityLookupInfos“ prior to executing the operation, it returns immediately with no results.
+// Creates an empty operation.
 func (o *CKFetchShareParticipantsOperation) Init() *CKFetchShareParticipantsOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchShareParticipantsOperationSelInit)
 	if _ret != 0 {
@@ -50,7 +52,7 @@ func (o *CKFetchShareParticipantsOperation) Init() *CKFetchShareParticipantsOper
 	return CKFetchShareParticipantsOperationFromID(_ret)
 }
 
-// Creates an operation for generating share participants from the specified user data. - Parameters: - userIdentityLookupInfos: The user data for the participants. If you specify `nil`, you must assign a value to the “CKFetchShareParticipantsOperation/userIdentityLookupInfos“ property before you execute this operation. After you create the operation, assign a handler to the “CKFetchShareParticipantsOperation/fetchShareParticipantsCompletionBlock“ property to process the results.
+// Creates an operation for generating share participants from the specified user data.
 func (o *CKFetchShareParticipantsOperation) InitWithUserIdentityLookupInfos(userIdentityLookupInfos *foundation.NSArray[*CKUserIdentityLookupInfo]) *CKFetchShareParticipantsOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchShareParticipantsOperationSelInitWithUserIdentityLookupInfos, userIdentityLookupInfos.Ptr())
 	if _ret != 0 {

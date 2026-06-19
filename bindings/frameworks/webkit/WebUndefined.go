@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// WebUndefined objects are simply used to represent the JavaScript “undefined” value in methods when bridging between JavaScript and Objective-C. For example, if you invoke a JavaScript function that returns the JavaScript “undefined” value, then a WebUndefined object is returned to the Objective-C calling context.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/webundefined
 type WebUndefined struct {
 	foundation.NSObject
@@ -30,7 +32,7 @@ func WebUndefinedFromID(id objc.ID) *WebUndefined {
 	return o
 }
 
-// @method undefined @result The WebUndefined shared instance.
+// Returns the shared WebUndefined instance.
 func WebUndefinedUndefined() *WebUndefined {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWebUndefined), _webUndefinedSelUndefined)
 	if _ret != 0 {

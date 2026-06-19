@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class for classes that define the configuration for a new acceleration structure.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlaccelerationstructuredescriptor
 type MTLAccelerationStructureDescriptor struct {
 	foundation.NSObject

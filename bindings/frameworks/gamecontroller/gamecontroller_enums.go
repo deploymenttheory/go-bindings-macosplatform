@@ -35,14 +35,20 @@ func (e EvCmd) String() string {
 	}
 }
 
+// The possible values for controller player indices.
 type GCControllerPlayerIndex int64
 
 const (
+	// The default index for a player on a controller.
 	GCControllerPlayerIndexUnset GCControllerPlayerIndex = -1
-	GCControllerPlayerIndex1     GCControllerPlayerIndex = 0
-	GCControllerPlayerIndex2     GCControllerPlayerIndex = 1
-	GCControllerPlayerIndex3     GCControllerPlayerIndex = 2
-	GCControllerPlayerIndex4     GCControllerPlayerIndex = 3
+	// Player one is using the controller.
+	GCControllerPlayerIndex1 GCControllerPlayerIndex = 0
+	// Player two is using the controller.
+	GCControllerPlayerIndex2 GCControllerPlayerIndex = 1
+	// Player three is using the controller.
+	GCControllerPlayerIndex3 GCControllerPlayerIndex = 2
+	// Player four is using the controller.
+	GCControllerPlayerIndex4 GCControllerPlayerIndex = 3
 )
 
 func (e GCControllerPlayerIndex) String() string {
@@ -62,6 +68,7 @@ func (e GCControllerPlayerIndex) String() string {
 	}
 }
 
+// A state that indicates whether a device’s battery has power and is charging.
 type GCDeviceBatteryState int64
 
 const (
@@ -86,14 +93,15 @@ func (e GCDeviceBatteryState) String() string {
 	}
 }
 
+// Possible values that describe whether the input value of an element changes.
 type GCDevicePhysicalInputElementChange int64
 
 const (
-	// Indicates that a change could not be determined.  This is typically because the input state queue filled up and older input state snapshots were dropped.
+	// It’s unknown whether there’s a change to the input value.
 	GCDevicePhysicalInputElementUnknownChange GCDevicePhysicalInputElementChange = -1
-	// Indicates that no value of the element changed.
+	// There’s no change to the input value.
 	GCDevicePhysicalInputElementNoChange GCDevicePhysicalInputElementChange = 0
-	// Indicates that a value of the element changed.
+	// There’s a change to the input value.
 	GCDevicePhysicalInputElementChanged GCDevicePhysicalInputElementChange = 1
 )
 
@@ -110,6 +118,7 @@ func (e GCDevicePhysicalInputElementChange) String() string {
 	}
 }
 
+// The possible modes of an adaptive trigger.
 type GCDualSenseAdaptiveTriggerMode int64
 
 const (
@@ -142,6 +151,7 @@ func (e GCDualSenseAdaptiveTriggerMode) String() string {
 	}
 }
 
+// The possible states of an adaptive trigger.
 type GCDualSenseAdaptiveTriggerStatus int64
 
 const (
@@ -233,14 +243,20 @@ func (e GCMicroGamepadSnapshotDataVersion) String() string {
 	}
 }
 
+// The directions that a physical input source involves.
 type GCPhysicalInputSourceDirection uint64
 
 const (
+	// The physical input source doesn’t support directions.
 	GCPhysicalInputSourceDirectionNotApplicable GCPhysicalInputSourceDirection = 0
-	GCPhysicalInputSourceDirectionUp            GCPhysicalInputSourceDirection = 1
-	GCPhysicalInputSourceDirectionRight         GCPhysicalInputSourceDirection = 2
-	GCPhysicalInputSourceDirectionDown          GCPhysicalInputSourceDirection = 4
-	GCPhysicalInputSourceDirectionLeft          GCPhysicalInputSourceDirection = 8
+	// The physical input source contains a value for the up direction.
+	GCPhysicalInputSourceDirectionUp GCPhysicalInputSourceDirection = 1
+	// The physical input source supports the right direction.
+	GCPhysicalInputSourceDirectionRight GCPhysicalInputSourceDirection = 2
+	// The physical input source supports the down direction.
+	GCPhysicalInputSourceDirectionDown GCPhysicalInputSourceDirection = 4
+	// The physical input source supports the left direction.
+	GCPhysicalInputSourceDirectionLeft GCPhysicalInputSourceDirection = 8
 )
 
 func (e GCPhysicalInputSourceDirection) String() string {
@@ -263,6 +279,7 @@ func (e GCPhysicalInputSourceDirection) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A state for handling input when an element is part of a system gesture.
 type GCSystemGestureState int64
 
 const (
@@ -287,6 +304,7 @@ func (e GCSystemGestureState) String() string {
 	}
 }
 
+// The possible states of the user’s touch.
 type GCTouchState int64
 
 const (

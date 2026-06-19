@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A description of the paravirtualized graphics device to create.
+//
 // PGDeviceDescriptor wraps [raw.PGDeviceDescriptor] with a fluent Go API.
 type PGDeviceDescriptor struct {
 	inner *raw.PGDeviceDescriptor
@@ -37,7 +39,7 @@ func NewPGDeviceDescriptor() *PGDeviceDescriptor {
 	return &PGDeviceDescriptor{inner: raw.PGDeviceDescriptorFromID(_id)}
 }
 
-// @property device @abstract The metal device to use to back the PGDevice
+// The Metal device object to use to back the virtual graphics device.
 //
 // WithDevice sets the device property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithDevice(device metal.MTLDevice) *PGDeviceDescriptor {
@@ -45,7 +47,7 @@ func (x *PGDeviceDescriptor) WithDevice(device metal.MTLDevice) *PGDeviceDescrip
 	return x
 }
 
-// @property mmioLength @abstract The length, of the memory that backs the APPLEGPU_BAR_MMIO @discussion By default, the value of mmioLength will be the recommended default size for the MMIO memory.
+// The length in bytes of the memory-mapped IO section.
 //
 // WithMmioLength sets the mmioLength property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithMmioLength(mmioLength uint) *PGDeviceDescriptor {
@@ -53,7 +55,7 @@ func (x *PGDeviceDescriptor) WithMmioLength(mmioLength uint) *PGDeviceDescriptor
 	return x
 }
 
-// @property createTask @abstract The block to invoke to create a task.
+// A handler that the framework calls to create a task object.
 //
 // WithCreateTask sets the createTask property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithCreateTask(createTask func(uint64, unsafe.Pointer) unsafe.Pointer) *PGDeviceDescriptor {
@@ -61,7 +63,7 @@ func (x *PGDeviceDescriptor) WithCreateTask(createTask func(uint64, unsafe.Point
 	return x
 }
 
-// @property destroyTask @abstract The block to invoke to destroy a task.
+// A handler that the framework calls to destroy a task object.
 //
 // WithDestroyTask sets the destroyTask property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithDestroyTask(destroyTask func(unsafe.Pointer)) *PGDeviceDescriptor {
@@ -69,7 +71,7 @@ func (x *PGDeviceDescriptor) WithDestroyTask(destroyTask func(unsafe.Pointer)) *
 	return x
 }
 
-// @property mapMemory @abstract The block to invoke to map guest memory into a task.
+// A handler that the framework calls to map memory into the virtual machine.
 //
 // WithMapMemory sets the mapMemory property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithMapMemory(mapMemory func(unsafe.Pointer, uint32, uint64, bool, *raw.PGPhysicalMemoryRange_s) bool) *PGDeviceDescriptor {
@@ -77,7 +79,7 @@ func (x *PGDeviceDescriptor) WithMapMemory(mapMemory func(unsafe.Pointer, uint32
 	return x
 }
 
-// @property unmapMemory @abstract The block to invoke to unmap guest memory from a task.
+// A handler that the framework calls to unmap memory from the virtual machine.
 //
 // WithUnmapMemory sets the unmapMemory property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithUnmapMemory(unmapMemory func(unsafe.Pointer, uint64, uint64) bool) *PGDeviceDescriptor {
@@ -85,7 +87,7 @@ func (x *PGDeviceDescriptor) WithUnmapMemory(unmapMemory func(unsafe.Pointer, ui
 	return x
 }
 
-// @property readMemory @abstract The block to invoke to perform a read of guest memory
+// A handler that the framework calls to read data from the guest’s memory.
 //
 // WithReadMemory sets the readMemory property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithReadMemory(readMemory func(uint64, uint64, unsafe.Pointer) bool) *PGDeviceDescriptor {
@@ -93,7 +95,7 @@ func (x *PGDeviceDescriptor) WithReadMemory(readMemory func(uint64, uint64, unsa
 	return x
 }
 
-// @property raiseInterrupt @abstract The block to invoke to raise an interrupt to the guest.  May be raised from a dispatch queue must be thread safe.
+// A handler that the system calls to raise an interrupt in the guest environment.
 //
 // WithRaiseInterrupt sets the raiseInterrupt property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithRaiseInterrupt(raiseInterrupt func(uint32)) *PGDeviceDescriptor {
@@ -101,7 +103,7 @@ func (x *PGDeviceDescriptor) WithRaiseInterrupt(raiseInterrupt func(uint32)) *PG
 	return x
 }
 
-// @property addTraceRange @abstract The block to invoke to add a trace range. @discussion If the client is unable to provide range tracing, it should not populate this property or removeTraceRange.
+// A handler that the framework calls to add a trace range.
 //
 // WithAddTraceRange sets the addTraceRange property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithAddTraceRange(addTraceRange func(*raw.PGPhysicalMemoryRange_s, objc.Block) unsafe.Pointer) *PGDeviceDescriptor {
@@ -109,7 +111,7 @@ func (x *PGDeviceDescriptor) WithAddTraceRange(addTraceRange func(*raw.PGPhysica
 	return x
 }
 
-// @property removeTraceRange @abstract The block to invoke to remove a trace range. @discussion This property must be populated if addTraceRange is populated.
+// A handler that the framework calls to remove a trace range.
 //
 // WithRemoveTraceRange sets the removeTraceRange property and returns the receiver for chaining.
 func (x *PGDeviceDescriptor) WithRemoveTraceRange(removeTraceRange func(unsafe.Pointer)) *PGDeviceDescriptor {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of the contact between two physics bodies.
+//
 // PhysicsContact wraps [raw.SKPhysicsContact] with a fluent Go API.
 type PhysicsContact struct {
 	inner *raw.SKPhysicsContact

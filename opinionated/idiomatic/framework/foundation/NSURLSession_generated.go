@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that coordinates a group of related, network data transfer tasks.
+//
 // URLSession wraps [raw.NSURLSession] with a fluent Go API.
 type URLSession struct {
 	inner *raw.NSURLSession

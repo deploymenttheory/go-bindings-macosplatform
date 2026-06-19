@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the Cocoa text input system.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextinputcontext
 type NSTextInputContext struct {
 	foundation.NSObject
@@ -49,6 +51,7 @@ func NSTextInputContextFromID(id objc.ID) *NSTextInputContext {
 	return o
 }
 
+// The designated initializer
 func (o *NSTextInputContext) InitWithClient(client NSTextInputClient) *NSTextInputContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextInputContextSelInitWithClient, client)
 	if _ret != 0 {
@@ -57,23 +60,28 @@ func (o *NSTextInputContext) InitWithClient(client NSTextInputClient) *NSTextInp
 	return NSTextInputContextFromID(_ret)
 }
 
+// Activates the receiver.
 func (o *NSTextInputContext) Activate() {
 	o.Ptr().Send(_nSTextInputContextSelActivate)
 }
 
+// Deactivates the receiver.
 func (o *NSTextInputContext) Deactivate() {
 	o.Ptr().Send(_nSTextInputContextSelDeactivate)
 }
 
+// Tells the Cocoa text input system to handle mouse or key events.
 func (o *NSTextInputContext) HandleEvent(event *NSEvent) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextInputContextSelHandleEvent, event.Ptr())
 	return _ret
 }
 
+// Tells the Cocoa text input system to discard the current conversion session.
 func (o *NSTextInputContext) DiscardMarkedText() {
 	o.Ptr().Send(_nSTextInputContextSelDiscardMarkedText)
 }
 
+// Notifies the Cocoa text input system that the position information previously queried via methods like firstRectForCharacterRange:actualRange: needs to be updated.
 func (o *NSTextInputContext) InvalidateCharacterCoordinates() {
 	o.Ptr().Send(_nSTextInputContextSelInvalidateCharacterCoordinates)
 }
@@ -94,6 +102,7 @@ func (o *NSTextInputContext) TextInputClientDidScroll() {
 	o.Ptr().Send(_nSTextInputContextSelTextInputClientDidScroll)
 }
 
+// Returns the display name for the given text input source identifier.
 func NSTextInputContextLocalizedNameForInputSource(inputSourceIdentifier *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextInputContext), _nSTextInputContextSelLocalizedNameForInputSource, inputSourceIdentifier.Ptr())
 	if _ret != 0 {
@@ -125,17 +134,23 @@ func (o *NSTextInputContext) SetAcceptsGlyphInfo(acceptsGlyphInfo bool) {
 }
 
 func (o *NSTextInputContext) AllowedInputSourceLocales() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTextInputContextSelAllowedInputSourceLocales)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextInputContextSelAllowedInputSourceLocales)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSTextInputContext) SetAllowedInputSourceLocales(allowedInputSourceLocales *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSTextInputContextSelSetAllowedInputSourceLocales, allowedInputSourceLocales)
+	o.Ptr().Send(_nSTextInputContextSelSetAllowedInputSourceLocales, allowedInputSourceLocales.Ptr())
 }
 
 func (o *NSTextInputContext) KeyboardInputSources() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTextInputContextSelKeyboardInputSources)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextInputContextSelKeyboardInputSources)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSTextInputContext) SelectedKeyboardInputSource() *foundation.NSString {

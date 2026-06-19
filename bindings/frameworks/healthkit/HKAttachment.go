@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A file that is attached to a sample in the HealthKit store.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkattachment
 type HKAttachment struct {
 	foundation.NSObject
@@ -80,6 +82,9 @@ func (o *HKAttachment) CreationDate() *foundation.NSDate {
 
 // @property      metadata @abstract      Extra information describing the attachment. @discussion    Keys must be NSString and values must be either NSString, NSNumber, or NSDate.
 func (o *HKAttachment) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _hKAttachmentSelMetadata)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKAttachmentSelMetadata)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes the result of a batch delete request.
+//
 // BatchDeleteResult wraps [raw.NSBatchDeleteResult] with a fluent Go API.
 type BatchDeleteResult struct {
 	inner *raw.NSBatchDeleteResult

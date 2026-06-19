@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains information about a received PushKit notification.
+//
 // Apple documentation: https://developer.apple.com/documentation/pushkit/pkpushpayload
 type PKPushPayload struct {
 	foundation.NSObject
@@ -42,6 +44,9 @@ func (o *PKPushPayload) Type() *foundation.NSString {
 
 // The contents of the received payload. For VoIP pushes, the sender is free to specify any fields for the contained data as long as it is provided in a text-encodable JSON format.
 func (o *PKPushPayload) DictionaryPayload() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _pKPushPayloadSelDictionaryPayload)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKPushPayloadSelDictionaryPayload)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }

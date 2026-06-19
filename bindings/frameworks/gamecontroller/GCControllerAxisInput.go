@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A control element that tracks movement along an axis.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gccontrolleraxisinput
 type GCControllerAxisInput struct {
 	GCControllerElement
@@ -32,7 +34,7 @@ func GCControllerAxisInputFromID(id objc.ID) *GCControllerAxisInput {
 	return o
 }
 
-// Sets the normalized value for the input. @param value the value to set the input to. @note If the controller's snapshot flag is set to NO, this method has no effect. @see value
+// Sets the normalized value of the axis.
 func (o *GCControllerAxisInput) SetValue(value float32) {
 	o.Ptr().Send(_gCControllerAxisInputSelSetValue, value)
 }

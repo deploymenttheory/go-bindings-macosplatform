@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A gaussian distribution is biased towards the mean value, the possible outcomes are spread out from the mean with decreasing probability. Values within 1 deviation of the mean make up 68.27% of the distribution, values within 2 deviations make up 95% and values within 3 deviations make up 99.7%. Note that a gaussian distribution's unbounded behavior beyond 3 deviations is undesired, thus this distribution deviates nominally by modifying the bounds to 3 deviations. Thus values within 3 deviations actually make up 100% of the distribution.
+// A generator for random numbers that follow a Gaussian distribution (also known as a normal distribution) across multiple samplings.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkgaussiandistribution
 type GKGaussianDistribution struct {
@@ -34,7 +34,7 @@ func GKGaussianDistributionFromID(id objc.ID) *GKGaussianDistribution {
 	return o
 }
 
-// Initializes a Gaussian random distribution within the range [lowest, highest] using a source to grab input values from. This sets the gaussian parameters to: mean = (highest + lowest) / 2 deviation = (highest - lowest) / 6 The mean and deviation will be floating point numbers even if the distribution is meant to produce integer values. @see mean @see deviation
+// Initializes a Gaussian random distribution with the specified lower and upper bounds, using the specified source randomizer.
 func (o *GKGaussianDistribution) InitWithRandomSourceLowestValueHighestValue(source GKRandom, lowestInclusive int, highestInclusive int) *GKGaussianDistribution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGaussianDistributionSelInitWithRandomSourceLowestValueHighestValue, source, lowestInclusive, highestInclusive)
 	if _ret != 0 {
@@ -43,7 +43,7 @@ func (o *GKGaussianDistribution) InitWithRandomSourceLowestValueHighestValue(sou
 	return GKGaussianDistributionFromID(_ret)
 }
 
-// Initializes a Gaussian random distribution within the range [mean - 3 * deviation, mean + 3 * deviation] using a source to grab input values from.
+// Initializes a Gaussian random distribution with the specified mean and deviation, using the specified source randomizer.
 func (o *GKGaussianDistribution) InitWithRandomSourceMeanDeviation(source GKRandom, mean float32, deviation float32) *GKGaussianDistribution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGaussianDistributionSelInitWithRandomSourceMeanDeviation, source, mean, deviation)
 	if _ret != 0 {

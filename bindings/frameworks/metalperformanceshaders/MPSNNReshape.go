@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for reshape operations.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreshape
 type MPSNNReshape struct {
 	mpsneuralnetwork.MPSCNNKernel

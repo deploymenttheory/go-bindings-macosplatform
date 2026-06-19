@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A filter that finds the maximum pixel value in a rectangular region centered around each pixel in the source image.
+//
 // ImageAreaMax wraps [raw.MPSImageAreaMax] with a fluent Go API.
 type ImageAreaMax struct {
 	inner *raw.MPSImageAreaMax
@@ -33,7 +35,7 @@ func ImageAreaMaxFromID(id objc.ID) *ImageAreaMax {
 	return &ImageAreaMax{inner: raw.MPSImageAreaMaxFromID(id)}
 }
 
-// @abstract Set the kernel height and width @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel. Must be an odd number. @param      kernelHeight        The height of the kernel. Must be an odd number.
+// Initializes the kernel with a specified width and height.
 //
 // NewImageAreaMaxWithDeviceKernelWidthKernelHeight creates a new [ImageAreaMax].
 func NewImageAreaMaxWithDeviceKernelWidthKernelHeight(device metal.MTLDevice, kernelWidth uint, kernelHeight uint) *ImageAreaMax {
@@ -51,7 +53,7 @@ func NewImageAreaMaxWithCoderDevice(aDecoder *foundation.NSCoder, device metal.M
 	return &ImageAreaMax{inner: raw.MPSImageAreaMaxFromID(_id)}
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+// The position of the destination clip rectangle origin relative to the source buffer.
 //
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageAreaMax) WithOffset(offset mpscore.MPSOffset) *ImageAreaMax {
@@ -59,7 +61,7 @@ func (x *ImageAreaMax) WithOffset(offset mpscore.MPSOffset) *ImageAreaMax {
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 //
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageAreaMax) WithClipRect(clipRect metal.MTLRegion) *ImageAreaMax {
@@ -67,7 +69,7 @@ func (x *ImageAreaMax) WithClipRect(clipRect metal.MTLRegion) *ImageAreaMax {
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+// The edge mode to use when texture reads stray off the edge of an image.
 //
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageAreaMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAreaMax {
@@ -75,7 +77,7 @@ func (x *ImageAreaMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAre
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageAreaMax) WithOptions(options mpscore.MPSKernelOptions) *ImageAreaMax {
@@ -83,7 +85,7 @@ func (x *ImageAreaMax) WithOptions(options mpscore.MPSKernelOptions) *ImageAreaM
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageAreaMax) WithLabel(label string) *ImageAreaMax {

@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A kernel for applying a fully gradient connected neural network layer.
+//
 // MatrixFullyConnectedGradient wraps [raw.MPSMatrixFullyConnectedGradient] with a fluent Go API.
 type MatrixFullyConnectedGradient struct {
 	inner *raw.MPSMatrixFullyConnectedGradient
@@ -122,7 +124,7 @@ func (x *MatrixFullyConnectedGradient) WithBatchSize(batchSize uint) *MatrixFull
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixFullyConnectedGradient) WithOptions(options mpscore.MPSKernelOptions) *MatrixFullyConnectedGradient {
@@ -130,7 +132,7 @@ func (x *MatrixFullyConnectedGradient) WithOptions(options mpscore.MPSKernelOpti
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixFullyConnectedGradient) WithLabel(label string) *MatrixFullyConnectedGradient {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A machine learning collection type that stores numeric values in an array with multiple dimensions.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmultiarray
 type MLMultiArray struct {
 	foundation.NSObject
@@ -65,14 +67,20 @@ func (o *MLMultiArray) DataType() MLMultiArrayDataType {
 
 // Shape of the multi-dimensional space that this instance represents.
 func (o *MLMultiArray) Shape() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLMultiArraySelShape)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArraySelShape)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Strides. It defines the offset of the scalar of a given coordinate index in the storage, which is: ``` scalarOffset = sum_d index[d]*strides[d] ```
 func (o *MLMultiArray) Strides() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLMultiArraySelStrides)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArraySelStrides)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Count of total number of addressable scalars. The value is same as `product_d shape[d]`.
@@ -87,10 +95,10 @@ func (o *MLMultiArray) PixelBuffer() unsafe.Pointer {
 	return _ret
 }
 
-// Creates the object. The contents of the object are left uninitialized; the client must initialize it. The scalars will use the first-major contiguous layout. - Parameters: - shape: The shape - dataType: The data type - error: Filled with error information on error.
+// Creates a multidimensional array with a shape and type.
 func (o *MLMultiArray) InitWithShapeDataTypeError(shape *foundation.NSArray[*foundation.NSNumber], dataType MLMultiArrayDataType) (*MLMultiArray, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArraySelInitWithShapeDataTypeError, shape, dataType, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArraySelInitWithShapeDataTypeError, shape.Ptr(), dataType, unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -100,16 +108,16 @@ func (o *MLMultiArray) InitWithShapeDataTypeError(shape *foundation.NSArray[*fou
 	return MLMultiArrayFromID(_ret), nil
 }
 
-// Creates the object with specified strides. The contents of the object are left uninitialized; the client must initialize it. ```swift let shape = [2, 3]; let strides = [4, 1] let multiArray = MLMultiArray(shape: shape, dataType: .float32, strides: strides) XCTAssertEqual(multiArray.shape, shape as [NSNumber]) XCTAssertEqual(multiArray.strides, strides as [NSNumber]) ``` ```objc NSArray<NSNumber *> *shape = @[@2, @3]; NSArray<NSNumber *> *strides = @[@4, @1]; MLMultiArray *multiArray = [[MLMultiArray alloc] initWithShape:shape dataType:MLMultiArrayDataTypeFloat32 strides:strides]; XCTAssertEqualObjects(multiArray.shape, shape); XCTAssertEqualObjects(multiArray.strides, strides); ``` - Parameters: - shape: The shape - dataType: The data type - strides: The strides.
+// Creates the object with specified strides.
 func (o *MLMultiArray) InitWithShapeDataTypeStrides(shape *foundation.NSArray[*foundation.NSNumber], dataType MLMultiArrayDataType, strides *foundation.NSArray[*foundation.NSNumber]) *MLMultiArray {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArraySelInitWithShapeDataTypeStrides, shape, dataType, strides)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArraySelInitWithShapeDataTypeStrides, shape.Ptr(), dataType, strides.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MLMultiArrayFromID(_ret)
 }
 
-// Creates the object with existing data without copy. Use this initializer to reference the existing buffer as the storage without copy. ```objc int32_t *buffer = malloc(sizeof(int32_t) * 2 * 3 * 4); MLMultiArray *multiArray = [[MLMultiArray alloc] initWithDataPointer:buffer shape:@[@2, @3, @4] dataType:MLMultiArrayDataTypeInt32 strides:@[@12, @4, @1] deallocator:^(void *bytes) { free(bytes); } error:NULL]; ``` - Parameters: - dataPointer: The pointer to the buffer. - shape: The shape - dataType: The data type - strides: The strides. - deallocator: Block to be called on the deallocation of the instance. - error: Filled with error information on error.
+// Creates a multiarray from a data pointer.
 func (o *MLMultiArray) InitWithDataPointerShapeDataTypeStridesDeallocatorError(dataPointer unsafe.Pointer, shape *foundation.NSArray[*foundation.NSNumber], dataType MLMultiArrayDataType, strides *foundation.NSArray[*foundation.NSNumber], deallocator func(unsafe.Pointer)) (*MLMultiArray, error) {
 	var __block_deallocator objc.Block
 	if deallocator != nil {
@@ -119,7 +127,7 @@ func (o *MLMultiArray) InitWithDataPointerShapeDataTypeStridesDeallocatorError(d
 		defer __block_deallocator.Release()
 	}
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArraySelInitWithDataPointerShapeDataTypeStridesDeallocatorError, dataPointer, shape, dataType, strides, __block_deallocator, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArraySelInitWithDataPointerShapeDataTypeStridesDeallocatorError, dataPointer, shape.Ptr(), dataType, strides.Ptr(), __block_deallocator, unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -129,16 +137,16 @@ func (o *MLMultiArray) InitWithDataPointerShapeDataTypeStridesDeallocatorError(d
 	return MLMultiArrayFromID(_ret), nil
 }
 
-// Create by wrapping a pixel buffer. Use this initializer to create an IOSurface backed MLMultiArray, which can reduce the inference latency by avoiding the buffer copy. The instance will own the pixel buffer and release it on the deallocation. The pixel buffer's pixel format type must be either `kCVPixelFormatType_OneComponent16Half` for `MLMultiArrayDataTypeFloat16` or `kCVPixelFormatType_OneComponent8` for `MLMultiArrayDataTypeInt8`. ```objc CVPixelBufferRef pixelBuffer = NULL; NSDictionary* pixelBufferAttributes = @{ (id)kCVPixelBufferIOSurfacePropertiesKey: @{} }; // Since shape == [2, 3, 4], width is 4 (= shape[2]) and height is 6 (= shape[0] * shape[1]). CVPixelBufferCreate(kCFAllocatorDefault, 4, 6, kCVPixelFormatType_OneComponent16Half, (__bridge CFDictionaryRef)pixelBufferAttributes, &pixelBuffer); MLMultiArray *multiArray = [[MLMultiArray alloc] initWithPixelBuffer:pixelBuffer shape:@[@2, @3, @4]]; ``` - Parameters: - pixelBuffer: The pixel buffer to be owned by the instance. - shape: The shape of the MLMultiArray. The last dimension of `shape` must match the pixel buffer's width. The product of the rest of the dimensions must match the height.
+// Creates a multiarray sharing the surface of a pixel buffer.
 func (o *MLMultiArray) InitWithPixelBufferShape(pixelBuffer unsafe.Pointer, shape *foundation.NSArray[*foundation.NSNumber]) *MLMultiArray {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArraySelInitWithPixelBufferShape, pixelBuffer, shape)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArraySelInitWithPixelBufferShape, pixelBuffer, shape.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MLMultiArrayFromID(_ret)
 }
 
-// Get the underlying buffer pointer to read. The buffer pointer is valid only within the block. ```objc MLMultiArray * A = [[MLMultiArray alloc] initWithShape:@[@3, @2] dataType:MLMultiArrayDataTypeInt32 error:NULL]; A[@[@1, @2]] = @42; [A getBytesWithHandler:^(const void *bytes, NSInteger size) { const int32_t *scalarBuffer = (const int32_t *)bytes; const int strideY = A.strides[0].intValue; // Print 42 NSLog(@"Scalar at (1, 2): %d", scalarBuffer[1 * strideY + 2]); }]; ``` - Parameters: - handler: The block to receive the buffer pointer and its size in bytes.
+// Get the underlying buffer pointer to read.
 func (o *MLMultiArray) GetBytesWithHandler(handler func(unsafe.Pointer, int)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -150,12 +158,22 @@ func (o *MLMultiArray) GetBytesWithHandler(handler func(unsafe.Pointer, int)) {
 	o.Ptr().Send(_mLMultiArraySelGetBytesWithHandler, __block_handler)
 }
 
-// Get the underlying buffer pointer to mutate. The buffer pointer is valid only within the block. Use `strides` parameter passed in the block because the method may switch to a new backing buffer with different strides. ```objc MLMultiArray * A = [[MLMultiArray alloc] initWithShape:@[@3, @2] dataType:MLMultiArrayDataTypeInt32 error:NULL]; [A getMutableBytesWithHandler:^(void *bytes, NSInteger __unused size, NSArray<NSNumber *> *strides) { int32_t *scalarBuffer = (int32_t *)bytes; const int strideY = strides[0].intValue; scalarBuffer[1 * strideY + 2] = 42;  // Set 42 at A[1, 2] }]; ``` - Parameters: - handler: The block to receive the buffer pointer, size in bytes, and strides.
-func (o *MLMultiArray) GetMutableBytesWithHandler(handler objc.Block) {
-	o.Ptr().Send(_mLMultiArraySelGetMutableBytesWithHandler, handler)
+// Get the underlying buffer pointer to mutate.
+func (o *MLMultiArray) GetMutableBytesWithHandler(handler func(unsafe.Pointer, int, *foundation.NSArray[*foundation.NSNumber])) {
+	var __block_handler objc.Block
+	if handler != nil {
+		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer, blockParam1 int, blockParam2 objc.ID) {
+			if blockParam2 != 0 {
+				blockParam2.Send(objc.RegisterName("retain"))
+			}
+			handler(blockParam0, blockParam1, foundation.NSArrayFromID[*foundation.NSNumber](blockParam2))
+		})
+		defer __block_handler.Release()
+	}
+	o.Ptr().Send(_mLMultiArraySelGetMutableBytesWithHandler, __block_handler)
 }
 
-// Concatenate MLMultiArrays to form a new MLMultiArray. All the source MLMultiArrays must have a same shape except the specified axis. The resultant MLMultiArray has the same shape as inputs except this axis, which dimension will be the sum of all the input dimensions of the axis. For example, ```swift // Swift let A = try MLMultiArray(shape: [2, 3], dataType: .int32) let B = try MLMultiArray(shape: [2, 2], dataType: .int32) let C = MLMultiArray(concatenating: [A, B], axis: 1, dataType: .int32) assert(C.shape == [2, 5]) ``` ```objc // Obj-C MLMultiArray *A = [[MLMultiArray alloc] initWithShape:@[@2, @3] dataType:MLMultiArrayDataTypeInt32 error:NULL]; MLMultiArray *B = [[MLMultiArray alloc] initWithShape:@[@2, @2] dataType:MLMultiArrayDataTypeInt32 error:NULL]; MLMultiArray *C = [MLMultiArray multiArrayByConcatenatingMultiArrays:@[A, B] alongAxis:1 dataType:MLMultiArrayDataTypeInt32]; assert(C.shape == @[@2, @5]) ``` Numeric data will be up or down casted as needed. The method raises NSInvalidArgumentException if the shapes of input multi arrays are not compatible for concatenation. - Parameters: - multiArrays: Array of MLMultiArray instances to be concatenated. - axis: Axis index with which the concatenation will performed. The value is wrapped by the dimension of the axis. For example, -1 is the last axis. - dataType: The data type of the resultant MLMultiArray.
+// Concatenate MLMultiArrays to form a new MLMultiArray.
 func MLMultiArrayMultiArrayByConcatenatingMultiArraysAlongAxisDataType(multiArrays *foundation.NSArray[*MLMultiArray], axis int, dataType MLMultiArrayDataType) *MLMultiArray {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLMultiArray), _mLMultiArraySelMultiArrayByConcatenatingMultiArraysAlongAxisDataType, multiArrays.Ptr(), axis, dataType)
 	if _ret != 0 {
@@ -175,24 +193,24 @@ func (o *MLMultiArray) ObjectAtIndexedSubscript(idx int) *foundation.NSNumber {
 
 // Get a value by its multidimensional index (NSArray<NSNumber *>)
 func (o *MLMultiArray) ObjectForKeyedSubscript(key *foundation.NSArray[*foundation.NSNumber]) *foundation.NSNumber {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArraySelObjectForKeyedSubscript, key)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArraySelObjectForKeyedSubscript, key.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSNumberFromID(_ret)
 }
 
-// Set a value by its linear index (assumes C-style index ordering)
+// Assigns a number to the multiarray’s element at the location that the linear offset defines.
 func (o *MLMultiArray) SetObjectAtIndexedSubscript(obj *foundation.NSNumber, idx int) {
 	o.Ptr().Send(_mLMultiArraySelSetObjectAtIndexedSubscript, obj.Ptr(), idx)
 }
 
-// Set a value by subindicies (NSArray<NSNumber *>)
+// Assigns a number to the multiarray’s element at the location that the number array defines.
 func (o *MLMultiArray) SetObjectForKeyedSubscript(obj *foundation.NSNumber, key *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_mLMultiArraySelSetObjectForKeyedSubscript, obj.Ptr(), key)
+	o.Ptr().Send(_mLMultiArraySelSetObjectForKeyedSubscript, obj.Ptr(), key.Ptr())
 }
 
-// Transfer the contents to the destination multi-array. Numeric data will be up or down casted as needed. It can transfer to a multi-array with different layout (strides). ```swift let sourceMultiArray: MLMultiArray = ... // shape is [2, 3] and data type is Float64 let newStrides = [4, 1] let destinationMultiArray = MLMultiArray(shape: [2, 3], dataType: .float32, strides: newStrides) sourceMultiArray.transfer(to: destinationMultiArray) ``` ```objc NSArray<NSNumber *> *shape = @[@2, @3]; NSArray<NSNumber *> *sourceStrides = @[@3, @1]; NSArray<NSNumber *> *destinationStrides = @[@4, @1]; MLMultiArray *source = [[MLMultiArray alloc] initWithShape:shape dataType:MLMultiArrayDataTypeDouble strides:sourceStrides]; // Initialize source... MLMultiArray *destination = [[MLMultiArray alloc] initWithShape:shape dataType:MLMultiArrayDataTypeFloat32 strides:destinationStrides]; [source transferToMultiArray:destination]; ``` - Parameters: - destinationMultiArray: The transfer destination.
+// Transfer the contents to the destination multi-array.
 func (o *MLMultiArray) TransferToMultiArray(destinationMultiArray *MLMultiArray) {
 	o.Ptr().Send(_mLMultiArraySelTransferToMultiArray, destinationMultiArray.Ptr())
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A list of alternative strings for a piece of text.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextalternatives
 type NSTextAlternatives struct {
 	foundation.NSObject
@@ -33,14 +35,16 @@ func NSTextAlternativesFromID(id objc.ID) *NSTextAlternatives {
 	return o
 }
 
+// Initializes an NSTextAlternatives instance.
 func (o *NSTextAlternatives) InitWithPrimaryStringAlternativeStrings(primaryString *foundation.NSString, alternativeStrings *foundation.NSArray[*foundation.NSString]) *NSTextAlternatives {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAlternativesSelInitWithPrimaryStringAlternativeStrings, primaryString.Ptr(), alternativeStrings)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAlternativesSelInitWithPrimaryStringAlternativeStrings, primaryString.Ptr(), alternativeStrings.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSTextAlternativesFromID(_ret)
 }
 
+// Sent to the NSTextAlternatives object by the text view when the user chooses one of the alternative strings.
 func (o *NSTextAlternatives) NoteSelectedAlternativeString(alternativeString *foundation.NSString) {
 	o.Ptr().Send(_nSTextAlternativesSelNoteSelectedAlternativeString, alternativeString.Ptr())
 }
@@ -54,6 +58,9 @@ func (o *NSTextAlternatives) PrimaryString() *foundation.NSString {
 }
 
 func (o *NSTextAlternatives) AlternativeStrings() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTextAlternativesSelAlternativeStrings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAlternativesSelAlternativeStrings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

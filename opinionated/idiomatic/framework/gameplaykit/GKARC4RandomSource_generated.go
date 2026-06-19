@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A deterministic pseudo-random source that generates random numbers based on an arc4 algorithm. This is a deterministic random source suitable for creating reliable gameplay mechanics. While deterministic, this is not a cryptographic random source, however it may be useful for obfuscation of gameplay data in manner similar to a stream cipher.
+// A basic random number generator implementing the ARC4 algorithm, which is suitable for most gameplay mechanics.
 //
 // ARC4RandomSource wraps [raw.GKARC4RandomSource] with a fluent Go API.
 type ARC4RandomSource struct {
@@ -38,7 +38,7 @@ func NewARC4RandomSource() *ARC4RandomSource {
 	return &ARC4RandomSource{inner: raw.GKARC4RandomSourceFromID(_id)}
 }
 
-// Initializes an arc4 random source with bits from the seed.
+// Initializes a random source with the specified seed data.
 //
 // NewARC4RandomSourceWithSeed creates a new [ARC4RandomSource].
 func NewARC4RandomSourceWithSeed(seed *foundation.NSData) *ARC4RandomSource {
@@ -47,7 +47,7 @@ func NewARC4RandomSourceWithSeed(seed *foundation.NSData) *ARC4RandomSource {
 	return &ARC4RandomSource{inner: raw.GKARC4RandomSourceFromID(_id)}
 }
 
-// The seed used to stir the arc4 random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
+// The seed data that determines the random source’s behavior.
 //
 // WithSeed sets the seed property and returns the receiver for chaining.
 func (x *ARC4RandomSource) WithSeed(seed *foundation.NSData) *ARC4RandomSource {
@@ -55,7 +55,7 @@ func (x *ARC4RandomSource) WithSeed(seed *foundation.NSData) *ARC4RandomSource {
 	return x
 }
 
-// Arc4 based random sources have repeatable initial sequences. If used for obfuscation you should drop N values from the start, where N should be any number larger than 768 to ensure the initial sequence is flushed.
+// Skips the specified number of values in the random sequence.
 //
 // DropValuesWithCount calls the underlying DropValuesWithCount.
 func (x *ARC4RandomSource) DropValuesWithCount(count uint) {

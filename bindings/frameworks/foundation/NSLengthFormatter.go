@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A formatter that provides localized descriptions of linear distances, such as length and height measurements.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nslengthformatter
 type NSLengthFormatter struct {
 	NSFormatter

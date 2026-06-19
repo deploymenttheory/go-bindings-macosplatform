@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request for details about one or more reservations.
+//
 // GetReservationDetailsIntent wraps [raw.INGetReservationDetailsIntent] with a fluent Go API.
 type GetReservationDetailsIntent struct {
 	inner *raw.INGetReservationDetailsIntent
@@ -31,6 +33,8 @@ func GetReservationDetailsIntentFromID(id objc.ID) *GetReservationDetailsIntent 
 	return &GetReservationDetailsIntent{inner: raw.INGetReservationDetailsIntentFromID(id)}
 }
 
+// Creates an intent that describes the reservation.
+//
 // NewGetReservationDetailsIntentWithReservationContainerReferenceReservationItemReferences creates a new [GetReservationDetailsIntent].
 func NewGetReservationDetailsIntentWithReservationContainerReferenceReservationItemReferences(reservationContainerReference *raw.INSpeakableString, reservationItemReferences *foundation.NSArray[*raw.INSpeakableString]) *GetReservationDetailsIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INGetReservationDetailsIntent")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewGetReservationDetailsIntentWithReservationContainerReferenceReservationI
 	return &GetReservationDetailsIntent{inner: raw.INGetReservationDetailsIntentFromID(_id)}
 }
 
+// The intent’s display name.
+//
 // WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
 func (x *GetReservationDetailsIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *GetReservationDetailsIntent {
 	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))

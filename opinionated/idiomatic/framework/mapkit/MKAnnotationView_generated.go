@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The visual representation of one of your annotation objects.
+//
 // AnnotationView wraps [raw.MKAnnotationView] with a fluent Go API.
 type AnnotationView struct {
 	inner *raw.MKAnnotationView
@@ -33,6 +35,8 @@ func AnnotationViewFromID(id objc.ID) *AnnotationView {
 	return &AnnotationView{inner: raw.MKAnnotationViewFromID(id)}
 }
 
+// Creates and returns a new annotation view.
+//
 // NewAnnotationViewWithAnnotationReuseIdentifier creates a new [AnnotationView].
 func NewAnnotationViewWithAnnotationReuseIdentifier(annotation raw.MKAnnotation, reuseIdentifier string) *AnnotationView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKAnnotationView")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewAnnotationViewWithAnnotationReuseIdentifier(annotation raw.MKAnnotation,
 	return &AnnotationView{inner: raw.MKAnnotationViewFromID(_id)}
 }
 
+// Creates an annotation view using data from the specified unarchiver.
+//
 // NewAnnotationViewWithCoder creates a new [AnnotationView].
 func NewAnnotationViewWithCoder(aDecoder *foundation.NSCoder) *AnnotationView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKAnnotationView")), objc.RegisterName("alloc"))
@@ -47,142 +53,190 @@ func NewAnnotationViewWithCoder(aDecoder *foundation.NSCoder) *AnnotationView {
 	return &AnnotationView{inner: raw.MKAnnotationViewFromID(_id)}
 }
 
+// The annotation object associated with the view.
+//
 // WithAnnotation sets the annotation property and returns the receiver for chaining.
 func (x *AnnotationView) WithAnnotation(annotation raw.MKAnnotation) *AnnotationView {
 	x.inner.SetAnnotation(annotation)
 	return x
 }
 
+// The image the annotation view displays.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *AnnotationView) WithImage(image *appkit.NSImage) *AnnotationView {
 	x.inner.SetImage(image)
 	return x
 }
 
+// The offset (in points) at which to display the view.
+//
 // WithCenterOffset sets the centerOffset property and returns the receiver for chaining.
 func (x *AnnotationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *AnnotationView {
 	x.inner.SetCenterOffset(centerOffset)
 	return x
 }
 
+// An offset that changes the accessory’s default anchor point.
+//
 // WithAccessoryOffset sets the accessoryOffset property and returns the receiver for chaining.
 func (x *AnnotationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *AnnotationView {
 	x.inner.SetAccessoryOffset(accessoryOffset)
 	return x
 }
 
+// The offset (in points) at which to place the callout.
+//
 // WithCalloutOffset sets the calloutOffset property and returns the receiver for chaining.
 func (x *AnnotationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *AnnotationView {
 	x.inner.SetCalloutOffset(calloutOffset)
 	return x
 }
 
+// The offset in points from the middle-left of the annotation view.
+//
 // WithLeftCalloutOffset sets the leftCalloutOffset property and returns the receiver for chaining.
 func (x *AnnotationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *AnnotationView {
 	x.inner.SetLeftCalloutOffset(leftCalloutOffset)
 	return x
 }
 
+// The offset in points from the middle-right of the annotation view.
+//
 // WithRightCalloutOffset sets the rightCalloutOffset property and returns the receiver for chaining.
 func (x *AnnotationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *AnnotationView {
 	x.inner.SetRightCalloutOffset(rightCalloutOffset)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation is in an enabled state.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *AnnotationView) WithEnabled(enabled bool) *AnnotationView {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value that indicates whether the map view highlights the annotation view.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *AnnotationView) WithHighlighted(highlighted bool) *AnnotationView {
 	x.inner.SetHighlighted(highlighted)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation view is in a selected state.
+//
 // WithSelected sets the selected property and returns the receiver for chaining.
 func (x *AnnotationView) WithSelected(selected bool) *AnnotationView {
 	x.inner.SetSelected(selected)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation view is able to display extra information in a callout.
+//
 // WithCanShowCallout sets the canShowCallout property and returns the receiver for chaining.
 func (x *AnnotationView) WithCanShowCallout(canShowCallout bool) *AnnotationView {
 	x.inner.SetCanShowCallout(canShowCallout)
 	return x
 }
 
+// The view to display on the left side of the standard callout.
+//
 // WithLeftCalloutAccessoryView sets the leftCalloutAccessoryView property and returns the receiver for chaining.
 func (x *AnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView *appkit.NSView) *AnnotationView {
 	x.inner.SetLeftCalloutAccessoryView(leftCalloutAccessoryView)
 	return x
 }
 
+// The view to display on the right side of the standard callout.
+//
 // WithRightCalloutAccessoryView sets the rightCalloutAccessoryView property and returns the receiver for chaining.
 func (x *AnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *AnnotationView {
 	x.inner.SetRightCalloutAccessoryView(rightCalloutAccessoryView)
 	return x
 }
 
+// The detail accessory view to use in the standard callout.
+//
 // WithDetailCalloutAccessoryView sets the detailCalloutAccessoryView property and returns the receiver for chaining.
 func (x *AnnotationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *AnnotationView {
 	x.inner.SetDetailCalloutAccessoryView(detailCalloutAccessoryView)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation view is draggable.
+//
 // WithDraggable sets the draggable property and returns the receiver for chaining.
 func (x *AnnotationView) WithDraggable(draggable bool) *AnnotationView {
 	x.inner.SetDraggable(draggable)
 	return x
 }
 
+// The drag state of the annotation view.
+//
 // WithDragState sets the dragState property and returns the receiver for chaining.
 func (x *AnnotationView) WithDragState(dragState MKAnnotationViewDragState) *AnnotationView {
 	x.inner.SetDragState(raw.MKAnnotationViewDragState(dragState))
 	return x
 }
 
+// An identifier that determines whether the annotation view participates in clustering.
+//
 // WithClusteringIdentifier sets the clusteringIdentifier property and returns the receiver for chaining.
 func (x *AnnotationView) WithClusteringIdentifier(clusteringIdentifier string) *AnnotationView {
 	x.inner.SetClusteringIdentifier(foundation.NSStringStringWithUTF8String(clusteringIdentifier))
 	return x
 }
 
+// The display priority of the annotation view.
+//
 // WithDisplayPriority sets the displayPriority property and returns the receiver for chaining.
 func (x *AnnotationView) WithDisplayPriority(displayPriority float32) *AnnotationView {
 	x.inner.SetDisplayPriority(displayPriority)
 	return x
 }
 
+// The relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
+//
 // WithZPriority sets the zPriority property and returns the receiver for chaining.
 func (x *AnnotationView) WithZPriority(zPriority float32) *AnnotationView {
 	x.inner.SetZPriority(zPriority)
 	return x
 }
 
+// The relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
+//
 // WithSelectedZPriority sets the selectedZPriority property and returns the receiver for chaining.
 func (x *AnnotationView) WithSelectedZPriority(selectedZPriority float32) *AnnotationView {
 	x.inner.SetSelectedZPriority(selectedZPriority)
 	return x
 }
 
+// The collision mode to use when interpreting the collision frame rectangle.
+//
 // WithCollisionMode sets the collisionMode property and returns the receiver for chaining.
 func (x *AnnotationView) WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *AnnotationView {
 	x.inner.SetCollisionMode(raw.MKAnnotationViewCollisionMode(collisionMode))
 	return x
 }
 
+// Notifies the annotation view that the map view is about to display it.
+//
 // PrepareForDisplay calls the underlying PrepareForDisplay.
 func (x *AnnotationView) PrepareForDisplay() {
 	x.inner.PrepareForDisplay()
 }
 
+// Sets the selection state of the annotation view.
+//
 // SetSelectedAnimated calls the underlying SetSelectedAnimated.
 func (x *AnnotationView) SetSelectedAnimated(selected bool, animated bool) {
 	x.inner.SetSelectedAnimated(selected, animated)
 }
 
+// Sets the drag state for the annotation view.
+//
 // SetDragStateAnimated calls the underlying SetDragStateAnimated.
 func (x *AnnotationView) SetDragStateAnimated(newDragState MKAnnotationViewDragState, animated bool) {
 	x.inner.SetDragStateAnimated(raw.MKAnnotationViewDragState(newDragState), animated)

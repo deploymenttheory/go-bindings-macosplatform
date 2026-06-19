@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Detailed information about a contact between two physics bodies in a scene’s physics simulation.
+//
 // PhysicsContact wraps [raw.SCNPhysicsContact] with a fluent Go API.
 type PhysicsContact struct {
 	inner *raw.SCNPhysicsContact

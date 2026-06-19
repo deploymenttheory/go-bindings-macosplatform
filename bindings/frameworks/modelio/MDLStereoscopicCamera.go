@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A point of view for rendering a stereoscopic display of a 3D scene.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlstereoscopiccamera
 type MDLStereoscopicCamera struct {
 	MDLCamera

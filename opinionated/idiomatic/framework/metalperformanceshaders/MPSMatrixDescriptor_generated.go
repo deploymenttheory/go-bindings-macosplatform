@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of attributes used to create an MPS matrix.
+//
 // MatrixDescriptor wraps [raw.MPSMatrixDescriptor] with a fluent Go API.
 type MatrixDescriptor struct {
 	inner *raw.MPSMatrixDescriptor
@@ -36,7 +38,7 @@ func NewMatrixDescriptor() *MatrixDescriptor {
 	return &MatrixDescriptor{inner: raw.MPSMatrixDescriptorFromID(_id)}
 }
 
-// @property   rows @discussion The number of rows in a matrix.
+// The number of rows in the matrix.
 //
 // WithRows sets the rows property and returns the receiver for chaining.
 func (x *MatrixDescriptor) WithRows(rows uint) *MatrixDescriptor {
@@ -44,7 +46,7 @@ func (x *MatrixDescriptor) WithRows(rows uint) *MatrixDescriptor {
 	return x
 }
 
-// @property   columns @discussion The number of columns in a matrix.
+// The number of columns in the matrix.
 //
 // WithColumns sets the columns property and returns the receiver for chaining.
 func (x *MatrixDescriptor) WithColumns(columns uint) *MatrixDescriptor {
@@ -52,7 +54,7 @@ func (x *MatrixDescriptor) WithColumns(columns uint) *MatrixDescriptor {
 	return x
 }
 
-// @property   dataType @discussion The type of the data which makes up the values of the matrix.
+// The type of the values in the matrix.
 //
 // WithDataType sets the dataType property and returns the receiver for chaining.
 func (x *MatrixDescriptor) WithDataType(dataType mpscore.MPSDataType) *MatrixDescriptor {
@@ -60,7 +62,7 @@ func (x *MatrixDescriptor) WithDataType(dataType mpscore.MPSDataType) *MatrixDes
 	return x
 }
 
-// @property   rowBytes @discussion The stride, in bytes, between corresponding elements of consecutive rows.  Must be a multiple of the element size.
+// The stride, in bytes, between corresponding elements of consecutive rows in the matrix.
 //
 // WithRowBytes sets the rowBytes property and returns the receiver for chaining.
 func (x *MatrixDescriptor) WithRowBytes(rowBytes uint) *MatrixDescriptor {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration data to use when generating a PDF representation of a web view’s contents.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkpdfconfiguration
 type WKPDFConfiguration struct {
 	foundation.NSObject

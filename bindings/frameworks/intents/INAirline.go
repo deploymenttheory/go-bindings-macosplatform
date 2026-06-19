@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information that describes an airline.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inairline
 type INAirline struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func INAirlineFromID(id objc.ID) *INAirline {
 	return o
 }
 
+// Creates a new airline object with the specified contents and attributes.
 func (o *INAirline) InitWithNameIataCodeIcaoCode(name *foundation.NSString, iataCode *foundation.NSString, icaoCode *foundation.NSString) *INAirline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNAirlineSelInitWithNameIataCodeIcaoCode, name.Ptr(), iataCode.Ptr(), icaoCode.Ptr())
 	if _ret != 0 {

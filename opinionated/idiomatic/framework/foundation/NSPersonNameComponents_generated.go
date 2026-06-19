@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages the separate parts of a person’s name to allow locale-aware formatting.
+//
 // PersonNameComponents wraps [raw.NSPersonNameComponents] with a fluent Go API.
 type PersonNameComponents struct {
 	inner *raw.NSPersonNameComponents
@@ -36,42 +38,56 @@ func NewPersonNameComponents() *PersonNameComponents {
 	return &PersonNameComponents{inner: raw.NSPersonNameComponentsFromID(_id)}
 }
 
+// The portion of a name’s full form of address that precedes the name itself (for example, “Dr.,” “Mr.,” “Ms.”).
+//
 // WithNamePrefix sets the namePrefix property and returns the receiver for chaining.
 func (x *PersonNameComponents) WithNamePrefix(namePrefix string) *PersonNameComponents {
 	x.inner.SetNamePrefix(foundation.NSStringStringWithUTF8String(namePrefix))
 	return x
 }
 
+// Name bestowed upon an individual to differentiate them from other members of a group that share a family name (for example, “Johnathan”).
+//
 // WithGivenName sets the givenName property and returns the receiver for chaining.
 func (x *PersonNameComponents) WithGivenName(givenName string) *PersonNameComponents {
 	x.inner.SetGivenName(foundation.NSStringStringWithUTF8String(givenName))
 	return x
 }
 
+// Secondary name bestowed upon an individual to differentiate them from others that have the same given name (for example, “Maple”).
+//
 // WithMiddleName sets the middleName property and returns the receiver for chaining.
 func (x *PersonNameComponents) WithMiddleName(middleName string) *PersonNameComponents {
 	x.inner.SetMiddleName(foundation.NSStringStringWithUTF8String(middleName))
 	return x
 }
 
+// Name bestowed upon an individual to denote membership in a group or family. (for example, “Appleseed”).
+//
 // WithFamilyName sets the familyName property and returns the receiver for chaining.
 func (x *PersonNameComponents) WithFamilyName(familyName string) *PersonNameComponents {
 	x.inner.SetFamilyName(foundation.NSStringStringWithUTF8String(familyName))
 	return x
 }
 
+// The portion of a name’s full form of address that follows the name itself (for example, “Esq.,” “Jr.,” “Ph.D.”).
+//
 // WithNameSuffix sets the nameSuffix property and returns the receiver for chaining.
 func (x *PersonNameComponents) WithNameSuffix(nameSuffix string) *PersonNameComponents {
 	x.inner.SetNameSuffix(foundation.NSStringStringWithUTF8String(nameSuffix))
 	return x
 }
 
+// Name substituted for the purposes of familiarity (for example, “Johnny”).
+//
 // WithNickname sets the nickname property and returns the receiver for chaining.
 func (x *PersonNameComponents) WithNickname(nickname string) *PersonNameComponents {
 	x.inner.SetNickname(foundation.NSStringStringWithUTF8String(nickname))
 	return x
 }
 
+// The phonetic representation name components of the receiver.
+//
 // WithPhoneticRepresentation sets the phoneticRepresentation property and returns the receiver for chaining.
 func (x *PersonNameComponents) WithPhoneticRepresentation(phoneticRepresentation *PersonNameComponents) *PersonNameComponents {
 	x.inner.SetPhoneticRepresentation(phoneticRepresentation.Unwrap())

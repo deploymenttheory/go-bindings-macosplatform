@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that displays a user interface where users preview and edit a screen recording that you create with ReplayKit.
+//
 // PreviewViewController wraps [raw.RPPreviewViewController] with a fluent Go API.
 type PreviewViewController struct {
 	inner *raw.RPPreviewViewController
@@ -35,6 +37,8 @@ func NewPreviewViewController() *PreviewViewController {
 	return &PreviewViewController{inner: raw.RPPreviewViewControllerFromID(_id)}
 }
 
+// The preview view controller’s delegate.
+//
 // WithPreviewControllerDelegate sets the previewControllerDelegate property and returns the receiver for chaining.
 func (x *PreviewViewController) WithPreviewControllerDelegate(previewControllerDelegate raw.RPPreviewViewControllerDelegate) *PreviewViewController {
 	x.inner.SetPreviewControllerDelegate(previewControllerDelegate)

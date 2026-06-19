@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// This class acts as a wrapper for the HKBiologicalSex enumeration.
+//
 // BiologicalSexObject wraps [raw.HKBiologicalSexObject] with a fluent Go API.
 type BiologicalSexObject struct {
 	inner *raw.HKBiologicalSexObject

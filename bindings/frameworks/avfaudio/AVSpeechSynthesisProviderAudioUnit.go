@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that generates speech from text.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avspeechsynthesisprovideraudiounit
 type AVSpeechSynthesisProviderAudioUnit struct {
 	ptr objc.ID
@@ -39,12 +41,12 @@ func AVSpeechSynthesisProviderAudioUnitFromID(id objc.ID) *AVSpeechSynthesisProv
 	return o
 }
 
-// @brief  Sends a new speech request to be synthesized @discussion Sends a new speech request to the synthesizer to render. When the synthesizer audio unit is finished generating audio buffers for the speech request, it should indicate this within its internal render block, @c AUInternalRenderBlock, specifically through the @c AudioUnitRenderActionFlags flag @c kAudioOfflineUnitRenderAction_Complete.
+// Sets the text to synthesize and the voice to use.
 func (o *AVSpeechSynthesisProviderAudioUnit) SynthesizeSpeechRequest(speechRequest *AVSpeechSynthesisProviderRequest) {
 	o.Ptr().Send(_aVSpeechSynthesisProviderAudioUnitSelSynthesizeSpeechRequest, speechRequest.Ptr())
 }
 
-// @brief  Informs the audio unit that the speech request job should be discarded.
+// Informs the audio unit to discard the speech request.
 func (o *AVSpeechSynthesisProviderAudioUnit) CancelSpeechRequest() {
 	o.Ptr().Send(_aVSpeechSynthesisProviderAudioUnitSelCancelSpeechRequest)
 }

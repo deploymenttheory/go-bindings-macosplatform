@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sound event node that invokes one of its child nodes at random.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaserandomnodedefinition
 type PHASERandomNodeDefinition struct {
 	PHASESoundEventNodeDefinition
@@ -34,7 +36,7 @@ func PHASERandomNodeDefinitionFromID(id objc.ID) *PHASERandomNodeDefinition {
 	return o
 }
 
-// @method init @abstract Create a random node definition @return A new PHASERandomNodeDefinition object
+// Creates a random node.
 func (o *PHASERandomNodeDefinition) Init() *PHASERandomNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASERandomNodeDefinitionSelInit)
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func (o *PHASERandomNodeDefinition) Init() *PHASERandomNodeDefinition {
 	return PHASERandomNodeDefinitionFromID(_ret)
 }
 
-// @method initWithIdentifier @abstract Create a random node definition @param identifier An optional custom identifier to give to this object @return A new PHASERandomNodeDefinition object
+// Creates a random node with the name you specify.
 func (o *PHASERandomNodeDefinition) InitWithIdentifier(identifier *foundation.NSString) *PHASERandomNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASERandomNodeDefinitionSelInitWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -52,7 +54,7 @@ func (o *PHASERandomNodeDefinition) InitWithIdentifier(identifier *foundation.NS
 	return PHASERandomNodeDefinitionFromID(_ret)
 }
 
-// @method addSubtree @abstract Add a subtree to a random node @param subtree A PHASESoundEventNodeDefinition that will be a child node of this random node @param weight The probability weight of this subtree.  Higher numbers compared to other subtree weights will increase the likelihood of being chosen. This value must be greater than or equal to 1, and is clamped otherwise.
+// Adds a node tree that’s one of the random-selection options.
 func (o *PHASERandomNodeDefinition) AddSubtreeWeight(subtree *PHASESoundEventNodeDefinition, weight *foundation.NSNumber) {
 	o.Ptr().Send(_pHASERandomNodeDefinitionSelAddSubtreeWeight, subtree.Ptr(), weight.Ptr())
 }

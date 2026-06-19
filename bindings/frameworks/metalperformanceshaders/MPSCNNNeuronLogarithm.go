@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A logarithm neuron filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronlogarithm
 type MPSCNNNeuronLogarithm struct {
 	mpsneuralnetwork.MPSCNNNeuron

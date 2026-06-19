@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates information about a resource request from a resource loader to renew a previously issued request.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetresourcerenewalrequest
 type AVAssetResourceRenewalRequest struct {
 	AVAssetResourceLoadingRequest

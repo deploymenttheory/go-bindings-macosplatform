@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for acceleration.
+//
 // UnitAcceleration wraps [raw.NSUnitAcceleration] with a fluent Go API.
 type UnitAcceleration struct {
 	inner *raw.NSUnitAcceleration

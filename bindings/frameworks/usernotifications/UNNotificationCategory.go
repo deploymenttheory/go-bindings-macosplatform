@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type of notification your app supports and the custom actions that the system displays.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/unnotificationcategory
 type UNNotificationCategory struct {
 	foundation.NSObject
@@ -38,24 +40,27 @@ func UNNotificationCategoryFromID(id objc.ID) *UNNotificationCategory {
 	return o
 }
 
+// Creates a category object containing the specified actions and options.
 func UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersOptions(identifier *foundation.NSString, actions *foundation.NSArray[*UNNotificationAction], intentIdentifiers *foundation.NSArray[*foundation.NSString], options UNNotificationCategoryOptions) *UNNotificationCategory {
-	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationCategory), _uNNotificationCategorySelCategoryWithIdentifierActionsIntentIdentifiersOptions, identifier.Ptr(), actions.Ptr(), intentIdentifiers, options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationCategory), _uNNotificationCategorySelCategoryWithIdentifierActionsIntentIdentifiersOptions, identifier.Ptr(), actions.Ptr(), intentIdentifiers.Ptr(), options)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return UNNotificationCategoryFromID(_ret)
 }
 
+// Creates a category object containing the specified actions, options, and placeholder text used when previews aren’t shown.
 func UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions(identifier *foundation.NSString, actions *foundation.NSArray[*UNNotificationAction], intentIdentifiers *foundation.NSArray[*foundation.NSString], hiddenPreviewsBodyPlaceholder *foundation.NSString, options UNNotificationCategoryOptions) *UNNotificationCategory {
-	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationCategory), _uNNotificationCategorySelCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions, identifier.Ptr(), actions.Ptr(), intentIdentifiers, hiddenPreviewsBodyPlaceholder.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationCategory), _uNNotificationCategorySelCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions, identifier.Ptr(), actions.Ptr(), intentIdentifiers.Ptr(), hiddenPreviewsBodyPlaceholder.Ptr(), options)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return UNNotificationCategoryFromID(_ret)
 }
 
+// Creates a category object containing the specified actions, options, placeholder text used when previews aren’t shown, and summary format string.
 func UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions(identifier *foundation.NSString, actions *foundation.NSArray[*UNNotificationAction], intentIdentifiers *foundation.NSArray[*foundation.NSString], hiddenPreviewsBodyPlaceholder *foundation.NSString, categorySummaryFormat *foundation.NSString, options UNNotificationCategoryOptions) *UNNotificationCategory {
-	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationCategory), _uNNotificationCategorySelCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions, identifier.Ptr(), actions.Ptr(), intentIdentifiers, hiddenPreviewsBodyPlaceholder.Ptr(), categorySummaryFormat.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationCategory), _uNNotificationCategorySelCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions, identifier.Ptr(), actions.Ptr(), intentIdentifiers.Ptr(), hiddenPreviewsBodyPlaceholder.Ptr(), categorySummaryFormat.Ptr(), options)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -79,8 +84,11 @@ func (o *UNNotificationCategory) Actions() *foundation.NSArray[*UNNotificationAc
 }
 
 func (o *UNNotificationCategory) IntentIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _uNNotificationCategorySelIntentIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationCategorySelIntentIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *UNNotificationCategory) Options() UNNotificationCategoryOptions {

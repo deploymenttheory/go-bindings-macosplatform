@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An encapsulation of the design-time view controller and window controller graph represented in an Interface Builder storyboard resource file.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsstoryboard
 type NSStoryboard struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func NSStoryboardFromID(id objc.ID) *NSStoryboard {
 	return o
 }
 
+// Creates a storyboard based on the named storyboard file in the specified bundle.
 func NSStoryboardStoryboardWithNameBundle(name *foundation.NSString, storyboardBundleOrNil *foundation.NSBundle) *NSStoryboard {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSStoryboard), _nSStoryboardSelStoryboardWithNameBundle, name.Ptr(), storyboardBundleOrNil.Ptr())
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func NSStoryboardStoryboardWithNameBundle(name *foundation.NSString, storyboardB
 	return NSStoryboardFromID(_ret)
 }
 
+// Creates the initial view controller or window controller from a storyboard.
 func (o *NSStoryboard) InstantiateInitialController() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStoryboardSelInstantiateInitialController)
 	return _ret
@@ -63,6 +67,7 @@ func (o *NSStoryboard) InstantiateInitialControllerWithCreator(block func(*found
 	return _ret
 }
 
+// Instantiates a specified view controller or window controller from a storyboard.
 func (o *NSStoryboard) InstantiateControllerWithIdentifier(identifier *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStoryboardSelInstantiateControllerWithIdentifier, identifier.Ptr())
 	return _ret

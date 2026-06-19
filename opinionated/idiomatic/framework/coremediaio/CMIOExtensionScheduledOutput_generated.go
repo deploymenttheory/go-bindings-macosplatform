@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents scheduled output.
+//
 // ExtensionScheduledOutput wraps [raw.CMIOExtensionScheduledOutput] with a fluent Go API.
 type ExtensionScheduledOutput struct {
 	inner *raw.CMIOExtensionScheduledOutput
@@ -29,7 +31,7 @@ func ExtensionScheduledOutputFromID(id objc.ID) *ExtensionScheduledOutput {
 	return &ExtensionScheduledOutput{inner: raw.CMIOExtensionScheduledOutputFromID(id)}
 }
 
-// @method initWithSequenceNumber:hostTimeInNanoseconds: @abstract Initialize a stream scheduled output instance. @param sequenceNumber The buffer sequence number that was output. @param hostTimeInNanoseconds The host time in nanoseconds when the buffer was output. @result A CMIOExtensionScheduledOutput instance that describes the state of the stream.
+// Creates a scheduled output object.
 //
 // NewExtensionScheduledOutputWithSequenceNumberHostTimeInNanoseconds creates a new [ExtensionScheduledOutput].
 func NewExtensionScheduledOutputWithSequenceNumberHostTimeInNanoseconds(sequenceNumber uint64, hostTimeInNanoseconds uint64) *ExtensionScheduledOutput {

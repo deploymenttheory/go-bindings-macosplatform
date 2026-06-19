@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for controls that interact with the camera system.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturecontrol
 type AVCaptureControl struct {
 	foundation.NSObject

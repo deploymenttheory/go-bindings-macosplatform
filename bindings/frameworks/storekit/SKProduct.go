@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about a registered product in App Store Connect.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skproduct
 // Deprecated: Use Product.
 type SKProduct struct {
@@ -119,8 +121,11 @@ func (o *SKProduct) ContentLengths() unsafe.Pointer {
 
 // Deprecated: Hosted content is no longer supported.
 func (o *SKProduct) DownloadContentLengths() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _sKProductSelDownloadContentLengths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductSelDownloadContentLengths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Deprecated: since macOS 10.14.

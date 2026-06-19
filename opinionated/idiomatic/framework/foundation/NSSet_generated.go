@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A static, unordered collection of unique objects.
+//
 // Set wraps [raw.NSSet] with a fluent Go API.
 type Set struct {
 	inner *raw.NSSet[objc.ID]
@@ -36,6 +38,8 @@ func NewSet() *Set {
 	return &Set{inner: raw.NSSetFromID[objc.ID](_id)}
 }
 
+// Initializes a newly allocated set with a specified number of objects from a given C array of objects.
+//
 // NewSetWithObjectsCount creates a new [Set].
 func NewSetWithObjectsCount(objects unsafe.Pointer, cnt uint) *Set {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSet")), objc.RegisterName("alloc"))
@@ -50,6 +54,8 @@ func NewSetWithCoder(coder *raw.NSCoder) *Set {
 	return &Set{inner: raw.NSSetFromID[objc.ID](_id)}
 }
 
+// Initializes a newly allocated set with members taken from the specified list of objects.
+//
 // NewSetWithObjects creates a new [Set].
 func NewSetWithObjects(firstObj objc.ID) *Set {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSet")), objc.RegisterName("alloc"))
@@ -57,6 +63,8 @@ func NewSetWithObjects(firstObj objc.ID) *Set {
 	return &Set{inner: raw.NSSetFromID[objc.ID](_id)}
 }
 
+// Initializes a newly allocated set and adds to it objects from another given set.
+//
 // NewSetWithSet creates a new [Set].
 func NewSetWithSet(set *raw.NSSet[objc.ID]) *Set {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSet")), objc.RegisterName("alloc"))
@@ -64,6 +72,8 @@ func NewSetWithSet(set *raw.NSSet[objc.ID]) *Set {
 	return &Set{inner: raw.NSSetFromID[objc.ID](_id)}
 }
 
+// Initializes a newly allocated set and adds to it members of another given set.
+//
 // NewSetWithSetCopyItems creates a new [Set].
 func NewSetWithSetCopyItems(set *raw.NSSet[objc.ID], flag bool) *Set {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSet")), objc.RegisterName("alloc"))
@@ -71,6 +81,8 @@ func NewSetWithSetCopyItems(set *raw.NSSet[objc.ID], flag bool) *Set {
 	return &Set{inner: raw.NSSetFromID[objc.ID](_id)}
 }
 
+// Initializes a newly allocated set with the objects that are contained in a given array.
+//
 // NewSetWithArray creates a new [Set].
 func NewSetWithArray(array *raw.NSArray[objc.ID]) *Set {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSet")), objc.RegisterName("alloc"))
@@ -84,11 +96,15 @@ func (x *Set) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw
 	return x
 }
 
+// Determines whether a given object is present in the set, and returns that object if it is.
+//
 // Member calls the underlying Member.
 func (x *Set) Member(object objc.ID) objc.ID {
 	return x.inner.Member(object)
 }
 
+// Returns an enumerator object that lets you access each object in the set.
+//
 // ObjectEnumerator calls the underlying ObjectEnumerator.
 func (x *Set) ObjectEnumerator() *raw.NSEnumerator[objc.ID] {
 	return x.inner.ObjectEnumerator()
@@ -99,16 +115,22 @@ func (x *Set) Count() uint {
 	return x.inner.Count()
 }
 
+// Returns one of the objects in the set, or nil if the set contains no objects.
+//
 // AnyObject calls the underlying AnyObject.
 func (x *Set) AnyObject() objc.ID {
 	return x.inner.AnyObject()
 }
 
+// Returns a Boolean value that indicates whether a given object is present in the set.
+//
 // ContainsObject calls the underlying ContainsObject.
 func (x *Set) ContainsObject(anObject objc.ID) bool {
 	return x.inner.ContainsObject(anObject)
 }
 
+// Returns a string that represents the contents of the set, formatted as a property list.
+//
 // DescriptionWithLocale calls the underlying DescriptionWithLocale.
 func (x *Set) DescriptionWithLocale(locale objc.ID) *String {
 	_r := x.inner.DescriptionWithLocale(locale)
@@ -118,61 +140,85 @@ func (x *Set) DescriptionWithLocale(locale objc.ID) *String {
 	return &String{inner: _r}
 }
 
+// Returns a Boolean value that indicates whether at least one object in the receiving set is also present in another given set.
+//
 // IntersectsSet calls the underlying IntersectsSet.
 func (x *Set) IntersectsSet(otherSet *raw.NSSet[objc.ID]) bool {
 	return x.inner.IntersectsSet(otherSet)
 }
 
+// Compares the receiving set to another set.
+//
 // IsEqualToSet calls the underlying IsEqualToSet.
 func (x *Set) IsEqualToSet(otherSet *raw.NSSet[objc.ID]) bool {
 	return x.inner.IsEqualToSet(otherSet)
 }
 
+// Returns a Boolean value that indicates whether every object in the receiving set is also present in another given set.
+//
 // IsSubsetOfSet calls the underlying IsSubsetOfSet.
 func (x *Set) IsSubsetOfSet(otherSet *raw.NSSet[objc.ID]) bool {
 	return x.inner.IsSubsetOfSet(otherSet)
 }
 
+// Sends a message specified by a given selector to each object in the set.
+//
 // MakeObjectsPerformSelector calls the underlying MakeObjectsPerformSelector.
 func (x *Set) MakeObjectsPerformSelector(aSelector objc.SEL) {
 	x.inner.MakeObjectsPerformSelector(aSelector)
 }
 
+// Sends a message specified by a given selector to each object in the set.
+//
 // MakeObjectsPerformSelectorWithObject calls the underlying MakeObjectsPerformSelectorWithObject.
 func (x *Set) MakeObjectsPerformSelectorWithObject(aSelector objc.SEL, argument objc.ID) {
 	x.inner.MakeObjectsPerformSelectorWithObject(aSelector, argument)
 }
 
+// Returns a new set formed by adding a given object to the receiving set.
+//
 // SetByAddingObject calls the underlying SetByAddingObject.
 func (x *Set) SetByAddingObject(anObject objc.ID) *raw.NSSet[objc.ID] {
 	return x.inner.SetByAddingObject(anObject)
 }
 
+// Returns a new set formed by adding the objects in a given set to the receiving set.
+//
 // SetByAddingObjectsFromSet calls the underlying SetByAddingObjectsFromSet.
 func (x *Set) SetByAddingObjectsFromSet(other *raw.NSSet[objc.ID]) *raw.NSSet[objc.ID] {
 	return x.inner.SetByAddingObjectsFromSet(other)
 }
 
+// Returns a new set formed by adding the objects in a given array to the receiving set.
+//
 // SetByAddingObjectsFromArray calls the underlying SetByAddingObjectsFromArray.
 func (x *Set) SetByAddingObjectsFromArray(other *raw.NSArray[objc.ID]) *raw.NSSet[objc.ID] {
 	return x.inner.SetByAddingObjectsFromArray(other)
 }
 
+// Executes a given block using each object in the set.
+//
 // EnumerateObjectsUsing calls the underlying EnumerateObjectsUsing.
 func (x *Set) EnumerateObjectsUsing(block objc.Block) {
 	x.inner.EnumerateObjectsUsing(block)
 }
 
+// Executes a given block using each object in the set, using the specified enumeration options.
+//
 // EnumerateObjectsWithOptionsUsing calls the underlying EnumerateObjectsWithOptionsUsing.
 func (x *Set) EnumerateObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block) {
 	x.inner.EnumerateObjectsWithOptionsUsing(raw.NSEnumerationOptions(opts), block)
 }
 
+// Returns a set of objects that pass a test in a given block.
+//
 // ObjectsPassingTest calls the underlying ObjectsPassingTest.
 func (x *Set) ObjectsPassingTest(predicate objc.Block) *raw.NSSet[objc.ID] {
 	return x.inner.ObjectsPassingTest(predicate)
 }
 
+// Returns a set of objects that pass a test in a given block, using the specified enumeration options.
+//
 // ObjectsWithOptionsPassingTest calls the underlying ObjectsWithOptionsPassingTest.
 func (x *Set) ObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *raw.NSSet[objc.ID] {
 	return x.inner.ObjectsWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
@@ -183,11 +229,15 @@ func (x *Set) AllObjects() *raw.NSArray[objc.ID] {
 	return x.inner.AllObjects()
 }
 
+// Returns an array of the set’s content sorted as specified by a given array of sort descriptors.
+//
 // SortedArrayUsingDescriptors calls the underlying SortedArrayUsingDescriptors.
 func (x *Set) SortedArrayUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor]) *raw.NSArray[objc.ID] {
 	return x.inner.SortedArrayUsingDescriptors(sortDescriptors)
 }
 
+// Evaluates a given predicate against each object in the receiving set and returns a new set containing the objects for which the predicate returns true.
+//
 // FilteredSetUsingPredicate calls the underlying FilteredSetUsingPredicate.
 func (x *Set) FilteredSetUsingPredicate(predicate *raw.NSPredicate) *raw.NSSet[objc.ID] {
 	return x.inner.FilteredSetUsingPredicate(predicate)

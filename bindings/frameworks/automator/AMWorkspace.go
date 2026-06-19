@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A workspace for running an Automator workflow.
+//
 // Apple documentation: https://developer.apple.com/documentation/automator/amworkspace
 type AMWorkspace struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func AMWorkspaceFromID(id objc.ID) *AMWorkspace {
 	return o
 }
 
+// Loads and runs the specified workflow file.
 func (o *AMWorkspace) RunWorkflowAtPathWithInputError(path *foundation.NSString, input objc.ID) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMWorkspaceSelRunWorkflowAtPathWithInputError, path.Ptr(), input, unsafe.Pointer(&_nsErr))

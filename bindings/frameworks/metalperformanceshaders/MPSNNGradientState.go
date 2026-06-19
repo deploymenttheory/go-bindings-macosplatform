@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class representing the state of a gradient kernel when it was encoded.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnngradientstate
 type MPSNNGradientState struct {
 	mpscore.MPSState

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A specification of what traffic to route through a transparent proxy.
+//
 // NETransparentProxyNetworkSettings wraps [raw.NETransparentProxyNetworkSettings] with a fluent Go API.
 type NETransparentProxyNetworkSettings struct {
 	inner *raw.NETransparentProxyNetworkSettings
@@ -40,7 +42,7 @@ func NewNETransparentProxyNetworkSettings() *NETransparentProxyNetworkSettings {
 	return &NETransparentProxyNetworkSettings{inner: raw.NETransparentProxyNetworkSettingsFromID(_id)}
 }
 
-// @property includedNetworkRules @discussion An array of NENetworkRule objects that collectively specify the traffic that will be routed through the transparent proxy. The following restrictions apply to each NENetworkRule in this list: Restrictions for rules with an address endpoint: If the port string of the endpoint is "0" or is the empty string, then the address of the endpoint must be a non-wildcard address (i.e. "0.0.0.0" or "::"). If the address is a wildcard address (i.e. "0.0.0.0" or "::"), then the port string of the endpoint must be non-empty and must not be "0". A port string of "53" is not allowed. Destination Domain-based rules must be used to match DNS traffic. The matchLocalNetwork property must be nil. The matchDirection property must be NETrafficDirectionOutbound.
+// An array of rules that collectively specify what traffic to route through the transparent proxy.
 //
 // WithIncludedNetworkRules sets the collection, converting the Go slice to an NSArray.
 func (x *NETransparentProxyNetworkSettings) WithIncludedNetworkRules(items ...*raw.NENetworkRule) *NETransparentProxyNetworkSettings {
@@ -63,7 +65,7 @@ func (x *NETransparentProxyNetworkSettings) WithIncludedNetworkRules(items ...*r
 	return x
 }
 
-// @property excludedNetworkRules @discussion An array of NENetworkRule objects that collectively specify the traffic that will not be routed through the transparent proxy. The following restrictions apply to each NENetworkRule in this list: Restrictions for rules with an address endpoint: If the port string of the endpoint is "0" or is the empty string, then the address of the endpoint must be a non-wildcard address (i.e. "0.0.0.0" or "::"). If the address is a wildcard address (i.e. "0.0.0.0" or "::"), then the port string of the endpoint must be non-empty and must not be "0". A port string of "53" is not allowed. Destination Domain-based rules must be used to match DNS traffic. The matchLocalNetwork property must be nil. The matchDirection property must be NETrafficDirectionOutbound.
+// An array of rules that collectively specify what traffic to not route through the transparent proxy.
 //
 // WithExcludedNetworkRules sets the collection, converting the Go slice to an NSArray.
 func (x *NETransparentProxyNetworkSettings) WithExcludedNetworkRules(items ...*raw.NENetworkRule) *NETransparentProxyNetworkSettings {
@@ -86,7 +88,7 @@ func (x *NETransparentProxyNetworkSettings) WithExcludedNetworkRules(items ...*r
 	return x
 }
 
-// @property DNSSettings @discussion An NEDNSSettings object that contains the desired tunnel DNS settings.
+// The tunnel DNS settings.
 //
 // WithDNSSettings sets the dNSSettings property and returns the receiver for chaining.
 func (x *NETransparentProxyNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NETransparentProxyNetworkSettings {
@@ -94,7 +96,7 @@ func (x *NETransparentProxyNetworkSettings) WithDNSSettings(dNSSettings NEDNSSet
 	return x
 }
 
-// @property proxySettings @discussion An NEProxySettings object that contains the desired tunnel proxy settings.
+// The tunnel HTTP proxy settings.
 //
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
 func (x *NETransparentProxyNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NETransparentProxyNetworkSettings {

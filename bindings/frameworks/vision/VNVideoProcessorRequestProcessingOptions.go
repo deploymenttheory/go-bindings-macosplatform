@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines a video processor’s configuration options.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnvideoprocessorrequestprocessingoptions
 type VNVideoProcessorRequestProcessingOptions struct {
 	foundation.NSObject

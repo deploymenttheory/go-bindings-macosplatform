@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The settings for creating or updating a machine learning model.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmodelconfiguration
 type MLModelConfiguration struct {
 	foundation.NSObject
@@ -100,12 +102,15 @@ func (o *MLModelConfiguration) SetPreferredMetalDevice(preferredMetalDevice meta
 }
 
 func (o *MLModelConfiguration) Parameters() *foundation.NSDictionary[*MLParameterKey, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*MLParameterKey, objc.ID]](o.Ptr(), _mLModelConfigurationSelParameters)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelConfigurationSelParameters)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*MLParameterKey, objc.ID](_ret)
 }
 
 func (o *MLModelConfiguration) SetParameters(parameters *foundation.NSDictionary[*MLParameterKey, objc.ID]) {
-	o.Ptr().Send(_mLModelConfigurationSelSetParameters, parameters)
+	o.Ptr().Send(_mLModelConfigurationSelSetParameters, parameters.Ptr())
 }
 
 func (o *MLModelConfiguration) FunctionName() *foundation.NSString {

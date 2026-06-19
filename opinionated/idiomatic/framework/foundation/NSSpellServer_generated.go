@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A server that your app uses to provide a spell checker service to other apps running in the system.
+//
 // SpellServer wraps [raw.NSSpellServer] with a fluent Go API.
 type SpellServer struct {
 	inner *raw.NSSpellServer
@@ -36,6 +38,8 @@ func NewSpellServer() *SpellServer {
 	return &SpellServer{inner: raw.NSSpellServerFromID(_id)}
 }
 
+// Returns the receiver’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SpellServer) WithDelegate(delegate raw.NSSpellServerDelegate) *SpellServer {
 	x.inner.SetDelegate(delegate)
@@ -48,16 +52,22 @@ func (x *SpellServer) WithScriptingProperties(scriptingProperties *raw.NSDiction
 	return x
 }
 
+// Notifies the receiver of a language your spelling checker can check.
+//
 // RegisterLanguageByVendor calls the underlying RegisterLanguageByVendor.
 func (x *SpellServer) RegisterLanguageByVendor(language string, vendor string) bool {
 	return x.inner.RegisterLanguageByVendor(foundation.NSStringStringWithUTF8String(language), foundation.NSStringStringWithUTF8String(vendor))
 }
 
+// Indicates whether a given word is in the user’s list of learned words or the document’s list of words to ignore.
+//
 // IsWordInUserDictionariesCaseSensitive calls the underlying IsWordInUserDictionariesCaseSensitive.
 func (x *SpellServer) IsWordInUserDictionariesCaseSensitive(word string, flag bool) bool {
 	return x.inner.IsWordInUserDictionariesCaseSensitive(foundation.NSStringStringWithUTF8String(word), flag)
 }
 
+// Causes the receiver to start listening for spell-checking requests.
+//
 // Run calls the underlying Run.
 func (x *SpellServer) Run() {
 	x.inner.Run()

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that provides simple text layout and rendering of plain or attributed strings.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/catextlayer
 type CATextLayer struct {
 	CALayer

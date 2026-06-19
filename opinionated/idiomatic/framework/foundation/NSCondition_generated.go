@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A condition variable whose semantics follow those used for POSIX-style conditions.
+//
 // Condition wraps [raw.NSCondition] with a fluent Go API.
 type Condition struct {
 	inner *raw.NSCondition
@@ -36,6 +38,8 @@ func NewCondition() *Condition {
 	return &Condition{inner: raw.NSConditionFromID(_id)}
 }
 
+// The name of the condition.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Condition) WithName(name string) *Condition {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
@@ -48,21 +52,29 @@ func (x *Condition) WithScriptingProperties(scriptingProperties *raw.NSDictionar
 	return x
 }
 
+// Blocks the current thread until the condition is signaled.
+//
 // Wait calls the underlying Wait.
 func (x *Condition) Wait() {
 	x.inner.Wait()
 }
 
+// Blocks the current thread until the condition is signaled or the specified time limit is reached.
+//
 // WaitUntilDate calls the underlying WaitUntilDate.
 func (x *Condition) WaitUntilDate(limit *raw.NSDate) bool {
 	return x.inner.WaitUntilDate(limit)
 }
 
+// Signals the condition, waking up one thread waiting on it.
+//
 // Signal calls the underlying Signal.
 func (x *Condition) Signal() {
 	x.inner.Signal()
 }
 
+// Signals the condition, waking up all threads waiting on it.
+//
 // Broadcast calls the underlying Broadcast.
 func (x *Condition) Broadcast() {
 	x.inner.Broadcast()

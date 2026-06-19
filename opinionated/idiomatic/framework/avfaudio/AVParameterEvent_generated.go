@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a parameter event on a music track’s destination.
+//
 // ParameterEvent wraps [raw.AVParameterEvent] with a fluent Go API.
 type ParameterEvent struct {
 	inner *raw.AVParameterEvent
@@ -29,7 +31,7 @@ func ParameterEventFromID(id objc.ID) *ParameterEvent {
 	return &ParameterEvent{inner: raw.AVParameterEventFromID(id)}
 }
 
-// @method initWithParameterID:scope:element:value @abstract Initialize the event with the parameter ID, scope, element, and value for the parameter to be set. @param parameterID The ID of the parameter (see AudioUnitParameterID). @param scope The audio unit scope for the parameter (see AudioUnitScope). @param element The element index within the scope (see AudioUnitElement). @param value The value of the parameter to be set.  Range:  Dependent on parameter.
+// Creates an event with a parameter identifier, scope, element, and value for the parameter to set.
 //
 // NewParameterEventWithParameterIDScopeElementValue creates a new [ParameterEvent].
 func NewParameterEventWithParameterIDScopeElementValue(parameterID uint, scope uint, element uint, value float32) *ParameterEvent {
@@ -38,7 +40,7 @@ func NewParameterEventWithParameterIDScopeElementValue(parameterID uint, scope u
 	return &ParameterEvent{inner: raw.AVParameterEventFromID(_id)}
 }
 
-// @property parameterID The ID of the parameter (see AudioUnitParameterID).
+// The identifier of the parameter.
 //
 // WithParameterID sets the parameterID property and returns the receiver for chaining.
 func (x *ParameterEvent) WithParameterID(parameterID uint) *ParameterEvent {
@@ -46,7 +48,7 @@ func (x *ParameterEvent) WithParameterID(parameterID uint) *ParameterEvent {
 	return x
 }
 
-// @property scope The audio unit scope for the parameter (see AudioUnitScope).
+// The audio unit scope for the parameter.
 //
 // WithScope sets the scope property and returns the receiver for chaining.
 func (x *ParameterEvent) WithScope(scope uint) *ParameterEvent {
@@ -54,7 +56,7 @@ func (x *ParameterEvent) WithScope(scope uint) *ParameterEvent {
 	return x
 }
 
-// @property element The element index within the scope (see AudioUnitElement).
+// The element index in the scope.
 //
 // WithElement sets the element property and returns the receiver for chaining.
 func (x *ParameterEvent) WithElement(element uint) *ParameterEvent {
@@ -62,7 +64,7 @@ func (x *ParameterEvent) WithElement(element uint) *ParameterEvent {
 	return x
 }
 
-// @property value The value of the parameter to be set.  Range:  Dependent on parameter.
+// The value of the parameter to set.
 //
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *ParameterEvent) WithValue(value float32) *ParameterEvent {

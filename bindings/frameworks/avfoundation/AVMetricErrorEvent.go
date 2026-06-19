@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a metric event when an error occurs.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetricerrorevent
 type AVMetricErrorEvent struct {
 	AVMetricEvent

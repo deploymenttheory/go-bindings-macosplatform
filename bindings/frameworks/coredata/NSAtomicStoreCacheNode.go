@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A concrete class that you use to represent basic nodes in a Core Data atomic store.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsatomicstorecachenode
 type NSAtomicStoreCacheNode struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func NSAtomicStoreCacheNodeFromID(id objc.ID) *NSAtomicStoreCacheNode {
 	return o
 }
 
+// Returns a cache node for the given managed object ID.
 func (o *NSAtomicStoreCacheNode) InitWithObjectID(moid *NSManagedObjectID) *NSAtomicStoreCacheNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreCacheNodeSelInitWithObjectID, moid.Ptr())
 	if _ret != 0 {
@@ -50,10 +53,13 @@ func (o *NSAtomicStoreCacheNode) ObjectID() *NSManagedObjectID {
 }
 
 func (o *NSAtomicStoreCacheNode) PropertyCache() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSAtomicStoreCacheNodeSelPropertyCache)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreCacheNodeSelPropertyCache)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMutableDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSAtomicStoreCacheNode) SetPropertyCache(propertyCache *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSAtomicStoreCacheNodeSelSetPropertyCache, propertyCache)
+	o.Ptr().Send(_nSAtomicStoreCacheNodeSelSetPropertyCache, propertyCache.Ptr())
 }

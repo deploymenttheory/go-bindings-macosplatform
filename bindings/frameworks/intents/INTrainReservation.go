@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information that describes a train reservation.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/intrainreservation
 type INTrainReservation struct {
 	INReservation
@@ -33,6 +35,7 @@ func INTrainReservationFromID(id objc.ID) *INTrainReservation {
 	return o
 }
 
+// Creates a train reservation with the specified contents and attributes.
 func (o *INTrainReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatTrainTrip(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], uRL *foundation.NSURL, reservedSeat *INSeat, trainTrip *INTrainTrip) *INTrainReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTrainReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatTrainTrip, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), uRL.Ptr(), reservedSeat.Ptr(), trainTrip.Ptr())
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func (o *INTrainReservation) InitWithItemReferenceReservationNumberBookingTimeRe
 	return INTrainReservationFromID(_ret)
 }
 
+// Creates a new train reservation with the specified contents and attributes.
 func (o *INTrainReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatTrainTrip(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], reservedSeat *INSeat, trainTrip *INTrainTrip) *INTrainReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTrainReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatTrainTrip, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), reservedSeat.Ptr(), trainTrip.Ptr())
 	if _ret != 0 {

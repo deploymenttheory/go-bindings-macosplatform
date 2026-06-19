@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of either a source or destination connection point in the audio engine.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudioconnectionpoint
 type AVAudioConnectionPoint struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func AVAudioConnectionPointFromID(id objc.ID) *AVAudioConnectionPoint {
 	return o
 }
 
-// @method initWithNode:bus: @abstract Create a connection point object. @param node the source or destination node @param bus the output or input bus on the node @discussion If the node is nil, this method fails (returns nil).
+// Creates a connection point object.
 func (o *AVAudioConnectionPoint) InitWithNodeBus(node *AVAudioNode, bus uint) *AVAudioConnectionPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConnectionPointSelInitWithNodeBus, node.Ptr(), bus)
 	if _ret != 0 {

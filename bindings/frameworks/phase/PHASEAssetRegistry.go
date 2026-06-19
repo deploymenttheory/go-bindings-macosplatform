@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A central repository of audio assets.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseassetregistry
 type PHASEAssetRegistry struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func PHASEAssetRegistryFromID(id objc.ID) *PHASEAssetRegistry {
 	return o
 }
 
-// @method registerGlobalMetaParameter:error @abstract Register a global metaparameter with the asset registry. @note This function is synchronous and thread-safe. Clients can safely run this function to register multiple global metaparameters from multiple threads, if required. @param metaParameterDefinition The metaparameter object to register. @param error The error object in case of an error. @return A PHASEGlobalMetaParameterAsset object.
+// Registers a global metaparameter with the asset registry.
 func (o *PHASEAssetRegistry) RegisterGlobalMetaParameterError(metaParameterDefinition *PHASEMetaParameterDefinition) (*PHASEGlobalMetaParameterAsset, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetRegistrySelRegisterGlobalMetaParameterError, metaParameterDefinition.Ptr(), unsafe.Pointer(&_nsErr))
@@ -52,7 +54,7 @@ func (o *PHASEAssetRegistry) RegisterGlobalMetaParameterError(metaParameterDefin
 	return PHASEGlobalMetaParameterAssetFromID(_ret), nil
 }
 
-// @method registerSoundEventAssetWithRootNode:identifier:error @abstract Register a sound event asset with the asset registry. @note This function is synchronous and thread-safe. Clients can safely run this function to register multiple sound event assets from multiple threads, if required. @param rootNode The root node of the sound event asset to register. @param identifier An identifier that uniquely represents this sound event asset. Nil generates an automatic identifier. @param error The error object in case of an error @return A PHASESoundEventNodeAsset object
+// Registers the root node of the sound event asset.
 func (o *PHASEAssetRegistry) RegisterSoundEventAssetWithRootNodeIdentifierError(rootNode *PHASESoundEventNodeDefinition, identifier *foundation.NSString) (*PHASESoundEventNodeAsset, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetRegistrySelRegisterSoundEventAssetWithRootNodeIdentifierError, rootNode.Ptr(), identifier.Ptr(), unsafe.Pointer(&_nsErr))
@@ -65,7 +67,7 @@ func (o *PHASEAssetRegistry) RegisterSoundEventAssetWithRootNodeIdentifierError(
 	return PHASESoundEventNodeAssetFromID(_ret), nil
 }
 
-// @method registerSoundAssetAtURL:identifier:assetType:channelLayout:normalizationMode:error @abstract Register an audio file as a sound asset in the system. @note This function is synchronous and thread-safe. Clients can safely run this function to register multiple sound assets from multiple threads, if required. @param url The URL of the audio file. @param identifier An identifier that uniquely represents this sound event asset. Nil generates an automatic identifier. @param assetType The asset type for this sound asset. @param channelLayout The audio channel layout for this sound asset. If a valid channel layout definition is read from the file being registered, this will override it. If nil is passed as a value for this property, the file must either be mono or stereo, or already contain a vaild channel layout definition. This channel layout must have the same channel count as the audio file being loaded. @param normalizationMode The normalization mode. @param error The error object in case of an error @return A PHASESoundAsset object
+// Loads a sound asset from the argument URL and adds it to the engine’s list of registered assets.
 func (o *PHASEAssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(url *foundation.NSURL, identifier *foundation.NSString, assetType PHASEAssetType, channelLayout *avfaudio.AVAudioChannelLayout, normalizationMode PHASENormalizationMode) (*PHASESoundAsset, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetRegistrySelRegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError, url.Ptr(), identifier.Ptr(), assetType, channelLayout.Ptr(), normalizationMode, unsafe.Pointer(&_nsErr))
@@ -78,7 +80,7 @@ func (o *PHASEAssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLa
 	return PHASESoundAssetFromID(_ret), nil
 }
 
-// @method registerSoundAssetWithData:identifier:format:normalizationMode:error @abstract Register audio data as a sound asset in the system. @note This function is synchronous and thread-safe. Clients can safely run this function to register multiple sound assets from multiple threads, if required. @param data A buffer containing the audio data to register as a sound asset. Audio data must either be a single PCM buffer of interleaved channels or multiple deinterleaved PCM buffers per channel packed back to back. @param identifier The identifier to assign to this sound asset. Nil generates an automatic identifier. @param format The AVAudioFormat object that describes the audio data in the buffer. @param normalizationMode The normalization mode. @param error The error object in case of an error. @return A PHASESoundAsset object.
+// Loads a sound asset from memory and adds it to the engine’s list of registered assets.
 func (o *PHASEAssetRegistry) RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data *foundation.NSData, identifier *foundation.NSString, format *avfaudio.AVAudioFormat, normalizationMode PHASENormalizationMode) (*PHASESoundAsset, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetRegistrySelRegisterSoundAssetWithDataIdentifierFormatNormalizationModeError, data.Ptr(), identifier.Ptr(), format.Ptr(), normalizationMode, unsafe.Pointer(&_nsErr))
@@ -91,7 +93,7 @@ func (o *PHASEAssetRegistry) RegisterSoundAssetWithDataIdentifierFormatNormaliza
 	return PHASESoundAssetFromID(_ret), nil
 }
 
-// @method unregisterAssetWithIdentifier:completion: @abstract Unregister and unload an asset. @param identifier The identifier of the PHASEAsset object to unregister @param handler An optional completion block that will be called when the asset has been unregistered. Once you receive this callback, it's safe to deallocate external resources, if applicable.
+// Deallocates system memory for a given asset and removes it from the engine’s list of registered assets.
 func (o *PHASEAssetRegistry) UnregisterAssetWithIdentifierCompletion(identifier *foundation.NSString, handler func(bool)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -103,7 +105,7 @@ func (o *PHASEAssetRegistry) UnregisterAssetWithIdentifierCompletion(identifier 
 	o.Ptr().Send(_pHASEAssetRegistrySelUnregisterAssetWithIdentifierCompletion, identifier.Ptr(), __block_handler)
 }
 
-// @method assetForIdentifier @abstract Finds an asset in the asset registry, given an identifier. @param identifier The identifier of this asset @return A PHASEAsset object, or nil if one could not be found.
+// Provides the asset named with the designated identifier.
 func (o *PHASEAssetRegistry) AssetForIdentifier(identifier *foundation.NSString) *PHASEAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetRegistrySelAssetForIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -113,6 +115,9 @@ func (o *PHASEAssetRegistry) AssetForIdentifier(identifier *foundation.NSString)
 }
 
 func (o *PHASEAssetRegistry) GlobalMetaParameters() *foundation.NSDictionary[*foundation.NSString, *PHASEMetaParameter] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *PHASEMetaParameter]](o.Ptr(), _pHASEAssetRegistrySelGlobalMetaParameters)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAssetRegistrySelGlobalMetaParameters)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *PHASEMetaParameter](_ret)
 }

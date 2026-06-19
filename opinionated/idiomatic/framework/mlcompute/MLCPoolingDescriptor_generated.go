@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object you use to create a pooling layer.
+//
 // PoolingDescriptor wraps [raw.MLCPoolingDescriptor] with a fluent Go API.
 type PoolingDescriptor struct {
 	inner *raw.MLCPoolingDescriptor

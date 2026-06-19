@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Data that’s protected by a persisted right.
+//
 // Apple documentation: https://developer.apple.com/documentation/localauthentication/lasecret
 type LASecret struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func LASecretFromID(id objc.ID) *LASecret {
 	return o
 }
 
-// @brief Fetch stored data if any @param handler Completion handler invoked with a generic secret stored along with the right or an error if no secret is found or the fetch operation fails.
+// Retrieves data stored in a secret.
 func (o *LASecret) LoadDataWithCompletion(handler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {

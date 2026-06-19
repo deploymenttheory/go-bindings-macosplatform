@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A proxy for a Safari window.
+//
 // Apple documentation: https://developer.apple.com/documentation/safariservices/sfsafariwindow
 type SFSafariWindow struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func SFSafariWindowFromID(id objc.ID) *SFSafariWindow {
 	return o
 }
 
-// Calls the completion handler with the active tab in the window.
+// Calls the completion handler with the active tab in the target window.
 func (o *SFSafariWindow) GetActiveTabWithCompletionHandler(completionHandler func(*SFSafariTab)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -64,7 +66,7 @@ func (o *SFSafariWindow) GetAllTabsWithCompletionHandler(completionHandler func(
 	o.Ptr().Send(_sFSafariWindowSelGetAllTabsWithCompletionHandler, __block_completionHandler)
 }
 
-// This will open a tab at the end of the tab list. The completion handler is called when the tab has been opened.
+// Opens a tab at the end of the tab bar.
 func (o *SFSafariWindow) OpenTabWithURLMakeActiveIfPossibleCompletionHandler(url *foundation.NSURL, activateTab bool, completionHandler func(*SFSafariTab)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -79,7 +81,7 @@ func (o *SFSafariWindow) OpenTabWithURLMakeActiveIfPossibleCompletionHandler(url
 	o.Ptr().Send(_sFSafariWindowSelOpenTabWithURLMakeActiveIfPossibleCompletionHandler, url.Ptr(), activateTab, __block_completionHandler)
 }
 
-// Gets the extension’s toolbar item in this window.
+// Gets the extension’s toolbar item from the target window.
 func (o *SFSafariWindow) GetToolbarItemWithCompletionHandler(completionHandler func(*SFSafariToolbarItem)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

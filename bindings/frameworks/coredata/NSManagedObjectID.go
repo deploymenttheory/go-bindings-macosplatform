@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A compact, universal identifier for a managed object.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsmanagedobjectid
 type NSManagedObjectID struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func NSManagedObjectIDFromID(id objc.ID) *NSManagedObjectID {
 	return o
 }
 
+// Returns a URI that provides an archiveable reference to the object for the object ID.
 func (o *NSManagedObjectID) URIRepresentation() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectIDSelURIRepresentation)
 	if _ret != 0 {

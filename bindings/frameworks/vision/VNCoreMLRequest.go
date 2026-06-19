@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An image-analysis request that uses a Core ML model to process images.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vncoremlrequest
 type VNCoreMLRequest struct {
 	VNImageBasedRequest
@@ -35,7 +37,7 @@ func VNCoreMLRequestFromID(id objc.ID) *VNCoreMLRequest {
 	return o
 }
 
-// @brief Create a new request with a model. @param model		The VNCoreMLModel to be used.
+// Creates a model container to use with an image analysis request based on the model you provide.
 func (o *VNCoreMLRequest) InitWithModel(model *VNCoreMLModel) *VNCoreMLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNCoreMLRequestSelInitWithModel, model.Ptr())
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *VNCoreMLRequest) InitWithModel(model *VNCoreMLModel) *VNCoreMLRequest {
 	return VNCoreMLRequestFromID(_ret)
 }
 
-// @brief Create a new request with a model. @param model		The VNCoreMLModel to be used. @param	completionHandler	The block that is invoked when the request has been performed.
+// Creates a model container to use with an image analysis request based on the model you provide, with an optional completion handler.
 func (o *VNCoreMLRequest) InitWithModelCompletionHandler(model *VNCoreMLModel, completionHandler func(*VNRequest, unsafe.Pointer)) *VNCoreMLRequest {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A layer that normalizes a batch of inputs.
+//
 // BatchNormalizationLayer wraps [raw.MLCBatchNormalizationLayer] with a fluent Go API.
 type BatchNormalizationLayer struct {
 	inner *raw.MLCBatchNormalizationLayer
@@ -36,7 +38,7 @@ func NewBatchNormalizationLayer() *BatchNormalizationLayer {
 	return &BatchNormalizationLayer{inner: raw.MLCBatchNormalizationLayerFromID(_id)}
 }
 
-// @property   label @abstract   A string to help identify this object.
+// A string that helps identify this layer.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *BatchNormalizationLayer) WithLabel(label string) *BatchNormalizationLayer {
@@ -44,7 +46,7 @@ func (x *BatchNormalizationLayer) WithLabel(label string) *BatchNormalizationLay
 	return x
 }
 
-// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 //
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *BatchNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *BatchNormalizationLayer {

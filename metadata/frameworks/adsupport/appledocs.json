@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "framework": "AdSupport",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "ASIdentifierManager": {
+      "doc": "The object that contains the advertising identifier.",
+      "url": "https://developer.apple.com/documentation/adsupport/asidentifiermanager"
+    }
+  },
+  "methods": {
+    "ASIdentifierManager": {
+      "+sharedManager": {
+        "doc": "The shared instance of the identifier manager class.",
+        "url": "https://developer.apple.com/documentation/adsupport/asidentifiermanager/shared()"
+      }
+    }
+  },
+  "properties": {
+    "ASIdentifierManager": {
+      "advertisingIdentifier": {
+        "doc": "The UUID that is specific to a device.",
+        "url": "https://developer.apple.com/documentation/adsupport/asidentifiermanager/advertisingidentifier"
+      },
+      "advertisingTrackingEnabled": {
+        "doc": "A Boolean value that indicates whether the user has limited ad tracking enabled.",
+        "url": "https://developer.apple.com/documentation/adsupport/asidentifiermanager/isadvertisingtrackingenabled"
+      }
+    }
+  }
+}

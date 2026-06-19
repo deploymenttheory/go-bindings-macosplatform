@@ -34,19 +34,25 @@ func MTRGeneralDiagnosticsClusterHardwareFaultChangeEventFromID(id objc.ID) *MTR
 }
 
 func (o *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Current() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelCurrent)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelCurrent)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetCurrent(current *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelSetCurrent, current)
+	o.Ptr().Send(_mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelSetCurrent, current.Ptr())
 }
 
 func (o *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Previous() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelPrevious)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelPrevious)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetPrevious(previous *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelSetPrevious, previous)
+	o.Ptr().Send(_mTRGeneralDiagnosticsClusterHardwareFaultChangeEventSelSetPrevious, previous.Ptr())
 }

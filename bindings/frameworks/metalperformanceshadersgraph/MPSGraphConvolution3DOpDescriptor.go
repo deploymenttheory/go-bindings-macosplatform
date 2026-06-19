@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that describes the properties of a 3D-convolution operator.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphconvolution3dopdescriptor
 type MPSGraphConvolution3DOpDescriptor struct {
 	MPSGraphObject
@@ -63,7 +65,7 @@ func MPSGraphConvolution3DOpDescriptorFromID(id objc.ID) *MPSGraphConvolution3DO
 	return o
 }
 
-// Creates a convolution descriptor with given values for parameters. - Parameters: - strideInX: See “strideInX“ property. - strideInY: See “strideInY“ property. - strideInZ: See “strideInZ“ property. - dilationRateInX: See “dilationRateInX“ property. - dilationRateInY: See “dilationRateInY“ property. - dilationRateInZ: See “dilationRateInZ“ property. - groups: See “groups“ property. - paddingLeft: See “paddingLeft“ property. - paddingRight: See “paddingRight“ property. - paddingTop: See “paddingTop“ property. - paddingBottom: See “paddingBottom“ property. - paddingFront: See “paddingFront“ property. - paddingBack: See “paddingBack“ property. - paddingStyle: See “paddingStyle“ property. - dataLayout: See “dataLayout“ property. - weightsLayout: See “weightsLayout“ property. - Returns: The `MPSGraphConvolution3DOpDescriptor` on autoreleasepool.
+// Creates a convolution descriptor with given values for parameters.
 func MPSGraphConvolution3DOpDescriptorDescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBackPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, strideInZ uint, dilationRateInX uint, dilationRateInY uint, dilationRateInZ uint, groups uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingFront uint, paddingBack uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout, weightsLayout MPSGraphTensorNamedDataLayout) *MPSGraphConvolution3DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphConvolution3DOpDescriptor), _mPSGraphConvolution3DOpDescriptorSelDescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBackPaddingStyleDataLayoutWeightsLayout, strideInX, strideInY, strideInZ, dilationRateInX, dilationRateInY, dilationRateInZ, groups, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingFront, paddingBack, paddingStyle, dataLayout, weightsLayout)
 	if _ret != 0 {
@@ -72,7 +74,7 @@ func MPSGraphConvolution3DOpDescriptorDescriptorWithStrideInXStrideInYStrideInZD
 	return MPSGraphConvolution3DOpDescriptorFromID(_ret)
 }
 
-// Creates a convolution descriptor with given values for parameters. - Parameters: - strideInX: See “strideInX“ property. - strideInY: See “strideInY“ property. - strideInZ: See “strideInZ“ property. - dilationRateInX: See “dilationRateInX“ property. - dilationRateInY: See “dilationRateInY“ property. - dilationRateInZ: See “dilationRateInZ“ property. - groups: See “groups“ property. - paddingStyle: See “paddingStyle“ property. - dataLayout: See “dataLayout“ property. - weightsLayout: See “weightsLayout“ property. - Returns: The `MPSGraphConvolution3DOpDescriptor` on autoreleasepool.
+// Creates a convolution descriptor with given values for parameters.
 func MPSGraphConvolution3DOpDescriptorDescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, strideInZ uint, dilationRateInX uint, dilationRateInY uint, dilationRateInZ uint, groups uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout, weightsLayout MPSGraphTensorNamedDataLayout) *MPSGraphConvolution3DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphConvolution3DOpDescriptor), _mPSGraphConvolution3DOpDescriptorSelDescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingStyleDataLayoutWeightsLayout, strideInX, strideInY, strideInZ, dilationRateInX, dilationRateInY, dilationRateInZ, groups, paddingStyle, dataLayout, weightsLayout)
 	if _ret != 0 {
@@ -81,7 +83,7 @@ func MPSGraphConvolution3DOpDescriptorDescriptorWithStrideInXStrideInYStrideInZD
 	return MPSGraphConvolution3DOpDescriptorFromID(_ret)
 }
 
-// Sets the left, right, top, bottom, front, and back padding values. - Parameters: - paddingLeft: See “paddingLeft“ property. - paddingRight: See “paddingRight“ property. - paddingTop: See “paddingTop“ property. - paddingBottom: See “paddingBottom“ property. - paddingFront: See “paddingFront“ property. - paddingBottom: See “paddingBottom“ property.
+// Sets the left, right, top, bottom, front, and back padding values.
 func (o *MPSGraphConvolution3DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBack(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingFront uint, paddingBack uint) {
 	o.Ptr().Send(_mPSGraphConvolution3DOpDescriptorSelSetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBack, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingFront, paddingBack)
 }

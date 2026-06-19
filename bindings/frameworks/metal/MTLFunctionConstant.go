@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A constant that specializes the behavior of a shader.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlfunctionconstant
 type MTLFunctionConstant struct {
 	foundation.NSObject

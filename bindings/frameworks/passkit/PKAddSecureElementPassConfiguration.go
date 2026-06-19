@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes the configuration of a secure element payment pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkaddsecureelementpassconfiguration
 type PKAddSecureElementPassConfiguration struct {
 	foundation.NSObject

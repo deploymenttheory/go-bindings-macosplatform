@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container that your extension fills to provide credentials through the QuickType bar.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystore
 type ASCredentialIdentityStore struct {
 	foundation.NSObject
@@ -41,7 +43,7 @@ func ASCredentialIdentityStoreFromID(id objc.ID) *ASCredentialIdentityStore {
 	return o
 }
 
-// @abstract Get the state of the credential identity store. @param completion completion handler to be called with the current state of the store. @discussion Call this method to find out the current state of the store before attempting to call other store methods. Use the provided ASCredentialIdentityStoreState to find out if the store is enabled and whether it supports incremental updates.
+// Gets the state of the credential identity store.
 func (o *ASCredentialIdentityStore) GetCredentialIdentityStoreStateWithCompletion(completion func(*ASCredentialIdentityStoreState)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -56,7 +58,7 @@ func (o *ASCredentialIdentityStore) GetCredentialIdentityStoreStateWithCompletio
 	o.Ptr().Send(_aSCredentialIdentityStoreSelGetCredentialIdentityStoreStateWithCompletion, __block_completion)
 }
 
-// @abstract List the currently saved credential identities. @param serviceIdentifier Specify a service identifier to get only credential identities for that service. Pass nil to get credential identities for all services. @param credentialIdentityTypes Specify one or more types to get only credential identities of those types. Pass ASCredentialIdentityTypesAll to get credential identities of all types. @discussion Call this method to get a list of all credential identities saved in the store for your extension.
+// Retrieves an array of all previously saved credential identities in the store for your extension.
 func (o *ASCredentialIdentityStore) GetCredentialIdentitiesForServiceCredentialIdentityTypesCompletionHandler(serviceIdentifier *ASCredentialServiceIdentifier, credentialIdentityTypes ASCredentialIdentityTypes, completionHandler func(*foundation.NSArray[ASCredentialIdentity])) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -71,7 +73,7 @@ func (o *ASCredentialIdentityStore) GetCredentialIdentitiesForServiceCredentialI
 	o.Ptr().Send(_aSCredentialIdentityStoreSelGetCredentialIdentitiesForServiceCredentialIdentityTypesCompletionHandler, serviceIdentifier.Ptr(), credentialIdentityTypes, __block_completionHandler)
 }
 
-// @abstract Save the given credential identities to the store. @param credentialIdentities array of ASPasswordCredentialIdentity objects to save to the store. @param completion optional completion handler to be called after adding the credential identities. If the operation fails, an error with domain ASCredentialIdentityStoreErrorDomain will be provided and none of the objects in credentialIdentities will be saved to the store. @discussion If the store supports incremental updates, call this method to add new credential identities since the last time the store was updated. Otherwise, call this method to pass all credential identities. If some credential identities in credentialIdentities already exist in the store, they will be replaced by those from credentialIdentities.
+// Saves the given credential identities to the store.
 // Deprecated: since macOS 14.0.
 func (o *ASCredentialIdentityStore) SaveCredentialIdentitiesCompletion(credentialIdentities *foundation.NSArray[*ASPasswordCredentialIdentity], completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
@@ -84,7 +86,7 @@ func (o *ASCredentialIdentityStore) SaveCredentialIdentitiesCompletion(credentia
 	o.Ptr().Send(_aSCredentialIdentityStoreSelSaveCredentialIdentitiesCompletion, credentialIdentities.Ptr(), __block_completion)
 }
 
-// @abstract Save the given credential identities to the store. @param credentialIdentities array of ASCredentialIdentity objects to save to the store. @param completion optional completion handler to be called after adding the credential identities. If the operation fails, an error with domain ASCredentialIdentityStoreErrorDomain will be provided and none of the objects in credentialIdentities will be saved to the store. @discussion If the store supports incremental updates, call this method to add new credential identities since the last time the store was updated. Otherwise, call this method to pass all credential identities. If some credential identities in credentialIdentities already exist in the store, they will be replaced by those from credentialIdentities.
+// Save the supplied credential identities to the store.
 func (o *ASCredentialIdentityStore) SaveCredentialIdentityEntriesCompletion(credentialIdentities *foundation.NSArray[ASCredentialIdentity], completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -96,7 +98,7 @@ func (o *ASCredentialIdentityStore) SaveCredentialIdentityEntriesCompletion(cred
 	o.Ptr().Send(_aSCredentialIdentityStoreSelSaveCredentialIdentityEntriesCompletion, credentialIdentities.Ptr(), __block_completion)
 }
 
-// @abstract Remove the given credential identities from the store. @param credentialIdentities array of ASPasswordCredentialIdentity objects to remove from the store. @param completion optional completion handler to be called after removing the credential identities. If the operation fails, an error with domain ASCredentialIdentityStoreErrorDomain will be provided and none of the objects in credentialIdentities will be removed from the store. @discussion Use this method only if the store supports incremental updates to remove previously added credentials to the store.
+// Removes the given credential identities from the store.
 // Deprecated: since macOS 14.0.
 func (o *ASCredentialIdentityStore) RemoveCredentialIdentitiesCompletion(credentialIdentities *foundation.NSArray[*ASPasswordCredentialIdentity], completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
@@ -109,7 +111,7 @@ func (o *ASCredentialIdentityStore) RemoveCredentialIdentitiesCompletion(credent
 	o.Ptr().Send(_aSCredentialIdentityStoreSelRemoveCredentialIdentitiesCompletion, credentialIdentities.Ptr(), __block_completion)
 }
 
-// @abstract Remove the given credential identities from the store. @param credentialIdentities array of ASCredentialIdentity objects to remove from the store. @param completion optional completion handler to be called after removing the credential identities. If the operation fails, an error with domain ASCredentialIdentityStoreErrorDomain will be provided and none of the objects in credentialIdentities will be removed from the store. @discussion Use this method only if the store supports incremental updates to remove previously added credentials to the store.
+// Remove the given credential identities from the store.
 func (o *ASCredentialIdentityStore) RemoveCredentialIdentityEntriesCompletion(credentialIdentities *foundation.NSArray[ASCredentialIdentity], completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -121,7 +123,7 @@ func (o *ASCredentialIdentityStore) RemoveCredentialIdentityEntriesCompletion(cr
 	o.Ptr().Send(_aSCredentialIdentityStoreSelRemoveCredentialIdentityEntriesCompletion, credentialIdentities.Ptr(), __block_completion)
 }
 
-// @abstract Remove all existing credential identities from the store. @param completion optional completion handler to be called after removing all existing credential identities. If the operation fails, an error with domain ASCredentialIdentityStoreErrorDomain will be provided and none of the existing credential identities will be removed from the store.
+// Removes all existing credential identities from the store.
 func (o *ASCredentialIdentityStore) RemoveAllCredentialIdentitiesWithCompletion(completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -133,7 +135,7 @@ func (o *ASCredentialIdentityStore) RemoveAllCredentialIdentitiesWithCompletion(
 	o.Ptr().Send(_aSCredentialIdentityStoreSelRemoveAllCredentialIdentitiesWithCompletion, __block_completion)
 }
 
-// @abstract Replace existing credential identities with new credential identities. @param newCredentialIdentities array of new credential identity objects to replace the old ones. @param completion an optional completion block to be called after the operation is finished. @discussion This method will delete all existing credential identities that are persisted in the store and replace them with the provided array of credential identities. If the operation fails, an error with domain ASCredentialIdentityStoreErrorDomain will be provided and none of the new credential identities will be saved.
+// Replaces existing credential identities with new credential identities.
 // Deprecated: since macOS 14.0.
 func (o *ASCredentialIdentityStore) ReplaceCredentialIdentitiesWithIdentitiesCompletion(newCredentialIdentities *foundation.NSArray[*ASPasswordCredentialIdentity], completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
@@ -146,7 +148,7 @@ func (o *ASCredentialIdentityStore) ReplaceCredentialIdentitiesWithIdentitiesCom
 	o.Ptr().Send(_aSCredentialIdentityStoreSelReplaceCredentialIdentitiesWithIdentitiesCompletion, newCredentialIdentities.Ptr(), __block_completion)
 }
 
-// @abstract Replace existing credential identities with new credential identities. @param newCredentialIdentities array of new credential identity objects to replace the old ones. @param completion an optional completion block to be called after the operation is finished. @discussion This method will delete all existing credential identities that are persisted in the store and replace them with the provided array of credential identities. If the operation fails, an error with domain ASCredentialIdentityStoreErrorDomain will be provided and none of the new credential identities will be saved.
+// Replaces existing credential identities with new credential identities.
 func (o *ASCredentialIdentityStore) ReplaceCredentialIdentityEntriesCompletion(newCredentialIdentities *foundation.NSArray[ASCredentialIdentity], completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

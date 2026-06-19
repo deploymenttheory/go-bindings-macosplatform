@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of properties that configure a frame interpolator, and a factory method that creates the effect.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor
 type MTLFXFrameInterpolatorDescriptor struct {
 	foundation.NSObject
@@ -54,25 +56,25 @@ func MTLFXFrameInterpolatorDescriptorFromID(id objc.ID) *MTLFXFrameInterpolatorD
 	return o
 }
 
-// Creates a frame interpolator instance for a Metal device. - Parameters: - device: The Metal device that creates the frame interpolator. - Returns: A new frame interpolator instance upon success, or `nil` otherwise.
+// Creates a frame interpolator instance for a Metal device.
 func (o *MTLFXFrameInterpolatorDescriptor) NewFrameInterpolatorWithDevice(device metal.MTLDevice) MTLFXFrameInterpolator {
 	_ret := objc.Send[MTLFXFrameInterpolator](o.Ptr(), _mTLFXFrameInterpolatorDescriptorSelNewFrameInterpolatorWithDevice, device)
 	return _ret
 }
 
-// Creates a frame interpolator instance for a Metal device. - Parameters: - device: The Metal device that creates the frame interpolator. - compiler: A compiler instance this method can use to build pipeline state objects. - Returns: A new frame interpolator instance upon success, or `nil` otherwise.
+// Creates a frame interpolator instance for a Metal device.
 func (o *MTLFXFrameInterpolatorDescriptor) NewFrameInterpolatorWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) MTL4FXFrameInterpolator {
 	_ret := objc.Send[MTL4FXFrameInterpolator](o.Ptr(), _mTLFXFrameInterpolatorDescriptorSelNewFrameInterpolatorWithDeviceCompiler, device, compiler)
 	return _ret
 }
 
-// Queries whether a Metal device supports frame interpolation compatible with a Metal 4 command buffer. - Parameters: - device: The GPU device for which this methods tests support. - Returns: <doc://com.apple.documentation/documentation/swift/true> if the device supports frame interpolation for Metal 4, <doc://com.apple.documentation/documentation/swift/false> otherwise.
+// Queries whether a Metal device supports frame interpolation compatible with a Metal 4 command buffer.
 func MTLFXFrameInterpolatorDescriptorSupportsMetal4FX(device metal.MTLDevice) bool {
 	_ret := objc.Send[bool](objc.ID(_clsMTLFXFrameInterpolatorDescriptor), _mTLFXFrameInterpolatorDescriptorSelSupportsMetal4FX, device)
 	return _ret
 }
 
-// Queries whether a Metal device supports frame interpolation. - Parameters: - device: The GPU device for which this methods tests support. - Returns: <doc://com.apple.documentation/documentation/swift/true> if the device supports frame interpolation, <doc://com.apple.documentation/documentation/swift/false> otherwise.
+// Queries whether a Metal device supports frame interpolation.
 func MTLFXFrameInterpolatorDescriptorSupportsDevice(device metal.MTLDevice) bool {
 	_ret := objc.Send[bool](objc.ID(_clsMTLFXFrameInterpolatorDescriptor), _mTLFXFrameInterpolatorDescriptorSelSupportsDevice, device)
 	return _ret

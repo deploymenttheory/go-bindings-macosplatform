@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that performs a Euclidean distance transform on an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimageeuclideandistancetransform
 type MPSImageEuclideanDistanceTransform struct {
 	mpsimage.MPSUnaryImageKernel
@@ -35,6 +37,7 @@ func MPSImageEuclideanDistanceTransformFromID(id objc.ID) *MPSImageEuclideanDist
 	return o
 }
 
+// Creates a Euclidean distance transform that runs on a specified device.
 func (o *MPSImageEuclideanDistanceTransform) InitWithDevice(device metal.MTLDevice) *MPSImageEuclideanDistanceTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageEuclideanDistanceTransformSelInitWithDevice, device)
 	if _ret != 0 {
@@ -43,7 +46,7 @@ func (o *MPSImageEuclideanDistanceTransform) InitWithDevice(device metal.MTLDevi
 	return MPSImageEuclideanDistanceTransformFromID(_ret)
 }
 
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+// Creates a Euclidean distance transform that uses a specified decoder for your data and runs on a specified device.
 func (o *MPSImageEuclideanDistanceTransform) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageEuclideanDistanceTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageEuclideanDistanceTransformSelInitWithCoderDevice, aDecoder.Ptr(), device)
 	if _ret != 0 {

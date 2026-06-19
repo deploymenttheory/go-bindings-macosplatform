@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An encapsulation of a collection of changes to be made by an object store in response to a save operation on a managed object context.
+//
 // SaveChangesRequest wraps [raw.NSSaveChangesRequest] with a fluent Go API.
 type SaveChangesRequest struct {
 	inner *raw.NSSaveChangesRequest
@@ -31,6 +33,8 @@ func SaveChangesRequestFromID(id objc.ID) *SaveChangesRequest {
 	return &SaveChangesRequest{inner: raw.NSSaveChangesRequestFromID(id)}
 }
 
+// Initializes a save changes request with collections of given changes.
+//
 // NewSaveChangesRequestWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedObjects creates a new [SaveChangesRequest].
 func NewSaveChangesRequestWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedObjects(insertedObjects *foundation.NSSet[*raw.NSManagedObject], updatedObjects *foundation.NSSet[*raw.NSManagedObject], deletedObjects *foundation.NSSet[*raw.NSManagedObject], lockedObjects *foundation.NSSet[*raw.NSManagedObject]) *SaveChangesRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSaveChangesRequest")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewSaveChangesRequestWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedO
 	return &SaveChangesRequest{inner: raw.NSSaveChangesRequestFromID(_id)}
 }
 
+// The stores the request should be sent to.
+//
 // WithAffectedStores sets the collection, converting the Go slice to an NSArray.
 func (x *SaveChangesRequest) WithAffectedStores(items ...PersistentStoreProvider) *SaveChangesRequest {
 	if len(items) == 0 {

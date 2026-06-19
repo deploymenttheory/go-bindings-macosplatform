@@ -88,7 +88,7 @@ func IKImageViewFromID(id objc.ID) *IKImageView {
 
 // @method setImage:imageProperties: @abstract Sets the image & metadata (both retrieved from ImageIO).
 func (o *IKImageView) SetImageImageProperties(image unsafe.Pointer, metaData *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_iKImageViewSelSetImageImageProperties, image, metaData)
+	o.Ptr().Send(_iKImageViewSelSetImageImageProperties, image, metaData.Ptr())
 }
 
 // @method setImageWithURL: @abstract Initializes an image view with the image specified by a URL.
@@ -110,8 +110,11 @@ func (o *IKImageView) ImageSize() corefoundation.CGSize {
 
 // @method imageProperties @abstract Returns the metadata for the image in the view.
 func (o *IKImageView) ImageProperties() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _iKImageViewSelImageProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageViewSelImageProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @method setRotationAngle:centerPoint: @abstract Sets the rotation angle at the provided origin.

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a single layout constraint between two layers.
+//
 // Constraint wraps [raw.CAConstraint] with a fluent Go API.
 type Constraint struct {
 	inner *raw.CAConstraint
@@ -31,6 +33,8 @@ func ConstraintFromID(id objc.ID) *Constraint {
 	return &Constraint{inner: raw.CAConstraintFromID(id)}
 }
 
+// Returns an CAConstraint object with the specified parameters. Designated initializer.
+//
 // NewConstraintWithAttributeRelativeToAttributeScaleOffset creates a new [Constraint].
 func NewConstraintWithAttributeRelativeToAttributeScaleOffset(attr CAConstraintAttribute, srcId string, srcAttr CAConstraintAttribute, m float64, c float64) *Constraint {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CAConstraint")), objc.RegisterName("alloc"))

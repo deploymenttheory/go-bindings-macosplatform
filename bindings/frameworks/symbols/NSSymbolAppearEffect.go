@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that makes the layers of a symbol-based image appear separately or as a whole.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymbolappeareffect
 type NSSymbolAppearEffect struct {
 	NSSymbolEffect
@@ -33,7 +35,7 @@ func NSSymbolAppearEffectFromID(id objc.ID) *NSSymbolAppearEffect {
 	return o
 }
 
-// The default appear effect, determined by the system.
+// An animation that makes the layers of a symbol-based image appear separately or as a whole.
 func NSSymbolAppearEffectEffect() *NSSymbolAppearEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolAppearEffect), _nSSymbolAppearEffectSelEffect)
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func NSSymbolAppearEffectEffect() *NSSymbolAppearEffect {
 	return NSSymbolAppearEffectFromID(_ret)
 }
 
-// Convenience initializer for an appear effect that appears scaling up.
+// An effect that makes the symbol scale up as it appears.
 func NSSymbolAppearEffectAppearUpEffect() *NSSymbolAppearEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolAppearEffect), _nSSymbolAppearEffectSelAppearUpEffect)
 	if _ret != 0 {
@@ -51,7 +53,7 @@ func NSSymbolAppearEffectAppearUpEffect() *NSSymbolAppearEffect {
 	return NSSymbolAppearEffectFromID(_ret)
 }
 
-// Convenience initializer for an appear effect that appears scaling down.
+// An effect that makes the symbol scale down as it appears.
 func NSSymbolAppearEffectAppearDownEffect() *NSSymbolAppearEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolAppearEffect), _nSSymbolAppearEffectSelAppearDownEffect)
 	if _ret != 0 {
@@ -60,7 +62,7 @@ func NSSymbolAppearEffectAppearDownEffect() *NSSymbolAppearEffect {
 	return NSSymbolAppearEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that animates incrementally, by layer.
+// An effect that makes each layer appear separately.
 func (o *NSSymbolAppearEffect) EffectWithByLayer() *NSSymbolAppearEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolAppearEffectSelEffectWithByLayer)
 	if _ret != 0 {
@@ -69,7 +71,7 @@ func (o *NSSymbolAppearEffect) EffectWithByLayer() *NSSymbolAppearEffect {
 	return NSSymbolAppearEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+// An effect that makes all layers appear simultaneously.
 func (o *NSSymbolAppearEffect) EffectWithWholeSymbol() *NSSymbolAppearEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolAppearEffectSelEffectWithWholeSymbol)
 	if _ret != 0 {

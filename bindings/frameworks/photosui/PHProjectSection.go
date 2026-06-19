@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of content representing curated asset and text elements.
+//
 // Apple documentation: https://developer.apple.com/documentation/photosui/phprojectsection
 type PHProjectSection struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An opaque object that tracks the state of the Photos library between runs, and that you can copy and serialize for future use.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phpersistentchangetoken
 type PHPersistentChangeToken struct {
 	foundation.NSObject

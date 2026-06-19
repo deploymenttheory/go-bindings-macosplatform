@@ -1387,7 +1387,7 @@
     "ASAuthorizationPlatformPublicKeyCredentialAssertion": {
       "largeBlob": {
         "doc": "The request’s binary large object value.",
-        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialassertion/largeblob-97tbp"
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialassertion/largeblob-29ggs"
       }
     },
     "ASAuthorizationPlatformPublicKeyCredentialAssertionRequest": {
@@ -1409,13 +1409,13 @@
     "ASAuthorizationPlatformPublicKeyCredentialRegistration": {
       "largeBlob": {
         "doc": "The request’s binary large object value.",
-        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialregistration/largeblob-5nvj9"
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialregistration/largeblob-jhnw"
       }
     },
     "ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest": {
       "largeBlob": {
         "doc": "The request’s binary large object value.",
-        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialregistrationrequest/largeblob-5ismm"
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialregistrationrequest/largeblob-28v2m"
       }
     },
     "ASAuthorizationProviderExtensionAuthorizationRequest": {
@@ -1904,8 +1904,8 @@
         "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/init(credentialidentity:clientdatahash:userverificationpreference:supportedalgorithms:)-52txr"
       },
       "init(credentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:extensionInput:)": {
-        "doc": "Initializes a passkey credential request, providing additional passkey assertion data.",
-        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/init(credentialidentity:clientdatahash:userverificationpreference:supportedalgorithms:extensioninput:)-9hsyv"
+        "doc": "Initializes a passkey credential request, providing additional passkey registration data.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/init(credentialidentity:clientdatahash:userverificationpreference:supportedalgorithms:extensioninput:)-1258o"
       },
       "registrationExtensionInput": {
         "doc": "An input for WebAuthn extensions.",
@@ -1957,7 +1957,7 @@
       },
       "extensionOutput": {
         "doc": "An output from WebAuthn extensions.",
-        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential/extensionoutput-2lf9m"
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential/extensionoutput-95gvu"
       },
       "init(relyingParty:clientDataHash:credentialID:attestationObject:extensionOutput:)": {
         "doc": "Initializes a passkey registration credential object.",

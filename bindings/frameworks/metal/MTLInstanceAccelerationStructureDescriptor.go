@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of an acceleration structure that derives from instances of primitive acceleration structures.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlinstanceaccelerationstructuredescriptor
 type MTLInstanceAccelerationStructureDescriptor struct {
 	MTLAccelerationStructureDescriptor
@@ -54,6 +56,7 @@ func MTLInstanceAccelerationStructureDescriptorFromID(id objc.ID) *MTLInstanceAc
 	return o
 }
 
+// Creates an instance descriptor.
 func MTLInstanceAccelerationStructureDescriptorDescriptor() *MTLInstanceAccelerationStructureDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLInstanceAccelerationStructureDescriptor), _mTLInstanceAccelerationStructureDescriptorSelDescriptor)
 	if _ret != 0 {

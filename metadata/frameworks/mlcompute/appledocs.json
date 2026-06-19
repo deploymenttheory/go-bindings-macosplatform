@@ -1,0 +1,2919 @@
+{
+  "schema_version": 1,
+  "framework": "MLCompute",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "MLCActivationDescriptor": {
+      "doc": "A configuration object you use to create an activation layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationdescriptor"
+    },
+    "MLCActivationLayer": {
+      "doc": "A layer that applies an activation function to the source tensor and produces an output.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationlayer"
+    },
+    "MLCAdamOptimizer": {
+      "doc": "An optimizer that represents the adaptive moment estimation algorithm.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcadamoptimizer"
+    },
+    "MLCAdamWOptimizer": {
+      "doc": "An optimizer that represents the Adam algorithm with weight decay.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcadamwoptimizer"
+    },
+    "MLCArithmeticLayer": {
+      "doc": "A layer that performs an arithmetic operation.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticlayer"
+    },
+    "MLCBatchNormalizationLayer": {
+      "doc": "A layer that normalizes a batch of inputs.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcbatchnormalizationlayer"
+    },
+    "MLCComparisonLayer": {
+      "doc": "A layer that performs elementwise comparison of two tensors.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlccomparisonlayer"
+    },
+    "MLCConcatenationLayer": {
+      "doc": "A layer that combines tensors into a single tensor.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcconcatenationlayer"
+    },
+    "MLCConvolutionDescriptor": {
+      "doc": "A configuration object you use to create a convolution or fully connected layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor"
+    },
+    "MLCConvolutionLayer": {
+      "doc": "A layer that applies a convolution over a signal.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutionlayer"
+    },
+    "MLCDevice": {
+      "doc": "An object that represents the CPU or one or more GPUs the framework uses to execute a neural network.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcdevice"
+    },
+    "MLCDropoutLayer": {
+      "doc": "A layer that deactivates neurons randomly to avoid overfitting.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcdropoutlayer"
+    },
+    "MLCEmbeddingDescriptor": {
+      "doc": "A configuration object you use to create an embedding layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor"
+    },
+    "MLCEmbeddingLayer": {
+      "doc": "A layer that stores a word embedding.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddinglayer"
+    },
+    "MLCFullyConnectedLayer": {
+      "doc": "A layer that connects each input to each output within its layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcfullyconnectedlayer"
+    },
+    "MLCGatherLayer": {
+      "doc": "A layer that fetches data at the locations you specify.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcgatherlayer"
+    },
+    "MLCGramMatrixLayer": {
+      "doc": "A layer that computes the uncentered cross-correlation values between the spacial planes of each feature channel of a tensor.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcgrammatrixlayer"
+    },
+    "MLCGraph": {
+      "doc": "A graph of layers you use to build a training or inference graph.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph"
+    },
+    "MLCGroupNormalizationLayer": {
+      "doc": "A layer that divides the channels into groups for normalization.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcgroupnormalizationlayer"
+    },
+    "MLCInferenceGraph": {
+      "doc": "An inference graph created from one or more MLCGraph instances plus additional layers added directly to the inference graph.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcinferencegraph"
+    },
+    "MLCInstanceNormalizationLayer": {
+      "doc": "A layer that normalizes all features of one channel.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcinstancenormalizationlayer"
+    },
+    "MLCLSTMDescriptor": {
+      "doc": "The configuration object you use to create the LSTM layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor"
+    },
+    "MLCLSTMLayer": {
+      "doc": "A layer that represents long short-term memory (LSTM) networks.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlclstmlayer"
+    },
+    "MLCLayer": {
+      "doc": "The base class for all framework layers.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlclayer"
+    },
+    "MLCLayerNormalizationLayer": {
+      "doc": "A layer that applies layer normalization over inputs.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlclayernormalizationlayer"
+    },
+    "MLCLossDescriptor": {
+      "doc": "A configuration object you use to create a loss layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlclossdescriptor"
+    },
+    "MLCLossLayer": {
+      "doc": "A layer that estimates the inaccuracies of the model to reduce the loss on the next evaluation.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer"
+    },
+    "MLCMatMulDescriptor": {
+      "doc": "A configuration object you use to create a matrix multiplication layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcmatmuldescriptor"
+    },
+    "MLCMatMulLayer": {
+      "doc": "A layer that multiplies matrices.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcmatmullayer"
+    },
+    "MLCMultiheadAttentionDescriptor": {
+      "doc": "A configuration object you use to create a multi-head attention layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentiondescriptor"
+    },
+    "MLCMultiheadAttentionLayer": {
+      "doc": "A multihead, scaled dot-product attention layer that attends to one or more entries in the input key-value pairs.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentionlayer"
+    },
+    "MLCOptimizer": {
+      "doc": "The base class for all framework optimizers.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizer"
+    },
+    "MLCOptimizerDescriptor": {
+      "doc": "A configuration object you use to create an optimizer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizerdescriptor"
+    },
+    "MLCPaddingLayer": {
+      "doc": "A layer that pads a tensor with the padding sizes you specify.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer"
+    },
+    "MLCPlatform": {
+      "doc": "A utility class for setting global properties in the framework.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcplatform"
+    },
+    "MLCPoolingDescriptor": {
+      "doc": "A configuration object you use to create a pooling layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor"
+    },
+    "MLCPoolingLayer": {
+      "doc": "A layer that summarizes the average presence of a feature.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolinglayer"
+    },
+    "MLCRMSPropOptimizer": {
+      "doc": "An optimizer that represents the root mean square propagation algorithm.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcrmspropoptimizer"
+    },
+    "MLCReductionLayer": {
+      "doc": "A layer that reduces tensor values across a specific dimension to a scalar value.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcreductionlayer"
+    },
+    "MLCReshapeLayer": {
+      "doc": "A layer that reshapes a tensor with the shape you specify.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcreshapelayer"
+    },
+    "MLCSGDOptimizer": {
+      "doc": "An optimizer that represents the stochastic gradient decent algorithm.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcsgdoptimizer"
+    },
+    "MLCScatterLayer": {
+      "doc": "A layer that updates the output at an index you specify.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcscatterlayer"
+    },
+    "MLCSelectionLayer": {
+      "doc": "A layer for selecting elements from two tensors.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcselectionlayer"
+    },
+    "MLCSliceLayer": {
+      "doc": "A layer that extracts a slice from a tensor.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcslicelayer"
+    },
+    "MLCSoftmaxLayer": {
+      "doc": "A layer that outputs a probability distribution as attention weights.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcsoftmaxlayer"
+    },
+    "MLCSplitLayer": {
+      "doc": "A layer that splits a tensor value into a list of subtensors.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcsplitlayer"
+    },
+    "MLCTensor": {
+      "doc": "The data object you use throughout the framework.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlctensor"
+    },
+    "MLCTensorData": {
+      "doc": "An encapsulation of the memory that tensor data uses.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlctensordata"
+    },
+    "MLCTensorDescriptor": {
+      "doc": "A configuration object you use to create a tensor.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor"
+    },
+    "MLCTensorOptimizerDeviceData": {
+      "doc": "An encapsulation of the device memory associated with a tensor that an optimizer uses.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlctensoroptimizerdevicedata"
+    },
+    "MLCTensorParameter": {
+      "doc": "A tensor parameter object.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlctensorparameter"
+    },
+    "MLCTrainingGraph": {
+      "doc": "A training graph that you create from one or more graph objects plus additional layers you add directly to the training graph.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph"
+    },
+    "MLCTransposeLayer": {
+      "doc": "A layer that permutes the dimensions you specify.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlctransposelayer"
+    },
+    "MLCUpsampleLayer": {
+      "doc": "A layer that applies upsampling with the shape you specify.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcupsamplelayer"
+    },
+    "MLCYOLOLossDescriptor": {
+      "doc": "The configuration object you use to create the YOLO loss layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcyololossdescriptor"
+    },
+    "MLCYOLOLossLayer": {
+      "doc": "A layer that estimates loss for the YOLO algorithm.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcyololosslayer"
+    }
+  },
+  "enums": {
+    "MLCActivationType": {
+      "doc": "An activation type that you specify for an activation descriptor.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype",
+      "members": {
+        "MLCActivationTypeAbsolute": {
+          "doc": "An activation type that implements the absolute activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/absolute"
+        },
+        "MLCActivationTypeCELU": {
+          "doc": "An activation type that implements the CELU activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/celu"
+        },
+        "MLCActivationTypeClamp": {
+          "doc": "An activation type that implements the clamp activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/clamp"
+        },
+        "MLCActivationTypeCount": {
+          "doc": "The count of activation types.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/mlcactivationtypecount"
+        },
+        "MLCActivationTypeDebugDescription": {
+          "doc": "A textual description of the activation type, suitable for debugging.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/debugdescription"
+        },
+        "MLCActivationTypeELU": {
+          "doc": "An activation type that implements the exponential linear unit activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/elu"
+        },
+        "MLCActivationTypeGELU": {
+          "doc": "An activation type that implements the gaussian error linear unit activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/gelu"
+        },
+        "MLCActivationTypeHardShrink": {
+          "doc": "An activation type that implements the hard shrink activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/hardshrink"
+        },
+        "MLCActivationTypeHardSigmoid": {
+          "doc": "An activation type that implements the hard sigmoid activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/hardsigmoid"
+        },
+        "MLCActivationTypeHardSwish": {
+          "doc": "An activation type that implements the hard swish activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/hardswish"
+        },
+        "MLCActivationTypeLinear": {
+          "doc": "An activation type that implements the linear activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/linear"
+        },
+        "MLCActivationTypeLogSigmoid": {
+          "doc": "An activation type that implements the log sigmoid activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/logsigmoid"
+        },
+        "MLCActivationTypeNone": {
+          "doc": "An activation type that implements the identity function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/none"
+        },
+        "MLCActivationTypeReLU": {
+          "doc": "An activation type that implements the rectified linear unit activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/relu"
+        },
+        "MLCActivationTypeReLUN": {
+          "doc": "An activation type that implements the ReLUN activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/relun"
+        },
+        "MLCActivationTypeSELU": {
+          "doc": "An activation type that implements the scaled exponential linear unit activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/selu"
+        },
+        "MLCActivationTypeSigmoid": {
+          "doc": "An activation type that implements the sigmoid activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/sigmoid"
+        },
+        "MLCActivationTypeSoftPlus": {
+          "doc": "An activation type that implements the soft plus activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/softplus"
+        },
+        "MLCActivationTypeSoftShrink": {
+          "doc": "An activation type that implements the soft shrink activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/softshrink"
+        },
+        "MLCActivationTypeSoftSign": {
+          "doc": "An activation type that implements the parametric soft sign activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/softsign"
+        },
+        "MLCActivationTypeTanh": {
+          "doc": "An activation type that implements the hyperbolic tangent activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/tanh"
+        },
+        "MLCActivationTypeTanhShrink": {
+          "doc": "An activation type that implements the hyperbolic tangent shrink activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/tanhshrink"
+        },
+        "MLCActivationTypeThreshold": {
+          "doc": "An activation type that implements the threshold activation function.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationtype/threshold"
+        }
+      }
+    },
+    "MLCArithmeticOperation": {
+      "doc": "Constants that describe an arithmetic operation.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation",
+      "members": {
+        "MLCArithmeticOperationAcos": {
+          "doc": "Calculates the element-wise inverse cosine of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/acos"
+        },
+        "MLCArithmeticOperationAcosh": {
+          "doc": "Calculates the element-wise inverse hyperbolic cosine of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/acosh"
+        },
+        "MLCArithmeticOperationAdd": {
+          "doc": "Calculates the element-wise sum of the inputs.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/add"
+        },
+        "MLCArithmeticOperationAsin": {
+          "doc": "Calculates the element-wise inverse sine of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/asin"
+        },
+        "MLCArithmeticOperationAsinh": {
+          "doc": "Calculates the element-wise inverse hyperbolic sine of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/asinh"
+        },
+        "MLCArithmeticOperationAtan": {
+          "doc": "Calculates the element-wise inverse tangent of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/atan"
+        },
+        "MLCArithmeticOperationAtanh": {
+          "doc": "Calculates the element-wise inverse hyperbolic tangent of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/atanh"
+        },
+        "MLCArithmeticOperationCeil": {
+          "doc": "Calculates the element-wise ceiling of the inputs.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/ceil"
+        },
+        "MLCArithmeticOperationCos": {
+          "doc": "Calculates the element-wise cosine of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/cos"
+        },
+        "MLCArithmeticOperationCosh": {
+          "doc": "Calculates the element-wise hyperbolic cosine of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/cosh"
+        },
+        "MLCArithmeticOperationCount": {
+          "doc": "The total number of arithmetic operations.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/mlcarithmeticoperationcount"
+        },
+        "MLCArithmeticOperationDebugDescription": {
+          "doc": "A textual description of the arithmetic operation you use for debugging.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/debugdescription"
+        },
+        "MLCArithmeticOperationDivide": {
+          "doc": "Calculates the element-wise division of the inputs.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/divide"
+        },
+        "MLCArithmeticOperationDivideNoNaN": {
+          "doc": "Calculates the element-wise division of the inputs, and returns 0 if the denominator is 0.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/dividenonan"
+        },
+        "MLCArithmeticOperationExp": {
+          "doc": "Calculates the element-wise result of the exponent raised to the power of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/exp"
+        },
+        "MLCArithmeticOperationExp2": {
+          "doc": "Calculates the element-wise result of the number 2 raised to the power of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/exp2"
+        },
+        "MLCArithmeticOperationFloor": {
+          "doc": "Calculates the element-wise floor of the inputs.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/floor"
+        },
+        "MLCArithmeticOperationLog": {
+          "doc": "Calculates the element-wise natural logarithm of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/log"
+        },
+        "MLCArithmeticOperationLog2": {
+          "doc": "Calculates the element-wise base 2 logarithm of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/log2"
+        },
+        "MLCArithmeticOperationMax": {
+          "doc": "Calculates the element-wise maximum the inputs.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/max"
+        },
+        "MLCArithmeticOperationMin": {
+          "doc": "Calculates the element-wise minimum of the inputs.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/min"
+        },
+        "MLCArithmeticOperationMultiply": {
+          "doc": "Calculates the element-wise product of the inputs.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/multiply"
+        },
+        "MLCArithmeticOperationMultiplyNoNaN": {
+          "doc": "Calculates the element-wise product of the inputs, and returns 0 when the result isn’t a number or infinity.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/multiplynonan"
+        },
+        "MLCArithmeticOperationPow": {
+          "doc": "Calculates the element-wise first input raised to the power of the second input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/pow"
+        },
+        "MLCArithmeticOperationRound": {
+          "doc": "Calculates the element-wise rounding of the inputs.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/round"
+        },
+        "MLCArithmeticOperationRsqrt": {
+          "doc": "Calculates the element-wise reciprocal of the square root of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/rsqrt"
+        },
+        "MLCArithmeticOperationSin": {
+          "doc": "Calculates the element-wise sine of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/sin"
+        },
+        "MLCArithmeticOperationSinh": {
+          "doc": "Calculates the element-wise hyperbolic sine of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/sinh"
+        },
+        "MLCArithmeticOperationSqrt": {
+          "doc": "Calculates the element-wise square root of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/sqrt"
+        },
+        "MLCArithmeticOperationSubtract": {
+          "doc": "Calculates the element-wise difference between the inputs.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/subtract"
+        },
+        "MLCArithmeticOperationTan": {
+          "doc": "Calculates the element-wise tangent of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/tan"
+        },
+        "MLCArithmeticOperationTanh": {
+          "doc": "Calculates the element-wise hyperbolic tangent of the input.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticoperation/tanh"
+        }
+      }
+    },
+    "MLCComparisonOperation": {
+      "doc": "A comparison operation.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlccomparisonoperation",
+      "members": {
+        "MLCComparisonOperationCount": {
+          "doc": "A number that represents the operation count.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlccomparisonoperation/mlccomparisonoperationcount"
+        },
+        "MLCComparisonOperationDebugDescription": {
+          "doc": "A textual description of the comparison operation, suitable for debugging.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlccomparisonoperation/debugdescription"
+        }
+      }
+    },
+    "MLCConvolutionType": {
+      "doc": "The convolution type specified for a convolution layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiontype",
+      "members": {
+        "MLCConvolutionTypeDebugDescription": {
+          "doc": "A textual description of the convolution type, suitable for debugging.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiontype/debugdescription"
+        }
+      }
+    },
+    "MLCDataType": {
+      "doc": "A tensor data type.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcdatatype"
+    },
+    "MLCDeviceType": {
+      "doc": "A device type for execution of a neural network.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcdevicetype",
+      "members": {
+        "MLCDeviceTypeANE": {
+          "doc": "A device type that represents the Apple Neural Engine.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcdevicetype/ane"
+        },
+        "MLCDeviceTypeAny": {
+          "doc": "A device type that represents either the CPU or GPU.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcdevicetype/any"
+        },
+        "MLCDeviceTypeCPU": {
+          "doc": "A device type that represents the CPU.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcdevicetype/cpu"
+        },
+        "MLCDeviceTypeCount": {
+          "doc": "A number that represents the number of device types.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcdevicetype/mlcdevicetypecount"
+        },
+        "MLCDeviceTypeGPU": {
+          "doc": "A device type that represents the GPU.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcdevicetype/gpu"
+        }
+      }
+    },
+    "MLCExecutionOptions": {
+      "doc": "A bitmask that specifies the options you use when executing a graph.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcexecutionoptions",
+      "members": {
+        "MLCExecutionOptionsForwardForInference": {
+          "doc": "The option to execute the forward pass for inference only.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcexecutionoptions/forwardforinference"
+        },
+        "MLCExecutionOptionsNone": {
+          "doc": "The option to execute the graph in the most efficient way possible.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcexecutionoptions/mlcexecutionoptionsnone"
+        },
+        "MLCExecutionOptionsPerLayerProfiling": {
+          "doc": "The option to enable additional per-layer profiling information using signposts.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcexecutionoptions/perlayerprofiling"
+        },
+        "MLCExecutionOptionsProfiling": {
+          "doc": "The option to return profiling information in the callback before returning from execution.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcexecutionoptions/profiling"
+        },
+        "MLCExecutionOptionsSkipWritingInputDataToDevice": {
+          "doc": "The option to skip writing input data to device memory.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcexecutionoptions/skipwritinginputdatatodevice"
+        },
+        "MLCExecutionOptionsSynchronous": {
+          "doc": "The option to execute the graph synchronously.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcexecutionoptions/synchronous"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates an execution option with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcexecutionoptions/init(rawvalue:)"
+        }
+      }
+    },
+    "MLCGradientClippingType": {
+      "doc": "A clipping type the system applies to a gradient.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcgradientclippingtype",
+      "members": {
+        "MLCGradientClippingTypeByGlobalNorm": {
+          "doc": "An option that clips by global norm.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcgradientclippingtype/byglobalnorm"
+        },
+        "MLCGradientClippingTypeByNorm": {
+          "doc": "An option that clips by norm.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcgradientclippingtype/bynorm"
+        },
+        "MLCGradientClippingTypeByValue": {
+          "doc": "An option that clips by value.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcgradientclippingtype/byvalue"
+        },
+        "MLCGradientClippingTypeDebugDescription": {
+          "doc": "A textual description of the gradient clipping type, suitable for debugging.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcgradientclippingtype/debugdescription"
+        }
+      }
+    },
+    "MLCGraphCompilationOptions": {
+      "doc": "A bitmask that specifies the options you use when compiling a graph.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcgraphcompilationoptions",
+      "members": {
+        "MLCGraphCompilationOptionsComputeAllGradients": {
+          "doc": "The option to compute all gradients during graph compilation.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcgraphcompilationoptions/computeallgradients"
+        },
+        "MLCGraphCompilationOptionsDebugLayers": {
+          "doc": "The option to debug layers during graph compilation.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcgraphcompilationoptions/debuglayers"
+        },
+        "MLCGraphCompilationOptionsDisableLayerFusion": {
+          "doc": "The option to disable layer fusion during graph compilation.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcgraphcompilationoptions/disablelayerfusion"
+        },
+        "MLCGraphCompilationOptionsLinkGraphs": {
+          "doc": "The option to link graphs during graph compilation.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcgraphcompilationoptions/linkgraphs"
+        },
+        "MLCGraphCompilationOptionsNone": {
+          "doc": "The default option for graph compilation.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcgraphcompilationoptions/mlcgraphcompilationoptionsnone"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a graph compilation option with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcgraphcompilationoptions/init(rawvalue:)"
+        }
+      }
+    },
+    "MLCLSTMResultMode": {
+      "doc": "Constants that describe the result of an LSTM layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlclstmresultmode",
+      "members": {
+        "MLCLSTMResultModeDebugDescription": {
+          "doc": "A textual description of the LSTM result mode you use for debugging.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlclstmresultmode/debugdescription"
+        },
+        "MLCLSTMResultModeOutput": {
+          "doc": "A result mode that indicates the layer produces a single result tensor that represents the final output of the LSTM.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlclstmresultmode/output"
+        },
+        "MLCLSTMResultModeOutputAndStates": {
+          "doc": "A result mode that indicates the layer produces three result tensors that represent the final output of the LSTM, the last hidden state, and the cell state.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlclstmresultmode/outputandstates"
+        }
+      }
+    },
+    "MLCLossType": {
+      "doc": "A loss function.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlclosstype",
+      "members": {
+        "MLCLossTypeDebugDescription": {
+          "doc": "A textual description of the loss type, suitable for debugging.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlclosstype/debugdescription"
+        }
+      }
+    },
+    "MLCPaddingPolicy": {
+      "doc": "A padding policy that you specify for a convolution or pooling layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddingpolicy"
+    },
+    "MLCPaddingType": {
+      "doc": "A padding type that you specify for a padding layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddingtype",
+      "members": {
+        "MLCPaddingTypeDebugDescription": {
+          "doc": "A textual description of the padding type, suitable for debugging.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddingtype/debugdescription"
+        }
+      }
+    },
+    "MLCPoolingType": {
+      "doc": "A pooling function type for a pooling layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingtype"
+    },
+    "MLCRandomInitializerType": {
+      "doc": "An initializer type you use to create a tensor with random data.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcrandominitializertype"
+    },
+    "MLCReductionType": {
+      "doc": "Constants that describe a reduction operation type.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcreductiontype",
+      "members": {
+        "MLCReductionTypeAll": {
+          "doc": "A reduction operation that applies to all dimensions.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcreductiontype/all"
+        },
+        "MLCReductionTypeAny": {
+          "doc": "A reduction operation that applies to any dimension.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcreductiontype/any"
+        },
+        "MLCReductionTypeArgMax": {
+          "doc": "A reduction operation that applies to the maximum dimension you specify.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcreductiontype/argmax"
+        },
+        "MLCReductionTypeArgMin": {
+          "doc": "A reduction operation that applies to the minimum dimension you specify.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcreductiontype/argmin"
+        },
+        "MLCReductionTypeCount": {
+          "doc": "The total number of reduction operations.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcreductiontype/mlcreductiontypecount"
+        },
+        "MLCReductionTypeDebugDescription": {
+          "doc": "A textual description of the reduction operation you use for debugging.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcreductiontype/debugdescription"
+        },
+        "MLCReductionTypeL1Norm": {
+          "doc": "A reduction operation that applies a lasso regularization penalty.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcreductiontype/l1norm"
+        },
+        "MLCReductionTypeMax": {
+          "doc": "A reduction operation that applies to the maximum dimension.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcreductiontype/max"
+        },
+        "MLCReductionTypeMean": {
+          "doc": "A reduction operation that applies to the mean of the dimensions.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcreductiontype/mean"
+        },
+        "MLCReductionTypeMin": {
+          "doc": "A reduction operation that applies to the minimum dimension.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcreductiontype/min"
+        },
+        "MLCReductionTypeNone": {
+          "doc": "A reduction operation that applies no reduction.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcreductiontype/none"
+        },
+        "MLCReductionTypeSum": {
+          "doc": "A reduction operation that applies to the sum of the dimensions.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcreductiontype/sum"
+        }
+      }
+    },
+    "MLCRegularizationType": {
+      "doc": "A regularization function to use with an optimizer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcregularizationtype"
+    },
+    "MLCSampleMode": {
+      "doc": "A sampling mode for an upsample layer.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcsamplemode",
+      "members": {
+        "MLCSampleModeDebugDescription": {
+          "doc": "A textual description of the sample mode, suitable for debugging.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcsamplemode/debugdescription"
+        }
+      }
+    },
+    "MLCSoftmaxOperation": {
+      "doc": "A softmax operation.",
+      "url": "https://developer.apple.com/documentation/mlcompute/mlcsoftmaxoperation",
+      "members": {
+        "MLCSoftmaxOperationDebugDescription": {
+          "doc": "A textual description of the softmax operation, suitable for debugging.",
+          "url": "https://developer.apple.com/documentation/mlcompute/mlcsoftmaxoperation/debugdescription"
+        }
+      }
+    }
+  },
+  "methods": {
+    "MLCActivationDescriptor": {
+      "+descriptorWithType:": {
+        "doc": "Creates an activation descriptor with the activation type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationdescriptor/init(type:)"
+      },
+      "+descriptorWithType:a:": {
+        "doc": "Creates an activation descriptor with the activation type and parameter a that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationdescriptor/init(type:a:)"
+      },
+      "+descriptorWithType:a:b:": {
+        "doc": "Creates an activation descriptor with the activation type and parameters a and b that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationdescriptor/init(type:a:b:)"
+      },
+      "+descriptorWithType:a:b:c:": {
+        "doc": "Creates an activation descriptor with the activation type and parameters a, b, and c that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationdescriptor/init(type:a:b:c:)"
+      }
+    },
+    "MLCActivationLayer": {
+      "+layerWithDescriptor:": {
+        "doc": "Creates an activation layer with the descriptor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationlayer/init(descriptor:)"
+      }
+    },
+    "MLCAdamOptimizer": {
+      "+optimizerWithDescriptor:": {
+        "doc": "Creates an Adam optimizer with the descriptor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcadamoptimizer/init(descriptor:)"
+      },
+      "+optimizerWithDescriptor:beta1:beta2:epsilon:timeStep:": {
+        "doc": "Creates an Adam optimizer with the values you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcadamoptimizer/init(descriptor:beta1:beta2:epsilon:timestep:)"
+      },
+      "+optimizerWithDescriptor:beta1:beta2:epsilon:usesAMSGrad:timeStep:": {
+        "doc": "Creates an Adam optimizer with the values you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcadamoptimizer/init(descriptor:beta1:beta2:epsilon:usesamsgrad:timestep:)"
+      }
+    },
+    "MLCAdamWOptimizer": {
+      "+optimizerWithDescriptor:": {
+        "doc": "Creates a default optimizer with the descriptor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcadamwoptimizer/init(descriptor:)"
+      },
+      "+optimizerWithDescriptor:beta1:beta2:epsilon:usesAMSGrad:timeStep:": {
+        "doc": "Creates an AdamW optimizer with the values you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcadamwoptimizer/init(descriptor:beta1:beta2:epsilon:usesamsgrad:timestep:)"
+      }
+    },
+    "MLCArithmeticLayer": {
+      "+layerWithOperation:": {
+        "doc": "Creates an arithmetic layer with the operation you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticlayer/init(operation:)"
+      }
+    },
+    "MLCBatchNormalizationLayer": {
+      "+layerWithFeatureChannelCount:mean:variance:beta:gamma:varianceEpsilon:": {
+        "doc": "Creates a batch normalization layer with the number of feature channels, tensors, and variance epsilon you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcbatchnormalizationlayer/init(featurechannelcount:mean:variance:beta:gamma:varianceepsilon:)"
+      },
+      "+layerWithFeatureChannelCount:mean:variance:beta:gamma:varianceEpsilon:momentum:": {
+        "doc": "Creates a batch normalization layer with the number of feature channels, tensors, variance epsilon, and momentum you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcbatchnormalizationlayer/init(featurechannelcount:mean:variance:beta:gamma:varianceepsilon:momentum:)"
+      }
+    },
+    "MLCComparisonLayer": {
+      "+layerWithOperation:": {
+        "doc": "Creates a comparison layer with the operation you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlccomparisonlayer/init(operation:)"
+      }
+    },
+    "MLCConcatenationLayer": {
+      "+layer": {
+        "doc": "Creates a concatenation layer with a dimension value of 1, which typically represents feature channels.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconcatenationlayer/init()"
+      },
+      "+layerWithDimension:": {
+        "doc": "Creates a concatenation layer with the dimension you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconcatenationlayer/init(dimension:)"
+      }
+    },
+    "MLCConvolutionDescriptor": {
+      "+convolutionTransposeDescriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:": {
+        "doc": "Creates a convolution transpose descriptor with the kernel and padding options, number of feature channels and groups, and dilation rates you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/convolutiontransposedescriptorwithkernelsizes:inputfeaturechannelcount:outputfeaturechannelcount:groupcount:strides:dilationrates:paddingpolicy:paddingsizes:"
+      },
+      "+convolutionTransposeDescriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:strides:paddingPolicy:paddingSizes:": {
+        "doc": "Creates a convolution transpose descriptor with the kernel sizes, number of feature channels, strides, and padding options you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/convolutiontransposedescriptorwithkernelsizes:inputfeaturechannelcount:outputfeaturechannelcount:strides:paddingpolicy:paddingsizes:"
+      },
+      "+convolutionTransposeDescriptorWithKernelWidth:kernelHeight:inputFeatureChannelCount:outputFeatureChannelCount:": {
+        "doc": "Creates a descriptor for convolution transpose with the kernel sizes and number of feature channels you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/init(transposewithkernelwidth:kernelheight:inputfeaturechannelcount:outputfeaturechannelcount:)"
+      },
+      "+depthwiseConvolutionDescriptorWithKernelSizes:inputFeatureChannelCount:channelMultiplier:strides:dilationRates:paddingPolicy:paddingSizes:": {
+        "doc": "Creates a convolution descriptor with the kernel and padding options, number of input channels, channel multiplier, and dilation rates you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/depthwiseconvolutiondescriptorwithkernelsizes:inputfeaturechannelcount:channelmultiplier:strides:dilationrates:paddingpolicy:paddingsizes:"
+      },
+      "+depthwiseConvolutionDescriptorWithKernelSizes:inputFeatureChannelCount:channelMultiplier:strides:paddingPolicy:paddingSizes:": {
+        "doc": "Creates a depthwise convolution descriptor with the kernel and padding options, number of input feature channels, and channel multiplier you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/depthwiseconvolutiondescriptorwithkernelsizes:inputfeaturechannelcount:channelmultiplier:strides:paddingpolicy:paddingsizes:"
+      },
+      "+depthwiseConvolutionDescriptorWithKernelWidth:kernelHeight:inputFeatureChannelCount:channelMultiplier:": {
+        "doc": "Creates a descriptor for depthwise convolution with the kernel sizes, number of input feature channels, and channel multiplier you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/init(depthwisewithkernelwidth:kernelheight:inputfeaturechannelcount:channelmultiplier:)"
+      },
+      "+descriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:": {
+        "doc": "Creates a convolution descriptor with the kernel and padding options, number of feature channels and groups, and dilation rates you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/descriptorwithkernelsizes:inputfeaturechannelcount:outputfeaturechannelcount:groupcount:strides:dilationrates:paddingpolicy:paddingsizes:"
+      },
+      "+descriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:strides:paddingPolicy:paddingSizes:": {
+        "doc": "Creates a convolution descriptor with the kernel sizes, number of feature channels, strides, padding policy, and padding sizes you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/descriptorwithkernelsizes:inputfeaturechannelcount:outputfeaturechannelcount:strides:paddingpolicy:paddingsizes:"
+      },
+      "+descriptorWithKernelWidth:kernelHeight:inputFeatureChannelCount:outputFeatureChannelCount:": {
+        "doc": "Creates a convolution descriptor with the kernel sizes and number of feature channels you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/descriptorwithkernelwidth:kernelheight:inputfeaturechannelcount:outputfeaturechannelcount:"
+      },
+      "+descriptorWithType:kernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:": {
+        "doc": "Creates a descriptor with the type, kernel sizes, number of feature channels and groups, strides, dilation rates, and padding policy you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/descriptorwithtype:kernelsizes:inputfeaturechannelcount:outputfeaturechannelcount:groupcount:strides:dilationrates:paddingpolicy:paddingsizes:"
+      }
+    },
+    "MLCConvolutionLayer": {
+      "+layerWithWeights:biases:descriptor:": {
+        "doc": "Creates a convolution layer with the weights, biases, and descriptor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutionlayer/init(weights:biases:descriptor:)"
+      }
+    },
+    "MLCDevice": {
+      "+aneDevice": {
+        "doc": "Creates a device that uses the Apple Neural Engine, if one exists.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcdevice/ane()"
+      },
+      "+cpuDevice": {
+        "doc": "Creates a device that uses the CPU.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcdevice/cpu()"
+      },
+      "+deviceWithGPUDevices:": {
+        "doc": "Creates a device using the GPUs you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcdevice/init(gpudevices:)-4mj85"
+      },
+      "+deviceWithType:": {
+        "doc": "Creates a device of the type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcdevice/init(type:)"
+      },
+      "+deviceWithType:selectsMultipleComputeDevices:": {
+        "doc": "Creates a device that you can configure to use multiple compute devices.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcdevice/init(type:selectsmultiplecomputedevices:)"
+      },
+      "+gpuDevice": {
+        "doc": "Creates a device that uses a GPU, if one exists.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcdevice/gpu()"
+      }
+    },
+    "MLCDropoutLayer": {
+      "+layerWithRate:seed:": {
+        "doc": "Creates a dropout layer with the probability rate and random number generator seed you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcdropoutlayer/init(rate:seed:)"
+      }
+    },
+    "MLCEmbeddingDescriptor": {
+      "+descriptorWithEmbeddingCount:embeddingDimension:": {
+        "doc": "Creates an embedding descriptor with the size of the dictionary and dimension of embedding vectors you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/descriptorwithembeddingcount:embeddingdimension:"
+      },
+      "+descriptorWithEmbeddingCount:embeddingDimension:paddingIndex:maximumNorm:pNorm:scalesGradientByFrequency:": {
+        "doc": "Creates a new embedding descriptor with the size and dimension of embedding vectors, padding index, and norm and scaling options that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/descriptorwithembeddingcount:embeddingdimension:paddingindex:maximumnorm:pnorm:scalesgradientbyfrequency:"
+      }
+    },
+    "MLCEmbeddingLayer": {
+      "+layerWithDescriptor:weights:": {
+        "doc": "Creates an embedding layer with the descriptor and word embedding weights tensor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddinglayer/init(descriptor:weights:)"
+      }
+    },
+    "MLCFullyConnectedLayer": {
+      "+layerWithWeights:biases:descriptor:": {
+        "doc": "Creates a fully connected layer with the weights, biases, and convolution descriptor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcfullyconnectedlayer/init(weights:biases:descriptor:)"
+      }
+    },
+    "MLCGatherLayer": {
+      "+layerWithDimension:": {
+        "doc": "Creates a gather layer with the dimension you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgatherlayer/init(dimension:)"
+      }
+    },
+    "MLCGramMatrixLayer": {
+      "+layerWithScale:": {
+        "doc": "Creates a gram matrix layer with the scaling factor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgrammatrixlayer/init(scale:)"
+      }
+    },
+    "MLCGraph": {
+      "+graph": {
+        "doc": "Creates a new graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/graph"
+      },
+      "-bindAndWriteData:forInputs:toDevice:batchSize:synchronous:": {
+        "doc": "Associates the given data with the input tensors, and if the device is a GPU, also copies the data to the device memory.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/bindandwritedata(_:forinputs:to:batchsize:synchronous:)"
+      },
+      "-bindAndWriteData:forInputs:toDevice:synchronous:": {
+        "doc": "Associates the given data with the input tensors, and if the device is a GPU, also copies the data to the device memory.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/bindandwritedata(_:forinputs:to:synchronous:)"
+      },
+      "-concatenateWithSources:dimension:": {
+        "doc": "Adds a new concatenation layer to the graph using the source tensors and concatenation dimension you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/concatenate(sources:dimension:)"
+      },
+      "-gatherWithDimension:source:indices:": {
+        "doc": "Adds a gather layer to the graph using the source tensor, dimension along which to index, and the indices you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/gather(withdimension:source:indices:)"
+      },
+      "-nodeWithLayer:source:": {
+        "doc": "Adds the layer and source tensor that you specify to the graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/node(with:source:)"
+      },
+      "-nodeWithLayer:sources:": {
+        "doc": "Adds the layer and source tensors that you specify to the graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/node(with:sources:)"
+      },
+      "-nodeWithLayer:sources:disableUpdate:": {
+        "doc": "Adds the layer, source tensors, and option to disable optimizer updates that you specify to the graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/node(with:sources:disableupdate:)"
+      },
+      "-nodeWithLayer:sources:lossLabels:": {
+        "doc": "Adds the layer, sources, and loss labels tensors that you specify to the graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/node(with:sources:losslabels:)"
+      },
+      "-reshapeWithShape:source:": {
+        "doc": "Adds a new reshape layer to the graph using the shape and source tensor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/reshapewithshape:source:"
+      },
+      "-resultTensorsForLayer:": {
+        "doc": "Gets the result tensors for a layer in the training graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/resulttensors(for:)"
+      },
+      "-scatterWithDimension:source:indices:copyFrom:reductionType:": {
+        "doc": "Adds a scatter layer to the graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/scatter(withdimension:source:indices:copyfrom:reductiontype:)"
+      },
+      "-selectWithSources:condition:": {
+        "doc": "Adds a select layer to the graph using the condition mask and source tensors you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/selectwithsources:condition:"
+      },
+      "-sourceTensorsForLayer:": {
+        "doc": "Gets the source tensors for a layer in the training graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/sourcetensors(for:)"
+      },
+      "-splitWithSource:splitCount:dimension:": {
+        "doc": "Adds a new split layer to the graph using the source tensor, number of splits, and dimension to split the source tensor that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/split(source:splitcount:dimension:)"
+      },
+      "-splitWithSource:splitSectionLengths:dimension:": {
+        "doc": "Adds a new split layer to the graph using the source tensor, lengths of each split section, and dimension to split the source tensor that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/splitwithsource:splitsectionlengths:dimension:"
+      },
+      "-transposeWithDimensions:source:": {
+        "doc": "Adds a new transpose layer to the graph using the dimensions and source tensor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/transposewithdimensions:source:"
+      }
+    },
+    "MLCGroupNormalizationLayer": {
+      "+layerWithFeatureChannelCount:groupCount:beta:gamma:varianceEpsilon:": {
+        "doc": "Creates a group normalization layer with the number of feature channels and groups, beta and gamma tensors, and variance epsilon you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgroupnormalizationlayer/init(featurechannelcount:groupcount:beta:gamma:varianceepsilon:)"
+      }
+    },
+    "MLCInferenceGraph": {
+      "+graphWithGraphObjects:": {
+        "doc": "Creates an inference graph with the layers from the graph objects you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinferencegraph/init(graphobjects:)"
+      },
+      "-addInputs:": {
+        "doc": "Adds the inputs you specify to the inference graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinferencegraph/addinputs(_:)"
+      },
+      "-addInputs:lossLabels:lossLabelWeights:": {
+        "doc": "Adds the inputs, loss labels, and loss label weights that you specify to the inference graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinferencegraph/addinputs(_:losslabels:losslabelweights:)"
+      },
+      "-addOutputs:": {
+        "doc": "Adds the outputs you specify to the inference graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinferencegraph/addoutputs(_:)"
+      },
+      "-compileWithOptions:device:": {
+        "doc": "Compiles the inference graph for the options and device you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinferencegraph/compile(options:device:)"
+      },
+      "-compileWithOptions:device:inputTensors:inputTensorsData:": {
+        "doc": "Compiles the inference graph for the options, device, and input tensors you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinferencegraph/compile(options:device:inputtensors:inputtensorsdata:)"
+      },
+      "-executeWithInputsData:batchSize:options:completionHandler:": {
+        "doc": "Executes the inference graph with the inputs data, batch size, execution options, and completion handler you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinferencegraph/execute(inputsdata:batchsize:options:completionhandler:)"
+      },
+      "-executeWithInputsData:lossLabelsData:lossLabelWeightsData:batchSize:options:completionHandler:": {
+        "doc": "Executes the inference graph with the input data, batch size, execution options and completion handler you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinferencegraph/execute(inputsdata:losslabelsdata:losslabelweightsdata:batchsize:options:completionhandler:)"
+      },
+      "-executeWithInputsData:lossLabelsData:lossLabelWeightsData:outputsData:batchSize:options:completionHandler:": {
+        "doc": "Executes the inference graph with the input and output data, batch size, execution options, and completion handler that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinferencegraph/execute(inputsdata:losslabelsdata:losslabelweightsdata:outputsdata:batchsize:options:completionhandler:)"
+      },
+      "-executeWithInputsData:outputsData:batchSize:options:completionHandler:": {
+        "doc": "Executes the inference graph with the inputs and outputs data, batch size, execution options, and completion handler that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinferencegraph/execute(inputsdata:outputsdata:batchsize:options:completionhandler:)"
+      },
+      "-linkWithGraphs:": {
+        "doc": "Links the inference graphs you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinferencegraph/link(with:)"
+      }
+    },
+    "MLCInstanceNormalizationLayer": {
+      "+layerWithFeatureChannelCount:beta:gamma:varianceEpsilon:": {
+        "doc": "Creates an instance normalization layer with the number of feature channels, beta and gamma tensors, and variance epsilon you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinstancenormalizationlayer/init(featurechannelcount:beta:gamma:varianceepsilon:)"
+      },
+      "+layerWithFeatureChannelCount:beta:gamma:varianceEpsilon:momentum:": {
+        "doc": "Creates an instance normalization layer with the number of feature channels, beta and gamma tensors, variance epsilon, and momentum you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinstancenormalizationlayer/init(featurechannelcount:beta:gamma:varianceepsilon:momentum:)"
+      },
+      "+layerWithFeatureChannelCount:mean:variance:beta:gamma:varianceEpsilon:momentum:": {
+        "doc": "Creates an instance normalization layer with the number of feature channels, mean, variance, beta and gamma tensors, variance epsilon, and momentum you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinstancenormalizationlayer/init(featurechannelcount:mean:variance:beta:gamma:varianceepsilon:momentum:)"
+      }
+    },
+    "MLCLSTMDescriptor": {
+      "+descriptorWithInputSize:hiddenSize:layerCount:": {
+        "doc": "Creates a batch first LSTM descriptor with the input size and number of layers you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor/init(inputsize:hiddensize:layercount:)"
+      },
+      "+descriptorWithInputSize:hiddenSize:layerCount:usesBiases:batchFirst:isBidirectional:dropout:": {
+        "doc": "Creates a batch first LSTM descriptor that allows you to indicate whether the input and output shape is batch first.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor/init(inputsize:hiddensize:layercount:usesbiases:batchfirst:isbidirectional:dropout:)"
+      },
+      "+descriptorWithInputSize:hiddenSize:layerCount:usesBiases:batchFirst:isBidirectional:returnsSequences:dropout:": {
+        "doc": "Creates a batch first LSTM descriptor that allows you to indicate whether the layer returns output for all sequences, or output for only the last sequence.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor/init(inputsize:hiddensize:layercount:usesbiases:batchfirst:isbidirectional:returnssequences:dropout:)"
+      },
+      "+descriptorWithInputSize:hiddenSize:layerCount:usesBiases:batchFirst:isBidirectional:returnsSequences:dropout:resultMode:": {
+        "doc": "Creates a descriptor with the number of features and layers, dropout, and options for use of biases, batch order, return sequences, bidirectionality, and expected tensors you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor/init(inputsize:hiddensize:layercount:usesbiases:batchfirst:isbidirectional:returnssequences:dropout:resultmode:)"
+      },
+      "+descriptorWithInputSize:hiddenSize:layerCount:usesBiases:isBidirectional:dropout:": {
+        "doc": "Creates a batch first LSTM descriptor with bias and bidirectional options you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor/init(inputsize:hiddensize:layercount:usesbiases:isbidirectional:dropout:)"
+      }
+    },
+    "MLCLSTMLayer": {
+      "+layerWithDescriptor:inputWeights:hiddenWeights:biases:": {
+        "doc": "Creates an LSTM layer with the descriptor, input and hidden weights, and biases you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmlayer/init(descriptor:inputweights:hiddenweights:biases:)"
+      },
+      "+layerWithDescriptor:inputWeights:hiddenWeights:peepholeWeights:biases:": {
+        "doc": "Creates an LSTM layer with the descriptor, weights, and biases you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmlayer/init(descriptor:inputweights:hiddenweights:peepholeweights:biases:)"
+      },
+      "+layerWithDescriptor:inputWeights:hiddenWeights:peepholeWeights:biases:gateActivations:outputResultActivation:": {
+        "doc": "Creates an LSTM layer using the descriptor, weights, biases, gate activations, and output result activation that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmlayer/init(descriptor:inputweights:hiddenweights:peepholeweights:biases:gateactivations:outputresultactivation:)"
+      }
+    },
+    "MLCLayer": {
+      "+supportsDataType:onDevice:": {
+        "doc": "Returns a Boolean that indicates whether instances of this layer accept source tensors for the data type and device that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclayer/supportsdatatype(_:on:)"
+      }
+    },
+    "MLCLayerNormalizationLayer": {
+      "+layerWithNormalizedShape:beta:gamma:varianceEpsilon:": {
+        "doc": "Creates a normalization layer with a shape, beta and gamma tensors, and variance epsilon you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclayernormalizationlayer/layerwithnormalizedshape:beta:gamma:varianceepsilon:"
+      }
+    },
+    "MLCLossDescriptor": {
+      "+descriptorWithType:reductionType:": {
+        "doc": "Creates a loss descriptor with the loss function and reduction type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclossdescriptor/init(type:reductiontype:)"
+      },
+      "+descriptorWithType:reductionType:weight:": {
+        "doc": "Creates a loss descriptor with the loss function, reduction type, and weight you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclossdescriptor/init(type:reductiontype:weight:)"
+      },
+      "+descriptorWithType:reductionType:weight:labelSmoothing:classCount:": {
+        "doc": "Creates a loss descriptor with the loss function, reduction type, weight, label smoothing, and number of classes you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclossdescriptor/init(type:reductiontype:weight:labelsmoothing:classcount:)"
+      },
+      "+descriptorWithType:reductionType:weight:labelSmoothing:classCount:epsilon:delta:": {
+        "doc": "Creates a loss descriptor with the loss function, reduction type, weight, label smoothing, and number of classes, epsilon, and delta that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclossdescriptor/init(type:reductiontype:weight:labelsmoothing:classcount:epsilon:delta:)"
+      }
+    },
+    "MLCLossLayer": {
+      "+categoricalCrossEntropyLossWithReductionType:labelSmoothing:classCount:weight:": {
+        "doc": "Creates a categorical cross entropy loss layer with the reduction type, label smoothing, number of classes, and weight you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/categoricalcrossentropy(reductiontype:labelsmoothing:classcount:weight:)"
+      },
+      "+categoricalCrossEntropyLossWithReductionType:labelSmoothing:classCount:weights:": {
+        "doc": "Creates a categorical cross entropy loss layer with the reduction type, label smoothing, number of classes, and weights you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/categoricalcrossentropy(reductiontype:labelsmoothing:classcount:weights:)"
+      },
+      "+cosineDistanceLossWithReductionType:weight:": {
+        "doc": "Creates a cosine distance loss layer with the reduction type and weight you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/cosinedistance(reductiontype:weight:)"
+      },
+      "+cosineDistanceLossWithReductionType:weights:": {
+        "doc": "Creates a cosine distance loss layer with the reduction type and weights you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/cosinedistance(reductiontype:weights:)"
+      },
+      "+hingeLossWithReductionType:weight:": {
+        "doc": "Creates a hinge loss layer with the reduction type and weight you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/hingeloss(reductiontype:weight:)"
+      },
+      "+hingeLossWithReductionType:weights:": {
+        "doc": "Creates a hinge loss layer with the reduction type and weights you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/hingeloss(reductiontype:weights:)"
+      },
+      "+huberLossWithReductionType:delta:weight:": {
+        "doc": "Creates a huber loss layer with the reduction type, delta, and weight you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/huberloss(reductiontype:delta:weight:)"
+      },
+      "+huberLossWithReductionType:delta:weights:": {
+        "doc": "Creates a huber loss layer with the reduction type, delta, and weights you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/huberloss(reductiontype:delta:weights:)"
+      },
+      "+layerWithDescriptor:": {
+        "doc": "Creates a loss layer with the descriptor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/init(descriptor:)"
+      },
+      "+layerWithDescriptor:weights:": {
+        "doc": "Creates a loss layer with the descriptor and weights you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/init(descriptor:weights:)"
+      },
+      "+logLossWithReductionType:epsilon:weight:": {
+        "doc": "Creates a log loss layer with the reduction type, epsilon, and weight you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/log(reductiontype:epsilon:weight:)"
+      },
+      "+logLossWithReductionType:epsilon:weights:": {
+        "doc": "Creates a log loss layer with the reduction type, epsilon, and weights you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/log(reductiontype:epsilon:weights:)"
+      },
+      "+meanAbsoluteErrorLossWithReductionType:weight:": {
+        "doc": "Creates a mean absolute loss layer with the reduction type and weight.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/meanabsoluteerror(reductiontype:weight:)"
+      },
+      "+meanAbsoluteErrorLossWithReductionType:weights:": {
+        "doc": "Creates a mean absolute loss layer with the reduction type and weights you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/meanabsoluteerror(reductiontype:weights:)"
+      },
+      "+meanSquaredErrorLossWithReductionType:weight:": {
+        "doc": "Creates a mean squared loss layer with the reduction type and weight you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/meansquarederror(reductiontype:weight:)"
+      },
+      "+meanSquaredErrorLossWithReductionType:weights:": {
+        "doc": "Creates a mean squared loss layer with the reduction type and weights you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/meansquarederror(reductiontype:weights:)"
+      },
+      "+sigmoidCrossEntropyLossWithReductionType:labelSmoothing:weight:": {
+        "doc": "Creates a sigmoid cross entropy loss layer with the reduction type, label smoothing, and weight you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/sigmoidcrossentropy(reductiontype:labelsmoothing:weight:)"
+      },
+      "+sigmoidCrossEntropyLossWithReductionType:labelSmoothing:weights:": {
+        "doc": "Creates a sigmoid cross entropy loss layer with the reduction type, label smoothing, and weights you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/sigmoidcrossentropy(reductiontype:labelsmoothing:weights:)"
+      },
+      "+softmaxCrossEntropyLossWithReductionType:labelSmoothing:classCount:weight:": {
+        "doc": "Creates a softmax cross entropy loss layer with the reduction type, label smoothing, number of classes, and weight you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/softmaxcrossentropy(reductiontype:labelsmoothing:classcount:weight:)"
+      },
+      "+softmaxCrossEntropyLossWithReductionType:labelSmoothing:classCount:weights:": {
+        "doc": "Creates a softmax cross entropy loss layer with the reduction type, label smoothing, number of classes, and weights you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/softmaxcrossentropy(reductiontype:labelsmoothing:classcount:weights:)"
+      }
+    },
+    "MLCMatMulDescriptor": {
+      "+descriptor": {
+        "doc": "Creates a batched matrix multiplication descriptor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmatmuldescriptor/init()"
+      },
+      "+descriptorWithAlpha:transposesX:transposesY:": {
+        "doc": "Creates a batched matrix multiplication descriptor with the alpha value and transpose options you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmatmuldescriptor/init(alpha:transposesx:transposesy:)"
+      }
+    },
+    "MLCMatMulLayer": {
+      "+layerWithDescriptor:": {
+        "doc": "Creates a matrix multiplication layer with the specified descriptor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmatmullayer/init(descriptor:)"
+      }
+    },
+    "MLCMultiheadAttentionDescriptor": {
+      "+descriptorWithModelDimension:headCount:": {
+        "doc": "Creates a multi-head attention descriptor with the model dimension and number of parallel attention heads you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentiondescriptor/init(modeldimension:headcount:)"
+      },
+      "+descriptorWithModelDimension:keyDimension:valueDimension:headCount:dropout:hasBiases:hasAttentionBiases:addsZeroAttention:": {
+        "doc": "Creates a multi-head attention descriptor with the dimensions, number of attention heads, dropout rate, and bias and padding options you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentiondescriptor/init(modeldimension:keydimension:valuedimension:headcount:dropout:hasbiases:hasattentionbiases:addszeroattention:)"
+      }
+    },
+    "MLCMultiheadAttentionLayer": {
+      "+layerWithDescriptor:weights:biases:attentionBiases:": {
+        "doc": "Creates a multi-head attention layer with the descriptor, weights, and biases you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentionlayer/init(descriptor:weights:biases:attentionbiases:)"
+      }
+    },
+    "MLCOptimizerDescriptor": {
+      "+descriptorWithLearningRate:gradientRescale:appliesGradientClipping:gradientClipMax:gradientClipMin:regularizationType:regularizationScale:": {
+        "doc": "Creates a descriptor with the learning rate, gradient rescale, clipping option and values, and regularization type and scale that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizerdescriptor/init(learningrate:gradientrescale:appliesgradientclipping:gradientclipmax:gradientclipmin:regularizationtype:regularizationscale:)"
+      },
+      "+descriptorWithLearningRate:gradientRescale:appliesGradientClipping:gradientClippingType:gradientClipMax:gradientClipMin:maximumClippingNorm:customGlobalNorm:regularizationType:regularizationScale:": {
+        "doc": "Creates a descriptor with the learning rate, gradient rescale, clipping option and values, and regularization type and scale that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizerdescriptor/init(learningrate:gradientrescale:appliesgradientclipping:gradientclippingtype:gradientclipmax:gradientclipmin:maximumclippingnorm:customglobalnorm:regularizationtype:regularizationscale:)"
+      },
+      "+descriptorWithLearningRate:gradientRescale:regularizationType:regularizationScale:": {
+        "doc": "Creates an optimizer descriptor with the learning rate, gradient rescale, regularization type, and regulation scale that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizerdescriptor/init(learningrate:gradientrescale:regularizationtype:regularizationscale:)"
+      }
+    },
+    "MLCPaddingLayer": {
+      "+layerWithConstantPadding:constantValue:": {
+        "doc": "Creates a padding layer with the constant padding sizes and constant valu you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer/layerwithconstantpadding:constantvalue:"
+      },
+      "+layerWithReflectionPadding:": {
+        "doc": "Creates a padding layer with the reflection padding sizes you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer/layerwithreflectionpadding:"
+      },
+      "+layerWithSymmetricPadding:": {
+        "doc": "Creates a padding layer with the symmetric padding sizes you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer/layerwithsymmetricpadding:"
+      },
+      "+layerWithZeroPadding:": {
+        "doc": "Creates a padding layer with the zero padding sizes you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer/layerwithzeropadding:"
+      }
+    },
+    "MLCPlatform": {
+      "+getRNGseed": {
+        "doc": "Returns the global random number generator seed value.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcplatform/getrngseed()"
+      },
+      "+setRNGSeedTo:": {
+        "doc": "Sets the global random number generator seed value.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcplatform/setrngseedto(_:)"
+      }
+    },
+    "MLCPoolingDescriptor": {
+      "+averagePoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:countIncludesPadding:": {
+        "doc": "Creates an average pooling descriptor with the kernel sizes, strides, dilution rates, padding policy and sizes, and zero padding option you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/averagepoolingdescriptorwithkernelsizes:strides:dilationrates:paddingpolicy:paddingsizes:countincludespadding:"
+      },
+      "+averagePoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:countIncludesPadding:": {
+        "doc": "Creates an average pooling descriptor with the kernel sizes, strides, padding policy, padding sizes, and zero padding option that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/averagepoolingdescriptorwithkernelsizes:strides:paddingpolicy:paddingsizes:countincludespadding:"
+      },
+      "+l2NormPoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:": {
+        "doc": "Creates a descriptor for an L2 norm pooling function with the kernel sizes, strides, dilation rates, padding policy, and padding sizes you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/l2normpoolingdescriptorwithkernelsizes:strides:dilationrates:paddingpolicy:paddingsizes:"
+      },
+      "+l2NormPoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:": {
+        "doc": "Creates a descriptor for an L2 norm pooling function with the kernel sizes, strides, padding policy, and padding sizes that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/l2normpoolingdescriptorwithkernelsizes:strides:paddingpolicy:paddingsizes:"
+      },
+      "+maxPoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:": {
+        "doc": "Creates a descriptor for a max pooling function with the kernel sizes, strides, dilation rates, padding policy, and padding sizes that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/maxpoolingdescriptorwithkernelsizes:strides:dilationrates:paddingpolicy:paddingsizes:"
+      },
+      "+maxPoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:": {
+        "doc": "Creates a descriptor for a max pooling function with the kernel sizes, strides, padding policy, and padding sizes that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/maxpoolingdescriptorwithkernelsizes:strides:paddingpolicy:paddingsizes:"
+      },
+      "+poolingDescriptorWithType:kernelSize:stride:": {
+        "doc": "Creates a pooling descriptor with the pooling function, kernel size, and stride you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/poolingdescriptorwithtype:kernelsize:stride:"
+      }
+    },
+    "MLCPoolingLayer": {
+      "+layerWithDescriptor:": {
+        "doc": "Creates a pooling layer with the descriptor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolinglayer/init(descriptor:)"
+      }
+    },
+    "MLCRMSPropOptimizer": {
+      "+optimizerWithDescriptor:": {
+        "doc": "Creates an RMSProp optimizer with the descriptor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcrmspropoptimizer/init(descriptor:)"
+      },
+      "+optimizerWithDescriptor:momentumScale:alpha:epsilon:isCentered:": {
+        "doc": "Creates an RMSProp optimizer with the descriptor, momentum scale, smoothing, epsilon, and option to compute the centered RMSProp that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcrmspropoptimizer/init(descriptor:momentumscale:alpha:epsilon:iscentered:)"
+      }
+    },
+    "MLCReductionLayer": {
+      "+layerWithReductionType:dimension:": {
+        "doc": "Creates a reduction layer using the reduction type and dimension you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcreductionlayer/init(reductiontype:dimension:)"
+      },
+      "+layerWithReductionType:dimensions:": {
+        "doc": "Creates a reduction layer using the reduction type and dimensions you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcreductionlayer/layerwithreductiontype:dimensions:"
+      }
+    },
+    "MLCReshapeLayer": {
+      "+layerWithShape:": {
+        "doc": "Creates a reshape layer with the shape you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcreshapelayer/layerwithshape:"
+      }
+    },
+    "MLCSGDOptimizer": {
+      "+optimizerWithDescriptor:": {
+        "doc": "Creates an SGD optimizer with the descriptor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcsgdoptimizer/init(descriptor:)"
+      },
+      "+optimizerWithDescriptor:momentumScale:usesNesterovMomentum:": {
+        "doc": "Create an SGD optimizer with the descriptor, momentum scale, and option to enable Nesterov momentum that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcsgdoptimizer/init(descriptor:momentumscale:usesnesterovmomentum:)"
+      }
+    },
+    "MLCScatterLayer": {
+      "+layerWithDimension:reductionType:": {
+        "doc": "Creates a scatter layer with the dimension and reduction type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcscatterlayer/init(dimension:reductiontype:)"
+      }
+    },
+    "MLCSelectionLayer": {
+      "+layer": {
+        "doc": "Creates a selection layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcselectionlayer/init()"
+      }
+    },
+    "MLCSliceLayer": {
+      "+sliceLayerWithStart:end:stride:": {
+        "doc": "Creates a slice layer with the specified start, end, and stride.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcslicelayer/slicelayerwithstart:end:stride:"
+      }
+    },
+    "MLCSoftmaxLayer": {
+      "+layerWithOperation:": {
+        "doc": "Creates a softmax layer with the operation you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcsoftmaxlayer/init(operation:)"
+      },
+      "+layerWithOperation:dimension:": {
+        "doc": "Creates a softmax layer with the operation and dimension you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcsoftmaxlayer/init(operation:dimension:)"
+      }
+    },
+    "MLCSplitLayer": {
+      "+layerWithSplitCount:dimension:": {
+        "doc": "Creates a split layer with the number of splits and dimension you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcsplitlayer/init(splitcount:dimension:)"
+      },
+      "+layerWithSplitSectionLengths:dimension:": {
+        "doc": "Creates a split layer with the lengths of each split section and dimension you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcsplitlayer/layerwithsplitsectionlengths:dimension:"
+      }
+    },
+    "MLCTensor": {
+      "+tensorWithDescriptor:": {
+        "doc": "Creates a tensor without data, using the descriptor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(descriptor:)"
+      },
+      "+tensorWithDescriptor:data:": {
+        "doc": "Creates a tensor with the descriptor and data you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(descriptor:data:)"
+      },
+      "+tensorWithDescriptor:fillWithData:": {
+        "doc": "Creates a tensor with the descriptor and scalar value you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(descriptor:fillwithdata:)"
+      },
+      "+tensorWithDescriptor:randomInitializerType:": {
+        "doc": "Creates a tensor with the descriptor and random initializer type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(descriptor:randominitializertype:)"
+      },
+      "+tensorWithSequenceLength:featureChannelCount:batchSize:": {
+        "doc": "Creates a tensor without data, with the sequence length, number of feature channels, and batch size you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(sequencelength:featurechannelcount:batchsize:)"
+      },
+      "+tensorWithSequenceLength:featureChannelCount:batchSize:data:": {
+        "doc": "Creates a tensor with the sequence length, number of feature channels, batch size, and data you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(sequencelength:featurechannelcount:batchsize:data:)"
+      },
+      "+tensorWithSequenceLength:featureChannelCount:batchSize:randomInitializerType:": {
+        "doc": "Creates a tensor with the sequence length, number of feature channels, batch size, and random initializer type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(sequencelength:featurechannelcount:batchsize:randominitializertype:)"
+      },
+      "+tensorWithSequenceLengths:sortedSequences:featureChannelCount:batchSize:data:": {
+        "doc": "Creates a tensor with the sequence lengths, sorting indicator, number of feature channels, batch size, and data you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/tensorwithsequencelengths:sortedsequences:featurechannelcount:batchsize:data:"
+      },
+      "+tensorWithSequenceLengths:sortedSequences:featureChannelCount:batchSize:randomInitializerType:": {
+        "doc": "Creates a tensor with the sequence lengths, sorting indicator, number of feature channels, batch size, and random initializer type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/tensorwithsequencelengths:sortedsequences:featurechannelcount:batchsize:randominitializertype:"
+      },
+      "+tensorWithShape:": {
+        "doc": "Creates a tensor without data, with the shape you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/tensorwithshape:"
+      },
+      "+tensorWithShape:data:dataType:": {
+        "doc": "Creates a tensor with the shape, data, and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/tensorwithshape:data:datatype:"
+      },
+      "+tensorWithShape:dataType:": {
+        "doc": "Creates a tensor without data, with the shape and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/tensorwithshape:datatype:"
+      },
+      "+tensorWithShape:fillWithData:dataType:": {
+        "doc": "Creates a tensor with the shape, scalar value, and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/tensorwithshape:fillwithdata:datatype:"
+      },
+      "+tensorWithShape:randomInitializerType:": {
+        "doc": "Creates a tensor with the shape and random initializer type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/tensorwithshape:randominitializertype:"
+      },
+      "+tensorWithShape:randomInitializerType:dataType:": {
+        "doc": "Creates a tensor with the shape, random initializer, and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/tensorwithshape:randominitializertype:datatype:"
+      },
+      "+tensorWithWidth:height:featureChannelCount:batchSize:": {
+        "doc": "Creates a tensor without data, with the sizes and number of feature channels you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(width:height:featurechannelcount:batchsize:)"
+      },
+      "+tensorWithWidth:height:featureChannelCount:batchSize:data:": {
+        "doc": "Creates a tensor with the sizes, number of feature channels, and data you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(width:height:featurechannelcount:batchsize:data:)"
+      },
+      "+tensorWithWidth:height:featureChannelCount:batchSize:data:dataType:": {
+        "doc": "Creates a tensor with the sizes, number of feature channels, data, and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(width:height:featurechannelcount:batchsize:data:datatype:)"
+      },
+      "+tensorWithWidth:height:featureChannelCount:batchSize:fillWithData:dataType:": {
+        "doc": "Creates a tensor with the sizes and number of feature channels, and filled with the data and type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(width:height:featurechannelcount:batchsize:fillwithdata:datatype:)"
+      },
+      "+tensorWithWidth:height:featureChannelCount:batchSize:randomInitializerType:": {
+        "doc": "Creates a tensor with the sizes, number of feature channels, and random data using the random initializer type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(width:height:featurechannelcount:batchsize:randominitializertype:)"
+      },
+      "-bindAndWriteData:toDevice:": {
+        "doc": "Associates the given data to the tensor, and if the device is a GPU, also copies the data to the device memory.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/bindandwritedata(_:to:)"
+      },
+      "-bindOptimizerData:deviceData:": {
+        "doc": "Associates the optimizer and device data buffers you specify to the tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/bindoptimizerdata(_:devicedata:)"
+      },
+      "-copyDataFromDeviceMemoryToBytes:length:synchronizeWithDevice:": {
+        "doc": "Copies tensor data from device memory to user-specified memory.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/copydatafromdevicememory(tobytes:length:synchronizewithdevice:)"
+      },
+      "-synchronizeData": {
+        "doc": "Synchronizes the data in host memory.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/synchronizedata()"
+      },
+      "-synchronizeOptimizerData": {
+        "doc": "Synchronizes the optimizer data in host memory.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/synchronizeoptimizerdata()"
+      },
+      "-tensorByDequantizingToType:scale:bias:": {
+        "doc": "Converts a tensor you quantize to a 32-bit floating-point tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/dequantized(to:scale:zeropoint:)"
+      },
+      "-tensorByDequantizingToType:scale:bias:axis:": {
+        "doc": "Converts a tensor you quantize to a 32-bit floating-point tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/dequantized(to:scale:bias:axis:)"
+      },
+      "-tensorByQuantizingToType:scale:bias:": {
+        "doc": "Converts a 32-bit floating-point tensor with the scale and bias you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/quantized(to:scale:bias:)"
+      },
+      "-tensorByQuantizingToType:scale:bias:axis:": {
+        "doc": "Converts a 32-bit floating-point tensor with the scale and bias you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/quantized(to:scale:bias:axis:)"
+      }
+    },
+    "MLCTensorData": {
+      "+dataWithBytesNoCopy:length:": {
+        "doc": "Creates a tensor data instance with the buffer of data and length of bytes you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordata/init(bytesnocopy:length:)"
+      },
+      "+dataWithBytesNoCopy:length:deallocator:": {
+        "doc": "Creates a tensor data instance with a data buffer, byte length, and custom deallocator closure you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordata/init(bytesnocopy:length:deallocator:)"
+      },
+      "+dataWithImmutableBytesNoCopy:length:": {
+        "doc": "Creates a tensor data instance with the buffer of immutable data and length of bytes you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordata/init(immutablebytesnocopy:length:)"
+      }
+    },
+    "MLCTensorDescriptor": {
+      "+convolutionBiasesDescriptorWithFeatureChannelCount:dataType:": {
+        "doc": "Creates a tensor descriptor with the number of feature channels and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/init(convolutionbiaseswithfeaturechannelcount:datatype:)"
+      },
+      "+convolutionWeightsDescriptorWithInputFeatureChannelCount:outputFeatureChannelCount:dataType:": {
+        "doc": "Creates a tensor descriptor with the number of feature channels and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/init(convolutionweightswithinputfeaturechannelcount:outputfeaturechannelcount:datatype:)"
+      },
+      "+convolutionWeightsDescriptorWithWidth:height:inputFeatureChannelCount:outputFeatureChannelCount:dataType:": {
+        "doc": "Creates a tensor descriptor with the sizing, number of feature channels, and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/init(convolutionweightswithwidth:height:inputfeaturechannelcount:outputfeaturechannelcount:datatype:)"
+      },
+      "+descriptorWithShape:dataType:": {
+        "doc": "Creates a tensor descriptor with the shape and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/descriptorwithshape:datatype:"
+      },
+      "+descriptorWithShape:sequenceLengths:sortedSequences:dataType:": {
+        "doc": "Creates a tensor descriptor with the shape, variable sequence lengths, sorting indicator, and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/descriptorwithshape:sequencelengths:sortedsequences:datatype:"
+      },
+      "+descriptorWithWidth:height:featureChannelCount:batchSize:": {
+        "doc": "Creates a tensor descriptor with the width and height, number of feature channels, and batch size you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/init(width:height:featurechannelcount:batchsize:)"
+      },
+      "+descriptorWithWidth:height:featureChannelCount:batchSize:dataType:": {
+        "doc": "Creates a tensor descriptor with the width and height, number of feature channels, batch size, and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/init(width:height:featurechannelcount:batchsize:datatype:)"
+      }
+    },
+    "MLCTensorParameter": {
+      "+parameterWithTensor:": {
+        "doc": "Creates a tensor parameter with the tensor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensorparameter/init(tensor:)"
+      },
+      "+parameterWithTensor:optimizerData:": {
+        "doc": "Creates a tensor parameter with the tensor and optimizer data you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensorparameter/init(tensor:optimizerdata:)"
+      }
+    },
+    "MLCTrainingGraph": {
+      "+graphWithGraphObjects:lossLayer:optimizer:": {
+        "doc": "Creates a training graph with the layers from the graph objects, loss layer, and optimizer you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/init(graphobjects:losslayer:optimizer:)"
+      },
+      "-addInputs:lossLabels:": {
+        "doc": "Adds the inputs and loss label inputs that you specify to the training graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/addinputs(_:losslabels:)"
+      },
+      "-addInputs:lossLabels:lossLabelWeights:": {
+        "doc": "Adds the inputs, loss labels, and loss label weights that you specify to the training graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/addinputs(_:losslabels:losslabelweights:)"
+      },
+      "-addOutputs:": {
+        "doc": "Adds the outputs to the training graph you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/addoutputs(_:)"
+      },
+      "-allocateUserGradientForTensor:": {
+        "doc": "Allocates an entry for a gradient for the result tensor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/allocateusergradient(for:)"
+      },
+      "-bindOptimizerData:deviceData:withTensor:": {
+        "doc": "Associates the optimizer and device data you specify along with the tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/bindoptimizerdata(_:devicedata:with:)"
+      },
+      "-compileOptimizer:": {
+        "doc": "Compiles the optimizer to use with a training graph you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/compileoptimizer(_:)"
+      },
+      "-compileWithOptions:device:": {
+        "doc": "Compiles the training graph for the options and device you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/compile(options:device:)"
+      },
+      "-compileWithOptions:device:inputTensors:inputTensorsData:": {
+        "doc": "Compiles the training graph for the options, device, and input tensors you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/compile(options:device:inputtensors:inputtensorsdata:)"
+      },
+      "-executeForwardWithBatchSize:options:completionHandler:": {
+        "doc": "Executes the forward pass of the training graph with the batch size, execution options, and completion handler you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/executeforward(batchsize:options:completionhandler:)"
+      },
+      "-executeForwardWithBatchSize:options:outputsData:completionHandler:": {
+        "doc": "Executes the forward pass of the training graph with the batch size, execution options, output data, and completion handler you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/executeforward(batchsize:options:outputsdata:completionhandler:)"
+      },
+      "-executeGradientWithBatchSize:options:completionHandler:": {
+        "doc": "Executes the gradient pass of the training graph with the batch size, execution options, and completion handler you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/executegradient(batchsize:options:completionhandler:)"
+      },
+      "-executeGradientWithBatchSize:options:outputsData:completionHandler:": {
+        "doc": "Executes the gradient pass of the training graph with the batch size, execution options, output data, and completion handler you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/executegradient(batchsize:options:outputsdata:completionhandler:)"
+      },
+      "-executeOptimizerUpdateWithOptions:completionHandler:": {
+        "doc": "Executes the optimizer update pass of the training graph with the execution options and completion handler you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/executeoptimizerupdate(options:completionhandler:)"
+      },
+      "-executeWithInputsData:lossLabelsData:lossLabelWeightsData:batchSize:options:completionHandler:": {
+        "doc": "Executes the training graph with the input data, batch size, execution options, and completion handler you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/execute(inputsdata:losslabelsdata:losslabelweightsdata:batchsize:options:completionhandler:)"
+      },
+      "-executeWithInputsData:lossLabelsData:lossLabelWeightsData:outputsData:batchSize:options:completionHandler:": {
+        "doc": "Executes the training graph with the input data, output data, batch size, execution options, and completion handler that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/execute(inputsdata:losslabelsdata:losslabelweightsdata:outputsdata:batchsize:options:completionhandler:)"
+      },
+      "-gradientDataForParameter:layer:": {
+        "doc": "Gets the gradient data for the trainable parameter and associated layer you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/gradientdata(forparameter:layer:)"
+      },
+      "-gradientTensorForInput:": {
+        "doc": "Gets the gradient tensor for the input tensor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/gradienttensor(forinput:)"
+      },
+      "-linkWithGraphs:": {
+        "doc": "Links the training graphs you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/link(with:)"
+      },
+      "-resultGradientTensorsForLayer:": {
+        "doc": "Gets the result gradient tensors for the layer in the training graph you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/resultgradienttensors(for:)"
+      },
+      "-setTrainingTensorParameters:": {
+        "doc": "Sets the input tensor parameters, which the optimizer then updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/settrainingtensorparameters(_:)"
+      },
+      "-sourceGradientTensorsForLayer:": {
+        "doc": "Gets the source gradient tensors for the layer in the training graph you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/sourcegradienttensors(for:)"
+      },
+      "-stopGradientForTensors:": {
+        "doc": "Adds the tensors that you specify, to indicate which contributions the graph excludes when computing gradients during gradient pass.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/stopgradient(for:)"
+      },
+      "-synchronizeUpdates": {
+        "doc": "Synchronizes updates from device memory.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/synchronizeupdates()"
+      }
+    },
+    "MLCTransposeLayer": {
+      "+layerWithDimensions:": {
+        "doc": "Creates a transpose layer with the dimensions you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctransposelayer/layerwithdimensions:"
+      }
+    },
+    "MLCUpsampleLayer": {
+      "+layerWithShape:": {
+        "doc": "Creates an upsample layer with the shape you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcupsamplelayer/layerwithshape:"
+      },
+      "+layerWithShape:sampleMode:alignsCorners:": {
+        "doc": "Creates an upsample layer with the shape, upsampling algorithm, and corner alignement option you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcupsamplelayer/layerwithshape:samplemode:alignscorners:"
+      }
+    },
+    "MLCYOLOLossDescriptor": {
+      "+descriptorWithAnchorBoxes:anchorBoxCount:": {
+        "doc": "Creates a YOLO loss filter descriptor with the anchor box data and number of anchor boxes you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcyololossdescriptor/init(anchorboxes:anchorboxcount:)"
+      }
+    },
+    "MLCYOLOLossLayer": {
+      "+layerWithDescriptor:": {
+        "doc": "Creates a YOLO loss layer with the descriptor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcyololosslayer/init(descriptor:)"
+      }
+    }
+  },
+  "properties": {
+    "MLCActivationDescriptor": {
+      "a": {
+        "doc": "The parameter a to the activation function.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationdescriptor/a"
+      },
+      "activationType": {
+        "doc": "The type of activation function.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationdescriptor/activationtype"
+      },
+      "b": {
+        "doc": "The parameter b to the activation function.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationdescriptor/b"
+      },
+      "c": {
+        "doc": "The parameter c to the activation function.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationdescriptor/c"
+      }
+    },
+    "MLCActivationLayer": {
+      "descriptor": {
+        "doc": "The configuration object you use to create an activation layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcactivationlayer/descriptor"
+      }
+    },
+    "MLCAdamOptimizer": {
+      "beta1": {
+        "doc": "The coefficent for computing running averages of gradient.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcadamoptimizer/beta1"
+      },
+      "beta2": {
+        "doc": "The coefficent for computing running averages of square of gradient.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcadamoptimizer/beta2"
+      },
+      "epsilon": {
+        "doc": "The epsilon value for improving numerical stability.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcadamoptimizer/epsilon"
+      },
+      "timeStep": {
+        "doc": "The initial timestep for the update.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcadamoptimizer/timestep"
+      },
+      "usesAMSGrad": {
+        "doc": "A Boolean value that indicates whether to use a variant of the algorithm.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcadamoptimizer/usesamsgrad"
+      }
+    },
+    "MLCAdamWOptimizer": {
+      "beta1": {
+        "doc": "The coefficent for computing running averages of gradient.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcadamwoptimizer/beta1"
+      },
+      "beta2": {
+        "doc": "The coefficent for computing running averages of square of gradient.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcadamwoptimizer/beta2"
+      },
+      "epsilon": {
+        "doc": "The epsilon value for improving numerical stability.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcadamwoptimizer/epsilon"
+      },
+      "timeStep": {
+        "doc": "The initial timestep for the update.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcadamwoptimizer/timestep"
+      },
+      "usesAMSGrad": {
+        "doc": "A Boolean value that indicates whether to use a variant of the algorithm.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcadamwoptimizer/usesamsgrad"
+      }
+    },
+    "MLCArithmeticLayer": {
+      "operation": {
+        "doc": "The arithmetic layer’s operation.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcarithmeticlayer/operation"
+      }
+    },
+    "MLCBatchNormalizationLayer": {
+      "beta": {
+        "doc": "The beta tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcbatchnormalizationlayer/beta"
+      },
+      "betaParameter": {
+        "doc": "The beta tensor parameter you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcbatchnormalizationlayer/betaparameter"
+      },
+      "featureChannelCount": {
+        "doc": "The number of feature channels.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcbatchnormalizationlayer/featurechannelcount"
+      },
+      "gamma": {
+        "doc": "The gamma tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcbatchnormalizationlayer/gamma"
+      },
+      "gammaParameter": {
+        "doc": "The gamma tensor parameter you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcbatchnormalizationlayer/gammaparameter"
+      },
+      "mean": {
+        "doc": "The mean tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcbatchnormalizationlayer/mean"
+      },
+      "momentum": {
+        "doc": "The value you use for the running mean and variance computation.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcbatchnormalizationlayer/momentum"
+      },
+      "variance": {
+        "doc": "The variance tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcbatchnormalizationlayer/variance"
+      },
+      "varianceEpsilon": {
+        "doc": "The variance epsilon you use for numerical stability.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcbatchnormalizationlayer/varianceepsilon"
+      }
+    },
+    "MLCComparisonLayer": {
+      "operation": {
+        "doc": "The comparison layer’s operation.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlccomparisonlayer/operation"
+      }
+    },
+    "MLCConcatenationLayer": {
+      "dimension": {
+        "doc": "The dimension, or axis, along which you concatenate tensors.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconcatenationlayer/dimension"
+      }
+    },
+    "MLCConvolutionDescriptor": {
+      "convolutionType": {
+        "doc": "The type of convolution.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/convolutiontype"
+      },
+      "dilationRateInX": {
+        "doc": "The dilation rate, or stride of elements, in the kernel in x.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/dilationrateinx"
+      },
+      "dilationRateInY": {
+        "doc": "The dilation rate, or stride of elements, in the kernel in y.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/dilationrateiny"
+      },
+      "dilationRates": {
+        "doc": "A tuple that contains the dilation rates for y and x.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/dilationrates"
+      },
+      "groupCount": {
+        "doc": "The number of groups.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/groupcount"
+      },
+      "init(type:kernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:)": {
+        "doc": "Creates a descriptor for the type, sizes, number of feature channels, group count, strides, dilation rates, and padding policy you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/init(type:kernelsizes:inputfeaturechannelcount:outputfeaturechannelcount:groupcount:strides:dilationrates:paddingpolicy:)"
+      },
+      "inputFeatureChannelCount": {
+        "doc": "The number of feature channels in the input tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/inputfeaturechannelcount"
+      },
+      "isConvolutionTranspose": {
+        "doc": "A Boolean that indicates whether this is a convolution transpose.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/isconvolutiontranspose"
+      },
+      "kernelHeight": {
+        "doc": "The kernel size in y.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/kernelheight"
+      },
+      "kernelSizes": {
+        "doc": "A tuple that contains the kernel sizes for height and width.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/kernelsizes"
+      },
+      "kernelWidth": {
+        "doc": "The kernel size in x.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/kernelwidth"
+      },
+      "outputFeatureChannelCount": {
+        "doc": "The number of feature channels in the output tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/outputfeaturechannelcount"
+      },
+      "paddingPolicy": {
+        "doc": "The padding policy.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/paddingpolicy-61tq3"
+      },
+      "paddingSizeInX": {
+        "doc": "The pooling size in x, left and right, to use if the padding policy is to use padding size.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/paddingsizeinx"
+      },
+      "paddingSizeInY": {
+        "doc": "The pooling size in y, top and bottom, to use if the padding policy is to use padding size.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/paddingsizeiny"
+      },
+      "strideInX": {
+        "doc": "The kernel stride in x.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/strideinx"
+      },
+      "strideInY": {
+        "doc": "The kernel stride in y.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/strideiny"
+      },
+      "strides": {
+        "doc": "A tuple that contains the kernel strides for y and x.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/strides"
+      },
+      "usesDepthwiseConvolution": {
+        "doc": "A Boolean that indicates whether you use depthwise convolution.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/usesdepthwiseconvolution"
+      }
+    },
+    "MLCConvolutionLayer": {
+      "biases": {
+        "doc": "The biases tensor you use for the convolution layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutionlayer/biases"
+      },
+      "biasesParameter": {
+        "doc": "The biases tensor parameter you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutionlayer/biasesparameter"
+      },
+      "descriptor": {
+        "doc": "The configuration object you use to create the convolution layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutionlayer/descriptor"
+      },
+      "weights": {
+        "doc": "The weights tensor you use for the convolution layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutionlayer/weights"
+      },
+      "weightsParameter": {
+        "doc": "The weights tensor parameter you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutionlayer/weightsparameter"
+      }
+    },
+    "MLCDevice": {
+      "actualDeviceType": {
+        "doc": "The active device.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcdevice/actualdevicetype"
+      },
+      "gpuDevices": {
+        "doc": "An array that contains the specific Metal devices you use to execute neural networks.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcdevice/gpudevices"
+      },
+      "type": {
+        "doc": "The type you specify when creating the device.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcdevice/type"
+      }
+    },
+    "MLCDropoutLayer": {
+      "rate": {
+        "doc": "The dropout rate you use for each element.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcdropoutlayer/rate"
+      },
+      "seed": {
+        "doc": "The seed you use to generate random numbers.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcdropoutlayer/seed"
+      }
+    },
+    "MLCEmbeddingDescriptor": {
+      "embeddingCount": {
+        "doc": "The size of the dictionary.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/embeddingcount-77gxz"
+      },
+      "embeddingDimension": {
+        "doc": "The dimension of embedding vectors.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/embeddingdimension-3u8w7"
+      },
+      "init(embeddingCount:embeddingDimension:)": {
+        "doc": "Creates an embedding descriptor with the size of the dictionary and dimension of embedding vectors you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/init(embeddingcount:embeddingdimension:)"
+      },
+      "init(embeddingCount:embeddingDimension:paddingIndex:maximumNorm:pNorm:scalesGradientByFrequency:)": {
+        "doc": "Creates an embedding descriptor with the size and dimension of embedding vectors, padding index, and norm and scaling options that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/init(embeddingcount:embeddingdimension:paddingindex:maximumnorm:pnorm:scalesgradientbyfrequency:)"
+      },
+      "maximumNorm": {
+        "doc": "A float value that, if set, causes the layer to renormalize the selected embedding vectors to have an Lp norm less than this value.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/maximumnorm-17u0k"
+      },
+      "pNorm": {
+        "doc": "The p of the Lp norm.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/pnorm-8vhw1"
+      },
+      "paddingIndex": {
+        "doc": "An unsigned integer value that, if set, causes the layer to initialize the embedding vector at that index to zero.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/paddingindex-pb1e"
+      },
+      "scalesGradientByFrequency": {
+        "doc": "A Boolean that indicates whether the layer scales gradients by the inverse of the frequency of words in batch before the weight update.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/scalesgradientbyfrequency"
+      }
+    },
+    "MLCEmbeddingLayer": {
+      "descriptor": {
+        "doc": "The configuration object you use to create the embedding layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddinglayer/descriptor"
+      },
+      "weights": {
+        "doc": "The weights tensor that contains the word embedding.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddinglayer/weights"
+      },
+      "weightsParameter": {
+        "doc": "The tensor parameter that describes the weights for the optimizer update.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddinglayer/weightsparameter"
+      }
+    },
+    "MLCFullyConnectedLayer": {
+      "biases": {
+        "doc": "The biases tensor you use for the fully connected layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcfullyconnectedlayer/biases"
+      },
+      "biasesParameter": {
+        "doc": "The biases tensor parameter you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcfullyconnectedlayer/biasesparameter"
+      },
+      "descriptor": {
+        "doc": "The configuration object you use to create the fully connected layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcfullyconnectedlayer/descriptor"
+      },
+      "weights": {
+        "doc": "The weights tensor you use for the fully connected layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcfullyconnectedlayer/weights"
+      },
+      "weightsParameter": {
+        "doc": "The weights tensor parameter you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcfullyconnectedlayer/weightsparameter"
+      }
+    },
+    "MLCGatherLayer": {
+      "dimension": {
+        "doc": "The dimension to index.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgatherlayer/dimension"
+      }
+    },
+    "MLCGramMatrixLayer": {
+      "scale": {
+        "doc": "The scaling factor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgrammatrixlayer/scale"
+      }
+    },
+    "MLCGraph": {
+      "device": {
+        "doc": "The device you’ll use for compiling and executing a graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/device"
+      },
+      "layers": {
+        "doc": "An array that contains the layers in the graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/layers"
+      },
+      "reshape(shape:source:)": {
+        "doc": "Adds a new reshape layer to the graph using the shape and source tensor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/reshape(shape:source:)"
+      },
+      "split(source:splitSectionLengths:dimension:)": {
+        "doc": "Adds a new split layer to the graph using the source tensor, lengths of each split section, and dimension to split the source tensor that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/split(source:splitsectionlengths:dimension:)"
+      },
+      "summarizedDOTDescription": {
+        "doc": "A DOT representation of the graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/summarizeddotdescription"
+      },
+      "transpose(dimensions:source:)": {
+        "doc": "Adds a new transpose layer to the graph using the dimensions and source tensor you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgraph/transpose(dimensions:source:)"
+      }
+    },
+    "MLCGroupNormalizationLayer": {
+      "beta": {
+        "doc": "The beta tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgroupnormalizationlayer/beta"
+      },
+      "betaParameter": {
+        "doc": "The beta tensor parameter you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgroupnormalizationlayer/betaparameter"
+      },
+      "featureChannelCount": {
+        "doc": "The number of feature channels.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgroupnormalizationlayer/featurechannelcount"
+      },
+      "gamma": {
+        "doc": "The gamma tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgroupnormalizationlayer/gamma"
+      },
+      "gammaParameter": {
+        "doc": "The gamma tensor parameter you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgroupnormalizationlayer/gammaparameter"
+      },
+      "groupCount": {
+        "doc": "The number of groups into which you separate the channels.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgroupnormalizationlayer/groupcount"
+      },
+      "varianceEpsilon": {
+        "doc": "The variance epsilon you use for numerical stability.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcgroupnormalizationlayer/varianceepsilon"
+      }
+    },
+    "MLCInferenceGraph": {
+      "deviceMemorySize": {
+        "doc": "The device memory size in bytes for all intermediate tensors in the inference graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinferencegraph/devicememorysize"
+      },
+      "execute(inputsData:lossLabelsData:lossLabelWeightsData:outputsData:batchSize:options:)": {
+        "doc": "Executes the inference graph with the input and output data, batch size, and execution options you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinferencegraph/execute(inputsdata:losslabelsdata:losslabelweightsdata:outputsdata:batchsize:options:)"
+      }
+    },
+    "MLCInstanceNormalizationLayer": {
+      "beta": {
+        "doc": "The beta tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinstancenormalizationlayer/beta"
+      },
+      "betaParameter": {
+        "doc": "The beta tensor parameter you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinstancenormalizationlayer/betaparameter"
+      },
+      "featureChannelCount": {
+        "doc": "The number of feature channels.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinstancenormalizationlayer/featurechannelcount"
+      },
+      "gamma": {
+        "doc": "The gamma tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinstancenormalizationlayer/gamma"
+      },
+      "gammaParameter": {
+        "doc": "The gamma tensor parameter you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinstancenormalizationlayer/gammaparameter"
+      },
+      "mean": {
+        "doc": "The running mean tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinstancenormalizationlayer/mean"
+      },
+      "momentum": {
+        "doc": "The momentum value for the running mean and variance computation.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinstancenormalizationlayer/momentum"
+      },
+      "variance": {
+        "doc": "The running variance tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinstancenormalizationlayer/variance"
+      },
+      "varianceEpsilon": {
+        "doc": "The variance epsilon you use for numerical stability.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcinstancenormalizationlayer/varianceepsilon"
+      }
+    },
+    "MLCLSTMDescriptor": {
+      "batchFirst": {
+        "doc": "A Boolean that indicates whether the input and output shape is batch first.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor/batchfirst"
+      },
+      "dropout": {
+        "doc": "The dropout probability.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor/dropout"
+      },
+      "hiddenSize": {
+        "doc": "The number of features in the hidden state.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor/hiddensize"
+      },
+      "inputSize": {
+        "doc": "The number of expected features in the input.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor/inputsize"
+      },
+      "isBidirectional": {
+        "doc": "A Boolean that indicates whether the layer is bidirectional.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor/isbidirectional"
+      },
+      "layerCount": {
+        "doc": "The number of recurrent layers.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor/layercount"
+      },
+      "resultMode": {
+        "doc": "The mode that indicates whether the layer produces a single result tensor or three result tensors — final output, last hidden state, and the cell state.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor/resultmode"
+      },
+      "returnsSequences": {
+        "doc": "A Boolean that indicates whether the layer returns output for all sequences.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor/returnssequences"
+      },
+      "usesBiases": {
+        "doc": "A Boolean that indicates whether you use bias weights.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor/usesbiases"
+      }
+    },
+    "MLCLSTMLayer": {
+      "biases": {
+        "doc": "The array of tensors that describe the bias terms you use for the input, hidden, cell, and output gates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmlayer/biases"
+      },
+      "biasesParameters": {
+        "doc": "The biases tensor parameters you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmlayer/biasesparameters"
+      },
+      "descriptor": {
+        "doc": "The configuration object you use to create the LSTM layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmlayer/descriptor"
+      },
+      "gateActivations": {
+        "doc": "The array of gate activations you use for input, hidden, cell, and output gates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmlayer/gateactivations"
+      },
+      "hiddenWeights": {
+        "doc": "The array of tensors that describe the hidden weights you use for the input, hidden, cell, and output gates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmlayer/hiddenweights"
+      },
+      "hiddenWeightsParameters": {
+        "doc": "The hidden weights tensor parameters you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmlayer/hiddenweightsparameters"
+      },
+      "inputWeights": {
+        "doc": "The array of tensors that describe the input weights you use for the input, hidden, cell, and output gates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmlayer/inputweights"
+      },
+      "inputWeightsParameters": {
+        "doc": "The input weights tensor parameters you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmlayer/inputweightsparameters"
+      },
+      "outputResultActivation": {
+        "doc": "The output activation descriptor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmlayer/outputresultactivation"
+      },
+      "peepholeWeights": {
+        "doc": "The array of tensors that describe the peephole weights you use for the input, hidden, cell, and output gates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmlayer/peepholeweights"
+      },
+      "peepholeWeightsParameters": {
+        "doc": "The peephole weights tensor parameters you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclstmlayer/peepholeweightsparameters"
+      }
+    },
+    "MLCLayer": {
+      "deviceType": {
+        "doc": "A device type that indicates where the system executes the layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclayer/devicetype"
+      },
+      "isDebuggingEnabled": {
+        "doc": "A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclayer/isdebuggingenabled"
+      },
+      "label": {
+        "doc": "A string that helps identify this layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclayer/label"
+      },
+      "layerID": {
+        "doc": "A unique number that identifies each layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclayer/layerid"
+      }
+    },
+    "MLCLayerNormalizationLayer": {
+      "beta": {
+        "doc": "The beta tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclayernormalizationlayer/beta"
+      },
+      "betaParameter": {
+        "doc": "The beta tensor parameter you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclayernormalizationlayer/betaparameter"
+      },
+      "gamma": {
+        "doc": "The gamma tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclayernormalizationlayer/gamma"
+      },
+      "gammaParameter": {
+        "doc": "The gamma tensor parameter you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclayernormalizationlayer/gammaparameter"
+      },
+      "init(normalizedShape:beta:gamma:varianceEpsilon:)": {
+        "doc": "Creates a normalization layer with a shape, optional beta and gamma tensors, and variance epsilon you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclayernormalizationlayer/init(normalizedshape:beta:gamma:varianceepsilon:)-28e6g"
+      },
+      "normalizedShape": {
+        "doc": "The shape of the axes where normalization occurs.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclayernormalizationlayer/normalizedshape-2cz6k"
+      },
+      "varianceEpsilon": {
+        "doc": "The variance epsilon you use for numerical stability.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclayernormalizationlayer/varianceepsilon"
+      }
+    },
+    "MLCLossDescriptor": {
+      "classCount": {
+        "doc": "The number of classes.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclossdescriptor/classcount"
+      },
+      "delta": {
+        "doc": "The delta value.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclossdescriptor/delta"
+      },
+      "epsilon": {
+        "doc": "The epsilon value.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclossdescriptor/epsilon"
+      },
+      "labelSmoothing": {
+        "doc": "The value for label smoothing.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclossdescriptor/labelsmoothing"
+      },
+      "lossType": {
+        "doc": "The loss function type.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclossdescriptor/losstype"
+      },
+      "reductionType": {
+        "doc": "The reduction operation performed by the loss function.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclossdescriptor/reductiontype"
+      },
+      "weight": {
+        "doc": "The scale factor you apply to each element of a result.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclossdescriptor/weight"
+      }
+    },
+    "MLCLossLayer": {
+      "descriptor": {
+        "doc": "The configuration object you use to create the loss layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/descriptor"
+      },
+      "weights": {
+        "doc": "The loss label weights tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclosslayer/weights"
+      }
+    },
+    "MLCMatMulDescriptor": {
+      "alpha": {
+        "doc": "A scalar value you specify to scale the result in C = alpha x A x B.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmatmuldescriptor/alpha"
+      },
+      "transposesX": {
+        "doc": "A Boolean that specifies whether you choose to transpose the last two dimensions of x.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmatmuldescriptor/transposesx"
+      },
+      "transposesY": {
+        "doc": "A Boolean that specifies whether you choose to transpose the last two dimensions of y.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmatmuldescriptor/transposesy"
+      }
+    },
+    "MLCMatMulLayer": {
+      "descriptor": {
+        "doc": "The configuration object you use to create the matrix multiplication layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmatmullayer/descriptor"
+      }
+    },
+    "MLCMultiheadAttentionDescriptor": {
+      "addsZeroAttention": {
+        "doc": "A Boolean that specifies whether you add a row of zeros to projected key and value.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentiondescriptor/addszeroattention"
+      },
+      "dropout": {
+        "doc": "The dropout rate you apply to the output projection weights.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentiondescriptor/dropout"
+      },
+      "hasAttentionBiases": {
+        "doc": "A Boolean that specifies whether you add an array of biases to key and value, respectively.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentiondescriptor/hasattentionbiases"
+      },
+      "hasBiases": {
+        "doc": "A Boolean that specifies whether you add a bias to query, key, value, and output projections.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentiondescriptor/hasbiases"
+      },
+      "headCount": {
+        "doc": "The number of parallel attention heads.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentiondescriptor/headcount"
+      },
+      "keyDimension": {
+        "doc": "The total dimension of key space, which must be divisible by the number of heads.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentiondescriptor/keydimension"
+      },
+      "modelDimension": {
+        "doc": "The model or embedding dimension.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentiondescriptor/modeldimension"
+      },
+      "valueDimension": {
+        "doc": "The total dimension of value space, which must be divisible by the number of heads.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentiondescriptor/valuedimension"
+      }
+    },
+    "MLCMultiheadAttentionLayer": {
+      "attentionBiases": {
+        "doc": "The array of attention biases you use for key and value.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentionlayer/attentionbiases"
+      },
+      "biases": {
+        "doc": "The array of biases you use for query, key, value, and output projections.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentionlayer/biases"
+      },
+      "biasesParameters": {
+        "doc": "The array of biases tensor parameters you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentionlayer/biasesparameters"
+      },
+      "descriptor": {
+        "doc": "The configuration object you use to create the multi-head attention layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentionlayer/descriptor"
+      },
+      "weights": {
+        "doc": "The array of weights you use for query, key, value, and output projections.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentionlayer/weights"
+      },
+      "weightsParameters": {
+        "doc": "The array of weights tensor parameters you use for optimizer updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcmultiheadattentionlayer/weightsparameters"
+      }
+    },
+    "MLCOptimizer": {
+      "appliesGradientClipping": {
+        "doc": "A Boolean value that indicates whether you apply gradient clipping.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizer/appliesgradientclipping"
+      },
+      "customGlobalNorm": {
+        "doc": "A custom norm the system uses in place of the global norm.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizer/customglobalnorm"
+      },
+      "gradientClipMax": {
+        "doc": "The maximum gradient value before the optimizer rescales the gradient, if you enable gradient clipping.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizer/gradientclipmax"
+      },
+      "gradientClipMin": {
+        "doc": "The minimum gradient value before the optimizer rescales the gradient, if you enable gradient clipping.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizer/gradientclipmin"
+      },
+      "gradientClippingType": {
+        "doc": "The type of clipping the system applies to the gradient.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizer/gradientclippingtype"
+      },
+      "gradientRescale": {
+        "doc": "The rescale value the optimizer applies to gradients during updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizer/gradientrescale"
+      },
+      "learningRate": {
+        "doc": "The learning rate.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizer/learningrate"
+      },
+      "maximumClippingNorm": {
+        "doc": "The maximum clipping value.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizer/maximumclippingnorm"
+      },
+      "regularizationScale": {
+        "doc": "The regularization scale.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizer/regularizationscale"
+      },
+      "regularizationType": {
+        "doc": "The regularization type.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizer/regularizationtype"
+      }
+    },
+    "MLCOptimizerDescriptor": {
+      "appliesGradientClipping": {
+        "doc": "A Boolean that indicates whether you apply gradient clipping.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizerdescriptor/appliesgradientclipping"
+      },
+      "customGlobalNorm": {
+        "doc": "A custom norm the system uses in place of the global norm.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizerdescriptor/customglobalnorm"
+      },
+      "gradientClipMax": {
+        "doc": "The maximum gradient value before the optimizer rescales the gradient, if you enabled gradient clipping.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizerdescriptor/gradientclipmax"
+      },
+      "gradientClipMin": {
+        "doc": "The minimum gradient value before the optimizer rescales the gradient, if you enabled gradient clipping.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizerdescriptor/gradientclipmin"
+      },
+      "gradientClippingType": {
+        "doc": "The type of clipping the system applies to the gradient.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizerdescriptor/gradientclippingtype"
+      },
+      "gradientRescale": {
+        "doc": "The rescale value the optimizer applies to gradients during updates.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizerdescriptor/gradientrescale"
+      },
+      "learningRate": {
+        "doc": "The learning rate.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizerdescriptor/learningrate"
+      },
+      "maximumClippingNorm": {
+        "doc": "The maximum clipping value.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizerdescriptor/maximumclippingnorm"
+      },
+      "regularizationScale": {
+        "doc": "The regularization scale.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizerdescriptor/regularizationscale"
+      },
+      "regularizationType": {
+        "doc": "The regularization type.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcoptimizerdescriptor/regularizationtype"
+      }
+    },
+    "MLCPaddingLayer": {
+      "constantValue": {
+        "doc": "The constant value you use if padding type is constant.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer/constantvalue"
+      },
+      "init(constantPadding:constantValue:)": {
+        "doc": "Creates a padding layer with the constant padding sizes and constant value you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer/init(constantpadding:constantvalue:)"
+      },
+      "init(reflectionPadding:)": {
+        "doc": "Creates a padding layer with the reflection padding sizes you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer/init(reflectionpadding:)"
+      },
+      "init(symmetricPadding:)": {
+        "doc": "Creates a padding layer with the symmetric padding sizes you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer/init(symmetricpadding:)"
+      },
+      "init(zeroPadding:)": {
+        "doc": "Creates a padding layer with the zero padding sizes you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer/init(zeropadding:)"
+      },
+      "paddingBottom": {
+        "doc": "The bottom padding size.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer/paddingbottom"
+      },
+      "paddingLeft": {
+        "doc": "The left padding size.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer/paddingleft"
+      },
+      "paddingRight": {
+        "doc": "The right padding size.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer/paddingright"
+      },
+      "paddingTop": {
+        "doc": "The top padding size.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer/paddingtop"
+      },
+      "paddingType": {
+        "doc": "The padding type.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpaddinglayer/paddingtype"
+      }
+    },
+    "MLCPoolingDescriptor": {
+      "countIncludesPadding": {
+        "doc": "A Boolean that indicates whether you include zero padding in the averaging calculation.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/countincludespadding"
+      },
+      "dilationRateInX": {
+        "doc": "The kernel dilation rate, or stride of elements, in x.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/dilationrateinx"
+      },
+      "dilationRateInY": {
+        "doc": "The kernel dilation rate, or stride of elements, in y.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/dilationrateiny"
+      },
+      "dilationRates": {
+        "doc": "A tuple that contains the dilation rates for y and x.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/dilationrates"
+      },
+      "init(type:kernelSizes:strides:dilationRates:paddingPolicy:)": {
+        "doc": "Creates a pooling descriptor with the pooling function type, kernel sizes, strides, dilation rates, and padding policy that you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/init(type:kernelsizes:strides:dilationrates:paddingpolicy:)"
+      },
+      "kernelHeight": {
+        "doc": "The pooling kernel size in y.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/kernelheight"
+      },
+      "kernelSizes": {
+        "doc": "A tuple that contains the kernel sizes for height and width.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/kernelsizes"
+      },
+      "kernelWidth": {
+        "doc": "The pooling kernel size in x.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/kernelwidth"
+      },
+      "paddingPolicy": {
+        "doc": "The padding policy.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/paddingpolicy-1e6rg"
+      },
+      "paddingSizeInX": {
+        "doc": "The padding size in x, left and right, to use if the padding policy is to use padding size.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/paddingsizeinx"
+      },
+      "paddingSizeInY": {
+        "doc": "The padding size in y, top and bottom, to use if the padding policy is to use padding size.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/paddingsizeiny"
+      },
+      "poolingType": {
+        "doc": "The pooling operation type.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/poolingtype-4ni07"
+      },
+      "strideInX": {
+        "doc": "The stride of the kernel in x.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/strideinx"
+      },
+      "strideInY": {
+        "doc": "The stride of the kernel in y.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/strideiny"
+      },
+      "strides": {
+        "doc": "A tuple that contains the kernel strides for y and x.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/strides"
+      }
+    },
+    "MLCPoolingLayer": {
+      "descriptor": {
+        "doc": "The configuration object you use to create the pooling layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolinglayer/descriptor"
+      }
+    },
+    "MLCRMSPropOptimizer": {
+      "alpha": {
+        "doc": "The constant for smoothing.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcrmspropoptimizer/alpha"
+      },
+      "epsilon": {
+        "doc": "The epsilon value you use to improve numerical stability.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcrmspropoptimizer/epsilon"
+      },
+      "isCentered": {
+        "doc": "A Boolean that indicates whether you compute the centered RMSProp.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcrmspropoptimizer/iscentered"
+      },
+      "momentumScale": {
+        "doc": "A hyper-parameter that specifies the momentum factor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcrmspropoptimizer/momentumscale"
+      }
+    },
+    "MLCReductionLayer": {
+      "dimension": {
+        "doc": "The dimension to perform the reduction operation on.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcreductionlayer/dimension"
+      },
+      "dimensions": {
+        "doc": "The dimensions to perform the reduction operation on.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcreductionlayer/dimensions-4359b"
+      },
+      "init(reductionType:dimensions:)": {
+        "doc": "Creates a reduction layer using the reduction type and dimensions you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcreductionlayer/init(reductiontype:dimensions:)"
+      },
+      "reductionType": {
+        "doc": "The function reduction type the system uses for reduction.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcreductionlayer/reductiontype"
+      }
+    },
+    "MLCReshapeLayer": {
+      "init(shape:)": {
+        "doc": "Creates a reshape layer with the shape you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcreshapelayer/init(shape:)"
+      },
+      "shape": {
+        "doc": "An array that contains the size of each dimension.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcreshapelayer/shape-840ax"
+      }
+    },
+    "MLCSGDOptimizer": {
+      "momentumScale": {
+        "doc": "A hyper-parameter specifying the momentum factor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcsgdoptimizer/momentumscale"
+      },
+      "usesNesterovMomentum": {
+        "doc": "A Boolean that indicates whether you enable Nesterov momentum.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcsgdoptimizer/usesnesterovmomentum"
+      }
+    },
+    "MLCScatterLayer": {
+      "dimension": {
+        "doc": "The dimension to index.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcscatterlayer/dimension"
+      },
+      "reductionType": {
+        "doc": "The reduction type that applies to all values in the source tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcscatterlayer/reductiontype"
+      }
+    },
+    "MLCSliceLayer": {
+      "end": {
+        "doc": "The end vector.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcslicelayer/end-8z0wi"
+      },
+      "init(start:end:stride:)": {
+        "doc": "Creates a slice layer with the start, end, and stride you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcslicelayer/init(start:end:stride:)"
+      },
+      "start": {
+        "doc": "The start vector.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcslicelayer/start-6dnjn"
+      },
+      "stride": {
+        "doc": "The stride vector.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcslicelayer/stride-84fhb"
+      }
+    },
+    "MLCSoftmaxLayer": {
+      "dimension": {
+        "doc": "The dimension over which you want to perform the softmax operation.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcsoftmaxlayer/dimension"
+      },
+      "operation": {
+        "doc": "The softmax operation.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcsoftmaxlayer/operation"
+      }
+    },
+    "MLCSplitLayer": {
+      "dimension": {
+        "doc": "The dimension or axis along which to split the tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcsplitlayer/dimension"
+      },
+      "init(splitSectionLengths:dimension:)": {
+        "doc": "Creates a split layer with the lengths of each split section and dimension you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcsplitlayer/init(splitsectionlengths:dimension:)"
+      },
+      "splitCount": {
+        "doc": "The number of splits.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcsplitlayer/splitcount"
+      },
+      "splitSectionLengths": {
+        "doc": "An array that contains the lengths of each split section.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcsplitlayer/splitsectionlengths-32abw"
+      }
+    },
+    "MLCTensor": {
+      "data": {
+        "doc": "The tensor data.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/data"
+      },
+      "descriptor": {
+        "doc": "The configuration object you use to create a tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/descriptor"
+      },
+      "device": {
+        "doc": "The device associated with this tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/device"
+      },
+      "hasValidNumerics": {
+        "doc": "A Boolean that indicates whether a tensor contains NaN or INF values.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/hasvalidnumerics"
+      },
+      "init(sequenceLengths:sortedSequences:featureChannelCount:batchSize:data:)": {
+        "doc": "Creates a tensor with the sequence lengths, sorting indicator, number of feature channels, batch size, and data you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(sequencelengths:sortedsequences:featurechannelcount:batchsize:data:)"
+      },
+      "init(sequenceLengths:sortedSequences:featureChannelCount:batchSize:randomInitializerType:)": {
+        "doc": "Creates a tensor with the sequence lengths, sorting indicator, number of feature channels, batch size, and random initializer type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(sequencelengths:sortedsequences:featurechannelcount:batchsize:randominitializertype:)"
+      },
+      "init(shape:)": {
+        "doc": "Creates a tensor without data, with the shape you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(shape:)"
+      },
+      "init(shape:data:dataType:)": {
+        "doc": "Creates a tensor with the shape, data, and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(shape:data:datatype:)"
+      },
+      "init(shape:dataType:)": {
+        "doc": "Creates a tensor without data, with the shape and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(shape:datatype:)"
+      },
+      "init(shape:fillWithData:dataType:)": {
+        "doc": "Creates a tensor with the shape, scalar value, and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(shape:fillwithdata:datatype:)"
+      },
+      "init(shape:randomInitializerType:)": {
+        "doc": "Creates a tensor with the shape and random initializer type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/init(shape:randominitializertype:)"
+      },
+      "label": {
+        "doc": "A string that identifes this tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/label"
+      },
+      "optimizerData": {
+        "doc": "An array that contains optimizer buffers you specify when you create a tensor parameter.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/optimizerdata"
+      },
+      "optimizerDeviceData": {
+        "doc": "An array that contains the device optimizer buffers you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/optimizerdevicedata"
+      },
+      "tensorID": {
+        "doc": "A number that uniquely identifies the tensor, which the framework assigns when it creates a tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensor/tensorid"
+      }
+    },
+    "MLCTensorData": {
+      "bytes": {
+        "doc": "A buffer that conains data.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordata/bytes"
+      },
+      "length": {
+        "doc": "The number of bytes you choose to hold for this tensor data instance.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordata/length"
+      }
+    },
+    "MLCTensorDescriptor": {
+      "batchSizePerSequenceStep": {
+        "doc": "The batch size for each sequence.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/batchsizepersequencestep-55mp8"
+      },
+      "dataType": {
+        "doc": "The tensor data type.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/datatype"
+      },
+      "dimensionCount": {
+        "doc": "The number of dimensions in the tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/dimensioncount"
+      },
+      "init(shape:dataType:)": {
+        "doc": "Creates a tensor descriptor with the shape and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/init(shape:datatype:)"
+      },
+      "init(shape:sequenceLengths:sortedSequences:dataType:)": {
+        "doc": "Creates a tensor descriptor with the shape, variable sequence lengths, sorting indicator, and data type you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/init(shape:sequencelengths:sortedsequences:datatype:)"
+      },
+      "maxTensorDimensions": {
+        "doc": "The maximum number of tensor dimensions.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/maxtensordimensions"
+      },
+      "sequenceLengths": {
+        "doc": "An array that contains the variable lengths of sequences stored in the tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/sequencelengths-3jdab"
+      },
+      "shape": {
+        "doc": "An array that contains the size in each dimension.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/shape-91vng"
+      },
+      "sortedSequences": {
+        "doc": "A Boolean that indicates whether you provided the sequence lengths sorted in descending order.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/sortedsequences"
+      },
+      "stride": {
+        "doc": "An array that contains the stride, in bytes, in each dimension.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/stride-3ydik"
+      },
+      "tensorAllocationSizeInBytes": {
+        "doc": "The allocation size, in bytes, for a tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/tensorallocationsizeinbytes"
+      }
+    },
+    "MLCTensorParameter": {
+      "isUpdatable": {
+        "doc": "A Boolean that indicates whether this tensor parameter is updatable.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensorparameter/isupdatable"
+      },
+      "tensor": {
+        "doc": "The underlying tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensorparameter/tensor"
+      }
+    },
+    "MLCTrainingGraph": {
+      "deviceMemorySize": {
+        "doc": "The device memory size in bytes for all intermediate tensors for forward, gradient passes, and optimizer updates for all layers in the training graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/devicememorysize"
+      },
+      "executeForward(batchSize:options:outputsData:)": {
+        "doc": "Executes the forward pass of the training graph with the batch size, execution options, and output data you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/executeforward(batchsize:options:outputsdata:)"
+      },
+      "executeGradient(batchSize:options:outputsData:)": {
+        "doc": "Executes the gradient pass of the training graph with the batch size, execution options, and output data you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/executegradient(batchsize:options:outputsdata:)"
+      },
+      "executeOptimizerUpdate(options:)": {
+        "doc": "Executes the optimizer update pass of the training graph with the execution options you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/executeoptimizerupdate(options:)"
+      },
+      "optimizer": {
+        "doc": "The optimizer to use with the training graph.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctraininggraph/optimizer"
+      }
+    },
+    "MLCTransposeLayer": {
+      "dimensions": {
+        "doc": "An array that contains an input axis source for each output axis, which represents the ordering of dimensions.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctransposelayer/dimensions-71ed6"
+      },
+      "init(dimensions:)": {
+        "doc": "Creates a transpose layer with the dimensions you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctransposelayer/init(dimensions:)"
+      }
+    },
+    "MLCUpsampleLayer": {
+      "alignsCorners": {
+        "doc": "A Boolean that indicates whether the layer aligns the corner pixels of the input and output tensors.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcupsamplelayer/alignscorners"
+      },
+      "init(shape:)": {
+        "doc": "Creates an upsample layer with the shape you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcupsamplelayer/init(shape:)"
+      },
+      "init(shape:sampleMode:alignsCorners:)": {
+        "doc": "Creates an upsample layer with the shape, upsampling algorithm, and corner alignment option you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcupsamplelayer/init(shape:samplemode:alignscorners:)"
+      },
+      "sampleMode": {
+        "doc": "The upsampling algorithm type.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcupsamplelayer/samplemode"
+      },
+      "shape": {
+        "doc": "An array that contains the dimensions of the result tensor.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcupsamplelayer/shape-61n1u"
+      }
+    },
+    "MLCYOLOLossDescriptor": {
+      "anchorBoxCount": {
+        "doc": "The number of anchor boxes you use to detect an object in each grid cell.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcyololossdescriptor/anchorboxcount"
+      },
+      "anchorBoxes": {
+        "doc": "Data that contains the width and height for all the anchor boxes.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcyololossdescriptor/anchorboxes"
+      },
+      "maximumIOUForObjectAbsence": {
+        "doc": "The negative intersection over union (IOU).",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcyololossdescriptor/maximumiouforobjectabsence"
+      },
+      "minimumIOUForObjectPresence": {
+        "doc": "The positive intersection over union (IOU).",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcyololossdescriptor/minimumiouforobjectpresence"
+      },
+      "scaleClassLoss": {
+        "doc": "The scale factor you use for loss when there are no object classes, and for loss gradient.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcyololossdescriptor/scaleclassloss"
+      },
+      "scaleNoObjectConfidenceLoss": {
+        "doc": "The scale factor you use for no object confidence loss and loss gradient.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcyololossdescriptor/scalenoobjectconfidenceloss"
+      },
+      "scaleObjectConfidenceLoss": {
+        "doc": "The scale factor you use for object confidence loss and loss gradient.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcyololossdescriptor/scaleobjectconfidenceloss"
+      },
+      "scaleSpatialPositionLoss": {
+        "doc": "The scale factor you use for spatial position loss and loss gradient.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcyololossdescriptor/scalespatialpositionloss"
+      },
+      "scaleSpatialSizeLoss": {
+        "doc": "The scale factor you use for spatial size loss and loss gradient.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcyololossdescriptor/scalespatialsizeloss"
+      },
+      "shouldRescore": {
+        "doc": "A Boolean that indicates whether the layer scales the object confidence loss by the intersection over union (IOU) overlap.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcyololossdescriptor/shouldrescore"
+      }
+    },
+    "MLCYOLOLossLayer": {
+      "yoloLossDescriptor": {
+        "doc": "The configuration object you use to create the YOLO loss layer.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcyololosslayer/yololossdescriptor"
+      }
+    }
+  }
+}

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The settings for an IPv4 route.
+//
 // NEIPv4Route wraps [raw.NEIPv4Route] with a fluent Go API.
 type NEIPv4Route struct {
 	inner *raw.NEIPv4Route
@@ -31,7 +33,7 @@ func NEIPv4RouteFromID(id objc.ID) *NEIPv4Route {
 	return &NEIPv4Route{inner: raw.NEIPv4RouteFromID(id)}
 }
 
-// @method initWithDestinationAddress:subnetMask: @discussion Initialize a newly-allocated NEIPv4Route. @param address The IPv4 address of the destination network. @param subnetMask The subnet mask of the destination network. @return The initialized NEIPv4Route.
+// Initialize the NEIPv4Route object.
 //
 // NewNEIPv4RouteWithDestinationAddressSubnetMask creates a new [NEIPv4Route].
 func NewNEIPv4RouteWithDestinationAddressSubnetMask(address string, subnetMask string) *NEIPv4Route {
@@ -40,7 +42,7 @@ func NewNEIPv4RouteWithDestinationAddressSubnetMask(address string, subnetMask s
 	return &NEIPv4Route{inner: raw.NEIPv4RouteFromID(_id)}
 }
 
-// @property gatewayAddress @discussion The IPv4 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
+// The address of the next-hop gateway of the route.
 //
 // WithGatewayAddress sets the gatewayAddress property and returns the receiver for chaining.
 func (x *NEIPv4Route) WithGatewayAddress(gatewayAddress string) *NEIPv4Route {

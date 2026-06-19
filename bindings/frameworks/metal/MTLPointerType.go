@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a pointer.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlpointertype
 type MTLPointerType struct {
 	MTLType
@@ -35,6 +37,7 @@ func MTLPointerTypeFromID(id objc.ID) *MTLPointerType {
 	return o
 }
 
+// Provides a description of the underlying struct when the pointer points to a struct.
 func (o *MTLPointerType) ElementStructType() *MTLStructType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLPointerTypeSelElementStructType)
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func (o *MTLPointerType) ElementStructType() *MTLStructType {
 	return MTLStructTypeFromID(_ret)
 }
 
+// Provides a description of the underlying array when the pointer points to an array.
 func (o *MTLPointerType) ElementArrayType() *MTLArrayType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLPointerTypeSelElementArrayType)
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A tool for erasing previously drawn content in a canvas view.
+//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pkerasertool
 type PKEraserTool struct {
 	PKTool

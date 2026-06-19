@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains all the semantic information about an accessible chart.
+//
 // Apple documentation: https://developer.apple.com/documentation/accessibility/axchartdescriptor
 type AXChartDescriptor struct {
 	foundation.NSObject
@@ -52,6 +54,7 @@ func AXChartDescriptorFromID(id objc.ID) *AXChartDescriptor {
 	return o
 }
 
+// Creates a chart descriptor with the specified title, summary, x-axis descriptor, y-axis descriptor, descriptors for additional axes, and array of data series.
 func (o *AXChartDescriptor) InitWithTitleSummaryXAxisDescriptorYAxisDescriptorSeries(title *foundation.NSString, summary *foundation.NSString, xAxis AXDataAxisDescriptor, yAxis *AXNumericDataAxisDescriptor, series *foundation.NSArray[*AXDataSeriesDescriptor]) *AXChartDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXChartDescriptorSelInitWithTitleSummaryXAxisDescriptorYAxisDescriptorSeries, title.Ptr(), summary.Ptr(), xAxis, yAxis.Ptr(), series.Ptr())
 	if _ret != 0 {
@@ -60,6 +63,7 @@ func (o *AXChartDescriptor) InitWithTitleSummaryXAxisDescriptorYAxisDescriptorSe
 	return AXChartDescriptorFromID(_ret)
 }
 
+// Creates a chart descriptor with the specified attributed title, summary, x-axis descriptor, y-axis descriptor, and array of data series.
 func (o *AXChartDescriptor) InitWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorSeries(attributedTitle *foundation.NSAttributedString, summary *foundation.NSString, xAxis AXDataAxisDescriptor, yAxis *AXNumericDataAxisDescriptor, series *foundation.NSArray[*AXDataSeriesDescriptor]) *AXChartDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXChartDescriptorSelInitWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorSeries, attributedTitle.Ptr(), summary.Ptr(), xAxis, yAxis.Ptr(), series.Ptr())
 	if _ret != 0 {
@@ -68,6 +72,7 @@ func (o *AXChartDescriptor) InitWithAttributedTitleSummaryXAxisDescriptorYAxisDe
 	return AXChartDescriptorFromID(_ret)
 }
 
+// Creates a chart descriptor with the specified title, summary, x-axis descriptor, y-axis descriptor, descriptors for additional axes, and array of data series.
 func (o *AXChartDescriptor) InitWithTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries(title *foundation.NSString, summary *foundation.NSString, xAxis AXDataAxisDescriptor, yAxis *AXNumericDataAxisDescriptor, additionalAxes *foundation.NSArray[AXDataAxisDescriptor], series *foundation.NSArray[*AXDataSeriesDescriptor]) *AXChartDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXChartDescriptorSelInitWithTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries, title.Ptr(), summary.Ptr(), xAxis, yAxis.Ptr(), additionalAxes.Ptr(), series.Ptr())
 	if _ret != 0 {
@@ -76,6 +81,7 @@ func (o *AXChartDescriptor) InitWithTitleSummaryXAxisDescriptorYAxisDescriptorAd
 	return AXChartDescriptorFromID(_ret)
 }
 
+// Creates a chart descriptor with the specified attributed title, summary, x-axis descriptor, y-axis descriptor, descriptors for additional axes, and array of data series.
 func (o *AXChartDescriptor) InitWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries(attributedTitle *foundation.NSAttributedString, summary *foundation.NSString, xAxis AXDataAxisDescriptor, yAxis *AXNumericDataAxisDescriptor, additionalAxes *foundation.NSArray[AXDataAxisDescriptor], series *foundation.NSArray[*AXDataSeriesDescriptor]) *AXChartDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXChartDescriptorSelInitWithAttributedTitleSummaryXAxisDescriptorYAxisDescriptorAdditionalAxesSeries, attributedTitle.Ptr(), summary.Ptr(), xAxis, yAxis.Ptr(), additionalAxes.Ptr(), series.Ptr())
 	if _ret != 0 {

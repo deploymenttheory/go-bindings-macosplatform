@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A symbol effect that applies the Rotate animation to symbol images.
+//
 // SymbolRotateEffect wraps [raw.NSSymbolRotateEffect] with a fluent Go API.
 type SymbolRotateEffect struct {
 	inner *raw.NSSymbolRotateEffect

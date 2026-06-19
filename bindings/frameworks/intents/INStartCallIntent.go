@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to start an audio or video call with one or more users.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/instartcallintent
 type INStartCallIntent struct {
 	INIntent
@@ -36,6 +38,7 @@ func INStartCallIntentFromID(id objc.ID) *INStartCallIntent {
 	return o
 }
 
+// Creates a start call intent object with the specified parameters.
 func (o *INStartCallIntent) InitWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability(callRecordFilter *INCallRecordFilter, callRecordToCallBack *INCallRecord, audioRoute INCallAudioRoute, destinationType INCallDestinationType, contacts *foundation.NSArray[*INPerson], callCapability INCallCapability) *INStartCallIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNStartCallIntentSelInitWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability, callRecordFilter.Ptr(), callRecordToCallBack.Ptr(), audioRoute, destinationType, contacts.Ptr(), callCapability)
 	if _ret != 0 {

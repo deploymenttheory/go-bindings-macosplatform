@@ -34,7 +34,7 @@ func MTREnergyEVSEClusterGetTargetsResponseParamsFromID(id objc.ID) *MTREnergyEV
 	return &MTREnergyEVSEClusterGetTargetsResponseParams{inner: raw.MTREnergyEVSEClusterGetTargetsResponseParamsFromID(id)}
 }
 
-// Initialize an MTREnergyEVSEClusterGetTargetsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+// Initialize an MTREnergyEVSEClusterGetTargetsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
 //
 // NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValueError creates a new [MTREnergyEVSEClusterGetTargetsResponseParams].
 func NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTREnergyEVSEClusterGetTargetsResponseParams, error) {

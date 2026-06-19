@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that stores information required to execute a gradient pass for instance normalization.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnninstancenormalizationgradientstate
 type MPSCNNInstanceNormalizationGradientState struct {
 	mpsneuralnetwork.MPSNNGradientState

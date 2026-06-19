@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A utility class that represents range components of a stroke.
+//
 // FloatRange wraps [raw.PKFloatRange] with a fluent Go API.
 type FloatRange struct {
 	inner *raw.PKFloatRange
@@ -29,6 +31,8 @@ func FloatRangeFromID(id objc.ID) *FloatRange {
 	return &FloatRange{inner: raw.PKFloatRangeFromID(id)}
 }
 
+// A utility class used to contain ranges returned by the PKStroke API.
+//
 // NewFloatRangeWithLowerBoundUpperBound creates a new [FloatRange].
 func NewFloatRangeWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *FloatRange {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKFloatRange")), objc.RegisterName("alloc"))

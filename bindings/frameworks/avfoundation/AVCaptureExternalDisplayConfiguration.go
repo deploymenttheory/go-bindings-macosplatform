@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class you use to specify a configuration to your external display configurator.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptureexternaldisplayconfiguration
 type AVCaptureExternalDisplayConfiguration struct {
 	foundation.NSObject

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates a drag-and-drop action.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsdraggingsession
 type NSDraggingSession struct {
 	foundation.NSObject
@@ -40,6 +42,7 @@ func NSDraggingSessionFromID(id objc.ID) *NSDraggingSession {
 	return o
 }
 
+// Enumerates through each dragging item.
 func (o *NSDraggingSession) EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(enumOpts NSDraggingItemEnumerationOptions, view *NSView, classArray *foundation.NSArray[objc.Class], searchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(*NSDraggingItem, int, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -51,7 +54,7 @@ func (o *NSDraggingSession) EnumerateDraggingItemsWithOptionsForViewClassesSearc
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_nSDraggingSessionSelEnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing, enumOpts, view.Ptr(), classArray, searchOptions, __block_block)
+	o.Ptr().Send(_nSDraggingSessionSelEnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing, enumOpts, view.Ptr(), classArray.Ptr(), searchOptions.Ptr(), __block_block)
 }
 
 func (o *NSDraggingSession) DraggingFormation() NSDraggingFormation {

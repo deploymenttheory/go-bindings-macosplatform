@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The formatting properties for a PIN, such as character encoding and length constraints.
+//
 // SmartCardPINFormat wraps [raw.TKSmartCardPINFormat] with a fluent Go API.
 type SmartCardPINFormat struct {
 	inner *raw.TKSmartCardPINFormat
@@ -35,7 +37,7 @@ func NewSmartCardPINFormat() *SmartCardPINFormat {
 	return &SmartCardPINFormat{inner: raw.TKSmartCardPINFormatFromID(_id)}
 }
 
-// Format of PIN characters. @note Default value: TKSmartCardPINCharsetNumeric
+// The format of PIN characters. TKSmartCardPINCharsetNumeric by default.
 //
 // WithCharset sets the charset property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithCharset(charset TKSmartCardPINCharset) *SmartCardPINFormat {
@@ -43,7 +45,7 @@ func (x *SmartCardPINFormat) WithCharset(charset TKSmartCardPINCharset) *SmartCa
 	return x
 }
 
-// Encoding of PIN characters. @note Default value: TKSmartCardPINEncodingASCII
+// The encoding of PIN characters. TKSmartCardPINEncodingASCII by default.
 //
 // WithEncoding sets the encoding property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithEncoding(encoding TKSmartCardPINEncoding) *SmartCardPINFormat {
@@ -51,7 +53,7 @@ func (x *SmartCardPINFormat) WithEncoding(encoding TKSmartCardPINEncoding) *Smar
 	return x
 }
 
-// Minimum number of characters to form a valid PIN. @note Default value: 4
+// The minimum number of characters to form a valid PIN. 4 by default.
 //
 // WithMinPINLength sets the minPINLength property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithMinPINLength(minPINLength int) *SmartCardPINFormat {
@@ -59,7 +61,7 @@ func (x *SmartCardPINFormat) WithMinPINLength(minPINLength int) *SmartCardPINFor
 	return x
 }
 
-// Maximum number of characters to form a valid PIN. @note Default value: 8
+// The maximum number of characters to form a valid PIN. 8 by default.
 //
 // WithMaxPINLength sets the maxPINLength property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithMaxPINLength(maxPINLength int) *SmartCardPINFormat {
@@ -67,7 +69,7 @@ func (x *SmartCardPINFormat) WithMaxPINLength(maxPINLength int) *SmartCardPINFor
 	return x
 }
 
-// Total length of the PIN block in bytes. @note Default value: 8
+// The total length of the PIN block in bytes. 8 by default.
 //
 // WithPINBlockByteLength sets the pINBlockByteLength property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithPINBlockByteLength(pINBlockByteLength int) *SmartCardPINFormat {
@@ -75,7 +77,7 @@ func (x *SmartCardPINFormat) WithPINBlockByteLength(pINBlockByteLength int) *Sma
 	return x
 }
 
-// PIN justification within the PIN block. @note Default value: TKSmartCardPINJustificationLeft
+// The justification within the PIN block. TKSmartCardPINJustificationLeft by default.
 //
 // WithPINJustification sets the pINJustification property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithPINJustification(pINJustification TKSmartCardPINJustification) *SmartCardPINFormat {
@@ -83,7 +85,7 @@ func (x *SmartCardPINFormat) WithPINJustification(pINJustification TKSmartCardPI
 	return x
 }
 
-// Offset in bits within the PIN block to mark a location for filling in the formatted PIN (justified with respect to PINJustification). @note Default value: 0 @discussion The offset, in bits, within the PIN block to mark a location for filling in the formatted PIN, which is justified with respect to the PINJustification property value.
+// The offset, in bits, within the PIN block to mark a location for filling in the formatted PIN, which is justified with respect to the PINJustification property value. 0 by default.
 //
 // WithPINBitOffset sets the pINBitOffset property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithPINBitOffset(pINBitOffset int) *SmartCardPINFormat {
@@ -91,7 +93,7 @@ func (x *SmartCardPINFormat) WithPINBitOffset(pINBitOffset int) *SmartCardPINFor
 	return x
 }
 
-// Offset in bits within the PIN block to mark a location for filling in the PIN length (always left justified). @note Default value: 0 @discussion The offset, in bits, within the PIN block to mark a location for filling in the PIN length, which is always left justified.
+// The offset, in bits, within the PIN block to mark a location for filling in the PIN length, which is always left justified. 0 by default.
 //
 // WithPINLengthBitOffset sets the pINLengthBitOffset property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithPINLengthBitOffset(pINLengthBitOffset int) *SmartCardPINFormat {
@@ -99,7 +101,7 @@ func (x *SmartCardPINFormat) WithPINLengthBitOffset(pINLengthBitOffset int) *Sma
 	return x
 }
 
-// Size in bits of the PIN length field. If set to 0, PIN length is not written. @note Default value: 0
+// The size, in bits, of the PIN length field. If set to 0, PIN length is not written. 0 by default.
 //
 // WithPINLengthBitSize sets the pINLengthBitSize property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithPINLengthBitSize(pINLengthBitSize int) *SmartCardPINFormat {

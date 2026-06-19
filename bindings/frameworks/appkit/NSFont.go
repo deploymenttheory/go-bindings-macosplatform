@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The representation of a font in an app.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsfont
 type NSFont struct {
 	foundation.NSObject
@@ -99,7 +101,7 @@ func NSFontFromID(id objc.ID) *NSFont {
 	return o
 }
 
-// ******* Factory ********
+// Creates a font object for the specified font name and font size.
 func NSFontFontWithNameSize(fontName *foundation.NSString, fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelFontWithNameSize, fontName.Ptr(), fontSize)
 	if _ret != 0 {
@@ -108,6 +110,7 @@ func NSFontFontWithNameSize(fontName *foundation.NSString, fontSize float64) *NS
 	return NSFontFromID(_ret)
 }
 
+// Returns a font object for the specified font name and matrix.
 func NSFontFontWithNameMatrix(fontName *foundation.NSString, fontMatrix *float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelFontWithNameMatrix, fontName.Ptr(), fontMatrix)
 	if _ret != 0 {
@@ -116,6 +119,7 @@ func NSFontFontWithNameMatrix(fontName *foundation.NSString, fontMatrix *float64
 	return NSFontFromID(_ret)
 }
 
+// Returns a font object for the specified font descriptor and font size.
 func NSFontFontWithDescriptorSize(fontDescriptor *NSFontDescriptor, fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelFontWithDescriptorSize, fontDescriptor.Ptr(), fontSize)
 	if _ret != 0 {
@@ -124,6 +128,7 @@ func NSFontFontWithDescriptorSize(fontDescriptor *NSFontDescriptor, fontSize flo
 	return NSFontFromID(_ret)
 }
 
+// Returns a font object for the specified font descriptor and text transform.
 func NSFontFontWithDescriptorTextTransform(fontDescriptor *NSFontDescriptor, textTransform *foundation.NSAffineTransform) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelFontWithDescriptorTextTransform, fontDescriptor.Ptr(), textTransform.Ptr())
 	if _ret != 0 {
@@ -132,6 +137,7 @@ func NSFontFontWithDescriptorTextTransform(fontDescriptor *NSFontDescriptor, tex
 	return NSFontFromID(_ret)
 }
 
+// Returns the font used by default for documents and other text under the user’s control (that is, text whose font the user can normally change), in the specified size.
 func NSFontUserFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelUserFontOfSize, fontSize)
 	if _ret != 0 {
@@ -140,6 +146,7 @@ func NSFontUserFontOfSize(fontSize float64) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns the font used by default for documents and other text under the user’s control (that is, text whose font the user can normally change), when that font should be fixed-pitch, in the specified size.
 func NSFontUserFixedPitchFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelUserFixedPitchFontOfSize, fontSize)
 	if _ret != 0 {
@@ -148,14 +155,17 @@ func NSFontUserFixedPitchFontOfSize(fontSize float64) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Sets the font used by default for documents and other text under the user’s control to the specified font.
 func NSFontSetUserFont(font *NSFont) {
 	objc.ID(_clsNSFont).Send(_nSFontSelSetUserFont, font.Ptr())
 }
 
+// Sets the font used by default for documents and other text under the user’s control, when that font should be fixed-pitch, to the specified font.
 func NSFontSetUserFixedPitchFont(font *NSFont) {
 	objc.ID(_clsNSFont).Send(_nSFontSelSetUserFixedPitchFont, font.Ptr())
 }
 
+// Returns the standard system font with the specified size.
 func NSFontSystemFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelSystemFontOfSize, fontSize)
 	if _ret != 0 {
@@ -164,6 +174,7 @@ func NSFontSystemFontOfSize(fontSize float64) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns the standard system font in boldface type with the specified size.
 func NSFontBoldSystemFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelBoldSystemFontOfSize, fontSize)
 	if _ret != 0 {
@@ -172,6 +183,7 @@ func NSFontBoldSystemFontOfSize(fontSize float64) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns the font used for standard interface labels in the specified size.
 func NSFontLabelFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelLabelFontOfSize, fontSize)
 	if _ret != 0 {
@@ -180,6 +192,7 @@ func NSFontLabelFontOfSize(fontSize float64) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns the font used for window title bars, in the specified size.
 func NSFontTitleBarFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelTitleBarFontOfSize, fontSize)
 	if _ret != 0 {
@@ -188,6 +201,7 @@ func NSFontTitleBarFontOfSize(fontSize float64) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns the font used for menu items, in the specified size.
 func NSFontMenuFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelMenuFontOfSize, fontSize)
 	if _ret != 0 {
@@ -196,6 +210,7 @@ func NSFontMenuFontOfSize(fontSize float64) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns the font used for menu bar items, in the specified size.
 func NSFontMenuBarFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelMenuBarFontOfSize, fontSize)
 	if _ret != 0 {
@@ -204,6 +219,7 @@ func NSFontMenuBarFontOfSize(fontSize float64) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns the font used for standard interface items, such as button labels, menu items, and so on, in the specified size.
 func NSFontMessageFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelMessageFontOfSize, fontSize)
 	if _ret != 0 {
@@ -212,6 +228,7 @@ func NSFontMessageFontOfSize(fontSize float64) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns the font used for palette window title bars, in the specified size.
 func NSFontPaletteFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelPaletteFontOfSize, fontSize)
 	if _ret != 0 {
@@ -220,6 +237,7 @@ func NSFontPaletteFontOfSize(fontSize float64) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns the font used for tool tips labels, in the specified size.
 func NSFontToolTipsFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelToolTipsFontOfSize, fontSize)
 	if _ret != 0 {
@@ -228,6 +246,7 @@ func NSFontToolTipsFontOfSize(fontSize float64) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns the font used for the content of controls in the specified size.
 func NSFontControlContentFontOfSize(fontSize float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelControlContentFontOfSize, fontSize)
 	if _ret != 0 {
@@ -236,6 +255,7 @@ func NSFontControlContentFontOfSize(fontSize float64) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns the standard system font with the specified size and weight.
 func NSFontSystemFontOfSizeWeight(fontSize float64, weight float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelSystemFontOfSizeWeight, fontSize, weight)
 	if _ret != 0 {
@@ -244,6 +264,7 @@ func NSFontSystemFontOfSizeWeight(fontSize float64, weight float64) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns a version of the standard system font that contains monospaced digit glyphs.
 func NSFontMonospacedDigitSystemFontOfSizeWeight(fontSize float64, weight float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelMonospacedDigitSystemFontOfSizeWeight, fontSize, weight)
 	if _ret != 0 {
@@ -260,6 +281,7 @@ func NSFontSystemFontOfSizeWeightWidth(fontSize float64, weight float64, width f
 	return NSFontFromID(_ret)
 }
 
+// Returns a monospace version of the system font with the specified size and weight.
 func NSFontMonospacedSystemFontOfSizeWeight(fontSize float64, weight float64) *NSFont {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelMonospacedSystemFontOfSizeWeight, fontSize, weight)
 	if _ret != 0 {
@@ -276,6 +298,7 @@ func (o *NSFont) FontWithSize(fontSize float64) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns the font size used for the specified control size.
 func NSFontSystemFontSizeForControlSize(controlSize NSControlSize) float64 {
 	_ret := objc.Send[float64](objc.ID(_clsNSFont), _nSFontSelSystemFontSizeForControlSize, controlSize)
 	return _ret
@@ -300,11 +323,12 @@ func (o *NSFont) GetAdvancementsForCGGlyphsCount(advancements *corefoundation.CG
 	o.Ptr().Send(_nSFontSelGetAdvancementsForCGGlyphsCount, advancements, glyphs, glyphCount)
 }
 
-// ******* NSGraphicsContext-related ********
+// Sets this font as the font for the current graphics context.
 func (o *NSFont) Set() {
 	o.Ptr().Send(_nSFontSelSet)
 }
 
+// Sets this font as the font for the specified graphics context.
 func (o *NSFont) SetInContext(graphicsContext *NSGraphicsContext) {
 	o.Ptr().Send(_nSFontSelSetInContext, graphicsContext.Ptr())
 }
@@ -462,35 +486,42 @@ func (o *NSFont) IsVertical() bool {
 	return _ret
 }
 
+// Returns the named encoded glyph, or –1 if the receiver contains no such glyph.
 // Deprecated: since macOS 10.13.
 func (o *NSFont) GlyphWithName(name *foundation.NSString) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSFontSelGlyphWithName, name.Ptr())
 	return _ret
 }
 
+// Returns the bounding rectangle for the specified glyph, scaled to the receiver’s size.
 // Deprecated: since macOS 10.13.
 func (o *NSFont) BoundingRectForGlyph(glyph uint) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSFontSelBoundingRectForGlyph, glyph)
 	return _ret
 }
 
+// Returns the nominal spacing for the given glyph—the distance the current point moves after showing the glyph—accounting for the receiver’s size.
 func (o *NSFont) AdvancementForGlyph(glyph uint) corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSFontSelAdvancementForGlyph, glyph)
 	return _ret
 }
 
+// Returns an array of the bounding rectangles for the specified glyphs rendered by the receiver.
 func (o *NSFont) GetBoundingRectsForGlyphsCount(bounds *corefoundation.CGRect, glyphs *uint, glyphCount uint) {
 	o.Ptr().Send(_nSFontSelGetBoundingRectsForGlyphsCount, bounds, glyphs, glyphCount)
 }
 
+// Returns an array of the advancements for the specified glyphs rendered by the receiver.
 func (o *NSFont) GetAdvancementsForGlyphsCount(advancements *corefoundation.CGSize, glyphs *uint, glyphCount uint) {
 	o.Ptr().Send(_nSFontSelGetAdvancementsForGlyphsCount, advancements, glyphs, glyphCount)
 }
 
+// Returns an array of the advancements for the specified packed glyphs and rendered by the receiver.
 func (o *NSFont) GetAdvancementsForPackedGlyphsLength(advancements *corefoundation.CGSize, packedGlyphs unsafe.Pointer, length uint) {
 	o.Ptr().Send(_nSFontSelGetAdvancementsForPackedGlyphsLength, advancements, packedGlyphs, length)
 }
 
+// Returns a bitmapped screen font, when sent to a font object representing a scalable PostScript font, with the specified rendering mode, matching the receiver in typeface and matrix (or size), or nil if such a font can’t be found.
 func (o *NSFont) ScreenFontWithRenderingMode(renderingMode NSFontRenderingMode) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontSelScreenFontWithRenderingMode, renderingMode)
 	if _ret != 0 {
@@ -521,8 +552,9 @@ func (o *NSFont) RenderingMode() NSFontRenderingMode {
 	return _ret
 }
 
+// Returns the font associated with the text style.
 func NSFontPreferredFontForTextStyleOptions(style *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSFont {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelPreferredFontForTextStyleOptions, style.Ptr(), options)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSFont), _nSFontSelPreferredFontForTextStyleOptions, style.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

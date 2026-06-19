@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A buffer that backs the vertex data of a Model I/O mesh, suitable for use in a Metal app.
+//
 // MeshBuffer wraps [raw.MTKMeshBuffer] with a fluent Go API.
 type MeshBuffer struct {
 	inner *raw.MTKMeshBuffer

@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class		IKFilterBrowserPanel @abstract   The IKFilterBrowserPanel provides the shared IKFilterBrowser with its runtime model. @discussion  See information in the introduction.
+// Presents a user interface for browsing filters.
 //
 // Apple documentation: https://developer.apple.com/documentation/quartz/ikfilterbrowserpanel
 type IKFilterBrowserPanel struct {
@@ -34,13 +34,13 @@ func IKFilterBrowserPanelFromID(id objc.ID) *IKFilterBrowserPanel {
 	return o
 }
 
-// @method     filterBrowserPanelWithStyleMask: @abstract   Create a shared instance of the IKFilterBrowser @discussion Use this method to create a shared instance of the IKFilterBrowser with a specific NSWindow style. Right now it only supports selecting of deselecting the NSTexturedBackgroundWindowMask style bit.
+// Creates a shared instance of the IKFilterBrowserPanel class.
 func IKFilterBrowserPanelFilterBrowserPanelWithStyleMask(styleMask uint) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIKFilterBrowserPanel), _iKFilterBrowserPanelSelFilterBrowserPanelWithStyleMask, styleMask)
 	return _ret
 }
 
-// @method     filterName @abstract   Returns the name of the currently selected filter. @discussion Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
+// Returns the name of the filter that is currently selected in the filter browser.
 func (o *IKFilterBrowserPanel) FilterName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterBrowserPanelSelFilterName)
 	if _ret != 0 {

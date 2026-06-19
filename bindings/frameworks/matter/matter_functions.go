@@ -14,7 +14,7 @@ var (
 	_fnMTRAttributeNameForID func(MTRClusterIDType, MTRAttributeIDType) objc.ID
 	// Resolve Matter cluster IDs into a descriptive string. For unknown IDs, a string '<Unknown clusterID %d>' will be returned.
 	_fnMTRClusterNameForID               func(MTRClusterIDType) objc.ID
-	_fnMTRDeviceControllerStorageClasses func() *foundation.NSSet[objc.Class]
+	_fnMTRDeviceControllerStorageClasses func() objc.ID
 	// Resolve Matter event IDs into a descriptive string. For unknown IDs, a string '<Unknown clusterID %d>' (if the cluster ID is not known) or '<Unknown eventID %d>' (if the cluster ID is known but the event ID is not known) will be returned.
 	_fnMTREventNameForID func(MTRClusterIDType, MTREventIDType) objc.ID
 	// Resolve Matter request (client to server) command IDs into a descriptive string. For unknown IDs, a string '<Unknown clusterID %d>' (if the cluster ID is not known) or '<Unknown commandID %d>' (if the cluster ID is known but the command ID is not known) will be returned.
@@ -46,7 +46,11 @@ func MTRClusterNameForID(clusterID MTRClusterIDType) *foundation.NSString {
 }
 
 func MTRDeviceControllerStorageClasses() *foundation.NSSet[objc.Class] {
-	return _fnMTRDeviceControllerStorageClasses()
+	_ret := _fnMTRDeviceControllerStorageClasses()
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[objc.Class](_ret)
 }
 
 // Resolve Matter event IDs into a descriptive string. For unknown IDs, a string '<Unknown clusterID %d>' (if the cluster ID is not known) or '<Unknown eventID %d>' (if the cluster ID is known but the event ID is not known) will be returned.

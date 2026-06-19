@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that gives you the ability to choose from system-provided tinting behaviors.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstintconfiguration
 type NSTintConfiguration struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func NSTintConfigurationFromID(id objc.ID) *NSTintConfiguration {
 	return o
 }
 
-// Specifies that content should be tinted with a particular color whenever the app's preferred Accent Color is in use, i.e. when the system Accent Color is configured to "Multicolor". If the system Accent Color is configured to any other color, this tint configuration defers to the Accent Color. This type of configuration should be used for custom colors that are designed to match an app-specific Accent Color, but would mismatch a user-selected color.
+// Creates a new tint configuration for the system to use when the app’s preferred accent color is in use.
 func NSTintConfigurationTintConfigurationWithPreferredColor(color *NSColor) *NSTintConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTintConfiguration), _nSTintConfigurationSelTintConfigurationWithPreferredColor, color.Ptr())
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func NSTintConfigurationTintConfigurationWithPreferredColor(color *NSColor) *NST
 	return NSTintConfigurationFromID(_ret)
 }
 
-// Specifies that content should be tinted with a specific color value. The specified color value is used regardless of the system Accent Color.
+// Creates a new tint configuration using a specific color value.
 func NSTintConfigurationTintConfigurationWithFixedColor(color *NSColor) *NSTintConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTintConfiguration), _nSTintConfigurationSelTintConfigurationWithFixedColor, color.Ptr())
 	if _ret != 0 {

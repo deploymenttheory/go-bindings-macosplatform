@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a simple recurrent block or layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsrnnsinglegatedescriptor
 type MPSRNNSingleGateDescriptor struct {
 	mpsneuralnetwork.MPSRNNDescriptor

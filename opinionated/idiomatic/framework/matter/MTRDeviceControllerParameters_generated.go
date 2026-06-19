@@ -100,7 +100,7 @@ func (x *MTRDeviceControllerParameters) WithConcurrentSubscriptionEstablishments
 	return x
 }
 
-// Sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details If this value is nil, a default storage behavior configuration will be used.
+// Sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details
 //
 // WithStorageBehaviorConfiguration sets the storageBehaviorConfiguration property and returns the receiver for chaining.
 func (x *MTRDeviceControllerParameters) WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerParameters {
@@ -108,7 +108,7 @@ func (x *MTRDeviceControllerParameters) WithStorageBehaviorConfiguration(storage
 	return x
 }
 
-// Whether the controller should start out suspended. Defaults to NO.
+// Whether the controller should start out suspended.
 //
 // WithStartSuspended sets the startSuspended property and returns the receiver for chaining.
 func (x *MTRDeviceControllerParameters) WithStartSuspended(startSuspended bool) *MTRDeviceControllerParameters {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Your app’s response to a send message intent.
+//
 // SendMessageIntentResponse wraps [raw.INSendMessageIntentResponse] with a fluent Go API.
 type SendMessageIntentResponse struct {
 	inner *raw.INSendMessageIntentResponse
@@ -30,6 +32,8 @@ func SendMessageIntentResponseFromID(id objc.ID) *SendMessageIntentResponse {
 	return &SendMessageIntentResponse{inner: raw.INSendMessageIntentResponseFromID(id)}
 }
 
+// Initializes the response object with the specified code and user activity object.
+//
 // NewSendMessageIntentResponseWithCodeUserActivity creates a new [SendMessageIntentResponse].
 func NewSendMessageIntentResponseWithCodeUserActivity(code INSendMessageIntentResponseCode, userActivity *foundation.NSUserActivity) *SendMessageIntentResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSendMessageIntentResponse")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewSendMessageIntentResponseWithCodeUserActivity(code INSendMessageIntentRe
 	return &SendMessageIntentResponse{inner: raw.INSendMessageIntentResponseFromID(_id)}
 }
 
+// The user activity object to use when launching the app.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *SendMessageIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *SendMessageIntentResponse {
 	x.inner.INIntentResponse.SetUserActivity(userActivity)

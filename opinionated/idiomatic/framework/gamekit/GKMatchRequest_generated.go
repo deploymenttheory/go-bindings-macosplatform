@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that encapsulates the parameters to create a real-time or turn-based match.
+//
 // MatchRequest wraps [raw.GKMatchRequest] with a fluent Go API.
 type MatchRequest struct {
 	inner *raw.GKMatchRequest
@@ -38,7 +40,7 @@ func NewMatchRequest() *MatchRequest {
 	return &MatchRequest{inner: raw.GKMatchRequestFromID(_id)}
 }
 
-// Minimum number of players for the match
+// The minimum number of players that can join the match.
 //
 // WithMinPlayers sets the minPlayers property and returns the receiver for chaining.
 func (x *MatchRequest) WithMinPlayers(minPlayers uint) *MatchRequest {
@@ -46,7 +48,7 @@ func (x *MatchRequest) WithMinPlayers(minPlayers uint) *MatchRequest {
 	return x
 }
 
-// Maximum number of players for the match
+// The maximum number of players that can join the match.
 //
 // WithMaxPlayers sets the maxPlayers property and returns the receiver for chaining.
 func (x *MatchRequest) WithMaxPlayers(maxPlayers uint) *MatchRequest {
@@ -54,7 +56,7 @@ func (x *MatchRequest) WithMaxPlayers(maxPlayers uint) *MatchRequest {
 	return x
 }
 
-// The player group identifier. Matchmaking will only take place between players in the same group.
+// A number identifying a subset of players invited to join a match.
 //
 // WithPlayerGroup sets the playerGroup property and returns the receiver for chaining.
 func (x *MatchRequest) WithPlayerGroup(playerGroup uint) *MatchRequest {
@@ -62,7 +64,7 @@ func (x *MatchRequest) WithPlayerGroup(playerGroup uint) *MatchRequest {
 	return x
 }
 
-// optional mask that specifies the role that the local player would like to play in the game.  If this value is 0, it will be set to 0xFFFFFFFF (the default), and this property will be ignored. If the value is nonzero, then automatching uses the value as a mask that restricts the role the player can play in the group. Automatching with player attributes matches new players into the game so that the bitwise OR of the masks of all the players in the resulting match equals 0xFFFFFFFF.
+// A mask that specifies the role that the local player would like to play in the game.
 //
 // WithPlayerAttributes sets the playerAttributes property and returns the receiver for chaining.
 func (x *MatchRequest) WithPlayerAttributes(playerAttributes uint32) *MatchRequest {
@@ -70,7 +72,7 @@ func (x *MatchRequest) WithPlayerAttributes(playerAttributes uint32) *MatchReque
 	return x
 }
 
-// Array of GKPlayers to invite, or nil if none. This array can also include local guest players.
+// The players to invite to the match.
 //
 // WithRecipients sets the collection, converting the Go slice to an NSArray.
 func (x *MatchRequest) WithRecipients(items ...PlayerProvider) *MatchRequest {
@@ -93,7 +95,7 @@ func (x *MatchRequest) WithRecipients(items ...PlayerProvider) *MatchRequest {
 	return x
 }
 
-// Message sent to invited players, may be modified if using GKMatchmakerViewController Will return nil if the player is underage or restricted.
+// The message sent to other players when the local player invites them to join a match.
 //
 // WithInviteMessage sets the inviteMessage property and returns the receiver for chaining.
 func (x *MatchRequest) WithInviteMessage(inviteMessage string) *MatchRequest {
@@ -101,7 +103,7 @@ func (x *MatchRequest) WithInviteMessage(inviteMessage string) *MatchRequest {
 	return x
 }
 
-// Default number of players to use during matchmaking. If not set we will default to the number that the player previously set for this game, or maxPlayers.
+// The default number of players for the match.
 //
 // WithDefaultNumberOfPlayers sets the defaultNumberOfPlayers property and returns the receiver for chaining.
 func (x *MatchRequest) WithDefaultNumberOfPlayers(defaultNumberOfPlayers uint) *MatchRequest {
@@ -109,7 +111,7 @@ func (x *MatchRequest) WithDefaultNumberOfPlayers(defaultNumberOfPlayers uint) *
 	return x
 }
 
-// Whether or not a match will be created only using automatch.  If YES, then a player will not be able to invite anyone (including contacts, friends, and nearby players) to the match, but rely on automatching to find players for the match.  Default is NO.
+// A Boolean value that determines whether a game uses automatch to find players or the local player invites players.
 //
 // WithRestrictToAutomatch sets the restrictToAutomatch property and returns the receiver for chaining.
 func (x *MatchRequest) WithRestrictToAutomatch(restrictToAutomatch bool) *MatchRequest {
@@ -117,7 +119,7 @@ func (x *MatchRequest) WithRestrictToAutomatch(restrictToAutomatch bool) *MatchR
 	return x
 }
 
-// An recipientResponseHandler can be set in order to receive responses from programmatically invited players.
+// A method that handles when a player responds to an invitation to join a match.
 //
 // WithRecipientResponseHandler sets the recipientResponseHandler property and returns the receiver for chaining.
 func (x *MatchRequest) WithRecipientResponseHandler(recipientResponseHandler func(*raw.GKPlayer, GKInviteRecipientResponse)) *MatchRequest {
@@ -127,6 +129,8 @@ func (x *MatchRequest) WithRecipientResponseHandler(recipientResponseHandler fun
 	return x
 }
 
+// Handles when a player responds to an invitation.
+//
 // WithInviteeResponseHandler sets the inviteeResponseHandler property and returns the receiver for chaining.
 func (x *MatchRequest) WithInviteeResponseHandler(inviteeResponseHandler func(*foundation.NSString, GKInviteRecipientResponse)) *MatchRequest {
 	x.inner.SetInviteeResponseHandler(func(_a0 *foundation.NSString, _a1 raw.GKInviteRecipientResponse) {
@@ -135,6 +139,8 @@ func (x *MatchRequest) WithInviteeResponseHandler(inviteeResponseHandler func(*f
 	return x
 }
 
+// A list of player identifiers for players to invite to the match.
+//
 // WithPlayersToInvite sets the collection, converting the Go slice to an NSArray.
 func (x *MatchRequest) WithPlayersToInvite(items ...*foundation.NSString) *MatchRequest {
 	if len(items) == 0 {
@@ -156,7 +162,7 @@ func (x *MatchRequest) WithPlayersToInvite(items ...*foundation.NSString) *Match
 	return x
 }
 
-// The name of the queue, if rule-based matchmaking is used.
+// The name of the queue that Game Center places the match request in.
 //
 // WithQueueName sets the queueName property and returns the receiver for chaining.
 func (x *MatchRequest) WithQueueName(queueName string) *MatchRequest {
@@ -164,7 +170,7 @@ func (x *MatchRequest) WithQueueName(queueName string) *MatchRequest {
 	return x
 }
 
-// The recipient specific match properties, if rule-based matchmaking is used when inviting players.
+// The criteria for recipients of the match request that Game Center uses to find other players when using matchmaking rules.
 //
 // WithRecipientProperties sets the recipientProperties property and returns the receiver for chaining.
 func (x *MatchRequest) WithRecipientProperties(recipientProperties *foundation.NSDictionary[*raw.GKPlayer, objc.ID]) *MatchRequest {

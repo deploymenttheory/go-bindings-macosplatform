@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface to maintain platform single sign-on (SSO) during authentication and registration.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager
 type ASAuthorizationProviderExtensionLoginManager struct {
 	foundation.NSObject
@@ -69,7 +71,7 @@ func (o *ASAuthorizationProviderExtensionLoginManager) SaveUserLoginConfiguratio
 	return _ret, nil
 }
 
-// Saves or replaces the login configration. @param loginConfiguration The login configration to use. @param error The error when there are validation errors or nil.
+// Saves or replaces the login configuration.
 func (o *ASAuthorizationProviderExtensionLoginManager) SaveLoginConfigurationError(loginConfiguration *ASAuthorizationProviderExtensionLoginConfiguration) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginManagerSelSaveLoginConfigurationError, loginConfiguration.Ptr(), unsafe.Pointer(&_nsErr))
@@ -79,18 +81,18 @@ func (o *ASAuthorizationProviderExtensionLoginManager) SaveLoginConfigurationErr
 	return _ret, nil
 }
 
-// @abstract Saves the provided certificate for the key type. @param certificate The certificate to save. @param keyType The key type for the certificate.
+// Saves the provided certificate for the key type.
 func (o *ASAuthorizationProviderExtensionLoginManager) SaveCertificateKeyType(certificate unsafe.Pointer, keyType ASAuthorizationProviderExtensionKeyType) {
 	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelSaveCertificateKeyType, certificate, keyType)
 }
 
-// @abstract Retrieves the key for the specified platform SSO key type. @param keyType The key type to retrieve.
+// Retrieves the key for the specified platform single sign-on key type.
 func (o *ASAuthorizationProviderExtensionLoginManager) CopyKeyForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aSAuthorizationProviderExtensionLoginManagerSelCopyKeyForKeyType, keyType)
 	return _ret
 }
 
-// @abstract Retrieves the identity for the specified platform SSO key type. @param keyType The key type to retrieve.
+// Retrieves the identity for the specified platform single sign-on key type.
 func (o *ASAuthorizationProviderExtensionLoginManager) CopyIdentityForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aSAuthorizationProviderExtensionLoginManagerSelCopyIdentityForKeyType, keyType)
 	return _ret
@@ -107,7 +109,7 @@ func (o *ASAuthorizationProviderExtensionLoginManager) CompleteKeyRotationForKey
 	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelCompleteKeyRotationForKeyType, keyType)
 }
 
-// @abstract Requests AppSSOAgent reauthenticate the current user for the current extension.  This is used when the tokens are revoked, or expired and need to be requested again.
+// Requests platform single sign-on to reauthenticate the current user.
 func (o *ASAuthorizationProviderExtensionLoginManager) UserNeedsReauthenticationWithCompletion(completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -119,12 +121,12 @@ func (o *ASAuthorizationProviderExtensionLoginManager) UserNeedsReauthentication
 	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelUserNeedsReauthenticationWithCompletion, __block_completion)
 }
 
-// @abstract Requests that the device registration be run again to repair it.
+// Invokes the device registration to run again so the current user can repair it.
 func (o *ASAuthorizationProviderExtensionLoginManager) DeviceRegistrationsNeedsRepair() {
 	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelDeviceRegistrationsNeedsRepair)
 }
 
-// @abstract Requests that user registration be run again for the current user to repair it.
+// Invokes the user registration to run again so the current user can repair it.
 func (o *ASAuthorizationProviderExtensionLoginManager) UserRegistrationsNeedsRepair() {
 	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelUserRegistrationsNeedsRepair)
 }
@@ -134,7 +136,7 @@ func (o *ASAuthorizationProviderExtensionLoginManager) DecryptionKeysNeedRepair(
 	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelDecryptionKeysNeedRepair)
 }
 
-// @abstract Creates new Encryption, Signing, and Secure Enclave keys for the user.  The old keys will be destroyed.
+// Creates new encryption, signing, and Secure Enclave keys for the user.
 func (o *ASAuthorizationProviderExtensionLoginManager) ResetKeys() {
 	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelResetKeys)
 }
@@ -150,16 +152,36 @@ func (o *ASAuthorizationProviderExtensionLoginManager) ResetUserSecureEnclaveKey
 }
 
 // @abstract Provides a new or cached attestation for the specified key type. @param keyType The key type for the attestation. @param clientDataHash A SHA256 hash of a unique, single-use data block that embeds a challenge from your server. @param completion A closure that the method calls upon completion with the following parameters: * attestationCertificates An array of certificates that verify the validity of the key associated with the keyType. Send this to your server for processing. * error A DCError instance that indicates the reason for failure, or nil on success.
-func (o *ASAuthorizationProviderExtensionLoginManager) AttestKeyClientDataHashCompletion(keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block) {
-	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelAttestKeyClientDataHashCompletion, keyType, clientDataHash.Ptr(), completion)
+func (o *ASAuthorizationProviderExtensionLoginManager) AttestKeyClientDataHashCompletion(keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelAttestKeyClientDataHashCompletion, keyType, clientDataHash.Ptr(), __block_completion)
 }
 
 // @abstract Provides a new or cached attestation for the specified pending key type. @param keyType The pending key type for the attestation. @param clientDataHash A SHA256 hash of a unique, single-use data block that embeds a challenge from your server. @param completion A closure that the method calls upon completion with the following parameters: * attestationCertificates An array of certificates that verify the validity of the pending key associated with the keyType. Send this to your server for processing. * error A DCError instance that indicates the reason for failure, or nil on success.
-func (o *ASAuthorizationProviderExtensionLoginManager) AttestPendingKeyClientDataHashCompletion(keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block) {
-	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelAttestPendingKeyClientDataHashCompletion, keyType, clientDataHash.Ptr(), completion)
+func (o *ASAuthorizationProviderExtensionLoginManager) AttestPendingKeyClientDataHashCompletion(keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
+	var __block_completion objc.Block
+	if completion != nil {
+		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completion(foundation.NSArrayFromID[objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completion.Release()
+	}
+	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelAttestPendingKeyClientDataHashCompletion, keyType, clientDataHash.Ptr(), __block_completion)
 }
 
-// @abstract Asks authorization service to show extension view controller for registration. If the controller cannot be shown an error is returned.  This is only valid during registration.
+// Requests platform single sign-on to show the extension’s view controller to the user.
 func (o *ASAuthorizationProviderExtensionLoginManager) PresentRegistrationViewControllerWithCompletion(completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -200,8 +222,11 @@ func (o *ASAuthorizationProviderExtensionLoginManager) AuthenticationMethod() AS
 
 // @abstract Returns the extension data from the MDM profile.
 func (o *ASAuthorizationProviderExtensionLoginManager) ExtensionData() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _aSAuthorizationProviderExtensionLoginManagerSelExtensionData)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginManagerSelExtensionData)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @abstract The user name to use when authenticating with the identity provider.
@@ -227,12 +252,15 @@ func (o *ASAuthorizationProviderExtensionLoginManager) UserLoginConfiguration() 
 
 // @abstract Retrieves or sets the current SSO tokens response for the current user and extension.
 func (o *ASAuthorizationProviderExtensionLoginManager) SsoTokens() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _aSAuthorizationProviderExtensionLoginManagerSelSsoTokens)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginManagerSelSsoTokens)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *ASAuthorizationProviderExtensionLoginManager) SetSsoTokens(ssoTokens *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelSetSsoTokens, ssoTokens)
+	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginManagerSelSetSsoTokens, ssoTokens.Ptr())
 }
 
 // @abstract Retrieves or sets the current login configuration for the extension.

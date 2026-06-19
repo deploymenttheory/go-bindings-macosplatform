@@ -14,7 +14,7 @@ import (
 	"unsafe"
 )
 
-// @class IOBluetoothServiceBrowserController @abstract A NSWindowController subclass to display a window to search for and perform SDP queries on bluetooth devices within range. @discussion This NSWindowController subclass will bring up a generic Bluetooth search and SDP browsing window allowing the user to find devices within range, perform SDP queries on a particular device, and select a SDP service to connect to.  The client application can provide NSArrays of valid service UUIDs to allow, and an NSArray of valid device types to allow.  The device type filter is not yet implemented.
+// A NSWindowController subclass to display a window to search for and perform SDP queries on bluetooth devices within range.
 //
 // BluetoothServiceBrowserController wraps [raw.IOBluetoothServiceBrowserController] with a fluent Go API.
 type BluetoothServiceBrowserController struct {
@@ -44,91 +44,113 @@ func NewBluetoothServiceBrowserController() *BluetoothServiceBrowserController {
 	return &BluetoothServiceBrowserController{inner: raw.IOBluetoothServiceBrowserControllerFromID(_id)}
 }
 
-// @method	getServiceBrowserControllerRef @abstract	Returns an IOBluetoothServiceBrowserControllerRef representation of the target IOBluetoothServiceBrowserController object. @result		Returns an IOBluetoothServiceBrowserControllerRef representation of the target IOBluetoothServiceBrowserController object.
+// Returns an IOBluetoothServiceBrowserControllerRef representation of the target IOBluetoothServiceBrowserController object.
 //
 // GetServiceBrowserControllerRef calls the underlying GetServiceBrowserControllerRef.
 func (x *BluetoothServiceBrowserController) GetServiceBrowserControllerRef() unsafe.Pointer {
 	return x.inner.GetServiceBrowserControllerRef()
 }
 
-// @method	discover: @abstract	Invoke an already created window controller to display, and run the modal dialog. @discussion	***WARNING*** This method has been deprecated in favor of -runModal and -getResults. @param		outRecord 	Pointer to a (IOBluetoothSDPServiceRecord *) object.  This will get allocated and returned to the client if the user selects a service. @result		IOReturn - kIOReturnSuccess  - on successful completion. kCanceledErr - User canceled. @discussion	This method will run the IOBluetoothServiceBrowserController browser window modally.
+// Invoke an already created window controller to display, and run the modal dialog.
 //
 // Discover calls the underlying Discover.
 func (x *BluetoothServiceBrowserController) Discover(outRecord *iobluetooth.IOBluetoothSDPServiceRecord) int {
 	return x.inner.Discover(outRecord)
 }
 
-// @method	discoverAsSheetForWindow:withRecord: @abstract	Invoke an already created window controller to display, and run the modal dialog. @discussion	***WARNING*** This method has been deprecated in favor of -beginSheetModalForWindow:... and -getResults. @param		sheetWindow 	The window to use for the anchor of the sheet.. @param		outRecord 	Pointer to a (IOBluetoothSDPServiceRecord *) object.  This will get allocated and returned to the client if the user selects a service. @result		IOReturn - kIOReturnSuccess  - on successful completion. kCanceledErr - User canceled. @discussion	This method will run the IOBluetoothServiceBrowserController browser window as a sheet for the window passed to it in sheetWindow.
+// Invoke an already created window controller to display, and run the modal dialog.
 //
 // DiscoverAsSheetForWindowWithRecord calls the underlying DiscoverAsSheetForWindowWithRecord.
 func (x *BluetoothServiceBrowserController) DiscoverAsSheetForWindowWithRecord(sheetWindow *appkit.NSWindow, outRecord *iobluetooth.IOBluetoothSDPServiceRecord) int {
 	return x.inner.DiscoverAsSheetForWindowWithRecord(sheetWindow, outRecord)
 }
 
-// @method	discoverWithDeviceAttributes:serviceList:serviceRecord: @abstract	Invoke an already created window controller to display, and run the modal dialog. @discussion	***WARNING*** This method has been deprecated in favor of -setSearchAttributes:, -addAllowedUUID:, -runModal and -getResults. @param		deviceArray 	A NSArray of valid device type objects to allow.  Not implemented yet. @param		serviceArray 	A NSArray of valid UUIDs to allow. The array should contain NSData objects specifying the UUID to allow.  We currently only support 16-bit short UUID forms, but will allow for any of the 16, 32 or full 128-bit UUID forms. @param		outRecord 	Pointer to a (IOBluetoothSDPServiceRecord *) object.  This will get allocated and returned to the client if the user selects a service. @result		IOReturn - kIOReturnSuccess  - on successful completion. kCanceledErr - User canceled. @discussion	This method will run the IOBluetoothServiceBrowserController browser window as a sheet for the window passed to it in sheetWindow.
+// Invoke an already created window controller to display, and run the modal dialog.
 //
 // DiscoverWithDeviceAttributesServiceListServiceRecord calls the underlying DiscoverWithDeviceAttributesServiceListServiceRecord.
 func (x *BluetoothServiceBrowserController) DiscoverWithDeviceAttributesServiceListServiceRecord(deviceAttributes *iobluetooth.IOBluetoothDeviceSearchAttributes, serviceArray *foundation.NSArray[objc.ID], outRecord *iobluetooth.IOBluetoothSDPServiceRecord) int {
 	return x.inner.DiscoverWithDeviceAttributesServiceListServiceRecord(deviceAttributes, serviceArray, outRecord)
 }
 
-// @method	setOptions: @abstract	Modify the options for the window controller. @param		inOptions 	Bit field to set the options to. @result		None. @discussion	This method will set the options for the browser to new values.
+// Modify the options for the window controller.
 //
 // SetOptions calls the underlying SetOptions.
 func (x *BluetoothServiceBrowserController) SetOptions(inOptions uint32) {
 	x.inner.SetOptions(inOptions)
 }
 
+// Runs the service browser panel in a modal session to allow the user to select a service on a Bluetooth device.
+//
 // RunModal calls the underlying RunModal.
 func (x *BluetoothServiceBrowserController) RunModal() int {
 	return x.inner.RunModal()
 }
 
+// Runs the service browser panel as a sheet on the target window.
+//
 // BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo.
 func (x *BluetoothServiceBrowserController) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheetWindow *appkit.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) int {
 	return x.inner.BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheetWindow, modalDelegate, didEndSelector, contextInfo)
 }
 
+// Returns the result of the user’s selection.
+//
 // GetResults calls the underlying GetResults.
 func (x *BluetoothServiceBrowserController) GetResults() *foundation.NSArray[objc.ID] {
 	return x.inner.GetResults()
 }
 
+// Returns the option bits that control the panel’s behavior.
+//
 // GetOptions calls the underlying GetOptions.
 func (x *BluetoothServiceBrowserController) GetOptions() uint32 {
 	return x.inner.GetOptions()
 }
 
+// Sets the search attributes that control the panel’s search/inquiry behavior.
+//
 // SetSearchAttributes calls the underlying SetSearchAttributes.
 func (x *BluetoothServiceBrowserController) SetSearchAttributes(searchAttributes *iobluetooth.IOBluetoothDeviceSearchAttributes) {
 	x.inner.SetSearchAttributes(searchAttributes)
 }
 
+// Returns the search attributes that control the panel’s search/inquiry behavior.
+//
 // GetSearchAttributes calls the underlying GetSearchAttributes.
 func (x *BluetoothServiceBrowserController) GetSearchAttributes() *iobluetooth.IOBluetoothDeviceSearchAttributes {
 	return x.inner.GetSearchAttributes()
 }
 
+// Adds a UUID to the list of UUIDs that are used to validate the user’s selection.
+//
 // AddAllowedUUID calls the underlying AddAllowedUUID.
 func (x *BluetoothServiceBrowserController) AddAllowedUUID(allowedUUID *iobluetooth.IOBluetoothSDPUUID) {
 	x.inner.AddAllowedUUID(allowedUUID)
 }
 
+// Adds an array of UUIDs to the list of UUIDs that are used to validate the user’s selection.
+//
 // AddAllowedUUIDArray calls the underlying AddAllowedUUIDArray.
 func (x *BluetoothServiceBrowserController) AddAllowedUUIDArray(allowedUUIDArray *foundation.NSArray[objc.ID]) {
 	x.inner.AddAllowedUUIDArray(allowedUUIDArray)
 }
 
+// Resets the controller back to the default state where it will accept any device the user selects.
+//
 // ClearAllowedUUIDs calls the underlying ClearAllowedUUIDs.
 func (x *BluetoothServiceBrowserController) ClearAllowedUUIDs() {
 	x.inner.ClearAllowedUUIDs()
 }
 
+// Sets the title of the panel when not run as a sheet.
+//
 // SetTitle calls the underlying SetTitle.
 func (x *BluetoothServiceBrowserController) SetTitle(windowTitle string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(windowTitle))
 }
 
+// Returns the title of the device selector panel.
+//
 // GetTitle calls the underlying GetTitle.
 func (x *BluetoothServiceBrowserController) GetTitle() string {
 	_r := x.inner.GetTitle()
@@ -138,11 +160,15 @@ func (x *BluetoothServiceBrowserController) GetTitle() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the description text that appears in the device selector panel.
+//
 // SetDescriptionText calls the underlying SetDescriptionText.
 func (x *BluetoothServiceBrowserController) SetDescriptionText(descriptionText string) {
 	x.inner.SetDescriptionText(foundation.NSStringStringWithUTF8String(descriptionText))
 }
 
+// Returns the description text that appears in the device selector panel.
+//
 // GetDescriptionText calls the underlying GetDescriptionText.
 func (x *BluetoothServiceBrowserController) GetDescriptionText() string {
 	_r := x.inner.GetDescriptionText()
@@ -152,11 +178,15 @@ func (x *BluetoothServiceBrowserController) GetDescriptionText() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the title of the default/select button in the device selector panel.
+//
 // SetPrompt calls the underlying SetPrompt.
 func (x *BluetoothServiceBrowserController) SetPrompt(prompt string) {
 	x.inner.SetPrompt(foundation.NSStringStringWithUTF8String(prompt))
 }
 
+// Returns the title of the default/select button in the device selector panel.
+//
 // GetPrompt calls the underlying GetPrompt.
 func (x *BluetoothServiceBrowserController) GetPrompt() string {
 	_r := x.inner.GetPrompt()

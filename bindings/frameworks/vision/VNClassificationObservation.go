@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents classification information that an image-analysis request produces.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnclassificationobservation
 type VNClassificationObservation struct {
 	VNObservation
@@ -41,13 +43,13 @@ func (o *VNClassificationObservation) Identifier() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-// @brief	Determine whether or not the observation's operation point for a specific precision has a minimum recall value. @param minimumRecall	The minimum recall desired for an operation point. @param precision		The precision value used to select the operation point. @return YES if the recall value for the operation point specified by a precision value has the minimum value; otherwise, NO.
+// Determines whether the observation for a specific precision has a minimum recall value.
 func (o *VNClassificationObservation) HasMinimumRecallForPrecision(minimumRecall float32, precision float32) bool {
 	_ret := objc.Send[bool](o.Ptr(), _vNClassificationObservationSelHasMinimumRecallForPrecision, minimumRecall, precision)
 	return _ret
 }
 
-// @brief	Determine whether or not the observation's operation point for a specific recall has a minimum precision value. @param minimumPrecision	The minimum precision desired for an operation point. @param recall		The recall value used to select the operation point. @return YES if the precision value for the operation point specified by a recall value has the minimum value; otherwise, NO.
+// Determines whether the observation for a specific recall has a minimum precision value.
 func (o *VNClassificationObservation) HasMinimumPrecisionForRecall(minimumPrecision float32, recall float32) bool {
 	_ret := objc.Send[bool](o.Ptr(), _vNClassificationObservationSelHasMinimumPrecisionForRecall, minimumPrecision, recall)
 	return _ret

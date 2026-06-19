@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A lock that can be associated with specific, user-defined conditions.
+//
 // ConditionLock wraps [raw.NSConditionLock] with a fluent Go API.
 type ConditionLock struct {
 	inner *raw.NSConditionLock
@@ -30,6 +32,8 @@ func ConditionLockFromID(id objc.ID) *ConditionLock {
 	return &ConditionLock{inner: raw.NSConditionLockFromID(id)}
 }
 
+// Initializes a newly allocated NSConditionLock object and sets its condition.
+//
 // NewConditionLockWithCondition creates a new [ConditionLock].
 func NewConditionLockWithCondition(condition int) *ConditionLock {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSConditionLock")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewConditionLockWithCondition(condition int) *ConditionLock {
 	return &ConditionLock{inner: raw.NSConditionLockFromID(_id)}
 }
 
+// The name associated with the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *ConditionLock) WithName(name string) *ConditionLock {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
@@ -49,31 +55,43 @@ func (x *ConditionLock) WithScriptingProperties(scriptingProperties *raw.NSDicti
 	return x
 }
 
+// Attempts to acquire a lock.
+//
 // LockWhenCondition calls the underlying LockWhenCondition.
 func (x *ConditionLock) LockWhenCondition(condition int) {
 	x.inner.LockWhenCondition(condition)
 }
 
+// Attempts to acquire a lock without regard to the receiver’s condition.
+//
 // TryLock calls the underlying TryLock.
 func (x *ConditionLock) TryLock() bool {
 	return x.inner.TryLock()
 }
 
+// Attempts to acquire a lock if the receiver’s condition is equal to the specified condition.
+//
 // TryLockWhenCondition calls the underlying TryLockWhenCondition.
 func (x *ConditionLock) TryLockWhenCondition(condition int) bool {
 	return x.inner.TryLockWhenCondition(condition)
 }
 
+// Relinquishes the lock and sets the receiver’s condition.
+//
 // UnlockWithCondition calls the underlying UnlockWithCondition.
 func (x *ConditionLock) UnlockWithCondition(condition int) {
 	x.inner.UnlockWithCondition(condition)
 }
 
+// Attempts to acquire a lock before a specified moment in time.
+//
 // LockBeforeDate calls the underlying LockBeforeDate.
 func (x *ConditionLock) LockBeforeDate(limit *raw.NSDate) bool {
 	return x.inner.LockBeforeDate(limit)
 }
 
+// Attempts to acquire a lock before a specified moment in time.
+//
 // LockWhenConditionBeforeDate calls the underlying LockWhenConditionBeforeDate.
 func (x *ConditionLock) LockWhenConditionBeforeDate(condition int, limit *raw.NSDate) bool {
 	return x.inner.LockWhenConditionBeforeDate(condition, limit)

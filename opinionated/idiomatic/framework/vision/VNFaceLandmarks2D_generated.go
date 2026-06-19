@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of facial features that a request detects.
+//
 // FaceLandmarks2D wraps [raw.VNFaceLandmarks2D] with a fluent Go API.
 type FaceLandmarks2D struct {
 	inner *raw.VNFaceLandmarks2D

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains the results of searching the web view’s contents.
+//
 // WKFindResult wraps [raw.WKFindResult] with a fluent Go API.
 type WKFindResult struct {
 	inner *raw.WKFindResult

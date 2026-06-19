@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration parameters of a natural language model.
+//
 // ModelConfiguration wraps [raw.NLModelConfiguration] with a fluent Go API.
 type ModelConfiguration struct {
 	inner *raw.NLModelConfiguration

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The sync engine is about to fetch changes from the server.
+//
 // SyncEngineWillFetchChangesEvent wraps [raw.CKSyncEngineWillFetchChangesEvent] with a fluent Go API.
 type SyncEngineWillFetchChangesEvent struct {
 	inner *raw.CKSyncEngineWillFetchChangesEvent

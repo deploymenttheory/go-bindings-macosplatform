@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// Constants that indicate the result of animating an image sequence.
 type CGImageAnimationStatus int64
 
 const (
@@ -35,14 +36,20 @@ func (e CGImageAnimationStatus) String() string {
 	}
 }
 
+// Constants for errors that occur when getting or setting metadata information.
 type CGImageMetadataErrors int64
 
 const (
-	KCGImageMetadataErrorUnknown              CGImageMetadataErrors = 0
-	KCGImageMetadataErrorUnsupportedFormat    CGImageMetadataErrors = 1
-	KCGImageMetadataErrorBadArgument          CGImageMetadataErrors = 2
+	// An error that indicates an unknown condition occurred.
+	KCGImageMetadataErrorUnknown CGImageMetadataErrors = 0
+	// An error that indicates the metadata was in an unsupported format.
+	KCGImageMetadataErrorUnsupportedFormat CGImageMetadataErrors = 1
+	// An error that indicates a parameter was malformed or contained invalid data.
+	KCGImageMetadataErrorBadArgument CGImageMetadataErrors = 2
+	// An error that indicates an attempt to save conflicting metadata values.
 	KCGImageMetadataErrorConflictingArguments CGImageMetadataErrors = 3
-	KCGImageMetadataErrorPrefixConflict       CGImageMetadataErrors = 4
+	// An error that indicates an attempt to register a namespace with a prefix that is different than the namespace’s existing prefix.
+	KCGImageMetadataErrorPrefixConflict CGImageMetadataErrors = 4
 )
 
 func (e CGImageMetadataErrors) String() string {
@@ -62,17 +69,26 @@ func (e CGImageMetadataErrors) String() string {
 	}
 }
 
+// Constants that indicate the XMP type for a metadata tag.
 type CGImageMetadataType int64
 
 const (
-	KCGImageMetadataTypeInvalid        CGImageMetadataType = -1
-	KCGImageMetadataTypeDefault        CGImageMetadataType = 0
-	KCGImageMetadataTypeString         CGImageMetadataType = 1
+	// An invalid metadata type.
+	KCGImageMetadataTypeInvalid CGImageMetadataType = -1
+	// The default type for new tags.
+	KCGImageMetadataTypeDefault CGImageMetadataType = 0
+	// A string value.
+	KCGImageMetadataTypeString CGImageMetadataType = 1
+	// An array that doesn’t preserve the order of items.
 	KCGImageMetadataTypeArrayUnordered CGImageMetadataType = 2
-	KCGImageMetadataTypeArrayOrdered   CGImageMetadataType = 3
+	// An array that preserves the order of items.
+	KCGImageMetadataTypeArrayOrdered CGImageMetadataType = 3
+	// An ordered array, in which all elements are alternates for the same value.
 	KCGImageMetadataTypeAlternateArray CGImageMetadataType = 4
-	KCGImageMetadataTypeAlternateText  CGImageMetadataType = 5
-	KCGImageMetadataTypeStructure      CGImageMetadataType = 6
+	// An alternate array, in which all elements are localized strings for the same value.
+	KCGImageMetadataTypeAlternateText CGImageMetadataType = 5
+	// A collection of keys and values.
+	KCGImageMetadataTypeStructure CGImageMetadataType = 6
 )
 
 func (e CGImageMetadataType) String() string {
@@ -98,17 +114,26 @@ func (e CGImageMetadataType) String() string {
 	}
 }
 
+// A value describing the intended display orientation for an image.
 type CGImagePropertyOrientation int64
 
 const (
-	KCGImagePropertyOrientationUp            CGImagePropertyOrientation = 1
-	KCGImagePropertyOrientationUpMirrored    CGImagePropertyOrientation = 2
-	KCGImagePropertyOrientationDown          CGImagePropertyOrientation = 3
-	KCGImagePropertyOrientationDownMirrored  CGImagePropertyOrientation = 4
-	KCGImagePropertyOrientationLeftMirrored  CGImagePropertyOrientation = 5
-	KCGImagePropertyOrientationRight         CGImagePropertyOrientation = 6
+	// The encoded image data matches the image’s intended display orientation.
+	KCGImagePropertyOrientationUp CGImagePropertyOrientation = 1
+	// The encoded image data is horizontally flipped from the image’s intended display orientation.
+	KCGImagePropertyOrientationUpMirrored CGImagePropertyOrientation = 2
+	// The encoded image data is rotated 180° from the image’s intended display orientation.
+	KCGImagePropertyOrientationDown CGImagePropertyOrientation = 3
+	// The encoded image data is vertically flipped from the image’s intended display orientation.
+	KCGImagePropertyOrientationDownMirrored CGImagePropertyOrientation = 4
+	// The encoded image data is horizontally flipped and rotated 90° counter-clockwise from the image’s intended display orientation.
+	KCGImagePropertyOrientationLeftMirrored CGImagePropertyOrientation = 5
+	// The encoded image data is rotated 90° counter-clockwise from the image’s intended display orientation.
+	KCGImagePropertyOrientationRight CGImagePropertyOrientation = 6
+	// The encoded image data is horizontally flipped and rotated 90° clockwise from the image’s intended display orientation.
 	KCGImagePropertyOrientationRightMirrored CGImagePropertyOrientation = 7
-	KCGImagePropertyOrientationLeft          CGImagePropertyOrientation = 8
+	// The encoded image data is rotated 90° clockwise from the image’s intended display orientation.
+	KCGImagePropertyOrientationLeft CGImagePropertyOrientation = 8
 )
 
 func (e CGImagePropertyOrientation) String() string {
@@ -152,15 +177,22 @@ func (e CGImagePropertyTGACompression) String() string {
 	}
 }
 
+// The set of status values for images and image sources.
 type CGImageSourceStatus int64
 
 const (
+	// The end of the file occurred unexpectedly.
 	KCGImageStatusUnexpectedEOF CGImageSourceStatus = -5
-	KCGImageStatusInvalidData   CGImageSourceStatus = -4
-	KCGImageStatusUnknownType   CGImageSourceStatus = -3
+	// The data is not valid.
+	KCGImageStatusInvalidData CGImageSourceStatus = -4
+	// The image is an unknown type.
+	KCGImageStatusUnknownType CGImageSourceStatus = -3
+	// The image source is reading the header.
 	KCGImageStatusReadingHeader CGImageSourceStatus = -2
-	KCGImageStatusIncomplete    CGImageSourceStatus = -1
-	KCGImageStatusComplete      CGImageSourceStatus = 0
+	// The operation is not complete
+	KCGImageStatusIncomplete CGImageSourceStatus = -1
+	// The operation is complete.
+	KCGImageStatusComplete CGImageSourceStatus = 0
 )
 
 func (e CGImageSourceStatus) String() string {

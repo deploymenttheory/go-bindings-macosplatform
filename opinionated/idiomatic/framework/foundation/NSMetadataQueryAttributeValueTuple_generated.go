@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The NSMetadataQueryAttributeValueTuple class represents attribute-value tuples, which are objects that contain the attribute name and value of a metadata attribute.
+//
 // MetadataQueryAttributeValueTuple wraps [raw.NSMetadataQueryAttributeValueTuple] with a fluent Go API.
 type MetadataQueryAttributeValueTuple struct {
 	inner *raw.NSMetadataQueryAttributeValueTuple

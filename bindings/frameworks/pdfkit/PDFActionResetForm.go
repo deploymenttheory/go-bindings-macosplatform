@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// PDFActionResetForm, a subclass of PDFAction, defines methods for getting and clearing fields in a PDF form.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfactionresetform
 type PDFActionResetForm struct {
 	PDFAction
@@ -34,6 +36,7 @@ func PDFActionResetFormFromID(id objc.ID) *PDFActionResetForm {
 	return o
 }
 
+// Initializes a reset form action.
 func (o *PDFActionResetForm) Init() *PDFActionResetForm {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFActionResetFormSelInit)
 	if _ret != 0 {
@@ -43,12 +46,15 @@ func (o *PDFActionResetForm) Init() *PDFActionResetForm {
 }
 
 func (o *PDFActionResetForm) Fields() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _pDFActionResetFormSelFields)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pDFActionResetFormSelFields)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *PDFActionResetForm) SetFields(fields *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_pDFActionResetFormSelSetFields, fields)
+	o.Ptr().Send(_pDFActionResetFormSelSetFields, fields.Ptr())
 }
 
 func (o *PDFActionResetForm) FieldsIncludedAreCleared() bool {

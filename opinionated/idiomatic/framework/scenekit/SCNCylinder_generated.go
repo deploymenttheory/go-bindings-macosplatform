@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A right circular cylinder geometry.
+//
 // Cylinder wraps [raw.SCNCylinder] with a fluent Go API.
 type Cylinder struct {
 	inner *raw.SCNCylinder
@@ -37,7 +39,7 @@ func NewCylinder() *Cylinder {
 	return &Cylinder{inner: raw.SCNCylinderFromID(_id)}
 }
 
-// @property radius @abstract The radius of the cylinder. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
+// The radius of the cylinder’s circular cross section. Animatable.
 //
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *Cylinder) WithRadius(radius float64) *Cylinder {
@@ -45,7 +47,7 @@ func (x *Cylinder) WithRadius(radius float64) *Cylinder {
 	return x
 }
 
-// @property height @abstract The height of the cylinder. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+// The extent of the cylinder along its y-axis. Animatable.
 //
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *Cylinder) WithHeight(height float64) *Cylinder {
@@ -53,7 +55,7 @@ func (x *Cylinder) WithHeight(height float64) *Cylinder {
 	return x
 }
 
-// @property radialSegmentCount @abstract The number of subdivisions along the radial coordinate. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+// The number of subdivisions around the circumference of the cylinder. Animatable.
 //
 // WithRadialSegmentCount sets the radialSegmentCount property and returns the receiver for chaining.
 func (x *Cylinder) WithRadialSegmentCount(radialSegmentCount int) *Cylinder {
@@ -61,7 +63,7 @@ func (x *Cylinder) WithRadialSegmentCount(radialSegmentCount int) *Cylinder {
 	return x
 }
 
-// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+// The number of subdivisions in the sides of the cylinder along its y-axis. Animatable.
 //
 // WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
 func (x *Cylinder) WithHeightSegmentCount(heightSegmentCount int) *Cylinder {
@@ -69,7 +71,7 @@ func (x *Cylinder) WithHeightSegmentCount(heightSegmentCount int) *Cylinder {
 	return x
 }
 
-// @property name @abstract Determines the name of the receiver.
+// A name associated with the geometry object.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Cylinder) WithName(name string) *Cylinder {
@@ -77,7 +79,7 @@ func (x *Cylinder) WithName(name string) *Cylinder {
 	return x
 }
 
-// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 //
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Cylinder) WithMaterials(items ...*raw.SCNMaterial) *Cylinder {
@@ -100,7 +102,7 @@ func (x *Cylinder) WithMaterials(items ...*raw.SCNMaterial) *Cylinder {
 	return x
 }
 
-// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+// The first material attached to the geometry.
 //
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Cylinder) WithFirstMaterial(firstMaterial *Material) *Cylinder {
@@ -108,7 +110,7 @@ func (x *Cylinder) WithFirstMaterial(firstMaterial *Material) *Cylinder {
 	return x
 }
 
-// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 //
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Cylinder) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cylinder {
@@ -137,7 +139,7 @@ func (x *Cylinder) WithTessellator(tessellator *GeometryTessellator) *Cylinder {
 	return x
 }
 
-// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 //
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Cylinder) WithSubdivisionLevel(subdivisionLevel uint) *Cylinder {
@@ -153,7 +155,7 @@ func (x *Cylinder) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *
 	return x
 }
 
-// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 //
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Cylinder) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cylinder {
@@ -161,7 +163,7 @@ func (x *Cylinder) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *
 	return x
 }
 
-// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 //
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Cylinder) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cylinder {

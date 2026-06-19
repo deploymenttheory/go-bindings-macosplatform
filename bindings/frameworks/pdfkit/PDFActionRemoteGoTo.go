@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// PDFActionRemoteGoTo, a subclass of PDFAction, defines methods for getting and setting the destination of a go-to action that targets another document.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfactionremotegoto
 type PDFActionRemoteGoTo struct {
 	PDFAction
@@ -37,6 +39,7 @@ func PDFActionRemoteGoToFromID(id objc.ID) *PDFActionRemoteGoTo {
 	return o
 }
 
+// Initializes the remote go-to action with the specified page index, point, and document URL.
 func (o *PDFActionRemoteGoTo) InitWithPageIndexAtPointFileURL(pageIndex uint, point corefoundation.CGPoint, url *foundation.NSURL) *PDFActionRemoteGoTo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFActionRemoteGoToSelInitWithPageIndexAtPointFileURL, pageIndex, point, url.Ptr())
 	if _ret != 0 {

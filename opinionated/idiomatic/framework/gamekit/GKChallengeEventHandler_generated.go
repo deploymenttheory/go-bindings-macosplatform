@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A singleton object responsible for dispatching challenge-related events to its delegate
+// The GKChallengeEventHandler class is used to respond to events related to challenges sent or received by the local player.
 //
 // ChallengeEventHandler wraps [raw.GKChallengeEventHandler] with a fluent Go API.
 type ChallengeEventHandler struct {
@@ -37,6 +37,8 @@ func NewChallengeEventHandler() *ChallengeEventHandler {
 	return &ChallengeEventHandler{inner: raw.GKChallengeEventHandlerFromID(_id)}
 }
 
+// The delegate for the event handler.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *ChallengeEventHandler) WithDelegate(delegate raw.GKChallengeEventHandlerDelegate) *ChallengeEventHandler {
 	x.inner.SetDelegate(delegate)

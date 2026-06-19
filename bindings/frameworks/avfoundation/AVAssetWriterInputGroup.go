@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A group of inputs with tracks that are mutually exclusive to each other for playback or processing.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetwriterinputgroup
 type AVAssetWriterInputGroup struct {
 	AVMediaSelectionGroup
@@ -33,6 +35,7 @@ func AVAssetWriterInputGroupFromID(id objc.ID) *AVAssetWriterInputGroup {
 	return o
 }
 
+// Returns a new group for the asset writer inputs.
 func AVAssetWriterInputGroupAssetWriterInputGroupWithInputsDefaultInput(inputs *foundation.NSArray[*AVAssetWriterInput], defaultInput *AVAssetWriterInput) *AVAssetWriterInputGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetWriterInputGroup), _aVAssetWriterInputGroupSelAssetWriterInputGroupWithInputsDefaultInput, inputs.Ptr(), defaultInput.Ptr())
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func AVAssetWriterInputGroupAssetWriterInputGroupWithInputsDefaultInput(inputs *
 	return AVAssetWriterInputGroupFromID(_ret)
 }
 
+// Creates a group for the asset writer inputs.
 func (o *AVAssetWriterInputGroup) InitWithInputsDefaultInput(inputs *foundation.NSArray[*AVAssetWriterInput], defaultInput *AVAssetWriterInput) *AVAssetWriterInputGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputGroupSelInitWithInputsDefaultInput, inputs.Ptr(), defaultInput.Ptr())
 	if _ret != 0 {

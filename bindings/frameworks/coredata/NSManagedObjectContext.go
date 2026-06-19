@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object space to manipulate and track changes to managed objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext
 type NSManagedObjectContext struct {
 	foundation.NSObject
@@ -107,6 +109,7 @@ func (o *NSManagedObjectContext) Init() *NSManagedObjectContext {
 	return NSManagedObjectContextFromID(_ret)
 }
 
+// Creates a context that uses the specified concurrency type.
 func (o *NSManagedObjectContext) InitWithConcurrencyType(ct NSManagedObjectContextConcurrencyType) *NSManagedObjectContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelInitWithConcurrencyType, ct)
 	if _ret != 0 {
@@ -115,6 +118,7 @@ func (o *NSManagedObjectContext) InitWithConcurrencyType(ct NSManagedObjectConte
 	return NSManagedObjectContextFromID(_ret)
 }
 
+// Asynchronously performs the specified closure on the context’s queue.
 func (o *NSManagedObjectContext) PerformBlock(block func()) {
 	var __block_block objc.Block
 	if block != nil {
@@ -126,6 +130,7 @@ func (o *NSManagedObjectContext) PerformBlock(block func()) {
 	o.Ptr().Send(_nSManagedObjectContextSelPerformBlock, __block_block)
 }
 
+// Synchronously performs the specified closure on the context’s queue.
 func (o *NSManagedObjectContext) PerformBlockAndWait(block func()) {
 	var __block_block objc.Block
 	if block != nil {
@@ -137,6 +142,7 @@ func (o *NSManagedObjectContext) PerformBlockAndWait(block func()) {
 	o.Ptr().Send(_nSManagedObjectContextSelPerformBlockAndWait, __block_block)
 }
 
+// Returns an object that exists in the context.
 func (o *NSManagedObjectContext) ObjectRegisteredForID(objectID *NSManagedObjectID) *NSManagedObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelObjectRegisteredForID, objectID.Ptr())
 	if _ret != 0 {
@@ -145,6 +151,7 @@ func (o *NSManagedObjectContext) ObjectRegisteredForID(objectID *NSManagedObject
 	return NSManagedObjectFromID(_ret)
 }
 
+// Returns either an existing object from the context or a fault that represents that object.
 func (o *NSManagedObjectContext) ObjectWithID(objectID *NSManagedObjectID) *NSManagedObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelObjectWithID, objectID.Ptr())
 	if _ret != 0 {
@@ -153,6 +160,7 @@ func (o *NSManagedObjectContext) ObjectWithID(objectID *NSManagedObjectID) *NSMa
 	return NSManagedObjectFromID(_ret)
 }
 
+// Returns an existing object from either the context or the persistent store.
 func (o *NSManagedObjectContext) ExistingObjectWithIDError(objectID *NSManagedObjectID) (*NSManagedObject, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelExistingObjectWithIDError, objectID.Ptr(), unsafe.Pointer(&_nsErr))
@@ -165,24 +173,30 @@ func (o *NSManagedObjectContext) ExistingObjectWithIDError(objectID *NSManagedOb
 	return NSManagedObjectFromID(_ret), nil
 }
 
+// Returns an array of objects that meet the criteria of the specified fetch request.
 func (o *NSManagedObjectContext) ExecuteFetchRequestError(request *NSFetchRequest[objc.ID]) (*foundation.NSArray[objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSManagedObjectContextSelExecuteFetchRequestError, request, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelExecuteFetchRequestError, request.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[objc.ID](_ret), nil
 }
 
+// Returns the number of objects the specified request fetches when it executes.
 func (o *NSManagedObjectContext) CountForFetchRequestError(request *NSFetchRequest[objc.ID]) (uint, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[uint](o.Ptr(), _nSManagedObjectContextSelCountForFetchRequestError, request, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[uint](o.Ptr(), _nSManagedObjectContextSelCountForFetchRequestError, request.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Passes a request to the persistent store without affecting the contents of the managed object context, and returns a persistent store result.
 func (o *NSManagedObjectContext) ExecuteRequestError(request *NSPersistentStoreRequest) (*NSPersistentStoreResult, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelExecuteRequestError, request.Ptr(), unsafe.Pointer(&_nsErr))
@@ -195,46 +209,57 @@ func (o *NSManagedObjectContext) ExecuteRequestError(request *NSPersistentStoreR
 	return NSPersistentStoreResultFromID(_ret), nil
 }
 
+// Registers an object to be inserted in the context’s persistent store the next time changes are saved.
 func (o *NSManagedObjectContext) InsertObject(object *NSManagedObject) {
 	o.Ptr().Send(_nSManagedObjectContextSelInsertObject, object.Ptr())
 }
 
+// Specifies an object that should be removed from its persistent store when changes are committed.
 func (o *NSManagedObjectContext) DeleteObject(object *NSManagedObject) {
 	o.Ptr().Send(_nSManagedObjectContextSelDeleteObject, object.Ptr())
 }
 
+// Updates the persistent properties of a managed object to use the latest values from the persistent store.
 func (o *NSManagedObjectContext) RefreshObjectMergeChanges(object *NSManagedObject, flag bool) {
 	o.Ptr().Send(_nSManagedObjectContextSelRefreshObjectMergeChanges, object.Ptr(), flag)
 }
 
+// Marks an object for conflict detection.
 func (o *NSManagedObjectContext) DetectConflictsForObject(object *NSManagedObject) {
 	o.Ptr().Send(_nSManagedObjectContextSelDetectConflictsForObject, object.Ptr())
 }
 
+// Forces the context to process changes to the object graph.
 func (o *NSManagedObjectContext) ProcessPendingChanges() {
 	o.Ptr().Send(_nSManagedObjectContextSelProcessPendingChanges)
 }
 
+// Specifies the store in which a newly inserted object will be saved.
 func (o *NSManagedObjectContext) AssignObjectToPersistentStore(object objc.ID, store *NSPersistentStore) {
 	o.Ptr().Send(_nSManagedObjectContextSelAssignObjectToPersistentStore, object, store.Ptr())
 }
 
+// Sends an undo message to the context’s undo manager, asking it to reverse the latest uncommitted changes applied to objects in the object graph.
 func (o *NSManagedObjectContext) Undo() {
 	o.Ptr().Send(_nSManagedObjectContextSelUndo)
 }
 
+// Sends a redo message to the context’s undo manager, asking it to reverse the latest undo operation applied to objects in the object graph.
 func (o *NSManagedObjectContext) Redo() {
 	o.Ptr().Send(_nSManagedObjectContextSelRedo)
 }
 
+// Returns the context to its base state.
 func (o *NSManagedObjectContext) Reset() {
 	o.Ptr().Send(_nSManagedObjectContextSelReset)
 }
 
+// Removes everything from the undo stack, discards all insertions and deletions, and restores updated objects to their last committed values.
 func (o *NSManagedObjectContext) Rollback() {
 	o.Ptr().Send(_nSManagedObjectContextSelRollback)
 }
 
+// Attempts to commit unsaved changes to registered objects to the context’s parent store.
 func (o *NSManagedObjectContext) Save() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSManagedObjectContextSelSave, unsafe.Pointer(&_nsErr))
@@ -244,6 +269,7 @@ func (o *NSManagedObjectContext) Save() (bool, error) {
 	return _ret, nil
 }
 
+// Refreshes all of the registered managed objects in the context.
 func (o *NSManagedObjectContext) RefreshAllObjects() {
 	o.Ptr().Send(_nSManagedObjectContextSelRefreshAllObjects)
 }
@@ -264,11 +290,13 @@ func (o *NSManagedObjectContext) TryLock() bool {
 	return _ret
 }
 
+// Creates a log of the inaccessible fault.
 func (o *NSManagedObjectContext) ShouldHandleInaccessibleFaultForObjectIDTriggeredByProperty(fault *NSManagedObject, oid *NSManagedObjectID, property *NSPropertyDescription) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSManagedObjectContextSelShouldHandleInaccessibleFaultForObjectIDTriggeredByProperty, fault.Ptr(), oid.Ptr(), property.Ptr())
 	return _ret
 }
 
+// Converts to permanent IDs the object IDs of the objects in a given array.
 func (o *NSManagedObjectContext) ObtainPermanentIDsForObjectsError(objects *foundation.NSArray[*NSManagedObject]) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSManagedObjectContextSelObtainPermanentIDsForObjectsError, objects.Ptr(), unsafe.Pointer(&_nsErr))
@@ -278,14 +306,17 @@ func (o *NSManagedObjectContext) ObtainPermanentIDsForObjectsError(objects *foun
 	return _ret, nil
 }
 
+// Merges the changes specified in a given notification.
 func (o *NSManagedObjectContext) MergeChangesFromContextDidSaveNotification(notification *foundation.NSNotification) {
 	o.Ptr().Send(_nSManagedObjectContextSelMergeChangesFromContextDidSaveNotification, notification.Ptr())
 }
 
+// Handles changes from other processes or from a serialized state.
 func NSManagedObjectContextMergeChangesFromRemoteContextSaveIntoContexts(changeNotificationData *foundation.NSDictionary[objc.ID, objc.ID], contexts *foundation.NSArray[*NSManagedObjectContext]) {
-	objc.ID(_clsNSManagedObjectContext).Send(_nSManagedObjectContextSelMergeChangesFromRemoteContextSaveIntoContexts, changeNotificationData, contexts.Ptr())
+	objc.ID(_clsNSManagedObjectContext).Send(_nSManagedObjectContextSelMergeChangesFromRemoteContextSaveIntoContexts, changeNotificationData.Ptr(), contexts.Ptr())
 }
 
+// Sets the query generation this context should use.
 func (o *NSManagedObjectContext) SetQueryGenerationFromTokenError(generation *NSQueryGenerationToken) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSManagedObjectContextSelSetQueryGenerationFromTokenError, generation.Ptr(), unsafe.Pointer(&_nsErr))
@@ -349,8 +380,11 @@ func (o *NSManagedObjectContext) HasChanges() bool {
 }
 
 func (o *NSManagedObjectContext) UserInfo() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSMutableDictionary[objc.ID, objc.ID]](o.Ptr(), _nSManagedObjectContextSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMutableDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSManagedObjectContext) ConcurrencyType() NSManagedObjectContextConcurrencyType {

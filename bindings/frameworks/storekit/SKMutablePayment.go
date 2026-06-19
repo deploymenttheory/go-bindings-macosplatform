@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable request to the App Store to process payment for additional functionality that your app offers.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skmutablepayment
 // Deprecated: Use Product.purchase(confirmIn:options:).
 type SKMutablePayment struct {

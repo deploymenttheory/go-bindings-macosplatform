@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information that describes a flight.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inflight
 type INFlight struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func INFlightFromID(id objc.ID) *INFlight {
 	return o
 }
 
+// Creates a new object containing information about a flight.
 func (o *INFlight) InitWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportGateArrivalAirportGate(airline *INAirline, flightNumber *foundation.NSString, boardingTime *INDateComponentsRange, flightDuration *INDateComponentsRange, departureAirportGate *INAirportGate, arrivalAirportGate *INAirportGate) *INFlight {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFlightSelInitWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportGateArrivalAirportGate, airline.Ptr(), flightNumber.Ptr(), boardingTime.Ptr(), flightDuration.Ptr(), departureAirportGate.Ptr(), arrivalAirportGate.Ptr())
 	if _ret != 0 {

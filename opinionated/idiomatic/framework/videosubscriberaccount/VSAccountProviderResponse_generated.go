@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains the response from the account provider.
+//
 // VSAccountProviderResponse wraps [raw.VSAccountProviderResponse] with a fluent Go API.
 type VSAccountProviderResponse struct {
 	inner *raw.VSAccountProviderResponse

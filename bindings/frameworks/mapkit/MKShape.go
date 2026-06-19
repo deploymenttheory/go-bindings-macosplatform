@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that defines the basic properties for all shape-based overlay objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkshape
 type MKShape struct {
 	foundation.NSObject

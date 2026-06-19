@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the user adding, updating, or deleting a contact or group.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnchangehistoryevent
 type CNChangeHistoryEvent struct {
 	foundation.NSObject
@@ -30,6 +32,7 @@ func CNChangeHistoryEventFromID(id objc.ID) *CNChangeHistoryEvent {
 	return o
 }
 
+// Forwards the event to the delegate you provide to process the change-history event.
 func (o *CNChangeHistoryEvent) AcceptEventVisitor(visitor CNChangeHistoryEventVisitor) {
 	o.Ptr().Send(_cNChangeHistoryEventSelAcceptEventVisitor, visitor)
 }

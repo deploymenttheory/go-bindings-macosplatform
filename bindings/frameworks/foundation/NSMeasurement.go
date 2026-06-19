@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A numeric quantity labeled with a unit of measure, with support for unit conversion and unit-aware calculations.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmeasurement
 type NSMeasurement[UnitType purego.AnyObject] struct {
 	NSObject
@@ -35,6 +37,7 @@ func NSMeasurementFromID[UnitType purego.AnyObject](id objc.ID) *NSMeasurement[U
 	return o
 }
 
+// Initializes a new measurement with a specified double-precision floating-point value and unit.
 func (o *NSMeasurement[UnitType]) InitWithDoubleValueUnit(doubleValue float64, unit UnitType) *NSMeasurement[UnitType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementSelInitWithDoubleValueUnit, doubleValue, unit)
 	if _ret != 0 {
@@ -43,16 +46,22 @@ func (o *NSMeasurement[UnitType]) InitWithDoubleValueUnit(doubleValue float64, u
 	return NSMeasurementFromID[UnitType](_ret)
 }
 
+// Indicates whether the measurement can be converted to the given unit.
 func (o *NSMeasurement[UnitType]) CanBeConvertedToUnit(unit *NSUnit) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMeasurementSelCanBeConvertedToUnit, unit.Ptr())
 	return _ret
 }
 
+// Returns a measurement created by converting the receiver to the specified unit.
 func (o *NSMeasurement[UnitType]) MeasurementByConvertingToUnit(unit *NSUnit) *NSMeasurement[objc.ID] {
-	_ret := objc.Send[*NSMeasurement[objc.ID]](o.Ptr(), _nSMeasurementSelMeasurementByConvertingToUnit, unit.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementSelMeasurementByConvertingToUnit, unit.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSMeasurementFromID[objc.ID](_ret)
 }
 
+// Returns a new measurement by adding the receiver to the specified measurement.
 func (o *NSMeasurement[UnitType]) MeasurementByAddingMeasurement(measurement *NSMeasurement[UnitType]) *NSMeasurement[UnitType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementSelMeasurementByAddingMeasurement, measurement.Ptr())
 	if _ret != 0 {
@@ -61,6 +70,7 @@ func (o *NSMeasurement[UnitType]) MeasurementByAddingMeasurement(measurement *NS
 	return NSMeasurementFromID[UnitType](_ret)
 }
 
+// Returns a new measurement by subtracting the specified measurement from the receiver.
 func (o *NSMeasurement[UnitType]) MeasurementBySubtractingMeasurement(measurement *NSMeasurement[UnitType]) *NSMeasurement[UnitType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementSelMeasurementBySubtractingMeasurement, measurement.Ptr())
 	if _ret != 0 {

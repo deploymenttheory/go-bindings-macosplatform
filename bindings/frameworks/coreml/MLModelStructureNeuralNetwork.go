@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class representing the structure of a NeuralNetwork model.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmodelstructureneuralnetwork
 type MLModelStructureNeuralNetwork struct {
 	foundation.NSObject

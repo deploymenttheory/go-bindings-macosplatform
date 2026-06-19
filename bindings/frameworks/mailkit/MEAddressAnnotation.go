@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that indicates the validity of an email address.
+//
 // Apple documentation: https://developer.apple.com/documentation/mailkit/meaddressannotation
 type MEAddressAnnotation struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func MEAddressAnnotationFromID(id objc.ID) *MEAddressAnnotation {
 	return o
 }
 
-// @brief An annotation to denote a recipeint email address has an error when composing a mail message. @param localizedDescription - A localized string with a brief description of the error that may be presented to the user.
+// Indicates an address is invalid and may result in failure to deliver a message.
 func MEAddressAnnotationErrorWithLocalizedDescription(localizedDescription *foundation.NSString) *MEAddressAnnotation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEAddressAnnotation), _mEAddressAnnotationSelErrorWithLocalizedDescription, localizedDescription.Ptr())
 	if _ret != 0 {
@@ -41,7 +43,7 @@ func MEAddressAnnotationErrorWithLocalizedDescription(localizedDescription *foun
 	return MEAddressAnnotationFromID(_ret)
 }
 
-// @brief An annotation to warn about a recipeint email address when composing a mail message. @param localizedDescription - A localized string with a brief description of the warning may be presented to the user. .
+// Indicates an address may be invalid or needs attention.
 func MEAddressAnnotationWarningWithLocalizedDescription(localizedDescription *foundation.NSString) *MEAddressAnnotation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEAddressAnnotation), _mEAddressAnnotationSelWarningWithLocalizedDescription, localizedDescription.Ptr())
 	if _ret != 0 {
@@ -50,7 +52,7 @@ func MEAddressAnnotationWarningWithLocalizedDescription(localizedDescription *fo
 	return MEAddressAnnotationFromID(_ret)
 }
 
-// @brief An annotation to  denote a valid recipeint email address when composing a mail message. @param localizedDescription - A localized string with a brief description that may be presented to the user. .
+// Indicates an address is valid and correct.
 func MEAddressAnnotationSuccessWithLocalizedDescription(localizedDescription *foundation.NSString) *MEAddressAnnotation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEAddressAnnotation), _mEAddressAnnotationSelSuccessWithLocalizedDescription, localizedDescription.Ptr())
 	if _ret != 0 {

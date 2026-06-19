@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract superclass for Photos asset collections and collection lists.
+//
 // Collection wraps [raw.PHCollection] with a fluent Go API.
 type Collection struct {
 	inner *raw.PHCollection
@@ -36,6 +38,8 @@ func NewCollection() *Collection {
 	return &Collection{inner: raw.PHCollectionFromID(_id)}
 }
 
+// Returns whether the collection supports the specified editing operation.
+//
 // CanPerformEditOperation calls the underlying CanPerformEditOperation.
 func (x *Collection) CanPerformEditOperation(anOperation PHCollectionEditOperation) bool {
 	return x.inner.CanPerformEditOperation(raw.PHCollectionEditOperation(anOperation))

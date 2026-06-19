@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable object that you use to create a new storage management policy.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmutableassetdownloadstoragemanagementpolicy
 type AVMutableAssetDownloadStorageManagementPolicy struct {
 	AVAssetDownloadStorageManagementPolicy

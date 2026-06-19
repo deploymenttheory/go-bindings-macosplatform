@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A named parameter with a value that the app can change over time.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasemetaparameter
 type PHASEMetaParameter struct {
 	foundation.NSObject

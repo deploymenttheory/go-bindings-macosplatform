@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A container for the color or texture of one of a material’s visual properties.
+//
 // MaterialProperty wraps [raw.SCNMaterialProperty] with a fluent Go API.
 type MaterialProperty struct {
 	inner *raw.SCNMaterialProperty
@@ -36,7 +38,7 @@ func NewMaterialProperty() *MaterialProperty {
 	return &MaterialProperty{inner: raw.SCNMaterialPropertyFromID(_id)}
 }
 
-// @property contents @abstract Specifies the receiver's contents. This can be a color (NSColor, UIColor, CGColorRef), an image (NSImage, UIImage, CGImageRef), a layer (CALayer), a path (NSString or NSURL), a SpriteKit scene (SKScene), a texture (SKTexture, id<MTLTexture> or GLKTextureInfo), or a floating value between 0 and 1 (NSNumber) for metalness and roughness properties. AVCaptureDevice is supported on iOS 11 and AVPlayer is supported on macOS 10.13, iOS 11 and tvOS 11. Animatable when set to a color. @discussion Setting the contents to an instance of SKTexture will automatically update the wrapS, wrapT, contentsTransform, minification, magnification and mip filters according to the SKTexture settings. When a cube map is expected (e.g. SCNMaterial.reflective, SCNScene.background, SCNScene.lightingEnvironment) you can use 1. A horizontal strip image                          where `6 * image.height ==     image.width` 2. A vertical strip image                            where `    image.height == 6 * image.width` 3. A spherical projection image (latitude/longitude) where `2 * image.height ==     image.width` 4. A NSArray of 6 images. This array must contain images of the exact same dimensions, in the following order, in a left-handed coordinate system: +X, -X, +Y, -Y, +Z, -Z (or Right, Left, Top, Bottom, Front, Back).
+// The visual contents of the material property—a color, image, or source of animated content. Animatable.
 //
 // WithContents sets the contents property and returns the receiver for chaining.
 func (x *MaterialProperty) WithContents(contents objc.ID) *MaterialProperty {
@@ -44,7 +46,7 @@ func (x *MaterialProperty) WithContents(contents objc.ID) *MaterialProperty {
 	return x
 }
 
-// @property intensity @abstract Determines the receiver's intensity. This intensity is used to modulate the properties in several ways. It dims the diffuse, specular and emission properties, it varies the bumpiness of the normal property and the filter property is blended with white. Default value is 1.0. Animatable.
+// A number between 0.0 and 1.0 that modulates the effect of the material property. Animatable.
 //
 // WithIntensity sets the intensity property and returns the receiver for chaining.
 func (x *MaterialProperty) WithIntensity(intensity float64) *MaterialProperty {
@@ -52,7 +54,7 @@ func (x *MaterialProperty) WithIntensity(intensity float64) *MaterialProperty {
 	return x
 }
 
-// @property minificationFilter @abstract Specifies the filter type to use when rendering the contents (specified in the `contents' property). @discussion The minification filter is used when to reduce the size of image data. See above the list of available modes. Defaults to SCNFilterModeLinear.
+// Texture filtering for rendering the material property’s image contents at a size smaller than that of the original image.
 //
 // WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
 func (x *MaterialProperty) WithMinificationFilter(minificationFilter SCNFilterMode) *MaterialProperty {
@@ -60,7 +62,7 @@ func (x *MaterialProperty) WithMinificationFilter(minificationFilter SCNFilterMo
 	return x
 }
 
-// @property magnificationFilter @abstract Specifies the filter type to use when rendering the the contents (specified in the `contents' property). @discussion The magnification filter is used when to increase the size of image data. See above the list of available modes. Defaults to SCNFilterModeLinear.
+// Texture filtering for rendering the material property’s image contents at a size larger than that of the original image.
 //
 // WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
 func (x *MaterialProperty) WithMagnificationFilter(magnificationFilter SCNFilterMode) *MaterialProperty {
@@ -68,7 +70,7 @@ func (x *MaterialProperty) WithMagnificationFilter(magnificationFilter SCNFilter
 	return x
 }
 
-// @property mipFilter @abstract Specifies the mipmap filter to use during minification. @discussion Defaults to SCNFilterModeNearest starting macOS 10.12, iOS 10, tvOS 10 and watchOS 3. Defaults to SCNFilterModeNone in previous versions.
+// Texture filtering for using mipmaps to render the material property’s image contents at a size smaller than that of the original image.
 //
 // WithMipFilter sets the mipFilter property and returns the receiver for chaining.
 func (x *MaterialProperty) WithMipFilter(mipFilter SCNFilterMode) *MaterialProperty {
@@ -76,7 +78,7 @@ func (x *MaterialProperty) WithMipFilter(mipFilter SCNFilterMode) *MaterialPrope
 	return x
 }
 
-// @property contentsTransform @abstract Determines the receiver's contents transform. Animatable.
+// The transformation applied to the material property’s visual contents. Animatable.
 //
 // WithContentsTransform sets the contentsTransform property and returns the receiver for chaining.
 func (x *MaterialProperty) WithContentsTransform(contentsTransform quartzcore.CATransform3D) *MaterialProperty {
@@ -84,7 +86,7 @@ func (x *MaterialProperty) WithContentsTransform(contentsTransform quartzcore.CA
 	return x
 }
 
-// @property wrapS @abstract Determines the receiver's wrap mode for the s texture coordinate. Defaults to SCNWrapModeClamp.
+// The wrapping behavior for the S texture coordinate.
 //
 // WithWrapS sets the wrapS property and returns the receiver for chaining.
 func (x *MaterialProperty) WithWrapS(wrapS SCNWrapMode) *MaterialProperty {
@@ -92,7 +94,7 @@ func (x *MaterialProperty) WithWrapS(wrapS SCNWrapMode) *MaterialProperty {
 	return x
 }
 
-// @property wrapT @abstract Determines the receiver's wrap mode for the t texture coordinate. Defaults to SCNWrapModeClamp.
+// The wrapping behavior for the T texture coordinate.
 //
 // WithWrapT sets the wrapT property and returns the receiver for chaining.
 func (x *MaterialProperty) WithWrapT(wrapT SCNWrapMode) *MaterialProperty {
@@ -100,7 +102,7 @@ func (x *MaterialProperty) WithWrapT(wrapT SCNWrapMode) *MaterialProperty {
 	return x
 }
 
-// @property mappingChannel @abstract Determines the receiver's mapping channel. Defaults to 0. @discussion Geometries potentially have multiple sources of texture coordinates. Every source has a unique mapping channel index. The mapping channel allows to select which source of texture coordinates is used to map the content of the receiver.
+// The source of texture coordinates for mapping the material property’s image contents.
 //
 // WithMappingChannel sets the mappingChannel property and returns the receiver for chaining.
 func (x *MaterialProperty) WithMappingChannel(mappingChannel int) *MaterialProperty {
@@ -116,7 +118,7 @@ func (x *MaterialProperty) WithTextureComponents(textureComponents SCNColorMask)
 	return x
 }
 
-// @property maxAnisotropy @abstract Specifies the receiver's max anisotropy. Defaults to MAXFLOAT. @discussion Anisotropic filtering reduces blur and preserves detail at extreme viewing angles.
+// The amount of anisotropic texture filtering to be used when rendering the material property’s image contents.
 //
 // WithMaxAnisotropy sets the maxAnisotropy property and returns the receiver for chaining.
 func (x *MaterialProperty) WithMaxAnisotropy(maxAnisotropy float64) *MaterialProperty {
@@ -124,7 +126,7 @@ func (x *MaterialProperty) WithMaxAnisotropy(maxAnisotropy float64) *MaterialPro
 	return x
 }
 
-// @property borderColor @abstract Determines the receiver's border color (CGColorRef or NSColor). Animatable. @discussion The border color is ignored on iOS and is always considered as clear color (0,0,0,0) when the texture has an alpha channel and opaque back (0,0,0,1) otherwise.
+// A color used to fill in areas of a material’s surface not covered by the material property’s image contents.
 //
 // WithBorderColor sets the borderColor property and returns the receiver for chaining.
 func (x *MaterialProperty) WithBorderColor(borderColor objc.ID) *MaterialProperty {

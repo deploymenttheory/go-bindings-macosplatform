@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A condition that describes the identity characteristics of a beacon.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clbeaconidentitycondition
 type CLBeaconIdentityCondition struct {
 	CLCondition
@@ -35,6 +37,7 @@ func CLBeaconIdentityConditionFromID(id objc.ID) *CLBeaconIdentityCondition {
 	return o
 }
 
+// Creates a new beacon identity condition with the identifier you specify.
 func (o *CLBeaconIdentityCondition) InitWithUUID(uuid *foundation.NSUUID) *CLBeaconIdentityCondition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconIdentityConditionSelInitWithUUID, uuid.Ptr())
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func (o *CLBeaconIdentityCondition) InitWithUUID(uuid *foundation.NSUUID) *CLBea
 	return CLBeaconIdentityConditionFromID(_ret)
 }
 
+// Creates a new beacon identity condition with the identifier and major value you specify.
 func (o *CLBeaconIdentityCondition) InitWithUUIDMajor(uuid *foundation.NSUUID, major uint16) *CLBeaconIdentityCondition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconIdentityConditionSelInitWithUUIDMajor, uuid.Ptr(), major)
 	if _ret != 0 {
@@ -51,6 +55,7 @@ func (o *CLBeaconIdentityCondition) InitWithUUIDMajor(uuid *foundation.NSUUID, m
 	return CLBeaconIdentityConditionFromID(_ret)
 }
 
+// Creates a new beacon identity condition with the identifier, and major and minor values you specify.
 func (o *CLBeaconIdentityCondition) InitWithUUIDMajorMinor(uuid *foundation.NSUUID, major uint16, minor uint16) *CLBeaconIdentityCondition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconIdentityConditionSelInitWithUUIDMajorMinor, uuid.Ptr(), major, minor)
 	if _ret != 0 {

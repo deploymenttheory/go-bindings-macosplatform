@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of options that affect the filtering, sorting, and management of results that Photos returns when you fetch asset or collection objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phfetchoptions
 type PHFetchOptions struct {
 	foundation.NSObject
@@ -56,12 +58,15 @@ func (o *PHFetchOptions) SetPredicate(predicate *foundation.NSPredicate) {
 }
 
 func (o *PHFetchOptions) SortDescriptors() *foundation.NSArray[*foundation.NSSortDescriptor] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSSortDescriptor]](o.Ptr(), _pHFetchOptionsSelSortDescriptors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHFetchOptionsSelSortDescriptors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSSortDescriptor](_ret)
 }
 
 func (o *PHFetchOptions) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
-	o.Ptr().Send(_pHFetchOptionsSelSetSortDescriptors, sortDescriptors)
+	o.Ptr().Send(_pHFetchOptionsSelSetSortDescriptors, sortDescriptors.Ptr())
 }
 
 func (o *PHFetchOptions) IncludeHiddenAssets() bool {

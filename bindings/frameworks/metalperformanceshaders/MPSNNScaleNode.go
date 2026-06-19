@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Abstract node representing an image resampling filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnscalenode
 type MPSNNScaleNode struct {
 	mpsneuralnetwork.MPSNNFilterNode

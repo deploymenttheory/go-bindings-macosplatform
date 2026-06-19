@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A text suggestion to insert into a document.
+//
 // Apple documentation: https://developer.apple.com/documentation/browserenginekit/betextsuggestion
 type BETextSuggestion struct {
 	foundation.NSObject

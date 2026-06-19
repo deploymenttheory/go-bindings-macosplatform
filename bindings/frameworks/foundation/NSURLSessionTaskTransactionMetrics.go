@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsualtes the performance metrics collected by the URL Loading System during the execution of a session task.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsessiontasktransactionmetrics
 type NSURLSessionTaskTransactionMetrics struct {
 	NSObject

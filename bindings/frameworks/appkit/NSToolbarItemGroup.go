@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A group of subitems in a toolbar item.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstoolbaritemgroup
 type NSToolbarItemGroup struct {
 	NSToolbarItem
@@ -41,28 +43,30 @@ func NSToolbarItemGroupFromID(id objc.ID) *NSToolbarItemGroup {
 	return o
 }
 
-// Convenience constructors for creating segmented control based toolbar items with images or text. The item returned will have a custom view for representing the control and automatically create subitems for the group. The labels array, if not nil, will be used to provide individual labels under the item for each segment of the control. When space in the toolbar is tight, the control may switch to a smaller alternate representation as necessary to remain in the toolbar.
+// Creates a grouped toolbar item with labels.
 func NSToolbarItemGroupGroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction(itemIdentifier *foundation.NSString, titles *foundation.NSArray[*foundation.NSString], selectionMode NSToolbarItemGroupSelectionMode, labels *foundation.NSArray[*foundation.NSString], target objc.ID, action objc.SEL) *NSToolbarItemGroup {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSToolbarItemGroup), _nSToolbarItemGroupSelGroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction, itemIdentifier.Ptr(), titles, selectionMode, labels, target, action)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSToolbarItemGroup), _nSToolbarItemGroupSelGroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction, itemIdentifier.Ptr(), titles.Ptr(), selectionMode, labels.Ptr(), target, action)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSToolbarItemGroupFromID(_ret)
 }
 
+// Creates a grouped toolbar item with images.
 func NSToolbarItemGroupGroupWithItemIdentifierImagesSelectionModeLabelsTargetAction(itemIdentifier *foundation.NSString, images *foundation.NSArray[*NSImage], selectionMode NSToolbarItemGroupSelectionMode, labels *foundation.NSArray[*foundation.NSString], target objc.ID, action objc.SEL) *NSToolbarItemGroup {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSToolbarItemGroup), _nSToolbarItemGroupSelGroupWithItemIdentifierImagesSelectionModeLabelsTargetAction, itemIdentifier.Ptr(), images.Ptr(), selectionMode, labels, target, action)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSToolbarItemGroup), _nSToolbarItemGroupSelGroupWithItemIdentifierImagesSelectionModeLabelsTargetAction, itemIdentifier.Ptr(), images.Ptr(), selectionMode, labels.Ptr(), target, action)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSToolbarItemGroupFromID(_ret)
 }
 
-// Get and set selection of individual subitems of the group item.
+// Sets the selected state of a subitem in a grouped toolbar item.
 func (o *NSToolbarItemGroup) SetSelectedAtIndex(selected bool, index int) {
 	o.Ptr().Send(_nSToolbarItemGroupSelSetSelectedAtIndex, selected, index)
 }
 
+// Indicates whether a specified index is currently selected.
 func (o *NSToolbarItemGroup) IsSelectedAtIndex(index int) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemGroupSelIsSelectedAtIndex, index)
 	return _ret

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A continuous gesture recognizer that tracks a pinch gesture that magnifies content.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsmagnificationgesturerecognizer
 type NSMagnificationGestureRecognizer struct {
 	NSGestureRecognizer

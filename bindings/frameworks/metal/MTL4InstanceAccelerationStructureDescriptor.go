@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Descriptor for an instance acceleration structure.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4instanceaccelerationstructuredescriptor
 type MTL4InstanceAccelerationStructureDescriptor struct {
 	MTL4AccelerationStructureDescriptor

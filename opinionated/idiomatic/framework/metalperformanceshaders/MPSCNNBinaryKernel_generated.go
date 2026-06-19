@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A convolution neural network kernel.
+//
 // CNNBinaryKernel wraps [raw.MPSCNNBinaryKernel] with a fluent Go API.
 type CNNBinaryKernel struct {
 	inner *raw.MPSCNNBinaryKernel
@@ -180,7 +182,7 @@ func (x *CNNBinaryKernel) WithDestinationImageAllocator(destinationImageAllocato
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNBinaryKernel) WithOptions(options mpscore.MPSKernelOptions) *CNNBinaryKernel {
@@ -188,7 +190,7 @@ func (x *CNNBinaryKernel) WithOptions(options mpscore.MPSKernelOptions) *CNNBina
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNBinaryKernel) WithLabel(label string) *CNNBinaryKernel {

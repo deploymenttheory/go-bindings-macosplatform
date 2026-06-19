@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the result of calculating the minimum, maximum, average, or sum over a set of samples from the HealthKit store.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkstatistics
 type HKStatistics struct {
 	foundation.NSObject
@@ -47,7 +49,7 @@ func HKStatisticsFromID(id objc.ID) *HKStatistics {
 	return o
 }
 
-// @method        averageQuantityForSource: @abstract      Returns the average quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
+// Returns the average value from all the samples that match the query and that were created by the specified source.
 func (o *HKStatistics) AverageQuantityForSource(source *HKSource) *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelAverageQuantityForSource, source.Ptr())
 	if _ret != 0 {
@@ -56,7 +58,7 @@ func (o *HKStatistics) AverageQuantityForSource(source *HKSource) *HKQuantity {
 	return HKQuantityFromID(_ret)
 }
 
-// @method        averageQuantity @abstract      Returns the average quantity in the time period represented by the receiver.
+// Returns the average value from all the samples that match the query.
 func (o *HKStatistics) AverageQuantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelAverageQuantity)
 	if _ret != 0 {
@@ -65,7 +67,7 @@ func (o *HKStatistics) AverageQuantity() *HKQuantity {
 	return HKQuantityFromID(_ret)
 }
 
-// @method        minimumQuantityForSource: @abstract      Returns the minimum quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
+// Returns the minimum value from all the samples that match the query and that were created by the specified source.
 func (o *HKStatistics) MinimumQuantityForSource(source *HKSource) *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMinimumQuantityForSource, source.Ptr())
 	if _ret != 0 {
@@ -74,7 +76,7 @@ func (o *HKStatistics) MinimumQuantityForSource(source *HKSource) *HKQuantity {
 	return HKQuantityFromID(_ret)
 }
 
-// @method        minimumQuantity @abstract      Returns the minimum quantity in the time period represented by the receiver.
+// Returns the minimum value from all the samples that match the query.
 func (o *HKStatistics) MinimumQuantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMinimumQuantity)
 	if _ret != 0 {
@@ -83,7 +85,7 @@ func (o *HKStatistics) MinimumQuantity() *HKQuantity {
 	return HKQuantityFromID(_ret)
 }
 
-// @method        maximumQuantityForSource: @abstract      Returns the maximum quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
+// Returns the maximum value from all the samples that match the query and that were created by the specified source.
 func (o *HKStatistics) MaximumQuantityForSource(source *HKSource) *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMaximumQuantityForSource, source.Ptr())
 	if _ret != 0 {
@@ -92,7 +94,7 @@ func (o *HKStatistics) MaximumQuantityForSource(source *HKSource) *HKQuantity {
 	return HKQuantityFromID(_ret)
 }
 
-// @method        maximumQuantity @abstract      Returns the maximum quantity in the time period represented by the receiver.
+// Returns the maximum value from all the samples that match the query.
 func (o *HKStatistics) MaximumQuantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMaximumQuantity)
 	if _ret != 0 {
@@ -101,7 +103,7 @@ func (o *HKStatistics) MaximumQuantity() *HKQuantity {
 	return HKQuantityFromID(_ret)
 }
 
-// @method        mostRecentQuantityForSource: @abstract      Returns the most recent quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
+// Returns the most recent value from all the samples that match the query and were created by the specified source.
 func (o *HKStatistics) MostRecentQuantityForSource(source *HKSource) *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMostRecentQuantityForSource, source.Ptr())
 	if _ret != 0 {
@@ -110,7 +112,7 @@ func (o *HKStatistics) MostRecentQuantityForSource(source *HKSource) *HKQuantity
 	return HKQuantityFromID(_ret)
 }
 
-// @method        mostRecentQuantity @abstract      Returns the most recent quantity in the time period represented by the receiver.
+// Returns the most recent value from all the samples that match the query.
 func (o *HKStatistics) MostRecentQuantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMostRecentQuantity)
 	if _ret != 0 {
@@ -119,7 +121,7 @@ func (o *HKStatistics) MostRecentQuantity() *HKQuantity {
 	return HKQuantityFromID(_ret)
 }
 
-// @method        mostRecentQuantityDateIntervalForSource: @abstract      Returns the date interval of the most recent quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
+// Returns the date interval of the most recent sample that matches the query and was created by the specified source.
 func (o *HKStatistics) MostRecentQuantityDateIntervalForSource(source *HKSource) *foundation.NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMostRecentQuantityDateIntervalForSource, source.Ptr())
 	if _ret != 0 {
@@ -128,7 +130,7 @@ func (o *HKStatistics) MostRecentQuantityDateIntervalForSource(source *HKSource)
 	return foundation.NSDateIntervalFromID(_ret)
 }
 
-// @method        mostRecentQuantityDateInterval @abstract      Returns the date interval of the most recent quantity in the time period represented by the receiver.
+// Returns the date interval of the most recent sample that matches the query.
 func (o *HKStatistics) MostRecentQuantityDateInterval() *foundation.NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMostRecentQuantityDateInterval)
 	if _ret != 0 {
@@ -137,7 +139,7 @@ func (o *HKStatistics) MostRecentQuantityDateInterval() *foundation.NSDateInterv
 	return foundation.NSDateIntervalFromID(_ret)
 }
 
-// @method        sumQuantityForSource: @abstract      Returns the sum quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
+// Returns the sum of all the samples that match the query and that were created by the specified source.
 func (o *HKStatistics) SumQuantityForSource(source *HKSource) *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelSumQuantityForSource, source.Ptr())
 	if _ret != 0 {
@@ -146,7 +148,7 @@ func (o *HKStatistics) SumQuantityForSource(source *HKSource) *HKQuantity {
 	return HKQuantityFromID(_ret)
 }
 
-// @method        sumQuantity @abstract      Returns the sum of quantities in the time period represented by the receiver.
+// Returns the sum of all the samples that match the query.
 func (o *HKStatistics) SumQuantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelSumQuantity)
 	if _ret != 0 {
@@ -155,7 +157,7 @@ func (o *HKStatistics) SumQuantity() *HKQuantity {
 	return HKQuantityFromID(_ret)
 }
 
-// Total duration (in seconds) covered by the samples represented by these statistics. Only present if HKStatisticsOptionDuration is is specified. @method        duration @abstract      Total duration, as a time-unit compatible quantity, covered by the samples represented by these statistics. @discussion    Only present if HKStatisticsOptionDuration is is specified.
+// Returns the total duration covering all the samples that match the query.
 func (o *HKStatistics) Duration() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelDuration)
 	if _ret != 0 {
@@ -164,7 +166,7 @@ func (o *HKStatistics) Duration() *HKQuantity {
 	return HKQuantityFromID(_ret)
 }
 
-// @method        durationForSource: @abstract      Returns the duration, as a time-unit compatible quantity, for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
+// Returns the total duration covering all the samples created by the specified source that also match the query.
 func (o *HKStatistics) DurationForSource(source *HKSource) *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelDurationForSource, source.Ptr())
 	if _ret != 0 {

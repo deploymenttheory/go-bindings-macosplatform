@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that permutes the dimensions you specify.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlctransposelayer
 type MLCTransposeLayer struct {
 	MLCLayer
@@ -31,9 +33,9 @@ func MLCTransposeLayerFromID(id objc.ID) *MLCTransposeLayer {
 	return o
 }
 
-// @abstract   Create a transpose layer @param      dimensions NSArray<NSNumber *> representing the desired ordering of dimensions The dimensions array specifies the input axis source for each output axis, such that the K'th element in the dimensions array specifies the input axis source for the K'th axis in the output.  The batch dimension which is typically axis 0 cannot be transposed. @return     A new transpose layer.
+// Creates a transpose layer with the dimensions you specify.
 func MLCTransposeLayerLayerWithDimensions(dimensions *foundation.NSArray[*foundation.NSNumber]) *MLCTransposeLayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTransposeLayer), _mLCTransposeLayerSelLayerWithDimensions, dimensions)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTransposeLayer), _mLCTransposeLayerSelLayerWithDimensions, dimensions.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -42,6 +44,9 @@ func MLCTransposeLayerLayerWithDimensions(dimensions *foundation.NSArray[*founda
 
 // @property   dimensions @abstract   Permutes the dimensions according to 'dimensions'. @discussion The returned tensor's dimension i will correspond to dimensions[i].
 func (o *MLCTransposeLayer) Dimensions() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCTransposeLayerSelDimensions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTransposeLayerSelDimensions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the partial or final results of a speech recognition request.
+//
 // Apple documentation: https://developer.apple.com/documentation/speech/sfspeechrecognitionresult
 type SFSpeechRecognitionResult struct {
 	foundation.NSObject

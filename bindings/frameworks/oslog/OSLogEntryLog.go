@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A log entry.
+//
 // Apple documentation: https://developer.apple.com/documentation/oslog/oslogentrylog
 type OSLogEntryLog struct {
 	OSLogEntry

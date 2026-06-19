@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An element that represents a media asset within project section content.
+//
 // ProjectAssetElement wraps [raw.PHProjectAssetElement] with a fluent Go API.
 type ProjectAssetElement struct {
 	inner *raw.PHProjectAssetElement

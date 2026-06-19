@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Defines a spatial directive. The various goals cause force to be applied to agents to try to achieve said goal.
+// An influence that motivates the movement of one or more agents.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkgoal
 type GKGoal struct {
@@ -43,7 +43,7 @@ func GKGoalFromID(id objc.ID) *GKGoal {
 	return o
 }
 
-// Creates a goal to move toward the agent @param agent the agent to seek
+// Creates a goal whose effect is to move an agent toward the current position of the specified other agent.
 func GKGoalGoalToSeekAgent(agent *GKAgent) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToSeekAgent, agent.Ptr())
 	if _ret != 0 {
@@ -52,7 +52,7 @@ func GKGoalGoalToSeekAgent(agent *GKAgent) *GKGoal {
 	return GKGoalFromID(_ret)
 }
 
-// Creates a goal to move away from the agent @param agent the agent to flee from
+// Creates a goal whose effect is to move an agent away from the current position of the specified other agent.
 func GKGoalGoalToFleeAgent(agent *GKAgent) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToFleeAgent, agent.Ptr())
 	if _ret != 0 {
@@ -61,7 +61,7 @@ func GKGoalGoalToFleeAgent(agent *GKAgent) *GKGoal {
 	return GKGoalFromID(_ret)
 }
 
-// Creates a goal to avoid colliding with a group of agents without taking into account those agents' momentum @param maxPredictionTime how far ahead in the future, in seconds, should we look for potential collisions
+// Creates a goal whose effect is to make an agent avoid colliding with the specified static obstacles.
 func GKGoalGoalToAvoidObstaclesMaxPredictionTime(obstacles *foundation.NSArray[*GKObstacle], maxPredictionTime float64) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToAvoidObstaclesMaxPredictionTime, obstacles.Ptr(), maxPredictionTime)
 	if _ret != 0 {
@@ -70,7 +70,7 @@ func GKGoalGoalToAvoidObstaclesMaxPredictionTime(obstacles *foundation.NSArray[*
 	return GKGoalFromID(_ret)
 }
 
-// Creates a goal to avoid colliding with a group of agents taking into account those agent's momentum @param maxPredictionTime how far ahead in the future, in seconds, should we look for potential collisions
+// Creates a goal whose effect is to make an agent avoid colliding with the specified other agents, taking into account the other agents’ movement.
 func GKGoalGoalToAvoidAgentsMaxPredictionTime(agents *foundation.NSArray[*GKAgent], maxPredictionTime float64) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToAvoidAgentsMaxPredictionTime, agents.Ptr(), maxPredictionTime)
 	if _ret != 0 {
@@ -79,7 +79,7 @@ func GKGoalGoalToAvoidAgentsMaxPredictionTime(agents *foundation.NSArray[*GKAgen
 	return GKGoalFromID(_ret)
 }
 
-// Creates a goal that tries to repel this agent away from the other agents and attempts to prevent overlap @param maxDistance the distance between agents before repelling happens @param maxAngle the angle, in radians, between this agent's foward and the vector toward the other agent before the repelling happens
+// Creates a goal whose effect is to make an agent maintain the specified distance from other agents in a specified group.
 func GKGoalGoalToSeparateFromAgentsMaxDistanceMaxAngle(agents *foundation.NSArray[*GKAgent], maxDistance float32, maxAngle float32) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToSeparateFromAgentsMaxDistanceMaxAngle, agents.Ptr(), maxDistance, maxAngle)
 	if _ret != 0 {
@@ -88,7 +88,7 @@ func GKGoalGoalToSeparateFromAgentsMaxDistanceMaxAngle(agents *foundation.NSArra
 	return GKGoalFromID(_ret)
 }
 
-// Creates a goal to align this agent's orientation with the average orientation of the group of agents. @param maxDistance the distance between agents before alignment happens @param maxAngle the angle, in radians, between this agent's foward and the vector toward the other agent before alignment happens
+// Creates a goal whose effect is to make an agent align its orientation with that of other agents in a specified group.
 func GKGoalGoalToAlignWithAgentsMaxDistanceMaxAngle(agents *foundation.NSArray[*GKAgent], maxDistance float32, maxAngle float32) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToAlignWithAgentsMaxDistanceMaxAngle, agents.Ptr(), maxDistance, maxAngle)
 	if _ret != 0 {
@@ -97,7 +97,7 @@ func GKGoalGoalToAlignWithAgentsMaxDistanceMaxAngle(agents *foundation.NSArray[*
 	return GKGoalFromID(_ret)
 }
 
-// Creates a goal to seek the average position of the group of agents. @param maxDistance the distance between agents before cohesion happens @param maxAngle the angle between this agent's foward and the vector toward the other agent before cohesion happens
+// Creates a goal whose effect is to make an agent stay near the other agents in a specified group.
 func GKGoalGoalToCohereWithAgentsMaxDistanceMaxAngle(agents *foundation.NSArray[*GKAgent], maxDistance float32, maxAngle float32) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToCohereWithAgentsMaxDistanceMaxAngle, agents.Ptr(), maxDistance, maxAngle)
 	if _ret != 0 {
@@ -106,7 +106,7 @@ func GKGoalGoalToCohereWithAgentsMaxDistanceMaxAngle(agents *foundation.NSArray[
 	return GKGoalFromID(_ret)
 }
 
-// Creates a goal that attempts to change our momentum to reach the target speed @param targetSpeed the target speed
+// Creates a goal whose effect is to accelerate or decelerate an agent until it reaches the specified speed.
 func GKGoalGoalToReachTargetSpeed(targetSpeed float32) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToReachTargetSpeed, targetSpeed)
 	if _ret != 0 {
@@ -115,7 +115,7 @@ func GKGoalGoalToReachTargetSpeed(targetSpeed float32) *GKGoal {
 	return GKGoalFromID(_ret)
 }
 
-// Creates a goal that will make the agent appear to wander, aimlessly moving forward and turning randomly @param speed the speed at which to wander
+// Creates a goal whose effect is to make an agent wander aimlessly, moving forward and turning at random.
 func GKGoalGoalToWander(speed float32) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToWander, speed)
 	if _ret != 0 {
@@ -124,7 +124,7 @@ func GKGoalGoalToWander(speed float32) *GKGoal {
 	return GKGoalFromID(_ret)
 }
 
-// Creates a goal that will attempt to intercept another target agent taking into account that agent's momentum @param target agent to intercept @param maxPredictionTime how far ahead in the future, in seconds, should we look for potential intercepts
+// Creates a goal whose effect is to make an agent pursue the specified other agent, taking into account the target’s movement.
 func GKGoalGoalToInterceptAgentMaxPredictionTime(target *GKAgent, maxPredictionTime float64) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToInterceptAgentMaxPredictionTime, target.Ptr(), maxPredictionTime)
 	if _ret != 0 {
@@ -133,7 +133,7 @@ func GKGoalGoalToInterceptAgentMaxPredictionTime(target *GKAgent, maxPredictionT
 	return GKGoalFromID(_ret)
 }
 
-// Creates a goal that will attempt to follow the given path @param path the path to follow @param maxPredictionTime how far ahead in the future, in seconds, should we look for potential intercepts @param forward direction to follow the path. forward = NO is reverse
+// Creates a goal whose effect is to both maintain position on and traverse the specified path.
 func GKGoalGoalToFollowPathMaxPredictionTimeForward(path *GKPath, maxPredictionTime float64, forward bool) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToFollowPathMaxPredictionTimeForward, path.Ptr(), maxPredictionTime, forward)
 	if _ret != 0 {
@@ -142,7 +142,7 @@ func GKGoalGoalToFollowPathMaxPredictionTimeForward(path *GKPath, maxPredictionT
 	return GKGoalFromID(_ret)
 }
 
-// Creates a goal that will attempt to stay on the given path @param path the path to follow @param maxPredictionTime how far ahead in the future, in seconds, should we look for potential intercepts
+// Creates a goal whose effect is to maintain an agent’s position within the specified path.
 func GKGoalGoalToStayOnPathMaxPredictionTime(path *GKPath, maxPredictionTime float64) *GKGoal {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGoal), _gKGoalSelGoalToStayOnPathMaxPredictionTime, path.Ptr(), maxPredictionTime)
 	if _ret != 0 {

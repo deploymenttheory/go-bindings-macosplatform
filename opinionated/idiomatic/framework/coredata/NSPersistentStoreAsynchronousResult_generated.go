@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A concrete class used to represent the results of an asynchronous request.
+//
 // PersistentStoreAsynchronousResult wraps [raw.NSPersistentStoreAsynchronousResult] with a fluent Go API.
 type PersistentStoreAsynchronousResult struct {
 	inner *raw.NSPersistentStoreAsynchronousResult
@@ -39,6 +41,8 @@ func NewPersistentStoreAsynchronousResult() *PersistentStoreAsynchronousResult {
 	return &PersistentStoreAsynchronousResult{inner: raw.NSPersistentStoreAsynchronousResultFromID(_id)}
 }
 
+// Cancels the asynchronous fetch request.
+//
 // Cancel calls the underlying Cancel.
 func (x *PersistentStoreAsynchronousResult) Cancel() {
 	x.inner.Cancel()

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A navigation graph for 2D game worlds where movement is constrained to an integer grid.
+//
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkgridgraph
 type GKGridGraph[NodeType purego.AnyObject] struct {
 	GKGraph
@@ -41,7 +43,7 @@ func GKGridGraphFromID[NodeType purego.AnyObject](id objc.ID) *GKGridGraph[NodeT
 	return o
 }
 
-// Creates a bidirectional graph connecting all of the points on a 2D grid @param position starting position in the grid @param width how wide the grid will be; the grid will continue along the positive X axis from the starting x value @param height how high the grid will be; the grid will continue along the positive Y axis from the starting y value @param diagonalsAllowed should diagonal connections between nodes be made?  If not, only cardinal directions will be connected.
+// Creates a graph that describes an integer grid with the specified dimensions.
 func GKGridGraphGraphFromGridStartingAtWidthHeightDiagonalsAllowed(position unsafe.Pointer, width int, height int, diagonalsAllowed bool) *GKGridGraph[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGridGraph), _gKGridGraphSelGraphFromGridStartingAtWidthHeightDiagonalsAllowed, position, width, height, diagonalsAllowed)
 	if _ret != 0 {
@@ -50,6 +52,7 @@ func GKGridGraphGraphFromGridStartingAtWidthHeightDiagonalsAllowed(position unsa
 	return GKGridGraphFromID[objc.ID](_ret)
 }
 
+// Initializes a graph that describes an integer grid with the specified dimensions.
 func (o *GKGridGraph[NodeType]) InitFromGridStartingAtWidthHeightDiagonalsAllowed(position unsafe.Pointer, width int, height int, diagonalsAllowed bool) *GKGridGraph[NodeType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGridGraphSelInitFromGridStartingAtWidthHeightDiagonalsAllowed, position, width, height, diagonalsAllowed)
 	if _ret != 0 {
@@ -58,7 +61,7 @@ func (o *GKGridGraph[NodeType]) InitFromGridStartingAtWidthHeightDiagonalsAllowe
 	return GKGridGraphFromID[NodeType](_ret)
 }
 
-// Creates a bidirectional graph connecting all of the points on a 2D grid @param position starting position in the grid @param width how wide the grid will be; the grid will continue along the positive X axis from the starting x value @param height how high the grid will be; the grid will continue along the positive Y axis from the starting y value @param diagonalsAllowed should diagonal connections between nodes be made?  If not, only cardinal directions will be connected. @param nodeClass the class of the nodes that this graph should create.  Must descend from GKGridGraphNode
+// Creates a graph that describes an integer grid with the specified dimensions, using the specified node class.
 func GKGridGraphGraphFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass(position unsafe.Pointer, width int, height int, diagonalsAllowed bool, nodeClass objc.Class) *GKGridGraph[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGridGraph), _gKGridGraphSelGraphFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass, position, width, height, diagonalsAllowed, nodeClass)
 	if _ret != 0 {
@@ -67,6 +70,7 @@ func GKGridGraphGraphFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass(posi
 	return GKGridGraphFromID[objc.ID](_ret)
 }
 
+// Initializes a graph that describes an integer grid with the specified dimensions, using the specified node class.
 func (o *GKGridGraph[NodeType]) InitFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass(position unsafe.Pointer, width int, height int, diagonalsAllowed bool, nodeClass objc.Class) *GKGridGraph[NodeType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGridGraphSelInitFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass, position, width, height, diagonalsAllowed, nodeClass)
 	if _ret != 0 {
@@ -75,13 +79,13 @@ func (o *GKGridGraph[NodeType]) InitFromGridStartingAtWidthHeightDiagonalsAllowe
 	return GKGridGraphFromID[NodeType](_ret)
 }
 
-// Returns the GKGridGraphNode at the indicated X and Y coordinate Returns nil if it is outside the bounds of minCoordinates and maxCoordinates @param position starting position in the grid
+// Returns the node in the graph at the specified grid coordinates.
 func (o *GKGridGraph[NodeType]) NodeAtGridPosition(position unsafe.Pointer) NodeType {
 	_ret := objc.Send[NodeType](o.Ptr(), _gKGridGraphSelNodeAtGridPosition, position)
 	return _ret
 }
 
-// Connects the given GKGridGraphNode to this graph by connecting it to it's adjacent nodes on the grid Input node must have coordinates within the rectangle specified by minCoordinates and maxCoordinates @param node the node to be connected
+// Adds the specified node to the graph, connecting it to its nearest neighbors in the grid.
 func (o *GKGridGraph[NodeType]) ConnectNodeToAdjacentNodes(node *GKGridGraphNode) {
 	o.Ptr().Send(_gKGridGraphSelConnectNodeToAdjacentNodes, node.Ptr())
 }

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that displays the sender who shares a highlight and provides related actions.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyou/swattributionview
 type SWAttributionView struct {
 	appkit.NSView

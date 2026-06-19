@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that displays content from a player and presents a native user interface to control playback.
+//
 // Apple documentation: https://developer.apple.com/documentation/avkit/avplayerview
 type AVPlayerView struct {
 	appkit.NSView
@@ -77,12 +79,12 @@ func AVPlayerViewFromID(id objc.ID) *AVPlayerView {
 	return o
 }
 
-// @property		selectSpeed @param			speed The playback speed to select. @abstract		Sets the input AVPlaybackSpeed as the selected speed. @discussion	Calls to selectSpeed with AVPlaybackSpeeds not contained within the speeds property array will be ignored.
+// Selects a specified playback speed.
 func (o *AVPlayerView) SelectSpeed(speed *AVPlaybackSpeed) {
 	o.Ptr().Send(_aVPlayerViewSelSelectSpeed, speed.Ptr())
 }
 
-// @method		setMagnification:centeredAtPoint: @abstract	Scales the video's view by a specified factor and centers the result on a specified point. @param		magnification The factor by which to scale the video's view. @param		point The point (in view space) on which to center magnification. @discussion	The magnification cannot be smaller than 1.0 or larger 64.0. Nearest neighbor interpolation will be used once the content has been zoomed past a certain factor.
+// Scales the video’s view by a specified factor, and centers the result on a specified point.
 func (o *AVPlayerView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
 	o.Ptr().Send(_aVPlayerViewSelSetMagnificationCenteredAtPoint, magnification, point)
 }
@@ -289,7 +291,7 @@ func (o *AVPlayerView) SetShowsTimecodes(showsTimecodes bool) {
 	o.Ptr().Send(_aVPlayerViewSelSetShowsTimecodes, showsTimecodes)
 }
 
-// @method		beginTrimmingWithCompletionHandler: @param		handler A completion handler that is executed when the user selects either the Trim or Cancel button in the trimming UI. @abstract	Sets the controls panel into trimming mode and blocks until the user selects either the Trim or the Cancel button.
+// Puts the player view into trimming mode.
 func (o *AVPlayerView) BeginTrimmingWithCompletionHandler(handler func(AVPlayerViewTrimResult)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -307,7 +309,7 @@ func (o *AVPlayerView) CanBeginTrimming() bool {
 	return _ret
 }
 
-// @method		flashChapterNumber:chapterTitle: @param		chapterNumber The chapter number (required). @param		chapterTitle The chapter title (optional). @abstract	Display the provided chapter number and title momentarily.
+// Displays the chapter number and title in the player view for a brief moment.
 func (o *AVPlayerView) FlashChapterNumberChapterTitle(chapterNumber uint, chapterTitle *foundation.NSString) {
 	o.Ptr().Send(_aVPlayerViewSelFlashChapterNumberChapterTitle, chapterNumber, chapterTitle.Ptr())
 }

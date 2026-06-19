@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An element that represents text within project section content.
+//
 // Apple documentation: https://developer.apple.com/documentation/photosui/phprojecttextelement
 type PHProjectTextElement struct {
 	PHProjectElement

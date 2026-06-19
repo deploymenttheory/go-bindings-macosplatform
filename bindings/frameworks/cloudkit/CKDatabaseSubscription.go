@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A subscription that generates push notifications when CloudKit modifies records in a database.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckdatabasesubscription
 type CKDatabaseSubscription struct {
 	CKSubscription
@@ -52,7 +54,7 @@ func CKDatabaseSubscriptionNew() *CKDatabaseSubscription {
 	return CKDatabaseSubscriptionFromID(_ret)
 }
 
-// Creates a named subscription for all records in a database. - Parameters: - subscriptionID: The subscription's name. It must be unique in the container, and must not be `nil` or an empty string.
+// Creates a named subscription for all records in a database.
 func (o *CKDatabaseSubscription) InitWithSubscriptionID(subscriptionID *foundation.NSString) *CKDatabaseSubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKDatabaseSubscriptionSelInitWithSubscriptionID, subscriptionID.Ptr())
 	if _ret != 0 {
@@ -61,7 +63,7 @@ func (o *CKDatabaseSubscription) InitWithSubscriptionID(subscriptionID *foundati
 	return CKDatabaseSubscriptionFromID(_ret)
 }
 
-// Creates a database subscription from a serialized instance. - Parameters: - aDecoder: The object that decodes the serialized database subscription.
+// Creates a database subscription from a serialized instance.
 func (o *CKDatabaseSubscription) InitWithCoder(aDecoder *foundation.NSCoder) *CKDatabaseSubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKDatabaseSubscriptionSelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {

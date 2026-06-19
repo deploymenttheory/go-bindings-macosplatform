@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface for configuring a rule-based list of options.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsruleeditor
 type NSRuleEditor struct {
 	NSControl
@@ -71,14 +73,17 @@ func NSRuleEditorFromID(id objc.ID) *NSRuleEditor {
 	return o
 }
 
+// Instructs the receiver to refetch criteria from its delegate.
 func (o *NSRuleEditor) ReloadCriteria() {
 	o.Ptr().Send(_nSRuleEditorSelReloadCriteria)
 }
 
+// Instructs the receiver to regenerate its predicate by invoking the corresponding delegate method.
 func (o *NSRuleEditor) ReloadPredicate() {
 	o.Ptr().Send(_nSRuleEditorSelReloadPredicate)
 }
 
+// Returns the predicate for a given row.
 func (o *NSRuleEditor) PredicateForRow(row int) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelPredicateForRow, row)
 	if _ret != 0 {
@@ -87,6 +92,7 @@ func (o *NSRuleEditor) PredicateForRow(row int) *foundation.NSPredicate {
 	return foundation.NSPredicateFromID(_ret)
 }
 
+// Returns the immediate subrows of a given row.
 func (o *NSRuleEditor) SubrowIndexesForRow(rowIndex int) *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelSubrowIndexesForRow, rowIndex)
 	if _ret != 0 {
@@ -95,51 +101,68 @@ func (o *NSRuleEditor) SubrowIndexesForRow(rowIndex int) *foundation.NSIndexSet 
 	return foundation.NSIndexSetFromID(_ret)
 }
 
+// Returns the currently chosen items for a given row.
 func (o *NSRuleEditor) CriteriaForRow(row int) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSRuleEditorSelCriteriaForRow, row)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelCriteriaForRow, row)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Returns the chosen values for a given row.
 func (o *NSRuleEditor) DisplayValuesForRow(row int) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSRuleEditorSelDisplayValuesForRow, row)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelDisplayValuesForRow, row)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Returns the index of the row containing a given value.
 func (o *NSRuleEditor) RowForDisplayValue(displayValue objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _nSRuleEditorSelRowForDisplayValue, displayValue)
 	return _ret
 }
 
+// Returns the type of a given row.
 func (o *NSRuleEditor) RowTypeForRow(rowIndex int) NSRuleEditorRowType {
 	_ret := objc.Send[NSRuleEditorRowType](o.Ptr(), _nSRuleEditorSelRowTypeForRow, rowIndex)
 	return _ret
 }
 
+// Returns the index of the parent of a given row.
 func (o *NSRuleEditor) ParentRowForRow(rowIndex int) int {
 	_ret := objc.Send[int](o.Ptr(), _nSRuleEditorSelParentRowForRow, rowIndex)
 	return _ret
 }
 
+// Adds a row to the receiver.
 func (o *NSRuleEditor) AddRow(sender objc.ID) {
 	o.Ptr().Send(_nSRuleEditorSelAddRow, sender)
 }
 
+// Adds a new row of a given type at a given location.
 func (o *NSRuleEditor) InsertRowAtIndexWithTypeAsSubrowOfRowAnimate(rowIndex int, rowType NSRuleEditorRowType, parentRow int, shouldAnimate bool) {
 	o.Ptr().Send(_nSRuleEditorSelInsertRowAtIndexWithTypeAsSubrowOfRowAnimate, rowIndex, rowType, parentRow, shouldAnimate)
 }
 
+// Modifies the row at a given index to contain the given items and values.
 func (o *NSRuleEditor) SetCriteriaAndDisplayValuesForRowAtIndex(criteria *foundation.NSArray[objc.ID], values *foundation.NSArray[objc.ID], rowIndex int) {
-	o.Ptr().Send(_nSRuleEditorSelSetCriteriaAndDisplayValuesForRowAtIndex, criteria, values, rowIndex)
+	o.Ptr().Send(_nSRuleEditorSelSetCriteriaAndDisplayValuesForRowAtIndex, criteria.Ptr(), values.Ptr(), rowIndex)
 }
 
+// Removes the row at a given index.
 func (o *NSRuleEditor) RemoveRowAtIndex(rowIndex int) {
 	o.Ptr().Send(_nSRuleEditorSelRemoveRowAtIndex, rowIndex)
 }
 
+// Removes the rows at given indexes.
 func (o *NSRuleEditor) RemoveRowsAtIndexesIncludeSubrows(rowIndexes *foundation.NSIndexSet, includeSubrows bool) {
 	o.Ptr().Send(_nSRuleEditorSelRemoveRowsAtIndexesIncludeSubrows, rowIndexes.Ptr(), includeSubrows)
 }
 
+// Sets in the receiver the indexes of rows that are selected.
 func (o *NSRuleEditor) SelectRowIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool) {
 	o.Ptr().Send(_nSRuleEditorSelSelectRowIndexesByExtendingSelection, indexes.Ptr(), extend)
 }
@@ -166,12 +189,15 @@ func (o *NSRuleEditor) SetFormattingStringsFilename(formattingStringsFilename *f
 }
 
 func (o *NSRuleEditor) FormattingDictionary() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _nSRuleEditorSelFormattingDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelFormattingDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
 func (o *NSRuleEditor) SetFormattingDictionary(formattingDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
-	o.Ptr().Send(_nSRuleEditorSelSetFormattingDictionary, formattingDictionary)
+	o.Ptr().Send(_nSRuleEditorSelSetFormattingDictionary, formattingDictionary.Ptr())
 }
 
 func (o *NSRuleEditor) NestingMode() NSRuleEditorNestingMode {

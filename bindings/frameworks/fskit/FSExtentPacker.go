@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that directs the kernel to map space on disk to a specific file managed by this file system.
+//
 // Apple documentation: https://developer.apple.com/documentation/fskit/fsextentpacker
 type FSExtentPacker struct {
 	foundation.NSObject
@@ -30,7 +32,7 @@ func FSExtentPackerFromID(id objc.ID) *FSExtentPacker {
 	return o
 }
 
-// Packs a single extent to send to the kernel. - Parameters: - resource: The resource on which to perform I/O. - type: The type of extent, indicating whether it contains valid data. - logicalOffset: The extent offset within the file, in bytes. - physicalOffset: The extent offset on disk, in bytes. - length: The extent length, in bytes. - Returns: A Boolean value that indicates whether the packer can pack more extents.
+// Packs a single extent to send to the kernel.
 func (o *FSExtentPacker) PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *FSBlockDeviceResource, type_ FSExtentType, logicalOffset int64, physicalOffset int64, length uint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _fSExtentPackerSelPackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength, resource.Ptr(), type_, logicalOffset, physicalOffset, length)
 	return _ret

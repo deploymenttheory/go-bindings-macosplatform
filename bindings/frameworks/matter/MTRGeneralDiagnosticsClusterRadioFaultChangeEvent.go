@@ -34,19 +34,25 @@ func MTRGeneralDiagnosticsClusterRadioFaultChangeEventFromID(id objc.ID) *MTRGen
 }
 
 func (o *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Current() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelCurrent)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelCurrent)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) SetCurrent(current *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelSetCurrent, current)
+	o.Ptr().Send(_mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelSetCurrent, current.Ptr())
 }
 
 func (o *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Previous() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelPrevious)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelPrevious)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) SetPrevious(previous *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelSetPrevious, previous)
+	o.Ptr().Send(_mTRGeneralDiagnosticsClusterRadioFaultChangeEventSelSetPrevious, previous.Ptr())
 }

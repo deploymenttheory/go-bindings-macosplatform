@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that allows players to view and manage their Game Center information from within your game.
+//
 // AccessPoint wraps [raw.GKAccessPoint] with a fluent Go API.
 type AccessPoint struct {
 	inner *raw.GKAccessPoint
@@ -39,7 +41,7 @@ func NewAccessPoint() *AccessPoint {
 	return &AccessPoint{inner: raw.GKAccessPointFromID(_id)}
 }
 
-// set this true to enable access point in your app.  Setting this will cause the access point to appear after the notification banner is presented.  If it already was presented it will appear immediately
+// A Boolean value that determines whether to display the access point.
 //
 // WithActive sets the active property and returns the receiver for chaining.
 func (x *AccessPoint) WithActive(active bool) *AccessPoint {
@@ -47,7 +49,7 @@ func (x *AccessPoint) WithActive(active bool) *AccessPoint {
 	return x
 }
 
-// Set this property to true if you wish to show the highlights for most recent achievement, current rank on default leaderboard, etc
+// A Boolean value that indicates whether to display highlights for achievements and current ranks for leaderboards.
 //
 // WithShowHighlights sets the showHighlights property and returns the receiver for chaining.
 func (x *AccessPoint) WithShowHighlights(showHighlights bool) *AccessPoint {
@@ -55,7 +57,7 @@ func (x *AccessPoint) WithShowHighlights(showHighlights bool) *AccessPoint {
 	return x
 }
 
-// These properties control the placement of the widget
+// The corner of the screen to display the access point.
 //
 // WithLocation sets the location property and returns the receiver for chaining.
 func (x *AccessPoint) WithLocation(location GKAccessPointLocation) *AccessPoint {
@@ -63,7 +65,7 @@ func (x *AccessPoint) WithLocation(location GKAccessPointLocation) *AccessPoint 
 	return x
 }
 
-// the following is a platform specific window that you wish to have the access point in.  If not set then a best attempt will be made to choose the main window of the app.
+// The window that contains the access point.
 //
 // WithParentWindow sets the parentWindow property and returns the receiver for chaining.
 func (x *AccessPoint) WithParentWindow(parentWindow *appkit.NSWindow) *AccessPoint {
@@ -71,7 +73,7 @@ func (x *AccessPoint) WithParentWindow(parentWindow *appkit.NSWindow) *AccessPoi
 	return x
 }
 
-// this lets the developer trigger the access point as if the user had touched it.  This is useful for games that use controllers or the remote on AppleTV.  the argument lets you specify a specific state (default, profile, achievements, leaderboards) for GameCenterViewController
+// Displays the Game Center dashboard as if the player taps or presses the access point.
 //
 // TriggerAccessPointWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *AccessPoint) TriggerAccessPointWithHandler(ctx context.Context) error {
@@ -87,6 +89,8 @@ func (x *AccessPoint) TriggerAccessPointWithHandler(ctx context.Context) error {
 	}
 }
 
+// Displays the Game Center dashboard in the specified state as if the player taps or presses the access point.
+//
 // TriggerAccessPointWithStateHandler blocks until the operation completes or ctx is cancelled.
 func (x *AccessPoint) TriggerAccessPointWithStateHandler(ctx context.Context, state GKGameCenterViewControllerState) error {
 	_ch := make(chan error, 1)
@@ -101,6 +105,8 @@ func (x *AccessPoint) TriggerAccessPointWithStateHandler(ctx context.Context, st
 	}
 }
 
+// Displays the Game Center dashboard in a state that shows a specific achievement.
+//
 // TriggerAccessPointWithAchievementIDHandler blocks until the operation completes or ctx is cancelled.
 func (x *AccessPoint) TriggerAccessPointWithAchievementIDHandler(ctx context.Context, achievementID string) error {
 	_ch := make(chan error, 1)
@@ -115,6 +121,8 @@ func (x *AccessPoint) TriggerAccessPointWithAchievementIDHandler(ctx context.Con
 	}
 }
 
+// Displays the Game Center dashboard in a state that shows a specific leaderboard set.
+//
 // TriggerAccessPointWithLeaderboardSetIDHandler blocks until the operation completes or ctx is cancelled.
 func (x *AccessPoint) TriggerAccessPointWithLeaderboardSetIDHandler(ctx context.Context, leaderboardSetID string) error {
 	_ch := make(chan error, 1)
@@ -129,6 +137,8 @@ func (x *AccessPoint) TriggerAccessPointWithLeaderboardSetIDHandler(ctx context.
 	}
 }
 
+// Displays the Game Center dashboard in a state that shows a specific leaderboard.
+//
 // TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler blocks until the operation completes or ctx is cancelled.
 func (x *AccessPoint) TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler(ctx context.Context, leaderboardID string, playerScope GKLeaderboardPlayerScope, timeScope GKLeaderboardTimeScope) error {
 	_ch := make(chan error, 1)
@@ -143,6 +153,8 @@ func (x *AccessPoint) TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHan
 	}
 }
 
+// Displays the Game Center dashboard in a state that shows a player profile.
+//
 // TriggerAccessPointWithPlayerHandler blocks until the operation completes or ctx is cancelled.
 func (x *AccessPoint) TriggerAccessPointWithPlayerHandler(ctx context.Context, player *raw.GKPlayer) error {
 	_ch := make(chan error, 1)

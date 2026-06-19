@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A GPU-based image-processing routine that processes only the color information in images, used to create custom Core Image filters.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cicolorkernel
 type CIColorKernel struct {
 	CIKernel
@@ -32,6 +34,7 @@ func CIColorKernelFromID(id objc.ID) *CIColorKernel {
 	return o
 }
 
+// Creates a color kernel object from the specified kernel source code.
 func CIColorKernelKernelWithString(string_ *foundation.NSString) *CIColorKernel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIColorKernel), _cIColorKernelSelKernelWithString, string_.Ptr())
 	if _ret != 0 {
@@ -40,8 +43,9 @@ func CIColorKernelKernelWithString(string_ *foundation.NSString) *CIColorKernel 
 	return CIColorKernelFromID(_ret)
 }
 
+// Creates a new image using the kernel and specified arguments.
 func (o *CIColorKernel) ApplyWithExtentArguments(extent corefoundation.CGRect, args *foundation.NSArray[objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIColorKernelSelApplyWithExtentArguments, extent, args)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIColorKernelSelApplyWithExtentArguments, extent, args.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

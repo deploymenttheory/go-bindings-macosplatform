@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller that manages a view, typically loaded from a nib file.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsviewcontroller
 type NSViewController struct {
 	NSResponder
@@ -86,6 +88,7 @@ func NSViewControllerFromID(id objc.ID) *NSViewController {
 	return o
 }
 
+// Returns a view controller object initialized to the nib file in the specified bundle.
 func (o *NSViewController) InitWithNibNameBundle(nibNameOrNil *foundation.NSString, nibBundleOrNil *foundation.NSBundle) *NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewControllerSelInitWithNibNameBundle, nibNameOrNil.Ptr(), nibBundleOrNil.Ptr())
 	if _ret != 0 {
@@ -102,6 +105,7 @@ func (o *NSViewController) InitWithCoder(coder *foundation.NSCoder) *NSViewContr
 	return NSViewControllerFromID(_ret)
 }
 
+// Instantiates a view from a nib file and sets the value of the view property.
 func (o *NSViewController) LoadView() {
 	o.Ptr().Send(_nSViewControllerSelLoadView)
 }
@@ -110,47 +114,58 @@ func (o *NSViewController) LoadViewIfNeeded() {
 	o.Ptr().Send(_nSViewControllerSelLoadViewIfNeeded)
 }
 
+// Attempt to commit any currently edited results of the receiver.
 func (o *NSViewController) CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate objc.ID, didCommitSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSViewControllerSelCommitEditingWithDelegateDidCommitSelectorContextInfo, delegate, didCommitSelector, contextInfo)
 }
 
+// Returns whether the receiver was able to commit any pending edits.
 func (o *NSViewController) CommitEditing() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSViewControllerSelCommitEditing)
 	return _ret
 }
 
+// Causes the receiver to discard any changes, restoring the previous values.
 func (o *NSViewController) DiscardEditing() {
 	o.Ptr().Send(_nSViewControllerSelDiscardEditing)
 }
 
+// Called after the view controller’s view has been loaded into memory.
 func (o *NSViewController) ViewDidLoad() {
 	o.Ptr().Send(_nSViewControllerSelViewDidLoad)
 }
 
+// Called after the view controller’s view has been loaded into memory is about to be added to the view hierarchy in the window.
 func (o *NSViewController) ViewWillAppear() {
 	o.Ptr().Send(_nSViewControllerSelViewWillAppear)
 }
 
+// Called when the view controller’s view is fully transitioned onto the screen.
 func (o *NSViewController) ViewDidAppear() {
 	o.Ptr().Send(_nSViewControllerSelViewDidAppear)
 }
 
+// Called when the view controller’s view is about to be removed from the view hierarchy in the window.
 func (o *NSViewController) ViewWillDisappear() {
 	o.Ptr().Send(_nSViewControllerSelViewWillDisappear)
 }
 
+// Called after the view controller’s view is removed from the view hierarchy in a window.
 func (o *NSViewController) ViewDidDisappear() {
 	o.Ptr().Send(_nSViewControllerSelViewDidDisappear)
 }
 
+// Called during Auto Layout constraint updating to enable the view controller to mediate the process.
 func (o *NSViewController) UpdateViewConstraints() {
 	o.Ptr().Send(_nSViewControllerSelUpdateViewConstraints)
 }
 
+// Called just before the layout method of the view controller’s view is called.
 func (o *NSViewController) ViewWillLayout() {
 	o.Ptr().Send(_nSViewControllerSelViewWillLayout)
 }
 
+// Called immediately after the layout method of the view controller’s view is called.
 func (o *NSViewController) ViewDidLayout() {
 	o.Ptr().Send(_nSViewControllerSelViewDidLayout)
 }
@@ -226,10 +241,12 @@ func (o *NSViewController) SetPreferredContentSize(preferredContentSize corefoun
 	o.Ptr().Send(_nSViewControllerSelSetPreferredContentSize, preferredContentSize)
 }
 
+// Presents another view controller using a specified, custom animator for presentation and dismissal.
 func (o *NSViewController) PresentViewControllerAnimator(viewController *NSViewController, animator NSViewControllerPresentationAnimator) {
 	o.Ptr().Send(_nSViewControllerSelPresentViewControllerAnimator, viewController.Ptr(), animator)
 }
 
+// Dismisses a presented view controller, using the same animator that presented it.
 func (o *NSViewController) DismissViewController(viewController *NSViewController) {
 	o.Ptr().Send(_nSViewControllerSelDismissViewController, viewController.Ptr())
 }
@@ -254,14 +271,17 @@ func (o *NSViewController) PresentingViewController() *NSViewController {
 	return NSViewControllerFromID(_ret)
 }
 
+// Presents another view controller as a sheet.
 func (o *NSViewController) PresentViewControllerAsSheet(viewController *NSViewController) {
 	o.Ptr().Send(_nSViewControllerSelPresentViewControllerAsSheet, viewController.Ptr())
 }
 
+// Presents another view controller as a modal window, also known as an alert.
 func (o *NSViewController) PresentViewControllerAsModalWindow(viewController *NSViewController) {
 	o.Ptr().Send(_nSViewControllerSelPresentViewControllerAsModalWindow, viewController.Ptr())
 }
 
+// Presents another view controller as a popover.
 func (o *NSViewController) PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior(viewController *NSViewController, positioningRect corefoundation.CGRect, positioningView *NSView, preferredEdge foundation.NSRectEdge, behavior NSPopoverBehavior) {
 	o.Ptr().Send(_nSViewControllerSelPresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior, viewController.Ptr(), positioningRect, positioningView.Ptr(), preferredEdge, behavior)
 }
@@ -270,6 +290,7 @@ func (o *NSViewController) PresentViewControllerAsPopoverRelativeToRectOfViewPre
 	o.Ptr().Send(_nSViewControllerSelPresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent, viewController.Ptr(), positioningRect, positioningView.Ptr(), preferredEdge, behavior, hasFullSizeContent)
 }
 
+// Performs a transition between two sibling child view controllers of the view controller.
 func (o *NSViewController) TransitionFromViewControllerToViewControllerOptionsCompletionHandler(fromViewController *NSViewController, toViewController *NSViewController, options NSViewControllerTransitionOptions, completion func()) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -281,26 +302,32 @@ func (o *NSViewController) TransitionFromViewControllerToViewControllerOptionsCo
 	o.Ptr().Send(_nSViewControllerSelTransitionFromViewControllerToViewControllerOptionsCompletionHandler, fromViewController.Ptr(), toViewController.Ptr(), options, __block_completion)
 }
 
+// A convenience method for adding a child view controller at the end of the childViewControllers array.
 func (o *NSViewController) AddChildViewController(childViewController *NSViewController) {
 	o.Ptr().Send(_nSViewControllerSelAddChildViewController, childViewController.Ptr())
 }
 
+// Removes the called view controller from its parent view controller.
 func (o *NSViewController) RemoveFromParentViewController() {
 	o.Ptr().Send(_nSViewControllerSelRemoveFromParentViewController)
 }
 
+// Inserts a specified child view controller into the childViewControllers array at a specified position.
 func (o *NSViewController) InsertChildViewControllerAtIndex(childViewController *NSViewController, index int) {
 	o.Ptr().Send(_nSViewControllerSelInsertChildViewControllerAtIndex, childViewController.Ptr(), index)
 }
 
+// Removes a specified child controller from the view controller.
 func (o *NSViewController) RemoveChildViewControllerAtIndex(index int) {
 	o.Ptr().Send(_nSViewControllerSelRemoveChildViewControllerAtIndex, index)
 }
 
+// Called when there is a change in value of the preferredContentSize property of a child view controller or a presented view controller.
 func (o *NSViewController) PreferredContentSizeDidChangeForViewController(viewController *NSViewController) {
 	o.Ptr().Send(_nSViewControllerSelPreferredContentSizeDidChangeForViewController, viewController.Ptr())
 }
 
+// For a view controller that is part of an app extension, called when its view is about to be resized.
 func (o *NSViewController) ViewWillTransitionToSize(newSize corefoundation.CGSize) {
 	o.Ptr().Send(_nSViewControllerSelViewWillTransitionToSize, newSize)
 }

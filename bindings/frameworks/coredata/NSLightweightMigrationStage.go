@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes a series of models suitable for lightweight migration.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nslightweightmigrationstage
 type NSLightweightMigrationStage struct {
 	NSMigrationStage
@@ -31,8 +33,9 @@ func NSLightweightMigrationStageFromID(id objc.ID) *NSLightweightMigrationStage 
 	return o
 }
 
+// Creates a lightweight migration stage with the specified version checksums.
 func (o *NSLightweightMigrationStage) InitWithVersionChecksums(versionChecksums *foundation.NSArray[*foundation.NSString]) *NSLightweightMigrationStage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSLightweightMigrationStageSelInitWithVersionChecksums, versionChecksums)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSLightweightMigrationStageSelInitWithVersionChecksums, versionChecksums.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -40,6 +43,9 @@ func (o *NSLightweightMigrationStage) InitWithVersionChecksums(versionChecksums 
 }
 
 func (o *NSLightweightMigrationStage) VersionChecksums() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSLightweightMigrationStageSelVersionChecksums)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSLightweightMigrationStageSelVersionChecksums)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A simple interface for loading and playing audio files.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssound
 type NSSound struct {
 	foundation.NSObject
@@ -59,6 +61,7 @@ func NSSoundFromID(id objc.ID) *NSSound {
 	return o
 }
 
+// Returns the NSSound instance associated with a given name.
 func NSSoundSoundNamed(name *foundation.NSString) *NSSound {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSound), _nSSoundSelSoundNamed, name.Ptr())
 	if _ret != 0 {
@@ -67,6 +70,7 @@ func NSSoundSoundNamed(name *foundation.NSString) *NSSound {
 	return NSSoundFromID(_ret)
 }
 
+// Initializes the receiver with the audio data located at a given URL.
 func (o *NSSound) InitWithContentsOfURLByReference(url *foundation.NSURL, byRef bool) *NSSound {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSoundSelInitWithContentsOfURLByReference, url.Ptr(), byRef)
 	if _ret != 0 {
@@ -75,6 +79,7 @@ func (o *NSSound) InitWithContentsOfURLByReference(url *foundation.NSURL, byRef 
 	return NSSoundFromID(_ret)
 }
 
+// Initializes the receiver with the audio data located at a given filepath.
 func (o *NSSound) InitWithContentsOfFileByReference(path *foundation.NSString, byRef bool) *NSSound {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSoundSelInitWithContentsOfFileByReference, path.Ptr(), byRef)
 	if _ret != 0 {
@@ -83,6 +88,7 @@ func (o *NSSound) InitWithContentsOfFileByReference(path *foundation.NSString, b
 	return NSSoundFromID(_ret)
 }
 
+// Initializes the receiver with a given audio data.
 func (o *NSSound) InitWithData(data *foundation.NSData) *NSSound {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSoundSelInitWithData, data.Ptr())
 	if _ret != 0 {
@@ -96,11 +102,13 @@ func (o *NSSound) SetName(string_ *foundation.NSString) bool {
 	return _ret
 }
 
+// Indicates whether the receiver can create an instance of itself from the data in a pasteboard.
 func NSSoundCanInitWithPasteboard(pasteboard *NSPasteboard) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSSound), _nSSoundSelCanInitWithPasteboard, pasteboard.Ptr())
 	return _ret
 }
 
+// Initializes the receiver with data from a pasteboard. The pasteboard should contain a type returned by NSSound. NSSound expects the data to have a proper magic number, sound header, and data for the formats it supports.
 func (o *NSSound) InitWithPasteboard(pasteboard *NSPasteboard) *NSSound {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSoundSelInitWithPasteboard, pasteboard.Ptr())
 	if _ret != 0 {
@@ -109,39 +117,49 @@ func (o *NSSound) InitWithPasteboard(pasteboard *NSPasteboard) *NSSound {
 	return NSSoundFromID(_ret)
 }
 
+// Writes the receiver’s data to a pasteboard.
 func (o *NSSound) WriteToPasteboard(pasteboard *NSPasteboard) {
 	o.Ptr().Send(_nSSoundSelWriteToPasteboard, pasteboard.Ptr())
 }
 
+// Initiates audio playback.
 func (o *NSSound) Play() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSoundSelPlay)
 	return _ret
 }
 
+// Pauses audio playback.
 func (o *NSSound) Pause() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSoundSelPause)
 	return _ret
 }
 
+// Resumes audio playback.
 func (o *NSSound) Resume() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSoundSelResume)
 	return _ret
 }
 
+// Concludes audio playback.
 func (o *NSSound) Stop() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSoundSelStop)
 	return _ret
 }
 
+// Specifies the receiver’s channel map.
 // Deprecated: since macOS 10.9.
 func (o *NSSound) SetChannelMapping(channelMapping *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSSoundSelSetChannelMapping, channelMapping)
+	o.Ptr().Send(_nSSoundSelSetChannelMapping, channelMapping.Ptr())
 }
 
+// Provides the receiver’s channel map.
 // Deprecated: since macOS 10.9.
 func (o *NSSound) ChannelMapping() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSSoundSelChannelMapping)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSoundSelChannelMapping)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSSound) Name() *foundation.NSString {
@@ -153,8 +171,11 @@ func (o *NSSound) Name() *foundation.NSString {
 }
 
 func NSSoundSoundUnfilteredTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSSound), _nSSoundSelSoundUnfilteredTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSSound), _nSSoundSelSoundUnfilteredTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSSound) IsPlaying() bool {
@@ -215,14 +236,22 @@ func (o *NSSound) SetPlaybackDeviceIdentifier(playbackDeviceIdentifier *foundati
 	o.Ptr().Send(_nSSoundSelSetPlaybackDeviceIdentifier, playbackDeviceIdentifier.Ptr())
 }
 
+// Provides the list of file types the NSSound class understands.
 // Deprecated: since macOS 10.5.
 func NSSoundSoundUnfilteredFileTypes() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsNSSound), _nSSoundSelSoundUnfilteredFileTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSSound), _nSSoundSelSoundUnfilteredFileTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Provides a list of the pasteboard types that the NSSound class can accept.
 // Deprecated: since macOS 10.5.
 func NSSoundSoundUnfilteredPasteboardTypes() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsNSSound), _nSSoundSelSoundUnfilteredPasteboardTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSSound), _nSSoundSelSoundUnfilteredPasteboardTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

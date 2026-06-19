@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description object used to create and load a persistent store.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistentstoredescription
 type NSPersistentStoreDescription struct {
 	foundation.NSObject
@@ -53,6 +55,7 @@ func NSPersistentStoreDescriptionFromID(id objc.ID) *NSPersistentStoreDescriptio
 	return o
 }
 
+// Initializes and returns a persistent store description with the given URL.
 func NSPersistentStoreDescriptionPersistentStoreDescriptionWithURL(uRL *foundation.NSURL) *NSPersistentStoreDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentStoreDescription), _nSPersistentStoreDescriptionSelPersistentStoreDescriptionWithURL, uRL.Ptr())
 	if _ret != 0 {
@@ -61,14 +64,17 @@ func NSPersistentStoreDescriptionPersistentStoreDescriptionWithURL(uRL *foundati
 	return NSPersistentStoreDescriptionFromID(_ret)
 }
 
+// Sets an option on the store.
 func (o *NSPersistentStoreDescription) SetOptionForKey(option *foundation.NSObject, key *foundation.NSString) {
 	o.Ptr().Send(_nSPersistentStoreDescriptionSelSetOptionForKey, option.Ptr(), key.Ptr())
 }
 
+// Allows you to set pragmas for the SQLite store.
 func (o *NSPersistentStoreDescription) SetValueForPragmaNamed(value *foundation.NSObject, name *foundation.NSString) {
 	o.Ptr().Send(_nSPersistentStoreDescriptionSelSetValueForPragmaNamed, value.Ptr(), name.Ptr())
 }
 
+// Initializes the receiver with a URL for the store.
 func (o *NSPersistentStoreDescription) InitWithURL(url *foundation.NSURL) *NSPersistentStoreDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreDescriptionSelInitWithURL, url.Ptr())
 	if _ret != 0 {
@@ -114,8 +120,11 @@ func (o *NSPersistentStoreDescription) SetURL(uRL *foundation.NSURL) {
 }
 
 func (o *NSPersistentStoreDescription) Options() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]](o.Ptr(), _nSPersistentStoreDescriptionSelOptions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreDescriptionSelOptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSObject](_ret)
 }
 
 func (o *NSPersistentStoreDescription) IsReadOnly() bool {
@@ -137,8 +146,11 @@ func (o *NSPersistentStoreDescription) SetTimeout(timeout float64) {
 }
 
 func (o *NSPersistentStoreDescription) SqlitePragmas() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]](o.Ptr(), _nSPersistentStoreDescriptionSelSqlitePragmas)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreDescriptionSelSqlitePragmas)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSObject](_ret)
 }
 
 func (o *NSPersistentStoreDescription) ShouldAddStoreAsynchronously() bool {

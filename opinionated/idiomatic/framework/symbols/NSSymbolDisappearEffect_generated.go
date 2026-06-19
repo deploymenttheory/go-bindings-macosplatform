@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that makes the layers of a symbol-based image disappear separately or as a whole.
+//
 // SymbolDisappearEffect wraps [raw.NSSymbolDisappearEffect] with a fluent Go API.
 type SymbolDisappearEffect struct {
 	inner *raw.NSSymbolDisappearEffect
@@ -35,7 +37,7 @@ func NewSymbolDisappearEffect() *SymbolDisappearEffect {
 	return &SymbolDisappearEffect{inner: raw.NSSymbolDisappearEffectFromID(_id)}
 }
 
-// Returns a copy of the effect that animates incrementally, by layer.
+// An effect that makes each layer disappear separately.
 //
 // EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolDisappearEffect) EffectWithByLayer() *SymbolDisappearEffect {
@@ -46,7 +48,7 @@ func (x *SymbolDisappearEffect) EffectWithByLayer() *SymbolDisappearEffect {
 	return &SymbolDisappearEffect{inner: _r}
 }
 
-// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+// An effect that makes all layers disappear simultaneously.
 //
 // EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolDisappearEffect) EffectWithWholeSymbol() *SymbolDisappearEffect {

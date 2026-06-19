@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A tool for selecting stroked lines and shapes in a canvas view.
+//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pklassotool
 type PKLassoTool struct {
 	PKTool

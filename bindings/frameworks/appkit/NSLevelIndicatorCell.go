@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// NSLevelIndicatorCell is a subclass of NSActionCell that provides several level indicator display styles including: capacity, ranking and relevancy. The capacity style provides both continuous and discrete modes.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nslevelindicatorcell
 type NSLevelIndicatorCell struct {
 	NSActionCell
@@ -48,6 +50,7 @@ func NSLevelIndicatorCellFromID(id objc.ID) *NSLevelIndicatorCell {
 	return o
 }
 
+// Initializes the receiver with the style specified by levelIndicatorStyle.
 func (o *NSLevelIndicatorCell) InitWithLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle) *NSLevelIndicatorCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorCellSelInitWithLevelIndicatorStyle, levelIndicatorStyle)
 	if _ret != 0 {
@@ -56,11 +59,13 @@ func (o *NSLevelIndicatorCell) InitWithLevelIndicatorStyle(levelIndicatorStyle N
 	return NSLevelIndicatorCellFromID(_ret)
 }
 
+// Returns the bounding rectangle of the tick mark identified by index (the minimum-value tick mark is at index 0).
 func (o *NSLevelIndicatorCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSLevelIndicatorCellSelRectOfTickMarkAtIndex, index)
 	return _ret
 }
 
+// Returns the receiver’s value represented by the tick mark at index (the minimum-value tick mark has an index of 0).
 func (o *NSLevelIndicatorCell) TickMarkValueAtIndex(index int) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSLevelIndicatorCellSelTickMarkValueAtIndex, index)
 	return _ret

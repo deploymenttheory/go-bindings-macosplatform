@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The relationship between two user interface objects that must be satisfied by the constraint-based layout system.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nslayoutconstraint
 type NSLayoutConstraint struct {
 	foundation.NSObject
@@ -51,14 +53,16 @@ func NSLayoutConstraintFromID(id objc.ID) *NSLayoutConstraint {
 	return o
 }
 
+// Creates constraints described by an ASCII art-like visual format string.
 func NSLayoutConstraintConstraintsWithVisualFormatOptionsMetricsViews(format *foundation.NSString, opts NSLayoutFormatOptions, metrics *foundation.NSDictionary[*foundation.NSString, objc.ID], views *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*NSLayoutConstraint] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSLayoutConstraint), _nSLayoutConstraintSelConstraintsWithVisualFormatOptionsMetricsViews, format.Ptr(), opts, metrics, views)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSLayoutConstraint), _nSLayoutConstraintSelConstraintsWithVisualFormatOptionsMetricsViews, format.Ptr(), opts, metrics.Ptr(), views.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*NSLayoutConstraint](_ret)
 }
 
+// Creates a constraint that defines the relationship between the specified attributes of the given views.
 func NSLayoutConstraintConstraintWithItemAttributeRelatedByToItemAttributeMultiplierConstant(view1 objc.ID, attr1 NSLayoutAttribute, relation NSLayoutRelation, view2 objc.ID, attr2 NSLayoutAttribute, multiplier float64, c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLayoutConstraint), _nSLayoutConstraintSelConstraintWithItemAttributeRelatedByToItemAttributeMultiplierConstant, view1, attr1, relation, view2, attr2, multiplier, c)
 	if _ret != 0 {
@@ -67,10 +71,12 @@ func NSLayoutConstraintConstraintWithItemAttributeRelatedByToItemAttributeMultip
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Activates each constraint in the specified array.
 func NSLayoutConstraintActivateConstraints(constraints *foundation.NSArray[*NSLayoutConstraint]) {
 	objc.ID(_clsNSLayoutConstraint).Send(_nSLayoutConstraintSelActivateConstraints, constraints.Ptr())
 }
 
+// Deactivates each constraint in the specified array.
 func NSLayoutConstraintDeactivateConstraints(constraints *foundation.NSArray[*NSLayoutConstraint]) {
 	objc.ID(_clsNSLayoutConstraint).Send(_nSLayoutConstraintSelDeactivateConstraints, constraints.Ptr())
 }
@@ -114,13 +120,19 @@ func (o *NSLayoutConstraint) SecondAttribute() NSLayoutAttribute {
 }
 
 func (o *NSLayoutConstraint) FirstAnchor() *NSLayoutAnchor[objc.ID] {
-	_ret := objc.Send[*NSLayoutAnchor[objc.ID]](o.Ptr(), _nSLayoutConstraintSelFirstAnchor)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutConstraintSelFirstAnchor)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSLayoutAnchorFromID[objc.ID](_ret)
 }
 
 func (o *NSLayoutConstraint) SecondAnchor() *NSLayoutAnchor[objc.ID] {
-	_ret := objc.Send[*NSLayoutAnchor[objc.ID]](o.Ptr(), _nSLayoutConstraintSelSecondAnchor)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutConstraintSelSecondAnchor)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSLayoutAnchorFromID[objc.ID](_ret)
 }
 
 func (o *NSLayoutConstraint) Relation() NSLayoutRelation {

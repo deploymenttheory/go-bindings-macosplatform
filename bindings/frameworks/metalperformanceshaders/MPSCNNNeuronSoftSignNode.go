@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract   A node representing a MPSCNNNeuronSoftSign kernel @discussion For each pixel, applies the following function: @code f(x) = x / (1 + abs(x)) @endcode
+// A representation of a softsign neuron filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronsoftsignnode
 type MPSCNNNeuronSoftSignNode struct {

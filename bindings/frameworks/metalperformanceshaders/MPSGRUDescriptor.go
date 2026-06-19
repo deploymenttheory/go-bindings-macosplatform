@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a gated recurrent unit block or layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsgrudescriptor
 type MPSGRUDescriptor struct {
 	mpsneuralnetwork.MPSRNNDescriptor

@@ -8,46 +8,59 @@ import (
 	"strings"
 )
 
+// Constants that describe activation functions.
 type BNNSActivationFunction int64
 
 const (
-	BNNSActivationFunctionIdentity                        BNNSActivationFunction = 0
-	BNNSActivationFunctionRectifiedLinear                 BNNSActivationFunction = 1
-	BNNSActivationFunctionLeakyRectifiedLinear            BNNSActivationFunction = 2
-	BNNSActivationFunctionSigmoid                         BNNSActivationFunction = 3
-	BNNSActivationFunctionTanh                            BNNSActivationFunction = 4
-	BNNSActivationFunctionScaledTanh                      BNNSActivationFunction = 5
-	BNNSActivationFunctionAbs                             BNNSActivationFunction = 6
-	BNNSActivationFunctionLinear                          BNNSActivationFunction = 7
-	BNNSActivationFunctionClamp                           BNNSActivationFunction = 8
-	BNNSActivationFunctionIntegerLinearSaturate           BNNSActivationFunction = 9
+	// An activation function that returns its input.
+	BNNSActivationFunctionIdentity BNNSActivationFunction = 0
+	// An activation function that returns its input when that is greater than or equal to zero, otherwise it returns zero.
+	BNNSActivationFunctionRectifiedLinear BNNSActivationFunction = 1
+	// An activation function that returns its input when that is greater than or equal to zero, otherwise it returns its input multiplied by a specified value.
+	BNNSActivationFunctionLeakyRectifiedLinear BNNSActivationFunction = 2
+	// An activation function that returns the sigmoid function of its input.
+	BNNSActivationFunctionSigmoid BNNSActivationFunction = 3
+	// An activation function that returns the hyperbolic tangent of its input.
+	BNNSActivationFunctionTanh BNNSActivationFunction = 4
+	// An activation function that returns the scaled hyperbolic tangent of its input.
+	BNNSActivationFunctionScaledTanh BNNSActivationFunction = 5
+	// An activation function that returns the absolute value of its input.
+	BNNSActivationFunctionAbs BNNSActivationFunction = 6
+	// An activation function that returns its input multiplied by a specified value.
+	BNNSActivationFunctionLinear BNNSActivationFunction = 7
+	// An activation function that returns its input clamped to the specified range.
+	BNNSActivationFunctionClamp BNNSActivationFunction = 8
+	// An activation function that returns an arithmetic shift, preserving sign.
+	BNNSActivationFunctionIntegerLinearSaturate BNNSActivationFunction = 9
+	// An activation function that returns an arithmetic shift, preserving sign for each channel.
 	BNNSActivationFunctionIntegerLinearSaturatePerChannel BNNSActivationFunction = 10
-	BNNSActivationFunctionSoftmax                         BNNSActivationFunction = 11
-	BNNSActivationFunctionGELUApproximation               BNNSActivationFunction = 12
-	BNNSActivationFunctionGumbel                          BNNSActivationFunction = 13
-	BNNSActivationFunctionGumbelMax                       BNNSActivationFunction = 14
-	BNNSActivationFunctionHardSigmoid                     BNNSActivationFunction = 15
-	BNNSActivationFunctionSoftplus                        BNNSActivationFunction = 16
-	BNNSActivationFunctionSoftsign                        BNNSActivationFunction = 17
-	BNNSActivationFunctionELU                             BNNSActivationFunction = 18
-	BNNSActivationFunctionClampedLeakyRectifiedLinear     BNNSActivationFunction = 19
-	BNNSActivationFunctionLinearWithBias                  BNNSActivationFunction = 20
-	BNNSActivationFunctionLogSoftmax                      BNNSActivationFunction = 21
-	BNNSActivationFunctionLogSigmoid                      BNNSActivationFunction = 22
-	BNNSActivationFunctionSELU                            BNNSActivationFunction = 23
-	BNNSActivationFunctionCELU                            BNNSActivationFunction = 24
-	BNNSActivationFunctionHardShrink                      BNNSActivationFunction = 25
-	BNNSActivationFunctionSoftShrink                      BNNSActivationFunction = 26
-	BNNSActivationFunctionTanhShrink                      BNNSActivationFunction = 27
-	BNNSActivationFunctionThreshold                       BNNSActivationFunction = 28
-	BNNSActivationFunctionPReLUPerChannel                 BNNSActivationFunction = 29
-	BNNSActivationFunctionGELUApproximation2              BNNSActivationFunction = 30
-	BNNSActivationFunctionHardSwish                       BNNSActivationFunction = 30
-	BNNSActivationFunctionSiLU                            BNNSActivationFunction = 31
-	BNNSActivationFunctionReLU6                           BNNSActivationFunction = 32
-	BNNSActivationFunctionErf                             BNNSActivationFunction = 33
-	BNNSActivationFunctionGELU                            BNNSActivationFunction = 34
-	BNNSActivationFunctionGELUApproximationSigmoid        BNNSActivationFunction = 35
+	// An activation function that returns the softmax function of its input.
+	BNNSActivationFunctionSoftmax                     BNNSActivationFunction = 11
+	BNNSActivationFunctionGELUApproximation           BNNSActivationFunction = 12
+	BNNSActivationFunctionGumbel                      BNNSActivationFunction = 13
+	BNNSActivationFunctionGumbelMax                   BNNSActivationFunction = 14
+	BNNSActivationFunctionHardSigmoid                 BNNSActivationFunction = 15
+	BNNSActivationFunctionSoftplus                    BNNSActivationFunction = 16
+	BNNSActivationFunctionSoftsign                    BNNSActivationFunction = 17
+	BNNSActivationFunctionELU                         BNNSActivationFunction = 18
+	BNNSActivationFunctionClampedLeakyRectifiedLinear BNNSActivationFunction = 19
+	BNNSActivationFunctionLinearWithBias              BNNSActivationFunction = 20
+	BNNSActivationFunctionLogSoftmax                  BNNSActivationFunction = 21
+	BNNSActivationFunctionLogSigmoid                  BNNSActivationFunction = 22
+	BNNSActivationFunctionSELU                        BNNSActivationFunction = 23
+	BNNSActivationFunctionCELU                        BNNSActivationFunction = 24
+	BNNSActivationFunctionHardShrink                  BNNSActivationFunction = 25
+	BNNSActivationFunctionSoftShrink                  BNNSActivationFunction = 26
+	BNNSActivationFunctionTanhShrink                  BNNSActivationFunction = 27
+	BNNSActivationFunctionThreshold                   BNNSActivationFunction = 28
+	BNNSActivationFunctionPReLUPerChannel             BNNSActivationFunction = 29
+	BNNSActivationFunctionGELUApproximation2          BNNSActivationFunction = 30
+	BNNSActivationFunctionHardSwish                   BNNSActivationFunction = 30
+	BNNSActivationFunctionSiLU                        BNNSActivationFunction = 31
+	BNNSActivationFunctionReLU6                       BNNSActivationFunction = 32
+	BNNSActivationFunctionErf                         BNNSActivationFunction = 33
+	BNNSActivationFunctionGELU                        BNNSActivationFunction = 34
+	BNNSActivationFunctionGELUApproximationSigmoid    BNNSActivationFunction = 35
 )
 
 func (e BNNSActivationFunction) String() string {
@@ -129,6 +142,7 @@ func (e BNNSActivationFunction) String() string {
 	}
 }
 
+// Constants that define arithmetic operations.
 type BNNSArithmeticFunction int64
 
 const (
@@ -264,6 +278,7 @@ func (e BNNSArithmeticFunction) String() string {
 	}
 }
 
+// Constants that define the convention to specify the four bounding box coordinates for crop-resize operations.
 type BNNSBoxCoordinateMode int64
 
 const (
@@ -288,6 +303,7 @@ func (e BNNSBoxCoordinateMode) String() string {
 	}
 }
 
+// Constants that describe the data type of an n-dimensional array.
 type BNNSDataLayout int64
 
 const (
@@ -384,6 +400,7 @@ func (e BNNSDataLayout) String() string {
 	}
 }
 
+// BNNS Data Types.
 type BNNSDataType int64
 
 const (
@@ -483,6 +500,7 @@ func (e BNNSDataType) String() string {
 	}
 }
 
+// Constants that describe the input and output types of an arithmetic operation.
 type BNNSDescriptorType int64
 
 const (
@@ -504,6 +522,7 @@ func (e BNNSDescriptorType) String() string {
 	}
 }
 
+// Flags that control behavior of embedding layers.
 type BNNSEmbeddingFlags int64
 
 const (
@@ -519,6 +538,7 @@ func (e BNNSEmbeddingFlags) String() string {
 	}
 }
 
+// Constants that define the component filters of a fused layer.
 type BNNSFilterType int64
 
 const (
@@ -558,9 +578,11 @@ func (e BNNSFilterType) String() string {
 	}
 }
 
+// Options that control the behavior of a filter parameter.
 type BNNSFlags int64
 
 const (
+	// A flag that instructs the filter to use pointers to data you provide at creation time.
 	BNNSFlagsUseClientPtr BNNSFlags = 1
 )
 
@@ -573,6 +595,7 @@ func (e BNNSFlags) String() string {
 	}
 }
 
+// Constants that describe argument intents.
 type BNNSGraphArgumentIntent int64
 
 const (
@@ -594,6 +617,7 @@ func (e BNNSGraphArgumentIntent) String() string {
 	}
 }
 
+// Constants that specify the argument type for a graph context.
 type BNNSGraphArgumentType int64
 
 const (
@@ -612,6 +636,7 @@ func (e BNNSGraphArgumentType) String() string {
 	}
 }
 
+// Constants that specify the mask for compile-time messages.
 type BNNSGraphMessageLevel int64
 
 const (
@@ -636,6 +661,7 @@ func (e BNNSGraphMessageLevel) String() string {
 	}
 }
 
+// Constants that describe the compilation optimization preference.
 type BNNSGraphOptimizationPreference int64
 
 const (
@@ -654,6 +680,7 @@ func (e BNNSGraphOptimizationPreference) String() string {
 	}
 }
 
+// Constants that describe interpolation methods.
 type BNNSInterpolationMethod int64
 
 const (
@@ -672,6 +699,7 @@ func (e BNNSInterpolationMethod) String() string {
 	}
 }
 
+// Options that control the behavior of a long short-term memory (LSTM) layer.
 type BNNSLayerFlags int64
 
 const (
@@ -690,6 +718,7 @@ func (e BNNSLayerFlags) String() string {
 	}
 }
 
+// Constants that specify how a crop-resize layer samples a grid.
 type BNNSLinearSamplingMode int64
 
 const (
@@ -717,6 +746,7 @@ func (e BNNSLinearSamplingMode) String() string {
 	}
 }
 
+// Constants that describe loss functions.
 type BNNSLossFunction int64
 
 const (
@@ -759,6 +789,7 @@ func (e BNNSLossFunction) String() string {
 	}
 }
 
+// Constants that describe reduction functions used by a loss layer.
 type BNNSLossReductionFunction int64
 
 const (
@@ -786,6 +817,7 @@ func (e BNNSLossReductionFunction) String() string {
 	}
 }
 
+// Options that control the behavior of an n-dimensional array.
 type BNNSNDArrayFlags int64
 
 const (
@@ -804,6 +836,7 @@ func (e BNNSNDArrayFlags) String() string {
 	}
 }
 
+// Constants that describe norm types.
 type BNNSNormType int64
 
 const (
@@ -819,6 +852,7 @@ func (e BNNSNormType) String() string {
 	}
 }
 
+// Constants that describe clipping functions.
 type BNNSOptimizerClippingFunction int64
 
 const (
@@ -843,6 +877,7 @@ func (e BNNSOptimizerClippingFunction) String() string {
 	}
 }
 
+// A structure that contains optimizer functions.
 type BNNSOptimizerFunction int64
 
 const (
@@ -891,6 +926,7 @@ func (e BNNSOptimizerFunction) String() string {
 	}
 }
 
+// A structure that contains optimizer regularization functions.
 type BNNSOptimizerRegularizationFunction int64
 
 const (
@@ -912,6 +948,7 @@ func (e BNNSOptimizerRegularizationFunction) String() string {
 	}
 }
 
+// Constants that define SGD momentum variants.
 type BNNSOptimizerSGDMomentumVariant int64
 
 const (
@@ -933,6 +970,7 @@ func (e BNNSOptimizerSGDMomentumVariant) String() string {
 	}
 }
 
+// Constants that define padding modes.
 type BNNSPaddingMode int64
 
 const (
@@ -954,6 +992,7 @@ func (e BNNSPaddingMode) String() string {
 	}
 }
 
+// Constants that specify which pointer the BNNS get filter function returns.
 type BNNSPointerSpecifier int64
 
 const (
@@ -972,15 +1011,18 @@ func (e BNNSPointerSpecifier) String() string {
 	}
 }
 
+// Constants that describe pooling functions.
 type BNNSPoolingFunction int64
 
 const (
+	// A function for pooling that computes the maximum of each element in the pooling kernel.
 	BNNSPoolingFunctionMax                        BNNSPoolingFunction = 0
 	BNNSPoolingFunctionAverageCountIncludePadding BNNSPoolingFunction = 1
 	BNNSPoolingFunctionAverageCountExcludePadding BNNSPoolingFunction = 2
 	BNNSPoolingFunctionUnMax                      BNNSPoolingFunction = 3
 	BNNSPoolingFunctionL2Norm                     BNNSPoolingFunction = 4
-	BNNSPoolingFunctionAverage                    BNNSPoolingFunction = 1
+	// A function for pooling that computes the average of each element in the pooling kernel.
+	BNNSPoolingFunctionAverage BNNSPoolingFunction = 1
 )
 
 func (e BNNSPoolingFunction) String() string {
@@ -1000,6 +1042,7 @@ func (e BNNSPoolingFunction) String() string {
 	}
 }
 
+// Constants that describe quantization functions.
 type BNNSQuantizerFunction int64
 
 const (
@@ -1018,6 +1061,7 @@ func (e BNNSQuantizerFunction) String() string {
 	}
 }
 
+// Constants that describe random number generation methods.
 type BNNSRandomGeneratorMethod int64
 
 const (
@@ -1033,6 +1077,7 @@ func (e BNNSRandomGeneratorMethod) String() string {
 	}
 }
 
+// Constants that describe reduction functions.
 type BNNSReduceFunction int64
 
 const (
@@ -1098,6 +1143,7 @@ func (e BNNSReduceFunction) String() string {
 	}
 }
 
+// Constants that describe relational operations.
 type BNNSRelationalOperator int64
 
 const (
@@ -1146,6 +1192,7 @@ func (e BNNSRelationalOperator) String() string {
 	}
 }
 
+// Constants that specify a shuffle type.
 type BNNSShuffleType int64
 
 const (
@@ -1322,6 +1369,7 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
+// Options that control the computation.
 type SparseControl_t int64
 
 const (
@@ -1337,6 +1385,7 @@ func (e SparseControl_t) String() string {
 	}
 }
 
+// Constants that define the factorization type.
 type SparseFactorization_t int64
 
 const (
@@ -1382,6 +1431,7 @@ func (e SparseFactorization_t) String() string {
 	}
 }
 
+// Defines the exact variant of GMRES to implement
 type SparseGMRESVariant_t int64
 
 const (
@@ -1403,6 +1453,7 @@ func (e SparseGMRESVariant_t) String() string {
 	}
 }
 
+// Constants that define the status of the iterative solve.
 type SparseIterativeStatus_t int32
 
 const (
@@ -1430,6 +1481,7 @@ func (e SparseIterativeStatus_t) String() string {
 	}
 }
 
+// A structure that defines whether the matrix is ordinary, symmetric, or triangular.
 type SparseKind_t uint32
 
 const (
@@ -1457,6 +1509,7 @@ func (e SparseKind_t) String() string {
 	}
 }
 
+// Constants that specify the type of convergence test.
 type SparseLSMRConvergenceTest_t int32
 
 const (
@@ -1475,6 +1528,7 @@ func (e SparseLSMRConvergenceTest_t) String() string {
 	}
 }
 
+// Options that define which ordering algorithm to use.
 type SparseOrder_t int64
 
 const (
@@ -1505,6 +1559,7 @@ func (e SparseOrder_t) String() string {
 	}
 }
 
+// Constants that define the preconditioner type.
 type SparsePreconditioner_t int32
 
 const (
@@ -1529,6 +1584,7 @@ func (e SparsePreconditioner_t) String() string {
 	}
 }
 
+// Options that define which scaling algorithm to use.
 type SparseScaling_t int64
 
 const (
@@ -1556,6 +1612,7 @@ func (e SparseScaling_t) String() string {
 	}
 }
 
+// Constants that describe the status of a factorization.
 type SparseStatus_t int32
 
 const (
@@ -1586,6 +1643,7 @@ func (e SparseStatus_t) String() string {
 	}
 }
 
+// Constants that define the subfactor of a factorization.
 type SparseSubfactor_t int64
 
 const (
@@ -1631,6 +1689,7 @@ func (e SparseSubfactor_t) String() string {
 	}
 }
 
+// A structure that defines which triangle a symmetric matrix stores, or whether a triangular matrix is upper or lower.
 type SparseTriangle_t uint8
 
 const (
@@ -1649,6 +1708,7 @@ func (e SparseTriangle_t) String() string {
 	}
 }
 
+// Low-rank update algorithm selector
 type SparseUpdate_t int64
 
 const (
@@ -2437,7 +2497,7 @@ func (e Qos_class_t) String() string {
 	}
 }
 
-// @enum quadrature_integrator @abstract Integrators @constant QUADRATURE_INTEGRATE_QNG Simple non-adaptive automatic integrator using Gauss-Kronrod-Patterson quadrature coefficients. Evaluates 21, or 43, or 87 points in the interval until the requested accuracy is reached. No workspace is necessary for this integrator. @constant QUADRATURE_INTEGRATE_QAG Simple globally adaptive integrator. Allows selection of the number of Gauss-Kronrod points used in each subinterval, and the max number of subintervals. @constant QUADRATURE_INTEGRATE_QAGS Global adaptive quadrature based on 21-point or 15-point (if at least one bound is infinite) Gauss–Kronrod quadrature within each subinterval, with acceleration by Peter Wynn's epsilon algorithm. If at least one of the interval bounds is infinite, this is equivalent to the QUADPACK QAGI routine. Otherwise, this is equivalent to the QUADPACK QAGS routine.
+// Constants that specify integration algorithms.
 type Quadrature_integrator int64
 
 const (
@@ -2459,7 +2519,7 @@ func (e Quadrature_integrator) String() string {
 	}
 }
 
-// @enum quadrature_status @abstract Quadrature return status @discussion Success is 0, and errors have a negative value. @constant QUADRATURE_SUCCESS Success. @constant QUADRATURE_ERROR Generic error. @constant QUADRATURE_INVALID_ARG_ERROR Invalid argument. @constant QUADRATURE_ALLOC_ERROR Memory allocation failed. @constant QUADRATURE_INTERNAL_ERROR This is a bug in the Quadrature code, please file a bug report. @constant QUADRATURE_INTEGRATE_MAX_EVAL_ERROR The requested accuracy limit could not be reached with the allowed number of evals/subdivisions. @constant QUADRATURE_INTEGRATE_BAD_BEHAVIOUR_ERROR Extremely bad integrand behaviour, or excessive roundoff error occurs at some points of the integration interval.
+// Constants that indicate the status of a quadrature operation.
 type Quadrature_status int64
 
 const (
@@ -2493,7 +2553,7 @@ func (e Quadrature_status) String() string {
 	}
 }
 
-// @abstract The matrix property type
+// The matrix property type.
 type Sparse_matrix_property int64
 
 const (
@@ -2518,7 +2578,7 @@ func (e Sparse_matrix_property) String() string {
 	}
 }
 
-// @abstract The norm specifier @constant SPARSE_NORM_ONE Matrix element wise: sum over i,j ( | A[i,j] | ) Matrix operator    : max over j ( sum over i ( | A[i,j] | ) Vector element wise: sum over i ( | x[i] | ) @constant SPARSE_NORM_TWO Matrix element wise: sqrt( sum over i,j (A[i,j])^2 ) Matrix operator    : Largest singular value of matrix, note that the operator SPARSE_NORM_TWO is significantly more expensive than other norm operations. Vector element wise: sqrt( sum over i (x[i])^2 ) @constant SPARSE_NORM_INF Matrix element wise: max over i,j ( | A[i,j] | ) Matrix operator    : max over i ( sum over j ( | A[i,j] | ) Vector element wise: max over i ( | x[i] | ) @constant SPARSE_NORM_R1 Matrix element wise: sum over j ( sqrt ( sum over i ( A[i,j]^2 ) ) ) Matrix operator    : Not supported. Undefined Vector element wise: Not supported. Undefined
+// The norm specifier.
 type Sparse_norm int64
 
 const (
@@ -2543,7 +2603,7 @@ func (e Sparse_norm) String() string {
 	}
 }
 
-// @abstract The type reflecting the status of an operations. @constant SPARSE_SUCCESS Operation was a success @constant SPARSE_ILLEGAL_PARAMETER Operation was not completed because one or more of the arguments had an illegal value. @constant SPARSE_CANNOT_SET_PROPERTY Matrix properties can only be set before any values are inserted into the matrix.  This error occurs if that order is not repsected. @constant SPARSE_SYSTEM_ERROR An internal error has occured, such as non enough memory.
+// The type reflecting the status of an operations.
 type Sparse_status int64
 
 const (
@@ -2568,7 +2628,7 @@ func (e Sparse_status) String() string {
 	}
 }
 
-// @typedef    vImageARGBType @abstract   An encoding of an image format type to be used with RGB <-> Y'CbCr conversions in vImage/Conversions.h @discussion These formats enumerate different vImage ARGB pixel formats.
+// Constants that describe the encoding of an ARGB image for conversions between RGB and YpCbCr.
 type VImageARGBType int64
 
 const (
@@ -2590,6 +2650,7 @@ func (e VImageARGBType) String() string {
 	}
 }
 
+// Constants that indicate the use for a multidimensional lookup table.
 type VImageMDTableUsageHint int64
 
 const (
@@ -2608,7 +2669,7 @@ func (e VImageMDTableUsageHint) String() string {
 	}
 }
 
-// @typedef    vImageYpCbCrType @abstract   An encoding of an image format type to be used with RGB <-> Y'CbCr conversions in vImage/Conversions.h @discussion These formats enumerate different vImage/CoreVideo Y'CbCr pixel formats. @seealso    CVPixelBuffer OSTypes in CVPixelBuffer.h
+// Constants that describe the encoding of a YpCbCr image for conversions between RGB and YpCbCr.
 type VImageYpCbCrType int64
 
 const (
@@ -2657,6 +2718,7 @@ func (e VImageYpCbCrType) String() string {
 	}
 }
 
+// Constants that represent different interpolation methods.
 type VImage_InterpolationMethod int64
 
 const (

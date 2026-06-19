@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a normalized point in an image, along with an identifier label and a confidence value.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnrecognizedpoint
 type VNRecognizedPoint struct {
 	VNDetectedPoint

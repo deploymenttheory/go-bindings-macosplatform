@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for effects that you can apply to a symbol-based image.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymboleffect
 type NSSymbolEffect struct {
 	foundation.NSObject

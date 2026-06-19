@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A closed polygon overlay.
+//
 // Polygon wraps [raw.MKPolygon] with a fluent Go API.
 type Polygon struct {
 	inner *raw.MKPolygon
@@ -37,12 +39,16 @@ func NewPolygon() *Polygon {
 	return &Polygon{inner: raw.MKPolygonFromID(_id)}
 }
 
+// The title of the shape annotation.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Polygon) WithTitle(title string) *Polygon {
 	x.inner.MKMultiPoint.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The subtitle of the shape annotation.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *Polygon) WithSubtitle(subtitle string) *Polygon {
 	x.inner.MKMultiPoint.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The values for the attachment characteristics of attributed strings and related objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextattachment
 type NSTextAttachment struct {
 	foundation.NSObject
@@ -51,6 +53,7 @@ func NSTextAttachmentFromID(id objc.ID) *NSTextAttachment {
 	return o
 }
 
+// Creates a text attachment object with the specified data.
 func (o *NSTextAttachment) InitWithDataOfType(contentData *foundation.NSData, uti *foundation.NSString) *NSTextAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentSelInitWithDataOfType, contentData.Ptr(), uti.Ptr())
 	if _ret != 0 {
@@ -59,6 +62,7 @@ func (o *NSTextAttachment) InitWithDataOfType(contentData *foundation.NSData, ut
 	return NSTextAttachmentFromID(_ret)
 }
 
+// Creates a text attachment object to contain the specified file wrapper.
 func (o *NSTextAttachment) InitWithFileWrapper(fileWrapper *foundation.NSFileWrapper) *NSTextAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentSelInitWithFileWrapper, fileWrapper.Ptr())
 	if _ret != 0 {
@@ -67,11 +71,13 @@ func (o *NSTextAttachment) InitWithFileWrapper(fileWrapper *foundation.NSFileWra
 	return NSTextAttachmentFromID(_ret)
 }
 
+// Returns the text attachment view provider class, if any, for the file type you specify.
 func NSTextAttachmentTextAttachmentViewProviderClassForFileType(fileType *foundation.NSString) objc.Class {
 	_ret := objc.Send[objc.Class](objc.ID(_clsNSTextAttachment), _nSTextAttachmentSelTextAttachmentViewProviderClassForFileType, fileType.Ptr())
 	return _ret
 }
 
+// Registers a specific file type with the attachment view provider.
 func NSTextAttachmentRegisterTextAttachmentViewProviderClassForFileType(textAttachmentViewProviderClass objc.Class, fileType *foundation.NSString) {
 	objc.ID(_clsNSTextAttachment).Send(_nSTextAttachmentSelRegisterTextAttachmentViewProviderClassForFileType, textAttachmentViewProviderClass, fileType.Ptr())
 }

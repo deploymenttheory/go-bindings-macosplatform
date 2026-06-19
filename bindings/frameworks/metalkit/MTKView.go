@@ -16,6 +16,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specialized view that creates, configures, and displays Metal objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalkit/mtkview
 type MTKView struct {
 	appkit.NSView
@@ -85,7 +87,7 @@ func MTKViewFromID(id objc.ID) *MTKView {
 	return o
 }
 
-// @method initWithFrame:device @abstract Initalize the view with a frame and device @param frameRect The frame rectangle for the created view object. @param device The MTLDevice to be used by the view to create Metal objects
+// Initializes a view with the specified frame rectangle and Metal device.
 func (o *MTKView) InitWithFrameDevice(frameRect corefoundation.CGRect, device metal.MTLDevice) *MTKView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKViewSelInitWithFrameDevice, frameRect, device)
 	if _ret != 0 {
@@ -94,7 +96,7 @@ func (o *MTKView) InitWithFrameDevice(frameRect corefoundation.CGRect, device me
 	return MTKViewFromID(_ret)
 }
 
-// @method initWithCoder: @abstract Returns a view initalized from data in a given unarchiver @param coder An unarchiver object
+// Initializes a view from data in a given unarchiver.
 func (o *MTKView) InitWithCoder(coder *foundation.NSCoder) *MTKView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKViewSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -103,12 +105,12 @@ func (o *MTKView) InitWithCoder(coder *foundation.NSCoder) *MTKView {
 	return MTKViewFromID(_ret)
 }
 
-// @method releaseDrawables @abstract Release the depthStencilTexture and multisampleColorTexture @discussion Can be called by the app to release the textures in order to conserve memory when it goes into the background.   The view will recreate multisampleColorTexture or depthStencilTexture upon the next access of the respective properties.  Both multisampleColorTexture and depthStencilTexture will be recreated in the access to currentRenderPassDescriptor.
+// Releases the depthStencilTexture and multisampleColorTexture objects.
 func (o *MTKView) ReleaseDrawables() {
 	o.Ptr().Send(_mTKViewSelReleaseDrawables)
 }
 
-// @method draw @abstract Manually ask the view to draw new contents. This causes the view to call either the drawInMTKView (delegate) or drawRect (subclass) method. @discussion Manually ask the view to draw new contents. This causes the view to call either the drawInMTKView (delegate) or drawRect (subclass) method. This should be used when the view's paused proprety is set to true and enableSetNeedsDisplay is set to false.
+// Redraws the view’s contents immediately.
 func (o *MTKView) Draw() {
 	o.Ptr().Send(_mTKViewSelDraw)
 }

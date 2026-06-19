@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that displays a button either to trigger payments through Apple Pay or to prompt the user to set up a card.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentbutton
 type PKPaymentButton struct {
 	appkit.NSButton
@@ -33,6 +35,7 @@ func PKPaymentButtonFromID(id objc.ID) *PKPaymentButton {
 	return o
 }
 
+// Creates a new payment button with the specified type and style.
 func PKPaymentButtonButtonWithTypeStyle(buttonType PKPaymentButtonType, buttonStyle PKPaymentButtonStyle) *PKPaymentButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPKPaymentButton), _pKPaymentButtonSelButtonWithTypeStyle, buttonType, buttonStyle)
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func PKPaymentButtonButtonWithTypeStyle(buttonType PKPaymentButtonType, buttonSt
 	return PKPaymentButtonFromID(_ret)
 }
 
+// Creates a new payment button with the specified type and style.
 func (o *PKPaymentButton) InitWithPaymentButtonTypePaymentButtonStyle(type_ PKPaymentButtonType, style PKPaymentButtonStyle) *PKPaymentButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentButtonSelInitWithPaymentButtonTypePaymentButtonStyle, type_, style)
 	if _ret != 0 {

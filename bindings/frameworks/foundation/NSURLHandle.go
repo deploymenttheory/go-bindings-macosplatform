@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that accesses and manages resource data indicated by a URL.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlhandle
 // Deprecated: since macOS 10.4.
 type NSURLHandle struct {
@@ -53,23 +55,27 @@ func NSURLHandleFromID(id objc.ID) *NSURLHandle {
 	return o
 }
 
+// Registers a subclass of NSURLHandle as an available subclass for handling URLs
 // Deprecated: since macOS 10.4.
 func NSURLHandleRegisterURLHandleClass(anURLHandleSubclass objc.Class) {
 	objc.ID(_clsNSURLHandle).Send(_nSURLHandleSelRegisterURLHandleClass, anURLHandleSubclass)
 }
 
+// Returns the class of the URL handle that will be used for a specified URL.
 // Deprecated: since macOS 10.4.
 func NSURLHandleURLHandleClassForURL(anURL *NSURL) objc.Class {
 	_ret := objc.Send[objc.Class](objc.ID(_clsNSURLHandle), _nSURLHandleSelURLHandleClassForURL, anURL.Ptr())
 	return _ret
 }
 
+// Returns the status of the receiver.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) Status() NSURLHandleStatus {
 	_ret := objc.Send[NSURLHandleStatus](o.Ptr(), _nSURLHandleSelStatus)
 	return _ret
 }
 
+// Returns a string describing the reason a load failed.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) FailureReason() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLHandleSelFailureReason)
@@ -79,26 +85,31 @@ func (o *NSURLHandle) FailureReason() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Adds a client of the URL handle.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) AddClient(client NSURLHandleClient) {
 	o.Ptr().Send(_nSURLHandleSelAddClient, client)
 }
 
+// Removes client as an NSURLHandleClient of the receiver.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) RemoveClient(client NSURLHandleClient) {
 	o.Ptr().Send(_nSURLHandleSelRemoveClient, client)
 }
 
+// Loads the receiver’s data in the background.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) LoadInBackground() {
 	o.Ptr().Send(_nSURLHandleSelLoadInBackground)
 }
 
+// Called to cancel a load currently in progress.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) CancelLoadInBackground() {
 	o.Ptr().Send(_nSURLHandleSelCancelLoadInBackground)
 }
 
+// Returns the resource data managed by the receiver, loading it if necessary.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) ResourceData() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLHandleSelResourceData)
@@ -108,6 +119,7 @@ func (o *NSURLHandle) ResourceData() *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Immediately returns the currently available resource data managed by the URL handle.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) AvailableResourceData() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLHandleSelAvailableResourceData)
@@ -117,33 +129,39 @@ func (o *NSURLHandle) AvailableResourceData() *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Returns the expected length of the resource data if it is provided by the server.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) ExpectedResourceDataSize() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSURLHandleSelExpectedResourceDataSize)
 	return _ret
 }
 
+// Flushes any cached data for the URL served by this URL handle.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) FlushCachedData() {
 	o.Ptr().Send(_nSURLHandleSelFlushCachedData)
 }
 
+// Called when a background load fails.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) BackgroundLoadDidFailWithReason(reason *NSString) {
 	o.Ptr().Send(_nSURLHandleSelBackgroundLoadDidFailWithReason, reason.Ptr())
 }
 
+// Appends new data to the receiver’s resource data.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) DidLoadBytesLoadComplete(newBytes *NSData, yorn bool) {
 	o.Ptr().Send(_nSURLHandleSelDidLoadBytesLoadComplete, newBytes.Ptr(), yorn)
 }
 
+// Returns whether a URL handle can be initialized with a given URL.
 // Deprecated: since macOS 10.4.
 func NSURLHandleCanInitWithURL(anURL *NSURL) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSURLHandle), _nSURLHandleSelCanInitWithURL, anURL.Ptr())
 	return _ret
 }
 
+// Returns the URL handle from the cache that has serviced the specified URL or another identical URL.
 // Deprecated: since macOS 10.4.
 func NSURLHandleCachedHandleForURL(anURL *NSURL) *NSURLHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLHandle), _nSURLHandleSelCachedHandleForURL, anURL.Ptr())
@@ -153,36 +171,42 @@ func NSURLHandleCachedHandleForURL(anURL *NSURL) *NSURLHandle {
 	return NSURLHandleFromID(_ret)
 }
 
+// Initializes a newly created URL handle with the specified URL.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) InitWithURLCached(anURL *NSURL, willCache bool) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLHandleSelInitWithURLCached, anURL.Ptr(), willCache)
 	return _ret
 }
 
+// Returns the property for the specified key.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) PropertyForKey(propertyKey *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLHandleSelPropertyForKey, propertyKey.Ptr())
 	return _ret
 }
 
+// Returns the property for the specified key only if the value is already available; that is, the client doesn’t need to do any work.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) PropertyForKeyIfAvailable(propertyKey *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLHandleSelPropertyForKeyIfAvailable, propertyKey.Ptr())
 	return _ret
 }
 
+// Sets the property of the receiver’s resource for a specified key to the specified value.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) WritePropertyForKey(propertyValue objc.ID, propertyKey *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLHandleSelWritePropertyForKey, propertyValue, propertyKey.Ptr())
 	return _ret
 }
 
+// Attempts to write a specified set of data to the location specified by the receiver’s URL.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) WriteData(data *NSData) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLHandleSelWriteData, data.Ptr())
 	return _ret
 }
 
+// Loads the receiver’s data synchronously.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) LoadInForeground() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLHandleSelLoadInForeground)
@@ -192,11 +216,13 @@ func (o *NSURLHandle) LoadInForeground() *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Called when a background load begins.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) BeginLoadInBackground() {
 	o.Ptr().Send(_nSURLHandleSelBeginLoadInBackground)
 }
 
+// Halts any background loading.
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) EndLoadInBackground() {
 	o.Ptr().Send(_nSURLHandleSelEndLoadInBackground)

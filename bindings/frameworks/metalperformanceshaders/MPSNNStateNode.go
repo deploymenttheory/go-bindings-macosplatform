@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A placeholder node denoting the position in the graph of a state object.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnstatenode
 type MPSNNStateNode struct {
 	foundation.NSObject

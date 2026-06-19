@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The result of a request to fetch persistent CloudKit container events.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventresult
 type NSPersistentCloudKitContainerEventResult struct {
 	NSPersistentStoreResult

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of an acceleration structure that contains geometry primitives.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlprimitiveaccelerationstructuredescriptor
 type MTLPrimitiveAccelerationStructureDescriptor struct {
 	MTLAccelerationStructureDescriptor
@@ -42,6 +44,7 @@ func MTLPrimitiveAccelerationStructureDescriptorFromID(id objc.ID) *MTLPrimitive
 	return o
 }
 
+// Creates a new primitive descriptor.
 func MTLPrimitiveAccelerationStructureDescriptorDescriptor() *MTLPrimitiveAccelerationStructureDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLPrimitiveAccelerationStructureDescriptor), _mTLPrimitiveAccelerationStructureDescriptorSelDescriptor)
 	if _ret != 0 {

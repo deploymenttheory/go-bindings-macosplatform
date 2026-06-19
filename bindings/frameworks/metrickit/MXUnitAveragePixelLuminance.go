@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A unit of measure of pixel luminosity on an OLED display.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxunitaveragepixelluminance
 type MXUnitAveragePixelLuminance struct {
 	foundation.NSDimension

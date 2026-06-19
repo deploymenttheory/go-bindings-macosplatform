@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that represents data that doesn’t typically change over time.
+//
 // CharacteristicType wraps [raw.HKCharacteristicType] with a fluent Go API.
 type CharacteristicType struct {
 	inner *raw.HKCharacteristicType

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of information for a subscriber’s account.
+//
 // VSAccountMetadata wraps [raw.VSAccountMetadata] with a fluent Go API.
 type VSAccountMetadata struct {
 	inner *raw.VSAccountMetadata

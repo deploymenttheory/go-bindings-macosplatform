@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A request to create, delete, change metadata for, or edit the content of a Photos asset, for use in a photo library change block.
+//
 // AssetChangeRequest wraps [raw.PHAssetChangeRequest] with a fluent Go API.
 type AssetChangeRequest struct {
 	inner *raw.PHAssetChangeRequest
@@ -37,30 +39,40 @@ func NewAssetChangeRequest() *AssetChangeRequest {
 	return &AssetChangeRequest{inner: raw.PHAssetChangeRequestFromID(_id)}
 }
 
+// The date and time at which the asset claims to have been originally created.
+//
 // WithCreationDate sets the creationDate property and returns the receiver for chaining.
 func (x *AssetChangeRequest) WithCreationDate(creationDate *foundation.NSDate) *AssetChangeRequest {
 	x.inner.SetCreationDate(creationDate)
 	return x
 }
 
+// A Boolean value that indicates whether the asset is marked as one of the user’s favorites.
+//
 // WithFavorite sets the favorite property and returns the receiver for chaining.
 func (x *AssetChangeRequest) WithFavorite(favorite bool) *AssetChangeRequest {
 	x.inner.SetFavorite(favorite)
 	return x
 }
 
+// A Boolean value that indicates whether the asset is hidden in collections.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *AssetChangeRequest) WithHidden(hidden bool) *AssetChangeRequest {
 	x.inner.SetHidden(hidden)
 	return x
 }
 
+// The output of an asset content editing session.
+//
 // WithContentEditingOutput sets the contentEditingOutput property and returns the receiver for chaining.
 func (x *AssetChangeRequest) WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetChangeRequest {
 	x.inner.SetContentEditingOutput(contentEditingOutput.Unwrap())
 	return x
 }
 
+// Request to revert any edits made to the asset’s content.
+//
 // RevertAssetContentToOriginal calls the underlying RevertAssetContentToOriginal.
 func (x *AssetChangeRequest) RevertAssetContentToOriginal() {
 	x.inner.RevertAssetContentToOriginal()

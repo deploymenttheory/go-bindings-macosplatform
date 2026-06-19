@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mechanism for creating implicit animations and combining scene graph changes into atomic updates.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scntransaction
 type SCNTransaction struct {
 	foundation.NSObject
@@ -45,31 +47,38 @@ func SCNTransactionFromID(id objc.ID) *SCNTransaction {
 	return o
 }
 
+// Begins a new transaction for the current thread.
 func SCNTransactionBegin() {
 	objc.ID(_clsSCNTransaction).Send(_sCNTransactionSelBegin)
 }
 
+// Commits all changes made during the current transaction.
 func SCNTransactionCommit() {
 	objc.ID(_clsSCNTransaction).Send(_sCNTransactionSelCommit)
 }
 
+// Applies all changes from the current automatic transaction.
 func SCNTransactionFlush() {
 	objc.ID(_clsSCNTransaction).Send(_sCNTransactionSelFlush)
 }
 
+// Attempts to acquire a recursive spinlock to ensure the validity of values you retrieve during the transaction.
 func SCNTransactionLock() {
 	objc.ID(_clsSCNTransaction).Send(_sCNTransactionSelLock)
 }
 
+// Relinquishes a previously acquired transaction lock.
 func SCNTransactionUnlock() {
 	objc.ID(_clsSCNTransaction).Send(_sCNTransactionSelUnlock)
 }
 
+// Returns the object previously associated with the current transaction using the specified key.
 func SCNTransactionValueForKey(key *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNTransaction), _sCNTransactionSelValueForKey, key.Ptr())
 	return _ret
 }
 
+// Associates an arbitrary object with the current transaction using the specified key.
 func SCNTransactionSetValueForKey(value objc.ID, key *foundation.NSString) {
 	objc.ID(_clsSCNTransaction).Send(_sCNTransactionSelSetValueForKey, value, key.Ptr())
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the response to a navigation request, and which you use to make navigation-related policy decisions.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wknavigationresponse
 type WKNavigationResponse struct {
 	foundation.NSObject

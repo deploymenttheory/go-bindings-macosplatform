@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a gradient max pooling filter.
+//
 // CNNPoolingMaxGradientNode wraps [raw.MPSCNNPoolingMaxGradientNode] with a fluent Go API.
 type CNNPoolingMaxGradientNode struct {
 	inner *raw.MPSCNNPoolingMaxGradientNode

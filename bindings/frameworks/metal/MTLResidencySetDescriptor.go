@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration that customizes the behavior for a residency set.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlresidencysetdescriptor
 type MTLResidencySetDescriptor struct {
 	foundation.NSObject

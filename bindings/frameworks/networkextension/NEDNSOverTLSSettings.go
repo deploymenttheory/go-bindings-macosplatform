@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The DNS resolver settings for a DNS-over-TLS server.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nednsovertlssettings
 type NEDNSOverTLSSettings struct {
 	NEDNSSettings

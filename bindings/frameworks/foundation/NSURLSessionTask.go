@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A task, like downloading a specific resource, performed in a URL session.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsessiontask
 type NSURLSessionTask struct {
 	NSObject

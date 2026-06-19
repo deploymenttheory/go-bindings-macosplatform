@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Activity information that is true or false, pass or fail, yes or no.
+//
 // Apple documentation: https://developer.apple.com/documentation/classkit/clsbinaryitem
 type CLSBinaryItem struct {
 	CLSActivityItem
@@ -33,7 +35,7 @@ func CLSBinaryItemFromID(id objc.ID) *CLSBinaryItem {
 	return o
 }
 
-// @abstract      Create an item that represents a binary value @param         title           Title of the CLSBinaryItem. @param         identifier      An identifier that is unique within its owning activity. @param         valueType       The type of binary value. Ex. pass or fail.
+// Initializes a new binary activity item of the given type.
 func (o *CLSBinaryItem) InitWithIdentifierTitleType(identifier *foundation.NSString, title *foundation.NSString, valueType CLSBinaryValueType) *CLSBinaryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSBinaryItemSelInitWithIdentifierTitleType, identifier.Ptr(), title.Ptr(), valueType)
 	if _ret != 0 {

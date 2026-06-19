@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A kernel for computing the solution of a linear system of equations using a triangular coefficient matrix.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixsolvetriangular
 type MPSMatrixSolveTriangular struct {
 	mpsmatrix.MPSMatrixBinaryKernel

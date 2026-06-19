@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains screenshot properties such as output width, height, and image quality specifications.
+//
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/scscreenshotconfiguration
 type SCScreenshotConfiguration struct {
 	foundation.NSObject
@@ -184,6 +186,9 @@ func (o *SCScreenshotConfiguration) SetFileURL(fileURL *foundation.NSURL) {
 
 // @abstract an array of UTTypes that corresponds to the file formats that are supported. ScreenCaptureKit can save the CGImage into heic, jpeg, and png
 func SCScreenshotConfigurationSupportedContentTypes() *foundation.NSArray[*uniformtypeidentifiers.UTType] {
-	_ret := objc.Send[*foundation.NSArray[*uniformtypeidentifiers.UTType]](objc.ID(_clsSCScreenshotConfiguration), _sCScreenshotConfigurationSelSupportedContentTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsSCScreenshotConfiguration), _sCScreenshotConfigurationSelSupportedContentTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*uniformtypeidentifiers.UTType](_ret)
 }

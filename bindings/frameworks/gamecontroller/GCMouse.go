@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a physical mouse connected to a device.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcmouse
 type GCMouse struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func GCMouseFromID(id objc.ID) *GCMouse {
 	return o
 }
 
+// Returns any mice that the user connects to the device.
 func GCMouseMice() *foundation.NSArray[*GCMouse] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGCMouse), _gCMouseSelMice)
 	if _ret != 0 {

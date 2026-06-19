@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of changes in the persistent history based on a context save or batch operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistenthistorytransaction
 type NSPersistentHistoryTransaction struct {
 	foundation.NSObject
@@ -42,6 +44,7 @@ func NSPersistentHistoryTransactionFromID(id objc.ID) *NSPersistentHistoryTransa
 	return o
 }
 
+// Requests an entity description using the provided context for the managed object type affected by the transaction.
 func NSPersistentHistoryTransactionEntityDescriptionWithContext(context_ *NSManagedObjectContext) *NSEntityDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryTransaction), _nSPersistentHistoryTransactionSelEntityDescriptionWithContext, context_.Ptr())
 	if _ret != 0 {
@@ -50,6 +53,7 @@ func NSPersistentHistoryTransactionEntityDescriptionWithContext(context_ *NSMana
 	return NSEntityDescriptionFromID(_ret)
 }
 
+// Obtains a notification for use in merging the transaction’s changes into a managed object context.
 func (o *NSPersistentHistoryTransaction) ObjectIDNotification() *foundation.NSNotification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryTransactionSelObjectIDNotification)
 	if _ret != 0 {
@@ -67,8 +71,11 @@ func NSPersistentHistoryTransactionEntityDescription() *NSEntityDescription {
 }
 
 func NSPersistentHistoryTransactionFetchRequest() *NSFetchRequest[objc.ID] {
-	_ret := objc.Send[*NSFetchRequest[objc.ID]](objc.ID(_clsNSPersistentHistoryTransaction), _nSPersistentHistoryTransactionSelFetchRequest)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryTransaction), _nSPersistentHistoryTransactionSelFetchRequest)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSFetchRequestFromID[objc.ID](_ret)
 }
 
 func (o *NSPersistentHistoryTransaction) Timestamp() *foundation.NSDate {

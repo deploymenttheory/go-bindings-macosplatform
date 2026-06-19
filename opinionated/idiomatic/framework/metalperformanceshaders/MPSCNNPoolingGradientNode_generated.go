@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a gradient pooling kernel.
+//
 // CNNPoolingGradientNode wraps [raw.MPSCNNPoolingGradientNode] with a fluent Go API.
 type CNNPoolingGradientNode struct {
 	inner *raw.MPSCNNPoolingGradientNode

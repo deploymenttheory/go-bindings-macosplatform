@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request to start an audio or video call with one or more users.
+//
 // StartCallIntent wraps [raw.INStartCallIntent] with a fluent Go API.
 type StartCallIntent struct {
 	inner *raw.INStartCallIntent
@@ -31,6 +33,8 @@ func StartCallIntentFromID(id objc.ID) *StartCallIntent {
 	return &StartCallIntent{inner: raw.INStartCallIntentFromID(id)}
 }
 
+// Creates a start call intent object with the specified parameters.
+//
 // NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability creates a new [StartCallIntent].
 func NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability(callRecordFilter *raw.INCallRecordFilter, callRecordToCallBack *raw.INCallRecord, audioRoute INCallAudioRoute, destinationType INCallDestinationType, contacts *foundation.NSArray[*raw.INPerson], callCapability INCallCapability) *StartCallIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INStartCallIntent")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestina
 	return &StartCallIntent{inner: raw.INStartCallIntentFromID(_id)}
 }
 
+// The intent’s display name.
+//
 // WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
 func (x *StartCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *StartCallIntent {
 	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))

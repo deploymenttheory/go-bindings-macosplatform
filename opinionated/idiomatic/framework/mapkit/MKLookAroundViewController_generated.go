@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that manages the presentation and display of a LookAround view.
+//
 // LookAroundViewController wraps [raw.MKLookAroundViewController] with a fluent Go API.
 type LookAroundViewController struct {
 	inner *raw.MKLookAroundViewController
@@ -30,6 +32,8 @@ func LookAroundViewControllerFromID(id objc.ID) *LookAroundViewController {
 	return &LookAroundViewController{inner: raw.MKLookAroundViewControllerFromID(id)}
 }
 
+// Creates a new LookAround view controller with the specified scene.
+//
 // NewLookAroundViewControllerWithScene creates a new [LookAroundViewController].
 func NewLookAroundViewControllerWithScene(scene *raw.MKLookAroundScene) *LookAroundViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLookAroundViewController")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewLookAroundViewControllerWithScene(scene *raw.MKLookAroundScene) *LookAro
 	return &LookAroundViewController{inner: raw.MKLookAroundViewControllerFromID(_id)}
 }
 
+// Creates a new LookAround view controller from the specified nib and bundle.
+//
 // NewLookAroundViewControllerWithNibNameBundle creates a new [LookAroundViewController].
 func NewLookAroundViewControllerWithNibNameBundle(nibNameOrNil string, nibBundleOrNil *foundation.NSBundle) *LookAroundViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLookAroundViewController")), objc.RegisterName("alloc"))
@@ -44,6 +50,8 @@ func NewLookAroundViewControllerWithNibNameBundle(nibNameOrNil string, nibBundle
 	return &LookAroundViewController{inner: raw.MKLookAroundViewControllerFromID(_id)}
 }
 
+// Creates a new LookAround view controller object from a coder object provided by a storyboard or nib file.
+//
 // NewLookAroundViewControllerWithCoder creates a new [LookAroundViewController].
 func NewLookAroundViewControllerWithCoder(coder *foundation.NSCoder) *LookAroundViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLookAroundViewController")), objc.RegisterName("alloc"))
@@ -51,36 +59,48 @@ func NewLookAroundViewControllerWithCoder(coder *foundation.NSCoder) *LookAround
 	return &LookAroundViewController{inner: raw.MKLookAroundViewControllerFromID(_id)}
 }
 
+// An object you provide to receive events related to the user’s interaction with the LookAround view controller.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *LookAroundViewController) WithDelegate(delegate raw.MKLookAroundViewControllerDelegate) *LookAroundViewController {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The LookAround scene.
+//
 // WithScene sets the scene property and returns the receiver for chaining.
 func (x *LookAroundViewController) WithScene(scene *LookAroundScene) *LookAroundViewController {
 	x.inner.SetScene(scene.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the map’s navigation controls are visible.
+//
 // WithNavigationEnabled sets the navigationEnabled property and returns the receiver for chaining.
 func (x *LookAroundViewController) WithNavigationEnabled(navigationEnabled bool) *LookAroundViewController {
 	x.inner.SetNavigationEnabled(navigationEnabled)
 	return x
 }
 
+// A Boolean value that indicates whether the map display road labels.
+//
 // WithShowsRoadLabels sets the showsRoadLabels property and returns the receiver for chaining.
 func (x *LookAroundViewController) WithShowsRoadLabels(showsRoadLabels bool) *LookAroundViewController {
 	x.inner.SetShowsRoadLabels(showsRoadLabels)
 	return x
 }
 
+// The filter used to determine the points of interest shown on the map.
+//
 // WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
 func (x *LookAroundViewController) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundViewController {
 	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
 	return x
 }
 
+// A value that indicates the badge’s position on the LookAround view.
+//
 // WithBadgePosition sets the badgePosition property and returns the receiver for chaining.
 func (x *LookAroundViewController) WithBadgePosition(badgePosition MKLookAroundBadgePosition) *LookAroundViewController {
 	x.inner.SetBadgePosition(raw.MKLookAroundBadgePosition(badgePosition))

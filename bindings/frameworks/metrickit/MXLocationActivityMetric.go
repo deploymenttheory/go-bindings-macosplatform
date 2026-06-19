@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing metrics about the use of location-tracking features of a device.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxlocationactivitymetric
 type MXLocationActivityMetric struct {
 	MXMetric
@@ -37,36 +39,54 @@ func MXLocationActivityMetricFromID(id objc.ID) *MXLocationActivityMetric {
 
 // @property      cumulativeBestAccuracyTime @abstract      Cumulative time spent acquiring location at kCLLocationAccuracyBest. @discussion    Dimensioned as NSUnitDuration.
 func (o *MXLocationActivityMetric) CumulativeBestAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXLocationActivityMetricSelCumulativeBestAccuracyTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXLocationActivityMetricSelCumulativeBestAccuracyTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }
 
 // @property      cumulativeBestAccuracyForNavigationTime @abstract      Cumulative time spent acquiring location at kCLLocationAccuracyBestForNavigation. @discussion    Dimensioned as NSUnitDuration.
 func (o *MXLocationActivityMetric) CumulativeBestAccuracyForNavigationTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXLocationActivityMetricSelCumulativeBestAccuracyForNavigationTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXLocationActivityMetricSelCumulativeBestAccuracyForNavigationTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }
 
 // @property      cumulativeNearestTenMetersAccuracyTime @abstract      Cumulative time spent acquiring location at kCLLocationAccuracyNearestTenMeters. @discussion    Dimensioned as NSUnitDuration.
 func (o *MXLocationActivityMetric) CumulativeNearestTenMetersAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXLocationActivityMetricSelCumulativeNearestTenMetersAccuracyTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXLocationActivityMetricSelCumulativeNearestTenMetersAccuracyTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }
 
 // @property      cumulativeHundredMetersAccuracyTime @abstract      Cumulative time spent acquiring location at kCLLocationAccuracyHundredMeters. @discussion    Dimensioned as NSUnitDuration.
 func (o *MXLocationActivityMetric) CumulativeHundredMetersAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXLocationActivityMetricSelCumulativeHundredMetersAccuracyTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXLocationActivityMetricSelCumulativeHundredMetersAccuracyTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }
 
 // @property      cumulativeKilometerAccuracyTime @abstract      Cumulative time spent acquiring location at kCLLocationAccuracyKilometer. @discussion    Dimensioned as NSUnitDuration.
 func (o *MXLocationActivityMetric) CumulativeKilometerAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXLocationActivityMetricSelCumulativeKilometerAccuracyTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXLocationActivityMetricSelCumulativeKilometerAccuracyTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }
 
 // @property      cumulativeThreeKilometersAccuracyTime @abstract      Cumulative time spent acquiring location at kCLLocationAccuracyThreeKilometers. @discussion    Dimensioned as NSUnitDuration.
 func (o *MXLocationActivityMetric) CumulativeThreeKilometersAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXLocationActivityMetricSelCumulativeThreeKilometersAccuracyTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXLocationActivityMetricSelCumulativeThreeKilometersAccuracyTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The concrete assertion request type for platform credentials.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialassertionrequest
 type ASAuthorizationPlatformPublicKeyCredentialAssertionRequest struct {
 	ASAuthorizationRequest

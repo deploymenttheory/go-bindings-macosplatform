@@ -151,6 +151,7 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
+// Codes for the errors that Shazam produces.
 type SHErrorCode int64
 
 const (

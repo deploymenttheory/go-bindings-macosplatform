@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A file that is attached to a sample in the HealthKit store.
+//
 // Attachment wraps [raw.HKAttachment] with a fluent Go API.
 type Attachment struct {
 	inner *raw.HKAttachment

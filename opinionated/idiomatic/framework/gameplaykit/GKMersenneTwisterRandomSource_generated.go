@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A deterministic pseudo-random source that generates random numbers based on a mersenne twister algorithm. This is a deterministic random source suitable for creating reliable gameplay mechanics. It is slightly slower than an Arc4 source, but more random, in that it has a longer period until repeating sequences. While deterministic, this is not a cryptographic random source. It is however suitable for obfuscation of gameplay data.
+// A basic random number generator implementing the Mersenne Twister algorithm, which is more random, but slower than the default random source.
 //
 // MersenneTwisterRandomSource wraps [raw.GKMersenneTwisterRandomSource] with a fluent Go API.
 type MersenneTwisterRandomSource struct {
@@ -37,7 +37,7 @@ func NewMersenneTwisterRandomSource() *MersenneTwisterRandomSource {
 	return &MersenneTwisterRandomSource{inner: raw.GKMersenneTwisterRandomSourceFromID(_id)}
 }
 
-// Initializes a linear congruential random source with bits the given 64 bit seed.
+// Initializes a random source with the specified seed value.
 //
 // NewMersenneTwisterRandomSourceWithSeed creates a new [MersenneTwisterRandomSource].
 func NewMersenneTwisterRandomSourceWithSeed(seed uint64) *MersenneTwisterRandomSource {
@@ -46,7 +46,7 @@ func NewMersenneTwisterRandomSourceWithSeed(seed uint64) *MersenneTwisterRandomS
 	return &MersenneTwisterRandomSource{inner: raw.GKMersenneTwisterRandomSourceFromID(_id)}
 }
 
-// The seed used to stir the mersenne twister random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
+// The seed value that determines the random source’s behavior.
 //
 // WithSeed sets the seed property and returns the receiver for chaining.
 func (x *MersenneTwisterRandomSource) WithSeed(seed uint64) *MersenneTwisterRandomSource {

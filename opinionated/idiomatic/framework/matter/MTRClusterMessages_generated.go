@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Messages This cluster provides an interface for passing messages to be presented by a device.
+//
 // MTRClusterMessages wraps [raw.MTRClusterMessages] with a fluent Go API.
 type MTRClusterMessages struct {
 	inner *raw.MTRClusterMessages

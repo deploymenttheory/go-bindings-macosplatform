@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specialized predicate for comparing expressions.
+//
 // ComparisonPredicate wraps [raw.NSComparisonPredicate] with a fluent Go API.
 type ComparisonPredicate struct {
 	inner *raw.NSComparisonPredicate
@@ -29,6 +31,8 @@ func ComparisonPredicateFromID(id objc.ID) *ComparisonPredicate {
 	return &ComparisonPredicate{inner: raw.NSComparisonPredicateFromID(id)}
 }
 
+// Creates a predicate to a specified type that you form by combining specified left and right expressions using a specified modifier and options.
+//
 // NewComparisonPredicateWithLeftExpressionRightExpressionModifierTypeOptions creates a new [ComparisonPredicate].
 func NewComparisonPredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs *raw.NSExpression, rhs *raw.NSExpression, modifier NSComparisonPredicateModifier, type_ NSPredicateOperatorType, options NSComparisonPredicateOptions) *ComparisonPredicate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSComparisonPredicate")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewComparisonPredicateWithLeftExpressionRightExpressionModifierTypeOptions(
 	return &ComparisonPredicate{inner: raw.NSComparisonPredicateFromID(_id)}
 }
 
+// Creates a predicate that you form by combining specified left and right expressions using a specified selector.
+//
 // NewComparisonPredicateWithLeftExpressionRightExpressionCustomSelector creates a new [ComparisonPredicate].
 func NewComparisonPredicateWithLeftExpressionRightExpressionCustomSelector(lhs *raw.NSExpression, rhs *raw.NSExpression, selector objc.SEL) *ComparisonPredicate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSComparisonPredicate")), objc.RegisterName("alloc"))
@@ -43,6 +49,8 @@ func NewComparisonPredicateWithLeftExpressionRightExpressionCustomSelector(lhs *
 	return &ComparisonPredicate{inner: raw.NSComparisonPredicateFromID(_id)}
 }
 
+// Creates a predicate by decoding from the coder you specify.
+//
 // NewComparisonPredicateWithCoder creates a new [ComparisonPredicate].
 func NewComparisonPredicateWithCoder(coder *raw.NSCoder) *ComparisonPredicate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSComparisonPredicate")), objc.RegisterName("alloc"))

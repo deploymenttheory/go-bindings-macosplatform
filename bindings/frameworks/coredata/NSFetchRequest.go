@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of search criteria used to retrieve data from a persistent store.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsfetchrequest
 type NSFetchRequest[ResultType purego.AnyObject] struct {
 	NSPersistentStoreRequest
@@ -70,6 +72,7 @@ func NSFetchRequestFromID[ResultType purego.AnyObject](id objc.ID) *NSFetchReque
 	return o
 }
 
+// Returns a fetch request configured with a given entity name.
 func NSFetchRequestFetchRequestWithEntityName(entityName *foundation.NSString) *NSFetchRequest[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFetchRequest), _nSFetchRequestSelFetchRequestWithEntityName, entityName.Ptr())
 	if _ret != 0 {
@@ -78,6 +81,7 @@ func NSFetchRequestFetchRequestWithEntityName(entityName *foundation.NSString) *
 	return NSFetchRequestFromID[objc.ID](_ret)
 }
 
+// Creates a new fetch request.
 func (o *NSFetchRequest[ResultType]) Init() *NSFetchRequest[ResultType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchRequestSelInit)
 	if _ret != 0 {
@@ -94,6 +98,7 @@ func (o *NSFetchRequest[ResultType]) InitWithEntityName(entityName *foundation.N
 	return NSFetchRequestFromID[ResultType](_ret)
 }
 
+// Executes the fetch request against the managed object context that is associated with the current queue.
 func (o *NSFetchRequest[ResultType]) Execute() (*foundation.NSArray[ResultType], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchRequestSelExecute, unsafe.Pointer(&_nsErr))
@@ -139,12 +144,15 @@ func (o *NSFetchRequest[ResultType]) SetPredicate(predicate *foundation.NSPredic
 }
 
 func (o *NSFetchRequest[ResultType]) SortDescriptors() *foundation.NSArray[*foundation.NSSortDescriptor] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSSortDescriptor]](o.Ptr(), _nSFetchRequestSelSortDescriptors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchRequestSelSortDescriptors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSSortDescriptor](_ret)
 }
 
 func (o *NSFetchRequest[ResultType]) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
-	o.Ptr().Send(_nSFetchRequestSelSetSortDescriptors, sortDescriptors)
+	o.Ptr().Send(_nSFetchRequestSelSetSortDescriptors, sortDescriptors.Ptr())
 }
 
 func (o *NSFetchRequest[ResultType]) FetchLimit() uint {
@@ -193,12 +201,15 @@ func (o *NSFetchRequest[ResultType]) SetReturnsObjectsAsFaults(returnsObjectsAsF
 }
 
 func (o *NSFetchRequest[ResultType]) RelationshipKeyPathsForPrefetching() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSFetchRequestSelRelationshipKeyPathsForPrefetching)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchRequestSelRelationshipKeyPathsForPrefetching)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSFetchRequest[ResultType]) SetRelationshipKeyPathsForPrefetching(relationshipKeyPathsForPrefetching *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSFetchRequestSelSetRelationshipKeyPathsForPrefetching, relationshipKeyPathsForPrefetching)
+	o.Ptr().Send(_nSFetchRequestSelSetRelationshipKeyPathsForPrefetching, relationshipKeyPathsForPrefetching.Ptr())
 }
 
 func (o *NSFetchRequest[ResultType]) IncludesPendingChanges() bool {
@@ -220,12 +231,15 @@ func (o *NSFetchRequest[ResultType]) SetReturnsDistinctResults(returnsDistinctRe
 }
 
 func (o *NSFetchRequest[ResultType]) PropertiesToFetch() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSFetchRequestSelPropertiesToFetch)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchRequestSelPropertiesToFetch)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSFetchRequest[ResultType]) SetPropertiesToFetch(propertiesToFetch *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSFetchRequestSelSetPropertiesToFetch, propertiesToFetch)
+	o.Ptr().Send(_nSFetchRequestSelSetPropertiesToFetch, propertiesToFetch.Ptr())
 }
 
 func (o *NSFetchRequest[ResultType]) FetchOffset() uint {
@@ -256,12 +270,15 @@ func (o *NSFetchRequest[ResultType]) SetShouldRefreshRefetchedObjects(shouldRefr
 }
 
 func (o *NSFetchRequest[ResultType]) PropertiesToGroupBy() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSFetchRequestSelPropertiesToGroupBy)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchRequestSelPropertiesToGroupBy)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSFetchRequest[ResultType]) SetPropertiesToGroupBy(propertiesToGroupBy *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSFetchRequestSelSetPropertiesToGroupBy, propertiesToGroupBy)
+	o.Ptr().Send(_nSFetchRequestSelSetPropertiesToGroupBy, propertiesToGroupBy.Ptr())
 }
 
 func (o *NSFetchRequest[ResultType]) HavingPredicate() *foundation.NSPredicate {

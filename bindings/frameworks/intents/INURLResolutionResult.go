@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for the types media destinations.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inurlresolutionresult
 type INURLResolutionResult struct {
 	INIntentResolutionResult
@@ -32,6 +34,7 @@ func INURLResolutionResultFromID(id objc.ID) *INURLResolutionResult {
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INURLResolutionResultSuccessWithResolvedURL(resolvedURL *foundation.NSURL) *INURLResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINURLResolutionResult), _iNURLResolutionResultSelSuccessWithResolvedURL, resolvedURL.Ptr())
 	if _ret != 0 {
@@ -40,14 +43,16 @@ func INURLResolutionResultSuccessWithResolvedURL(resolvedURL *foundation.NSURL) 
 	return INURLResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires the user to select from among the specified objects.
 func INURLResolutionResultDisambiguationWithURLsToDisambiguate(urlsToDisambiguate *foundation.NSArray[*foundation.NSURL]) *INURLResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINURLResolutionResult), _iNURLResolutionResultSelDisambiguationWithURLsToDisambiguate, urlsToDisambiguate)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINURLResolutionResult), _iNURLResolutionResultSelDisambiguationWithURLsToDisambiguate, urlsToDisambiguate.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return INURLResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INURLResolutionResultConfirmationRequiredWithURLToConfirm(urlToConfirm *foundation.NSURL) *INURLResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINURLResolutionResult), _iNURLResolutionResultSelConfirmationRequiredWithURLToConfirm, urlToConfirm.Ptr())
 	if _ret != 0 {

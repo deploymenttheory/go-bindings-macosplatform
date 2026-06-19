@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A descriptor you configure with curve geometry for building acceleration structures.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlaccelerationstructurecurvegeometrydescriptor
 type MTLAccelerationStructureCurveGeometryDescriptor struct {
 	MTLAccelerationStructureGeometryDescriptor
@@ -63,6 +65,7 @@ func MTLAccelerationStructureCurveGeometryDescriptorFromID(id objc.ID) *MTLAccel
 	return o
 }
 
+// Creates a curve geometry descriptor.
 func MTLAccelerationStructureCurveGeometryDescriptorDescriptor() *MTLAccelerationStructureCurveGeometryDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLAccelerationStructureCurveGeometryDescriptor), _mTLAccelerationStructureCurveGeometryDescriptorSelDescriptor)
 	if _ret != 0 {

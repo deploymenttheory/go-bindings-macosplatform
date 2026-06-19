@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of an intersection function that performs an intersection test.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlintersectionfunctiondescriptor
 type MTLIntersectionFunctionDescriptor struct {
 	MTLFunctionDescriptor

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that supports Cocoa’s reference-counted memory management system.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsautoreleasepool
 type NSAutoreleasePool struct {
 	NSObject
@@ -30,14 +32,17 @@ func NSAutoreleasePoolFromID(id objc.ID) *NSAutoreleasePool {
 	return o
 }
 
+// Adds a given object to the active autorelease pool in the current thread.
 func NSAutoreleasePoolAddObject(anObject objc.ID) {
 	objc.ID(_clsNSAutoreleasePool).Send(_nSAutoreleasePoolSelAddObject, anObject)
 }
 
+// Adds a given object to the receiver
 func (o *NSAutoreleasePool) AddObject(anObject objc.ID) {
 	o.Ptr().Send(_nSAutoreleasePoolSelAddObject, anObject)
 }
 
+// In a reference-counted environment, releases and pops the receiver; in a garbage-collected environment, triggers garbage collection if the memory allocated since the last collection is greater than the current threshold.
 func (o *NSAutoreleasePool) Drain() {
 	o.Ptr().Send(_nSAutoreleasePoolSelDrain)
 }

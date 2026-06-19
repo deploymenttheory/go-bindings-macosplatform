@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that stores a word embedding.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcembeddinglayer
 type MLCEmbeddingLayer struct {
 	MLCLayer
@@ -32,6 +34,7 @@ func MLCEmbeddingLayerFromID(id objc.ID) *MLCEmbeddingLayer {
 	return o
 }
 
+// Creates an embedding layer with the descriptor and word embedding weights tensor you specify.
 func MLCEmbeddingLayerLayerWithDescriptorWeights(descriptor *MLCEmbeddingDescriptor, weights *MLCTensor) *MLCEmbeddingLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCEmbeddingLayer), _mLCEmbeddingLayerSelLayerWithDescriptorWeights, descriptor.Ptr(), weights.Ptr())
 	if _ret != 0 {

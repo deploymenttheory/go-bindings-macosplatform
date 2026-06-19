@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract   A MPSNNFilterNode representing a MPSCNNBinaryConvolution kernel
+// A representation of a convolution kernel with binary weights and an input image using binary approximations.
 //
 // CNNBinaryConvolutionNode wraps [raw.MPSCNNBinaryConvolutionNode] with a fluent Go API.
 type CNNBinaryConvolutionNode struct {

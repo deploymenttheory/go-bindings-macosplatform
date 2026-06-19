@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Groups together properties that describe a shader function suitable for stitching.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4stitchedfunctiondescriptor
 type MTL4StitchedFunctionDescriptor struct {
 	MTL4FunctionDescriptor

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The sync engine state was updated, and you should persist it locally.
+//
 // SyncEngineStateUpdateEvent wraps [raw.CKSyncEngineStateUpdateEvent] with a fluent Go API.
 type SyncEngineStateUpdateEvent struct {
 	inner *raw.CKSyncEngineStateUpdateEvent

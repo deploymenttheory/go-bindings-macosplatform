@@ -144,21 +144,27 @@ func (o *MTRChannelClusterProgramStruct) SetDescriptionString(descriptionString 
 }
 
 func (o *MTRChannelClusterProgramStruct) AudioLanguages() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRChannelClusterProgramStructSelAudioLanguages)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramStructSelAudioLanguages)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRChannelClusterProgramStruct) SetAudioLanguages(audioLanguages *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRChannelClusterProgramStructSelSetAudioLanguages, audioLanguages)
+	o.Ptr().Send(_mTRChannelClusterProgramStructSelSetAudioLanguages, audioLanguages.Ptr())
 }
 
 func (o *MTRChannelClusterProgramStruct) Ratings() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRChannelClusterProgramStructSelRatings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramStructSelRatings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRChannelClusterProgramStruct) SetRatings(ratings *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRChannelClusterProgramStructSelSetRatings, ratings)
+	o.Ptr().Send(_mTRChannelClusterProgramStructSelSetRatings, ratings.Ptr())
 }
 
 func (o *MTRChannelClusterProgramStruct) ReleaseDate() *foundation.NSString {
@@ -210,19 +216,25 @@ func (o *MTRChannelClusterProgramStruct) SetSeriesInfo(seriesInfo *MTRChannelClu
 }
 
 func (o *MTRChannelClusterProgramStruct) CategoryList() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRChannelClusterProgramStructSelCategoryList)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramStructSelCategoryList)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRChannelClusterProgramStruct) SetCategoryList(categoryList *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRChannelClusterProgramStructSelSetCategoryList, categoryList)
+	o.Ptr().Send(_mTRChannelClusterProgramStructSelSetCategoryList, categoryList.Ptr())
 }
 
 func (o *MTRChannelClusterProgramStruct) CastList() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRChannelClusterProgramStructSelCastList)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramStructSelCastList)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRChannelClusterProgramStruct) SetCastList(castList *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRChannelClusterProgramStructSelSetCastList, castList)
+	o.Ptr().Send(_mTRChannelClusterProgramStructSelSetCastList, castList.Ptr())
 }

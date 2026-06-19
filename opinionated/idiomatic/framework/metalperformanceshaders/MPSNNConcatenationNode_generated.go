@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a the concatenation (in the feature channel dimension) of the results from one or more kernels
+// A representation of the results from one or more kernels.
 //
 // NNConcatenationNode wraps [raw.MPSNNConcatenationNode] with a fluent Go API.
 type NNConcatenationNode struct {

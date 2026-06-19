@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a change in the Photos library, and allows for requesting local identifiers that identify the changes for a library object.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phpersistentchange
 type PHPersistentChange struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func PHPersistentChangeFromID(id objc.ID) *PHPersistentChange {
 	return o
 }
 
+// Returns the change history that contains the local identifiers for object inserts, updates, and deletes.
 func (o *PHPersistentChange) ChangeDetailsForObjectTypeError(objectType PHObjectType) (*PHPersistentObjectChangeDetails, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPersistentChangeSelChangeDetailsForObjectTypeError, objectType, unsafe.Pointer(&_nsErr))

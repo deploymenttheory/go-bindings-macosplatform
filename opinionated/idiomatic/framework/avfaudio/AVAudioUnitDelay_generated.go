@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that implements a delay effect.
+//
 // AudioUnitDelay wraps [raw.AVAudioUnitDelay] with a fluent Go API.
 type AudioUnitDelay struct {
 	inner *raw.AVAudioUnitDelay
@@ -35,7 +37,7 @@ func NewAudioUnitDelay() *AudioUnitDelay {
 	return &AudioUnitDelay{inner: raw.AVAudioUnitDelayFromID(_id)}
 }
 
-// @property delayTime Time taken by the delayed input signal to reach the output @abstract Range:      0 -> 2 Default:    1 Unit:       Seconds
+// The time for the input signal to reach the output.
 //
 // WithDelayTime sets the delayTime property and returns the receiver for chaining.
 func (x *AudioUnitDelay) WithDelayTime(delayTime float64) *AudioUnitDelay {
@@ -43,7 +45,7 @@ func (x *AudioUnitDelay) WithDelayTime(delayTime float64) *AudioUnitDelay {
 	return x
 }
 
-// @property feedback @abstract Amount of the output signal fed back into the delay line Range:      -100 -> 100 Default:    50 Unit:       Percent
+// The amount of the output signal that feeds back into the delay line.
 //
 // WithFeedback sets the feedback property and returns the receiver for chaining.
 func (x *AudioUnitDelay) WithFeedback(feedback float32) *AudioUnitDelay {
@@ -51,7 +53,7 @@ func (x *AudioUnitDelay) WithFeedback(feedback float32) *AudioUnitDelay {
 	return x
 }
 
-// @property lowPassCutoff @abstract Cutoff frequency above which high frequency content is rolled off Range:      10 -> (samplerate/2) Default:    15000 Unit:       Hertz
+// The cutoff frequency above which high frequency content rolls off, in hertz.
 //
 // WithLowPassCutoff sets the lowPassCutoff property and returns the receiver for chaining.
 func (x *AudioUnitDelay) WithLowPassCutoff(lowPassCutoff float32) *AudioUnitDelay {
@@ -59,7 +61,7 @@ func (x *AudioUnitDelay) WithLowPassCutoff(lowPassCutoff float32) *AudioUnitDela
 	return x
 }
 
-// @property wetDryMix @abstract Blend of the wet and dry signals Range:      0 (all dry) -> 100 (all wet) Default:    100 Unit:       Percent
+// The blend of the wet and dry signals.
 //
 // WithWetDryMix sets the wetDryMix property and returns the receiver for chaining.
 func (x *AudioUnitDelay) WithWetDryMix(wetDryMix float32) *AudioUnitDelay {
@@ -67,7 +69,7 @@ func (x *AudioUnitDelay) WithWetDryMix(wetDryMix float32) *AudioUnitDelay {
 	return x
 }
 
-// @property bypass @abstract Bypass state of the audio unit.
+// The bypass state of the audio unit.
 //
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitDelay) WithBypass(bypass bool) *AudioUnitDelay {

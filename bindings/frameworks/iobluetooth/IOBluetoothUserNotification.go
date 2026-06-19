@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Represents a registered notification.
+//
 // Apple documentation: https://developer.apple.com/documentation/iobluetooth/iobluetoothusernotification
 type IOBluetoothUserNotification struct {
 	foundation.NSObject
@@ -30,6 +32,7 @@ func IOBluetoothUserNotificationFromID(id objc.ID) *IOBluetoothUserNotification 
 	return o
 }
 
+// Called to unregister the target notification.
 func (o *IOBluetoothUserNotification) Unregister() {
 	o.Ptr().Send(_iOBluetoothUserNotificationSelUnregister)
 }

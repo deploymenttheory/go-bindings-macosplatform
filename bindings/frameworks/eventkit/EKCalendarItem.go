@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract superclass for calendar events and reminders.
+//
 // Apple documentation: https://developer.apple.com/documentation/eventkit/ekcalendaritem
 type EKCalendarItem struct {
 	EKObject
@@ -58,20 +60,22 @@ func EKCalendarItemFromID(id objc.ID) *EKCalendarItem {
 	return o
 }
 
-// @method     addAlarm: @abstract   Adds an alarm to this item. @discussion This method add an alarm to an item. Be warned that some calendars can only allow a certain maximum number of alarms. When this item is saved, it will truncate any extra alarms from the array.
+// Adds an alarm to the receiver.
 func (o *EKCalendarItem) AddAlarm(alarm *EKAlarm) {
 	o.Ptr().Send(_eKCalendarItemSelAddAlarm, alarm.Ptr())
 }
 
-// @method     removeAlarm: @abstract   Removes an alarm from this item.
+// Removes an alarm from the calendar item.
 func (o *EKCalendarItem) RemoveAlarm(alarm *EKAlarm) {
 	o.Ptr().Send(_eKCalendarItemSelRemoveAlarm, alarm.Ptr())
 }
 
+// Adds a recurrence rule to the recurrence rule array.
 func (o *EKCalendarItem) AddRecurrenceRule(rule *EKRecurrenceRule) {
 	o.Ptr().Send(_eKCalendarItemSelAddRecurrenceRule, rule.Ptr())
 }
 
+// Removes a recurrence rule from the recurrence rule array.
 func (o *EKCalendarItem) RemoveRecurrenceRule(rule *EKRecurrenceRule) {
 	o.Ptr().Send(_eKCalendarItemSelRemoveRecurrenceRule, rule.Ptr())
 }

@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Node representing a MPSCNNUpsamplingBilinear kernel
+// A representation of a gradient bilinear spatial upsampling filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingbilineargradientnode
 type MPSCNNUpsamplingBilinearGradientNode struct {

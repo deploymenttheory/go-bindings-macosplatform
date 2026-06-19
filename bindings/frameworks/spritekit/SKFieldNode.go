@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A node that applies physics effects to nearby nodes.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skfieldnode
 type SKFieldNode struct {
 	SKNode
@@ -64,7 +66,7 @@ func SKFieldNodeFromID(id objc.ID) *SKFieldNode {
 	return o
 }
 
-// Slows an object proportionally to the object’s velocity. Use this to simulate effects such as friction from motion through the air.
+// Creates a field node that applies a force that resists the motion of physics bodies.
 func SKFieldNodeDragField() *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelDragField)
 	if _ret != 0 {
@@ -73,7 +75,7 @@ func SKFieldNodeDragField() *SKFieldNode {
 	return SKFieldNodeFromID(_ret)
 }
 
-// Applies a force tangential to the direction from the sample point to the field's position. The force will be CCW to the direction. Make the strength negative to apply force in the CW direction. Amount is proportional to distance from center and the object's mass. Use this to create effects such as tornadoes.
+// Creates a field node that applies a perpendicular force to physics bodies.
 func SKFieldNodeVortexField() *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelVortexField)
 	if _ret != 0 {
@@ -82,7 +84,7 @@ func SKFieldNodeVortexField() *SKFieldNode {
 	return SKFieldNodeFromID(_ret)
 }
 
-// Applies a force in the direction of the origin of the field in local space. To repel objects, use a negative strength. The force is proportional to the distance from the field origin. Varies with the mass of the object according to F = ma The field node's rotation property can be used to orient the gravity in a particular direction.
+// Creates a field node that accelerates physics bodies toward the field node.
 func SKFieldNodeRadialGravityField() *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelRadialGravityField)
 	if _ret != 0 {
@@ -91,7 +93,7 @@ func SKFieldNodeRadialGravityField() *SKFieldNode {
 	return SKFieldNodeFromID(_ret)
 }
 
-// Applies a force in the direction of the vector in the local space. To repel objects, use a negative strength. The force is the same everywhere in the field. Varies with the mass of the object according to F = ma The field node's rotation property can be used to orient the gravity in a particular direction. @param direction The direction the force is applied in the x,y plane. The length of the direction vector is multiplied by the field's strength property to get the final calculated force. All three components of the direction vector are used to calculate the length. @see direction
+// Creates a field node that accelerates physics bodies in a specific direction.
 func SKFieldNodeLinearGravityFieldWithVector(direction unsafe.Pointer) *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelLinearGravityFieldWithVector, direction)
 	if _ret != 0 {
@@ -100,7 +102,7 @@ func SKFieldNodeLinearGravityFieldWithVector(direction unsafe.Pointer) *SKFieldN
 	return SKFieldNodeFromID(_ret)
 }
 
-// Uses the supplied velocity vector for any object entering the field’s area of effect. Velocity fields override the effect of any other acceleration applied to the body. Velocity fields are typically used for such effects as advection, for example, a velocity field might describe the velocity on the surface of a river. An object placed in the river would then follow the river. @param direction The directed velocity that will be applied to the body. The z component is ignored. @see direction
+// Creates a field node that gives physics bodies a constant velocity.
 func SKFieldNodeVelocityFieldWithVector(direction unsafe.Pointer) *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelVelocityFieldWithVector, direction)
 	if _ret != 0 {
@@ -109,7 +111,7 @@ func SKFieldNodeVelocityFieldWithVector(direction unsafe.Pointer) *SKFieldNode {
 	return SKFieldNodeFromID(_ret)
 }
 
-// The supplied texture contains velocity values for any object entering the field’s area of effect. If no texture is supplied, the direction property is used instead. Velocity fields override the effect of any other acceleration applied to the body. Velocity fields are typically used for such effects as advection, for example, a velocity field might describe the velocity on the surface of a river. An object placed in the river would then follow the river. @param velocityTexture The R and G channels of the supplied texture become x and y components of velocity. B and A, if present in the SKTexture, are ignored. @see texture
+// Creates a field node that sets the velocity of physics bodies that enter the node’s area based on the pixel values of a texture.
 func SKFieldNodeVelocityFieldWithTexture(velocityTexture *SKTexture) *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelVelocityFieldWithTexture, velocityTexture.Ptr())
 	if _ret != 0 {
@@ -118,7 +120,7 @@ func SKFieldNodeVelocityFieldWithTexture(velocityTexture *SKTexture) *SKFieldNod
 	return SKFieldNodeFromID(_ret)
 }
 
-// A time varying differentiable Perlin simplex noise field. By default a smooth noise is calculated, and the field is time varying. Use this to simulate such effects as fireflies, or snow. To freeze the noise in place, set animationSpeed to 0.0. Mass is ignored. @param smoothness value of 0 means as noisy as possible, 1 means as smooth as possible @param speed is the general rate in Hz that any particular texel changes to a different value @see smoothness @see animationSpeed
+// Creates a field node that applies a randomized acceleration to physics bodies.
 func SKFieldNodeNoiseFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelNoiseFieldWithSmoothnessAnimationSpeed, smoothness, speed)
 	if _ret != 0 {
@@ -127,7 +129,7 @@ func SKFieldNodeNoiseFieldWithSmoothnessAnimationSpeed(smoothness float64, speed
 	return SKFieldNodeFromID(_ret)
 }
 
-// Just like Noise, except the strength of the noise is proportional to the velocity of the object in the field. @param smoothness value of 0 means as noisy as possible, 1 means as smooth as possible @param speed is the general rate in Hz that any particular texel changes to a different value @see smoothness @see animationSpeed
+// Creates a field node that applies a randomized acceleration to physics bodies.
 func SKFieldNodeTurbulenceFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelTurbulenceFieldWithSmoothnessAnimationSpeed, smoothness, speed)
 	if _ret != 0 {
@@ -136,7 +138,7 @@ func SKFieldNodeTurbulenceFieldWithSmoothnessAnimationSpeed(smoothness float64, 
 	return SKFieldNodeFromID(_ret)
 }
 
-// A Hooke’s law force - a force linearly proportional to distance from the center of the field. An object in this field will oscillate with a period proportional to the inverse of the mass. An example use is to keep objects confined to a particular region.
+// Creates a field node that applies a spring-like force that pulls physics bodies toward the field node.
 func SKFieldNodeSpringField() *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelSpringField)
 	if _ret != 0 {
@@ -145,7 +147,7 @@ func SKFieldNodeSpringField() *SKFieldNode {
 	return SKFieldNodeFromID(_ret)
 }
 
-// A force proportional to the charge on the object. A charge property has been added to SKPhysicsBodies to accomplish this. An example use of this field is to make objects behavior differently from one another when they enter a region, or to make an object's behavior different than its mass based behavior This field models the first part of the Lorentz equation, F = qE
+// Creates a field node that applies an electrical force proportional to the electrical charge of physics bodies.
 func SKFieldNodeElectricField() *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelElectricField)
 	if _ret != 0 {
@@ -154,7 +156,7 @@ func SKFieldNodeElectricField() *SKFieldNode {
 	return SKFieldNodeFromID(_ret)
 }
 
-// A force proportional to the charge on the object and the object’s velocity. A charge property has been added to SKPhysicsBodies to accomplish this. An example use of this field is to make objects behavior differently from one another when they enter a region, or to make an object's behavior different than its mass based behavior This field models the second part of the Lorentz equation, F = qvB
+// Creates a field node that applies a magnetic force based on the velocity and electrical charge of the physics bodies.
 func SKFieldNodeMagneticField() *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelMagneticField)
 	if _ret != 0 {
@@ -163,6 +165,7 @@ func SKFieldNodeMagneticField() *SKFieldNode {
 	return SKFieldNodeFromID(_ret)
 }
 
+// Creates a field node that calculates and applies a custom force to the physics body.
 func SKFieldNodeCustomFieldWithEvaluationBlock(block func(unsafe.Pointer, unsafe.Pointer, float32, float32, float64) unsafe.Pointer) *SKFieldNode {
 	var __block_block objc.Block
 	if block != nil {

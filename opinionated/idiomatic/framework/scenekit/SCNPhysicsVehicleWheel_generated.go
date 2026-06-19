@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The appearance and physical characteristics of an individual wheel associated with an physics vehicle behavior.
+//
 // PhysicsVehicleWheel wraps [raw.SCNPhysicsVehicleWheel] with a fluent Go API.
 type PhysicsVehicleWheel struct {
 	inner *raw.SCNPhysicsVehicleWheel
@@ -35,66 +37,88 @@ func NewPhysicsVehicleWheel() *PhysicsVehicleWheel {
 	return &PhysicsVehicleWheel{inner: raw.SCNPhysicsVehicleWheelFromID(_id)}
 }
 
+// The spring coefficient of the suspension between the vehicle and the wheel.
+//
 // WithSuspensionStiffness sets the suspensionStiffness property and returns the receiver for chaining.
 func (x *PhysicsVehicleWheel) WithSuspensionStiffness(suspensionStiffness float64) *PhysicsVehicleWheel {
 	x.inner.SetSuspensionStiffness(suspensionStiffness)
 	return x
 }
 
+// The coefficient that limits the speed of the suspension returning to its rest length when compressed.
+//
 // WithSuspensionCompression sets the suspensionCompression property and returns the receiver for chaining.
 func (x *PhysicsVehicleWheel) WithSuspensionCompression(suspensionCompression float64) *PhysicsVehicleWheel {
 	x.inner.SetSuspensionCompression(suspensionCompression)
 	return x
 }
 
+// The damping ratio that limits oscillation in the vehicle’s suspension.
+//
 // WithSuspensionDamping sets the suspensionDamping property and returns the receiver for chaining.
 func (x *PhysicsVehicleWheel) WithSuspensionDamping(suspensionDamping float64) *PhysicsVehicleWheel {
 	x.inner.SetSuspensionDamping(suspensionDamping)
 	return x
 }
 
+// The maximum distance that the wheel is allowed to move up or down relative to its connection point, in centimeters.
+//
 // WithMaximumSuspensionTravel sets the maximumSuspensionTravel property and returns the receiver for chaining.
 func (x *PhysicsVehicleWheel) WithMaximumSuspensionTravel(maximumSuspensionTravel float64) *PhysicsVehicleWheel {
 	x.inner.SetMaximumSuspensionTravel(maximumSuspensionTravel)
 	return x
 }
 
+// The traction between the wheel and any surface in contact with it.
+//
 // WithFrictionSlip sets the frictionSlip property and returns the receiver for chaining.
 func (x *PhysicsVehicleWheel) WithFrictionSlip(frictionSlip float64) *PhysicsVehicleWheel {
 	x.inner.SetFrictionSlip(frictionSlip)
 	return x
 }
 
+// The maximum force of the suspension between the vehicle and the wheel, in newtons.
+//
 // WithMaximumSuspensionForce sets the maximumSuspensionForce property and returns the receiver for chaining.
 func (x *PhysicsVehicleWheel) WithMaximumSuspensionForce(maximumSuspensionForce float64) *PhysicsVehicleWheel {
 	x.inner.SetMaximumSuspensionForce(maximumSuspensionForce)
 	return x
 }
 
+// The position of the wheel’s connection to the vehicle’s chassis.
+//
 // WithConnectionPosition sets the connectionPosition property and returns the receiver for chaining.
 func (x *PhysicsVehicleWheel) WithConnectionPosition(connectionPosition raw.SCNVector3) *PhysicsVehicleWheel {
 	x.inner.SetConnectionPosition(connectionPosition)
 	return x
 }
 
+// The direction of the axis that the wheel pivots around to steer the vehicle.
+//
 // WithSteeringAxis sets the steeringAxis property and returns the receiver for chaining.
 func (x *PhysicsVehicleWheel) WithSteeringAxis(steeringAxis raw.SCNVector3) *PhysicsVehicleWheel {
 	x.inner.SetSteeringAxis(steeringAxis)
 	return x
 }
 
+// The direction of the axis that the wheel spins around to move the vehicle.
+//
 // WithAxle sets the axle property and returns the receiver for chaining.
 func (x *PhysicsVehicleWheel) WithAxle(axle raw.SCNVector3) *PhysicsVehicleWheel {
 	x.inner.SetAxle(axle)
 	return x
 }
 
+// The radius of the wheel.
+//
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *PhysicsVehicleWheel) WithRadius(radius float64) *PhysicsVehicleWheel {
 	x.inner.SetRadius(radius)
 	return x
 }
 
+// The resting length of the suspension, in meters.
+//
 // WithSuspensionRestLength sets the suspensionRestLength property and returns the receiver for chaining.
 func (x *PhysicsVehicleWheel) WithSuspensionRestLength(suspensionRestLength float64) *PhysicsVehicleWheel {
 	x.inner.SetSuspensionRestLength(suspensionRestLength)

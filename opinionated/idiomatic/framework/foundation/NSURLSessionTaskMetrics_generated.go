@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object encapsulating the metrics for a session task.
+//
 // URLSessionTaskMetrics wraps [raw.NSURLSessionTaskMetrics] with a fluent Go API.
 type URLSessionTaskMetrics struct {
 	inner *raw.NSURLSessionTaskMetrics

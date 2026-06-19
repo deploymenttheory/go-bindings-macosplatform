@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of multipolyline shapes, each consisting of one or more connected line segments.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmultipolyline
 type MKMultiPolyline struct {
 	MKShape
@@ -31,6 +33,7 @@ func MKMultiPolylineFromID(id objc.ID) *MKMultiPolyline {
 	return o
 }
 
+// Creates a multipolyline object using the provided polylines.
 func (o *MKMultiPolyline) InitWithPolylines(polylines *foundation.NSArray[*MKPolyline]) *MKMultiPolyline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMultiPolylineSelInitWithPolylines, polylines.Ptr())
 	if _ret != 0 {

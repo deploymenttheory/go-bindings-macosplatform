@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of either a source or destination connection point in the audio engine.
+//
 // AudioConnectionPoint wraps [raw.AVAudioConnectionPoint] with a fluent Go API.
 type AudioConnectionPoint struct {
 	inner *raw.AVAudioConnectionPoint
@@ -29,7 +31,7 @@ func AudioConnectionPointFromID(id objc.ID) *AudioConnectionPoint {
 	return &AudioConnectionPoint{inner: raw.AVAudioConnectionPointFromID(id)}
 }
 
-// @method initWithNode:bus: @abstract Create a connection point object. @param node the source or destination node @param bus the output or input bus on the node @discussion If the node is nil, this method fails (returns nil).
+// Creates a connection point object.
 //
 // NewAudioConnectionPointWithNodeBus creates a new [AudioConnectionPoint].
 func NewAudioConnectionPointWithNodeBus(node *raw.AVAudioNode, bus uint) *AudioConnectionPoint {

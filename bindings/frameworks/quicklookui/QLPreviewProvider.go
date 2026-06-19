@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that you subclass to provide a data-based Quick Look preview extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/quicklookui/qlpreviewprovider
 type QLPreviewProvider struct {
 	foundation.NSObject

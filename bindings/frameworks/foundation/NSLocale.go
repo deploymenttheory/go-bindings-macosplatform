@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about linguistic, cultural, and technological conventions for use in formatting data for presentation.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nslocale
 type NSLocale struct {
 	NSObject
@@ -79,11 +81,13 @@ func NSLocaleFromID(id objc.ID) *NSLocale {
 	return o
 }
 
+// Returns the value of the component corresponding to the specified key.
 func (o *NSLocale) ObjectForKey(key *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLocaleSelObjectForKey, key.Ptr())
 	return _ret
 }
 
+// Returns the display name for the given locale component value.
 func (o *NSLocale) DisplayNameForKeyValue(key *NSString, value objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLocaleSelDisplayNameForKeyValue, key.Ptr(), value)
 	if _ret != 0 {
@@ -92,6 +96,7 @@ func (o *NSLocale) DisplayNameForKeyValue(key *NSString, value objc.ID) *NSStrin
 	return NSStringFromID(_ret)
 }
 
+// Initializes a locale using a given locale identifier.
 func (o *NSLocale) InitWithLocaleIdentifier(string_ *NSString) *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLocaleSelInitWithLocaleIdentifier, string_.Ptr())
 	if _ret != 0 {
@@ -100,6 +105,7 @@ func (o *NSLocale) InitWithLocaleIdentifier(string_ *NSString) *NSLocale {
 	return NSLocaleFromID(_ret)
 }
 
+// Returns a locale initialized from data in the given unarchiver.
 func (o *NSLocale) InitWithCoder(coder *NSCoder) *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLocaleSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -108,6 +114,7 @@ func (o *NSLocale) InitWithCoder(coder *NSCoder) *NSLocale {
 	return NSLocaleFromID(_ret)
 }
 
+// Returns the localized string for the specified locale identifier.
 func (o *NSLocale) LocalizedStringForLocaleIdentifier(localeIdentifier *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLocaleSelLocalizedStringForLocaleIdentifier, localeIdentifier.Ptr())
 	if _ret != 0 {
@@ -116,6 +123,7 @@ func (o *NSLocale) LocalizedStringForLocaleIdentifier(localeIdentifier *NSString
 	return NSStringFromID(_ret)
 }
 
+// Returns the localized string for the specified language code.
 func (o *NSLocale) LocalizedStringForLanguageCode(languageCode *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLocaleSelLocalizedStringForLanguageCode, languageCode.Ptr())
 	if _ret != 0 {
@@ -124,6 +132,7 @@ func (o *NSLocale) LocalizedStringForLanguageCode(languageCode *NSString) *NSStr
 	return NSStringFromID(_ret)
 }
 
+// Returns the localized string for a country or region code.
 func (o *NSLocale) LocalizedStringForCountryCode(countryCode *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLocaleSelLocalizedStringForCountryCode, countryCode.Ptr())
 	if _ret != 0 {
@@ -132,6 +141,7 @@ func (o *NSLocale) LocalizedStringForCountryCode(countryCode *NSString) *NSStrin
 	return NSStringFromID(_ret)
 }
 
+// Returns the localized string for the specified script code.
 func (o *NSLocale) LocalizedStringForScriptCode(scriptCode *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLocaleSelLocalizedStringForScriptCode, scriptCode.Ptr())
 	if _ret != 0 {
@@ -140,6 +150,7 @@ func (o *NSLocale) LocalizedStringForScriptCode(scriptCode *NSString) *NSString 
 	return NSStringFromID(_ret)
 }
 
+// Returns the localized string for the specified variant code.
 func (o *NSLocale) LocalizedStringForVariantCode(variantCode *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLocaleSelLocalizedStringForVariantCode, variantCode.Ptr())
 	if _ret != 0 {
@@ -148,6 +159,7 @@ func (o *NSLocale) LocalizedStringForVariantCode(variantCode *NSString) *NSStrin
 	return NSStringFromID(_ret)
 }
 
+// Returns the localized string for the specified calendar identifier.
 func (o *NSLocale) LocalizedStringForCalendarIdentifier(calendarIdentifier *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLocaleSelLocalizedStringForCalendarIdentifier, calendarIdentifier.Ptr())
 	if _ret != 0 {
@@ -156,6 +168,7 @@ func (o *NSLocale) LocalizedStringForCalendarIdentifier(calendarIdentifier *NSSt
 	return NSStringFromID(_ret)
 }
 
+// Returns the localized string for the specified collation identifier.
 func (o *NSLocale) LocalizedStringForCollationIdentifier(collationIdentifier *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLocaleSelLocalizedStringForCollationIdentifier, collationIdentifier.Ptr())
 	if _ret != 0 {
@@ -164,6 +177,7 @@ func (o *NSLocale) LocalizedStringForCollationIdentifier(collationIdentifier *NS
 	return NSStringFromID(_ret)
 }
 
+// Returns the localized string for the specified currency code.
 func (o *NSLocale) LocalizedStringForCurrencyCode(currencyCode *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLocaleSelLocalizedStringForCurrencyCode, currencyCode.Ptr())
 	if _ret != 0 {
@@ -172,6 +186,7 @@ func (o *NSLocale) LocalizedStringForCurrencyCode(currencyCode *NSString) *NSStr
 	return NSStringFromID(_ret)
 }
 
+// Returns the localized string for the specified collator identifier.
 func (o *NSLocale) LocalizedStringForCollatorIdentifier(collatorIdentifier *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLocaleSelLocalizedStringForCollatorIdentifier, collatorIdentifier.Ptr())
 	if _ret != 0 {
@@ -340,6 +355,7 @@ func (o *NSLocale) AlternateQuotationEndDelimiter() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a locale initialized using the given locale identifier.
 func NSLocaleLocaleWithLocaleIdentifier(ident *NSString) *NSLocale {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLocale), _nSLocaleSelLocaleWithLocaleIdentifier, ident.Ptr())
 	if _ret != 0 {
@@ -372,6 +388,7 @@ func NSLocaleSystemLocale() *NSLocale {
 	return NSLocaleFromID(_ret)
 }
 
+// Returns a dictionary that is the result of parsing a locale ID.
 func NSLocaleComponentsFromLocaleIdentifier(string_ *NSString) *NSDictionary[*NSString, *NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLocale), _nSLocaleSelComponentsFromLocaleIdentifier, string_.Ptr())
 	if _ret != 0 {
@@ -380,6 +397,7 @@ func NSLocaleComponentsFromLocaleIdentifier(string_ *NSString) *NSDictionary[*NS
 	return NSDictionaryFromID[*NSString, *NSString](_ret)
 }
 
+// Returns a locale identifier from the components specified in a given dictionary.
 func NSLocaleLocaleIdentifierFromComponents(dict *NSDictionary[*NSString, *NSString]) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLocale), _nSLocaleSelLocaleIdentifierFromComponents, dict.Ptr())
 	if _ret != 0 {
@@ -388,6 +406,7 @@ func NSLocaleLocaleIdentifierFromComponents(dict *NSDictionary[*NSString, *NSStr
 	return NSStringFromID(_ret)
 }
 
+// Returns the canonical identifier for a given locale identification string.
 func NSLocaleCanonicalLocaleIdentifierFromString(string_ *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLocale), _nSLocaleSelCanonicalLocaleIdentifierFromString, string_.Ptr())
 	if _ret != 0 {
@@ -396,6 +415,7 @@ func NSLocaleCanonicalLocaleIdentifierFromString(string_ *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a canonical language identifier by mapping an arbitrary locale identification string to the canonical identifier.
 func NSLocaleCanonicalLanguageIdentifierFromString(string_ *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLocale), _nSLocaleSelCanonicalLanguageIdentifierFromString, string_.Ptr())
 	if _ret != 0 {
@@ -404,6 +424,7 @@ func NSLocaleCanonicalLanguageIdentifierFromString(string_ *NSString) *NSString 
 	return NSStringFromID(_ret)
 }
 
+// Returns a locale identifier from a Windows locale code.
 func NSLocaleLocaleIdentifierFromWindowsLocaleCode(lcid uint32) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLocale), _nSLocaleSelLocaleIdentifierFromWindowsLocaleCode, lcid)
 	if _ret != 0 {
@@ -412,16 +433,19 @@ func NSLocaleLocaleIdentifierFromWindowsLocaleCode(lcid uint32) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a Window locale code from the locale identifier.
 func NSLocaleWindowsLocaleCodeFromLocaleIdentifier(localeIdentifier *NSString) uint32 {
 	_ret := objc.Send[uint32](objc.ID(_clsNSLocale), _nSLocaleSelWindowsLocaleCodeFromLocaleIdentifier, localeIdentifier.Ptr())
 	return _ret
 }
 
+// Returns the direction of the sequence of characters in a line for the specified ISO language code.
 func NSLocaleCharacterDirectionForLanguage(isoLangCode *NSString) NSLocaleLanguageDirection {
 	_ret := objc.Send[NSLocaleLanguageDirection](objc.ID(_clsNSLocale), _nSLocaleSelCharacterDirectionForLanguage, isoLangCode.Ptr())
 	return _ret
 }
 
+// Returns the direction of the sequence of lines for the specified ISO language code.
 func NSLocaleLineDirectionForLanguage(isoLangCode *NSString) NSLocaleLanguageDirection {
 	_ret := objc.Send[NSLocaleLanguageDirection](objc.ID(_clsNSLocale), _nSLocaleSelLineDirectionForLanguage, isoLangCode.Ptr())
 	return _ret

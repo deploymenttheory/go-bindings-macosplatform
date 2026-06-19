@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that names a specific XPC listener.
+//
 // XPCListenerEndpoint wraps [raw.NSXPCListenerEndpoint] with a fluent Go API.
 type XPCListenerEndpoint struct {
 	inner *raw.NSXPCListenerEndpoint

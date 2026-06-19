@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object of the CBUserIdentity class represents a user identity and is used for accessing the attributes of a user identity from an identity authority. The principal attributes of CBUserIdentity are a POSIX user identifier (UID), password, and certificate.
+//
 // Apple documentation: https://developer.apple.com/documentation/collaboration/cbuseridentity
 type CBUserIdentity struct {
 	CBIdentity
@@ -36,7 +38,7 @@ func CBUserIdentityFromID(id objc.ID) *CBUserIdentity {
 	return o
 }
 
-// Returns the user identity with the given POSIX UID in the specified identity authority. - Parameters: - uid: The UID of the identity you are searching for. - authority: The identity authority to search. - Returns: The user identity with the given UID in the specified identity authority, or `nil` if no identity exists with the specified UID.
+// Returns the user identity with the given POSIX UID in the specified identity authority.
 func CBUserIdentityUserIdentityWithPosixUIDAuthority(uid uint, authority *CBIdentityAuthority) *CBUserIdentity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBUserIdentity), _cBUserIdentitySelUserIdentityWithPosixUIDAuthority, uid, authority.Ptr())
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func CBUserIdentityUserIdentityWithPosixUIDAuthority(uid uint, authority *CBIden
 	return CBUserIdentityFromID(_ret)
 }
 
-// Returns a Boolean value indicating whether the given password is correct for the identity. - Parameters: - password: The password to test for the identity. - Returns: `TRUE` if the password is correct; otherwise, `FALSE`.
+// Returns a Boolean value indicating whether the given password is correct for the identity.
 func (o *CBUserIdentity) AuthenticateWithPassword(password *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cBUserIdentitySelAuthenticateWithPassword, password.Ptr())
 	return _ret

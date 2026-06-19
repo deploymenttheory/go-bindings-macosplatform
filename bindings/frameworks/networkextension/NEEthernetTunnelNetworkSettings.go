@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The network settings for an ethernet-based VPN tunnel.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neethernettunnelnetworksettings
 type NEEthernetTunnelNetworkSettings struct {
 	NEPacketTunnelNetworkSettings
@@ -31,7 +33,7 @@ func NEEthernetTunnelNetworkSettingsFromID(id objc.ID) *NEEthernetTunnelNetworkS
 	return o
 }
 
-// @method initWithTunnelRemoteAddress: @discussion This function initializes a newly-allocated NEEthernetTunnelNetworkSettings object with a given tunnel remote address and MAC address. @param address The address of the remote endpoint that is providing the tunnel service. @param ethernetAddress The ethernet address to be assigned to the tunnel interface. This string should be in the format "xx:xx:xx:xx:xx:xx", where each xx is a hexidecimal number between 0 and ff. @param mtu The MTU (Maxium Transmission Unit) in bytes to be assigned to the tunnel interface.
+// Creates a settings object with a given tunnel remote address and MAC address.
 func (o *NEEthernetTunnelNetworkSettings) InitWithTunnelRemoteAddressEthernetAddressMtu(address *foundation.NSString, ethernetAddress *foundation.NSString, mtu int) *NEEthernetTunnelNetworkSettings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEEthernetTunnelNetworkSettingsSelInitWithTunnelRemoteAddressEthernetAddressMtu, address.Ptr(), ethernetAddress.Ptr(), mtu)
 	if _ret != 0 {

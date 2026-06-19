@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A data sample from the device’s three accelerometers.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremotion/cmaccelerometerdata
 type CMAccelerometerData struct {
 	CMLogItem

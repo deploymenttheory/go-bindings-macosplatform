@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Contains the user’s payment credentials.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymenttoken
 type PKPaymentToken struct {
 	foundation.NSObject

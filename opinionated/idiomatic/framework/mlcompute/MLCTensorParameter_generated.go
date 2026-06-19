@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A tensor parameter object.
+//
 // TensorParameter wraps [raw.MLCTensorParameter] with a fluent Go API.
 type TensorParameter struct {
 	inner *raw.MLCTensorParameter
@@ -35,7 +37,7 @@ func NewTensorParameter() *TensorParameter {
 	return &TensorParameter{inner: raw.MLCTensorParameterFromID(_id)}
 }
 
-// @property   isUpdatable @abstract   Specifies whether this tensor parameter is updatable
+// A Boolean that indicates whether this tensor parameter is updatable.
 //
 // WithIsUpdatable sets the isUpdatable property and returns the receiver for chaining.
 func (x *TensorParameter) WithIsUpdatable(isUpdatable bool) *TensorParameter {

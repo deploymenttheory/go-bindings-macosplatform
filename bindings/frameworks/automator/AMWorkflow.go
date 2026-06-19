@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that lets you use an Automator workflow in your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/automator/amworkflow
 type AMWorkflow struct {
 	foundation.NSObject
@@ -46,6 +48,7 @@ func AMWorkflowFromID(id objc.ID) *AMWorkflow {
 	return o
 }
 
+// Loads and runs the specified workflow file.
 func AMWorkflowRunWorkflowAtURLWithInputError(fileURL *foundation.NSURL, input objc.ID) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsAMWorkflow), _aMWorkflowSelRunWorkflowAtURLWithInputError, fileURL.Ptr(), input, unsafe.Pointer(&_nsErr))
@@ -55,6 +58,7 @@ func AMWorkflowRunWorkflowAtURLWithInputError(fileURL *foundation.NSURL, input o
 	return _ret, nil
 }
 
+// Creates and initializes a workflow.
 func (o *AMWorkflow) Init() *AMWorkflow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMWorkflowSelInit)
 	if _ret != 0 {
@@ -63,6 +67,7 @@ func (o *AMWorkflow) Init() *AMWorkflow {
 	return AMWorkflowFromID(_ret)
 }
 
+// Creates and initializes a workflow based on the contents of the specified file.
 func (o *AMWorkflow) InitWithContentsOfURLError(fileURL *foundation.NSURL) (*AMWorkflow, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMWorkflowSelInitWithContentsOfURLError, fileURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -75,6 +80,7 @@ func (o *AMWorkflow) InitWithContentsOfURLError(fileURL *foundation.NSURL) (*AMW
 	return AMWorkflowFromID(_ret), nil
 }
 
+// Writes the workflow to the specified file.
 func (o *AMWorkflow) WriteToURLError(fileURL *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aMWorkflowSelWriteToURLError, fileURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -84,28 +90,34 @@ func (o *AMWorkflow) WriteToURLError(fileURL *foundation.NSURL) (bool, error) {
 	return _ret, nil
 }
 
+// Sets the value of the workflow variable with the specified name.
 func (o *AMWorkflow) SetValueForVariableWithName(value objc.ID, variableName *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aMWorkflowSelSetValueForVariableWithName, value, variableName.Ptr())
 	return _ret
 }
 
+// Returns the value of the workflow variable with the specified name.
 func (o *AMWorkflow) ValueForVariableWithName(variableName *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMWorkflowSelValueForVariableWithName, variableName.Ptr())
 	return _ret
 }
 
+// Adds the specified action at the end of the receiving workflow.
 func (o *AMWorkflow) AddAction(action *AMAction) {
 	o.Ptr().Send(_aMWorkflowSelAddAction, action.Ptr())
 }
 
+// Removes the specified action from the workflow.
 func (o *AMWorkflow) RemoveAction(action *AMAction) {
 	o.Ptr().Send(_aMWorkflowSelRemoveAction, action.Ptr())
 }
 
+// Inserts the specified action at the specified position of the receiving workflow.
 func (o *AMWorkflow) InsertActionAtIndex(action *AMAction, index uint) {
 	o.Ptr().Send(_aMWorkflowSelInsertActionAtIndex, action.Ptr(), index)
 }
 
+// Moves the action from the specified start position to the specified end position in the receiving workflow.
 func (o *AMWorkflow) MoveActionAtIndexToIndex(startIndex uint, endIndex uint) {
 	o.Ptr().Send(_aMWorkflowSelMoveActionAtIndexToIndex, startIndex, endIndex)
 }

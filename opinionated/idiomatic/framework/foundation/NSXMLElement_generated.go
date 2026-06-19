@@ -12,7 +12,7 @@ import (
 	"unsafe"
 )
 
-// @class NSXMLElement @abstract An XML element @discussion Note: Trying to add a document, namespace, attribute, or node with a parent throws an exception. To add a node with a parent first detach or create a copy of it.
+// The element nodes in an XML tree structure.
 //
 // XMLElement wraps [raw.NSXMLElement] with a fluent Go API.
 type XMLElement struct {

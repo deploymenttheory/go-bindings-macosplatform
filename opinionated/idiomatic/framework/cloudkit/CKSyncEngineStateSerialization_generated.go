@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An opaque object that contains the serialized representation of a sync engine’s current state.
+//
 // SyncEngineStateSerialization wraps [raw.CKSyncEngineStateSerialization] with a fluent Go API.
 type SyncEngineStateSerialization struct {
 	inner *raw.CKSyncEngineStateSerialization

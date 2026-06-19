@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of properties that configure a temporal scaling effect, and a factory method that creates the effect.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor
 type MTLFXTemporalScalerDescriptor struct {
 	foundation.NSObject
@@ -66,37 +68,37 @@ func MTLFXTemporalScalerDescriptorFromID(id objc.ID) *MTLFXTemporalScalerDescrip
 	return o
 }
 
-// Creates a temporal scaler instance for a Metal device. - Parameters: - device: The Metal device that creates the temporal scaler. - Returns: A new temporal scaler instance upon success, or `nil` otherwise.
+// Creates a temporal scaler instance from this descriptor’s current property values.
 func (o *MTLFXTemporalScalerDescriptor) NewTemporalScalerWithDevice(device metal.MTLDevice) MTLFXTemporalScaler {
 	_ret := objc.Send[MTLFXTemporalScaler](o.Ptr(), _mTLFXTemporalScalerDescriptorSelNewTemporalScalerWithDevice, device)
 	return _ret
 }
 
-// Creates a temporal scaler instance for a Metal device. - Parameters: - device: The Metal device that creates the temporal scaler. - compiler: A compiler instance this method can use to build pipeline state objects. - Returns: A new temporal scaler instance upon success, or `nil` otherwise.
+// Creates a temporal scaler instance for a Metal device.
 func (o *MTLFXTemporalScalerDescriptor) NewTemporalScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) MTL4FXTemporalScaler {
 	_ret := objc.Send[MTL4FXTemporalScaler](o.Ptr(), _mTLFXTemporalScalerDescriptorSelNewTemporalScalerWithDeviceCompiler, device, compiler)
 	return _ret
 }
 
-// Returns the smallest temporal scaling factor the device supports as a floating-point value. - Parameters: - device: The Metal device for which this method performs this check. - Returns: the minimum input content scale the GPU device supports.
+// Returns the smallest temporal scaling factor the device supports as a floating-point value.
 func MTLFXTemporalScalerDescriptorSupportedInputContentMinScaleForDevice(device metal.MTLDevice) float32 {
 	_ret := objc.Send[float32](objc.ID(_clsMTLFXTemporalScalerDescriptor), _mTLFXTemporalScalerDescriptorSelSupportedInputContentMinScaleForDevice, device)
 	return _ret
 }
 
-// Returns the largest temporal scaling factor the device supports as a floating-point value. - Parameters: - device: The Metal device for which this method performs this check. - Returns: the maximum input content scale the GPU device supports.
+// Returns the largest temporal scaling factor the device supports as a floating-point value.
 func MTLFXTemporalScalerDescriptorSupportedInputContentMaxScaleForDevice(device metal.MTLDevice) float32 {
 	_ret := objc.Send[float32](objc.ID(_clsMTLFXTemporalScalerDescriptor), _mTLFXTemporalScalerDescriptorSelSupportedInputContentMaxScaleForDevice, device)
 	return _ret
 }
 
-// Returns a Boolean value that indicates whether the temporal scaler works with a GPU. - Parameters: - device: A device instance that represents a GPU. - Returns: <doc://com.apple.documentation/documentation/swift/true> if the device supports temporal scaling, <doc://com.apple.documentation/documentation/swift/false> otherwise.
+// Returns a Boolean value that indicates whether the temporal scaler works with a GPU.
 func MTLFXTemporalScalerDescriptorSupportsDevice(device metal.MTLDevice) bool {
 	_ret := objc.Send[bool](objc.ID(_clsMTLFXTemporalScalerDescriptor), _mTLFXTemporalScalerDescriptorSelSupportsDevice, device)
 	return _ret
 }
 
-// Queries whether a Metal device supports temporal scaling compatible with Metal 4. - Parameters: - device: The GPU device for which this methods tests support. - Returns: <doc://com.apple.documentation/documentation/swift/true> if the device supports temporal scaling with Metal 4, <doc://com.apple.documentation/documentation/swift/false> otherwise.
+// Queries whether a Metal device supports temporal scaling compatible with Metal 4.
 func MTLFXTemporalScalerDescriptorSupportsMetal4FX(device metal.MTLDevice) bool {
 	_ret := objc.Send[bool](objc.ID(_clsMTLFXTemporalScalerDescriptor), _mTLFXTemporalScalerDescriptorSelSupportsMetal4FX, device)
 	return _ret

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates information about all accounts of a particular type.
+//
 // Apple documentation: https://developer.apple.com/documentation/accounts/acaccounttype
 // Deprecated: Use appropriate non-Apple SDK corresponding to the type of account you want to reference instead
 type ACAccountType struct {

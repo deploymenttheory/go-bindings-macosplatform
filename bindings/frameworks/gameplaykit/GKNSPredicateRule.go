@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A convenient subclass of GKRule that leverages existing NSPRedicate functionality for evaluating the predicate of the rule.
+// A rule for use in a rule system that uses a Foundation NSPredicate object to evaluate itself.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gknspredicaterule
 type GKNSPredicateRule struct {
@@ -33,7 +33,7 @@ func GKNSPredicateRuleFromID(id objc.ID) *GKNSPredicateRule {
 	return o
 }
 
-// Initializes a new rule with the given NSPredicate
+// Initializes a rule with the specified predicate.
 func (o *GKNSPredicateRule) InitWithPredicate(predicate *foundation.NSPredicate) *GKNSPredicateRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKNSPredicateRuleSelInitWithPredicate, predicate.Ptr())
 	if _ret != 0 {

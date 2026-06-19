@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class representing an Operation in a Program.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmodelstructureprogramoperation
 type MLModelStructureProgramOperation struct {
 	foundation.NSObject
@@ -44,8 +46,11 @@ func (o *MLModelStructureProgramOperation) OperatorName() *foundation.NSString {
 
 // The arguments to the Operation.
 func (o *MLModelStructureProgramOperation) Inputs() *foundation.NSDictionary[*foundation.NSString, *MLModelStructureProgramArgument] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *MLModelStructureProgramArgument]](o.Ptr(), _mLModelStructureProgramOperationSelInputs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureProgramOperationSelInputs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *MLModelStructureProgramArgument](_ret)
 }
 
 // The outputs of the Operation.

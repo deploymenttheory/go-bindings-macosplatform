@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An operation that fetches database changes.
+//
 // FetchDatabaseChangesOperation wraps [raw.CKFetchDatabaseChangesOperation] with a fluent Go API.
 type FetchDatabaseChangesOperation struct {
 	inner *raw.CKFetchDatabaseChangesOperation
@@ -37,7 +39,7 @@ func NewFetchDatabaseChangesOperation() *FetchDatabaseChangesOperation {
 	return &FetchDatabaseChangesOperation{inner: raw.CKFetchDatabaseChangesOperationFromID(_id)}
 }
 
-// Creates an operation for fetching database changes. - Parameters: - previousServerChangeToken: The change token that CloudKit uses to determine which database changes to return. After creating the operation, assign a handler to the “CKFetchDatabaseChangesOperation/fetchDatabaseChangesCompletionBlock“ property so that you can process the operation's results. If this is your first fetch, or if you want to refetch all zones, pass `nil` for the change token. If you provide a change token from a previous “CKFetchDatabaseChangesOperation“, CloudKit returns only the zones with changes since that token. The per-database “CKServerChangeToken“ isn't the same as the per-record zone “CKServerChangeToken“ from “CKFetchRecordZoneChangesOperation“.
+// Creates an operation for fetching database changes.
 //
 // NewFetchDatabaseChangesOperationWithPreviousServerChangeToken creates a new [FetchDatabaseChangesOperation].
 func NewFetchDatabaseChangesOperationWithPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken) *FetchDatabaseChangesOperation {
@@ -46,7 +48,7 @@ func NewFetchDatabaseChangesOperationWithPreviousServerChangeToken(previousServe
 	return &FetchDatabaseChangesOperation{inner: raw.CKFetchDatabaseChangesOperationFromID(_id)}
 }
 
-// The server change token. Assign the token you receive from the “CKFetchDatabaseChangesOperation/fetchDatabaseChangesCompletionBlock“ to this property. Doing so yields only the changes that occur after your most recent fetch operation. If you specify `nil` for this parameter, the operation fetches all changes.
+// The server change token.
 //
 // WithPreviousServerChangeToken sets the previousServerChangeToken property and returns the receiver for chaining.
 func (x *FetchDatabaseChangesOperation) WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchDatabaseChangesOperation {
@@ -54,7 +56,7 @@ func (x *FetchDatabaseChangesOperation) WithPreviousServerChangeToken(previousSe
 	return x
 }
 
-// The maximum number of results that the operation fetches. Use this property to limit the number of changes this operation returns. When the operation reaches the limit, it updates the change token and returns it to indicate that more results are available.
+// The maximum number of results that the operation fetches.
 //
 // WithResultsLimit sets the resultsLimit property and returns the receiver for chaining.
 func (x *FetchDatabaseChangesOperation) WithResultsLimit(resultsLimit uint) *FetchDatabaseChangesOperation {
@@ -62,7 +64,7 @@ func (x *FetchDatabaseChangesOperation) WithResultsLimit(resultsLimit uint) *Fet
 	return x
 }
 
-// A Boolean value that indicates whether to send repeated requests to the server. If <doc://com.apple.documentation/documentation/swift/true>, the operation sends repeat requests to the server until it fetches all changes. CloudKit executes the handler you set on the “CKFetchDatabaseChangesOperation/changeTokenUpdatedBlock“ property with a change token after each request. The default value is <doc://com.apple.documentation/documentation/swift/true>.
+// A Boolean value that indicates whether to send repeated requests to the server.
 //
 // WithFetchAllChanges sets the fetchAllChanges property and returns the receiver for chaining.
 func (x *FetchDatabaseChangesOperation) WithFetchAllChanges(fetchAllChanges bool) *FetchDatabaseChangesOperation {
@@ -70,7 +72,7 @@ func (x *FetchDatabaseChangesOperation) WithFetchAllChanges(fetchAllChanges bool
 	return x
 }
 
-// The closure to execute with a single record zone change. The closure returns no value and takes the following parameter: - term `zoneID`: The ID of the  record zone that contains changes.
+// The closure to execute with a single record zone change.
 //
 // WithRecordZoneWithIDChangedBlock sets the recordZoneWithIDChangedBlock property and returns the receiver for chaining.
 func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDChangedBlock(recordZoneWithIDChangedBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation {
@@ -78,7 +80,7 @@ func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDChangedBlock(recordZ
 	return x
 }
 
-// The closure to execute when a record zone no longer exists. The closure returns no value and takes the following parameter: - term `zoneID`: The deleted record zone's ID.
+// The closure to execute when a record zone no longer exists.
 //
 // WithRecordZoneWithIDWasDeletedBlock sets the recordZoneWithIDWasDeletedBlock property and returns the receiver for chaining.
 func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasDeletedBlock(recordZoneWithIDWasDeletedBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation {
@@ -86,7 +88,7 @@ func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasDeletedBlock(reco
 	return x
 }
 
-// The closure to execute when CloudKit purges a record zone. The closure returns no value and takes the following parameter: - term `zoneID`: The purged record zone's ID.
+// The closure to execute when CloudKit purges a record zone.
 //
 // WithRecordZoneWithIDWasPurgedBlock sets the recordZoneWithIDWasPurgedBlock property and returns the receiver for chaining.
 func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasPurgedBlock(recordZoneWithIDWasPurgedBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation {
@@ -94,7 +96,7 @@ func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasPurgedBlock(recor
 	return x
 }
 
-// The closure to execute when a user-invoked account reset deletes a record zone. The closure returns no value and takes a single parameter: the deleted record zone's ID. The operation executes this closure, instead of “CKFetchDatabaseChangesOperation/recordZoneWithIDWasDeletedBlock“, after a user action causes CloudKit to delete the record zone. Reupload any locally cached data to iCloud to minimize data loss.
+// The closure to execute when a user-invoked account reset deletes a record zone.
 //
 // WithRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock sets the recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock property and returns the receiver for chaining.
 func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation {
@@ -102,7 +104,7 @@ func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasDeletedDueToUserE
 	return x
 }
 
-// The closure to execute when the change token updates. The closure executes periodically, and provides a new change token so that you don't need to refetch previously fetched record zone changes in a subsequent operation.
+// The closure to execute when the change token updates.
 //
 // WithChangeTokenUpdatedBlock sets the changeTokenUpdatedBlock property and returns the receiver for chaining.
 func (x *FetchDatabaseChangesOperation) WithChangeTokenUpdatedBlock(changeTokenUpdatedBlock func(*raw.CKServerChangeToken)) *FetchDatabaseChangesOperation {
@@ -110,7 +112,7 @@ func (x *FetchDatabaseChangesOperation) WithChangeTokenUpdatedBlock(changeTokenU
 	return x
 }
 
-// The closure to execute when the operation finishes. The closure returns no value and takes the following parameters: - The change token to store and use in subsequent instances of “CKFetchDatabaseChangesOperation“. - A Boolen value that indicates whether this is the final database change. If “CKFetchDatabaseChangesOperation/fetchAllChanges“ is <doc://com.apple.documentation/documentation/swift/false>, it's the app's responsibility to create additional instances of “CKFetchDatabaseChangesOperation“ to fetch further changes. - An error object that contains information about a problem, or `nil` if CloudKit successfully retrieves the database changes. - Note: The change token and error parameters are mutally exclusive — that is, the closure provides one of them but not both. Your app is responsible for saving the change token at the end of the operation and providing it to future uses of “CKFetchDatabaseChangesOperation“. If the server returns a “CKError/Code/changeTokenExpired“ error, the “CKFetchDatabaseChangesOperation/previousServerChangeToken“ value is stale and your app needs to clear its local cache and refetch the database changes, starting with a `nil` change token.
+// The closure to execute when the operation finishes.
 //
 // WithFetchDatabaseChangesCompletionBlock sets the fetchDatabaseChangesCompletionBlock property and returns the receiver for chaining.
 func (x *FetchDatabaseChangesOperation) WithFetchDatabaseChangesCompletionBlock(fetchDatabaseChangesCompletionBlock func(*raw.CKServerChangeToken, bool, unsafe.Pointer)) *FetchDatabaseChangesOperation {
@@ -118,7 +120,7 @@ func (x *FetchDatabaseChangesOperation) WithFetchDatabaseChangesCompletionBlock(
 	return x
 }
 
-// The database that the operation uses. For operations that you execute in a custom queue, use this property to specify the target database. Setting the database also sets the corresponding container, which it inherits from “CKOperation“. If this property's value is `nil`, the operation targets the user's private database. The default value is `nil`.
+// The database that the operation uses.
 //
 // WithDatabase sets the database property and returns the receiver for chaining.
 func (x *FetchDatabaseChangesOperation) WithDatabase(database *Database) *FetchDatabaseChangesOperation {
@@ -126,7 +128,7 @@ func (x *FetchDatabaseChangesOperation) WithDatabase(database *Database) *FetchD
 	return x
 }
 
-// The operation's configuration.
+// The operation’s configuration.
 //
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *FetchDatabaseChangesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchDatabaseChangesOperation {
@@ -134,7 +136,7 @@ func (x *FetchDatabaseChangesOperation) WithConfiguration(configuration *Operati
 	return x
 }
 
-// The operation's group.
+// The operation’s group.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *FetchDatabaseChangesOperation) WithGroup(group *OperationGroup) *FetchDatabaseChangesOperation {
@@ -142,7 +144,7 @@ func (x *FetchDatabaseChangesOperation) WithGroup(group *OperationGroup) *FetchD
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *FetchDatabaseChangesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchDatabaseChangesOperation {
@@ -166,7 +168,7 @@ func (x *FetchDatabaseChangesOperation) WithAllowsCellularAccess(allowsCellularA
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A Boolean value that indicates whether the operation is long-lived.
 //
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *FetchDatabaseChangesOperation) WithLongLived(longLived bool) *FetchDatabaseChangesOperation {

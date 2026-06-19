@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A subclass of CAOpenGLLayer that is suitable for rendering OpenGL into layers.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsopengllayer
 type NSOpenGLLayer struct {
 	quartzcore.CAOpenGLLayer
@@ -40,6 +42,7 @@ func NSOpenGLLayerFromID(id objc.ID) *NSOpenGLLayer {
 	return o
 }
 
+// Returns the OpenGL pixel format suitable for the specified displays.
 func (o *NSOpenGLLayer) OpenGLPixelFormatForDisplayMask(mask uint32) *NSOpenGLPixelFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLLayerSelOpenGLPixelFormatForDisplayMask, mask)
 	if _ret != 0 {
@@ -48,6 +51,7 @@ func (o *NSOpenGLLayer) OpenGLPixelFormatForDisplayMask(mask uint32) *NSOpenGLPi
 	return NSOpenGLPixelFormatFromID(_ret)
 }
 
+// Returns the OpenGL context to use for the requested pixel format.
 func (o *NSOpenGLLayer) OpenGLContextForPixelFormat(pixelFormat *NSOpenGLPixelFormat) *NSOpenGLContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLLayerSelOpenGLContextForPixelFormat, pixelFormat.Ptr())
 	if _ret != 0 {
@@ -56,11 +60,13 @@ func (o *NSOpenGLLayer) OpenGLContextForPixelFormat(pixelFormat *NSOpenGLPixelFo
 	return NSOpenGLContextFromID(_ret)
 }
 
+// Invoked to ask the layer whether it can (or should) draw.
 func (o *NSOpenGLLayer) CanDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(context_ *NSOpenGLContext, pixelFormat *NSOpenGLPixelFormat, t float64, ts *corevideo.CVTimeStamp) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSOpenGLLayerSelCanDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime, context_.Ptr(), pixelFormat.Ptr(), t, ts)
 	return _ret
 }
 
+// Draws the OpenGL content for the specified time.
 func (o *NSOpenGLLayer) DrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(context_ *NSOpenGLContext, pixelFormat *NSOpenGLPixelFormat, t float64, ts *corevideo.CVTimeStamp) {
 	o.Ptr().Send(_nSOpenGLLayerSelDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime, context_.Ptr(), pixelFormat.Ptr(), t, ts)
 }

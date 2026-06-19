@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that deactivates neurons randomly to avoid overfitting.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcdropoutlayer
 type MLCDropoutLayer struct {
 	MLCLayer
@@ -31,7 +33,7 @@ func MLCDropoutLayerFromID(id objc.ID) *MLCDropoutLayer {
 	return o
 }
 
-// @abstract   Create a dropout layer @param      rate  A scalar float value. The probability that each element is dropped. @param      seed  The seed used to generate random numbers. @return     A new dropout layer
+// Creates a dropout layer with the probability rate and random number generator seed you specify.
 func MLCDropoutLayerLayerWithRateSeed(rate float32, seed uint) *MLCDropoutLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCDropoutLayer), _mLCDropoutLayerSelLayerWithRateSeed, rate, seed)
 	if _ret != 0 {

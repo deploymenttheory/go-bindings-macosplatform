@@ -5,6 +5,7 @@
 package appkit
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -157,9 +158,25 @@ func (x *DocumentController) RunModalOpenPanelForTypes(openPanel *raw.NSOpenPane
 
 // Presents an Open dialog and delivers the results to a completion handler as an array of URLs for the chosen files, or nil.
 //
-// BeginOpenPanelWithCompletionHandler calls the underlying BeginOpenPanelWithCompletionHandler.
-func (x *DocumentController) BeginOpenPanelWithCompletionHandler(completionHandler objc.Block) {
-	x.inner.BeginOpenPanelWithCompletionHandler(completionHandler)
+// BeginOpenPanel blocks until the operation completes or ctx is cancelled.
+func (x *DocumentController) BeginOpenPanel(ctx context.Context) (*foundation.NSArray[*foundation.NSURL], error) {
+	type _result struct {
+		val *foundation.NSArray[*foundation.NSURL]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.BeginOpenPanelWithCompletionHandler(func(_p0 *foundation.NSArray[*foundation.NSURL]) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*foundation.NSURL]
+		return _zero, ctx.Err()
+	}
 }
 
 // Presents a nonmodal Open dialog that displays files you can open from a list of UTIs.
@@ -539,7 +556,7 @@ type DocumentControllerable interface {
 	OpenDocument(sender objc.ID)
 	URLsFromRunningOpenPanel() []*foundation.NSURL
 	RunModalOpenPanelForTypes(openPanel *raw.NSOpenPanel, types *foundation.NSArray[*foundation.NSString]) int
-	BeginOpenPanelWithCompletionHandler(completionHandler objc.Block)
+	BeginOpenPanel(ctx context.Context) (*foundation.NSArray[*foundation.NSURL], error)
 	BeginOpenPanelForTypesCompletionHandler(openPanel *raw.NSOpenPanel, inTypes *foundation.NSArray[*foundation.NSString], completionHandler func(int))
 	OpenDocumentWithContentsOfURLDisplayCompletionHandler(url string, displayDocument bool, completionHandler func(*raw.NSDocument, bool, unsafe.Pointer))
 	MakeDocumentWithContentsOfURLOfTypeError(url string, typeName string) (*Document, error)

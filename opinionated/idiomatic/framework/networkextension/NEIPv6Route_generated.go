@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The settings for an IPv6 route.
+//
 // NEIPv6Route wraps [raw.NEIPv6Route] with a fluent Go API.
 type NEIPv6Route struct {
 	inner *raw.NEIPv6Route
@@ -31,7 +33,7 @@ func NEIPv6RouteFromID(id objc.ID) *NEIPv6Route {
 	return &NEIPv6Route{inner: raw.NEIPv6RouteFromID(id)}
 }
 
-// @method initWithDestinationAddress:networkPrefixLength: @discussion Initialize a newly-allocated NEIPv6Route. @param address The IPv6 address of the destination network. @param networkPrefixLength A number containing the length in bits of the network prefix of the destination network. @return The initialized NEIPv6Route.
+// Initialize the NEIPv6Route
 //
 // NewNEIPv6RouteWithDestinationAddressNetworkPrefixLength creates a new [NEIPv6Route].
 func NewNEIPv6RouteWithDestinationAddressNetworkPrefixLength(address string, networkPrefixLength *foundation.NSNumber) *NEIPv6Route {
@@ -40,7 +42,7 @@ func NewNEIPv6RouteWithDestinationAddressNetworkPrefixLength(address string, net
 	return &NEIPv6Route{inner: raw.NEIPv6RouteFromID(_id)}
 }
 
-// @property gatewayAddress @discussion The IPv6 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
+// The address of the next-hop gateway of the route.
 //
 // WithGatewayAddress sets the gatewayAddress property and returns the receiver for chaining.
 func (x *NEIPv6Route) WithGatewayAddress(gatewayAddress string) *NEIPv6Route {

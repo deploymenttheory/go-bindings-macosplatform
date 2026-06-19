@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the location of a resource, such as an item on a remote server or the path to a local file.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurl
 type NSURL struct {
 	NSObject
@@ -112,6 +114,7 @@ func NSURLFromID(id objc.ID) *NSURL {
 	return o
 }
 
+// Initializes a newly created NSURL with a specified scheme, host, and path.
 // Deprecated: Use NSURLComponents instead, which lets you create a valid URL with any valid combination of URL components and subcomponents (not just scheme, host and path), and lets you set components and subcomponents with either percent-encoded or un-percent-encoded strings.
 func (o *NSURL) InitWithSchemeHostPath(scheme *NSString, host *NSString, path *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithSchemeHostPath, scheme.Ptr(), host.Ptr(), path.Ptr())
@@ -121,6 +124,7 @@ func (o *NSURL) InitWithSchemeHostPath(scheme *NSString, host *NSString, path *N
 	return NSURLFromID(_ret)
 }
 
+// Initializes a newly created file NSURL referencing the local file or directory at path, relative to a base URL.
 func (o *NSURL) InitFileURLWithPathIsDirectoryRelativeToURL(path *NSString, isDir bool, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitFileURLWithPathIsDirectoryRelativeToURL, path.Ptr(), isDir, baseURL.Ptr())
 	if _ret != 0 {
@@ -129,6 +133,7 @@ func (o *NSURL) InitFileURLWithPathIsDirectoryRelativeToURL(path *NSString, isDi
 	return NSURLFromID(_ret)
 }
 
+// Initializes a newly created file NSURL referencing the local file or directory at path, relative to a base URL.
 func (o *NSURL) InitFileURLWithPathRelativeToURL(path *NSString, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitFileURLWithPathRelativeToURL, path.Ptr(), baseURL.Ptr())
 	if _ret != 0 {
@@ -137,6 +142,7 @@ func (o *NSURL) InitFileURLWithPathRelativeToURL(path *NSString, baseURL *NSURL)
 	return NSURLFromID(_ret)
 }
 
+// Initializes a newly created NSURL referencing the local file or directory at path.
 func (o *NSURL) InitFileURLWithPathIsDirectory(path *NSString, isDir bool) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitFileURLWithPathIsDirectory, path.Ptr(), isDir)
 	if _ret != 0 {
@@ -145,6 +151,7 @@ func (o *NSURL) InitFileURLWithPathIsDirectory(path *NSString, isDir bool) *NSUR
 	return NSURLFromID(_ret)
 }
 
+// Initializes a newly created NSURL referencing the local file or directory at path.
 func (o *NSURL) InitFileURLWithPath(path *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitFileURLWithPath, path.Ptr())
 	if _ret != 0 {
@@ -153,6 +160,7 @@ func (o *NSURL) InitFileURLWithPath(path *NSString) *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// Initializes and returns a newly created file NSURL referencing the local file or directory at path, relative to a base URL.
 func NSURLFileURLWithPathIsDirectoryRelativeToURL(path *NSString, isDir bool, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelFileURLWithPathIsDirectoryRelativeToURL, path.Ptr(), isDir, baseURL.Ptr())
 	if _ret != 0 {
@@ -161,6 +169,7 @@ func NSURLFileURLWithPathIsDirectoryRelativeToURL(path *NSString, isDir bool, ba
 	return NSURLFromID(_ret)
 }
 
+// Initializes and returns a newly created file NSURL referencing the local file or directory at path, relative to a base URL.
 func NSURLFileURLWithPathRelativeToURL(path *NSString, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelFileURLWithPathRelativeToURL, path.Ptr(), baseURL.Ptr())
 	if _ret != 0 {
@@ -169,6 +178,7 @@ func NSURLFileURLWithPathRelativeToURL(path *NSString, baseURL *NSURL) *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// Initializes and returns a newly created NSURL object as a file URL with a specified path.
 func NSURLFileURLWithPathIsDirectory(path *NSString, isDir bool) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelFileURLWithPathIsDirectory, path.Ptr(), isDir)
 	if _ret != 0 {
@@ -177,6 +187,7 @@ func NSURLFileURLWithPathIsDirectory(path *NSString, isDir bool) *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// Initializes and returns a newly created NSURL object as a file URL with a specified path.
 func NSURLFileURLWithPath(path *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelFileURLWithPath, path.Ptr())
 	if _ret != 0 {
@@ -185,6 +196,7 @@ func NSURLFileURLWithPath(path *NSString) *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// Initializes a URL object with a C string representing a local file system path.
 func (o *NSURL) InitFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL(path string, isDir bool, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL, path, isDir, baseURL.Ptr())
 	if _ret != 0 {
@@ -193,6 +205,7 @@ func (o *NSURL) InitFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL(
 	return NSURLFromID(_ret)
 }
 
+// Returns a new URL object initialized with a C string representing a local file system path.
 func NSURLFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL(path string, isDir bool, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL, path, isDir, baseURL.Ptr())
 	if _ret != 0 {
@@ -201,6 +214,7 @@ func NSURLFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL(path strin
 	return NSURLFromID(_ret)
 }
 
+// Initializes an NSURL object with a provided URL string.
 func (o *NSURL) InitWithString(uRLString *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithString, uRLString.Ptr())
 	if _ret != 0 {
@@ -209,6 +223,7 @@ func (o *NSURL) InitWithString(uRLString *NSString) *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// Initializes an NSURL object with a base URL and a relative string.
 func (o *NSURL) InitWithStringRelativeToURL(uRLString *NSString, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithStringRelativeToURL, uRLString.Ptr(), baseURL.Ptr())
 	if _ret != 0 {
@@ -217,6 +232,7 @@ func (o *NSURL) InitWithStringRelativeToURL(uRLString *NSString, baseURL *NSURL)
 	return NSURLFromID(_ret)
 }
 
+// Creates and returns an NSURL object initialized with a provided URL string.
 func NSURLURLWithString(uRLString *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLWithString, uRLString.Ptr())
 	if _ret != 0 {
@@ -225,6 +241,7 @@ func NSURLURLWithString(uRLString *NSString) *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// Creates and returns an NSURL object initialized with a base URL and a relative string.
 func NSURLURLWithStringRelativeToURL(uRLString *NSString, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLWithStringRelativeToURL, uRLString.Ptr(), baseURL.Ptr())
 	if _ret != 0 {
@@ -233,7 +250,7 @@ func NSURLURLWithStringRelativeToURL(uRLString *NSString, baseURL *NSURL) *NSURL
 	return NSURLFromID(_ret)
 }
 
-// Initializes an `NSURL` with a URL string and the option to add (or skip) IDNA- and percent-encoding of invalid characters. If `encodingInvalidCharacters` is false, and the URL string is invalid according to RFC 3986, `nil` is returned. If `encodingInvalidCharacters` is true, `NSURL` will try to encode the string to create a valid URL. If the URL string is still invalid after encoding, `nil` is returned. - Parameter URLString: The URL string. - Parameter encodingInvalidCharacters: True if `NSURL` should try to encode an invalid URL string, false otherwise. - Returns: An `NSURL` instance for a valid URL, or `nil` if the URL is invalid.
+// Creates an instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
 func (o *NSURL) InitWithStringEncodingInvalidCharacters(uRLString *NSString, encodingInvalidCharacters bool) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithStringEncodingInvalidCharacters, uRLString.Ptr(), encodingInvalidCharacters)
 	if _ret != 0 {
@@ -242,7 +259,7 @@ func (o *NSURL) InitWithStringEncodingInvalidCharacters(uRLString *NSString, enc
 	return NSURLFromID(_ret)
 }
 
-// Initializes and returns a newly created `NSURL` with a URL string and the option to add (or skip) IDNA- and percent-encoding of invalid characters. If `encodingInvalidCharacters` is false, and the URL string is invalid according to RFC 3986, `nil` is returned. If `encodingInvalidCharacters` is true, `NSURL` will try to encode the string to create a valid URL. If the URL string is still invalid after encoding, `nil` is returned. - Parameter URLString: The URL string. - Parameter encodingInvalidCharacters: True if `NSURL` should try to encode an invalid URL string, false otherwise. - Returns: An `NSURL` instance for a valid URL, or `nil` if the URL is invalid.
+// Creates and returns an instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
 func NSURLURLWithStringEncodingInvalidCharacters(uRLString *NSString, encodingInvalidCharacters bool) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLWithStringEncodingInvalidCharacters, uRLString.Ptr(), encodingInvalidCharacters)
 	if _ret != 0 {
@@ -251,6 +268,7 @@ func NSURLURLWithStringEncodingInvalidCharacters(uRLString *NSString, encodingIn
 	return NSURLFromID(_ret)
 }
 
+// Initializes a newly created NSURL using the contents of the given data, relative to a base URL.
 func (o *NSURL) InitWithDataRepresentationRelativeToURL(data *NSData, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithDataRepresentationRelativeToURL, data.Ptr(), baseURL.Ptr())
 	if _ret != 0 {
@@ -259,6 +277,7 @@ func (o *NSURL) InitWithDataRepresentationRelativeToURL(data *NSData, baseURL *N
 	return NSURLFromID(_ret)
 }
 
+// Initializes and returns a newly created NSURL using the contents of the given data, relative to a base URL.
 func NSURLURLWithDataRepresentationRelativeToURL(data *NSData, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLWithDataRepresentationRelativeToURL, data.Ptr(), baseURL.Ptr())
 	if _ret != 0 {
@@ -267,6 +286,7 @@ func NSURLURLWithDataRepresentationRelativeToURL(data *NSData, baseURL *NSURL) *
 	return NSURLFromID(_ret)
 }
 
+// Initializes a newly created absolute NSURL using the contents of the given data, relative to a base URL.
 func (o *NSURL) InitAbsoluteURLWithDataRepresentationRelativeToURL(data *NSData, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitAbsoluteURLWithDataRepresentationRelativeToURL, data.Ptr(), baseURL.Ptr())
 	if _ret != 0 {
@@ -275,6 +295,7 @@ func (o *NSURL) InitAbsoluteURLWithDataRepresentationRelativeToURL(data *NSData,
 	return NSURLFromID(_ret)
 }
 
+// Initializes and returns a newly created absolute NSURL using the contents of the given data, relative to a base URL.
 func NSURLAbsoluteURLWithDataRepresentationRelativeToURL(data *NSData, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelAbsoluteURLWithDataRepresentationRelativeToURL, data.Ptr(), baseURL.Ptr())
 	if _ret != 0 {
@@ -283,16 +304,19 @@ func NSURLAbsoluteURLWithDataRepresentationRelativeToURL(data *NSData, baseURL *
 	return NSURLFromID(_ret)
 }
 
+// Fills the provided buffer with a C string representing a local file system path.
 func (o *NSURL) GetFileSystemRepresentationMaxLength(buffer string, maxBufferLength uint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelGetFileSystemRepresentationMaxLength, buffer, maxBufferLength)
 	return _ret
 }
 
+// Returns whether the URL is a file reference URL.
 func (o *NSURL) IsFileReferenceURL() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelIsFileReferenceURL)
 	return _ret
 }
 
+// Returns a new file reference URL that points to the same resource as the receiver.
 func (o *NSURL) FileReferenceURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelFileReferenceURL)
 	if _ret != 0 {
@@ -301,6 +325,7 @@ func (o *NSURL) FileReferenceURL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// Returns the value of the resource property for the specified key.
 func (o *NSURL) GetResourceValueForKeyError(value **ObjcObject, key *NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelGetResourceValueForKeyError, value, key.Ptr(), unsafe.Pointer(&_nsErr))
@@ -310,15 +335,20 @@ func (o *NSURL) GetResourceValueForKeyError(value **ObjcObject, key *NSString) (
 	return _ret, nil
 }
 
+// Returns the resource values for the properties identified by specified array of keys.
 func (o *NSURL) ResourceValuesForKeysError(keys *NSArray[*NSString]) (*NSDictionary[*NSString, objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSURLSelResourceValuesForKeysError, keys.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelResourceValuesForKeysError, keys.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return NSDictionaryFromID[*NSString, objc.ID](_ret), nil
 }
 
+// Sets the URL’s resource property for a given key to a given value.
 func (o *NSURL) SetResourceValueForKeyError(value objc.ID, key *NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelSetResourceValueForKeyError, value, key.Ptr(), unsafe.Pointer(&_nsErr))
@@ -328,27 +358,32 @@ func (o *NSURL) SetResourceValueForKeyError(value objc.ID, key *NSString) (bool,
 	return _ret, nil
 }
 
+// Sets the URL’s resource properties for a given set of keys to a given set of values.
 func (o *NSURL) SetResourceValuesError(keyedValues *NSDictionary[*NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSURLSelSetResourceValuesError, keyedValues, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _nSURLSelSetResourceValuesError, keyedValues.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Removes the cached resource value identified by a given key from the URL object.
 func (o *NSURL) RemoveCachedResourceValueForKey(key *NSString) {
 	o.Ptr().Send(_nSURLSelRemoveCachedResourceValueForKey, key.Ptr())
 }
 
+// Removes all cached resource values and temporary resource values from the URL object.
 func (o *NSURL) RemoveAllCachedResourceValues() {
 	o.Ptr().Send(_nSURLSelRemoveAllCachedResourceValues)
 }
 
+// Sets a temporary resource value on the URL object.
 func (o *NSURL) SetTemporaryResourceValueForKey(value objc.ID, key *NSString) {
 	o.Ptr().Send(_nSURLSelSetTemporaryResourceValueForKey, value, key.Ptr())
 }
 
+// Returns a bookmark for the URL, created with specified options and resource values.
 func (o *NSURL) BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(options NSURLBookmarkCreationOptions, keys *NSArray[*NSString], relativeURL *NSURL) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelBookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError, options, keys.Ptr(), relativeURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -361,6 +396,7 @@ func (o *NSURL) BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToU
 	return NSDataFromID(_ret), nil
 }
 
+// Initializes a newly created NSURL that points to a location specified by resolving bookmark data.
 func (o *NSURL) InitByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData *NSData, options NSURLBookmarkResolutionOptions, relativeURL *NSURL, isStale *bool) (*NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError, bookmarkData.Ptr(), options, relativeURL.Ptr(), isStale, unsafe.Pointer(&_nsErr))
@@ -373,6 +409,7 @@ func (o *NSURL) InitByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsSta
 	return NSURLFromID(_ret), nil
 }
 
+// Returns a new URL made by resolving bookmark data.
 func NSURLURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData *NSData, options NSURLBookmarkResolutionOptions, relativeURL *NSURL, isStale *bool) (*NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError, bookmarkData.Ptr(), options, relativeURL.Ptr(), isStale, unsafe.Pointer(&_nsErr))
@@ -385,11 +422,16 @@ func NSURLURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError
 	return NSURLFromID(_ret), nil
 }
 
+// Returns the resource values for properties identified by a specified array of keys contained in specified bookmark data.
 func NSURLResourceValuesForKeysFromBookmarkData(keys *NSArray[*NSString], bookmarkData *NSData) *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](objc.ID(_clsNSURL), _nSURLSelResourceValuesForKeysFromBookmarkData, keys.Ptr(), bookmarkData.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelResourceValuesForKeysFromBookmarkData, keys.Ptr(), bookmarkData.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
+// Creates an alias file on disk at a specified location with specified bookmark data.
 func NSURLWriteBookmarkDataToURLOptionsError(bookmarkData *NSData, bookmarkFileURL *NSURL, options uint) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsNSURL), _nSURLSelWriteBookmarkDataToURLOptionsError, bookmarkData.Ptr(), bookmarkFileURL.Ptr(), options, unsafe.Pointer(&_nsErr))
@@ -399,6 +441,7 @@ func NSURLWriteBookmarkDataToURLOptionsError(bookmarkData *NSData, bookmarkFileU
 	return _ret, nil
 }
 
+// Initializes and returns bookmark data derived from an alias file pointed to by a specified URL.
 func NSURLBookmarkDataWithContentsOfURLError(bookmarkFileURL *NSURL) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelBookmarkDataWithContentsOfURLError, bookmarkFileURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -411,6 +454,7 @@ func NSURLBookmarkDataWithContentsOfURLError(bookmarkFileURL *NSURL) (*NSData, e
 	return NSDataFromID(_ret), nil
 }
 
+// Returns a new URL made by resolving the alias file at url.
 func NSURLURLByResolvingAliasFileAtURLOptionsError(url *NSURL, options NSURLBookmarkResolutionOptions) (*NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLByResolvingAliasFileAtURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
@@ -423,11 +467,13 @@ func NSURLURLByResolvingAliasFileAtURLOptionsError(url *NSURL, options NSURLBook
 	return NSURLFromID(_ret), nil
 }
 
+// In an app that has adopted App Sandbox, makes the resource pointed to by a security-scoped URL available to the app.
 func (o *NSURL) StartAccessingSecurityScopedResource() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelStartAccessingSecurityScopedResource)
 	return _ret
 }
 
+// In an app that adopts App Sandbox, revokes access to the resource pointed to by a security-scoped URL.
 func (o *NSURL) StopAccessingSecurityScopedResource() {
 	o.Ptr().Send(_nSURLSelStopAccessingSecurityScopedResource)
 }
@@ -594,6 +640,7 @@ func (o *NSURL) FilePathURL() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// Returns the value of the resource property for the specified key.
 func (o *NSURL) GetPromisedItemResourceValueForKeyError(value **ObjcObject, key *NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelGetPromisedItemResourceValueForKeyError, value, key.Ptr(), unsafe.Pointer(&_nsErr))
@@ -603,15 +650,20 @@ func (o *NSURL) GetPromisedItemResourceValueForKeyError(value **ObjcObject, key 
 	return _ret, nil
 }
 
+// Returns the resource values for the properties identified by specified array of keys.
 func (o *NSURL) PromisedItemResourceValuesForKeysError(keys *NSArray[*NSString]) (*NSDictionary[*NSString, objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSURLSelPromisedItemResourceValuesForKeysError, keys.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelPromisedItemResourceValuesForKeysError, keys.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return NSDictionaryFromID[*NSString, objc.ID](_ret), nil
 }
 
+// Returns whether the promised item can be reached.
 func (o *NSURL) CheckPromisedItemIsReachableAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelCheckPromisedItemIsReachableAndReturnError, unsafe.Pointer(&_nsErr))
@@ -621,6 +673,7 @@ func (o *NSURL) CheckPromisedItemIsReachableAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
+// Initializes and returns a newly created NSURL object as a file URL with specified path components.
 func NSURLFileURLWithPathComponents(components *NSArray[*NSString]) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelFileURLWithPathComponents, components.Ptr())
 	if _ret != 0 {
@@ -629,6 +682,7 @@ func NSURLFileURLWithPathComponents(components *NSArray[*NSString]) *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// Returns a new URL by appending a path component to the original URL.
 func (o *NSURL) URLByAppendingPathComponent(pathComponent *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLByAppendingPathComponent, pathComponent.Ptr())
 	if _ret != 0 {
@@ -637,6 +691,7 @@ func (o *NSURL) URLByAppendingPathComponent(pathComponent *NSString) *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// Returns a new URL by appending a path component to the original URL, along with a trailing slash if the component is a directory.
 func (o *NSURL) URLByAppendingPathComponentIsDirectory(pathComponent *NSString, isDirectory bool) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLByAppendingPathComponentIsDirectory, pathComponent.Ptr(), isDirectory)
 	if _ret != 0 {
@@ -645,6 +700,7 @@ func (o *NSURL) URLByAppendingPathComponentIsDirectory(pathComponent *NSString, 
 	return NSURLFromID(_ret)
 }
 
+// Returns a new URL by appending a path extension to the original URL.
 func (o *NSURL) URLByAppendingPathExtension(pathExtension *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLByAppendingPathExtension, pathExtension.Ptr())
 	if _ret != 0 {
@@ -653,6 +709,7 @@ func (o *NSURL) URLByAppendingPathExtension(pathExtension *NSString) *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// Returns whether the resource pointed to by a file URL can be reached.
 func (o *NSURL) CheckResourceIsReachableAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelCheckResourceIsReachableAndReturnError, unsafe.Pointer(&_nsErr))
@@ -718,6 +775,7 @@ func (o *NSURL) URLByResolvingSymlinksInPath() *NSURL {
 	return NSURLFromID(_ret)
 }
 
+// Returns the receiver’s resource data, loading it if necessary.
 // Deprecated: Use NSURLConnection instead
 func (o *NSURL) ResourceDataUsingCache(shouldUseCache bool) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelResourceDataUsingCache, shouldUseCache)
@@ -727,29 +785,34 @@ func (o *NSURL) ResourceDataUsingCache(shouldUseCache bool) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Loads the receiver’s resource data in the background.
 // Deprecated: Use NSURLConnection instead
 func (o *NSURL) LoadResourceDataNotifyingClientUsingCache(client objc.ID, shouldUseCache bool) {
 	o.Ptr().Send(_nSURLSelLoadResourceDataNotifyingClientUsingCache, client, shouldUseCache)
 }
 
+// Returns the specified property of the receiver’s resource.
 // Deprecated: Use NSURLConnection instead
 func (o *NSURL) PropertyForKey(propertyKey *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelPropertyForKey, propertyKey.Ptr())
 	return _ret
 }
 
+// Attempts to set the resource data for the receiver.
 // Deprecated: Use NSURLConnection instead
 func (o *NSURL) SetResourceData(data *NSData) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelSetResourceData, data.Ptr())
 	return _ret
 }
 
+// Changes the specified property of the receiver’s resource.
 // Deprecated: Use NSURLConnection instead
 func (o *NSURL) SetPropertyForKey(property objc.ID, propertyKey *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSURLSelSetPropertyForKey, property, propertyKey.Ptr())
 	return _ret
 }
 
+// Returns a URL handle to service the receiver.
 // Deprecated: Use NSURLConnection instead
 func (o *NSURL) URLHandleUsingCache(shouldUseCache bool) *NSURLHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLHandleUsingCache, shouldUseCache)

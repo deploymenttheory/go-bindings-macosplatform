@@ -14,7 +14,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class RPBroadcastActivityController @abstract Controller object that allows clients to present the macOS broadcast picker and returns the RPBroadcastController object that controls broadcast functionality.
+// A controller object that presents the macOS broadcast picker.
 //
 // Apple documentation: https://developer.apple.com/documentation/replaykit/rpbroadcastactivitycontroller
 type RPBroadcastActivityController struct {
@@ -38,7 +38,7 @@ func RPBroadcastActivityControllerFromID(id objc.ID) *RPBroadcastActivityControl
 	return o
 }
 
-// @abstract Shows the broadcast picker at specified origin point from specified application window. Loads a RPBroadcastActivityController instance and returns it in the handler block. Calling this will present a macOS picker with a list of available broadcast services for the user to select and return the the RPBroadcastActivityController object. Note, the origin point represent the top left hand corner position of the picker that will be displayed. Upon completion of the picker, the picker object will be automatically dismissed and the delegate's broadcastActivityController:didFinishWithBroadcastController:error: will be called. @param point origin point where (0,0) is the bottom left of the specified application window @param window application window presenting the picker. nil specifies the picker is presented from the application main window. @param preferredExtension The extension bundle identifier for the preferred broadcast extension service. nil specifies all extensions will be shown. @discussion The handler will be called after the user us finished with the picker and has finish setting up the broadcast extension, which will provide an instance of RPBroadcastAcvityController and an error if one occured.
+// Presents a list of available broadcast services for the user to select.
 func RPBroadcastActivityControllerShowBroadcastPickerAtPointFromWindowPreferredExtensionIdentifierCompletionHandler(point corefoundation.CGPoint, window *appkit.NSWindow, preferredExtension *foundation.NSString, handler func(*RPBroadcastActivityController, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {

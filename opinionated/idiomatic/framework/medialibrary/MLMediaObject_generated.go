@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The MLMediaObject class describes a single media file, such as a photo, song, or movie. Each media object contains basic metadata including a name, media type, URL, and so on. Additional information about each object is stored in its list of attributes. For a list of possible object attribute keys, see Media Object Attribute Keys.
+//
 // MediaObject wraps [raw.MLMediaObject] with a fluent Go API.
 type MediaObject struct {
 	inner *raw.MLMediaObject

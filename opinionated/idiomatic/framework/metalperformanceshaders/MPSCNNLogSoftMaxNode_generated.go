@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a MPSCNNLogSoftMax kernel
+// A representation of a logarithmic softmax filter kernel.
 //
 // CNNLogSoftMaxNode wraps [raw.MPSCNNLogSoftMaxNode] with a fluent Go API.
 type CNNLogSoftMaxNode struct {

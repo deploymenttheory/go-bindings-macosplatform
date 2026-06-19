@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mechanism for converting one kind of scripting data to another.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsscriptcoercionhandler
 type NSScriptCoercionHandler struct {
 	NSObject
@@ -31,6 +33,7 @@ func NSScriptCoercionHandlerFromID(id objc.ID) *NSScriptCoercionHandler {
 	return o
 }
 
+// Returns the shared NSScriptCoercionHandler for the application.
 func NSScriptCoercionHandlerSharedCoercionHandler() *NSScriptCoercionHandler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScriptCoercionHandler), _nSScriptCoercionHandlerSelSharedCoercionHandler)
 	if _ret != 0 {
@@ -39,11 +42,13 @@ func NSScriptCoercionHandlerSharedCoercionHandler() *NSScriptCoercionHandler {
 	return NSScriptCoercionHandlerFromID(_ret)
 }
 
+// Returns an object of a given class representing a given value.
 func (o *NSScriptCoercionHandler) CoerceValueToClass(value objc.ID, toClass objc.Class) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCoercionHandlerSelCoerceValueToClass, value, toClass)
 	return _ret
 }
 
+// Registers a given object (typically a class) to handle coercions (conversions) from one given class to another.
 func (o *NSScriptCoercionHandler) RegisterCoercerSelectorToConvertFromClassToClass(coercer objc.ID, selector objc.SEL, fromClass objc.Class, toClass objc.Class) {
 	o.Ptr().Send(_nSScriptCoercionHandlerSelRegisterCoercerSelectorToConvertFromClassToClass, coercer, selector, fromClass, toClass)
 }

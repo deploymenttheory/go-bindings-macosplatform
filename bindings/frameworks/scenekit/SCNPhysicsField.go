@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that applies forces, such as gravitation, electromagnetism, and turbulence, to physics bodies within a certain area of effect.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnphysicsfield
 type SCNPhysicsField struct {
 	foundation.NSObject
@@ -61,7 +63,7 @@ func SCNPhysicsFieldFromID(id objc.ID) *SCNPhysicsField {
 	return o
 }
 
-// Slows an object proportionally to the object’s velocity. Use this to simulate effects such as friction from motion through the air.
+// Creates a field that slows any object in its area of effect with a force proportional to the object’s velocity.
 func SCNPhysicsFieldDragField() *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelDragField)
 	if _ret != 0 {
@@ -70,7 +72,7 @@ func SCNPhysicsFieldDragField() *SCNPhysicsField {
 	return SCNPhysicsFieldFromID(_ret)
 }
 
-// Applies a force tangential to the direction from the sample point to the field's position. The force will be CCW to the direction. Make the strength negative to apply force in the CW direction. Amount is proportional to distance from center and the object's mass. Use this to create effects such as tornadoes.
+// Creates a field whose forces circulate around an axis.
 func SCNPhysicsFieldVortexField() *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelVortexField)
 	if _ret != 0 {
@@ -79,7 +81,7 @@ func SCNPhysicsFieldVortexField() *SCNPhysicsField {
 	return SCNPhysicsFieldFromID(_ret)
 }
 
-// Applies a force in the direction of the origin of the field in local space. To repel objects, use a negative strength. The force is proportional to the distance from the field origin. Varies with the mass of the object according to F = ma The field node's rotation property can be used to orient the gravity in a particular direction.
+// Creates a field that accelerates objects toward its center.
 func SCNPhysicsFieldRadialGravityField() *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelRadialGravityField)
 	if _ret != 0 {
@@ -88,7 +90,7 @@ func SCNPhysicsFieldRadialGravityField() *SCNPhysicsField {
 	return SCNPhysicsFieldFromID(_ret)
 }
 
-// Applies a force in the direction of the "direction" vector in the local space. To repel objects, use a negative strength. The force is the same everywhere in the field. Varies with the mass of the object according to F = ma The field node's rotation property can be used to orient the gravity in a particular direction.
+// Creates a field that accelerates objects in a specific direction.
 func SCNPhysicsFieldLinearGravityField() *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelLinearGravityField)
 	if _ret != 0 {
@@ -97,7 +99,7 @@ func SCNPhysicsFieldLinearGravityField() *SCNPhysicsField {
 	return SCNPhysicsFieldFromID(_ret)
 }
 
-// A time varying differentiable Perlin simplex noise field. A smoothness of 0 means as noisy as possible. Use this to simulate such effects as fireflies, or snow. To freeze the noise in place, set animationSpeed to 0.0. Mass is ignored. You can change the "smoothness" and "animationSpeed" using KVC.
+// Creates a field that applies random forces to objects in its area of effect.
 func SCNPhysicsFieldNoiseFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelNoiseFieldWithSmoothnessAnimationSpeed, smoothness, speed)
 	if _ret != 0 {
@@ -106,7 +108,7 @@ func SCNPhysicsFieldNoiseFieldWithSmoothnessAnimationSpeed(smoothness float64, s
 	return SCNPhysicsFieldFromID(_ret)
 }
 
-// Just like Noise, except the strength of the noise is proportional to the velocity of the object in the field.
+// Creates a field that applies random forces to objects in its area of effect, with magnitudes proportional to those objects’ velocities.
 func SCNPhysicsFieldTurbulenceFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelTurbulenceFieldWithSmoothnessAnimationSpeed, smoothness, speed)
 	if _ret != 0 {
@@ -115,7 +117,7 @@ func SCNPhysicsFieldTurbulenceFieldWithSmoothnessAnimationSpeed(smoothness float
 	return SCNPhysicsFieldFromID(_ret)
 }
 
-// A Hooke’s law force - a force linearly proportional to distance from the center of the field. An object in this field will oscillate with a period proportional to the inverse of the mass. An example use is to keep objects confined to a particular region.
+// Creates a field that pulls objects toward its center with a spring-like force.
 func SCNPhysicsFieldSpringField() *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelSpringField)
 	if _ret != 0 {
@@ -124,7 +126,7 @@ func SCNPhysicsFieldSpringField() *SCNPhysicsField {
 	return SCNPhysicsFieldFromID(_ret)
 }
 
-// A force proportional to the charge on the object. An example use of this field is to make objects behavior differently from one another when they enter a region, or to make an object's behavior different than its mass based behavior This field models the first part of the Lorentz equation, F = qE
+// Creates a field that attracts or repels objects based on their electrical charge and on their distance from the field’s center.
 func SCNPhysicsFieldElectricField() *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelElectricField)
 	if _ret != 0 {
@@ -133,7 +135,7 @@ func SCNPhysicsFieldElectricField() *SCNPhysicsField {
 	return SCNPhysicsFieldFromID(_ret)
 }
 
-// A force proportional to the charge on the object and the object’s velocity. An example use of this field is to make objects behavior differently from one another when they enter a region, or to make an object's behavior different than its mass based behavior This field models the second part of the Lorentz equation, F = qvB
+// Creates a field that attracts or repels objects based on their electrical charge, velocity, and distance from the field’s axis.
 func SCNPhysicsFieldMagneticField() *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelMagneticField)
 	if _ret != 0 {
@@ -142,7 +144,7 @@ func SCNPhysicsFieldMagneticField() *SCNPhysicsField {
 	return SCNPhysicsFieldFromID(_ret)
 }
 
-// A field force with a custom force evaluator.
+// Creates a field that runs the specified block to determine the force a field applies to each object in its area of effect.
 func SCNPhysicsFieldCustomFieldWithEvaluationBlock(block objc.Block) *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelCustomFieldWithEvaluationBlock, block)
 	if _ret != 0 {

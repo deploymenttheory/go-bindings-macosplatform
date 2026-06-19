@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that you subclass to provide a data-based Quick Look preview extension.
+//
 // PreviewProvider wraps [raw.QLPreviewProvider] with a fluent Go API.
 type PreviewProvider struct {
 	inner *raw.QLPreviewProvider

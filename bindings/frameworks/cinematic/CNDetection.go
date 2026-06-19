@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A structure that represents a detected subject, face, torso or pet at a particular time.
+//
 // Apple documentation: https://developer.apple.com/documentation/cinematic/cndetection
 type CNDetection struct {
 	foundation.NSObject

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract superclass for containers of face landmark information.
+//
 // FaceLandmarks wraps [raw.VNFaceLandmarks] with a fluent Go API.
 type FaceLandmarks struct {
 	inner *raw.VNFaceLandmarks

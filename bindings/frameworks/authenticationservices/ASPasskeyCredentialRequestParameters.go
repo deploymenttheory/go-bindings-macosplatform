@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents information about a passkey credential request.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequestparameters
 type ASPasskeyCredentialRequestParameters struct {
 	foundation.NSObject
@@ -63,8 +65,11 @@ func (o *ASPasskeyCredentialRequestParameters) UserVerificationPreference() *fou
 
 // A list of allowed credential IDs for this request. An empty list means all credentials are allowed.
 func (o *ASPasskeyCredentialRequestParameters) AllowedCredentials() *foundation.NSArray[*foundation.NSData] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSData]](o.Ptr(), _aSPasskeyCredentialRequestParametersSelAllowedCredentials)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialRequestParametersSelAllowedCredentials)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSData](_ret)
 }
 
 // Inputs for WebAuthn extensions used for passkey assertion.

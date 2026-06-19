@@ -174,7 +174,7 @@
       },
       "status": {
         "doc": "The current state of the framework’s Camera Assistance feature.",
-        "url": "https://developer.apple.com/documentation/nearbyinteraction/nialgorithmconvergence/status-654t"
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nialgorithmconvergence/status-j61c"
       }
     },
     "NIDLTDOAConfiguration": {
@@ -268,7 +268,7 @@
       },
       "direction": {
         "doc": "A vector that points from the user’s device in the direction of the peer device.",
-        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/direction-4qh5w"
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/direction-5xcld"
       },
       "discoveryToken": {
         "doc": "A unique identifier for a peer device in the session.",
@@ -280,7 +280,7 @@
       },
       "horizontalAngle": {
         "doc": "An angle in radians that indicates the azimuthal direction to the nearby object.",
-        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/horizontalangle-9ibky"
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/horizontalangle-hsg"
       },
       "verticalDirectionEstimate": {
         "doc": "The estimation of a nearby object’s vertical position as it relates to the user’s device.",

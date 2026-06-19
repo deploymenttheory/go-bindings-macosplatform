@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that executes scripts.
+//
 // UserScriptTask wraps [raw.NSUserScriptTask] with a fluent Go API.
 type UserScriptTask struct {
 	inner *raw.NSUserScriptTask
@@ -32,6 +34,8 @@ func UserScriptTaskFromID(id objc.ID) *UserScriptTask {
 	return &UserScriptTask{inner: raw.NSUserScriptTaskFromID(id)}
 }
 
+// Return a user script task instance given a URL for a script file.
+//
 // NewUserScriptTaskWithURLError creates a new [UserScriptTask].
 func NewUserScriptTaskWithURLError(url string) (*UserScriptTask, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserScriptTask")), objc.RegisterName("alloc"))
@@ -49,6 +53,8 @@ func (x *UserScriptTask) WithScriptingProperties(scriptingProperties *raw.NSDict
 	return x
 }
 
+// Executes the script with no input and ignoring any result.
+//
 // ExecuteWithCompletionHandler calls the underlying ExecuteWithCompletionHandler.
 func (x *UserScriptTask) ExecuteWithCompletionHandler(handler func(unsafe.Pointer)) {
 	x.inner.ExecuteWithCompletionHandler(handler)

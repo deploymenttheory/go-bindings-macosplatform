@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object used to add a background to a section of a collection view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionlayoutdecorationitem
 type NSCollectionLayoutDecorationItem struct {
 	NSCollectionLayoutItem
@@ -33,6 +35,7 @@ func NSCollectionLayoutDecorationItemFromID(id objc.ID) *NSCollectionLayoutDecor
 	return o
 }
 
+// Creates a section background with a string to identify the element kind.
 func NSCollectionLayoutDecorationItemBackgroundDecorationItemWithElementKind(elementKind *foundation.NSString) *NSCollectionLayoutDecorationItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDecorationItem), _nSCollectionLayoutDecorationItemSelBackgroundDecorationItemWithElementKind, elementKind.Ptr())
 	if _ret != 0 {

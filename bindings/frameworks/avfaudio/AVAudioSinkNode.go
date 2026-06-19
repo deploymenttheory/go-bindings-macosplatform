@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that receives audio data.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiosinknode
 type AVAudioSinkNode struct {
 	AVAudioNode
@@ -30,7 +32,7 @@ func AVAudioSinkNodeFromID(id objc.ID) *AVAudioSinkNode {
 	return o
 }
 
-// @method initWithReceiverBlock: @abstract Create a node with a receiver block. @param block The block that receives audio data from the input. @discussion The receiver block is called when the input data is available. The block will be called on the realtime thread and it is the client's responsibility to handle it in a thread-safe manner and to not make any blocking calls. The audio format for the input bus will be set from the connection format when connecting to another node. The audio format for the data received by the block will be set to the node's input format.
+// Creates an audio sink node with a block that receives audio data.
 func (o *AVAudioSinkNode) InitWithReceiverBlock(block func(*coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) *AVAudioSinkNode {
 	var __block_block objc.Block
 	if block != nil {

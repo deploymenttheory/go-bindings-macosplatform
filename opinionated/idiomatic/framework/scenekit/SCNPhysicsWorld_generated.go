@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The global simulation of collisions, gravity, joints, and other physics effects in a scene.
+//
 // PhysicsWorld wraps [raw.SCNPhysicsWorld] with a fluent Go API.
 type PhysicsWorld struct {
 	inner *raw.SCNPhysicsWorld
@@ -38,65 +40,89 @@ func NewPhysicsWorld() *PhysicsWorld {
 	return &PhysicsWorld{inner: raw.SCNPhysicsWorldFromID(_id)}
 }
 
+// A vector that specifies the gravitational acceleration applied to physics bodies in the physics world.
+//
 // WithGravity sets the gravity property and returns the receiver for chaining.
 func (x *PhysicsWorld) WithGravity(gravity raw.SCNVector3) *PhysicsWorld {
 	x.inner.SetGravity(gravity)
 	return x
 }
 
+// The rate at which the simulation executes.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *PhysicsWorld) WithSpeed(speed float64) *PhysicsWorld {
 	x.inner.SetSpeed(speed)
 	return x
 }
 
+// The time interval between updates to the physics simulation.
+//
 // WithTimeStep sets the timeStep property and returns the receiver for chaining.
 func (x *PhysicsWorld) WithTimeStep(timeStep float64) *PhysicsWorld {
 	x.inner.SetTimeStep(timeStep)
 	return x
 }
 
+// A delegate that is called when two physics bodies come in contact with each other.
+//
 // WithContactDelegate sets the contactDelegate property and returns the receiver for chaining.
 func (x *PhysicsWorld) WithContactDelegate(contactDelegate raw.SCNPhysicsContactDelegate) *PhysicsWorld {
 	x.inner.SetContactDelegate(contactDelegate)
 	return x
 }
 
+// Adds a behavior to the physics world.
+//
 // AddBehavior calls the underlying AddBehavior.
 func (x *PhysicsWorld) AddBehavior(behavior *raw.SCNPhysicsBehavior) {
 	x.inner.AddBehavior(behavior)
 }
 
+// Removes a behavior from the physics world.
+//
 // RemoveBehavior calls the underlying RemoveBehavior.
 func (x *PhysicsWorld) RemoveBehavior(behavior *raw.SCNPhysicsBehavior) {
 	x.inner.RemoveBehavior(behavior)
 }
 
+// Removes all behaviors affecting bodies in the physics world.
+//
 // RemoveAllBehaviors calls the underlying RemoveAllBehaviors.
 func (x *PhysicsWorld) RemoveAllBehaviors() {
 	x.inner.RemoveAllBehaviors()
 }
 
+// Searches for physics bodies along a line segment between two points in the physics world.
+//
 // RayTestWithSegmentFromPointToPointOptions calls the underlying RayTestWithSegmentFromPointToPointOptions.
 func (x *PhysicsWorld) RayTestWithSegmentFromPointToPointOptions(origin raw.SCNVector3, dest raw.SCNVector3, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.SCNHitTestResult] {
 	return x.inner.RayTestWithSegmentFromPointToPointOptions(origin, dest, options)
 }
 
+// Checks for contacts between two physics bodies.
+//
 // ContactTestBetweenBodyAndBodyOptions calls the underlying ContactTestBetweenBodyAndBodyOptions.
 func (x *PhysicsWorld) ContactTestBetweenBodyAndBodyOptions(bodyA *raw.SCNPhysicsBody, bodyB *raw.SCNPhysicsBody, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.SCNPhysicsContact] {
 	return x.inner.ContactTestBetweenBodyAndBodyOptions(bodyA, bodyB, options)
 }
 
+// Checks for contacts between one physics body and any other bodies in the physics world.
+//
 // ContactTestWithBodyOptions calls the underlying ContactTestWithBodyOptions.
 func (x *PhysicsWorld) ContactTestWithBodyOptions(body *raw.SCNPhysicsBody, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.SCNPhysicsContact] {
 	return x.inner.ContactTestWithBodyOptions(body, options)
 }
 
+// Searches for physics bodies in the space formed by moving a convex shape through the physics world.
+//
 // ConvexSweepTestWithShapeFromTransformToTransformOptions calls the underlying ConvexSweepTestWithShapeFromTransformToTransformOptions.
 func (x *PhysicsWorld) ConvexSweepTestWithShapeFromTransformToTransformOptions(shape *raw.SCNPhysicsShape, from quartzcore.CATransform3D, to quartzcore.CATransform3D, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.SCNPhysicsContact] {
 	return x.inner.ConvexSweepTestWithShapeFromTransformToTransformOptions(shape, from, to, options)
 }
 
+// Forces the physics engine to reevaluate possible collisions between physics bodies.
+//
 // UpdateCollisionPairs calls the underlying UpdateCollisionPairs.
 func (x *PhysicsWorld) UpdateCollisionPairs() {
 	x.inner.UpdateCollisionPairs()

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains configuration information about a workout session.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkworkoutconfiguration
 type HKWorkoutConfiguration struct {
 	foundation.NSObject

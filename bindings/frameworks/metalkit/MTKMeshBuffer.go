@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A buffer that backs the vertex data of a Model I/O mesh, suitable for use in a Metal app.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalkit/mtkmeshbuffer
 type MTKMeshBuffer struct {
 	foundation.NSObject

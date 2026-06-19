@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a MIDI control change message.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avmidicontrolchangeevent
 type AVMIDIControlChangeEvent struct {
 	AVMIDIChannelEvent
@@ -31,7 +33,7 @@ func AVMIDIControlChangeEventFromID(id objc.ID) *AVMIDIControlChangeEvent {
 	return o
 }
 
-// @method initWithChannel:messageType:value @abstract Initialize the event with a channel, a control change type, and a control value. @param channel The MIDI channel for the control change.  Range: 0-15. @param messageType The AVMIDIControlChangeMessageType indicating which MIDI control change message to send. @param value The value for this control change.  Range: Depends on the type (see the General MIDI specification).
+// Creates an event with a channel, control change type, and a value.
 func (o *AVMIDIControlChangeEvent) InitWithChannelMessageTypeValue(channel uint, messageType AVMIDIControlChangeMessageType, value uint) *AVMIDIControlChangeEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIControlChangeEventSelInitWithChannelMessageTypeValue, channel, messageType, value)
 	if _ret != 0 {

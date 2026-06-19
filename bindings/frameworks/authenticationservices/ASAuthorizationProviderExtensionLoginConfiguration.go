@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface for configuring platform single sign-on.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration
 type ASAuthorizationProviderExtensionLoginConfiguration struct {
 	foundation.NSObject
@@ -129,7 +131,7 @@ func ASAuthorizationProviderExtensionLoginConfigurationFromID(id objc.ID) *ASAut
 	return o
 }
 
-// @abstract Initializes an ASAuthorizationProviderExtensionLoginConfiguration class with the required values. @param clientID The client_id for the Apple platform SSO login at the identity provider. @param issuer The issuer for the requests, used to validate responses. @param tokenEndpointURL The token endpoint at the idP for login. @param jwksEndpointURL The JWKS URL at the idP for validating tokens. @param audience The audience used for signed assertions.  This should be the tenent at the idP. @return An instance of a ASAuthorizationProviderExtensionLoginConfiguration.
+// Creates a configuration with the required values.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) InitWithClientIDIssuerTokenEndpointURLJwksEndpointURLAudience(clientID *foundation.NSString, issuer *foundation.NSString, tokenEndpointURL *foundation.NSURL, jwksEndpointURL *foundation.NSURL, audience *foundation.NSString) *ASAuthorizationProviderExtensionLoginConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelInitWithClientIDIssuerTokenEndpointURLJwksEndpointURLAudience, clientID.Ptr(), issuer.Ptr(), tokenEndpointURL.Ptr(), jwksEndpointURL.Ptr(), audience.Ptr())
 	if _ret != 0 {
@@ -138,7 +140,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) InitWithClientIDIss
 	return ASAuthorizationProviderExtensionLoginConfigurationFromID(_ret)
 }
 
-// @abstract Creates a login configuration using the OpenID configuration. @param openIDConfigurationURL The base URL to load the .well-known/openid-configuration. @param clientID The client_id for the Apple platform SSO login at the identity provider. @param issuer The issuer for the requests, used to validate responses. @param completion The completion called when it is complete or the error.
+// Creates a login configuration using the OpenID configuration.
 func ASAuthorizationProviderExtensionLoginConfigurationConfigurationWithOpenIDConfigurationURLClientIDIssuerCompletion(openIDConfigurationURL *foundation.NSURL, clientID *foundation.NSString, issuer *foundation.NSString, completion func(*ASAuthorizationProviderExtensionLoginConfiguration, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -153,40 +155,40 @@ func ASAuthorizationProviderExtensionLoginConfigurationConfigurationWithOpenIDCo
 	objc.ID(_clsASAuthorizationProviderExtensionLoginConfiguration).Send(_aSAuthorizationProviderExtensionLoginConfigurationSelConfigurationWithOpenIDConfigurationURLClientIDIssuerCompletion, openIDConfigurationURL.Ptr(), clientID.Ptr(), issuer.Ptr(), __block_completion)
 }
 
-// @abstract Sets custom claims to be added to the embedded assertion request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+// Adds the custom claims to the embedded assertion request header.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomAssertionRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomAssertionRequestHeaderClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomAssertionRequestHeaderClaimsReturningError, claims.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
-// @abstract Sets custom claims to be added to the embedded assertion request body. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+// Adds the custom claims to the embedded assertion request body.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomAssertionRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomAssertionRequestBodyClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomAssertionRequestBodyClaimsReturningError, claims.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
-// @abstract Sets custom claims to be added to the login request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+// Adds the custom claims to the login request header.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomLoginRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomLoginRequestHeaderClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomLoginRequestHeaderClaimsReturningError, claims.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
-// @abstract Sets custom claims to be added to the login request body. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+// Adds the custom claims to the login request body.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomLoginRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomLoginRequestBodyClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomLoginRequestBodyClaimsReturningError, claims.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -196,7 +198,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomLoginReque
 // @abstract Sets custom claims to be added to the refresh request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRefreshRequestHeaderClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRefreshRequestHeaderClaimsReturningError, claims.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -206,7 +208,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshReq
 // @abstract Sets custom claims to be added to the refresh request bode. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRefreshRequestBodyClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRefreshRequestBodyClaimsReturningError, claims.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -216,7 +218,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshReq
 // @abstract Sets custom claims to be added to the key exchange request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchangeRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyExchangeRequestHeaderClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyExchangeRequestHeaderClaimsReturningError, claims.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -226,7 +228,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchang
 // @abstract Sets custom claims to be added to the key exchange request body. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchangeRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyExchangeRequestBodyClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyExchangeRequestBodyClaimsReturningError, claims.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -236,7 +238,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchang
 // @abstract Sets custom claims to be added to the key request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyRequestHeaderClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyRequestHeaderClaimsReturningError, claims.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -246,7 +248,7 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequest
 // @abstract Sets custom claims to be added to the key request body. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyRequestBodyClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyRequestBodyClaimsReturningError, claims.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -338,12 +340,15 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetJwksEndpointURL(
 
 // @abstract The root certificates to use for trust evaluation of jwks keys. @discussion if set, certificates will be required in jwks responses and evaluated using the supplied certificates.  If the jwks certificates are missing or fail trust evaluation the login will fail.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) JwksTrustedRootCertificates() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelJwksTrustedRootCertificates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelJwksTrustedRootCertificates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetJwksTrustedRootCertificates(jwksTrustedRootCertificates *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetJwksTrustedRootCertificates, jwksTrustedRootCertificates)
+	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetJwksTrustedRootCertificates, jwksTrustedRootCertificates.Ptr())
 }
 
 // @abstract The device context for storing device meta data.
@@ -410,12 +415,15 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetServerNonceClaim
 
 // @abstract Custom values added to the server nonce POST request body.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) CustomNonceRequestValues() *foundation.NSArray[*foundation.NSURLQueryItem] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURLQueryItem]](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelCustomNonceRequestValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelCustomNonceRequestValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURLQueryItem](_ret)
 }
 
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomNonceRequestValues(customNonceRequestValues *foundation.NSArray[*foundation.NSURLQueryItem]) {
-	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomNonceRequestValues, customNonceRequestValues)
+	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomNonceRequestValues, customNonceRequestValues.Ptr())
 }
 
 // @abstract Additional login scopes.
@@ -482,12 +490,15 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomRequestJWT
 
 // @abstract Custom values added to the login POST request body.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) CustomLoginRequestValues() *foundation.NSArray[*foundation.NSURLQueryItem] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURLQueryItem]](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelCustomLoginRequestValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelCustomLoginRequestValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURLQueryItem](_ret)
 }
 
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomLoginRequestValues(customLoginRequestValues *foundation.NSArray[*foundation.NSURLQueryItem]) {
-	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomLoginRequestValues, customLoginRequestValues)
+	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomLoginRequestValues, customLoginRequestValues.Ptr())
 }
 
 // @abstract The claim name for the user unique identifier in the id token. Defaults to "sub".
@@ -557,12 +568,15 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetRefreshEndpointU
 
 // @abstract Custom values added to the refresh POST request body.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) CustomRefreshRequestValues() *foundation.NSArray[*foundation.NSURLQueryItem] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURLQueryItem]](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelCustomRefreshRequestValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelCustomRefreshRequestValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURLQueryItem](_ret)
 }
 
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshRequestValues(customRefreshRequestValues *foundation.NSArray[*foundation.NSURLQueryItem]) {
-	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRefreshRequestValues, customRefreshRequestValues)
+	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRefreshRequestValues, customRefreshRequestValues.Ptr())
 }
 
 // @abstract The federation method to use.
@@ -642,12 +656,15 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetFederationPredic
 
 // @abstract The custom query string values to add when making the preauthenticaion request.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) CustomFederationUserPreauthenticationRequestValues() *foundation.NSArray[*foundation.NSURLQueryItem] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURLQueryItem]](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelCustomFederationUserPreauthenticationRequestValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelCustomFederationUserPreauthenticationRequestValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURLQueryItem](_ret)
 }
 
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomFederationUserPreauthenticationRequestValues(customFederationUserPreauthenticationRequestValues *foundation.NSArray[*foundation.NSURLQueryItem]) {
-	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomFederationUserPreauthenticationRequestValues, customFederationUserPreauthenticationRequestValues)
+	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomFederationUserPreauthenticationRequestValues, customFederationUserPreauthenticationRequestValues.Ptr())
 }
 
 // @abstract The public key to use for encrypting the embedded login assertion. @discussion Only applies to password authentication.  If set, the password will encrypted in an embedded assertion instead of the login request itself.
@@ -727,22 +744,28 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetKeyEndpointURL(k
 
 // @abstract Custom values added to the key exchange POST request body.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) CustomKeyExchangeRequestValues() *foundation.NSArray[*foundation.NSURLQueryItem] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURLQueryItem]](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelCustomKeyExchangeRequestValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelCustomKeyExchangeRequestValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURLQueryItem](_ret)
 }
 
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchangeRequestValues(customKeyExchangeRequestValues *foundation.NSArray[*foundation.NSURLQueryItem]) {
-	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyExchangeRequestValues, customKeyExchangeRequestValues)
+	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyExchangeRequestValues, customKeyExchangeRequestValues.Ptr())
 }
 
 // @abstract Custom values added to the key request POST request body.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) CustomKeyRequestValues() *foundation.NSArray[*foundation.NSURLQueryItem] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURLQueryItem]](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelCustomKeyRequestValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelCustomKeyRequestValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURLQueryItem](_ret)
 }
 
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequestValues(customKeyRequestValues *foundation.NSArray[*foundation.NSURLQueryItem]) {
-	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyRequestValues, customKeyRequestValues)
+	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyRequestValues, customKeyRequestValues.Ptr())
 }
 
 // @abstract The PreSharedKey to be used for HKPE. Setting this value will change the mode to PSK or AuthPSK if the hpkeAuthPublicKey is also set. Must be at least 32 bytes.

@@ -1,0 +1,562 @@
+{
+  "schema_version": 1,
+  "framework": "GLKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "GLKBaseEffect": {
+      "doc": "A simple lighting and shading system for use in shader-based OpenGL rendering.",
+      "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect"
+    },
+    "GLKEffectProperty": {
+      "doc": "The abstract superclass for configuration information used in GLKit rendering effects.",
+      "url": "https://developer.apple.com/documentation/glkit/glkeffectproperty"
+    },
+    "GLKEffectPropertyFog": {
+      "doc": "Fog drawing information for use in GLKit rendering effects.",
+      "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertyfog"
+    },
+    "GLKEffectPropertyLight": {
+      "doc": "Lighting information for use in GLKit rendering effects.",
+      "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertylight"
+    },
+    "GLKEffectPropertyMaterial": {
+      "doc": "Surface appearance properties for use in GLKit rendering effects.",
+      "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertymaterial"
+    },
+    "GLKEffectPropertyTexture": {
+      "doc": "Texture drawing parameters for use in GLKit rendering effects.",
+      "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertytexture"
+    },
+    "GLKEffectPropertyTransform": {
+      "doc": "Coordinate transform information for use in GLKit rendering effects.",
+      "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertytransform"
+    },
+    "GLKMesh": {
+      "url": "https://developer.apple.com/documentation/glkit/glkmesh"
+    },
+    "GLKMeshBuffer": {
+      "url": "https://developer.apple.com/documentation/glkit/glkmeshbuffer"
+    },
+    "GLKMeshBufferAllocator": {
+      "url": "https://developer.apple.com/documentation/glkit/glkmeshbufferallocator"
+    },
+    "GLKReflectionMapEffect": {
+      "doc": "A lighting and shading system that supports reflection mapping for use in shader-based OpenGL rendering.",
+      "url": "https://developer.apple.com/documentation/glkit/glkreflectionmapeffect"
+    },
+    "GLKSkyboxEffect": {
+      "doc": "A simple skybox visual effect for use in shader-based OpenGL rendering.",
+      "url": "https://developer.apple.com/documentation/glkit/glkskyboxeffect"
+    },
+    "GLKSubmesh": {
+      "url": "https://developer.apple.com/documentation/glkit/glksubmesh"
+    },
+    "GLKTextureInfo": {
+      "doc": "Information about OpenGL textures created by the GLKTextureLoader class.",
+      "url": "https://developer.apple.com/documentation/glkit/glktextureinfo"
+    },
+    "GLKTextureLoader": {
+      "doc": "A utility class that simplifies loading OpenGL or OpenGL ES texture datas from a variety of image file formats.",
+      "url": "https://developer.apple.com/documentation/glkit/glktextureloader"
+    }
+  },
+  "protocols": {
+    "GLKNamedEffect": {
+      "doc": "A standard interface for objects that provide shader-based OpenGL rendering effects.",
+      "url": "https://developer.apple.com/documentation/glkit/glknamedeffect"
+    }
+  },
+  "enums": {
+    "GLKFogMode": {
+      "doc": "A mode that describes how the fog component is calculated for the fragment.",
+      "url": "https://developer.apple.com/documentation/glkit/glkfogmode",
+      "members": {
+        "GLKFogModeExp": {
+          "doc": "The fog component is calculated as exp(-density * distance) and clamped to the range [0.0, 1.0].",
+          "url": "https://developer.apple.com/documentation/glkit/glkfogmode/exp"
+        },
+        "GLKFogModeExp2": {
+          "doc": "The fog component is calculated as exp(-(density * distance)^2) and clamped to the range [0.0, 1.0].",
+          "url": "https://developer.apple.com/documentation/glkit/glkfogmode/exp2"
+        },
+        "GLKFogModeLinear": {
+          "doc": "The fog component is calculated as (end - distance) / (end - start) and clamped to the range [0.0, 1.0].",
+          "url": "https://developer.apple.com/documentation/glkit/glkfogmode/linear"
+        }
+      }
+    },
+    "GLKLightingType": {
+      "doc": "A constant that describes how lighting is calculated by an effect.",
+      "url": "https://developer.apple.com/documentation/glkit/glklightingtype",
+      "members": {
+        "GLKLightingTypePerPixel": {
+          "doc": "Indicates that the inputs to the lighting calculation are interpolated across a triangle and the lighting calculations are performed at each fragment.",
+          "url": "https://developer.apple.com/documentation/glkit/glklightingtype/perpixel"
+        },
+        "GLKLightingTypePerVertex": {
+          "doc": "Indicates that the lighting calculations are performed at each vertex in a triangle and then interpolated across the triangle.",
+          "url": "https://developer.apple.com/documentation/glkit/glklightingtype/pervertex"
+        }
+      }
+    },
+    "GLKTextureEnvMode": {
+      "doc": "The mode used to combine the texture with other color components.",
+      "url": "https://developer.apple.com/documentation/glkit/glktextureenvmode",
+      "members": {
+        "GLKTextureEnvModeDecal": {
+          "doc": "The output color is calculated by using the texture’s alpha component to blend the texture’s color with the input color.",
+          "url": "https://developer.apple.com/documentation/glkit/glktextureenvmode/decal"
+        },
+        "GLKTextureEnvModeModulate": {
+          "doc": "The output color is calculated by multiplying the texture’s color by the input color.",
+          "url": "https://developer.apple.com/documentation/glkit/glktextureenvmode/modulate"
+        },
+        "GLKTextureEnvModeReplace": {
+          "doc": "The output color is set to the color fetched from the texture. The input color is ignored.",
+          "url": "https://developer.apple.com/documentation/glkit/glktextureenvmode/replace"
+        }
+      }
+    },
+    "GLKTextureInfoAlphaState": {
+      "doc": "Values that describe the alpha information stored in a source image’s pixel data.",
+      "url": "https://developer.apple.com/documentation/glkit/glktextureinfoalphastate",
+      "members": {
+        "GLKTextureInfoAlphaStateNonPremultiplied": {
+          "doc": "Indicates that the color values in the texture were not premultiplied by the alpha value.",
+          "url": "https://developer.apple.com/documentation/glkit/glktextureinfoalphastate/nonpremultiplied"
+        },
+        "GLKTextureInfoAlphaStateNone": {
+          "doc": "Indicates that the texture has no alpha information.",
+          "url": "https://developer.apple.com/documentation/glkit/glktextureinfoalphastate/none"
+        },
+        "GLKTextureInfoAlphaStatePremultiplied": {
+          "doc": "Indicates that the color values in the texture have already been premultiplied by the alpha value.",
+          "url": "https://developer.apple.com/documentation/glkit/glktextureinfoalphastate/premultiplied"
+        }
+      }
+    },
+    "GLKTextureInfoOrigin": {
+      "doc": "The location of the origin in the original source image.",
+      "url": "https://developer.apple.com/documentation/glkit/glktextureinfoorigin",
+      "members": {
+        "GLKTextureInfoOriginBottomLeft": {
+          "doc": "The origin of the texture is in the bottom-left corner.",
+          "url": "https://developer.apple.com/documentation/glkit/glktextureinfoorigin/bottomleft"
+        },
+        "GLKTextureInfoOriginTopLeft": {
+          "doc": "The origin of the texture is in the top-left corner.",
+          "url": "https://developer.apple.com/documentation/glkit/glktextureinfoorigin/topleft"
+        },
+        "GLKTextureInfoOriginUnknown": {
+          "doc": "The origin of the texture is not supported.",
+          "url": "https://developer.apple.com/documentation/glkit/glktextureinfoorigin/unknown"
+        }
+      }
+    },
+    "GLKTextureLoaderError": {
+      "url": "https://developer.apple.com/documentation/glkit/glktextureloadererror"
+    },
+    "GLKTextureTarget": {
+      "doc": "The kind of texture pointed to by the property.",
+      "url": "https://developer.apple.com/documentation/glkit/glktexturetarget",
+      "members": {
+        "GLKTextureTarget2D": {
+          "doc": "The texture is a 2D texture.",
+          "url": "https://developer.apple.com/documentation/glkit/glktexturetarget/target2d"
+        },
+        "GLKTextureTargetCt": {
+          "doc": "The number of items in the enumeration.",
+          "url": "https://developer.apple.com/documentation/glkit/glktexturetarget/targetct"
+        },
+        "GLKTextureTargetCubeMap": {
+          "doc": "The texture is a set of six textures that make up a cube map.",
+          "url": "https://developer.apple.com/documentation/glkit/glktexturetarget/targetcubemap"
+        }
+      }
+    },
+    "GLKVertexAttrib": {
+      "doc": "Values used as indices in OpenGL code to associate vertex data with an attribute in a named shader effect.",
+      "url": "https://developer.apple.com/documentation/glkit/glkvertexattrib",
+      "members": {
+        "GLKVertexAttribColor": {
+          "doc": "This index is used to provide the vertex color to a shader.",
+          "url": "https://developer.apple.com/documentation/glkit/glkvertexattrib/color"
+        },
+        "GLKVertexAttribNormal": {
+          "doc": "This index is used to provide the vertex normal to a shader.",
+          "url": "https://developer.apple.com/documentation/glkit/glkvertexattrib/normal"
+        },
+        "GLKVertexAttribPosition": {
+          "doc": "This index is used to provide the vertex position to a shader.",
+          "url": "https://developer.apple.com/documentation/glkit/glkvertexattrib/position"
+        },
+        "GLKVertexAttribTexCoord0": {
+          "doc": "This index is used to provide a set of texture coordinates to a shader.",
+          "url": "https://developer.apple.com/documentation/glkit/glkvertexattrib/texcoord0"
+        },
+        "GLKVertexAttribTexCoord1": {
+          "doc": "This index is used to provide the second set of texture coordinates to a shader.",
+          "url": "https://developer.apple.com/documentation/glkit/glkvertexattrib/texcoord1"
+        }
+      }
+    }
+  },
+  "methods": {
+    "GLKBaseEffect": {
+      "-prepareToDraw": {
+        "doc": "Prepares an effect for rendering.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/preparetodraw()"
+      }
+    },
+    "GLKReflectionMapEffect": {
+      "-prepareToDraw": {
+        "doc": "Prepares an effect for rendering.",
+        "url": "https://developer.apple.com/documentation/glkit/glkreflectionmapeffect/preparetodraw()"
+      }
+    },
+    "GLKSkyboxEffect": {
+      "-draw": {
+        "doc": "Draws the skybox.",
+        "url": "https://developer.apple.com/documentation/glkit/glkskyboxeffect/draw()"
+      },
+      "-prepareToDraw": {
+        "doc": "Prepares an effect for rendering.",
+        "url": "https://developer.apple.com/documentation/glkit/glkskyboxeffect/preparetodraw()"
+      }
+    },
+    "GLKTextureLoader": {
+      "+cubeMapWithContentsOfFile:options:error:": {
+        "doc": "Loads a cube map texture image from a single file and creates a new texture from the data.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/cubemap(withcontentsoffile:options:)"
+      },
+      "+cubeMapWithContentsOfFiles:options:error:": {
+        "doc": "Loads a cube map texture image from a series of files and creates a new texture from the data.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/cubemap(withcontentsoffiles:options:)"
+      },
+      "+cubeMapWithContentsOfURL:options:error:": {
+        "doc": "Loads a cube map texture image from a single URL and creates a new texture from the data.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/cubemap(withcontentsof:options:)"
+      },
+      "+textureWithCGImage:options:error:": {
+        "doc": "Loads a 2D texture image from a Quartz image and creates a new texture from the data.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/texture(with:options:)"
+      },
+      "+textureWithContentsOfData:options:error:": {
+        "doc": "Loads a 2D texture image from a memory range and creates a new texture from the data.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/texture(withcontentsof:options:)-2ljxb"
+      },
+      "+textureWithContentsOfFile:options:error:": {
+        "doc": "Loads a 2D texture image from a file and creates a new texture from the data.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/texture(withcontentsoffile:options:)"
+      },
+      "+textureWithContentsOfURL:options:error:": {
+        "doc": "Loads a 2D texture image from a URL and creates a new texture from the data.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/texture(withcontentsof:options:)-708ft"
+      },
+      "-cubeMapWithContentsOfFile:options:queue:completionHandler:": {
+        "doc": "Asynchronously loads a cube map texture image from a single file and creates a new texture from the data.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/cubemap(withcontentsoffile:options:queue:completionhandler:)"
+      },
+      "-cubeMapWithContentsOfFiles:options:queue:completionHandler:": {
+        "doc": "Asynchronously loads a cube map texture image from a series of files and creates a new texture from the data.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/cubemap(withcontentsoffiles:options:queue:completionhandler:)"
+      },
+      "-cubeMapWithContentsOfURL:options:queue:completionHandler:": {
+        "doc": "Asynchronously loads a cube map texture image from a single URL and creates a new texture from the data.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/cubemap(withcontentsof:options:queue:completionhandler:)"
+      },
+      "-initWithShareContext:": {
+        "doc": "Initializes a new texture loader object.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/init(share:)"
+      },
+      "-initWithSharegroup:": {
+        "doc": "Initializes a new texture loader object.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/init(sharegroup:)"
+      },
+      "-textureWithCGImage:options:queue:completionHandler:": {
+        "doc": "Asynchronously loads a 2D texture image from a Quartz image and creates a new texture from the data.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/texture(with:options:queue:completionhandler:)"
+      },
+      "-textureWithContentsOfData:options:queue:completionHandler:": {
+        "doc": "Asynchronously loads a 2D texture image from a memory range and creates a new texture from the data.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/texture(withcontentsof:options:queue:completionhandler:)-6n0cf"
+      },
+      "-textureWithContentsOfFile:options:queue:completionHandler:": {
+        "doc": "Asynchronously loads a 2D texture image from a file and creates a new texture from the data.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/texture(withcontentsoffile:options:queue:completionhandler:)"
+      },
+      "-textureWithContentsOfURL:options:queue:completionHandler:": {
+        "doc": "Asynchronously loads a 2D texture image from a URL and creates a new texture from the data.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureloader/texture(withcontentsof:options:queue:completionhandler:)-55187"
+      }
+    }
+  },
+  "properties": {
+    "GLKBaseEffect": {
+      "colorMaterialEnabled": {
+        "doc": "A Boolean value that indicates whether or not to use the color vertex attribute when calculating the light’s interaction with the material.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/colormaterialenabled"
+      },
+      "constantColor": {
+        "doc": "A constant color, used when per-vertex color data is not provided.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/constantcolor"
+      },
+      "fog": {
+        "doc": "The fog properties to apply to the scene.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/fog"
+      },
+      "label": {
+        "doc": "A string used to name your effect.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/label"
+      },
+      "light0": {
+        "doc": "The lighting properties for the first light in the scene.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/light0"
+      },
+      "light1": {
+        "doc": "The lighting properties for the second light in the scene.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/light1"
+      },
+      "light2": {
+        "doc": "The lighting properties for the third light in the scene.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/light2"
+      },
+      "lightModelAmbientColor": {
+        "doc": "The ambient color applied to all primitives rendered by the effect.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/lightmodelambientcolor"
+      },
+      "lightModelTwoSided": {
+        "doc": "A Boolean value that indicates whether lighting is calculated for both sides of a primitive.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/lightmodeltwosided"
+      },
+      "lightingType": {
+        "doc": "The strategy the effect uses to calculate light values at each fragment. See GLKLightingType.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/lightingtype"
+      },
+      "material": {
+        "doc": "The material properties used when calculating the light values for a rendered primitive.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/material"
+      },
+      "texture2d0": {
+        "doc": "The properties for the first texture.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/texture2d0"
+      },
+      "texture2d1": {
+        "doc": "The properties for the second texture.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/texture2d1"
+      },
+      "textureOrder": {
+        "doc": "The order in which textures are applied to rendered primitives.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/textureorder"
+      },
+      "transform": {
+        "doc": "The modelview, projection and texture transformations applied to the vertex data when the effect is bound.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/transform"
+      },
+      "useConstantColor": {
+        "doc": "A Boolean value that indicates whether or not to use the constant color.",
+        "url": "https://developer.apple.com/documentation/glkit/glkbaseeffect/useconstantcolor"
+      }
+    },
+    "GLKEffectPropertyFog": {
+      "color": {
+        "doc": "The color of the fog at maximum density.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertyfog/color"
+      },
+      "density": {
+        "doc": "The rate at which the fog exponent increases.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertyfog/density"
+      },
+      "enabled": {
+        "doc": "A Boolean value that indicates whether fog is applied to the fragment color.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertyfog/enabled"
+      },
+      "end": {
+        "doc": "The distance in eye coordinates where fog completely covers the color fragment.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertyfog/end"
+      },
+      "mode": {
+        "doc": "The algorithm used to compute the density of the fog applied to the fragment color.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertyfog/mode"
+      },
+      "start": {
+        "doc": "The minimum distance in eye coordinates before fog is applied to the fragment color.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertyfog/start"
+      }
+    },
+    "GLKEffectPropertyLight": {
+      "ambientColor": {
+        "doc": "The ambient portion of the light.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertylight/ambientcolor"
+      },
+      "constantAttenuation": {
+        "doc": "A constant factor applied to the attenuation of a point light or spotlight.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertylight/constantattenuation"
+      },
+      "diffuseColor": {
+        "doc": "The diffuse portion of the light.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertylight/diffusecolor"
+      },
+      "enabled": {
+        "doc": "A Boolean value that indicates whether calculations should be performed on this light.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertylight/enabled"
+      },
+      "linearAttenuation": {
+        "doc": "A linear factor applied to the attenuation of a point light or spotlight.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertylight/linearattenuation"
+      },
+      "position": {
+        "doc": "The position of the light in world coordinates.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertylight/position"
+      },
+      "quadraticAttenuation": {
+        "doc": "A quadratic factor applied to the attenuation of a point light or spotlight.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertylight/quadraticattenuation"
+      },
+      "specularColor": {
+        "doc": "The specular portion of the light.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertylight/specularcolor"
+      },
+      "spotCutoff": {
+        "doc": "The angle in degrees where the spotlight is cut off.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertylight/spotcutoff"
+      },
+      "spotDirection": {
+        "doc": "A vector indicating the direction the spotlight is projecting.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertylight/spotdirection"
+      },
+      "spotExponent": {
+        "doc": "A value indicating how focused the spotlight is.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertylight/spotexponent"
+      },
+      "transform": {
+        "doc": "A transform applied to the light’s position and direction before calculating the contribution of the light.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertylight/transform"
+      }
+    },
+    "GLKEffectPropertyMaterial": {
+      "ambientColor": {
+        "doc": "The ambient color of the material.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertymaterial/ambientcolor"
+      },
+      "diffuseColor": {
+        "doc": "The diffuse color of the material.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertymaterial/diffusecolor"
+      },
+      "emissiveColor": {
+        "doc": "The emissive color of the material.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertymaterial/emissivecolor"
+      },
+      "shininess": {
+        "doc": "The shininess of the material, used when calculating specular lighting effects.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertymaterial/shininess"
+      },
+      "specularColor": {
+        "doc": "The specular color of the material.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertymaterial/specularcolor"
+      }
+    },
+    "GLKEffectPropertyTexture": {
+      "enabled": {
+        "doc": "A Boolean value that indicates whether this texture is used to texture drawn primitives.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertytexture/enabled"
+      },
+      "envMode": {
+        "doc": "The mode the texture uses to compute its output fragment color. See GLKTextureEnvMode.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertytexture/envmode"
+      },
+      "name": {
+        "doc": "The OpenGL name for the texture being sampled by this texture stage.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertytexture/name"
+      },
+      "target": {
+        "doc": "The kind of texture pointed to by the texture stage. See GLKTextureTarget.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertytexture/target"
+      }
+    },
+    "GLKEffectPropertyTransform": {
+      "modelviewMatrix": {
+        "doc": "The matrix used to transform position coordinates from world space to eye space.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertytransform/modelviewmatrix"
+      },
+      "normalMatrix": {
+        "doc": "The matrix used to transform normal coordinates from world space to eye space.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertytransform/normalmatrix"
+      },
+      "projectionMatrix": {
+        "doc": "The matrix used to transform position coordinates from eye space to projection space.",
+        "url": "https://developer.apple.com/documentation/glkit/glkeffectpropertytransform/projectionmatrix"
+      }
+    },
+    "GLKReflectionMapEffect": {
+      "matrix": {
+        "doc": "The reflection matrix to apply to the normals of the submitted vertices.",
+        "url": "https://developer.apple.com/documentation/glkit/glkreflectionmapeffect/matrix"
+      },
+      "textureCubeMap": {
+        "doc": "The texture map to apply in the reflection stage.",
+        "url": "https://developer.apple.com/documentation/glkit/glkreflectionmapeffect/texturecubemap"
+      }
+    },
+    "GLKSkyboxEffect": {
+      "center": {
+        "doc": "The center of the skybox.",
+        "url": "https://developer.apple.com/documentation/glkit/glkskyboxeffect/center"
+      },
+      "label": {
+        "doc": "A string used to name your effect.",
+        "url": "https://developer.apple.com/documentation/glkit/glkskyboxeffect/label"
+      },
+      "textureCubeMap": {
+        "doc": "The texture to apply to the skybox.",
+        "url": "https://developer.apple.com/documentation/glkit/glkskyboxeffect/texturecubemap"
+      },
+      "transform": {
+        "doc": "The transform applied before drawing the skybox.",
+        "url": "https://developer.apple.com/documentation/glkit/glkskyboxeffect/transform"
+      },
+      "xSize": {
+        "doc": "The width of the skybox.",
+        "url": "https://developer.apple.com/documentation/glkit/glkskyboxeffect/xsize"
+      },
+      "ySize": {
+        "doc": "The height of the skybox.",
+        "url": "https://developer.apple.com/documentation/glkit/glkskyboxeffect/ysize"
+      },
+      "zSize": {
+        "doc": "The depth of the skybox.",
+        "url": "https://developer.apple.com/documentation/glkit/glkskyboxeffect/zsize"
+      }
+    },
+    "GLKTextureInfo": {
+      "alphaState": {
+        "doc": "The state of the alpha component in the loaded texture.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureinfo/alphastate-swift.property"
+      },
+      "containsMipmaps": {
+        "doc": "A Boolean value that states whether the loaded texture contains mip maps.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureinfo/containsmipmaps-swift.property"
+      },
+      "height": {
+        "doc": "The height of the loaded texture.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureinfo/height-swift.property"
+      },
+      "name": {
+        "doc": "The OpenGL context’s name for the texture.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureinfo/name-swift.property"
+      },
+      "target": {
+        "doc": "The OpenGL binding target for the texture.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureinfo/target-swift.property"
+      },
+      "textureOrigin": {
+        "doc": "The location of the origin in the loaded texture.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureinfo/textureorigin-swift.property"
+      },
+      "width": {
+        "doc": "The width of the loaded texture.",
+        "url": "https://developer.apple.com/documentation/glkit/glktextureinfo/width-swift.property"
+      }
+    }
+  }
+}

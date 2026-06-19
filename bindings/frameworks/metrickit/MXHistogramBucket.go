@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing a bucket of data in a histogram.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxhistogrambucket
 type MXHistogramBucket[UnitType purego.AnyObject] struct {
 	foundation.NSObject

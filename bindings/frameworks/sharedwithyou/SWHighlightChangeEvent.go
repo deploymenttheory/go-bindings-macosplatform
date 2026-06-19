@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents change activity for a highlight.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyou/swhighlightchangeevent
 type SWHighlightChangeEvent struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func SWHighlightChangeEventFromID(id objc.ID) *SWHighlightChangeEvent {
 	return o
 }
 
-// Initializes a highlight change event object to represent changes to a highlight. @param highlight The object on which the event occurred. @param trigger The trigger change event for the highlight.
+// Creates and initializes a change event.
 func (o *SWHighlightChangeEvent) InitWithHighlightTrigger(highlight *SWHighlight, trigger SWHighlightChangeEventTrigger) *SWHighlightChangeEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightChangeEventSelInitWithHighlightTrigger, highlight.Ptr(), trigger)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// Provides registration and management of Crash Detection events.
+//
 // CrashDetectionManager wraps [raw.SACrashDetectionManager] with a fluent Go API.
 type CrashDetectionManager struct {
 	inner *raw.SACrashDetectionManager
@@ -36,7 +38,7 @@ func NewCrashDetectionManager() *CrashDetectionManager {
 	return &CrashDetectionManager{inner: raw.SACrashDetectionManagerFromID(_id)}
 }
 
-// delegate @discussion The delegate object to receive Crash Detection events.
+// The object that receives Crash Detection events.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *CrashDetectionManager) WithDelegate(delegate raw.SACrashDetectionDelegate) *CrashDetectionManager {
@@ -44,7 +46,7 @@ func (x *CrashDetectionManager) WithDelegate(delegate raw.SACrashDetectionDelega
 	return x
 }
 
-// @discussion Requests the user’s permission to access Crash Detection information. @param handler Completion handler invoked with the status of the authorization request.
+// Requests permission to access Crash Detection information.
 //
 // RequestAuthorizationWithCompletionHandler calls the underlying RequestAuthorizationWithCompletionHandler.
 func (x *CrashDetectionManager) RequestAuthorizationWithCompletionHandler(handler func(SAAuthorizationStatus, unsafe.Pointer)) {

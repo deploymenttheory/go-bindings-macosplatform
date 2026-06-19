@@ -10,7 +10,7 @@ import (
 	"unsafe"
 )
 
-// A 2D specalization of an agent that moves on a 2-axis logical coordinate system. This coordinate system does not need to match the visual coordinate system of the delegate. One simple case of that is isometric 2D content where the game model is on a flat 2D plane but the visuals are displayed on an angle where one of the logical axes are used for simulated depth as well as some translation in the display plane.
+// An agent that operates in a two-dimensional space.
 //
 // Agent2D wraps [raw.GKAgent2D] with a fluent Go API.
 type Agent2D struct {
@@ -38,7 +38,7 @@ func NewAgent2D() *Agent2D {
 	return &Agent2D{inner: raw.GKAgent2DFromID(_id)}
 }
 
-// Z rotation of the agent on the logical XY plane
+// The rotation of the agent around the z-axis.
 //
 // WithRotation sets the rotation property and returns the receiver for chaining.
 func (x *Agent2D) WithRotation(rotation float32) *Agent2D {
@@ -46,7 +46,7 @@ func (x *Agent2D) WithRotation(rotation float32) *Agent2D {
 	return x
 }
 
-// Object which has agentDidUpdate called on it during this agent's behavior updatekbeha
+// An object that prepares for or responds to updates in the agent simulation.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Agent2D) WithDelegate(delegate raw.GKAgentDelegate) *Agent2D {
@@ -54,7 +54,7 @@ func (x *Agent2D) WithDelegate(delegate raw.GKAgentDelegate) *Agent2D {
 	return x
 }
 
-// The behavior to apply when updateWithDeltaTime is called. All forces from the goals in the behavior are summed and then applied.
+// A weighted collection of goals that influence the agent’s movement.
 //
 // WithBehavior sets the behavior property and returns the receiver for chaining.
 func (x *Agent2D) WithBehavior(behavior BehaviorProvider) *Agent2D {
@@ -62,7 +62,7 @@ func (x *Agent2D) WithBehavior(behavior BehaviorProvider) *Agent2D {
 	return x
 }
 
-// Agent's mass. Used for agent impulse application purposes. Defaults to 1.0
+// The resistance of the agent to changes in speed or direction.
 //
 // WithMass sets the mass property and returns the receiver for chaining.
 func (x *Agent2D) WithMass(mass float32) *Agent2D {
@@ -70,7 +70,7 @@ func (x *Agent2D) WithMass(mass float32) *Agent2D {
 	return x
 }
 
-// Radius of the agent's bounding circle.  Used by the agent avoid steering functions. Defaults to 0.5 for a canonical diameter of 1.0
+// The agent’s radius.
 //
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *Agent2D) WithRadius(radius float32) *Agent2D {
@@ -78,7 +78,7 @@ func (x *Agent2D) WithRadius(radius float32) *Agent2D {
 	return x
 }
 
-// Current speed of the agent along its foward direction. Defaults to 0.0
+// The agent’s current forward speed, in units per second.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *Agent2D) WithSpeed(speed float32) *Agent2D {
@@ -86,7 +86,7 @@ func (x *Agent2D) WithSpeed(speed float32) *Agent2D {
 	return x
 }
 
-// Maximum amount of acceleration that can be applied to this agent.  All applied impulses are clipped to this amount. Defaults to 1.0
+// The upper limit to changes in the agent’s speed or direction.
 //
 // WithMaxAcceleration sets the maxAcceleration property and returns the receiver for chaining.
 func (x *Agent2D) WithMaxAcceleration(maxAcceleration float32) *Agent2D {
@@ -94,7 +94,7 @@ func (x *Agent2D) WithMaxAcceleration(maxAcceleration float32) *Agent2D {
 	return x
 }
 
-// Maximum speed of this agent. Impulses cannot cause the agents speed to ever be greater than this value. Defaults to 1.0
+// The agent’s maximum forward speed, in units per second.
 //
 // WithMaxSpeed sets the maxSpeed property and returns the receiver for chaining.
 func (x *Agent2D) WithMaxSpeed(maxSpeed float32) *Agent2D {

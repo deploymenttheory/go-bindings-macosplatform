@@ -7,6 +7,7 @@ import (
 	"unsafe"
 )
 
+// A structure that describes the location and size of a block of memory.
 type IOAddressSegment struct {
 	Address uint64
 	Length  uint64
@@ -84,6 +85,7 @@ type IOHistogramSegmentConfig struct {
 	Segment_bucket_count uint32
 }
 
+// A private structure for an interrupt dispatch source.
 type IOInterruptDispatchSourcePayload struct {
 	Time  uint64
 	Count uint64
@@ -273,6 +275,7 @@ type IOTimerDispatchSource_IVars struct{}
 // IOTimerDispatchSource_LocalIVars is an opaque type.
 type IOTimerDispatchSource_LocalIVars struct{}
 
+// Arguments to pass to IOConnectMethod calls.
 type IOUserClientMethodArguments struct {
 	Version                    uint64
 	Selector                   uint64
@@ -288,6 +291,7 @@ type IOUserClientMethodArguments struct {
 	StructureOutputMaximumSize uint64
 }
 
+// A structure that specifies how to validate the arguments passed to a client method function.
 type IOUserClientMethodDispatch struct {
 	Function                 unsafe.Pointer
 	CheckCompletionExists    uint32
@@ -413,6 +417,7 @@ type OSNumber_IVars struct{}
 // OSNumber_LocalIVars is an opaque type.
 type OSNumber_LocalIVars struct{}
 
+// The base class for DriverKit objects
 // OSObject is an opaque type.
 type OSObject struct{}
 

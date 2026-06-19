@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that describes the pattern for a recurring event.
+//
 // RecurrenceRule wraps [raw.EKRecurrenceRule] with a fluent Go API.
 type RecurrenceRule struct {
 	inner *raw.EKRecurrenceRule
@@ -31,7 +33,7 @@ func RecurrenceRuleFromID(id objc.ID) *RecurrenceRule {
 	return &RecurrenceRule{inner: raw.EKRecurrenceRuleFromID(id)}
 }
 
-// @method     initRecurrenceWithFrequency:interval:end: @abstract   Simple initializer to create a recurrence. @discussion This is used to create a simple recurrence with a specific type, interval and end. If interval is 0, an exception is raised. The end parameter can be nil.
+// Initializes and returns a simple recurrence rule with a given frequency, interval, and end.
 //
 // NewRecurrenceRuleRecurrenceWithFrequencyIntervalEnd creates a new [RecurrenceRule].
 func NewRecurrenceRuleRecurrenceWithFrequencyIntervalEnd(type_ EKRecurrenceFrequency, interval int, end *raw.EKRecurrenceEnd) *RecurrenceRule {
@@ -40,7 +42,7 @@ func NewRecurrenceRuleRecurrenceWithFrequencyIntervalEnd(type_ EKRecurrenceFrequ
 	return &RecurrenceRule{inner: raw.EKRecurrenceRuleFromID(_id)}
 }
 
-// @method     initRecurrenceWithFrequency:interval:daysOfTheWeek:daysOfTheMonth:monthsOfTheYear:weeksOfTheYear:daysOfTheYear:setPositions:end: @abstract   The designated initializer. @discussion This can be used to build any kind of recurrence rule. But be aware that certain combinations make no sense and will be ignored. For example, if you pass daysOfTheWeek for a daily recurrence, they will be ignored. @param      type            The type of recurrence @param      interval        The interval. Passing zero will raise an exception. @param      daysOfTheWeek   An array of EKRecurrenceDayOfWeek objects. Valid for all recurrence types except daily. Ignored otherwise. Corresponds to the BYDAY value in the iCalendar specification. @param      daysOfTheMonth  An array of NSNumbers ([+/-] 1 to 31). Negative numbers infer counting from the end of the month. For example, -1 means the last day of the month. Valid only for monthly recurrences. Ignored otherwise. Corresponds to the BYMONTHDAY value in the iCalendar specification. @param      monthsOfTheYear An array of NSNumbers (1 to 12). Valid only for yearly recurrences. Ignored otherwise. Corresponds to the BYMONTH value in the iCalendar specification. @param      weeksOfTheYear  An array of NSNumbers ([+/1] 1 to 53). Negative numbers infer counting from the end of the year. For example, -1 means the last week of the year. Valid only for yearly recurrences. Ignored otherwise. Corresponds to the BYWEEKNO value in the iCalendar specification. @param      daysOfTheYear   An array of NSNumbers ([+/1] 1 to 366). Negative numbers infer counting from the end of the year. For example, -1 means the last day of the year. Valid only for yearly recurrences. Ignored otherwise. Corresponds to the BYYEARDAY value in the iCalendar specification. @param      setPositions    An array of NSNumbers ([+/1] 1 to 366). Used at the end of recurrence computation to filter the list to the positions specified. Negative numbers indicate starting at the end, i.e. -1 indicates taking the last result of the set. Valid when daysOfTheWeek, daysOfTheMonth, monthsOfTheYear, weeksOfTheYear, or daysOfTheYear is passed. Ignored otherwise. Corresponds to the BYSETPOS value in the iCalendar specification. @param      end             The recurrence end, or nil.
+// Initializes and returns a recurrence rule with a given frequency and additional scheduling information.
 //
 // NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd creates a new [RecurrenceRule].
 func NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd(type_ EKRecurrenceFrequency, interval int, days *foundation.NSArray[*raw.EKRecurrenceDayOfWeek], monthDays *foundation.NSArray[*foundation.NSNumber], months *foundation.NSArray[*foundation.NSNumber], weeksOfTheYear *foundation.NSArray[*foundation.NSNumber], daysOfTheYear *foundation.NSArray[*foundation.NSNumber], setPositions *foundation.NSArray[*foundation.NSNumber], end *raw.EKRecurrenceEnd) *RecurrenceRule {
@@ -49,7 +51,7 @@ func NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonth
 	return &RecurrenceRule{inner: raw.EKRecurrenceRuleFromID(_id)}
 }
 
-// @property       recurrenceEnd @discussion     This property defines when the the repeating event is scheduled to end. The end date can be specified by a number of occurrences, or with an end date.
+// Indicates when the recurrence rule ends.
 //
 // WithRecurrenceEnd sets the recurrenceEnd property and returns the receiver for chaining.
 func (x *RecurrenceRule) WithRecurrenceEnd(recurrenceEnd *RecurrenceEnd) *RecurrenceRule {

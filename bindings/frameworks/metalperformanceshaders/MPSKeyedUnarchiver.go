@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A keyed archiver that supports Metal Performance Shaders kernel decoding.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpskeyedunarchiver
 type MPSKeyedUnarchiver struct {
 	foundation.NSKeyedUnarchiver
@@ -42,7 +44,7 @@ func MPSKeyedUnarchiverFromID(id objc.ID) *MPSKeyedUnarchiver {
 
 func MPSKeyedUnarchiverUnarchivedObjectOfClassesFromDataDeviceError(classes *foundation.NSSet[objc.Class], data *foundation.NSData, device metal.MTLDevice) (objc.ID, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsMPSKeyedUnarchiver), _mPSKeyedUnarchiverSelUnarchivedObjectOfClassesFromDataDeviceError, classes, data.Ptr(), device, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsMPSKeyedUnarchiver), _mPSKeyedUnarchiverSelUnarchivedObjectOfClassesFromDataDeviceError, classes.Ptr(), data.Ptr(), device, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}

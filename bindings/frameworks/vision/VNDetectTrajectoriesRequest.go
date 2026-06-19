@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request that detects the trajectories of shapes moving along a parabolic path.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetecttrajectoriesrequest
 type VNDetectTrajectoriesRequest struct {
 	VNStatefulRequest
@@ -43,7 +45,7 @@ func VNDetectTrajectoriesRequestFromID(id objc.ID) *VNDetectTrajectoriesRequest 
 	return o
 }
 
-// @brief Create a new request that will detect the trajectory of a shape in motion. @param frameAnalysisSpacing	The reciprocal of the maximum rate at which buffers will be processed. The request will not process buffers that fall within the frameAnalysisSpacing after it has performed the analysis. The analysis is not done by wall time but by analysis of the time stamps of the samplebuffers being processed. This property is for instance useful to throttle the processing on slower devices. If this is set to kCMTimeZero then no frames get skipped in the analysis. @param trajectoryLength		The number of points required to analyze a parabola that indicates a trajectory. Must be at least 5. @param completionHandler		The block to be invoked after the request has completed its processing. The completion handler gets executed on the same dispatch queue as the request being executed.
+// Creates a new request to detect trajectories.
 func (o *VNDetectTrajectoriesRequest) InitWithFrameAnalysisSpacingTrajectoryLengthCompletionHandler(frameAnalysisSpacing coremedia.CMTime, trajectoryLength int, completionHandler func(*VNRequest, unsafe.Pointer)) *VNDetectTrajectoriesRequest {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

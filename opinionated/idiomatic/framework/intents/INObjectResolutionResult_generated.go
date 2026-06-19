@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for an Object associated with an intent.
+//
 // ObjectResolutionResult wraps [raw.INObjectResolutionResult] with a fluent Go API.
 type ObjectResolutionResult struct {
 	inner *raw.INObjectResolutionResult

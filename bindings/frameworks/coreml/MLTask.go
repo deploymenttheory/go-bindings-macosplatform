@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for machine learning tasks.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mltask
 type MLTask struct {
 	foundation.NSObject
@@ -36,10 +38,12 @@ func MLTaskFromID(id objc.ID) *MLTask {
 	return o
 }
 
+// Begins or resumes a machine learning task.
 func (o *MLTask) Resume() {
 	o.Ptr().Send(_mLTaskSelResume)
 }
 
+// Cancels a machine learning task before it completes.
 func (o *MLTask) Cancel() {
 	o.Ptr().Send(_mLTaskSelCancel)
 }

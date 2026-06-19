@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes an activity within a longer workout.
+//
 // WorkoutActivity wraps [raw.HKWorkoutActivity] with a fluent Go API.
 type WorkoutActivity struct {
 	inner *raw.HKWorkoutActivity
@@ -31,7 +33,7 @@ func WorkoutActivityFromID(id objc.ID) *WorkoutActivity {
 	return &WorkoutActivity{inner: raw.HKWorkoutActivityFromID(id)}
 }
 
-// @method        initWithWorkoutConfiguration:startDate:endDate:metadata: @abstract      Initialize a new HKWorkoutActivity with the specified values. @param     workoutConfiguration    The configuration object describing the workout activity. @param     startDate               The point in time when the workout activity was started. @param     endDate                 The point in time when the workout activity was ended. @param     metadata                Metadata for the workout activity. (Optional)
+// Creates a workout activity using the provided configuration, start date, end date, and metadata.
 //
 // NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata creates a new [WorkoutActivity].
 func NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata(workoutConfiguration *raw.HKWorkoutConfiguration, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata purego.IDer) *WorkoutActivity {
@@ -40,7 +42,7 @@ func NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata(workoutC
 	return &WorkoutActivity{inner: raw.HKWorkoutActivityFromID(_id)}
 }
 
-// @method        statisticsForType: @discussion    Returns an HKStatistics object containing the statistics for all the samples of the given type that have been added to the workout within the date interval of this activity. If there are no samples of the given type then nil is returned. @param         quantityType    The quantity type to gather statistics about.
+// Returns the activity’s statistics for the provided quantity type.
 //
 // StatisticsForType calls the underlying StatisticsForType.
 func (x *WorkoutActivity) StatisticsForType(quantityType *raw.HKQuantityType) *Statistics {

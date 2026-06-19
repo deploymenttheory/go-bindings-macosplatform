@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The abstract base class for CloudKit notifications.
+//
 // Notification wraps [raw.CKNotification] with a fluent Go API.
 type Notification struct {
 	inner *raw.CKNotification

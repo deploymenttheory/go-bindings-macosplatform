@@ -56,6 +56,7 @@ func (e EvCmd) String() string {
 	}
 }
 
+// Specifies the corner of the screen to display the access point.
 type GKAccessPointLocation int64
 
 const (
@@ -80,14 +81,19 @@ func (e GKAccessPointLocation) String() string {
 	}
 }
 
+// The state of a challenge.
 // Deprecated: since macOS 26.0.
 type GKChallengeState int64
 
 const (
-	GKChallengeStateInvalid   GKChallengeState = 0
-	GKChallengeStatePending   GKChallengeState = 1
+	// The challenge isn’t valid because an error occurred.
+	GKChallengeStateInvalid GKChallengeState = 0
+	// The player issued a challenge, but the other player hasn’t accepted or refused it.
+	GKChallengeStatePending GKChallengeState = 1
+	// The player successfully completed the challenge.
 	GKChallengeStateCompleted GKChallengeState = 2
-	GKChallengeStateDeclined  GKChallengeState = 3
+	// The player declined the challenge.
+	GKChallengeStateDeclined GKChallengeState = 3
 )
 
 func (e GKChallengeState) String() string {
@@ -105,11 +111,14 @@ func (e GKChallengeState) String() string {
 	}
 }
 
+// Possible connection states for a player
 type GKConnectionState int64
 
 const (
+	// The player is not connected to the game session.
 	GKConnectionStateNotConnected GKConnectionState = 0
-	GKConnectionStateConnected    GKConnectionState = 1
+	// The player is connected to the game session.
+	GKConnectionStateConnected GKConnectionState = 1
 )
 
 func (e GKConnectionState) String() string {
@@ -123,6 +132,7 @@ func (e GKConnectionState) String() string {
 	}
 }
 
+// Error codes for the GameKit error domain.
 type GKErrorCode int64
 
 const (
@@ -261,13 +271,18 @@ func (e GKErrorCode) String() string {
 	}
 }
 
+// Constants that indicate if the local player grants access to their friends list.
 type GKFriendsAuthorizationStatus int64
 
 const (
+	// The player hasn’t choosen whether your game may access their friends list.
 	GKFriendsAuthorizationStatusNotDetermined GKFriendsAuthorizationStatus = 0
-	GKFriendsAuthorizationStatusRestricted    GKFriendsAuthorizationStatus = 1
-	GKFriendsAuthorizationStatusDenied        GKFriendsAuthorizationStatus = 2
-	GKFriendsAuthorizationStatusAuthorized    GKFriendsAuthorizationStatus = 3
+	// Access to the player’s list of friends restricted.
+	GKFriendsAuthorizationStatusRestricted GKFriendsAuthorizationStatus = 1
+	// Access to the player’s friends’ data denied.
+	GKFriendsAuthorizationStatusDenied GKFriendsAuthorizationStatus = 2
+	// The player authorized your game to access their list of friends.
+	GKFriendsAuthorizationStatusAuthorized GKFriendsAuthorizationStatus = 3
 )
 
 func (e GKFriendsAuthorizationStatus) String() string {
@@ -285,6 +300,7 @@ func (e GKFriendsAuthorizationStatus) String() string {
 	}
 }
 
+// Play Style of the game activity. It can be either Asynchronous or Synchronous.
 type GKGameActivityPlayStyle int64
 
 const (
@@ -334,15 +350,23 @@ func (e GKGameActivityState) String() string {
 	}
 }
 
+// The type of content for the view controller to present.
 type GKGameCenterViewControllerState int64
 
 const (
-	GKGameCenterViewControllerStateDefault                GKGameCenterViewControllerState = -1
-	GKGameCenterViewControllerStateLeaderboards           GKGameCenterViewControllerState = 0
-	GKGameCenterViewControllerStateAchievements           GKGameCenterViewControllerState = 1
-	GKGameCenterViewControllerStateChallenges             GKGameCenterViewControllerState = 2
-	GKGameCenterViewControllerStateLocalPlayerProfile     GKGameCenterViewControllerState = 3
-	GKGameCenterViewControllerStateDashboard              GKGameCenterViewControllerState = 4
+	// The view controller should present the default screen.
+	GKGameCenterViewControllerStateDefault GKGameCenterViewControllerState = -1
+	// The view controller should present leaderboard sets or leaderboards if there are no sets.
+	GKGameCenterViewControllerStateLeaderboards GKGameCenterViewControllerState = 0
+	// The view controller should present a list of achievements.
+	GKGameCenterViewControllerStateAchievements GKGameCenterViewControllerState = 1
+	// The view controller should present a list of challenges.
+	GKGameCenterViewControllerStateChallenges GKGameCenterViewControllerState = 2
+	// The view controller should present the local player’s profile.
+	GKGameCenterViewControllerStateLocalPlayerProfile GKGameCenterViewControllerState = 3
+	// The view controller should present the dashboard.
+	GKGameCenterViewControllerStateDashboard GKGameCenterViewControllerState = 4
+	// The view controller should present the friends list.
 	GKGameCenterViewControllerStateLocalPlayerFriendsList GKGameCenterViewControllerState = 5
 )
 
@@ -367,6 +391,7 @@ func (e GKGameCenterViewControllerState) String() string {
 	}
 }
 
+// Error codes for the game session domain.
 // Deprecated: GKGameSession is deprecated, use real-time and turn-based matchmaking APIs instead.
 type GKGameSessionErrorCode int64
 
@@ -428,21 +453,34 @@ func (e GKGameSessionErrorCode) String() string {
 	}
 }
 
+// A player’s response to an invitation to join a match.
 type GKInviteRecipientResponse int64
 
 const (
-	GKInviteRecipientResponseAccepted        GKInviteRecipientResponse = 0
-	GKInviteRecipientResponseDeclined        GKInviteRecipientResponse = 1
-	GKInviteRecipientResponseFailed          GKInviteRecipientResponse = 2
-	GKInviteRecipientResponseIncompatible    GKInviteRecipientResponse = 3
+	// A response when the player accepts the invitation.
+	GKInviteRecipientResponseAccepted GKInviteRecipientResponse = 0
+	// A response when the player rejects the invitation.
+	GKInviteRecipientResponseDeclined GKInviteRecipientResponse = 1
+	// A response when the system fails to deliver the invitation to the player.
+	GKInviteRecipientResponseFailed GKInviteRecipientResponse = 2
+	// A response when the player isn’t running a compatible version of the game.
+	GKInviteRecipientResponseIncompatible GKInviteRecipientResponse = 3
+	// A response when the system can’t contact the player.
 	GKInviteRecipientResponseUnableToConnect GKInviteRecipientResponse = 4
-	GKInviteRecipientResponseNoAnswer        GKInviteRecipientResponse = 5
-	GKInviteeResponseAccepted                GKInviteRecipientResponse = 0
-	GKInviteeResponseDeclined                GKInviteRecipientResponse = 1
-	GKInviteeResponseFailed                  GKInviteRecipientResponse = 2
-	GKInviteeResponseIncompatible            GKInviteRecipientResponse = 3
-	GKInviteeResponseUnableToConnect         GKInviteRecipientResponse = 4
-	GKInviteeResponseNoAnswer                GKInviteRecipientResponse = 5
+	// A response when the invitation times out because the player doesn’t answer it.
+	GKInviteRecipientResponseNoAnswer GKInviteRecipientResponse = 5
+	// The player accepted the invitation.
+	GKInviteeResponseAccepted GKInviteRecipientResponse = 0
+	// The player rejected the invitation.
+	GKInviteeResponseDeclined GKInviteRecipientResponse = 1
+	// The invitation was unable to be delivered.
+	GKInviteeResponseFailed GKInviteRecipientResponse = 2
+	// The invitee isn’t running a compatible version of your game.
+	GKInviteeResponseIncompatible GKInviteRecipientResponse = 3
+	// The invitee couldn’t be contacted.
+	GKInviteeResponseUnableToConnect GKInviteRecipientResponse = 4
+	// The invitation timed out without an answer.
+	GKInviteeResponseNoAnswer GKInviteRecipientResponse = 5
 )
 
 func (e GKInviteRecipientResponse) String() string {
@@ -464,6 +502,7 @@ func (e GKInviteRecipientResponse) String() string {
 	}
 }
 
+// Specifies the type of players for filtering data.
 type GKLeaderboardPlayerScope int64
 
 const (
@@ -482,6 +521,7 @@ func (e GKLeaderboardPlayerScope) String() string {
 	}
 }
 
+// Specifies the time period for filtering data.
 type GKLeaderboardTimeScope int64
 
 const (
@@ -503,6 +543,7 @@ func (e GKLeaderboardTimeScope) String() string {
 	}
 }
 
+// Specifies whether a leaderboard is recurring.
 type GKLeaderboardType int64
 
 const (
@@ -521,6 +562,7 @@ func (e GKLeaderboardType) String() string {
 	}
 }
 
+// The mechanism used to transmit data to other players.
 type GKMatchSendDataMode int64
 
 const (
@@ -539,12 +581,16 @@ func (e GKMatchSendDataMode) String() string {
 	}
 }
 
+// The kind of match managed by Game Center.
 type GKMatchType uint64
 
 const (
+	// A peer-to-peer match hosted by Game Center.
 	GKMatchTypePeerToPeer GKMatchType = 0
-	GKMatchTypeHosted     GKMatchType = 1
-	GKMatchTypeTurnBased  GKMatchType = 2
+	// A match hosted on your private server.
+	GKMatchTypeHosted GKMatchType = 1
+	// A turn-based match hosted by Game Center.
+	GKMatchTypeTurnBased GKMatchType = 2
 )
 
 func (e GKMatchType) String() string {
@@ -560,13 +606,18 @@ func (e GKMatchType) String() string {
 	}
 }
 
+// Possible modes that a multiplayer game uses to find matches.
 type GKMatchmakingMode int64
 
 const (
-	GKMatchmakingModeDefault       GKMatchmakingMode = 0
-	GKMatchmakingModeNearbyOnly    GKMatchmakingMode = 1
+	// The default matchmaking mode.
+	GKMatchmakingModeDefault GKMatchmakingMode = 0
+	// A mode that matches the local player only with nearby players.
+	GKMatchmakingModeNearbyOnly GKMatchmakingMode = 1
+	// A mode that matches the local player only with players who are also actively looking for a match.
 	GKMatchmakingModeAutomatchOnly GKMatchmakingMode = 2
-	GKMatchmakingModeInviteOnly    GKMatchmakingMode = 3
+	// A mode that matches the local player only with players who they invite, and doesn’t use automatch to fill empty slots.
+	GKMatchmakingModeInviteOnly GKMatchmakingMode = 3
 )
 
 func (e GKMatchmakingMode) String() string {
@@ -584,14 +635,20 @@ func (e GKMatchmakingMode) String() string {
 	}
 }
 
+// The state of a peer known to the session.
 // Deprecated: No longer supported
 type GKPeerConnectionState int32
 
 const (
-	GKPeerStateAvailable      GKPeerConnectionState = 0
-	GKPeerStateUnavailable    GKPeerConnectionState = 1
-	GKPeerStateConnected      GKPeerConnectionState = 2
-	GKPeerStateDisconnected   GKPeerConnectionState = 3
+	// A peer not connected to the session, but one that the session can connect to.
+	GKPeerStateAvailable GKPeerConnectionState = 0
+	// A peer that is no longer interested in receiving connections.
+	GKPeerStateUnavailable GKPeerConnectionState = 1
+	// A peer connected to the session.
+	GKPeerStateConnected GKPeerConnectionState = 2
+	// A peer that disconnected from the session.
+	GKPeerStateDisconnected GKPeerConnectionState = 3
+	// A peer attempting to connect to the session.
 	GKPeerStateConnecting     GKPeerConnectionState = 4
 	GKPeerStateConnectedRelay GKPeerConnectionState = 5
 )
@@ -615,6 +672,7 @@ func (e GKPeerConnectionState) String() string {
 	}
 }
 
+// The size of a photo that Game Center loads.
 type GKPhotoSize int64
 
 const (
@@ -633,11 +691,15 @@ func (e GKPhotoSize) String() string {
 	}
 }
 
+// The possible states of a connection to a match.
 type GKPlayerConnectionState int64
 
 const (
-	GKPlayerStateUnknown      GKPlayerConnectionState = 0
-	GKPlayerStateConnected    GKPlayerConnectionState = 1
+	// An undetermined state in which the player can’t receive data.
+	GKPlayerStateUnknown GKPlayerConnectionState = 0
+	// A state in which a player connects to the match and can receive data.
+	GKPlayerStateConnected GKPlayerConnectionState = 1
+	// A state in which a player disconnects from the match and can’t receive data.
 	GKPlayerStateDisconnected GKPlayerConnectionState = 2
 )
 
@@ -654,14 +716,15 @@ func (e GKPlayerConnectionState) String() string {
 	}
 }
 
+// Describes the release state of an App Store Connect resource, such as an Achievement or Leaderboard.
 type GKReleaseState uint64
 
 const (
-	// The system can't determine the release state of the resource.
+	// The system can’t determine the release state of the resource.
 	GKReleaseStateUnknown GKReleaseState = 0
-	// The resource is associated with a release in App Store Connect. This has no relationship with the "archived" state of a resource (i.e., A resource can be release _and_ archived).
+	// The resource is associated with a release in App Store Connect. This has no relationship with the “archived” state of a resource (i.e., A resource can be release and archived).
 	GKReleaseStateReleased GKReleaseState = 1
-	// The resource has been created in App Store Connect but isn't yet associated with a released version of an App.
+	// The resource has been created in App Store Connect but isn’t yet associated with a released version of an App.
 	GKReleaseStatePrereleased GKReleaseState = 2
 )
 
@@ -679,11 +742,14 @@ func (e GKReleaseState) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The mechanism used to transmit data to other peers.
 // Deprecated: No longer supported
 type GKSendDataMode int32
 
 const (
-	GKSendDataReliable   GKSendDataMode = 0
+	// The data is sent continuously until it is successfully received by the intended recipients or the connection times out.
+	GKSendDataReliable GKSendDataMode = 0
+	// The data is sent once and is not sent again if a transmission error occurred.
 	GKSendDataUnreliable GKSendDataMode = 1
 )
 
@@ -698,13 +764,17 @@ func (e GKSendDataMode) String() string {
 	}
 }
 
+// Modes that determine how a session interacts with other peers.
 // Deprecated: No longer supported
 type GKSessionMode int32
 
 const (
+	// A server advertises itself to local devices using its sessionID property.
 	GKSessionModeServer GKSessionMode = 0
+	// A client searches for servers advertising the same sessionID property.
 	GKSessionModeClient GKSessionMode = 1
-	GKSessionModePeer   GKSessionMode = 2
+	// A peer advertises like a server and searches like a client.
+	GKSessionModePeer GKSessionMode = 2
 )
 
 func (e GKSessionMode) String() string {
@@ -720,11 +790,14 @@ func (e GKSessionMode) String() string {
 	}
 }
 
+// The mechanism used to send messages to other players in a game session.
 type GKTransportType int64
 
 const (
+	// The data is sent once and is not sent again if a transmission error occurs.
 	GKTransportTypeUnreliable GKTransportType = 0
-	GKTransportTypeReliable   GKTransportType = 1
+	// The data is sent continuously until it is successfully received by the intended recipients or the connection times out.
+	GKTransportTypeReliable GKTransportType = 1
 )
 
 func (e GKTransportType) String() string {
@@ -738,13 +811,19 @@ func (e GKTransportType) String() string {
 	}
 }
 
+// The status of an exchange or reply.
 type GKTurnBasedExchangeStatus int64
 
 const (
-	GKTurnBasedExchangeStatusUnknown  GKTurnBasedExchangeStatus = 0
-	GKTurnBasedExchangeStatusActive   GKTurnBasedExchangeStatus = 1
+	// The state of the exchange request is unknown.
+	GKTurnBasedExchangeStatusUnknown GKTurnBasedExchangeStatus = 0
+	// GameKit sent the exchange request to recipients but not all recipients replied.
+	GKTurnBasedExchangeStatusActive GKTurnBasedExchangeStatus = 1
+	// All recipients of the exchange request replied.
 	GKTurnBasedExchangeStatusComplete GKTurnBasedExchangeStatus = 2
+	// The current participant saved the exchange request.
 	GKTurnBasedExchangeStatusResolved GKTurnBasedExchangeStatus = 3
+	// The sender canceled the exchange request.
 	GKTurnBasedExchangeStatusCanceled GKTurnBasedExchangeStatus = 4
 )
 
@@ -765,6 +844,7 @@ func (e GKTurnBasedExchangeStatus) String() string {
 	}
 }
 
+// The state of a participant when they forfeit a match or when a match ends.
 type GKTurnBasedMatchOutcome int64
 
 const (
@@ -810,6 +890,7 @@ func (e GKTurnBasedMatchOutcome) String() string {
 	}
 }
 
+// The states of a match from when it’s created to when it ends.
 type GKTurnBasedMatchStatus int64
 
 const (
@@ -834,6 +915,7 @@ func (e GKTurnBasedMatchStatus) String() string {
 	}
 }
 
+// The state the participant is in during the match.
 type GKTurnBasedParticipantStatus int64
 
 const (
@@ -864,6 +946,7 @@ func (e GKTurnBasedParticipantStatus) String() string {
 	}
 }
 
+// The state of a player in a voice chat.
 // Deprecated: No longer supported
 type GKVoiceChatPlayerState int64
 

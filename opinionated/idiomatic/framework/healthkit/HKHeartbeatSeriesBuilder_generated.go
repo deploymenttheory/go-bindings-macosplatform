@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A builder object for incrementally building a heartbeat series.
+//
 // HeartbeatSeriesBuilder wraps [raw.HKHeartbeatSeriesBuilder] with a fluent Go API.
 type HeartbeatSeriesBuilder struct {
 	inner *raw.HKHeartbeatSeriesBuilder
@@ -33,7 +35,7 @@ func HeartbeatSeriesBuilderFromID(id objc.ID) *HeartbeatSeriesBuilder {
 	return &HeartbeatSeriesBuilder{inner: raw.HKHeartbeatSeriesBuilderFromID(id)}
 }
 
-// @method             initWithHealthStore:device:startDate: @abstract           The designated initializer to create an HKHeartbeatSeriesBuilder. @discussion         The HKHealthStore is retained during the life of the object for the saving of the series data and final return of the series sample. @param              healthStore  Specifies the HKHealthStore object to use for building the series. @param              device       The optional device represents the HKDevice from which the data is provided. @param              startDate    The start date of the HKHeartbeatSeriesSample that will be generated.
+// Creates a new heartbeat series builder.
 //
 // NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate creates a new [HeartbeatSeriesBuilder].
 func NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate(healthStore *raw.HKHealthStore, device *raw.HKDevice, startDate *foundation.NSDate) *HeartbeatSeriesBuilder {
@@ -42,21 +44,21 @@ func NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate(healthStore *raw.HK
 	return &HeartbeatSeriesBuilder{inner: raw.HKHeartbeatSeriesBuilderFromID(_id)}
 }
 
-// @method             addHeartbeatWithTimeIntervalSinceSeriesStartDate:precededByGap:completion: @abstract           Associate a heartbeat with the receiver. @discussion         Use this method to asynchronously add a heartbeat to the series. @param     timeIntervalSinceStart  The elapsed time between the series startDate and the heartbeat occurence. Must be a positive value. @param              precededByGap  Whether or not this heartbeat was preceded by a gap in data collection. @param              completion     The completion callback handler returns the status of the save. If the completion handler success is NO, then error is non-nil. An error here is considered fatal and the series builder will be complete.
+// Adds a heartbeat to the series.
 //
 // AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion calls the underlying AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion.
 func (x *HeartbeatSeriesBuilder) AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion(timeIntervalSinceStart float64, precededByGap bool, completion func(bool, unsafe.Pointer)) {
 	x.inner.AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion(timeIntervalSinceStart, precededByGap, completion)
 }
 
-// @method             addMetadata:completion: @discussion         Adds new metadata to the builder instance. This method can be called more than once; each time the newly provided metadata will be incorporated in the same manner as -[NSMutableDictionary addEntriesFromDictionary:]. This operation is performed asynchronously and the completion will be executed on an arbitrary background queue. @param              metadata    The metadata to add to the builder. @param              completion  Block to be called when the addition of metadata to the builder is complete. If success is YES, the metadata has been added to the builder successfully. If success is NO, error will be non-null and will contain the error encountered during the insertion operation. When an error occurs, the builder's metadata will remain unchanged.
+// Adds metadata to the sample.
 //
 // AddMetadataCompletion calls the underlying AddMetadataCompletion.
 func (x *HeartbeatSeriesBuilder) AddMetadataCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer)) {
 	x.inner.AddMetadataCompletion(metadata, completion)
 }
 
-// @method             finishSeriesWithCompletion: @abstract           Method to stop data collection and return the associated HKHeartbeatSeriesSample. @discussion         Call this method when you have added all heartbeats to this builder. The completion handler will return the saved HKHeartbeatSeriesSample. If no heartbeat was added, then heartbeatSeries will be nil and an error returned. The receiver will be considered invalid afterwards and any further calls to it will result in an error. @param              completion  The completion callback handler returns the saved HKHeartbeatSeriesSample object. If heartbeatSeries is nil, an error will indicate why the series could not be returned including database inaccessibility during device lock. Subsequent requests for the HKHeartbeatSeriesSample can be made through HKSampleQuery or similar queries. To retrieve the data stored with an HKHeartbeatSeriesSample use HKHeartbeatSeriesQuery.
+// Finalizes the series and returns the resulting heartbeat series sample.
 //
 // FinishSeriesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *HeartbeatSeriesBuilder) FinishSeriesWithCompletion(ctx context.Context) (*HeartbeatSeriesSample, error) {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract base class for managing a token’s contents as keychain items.
+//
 // TokenKeychainItem wraps [raw.TKTokenKeychainItem] with a fluent Go API.
 type TokenKeychainItem struct {
 	inner *raw.TKTokenKeychainItem
@@ -31,7 +33,7 @@ func TokenKeychainItemFromID(id objc.ID) *TokenKeychainItem {
 	return &TokenKeychainItem{inner: raw.TKTokenKeychainItemFromID(id)}
 }
 
-// @brief Initializes item with objectID.
+// Initializes a token keychain item with the specified object ID.
 //
 // NewTokenKeychainItemWithObjectID creates a new [TokenKeychainItem].
 func NewTokenKeychainItemWithObjectID(objectID objc.ID) *TokenKeychainItem {
@@ -40,7 +42,7 @@ func NewTokenKeychainItemWithObjectID(objectID objc.ID) *TokenKeychainItem {
 	return &TokenKeychainItem{inner: raw.TKTokenKeychainItemFromID(_id)}
 }
 
-// @discussion Contains the user-visible label for this item.  This property is an equivalent of kSecAttrLabel in SecItem.h
+// The user-visible label for the keychain item.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *TokenKeychainItem) WithLabel(label string) *TokenKeychainItem {
@@ -48,7 +50,7 @@ func (x *TokenKeychainItem) WithLabel(label string) *TokenKeychainItem {
 	return x
 }
 
-// @discussion Contains access constraints for this object keyed by TKTOpenOperation wrapped in NSNumber.
+// Access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
 //
 // WithConstraints sets the constraints property and returns the receiver for chaining.
 func (x *TokenKeychainItem) WithConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *TokenKeychainItem {

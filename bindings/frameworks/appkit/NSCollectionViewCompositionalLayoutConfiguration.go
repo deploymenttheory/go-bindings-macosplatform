@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines scroll direction, section spacing, and headers or footers for the layout.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionviewcompositionallayoutconfiguration
 type NSCollectionViewCompositionalLayoutConfiguration struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A network endpoint specified by DNS name (or IP address) and port.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nwhostendpoint
 // Deprecated: Use `nw_endpoint_t` in Network framework instead, see deprecation notice in <NetworkExtension/NWHostEndpoint.h>
 type NWHostEndpoint struct {
@@ -37,7 +39,7 @@ func NWHostEndpointFromID(id objc.ID) *NWHostEndpoint {
 	return o
 }
 
-// @method endpointWithHostname:port: @param hostname A string representation of the hostname or address, such as www.apple.com or 10.0.0.1. @param port A string containing the port on the host, such as 80. @return An initialized NWHostEndpoint object.
+// Create a host endpoint with a hostname and port.
 // Deprecated: Use `nw_endpoint_create_host` in Network framework instead, see deprecation notice in <NetworkExtension/NWHostEndpoint.h>
 func NWHostEndpointEndpointWithHostnamePort(hostname *foundation.NSString, port *foundation.NSString) *NWHostEndpoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNWHostEndpoint), _nWHostEndpointSelEndpointWithHostnamePort, hostname.Ptr(), port.Ptr())

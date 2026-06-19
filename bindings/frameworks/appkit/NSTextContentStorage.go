@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A concrete object for managing your view’s text content and generating the text elements necessary for layout.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextcontentstorage
 type NSTextContentStorage struct {
 	NSTextContentManager
@@ -38,6 +40,7 @@ func NSTextContentStorageFromID(id objc.ID) *NSTextContentStorage {
 	return o
 }
 
+// Returns a new attributed string for the text element.
 func (o *NSTextContentStorage) AttributedStringForTextElement(textElement *NSTextElement) *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentStorageSelAttributedStringForTextElement, textElement.Ptr())
 	if _ret != 0 {
@@ -46,6 +49,7 @@ func (o *NSTextContentStorage) AttributedStringForTextElement(textElement *NSTex
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
+// Returns the text element corresponding to object’s attributed string.
 func (o *NSTextContentStorage) TextElementForAttributedString(attributedString *foundation.NSAttributedString) *NSTextElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentStorageSelTextElementForAttributedString, attributedString.Ptr())
 	if _ret != 0 {
@@ -54,16 +58,19 @@ func (o *NSTextContentStorage) TextElementForAttributedString(attributedString *
 	return NSTextElementFromID(_ret)
 }
 
+// Returns a new text location object based on an existing location and offset you provide.
 func (o *NSTextContentStorage) LocationFromLocationWithOffset(location NSTextLocation, offset int) NSTextLocation {
 	_ret := objc.Send[NSTextLocation](o.Ptr(), _nSTextContentStorageSelLocationFromLocationWithOffset, location, offset)
 	return _ret
 }
 
+// Returns the number of characters between the specified locations.
 func (o *NSTextContentStorage) OffsetFromLocationToLocation(from NSTextLocation, to NSTextLocation) int {
 	_ret := objc.Send[int](o.Ptr(), _nSTextContentStorageSelOffsetFromLocationToLocation, from, to)
 	return _ret
 }
 
+// Returns the text range, if any, in the backing store that required manual adjustment after editing.
 func (o *NSTextContentStorage) AdjustedRangeFromRangeForEditingTextSelection(textRange *NSTextRange, forEditingTextSelection bool) *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextContentStorageSelAdjustedRangeFromRangeForEditingTextSelection, textRange.Ptr(), forEditingTextSelection)
 	if _ret != 0 {

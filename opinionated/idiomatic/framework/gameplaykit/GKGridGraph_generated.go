@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A navigation graph for 2D game worlds where movement is constrained to an integer grid.
+//
 // GridGraph wraps [raw.GKGridGraph] with a fluent Go API.
 type GridGraph struct {
 	inner *raw.GKGridGraph[objc.ID]
@@ -30,6 +32,8 @@ func GridGraphFromID(id objc.ID) *GridGraph {
 	return &GridGraph{inner: raw.GKGridGraphFromID[objc.ID](id)}
 }
 
+// Initializes a graph that describes an integer grid with the specified dimensions.
+//
 // NewGridGraphFromGridStartingAtWidthHeightDiagonalsAllowed creates a new [GridGraph].
 func NewGridGraphFromGridStartingAtWidthHeightDiagonalsAllowed(position unsafe.Pointer, width int, height int, diagonalsAllowed bool) *GridGraph {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGridGraph")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewGridGraphFromGridStartingAtWidthHeightDiagonalsAllowed(position unsafe.P
 	return &GridGraph{inner: raw.GKGridGraphFromID[objc.ID](_id)}
 }
 
+// Initializes a graph that describes an integer grid with the specified dimensions, using the specified node class.
+//
 // NewGridGraphFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass creates a new [GridGraph].
 func NewGridGraphFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass(position unsafe.Pointer, width int, height int, diagonalsAllowed bool, nodeClass objc.Class) *GridGraph {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGridGraph")), objc.RegisterName("alloc"))
@@ -44,14 +50,14 @@ func NewGridGraphFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass(position
 	return &GridGraph{inner: raw.GKGridGraphFromID[objc.ID](_id)}
 }
 
-// Returns the GKGridGraphNode at the indicated X and Y coordinate Returns nil if it is outside the bounds of minCoordinates and maxCoordinates @param position starting position in the grid
+// Returns the node in the graph at the specified grid coordinates.
 //
 // NodeAtGridPosition calls the underlying NodeAtGridPosition.
 func (x *GridGraph) NodeAtGridPosition(position unsafe.Pointer) objc.ID {
 	return x.inner.NodeAtGridPosition(position)
 }
 
-// Connects the given GKGridGraphNode to this graph by connecting it to it's adjacent nodes on the grid Input node must have coordinates within the rectangle specified by minCoordinates and maxCoordinates @param node the node to be connected
+// Adds the specified node to the graph, connecting it to its nearest neighbors in the grid.
 //
 // ConnectNodeToAdjacentNodes calls the underlying ConnectNodeToAdjacentNodes.
 func (x *GridGraph) ConnectNodeToAdjacentNodes(node *raw.GKGridGraphNode) {

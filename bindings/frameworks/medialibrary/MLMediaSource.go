@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The MLMediaSource class identifies a specific provider of media. Conceptually, a media source respresents a single app, such as iTunes or Aperture. Each media source contains multiple groups of media objects—individual files containing a piece of media such as a photo, song, or movie.
+//
 // Apple documentation: https://developer.apple.com/documentation/medialibrary/mlmediasource
 type MLMediaSource struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func MLMediaSourceFromID(id objc.ID) *MLMediaSource {
 	return o
 }
 
+// Returns the media group with the specified identifier.
 func (o *MLMediaSource) MediaGroupForIdentifier(mediaGroupIdentifier *foundation.NSString) *MLMediaGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaSourceSelMediaGroupForIdentifier, mediaGroupIdentifier.Ptr())
 	if _ret != 0 {
@@ -45,11 +48,16 @@ func (o *MLMediaSource) MediaGroupForIdentifier(mediaGroupIdentifier *foundation
 	return MLMediaGroupFromID(_ret)
 }
 
+// Returns the media groups with the specified identifiers.
 func (o *MLMediaSource) MediaGroupsForIdentifiers(mediaGroupIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSDictionary[*foundation.NSString, *MLMediaGroup] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *MLMediaGroup]](o.Ptr(), _mLMediaSourceSelMediaGroupsForIdentifiers, mediaGroupIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaSourceSelMediaGroupsForIdentifiers, mediaGroupIdentifiers.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *MLMediaGroup](_ret)
 }
 
+// Returns the media object with the specified identifier.
 func (o *MLMediaSource) MediaObjectForIdentifier(mediaObjectIdentifier *foundation.NSString) *MLMediaObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaSourceSelMediaObjectForIdentifier, mediaObjectIdentifier.Ptr())
 	if _ret != 0 {
@@ -58,9 +66,13 @@ func (o *MLMediaSource) MediaObjectForIdentifier(mediaObjectIdentifier *foundati
 	return MLMediaObjectFromID(_ret)
 }
 
+// Returns the media objects with the specified identifiers.
 func (o *MLMediaSource) MediaObjectsForIdentifiers(mediaObjectIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSDictionary[*foundation.NSString, *MLMediaObject] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *MLMediaObject]](o.Ptr(), _mLMediaSourceSelMediaObjectsForIdentifiers, mediaObjectIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaSourceSelMediaObjectsForIdentifiers, mediaObjectIdentifiers.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *MLMediaObject](_ret)
 }
 
 func (o *MLMediaSource) MediaLibrary() *MLMediaLibrary {
@@ -80,8 +92,11 @@ func (o *MLMediaSource) MediaSourceIdentifier() *foundation.NSString {
 }
 
 func (o *MLMediaSource) Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mLMediaSourceSelAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaSourceSelAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MLMediaSource) RootMediaGroup() *MLMediaGroup {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains both input and output parameters that the low-latency super-resolution scaler frame processor needs.
+//
 // Apple documentation: https://developer.apple.com/documentation/videotoolbox/vtlowlatencysuperresolutionscalerparameters
 type VTLowLatencySuperResolutionScalerParameters struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func VTLowLatencySuperResolutionScalerParametersFromID(id objc.ID) *VTLowLatency
 	return o
 }
 
-// Creates a new low-latency, super-resolution scaler parameters object. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - destinationFrame: User-allocated pixel buffer that receives the scaled processor output; must be non `nil`.
+// Creates a new low-latency, super-resolution scaler parameters object.
 func (o *VTLowLatencySuperResolutionScalerParameters) InitWithSourceFrameDestinationFrame(sourceFrame *VTFrameProcessorFrame, destinationFrame *VTFrameProcessorFrame) *VTLowLatencySuperResolutionScalerParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencySuperResolutionScalerParametersSelInitWithSourceFrameDestinationFrame, sourceFrame.Ptr(), destinationFrame.Ptr())
 	if _ret != 0 {

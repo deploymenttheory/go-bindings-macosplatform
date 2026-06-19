@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes how a CloudKit operation behaves.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckoperationconfiguration
 type CKOperationConfiguration struct {
 	foundation.NSObject

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The shaped type class for types on tensors with a shape and data type.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphshapedtype
 type MPSGraphShapedType struct {
 	MPSGraphType
@@ -36,7 +38,7 @@ func MPSGraphShapedTypeFromID(id objc.ID) *MPSGraphShapedType {
 	return o
 }
 
-// Initializes a shaped type. - Parameters: - shape: The shape of the shaped type. - dataType: The dataType of the shaped type. - Returns: A valid MPSGraphShapedType, or nil if allocation failure.
+// Initializes a shaped type.
 func (o *MPSGraphShapedType) InitWithShapeDataType(shape unsafe.Pointer, dataType mpscore.MPSDataType) *MPSGraphShapedType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphShapedTypeSelInitWithShapeDataType, shape, dataType)
 	if _ret != 0 {

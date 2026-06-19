@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event driven parser of XML documents (including DTD declarations).
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsxmlparser
 type NSXMLParser struct {
 	NSObject

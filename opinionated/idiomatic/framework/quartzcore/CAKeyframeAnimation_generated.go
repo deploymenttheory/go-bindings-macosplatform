@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that provides keyframe animation capabilities for a layer object.
+//
 // KeyframeAnimation wraps [raw.CAKeyframeAnimation] with a fluent Go API.
 type KeyframeAnimation struct {
 	inner *raw.CAKeyframeAnimation
@@ -38,6 +40,8 @@ func NewKeyframeAnimation() *KeyframeAnimation {
 	return &KeyframeAnimation{inner: raw.CAKeyframeAnimationFromID(_id)}
 }
 
+// An optional array of NSNumber objects that define the time at which to apply a given keyframe segment.
+//
 // WithKeyTimes sets the collection, converting the Go slice to an NSArray.
 func (x *KeyframeAnimation) WithKeyTimes(items ...*foundation.NSNumber) *KeyframeAnimation {
 	if len(items) == 0 {
@@ -59,6 +63,8 @@ func (x *KeyframeAnimation) WithKeyTimes(items ...*foundation.NSNumber) *Keyfram
 	return x
 }
 
+// An optional array of CAMediaTimingFunction objects that define the pacing for each keyframe segment.
+//
 // WithTimingFunctions sets the collection, converting the Go slice to an NSArray.
 func (x *KeyframeAnimation) WithTimingFunctions(items ...*raw.CAMediaTimingFunction) *KeyframeAnimation {
 	if len(items) == 0 {
@@ -80,12 +86,16 @@ func (x *KeyframeAnimation) WithTimingFunctions(items ...*raw.CAMediaTimingFunct
 	return x
 }
 
+// Specifies how intermediate keyframe values are calculated by the receiver.
+//
 // WithCalculationMode sets the calculationMode property and returns the receiver for chaining.
 func (x *KeyframeAnimation) WithCalculationMode(calculationMode *foundation.NSString) *KeyframeAnimation {
 	x.inner.SetCalculationMode(calculationMode)
 	return x
 }
 
+// An array of numbers that define the tightness of the curve.
+//
 // WithTensionValues sets the collection, converting the Go slice to an NSArray.
 func (x *KeyframeAnimation) WithTensionValues(items ...*foundation.NSNumber) *KeyframeAnimation {
 	if len(items) == 0 {
@@ -107,6 +117,8 @@ func (x *KeyframeAnimation) WithTensionValues(items ...*foundation.NSNumber) *Ke
 	return x
 }
 
+// An array of numbers that define the sharpness of the timing curve’s corners.
+//
 // WithContinuityValues sets the collection, converting the Go slice to an NSArray.
 func (x *KeyframeAnimation) WithContinuityValues(items ...*foundation.NSNumber) *KeyframeAnimation {
 	if len(items) == 0 {
@@ -128,6 +140,8 @@ func (x *KeyframeAnimation) WithContinuityValues(items ...*foundation.NSNumber) 
 	return x
 }
 
+// An array of numbers that define the position of the curve relative to a control point.
+//
 // WithBiasValues sets the collection, converting the Go slice to an NSArray.
 func (x *KeyframeAnimation) WithBiasValues(items ...*foundation.NSNumber) *KeyframeAnimation {
 	if len(items) == 0 {
@@ -149,48 +163,64 @@ func (x *KeyframeAnimation) WithBiasValues(items ...*foundation.NSNumber) *Keyfr
 	return x
 }
 
+// Determines whether objects animating along the path rotate to match the path tangent.
+//
 // WithRotationMode sets the rotationMode property and returns the receiver for chaining.
 func (x *KeyframeAnimation) WithRotationMode(rotationMode *foundation.NSString) *KeyframeAnimation {
 	x.inner.SetRotationMode(rotationMode)
 	return x
 }
 
+// Specifies the key path the receiver animates.
+//
 // WithKeyPath sets the keyPath property and returns the receiver for chaining.
 func (x *KeyframeAnimation) WithKeyPath(keyPath string) *KeyframeAnimation {
 	x.inner.CAPropertyAnimation.SetKeyPath(foundation.NSStringStringWithUTF8String(keyPath))
 	return x
 }
 
+// Determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
+//
 // WithAdditive sets the additive property and returns the receiver for chaining.
 func (x *KeyframeAnimation) WithAdditive(additive bool) *KeyframeAnimation {
 	x.inner.CAPropertyAnimation.SetAdditive(additive)
 	return x
 }
 
+// Determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
+//
 // WithCumulative sets the cumulative property and returns the receiver for chaining.
 func (x *KeyframeAnimation) WithCumulative(cumulative bool) *KeyframeAnimation {
 	x.inner.CAPropertyAnimation.SetCumulative(cumulative)
 	return x
 }
 
+// An optional value function that is applied to interpolated values.
+//
 // WithValueFunction sets the valueFunction property and returns the receiver for chaining.
 func (x *KeyframeAnimation) WithValueFunction(valueFunction *ValueFunction) *KeyframeAnimation {
 	x.inner.CAPropertyAnimation.SetValueFunction(valueFunction.Unwrap())
 	return x
 }
 
+// An optional timing function defining the pacing of the animation.
+//
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
 func (x *KeyframeAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *KeyframeAnimation {
 	x.inner.CAPropertyAnimation.CAAnimation.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
+// Specifies the receiver’s delegate object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *KeyframeAnimation) WithDelegate(delegate raw.CAAnimationDelegate) *KeyframeAnimation {
 	x.inner.CAPropertyAnimation.CAAnimation.SetDelegate(delegate)
 	return x
 }
 
+// Determines if the animation is removed from the target layer’s animations upon completion.
+//
 // WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
 func (x *KeyframeAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *KeyframeAnimation {
 	x.inner.CAPropertyAnimation.CAAnimation.SetRemovedOnCompletion(removedOnCompletion)

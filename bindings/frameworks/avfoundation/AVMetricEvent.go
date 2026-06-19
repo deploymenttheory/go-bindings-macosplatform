@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class that represents a metric event.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetricevent
 type AVMetricEvent struct {
 	foundation.NSObject

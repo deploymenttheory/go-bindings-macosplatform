@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract base class for types that represent flows of network data.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nefilterflow
 type NEFilterFlow struct {
 	foundation.NSObject

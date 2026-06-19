@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The context of an attempt to send changes to the server.
+//
 // SyncEngineSendChangesContext wraps [raw.CKSyncEngineSendChangesContext] with a fluent Go API.
 type SyncEngineSendChangesContext struct {
 	inner *raw.CKSyncEngineSendChangesContext

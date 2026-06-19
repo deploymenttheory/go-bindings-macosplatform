@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a spatial normalization kernel.
+//
 // CNNSpatialNormalizationNode wraps [raw.MPSCNNSpatialNormalizationNode] with a fluent Go API.
 type CNNSpatialNormalizationNode struct {
 	inner *raw.MPSCNNSpatialNormalizationNode

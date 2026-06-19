@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A token session that manages the authentication state of a token.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktokensession
 type TKTokenSession struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func TKTokenSessionFromID(id objc.ID) *TKTokenSession {
 	return o
 }
 
-// @param token Token instance to which is this session instance bound.
+// Initializes a token session with the specified token.
 func (o *TKTokenSession) InitWithToken(token *TKToken) *TKTokenSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenSessionSelInitWithToken, token.Ptr())
 	if _ret != 0 {

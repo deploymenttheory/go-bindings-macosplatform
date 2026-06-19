@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mutable collection of unique integer values that represent indexes in another collection.
+//
 // MutableIndexSet wraps [raw.NSMutableIndexSet] with a fluent Go API.
 type MutableIndexSet struct {
 	inner *raw.NSMutableIndexSet
@@ -41,41 +43,57 @@ func (x *MutableIndexSet) WithScriptingProperties(scriptingProperties *raw.NSDic
 	return x
 }
 
+// Adds the indexes in an index set to the receiver.
+//
 // AddIndexes calls the underlying AddIndexes.
 func (x *MutableIndexSet) AddIndexes(indexSet *raw.NSIndexSet) {
 	x.inner.AddIndexes(indexSet)
 }
 
+// Removes the indexes in an index set from the receiver.
+//
 // RemoveIndexes calls the underlying RemoveIndexes.
 func (x *MutableIndexSet) RemoveIndexes(indexSet *raw.NSIndexSet) {
 	x.inner.RemoveIndexes(indexSet)
 }
 
+// Removes the receiver’s indexes.
+//
 // RemoveAllIndexes calls the underlying RemoveAllIndexes.
 func (x *MutableIndexSet) RemoveAllIndexes() {
 	x.inner.RemoveAllIndexes()
 }
 
+// Adds an index to the receiver.
+//
 // AddIndex calls the underlying AddIndex.
 func (x *MutableIndexSet) AddIndex(value uint) {
 	x.inner.AddIndex(value)
 }
 
+// Removes an index from the receiver.
+//
 // RemoveIndex calls the underlying RemoveIndex.
 func (x *MutableIndexSet) RemoveIndex(value uint) {
 	x.inner.RemoveIndex(value)
 }
 
+// Adds the indexes in an index range to the receiver.
+//
 // AddIndexesInRange calls the underlying AddIndexesInRange.
 func (x *MutableIndexSet) AddIndexesInRange(range_ raw.NSRange) {
 	x.inner.AddIndexesInRange(range_)
 }
 
+// Removes the indexes in an index range from the receiver.
+//
 // RemoveIndexesInRange calls the underlying RemoveIndexesInRange.
 func (x *MutableIndexSet) RemoveIndexesInRange(range_ raw.NSRange) {
 	x.inner.RemoveIndexesInRange(range_)
 }
 
+// Shifts a group of indexes to the left or the right within the receiver.
+//
 // ShiftIndexesStartingAtIndexBy calls the underlying ShiftIndexesStartingAtIndexBy.
 func (x *MutableIndexSet) ShiftIndexesStartingAtIndexBy(index uint, delta int) {
 	x.inner.ShiftIndexesStartingAtIndexBy(index, delta)

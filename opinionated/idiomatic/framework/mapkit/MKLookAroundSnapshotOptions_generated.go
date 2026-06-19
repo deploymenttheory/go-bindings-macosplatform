@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Values you use to customize LookAround snapshots.
+//
 // LookAroundSnapshotOptions wraps [raw.MKLookAroundSnapshotOptions] with a fluent Go API.
 type LookAroundSnapshotOptions struct {
 	inner *raw.MKLookAroundSnapshotOptions

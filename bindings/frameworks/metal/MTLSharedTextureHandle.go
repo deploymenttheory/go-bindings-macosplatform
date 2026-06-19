@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A texture handle that can be shared across process address space boundaries.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlsharedtexturehandle
 type MTLSharedTextureHandle struct {
 	foundation.NSObject

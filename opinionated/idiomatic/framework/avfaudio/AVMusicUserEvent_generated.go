@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a custom user message.
+//
 // MusicUserEvent wraps [raw.AVMusicUserEvent] with a fluent Go API.
 type MusicUserEvent struct {
 	inner *raw.AVMusicUserEvent
@@ -30,7 +32,7 @@ func MusicUserEventFromID(id objc.ID) *MusicUserEvent {
 	return &MusicUserEvent{inner: raw.AVMusicUserEventFromID(id)}
 }
 
-// @method initWithData: @abstract Initialize the event with an NSData. @param data An NSData object containing the contents to be returned via the AVMusicTrack's user callback.
+// Creates a user event with the data you specify.
 //
 // NewMusicUserEventWithData creates a new [MusicUserEvent].
 func NewMusicUserEventWithData(data *foundation.NSData) *MusicUserEvent {

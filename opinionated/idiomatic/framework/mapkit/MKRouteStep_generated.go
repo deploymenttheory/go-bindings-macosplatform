@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// One portion of an overall route.
+//
 // RouteStep wraps [raw.MKRouteStep] with a fluent Go API.
 type RouteStep struct {
 	inner *raw.MKRouteStep

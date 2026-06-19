@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A sample that stores an audiogram.
+//
 // AudiogramSample wraps [raw.HKAudiogramSample] with a fluent Go API.
 type AudiogramSample struct {
 	inner *raw.HKAudiogramSample

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that displays a list of values in a pop-up menu where the user selects a value or types in a custom value.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscombobox
 type NSComboBox struct {
 	NSTextField
@@ -65,63 +67,78 @@ func NSComboBoxFromID(id objc.ID) *NSComboBox {
 	return o
 }
 
+// Marks the receiver as needing redisplay, so that it will reload the data for visible pop-up items and draw the new values.
 func (o *NSComboBox) ReloadData() {
 	o.Ptr().Send(_nSComboBoxSelReloadData)
 }
 
+// Informs the receiver that the number of items in its data source has changed.
 func (o *NSComboBox) NoteNumberOfItemsChanged() {
 	o.Ptr().Send(_nSComboBoxSelNoteNumberOfItemsChanged)
 }
 
+// Scrolls the receiver’s pop-up list vertically so that the item at the specified index is as close to the top as possible.
 func (o *NSComboBox) ScrollItemAtIndexToTop(index int) {
 	o.Ptr().Send(_nSComboBoxSelScrollItemAtIndexToTop, index)
 }
 
+// Scrolls the receiver’s pop-up list vertically so that the item at the specified index is visible.
 func (o *NSComboBox) ScrollItemAtIndexToVisible(index int) {
 	o.Ptr().Send(_nSComboBoxSelScrollItemAtIndexToVisible, index)
 }
 
+// Selects the pop-up list row at the given index.
 func (o *NSComboBox) SelectItemAtIndex(index int) {
 	o.Ptr().Send(_nSComboBoxSelSelectItemAtIndex, index)
 }
 
+// Deselects the pop-up list item at the specified index if it’s selected.
 func (o *NSComboBox) DeselectItemAtIndex(index int) {
 	o.Ptr().Send(_nSComboBoxSelDeselectItemAtIndex, index)
 }
 
+// Adds an object to the end of the receiver’s internal item list.
 func (o *NSComboBox) AddItemWithObjectValue(object objc.ID) {
 	o.Ptr().Send(_nSComboBoxSelAddItemWithObjectValue, object)
 }
 
+// Adds multiple objects to the end of the receiver’s internal item list.
 func (o *NSComboBox) AddItemsWithObjectValues(objects *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSComboBoxSelAddItemsWithObjectValues, objects)
+	o.Ptr().Send(_nSComboBoxSelAddItemsWithObjectValues, objects.Ptr())
 }
 
+// Inserts an object at the specified location in the receiver’s internal item list.
 func (o *NSComboBox) InsertItemWithObjectValueAtIndex(object objc.ID, index int) {
 	o.Ptr().Send(_nSComboBoxSelInsertItemWithObjectValueAtIndex, object, index)
 }
 
+// Removes all occurrences of the given object from the receiver’s internal item list.
 func (o *NSComboBox) RemoveItemWithObjectValue(object objc.ID) {
 	o.Ptr().Send(_nSComboBoxSelRemoveItemWithObjectValue, object)
 }
 
+// Removes the object at the specified location from the receiver’s internal item list.
 func (o *NSComboBox) RemoveItemAtIndex(index int) {
 	o.Ptr().Send(_nSComboBoxSelRemoveItemAtIndex, index)
 }
 
+// Removes all items from the receiver’s internal item list.
 func (o *NSComboBox) RemoveAllItems() {
 	o.Ptr().Send(_nSComboBoxSelRemoveAllItems)
 }
 
+// Selects the first pop-up list item that corresponds to the given object.
 func (o *NSComboBox) SelectItemWithObjectValue(object objc.ID) {
 	o.Ptr().Send(_nSComboBoxSelSelectItemWithObjectValue, object)
 }
 
+// Returns the object located at the given index within the receiver’s internal item list.
 func (o *NSComboBox) ItemObjectValueAtIndex(index int) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSComboBoxSelItemObjectValueAtIndex, index)
 	return _ret
 }
 
+// Searches the receiver’s internal item list for the specified object and returns the lowest matching index.
 func (o *NSComboBox) IndexOfItemWithObjectValue(object objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _nSComboBoxSelIndexOfItemWithObjectValue, object)
 	return _ret
@@ -215,6 +232,9 @@ func (o *NSComboBox) ObjectValueOfSelectedItem() objc.ID {
 }
 
 func (o *NSComboBox) ObjectValues() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSComboBoxSelObjectValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSComboBoxSelObjectValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

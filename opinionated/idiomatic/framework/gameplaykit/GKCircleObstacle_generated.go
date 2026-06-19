@@ -10,7 +10,7 @@ import (
 	"unsafe"
 )
 
-// An obstacle with an impassible radius
+// A circular impassable area to be avoided by agents.
 //
 // CircleObstacle wraps [raw.GKCircleObstacle] with a fluent Go API.
 type CircleObstacle struct {
@@ -32,6 +32,8 @@ func CircleObstacleFromID(id objc.ID) *CircleObstacle {
 	return &CircleObstacle{inner: raw.GKCircleObstacleFromID(id)}
 }
 
+// Initializes a circular obstacle with the specified radius.
+//
 // NewCircleObstacleWithRadius creates a new [CircleObstacle].
 func NewCircleObstacleWithRadius(radius float32) *CircleObstacle {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKCircleObstacle")), objc.RegisterName("alloc"))
@@ -39,7 +41,7 @@ func NewCircleObstacleWithRadius(radius float32) *CircleObstacle {
 	return &CircleObstacle{inner: raw.GKCircleObstacleFromID(_id)}
 }
 
-// Radius of the impassible circle
+// The radius of the obstacle.
 //
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *CircleObstacle) WithRadius(radius float32) *CircleObstacle {

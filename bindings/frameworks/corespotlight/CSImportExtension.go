@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides searchable attributes for file types that the app supports.
+//
 // Apple documentation: https://developer.apple.com/documentation/corespotlight/csimportextension
 type CSImportExtension struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func CSImportExtensionFromID(id objc.ID) *CSImportExtension {
 	return o
 }
 
+// Provides searchable attributes for a file at the specified URL.
 func (o *CSImportExtension) UpdateAttributesForFileAtURLError(attributes *CSSearchableItemAttributeSet, contentURL *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cSImportExtensionSelUpdateAttributesForFileAtURLError, attributes.Ptr(), contentURL.Ptr(), unsafe.Pointer(&_nsErr))

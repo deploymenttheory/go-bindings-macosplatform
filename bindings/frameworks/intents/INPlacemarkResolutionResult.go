@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for placemark information associated with an intent.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inplacemarkresolutionresult
 type INPlacemarkResolutionResult struct {
 	INIntentResolutionResult
@@ -33,6 +35,7 @@ func INPlacemarkResolutionResultFromID(id objc.ID) *INPlacemarkResolutionResult 
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INPlacemarkResolutionResultSuccessWithResolvedPlacemark(resolvedPlacemark *corelocation.CLPlacemark) *INPlacemarkResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPlacemarkResolutionResult), _iNPlacemarkResolutionResultSelSuccessWithResolvedPlacemark, resolvedPlacemark.Ptr())
 	if _ret != 0 {
@@ -41,14 +44,16 @@ func INPlacemarkResolutionResultSuccessWithResolvedPlacemark(resolvedPlacemark *
 	return INPlacemarkResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires the user to select from among the specified objects.
 func INPlacemarkResolutionResultDisambiguationWithPlacemarksToDisambiguate(placemarksToDisambiguate *foundation.NSArray[*corelocation.CLPlacemark]) *INPlacemarkResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINPlacemarkResolutionResult), _iNPlacemarkResolutionResultSelDisambiguationWithPlacemarksToDisambiguate, placemarksToDisambiguate)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINPlacemarkResolutionResult), _iNPlacemarkResolutionResultSelDisambiguationWithPlacemarksToDisambiguate, placemarksToDisambiguate.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return INPlacemarkResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INPlacemarkResolutionResultConfirmationRequiredWithPlacemarkToConfirm(placemarkToConfirm *corelocation.CLPlacemark) *INPlacemarkResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPlacemarkResolutionResult), _iNPlacemarkResolutionResultSelConfirmationRequiredWithPlacemarkToConfirm, placemarkToConfirm.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Affine transform information that an image-alignment request produces.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnimagetranslationalignmentobservation
 type VNImageTranslationAlignmentObservation struct {
 	VNImageAlignmentObservation

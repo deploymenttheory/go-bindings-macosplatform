@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An observation that provides the recognized feature print.
+//
 // FeaturePrintObservation wraps [raw.VNFeaturePrintObservation] with a fluent Go API.
 type FeaturePrintObservation struct {
 	inner *raw.VNFeaturePrintObservation
@@ -36,7 +38,7 @@ func NewFeaturePrintObservation() *FeaturePrintObservation {
 	return &FeaturePrintObservation{inner: raw.VNFeaturePrintObservationFromID(_id)}
 }
 
-// @brief Computes the distance between two observations. @discussion The larger the distance the more dissimlar the feature prints are. In case of an error this method returns false with an error describing the error condition, for instance comparing two non-comparable feature prints.
+// Computes the distance between two feature print observations.
 //
 // ComputeDistanceToFeaturePrintObservationError calls the underlying ComputeDistanceToFeaturePrintObservationError.
 func (x *FeaturePrintObservation) ComputeDistanceToFeaturePrintObservationError(outDistance *float32, featurePrint *raw.VNFeaturePrintObservation) (bool, error) {

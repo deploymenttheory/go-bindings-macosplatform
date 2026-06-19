@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An array of buffer layout descriptor objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlbufferlayoutdescriptorarray
 type MTLBufferLayoutDescriptorArray struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func MTLBufferLayoutDescriptorArrayFromID(id objc.ID) *MTLBufferLayoutDescriptor
 	return o
 }
 
+// Returns the state of the specified buffer layout.
 func (o *MTLBufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index uint) *MTLBufferLayoutDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLBufferLayoutDescriptorArraySelObjectAtIndexedSubscript, index)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func (o *MTLBufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index uint) *M
 	return MTLBufferLayoutDescriptorFromID(_ret)
 }
 
+// Sets the state of the specified buffer layout.
 func (o *MTLBufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *MTLBufferLayoutDescriptor, index uint) {
 	o.Ptr().Send(_mTLBufferLayoutDescriptorArraySelSetObjectAtIndexedSubscript, bufferDesc.Ptr(), index)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An explicit association between two or more operations.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckoperationgroup
 type CKOperationGroup struct {
 	foundation.NSObject
@@ -51,7 +53,7 @@ func (o *CKOperationGroup) Init() *CKOperationGroup {
 	return CKOperationGroupFromID(_ret)
 }
 
-// Creates an operation group from a serialized instance. - Parameters: - aDecoder: The coder to use when deserializing the group.
+// Creates an operation group from a serialized instance.
 func (o *CKOperationGroup) InitWithCoder(aDecoder *foundation.NSCoder) *CKOperationGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKOperationGroupSelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {

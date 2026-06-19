@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A port that can be used as an endpoint for distributed object connections (or raw messaging).
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmachport
 type NSMachPort struct {
 	NSPort
@@ -33,6 +35,7 @@ func NSMachPortFromID(id objc.ID) *NSMachPort {
 	return o
 }
 
+// Creates and returns a port object configured with the given Mach port.
 func NSMachPortPortWithMachPort(machPort uint32) *NSPort {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMachPort), _nSMachPortSelPortWithMachPort, machPort)
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func NSMachPortPortWithMachPort(machPort uint32) *NSPort {
 	return NSPortFromID(_ret)
 }
 
+// Initializes a newly allocated NSMachPort object with a given Mach port.
 func (o *NSMachPort) InitWithMachPort(machPort uint32) *NSMachPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMachPortSelInitWithMachPort, machPort)
 	if _ret != 0 {
@@ -49,6 +53,7 @@ func (o *NSMachPort) InitWithMachPort(machPort uint32) *NSMachPort {
 	return NSMachPortFromID(_ret)
 }
 
+// Creates and returns a port object configured with the specified options and the given Mach port.
 func NSMachPortPortWithMachPortOptions(machPort uint32, f NSMachPortOptions) *NSPort {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMachPort), _nSMachPortSelPortWithMachPortOptions, machPort, f)
 	if _ret != 0 {
@@ -57,6 +62,7 @@ func NSMachPortPortWithMachPortOptions(machPort uint32, f NSMachPortOptions) *NS
 	return NSPortFromID(_ret)
 }
 
+// Initializes a newly allocated NSMachPort object with a given Mach port and the specified options.
 func (o *NSMachPort) InitWithMachPortOptions(machPort uint32, f NSMachPortOptions) *NSMachPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMachPortSelInitWithMachPortOptions, machPort, f)
 	if _ret != 0 {

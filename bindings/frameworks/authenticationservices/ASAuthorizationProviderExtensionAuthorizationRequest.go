@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An authorization request that your provider extension handles.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest
 type ASAuthorizationProviderExtensionAuthorizationRequest struct {
 	foundation.NSObject
@@ -53,27 +55,27 @@ func ASAuthorizationProviderExtensionAuthorizationRequestFromID(id objc.ID) *ASA
 	return o
 }
 
-// @abstract Call when authorization was not handled.
+// Indicates the request wasn’t handled.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) DoNotHandle() {
 	o.Ptr().Send(_aSAuthorizationProviderExtensionAuthorizationRequestSelDoNotHandle)
 }
 
-// @abstract Call when authorization needs to be canceled from some reason (for example user pressed Cancel button).
+// Cancels the request, for example, because the user taps a cancel button.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) Cancel() {
 	o.Ptr().Send(_aSAuthorizationProviderExtensionAuthorizationRequestSelCancel)
 }
 
-// @abstract Call when authorization succeeded without any output.
+// Indicates the requested authorization completed with no output.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) Complete() {
 	o.Ptr().Send(_aSAuthorizationProviderExtensionAuthorizationRequestSelComplete)
 }
 
-// @abstract Call when authorization succeeded with an authorization tokens stored in HTTP headers.
+// Indicates the requested authorization succeeded with tokens in the HTTP headers.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
-	o.Ptr().Send(_aSAuthorizationProviderExtensionAuthorizationRequestSelCompleteWithHTTPAuthorizationHeaders, httpAuthorizationHeaders)
+	o.Ptr().Send(_aSAuthorizationProviderExtensionAuthorizationRequestSelCompleteWithHTTPAuthorizationHeaders, httpAuthorizationHeaders.Ptr())
 }
 
-// @abstract Call when authorization succeeded with a HTTP response.
+// Indicates the requested authorization succeeded with an HTTP response.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPResponseHttpBody(httpResponse *foundation.NSHTTPURLResponse, httpBody *foundation.NSData) {
 	o.Ptr().Send(_aSAuthorizationProviderExtensionAuthorizationRequestSelCompleteWithHTTPResponseHttpBody, httpResponse.Ptr(), httpBody.Ptr())
 }
@@ -83,12 +85,12 @@ func (o *ASAuthorizationProviderExtensionAuthorizationRequest) CompleteWithAutho
 	o.Ptr().Send(_aSAuthorizationProviderExtensionAuthorizationRequestSelCompleteWithAuthorizationResult, authorizationResult.Ptr())
 }
 
-// @abstract Call when authorization failed with an error.
+// Indicates the requested authorization failed.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) CompleteWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_aSAuthorizationProviderExtensionAuthorizationRequestSelCompleteWithError, error_)
 }
 
-// @abstract Asks authorization service to show extension view controller. If the controller cannot be shown an error is returned.
+// Asks the authorization service to show the extension’s view controller to the user.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) PresentAuthorizationViewControllerWithCompletion(completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -120,8 +122,11 @@ func (o *ASAuthorizationProviderExtensionAuthorizationRequest) RequestedOperatio
 
 // @abstract Request HTTP headers.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) HttpHeaders() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationRequestSelHttpHeaders)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationRequestSelHttpHeaders)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
 // @abstract Request body.
@@ -144,8 +149,11 @@ func (o *ASAuthorizationProviderExtensionAuthorizationRequest) Realm() *foundati
 
 // @abstract Extension data from extension configuration provided by MDM stored as a property-list.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) ExtensionData() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationRequestSelExtensionData)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationRequestSelExtensionData)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @abstract Identification of the calling application.
@@ -159,8 +167,11 @@ func (o *ASAuthorizationProviderExtensionAuthorizationRequest) CallerBundleIdent
 
 // @abstract Authorization options.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) AuthorizationOptions() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationRequestSelAuthorizationOptions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationRequestSelAuthorizationOptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @abstract Indicates whether the calling application is managed.

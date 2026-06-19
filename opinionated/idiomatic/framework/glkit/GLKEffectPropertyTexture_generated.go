@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Texture drawing parameters for use in GLKit rendering effects.
+//
 // EffectPropertyTexture wraps [raw.GLKEffectPropertyTexture] with a fluent Go API.
 type EffectPropertyTexture struct {
 	inner *raw.GLKEffectPropertyTexture
@@ -35,24 +37,32 @@ func NewEffectPropertyTexture() *EffectPropertyTexture {
 	return &EffectPropertyTexture{inner: raw.GLKEffectPropertyTextureFromID(_id)}
 }
 
+// A Boolean value that indicates whether this texture is used to texture drawn primitives.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *EffectPropertyTexture) WithEnabled(enabled uint8) *EffectPropertyTexture {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// The OpenGL name for the texture being sampled by this texture stage.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *EffectPropertyTexture) WithName(name uint32) *EffectPropertyTexture {
 	x.inner.SetName(name)
 	return x
 }
 
+// The kind of texture pointed to by the texture stage. See GLKTextureTarget.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *EffectPropertyTexture) WithTarget(target GLKTextureTarget) *EffectPropertyTexture {
 	x.inner.SetTarget(raw.GLKTextureTarget(target))
 	return x
 }
 
+// The mode the texture uses to compute its output fragment color. See GLKTextureEnvMode.
+//
 // WithEnvMode sets the envMode property and returns the receiver for chaining.
 func (x *EffectPropertyTexture) WithEnvMode(envMode GLKTextureEnvMode) *EffectPropertyTexture {
 	x.inner.SetEnvMode(raw.GLKTextureEnvMode(envMode))

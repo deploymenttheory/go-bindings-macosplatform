@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An array of length matching the rank, holding the dimensions of a tensor.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtltensorextents
 type MTLTensorExtents struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func MTLTensorExtentsFromID(id objc.ID) *MTLTensorExtents {
 	return o
 }
 
-// Creates a new tensor extents with the rank and extent values you provide. Zero rank extents represent scalars. `values` can only be `nil`if `rank` is 0. - Parameters: - rank: the number of dimensions. - values: an array of length `rank` that specifies the size of each dimension. The first dimension is the innermost dimension. - Returns: Tensor extents with the rank and extent values you provide. Returns `nil` if `rank` exceeds 0 and `values` is nil or if `rank` exceeds “MTL_TENSOR_MAX_RANK“.
+// Creates a new tensor extents with the rank and extent values you provide.
 func (o *MTLTensorExtents) InitWithRankValues(rank uint, values *int64) *MTLTensorExtents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLTensorExtentsSelInitWithRankValues, rank, values)
 	if _ret != 0 {
@@ -41,7 +43,7 @@ func (o *MTLTensorExtents) InitWithRankValues(rank uint, values *int64) *MTLTens
 	return MTLTensorExtentsFromID(_ret)
 }
 
-// Returns the extent at an index. - Parameters: - dimensionIndex: the index of the dimension. The first dimension is the innermost dimension. - Returns: the extent at `dimensionIndex`. This method returns -1 if `dimensionIndex` is greater than or equal to `rank`.
+// Returns the extent at an index.
 func (o *MTLTensorExtents) ExtentAtDimensionIndex(dimensionIndex uint) int {
 	_ret := objc.Send[int](o.Ptr(), _mTLTensorExtentsSelExtentAtDimensionIndex, dimensionIndex)
 	return _ret

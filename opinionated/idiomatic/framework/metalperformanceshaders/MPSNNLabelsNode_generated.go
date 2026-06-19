@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A placeholder node denoting the per-element weight buffer used by loss and gradient loss kernels.
+//
 // NNLabelsNode wraps [raw.MPSNNLabelsNode] with a fluent Go API.
 type NNLabelsNode struct {
 	inner *raw.MPSNNLabelsNode

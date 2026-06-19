@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A command that sets one or more attributes or relationships to one or more values.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nssetcommand
 type NSSetCommand struct {
 	NSScriptCommand

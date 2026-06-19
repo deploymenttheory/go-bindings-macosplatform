@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the properties of a device.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremediaio/cmioextensiondeviceproperties
 type CMIOExtensionDeviceProperties struct {
 	foundation.NSObject
@@ -42,27 +44,27 @@ func CMIOExtensionDevicePropertiesFromID(id objc.ID) *CMIOExtensionDevicePropert
 	return o
 }
 
-// @method devicePropertiesWithDictionary: @abstract Return a device properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionDeviceProperties instance.
+// Returns a new properties object with a dictionary of property states.
 func CMIOExtensionDevicePropertiesDevicePropertiesWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CMIOExtensionDeviceProperties {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionDeviceProperties), _cMIOExtensionDevicePropertiesSelDevicePropertiesWithDictionary, propertiesDictionary)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionDeviceProperties), _cMIOExtensionDevicePropertiesSelDevicePropertiesWithDictionary, propertiesDictionary.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CMIOExtensionDevicePropertiesFromID(_ret)
 }
 
-// @method initWithDictionary: @abstract Initialize a device properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionDeviceProperties instance.
+// Creates a properties object with a dictionary of property states.
 func (o *CMIOExtensionDeviceProperties) InitWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CMIOExtensionDeviceProperties {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionDevicePropertiesSelInitWithDictionary, propertiesDictionary)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionDevicePropertiesSelInitWithDictionary, propertiesDictionary.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CMIOExtensionDevicePropertiesFromID(_ret)
 }
 
-// @property setPropertyState:forProperty: @abstract Set the property value. @param propertyState The property state. @param property The property key. @discussion Setting nil to propertyState does remove the property.
+// Sets the value of a device property.
 func (o *CMIOExtensionDeviceProperties) SetPropertyStateForProperty(propertyState *CMIOExtensionPropertyState[objc.ID], property *foundation.NSString) {
-	o.Ptr().Send(_cMIOExtensionDevicePropertiesSelSetPropertyStateForProperty, propertyState, property.Ptr())
+	o.Ptr().Send(_cMIOExtensionDevicePropertiesSelSetPropertyStateForProperty, propertyState.Ptr(), property.Ptr())
 }
 
 // @property model @abstract The device model. @discussion The property key is CMIOExtensionPropertyDeviceModel.
@@ -119,10 +121,13 @@ func (o *CMIOExtensionDeviceProperties) SetLinkedCoreAudioDeviceUID(linkedCoreAu
 
 // @property propertiesDictionary @abstract The dictionary of properties. @discussion The dictionary containing all keys and values.
 func (o *CMIOExtensionDeviceProperties) PropertiesDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _cMIOExtensionDevicePropertiesSelPropertiesDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionDevicePropertiesSelPropertiesDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *CMIOExtensionDeviceProperties) SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_cMIOExtensionDevicePropertiesSelSetPropertiesDictionary, propertiesDictionary)
+	o.Ptr().Send(_cMIOExtensionDevicePropertiesSelSetPropertiesDictionary, propertiesDictionary.Ptr())
 }

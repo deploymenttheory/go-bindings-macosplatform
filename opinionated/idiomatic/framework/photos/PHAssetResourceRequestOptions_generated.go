@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of options affecting the delivery of underlying asset data that you request from the asset resource manager.
+//
 // AssetResourceRequestOptions wraps [raw.PHAssetResourceRequestOptions] with a fluent Go API.
 type AssetResourceRequestOptions struct {
 	inner *raw.PHAssetResourceRequestOptions
@@ -35,12 +37,16 @@ func NewAssetResourceRequestOptions() *AssetResourceRequestOptions {
 	return &AssetResourceRequestOptions{inner: raw.PHAssetResourceRequestOptionsFromID(_id)}
 }
 
+// A Boolean value that specifies whether Photos can download the requested asset resource data from iCloud.
+//
 // WithNetworkAccessAllowed sets the networkAccessAllowed property and returns the receiver for chaining.
 func (x *AssetResourceRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *AssetResourceRequestOptions {
 	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
 	return x
 }
 
+// A block that Photos calls periodically while downloading the asset resource data.
+//
 // WithProgressHandler sets the progressHandler property and returns the receiver for chaining.
 func (x *AssetResourceRequestOptions) WithProgressHandler(progressHandler func(float64)) *AssetResourceRequestOptions {
 	x.inner.SetProgressHandler(progressHandler)

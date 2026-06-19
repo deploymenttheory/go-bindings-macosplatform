@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// This class serves as the entry point to the iTunesLibrary framework.
+//
 // Library wraps [raw.ITLibrary] with a fluent Go API.
 type Library struct {
 	inner *raw.ITLibrary
@@ -32,7 +34,7 @@ func LibraryFromID(id objc.ID) *Library {
 	return &Library{inner: raw.ITLibraryFromID(id)}
 }
 
-// @abstract Initializes an instance of ITLibrary which can be used to retrieve media entities. @discussion Upon initialization of the ITLibrary class, the default iTunes database for the current user will be read and parsed. At this point all media entities will be cached in memory until the time the object is deallocated. @param requestedAPIVersion The version of the iTunesLibrary API that the application is requesting, provide "1.0" if unknown. @param error A pointer to a variable that will receive an NSError if this method fails. May be nil if caller does not care about error. @return An ITLibrary instance, or nil if this method fails.
+// Initializes an instance of ITLibrary that can retrieve media entities.
 //
 // NewLibraryWithAPIVersionError creates a new [Library].
 func NewLibraryWithAPIVersionError(requestedAPIVersion string) (*Library, error) {
@@ -45,7 +47,7 @@ func NewLibraryWithAPIVersionError(requestedAPIVersion string) (*Library, error)
 	return &Library{inner: raw.ITLibraryFromID(_id)}, nil
 }
 
-// @abstract Initializes an instance of ITLibrary which can be used to retrieve media entities. @discussion Unless the ITLibInitOptionLazyLoadData option is specified, the default iTunes database for the current user will be read and parsed upon initialization of the ITLibrary class, and all media entities will be cached in memory. @param requestedAPIVersion The version of the iTunesLibrary API that the application is requesting, provide "1.0" if unknown. @param options Options that change the initialization behavior. @param error A pointer to a variable that will receive an NSError if this method fails. May be nil if caller does not care about error. @return An ITLibrary instance, or nil if this method fails.
+// Initializes an instance of ITLibrary that can retrieve media entities.
 //
 // NewLibraryWithAPIVersionOptionsError creates a new [Library].
 func NewLibraryWithAPIVersionOptionsError(requestedAPIVersion string, options ITLibInitOptions) (*Library, error) {
@@ -58,7 +60,7 @@ func NewLibraryWithAPIVersionOptionsError(requestedAPIVersion string, options IT
 	return &Library{inner: raw.ITLibraryFromID(_id)}, nil
 }
 
-// @abstract Retrieves the artwork from a media file. @param mediaFileURL The URL of the media file whose artwork should be extracted. @return A ITLibArtwork instance represeting the media file artwork, or nil if the artwork was not found or could not be extracted.
+// Retrieves the artwork from a media file that may or may not be in the iTunes library.
 //
 // ArtworkForMediaFile calls the underlying ArtworkForMediaFile.
 func (x *Library) ArtworkForMediaFile(mediaFileURL string) *LibArtwork {
@@ -69,14 +71,14 @@ func (x *Library) ArtworkForMediaFile(mediaFileURL string) *LibArtwork {
 	return &LibArtwork{inner: _r}
 }
 
-// @abstract Refreshes the data used by the framework. @return YES if the data was reloaded, false if an error occurred.
+// Refreshes the data that the framework uses.
 //
 // ReloadData calls the underlying ReloadData.
 func (x *Library) ReloadData() bool {
 	return x.inner.ReloadData()
 }
 
-// @abstract Unloads the data used by the framework.
+// Unloads the data that the framework uses.
 //
 // UnloadData calls the underlying UnloadData.
 func (x *Library) UnloadData() {

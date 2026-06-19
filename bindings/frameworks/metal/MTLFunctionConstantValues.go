@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of constant values that specialize a graphics or compute GPU function.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlfunctionconstantvalues
 type MTLFunctionConstantValues struct {
 	foundation.NSObject
@@ -35,18 +37,22 @@ func MTLFunctionConstantValuesFromID(id objc.ID) *MTLFunctionConstantValues {
 	return o
 }
 
+// Sets a value for a function constant at a specific index.
 func (o *MTLFunctionConstantValues) SetConstantValueTypeAtIndex(value unsafe.Pointer, type_ MTLDataType, index uint) {
 	o.Ptr().Send(_mTLFunctionConstantValuesSelSetConstantValueTypeAtIndex, value, type_, index)
 }
 
+// Sets values for a group of function constants within a specific index range.
 func (o *MTLFunctionConstantValues) SetConstantValuesTypeWithRange(values unsafe.Pointer, type_ MTLDataType, range_ foundation.NSRange) {
 	o.Ptr().Send(_mTLFunctionConstantValuesSelSetConstantValuesTypeWithRange, values, type_, range_)
 }
 
+// Sets a value for a function constant with a specific name.
 func (o *MTLFunctionConstantValues) SetConstantValueTypeWithName(value unsafe.Pointer, type_ MTLDataType, name *foundation.NSString) {
 	o.Ptr().Send(_mTLFunctionConstantValuesSelSetConstantValueTypeWithName, value, type_, name.Ptr())
 }
 
+// Deletes all previously set constant values.
 func (o *MTLFunctionConstantValues) Reset() {
 	o.Ptr().Send(_mTLFunctionConstantValuesSelReset)
 }

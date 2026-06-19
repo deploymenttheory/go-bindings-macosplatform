@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The DNS resolver settings for a DNS-over-HTTPS server.
+//
 // NEDNSOverHTTPSSettings wraps [raw.NEDNSOverHTTPSSettings] with a fluent Go API.
 type NEDNSOverHTTPSSettings struct {
 	inner *raw.NEDNSOverHTTPSSettings
@@ -37,7 +39,7 @@ func NewNEDNSOverHTTPSSettings() *NEDNSOverHTTPSSettings {
 	return &NEDNSOverHTTPSSettings{inner: raw.NEDNSOverHTTPSSettingsFromID(_id)}
 }
 
-// @property serverURL @discussion The URL to which to make DNS-over-HTTPS requests. The format should be an HTTPS URL with the path indicating the location of the DNS-over-HTTPS server, such as: "https://dnsserver.example.net/dns-query".
+// The URL of a DNS-over-HTTPS server.
 //
 // WithServerURL sets the serverURL property and returns the receiver for chaining.
 func (x *NEDNSOverHTTPSSettings) WithServerURL(serverURL string) *NEDNSOverHTTPSSettings {
@@ -45,7 +47,7 @@ func (x *NEDNSOverHTTPSSettings) WithServerURL(serverURL string) *NEDNSOverHTTPS
 	return x
 }
 
-// @property identityReference @discussion The optional certificate identity keychain reference to use as a TLS client certificate.
+// A persistent keychain reference to a keychain item containing the certificate and private key components of the DNS client credential.
 //
 // WithIdentityReference sets the identityReference property and returns the receiver for chaining.
 func (x *NEDNSOverHTTPSSettings) WithIdentityReference(identityReference *foundation.NSData) *NEDNSOverHTTPSSettings {
@@ -53,7 +55,7 @@ func (x *NEDNSOverHTTPSSettings) WithIdentityReference(identityReference *founda
 	return x
 }
 
-// @property searchDomains @discussion An array of DNS server search domain strings.
+// A list of domain strings used to fully qualify single-label host names.
 //
 // WithSearchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSOverHTTPSSettings) WithSearchDomains(items ...*foundation.NSString) *NEDNSOverHTTPSSettings {
@@ -76,7 +78,7 @@ func (x *NEDNSOverHTTPSSettings) WithSearchDomains(items ...*foundation.NSString
 	return x
 }
 
-// @property domainName @discussion A string containing the DNS domain.
+// The primary domain of the tunnel.
 //
 // WithDomainName sets the domainName property and returns the receiver for chaining.
 func (x *NEDNSOverHTTPSSettings) WithDomainName(domainName string) *NEDNSOverHTTPSSettings {
@@ -84,7 +86,7 @@ func (x *NEDNSOverHTTPSSettings) WithDomainName(domainName string) *NEDNSOverHTT
 	return x
 }
 
-// @property matchDomains @discussion An array of strings containing domain strings. If this property is non-nil, the DNS settings will only be used to resolve host names within the specified domains.
+// A list of domain strings used to determine which DNS queries will use the DNS resolver settings contained in this object.
 //
 // WithMatchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSOverHTTPSSettings) WithMatchDomains(items ...*foundation.NSString) *NEDNSOverHTTPSSettings {
@@ -107,7 +109,7 @@ func (x *NEDNSOverHTTPSSettings) WithMatchDomains(items ...*foundation.NSString)
 	return x
 }
 
-// @property matchDomainsNoSearch @discussion A boolean indicating if the match domains should be appended to the search domain list.  Default is NO (match domains will be appended to the search domain list).
+// A Boolean that specifies if the domains in the matchDomains list should not be appended to the resolver’s list of search domains.
 //
 // WithMatchDomainsNoSearch sets the matchDomainsNoSearch property and returns the receiver for chaining.
 func (x *NEDNSOverHTTPSSettings) WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSOverHTTPSSettings {

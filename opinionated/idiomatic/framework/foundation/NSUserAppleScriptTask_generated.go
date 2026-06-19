@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that executes AppleScript scripts.
+//
 // UserAppleScriptTask wraps [raw.NSUserAppleScriptTask] with a fluent Go API.
 type UserAppleScriptTask struct {
 	inner *raw.NSUserAppleScriptTask
@@ -42,6 +44,8 @@ func (x *UserAppleScriptTask) WithScriptingProperties(scriptingProperties *raw.N
 	return x
 }
 
+// Execute the AppleScript script by sending it the specified Apple event.
+//
 // ExecuteWithAppleEventCompletionHandler calls the underlying ExecuteWithAppleEventCompletionHandler.
 func (x *UserAppleScriptTask) ExecuteWithAppleEventCompletionHandler(event *raw.NSAppleEventDescriptor, handler func(*raw.NSAppleEventDescriptor, unsafe.Pointer)) {
 	x.inner.ExecuteWithAppleEventCompletionHandler(event, handler)

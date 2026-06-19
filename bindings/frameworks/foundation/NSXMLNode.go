@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The nodes in the abstract, logical tree structure that represents an XML document.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsxmlnode
 type NSXMLNode struct {
 	NSObject
@@ -264,20 +266,26 @@ func (o *NSXMLNode) NodesForXPathError(xpath *NSString) (*NSArray[*NSXMLNode], e
 // @method objectsForXQuery:constants:error: @abstract Returns the objects resulting from applying an XQuery to this node using the node as the context item ("."). Constants are a name-value dictionary for constants declared "external" in the query. normalizeAdjacentTextNodesPreservingCDATA:NO should be called if there are adjacent text nodes since they are not allowed under the XPath/XQuery Data Model. @returns An array whose elements are kinds of NSArray, NSData, NSDate, NSNumber, NSString, NSURL, or NSXMLNode.
 func (o *NSXMLNode) ObjectsForXQueryConstantsError(xquery *NSString, constants *NSDictionary[*NSString, objc.ID]) (*NSArray[objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSXMLNodeSelObjectsForXQueryConstantsError, xquery.Ptr(), constants, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelObjectsForXQueryConstantsError, xquery.Ptr(), constants.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return NSArrayFromID[objc.ID](_ret), nil
 }
 
 func (o *NSXMLNode) ObjectsForXQueryError(xquery *NSString) (*NSArray[objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSXMLNodeSelObjectsForXQueryError, xquery.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLNodeSelObjectsForXQueryError, xquery.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return NSArrayFromID[objc.ID](_ret), nil
 }
 
 // @abstract Returns an element, attribute, entity, or notation DTD node based on the full XML string.

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sample that stores a vision prescription.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkvisionprescription
 type HKVisionPrescription struct {
 	HKSample
@@ -33,9 +35,9 @@ func HKVisionPrescriptionFromID(id objc.ID) *HKVisionPrescription {
 	return o
 }
 
-// @method        prescriptionWithType:dateIssued:expirationDate:device:metadata @param         type           The prescription type @param         dateIssued     The date the prescription was issued @param         expirationDate The date the prescription expires @param         device         The device that generated the sample @param         metadata       The metadata for the sample
+// Creates a new vision prescription sample.
 func HKVisionPrescriptionPrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata(type_ HKVisionPrescriptionType, dateIssued *foundation.NSDate, expirationDate *foundation.NSDate, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKVisionPrescription {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKVisionPrescription), _hKVisionPrescriptionSelPrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata, type_, dateIssued.Ptr(), expirationDate.Ptr(), device.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKVisionPrescription), _hKVisionPrescriptionSelPrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata, type_, dateIssued.Ptr(), expirationDate.Ptr(), device.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

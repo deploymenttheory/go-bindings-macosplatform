@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A session that tracks a person’s workout.
+//
 // WorkoutSession wraps [raw.HKWorkoutSession] with a fluent Go API.
 type WorkoutSession struct {
 	inner *raw.HKWorkoutSession
@@ -36,7 +38,7 @@ func NewWorkoutSession() *WorkoutSession {
 	return &WorkoutSession{inner: raw.HKWorkoutSessionFromID(_id)}
 }
 
-// @property      delegate @abstract      The session delegate, which receives @discussion    The session delegate object is the one implementing the methods that get called when the session state changes or a failure occurs in the session.
+// The workout session’s delegate.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *WorkoutSession) WithDelegate(delegate raw.HKWorkoutSessionDelegate) *WorkoutSession {
@@ -44,56 +46,56 @@ func (x *WorkoutSession) WithDelegate(delegate raw.HKWorkoutSessionDelegate) *Wo
 	return x
 }
 
-// @method        prepare @abstract      Prepares the workout session for starting. @discussion    This method will asynchronously prepare the workout session for starting. The state of the workout session will transition to HKWorkoutSessionStatePrepared. A prepared session will put the system in session mode, but will not start the session activity. You might call this methods, for example, prior to displaying a countdown on your application while waiting for the activity to start.
+// Prepares the workout session.
 //
 // Prepare calls the underlying Prepare.
 func (x *WorkoutSession) Prepare() {
 	x.inner.Prepare()
 }
 
-// @method        startActivityWithDate: @param         date                Start date for the workout session activity @abstract      Starts the workout session activity. @discussion    This method will asynchronously begin the workout session activity. The state of the workout session will transition to HKWorkoutSessionStateRunning. Once a session activity is started the system will be in session mode and sensor algorithms will be applied to generate data for the workout activity.
+// Starts the workout session activity, and sets the start date.
 //
 // StartActivityWithDate calls the underlying StartActivityWithDate.
 func (x *WorkoutSession) StartActivityWithDate(date *foundation.NSDate) {
 	x.inner.StartActivityWithDate(date)
 }
 
-// @method        stopActivityWithDate: @param         date                Stop date for the workout session activity @abstract      Stops the workout session activity. @discussion    This method will asynchronously stop the session activity if it is currently running. The state of the workout session will transition to HKWorkoutSessionStateStopped. Once a workout session is stopped, it cannot be reused to start a new workout session. Sensor algorithms will be stopped and no new data will be generated for this session. However, the system will remain in session mode.
+// Stops the workout session activity, and sets the end date.
 //
 // StopActivityWithDate calls the underlying StopActivityWithDate.
 func (x *WorkoutSession) StopActivityWithDate(date *foundation.NSDate) {
 	x.inner.StopActivityWithDate(date)
 }
 
-// @method        end @abstract      Ends the workout session. @discussion    This method will end the session if it is currently running or stopped. The state of the workout session will transition to HKWorkoutSessionStateEnded. Once a workout session is ended, it cannot be reused to start a new workout session. Sensor algorithms will be stopped, no new data will be generated for this session, and the system will exit session mode.
+// Ends the workout session.
 //
 // End calls the underlying End.
 func (x *WorkoutSession) End() {
 	x.inner.End()
 }
 
-// @method        pause @abstract      Pauses the workout session. @discussion    This method will pause the session if it is currently running. The state of the workout session will transition to HKWorkoutSessionStatePaused. An HKWorkoutEventTypePause will be generated and delivered to the workout session's delegate.
+// Pauses the workout session.
 //
 // Pause calls the underlying Pause.
 func (x *WorkoutSession) Pause() {
 	x.inner.Pause()
 }
 
-// @method        resume @abstract      Resumes the workout session. @discussion    This method will resume the session if it is currently paused. The state of the workout session will transition to HKWorkoutSessionStateRunning. An HKWorkoutEventTypeResume will be generated and delivered to the workout session's delegate.
+// Resumes the workout session.
 //
 // Resume calls the underlying Resume.
 func (x *WorkoutSession) Resume() {
 	x.inner.Resume()
 }
 
-// @method        beginNewActivityWithConfiguration:date:metadata: @abstract      Begins a new workout activity for this session. @discussion    This method will asynchronously begin the workout activity. The delegate for this session would be informed once the activity effectively begins.  Sensor algorithms to generate data would be updated to match the new activity.
+// Begins a new workout activity in the workout session.
 //
 // BeginNewActivityWithConfigurationDateMetadata calls the underlying BeginNewActivityWithConfigurationDateMetadata.
 func (x *WorkoutSession) BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration *raw.HKWorkoutConfiguration, date *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration, date, metadata)
 }
 
-// @method        endCurrentActivityOnDate: @abstract      Ends the current workout activity. @discussion    This method will end the current activity, reverting to the main session activity. The delegate for this session would be informed once the activity effectively ends. Sensor algorithms to generate data would be updated to match the main session activity.
+// Ends the current workout activity.
 //
 // EndCurrentActivityOnDate calls the underlying EndCurrentActivityOnDate.
 func (x *WorkoutSession) EndCurrentActivityOnDate(date *foundation.NSDate) {

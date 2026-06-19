@@ -3,16 +3,18 @@
 
 package imageio
 
+// An opaque type that you use to write image data to a URL, data object, or data consumer.
 // CGImageDestination is an opaque type.
 type CGImageDestination struct{}
 
-// @typedef CGImageMetadataRef @abstract an immutable container for CGImageMetadataTags
+// An immutable object that contains the XMP metadata associated with an image.
 // CGImageMetadata is an opaque type.
 type CGImageMetadata struct{}
 
-// @typedef CGImageMetadataTagRef @abstract an individual metadata tag @discussion A CGImageMetadataTag encapsulates an EXIF, IPTC, or XMP property. All tags contain a namespace, prefix, name, type, and value. Please see @link CGImageMetadataTagCreate @/link for more details.
+// An immutable type that contains information about a single piece of image metadata.
 // CGImageMetadataTag is an opaque type.
 type CGImageMetadataTag struct{}
 
+// An opaque type that you use to read image data from a URL, data object, or data consumer.
 // CGImageSource is an opaque type.
 type CGImageSource struct{}

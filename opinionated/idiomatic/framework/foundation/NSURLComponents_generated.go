@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that parses URLs into and constructs URLs from their constituent parts.
+//
 // URLComponents wraps [raw.NSURLComponents] with a fluent Go API.
 type URLComponents struct {
 	inner *raw.NSURLComponents
@@ -38,6 +40,8 @@ func NewURLComponents() *URLComponents {
 	return &URLComponents{inner: raw.NSURLComponentsFromID(_id)}
 }
 
+// Creates a URL components object by parsing the URL from an NSURL object.
+//
 // NewURLComponentsWithURLResolvingAgainstBaseURL creates a new [URLComponents].
 func NewURLComponentsWithURLResolvingAgainstBaseURL(url string, resolve bool) *URLComponents {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLComponents")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewURLComponentsWithURLResolvingAgainstBaseURL(url string, resolve bool) *U
 	return &URLComponents{inner: raw.NSURLComponentsFromID(_id)}
 }
 
+// Creates a URL components object by parsing a URL in string form.
+//
 // NewURLComponentsWithString creates a new [URLComponents].
 func NewURLComponentsWithString(uRLString string) *URLComponents {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLComponents")), objc.RegisterName("alloc"))
@@ -52,7 +58,7 @@ func NewURLComponentsWithString(uRLString string) *URLComponents {
 	return &URLComponents{inner: raw.NSURLComponentsFromID(_id)}
 }
 
-// Initializes an `NSURLComponents` with a URL string and the option to add (or skip) IDNA- and percent-encoding of invalid characters. If `encodingInvalidCharacters` is false, and the URL string is invalid according to RFC 3986, `nil` is returned. If `encodingInvalidCharacters` is true, `NSURLComponents` will try to encode the string to create a valid URL. If the URL string is still invalid after encoding, `nil` is returned. - Parameter URLString: The URL string. - Parameter encodingInvalidCharacters: True if `NSURLComponents` should try to encode an invalid URL string, false otherwise. - Returns: An `NSURLComponents` instance for a valid URL, or `nil` if the URL is invalid.
+// Creates a URL components instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
 //
 // NewURLComponentsWithStringEncodingInvalidCharacters creates a new [URLComponents].
 func NewURLComponentsWithStringEncodingInvalidCharacters(uRLString string, encodingInvalidCharacters bool) *URLComponents {
@@ -61,96 +67,128 @@ func NewURLComponentsWithStringEncodingInvalidCharacters(uRLString string, encod
 	return &URLComponents{inner: raw.NSURLComponentsFromID(_id)}
 }
 
+// The scheme URL component, or nil if not present.
+//
 // WithScheme sets the scheme property and returns the receiver for chaining.
 func (x *URLComponents) WithScheme(scheme string) *URLComponents {
 	x.inner.SetScheme(foundation.NSStringStringWithUTF8String(scheme))
 	return x
 }
 
+// The username URL subcomponent, or nil if not present.
+//
 // WithUser sets the user property and returns the receiver for chaining.
 func (x *URLComponents) WithUser(user string) *URLComponents {
 	x.inner.SetUser(foundation.NSStringStringWithUTF8String(user))
 	return x
 }
 
+// The password URL subcomponent, or nil if not present.
+//
 // WithPassword sets the password property and returns the receiver for chaining.
 func (x *URLComponents) WithPassword(password string) *URLComponents {
 	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))
 	return x
 }
 
+// The host URL subcomponent, or nil if not present.
+//
 // WithHost sets the host property and returns the receiver for chaining.
 func (x *URLComponents) WithHost(host string) *URLComponents {
 	x.inner.SetHost(foundation.NSStringStringWithUTF8String(host))
 	return x
 }
 
+// The port number URL component, or nil if not present.
+//
 // WithPort sets the port property and returns the receiver for chaining.
 func (x *URLComponents) WithPort(port NumberProvider) *URLComponents {
 	x.inner.SetPort(port.asNumber())
 	return x
 }
 
+// The path URL component, or nil if not present.
+//
 // WithPath sets the path property and returns the receiver for chaining.
 func (x *URLComponents) WithPath(path string) *URLComponents {
 	x.inner.SetPath(foundation.NSStringStringWithUTF8String(path))
 	return x
 }
 
+// The query URL component as a string, or nil if not present.
+//
 // WithQuery sets the query property and returns the receiver for chaining.
 func (x *URLComponents) WithQuery(query string) *URLComponents {
 	x.inner.SetQuery(foundation.NSStringStringWithUTF8String(query))
 	return x
 }
 
+// The fragment URL component (the part after a # symbol), or nil if not present.
+//
 // WithFragment sets the fragment property and returns the receiver for chaining.
 func (x *URLComponents) WithFragment(fragment string) *URLComponents {
 	x.inner.SetFragment(foundation.NSStringStringWithUTF8String(fragment))
 	return x
 }
 
+// The username URL subcomponent expressed as a URL-encoded string, or nil if not present.
+//
 // WithPercentEncodedUser sets the percentEncodedUser property and returns the receiver for chaining.
 func (x *URLComponents) WithPercentEncodedUser(percentEncodedUser string) *URLComponents {
 	x.inner.SetPercentEncodedUser(foundation.NSStringStringWithUTF8String(percentEncodedUser))
 	return x
 }
 
+// The password URL subcomponent expressed as a URL-encoded string, or nil if not present.
+//
 // WithPercentEncodedPassword sets the percentEncodedPassword property and returns the receiver for chaining.
 func (x *URLComponents) WithPercentEncodedPassword(percentEncodedPassword string) *URLComponents {
 	x.inner.SetPercentEncodedPassword(foundation.NSStringStringWithUTF8String(percentEncodedPassword))
 	return x
 }
 
+// The host URL subcomponent expressed as a URL-encoded string, or nil if not present.
+//
 // WithPercentEncodedHost sets the percentEncodedHost property and returns the receiver for chaining.
 func (x *URLComponents) WithPercentEncodedHost(percentEncodedHost string) *URLComponents {
 	x.inner.SetPercentEncodedHost(foundation.NSStringStringWithUTF8String(percentEncodedHost))
 	return x
 }
 
+// The path URL component expressed as a URL-encoded string, or nil if not present.
+//
 // WithPercentEncodedPath sets the percentEncodedPath property and returns the receiver for chaining.
 func (x *URLComponents) WithPercentEncodedPath(percentEncodedPath string) *URLComponents {
 	x.inner.SetPercentEncodedPath(foundation.NSStringStringWithUTF8String(percentEncodedPath))
 	return x
 }
 
+// The query URL component expressed as a URL-encoded string, or nil if not present.
+//
 // WithPercentEncodedQuery sets the percentEncodedQuery property and returns the receiver for chaining.
 func (x *URLComponents) WithPercentEncodedQuery(percentEncodedQuery string) *URLComponents {
 	x.inner.SetPercentEncodedQuery(foundation.NSStringStringWithUTF8String(percentEncodedQuery))
 	return x
 }
 
+// The fragment URL component (the part after a # symbol) expressed as a URL-encoded string, or nil if not present.
+//
 // WithPercentEncodedFragment sets the percentEncodedFragment property and returns the receiver for chaining.
 func (x *URLComponents) WithPercentEncodedFragment(percentEncodedFragment string) *URLComponents {
 	x.inner.SetPercentEncodedFragment(foundation.NSStringStringWithUTF8String(percentEncodedFragment))
 	return x
 }
 
+// The host subcomponent, percent-encoded.
+//
 // WithEncodedHost sets the encodedHost property and returns the receiver for chaining.
 func (x *URLComponents) WithEncodedHost(encodedHost string) *URLComponents {
 	x.inner.SetEncodedHost(foundation.NSStringStringWithUTF8String(encodedHost))
 	return x
 }
 
+// The query URL component as an array of name/value pairs.
+//
 // WithQueryItems sets the collection, converting the Go slice to an NSArray.
 func (x *URLComponents) WithQueryItems(items ...*raw.NSURLQueryItem) *URLComponents {
 	if len(items) == 0 {
@@ -199,6 +237,8 @@ func (x *URLComponents) WithScriptingProperties(scriptingProperties *raw.NSDicti
 	return x
 }
 
+// Returns a URL object derived from the components object.
+//
 // URLRelativeToURL calls the underlying URLRelativeToURL.
 func (x *URLComponents) URLRelativeToURL(baseURL string) *URL {
 	_r := x.inner.URLRelativeToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))

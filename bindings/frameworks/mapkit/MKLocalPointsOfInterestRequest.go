@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A structured request to use when searching for points of interest.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mklocalpointsofinterestrequest
 type MKLocalPointsOfInterestRequest struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func MKLocalPointsOfInterestRequestFromID(id objc.ID) *MKLocalPointsOfInterestRe
 	return o
 }
 
+// Creates a points of interest search request centered on the provided coordinate with the provided radius.
 func (o *MKLocalPointsOfInterestRequest) InitWithCenterCoordinateRadius(coordinate unsafe.Pointer, radius unsafe.Pointer) *MKLocalPointsOfInterestRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalPointsOfInterestRequestSelInitWithCenterCoordinateRadius, coordinate, radius)
 	if _ret != 0 {
@@ -46,6 +49,7 @@ func (o *MKLocalPointsOfInterestRequest) InitWithCenterCoordinateRadius(coordina
 	return MKLocalPointsOfInterestRequestFromID(_ret)
 }
 
+// Creates a points of interest search request based on existing region.
 func (o *MKLocalPointsOfInterestRequest) InitWithCoordinateRegion(region MKCoordinateRegion) *MKLocalPointsOfInterestRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalPointsOfInterestRequestSelInitWithCoordinateRegion, region)
 	if _ret != 0 {

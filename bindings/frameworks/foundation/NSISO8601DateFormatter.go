@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A formatter that converts between dates and their ISO 8601 string representations.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsiso8601dateformatter
 type NSISO8601DateFormatter struct {
 	NSFormatter

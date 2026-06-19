@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A track in a movie that conforms to the QuickTime or ISO base media file format.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmovietrack
 type AVMovieTrack struct {
 	AVAssetTrack

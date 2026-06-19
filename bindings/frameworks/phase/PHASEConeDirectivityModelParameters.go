@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that directs sound in a cone-shaped curve that extends from a sound source.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseconedirectivitymodelparameters
 type PHASEConeDirectivityModelParameters struct {
 	PHASEDirectivityModelParameters
@@ -31,6 +33,7 @@ func PHASEConeDirectivityModelParametersFromID(id objc.ID) *PHASEConeDirectivity
 	return o
 }
 
+// Creates an object that directs sound in a cone-shaped curve that extends from a sound source.
 func (o *PHASEConeDirectivityModelParameters) InitWithSubbandParameters(subbandParameters *foundation.NSArray[*PHASEConeDirectivityModelSubbandParameters]) *PHASEConeDirectivityModelParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEConeDirectivityModelParametersSelInitWithSubbandParameters, subbandParameters.Ptr())
 	if _ret != 0 {

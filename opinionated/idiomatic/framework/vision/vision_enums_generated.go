@@ -8,13 +8,19 @@ import (
 	"fmt"
 )
 
+// Composite types for barcode requests.
 type VNBarcodeCompositeType int64
 
 const (
-	VNBarcodeCompositeTypeNone     VNBarcodeCompositeType = 0
-	VNBarcodeCompositeTypeLinked   VNBarcodeCompositeType = 1
+	// A type that represents no composite type.
+	VNBarcodeCompositeTypeNone VNBarcodeCompositeType = 0
+	// A type that represents a linked composite type.
+	VNBarcodeCompositeTypeLinked VNBarcodeCompositeType = 1
+	// A type that represents trade items in bulk.
 	VNBarcodeCompositeTypeGS1TypeA VNBarcodeCompositeType = 2
+	// A type that represents trade items by piece.
 	VNBarcodeCompositeTypeGS1TypeB VNBarcodeCompositeType = 3
+	// A type that represents trade items in varying quantity.
 	VNBarcodeCompositeTypeGS1TypeC VNBarcodeCompositeType = 4
 )
 
@@ -35,12 +41,16 @@ func (e VNBarcodeCompositeType) String() string {
 	}
 }
 
+// Constants that the define the chirality, or handedness, of a pose.
 type VNChirality int64
 
 const (
+	// Indicates that the pose chirality is unknown.
 	VNChiralityUnknown VNChirality = 0
-	VNChiralityLeft    VNChirality = -1
-	VNChiralityRight   VNChirality = 1
+	// Indicates a left-handed pose.
+	VNChiralityLeft VNChirality = -1
+	// Indicates a right-handed pose.
+	VNChiralityRight VNChirality = 1
 )
 
 func (e VNChirality) String() string {
@@ -56,12 +66,16 @@ func (e VNChirality) String() string {
 	}
 }
 
+// An enumeration of the type of element in feature print data.
 type VNElementType uint64
 
 const (
+	// The element type isn’t known.
 	VNElementTypeUnknown VNElementType = 0
-	VNElementTypeFloat   VNElementType = 1
-	VNElementTypeDouble  VNElementType = 2
+	// The elements are floating-point numbers.
+	VNElementTypeFloat VNElementType = 1
+	// The elements are double-precision floating-point numbers.
+	VNElementTypeDouble VNElementType = 2
 )
 
 func (e VNElementType) String() string {
@@ -77,32 +91,57 @@ func (e VNElementType) String() string {
 	}
 }
 
+// Constants that identify errors from the framework.
 type VNErrorCode int64
 
 const (
-	VNErrorTuriCoreErrorCode        VNErrorCode = -1
-	VNErrorOK                       VNErrorCode = 0
-	VNErrorRequestCancelled         VNErrorCode = 1
-	VNErrorInvalidFormat            VNErrorCode = 2
-	VNErrorOperationFailed          VNErrorCode = 3
-	VNErrorOutOfBoundsError         VNErrorCode = 4
-	VNErrorInvalidOption            VNErrorCode = 5
-	VNErrorIOError                  VNErrorCode = 6
-	VNErrorMissingOption            VNErrorCode = 7
-	VNErrorNotImplemented           VNErrorCode = 8
-	VNErrorInternalError            VNErrorCode = 9
-	VNErrorOutOfMemory              VNErrorCode = 10
-	VNErrorUnknownError             VNErrorCode = 11
-	VNErrorInvalidOperation         VNErrorCode = 12
-	VNErrorInvalidImage             VNErrorCode = 13
-	VNErrorInvalidArgument          VNErrorCode = 14
-	VNErrorInvalidModel             VNErrorCode = 15
-	VNErrorUnsupportedRevision      VNErrorCode = 16
-	VNErrorDataUnavailable          VNErrorCode = 17
-	VNErrorTimeStampNotFound        VNErrorCode = 18
-	VNErrorUnsupportedRequest       VNErrorCode = 19
-	VNErrorTimeout                  VNErrorCode = 20
-	VNErrorUnsupportedComputeStage  VNErrorCode = 21
+	// An error occurred during Create ML training due to an invalid transformation or image.
+	VNErrorTuriCoreErrorCode VNErrorCode = -1
+	// The operation finished without error.
+	VNErrorOK VNErrorCode = 0
+	// An app canceled the request.
+	VNErrorRequestCancelled VNErrorCode = 1
+	// The format of the image is invalid.
+	VNErrorInvalidFormat VNErrorCode = 2
+	// The requested operation failed.
+	VNErrorOperationFailed VNErrorCode = 3
+	// An app attempted to access data that’s out-of-bounds.
+	VNErrorOutOfBoundsError VNErrorCode = 4
+	// An app specified an invalid option on a request.
+	VNErrorInvalidOption VNErrorCode = 5
+	// An I/O error for an image, image sequence, or Core ML model.
+	VNErrorIOError VNErrorCode = 6
+	// A request is missing a required option.
+	VNErrorMissingOption VNErrorCode = 7
+	// The method isn’t implemented in the underlying model.
+	VNErrorNotImplemented VNErrorCode = 8
+	// An internal error occurred within the framework.
+	VNErrorInternalError VNErrorCode = 9
+	// The system doesn’t have enough memory to complete the request.
+	VNErrorOutOfMemory VNErrorCode = 10
+	// An unidentified error occurred.
+	VNErrorUnknownError VNErrorCode = 11
+	// An app requested an unsupported operation.
+	VNErrorInvalidOperation VNErrorCode = 12
+	// The image is invalid.
+	VNErrorInvalidImage VNErrorCode = 13
+	// An app passed an invalid parameter to a request.
+	VNErrorInvalidArgument VNErrorCode = 14
+	// The Core ML model is incompatible with the request.
+	VNErrorInvalidModel VNErrorCode = 15
+	// An app specified an unsupported request revision.
+	VNErrorUnsupportedRevision VNErrorCode = 16
+	// The data isn’t available.
+	VNErrorDataUnavailable VNErrorCode = 17
+	// The system can’t find a timestamp.
+	VNErrorTimeStampNotFound VNErrorCode = 18
+	// An app attempted an unsupported request.
+	VNErrorUnsupportedRequest VNErrorCode = 19
+	// The requested operation timed out.
+	VNErrorTimeout VNErrorCode = 20
+	// An app requested an unsupported compute stage.
+	VNErrorUnsupportedComputeStage VNErrorCode = 21
+	// An app requested an unsupported compute device.
 	VNErrorUnsupportedComputeDevice VNErrorCode = 22
 )
 
@@ -161,6 +200,7 @@ func (e VNErrorCode) String() string {
 	}
 }
 
+// The supported optical flow accuracy levels.
 type VNGenerateOpticalFlowRequestComputationAccuracy uint64
 
 const (
@@ -185,6 +225,7 @@ func (e VNGenerateOpticalFlowRequestComputationAccuracy) String() string {
 	}
 }
 
+// Constants that define the levels of quality for a person segmentation request.
 type VNGeneratePersonSegmentationRequestQualityLevel uint64
 
 const (
@@ -206,6 +247,7 @@ func (e VNGeneratePersonSegmentationRequestQualityLevel) String() string {
 	}
 }
 
+// Constants that identify body height estimation techniques.
 type VNHumanBodyPose3DObservationHeightEstimation int64
 
 const (
@@ -224,13 +266,19 @@ func (e VNHumanBodyPose3DObservationHeightEstimation) String() string {
 	}
 }
 
+// Options that define how Vision crops and scales an input-image.
 type VNImageCropAndScaleOption uint64
 
 const (
-	VNImageCropAndScaleOptionCenterCrop           VNImageCropAndScaleOption = 0
-	VNImageCropAndScaleOptionScaleFit             VNImageCropAndScaleOption = 1
-	VNImageCropAndScaleOptionScaleFill            VNImageCropAndScaleOption = 2
-	VNImageCropAndScaleOptionScaleFitRotate90CCW  VNImageCropAndScaleOption = 257
+	// An option that scales the image to fit its shorter side within the input dimensions, while preserving its aspect ratio, and center-crops the image.
+	VNImageCropAndScaleOptionCenterCrop VNImageCropAndScaleOption = 0
+	// An option that scales the image to fit its longer side within the input dimensions, while preserving its aspect ratio, and center-crops the image.
+	VNImageCropAndScaleOptionScaleFit VNImageCropAndScaleOption = 1
+	// An option that scales the image to fill the input dimensions, resizing it if necessary.
+	VNImageCropAndScaleOptionScaleFill VNImageCropAndScaleOption = 2
+	// An option that rotates the image 90 degrees counterclockwise and then scales it, while preserving its aspect ratio, to fit on the long side.
+	VNImageCropAndScaleOptionScaleFitRotate90CCW VNImageCropAndScaleOption = 257
+	// An option that rotates the image 90 degrees counterclockwise and then scales it to fill the input dimensions.
 	VNImageCropAndScaleOptionScaleFillRotate90CCW VNImageCropAndScaleOption = 258
 )
 
@@ -251,6 +299,7 @@ func (e VNImageCropAndScaleOption) String() string {
 	}
 }
 
+// The set of classifications that describe how to interpret the points the region provides.
 type VNPointsClassification int64
 
 const (
@@ -272,12 +321,16 @@ func (e VNPointsClassification) String() string {
 	}
 }
 
+// An enumeration of face landmarks in a constellation object.
 type VNRequestFaceLandmarksConstellation uint64
 
 const (
+	// An undefined constellation.
 	VNRequestFaceLandmarksConstellationNotDefined VNRequestFaceLandmarksConstellation = 0
-	VNRequestFaceLandmarksConstellation65Points   VNRequestFaceLandmarksConstellation = 1
-	VNRequestFaceLandmarksConstellation76Points   VNRequestFaceLandmarksConstellation = 2
+	// A constellation with 65 points.
+	VNRequestFaceLandmarksConstellation65Points VNRequestFaceLandmarksConstellation = 1
+	// A constellation with 76 points.
+	VNRequestFaceLandmarksConstellation76Points VNRequestFaceLandmarksConstellation = 2
 )
 
 func (e VNRequestFaceLandmarksConstellation) String() string {
@@ -293,11 +346,14 @@ func (e VNRequestFaceLandmarksConstellation) String() string {
 	}
 }
 
+// Constants that identify the performance and accuracy of the text recognition.
 type VNRequestTextRecognitionLevel int64
 
 const (
+	// Accurate text recognition takes more time to produce a more comprehensive result.
 	VNRequestTextRecognitionLevelAccurate VNRequestTextRecognitionLevel = 0
-	VNRequestTextRecognitionLevelFast     VNRequestTextRecognitionLevel = 1
+	// Fast text recognition returns results more quickly at the expense of accuracy.
+	VNRequestTextRecognitionLevelFast VNRequestTextRecognitionLevel = 1
 )
 
 func (e VNRequestTextRecognitionLevel) String() string {
@@ -311,11 +367,14 @@ func (e VNRequestTextRecognitionLevel) String() string {
 	}
 }
 
+// An enumeration of tracking priorities.
 type VNRequestTrackingLevel uint64
 
 const (
+	// Tracking level that favors location accuracy over speed.
 	VNRequestTrackingLevelAccurate VNRequestTrackingLevel = 0
-	VNRequestTrackingLevelFast     VNRequestTrackingLevel = 1
+	// Tracking level that favors speed over location accuracy.
+	VNRequestTrackingLevelFast VNRequestTrackingLevel = 1
 )
 
 func (e VNRequestTrackingLevel) String() string {
@@ -329,6 +388,7 @@ func (e VNRequestTrackingLevel) String() string {
 	}
 }
 
+// Computational accuracy options.
 type VNTrackOpticalFlowRequestComputationAccuracy uint64
 
 const (

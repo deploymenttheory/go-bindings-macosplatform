@@ -43,11 +43,13 @@ type VTDecompressionOutputCallbackRecord struct {
 	DecompressionOutputRefCon   unsafe.Pointer
 }
 
+// A structure that represents a 32-bit integer point value.
 type VTInt32Point struct {
 	X int32
 	Y int32
 }
 
+// A structure that represents a 32-bit integer size value.
 type VTInt32Size struct {
 	Width  int32
 	Height int32

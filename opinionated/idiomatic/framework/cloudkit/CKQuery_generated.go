@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A query that describes the criteria to apply when searching for records in a database.
+//
 // Query wraps [raw.CKQuery] with a fluent Go API.
 type Query struct {
 	inner *raw.CKQuery
@@ -32,7 +34,7 @@ func QueryFromID(id objc.ID) *Query {
 	return &Query{inner: raw.CKQueryFromID(id)}
 }
 
-// Creates an operation group from a serialized instance. - Parameters: - aDecoder: The coder to use when deserializing the group.
+// Creates an operation group from a serialized instance.
 //
 // NewQueryWithCoder creates a new [Query].
 func NewQueryWithCoder(aDecoder *foundation.NSCoder) *Query {
@@ -41,7 +43,7 @@ func NewQueryWithCoder(aDecoder *foundation.NSCoder) *Query {
 	return &Query{inner: raw.CKQueryFromID(_id)}
 }
 
-// Creates a query with the specified record type and predicate. - Parameters: - recordType: The type of record to search. Specify the name of one of your app's supported record types. The method throws an exception if this parameter is `nil` or contains an empty string. - predicate: The search predicate to apply to the prospective records. Only records that match the predicate criteria appear in the search results. For guidelines on how to construct predicates for your queries, see <doc:CKQuery#Predicate-Rules-for-Query-Objects>. This parameter must not be `nil`. - Returns: An initialized query object. You can't change the record type and predicate of a query after you create it. If you want to search for a different set of records using a different set of search criteria, create a new query. You can add sort descriptors to the query and change them later as necessary. You can't query for user records, and executing a query where the record type is “CKRecordTypeUserRecord-49k30“ results in an error. You must fetch user records directly using their IDs.
+// Creates a query with the specified record type and predicate.
 //
 // NewQueryWithRecordTypePredicate creates a new [Query].
 func NewQueryWithRecordTypePredicate(recordType *foundation.NSString, predicate *foundation.NSPredicate) *Query {
@@ -50,7 +52,7 @@ func NewQueryWithRecordTypePredicate(recordType *foundation.NSString, predicate 
 	return &Query{inner: raw.CKQueryFromID(_id)}
 }
 
-// The sort descriptors for organizing the query's results. You can add sort descriptors to a query and change them later as necessary. Each sort descriptor contains a field name of the intended record type and information about whether to sort values in that field in ascending or descending order. The default value of this property is `nil`, which means that records return in an indeterminate order. The order of the items in the array defines the order that CloudKit applies the sort descriptors to the results. In other words, CloudKit applies the first sort descriptor in the array, then the second sort descriptor, if necessary, then the third, and so on.
+// The sort descriptors for organizing the query’s results.
 //
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *Query) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *Query {

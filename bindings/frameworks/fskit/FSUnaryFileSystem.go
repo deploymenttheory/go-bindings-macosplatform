@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for implementing a minimal file system.
+//
 // Apple documentation: https://developer.apple.com/documentation/fskit/fsunaryfilesystem
 type FSUnaryFileSystem struct {
 	foundation.NSObject

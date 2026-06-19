@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains information about a mail message, such as the subject, addressees, date sent, and the message contents.
+//
 // Message wraps [raw.MEMessage] with a fluent Go API.
 type Message struct {
 	inner *raw.MEMessage

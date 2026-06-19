@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that plays audio data from a file or buffer.
+//
 // AudioPlayer wraps [raw.AVAudioPlayer] with a fluent Go API.
 type AudioPlayer struct {
 	inner *raw.AVAudioPlayer
@@ -32,6 +34,8 @@ func AudioPlayerFromID(id objc.ID) *AudioPlayer {
 	return &AudioPlayer{inner: raw.AVAudioPlayerFromID(id)}
 }
 
+// Creates a player to play audio from a file.
+//
 // NewAudioPlayerWithContentsOfURLError creates a new [AudioPlayer].
 func NewAudioPlayerWithContentsOfURLError(url string) (*AudioPlayer, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioPlayer")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewAudioPlayerWithContentsOfURLError(url string) (*AudioPlayer, error) {
 	return &AudioPlayer{inner: raw.AVAudioPlayerFromID(_id)}, nil
 }
 
+// Creates a player to play in-memory audio data.
+//
 // NewAudioPlayerWithDataError creates a new [AudioPlayer].
 func NewAudioPlayerWithDataError(data *foundation.NSData) (*AudioPlayer, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioPlayer")), objc.RegisterName("alloc"))
@@ -54,6 +60,8 @@ func NewAudioPlayerWithDataError(data *foundation.NSData) (*AudioPlayer, error) 
 	return &AudioPlayer{inner: raw.AVAudioPlayerFromID(_id)}, nil
 }
 
+// Creates a player to play audio from a file of a particular type.
+//
 // NewAudioPlayerWithContentsOfURLFileTypeHintError creates a new [AudioPlayer].
 func NewAudioPlayerWithContentsOfURLFileTypeHintError(url string, utiString string) (*AudioPlayer, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioPlayer")), objc.RegisterName("alloc"))
@@ -65,6 +73,8 @@ func NewAudioPlayerWithContentsOfURLFileTypeHintError(url string, utiString stri
 	return &AudioPlayer{inner: raw.AVAudioPlayerFromID(_id)}, nil
 }
 
+// Creates a player to play in-memory audio data of a particular type.
+//
 // NewAudioPlayerWithDataFileTypeHintError creates a new [AudioPlayer].
 func NewAudioPlayerWithDataFileTypeHintError(data *foundation.NSData, utiString string) (*AudioPlayer, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioPlayer")), objc.RegisterName("alloc"))
@@ -76,100 +86,136 @@ func NewAudioPlayerWithDataFileTypeHintError(data *foundation.NSData, utiString 
 	return &AudioPlayer{inner: raw.AVAudioPlayerFromID(_id)}, nil
 }
 
+// The unique identifier of the current audio player.
+//
 // WithCurrentDevice sets the currentDevice property and returns the receiver for chaining.
 func (x *AudioPlayer) WithCurrentDevice(currentDevice string) *AudioPlayer {
 	x.inner.SetCurrentDevice(foundation.NSStringStringWithUTF8String(currentDevice))
 	return x
 }
 
+// The delegate object for the audio player.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *AudioPlayer) WithDelegate(delegate raw.AVAudioPlayerDelegate) *AudioPlayer {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The audio player’s stereo pan position.
+//
 // WithPan sets the pan property and returns the receiver for chaining.
 func (x *AudioPlayer) WithPan(pan float32) *AudioPlayer {
 	x.inner.SetPan(pan)
 	return x
 }
 
+// The audio player’s volume relative to other audio output.
+//
 // WithVolume sets the volume property and returns the receiver for chaining.
 func (x *AudioPlayer) WithVolume(volume float32) *AudioPlayer {
 	x.inner.SetVolume(volume)
 	return x
 }
 
+// A Boolean value that indicates whether you can adjust the playback rate of the audio player.
+//
 // WithEnableRate sets the enableRate property and returns the receiver for chaining.
 func (x *AudioPlayer) WithEnableRate(enableRate bool) *AudioPlayer {
 	x.inner.SetEnableRate(enableRate)
 	return x
 }
 
+// The audio player’s playback rate.
+//
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *AudioPlayer) WithRate(rate float32) *AudioPlayer {
 	x.inner.SetRate(rate)
 	return x
 }
 
+// The current playback time, in seconds, within the audio timeline.
+//
 // WithCurrentTime sets the currentTime property and returns the receiver for chaining.
 func (x *AudioPlayer) WithCurrentTime(currentTime float64) *AudioPlayer {
 	x.inner.SetCurrentTime(currentTime)
 	return x
 }
 
+// The number of times the audio repeats playback.
+//
 // WithNumberOfLoops sets the numberOfLoops property and returns the receiver for chaining.
 func (x *AudioPlayer) WithNumberOfLoops(numberOfLoops int) *AudioPlayer {
 	x.inner.SetNumberOfLoops(numberOfLoops)
 	return x
 }
 
+// A Boolean value that indicates whether the player is able to generate audio-level metering data.
+//
 // WithMeteringEnabled sets the meteringEnabled property and returns the receiver for chaining.
 func (x *AudioPlayer) WithMeteringEnabled(meteringEnabled bool) *AudioPlayer {
 	x.inner.SetMeteringEnabled(meteringEnabled)
 	return x
 }
 
+// Prepares the player for audio playback.
+//
 // PrepareToPlay calls the underlying PrepareToPlay.
 func (x *AudioPlayer) PrepareToPlay() bool {
 	return x.inner.PrepareToPlay()
 }
 
+// Plays audio asynchronously.
+//
 // Play calls the underlying Play.
 func (x *AudioPlayer) Play() bool {
 	return x.inner.Play()
 }
 
+// Plays audio asynchronously, starting at a specified point in the audio output device’s timeline.
+//
 // PlayAtTime calls the underlying PlayAtTime.
 func (x *AudioPlayer) PlayAtTime(time_ float64) bool {
 	return x.inner.PlayAtTime(time_)
 }
 
+// Pauses audio playback.
+//
 // Pause calls the underlying Pause.
 func (x *AudioPlayer) Pause() {
 	x.inner.Pause()
 }
 
+// Stops playback and undoes the setup the system requires for playback.
+//
 // Stop calls the underlying Stop.
 func (x *AudioPlayer) Stop() {
 	x.inner.Stop()
 }
 
+// Changes the audio player’s volume over a duration of time.
+//
 // SetVolumeFadeDuration calls the underlying SetVolumeFadeDuration.
 func (x *AudioPlayer) SetVolumeFadeDuration(volume float32, duration float64) {
 	x.inner.SetVolumeFadeDuration(volume, duration)
 }
 
+// Refreshes the average and peak power values for all channels of an audio player.
+//
 // UpdateMeters calls the underlying UpdateMeters.
 func (x *AudioPlayer) UpdateMeters() {
 	x.inner.UpdateMeters()
 }
 
+// Returns the peak power, in decibels full-scale (dBFS), for an audio channel.
+//
 // PeakPowerForChannel calls the underlying PeakPowerForChannel.
 func (x *AudioPlayer) PeakPowerForChannel(channelNumber uint) float32 {
 	return x.inner.PeakPowerForChannel(channelNumber)
 }
 
+// Returns the average power, in decibels full-scale (dBFS), for an audio channel.
+//
 // AveragePowerForChannel calls the underlying AveragePowerForChannel.
 func (x *AudioPlayer) AveragePowerForChannel(channelNumber uint) float32 {
 	return x.inner.AveragePowerForChannel(channelNumber)

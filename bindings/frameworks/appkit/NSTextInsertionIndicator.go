@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that represents the insertion indicator in text.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextinsertionindicator
 type NSTextInsertionIndicator struct {
 	NSView

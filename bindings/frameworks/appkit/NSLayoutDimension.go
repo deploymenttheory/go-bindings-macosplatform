@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A factory class for creating size-based layout constraint objects using a fluent API.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nslayoutdimension
 type NSLayoutDimension struct {
 	NSLayoutAnchor[objc.ID]
@@ -37,6 +39,7 @@ func NSLayoutDimensionFromID(id objc.ID) *NSLayoutDimension {
 	return o
 }
 
+// Returns a constraint that defines a constant size for the anchor’s size attribute.
 func (o *NSLayoutDimension) ConstraintEqualToConstant(c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintEqualToConstant, c)
 	if _ret != 0 {
@@ -45,6 +48,7 @@ func (o *NSLayoutDimension) ConstraintEqualToConstant(c float64) *NSLayoutConstr
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines the minimum size for the anchor’s size attribute.
 func (o *NSLayoutDimension) ConstraintGreaterThanOrEqualToConstant(c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintGreaterThanOrEqualToConstant, c)
 	if _ret != 0 {
@@ -53,6 +57,7 @@ func (o *NSLayoutDimension) ConstraintGreaterThanOrEqualToConstant(c float64) *N
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines the maximum size for the anchor’s size attribute.
 func (o *NSLayoutDimension) ConstraintLessThanOrEqualToConstant(c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintLessThanOrEqualToConstant, c)
 	if _ret != 0 {
@@ -61,6 +66,7 @@ func (o *NSLayoutDimension) ConstraintLessThanOrEqualToConstant(c float64) *NSLa
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines the anchor’s size attribute as equal to the specified anchor multiplied by the constant.
 func (o *NSLayoutDimension) ConstraintEqualToAnchorMultiplier(anchor *NSLayoutDimension, m float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintEqualToAnchorMultiplier, anchor.Ptr(), m)
 	if _ret != 0 {
@@ -69,6 +75,7 @@ func (o *NSLayoutDimension) ConstraintEqualToAnchorMultiplier(anchor *NSLayoutDi
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines the anchor’s size attribute as greater than or equal to the specified anchor multiplied by the constant.
 func (o *NSLayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplier(anchor *NSLayoutDimension, m float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintGreaterThanOrEqualToAnchorMultiplier, anchor.Ptr(), m)
 	if _ret != 0 {
@@ -77,6 +84,7 @@ func (o *NSLayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplier(ancho
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines the anchor’s size attribute as less than or equal to the specified anchor multiplied by the constant.
 func (o *NSLayoutDimension) ConstraintLessThanOrEqualToAnchorMultiplier(anchor *NSLayoutDimension, m float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintLessThanOrEqualToAnchorMultiplier, anchor.Ptr(), m)
 	if _ret != 0 {
@@ -85,6 +93,7 @@ func (o *NSLayoutDimension) ConstraintLessThanOrEqualToAnchorMultiplier(anchor *
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines the anchor’s size attribute as equal to the specified size attribute multiplied by a constant plus an offset.
 func (o *NSLayoutDimension) ConstraintEqualToAnchorMultiplierConstant(anchor *NSLayoutDimension, m float64, c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintEqualToAnchorMultiplierConstant, anchor.Ptr(), m, c)
 	if _ret != 0 {
@@ -93,6 +102,7 @@ func (o *NSLayoutDimension) ConstraintEqualToAnchorMultiplierConstant(anchor *NS
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines the anchor’s size attribute as greater than or equal to the specified anchor multiplied by the constant plus an offset.
 func (o *NSLayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplierConstant(anchor *NSLayoutDimension, m float64, c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintGreaterThanOrEqualToAnchorMultiplierConstant, anchor.Ptr(), m, c)
 	if _ret != 0 {
@@ -101,6 +111,7 @@ func (o *NSLayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplierConsta
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines the anchor’s size attribute as greater than or equal to the specified anchor multiplied by the constant plus an offset.
 func (o *NSLayoutDimension) ConstraintLessThanOrEqualToAnchorMultiplierConstant(anchor *NSLayoutDimension, m float64, c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintLessThanOrEqualToAnchorMultiplierConstant, anchor.Ptr(), m, c)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A concrete subclass the Core Image Barcode Descriptor that represents an Aztec code symbol.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/ciazteccodedescriptor
 type CIAztecCodeDescriptor struct {
 	CIBarcodeDescriptor
@@ -35,7 +37,7 @@ func CIAztecCodeDescriptorFromID(id objc.ID) *CIAztecCodeDescriptor {
 	return o
 }
 
-// Initializes an Aztec code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the Aztec code symbol. - isCompact: A Boolean indicating whether or not the Aztec code is compact. - layerCount: The number of layers in the Aztec code, from 1 to 32. - dataCodewordCount: The number of codewords in the Aztec code, from 1 to 2048. - Returns: An initialized “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
+// Initializes an Aztec code descriptor for the given payload and parameters.
 func (o *CIAztecCodeDescriptor) InitWithPayloadIsCompactLayerCountDataCodewordCount(errorCorrectedPayload *foundation.NSData, isCompact bool, layerCount int, dataCodewordCount int) *CIAztecCodeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIAztecCodeDescriptorSelInitWithPayloadIsCompactLayerCountDataCodewordCount, errorCorrectedPayload.Ptr(), isCompact, layerCount, dataCodewordCount)
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *CIAztecCodeDescriptor) InitWithPayloadIsCompactLayerCountDataCodewordCo
 	return CIAztecCodeDescriptorFromID(_ret)
 }
 
-// Creates an Aztec code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the Aztec code symbol. - isCompact: A Boolean indicating whether or not the Aztec code is compact. - layerCount: The number of layers in the Aztec code, from 1 to 32. - dataCodewordCount: The number of codewords in the Aztec code, from 1 to 2048. - Returns: An autoreleased “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
+// Creates an Aztec code descriptor for the given payload and parameters.
 func CIAztecCodeDescriptorDescriptorWithPayloadIsCompactLayerCountDataCodewordCount(errorCorrectedPayload *foundation.NSData, isCompact bool, layerCount int, dataCodewordCount int) *CIAztecCodeDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIAztecCodeDescriptor), _cIAztecCodeDescriptorSelDescriptorWithPayloadIsCompactLayerCountDataCodewordCount, errorCorrectedPayload.Ptr(), isCompact, layerCount, dataCodewordCount)
 	if _ret != 0 {

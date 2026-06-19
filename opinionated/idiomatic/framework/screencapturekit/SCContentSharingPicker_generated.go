@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An instance of a picker presented by the operating system for managing frame-capture streams.
+//
 // ContentSharingPicker wraps [raw.SCContentSharingPicker] with a fluent Go API.
 type ContentSharingPicker struct {
 	inner *raw.SCContentSharingPicker
@@ -36,7 +38,7 @@ func NewContentSharingPicker() *ContentSharingPicker {
 	return &ContentSharingPicker{inner: raw.SCContentSharingPickerFromID(_id)}
 }
 
-// @abstract defaultConfiguration for the content sharing picker. If a stream does not have a configuration, the default configuration will be used.
+// The default configuration to use for the content capture picker.
 //
 // WithDefaultConfiguration sets the defaultConfiguration property and returns the receiver for chaining.
 func (x *ContentSharingPicker) WithDefaultConfiguration(defaultConfiguration *raw.SCContentSharingPickerConfiguration[objc.ID]) *ContentSharingPicker {
@@ -44,7 +46,7 @@ func (x *ContentSharingPicker) WithDefaultConfiguration(defaultConfiguration *ra
 	return x
 }
 
-// @abstract maximumStreamCount An integer value that, if set, limits when Control Center will show the UI to present a picker with no associated stream. If set to 0, Control Center will never ever show UI to present a picker without an associated stream.
+// The maximum number of streams the content capture picker allows.
 //
 // WithMaximumStreamCount sets the maximumStreamCount property and returns the receiver for chaining.
 func (x *ContentSharingPicker) WithMaximumStreamCount(maximumStreamCount *foundation.NSNumber) *ContentSharingPicker {
@@ -52,7 +54,7 @@ func (x *ContentSharingPicker) WithMaximumStreamCount(maximumStreamCount *founda
 	return x
 }
 
-// @abstract active A picker needs to be marked as active for its UI to appear. If `startPickingContent` is called and the picker is not marked as active, the picker will not appear.
+// A Boolean value that indicates if the picker is active.
 //
 // WithActive sets the active property and returns the receiver for chaining.
 func (x *ContentSharingPicker) WithActive(active bool) *ContentSharingPicker {
@@ -60,49 +62,49 @@ func (x *ContentSharingPicker) WithActive(active bool) *ContentSharingPicker {
 	return x
 }
 
-// @abstract addObserver: @param observer the observer object that adheres to SCContentSharingPickerObserver protocol @discussion Adds an observer object that will receive the results of user interaction with a displayed picker
+// Adds an observer instance to notify of changes in the content-sharing picker.
 //
 // AddObserver calls the underlying AddObserver.
 func (x *ContentSharingPicker) AddObserver(observer raw.SCContentSharingPickerObserver) {
 	x.inner.AddObserver(observer)
 }
 
-// @abstract removeObserver: @param observer the observer object that adheres to SCContentSharingPickerObserver protocol @discussion Removes an observer object that will receive the results of user interaction with a displayed picker
+// Removes an observer instance from the content-sharing picker.
 //
 // RemoveObserver calls the underlying RemoveObserver.
 func (x *ContentSharingPicker) RemoveObserver(observer raw.SCContentSharingPickerObserver) {
 	x.inner.RemoveObserver(observer)
 }
 
-// @abstract setConfiguration:forStream: @param pickerConfig configuration for the picker @param stream stream for optional picking configuration @discussion Sets optional configuration for the picker for a specific stream. If this is not set, the stream will use the defaultConfiguration instead
+// Sets the configuration for the content capture picker for a capture stream, providing allowed selection modes and content excluded from selection.
 //
 // SetConfigurationForStream calls the underlying SetConfigurationForStream.
 func (x *ContentSharingPicker) SetConfigurationForStream(pickerConfig *raw.SCContentSharingPickerConfiguration[objc.ID], stream *raw.SCStream) {
 	x.inner.SetConfigurationForStream(pickerConfig, stream)
 }
 
-// @abstract present @discussion show content sharing picker to get content for updating a new stream
+// Displays the picker with no active selection for capture.
 //
 // Present calls the underlying Present.
 func (x *ContentSharingPicker) Present() {
 	x.inner.Present()
 }
 
-// @abstract presentPickerUsingContentStyle: @param contentStyle the mode in which picking should start @discussion Takes a person straight into picking particular windows or displays
+// Displays the picker for a single type of capture selection.
 //
 // PresentPickerUsingContentStyle calls the underlying PresentPickerUsingContentStyle.
 func (x *ContentSharingPicker) PresentPickerUsingContentStyle(contentStyle SCShareableContentStyle) {
 	x.inner.PresentPickerUsingContentStyle(raw.SCShareableContentStyle(contentStyle))
 }
 
-// @abstract presentPickerForStream: @param stream the stream to update @discussion show content sharing picker with an existing stream
+// Displays the picker with an already running capture stream.
 //
 // PresentPickerForStream calls the underlying PresentPickerForStream.
 func (x *ContentSharingPicker) PresentPickerForStream(stream *raw.SCStream) {
 	x.inner.PresentPickerForStream(stream)
 }
 
-// @abstract presentPickerForStream:usingContentStyle: @param stream the stream that the picker will display @param contentStyle the mode in which picking should start @discussion Takes a person straight into picking particular windows or displays
+// Displays the picker with an existing capture stream, allowing for a single type of capture selection.
 //
 // PresentPickerForStreamUsingContentStyle calls the underlying PresentPickerForStreamUsingContentStyle.
 func (x *ContentSharingPicker) PresentPickerForStreamUsingContentStyle(stream *raw.SCStream, contentStyle SCShareableContentStyle) {

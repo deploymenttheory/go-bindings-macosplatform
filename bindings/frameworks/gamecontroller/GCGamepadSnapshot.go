@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A recording of all of the values provided by a GCGamepad object.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcgamepadsnapshot
 // Deprecated: Use GCExtendedGamepad instead
 type GCGamepadSnapshot struct {
@@ -34,6 +36,7 @@ func GCGamepadSnapshotFromID(id objc.ID) *GCGamepadSnapshot {
 	return o
 }
 
+// Initializes a snapshot object with the flattened data representation obtained from another snapshot.
 // Deprecated: Use GCExtendedGamepad instead
 func (o *GCGamepadSnapshot) InitWithSnapshotData(data *foundation.NSData) *GCGamepadSnapshot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCGamepadSnapshotSelInitWithSnapshotData, data.Ptr())
@@ -43,6 +46,7 @@ func (o *GCGamepadSnapshot) InitWithSnapshotData(data *foundation.NSData) *GCGam
 	return GCGamepadSnapshotFromID(_ret)
 }
 
+// Initializes a snapshot object associated with a specific controller using a flattened data representation obtained from another snapshot.
 func (o *GCGamepadSnapshot) InitWithControllerSnapshotData(controller *GCController, data *foundation.NSData) *GCGamepadSnapshot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCGamepadSnapshotSelInitWithControllerSnapshotData, controller.Ptr(), data.Ptr())
 	if _ret != 0 {

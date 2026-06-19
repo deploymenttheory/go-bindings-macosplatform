@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A group of windows that display together as a single tabbed window.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nswindowtabgroup
 type NSWindowTabGroup struct {
 	foundation.NSObject
@@ -39,14 +41,17 @@ func NSWindowTabGroupFromID(id objc.ID) *NSWindowTabGroup {
 	return o
 }
 
+// Adds a window to the tab group.
 func (o *NSWindowTabGroup) AddWindow(window *NSWindow) {
 	o.Ptr().Send(_nSWindowTabGroupSelAddWindow, window.Ptr())
 }
 
+// Inserts a window at a specific location within the tab group.
 func (o *NSWindowTabGroup) InsertWindowAtIndex(window *NSWindow, index int) {
 	o.Ptr().Send(_nSWindowTabGroupSelInsertWindowAtIndex, window.Ptr(), index)
 }
 
+// Removes a window from the tab group.
 func (o *NSWindowTabGroup) RemoveWindow(window *NSWindow) {
 	o.Ptr().Send(_nSWindowTabGroupSelRemoveWindow, window.Ptr())
 }

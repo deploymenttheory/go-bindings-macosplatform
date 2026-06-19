@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Stores information about a single update from a Metal display link instance.
+//
 // MetalDisplayLinkUpdate wraps [raw.CAMetalDisplayLinkUpdate] with a fluent Go API.
 type MetalDisplayLinkUpdate struct {
 	inner *raw.CAMetalDisplayLinkUpdate

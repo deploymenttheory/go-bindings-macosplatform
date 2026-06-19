@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that represents a camera item.
+//
 // Apple documentation: https://developer.apple.com/documentation/imagecapturecore/iccameraitem
 type ICCameraItem struct {
 	foundation.NSObject
@@ -53,22 +55,22 @@ func ICCameraItemFromID(id objc.ID) *ICCameraItem {
 	return o
 }
 
-// @method requestThumbnail @abstract This method requests thumbnail for the item. If one is not readily available, accessing this property will send a message to the device requesting a thumbnail for the file. The delegate of the device will be notified via method "cameraDevice:didReceiveThumbnail:forItem:error:", if this method is implemented by the delegate. @note Execution of the delegate callback will occur on the main thread.
+// Requests a thumbnail for the item.
 func (o *ICCameraItem) RequestThumbnail() {
 	o.Ptr().Send(_iCCameraItemSelRequestThumbnail)
 }
 
-// @method requestMetadata @abstract ￼Metadata for the file if one is readily available. If one is not readily available, accessing this property will send a message to the device requesting metadata for the file. The delegate of the device will be notified via method "cameraDevice:didReceiveMetadata:forItem:error:", if this method is implemented by the delegate. @note Execution of the delegate callback will occur on the main thread.
+// Requests metadata for the item.
 func (o *ICCameraItem) RequestMetadata() {
 	o.Ptr().Send(_iCCameraItemSelRequestMetadata)
 }
 
-// @method flushThumbnailCache @abstract ￼Deletes cached thumbnail for the item.
+// Deletes the item’s cached thumbnail.
 func (o *ICCameraItem) FlushThumbnailCache() {
 	o.Ptr().Send(_iCCameraItemSelFlushThumbnailCache)
 }
 
-// @method flushMetadataCache @abstract ￼Deletes cached metadata for the item.
+// Deletes the item’s cached metadata.
 func (o *ICCameraItem) FlushMetadataCache() {
 	o.Ptr().Send(_iCCameraItemSelFlushMetadataCache)
 }
@@ -159,14 +161,20 @@ func (o *ICCameraItem) Thumbnail() unsafe.Pointer {
 
 // @property metadata @abstract ￼Metadata for the item. The value of this property is NULL unless a 'requestMetadata' message is sent to this object.
 func (o *ICCameraItem) Metadata() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _iCCameraItemSelMetadata)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraItemSelMetadata)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @property userData @abstract ￼A mutable dictionary to store arbitrary key-value pairs associated with a camera item object. This can be used by view objects that bind to this object to store "house-keeping" information.
 func (o *ICCameraItem) UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSMutableDictionary[objc.ID, objc.ID]](o.Ptr(), _iCCameraItemSelUserData)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraItemSelUserData)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMutableDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @property ptpObjectHandle @abstract PTP object handle value if the item is on a camera that uses PTP protocol. The value of this property is set to 0 if the camera does not use PTP protocol.

@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract returns elementwise sum of left + right
+// A representation of an addition operator.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnadditionnode
 type MPSNNAdditionNode struct {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that manages parameters of a post-quantum pre-shared key (PPK).
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nevpnikev2ppkconfiguration
 type NEVPNIKEv2PPKConfiguration struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func NEVPNIKEv2PPKConfigurationFromID(id objc.ID) *NEVPNIKEv2PPKConfiguration {
 	return o
 }
 
-// @method initWithIdentifier:keychainReference: @discussion Initialize a newly-allocated NEVPNIKEv2PPKConfiguration object. @param identifier The identifier for the PPK. @param keychainReference A persistent reference to a keychain item of class kSecClassGenericPassword containing the PPK.
+// Initializes a quantum-secure pre-shared key (PPK) configuration.
 func (o *NEVPNIKEv2PPKConfiguration) InitWithIdentifierKeychainReference(identifier *foundation.NSString, keychainReference *foundation.NSData) *NEVPNIKEv2PPKConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNIKEv2PPKConfigurationSelInitWithIdentifierKeychainReference, identifier.Ptr(), keychainReference.Ptr())
 	if _ret != 0 {

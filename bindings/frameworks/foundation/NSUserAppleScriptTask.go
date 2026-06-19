@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that executes AppleScript scripts.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsuserapplescripttask
 type NSUserAppleScriptTask struct {
 	NSUserScriptTask
@@ -31,6 +33,7 @@ func NSUserAppleScriptTaskFromID(id objc.ID) *NSUserAppleScriptTask {
 	return o
 }
 
+// Execute the AppleScript script by sending it the specified Apple event.
 func (o *NSUserAppleScriptTask) ExecuteWithAppleEventCompletionHandler(event *NSAppleEventDescriptor, handler func(*NSAppleEventDescriptor, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {

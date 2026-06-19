@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains information a video compositor needs to render an output pixel buffer.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avasynchronousvideocompositionrequest
 type AVAsynchronousVideoCompositionRequest struct {
 	foundation.NSObject
@@ -46,19 +48,19 @@ func AVAsynchronousVideoCompositionRequestFromID(id objc.ID) *AVAsynchronousVide
 	return o
 }
 
-// Returns the source CVPixelBufferRef for the given track ID If the track contains tagged buffers, a pixel buffer from one of the tagged buffers will be returned. - Parameter trackID: The track ID for the requested source frame
+// Returns a source pixel buffer for the track that contains the specified identifier.
 func (o *AVAsynchronousVideoCompositionRequest) SourceFrameByTrackID(trackID int32) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVAsynchronousVideoCompositionRequestSelSourceFrameByTrackID, trackID)
 	return _ret
 }
 
-// Returns the source CMSampleBufferRef for the given track ID - Parameter trackID: The track ID for the requested source sample buffer
+// Returns a source sample buffer for the track that contains the specified identifier.
 func (o *AVAsynchronousVideoCompositionRequest) SourceSampleBufferByTrackID(trackID int32) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVAsynchronousVideoCompositionRequestSelSourceSampleBufferByTrackID, trackID)
 	return _ret
 }
 
-// Returns the source AVTimedMetadataGroup * for the given track ID - Parameter trackID: The track ID for the requested source timed metadata group.
+// Returns a source timed metadata group for the track that contains the specified identifier.
 func (o *AVAsynchronousVideoCompositionRequest) SourceTimedMetadataByTrackID(trackID int32) *AVTimedMetadataGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAsynchronousVideoCompositionRequestSelSourceTimedMetadataByTrackID, trackID)
 	if _ret != 0 {
@@ -67,33 +69,33 @@ func (o *AVAsynchronousVideoCompositionRequest) SourceTimedMetadataByTrackID(tra
 	return AVTimedMetadataGroupFromID(_ret)
 }
 
-// The method that the custom compositor calls when composition succeeds. - Parameter composedVideoFrame: The video frame to finish with. Call finishWithComposedTaggedBufferGroup: instead if outputBufferDescription is non-nil.
+// Finishes the request to compose the frame.
 func (o *AVAsynchronousVideoCompositionRequest) FinishWithComposedVideoFrame(composedVideoFrame unsafe.Pointer) {
 	o.Ptr().Send(_aVAsynchronousVideoCompositionRequestSelFinishWithComposedVideoFrame, composedVideoFrame)
 }
 
-// callback the custom compositor should call when composition failed. The error parameter should describe the actual error.
+// Finishes the request with an error.
 func (o *AVAsynchronousVideoCompositionRequest) FinishWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_aVAsynchronousVideoCompositionRequestSelFinishWithError, error_)
 }
 
-// callback the custom compositor should call for a request that has been cancelled.
+// Cancels the request to compose a video frame.
 func (o *AVAsynchronousVideoCompositionRequest) FinishCancelledRequest() {
 	o.Ptr().Send(_aVAsynchronousVideoCompositionRequestSelFinishCancelledRequest)
 }
 
-// Returns the source CMTaggedBufferGroupRef for the given track ID. Returns nil if the video track does not contain tagged buffers. Returns nil if the track does not contain video. This function should only be called when supportsSourceTaggedBuffers is YES. - Parameter trackID: The track ID for the requested source tagged buffer group.
+// Returns the source CMTaggedBufferGroupRef for the given track ID.
 func (o *AVAsynchronousVideoCompositionRequest) SourceTaggedBufferGroupByTrackID(trackID int32) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVAsynchronousVideoCompositionRequestSelSourceTaggedBufferGroupByTrackID, trackID)
 	return _ret
 }
 
-// The method that the custom compositor calls when composition succeeds. - Parameter taggedBufferGroup: The tagged buffer group containing the composed tagged buffers. The tagged buffers must be compatible with the outputBufferDescription specified in the video composition. The outputBufferDescription must not be nil when calling this function. NOTE: If “AVVideoComposition/spatialConfigurations“ is not empty, then “attach(spatialVideoConfiguration:to:)“ must be called with one of the spatial configurations. An exception will be thrown otherwise. Also, all pixel buffers must be associated with the same spatial configuration. An exception will be thrown otherwise.
+// The method that the custom compositor calls when composition succeeds.
 func (o *AVAsynchronousVideoCompositionRequest) FinishWithComposedTaggedBufferGroup(taggedBufferGroup unsafe.Pointer) {
 	o.Ptr().Send(_aVAsynchronousVideoCompositionRequestSelFinishWithComposedTaggedBufferGroup, taggedBufferGroup)
 }
 
-// Associates the pixel buffer with the specified spatial configuration. - Parameters: - spatialVideoConfiguration: The spatial configuration to associate with the pixel buffer. - pixelBuffer: The pixel buffer to associate with the spatial configuration. NOTE: The spatial configuration must be one of the spatial configurations specified in the “AVVideoComposition/spatialConfigurations“ property. An exception will be thrown otherwise. NOTE: All pixel buffers from the custom compositor must be associated with the same spatial configuration. An exception will be thrown otherwise. A spatial configuration with all nil values indicates the video is not spatial. A nil spatial configuration also indicates the video is not spatial. The value can be nil, which indicates the output will not be spatial, but a spatial configuration with all nil values must be in the “AVVideoComposition/spatialConfigurations“ property or an exception will be thrown.
+// Associates the pixel buffer with the specified spatial configuration.
 func (o *AVAsynchronousVideoCompositionRequest) AttachSpatialVideoConfigurationToPixelBuffer(spatialVideoConfiguration *AVSpatialVideoConfiguration, pixelBuffer unsafe.Pointer) {
 	o.Ptr().Send(_aVAsynchronousVideoCompositionRequestSelAttachSpatialVideoConfigurationToPixelBuffer, spatialVideoConfiguration.Ptr(), pixelBuffer)
 }
@@ -115,14 +117,20 @@ func (o *AVAsynchronousVideoCompositionRequest) CompositionTime() coremedia.CMTi
 
 // Track IDs of all the source video buffers that are available to compose the frame.
 func (o *AVAsynchronousVideoCompositionRequest) SourceTrackIDs() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAsynchronousVideoCompositionRequestSelSourceTrackIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAsynchronousVideoCompositionRequestSelSourceTrackIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Track IDs of all the source sample data buffers that are available to compose the frame.
 func (o *AVAsynchronousVideoCompositionRequest) SourceSampleDataTrackIDs() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAsynchronousVideoCompositionRequestSelSourceSampleDataTrackIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAsynchronousVideoCompositionRequestSelSourceSampleDataTrackIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // The AVVideoCompositionInstruction to use to compose the frame.

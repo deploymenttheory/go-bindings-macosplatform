@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gradient softmax filter.
+//
 // CNNSoftMaxGradient wraps [raw.MPSCNNSoftMaxGradient] with a fluent Go API.
 type CNNSoftMaxGradient struct {
 	inner *raw.MPSCNNSoftMaxGradient
@@ -195,7 +197,7 @@ func (x *CNNSoftMaxGradient) WithDestinationImageAllocator(destinationImageAlloc
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNSoftMaxGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNSoftMaxGradient {
@@ -203,7 +205,7 @@ func (x *CNNSoftMaxGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNS
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNSoftMaxGradient) WithLabel(label string) *CNNSoftMaxGradient {

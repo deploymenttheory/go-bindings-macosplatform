@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The GKTurnBasedEventHandler class is used to respond to important messages related to turn-based matches. To use it, call the sharedTurnBasedEventHandler class method to get the singleton instance and assign an object that implements the GKTurnBasedEventHandlerDelegate protocol to its delegate property. All methods are called on the main thread.
+//
 // TurnBasedEventHandler wraps [raw.GKTurnBasedEventHandler] with a fluent Go API.
 type TurnBasedEventHandler struct {
 	inner *raw.GKTurnBasedEventHandler
@@ -36,6 +38,8 @@ func NewTurnBasedEventHandler() *TurnBasedEventHandler {
 	return &TurnBasedEventHandler{inner: raw.GKTurnBasedEventHandlerFromID(_id)}
 }
 
+// The delegate for the event handler.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *TurnBasedEventHandler) WithDelegate(delegate *foundation.NSObject) *TurnBasedEventHandler {
 	x.inner.SetDelegate(delegate)

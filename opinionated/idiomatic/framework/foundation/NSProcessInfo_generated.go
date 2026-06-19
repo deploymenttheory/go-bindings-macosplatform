@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of information about the current process.
+//
 // ProcessInfo wraps [raw.NSProcessInfo] with a fluent Go API.
 type ProcessInfo struct {
 	inner *raw.NSProcessInfo

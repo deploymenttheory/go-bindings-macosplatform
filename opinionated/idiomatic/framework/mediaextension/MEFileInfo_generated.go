@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains file properties from the media asset.
+//
 // FileInfo wraps [raw.MEFileInfo] with a fluent Go API.
 type FileInfo struct {
 	inner *raw.MEFileInfo
@@ -38,7 +40,7 @@ func NewFileInfo() *FileInfo {
 	return &FileInfo{inner: raw.MEFileInfoFromID(_id)}
 }
 
-// @property		duration @abstract		The duration of the media asset if known, otherwise kCMTimeInvalid.
+// The duration of the media asset, if available.
 //
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *FileInfo) WithDuration(duration coremedia.CMTime) *FileInfo {
@@ -46,7 +48,7 @@ func (x *FileInfo) WithDuration(duration coremedia.CMTime) *FileInfo {
 	return x
 }
 
-// @property		fragmentsStatus @abstract		Indicates if the media asset is capable of being extended by fragments or contains fragments @discussion		See the MEFileInfoFragmentsStatus values for details of the return value. The value will default to MEFileInfoCouldNotContainFragments.
+// Indicates if the media asset contains fragments or is extendable by fragments.
 //
 // WithFragmentsStatus sets the fragmentsStatus property and returns the receiver for chaining.
 func (x *FileInfo) WithFragmentsStatus(fragmentsStatus MEFileInfoFragmentsStatus) *FileInfo {

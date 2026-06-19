@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The infrastructure for drawing, printing, and handling events in an app.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsview
 type NSView struct {
 	NSResponder
@@ -373,6 +375,7 @@ func NSViewFromID(id objc.ID) *NSView {
 	return o
 }
 
+// Initializes and returns a newly allocated NSView object with a specified frame rectangle.
 func (o *NSView) InitWithFrame(frameRect corefoundation.CGRect) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelInitWithFrame, frameRect)
 	if _ret != 0 {
@@ -381,6 +384,7 @@ func (o *NSView) InitWithFrame(frameRect corefoundation.CGRect) *NSView {
 	return NSViewFromID(_ret)
 }
 
+// Initializes a view using from data in the specified coder object.
 func (o *NSView) InitWithCoder(coder *foundation.NSCoder) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -662,6 +666,7 @@ func (o *NSView) DisplayIfNeededInRectIgnoringOpacity(rect corefoundation.CGRect
 	o.Ptr().Send(_nSViewSelDisplayIfNeededInRectIgnoringOpacity, rect)
 }
 
+// Overridden by subclasses to draw the view’s image within the specified rectangle.
 func (o *NSView) DrawRect(dirtyRect corefoundation.CGRect) {
 	o.Ptr().Send(_nSViewSelDrawRect, dirtyRect)
 }
@@ -753,6 +758,7 @@ func (o *NSView) MakeBackingLayer() *quartzcore.CALayer {
 	return quartzcore.CALayerFromID(_ret)
 }
 
+// Updates the view’s content by modifying its underlying layer.
 func (o *NSView) UpdateLayer() {
 	o.Ptr().Send(_nSViewSelUpdateLayer)
 }
@@ -765,6 +771,7 @@ func (o *NSView) Layout() {
 	o.Ptr().Send(_nSViewSelLayout)
 }
 
+// Overridden by subclasses to return a context-sensitive pop-up menu for a given mouse-down event.
 func (o *NSView) MenuForEvent(event *NSEvent) *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelMenuForEvent, event.Ptr())
 	if _ret != 0 {
@@ -813,6 +820,7 @@ func (o *NSView) RectForSmartMagnificationAtPointInRect(location corefoundation.
 	return _ret
 }
 
+// Restores the view to an initial state so that it can be reused.
 func (o *NSView) PrepareForReuse() {
 	o.Ptr().Send(_nSViewSelPrepareForReuse)
 }
@@ -1130,12 +1138,15 @@ func (o *NSView) SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) {
 }
 
 func (o *NSView) BackgroundFilters() *foundation.NSArray[*coreimage.CIFilter] {
-	_ret := objc.Send[*foundation.NSArray[*coreimage.CIFilter]](o.Ptr(), _nSViewSelBackgroundFilters)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelBackgroundFilters)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*coreimage.CIFilter](_ret)
 }
 
 func (o *NSView) SetBackgroundFilters(backgroundFilters *foundation.NSArray[*coreimage.CIFilter]) {
-	o.Ptr().Send(_nSViewSelSetBackgroundFilters, backgroundFilters)
+	o.Ptr().Send(_nSViewSelSetBackgroundFilters, backgroundFilters.Ptr())
 }
 
 func (o *NSView) CompositingFilter() *coreimage.CIFilter {
@@ -1151,12 +1162,15 @@ func (o *NSView) SetCompositingFilter(compositingFilter *coreimage.CIFilter) {
 }
 
 func (o *NSView) ContentFilters() *foundation.NSArray[*coreimage.CIFilter] {
-	_ret := objc.Send[*foundation.NSArray[*coreimage.CIFilter]](o.Ptr(), _nSViewSelContentFilters)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelContentFilters)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*coreimage.CIFilter](_ret)
 }
 
 func (o *NSView) SetContentFilters(contentFilters *foundation.NSArray[*coreimage.CIFilter]) {
-	o.Ptr().Send(_nSViewSelSetContentFilters, contentFilters)
+	o.Ptr().Send(_nSViewSelSetContentFilters, contentFilters.Ptr())
 }
 
 func (o *NSView) Shadow() *NSShadow {
@@ -1462,7 +1476,7 @@ func (o *NSView) BeginDraggingSessionWithItemsEventSource(items *foundation.NSAr
 }
 
 func (o *NSView) RegisterForDraggedTypes(newTypes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSViewSelRegisterForDraggedTypes, newTypes)
+	o.Ptr().Send(_nSViewSelRegisterForDraggedTypes, newTypes.Ptr())
 }
 
 func (o *NSView) UnregisterDraggedTypes() {
@@ -1470,17 +1484,20 @@ func (o *NSView) UnregisterDraggedTypes() {
 }
 
 func (o *NSView) RegisteredDraggedTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSViewSelRegisteredDraggedTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelRegisteredDraggedTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSView) EnterFullScreenModeWithOptions(screen *NSScreen, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelEnterFullScreenModeWithOptions, screen.Ptr(), options)
+	_ret := objc.Send[bool](o.Ptr(), _nSViewSelEnterFullScreenModeWithOptions, screen.Ptr(), options.Ptr())
 	return _ret
 }
 
 func (o *NSView) ExitFullScreenModeWithOptions(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSViewSelExitFullScreenModeWithOptions, options)
+	o.Ptr().Send(_nSViewSelExitFullScreenModeWithOptions, options.Ptr())
 }
 
 func (o *NSView) IsInFullScreenMode() bool {
@@ -1493,7 +1510,7 @@ func (o *NSView) ShowDefinitionForAttributedStringAtPoint(attrString *foundation
 }
 
 func (o *NSView) ShowDefinitionForAttributedStringRangeOptionsBaselineOriginProvider(attrString *foundation.NSAttributedString, targetRange foundation.NSRange, options *foundation.NSDictionary[*foundation.NSString, objc.ID], originProvider objc.Block) {
-	o.Ptr().Send(_nSViewSelShowDefinitionForAttributedStringRangeOptionsBaselineOriginProvider, attrString.Ptr(), targetRange, options, originProvider)
+	o.Ptr().Send(_nSViewSelShowDefinitionForAttributedStringRangeOptionsBaselineOriginProvider, attrString.Ptr(), targetRange, options.Ptr(), originProvider)
 }
 
 func (o *NSView) IsDrawingFindIndicator() bool {
@@ -1643,7 +1660,7 @@ func (o *NSView) DragFileFromRectSlideBackEvent(filename *foundation.NSString, r
 
 // Deprecated: Use -beginDraggingSessionWithItems:event:source: with an NSFilePromiseProvider instead
 func (o *NSView) DragPromisedFilesOfTypesFromRectSourceSlideBackEvent(typeArray *foundation.NSArray[*foundation.NSString], rect corefoundation.CGRect, sourceObject objc.ID, flag bool, event *NSEvent) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSViewSelDragPromisedFilesOfTypesFromRectSourceSlideBackEvent, typeArray, rect, sourceObject, flag, event.Ptr())
+	_ret := objc.Send[bool](o.Ptr(), _nSViewSelDragPromisedFilesOfTypesFromRectSourceSlideBackEvent, typeArray.Ptr(), rect, sourceObject, flag, event.Ptr())
 	return _ret
 }
 
@@ -1736,8 +1753,11 @@ func (o *NSView) EnclosingMenuItem() *NSMenuItem {
 }
 
 func (o *NSView) CandidateListTouchBarItem() *NSCandidateListTouchBarItem[objc.ID] {
-	_ret := objc.Send[*NSCandidateListTouchBarItem[objc.ID]](o.Ptr(), _nSViewSelCandidateListTouchBarItem)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelCandidateListTouchBarItem)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSCandidateListTouchBarItemFromID[objc.ID](_ret)
 }
 
 func (o *NSView) ReflectScrolledClipView(clipView *NSClipView) {

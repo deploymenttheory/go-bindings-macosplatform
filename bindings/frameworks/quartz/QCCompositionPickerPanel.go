@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The QCCompositionPickerPanel class represents a utility window that allows users to browse compositions that are in the Quartz Composer composition repository and, if supported, preview the composition. The QCCompositionPickerPanel class cannot be subclassed.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/qccompositionpickerpanel
 type QCCompositionPickerPanel struct {
 	appkit.NSPanel
@@ -31,6 +33,7 @@ func QCCompositionPickerPanelFromID(id objc.ID) *QCCompositionPickerPanel {
 	return o
 }
 
+// Returns the shared instance of the composition picker panel.
 func QCCompositionPickerPanelSharedCompositionPickerPanel() *QCCompositionPickerPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQCCompositionPickerPanel), _qCCompositionPickerPanelSelSharedCompositionPickerPanel)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func QCCompositionPickerPanelSharedCompositionPickerPanel() *QCCompositionPicker
 	return QCCompositionPickerPanelFromID(_ret)
 }
 
+// Returns the composition picker view used by the panel so that it can be configured.
 func (o *QCCompositionPickerPanel) CompositionPickerView() *QCCompositionPickerView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionPickerPanelSelCompositionPickerView)
 	if _ret != 0 {

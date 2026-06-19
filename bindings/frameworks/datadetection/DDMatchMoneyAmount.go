@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An object that contains an amount of money that the data detection system matches. The DataDetection framework returns a match for an amount of money in a `DDMatchMoneyAmount` object, which contains an amount of money and an ISO currency code.
+// An object that contains an amount of money that the data detection system matches.
 //
 // Apple documentation: https://developer.apple.com/documentation/datadetection/ddmatchmoneyamount
 type DDMatchMoneyAmount struct {

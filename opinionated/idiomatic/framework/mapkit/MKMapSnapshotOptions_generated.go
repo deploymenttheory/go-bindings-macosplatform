@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The options the snapshotter initializer uses to create a snapshotter to capture map-based imagery.
+//
 // MapSnapshotOptions wraps [raw.MKMapSnapshotOptions] with a fluent Go API.
 type MapSnapshotOptions struct {
 	inner *raw.MKMapSnapshotOptions

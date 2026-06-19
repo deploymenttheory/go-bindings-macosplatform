@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A static, plain-text Unicode string object.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsstring
 type NSString struct {
 	NSObject
@@ -195,11 +197,13 @@ func NSStringFromID(id objc.ID) *NSString {
 	return o
 }
 
+// Returns the character at a given UTF-16 code unit index.
 func (o *NSString) CharacterAtIndex(index uint) uint16 {
 	_ret := objc.Send[uint16](o.Ptr(), _nSStringSelCharacterAtIndex, index)
 	return _ret
 }
 
+// Returns an initialized NSString object that contains no characters.
 func (o *NSString) Init() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInit)
 	if _ret != 0 {
@@ -221,6 +225,7 @@ func (o *NSString) Length() uint {
 	return _ret
 }
 
+// Returns a new string containing the characters of the receiver from the one at a given index to the end.
 func (o *NSString) SubstringFromIndex(from uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelSubstringFromIndex, from)
 	if _ret != 0 {
@@ -229,6 +234,7 @@ func (o *NSString) SubstringFromIndex(from uint) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a new string containing the characters of the receiver up to, but not including, the one at a given index.
 func (o *NSString) SubstringToIndex(to uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelSubstringToIndex, to)
 	if _ret != 0 {
@@ -237,6 +243,7 @@ func (o *NSString) SubstringToIndex(to uint) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string object containing the characters of the receiver that lie within a given range.
 func (o *NSString) SubstringWithRange(range_ NSRange) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelSubstringWithRange, range_)
 	if _ret != 0 {
@@ -245,65 +252,78 @@ func (o *NSString) SubstringWithRange(range_ NSRange) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Copies characters from a given range in the receiver into a given buffer.
 func (o *NSString) GetCharactersRange(buffer *uint16, range_ NSRange) {
 	o.Ptr().Send(_nSStringSelGetCharactersRange, buffer, range_)
 }
 
+// Returns the result of invoking compare:options:range: with no options and the receiver’s full extent as the range.
 func (o *NSString) Compare(string_ *NSString) NSComparisonResult {
 	_ret := objc.Send[NSComparisonResult](o.Ptr(), _nSStringSelCompare, string_.Ptr())
 	return _ret
 }
 
+// Compares the string with the specified string using the given options.
 func (o *NSString) CompareOptions(string_ *NSString, mask NSStringCompareOptions) NSComparisonResult {
 	_ret := objc.Send[NSComparisonResult](o.Ptr(), _nSStringSelCompareOptions, string_.Ptr(), mask)
 	return _ret
 }
 
+// Returns the result of invoking compare:options:range:locale: with a nil locale.
 func (o *NSString) CompareOptionsRange(string_ *NSString, mask NSStringCompareOptions, rangeOfReceiverToCompare NSRange) NSComparisonResult {
 	_ret := objc.Send[NSComparisonResult](o.Ptr(), _nSStringSelCompareOptionsRange, string_.Ptr(), mask, rangeOfReceiverToCompare)
 	return _ret
 }
 
+// Compares the string using the specified options and returns the lexical ordering for the range.
 func (o *NSString) CompareOptionsRangeLocale(string_ *NSString, mask NSStringCompareOptions, rangeOfReceiverToCompare NSRange, locale objc.ID) NSComparisonResult {
 	_ret := objc.Send[NSComparisonResult](o.Ptr(), _nSStringSelCompareOptionsRangeLocale, string_.Ptr(), mask, rangeOfReceiverToCompare, locale)
 	return _ret
 }
 
+// Returns the result of invoking compare:options: with NSCaseInsensitiveSearch as the only option.
 func (o *NSString) CaseInsensitiveCompare(string_ *NSString) NSComparisonResult {
 	_ret := objc.Send[NSComparisonResult](o.Ptr(), _nSStringSelCaseInsensitiveCompare, string_.Ptr())
 	return _ret
 }
 
+// Compares the string and a given string using a localized comparison.
 func (o *NSString) LocalizedCompare(string_ *NSString) NSComparisonResult {
 	_ret := objc.Send[NSComparisonResult](o.Ptr(), _nSStringSelLocalizedCompare, string_.Ptr())
 	return _ret
 }
 
+// Compares the string with a given string using a case-insensitive, localized, comparison.
 func (o *NSString) LocalizedCaseInsensitiveCompare(string_ *NSString) NSComparisonResult {
 	_ret := objc.Send[NSComparisonResult](o.Ptr(), _nSStringSelLocalizedCaseInsensitiveCompare, string_.Ptr())
 	return _ret
 }
 
+// Compares strings as sorted by the Finder.
 func (o *NSString) LocalizedStandardCompare(string_ *NSString) NSComparisonResult {
 	_ret := objc.Send[NSComparisonResult](o.Ptr(), _nSStringSelLocalizedStandardCompare, string_.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether a given string is equal to the receiver using a literal Unicode-based comparison.
 func (o *NSString) IsEqualToString(aString *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelIsEqualToString, aString.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether a given string matches the beginning characters of the receiver.
 func (o *NSString) HasPrefix(str *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelHasPrefix, str.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether a given string matches the ending characters of the receiver.
 func (o *NSString) HasSuffix(str *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelHasSuffix, str.Ptr())
 	return _ret
 }
 
+// Returns a string containing characters the receiver and a given string have in common, starting from the beginning of each up to the first characters that aren’t equivalent.
 func (o *NSString) CommonPrefixWithStringOptions(str *NSString, mask NSStringCompareOptions) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelCommonPrefixWithStringOptions, str.Ptr(), mask)
 	if _ret != 0 {
@@ -312,71 +332,85 @@ func (o *NSString) CommonPrefixWithStringOptions(str *NSString, mask NSStringCom
 	return NSStringFromID(_ret)
 }
 
+// Returns a Boolean value indicating whether the string contains a given string by performing a case-sensitive, locale-unaware search.
 func (o *NSString) ContainsString(str *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelContainsString, str.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the string contains a given string by performing a case-insensitive, locale-aware search.
 func (o *NSString) LocalizedCaseInsensitiveContainsString(str *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelLocalizedCaseInsensitiveContainsString, str.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the string contains a given string by performing a case and diacritic insensitive, locale-aware search.
 func (o *NSString) LocalizedStandardContainsString(str *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelLocalizedStandardContainsString, str.Ptr())
 	return _ret
 }
 
+// Finds and returns the range of the first occurrence of a given string within the string by performing a case and diacritic insensitive, locale-aware search.
 func (o *NSString) LocalizedStandardRangeOfString(str *NSString) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSStringSelLocalizedStandardRangeOfString, str.Ptr())
 	return _ret
 }
 
+// Finds and returns the range of the first occurrence of a given string within the string.
 func (o *NSString) RangeOfString(searchString *NSString) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSStringSelRangeOfString, searchString.Ptr())
 	return _ret
 }
 
+// Finds and returns the range of the first occurrence of a given string within the string, subject to given options.
 func (o *NSString) RangeOfStringOptions(searchString *NSString, mask NSStringCompareOptions) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSStringSelRangeOfStringOptions, searchString.Ptr(), mask)
 	return _ret
 }
 
+// Finds and returns the range of the first occurrence of a given string, within the given range of the string, subject to given options.
 func (o *NSString) RangeOfStringOptionsRange(searchString *NSString, mask NSStringCompareOptions, rangeOfReceiverToSearch NSRange) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSStringSelRangeOfStringOptionsRange, searchString.Ptr(), mask, rangeOfReceiverToSearch)
 	return _ret
 }
 
+// Finds and returns the range of the first occurrence of a given string within a given range of the string, subject to given options, using the specified locale, if any.
 func (o *NSString) RangeOfStringOptionsRangeLocale(searchString *NSString, mask NSStringCompareOptions, rangeOfReceiverToSearch NSRange, locale *NSLocale) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSStringSelRangeOfStringOptionsRangeLocale, searchString.Ptr(), mask, rangeOfReceiverToSearch, locale.Ptr())
 	return _ret
 }
 
+// Finds and returns the range in the string of the first character from a given character set.
 func (o *NSString) RangeOfCharacterFromSet(searchSet *NSCharacterSet) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSStringSelRangeOfCharacterFromSet, searchSet.Ptr())
 	return _ret
 }
 
+// Finds and returns the range in the string of the first character, using given options, from a given character set.
 func (o *NSString) RangeOfCharacterFromSetOptions(searchSet *NSCharacterSet, mask NSStringCompareOptions) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSStringSelRangeOfCharacterFromSetOptions, searchSet.Ptr(), mask)
 	return _ret
 }
 
+// Finds and returns the range in the string of the first character from a given character set found in a given range with given options.
 func (o *NSString) RangeOfCharacterFromSetOptionsRange(searchSet *NSCharacterSet, mask NSStringCompareOptions, rangeOfReceiverToSearch NSRange) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSStringSelRangeOfCharacterFromSetOptionsRange, searchSet.Ptr(), mask, rangeOfReceiverToSearch)
 	return _ret
 }
 
+// Returns the range in the receiver of the composed character sequence located at a given index.
 func (o *NSString) RangeOfComposedCharacterSequenceAtIndex(index uint) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSStringSelRangeOfComposedCharacterSequenceAtIndex, index)
 	return _ret
 }
 
+// Returns the range in the string of the composed character sequences for a given range.
 func (o *NSString) RangeOfComposedCharacterSequencesForRange(range_ NSRange) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSStringSelRangeOfComposedCharacterSequencesForRange, range_)
 	return _ret
 }
 
+// Returns a new string made by appending a given string to the receiver.
 func (o *NSString) StringByAppendingString(aString *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByAppendingString, aString.Ptr())
 	if _ret != 0 {
@@ -385,6 +419,7 @@ func (o *NSString) StringByAppendingString(aString *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string made by appending to the receiver a string constructed from a given format string and the following arguments.
 func (o *NSString) StringByAppendingFormat(format *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByAppendingFormat, format.Ptr())
 	if _ret != 0 {
@@ -393,6 +428,7 @@ func (o *NSString) StringByAppendingFormat(format *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a version of the string with all letters converted to uppercase, taking into account the specified locale.
 func (o *NSString) UppercaseStringWithLocale(locale *NSLocale) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelUppercaseStringWithLocale, locale.Ptr())
 	if _ret != 0 {
@@ -401,6 +437,7 @@ func (o *NSString) UppercaseStringWithLocale(locale *NSLocale) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a version of the string with all letters converted to lowercase, taking into account the specified locale.
 func (o *NSString) LowercaseStringWithLocale(locale *NSLocale) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLowercaseStringWithLocale, locale.Ptr())
 	if _ret != 0 {
@@ -409,6 +446,7 @@ func (o *NSString) LowercaseStringWithLocale(locale *NSLocale) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a capitalized representation of the receiver using the specified locale.
 func (o *NSString) CapitalizedStringWithLocale(locale *NSLocale) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelCapitalizedStringWithLocale, locale.Ptr())
 	if _ret != 0 {
@@ -417,28 +455,34 @@ func (o *NSString) CapitalizedStringWithLocale(locale *NSLocale) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns by reference the beginning of the first line and the end of the last line touched by the given range.
 func (o *NSString) GetLineStartEndContentsEndForRange(startPtr *uint, lineEndPtr *uint, contentsEndPtr *uint, range_ NSRange) {
 	o.Ptr().Send(_nSStringSelGetLineStartEndContentsEndForRange, startPtr, lineEndPtr, contentsEndPtr, range_)
 }
 
+// Returns the range of characters representing the line or lines containing a given range.
 func (o *NSString) LineRangeForRange(range_ NSRange) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSStringSelLineRangeForRange, range_)
 	return _ret
 }
 
+// Returns by reference the beginning of the first paragraph and the end of the last paragraph touched by the given range.
 func (o *NSString) GetParagraphStartEndContentsEndForRange(startPtr *uint, parEndPtr *uint, contentsEndPtr *uint, range_ NSRange) {
 	o.Ptr().Send(_nSStringSelGetParagraphStartEndContentsEndForRange, startPtr, parEndPtr, contentsEndPtr, range_)
 }
 
+// Returns the range of characters representing the paragraph or paragraphs containing a given range.
 func (o *NSString) ParagraphRangeForRange(range_ NSRange) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSStringSelParagraphRangeForRange, range_)
 	return _ret
 }
 
+// Enumerates the substrings of the specified type in the specified range of the string.
 func (o *NSString) EnumerateSubstringsInRangeOptionsUsing(range_ NSRange, opts NSStringEnumerationOptions, block objc.Block) {
 	o.Ptr().Send(_nSStringSelEnumerateSubstringsInRangeOptionsUsing, range_, opts, block)
 }
 
+// Enumerates all the lines in the string.
 func (o *NSString) EnumerateLinesUsing(block func(*NSString, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -453,6 +497,7 @@ func (o *NSString) EnumerateLinesUsing(block func(*NSString, *bool)) {
 	o.Ptr().Send(_nSStringSelEnumerateLinesUsing, __block_block)
 }
 
+// Returns an NSData object containing a representation of the receiver encoded using a given encoding.
 func (o *NSString) DataUsingEncodingAllowLossyConversion(encoding uint, lossy bool) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelDataUsingEncodingAllowLossyConversion, encoding, lossy)
 	if _ret != 0 {
@@ -461,6 +506,7 @@ func (o *NSString) DataUsingEncodingAllowLossyConversion(encoding uint, lossy bo
 	return NSDataFromID(_ret)
 }
 
+// Returns an NSData object containing a representation of the receiver encoded using a given encoding.
 func (o *NSString) DataUsingEncoding(encoding uint) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelDataUsingEncoding, encoding)
 	if _ret != 0 {
@@ -469,36 +515,43 @@ func (o *NSString) DataUsingEncoding(encoding uint) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Returns a Boolean value that indicates whether the receiver can be converted to a given encoding without loss of information.
 func (o *NSString) CanBeConvertedToEncoding(encoding uint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelCanBeConvertedToEncoding, encoding)
 	return _ret
 }
 
+// Returns a representation of the string as a C string using a given encoding.
 func (o *NSString) CStringUsingEncoding(encoding uint) string {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelCStringUsingEncoding, encoding)
 	return purego.GoString(_ret)
 }
 
+// Converts the string to a given encoding and stores it in a buffer.
 func (o *NSString) GetCStringMaxLengthEncoding(buffer string, maxBufferCount uint, encoding uint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelGetCStringMaxLengthEncoding, buffer, maxBufferCount, encoding)
 	return _ret
 }
 
+// Gets a given range of characters as bytes in a specified encoding.
 func (o *NSString) GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange(buffer unsafe.Pointer, maxBufferCount uint, usedBufferCount *uint, encoding uint, options NSStringEncodingConversionOptions, range_ NSRange, leftover *NSRange) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelGetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange, buffer, maxBufferCount, usedBufferCount, encoding, options, range_, leftover)
 	return _ret
 }
 
+// Returns the maximum number of bytes needed to store the receiver in a given encoding.
 func (o *NSString) MaximumLengthOfBytesUsingEncoding(enc uint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSStringSelMaximumLengthOfBytesUsingEncoding, enc)
 	return _ret
 }
 
+// Returns the number of bytes required to store the receiver in a given encoding.
 func (o *NSString) LengthOfBytesUsingEncoding(enc uint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSStringSelLengthOfBytesUsingEncoding, enc)
 	return _ret
 }
 
+// Returns a human-readable string giving the name of a given encoding.
 func NSStringLocalizedNameOfStringEncoding(encoding uint) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelLocalizedNameOfStringEncoding, encoding)
 	if _ret != 0 {
@@ -507,6 +560,7 @@ func NSStringLocalizedNameOfStringEncoding(encoding uint) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns an array containing substrings from the receiver that have been divided by a given separator.
 func (o *NSString) ComponentsSeparatedByString(separator *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelComponentsSeparatedByString, separator.Ptr())
 	if _ret != 0 {
@@ -515,6 +569,7 @@ func (o *NSString) ComponentsSeparatedByString(separator *NSString) *NSArray[*NS
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns an array containing substrings from the receiver that have been divided by characters in a given set.
 func (o *NSString) ComponentsSeparatedByCharactersInSet(separator *NSCharacterSet) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelComponentsSeparatedByCharactersInSet, separator.Ptr())
 	if _ret != 0 {
@@ -523,6 +578,7 @@ func (o *NSString) ComponentsSeparatedByCharactersInSet(separator *NSCharacterSe
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns a new string made by removing from both ends of the receiver characters contained in a given character set.
 func (o *NSString) StringByTrimmingCharactersInSet(set *NSCharacterSet) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByTrimmingCharactersInSet, set.Ptr())
 	if _ret != 0 {
@@ -531,6 +587,7 @@ func (o *NSString) StringByTrimmingCharactersInSet(set *NSCharacterSet) *NSStrin
 	return NSStringFromID(_ret)
 }
 
+// Returns a new string formed from the receiver by either removing characters from the end, or by appending as many occurrences as necessary of a given pad string.
 func (o *NSString) StringByPaddingToLengthWithStringStartingAtIndex(newLength uint, padString *NSString, padIndex uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByPaddingToLengthWithStringStartingAtIndex, newLength, padString.Ptr(), padIndex)
 	if _ret != 0 {
@@ -539,6 +596,7 @@ func (o *NSString) StringByPaddingToLengthWithStringStartingAtIndex(newLength ui
 	return NSStringFromID(_ret)
 }
 
+// Creates a string suitable for comparison by removing the specified character distinctions from a string.
 func (o *NSString) StringByFoldingWithOptionsLocale(options NSStringCompareOptions, locale *NSLocale) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByFoldingWithOptionsLocale, options, locale.Ptr())
 	if _ret != 0 {
@@ -547,6 +605,7 @@ func (o *NSString) StringByFoldingWithOptionsLocale(options NSStringCompareOptio
 	return NSStringFromID(_ret)
 }
 
+// Returns a new string in which all occurrences of a target string in a specified range of the receiver are replaced by another given string.
 func (o *NSString) StringByReplacingOccurrencesOfStringWithStringOptionsRange(target *NSString, replacement *NSString, options NSStringCompareOptions, searchRange NSRange) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByReplacingOccurrencesOfStringWithStringOptionsRange, target.Ptr(), replacement.Ptr(), options, searchRange)
 	if _ret != 0 {
@@ -555,6 +614,7 @@ func (o *NSString) StringByReplacingOccurrencesOfStringWithStringOptionsRange(ta
 	return NSStringFromID(_ret)
 }
 
+// Returns a new string in which all occurrences of a target string in the receiver are replaced by another given string.
 func (o *NSString) StringByReplacingOccurrencesOfStringWithString(target *NSString, replacement *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByReplacingOccurrencesOfStringWithString, target.Ptr(), replacement.Ptr())
 	if _ret != 0 {
@@ -563,6 +623,7 @@ func (o *NSString) StringByReplacingOccurrencesOfStringWithString(target *NSStri
 	return NSStringFromID(_ret)
 }
 
+// Returns a new string in which the characters in a specified range of the receiver are replaced by a given string.
 func (o *NSString) StringByReplacingCharactersInRangeWithString(range_ NSRange, replacement *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByReplacingCharactersInRangeWithString, range_, replacement.Ptr())
 	if _ret != 0 {
@@ -571,6 +632,7 @@ func (o *NSString) StringByReplacingCharactersInRangeWithString(range_ NSRange, 
 	return NSStringFromID(_ret)
 }
 
+// Returns a new string by applying a specified transform to the string.
 func (o *NSString) StringByApplyingTransformReverse(transform *NSString, reverse bool) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByApplyingTransformReverse, transform.Ptr(), reverse)
 	if _ret != 0 {
@@ -579,6 +641,7 @@ func (o *NSString) StringByApplyingTransformReverse(transform *NSString, reverse
 	return NSStringFromID(_ret)
 }
 
+// Writes the contents of the receiver to the URL specified by url using the specified encoding.
 func (o *NSString) WriteToURLAtomicallyEncodingError(url *NSURL, useAuxiliaryFile bool, enc uint) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelWriteToURLAtomicallyEncodingError, url.Ptr(), useAuxiliaryFile, enc, unsafe.Pointer(&_nsErr))
@@ -588,6 +651,7 @@ func (o *NSString) WriteToURLAtomicallyEncodingError(url *NSURL, useAuxiliaryFil
 	return _ret, nil
 }
 
+// Writes the contents of the receiver to a file at a given path using a given encoding.
 func (o *NSString) WriteToFileAtomicallyEncodingError(path *NSString, useAuxiliaryFile bool, enc uint) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelWriteToFileAtomicallyEncodingError, path.Ptr(), useAuxiliaryFile, enc, unsafe.Pointer(&_nsErr))
@@ -597,6 +661,7 @@ func (o *NSString) WriteToFileAtomicallyEncodingError(path *NSString, useAuxilia
 	return _ret, nil
 }
 
+// Returns an initialized NSString object that contains a given number of characters from a given C array of UTF-16 code units.
 func (o *NSString) InitWithCharactersNoCopyLengthFreeWhenDone(characters *uint16, length uint, freeBuffer bool) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithCharactersNoCopyLengthFreeWhenDone, characters, length, freeBuffer)
 	if _ret != 0 {
@@ -620,6 +685,7 @@ func (o *NSString) InitWithCharactersNoCopyLengthDeallocator(chars *uint16, len_
 	return NSStringFromID(_ret)
 }
 
+// Returns an initialized NSString object that contains a given number of characters from a given C array of UTF-16 code units.
 func (o *NSString) InitWithCharactersLength(characters *uint16, length uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithCharactersLength, characters, length)
 	if _ret != 0 {
@@ -628,6 +694,7 @@ func (o *NSString) InitWithCharactersLength(characters *uint16, length uint) *NS
 	return NSStringFromID(_ret)
 }
 
+// Returns an @c NSString object initialized by copying the characters from a given C array of UTF8-encoded bytes.
 func (o *NSString) InitWithUTF8String(nullTerminatedCString string) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithUTF8String, nullTerminatedCString)
 	if _ret != 0 {
@@ -636,6 +703,7 @@ func (o *NSString) InitWithUTF8String(nullTerminatedCString string) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns an NSString object initialized by copying the characters from another given string.
 func (o *NSString) InitWithString(aString *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithString, aString.Ptr())
 	if _ret != 0 {
@@ -644,6 +712,7 @@ func (o *NSString) InitWithString(aString *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted.
 func (o *NSString) InitWithFormat(format *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithFormat, format.Ptr())
 	if _ret != 0 {
@@ -652,6 +721,7 @@ func (o *NSString) InitWithFormat(format *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted without any localization.
 func (o *NSString) InitWithFormatArguments(format *NSString, argList string) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithFormatArguments, format.Ptr(), argList)
 	if _ret != 0 {
@@ -660,6 +730,7 @@ func (o *NSString) InitWithFormatArguments(format *NSString, argList string) *NS
 	return NSStringFromID(_ret)
 }
 
+// Returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted according to given locale.
 func (o *NSString) InitWithFormatLocale(format *NSString, locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithFormatLocale, format.Ptr(), locale)
 	if _ret != 0 {
@@ -668,6 +739,7 @@ func (o *NSString) InitWithFormatLocale(format *NSString, locale objc.ID) *NSStr
 	return NSStringFromID(_ret)
 }
 
+// Returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted according to given locale information. This method is meant to be called from within a variadic function, where the argument list will be available.
 func (o *NSString) InitWithFormatLocaleArguments(format *NSString, locale objc.ID, argList string) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithFormatLocaleArguments, format.Ptr(), locale, argList)
 	if _ret != 0 {
@@ -724,6 +796,7 @@ func (o *NSString) InitWithValidatedFormatValidFormatSpecifiersLocaleArgumentsEr
 	return NSStringFromID(_ret), nil
 }
 
+// Returns an NSString object initialized by converting given data into UTF-16 code units using a given encoding.
 func (o *NSString) InitWithDataEncoding(data *NSData, encoding uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithDataEncoding, data.Ptr(), encoding)
 	if _ret != 0 {
@@ -732,6 +805,7 @@ func (o *NSString) InitWithDataEncoding(data *NSData, encoding uint) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns an initialized NSString object containing a given number of bytes from a given buffer of bytes interpreted in a given encoding.
 func (o *NSString) InitWithBytesLengthEncoding(bytes_ unsafe.Pointer, len_ uint, encoding uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithBytesLengthEncoding, bytes_, len_, encoding)
 	if _ret != 0 {
@@ -740,6 +814,7 @@ func (o *NSString) InitWithBytesLengthEncoding(bytes_ unsafe.Pointer, len_ uint,
 	return NSStringFromID(_ret)
 }
 
+// Returns an initialized NSString object that contains a given number of bytes from a given buffer of bytes interpreted in a given encoding, and optionally frees the buffer.
 func (o *NSString) InitWithBytesNoCopyLengthEncodingFreeWhenDone(bytes_ unsafe.Pointer, len_ uint, encoding uint, freeBuffer bool) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithBytesNoCopyLengthEncodingFreeWhenDone, bytes_, len_, encoding, freeBuffer)
 	if _ret != 0 {
@@ -763,6 +838,7 @@ func (o *NSString) InitWithBytesNoCopyLengthEncodingDeallocator(bytes_ unsafe.Po
 	return NSStringFromID(_ret)
 }
 
+// Returns an empty string.
 func NSStringString() *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelString)
 	if _ret != 0 {
@@ -771,6 +847,7 @@ func NSStringString() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string created by copying the characters from another given string.
 func NSStringStringWithString(string_ *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithString, string_.Ptr())
 	if _ret != 0 {
@@ -779,6 +856,7 @@ func NSStringStringWithString(string_ *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string containing a given number of characters taken from a given C array of UTF-16 code units.
 func NSStringStringWithCharactersLength(characters *uint16, length uint) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithCharactersLength, characters, length)
 	if _ret != 0 {
@@ -787,6 +865,7 @@ func NSStringStringWithCharactersLength(characters *uint16, length uint) *NSStri
 	return NSStringFromID(_ret)
 }
 
+// Returns a string created by copying the data from a given C array of UTF8-encoded bytes.
 func NSStringStringWithUTF8String(nullTerminatedCString string) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithUTF8String, nullTerminatedCString)
 	if _ret != 0 {
@@ -795,6 +874,7 @@ func NSStringStringWithUTF8String(nullTerminatedCString string) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string created by using a given format string as a template into which the remaining argument values are substituted.
 func NSStringStringWithFormat(format *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithFormat, format.Ptr())
 	if _ret != 0 {
@@ -803,6 +883,7 @@ func NSStringStringWithFormat(format *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string created by using a given format string as a template into which the remaining argument values are substituted according to the current locale.
 func NSStringLocalizedStringWithFormat(format *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelLocalizedStringWithFormat, format.Ptr())
 	if _ret != 0 {
@@ -835,6 +916,7 @@ func NSStringLocalizedStringWithValidatedFormatValidFormatSpecifiersError(format
 	return NSStringFromID(_ret), nil
 }
 
+// Returns an @c NSString object initialized using the characters in a given C array, interpreted according to a given encoding.
 func (o *NSString) InitWithCStringEncoding(nullTerminatedCString string, encoding uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithCStringEncoding, nullTerminatedCString, encoding)
 	if _ret != 0 {
@@ -843,6 +925,7 @@ func (o *NSString) InitWithCStringEncoding(nullTerminatedCString string, encodin
 	return NSStringFromID(_ret)
 }
 
+// Returns a string containing the bytes in a given C array, interpreted according to a given encoding.
 func NSStringStringWithCStringEncoding(cString string, enc uint) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithCStringEncoding, cString, enc)
 	if _ret != 0 {
@@ -851,6 +934,7 @@ func NSStringStringWithCStringEncoding(cString string, enc uint) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns an @c NSString object initialized by reading data from a given URL interpreted using a given encoding.
 func (o *NSString) InitWithContentsOfURLEncodingError(url *NSURL, enc uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithContentsOfURLEncodingError, url.Ptr(), enc, unsafe.Pointer(&_nsErr))
@@ -863,6 +947,7 @@ func (o *NSString) InitWithContentsOfURLEncodingError(url *NSURL, enc uint) (*NS
 	return NSStringFromID(_ret), nil
 }
 
+// Returns an NSString object initialized by reading data from the file at a given path using a given encoding.
 func (o *NSString) InitWithContentsOfFileEncodingError(path *NSString, enc uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithContentsOfFileEncodingError, path.Ptr(), enc, unsafe.Pointer(&_nsErr))
@@ -875,6 +960,7 @@ func (o *NSString) InitWithContentsOfFileEncodingError(path *NSString, enc uint)
 	return NSStringFromID(_ret), nil
 }
 
+// Returns a string created by reading data from the file at a given path interpreted using a given encoding.
 func NSStringStringWithContentsOfURLEncodingError(url *NSURL, enc uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithContentsOfURLEncodingError, url.Ptr(), enc, unsafe.Pointer(&_nsErr))
@@ -887,6 +973,7 @@ func NSStringStringWithContentsOfURLEncodingError(url *NSURL, enc uint) (*NSStri
 	return NSStringFromID(_ret), nil
 }
 
+// Returns a string created by reading data from the file at a given path interpreted using a given encoding.
 func NSStringStringWithContentsOfFileEncodingError(path *NSString, enc uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithContentsOfFileEncodingError, path.Ptr(), enc, unsafe.Pointer(&_nsErr))
@@ -899,6 +986,7 @@ func NSStringStringWithContentsOfFileEncodingError(path *NSString, enc uint) (*N
 	return NSStringFromID(_ret), nil
 }
 
+// Returns an @c NSString object initialized by reading data from a given URL and returns by reference the encoding used to interpret the data.
 func (o *NSString) InitWithContentsOfURLUsedEncodingError(url *NSURL, enc *uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithContentsOfURLUsedEncodingError, url.Ptr(), enc, unsafe.Pointer(&_nsErr))
@@ -911,6 +999,7 @@ func (o *NSString) InitWithContentsOfURLUsedEncodingError(url *NSURL, enc *uint)
 	return NSStringFromID(_ret), nil
 }
 
+// Returns an NSString object initialized by reading data from the file at a given path and returns by reference the encoding used to interpret the characters.
 func (o *NSString) InitWithContentsOfFileUsedEncodingError(path *NSString, enc *uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithContentsOfFileUsedEncodingError, path.Ptr(), enc, unsafe.Pointer(&_nsErr))
@@ -923,6 +1012,7 @@ func (o *NSString) InitWithContentsOfFileUsedEncodingError(path *NSString, enc *
 	return NSStringFromID(_ret), nil
 }
 
+// Returns a string created by reading data from the file at a given URL and returns by reference the encoding used to interpret the data.
 func NSStringStringWithContentsOfURLUsedEncodingError(url *NSURL, enc *uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithContentsOfURLUsedEncodingError, url.Ptr(), enc, unsafe.Pointer(&_nsErr))
@@ -935,6 +1025,7 @@ func NSStringStringWithContentsOfURLUsedEncodingError(url *NSURL, enc *uint) (*N
 	return NSStringFromID(_ret), nil
 }
 
+// Returns a string created by reading data from the file at a given path and returns by reference the encoding used to interpret the file.
 func NSStringStringWithContentsOfFileUsedEncodingError(path *NSString, enc *uint) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithContentsOfFileUsedEncodingError, path.Ptr(), enc, unsafe.Pointer(&_nsErr))
@@ -1082,84 +1173,102 @@ func (o *NSString) PrecomposedStringWithCompatibilityMapping() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the string encoding for the given data as detected by attempting to create a string according to the specified encoding options.
 func NSStringStringEncodingForDataEncodingOptionsConvertedStringUsedLossyConversion(data *NSData, opts *NSDictionary[*NSString, objc.ID], string_ *NSString, usedLossyConversion *bool) uint {
-	_ret := objc.Send[uint](objc.ID(_clsNSString), _nSStringSelStringEncodingForDataEncodingOptionsConvertedStringUsedLossyConversion, data.Ptr(), opts, string_.Ptr(), usedLossyConversion)
+	_ret := objc.Send[uint](objc.ID(_clsNSString), _nSStringSelStringEncodingForDataEncodingOptionsConvertedStringUsedLossyConversion, data.Ptr(), opts.Ptr(), string_.Ptr(), usedLossyConversion)
 	return _ret
 }
 
+// Parses the receiver as a text representation of a property list, returning an NSString, NSData, NSArray, or NSDictionary object, according to the topmost element.
 func (o *NSString) PropertyList() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelPropertyList)
 	return _ret
 }
 
+// Returns a dictionary object initialized with the keys and values found in the receiver.
 func (o *NSString) PropertyListFromStringsFileFormat() *NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSStringSelPropertyListFromStringsFileFormat)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelPropertyListFromStringsFileFormat)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Returns a representation of the receiver as a C string in the default C-string encoding.
 // Deprecated: Use -cStringUsingEncoding: instead
 func (o *NSString) CString() string {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelCString)
 	return purego.GoString(_ret)
 }
 
+// Returns a representation of the receiver as a C string in the default C-string encoding, possibly losing information in converting to that encoding.
 // Deprecated: Use -cStringUsingEncoding: instead
 func (o *NSString) LossyCString() string {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLossyCString)
 	return purego.GoString(_ret)
 }
 
+// Returns the length in char-sized units of the receiver’s C-string representation in the default C-string encoding.
 // Deprecated: Use -lengthOfBytesUsingEncoding: instead
 func (o *NSString) CStringLength() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSStringSelCStringLength)
 	return _ret
 }
 
+// Invokes getCString:maxLength:range:remainingRange: with NSMaximumStringLength as the maximum length, the receiver’s entire extent as the range, and NULL for the remaining range.
 // Deprecated: Use -getCString:maxLength:encoding: instead
 func (o *NSString) GetCString(bytes_ string) {
 	o.Ptr().Send(_nSStringSelGetCString, bytes_)
 }
 
+// Invokes getCString:maxLength:range:remainingRange: with maxLength as the maximum length in char-sized units, the receiver’s entire extent as the range, and NULL for the remaining range.
 // Deprecated: Use -getCString:maxLength:encoding: instead
 func (o *NSString) GetCStringMaxLength(bytes_ string, maxLength uint) {
 	o.Ptr().Send(_nSStringSelGetCStringMaxLength, bytes_, maxLength)
 }
 
+// Converts the receiver’s content to the default C-string encoding and stores them in a given buffer.
 // Deprecated: Use -getCString:maxLength:encoding: instead
 func (o *NSString) GetCStringMaxLengthRangeRemainingRange(bytes_ string, maxLength uint, aRange NSRange, leftoverRange *NSRange) {
 	o.Ptr().Send(_nSStringSelGetCStringMaxLengthRangeRemainingRange, bytes_, maxLength, aRange, leftoverRange)
 }
 
+// Writes the contents of the receiver to the file specified by a given path.
 // Deprecated: Use -writeToFile:atomically:encoding:error: instead
 func (o *NSString) WriteToFileAtomically(path *NSString, useAuxiliaryFile bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelWriteToFileAtomically, path.Ptr(), useAuxiliaryFile)
 	return _ret
 }
 
+// Writes the contents of the receiver to the location specified by a given URL.
 // Deprecated: Use -writeToURL:atomically:encoding:error: instead
 func (o *NSString) WriteToURLAtomically(url *NSURL, atomically bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelWriteToURLAtomically, url.Ptr(), atomically)
 	return _ret
 }
 
+// Initializes the receiver, a newly allocated NSString object, by reading data from the file named by path.
 // Deprecated: Use -initWithContentsOfFile:encoding:error: instead
 func (o *NSString) InitWithContentsOfFile(path *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithContentsOfFile, path.Ptr())
 	return _ret
 }
 
+// Returns an @c NSString object initialized by reading data from the URL named by @c url.
 // Deprecated: Use -initWithContentsOfURL:encoding:error: instead
 func (o *NSString) InitWithContentsOfURL(url *NSURL) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelInitWithContentsOfURL, url.Ptr())
 	return _ret
 }
 
+// Returns a string created by reading data from the file named by a given path.
 // Deprecated: Use +stringWithContentsOfFile:encoding:error: instead
 func NSStringStringWithContentsOfFile(path *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithContentsOfFile, path.Ptr())
 	return _ret
 }
 
+// Returns a string created by reading data from the file named by a given URL.
 // Deprecated: Use +stringWithContentsOfURL:encoding:error: instead
 func NSStringStringWithContentsOfURL(url *NSURL) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithContentsOfURL, url.Ptr())
@@ -1184,23 +1293,27 @@ func (o *NSString) InitWithCString(bytes_ string) objc.ID {
 	return _ret
 }
 
+// Returns a string containing the characters in a given C-string.
 // Deprecated: Use +stringWithCString:encoding:
 func NSStringStringWithCStringLength(bytes_ string, length uint) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithCStringLength, bytes_, length)
 	return _ret
 }
 
+// Creates a new string using a given C-string.
 // Deprecated: Use +stringWithCString:encoding: instead
 func NSStringStringWithCString(bytes_ string) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelStringWithCString, bytes_)
 	return _ret
 }
 
+// Copies all characters from the receiver into a given buffer.
 // Deprecated: Use +stringWithCString:encoding: instead
 func (o *NSString) GetCharacters(buffer *uint16) {
 	o.Ptr().Send(_nSStringSelGetCharacters, buffer)
 }
 
+// Returns a string variation suitable for the specified presentation width.
 func (o *NSString) VariantFittingPresentationWidth(width int) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelVariantFittingPresentationWidth, width)
 	if _ret != 0 {
@@ -1209,6 +1322,7 @@ func (o *NSString) VariantFittingPresentationWidth(width int) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a string built from the strings in a given array by concatenating them with a path separator between each pair.
 func NSStringPathWithComponents(components *NSArray[*NSString]) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSString), _nSStringSelPathWithComponents, components.Ptr())
 	if _ret != 0 {
@@ -1217,6 +1331,7 @@ func NSStringPathWithComponents(components *NSArray[*NSString]) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a new string made by appending to the receiver a given string.
 func (o *NSString) StringByAppendingPathComponent(str *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByAppendingPathComponent, str.Ptr())
 	if _ret != 0 {
@@ -1225,6 +1340,7 @@ func (o *NSString) StringByAppendingPathComponent(str *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a new string made by appending to the receiver an extension separator followed by a given extension.
 func (o *NSString) StringByAppendingPathExtension(str *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByAppendingPathExtension, str.Ptr())
 	if _ret != 0 {
@@ -1233,6 +1349,7 @@ func (o *NSString) StringByAppendingPathExtension(str *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns an array of strings made by separately appending to the receiver each string in a given array.
 func (o *NSString) StringsByAppendingPaths(paths *NSArray[*NSString]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringsByAppendingPaths, paths.Ptr())
 	if _ret != 0 {
@@ -1241,11 +1358,13 @@ func (o *NSString) StringsByAppendingPaths(paths *NSArray[*NSString]) *NSArray[*
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Interprets the receiver as a path in the file system and attempts to perform filename completion, returning a numeric value that indicates whether a match was possible, and by reference the longest path that matches the receiver.
 func (o *NSString) CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(outputName *NSString, flag bool, outputArray *NSArray[*NSString], filterTypes *NSArray[*NSString]) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSStringSelCompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes, outputName.Ptr(), flag, outputArray.Ptr(), filterTypes.Ptr())
 	return _ret
 }
 
+// Interprets the receiver as a system-independent path and fills a buffer with a C-string in a format and encoding suitable for use with file-system calls.
 func (o *NSString) GetFileSystemRepresentationMaxLength(cname string, max uint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSStringSelGetFileSystemRepresentationMaxLength, cname, max)
 	return _ret
@@ -1333,6 +1452,7 @@ func (o *NSString) FileSystemRepresentation() unsafe.Pointer {
 	return _ret
 }
 
+// Returns a new string made from the receiver by replacing all characters not in the specified set with percent-encoded characters.
 func (o *NSString) StringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters *NSCharacterSet) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByAddingPercentEncodingWithAllowedCharacters, allowedCharacters.Ptr())
 	if _ret != 0 {
@@ -1341,6 +1461,7 @@ func (o *NSString) StringByAddingPercentEncodingWithAllowedCharacters(allowedCha
 	return NSStringFromID(_ret)
 }
 
+// Returns a representation of the receiver using a given encoding to determine the percent escapes necessary to convert the receiver into a legal URL string.
 // Deprecated: Use -stringByAddingPercentEncodingWithAllowedCharacters: instead, which always uses the recommended UTF-8 encoding, and which encodes for a specific URL component or subcomponent since each URL component or subcomponent has different rules for what characters are valid.
 func (o *NSString) StringByAddingPercentEscapesUsingEncoding(enc uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByAddingPercentEscapesUsingEncoding, enc)
@@ -1350,6 +1471,7 @@ func (o *NSString) StringByAddingPercentEscapesUsingEncoding(enc uint) *NSString
 	return NSStringFromID(_ret)
 }
 
+// Returns a new string made by replacing in the receiver all percent escapes with the matching characters as determined by a given encoding.
 // Deprecated: Use -stringByRemovingPercentEncoding instead, which always uses the recommended UTF-8 encoding.
 func (o *NSString) StringByReplacingPercentEscapesUsingEncoding(enc uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelStringByReplacingPercentEscapesUsingEncoding, enc)
@@ -1367,6 +1489,7 @@ func (o *NSString) StringByRemovingPercentEncoding() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns an array of linguistic tags for the specified range and requested tags within the receiving string.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSString) LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_ NSRange, scheme *NSString, options NSLinguisticTaggerOptions, orthography *NSOrthography, tokenRanges *NSArray[*NSValue]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStringSelLinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges, range_, scheme.Ptr(), options, orthography.Ptr(), tokenRanges.Ptr())
@@ -1376,6 +1499,7 @@ func (o *NSString) LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(rang
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Performs linguistic analysis on the specified string by enumerating the specific range of the string, providing the Block with the located tags.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSString) EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing(range_ NSRange, scheme *NSString, options NSLinguisticTaggerOptions, orthography *NSOrthography, block objc.Block) {
 	o.Ptr().Send(_nSStringSelEnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing, range_, scheme.Ptr(), options, orthography.Ptr(), block)

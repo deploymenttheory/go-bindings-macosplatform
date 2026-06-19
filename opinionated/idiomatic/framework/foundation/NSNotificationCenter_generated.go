@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A notification dispatch mechanism that enables the broadcast of information to registered observers.
+//
 // NotificationCenter wraps [raw.NSNotificationCenter] with a fluent Go API.
 type NotificationCenter struct {
 	inner *raw.NSNotificationCenter

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A structure that captures the components of a stroke and provides methods to find and interpolate points along the stroke’s path.
+//
 // StrokePath wraps [raw.PKStrokePath] with a fluent Go API.
 type StrokePath struct {
 	inner *raw.PKStrokePath

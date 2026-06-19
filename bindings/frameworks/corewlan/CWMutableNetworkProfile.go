@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Encapsulates a mutable network profile entry.
+//
 // Apple documentation: https://developer.apple.com/documentation/corewlan/cwmutablenetworkprofile
 type CWMutableNetworkProfile struct {
 	CWNetworkProfile

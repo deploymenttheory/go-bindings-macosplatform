@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// GKGraphNode coupled with a position on a 2D grid
+// A node in a navigation graph, associated with a position on a discrete two-dimensional grid.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkgridgraphnode
 type GKGridGraphNode struct {
@@ -35,6 +35,7 @@ func GKGridGraphNodeFromID(id objc.ID) *GKGridGraphNode {
 	return o
 }
 
+// Creates a graph node with the specified position on a grid.
 func GKGridGraphNodeNodeWithGridPosition(gridPosition unsafe.Pointer) *GKGridGraphNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGridGraphNode), _gKGridGraphNodeSelNodeWithGridPosition, gridPosition)
 	if _ret != 0 {
@@ -43,6 +44,7 @@ func GKGridGraphNodeNodeWithGridPosition(gridPosition unsafe.Pointer) *GKGridGra
 	return GKGridGraphNodeFromID(_ret)
 }
 
+// Initializes a graph node with the specified position on a grid.
 func (o *GKGridGraphNode) InitWithGridPosition(gridPosition unsafe.Pointer) *GKGridGraphNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGridGraphNodeSelInitWithGridPosition, gridPosition)
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object you use to create an optimizer.
+//
 // OptimizerDescriptor wraps [raw.MLCOptimizerDescriptor] with a fluent Go API.
 type OptimizerDescriptor struct {
 	inner *raw.MLCOptimizerDescriptor

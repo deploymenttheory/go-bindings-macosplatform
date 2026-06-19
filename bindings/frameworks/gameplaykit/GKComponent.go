@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A component is the data and logic for one part of an object in an entity-component system. Entities have many components but components are associated with only a single entity. Components across entities are best arranged in ComponentSystems, which are homogeneous collections of components that the game logic updates in a deterministic order. @see GKComponentSystem
+// The abstract superclass for creating objects that add specific gameplay functionality to an entity.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkcomponent
 type GKComponent struct {
@@ -35,17 +35,17 @@ func GKComponentFromID(id objc.ID) *GKComponent {
 	return o
 }
 
-// Updates the component with the given delta time since the last update. Each component should perform its time-based logic in this method.
+// Performs any custom periodic actions defined by the component subclass.
 func (o *GKComponent) UpdateWithDeltaTime(seconds float64) {
 	o.Ptr().Send(_gKComponentSelUpdateWithDeltaTime, seconds)
 }
 
-// Override this to perform game logic when this component is added to an entity
+// Notifies the component that it has been assigned to an entity.
 func (o *GKComponent) DidAddToEntity() {
 	o.Ptr().Send(_gKComponentSelDidAddToEntity)
 }
 
-// Override this to perform game logic before this entity is removed from it's entity
+// Notifies the component that it has been removed from an entity.
 func (o *GKComponent) WillRemoveFromEntity() {
 	o.Ptr().Send(_gKComponentSelWillRemoveFromEntity)
 }

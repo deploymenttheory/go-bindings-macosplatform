@@ -49,7 +49,7 @@ func (o *ASAuthorizationProviderExtensionUserLoginConfiguration) InitWithLoginUs
 // @abstract Sets custom claims to be added to the embedded assertion request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
 func (o *ASAuthorizationProviderExtensionUserLoginConfiguration) SetCustomAssertionRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionUserLoginConfigurationSelSetCustomAssertionRequestHeaderClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionUserLoginConfigurationSelSetCustomAssertionRequestHeaderClaimsReturningError, claims.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -59,7 +59,7 @@ func (o *ASAuthorizationProviderExtensionUserLoginConfiguration) SetCustomAssert
 // @abstract Sets custom claims to be added to the embedded assertion request body. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
 func (o *ASAuthorizationProviderExtensionUserLoginConfiguration) SetCustomAssertionRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionUserLoginConfigurationSelSetCustomAssertionRequestBodyClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionUserLoginConfigurationSelSetCustomAssertionRequestBodyClaimsReturningError, claims.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -69,7 +69,7 @@ func (o *ASAuthorizationProviderExtensionUserLoginConfiguration) SetCustomAssert
 // @abstract Sets custom claims to be added to the login request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
 func (o *ASAuthorizationProviderExtensionUserLoginConfiguration) SetCustomLoginRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionUserLoginConfigurationSelSetCustomLoginRequestHeaderClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionUserLoginConfigurationSelSetCustomLoginRequestHeaderClaimsReturningError, claims.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -79,7 +79,7 @@ func (o *ASAuthorizationProviderExtensionUserLoginConfiguration) SetCustomLoginR
 // @abstract Sets custom claims to be added to the login request body. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
 func (o *ASAuthorizationProviderExtensionUserLoginConfiguration) SetCustomLoginRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionUserLoginConfigurationSelSetCustomLoginRequestBodyClaimsReturningError, claims, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _aSAuthorizationProviderExtensionUserLoginConfigurationSelSetCustomLoginRequestBodyClaimsReturningError, claims.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}

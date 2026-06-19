@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that executes unix applications.
+//
 // UserUnixTask wraps [raw.NSUserUnixTask] with a fluent Go API.
 type UserUnixTask struct {
 	inner *raw.NSUserUnixTask
@@ -36,18 +38,24 @@ func NewUserUnixTask() *UserUnixTask {
 	return &UserUnixTask{inner: raw.NSUserUnixTaskFromID(_id)}
 }
 
+// The standard input stream.
+//
 // WithStandardInput sets the standardInput property and returns the receiver for chaining.
 func (x *UserUnixTask) WithStandardInput(standardInput *FileHandle) *UserUnixTask {
 	x.inner.SetStandardInput(standardInput.Unwrap())
 	return x
 }
 
+// The standard output stream.
+//
 // WithStandardOutput sets the standardOutput property and returns the receiver for chaining.
 func (x *UserUnixTask) WithStandardOutput(standardOutput *FileHandle) *UserUnixTask {
 	x.inner.SetStandardOutput(standardOutput.Unwrap())
 	return x
 }
 
+// The standard error stream.
+//
 // WithStandardError sets the standardError property and returns the receiver for chaining.
 func (x *UserUnixTask) WithStandardError(standardError *FileHandle) *UserUnixTask {
 	x.inner.SetStandardError(standardError.Unwrap())
@@ -60,6 +68,8 @@ func (x *UserUnixTask) WithScriptingProperties(scriptingProperties *raw.NSDictio
 	return x
 }
 
+// Execute the unix script with the specified arguments.
+//
 // ExecuteWithArgumentsCompletionHandler calls the underlying ExecuteWithArgumentsCompletionHandler.
 func (x *UserUnixTask) ExecuteWithArgumentsCompletionHandler(arguments *raw.NSArray[*raw.NSString], handler func(unsafe.Pointer)) {
 	x.inner.ExecuteWithArgumentsCompletionHandler(arguments, handler)

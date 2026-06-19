@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A PDFAnnotationTextWidget object allows you to manage the appearance and content of text fields.
+//
 // AnnotationTextWidget wraps [raw.PDFAnnotationTextWidget] with a fluent Go API.
 type AnnotationTextWidget struct {
 	inner *raw.PDFAnnotationTextWidget
@@ -40,96 +42,128 @@ func NewAnnotationTextWidget() *AnnotationTextWidget {
 	return &AnnotationTextWidget{inner: raw.PDFAnnotationTextWidgetFromID(_id)}
 }
 
+// Returns the page that the annotation is associated with.
+//
 // WithPage sets the page property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithPage(page *Page) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetPage(page.Unwrap())
 	return x
 }
 
+// Returns the type of the annotation.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithType(type_ string) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetType(foundation.NSStringStringWithUTF8String(type_))
 	return x
 }
 
+// Returns the bounding box for the annotation in page space.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithBounds(bounds corefoundation.CGRect) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetBounds(bounds)
 	return x
 }
 
+// Returns a Boolean value indicating whether the annotation should be displayed.
+//
 // WithShouldDisplay sets the shouldDisplay property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithShouldDisplay(shouldDisplay bool) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetShouldDisplay(shouldDisplay)
 	return x
 }
 
+// Returns a Boolean value indicating whether the annotation should appear when the document is printed.
+//
 // WithShouldPrint sets the shouldPrint property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithShouldPrint(shouldPrint bool) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetShouldPrint(shouldPrint)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithHighlighted(highlighted bool) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetHighlighted(highlighted)
 	return x
 }
 
+// The font the annotation uses to display text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithFont(font *appkit.NSFont) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetFont(font)
 	return x
 }
 
+// The font color the annotation uses to display text.
+//
 // WithFontColor sets the fontColor property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithFontColor(fontColor *appkit.NSColor) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetFontColor(fontColor)
 	return x
 }
 
+// The fill color for drawing a circle, line, or square annotation.
+//
 // WithInteriorColor sets the interiorColor property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithInteriorColor(interiorColor *appkit.NSColor) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetInteriorColor(interiorColor)
 	return x
 }
 
+// The alignment of the free text and text widget annotation’s text content.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithAlignment(alignment appkit.NSTextAlignment) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetAlignment(alignment)
 	return x
 }
 
+// The point where a line begins, in annotation-space coordinates.
+//
 // WithStartPoint sets the startPoint property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetStartPoint(startPoint)
 	return x
 }
 
+// The point where a line ends, in annotation-space coordinates.
+//
 // WithEndPoint sets the endPoint property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetEndPoint(endPoint)
 	return x
 }
 
+// The style of the line annotation’s starting point, such as square or filled arrowhead.
+//
 // WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetStartLineStyle(raw.PDFLineStyle(startLineStyle))
 	return x
 }
 
+// The style of the line annotation’s ending point, such as square or filled arrowhead.
+//
 // WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetEndLineStyle(raw.PDFLineStyle(endLineStyle))
 	return x
 }
 
+// The type of icon to display for a pop-up text annotation.
+//
 // WithIconType sets the iconType property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithIconType(iconType PDFTextAnnotationIconType) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetIconType(raw.PDFTextAnnotationIconType(iconType))
 	return x
 }
 
+// An array of values that represents the points bounding the marked-up text.
+//
 // WithQuadrilateralPoints sets the collection, converting the Go slice to an NSArray.
 func (x *AnnotationTextWidget) WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationTextWidget {
 	if len(items) == 0 {
@@ -151,72 +185,96 @@ func (x *AnnotationTextWidget) WithQuadrilateralPoints(items ...*foundation.NSVa
 	return x
 }
 
+// The markup type that the annotation displays, either highlight, strikethrough, underline, or redact.
+//
 // WithMarkupType sets the markupType property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithMarkupType(markupType PDFMarkupType) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetMarkupType(raw.PDFMarkupType(markupType))
 	return x
 }
 
+// The type of button widget control, either radio button, push button, or checkbox.
+//
 // WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetWidgetControlType(raw.PDFWidgetControlType(widgetControlType))
 	return x
 }
 
+// A Boolean value that indicates whether the text widget annotation displays multiple lines.
+//
 // WithMultiline sets the multiline property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithMultiline(multiline bool) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetMultiline(multiline)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation divides the text widget’s bounds into equally spaced segments, such as in a form entry field.
+//
 // WithComb sets the comb property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithComb(comb bool) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetComb(comb)
 	return x
 }
 
+// The maximum number of characters the text widget annotation allows.
+//
 // WithMaximumLength sets the maximumLength property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithMaximumLength(maximumLength int) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetMaximumLength(maximumLength)
 	return x
 }
 
+// The string value of the widget annotation.
+//
 // WithWidgetStringValue sets the widgetStringValue property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithWidgetStringValue(widgetStringValue string) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetWidgetStringValue(foundation.NSStringStringWithUTF8String(widgetStringValue))
 	return x
 }
 
+// The string value that the widget reverts to when performing a reset form action.
+//
 // WithWidgetDefaultStringValue sets the widgetDefaultStringValue property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithWidgetDefaultStringValue(widgetDefaultStringValue string) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetWidgetDefaultStringValue(foundation.NSStringStringWithUTF8String(widgetDefaultStringValue))
 	return x
 }
 
+// A Boolean value that indicates whether clicking or tapping a selected radio button toggles it to an unselected state.
+//
 // WithAllowsToggleToOff sets the allowsToggleToOff property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithAllowsToggleToOff(allowsToggleToOff bool) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetAllowsToggleToOff(allowsToggleToOff)
 	return x
 }
 
+// A Boolean value that indicates whether radio buttons in a group turn on and off in unison.
+//
 // WithRadiosInUnison sets the radiosInUnison property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithRadiosInUnison(radiosInUnison bool) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetRadiosInUnison(radiosInUnison)
 	return x
 }
 
+// A Boolean value that determines whether the widget is editable.
+//
 // WithReadOnly sets the readOnly property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithReadOnly(readOnly bool) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetReadOnly(readOnly)
 	return x
 }
 
+// A Boolean value that indicates whether the choice widget annotation is a list or a pop-up menu.
+//
 // WithListChoice sets the listChoice property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithListChoice(listChoice bool) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetListChoice(listChoice)
 	return x
 }
 
+// An array of strings that specifies the options in either a list or a pop-up menu.
+//
 // WithChoices sets the collection, converting the Go slice to an NSArray.
 func (x *AnnotationTextWidget) WithChoices(items ...*foundation.NSString) *AnnotationTextWidget {
 	if len(items) == 0 {
@@ -238,6 +296,8 @@ func (x *AnnotationTextWidget) WithChoices(items ...*foundation.NSString) *Annot
 	return x
 }
 
+// An array of strings that specifies the export values for items in a list or a pop-up menu.
+//
 // WithValues sets the collection, converting the Go slice to an NSArray.
 func (x *AnnotationTextWidget) WithValues(items ...*foundation.NSString) *AnnotationTextWidget {
 	if len(items) == 0 {
@@ -259,60 +319,80 @@ func (x *AnnotationTextWidget) WithValues(items ...*foundation.NSString) *Annota
 	return x
 }
 
+// The current state of the button widget annotation.
+//
 // WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetButtonWidgetState(raw.PDFWidgetCellState(buttonWidgetState))
 	return x
 }
 
+// A string value that differentiates button widgets in the same group, such as to identify mutually exclusive radio buttons from each other.
+//
 // WithButtonWidgetStateString sets the buttonWidgetStateString property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetButtonWidgetStateString(foundation.NSStringStringWithUTF8String(buttonWidgetStateString))
 	return x
 }
 
+// A Boolean value that indicates whether the pop-up annotation is in an opened state, displaying its text content, or in a closed state, displaying an icon.
+//
 // WithOpen sets the open property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithOpen(open bool) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetOpen(open)
 	return x
 }
 
+// The destination for a link annotation.
+//
 // WithDestination sets the destination property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithDestination(destination *Destination) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetDestination(destination.Unwrap())
 	return x
 }
 
+// A URL for a link annotation.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithURL(uRL string) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// The widget identifier for form annotation actions and behaviors.
+//
 // WithFieldName sets the fieldName property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithFieldName(fieldName string) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetFieldName(foundation.NSStringStringWithUTF8String(fieldName))
 	return x
 }
 
+// The title of push button widget annotations.
+//
 // WithCaption sets the caption property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithCaption(caption string) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetCaption(foundation.NSStringStringWithUTF8String(caption))
 	return x
 }
 
+// The color of the widget’s background.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithBackgroundColor(backgroundColor *appkit.NSColor) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetBackgroundColor(backgroundColor)
 	return x
 }
 
+// The name of the stamp, a text or graphics annotation that emulates a rubber stamp effect.
+//
 // WithStampName sets the stampName property and returns the receiver for chaining.
 func (x *AnnotationTextWidget) WithStampName(stampName string) *AnnotationTextWidget {
 	x.inner.PDFAnnotation.SetStampName(foundation.NSStringStringWithUTF8String(stampName))
 	return x
 }
 
+// Returns the string assigned to the annotation.
+//
 // StringValue calls the underlying StringValue.
 func (x *AnnotationTextWidget) StringValue() string {
 	_r := x.inner.StringValue()
@@ -322,6 +402,8 @@ func (x *AnnotationTextWidget) StringValue() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the string for the annotation.
+//
 // SetStringValue calls the underlying SetStringValue.
 func (x *AnnotationTextWidget) SetStringValue(value string) {
 	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(value))
@@ -337,11 +419,15 @@ func (x *AnnotationTextWidget) SetAttributedStringValue(value *foundation.NSAttr
 	x.inner.SetAttributedStringValue(value)
 }
 
+// Returns the rotation angle of the annotation text field in degrees.
+//
 // Rotation calls the underlying Rotation.
 func (x *AnnotationTextWidget) Rotation() int {
 	return x.inner.Rotation()
 }
 
+// Sets the rotation angle of the annotation text field in degrees.
+//
 // SetRotation calls the underlying SetRotation.
 func (x *AnnotationTextWidget) SetRotation(rotation int) {
 	x.inner.SetRotation(rotation)

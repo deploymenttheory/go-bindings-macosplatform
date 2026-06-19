@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An interface for objects that define resources for Metal Performance Shaders state containers.
+//
 // StateResourceList wraps [raw.MPSStateResourceList] with a fluent Go API.
 type StateResourceList struct {
 	inner *raw.MPSStateResourceList

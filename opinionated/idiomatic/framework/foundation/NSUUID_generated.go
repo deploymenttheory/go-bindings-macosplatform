@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A universally unique value that can be used to identify types, interfaces, and other items.
+//
 // UUID wraps [raw.NSUUID] with a fluent Go API.
 type UUID struct {
 	inner *raw.NSUUID
@@ -36,6 +38,8 @@ func NewUUID() *UUID {
 	return &UUID{inner: raw.NSUUIDFromID(_id)}
 }
 
+// Initializes a new UUID with the formatted string.
+//
 // NewUUIDWithUUIDString creates a new [UUID].
 func NewUUIDWithUUIDString(string_ string) *UUID {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUUID")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewUUIDWithUUIDString(string_ string) *UUID {
 	return &UUID{inner: raw.NSUUIDFromID(_id)}
 }
 
+// Initializes a new UUID with the given bytes.
+//
 // NewUUIDWithUUIDBytes creates a new [UUID].
 func NewUUIDWithUUIDBytes(bytes_ *uint8) *UUID {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUUID")), objc.RegisterName("alloc"))
@@ -56,11 +62,15 @@ func (x *UUID) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*ra
 	return x
 }
 
+// Returns the UUID as bytes.
+//
 // GetUUIDBytes calls the underlying GetUUIDBytes.
 func (x *UUID) GetUUIDBytes(uuid *uint8) {
 	x.inner.GetUUIDBytes(uuid)
 }
 
+// Compares the receiver to another NSUUID in constant time.
+//
 // Compare calls the underlying Compare.
 func (x *UUID) Compare(otherUUID *raw.NSUUID) NSComparisonResult {
 	return NSComparisonResult(x.inner.Compare(otherUUID))

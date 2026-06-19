@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A proxy for a Safari app extension toolbar item in a Safari window.
+//
 // Apple documentation: https://developer.apple.com/documentation/safariservices/sfsafaritoolbaritem
 type SFSafariToolbarItem struct {
 	foundation.NSObject
@@ -36,22 +38,22 @@ func SFSafariToolbarItemFromID(id objc.ID) *SFSafariToolbarItem {
 	return o
 }
 
-// Sets the enabled state and the badge text for the toolbar item. The badge text is visible even when the toolbar item is disabled.
+// Sets the enabled state and the badge text for the toolbar item.
 func (o *SFSafariToolbarItem) SetEnabledWithBadgeText(enabled bool, badgeText *foundation.NSString) {
 	o.Ptr().Send(_sFSafariToolbarItemSelSetEnabledWithBadgeText, enabled, badgeText.Ptr())
 }
 
-// Sets the enabled state for the toolbar item.
+// Sets whether the toolbar item is enabled.
 func (o *SFSafariToolbarItem) SetEnabled(enabled bool) {
 	o.Ptr().Send(_sFSafariToolbarItemSelSetEnabled, enabled)
 }
 
-// Sets the badge text for the toolbar item. The badge text is visible even when the toolbar item is disabled. Setting the text to nil will clear the badge.
+// Sets the badge text for the toolbar item.
 func (o *SFSafariToolbarItem) SetBadgeText(badgeText *foundation.NSString) {
 	o.Ptr().Send(_sFSafariToolbarItemSelSetBadgeText, badgeText.Ptr())
 }
 
-// Sets the image for the toolbar item. Setting the image to nil will set the default image.
+// Sets the image displayed in the toolbar button.
 func (o *SFSafariToolbarItem) SetImage(image *appkit.NSImage) {
 	o.Ptr().Send(_sFSafariToolbarItemSelSetImage, image.Ptr())
 }

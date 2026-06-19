@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view controller that provides the user interface for choosing assets from the photo library.
+//
 // PickerViewController wraps [raw.PHPickerViewController] with a fluent Go API.
 type PickerViewController struct {
 	inner *raw.PHPickerViewController
@@ -30,7 +32,7 @@ func PickerViewControllerFromID(id objc.ID) *PickerViewController {
 	return &PickerViewController{inner: raw.PHPickerViewControllerFromID(id)}
 }
 
-// Initializes a new picker with the \c configuration the picker should use.
+// Creates a new picker view controller with the configuration you specify.
 //
 // NewPickerViewControllerWithConfiguration creates a new [PickerViewController].
 func NewPickerViewControllerWithConfiguration(configuration *raw.PHPickerConfiguration) *PickerViewController {
@@ -39,7 +41,7 @@ func NewPickerViewControllerWithConfiguration(configuration *raw.PHPickerConfigu
 	return &PickerViewController{inner: raw.PHPickerViewControllerFromID(_id)}
 }
 
-// The delegate to be notified.
+// The picker’s delegate object.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PickerViewController) WithDelegate(delegate raw.PHPickerViewControllerDelegate) *PickerViewController {
@@ -47,42 +49,42 @@ func (x *PickerViewController) WithDelegate(delegate raw.PHPickerViewControllerD
 	return x
 }
 
-// Updates the picker using the configuration.
+// Customizes your app’s photo picker according to the given configuration.
 //
 // UpdatePickerUsingConfiguration calls the underlying UpdatePickerUsingConfiguration.
 func (x *PickerViewController) UpdatePickerUsingConfiguration(configuration *raw.PHPickerUpdateConfiguration) {
 	x.inner.UpdatePickerUsingConfiguration(configuration)
 }
 
-// Deselects selected assets in the picker. @discussion Does nothing if asset identifiers are invalid or not selected, or \c photoLibrary is not specified in the configuration.
+// Deselects assets that are in a selected state.
 //
 // DeselectAssetsWithIdentifiers calls the underlying DeselectAssetsWithIdentifiers.
 func (x *PickerViewController) DeselectAssetsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) {
 	x.inner.DeselectAssetsWithIdentifiers(identifiers)
 }
 
-// Reorders selected assets in the picker. A \c nil \c afterIdentifier means moving to the front. @discussion Does nothing if asset identifiers are invalid or not selected, or \c photoLibrary is not specified in the configuration.
+// Reorders assets that are in a selected state.
 //
 // MoveAssetWithIdentifierAfterAssetWithIdentifier calls the underlying MoveAssetWithIdentifierAfterAssetWithIdentifier.
 func (x *PickerViewController) MoveAssetWithIdentifierAfterAssetWithIdentifier(identifier string, afterIdentifier string) {
 	x.inner.MoveAssetWithIdentifierAfterAssetWithIdentifier(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(afterIdentifier))
 }
 
-// Scrolls content to the initial position if possible.
+// Resets the visible photo thumbnails by scrolling the view to the picker’s initial position.
 //
 // ScrollToInitialPosition calls the underlying ScrollToInitialPosition.
 func (x *PickerViewController) ScrollToInitialPosition() {
 	x.inner.ScrollToInitialPosition()
 }
 
-// Zooms in content if possible.
+// Changes the picker’s content scale by making the photo thumbnails larger in the view.
 //
 // ZoomIn calls the underlying ZoomIn.
 func (x *PickerViewController) ZoomIn() {
 	x.inner.ZoomIn()
 }
 
-// Zooms out content if possible.
+// Changes the picker’s content scale by making the photo thumbnails smaller in the view.
 //
 // ZoomOut calls the underlying ZoomOut.
 func (x *PickerViewController) ZoomOut() {

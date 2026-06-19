@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A class that represents a calendar in EventKit.
+//
 // Calendar wraps [raw.EKCalendar] with a fluent Go API.
 type Calendar struct {
 	inner *raw.EKCalendar
@@ -39,7 +41,7 @@ func NewCalendar() *Calendar {
 	return &Calendar{inner: raw.EKCalendarFromID(_id)}
 }
 
-// @property   source @abstract   The source representing the 'account' this calendar belongs to. This is only settable when initially creating a calendar and then effectively read-only after that. That is, you can create a calendar, but you cannot move it to another source. @discussion This will be nil for new calendars until you set it.
+// The source object representing the account to which this calendar belongs.
 //
 // WithSource sets the source property and returns the receiver for chaining.
 func (x *Calendar) WithSource(source *Source) *Calendar {
@@ -47,7 +49,7 @@ func (x *Calendar) WithSource(source *Source) *Calendar {
 	return x
 }
 
-// @property   title @abstract   The title of the calendar.
+// The calendar’s title.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Calendar) WithTitle(title string) *Calendar {
@@ -55,7 +57,7 @@ func (x *Calendar) WithTitle(title string) *Calendar {
 	return x
 }
 
-// @property   color @abstract   Returns the calendar color as a NSColor. @discussion This will be nil for new calendars until you set it.
+// The calendar’s color.
 //
 // WithColor sets the color property and returns the receiver for chaining.
 func (x *Calendar) WithColor(color *appkit.NSColor) *Calendar {

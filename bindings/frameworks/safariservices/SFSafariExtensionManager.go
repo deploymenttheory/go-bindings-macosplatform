@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that your app uses to find out the current state of a Safari extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/safariservices/sfsafariextensionmanager
 type SFSafariExtensionManager struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func SFSafariExtensionManagerFromID(id objc.ID) *SFSafariExtensionManager {
 	return o
 }
 
+// Returns the current state of a Safari extension.
 func SFSafariExtensionManagerGetStateOfSafariExtensionWithIdentifierCompletionHandler(identifier *foundation.NSString, completionHandler func(*SFSafariExtensionState, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

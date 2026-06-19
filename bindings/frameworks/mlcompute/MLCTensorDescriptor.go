@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object you use to create a tensor.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlctensordescriptor
 type MLCTensorDescriptor struct {
 	foundation.NSObject
@@ -45,25 +47,25 @@ func MLCTensorDescriptorFromID(id objc.ID) *MLCTensorDescriptor {
 	return o
 }
 
-// @abstract   Create a MLCTensorDescriptor object @param      shape       The tensor shape @param      dataType    The tensor data type @return     A new MLCTensorDescriptor object or nil if failure.
+// Creates a tensor descriptor with the shape and data type you specify.
 func MLCTensorDescriptorDescriptorWithShapeDataType(shape *foundation.NSArray[*foundation.NSNumber], dataType MLCDataType) *MLCTensorDescriptor {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelDescriptorWithShapeDataType, shape, dataType)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelDescriptorWithShapeDataType, shape.Ptr(), dataType)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MLCTensorDescriptorFromID(_ret)
 }
 
-// @abstract   Create a MLCTensorDescriptor object @param      shape              The tensor shape @param      sequenceLengths    The sequence lengths in tensor @param      sortedSequences    A boolean to indicate whether sequences are sorted @param      dataType           The tensor data type @return     A new MLCTensorDescriptor object or nil if failure. @discussion This method is provided as an easy to use API to create sequence tensors used by recurrent layers.
+// Creates a tensor descriptor with the shape, variable sequence lengths, sorting indicator, and data type you specify.
 func MLCTensorDescriptorDescriptorWithShapeSequenceLengthsSortedSequencesDataType(shape *foundation.NSArray[*foundation.NSNumber], sequenceLengths *foundation.NSArray[*foundation.NSNumber], sortedSequences bool, dataType MLCDataType) *MLCTensorDescriptor {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelDescriptorWithShapeSequenceLengthsSortedSequencesDataType, shape, sequenceLengths, sortedSequences, dataType)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelDescriptorWithShapeSequenceLengthsSortedSequencesDataType, shape.Ptr(), sequenceLengths.Ptr(), sortedSequences, dataType)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MLCTensorDescriptorFromID(_ret)
 }
 
-// @abstract   Create a MLCTensorDescriptor object @param      width              The tensor width @param      height             The tensor height @param      featureChannels    The number of feature channels @param      batchSize          The batch size @return     A new MLCTensorDescriptor object or nil if failure. @discussion This method is provided as an easy to use API to create [NCHW] tensors used by convolutional layers.
+// Creates a tensor descriptor with the width and height, number of feature channels, and batch size you specify.
 func MLCTensorDescriptorDescriptorWithWidthHeightFeatureChannelCountBatchSize(width uint, height uint, featureChannels uint, batchSize uint) *MLCTensorDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelDescriptorWithWidthHeightFeatureChannelCountBatchSize, width, height, featureChannels, batchSize)
 	if _ret != 0 {
@@ -72,7 +74,7 @@ func MLCTensorDescriptorDescriptorWithWidthHeightFeatureChannelCountBatchSize(wi
 	return MLCTensorDescriptorFromID(_ret)
 }
 
-// @abstract   Create a MLCTensorDescriptor object @param      width              The tensor width @param      height             The tensor height @param      featureChannelCount    The number of feature channels @param      batchSize          The batch size @param      dataType           The tensor data type @return     A new MLCTensorDescriptor object or nil if failure. @discussion This method is provided as an easy to use API to create [NCHW] tensors used by convolutional layers.
+// Creates a tensor descriptor with the width and height, number of feature channels, batch size, and data type you specify.
 func MLCTensorDescriptorDescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType(width uint, height uint, featureChannelCount uint, batchSize uint, dataType MLCDataType) *MLCTensorDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelDescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType, width, height, featureChannelCount, batchSize, dataType)
 	if _ret != 0 {
@@ -81,7 +83,7 @@ func MLCTensorDescriptorDescriptorWithWidthHeightFeatureChannelCountBatchSizeDat
 	return MLCTensorDescriptorFromID(_ret)
 }
 
-// @abstract   Create a MLCTensorDescriptor object @param      width                                      The tensor width @param      height                                    The tensor height @param      inputFeatureChannelCount     The number of input feature channels @param      outputFeatureChannelCount   The number of output feature channels @param      dataType                                The tensor data type @return     A new MLCTensorDescriptor object or nil if failure. @discussion This method is provided as an easy to use API to create a weight tensor.
+// Creates a tensor descriptor with the sizing, number of feature channels, and data type you specify.
 func MLCTensorDescriptorConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType(width uint, height uint, inputFeatureChannelCount uint, outputFeatureChannelCount uint, dataType MLCDataType) *MLCTensorDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType, width, height, inputFeatureChannelCount, outputFeatureChannelCount, dataType)
 	if _ret != 0 {
@@ -90,7 +92,7 @@ func MLCTensorDescriptorConvolutionWeightsDescriptorWithWidthHeightInputFeatureC
 	return MLCTensorDescriptorFromID(_ret)
 }
 
-// @abstract   Create a MLCTensorDescriptor object @param      inputFeatureChannelCount     The number of input feature channels @param      outputFeatureChannelCount   The number of output feature channels @param      dataType                                The tensor data type @return     A new MLCTensorDescriptor object or nil if failure. @discussion This method is provided as an easy to use API to create a weight tensor for a kernel of size 1.
+// Creates a tensor descriptor with the number of feature channels and data type you specify.
 func MLCTensorDescriptorConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType(inputFeatureChannelCount uint, outputFeatureChannelCount uint, dataType MLCDataType) *MLCTensorDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType, inputFeatureChannelCount, outputFeatureChannelCount, dataType)
 	if _ret != 0 {
@@ -99,7 +101,7 @@ func MLCTensorDescriptorConvolutionWeightsDescriptorWithInputFeatureChannelCount
 	return MLCTensorDescriptorFromID(_ret)
 }
 
-// @abstract   Create a MLCTensorDescriptor object @param      featureChannelCount     The number of input feature channels @param      dataType                     The tensor data type @return     A new MLCTensorDescriptor object or nil if failure. @discussion This method is provided as an easy to use API to create a bias tensor.
+// Creates a tensor descriptor with the number of feature channels and data type you specify.
 func MLCTensorDescriptorConvolutionBiasesDescriptorWithFeatureChannelCountDataType(featureChannelCount uint, dataType MLCDataType) *MLCTensorDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorDescriptor), _mLCTensorDescriptorSelConvolutionBiasesDescriptorWithFeatureChannelCountDataType, featureChannelCount, dataType)
 	if _ret != 0 {
@@ -122,14 +124,20 @@ func (o *MLCTensorDescriptor) DimensionCount() uint {
 
 // @property   shape @abstract   The size in each dimension
 func (o *MLCTensorDescriptor) Shape() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCTensorDescriptorSelShape)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTensorDescriptorSelShape)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property   stride @abstract   The stride in bytes in each dimension
 func (o *MLCTensorDescriptor) Stride() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCTensorDescriptorSelStride)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTensorDescriptorSelStride)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property   tensorAllocationSizeInBytes @abstract   The allocation size in bytes for a tensor.
@@ -140,8 +148,11 @@ func (o *MLCTensorDescriptor) TensorAllocationSizeInBytes() uint {
 
 // @property   sequenceLengths @abstract   TODO
 func (o *MLCTensorDescriptor) SequenceLengths() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCTensorDescriptorSelSequenceLengths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTensorDescriptorSelSequenceLengths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property   sortedSequences @abstract   Specifies whether the sequences are sorted or not.
@@ -152,8 +163,11 @@ func (o *MLCTensorDescriptor) SortedSequences() bool {
 
 // @property   batchSizePerSequenceStep @abstract   The batch size for each sequence @discussion We populate this only when sequenceLengths is valid. The length of this array should be the maximum sequence length in sequenceLengths (i.e sequenceLengths[0]).
 func (o *MLCTensorDescriptor) BatchSizePerSequenceStep() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCTensorDescriptorSelBatchSizePerSequenceStep)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTensorDescriptorSelBatchSizePerSequenceStep)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property   maxTensorDimensions @abstract   The maximum number of tensor dimensions supported

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A utility object for generating a list of completion strings based on a partial search string that you provide.
+//
 // LocalSearchCompleter wraps [raw.MKLocalSearchCompleter] with a fluent Go API.
 type LocalSearchCompleter struct {
 	inner *raw.MKLocalSearchCompleter
@@ -37,54 +39,72 @@ func NewLocalSearchCompleter() *LocalSearchCompleter {
 	return &LocalSearchCompleter{inner: raw.MKLocalSearchCompleterFromID(_id)}
 }
 
+// The search string that you want completions for.
+//
 // WithQueryFragment sets the queryFragment property and returns the receiver for chaining.
 func (x *LocalSearchCompleter) WithQueryFragment(queryFragment string) *LocalSearchCompleter {
 	x.inner.SetQueryFragment(foundation.NSStringStringWithUTF8String(queryFragment))
 	return x
 }
 
+// The region that defines the geographic scope of the search.
+//
 // WithRegion sets the region property and returns the receiver for chaining.
 func (x *LocalSearchCompleter) WithRegion(region raw.MKCoordinateRegion) *LocalSearchCompleter {
 	x.inner.SetRegion(region)
 	return x
 }
 
+// A value that indicates the importance of the configured region.
+//
 // WithRegionPriority sets the regionPriority property and returns the receiver for chaining.
 func (x *LocalSearchCompleter) WithRegionPriority(regionPriority MKLocalSearchRegionPriority) *LocalSearchCompleter {
 	x.inner.SetRegionPriority(raw.MKLocalSearchRegionPriority(regionPriority))
 	return x
 }
 
+// The filter options for the search results.
+//
 // WithFilterType sets the filterType property and returns the receiver for chaining.
 func (x *LocalSearchCompleter) WithFilterType(filterType MKSearchCompletionFilterType) *LocalSearchCompleter {
 	x.inner.SetFilterType(raw.MKSearchCompletionFilterType(filterType))
 	return x
 }
 
+// The types of search completions to include.
+//
 // WithResultTypes sets the resultTypes property and returns the receiver for chaining.
 func (x *LocalSearchCompleter) WithResultTypes(resultTypes MKLocalSearchCompleterResultType) *LocalSearchCompleter {
 	x.inner.SetResultTypes(raw.MKLocalSearchCompleterResultType(resultTypes))
 	return x
 }
 
+// A filter that lists point of interest categories to include or exclude in the search.
+//
 // WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
 func (x *LocalSearchCompleter) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalSearchCompleter {
 	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
 	return x
 }
 
+// A filter that lists which address options to include or exclude in search results.
+//
 // WithAddressFilter sets the addressFilter property and returns the receiver for chaining.
 func (x *LocalSearchCompleter) WithAddressFilter(addressFilter *AddressFilter) *LocalSearchCompleter {
 	x.inner.SetAddressFilter(addressFilter.Unwrap())
 	return x
 }
 
+// The object that receives the completion results.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *LocalSearchCompleter) WithDelegate(delegate raw.MKLocalSearchCompleterDelegate) *LocalSearchCompleter {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Cancels an in-progress search operation.
+//
 // Cancel calls the underlying Cancel.
 func (x *LocalSearchCompleter) Cancel() {
 	x.inner.Cancel()

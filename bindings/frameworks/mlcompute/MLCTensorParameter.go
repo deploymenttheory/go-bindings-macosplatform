@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A tensor parameter object.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlctensorparameter
 type MLCTensorParameter struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func MLCTensorParameterFromID(id objc.ID) *MLCTensorParameter {
 	return o
 }
 
-// @abstract   Create a tensor parameter @param      tensor            The unedrlying tensor @return     A new tensor parameter object
+// Creates a tensor parameter with the tensor you specify.
 func MLCTensorParameterParameterWithTensor(tensor *MLCTensor) *MLCTensorParameter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorParameter), _mLCTensorParameterSelParameterWithTensor, tensor.Ptr())
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func MLCTensorParameterParameterWithTensor(tensor *MLCTensor) *MLCTensorParamete
 	return MLCTensorParameterFromID(_ret)
 }
 
-// @abstract   Create a tensor parameter @param      tensor            The unedrlying tensor @param      optimizerData   The optimizer data needed for this input tensor @return     A new tensor parameter object
+// Creates a tensor parameter with the tensor and optimizer data you specify.
 func MLCTensorParameterParameterWithTensorOptimizerData(tensor *MLCTensor, optimizerData *foundation.NSArray[*MLCTensorData]) *MLCTensorParameter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorParameter), _mLCTensorParameterSelParameterWithTensorOptimizerData, tensor.Ptr(), optimizerData.Ptr())
 	if _ret != 0 {

@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A tile group encapsulates a collection of related tile definitions that are designed to be pieced together within a tile map. How those tiles are pieced together is governed by the set of rules. When a tile group is placed in a tile map, the map evaluates the rules to determine which tiles should be placed to achieve the desired outcome.
+// A set of tiles that collectively define one type of terrain.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/sktilegroup
 type SKTileGroup struct {
@@ -58,7 +58,7 @@ func SKTileGroupTileGroupWithRules(rules *foundation.NSArray[*SKTileGroupRule]) 
 	return SKTileGroupFromID(_ret)
 }
 
-// Create an empty tile group. Placing this in a tile map will erase the existing tile at that location.
+// Creates an empty tile that erases the existing tile at that location on a tile map.
 func SKTileGroupEmptyTileGroup() *SKTileGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileGroup), _sKTileGroupSelEmptyTileGroup)
 	if _ret != 0 {
@@ -67,7 +67,7 @@ func SKTileGroupEmptyTileGroup() *SKTileGroup {
 	return SKTileGroupFromID(_ret)
 }
 
-// Initilize a simple tile group for a single tile definition. This creates and initializes the SKTileGroupRule necessary to place the provided tile definition in a tile map. @param tileDefinition tile definition we wish to place in a tile map
+// Creates and initializes a simple tile group with a single tile definition.
 func (o *SKTileGroup) InitWithTileDefinition(tileDefinition *SKTileDefinition) *SKTileGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileGroupSelInitWithTileDefinition, tileDefinition.Ptr())
 	if _ret != 0 {
@@ -76,7 +76,7 @@ func (o *SKTileGroup) InitWithTileDefinition(tileDefinition *SKTileDefinition) *
 	return SKTileGroupFromID(_ret)
 }
 
-// Initilize a tile group with the specified rules. @param rules the rules the group will use to determine tile placement
+// Creates and initializes a tile group with the specified tile group rules.
 func (o *SKTileGroup) InitWithRules(rules *foundation.NSArray[*SKTileGroupRule]) *SKTileGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileGroupSelInitWithRules, rules.Ptr())
 	if _ret != 0 {

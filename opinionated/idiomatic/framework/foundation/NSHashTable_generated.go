@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection similar to a set, but with broader range of available memory semantics.
+//
 // HashTable wraps [raw.NSHashTable] with a fluent Go API.
 type HashTable struct {
 	inner *raw.NSHashTable[objc.ID]
@@ -29,6 +31,8 @@ func HashTableFromID(id objc.ID) *HashTable {
 	return &HashTable{inner: raw.NSHashTableFromID[objc.ID](id)}
 }
 
+// Returns a hash table initialized with the given attributes.
+//
 // NewHashTableWithOptionsCapacity creates a new [HashTable].
 func NewHashTableWithOptionsCapacity(options NSPointerFunctionsOptions, initialCapacity uint) *HashTable {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSHashTable")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewHashTableWithOptionsCapacity(options NSPointerFunctionsOptions, initialC
 	return &HashTable{inner: raw.NSHashTableFromID[objc.ID](_id)}
 }
 
+// Returns a hash table initialized with the given functions and capacity.
+//
 // NewHashTableWithPointerFunctionsCapacity creates a new [HashTable].
 func NewHashTableWithPointerFunctionsCapacity(functions *raw.NSPointerFunctions, initialCapacity uint) *HashTable {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSHashTable")), objc.RegisterName("alloc"))
@@ -49,61 +55,85 @@ func (x *HashTable) WithScriptingProperties(scriptingProperties *raw.NSDictionar
 	return x
 }
 
+// Determines whether the hash table contains a given object, and returns that object if it is present
+//
 // Member calls the underlying Member.
 func (x *HashTable) Member(object objc.ID) objc.ID {
 	return x.inner.Member(object)
 }
 
+// Returns an enumerator object that lets you access each object in the hash table.
+//
 // ObjectEnumerator calls the underlying ObjectEnumerator.
 func (x *HashTable) ObjectEnumerator() *raw.NSEnumerator[objc.ID] {
 	return x.inner.ObjectEnumerator()
 }
 
+// Adds a given object to the hash table.
+//
 // AddObject calls the underlying AddObject.
 func (x *HashTable) AddObject(object objc.ID) {
 	x.inner.AddObject(object)
 }
 
+// Removes a given object from the hash table.
+//
 // RemoveObject calls the underlying RemoveObject.
 func (x *HashTable) RemoveObject(object objc.ID) {
 	x.inner.RemoveObject(object)
 }
 
+// Removes all objects from the hash table.
+//
 // RemoveAllObjects calls the underlying RemoveAllObjects.
 func (x *HashTable) RemoveAllObjects() {
 	x.inner.RemoveAllObjects()
 }
 
+// Returns a Boolean value that indicates whether the hash table contains a given object.
+//
 // ContainsObject calls the underlying ContainsObject.
 func (x *HashTable) ContainsObject(anObject objc.ID) bool {
 	return x.inner.ContainsObject(anObject)
 }
 
+// Returns a Boolean value that indicates whether a given hash table intersects with the receiving hash table.
+//
 // IntersectsHashTable calls the underlying IntersectsHashTable.
 func (x *HashTable) IntersectsHashTable(other *raw.NSHashTable[objc.ID]) bool {
 	return x.inner.IntersectsHashTable(other)
 }
 
+// Returns a Boolean value that indicates whether a given hash table is equal to the receiving hash table.
+//
 // IsEqualToHashTable calls the underlying IsEqualToHashTable.
 func (x *HashTable) IsEqualToHashTable(other *raw.NSHashTable[objc.ID]) bool {
 	return x.inner.IsEqualToHashTable(other)
 }
 
+// Returns a Boolean value that indicates whether every element in the receiving hash table is also present in another given hash table.
+//
 // IsSubsetOfHashTable calls the underlying IsSubsetOfHashTable.
 func (x *HashTable) IsSubsetOfHashTable(other *raw.NSHashTable[objc.ID]) bool {
 	return x.inner.IsSubsetOfHashTable(other)
 }
 
+// Removes from the receiving hash table each element that isn’t a member of another given hash table.
+//
 // IntersectHashTable calls the underlying IntersectHashTable.
 func (x *HashTable) IntersectHashTable(other *raw.NSHashTable[objc.ID]) {
 	x.inner.IntersectHashTable(other)
 }
 
+// Adds each element in another given hash table to the receiving hash table, if not present.
+//
 // UnionHashTable calls the underlying UnionHashTable.
 func (x *HashTable) UnionHashTable(other *raw.NSHashTable[objc.ID]) {
 	x.inner.UnionHashTable(other)
 }
 
+// Removes each element in another given hash table from the receiving hash table, if present.
+//
 // MinusHashTable calls the underlying MinusHashTable.
 func (x *HashTable) MinusHashTable(other *raw.NSHashTable[objc.ID]) {
 	x.inner.MinusHashTable(other)

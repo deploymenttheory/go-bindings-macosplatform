@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A joint that simulates a spring connecting two physics bodies.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skphysicsjointspring
 type SKPhysicsJointSpring struct {
 	SKPhysicsJoint
@@ -34,6 +36,7 @@ func SKPhysicsJointSpringFromID(id objc.ID) *SKPhysicsJointSpring {
 	return o
 }
 
+// Creates a new spring joint.
 func SKPhysicsJointSpringJointWithBodyABodyBAnchorAAnchorB(bodyA *SKPhysicsBody, bodyB *SKPhysicsBody, anchorA corefoundation.CGPoint, anchorB corefoundation.CGPoint) *SKPhysicsJointSpring {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsJointSpring), _sKPhysicsJointSpringSelJointWithBodyABodyBAnchorAAnchorB, bodyA.Ptr(), bodyB.Ptr(), anchorA, anchorB)
 	if _ret != 0 {

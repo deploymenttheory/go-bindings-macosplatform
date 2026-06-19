@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A VPN On Demand rule that connects the VPN.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neondemandruleconnect
 type NEOnDemandRuleConnect struct {
 	NEOnDemandRule

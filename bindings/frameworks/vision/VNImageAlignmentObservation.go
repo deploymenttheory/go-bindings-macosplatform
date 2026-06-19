@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for image-analysis results that describe the relative alignment of two images.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnimagealignmentobservation
 type VNImageAlignmentObservation struct {
 	VNObservation

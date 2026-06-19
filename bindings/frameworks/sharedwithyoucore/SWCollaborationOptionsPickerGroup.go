@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a group of collaboration options that the system displays together with mutually exclusive options.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationoptionspickergroup
 type SWCollaborationOptionsPickerGroup struct {
 	SWCollaborationOptionsGroup

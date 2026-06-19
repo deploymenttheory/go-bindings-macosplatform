@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides information about the chunk of media at the location of a sample.
+//
 // SampleCursorChunk wraps [raw.MESampleCursorChunk] with a fluent Go API.
 type SampleCursorChunk struct {
 	inner *raw.MESampleCursorChunk
@@ -30,7 +32,7 @@ func SampleCursorChunkFromID(id objc.ID) *SampleCursorChunk {
 	return &SampleCursorChunk{inner: raw.MESampleCursorChunkFromID(id)}
 }
 
-// @property		initWithByteSource @abstract		The initializer for the MESampleCursorChunk class. @param			byteSource The MEByteSource to be used to read the data for the sample. @param			chunkStorageRange The offset location and length of the sample's chunk within the MEByteSource. @param			chunkInfo A completed AVSampleCursorChunkInfo with details about the chunk in the media. @param			sampleIndexWithinChunk The offset of the sample within the chunk, in samples.
+// Creates a new sample cursor chunk with byte source and chunk data that you provide.
 //
 // NewSampleCursorChunkWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk creates a new [SampleCursorChunk].
 func NewSampleCursorChunkWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk(byteSource *raw.MEByteSource, chunkStorageRange avfoundation.AVSampleCursorStorageRange, chunkInfo avfoundation.AVSampleCursorChunkInfo, sampleIndexWithinChunk int) *SampleCursorChunk {

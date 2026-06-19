@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing the span of time between a specific start date and end date.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdateinterval
 type NSDateInterval struct {
 	NSObject
@@ -40,6 +42,7 @@ func NSDateIntervalFromID(id objc.ID) *NSDateInterval {
 	return o
 }
 
+// Initializes a date interval by setting the start and end date to the current date.
 func (o *NSDateInterval) Init() *NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalSelInit)
 	if _ret != 0 {
@@ -48,6 +51,7 @@ func (o *NSDateInterval) Init() *NSDateInterval {
 	return NSDateIntervalFromID(_ret)
 }
 
+// Returns a date interval initialized from data in the given unarchiver.
 func (o *NSDateInterval) InitWithCoder(coder *NSCoder) *NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -56,6 +60,7 @@ func (o *NSDateInterval) InitWithCoder(coder *NSCoder) *NSDateInterval {
 	return NSDateIntervalFromID(_ret)
 }
 
+// Initializes a date interval with a given start date and duration.
 func (o *NSDateInterval) InitWithStartDateDuration(startDate *NSDate, duration float64) *NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalSelInitWithStartDateDuration, startDate.Ptr(), duration)
 	if _ret != 0 {
@@ -64,6 +69,7 @@ func (o *NSDateInterval) InitWithStartDateDuration(startDate *NSDate, duration f
 	return NSDateIntervalFromID(_ret)
 }
 
+// Initializes a date interval from a given start date and end date.
 func (o *NSDateInterval) InitWithStartDateEndDate(startDate *NSDate, endDate *NSDate) *NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalSelInitWithStartDateEndDate, startDate.Ptr(), endDate.Ptr())
 	if _ret != 0 {
@@ -72,21 +78,25 @@ func (o *NSDateInterval) InitWithStartDateEndDate(startDate *NSDate, endDate *NS
 	return NSDateIntervalFromID(_ret)
 }
 
+// Compares the receiver with the specified date interval.
 func (o *NSDateInterval) Compare(dateInterval *NSDateInterval) NSComparisonResult {
 	_ret := objc.Send[NSComparisonResult](o.Ptr(), _nSDateIntervalSelCompare, dateInterval.Ptr())
 	return _ret
 }
 
+// Indicates whether the receiver is equal to the specified date interval.
 func (o *NSDateInterval) IsEqualToDateInterval(dateInterval *NSDateInterval) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateIntervalSelIsEqualToDateInterval, dateInterval.Ptr())
 	return _ret
 }
 
+// Indicates whether the receiver intersects with the specified date interval.
 func (o *NSDateInterval) IntersectsDateInterval(dateInterval *NSDateInterval) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateIntervalSelIntersectsDateInterval, dateInterval.Ptr())
 	return _ret
 }
 
+// Returns the intersection between the receiver and the specified date interval.
 func (o *NSDateInterval) IntersectionWithDateInterval(dateInterval *NSDateInterval) *NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalSelIntersectionWithDateInterval, dateInterval.Ptr())
 	if _ret != 0 {
@@ -95,6 +105,7 @@ func (o *NSDateInterval) IntersectionWithDateInterval(dateInterval *NSDateInterv
 	return NSDateIntervalFromID(_ret)
 }
 
+// Indicates whether the receiver contains the specified date.
 func (o *NSDateInterval) ContainsDate(date *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateIntervalSelContainsDate, date.Ptr())
 	return _ret

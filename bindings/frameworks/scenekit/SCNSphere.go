@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sphere (or ball or globe) geometry.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnsphere
 type SCNSphere struct {
 	SCNGeometry
@@ -35,7 +37,7 @@ func SCNSphereFromID(id objc.ID) *SCNSphere {
 	return o
 }
 
-// @method sphereWithRadius: @abstract Creates and returns a sphere with given radius. @param radius The radius of the sphere.
+// Creates a sphere geometry with the specified radius.
 func SCNSphereSphereWithRadius(radius float64) *SCNSphere {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNSphere), _sCNSphereSelSphereWithRadius, radius)
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes the result of a batch delete request.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsbatchdeleteresult
 type NSBatchDeleteResult struct {
 	NSPersistentStoreResult

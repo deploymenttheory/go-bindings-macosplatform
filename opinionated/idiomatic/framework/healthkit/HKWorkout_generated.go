@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A workout sample that stores information about a single physical activity.
+//
 // Workout wraps [raw.HKWorkout] with a fluent Go API.
 type Workout struct {
 	inner *raw.HKWorkout
@@ -37,7 +39,7 @@ func NewWorkout() *Workout {
 	return &Workout{inner: raw.HKWorkoutFromID(_id)}
 }
 
-// @method        statisticsForType: @discussion    Returns an HKStatistics object containing the statistics for all the samples of the given type that have been added to the workout. If there are no samples of the given type then nil is returned. @param         quantityType    The quantity type to gather statistics about.
+// Returns the workout’s statistics for the provided quantity type.
 //
 // StatisticsForType calls the underlying StatisticsForType.
 func (x *Workout) StatisticsForType(quantityType *raw.HKQuantityType) *Statistics {

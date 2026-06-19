@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents an HTTP Live Streaming asset variant.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetvariantqualifier
 type AVAssetVariantQualifier struct {
 	foundation.NSObject
@@ -43,7 +45,7 @@ func AVAssetVariantQualifierFromID(id objc.ID) *AVAssetVariantQualifier {
 	return o
 }
 
-// Returns a qualifer for a predicate. - Parameter predicate: The variant predicate. Must be a valid, non-nil NSPredicate.
+// Creates a variant qualifier with a predicate.
 func AVAssetVariantQualifierAssetVariantQualifierWithPredicate(predicate *foundation.NSPredicate) *AVAssetVariantQualifier {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetVariantQualifier), _aVAssetVariantQualifierSelAssetVariantQualifierWithPredicate, predicate.Ptr())
 	if _ret != 0 {
@@ -52,7 +54,7 @@ func AVAssetVariantQualifierAssetVariantQualifierWithPredicate(predicate *founda
 	return AVAssetVariantQualifierFromID(_ret)
 }
 
-// Returns a qualifer for a particular asset variant. - Parameter variant: A variant obtained from the -[AVAsset variants] or -[AVAssetDownloadConfiguration playableVariants]. Must be a valid, non-nil AVAssetVariant.
+// Creates a variant qualifier with an asset variant.
 func AVAssetVariantQualifierAssetVariantQualifierWithVariant(variant *AVAssetVariant) *AVAssetVariantQualifier {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetVariantQualifier), _aVAssetVariantQualifierSelAssetVariantQualifierWithVariant, variant.Ptr())
 	if _ret != 0 {
@@ -61,7 +63,7 @@ func AVAssetVariantQualifierAssetVariantQualifierWithVariant(variant *AVAssetVar
 	return AVAssetVariantQualifierFromID(_ret)
 }
 
-// Creates a NSPredicate for audio channel count which can be used with other NSPredicates to express variant preferences. - Parameter channelCount: The RHS value for the channel count in the predicate equation. - Parameter mediaSelectionOption: The audio media selection option under consideration. - Parameter operatorType: The valid values are NSLessThanPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType, NSGreaterThanPredicateOperatorType, NSGreaterThanOrEqualToPredicateOperatorType, NSEqualToPredicateOperatorType and NSNotEqualToPredicateOperatorType.
+// Creates a predicate with a channel count, media selection option, and operator type.
 func AVAssetVariantQualifierPredicateForChannelCountMediaSelectionOptionOperatorType(channelCount int, mediaSelectionOption *AVMediaSelectionOption, operatorType foundation.NSPredicateOperatorType) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetVariantQualifier), _aVAssetVariantQualifierSelPredicateForChannelCountMediaSelectionOptionOperatorType, channelCount, mediaSelectionOption.Ptr(), operatorType)
 	if _ret != 0 {
@@ -70,7 +72,7 @@ func AVAssetVariantQualifierPredicateForChannelCountMediaSelectionOptionOperator
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// Creates a NSPredicate for binaural which can be used with other NSPredicates to express variant preferences. - Parameter isBinaural: The RHS value for the value of isBinauralAudio in the predicate equation. - Parameter mediaSelectionOption: The audio media selection option under consideration.
+// Creates a predicate for binaural audio.
 func AVAssetVariantQualifierPredicateForBinauralAudioMediaSelectionOption(isBinauralAudio bool, mediaSelectionOption *AVMediaSelectionOption) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetVariantQualifier), _aVAssetVariantQualifierSelPredicateForBinauralAudioMediaSelectionOption, isBinauralAudio, mediaSelectionOption.Ptr())
 	if _ret != 0 {
@@ -79,7 +81,7 @@ func AVAssetVariantQualifierPredicateForBinauralAudioMediaSelectionOption(isBina
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// Creates a NSPredicate for immersive audio which can be used with other NSPredicates to express variant preferences. - Parameter isImmersiveAudio: The RHS value for the value of isImmersiveAudio in the predicate equation. - Parameter mediaSelectionOption: The audio media selection option under consideration.
+// Creates a predicate for immersive audio.
 func AVAssetVariantQualifierPredicateForImmersiveAudioMediaSelectionOption(isImmersiveAudio bool, mediaSelectionOption *AVMediaSelectionOption) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetVariantQualifier), _aVAssetVariantQualifierSelPredicateForImmersiveAudioMediaSelectionOption, isImmersiveAudio, mediaSelectionOption.Ptr())
 	if _ret != 0 {
@@ -88,7 +90,7 @@ func AVAssetVariantQualifierPredicateForImmersiveAudioMediaSelectionOption(isImm
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// Creates a NSPredicate for immersive audio which can be used with other NSPredicates to express variant preferences. - Parameter isDownmixAudio: The RHS value for the value of isDownmixAudio in the predicate equation. - Parameter mediaSelectionOption: The audio media selection option under consideration.
+// Creates a predicate for downmix audio.
 func AVAssetVariantQualifierPredicateForDownmixAudioMediaSelectionOption(isDownmixAudio bool, mediaSelectionOption *AVMediaSelectionOption) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetVariantQualifier), _aVAssetVariantQualifierSelPredicateForDownmixAudioMediaSelectionOption, isDownmixAudio, mediaSelectionOption.Ptr())
 	if _ret != 0 {
@@ -97,7 +99,7 @@ func AVAssetVariantQualifierPredicateForDownmixAudioMediaSelectionOption(isDownm
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// Creates a NSPredicate for presentation size width which can be used with other NSPredicates to express variant preferences. - Parameter width: The RHS value for the presentation size width in the predicate equation. - Parameter operatorType: The valid values are NSLessThanPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType, NSGreaterThanPredicateOperatorType, NSGreaterThanOrEqualToPredicateOperatorType, NSEqualToPredicateOperatorType and NSNotEqualToPredicateOperatorType.
+// Creates a predicate with a width and operator type.
 func AVAssetVariantQualifierPredicateForPresentationWidthOperatorType(width float64, operatorType foundation.NSPredicateOperatorType) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetVariantQualifier), _aVAssetVariantQualifierSelPredicateForPresentationWidthOperatorType, width, operatorType)
 	if _ret != 0 {
@@ -106,7 +108,7 @@ func AVAssetVariantQualifierPredicateForPresentationWidthOperatorType(width floa
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// Creates a NSPredicate for presentation size height which can be used with other NSPredicates to express variant preferences. - Parameter height: The RHS value for the presentation size height in the predicate equation. - Parameter operatorType: The valid values are NSLessThanPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType, NSGreaterThanPredicateOperatorType, NSGreaterThanOrEqualToPredicateOperatorType, NSEqualToPredicateOperatorType and NSNotEqualToPredicateOperatorType.
+// Creates a predicate with a height and operator type.
 func AVAssetVariantQualifierPredicateForPresentationHeightOperatorType(height float64, operatorType foundation.NSPredicateOperatorType) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetVariantQualifier), _aVAssetVariantQualifierSelPredicateForPresentationHeightOperatorType, height, operatorType)
 	if _ret != 0 {
@@ -115,7 +117,7 @@ func AVAssetVariantQualifierPredicateForPresentationHeightOperatorType(height fl
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// Creates a NSPredicate for audio sample rate which can be used with other NSPredicates to express variant preferences. - Parameter sampleRate: The RHS value for the sample rate in the predicate equation. - Parameter mediaSelectionOption: The audio media selection option under consideration. - Parameter operatorType: The valid values are NSLessThanPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType, NSGreaterThanPredicateOperatorType, NSGreaterThanOrEqualToPredicateOperatorType, NSEqualToPredicateOperatorType and NSNotEqualToPredicateOperatorType.
+// Creates a predicate for audio sample rate.
 func AVAssetVariantQualifierPredicateForAudioSampleRateMediaSelectionOptionOperatorType(sampleRate float64, mediaSelectionOption *AVMediaSelectionOption, operatorType foundation.NSPredicateOperatorType) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetVariantQualifier), _aVAssetVariantQualifierSelPredicateForAudioSampleRateMediaSelectionOptionOperatorType, sampleRate, mediaSelectionOption.Ptr(), operatorType)
 	if _ret != 0 {
@@ -124,7 +126,7 @@ func AVAssetVariantQualifierPredicateForAudioSampleRateMediaSelectionOptionOpera
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// Creates a NSPredicate for audio channel count which can be used with other NSPredicates to express variant preferences. Predicate will be evaluated on the media selection option selected for the asset. Media selection options for primary assets may be specified in the AVAssetDownloadConfiguration mediaSelections property. Media selection options for interstitial assets may be circumscribed by -[AVAssetDownloadConfiguration setInterstitialMediaSelectionCriteria: forMediaCharacteristic:]. - Parameter channelCount: The RHS value for the channel count in the predicate equation. - Parameter operatorType: The valid values are NSLessThanPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType, NSGreaterThanPredicateOperatorType, NSGreaterThanOrEqualToPredicateOperatorType, NSEqualToPredicateOperatorType and NSNotEqualToPredicateOperatorType.
+// Creates a NSPredicate for audio channel count which can be used with other NSPredicates to express variant preferences.
 func AVAssetVariantQualifierPredicateForChannelCountOperatorType(channelCount int, operatorType foundation.NSPredicateOperatorType) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetVariantQualifier), _aVAssetVariantQualifierSelPredicateForChannelCountOperatorType, channelCount, operatorType)
 	if _ret != 0 {
@@ -133,7 +135,7 @@ func AVAssetVariantQualifierPredicateForChannelCountOperatorType(channelCount in
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// Creates a NSPredicate for binaural which can be used with other NSPredicates to express variant preferences. - Parameter isBinaural: The RHS value for the value of isBinauralAudio in the predicate equation.
+// Creates a NSPredicate for binaural which can be used with other NSPredicates to express variant preferences.
 func AVAssetVariantQualifierPredicateForBinauralAudio(isBinauralAudio bool) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetVariantQualifier), _aVAssetVariantQualifierSelPredicateForBinauralAudio, isBinauralAudio)
 	if _ret != 0 {
@@ -142,7 +144,7 @@ func AVAssetVariantQualifierPredicateForBinauralAudio(isBinauralAudio bool) *fou
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// Creates a NSPredicate for immersive audio which can be used with other NSPredicates to express variant preferences. Predicate will be evaluated on the media selection option selected for the asset. Media selection options for primary assets may be specified in the AVAssetDownloadConfiguration mediaSelections property. Media selection options for interstitial assets may be circumscribed by -[AVAssetDownloadConfiguration setInterstitialMediaSelectionCriteria: forMediaCharacteristic:]. - Parameter isImmersiveAudio: The RHS value for the value of isImmersiveAudio in the predicate equation.
+// Creates a NSPredicate for immersive audio which can be used with other NSPredicates to express variant preferences.
 func AVAssetVariantQualifierPredicateForImmersiveAudio(isImmersiveAudio bool) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetVariantQualifier), _aVAssetVariantQualifierSelPredicateForImmersiveAudio, isImmersiveAudio)
 	if _ret != 0 {
@@ -151,7 +153,7 @@ func AVAssetVariantQualifierPredicateForImmersiveAudio(isImmersiveAudio bool) *f
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// Creates a NSPredicate for immersive audio which can be used with other NSPredicates to express variant preferences. Predicate will be evaluated on the media selection option selected for the asset. Media selection options for primary assets may be specified in the AVAssetDownloadConfiguration mediaSelections property. Media selection options for interstitial assets may be circumscribed by -[AVAssetDownloadConfiguration setInterstitialMediaSelectionCriteria: forMediaCharacteristic:]. - Parameter isDownmixAudio: The RHS value for the value of isDownmixAudio in the predicate equation.
+// Creates a NSPredicate for immersive audio which can be used with other NSPredicates to express variant preferences.
 func AVAssetVariantQualifierPredicateForDownmixAudio(isDownmixAudio bool) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetVariantQualifier), _aVAssetVariantQualifierSelPredicateForDownmixAudio, isDownmixAudio)
 	if _ret != 0 {
@@ -160,7 +162,7 @@ func AVAssetVariantQualifierPredicateForDownmixAudio(isDownmixAudio bool) *found
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// Creates a NSPredicate for audio sample rate which can be used with other NSPredicates to express variant preferences. Predicate will be evaluated on the media selection option selected for the asset. Media selection options for primary assets may be specified in the AVAssetDownloadConfiguration mediaSelections property. Media selection options for interstitial assets may be circumscribed by -[AVAssetDownloadConfiguration setInterstitialMediaSelectionCriteria: forMediaCharacteristic:]. - Parameter sampleRate: The RHS value for the sample rate in the predicate equation. - Parameter operatorType: The valid values are NSLessThanPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType, NSGreaterThanPredicateOperatorType, NSGreaterThanOrEqualToPredicateOperatorType, NSEqualToPredicateOperatorType and NSNotEqualToPredicateOperatorType.
+// Creates a NSPredicate for audio sample rate which can be used with other NSPredicates to express variant preferences.
 func AVAssetVariantQualifierPredicateForAudioSampleRateOperatorType(sampleRate float64, operatorType foundation.NSPredicateOperatorType) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetVariantQualifier), _aVAssetVariantQualifierSelPredicateForAudioSampleRateOperatorType, sampleRate, operatorType)
 	if _ret != 0 {

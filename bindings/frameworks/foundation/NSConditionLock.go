@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A lock that can be associated with specific, user-defined conditions.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsconditionlock
 type NSConditionLock struct {
 	NSObject
@@ -38,6 +40,7 @@ func NSConditionLockFromID(id objc.ID) *NSConditionLock {
 	return o
 }
 
+// Initializes a newly allocated NSConditionLock object and sets its condition.
 func (o *NSConditionLock) InitWithCondition(condition int) *NSConditionLock {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConditionLockSelInitWithCondition, condition)
 	if _ret != 0 {
@@ -46,29 +49,35 @@ func (o *NSConditionLock) InitWithCondition(condition int) *NSConditionLock {
 	return NSConditionLockFromID(_ret)
 }
 
+// Attempts to acquire a lock.
 func (o *NSConditionLock) LockWhenCondition(condition int) {
 	o.Ptr().Send(_nSConditionLockSelLockWhenCondition, condition)
 }
 
+// Attempts to acquire a lock without regard to the receiver’s condition.
 func (o *NSConditionLock) TryLock() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSConditionLockSelTryLock)
 	return _ret
 }
 
+// Attempts to acquire a lock if the receiver’s condition is equal to the specified condition.
 func (o *NSConditionLock) TryLockWhenCondition(condition int) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSConditionLockSelTryLockWhenCondition, condition)
 	return _ret
 }
 
+// Relinquishes the lock and sets the receiver’s condition.
 func (o *NSConditionLock) UnlockWithCondition(condition int) {
 	o.Ptr().Send(_nSConditionLockSelUnlockWithCondition, condition)
 }
 
+// Attempts to acquire a lock before a specified moment in time.
 func (o *NSConditionLock) LockBeforeDate(limit *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSConditionLockSelLockBeforeDate, limit.Ptr())
 	return _ret
 }
 
+// Attempts to acquire a lock before a specified moment in time.
 func (o *NSConditionLock) LockWhenConditionBeforeDate(condition int, limit *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSConditionLockSelLockWhenConditionBeforeDate, condition, limit.Ptr())
 	return _ret

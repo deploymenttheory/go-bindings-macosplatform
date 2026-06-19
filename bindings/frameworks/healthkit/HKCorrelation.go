@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sample that groups multiple related samples into a single entry.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkcorrelation
 type HKCorrelation struct {
 	HKSample
@@ -35,7 +37,7 @@ func HKCorrelationFromID(id objc.ID) *HKCorrelation {
 	return o
 }
 
-// @method        correlationWithType:startDate:endDate:objects: @abstract      Creates a new HKCorrelation with the given type, start date, end date, and objects. @discussion    objects must be a set of HKQuantitySamples and HKCategorySamples
+// Instantiates and returns a new correlation instance.
 func HKCorrelationCorrelationWithTypeStartDateEndDateObjects(correlationType *HKCorrelationType, startDate *foundation.NSDate, endDate *foundation.NSDate, objects *foundation.NSSet[*HKSample]) *HKCorrelation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKCorrelation), _hKCorrelationSelCorrelationWithTypeStartDateEndDateObjects, correlationType.Ptr(), startDate.Ptr(), endDate.Ptr(), objects.Ptr())
 	if _ret != 0 {
@@ -44,25 +46,25 @@ func HKCorrelationCorrelationWithTypeStartDateEndDateObjects(correlationType *HK
 	return HKCorrelationFromID(_ret)
 }
 
-// @method        correlationWithType:startDate:endDate:objects:metadata: @abstract      Creates a new HKCorrelation with the given type, start date, end date, objects, and metadata. @discussion    objects must be a set of HKQuantitySamples and HKCategorySamples
+// Instantiates and returns a new correlation instance with the provided metadata.
 func HKCorrelationCorrelationWithTypeStartDateEndDateObjectsMetadata(correlationType *HKCorrelationType, startDate *foundation.NSDate, endDate *foundation.NSDate, objects *foundation.NSSet[*HKSample], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKCorrelation {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKCorrelation), _hKCorrelationSelCorrelationWithTypeStartDateEndDateObjectsMetadata, correlationType.Ptr(), startDate.Ptr(), endDate.Ptr(), objects.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKCorrelation), _hKCorrelationSelCorrelationWithTypeStartDateEndDateObjectsMetadata, correlationType.Ptr(), startDate.Ptr(), endDate.Ptr(), objects.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return HKCorrelationFromID(_ret)
 }
 
-// @method        correlationWithType:startDate:endDate:objects:device:metadata: @abstract      Creates a new HKCorrelation with the given type, start date, end date, objects, and metadata. @param         correlationType The correlation type of the objects set. @param         startDate       The start date of the correlation. @param         endDate         The end date of the correlation. @param         device          The HKDevice that generated the samples (optional). @param         metadata        Metadata for the correlation (optional). @discussion    objects must be a set of HKQuantitySamples and HKCategorySamples
+// Instantiates and returns a new correlation instance with the provided device and metadata.
 func HKCorrelationCorrelationWithTypeStartDateEndDateObjectsDeviceMetadata(correlationType *HKCorrelationType, startDate *foundation.NSDate, endDate *foundation.NSDate, objects *foundation.NSSet[*HKSample], device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKCorrelation {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKCorrelation), _hKCorrelationSelCorrelationWithTypeStartDateEndDateObjectsDeviceMetadata, correlationType.Ptr(), startDate.Ptr(), endDate.Ptr(), objects.Ptr(), device.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKCorrelation), _hKCorrelationSelCorrelationWithTypeStartDateEndDateObjectsDeviceMetadata, correlationType.Ptr(), startDate.Ptr(), endDate.Ptr(), objects.Ptr(), device.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return HKCorrelationFromID(_ret)
 }
 
-// @method    objectsForType: @abstract  Returns the set of correlated objects with the specified type.
+// Returns a set containing all the objects of the specified type in the correlation.
 func (o *HKCorrelation) ObjectsForType(objectType *HKObjectType) *foundation.NSSet[*HKSample] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKCorrelationSelObjectsForType, objectType.Ptr())
 	if _ret != 0 {

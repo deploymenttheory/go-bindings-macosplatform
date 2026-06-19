@@ -151,14 +151,15 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
+// Constants indicating the type of media button to display.
 type UNNotificationContentExtensionMediaPlayPauseButtonType uint64
 
 const (
-	// No media button. Specify this option when you don't want a media button. This is the default option.
+	// No media button.
 	UNNotificationContentExtensionMediaPlayPauseButtonTypeNone UNNotificationContentExtensionMediaPlayPauseButtonType = 0
-	// A standard play/pause button. This button is always visible. When tapped, its appearance changes between the play and pause icons and triggers the appropriate play and pause actions.
+	// A standard play/pause button.
 	UNNotificationContentExtensionMediaPlayPauseButtonTypeDefault UNNotificationContentExtensionMediaPlayPauseButtonType = 1
-	// A partially transparent play/pause button that is layered on top of your media content. This button draws a play icon over the content initially. When playback begins, the button disappears. Tapping the content again pauses playback and displays the play button again.
+	// A partially transparent play/pause button that is layered on top of your media content.
 	UNNotificationContentExtensionMediaPlayPauseButtonTypeOverlay UNNotificationContentExtensionMediaPlayPauseButtonType = 2
 )
 
@@ -175,14 +176,15 @@ func (e UNNotificationContentExtensionMediaPlayPauseButtonType) String() string 
 	}
 }
 
+// Constants indicating the preferred response to a notification.
 type UNNotificationContentExtensionResponseOption uint64
 
 const (
-	// Don't dismiss the notification interface. The content extension handles the selected action.
+	// Don’t dismiss the notification interface.
 	UNNotificationContentExtensionResponseOptionDoNotDismiss UNNotificationContentExtensionResponseOption = 0
-	// Dismiss the notification interface. The content extension handles the selected action.
+	// Dismiss the notification interface.
 	UNNotificationContentExtensionResponseOptionDismiss UNNotificationContentExtensionResponseOption = 1
-	// Dismiss the notification interface and forward the notification to the app. Choose this option when you want the app to respond to the action or handle it.
+	// Dismiss the notification interface and forward the notification to the app.
 	UNNotificationContentExtensionResponseOptionDismissAndForwardAction UNNotificationContentExtensionResponseOption = 2
 )
 

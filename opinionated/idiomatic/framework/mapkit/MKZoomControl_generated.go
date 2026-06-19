@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specialized view that displays and controls the zoom level of the map view.
+//
 // ZoomControl wraps [raw.MKZoomControl] with a fluent Go API.
 type ZoomControl struct {
 	inner *raw.MKZoomControl
@@ -35,6 +37,8 @@ func NewZoomControl() *ZoomControl {
 	return &ZoomControl{inner: raw.MKZoomControlFromID(_id)}
 }
 
+// The map view associated with this control.
+//
 // WithMapView sets the mapView property and returns the receiver for chaining.
 func (x *ZoomControl) WithMapView(mapView *MapView) *ZoomControl {
 	x.inner.SetMapView(mapView.Unwrap())

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that relays device discovery events from the extension to the system.
+//
 // DDDiscoverySession wraps [raw.DDDiscoverySession] with a fluent Go API.
 type DDDiscoverySession struct {
 	inner *raw.DDDiscoverySession
@@ -35,7 +37,7 @@ func NewDDDiscoverySession() *DDDiscoverySession {
 	return &DDDiscoverySession{inner: raw.DDDiscoverySessionFromID(_id)}
 }
 
-// Reports an event to the host.
+// Reports an event to the system.
 //
 // ReportEvent calls the underlying ReportEvent.
 func (x *DDDiscoverySession) ReportEvent(inEvent *raw.DDDeviceEvent) {

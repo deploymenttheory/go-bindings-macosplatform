@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes an adjustment to the time range of one or more captions.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptionconversiontimerangeadjustment
 type AVCaptionConversionTimeRangeAdjustment struct {
 	AVCaptionConversionAdjustment

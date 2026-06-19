@@ -497,6 +497,7 @@ func (i Cryptex_auth_type_t) isMultiValue() bool {
 	return false
 }
 
+// The type of the message’s action.
 // [ESTypes.h:15]
 type Es_action_type_t int64
 
@@ -599,7 +600,7 @@ func (i Es_address_type_t) isMultiValue() bool {
 	return false
 }
 
-// @brief Valid authorization values to be used when responding to a es_message_t auth event
+// Values used when responding to an authorization event.
 // [ESTypes.h:299]
 type Es_auth_result_t int64
 
@@ -889,7 +890,7 @@ func (i Es_btm_item_type_t) isMultiValue() bool {
 	return false
 }
 
-// @brief Error conditions for clearing the authorisation caches
+// Values that indicate the result of clearing a cache.
 // [ESTypes.h:364]
 type Es_clear_cache_result_t int64
 
@@ -941,7 +942,7 @@ func (i Es_clear_cache_result_t) isMultiValue() bool {
 	return false
 }
 
-// es_cs_validation_category Indicates the code signature validation policy that was applied to a binary
+// es_cs_validation_category
 // [ESTypes.h:661]
 type Es_cs_validation_category_t int64
 
@@ -1031,7 +1032,7 @@ func (i Es_cs_validation_category_t) isMultiValue() bool {
 	return false
 }
 
-// es_destination_type_t See es_event_create_t / es_event_rename_t
+// A type that indicates how a file event presents its destination to the client.
 // [ESTypes.h:705]
 type Es_destination_type_t int64
 
@@ -1076,7 +1077,7 @@ func (i Es_destination_type_t) isMultiValue() bool {
 	return false
 }
 
-// The valid event types recognized by EndpointSecurity @discussion When a program subscribes to and receives an AUTH-related event, it must respond with an appropriate result indicating whether or not the operation should be allowed to continue. The valid API options are: - es_respond_auth_result - es_respond_flags_result Currently, only ES_EVENT_TYPE_AUTH_OPEN must use es_respond_flags_result. All other AUTH events must use es_respond_auth_result.
+// A type used to identify a message’s event type and subscribe to events of that type.
 // [ESTypes.h:99]
 type Es_event_type_t int64
 
@@ -2170,6 +2171,7 @@ func (i Es_mute_inverted_return_t) isMultiValue() bool {
 	return false
 }
 
+// The type of a path argument, such as a prefix or a path literal.
 // [ESTypes.h:415]
 type Es_mute_path_type_t int64
 
@@ -2230,7 +2232,7 @@ func (i Es_mute_path_type_t) isMultiValue() bool {
 	return false
 }
 
-// @brief Error conditions for creating a new client
+// The result of an attempt to create a new client.
 // [ESTypes.h:345]
 type Es_new_client_result_t int64
 
@@ -2531,7 +2533,7 @@ func (i Es_openssh_login_result_type_t) isMultiValue() bool {
 	return false
 }
 
-// @brief This enum describes the type of the es_event_proc_check_t event that are currently used @note ES_PROC_CHECK_TYPE_KERNMSGBUF, ES_PROC_CHECK_TYPE_TERMINATE and ES_PROC_CHECK_TYPE_UDATA_INFO are deprecated and no proc_check messages will be generated for the corresponding proc_info call numbers. The terminate callnum is covered by the signal event.
+// The type of call used when a process checks on the access of the target process.
 // [ESTypes.h:33]
 type Es_proc_check_type_t int64
 
@@ -2616,7 +2618,7 @@ func (i Es_proc_check_type_t) isMultiValue() bool {
 	return false
 }
 
-// @brief This enum describes the type of suspend/resume operations that are currently used.
+// The type of a process suspension or resumption event.
 // [ESTypes.h:765]
 type Es_proc_suspend_resume_type_t int64
 
@@ -2711,7 +2713,7 @@ func (i Es_profile_source_t) isMultiValue() bool {
 	return false
 }
 
-// @brief Error conditions for responding to a message
+// Values that indicate the result of responding to a message.
 // [ESTypes.h:327]
 type Es_respond_result_t int64
 
@@ -2781,7 +2783,7 @@ func (i Es_respond_result_t) isMultiValue() bool {
 	return false
 }
 
-// @brief Valid values for the result_type of es_result_t to indicate the appropriate union member to use
+// A type that indicates the type of a message’s result.
 // [ESTypes.h:309]
 type Es_result_type_t int64
 
@@ -2828,7 +2830,7 @@ func (i Es_result_type_t) isMultiValue() bool {
 	return false
 }
 
-// @brief Return value for functions that can only fail in one way
+// Values that indicate the result of an Endpoint Security action that can only succeed or fail.
 // [ESTypes.h:319]
 type Es_return_t int64
 
@@ -2873,6 +2875,7 @@ func (i Es_return_t) isMultiValue() bool {
 	return false
 }
 
+// A type that indicates whether an event represents setting or clearing a file’s access control list.
 // [ESTypes.h:20]
 type Es_set_or_clear_t int64
 
@@ -2982,7 +2985,7 @@ func (i Es_sudo_plugin_type_t) isMultiValue() bool {
 	return false
 }
 
-// ess_tcc_authorization_reason_t Represents the reason a TCC permission was updated.
+// ess_tcc_authorization_reason_t
 // [ESTypes.h:627]
 type Es_tcc_authorization_reason_t int64
 
@@ -3087,7 +3090,7 @@ func (i Es_tcc_authorization_reason_t) isMultiValue() bool {
 	return false
 }
 
-// ess_tcc_authorization_right_t Represents the type of authorization permission an application has to a TCC Service.
+// ess_tcc_authorization_right_t
 // [ESTypes.h:612]
 type Es_tcc_authorization_right_t int64
 
@@ -3212,7 +3215,7 @@ func (i Es_tcc_event_type_t) isMultiValue() bool {
 	return false
 }
 
-// es_tcc_identity_type_t Represent the identity type of an application which has access to a TCC service.
+// es_tcc_identity_type_t
 // [ESTypes.h:649]
 type Es_tcc_identity_type_t int64
 

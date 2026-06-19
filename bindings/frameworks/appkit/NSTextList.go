@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A section of text that forms a single list.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextlist
 type NSTextList struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func NSTextListFromID(id objc.ID) *NSTextList {
 	return o
 }
 
+// Returns a new text list with the format, options, and starting item number you provide.
 func (o *NSTextList) InitWithMarkerFormatOptionsStartingItemNumber(markerFormat *foundation.NSString, options NSTextListOptions, startingItemNumber int) *NSTextList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListSelInitWithMarkerFormatOptionsStartingItemNumber, markerFormat.Ptr(), options, startingItemNumber)
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func (o *NSTextList) InitWithMarkerFormatOptionsStartingItemNumber(markerFormat 
 	return NSTextListFromID(_ret)
 }
 
+// Returns an initialized text list.
 func (o *NSTextList) InitWithMarkerFormatOptions(markerFormat *foundation.NSString, options uint) *NSTextList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListSelInitWithMarkerFormatOptions, markerFormat.Ptr(), options)
 	if _ret != 0 {
@@ -55,6 +59,7 @@ func (o *NSTextList) InitWithMarkerFormatOptions(markerFormat *foundation.NSStri
 	return NSTextListFromID(_ret)
 }
 
+// Initializes and returns a newly allocated text list item.
 func (o *NSTextList) InitWithCoder(coder *foundation.NSCoder) *NSTextList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -63,6 +68,7 @@ func (o *NSTextList) InitWithCoder(coder *foundation.NSCoder) *NSTextList {
 	return NSTextListFromID(_ret)
 }
 
+// Returns the computed value for a specific ordinal position in the list.
 func (o *NSTextList) MarkerForItemNumber(itemNumber int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListSelMarkerForItemNumber, itemNumber)
 	if _ret != 0 {

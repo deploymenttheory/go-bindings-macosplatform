@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event requesting a change in the rating.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpratingcommandevent
 type MPRatingCommandEvent struct {
 	MPRemoteCommandEvent

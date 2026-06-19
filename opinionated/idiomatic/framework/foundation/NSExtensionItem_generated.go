@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An immutable collection of values representing different aspects of an item for an extension to act upon.
+//
 // ExtensionItem wraps [raw.NSExtensionItem] with a fluent Go API.
 type ExtensionItem struct {
 	inner *raw.NSExtensionItem
@@ -37,18 +39,24 @@ func NewExtensionItem() *ExtensionItem {
 	return &ExtensionItem{inner: raw.NSExtensionItemFromID(_id)}
 }
 
+// An optional title for the item.
+//
 // WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
 func (x *ExtensionItem) WithAttributedTitle(attributedTitle AttributedStringProvider) *ExtensionItem {
 	x.inner.SetAttributedTitle(attributedTitle.asAttributedString())
 	return x
 }
 
+// An optional string describing the extension item content.
+//
 // WithAttributedContentText sets the attributedContentText property and returns the receiver for chaining.
 func (x *ExtensionItem) WithAttributedContentText(attributedContentText AttributedStringProvider) *ExtensionItem {
 	x.inner.SetAttributedContentText(attributedContentText.asAttributedString())
 	return x
 }
 
+// An optional array of media data associated with the extension item.
+//
 // WithAttachments sets the collection, converting the Go slice to an NSArray.
 func (x *ExtensionItem) WithAttachments(items ...*raw.NSItemProvider) *ExtensionItem {
 	if len(items) == 0 {
@@ -70,6 +78,8 @@ func (x *ExtensionItem) WithAttachments(items ...*raw.NSItemProvider) *Extension
 	return x
 }
 
+// An optional dictionary of keys and values corresponding to the extension item’s properties.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *ExtensionItem) WithUserInfo(userInfo *raw.NSDictionary[objc.ID, objc.ID]) *ExtensionItem {
 	x.inner.SetUserInfo(userInfo)

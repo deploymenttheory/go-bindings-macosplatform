@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a gradient normalization kernel applied across feature channels.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnncrosschannelnormalizationgradientnode
 type MPSCNNCrossChannelNormalizationGradientNode struct {
 	mpsneuralnetwork.MPSNNGradientFilterNode

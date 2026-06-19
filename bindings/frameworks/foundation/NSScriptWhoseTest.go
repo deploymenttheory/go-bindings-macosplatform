@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that provides the basis for testing specifiers one at a time or in groups.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsscriptwhosetest
 type NSScriptWhoseTest struct {
 	NSObject
@@ -31,6 +33,7 @@ func NSScriptWhoseTestFromID(id objc.ID) *NSScriptWhoseTest {
 	return o
 }
 
+// Returns a Boolean value that indicates whether the test represented by the receiver evaluates to true.
 func (o *NSScriptWhoseTest) IsTrue() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScriptWhoseTestSelIsTrue)
 	return _ret

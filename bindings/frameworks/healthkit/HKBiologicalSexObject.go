@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// This class acts as a wrapper for the HKBiologicalSex enumeration.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkbiologicalsexobject
 type HKBiologicalSexObject struct {
 	foundation.NSObject

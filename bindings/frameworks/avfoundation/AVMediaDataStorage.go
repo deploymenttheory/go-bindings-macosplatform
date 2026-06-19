@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the media sample data storage file.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmediadatastorage
 type AVMediaDataStorage struct {
 	foundation.NSObject
@@ -31,16 +33,16 @@ func AVMediaDataStorageFromID(id objc.ID) *AVMediaDataStorage {
 	return o
 }
 
-// @method			initWithURL:options: @abstract		Creates an AVMediaDataStorage object associated with a file URL. @param			URL An NSURL object that specifies a file where sample data that is added to a movie or track should be written. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMediaDataStorage object. Currently no keys are defined. @result			An AVMediaDataStorage object
+// Creates a media data storage object associated with a file URL.
 func (o *AVMediaDataStorage) InitWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMediaDataStorage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaDataStorageSelInitWithURLOptions, uRL.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaDataStorageSelInitWithURLOptions, uRL.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVMediaDataStorageFromID(_ret)
 }
 
-// @method			URL @abstract       The URL from which the receiver was initialized; may be nil.
+// Returns the URL used to initialize the receiver.
 func (o *AVMediaDataStorage) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaDataStorageSelURL)
 	if _ret != 0 {

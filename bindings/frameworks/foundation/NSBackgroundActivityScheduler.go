@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A task scheduler suitable for low priority operations that can run in the background.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsbackgroundactivityscheduler
 type NSBackgroundActivityScheduler struct {
 	NSObject
@@ -41,6 +43,7 @@ func NSBackgroundActivitySchedulerFromID(id objc.ID) *NSBackgroundActivitySchedu
 	return o
 }
 
+// Initializes a background activity scheduler object with a specified unique identifier.
 func (o *NSBackgroundActivityScheduler) InitWithIdentifier(identifier *NSString) *NSBackgroundActivityScheduler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBackgroundActivitySchedulerSelInitWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -49,6 +52,7 @@ func (o *NSBackgroundActivityScheduler) InitWithIdentifier(identifier *NSString)
 	return NSBackgroundActivitySchedulerFromID(_ret)
 }
 
+// Begins scheduling the background activity.
 func (o *NSBackgroundActivityScheduler) ScheduleWith(block func(objc.Block)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -60,6 +64,7 @@ func (o *NSBackgroundActivityScheduler) ScheduleWith(block func(objc.Block)) {
 	o.Ptr().Send(_nSBackgroundActivitySchedulerSelScheduleWith, __block_block)
 }
 
+// Prevents the background activity from being scheduled again.
 func (o *NSBackgroundActivityScheduler) Invalidate() {
 	o.Ptr().Send(_nSBackgroundActivitySchedulerSelInvalidate)
 }

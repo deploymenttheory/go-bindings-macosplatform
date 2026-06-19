@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that reports the state of a reaction effect performed on a capture device.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturereactioneffectstate
 type AVCaptureReactionEffectState struct {
 	foundation.NSObject

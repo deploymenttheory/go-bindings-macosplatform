@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a relationship between two entities.
+//
 // RelationshipDescription wraps [raw.NSRelationshipDescription] with a fluent Go API.
 type RelationshipDescription struct {
 	inner *raw.NSRelationshipDescription
@@ -36,90 +38,120 @@ func NewRelationshipDescription() *RelationshipDescription {
 	return &RelationshipDescription{inner: raw.NSRelationshipDescriptionFromID(_id)}
 }
 
+// The type of object the relationship contains.
+//
 // WithDestinationEntity sets the destinationEntity property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithDestinationEntity(destinationEntity *EntityDescription) *RelationshipDescription {
 	x.inner.SetDestinationEntity(destinationEntity.Unwrap())
 	return x
 }
 
+// The relationship that represents the inverse of the current relationship.
+//
 // WithInverseRelationship sets the inverseRelationship property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithInverseRelationship(inverseRelationship *RelationshipDescription) *RelationshipDescription {
 	x.inner.SetInverseRelationship(inverseRelationship.Unwrap())
 	return x
 }
 
+// The maximum number of managed objects the relationship can reference.
+//
 // WithMaxCount sets the maxCount property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithMaxCount(maxCount uint) *RelationshipDescription {
 	x.inner.SetMaxCount(maxCount)
 	return x
 }
 
+// The minimum number of managed objects the relationship can reference.
+//
 // WithMinCount sets the minCount property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithMinCount(minCount uint) *RelationshipDescription {
 	x.inner.SetMinCount(minCount)
 	return x
 }
 
+// The rule to apply when you delete the relationship’s owning managed object.
+//
 // WithDeleteRule sets the deleteRule property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithDeleteRule(deleteRule NSDeleteRule) *RelationshipDescription {
 	x.inner.SetDeleteRule(raw.NSDeleteRule(deleteRule))
 	return x
 }
 
+// A Boolean value that determines whether the relationship preserves the order of the referenced managed objects.
+//
 // WithOrdered sets the ordered property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithOrdered(ordered bool) *RelationshipDescription {
 	x.inner.SetOrdered(ordered)
 	return x
 }
 
+// The name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithName(name string) *RelationshipDescription {
 	x.inner.NSPropertyDescription.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is optional.
+//
 // WithOptional sets the optional property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithOptional(optional bool) *RelationshipDescription {
 	x.inner.NSPropertyDescription.SetOptional(optional)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is transient.
+//
 // WithTransient sets the transient property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithTransient(transient bool) *RelationshipDescription {
 	x.inner.NSPropertyDescription.SetTransient(transient)
 	return x
 }
 
+// The user info dictionary of the receiver.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *RelationshipDescription {
 	x.inner.NSPropertyDescription.SetUserInfo(userInfo)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver should be indexed for searching.
+//
 // WithIndexed sets the indexed property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithIndexed(indexed bool) *RelationshipDescription {
 	x.inner.NSPropertyDescription.SetIndexed(indexed)
 	return x
 }
 
+// The version hash modifier for the receiver.
+//
 // WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithVersionHashModifier(versionHashModifier string) *RelationshipDescription {
 	x.inner.NSPropertyDescription.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
 	return x
 }
 
+// A Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
+//
 // WithIndexedBySpotlight sets the indexedBySpotlight property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *RelationshipDescription {
 	x.inner.NSPropertyDescription.SetIndexedBySpotlight(indexedBySpotlight)
 	return x
 }
 
+// A Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
+//
 // WithStoredInExternalRecord sets the storedInExternalRecord property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *RelationshipDescription {
 	x.inner.NSPropertyDescription.SetStoredInExternalRecord(storedInExternalRecord)
 	return x
 }
 
+// The renaming identifier for the receiver.
+//
 // WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithRenamingIdentifier(renamingIdentifier string) *RelationshipDescription {
 	x.inner.NSPropertyDescription.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))

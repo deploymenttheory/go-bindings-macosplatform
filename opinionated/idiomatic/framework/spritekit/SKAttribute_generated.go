@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specification for dynamic per-node data used with a custom shader.
+//
 // Attribute wraps [raw.SKAttribute] with a fluent Go API.
 type Attribute struct {
 	inner *raw.SKAttribute
@@ -31,6 +33,8 @@ func AttributeFromID(id objc.ID) *Attribute {
 	return &Attribute{inner: raw.SKAttributeFromID(id)}
 }
 
+// Creates and initializes a new attribute object of a specified type with a name that can be referenced within the shader.
+//
 // NewAttributeWithNameType creates a new [Attribute].
 func NewAttributeWithNameType(name string, type_ SKAttributeType) *Attribute {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKAttribute")), objc.RegisterName("alloc"))

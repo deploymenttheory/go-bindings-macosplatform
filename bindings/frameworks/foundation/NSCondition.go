@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A condition variable whose semantics follow those used for POSIX-style conditions.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nscondition
 type NSCondition struct {
 	NSObject
@@ -34,19 +36,23 @@ func NSConditionFromID(id objc.ID) *NSCondition {
 	return o
 }
 
+// Blocks the current thread until the condition is signaled.
 func (o *NSCondition) Wait() {
 	o.Ptr().Send(_nSConditionSelWait)
 }
 
+// Blocks the current thread until the condition is signaled or the specified time limit is reached.
 func (o *NSCondition) WaitUntilDate(limit *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSConditionSelWaitUntilDate, limit.Ptr())
 	return _ret
 }
 
+// Signals the condition, waking up one thread waiting on it.
 func (o *NSCondition) Signal() {
 	o.Ptr().Send(_nSConditionSelSignal)
 }
 
+// Signals the condition, waking up all threads waiting on it.
 func (o *NSCondition) Broadcast() {
 	o.Ptr().Send(_nSConditionSelBroadcast)
 }

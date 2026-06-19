@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents activity in a persistent CloudKit container.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainerevent
 type NSPersistentCloudKitContainerEvent struct {
 	foundation.NSObject

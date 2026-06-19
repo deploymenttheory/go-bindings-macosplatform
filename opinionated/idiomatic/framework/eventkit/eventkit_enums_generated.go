@@ -9,11 +9,15 @@ import (
 	"strings"
 )
 
+// A value indicating whether an alarm is triggered by entering or exiting a region.
 type EKAlarmProximity int64
 
 const (
-	EKAlarmProximityNone  EKAlarmProximity = 0
+	// The alarm has no proximity trigger.
+	EKAlarmProximityNone EKAlarmProximity = 0
+	// The alarm is set to fire when entering a region.
 	EKAlarmProximityEnter EKAlarmProximity = 1
+	// The alarm is set to fire when leaving a region.
 	EKAlarmProximityLeave EKAlarmProximity = 2
 )
 
@@ -30,13 +34,18 @@ func (e EKAlarmProximity) String() string {
 	}
 }
 
+// A value that specifies what type of action occurs when the alarm triggers.
 type EKAlarmType int64
 
 const (
-	EKAlarmTypeDisplay   EKAlarmType = 0
-	EKAlarmTypeAudio     EKAlarmType = 1
+	// The alarm displays a message.
+	EKAlarmTypeDisplay EKAlarmType = 0
+	// The alarm plays a sound.
+	EKAlarmTypeAudio EKAlarmType = 1
+	// The alarm opens a URL.
 	EKAlarmTypeProcedure EKAlarmType = 2
-	EKAlarmTypeEmail     EKAlarmType = 3
+	// The alarm sends an email.
+	EKAlarmTypeEmail EKAlarmType = 3
 )
 
 func (e EKAlarmType) String() string {
@@ -54,15 +63,22 @@ func (e EKAlarmType) String() string {
 	}
 }
 
+// The current authorization status for a specific entity type.
 type EKAuthorizationStatus int64
 
 const (
+	// The person hasn’t chosen whether the app may access the service.
 	EKAuthorizationStatusNotDetermined EKAuthorizationStatus = 0
-	EKAuthorizationStatusRestricted    EKAuthorizationStatus = 1
-	EKAuthorizationStatusDenied        EKAuthorizationStatus = 2
-	EKAuthorizationStatusFullAccess    EKAuthorizationStatus = 3
-	EKAuthorizationStatusWriteOnly     EKAuthorizationStatus = 4
-	EKAuthorizationStatusAuthorized    EKAuthorizationStatus = 3
+	// The app isn’t authorized to access the service.
+	EKAuthorizationStatusRestricted EKAuthorizationStatus = 1
+	// The person explicitly denied access to the service for the app.
+	EKAuthorizationStatusDenied EKAuthorizationStatus = 2
+	// The app has both read and write access to the requested entity type.
+	EKAuthorizationStatusFullAccess EKAuthorizationStatus = 3
+	// The app has write-only access to the requested entity type.
+	EKAuthorizationStatusWriteOnly EKAuthorizationStatus = 4
+	// The app can access the service.
+	EKAuthorizationStatusAuthorized EKAuthorizationStatus = 3
 )
 
 func (e EKAuthorizationStatus) String() string {
@@ -82,14 +98,20 @@ func (e EKAuthorizationStatus) String() string {
 	}
 }
 
+// A bitmask indicating the event availability settings that the calendar can support.
 // Bitmask — values may be combined with |.
 type EKCalendarEventAvailabilityMask uint64
 
 const (
-	EKCalendarEventAvailabilityNone        EKCalendarEventAvailabilityMask = 0
-	EKCalendarEventAvailabilityBusy        EKCalendarEventAvailabilityMask = 1
-	EKCalendarEventAvailabilityFree        EKCalendarEventAvailabilityMask = 2
-	EKCalendarEventAvailabilityTentative   EKCalendarEventAvailabilityMask = 4
+	// The calendar does not support event availability settings.
+	EKCalendarEventAvailabilityNone EKCalendarEventAvailabilityMask = 0
+	// The calendar supports the busy event availability setting.
+	EKCalendarEventAvailabilityBusy EKCalendarEventAvailabilityMask = 1
+	// The calendar supports the free event availability setting.
+	EKCalendarEventAvailabilityFree EKCalendarEventAvailabilityMask = 2
+	// The calendar supports the tentative event availability setting.
+	EKCalendarEventAvailabilityTentative EKCalendarEventAvailabilityMask = 4
+	// The calendar supports the unavailable event availability setting.
 	EKCalendarEventAvailabilityUnavailable EKCalendarEventAvailabilityMask = 8
 )
 
@@ -113,14 +135,20 @@ func (e EKCalendarEventAvailabilityMask) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Possible calendar types.
 type EKCalendarType int64
 
 const (
-	EKCalendarTypeLocal        EKCalendarType = 0
-	EKCalendarTypeCalDAV       EKCalendarType = 1
-	EKCalendarTypeExchange     EKCalendarType = 2
+	// A local calendar.
+	EKCalendarTypeLocal EKCalendarType = 0
+	// A CalDAV or iCloud calendar.
+	EKCalendarTypeCalDAV EKCalendarType = 1
+	// An Exchange calendar.
+	EKCalendarTypeExchange EKCalendarType = 2
+	// A locally subscribed calendar.
 	EKCalendarTypeSubscription EKCalendarType = 3
-	EKCalendarTypeBirthday     EKCalendarType = 4
+	// A birthday calendar.
+	EKCalendarTypeBirthday EKCalendarType = 4
 )
 
 func (e EKCalendarType) String() string {
@@ -140,11 +168,14 @@ func (e EKCalendarType) String() string {
 	}
 }
 
+// A bitmask of EKEntityType for specifying multiple entities at once.
 // Bitmask — values may be combined with |.
 type EKEntityMask uint64
 
 const (
-	EKEntityMaskEvent    EKEntityMask = 1
+	// Represents an event.
+	EKEntityMaskEvent EKEntityMask = 1
+	// Represents a reminder.
 	EKEntityMaskReminder EKEntityMask = 2
 )
 
@@ -162,10 +193,13 @@ func (e EKEntityMask) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The type of entities allowed for a source.
 type EKEntityType uint64
 
 const (
-	EKEntityTypeEvent    EKEntityType = 0
+	// Represents an event.
+	EKEntityTypeEvent EKEntityType = 0
+	// Represents a reminder.
 	EKEntityTypeReminder EKEntityType = 1
 )
 
@@ -180,6 +214,7 @@ func (e EKEntityType) String() string {
 	}
 }
 
+// Error codes for EventKit errors.
 type EKErrorCode int64
 
 const (
@@ -306,14 +341,20 @@ func (e EKErrorCode) String() string {
 	}
 }
 
+// The event’s availability setting for scheduling purposes.
 type EKEventAvailability int64
 
 const (
+	// Availability settings are not supported by the event’s calendar.
 	EKEventAvailabilityNotSupported EKEventAvailability = -1
-	EKEventAvailabilityBusy         EKEventAvailability = 0
-	EKEventAvailabilityFree         EKEventAvailability = 1
-	EKEventAvailabilityTentative    EKEventAvailability = 2
-	EKEventAvailabilityUnavailable  EKEventAvailability = 3
+	// The event has a busy availability setting.
+	EKEventAvailabilityBusy EKEventAvailability = 0
+	// The event has a free availability setting.
+	EKEventAvailabilityFree EKEventAvailability = 1
+	// The event has a tentative availability setting.
+	EKEventAvailabilityTentative EKEventAvailability = 2
+	// The event has an unavailable availability setting.
+	EKEventAvailabilityUnavailable EKEventAvailability = 3
 )
 
 func (e EKEventAvailability) String() string {
@@ -333,13 +374,18 @@ func (e EKEventAvailability) String() string {
 	}
 }
 
+// The event’s status.
 type EKEventStatus int64
 
 const (
-	EKEventStatusNone      EKEventStatus = 0
+	// The event has no status.
+	EKEventStatusNone EKEventStatus = 0
+	// The event is confirmed.
 	EKEventStatusConfirmed EKEventStatus = 1
+	// The event is tentative.
 	EKEventStatusTentative EKEventStatus = 2
-	EKEventStatusCanceled  EKEventStatus = 3
+	// The event is canceled.
+	EKEventStatusCanceled EKEventStatus = 3
 )
 
 func (e EKEventStatus) String() string {
@@ -357,13 +403,19 @@ func (e EKEventStatus) String() string {
 	}
 }
 
+// The participant’s role for an event.
 type EKParticipantRole int64
 
 const (
-	EKParticipantRoleUnknown        EKParticipantRole = 0
-	EKParticipantRoleRequired       EKParticipantRole = 1
-	EKParticipantRoleOptional       EKParticipantRole = 2
-	EKParticipantRoleChair          EKParticipantRole = 3
+	// The participant’s role is unknown.
+	EKParticipantRoleUnknown EKParticipantRole = 0
+	// The participant’s attendance is required.
+	EKParticipantRoleRequired EKParticipantRole = 1
+	// The participant’s attendance is optional.
+	EKParticipantRoleOptional EKParticipantRole = 2
+	// The participant is the chair of the event.
+	EKParticipantRoleChair EKParticipantRole = 3
+	// The participant does not have an active role in the event.
 	EKParticipantRoleNonParticipant EKParticipantRole = 4
 )
 
@@ -384,16 +436,25 @@ func (e EKParticipantRole) String() string {
 	}
 }
 
+// The participant’s attendance status for an event.
 type EKParticipantStatus int64
 
 const (
-	EKParticipantStatusUnknown   EKParticipantStatus = 0
-	EKParticipantStatusPending   EKParticipantStatus = 1
-	EKParticipantStatusAccepted  EKParticipantStatus = 2
-	EKParticipantStatusDeclined  EKParticipantStatus = 3
+	// The participant’s attendance status is unknown.
+	EKParticipantStatusUnknown EKParticipantStatus = 0
+	// The participant has yet to respond to the event.
+	EKParticipantStatusPending EKParticipantStatus = 1
+	// The participant has accepted the event.
+	EKParticipantStatusAccepted EKParticipantStatus = 2
+	// The participant has declined the event.
+	EKParticipantStatusDeclined EKParticipantStatus = 3
+	// The participant’s attendance status is tentative.
 	EKParticipantStatusTentative EKParticipantStatus = 4
+	// The participant has delegated attendance to another participant.
 	EKParticipantStatusDelegated EKParticipantStatus = 5
+	// The participant’s event has completed.
 	EKParticipantStatusCompleted EKParticipantStatus = 6
+	// The participant’s event is currently in process.
 	EKParticipantStatusInProcess EKParticipantStatus = 7
 )
 
@@ -420,14 +481,20 @@ func (e EKParticipantStatus) String() string {
 	}
 }
 
+// The type of participant.
 type EKParticipantType int64
 
 const (
-	EKParticipantTypeUnknown  EKParticipantType = 0
-	EKParticipantTypePerson   EKParticipantType = 1
-	EKParticipantTypeRoom     EKParticipantType = 2
+	// The participant’s type is unknown.
+	EKParticipantTypeUnknown EKParticipantType = 0
+	// The participant is a person.
+	EKParticipantTypePerson EKParticipantType = 1
+	// The participant is a room.
+	EKParticipantTypeRoom EKParticipantType = 2
+	// The participant is a resource.
 	EKParticipantTypeResource EKParticipantType = 3
-	EKParticipantTypeGroup    EKParticipantType = 4
+	// The participant is a group.
+	EKParticipantTypeGroup EKParticipantType = 4
 )
 
 func (e EKParticipantType) String() string {
@@ -447,13 +514,18 @@ func (e EKParticipantType) String() string {
 	}
 }
 
+// The frequency for recurrence rules.
 type EKRecurrenceFrequency int64
 
 const (
-	EKRecurrenceFrequencyDaily   EKRecurrenceFrequency = 0
-	EKRecurrenceFrequencyWeekly  EKRecurrenceFrequency = 1
+	// Indicates a daily recurrence rule.
+	EKRecurrenceFrequencyDaily EKRecurrenceFrequency = 0
+	// Indicates a weekly recurrence rule.
+	EKRecurrenceFrequencyWeekly EKRecurrenceFrequency = 1
+	// Indicates a monthly recurrence rule.
 	EKRecurrenceFrequencyMonthly EKRecurrenceFrequency = 2
-	EKRecurrenceFrequencyYearly  EKRecurrenceFrequency = 3
+	// Indicates a yearly recurrence rule.
+	EKRecurrenceFrequencyYearly EKRecurrenceFrequency = 3
 )
 
 func (e EKRecurrenceFrequency) String() string {
@@ -471,15 +543,22 @@ func (e EKRecurrenceFrequency) String() string {
 	}
 }
 
+// The type of source object.
 type EKSourceType int64
 
 const (
-	EKSourceTypeLocal      EKSourceType = 0
-	EKSourceTypeExchange   EKSourceType = 1
-	EKSourceTypeCalDAV     EKSourceType = 2
-	EKSourceTypeMobileMe   EKSourceType = 3
+	// Represents a local source.
+	EKSourceTypeLocal EKSourceType = 0
+	// Represents an Exchange source.
+	EKSourceTypeExchange EKSourceType = 1
+	// Represents a CalDAV or iCloud source.
+	EKSourceTypeCalDAV EKSourceType = 2
+	// Represents a MobileMe source.
+	EKSourceTypeMobileMe EKSourceType = 3
+	// Represents a subscribed source.
 	EKSourceTypeSubscribed EKSourceType = 4
-	EKSourceTypeBirthdays  EKSourceType = 5
+	// Represents a birthday source.
+	EKSourceTypeBirthdays EKSourceType = 5
 )
 
 func (e EKSourceType) String() string {
@@ -501,10 +580,13 @@ func (e EKSourceType) String() string {
 	}
 }
 
+// An object that indicates whether modifications should apply to a single event or all future events of a recurring event.
 type EKSpan int64
 
 const (
-	EKSpanThisEvent    EKSpan = 0
+	// Modifications to this event instance should affect only this instance.
+	EKSpanThisEvent EKSpan = 0
+	// Modifications to this event instance should also affect future instances of this event.
 	EKSpanFutureEvents EKSpan = 1
 )
 
@@ -519,23 +601,38 @@ func (e EKSpan) String() string {
 	}
 }
 
+// The day of the week.
 type EKWeekday int64
 
 const (
-	EKWeekdaySunday    EKWeekday = 1
-	EKWeekdayMonday    EKWeekday = 2
-	EKWeekdayTuesday   EKWeekday = 3
+	// The value for Sunday.
+	EKWeekdaySunday EKWeekday = 1
+	// The value for Monday.
+	EKWeekdayMonday EKWeekday = 2
+	// The value for Tuesday.
+	EKWeekdayTuesday EKWeekday = 3
+	// The value for Wednesday.
 	EKWeekdayWednesday EKWeekday = 4
-	EKWeekdayThursday  EKWeekday = 5
-	EKWeekdayFriday    EKWeekday = 6
-	EKWeekdaySaturday  EKWeekday = 7
-	EKSunday           EKWeekday = 1
-	EKMonday           EKWeekday = 2
-	EKTuesday          EKWeekday = 3
-	EKWednesday        EKWeekday = 4
-	EKThursday         EKWeekday = 5
-	EKFriday           EKWeekday = 6
-	EKSaturday         EKWeekday = 7
+	// The value for Thursday.
+	EKWeekdayThursday EKWeekday = 5
+	// The value for Friday.
+	EKWeekdayFriday EKWeekday = 6
+	// The value for Saturday.
+	EKWeekdaySaturday EKWeekday = 7
+	// The value for Sunday.
+	EKSunday EKWeekday = 1
+	// The value for Monday.
+	EKMonday EKWeekday = 2
+	// The value for Tuesday.
+	EKTuesday EKWeekday = 3
+	// The value for Wednesday.
+	EKWednesday EKWeekday = 4
+	// The value for Thursday.
+	EKThursday EKWeekday = 5
+	// The value for Friday.
+	EKFriday EKWeekday = 6
+	// The value for Saturday.
+	EKSaturday EKWeekday = 7
 )
 
 func (e EKWeekday) String() string {

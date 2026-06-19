@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Parameters for an IKEv2 Security Association.
+//
 // NEVPNIKEv2SecurityAssociationParameters wraps [raw.NEVPNIKEv2SecurityAssociationParameters] with a fluent Go API.
 type NEVPNIKEv2SecurityAssociationParameters struct {
 	inner *raw.NEVPNIKEv2SecurityAssociationParameters
@@ -40,7 +42,7 @@ func NewNEVPNIKEv2SecurityAssociationParameters() *NEVPNIKEv2SecurityAssociation
 	return &NEVPNIKEv2SecurityAssociationParameters{inner: raw.NEVPNIKEv2SecurityAssociationParametersFromID(_id)}
 }
 
-// @property encryptionAlgorithm @discussion The algorithm used by the Security Association to encrypt and decrypt data. On macOS and iOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256 starting in macOS 11 and iOS 14. Prior to that the default was NEVPNIKEv2EncryptionAlgorithm3DES. On tvOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256GCM.
+// The algorithm used by the Security Association to encrypt and decrypt data.
 //
 // WithEncryptionAlgorithm sets the encryptionAlgorithm property and returns the receiver for chaining.
 func (x *NEVPNIKEv2SecurityAssociationParameters) WithEncryptionAlgorithm(encryptionAlgorithm NEVPNIKEv2EncryptionAlgorithm) *NEVPNIKEv2SecurityAssociationParameters {
@@ -48,7 +50,7 @@ func (x *NEVPNIKEv2SecurityAssociationParameters) WithEncryptionAlgorithm(encryp
 	return x
 }
 
-// @property integrityAlgorithm @discussion The algorithm used by the Security Association to verify the integrity of data.  The IKE psedo-random function algorithm will be inferred based on the integrity algorithm. Default is NEVPNIKEv2IntegrityAlgorithmSHA256 starting in macOS 11, iOS 14, and tvOS 17.  Prior to that the default was NEVPNIKEv2IntegrityAlgorithmSHA96.
+// The algorithm used by the Security Association to verify the integrity of data.
 //
 // WithIntegrityAlgorithm sets the integrityAlgorithm property and returns the receiver for chaining.
 func (x *NEVPNIKEv2SecurityAssociationParameters) WithIntegrityAlgorithm(integrityAlgorithm NEVPNIKEv2IntegrityAlgorithm) *NEVPNIKEv2SecurityAssociationParameters {
@@ -56,7 +58,7 @@ func (x *NEVPNIKEv2SecurityAssociationParameters) WithIntegrityAlgorithm(integri
 	return x
 }
 
-// @property diffieHellmanGroup @discussion The Diffie Hellman group used by the Security Association. Default is NEVPNIKEv2DiffieHellmanGroup14 starting in macOS 11, iOS 14, and tvOS 17. Prior to that the default was NEVPNIKEv2DiffieHellmanGroup2.
+// The Diffie Hellman group used by the Security Association.
 //
 // WithDiffieHellmanGroup sets the diffieHellmanGroup property and returns the receiver for chaining.
 func (x *NEVPNIKEv2SecurityAssociationParameters) WithDiffieHellmanGroup(diffieHellmanGroup NEVPNIKEv2DiffieHellmanGroup) *NEVPNIKEv2SecurityAssociationParameters {
@@ -64,7 +66,7 @@ func (x *NEVPNIKEv2SecurityAssociationParameters) WithDiffieHellmanGroup(diffieH
 	return x
 }
 
-// @property postQuantumKeyExchangeMethods @discussion The post-quantum key exchange method(s) used by the Security Association, if any. Values are taken from NEVPNIKEv2PostQuantumKeyExchangeMethod. Up to 7 methods may be specified, mapping to ADDKE1 - ADDKE7 from RFC 9370.
+// A list of the quantum-secure key exchange methods the Security Association uses.
 //
 // WithPostQuantumKeyExchangeMethods sets the collection, converting the Go slice to an NSArray.
 func (x *NEVPNIKEv2SecurityAssociationParameters) WithPostQuantumKeyExchangeMethods(items ...*foundation.NSNumber) *NEVPNIKEv2SecurityAssociationParameters {
@@ -87,7 +89,7 @@ func (x *NEVPNIKEv2SecurityAssociationParameters) WithPostQuantumKeyExchangeMeth
 	return x
 }
 
-// @property lifetimeMinutes @discussion The life time of the Security Association, in minutes. Default is 60 for IKE Security Associations, and 30 for Child Security Associations. Before the lifetime is reached, IKEv2 will attempt to rekey the Security Association to maintain the connection.
+// The duration of the lifetime of the Security Association, in minutes.
 //
 // WithLifetimeMinutes sets the lifetimeMinutes property and returns the receiver for chaining.
 func (x *NEVPNIKEv2SecurityAssociationParameters) WithLifetimeMinutes(lifetimeMinutes int32) *NEVPNIKEv2SecurityAssociationParameters {

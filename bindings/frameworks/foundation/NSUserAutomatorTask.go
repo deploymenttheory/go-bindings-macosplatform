@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that executes Automator workflows.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsuserautomatortask
 type NSUserAutomatorTask struct {
 	NSUserScriptTask
@@ -33,6 +35,7 @@ func NSUserAutomatorTaskFromID(id objc.ID) *NSUserAutomatorTask {
 	return o
 }
 
+// Execute the Automator workflow by providing it as securely coded input.
 func (o *NSUserAutomatorTask) ExecuteWithInputCompletionHandler(input NSSecureCoding, handler func(objc.ID, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -45,10 +48,13 @@ func (o *NSUserAutomatorTask) ExecuteWithInputCompletionHandler(input NSSecureCo
 }
 
 func (o *NSUserAutomatorTask) Variables() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSUserAutomatorTaskSelVariables)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserAutomatorTaskSelVariables)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSUserAutomatorTask) SetVariables(variables *NSDictionary[*NSString, objc.ID]) {
-	o.Ptr().Send(_nSUserAutomatorTaskSelSetVariables, variables)
+	o.Ptr().Send(_nSUserAutomatorTaskSelSetVariables, variables.Ptr())
 }

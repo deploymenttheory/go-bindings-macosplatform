@@ -8,23 +8,38 @@ import (
 	"strings"
 )
 
+// The PPP-specific status of the network connection.
 type SCNetworkConnectionPPPStatus int64
 
 const (
-	KSCNetworkConnectionPPPDisconnected       SCNetworkConnectionPPPStatus = 0
-	KSCNetworkConnectionPPPInitializing       SCNetworkConnectionPPPStatus = 1
-	KSCNetworkConnectionPPPConnectingLink     SCNetworkConnectionPPPStatus = 2
-	KSCNetworkConnectionPPPDialOnTraffic      SCNetworkConnectionPPPStatus = 3
-	KSCNetworkConnectionPPPNegotiatingLink    SCNetworkConnectionPPPStatus = 4
-	KSCNetworkConnectionPPPAuthenticating     SCNetworkConnectionPPPStatus = 5
+	// PPP is disconnected.
+	KSCNetworkConnectionPPPDisconnected SCNetworkConnectionPPPStatus = 0
+	// PPP is initializing.
+	KSCNetworkConnectionPPPInitializing SCNetworkConnectionPPPStatus = 1
+	// PPP is connecting the lower connection layer (for example, the modem is dialing out).
+	KSCNetworkConnectionPPPConnectingLink SCNetworkConnectionPPPStatus = 2
+	// PPP is waiting for networking traffic to automatically establish the connection.
+	KSCNetworkConnectionPPPDialOnTraffic SCNetworkConnectionPPPStatus = 3
+	// The PPP lower layer is connected and PPP is negotiating the link layer (LCP protocol).
+	KSCNetworkConnectionPPPNegotiatingLink SCNetworkConnectionPPPStatus = 4
+	// PPP is authenticating to the server (PAP, CHAP, MS-CHAP, or EAP protocols).
+	KSCNetworkConnectionPPPAuthenticating SCNetworkConnectionPPPStatus = 5
+	// PPP is waiting for the server to call back.
 	KSCNetworkConnectionPPPWaitingForCallBack SCNetworkConnectionPPPStatus = 6
+	// PPP is now authenticated and negotiating the networking layer (IPCP or IPv6CP protocols).
 	KSCNetworkConnectionPPPNegotiatingNetwork SCNetworkConnectionPPPStatus = 7
-	KSCNetworkConnectionPPPConnected          SCNetworkConnectionPPPStatus = 8
-	KSCNetworkConnectionPPPTerminating        SCNetworkConnectionPPPStatus = 9
-	KSCNetworkConnectionPPPDisconnectingLink  SCNetworkConnectionPPPStatus = 10
-	KSCNetworkConnectionPPPHoldingLinkOff     SCNetworkConnectionPPPStatus = 11
-	KSCNetworkConnectionPPPSuspended          SCNetworkConnectionPPPStatus = 12
-	KSCNetworkConnectionPPPWaitingForRedial   SCNetworkConnectionPPPStatus = 13
+	// PPP is now fully connected for at least one networking layer. Additional networking protocol might still be negotiating.
+	KSCNetworkConnectionPPPConnected SCNetworkConnectionPPPStatus = 8
+	// PPP networking and link protocols are terminating.
+	KSCNetworkConnectionPPPTerminating SCNetworkConnectionPPPStatus = 9
+	// PPP is disconnecting the lower level (for example, the modem is hanging up).
+	KSCNetworkConnectionPPPDisconnectingLink SCNetworkConnectionPPPStatus = 10
+	// PPP is disconnected and maintaining the link temporarily off.
+	KSCNetworkConnectionPPPHoldingLinkOff SCNetworkConnectionPPPStatus = 11
+	// PPP is suspended as a result of the suspend command (for example, when a V.92 Modem is On Hold).
+	KSCNetworkConnectionPPPSuspended SCNetworkConnectionPPPStatus = 12
+	// PPP has found a busy server and is waiting for redial.
+	KSCNetworkConnectionPPPWaitingForRedial SCNetworkConnectionPPPStatus = 13
 )
 
 func (e SCNetworkConnectionPPPStatus) String() string {
@@ -62,13 +77,19 @@ func (e SCNetworkConnectionPPPStatus) String() string {
 	}
 }
 
+// The current status of the network connection.
 type SCNetworkConnectionStatus int64
 
 const (
-	KSCNetworkConnectionInvalid       SCNetworkConnectionStatus = -1
-	KSCNetworkConnectionDisconnected  SCNetworkConnectionStatus = 0
-	KSCNetworkConnectionConnecting    SCNetworkConnectionStatus = 1
-	KSCNetworkConnectionConnected     SCNetworkConnectionStatus = 2
+	// The network connection refers to an invalid service.
+	KSCNetworkConnectionInvalid SCNetworkConnectionStatus = -1
+	// The network connection is disconnected.
+	KSCNetworkConnectionDisconnected SCNetworkConnectionStatus = 0
+	// The network connection is connecting.
+	KSCNetworkConnectionConnecting SCNetworkConnectionStatus = 1
+	// The network connection is connected.
+	KSCNetworkConnectionConnected SCNetworkConnectionStatus = 2
+	// The network connection is disconnecting.
 	KSCNetworkConnectionDisconnecting SCNetworkConnectionStatus = 3
 )
 
@@ -89,17 +110,26 @@ func (e SCNetworkConnectionStatus) String() string {
 	}
 }
 
+// Flags that indicate the reachability of a network node name or address, including whether a connection is required, and whether some user intervention might be required when establishing a connection.
 type SCNetworkReachabilityFlags int64
 
 const (
-	KSCNetworkReachabilityFlagsTransientConnection  SCNetworkReachabilityFlags = 1
-	KSCNetworkReachabilityFlagsReachable            SCNetworkReachabilityFlags = 2
-	KSCNetworkReachabilityFlagsConnectionRequired   SCNetworkReachabilityFlags = 4
-	KSCNetworkReachabilityFlagsConnectionOnTraffic  SCNetworkReachabilityFlags = 8
+	// The specified node name or address can be reached via a transient connection, such as PPP.
+	KSCNetworkReachabilityFlagsTransientConnection SCNetworkReachabilityFlags = 1
+	// The specified node name or address can be reached using the current network configuration.
+	KSCNetworkReachabilityFlagsReachable SCNetworkReachabilityFlags = 2
+	// The specified node name or address can be reached using the current network configuration, but a connection must first be established. If this flag is set, the kSCNetworkReachabilityFlagsConnectionOnTraffic flag, kSCNetworkReachabilityFlagsConnectionOnDemand flag, or kSCNetworkReachabilityFlagsIsWWAN flag is also typically set to indicate the type of connection required. If the user must manually make the connection, the kSCNetworkReachabilityFlagsInterventionRequired flag is also set.
+	KSCNetworkReachabilityFlagsConnectionRequired SCNetworkReachabilityFlags = 4
+	// The specified node name or address can be reached using the current network configuration, but a connection must first be established. Any traffic directed to the specified name or address will initiate the connection.
+	KSCNetworkReachabilityFlagsConnectionOnTraffic SCNetworkReachabilityFlags = 8
+	// The specified node name or address can be reached using the current network configuration, but a connection must first be established.
 	KSCNetworkReachabilityFlagsInterventionRequired SCNetworkReachabilityFlags = 16
-	KSCNetworkReachabilityFlagsConnectionOnDemand   SCNetworkReachabilityFlags = 32
-	KSCNetworkReachabilityFlagsIsLocalAddress       SCNetworkReachabilityFlags = 65536
-	KSCNetworkReachabilityFlagsIsDirect             SCNetworkReachabilityFlags = 131072
+	// The specified node name or address can be reached using the current network configuration, but a connection must first be established.
+	KSCNetworkReachabilityFlagsConnectionOnDemand SCNetworkReachabilityFlags = 32
+	// The specified node name or address is one that is associated with a network interface on the current system.
+	KSCNetworkReachabilityFlagsIsLocalAddress SCNetworkReachabilityFlags = 65536
+	// Network traffic to the specified node name or address will not go through a gateway, but is routed directly to one of the interfaces in the system.
+	KSCNetworkReachabilityFlagsIsDirect SCNetworkReachabilityFlags = 131072
 )
 
 func (e SCNetworkReachabilityFlags) String() string {
@@ -134,11 +164,14 @@ func (e SCNetworkReachabilityFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The type of notification (used with the SCPreferencesCallBack callback).
 type SCPreferencesNotification int64
 
 const (
+	// Indicates when new preferences have been saved.
 	KSCPreferencesNotificationCommit SCPreferencesNotification = 1
-	KSCPreferencesNotificationApply  SCPreferencesNotification = 2
+	// Indicates when a request has been made to apply the currently saved preferences to the active system configuration.
+	KSCPreferencesNotificationApply SCPreferencesNotification = 2
 )
 
 func (e SCPreferencesNotification) String() string {

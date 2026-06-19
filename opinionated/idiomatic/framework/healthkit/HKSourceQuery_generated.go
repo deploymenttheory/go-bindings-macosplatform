@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A query that returns a list of sources, such as apps and devices, that have saved matching queries to the HealthKit store.
+//
 // SourceQuery wraps [raw.HKSourceQuery] with a fluent Go API.
 type SourceQuery struct {
 	inner *raw.HKSourceQuery
@@ -31,7 +33,7 @@ func SourceQueryFromID(id objc.ID) *SourceQuery {
 	return &SourceQuery{inner: raw.HKSourceQueryFromID(id)}
 }
 
-// @method        initWithSampleType:samplePredicate:completionHandler: @abstract      Returns a query that will retrieve HKSources that have saved samples of the given type matching the given predicate. @param         sampleType          The type of sample. @param         objectPredicate     The predicate which samples must match. @param         completionHandler   The block to be called when the query has finished executing.
+// Instantiates and returns a source query.
 //
 // NewSourceQueryWithSampleTypeSamplePredicateCompletionHandler creates a new [SourceQuery].
 func NewSourceQueryWithSampleTypeSamplePredicateCompletionHandler(sampleType *raw.HKSampleType, objectPredicate *foundation.NSPredicate, completionHandler func(*raw.HKSourceQuery, *foundation.NSSet[*raw.HKSource], unsafe.Pointer)) *SourceQuery {

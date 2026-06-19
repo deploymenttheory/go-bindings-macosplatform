@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A static, plain-text Unicode string object.
+//
 // String wraps [raw.NSString] with a fluent Go API.
 type String struct {
 	inner *raw.NSString
@@ -45,6 +47,8 @@ func NewStringWithCoder(coder *raw.NSCoder) *String {
 	return &String{inner: raw.NSStringFromID(_id)}
 }
 
+// Returns an initialized NSString object that contains a given number of characters from a given C array of UTF-16 code units.
+//
 // NewStringWithCharactersNoCopyLengthFreeWhenDone creates a new [String].
 func NewStringWithCharactersNoCopyLengthFreeWhenDone(characters *uint16, length uint, freeBuffer bool) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -59,6 +63,8 @@ func NewStringWithCharactersNoCopyLengthDeallocator(chars *uint16, len_ uint, de
 	return &String{inner: raw.NSStringFromID(_id)}
 }
 
+// Returns an initialized NSString object that contains a given number of characters from a given C array of UTF-16 code units.
+//
 // NewStringWithCharactersLength creates a new [String].
 func NewStringWithCharactersLength(characters *uint16, length uint) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -66,6 +72,8 @@ func NewStringWithCharactersLength(characters *uint16, length uint) *String {
 	return &String{inner: raw.NSStringFromID(_id)}
 }
 
+// Returns an @c NSString object initialized by copying the characters from a given C array of UTF8-encoded bytes.
+//
 // NewStringWithUTF8String creates a new [String].
 func NewStringWithUTF8String(nullTerminatedCString string) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -73,6 +81,8 @@ func NewStringWithUTF8String(nullTerminatedCString string) *String {
 	return &String{inner: raw.NSStringFromID(_id)}
 }
 
+// Returns an NSString object initialized by copying the characters from another given string.
+//
 // NewStringWithString creates a new [String].
 func NewStringWithString(aString string) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -80,6 +90,8 @@ func NewStringWithString(aString string) *String {
 	return &String{inner: raw.NSStringFromID(_id)}
 }
 
+// Returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted.
+//
 // NewStringWithFormat creates a new [String].
 func NewStringWithFormat(format string) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -87,6 +99,8 @@ func NewStringWithFormat(format string) *String {
 	return &String{inner: raw.NSStringFromID(_id)}
 }
 
+// Returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted without any localization.
+//
 // NewStringWithFormatArguments creates a new [String].
 func NewStringWithFormatArguments(format string, argList string) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -94,6 +108,8 @@ func NewStringWithFormatArguments(format string, argList string) *String {
 	return &String{inner: raw.NSStringFromID(_id)}
 }
 
+// Returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted according to given locale.
+//
 // NewStringWithFormatLocale creates a new [String].
 func NewStringWithFormatLocale(format string, locale objc.ID) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -101,6 +117,8 @@ func NewStringWithFormatLocale(format string, locale objc.ID) *String {
 	return &String{inner: raw.NSStringFromID(_id)}
 }
 
+// Returns an NSString object initialized by using a given format string as a template into which the remaining argument values are substituted according to given locale information. This method is meant to be called from within a variadic function, where the argument list will be available.
+//
 // NewStringWithFormatLocaleArguments creates a new [String].
 func NewStringWithFormatLocaleArguments(format string, locale objc.ID, argList string) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -152,6 +170,8 @@ func NewStringWithValidatedFormatValidFormatSpecifiersLocaleArgumentsError(forma
 	return &String{inner: raw.NSStringFromID(_id)}, nil
 }
 
+// Returns an NSString object initialized by converting given data into UTF-16 code units using a given encoding.
+//
 // NewStringWithDataEncoding creates a new [String].
 func NewStringWithDataEncoding(data *raw.NSData, encoding uint) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -159,6 +179,8 @@ func NewStringWithDataEncoding(data *raw.NSData, encoding uint) *String {
 	return &String{inner: raw.NSStringFromID(_id)}
 }
 
+// Returns an initialized NSString object containing a given number of bytes from a given buffer of bytes interpreted in a given encoding.
+//
 // NewStringWithBytesLengthEncoding creates a new [String].
 func NewStringWithBytesLengthEncoding(bytes_ unsafe.Pointer, len_ uint, encoding uint) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -166,6 +188,8 @@ func NewStringWithBytesLengthEncoding(bytes_ unsafe.Pointer, len_ uint, encoding
 	return &String{inner: raw.NSStringFromID(_id)}
 }
 
+// Returns an initialized NSString object that contains a given number of bytes from a given buffer of bytes interpreted in a given encoding, and optionally frees the buffer.
+//
 // NewStringWithBytesNoCopyLengthEncodingFreeWhenDone creates a new [String].
 func NewStringWithBytesNoCopyLengthEncodingFreeWhenDone(bytes_ unsafe.Pointer, len_ uint, encoding uint, freeBuffer bool) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -180,6 +204,8 @@ func NewStringWithBytesNoCopyLengthEncodingDeallocator(bytes_ unsafe.Pointer, le
 	return &String{inner: raw.NSStringFromID(_id)}
 }
 
+// Returns an @c NSString object initialized using the characters in a given C array, interpreted according to a given encoding.
+//
 // NewStringWithCStringEncoding creates a new [String].
 func NewStringWithCStringEncoding(nullTerminatedCString string, encoding uint) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -187,6 +213,8 @@ func NewStringWithCStringEncoding(nullTerminatedCString string, encoding uint) *
 	return &String{inner: raw.NSStringFromID(_id)}
 }
 
+// Returns an @c NSString object initialized by reading data from a given URL interpreted using a given encoding.
+//
 // NewStringWithContentsOfURLEncodingError creates a new [String].
 func NewStringWithContentsOfURLEncodingError(url string, enc uint) (*String, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -198,6 +226,8 @@ func NewStringWithContentsOfURLEncodingError(url string, enc uint) (*String, err
 	return &String{inner: raw.NSStringFromID(_id)}, nil
 }
 
+// Returns an NSString object initialized by reading data from the file at a given path using a given encoding.
+//
 // NewStringWithContentsOfFileEncodingError creates a new [String].
 func NewStringWithContentsOfFileEncodingError(path string, enc uint) (*String, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -209,6 +239,8 @@ func NewStringWithContentsOfFileEncodingError(path string, enc uint) (*String, e
 	return &String{inner: raw.NSStringFromID(_id)}, nil
 }
 
+// Returns an @c NSString object initialized by reading data from a given URL and returns by reference the encoding used to interpret the data.
+//
 // NewStringWithContentsOfURLUsedEncodingError creates a new [String].
 func NewStringWithContentsOfURLUsedEncodingError(url string, enc *uint) (*String, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -220,6 +252,8 @@ func NewStringWithContentsOfURLUsedEncodingError(url string, enc *uint) (*String
 	return &String{inner: raw.NSStringFromID(_id)}, nil
 }
 
+// Returns an NSString object initialized by reading data from the file at a given path and returns by reference the encoding used to interpret the characters.
+//
 // NewStringWithContentsOfFileUsedEncodingError creates a new [String].
 func NewStringWithContentsOfFileUsedEncodingError(path string, enc *uint) (*String, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -231,6 +265,8 @@ func NewStringWithContentsOfFileUsedEncodingError(path string, enc *uint) (*Stri
 	return &String{inner: raw.NSStringFromID(_id)}, nil
 }
 
+// Initializes the receiver, a newly allocated NSString object, by reading data from the file named by path.
+//
 // NewStringWithContentsOfFile creates a new [String].
 func NewStringWithContentsOfFile(path string) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -238,6 +274,8 @@ func NewStringWithContentsOfFile(path string) *String {
 	return &String{inner: raw.NSStringFromID(_id)}
 }
 
+// Returns an @c NSString object initialized by reading data from the URL named by @c url.
+//
 // NewStringWithContentsOfURL creates a new [String].
 func NewStringWithContentsOfURL(url string) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
@@ -272,6 +310,8 @@ func (x *String) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*
 	return x
 }
 
+// Returns the character at a given UTF-16 code unit index.
+//
 // CharacterAtIndex calls the underlying CharacterAtIndex.
 func (x *String) CharacterAtIndex(index uint) uint16 {
 	return x.inner.CharacterAtIndex(index)
@@ -282,6 +322,8 @@ func (x *String) Length() uint {
 	return x.inner.Length()
 }
 
+// Returns a new string containing the characters of the receiver from the one at a given index to the end.
+//
 // SubstringFromIndex calls the underlying SubstringFromIndex.
 func (x *String) SubstringFromIndex(from uint) *String {
 	_r := x.inner.SubstringFromIndex(from)
@@ -291,6 +333,8 @@ func (x *String) SubstringFromIndex(from uint) *String {
 	return &String{inner: _r}
 }
 
+// Returns a new string containing the characters of the receiver up to, but not including, the one at a given index.
+//
 // SubstringToIndex calls the underlying SubstringToIndex.
 func (x *String) SubstringToIndex(to uint) *String {
 	_r := x.inner.SubstringToIndex(to)
@@ -300,6 +344,8 @@ func (x *String) SubstringToIndex(to uint) *String {
 	return &String{inner: _r}
 }
 
+// Returns a string object containing the characters of the receiver that lie within a given range.
+//
 // SubstringWithRange calls the underlying SubstringWithRange.
 func (x *String) SubstringWithRange(range_ raw.NSRange) *String {
 	_r := x.inner.SubstringWithRange(range_)
@@ -309,66 +355,92 @@ func (x *String) SubstringWithRange(range_ raw.NSRange) *String {
 	return &String{inner: _r}
 }
 
+// Copies characters from a given range in the receiver into a given buffer.
+//
 // GetCharactersRange calls the underlying GetCharactersRange.
 func (x *String) GetCharactersRange(buffer *uint16, range_ raw.NSRange) {
 	x.inner.GetCharactersRange(buffer, range_)
 }
 
+// Returns the result of invoking compare:options:range: with no options and the receiver’s full extent as the range.
+//
 // Compare calls the underlying Compare.
 func (x *String) Compare(string_ string) NSComparisonResult {
 	return NSComparisonResult(x.inner.Compare(foundation.NSStringStringWithUTF8String(string_)))
 }
 
+// Compares the string with the specified string using the given options.
+//
 // CompareOptions calls the underlying CompareOptions.
 func (x *String) CompareOptions(string_ string, mask NSStringCompareOptions) NSComparisonResult {
 	return NSComparisonResult(x.inner.CompareOptions(foundation.NSStringStringWithUTF8String(string_), raw.NSStringCompareOptions(mask)))
 }
 
+// Returns the result of invoking compare:options:range:locale: with a nil locale.
+//
 // CompareOptionsRange calls the underlying CompareOptionsRange.
 func (x *String) CompareOptionsRange(string_ string, mask NSStringCompareOptions, rangeOfReceiverToCompare raw.NSRange) NSComparisonResult {
 	return NSComparisonResult(x.inner.CompareOptionsRange(foundation.NSStringStringWithUTF8String(string_), raw.NSStringCompareOptions(mask), rangeOfReceiverToCompare))
 }
 
+// Compares the string using the specified options and returns the lexical ordering for the range.
+//
 // CompareOptionsRangeLocale calls the underlying CompareOptionsRangeLocale.
 func (x *String) CompareOptionsRangeLocale(string_ string, mask NSStringCompareOptions, rangeOfReceiverToCompare raw.NSRange, locale objc.ID) NSComparisonResult {
 	return NSComparisonResult(x.inner.CompareOptionsRangeLocale(foundation.NSStringStringWithUTF8String(string_), raw.NSStringCompareOptions(mask), rangeOfReceiverToCompare, locale))
 }
 
+// Returns the result of invoking compare:options: with NSCaseInsensitiveSearch as the only option.
+//
 // CaseInsensitiveCompare calls the underlying CaseInsensitiveCompare.
 func (x *String) CaseInsensitiveCompare(string_ string) NSComparisonResult {
 	return NSComparisonResult(x.inner.CaseInsensitiveCompare(foundation.NSStringStringWithUTF8String(string_)))
 }
 
+// Compares the string and a given string using a localized comparison.
+//
 // LocalizedCompare calls the underlying LocalizedCompare.
 func (x *String) LocalizedCompare(string_ string) NSComparisonResult {
 	return NSComparisonResult(x.inner.LocalizedCompare(foundation.NSStringStringWithUTF8String(string_)))
 }
 
+// Compares the string with a given string using a case-insensitive, localized, comparison.
+//
 // LocalizedCaseInsensitiveCompare calls the underlying LocalizedCaseInsensitiveCompare.
 func (x *String) LocalizedCaseInsensitiveCompare(string_ string) NSComparisonResult {
 	return NSComparisonResult(x.inner.LocalizedCaseInsensitiveCompare(foundation.NSStringStringWithUTF8String(string_)))
 }
 
+// Compares strings as sorted by the Finder.
+//
 // LocalizedStandardCompare calls the underlying LocalizedStandardCompare.
 func (x *String) LocalizedStandardCompare(string_ string) NSComparisonResult {
 	return NSComparisonResult(x.inner.LocalizedStandardCompare(foundation.NSStringStringWithUTF8String(string_)))
 }
 
+// Returns a Boolean value that indicates whether a given string is equal to the receiver using a literal Unicode-based comparison.
+//
 // IsEqualToString calls the underlying IsEqualToString.
 func (x *String) IsEqualToString(aString string) bool {
 	return x.inner.IsEqualToString(foundation.NSStringStringWithUTF8String(aString))
 }
 
+// Returns a Boolean value that indicates whether a given string matches the beginning characters of the receiver.
+//
 // HasPrefix calls the underlying HasPrefix.
 func (x *String) HasPrefix(str string) bool {
 	return x.inner.HasPrefix(foundation.NSStringStringWithUTF8String(str))
 }
 
+// Returns a Boolean value that indicates whether a given string matches the ending characters of the receiver.
+//
 // HasSuffix calls the underlying HasSuffix.
 func (x *String) HasSuffix(str string) bool {
 	return x.inner.HasSuffix(foundation.NSStringStringWithUTF8String(str))
 }
 
+// Returns a string containing characters the receiver and a given string have in common, starting from the beginning of each up to the first characters that aren’t equivalent.
+//
 // CommonPrefixWithStringOptions calls the underlying CommonPrefixWithStringOptions.
 func (x *String) CommonPrefixWithStringOptions(str string, mask NSStringCompareOptions) *String {
 	_r := x.inner.CommonPrefixWithStringOptions(foundation.NSStringStringWithUTF8String(str), raw.NSStringCompareOptions(mask))
@@ -378,71 +450,99 @@ func (x *String) CommonPrefixWithStringOptions(str string, mask NSStringCompareO
 	return &String{inner: _r}
 }
 
+// Returns a Boolean value indicating whether the string contains a given string by performing a case-sensitive, locale-unaware search.
+//
 // ContainsString calls the underlying ContainsString.
 func (x *String) ContainsString(str string) bool {
 	return x.inner.ContainsString(foundation.NSStringStringWithUTF8String(str))
 }
 
+// Returns a Boolean value indicating whether the string contains a given string by performing a case-insensitive, locale-aware search.
+//
 // LocalizedCaseInsensitiveContainsString calls the underlying LocalizedCaseInsensitiveContainsString.
 func (x *String) LocalizedCaseInsensitiveContainsString(str string) bool {
 	return x.inner.LocalizedCaseInsensitiveContainsString(foundation.NSStringStringWithUTF8String(str))
 }
 
+// Returns a Boolean value indicating whether the string contains a given string by performing a case and diacritic insensitive, locale-aware search.
+//
 // LocalizedStandardContainsString calls the underlying LocalizedStandardContainsString.
 func (x *String) LocalizedStandardContainsString(str string) bool {
 	return x.inner.LocalizedStandardContainsString(foundation.NSStringStringWithUTF8String(str))
 }
 
+// Finds and returns the range of the first occurrence of a given string within the string by performing a case and diacritic insensitive, locale-aware search.
+//
 // LocalizedStandardRangeOfString calls the underlying LocalizedStandardRangeOfString.
 func (x *String) LocalizedStandardRangeOfString(str string) raw.NSRange {
 	return x.inner.LocalizedStandardRangeOfString(foundation.NSStringStringWithUTF8String(str))
 }
 
+// Finds and returns the range of the first occurrence of a given string within the string.
+//
 // RangeOfString calls the underlying RangeOfString.
 func (x *String) RangeOfString(searchString string) raw.NSRange {
 	return x.inner.RangeOfString(foundation.NSStringStringWithUTF8String(searchString))
 }
 
+// Finds and returns the range of the first occurrence of a given string within the string, subject to given options.
+//
 // RangeOfStringOptions calls the underlying RangeOfStringOptions.
 func (x *String) RangeOfStringOptions(searchString string, mask NSStringCompareOptions) raw.NSRange {
 	return x.inner.RangeOfStringOptions(foundation.NSStringStringWithUTF8String(searchString), raw.NSStringCompareOptions(mask))
 }
 
+// Finds and returns the range of the first occurrence of a given string, within the given range of the string, subject to given options.
+//
 // RangeOfStringOptionsRange calls the underlying RangeOfStringOptionsRange.
 func (x *String) RangeOfStringOptionsRange(searchString string, mask NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange) raw.NSRange {
 	return x.inner.RangeOfStringOptionsRange(foundation.NSStringStringWithUTF8String(searchString), raw.NSStringCompareOptions(mask), rangeOfReceiverToSearch)
 }
 
+// Finds and returns the range of the first occurrence of a given string within a given range of the string, subject to given options, using the specified locale, if any.
+//
 // RangeOfStringOptionsRangeLocale calls the underlying RangeOfStringOptionsRangeLocale.
 func (x *String) RangeOfStringOptionsRangeLocale(searchString string, mask NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange, locale *raw.NSLocale) raw.NSRange {
 	return x.inner.RangeOfStringOptionsRangeLocale(foundation.NSStringStringWithUTF8String(searchString), raw.NSStringCompareOptions(mask), rangeOfReceiverToSearch, locale)
 }
 
+// Finds and returns the range in the string of the first character from a given character set.
+//
 // RangeOfCharacterFromSet calls the underlying RangeOfCharacterFromSet.
 func (x *String) RangeOfCharacterFromSet(searchSet *raw.NSCharacterSet) raw.NSRange {
 	return x.inner.RangeOfCharacterFromSet(searchSet)
 }
 
+// Finds and returns the range in the string of the first character, using given options, from a given character set.
+//
 // RangeOfCharacterFromSetOptions calls the underlying RangeOfCharacterFromSetOptions.
 func (x *String) RangeOfCharacterFromSetOptions(searchSet *raw.NSCharacterSet, mask NSStringCompareOptions) raw.NSRange {
 	return x.inner.RangeOfCharacterFromSetOptions(searchSet, raw.NSStringCompareOptions(mask))
 }
 
+// Finds and returns the range in the string of the first character from a given character set found in a given range with given options.
+//
 // RangeOfCharacterFromSetOptionsRange calls the underlying RangeOfCharacterFromSetOptionsRange.
 func (x *String) RangeOfCharacterFromSetOptionsRange(searchSet *raw.NSCharacterSet, mask NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange) raw.NSRange {
 	return x.inner.RangeOfCharacterFromSetOptionsRange(searchSet, raw.NSStringCompareOptions(mask), rangeOfReceiverToSearch)
 }
 
+// Returns the range in the receiver of the composed character sequence located at a given index.
+//
 // RangeOfComposedCharacterSequenceAtIndex calls the underlying RangeOfComposedCharacterSequenceAtIndex.
 func (x *String) RangeOfComposedCharacterSequenceAtIndex(index uint) raw.NSRange {
 	return x.inner.RangeOfComposedCharacterSequenceAtIndex(index)
 }
 
+// Returns the range in the string of the composed character sequences for a given range.
+//
 // RangeOfComposedCharacterSequencesForRange calls the underlying RangeOfComposedCharacterSequencesForRange.
 func (x *String) RangeOfComposedCharacterSequencesForRange(range_ raw.NSRange) raw.NSRange {
 	return x.inner.RangeOfComposedCharacterSequencesForRange(range_)
 }
 
+// Returns a new string made by appending a given string to the receiver.
+//
 // StringByAppendingString calls the underlying StringByAppendingString.
 func (x *String) StringByAppendingString(aString string) *String {
 	_r := x.inner.StringByAppendingString(foundation.NSStringStringWithUTF8String(aString))
@@ -452,6 +552,8 @@ func (x *String) StringByAppendingString(aString string) *String {
 	return &String{inner: _r}
 }
 
+// Returns a string made by appending to the receiver a string constructed from a given format string and the following arguments.
+//
 // StringByAppendingFormat calls the underlying StringByAppendingFormat.
 func (x *String) StringByAppendingFormat(format string) *String {
 	_r := x.inner.StringByAppendingFormat(foundation.NSStringStringWithUTF8String(format))
@@ -461,6 +563,8 @@ func (x *String) StringByAppendingFormat(format string) *String {
 	return &String{inner: _r}
 }
 
+// Returns a version of the string with all letters converted to uppercase, taking into account the specified locale.
+//
 // UppercaseStringWithLocale calls the underlying UppercaseStringWithLocale.
 func (x *String) UppercaseStringWithLocale(locale *raw.NSLocale) *String {
 	_r := x.inner.UppercaseStringWithLocale(locale)
@@ -470,6 +574,8 @@ func (x *String) UppercaseStringWithLocale(locale *raw.NSLocale) *String {
 	return &String{inner: _r}
 }
 
+// Returns a version of the string with all letters converted to lowercase, taking into account the specified locale.
+//
 // LowercaseStringWithLocale calls the underlying LowercaseStringWithLocale.
 func (x *String) LowercaseStringWithLocale(locale *raw.NSLocale) *String {
 	_r := x.inner.LowercaseStringWithLocale(locale)
@@ -479,6 +585,8 @@ func (x *String) LowercaseStringWithLocale(locale *raw.NSLocale) *String {
 	return &String{inner: _r}
 }
 
+// Returns a capitalized representation of the receiver using the specified locale.
+//
 // CapitalizedStringWithLocale calls the underlying CapitalizedStringWithLocale.
 func (x *String) CapitalizedStringWithLocale(locale *raw.NSLocale) *String {
 	_r := x.inner.CapitalizedStringWithLocale(locale)
@@ -488,36 +596,50 @@ func (x *String) CapitalizedStringWithLocale(locale *raw.NSLocale) *String {
 	return &String{inner: _r}
 }
 
+// Returns by reference the beginning of the first line and the end of the last line touched by the given range.
+//
 // GetLineStartEndContentsEndForRange calls the underlying GetLineStartEndContentsEndForRange.
 func (x *String) GetLineStartEndContentsEndForRange(startPtr *uint, lineEndPtr *uint, contentsEndPtr *uint, range_ raw.NSRange) {
 	x.inner.GetLineStartEndContentsEndForRange(startPtr, lineEndPtr, contentsEndPtr, range_)
 }
 
+// Returns the range of characters representing the line or lines containing a given range.
+//
 // LineRangeForRange calls the underlying LineRangeForRange.
 func (x *String) LineRangeForRange(range_ raw.NSRange) raw.NSRange {
 	return x.inner.LineRangeForRange(range_)
 }
 
+// Returns by reference the beginning of the first paragraph and the end of the last paragraph touched by the given range.
+//
 // GetParagraphStartEndContentsEndForRange calls the underlying GetParagraphStartEndContentsEndForRange.
 func (x *String) GetParagraphStartEndContentsEndForRange(startPtr *uint, parEndPtr *uint, contentsEndPtr *uint, range_ raw.NSRange) {
 	x.inner.GetParagraphStartEndContentsEndForRange(startPtr, parEndPtr, contentsEndPtr, range_)
 }
 
+// Returns the range of characters representing the paragraph or paragraphs containing a given range.
+//
 // ParagraphRangeForRange calls the underlying ParagraphRangeForRange.
 func (x *String) ParagraphRangeForRange(range_ raw.NSRange) raw.NSRange {
 	return x.inner.ParagraphRangeForRange(range_)
 }
 
+// Enumerates the substrings of the specified type in the specified range of the string.
+//
 // EnumerateSubstringsInRangeOptionsUsing calls the underlying EnumerateSubstringsInRangeOptionsUsing.
 func (x *String) EnumerateSubstringsInRangeOptionsUsing(range_ raw.NSRange, opts NSStringEnumerationOptions, block objc.Block) {
 	x.inner.EnumerateSubstringsInRangeOptionsUsing(range_, raw.NSStringEnumerationOptions(opts), block)
 }
 
+// Enumerates all the lines in the string.
+//
 // EnumerateLinesUsing calls the underlying EnumerateLinesUsing.
 func (x *String) EnumerateLinesUsing(block func(*raw.NSString, *bool)) {
 	x.inner.EnumerateLinesUsing(block)
 }
 
+// Returns an NSData object containing a representation of the receiver encoded using a given encoding.
+//
 // DataUsingEncodingAllowLossyConversion calls the underlying DataUsingEncodingAllowLossyConversion.
 func (x *String) DataUsingEncodingAllowLossyConversion(encoding uint, lossy bool) *Data {
 	_r := x.inner.DataUsingEncodingAllowLossyConversion(encoding, lossy)
@@ -527,6 +649,8 @@ func (x *String) DataUsingEncodingAllowLossyConversion(encoding uint, lossy bool
 	return &Data{inner: _r}
 }
 
+// Returns an NSData object containing a representation of the receiver encoded using a given encoding.
+//
 // DataUsingEncoding calls the underlying DataUsingEncoding.
 func (x *String) DataUsingEncoding(encoding uint) *Data {
 	_r := x.inner.DataUsingEncoding(encoding)
@@ -536,46 +660,64 @@ func (x *String) DataUsingEncoding(encoding uint) *Data {
 	return &Data{inner: _r}
 }
 
+// Returns a Boolean value that indicates whether the receiver can be converted to a given encoding without loss of information.
+//
 // CanBeConvertedToEncoding calls the underlying CanBeConvertedToEncoding.
 func (x *String) CanBeConvertedToEncoding(encoding uint) bool {
 	return x.inner.CanBeConvertedToEncoding(encoding)
 }
 
+// Returns a representation of the string as a C string using a given encoding.
+//
 // CStringUsingEncoding calls the underlying CStringUsingEncoding.
 func (x *String) CStringUsingEncoding(encoding uint) string {
 	return x.inner.CStringUsingEncoding(encoding)
 }
 
+// Converts the string to a given encoding and stores it in a buffer.
+//
 // GetCStringMaxLengthEncoding calls the underlying GetCStringMaxLengthEncoding.
 func (x *String) GetCStringMaxLengthEncoding(buffer string, maxBufferCount uint, encoding uint) bool {
 	return x.inner.GetCStringMaxLengthEncoding(buffer, maxBufferCount, encoding)
 }
 
+// Gets a given range of characters as bytes in a specified encoding.
+//
 // GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange calls the underlying GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange.
 func (x *String) GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange(buffer unsafe.Pointer, maxBufferCount uint, usedBufferCount *uint, encoding uint, options NSStringEncodingConversionOptions, range_ raw.NSRange, leftover *raw.NSRange) bool {
 	return x.inner.GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange(buffer, maxBufferCount, usedBufferCount, encoding, raw.NSStringEncodingConversionOptions(options), range_, leftover)
 }
 
+// Returns the maximum number of bytes needed to store the receiver in a given encoding.
+//
 // MaximumLengthOfBytesUsingEncoding calls the underlying MaximumLengthOfBytesUsingEncoding.
 func (x *String) MaximumLengthOfBytesUsingEncoding(enc uint) uint {
 	return x.inner.MaximumLengthOfBytesUsingEncoding(enc)
 }
 
+// Returns the number of bytes required to store the receiver in a given encoding.
+//
 // LengthOfBytesUsingEncoding calls the underlying LengthOfBytesUsingEncoding.
 func (x *String) LengthOfBytesUsingEncoding(enc uint) uint {
 	return x.inner.LengthOfBytesUsingEncoding(enc)
 }
 
+// Returns an array containing substrings from the receiver that have been divided by a given separator.
+//
 // ComponentsSeparatedByString calls the underlying ComponentsSeparatedByString.
 func (x *String) ComponentsSeparatedByString(separator string) *raw.NSArray[*raw.NSString] {
 	return x.inner.ComponentsSeparatedByString(foundation.NSStringStringWithUTF8String(separator))
 }
 
+// Returns an array containing substrings from the receiver that have been divided by characters in a given set.
+//
 // ComponentsSeparatedByCharactersInSet calls the underlying ComponentsSeparatedByCharactersInSet.
 func (x *String) ComponentsSeparatedByCharactersInSet(separator *raw.NSCharacterSet) *raw.NSArray[*raw.NSString] {
 	return x.inner.ComponentsSeparatedByCharactersInSet(separator)
 }
 
+// Returns a new string made by removing from both ends of the receiver characters contained in a given character set.
+//
 // StringByTrimmingCharactersInSet calls the underlying StringByTrimmingCharactersInSet.
 func (x *String) StringByTrimmingCharactersInSet(set *raw.NSCharacterSet) *String {
 	_r := x.inner.StringByTrimmingCharactersInSet(set)
@@ -585,6 +727,8 @@ func (x *String) StringByTrimmingCharactersInSet(set *raw.NSCharacterSet) *Strin
 	return &String{inner: _r}
 }
 
+// Returns a new string formed from the receiver by either removing characters from the end, or by appending as many occurrences as necessary of a given pad string.
+//
 // StringByPaddingToLengthWithStringStartingAtIndex calls the underlying StringByPaddingToLengthWithStringStartingAtIndex.
 func (x *String) StringByPaddingToLengthWithStringStartingAtIndex(newLength uint, padString string, padIndex uint) *String {
 	_r := x.inner.StringByPaddingToLengthWithStringStartingAtIndex(newLength, foundation.NSStringStringWithUTF8String(padString), padIndex)
@@ -594,6 +738,8 @@ func (x *String) StringByPaddingToLengthWithStringStartingAtIndex(newLength uint
 	return &String{inner: _r}
 }
 
+// Creates a string suitable for comparison by removing the specified character distinctions from a string.
+//
 // StringByFoldingWithOptionsLocale calls the underlying StringByFoldingWithOptionsLocale.
 func (x *String) StringByFoldingWithOptionsLocale(options NSStringCompareOptions, locale *raw.NSLocale) *String {
 	_r := x.inner.StringByFoldingWithOptionsLocale(raw.NSStringCompareOptions(options), locale)
@@ -603,6 +749,8 @@ func (x *String) StringByFoldingWithOptionsLocale(options NSStringCompareOptions
 	return &String{inner: _r}
 }
 
+// Returns a new string in which all occurrences of a target string in a specified range of the receiver are replaced by another given string.
+//
 // StringByReplacingOccurrencesOfStringWithStringOptionsRange calls the underlying StringByReplacingOccurrencesOfStringWithStringOptionsRange.
 func (x *String) StringByReplacingOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options NSStringCompareOptions, searchRange raw.NSRange) *String {
 	_r := x.inner.StringByReplacingOccurrencesOfStringWithStringOptionsRange(foundation.NSStringStringWithUTF8String(target), foundation.NSStringStringWithUTF8String(replacement), raw.NSStringCompareOptions(options), searchRange)
@@ -612,6 +760,8 @@ func (x *String) StringByReplacingOccurrencesOfStringWithStringOptionsRange(targ
 	return &String{inner: _r}
 }
 
+// Returns a new string in which all occurrences of a target string in the receiver are replaced by another given string.
+//
 // StringByReplacingOccurrencesOfStringWithString calls the underlying StringByReplacingOccurrencesOfStringWithString.
 func (x *String) StringByReplacingOccurrencesOfStringWithString(target string, replacement string) *String {
 	_r := x.inner.StringByReplacingOccurrencesOfStringWithString(foundation.NSStringStringWithUTF8String(target), foundation.NSStringStringWithUTF8String(replacement))
@@ -621,6 +771,8 @@ func (x *String) StringByReplacingOccurrencesOfStringWithString(target string, r
 	return &String{inner: _r}
 }
 
+// Returns a new string in which the characters in a specified range of the receiver are replaced by a given string.
+//
 // StringByReplacingCharactersInRangeWithString calls the underlying StringByReplacingCharactersInRangeWithString.
 func (x *String) StringByReplacingCharactersInRangeWithString(range_ raw.NSRange, replacement string) *String {
 	_r := x.inner.StringByReplacingCharactersInRangeWithString(range_, foundation.NSStringStringWithUTF8String(replacement))
@@ -630,6 +782,8 @@ func (x *String) StringByReplacingCharactersInRangeWithString(range_ raw.NSRange
 	return &String{inner: _r}
 }
 
+// Returns a new string by applying a specified transform to the string.
+//
 // StringByApplyingTransformReverse calls the underlying StringByApplyingTransformReverse.
 func (x *String) StringByApplyingTransformReverse(transform *raw.NSString, reverse bool) *String {
 	_r := x.inner.StringByApplyingTransformReverse(transform, reverse)
@@ -639,11 +793,15 @@ func (x *String) StringByApplyingTransformReverse(transform *raw.NSString, rever
 	return &String{inner: _r}
 }
 
+// Writes the contents of the receiver to the URL specified by url using the specified encoding.
+//
 // WriteToURLAtomicallyEncodingError calls the underlying WriteToURLAtomicallyEncodingError.
 func (x *String) WriteToURLAtomicallyEncodingError(url string, useAuxiliaryFile bool, enc uint) (bool, error) {
 	return x.inner.WriteToURLAtomicallyEncodingError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), useAuxiliaryFile, enc)
 }
 
+// Writes the contents of the receiver to a file at a given path using a given encoding.
+//
 // WriteToFileAtomicallyEncodingError calls the underlying WriteToFileAtomicallyEncodingError.
 func (x *String) WriteToFileAtomicallyEncodingError(path string, useAuxiliaryFile bool, enc uint) (bool, error) {
 	return x.inner.WriteToFileAtomicallyEncodingError(foundation.NSStringStringWithUTF8String(path), useAuxiliaryFile, enc)
@@ -784,61 +942,85 @@ func (x *String) PrecomposedStringWithCompatibilityMapping() *String {
 	return &String{inner: _r}
 }
 
+// Parses the receiver as a text representation of a property list, returning an NSString, NSData, NSArray, or NSDictionary object, according to the topmost element.
+//
 // PropertyList calls the underlying PropertyList.
 func (x *String) PropertyList() objc.ID {
 	return x.inner.PropertyList()
 }
 
+// Returns a dictionary object initialized with the keys and values found in the receiver.
+//
 // PropertyListFromStringsFileFormat calls the underlying PropertyListFromStringsFileFormat.
 func (x *String) PropertyListFromStringsFileFormat() *raw.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.PropertyListFromStringsFileFormat()
 }
 
+// Returns a representation of the receiver as a C string in the default C-string encoding.
+//
 // CString calls the underlying CString.
 func (x *String) CString() string {
 	return x.inner.CString()
 }
 
+// Returns a representation of the receiver as a C string in the default C-string encoding, possibly losing information in converting to that encoding.
+//
 // LossyCString calls the underlying LossyCString.
 func (x *String) LossyCString() string {
 	return x.inner.LossyCString()
 }
 
+// Returns the length in char-sized units of the receiver’s C-string representation in the default C-string encoding.
+//
 // CStringLength calls the underlying CStringLength.
 func (x *String) CStringLength() uint {
 	return x.inner.CStringLength()
 }
 
+// Invokes getCString:maxLength:range:remainingRange: with NSMaximumStringLength as the maximum length, the receiver’s entire extent as the range, and NULL for the remaining range.
+//
 // GetCString calls the underlying GetCString.
 func (x *String) GetCString(bytes_ string) {
 	x.inner.GetCString(bytes_)
 }
 
+// Invokes getCString:maxLength:range:remainingRange: with maxLength as the maximum length in char-sized units, the receiver’s entire extent as the range, and NULL for the remaining range.
+//
 // GetCStringMaxLength calls the underlying GetCStringMaxLength.
 func (x *String) GetCStringMaxLength(bytes_ string, maxLength uint) {
 	x.inner.GetCStringMaxLength(bytes_, maxLength)
 }
 
+// Converts the receiver’s content to the default C-string encoding and stores them in a given buffer.
+//
 // GetCStringMaxLengthRangeRemainingRange calls the underlying GetCStringMaxLengthRangeRemainingRange.
 func (x *String) GetCStringMaxLengthRangeRemainingRange(bytes_ string, maxLength uint, aRange raw.NSRange, leftoverRange *raw.NSRange) {
 	x.inner.GetCStringMaxLengthRangeRemainingRange(bytes_, maxLength, aRange, leftoverRange)
 }
 
+// Writes the contents of the receiver to the file specified by a given path.
+//
 // WriteToFileAtomically calls the underlying WriteToFileAtomically.
 func (x *String) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
 	return x.inner.WriteToFileAtomically(foundation.NSStringStringWithUTF8String(path), useAuxiliaryFile)
 }
 
+// Writes the contents of the receiver to the location specified by a given URL.
+//
 // WriteToURLAtomically calls the underlying WriteToURLAtomically.
 func (x *String) WriteToURLAtomically(url string, atomically bool) bool {
 	return x.inner.WriteToURLAtomically(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), atomically)
 }
 
+// Copies all characters from the receiver into a given buffer.
+//
 // GetCharacters calls the underlying GetCharacters.
 func (x *String) GetCharacters(buffer *uint16) {
 	x.inner.GetCharacters(buffer)
 }
 
+// Returns a string variation suitable for the specified presentation width.
+//
 // VariantFittingPresentationWidth calls the underlying VariantFittingPresentationWidth.
 func (x *String) VariantFittingPresentationWidth(width int) *String {
 	_r := x.inner.VariantFittingPresentationWidth(width)
@@ -848,6 +1030,8 @@ func (x *String) VariantFittingPresentationWidth(width int) *String {
 	return &String{inner: _r}
 }
 
+// Returns a new string made by appending to the receiver a given string.
+//
 // StringByAppendingPathComponent calls the underlying StringByAppendingPathComponent.
 func (x *String) StringByAppendingPathComponent(str string) *String {
 	_r := x.inner.StringByAppendingPathComponent(foundation.NSStringStringWithUTF8String(str))
@@ -857,6 +1041,8 @@ func (x *String) StringByAppendingPathComponent(str string) *String {
 	return &String{inner: _r}
 }
 
+// Returns a new string made by appending to the receiver an extension separator followed by a given extension.
+//
 // StringByAppendingPathExtension calls the underlying StringByAppendingPathExtension.
 func (x *String) StringByAppendingPathExtension(str string) *String {
 	_r := x.inner.StringByAppendingPathExtension(foundation.NSStringStringWithUTF8String(str))
@@ -866,6 +1052,8 @@ func (x *String) StringByAppendingPathExtension(str string) *String {
 	return &String{inner: _r}
 }
 
+// Returns an array of strings made by separately appending to the receiver each string in a given array.
+//
 // StringsByAppendingPaths calls the underlying StringsByAppendingPaths.
 func (x *String) StringsByAppendingPaths(paths ...StringProvider) *raw.NSArray[*raw.NSString] {
 	_ptrs := make([]objc.ID, len(paths))
@@ -882,6 +1070,8 @@ func (x *String) StringsByAppendingPaths(paths ...StringProvider) *raw.NSArray[*
 	return x.inner.StringsByAppendingPaths(_arg0)
 }
 
+// Interprets the receiver as a path in the file system and attempts to perform filename completion, returning a numeric value that indicates whether a match was possible, and by reference the longest path that matches the receiver.
+//
 // CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes calls the underlying CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes.
 func (x *String) CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(outputName string, flag bool, outputArray *raw.NSArray[*raw.NSString], filterTypes ...StringProvider) uint {
 	_ptrs := make([]objc.ID, len(filterTypes))
@@ -898,6 +1088,8 @@ func (x *String) CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(
 	return x.inner.CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(foundation.NSStringStringWithUTF8String(outputName), flag, outputArray, _arg3)
 }
 
+// Interprets the receiver as a system-independent path and fills a buffer with a C-string in a format and encoding suitable for use with file-system calls.
+//
 // GetFileSystemRepresentationMaxLength calls the underlying GetFileSystemRepresentationMaxLength.
 func (x *String) GetFileSystemRepresentationMaxLength(cname string, max uint) bool {
 	return x.inner.GetFileSystemRepresentationMaxLength(cname, max)
@@ -996,6 +1188,8 @@ func (x *String) FileSystemRepresentation() unsafe.Pointer {
 	return x.inner.FileSystemRepresentation()
 }
 
+// Returns a new string made from the receiver by replacing all characters not in the specified set with percent-encoded characters.
+//
 // StringByAddingPercentEncodingWithAllowedCharacters calls the underlying StringByAddingPercentEncodingWithAllowedCharacters.
 func (x *String) StringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters *raw.NSCharacterSet) *String {
 	_r := x.inner.StringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters)
@@ -1005,6 +1199,8 @@ func (x *String) StringByAddingPercentEncodingWithAllowedCharacters(allowedChara
 	return &String{inner: _r}
 }
 
+// Returns a representation of the receiver using a given encoding to determine the percent escapes necessary to convert the receiver into a legal URL string.
+//
 // StringByAddingPercentEscapesUsingEncoding calls the underlying StringByAddingPercentEscapesUsingEncoding.
 func (x *String) StringByAddingPercentEscapesUsingEncoding(enc uint) *String {
 	_r := x.inner.StringByAddingPercentEscapesUsingEncoding(enc)
@@ -1014,6 +1210,8 @@ func (x *String) StringByAddingPercentEscapesUsingEncoding(enc uint) *String {
 	return &String{inner: _r}
 }
 
+// Returns a new string made by replacing in the receiver all percent escapes with the matching characters as determined by a given encoding.
+//
 // StringByReplacingPercentEscapesUsingEncoding calls the underlying StringByReplacingPercentEscapesUsingEncoding.
 func (x *String) StringByReplacingPercentEscapesUsingEncoding(enc uint) *String {
 	_r := x.inner.StringByReplacingPercentEscapesUsingEncoding(enc)
@@ -1032,6 +1230,8 @@ func (x *String) StringByRemovingPercentEncoding() *String {
 	return &String{inner: _r}
 }
 
+// Returns an array of linguistic tags for the specified range and requested tags within the receiving string.
+//
 // LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges calls the underlying LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges.
 func (x *String) LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_ raw.NSRange, scheme *raw.NSString, options NSLinguisticTaggerOptions, orthography *raw.NSOrthography, tokenRanges ...ValueProvider) *raw.NSArray[*raw.NSString] {
 	_ptrs := make([]objc.ID, len(tokenRanges))
@@ -1048,6 +1248,8 @@ func (x *String) LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_
 	return x.inner.LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_, scheme, raw.NSLinguisticTaggerOptions(options), orthography, _arg4)
 }
 
+// Performs linguistic analysis on the specified string by enumerating the specific range of the string, providing the Block with the located tags.
+//
 // EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing calls the underlying EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing.
 func (x *String) EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing(range_ raw.NSRange, scheme *raw.NSString, options NSLinguisticTaggerOptions, orthography *raw.NSOrthography, block objc.Block) {
 	x.inner.EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing(range_, scheme, raw.NSLinguisticTaggerOptions(options), orthography, block)

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Represents options to configure a commit operation on a command queue.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4commitoptions
 type MTL4CommitOptions struct {
 	foundation.NSObject
@@ -30,7 +32,7 @@ func MTL4CommitOptionsFromID(id objc.ID) *MTL4CommitOptions {
 	return o
 }
 
-// Registers a commit feedback handler that Metal calls with feedback data when available. - Parameter block: “MTL4CommitFeedbackHandler“ that Metal invokes.
+// Registers a commit feedback handler that Metal calls with feedback data when available.
 func (o *MTL4CommitOptions) AddFeedbackHandler(block func(objc.ID)) {
 	var __block_block objc.Block
 	if block != nil {

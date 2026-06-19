@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that maps URL requests to cached response objects.
+//
 // URLCache wraps [raw.NSURLCache] with a fluent Go API.
 type URLCache struct {
 	inner *raw.NSURLCache
@@ -40,7 +42,7 @@ func NewURLCacheWithMemoryCapacityDiskCapacityDiskPath(memoryCapacity uint, disk
 	return &URLCache{inner: raw.NSURLCacheFromID(_id)}
 }
 
-// @method initWithMemoryCapacity:diskCapacity:directoryURL: @abstract Initializes an NSURLCache with the given capacity and directory. @param memoryCapacity the capacity, measured in bytes, for the cache in memory. Or 0 to disable memory cache. @param diskCapacity the capacity, measured in bytes, for the cache on disk. Or 0 to disable disk cache. @param directoryURL the path to a directory on disk where the cache data is stored. Or nil for default directory. @result an initialized NSURLCache, with the given capacity, optionally backed by disk.
+// Creates a URL cache object with the specified memory and disk capacities, in the specified directory.
 //
 // NewURLCacheWithMemoryCapacityDiskCapacityDirectoryURL creates a new [URLCache].
 func NewURLCacheWithMemoryCapacityDiskCapacityDirectoryURL(memoryCapacity uint, diskCapacity uint, directoryURL string) *URLCache {

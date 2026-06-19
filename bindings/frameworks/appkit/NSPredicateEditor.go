@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A defined set of rules that allows the editing of predicate objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspredicateeditor
 type NSPredicateEditor struct {
 	NSRuleEditor

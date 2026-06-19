@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A query that performs complex searches based on the correlation’s contents, and returns a snapshot of all matching samples.
+//
 // CorrelationQuery wraps [raw.HKCorrelationQuery] with a fluent Go API.
 type CorrelationQuery struct {
 	inner *raw.HKCorrelationQuery
@@ -32,7 +34,7 @@ func CorrelationQueryFromID(id objc.ID) *CorrelationQuery {
 	return &CorrelationQuery{inner: raw.HKCorrelationQueryFromID(id)}
 }
 
-// @method    initWithTypes:predicate:samplePredicate:completion: @abstract  The designated initializer for HKCorrelationQuery. @param     correlationType     The type of correlation that is being queried for @param     predicate           The predicate for scoping which HKCorrelations are returned @param     samplePredicates    A dictionary mapping HKSampleTypes to NSPredicates. If no predicate for a particular type is provided, it is assumed to be a nil predicate and objects of that type will not be filtered.
+// Instantiates and returns a correlation query.
 //
 // NewCorrelationQueryWithTypePredicateSamplePredicatesCompletion creates a new [CorrelationQuery].
 func NewCorrelationQueryWithTypePredicateSamplePredicatesCompletion(correlationType *raw.HKCorrelationType, predicate *foundation.NSPredicate, samplePredicates purego.IDer, completion func(*raw.HKCorrelationQuery, *foundation.NSArray[*raw.HKCorrelation], unsafe.Pointer)) *CorrelationQuery {

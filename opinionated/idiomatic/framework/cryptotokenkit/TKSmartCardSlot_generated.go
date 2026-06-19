@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A single smart card reader slot in the system.
+//
 // SmartCardSlot wraps [raw.TKSmartCardSlot] with a fluent Go API.
 type SmartCardSlot struct {
 	inner *raw.TKSmartCardSlot
@@ -36,7 +38,7 @@ func NewSmartCardSlot() *SmartCardSlot {
 	return &SmartCardSlot{inner: raw.TKSmartCardSlotFromID(_id)}
 }
 
-// Creates new object representing currently inserted and valid card. @discussion It is possible to instantiate multiple objects for single card, exclusivity is handled by sessions on the level of created SmartCard objects. @return Newly created SmartCard object, or nil if slot does not contain valid card.
+// Creates a new TKSmartCard object representing the currently inserted Smart Card.
 //
 // MakeSmartCard calls the underlying MakeSmartCard.
 func (x *SmartCardSlot) MakeSmartCard() *SmartCard {

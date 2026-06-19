@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages an app’s main event loop and resources used by all of that app’s objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsapplication
 type NSApplication struct {
 	NSResponder
@@ -147,6 +149,7 @@ func NSApplicationFromID(id objc.ID) *NSApplication {
 	return o
 }
 
+// Hides all the receiver’s windows, and the next app in line is activated.
 func (o *NSApplication) Hide(sender objc.ID) {
 	o.Ptr().Send(_nSApplicationSelHide, sender)
 }
@@ -155,6 +158,7 @@ func (o *NSApplication) Unhide(sender objc.ID) {
 	o.Ptr().Send(_nSApplicationSelUnhide, sender)
 }
 
+// Restores hidden windows without activating their owner (the receiver).
 func (o *NSApplication) UnhideWithoutActivation() {
 	o.Ptr().Send(_nSApplicationSelUnhideWithoutActivation)
 }
@@ -167,6 +171,7 @@ func (o *NSApplication) WindowWithWindowNumber(windowNum int) *NSWindow {
 	return NSWindowFromID(_ret)
 }
 
+// Deactivates the receiver.
 func (o *NSApplication) Deactivate() {
 	o.Ptr().Send(_nSApplicationSelDeactivate)
 }
@@ -177,33 +182,37 @@ func (o *NSApplication) ActivateIgnoringOtherApps(ignoreOtherApps bool) {
 	o.Ptr().Send(_nSApplicationSelActivateIgnoringOtherApps, ignoreOtherApps)
 }
 
-// Makes the receiver the active app, if possible. You shouldn’t assume the app will be active immediately after sending this message. The framework also does not guarantee that the app will be activated at all. For cooperative activation, the other application should call `-yieldActivationToApplication:` or equivalent prior to the target application invoking `-activate`. Invoking `-activate` on an already-active application cancels any pending activation yields by the receiver.
+// Activates the receiver app, if appropriate.
 func (o *NSApplication) Activate() {
 	o.Ptr().Send(_nSApplicationSelActivate)
 }
 
-// Explicitly allows another application to make itself active. Calling this method will not deactivate the current app, nor will it activate the other app. For cooperative or coordinated activation, the other app should request to be activated at some point in the future by calling `activate` or equivalent.
+// Explicitly allows another app to make itself active.
 func (o *NSApplication) YieldActivationToApplication(application *NSRunningApplication) {
 	o.Ptr().Send(_nSApplicationSelYieldActivationToApplication, application.Ptr())
 }
 
-// Same as `-yieldActivationToApplication:`, but the provided bundle identifier does not have to correspond to a currently running application. This method should be used to yield activation to apps that may not be running at the time of invoking it. If it is known that the target application is currently running, use `-yieldActivationToApplication:` instead.
+// Explicitly allows another app to make itself active.
 func (o *NSApplication) YieldActivationToApplicationWithBundleIdentifier(bundleIdentifier *foundation.NSString) {
 	o.Ptr().Send(_nSApplicationSelYieldActivationToApplicationWithBundleIdentifier, bundleIdentifier.Ptr())
 }
 
+// Hides all apps, except the receiver.
 func (o *NSApplication) HideOtherApplications(sender objc.ID) {
 	o.Ptr().Send(_nSApplicationSelHideOtherApplications, sender)
 }
 
+// Unhides all apps, including the receiver.
 func (o *NSApplication) UnhideAllApplications(sender objc.ID) {
 	o.Ptr().Send(_nSApplicationSelUnhideAllApplications, sender)
 }
 
+// Activates the app, opens any files specified by the NSOpen user default, and unhighlights the app’s icon.
 func (o *NSApplication) FinishLaunching() {
 	o.Ptr().Send(_nSApplicationSelFinishLaunching)
 }
 
+// Starts the main event loop.
 func (o *NSApplication) Run() {
 	o.Ptr().Send(_nSApplicationSelRun)
 }
@@ -213,6 +222,7 @@ func (o *NSApplication) RunModalForWindow(window *NSWindow) int {
 	return _ret
 }
 
+// Stops the main event loop.
 func (o *NSApplication) Stop(sender objc.ID) {
 	o.Ptr().Send(_nSApplicationSelStop, sender)
 }
@@ -243,16 +253,18 @@ func (o *NSApplication) EndModalSession(session unsafe.Pointer) {
 	o.Ptr().Send(_nSApplicationSelEndModalSession, session)
 }
 
+// Terminates the receiver.
 func (o *NSApplication) Terminate(sender objc.ID) {
 	o.Ptr().Send(_nSApplicationSelTerminate, sender)
 }
 
-// Inform the user that this application needs attention - call this method only if your application is not already active.
+// Starts a user attention request.
 func (o *NSApplication) RequestUserAttention(requestType NSRequestUserAttentionType) int {
 	_ret := objc.Send[int](o.Ptr(), _nSApplicationSelRequestUserAttention, requestType)
 	return _ret
 }
 
+// Cancels a previous user attention request.
 func (o *NSApplication) CancelUserAttentionRequest(request int) {
 	o.Ptr().Send(_nSApplicationSelCancelUserAttentionRequest, request)
 }
@@ -280,36 +292,39 @@ func (o *NSApplication) SetWindowsNeedUpdate(needUpdate bool) {
 	o.Ptr().Send(_nSApplicationSelSetWindowsNeedUpdate, needUpdate)
 }
 
+// Sends an message to each onscreen window.
 func (o *NSApplication) UpdateWindows() {
 	o.Ptr().Send(_nSApplicationSelUpdateWindows)
 }
 
-// @return The activation policy of the application.
+// Returns the app’s activation policy.
 func (o *NSApplication) ActivationPolicy() NSApplicationActivationPolicy {
 	_ret := objc.Send[NSApplicationActivationPolicy](o.Ptr(), _nSApplicationSelActivationPolicy)
 	return _ret
 }
 
-// Attempts to modify the application's activation policy.  In OS X 10.9, any policy may be set; prior to 10.9, the activation policy may be changed to @c NSApplicationActivationPolicyProhibited or @c NSApplicationActivationPolicyRegular, but may not be changed to @c NSApplicationActivationPolicyAccessory.  This returns @c YES if setting the activation policy is successful, and @c NO if not.
+// Attempts to modify the app’s activation policy.
 func (o *NSApplication) SetActivationPolicy(activationPolicy NSApplicationActivationPolicy) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelSetActivationPolicy, activationPolicy)
 	return _ret
 }
 
+// Logs a given exception by calling NSLog().
 func (o *NSApplication) ReportException(exception *foundation.NSException) {
 	o.Ptr().Send(_nSApplicationSelReportException, exception.Ptr())
 }
 
+// Creates and executes a new thread based on the specified target and selector.
 func NSApplicationDetachDrawingThreadToTargetWithObject(selector objc.SEL, target objc.ID, argument objc.ID) {
 	objc.ID(_clsNSApplication).Send(_nSApplicationSelDetachDrawingThreadToTargetWithObject, selector, target, argument)
 }
 
-// If an application delegate returns NSTerminateLater from -applicationShouldTerminate:, -replyToApplicationShouldTerminate: must be called with YES or NO once the application decides if it can terminate.
+// Responds to NSTerminateLater once the app knows whether it can terminate.
 func (o *NSApplication) ReplyToApplicationShouldTerminate(shouldTerminate bool) {
 	o.Ptr().Send(_nSApplicationSelReplyToApplicationShouldTerminate, shouldTerminate)
 }
 
-// If an application delegate encounters an error while handling `-application:openFiles:` or` -application:printFiles:`, `-replyToOpenOrPrint:` should be called with @c NSApplicationDelegateReplyFailure.  If the user cancels the operation, @c NSApplicationDelegateReplyCancel should be used, and if the operation succeeds, @c NSApplicationDelegateReplySuccess should be used .
+// Handles errors that might occur when the user attempts to open or print files.
 func (o *NSApplication) ReplyToOpenOrPrint(reply NSApplicationDelegateReply) {
 	o.Ptr().Send(_nSApplicationSelReplyToOpenOrPrint, reply)
 }
@@ -482,14 +497,17 @@ func (o *NSApplication) EffectiveAppearance() *NSAppearance {
 	return NSAppearanceFromID(_ret)
 }
 
+// Dispatches an event to other objects.
 func (o *NSApplication) SendEvent(event *NSEvent) {
 	o.Ptr().Send(_nSApplicationSelSendEvent, event.Ptr())
 }
 
+// Adds a given event to the receiver’s event queue.
 func (o *NSApplication) PostEventAtStart(event *NSEvent, atStart bool) {
 	o.Ptr().Send(_nSApplicationSelPostEventAtStart, event.Ptr(), atStart)
 }
 
+// Returns the next event matching a given mask, or nil if no such event is found before a specified expiration date.
 func (o *NSApplication) NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *NSEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelNextEventMatchingMaskUntilDateInModeDequeue, mask, expiration.Ptr(), mode.Ptr(), deqFlag)
 	if _ret != 0 {
@@ -498,6 +516,7 @@ func (o *NSApplication) NextEventMatchingMaskUntilDateInModeDequeue(mask NSEvent
 	return NSEventFromID(_ret)
 }
 
+// Removes all events matching the given mask and generated before the specified event.
 func (o *NSApplication) DiscardEventsMatchingMaskBeforeEvent(mask NSEventMask, lastEvent *NSEvent) {
 	o.Ptr().Send(_nSApplicationSelDiscardEventsMatchingMaskBeforeEvent, mask, lastEvent.Ptr())
 }
@@ -510,16 +529,19 @@ func (o *NSApplication) CurrentEvent() *NSEvent {
 	return NSEventFromID(_ret)
 }
 
+// Sends the given action message to the given target.
 func (o *NSApplication) SendActionToFrom(action objc.SEL, target objc.ID, sender objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelSendActionToFrom, action, target, sender)
 	return _ret
 }
 
+// Returns the object that receives the action message specified by the given selector.
 func (o *NSApplication) TargetForAction(action objc.SEL) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelTargetForAction, action)
 	return _ret
 }
 
+// Searches for an object that can receive the message specified by the given selector.
 func (o *NSApplication) TargetForActionToFrom(action objc.SEL, target objc.ID, sender objc.ID) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSApplicationSelTargetForActionToFrom, action, target, sender)
 	return _ret
@@ -568,7 +590,7 @@ func (o *NSApplication) IsFullKeyboardAccessEnabled() bool {
 }
 
 func (o *NSApplication) RegisterServicesMenuSendTypesReturnTypes(sendTypes *foundation.NSArray[*foundation.NSString], returnTypes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSApplicationSelRegisterServicesMenuSendTypesReturnTypes, sendTypes, returnTypes)
+	o.Ptr().Send(_nSApplicationSelRegisterServicesMenuSendTypesReturnTypes, sendTypes.Ptr(), returnTypes.Ptr())
 }
 
 func (o *NSApplication) ServicesMenu() *NSMenu {
@@ -597,7 +619,7 @@ func (o *NSApplication) OrderFrontStandardAboutPanel(sender objc.ID) {
 }
 
 func (o *NSApplication) OrderFrontStandardAboutPanelWithOptions(optionsDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSApplicationSelOrderFrontStandardAboutPanelWithOptions, optionsDictionary)
+	o.Ptr().Send(_nSApplicationSelOrderFrontStandardAboutPanelWithOptions, optionsDictionary.Ptr())
 }
 
 func (o *NSApplication) UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection {
@@ -605,24 +627,27 @@ func (o *NSApplication) UserInterfaceLayoutDirection() NSUserInterfaceLayoutDire
 	return _ret
 }
 
-// Disable or reenable relaunching this app on login, if the app was running at the time the user logged out.  These methods increment and decrement a counter respectively; if the counter is 0 at the time the user logs out, then the app may be relaunched when the user logs back in.  The counter is initially zero, so by default apps are relaunched. If your app should not be relaunched because it launches via some other mechanism (e.g. launchd), then the recommended usage is to call `-[NSApp disableRelaunchOnLogin]` once, and never pair it with an -enable call. If your app should not be relaunched because it triggers a restart (e.g. an installer), then the recommended usage is to call `-[NSApp disableRelaunchOnLogin]` immediately before you attempt to trigger a restart, and `-[NSApp enableRelaunchOnLogin]` immediately after.  This is because the user may cancel restarting; if the user later restarts for another reason, then your app should be brought back. These methods are thread safe.
+// Disables relaunching the app on login.
 func (o *NSApplication) DisableRelaunchOnLogin() {
 	o.Ptr().Send(_nSApplicationSelDisableRelaunchOnLogin)
 }
 
+// Enables relaunching the app on login.
 func (o *NSApplication) EnableRelaunchOnLogin() {
 	o.Ptr().Send(_nSApplicationSelEnableRelaunchOnLogin)
 }
 
+// Register for notifications sent by Apple Push Notification service (APNs).
 func (o *NSApplication) RegisterForRemoteNotifications() {
 	o.Ptr().Send(_nSApplicationSelRegisterForRemoteNotifications)
 }
 
+// Unregister for notifications received from Apple Push Notification service.
 func (o *NSApplication) UnregisterForRemoteNotifications() {
 	o.Ptr().Send(_nSApplicationSelUnregisterForRemoteNotifications)
 }
 
-// The following are soft deprecated. Please use the `-registerForRemoteNotifications` above and `-requestAuthorizationWithOptions:` from `UserNotifications.framework`.
+// Register to receive notifications of the specified types from a provider through the Apple Push Notification service.
 func (o *NSApplication) RegisterForRemoteNotificationTypes(types NSRemoteNotificationType) {
 	o.Ptr().Send(_nSApplicationSelRegisterForRemoteNotificationTypes, types)
 }
@@ -655,7 +680,7 @@ func (o *NSApplication) BeginModalSessionForWindowRelativeToWindow(window *NSWin
 // `-application:printFiles:` was deprecated in Mac OS X 10.4. Implement `-application:printFiles:withSettings:showPrintPanels:` in your application delegate instead.
 // Deprecated: since macOS 10.4.
 func (o *NSApplication) ApplicationPrintFiles(sender *NSApplication, filenames *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSApplicationSelApplicationPrintFiles, sender.Ptr(), filenames)
+	o.Ptr().Send(_nSApplicationSelApplicationPrintFiles, sender.Ptr(), filenames.Ptr())
 }
 
 // `NSWindow`'s `-beginSheet:completionHandler:` and `-endSheet:returnCode:` should be used instead.  `NSApplication`'s `-beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:` will continue to work as it previously did, leaking contextInfo and failing when there is already an existing sheet.
@@ -693,15 +718,17 @@ func (o *NSApplication) Context() *NSGraphicsContext {
 	return NSGraphicsContextFromID(_ret)
 }
 
+// Places the receiver in context-sensitive help mode.
 func (o *NSApplication) ActivateContextHelpMode(sender objc.ID) {
 	o.Ptr().Send(_nSApplicationSelActivateContextHelpMode, sender)
 }
 
+// If your project is properly registered, and the necessary keys have been set in the property list, this method launches Help Viewer and displays the first page of your app’s help book.
 func (o *NSApplication) ShowHelp(sender objc.ID) {
 	o.Ptr().Send(_nSApplicationSelShowHelp, sender)
 }
 
-// Show or dismiss the customization palette for the currently displayed NSTouchBars. NSApplication validates this selector against whether the current NSTouchBars are customizable and, if configured on a menu item, will standardize and localize the title. If the current system does not have Touch Bar support, the menu item will be automatically hidden.
+// Show or hides the interface for customizing the Touch Bar.
 func (o *NSApplication) ToggleTouchBarCustomizationPalette(sender objc.ID) {
 	o.Ptr().Send(_nSApplicationSelToggleTouchBarCustomizationPalette, sender)
 }
@@ -740,14 +767,17 @@ func (o *NSApplication) OrderedWindows() *foundation.NSArray[*NSWindow] {
 	return foundation.NSArrayFromID[*NSWindow](_ret)
 }
 
+// Register an object that provides help data to your app.
 func (o *NSApplication) RegisterUserInterfaceItemSearchHandler(handler NSUserInterfaceItemSearching) {
 	o.Ptr().Send(_nSApplicationSelRegisterUserInterfaceItemSearchHandler, handler)
 }
 
+// Unregister an object that provides help data to your app.
 func (o *NSApplication) UnregisterUserInterfaceItemSearchHandler(handler NSUserInterfaceItemSearching) {
 	o.Ptr().Send(_nSApplicationSelUnregisterUserInterfaceItemSearchHandler, handler)
 }
 
+// Searches for the string in the user interface.
 func (o *NSApplication) SearchStringInUserInterfaceItemStringSearchRangeFoundRange(searchString *foundation.NSString, stringToSearch *foundation.NSString, searchRange foundation.NSRange, foundRange *foundation.NSRange) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSApplicationSelSearchStringInUserInterfaceItemStringSearchRangeFoundRange, searchString.Ptr(), stringToSearch.Ptr(), searchRange, foundRange)
 	return _ret

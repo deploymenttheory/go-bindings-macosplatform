@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A query that returns the underlying voltage measurements for an electrocardiogram sample.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkelectrocardiogramquery
 type HKElectrocardiogramQuery struct {
 	HKQuery
@@ -31,7 +33,7 @@ func HKElectrocardiogramQueryFromID(id objc.ID) *HKElectrocardiogramQuery {
 	return o
 }
 
-// @method        initWithElectrocardiogram:dataHandler: @abstract      Returns a query that will enumerate over voltages recorded across leads in an electrocardiogram. @param         electrocardiogram    The sample for which the lead data will be returned. @param         dataHandler          The block to invoke with results from the query. It will be called once for each voltage measurement. Call [query stop] to stop enumeration, if desired.
+// Creates a new electrocardiogram query object.
 func (o *HKElectrocardiogramQuery) InitWithElectrocardiogramDataHandler(electrocardiogram *HKElectrocardiogram, dataHandler func(*HKElectrocardiogramQuery, *HKElectrocardiogramVoltageMeasurement, bool, unsafe.Pointer)) *HKElectrocardiogramQuery {
 	var __block_dataHandler objc.Block
 	if dataHandler != nil {

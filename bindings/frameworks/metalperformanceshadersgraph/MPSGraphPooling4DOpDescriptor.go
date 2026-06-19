@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The class that defines the parameters for a 4D pooling operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphpooling4dopdescriptor
 type MPSGraphPooling4DOpDescriptor struct {
 	MPSGraphObject
@@ -50,18 +52,18 @@ func MPSGraphPooling4DOpDescriptorFromID(id objc.ID) *MPSGraphPooling4DOpDescrip
 	return o
 }
 
-// Creates a 4D pooling descriptor with given values. - Parameters: - kernelSizes: See `kernelSizes` property. - strides: See `strides` property. - dilationRates: See `dilationRates` property. - paddingValues: See `paddingValues` property. - paddingStyle: See `paddingStyle` property. - Returns: The descriptor on autoreleasepool.
+// Creates a 4D pooling descriptor with given values.
 func MPSGraphPooling4DOpDescriptorDescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingValues *foundation.NSArray[*foundation.NSNumber], paddingStyle MPSGraphPaddingStyle) *MPSGraphPooling4DOpDescriptor {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphPooling4DOpDescriptor), _mPSGraphPooling4DOpDescriptorSelDescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle, kernelSizes, strides, dilationRates, paddingValues, paddingStyle)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphPooling4DOpDescriptor), _mPSGraphPooling4DOpDescriptorSelDescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle, kernelSizes.Ptr(), strides.Ptr(), dilationRates.Ptr(), paddingValues.Ptr(), paddingStyle)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MPSGraphPooling4DOpDescriptorFromID(_ret)
 }
 
-// Creates a 4D pooling descriptor with default values. - Parameters: - kernelSizes: See `kernelSizes` property. - paddingStyle: See `paddingStyle` property. - Returns: The descriptor on autoreleasepool.
+// Creates a 4D pooling descriptor with default values.
 func MPSGraphPooling4DOpDescriptorDescriptorWithKernelSizesPaddingStyle(kernelSizes *foundation.NSArray[*foundation.NSNumber], paddingStyle MPSGraphPaddingStyle) *MPSGraphPooling4DOpDescriptor {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphPooling4DOpDescriptor), _mPSGraphPooling4DOpDescriptorSelDescriptorWithKernelSizesPaddingStyle, kernelSizes, paddingStyle)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphPooling4DOpDescriptor), _mPSGraphPooling4DOpDescriptorSelDescriptorWithKernelSizesPaddingStyle, kernelSizes.Ptr(), paddingStyle)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -70,42 +72,54 @@ func MPSGraphPooling4DOpDescriptorDescriptorWithKernelSizesPaddingStyle(kernelSi
 
 // Defines the pooling window size. Must be four numbers, one for each spatial dimension, fastest running index last.
 func (o *MPSGraphPooling4DOpDescriptor) KernelSizes() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mPSGraphPooling4DOpDescriptorSelKernelSizes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphPooling4DOpDescriptorSelKernelSizes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *MPSGraphPooling4DOpDescriptor) SetKernelSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_mPSGraphPooling4DOpDescriptorSelSetKernelSizes, kernelSizes)
+	o.Ptr().Send(_mPSGraphPooling4DOpDescriptorSelSetKernelSizes, kernelSizes.Ptr())
 }
 
 // Defines strides for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1, @1 ]`
 func (o *MPSGraphPooling4DOpDescriptor) Strides() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mPSGraphPooling4DOpDescriptorSelStrides)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphPooling4DOpDescriptorSelStrides)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *MPSGraphPooling4DOpDescriptor) SetStrides(strides *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_mPSGraphPooling4DOpDescriptorSelSetStrides, strides)
+	o.Ptr().Send(_mPSGraphPooling4DOpDescriptorSelSetStrides, strides.Ptr())
 }
 
 // Defines dilation rates for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1, @1 ]`
 func (o *MPSGraphPooling4DOpDescriptor) DilationRates() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mPSGraphPooling4DOpDescriptorSelDilationRates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphPooling4DOpDescriptorSelDilationRates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *MPSGraphPooling4DOpDescriptor) SetDilationRates(dilationRates *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_mPSGraphPooling4DOpDescriptorSelSetDilationRates, dilationRates)
+	o.Ptr().Send(_mPSGraphPooling4DOpDescriptorSelSetDilationRates, dilationRates.Ptr())
 }
 
 // Defines padding values for spatial dimensions which must be eight numbers, two for each spatial dimension. For example `paddingValues[0]` defines the explicit padding amount before the first spatial dimension (slowest running index of spatial dimensions), `paddingValues[1]` defines the padding amount after the first spatial dimension etc. Used only when `paddingStyle = MPSGraphPaddingStyleExplicit`. Default value: `@[ @0, @0, @0, @0, @0, @0, @0, @0 ]`
 func (o *MPSGraphPooling4DOpDescriptor) PaddingValues() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mPSGraphPooling4DOpDescriptorSelPaddingValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphPooling4DOpDescriptorSelPaddingValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *MPSGraphPooling4DOpDescriptor) SetPaddingValues(paddingValues *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_mPSGraphPooling4DOpDescriptorSelSetPaddingValues, paddingValues)
+	o.Ptr().Send(_mPSGraphPooling4DOpDescriptorSelSetPaddingValues, paddingValues.Ptr())
 }
 
 // Defines what kind of padding graph applies to the operation. Default value: `MPSGraphPaddingStyleExplicit`.

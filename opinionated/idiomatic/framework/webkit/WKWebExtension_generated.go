@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that encapsulates a web extension’s resources that the manifest file defines.
+//
 // WKWebExtension wraps [raw.WKWebExtension] with a fluent Go API.
 type WKWebExtension struct {
 	inner *raw.WKWebExtension
@@ -39,18 +41,22 @@ func NewWKWebExtension() *WKWebExtension {
 	return &WKWebExtension{inner: raw.WKWebExtensionFromID(_id)}
 }
 
-// @abstract Checks if a manifest version is supported by the extension. @param manifestVersion The version number to check. @result Returns `YES` if the extension specified a manifest version that is greater than or equal to `manifestVersion`.
+// Checks if a manifest version is supported by the extension.
 //
 // SupportsManifestVersion calls the underlying SupportsManifestVersion.
 func (x *WKWebExtension) SupportsManifestVersion(manifestVersion float64) bool {
 	return x.inner.SupportsManifestVersion(manifestVersion)
 }
 
+// Returns the extension’s icon image for the specified size.
+//
 // IconForSize calls the underlying IconForSize.
 func (x *WKWebExtension) IconForSize(size corefoundation.CGSize) *appkit.NSImage {
 	return x.inner.IconForSize(size)
 }
 
+// Returns the default action icon for the specified size.
+//
 // ActionIconForSize calls the underlying ActionIconForSize.
 func (x *WKWebExtension) ActionIconForSize(size corefoundation.CGSize) *appkit.NSImage {
 	return x.inner.ActionIconForSize(size)

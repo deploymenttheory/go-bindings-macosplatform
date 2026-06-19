@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A single measurement of the device’s rotation rate.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremotion/cmgyrodata
 type CMGyroData struct {
 	CMLogItem

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An NSImageCell object displays a single image (encapsulated in an NSImage object) in a frame. This class provides methods for choosing the frame and for aligning and scaling the image to fit the frame.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsimagecell
 type NSImageCell struct {
 	NSCell

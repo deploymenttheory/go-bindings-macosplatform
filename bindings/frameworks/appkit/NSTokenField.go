@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A text field that converts text into visually distinct tokens.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstokenfield
 type NSTokenField struct {
 	NSTextField

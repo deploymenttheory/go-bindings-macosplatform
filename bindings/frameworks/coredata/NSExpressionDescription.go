@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes an expression to include with a fetch request.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsexpressiondescription
 type NSExpressionDescription struct {
 	NSPropertyDescription

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that controls participant access and permission options.
+//
 // AllowedSharingOptions wraps [raw.CKAllowedSharingOptions] with a fluent Go API.
 type AllowedSharingOptions struct {
 	inner *raw.CKAllowedSharingOptions
@@ -29,7 +31,7 @@ func AllowedSharingOptionsFromID(id objc.ID) *AllowedSharingOptions {
 	return &AllowedSharingOptions{inner: raw.CKAllowedSharingOptionsFromID(id)}
 }
 
-// Creates and initializes an allowed sharing options object. - Parameters: - allowedParticipantPermissionOptions: The “CKSharingParticipantPermissionOption“ setting. - allowedParticipantAccessOptions: The “CKSharingParticipantAccessOption“ setting.
+// Creates and initializes an allowed sharing options object.
 //
 // NewAllowedSharingOptionsWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions creates a new [AllowedSharingOptions].
 func NewAllowedSharingOptionsWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions(allowedParticipantPermissionOptions CKSharingParticipantPermissionOption, allowedParticipantAccessOptions CKSharingParticipantAccessOption) *AllowedSharingOptions {
@@ -54,7 +56,7 @@ func (x *AllowedSharingOptions) WithAllowedParticipantAccessOptions(allowedParti
 	return x
 }
 
-// Default value is NO. If set, the system sharing UI allows the user to choose whether added participants can invite others to the share. CloudKit returns shares with “CKShare/ParticipantRole/administrator-enum.case“ participants as read-only to devices running OS versions prior to this role being introduced. CloudKit returns administrator participants on such read-only shares as “CKShare/ParticipantRole/privateUser-enum.case“.
+// Default value is NO. If set, the system sharing UI allows the user to choose whether added participants can invite others to the share. CloudKit returns shares with CKShareParticipantRoleAdministrator participants as read-only to devices running OS versions prior to this role being introduced. CloudKit returns administrator participants on such read-only shares as CKShareParticipantRolePrivateUser.
 //
 // WithAllowsParticipantsToInviteOthers sets the allowsParticipantsToInviteOthers property and returns the receiver for chaining.
 func (x *AllowedSharingOptions) WithAllowsParticipantsToInviteOthers(allowsParticipantsToInviteOthers bool) *AllowedSharingOptions {

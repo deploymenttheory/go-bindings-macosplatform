@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages the synchronization of local and remote record data.
+//
 // SyncEngine wraps [raw.CKSyncEngine] with a fluent Go API.
 type SyncEngine struct {
 	inner *raw.CKSyncEngine

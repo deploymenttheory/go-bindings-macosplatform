@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class that all Core Data model objects inherit from.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsmanagedobject
 type NSManagedObject struct {
 	foundation.NSObject
@@ -65,6 +67,7 @@ func NSManagedObjectFromID(id objc.ID) *NSManagedObject {
 	return o
 }
 
+// Returns the entity description that is associated with this subclass.
 func NSManagedObjectEntity() *NSEntityDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSManagedObject), _nSManagedObjectSelEntity)
 	if _ret != 0 {
@@ -73,11 +76,16 @@ func NSManagedObjectEntity() *NSEntityDescription {
 	return NSEntityDescriptionFromID(_ret)
 }
 
+// Returns an initialized fetch request with the entity this subclass represents.
 func NSManagedObjectFetchRequest() *NSFetchRequest[objc.ID] {
-	_ret := objc.Send[*NSFetchRequest[objc.ID]](objc.ID(_clsNSManagedObject), _nSManagedObjectSelFetchRequest)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSManagedObject), _nSManagedObjectSelFetchRequest)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSFetchRequestFromID[objc.ID](_ret)
 }
 
+// Initializes a managed object from an entity description and inserts it into the specified managed object context.
 func (o *NSManagedObject) InitWithEntityInsertIntoManagedObjectContext(entity *NSEntityDescription, context_ *NSManagedObjectContext) *NSManagedObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectSelInitWithEntityInsertIntoManagedObjectContext, entity.Ptr(), context_.Ptr())
 	if _ret != 0 {
@@ -86,6 +94,7 @@ func (o *NSManagedObject) InitWithEntityInsertIntoManagedObjectContext(entity *N
 	return NSManagedObjectFromID(_ret)
 }
 
+// Initializes a managed object subclass and inserts it into the specified managed object context.
 func (o *NSManagedObject) InitWithContext(moc *NSManagedObjectContext) *NSManagedObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectSelInitWithContext, moc.Ptr())
 	if _ret != 0 {
@@ -94,11 +103,13 @@ func (o *NSManagedObject) InitWithContext(moc *NSManagedObjectContext) *NSManage
 	return NSManagedObjectFromID(_ret)
 }
 
+// Returns a Boolean value that indicates whether the relationship for a given key is a fault.
 func (o *NSManagedObject) HasFaultForRelationshipNamed(key *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSManagedObjectSelHasFaultForRelationshipNamed, key.Ptr())
 	return _ret
 }
 
+// Returns the object IDs for all of the managed objects that are in the named relationship.
 func (o *NSManagedObject) ObjectIDsForRelationshipNamed(key *foundation.NSString) *foundation.NSArray[*NSManagedObjectID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectSelObjectIDsForRelationshipNamed, key.Ptr())
 	if _ret != 0 {
@@ -107,70 +118,95 @@ func (o *NSManagedObject) ObjectIDsForRelationshipNamed(key *foundation.NSString
 	return foundation.NSArrayFromID[*NSManagedObjectID](_ret)
 }
 
+// Provides support for key-value observing access notification.
 func (o *NSManagedObject) WillAccessValueForKey(key *foundation.NSString) {
 	o.Ptr().Send(_nSManagedObjectSelWillAccessValueForKey, key.Ptr())
 }
 
+// Provides support for key-value observing access notification.
 func (o *NSManagedObject) DidAccessValueForKey(key *foundation.NSString) {
 	o.Ptr().Send(_nSManagedObjectSelDidAccessValueForKey, key.Ptr())
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object when fufilling it from a fault.
 func (o *NSManagedObject) AwakeFromFetch() {
 	o.Ptr().Send(_nSManagedObjectSelAwakeFromFetch)
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object when initially creating it.
 func (o *NSManagedObject) AwakeFromInsert() {
 	o.Ptr().Send(_nSManagedObjectSelAwakeFromInsert)
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object when fulfilling it from a snapshot.
 func (o *NSManagedObject) AwakeFromSnapshotEvents(flags NSSnapshotEventType) {
 	o.Ptr().Send(_nSManagedObjectSelAwakeFromSnapshotEvents, flags)
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object before deleting it.
 func (o *NSManagedObject) PrepareForDeletion() {
 	o.Ptr().Send(_nSManagedObjectSelPrepareForDeletion)
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object before saving it.
 func (o *NSManagedObject) WillSave() {
 	o.Ptr().Send(_nSManagedObjectSelWillSave)
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object after the managed object’s context completes a save operation.
 func (o *NSManagedObject) DidSave() {
 	o.Ptr().Send(_nSManagedObjectSelDidSave)
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object before converting it to a fault.
 func (o *NSManagedObject) WillTurnIntoFault() {
 	o.Ptr().Send(_nSManagedObjectSelWillTurnIntoFault)
 }
 
+// Provides an opportunity to add code into the life cycle of the managed object after converting it to a fault.
 func (o *NSManagedObject) DidTurnIntoFault() {
 	o.Ptr().Send(_nSManagedObjectSelDidTurnIntoFault)
 }
 
+// Returns the value for the specified property from the managed object’s private internal storage .
 func (o *NSManagedObject) PrimitiveValueForKey(key *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectSelPrimitiveValueForKey, key.Ptr())
 	return _ret
 }
 
+// Sets the value of a given property in the managed object’s private internal storage.
 func (o *NSManagedObject) SetPrimitiveValueForKey(value objc.ID, key *foundation.NSString) {
 	o.Ptr().Send(_nSManagedObjectSelSetPrimitiveValueForKey, value, key.Ptr())
 }
 
+// Returns a dictionary of the most recent fetched or saved values of the managed object for the properties of the specified keys.
 func (o *NSManagedObject) CommittedValuesForKeys(keys *foundation.NSArray[*foundation.NSString]) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSManagedObjectSelCommittedValuesForKeys, keys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectSelCommittedValuesForKeys, keys.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
+// Returns a dictionary containing the keys and new values of persistent properties with changes since the last fetching or saving of the managed object.
 func (o *NSManagedObject) ChangedValues() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSManagedObjectSelChangedValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectSelChangedValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
+// Returns a dictionary containing the keys and new values of persistent properties with changes since the last fetching or saving of the managed object.
 func (o *NSManagedObject) ChangedValuesForCurrentEvent() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSManagedObjectSelChangedValuesForCurrentEvent)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectSelChangedValuesForCurrentEvent)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
+// Determines whether the managed object can be deleted in its current state.
 func (o *NSManagedObject) ValidateForDelete() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSManagedObjectSelValidateForDelete, unsafe.Pointer(&_nsErr))
@@ -180,6 +216,7 @@ func (o *NSManagedObject) ValidateForDelete() (bool, error) {
 	return _ret, nil
 }
 
+// Determines whether the managed object can be inserted in its current state.
 func (o *NSManagedObject) ValidateForInsert() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSManagedObjectSelValidateForInsert, unsafe.Pointer(&_nsErr))
@@ -189,6 +226,7 @@ func (o *NSManagedObject) ValidateForInsert() (bool, error) {
 	return _ret, nil
 }
 
+// Determines whether the managed object’s current state is valid.
 func (o *NSManagedObject) ValidateForUpdate() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSManagedObjectSelValidateForUpdate, unsafe.Pointer(&_nsErr))

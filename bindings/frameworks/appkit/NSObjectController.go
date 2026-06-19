@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller that can manage an object’s properties referenced by key-value paths.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsobjectcontroller
 type NSObjectController struct {
 	NSController
@@ -64,6 +66,7 @@ func NSObjectControllerFromID(id objc.ID) *NSObjectController {
 	return o
 }
 
+// Initializes and returns an NSObjectController object with the given content.
 func (o *NSObjectController) InitWithContent(content objc.ID) *NSObjectController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectControllerSelInitWithContent, content)
 	if _ret != 0 {
@@ -80,31 +83,38 @@ func (o *NSObjectController) InitWithCoder(coder *foundation.NSCoder) *NSObjectC
 	return NSObjectControllerFromID(_ret)
 }
 
+// Typically overridden by subclasses that require additional control over the creation of new objects.
 func (o *NSObjectController) PrepareContent() {
 	o.Ptr().Send(_nSObjectControllerSelPrepareContent)
 }
 
+// Creates and returns a new object of the appropriate class.
 func (o *NSObjectController) NewObject() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectControllerSelNewObject)
 	return _ret
 }
 
+// Sets the receiver’s content object.
 func (o *NSObjectController) AddObject(object objc.ID) {
 	o.Ptr().Send(_nSObjectControllerSelAddObject, object)
 }
 
+// Removes a given object from the receiver’s content.
 func (o *NSObjectController) RemoveObject(object objc.ID) {
 	o.Ptr().Send(_nSObjectControllerSelRemoveObject, object)
 }
 
+// Creates a new object and sets it as the receiver’s content object.
 func (o *NSObjectController) Add(sender objc.ID) {
 	o.Ptr().Send(_nSObjectControllerSelAdd, sender)
 }
 
+// Removes the receiver’s content object.
 func (o *NSObjectController) Remove(sender objc.ID) {
 	o.Ptr().Send(_nSObjectControllerSelRemove, sender)
 }
 
+// Returns whether the receiver can handle the action method for a user interface item.
 func (o *NSObjectController) ValidateUserInterfaceItem(item NSValidatedUserInterfaceItem) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSObjectControllerSelValidateUserInterfaceItem, item)
 	return _ret
@@ -125,8 +135,11 @@ func (o *NSObjectController) Selection() objc.ID {
 }
 
 func (o *NSObjectController) SelectedObjects() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSObjectControllerSelSelectedObjects)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectControllerSelSelectedObjects)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSObjectController) AutomaticallyPreparesContent() bool {
@@ -166,22 +179,28 @@ func (o *NSObjectController) CanRemove() bool {
 	return _ret
 }
 
+// Subclasses should override this method to customize a fetch request, for example to specify fetch limits.
 func (o *NSObjectController) FetchWithRequestMergeError(fetchRequest *coredata.NSFetchRequest[objc.ID], merge bool) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSObjectControllerSelFetchWithRequestMergeError, fetchRequest, merge, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _nSObjectControllerSelFetchWithRequestMergeError, fetchRequest.Ptr(), merge, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Causes the receiver to fetch the data objects specified by the entity name and fetch predicate.
 func (o *NSObjectController) Fetch(sender objc.ID) {
 	o.Ptr().Send(_nSObjectControllerSelFetch, sender)
 }
 
+// Returns the default fetch request used by the receiver.
 func (o *NSObjectController) DefaultFetchRequest() *coredata.NSFetchRequest[objc.ID] {
-	_ret := objc.Send[*coredata.NSFetchRequest[objc.ID]](o.Ptr(), _nSObjectControllerSelDefaultFetchRequest)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectControllerSelDefaultFetchRequest)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return coredata.NSFetchRequestFromID[objc.ID](_ret)
 }
 
 func (o *NSObjectController) ManagedObjectContext() *coredata.NSManagedObjectContext {

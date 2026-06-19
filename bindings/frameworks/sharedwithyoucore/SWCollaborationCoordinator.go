@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the shared collaboration coordinator.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationcoordinator
 type SWCollaborationCoordinator struct {
 	foundation.NSObject

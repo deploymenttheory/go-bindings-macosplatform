@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that determines the current capabilities of a person’s Music library.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skcloudservicecontroller
 // Deprecated: Use MusicKit.
 type SKCloudServiceController struct {
@@ -38,12 +40,14 @@ func SKCloudServiceControllerFromID(id objc.ID) *SKCloudServiceController {
 	return o
 }
 
+// Returns the type of authorization the customer has for accessing the Music library on the device.
 // Deprecated: Use MusicAuthorization.currentStatus from MusicKit.
 func SKCloudServiceControllerAuthorizationStatus() SKCloudServiceAuthorizationStatus {
 	_ret := objc.Send[SKCloudServiceAuthorizationStatus](objc.ID(_clsSKCloudServiceController), _sKCloudServiceControllerSelAuthorizationStatus)
 	return _ret
 }
 
+// Asks the customer for permission to access the Music library on the device.
 // Deprecated: Use MusicAuthorization.request() from MusicKit.
 func SKCloudServiceControllerRequestAuthorization(completionHandler func(SKCloudServiceAuthorizationStatus)) {
 	var __block_completionHandler objc.Block
@@ -56,6 +60,7 @@ func SKCloudServiceControllerRequestAuthorization(completionHandler func(SKCloud
 	objc.ID(_clsSKCloudServiceController).Send(_sKCloudServiceControllerSelRequestAuthorization, __block_completionHandler)
 }
 
+// Gets the current capabilities associated with the Music library on the device.
 // Deprecated: Use MusicSubscription.current from MusicKit.
 func (o *SKCloudServiceController) RequestCapabilitiesWithCompletionHandler(completionHandler func(SKCloudServiceCapability, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -68,6 +73,7 @@ func (o *SKCloudServiceController) RequestCapabilitiesWithCompletionHandler(comp
 	o.Ptr().Send(_sKCloudServiceControllerSelRequestCapabilitiesWithCompletionHandler, __block_completionHandler)
 }
 
+// Gets the country code for the storefront associated with a customer’s iTunes account.
 // Deprecated: Use MusicDataRequest.currentCountryCode from MusicKit.
 func (o *SKCloudServiceController) RequestStorefrontCountryCodeWithCompletionHandler(completionHandler func(*foundation.NSString, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -83,6 +89,7 @@ func (o *SKCloudServiceController) RequestStorefrontCountryCodeWithCompletionHan
 	o.Ptr().Send(_sKCloudServiceControllerSelRequestStorefrontCountryCodeWithCompletionHandler, __block_completionHandler)
 }
 
+// Gets the device’s storefront identifier.
 // Deprecated: Use Storefront.current.id.
 func (o *SKCloudServiceController) RequestStorefrontIdentifierWithCompletionHandler(completionHandler func(*foundation.NSString, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -98,6 +105,7 @@ func (o *SKCloudServiceController) RequestStorefrontIdentifierWithCompletionHand
 	o.Ptr().Send(_sKCloudServiceControllerSelRequestStorefrontIdentifierWithCompletionHandler, __block_completionHandler)
 }
 
+// Returns a user token that you use to access personalized Apple Music content.
 // Deprecated: Use MusicKit.
 func (o *SKCloudServiceController) RequestUserTokenForDeveloperTokenCompletionHandler(developerToken *foundation.NSString, completionHandler func(*foundation.NSString, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block

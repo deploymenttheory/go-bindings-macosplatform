@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of an acceleration structure that Metal derives from instances of primitive acceleration structures that the GPU can populate.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlindirectinstanceaccelerationstructuredescriptor
 type MTLIndirectInstanceAccelerationStructureDescriptor struct {
 	MTLAccelerationStructureDescriptor

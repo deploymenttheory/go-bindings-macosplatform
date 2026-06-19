@@ -8,18 +8,28 @@ import (
 	"fmt"
 )
 
+// These constants specify the possible formats of the data that imageDataFormat returns.
 type ITLibArtworkFormat uint64
 
 const (
-	ITLibArtworkFormatNone     ITLibArtworkFormat = 0
-	ITLibArtworkFormatBitmap   ITLibArtworkFormat = 1
-	ITLibArtworkFormatJPEG     ITLibArtworkFormat = 2
+	// The image data format is unknown.
+	ITLibArtworkFormatNone ITLibArtworkFormat = 0
+	// The image data corresponds to a bitmap image.
+	ITLibArtworkFormatBitmap ITLibArtworkFormat = 1
+	// The image data corresponds to a JPEG image.
+	ITLibArtworkFormatJPEG ITLibArtworkFormat = 2
+	// The image data corresponds to a JPEG2000 image.
 	ITLibArtworkFormatJPEG2000 ITLibArtworkFormat = 3
-	ITLibArtworkFormatGIF      ITLibArtworkFormat = 4
-	ITLibArtworkFormatPNG      ITLibArtworkFormat = 5
-	ITLibArtworkFormatBMP      ITLibArtworkFormat = 6
-	ITLibArtworkFormatTIFF     ITLibArtworkFormat = 7
-	ITLibArtworkFormatPICT     ITLibArtworkFormat = 8
+	// The image data corresponds to a GIF image.
+	ITLibArtworkFormatGIF ITLibArtworkFormat = 4
+	// The image data corresponds to a PNG image.
+	ITLibArtworkFormatPNG ITLibArtworkFormat = 5
+	// The image data corresponds to a bitmap image.
+	ITLibArtworkFormatBMP ITLibArtworkFormat = 6
+	// The image data corresponds to a TIFF image.
+	ITLibArtworkFormatTIFF ITLibArtworkFormat = 7
+	// The image data corresponds to a PICT image.
+	ITLibArtworkFormatPICT ITLibArtworkFormat = 8
 )
 
 func (e ITLibArtworkFormat) String() string {
@@ -47,31 +57,55 @@ func (e ITLibArtworkFormat) String() string {
 	}
 }
 
+// These constants specify the possible kinds of distinguished playlists.
 type ITLibDistinguishedPlaylistKind uint64
 
 const (
-	ITLibDistinguishedPlaylistKindNone                ITLibDistinguishedPlaylistKind = 0
-	ITLibDistinguishedPlaylistKindMovies              ITLibDistinguishedPlaylistKind = 1
-	ITLibDistinguishedPlaylistKindTVShows             ITLibDistinguishedPlaylistKind = 2
-	ITLibDistinguishedPlaylistKindMusic               ITLibDistinguishedPlaylistKind = 3
-	ITLibDistinguishedPlaylistKindAudiobooks          ITLibDistinguishedPlaylistKind = 4
-	ITLibDistinguishedPlaylistKindBooks               ITLibDistinguishedPlaylistKind = 4
-	ITLibDistinguishedPlaylistKindRingtones           ITLibDistinguishedPlaylistKind = 5
-	ITLibDistinguishedPlaylistKindPodcasts            ITLibDistinguishedPlaylistKind = 7
-	ITLibDistinguishedPlaylistKindVoiceMemos          ITLibDistinguishedPlaylistKind = 14
-	ITLibDistinguishedPlaylistKindPurchases           ITLibDistinguishedPlaylistKind = 16
-	ITLibDistinguishedPlaylistKindiTunesU             ITLibDistinguishedPlaylistKind = 26
-	ITLibDistinguishedPlaylistKind90sMusic            ITLibDistinguishedPlaylistKind = 42
-	ITLibDistinguishedPlaylistKindMyTopRated          ITLibDistinguishedPlaylistKind = 43
-	ITLibDistinguishedPlaylistKindTop25MostPlayed     ITLibDistinguishedPlaylistKind = 44
-	ITLibDistinguishedPlaylistKindRecentlyPlayed      ITLibDistinguishedPlaylistKind = 45
-	ITLibDistinguishedPlaylistKindRecentlyAdded       ITLibDistinguishedPlaylistKind = 46
-	ITLibDistinguishedPlaylistKindMusicVideos         ITLibDistinguishedPlaylistKind = 47
-	ITLibDistinguishedPlaylistKindClassicalMusic      ITLibDistinguishedPlaylistKind = 48
-	ITLibDistinguishedPlaylistKindLibraryMusicVideos  ITLibDistinguishedPlaylistKind = 49
-	ITLibDistinguishedPlaylistKindHomeVideos          ITLibDistinguishedPlaylistKind = 50
-	ITLibDistinguishedPlaylistKindApplications        ITLibDistinguishedPlaylistKind = 51
-	ITLibDistinguishedPlaylistKindLovedSongs          ITLibDistinguishedPlaylistKind = 52
+	// The playlist isn’t a distinguished playlist.
+	ITLibDistinguishedPlaylistKindNone ITLibDistinguishedPlaylistKind = 0
+	// The playlist contains all the movies in the iTunes library.
+	ITLibDistinguishedPlaylistKindMovies ITLibDistinguishedPlaylistKind = 1
+	// The playlist contains all the TV shows in the iTunes library.
+	ITLibDistinguishedPlaylistKindTVShows ITLibDistinguishedPlaylistKind = 2
+	// The playlist contains all the music items in the iTunes library.
+	ITLibDistinguishedPlaylistKindMusic ITLibDistinguishedPlaylistKind = 3
+	// The playlist contains all the audiobooks in the iTunes library.
+	ITLibDistinguishedPlaylistKindAudiobooks ITLibDistinguishedPlaylistKind = 4
+	// The playlist contains all the audiobooks in the iTunes library.
+	ITLibDistinguishedPlaylistKindBooks ITLibDistinguishedPlaylistKind = 4
+	// The playlist contains all the iOS ringtones in the iTunes library.
+	ITLibDistinguishedPlaylistKindRingtones ITLibDistinguishedPlaylistKind = 5
+	// The playlist contains all the podcasts in the iTunes library.
+	ITLibDistinguishedPlaylistKindPodcasts ITLibDistinguishedPlaylistKind = 7
+	// The playlist contains all the voice memos in the iTunes library.
+	ITLibDistinguishedPlaylistKindVoiceMemos ITLibDistinguishedPlaylistKind = 14
+	// The playlist contains all the user’s purchases from the iTunes Store.
+	ITLibDistinguishedPlaylistKindPurchases ITLibDistinguishedPlaylistKind = 16
+	// The playlist contains all the user’s iTunes U items.
+	ITLibDistinguishedPlaylistKindiTunesU ITLibDistinguishedPlaylistKind = 26
+	// The default Smart Playlist that iTunes creates of the user’s music from the 1990s.
+	ITLibDistinguishedPlaylistKind90sMusic ITLibDistinguishedPlaylistKind = 42
+	// The default Smart Playlist that iTunes creates of the user’s top rated media items.
+	ITLibDistinguishedPlaylistKindMyTopRated ITLibDistinguishedPlaylistKind = 43
+	// The default Smart Playlist that iTunes creates of the user’s 25 most played media items.
+	ITLibDistinguishedPlaylistKindTop25MostPlayed ITLibDistinguishedPlaylistKind = 44
+	// The default Smart Playlist that iTunes creates of the user’s most recently played media items.
+	ITLibDistinguishedPlaylistKindRecentlyPlayed ITLibDistinguishedPlaylistKind = 45
+	// The default Smart Playlist that iTunes creates of the user’s most recently added media items.
+	ITLibDistinguishedPlaylistKindRecentlyAdded ITLibDistinguishedPlaylistKind = 46
+	// The default Smart Playlist that iTunes creates of the user’s music videos.
+	ITLibDistinguishedPlaylistKindMusicVideos ITLibDistinguishedPlaylistKind = 47
+	// The default Smart Playlist that iTunes creates of the user’s classical music.
+	ITLibDistinguishedPlaylistKindClassicalMusic ITLibDistinguishedPlaylistKind = 48
+	// The playlist contains all the music videos in the iTunes library.
+	ITLibDistinguishedPlaylistKindLibraryMusicVideos ITLibDistinguishedPlaylistKind = 49
+	// The playlist contains all the user’s home videos in the iTunes library.
+	ITLibDistinguishedPlaylistKindHomeVideos ITLibDistinguishedPlaylistKind = 50
+	// The playlist contains all the user’s iOS apps in the iTunes library.
+	ITLibDistinguishedPlaylistKindApplications ITLibDistinguishedPlaylistKind = 51
+	// The playlist contains all the user’s loved music.
+	ITLibDistinguishedPlaylistKindLovedSongs ITLibDistinguishedPlaylistKind = 52
+	// The default Smart Playlist that iTunes creates of the user’s music shows and movies.
 	ITLibDistinguishedPlaylistKindMusicShowsAndMovies ITLibDistinguishedPlaylistKind = 53
 )
 
@@ -126,9 +160,11 @@ func (e ITLibDistinguishedPlaylistKind) String() string {
 	}
 }
 
+// These constants describe the features that an iTunes library supports.
 type ITLibExportFeature uint64
 
 const (
+	// The iTunes library doesn’t support any export features.
 	ITLibExportFeatureNone ITLibExportFeature = 0
 )
 
@@ -141,11 +177,13 @@ func (e ITLibExportFeature) String() string {
 	}
 }
 
+// These constants describe initialization options for an iTunes library.
 type ITLibInitOptions uint64
 
 const (
+	// No initialization options apply.
 	ITLibInitOptionNone ITLibInitOptions = 0
-	// ITLibrary will be initialized but no iTunes library data will be loaded. Data will be lazy-loaded upon request.
+	// iTunes library data loads upon request, rather than during initialization.
 	ITLibInitOptionLazyLoadData ITLibInitOptions = 1
 )
 
@@ -160,13 +198,18 @@ func (e ITLibInitOptions) String() string {
 	}
 }
 
+// These constants specify the location type of a media item.
 type ITLibMediaItemLocationType uint64
 
 const (
+	// The media item location type is unknown.
 	ITLibMediaItemLocationTypeUnknown ITLibMediaItemLocationType = 0
-	ITLibMediaItemLocationTypeFile    ITLibMediaItemLocationType = 1
-	ITLibMediaItemLocationTypeURL     ITLibMediaItemLocationType = 2
-	ITLibMediaItemLocationTypeRemote  ITLibMediaItemLocationType = 3
+	// The media item location refers to a local file.
+	ITLibMediaItemLocationTypeFile ITLibMediaItemLocationType = 1
+	// The media item location refers to a URL, such as a podcast.
+	ITLibMediaItemLocationTypeURL ITLibMediaItemLocationType = 2
+	// The media item location refers to a remote file.
+	ITLibMediaItemLocationTypeRemote ITLibMediaItemLocationType = 3
 )
 
 func (e ITLibMediaItemLocationType) String() string {
@@ -184,12 +227,16 @@ func (e ITLibMediaItemLocationType) String() string {
 	}
 }
 
+// These constants specify the possible ratings of media item lyrics.
 type ITLibMediaItemLyricsContentRating uint64
 
 const (
-	ITLibMediaItemLyricsContentRatingNone     ITLibMediaItemLyricsContentRating = 0
+	// There is no rating information for the media item lyrics.
+	ITLibMediaItemLyricsContentRatingNone ITLibMediaItemLyricsContentRating = 0
+	// The media item lyrics contain explicit language.
 	ITLibMediaItemLyricsContentRatingExplicit ITLibMediaItemLyricsContentRating = 1
-	ITLibMediaItemLyricsContentRatingClean    ITLibMediaItemLyricsContentRating = 2
+	// The media item lyrics don’t contain explicit language.
+	ITLibMediaItemLyricsContentRatingClean ITLibMediaItemLyricsContentRating = 2
 )
 
 func (e ITLibMediaItemLyricsContentRating) String() string {
@@ -205,27 +252,46 @@ func (e ITLibMediaItemLyricsContentRating) String() string {
 	}
 }
 
+// These constants specify the possible media kinds of a media item.
 type ITLibMediaItemMediaKind uint64
 
 const (
-	ITLibMediaItemMediaKindUnknown            ITLibMediaItemMediaKind = 1
-	ITLibMediaItemMediaKindSong               ITLibMediaItemMediaKind = 2
-	ITLibMediaItemMediaKindMovie              ITLibMediaItemMediaKind = 3
-	ITLibMediaItemMediaKindPodcast            ITLibMediaItemMediaKind = 4
-	ITLibMediaItemMediaKindAudiobook          ITLibMediaItemMediaKind = 5
-	ITLibMediaItemMediaKindPDFBooklet         ITLibMediaItemMediaKind = 6
-	ITLibMediaItemMediaKindMusicVideo         ITLibMediaItemMediaKind = 7
-	ITLibMediaItemMediaKindTVShow             ITLibMediaItemMediaKind = 8
+	// The media item kind is unknown.
+	ITLibMediaItemMediaKindUnknown ITLibMediaItemMediaKind = 1
+	// The media item is a song.
+	ITLibMediaItemMediaKindSong ITLibMediaItemMediaKind = 2
+	// The media item is a movie.
+	ITLibMediaItemMediaKindMovie ITLibMediaItemMediaKind = 3
+	// The media item is an audio or a video podcast.
+	ITLibMediaItemMediaKindPodcast ITLibMediaItemMediaKind = 4
+	// The media item is an audiobook.
+	ITLibMediaItemMediaKindAudiobook ITLibMediaItemMediaKind = 5
+	// The media item is an unwrapped PDF file that’s part of a music album.
+	ITLibMediaItemMediaKindPDFBooklet ITLibMediaItemMediaKind = 6
+	// The media item is a music video.
+	ITLibMediaItemMediaKindMusicVideo ITLibMediaItemMediaKind = 7
+	// The media item is a TV show.
+	ITLibMediaItemMediaKindTVShow ITLibMediaItemMediaKind = 8
+	// The media item is a QuickTime movie with embedded Flash.
 	ITLibMediaItemMediaKindInteractiveBooklet ITLibMediaItemMediaKind = 9
-	ITLibMediaItemMediaKindHomeVideo          ITLibMediaItemMediaKind = 12
-	ITLibMediaItemMediaKindRingtone           ITLibMediaItemMediaKind = 14
-	ITLibMediaItemMediaKindDigitalBooklet     ITLibMediaItemMediaKind = 15
-	ITLibMediaItemMediaKindIOSApplication     ITLibMediaItemMediaKind = 16
-	ITLibMediaItemMediaKindVoiceMemo          ITLibMediaItemMediaKind = 17
-	ITLibMediaItemMediaKindiTunesU            ITLibMediaItemMediaKind = 18
-	ITLibMediaItemMediaKindBook               ITLibMediaItemMediaKind = 19
-	ITLibMediaItemMediaKindPDFBook            ITLibMediaItemMediaKind = 20
-	ITLibMediaItemMediaKindAlertTone          ITLibMediaItemMediaKind = 21
+	// The media item is a non-iTunes Store movie.
+	ITLibMediaItemMediaKindHomeVideo ITLibMediaItemMediaKind = 12
+	// The media item is an iOS ringtone.
+	ITLibMediaItemMediaKindRingtone ITLibMediaItemMediaKind = 14
+	// The media item is an iTunes Extra or an iTunes LP item.
+	ITLibMediaItemMediaKindDigitalBooklet ITLibMediaItemMediaKind = 15
+	// The media item is an iOS app.
+	ITLibMediaItemMediaKindIOSApplication ITLibMediaItemMediaKind = 16
+	// The media item is a recorded voice memo.
+	ITLibMediaItemMediaKindVoiceMemo ITLibMediaItemMediaKind = 17
+	// The media item is an iTunes U audio or video file.
+	ITLibMediaItemMediaKindiTunesU ITLibMediaItemMediaKind = 18
+	// The media item is an EPUB file or an iBooks Author book.
+	ITLibMediaItemMediaKindBook ITLibMediaItemMediaKind = 19
+	// The media item is a PDF file that iTunes treats as a book unless the user overrides it.
+	ITLibMediaItemMediaKindPDFBook ITLibMediaItemMediaKind = 20
+	// The media item is an audio tone that’s not a protected ringtone on an iOS device.
+	ITLibMediaItemMediaKindAlertTone ITLibMediaItemMediaKind = 21
 )
 
 func (e ITLibMediaItemMediaKind) String() string {
@@ -271,12 +337,16 @@ func (e ITLibMediaItemMediaKind) String() string {
 	}
 }
 
+// These constants specify the play status of the media item.
 type ITLibMediaItemPlayStatus uint64
 
 const (
-	ITLibMediaItemPlayStatusNone            ITLibMediaItemPlayStatus = 0
+	// The user has played the media item or iTunes doesn’t track the play status for this kind of media item.
+	ITLibMediaItemPlayStatusNone ITLibMediaItemPlayStatus = 0
+	// The user has partially played the media item.
 	ITLibMediaItemPlayStatusPartiallyPlayed ITLibMediaItemPlayStatus = 1
-	ITLibMediaItemPlayStatusUnplayed        ITLibMediaItemPlayStatus = 2
+	// The user hasn’t played the media item.
+	ITLibMediaItemPlayStatusUnplayed ITLibMediaItemPlayStatus = 2
 )
 
 func (e ITLibMediaItemPlayStatus) String() string {
@@ -292,13 +362,19 @@ func (e ITLibMediaItemPlayStatus) String() string {
 	}
 }
 
+// These constants specify the possible kinds of playlists.
 type ITLibPlaylistKind uint64
 
 const (
-	ITLibPlaylistKindRegular   ITLibPlaylistKind = 0
-	ITLibPlaylistKindSmart     ITLibPlaylistKind = 1
-	ITLibPlaylistKindGenius    ITLibPlaylistKind = 2
-	ITLibPlaylistKindFolder    ITLibPlaylistKind = 3
+	// A standard playlist that the user or iTunes creates, such as Music, Movies, Pop Mix, or My Awesome Playlist.
+	ITLibPlaylistKindRegular ITLibPlaylistKind = 0
+	// A playlist with contents that iTunes generates by evaluating a set of rules, such as 90s Music or Songs from 1999.
+	ITLibPlaylistKindSmart ITLibPlaylistKind = 1
+	// A playlist iTunes creates of songs that go well with a song the user specifies.
+	ITLibPlaylistKindGenius ITLibPlaylistKind = 2
+	// A playlist folder that the user or iTunes creates, such as My Playlist Folder or Genius Mixes.
+	ITLibPlaylistKindFolder ITLibPlaylistKind = 3
+	// An ongoing playlist in a particular genre—like a commercial-free radio station playing the user’s favorite songs—that iTunes creates from music in the user’s iTunes library.
 	ITLibPlaylistKindGeniusMix ITLibPlaylistKind = 4
 )
 

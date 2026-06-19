@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class IKSlideshow @abstract IKSlideshow handles a slideshow with images, PDFs & more.
+// The IKSlideshow class encapsulates a data source and options for a slideshow.
 //
 // Apple documentation: https://developer.apple.com/documentation/quartz/ikslideshow
 type IKSlideshow struct {
@@ -41,45 +41,45 @@ func IKSlideshowFromID(id objc.ID) *IKSlideshow {
 	return o
 }
 
-// @method sharedSlideshow @abstract shared instance of the IKSlideshow.
+// Returns a shared instance of a slideshow.
 func IKSlideshowSharedSlideshow() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIKSlideshow), _iKSlideshowSelSharedSlideshow)
 	return _ret
 }
 
-// @method runSlideshowWithDataSource:inMode:options: @abstract start the slideshow (slideshowOptions can be NULL).
+// Runs a slideshow that contains the specified kind of items, provided from a data source.
 func (o *IKSlideshow) RunSlideshowWithDataSourceInModeOptions(dataSource objc.ID, slideshowMode *foundation.NSString, slideshowOptions *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_iKSlideshowSelRunSlideshowWithDataSourceInModeOptions, dataSource, slideshowMode.Ptr(), slideshowOptions)
+	o.Ptr().Send(_iKSlideshowSelRunSlideshowWithDataSourceInModeOptions, dataSource, slideshowMode.Ptr(), slideshowOptions.Ptr())
 }
 
-// @method stopSlideshow: @abstract stop the slideshow.
+// Stops a slideshow.
 func (o *IKSlideshow) StopSlideshow(sender objc.ID) {
 	o.Ptr().Send(_iKSlideshowSelStopSlideshow, sender)
 }
 
-// @method reloadData: @abstract reloadData.
+// Reloads the data for a slideshow.
 func (o *IKSlideshow) ReloadData() {
 	o.Ptr().Send(_iKSlideshowSelReloadData)
 }
 
-// @method reloadSlideshowItemAtIndex: @abstract reloadSlideshowItemAtIndex.
+// Reloads the data for a slideshow, starting at the specified index.
 func (o *IKSlideshow) ReloadSlideshowItemAtIndex(index uint) {
 	o.Ptr().Send(_iKSlideshowSelReloadSlideshowItemAtIndex, index)
 }
 
-// @method indexOfCurrentSlideshowItem: @abstract Returns index of current slideshow item.
+// Returns the index of the current slideshow item.
 func (o *IKSlideshow) IndexOfCurrentSlideshowItem() uint {
 	_ret := objc.Send[uint](o.Ptr(), _iKSlideshowSelIndexOfCurrentSlideshowItem)
 	return _ret
 }
 
-// @method canExportToApplication: @abstract Is exporting to a given application possible (application installed?, right version?, ...).
+// Finds out whether the slideshow can export its contents to an application.
 func IKSlideshowCanExportToApplication(applicationBundleIdentifier *foundation.NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsIKSlideshow), _iKSlideshowSelCanExportToApplication, applicationBundleIdentifier.Ptr())
 	return _ret
 }
 
-// @method exportSlideshowItem:toApplication: @abstract export an item to the given application. @discussion The item can be either: NSImage, NSString, NSURL, or a NSArray of NSImage / NSString / NSURL.
+// Exports a slideshow item to the application that has the provided bundle identifier.
 func IKSlideshowExportSlideshowItemToApplication(item objc.ID, applicationBundleIdentifier *foundation.NSString) {
 	objc.ID(_clsIKSlideshow).Send(_iKSlideshowSelExportSlideshowItemToApplication, item, applicationBundleIdentifier.Ptr())
 }

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A trigger condition that indicates Apple Push Notification Service (APNs) has sent the notification.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/unpushnotificationtrigger
 type UNPushNotificationTrigger struct {
 	UNNotificationTrigger

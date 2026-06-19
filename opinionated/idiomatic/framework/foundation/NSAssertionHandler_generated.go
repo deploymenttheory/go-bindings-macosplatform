@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that logs an assertion to the console.
+//
 // AssertionHandler wraps [raw.NSAssertionHandler] with a fluent Go API.
 type AssertionHandler struct {
 	inner *raw.NSAssertionHandler

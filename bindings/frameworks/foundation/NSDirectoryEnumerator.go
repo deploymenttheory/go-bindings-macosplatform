@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that enumerates the contents of a directory.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdirectoryenumerator
 type NSDirectoryEnumerator[ObjectType purego.AnyObject] struct {
 	NSEnumerator[ObjectType]
@@ -43,13 +45,19 @@ func (o *NSDirectoryEnumerator[ObjectType]) SkipDescendants() {
 }
 
 func (o *NSDirectoryEnumerator[ObjectType]) FileAttributes() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSDirectoryEnumeratorSelFileAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSDirectoryEnumeratorSelFileAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSDirectoryEnumerator[ObjectType]) DirectoryAttributes() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSDirectoryEnumeratorSelDirectoryAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSDirectoryEnumeratorSelDirectoryAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSDirectoryEnumerator[ObjectType]) IsEnumeratingDirectoryPostOrder() bool {

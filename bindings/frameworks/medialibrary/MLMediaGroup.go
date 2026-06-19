@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The MLMediaGroup class provides groupings for media objects from a single source of media, such as iTunes or Aperture. The media objects—individual files containing a piece of media such as a photo, song, or movie—are referenced by one or more groups within each media source. These groupings serve as filters, providing hierarchical structure to the collection of objects in each source.
+//
 // Apple documentation: https://developer.apple.com/documentation/medialibrary/mlmediagroup
 type MLMediaGroup struct {
 	foundation.NSObject
@@ -91,8 +93,11 @@ func (o *MLMediaGroup) TypeIdentifier() *foundation.NSString {
 }
 
 func (o *MLMediaGroup) Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mLMediaGroupSelAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaGroupSelAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MLMediaGroup) ChildGroups() *foundation.NSArray[*MLMediaGroup] {

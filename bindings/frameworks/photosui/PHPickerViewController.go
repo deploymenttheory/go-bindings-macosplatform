@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view controller that provides the user interface for choosing assets from the photo library.
+//
 // Apple documentation: https://developer.apple.com/documentation/photosui/phpickerviewcontroller
 type PHPickerViewController struct {
 	appkit.NSViewController
@@ -40,7 +42,7 @@ func PHPickerViewControllerFromID(id objc.ID) *PHPickerViewController {
 	return o
 }
 
-// Initializes a new picker with the \c configuration the picker should use.
+// Creates a new picker view controller with the configuration you specify.
 func (o *PHPickerViewController) InitWithConfiguration(configuration *PHPickerConfiguration) *PHPickerViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPickerViewControllerSelInitWithConfiguration, configuration.Ptr())
 	if _ret != 0 {
@@ -49,32 +51,32 @@ func (o *PHPickerViewController) InitWithConfiguration(configuration *PHPickerCo
 	return PHPickerViewControllerFromID(_ret)
 }
 
-// Updates the picker using the configuration.
+// Customizes your app’s photo picker according to the given configuration.
 func (o *PHPickerViewController) UpdatePickerUsingConfiguration(configuration *PHPickerUpdateConfiguration) {
 	o.Ptr().Send(_pHPickerViewControllerSelUpdatePickerUsingConfiguration, configuration.Ptr())
 }
 
-// Deselects selected assets in the picker. @discussion Does nothing if asset identifiers are invalid or not selected, or \c photoLibrary is not specified in the configuration.
+// Deselects assets that are in a selected state.
 func (o *PHPickerViewController) DeselectAssetsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_pHPickerViewControllerSelDeselectAssetsWithIdentifiers, identifiers)
+	o.Ptr().Send(_pHPickerViewControllerSelDeselectAssetsWithIdentifiers, identifiers.Ptr())
 }
 
-// Reorders selected assets in the picker. A \c nil \c afterIdentifier means moving to the front. @discussion Does nothing if asset identifiers are invalid or not selected, or \c photoLibrary is not specified in the configuration.
+// Reorders assets that are in a selected state.
 func (o *PHPickerViewController) MoveAssetWithIdentifierAfterAssetWithIdentifier(identifier *foundation.NSString, afterIdentifier *foundation.NSString) {
 	o.Ptr().Send(_pHPickerViewControllerSelMoveAssetWithIdentifierAfterAssetWithIdentifier, identifier.Ptr(), afterIdentifier.Ptr())
 }
 
-// Scrolls content to the initial position if possible.
+// Resets the visible photo thumbnails by scrolling the view to the picker’s initial position.
 func (o *PHPickerViewController) ScrollToInitialPosition() {
 	o.Ptr().Send(_pHPickerViewControllerSelScrollToInitialPosition)
 }
 
-// Zooms in content if possible.
+// Changes the picker’s content scale by making the photo thumbnails larger in the view.
 func (o *PHPickerViewController) ZoomIn() {
 	o.Ptr().Send(_pHPickerViewControllerSelZoomIn)
 }
 
-// Zooms out content if possible.
+// Changes the picker’s content scale by making the photo thumbnails smaller in the view.
 func (o *PHPickerViewController) ZoomOut() {
 	o.Ptr().Send(_pHPickerViewControllerSelZoomOut)
 }

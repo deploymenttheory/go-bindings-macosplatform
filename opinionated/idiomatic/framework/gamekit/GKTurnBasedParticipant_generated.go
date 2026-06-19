@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A participant in a turn-based match.
+//
 // TurnBasedParticipant wraps [raw.GKTurnBasedParticipant] with a fluent Go API.
 type TurnBasedParticipant struct {
 	inner *raw.GKTurnBasedParticipant
@@ -37,6 +39,8 @@ func NewTurnBasedParticipant() *TurnBasedParticipant {
 	return &TurnBasedParticipant{inner: raw.GKTurnBasedParticipantFromID(_id)}
 }
 
+// The conclusion or results of a participant in a match.
+//
 // WithMatchOutcome sets the matchOutcome property and returns the receiver for chaining.
 func (x *TurnBasedParticipant) WithMatchOutcome(matchOutcome GKTurnBasedMatchOutcome) *TurnBasedParticipant {
 	x.inner.SetMatchOutcome(raw.GKTurnBasedMatchOutcome(matchOutcome))

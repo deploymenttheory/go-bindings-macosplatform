@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// This class represents an artist, such as the performer of a song.
+//
 // Apple documentation: https://developer.apple.com/documentation/ituneslibrary/itlibartist
 type ITLibArtist struct {
 	foundation.NSObject

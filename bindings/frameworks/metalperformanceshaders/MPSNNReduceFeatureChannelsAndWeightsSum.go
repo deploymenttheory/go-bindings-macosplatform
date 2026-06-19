@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A reduction filter that returns the weighted sum of all values for each feature channel in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducefeaturechannelsandweightssum
 type MPSNNReduceFeatureChannelsAndWeightsSum struct {
 	mpsneuralnetwork.MPSNNReduceBinary

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A UI control shown in the Touch Bar on supported models of MacBook Pro.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstouchbaritem
 type NSTouchBarItem struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func NSTouchBarItemFromID(id objc.ID) *NSTouchBarItem {
 	return o
 }
 
+// Creates a new item with the specified identifier.
 func (o *NSTouchBarItem) InitWithIdentifier(identifier *foundation.NSString) *NSTouchBarItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelInitWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -46,6 +49,7 @@ func (o *NSTouchBarItem) InitWithIdentifier(identifier *foundation.NSString) *NS
 	return NSTouchBarItemFromID(_ret)
 }
 
+// Initializes and returns a new item from a storyboard or nib file.
 func (o *NSTouchBarItem) InitWithCoder(coder *foundation.NSCoder) *NSTouchBarItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarItemSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The colored light on a device.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcdevicelight
 type GCDeviceLight struct {
 	foundation.NSObject

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes a specific version of an object model.
+//
 // ManagedObjectModelReference wraps [raw.NSManagedObjectModelReference] with a fluent Go API.
 type ManagedObjectModelReference struct {
 	inner *raw.NSManagedObjectModelReference
@@ -31,6 +33,8 @@ func ManagedObjectModelReferenceFromID(id objc.ID) *ManagedObjectModelReference 
 	return &ManagedObjectModelReference{inner: raw.NSManagedObjectModelReferenceFromID(id)}
 }
 
+// Creates an object model reference for the specified model.
+//
 // NewManagedObjectModelReferenceWithModelVersionChecksum creates a new [ManagedObjectModelReference].
 func NewManagedObjectModelReferenceWithModelVersionChecksum(model *raw.NSManagedObjectModel, versionChecksum string) *ManagedObjectModelReference {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObjectModelReference")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewManagedObjectModelReferenceWithModelVersionChecksum(model *raw.NSManaged
 	return &ManagedObjectModelReference{inner: raw.NSManagedObjectModelReferenceFromID(_id)}
 }
 
+// Creates an object model reference for the model at the specified file URL.
+//
 // NewManagedObjectModelReferenceWithFileURLVersionChecksum creates a new [ManagedObjectModelReference].
 func NewManagedObjectModelReferenceWithFileURLVersionChecksum(fileURL string, versionChecksum string) *ManagedObjectModelReference {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObjectModelReference")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewManagedObjectModelReferenceWithFileURLVersionChecksum(fileURL string, ve
 	return &ManagedObjectModelReference{inner: raw.NSManagedObjectModelReferenceFromID(_id)}
 }
 
+// Creates an object model reference with the entities corresponding to the specified entity version hashes.
+//
 // NewManagedObjectModelReferenceWithEntityVersionHashesInBundleVersionChecksum creates a new [ManagedObjectModelReference].
 func NewManagedObjectModelReferenceWithEntityVersionHashesInBundleVersionChecksum(versionHash purego.IDer, bundle *foundation.NSBundle, versionChecksum string) *ManagedObjectModelReference {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObjectModelReference")), objc.RegisterName("alloc"))
@@ -52,6 +60,8 @@ func NewManagedObjectModelReferenceWithEntityVersionHashesInBundleVersionChecksu
 	return &ManagedObjectModelReference{inner: raw.NSManagedObjectModelReferenceFromID(_id)}
 }
 
+// Creates an object model reference for the named model in the specified bundle.
+//
 // NewManagedObjectModelReferenceWithNameInBundleVersionChecksum creates a new [ManagedObjectModelReference].
 func NewManagedObjectModelReferenceWithNameInBundleVersionChecksum(modelName string, bundle *foundation.NSBundle, versionChecksum string) *ManagedObjectModelReference {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObjectModelReference")), objc.RegisterName("alloc"))

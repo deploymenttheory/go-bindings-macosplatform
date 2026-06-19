@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// PDFActionURL, a subclass of PDFAction, defines methods for getting and setting the URL associated with a URL action.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfactionurl
 type PDFActionURL struct {
 	PDFAction
@@ -32,6 +34,7 @@ func PDFActionURLFromID(id objc.ID) *PDFActionURL {
 	return o
 }
 
+// Initializes a URL action with the specified URL.
 func (o *PDFActionURL) InitWithURL(url *foundation.NSURL) *PDFActionURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFActionURLSelInitWithURL, url.Ptr())
 	if _ret != 0 {

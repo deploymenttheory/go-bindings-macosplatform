@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable representation of inspectable details of an integrated timeline object.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayeritemintegratedtimelinesnapshot
 type AVPlayerItemIntegratedTimelineSnapshot struct {
 	foundation.NSObject

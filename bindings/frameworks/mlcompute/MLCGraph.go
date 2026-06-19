@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A graph of layers you use to build a training or inference graph.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcgraph
 type MLCGraph struct {
 	foundation.NSObject
@@ -49,7 +51,7 @@ func MLCGraphFromID(id objc.ID) *MLCGraph {
 	return o
 }
 
-// @abstract   Creates a new graph. @return     A new graph.
+// Creates a new graph.
 func MLCGraphGraph() *MLCGraph {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCGraph), _mLCGraphSelGraph)
 	if _ret != 0 {
@@ -58,7 +60,7 @@ func MLCGraphGraph() *MLCGraph {
 	return MLCGraphFromID(_ret)
 }
 
-// @abstract   Add a layer to the graph @param      layer        The layer @param      source      The source tensor @return     A result tensor
+// Adds the layer and source tensor that you specify to the graph.
 func (o *MLCGraph) NodeWithLayerSource(layer *MLCLayer, source *MLCTensor) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelNodeWithLayerSource, layer.Ptr(), source.Ptr())
 	if _ret != 0 {
@@ -67,7 +69,7 @@ func (o *MLCGraph) NodeWithLayerSource(layer *MLCLayer, source *MLCTensor) *MLCT
 	return MLCTensorFromID(_ret)
 }
 
-// @abstract   Add a layer to the graph @param      layer        The layer @param      sources    A list of source tensors @discussion For variable length sequences of LSTMs/RNNs layers, create an MLCTensor of sortedSequenceLengths and pass it as the last index (i.e. index 2 or 4) of sources. This tensor must of be type MLCDataTypeInt32. @return     A result tensor
+// Adds the layer and source tensors that you specify to the graph.
 func (o *MLCGraph) NodeWithLayerSources(layer *MLCLayer, sources *foundation.NSArray[*MLCTensor]) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelNodeWithLayerSources, layer.Ptr(), sources.Ptr())
 	if _ret != 0 {
@@ -76,7 +78,7 @@ func (o *MLCGraph) NodeWithLayerSources(layer *MLCLayer, sources *foundation.NSA
 	return MLCTensorFromID(_ret)
 }
 
-// @abstract   Add a layer to the graph @param      layer                       The layer @param      sources                   A list of source tensors @param      disableUpdate     A flag to indicate if optimizer update should be disabled for this layer @discussion For variable length sequences of LSTMs/RNNs layers, create an MLCTensor of sortedSequenceLengths and pass it as the last index (i.e. index 2 or 4) of sources. This tensor must of be type MLCDataTypeInt32. @return     A result tensor
+// Adds the layer, source tensors, and option to disable optimizer updates that you specify to the graph.
 func (o *MLCGraph) NodeWithLayerSourcesDisableUpdate(layer *MLCLayer, sources *foundation.NSArray[*MLCTensor], disableUpdate bool) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelNodeWithLayerSourcesDisableUpdate, layer.Ptr(), sources.Ptr(), disableUpdate)
 	if _ret != 0 {
@@ -85,7 +87,7 @@ func (o *MLCGraph) NodeWithLayerSourcesDisableUpdate(layer *MLCLayer, sources *f
 	return MLCTensorFromID(_ret)
 }
 
-// @abstract   Add a loss layer to the graph @param      layer                      The loss layer @param      lossLabels           The loss labels tensor @discussion For variable length sequences of LSTMs/RNNs layers, create an MLCTensor of sortedSequenceLengths and pass it as the last index (i.e. index 2 or 4) of sources. This tensor must of be type MLCDataTypeInt32. @return     A result tensor
+// Adds the layer, sources, and loss labels tensors that you specify to the graph.
 func (o *MLCGraph) NodeWithLayerSourcesLossLabels(layer *MLCLayer, sources *foundation.NSArray[*MLCTensor], lossLabels *foundation.NSArray[*MLCTensor]) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelNodeWithLayerSourcesLossLabels, layer.Ptr(), sources.Ptr(), lossLabels.Ptr())
 	if _ret != 0 {
@@ -94,7 +96,7 @@ func (o *MLCGraph) NodeWithLayerSourcesLossLabels(layer *MLCLayer, sources *foun
 	return MLCTensorFromID(_ret)
 }
 
-// @abstract   Add a split layer to the graph @param      source                         The source tensor @param      splitCount                The number of splits @param      dimension                  The dimension to split the source tensor @return     A result tensor
+// Adds a new split layer to the graph using the source tensor, number of splits, and dimension to split the source tensor that you specify.
 func (o *MLCGraph) SplitWithSourceSplitCountDimension(source *MLCTensor, splitCount uint, dimension uint) *foundation.NSArray[*MLCTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelSplitWithSourceSplitCountDimension, source.Ptr(), splitCount, dimension)
 	if _ret != 0 {
@@ -103,16 +105,16 @@ func (o *MLCGraph) SplitWithSourceSplitCountDimension(source *MLCTensor, splitCo
 	return foundation.NSArrayFromID[*MLCTensor](_ret)
 }
 
-// @abstract   Add a split layer to the graph @param      source                                     The source tensor @param      splitSectionLengths        The lengths of each split section @param      dimension                              The dimension to split the source tensor @return     A result tensor
+// Adds a new split layer to the graph using the source tensor, lengths of each split section, and dimension to split the source tensor that you specify.
 func (o *MLCGraph) SplitWithSourceSplitSectionLengthsDimension(source *MLCTensor, splitSectionLengths *foundation.NSArray[*foundation.NSNumber], dimension uint) *foundation.NSArray[*MLCTensor] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelSplitWithSourceSplitSectionLengthsDimension, source.Ptr(), splitSectionLengths, dimension)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelSplitWithSourceSplitSectionLengthsDimension, source.Ptr(), splitSectionLengths.Ptr(), dimension)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*MLCTensor](_ret)
 }
 
-// @abstract   Add a concat layer to the graph @param      sources      The source tensors to concatenate @param      dimension  The concatenation dimension @return     A result tensor
+// Adds a new concatenation layer to the graph using the source tensors and concatenation dimension you specify.
 func (o *MLCGraph) ConcatenateWithSourcesDimension(sources *foundation.NSArray[*MLCTensor], dimension uint) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelConcatenateWithSourcesDimension, sources.Ptr(), dimension)
 	if _ret != 0 {
@@ -121,25 +123,25 @@ func (o *MLCGraph) ConcatenateWithSourcesDimension(sources *foundation.NSArray[*
 	return MLCTensorFromID(_ret)
 }
 
-// @abstract   Add a reshape layer to the graph @param      shape                     An array representing the shape of result tensor @param      source                   The source tensor @return     A result tensor
+// Adds a new reshape layer to the graph using the shape and source tensor you specify.
 func (o *MLCGraph) ReshapeWithShapeSource(shape *foundation.NSArray[*foundation.NSNumber], source *MLCTensor) *MLCTensor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelReshapeWithShapeSource, shape, source.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelReshapeWithShapeSource, shape.Ptr(), source.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MLCTensorFromID(_ret)
 }
 
-// @abstract   Add a transpose layer to the graph @param      dimensions NSArray<NSNumber *> representing the desired ordering of dimensions The dimensions array specifies the input axis source for each output axis, such that the K'th element in the dimensions array specifies the input axis source for the K'th axis in the output.  The batch dimension which is typically axis 0 cannot be transposed. @return     A result tensor
+// Adds a new transpose layer to the graph using the dimensions and source tensor you specify.
 func (o *MLCGraph) TransposeWithDimensionsSource(dimensions *foundation.NSArray[*foundation.NSNumber], source *MLCTensor) *MLCTensor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelTransposeWithDimensionsSource, dimensions, source.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelTransposeWithDimensionsSource, dimensions.Ptr(), source.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MLCTensorFromID(_ret)
 }
 
-// @abstract   Add a select layer to the graph @param      sources            The source tensors @param      condition        The condition mask @return     A result tensor
+// Adds a select layer to the graph using the condition mask and source tensors you specify.
 func (o *MLCGraph) SelectWithSourcesCondition(sources *foundation.NSArray[*MLCTensor], condition *MLCTensor) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelSelectWithSourcesCondition, sources.Ptr(), condition.Ptr())
 	if _ret != 0 {
@@ -148,7 +150,7 @@ func (o *MLCGraph) SelectWithSourcesCondition(sources *foundation.NSArray[*MLCTe
 	return MLCTensorFromID(_ret)
 }
 
-// @abstract   Add a scatter layer to the graph @param      dimension             The dimension along which to index @param      source                    The updates to use with scattering with index positions specified in indices to result tensor @param      indices                  The index of elements to scatter @param      copyFrom                The source tensor whose data is  to be first copied to the result tensor @param      reductionType     The reduction type applied for all values in source tensor that are scattered to a specific location in the result tensor. Must be: MLCReductionTypeNone or MLCReductionTypeSum. @return     A result tensor
+// Adds a scatter layer to the graph.
 func (o *MLCGraph) ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension uint, source *MLCTensor, indices *MLCTensor, copyFrom *MLCTensor, reductionType MLCReductionType) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelScatterWithDimensionSourceIndicesCopyFromReductionType, dimension, source.Ptr(), indices.Ptr(), copyFrom.Ptr(), reductionType)
 	if _ret != 0 {
@@ -157,7 +159,7 @@ func (o *MLCGraph) ScatterWithDimensionSourceIndicesCopyFromReductionType(dimens
 	return MLCTensorFromID(_ret)
 }
 
-// @abstract   Add a gather layer to the graph @param      dimension       The dimension along which to index @param      source              The source tensor @param      indices            The index of elements to gather @return     A result tensor
+// Adds a gather layer to the graph using the source tensor, dimension along which to index, and the indices you specify.
 func (o *MLCGraph) GatherWithDimensionSourceIndices(dimension uint, source *MLCTensor, indices *MLCTensor) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelGatherWithDimensionSourceIndices, dimension, source.Ptr(), indices.Ptr())
 	if _ret != 0 {
@@ -166,19 +168,19 @@ func (o *MLCGraph) GatherWithDimensionSourceIndices(dimension uint, source *MLCT
 	return MLCTensorFromID(_ret)
 }
 
-// @abstract   Associates data with input tensors. If the device is GPU, also copies the data to the device memory. Returns true if the data is successfully associated with input tensors. @discussion This function should be used if you execute the forward, gradient and optimizer updates independently. Before the forward pass is executed, the inputs should be written to device memory.  Similarly, before the gradient pass is executed, the inputs (typically the initial gradient tensor) should be written to device memory.  The caller must guarantee the lifetime of the underlying memory of each value of \p inputsData for the entirety of each corresponding input tensor's lifetime. @param      inputsData        The input data to use to write to device memory @param      inputTensors    The list of tensors to perform writes on @param      device                 The device @param      batchSize          The batch size.  This should be set to the actual batch size that may be used when we execute the graph and can be a value less than or equal to the batch size specified in the tensor. If set to 0, we use batch size specified in the tensor. @param      synchronous     Whether to execute the copy to the device synchronously.  For performance, asynchronous execution is recommended. @return     A Boolean value indicating whether the data is successfully associated with the tensor.
+// Associates the given data with the input tensors, and if the device is a GPU, also copies the data to the device memory.
 func (o *MLCGraph) BindAndWriteDataForInputsToDeviceBatchSizeSynchronous(inputsData *foundation.NSDictionary[*foundation.NSString, *MLCTensorData], inputTensors *foundation.NSDictionary[*foundation.NSString, *MLCTensor], device *MLCDevice, batchSize uint, synchronous bool) bool {
-	_ret := objc.Send[bool](o.Ptr(), _mLCGraphSelBindAndWriteDataForInputsToDeviceBatchSizeSynchronous, inputsData, inputTensors, device.Ptr(), batchSize, synchronous)
+	_ret := objc.Send[bool](o.Ptr(), _mLCGraphSelBindAndWriteDataForInputsToDeviceBatchSizeSynchronous, inputsData.Ptr(), inputTensors.Ptr(), device.Ptr(), batchSize, synchronous)
 	return _ret
 }
 
-// @abstract   Associates data with input tensors. If the device is GPU, also copies the data to the device memory. Returns true if the data is successfully associated with input tensors. @discussion This function should be used if you execute the forward, gradient and optimizer updates independently. Before the forward pass is executed, the inputs should be written to device memory.  Similarly, before the gradient pass is executed, the inputs (typically the initial gradient tensor) should be written to device memory.  The caller must guarantee the lifetime of the underlying memory of each value of \p inputsData for the entirety of each corresponding input tensor's lifetime. @param      inputsData        The input data to use to write to device memory @param      inputTensors    The list of tensors to perform writes on @param      device                 The device @param      synchronous     Whether to execute the copy to the device synchronously.  For performance, asynchronous execution is recommended. @return     A Boolean value indicating whether the data is successfully associated with the tensor.
+// Associates the given data with the input tensors, and if the device is a GPU, also copies the data to the device memory.
 func (o *MLCGraph) BindAndWriteDataForInputsToDeviceSynchronous(inputsData *foundation.NSDictionary[*foundation.NSString, *MLCTensorData], inputTensors *foundation.NSDictionary[*foundation.NSString, *MLCTensor], device *MLCDevice, synchronous bool) bool {
-	_ret := objc.Send[bool](o.Ptr(), _mLCGraphSelBindAndWriteDataForInputsToDeviceSynchronous, inputsData, inputTensors, device.Ptr(), synchronous)
+	_ret := objc.Send[bool](o.Ptr(), _mLCGraphSelBindAndWriteDataForInputsToDeviceSynchronous, inputsData.Ptr(), inputTensors.Ptr(), device.Ptr(), synchronous)
 	return _ret
 }
 
-// @abstract   Get the source tensors for a layer in the training graph @param      layer   A layer in the training graph @return     A list of tensors
+// Gets the source tensors for a layer in the training graph.
 func (o *MLCGraph) SourceTensorsForLayer(layer *MLCLayer) *foundation.NSArray[*MLCTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelSourceTensorsForLayer, layer.Ptr())
 	if _ret != 0 {
@@ -187,7 +189,7 @@ func (o *MLCGraph) SourceTensorsForLayer(layer *MLCLayer) *foundation.NSArray[*M
 	return foundation.NSArrayFromID[*MLCTensor](_ret)
 }
 
-// @abstract   Get the result tensors for a layer in the training graph @param      layer   A layer in the training graph @return     A list of tensors
+// Gets the result tensors for a layer in the training graph.
 func (o *MLCGraph) ResultTensorsForLayer(layer *MLCLayer) *foundation.NSArray[*MLCTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGraphSelResultTensorsForLayer, layer.Ptr())
 	if _ret != 0 {

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that plays MIDI data through a system sound module.
+//
 // MIDIPlayer wraps [raw.AVMIDIPlayer] with a fluent Go API.
 type MIDIPlayer struct {
 	inner *raw.AVMIDIPlayer
@@ -32,7 +34,7 @@ func MIDIPlayerFromID(id objc.ID) *MIDIPlayer {
 	return &MIDIPlayer{inner: raw.AVMIDIPlayerFromID(id)}
 }
 
-// @method initWithContentsOfURL:soundBankURL:error: @abstract Create a player with the contents of the file specified by the URL. @discussion 'bankURL' should contain the path to a SoundFont2 or DLS bank to be used by the MIDI synthesizer.  For OSX it can be set to nil for the default, but for iOS it must always refer to a valid bank file.
+// Creates a player to play a MIDI file with the specified soundbank.
 //
 // NewMIDIPlayerWithContentsOfURLSoundBankURLError creates a new [MIDIPlayer].
 func NewMIDIPlayerWithContentsOfURLSoundBankURLError(inURL string, bankURL string) (*MIDIPlayer, error) {
@@ -45,7 +47,7 @@ func NewMIDIPlayerWithContentsOfURLSoundBankURLError(inURL string, bankURL strin
 	return &MIDIPlayer{inner: raw.AVMIDIPlayerFromID(_id)}, nil
 }
 
-// @method initWithData:soundBankURL:error: @abstract Create a player with the contents of the data object @discussion 'bankURL' should contain the path to a SoundFont2 or DLS bank to be used by the MIDI synthesizer.  For OSX it can be set to nil for the default, but for iOS it must always refer to a valid bank file.
+// Creates a player to play MIDI data with the specified soundbank.
 //
 // NewMIDIPlayerWithDataSoundBankURLError creates a new [MIDIPlayer].
 func NewMIDIPlayerWithDataSoundBankURLError(data *foundation.NSData, bankURL string) (*MIDIPlayer, error) {
@@ -58,7 +60,7 @@ func NewMIDIPlayerWithDataSoundBankURLError(data *foundation.NSData, bankURL str
 	return &MIDIPlayer{inner: raw.AVMIDIPlayerFromID(_id)}, nil
 }
 
-// @property rate @abstract The playback rate of the player @discussion 1.0 is normal playback rate.  Rate must be > 0.0.
+// The playback rate of the player.
 //
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *MIDIPlayer) WithRate(rate float32) *MIDIPlayer {
@@ -66,7 +68,7 @@ func (x *MIDIPlayer) WithRate(rate float32) *MIDIPlayer {
 	return x
 }
 
-// @property currentPosition @abstract The current playback position in seconds @discussion Setting this positions the player to the specified time.  No range checking on the time value is done. This can be set while the player is playing, in which case playback will resume at the new time.
+// The current playback position, in seconds.
 //
 // WithCurrentPosition sets the currentPosition property and returns the receiver for chaining.
 func (x *MIDIPlayer) WithCurrentPosition(currentPosition float64) *MIDIPlayer {
@@ -74,21 +76,21 @@ func (x *MIDIPlayer) WithCurrentPosition(currentPosition float64) *MIDIPlayer {
 	return x
 }
 
-// @method prepareToPlay @abstract Get ready to play the sequence by prerolling all events @discussion Happens automatically on play if it has not already been called, but may produce a delay in startup.
+// Prepares the player to play the sequence by prerolling all events.
 //
 // PrepareToPlay calls the underlying PrepareToPlay.
 func (x *MIDIPlayer) PrepareToPlay() {
 	x.inner.PrepareToPlay()
 }
 
-// @method play: @abstract Play the sequence.
+// Plays the MIDI sequence.
 //
 // Play calls the underlying Play.
 func (x *MIDIPlayer) Play(completionHandler func()) {
 	x.inner.Play(completionHandler)
 }
 
-// @method stop @abstract Stop playing the sequence.
+// Stops playing the sequence.
 //
 // Stop calls the underlying Stop.
 func (x *MIDIPlayer) Stop() {

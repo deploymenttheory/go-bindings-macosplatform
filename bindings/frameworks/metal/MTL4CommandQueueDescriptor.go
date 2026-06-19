@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Groups together parameters for the creation of a new command queue.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4commandqueuedescriptor
 type MTL4CommandQueueDescriptor struct {
 	foundation.NSObject

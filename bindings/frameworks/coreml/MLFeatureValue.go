@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A generic wrapper around an underlying value and the value’s type.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlfeaturevalue
 type MLFeatureValue struct {
 	foundation.NSObject
@@ -58,7 +60,7 @@ func MLFeatureValueFromID(id objc.ID) *MLFeatureValue {
 	return o
 }
 
-// Hold an object with the specified value
+// Creates a feature value that contains an integer.
 func MLFeatureValueFeatureValueWithInt64(value int64) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithInt64, value)
 	if _ret != 0 {
@@ -67,6 +69,7 @@ func MLFeatureValueFeatureValueWithInt64(value int64) *MLFeatureValue {
 	return MLFeatureValueFromID(_ret)
 }
 
+// Creates a feature value that contains a double.
 func MLFeatureValueFeatureValueWithDouble(value float64) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithDouble, value)
 	if _ret != 0 {
@@ -75,6 +78,7 @@ func MLFeatureValueFeatureValueWithDouble(value float64) *MLFeatureValue {
 	return MLFeatureValueFromID(_ret)
 }
 
+// Creates a feature value that contains a string.
 func MLFeatureValueFeatureValueWithString(value *foundation.NSString) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithString, value.Ptr())
 	if _ret != 0 {
@@ -83,6 +87,7 @@ func MLFeatureValueFeatureValueWithString(value *foundation.NSString) *MLFeature
 	return MLFeatureValueFromID(_ret)
 }
 
+// Creates a feature value that contains a multidimensional array.
 func MLFeatureValueFeatureValueWithMultiArray(value *MLMultiArray) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithMultiArray, value.Ptr())
 	if _ret != 0 {
@@ -91,6 +96,7 @@ func MLFeatureValueFeatureValueWithMultiArray(value *MLMultiArray) *MLFeatureVal
 	return MLFeatureValueFromID(_ret)
 }
 
+// Creates a feature value that contains an image from a pixel buffer.
 func MLFeatureValueFeatureValueWithPixelBuffer(value unsafe.Pointer) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithPixelBuffer, value)
 	if _ret != 0 {
@@ -99,6 +105,7 @@ func MLFeatureValueFeatureValueWithPixelBuffer(value unsafe.Pointer) *MLFeatureV
 	return MLFeatureValueFromID(_ret)
 }
 
+// Creates a feature value that contains a sequence.
 func MLFeatureValueFeatureValueWithSequence(sequence *MLSequence) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithSequence, sequence.Ptr())
 	if _ret != 0 {
@@ -107,7 +114,7 @@ func MLFeatureValueFeatureValueWithSequence(sequence *MLSequence) *MLFeatureValu
 	return MLFeatureValueFromID(_ret)
 }
 
-// Represent an undefined value of a specified type
+// Creates a feature value with a type that represents an undefined or missing value.
 func MLFeatureValueUndefinedFeatureValueWithType(type_ MLFeatureType) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelUndefinedFeatureValueWithType, type_)
 	if _ret != 0 {
@@ -116,10 +123,10 @@ func MLFeatureValueUndefinedFeatureValueWithType(type_ MLFeatureType) *MLFeature
 	return MLFeatureValueFromID(_ret)
 }
 
-// For encoding a sparse feature set or for encoding probabilities. Input keys that are not NSNumber * or NSString * are rejected on construction and return a MLModelErrorFeatureTypeMismatch error. Further validation for consistency occurs on evaluation
+// Creates a feature value that contains a dictionary of numbers.
 func MLFeatureValueFeatureValueWithDictionaryError(value *foundation.NSDictionary[objc.ID, *foundation.NSNumber]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithDictionaryError, value, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithDictionaryError, value.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -129,7 +136,7 @@ func MLFeatureValueFeatureValueWithDictionaryError(value *foundation.NSDictionar
 	return MLFeatureValueFromID(_ret), nil
 }
 
-// @abstract Returns a Boolean value that indicates whether a feature value is equal to another. @discussion If the types of the MLFeatureValue objects "self" and "value"  are integer in one case and double in the other (in either order) then those mixed mode numeric values are compared as NSNumbers. Otherwise if the types of the MLFeatureValue objects are different NO is returned. When "self" and "value" are both PixelBuffer MLFeatureValue types, only their CVPixelBufferRef values are compared for equality, the underlying arrays of pixelValues are not examined. [So, distinct PixelBuffer MLFeatureValue objects with distinct CVPixelBufferRef values which encapsulate the same array of pixels will compare *not* equal.] For all other (matching) MLFeatureValue types, the BOOL value returned is the result of comparing "self" with "value" via isEqualToNumber:, isEqualToString:, isEqualtoDictionary:, isEqualToMultiArray:, isEqualToArray: as chosen by the MLFeatureValue types.
+// Returns a Boolean value that indicates whether a feature value is equal to another.
 func (o *MLFeatureValue) IsEqualToFeatureValue(value *MLFeatureValue) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLFeatureValueSelIsEqualToFeatureValue, value.Ptr())
 	return _ret
@@ -179,8 +186,11 @@ func (o *MLFeatureValue) MultiArrayValue() *MLMultiArray {
 
 // Populated value if the type is MLFeatureTypeDictionary
 func (o *MLFeatureValue) DictionaryValue() *foundation.NSDictionary[objc.ID, *foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, *foundation.NSNumber]](o.Ptr(), _mLFeatureValueSelDictionaryValue)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLFeatureValueSelDictionaryValue)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, *foundation.NSNumber](_ret)
 }
 
 // Populated value if the type is MLFeatureTypeImage
@@ -201,7 +211,7 @@ func (o *MLFeatureValue) SequenceValue() *MLSequence {
 // Construct image feature value from an image on disk. Orientation is read from Exif if avaiable
 func MLFeatureValueFeatureValueWithImageAtURLPixelsWidePixelsHighPixelFormatTypeOptionsError(url *foundation.NSURL, pixelsWide int, pixelsHigh int, pixelFormatType uint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLPixelsWidePixelsHighPixelFormatTypeOptionsError, url.Ptr(), pixelsWide, pixelsHigh, pixelFormatType, options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLPixelsWidePixelsHighPixelFormatTypeOptionsError, url.Ptr(), pixelsWide, pixelsHigh, pixelFormatType, options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -214,7 +224,7 @@ func MLFeatureValueFeatureValueWithImageAtURLPixelsWidePixelsHighPixelFormatType
 // Construct image feature value from an image on disk, using a model specified image constraint. Orientation is read from Exif if avaiable
 func MLFeatureValueFeatureValueWithImageAtURLConstraintOptionsError(url *foundation.NSURL, constraint *MLImageConstraint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLConstraintOptionsError, url.Ptr(), constraint.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLConstraintOptionsError, url.Ptr(), constraint.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -227,7 +237,7 @@ func MLFeatureValueFeatureValueWithImageAtURLConstraintOptionsError(url *foundat
 // Construct image feature value from CGImage (orientation is assumed to be kCGImagePropertyOrientationUp)
 func MLFeatureValueFeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptionsError(cgImage unsafe.Pointer, pixelsWide int, pixelsHigh int, pixelFormatType uint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptionsError, cgImage, pixelsWide, pixelsHigh, pixelFormatType, options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptionsError, cgImage, pixelsWide, pixelsHigh, pixelFormatType, options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -240,7 +250,7 @@ func MLFeatureValueFeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOpt
 // Construct image feature value from CGImage, using the size and type information required by feature description (orientation is assumed to be kCGImagePropertyOrientationUp)
 func MLFeatureValueFeatureValueWithCGImageConstraintOptionsError(cgImage unsafe.Pointer, constraint *MLImageConstraint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImageConstraintOptionsError, cgImage, constraint.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImageConstraintOptionsError, cgImage, constraint.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -253,7 +263,7 @@ func MLFeatureValueFeatureValueWithCGImageConstraintOptionsError(cgImage unsafe.
 // Construct image feature value from an image on disk. The passed in orientation supersedes any in the file
 func MLFeatureValueFeatureValueWithImageAtURLOrientationPixelsWidePixelsHighPixelFormatTypeOptionsError(url *foundation.NSURL, orientation imageio.CGImagePropertyOrientation, pixelsWide int, pixelsHigh int, pixelFormatType uint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLOrientationPixelsWidePixelsHighPixelFormatTypeOptionsError, url.Ptr(), orientation, pixelsWide, pixelsHigh, pixelFormatType, options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLOrientationPixelsWidePixelsHighPixelFormatTypeOptionsError, url.Ptr(), orientation, pixelsWide, pixelsHigh, pixelFormatType, options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -266,7 +276,7 @@ func MLFeatureValueFeatureValueWithImageAtURLOrientationPixelsWidePixelsHighPixe
 // Construct image feature value from an image on disk using a model specified image constraint. The passed in orientation supersedes any in the file
 func MLFeatureValueFeatureValueWithImageAtURLOrientationConstraintOptionsError(url *foundation.NSURL, orientation imageio.CGImagePropertyOrientation, constraint *MLImageConstraint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLOrientationConstraintOptionsError, url.Ptr(), orientation, constraint.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLOrientationConstraintOptionsError, url.Ptr(), orientation, constraint.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -279,7 +289,7 @@ func MLFeatureValueFeatureValueWithImageAtURLOrientationConstraintOptionsError(u
 // Construct image feature value from CGImage w/ specified orientation
 func MLFeatureValueFeatureValueWithCGImageOrientationPixelsWidePixelsHighPixelFormatTypeOptionsError(cgImage unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, pixelsWide int, pixelsHigh int, pixelFormatType uint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImageOrientationPixelsWidePixelsHighPixelFormatTypeOptionsError, cgImage, orientation, pixelsWide, pixelsHigh, pixelFormatType, options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImageOrientationPixelsWidePixelsHighPixelFormatTypeOptionsError, cgImage, orientation, pixelsWide, pixelsHigh, pixelFormatType, options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -292,7 +302,7 @@ func MLFeatureValueFeatureValueWithCGImageOrientationPixelsWidePixelsHighPixelFo
 // Construct image feature value from CGImage w/ specified orientation, using the size and type information required by feature description
 func MLFeatureValueFeatureValueWithCGImageOrientationConstraintOptionsError(cgImage unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, constraint *MLImageConstraint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImageOrientationConstraintOptionsError, cgImage, orientation, constraint.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImageOrientationConstraintOptionsError, cgImage, orientation, constraint.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

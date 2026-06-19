@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the contacts prescription data for one eye.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkcontactslensspecification
 type HKContactsLensSpecification struct {
 	HKLensSpecification
@@ -31,7 +33,7 @@ func HKContactsLensSpecificationFromID(id objc.ID) *HKContactsLensSpecification 
 	return o
 }
 
-// @method        initWithSphere:cylinder:axis:addPower:baseCurve:diameter @param         sphere     The lens power to correct nearsightedness or farsightedness @param         cylinder   The lens power required to correct astigmatism @param         axis       The angle along which cylindrical power should be positioned to correct astigmatism @param         addPower   The power adjustment applied to a multifocal lens to correct presbyopia @param         baseCurve  The curvature of the back surface of the lens @param         diameter   The width of the lens from edge to edge
+// Creates a new contact lens specification, containing the prescription data for one eye.
 func (o *HKContactsLensSpecification) InitWithSphereCylinderAxisAddPowerBaseCurveDiameter(sphere *HKQuantity, cylinder *HKQuantity, axis *HKQuantity, addPower *HKQuantity, baseCurve *HKQuantity, diameter *HKQuantity) *HKContactsLensSpecification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKContactsLensSpecificationSelInitWithSphereCylinderAxisAddPowerBaseCurveDiameter, sphere.Ptr(), cylinder.Ptr(), axis.Ptr(), addPower.Ptr(), baseCurve.Ptr(), diameter.Ptr())
 	if _ret != 0 {

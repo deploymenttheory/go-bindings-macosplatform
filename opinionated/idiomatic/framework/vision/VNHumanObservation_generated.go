@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a person that the request detects.
+//
 // HumanObservation wraps [raw.VNHumanObservation] with a fluent Go API.
 type HumanObservation struct {
 	inner *raw.VNHumanObservation

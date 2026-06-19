@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that holds public key credential transport information.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialdescriptor
 type ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor struct {
 	foundation.NSObject
@@ -32,8 +34,9 @@ func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(id objc.ID) *
 	return o
 }
 
+// Creates the object with the credential ID and the array of transports.
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) InitWithCredentialIDTransports(credentialID *foundation.NSData, allowedTransports *foundation.NSArray[*foundation.NSString]) *ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialDescriptorSelInitWithCredentialIDTransports, credentialID.Ptr(), allowedTransports)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialDescriptorSelInitWithCredentialIDTransports, credentialID.Ptr(), allowedTransports.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -42,10 +45,13 @@ func (o *ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) InitWithCreden
 
 // @abstract An array indicating transports for the credential indicated by credentialID.
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) Transports() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialDescriptorSelTransports)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialDescriptorSelTransports)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) SetTransports(transports *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_aSAuthorizationSecurityKeyPublicKeyCredentialDescriptorSelSetTransports, transports)
+	o.Ptr().Send(_aSAuthorizationSecurityKeyPublicKeyCredentialDescriptorSelSetTransports, transports.Ptr())
 }

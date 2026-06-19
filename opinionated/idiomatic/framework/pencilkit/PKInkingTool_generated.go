@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A structure that defines the drawing characteristics (width, color, pen style) to use when drawing lines on a canvas view.
+//
 // InkingTool wraps [raw.PKInkingTool] with a fluent Go API.
 type InkingTool struct {
 	inner *raw.PKInkingTool

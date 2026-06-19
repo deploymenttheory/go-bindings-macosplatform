@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a texture.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtltexturereferencetype
 type MTLTextureReferenceType struct {
 	MTLType

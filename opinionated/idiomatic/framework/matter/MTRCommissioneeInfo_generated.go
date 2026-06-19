@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information read from the commissionee device during commissioning.
+//
 // MTRCommissioneeInfo wraps [raw.MTRCommissioneeInfo] with a fluent Go API.
 type MTRCommissioneeInfo struct {
 	inner *raw.MTRCommissioneeInfo

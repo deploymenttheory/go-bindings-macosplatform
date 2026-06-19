@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents an Automator action that’s a loadable bundle.
+//
 // Apple documentation: https://developer.apple.com/documentation/automator/ambundleaction
 type AMBundleAction struct {
 	AMAction
@@ -36,6 +38,7 @@ func AMBundleActionFromID(id objc.ID) *AMBundleAction {
 	return o
 }
 
+// Allows the action object to perform setup tasks requiring the presence of all bundle objects.
 func (o *AMBundleAction) AwakeFromBundle() {
 	o.Ptr().Send(_aMBundleActionSelAwakeFromBundle)
 }
@@ -62,10 +65,13 @@ func (o *AMBundleAction) Bundle() *foundation.NSBundle {
 }
 
 func (o *AMBundleAction) Parameters() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aMBundleActionSelParameters)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aMBundleActionSelParameters)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMutableDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *AMBundleAction) SetParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_aMBundleActionSelSetParameters, parameters)
+	o.Ptr().Send(_aMBundleActionSelSetParameters, parameters.Ptr())
 }

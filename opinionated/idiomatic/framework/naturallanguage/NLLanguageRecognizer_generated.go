@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The language of a body of text.
+//
 // LanguageRecognizer wraps [raw.NLLanguageRecognizer] with a fluent Go API.
 type LanguageRecognizer struct {
 	inner *raw.NLLanguageRecognizer
@@ -38,12 +40,16 @@ func NewLanguageRecognizer() *LanguageRecognizer {
 	return &LanguageRecognizer{inner: raw.NLLanguageRecognizerFromID(_id)}
 }
 
+// A dictionary that maps languages to their probabilities in the language identification process.
+//
 // WithLanguageHints sets the languageHints property and returns the receiver for chaining.
 func (x *LanguageRecognizer) WithLanguageHints(languageHints *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) *LanguageRecognizer {
 	x.inner.SetLanguageHints(languageHints)
 	return x
 }
 
+// Limits the set of possible languages that the recognizer will return.
+//
 // WithLanguageConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *LanguageRecognizer) WithLanguageConstraints(items ...*foundation.NSString) *LanguageRecognizer {
 	if len(items) == 0 {
@@ -65,16 +71,22 @@ func (x *LanguageRecognizer) WithLanguageConstraints(items ...*foundation.NSStri
 	return x
 }
 
+// Analyzes the piece of text to determine its dominant language.
+//
 // ProcessString calls the underlying ProcessString.
 func (x *LanguageRecognizer) ProcessString(string_ string) {
 	x.inner.ProcessString(foundation.NSStringStringWithUTF8String(string_))
 }
 
+// Resets the recognizer to its initial state.
+//
 // Reset calls the underlying Reset.
 func (x *LanguageRecognizer) Reset() {
 	x.inner.Reset()
 }
 
+// Generates the probabilities of possible languages for the processed text.
+//
 // LanguageHypothesesWithMaximum calls the underlying LanguageHypothesesWithMaximum.
 func (x *LanguageRecognizer) LanguageHypothesesWithMaximum(maxHypotheses uint) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber] {
 	return x.inner.LanguageHypothesesWithMaximum(maxHypotheses)

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides information about fetched record zone changes.
+//
 // SyncEngineFetchedRecordZoneChangesEvent wraps [raw.CKSyncEngineFetchedRecordZoneChangesEvent] with a fluent Go API.
 type SyncEngineFetchedRecordZoneChangesEvent struct {
 	inner *raw.CKSyncEngineFetchedRecordZoneChangesEvent

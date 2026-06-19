@@ -34,19 +34,25 @@ func MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventFromID(id objc.ID)
 }
 
 func (o *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Current() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelCurrent)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelCurrent)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetCurrent(current *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelSetCurrent, current)
+	o.Ptr().Send(_mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelSetCurrent, current.Ptr())
 }
 
 func (o *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Previous() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelPrevious)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelPrevious)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetPrevious(previous *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelSetPrevious, previous)
+	o.Ptr().Send(_mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventSelSetPrevious, previous.Ptr())
 }

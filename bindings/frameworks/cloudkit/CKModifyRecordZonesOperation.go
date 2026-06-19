@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation that modifies one or more record zones.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckmodifyrecordzonesoperation
 type CKModifyRecordZonesOperation struct {
 	CKDatabaseOperation
@@ -43,7 +45,7 @@ func CKModifyRecordZonesOperationFromID(id objc.ID) *CKModifyRecordZonesOperatio
 	return o
 }
 
-// Creates an empty modify record zones operation. You must set at least one of the “CKModifyRecordZonesOperation/recordZonesToSave“ or “CKModifyRecordZonesOperation/recordZoneIDsToDelete“ properties before you execute the operation.
+// Creates an empty modify record zones operation.
 func (o *CKModifyRecordZonesOperation) Init() *CKModifyRecordZonesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKModifyRecordZonesOperationSelInit)
 	if _ret != 0 {
@@ -52,7 +54,7 @@ func (o *CKModifyRecordZonesOperation) Init() *CKModifyRecordZonesOperation {
 	return CKModifyRecordZonesOperationFromID(_ret)
 }
 
-// Creates an operation for modifying the specified record zones. - Parameters: - recordZonesToSave: The record zones to save. You can specify `nil` for this parameter. - recordZoneIDsToDelete: The IDs of the record zones to delete. You can specify `nil` for this parameter. The record zones you intend to save or delete must all reside in the same database, which you specify when you configure the operation. If you delete a record zone, CloudKit deletes any records it contains.
+// Creates an operation for modifying the specified record zones.
 func (o *CKModifyRecordZonesOperation) InitWithRecordZonesToSaveRecordZoneIDsToDelete(recordZonesToSave *foundation.NSArray[*CKRecordZone], recordZoneIDsToDelete *foundation.NSArray[*CKRecordZoneID]) *CKModifyRecordZonesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKModifyRecordZonesOperationSelInitWithRecordZonesToSaveRecordZoneIDsToDelete, recordZonesToSave.Ptr(), recordZoneIDsToDelete.Ptr())
 	if _ret != 0 {

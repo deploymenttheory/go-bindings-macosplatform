@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that you use to create a new composition from existing assets.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmutablecomposition
 type AVMutableComposition struct {
 	AVComposition
@@ -44,7 +46,7 @@ func AVMutableCompositionFromID(id objc.ID) *AVMutableComposition {
 	return o
 }
 
-// @method         composition @abstract       Returns an empty AVMutableComposition.
+// Returns a new mutable composition.
 func AVMutableCompositionComposition() *AVMutableComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableComposition), _aVMutableCompositionSelComposition)
 	if _ret != 0 {
@@ -53,9 +55,9 @@ func AVMutableCompositionComposition() *AVMutableComposition {
 	return AVMutableCompositionFromID(_ret)
 }
 
-// @method         compositionWithURLAssetInitializationOptions: @abstract       Returns an empty AVMutableComposition. @param          URLAssetInitializationOptions Specifies the initialization options that the receiver should use when creating AVURLAssets internally, e.g. AVURLAssetPreferPreciseDurationAndTimingKey. The default behavior for creation of AVURLAssets by an AVMutableComposition is equivalent to the behavior of +[AVURLAsset URLAssetWithURL:options:] when specifying no initialization options. @discussion AVMutableCompositions create AVURLAssets internally for URLs specified by AVCompositionTrackSegments of AVMutableCompositionTracks, as needed, whenever AVCompositionTrackSegments are added to tracks via -[AVMutableCompositionTrack setSegments:] rather than by inserting timeranges of already existing AVAssets or AVAssetTracks.
+// Creates a mutable composition that uses the specified initialization options.
 func AVMutableCompositionCompositionWithURLAssetInitializationOptions(uRLAssetInitializationOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMutableComposition {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableComposition), _aVMutableCompositionSelCompositionWithURLAssetInitializationOptions, uRLAssetInitializationOptions)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableComposition), _aVMutableCompositionSelCompositionWithURLAssetInitializationOptions, uRLAssetInitializationOptions.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -66,7 +68,7 @@ func (o *AVMutableComposition) SetNaturalSize(naturalSize corefoundation.CGSize)
 	o.Ptr().Send(_aVMutableCompositionSelSetNaturalSize, naturalSize)
 }
 
-// @method         insertTimeRange:ofAsset:atTime:error: @abstract       Inserts all the tracks of a timeRange of an asset into a composition. @param          timeRange Specifies the timeRange of the asset to be inserted. @param          asset Specifies the asset that contains the tracks that are to be inserted. Only instances of AVURLAsset and AVComposition are supported (AVComposition starting in macOS 10.10 and iOS 8.0). The asset should have its tracks loaded, and the tracks should have their formatDescriptions loaded before invoking this method to avoid blocking. @param          startTime Specifies the time at which the inserted tracks are to be presented by the composition. @param          outError Describes failures that may be reported to the user, e.g. the asset that was selected for insertion in the composition is restricted by copy-protection. @result         A BOOL value indicating the success of the insertion. @discussion You provide a reference to an AVAsset and the timeRange within it that you want to insert. You specify the start time in the destination composition at which the timeRange should be inserted. This method may add new tracks to ensure that all tracks of the asset are represented in the inserted timeRange. Note that the media data for the inserted timeRange will be presented at its natural duration and rate. It can be scaled to a different duration and presented at a different rate via -scaleTimeRange:toDuration:. Existing content at the specified startTime will be pushed out by the duration of timeRange. Note that this operation only inserts one or more track segments into affected AVMutableCompositionTracks; it does not affect the values of other track properties, either to match the corresponding values of tracks in the source asset or for any other purpose.
+// Inserts all the tracks within a given time range of a specified asset into the composition.
 // Deprecated: since macOS 15.0.
 func (o *AVMutableComposition) InsertTimeRangeOfAssetAtTimeError(timeRange coremedia.CMTimeRange, asset *AVAsset, startTime coremedia.CMTime) (bool, error) {
 	var _nsErr uintptr
@@ -77,7 +79,7 @@ func (o *AVMutableComposition) InsertTimeRangeOfAssetAtTimeError(timeRange corem
 	return _ret, nil
 }
 
-// @method         insertTimeRange:ofAsset:atTime:completionHandler: @abstract       Inserts all the tracks of a timeRange of an asset into a composition. @param          timeRange Specifies the timeRange of the asset to be inserted. @param          asset Specifies the asset that contains the tracks that are to be inserted. Only instances of AVURLAsset and AVComposition are supported (AVComposition starting in macOS 10.10 and iOS 8.0). @param          startTime Specifies the time at which the inserted tracks are to be presented by the composition. @param          completionHandler A block that is invoked when the insertion is complete.  If the error parameter is non-nil, it describes a failure that may be reported to the user, e.g. the asset that was selected for insertion in the composition is restricted by copy-protection. @discussion You provide a reference to an AVAsset and the timeRange within it that you want to insert. You specify the start time in the destination composition at which the timeRange should be inserted. This method may add new tracks to ensure that all tracks of the asset are represented in the inserted timeRange. Note that the media data for the inserted timeRange will be presented at its natural duration and rate. It can be scaled to a different duration and presented at a different rate via -scaleTimeRange:toDuration:. Existing content at the specified startTime will be pushed out by the duration of timeRange. Note that this operation only inserts one or more track segments into affected AVMutableCompositionTracks; it does not affect the values of other track properties, either to match the corresponding values of tracks in the source asset or for any other purpose.
+// Inserts all tracks of an asset for a time range into a composition.
 func (o *AVMutableComposition) InsertTimeRangeOfAssetAtTimeCompletionHandler(timeRange coremedia.CMTimeRange, asset *AVAsset, startTime coremedia.CMTime, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -89,22 +91,22 @@ func (o *AVMutableComposition) InsertTimeRangeOfAssetAtTimeCompletionHandler(tim
 	o.Ptr().Send(_aVMutableCompositionSelInsertTimeRangeOfAssetAtTimeCompletionHandler, timeRange, asset.Ptr(), startTime, __block_completionHandler)
 }
 
-// @method         insertEmptyTimeRange: @abstract       Adds or extends an empty timeRange within all tracks of the composition. @param          timeRange Specifies the empty timeRange to be inserted. @discussion If you insert an empty timeRange into the composition, any media that was presented during that interval prior to the insertion will be presented instead immediately afterward. You can use this method to reserve an interval in which you want a subsequently created track to present its media. Note that you cannot add empty time ranges to the end of a composition.
+// Adds or extends an empty time range within all tracks of the composition.
 func (o *AVMutableComposition) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
 	o.Ptr().Send(_aVMutableCompositionSelInsertEmptyTimeRange, timeRange)
 }
 
-// @method         removeTimeRange: @abstract       Removes a specified timeRange from all tracks of the composition. @param          timeRange Specifies the timeRange to be removed. @discussion Removal of a time range does not cause any existing tracks to be removed from the composition, even if removing timeRange results in an empty track. Instead, it removes or truncates track segments that intersect with the timeRange. After removing, existing content after timeRange will be pulled in.
+// Removes a specified time range from all tracks of the composition.
 func (o *AVMutableComposition) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
 	o.Ptr().Send(_aVMutableCompositionSelRemoveTimeRange, timeRange)
 }
 
-// @method         scaleTimeRange:toDuration: @abstract       Changes the duration of a timeRange of all tracks. @param          timeRange Specifies the timeRange of the composition to be scaled. @param          duration Specifies the new duration of the timeRange. @discussion Each trackSegment affected by the scaling operation will be presented at a rate equal to source.duration / target.duration of its resulting timeMapping.
+// Changes the duration of all tracks in a given time range.
 func (o *AVMutableComposition) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
 	o.Ptr().Send(_aVMutableCompositionSelScaleTimeRangeToDuration, timeRange, duration)
 }
 
-// @method         addMutableTrackWithMediaType:preferredTrackID: @abstract       Adds an empty track to a mutable composition. @param          mediaType The media type of the new track. @param          preferredTrackID Specifies the preferred track ID for the new track. If you do not need to specify a preferred track ID, pass kCMPersistentTrackID_Invalid. Otherwise the preferred track ID will be used for the new track, provided that it is not currently in use and has not previously been used. @result         An instance of AVMutableCompositionTrack representing the new track. Its actual trackID is available via its @"trackID" key. @discussion If the specified preferred track ID is not available, or kCMPersistentTrackID_Invalid was passed in, a unique track ID will be generated.
+// Adds an empty track to a composition.
 func (o *AVMutableComposition) AddMutableTrackWithMediaTypePreferredTrackID(mediaType *foundation.NSString, preferredTrackID int32) *AVMutableCompositionTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableCompositionSelAddMutableTrackWithMediaTypePreferredTrackID, mediaType.Ptr(), preferredTrackID)
 	if _ret != 0 {
@@ -113,12 +115,12 @@ func (o *AVMutableComposition) AddMutableTrackWithMediaTypePreferredTrackID(medi
 	return AVMutableCompositionTrackFromID(_ret)
 }
 
-// @method         removeTrack: @abstract       Removes a track of a mutable composition. @param          track A reference to the AVCompositionTrack to be removed. @discussion If you retain a reference to the removed track, note that its @"composition" key will have the value nil, and the values of its other properties are undefined.
+// Removes a specified track from the composition.
 func (o *AVMutableComposition) RemoveTrack(track *AVCompositionTrack) {
 	o.Ptr().Send(_aVMutableCompositionSelRemoveTrack, track.Ptr())
 }
 
-// @method         mutableTrackCompatibleWithTrack: @abstract       Provides a reference to a track of a mutable composition into which any timeRange of an AVAssetTrack can be inserted (via -[AVMutableCompositionTrack insertTimeRange:ofTrack:atTime:error:]). @param          track A reference to the AVAssetTrack from which a timeRange may be inserted. @result         An AVMutableCompositionTrack that can accommodate the insertion, or, if no such track is available, nil. @discussion If a compatible track is desired but the result of this method is nil, a new track of the same mediaType as the AVAssetTrack can be created via -addMutableTrackWithMediaType:preferredTrackID:, and this new track will be compatible. For best performance, the number of tracks of a composition should be kept to a minimum, corresponding to the number for which media data must be presented in parallel. If media data of the same type is to be presented serially, even from multiple assets, a single track of that media type should be used. This method, -mutableTrackCompatibleWithTrack:, can help the client to identify an existing target track for an insertion. Similar to -[AVAsset compatibleTrackForCompositionTrack:].
+// Returns a composition track into which you can insert any time range of the specified asset track.
 func (o *AVMutableComposition) MutableTrackCompatibleWithTrack(track *AVAssetTrack) *AVMutableCompositionTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableCompositionSelMutableTrackCompatibleWithTrack, track.Ptr())
 	if _ret != 0 {

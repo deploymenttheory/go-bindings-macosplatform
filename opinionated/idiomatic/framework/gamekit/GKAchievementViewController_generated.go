@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An GKAchievementViewController object provides a standard user interface to display achievement progress for the local player. If the GKGameCenterViewController class is available, you should use it instead.
+//
 // AchievementViewController wraps [raw.GKAchievementViewController] with a fluent Go API.
 type AchievementViewController struct {
 	inner *raw.GKAchievementViewController
@@ -36,12 +38,16 @@ func NewAchievementViewController() *AchievementViewController {
 	return &AchievementViewController{inner: raw.GKAchievementViewControllerFromID(_id)}
 }
 
+// The achievement view controller’s delegate.
+//
 // WithAchievementDelegate sets the achievementDelegate property and returns the receiver for chaining.
 func (x *AchievementViewController) WithAchievementDelegate(achievementDelegate raw.GKAchievementViewControllerDelegate) *AchievementViewController {
 	x.inner.SetAchievementDelegate(achievementDelegate)
 	return x
 }
 
+// The view controller’s delegate.
+//
 // WithGameCenterDelegate sets the gameCenterDelegate property and returns the receiver for chaining.
 func (x *AchievementViewController) WithGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) *AchievementViewController {
 	x.inner.GKGameCenterViewController.SetGameCenterDelegate(gameCenterDelegate)

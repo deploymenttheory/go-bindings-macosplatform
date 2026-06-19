@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An object that stores the gradient of the loss function with respect to the batch statistics and batch normalization weights.
+//
 // CNNBatchNormalizationStatisticsGradient wraps [raw.MPSCNNBatchNormalizationStatisticsGradient] with a fluent Go API.
 type CNNBatchNormalizationStatisticsGradient struct {
 	inner *raw.MPSCNNBatchNormalizationStatisticsGradient
@@ -198,7 +200,7 @@ func (x *CNNBatchNormalizationStatisticsGradient) WithDestinationImageAllocator(
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNBatchNormalizationStatisticsGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNBatchNormalizationStatisticsGradient {
@@ -206,7 +208,7 @@ func (x *CNNBatchNormalizationStatisticsGradient) WithOptions(options mpscore.MP
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNBatchNormalizationStatisticsGradient) WithLabel(label string) *CNNBatchNormalizationStatisticsGradient {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An enumerator that can access and list log entries.
+//
 // Apple documentation: https://developer.apple.com/documentation/oslog/oslogenumerator
 type OSLogEnumerator struct {
 	foundation.NSEnumerator[objc.ID]

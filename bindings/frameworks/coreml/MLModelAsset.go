@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstraction of a compiled Core ML model asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmodelasset
 type MLModelAsset struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func MLModelAssetFromID(id objc.ID) *MLModelAsset {
 	return o
 }
 
-// Construct a model asset from the contents of specification data. - Parameters: - specificationData: Contents of .mlmodel as a data blob. - error: When the model asset creation fails error is populated with the reason for failure.
+// Creates a model asset from an in-memory model specification.
 func MLModelAssetModelAssetWithSpecificationDataError(specificationData *foundation.NSData) (*MLModelAsset, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLModelAsset), _mLModelAssetSelModelAssetWithSpecificationDataError, specificationData.Ptr(), unsafe.Pointer(&_nsErr))
@@ -50,10 +52,10 @@ func MLModelAssetModelAssetWithSpecificationDataError(specificationData *foundat
 	return MLModelAssetFromID(_ret), nil
 }
 
-// Construct a model asset from an ML Program specification by replacing blob file references with corresponding in-memory blobs. An ML Program may use `BlobFileValue` syntax, which stores the blob data in external files and refers them by URL. This factory method enables in-memory workflow for such models by using the specified in-memory blob data in place of the external files. The format of in-memory blobs must be the same as the external files. The dictionary must contain all the reference URLs used in the specification. - Parameters: - specification: Contents of .mlmodel as a data blob. - blobMapping: A dictionary with blob URL as the key and blob data as the value. - error: When the model asset creation fails error is populated with the reason for failure.
+// Construct a model asset from an ML Program specification by replacing blob file references with corresponding in-memory blobs.
 func MLModelAssetModelAssetWithSpecificationDataBlobMappingError(specificationData *foundation.NSData, blobMapping *foundation.NSDictionary[*foundation.NSURL, *foundation.NSData]) (*MLModelAsset, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLModelAsset), _mLModelAssetSelModelAssetWithSpecificationDataBlobMappingError, specificationData.Ptr(), blobMapping, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLModelAsset), _mLModelAssetSelModelAssetWithSpecificationDataBlobMappingError, specificationData.Ptr(), blobMapping.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -63,7 +65,7 @@ func MLModelAssetModelAssetWithSpecificationDataBlobMappingError(specificationDa
 	return MLModelAssetFromID(_ret), nil
 }
 
-// Constructs a ModelAsset from a compiled model URL. - Parameters: - compiledModelURL: Location on the disk where the model asset is present. - error: Errors if the model asset is not loadable. - Returns: a model asset or nil if there is an error.
+// Constructs a ModelAsset from a compiled model URL.
 func MLModelAssetModelAssetWithURLError(compiledModelURL *foundation.NSURL) (*MLModelAsset, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLModelAsset), _mLModelAssetSelModelAssetWithURLError, compiledModelURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -76,7 +78,7 @@ func MLModelAssetModelAssetWithURLError(compiledModelURL *foundation.NSURL) (*ML
 	return MLModelAssetFromID(_ret), nil
 }
 
-// The default model descripton. Use this method to get the description of the model such as the feature descriptions, the model author, and other metadata. For the multi-function model asset, this method vends the description for the default function. Use `modelDescription(for:)` to get the model description of other functions. ```swift let modelAsset = try MLModelAsset(url: modelURL) let modelDescription = try await modelAsset.modelDescription() print(modelDescription) ```
+// The default model descripton.
 func (o *MLModelAsset) ModelDescriptionWithCompletionHandler(handler func(*MLModelDescription, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -91,7 +93,7 @@ func (o *MLModelAsset) ModelDescriptionWithCompletionHandler(handler func(*MLMod
 	o.Ptr().Send(_mLModelAssetSelModelDescriptionWithCompletionHandler, __block_handler)
 }
 
-// The model descripton for a specified function. Use this method to get the description of the model such as the feature descriptions, the model author, and other metadata. ```swift let modelAsset = try MLModelAsset(url: modelURL) let modelDescription = try await modelAsset.modelDescription(of: "my_function") print(modelDescription) ```
+// The model descripton for a specified function.
 func (o *MLModelAsset) ModelDescriptionOfFunctionNamedCompletionHandler(functionName *foundation.NSString, handler func(*MLModelDescription, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -106,7 +108,17 @@ func (o *MLModelAsset) ModelDescriptionOfFunctionNamedCompletionHandler(function
 	o.Ptr().Send(_mLModelAssetSelModelDescriptionOfFunctionNamedCompletionHandler, functionName.Ptr(), __block_handler)
 }
 
-// The list of function names in the model asset. Some model types (e.g. ML Program) supports multiple functions. Use this method to query the function names. The method vends the empty array when the model doesn't use the multi-function configuration. ```swift let modelAsset = try MLModelAsset(url: modelURL) let functionNames = try await modelAsset.functionNames print(functionNames) // For example, ["my_function1", "my_function2"]; ```
-func (o *MLModelAsset) FunctionNamesWithCompletionHandler(handler objc.Block) {
-	o.Ptr().Send(_mLModelAssetSelFunctionNamesWithCompletionHandler, handler)
+// The list of function names in the model asset.
+func (o *MLModelAsset) FunctionNamesWithCompletionHandler(handler func(*foundation.NSArray[*foundation.NSString], unsafe.Pointer)) {
+	var __block_handler objc.Block
+	if handler != nil {
+		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			handler(foundation.NSArrayFromID[*foundation.NSString](blockParam0), blockParam1)
+		})
+		defer __block_handler.Release()
+	}
+	o.Ptr().Send(_mLModelAssetSelFunctionNamesWithCompletionHandler, __block_handler)
 }

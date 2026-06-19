@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A stub class that encapsulates security information about a file.
+//
 // FileSecurity wraps [raw.NSFileSecurity] with a fluent Go API.
 type FileSecurity struct {
 	inner *raw.NSFileSecurity

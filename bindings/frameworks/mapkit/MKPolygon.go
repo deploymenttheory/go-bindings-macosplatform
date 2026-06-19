@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A closed polygon overlay.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkpolygon
 type MKPolygon struct {
 	MKMultiPoint
@@ -36,6 +38,7 @@ func MKPolygonFromID(id objc.ID) *MKPolygon {
 	return o
 }
 
+// Creates and returns a polygon object from the specified set of map points.
 func MKPolygonPolygonWithPointsCount(points *MKMapPoint, count uint) *MKPolygon {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPolygon), _mKPolygonSelPolygonWithPointsCount, points, count)
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func MKPolygonPolygonWithPointsCount(points *MKMapPoint, count uint) *MKPolygon 
 	return MKPolygonFromID(_ret)
 }
 
+// Creates and returns a polygon object from the specified set of map points and interior polygons.
 func MKPolygonPolygonWithPointsCountInteriorPolygons(points *MKMapPoint, count uint, interiorPolygons *foundation.NSArray[*MKPolygon]) *MKPolygon {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPolygon), _mKPolygonSelPolygonWithPointsCountInteriorPolygons, points, count, interiorPolygons.Ptr())
 	if _ret != 0 {
@@ -52,6 +56,7 @@ func MKPolygonPolygonWithPointsCountInteriorPolygons(points *MKMapPoint, count u
 	return MKPolygonFromID(_ret)
 }
 
+// Creates and returns a polygon object from the specified set of coordinates.
 func MKPolygonPolygonWithCoordinatesCount(coords unsafe.Pointer, count uint) *MKPolygon {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPolygon), _mKPolygonSelPolygonWithCoordinatesCount, coords, count)
 	if _ret != 0 {
@@ -60,6 +65,7 @@ func MKPolygonPolygonWithCoordinatesCount(coords unsafe.Pointer, count uint) *MK
 	return MKPolygonFromID(_ret)
 }
 
+// Creates and returns a polygon object from the specified set of coordinates and interior polygons.
 func MKPolygonPolygonWithCoordinatesCountInteriorPolygons(coords unsafe.Pointer, count uint, interiorPolygons *foundation.NSArray[*MKPolygon]) *MKPolygon {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPolygon), _mKPolygonSelPolygonWithCoordinatesCountInteriorPolygons, coords, count, interiorPolygons.Ptr())
 	if _ret != 0 {

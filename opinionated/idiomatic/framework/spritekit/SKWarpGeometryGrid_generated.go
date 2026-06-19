@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A definition for a grid-based deformation of nodes that conform to SKWarpable.
+//
 // WarpGeometryGrid wraps [raw.SKWarpGeometryGrid] with a fluent Go API.
 type WarpGeometryGrid struct {
 	inner *raw.SKWarpGeometryGrid
@@ -31,6 +33,8 @@ func WarpGeometryGridFromID(id objc.ID) *WarpGeometryGrid {
 	return &WarpGeometryGrid{inner: raw.SKWarpGeometryGridFromID(id)}
 }
 
+// Tells you when to intialize a grid that was loaded from an archive.
+//
 // NewWarpGeometryGridWithCoder creates a new [WarpGeometryGrid].
 func NewWarpGeometryGridWithCoder(aDecoder *foundation.NSCoder) *WarpGeometryGrid {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKWarpGeometryGrid")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewWarpGeometryGridWithCoder(aDecoder *foundation.NSCoder) *WarpGeometryGri
 	return &WarpGeometryGrid{inner: raw.SKWarpGeometryGridFromID(_id)}
 }
 
+// Creates a warp geometry grid of a specific size and warp translation, in pointers to point arrays.
+//
 // NewWarpGeometryGridWithColumnsRowsSourcePositionsDestPositions creates a new [WarpGeometryGrid].
 func NewWarpGeometryGridWithColumnsRowsSourcePositionsDestPositions(cols int, rows int, sourcePositions unsafe.Pointer, destPositions unsafe.Pointer) *WarpGeometryGrid {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKWarpGeometryGrid")), objc.RegisterName("alloc"))
@@ -45,16 +51,22 @@ func NewWarpGeometryGridWithColumnsRowsSourcePositionsDestPositions(cols int, ro
 	return &WarpGeometryGrid{inner: raw.SKWarpGeometryGridFromID(_id)}
 }
 
+// Returns the source position of a vertex.
+//
 // SourcePositionAtIndex calls the underlying SourcePositionAtIndex.
 func (x *WarpGeometryGrid) SourcePositionAtIndex(index int) unsafe.Pointer {
 	return x.inner.SourcePositionAtIndex(index)
 }
 
+// Returns the destination position of a vertex.
+//
 // DestPositionAtIndex calls the underlying DestPositionAtIndex.
 func (x *WarpGeometryGrid) DestPositionAtIndex(index int) unsafe.Pointer {
 	return x.inner.DestPositionAtIndex(index)
 }
 
+// Returns a copy of the receiver with the source positions replaced by a specified array.
+//
 // GridByReplacingSourcePositions calls the underlying GridByReplacingSourcePositions.
 func (x *WarpGeometryGrid) GridByReplacingSourcePositions(sourcePositions unsafe.Pointer) *WarpGeometryGrid {
 	_r := x.inner.GridByReplacingSourcePositions(sourcePositions)
@@ -64,6 +76,8 @@ func (x *WarpGeometryGrid) GridByReplacingSourcePositions(sourcePositions unsafe
 	return &WarpGeometryGrid{inner: _r}
 }
 
+// Returns a copy of the receiver with the destination positions replaced by a specified array.
+//
 // GridByReplacingDestPositions calls the underlying GridByReplacingDestPositions.
 func (x *WarpGeometryGrid) GridByReplacingDestPositions(destPositions unsafe.Pointer) *WarpGeometryGrid {
 	_r := x.inner.GridByReplacingDestPositions(destPositions)

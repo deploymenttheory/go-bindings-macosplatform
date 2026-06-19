@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a MIDI poly or key pressure event.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avmidipolypressureevent
 type AVMIDIPolyPressureEvent struct {
 	AVMIDIChannelEvent
@@ -33,7 +35,7 @@ func AVMIDIPolyPressureEventFromID(id objc.ID) *AVMIDIPolyPressureEvent {
 	return o
 }
 
-// @method initWithChannel:key:pressure @abstract Initialize the event with a channel, a MIDI key number, and a key pressure value. @param channel The MIDI channel for the message.  Range: 0-15. @param key The MIDI key number to which the pressure should be applied. @param pressure The poly pressure value.
+// Creates an event with a channel, MIDI key number, and a key pressure value.
 func (o *AVMIDIPolyPressureEvent) InitWithChannelKeyPressure(channel uint, key uint, pressure uint) *AVMIDIPolyPressureEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIPolyPressureEventSelInitWithChannelKeyPressure, channel, key, pressure)
 	if _ret != 0 {

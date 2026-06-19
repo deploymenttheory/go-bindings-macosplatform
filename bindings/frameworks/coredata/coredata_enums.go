@@ -64,25 +64,42 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
+// The types of attribute that Core Data supports.
 type NSAttributeType uint64
 
 const (
-	NSUndefinedAttributeType     NSAttributeType = 0
-	NSInteger16AttributeType     NSAttributeType = 100
-	NSInteger32AttributeType     NSAttributeType = 200
-	NSInteger64AttributeType     NSAttributeType = 300
-	NSDecimalAttributeType       NSAttributeType = 400
-	NSDoubleAttributeType        NSAttributeType = 500
-	NSFloatAttributeType         NSAttributeType = 600
-	NSStringAttributeType        NSAttributeType = 700
-	NSBooleanAttributeType       NSAttributeType = 800
-	NSDateAttributeType          NSAttributeType = 900
-	NSBinaryDataAttributeType    NSAttributeType = 1000
-	NSUUIDAttributeType          NSAttributeType = 1100
-	NSURIAttributeType           NSAttributeType = 1200
+	// An attribute that doesn’t have an explicit type.
+	NSUndefinedAttributeType NSAttributeType = 0
+	// An attribute that stores a 16-bit signed integer value.
+	NSInteger16AttributeType NSAttributeType = 100
+	// An attribute that stores a 32-bit signed integer value.
+	NSInteger32AttributeType NSAttributeType = 200
+	// An attribute that stores a 64-bit signed integer value.
+	NSInteger64AttributeType NSAttributeType = 300
+	// An attribute that stores a decimal value.
+	NSDecimalAttributeType NSAttributeType = 400
+	// An attribute that stores a double value.
+	NSDoubleAttributeType NSAttributeType = 500
+	// An attribute that stores a float value.
+	NSFloatAttributeType NSAttributeType = 600
+	// An attribute that stores a string.
+	NSStringAttributeType NSAttributeType = 700
+	// An attribute that stores a Boolean value.
+	NSBooleanAttributeType NSAttributeType = 800
+	// An attribute that stores a date.
+	NSDateAttributeType NSAttributeType = 900
+	// An attribute that stores binary data.
+	NSBinaryDataAttributeType NSAttributeType = 1000
+	// An attribute that stores a universally unique identifier.
+	NSUUIDAttributeType NSAttributeType = 1100
+	// An attribute that stores a uniform resource identifier.
+	NSURIAttributeType NSAttributeType = 1200
+	// An attribute that uses a value transformer to derive its value.
 	NSTransformableAttributeType NSAttributeType = 1800
-	NSObjectIDAttributeType      NSAttributeType = 2000
-	NSCompositeAttributeType     NSAttributeType = 2100
+	// An attribute that stores a managed object’s ID.
+	NSObjectIDAttributeType NSAttributeType = 2000
+	// An attribute that derives its value by composing other attributes.
+	NSCompositeAttributeType NSAttributeType = 2100
 )
 
 func (e NSAttributeType) String() string {
@@ -124,12 +141,16 @@ func (e NSAttributeType) String() string {
 	}
 }
 
+// The types of result a batch delete request can provide when it executes.
 type NSBatchDeleteRequestResultType uint64
 
 const (
+	// Returns a Boolean value that indicates if the request succeeds.
 	NSBatchDeleteResultTypeStatusOnly NSBatchDeleteRequestResultType = 0
-	NSBatchDeleteResultTypeObjectIDs  NSBatchDeleteRequestResultType = 1
-	NSBatchDeleteResultTypeCount      NSBatchDeleteRequestResultType = 2
+	// Returns an array of the deleted managed objects’ identifiers.
+	NSBatchDeleteResultTypeObjectIDs NSBatchDeleteRequestResultType = 1
+	// Returns the number of managed objects the request deletes.
+	NSBatchDeleteResultTypeCount NSBatchDeleteRequestResultType = 2
 )
 
 func (e NSBatchDeleteRequestResultType) String() string {
@@ -145,12 +166,16 @@ func (e NSBatchDeleteRequestResultType) String() string {
 	}
 }
 
+// Result types for a batch-insertion request.
 type NSBatchInsertRequestResultType uint64
 
 const (
+	// A value that indicates that the return type is a Boolean value representing whether the batch-insertion request succeeded.
 	NSBatchInsertRequestResultTypeStatusOnly NSBatchInsertRequestResultType = 0
-	NSBatchInsertRequestResultTypeObjectIDs  NSBatchInsertRequestResultType = 1
-	NSBatchInsertRequestResultTypeCount      NSBatchInsertRequestResultType = 2
+	// A value that indicates the return type is an array of object IDs that corresponds to the inserted rows.
+	NSBatchInsertRequestResultTypeObjectIDs NSBatchInsertRequestResultType = 1
+	// A value that indicates that the return type is the number of inserted rows.
+	NSBatchInsertRequestResultTypeCount NSBatchInsertRequestResultType = 2
 )
 
 func (e NSBatchInsertRequestResultType) String() string {
@@ -166,11 +191,15 @@ func (e NSBatchInsertRequestResultType) String() string {
 	}
 }
 
+// Result types for a batch-update request.
 type NSBatchUpdateRequestResultType uint64
 
 const (
-	NSStatusOnlyResultType          NSBatchUpdateRequestResultType = 0
-	NSUpdatedObjectIDsResultType    NSBatchUpdateRequestResultType = 1
+	// A value that indicates the return type is a Boolean value representing whether the batch-update request succeeds.
+	NSStatusOnlyResultType NSBatchUpdateRequestResultType = 0
+	// A value that indicates the return type is an array of object IDs that corresponds to the updated rows.
+	NSUpdatedObjectIDsResultType NSBatchUpdateRequestResultType = 1
+	// A value that indicates the return type is the number of updated rows.
 	NSUpdatedObjectsCountResultType NSBatchUpdateRequestResultType = 2
 )
 
@@ -187,13 +216,18 @@ func (e NSBatchUpdateRequestResultType) String() string {
 	}
 }
 
+// Constants that determine what happens when you delete a relationship’s owning managed object.
 type NSDeleteRule uint64
 
 const (
+	// A rule that prevents modification of the referenced managed objects.
 	NSNoActionDeleteRule NSDeleteRule = 0
-	NSNullifyDeleteRule  NSDeleteRule = 1
-	NSCascadeDeleteRule  NSDeleteRule = 2
-	NSDenyDeleteRule     NSDeleteRule = 3
+	// A rule that nullifies the inverse relationship of the referenced managed objects.
+	NSNullifyDeleteRule NSDeleteRule = 1
+	// A rule that deletes the referenced managed objects.
+	NSCascadeDeleteRule NSDeleteRule = 2
+	// A rule that prevents the deletion of the owning managed object if the relationship has references to other objects.
+	NSDenyDeleteRule NSDeleteRule = 3
 )
 
 func (e NSDeleteRule) String() string {
@@ -211,14 +245,21 @@ func (e NSDeleteRule) String() string {
 	}
 }
 
+// The types for mapping an entity between a source model and a destination model.
 type NSEntityMappingType uint64
 
 const (
+	// Specifies that the developer handles destination instance creation.
 	NSUndefinedEntityMappingType NSEntityMappingType = 0
-	NSCustomEntityMappingType    NSEntityMappingType = 1
-	NSAddEntityMappingType       NSEntityMappingType = 2
-	NSRemoveEntityMappingType    NSEntityMappingType = 3
-	NSCopyEntityMappingType      NSEntityMappingType = 4
+	// Specifies a custom mapping.
+	NSCustomEntityMappingType NSEntityMappingType = 1
+	// Specifies that this is a new entity in the destination model.
+	NSAddEntityMappingType NSEntityMappingType = 2
+	// Specifies that this entity is not present in the destination model.
+	NSRemoveEntityMappingType NSEntityMappingType = 3
+	// Specifies that source instances are migrated as-is.
+	NSCopyEntityMappingType NSEntityMappingType = 4
+	// Specifies that entity exists in source and destination and is mapped.
 	NSTransformEntityMappingType NSEntityMappingType = 5
 )
 
@@ -241,11 +282,14 @@ func (e NSEntityMappingType) String() string {
 	}
 }
 
+// Defines the possible types of index elements.
 type NSFetchIndexElementType uint64
 
 const (
+	// A binary index type.
 	NSFetchIndexElementTypeBinary NSFetchIndexElementType = 0
-	NSFetchIndexElementTypeRTree  NSFetchIndexElementType = 1
+	// An R-tree index type.
+	NSFetchIndexElementTypeRTree NSFetchIndexElementType = 1
 )
 
 func (e NSFetchIndexElementType) String() string {
@@ -259,13 +303,18 @@ func (e NSFetchIndexElementType) String() string {
 	}
 }
 
+// Constants that specify the possible result types a fetch request can return.
 type NSFetchRequestResultType uint64
 
 const (
-	NSManagedObjectResultType   NSFetchRequestResultType = 0
+	// The request returns managed objects.
+	NSManagedObjectResultType NSFetchRequestResultType = 0
+	// The request returns managed object IDs.
 	NSManagedObjectIDResultType NSFetchRequestResultType = 1
-	NSDictionaryResultType      NSFetchRequestResultType = 2
-	NSCountResultType           NSFetchRequestResultType = 4
+	// The request returns dictionaries.
+	NSDictionaryResultType NSFetchRequestResultType = 2
+	// The request returns the count of the objects that match the request.
+	NSCountResultType NSFetchRequestResultType = 4
 )
 
 func (e NSFetchRequestResultType) String() string {
@@ -285,12 +334,17 @@ func (e NSFetchRequestResultType) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that specify the possible types of changes that are reported.
 type NSFetchedResultsChangeType uint64
 
 const (
+	// Specifies that an object was inserted.
 	NSFetchedResultsChangeInsert NSFetchedResultsChangeType = 1
+	// Specifies that an object was deleted.
 	NSFetchedResultsChangeDelete NSFetchedResultsChangeType = 2
-	NSFetchedResultsChangeMove   NSFetchedResultsChangeType = 3
+	// Specifies that an object was moved.
+	NSFetchedResultsChangeMove NSFetchedResultsChangeType = 3
+	// Specifies that an object was changed.
 	NSFetchedResultsChangeUpdate NSFetchedResultsChangeType = 4
 )
 
@@ -309,12 +363,16 @@ func (e NSFetchedResultsChangeType) String() string {
 	}
 }
 
+// The concurrency types you can use with a managed object context.
 type NSManagedObjectContextConcurrencyType uint64
 
 const (
-	NSConfinementConcurrencyType  NSManagedObjectContextConcurrencyType = 0
+	// Specifies that the context will use the thread confinement pattern.
+	NSConfinementConcurrencyType NSManagedObjectContextConcurrencyType = 0
+	// Specifies that the context will be associated with a private dispatch queue.
 	NSPrivateQueueConcurrencyType NSManagedObjectContextConcurrencyType = 1
-	NSMainQueueConcurrencyType    NSManagedObjectContextConcurrencyType = 2
+	// Specifies that the context will be associated with the main queue.
+	NSMainQueueConcurrencyType NSManagedObjectContextConcurrencyType = 2
 )
 
 func (e NSManagedObjectContextConcurrencyType) String() string {
@@ -330,14 +388,20 @@ func (e NSManagedObjectContextConcurrencyType) String() string {
 	}
 }
 
+// Constants that define merge policy types.
 type NSMergePolicyType uint64
 
 const (
-	NSErrorMergePolicyType                      NSMergePolicyType = 0
-	NSMergeByPropertyStoreTrumpMergePolicyType  NSMergePolicyType = 1
+	// The default merge policy for all managed object contexts.
+	NSErrorMergePolicyType NSMergePolicyType = 0
+	// A property-based merge policy that applies external changes.
+	NSMergeByPropertyStoreTrumpMergePolicyType NSMergePolicyType = 1
+	// A property-based merge policy that applies in-memory changes.
 	NSMergeByPropertyObjectTrumpMergePolicyType NSMergePolicyType = 2
-	NSOverwriteMergePolicyType                  NSMergePolicyType = 3
-	NSRollbackMergePolicyType                   NSMergePolicyType = 4
+	// A merge policy type that overwrites the entire stored object.
+	NSOverwriteMergePolicyType NSMergePolicyType = 3
+	// A merge policy that discards unsaved changes.
+	NSRollbackMergePolicyType NSMergePolicyType = 4
 )
 
 func (e NSMergePolicyType) String() string {
@@ -357,6 +421,7 @@ func (e NSMergePolicyType) String() string {
 	}
 }
 
+// The types of results from a persistent CloudKit container event fetch request.
 type NSPersistentCloudKitContainerEventResultType int64
 
 const (
@@ -375,6 +440,7 @@ func (e NSPersistentCloudKitContainerEventResultType) String() string {
 	}
 }
 
+// The type of event in a persistent CloudKit container, either setup, import, or export.
 type NSPersistentCloudKitContainerEventType int64
 
 const (
@@ -396,11 +462,15 @@ func (e NSPersistentCloudKitContainerEventType) String() string {
 	}
 }
 
+// Options that control the behavior when promoting the container’s schema to CloudKit.
 type NSPersistentCloudKitContainerSchemaInitializationOptions uint64
 
 const (
-	NSPersistentCloudKitContainerSchemaInitializationOptionsNone        NSPersistentCloudKitContainerSchemaInitializationOptions = 0
-	NSPersistentCloudKitContainerSchemaInitializationOptionsDryRun      NSPersistentCloudKitContainerSchemaInitializationOptions = 2
+	// Indicates there are no specified schema options.
+	NSPersistentCloudKitContainerSchemaInitializationOptionsNone NSPersistentCloudKitContainerSchemaInitializationOptions = 0
+	// A flag that indicates the container validates the model and generates the records, but doesn’t upload them to CloudKit.
+	NSPersistentCloudKitContainerSchemaInitializationOptionsDryRun NSPersistentCloudKitContainerSchemaInitializationOptions = 2
+	// Prints the generated records to the console.
 	NSPersistentCloudKitContainerSchemaInitializationOptionsPrintSchema NSPersistentCloudKitContainerSchemaInitializationOptions = 4
 )
 
@@ -418,11 +488,15 @@ func (e NSPersistentCloudKitContainerSchemaInitializationOptions) String() strin
 	return strings.Join(parts, "|")
 }
 
+// The types of changes to managed objects reflected in persistent history.
 type NSPersistentHistoryChangeType int64
 
 const (
+	// The insertion of a managed object into the persistent store.
 	NSPersistentHistoryChangeTypeInsert NSPersistentHistoryChangeType = 0
+	// An update to a managed object’s properties in the persistent store.
 	NSPersistentHistoryChangeTypeUpdate NSPersistentHistoryChangeType = 1
+	// The deletion of a managed object from the persistent store.
 	NSPersistentHistoryChangeTypeDelete NSPersistentHistoryChangeType = 2
 )
 
@@ -439,14 +513,21 @@ func (e NSPersistentHistoryChangeType) String() string {
 	}
 }
 
+// The types of results from a persistent history change request.
 type NSPersistentHistoryResultType int64
 
 const (
-	NSPersistentHistoryResultTypeStatusOnly             NSPersistentHistoryResultType = 0
-	NSPersistentHistoryResultTypeObjectIDs              NSPersistentHistoryResultType = 1
-	NSPersistentHistoryResultTypeCount                  NSPersistentHistoryResultType = 2
-	NSPersistentHistoryResultTypeTransactionsOnly       NSPersistentHistoryResultType = 3
-	NSPersistentHistoryResultTypeChangesOnly            NSPersistentHistoryResultType = 4
+	// The status of the persistent history change request.
+	NSPersistentHistoryResultTypeStatusOnly NSPersistentHistoryResultType = 0
+	// The identifiers of managed objects changed since the requested date, token, or transaction.
+	NSPersistentHistoryResultTypeObjectIDs NSPersistentHistoryResultType = 1
+	// The number of persistent history changes since the requested date, token, or transaction.
+	NSPersistentHistoryResultTypeCount NSPersistentHistoryResultType = 2
+	// The persistent history transactions since the requested date, token, or transaction.
+	NSPersistentHistoryResultTypeTransactionsOnly NSPersistentHistoryResultType = 3
+	// The persistent history changes since the requested date, token, or transaction.
+	NSPersistentHistoryResultTypeChangesOnly NSPersistentHistoryResultType = 4
+	// The persistent history transactions and changes since the requested date, token, or transaction.
 	NSPersistentHistoryResultTypeTransactionsAndChanges NSPersistentHistoryResultType = 5
 )
 
@@ -469,13 +550,19 @@ func (e NSPersistentHistoryResultType) String() string {
 	}
 }
 
+// Constants that specify the types of fetch requests.
 type NSPersistentStoreRequestType uint64
 
 const (
-	NSFetchRequestType       NSPersistentStoreRequestType = 1
-	NSSaveRequestType        NSPersistentStoreRequestType = 2
+	// Specifies that the request returns managed objects.
+	NSFetchRequestType NSPersistentStoreRequestType = 1
+	// Specifies that the request saves managed objects.
+	NSSaveRequestType NSPersistentStoreRequestType = 2
+	// A request that inserts data into a persistent store using a batch of managed objects or dictionaries.
 	NSBatchInsertRequestType NSPersistentStoreRequestType = 5
+	// A request that updates data for multiple managed objects in a persistent store.
 	NSBatchUpdateRequestType NSPersistentStoreRequestType = 6
+	// A request that deletes data for multiple managed objects from a persistent store.
 	NSBatchDeleteRequestType NSPersistentStoreRequestType = 7
 )
 
@@ -496,13 +583,18 @@ func (e NSPersistentStoreRequestType) String() string {
 	}
 }
 
+// These constants are used as the value corresponding to the NSPersistentStoreUbiquitousTransitionTypeKey in the user info dictionary of NSPersistentStoreCoordinatorStoresWillChangeNotification and NSPersistentStoreCoordinatorStoresDidChangeNotification notifications to identify the type of event leading to a change.
 // Deprecated: Please see the release notes and Core Data documentation.
 type NSPersistentStoreUbiquitousTransitionType uint64
 
 const (
-	NSPersistentStoreUbiquitousTransitionTypeAccountAdded           NSPersistentStoreUbiquitousTransitionType = 1
-	NSPersistentStoreUbiquitousTransitionTypeAccountRemoved         NSPersistentStoreUbiquitousTransitionType = 2
-	NSPersistentStoreUbiquitousTransitionTypeContentRemoved         NSPersistentStoreUbiquitousTransitionType = 3
+	// This value indicates that a new iCloud account is available, and the persistent store in use will or did transition to the new account.
+	NSPersistentStoreUbiquitousTransitionTypeAccountAdded NSPersistentStoreUbiquitousTransitionType = 1
+	// This value indicates that no iCloud account is available, and the persistent store in use will or did transition to the “local” store.
+	NSPersistentStoreUbiquitousTransitionTypeAccountRemoved NSPersistentStoreUbiquitousTransitionType = 2
+	// This value indicates that the user has wiped the contents of the iCloud account, usually using Delete All from Documents & Data in Settings.
+	NSPersistentStoreUbiquitousTransitionTypeContentRemoved NSPersistentStoreUbiquitousTransitionType = 3
+	// This value indicates that the Core Data integration has finished building a store file that is consistent with the contents of the iCloud account, and is ready to replace the fallback store with that file.
 	NSPersistentStoreUbiquitousTransitionTypeInitialImportCompleted NSPersistentStoreUbiquitousTransitionType = 4
 )
 
@@ -521,15 +613,22 @@ func (e NSPersistentStoreUbiquitousTransitionType) String() string {
 	}
 }
 
+// Constants that specify the reason the managed object may need to reinitialize its values.
 type NSSnapshotEventType uint64
 
 const (
+	// Specifies a change due to undo from insertion.
 	NSSnapshotEventUndoInsertion NSSnapshotEventType = 2
-	NSSnapshotEventUndoDeletion  NSSnapshotEventType = 4
-	NSSnapshotEventUndoUpdate    NSSnapshotEventType = 8
-	NSSnapshotEventRollback      NSSnapshotEventType = 16
-	NSSnapshotEventRefresh       NSSnapshotEventType = 32
-	NSSnapshotEventMergePolicy   NSSnapshotEventType = 64
+	// Specifies a change due to undo from deletion.
+	NSSnapshotEventUndoDeletion NSSnapshotEventType = 4
+	// Specifies a change due to a property-level undo.
+	NSSnapshotEventUndoUpdate NSSnapshotEventType = 8
+	// Specifies a change due to the managed object context being rolled back.
+	NSSnapshotEventRollback NSSnapshotEventType = 16
+	// Specifies a change due to the managed object being refreshed.
+	NSSnapshotEventRefresh NSSnapshotEventType = 32
+	// Specifies a change due to conflict resolution during a save operation.
+	NSSnapshotEventMergePolicy NSSnapshotEventType = 64
 )
 
 func (e NSSnapshotEventType) String() string {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents membership activity for a highlight.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyou/swhighlightmembershipevent
 type SWHighlightMembershipEvent struct {
 	foundation.NSObject
@@ -31,7 +33,7 @@ func SWHighlightMembershipEventFromID(id objc.ID) *SWHighlightMembershipEvent {
 	return o
 }
 
-// Initializes a highlight membership event object to represent changes to a highlight membership. @param highlight The object on which the event occurred. @param trigger The trigger membership event for the highlight.
+// Creates and initializes a membership event.
 func (o *SWHighlightMembershipEvent) InitWithHighlightTrigger(highlight *SWHighlight, trigger SWHighlightMembershipEventTrigger) *SWHighlightMembershipEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightMembershipEventSelInitWithHighlightTrigger, highlight.Ptr(), trigger)
 	if _ret != 0 {

@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A container that provides information about and access to the image, video, or Live Photo content of an asset to be edited.
+//
 // ContentEditingInput wraps [raw.PHContentEditingInput] with a fluent Go API.
 type ContentEditingInput struct {
 	inner *raw.PHContentEditingInput

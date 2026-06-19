@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to create, delete, or modify a Photos asset collection, for use in a photo library change block.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phassetcollectionchangerequest
 type PHAssetCollectionChangeRequest struct {
 	PHChangeRequest
@@ -42,6 +44,7 @@ func PHAssetCollectionChangeRequestFromID(id objc.ID) *PHAssetCollectionChangeRe
 	return o
 }
 
+// Creates a request for adding a new asset collection to the Photos library.
 func PHAssetCollectionChangeRequestCreationRequestForAssetCollectionWithTitle(title *foundation.NSString) *PHAssetCollectionChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollectionChangeRequest), _pHAssetCollectionChangeRequestSelCreationRequestForAssetCollectionWithTitle, title.Ptr())
 	if _ret != 0 {
@@ -50,10 +53,12 @@ func PHAssetCollectionChangeRequestCreationRequestForAssetCollectionWithTitle(ti
 	return PHAssetCollectionChangeRequestFromID(_ret)
 }
 
+// Requests that the specified asset collections be deleted.
 func PHAssetCollectionChangeRequestDeleteAssetCollections(assetCollections foundation.NSFastEnumeration) {
 	objc.ID(_clsPHAssetCollectionChangeRequest).Send(_pHAssetCollectionChangeRequestSelDeleteAssetCollections, assetCollections)
 }
 
+// Creates a request for modifying the specified asset collection.
 func PHAssetCollectionChangeRequestChangeRequestForAssetCollection(assetCollection *PHAssetCollection) *PHAssetCollectionChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollectionChangeRequest), _pHAssetCollectionChangeRequestSelChangeRequestForAssetCollection, assetCollection.Ptr())
 	if _ret != 0 {
@@ -62,6 +67,7 @@ func PHAssetCollectionChangeRequestChangeRequestForAssetCollection(assetCollecti
 	return PHAssetCollectionChangeRequestFromID(_ret)
 }
 
+// Creates a request for modifying the specified asset collection, with a fetch result for tracking changes.
 func PHAssetCollectionChangeRequestChangeRequestForAssetCollectionAssets(assetCollection *PHAssetCollection, assets *PHFetchResult[*PHAsset]) *PHAssetCollectionChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollectionChangeRequest), _pHAssetCollectionChangeRequestSelChangeRequestForAssetCollectionAssets, assetCollection.Ptr(), assets.Ptr())
 	if _ret != 0 {
@@ -70,26 +76,32 @@ func PHAssetCollectionChangeRequestChangeRequestForAssetCollectionAssets(assetCo
 	return PHAssetCollectionChangeRequestFromID(_ret)
 }
 
+// Adds the specified assets to the asset collection.
 func (o *PHAssetCollectionChangeRequest) AddAssets(assets foundation.NSFastEnumeration) {
 	o.Ptr().Send(_pHAssetCollectionChangeRequestSelAddAssets, assets)
 }
 
+// Inserts the specified assets into the collection at the specified indexes.
 func (o *PHAssetCollectionChangeRequest) InsertAssetsAtIndexes(assets foundation.NSFastEnumeration, indexes *foundation.NSIndexSet) {
 	o.Ptr().Send(_pHAssetCollectionChangeRequestSelInsertAssetsAtIndexes, assets, indexes.Ptr())
 }
 
+// Removes the specified assets from the asset collection.
 func (o *PHAssetCollectionChangeRequest) RemoveAssets(assets foundation.NSFastEnumeration) {
 	o.Ptr().Send(_pHAssetCollectionChangeRequestSelRemoveAssets, assets)
 }
 
+// Removes the assets at the specified indexes from the asset collection.
 func (o *PHAssetCollectionChangeRequest) RemoveAssetsAtIndexes(indexes *foundation.NSIndexSet) {
 	o.Ptr().Send(_pHAssetCollectionChangeRequestSelRemoveAssetsAtIndexes, indexes.Ptr())
 }
 
+// Replaces the assets at the specified indexes in the asset collection with the specified assets.
 func (o *PHAssetCollectionChangeRequest) ReplaceAssetsAtIndexesWithAssets(indexes *foundation.NSIndexSet, assets foundation.NSFastEnumeration) {
 	o.Ptr().Send(_pHAssetCollectionChangeRequestSelReplaceAssetsAtIndexesWithAssets, indexes.Ptr(), assets)
 }
 
+// Moves the assets at the specified indexes in the asset collection to a new index.
 func (o *PHAssetCollectionChangeRequest) MoveAssetsAtIndexesToIndex(fromIndexes *foundation.NSIndexSet, toIndex uint) {
 	o.Ptr().Send(_pHAssetCollectionChangeRequestSelMoveAssetsAtIndexesToIndex, fromIndexes.Ptr(), toIndex)
 }

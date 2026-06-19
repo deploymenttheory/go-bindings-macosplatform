@@ -96,6 +96,7 @@ func (e MEMessageActionFlag) String() string {
 	}
 }
 
+// A color that the system uses to display a message in the message list.
 type MEMessageActionMessageColor int64
 
 const (
@@ -171,12 +172,16 @@ func (e MEMessageSecurityErrorCode) String() string {
 	}
 }
 
+// The state of a message: sent, unsent, or received.
 type MEMessageState int64
 
 const (
+	// A state that indicates the system has received and stored the message.
 	MEMessageStateReceived MEMessageState = 0
-	MEMessageStateDraft    MEMessageState = 1
-	MEMessageStateSending  MEMessageState = 2
+	// A state that indicates the user is composing the message, and hasn’t sent it yet.
+	MEMessageStateDraft MEMessageState = 1
+	// A state that indicates the system is in the process of sending the message.
+	MEMessageStateSending MEMessageState = 2
 )
 
 func (e MEMessageState) String() string {

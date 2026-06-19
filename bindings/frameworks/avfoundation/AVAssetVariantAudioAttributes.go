@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the audio attributes for an asset variant.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetvariantaudioattributes
 type AVAssetVariantAudioAttributes struct {
 	foundation.NSObject
@@ -42,6 +44,9 @@ func (o *AVAssetVariantAudioAttributes) RenditionSpecificAttributesForMediaOptio
 
 // Provides an array of audio formats present in the variant's renditions if any are declared. Each value in the array is a NSNumber representation of AudioFormatID.
 func (o *AVAssetVariantAudioAttributes) FormatIDs() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAssetVariantAudioAttributesSelFormatIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetVariantAudioAttributesSelFormatIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

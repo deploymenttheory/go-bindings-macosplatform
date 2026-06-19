@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A ReLUN neuron filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronrelun
 type MPSCNNNeuronReLUN struct {
 	mpsneuralnetwork.MPSCNNNeuron

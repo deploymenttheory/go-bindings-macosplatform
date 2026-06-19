@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes a Media Extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmediaextensionproperties
 type AVMediaExtensionProperties struct {
 	foundation.NSObject

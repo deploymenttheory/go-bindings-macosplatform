@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Your response to an intent object.
+//
 // IntentResponse wraps [raw.INIntentResponse] with a fluent Go API.
 type IntentResponse struct {
 	inner *raw.INIntentResponse
@@ -36,6 +38,8 @@ func NewIntentResponse() *IntentResponse {
 	return &IntentResponse{inner: raw.INIntentResponseFromID(_id)}
 }
 
+// The user activity object to use when launching the app.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *IntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *IntentResponse {
 	x.inner.SetUserActivity(userActivity)

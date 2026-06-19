@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A texture that may have more than four channels for use in convolutional neural networks.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimage
 type MPSImage struct {
 	foundation.NSObject
@@ -71,7 +73,7 @@ func MPSImageDefaultAllocator() mpscore.MPSImageAllocator {
 	return _ret
 }
 
-// @abstract   Initialize an empty image object @param      device              The device that the image will be used. May not be NULL. @param      imageDescriptor     The MPSImageDescriptor. May not be NULL. @return     A valid MPSImage object or nil, if failure. @discussion Storage to store data needed is allocated lazily on first use of MPSImage or when application calls MPSImage.texture
+// Initializes an empty image.
 func (o *MPSImage) InitWithDeviceImageDescriptor(device metal.MTLDevice, imageDescriptor *mpscore.MPSImageDescriptor) *MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageSelInitWithDeviceImageDescriptor, device, imageDescriptor.Ptr())
 	if _ret != 0 {
@@ -89,7 +91,7 @@ func (o *MPSImage) InitWithParentImageSliceRangeFeatureChannels(parent *mpscore.
 	return MPSImageFromID(_ret)
 }
 
-// @abstract   Initialize an MPSImage object using Metal texture. Metal texture has been created by user for specific number of feature channels and number of images. @param      texture          The MTLTexture allocated by the user to be used as backing for MPSImage. @param      featureChannels  Number of feature channels this texture contains. @return     A valid MPSImage object or nil, if failure. @discussion Application can let MPS framework allocate texture with properties specified in imageDescriptor using initWithDevice:MPSImageDescriptor API above. However in memory intensive application, you can save memory (and allocation/deallocation time) by using MPSTemporaryImage where MPS framework aggressively reuse memory underlying textures on same command buffer. See MPSTemporaryImage class for details below. However, in certain cases, application developer may want more control on allocation, placement, reusing/recycling of memory backing textures used in application using Metal Heaps API. In this case, application can create MPSImage from pre-allocated texture using initWithTexture:featureChannels. MTLTextureType of texture can be MTLTextureType2D ONLY if featureChannels <= 4 in which case MPSImage.numberOfImages is set to 1. Else it should be MTLTextureType2DArray with arrayLength == numberOfImage * ((featureChannels + 3)/4). MPSImage.numberOfImages is set to texture.arrayLength / ((featureChannels + 3)/4). For MTLTextures containing typical image data which application may obtain from MetalKit or other libraries such as that drawn from a JPEG or PNG, featureChannels should be set to number of valid color channel e.g. for RGB data, even thought MTLPixelFormat will be MTLPixelFormatRGBA, featureChannels should be set to 3.
+// Initializes an image from a texture. The user-allocated texture has been created for a specific number of feature channels and number of images.
 func (o *MPSImage) InitWithTextureFeatureChannels(texture metal.MTLTexture, featureChannels uint) *MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageSelInitWithTextureFeatureChannels, texture, featureChannels)
 	if _ret != 0 {
@@ -124,7 +126,7 @@ func (o *MPSImage) ResourceSize() uint {
 	return _ret
 }
 
-// @abstract       Set (or query) the purgeability state of a MPSImage @discussion     Usage is per [MTLResource setPurgeableState:], except that the MTLTexture might be MPSPurgeableStateAllocationDeferred, which means there is no texture to mark volatile / nonvolatile. Attempts to set purgeability on MTLTextures that have not been allocated will be ignored.
+// Set (or query) the purgeable state of the image’s underlying texture.
 func (o *MPSImage) SetPurgeableState(state mpscore.MPSPurgeableState) mpscore.MPSPurgeableState {
 	_ret := objc.Send[mpscore.MPSPurgeableState](o.Ptr(), _mPSImageSelSetPurgeableState, state)
 	return _ret

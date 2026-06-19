@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A sample that represents the contents of a SMART Health Card or EU Digital COVID Certificate.
+//
 // VerifiableClinicalRecord wraps [raw.HKVerifiableClinicalRecord] with a fluent Go API.
 type VerifiableClinicalRecord struct {
 	inner *raw.HKVerifiableClinicalRecord

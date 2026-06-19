@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that identifies samples that group multiple subsamples.
+//
 // CorrelationType wraps [raw.HKCorrelationType] with a fluent Go API.
 type CorrelationType struct {
 	inner *raw.HKCorrelationType

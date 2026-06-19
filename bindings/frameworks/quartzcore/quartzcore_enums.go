@@ -8,16 +8,24 @@ import (
 	"strings"
 )
 
+// These constants are used by the autoresizingMask property.
 type CAAutoresizingMask uint32
 
 const (
-	KCALayerNotSizable    CAAutoresizingMask = 0
-	KCALayerMinXMargin    CAAutoresizingMask = 1
-	KCALayerWidthSizable  CAAutoresizingMask = 2
-	KCALayerMaxXMargin    CAAutoresizingMask = 4
-	KCALayerMinYMargin    CAAutoresizingMask = 8
+	// The receiver cannot be resized.
+	KCALayerNotSizable CAAutoresizingMask = 0
+	// The left margin between the receiver and its superview is flexible.
+	KCALayerMinXMargin CAAutoresizingMask = 1
+	// The receiver’s width is flexible.
+	KCALayerWidthSizable CAAutoresizingMask = 2
+	// The right margin between the receiver and its superview is flexible.
+	KCALayerMaxXMargin CAAutoresizingMask = 4
+	// The bottom margin between the receiver and its superview is flexible.
+	KCALayerMinYMargin CAAutoresizingMask = 8
+	// The receiver’s height is flexible.
 	KCALayerHeightSizable CAAutoresizingMask = 16
-	KCALayerMaxYMargin    CAAutoresizingMask = 32
+	// The top margin between the receiver and its superview is flexible.
+	KCALayerMaxYMargin CAAutoresizingMask = 32
 )
 
 func (e CAAutoresizingMask) String() string {
@@ -46,16 +54,25 @@ func (e CAAutoresizingMask) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The constraint attribute type.
 type CAConstraintAttribute int32
 
 const (
-	KCAConstraintMinX   CAConstraintAttribute = 0
-	KCAConstraintMidX   CAConstraintAttribute = 1
-	KCAConstraintMaxX   CAConstraintAttribute = 2
-	KCAConstraintWidth  CAConstraintAttribute = 3
-	KCAConstraintMinY   CAConstraintAttribute = 4
-	KCAConstraintMidY   CAConstraintAttribute = 5
-	KCAConstraintMaxY   CAConstraintAttribute = 6
+	// The left edge of a layer’s frame.
+	KCAConstraintMinX CAConstraintAttribute = 0
+	// The horizontal location of the center of a layer’s frame.
+	KCAConstraintMidX CAConstraintAttribute = 1
+	// The right edge of a layer’s frame.
+	KCAConstraintMaxX CAConstraintAttribute = 2
+	// The width of a layer.
+	KCAConstraintWidth CAConstraintAttribute = 3
+	// The bottom edge of a layer’s frame.
+	KCAConstraintMinY CAConstraintAttribute = 4
+	// The vertical location of the center of a layer’s frame.
+	KCAConstraintMidY CAConstraintAttribute = 5
+	// The top edge of a layer’s frame.
+	KCAConstraintMaxY CAConstraintAttribute = 6
+	// The height of a layer.
 	KCAConstraintHeight CAConstraintAttribute = 7
 )
 
@@ -111,6 +128,7 @@ func (e CACornerMask) String() string {
 	return strings.Join(parts, "|")
 }
 
+// This mask is used by the edgeAntialiasingMask property.
 type CAEdgeAntialiasingMask uint32
 
 const (

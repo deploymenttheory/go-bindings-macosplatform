@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object you use to request, manage, and store the user’s account information.
+//
 // Apple documentation: https://developer.apple.com/documentation/accounts/acaccountstore
 // Deprecated: Use appropriate non-Apple SDK corresponding to the type of account you want to reference instead
 type ACAccountStore struct {
@@ -40,6 +42,7 @@ func ACAccountStoreFromID(id objc.ID) *ACAccountStore {
 	return o
 }
 
+// Returns the account with the specified identifier.
 func (o *ACAccountStore) AccountWithIdentifier(identifier *foundation.NSString) *ACAccount {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountStoreSelAccountWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -48,6 +51,7 @@ func (o *ACAccountStore) AccountWithIdentifier(identifier *foundation.NSString) 
 	return ACAccountFromID(_ret)
 }
 
+// Returns an account type that matches the specified identifier.
 func (o *ACAccountStore) AccountTypeWithAccountTypeIdentifier(typeIdentifier *foundation.NSString) *ACAccountType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountStoreSelAccountTypeWithAccountTypeIdentifier, typeIdentifier.Ptr())
 	if _ret != 0 {
@@ -56,11 +60,16 @@ func (o *ACAccountStore) AccountTypeWithAccountTypeIdentifier(typeIdentifier *fo
 	return ACAccountTypeFromID(_ret)
 }
 
+// Returns all accounts of the specified type.
 func (o *ACAccountStore) AccountsWithAccountType(accountType *ACAccountType) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _aCAccountStoreSelAccountsWithAccountType, accountType.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountStoreSelAccountsWithAccountType, accountType.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Saves an account to the Accounts database.
 func (o *ACAccountStore) SaveAccountWithCompletionHandler(account *ACAccount, completionHandler func(bool, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -72,6 +81,7 @@ func (o *ACAccountStore) SaveAccountWithCompletionHandler(account *ACAccount, co
 	o.Ptr().Send(_aCAccountStoreSelSaveAccountWithCompletionHandler, account.Ptr(), __block_completionHandler)
 }
 
+// Obtains permission to access protected user properties.
 func (o *ACAccountStore) RequestAccessToAccountsWithTypeOptionsCompletion(accountType *ACAccountType, options *foundation.NSDictionary[objc.ID, objc.ID], completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -80,9 +90,10 @@ func (o *ACAccountStore) RequestAccessToAccountsWithTypeOptionsCompletion(accoun
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_aCAccountStoreSelRequestAccessToAccountsWithTypeOptionsCompletion, accountType.Ptr(), options, __block_completion)
+	o.Ptr().Send(_aCAccountStoreSelRequestAccessToAccountsWithTypeOptionsCompletion, accountType.Ptr(), options.Ptr(), __block_completion)
 }
 
+// Renews account credentials when the credentials are no longer valid.
 func (o *ACAccountStore) RenewCredentialsForAccountCompletion(account *ACAccount, completionHandler func(ACAccountCredentialRenewResult, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -94,6 +105,7 @@ func (o *ACAccountStore) RenewCredentialsForAccountCompletion(account *ACAccount
 	o.Ptr().Send(_aCAccountStoreSelRenewCredentialsForAccountCompletion, account.Ptr(), __block_completionHandler)
 }
 
+// Removes an account from the account store.
 func (o *ACAccountStore) RemoveAccountWithCompletionHandler(account *ACAccount, completionHandler func(bool, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -106,6 +118,9 @@ func (o *ACAccountStore) RemoveAccountWithCompletionHandler(account *ACAccount, 
 }
 
 func (o *ACAccountStore) Accounts() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _aCAccountStoreSelAccounts)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountStoreSelAccounts)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

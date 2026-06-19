@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A model instance that specifies how to map a model from a source to a destination managed object model.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsmappingmodel
 type NSMappingModel struct {
 	foundation.NSObject
@@ -37,14 +39,16 @@ func NSMappingModelFromID(id objc.ID) *NSMappingModel {
 	return o
 }
 
+// Returns the mapping model that will translate data from the source to the destination model.
 func NSMappingModelMappingModelFromBundlesForSourceModelDestinationModel(bundles *foundation.NSArray[*foundation.NSBundle], sourceModel *NSManagedObjectModel, destinationModel *NSManagedObjectModel) *NSMappingModel {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSMappingModel), _nSMappingModelSelMappingModelFromBundlesForSourceModelDestinationModel, bundles, sourceModel.Ptr(), destinationModel.Ptr())
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSMappingModel), _nSMappingModelSelMappingModelFromBundlesForSourceModelDestinationModel, bundles.Ptr(), sourceModel.Ptr(), destinationModel.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSMappingModelFromID(_ret)
 }
 
+// Returns a newly created mapping model that will migrate data from the source to the destination model.
 func NSMappingModelInferredMappingModelForSourceModelDestinationModelError(sourceModel *NSManagedObjectModel, destinationModel *NSManagedObjectModel) (*NSMappingModel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMappingModel), _nSMappingModelSelInferredMappingModelForSourceModelDestinationModelError, sourceModel.Ptr(), destinationModel.Ptr(), unsafe.Pointer(&_nsErr))
@@ -57,6 +61,7 @@ func NSMappingModelInferredMappingModelForSourceModelDestinationModelError(sourc
 	return NSMappingModelFromID(_ret), nil
 }
 
+// Returns a mapping model initialized from a given URL.
 func (o *NSMappingModel) InitWithContentsOfURL(url *foundation.NSURL) *NSMappingModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMappingModelSelInitWithContentsOfURL, url.Ptr())
 	if _ret != 0 {
@@ -78,6 +83,9 @@ func (o *NSMappingModel) SetEntityMappings(entityMappings *foundation.NSArray[*N
 }
 
 func (o *NSMappingModel) EntityMappingsByName() *foundation.NSDictionary[*foundation.NSString, *NSEntityMapping] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *NSEntityMapping]](o.Ptr(), _nSMappingModelSelEntityMappingsByName)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSMappingModelSelEntityMappingsByName)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *NSEntityMapping](_ret)
 }

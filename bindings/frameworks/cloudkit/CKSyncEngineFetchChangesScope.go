@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A scope in which the sync engine will fetch changes from the server.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginefetchchangesscope
 type CKSyncEngineFetchChangesScope struct {
 	foundation.NSObject

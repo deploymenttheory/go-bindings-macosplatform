@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The user’s response to an actionable notification, including any custom text that the user typed or dictated.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/untextinputnotificationresponse
 type UNTextInputNotificationResponse struct {
 	UNNotificationResponse

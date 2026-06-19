@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable object that represents a single 2D point in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnpoint
 type VNPoint struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func VNPointFromID(id objc.ID) *VNPoint {
 	return o
 }
 
-// @brief Returns a new VNPoint object that is shifted by X and Y offsets of the vector. @param vector	The vector offset to be applied to a source point. @param point	The source point. @return the translated point.
+// Creates a point object that’s shifted by the X and Y offsets of the specified vector.
 func VNPointPointByApplyingVectorToPoint(vector *VNVector, point *VNPoint) *VNPoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNPoint), _vNPointSelPointByApplyingVectorToPoint, vector.Ptr(), point.Ptr())
 	if _ret != 0 {
@@ -48,20 +50,20 @@ func VNPointPointByApplyingVectorToPoint(vector *VNVector, point *VNPoint) *VNPo
 	return VNPointFromID(_ret)
 }
 
-// @brief Returns the Euclidean distance between two VNPoint objects.
+// Calculates the distance between two points.
 // Deprecated: since macOS 11.0.
 func VNPointDistanceBetweenPointPoint(point1 *VNPoint, point2 *VNPoint) float64 {
 	_ret := objc.Send[float64](objc.ID(_clsVNPoint), _vNPointSelDistanceBetweenPointPoint, point1.Ptr(), point2.Ptr())
 	return _ret
 }
 
-// @brief Returns the Euclidean distance to another point. @param point The destination point. @return the Euclidean distance between the target and specified points.
+// Returns the distance to another point.
 func (o *VNPoint) DistanceToPoint(point *VNPoint) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _vNPointSelDistanceToPoint, point.Ptr())
 	return _ret
 }
 
-// @brief Initializes a VNPoint object from X and Y coordinates.
+// Creates a point object with the specified coordinates.
 func (o *VNPoint) InitWithXY(x float64, y float64) *VNPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNPointSelInitWithXY, x, y)
 	if _ret != 0 {
@@ -70,7 +72,7 @@ func (o *VNPoint) InitWithXY(x float64, y float64) *VNPoint {
 	return VNPointFromID(_ret)
 }
 
-// @brief Initializes a VNPoint object from a CGPoint.
+// Creates a point object from the specified Core Graphics point.
 func (o *VNPoint) InitWithLocation(location corefoundation.CGPoint) *VNPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNPointSelInitWithLocation, location)
 	if _ret != 0 {

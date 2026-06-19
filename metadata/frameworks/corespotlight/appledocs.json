@@ -395,8 +395,8 @@
         "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/init(appentity:)-3hv5"
       },
       "init(appEntity:priority:)": {
-        "doc": "Initializes a new searchable item with the relevant fields populated from the provided app entity. Resolves deferred properties before indexing.",
-        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/init(appentity:priority:)-7xlow"
+        "doc": "Initializes a new searchable item with the relevant fields populated from the provided app entity.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/init(appentity:priority:)-7h9s"
       },
       "isUpdate": {
         "doc": "A Boolean value that indicates whether to treat the item as an update instead of a new item.",

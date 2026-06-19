@@ -17,6 +17,8 @@ import (
 	"unsafe"
 )
 
+// An editing session for modifying the photo, video, and audio content of a Live Photo.
+//
 // LivePhotoEditingContext wraps [raw.PHLivePhotoEditingContext] with a fluent Go API.
 type LivePhotoEditingContext struct {
 	inner *raw.PHLivePhotoEditingContext
@@ -37,7 +39,7 @@ func LivePhotoEditingContextFromID(id objc.ID) *LivePhotoEditingContext {
 	return &LivePhotoEditingContext{inner: raw.PHLivePhotoEditingContextFromID(id)}
 }
 
-// Initializer from the specified live photo input Return nil if the specified input is not for a live photo
+// Creates a Live Photo editing context for the specified editing input.
 //
 // NewLivePhotoEditingContextWithLivePhotoEditingInput creates a new [LivePhotoEditingContext].
 func NewLivePhotoEditingContextWithLivePhotoEditingInput(livePhotoInput *raw.PHContentEditingInput) *LivePhotoEditingContext {
@@ -46,7 +48,7 @@ func NewLivePhotoEditingContextWithLivePhotoEditingInput(livePhotoInput *raw.PHC
 	return &LivePhotoEditingContext{inner: raw.PHLivePhotoEditingContextFromID(_id)}
 }
 
-// A block that can be set to process each frame of the live photo Note that the context uses a copy of the processor block during processing
+// A block to be called by Photos for processing each frame of the Live Photo’s visual content.
 //
 // WithFrameProcessor sets the frameProcessor property and returns the receiver for chaining.
 func (x *LivePhotoEditingContext) WithFrameProcessor(frameProcessor objc.Block) *LivePhotoEditingContext {
@@ -54,7 +56,7 @@ func (x *LivePhotoEditingContext) WithFrameProcessor(frameProcessor objc.Block) 
 	return x
 }
 
-// Specify the audio volume of the edited live photo Must be between 0.0 and 1.0 Default to 1.0
+// The audio gain to apply to the processed Live Photo.
 //
 // WithAudioVolume sets the audioVolume property and returns the receiver for chaining.
 func (x *LivePhotoEditingContext) WithAudioVolume(audioVolume float32) *LivePhotoEditingContext {
@@ -62,7 +64,7 @@ func (x *LivePhotoEditingContext) WithAudioVolume(audioVolume float32) *LivePhot
 	return x
 }
 
-// Asynchronously generate a new live photo suitable for playback in a PHLivePhotoView of the specified target size The options dictionary can contain additional options, see below
+// Processes a Live Photo with your edits for viewing.
 //
 // PrepareLivePhotoForPlaybackWithTargetSizeOptions blocks until the operation completes or ctx is cancelled.
 func (x *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOptions(ctx context.Context, targetSize corefoundation.CGSize, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*LivePhoto, error) {
@@ -90,14 +92,14 @@ func (x *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOptio
 	}
 }
 
-// Asynchronously process and save the edited live photo to the specified content editing output Options dictionary should be nil, reserved for future expansion
+// Processes and saves a full-quality Live Photo as the output of your editing session.
 //
 // SaveLivePhotoToOutputOptionsCompletionHandler calls the underlying SaveLivePhotoToOutputOptionsCompletionHandler.
 func (x *LivePhotoEditingContext) SaveLivePhotoToOutputOptionsCompletionHandler(output *raw.PHContentEditingOutput, options *foundation.NSDictionary[*foundation.NSString, objc.ID], handler func(bool, unsafe.Pointer)) {
 	x.inner.SaveLivePhotoToOutputOptionsCompletionHandler(output, options, handler)
 }
 
-// Cancel the current asynchronous operation This is implicitly called whenever prepare or save is called A canceled operation will call its completion handler with an appropriate error code
+// Aborts any Live Photo processing in progress.
 //
 // Cancel calls the underlying Cancel.
 func (x *LivePhotoEditingContext) Cancel() {

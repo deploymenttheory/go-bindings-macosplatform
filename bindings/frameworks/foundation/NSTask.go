@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a subprocess of the current process.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nstask
 type NSTask struct {
 	NSObject

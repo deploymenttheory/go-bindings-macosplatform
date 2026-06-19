@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A flow of network data that the filter examines.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nefiltersocketflow
 type NEFilterSocketFlow struct {
 	NEFilterFlow

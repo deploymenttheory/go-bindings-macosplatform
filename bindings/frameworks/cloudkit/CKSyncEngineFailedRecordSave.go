@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that describes an unsuccessful attempt to modify an individual record.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginefailedrecordsave
 type CKSyncEngineFailedRecordSave struct {
 	foundation.NSObject

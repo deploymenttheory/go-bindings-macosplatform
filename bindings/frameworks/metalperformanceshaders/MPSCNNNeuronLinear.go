@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A linear neuron filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronlinear
 type MPSCNNNeuronLinear struct {
 	mpsneuralnetwork.MPSCNNNeuron
@@ -31,7 +33,7 @@ func MPSCNNNeuronLinearFromID(id objc.ID) *MPSCNNNeuronLinear {
 	return o
 }
 
-// @abstract  Initialize the linear neuron filter @param     device   The device the filter will run on @param     a        Filter property "a". See class discussion. @param     b        Filter property "b". See class discussion. @return    A valid MPSCNNNeuronLinear object or nil, if failure.
+// Initializes a linear neuron filter.
 func (o *MPSCNNNeuronLinear) InitWithDeviceAB(device metal.MTLDevice, a float32, b float32) *MPSCNNNeuronLinear {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronLinearSelInitWithDeviceAB, device, a, b)
 	if _ret != 0 {

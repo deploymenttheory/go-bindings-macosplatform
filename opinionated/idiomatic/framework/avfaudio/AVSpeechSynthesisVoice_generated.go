@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A distinct voice for use in speech synthesis.
+//
 // SpeechSynthesisVoice wraps [raw.AVSpeechSynthesisVoice] with a fluent Go API.
 type SpeechSynthesisVoice struct {
 	inner *raw.AVSpeechSynthesisVoice

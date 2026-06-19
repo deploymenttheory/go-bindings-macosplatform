@@ -151,6 +151,7 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
+// The enumerated error codes that the Sound Analysis framework produces.
 type SNErrorCode int64
 
 const (
@@ -178,12 +179,13 @@ func (e SNErrorCode) String() string {
 	}
 }
 
+// Defines the types a time duration constraint uses.
 type SNTimeDurationConstraintType int64
 
 const (
-	// An 'enumerated' constraint type. In order for a duration to satisfy a constraint of this type, it must be a member of a particular set of discrete permissible values.
+	// A constraint type that uses an array of time durations to define what a request’s underlying sound classifier accepts.
 	SNTimeDurationConstraintTypeEnumerated SNTimeDurationConstraintType = 1
-	// A 'range' constraint type. In order for a duration to satisfy a constraint of this type, it must be a member of a particular continuous range of permissible values.
+	// A constraint type that uses a time duration range to define what a request’s underlying sound classifier accepts.
 	SNTimeDurationConstraintTypeRange SNTimeDurationConstraintType = 2
 )
 

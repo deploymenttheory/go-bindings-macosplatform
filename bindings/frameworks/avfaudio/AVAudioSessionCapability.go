@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Describes whether a specific capability is supported and if that capability is currently enabled
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiosessioncapability
 type AVAudioSessionCapability struct {
 	foundation.NSObject

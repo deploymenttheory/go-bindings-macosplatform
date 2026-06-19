@@ -6,10 +6,14 @@ package photos
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
+// A set of options affecting the delivery of still image representations of Photos assets you request from an image manager.
+//
 // ImageRequestOptions wraps [raw.PHImageRequestOptions] with a fluent Go API.
 type ImageRequestOptions struct {
 	inner *raw.PHImageRequestOptions
@@ -36,38 +40,50 @@ func NewImageRequestOptions() *ImageRequestOptions {
 	return &ImageRequestOptions{inner: raw.PHImageRequestOptionsFromID(_id)}
 }
 
+// The requested image quality and delivery priority.
+//
 // WithDeliveryMode sets the deliveryMode property and returns the receiver for chaining.
 func (x *ImageRequestOptions) WithDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode) *ImageRequestOptions {
 	x.inner.SetDeliveryMode(raw.PHImageRequestOptionsDeliveryMode(deliveryMode))
 	return x
 }
 
+// A mode that specifies how to resize the requested image.
+//
 // WithResizeMode sets the resizeMode property and returns the receiver for chaining.
 func (x *ImageRequestOptions) WithResizeMode(resizeMode PHImageRequestOptionsResizeMode) *ImageRequestOptions {
 	x.inner.SetResizeMode(raw.PHImageRequestOptionsResizeMode(resizeMode))
 	return x
 }
 
+// A rectangle for requesting a cropped version of the original image.
+//
 // WithNormalizedCropRect sets the normalizedCropRect property and returns the receiver for chaining.
 func (x *ImageRequestOptions) WithNormalizedCropRect(normalizedCropRect corefoundation.CGRect) *ImageRequestOptions {
 	x.inner.SetNormalizedCropRect(normalizedCropRect)
 	return x
 }
 
+// A Boolean value that specifies whether Photos can download the requested image from iCloud.
+//
 // WithNetworkAccessAllowed sets the networkAccessAllowed property and returns the receiver for chaining.
 func (x *ImageRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *ImageRequestOptions {
 	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
 	return x
 }
 
+// A Boolean value that determines whether Photos processes the image request synchronously.
+//
 // WithSynchronous sets the synchronous property and returns the receiver for chaining.
 func (x *ImageRequestOptions) WithSynchronous(synchronous bool) *ImageRequestOptions {
 	x.inner.SetSynchronous(synchronous)
 	return x
 }
 
+// A block that Photos calls periodically while downloading the image.
+//
 // WithProgressHandler sets the progressHandler property and returns the receiver for chaining.
-func (x *ImageRequestOptions) WithProgressHandler(progressHandler objc.Block) *ImageRequestOptions {
+func (x *ImageRequestOptions) WithProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) *ImageRequestOptions {
 	x.inner.SetProgressHandler(progressHandler)
 	return x
 }
@@ -134,7 +150,7 @@ func (x *ImageRequestOptions) ProgressHandler() objc.Block {
 }
 
 // SetProgressHandler calls the underlying SetProgressHandler.
-func (x *ImageRequestOptions) SetProgressHandler(progressHandler objc.Block) {
+func (x *ImageRequestOptions) SetProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) {
 	x.inner.SetProgressHandler(progressHandler)
 }
 
@@ -156,7 +172,7 @@ type ImageRequestOptionsable interface {
 	WithNormalizedCropRect(normalizedCropRect corefoundation.CGRect) *ImageRequestOptions
 	WithNetworkAccessAllowed(networkAccessAllowed bool) *ImageRequestOptions
 	WithSynchronous(synchronous bool) *ImageRequestOptions
-	WithProgressHandler(progressHandler objc.Block) *ImageRequestOptions
+	WithProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) *ImageRequestOptions
 	WithAllowSecondaryDegradedImage(allowSecondaryDegradedImage bool) *ImageRequestOptions
 	DeliveryMode() PHImageRequestOptionsDeliveryMode
 	SetDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode)
@@ -169,7 +185,7 @@ type ImageRequestOptionsable interface {
 	IsSynchronous() bool
 	SetSynchronous(synchronous bool)
 	ProgressHandler() objc.Block
-	SetProgressHandler(progressHandler objc.Block)
+	SetProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID]))
 	AllowSecondaryDegradedImage() bool
 	SetAllowSecondaryDegradedImage(allowSecondaryDegradedImage bool)
 }

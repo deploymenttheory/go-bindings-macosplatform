@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A span of time.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/indatecomponentsrange
 type INDateComponentsRange struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func INDateComponentsRangeFromID(id objc.ID) *INDateComponentsRange {
 	return o
 }
 
+// Initializes the object using the specified start and end dates.
 func (o *INDateComponentsRange) InitWithStartDateComponentsEndDateComponents(startDateComponents *foundation.NSDateComponents, endDateComponents *foundation.NSDateComponents) *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNDateComponentsRangeSelInitWithStartDateComponentsEndDateComponents, startDateComponents.Ptr(), endDateComponents.Ptr())
 	if _ret != 0 {
@@ -45,6 +48,7 @@ func (o *INDateComponentsRange) InitWithStartDateComponentsEndDateComponents(sta
 	return INDateComponentsRangeFromID(_ret)
 }
 
+// Initializes the date range to a repeating time period.
 func (o *INDateComponentsRange) InitWithStartDateComponentsEndDateComponentsRecurrenceRule(startDateComponents *foundation.NSDateComponents, endDateComponents *foundation.NSDateComponents, recurrenceRule objc.ID) *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNDateComponentsRangeSelInitWithStartDateComponentsEndDateComponentsRecurrenceRule, startDateComponents.Ptr(), endDateComponents.Ptr(), recurrenceRule)
 	if _ret != 0 {
@@ -53,6 +57,7 @@ func (o *INDateComponentsRange) InitWithStartDateComponentsEndDateComponentsRecu
 	return INDateComponentsRangeFromID(_ret)
 }
 
+// Initializes the date range using the specified recurrence rule.
 func (o *INDateComponentsRange) InitWithEKRecurrenceRule(recurrenceRule *eventkit.EKRecurrenceRule) *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNDateComponentsRangeSelInitWithEKRecurrenceRule, recurrenceRule.Ptr())
 	if _ret != 0 {
@@ -61,6 +66,7 @@ func (o *INDateComponentsRange) InitWithEKRecurrenceRule(recurrenceRule *eventki
 	return INDateComponentsRangeFromID(_ret)
 }
 
+// Returns an Event Kit recurrence rule that matches the available information.
 func (o *INDateComponentsRange) EKRecurrenceRule() *eventkit.EKRecurrenceRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNDateComponentsRangeSelEKRecurrenceRule)
 	if _ret != 0 {

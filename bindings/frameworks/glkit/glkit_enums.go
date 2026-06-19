@@ -56,11 +56,15 @@ func (e EvCmd) String() string {
 	}
 }
 
+// A mode that describes how the fog component is calculated for the fragment.
 type GLKFogMode int64
 
 const (
-	GLKFogModeExp    GLKFogMode = 0
-	GLKFogModeExp2   GLKFogMode = 1
+	// The fog component is calculated as exp(-density * distance) and clamped to the range [0.0, 1.0].
+	GLKFogModeExp GLKFogMode = 0
+	// The fog component is calculated as exp(-(density * distance)^2) and clamped to the range [0.0, 1.0].
+	GLKFogModeExp2 GLKFogMode = 1
+	// The fog component is calculated as (end - distance) / (end - start) and clamped to the range [0.0, 1.0].
 	GLKFogModeLinear GLKFogMode = 2
 )
 
@@ -77,11 +81,14 @@ func (e GLKFogMode) String() string {
 	}
 }
 
+// A constant that describes how lighting is calculated by an effect.
 type GLKLightingType int64
 
 const (
+	// Indicates that the lighting calculations are performed at each vertex in a triangle and then interpolated across the triangle.
 	GLKLightingTypePerVertex GLKLightingType = 0
-	GLKLightingTypePerPixel  GLKLightingType = 1
+	// Indicates that the inputs to the lighting calculation are interpolated across a triangle and the lighting calculations are performed at each fragment.
+	GLKLightingTypePerPixel GLKLightingType = 1
 )
 
 func (e GLKLightingType) String() string {
@@ -95,12 +102,16 @@ func (e GLKLightingType) String() string {
 	}
 }
 
+// The mode used to combine the texture with other color components.
 type GLKTextureEnvMode int64
 
 const (
-	GLKTextureEnvModeReplace  GLKTextureEnvMode = 0
+	// The output color is set to the color fetched from the texture. The input color is ignored.
+	GLKTextureEnvModeReplace GLKTextureEnvMode = 0
+	// The output color is calculated by multiplying the texture’s color by the input color.
 	GLKTextureEnvModeModulate GLKTextureEnvMode = 1
-	GLKTextureEnvModeDecal    GLKTextureEnvMode = 2
+	// The output color is calculated by using the texture’s alpha component to blend the texture’s color with the input color.
+	GLKTextureEnvModeDecal GLKTextureEnvMode = 2
 )
 
 func (e GLKTextureEnvMode) String() string {
@@ -116,12 +127,16 @@ func (e GLKTextureEnvMode) String() string {
 	}
 }
 
+// Values that describe the alpha information stored in a source image’s pixel data.
 type GLKTextureInfoAlphaState int64
 
 const (
-	GLKTextureInfoAlphaStateNone             GLKTextureInfoAlphaState = 0
+	// Indicates that the texture has no alpha information.
+	GLKTextureInfoAlphaStateNone GLKTextureInfoAlphaState = 0
+	// Indicates that the color values in the texture were not premultiplied by the alpha value.
 	GLKTextureInfoAlphaStateNonPremultiplied GLKTextureInfoAlphaState = 1
-	GLKTextureInfoAlphaStatePremultiplied    GLKTextureInfoAlphaState = 2
+	// Indicates that the color values in the texture have already been premultiplied by the alpha value.
+	GLKTextureInfoAlphaStatePremultiplied GLKTextureInfoAlphaState = 2
 )
 
 func (e GLKTextureInfoAlphaState) String() string {
@@ -137,11 +152,15 @@ func (e GLKTextureInfoAlphaState) String() string {
 	}
 }
 
+// The location of the origin in the original source image.
 type GLKTextureInfoOrigin int64
 
 const (
-	GLKTextureInfoOriginUnknown    GLKTextureInfoOrigin = 0
-	GLKTextureInfoOriginTopLeft    GLKTextureInfoOrigin = 1
+	// The origin of the texture is not supported.
+	GLKTextureInfoOriginUnknown GLKTextureInfoOrigin = 0
+	// The origin of the texture is in the top-left corner.
+	GLKTextureInfoOriginTopLeft GLKTextureInfoOrigin = 1
+	// The origin of the texture is in the bottom-left corner.
 	GLKTextureInfoOriginBottomLeft GLKTextureInfoOrigin = 2
 )
 
@@ -230,12 +249,16 @@ func (e GLKTextureLoaderError) String() string {
 	}
 }
 
+// The kind of texture pointed to by the property.
 type GLKTextureTarget int64
 
 const (
-	GLKTextureTarget2D      GLKTextureTarget = 3553
+	// The texture is a 2D texture.
+	GLKTextureTarget2D GLKTextureTarget = 3553
+	// The texture is a set of six textures that make up a cube map.
 	GLKTextureTargetCubeMap GLKTextureTarget = 34067
-	GLKTextureTargetCt      GLKTextureTarget = 2
+	// The number of items in the enumeration.
+	GLKTextureTargetCt GLKTextureTarget = 2
 )
 
 func (e GLKTextureTarget) String() string {
@@ -251,13 +274,19 @@ func (e GLKTextureTarget) String() string {
 	}
 }
 
+// Values used as indices in OpenGL code to associate vertex data with an attribute in a named shader effect.
 type GLKVertexAttrib int64
 
 const (
-	GLKVertexAttribPosition  GLKVertexAttrib = 0
-	GLKVertexAttribNormal    GLKVertexAttrib = 1
-	GLKVertexAttribColor     GLKVertexAttrib = 2
+	// This index is used to provide the vertex position to a shader.
+	GLKVertexAttribPosition GLKVertexAttrib = 0
+	// This index is used to provide the vertex normal to a shader.
+	GLKVertexAttribNormal GLKVertexAttrib = 1
+	// This index is used to provide the vertex color to a shader.
+	GLKVertexAttribColor GLKVertexAttrib = 2
+	// This index is used to provide a set of texture coordinates to a shader.
 	GLKVertexAttribTexCoord0 GLKVertexAttrib = 3
+	// This index is used to provide the second set of texture coordinates to a shader.
 	GLKVertexAttribTexCoord1 GLKVertexAttrib = 4
 )
 

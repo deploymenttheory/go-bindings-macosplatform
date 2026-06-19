@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A URL session task that is stream-based.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsessionstreamtask
 type NSURLSessionStreamTask struct {
 	NSURLSessionTask

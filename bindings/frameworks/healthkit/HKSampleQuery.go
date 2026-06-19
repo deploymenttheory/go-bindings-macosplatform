@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A general query that returns a snapshot of all the matching samples currently saved in the HealthKit store.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hksamplequery
 type HKSampleQuery struct {
 	HKQuery
@@ -36,7 +38,7 @@ func HKSampleQueryFromID(id objc.ID) *HKSampleQuery {
 	return o
 }
 
-// @method        initWithSampleType:predicate:limit:sortDescriptors:resultsHandler: @abstract      Returns a query that will retrieve HKSamples matching the given predicate. @param         sampleType      The type of sample to retrieve. @param         predicate       The predicate which samples should match. @param         limit           The maximum number of samples to return.  Pass HKObjectQueryNoLimit for no limit. @param         sortDescriptors The sort descriptors to use to order the resulting samples. @param         resultsHandler  The block to invoke with results when the query has finished executing.
+// Instantiates and returns a sample query.
 func (o *HKSampleQuery) InitWithSampleTypePredicateLimitSortDescriptorsResultsHandler(sampleType *HKSampleType, predicate *foundation.NSPredicate, limit uint, sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor], resultsHandler func(*HKSampleQuery, *foundation.NSArray[*HKSample], unsafe.Pointer)) *HKSampleQuery {
 	var __block_resultsHandler objc.Block
 	if resultsHandler != nil {
@@ -51,14 +53,14 @@ func (o *HKSampleQuery) InitWithSampleTypePredicateLimitSortDescriptorsResultsHa
 		})
 		defer __block_resultsHandler.Release()
 	}
-	_ret := objc.Send[objc.ID](o.Ptr(), _hKSampleQuerySelInitWithSampleTypePredicateLimitSortDescriptorsResultsHandler, sampleType.Ptr(), predicate.Ptr(), limit, sortDescriptors, __block_resultsHandler)
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKSampleQuerySelInitWithSampleTypePredicateLimitSortDescriptorsResultsHandler, sampleType.Ptr(), predicate.Ptr(), limit, sortDescriptors.Ptr(), __block_resultsHandler)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return HKSampleQueryFromID(_ret)
 }
 
-// @method        initWithQueryDescriptors:limit:resultsHandler: @abstract      Returns a query that will retrieve HKSamples matching any of the given queryDescriptors. @param         queryDescriptors          An array of query descriptors that describes the sample types and predicates used for querying. @param         limit                     The maximum number of samples to return. Pass HKObjectQueryNoLimit for no limit. @param         resultsHandler            The block to invoke with results when the query has finished executing. This block is invoked once with results, an array of HKSamples matching the queryDescriptors passed in, or nil if an error occurred.
+// Creates a query for samples that match any of the descriptors you provided.
 func (o *HKSampleQuery) InitWithQueryDescriptorsLimitResultsHandler(queryDescriptors *foundation.NSArray[*HKQueryDescriptor], limit int, resultsHandler func(*HKSampleQuery, *foundation.NSArray[*HKSample], unsafe.Pointer)) *HKSampleQuery {
 	var __block_resultsHandler objc.Block
 	if resultsHandler != nil {
@@ -80,7 +82,7 @@ func (o *HKSampleQuery) InitWithQueryDescriptorsLimitResultsHandler(queryDescrip
 	return HKSampleQueryFromID(_ret)
 }
 
-// @method        initWithQueryDescriptors:limit:sortDescriptors:resultsHandler: @abstract      Returns a query that will retrieve HKSamples matching any of the given queryDescriptors. @param         queryDescriptors          An array of query descriptors that describes the sample types and predicates used for querying. @param         limit                     The maximum number of samples to return. Pass HKObjectQueryNoLimit for no limit. @param         sortDescriptors           The sort descriptors to use to order the resulting samples. @param         resultsHandler            The block to invoke with results when the query has finished executing. This block is invoked once with results, an array of HKSamples matching the queryDescriptors passed in, or nil if an error occurred. The HKSamples in the array are sorted by the specified sortDescriptors.
+// Creates a query for samples that match any of the query descriptors you provided, sorted by the sort descriptors you provided.
 func (o *HKSampleQuery) InitWithQueryDescriptorsLimitSortDescriptorsResultsHandler(queryDescriptors *foundation.NSArray[*HKQueryDescriptor], limit int, sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor], resultsHandler func(*HKSampleQuery, *foundation.NSArray[*HKSample], unsafe.Pointer)) *HKSampleQuery {
 	var __block_resultsHandler objc.Block
 	if resultsHandler != nil {
@@ -95,7 +97,7 @@ func (o *HKSampleQuery) InitWithQueryDescriptorsLimitSortDescriptorsResultsHandl
 		})
 		defer __block_resultsHandler.Release()
 	}
-	_ret := objc.Send[objc.ID](o.Ptr(), _hKSampleQuerySelInitWithQueryDescriptorsLimitSortDescriptorsResultsHandler, queryDescriptors.Ptr(), limit, sortDescriptors, __block_resultsHandler)
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKSampleQuerySelInitWithQueryDescriptorsLimitSortDescriptorsResultsHandler, queryDescriptors.Ptr(), limit, sortDescriptors.Ptr(), __block_resultsHandler)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -110,6 +112,9 @@ func (o *HKSampleQuery) Limit() uint {
 
 // @property      sortDescriptors @abstract      An array of NSSortDescriptors.
 func (o *HKSampleQuery) SortDescriptors() *foundation.NSArray[*foundation.NSSortDescriptor] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSSortDescriptor]](o.Ptr(), _hKSampleQuerySelSortDescriptors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKSampleQuerySelSortDescriptors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSSortDescriptor](_ret)
 }

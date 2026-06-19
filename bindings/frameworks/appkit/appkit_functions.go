@@ -17,15 +17,15 @@ var (
 	_fnNSAccessibilityFrameInView                  func(objc.ID, corefoundation.CGRect) corefoundation.CGRect
 	_fnNSAccessibilityPointInView                  func(objc.ID, corefoundation.CGPoint) corefoundation.CGPoint
 	_fnNSAccessibilityPostNotification             func(objc.ID, objc.ID)
-	_fnNSAccessibilityPostNotificationWithUserInfo func(objc.ID, objc.ID, *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	_fnNSAccessibilityPostNotificationWithUserInfo func(objc.ID, objc.ID, objc.ID)
 	// Deprecated: Exceptions are no longer appropriate for indicating errors in accessibility API. Unexpected values should be handled through appropriate type checking.
 	_fnNSAccessibilityRaiseBadArgumentException     func(objc.ID, objc.ID, objc.ID)
 	_fnNSAccessibilityRoleDescription               func(objc.ID, objc.ID) objc.ID
 	_fnNSAccessibilityRoleDescriptionForUIElement   func(objc.ID) objc.ID
 	_fnNSAccessibilitySetMayContainProtectedContent func(bool) bool
 	_fnNSAccessibilityUnignoredAncestor             func(objc.ID) objc.ID
-	_fnNSAccessibilityUnignoredChildren             func(*foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID]
-	_fnNSAccessibilityUnignoredChildrenForOnlyChild func(objc.ID) *foundation.NSArray[objc.ID]
+	_fnNSAccessibilityUnignoredChildren             func(objc.ID) objc.ID
+	_fnNSAccessibilityUnignoredChildrenForOnlyChild func(objc.ID) objc.ID
 	_fnNSAccessibilityUnignoredDescendant           func(objc.ID) objc.ID
 	// @c NSApplicationLoad should be called when loading a Cocoa bundle in a Carbon app in order to initialize @c NSApplication and other Cocoa objects.  Redundant calls are ignored.
 	_fnNSApplicationLoad func() bool
@@ -79,7 +79,7 @@ var (
 	_fnNSFrameRectWithWidth               func(corefoundation.CGRect, float64)
 	_fnNSFrameRectWithWidthUsingOperation func(corefoundation.CGRect, float64, NSCompositingOperation)
 	_fnNSGetFileType                      func(objc.ID) objc.ID
-	_fnNSGetFileTypes                     func(*foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*foundation.NSString]
+	_fnNSGetFileTypes                     func(objc.ID) objc.ID
 	// Deprecated: Use NSAlert with a style of NSAlertStyleInformational instead
 	_fnNSGetInformationalAlertPanel func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
 	// Deprecated: Doesn't return anything useful since 10.0
@@ -153,7 +153,7 @@ func NSAccessibilityPostNotification(element objc.ID, notification *foundation.N
 }
 
 func NSAccessibilityPostNotificationWithUserInfo(element objc.ID, notification *foundation.NSString, userInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	_fnNSAccessibilityPostNotificationWithUserInfo(element, notification.Ptr(), userInfo)
+	_fnNSAccessibilityPostNotificationWithUserInfo(element, notification.Ptr(), userInfo.Ptr())
 }
 
 // Deprecated: Exceptions are no longer appropriate for indicating errors in accessibility API. Unexpected values should be handled through appropriate type checking.
@@ -186,11 +186,19 @@ func NSAccessibilityUnignoredAncestor(element objc.ID) objc.ID {
 }
 
 func NSAccessibilityUnignoredChildren(originalChildren *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {
-	return _fnNSAccessibilityUnignoredChildren(originalChildren)
+	_ret := _fnNSAccessibilityUnignoredChildren(originalChildren.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func NSAccessibilityUnignoredChildrenForOnlyChild(originalChild objc.ID) *foundation.NSArray[objc.ID] {
-	return _fnNSAccessibilityUnignoredChildrenForOnlyChild(originalChild)
+	_ret := _fnNSAccessibilityUnignoredChildrenForOnlyChild(originalChild)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func NSAccessibilityUnignoredDescendant(element objc.ID) objc.ID {
@@ -377,7 +385,11 @@ func NSGetFileType(pboardType *foundation.NSString) *foundation.NSString {
 }
 
 func NSGetFileTypes(pboardTypes *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*foundation.NSString] {
-	return _fnNSGetFileTypes(pboardTypes)
+	_ret := _fnNSGetFileTypes(pboardTypes.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // Deprecated: Use NSAlert with a style of NSAlertStyleInformational instead

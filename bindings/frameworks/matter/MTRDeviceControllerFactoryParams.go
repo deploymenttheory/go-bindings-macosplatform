@@ -64,21 +64,27 @@ func (o *MTRDeviceControllerFactoryParams) SetOtaProviderDelegate(otaProviderDel
 }
 
 func (o *MTRDeviceControllerFactoryParams) ProductAttestationAuthorityCertificates() *foundation.NSArray[*foundation.NSData] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSData]](o.Ptr(), _mTRDeviceControllerFactoryParamsSelProductAttestationAuthorityCertificates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerFactoryParamsSelProductAttestationAuthorityCertificates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSData](_ret)
 }
 
 func (o *MTRDeviceControllerFactoryParams) SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates *foundation.NSArray[*foundation.NSData]) {
-	o.Ptr().Send(_mTRDeviceControllerFactoryParamsSelSetProductAttestationAuthorityCertificates, productAttestationAuthorityCertificates)
+	o.Ptr().Send(_mTRDeviceControllerFactoryParamsSelSetProductAttestationAuthorityCertificates, productAttestationAuthorityCertificates.Ptr())
 }
 
 func (o *MTRDeviceControllerFactoryParams) CertificationDeclarationCertificates() *foundation.NSArray[*foundation.NSData] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSData]](o.Ptr(), _mTRDeviceControllerFactoryParamsSelCertificationDeclarationCertificates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerFactoryParamsSelCertificationDeclarationCertificates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSData](_ret)
 }
 
 func (o *MTRDeviceControllerFactoryParams) SetCertificationDeclarationCertificates(certificationDeclarationCertificates *foundation.NSArray[*foundation.NSData]) {
-	o.Ptr().Send(_mTRDeviceControllerFactoryParamsSelSetCertificationDeclarationCertificates, certificationDeclarationCertificates)
+	o.Ptr().Send(_mTRDeviceControllerFactoryParamsSelSetCertificationDeclarationCertificates, certificationDeclarationCertificates.Ptr())
 }
 
 func (o *MTRDeviceControllerFactoryParams) Port() *foundation.NSNumber {

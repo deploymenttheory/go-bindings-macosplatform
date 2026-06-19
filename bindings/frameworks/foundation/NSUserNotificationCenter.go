@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that delivers notifications from apps to the user.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsusernotificationcenter
 // Deprecated: All NSUserNotifications API should be replaced with UserNotifications.frameworks API
 type NSUserNotificationCenter struct {
@@ -40,22 +42,27 @@ func NSUserNotificationCenterFromID(id objc.ID) *NSUserNotificationCenter {
 	return o
 }
 
+// Schedules the specified user notification.
 func (o *NSUserNotificationCenter) ScheduleNotification(notification *NSUserNotification) {
 	o.Ptr().Send(_nSUserNotificationCenterSelScheduleNotification, notification.Ptr())
 }
 
+// Removes the specified user notification for the scheduled notifications.
 func (o *NSUserNotificationCenter) RemoveScheduledNotification(notification *NSUserNotification) {
 	o.Ptr().Send(_nSUserNotificationCenterSelRemoveScheduledNotification, notification.Ptr())
 }
 
+// Deliver the specified user notification.
 func (o *NSUserNotificationCenter) DeliverNotification(notification *NSUserNotification) {
 	o.Ptr().Send(_nSUserNotificationCenterSelDeliverNotification, notification.Ptr())
 }
 
+// Remove a delivered user notification from the user notification center.
 func (o *NSUserNotificationCenter) RemoveDeliveredNotification(notification *NSUserNotification) {
 	o.Ptr().Send(_nSUserNotificationCenterSelRemoveDeliveredNotification, notification.Ptr())
 }
 
+// Remove all delivered user notifications from the user notification center.
 func (o *NSUserNotificationCenter) RemoveAllDeliveredNotifications() {
 	o.Ptr().Send(_nSUserNotificationCenterSelRemoveAllDeliveredNotifications)
 }

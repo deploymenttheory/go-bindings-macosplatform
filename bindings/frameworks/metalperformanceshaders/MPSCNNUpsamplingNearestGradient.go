@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A gradient upsampling filter that samples the pixel nearest to the source when upsampling to the destination pixel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingnearestgradient
 type MPSCNNUpsamplingNearestGradient struct {
 	mpsneuralnetwork.MPSCNNUpsamplingGradient

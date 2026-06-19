@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that stores data required to execute batch normalization.
+//
 // CNNBatchNormalizationState wraps [raw.MPSCNNBatchNormalizationState] with a fluent Go API.
 type CNNBatchNormalizationState struct {
 	inner *raw.MPSCNNBatchNormalizationState

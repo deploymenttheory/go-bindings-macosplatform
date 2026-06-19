@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a client of the extension.
+//
 // ExtensionClient wraps [raw.CMIOExtensionClient] with a fluent Go API.
 type ExtensionClient struct {
 	inner *raw.CMIOExtensionClient

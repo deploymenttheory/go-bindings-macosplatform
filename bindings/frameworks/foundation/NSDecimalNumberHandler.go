@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that adopts the decimal number behaviors protocol.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdecimalnumberhandler
 type NSDecimalNumberHandler struct {
 	NSObject
@@ -31,6 +33,7 @@ func NSDecimalNumberHandlerFromID(id objc.ID) *NSDecimalNumberHandler {
 	return o
 }
 
+// Returns an NSDecimalNumberHandler object initialized so it behaves as specified by the method’s arguments.
 func (o *NSDecimalNumberHandler) InitWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(roundingMode NSRoundingMode, scale int16, exact bool, overflow bool, underflow bool, divideByZero bool) *NSDecimalNumberHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDecimalNumberHandlerSelInitWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero, roundingMode, scale, exact, overflow, underflow, divideByZero)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func (o *NSDecimalNumberHandler) InitWithRoundingModeScaleRaiseOnExactnessRaiseO
 	return NSDecimalNumberHandlerFromID(_ret)
 }
 
+// Returns an NSDecimalNumberHandler object with customized behavior.
 func NSDecimalNumberHandlerDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(roundingMode NSRoundingMode, scale int16, exact bool, overflow bool, underflow bool, divideByZero bool) *NSDecimalNumberHandler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDecimalNumberHandler), _nSDecimalNumberHandlerSelDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero, roundingMode, scale, exact, overflow, underflow, divideByZero)
 	if _ret != 0 {

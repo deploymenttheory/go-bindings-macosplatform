@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that parses BER-encoded data and produces DER-encoded data for TLV records.
+//
 // BERTLVRecord wraps [raw.TKBERTLVRecord] with a fluent Go API.
 type BERTLVRecord struct {
 	inner *raw.TKBERTLVRecord
@@ -31,7 +33,7 @@ func BERTLVRecordFromID(id objc.ID) *BERTLVRecord {
 	return &BERTLVRecord{inner: raw.TKBERTLVRecordFromID(id)}
 }
 
-// Creates TLV record with specified tag and value. @param tag Tag value for the new record. @param value Value for the new record. @return Newly created TLV record.
+// Initializes a BER-TLV record with the specified tag and value.
 //
 // NewBERTLVRecordWithTagValue creates a new [BERTLVRecord].
 func NewBERTLVRecordWithTagValue(tag uint64, value *foundation.NSData) *BERTLVRecord {
@@ -40,7 +42,7 @@ func NewBERTLVRecordWithTagValue(tag uint64, value *foundation.NSData) *BERTLVRe
 	return &BERTLVRecord{inner: raw.TKBERTLVRecordFromID(_id)}
 }
 
-// Creates TKBERTLVRecord with specified tag and array of children TKTLVRecord instances as subrecords. @param tag Tag value for the new record. @param records Array of TKTLVRecord instances serving as subrecords of this record. @return Newly created TLV record.
+// Initializes a BER-TLV record with the specified tag and an array of TLV subrecords.
 //
 // NewBERTLVRecordWithTagRecords creates a new [BERTLVRecord].
 func NewBERTLVRecordWithTagRecords(tag uint64, records ...TLVRecordProvider) *BERTLVRecord {

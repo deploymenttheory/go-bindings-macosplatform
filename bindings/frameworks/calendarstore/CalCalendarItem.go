@@ -69,7 +69,7 @@ func (o *CalCalendarItem) AddAlarm(alarm *CalAlarm) {
 
 // Deprecated: since macOS 10.8.
 func (o *CalCalendarItem) AddAlarms(alarms *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_calCalendarItemSelAddAlarms, alarms)
+	o.Ptr().Send(_calCalendarItemSelAddAlarms, alarms.Ptr())
 }
 
 // Deprecated: since macOS 10.8.
@@ -79,7 +79,7 @@ func (o *CalCalendarItem) RemoveAlarm(alarm *CalAlarm) {
 
 // Deprecated: since macOS 10.8.
 func (o *CalCalendarItem) RemoveAlarms(alarms *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_calCalendarItemSelRemoveAlarms, alarms)
+	o.Ptr().Send(_calCalendarItemSelRemoveAlarms, alarms.Ptr())
 }
 
 // Deprecated: since macOS 10.8.
@@ -158,11 +158,14 @@ func (o *CalCalendarItem) DateStamp() *foundation.NSDate {
 
 // Deprecated: since macOS 10.8.
 func (o *CalCalendarItem) Alarms() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _calCalendarItemSelAlarms)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarItemSelAlarms)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.8.
 func (o *CalCalendarItem) SetAlarms(alarms *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_calCalendarItemSelSetAlarms, alarms)
+	o.Ptr().Send(_calCalendarItemSelSetAlarms, alarms.Ptr())
 }

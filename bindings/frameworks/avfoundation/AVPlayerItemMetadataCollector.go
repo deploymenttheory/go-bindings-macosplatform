@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object used to capture the date range metadata defined for an HTTP Live Streaming asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayeritemmetadatacollector
 type AVPlayerItemMetadataCollector struct {
 	AVPlayerItemMediaDataCollector
@@ -33,16 +35,16 @@ func AVPlayerItemMetadataCollectorFromID(id objc.ID) *AVPlayerItemMetadataCollec
 	return o
 }
 
-// @method			initWithIdentifiers:classifyingLabels: @abstract		Returns an instance of AVPlayerItemMetadataCollector that can provide all available AVMetadataGroups matching a set of criteria. @param			identifiers A array of metadata identifiers indicating the metadata items that the output should provide. See AVMetadataIdentifiers.h for publicly defined metadata identifiers. Pass nil to include metadata with any identifier. @param			classifyingLabels If the metadata format supports labeling each metadata group with a string, supplying an array of group labels indicates that the output should provide metadata groups that match one of the supplied labels. Pass nil to include metadata with any (or no) classifying label. @result			An instance of AVPlayerItemMetadataCollector. @discussion Some metadata available in some formats - such as timed metadata embedded in HLS segments - is not available for collector output. The default init method can be used as an alternative to setting both identifiers and classifyingLabels to nil.
+// Creates a metadata collector to access a stream’s metadata groups matching the specified array of identifiers and classifying labels.
 func (o *AVPlayerItemMetadataCollector) InitWithIdentifiersClassifyingLabels(identifiers *foundation.NSArray[*foundation.NSString], classifyingLabels *foundation.NSArray[*foundation.NSString]) *AVPlayerItemMetadataCollector {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemMetadataCollectorSelInitWithIdentifiersClassifyingLabels, identifiers, classifyingLabels)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemMetadataCollectorSelInitWithIdentifiersClassifyingLabels, identifiers.Ptr(), classifyingLabels.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVPlayerItemMetadataCollectorFromID(_ret)
 }
 
-// @method			setDelegate:queue: @abstract		Sets the receiver's delegate and a dispatch queue on which the delegate will be called. @param			delegate An object conforming to AVPlayerItemMetadataCollectorPushDelegate protocol. @param			delegateQueue A dispatch queue on which all delegate methods will be called.
+// Sets the delegate and a dispatch queue on which the delegate will be called.
 func (o *AVPlayerItemMetadataCollector) SetDelegateQueue(delegate AVPlayerItemMetadataCollectorPushDelegate, delegateQueue *foundation.NSObject) {
 	o.Ptr().Send(_aVPlayerItemMetadataCollectorSelSetDelegateQueue, delegate, delegateQueue.Ptr())
 }

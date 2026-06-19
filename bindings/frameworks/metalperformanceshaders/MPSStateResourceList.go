@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface for objects that define resources for Metal Performance Shaders state containers.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsstateresourcelist
 type MPSStateResourceList struct {
 	foundation.NSObject

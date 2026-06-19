@@ -13,7 +13,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class SFAuthorizationPluginView @abstract SFAuthorizationPluginView is a class that you can use to insert an NSView into AuthorizationPlugin interfaces. @discussion  SFAuthorizationPluginView provides AuthorizationPlugin writers with an easy way to provide a user interface for their AuthorizationPlugin without having to duplicate the standard authentication dialog or the login window dialog.  This class was designed to be subclassed by the AuthorizationPlugin writer.  The following methods were designed to be overridden: buttonPressed:, didActivate, willActivateWithUser:, didDeactivate, firstKeyView, firstResponder, lastKeyView, setEnabled:, and viewForType:.  In order to display the user interface, the AuthorizationPlugin should create an instance of your subclass and then call displayView.  That will cause the appropriate dialog to be displayed and when credentials are needed, the overridden methods will be called in order to display the NSView provided by the subclass.
+// Allows authorization plug-in developers to create a custom view their plug-in can display.
 //
 // Apple documentation: https://developer.apple.com/documentation/securityinterface/sfauthorizationpluginview
 type SFAuthorizationPluginView struct {
@@ -50,51 +50,51 @@ func SFAuthorizationPluginViewFromID(id objc.ID) *SFAuthorizationPluginView {
 	return o
 }
 
-// @method initWithCallbacks:andEngineRef: @abstract The initialization method of this class.  You must provide the callbacks and engineRef that were provided to the AuthorizationPlugin and AuthorizationMechanismRef. @param callbacks The AuthorizationCallbacks provided to the AuthorizationPlugin. @param engineRef The AuthorizationEngineRef provided to the AuthorizationMechanismRef.
+// Initializes a new authorization plug-in view with the specified callbacks and authorization engine handle.
 func (o *SFAuthorizationPluginView) InitWithCallbacksAndEngineRef(callbacks unsafe.Pointer, engineRef unsafe.Pointer) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationPluginViewSelInitWithCallbacksAndEngineRef, callbacks, engineRef)
 	return _ret
 }
 
-// @method engineRef @abstract An accessor method to the AuthorizationEngineRef provided to the init method.  Use this value when calling the functions of the AuthorizationCallbacks when you need to set the result or set a context value.
+// Returns the authorization engine handle with which this instance was initialized.
 func (o *SFAuthorizationPluginView) EngineRef() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFAuthorizationPluginViewSelEngineRef)
 	return _ret
 }
 
-// @method callbacks @abstract An accessor method to the AuthorizationEngineRef provided to the init method.  Use this to get the function pointers to SetResult, SetContextValue, etc.  See the AuthorizationCallbacks documentation for more details.
+// Returns the authorization callbacks structure with which this instance was initialized.
 func (o *SFAuthorizationPluginView) Callbacks() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFAuthorizationPluginViewSelCallbacks)
 	return _ret
 }
 
-// @method buttonPressed: @abstract When a user presses a button, this method will be called to inform the SFAuthorizationPluginView of the user's action. By default buttonPressed: will set a result of Deny when the OK or Login buttons are pressed. If a user has pressed Login or OK button was pressed, the subclass needs to set the context values for the short name of the user so that user attributes can be looked up.  Use kAuthorizationEnvironmentUsername as the key.  The subclass should also set any additional context values that are needed by the authentication plugin to verify the user's credentials. @param inButtonType the type of button that was pressed.
+// Tells the authorization plug-in that the user pressed a button in the custom view.
 func (o *SFAuthorizationPluginView) ButtonPressed(inButtonType SFButtonType) {
 	o.Ptr().Send(_sFAuthorizationPluginViewSelButtonPressed, inButtonType)
 }
 
-// @method lastError @abstract Called by the Apple provided SecurityAgent plugin to get a description of the error that occurred during evaluation.  If no error occurred, the method should return nil. A downstream mechanism that works in cooperation with the SFAuthorizationPluginView can set a context value using the kAuthorizationContextFlagSticky flag to make it available to the SFAuthorizationPluginView in case of an error.
+// Returns the last error that occurred during evaluation.
 func (o *SFAuthorizationPluginView) LastError() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFAuthorizationPluginViewSelLastError)
 	return _ret
 }
 
-// @method didActivate @abstract Called when the user interface was made active by the AuthorizationPlugin.
+// Tells the authorization plug-in when its user interface has become active.
 func (o *SFAuthorizationPluginView) DidActivate() {
 	o.Ptr().Send(_sFAuthorizationPluginViewSelDidActivate)
 }
 
-// @method willActivateWithUser: @abstract Called by the Apple provided SecurityAgent plugin before the UI is made active. @param inUserInformation is a dictionary contains the following information: kSFAuthorizationPluginViewUserNameKey - an NSString with the selected user's name kSFAuthorizationPluginViewUserShortNameKey - an NSString with the selected user's short name The user name can be used to pre-populate a Text Field. NOTE: inUserInformation may be nil.
+// Tells the authorization plug-in that its user interface is about to be made active by the Apple-provided Security Agent.
 func (o *SFAuthorizationPluginView) WillActivateWithUser(inUserInformation *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_sFAuthorizationPluginViewSelWillActivateWithUser, inUserInformation)
+	o.Ptr().Send(_sFAuthorizationPluginViewSelWillActivateWithUser, inUserInformation.Ptr())
 }
 
-// @method didDeactivate @abstract Called when the user interface is deactivated by the AuthorizationPlugin.
+// Tells the authorization plug-in that its user interface has been deactivated.
 func (o *SFAuthorizationPluginView) DidDeactivate() {
 	o.Ptr().Send(_sFAuthorizationPluginViewSelDidDeactivate)
 }
 
-// @method firstKeyView @abstract When called by the AuthorizationPlugin, the subclass should return the first view in the keyboard loop of the NSView.  The default value returned is nil.
+// Returns the first view in the keyboard loop of the view.
 func (o *SFAuthorizationPluginView) FirstKeyView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationPluginViewSelFirstKeyView)
 	if _ret != 0 {
@@ -103,7 +103,7 @@ func (o *SFAuthorizationPluginView) FirstKeyView() *appkit.NSView {
 	return appkit.NSViewFromID(_ret)
 }
 
-// @method firstResponder @abstract When called by the AuthorizationPlugin, the subclass should return the view that should get the focus for keyboard events.  The default value returned is nil.
+// Returns the view that should get focus for keyboard events.
 func (o *SFAuthorizationPluginView) FirstResponder() *appkit.NSResponder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationPluginViewSelFirstResponder)
 	if _ret != 0 {
@@ -112,7 +112,7 @@ func (o *SFAuthorizationPluginView) FirstResponder() *appkit.NSResponder {
 	return appkit.NSResponderFromID(_ret)
 }
 
-// @method lastKeyView @abstract When called by the AuthorizationPlugin, the subclass should return the last view in the keyboard loop for the view.  The default value returned is nil.
+// Returns the last view in the keyboard loop of the view.
 func (o *SFAuthorizationPluginView) LastKeyView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationPluginViewSelLastKeyView)
 	if _ret != 0 {
@@ -121,12 +121,12 @@ func (o *SFAuthorizationPluginView) LastKeyView() *appkit.NSView {
 	return appkit.NSViewFromID(_ret)
 }
 
-// @method setEnabled: @abstract When called by the AuthorizationPlugin, the subclass should call setEnabled: on the controls that are in its view. @param inEnabled the state the controls should be in.
+// Enables or disables the controls in the authorization plug-in’s view.
 func (o *SFAuthorizationPluginView) SetEnabled(inEnabled bool) {
 	o.Ptr().Send(_sFAuthorizationPluginViewSelSetEnabled, inEnabled)
 }
 
-// @method viewForType: @abstract When called by the AuthorizationPlugin, the subclass should return the appropriate NSView for the requested SFViewType.  The NSView and its contents should have the autoresize flags set as appropriate to allow for the view to be resized. @param inType is the type of view being requested by the AuthorizationPlugin. NOTE: Currently a maximum width of 394 points is supported, but Apple reserves the right to change that in the future.  Do not assume that the width of the NSView won't change.
+// Returns the appropriate view object for the specified view type.
 func (o *SFAuthorizationPluginView) ViewForType(inType SFViewType) *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationPluginViewSelViewForType, inType)
 	if _ret != 0 {
@@ -135,17 +135,17 @@ func (o *SFAuthorizationPluginView) ViewForType(inType SFViewType) *appkit.NSVie
 	return appkit.NSViewFromID(_ret)
 }
 
-// @method displayView @abstract displayView is called in order to display the user interface provided by the subclass.  If you subclass this method, be sure to call [super displayView].  displayView will raise an SFDisplayViewException exception if an error occurs displaying the authorization dialog.
+// Displays the user interface provided by the authorization plug-in view subclass.
 func (o *SFAuthorizationPluginView) DisplayView() {
 	o.Ptr().Send(_sFAuthorizationPluginViewSelDisplayView)
 }
 
-// @method setButton:enabled: @abstract The SFAuthorizationPluginView calls this when it would like to disable a button in the UI. @param inButtonType the type of the button @param inEnabled YES to enabled the button, NO to disable the button
+// Enables or disables a button in the authorization plug-in’s user interface.
 func (o *SFAuthorizationPluginView) SetButtonEnabled(inButtonType SFButtonType, inEnabled bool) {
 	o.Ptr().Send(_sFAuthorizationPluginViewSelSetButtonEnabled, inButtonType, inEnabled)
 }
 
-// @method updateView @abstract updateView is called in order to have a new or modified NSView loaded by the AuthorizationPlugin.
+// Tells the authorization plug-in to get and display the appropriate view in the authorization plug-in’s user interface.
 func (o *SFAuthorizationPluginView) UpdateView() {
 	o.Ptr().Send(_sFAuthorizationPluginViewSelUpdateView)
 }

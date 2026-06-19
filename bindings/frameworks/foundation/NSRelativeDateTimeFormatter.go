@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A formatter that creates locale-aware string representations of a relative date or time.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsrelativedatetimeformatter
 type NSRelativeDateTimeFormatter struct {
 	NSFormatter

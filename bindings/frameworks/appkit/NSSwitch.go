@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A control that offers a binary choice.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsswitch
 type NSSwitch struct {
 	NSControl

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides metrics related to video playback quality.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avvideoperformancemetrics
 type AVVideoPerformanceMetrics struct {
 	foundation.NSObject

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A joint that imposes a maximum distance between two physics bodies, as if they were connected by a rope.
+//
 // PhysicsJointLimit wraps [raw.SKPhysicsJointLimit] with a fluent Go API.
 type PhysicsJointLimit struct {
 	inner *raw.SKPhysicsJointLimit
@@ -35,18 +37,24 @@ func NewPhysicsJointLimit() *PhysicsJointLimit {
 	return &PhysicsJointLimit{inner: raw.SKPhysicsJointLimitFromID(_id)}
 }
 
+// The maximum distance allowed between the two physics bodies connected by the limit joint.
+//
 // WithMaxLength sets the maxLength property and returns the receiver for chaining.
 func (x *PhysicsJointLimit) WithMaxLength(maxLength float64) *PhysicsJointLimit {
 	x.inner.SetMaxLength(maxLength)
 	return x
 }
 
+// The first body connected by the joint.
+//
 // WithBodyA sets the bodyA property and returns the receiver for chaining.
 func (x *PhysicsJointLimit) WithBodyA(bodyA *PhysicsBody) *PhysicsJointLimit {
 	x.inner.SKPhysicsJoint.SetBodyA(bodyA.Unwrap())
 	return x
 }
 
+// The second body connected by the joint.
+//
 // WithBodyB sets the bodyB property and returns the receiver for chaining.
 func (x *PhysicsJointLimit) WithBodyB(bodyB *PhysicsBody) *PhysicsJointLimit {
 	x.inner.SKPhysicsJoint.SetBodyB(bodyB.Unwrap())

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of the format of per-vertex data for a single vertex attribute in a mesh object.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlvertexattribute
 type MDLVertexAttribute struct {
 	foundation.NSObject
@@ -44,7 +46,7 @@ func MDLVertexAttributeFromID(id objc.ID) *MDLVertexAttribute {
 	return o
 }
 
-// @method initWithName:format:offset:bufferIndex @abstract Initialize attribute object with all properties
+// Initializes a vertex attribute object with the specified property values.
 func (o *MDLVertexAttribute) InitWithNameFormatOffsetBufferIndex(name *foundation.NSString, format MDLVertexFormat, offset uint, bufferIndex uint) *MDLVertexAttribute {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVertexAttributeSelInitWithNameFormatOffsetBufferIndex, name.Ptr(), format, offset, bufferIndex)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance that provides information about a field in a structure.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlstructmember
 type MTLStructMember struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func MTLStructMemberFromID(id objc.ID) *MTLStructMember {
 	return o
 }
 
+// Provides a description of the underlying struct when the struct member holds a struct.
 func (o *MTLStructMember) StructType() *MTLStructType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLStructMemberSelStructType)
 	if _ret != 0 {
@@ -46,6 +49,7 @@ func (o *MTLStructMember) StructType() *MTLStructType {
 	return MTLStructTypeFromID(_ret)
 }
 
+// Provides a description of the underlying array when the struct member holds an array.
 func (o *MTLStructMember) ArrayType() *MTLArrayType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLStructMemberSelArrayType)
 	if _ret != 0 {
@@ -54,6 +58,7 @@ func (o *MTLStructMember) ArrayType() *MTLArrayType {
 	return MTLArrayTypeFromID(_ret)
 }
 
+// Provides a description of the underlying texture when the struct member holds a texture.
 func (o *MTLStructMember) TextureReferenceType() *MTLTextureReferenceType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLStructMemberSelTextureReferenceType)
 	if _ret != 0 {
@@ -62,6 +67,7 @@ func (o *MTLStructMember) TextureReferenceType() *MTLTextureReferenceType {
 	return MTLTextureReferenceTypeFromID(_ret)
 }
 
+// Provides a description of the underlying pointer when the struct member holds a pointer.
 func (o *MTLStructMember) PointerType() *MTLPointerType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLStructMemberSelPointerType)
 	if _ret != 0 {
@@ -70,7 +76,7 @@ func (o *MTLStructMember) PointerType() *MTLPointerType {
 	return MTLPointerTypeFromID(_ret)
 }
 
-// Provides a description of the underlying tensor type when this struct member holds a tensor. - Returns: A description of the tensor type that this struct member holds, or `nil` if this struct member doesn't hold a tensor.
+// Provides a description of the underlying tensor type when this struct member holds a tensor.
 func (o *MTLStructMember) TensorReferenceType() *MTLTensorReferenceType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLStructMemberSelTensorReferenceType)
 	if _ret != 0 {

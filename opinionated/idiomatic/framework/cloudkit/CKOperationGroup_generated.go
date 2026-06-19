@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An explicit association between two or more operations.
+//
 // OperationGroup wraps [raw.CKOperationGroup] with a fluent Go API.
 type OperationGroup struct {
 	inner *raw.CKOperationGroup
@@ -37,7 +39,7 @@ func NewOperationGroup() *OperationGroup {
 	return &OperationGroup{inner: raw.CKOperationGroupFromID(_id)}
 }
 
-// Creates an operation group from a serialized instance. - Parameters: - aDecoder: The coder to use when deserializing the group.
+// Creates an operation group from a serialized instance.
 //
 // NewOperationGroupWithCoder creates a new [OperationGroup].
 func NewOperationGroupWithCoder(aDecoder *foundation.NSCoder) *OperationGroup {
@@ -46,7 +48,7 @@ func NewOperationGroupWithCoder(aDecoder *foundation.NSCoder) *OperationGroup {
 	return &OperationGroup{inner: raw.CKOperationGroupFromID(_id)}
 }
 
-// The default configuration for operations in the group. If an operation in the group has its own configuration, that configuration's values override the default configuration's values. For more information, see “CKOperation/Configuration“.
+// The default configuration for operations in the group.
 //
 // WithDefaultConfiguration sets the defaultConfiguration property and returns the receiver for chaining.
 func (x *OperationGroup) WithDefaultConfiguration(defaultConfiguration *OperationConfiguration) *OperationGroup {
@@ -54,7 +56,7 @@ func (x *OperationGroup) WithDefaultConfiguration(defaultConfiguration *Operatio
 	return x
 }
 
-// The operation group's name. The system sends the name of the operation group to CloudKit to provide aggregate reporting for “CKOperationGroup“. The name must not include any personal data.
+// The operation group’s name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *OperationGroup) WithName(name string) *OperationGroup {
@@ -62,7 +64,7 @@ func (x *OperationGroup) WithName(name string) *OperationGroup {
 	return x
 }
 
-// The number of operations in the operation group. This property shows the number of operations that you expect to be in this operation group. It's the developer's responsibility to set this value.
+// The number of operations in the operation group.
 //
 // WithQuantity sets the quantity property and returns the receiver for chaining.
 func (x *OperationGroup) WithQuantity(quantity uint) *OperationGroup {
@@ -70,7 +72,7 @@ func (x *OperationGroup) WithQuantity(quantity uint) *OperationGroup {
 	return x
 }
 
-// The estimated size of traffic to upload to CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
+// The estimated size of traffic to upload to CloudKit.
 //
 // WithExpectedSendSize sets the expectedSendSize property and returns the receiver for chaining.
 func (x *OperationGroup) WithExpectedSendSize(expectedSendSize CKOperationGroupTransferSize) *OperationGroup {
@@ -78,7 +80,7 @@ func (x *OperationGroup) WithExpectedSendSize(expectedSendSize CKOperationGroupT
 	return x
 }
 
-// The estimated size of traffic to download from CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
+// The estimated size of traffic to download from CloudKit.
 //
 // WithExpectedReceiveSize sets the expectedReceiveSize property and returns the receiver for chaining.
 func (x *OperationGroup) WithExpectedReceiveSize(expectedReceiveSize CKOperationGroupTransferSize) *OperationGroup {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the metadata for a reference signature.
+//
 // Apple documentation: https://developer.apple.com/documentation/shazamkit/shmediaitem
 type SHMediaItem struct {
 	foundation.NSObject
@@ -50,16 +52,16 @@ func SHMediaItemFromID(id objc.ID) *SHMediaItem {
 	return o
 }
 
-// Creates a media item object with a dictionary of properties and their associated values. - Parameters: - properties: A dictionary that contains the media item properties and their associated values.
+// Creates a media item object with a dictionary of properties and their associated values.
 func SHMediaItemMediaItemWithProperties(properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SHMediaItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSHMediaItem), _sHMediaItemSelMediaItemWithProperties, properties)
+	_ret := objc.Send[objc.ID](objc.ID(_clsSHMediaItem), _sHMediaItemSelMediaItemWithProperties, properties.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return SHMediaItemFromID(_ret)
 }
 
-// Requests the media item for the song with the specified Shazam ID. > Important: > You can call this method from synchronous code using a completion handler, as shown on this page, or you can call it as an asynchronous method that has the following declaration: > > ```swift > class func fetch(shazamID: String) async throws -> SHMediaItem > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>. - Parameters: - shazamID: The Shazam ID of the song. - completionHandler: The completion handler that the system calls with the result of the request. This block takes the following parameters: - term `mediaItem`: A media item. - term `error`: An error object if a problem occurs when fetching the media item; otherwise, `nil`.
+// Requests the media item for the song with the specified Shazam ID.
 func SHMediaItemFetchMediaItemWithShazamIDCompletionHandler(shazamID *foundation.NSString, completionHandler func(*SHMediaItem, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -74,13 +76,13 @@ func SHMediaItemFetchMediaItemWithShazamIDCompletionHandler(shazamID *foundation
 	objc.ID(_clsSHMediaItem).Send(_sHMediaItemSelFetchMediaItemWithShazamIDCompletionHandler, shazamID.Ptr(), __block_completionHandler)
 }
 
-// Accesses the property for the specified key for reading. - Parameters: - property: The key for the property. - Returns: The value of the property; otherwise, `nil`.
+// Accesses the property for the specified key for reading.
 func (o *SHMediaItem) ValueForProperty(property *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelValueForProperty, property.Ptr())
 	return _ret
 }
 
-// Accesses the property for the specified key for reading. - Parameters: - key: The key for the media item property. - Returns: The value of the property; otherwise, `nil`.
+// Accesses the property for the specified key for reading.
 func (o *SHMediaItem) ObjectForKeyedSubscript(key *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelObjectForKeyedSubscript, key.Ptr())
 	return _ret
@@ -124,8 +126,11 @@ func (o *SHMediaItem) Artist() *foundation.NSString {
 
 // An array of genre names for the media item. The array is empty if there are no media items.
 func (o *SHMediaItem) Genres() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _sHMediaItemSelGenres)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sHMediaItemSelGenres)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // The Apple Music ID for the song.

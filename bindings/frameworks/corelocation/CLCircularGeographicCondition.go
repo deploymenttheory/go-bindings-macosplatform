@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A circular geographic condition that a center point and radius define.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clcirculargeographiccondition
 type CLCircularGeographicCondition struct {
 	CLCondition
@@ -33,6 +35,7 @@ func CLCircularGeographicConditionFromID(id objc.ID) *CLCircularGeographicCondit
 	return o
 }
 
+// Creates a new circular geographic condition with the center point and radius you provide.
 func (o *CLCircularGeographicCondition) InitWithCenterRadius(center unsafe.Pointer, radius unsafe.Pointer) *CLCircularGeographicCondition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLCircularGeographicConditionSelInitWithCenterRadius, center, radius)
 	if _ret != 0 {

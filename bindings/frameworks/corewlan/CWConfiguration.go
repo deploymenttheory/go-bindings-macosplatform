@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Encapsulates an immutable configuration for an AirPort WLAN interface.
+//
 // Apple documentation: https://developer.apple.com/documentation/corewlan/cwconfiguration
 type CWConfiguration struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func CWConfigurationFromID(id objc.ID) *CWConfiguration {
 	return o
 }
 
-// @method @abstract Convenience method for getting a CWConfiguration object.
+// Convenience method for getting an empty CWConfiguration object.
 func CWConfigurationConfiguration() *CWConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCWConfiguration), _cWConfigurationSelConfiguration)
 	if _ret != 0 {
@@ -48,7 +50,7 @@ func CWConfigurationConfiguration() *CWConfiguration {
 	return CWConfigurationFromID(_ret)
 }
 
-// @method @abstract Initializes a CWConfiguration object.
+// Creates an empty CWConfiguration object.
 func (o *CWConfiguration) Init() *CWConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWConfigurationSelInit)
 	if _ret != 0 {
@@ -57,7 +59,7 @@ func (o *CWConfiguration) Init() *CWConfiguration {
 	return CWConfigurationFromID(_ret)
 }
 
-// @method @param configuration A CWConfiguration object. @result A CWConfiguration object. @abstract Initializes a CWConfiguration object with the properties of an existing CWConfiguration object.
+// Creates and returns a CWConfiguration object initialized with the given CWConfiguration object.
 func (o *CWConfiguration) InitWithConfiguration(configuration *CWConfiguration) *CWConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWConfigurationSelInitWithConfiguration, configuration.Ptr())
 	if _ret != 0 {
@@ -66,7 +68,7 @@ func (o *CWConfiguration) InitWithConfiguration(configuration *CWConfiguration) 
 	return CWConfigurationFromID(_ret)
 }
 
-// @method @param configuration A CWConfiguration object. @result A CWConfiguration object. @abstract Convenience method for getting a CWConfiguration object initialized with the properties of an existing CWConfiguration object.
+// Convenience method for getting a CWConfiguration object initialized with the given CWConfiguration object.
 func CWConfigurationConfigurationWithConfiguration(configuration *CWConfiguration) *CWConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCWConfiguration), _cWConfigurationSelConfigurationWithConfiguration, configuration.Ptr())
 	if _ret != 0 {
@@ -75,7 +77,7 @@ func CWConfigurationConfigurationWithConfiguration(configuration *CWConfiguratio
 	return CWConfigurationFromID(_ret)
 }
 
-// @method @param configuration The CWConfiguration with which to compare the receiver. @result YES if the objects are equal, NO otherwise. @abstract Determine CWConfiguration equality. @discussion CWConfiguration objects are considered equal if all their corresponding properties are equal.
+// Determine CWConfiguration object equality.
 func (o *CWConfiguration) IsEqualToConfiguration(configuration *CWConfiguration) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cWConfigurationSelIsEqualToConfiguration, configuration.Ptr())
 	return _ret

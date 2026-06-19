@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for the recipient of a message.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/insendmessagerecipientresolutionresult
 type INSendMessageRecipientResolutionResult struct {
 	INPersonResolutionResult
@@ -30,6 +32,7 @@ func INSendMessageRecipientResolutionResultFromID(id objc.ID) *INSendMessageReci
 	return o
 }
 
+// Creates an object whose resolution indicates that your app can’t use the specified person as a message recipient.
 func INSendMessageRecipientResolutionResultUnsupportedForReason(reason INSendMessageRecipientUnsupportedReason) *INSendMessageRecipientResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINSendMessageRecipientResolutionResult), _iNSendMessageRecipientResolutionResultSelUnsupportedForReason, reason)
 	if _ret != 0 {
@@ -38,6 +41,7 @@ func INSendMessageRecipientResolutionResultUnsupportedForReason(reason INSendMes
 	return INSendMessageRecipientResolutionResultFromID(_ret)
 }
 
+// Creates a resolution result object with the specified person resolution result object.
 func (o *INSendMessageRecipientResolutionResult) InitWithPersonResolutionResult(personResolutionResult *INPersonResolutionResult) *INSendMessageRecipientResolutionResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSendMessageRecipientResolutionResultSelInitWithPersonResolutionResult, personResolutionResult.Ptr())
 	if _ret != 0 {

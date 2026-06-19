@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An authentication operation for a cryptographic token.
+//
 // TokenAuthOperation wraps [raw.TKTokenAuthOperation] with a fluent Go API.
 type TokenAuthOperation struct {
 	inner *raw.TKTokenAuthOperation
@@ -35,7 +37,7 @@ func NewTokenAuthOperation() *TokenAuthOperation {
 	return &TokenAuthOperation{inner: raw.TKTokenAuthOperationFromID(_id)}
 }
 
-// @discussion Handler triggered by the system in order to let the token finalize the authentication operation. @param error Error details (see TKError.h). @return Finalization status.
+// Finishes the authentication operation.
 //
 // Finish returns any validation error.
 func (x *TokenAuthOperation) Finish() error {

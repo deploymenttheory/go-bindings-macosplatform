@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of metadata items that are valid for use during a specific time range.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avtimedmetadatagroup
 type AVTimedMetadataGroup struct {
 	AVMetadataGroup
@@ -36,7 +38,7 @@ func AVTimedMetadataGroupFromID(id objc.ID) *AVTimedMetadataGroup {
 	return o
 }
 
-// @method		initWithItems:timeRange: @abstract	Initializes an instance of AVTimedMetadataGroup with a collection of metadata items. @param		items An NSArray of AVMetadataItems. @param		timeRange The timeRange of the collection of AVMetadataItems. @result		An instance of AVTimedMetadataGroup.
+// Creates a timed metadata group initialized with the given metadata items.
 func (o *AVTimedMetadataGroup) InitWithItemsTimeRange(items *foundation.NSArray[*AVMetadataItem], timeRange coremedia.CMTimeRange) *AVTimedMetadataGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVTimedMetadataGroupSelInitWithItemsTimeRange, items.Ptr(), timeRange)
 	if _ret != 0 {
@@ -59,7 +61,7 @@ func (o *AVTimedMetadataGroup) TimeRange() coremedia.CMTimeRange {
 	return _ret
 }
 
-// @method		copyFormatDescription @abstract	Creates a format description based on the receiver's items. @result		An instance of CMMetadataFormatDescription sufficient to describe the contents of all the items referenced by the receiver. @discussion The returned format description is suitable for use as the format hint parameter when creating an instance of AVAssetWriterInput. Each item referenced by the receiver must carry a non-nil value for its dataType property.  An exception will be thrown if any item does not have a data type.
+// Creates a format description based on the receiver’s items.
 func (o *AVTimedMetadataGroup) CopyFormatDescription() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVTimedMetadataGroupSelCopyFormatDescription)
 	return _ret

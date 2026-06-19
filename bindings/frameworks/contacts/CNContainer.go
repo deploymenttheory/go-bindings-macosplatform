@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable object that represents a collection of contacts.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cncontainer
 type CNContainer struct {
 	foundation.NSObject
@@ -57,15 +59,16 @@ func (o *CNContainer) Type() CNContainerType {
 	return _ret
 }
 
+// Returns a predicate to find the containers with the specified identifiers.
 func CNContainerPredicateForContainersWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSPredicate {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCNContainer), _cNContainerSelPredicateForContainersWithIdentifiers, identifiers)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCNContainer), _cNContainerSelPredicateForContainersWithIdentifiers, identifiers.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @discussion If the identifier is for a unified contact then the fetch will return an empty array. To fetch the containers of a unified contact, first fetch the linked contacts then fetch the container of each linked contact.
+// Returns a predicate to find the container of the specified contact.
 func CNContainerPredicateForContainerOfContactWithIdentifier(contactIdentifier *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContainer), _cNContainerSelPredicateForContainerOfContactWithIdentifier, contactIdentifier.Ptr())
 	if _ret != 0 {
@@ -74,6 +77,7 @@ func CNContainerPredicateForContainerOfContactWithIdentifier(contactIdentifier *
 	return foundation.NSPredicateFromID(_ret)
 }
 
+// Returns a predicate to find the container of the specified group.
 func CNContainerPredicateForContainerOfGroupWithIdentifier(groupIdentifier *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContainer), _cNContainerSelPredicateForContainerOfGroupWithIdentifier, groupIdentifier.Ptr())
 	if _ret != 0 {

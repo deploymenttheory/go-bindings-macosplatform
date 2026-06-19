@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides a flexible method of defining animated transformations.
+//
 // ValueFunction wraps [raw.CAValueFunction] with a fluent Go API.
 type ValueFunction struct {
 	inner *raw.CAValueFunction

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides further information about a remote peripheral’s characteristic.
+//
 // Apple documentation: https://developer.apple.com/documentation/corebluetooth/cbdescriptor
 type CBDescriptor struct {
 	CBAttribute

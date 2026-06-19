@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a single pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpass
 type PKPass struct {
 	ptr objc.ID
@@ -53,6 +55,7 @@ func PKPassFromID(id objc.ID) *PKPass {
 	return o
 }
 
+// Creates a pass using the data you provide.
 func (o *PKPass) InitWithDataError(data *foundation.NSData) (*PKPass, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelInitWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
@@ -65,6 +68,7 @@ func (o *PKPass) InitWithDataError(data *foundation.NSData) (*PKPass, error) {
 	return PKPassFromID(_ret), nil
 }
 
+// Returns the localized value for a specified field of the pass.
 func (o *PKPass) LocalizedValueForFieldKey(key *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelLocalizedValueForFieldKey, key.Ptr())
 	return _ret
@@ -166,8 +170,11 @@ func (o *PKPass) RelevantDates() *foundation.NSArray[*PKPassRelevantDate] {
 }
 
 func (o *PKPass) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _pKPassSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *PKPass) PassURL() *foundation.NSURL {

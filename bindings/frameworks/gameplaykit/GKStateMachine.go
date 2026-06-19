@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Models a finite state machine that has a single current state.
+// A finite-state machine—a collection of state objects that each define logic for a particular state of gameplay and rules for transitioning between states.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkstatemachine
 type GKStateMachine struct {
@@ -38,7 +38,7 @@ func GKStateMachineFromID(id objc.ID) *GKStateMachine {
 	return o
 }
 
-// Creates a state machine with an array of possible states and an initial state. @param states a list of possible states for this state machine.
+// Creates a state machine with the specified states.
 func GKStateMachineStateMachineWithStates(states *foundation.NSArray[*GKState]) *GKStateMachine {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKStateMachine), _gKStateMachineSelStateMachineWithStates, states.Ptr())
 	if _ret != 0 {
@@ -47,6 +47,7 @@ func GKStateMachineStateMachineWithStates(states *foundation.NSArray[*GKState]) 
 	return GKStateMachineFromID(_ret)
 }
 
+// Initializes a state machine with the specified states.
 func (o *GKStateMachine) InitWithStates(states *foundation.NSArray[*GKState]) *GKStateMachine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKStateMachineSelInitWithStates, states.Ptr())
 	if _ret != 0 {
@@ -55,12 +56,12 @@ func (o *GKStateMachine) InitWithStates(states *foundation.NSArray[*GKState]) *G
 	return GKStateMachineFromID(_ret)
 }
 
-// Updates the current state machine. @param sec the time, in seconds, since the last frame
+// Tells the current state object to perform per-frame updates.
 func (o *GKStateMachine) UpdateWithDeltaTime(sec float64) {
 	o.Ptr().Send(_gKStateMachineSelUpdateWithDeltaTime, sec)
 }
 
-// Gets the instance of the indicated state class from this state machine. Returns nil if the state does not exist @param stateClass the class of the state to be retrieved
+// Returns the state object in the state machine corresponding to the specified class.
 func (o *GKStateMachine) StateForClass(stateClass objc.Class) *GKState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKStateMachineSelStateForClass, stateClass)
 	if _ret != 0 {
@@ -69,13 +70,13 @@ func (o *GKStateMachine) StateForClass(stateClass objc.Class) *GKState {
 	return GKStateFromID(_ret)
 }
 
-// Returns YES if the indicated class is a a valid next state or if currentState is nil @param stateClass the class of the state to be tested
+// Returns a Boolean value indicating whether it is valid for the state machine to transition from its current state to a state of the specified class.
 func (o *GKStateMachine) CanEnterState(stateClass objc.Class) bool {
 	_ret := objc.Send[bool](o.Ptr(), _gKStateMachineSelCanEnterState, stateClass)
 	return _ret
 }
 
-// Calls canEnterState to check if we can enter the given state and then enters that state if so. [GKState willExitWithNextState:] is called on the old current state. [GKState didEnterWithPreviousState:] is called on the new state. @param stateClass the class of the state to switch to @return YES if state was entered.  NO otherwise.
+// Attempts to transition the state machine from its current state to a state of the specified class.
 func (o *GKStateMachine) EnterState(stateClass objc.Class) bool {
 	_ret := objc.Send[bool](o.Ptr(), _gKStateMachineSelEnterState, stateClass)
 	return _ret

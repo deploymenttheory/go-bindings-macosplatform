@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that enumerates the contents of a directory.
+//
 // DirectoryEnumerator wraps [raw.NSDirectoryEnumerator] with a fluent Go API.
 type DirectoryEnumerator struct {
 	inner *raw.NSDirectoryEnumerator[objc.ID]

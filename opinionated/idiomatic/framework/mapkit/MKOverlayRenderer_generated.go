@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The shared infrastructure for drawing overlays on the map surface.
+//
 // OverlayRenderer wraps [raw.MKOverlayRenderer] with a fluent Go API.
 type OverlayRenderer struct {
 	inner *raw.MKOverlayRenderer
@@ -31,6 +33,8 @@ func OverlayRendererFromID(id objc.ID) *OverlayRenderer {
 	return &OverlayRenderer{inner: raw.MKOverlayRendererFromID(id)}
 }
 
+// Creates and returns the overlay renderer and associates it with the specified overlay object.
+//
 // NewOverlayRendererWithOverlay creates a new [OverlayRenderer].
 func NewOverlayRendererWithOverlay(overlay raw.MKOverlay) *OverlayRenderer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKOverlayRenderer")), objc.RegisterName("alloc"))
@@ -38,52 +42,72 @@ func NewOverlayRendererWithOverlay(overlay raw.MKOverlay) *OverlayRenderer {
 	return &OverlayRenderer{inner: raw.MKOverlayRendererFromID(_id)}
 }
 
+// The amount of transparency to apply to the overlay.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *OverlayRenderer) WithAlpha(alpha float64) *OverlayRenderer {
 	x.inner.SetAlpha(alpha)
 	return x
 }
 
+// Returns the point in the overlay renderer’s drawing area corresponding to the specified point on the map.
+//
 // PointForMapPoint calls the underlying PointForMapPoint.
 func (x *OverlayRenderer) PointForMapPoint(mapPoint raw.MKMapPoint) corefoundation.CGPoint {
 	return x.inner.PointForMapPoint(mapPoint)
 }
 
+// Returns the point on the map that corresponds to the specified point in the overlay renderer’s drawing area.
+//
 // MapPointForPoint calls the underlying MapPointForPoint.
 func (x *OverlayRenderer) MapPointForPoint(point corefoundation.CGPoint) raw.MKMapPoint {
 	return x.inner.MapPointForPoint(point)
 }
 
+// Returns the rectangle in the overlay renderer’s drawing area corresponding to the specified rectangle on the map.
+//
 // RectForMapRect calls the underlying RectForMapRect.
 func (x *OverlayRenderer) RectForMapRect(mapRect raw.MKMapRect) corefoundation.CGRect {
 	return x.inner.RectForMapRect(mapRect)
 }
 
+// Returns the rectangle on the map that corresponds to the specified rectangle in the overlay renderer’s drawing area.
+//
 // MapRectForRect calls the underlying MapRectForRect.
 func (x *OverlayRenderer) MapRectForRect(rect corefoundation.CGRect) raw.MKMapRect {
 	return x.inner.MapRectForRect(rect)
 }
 
+// Returns a Boolean value that indicates whether the overlay view is ready to draw its content.
+//
 // CanDrawMapRectZoomScale calls the underlying CanDrawMapRectZoomScale.
 func (x *OverlayRenderer) CanDrawMapRectZoomScale(mapRect raw.MKMapRect, zoomScale float64) bool {
 	return x.inner.CanDrawMapRectZoomScale(mapRect, zoomScale)
 }
 
+// Draws the overlay’s contents at the specified location on the map.
+//
 // DrawMapRectZoomScaleInContext calls the underlying DrawMapRectZoomScaleInContext.
 func (x *OverlayRenderer) DrawMapRectZoomScaleInContext(mapRect raw.MKMapRect, zoomScale float64, context_ unsafe.Pointer) {
 	x.inner.DrawMapRectZoomScaleInContext(mapRect, zoomScale, context_)
 }
 
+// Invalidates the entire contents of the overlay for all zoom scales.
+//
 // SetNeedsDisplay calls the underlying SetNeedsDisplay.
 func (x *OverlayRenderer) SetNeedsDisplay() {
 	x.inner.SetNeedsDisplay()
 }
 
+// Invalidates the specified portion of the overlay at all zoom scales.
+//
 // SetNeedsDisplayInMapRect calls the underlying SetNeedsDisplayInMapRect.
 func (x *OverlayRenderer) SetNeedsDisplayInMapRect(mapRect raw.MKMapRect) {
 	x.inner.SetNeedsDisplayInMapRect(mapRect)
 }
 
+// Invalidates the specified portion of the overlay, but only at the specified zoom scale.
+//
 // SetNeedsDisplayInMapRectZoomScale calls the underlying SetNeedsDisplayInMapRectZoomScale.
 func (x *OverlayRenderer) SetNeedsDisplayInMapRectZoomScale(mapRect raw.MKMapRect, zoomScale float64) {
 	x.inner.SetNeedsDisplayInMapRectZoomScale(mapRect, zoomScale)

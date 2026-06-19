@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Groups together properties that provide linking properties for render pipelines.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4renderpipelinedynamiclinkingdescriptor
 type MTL4RenderPipelineDynamicLinkingDescriptor struct {
 	foundation.NSObject

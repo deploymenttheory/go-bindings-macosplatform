@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that specifies a mixer for sound events and orients them in 3D space.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasemixerparameters
 type PHASEMixerParameters struct {
 	foundation.NSObject
@@ -31,12 +33,12 @@ func PHASEMixerParametersFromID(id objc.ID) *PHASEMixerParameters {
 	return o
 }
 
-// @method addSpatialMixerParametersWithIdentifier:source:listener @abstract Adds runtime parameters for a spatial mixer @param identifier The unique identifier assigned to a spatial submixer object. @param source The PHASESource object that this mixer will use to spatialize sounds. @param listener The PHASEListener object that this mixer will use to spatialize sounds.
+// Adds runtime parameters for a spatial mixer.
 func (o *PHASEMixerParameters) AddSpatialMixerParametersWithIdentifierSourceListener(identifier *foundation.NSString, source *PHASESource, listener *PHASEListener) {
 	o.Ptr().Send(_pHASEMixerParametersSelAddSpatialMixerParametersWithIdentifierSourceListener, identifier.Ptr(), source.Ptr(), listener.Ptr())
 }
 
-// @method addAmbientMixerParametersWithIdentifier:listener @abstract Adds runtime parameters for an ambient mixer @param identifier The unique identifier assigned to a spatial submixer object. @param listener The PHASEListener object that this mixer will use to orient sounds.
+// Adds runtime parameters for an ambient mixer.
 func (o *PHASEMixerParameters) AddAmbientMixerParametersWithIdentifierListener(identifier *foundation.NSString, listener *PHASEListener) {
 	o.Ptr().Send(_pHASEMixerParametersSelAddAmbientMixerParametersWithIdentifierListener, identifier.Ptr(), listener.Ptr())
 }

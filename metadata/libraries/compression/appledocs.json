@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "framework": "Compression",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "compression_algorithm": {
+      "doc": "A structure for values that represent compression algorithms.",
+      "url": "https://developer.apple.com/documentation/compression/compression_algorithm",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new constant from the given raw value.",
+          "url": "https://developer.apple.com/documentation/compression/compression_algorithm/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new constant from the given raw value.",
+          "url": "https://developer.apple.com/documentation/compression/compression_algorithm/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The raw value of the constant.",
+          "url": "https://developer.apple.com/documentation/compression/compression_algorithm/rawvalue"
+        }
+      }
+    },
+    "compression_status": {
+      "doc": "A set of values used to represent the status of stream compression.",
+      "url": "https://developer.apple.com/documentation/compression/compression_status",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new constant from the given raw value.",
+          "url": "https://developer.apple.com/documentation/compression/compression_status/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new constant from the given raw value.",
+          "url": "https://developer.apple.com/documentation/compression/compression_status/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The raw value of the constant.",
+          "url": "https://developer.apple.com/documentation/compression/compression_status/rawvalue"
+        }
+      }
+    },
+    "compression_stream_flags": {
+      "doc": "A set of values used to represent stream compression flags.",
+      "url": "https://developer.apple.com/documentation/compression/compression_stream_flags",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new constant from the given raw value.",
+          "url": "https://developer.apple.com/documentation/compression/compression_stream_flags/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new constant from the given raw value.",
+          "url": "https://developer.apple.com/documentation/compression/compression_stream_flags/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The raw value of the constant.",
+          "url": "https://developer.apple.com/documentation/compression/compression_stream_flags/rawvalue"
+        }
+      }
+    },
+    "compression_stream_operation": {
+      "doc": "A set of values used to represent a stream compression operation.",
+      "url": "https://developer.apple.com/documentation/compression/compression_stream_operation",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new constant from the given raw value.",
+          "url": "https://developer.apple.com/documentation/compression/compression_stream_operation/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new constant from the given raw value.",
+          "url": "https://developer.apple.com/documentation/compression/compression_stream_operation/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The raw value of the constant.",
+          "url": "https://developer.apple.com/documentation/compression/compression_stream_operation/rawvalue"
+        }
+      }
+    }
+  },
+  "structs": {
+    "compression_stream": {
+      "doc": "A structure representing a compression stream.",
+      "url": "https://developer.apple.com/documentation/compression/compression_stream"
+    }
+  }
+}

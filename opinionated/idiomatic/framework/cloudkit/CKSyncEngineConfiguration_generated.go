@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that configures the attributes and behavior of a sync engine.
+//
 // SyncEngineConfiguration wraps [raw.CKSyncEngineConfiguration] with a fluent Go API.
 type SyncEngineConfiguration struct {
 	inner *raw.CKSyncEngineConfiguration
@@ -31,7 +33,7 @@ func SyncEngineConfigurationFromID(id objc.ID) *SyncEngineConfiguration {
 	return &SyncEngineConfiguration{inner: raw.CKSyncEngineConfigurationFromID(id)}
 }
 
-// Creates a configuration for the specified database and serialized state. - Parameters: - database: The database to sync — either a person's private database or their shared database. - stateSerialization: If this is the first initialization of the associated sync engine, specify `nil`; otherwise, specify the state from the most recent “CKSyncEngineStateUpdateEvent“ that your delegate handled. - delegate: The object that provides the records to sync and handles any related events. - Returns: An initialized configuration instance.
+// Creates a configuration for the specified database and serialized state.
 //
 // NewSyncEngineConfigurationWithDatabaseStateSerializationDelegate creates a new [SyncEngineConfiguration].
 func NewSyncEngineConfigurationWithDatabaseStateSerializationDelegate(database *raw.CKDatabase, stateSerialization *raw.CKSyncEngineStateSerialization, delegate raw.CKSyncEngineDelegate) *SyncEngineConfiguration {
@@ -40,7 +42,7 @@ func NewSyncEngineConfigurationWithDatabaseStateSerializationDelegate(database *
 	return &SyncEngineConfiguration{inner: raw.CKSyncEngineConfigurationFromID(_id)}
 }
 
-// The associated database. Multiple sync engines can run in the same process, each targeting a different database. For example, you may use one sync engine for a person's private database and another for their shared database. - Important: When using CloudKit's production environment, don't create multiple sync engines that target the same database. You can, however, do this in the development environment to help testing — for example, to simulate multiple devices syncing back, and forth.
+// The associated database.
 //
 // WithDatabase sets the database property and returns the receiver for chaining.
 func (x *SyncEngineConfiguration) WithDatabase(database *Database) *SyncEngineConfiguration {
@@ -48,7 +50,7 @@ func (x *SyncEngineConfiguration) WithDatabase(database *Database) *SyncEngineCo
 	return x
 }
 
-// The sync engine's serialized state. This property returns the value you specify for the initializer's `stateSerialization` parameter. If you choose to set this property after initialization, assign the state from the most recent “CKSyncEngineStateUpdateEvent“ handled by your delegate. However, If this is the first initialization of the associated sync engine, specify `nil` instead. The default value is `nil`.
+// The sync engine’s serialized state.
 //
 // WithStateSerialization sets the stateSerialization property and returns the receiver for chaining.
 func (x *SyncEngineConfiguration) WithStateSerialization(stateSerialization *SyncEngineStateSerialization) *SyncEngineConfiguration {
@@ -64,7 +66,7 @@ func (x *SyncEngineConfiguration) WithDelegate(delegate raw.CKSyncEngineDelegate
 	return x
 }
 
-// A Boolean value that determines whether the engine syncs automatically. By default, the sync engine uses the system scheduler to automatically schedule both send and fetch operations. If an operation fails due to a recoverable error, such as a network failure, or when the server is enforcing request limits, the engine reschedules those operations as necessary. Unless you have a specific need, prefer to use the default behavior in your app. If you set this property's value to <doc://com.apple.documentation/documentation/swift/false>, use “CKSyncEngine/fetchChangesWithCompletionHandler:“ and “CKSyncEngine/sendChangesWithCompletionHandler:“ to invoke immediate sync operations, allowing for more control over when your app syncs its records. For example, you may want to sync at a specific time of day, or deterministically simulate certain conditions in your unit tests. The default value is <doc://com.apple.documentation/documentation/swift/true>.
+// A Boolean value that determines whether the engine syncs automatically.
 //
 // WithAutomaticallySync sets the automaticallySync property and returns the receiver for chaining.
 func (x *SyncEngineConfiguration) WithAutomaticallySync(automaticallySync bool) *SyncEngineConfiguration {
@@ -72,7 +74,7 @@ func (x *SyncEngineConfiguration) WithAutomaticallySync(automaticallySync bool) 
 	return x
 }
 
-// The subscription identifier for the associated database. By default, a sync engine attempts to discover an existing subscription for the synced database. If one isn't found, the engine creates an internal “CKDatabaseSubscription“ and uses that to receive notifications about remote record changes. If you require the sync engine to use a specific database subscription, assign that subscription's identifier to this property. Doing so enables your app to be backwards compatible if you're migrating to “CKSyncEngine-4b4w9“ from a custom CloudKit sync implementation. The default value is `nil`.
+// The subscription identifier for the associated database.
 //
 // WithSubscriptionID sets the subscriptionID property and returns the receiver for chaining.
 func (x *SyncEngineConfiguration) WithSubscriptionID(subscriptionID *foundation.NSString) *SyncEngineConfiguration {

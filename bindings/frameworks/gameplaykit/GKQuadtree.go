@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A tree data structure where each level has 4 children that subdivide a given space into the four quadrants. Stores arbitrary NSObject data via points and quads.
+// A data structure for organizing objects based on their locations in a two-dimensional space.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkquadtree
 type GKQuadtree[ElementType purego.AnyObject] struct {
@@ -41,7 +41,7 @@ func GKQuadtreeFromID[ElementType purego.AnyObject](id objc.ID) *GKQuadtree[Elem
 	return o
 }
 
-// Creates a quadtree with a bounding quad and minimum allowed cell size @param quad the quad that specifies of the bounds of this quadtree. Elements must only be within these bounds. @param minCellSize the minimum allowed cell size.  The quadtree will not create quadrants that have a width or height smaller than this size.
+// Creates a quadtree with the specified dimensions.
 func GKQuadtreeQuadtreeWithBoundingQuadMinimumCellSize(quad GKQuad, minCellSize float32) *GKQuadtree[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKQuadtree), _gKQuadtreeSelQuadtreeWithBoundingQuadMinimumCellSize, quad, minCellSize)
 	if _ret != 0 {
@@ -50,6 +50,7 @@ func GKQuadtreeQuadtreeWithBoundingQuadMinimumCellSize(quad GKQuad, minCellSize 
 	return GKQuadtreeFromID[objc.ID](_ret)
 }
 
+// Initializes a quadtree with the specified dimensions.
 func (o *GKQuadtree[ElementType]) InitWithBoundingQuadMinimumCellSize(quad GKQuad, minCellSize float32) *GKQuadtree[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKQuadtreeSelInitWithBoundingQuadMinimumCellSize, quad, minCellSize)
 	if _ret != 0 {
@@ -58,7 +59,7 @@ func (o *GKQuadtree[ElementType]) InitWithBoundingQuadMinimumCellSize(quad GKQua
 	return GKQuadtreeFromID[ElementType](_ret)
 }
 
-// Adds an NSObject to this quadtree with a given point. This data will always reside in the leaf node its point is in. @param element the element to store @param point the point associated with the element you want to store @return the quadtree node the element was added to
+// Adds an object to the tree corresponding to the specified point in 2D space.
 func (o *GKQuadtree[ElementType]) AddElementWithPoint(element ElementType, point unsafe.Pointer) *GKQuadtreeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKQuadtreeSelAddElementWithPoint, element, point)
 	if _ret != 0 {
@@ -67,7 +68,7 @@ func (o *GKQuadtree[ElementType]) AddElementWithPoint(element ElementType, point
 	return GKQuadtreeNodeFromID(_ret)
 }
 
-// Adds an NSObject to this quadtree with a given quad. This data will reside in the lowest node that its quad fits in completely. @param element the element to store @param quad the quad associated with the element you want to store @return the quad tree node the element was added to
+// Adds an object to the tree corresponding to the specified region of 2D space.
 func (o *GKQuadtree[ElementType]) AddElementWithQuad(element ElementType, quad GKQuad) *GKQuadtreeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKQuadtreeSelAddElementWithQuad, element, quad)
 	if _ret != 0 {
@@ -76,7 +77,7 @@ func (o *GKQuadtree[ElementType]) AddElementWithQuad(element ElementType, quad G
 	return GKQuadtreeNodeFromID(_ret)
 }
 
-// Returns all of the elements in the quadtree node this point would be placed in @param point the point to query @return an NSArray of all the data found at the quad tree node this point would be placed in
+// Returns all objects whose corresponding locations overlap the specified point.
 func (o *GKQuadtree[ElementType]) ElementsAtPoint(point unsafe.Pointer) *foundation.NSArray[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKQuadtreeSelElementsAtPoint, point)
 	if _ret != 0 {
@@ -85,7 +86,7 @@ func (o *GKQuadtree[ElementType]) ElementsAtPoint(point unsafe.Pointer) *foundat
 	return foundation.NSArrayFromID[ElementType](_ret)
 }
 
-// Returns all of the elements that resides in quad tree nodes which intersect the given quad @param quad the quad you want to test @return an NSArray of all the elements in all of the nodes that intersect the given quad
+// Returns all objects whose corresponding locations overlap the specified region.
 func (o *GKQuadtree[ElementType]) ElementsInQuad(quad GKQuad) *foundation.NSArray[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKQuadtreeSelElementsInQuad, quad)
 	if _ret != 0 {
@@ -94,13 +95,13 @@ func (o *GKQuadtree[ElementType]) ElementsInQuad(quad GKQuad) *foundation.NSArra
 	return foundation.NSArrayFromID[ElementType](_ret)
 }
 
-// Removes the given NSObject from this quad tree. Note that this is an exhaustive search and is slow. Cache the relevant GKQuadTreeNode and use removeElement:WithNode: for better performance. @param element the data to be removed @return returns YES if the data was removed, NO otherwise
+// Searches for the specified object and removes it from the tree.
 func (o *GKQuadtree[ElementType]) RemoveElement(element ElementType) bool {
 	_ret := objc.Send[bool](o.Ptr(), _gKQuadtreeSelRemoveElement, element)
 	return _ret
 }
 
-// Removes the given NSObject from the given quadtree node Note that this is not an exhaustive search and is faster than removeData: @param data the data to be removed @param node the node in which this data resides @return returns YES if the data was removed, NO otherwise
+// Removes the specified object from the tree, using a reference to its containing node.
 func (o *GKQuadtree[ElementType]) RemoveElementWithNode(data ElementType, node *GKQuadtreeNode) bool {
 	_ret := objc.Send[bool](o.Ptr(), _gKQuadtreeSelRemoveElementWithNode, data, node.Ptr())
 	return _ret

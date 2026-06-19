@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A URL session task that communicates over the WebSockets protocol standard.
+//
 // URLSessionWebSocketTask wraps [raw.NSURLSessionWebSocketTask] with a fluent Go API.
 type URLSessionWebSocketTask struct {
 	inner *raw.NSURLSessionWebSocketTask
@@ -93,6 +95,8 @@ func (x *URLSessionWebSocketTask) WithScriptingProperties(scriptingProperties *r
 	return x
 }
 
+// Sends a WebSocket message, receiving the result in a completion handler.
+//
 // SendMessage blocks until the operation completes or ctx is cancelled.
 func (x *URLSessionWebSocketTask) SendMessage(ctx context.Context, message *raw.NSURLSessionWebSocketMessage) error {
 	_ch := make(chan error, 1)
@@ -111,6 +115,8 @@ func (x *URLSessionWebSocketTask) SendMessage(ctx context.Context, message *raw.
 	}
 }
 
+// Reads a WebSocket message once all the frames of the message are available.
+//
 // ReceiveMessage blocks until the operation completes or ctx is cancelled.
 func (x *URLSessionWebSocketTask) ReceiveMessage(ctx context.Context) (*URLSessionWebSocketMessage, error) {
 	type _result struct {

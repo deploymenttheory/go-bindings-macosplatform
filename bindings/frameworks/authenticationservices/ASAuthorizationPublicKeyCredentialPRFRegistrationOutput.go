@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type to represent outputs of the web authentication PRF extension, when requesting them during a registration.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfregistrationoutput
 type ASAuthorizationPublicKeyCredentialPRFRegistrationOutput struct {
 	foundation.NSObject

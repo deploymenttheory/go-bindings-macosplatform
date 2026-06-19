@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @brief NSAccessibilityCustomRotors allow assistive technologies, like VoiceOver, to search applications for content related to the given label.
+// A context-sensitive function that helps VoiceOver users find the next instance of a related accessibility element.
 //
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsaccessibilitycustomrotor
 type NSAccessibilityCustomRotor struct {
@@ -41,7 +41,7 @@ func NSAccessibilityCustomRotorFromID(id objc.ID) *NSAccessibilityCustomRotor {
 	return o
 }
 
-// @brief Convenience initializer that uses NSAccessibilityCustomRotorTypeCustom as the default rotor type. Use this initializer for custom rotors that are not one of the common types.
+// Creates a custom rotor with the specified label and item search delegate.
 func (o *NSAccessibilityCustomRotor) InitWithLabelItemSearchDelegate(label *foundation.NSString, itemSearchDelegate NSAccessibilityCustomRotorItemSearchDelegate) *NSAccessibilityCustomRotor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAccessibilityCustomRotorSelInitWithLabelItemSearchDelegate, label.Ptr(), itemSearchDelegate)
 	if _ret != 0 {
@@ -50,7 +50,7 @@ func (o *NSAccessibilityCustomRotor) InitWithLabelItemSearchDelegate(label *foun
 	return NSAccessibilityCustomRotorFromID(_ret)
 }
 
-// @brief Convenience initializer for custom rotors that use a common type such as links, headings, etc. A default label will be provided.
+// Creates a custom rotor with the specified rotor type and item search delegate.
 func (o *NSAccessibilityCustomRotor) InitWithRotorTypeItemSearchDelegate(rotorType NSAccessibilityCustomRotorType, itemSearchDelegate NSAccessibilityCustomRotorItemSearchDelegate) *NSAccessibilityCustomRotor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAccessibilityCustomRotorSelInitWithRotorTypeItemSearchDelegate, rotorType, itemSearchDelegate)
 	if _ret != 0 {

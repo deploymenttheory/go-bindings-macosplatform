@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a function object to create.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlfunctiondescriptor
 type MTLFunctionDescriptor struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func MTLFunctionDescriptorFromID(id objc.ID) *MTLFunctionDescriptor {
 	return o
 }
 
-// @method functionDescriptor @abstract Create an autoreleased function descriptor
+// Creates a default function descriptor.
 func MTLFunctionDescriptorFunctionDescriptor() *MTLFunctionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLFunctionDescriptor), _mTLFunctionDescriptorSelFunctionDescriptor)
 	if _ret != 0 {

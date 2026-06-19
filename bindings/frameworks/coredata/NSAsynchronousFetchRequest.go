@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A fetch request that retrieves results asynchronously and supports progress notification.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsasynchronousfetchrequest
 type NSAsynchronousFetchRequest[ResultType purego.AnyObject] struct {
 	NSPersistentStoreRequest
@@ -33,6 +35,7 @@ func NSAsynchronousFetchRequestFromID[ResultType purego.AnyObject](id objc.ID) *
 	return o
 }
 
+// Initializes a new asynchronous fetch request configured with the provided fetch request and completion block.
 func (o *NSAsynchronousFetchRequest[ResultType]) InitWithFetchRequestCompletionBlock(request *NSFetchRequest[ResultType], blk func(*NSAsynchronousFetchResult[ResultType])) *NSAsynchronousFetchRequest[ResultType] {
 	var __block_blk objc.Block
 	if blk != nil {

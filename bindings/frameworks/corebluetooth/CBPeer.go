@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a remote device.
+//
 // Apple documentation: https://developer.apple.com/documentation/corebluetooth/cbpeer
 type CBPeer struct {
 	foundation.NSObject

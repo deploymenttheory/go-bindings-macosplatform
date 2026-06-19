@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The horizon angle information that an image-analysis request detects.
+//
 // HorizonObservation wraps [raw.VNHorizonObservation] with a fluent Go API.
 type HorizonObservation struct {
 	inner *raw.VNHorizonObservation
@@ -36,7 +38,7 @@ func NewHorizonObservation() *HorizonObservation {
 	return &HorizonObservation{inner: raw.VNHorizonObservationFromID(_id)}
 }
 
-// @brief Creates a transform for the specified width and height.
+// Creates an affine transform for the specified image width and height.
 //
 // TransformForImageWidthHeight calls the underlying TransformForImageWidthHeight.
 func (x *HorizonObservation) TransformForImageWidthHeight(width uint, height uint) corefoundation.CGAffineTransform {

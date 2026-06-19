@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object to create and manage a Personal VPN configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nevpnmanager
 type NEVPNManager struct {
 	foundation.NSObject
@@ -49,7 +51,7 @@ func NEVPNManagerFromID(id objc.ID) *NEVPNManager {
 	return o
 }
 
-// @method sharedManager @return The singleton NEVPNManager object for the calling process.
+// Access the single instance of NEVPNManager.
 func NEVPNManagerSharedManager() *NEVPNManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEVPNManager), _nEVPNManagerSelSharedManager)
 	if _ret != 0 {
@@ -58,7 +60,7 @@ func NEVPNManagerSharedManager() *NEVPNManager {
 	return NEVPNManagerFromID(_ret)
 }
 
-// @method loadFromPreferencesWithCompletionHandler: @discussion This function loads the current VPN configuration from the caller's VPN preferences. @param completionHandler A block that will be called on the main thread when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+// Load the VPN configuration from the Network Extension preferences.
 func (o *NEVPNManager) LoadFromPreferencesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -70,7 +72,7 @@ func (o *NEVPNManager) LoadFromPreferencesWithCompletionHandler(completionHandle
 	o.Ptr().Send(_nEVPNManagerSelLoadFromPreferencesWithCompletionHandler, __block_completionHandler)
 }
 
-// @method removeFromPreferencesWithCompletionHandler: @discussion This function removes the VPN configuration from the caller's VPN preferences. If the VPN is enabled, has VPN On Demand enabled, and has VPN On Demand rules, the VPN is disabled and the VPN On Demand rules are de-activated. @param completionHandler A block that will be called on the main thread when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
+// Remove the VPN configuration from the Network Extension preferences.
 func (o *NEVPNManager) RemoveFromPreferencesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -82,7 +84,7 @@ func (o *NEVPNManager) RemoveFromPreferencesWithCompletionHandler(completionHand
 	o.Ptr().Send(_nEVPNManagerSelRemoveFromPreferencesWithCompletionHandler, __block_completionHandler)
 }
 
-// @method saveToPreferencesWithCompletionHandler: @discussion This function saves the VPN configuration in the caller's VPN preferences. If the VPN is enabled, has VPN On Demand enabled, and has VPN On Demand rules, the VPN On Demand rules are activated. @param completionHandler A block that will be called on the main thread when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
+// Save the VPN configuration in the Network Extension preferences.
 func (o *NEVPNManager) SaveToPreferencesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that contains metadata indicating the specific product instance to provision.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkjapanindividualnumbercardmetadata
 type PKJapanIndividualNumberCardMetadata struct {
 	PKIdentityDocumentMetadata
@@ -37,7 +39,7 @@ func PKJapanIndividualNumberCardMetadataFromID(id objc.ID) *PKJapanIndividualNum
 	return o
 }
 
-// Initialize with parameters configured by issuer's server to indicate the specific product instance to provision. - Properties: - provisioningCredentialIdentifier: Identifies this user's instance for provisioning. - sharingInstanceIdentifier: A short lived token to prevent replay-ability. - cardTemplateIdentifier: An identifier for a legacy product on our Apple Pay servers. - preview: Object containing information to represent the pass to provision in our UI.
+// Creates the product instance to provision.
 func (o *PKJapanIndividualNumberCardMetadata) InitWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierPreview(credentialIdentifier *foundation.NSString, sharingInstanceIdentifier *foundation.NSString, templateIdentifier *foundation.NSString, preview *PKAddPassMetadataPreview) *PKJapanIndividualNumberCardMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKJapanIndividualNumberCardMetadataSelInitWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierPreview, credentialIdentifier.Ptr(), sharingInstanceIdentifier.Ptr(), templateIdentifier.Ptr(), preview.Ptr())
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func (o *PKJapanIndividualNumberCardMetadata) InitWithProvisioningCredentialIden
 	return PKJapanIndividualNumberCardMetadataFromID(_ret)
 }
 
-// Initialize with parameters configured by issuer's server to indicate the specific product instance to provision. - Properties: - provisioningCredentialIdentifier: Identifies this user's instance for provisioning. - sharingInstanceIdentifier: A short lived token to prevent replay-ability. - cardConfigurationIdentifier: An identifier for a product on our Apple Pay servers. - preview: Object containing information to represent the pass to provision in our UI.
+// Initializes the user instance for provisioning.
 func (o *PKJapanIndividualNumberCardMetadata) InitWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardConfigurationIdentifierPreview(credentialIdentifier *foundation.NSString, sharingInstanceIdentifier *foundation.NSString, cardConfigurationIdentifier *foundation.NSString, preview *PKAddPassMetadataPreview) *PKJapanIndividualNumberCardMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKJapanIndividualNumberCardMetadataSelInitWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardConfigurationIdentifierPreview, credentialIdentifier.Ptr(), sharingInstanceIdentifier.Ptr(), cardConfigurationIdentifier.Ptr(), preview.Ptr())
 	if _ret != 0 {

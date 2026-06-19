@@ -15,7 +15,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A texture to be mapped onto SKSpriteNode instances.
+// An image, decoded on the GPU, that can be used to render various SpriteKit objects.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/sktexture
 type SKTexture struct {
@@ -163,25 +163,25 @@ func (o *SKTexture) TextureByGeneratingNormalMapWithSmoothnessContrast(smoothnes
 	return SKTextureFromID(_ret)
 }
 
-// Used to choose the area of the texture you want to display. The origin and size should both be in the range 0.0 - 1.0, values outside of this range produces unpredictable results. Defaults to the entire texture {(0,0) (1,1)}.
+// Gets a rectangle that defines the portion of the texture used to render its image.
 func (o *SKTexture) TextureRect() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _sKTextureSelTextureRect)
 	return _ret
 }
 
-// The size of the texture's bitmap data in points.
+// Gets the size of the texture.
 func (o *SKTexture) Size() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _sKTextureSelSize)
 	return _ret
 }
 
-// Convert the current SKTexture into a CGImageRef object
+// Returns the texture’s image data as a Quartz 2D image.
 func (o *SKTexture) CGImage() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKTextureSelCGImage)
 	return _ret
 }
 
-// Start a texture preload operation on an array of textures @param textures an array of SKTextures to be preloaded @param completionHandler will be called upon the preload completion
+// Load the data of multiple textures into memory.
 func SKTexturePreloadTexturesWithCompletionHandler(textures *foundation.NSArray[*SKTexture], completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -193,7 +193,7 @@ func SKTexturePreloadTexturesWithCompletionHandler(textures *foundation.NSArray[
 	objc.ID(_clsSKTexture).Send(_sKTextureSelPreloadTexturesWithCompletionHandler, textures.Ptr(), __block_completionHandler)
 }
 
-// Request that this texture be loaded into vram on the next render update, with a callback handler.
+// Load texture data into memory, calling a completion handler after the task completes.
 func (o *SKTexture) PreloadWithCompletionHandler(completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A data object that contains a single rotation-rate measurement.
+//
 // RotationRateData wraps [raw.CMRotationRateData] with a fluent Go API.
 type RotationRateData struct {
 	inner *raw.CMRotationRateData

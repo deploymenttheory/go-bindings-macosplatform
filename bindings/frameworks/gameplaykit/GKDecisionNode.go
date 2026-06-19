@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A node for use in manually creating decision trees, representing a specific question and possible answers, or an action that follows from answering other questions.
+//
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkdecisionnode
 type GKDecisionNode struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func GKDecisionNodeFromID(id objc.ID) *GKDecisionNode {
 	return o
 }
 
-// Creates a numeric branch to a node containing the specified attribute @param value The value to create a branch with @param attribute The attribute of the created node @return The node lead to by the branch
+// Creates a child node that the decision tree should use when the current node’s attribute has the specified value.
 func (o *GKDecisionNode) CreateBranchWithValueAttribute(value *foundation.NSNumber, attribute foundation.NSObjectProtocol) *GKDecisionNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKDecisionNodeSelCreateBranchWithValueAttribute, value.Ptr(), attribute)
 	if _ret != 0 {
@@ -41,7 +43,7 @@ func (o *GKDecisionNode) CreateBranchWithValueAttribute(value *foundation.NSNumb
 	return GKDecisionNodeFromID(_ret)
 }
 
-// Creates a predicated branch to a node containing the specified attribute @param predicate The predicate to create a branch with @param attribute The attribute of the created node @return The node lead to by the branch
+// Creates a child node that the decision tree should use when the current node’s attribute satisfies the specified predicate.
 func (o *GKDecisionNode) CreateBranchWithPredicateAttribute(predicate *foundation.NSPredicate, attribute foundation.NSObjectProtocol) *GKDecisionNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKDecisionNodeSelCreateBranchWithPredicateAttribute, predicate.Ptr(), attribute)
 	if _ret != 0 {
@@ -50,7 +52,7 @@ func (o *GKDecisionNode) CreateBranchWithPredicateAttribute(predicate *foundatio
 	return GKDecisionNodeFromID(_ret)
 }
 
-// Creates a random branch to a node containing the specified attribute @param weight The weight to create a branch with (weighted for random selection) @param attribute The attribute of the created node @return The node lead to by the branch @see GKDecisionTree
+// Creates a child node that the decision tree should use as the result of a random choice, biased by the specified weight.
 func (o *GKDecisionNode) CreateBranchWithWeightAttribute(weight int, attribute foundation.NSObjectProtocol) *GKDecisionNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKDecisionNodeSelCreateBranchWithWeightAttribute, weight, attribute)
 	if _ret != 0 {

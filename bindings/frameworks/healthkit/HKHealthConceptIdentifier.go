@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A unique identifier for a specific health concept within a domain.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkhealthconceptidentifier
 type HKHealthConceptIdentifier struct {
 	foundation.NSObject

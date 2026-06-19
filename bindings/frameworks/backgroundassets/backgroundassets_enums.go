@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// The status of an asset pack.
 type BAAssetPackStatus uint64
 
 const (
@@ -17,9 +18,9 @@ const (
 	BAAssetPackStatusUpdateAvailable BAAssetPackStatus = 2
 	// A status value that indicates that the downloaded asset pack is up to date.
 	BAAssetPackStatusUpToDate BAAssetPackStatus = 4
-	// A status value that indicates that the downloaded asset pack is out of date. The presence of this status value doesn’t necessarily imply that an update to the asset pack can be downloaded over the current network connection. Check for the presence of ``BAAssetPackStatus/BAAssetPackStatusUpdateAvailable`` to determine whether an update can currently be downloaded.
+	// A status value that indicates that the downloaded asset pack is out of date.
 	BAAssetPackStatusOutOfDate BAAssetPackStatus = 8
-	// A status value that indicates that the asset pack is no longer available to download. Obsolete asset packs can’t be updated, and they also can’t be redownloaded once removed.
+	// A status value that indicates that the asset pack is no longer available to download.
 	BAAssetPackStatusObsolete BAAssetPackStatus = 16
 	// A status value that indicates that the system is currently downloading the asset pack.
 	BAAssetPackStatusDownloading BAAssetPackStatus = 32
@@ -56,11 +57,15 @@ func (e BAAssetPackStatus) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The content request type used in the downloader extension.
 type BAContentRequest int64
 
 const (
-	BAContentRequestInstall  BAContentRequest = 1
-	BAContentRequestUpdate   BAContentRequest = 2
+	// A content request resulting from the installation of the app.
+	BAContentRequestInstall BAContentRequest = 1
+	// A content request resulting from an update of the app.
+	BAContentRequestUpdate BAContentRequest = 2
+	// A content request resulting from a system request for updated content within the app.
 	BAContentRequestPeriodic BAContentRequest = 3
 )
 
@@ -77,6 +82,7 @@ func (e BAContentRequest) String() string {
 	}
 }
 
+// Constants that indicate the state of a download.
 type BADownloadState int64
 
 const (
@@ -167,12 +173,13 @@ func (e BAErrorCode) String() string {
 	}
 }
 
+// An error code for a managed asset pack.
 type BAManagedErrorCode int64
 
 const (
-	// An error code that indicates the system can’t find an asset pack with the given identifier. Refer to the value in `-[NSError userInfo]` for the key `BAAssetPackIdentifierErrorKey` for the asset pack’s identifier.
+	// An error code that indicates the system couldn’t find an asset pack with the given identifier.
 	BAManagedErrorCodeAssetPackNotFound BAManagedErrorCode = 0
-	// An error code that indicates the system can’t find a file at the specified path. Refer to the value in `-[NSError userInfo]` for the key `NSFilePathErrorKey` for the file path.
+	// An error code that indicates the system couldn’t find a file at the specified path.
 	BAManagedErrorCodeFileNotFound BAManagedErrorCode = 1
 )
 

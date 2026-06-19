@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that identifies samples that group multiple subsamples.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkcorrelationtype
 type HKCorrelationType struct {
 	HKSampleType

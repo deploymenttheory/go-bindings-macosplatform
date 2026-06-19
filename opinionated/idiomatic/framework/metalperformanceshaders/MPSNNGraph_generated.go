@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An optimized representation of a graph of neural network image and filter nodes.
+//
 // NNGraph wraps [raw.MPSNNGraph] with a fluent Go API.
 type NNGraph struct {
 	inner *raw.MPSNNGraph
@@ -90,7 +92,7 @@ func (x *NNGraph) WithFormat(format mpscore.MPSImageFeatureChannelFormat) *NNGra
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NNGraph) WithOptions(options mpscore.MPSKernelOptions) *NNGraph {
@@ -98,7 +100,7 @@ func (x *NNGraph) WithOptions(options mpscore.MPSKernelOptions) *NNGraph {
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NNGraph) WithLabel(label string) *NNGraph {

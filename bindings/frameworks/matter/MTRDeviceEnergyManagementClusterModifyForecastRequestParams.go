@@ -52,12 +52,15 @@ func (o *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetForecas
 }
 
 func (o *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SlotAdjustments() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRDeviceEnergyManagementClusterModifyForecastRequestParamsSelSlotAdjustments)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterModifyForecastRequestParamsSelSlotAdjustments)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetSlotAdjustments(slotAdjustments *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRDeviceEnergyManagementClusterModifyForecastRequestParamsSelSetSlotAdjustments, slotAdjustments)
+	o.Ptr().Send(_mTRDeviceEnergyManagementClusterModifyForecastRequestParamsSelSetSlotAdjustments, slotAdjustments.Ptr())
 }
 
 func (o *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) Cause() *foundation.NSNumber {

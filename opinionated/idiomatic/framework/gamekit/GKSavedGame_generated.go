@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a file containing saved game data.
+//
 // SavedGame wraps [raw.GKSavedGame] with a fluent Go API.
 type SavedGame struct {
 	inner *raw.GKSavedGame
@@ -39,7 +41,7 @@ func NewSavedGame() *SavedGame {
 	return &SavedGame{inner: raw.GKSavedGameFromID(_id)}
 }
 
-// Asynchronously load the data for this saved game. The completion handler is called with loaded data or an error.
+// Loads the game data from the file.
 //
 // LoadData blocks until the operation completes or ctx is cancelled.
 func (x *SavedGame) LoadData(ctx context.Context) (*foundation.NSData, error) {

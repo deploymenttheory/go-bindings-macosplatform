@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of an attribute that derives its value by performing a calculation on a related attribute.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsderivedattributedescription
 type NSDerivedAttributeDescription struct {
 	NSAttributeDescription

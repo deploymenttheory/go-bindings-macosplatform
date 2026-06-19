@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller profile that supports a racing wheel.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcracingwheelinput
 type GCRacingWheelInput struct {
 	GCRacingWheelInputState
@@ -30,7 +32,7 @@ func GCRacingWheelInputFromID(id objc.ID) *GCRacingWheelInput {
 	return o
 }
 
-// Polls the current state vector of the racing wheel input and saves it to a new instance.
+// Returns a snapshot of the racing wheel inputs.
 func (o *GCRacingWheelInput) Capture() *GCRacingWheelInputState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCRacingWheelInputSelCapture)
 	if _ret != 0 {
@@ -39,6 +41,7 @@ func (o *GCRacingWheelInput) Capture() *GCRacingWheelInputState {
 	return GCRacingWheelInputStateFromID(_ret)
 }
 
+// Returns the next input state of the racing wheel from the queue.
 func (o *GCRacingWheelInput) NextInputState() *GCRacingWheelInputState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCRacingWheelInputSelNextInputState)
 	if _ret != 0 {

@@ -1,0 +1,2499 @@
+{
+  "schema_version": 1,
+  "framework": "MetalPerformanceShaders",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "MPSAccelerationStructure": {
+      "doc": "The base class for data structures that are built over geometry and used to accelerate ray tracing.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsaccelerationstructure"
+    },
+    "MPSAccelerationStructureGroup": {
+      "doc": "A group of acceleration structures.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsaccelerationstructuregroup"
+    },
+    "MPSBinaryImageKernel": {
+      "doc": "A kernel that consumes two textures and produces one texture.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsbinaryimagekernel"
+    },
+    "MPSCNNAdd": {
+      "doc": "An addition operator.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnadd"
+    },
+    "MPSCNNAddGradient": {
+      "doc": "A gradient addition operator.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnaddgradient"
+    },
+    "MPSCNNArithmetic": {
+      "doc": "The base class for arithmetic operators.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnarithmetic"
+    },
+    "MPSCNNArithmeticGradient": {
+      "doc": "The base class for gradient arithmetic operators.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnarithmeticgradient"
+    },
+    "MPSCNNArithmeticGradientState": {
+      "doc": "An object that stores the clamp mask used by gradient arithmetic operators.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnarithmeticgradientstate"
+    },
+    "MPSCNNBatchNormalization": {
+      "doc": "A batch normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbatchnormalization"
+    },
+    "MPSCNNBatchNormalizationGradient": {
+      "doc": "A gradient batch normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbatchnormalizationgradient"
+    },
+    "MPSCNNBatchNormalizationGradientNode": {
+      "doc": "A representation of a gradient batch normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbatchnormalizationgradientnode"
+    },
+    "MPSCNNBatchNormalizationNode": {
+      "doc": "A representation of a batch normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbatchnormalizationnode"
+    },
+    "MPSCNNBatchNormalizationState": {
+      "doc": "An object that stores data required to execute batch normalization.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbatchnormalizationstate"
+    },
+    "MPSCNNBatchNormalizationStatistics": {
+      "doc": "An object that stores statistics required to execute batch normalization.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbatchnormalizationstatistics"
+    },
+    "MPSCNNBatchNormalizationStatisticsGradient": {
+      "doc": "An object that stores the gradient of the loss function with respect to the batch statistics and batch normalization weights.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbatchnormalizationstatisticsgradient"
+    },
+    "MPSCNNBinaryConvolution": {
+      "doc": "A convolution kernel with binary weights and an input image using binary approximations.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbinaryconvolution"
+    },
+    "MPSCNNBinaryConvolutionNode": {
+      "doc": "A representation of a convolution kernel with binary weights and an input image using binary approximations.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbinaryconvolutionnode"
+    },
+    "MPSCNNBinaryFullyConnected": {
+      "doc": "A fully connected convolution layer with binary weights and optionally binarized input image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbinaryfullyconnected"
+    },
+    "MPSCNNBinaryFullyConnectedNode": {
+      "doc": "A representation of a fully connected convolution layer with binary weights and optionally binarized input image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbinaryfullyconnectednode"
+    },
+    "MPSCNNBinaryKernel": {
+      "doc": "A convolution neural network kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbinarykernel"
+    },
+    "MPSCNNConvolution": {
+      "doc": "A convolution kernel that convolves the input image with a set of filters, with each producing one feature map in the output image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolution"
+    },
+    "MPSCNNConvolutionDescriptor": {
+      "doc": "A description of the attributes of a convolution kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiondescriptor"
+    },
+    "MPSCNNConvolutionGradient": {
+      "doc": "A gradient convolution kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiongradient"
+    },
+    "MPSCNNConvolutionGradientNode": {
+      "doc": "A representation of a gradient convolution kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiongradientnode"
+    },
+    "MPSCNNConvolutionGradientState": {
+      "doc": "An object that exposes a gradient convolution kernel’s gradient with respect to weights and biases.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiongradientstate"
+    },
+    "MPSCNNConvolutionGradientStateNode": {
+      "doc": "A representation of a gradient convolution state.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiongradientstatenode"
+    },
+    "MPSCNNConvolutionNode": {
+      "doc": "A representation of a convolution kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutionnode"
+    },
+    "MPSCNNConvolutionTranspose": {
+      "doc": "A transposed convolution kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiontranspose"
+    },
+    "MPSCNNConvolutionTransposeGradient": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiontransposegradient"
+    },
+    "MPSCNNConvolutionTransposeGradientNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiontransposegradientnode"
+    },
+    "MPSCNNConvolutionTransposeGradientState": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiontransposegradientstate"
+    },
+    "MPSCNNConvolutionTransposeGradientStateNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiontransposegradientstatenode"
+    },
+    "MPSCNNConvolutionTransposeNode": {
+      "doc": "A representation of a transposed convolution.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiontransposenode"
+    },
+    "MPSCNNConvolutionWeightsAndBiasesState": {
+      "doc": "A class that stores weights and biases.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutionweightsandbiasesstate"
+    },
+    "MPSCNNCrossChannelNormalization": {
+      "doc": "A normalization kernel applied across feature channels.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnncrosschannelnormalization"
+    },
+    "MPSCNNCrossChannelNormalizationGradient": {
+      "doc": "A gradient normalization kernel applied across feature channels.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnncrosschannelnormalizationgradient"
+    },
+    "MPSCNNCrossChannelNormalizationGradientNode": {
+      "doc": "A representation of a gradient normalization kernel applied across feature channels.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnncrosschannelnormalizationgradientnode"
+    },
+    "MPSCNNCrossChannelNormalizationNode": {
+      "doc": "A representation of a normalization kernel across feature channels.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnncrosschannelnormalizationnode"
+    },
+    "MPSCNNDepthWiseConvolutionDescriptor": {
+      "doc": "A description of a convolution object that does depthwise convolution.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnndepthwiseconvolutiondescriptor"
+    },
+    "MPSCNNDilatedPoolingMax": {
+      "doc": "A dilated max pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnndilatedpoolingmax"
+    },
+    "MPSCNNDilatedPoolingMaxGradient": {
+      "doc": "A gradient dilated max pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnndilatedpoolingmaxgradient"
+    },
+    "MPSCNNDilatedPoolingMaxGradientNode": {
+      "doc": "A representation of a gradient dilated max pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnndilatedpoolingmaxgradientnode"
+    },
+    "MPSCNNDilatedPoolingMaxNode": {
+      "doc": "A representation of a dilated max pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnndilatedpoolingmaxnode"
+    },
+    "MPSCNNDivide": {
+      "doc": "A division operator.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnndivide"
+    },
+    "MPSCNNDropout": {
+      "doc": "A dropout filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnndropout"
+    },
+    "MPSCNNDropoutGradient": {
+      "doc": "A gradient dropout filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnndropoutgradient"
+    },
+    "MPSCNNDropoutGradientNode": {
+      "doc": "A representation of a gradient dropout filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnndropoutgradientnode"
+    },
+    "MPSCNNDropoutGradientState": {
+      "doc": "A class that stores the mask used by dropout and gradient dropout filters.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnndropoutgradientstate"
+    },
+    "MPSCNNDropoutNode": {
+      "doc": "A representation of a dropout filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnndropoutnode"
+    },
+    "MPSCNNFullyConnected": {
+      "doc": "A fully connected convolution layer, also known as an inner product layer.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnfullyconnected"
+    },
+    "MPSCNNFullyConnectedGradient": {
+      "doc": "A gradient fully connected convolution layer.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnfullyconnectedgradient"
+    },
+    "MPSCNNFullyConnectedGradientNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnfullyconnectedgradientnode"
+    },
+    "MPSCNNFullyConnectedNode": {
+      "doc": "A representation of a fully connected convolution layer, also known as an inner product layer.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnfullyconnectednode"
+    },
+    "MPSCNNGradientKernel": {
+      "doc": "The base class for gradient layers.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnngradientkernel"
+    },
+    "MPSCNNGroupNormalization": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnngroupnormalization"
+    },
+    "MPSCNNGroupNormalizationGradient": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnngroupnormalizationgradient"
+    },
+    "MPSCNNGroupNormalizationGradientNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnngroupnormalizationgradientnode"
+    },
+    "MPSCNNGroupNormalizationGradientState": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnngroupnormalizationgradientstate"
+    },
+    "MPSCNNGroupNormalizationNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnngroupnormalizationnode"
+    },
+    "MPSCNNInstanceNormalization": {
+      "doc": "An instance normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnninstancenormalization"
+    },
+    "MPSCNNInstanceNormalizationGradient": {
+      "doc": "A gradient instance normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnninstancenormalizationgradient"
+    },
+    "MPSCNNInstanceNormalizationGradientNode": {
+      "doc": "A representation of a gradient instance normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnninstancenormalizationgradientnode"
+    },
+    "MPSCNNInstanceNormalizationGradientState": {
+      "doc": "An object that stores information required to execute a gradient pass for instance normalization.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnninstancenormalizationgradientstate"
+    },
+    "MPSCNNInstanceNormalizationNode": {
+      "doc": "A representation of an instance normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnninstancenormalizationnode"
+    },
+    "MPSCNNKernel": {
+      "doc": "Base class for neural network layers.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnkernel"
+    },
+    "MPSCNNLocalContrastNormalization": {
+      "doc": "A local-contrast normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlocalcontrastnormalization"
+    },
+    "MPSCNNLocalContrastNormalizationGradient": {
+      "doc": "A gradient local-contrast normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlocalcontrastnormalizationgradient"
+    },
+    "MPSCNNLocalContrastNormalizationGradientNode": {
+      "doc": "A representation of a gradient local-contrast normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlocalcontrastnormalizationgradientnode"
+    },
+    "MPSCNNLocalContrastNormalizationNode": {
+      "doc": "A representation of a local-contrast normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlocalcontrastnormalizationnode"
+    },
+    "MPSCNNLogSoftMax": {
+      "doc": "A neural transfer function that is useful for constructing a loss function to be minimized when training neural networks.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlogsoftmax"
+    },
+    "MPSCNNLogSoftMaxGradient": {
+      "doc": "A gradient logarithmic softmax filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlogsoftmaxgradient"
+    },
+    "MPSCNNLogSoftMaxGradientNode": {
+      "doc": "A representation of a gradient logarithmic softmax filter kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlogsoftmaxgradientnode"
+    },
+    "MPSCNNLogSoftMaxNode": {
+      "doc": "A representation of a logarithmic softmax filter kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlogsoftmaxnode"
+    },
+    "MPSCNNLoss": {
+      "doc": "A kernel that computes the loss and loss gradient between specified predictions and labels.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnloss"
+    },
+    "MPSCNNLossDataDescriptor": {
+      "doc": "An object that specifies properties used by a loss data descriptor.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlossdatadescriptor"
+    },
+    "MPSCNNLossDescriptor": {
+      "doc": "An object that specifies properties used by a loss kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlossdescriptor"
+    },
+    "MPSCNNLossLabels": {
+      "doc": "A class that stores the per-element weight buffer used by loss and gradient loss kernels.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlosslabels"
+    },
+    "MPSCNNLossNode": {
+      "doc": "A representation of a loss kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlossnode"
+    },
+    "MPSCNNMultiaryKernel": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnmultiarykernel"
+    },
+    "MPSCNNMultiply": {
+      "doc": "A multiply operator.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnmultiply"
+    },
+    "MPSCNNMultiplyGradient": {
+      "doc": "A gradient multiply operator.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnmultiplygradient"
+    },
+    "MPSCNNNeuron": {
+      "doc": "A filter that applies a neuron activation function.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuron"
+    },
+    "MPSCNNNeuronAbsolute": {
+      "doc": "An absolute neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronabsolute"
+    },
+    "MPSCNNNeuronAbsoluteNode": {
+      "doc": "A representation of an absolute neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronabsolutenode"
+    },
+    "MPSCNNNeuronELU": {
+      "doc": "A parametric ELU neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronelu"
+    },
+    "MPSCNNNeuronELUNode": {
+      "doc": "A representation of a parametric ELU neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronelunode"
+    },
+    "MPSCNNNeuronExponential": {
+      "doc": "An exponential neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronexponential"
+    },
+    "MPSCNNNeuronExponentialNode": {
+      "doc": "A representation of an exponential neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronexponentialnode"
+    },
+    "MPSCNNNeuronGeLUNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneurongelunode"
+    },
+    "MPSCNNNeuronGradient": {
+      "doc": "A gradient neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneurongradient"
+    },
+    "MPSCNNNeuronGradientNode": {
+      "doc": "A representation of a gradient exponential neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneurongradientnode"
+    },
+    "MPSCNNNeuronHardSigmoid": {
+      "doc": "A hard sigmoid neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronhardsigmoid"
+    },
+    "MPSCNNNeuronHardSigmoidNode": {
+      "doc": "A representation of a hard sigmoid neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronhardsigmoidnode"
+    },
+    "MPSCNNNeuronLinear": {
+      "doc": "A linear neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronlinear"
+    },
+    "MPSCNNNeuronLinearNode": {
+      "doc": "A representation of a linear neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronlinearnode"
+    },
+    "MPSCNNNeuronLogarithm": {
+      "doc": "A logarithm neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronlogarithm"
+    },
+    "MPSCNNNeuronLogarithmNode": {
+      "doc": "A representation of a logarithm neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronlogarithmnode"
+    },
+    "MPSCNNNeuronNode": {
+      "doc": "The virtual base class for MPS CNN neuron nodes.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronnode"
+    },
+    "MPSCNNNeuronPReLU": {
+      "doc": "A parametric ReLU (Rectified Linear Unit) neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronprelu"
+    },
+    "MPSCNNNeuronPReLUNode": {
+      "doc": "A representation a PReLU neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronprelunode"
+    },
+    "MPSCNNNeuronPower": {
+      "doc": "A power neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronpower"
+    },
+    "MPSCNNNeuronPowerNode": {
+      "doc": "A representation of a power neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronpowernode"
+    },
+    "MPSCNNNeuronReLU": {
+      "doc": "A ReLU (Rectified Linear Unit) neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronrelu"
+    },
+    "MPSCNNNeuronReLUN": {
+      "doc": "A ReLUN neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronrelun"
+    },
+    "MPSCNNNeuronReLUNNode": {
+      "doc": "A representation a ReLUN neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronrelunnode"
+    },
+    "MPSCNNNeuronReLUNode": {
+      "doc": "A representation a ReLU neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronrelunode"
+    },
+    "MPSCNNNeuronSigmoid": {
+      "doc": "A sigmoid neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronsigmoid"
+    },
+    "MPSCNNNeuronSigmoidNode": {
+      "doc": "A representation of a sigmoid neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronsigmoidnode"
+    },
+    "MPSCNNNeuronSoftPlus": {
+      "doc": "A parametric softplus neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronsoftplus"
+    },
+    "MPSCNNNeuronSoftPlusNode": {
+      "doc": "A representation of a parametric softplus neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronsoftplusnode"
+    },
+    "MPSCNNNeuronSoftSign": {
+      "doc": "A softsign neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronsoftsign"
+    },
+    "MPSCNNNeuronSoftSignNode": {
+      "doc": "A representation of a softsign neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronsoftsignnode"
+    },
+    "MPSCNNNeuronTanH": {
+      "doc": "A hyperbolic tangent neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneurontanh"
+    },
+    "MPSCNNNeuronTanHNode": {
+      "doc": "A representation of a hyperbolic tangent neuron filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneurontanhnode"
+    },
+    "MPSCNNNormalizationGammaAndBetaState": {
+      "doc": "An object that stores gamma and beta terms used to apply a scale and bias in instance- or batch-normalization operations.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnnormalizationgammaandbetastate"
+    },
+    "MPSCNNNormalizationMeanAndVarianceState": {
+      "doc": "An object that stores mean and variance terms used to execute batch normalization.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnnormalizationmeanandvariancestate"
+    },
+    "MPSCNNNormalizationNode": {
+      "doc": "Virtual base class for CNN normalization nodes.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnnormalizationnode"
+    },
+    "MPSCNNPooling": {
+      "doc": "A pooling kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpooling"
+    },
+    "MPSCNNPoolingAverage": {
+      "doc": "An average pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingaverage"
+    },
+    "MPSCNNPoolingAverageGradient": {
+      "doc": "A gradient average pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingaveragegradient"
+    },
+    "MPSCNNPoolingAverageGradientNode": {
+      "doc": "A representation of a gradient average pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingaveragegradientnode"
+    },
+    "MPSCNNPoolingAverageNode": {
+      "doc": "A representation of an average pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingaveragenode"
+    },
+    "MPSCNNPoolingGradient": {
+      "doc": "A gradient pooling kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolinggradient"
+    },
+    "MPSCNNPoolingGradientNode": {
+      "doc": "A representation of a gradient pooling kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolinggradientnode"
+    },
+    "MPSCNNPoolingL2Norm": {
+      "doc": "An L2-norm pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingl2norm"
+    },
+    "MPSCNNPoolingL2NormGradient": {
+      "doc": "A gradient L2-norm pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingl2normgradient"
+    },
+    "MPSCNNPoolingL2NormGradientNode": {
+      "doc": "A representation of a gradient L2-norm pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingl2normgradientnode"
+    },
+    "MPSCNNPoolingL2NormNode": {
+      "doc": "A representation of a L2-norm pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingl2normnode"
+    },
+    "MPSCNNPoolingMax": {
+      "doc": "A max pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingmax"
+    },
+    "MPSCNNPoolingMaxGradient": {
+      "doc": "A gradient max pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingmaxgradient"
+    },
+    "MPSCNNPoolingMaxGradientNode": {
+      "doc": "A representation of a gradient max pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingmaxgradientnode"
+    },
+    "MPSCNNPoolingMaxNode": {
+      "doc": "A representation of a max pooling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingmaxnode"
+    },
+    "MPSCNNPoolingNode": {
+      "doc": "A representation of a MPS CNN pooling kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingnode"
+    },
+    "MPSCNNSoftMax": {
+      "doc": "A neural transfer function that is useful for classification tasks.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnsoftmax"
+    },
+    "MPSCNNSoftMaxGradient": {
+      "doc": "A gradient softmax filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnsoftmaxgradient"
+    },
+    "MPSCNNSoftMaxGradientNode": {
+      "doc": "A representation of a gradient softmax filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnsoftmaxgradientnode"
+    },
+    "MPSCNNSoftMaxNode": {
+      "doc": "A representation of a softmax filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnsoftmaxnode"
+    },
+    "MPSCNNSpatialNormalization": {
+      "doc": "A spatial normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnspatialnormalization"
+    },
+    "MPSCNNSpatialNormalizationGradient": {
+      "doc": "A gradient spatial normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnspatialnormalizationgradient"
+    },
+    "MPSCNNSpatialNormalizationGradientNode": {
+      "doc": "A representation of a gradient spatial normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnspatialnormalizationgradientnode"
+    },
+    "MPSCNNSpatialNormalizationNode": {
+      "doc": "A representation of a spatial normalization kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnspatialnormalizationnode"
+    },
+    "MPSCNNSubPixelConvolutionDescriptor": {
+      "doc": "A description of a convolution object that does subpixel upsampling and reshaping.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnsubpixelconvolutiondescriptor"
+    },
+    "MPSCNNSubtract": {
+      "doc": "A subtraction operator.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnsubtract"
+    },
+    "MPSCNNSubtractGradient": {
+      "doc": "A gradient subtraction operator.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnsubtractgradient"
+    },
+    "MPSCNNUpsampling": {
+      "doc": "A filter that resamples an existing MPS image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsampling"
+    },
+    "MPSCNNUpsamplingBilinear": {
+      "doc": "A bilinear spatial upsampling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingbilinear"
+    },
+    "MPSCNNUpsamplingBilinearGradient": {
+      "doc": "A gradient bilinear spatial upsampling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingbilineargradient"
+    },
+    "MPSCNNUpsamplingBilinearGradientNode": {
+      "doc": "A representation of a gradient bilinear spatial upsampling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingbilineargradientnode"
+    },
+    "MPSCNNUpsamplingBilinearNode": {
+      "doc": "A representation of a bilinear spatial upsampling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingbilinearnode"
+    },
+    "MPSCNNUpsamplingGradient": {
+      "doc": "A gradient filter that upsamples an existing Metal Performance Shaders image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplinggradient"
+    },
+    "MPSCNNUpsamplingNearest": {
+      "doc": "A nearest spatial upsampling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingnearest"
+    },
+    "MPSCNNUpsamplingNearestGradient": {
+      "doc": "A gradient upsampling filter that samples the pixel nearest to the source when upsampling to the destination pixel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingnearestgradient"
+    },
+    "MPSCNNUpsamplingNearestGradientNode": {
+      "doc": "A representation of a gradient nearest spatial upsampling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingnearestgradientnode"
+    },
+    "MPSCNNUpsamplingNearestNode": {
+      "doc": "A representation of a nearest spatial upsampling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingnearestnode"
+    },
+    "MPSCNNYOLOLoss": {
+      "doc": "A kernel that computes the YOLO loss and loss gradient between specified predictions and labels.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnyololoss"
+    },
+    "MPSCNNYOLOLossDescriptor": {
+      "doc": "An object that specifies properties used by a YOLO loss kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnyololossdescriptor"
+    },
+    "MPSCNNYOLOLossNode": {
+      "doc": "A representation of a YOLO loss kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnyololossnode"
+    },
+    "MPSCommandBuffer": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscommandbuffer"
+    },
+    "MPSGRUDescriptor": {
+      "doc": "A description of a gated recurrent unit block or layer.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsgrudescriptor"
+    },
+    "MPSImage": {
+      "doc": "A texture that may have more than four channels for use in convolutional neural networks.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage"
+    },
+    "MPSImageAdd": {
+      "doc": "A filter that returns the element-wise sum of its two input images.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageadd"
+    },
+    "MPSImageAreaMax": {
+      "doc": "A filter that finds the maximum pixel value in a rectangular region centered around each pixel in the source image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageareamax"
+    },
+    "MPSImageAreaMin": {
+      "doc": "A filter that finds the minimum pixel value in a rectangular region centered around each pixel in the source image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageareamin"
+    },
+    "MPSImageArithmetic": {
+      "doc": "Base class for basic arithmetic nodes",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagearithmetic"
+    },
+    "MPSImageBilinearScale": {
+      "doc": "A filter that resizes and changes the aspect ratio of an image using Bilinear resampling.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagebilinearscale"
+    },
+    "MPSImageBox": {
+      "doc": "A filter that convolves an image with a given kernel of odd width and height.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagebox"
+    },
+    "MPSImageCanny": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagecanny"
+    },
+    "MPSImageConversion": {
+      "doc": "A filter that performs a conversion of color space, alpha, or pixel format.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageconversion"
+    },
+    "MPSImageConvolution": {
+      "doc": "A filter that convolves an image with a given kernel of odd width and height.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageconvolution"
+    },
+    "MPSImageCopyToMatrix": {
+      "doc": "A class that copies image data to a matrix.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagecopytomatrix"
+    },
+    "MPSImageDescriptor": {
+      "doc": "A description of the attributes used to create an MPSImage.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedescriptor"
+    },
+    "MPSImageDilate": {
+      "doc": "A filter that finds the maximum pixel value in a rectangular region by applying a dilation function.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedilate"
+    },
+    "MPSImageDivide": {
+      "doc": "A filter that returns the element-wise quotient of its two input images.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedivide"
+    },
+    "MPSImageEDLines": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageedlines"
+    },
+    "MPSImageErode": {
+      "doc": "A filter that finds the minimum pixel value in a rectangular region by applying an erosion function.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageerode"
+    },
+    "MPSImageEuclideanDistanceTransform": {
+      "doc": "A filter that performs a Euclidean distance transform on an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageeuclideandistancetransform"
+    },
+    "MPSImageFindKeypoints": {
+      "doc": "A kernel that is used to find a list of keypoints.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagefindkeypoints"
+    },
+    "MPSImageGaussianBlur": {
+      "doc": "A filter that convolves an image with a Gaussian blur of a given sigma in both the x and y directions.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagegaussianblur"
+    },
+    "MPSImageGaussianPyramid": {
+      "doc": "A filter that convolves an image with a Gaussian pyramid.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagegaussianpyramid"
+    },
+    "MPSImageGuidedFilter": {
+      "doc": "A filter that performs edge-aware filtering on an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageguidedfilter"
+    },
+    "MPSImageHistogram": {
+      "doc": "A filter that computes the histogram of an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogram"
+    },
+    "MPSImageHistogramEqualization": {
+      "doc": "A filter that equalizes the histogram of an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogramequalization"
+    },
+    "MPSImageHistogramSpecification": {
+      "doc": "A filter that performs a histogram specification operation on an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogramspecification"
+    },
+    "MPSImageIntegral": {
+      "doc": "A filter that calculates the sum of pixels over a specified region in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageintegral"
+    },
+    "MPSImageIntegralOfSquares": {
+      "doc": "A filter that calculates the sum of squared pixels over a specified region in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageintegralofsquares"
+    },
+    "MPSImageLanczosScale": {
+      "doc": "A filter that resizes and changes the aspect ratio of an image using Lanczos resampling.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagelanczosscale"
+    },
+    "MPSImageLaplacian": {
+      "doc": "An optimized Laplacian filter, provided for ease of use.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagelaplacian"
+    },
+    "MPSImageLaplacianPyramid": {
+      "doc": "A filter that convolves an image with a Laplacian filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagelaplacianpyramid"
+    },
+    "MPSImageLaplacianPyramidAdd": {
+      "doc": "A filter that convolves an image with an additive Laplacian pyramid.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagelaplacianpyramidadd"
+    },
+    "MPSImageLaplacianPyramidSubtract": {
+      "doc": "A filter that convolves an image with a subtractive Laplacian pyramid.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagelaplacianpyramidsubtract"
+    },
+    "MPSImageMedian": {
+      "doc": "A filter that applies a median filter in a square region centered around each pixel in the source image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagemedian"
+    },
+    "MPSImageMultiply": {
+      "doc": "A filter that returns the element-wise product of its two input images.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagemultiply"
+    },
+    "MPSImageNormalizedHistogram": {
+      "doc": "A filter that computes the normalized histogram of an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagenormalizedhistogram"
+    },
+    "MPSImagePyramid": {
+      "doc": "A base class for creating different kinds of pyramid images.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagepyramid"
+    },
+    "MPSImageReduceColumnMax": {
+      "doc": "A filter that returns the maximum value for each column in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagereducecolumnmax"
+    },
+    "MPSImageReduceColumnMean": {
+      "doc": "A filter that returns the mean value for each column in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagereducecolumnmean"
+    },
+    "MPSImageReduceColumnMin": {
+      "doc": "A filter that returns the minimum value for each column in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagereducecolumnmin"
+    },
+    "MPSImageReduceColumnSum": {
+      "doc": "A filter that returns the sum of all values for a column in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagereducecolumnsum"
+    },
+    "MPSImageReduceRowMax": {
+      "doc": "A filter that returns the maximum value for each row in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagereducerowmax"
+    },
+    "MPSImageReduceRowMean": {
+      "doc": "A filter that returns the mean value for each row in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagereducerowmean"
+    },
+    "MPSImageReduceRowMin": {
+      "doc": "A filter that returns the minimum value for each row in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagereducerowmin"
+    },
+    "MPSImageReduceRowSum": {
+      "doc": "A filter that returns the sum of all values for a row in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagereducerowsum"
+    },
+    "MPSImageReduceUnary": {
+      "doc": "The base class for reduction filters that take a single source as input.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagereduceunary"
+    },
+    "MPSImageScale": {
+      "doc": "A filter that resizes and changes the aspect ratio of an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagescale"
+    },
+    "MPSImageSobel": {
+      "doc": "A filter that convolves an image with the Sobel operator.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagesobel"
+    },
+    "MPSImageStatisticsMean": {
+      "doc": "A kernel that computes the mean for a given region of an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagestatisticsmean"
+    },
+    "MPSImageStatisticsMeanAndVariance": {
+      "doc": "A kernel that computes the mean and variance for a given region of an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagestatisticsmeanandvariance"
+    },
+    "MPSImageStatisticsMinAndMax": {
+      "doc": "A kernel that computes the minimum and maximum pixel values for a given region of an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagestatisticsminandmax"
+    },
+    "MPSImageSubtract": {
+      "doc": "A filter that returns the element-wise difference of its two input images.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagesubtract"
+    },
+    "MPSImageTent": {
+      "doc": "A filter that convolves an image with a tent filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagetent"
+    },
+    "MPSImageThresholdBinary": {
+      "doc": "A filter that returns a specified value for each pixel with a value greater than a specified threshold or 0 otherwise.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdbinary"
+    },
+    "MPSImageThresholdBinaryInverse": {
+      "doc": "A filter that returns 0 for each pixel with a value greater than a specified threshold or a specified value otherwise.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdbinaryinverse"
+    },
+    "MPSImageThresholdToZero": {
+      "doc": "A filter that returns the original value for each pixel with a value greater than a specified threshold or 0 otherwise.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdtozero"
+    },
+    "MPSImageThresholdToZeroInverse": {
+      "doc": "A filter that returns 0 for each pixel with a value greater than a specified threshold or the original value otherwise.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdtozeroinverse"
+    },
+    "MPSImageThresholdTruncate": {
+      "doc": "A filter that clamps the return value to an upper specified value.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdtruncate"
+    },
+    "MPSImageTranspose": {
+      "doc": "A filter that transposes an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagetranspose"
+    },
+    "MPSInstanceAccelerationStructure": {
+      "doc": "An acceleration structure built over instances of other acceleration structures.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsinstanceaccelerationstructure"
+    },
+    "MPSKernel": {
+      "doc": "A standard interface for Metal Performance Shaders kernels.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpskernel"
+    },
+    "MPSKeyedUnarchiver": {
+      "doc": "A keyed archiver that supports Metal Performance Shaders kernel decoding.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpskeyedunarchiver"
+    },
+    "MPSLSTMDescriptor": {
+      "doc": "A description of a long short-term memory block or layer.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpslstmdescriptor"
+    },
+    "MPSMatrix": {
+      "doc": "A 2D array of data that stores the data’s values.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrix"
+    },
+    "MPSMatrixBatchNormalization": {
+      "doc": "A batch normalization kernel that operates on matrices.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixbatchnormalization"
+    },
+    "MPSMatrixBatchNormalizationGradient": {
+      "doc": "A batch normalization gradient kernel that operates on matrices.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixbatchnormalizationgradient"
+    },
+    "MPSMatrixBinaryKernel": {
+      "doc": "A kernel that consumes two matrices and produces one matrix.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixbinarykernel"
+    },
+    "MPSMatrixCopy": {
+      "doc": "A class that can perform multiple matrix copy operations.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixcopy"
+    },
+    "MPSMatrixCopyDescriptor": {
+      "doc": "A description of multiple matrix copy operations.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixcopydescriptor"
+    },
+    "MPSMatrixCopyToImage": {
+      "doc": "A kernel that copies matrix data to a Metal Performance Shaders image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixcopytoimage"
+    },
+    "MPSMatrixDecompositionCholesky": {
+      "doc": "A kernel for computing the Cholesky factorization of a matrix.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixdecompositioncholesky"
+    },
+    "MPSMatrixDecompositionLU": {
+      "doc": "A kernel for computing the LU factorization of a matrix using partial pivoting with row interchanges.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixdecompositionlu"
+    },
+    "MPSMatrixDescriptor": {
+      "doc": "A description of attributes used to create an MPS matrix.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixdescriptor"
+    },
+    "MPSMatrixFindTopK": {
+      "doc": "A kernel for computing the top-K values and their corresponding indices in a matrix.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixfindtopk"
+    },
+    "MPSMatrixFullyConnected": {
+      "doc": "A kernel for applying a fully connected neural network layer.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixfullyconnected"
+    },
+    "MPSMatrixFullyConnectedGradient": {
+      "doc": "A kernel for applying a fully gradient connected neural network layer.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixfullyconnectedgradient"
+    },
+    "MPSMatrixLogSoftMax": {
+      "doc": "A logarithmic softmax kernel that operates on matrices.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixlogsoftmax"
+    },
+    "MPSMatrixLogSoftMaxGradient": {
+      "doc": "A logarithmic gradient softmax kernel that operates on matrices.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixlogsoftmaxgradient"
+    },
+    "MPSMatrixMultiplication": {
+      "doc": "A matrix multiplication kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixmultiplication"
+    },
+    "MPSMatrixNeuron": {
+      "doc": "A neuron activation kernel that operates on matrices.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixneuron"
+    },
+    "MPSMatrixNeuronGradient": {
+      "doc": "A gradient neuron activation kernel that operates on matrices.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixneurongradient"
+    },
+    "MPSMatrixRandom": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixrandom"
+    },
+    "MPSMatrixRandomDistributionDescriptor": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixrandomdistributiondescriptor"
+    },
+    "MPSMatrixRandomMTGP32": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixrandommtgp32"
+    },
+    "MPSMatrixRandomPhilox": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixrandomphilox"
+    },
+    "MPSMatrixSoftMax": {
+      "doc": "A softmax kernel that operates on matrices.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixsoftmax"
+    },
+    "MPSMatrixSoftMaxGradient": {
+      "doc": "A gradient softmax kernel that operates on matrices.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixsoftmaxgradient"
+    },
+    "MPSMatrixSolveCholesky": {
+      "doc": "A kernel for computing the solution of a linear system of equations using a Cholesky factorization.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixsolvecholesky"
+    },
+    "MPSMatrixSolveLU": {
+      "doc": "A kernel for computing the solution of a linear system of equations using an LU factorization.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixsolvelu"
+    },
+    "MPSMatrixSolveTriangular": {
+      "doc": "A kernel for computing the solution of a linear system of equations using a triangular coefficient matrix.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixsolvetriangular"
+    },
+    "MPSMatrixSum": {
+      "doc": "A kernel for performing a pointwise summation of a matrix.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixsum"
+    },
+    "MPSMatrixUnaryKernel": {
+      "doc": "A kernel that consumes one matrix and produces one matrix.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixunarykernel"
+    },
+    "MPSMatrixVectorMultiplication": {
+      "doc": "A matrix-vector multiplication kernel",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixvectormultiplication"
+    },
+    "MPSNDArray": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarray"
+    },
+    "MPSNDArrayAffineInt4Dequantize": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarrayaffineint4dequantize"
+    },
+    "MPSNDArrayAffineQuantizationDescriptor": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarrayaffinequantizationdescriptor"
+    },
+    "MPSNDArrayBinaryKernel": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraybinarykernel"
+    },
+    "MPSNDArrayBinaryPrimaryGradientKernel": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraybinaryprimarygradientkernel"
+    },
+    "MPSNDArrayBinarySecondaryGradientKernel": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraybinarysecondarygradientkernel"
+    },
+    "MPSNDArrayDescriptor": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraydescriptor"
+    },
+    "MPSNDArrayGather": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraygather"
+    },
+    "MPSNDArrayGatherGradient": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraygathergradient"
+    },
+    "MPSNDArrayGatherGradientState": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraygathergradientstate"
+    },
+    "MPSNDArrayGradientState": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraygradientstate"
+    },
+    "MPSNDArrayIdentity": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarrayidentity"
+    },
+    "MPSNDArrayLUTDequantize": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraylutdequantize"
+    },
+    "MPSNDArrayLUTQuantizationDescriptor": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraylutquantizationdescriptor"
+    },
+    "MPSNDArrayMatrixMultiplication": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraymatrixmultiplication"
+    },
+    "MPSNDArrayMultiaryBase": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraymultiarybase"
+    },
+    "MPSNDArrayMultiaryGradientKernel": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraymultiarygradientkernel"
+    },
+    "MPSNDArrayMultiaryKernel": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraymultiarykernel"
+    },
+    "MPSNDArrayQuantizationDescriptor": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarrayquantizationdescriptor"
+    },
+    "MPSNDArrayQuantizedMatrixMultiplication": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarrayquantizedmatrixmultiplication"
+    },
+    "MPSNDArrayStridedSlice": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraystridedslice"
+    },
+    "MPSNDArrayStridedSliceGradient": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarraystridedslicegradient"
+    },
+    "MPSNDArrayUnaryGradientKernel": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarrayunarygradientkernel"
+    },
+    "MPSNDArrayUnaryKernel": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarrayunarykernel"
+    },
+    "MPSNDArrayVectorLUTDequantize": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsndarrayvectorlutdequantize"
+    },
+    "MPSNNAdditionGradientNode": {
+      "doc": "A representation of a gradient addition operator.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnadditiongradientnode"
+    },
+    "MPSNNAdditionNode": {
+      "doc": "A representation of an addition operator.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnadditionnode"
+    },
+    "MPSNNArithmeticGradientNode": {
+      "doc": "A representation of the base class for gradient arithmetic operators.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnarithmeticgradientnode"
+    },
+    "MPSNNArithmeticGradientStateNode": {
+      "doc": "A representation of the clamp mask used by gradient arithmetic operators.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnarithmeticgradientstatenode"
+    },
+    "MPSNNBilinearScaleNode": {
+      "doc": "A representation of a bilinear resampling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnbilinearscalenode"
+    },
+    "MPSNNBinaryArithmeticNode": {
+      "doc": "Virtual base class for basic arithmetic nodes.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnbinaryarithmeticnode"
+    },
+    "MPSNNBinaryGradientState": {
+      "doc": "A class representing the state of a gradient binary kernel when it was encoded.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnbinarygradientstate"
+    },
+    "MPSNNBinaryGradientStateNode": {
+      "doc": "A representation of the state created to record the properties of a binary gradient kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnbinarygradientstatenode"
+    },
+    "MPSNNCompare": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnncompare"
+    },
+    "MPSNNComparisonNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnncomparisonnode"
+    },
+    "MPSNNConcatenationGradientNode": {
+      "doc": "A representation of the results from one or more gradient kernels.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnconcatenationgradientnode"
+    },
+    "MPSNNConcatenationNode": {
+      "doc": "A representation of the results from one or more kernels.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnconcatenationnode"
+    },
+    "MPSNNCropAndResizeBilinear": {
+      "doc": "A cropping and bilinear resizing filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnncropandresizebilinear"
+    },
+    "MPSNNDefaultPadding": {
+      "doc": "A class that provides predefined padding policies for common tasks.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnndefaultpadding"
+    },
+    "MPSNNDivisionNode": {
+      "doc": "A representation of a division operator.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnndivisionnode"
+    },
+    "MPSNNFilterNode": {
+      "doc": "A placeholder node denoting a neural network filter stage.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnfilternode"
+    },
+    "MPSNNForwardLoss": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnforwardloss"
+    },
+    "MPSNNForwardLossNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnforwardlossnode"
+    },
+    "MPSNNGradientFilterNode": {
+      "doc": "A representation of a gradient filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnngradientfilternode"
+    },
+    "MPSNNGradientState": {
+      "doc": "A class representing the state of a gradient kernel when it was encoded.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnngradientstate"
+    },
+    "MPSNNGradientStateNode": {
+      "doc": "A representation of the state created to record the properties of a gradient kernel at the time it was encoded.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnngradientstatenode"
+    },
+    "MPSNNGramMatrixCalculation": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnngrammatrixcalculation"
+    },
+    "MPSNNGramMatrixCalculationGradient": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnngrammatrixcalculationgradient"
+    },
+    "MPSNNGramMatrixCalculationGradientNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnngrammatrixcalculationgradientnode"
+    },
+    "MPSNNGramMatrixCalculationNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnngrammatrixcalculationnode"
+    },
+    "MPSNNGraph": {
+      "doc": "An optimized representation of a graph of neural network image and filter nodes.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnngraph"
+    },
+    "MPSNNGridSample": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnngridsample"
+    },
+    "MPSNNImageNode": {
+      "doc": "A placeholder node denoting the position of a neural network image in a graph.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnimagenode"
+    },
+    "MPSNNInitialGradient": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnninitialgradient"
+    },
+    "MPSNNInitialGradientNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnninitialgradientnode"
+    },
+    "MPSNNLabelsNode": {
+      "doc": "A placeholder node denoting the per-element weight buffer used by loss and gradient loss kernels.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnlabelsnode"
+    },
+    "MPSNNLanczosScaleNode": {
+      "doc": "A representation of a Lanczos resampling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnlanczosscalenode"
+    },
+    "MPSNNLocalCorrelation": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnlocalcorrelation"
+    },
+    "MPSNNLossGradient": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnlossgradient"
+    },
+    "MPSNNLossGradientNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnlossgradientnode"
+    },
+    "MPSNNMultiaryGradientState": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnmultiarygradientstate"
+    },
+    "MPSNNMultiaryGradientStateNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnmultiarygradientstatenode"
+    },
+    "MPSNNMultiplicationGradientNode": {
+      "doc": "A representation of a gradient multiplication operator.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnmultiplicationgradientnode"
+    },
+    "MPSNNMultiplicationNode": {
+      "doc": "A representation of a multiplication operator.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnmultiplicationnode"
+    },
+    "MPSNNNeuronDescriptor": {
+      "doc": "An object that specifies properties used by a neuron kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnneurondescriptor"
+    },
+    "MPSNNOptimizer": {
+      "doc": "The base class for optimization layers.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnoptimizer"
+    },
+    "MPSNNOptimizerAdam": {
+      "doc": "An optimization layer that performs an Adam pdate.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnoptimizeradam"
+    },
+    "MPSNNOptimizerDescriptor": {
+      "doc": "An object that specifies properties used by an optimizer kernel.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnoptimizerdescriptor"
+    },
+    "MPSNNOptimizerRMSProp": {
+      "doc": "An optimization layer that performs a root mean square propagation update.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnoptimizerrmsprop"
+    },
+    "MPSNNOptimizerStochasticGradientDescent": {
+      "doc": "An optimization layer that performs a gradient descent with an optional momentum update.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnoptimizerstochasticgradientdescent"
+    },
+    "MPSNNPad": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnpad"
+    },
+    "MPSNNPadGradient": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnpadgradient"
+    },
+    "MPSNNPadGradientNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnpadgradientnode"
+    },
+    "MPSNNPadNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnpadnode"
+    },
+    "MPSNNReduceBinary": {
+      "doc": "The base class for binary reduction filters.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducebinary"
+    },
+    "MPSNNReduceColumnMax": {
+      "doc": "A reduction filter that returns the maximum value for each column in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducecolumnmax"
+    },
+    "MPSNNReduceColumnMean": {
+      "doc": "A reduction filter that returns the mean value for each column in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducecolumnmean"
+    },
+    "MPSNNReduceColumnMin": {
+      "doc": "A reduction filter that returns the minimum value for each column in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducecolumnmin"
+    },
+    "MPSNNReduceColumnSum": {
+      "doc": "A reduction filter that returns the sum of all values for each column in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducecolumnsum"
+    },
+    "MPSNNReduceFeatureChannelsAndWeightsMean": {
+      "doc": "A reduction filter that returns the weighted sum for each feature channel in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducefeaturechannelsandweightsmean"
+    },
+    "MPSNNReduceFeatureChannelsAndWeightsSum": {
+      "doc": "A reduction filter that returns the weighted sum of all values for each feature channel in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducefeaturechannelsandweightssum"
+    },
+    "MPSNNReduceFeatureChannelsArgumentMax": {
+      "doc": "A reduction filter that returns the index of the location of the maximum value for each feature channel in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducefeaturechannelsargumentmax"
+    },
+    "MPSNNReduceFeatureChannelsArgumentMin": {
+      "doc": "A reduction filter that returns the index of the location of the minimum value for each feature channel in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducefeaturechannelsargumentmin"
+    },
+    "MPSNNReduceFeatureChannelsMax": {
+      "doc": "A reduction filter that returns the maximum value for each feature channel in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducefeaturechannelsmax"
+    },
+    "MPSNNReduceFeatureChannelsMean": {
+      "doc": "A reduction filter that returns the mean value for each feature channel in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducefeaturechannelsmean"
+    },
+    "MPSNNReduceFeatureChannelsMin": {
+      "doc": "A reduction filter that returns the minimum value for each feature channel in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducefeaturechannelsmin"
+    },
+    "MPSNNReduceFeatureChannelsSum": {
+      "doc": "A reduction filter that returns the sum of all values for each feature channel in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducefeaturechannelssum"
+    },
+    "MPSNNReduceRowMax": {
+      "doc": "A reduction filter that returns the maximum value for each row in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducerowmax"
+    },
+    "MPSNNReduceRowMean": {
+      "doc": "A reduction filter that returns the mean value for each row in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducerowmean"
+    },
+    "MPSNNReduceRowMin": {
+      "doc": "A reduction filter that returns the minimum value for each row in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducerowmin"
+    },
+    "MPSNNReduceRowSum": {
+      "doc": "A reduction filter that returns the sum of all values for each row in an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducerowsum"
+    },
+    "MPSNNReduceUnary": {
+      "doc": "The base class for unary reduction filters.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreduceunary"
+    },
+    "MPSNNReductionColumnMaxNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductioncolumnmaxnode"
+    },
+    "MPSNNReductionColumnMeanNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductioncolumnmeannode"
+    },
+    "MPSNNReductionColumnMinNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductioncolumnminnode"
+    },
+    "MPSNNReductionColumnSumNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductioncolumnsumnode"
+    },
+    "MPSNNReductionFeatureChannelsArgumentMaxNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductionfeaturechannelsargumentmaxnode"
+    },
+    "MPSNNReductionFeatureChannelsArgumentMinNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductionfeaturechannelsargumentminnode"
+    },
+    "MPSNNReductionFeatureChannelsMaxNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductionfeaturechannelsmaxnode"
+    },
+    "MPSNNReductionFeatureChannelsMeanNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductionfeaturechannelsmeannode"
+    },
+    "MPSNNReductionFeatureChannelsMinNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductionfeaturechannelsminnode"
+    },
+    "MPSNNReductionFeatureChannelsSumNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductionfeaturechannelssumnode"
+    },
+    "MPSNNReductionRowMaxNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductionrowmaxnode"
+    },
+    "MPSNNReductionRowMeanNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductionrowmeannode"
+    },
+    "MPSNNReductionRowMinNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductionrowminnode"
+    },
+    "MPSNNReductionRowSumNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductionrowsumnode"
+    },
+    "MPSNNReductionSpatialMeanGradientNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductionspatialmeangradientnode"
+    },
+    "MPSNNReductionSpatialMeanNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreductionspatialmeannode"
+    },
+    "MPSNNReshape": {
+      "doc": "The base class for reshape operations.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreshape"
+    },
+    "MPSNNReshapeGradient": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreshapegradient"
+    },
+    "MPSNNReshapeGradientNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreshapegradientnode"
+    },
+    "MPSNNReshapeNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreshapenode"
+    },
+    "MPSNNResizeBilinear": {
+      "doc": "A bilinear resizing filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnresizebilinear"
+    },
+    "MPSNNScaleNode": {
+      "doc": "Abstract node representing an image resampling filter.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnscalenode"
+    },
+    "MPSNNSlice": {
+      "doc": "A kernel that extracts a slice from an image.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnslice"
+    },
+    "MPSNNStateNode": {
+      "doc": "A placeholder node denoting the position in the graph of a state object.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnstatenode"
+    },
+    "MPSNNSubtractionGradientNode": {
+      "doc": "A representation of a gradient subtraction operator.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnsubtractiongradientnode"
+    },
+    "MPSNNSubtractionNode": {
+      "doc": "A representation of an subtraction operator.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnsubtractionnode"
+    },
+    "MPSNNUnaryReductionNode": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsnnunaryreductionnode"
+    },
+    "MPSPolygonAccelerationStructure": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpspolygonaccelerationstructure"
+    },
+    "MPSPolygonBuffer": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpspolygonbuffer"
+    },
+    "MPSPredicate": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpspredicate"
+    },
+    "MPSQuadrilateralAccelerationStructure": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsquadrilateralaccelerationstructure"
+    },
+    "MPSRNNDescriptor": {
+      "doc": "A description of a recursive neural network block or layer.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsrnndescriptor"
+    },
+    "MPSRNNImageInferenceLayer": {
+      "doc": "A recurrent neural network layer for inference on Metal Performance Shaders images.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsrnnimageinferencelayer"
+    },
+    "MPSRNNMatrixInferenceLayer": {
+      "doc": "A recurrent neural network layer for inference on Metal Performance Shaders matrices.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsrnnmatrixinferencelayer"
+    },
+    "MPSRNNMatrixTrainingLayer": {
+      "doc": "A layer for training recurrent neural networks on Metal Performance Shaders matrices.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsrnnmatrixtraininglayer"
+    },
+    "MPSRNNMatrixTrainingState": {
+      "doc": "A class that holds data from a forward pass to be used in a backward pass.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsrnnmatrixtrainingstate"
+    },
+    "MPSRNNRecurrentImageState": {
+      "doc": "A class that holds all the data that’s passed from one sequence iteration of the image-based recurrent neural network layer (stack) to the next.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsrnnrecurrentimagestate"
+    },
+    "MPSRNNRecurrentMatrixState": {
+      "doc": "A class holds all the data that’s passed from one sequence iteration of the matrix-based recurrent neural network layer to the next.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsrnnrecurrentmatrixstate"
+    },
+    "MPSRNNSingleGateDescriptor": {
+      "doc": "A description of a simple recurrent block or layer.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsrnnsinglegatedescriptor"
+    },
+    "MPSRayIntersector": {
+      "doc": "A kernel that performs intersection tests between rays and geometry.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsrayintersector"
+    },
+    "MPSSVGF": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpssvgf"
+    },
+    "MPSSVGFDefaultTextureAllocator": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpssvgfdefaulttextureallocator"
+    },
+    "MPSSVGFDenoiser": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpssvgfdenoiser"
+    },
+    "MPSState": {
+      "doc": "An opaque data container for large storage in MPS CNN filters.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsstate"
+    },
+    "MPSStateResourceList": {
+      "doc": "An interface for objects that define resources for Metal Performance Shaders state containers.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsstateresourcelist"
+    },
+    "MPSTemporalAA": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpstemporalaa"
+    },
+    "MPSTemporaryImage": {
+      "doc": "A texture for use in convolutional neural networks that stores transient data to be used and discarded promptly.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpstemporaryimage"
+    },
+    "MPSTemporaryMatrix": {
+      "doc": "A matrix allocated on GPU private memory.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpstemporarymatrix"
+    },
+    "MPSTemporaryNDArray": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpstemporaryndarray"
+    },
+    "MPSTemporaryVector": {
+      "doc": "A vector allocated on GPU private memory.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpstemporaryvector"
+    },
+    "MPSTriangleAccelerationStructure": {
+      "doc": "An acceleration structure built over triangles.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpstriangleaccelerationstructure"
+    },
+    "MPSUnaryImageKernel": {
+      "doc": "A kernel that consumes one texture and produces one texture.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsunaryimagekernel"
+    },
+    "MPSVector": {
+      "doc": "A 1D array of data that stores the data’s values.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsvector"
+    },
+    "MPSVectorDescriptor": {
+      "doc": "A description of the length and data type of a vector.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsvectordescriptor"
+    }
+  },
+  "enums": {
+    "MPSCustomKernelIndex": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscustomkernelindex"
+    },
+    "MPSDeviceCapsValues": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsdevicecapsvalues"
+    },
+    "MPSDeviceOptions": {
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsdeviceoptions"
+    },
+    "MPSImageType": {
+      "doc": "Options that define a Metal Performance Shaders image type.",
+      "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagetype"
+    }
+  },
+  "methods": {
+    "MPSBinaryImageKernel": {
+      "-encodeToCommandBuffer:inPlacePrimaryTexture:secondaryTexture:fallbackCopyAllocator:": {
+        "doc": "This method attempts to apply a kernel in place on a texture.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsbinaryimagekernel/encode(commandbuffer:inplaceprimarytexture:secondarytexture:fallbackcopyallocator:)"
+      },
+      "-encodeToCommandBuffer:primaryTexture:inPlaceSecondaryTexture:fallbackCopyAllocator:": {
+        "doc": "This method attempts to apply a kernel in place on a texture.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsbinaryimagekernel/encode(commandbuffer:primarytexture:inplacesecondarytexture:fallbackcopyallocator:)"
+      },
+      "-encodeToCommandBuffer:primaryTexture:secondaryTexture:destinationTexture:": {
+        "doc": "Encodes a kernel into a command buffer, out-of-place.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsbinaryimagekernel/encode(commandbuffer:primarytexture:secondarytexture:destinationtexture:)"
+      },
+      "-primarySourceRegionForDestinationSize:": {
+        "doc": "Determines the region of the primary source texture that will be read for an encode operation.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsbinaryimagekernel/primarysourceregion(fordestinationsize:)"
+      },
+      "-secondarySourceRegionForDestinationSize:": {
+        "doc": "Determines the region of the secondary source texture that will be read for an encode operation.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsbinaryimagekernel/secondarysourceregion(fordestinationsize:)"
+      }
+    },
+    "MPSCNNBinaryConvolution": {
+      "-initWithDevice:convolutionData:outputBiasTerms:outputScaleTerms:inputBiasTerms:inputScaleTerms:type:flags:": {
+        "doc": "Initializes a binary convolution kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbinaryconvolution/init(device:convolutiondata:outputbiasterms:outputscaleterms:inputbiasterms:inputscaleterms:type:flags:)"
+      },
+      "-initWithDevice:convolutionData:scaleValue:type:flags:": {
+        "doc": "Initializes a binary convolution kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbinaryconvolution/init(device:convolutiondata:scalevalue:type:flags:)"
+      }
+    },
+    "MPSCNNBinaryFullyConnected": {
+      "-initWithCoder:device:": {
+        "doc": "Initializes a fully connected convolution layer with binary weights.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbinaryfullyconnected/init(coder:device:)"
+      },
+      "-initWithDevice:convolutionData:outputBiasTerms:outputScaleTerms:inputBiasTerms:inputScaleTerms:type:flags:": {
+        "doc": "Initializes a fully connected convolution layer with binary weights.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbinaryfullyconnected/init(device:convolutiondata:outputbiasterms:outputscaleterms:inputbiasterms:inputscaleterms:type:flags:)"
+      },
+      "-initWithDevice:convolutionData:scaleValue:type:flags:": {
+        "doc": "Initializes a fully connected convolution layer with binary weights.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbinaryfullyconnected/init(device:convolutiondata:scalevalue:type:flags:)"
+      }
+    },
+    "MPSCNNConvolution": {
+      "-initWithDevice:convolutionDescriptor:kernelWeights:biasTerms:flags:": {
+        "doc": "Initializes a convolution kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolution/init(device:convolutiondescriptor:kernelweights:biasterms:flags:)"
+      }
+    },
+    "MPSCNNConvolutionDescriptor": {
+      "+cnnConvolutionDescriptorWithKernelWidth:kernelHeight:inputFeatureChannels:outputFeatureChannels:neuronFilter:": {
+        "doc": "Creates a convolution descriptor with an optional neuron filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiondescriptor/init(kernelwidth:kernelheight:inputfeaturechannels:outputfeaturechannels:neuronfilter:)"
+      }
+    },
+    "MPSCNNConvolutionTranspose": {
+      "-initWithCoder:device:": {
+        "doc": "Initializes a transposed convolution kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiontranspose/init(coder:device:)"
+      },
+      "-initWithDevice:weights:": {
+        "doc": "Initializes a transposed convolution kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiontranspose/init(device:weights:)"
+      }
+    },
+    "MPSCNNCrossChannelNormalization": {
+      "-initWithCoder:device:": {
+        "doc": "Initializes a normalization kernel in a channel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnncrosschannelnormalization/init(coder:device:)"
+      },
+      "-initWithDevice:kernelSize:": {
+        "doc": "Initializes a normalization kernel in a channel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnncrosschannelnormalization/init(device:kernelsize:)"
+      }
+    },
+    "MPSCNNDilatedPoolingMax": {
+      "-initWithCoder:device:": {
+        "doc": "Initializes a dilated max pooling filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnndilatedpoolingmax/init(coder:device:)"
+      },
+      "-initWithDevice:kernelWidth:kernelHeight:dilationRateX:dilationRateY:strideInPixelsX:strideInPixelsY:": {
+        "doc": "Initializes a dilated max pooling filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnndilatedpoolingmax/init(device:kernelwidth:kernelheight:dilationratex:dilationratey:strideinpixelsx:strideinpixelsy:)"
+      }
+    },
+    "MPSCNNFullyConnected": {
+      "-initWithCoder:device:": {
+        "doc": "Initializes a fully connected convolution layer.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnfullyconnected/init(coder:device:)"
+      },
+      "-initWithDevice:convolutionDescriptor:kernelWeights:biasTerms:flags:": {
+        "doc": "Initializes a fully connected convolution layer.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnfullyconnected/init(device:convolutiondescriptor:kernelweights:biasterms:flags:)"
+      },
+      "-initWithDevice:weights:": {
+        "doc": "Initializes a fully connected convolution layer.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnfullyconnected/init(device:weights:)"
+      }
+    },
+    "MPSCNNKernel": {
+      "-encodeToCommandBuffer:sourceImage:destinationImage:": {
+        "doc": "Encodes a kernel into a command buffer. The ensuing operation proceeds out-of-place.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnkernel/encode(commandbuffer:sourceimage:destinationimage:)"
+      }
+    },
+    "MPSCNNLocalContrastNormalization": {
+      "-initWithCoder:device:": {
+        "doc": "Initializes a local contrast normalization kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlocalcontrastnormalization/init(coder:device:)"
+      },
+      "-initWithDevice:kernelWidth:kernelHeight:": {
+        "doc": "Initializes a local contrast normalization kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlocalcontrastnormalization/init(device:kernelwidth:kernelheight:)"
+      }
+    },
+    "MPSCNNNeuronAbsolute": {
+      "-initWithDevice:": {
+        "doc": "Initializes an absolute neuron filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronabsolute/init(device:)"
+      }
+    },
+    "MPSCNNNeuronELU": {
+      "-initWithDevice:a:": {
+        "doc": "Initializes a parametric ELU neuron filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronelu/init(device:a:)"
+      }
+    },
+    "MPSCNNNeuronHardSigmoid": {
+      "-initWithDevice:a:b:": {
+        "doc": "Initializes a hard sigmoid neuron filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronhardsigmoid/init(device:a:b:)"
+      }
+    },
+    "MPSCNNNeuronLinear": {
+      "-initWithDevice:a:b:": {
+        "doc": "Initializes a linear neuron filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronlinear/init(device:a:b:)"
+      }
+    },
+    "MPSCNNNeuronReLU": {
+      "-initWithDevice:a:": {
+        "doc": "Initializes a ReLU neuron filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronrelu/init(device:a:)"
+      }
+    },
+    "MPSCNNNeuronSigmoid": {
+      "-initWithDevice:": {
+        "doc": "Initializes a sigmoid neuron filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronsigmoid/init(device:)"
+      }
+    },
+    "MPSCNNNeuronSoftPlus": {
+      "-initWithDevice:a:b:": {
+        "doc": "Initializes a parametric softplus neuron filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronsoftplus/init(device:a:b:)"
+      }
+    },
+    "MPSCNNNeuronSoftSign": {
+      "-initWithDevice:": {
+        "doc": "Initializes a softsign neuron filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronsoftsign/init(device:)"
+      }
+    },
+    "MPSCNNNeuronTanH": {
+      "-initWithDevice:a:b:": {
+        "doc": "Initializes a hyperbolic tangent neuron filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneurontanh/init(device:a:b:)"
+      }
+    },
+    "MPSCNNPooling": {
+      "-initWithCoder:device:": {
+        "doc": "Initializes a pooling filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpooling/init(coder:device:)"
+      },
+      "-initWithDevice:kernelWidth:kernelHeight:": {
+        "doc": "Initializes a pooling filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpooling/init(device:kernelwidth:kernelheight:)"
+      },
+      "-initWithDevice:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:": {
+        "doc": "Initializes a pooling filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpooling/init(device:kernelwidth:kernelheight:strideinpixelsx:strideinpixelsy:)"
+      }
+    },
+    "MPSCNNPoolingAverage": {
+      "-initWithCoder:device:": {
+        "doc": "Initializes an average pooling filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingaverage/init(coder:device:)"
+      },
+      "-initWithDevice:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:": {
+        "doc": "Initializes an average pooling filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingaverage/init(device:kernelwidth:kernelheight:strideinpixelsx:strideinpixelsy:)"
+      }
+    },
+    "MPSCNNPoolingL2Norm": {
+      "-initWithCoder:device:": {
+        "doc": "Initializes an L2-norm pooling filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingl2norm/init(coder:device:)"
+      },
+      "-initWithDevice:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:": {
+        "doc": "Initializes an L2-norm pooling filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingl2norm/init(device:kernelwidth:kernelheight:strideinpixelsx:strideinpixelsy:)"
+      }
+    },
+    "MPSCNNPoolingMax": {
+      "-initWithCoder:device:": {
+        "doc": "Initializes a max pooling filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingmax/init(coder:device:)"
+      },
+      "-initWithDevice:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:": {
+        "doc": "Initializes a max pooling filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingmax/init(device:kernelwidth:kernelheight:strideinpixelsx:strideinpixelsy:)"
+      }
+    },
+    "MPSCNNSpatialNormalization": {
+      "-initWithCoder:device:": {
+        "doc": "Initializes a spatial normalization kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnspatialnormalization/init(coder:device:)"
+      },
+      "-initWithDevice:kernelWidth:kernelHeight:": {
+        "doc": "Initializes a spatial normalization kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnspatialnormalization/init(device:kernelwidth:kernelheight:)"
+      }
+    },
+    "MPSCNNUpsamplingBilinear": {
+      "-initWithDevice:integerScaleFactorX:integerScaleFactorY:": {
+        "doc": "Initializes a bilinear spatial upsampling filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingbilinear/init(device:integerscalefactorx:integerscalefactory:)"
+      }
+    },
+    "MPSCNNUpsamplingNearest": {
+      "-initWithDevice:integerScaleFactorX:integerScaleFactorY:": {
+        "doc": "Initializes a nearest spatial upsampling filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingnearest/init(device:integerscalefactorx:integerscalefactory:)"
+      }
+    },
+    "MPSImage": {
+      "-initWithDevice:imageDescriptor:": {
+        "doc": "Initializes an empty image.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage/init(device:imagedescriptor:)"
+      },
+      "-initWithTexture:featureChannels:": {
+        "doc": "Initializes an image from a texture. The user-allocated texture has been created for a specific number of feature channels and number of images.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage/init(texture:featurechannels:)"
+      },
+      "-setPurgeableState:": {
+        "doc": "Set (or query) the purgeable state of the image’s underlying texture.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage/setpurgeablestate(_:)"
+      }
+    },
+    "MPSImageAreaMax": {
+      "-initWithDevice:kernelWidth:kernelHeight:": {
+        "doc": "Initializes the kernel with a specified width and height.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageareamax/init(device:kernelwidth:kernelheight:)"
+      }
+    },
+    "MPSImageBox": {
+      "-initWithDevice:kernelWidth:kernelHeight:": {
+        "doc": "Initializes a box filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagebox/init(device:kernelwidth:kernelheight:)"
+      }
+    },
+    "MPSImageConversion": {
+      "-initWithDevice:srcAlpha:destAlpha:backgroundColor:conversionInfo:": {
+        "doc": "Initializes a filter that can convert texture color space, alpha, and pixel format.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageconversion/init(device:srcalpha:destalpha:backgroundcolor:conversioninfo:)"
+      }
+    },
+    "MPSImageConvolution": {
+      "-initWithDevice:kernelWidth:kernelHeight:weights:": {
+        "doc": "Initializes a convolution filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageconvolution/init(device:kernelwidth:kernelheight:weights:)"
+      }
+    },
+    "MPSImageDescriptor": {
+      "+imageDescriptorWithChannelFormat:width:height:featureChannels:": {
+        "doc": "Creates an image descriptor for a single image.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedescriptor/init(channelformat:width:height:featurechannels:)"
+      },
+      "+imageDescriptorWithChannelFormat:width:height:featureChannels:numberOfImages:usage:": {
+        "doc": "Creates an image descriptor for an image container with options to set texture usage and batch size (number of images).",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedescriptor/init(channelformat:width:height:featurechannels:numberofimages:usage:)"
+      }
+    },
+    "MPSImageDilate": {
+      "-initWithDevice:kernelWidth:kernelHeight:values:": {
+        "doc": "Initializes the kernel with a specified width, height, and weight values.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedilate/init(device:kernelwidth:kernelheight:values:)"
+      }
+    },
+    "MPSImageEuclideanDistanceTransform": {
+      "-initWithCoder:device:": {
+        "doc": "Creates a Euclidean distance transform that uses a specified decoder for your data and runs on a specified device.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageeuclideandistancetransform/init(coder:device:)"
+      },
+      "-initWithDevice:": {
+        "doc": "Creates a Euclidean distance transform that runs on a specified device.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageeuclideandistancetransform/init(device:)"
+      }
+    },
+    "MPSImageGaussianBlur": {
+      "-initWithDevice:sigma:": {
+        "doc": "Initializes a Gaussian blur filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagegaussianblur/init(device:sigma:)"
+      }
+    },
+    "MPSImageHistogram": {
+      "-encodeToCommandBuffer:sourceTexture:histogram:histogramOffset:": {
+        "doc": "Encodes the filter to a command buffer using a compute command encoder.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogram/encode(to:sourcetexture:histogram:histogramoffset:)"
+      },
+      "-histogramSizeForSourceFormat:": {
+        "doc": "The amount of space the histogram will take up in the output buffer.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogram/histogramsize(forsourceformat:)"
+      },
+      "-initWithDevice:histogramInfo:": {
+        "doc": "Initializes a histogram with specific information.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogram/init(device:histograminfo:)"
+      }
+    },
+    "MPSImageHistogramEqualization": {
+      "-encodeTransformToCommandBuffer:sourceTexture:histogram:histogramOffset:": {
+        "doc": "Encodes the transform function to a command buffer using a compute command encoder. The transform function computes the equalization lookup table.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogramequalization/encodetransform(to:sourcetexture:histogram:histogramoffset:)"
+      },
+      "-initWithDevice:histogramInfo:": {
+        "doc": "Initializes a histogram with specific information.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogramequalization/init(device:histograminfo:)"
+      }
+    },
+    "MPSImageHistogramSpecification": {
+      "-encodeTransformToCommandBuffer:sourceTexture:sourceHistogram:sourceHistogramOffset:desiredHistogram:desiredHistogramOffset:": {
+        "doc": "Encodes the transform function to a command buffer using a compute command encoder. The transform function computes the equalization lookup table.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogramspecification/encodetransform(to:sourcetexture:sourcehistogram:sourcehistogramoffset:desiredhistogram:desiredhistogramoffset:)"
+      },
+      "-initWithDevice:histogramInfo:": {
+        "doc": "Initializes a histogram with specific information.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogramspecification/init(device:histograminfo:)"
+      }
+    },
+    "MPSImageMedian": {
+      "+maxKernelDiameter": {
+        "doc": "Queries the maximum diameter, in pixels, of the filter window supported by the median filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagemedian/maxkerneldiameter()"
+      },
+      "+minKernelDiameter": {
+        "doc": "Queries the minimum diameter, in pixels, of the filter window supported by the median filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagemedian/minkerneldiameter()"
+      },
+      "-initWithDevice:kernelDiameter:": {
+        "doc": "Initializes a filter for a particular kernel size and device.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagemedian/init(device:kerneldiameter:)"
+      }
+    },
+    "MPSImagePyramid": {
+      "-initWithDevice:": {
+        "doc": "Initializes a downwards 5-tap image pyramid with the default filter kernel and device.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagepyramid/init(device:)"
+      },
+      "-initWithDevice:centerWeight:": {
+        "doc": "Initialize a downwards 5-tap image pyramid with a central weight parameter and device.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagepyramid/init(device:centerweight:)"
+      },
+      "-initWithDevice:kernelWidth:kernelHeight:weights:": {
+        "doc": "Initialize a downwards n-tap image pyramid with a custom filter kernel and device.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagepyramid/init(device:kernelwidth:kernelheight:weights:)"
+      }
+    },
+    "MPSImageSobel": {
+      "-initWithDevice:": {
+        "doc": "Initializes a Sobel filter on a given device using the default color transform.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagesobel/init(device:)"
+      },
+      "-initWithDevice:linearGrayColorTransform:": {
+        "doc": "Initializes a Sobel filter on a given device using a specific color transform.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagesobel/init(device:lineargraycolortransform:)"
+      }
+    },
+    "MPSImageThresholdBinary": {
+      "-initWithDevice:thresholdValue:maximumValue:linearGrayColorTransform:": {
+        "doc": "Initializes the kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdbinary/init(device:thresholdvalue:maximumvalue:lineargraycolortransform:)"
+      }
+    },
+    "MPSImageThresholdBinaryInverse": {
+      "-initWithDevice:thresholdValue:maximumValue:linearGrayColorTransform:": {
+        "doc": "Initializes the kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdbinaryinverse/init(device:thresholdvalue:maximumvalue:lineargraycolortransform:)"
+      }
+    },
+    "MPSImageThresholdToZero": {
+      "-initWithDevice:thresholdValue:linearGrayColorTransform:": {
+        "doc": "Initializes the kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdtozero/init(device:thresholdvalue:lineargraycolortransform:)"
+      }
+    },
+    "MPSImageThresholdToZeroInverse": {
+      "-initWithDevice:thresholdValue:linearGrayColorTransform:": {
+        "doc": "Initializes the kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdtozeroinverse/init(device:thresholdvalue:lineargraycolortransform:)"
+      }
+    },
+    "MPSImageThresholdTruncate": {
+      "-initWithDevice:thresholdValue:linearGrayColorTransform:": {
+        "doc": "Initializes the kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdtruncate/init(device:thresholdvalue:lineargraycolortransform:)"
+      }
+    },
+    "MPSKernel": {
+      "-copyWithZone:device:": {
+        "doc": "Makes a copy of this kernel object for a new device.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpskernel/copy(with:device:)"
+      },
+      "-initWithDevice:": {
+        "doc": "Initializes a new kernel object.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpskernel/init(device:)"
+      }
+    },
+    "MPSMatrix": {
+      "-initWithBuffer:descriptor:": {
+        "doc": "Initializes a matrix with a buffer.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrix/init(buffer:descriptor:)"
+      }
+    },
+    "MPSMatrixDescriptor": {
+      "+matrixDescriptorWithDimensions:columns:rowBytes:dataType:": {
+        "doc": "Creates a matrix descriptor with the specified dimensions and data type.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixdescriptor/init(dimensions:columns:rowbytes:datatype:)"
+      },
+      "+rowBytesFromColumns:dataType:": {
+        "doc": "Determines the recommended matrix row stride, in bytes, for a given number of columns.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixdescriptor/rowbytes(fromcolumns:datatype:)"
+      }
+    },
+    "MPSMatrixMultiplication": {
+      "-encodeToCommandBuffer:leftMatrix:rightMatrix:resultMatrix:": {
+        "doc": "Encodes a matrix multiplication kernel to a command buffer.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixmultiplication/encode(commandbuffer:leftmatrix:rightmatrix:resultmatrix:)"
+      },
+      "-initWithDevice:transposeLeft:transposeRight:resultRows:resultColumns:interiorColumns:alpha:beta:": {
+        "doc": "Initializes a matrix multiplication kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixmultiplication/init(device:transposeleft:transposeright:resultrows:resultcolumns:interiorcolumns:alpha:beta:)"
+      }
+    },
+    "MPSTemporaryImage": {
+      "+prefetchStorageWithCommandBuffer:imageDescriptorList:": {
+        "doc": "A method that helps the framework decide which allocations to make ahead of time.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpstemporaryimage/prefetchstorage(with:imagedescriptorlist:)"
+      },
+      "+temporaryImageWithCommandBuffer:imageDescriptor:": {
+        "doc": "Initializes a temporary image for use on a command buffer.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpstemporaryimage/init(commandbuffer:imagedescriptor:)"
+      },
+      "+temporaryImageWithCommandBuffer:textureDescriptor:": {
+        "doc": "Low-level interface for creating a temporary image using a texture descriptor.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpstemporaryimage/init(commandbuffer:texturedescriptor:)"
+      }
+    },
+    "MPSUnaryImageKernel": {
+      "-encodeToCommandBuffer:inPlaceTexture:fallbackCopyAllocator:": {
+        "doc": "This method attempts to apply a kernel in place on a texture.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsunaryimagekernel/encode(commandbuffer:inplacetexture:fallbackcopyallocator:)"
+      },
+      "-encodeToCommandBuffer:sourceTexture:destinationTexture:": {
+        "doc": "Encodes a kernel into a command buffer, out of place.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsunaryimagekernel/encode(commandbuffer:sourcetexture:destinationtexture:)"
+      },
+      "-sourceRegionForDestinationSize:": {
+        "doc": "Determines the region of the source texture that will be read for an encode operation.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsunaryimagekernel/sourceregion(destinationsize:)"
+      }
+    }
+  },
+  "properties": {
+    "MPSBinaryImageKernel": {
+      "clipRect": {
+        "doc": "An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsbinaryimagekernel/cliprect"
+      },
+      "primaryEdgeMode": {
+        "doc": "The edge mode to use when texture reads stray off the edge of the primary source image.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsbinaryimagekernel/primaryedgemode"
+      },
+      "primaryOffset": {
+        "doc": "The position of the destination clip rectangle origin relative to the primary source buffer.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsbinaryimagekernel/primaryoffset"
+      },
+      "secondaryEdgeMode": {
+        "doc": "The edge mode to use when texture reads stray off the edge of the secondary source image.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsbinaryimagekernel/secondaryedgemode"
+      },
+      "secondaryOffset": {
+        "doc": "The position of the destination clip rectangle origin relative to the secondary source buffer.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsbinaryimagekernel/secondaryoffset"
+      }
+    },
+    "MPSCNNConvolution": {
+      "groups": {
+        "doc": "The number of groups that the input and output channels are divided into.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolution/groups"
+      },
+      "inputFeatureChannels": {
+        "doc": "The number of feature channels per pixel in the input image.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolution/inputfeaturechannels"
+      },
+      "neuron": {
+        "doc": "The neuron filter to be applied as part of the convolution operation.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolution/neuron"
+      },
+      "outputFeatureChannels": {
+        "doc": "The number of feature channels per pixel in the output image.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolution/outputfeaturechannels"
+      }
+    },
+    "MPSCNNConvolutionDescriptor": {
+      "groups": {
+        "doc": "The number of groups that the input and output channels are divided into.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiondescriptor/groups"
+      },
+      "inputFeatureChannels": {
+        "doc": "The number of feature channels per pixel in the input image.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiondescriptor/inputfeaturechannels"
+      },
+      "kernelHeight": {
+        "doc": "The height of the kernel window.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiondescriptor/kernelheight"
+      },
+      "kernelWidth": {
+        "doc": "The width of the kernel window.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiondescriptor/kernelwidth"
+      },
+      "neuron": {
+        "doc": "The neuron filter to be applied as part of the convolution operation.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiondescriptor/neuron"
+      },
+      "outputFeatureChannels": {
+        "doc": "The number of feature channels per pixel in the output image.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiondescriptor/outputfeaturechannels"
+      },
+      "strideInPixelsX": {
+        "doc": "The output stride (downsampling factor) in the x dimension.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiondescriptor/strideinpixelsx"
+      },
+      "strideInPixelsY": {
+        "doc": "The output stride (downsampling factor) in the y dimension.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiondescriptor/strideinpixelsy"
+      }
+    },
+    "MPSCNNCrossChannelNormalization": {
+      "alpha": {
+        "doc": "The “alpha” variable of the kernel function.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnncrosschannelnormalization/alpha"
+      },
+      "beta": {
+        "doc": "The “beta” variable of the kernel function.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnncrosschannelnormalization/beta"
+      },
+      "delta": {
+        "doc": "The “delta” variable of the kernel function.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnncrosschannelnormalization/delta"
+      },
+      "kernelSize": {
+        "doc": "The size of the square kernel window.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnncrosschannelnormalization/kernelsize"
+      }
+    },
+    "MPSCNNKernel": {
+      "clipRect": {
+        "doc": "An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnkernel/cliprect"
+      },
+      "destinationFeatureChannelOffset": {
+        "doc": "The number of channels in the destination image to skip before writing output data.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnkernel/destinationfeaturechanneloffset"
+      },
+      "edgeMode": {
+        "doc": "The edge mode to use when texture reads stray off the edge of an image.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnkernel/edgemode"
+      },
+      "offset": {
+        "doc": "The position of the destination image’s clip rectangle origin, relative to the source image.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnkernel/offset"
+      }
+    },
+    "MPSCNNLocalContrastNormalization": {
+      "alpha": {
+        "doc": "The “alpha” variable of the kernel function.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlocalcontrastnormalization/alpha"
+      },
+      "beta": {
+        "doc": "The “beta” variable of the kernel function.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlocalcontrastnormalization/beta"
+      },
+      "delta": {
+        "doc": "The “delta” variable of the kernel function.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlocalcontrastnormalization/delta"
+      },
+      "p0": {
+        "doc": "The “p0” variable of the kernel function.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlocalcontrastnormalization/p0"
+      },
+      "pm": {
+        "doc": "The “pm” variable of the kernel function.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlocalcontrastnormalization/pm"
+      },
+      "ps": {
+        "doc": "The “ps” variable of the kernel function.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlocalcontrastnormalization/ps"
+      }
+    },
+    "MPSCNNSpatialNormalization": {
+      "alpha": {
+        "doc": "The “alpha” variable of the kernel function.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnspatialnormalization/alpha"
+      },
+      "beta": {
+        "doc": "The “beta” variable of the kernel function.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnspatialnormalization/beta"
+      },
+      "delta": {
+        "doc": "The “delta” variable of the kernel function.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpscnnspatialnormalization/delta"
+      }
+    },
+    "MPSImage": {
+      "device": {
+        "doc": "The device on which the image will be used.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage/device"
+      },
+      "featureChannels": {
+        "doc": "The number of feature channels per pixel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage/featurechannels"
+      },
+      "height": {
+        "doc": "The formal height of the image, in pixels.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage/height"
+      },
+      "label": {
+        "doc": "A string to help identify this object.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage/label"
+      },
+      "numberOfImages": {
+        "doc": "The number of images for batch processing.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage/numberofimages"
+      },
+      "pixelFormat": {
+        "doc": "The pixel format of the underlying texture.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage/pixelformat"
+      },
+      "pixelSize": {
+        "doc": "The number of bytes from the first byte of one pixel to the first byte of the next pixel, in storage order. (Includes padding.)",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage/pixelsize"
+      },
+      "precision": {
+        "doc": "The number of bits of numeric precision available for each feature channel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage/precision"
+      },
+      "texture": {
+        "doc": "The underlying texture.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage/texture"
+      },
+      "textureType": {
+        "doc": "The type of the underlying texture.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage/texturetype"
+      },
+      "usage": {
+        "doc": "The intended usage of the underlying texture.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage/usage"
+      },
+      "width": {
+        "doc": "The formal width of the image, in pixels.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimage/width"
+      }
+    },
+    "MPSImageAreaMax": {
+      "kernelHeight": {
+        "doc": "The height of the filter window. Must be an odd number.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageareamax/kernelheight"
+      },
+      "kernelWidth": {
+        "doc": "The width of the filter window. Must be an odd number.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageareamax/kernelwidth"
+      }
+    },
+    "MPSImageBox": {
+      "kernelHeight": {
+        "doc": "The height of the filter window. Must be an odd number.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagebox/kernelheight"
+      },
+      "kernelWidth": {
+        "doc": "The width of the filter window. Must be an odd number.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagebox/kernelwidth"
+      }
+    },
+    "MPSImageConversion": {
+      "destinationAlpha": {
+        "doc": "Premultiplication description for the destination texture.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageconversion/destinationalpha"
+      },
+      "sourceAlpha": {
+        "doc": "Premultiplication description for the source texture.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageconversion/sourcealpha"
+      }
+    },
+    "MPSImageConvolution": {
+      "bias": {
+        "doc": "The value added to a convolved pixel before it is converted back to its intended storage format.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageconvolution/bias"
+      },
+      "kernelHeight": {
+        "doc": "The height of the filter window. Must be an odd number.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageconvolution/kernelheight"
+      },
+      "kernelWidth": {
+        "doc": "The width of the filter window. Must be an odd number.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageconvolution/kernelwidth"
+      }
+    },
+    "MPSImageDescriptor": {
+      "channelFormat": {
+        "doc": "The storage format to use for each channel in the image.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedescriptor/channelformat"
+      },
+      "cpuCacheMode": {
+        "doc": "The CPU cache mode of the underlying texture.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedescriptor/cpucachemode"
+      },
+      "featureChannels": {
+        "doc": "The number of feature channels per pixel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedescriptor/featurechannels"
+      },
+      "height": {
+        "doc": "The height of the image.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedescriptor/height"
+      },
+      "numberOfImages": {
+        "doc": "The number of images for batch processing.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedescriptor/numberofimages"
+      },
+      "pixelFormat": {
+        "doc": "The pixel format for the underlying texture.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedescriptor/pixelformat"
+      },
+      "storageMode": {
+        "doc": "The storage mode of underlying texture.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedescriptor/storagemode"
+      },
+      "usage": {
+        "doc": "Options to specify the intended usage of the underlying texture.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedescriptor/usage"
+      },
+      "width": {
+        "doc": "The width of the image.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedescriptor/width"
+      }
+    },
+    "MPSImageDilate": {
+      "kernelHeight": {
+        "doc": "The height of the filter window. which must be an odd number.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedilate/kernelheight"
+      },
+      "kernelWidth": {
+        "doc": "The width of the filter window which must be an odd number.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedilate/kernelwidth"
+      }
+    },
+    "MPSImageEuclideanDistanceTransform": {
+      "searchLimitRadius": {
+        "doc": "Limits the search in an image from a pixel to the closest nonzero pixel within a specified radius.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimageeuclideandistancetransform/searchlimitradius"
+      }
+    },
+    "MPSImageGaussianBlur": {
+      "sigma": {
+        "doc": "The sigma value with which the filter was created.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagegaussianblur/sigma"
+      }
+    },
+    "MPSImageHistogram": {
+      "clipRectSource": {
+        "doc": "The source rectangle to use when reading data.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogram/cliprectsource"
+      },
+      "histogramInfo": {
+        "doc": "A structure describing the histogram content.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogram/histograminfo"
+      },
+      "zeroHistogram": {
+        "doc": "Determines whether to zero-initialize the histogram results.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogram/zerohistogram"
+      }
+    },
+    "MPSImageHistogramEqualization": {
+      "histogramInfo": {
+        "doc": "A structure describing the histogram content.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogramequalization/histograminfo"
+      }
+    },
+    "MPSImageHistogramSpecification": {
+      "histogramInfo": {
+        "doc": "A structure describing the histogram content.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagehistogramspecification/histograminfo"
+      }
+    },
+    "MPSImageLaplacian": {
+      "bias": {
+        "doc": "The value added to a convolved pixel before it is converted back to its intended storage format.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagelaplacian/bias"
+      }
+    },
+    "MPSImageMedian": {
+      "kernelDiameter": {
+        "doc": "The diameter, in pixels, of the filter window.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagemedian/kerneldiameter"
+      }
+    },
+    "MPSImagePyramid": {
+      "kernelHeight": {
+        "doc": "The height of the filter window. Must be an odd number.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagepyramid/kernelheight"
+      },
+      "kernelWidth": {
+        "doc": "The width of the filter window. Must be an odd number.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagepyramid/kernelwidth"
+      }
+    },
+    "MPSImageSobel": {
+      "colorTransform": {
+        "doc": "The color transform used to initialize the Sobel filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagesobel/colortransform"
+      }
+    },
+    "MPSImageThresholdBinary": {
+      "maximumValue": {
+        "doc": "The maximum value used to initialize the threshold filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdbinary/maximumvalue"
+      },
+      "thresholdValue": {
+        "doc": "The threshold value used to initialize the threshold filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdbinary/thresholdvalue"
+      },
+      "transform": {
+        "doc": "The color transform used to initialize the threshold filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdbinary/transform"
+      }
+    },
+    "MPSImageThresholdBinaryInverse": {
+      "maximumValue": {
+        "doc": "The maximum value used to initialize the threshold filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdbinaryinverse/maximumvalue"
+      },
+      "thresholdValue": {
+        "doc": "The threshold value used to initialize the threshold filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdbinaryinverse/thresholdvalue"
+      },
+      "transform": {
+        "doc": "The color transform used to initialize the threshold filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdbinaryinverse/transform"
+      }
+    },
+    "MPSImageThresholdToZero": {
+      "thresholdValue": {
+        "doc": "The threshold value used to initialize the threshold filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdtozero/thresholdvalue"
+      },
+      "transform": {
+        "doc": "The color transform used to initialize the threshold filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdtozero/transform"
+      }
+    },
+    "MPSImageThresholdToZeroInverse": {
+      "thresholdValue": {
+        "doc": "The threshold value used to initialize the threshold filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdtozeroinverse/thresholdvalue"
+      },
+      "transform": {
+        "doc": "The color transform used to initialize the threshold filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdtozeroinverse/transform"
+      }
+    },
+    "MPSImageThresholdTruncate": {
+      "thresholdValue": {
+        "doc": "The threshold value used to initialize the threshold filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdtruncate/thresholdvalue"
+      },
+      "transform": {
+        "doc": "The color transform used to initialize the threshold filter.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsimagethresholdtruncate/transform"
+      }
+    },
+    "MPSKernel": {
+      "device": {
+        "doc": "The device on which the kernel will be used.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpskernel/device"
+      },
+      "label": {
+        "doc": "The string that identifies the kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpskernel/label"
+      },
+      "options": {
+        "doc": "The set of options used to run the kernel.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpskernel/options"
+      }
+    },
+    "MPSMatrix": {
+      "columns": {
+        "doc": "The number of columns in the matrix.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrix/columns"
+      },
+      "data": {
+        "doc": "The buffer that stores the matrix data.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrix/data"
+      },
+      "dataType": {
+        "doc": "The type of the values in the matrix.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrix/datatype"
+      },
+      "device": {
+        "doc": "The device on which the matrix will be used.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrix/device"
+      },
+      "rowBytes": {
+        "doc": "The stride, in bytes, between corresponding elements of consecutive rows in the matrix.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrix/rowbytes"
+      },
+      "rows": {
+        "doc": "The number of rows in the matrix.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrix/rows"
+      }
+    },
+    "MPSMatrixDescriptor": {
+      "columns": {
+        "doc": "The number of columns in the matrix.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixdescriptor/columns"
+      },
+      "dataType": {
+        "doc": "The type of the values in the matrix.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixdescriptor/datatype"
+      },
+      "rowBytes": {
+        "doc": "The stride, in bytes, between corresponding elements of consecutive rows in the matrix.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixdescriptor/rowbytes"
+      },
+      "rows": {
+        "doc": "The number of rows in the matrix.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixdescriptor/rows"
+      }
+    },
+    "MPSMatrixMultiplication": {
+      "leftMatrixOrigin": {
+        "doc": "The origin of the left input matrix.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixmultiplication/leftmatrixorigin"
+      },
+      "resultMatrixOrigin": {
+        "doc": "The origin of the result matrix.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixmultiplication/resultmatrixorigin"
+      },
+      "rightMatrixOrigin": {
+        "doc": "The origin of the right input matrix.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixmultiplication/rightmatrixorigin"
+      }
+    },
+    "MPSTemporaryImage": {
+      "readCount": {
+        "doc": "The number of times a temporary image may be read by a CNN kernel before its contents become undefined.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpstemporaryimage/readcount"
+      }
+    },
+    "MPSUnaryImageKernel": {
+      "clipRect": {
+        "doc": "An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsunaryimagekernel/cliprect"
+      },
+      "edgeMode": {
+        "doc": "The edge mode to use when texture reads stray off the edge of an image.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsunaryimagekernel/edgemode"
+      },
+      "offset": {
+        "doc": "The position of the destination clip rectangle origin relative to the source buffer.",
+        "url": "https://developer.apple.com/documentation/metalperformanceshaders/mpsunaryimagekernel/offset"
+      }
+    }
+  }
+}

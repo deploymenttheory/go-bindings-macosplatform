@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A control that defines an area on the screen that a user clicks to trigger an action.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsbutton
 type NSButton struct {
 	NSControl
@@ -96,7 +98,7 @@ func NSButtonFromID(id objc.ID) *NSButton {
 	return o
 }
 
-// Creates a standard push button with a title and image. @param title The localized title string that is displayed on the button. @param image The image that is displayed alongside the title. In left-to-right localizations, the image is displayed to the left of the title. In right-to-left localizations, it is displayed to the right. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized button object.
+// Creates a standard push button with a title and image.
 func NSButtonButtonWithTitleImageTargetAction(title *foundation.NSString, image *NSImage, target objc.ID, action objc.SEL) *NSButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelButtonWithTitleImageTargetAction, title.Ptr(), image.Ptr(), target, action)
 	if _ret != 0 {
@@ -105,7 +107,7 @@ func NSButtonButtonWithTitleImageTargetAction(title *foundation.NSString, image 
 	return NSButtonFromID(_ret)
 }
 
-// Creates a standard push button with the provided title. @param title The localized title string that is displayed on the button. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized button object.
+// Creates a standard push button with the title you specify.
 func NSButtonButtonWithTitleTargetAction(title *foundation.NSString, target objc.ID, action objc.SEL) *NSButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelButtonWithTitleTargetAction, title.Ptr(), target, action)
 	if _ret != 0 {
@@ -114,7 +116,7 @@ func NSButtonButtonWithTitleTargetAction(title *foundation.NSString, target objc
 	return NSButtonFromID(_ret)
 }
 
-// Creates a standard push button with the provided image. Set the image's accessibilityDescription property to ensure accessibility for this control. @param image The image to display in the body of the button. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized button object.
+// Creates a standard push button with the image you specify.
 func NSButtonButtonWithImageTargetAction(image *NSImage, target objc.ID, action objc.SEL) *NSButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelButtonWithImageTargetAction, image.Ptr(), target, action)
 	if _ret != 0 {
@@ -123,7 +125,7 @@ func NSButtonButtonWithImageTargetAction(image *NSImage, target objc.ID, action 
 	return NSButtonFromID(_ret)
 }
 
-// Creates a standard checkbox with the provided title. @param title The localized title string that is displayed alongside the checkbox. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized button object.
+// Creates a standard checkbox with the title you specify.
 func NSButtonCheckboxWithTitleTargetAction(title *foundation.NSString, target objc.ID, action objc.SEL) *NSButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelCheckboxWithTitleTargetAction, title.Ptr(), target, action)
 	if _ret != 0 {
@@ -132,7 +134,7 @@ func NSButtonCheckboxWithTitleTargetAction(title *foundation.NSString, target ob
 	return NSButtonFromID(_ret)
 }
 
-// Creates a standard radio button with the provided title. @param title The localized title string that is displayed alongside the radio button. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized button object.
+// Creates a standard radio button with the title you specify.
 func NSButtonRadioButtonWithTitleTargetAction(title *foundation.NSString, target objc.ID, action objc.SEL) *NSButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelRadioButtonWithTitleTargetAction, title.Ptr(), target, action)
 	if _ret != 0 {
@@ -141,35 +143,37 @@ func NSButtonRadioButtonWithTitleTargetAction(title *foundation.NSString, target
 	return NSButtonFromID(_ret)
 }
 
-// Sets the button’s type, which affects its user interface and behavior when clicked. See the NSButtonType enumeration for possible options and their behaviors.
+// Sets the button’s type, which affects its user interface and behavior when clicked.
 func (o *NSButton) SetButtonType(type_ NSButtonType) {
 	o.Ptr().Send(_nSButtonSelSetButtonType, type_)
 }
 
-// Sets the initial delay and repeat interval, in seconds, for repeated action messages sent when `continuous` is YES.
+// Sets the message delay and interval periods for a continuous button.
 func (o *NSButton) SetPeriodicDelayInterval(delay float32, interval float32) {
 	o.Ptr().Send(_nSButtonSelSetPeriodicDelayInterval, delay, interval)
 }
 
-// Gets the initial delay and repeat interval, in seconds, for repeated action messages sent when `continuous` is YES. Both parameters to this method must not be NULL.
+// Returns by reference the delay and interval periods for a continuous button.
 func (o *NSButton) GetPeriodicDelayInterval(delay *float32, interval *float32) {
 	o.Ptr().Send(_nSButtonSelGetPeriodicDelayInterval, delay, interval)
 }
 
-// Sets the button to its next eligible state. If the button allows mixed state, this cycles through the states in the order: on, off, mixed, on, etc. If the button does not allow mixed state, it toggles between off and on.
+// Sets the button to its next state.
 func (o *NSButton) SetNextState() {
 	o.Ptr().Send(_nSButtonSelSetNextState)
 }
 
-// Highlights, or un-highlights, the button. Highlighting makes the button appear "pressed", which may include showing an illuminated bezel, or showing the alternate image or title, depending on the type of button.
+// Highlights (or unhighlights) the button.
 func (o *NSButton) Highlight(flag bool) {
 	o.Ptr().Send(_nSButtonSelHighlight, flag)
 }
 
+// Sets the priority compression options for this button.
 func (o *NSButton) CompressWithPrioritizedCompressionOptions(prioritizedOptions *foundation.NSArray[*NSUserInterfaceCompressionOptions]) {
 	o.Ptr().Send(_nSButtonSelCompressWithPrioritizedCompressionOptions, prioritizedOptions.Ptr())
 }
 
+// Returns the minimum size of the button by using the compression options.
 func (o *NSButton) MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions *foundation.NSArray[*NSUserInterfaceCompressionOptions]) corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSButtonSelMinimumSizeWithPrioritizedCompressionOptions, prioritizedOptions.Ptr())
 	return _ret
@@ -498,6 +502,7 @@ func (o *NSButton) SetBorderShape(borderShape NSControlBorderShape) {
 	o.Ptr().Send(_nSButtonSelSetBorderShape, borderShape)
 }
 
+// Sets the title of a button with a character denoting an access key.
 // Deprecated: Mnemonics are not used on macOS. Set the title property directly instead.
 func (o *NSButton) SetTitleWithMnemonic(stringWithAmpersand *foundation.NSString) {
 	o.Ptr().Send(_nSButtonSelSetTitleWithMnemonic, stringWithAmpersand.Ptr())

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The class that represents a satellite image of the area with road and road name information layers on top.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkhybridmapconfiguration
 type MKHybridMapConfiguration struct {
 	MKMapConfiguration
@@ -34,6 +36,7 @@ func MKHybridMapConfigurationFromID(id objc.ID) *MKHybridMapConfiguration {
 	return o
 }
 
+// Creates a new hybrid map configuration.
 func (o *MKHybridMapConfiguration) Init() *MKHybridMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKHybridMapConfigurationSelInit)
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func (o *MKHybridMapConfiguration) Init() *MKHybridMapConfiguration {
 	return MKHybridMapConfigurationFromID(_ret)
 }
 
+// Creates a new hybrid map configuration with the specified elevation style.
 func (o *MKHybridMapConfiguration) InitWithElevationStyle(elevationStyle MKMapElevationStyle) *MKHybridMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKHybridMapConfigurationSelInitWithElevationStyle, elevationStyle)
 	if _ret != 0 {

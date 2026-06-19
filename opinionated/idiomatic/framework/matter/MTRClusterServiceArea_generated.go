@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Service Area The Service Area cluster provides an interface for controlling the areas where a device should operate, and for querying the current area being serviced.
+//
 // MTRClusterServiceArea wraps [raw.MTRClusterServiceArea] with a fluent Go API.
 type MTRClusterServiceArea struct {
 	inner *raw.MTRClusterServiceArea

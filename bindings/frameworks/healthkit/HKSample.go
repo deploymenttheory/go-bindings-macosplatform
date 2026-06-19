@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A HealthKit sample represents a piece of data associated with a start and end time.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hksample
 type HKSample struct {
 	HKObject

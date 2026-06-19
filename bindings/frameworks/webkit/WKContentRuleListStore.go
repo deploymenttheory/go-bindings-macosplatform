@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains the rules for how to load and filter content in the web view.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkcontentruleliststore
 type WKContentRuleListStore struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func WKContentRuleListStoreFromID(id objc.ID) *WKContentRuleListStore {
 	return o
 }
 
+// Returns the default content rule list store.
 func WKContentRuleListStoreDefaultStore() *WKContentRuleListStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKContentRuleListStore), _wKContentRuleListStoreSelDefaultStore)
 	if _ret != 0 {
@@ -45,6 +48,7 @@ func WKContentRuleListStoreDefaultStore() *WKContentRuleListStore {
 	return WKContentRuleListStoreFromID(_ret)
 }
 
+// Creates a new content rule list store in the specified directory.
 func WKContentRuleListStoreStoreWithURL(url *foundation.NSURL) *WKContentRuleListStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKContentRuleListStore), _wKContentRuleListStoreSelStoreWithURL, url.Ptr())
 	if _ret != 0 {
@@ -53,6 +57,7 @@ func WKContentRuleListStoreStoreWithURL(url *foundation.NSURL) *WKContentRuleLis
 	return WKContentRuleListStoreFromID(_ret)
 }
 
+// Compiles the specified JSON content into a new rule list and adds it to the current data store.
 func (o *WKContentRuleListStore) CompileContentRuleListForIdentifierEncodedContentRuleListCompletionHandler(identifier *foundation.NSString, encodedContentRuleList *foundation.NSString, completionHandler func(*WKContentRuleList, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -67,6 +72,7 @@ func (o *WKContentRuleListStore) CompileContentRuleListForIdentifierEncodedConte
 	o.Ptr().Send(_wKContentRuleListStoreSelCompileContentRuleListForIdentifierEncodedContentRuleListCompletionHandler, identifier.Ptr(), encodedContentRuleList.Ptr(), __block_completionHandler)
 }
 
+// Searches asynchronously for a specific rule list in the data store.
 func (o *WKContentRuleListStore) LookUpContentRuleListForIdentifierCompletionHandler(identifier *foundation.NSString, completionHandler func(*WKContentRuleList, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -81,6 +87,7 @@ func (o *WKContentRuleListStore) LookUpContentRuleListForIdentifierCompletionHan
 	o.Ptr().Send(_wKContentRuleListStoreSelLookUpContentRuleListForIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
 }
 
+// Removes a rule list from the current data store asynchronously.
 func (o *WKContentRuleListStore) RemoveContentRuleListForIdentifierCompletionHandler(identifier *foundation.NSString, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -92,6 +99,17 @@ func (o *WKContentRuleListStore) RemoveContentRuleListForIdentifierCompletionHan
 	o.Ptr().Send(_wKContentRuleListStoreSelRemoveContentRuleListForIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
 }
 
-func (o *WKContentRuleListStore) GetAvailableContentRuleListIdentifiers(completionHandler objc.Block) {
-	o.Ptr().Send(_wKContentRuleListStoreSelGetAvailableContentRuleListIdentifiers, completionHandler)
+// Fetches the identifiers for all rule lists in the store asynchronously.
+func (o *WKContentRuleListStore) GetAvailableContentRuleListIdentifiers(completionHandler func(*foundation.NSArray[*foundation.NSString])) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[*foundation.NSString](blockParam0))
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_wKContentRuleListStoreSelGetAvailableContentRuleListIdentifiers, __block_completionHandler)
 }

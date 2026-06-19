@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for controller profiles that support physical buttons, thumbsticks, and directional pads.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcphysicalinputprofile
 type GCPhysicalInputProfile struct {
 	foundation.NSObject
@@ -49,7 +51,7 @@ func GCPhysicalInputProfileFromID(id objc.ID) *GCPhysicalInputProfile {
 	return o
 }
 
-// Profile elements can be accessed using keyed subscript notation, with a valid alias of its inputs. @example extendedGamepad["Button A"] == extendedGamepad.buttonA // YES @example microGamepad["Button X"] == microGamepad.buttonX // YES @note Equivalent to -elements
+// Returns the element that the key specifies.
 func (o *GCPhysicalInputProfile) ObjectForKeyedSubscript(key *foundation.NSString) *GCControllerElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelObjectForKeyedSubscript, key.Ptr())
 	if _ret != 0 {
@@ -58,7 +60,7 @@ func (o *GCPhysicalInputProfile) ObjectForKeyedSubscript(key *foundation.NSStrin
 	return GCControllerElementFromID(_ret)
 }
 
-// Polls the state vector of the physical input input and saves it to a new and writable instance of GCPhysicalInputProfile. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken. @see snapshot @return A new physical input profile with the duplicated state vector of the current physical input
+// Returns a snapshot of the profile with its current element values.
 func (o *GCPhysicalInputProfile) Capture() *GCPhysicalInputProfile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelCapture)
 	if _ret != 0 {
@@ -67,12 +69,12 @@ func (o *GCPhysicalInputProfile) Capture() *GCPhysicalInputProfile {
 	return GCPhysicalInputProfileFromID(_ret)
 }
 
-// Sets the state vector of the physical input profile to a copy of the passed in physical input profile's state vector. @note If the controller's snapshot flag is set to NO, this method has no effect. @see GCController.snapshot
+// Copies the input values from a specified physical input profile to a snapshot of the profile.
 func (o *GCPhysicalInputProfile) SetStateFromPhysicalInput(physicalInput *GCPhysicalInputProfile) {
 	o.Ptr().Send(_gCPhysicalInputProfileSelSetStateFromPhysicalInput, physicalInput.Ptr())
 }
 
-// Returns the primary alias of the GCControllerElement that a given physical input maps to. @discussion If the user were to map a physical press of the A button of their game controller to the B button, then -[GCPhysicalInputProfile  mappedElementAliasForPhysicalInputName: GCInputButtonA] would return GCInputButtonB. Note that mappings can change anytime your app is backgrounded, so make sure you update any relevant visuals when returning to foreground. @param inputName A GCInput string corresponding to the physical button you want the mapped element alias for. @returns A GCInput string corresponding to the primary alias of the GCControllerElement that a given physical button maps to, or nil if there is no mapping.
+// Returns the name of the input element to which the user remaps the given physical element.
 func (o *GCPhysicalInputProfile) MappedElementAliasForPhysicalInputName(inputName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelMappedElementAliasForPhysicalInputName, inputName.Ptr())
 	if _ret != 0 {
@@ -81,10 +83,13 @@ func (o *GCPhysicalInputProfile) MappedElementAliasForPhysicalInputName(inputNam
 	return foundation.NSStringFromID(_ret)
 }
 
-// Returns a set of GCInput strings corresponding to physical inputs that are mapped to a given GCControllerElement. @discussion If the user mapped the physical press of the A button, the B button, and the X button to the B button, then -[GCPhysicalInputProfile mappedPhysicalInputNamesForElementAlias: GCInputButtonB] would return  [GCInputButtonA, GCInputButtonB, GCInputButtonX]. Note that mappings can change anytime your app is backgrounded, so make sure you update any relevant visuals when returning to foreground. @param elementAlias A GCInput string corresponding to an alias of the GCControllerElement you want the physical buttons for. @returns A set of GCInput strings corresponding to physical inputs that are mapped to a given GCControllerElement, or an empty set if there are no mappings.
+// Returns the physical input elements to which the user remaps the given input element.
 func (o *GCPhysicalInputProfile) MappedPhysicalInputNamesForElementAlias(elementAlias *foundation.NSString) *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _gCPhysicalInputProfileSelMappedPhysicalInputNamesForElementAlias, elementAlias.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelMappedPhysicalInputNamesForElementAlias, elementAlias.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 // A profile keeps a reference to the device that this profile is mapping input from
@@ -130,28 +135,43 @@ func (o *GCPhysicalInputProfile) SetValueDidChangeHandler(valueDidChangeHandler 
 
 // The following properties allow for runtime lookup of any input element on a profile, when provided with a valid alias. @example extendedGamepad.elements["Button A"] == extendedGamepad.buttonA // YES @example extendedGamepad.dpads["Left Thumbstick"] == extendedGamepad.leftThumbstick // YES @example extendedGamepad.dpads["Button B"] // returns nil, "Button B" is not a GCControllerDirectionPad
 func (o *GCPhysicalInputProfile) Elements() *foundation.NSDictionary[*foundation.NSString, *GCControllerElement] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *GCControllerElement]](o.Ptr(), _gCPhysicalInputProfileSelElements)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelElements)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *GCControllerElement](_ret)
 }
 
 func (o *GCPhysicalInputProfile) Buttons() *foundation.NSDictionary[*foundation.NSString, *GCControllerButtonInput] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *GCControllerButtonInput]](o.Ptr(), _gCPhysicalInputProfileSelButtons)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelButtons)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *GCControllerButtonInput](_ret)
 }
 
 func (o *GCPhysicalInputProfile) Axes() *foundation.NSDictionary[*foundation.NSString, *GCControllerAxisInput] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *GCControllerAxisInput]](o.Ptr(), _gCPhysicalInputProfileSelAxes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelAxes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *GCControllerAxisInput](_ret)
 }
 
 func (o *GCPhysicalInputProfile) Dpads() *foundation.NSDictionary[*foundation.NSString, *GCControllerDirectionPad] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *GCControllerDirectionPad]](o.Ptr(), _gCPhysicalInputProfileSelDpads)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelDpads)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *GCControllerDirectionPad](_ret)
 }
 
 func (o *GCPhysicalInputProfile) Touchpads() *foundation.NSDictionary[*foundation.NSString, *GCControllerTouchpad] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *GCControllerTouchpad]](o.Ptr(), _gCPhysicalInputProfileSelTouchpads)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelTouchpads)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *GCControllerTouchpad](_ret)
 }
 
 // The following properties allow for dynamic querying of the input elements available on a profile.

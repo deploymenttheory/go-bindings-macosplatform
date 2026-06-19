@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An input for a physical control, such as a button or thumbstick.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gccontrollerelement
 type GCControllerElement struct {
 	foundation.NSObject
@@ -128,6 +130,9 @@ func (o *GCControllerElement) SetUnmappedLocalizedName(unmappedLocalizedName *fo
 
 // A set of aliases that can be used to access this element with keyed subscript notation.
 func (o *GCControllerElement) Aliases() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _gCControllerElementSelAliases)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerElementSelAliases)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }

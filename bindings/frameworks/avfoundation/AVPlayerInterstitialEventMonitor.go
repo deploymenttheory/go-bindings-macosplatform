@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that monitors the scheduling and progress of interstitial events.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayerinterstitialeventmonitor
 type AVPlayerInterstitialEventMonitor struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func AVPlayerInterstitialEventMonitorFromID(id objc.ID) *AVPlayerInterstitialEve
 	return o
 }
 
-// Returns an instance of AVPlayerInterstitialEvent for use in observing and scheduling interstitial playback. - Parameter primaryPlayer: The AVPlayer that will play the primaryItems of the receiver's interstitial events. - Returns: An instance of AVPlayerInterstitialEventMonitor.
+// A convenience initializer that creates an observer with a player item.
 func AVPlayerInterstitialEventMonitorInterstitialEventMonitorWithPrimaryPlayer(primaryPlayer *AVPlayer) *AVPlayerInterstitialEventMonitor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerInterstitialEventMonitor), _aVPlayerInterstitialEventMonitorSelInterstitialEventMonitorWithPrimaryPlayer, primaryPlayer.Ptr())
 	if _ret != 0 {
@@ -46,6 +48,7 @@ func AVPlayerInterstitialEventMonitorInterstitialEventMonitorWithPrimaryPlayer(p
 	return AVPlayerInterstitialEventMonitorFromID(_ret)
 }
 
+// Creates an observer with a player item.
 func (o *AVPlayerInterstitialEventMonitor) InitWithPrimaryPlayer(primaryPlayer *AVPlayer) *AVPlayerInterstitialEventMonitor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventMonitorSelInitWithPrimaryPlayer, primaryPlayer.Ptr())
 	if _ret != 0 {

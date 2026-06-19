@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A discrete detection track composed of individual detections.
+// An object representing a discrete detection track composed of individual detections.
 //
 // Apple documentation: https://developer.apple.com/documentation/cinematic/cncustomdetectiontrack
 type CNCustomDetectionTrack struct {

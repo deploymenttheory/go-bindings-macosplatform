@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object that enables optical flow on a frame processing session.
+//
 // Apple documentation: https://developer.apple.com/documentation/videotoolbox/vtopticalflowconfiguration
 type VTOpticalFlowConfiguration struct {
 	foundation.NSObject
@@ -91,20 +93,29 @@ func VTOpticalFlowConfigurationDefaultRevision() VTOpticalFlowConfigurationRevis
 
 // Supported pixel formats for source frames for current configuration.
 func (o *VTOpticalFlowConfiguration) FrameSupportedPixelFormats() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _vTOpticalFlowConfigurationSelFrameSupportedPixelFormats)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTOpticalFlowConfigurationSelFrameSupportedPixelFormats)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTOpticalFlowConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTOpticalFlowConfigurationSelSourcePixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTOpticalFlowConfigurationSelSourcePixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTOpticalFlowConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTOpticalFlowConfigurationSelDestinationPixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTOpticalFlowConfigurationSelDestinationPixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Reports whether the system supports this processor.

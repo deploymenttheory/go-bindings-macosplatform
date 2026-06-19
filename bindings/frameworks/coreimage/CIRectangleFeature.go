@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about a rectangular region detected in a still or video image.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cirectanglefeature
 type CIRectangleFeature struct {
 	CIFeature

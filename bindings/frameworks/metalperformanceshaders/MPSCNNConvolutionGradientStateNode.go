@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a gradient convolution state.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiongradientstatenode
 type MPSCNNConvolutionGradientStateNode struct {
 	mpsneuralnetwork.MPSNNGradientStateNode

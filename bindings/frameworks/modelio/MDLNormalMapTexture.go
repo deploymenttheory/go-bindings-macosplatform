@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A generator of texel data that computes a normal map from a supplied texture.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlnormalmaptexture
 type MDLNormalMapTexture struct {
 	MDLTexture
@@ -30,6 +32,7 @@ func MDLNormalMapTextureFromID(id objc.ID) *MDLNormalMapTexture {
 	return o
 }
 
+// Initializes a normal map to be generated from the specified texture.
 func (o *MDLNormalMapTexture) InitByGeneratingNormalMapWithTextureNameSmoothnessContrast(sourceTexture *MDLTexture, name *foundation.NSString, smoothness float32, contrast float32) *MDLNormalMapTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLNormalMapTextureSelInitByGeneratingNormalMapWithTextureNameSmoothnessContrast, sourceTexture.Ptr(), name.Ptr(), smoothness, contrast)
 	if _ret != 0 {

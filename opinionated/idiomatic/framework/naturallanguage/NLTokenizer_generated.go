@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A tokenizer that segments natural language text into semantic units.
+//
 // Tokenizer wraps [raw.NLTokenizer] with a fluent Go API.
 type Tokenizer struct {
 	inner *raw.NLTokenizer
@@ -31,6 +33,8 @@ func TokenizerFromID(id objc.ID) *Tokenizer {
 	return &Tokenizer{inner: raw.NLTokenizerFromID(id)}
 }
 
+// Creates a tokenizer with the specified unit.
+//
 // NewTokenizerWithUnit creates a new [Tokenizer].
 func NewTokenizerWithUnit(unit NLTokenUnit) *Tokenizer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NLTokenizer")), objc.RegisterName("alloc"))
@@ -38,32 +42,44 @@ func NewTokenizerWithUnit(unit NLTokenUnit) *Tokenizer {
 	return &Tokenizer{inner: raw.NLTokenizerFromID(_id)}
 }
 
+// The text to be tokenized.
+//
 // WithString sets the string_ property and returns the receiver for chaining.
 func (x *Tokenizer) WithString(string_ string) *Tokenizer {
 	x.inner.SetString(foundation.NSStringStringWithUTF8String(string_))
 	return x
 }
 
+// Sets the language of the text to be tokenized.
+//
 // SetLanguage calls the underlying SetLanguage.
 func (x *Tokenizer) SetLanguage(language *foundation.NSString) {
 	x.inner.SetLanguage(language)
 }
 
+// Finds the range of the token at the given index.
+//
 // TokenRangeAtIndex calls the underlying TokenRangeAtIndex.
 func (x *Tokenizer) TokenRangeAtIndex(characterIndex uint) foundation.NSRange {
 	return x.inner.TokenRangeAtIndex(characterIndex)
 }
 
+// Finds the entire range of all tokens contained completely or partially within the specified range.
+//
 // TokenRangeForRange calls the underlying TokenRangeForRange.
 func (x *Tokenizer) TokenRangeForRange(range_ foundation.NSRange) foundation.NSRange {
 	return x.inner.TokenRangeForRange(range_)
 }
 
+// Tokenizes the string within the provided range.
+//
 // TokensForRange calls the underlying TokensForRange.
 func (x *Tokenizer) TokensForRange(range_ foundation.NSRange) *foundation.NSArray[*foundation.NSValue] {
 	return x.inner.TokensForRange(range_)
 }
 
+// Enumerates over a given range of the string and calls the specified block for each token.
+//
 // EnumerateTokensInRangeUsing calls the underlying EnumerateTokensInRangeUsing.
 func (x *Tokenizer) EnumerateTokensInRangeUsing(range_ foundation.NSRange, block objc.Block) {
 	x.inner.EnumerateTokensInRangeUsing(range_, block)

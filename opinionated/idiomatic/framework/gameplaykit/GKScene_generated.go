@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A scene stores and handles loading of data related to a particular scene.
+// A container for associating GameplayKit objects with a SpriteKit scene.
 //
 // Scene wraps [raw.GKScene] with a fluent Go API.
 type Scene struct {
@@ -39,7 +39,7 @@ func NewScene() *Scene {
 	return &Scene{inner: raw.GKSceneFromID(_id)}
 }
 
-// The root node for the scene. @see GKSceneRootNodeType
+// The SpriteKit scene managed by this GKScene object.
 //
 // WithRootNode sets the rootNode property and returns the receiver for chaining.
 func (x *Scene) WithRootNode(rootNode raw.GKSceneRootNodeType) *Scene {
@@ -47,14 +47,14 @@ func (x *Scene) WithRootNode(rootNode raw.GKSceneRootNodeType) *Scene {
 	return x
 }
 
-// Adds an entity to the scene's list of entities. @param entity the entity to add.
+// Adds a GameplayKit entity to the list of entities managed by the scene.
 //
 // AddEntity calls the underlying AddEntity.
 func (x *Scene) AddEntity(entity *raw.GKEntity) {
 	x.inner.AddEntity(entity)
 }
 
-// Removes an entity from the scene's list of entities. @param entity the entity to remove.
+// Removes a GameplayKit entity from the list of entities managed by the scene.
 //
 // RemoveEntity calls the underlying RemoveEntity.
 func (x *Scene) RemoveEntity(entity *raw.GKEntity) {
@@ -68,7 +68,7 @@ func (x *Scene) AddGraphName(graph *raw.GKGraph, name string) {
 	x.inner.AddGraphName(graph, foundation.NSStringStringWithUTF8String(name))
 }
 
-// Removes a graph from the scene's list of graphs. @param name the name of the corresponding graph as added via addGraph:
+// Removes a pathfinding graph from the list of graphs managed by the scene.
 //
 // RemoveGraph calls the underlying RemoveGraph.
 func (x *Scene) RemoveGraph(name string) {

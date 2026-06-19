@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that convolves an image with a given kernel of odd width and height.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagebox
 type MPSImageBox struct {
 	mpsimage.MPSUnaryImageKernel
@@ -35,6 +37,7 @@ func MPSImageBoxFromID(id objc.ID) *MPSImageBox {
 	return o
 }
 
+// Initializes a box filter.
 func (o *MPSImageBox) InitWithDeviceKernelWidthKernelHeight(device metal.MTLDevice, kernelWidth uint, kernelHeight uint) *MPSImageBox {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageBoxSelInitWithDeviceKernelWidthKernelHeight, device, kernelWidth, kernelHeight)
 	if _ret != 0 {

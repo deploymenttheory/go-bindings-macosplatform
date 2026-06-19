@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A normalization kernel applied across feature channels.
+//
 // CNNCrossChannelNormalization wraps [raw.MPSCNNCrossChannelNormalization] with a fluent Go API.
 type CNNCrossChannelNormalization struct {
 	inner *raw.MPSCNNCrossChannelNormalization
@@ -33,7 +35,7 @@ func CNNCrossChannelNormalizationFromID(id objc.ID) *CNNCrossChannelNormalizatio
 	return &CNNCrossChannelNormalization{inner: raw.MPSCNNCrossChannelNormalizationFromID(id)}
 }
 
-// @abstract  Initialize a local response normalization filter in a channel @param      device              The device the filter will run on @param      kernelSize          The kernel filter size in each dimension. @return     A valid MPSCNNCrossChannelNormalization object or nil, if failure.
+// Initializes a normalization kernel in a channel.
 //
 // NewCNNCrossChannelNormalizationWithDeviceKernelSize creates a new [CNNCrossChannelNormalization].
 func NewCNNCrossChannelNormalizationWithDeviceKernelSize(device metal.MTLDevice, kernelSize uint) *CNNCrossChannelNormalization {
@@ -42,7 +44,7 @@ func NewCNNCrossChannelNormalizationWithDeviceKernelSize(device metal.MTLDevice,
 	return &CNNCrossChannelNormalization{inner: raw.MPSCNNCrossChannelNormalizationFromID(_id)}
 }
 
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+// Initializes a normalization kernel in a channel.
 //
 // NewCNNCrossChannelNormalizationWithCoderDevice creates a new [CNNCrossChannelNormalization].
 func NewCNNCrossChannelNormalizationWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *CNNCrossChannelNormalization {
@@ -51,7 +53,7 @@ func NewCNNCrossChannelNormalizationWithCoderDevice(aDecoder *foundation.NSCoder
 	return &CNNCrossChannelNormalization{inner: raw.MPSCNNCrossChannelNormalizationFromID(_id)}
 }
 
-// @property   alpha @abstract   The value of alpha.  Default is 1.0. Must be non-negative.
+// The “alpha” variable of the kernel function.
 //
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *CNNCrossChannelNormalization) WithAlpha(alpha float32) *CNNCrossChannelNormalization {
@@ -59,7 +61,7 @@ func (x *CNNCrossChannelNormalization) WithAlpha(alpha float32) *CNNCrossChannel
 	return x
 }
 
-// @property   beta @abstract   The value of beta.  Default is 5.0
+// The “beta” variable of the kernel function.
 //
 // WithBeta sets the beta property and returns the receiver for chaining.
 func (x *CNNCrossChannelNormalization) WithBeta(beta float32) *CNNCrossChannelNormalization {
@@ -67,7 +69,7 @@ func (x *CNNCrossChannelNormalization) WithBeta(beta float32) *CNNCrossChannelNo
 	return x
 }
 
-// @property   delta @abstract   The value of delta.  Default is 1.0
+// The “delta” variable of the kernel function.
 //
 // WithDelta sets the delta property and returns the receiver for chaining.
 func (x *CNNCrossChannelNormalization) WithDelta(delta float32) *CNNCrossChannelNormalization {
@@ -75,7 +77,7 @@ func (x *CNNCrossChannelNormalization) WithDelta(delta float32) *CNNCrossChannel
 	return x
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+// The position of the destination image’s clip rectangle origin, relative to the source image.
 //
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *CNNCrossChannelNormalization) WithOffset(offset mpscore.MPSOffset) *CNNCrossChannelNormalization {
@@ -83,7 +85,7 @@ func (x *CNNCrossChannelNormalization) WithOffset(offset mpscore.MPSOffset) *CNN
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
 //
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *CNNCrossChannelNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNCrossChannelNormalization {
@@ -91,7 +93,7 @@ func (x *CNNCrossChannelNormalization) WithClipRect(clipRect metal.MTLRegion) *C
 	return x
 }
 
-// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+// The number of channels in the destination image to skip before writing output data.
 //
 // WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
 func (x *CNNCrossChannelNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNCrossChannelNormalization {
@@ -115,7 +117,7 @@ func (x *CNNCrossChannelNormalization) WithSourceFeatureChannelMaxCount(sourceFe
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode Note: For @ref MPSCNNPoolingAverage specifying edge mode @ref MPSImageEdgeModeClamp is interpreted as a "shrink-to-edge" operation, which shrinks the effective filtering window to remain within the source image borders.
+// The edge mode to use when texture reads stray off the edge of an image.
 //
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *CNNCrossChannelNormalization) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNCrossChannelNormalization {
@@ -139,7 +141,7 @@ func (x *CNNCrossChannelNormalization) WithDestinationImageAllocator(destination
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNCrossChannelNormalization) WithOptions(options mpscore.MPSKernelOptions) *CNNCrossChannelNormalization {
@@ -147,7 +149,7 @@ func (x *CNNCrossChannelNormalization) WithOptions(options mpscore.MPSKernelOpti
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNCrossChannelNormalization) WithLabel(label string) *CNNCrossChannelNormalization {

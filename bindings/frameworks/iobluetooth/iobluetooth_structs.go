@@ -633,6 +633,7 @@ type BluetoothUserPasskeyNotification struct {
 	Passkey       uint32
 }
 
+// Structure used to search for particular devices.
 type IOBluetoothDeviceSearchAttributes struct {
 	Options              uint
 	MaxResults           uint
@@ -640,6 +641,7 @@ type IOBluetoothDeviceSearchAttributes struct {
 	AttributeList        *IOBluetoothDeviceSearchDeviceAttributes
 }
 
+// Structure used to search for particular devices.
 type IOBluetoothDeviceSearchDeviceAttributes struct {
 	Address           BluetoothDeviceAddress
 	Name              [248]uint8
@@ -659,17 +661,20 @@ type IOBluetoothL2CAPChannelEvent struct {
 	Status    int
 }
 
+// Part of the OBEXSessionEvent structure.
 type OBEXAbortCommandData struct {
 	HeaderDataPtr    unsafe.Pointer
 	HeaderDataLength uint
 }
 
+// Part of the OBEXSessionEvent structure.
 type OBEXAbortCommandResponseData struct {
 	ServerResponseOpCode uint8
 	HeaderDataPtr        unsafe.Pointer
 	HeaderDataLength     uint
 }
 
+// Part of the OBEXSessionEvent structure.
 type OBEXConnectCommandData struct {
 	HeaderDataPtr    unsafe.Pointer
 	HeaderDataLength uint
@@ -678,6 +683,7 @@ type OBEXConnectCommandData struct {
 	Flags            uint8
 }
 
+// Part of the OBEXSessionEvent structure.
 type OBEXConnectCommandResponseData struct {
 	ServerResponseOpCode uint8
 	HeaderDataPtr        unsafe.Pointer
@@ -687,40 +693,47 @@ type OBEXConnectCommandResponseData struct {
 	Flags                uint8
 }
 
+// Part of the OBEXSessionEvent structure.
 type OBEXDisconnectCommandData struct {
 	HeaderDataPtr    unsafe.Pointer
 	HeaderDataLength uint
 }
 
+// Part of the OBEXSessionEvent structure.
 type OBEXDisconnectCommandResponseData struct {
 	ServerResponseOpCode uint8
 	HeaderDataPtr        unsafe.Pointer
 	HeaderDataLength     uint
 }
 
+// Part of the OBEXSessionEvent structure.
 type OBEXErrorData struct {
 	Error      int32
 	DataPtr    unsafe.Pointer
 	DataLength uint
 }
 
+// Part of the OBEXSessionEvent structure.
 type OBEXGetCommandData struct {
 	HeaderDataPtr    unsafe.Pointer
 	HeaderDataLength uint
 }
 
+// Part of the OBEXSessionEvent structure.
 type OBEXGetCommandResponseData struct {
 	ServerResponseOpCode uint8
 	HeaderDataPtr        unsafe.Pointer
 	HeaderDataLength     uint
 }
 
+// Part of the OBEXSessionEvent structure.
 type OBEXPutCommandData struct {
 	HeaderDataPtr      unsafe.Pointer
 	HeaderDataLength   uint
 	BodyDataLeftToSend uint
 }
 
+// Part of the OBEXSessionEvent structure.
 type OBEXPutCommandResponseData struct {
 	ServerResponseOpCode uint8
 	HeaderDataPtr        unsafe.Pointer
@@ -737,6 +750,7 @@ type OBEXSessionEvent struct {
 	U                unsafe.Pointer
 }
 
+// Part of the OBEXSessionEvent structure.
 type OBEXSetPathCommandData struct {
 	HeaderDataPtr    unsafe.Pointer
 	HeaderDataLength uint
@@ -744,6 +758,7 @@ type OBEXSetPathCommandData struct {
 	Constants        uint8
 }
 
+// Part of the OBEXSessionEvent structure.
 type OBEXSetPathCommandResponseData struct {
 	ServerResponseOpCode uint8
 	HeaderDataPtr        unsafe.Pointer

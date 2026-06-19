@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class for different kinds of authorization requests.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationrequest
 type ASAuthorizationRequest struct {
 	foundation.NSObject

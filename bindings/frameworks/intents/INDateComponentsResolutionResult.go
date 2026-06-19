@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for the date information associated with an intent.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/indatecomponentsresolutionresult
 type INDateComponentsResolutionResult struct {
 	INIntentResolutionResult
@@ -32,6 +34,7 @@ func INDateComponentsResolutionResultFromID(id objc.ID) *INDateComponentsResolut
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INDateComponentsResolutionResultSuccessWithResolvedDateComponents(resolvedDateComponents *foundation.NSDateComponents) *INDateComponentsResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINDateComponentsResolutionResult), _iNDateComponentsResolutionResultSelSuccessWithResolvedDateComponents, resolvedDateComponents.Ptr())
 	if _ret != 0 {
@@ -40,14 +43,16 @@ func INDateComponentsResolutionResultSuccessWithResolvedDateComponents(resolvedD
 	return INDateComponentsResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires the user to select from among the specified objects.
 func INDateComponentsResolutionResultDisambiguationWithDateComponentsToDisambiguate(dateComponentsToDisambiguate *foundation.NSArray[*foundation.NSDateComponents]) *INDateComponentsResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINDateComponentsResolutionResult), _iNDateComponentsResolutionResultSelDisambiguationWithDateComponentsToDisambiguate, dateComponentsToDisambiguate)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINDateComponentsResolutionResult), _iNDateComponentsResolutionResultSelDisambiguationWithDateComponentsToDisambiguate, dateComponentsToDisambiguate.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return INDateComponentsResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INDateComponentsResolutionResultConfirmationRequiredWithDateComponentsToConfirm(dateComponentsToConfirm *foundation.NSDateComponents) *INDateComponentsResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINDateComponentsResolutionResult), _iNDateComponentsResolutionResultSelConfirmationRequiredWithDateComponentsToConfirm, dateComponentsToConfirm.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// NEProxySettings contains HTTP proxy settings.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neproxysettings
 type NEProxySettings struct {
 	foundation.NSObject
@@ -143,20 +145,26 @@ func (o *NEProxySettings) SetExcludeSimpleHostnames(excludeSimpleHostnames bool)
 
 // @property exceptionList @discussion An array of domain strings. If the destination host name of a connection shares a suffix with one of these strings then the proxy settings will not be used for the connection.
 func (o *NEProxySettings) ExceptionList() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nEProxySettingsSelExceptionList)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEProxySettingsSelExceptionList)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NEProxySettings) SetExceptionList(exceptionList *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nEProxySettingsSelSetExceptionList, exceptionList)
+	o.Ptr().Send(_nEProxySettingsSelSetExceptionList, exceptionList.Ptr())
 }
 
 // @property matchDomains @discussion An array of domain strings. If the destination host name of a connection shares a suffix with one of these strings then the proxy settings will be used for the connection. Otherwise the proxy settings will not be used. If this property is nil then all connections to which the Network Extension applies will use the proxy settings.
 func (o *NEProxySettings) MatchDomains() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nEProxySettingsSelMatchDomains)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEProxySettingsSelMatchDomains)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NEProxySettings) SetMatchDomains(matchDomains *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nEProxySettingsSelSetMatchDomains, matchDomains)
+	o.Ptr().Send(_nEProxySettingsSelSetMatchDomains, matchDomains.Ptr())
 }

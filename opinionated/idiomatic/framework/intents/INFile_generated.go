@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes a file.
+//
 // File wraps [raw.INFile] with a fluent Go API.
 type File struct {
 	inner *raw.INFile
@@ -37,7 +39,7 @@ func NewFile() *File {
 	return &File{inner: raw.INFileFromID(_id)}
 }
 
-// The human-readable name of the file, which will be displayed to the user.
+// The name of the file.
 //
 // WithFilename sets the filename property and returns the receiver for chaining.
 func (x *File) WithFilename(filename string) *File {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A listener that waits for new incoming connections, configures them, and accepts or rejects them.
+//
 // XPCListener wraps [raw.NSXPCListener] with a fluent Go API.
 type XPCListener struct {
 	inner *raw.NSXPCListener
@@ -30,6 +32,8 @@ func XPCListenerFromID(id objc.ID) *XPCListener {
 	return &XPCListener{inner: raw.NSXPCListenerFromID(id)}
 }
 
+// Initializes a listener in a LaunchAgent or LaunchDaemon which has a name advertised in a launchd.plist file.
+//
 // NewXPCListenerWithMachServiceName creates a new [XPCListener].
 func NewXPCListenerWithMachServiceName(name string) *XPCListener {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXPCListener")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewXPCListenerWithMachServiceName(name string) *XPCListener {
 	return &XPCListener{inner: raw.NSXPCListenerFromID(_id)}
 }
 
+// The delegate for the listener.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *XPCListener) WithDelegate(delegate raw.NSXPCListenerDelegate) *XPCListener {
 	x.inner.SetDelegate(delegate)
@@ -49,27 +55,35 @@ func (x *XPCListener) WithScriptingProperties(scriptingProperties *raw.NSDiction
 	return x
 }
 
+// Starts processing of incoming requests.
+//
 // Resume calls the underlying Resume.
 func (x *XPCListener) Resume() {
 	x.inner.Resume()
 }
 
+// Suspends the listener.
+//
 // Suspend calls the underlying Suspend.
 func (x *XPCListener) Suspend() {
 	x.inner.Suspend()
 }
 
+// Activates the listener.
+//
 // Activate calls the underlying Activate.
 func (x *XPCListener) Activate() {
 	x.inner.Activate()
 }
 
+// Invalidates the listener.
+//
 // Invalidate calls the underlying Invalidate.
 func (x *XPCListener) Invalidate() {
 	x.inner.Invalidate()
 }
 
-// Sets the code signing requirement for new connections. If the requirement is malformed, an exception is thrown. If new peer connections do not match the requirement, the incoming connection is automatically rejected before consulting the delegate. This method will only work on `anonymousListener` or `initWithMachServiceName` listener instances. Use on other types of listeners will result in an assertion failure. See https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/RequirementLang/RequirementLang.html for more information on the format.
+// Sets the code signing requirement for connections to this listener.
 //
 // SetConnectionCodeSigningRequirement calls the underlying SetConnectionCodeSigningRequirement.
 func (x *XPCListener) SetConnectionCodeSigningRequirement(requirement string) {

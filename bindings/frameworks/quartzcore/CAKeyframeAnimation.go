@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides keyframe animation capabilities for a layer object.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/cakeyframeanimation
 type CAKeyframeAnimation struct {
 	CAPropertyAnimation
@@ -50,12 +52,15 @@ func CAKeyframeAnimationFromID(id objc.ID) *CAKeyframeAnimation {
 }
 
 func (o *CAKeyframeAnimation) Values() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cAKeyframeAnimationSelValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cAKeyframeAnimationSelValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *CAKeyframeAnimation) SetValues(values *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_cAKeyframeAnimationSelSetValues, values)
+	o.Ptr().Send(_cAKeyframeAnimationSelSetValues, values.Ptr())
 }
 
 func (o *CAKeyframeAnimation) Path() unsafe.Pointer {
@@ -68,12 +73,15 @@ func (o *CAKeyframeAnimation) SetPath(path unsafe.Pointer) {
 }
 
 func (o *CAKeyframeAnimation) KeyTimes() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _cAKeyframeAnimationSelKeyTimes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cAKeyframeAnimationSelKeyTimes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *CAKeyframeAnimation) SetKeyTimes(keyTimes *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_cAKeyframeAnimationSelSetKeyTimes, keyTimes)
+	o.Ptr().Send(_cAKeyframeAnimationSelSetKeyTimes, keyTimes.Ptr())
 }
 
 func (o *CAKeyframeAnimation) TimingFunctions() *foundation.NSArray[*CAMediaTimingFunction] {
@@ -101,30 +109,39 @@ func (o *CAKeyframeAnimation) SetCalculationMode(calculationMode *foundation.NSS
 }
 
 func (o *CAKeyframeAnimation) TensionValues() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _cAKeyframeAnimationSelTensionValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cAKeyframeAnimationSelTensionValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *CAKeyframeAnimation) SetTensionValues(tensionValues *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_cAKeyframeAnimationSelSetTensionValues, tensionValues)
+	o.Ptr().Send(_cAKeyframeAnimationSelSetTensionValues, tensionValues.Ptr())
 }
 
 func (o *CAKeyframeAnimation) ContinuityValues() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _cAKeyframeAnimationSelContinuityValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cAKeyframeAnimationSelContinuityValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *CAKeyframeAnimation) SetContinuityValues(continuityValues *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_cAKeyframeAnimationSelSetContinuityValues, continuityValues)
+	o.Ptr().Send(_cAKeyframeAnimationSelSetContinuityValues, continuityValues.Ptr())
 }
 
 func (o *CAKeyframeAnimation) BiasValues() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _cAKeyframeAnimationSelBiasValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cAKeyframeAnimationSelBiasValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *CAKeyframeAnimation) SetBiasValues(biasValues *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_cAKeyframeAnimationSelSetBiasValues, biasValues)
+	o.Ptr().Send(_cAKeyframeAnimationSelSetBiasValues, biasValues.Ptr())
 }
 
 func (o *CAKeyframeAnimation) RotationMode() *foundation.NSString {

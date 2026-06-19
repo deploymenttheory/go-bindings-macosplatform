@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object to enable motion blur on a frame processing session.
+//
 // Apple documentation: https://developer.apple.com/documentation/videotoolbox/vtmotionblurconfiguration
 type VTMotionBlurConfiguration struct {
 	foundation.NSObject
@@ -42,7 +44,7 @@ func VTMotionBlurConfigurationFromID(id objc.ID) *VTMotionBlurConfiguration {
 	return o
 }
 
-// Creates a new motion blur configuration. Returns `nil` if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels; the maximum value is 8192 for macOS, and 4096 for iOS. - frameHeight: Height of source frame in pixels; the maximum value is 4320 for macOS, and 2160 for iOS. - usePrecomputedFlow: Boolean value that indicates whether you will provide optical flow; if false, this configuration computes the optical flow on the fly. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see “VTMotionBlurConfigurationQualityPrioritization“. - revision: The specific algorithm or configuration revision you use to perform the request.
+// Creates a new motion blur configuration with specified flow width and height.
 func (o *VTMotionBlurConfiguration) InitWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, usePrecomputedFlow bool, qualityPrioritization VTMotionBlurConfigurationQualityPrioritization, revision VTMotionBlurConfigurationRevision) *VTMotionBlurConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTMotionBlurConfigurationSelInitWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision, frameWidth, frameHeight, usePrecomputedFlow, qualityPrioritization, revision)
 	if _ret != 0 {
@@ -98,20 +100,29 @@ func VTMotionBlurConfigurationDefaultRevision() VTMotionBlurConfigurationRevisio
 
 // Available supported pixel formats for source frames for current configuration.
 func (o *VTMotionBlurConfiguration) FrameSupportedPixelFormats() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _vTMotionBlurConfigurationSelFrameSupportedPixelFormats)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTMotionBlurConfigurationSelFrameSupportedPixelFormats)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTMotionBlurConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTMotionBlurConfigurationSelSourcePixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTMotionBlurConfigurationSelSourcePixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTMotionBlurConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTMotionBlurConfigurationSelDestinationPixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTMotionBlurConfigurationSelDestinationPixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Reports whether the system supports this processor.

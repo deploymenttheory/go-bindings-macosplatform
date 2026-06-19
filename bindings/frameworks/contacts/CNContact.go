@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable object that stores information about a single contact, such as the contact’s first name, phone numbers, and addresses.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cncontact
 type CNContact struct {
 	foundation.NSObject
@@ -71,19 +73,19 @@ func CNContactFromID(id objc.ID) *CNContact {
 	return o
 }
 
-// Returns YES if the value for the specified key was fetched.
+// Determines whether the contact property value for the specified key is fetched.
 func (o *CNContact) IsKeyAvailable(key *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cNContactSelIsKeyAvailable, key.Ptr())
 	return _ret
 }
 
-// Returns YES if the values for the keys specified by all the descriptors were fetched.
+// Determines whether all contact property values for the specified keys are fetched.
 func (o *CNContact) AreKeysAvailable(keyDescriptors *foundation.NSArray[CNKeyDescriptor]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cNContactSelAreKeysAvailable, keyDescriptors.Ptr())
 	return _ret
 }
 
-// Returns a user displayable property name.
+// Returns a string containing the localized contact property name.
 func CNContactLocalizedStringForKey(key *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContact), _cNContactSelLocalizedStringForKey, key.Ptr())
 	if _ret != 0 {
@@ -92,19 +94,19 @@ func CNContactLocalizedStringForKey(key *foundation.NSString) *foundation.NSStri
 	return foundation.NSStringFromID(_ret)
 }
 
-// The contact comparator for a given sort order.
+// Returns a comparator to sort contacts with the specified order.
 func CNContactComparatorForNameSortOrder(sortOrder CNContactSortOrder) objc.Block {
 	_ret := objc.Send[objc.Block](objc.ID(_clsCNContact), _cNContactSelComparatorForNameSortOrder, sortOrder)
 	return _ret
 }
 
-// Use to fetch all contact keys required for the contact sort comparator.
+// Fetches all the keys required for the contact sort comparator.
 func CNContactDescriptorForAllComparatorKeys() CNKeyDescriptor {
 	_ret := objc.Send[CNKeyDescriptor](objc.ID(_clsCNContact), _cNContactSelDescriptorForAllComparatorKeys)
 	return _ret
 }
 
-// Returns YES if the receiver was fetched as a unified contact and includes the contact having contactIdentifier in its unification
+// Returns a Boolean indicating whether the current contact is a unified contact and includes a contact with the specified identifier.
 func (o *CNContact) IsUnifiedWithContactWithIdentifier(contactIdentifier *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cNContactSelIsUnifiedWithContactWithIdentifier, contactIdentifier.Ptr())
 	return _ret
@@ -266,38 +268,59 @@ func (o *CNContact) ImageDataAvailable() bool {
 }
 
 func (o *CNContact) PhoneNumbers() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cNContactSelPhoneNumbers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelPhoneNumbers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *CNContact) EmailAddresses() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cNContactSelEmailAddresses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelEmailAddresses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *CNContact) PostalAddresses() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cNContactSelPostalAddresses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelPostalAddresses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *CNContact) UrlAddresses() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cNContactSelUrlAddresses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelUrlAddresses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *CNContact) ContactRelations() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cNContactSelContactRelations)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelContactRelations)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *CNContact) SocialProfiles() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cNContactSelSocialProfiles)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelSocialProfiles)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *CNContact) InstantMessageAddresses() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cNContactSelInstantMessageAddresses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelInstantMessageAddresses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // The Gregorian birthday.
@@ -320,11 +343,14 @@ func (o *CNContact) NonGregorianBirthday() *foundation.NSDateComponents {
 
 // Other Gregorian dates (anniversaries, etc).
 func (o *CNContact) Dates() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cNContactSelDates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactSelDates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
-// @abstract To fetch contacts matching a name. @discussion The name can contain any number of words.
+// Returns a predicate to find the contacts matching the specified name.
 func CNContactPredicateForContactsMatchingName(name *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContact), _cNContactSelPredicateForContactsMatchingName, name.Ptr())
 	if _ret != 0 {
@@ -333,7 +359,7 @@ func CNContactPredicateForContactsMatchingName(name *foundation.NSString) *found
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @abstract    Fetch contacts matching an email address. @discussion  Use this predicate to find the contact(s) which contain the specified email address. The search is not case-sensitive. @param       emailAddress The email address to search for. Do not include a scheme (e.g., "mailto:").
+// Returns a predicate to find the contacts whose email address matches the specified value.
 func CNContactPredicateForContactsMatchingEmailAddress(emailAddress *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContact), _cNContactSelPredicateForContactsMatchingEmailAddress, emailAddress.Ptr())
 	if _ret != 0 {
@@ -342,7 +368,7 @@ func CNContactPredicateForContactsMatchingEmailAddress(emailAddress *foundation.
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @abstract    Fetch contacts matching a phone number. @discussion  If the predicate and contact differ in their use or presence of country codes, a best effort will be made to match results; however, inexact matches are not guaranteed. @param       phoneNumber A @c CNPhoneNumber representing the phone number to search for. Do not include a scheme (e.g., "tel:").
+// Returns a predicate to find the contacts whose phone number matches the specified value.
 func CNContactPredicateForContactsMatchingPhoneNumber(phoneNumber *CNPhoneNumber) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContact), _cNContactSelPredicateForContactsMatchingPhoneNumber, phoneNumber.Ptr())
 	if _ret != 0 {
@@ -351,15 +377,16 @@ func CNContactPredicateForContactsMatchingPhoneNumber(phoneNumber *CNPhoneNumber
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// To fetch contacts matching contact identifiers.
+// Returns a predicate to find the contacts matching the specified identifiers.
 func CNContactPredicateForContactsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSPredicate {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCNContact), _cNContactSelPredicateForContactsWithIdentifiers, identifiers)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCNContact), _cNContactSelPredicateForContactsWithIdentifiers, identifiers.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
+// Returns a predicate to find the contacts that are members in the specified group.
 func CNContactPredicateForContactsInGroupWithIdentifier(groupIdentifier *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContact), _cNContactSelPredicateForContactsInGroupWithIdentifier, groupIdentifier.Ptr())
 	if _ret != 0 {
@@ -368,6 +395,7 @@ func CNContactPredicateForContactsInGroupWithIdentifier(groupIdentifier *foundat
 	return foundation.NSPredicateFromID(_ret)
 }
 
+// Returns a predicate to find the contacts in the specified container.
 func CNContactPredicateForContactsInContainerWithIdentifier(containerIdentifier *foundation.NSString) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContact), _cNContactSelPredicateForContactsInContainerWithIdentifier, containerIdentifier.Ptr())
 	if _ret != 0 {

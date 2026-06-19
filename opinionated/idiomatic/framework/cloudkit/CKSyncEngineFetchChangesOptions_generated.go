@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A set of options to use with a fetch operation.
+//
 // SyncEngineFetchChangesOptions wraps [raw.CKSyncEngineFetchChangesOptions] with a fluent Go API.
 type SyncEngineFetchChangesOptions struct {
 	inner *raw.CKSyncEngineFetchChangesOptions
@@ -32,7 +34,7 @@ func SyncEngineFetchChangesOptionsFromID(id objc.ID) *SyncEngineFetchChangesOpti
 	return &SyncEngineFetchChangesOptions{inner: raw.CKSyncEngineFetchChangesOptionsFromID(id)}
 }
 
-// Initializes a set of options with the specific scope. If you provide a `nil` scope, the default scope is used. The default scope includes everything.
+// Initializes a set of options with the specific scope.
 //
 // NewSyncEngineFetchChangesOptionsWithScope creates a new [SyncEngineFetchChangesOptions].
 func NewSyncEngineFetchChangesOptionsWithScope(scope *raw.CKSyncEngineFetchChangesScope) *SyncEngineFetchChangesOptions {
@@ -49,7 +51,7 @@ func (x *SyncEngineFetchChangesOptions) WithScope(scope *SyncEngineFetchChangesS
 	return x
 }
 
-// The operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of fetch operations in CloudKit Console. The default value is `nil`.
+// The operation group to use for the underlying CloudKit operations.
 //
 // WithOperationGroup sets the operationGroup property and returns the receiver for chaining.
 func (x *SyncEngineFetchChangesOptions) WithOperationGroup(operationGroup *OperationGroup) *SyncEngineFetchChangesOptions {
@@ -57,7 +59,7 @@ func (x *SyncEngineFetchChangesOptions) WithOperationGroup(operationGroup *Opera
 	return x
 }
 
-// A list of zones that are prioritized over others while fetching changes. `CKSyncEngine` fetches changes for the zones in this list first. You might use this to prioritize a specific set of zones for initial sync. You could also prioritize the object currently showing in the UI by putting it first in this list. Any zones not included in this list are prioritized in a default manner. If a zone in this list has no changes to fetch, then that zone is ignored.
+// A list of zones that are prioritized over others while fetching changes.
 //
 // WithPrioritizedZoneIDs sets the collection, converting the Go slice to an NSArray.
 func (x *SyncEngineFetchChangesOptions) WithPrioritizedZoneIDs(items ...*raw.CKRecordZoneID) *SyncEngineFetchChangesOptions {

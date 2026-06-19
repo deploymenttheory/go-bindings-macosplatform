@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specialized date object with embedded calendar information.
+//
 // CalendarDate wraps [raw.NSCalendarDate] with a fluent Go API.
 type CalendarDate struct {
 	inner *raw.NSCalendarDate

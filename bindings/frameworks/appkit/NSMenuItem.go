@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A command item in an app menu.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsmenuitem
 type NSMenuItem struct {
 	foundation.NSObject
@@ -99,6 +101,7 @@ func NSMenuItemFromID(id objc.ID) *NSMenuItem {
 	return o
 }
 
+// Returns a menu item that is used to separate logical groups of menu commands.
 func NSMenuItemSeparatorItem() *NSMenuItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenuItem), _nSMenuItemSelSeparatorItem)
 	if _ret != 0 {
@@ -107,7 +110,7 @@ func NSMenuItemSeparatorItem() *NSMenuItem {
 	return NSMenuItemFromID(_ret)
 }
 
-// Creates a menu item representing a section header with the provided title. Section header items are used to provide context to a grouping of menu items. Items created using this method are non-interactive and do not perform an action.
+// Returns a menu item representing a section header for a logical grouping of menu commands.
 func NSMenuItemSectionHeaderWithTitle(title *foundation.NSString) *NSMenuItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenuItem), _nSMenuItemSelSectionHeaderWithTitle, title.Ptr())
 	if _ret != 0 {
@@ -116,6 +119,7 @@ func NSMenuItemSectionHeaderWithTitle(title *foundation.NSString) *NSMenuItem {
 	return NSMenuItemFromID(_ret)
 }
 
+// Returns an initialized instance of NSMenuItem.
 func (o *NSMenuItem) InitWithTitleActionKeyEquivalent(string_ *foundation.NSString, selector objc.SEL, charCode *foundation.NSString) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelInitWithTitleActionKeyEquivalent, string_.Ptr(), selector, charCode.Ptr())
 	if _ret != 0 {
@@ -472,17 +476,20 @@ func (o *NSMenuItem) SetBadge(badge *NSMenuItemBadge) {
 	o.Ptr().Send(_nSMenuItemSelSetBadge, badge.Ptr())
 }
 
+// Sets the character of the menu item title at location that is to be underlined.
 // Deprecated: since macOS 10.6.
 func (o *NSMenuItem) SetMnemonicLocation(location uint) {
 	o.Ptr().Send(_nSMenuItemSelSetMnemonicLocation, location)
 }
 
+// Returns the position of the underlined character in the menu item title used as a mnemonic.
 // Deprecated: since macOS 10.6.
 func (o *NSMenuItem) MnemonicLocation() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSMenuItemSelMnemonicLocation)
 	return _ret
 }
 
+// Returns the character in the menu item title that appears underlined for use as a mnemonic.
 // Deprecated: since macOS 10.6.
 func (o *NSMenuItem) Mnemonic() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemSelMnemonic)
@@ -492,6 +499,7 @@ func (o *NSMenuItem) Mnemonic() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Sets the title of a menu item with a character denoting an access key.
 // Deprecated: since macOS 10.13.
 func (o *NSMenuItem) SetTitleWithMnemonic(stringWithAmpersand *foundation.NSString) {
 	o.Ptr().Send(_nSMenuItemSelSetTitleWithMnemonic, stringWithAmpersand.Ptr())

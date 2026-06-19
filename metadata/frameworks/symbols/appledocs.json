@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "framework": "Symbols",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "NSSymbolAppearEffect": {
+      "doc": "A type that makes the layers of a symbol-based image appear separately or as a whole.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymbolappeareffect"
+    },
+    "NSSymbolAutomaticContentTransition": {
+      "doc": "A type that applies the default animation to a symbol-based image in a context-sensitive manner.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymbolautomaticcontenttransition"
+    },
+    "NSSymbolBounceEffect": {
+      "doc": "A type that applies a transitory scaling effect, or bounce, to the layers in a symbol-based image separately or as a whole.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymbolbounceeffect"
+    },
+    "NSSymbolBreatheEffect": {
+      "doc": "A symbol effect that applies the Breathe animation to symbol images.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymbolbreatheeffect"
+    },
+    "NSSymbolContentTransition": {
+      "doc": "An abstract base class for transitions you can apply to symbol-based images.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymbolcontenttransition"
+    },
+    "NSSymbolDisappearEffect": {
+      "doc": "A type that makes the layers of a symbol-based image disappear separately or as a whole.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymboldisappeareffect"
+    },
+    "NSSymbolDrawOffEffect": {
+      "doc": "A symbol effect that applies the DrawOff animation to symbol images.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymboldrawoffeffect"
+    },
+    "NSSymbolDrawOnEffect": {
+      "doc": "A symbol effect that applies the DrawOn animation to symbol images.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymboldrawoneffect"
+    },
+    "NSSymbolEffect": {
+      "doc": "An abstract base class for effects that you can apply to a symbol-based image.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymboleffect"
+    },
+    "NSSymbolEffectOptions": {
+      "doc": "Options that configure how effects apply to symbol-based images.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptions"
+    },
+    "NSSymbolEffectOptionsRepeatBehavior": {
+      "doc": "The behavior of repetition to use when a symbol effect is animating.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptionsrepeatbehavior"
+    },
+    "NSSymbolMagicReplaceContentTransition": {
+      "doc": "A symbol effect applies the MagicReplace animation to symbol images.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymbolmagicreplacecontenttransition"
+    },
+    "NSSymbolPulseEffect": {
+      "doc": "A type that fades the opacity of some or all layers in a symbol-based image.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymbolpulseeffect"
+    },
+    "NSSymbolReplaceContentTransition": {
+      "doc": "A type that replaces the layers of one symbol-based image with those of another.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymbolreplacecontenttransition"
+    },
+    "NSSymbolRotateEffect": {
+      "doc": "A symbol effect that applies the Rotate animation to symbol images.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymbolrotateeffect"
+    },
+    "NSSymbolScaleEffect": {
+      "doc": "A type that scales the layers in a symbol-based image separately or as a whole.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymbolscaleeffect"
+    },
+    "NSSymbolVariableColorEffect": {
+      "doc": "A type that replaces the opacity of variable layers in a symbol-based image in a repeatable sequence.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymbolvariablecoloreffect"
+    },
+    "NSSymbolWiggleEffect": {
+      "doc": "A symbol effect that applies the Wiggle animation to symbol images.",
+      "url": "https://developer.apple.com/documentation/symbols/nssymbolwiggleeffect"
+    }
+  },
+  "methods": {
+    "NSSymbolAppearEffect": {
+      "+appearDownEffect": {
+        "doc": "An effect that makes the symbol scale down as it appears.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolappeareffect/appeardowneffect"
+      },
+      "+appearUpEffect": {
+        "doc": "An effect that makes the symbol scale up as it appears.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolappeareffect/appearupeffect"
+      },
+      "+effect": {
+        "doc": "An animation that makes the layers of a symbol-based image appear separately or as a whole.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolappeareffect/effect"
+      },
+      "-effectWithByLayer": {
+        "doc": "An effect that makes each layer appear separately.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolappeareffect/effectwithbylayer"
+      },
+      "-effectWithWholeSymbol": {
+        "doc": "An effect that makes all layers appear simultaneously.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolappeareffect/effectwithwholesymbol"
+      }
+    },
+    "NSSymbolAutomaticContentTransition": {
+      "+transition": {
+        "doc": "A transition that applies the default animation to a symbol-based image in a context-sensitive manner.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolautomaticcontenttransition/transition"
+      }
+    },
+    "NSSymbolBounceEffect": {
+      "+bounceDownEffect": {
+        "doc": "An effect that bounces the symbol downward.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolbounceeffect/bouncedowneffect"
+      },
+      "+bounceUpEffect": {
+        "doc": "An effect that bounces the symbol upward.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolbounceeffect/bounceupeffect"
+      },
+      "+effect": {
+        "doc": "An animation that applies a transitory scaling effect, or bounce, to the layers in a symbol-based image separately or as a whole.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolbounceeffect/effect"
+      },
+      "-effectWithByLayer": {
+        "doc": "An effect that bounces each layer separately.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolbounceeffect/effectwithbylayer"
+      },
+      "-effectWithWholeSymbol": {
+        "doc": "An effect that bounces all layers simultaneously.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolbounceeffect/effectwithwholesymbol"
+      }
+    },
+    "NSSymbolBreatheEffect": {
+      "+breathePlainEffect": {
+        "doc": "Convenience initializer for a breathe effect that makes the symbol breathe with no other styling.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolbreatheeffect/breatheplaineffect"
+      },
+      "+breathePulseEffect": {
+        "doc": "Convenience initializer for a breathe effect that pulses layers as they breathe.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolbreatheeffect/breathepulseeffect"
+      },
+      "+effect": {
+        "doc": "The default breathe effect, determined by the system.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolbreatheeffect/effect"
+      },
+      "-effectWithByLayer": {
+        "doc": "Returns a copy of the effect that animates incrementally, by layer.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolbreatheeffect/effectwithbylayer"
+      },
+      "-effectWithWholeSymbol": {
+        "doc": "Returns a copy of the effect that animates all layers of the symbol simultaneously.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolbreatheeffect/effectwithwholesymbol"
+      }
+    },
+    "NSSymbolDisappearEffect": {
+      "+disappearDownEffect": {
+        "doc": "An effect that scales the symbol down as it disappears.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboldisappeareffect/disappeardowneffect"
+      },
+      "+disappearUpEffect": {
+        "doc": "An effect that scales the symbol up as it disappears.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboldisappeareffect/disappearupeffect"
+      },
+      "+effect": {
+        "doc": "An animation that makes the layers of a symbol-based image disappear separately or as a whole.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboldisappeareffect/effect"
+      },
+      "-effectWithByLayer": {
+        "doc": "An effect that makes each layer disappear separately.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboldisappeareffect/effectwithbylayer"
+      },
+      "-effectWithWholeSymbol": {
+        "doc": "An effect that makes all layers disappear simultaneously.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboldisappeareffect/effectwithwholesymbol"
+      }
+    },
+    "NSSymbolDrawOffEffect": {
+      "+effect": {
+        "doc": "The default draw off effect, determined by the system.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboldrawoffeffect/effect"
+      },
+      "-effectWithByLayer": {
+        "doc": "Returns a copy of the effect requesting an animation that applies separately to each motion group.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboldrawoffeffect/effectwithbylayer"
+      },
+      "-effectWithIndividually": {
+        "doc": "Returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboldrawoffeffect/effectwithindividually"
+      },
+      "-effectWithNonReversed": {
+        "doc": "Returns a copy of the effect that only animates forwards. This cancels the reversed variant.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboldrawoffeffect/effectwithnonreversed"
+      },
+      "-effectWithReversed": {
+        "doc": "Returns a copy of the effect that animates in reverse. This cancels the nonReversed variant.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboldrawoffeffect/effectwithreversed"
+      },
+      "-effectWithWholeSymbol": {
+        "doc": "Returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboldrawoffeffect/effectwithwholesymbol"
+      }
+    },
+    "NSSymbolDrawOnEffect": {
+      "+effect": {
+        "doc": "The default draw on effect, determined by the system.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboldrawoneffect/effect"
+      },
+      "-effectWithByLayer": {
+        "doc": "Returns a copy of the effect requesting an animation that applies separately to each motion group.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboldrawoneffect/effectwithbylayer"
+      },
+      "-effectWithIndividually": {
+        "doc": "Returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboldrawoneffect/effectwithindividually"
+      },
+      "-effectWithWholeSymbol": {
+        "doc": "Returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboldrawoneffect/effectwithwholesymbol"
+      }
+    },
+    "NSSymbolEffectOptions": {
+      "+options": {
+        "doc": "The default set of effect options.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptions/options"
+      },
+      "+optionsWithNonRepeating": {
+        "doc": "A default set of effect options that prefers to not repeat.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptions/optionswithnonrepeating-c.type.method"
+      },
+      "+optionsWithRepeatBehavior:": {
+        "doc": "Convenience initializer setting a preferred repeat behavior.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptions/optionswithrepeatbehavior:-c.type.method"
+      },
+      "+optionsWithRepeatCount:": {
+        "doc": "A default set of effect options with a preferred repeat count.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptions/optionswithrepeatcount:-c.type.method"
+      },
+      "+optionsWithRepeating": {
+        "doc": "A default set of effect options that prefers to repeat indefinitely.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptions/optionswithrepeating-c.type.method"
+      },
+      "+optionsWithSpeed:": {
+        "doc": "A default set of effect options with a preferred speed multiplier.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptions/optionswithspeed:-c.type.method"
+      },
+      "-optionsWithNonRepeating": {
+        "doc": "A set of effect options that prefers to not repeat.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptions/optionswithnonrepeating-c.method"
+      },
+      "-optionsWithRepeatBehavior:": {
+        "doc": "Return a copy of the options setting a preferred repeat behavior.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptions/optionswithrepeatbehavior:-c.method"
+      },
+      "-optionsWithRepeatCount:": {
+        "doc": "Creates a set of effect options with a preferred repeat count.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptions/optionswithrepeatcount:-c.method"
+      },
+      "-optionsWithRepeating": {
+        "doc": "A set of effect options that prefers to repeat indefinitely.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptions/optionswithrepeating-c.method"
+      },
+      "-optionsWithSpeed:": {
+        "doc": "Creates a set of effect options with a preferred speed multiplier.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptions/optionswithspeed:-c.method"
+      }
+    },
+    "NSSymbolEffectOptionsRepeatBehavior": {
+      "+behaviorContinuous": {
+        "doc": "Creates and returns a repeat behavior that prefers to repeat indefinitely, using continuous animations if available. Continuous animations have an intro, a body that runs as long as the effect is enabled, and an outro. If available these animations provide a smoother animation when an effect repeats indefinitely.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptionsrepeatbehavior/behaviorcontinuous"
+      },
+      "+behaviorPeriodic": {
+        "doc": "Creates and returns a repeat behavior that prefers to repeat indefinitely using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptionsrepeatbehavior/behaviorperiodic"
+      },
+      "+behaviorPeriodicWithCount:": {
+        "doc": "Creates and returns a repeat behavior with a preferred play count using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptionsrepeatbehavior/behaviorperiodicwithcount:"
+      },
+      "+behaviorPeriodicWithCount:delay:": {
+        "doc": "Creates and returns a repeat behavior with a preferred play count and delay using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptionsrepeatbehavior/behaviorperiodicwithcount:delay:"
+      },
+      "+behaviorPeriodicWithDelay:": {
+        "doc": "Creates and returns a repeat behavior with a preferred repeat delay using periodic animations. Periodic animations play the effect at regular intervals starting and stopping each time.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymboleffectoptionsrepeatbehavior/behaviorperiodicwithdelay:"
+      }
+    },
+    "NSSymbolPulseEffect": {
+      "+effect": {
+        "doc": "The default pulse effect, determined by the system.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolpulseeffect/effect"
+      },
+      "-effectWithByLayer": {
+        "doc": "A copy of the effect requesting an animation that pulses only the layers marked to always pulse.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolpulseeffect/effectwithbylayer"
+      },
+      "-effectWithWholeSymbol": {
+        "doc": "A copy of the effect requesting an animation that pulses all layers simultaneously.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolpulseeffect/effectwithwholesymbol"
+      }
+    },
+    "NSSymbolReplaceContentTransition": {
+      "+magicTransitionWithFallback:": {
+        "doc": "Convenience initializer for a MagicReplace content transition with a configured Replace fallback.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolreplacecontenttransition/magictransitionwithfallback:"
+      },
+      "+replaceDownUpTransition": {
+        "doc": "An effect that replaces a symbol by scaling it down, and scaling a different symbol up.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolreplacecontenttransition/replacedownuptransition"
+      },
+      "+replaceOffUpTransition": {
+        "doc": "An effect that replaces a symbol by removing it, and scaling a different symbol up.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolreplacecontenttransition/replaceoffuptransition"
+      },
+      "+replaceUpUpTransition": {
+        "doc": "An effect that replaces a symbol by scaling it up, and scaling a different symbol up.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolreplacecontenttransition/replaceupuptransition"
+      },
+      "+transition": {
+        "doc": "An effect that replaces the layers of one symbol-based image with those of another.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolreplacecontenttransition/transition"
+      },
+      "-transitionWithByLayer": {
+        "doc": "An effect that replaces each layer separately.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolreplacecontenttransition/transitionwithbylayer"
+      },
+      "-transitionWithWholeSymbol": {
+        "doc": "An effect that replaces all layers simultaneously.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolreplacecontenttransition/transitionwithwholesymbol"
+      }
+    },
+    "NSSymbolRotateEffect": {
+      "+effect": {
+        "doc": "The default rotate effect, determined by the system.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolrotateeffect/effect"
+      },
+      "+rotateClockwiseEffect": {
+        "doc": "Convenience initializer for a rotate effect that rotates clockwise.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolrotateeffect/rotateclockwiseeffect"
+      },
+      "+rotateCounterClockwiseEffect": {
+        "doc": "Convenience initializer for a rotate effect that rotates counter-clockwise.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolrotateeffect/rotatecounterclockwiseeffect"
+      },
+      "-effectWithByLayer": {
+        "doc": "Returns a copy of the effect that animates incrementally, by layer.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolrotateeffect/effectwithbylayer"
+      },
+      "-effectWithWholeSymbol": {
+        "doc": "Returns a copy of the effect that animates all layers of the symbol simultaneously.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolrotateeffect/effectwithwholesymbol"
+      }
+    },
+    "NSSymbolScaleEffect": {
+      "+effect": {
+        "doc": "An animation that scales the layers in a symbol-based image separately or as a whole.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolscaleeffect/effect"
+      },
+      "+scaleDownEffect": {
+        "doc": "An effect that scales the symbol down.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolscaleeffect/scaledowneffect"
+      },
+      "+scaleUpEffect": {
+        "doc": "An effect that scales the symbol up.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolscaleeffect/scaleupeffect"
+      },
+      "-effectWithByLayer": {
+        "doc": "An effect that scales each layer separately.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolscaleeffect/effectwithbylayer"
+      },
+      "-effectWithWholeSymbol": {
+        "doc": "An effect that scales all layers simultaneously.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolscaleeffect/effectwithwholesymbol"
+      }
+    },
+    "NSSymbolVariableColorEffect": {
+      "+effect": {
+        "doc": "An animation that replaces the opacity of variable layers in a symbol-based image in a repeatable sequence.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolvariablecoloreffect/effect"
+      },
+      "-effectWithCumulative": {
+        "doc": "An effect that enables each layer of a symbol-based image in sequence.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolvariablecoloreffect/effectwithcumulative"
+      },
+      "-effectWithDimInactiveLayers": {
+        "doc": "An effect that dims inactive layers in a symbol-based image.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolvariablecoloreffect/effectwithdiminactivelayers"
+      },
+      "-effectWithHideInactiveLayers": {
+        "doc": "An effect that hides inactive layers in a symbol-based image.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolvariablecoloreffect/effectwithhideinactivelayers"
+      },
+      "-effectWithIterative": {
+        "doc": "An effect that momentarily enables each layer of a symbol-based image in sequence.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolvariablecoloreffect/effectwithiterative"
+      },
+      "-effectWithNonReversing": {
+        "doc": "An effect that doesn’t reverse each time it repeats.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolvariablecoloreffect/effectwithnonreversing"
+      },
+      "-effectWithReversing": {
+        "doc": "An effect that reverses each time it repeats.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolvariablecoloreffect/effectwithreversing"
+      }
+    },
+    "NSSymbolWiggleEffect": {
+      "+effect": {
+        "doc": "The default wiggle effect, determined by the system.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolwiggleeffect/effect"
+      },
+      "+wiggleBackwardEffect": {
+        "doc": "Convenience initializer for a wiggle effect that moves back and forth horizontally based on the current locale, starting by moving backward.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolwiggleeffect/wigglebackwardeffect"
+      },
+      "+wiggleClockwiseEffect": {
+        "doc": "Convenience initializer for a wiggle effect that rotates back and forth, starting by rotating clockwise.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolwiggleeffect/wiggleclockwiseeffect"
+      },
+      "+wiggleCounterClockwiseEffect": {
+        "doc": "Convenience initializer for a wiggle effect that rotates back and forth, starting by rotating counter-clockwise.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolwiggleeffect/wigglecounterclockwiseeffect"
+      },
+      "+wiggleCustomAngleEffect:": {
+        "doc": "Convenience initializer for a wiggle effect that moves back and forth along an axis, starting by moving toward a custom angle.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolwiggleeffect/wigglecustomangleeffect:"
+      },
+      "+wiggleDownEffect": {
+        "doc": "Convenience initializer for a wiggle effect that moves back and forth vertically, starting by moving down.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolwiggleeffect/wiggledowneffect"
+      },
+      "+wiggleForwardEffect": {
+        "doc": "Convenience initializer for a wiggle effect that moves back and forth horizontally based on the current locale, starting by moving forward.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolwiggleeffect/wiggleforwardeffect"
+      },
+      "+wiggleLeftEffect": {
+        "doc": "Convenience initializer for a wiggle effect that moves back and forth horizontally, starting by moving left.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolwiggleeffect/wigglelefteffect"
+      },
+      "+wiggleRightEffect": {
+        "doc": "Convenience initializer for a wiggle effect that moves back and forth horizontally, starting by moving right.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolwiggleeffect/wigglerighteffect"
+      },
+      "+wiggleUpEffect": {
+        "doc": "Convenience initializer for a wiggle effect that moves back and forth vertically, starting by moving up.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolwiggleeffect/wiggleupeffect"
+      },
+      "-effectWithByLayer": {
+        "doc": "Returns a copy of the effect that animates incrementally, by layer.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolwiggleeffect/effectwithbylayer"
+      },
+      "-effectWithWholeSymbol": {
+        "doc": "Returns a copy of the effect that animates all layers of the symbol simultaneously.",
+        "url": "https://developer.apple.com/documentation/symbols/nssymbolwiggleeffect/effectwithwholesymbol"
+      }
+    }
+  }
+}

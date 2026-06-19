@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class representing a dimensional unit of measure.
+//
 // Dimension wraps [raw.NSDimension] with a fluent Go API.
 type Dimension struct {
 	inner *raw.NSDimension

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that provides formatted address strings.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkaddressrepresentations
 type MKAddressRepresentations struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func MKAddressRepresentationsFromID(id objc.ID) *MKAddressRepresentations {
 	return o
 }
 
+// Returns the the location’s full address, optionally including the country or on a single link without line breaks.
 func (o *MKAddressRepresentations) FullAddressIncludingRegionSingleLine(includingRegion bool, singleLine bool) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressRepresentationsSelFullAddressIncludingRegionSingleLine, includingRegion, singleLine)
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func (o *MKAddressRepresentations) FullAddressIncludingRegionSingleLine(includin
 	return foundation.NSStringFromID(_ret)
 }
 
+// The city name and, optionally and if applicable, state and region to provide additional disambiguating context.
 func (o *MKAddressRepresentations) CityWithContextUsingStyle(style MKAddressRepresentationsContextStyle) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressRepresentationsSelCityWithContextUsingStyle, style)
 	if _ret != 0 {

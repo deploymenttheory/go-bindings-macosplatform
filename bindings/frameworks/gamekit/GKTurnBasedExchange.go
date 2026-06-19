@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Exchange request information that participants send in a turn-based match.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkturnbasedexchange
 type GKTurnBasedExchange struct {
 	foundation.NSObject
@@ -43,6 +45,7 @@ func GKTurnBasedExchangeFromID(id objc.ID) *GKTurnBasedExchange {
 	return o
 }
 
+// Cancels an exchange request.
 func (o *GKTurnBasedExchange) CancelWithLocalizableMessageKeyArgumentsCompletionHandler(key *foundation.NSString, arguments *foundation.NSArray[*foundation.NSString], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -51,9 +54,10 @@ func (o *GKTurnBasedExchange) CancelWithLocalizableMessageKeyArgumentsCompletion
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_gKTurnBasedExchangeSelCancelWithLocalizableMessageKeyArgumentsCompletionHandler, key.Ptr(), arguments, __block_completionHandler)
+	o.Ptr().Send(_gKTurnBasedExchangeSelCancelWithLocalizableMessageKeyArgumentsCompletionHandler, key.Ptr(), arguments.Ptr(), __block_completionHandler)
 }
 
+// Replies to an exchange request on behalf of a recipient.
 func (o *GKTurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsDataCompletionHandler(key *foundation.NSString, arguments *foundation.NSArray[*foundation.NSString], data *foundation.NSData, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -62,7 +66,7 @@ func (o *GKTurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsDataComplet
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_gKTurnBasedExchangeSelReplyWithLocalizableMessageKeyArgumentsDataCompletionHandler, key.Ptr(), arguments, data.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_gKTurnBasedExchangeSelReplyWithLocalizableMessageKeyArgumentsDataCompletionHandler, key.Ptr(), arguments.Ptr(), data.Ptr(), __block_completionHandler)
 }
 
 func (o *GKTurnBasedExchange) ExchangeID() *foundation.NSString {

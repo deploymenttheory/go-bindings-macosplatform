@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object to display app-specific providers in your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/videosubscriberaccount/vsaccountapplicationprovider
 type VSAccountApplicationProvider struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func VSAccountApplicationProviderFromID(id objc.ID) *VSAccountApplicationProvide
 	return o
 }
 
-// Returns an application provider using a given display name and identifier. Both the localizedDisplayName and identifier parameters must be non-empty strings.
+// Returns an application provider using a given display name and identifier.
 func (o *VSAccountApplicationProvider) InitWithLocalizedDisplayNameIdentifier(localizedDisplayName *foundation.NSString, identifier *foundation.NSString) *VSAccountApplicationProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountApplicationProviderSelInitWithLocalizedDisplayNameIdentifier, localizedDisplayName.Ptr(), identifier.Ptr())
 	if _ret != 0 {

@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class for creating different kinds of pyramid images.
+//
 // ImagePyramid wraps [raw.MPSImagePyramid] with a fluent Go API.
 type ImagePyramid struct {
 	inner *raw.MPSImagePyramid
@@ -33,6 +35,8 @@ func ImagePyramidFromID(id objc.ID) *ImagePyramid {
 	return &ImagePyramid{inner: raw.MPSImagePyramidFromID(id)}
 }
 
+// Initializes a downwards 5-tap image pyramid with the default filter kernel and device.
+//
 // NewImagePyramidWithDevice creates a new [ImagePyramid].
 func NewImagePyramidWithDevice(device metal.MTLDevice) *ImagePyramid {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImagePyramid")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewImagePyramidWithDevice(device metal.MTLDevice) *ImagePyramid {
 	return &ImagePyramid{inner: raw.MPSImagePyramidFromID(_id)}
 }
 
+// Initialize a downwards 5-tap image pyramid with a central weight parameter and device.
+//
 // NewImagePyramidWithDeviceCenterWeight creates a new [ImagePyramid].
 func NewImagePyramidWithDeviceCenterWeight(device metal.MTLDevice, centerWeight float32) *ImagePyramid {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImagePyramid")), objc.RegisterName("alloc"))
@@ -47,6 +53,8 @@ func NewImagePyramidWithDeviceCenterWeight(device metal.MTLDevice, centerWeight 
 	return &ImagePyramid{inner: raw.MPSImagePyramidFromID(_id)}
 }
 
+// Initialize a downwards n-tap image pyramid with a custom filter kernel and device.
+//
 // NewImagePyramidWithDeviceKernelWidthKernelHeightWeights creates a new [ImagePyramid].
 func NewImagePyramidWithDeviceKernelWidthKernelHeightWeights(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, kernelWeights *float32) *ImagePyramid {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImagePyramid")), objc.RegisterName("alloc"))
@@ -63,7 +71,7 @@ func NewImagePyramidWithCoderDevice(aDecoder *foundation.NSCoder, device metal.M
 	return &ImagePyramid{inner: raw.MPSImagePyramidFromID(_id)}
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+// The position of the destination clip rectangle origin relative to the source buffer.
 //
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImagePyramid) WithOffset(offset mpscore.MPSOffset) *ImagePyramid {
@@ -71,7 +79,7 @@ func (x *ImagePyramid) WithOffset(offset mpscore.MPSOffset) *ImagePyramid {
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 //
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImagePyramid) WithClipRect(clipRect metal.MTLRegion) *ImagePyramid {
@@ -79,7 +87,7 @@ func (x *ImagePyramid) WithClipRect(clipRect metal.MTLRegion) *ImagePyramid {
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+// The edge mode to use when texture reads stray off the edge of an image.
 //
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImagePyramid) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImagePyramid {
@@ -87,7 +95,7 @@ func (x *ImagePyramid) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImagePyr
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImagePyramid) WithOptions(options mpscore.MPSKernelOptions) *ImagePyramid {
@@ -95,7 +103,7 @@ func (x *ImagePyramid) WithOptions(options mpscore.MPSKernelOptions) *ImagePyram
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImagePyramid) WithLabel(label string) *ImagePyramid {

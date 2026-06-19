@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that accesses and manages resource data indicated by a URL.
+//
 // URLHandle wraps [raw.NSURLHandle] with a fluent Go API.
 type URLHandle struct {
 	inner *raw.NSURLHandle
@@ -30,6 +32,8 @@ func URLHandleFromID(id objc.ID) *URLHandle {
 	return &URLHandle{inner: raw.NSURLHandleFromID(id)}
 }
 
+// Initializes a newly created URL handle with the specified URL.
+//
 // NewURLHandleWithURLCached creates a new [URLHandle].
 func NewURLHandleWithURLCached(anURL string, willCache bool) *URLHandle {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLHandle")), objc.RegisterName("alloc"))
@@ -43,11 +47,15 @@ func (x *URLHandle) WithScriptingProperties(scriptingProperties *raw.NSDictionar
 	return x
 }
 
+// Returns the status of the receiver.
+//
 // Status calls the underlying Status.
 func (x *URLHandle) Status() NSURLHandleStatus {
 	return NSURLHandleStatus(x.inner.Status())
 }
 
+// Returns a string describing the reason a load failed.
+//
 // FailureReason calls the underlying FailureReason.
 func (x *URLHandle) FailureReason() *String {
 	_r := x.inner.FailureReason()
@@ -57,26 +65,36 @@ func (x *URLHandle) FailureReason() *String {
 	return &String{inner: _r}
 }
 
+// Adds a client of the URL handle.
+//
 // AddClient calls the underlying AddClient.
 func (x *URLHandle) AddClient(client raw.NSURLHandleClient) {
 	x.inner.AddClient(client)
 }
 
+// Removes client as an NSURLHandleClient of the receiver.
+//
 // RemoveClient calls the underlying RemoveClient.
 func (x *URLHandle) RemoveClient(client raw.NSURLHandleClient) {
 	x.inner.RemoveClient(client)
 }
 
+// Loads the receiver’s data in the background.
+//
 // LoadInBackground calls the underlying LoadInBackground.
 func (x *URLHandle) LoadInBackground() {
 	x.inner.LoadInBackground()
 }
 
+// Called to cancel a load currently in progress.
+//
 // CancelLoadInBackground calls the underlying CancelLoadInBackground.
 func (x *URLHandle) CancelLoadInBackground() {
 	x.inner.CancelLoadInBackground()
 }
 
+// Returns the resource data managed by the receiver, loading it if necessary.
+//
 // ResourceData calls the underlying ResourceData.
 func (x *URLHandle) ResourceData() *Data {
 	_r := x.inner.ResourceData()
@@ -86,6 +104,8 @@ func (x *URLHandle) ResourceData() *Data {
 	return &Data{inner: _r}
 }
 
+// Immediately returns the currently available resource data managed by the URL handle.
+//
 // AvailableResourceData calls the underlying AvailableResourceData.
 func (x *URLHandle) AvailableResourceData() *Data {
 	_r := x.inner.AvailableResourceData()
@@ -95,46 +115,64 @@ func (x *URLHandle) AvailableResourceData() *Data {
 	return &Data{inner: _r}
 }
 
+// Returns the expected length of the resource data if it is provided by the server.
+//
 // ExpectedResourceDataSize calls the underlying ExpectedResourceDataSize.
 func (x *URLHandle) ExpectedResourceDataSize() int64 {
 	return x.inner.ExpectedResourceDataSize()
 }
 
+// Flushes any cached data for the URL served by this URL handle.
+//
 // FlushCachedData calls the underlying FlushCachedData.
 func (x *URLHandle) FlushCachedData() {
 	x.inner.FlushCachedData()
 }
 
+// Called when a background load fails.
+//
 // BackgroundLoadDidFailWithReason calls the underlying BackgroundLoadDidFailWithReason.
 func (x *URLHandle) BackgroundLoadDidFailWithReason(reason string) {
 	x.inner.BackgroundLoadDidFailWithReason(foundation.NSStringStringWithUTF8String(reason))
 }
 
+// Appends new data to the receiver’s resource data.
+//
 // DidLoadBytesLoadComplete calls the underlying DidLoadBytesLoadComplete.
 func (x *URLHandle) DidLoadBytesLoadComplete(newBytes *raw.NSData, yorn bool) {
 	x.inner.DidLoadBytesLoadComplete(newBytes, yorn)
 }
 
+// Returns the property for the specified key.
+//
 // PropertyForKey calls the underlying PropertyForKey.
 func (x *URLHandle) PropertyForKey(propertyKey string) objc.ID {
 	return x.inner.PropertyForKey(foundation.NSStringStringWithUTF8String(propertyKey))
 }
 
+// Returns the property for the specified key only if the value is already available; that is, the client doesn’t need to do any work.
+//
 // PropertyForKeyIfAvailable calls the underlying PropertyForKeyIfAvailable.
 func (x *URLHandle) PropertyForKeyIfAvailable(propertyKey string) objc.ID {
 	return x.inner.PropertyForKeyIfAvailable(foundation.NSStringStringWithUTF8String(propertyKey))
 }
 
+// Sets the property of the receiver’s resource for a specified key to the specified value.
+//
 // WritePropertyForKey calls the underlying WritePropertyForKey.
 func (x *URLHandle) WritePropertyForKey(propertyValue objc.ID, propertyKey string) bool {
 	return x.inner.WritePropertyForKey(propertyValue, foundation.NSStringStringWithUTF8String(propertyKey))
 }
 
+// Attempts to write a specified set of data to the location specified by the receiver’s URL.
+//
 // WriteData calls the underlying WriteData.
 func (x *URLHandle) WriteData(data *raw.NSData) bool {
 	return x.inner.WriteData(data)
 }
 
+// Loads the receiver’s data synchronously.
+//
 // LoadInForeground calls the underlying LoadInForeground.
 func (x *URLHandle) LoadInForeground() *Data {
 	_r := x.inner.LoadInForeground()
@@ -144,11 +182,15 @@ func (x *URLHandle) LoadInForeground() *Data {
 	return &Data{inner: _r}
 }
 
+// Called when a background load begins.
+//
 // BeginLoadInBackground calls the underlying BeginLoadInBackground.
 func (x *URLHandle) BeginLoadInBackground() {
 	x.inner.BeginLoadInBackground()
 }
 
+// Halts any background loading.
+//
 // EndLoadInBackground calls the underlying EndLoadInBackground.
 func (x *URLHandle) EndLoadInBackground() {
 	x.inner.EndLoadInBackground()

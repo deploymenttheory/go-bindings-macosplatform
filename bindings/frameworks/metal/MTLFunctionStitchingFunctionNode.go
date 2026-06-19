@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A call graph node that describes a function call and its inputs.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlfunctionstitchingfunctionnode
 type MTLFunctionStitchingFunctionNode struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func MTLFunctionStitchingFunctionNodeFromID(id objc.ID) *MTLFunctionStitchingFun
 	return o
 }
 
+// Creates a new function node.
 func (o *MTLFunctionStitchingFunctionNode) InitWithNameArgumentsControlDependencies(name *foundation.NSString, arguments *foundation.NSArray[MTLFunctionStitchingNode], controlDependencies *foundation.NSArray[*MTLFunctionStitchingFunctionNode]) *MTLFunctionStitchingFunctionNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionStitchingFunctionNodeSelInitWithNameArgumentsControlDependencies, name.Ptr(), arguments.Ptr(), controlDependencies.Ptr())
 	if _ret != 0 {

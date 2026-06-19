@@ -9,11 +9,15 @@ import (
 	"strings"
 )
 
+// Specifies whether the captured screen output is standard or high dynamic range.
 type SCCaptureDynamicRange int64
 
 const (
-	SCCaptureDynamicRangeSDR                 SCCaptureDynamicRange = 0
-	SCCaptureDynamicRangeHDRLocalDisplay     SCCaptureDynamicRange = 1
+	// Specifies that the system captures the screen in standard dynamic range.
+	SCCaptureDynamicRangeSDR SCCaptureDynamicRange = 0
+	// Specifies that the system captures the screen in high dynamic range with attributes of the local display.
+	SCCaptureDynamicRangeHDRLocalDisplay SCCaptureDynamicRange = 1
+	// Specifies that the system captures the screen in high dynamic range with attributes of the canonical display.
 	SCCaptureDynamicRangeHDRCanonicalDisplay SCCaptureDynamicRange = 2
 )
 
@@ -30,13 +34,19 @@ func (e SCCaptureDynamicRange) String() string {
 	}
 }
 
+// Available resolutions for content capture.
 type SCCaptureResolutionType int64
 
 const (
+	// Allow ScreenCaptureKit to automatically select the quality of content depending on factors such as network connection.
+	//
 	// Deprecated: Use SCShareableContentStyle instead
 	SCCaptureResolutionAutomatic SCCaptureResolutionType = 0
+	// Capture streaming content at the best available resolution.
+	//
 	// Deprecated: Use SCShareableContentStyle instead
-	SCCaptureResolutionBest    SCCaptureResolutionType = 1
+	SCCaptureResolutionBest SCCaptureResolutionType = 1
+	// Capture streaming content with a one point to one pixel conversion factor.
 	SCCaptureResolutionNominal SCCaptureResolutionType = 2
 )
 
@@ -53,15 +63,21 @@ func (e SCCaptureResolutionType) String() string {
 	}
 }
 
+// Available modes for selecting streaming content from a picker presented by the operating system.
 // Bitmask — values may be combined with |.
 type SCContentSharingPickerMode uint64
 
 const (
-	SCContentSharingPickerModeSingleWindow         SCContentSharingPickerMode = 1
-	SCContentSharingPickerModeMultipleWindows      SCContentSharingPickerMode = 2
-	SCContentSharingPickerModeSingleApplication    SCContentSharingPickerMode = 4
+	// The mode allowing the selection of a single window through the presented picker.
+	SCContentSharingPickerModeSingleWindow SCContentSharingPickerMode = 1
+	// The mode allowing the selection of multiple windows through the presented picker.
+	SCContentSharingPickerModeMultipleWindows SCContentSharingPickerMode = 2
+	// The mode allowing the selection of a single application through the presented picker.
+	SCContentSharingPickerModeSingleApplication SCContentSharingPickerMode = 4
+	// The mode allowing the selection of multiple applications through the presented picker.
 	SCContentSharingPickerModeMultipleApplications SCContentSharingPickerMode = 8
-	SCContentSharingPickerModeSingleDisplay        SCContentSharingPickerMode = 16
+	// The mode allowing the selection of a single display through the presented picker.
+	SCContentSharingPickerModeSingleDisplay SCContentSharingPickerMode = 16
 )
 
 func (e SCContentSharingPickerMode) String() string {
@@ -87,11 +103,15 @@ func (e SCContentSharingPickerMode) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Configures how to present streaming notifications to a streamer of Presenter Overlay.
 type SCPresenterOverlayAlertSetting int64
 
 const (
+	// Displays an alert when using Presenter Overlay based on the System Settings.
 	SCPresenterOverlayAlertSettingSystem SCPresenterOverlayAlertSetting = 0
-	SCPresenterOverlayAlertSettingNever  SCPresenterOverlayAlertSetting = 1
+	// Never display an alert when using Presenter Overlay.
+	SCPresenterOverlayAlertSettingNever SCPresenterOverlayAlertSetting = 1
+	// Always display an alert when using Presenter Overlay.
 	SCPresenterOverlayAlertSettingAlways SCPresenterOverlayAlertSetting = 2
 )
 
@@ -147,12 +167,17 @@ func (e SCScreenshotDynamicRange) String() string {
 	}
 }
 
+// The style of content presented in a stream.
 type SCShareableContentStyle int64
 
 const (
-	SCShareableContentStyleNone        SCShareableContentStyle = 0
-	SCShareableContentStyleWindow      SCShareableContentStyle = 1
-	SCShareableContentStyleDisplay     SCShareableContentStyle = 2
+	// The stream isn’t currently presenting any content.
+	SCShareableContentStyleNone SCShareableContentStyle = 0
+	// The stream is currently presenting one or more windows.
+	SCShareableContentStyleWindow SCShareableContentStyle = 1
+	// The stream is currently presenting a complete display.
+	SCShareableContentStyleDisplay SCShareableContentStyle = 2
+	// The stream is currently presenting one or more applications.
 	SCShareableContentStyleApplication SCShareableContentStyle = 3
 )
 
@@ -198,6 +223,7 @@ func (e SCStreamConfigurationPreset) String() string {
 	}
 }
 
+// Codes for user cancellation events and errors that can occur in ScreenCaptureKit.
 type SCStreamErrorCode int64
 
 const (
@@ -273,10 +299,13 @@ func (e SCStreamErrorCode) String() string {
 	}
 }
 
+// Constants that represent output types for a stream frame.
 type SCStreamOutputType int64
 
 const (
-	SCStreamOutputTypeScreen     SCStreamOutputType = 0
+	// An output type that represents a screen capture sample buffer.
+	SCStreamOutputTypeScreen SCStreamOutputType = 0
+	// An output type that represents an audio capture sample buffer.
 	SCStreamOutputTypeAudio      SCStreamOutputType = 1
 	SCStreamOutputTypeMicrophone SCStreamOutputType = 2
 )
@@ -294,11 +323,15 @@ func (e SCStreamOutputType) String() string {
 	}
 }
 
+// The display type of the presented stream.
+//
 // Deprecated: Use SCShareableContentStyle instead
 type SCStreamType int64
 
 const (
-	SCStreamTypeWindow  SCStreamType = 0
+	// The stream is currently presented as a window.
+	SCStreamTypeWindow SCStreamType = 0
+	// The stream is currently on a complete display.
 	SCStreamTypeDisplay SCStreamType = 1
 )
 

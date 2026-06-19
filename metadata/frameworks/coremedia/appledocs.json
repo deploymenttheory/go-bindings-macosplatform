@@ -1,0 +1,343 @@
+{
+  "schema_version": 1,
+  "framework": "CoreMedia",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "CMPackingType": {
+      "doc": "The type of packing within each video frame, if any.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmpackingtype",
+      "members": {
+        "kCMPackingType_None": {
+          "doc": "Each frame contains only a single image, and isn’t frame-packed.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmpackingtype/none"
+        },
+        "kCMPackingType_OverUnder": {
+          "doc": "The video contains packed frames that have a left eye image on the top and right eye image on the bottom.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmpackingtype/overunder"
+        },
+        "kCMPackingType_SideBySide": {
+          "doc": "The video contains packed frames that have a left eye image on the left and right eye image on the right.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmpackingtype/sidebyside"
+        }
+      }
+    },
+    "CMProjectionType": {
+      "doc": "Constants describing the projection surface information in a 3D video buffer or channel.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmprojectiontype",
+      "members": {
+        "kCMProjectionType_Equirectangular": {
+          "doc": "Video content displays as a 360 degree equirectangular projection.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmprojectiontype/equirectangular"
+        },
+        "kCMProjectionType_Fisheye": {
+          "doc": "Video content displays as a fisheye projection.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmprojectiontype/fisheye"
+        },
+        "kCMProjectionType_HalfEquirectangular": {
+          "doc": "Video content displays as a 180 degree equirectangular projection.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmprojectiontype/halfequirectangular"
+        },
+        "kCMProjectionType_Rectangular": {
+          "doc": "Video content displays on a flat, rectangular 2D surface.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmprojectiontype/rectangular"
+        }
+      }
+    },
+    "CMStereoViewComponents": {
+      "doc": "Constants describing the stereo views contained within a buffer or channel.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmstereoviewcomponents",
+      "members": {
+        "kCMStereoView_LeftEye": {
+          "doc": "The stereo video track includes a left eye layer.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmstereoviewcomponents/lefteye"
+        },
+        "kCMStereoView_None": {
+          "doc": "A constant for video metadata to have no available stereo frames.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmstereoviewcomponents/kcmstereoview_none"
+        },
+        "kCMStereoView_RightEye": {
+          "doc": "The stereo video track includes a right eye layer.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmstereoviewcomponents/righteye"
+        }
+      }
+    },
+    "CMStereoViewInterpretationOptions": {
+      "doc": "Create a set of stereo view interpretation options from a constant.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmstereoviewinterpretationoptions",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Create a new option set with a given value.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmstereoviewinterpretationoptions/init(rawvalue:)"
+        },
+        "kCMStereoViewInterpretation_AdditionalViews": {
+          "doc": "A flag indicating that the video content contains additional views beyond the left or right eye.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmstereoviewinterpretationoptions/additionalviews"
+        },
+        "kCMStereoViewInterpretation_Default": {
+          "doc": "The default options for stereo video views.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmstereoviewinterpretationoptions/kcmstereoviewinterpretation_default"
+        },
+        "kCMStereoViewInterpretation_StereoOrderReversed": {
+          "doc": "Changes the default ordering of eye data, switching it from left-to-right to right-to-left.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmstereoviewinterpretationoptions/stereoorderreversed"
+        }
+      }
+    },
+    "CMTagCategory": {
+      "doc": "A 64-bit representation of a tag’s category.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmtagcategory",
+      "members": {
+        "kCMTagCategory_ChannelID": {
+          "doc": "A category used for tagging a channel ID.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcategory/kcmtagcategory_channelid"
+        },
+        "kCMTagCategory_MediaSubType": {
+          "doc": "A category used for tagging media subtype metadata.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcategory/kcmtagcategory_mediasubtype"
+        },
+        "kCMTagCategory_MediaType": {
+          "doc": "A category used for tagging media type metadata.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcategory/kcmtagcategory_mediatype"
+        },
+        "kCMTagCategory_PackingType": {
+          "doc": "A category used for tagging frame-packing information.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcategory/kcmtagcategory_packingtype"
+        },
+        "kCMTagCategory_PixelFormat": {
+          "doc": "A category used for tagging pixel format information.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcategory/kcmtagcategory_pixelformat"
+        },
+        "kCMTagCategory_ProjectionType": {
+          "doc": "A category used for tagging projection surface information.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcategory/kcmtagcategory_projectiontype"
+        },
+        "kCMTagCategory_StereoView": {
+          "doc": "A category used for tagging eye information for 3D video.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcategory/kcmtagcategory_stereoview"
+        },
+        "kCMTagCategory_StereoViewInterpretation": {
+          "doc": "A category used for tagging how to interpret stereo view metadata.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcategory/kcmtagcategory_stereoviewinterpretation"
+        },
+        "kCMTagCategory_TrackID": {
+          "doc": "A category used for tagging a track ID.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcategory/kcmtagcategory_trackid"
+        },
+        "kCMTagCategory_Undefined": {
+          "doc": "An unknown or undefined tag category.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcategory/kcmtagcategory_undefined"
+        },
+        "kCMTagCategory_VideoLayerID": {
+          "doc": "A category used for tagging a video layer ID.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcategory/kcmtagcategory_videolayerid"
+        }
+      }
+    },
+    "CMTagCollectionError": {
+      "doc": "Error codes returned by Core Media when working with tag collections.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmtagcollectionerror",
+      "members": {
+        "kCMTagCollectionError_AllocationFailed": {
+          "doc": "Indicates an internal allocation failed.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcollectionerror/kcmtagcollectionerror_allocationfailed"
+        },
+        "kCMTagCollectionError_ExhaustedBufferSize": {
+          "doc": "Indicates that a buffer was smaller than the number of requested tags.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcollectionerror/kcmtagcollectionerror_exhaustedbuffersize"
+        },
+        "kCMTagCollectionError_InternalError": {
+          "doc": "Indicates an error occurred inside of the Core Media framework.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcollectionerror/kcmtagcollectionerror_internalerror"
+        },
+        "kCMTagCollectionError_InvalidTag": {
+          "doc": "Indicates that the collection contains an invalid tag.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcollectionerror/kcmtagcollectionerror_invalidtag"
+        },
+        "kCMTagCollectionError_InvalidTagCollectionData": {
+          "doc": "Indicates that a Core Foundation data instance failed to initialize a new tag collection.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcollectionerror/kcmtagcollectionerror_invalidtagcollectiondata"
+        },
+        "kCMTagCollectionError_InvalidTagCollectionDataVersion": {
+          "doc": "Indicates that a Core Foundation data instance failed to initialize a new tag collection due to a versioning problem.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcollectionerror/kcmtagcollectionerror_invalidtagcollectiondataversion"
+        },
+        "kCMTagCollectionError_InvalidTagCollectionDictionary": {
+          "doc": "Indicates that a Core Foundation dictionary instance failed to initialize a new tag collection.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcollectionerror/kcmtagcollectionerror_invalidtagcollectiondictionary"
+        },
+        "kCMTagCollectionError_NotYetImplemented": {
+          "doc": "Indicates a function lacks a necessary backing implementation in Core Media.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcollectionerror/kcmtagcollectionerror_notyetimplemented"
+        },
+        "kCMTagCollectionError_ParamErr": {
+          "doc": "Indicates a parameter to a function was of the wrong type or didn’t meet a necessary condition.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcollectionerror/kcmtagcollectionerror_paramerr"
+        },
+        "kCMTagCollectionError_TagNotFound": {
+          "doc": "Indicates that there was no match in a collection for a tag.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagcollectionerror/kcmtagcollectionerror_tagnotfound"
+        }
+      }
+    },
+    "CMTagDataType": {
+      "doc": "The data type of a tag’s value.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmtagdatatype",
+      "members": {
+        "kCMTagDataType_Flags": {
+          "doc": "The tag value is a 64-bit wide bitflag field.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagdatatype/kcmtagdatatype_flags"
+        },
+        "kCMTagDataType_Float64": {
+          "doc": "The tag value is a 64-bit floating point number.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagdatatype/kcmtagdatatype_float64"
+        },
+        "kCMTagDataType_Invalid": {
+          "doc": "The tag value isn’t associated with any known data type.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagdatatype/kcmtagdatatype_invalid"
+        },
+        "kCMTagDataType_OSType": {
+          "doc": "The tag value is a 64-bit identifier used by the operating system.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagdatatype/kcmtagdatatype_ostype"
+        },
+        "kCMTagDataType_SInt64": {
+          "doc": "The tag value is a signed 64-bit integer.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagdatatype/kcmtagdatatype_sint64"
+        }
+      }
+    },
+    "CMTagError": {
+      "doc": "Core media tagging errors reported by the framework.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmtagerror",
+      "members": {
+        "kCMTagError_AllocationFailed": {
+          "doc": "An error where the system can’t allocate enough memory for the tag.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagerror/kcmtagerror_allocationfailed"
+        },
+        "kCMTagError_ParamErr": {
+          "doc": "An error where input or output parameters didn’t match the requirements of Core Media.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtagerror/kcmtagerror_paramerr"
+        }
+      }
+    },
+    "CMTaggedBufferGroupError": {
+      "doc": "Error codes returned by Core Media when working with tagged buffer groups.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmtaggedbuffergrouperror",
+      "members": {
+        "kCMTaggedBufferGroupError_AllocationFailed": {
+          "doc": "Indicates an internal allocation failed.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtaggedbuffergrouperror/kcmtaggedbuffergrouperror_allocationfailed"
+        },
+        "kCMTaggedBufferGroupError_InternalError": {
+          "doc": "Indicates an error occurred inside of the Core Media framework.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtaggedbuffergrouperror/kcmtaggedbuffergrouperror_internalerror"
+        },
+        "kCMTaggedBufferGroupError_ParamErr": {
+          "doc": "Indicates a parameter to a function was of the wrong type or didn’t meet a necessary condition.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtaggedbuffergrouperror/kcmtaggedbuffergrouperror_paramerr"
+        }
+      }
+    },
+    "CMTimeFlags": {
+      "doc": "A structure that defines the flags for a time value.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmtimeflags",
+      "members": {
+        "kCMTimeFlags_HasBeenRounded": {
+          "doc": "A flag that indicates a previous time calculation rounded the result.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtimeflags/hasbeenrounded"
+        },
+        "kCMTimeFlags_ImpliedValueFlagsMask": {
+          "doc": "A flag that indicates the time is positive or negative infinity, or indefinite.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtimeflags/impliedvalueflagsmask"
+        },
+        "kCMTimeFlags_Indefinite": {
+          "doc": "A flag that indicates the time is indefinite.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtimeflags/indefinite"
+        },
+        "kCMTimeFlags_NegativeInfinity": {
+          "doc": "A flag that indicates the time is negative infinity.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtimeflags/negativeinfinity"
+        },
+        "kCMTimeFlags_PositiveInfinity": {
+          "doc": "A flag that indicates the time is positive infinity.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtimeflags/positiveinfinity"
+        },
+        "kCMTimeFlags_Valid": {
+          "doc": "A flag that indicates a time is valid.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtimeflags/valid"
+        }
+      }
+    },
+    "CMTimeRoundingMethod": {
+      "doc": "An enumeration of rounding methods to use when performing time calculations.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmtimeroundingmethod",
+      "members": {
+        "kCMTimeRoundingMethod_Default": {
+          "doc": "The default rounding method.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtimeroundingmethod/default"
+        },
+        "kCMTimeRoundingMethod_QuickTime": {
+          "doc": "Rounds using the QuickTime method.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtimeroundingmethod/quicktime"
+        },
+        "kCMTimeRoundingMethod_RoundAwayFromZero": {
+          "doc": "Rounds away from zero.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtimeroundingmethod/roundawayfromzero"
+        },
+        "kCMTimeRoundingMethod_RoundHalfAwayFromZero": {
+          "doc": "Rounds half away from zero.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtimeroundingmethod/roundhalfawayfromzero"
+        },
+        "kCMTimeRoundingMethod_RoundTowardNegativeInfinity": {
+          "doc": "Rounds toward negative infinity.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtimeroundingmethod/roundtowardnegativeinfinity"
+        },
+        "kCMTimeRoundingMethod_RoundTowardPositiveInfinity": {
+          "doc": "Rounds toward positive infinity.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtimeroundingmethod/roundtowardpositiveinfinity"
+        },
+        "kCMTimeRoundingMethod_RoundTowardZero": {
+          "doc": "Rounds toward zero.",
+          "url": "https://developer.apple.com/documentation/coremedia/cmtimeroundingmethod/roundtowardzero"
+        }
+      }
+    }
+  },
+  "structs": {
+    "CMBlockBufferCustomBlockSource": {
+      "doc": "A structure to support custom memory allocation and deallocation for a block used in a block buffer.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmblockbuffercustomblocksource"
+    },
+    "CMBufferCallbacks": {
+      "doc": "A structure that stores the callbacks that perform buffer operations.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmbuffercallbacks"
+    },
+    "CMBufferHandlers": {
+      "doc": "A structure that stores the handlers that perform buffer operations.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmbufferhandlers"
+    },
+    "CMSampleTimingInfo": {
+      "doc": "A collection of timing information for a sample in a sample buffer.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmsampletiminginfo"
+    },
+    "CMTag": {
+      "doc": "A tag to set additional metadata on media buffers.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmtag"
+    },
+    "CMTime": {
+      "doc": "A structure that represents time.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmtime"
+    },
+    "CMTimeMapping": {
+      "doc": "A structure that maps a segment of a source time range to a target time range.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmtimemapping"
+    },
+    "CMTimeRange": {
+      "doc": "A structure that represents a time range.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmtimerange"
+    },
+    "CMVideoDimensions": {
+      "doc": "A structure that represents video dimensions.",
+      "url": "https://developer.apple.com/documentation/coremedia/cmvideodimensions"
+    }
+  }
+}

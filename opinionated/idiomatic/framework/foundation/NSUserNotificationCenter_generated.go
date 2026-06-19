@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that delivers notifications from apps to the user.
+//
 // UserNotificationCenter wraps [raw.NSUserNotificationCenter] with a fluent Go API.
 type UserNotificationCenter struct {
 	inner *raw.NSUserNotificationCenter
@@ -37,12 +39,16 @@ func NewUserNotificationCenter() *UserNotificationCenter {
 	return &UserNotificationCenter{inner: raw.NSUserNotificationCenterFromID(_id)}
 }
 
+// Specifies the notification center delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *UserNotificationCenter) WithDelegate(delegate raw.NSUserNotificationCenterDelegate) *UserNotificationCenter {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Specifies an array of scheduled user notifications that have not yet been delivered.
+//
 // WithScheduledNotifications sets the collection, converting the Go slice to an NSArray.
 func (x *UserNotificationCenter) WithScheduledNotifications(items ...*raw.NSUserNotification) *UserNotificationCenter {
 	if len(items) == 0 {
@@ -70,26 +76,36 @@ func (x *UserNotificationCenter) WithScriptingProperties(scriptingProperties *ra
 	return x
 }
 
+// Schedules the specified user notification.
+//
 // ScheduleNotification calls the underlying ScheduleNotification.
 func (x *UserNotificationCenter) ScheduleNotification(notification *raw.NSUserNotification) {
 	x.inner.ScheduleNotification(notification)
 }
 
+// Removes the specified user notification for the scheduled notifications.
+//
 // RemoveScheduledNotification calls the underlying RemoveScheduledNotification.
 func (x *UserNotificationCenter) RemoveScheduledNotification(notification *raw.NSUserNotification) {
 	x.inner.RemoveScheduledNotification(notification)
 }
 
+// Deliver the specified user notification.
+//
 // DeliverNotification calls the underlying DeliverNotification.
 func (x *UserNotificationCenter) DeliverNotification(notification *raw.NSUserNotification) {
 	x.inner.DeliverNotification(notification)
 }
 
+// Remove a delivered user notification from the user notification center.
+//
 // RemoveDeliveredNotification calls the underlying RemoveDeliveredNotification.
 func (x *UserNotificationCenter) RemoveDeliveredNotification(notification *raw.NSUserNotification) {
 	x.inner.RemoveDeliveredNotification(notification)
 }
 
+// Remove all delivered user notifications from the user notification center.
+//
 // RemoveAllDeliveredNotifications calls the underlying RemoveAllDeliveredNotifications.
 func (x *UserNotificationCenter) RemoveAllDeliveredNotifications() {
 	x.inner.RemoveAllDeliveredNotifications()

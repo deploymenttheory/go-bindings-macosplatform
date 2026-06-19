@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A server or an area on a server, commonly referred to as a realm, that requires authentication.
+//
 // URLProtectionSpace wraps [raw.NSURLProtectionSpace] with a fluent Go API.
 type URLProtectionSpace struct {
 	inner *raw.NSURLProtectionSpace

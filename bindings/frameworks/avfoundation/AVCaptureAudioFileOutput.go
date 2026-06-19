@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A capture output that records audio and saves the recorded audio to a file.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptureaudiofileoutput
 type AVCaptureAudioFileOutput struct {
 	AVCaptureFileOutput
@@ -37,6 +39,7 @@ func AVCaptureAudioFileOutputFromID(id objc.ID) *AVCaptureAudioFileOutput {
 	return o
 }
 
+// Creates a new audio file output.
 func (o *AVCaptureAudioFileOutput) Init() *AVCaptureAudioFileOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureAudioFileOutputSelInit)
 	if _ret != 0 {
@@ -45,18 +48,22 @@ func (o *AVCaptureAudioFileOutput) Init() *AVCaptureAudioFileOutput {
 	return AVCaptureAudioFileOutputFromID(_ret)
 }
 
+// Creates a new audio file output.
 func AVCaptureAudioFileOutputNew() *AVCaptureAudioFileOutput {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureAudioFileOutput), _aVCaptureAudioFileOutputSelNew)
 	return AVCaptureAudioFileOutputFromID(_ret)
 }
 
-// @method availableOutputFileTypes @abstract Provides the file types AVCaptureAudioFileOutput can write. @result An NSArray of UTIs identifying the file types the AVCaptureAudioFileOutput class can write.
+// Returns an array containing UTIs identifying the file types AVCaptureAudioFileOutput can write.
 func AVCaptureAudioFileOutputAvailableOutputFileTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsAVCaptureAudioFileOutput), _aVCaptureAudioFileOutputSelAvailableOutputFileTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureAudioFileOutput), _aVCaptureAudioFileOutputSelAvailableOutputFileTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-// @method startRecordingToOutputFileURL:outputFileType:recordingDelegate: @abstract Tells the receiver to start recording to a new file of the specified format, and specifies a delegate that will be notified when recording is finished. @param outputFileURL An NSURL object containing the URL of the output file. This method throws an NSInvalidArgumentException if the URL is not a valid file URL. @param fileType A UTI indicating the format of the file to be written. @param delegate An object conforming to the AVCaptureFileOutputRecordingDelegate protocol. Clients must specify a delegate so that they can be notified when recording to the given URL is finished. @discussion The method sets the file URL to which the receiver is currently writing output media. If a file at the given URL already exists when capturing starts, recording to the new file will fail. The fileType argument is a UTI corresponding to the audio file format that should be written. UTIs for common audio file types are declared in AVMediaFormat.h. Clients need not call stopRecording before calling this method while another recording is in progress. If this method is invoked while an existing output file was already being recorded, no media samples will be discarded between the old file and the new file. When recording is stopped either by calling stopRecording, by changing files using this method, or because of an error, the remaining data that needs to be included to the file will be written in the background. Therefore, clients must specify a delegate that will be notified when all data has been written to the file using the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: method. The recording delegate can also optionally implement methods that inform it when data starts being written, when recording is paused and resumed, and when recording is about to be finished. On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the first samples written to the new file are guaranteed to be those contained in the sample buffer passed to that method.
+// Tells the receiver to start recording to a new file of the specified format, and specifies a delegate that will be notified when recording is finished.
 func (o *AVCaptureAudioFileOutput) StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate(outputFileURL *foundation.NSURL, fileType *foundation.NSString, delegate AVCaptureFileOutputRecordingDelegate) {
 	o.Ptr().Send(_aVCaptureAudioFileOutputSelStartRecordingToOutputFileURLOutputFileTypeRecordingDelegate, outputFileURL.Ptr(), fileType.Ptr(), delegate)
 }
@@ -76,10 +83,13 @@ func (o *AVCaptureAudioFileOutput) SetMetadata(metadata *foundation.NSArray[*AVM
 
 // @property audioSettings @abstract Specifies the options the receiver uses to re-encode audio as it is being recorded. @discussion The output settings dictionary can contain values for keys from AVAudioSettings.h. A value of nil indicates that the format of the audio should not be changed before being written to the file.
 func (o *AVCaptureAudioFileOutput) AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVCaptureAudioFileOutputSelAudioSettings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureAudioFileOutputSelAudioSettings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *AVCaptureAudioFileOutput) SetAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_aVCaptureAudioFileOutputSelSetAudioSettings, audioSettings)
+	o.Ptr().Send(_aVCaptureAudioFileOutputSelSetAudioSettings, audioSettings.Ptr())
 }

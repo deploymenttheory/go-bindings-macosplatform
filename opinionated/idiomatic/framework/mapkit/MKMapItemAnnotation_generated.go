@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An annotation that represents a map item
+//
 // MapItemAnnotation wraps [raw.MKMapItemAnnotation] with a fluent Go API.
 type MapItemAnnotation struct {
 	inner *raw.MKMapItemAnnotation
@@ -29,6 +31,8 @@ func MapItemAnnotationFromID(id objc.ID) *MapItemAnnotation {
 	return &MapItemAnnotation{inner: raw.MKMapItemAnnotationFromID(id)}
 }
 
+// Creates a map item annotation
+//
 // NewMapItemAnnotationWithMapItem creates a new [MapItemAnnotation].
 func NewMapItemAnnotationWithMapItem(mapItem *raw.MKMapItem) *MapItemAnnotation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapItemAnnotation")), objc.RegisterName("alloc"))

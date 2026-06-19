@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The logical combination of one or more specifier tests.
+//
 // LogicalTest wraps [raw.NSLogicalTest] with a fluent Go API.
 type LogicalTest struct {
 	inner *raw.NSLogicalTest
@@ -29,6 +31,8 @@ func LogicalTestFromID(id objc.ID) *LogicalTest {
 	return &LogicalTest{inner: raw.NSLogicalTestFromID(id)}
 }
 
+// Returns an NSLogicalTest object initialized to perform an AND operation with the NSSpecifierTest objects in a given array.
+//
 // NewLogicalTestAndTestWithTests creates a new [LogicalTest].
 func NewLogicalTestAndTestWithTests(subTests *raw.NSArray[*raw.NSSpecifierTest]) *LogicalTest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLogicalTest")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewLogicalTestAndTestWithTests(subTests *raw.NSArray[*raw.NSSpecifierTest])
 	return &LogicalTest{inner: raw.NSLogicalTestFromID(_id)}
 }
 
+// Returns an NSLogicalTest object initialized to perform an OR operation with the NSSpecifierTest objects in a given array.
+//
 // NewLogicalTestOrTestWithTests creates a new [LogicalTest].
 func NewLogicalTestOrTestWithTests(subTests *raw.NSArray[*raw.NSSpecifierTest]) *LogicalTest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLogicalTest")), objc.RegisterName("alloc"))
@@ -43,6 +49,8 @@ func NewLogicalTestOrTestWithTests(subTests *raw.NSArray[*raw.NSSpecifierTest]) 
 	return &LogicalTest{inner: raw.NSLogicalTestFromID(_id)}
 }
 
+// Returns an NSLogicalTest object initialized to perform a NOT operation on the given NSScriptWhoseTest object.
+//
 // NewLogicalTestNotTestWithTest creates a new [LogicalTest].
 func NewLogicalTestNotTestWithTest(subTest *raw.NSScriptWhoseTest) *LogicalTest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLogicalTest")), objc.RegisterName("alloc"))

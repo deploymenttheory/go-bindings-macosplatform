@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A container that encapsulates the Core Data stack in your app.
+//
 // PersistentContainer wraps [raw.NSPersistentContainer] with a fluent Go API.
 type PersistentContainer struct {
 	inner *raw.NSPersistentContainer
@@ -33,6 +35,8 @@ func PersistentContainerFromID(id objc.ID) *PersistentContainer {
 	return &PersistentContainer{inner: raw.NSPersistentContainerFromID(id)}
 }
 
+// Creates a container with the specified name.
+//
 // NewPersistentContainerWithName creates a new [PersistentContainer].
 func NewPersistentContainerWithName(name string) *PersistentContainer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentContainer")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewPersistentContainerWithName(name string) *PersistentContainer {
 	return &PersistentContainer{inner: raw.NSPersistentContainerFromID(_id)}
 }
 
+// Create a container with the specified name and managed object model.
+//
 // NewPersistentContainerWithNameManagedObjectModel creates a new [PersistentContainer].
 func NewPersistentContainerWithNameManagedObjectModel(name string, model *raw.NSManagedObjectModel) *PersistentContainer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentContainer")), objc.RegisterName("alloc"))
@@ -47,6 +53,8 @@ func NewPersistentContainerWithNameManagedObjectModel(name string, model *raw.NS
 	return &PersistentContainer{inner: raw.NSPersistentContainerFromID(_id)}
 }
 
+// The descriptions of the container’s persistent stores.
+//
 // WithPersistentStoreDescriptions sets the collection, converting the Go slice to an NSArray.
 func (x *PersistentContainer) WithPersistentStoreDescriptions(items ...*raw.NSPersistentStoreDescription) *PersistentContainer {
 	if len(items) == 0 {
@@ -68,6 +76,8 @@ func (x *PersistentContainer) WithPersistentStoreDescriptions(items ...*raw.NSPe
 	return x
 }
 
+// Loads the persistent stores.
+//
 // LoadPersistentStores blocks until the operation completes or ctx is cancelled.
 func (x *PersistentContainer) LoadPersistentStores(ctx context.Context) (*PersistentStoreDescription, error) {
 	type _result struct {
@@ -94,6 +104,8 @@ func (x *PersistentContainer) LoadPersistentStores(ctx context.Context) (*Persis
 	}
 }
 
+// Returns a new managed object context that executes on a private queue.
+//
 // NewBackgroundContext calls the underlying NewBackgroundContext.
 func (x *PersistentContainer) NewBackgroundContext() *ManagedObjectContext {
 	_r := x.inner.NewBackgroundContext()
@@ -103,6 +115,8 @@ func (x *PersistentContainer) NewBackgroundContext() *ManagedObjectContext {
 	return &ManagedObjectContext{inner: _r}
 }
 
+// Executes a closure on a private queue using an ephemeral managed object context.
+//
 // PerformBackgroundTask blocks until the operation completes or ctx is cancelled.
 func (x *PersistentContainer) PerformBackgroundTask(ctx context.Context) (*ManagedObjectContext, error) {
 	type _result struct {

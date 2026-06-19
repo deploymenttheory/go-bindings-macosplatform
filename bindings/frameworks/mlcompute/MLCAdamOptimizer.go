@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An optimizer that represents the adaptive moment estimation algorithm.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcadamoptimizer
 type MLCAdamOptimizer struct {
 	MLCOptimizer
@@ -36,7 +38,7 @@ func MLCAdamOptimizerFromID(id objc.ID) *MLCAdamOptimizer {
 	return o
 }
 
-// @abstract   Create a MLCAdamOptimizer object with defaults @return     A new MLCAdamOptimizer object.
+// Creates an Adam optimizer with the descriptor you specify.
 func MLCAdamOptimizerOptimizerWithDescriptor(optimizerDescriptor *MLCOptimizerDescriptor) *MLCAdamOptimizer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCAdamOptimizer), _mLCAdamOptimizerSelOptimizerWithDescriptor, optimizerDescriptor.Ptr())
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func MLCAdamOptimizerOptimizerWithDescriptor(optimizerDescriptor *MLCOptimizerDe
 	return MLCAdamOptimizerFromID(_ret)
 }
 
-// @abstract   Create a MLCAdamOptimizer object @param      optimizerDescriptor    The optimizer descriptor object @param      beta1                                   The beta1 value @param      beta2                                   The beta2 value @param      epsilon                              The epsilon value to use to improve numerical stability @param      timeStep                            The initial timestep to use for the update @return     A new MLCAdamOptimizer object.
+// Creates an Adam optimizer with the values you specify.
 func MLCAdamOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonTimeStep(optimizerDescriptor *MLCOptimizerDescriptor, beta1 float32, beta2 float32, epsilon float32, timeStep uint) *MLCAdamOptimizer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCAdamOptimizer), _mLCAdamOptimizerSelOptimizerWithDescriptorBeta1Beta2EpsilonTimeStep, optimizerDescriptor.Ptr(), beta1, beta2, epsilon, timeStep)
 	if _ret != 0 {
@@ -54,7 +56,7 @@ func MLCAdamOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonTimeStep(optimizerD
 	return MLCAdamOptimizerFromID(_ret)
 }
 
-// @abstract   Create a MLCAdamOptimizer object @param      optimizerDescriptor    The optimizer descriptor object @param      beta1                                   The beta1 value @param      beta2                                   The beta2 value @param      epsilon                              The epsilon value to use to improve numerical stability @param      usesAMSGrad                     Whether to use the AMSGrad variant of this algorithm from the paper (https://arxiv.org/abs/1904.09237) @param      timeStep                            The initial timestep to use for the update @return     A new MLCAdamOptimizer object.
+// Creates an Adam optimizer with the values you specify.
 func MLCAdamOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep(optimizerDescriptor *MLCOptimizerDescriptor, beta1 float32, beta2 float32, epsilon float32, usesAMSGrad bool, timeStep uint) *MLCAdamOptimizer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCAdamOptimizer), _mLCAdamOptimizerSelOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep, optimizerDescriptor.Ptr(), beta1, beta2, epsilon, usesAMSGrad, timeStep)
 	if _ret != 0 {

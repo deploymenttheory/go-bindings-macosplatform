@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that finds the maximum pixel value in a rectangular region centered around each pixel in the source image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimageareamax
 type MPSImageAreaMax struct {
 	mpsimage.MPSUnaryImageKernel
@@ -35,7 +37,7 @@ func MPSImageAreaMaxFromID(id objc.ID) *MPSImageAreaMax {
 	return o
 }
 
-// @abstract Set the kernel height and width @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel. Must be an odd number. @param      kernelHeight        The height of the kernel. Must be an odd number.
+// Initializes the kernel with a specified width and height.
 func (o *MPSImageAreaMax) InitWithDeviceKernelWidthKernelHeight(device metal.MTLDevice, kernelWidth uint, kernelHeight uint) *MPSImageAreaMax {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageAreaMaxSelInitWithDeviceKernelWidthKernelHeight, device, kernelWidth, kernelHeight)
 	if _ret != 0 {

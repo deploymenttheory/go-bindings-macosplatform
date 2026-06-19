@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents an indexed change within an ordered collection.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsorderedcollectionchange
 type NSOrderedCollectionChange[ObjectType purego.AnyObject] struct {
 	NSObject
@@ -36,6 +38,7 @@ func NSOrderedCollectionChangeFromID[ObjectType purego.AnyObject](id objc.ID) *N
 	return o
 }
 
+// Creates an change object that represents inserting or removing an object from an ordered collection at a specific index.
 func NSOrderedCollectionChangeChangeWithObjectTypeIndex(anObject objc.ID, type_ NSCollectionChangeType, index uint) *NSOrderedCollectionChange[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedCollectionChange), _nSOrderedCollectionChangeSelChangeWithObjectTypeIndex, anObject, type_, index)
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func NSOrderedCollectionChangeChangeWithObjectTypeIndex(anObject objc.ID, type_ 
 	return NSOrderedCollectionChangeFromID[objc.ID](_ret)
 }
 
+// Creates an change object that represents inserting or removing an object from an ordered collection at a specific index, matched with an associated location that infers a move within the collection.
 func NSOrderedCollectionChangeChangeWithObjectTypeIndexAssociatedIndex(anObject objc.ID, type_ NSCollectionChangeType, index uint, associatedIndex uint) *NSOrderedCollectionChange[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedCollectionChange), _nSOrderedCollectionChangeSelChangeWithObjectTypeIndexAssociatedIndex, anObject, type_, index, associatedIndex)
 	if _ret != 0 {
@@ -52,6 +56,7 @@ func NSOrderedCollectionChangeChangeWithObjectTypeIndexAssociatedIndex(anObject 
 	return NSOrderedCollectionChangeFromID[objc.ID](_ret)
 }
 
+// Creates a change object that represents inserting or removing an object from an ordered collection at a specific index.
 func (o *NSOrderedCollectionChange[ObjectType]) InitWithObjectTypeIndex(anObject ObjectType, type_ NSCollectionChangeType, index uint) *NSOrderedCollectionChange[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionChangeSelInitWithObjectTypeIndex, anObject, type_, index)
 	if _ret != 0 {
@@ -60,6 +65,7 @@ func (o *NSOrderedCollectionChange[ObjectType]) InitWithObjectTypeIndex(anObject
 	return NSOrderedCollectionChangeFromID[ObjectType](_ret)
 }
 
+// Creates a change object that represents inserting, removing, or moving an object from an ordered collection at a specific index.
 func (o *NSOrderedCollectionChange[ObjectType]) InitWithObjectTypeIndexAssociatedIndex(anObject ObjectType, type_ NSCollectionChangeType, index uint, associatedIndex uint) *NSOrderedCollectionChange[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionChangeSelInitWithObjectTypeIndexAssociatedIndex, anObject, type_, index, associatedIndex)
 	if _ret != 0 {

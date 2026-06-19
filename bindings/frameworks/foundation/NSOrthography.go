@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of the linguistic content of natural language text, typically used for spelling and grammar checking.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsorthography
 type NSOrthography struct {
 	NSObject
@@ -39,8 +41,9 @@ func NSOrthographyFromID(id objc.ID) *NSOrthography {
 	return o
 }
 
+// Creates an orthography object with the specified dominant script and language map.
 func (o *NSOrthography) InitWithDominantScriptLanguageMap(script *NSString, map_ *NSDictionary[*NSString, objc.ID]) *NSOrthography {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelInitWithDominantScriptLanguageMap, script.Ptr(), map_)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelInitWithDominantScriptLanguageMap, script.Ptr(), map_.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -64,10 +67,14 @@ func (o *NSOrthography) DominantScript() *NSString {
 }
 
 func (o *NSOrthography) LanguageMap() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSOrthographySelLanguageMap)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelLanguageMap)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
+// Returns the list of languages for the specified script.
 func (o *NSOrthography) LanguagesForScript(script *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelLanguagesForScript, script.Ptr())
 	if _ret != 0 {
@@ -76,6 +83,7 @@ func (o *NSOrthography) LanguagesForScript(script *NSString) *NSArray[*NSString]
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns the dominant language for the specified script.
 func (o *NSOrthography) DominantLanguageForScript(script *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrthographySelDominantLanguageForScript, script.Ptr())
 	if _ret != 0 {
@@ -84,6 +92,7 @@ func (o *NSOrthography) DominantLanguageForScript(script *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Creates and returns an orthography object with the default language map for the specified language.
 func NSOrthographyDefaultOrthographyForLanguage(language *NSString) *NSOrthography {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrthography), _nSOrthographySelDefaultOrthographyForLanguage, language.Ptr())
 	if _ret != 0 {
@@ -116,8 +125,9 @@ func (o *NSOrthography) AllLanguages() *NSArray[*NSString] {
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Creates and returns an orthography object with the specified dominant script and language map.
 func NSOrthographyOrthographyWithDominantScriptLanguageMap(script *NSString, map_ *NSDictionary[*NSString, objc.ID]) *NSOrthography {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrthography), _nSOrthographySelOrthographyWithDominantScriptLanguageMap, script.Ptr(), map_)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrthography), _nSOrthographySelOrthographyWithDominantScriptLanguageMap, script.Ptr(), map_.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

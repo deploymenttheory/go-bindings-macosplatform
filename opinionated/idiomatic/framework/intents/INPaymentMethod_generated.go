@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about a form of payment supported by your app.
+//
 // PaymentMethod wraps [raw.INPaymentMethod] with a fluent Go API.
 type PaymentMethod struct {
 	inner *raw.INPaymentMethod
@@ -31,6 +33,8 @@ func PaymentMethodFromID(id objc.ID) *PaymentMethod {
 	return &PaymentMethod{inner: raw.INPaymentMethodFromID(id)}
 }
 
+// Initializes the payment method object with the specified type and descriptive information.
+//
 // NewPaymentMethodWithTypeNameIdentificationHintIcon creates a new [PaymentMethod].
 func NewPaymentMethodWithTypeNameIdentificationHintIcon(type_ INPaymentMethodType, name string, identificationHint string, icon *raw.INImage) *PaymentMethod {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPaymentMethod")), objc.RegisterName("alloc"))

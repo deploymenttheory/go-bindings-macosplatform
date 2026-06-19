@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that performs elementwise comparison of two tensors.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlccomparisonlayer
 type MLCComparisonLayer struct {
 	MLCLayer
@@ -30,7 +32,7 @@ func MLCComparisonLayerFromID(id objc.ID) *MLCComparisonLayer {
 	return o
 }
 
-// @abstract Create a comparison layer. @return   A new compare layer.
+// Creates a comparison layer with the operation you specify.
 func MLCComparisonLayerLayerWithOperation(operation MLCComparisonOperation) *MLCComparisonLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCComparisonLayer), _mLCComparisonLayerSelLayerWithOperation, operation)
 	if _ret != 0 {

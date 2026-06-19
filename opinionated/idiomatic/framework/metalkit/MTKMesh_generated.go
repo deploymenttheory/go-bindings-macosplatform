@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A container for the vertex data of a Model I/O mesh, suitable for use in a Metal app.
+//
 // Mesh wraps [raw.MTKMesh] with a fluent Go API.
 type Mesh struct {
 	inner *raw.MTKMesh
@@ -34,7 +36,7 @@ func MeshFromID(id objc.ID) *Mesh {
 	return &Mesh{inner: raw.MTKMeshFromID(id)}
 }
 
-// @method initWithMesh:device:error: @abstract Initialize the mesh and the mesh's submeshes. @param mesh Model I/O Mesh from which to create this MetalKit mesh @param device Metal device on which to create mesh resources @param error Pointer to an NSError object set if an error occurred @discussion The designated initializer for this class.  This does NOT initialize any meshes that are children of the Model I/O mesh, only submeshes that are part of the given mesh.  An exception is raised if vertexBuffer objects in the given mesh and the indexBuffer of any submesh in this mesh have not been created with a MTKMeshBufferAllocator object.  If a submesh using MDLGeometryTypeQuads or MDLGeometryTypeTopology is used, that submesh will be copied, and recreated to use MDLGeometryTypeTriangles, before this routine creates the MTKSubmesh.
+// Initializes a MetalKit mesh and its submeshes from a Model I/O mesh.
 //
 // NewMeshWithMeshDeviceError creates a new [Mesh].
 func NewMeshWithMeshDeviceError(mesh *modelio.MDLMesh, device metal.MTLDevice) (*Mesh, error) {
@@ -47,7 +49,7 @@ func NewMeshWithMeshDeviceError(mesh *modelio.MDLMesh, device metal.MTLDevice) (
 	return &Mesh{inner: raw.MTKMeshFromID(_id)}, nil
 }
 
-// @property name @abstract Name of the mesh copies from the originating Model I/O mesh. @discussion Can be used by the app to identify the mesh in its scene/world/renderer etc.
+// The name of the mesh.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Mesh) WithName(name string) *Mesh {

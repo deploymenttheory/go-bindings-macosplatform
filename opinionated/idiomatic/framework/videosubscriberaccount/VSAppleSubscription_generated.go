@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An Apple streaming service customer and their subscriptions.
+//
 // VSAppleSubscription wraps [raw.VSAppleSubscription] with a fluent Go API.
 type VSAppleSubscription struct {
 	inner *raw.VSAppleSubscription

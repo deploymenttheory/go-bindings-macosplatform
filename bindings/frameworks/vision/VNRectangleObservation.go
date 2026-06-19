@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the four vertices of a detected rectangle.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnrectangleobservation
 type VNRectangleObservation struct {
 	VNDetectedObjectObservation
@@ -35,7 +37,7 @@ func VNRectangleObservationFromID(id objc.ID) *VNRectangleObservation {
 	return o
 }
 
-// @brief Create a synthesized `VNRectangleObservation`. @note The clockwise parameter ordered `+[VNRectangleObservation rectangleObservationWithRequestRevision:topLeft:topRight:bottomRight:bottomLeft:]` is the preferred initializer. @param requestRevision The revision of the VNDetectRectanglesRequest that the observation is to be treated as originating from. @param topLeft The top-left corner of the rectangle in normalized coordinate space. @param bottomLeft The bottom-left corner of the rectangle in normalized coordinate space. @param bottomRight The bottom-right corner of the rectangle in normalized coordinate space. @param topRight The top-right corner of the rectangle in normalized coordinate space.
+// Creates a rectangle observation from its corner points.
 // Deprecated: since macOS 14.0.
 func VNRectangleObservationRectangleObservationWithRequestRevisionTopLeftBottomLeftBottomRightTopRight(requestRevision uint, topLeft corefoundation.CGPoint, bottomLeft corefoundation.CGPoint, bottomRight corefoundation.CGPoint, topRight corefoundation.CGPoint) *VNRectangleObservation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNRectangleObservation), _vNRectangleObservationSelRectangleObservationWithRequestRevisionTopLeftBottomLeftBottomRightTopRight, requestRevision, topLeft, bottomLeft, bottomRight, topRight)
@@ -45,7 +47,7 @@ func VNRectangleObservationRectangleObservationWithRequestRevisionTopLeftBottomL
 	return VNRectangleObservationFromID(_ret)
 }
 
-// @brief Create a synthesized `VNRectangleObservation`. @param requestRevision The revision of the VNDetectRectanglesRequest that the observation is to be treated as originating from. @param topLeft The top-left corner of the rectangle in normalized coordinate space. @param topRight The top-right corner of the rectangle in normalized coordinate space. @param bottomRight The bottom-right corner of the rectangle in normalized coordinate space. @param bottomLeft The bottom-left corner of the rectangle in normalized coordinate space.
+// Creates a rectangle observation from its corner points.
 func VNRectangleObservationRectangleObservationWithRequestRevisionTopLeftTopRightBottomRightBottomLeft(requestRevision uint, topLeft corefoundation.CGPoint, topRight corefoundation.CGPoint, bottomRight corefoundation.CGPoint, bottomLeft corefoundation.CGPoint) *VNRectangleObservation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNRectangleObservation), _vNRectangleObservationSelRectangleObservationWithRequestRevisionTopLeftTopRightBottomRightBottomLeft, requestRevision, topLeft, topRight, bottomRight, bottomLeft)
 	if _ret != 0 {

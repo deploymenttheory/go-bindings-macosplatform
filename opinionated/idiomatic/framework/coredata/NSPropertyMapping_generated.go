@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mapping instance that specifies in a model how to map from a property in a source entity to a property in a destination entity.
+//
 // PropertyMapping wraps [raw.NSPropertyMapping] with a fluent Go API.
 type PropertyMapping struct {
 	inner *raw.NSPropertyMapping
@@ -37,18 +39,24 @@ func NewPropertyMapping() *PropertyMapping {
 	return &PropertyMapping{inner: raw.NSPropertyMappingFromID(_id)}
 }
 
+// The name of the property in the destination entity for the property mapping.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *PropertyMapping) WithName(name string) *PropertyMapping {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// The value expression for the property mapping.
+//
 // WithValueExpression sets the valueExpression property and returns the receiver for chaining.
 func (x *PropertyMapping) WithValueExpression(valueExpression *foundation.NSExpression) *PropertyMapping {
 	x.inner.SetValueExpression(valueExpression)
 	return x
 }
 
+// The user info for the property mapping.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *PropertyMapping) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *PropertyMapping {
 	x.inner.SetUserInfo(userInfo)

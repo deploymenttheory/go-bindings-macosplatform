@@ -8,12 +8,16 @@ import (
 	"fmt"
 )
 
+// Status codes of credential renewal requests.
 type ACAccountCredentialRenewResult int64
 
 const (
-	ACAccountCredentialRenewResultRenewed  ACAccountCredentialRenewResult = 0
+	// The account’s credentials have been renewed and are now associated with the account.
+	ACAccountCredentialRenewResultRenewed ACAccountCredentialRenewResult = 0
+	// Renewal failed because the user revoked your access to their account.
 	ACAccountCredentialRenewResultRejected ACAccountCredentialRenewResult = 1
-	ACAccountCredentialRenewResultFailed   ACAccountCredentialRenewResult = 2
+	// A non-user-initiated cancel of the prompt.
+	ACAccountCredentialRenewResultFailed ACAccountCredentialRenewResult = 2
 )
 
 func (e ACAccountCredentialRenewResult) String() string {
@@ -29,6 +33,7 @@ func (e ACAccountCredentialRenewResult) String() string {
 	}
 }
 
+// Codes for errors that may occur.
 type ACErrorCode int64
 
 const (

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes the properties of an extension stream.
+//
 // ExtensionStreamProperties wraps [raw.CMIOExtensionStreamProperties] with a fluent Go API.
 type ExtensionStreamProperties struct {
 	inner *raw.CMIOExtensionStreamProperties
@@ -31,7 +33,7 @@ func ExtensionStreamPropertiesFromID(id objc.ID) *ExtensionStreamProperties {
 	return &ExtensionStreamProperties{inner: raw.CMIOExtensionStreamPropertiesFromID(id)}
 }
 
-// @method initWithDictionary: @abstract Initialize a stream properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionStreamProperties instance.
+// Creates a properties object that provides the specified properties and default states.
 //
 // NewExtensionStreamPropertiesWithDictionary creates a new [ExtensionStreamProperties].
 func NewExtensionStreamPropertiesWithDictionary(propertiesDictionary purego.IDer) *ExtensionStreamProperties {
@@ -40,7 +42,7 @@ func NewExtensionStreamPropertiesWithDictionary(propertiesDictionary purego.IDer
 	return &ExtensionStreamProperties{inner: raw.CMIOExtensionStreamPropertiesFromID(_id)}
 }
 
-// @property activeFormatIndex @abstract The active format index. @discussion The property key is CMIOExtensionPropertyStreamActiveFormatIndex.
+// The index of the active format.
 //
 // WithActiveFormatIndex sets the activeFormatIndex property and returns the receiver for chaining.
 func (x *ExtensionStreamProperties) WithActiveFormatIndex(activeFormatIndex *foundation.NSNumber) *ExtensionStreamProperties {
@@ -48,7 +50,7 @@ func (x *ExtensionStreamProperties) WithActiveFormatIndex(activeFormatIndex *fou
 	return x
 }
 
-// @property frameDuration @abstract The frame duration. @discussion The property key is CMIOExtensionPropertyStreamFrameDuration. The dictionary needs to be a dictionary representing a CMTime struct that is consistent with the frame duration specification provided by the current active format.
+// The duration of the frame.
 //
 // WithFrameDuration sets the frameDuration property and returns the receiver for chaining.
 func (x *ExtensionStreamProperties) WithFrameDuration(frameDuration *foundation.NSDictionary[objc.ID, objc.ID]) *ExtensionStreamProperties {
@@ -56,7 +58,7 @@ func (x *ExtensionStreamProperties) WithFrameDuration(frameDuration *foundation.
 	return x
 }
 
-// @property maxFrameDuration @abstract The maximum frame duration. @discussion The property key is CMIOExtensionPropertyStreamMaxFrameDuration. The dictionary needs to be a dictionary representing a CMTime struct that is consistent with the frame duration specification provided by the current active format.
+// The maximum duration of a frame.
 //
 // WithMaxFrameDuration sets the maxFrameDuration property and returns the receiver for chaining.
 func (x *ExtensionStreamProperties) WithMaxFrameDuration(maxFrameDuration *foundation.NSDictionary[objc.ID, objc.ID]) *ExtensionStreamProperties {
@@ -64,7 +66,7 @@ func (x *ExtensionStreamProperties) WithMaxFrameDuration(maxFrameDuration *found
 	return x
 }
 
-// @property sinkBufferQueueSize @abstract The sink stream property buffer queue size. @discussion The property key is CMIOExtensionPropertyStreamSinkBufferQueueSize.
+// The buffer queue size.
 //
 // WithSinkBufferQueueSize sets the sinkBufferQueueSize property and returns the receiver for chaining.
 func (x *ExtensionStreamProperties) WithSinkBufferQueueSize(sinkBufferQueueSize *foundation.NSNumber) *ExtensionStreamProperties {
@@ -72,7 +74,7 @@ func (x *ExtensionStreamProperties) WithSinkBufferQueueSize(sinkBufferQueueSize 
 	return x
 }
 
-// @property sinkBuffersRequiredForStartup @abstract The sink stream property for number of buffers required for startup. @discussion The property key is CMIOExtensionPropertyStreamSinkBuffersRequiredForStartup.
+// The number of buffers the stream requires for startup.
 //
 // WithSinkBuffersRequiredForStartup sets the sinkBuffersRequiredForStartup property and returns the receiver for chaining.
 func (x *ExtensionStreamProperties) WithSinkBuffersRequiredForStartup(sinkBuffersRequiredForStartup *foundation.NSNumber) *ExtensionStreamProperties {
@@ -80,7 +82,7 @@ func (x *ExtensionStreamProperties) WithSinkBuffersRequiredForStartup(sinkBuffer
 	return x
 }
 
-// @property sinkBufferUnderrunCount @abstract The sink stream property buffer underrun count. @discussion The property key is CMIOExtensionPropertyStreamSinkBufferUnderrunCount.
+// The buffer underrun count.
 //
 // WithSinkBufferUnderrunCount sets the sinkBufferUnderrunCount property and returns the receiver for chaining.
 func (x *ExtensionStreamProperties) WithSinkBufferUnderrunCount(sinkBufferUnderrunCount *foundation.NSNumber) *ExtensionStreamProperties {
@@ -88,7 +90,7 @@ func (x *ExtensionStreamProperties) WithSinkBufferUnderrunCount(sinkBufferUnderr
 	return x
 }
 
-// @property sinkEndOfData @abstract The sink stream property end of data. @discussion The property key is CMIOExtensionPropertyStreamSinkEndOfData.
+// A value that indicates whether the stream has reached its end.
 //
 // WithSinkEndOfData sets the sinkEndOfData property and returns the receiver for chaining.
 func (x *ExtensionStreamProperties) WithSinkEndOfData(sinkEndOfData *foundation.NSNumber) *ExtensionStreamProperties {
@@ -96,7 +98,7 @@ func (x *ExtensionStreamProperties) WithSinkEndOfData(sinkEndOfData *foundation.
 	return x
 }
 
-// @property propertiesDictionary @abstract The dictionary of properties. @discussion The dictionary containing all keys and values.
+// A dictionary representation of the property state.
 //
 // WithPropertiesDictionary sets the propertiesDictionary property and returns the receiver for chaining.
 func (x *ExtensionStreamProperties) WithPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionStreamProperties {
@@ -104,7 +106,7 @@ func (x *ExtensionStreamProperties) WithPropertiesDictionary(propertiesDictionar
 	return x
 }
 
-// @property setPropertyState:forProperty: @abstract Set the property value. @param propertyState The property state. @param property The property key. @discussion Setting nil to propertyState does remove the property.
+// Sets the state of the specified property.
 //
 // SetPropertyStateForProperty calls the underlying SetPropertyStateForProperty.
 func (x *ExtensionStreamProperties) SetPropertyStateForProperty(propertyState *raw.CMIOExtensionPropertyState[objc.ID], property *foundation.NSString) {

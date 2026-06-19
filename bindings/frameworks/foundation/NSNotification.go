@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container for information broadcast through a notification center to all registered observers.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsnotification
 type NSNotification struct {
 	NSObject
@@ -35,14 +37,16 @@ func NSNotificationFromID(id objc.ID) *NSNotification {
 	return o
 }
 
+// Initializes a notification with a specified name, object, and user information.
 func (o *NSNotification) InitWithNameObjectUserInfo(name *NSString, object objc.ID, userInfo *NSDictionary[objc.ID, objc.ID]) *NSNotification {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSNotificationSelInitWithNameObjectUserInfo, name.Ptr(), object, userInfo)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSNotificationSelInitWithNameObjectUserInfo, name.Ptr(), object, userInfo.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSNotificationFromID(_ret)
 }
 
+// Initializes a notification with the data from an unarchiver.
 func (o *NSNotification) InitWithCoder(coder *NSCoder) *NSNotification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNotificationSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -65,10 +69,14 @@ func (o *NSNotification) Object() objc.ID {
 }
 
 func (o *NSNotification) UserInfo() *NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSNotificationSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSNotificationSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Returns a new notification object with a specified name and object.
 func NSNotificationNotificationWithNameObject(aName *NSString, anObject objc.ID) *NSNotification {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNotification), _nSNotificationSelNotificationWithNameObject, aName.Ptr(), anObject)
 	if _ret != 0 {
@@ -77,8 +85,9 @@ func NSNotificationNotificationWithNameObject(aName *NSString, anObject objc.ID)
 	return NSNotificationFromID(_ret)
 }
 
+// Returns a notification object with a specified name, object, and user information.
 func NSNotificationNotificationWithNameObjectUserInfo(aName *NSString, anObject objc.ID, aUserInfo *NSDictionary[objc.ID, objc.ID]) *NSNotification {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSNotification), _nSNotificationSelNotificationWithNameObjectUserInfo, aName.Ptr(), anObject, aUserInfo)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSNotification), _nSNotificationSelNotificationWithNameObjectUserInfo, aName.Ptr(), anObject, aUserInfo.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

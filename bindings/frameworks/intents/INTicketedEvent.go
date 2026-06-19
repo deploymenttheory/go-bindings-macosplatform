@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information that describes a ticketed event.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inticketedevent
 type INTicketedEvent struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func INTicketedEventFromID(id objc.ID) *INTicketedEvent {
 	return o
 }
 
+// Creates a ticketed event object with the specified contents and attributes.
 func (o *INTicketedEvent) InitWithCategoryNameEventDurationLocation(category INTicketedEventCategory, name *foundation.NSString, eventDuration *INDateComponentsRange, location *corelocation.CLPlacemark) *INTicketedEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTicketedEventSelInitWithCategoryNameEventDurationLocation, category, name.Ptr(), eventDuration.Ptr(), location.Ptr())
 	if _ret != 0 {

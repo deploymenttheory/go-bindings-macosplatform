@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @brief Builds authentication requirements that can be used as fallbacks for  biometric authentication
+// A set of requirements to fall back on if biometrics aren’t present.
 //
 // Apple documentation: https://developer.apple.com/documentation/localauthentication/labiometryfallbackrequirement
 type LABiometryFallbackRequirement struct {

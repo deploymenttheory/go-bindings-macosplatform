@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A subscription that generates push notifications when CloudKit modifies records that match a predicate.
+//
 // QuerySubscription wraps [raw.CKQuerySubscription] with a fluent Go API.
 type QuerySubscription struct {
 	inner *raw.CKQuerySubscription
@@ -31,7 +33,7 @@ func QuerySubscriptionFromID(id objc.ID) *QuerySubscription {
 	return &QuerySubscription{inner: raw.CKQuerySubscriptionFromID(id)}
 }
 
-// Creates a query-based subscription that queries records of a specific type. - Parameters: - recordType: The record's type. You're responsible for defining your app's record types. This parameter must not be `nil` or an empty string. - predicate: The predicate that identifies the records for inclusion in the subscription. This parameter must not be `nil`. For information about the operators that predicates support, see the discussion in “CKQuery“. - querySubscriptionOptions: A bitmask of configuration options. See “CKQuerySubscription/Options“ for more information. The subscription that this method returns is a query-based subscription with a scope that includes all of the user's record zones. When CloudKit modifies a record that matches the specified type and predicate, it uses `querySubscriptionOptions` to determine whether to send a push notification.
+// Creates a query-based subscription that queries records of a specific type.
 //
 // NewQuerySubscriptionWithRecordTypePredicateOptions creates a new [QuerySubscription].
 func NewQuerySubscriptionWithRecordTypePredicateOptions(recordType *foundation.NSString, predicate *foundation.NSPredicate, querySubscriptionOptions CKQuerySubscriptionOptions) *QuerySubscription {
@@ -40,7 +42,7 @@ func NewQuerySubscriptionWithRecordTypePredicateOptions(recordType *foundation.N
 	return &QuerySubscription{inner: raw.CKQuerySubscriptionFromID(_id)}
 }
 
-// Creates a named query-based subscription that queries records of a specific type. - Parameters: - recordType: The record's type. You're responsible for defining your app's record types. This parameter must not be `nil` or an empty string. - predicate: The predicate that identifies the records for inclusion in the subscription. This parameter must not be `nil`. For information about the operators that predicates support, see the discussion in “CKQuery“. - subscriptionID: The subscription's name. You should provide a value that is unique in the target database, and you may not provide `nil` or an empty string. - querySubscriptionOptions: A bitmask of configuration options. See “CKQuerySubscription/Options“ for more information. The subscription that this method returns is a query-based subscription with a scope that includes all of the user's record zones. When CloudKit modifies a record that matches the specified type and predicate, it uses `querySubscriptionOptions` to determine whether to send a push notification.
+// Creates a named query-based subscription that queries records of a specific type.
 //
 // NewQuerySubscriptionWithRecordTypePredicateSubscriptionIDOptions creates a new [QuerySubscription].
 func NewQuerySubscriptionWithRecordTypePredicateSubscriptionIDOptions(recordType *foundation.NSString, predicate *foundation.NSPredicate, subscriptionID *foundation.NSString, querySubscriptionOptions CKQuerySubscriptionOptions) *QuerySubscription {
@@ -49,7 +51,7 @@ func NewQuerySubscriptionWithRecordTypePredicateSubscriptionIDOptions(recordType
 	return &QuerySubscription{inner: raw.CKQuerySubscriptionFromID(_id)}
 }
 
-// Creates a query-based subscription from a serialized instance. - Parameters: - aDecoder: The coder for decoding the serialized query subscription.
+// Creates a query-based subscription from a serialized instance.
 //
 // NewQuerySubscriptionWithCoder creates a new [QuerySubscription].
 func NewQuerySubscriptionWithCoder(aDecoder *foundation.NSCoder) *QuerySubscription {
@@ -58,7 +60,7 @@ func NewQuerySubscriptionWithCoder(aDecoder *foundation.NSCoder) *QuerySubscript
 	return &QuerySubscription{inner: raw.CKQuerySubscriptionFromID(_id)}
 }
 
-// The ID of the record zone that the subscription queries. This property applies to query-based subscriptions and zone-based subscriptions. Specifying a record zone ID limits the scope of the query to only the records in that zone. For zone-based subscriptions, the query includes all records in the specified record zone. For a query-based subscription, the query includes only records of a specific type in the specified record zone. For zone-based subscriptions, CloudKit sets this property's value automatically. For all other subscription types, the default value is `nil`. If you want to scope your query-based subscription to a specific record zone, you must assign a value explicitly.
+// The ID of the record zone that the subscription queries.
 //
 // WithZoneID sets the zoneID property and returns the receiver for chaining.
 func (x *QuerySubscription) WithZoneID(zoneID *RecordZoneID) *QuerySubscription {
@@ -66,7 +68,7 @@ func (x *QuerySubscription) WithZoneID(zoneID *RecordZoneID) *QuerySubscription 
 	return x
 }
 
-// The configuration for a subscription's push notifications. If you want the system to display your subscription's push notifications, assign a value to this property. The server uses the configuration you provide to determine the delivery options for notifications. For example, you can specify the text to display to the user, and the sound to play. You can also specify which fields of the record to include in the notification's payload. If you don't assign a value to this property, CloudKit still sends push notifications, but the system doesn't display them to the user. The default value of this property is `nil`.
+// The configuration for a subscription’s push notifications.
 //
 // WithNotificationInfo sets the notificationInfo property and returns the receiver for chaining.
 func (x *QuerySubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *QuerySubscription {

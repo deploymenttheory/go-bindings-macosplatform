@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A basic allocator implementation that allocates from main memory using data objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlmeshbufferdataallocator
 type MDLMeshBufferDataAllocator struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An NSForm object is a vertical matrix of NSFormCell objects to implement the fields.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsform
 // Deprecated: Use NSTextField directly instead, and consider NSStackView for layout assistance
 type NSForm struct {
@@ -50,54 +52,66 @@ func NSFormFromID(id objc.ID) *NSForm {
 	return o
 }
 
+// Returns the index of the selected entry.
 // Deprecated: Use NSTextField directly instead, and consider NSStackView for layout assistance
 func (o *NSForm) IndexOfSelectedItem() int {
 	_ret := objc.Send[int](o.Ptr(), _nSFormSelIndexOfSelectedItem)
 	return _ret
 }
 
+// Sets the width of all the entries in the receiver.
 // Deprecated: Use NSTextField directly instead, and consider NSStackView for layout assistance
 func (o *NSForm) SetEntryWidth(width float64) {
 	o.Ptr().Send(_nSFormSelSetEntryWidth, width)
 }
 
+// Sets the spacing between entries
 func (o *NSForm) SetInterlineSpacing(spacing float64) {
 	o.Ptr().Send(_nSFormSelSetInterlineSpacing, spacing)
 }
 
+// Sets whether the receiver’s entries should display a border around their editable text fields.
 func (o *NSForm) SetBordered(flag bool) {
 	o.Ptr().Send(_nSFormSelSetBordered, flag)
 }
 
+// Sets whether the receiver’s entries should display a bezel around their editable text.
 func (o *NSForm) SetBezeled(flag bool) {
 	o.Ptr().Send(_nSFormSelSetBezeled, flag)
 }
 
+// Sets the alignment for all of the entry titles.
 func (o *NSForm) SetTitleAlignment(mode NSTextAlignment) {
 	o.Ptr().Send(_nSFormSelSetTitleAlignment, mode)
 }
 
+// Sets the alignment for all of the receiver’s editable text.
 func (o *NSForm) SetTextAlignment(mode NSTextAlignment) {
 	o.Ptr().Send(_nSFormSelSetTextAlignment, mode)
 }
 
+// Sets the font for all of the entry titles.
 func (o *NSForm) SetTitleFont(fontObj *NSFont) {
 	o.Ptr().Send(_nSFormSelSetTitleFont, fontObj.Ptr())
 }
 
+// Sets the font for all of the receiver’s editable text fields
 func (o *NSForm) SetTextFont(fontObj *NSFont) {
 	o.Ptr().Send(_nSFormSelSetTextFont, fontObj.Ptr())
 }
 
+// Returns the entry at the specified index.
 func (o *NSForm) CellAtIndex(index int) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormSelCellAtIndex, index)
 	return _ret
 }
 
+// Displays the entry at the specified index.
 func (o *NSForm) DrawCellAtIndex(index int) {
 	o.Ptr().Send(_nSFormSelDrawCellAtIndex, index)
 }
 
+// Adds a new entry to the end of the receiver and gives it the specified title.
 func (o *NSForm) AddEntry(title *foundation.NSString) *NSFormCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormSelAddEntry, title.Ptr())
 	if _ret != 0 {
@@ -106,6 +120,7 @@ func (o *NSForm) AddEntry(title *foundation.NSString) *NSFormCell {
 	return NSFormCellFromID(_ret)
 }
 
+// Inserts an entry with the specified title into the receiver.
 func (o *NSForm) InsertEntryAtIndex(title *foundation.NSString, index int) *NSFormCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormSelInsertEntryAtIndex, title.Ptr(), index)
 	if _ret != 0 {
@@ -114,31 +129,38 @@ func (o *NSForm) InsertEntryAtIndex(title *foundation.NSString, index int) *NSFo
 	return NSFormCellFromID(_ret)
 }
 
+// Removes and releases the entry at the specified index.
 func (o *NSForm) RemoveEntryAtIndex(index int) {
 	o.Ptr().Send(_nSFormSelRemoveEntryAtIndex, index)
 }
 
+// Returns the index of the entry whose tag is tag.
 func (o *NSForm) IndexOfCellWithTag(tag int) int {
 	_ret := objc.Send[int](o.Ptr(), _nSFormSelIndexOfCellWithTag, tag)
 	return _ret
 }
 
+// Selects the entry at the specified index.
 func (o *NSForm) SelectTextAtIndex(index int) {
 	o.Ptr().Send(_nSFormSelSelectTextAtIndex, index)
 }
 
+// Sets the writing direction for the title of every control embedded in the form.
 func (o *NSForm) SetTitleBaseWritingDirection(writingDirection NSWritingDirection) {
 	o.Ptr().Send(_nSFormSelSetTitleBaseWritingDirection, writingDirection)
 }
 
+// Sets the writing direction for the text content of every control embedded in the form.
 func (o *NSForm) SetTextBaseWritingDirection(writingDirection NSWritingDirection) {
 	o.Ptr().Send(_nSFormSelSetTextBaseWritingDirection, writingDirection)
 }
 
+// Sets the preferred text field width used by Auto Layout.
 func (o *NSForm) SetPreferredTextFieldWidth(preferredWidth float64) {
 	o.Ptr().Send(_nSFormSelSetPreferredTextFieldWidth, preferredWidth)
 }
 
+// The preferred width of the form’s cells when using Auto Layout.
 func (o *NSForm) PreferredTextFieldWidth() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSFormSelPreferredTextFieldWidth)
 	return _ret

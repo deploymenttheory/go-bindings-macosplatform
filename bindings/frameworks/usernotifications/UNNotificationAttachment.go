@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A media file associated with a notification.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/unnotificationattachment
 type UNNotificationAttachment struct {
 	foundation.NSObject
@@ -35,9 +37,10 @@ func UNNotificationAttachmentFromID(id objc.ID) *UNNotificationAttachment {
 	return o
 }
 
+// Creates an attachment object from the specified file and options.
 func UNNotificationAttachmentAttachmentWithIdentifierURLOptionsError(identifier *foundation.NSString, uRL *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) (*UNNotificationAttachment, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationAttachment), _uNNotificationAttachmentSelAttachmentWithIdentifierURLOptionsError, identifier.Ptr(), uRL.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationAttachment), _uNNotificationAttachmentSelAttachmentWithIdentifierURLOptionsError, identifier.Ptr(), uRL.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An optimized Laplacian filter, provided for ease of use.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagelaplacian
 type MPSImageLaplacian struct {
 	mpsimage.MPSUnaryImageKernel

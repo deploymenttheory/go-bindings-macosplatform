@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that embeds its content view in a dynamic glass effect.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsglasseffectview
 type NSGlassEffectView struct {
 	NSView

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A passkey registration credential.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential
 type ASPasskeyRegistrationCredential struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func ASPasskeyRegistrationCredentialFromID(id objc.ID) *ASPasskeyRegistrationCre
 	return o
 }
 
-// @abstract Initializes an ASPasskeyRegistrationCredential object. @param relyingParty The relying party identifier associated with this passkey. @param clientDataHash The JSON encoded client data for this registration result. @param credentialID The unique identifier for this passkey. @param attestationObject The attestation object for this passkey registration result.
+// Initializes a passkey registration credential object.
 func (o *ASPasskeyRegistrationCredential) InitWithRelyingPartyClientDataHashCredentialIDAttestationObject(relyingParty *foundation.NSString, clientDataHash *foundation.NSData, credentialID *foundation.NSData, attestationObject *foundation.NSData) *ASPasskeyRegistrationCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyRegistrationCredentialSelInitWithRelyingPartyClientDataHashCredentialIDAttestationObject, relyingParty.Ptr(), clientDataHash.Ptr(), credentialID.Ptr(), attestationObject.Ptr())
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *ASPasskeyRegistrationCredential) InitWithRelyingPartyClientDataHashCred
 	return ASPasskeyRegistrationCredentialFromID(_ret)
 }
 
-// @abstract Initializes an ASPasskeyRegistrationCredential object. @param relyingParty The relying party identifier associated with this passkey. @param clientDataHash The JSON encoded client data for this registration result. @param credentialID The unique identifier for this passkey. @param attestationObject The attestation object for this passkey registration result. @param extensionOutput The output of WebAuthn extensions processed by the credential provider.
+// Initializes a passkey registration credential object.
 func (o *ASPasskeyRegistrationCredential) InitWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput(relyingParty *foundation.NSString, clientDataHash *foundation.NSData, credentialID *foundation.NSData, attestationObject *foundation.NSData, extensionOutput *ASPasskeyRegistrationCredentialExtensionOutput) *ASPasskeyRegistrationCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyRegistrationCredentialSelInitWithRelyingPartyClientDataHashCredentialIDAttestationObjectExtensionOutput, relyingParty.Ptr(), clientDataHash.Ptr(), credentialID.Ptr(), attestationObject.Ptr(), extensionOutput.Ptr())
 	if _ret != 0 {
@@ -56,7 +58,7 @@ func (o *ASPasskeyRegistrationCredential) InitWithRelyingPartyClientDataHashCred
 	return ASPasskeyRegistrationCredentialFromID(_ret)
 }
 
-// @abstract Creates and initializes an ASPasskeyRegistrationCredential object. @param relyingParty The relying party identifier associated with this passkey. @param clientDataHash The JSON encoded client data for this registration result. @param credentialID The unique identifier for this passkey. @param attestationObject The attestation object for this passkey registration result.
+// Creates and initializes a new passkey registration credential.
 func ASPasskeyRegistrationCredentialCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject(relyingParty *foundation.NSString, clientDataHash *foundation.NSData, credentialID *foundation.NSData, attestationObject *foundation.NSData) *ASPasskeyRegistrationCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASPasskeyRegistrationCredential), _aSPasskeyRegistrationCredentialSelCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject, relyingParty.Ptr(), clientDataHash.Ptr(), credentialID.Ptr(), attestationObject.Ptr())
 	if _ret != 0 {

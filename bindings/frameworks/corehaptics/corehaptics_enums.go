@@ -7,6 +7,7 @@ import (
 	"fmt"
 )
 
+// Possible actions to take after the haptic engine finishes execution.
 type CHHapticEngineFinishedAction int64
 
 const (
@@ -25,6 +26,7 @@ func (e CHHapticEngineFinishedAction) String() string {
 	}
 }
 
+// The enumeration of reasons the haptic engine stopped running.
 type CHHapticEngineStoppedReason int64
 
 const (
@@ -58,6 +60,7 @@ func (e CHHapticEngineStoppedReason) String() string {
 	}
 }
 
+// Error codes for framework operations.
 type CHHapticErrorCode int64
 
 const (

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that identifies activity summary objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkactivitysummarytype
 type HKActivitySummaryType struct {
 	HKObjectType

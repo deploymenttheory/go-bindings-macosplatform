@@ -13,7 +13,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class       ODSession @abstract    Class for working with OpenDirectory sessions. @discussion  Class for working with OpenDirectory sessions.
+// An ODSession object serves as a Cocoa wrapper for an Open Directory session.
 //
 // Apple documentation: https://developer.apple.com/documentation/opendirectory/odsession
 type ODSession struct {
@@ -45,7 +45,7 @@ func ODSessionFromID(id objc.ID) *ODSession {
 	return o
 }
 
-// @method     defaultSession @abstract   Returns a shared instance of a local ODSession @discussion Returns a shared instance of a local ODSession.  This can be used for most situations unless more control is needed over the session.
+// Returns a shared instance of the local session.
 func ODSessionDefaultSession() *ODSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsODSession), _oDSessionSelDefaultSession)
 	if _ret != 0 {
@@ -54,10 +54,10 @@ func ODSessionDefaultSession() *ODSession {
 	return ODSessionFromID(_ret)
 }
 
-// @method     sessionWithOptions:error: @abstract   Creates an autoreleased instance of ODSession directed over Proxy to another host @discussion Creates an autoreleased instance of ODSession directed over Proxy to another host.  nil can be passed for no options. outError is optional parameter, nil can be passed if error details are not needed.  Options include: If proxy is required then a dictionary with keys should be: Key                             Value ODSessionProxyAddress        NSString(hostname or IP) ODSessionProxyPort           NSNumber(IP port, should not be set as it will default) ODSessionProxyUsername       NSString(username) ODSessionProxyPassword       NSString(password)
+// Returns an autoreleased session object directed over proxy to another host.
 func ODSessionSessionWithOptionsError(inOptions *foundation.NSDictionary[objc.ID, objc.ID]) (*ODSession, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsODSession), _oDSessionSelSessionWithOptionsError, inOptions, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsODSession), _oDSessionSelSessionWithOptionsError, inOptions.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -67,10 +67,10 @@ func ODSessionSessionWithOptionsError(inOptions *foundation.NSDictionary[objc.ID
 	return ODSessionFromID(_ret), nil
 }
 
-// @method     initWithOptions:error: @abstract   Creates an instance of ODSession directed over Proxy to another host @discussion Creates an instance of ODSession directed over Proxy to another host.  nil can be passed for no options. outError is optional parameter, nil can be passed if error details are not needed. Options include: If proxy is required then a dictionary with keys should be: Key                             Value ODSessionProxyAddress        NSString(hostname or IP) ODSessionProxyPort           NSNumber(IP port, should not be set as it will default) ODSessionProxyUsername       NSString(username) ODSessionProxyPassword       NSString(password)
+// Creates a session object directed over proxy to another host.
 func (o *ODSession) InitWithOptionsError(inOptions *foundation.NSDictionary[objc.ID, objc.ID]) (*ODSession, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _oDSessionSelInitWithOptionsError, inOptions, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDSessionSelInitWithOptionsError, inOptions.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -80,14 +80,17 @@ func (o *ODSession) InitWithOptionsError(inOptions *foundation.NSDictionary[objc
 	return ODSessionFromID(_ret), nil
 }
 
-// @method     nodeNamesAndReturnError: @abstract   Returns the node names that are registered on this ODSession @discussion Returns the node names that are registered on this ODSession.  outError can be nil if error details are not needed.
+// Returns the node names that are registered with this session.
 func (o *ODSession) NodeNamesAndReturnError() (*foundation.NSArray[objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDSessionSelNodeNamesAndReturnError, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDSessionSelNodeNamesAndReturnError, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[objc.ID](_ret), nil
 }
 
 // @method configurationAuthorizationAllowingUserInteraction: @abstract Returns an authorization appropriate for managing configurations. @discussion Returns an authorization appropriate for managing configurations.  If a proxy session is in use this method will return nil and no error.
@@ -144,12 +147,18 @@ func (o *ODSession) DeleteConfigurationWithNodenameAuthorizationError(nodename *
 
 // @method configurationTemplateNames @abstract Returns a list of names as NSStrings for all available configuration templates. @discussion Returns a list of names as NSStrings for all available configuration templates.  Configuration templates have pre-configured modules and/or mappings.  Useful for re-using existing configurations that may change with operating system without changing the actual configuration.
 func (o *ODSession) ConfigurationTemplateNames() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDSessionSelConfigurationTemplateNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDSessionSelConfigurationTemplateNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @method mappingTemplateNames @abstract Returns a list names as NSStrings for all available mapping templates. @discussion Returns a list names as NSStrings for all available mapping templates.  Mapping templates have pre-configured record/attribute mappings.  Useful if a configuration uses a common layout of mappings for a type of server.
 func (o *ODSession) MappingTemplateNames() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDSessionSelMappingTemplateNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDSessionSelMappingTemplateNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

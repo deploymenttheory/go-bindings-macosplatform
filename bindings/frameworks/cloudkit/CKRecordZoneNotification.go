@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A notification that triggers when the contents of a record zone change.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckrecordzonenotification
 type CKRecordZoneNotification struct {
 	CKNotification

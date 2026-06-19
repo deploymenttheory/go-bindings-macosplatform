@@ -34,10 +34,10 @@ func MTREnergyEVSEClusterGetTargetsResponseParamsFromID(id objc.ID) *MTREnergyEV
 	return o
 }
 
-// Initialize an MTREnergyEVSEClusterGetTargetsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+// Initialize an MTREnergyEVSEClusterGetTargetsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
 func (o *MTREnergyEVSEClusterGetTargetsResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTREnergyEVSEClusterGetTargetsResponseParams, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterGetTargetsResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterGetTargetsResponseParamsSelInitWithResponseValueError, responseValue.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -48,10 +48,13 @@ func (o *MTREnergyEVSEClusterGetTargetsResponseParams) InitWithResponseValueErro
 }
 
 func (o *MTREnergyEVSEClusterGetTargetsResponseParams) ChargingTargetSchedules() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTREnergyEVSEClusterGetTargetsResponseParamsSelChargingTargetSchedules)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterGetTargetsResponseParamsSelChargingTargetSchedules)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTREnergyEVSEClusterGetTargetsResponseParams) SetChargingTargetSchedules(chargingTargetSchedules *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTREnergyEVSEClusterGetTargetsResponseParamsSelSetChargingTargetSchedules, chargingTargetSchedules)
+	o.Ptr().Send(_mTREnergyEVSEClusterGetTargetsResponseParamsSelSetChargingTargetSchedules, chargingTargetSchedules.Ptr())
 }

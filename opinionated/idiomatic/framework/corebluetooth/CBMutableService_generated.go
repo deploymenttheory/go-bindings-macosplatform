@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A service with writeable property values.
+//
 // MutableService wraps [raw.CBMutableService] with a fluent Go API.
 type MutableService struct {
 	inner *raw.CBMutableService
@@ -31,7 +33,7 @@ func MutableServiceFromID(id objc.ID) *MutableService {
 	return &MutableService{inner: raw.CBMutableServiceFromID(id)}
 }
 
-// @method initWithType:primary: @param UUID			The Bluetooth UUID of the service. @param isPrimary	The type of the service (primary or secondary). @discussion			Returns a service, initialized with a service type and UUID.
+// Creates a newly initialized mutable service specified by UUID and service type.
 //
 // NewMutableServiceWithTypePrimary creates a new [MutableService].
 func NewMutableServiceWithTypePrimary(uUID *raw.CBUUID, isPrimary bool) *MutableService {
@@ -40,6 +42,8 @@ func NewMutableServiceWithTypePrimary(uUID *raw.CBUUID, isPrimary bool) *Mutable
 	return &MutableService{inner: raw.CBMutableServiceFromID(_id)}
 }
 
+// A list of included services.
+//
 // WithIncludedServices sets the collection, converting the Go slice to an NSArray.
 func (x *MutableService) WithIncludedServices(items ...ServiceProvider) *MutableService {
 	if len(items) == 0 {
@@ -61,6 +65,8 @@ func (x *MutableService) WithIncludedServices(items ...ServiceProvider) *Mutable
 	return x
 }
 
+// A list of characteristics of a service.
+//
 // WithCharacteristics sets the collection, converting the Go slice to an NSArray.
 func (x *MutableService) WithCharacteristics(items ...CharacteristicProvider) *MutableService {
 	if len(items) == 0 {

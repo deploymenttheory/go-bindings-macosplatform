@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that implements a reverb effect.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiounitreverb
 type AVAudioUnitReverb struct {
 	AVAudioUnitEffect
@@ -31,7 +33,7 @@ func AVAudioUnitReverbFromID(id objc.ID) *AVAudioUnitReverb {
 	return o
 }
 
-// @method loadFactoryPreset: @abstract load a reverb preset Default:    AVAudioUnitReverbPresetMediumHall
+// Configures the audio unit as a reverb preset.
 func (o *AVAudioUnitReverb) LoadFactoryPreset(preset AVAudioUnitReverbPreset) {
 	o.Ptr().Send(_aVAudioUnitReverbSelLoadFactoryPreset, preset)
 }

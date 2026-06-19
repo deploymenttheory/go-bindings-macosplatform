@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A property or quality of the environment that affects how sound travels.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasemedium
 type PHASEMedium struct {
 	foundation.NSObject
@@ -30,7 +32,7 @@ func PHASEMediumFromID(id objc.ID) *PHASEMedium {
 	return o
 }
 
-// @method initWithEngine:preset @abstract Initialize a new medium from a preset.
+// Creates a medium.
 func (o *PHASEMedium) InitWithEnginePreset(engine *PHASEEngine, preset PHASEMediumPreset) *PHASEMedium {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEMediumSelInitWithEnginePreset, engine.Ptr(), preset)
 	if _ret != 0 {

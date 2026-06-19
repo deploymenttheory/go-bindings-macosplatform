@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object for scheduling the playback of buffers or segments of audio files.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudioplayernode
 type AVAudioPlayerNode struct {
 	AVAudioNode
@@ -45,6 +47,7 @@ func AVAudioPlayerNodeFromID(id objc.ID) *AVAudioPlayerNode {
 	return o
 }
 
+// Creates an initialized audio player node.
 func (o *AVAudioPlayerNode) Init() *AVAudioPlayerNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerNodeSelInit)
 	if _ret != 0 {
@@ -53,7 +56,7 @@ func (o *AVAudioPlayerNode) Init() *AVAudioPlayerNode {
 	return AVAudioPlayerNodeFromID(_ret)
 }
 
-// @method scheduleBuffer:completionHandler: @abstract Schedule playing samples from an AVAudioBuffer. @param buffer the buffer to play @param completionHandler called after the buffer has been consumed by the player or the player is stopped. may be nil. @discussion Schedules the buffer to be played following any previously scheduled commands. It is possible for the completionHandler to be called before rendering begins or before the buffer is played completely.
+// Schedules the playing samples from an audio buffer.
 func (o *AVAudioPlayerNode) ScheduleBufferCompletionHandler(buffer *AVAudioPCMBuffer, completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -65,7 +68,7 @@ func (o *AVAudioPlayerNode) ScheduleBufferCompletionHandler(buffer *AVAudioPCMBu
 	o.Ptr().Send(_aVAudioPlayerNodeSelScheduleBufferCompletionHandler, buffer.Ptr(), __block_completionHandler)
 }
 
-// @method scheduleBuffer:completionCallbackType:completionHandler: @abstract Schedule playing samples from an AVAudioBuffer. @param buffer the buffer to play @param callbackType option to specify when the completion handler must be called @param completionHandler called after the buffer has been consumed by the player or has finished playing back or the player is stopped. may be nil. @discussion Schedules the buffer to be played following any previously scheduled commands.
+// Schedules the playing samples from an audio buffer with the callback option you specify.
 func (o *AVAudioPlayerNode) ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *AVAudioPCMBuffer, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -77,7 +80,7 @@ func (o *AVAudioPlayerNode) ScheduleBufferCompletionCallbackTypeCompletionHandle
 	o.Ptr().Send(_aVAudioPlayerNodeSelScheduleBufferCompletionCallbackTypeCompletionHandler, buffer.Ptr(), callbackType, __block_completionHandler)
 }
 
-// @method scheduleBuffer:atTime:options:completionHandler: @abstract Schedule playing samples from an AVAudioBuffer. @param buffer the buffer to play @param when the time at which to play the buffer. see the discussion of timestamps, above. @param options options for looping, interrupting other buffers, etc. @param completionHandler called after the buffer has been consumed by the player or the player is stopped. may be nil. @discussion It is possible for the completionHandler to be called before rendering begins or before the buffer is played completely.
+// Schedules the playing samples from an audio buffer at the time and playback options you specify.
 func (o *AVAudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionHandler(buffer *AVAudioPCMBuffer, when *AVAudioTime, options AVAudioPlayerNodeBufferOptions, completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -89,7 +92,7 @@ func (o *AVAudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionHandler(buffer 
 	o.Ptr().Send(_aVAudioPlayerNodeSelScheduleBufferAtTimeOptionsCompletionHandler, buffer.Ptr(), when.Ptr(), options, __block_completionHandler)
 }
 
-// @method scheduleBuffer:atTime:options:completionCallbackType:completionHandler: @abstract Schedule playing samples from an AVAudioBuffer. @param buffer the buffer to play @param when the time at which to play the buffer. see the discussion of timestamps, above. @param options options for looping, interrupting other buffers, etc. @param callbackType option to specify when the completion handler must be called @param completionHandler called after the buffer has been consumed by the player or has finished playing back or the player is stopped. may be nil.
+// Schedules the playing samples from an audio buffer with the playback options you specify.
 func (o *AVAudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *AVAudioPCMBuffer, when *AVAudioTime, options AVAudioPlayerNodeBufferOptions, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -101,7 +104,7 @@ func (o *AVAudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionCallbackTypeCom
 	o.Ptr().Send(_aVAudioPlayerNodeSelScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler, buffer.Ptr(), when.Ptr(), options, callbackType, __block_completionHandler)
 }
 
-// @method scheduleFile:atTime:completionHandler: @abstract Schedule playing of an entire audio file. @param file the file to play @param when the time at which to play the file. see the discussion of timestamps, above. @param completionHandler called after the file has been consumed by the player or the player is stopped. may be nil. @discussion It is possible for the completionHandler to be called before rendering begins or before the file is played completely.
+// Schedules the playing of an entire audio file.
 func (o *AVAudioPlayerNode) ScheduleFileAtTimeCompletionHandler(file *AVAudioFile, when *AVAudioTime, completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -113,7 +116,7 @@ func (o *AVAudioPlayerNode) ScheduleFileAtTimeCompletionHandler(file *AVAudioFil
 	o.Ptr().Send(_aVAudioPlayerNodeSelScheduleFileAtTimeCompletionHandler, file.Ptr(), when.Ptr(), __block_completionHandler)
 }
 
-// @method scheduleFile:atTime:completionCallbackType:completionHandler: @abstract Schedule playing of an entire audio file. @param file the file to play @param when the time at which to play the file. see the discussion of timestamps, above. @param callbackType option to specify when the completion handler must be called @param completionHandler called after the file has been consumed by the player or has finished playing back or the player is stopped. may be nil.
+// Schedules the playing of an entire audio file with a callback option you specify.
 func (o *AVAudioPlayerNode) ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler(file *AVAudioFile, when *AVAudioTime, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -125,7 +128,7 @@ func (o *AVAudioPlayerNode) ScheduleFileAtTimeCompletionCallbackTypeCompletionHa
 	o.Ptr().Send(_aVAudioPlayerNodeSelScheduleFileAtTimeCompletionCallbackTypeCompletionHandler, file.Ptr(), when.Ptr(), callbackType, __block_completionHandler)
 }
 
-// @method scheduleSegment:startingFrame:frameCount:atTime:completionHandler: @abstract Schedule playing a segment of an audio file. @param file the file to play @param startFrame the starting frame position in the stream @param numberFrames the number of frames to play @param when the time at which to play the region. see the discussion of timestamps, above. @param completionHandler called after the segment has been consumed by the player or the player is stopped. may be nil. @discussion It is possible for the completionHandler to be called before rendering begins or before the segment is played completely.
+// Schedules the playing of an audio file segment.
 func (o *AVAudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler(file *AVAudioFile, startFrame int64, numberFrames uint32, when *AVAudioTime, completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -137,7 +140,7 @@ func (o *AVAudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompleti
 	o.Ptr().Send(_aVAudioPlayerNodeSelScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler, file.Ptr(), startFrame, numberFrames, when.Ptr(), __block_completionHandler)
 }
 
-// @method scheduleSegment:startingFrame:frameCount:atTime:completionCallbackType:completionHandler: @abstract Schedule playing a segment of an audio file. @param file the file to play @param startFrame the starting frame position in the stream @param numberFrames the number of frames to play @param when the time at which to play the region. see the discussion of timestamps, above. @param callbackType option to specify when the completion handler must be called @param completionHandler called after the segment has been consumed by the player or has finished playing back or the player is stopped. may be nil.
+// Schedules the playing of an audio file segment with a callback option you specify.
 func (o *AVAudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler(file *AVAudioFile, startFrame int64, numberFrames uint32, when *AVAudioTime, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -149,32 +152,32 @@ func (o *AVAudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompleti
 	o.Ptr().Send(_aVAudioPlayerNodeSelScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler, file.Ptr(), startFrame, numberFrames, when.Ptr(), callbackType, __block_completionHandler)
 }
 
-// @method stop @abstract Clear all of the node's previously scheduled events and stop playback. @discussion All of the node's previously scheduled events are cleared, including any that are in the middle of playing. The node's sample time (and therefore the times to which new events are to be scheduled) is reset to 0, and will not proceed until the node is started again (via play or playAtTime). Note that pausing or stopping all the players connected to an engine does not pause or stop the engine or the underlying hardware. The engine must be explicitly paused or stopped for the hardware to stop.
+// Clears all of the node’s events you schedule and stops playback.
 func (o *AVAudioPlayerNode) Stop() {
 	o.Ptr().Send(_aVAudioPlayerNodeSelStop)
 }
 
-// @method prepareWithFrameCount: @abstract Prepares previously scheduled file regions or buffers for playback. @param frameCount The number of sample frames of data to be prepared before returning.
+// Prepares the file regions or buffers you schedule for playback.
 func (o *AVAudioPlayerNode) PrepareWithFrameCount(frameCount uint32) {
 	o.Ptr().Send(_aVAudioPlayerNodeSelPrepareWithFrameCount, frameCount)
 }
 
-// @method play @abstract Start or resume playback immediately. @discussion equivalent to playAtTime:nil
+// Starts or resumes playback immediately.
 func (o *AVAudioPlayerNode) Play() {
 	o.Ptr().Send(_aVAudioPlayerNodeSelPlay)
 }
 
-// @method playAtTime: @abstract Start or resume playback at a specific time. @param when the node time at which to start or resume playback. nil signifies "now". @discussion This node is initially paused. Requests to play buffers or file segments are enqueued, and any necessary decoding begins immediately. Playback does not begin, however, until the player has started playing, via this method. Note that providing an AVAudioTime which is past (before lastRenderTime) will cause the player to begin playback immediately. E.g. To start a player X seconds in future: <pre> // start engine and player NSError *nsErr = nil; [_engine startAndReturnError:&nsErr]; if (!nsErr) { const float kStartDelayTime = 0.5; // sec AVAudioFormat *outputFormat = [_player outputFormatForBus:0]; AVAudioFramePosition startSampleTime = _player.lastRenderTime.sampleTime + kStartDelayTime * outputFormat.sampleRate; AVAudioTime *startTime = [AVAudioTime timeWithSampleTime:startSampleTime atRate:outputFormat.sampleRate]; [_player playAtTime:startTime]; } </pre>
+// Starts or resumes playback at a time you specify.
 func (o *AVAudioPlayerNode) PlayAtTime(when *AVAudioTime) {
 	o.Ptr().Send(_aVAudioPlayerNodeSelPlayAtTime, when.Ptr())
 }
 
-// @method pause @abstract Pause playback. @discussion The player's sample time does not advance while the node is paused. Note that pausing or stopping all the players connected to an engine does not pause or stop the engine or the underlying hardware. The engine must be explicitly paused or stopped for the hardware to stop.
+// Pauses the node’s playback.
 func (o *AVAudioPlayerNode) Pause() {
 	o.Ptr().Send(_aVAudioPlayerNodeSelPause)
 }
 
-// @method nodeTimeForPlayerTime: @abstract Convert from player time to node time. @param playerTime a time relative to the player's start time @return a node time @discussion This method and its inverse `playerTimeForNodeTime:` are discussed in the introduction to this class. If the player is not playing when this method is called, nil is returned.
+// Converts from player time to node time.
 func (o *AVAudioPlayerNode) NodeTimeForPlayerTime(playerTime *AVAudioTime) *AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerNodeSelNodeTimeForPlayerTime, playerTime.Ptr())
 	if _ret != 0 {
@@ -183,7 +186,7 @@ func (o *AVAudioPlayerNode) NodeTimeForPlayerTime(playerTime *AVAudioTime) *AVAu
 	return AVAudioTimeFromID(_ret)
 }
 
-// @method playerTimeForNodeTime: @abstract Convert from node time to player time. @param nodeTime a node time @return a time relative to the player's start time @discussion This method and its inverse `nodeTimeForPlayerTime:` are discussed in the introduction to this class. If the player is not playing when this method is called, nil is returned.
+// Converts from node time to player time.
 func (o *AVAudioPlayerNode) PlayerTimeForNodeTime(nodeTime *AVAudioTime) *AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerNodeSelPlayerTimeForNodeTime, nodeTime.Ptr())
 	if _ret != 0 {

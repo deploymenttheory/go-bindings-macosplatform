@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a specific point in time, independent of any calendar or time zone.
+//
 // Date wraps [raw.NSDate] with a fluent Go API.
 type Date struct {
 	inner *raw.NSDate
@@ -36,6 +38,8 @@ func NewDate() *Date {
 	return &Date{inner: raw.NSDateFromID(_id)}
 }
 
+// Returns a date object initialized relative to 00:00:00 UTC on 1 January 2001 by a given number of seconds.
+//
 // NewDateWithTimeIntervalSinceReferenceDate creates a new [Date].
 func NewDateWithTimeIntervalSinceReferenceDate(ti float64) *Date {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDate")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewDateWithTimeIntervalSinceReferenceDate(ti float64) *Date {
 	return &Date{inner: raw.NSDateFromID(_id)}
 }
 
+// Returns a date object initialized from data in the given unarchiver.
+//
 // NewDateWithCoder creates a new [Date].
 func NewDateWithCoder(coder *raw.NSCoder) *Date {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDate")), objc.RegisterName("alloc"))
@@ -50,6 +56,8 @@ func NewDateWithCoder(coder *raw.NSCoder) *Date {
 	return &Date{inner: raw.NSDateFromID(_id)}
 }
 
+// Returns a date object initialized relative to the current date and time by a given number of seconds.
+//
 // NewDateWithTimeIntervalSinceNow creates a new [Date].
 func NewDateWithTimeIntervalSinceNow(secs float64) *Date {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDate")), objc.RegisterName("alloc"))
@@ -57,6 +65,8 @@ func NewDateWithTimeIntervalSinceNow(secs float64) *Date {
 	return &Date{inner: raw.NSDateFromID(_id)}
 }
 
+// Returns a date object initialized relative to 00:00:00 UTC on 1 January 1970 by a given number of seconds.
+//
 // NewDateWithTimeIntervalSince1970 creates a new [Date].
 func NewDateWithTimeIntervalSince1970(secs float64) *Date {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDate")), objc.RegisterName("alloc"))
@@ -64,6 +74,8 @@ func NewDateWithTimeIntervalSince1970(secs float64) *Date {
 	return &Date{inner: raw.NSDateFromID(_id)}
 }
 
+// Returns a date object initialized relative to another given date by a given number of seconds.
+//
 // NewDateWithTimeIntervalSinceDate creates a new [Date].
 func NewDateWithTimeIntervalSinceDate(secsToBeAdded float64, date *raw.NSDate) *Date {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDate")), objc.RegisterName("alloc"))
@@ -71,6 +83,8 @@ func NewDateWithTimeIntervalSinceDate(secsToBeAdded float64, date *raw.NSDate) *
 	return &Date{inner: raw.NSDateFromID(_id)}
 }
 
+// Returns a date object initialized with a date and time value specified by a given string in the international string representation format.
+//
 // NewDateWithString creates a new [Date].
 func NewDateWithString(description string) *Date {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDate")), objc.RegisterName("alloc"))
@@ -89,16 +103,22 @@ func (x *Date) TimeIntervalSinceReferenceDate() float64 {
 	return x.inner.TimeIntervalSinceReferenceDate()
 }
 
+// Returns the interval between the receiver and another given date.
+//
 // TimeIntervalSinceDate calls the underlying TimeIntervalSinceDate.
 func (x *Date) TimeIntervalSinceDate(anotherDate *raw.NSDate) float64 {
 	return x.inner.TimeIntervalSinceDate(anotherDate)
 }
 
+// Returns a new date object that is set to a given number of seconds relative to the receiver.
+//
 // AddTimeInterval calls the underlying AddTimeInterval.
 func (x *Date) AddTimeInterval(seconds float64) objc.ID {
 	return x.inner.AddTimeInterval(seconds)
 }
 
+// Returns a new date object that is set to a given number of seconds relative to the receiver.
+//
 // DateByAddingTimeInterval calls the underlying DateByAddingTimeInterval.
 func (x *Date) DateByAddingTimeInterval(ti float64) *Date {
 	_r := x.inner.DateByAddingTimeInterval(ti)
@@ -108,6 +128,8 @@ func (x *Date) DateByAddingTimeInterval(ti float64) *Date {
 	return &Date{inner: _r}
 }
 
+// Returns the earlier of the receiver and another given date.
+//
 // EarlierDate calls the underlying EarlierDate.
 func (x *Date) EarlierDate(anotherDate *raw.NSDate) *Date {
 	_r := x.inner.EarlierDate(anotherDate)
@@ -117,6 +139,8 @@ func (x *Date) EarlierDate(anotherDate *raw.NSDate) *Date {
 	return &Date{inner: _r}
 }
 
+// Returns the later of the receiver and another given date.
+//
 // LaterDate calls the underlying LaterDate.
 func (x *Date) LaterDate(anotherDate *raw.NSDate) *Date {
 	_r := x.inner.LaterDate(anotherDate)
@@ -126,16 +150,22 @@ func (x *Date) LaterDate(anotherDate *raw.NSDate) *Date {
 	return &Date{inner: _r}
 }
 
+// Indicates the temporal ordering of the receiver and another given date.
+//
 // Compare calls the underlying Compare.
 func (x *Date) Compare(other *raw.NSDate) NSComparisonResult {
 	return NSComparisonResult(x.inner.Compare(other))
 }
 
+// Returns a Boolean value that indicates whether a given object is a date that is exactly equal the receiver.
+//
 // IsEqualToDate calls the underlying IsEqualToDate.
 func (x *Date) IsEqualToDate(otherDate *raw.NSDate) bool {
 	return x.inner.IsEqualToDate(otherDate)
 }
 
+// Returns a string representation of the date using the given locale.
+//
 // DescriptionWithLocale calls the underlying DescriptionWithLocale.
 func (x *Date) DescriptionWithLocale(locale objc.ID) *String {
 	_r := x.inner.DescriptionWithLocale(locale)
@@ -155,6 +185,8 @@ func (x *Date) TimeIntervalSince1970() float64 {
 	return x.inner.TimeIntervalSince1970()
 }
 
+// Converts the receiver to a calendar date with a given format string and time zone.
+//
 // DateWithCalendarFormatTimeZone calls the underlying DateWithCalendarFormatTimeZone.
 func (x *Date) DateWithCalendarFormatTimeZone(format string, aTimeZone *raw.NSTimeZone) *CalendarDate {
 	_r := x.inner.DateWithCalendarFormatTimeZone(foundation.NSStringStringWithUTF8String(format), aTimeZone)
@@ -164,6 +196,8 @@ func (x *Date) DateWithCalendarFormatTimeZone(format string, aTimeZone *raw.NSTi
 	return &CalendarDate{inner: _r}
 }
 
+// Returns a string representation of the date formatted as specified by given conversion specifiers.
+//
 // DescriptionWithCalendarFormatTimeZoneLocale calls the underlying DescriptionWithCalendarFormatTimeZoneLocale.
 func (x *Date) DescriptionWithCalendarFormatTimeZoneLocale(format string, aTimeZone *raw.NSTimeZone, locale objc.ID) *String {
 	_r := x.inner.DescriptionWithCalendarFormatTimeZoneLocale(foundation.NSStringStringWithUTF8String(format), aTimeZone, locale)

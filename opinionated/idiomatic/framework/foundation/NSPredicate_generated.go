@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A definition of logical conditions for constraining a search for a fetch or for in-memory filtering.
+//
 // Predicate wraps [raw.NSPredicate] with a fluent Go API.
 type Predicate struct {
 	inner *raw.NSPredicate
@@ -41,6 +43,8 @@ func (x *Predicate) WithScriptingProperties(scriptingProperties *raw.NSDictionar
 	return x
 }
 
+// Returns a copy of the predicate and substitutes the predicates variables with specified values from a specified substitution variables dictionary.
+//
 // PredicateWithSubstitutionVariables calls the underlying PredicateWithSubstitutionVariables.
 func (x *Predicate) PredicateWithSubstitutionVariables(variables *raw.NSDictionary[*raw.NSString, objc.ID]) *Predicate {
 	_r := x.inner.PredicateWithSubstitutionVariables(variables)
@@ -50,16 +54,22 @@ func (x *Predicate) PredicateWithSubstitutionVariables(variables *raw.NSDictiona
 	return &Predicate{inner: _r}
 }
 
+// Returns a Boolean value that indicates whether the specified object matches the conditions that the predicate specifies.
+//
 // EvaluateWithObject calls the underlying EvaluateWithObject.
 func (x *Predicate) EvaluateWithObject(object objc.ID) bool {
 	return x.inner.EvaluateWithObject(object)
 }
 
+// Returns a Boolean value that indicates whether the specified object matches the conditions that the predicate specifies after substituting in the values from a specified variables dictionary.
+//
 // EvaluateWithObjectSubstitutionVariables calls the underlying EvaluateWithObjectSubstitutionVariables.
 func (x *Predicate) EvaluateWithObjectSubstitutionVariables(object objc.ID, bindings *raw.NSDictionary[*raw.NSString, objc.ID]) bool {
 	return x.inner.EvaluateWithObjectSubstitutionVariables(object, bindings)
 }
 
+// Forces a securely decoded predicate to allow evaluation.
+//
 // AllowEvaluation calls the underlying AllowEvaluation.
 func (x *Predicate) AllowEvaluation() {
 	x.inner.AllowEvaluation()

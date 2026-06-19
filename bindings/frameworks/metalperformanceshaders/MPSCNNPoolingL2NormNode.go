@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract  A node representing a MPSCNNPoolingL2Norm kernel @discussion The default edge mode is MPSImageEdgeModeClamp
+// A representation of a L2-norm pooling filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingl2normnode
 type MPSCNNPoolingL2NormNode struct {

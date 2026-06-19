@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Base interface for other function-derived interfaces.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4binaryfunctiondescriptor
 type MTL4BinaryFunctionDescriptor struct {
 	foundation.NSObject

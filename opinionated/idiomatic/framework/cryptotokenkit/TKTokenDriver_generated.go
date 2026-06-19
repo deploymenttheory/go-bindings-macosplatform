@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class for building token drivers.
+//
 // TokenDriver wraps [raw.TKTokenDriver] with a fluent Go API.
 type TokenDriver struct {
 	inner *raw.TKTokenDriver
@@ -35,6 +37,8 @@ func NewTokenDriver() *TokenDriver {
 	return &TokenDriver{inner: raw.TKTokenDriverFromID(_id)}
 }
 
+// The token driver delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *TokenDriver) WithDelegate(delegate raw.TKTokenDriverDelegate) *TokenDriver {
 	x.inner.SetDelegate(delegate)

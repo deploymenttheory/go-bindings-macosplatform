@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The signed discount to apply to a payment.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skpaymentdiscount
 // Deprecated: Create a Product.PurchaseOption.promotionalOffer to use in Product.purchase(confirmIn:options:).
 type SKPaymentDiscount struct {
@@ -36,6 +38,7 @@ func SKPaymentDiscountFromID(id objc.ID) *SKPaymentDiscount {
 	return o
 }
 
+// Initializes the payment discount with a signature and the parameters used by the signature.
 func (o *SKPaymentDiscount) InitWithIdentifierKeyIdentifierNonceSignatureTimestamp(identifier *foundation.NSString, keyIdentifier *foundation.NSString, nonce *foundation.NSUUID, signature *foundation.NSString, timestamp *foundation.NSNumber) *SKPaymentDiscount {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentDiscountSelInitWithIdentifierKeyIdentifierNonceSignatureTimestamp, identifier.Ptr(), keyIdentifier.Ptr(), nonce.Ptr(), signature.Ptr(), timestamp.Ptr())
 	if _ret != 0 {

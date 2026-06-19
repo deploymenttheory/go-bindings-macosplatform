@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mapping instance that specifies in a model how to map from a property in a source entity to a property in a destination entity.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspropertymapping
 type NSPropertyMapping struct {
 	foundation.NSObject
@@ -60,10 +62,13 @@ func (o *NSPropertyMapping) SetValueExpression(valueExpression *foundation.NSExp
 }
 
 func (o *NSPropertyMapping) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSPropertyMappingSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPropertyMappingSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSPropertyMapping) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSPropertyMappingSelSetUserInfo, userInfo)
+	o.Ptr().Send(_nSPropertyMappingSelSetUserInfo, userInfo.Ptr())
 }

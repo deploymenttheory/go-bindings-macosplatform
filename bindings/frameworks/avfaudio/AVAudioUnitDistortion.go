@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that implements a multistage distortion effect.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiounitdistortion
 type AVAudioUnitDistortion struct {
 	AVAudioUnitEffect
@@ -33,7 +35,7 @@ func AVAudioUnitDistortionFromID(id objc.ID) *AVAudioUnitDistortion {
 	return o
 }
 
-// @method loadFactoryPreset: @abstract Load a distortion preset. Default:    AVAudioUnitDistortionPresetDrumsBitBrush
+// Configures the audio distortion unit by loading a distortion preset.
 func (o *AVAudioUnitDistortion) LoadFactoryPreset(preset AVAudioUnitDistortionPreset) {
 	o.Ptr().Send(_aVAudioUnitDistortionSelLoadFactoryPreset, preset)
 }

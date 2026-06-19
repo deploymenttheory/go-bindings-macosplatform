@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that can render an image from encapsulated PostScript (EPS) code.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsepsimagerep
 // Deprecated: `NSEPSImageRep` instances cannot be created on macOS 14.0 and later
 type NSEPSImageRep struct {
@@ -36,7 +38,7 @@ func NSEPSImageRepFromID(id objc.ID) *NSEPSImageRep {
 	return o
 }
 
-// Creates and returns a representation of an image initialized with the specified EPS data. Convenience of `-initWithData:`. - Note: This method always returns `nil` on macOS 14.0 and later.
+// Creates and returns a representation of an image initialized with the specified EPS data.
 func NSEPSImageRepImageRepWithData(epsData *foundation.NSData) *NSEPSImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEPSImageRep), _nSEPSImageRepSelImageRepWithData, epsData.Ptr())
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func NSEPSImageRepImageRepWithData(epsData *foundation.NSData) *NSEPSImageRep {
 	return NSEPSImageRepFromID(_ret)
 }
 
-// Returns a representation of an image initialized with the specified EPS data. - Note: This method always returns `nil` on macOS 14.0 and later.
+// Returns a representation of an image initialized with the specified EPS data.
 func (o *NSEPSImageRep) InitWithData(epsData *foundation.NSData) *NSEPSImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEPSImageRepSelInitWithData, epsData.Ptr())
 	if _ret != 0 {
@@ -54,7 +56,7 @@ func (o *NSEPSImageRep) InitWithData(epsData *foundation.NSData) *NSEPSImageRep 
 	return NSEPSImageRepFromID(_ret)
 }
 
-// The `-[NSEPSImageRep draw]` method sends this message to itself just before rendering the EPS code. The default implementation of this method does nothing. It can be overridden in a subclass to prepare the graphics state as needed.
+// Implemented by subclasses to configure the graphics state prior to drawing.
 // Deprecated: since macOS 10.10.
 func (o *NSEPSImageRep) PrepareGState() {
 	o.Ptr().Send(_nSEPSImageRepSelPrepareGState)

@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A filter that clamps the return value to an upper specified value.
+//
 // ImageThresholdTruncate wraps [raw.MPSImageThresholdTruncate] with a fluent Go API.
 type ImageThresholdTruncate struct {
 	inner *raw.MPSImageThresholdTruncate
@@ -33,7 +35,7 @@ func ImageThresholdTruncateFromID(id objc.ID) *ImageThresholdTruncate {
 	return &ImageThresholdTruncate{inner: raw.MPSImageThresholdTruncateFromID(id)}
 }
 
-// @abstract   initialize a MPSImageThresholdTruncate filter @param      device          The device the filter will run on @param      thresholdValue The threshold value to use @param      transform       This matrix is an array of 3 floats. The default if no transform is specifed is BT.601/JPEG: {0.299f, 0.587f, 0.114f};
+// Initializes the kernel.
 //
 // NewImageThresholdTruncateWithDeviceThresholdValueLinearGrayColorTransform creates a new [ImageThresholdTruncate].
 func NewImageThresholdTruncateWithDeviceThresholdValueLinearGrayColorTransform(device metal.MTLDevice, thresholdValue float32, transform *float32) *ImageThresholdTruncate {
@@ -51,7 +53,7 @@ func NewImageThresholdTruncateWithCoderDevice(aDecoder *foundation.NSCoder, devi
 	return &ImageThresholdTruncate{inner: raw.MPSImageThresholdTruncateFromID(_id)}
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+// The position of the destination clip rectangle origin relative to the source buffer.
 //
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageThresholdTruncate) WithOffset(offset mpscore.MPSOffset) *ImageThresholdTruncate {
@@ -59,7 +61,7 @@ func (x *ImageThresholdTruncate) WithOffset(offset mpscore.MPSOffset) *ImageThre
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 //
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageThresholdTruncate) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdTruncate {
@@ -67,7 +69,7 @@ func (x *ImageThresholdTruncate) WithClipRect(clipRect metal.MTLRegion) *ImageTh
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+// The edge mode to use when texture reads stray off the edge of an image.
 //
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageThresholdTruncate) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdTruncate {
@@ -75,7 +77,7 @@ func (x *ImageThresholdTruncate) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode)
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageThresholdTruncate) WithOptions(options mpscore.MPSKernelOptions) *ImageThresholdTruncate {
@@ -83,7 +85,7 @@ func (x *ImageThresholdTruncate) WithOptions(options mpscore.MPSKernelOptions) *
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageThresholdTruncate) WithLabel(label string) *ImageThresholdTruncate {

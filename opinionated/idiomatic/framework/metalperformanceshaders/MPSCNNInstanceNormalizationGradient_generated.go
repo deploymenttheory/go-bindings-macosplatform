@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gradient instance normalization kernel.
+//
 // CNNInstanceNormalizationGradient wraps [raw.MPSCNNInstanceNormalizationGradient] with a fluent Go API.
 type CNNInstanceNormalizationGradient struct {
 	inner *raw.MPSCNNInstanceNormalizationGradient
@@ -185,7 +187,7 @@ func (x *CNNInstanceNormalizationGradient) WithDestinationImageAllocator(destina
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNInstanceNormalizationGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNInstanceNormalizationGradient {
@@ -193,7 +195,7 @@ func (x *CNNInstanceNormalizationGradient) WithOptions(options mpscore.MPSKernel
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNInstanceNormalizationGradient) WithLabel(label string) *CNNInstanceNormalizationGradient {

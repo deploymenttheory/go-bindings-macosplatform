@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An R-tree is a data structure that partitions axis aligned bounding rectangles into groups spatially. When a group goes to large, it is split according to its split strategy into two new groups. Fast queries can be made on these partition bounding rectangles.
+// A data structure that adaptively organizes objects based on their locations in a two-dimensional space.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkrtree
 type GKRTree[ElementType purego.AnyObject] struct {
@@ -40,7 +40,7 @@ func GKRTreeFromID[ElementType purego.AnyObject](id objc.ID) *GKRTree[ElementTyp
 	return o
 }
 
-// Creates an RTree with a given maximum number of children per node.  Nodes that grow beyond this number of children will be split. @param maxNumberOfChildren the maximum number of children per node before splitting
+// Creates a new R-tree object.
 func GKRTreeTreeWithMaxNumberOfChildren(maxNumberOfChildren uint) *GKRTree[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRTree), _gKRTreeSelTreeWithMaxNumberOfChildren, maxNumberOfChildren)
 	if _ret != 0 {
@@ -49,6 +49,7 @@ func GKRTreeTreeWithMaxNumberOfChildren(maxNumberOfChildren uint) *GKRTree[objc.
 	return GKRTreeFromID[objc.ID](_ret)
 }
 
+// Initializes a new R-tree object.
 func (o *GKRTree[ElementType]) InitWithMaxNumberOfChildren(maxNumberOfChildren uint) *GKRTree[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRTreeSelInitWithMaxNumberOfChildren, maxNumberOfChildren)
 	if _ret != 0 {
@@ -57,17 +58,17 @@ func (o *GKRTree[ElementType]) InitWithMaxNumberOfChildren(maxNumberOfChildren u
 	return GKRTreeFromID[ElementType](_ret)
 }
 
-// Adds an element with the specified bounding rect to this RTree.  The supplied splitting strategy is used if the node this element would be added to needs to be split. @param element the element to be added @param boundingRectMin the min point (lower left) on the bounding rect of the element to be added @param boundingRectMax the min point (upper right) on the bounding rect of the element to be added @param splitStrategy the splitting strategy to be used if the node this element would be added to needs to be split
+// Adds the specified object to the tree.
 func (o *GKRTree[ElementType]) AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element ElementType, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer, splitStrategy GKRTreeSplitStrategy) {
 	o.Ptr().Send(_gKRTreeSelAddElementBoundingRectMinBoundingRectMaxSplitStrategy, element, boundingRectMin, boundingRectMax, splitStrategy)
 }
 
-// Removes an element with the specified bounding rect from this RTree. @param element the element to be removed @param boundingRectMin the min point (lower left) on the bounding rect of the element to be removed @param boundingRectMax the min point (upper right) on the bounding rect of the element to be removed
+// Removes the specified object from the tree.
 func (o *GKRTree[ElementType]) RemoveElementBoundingRectMinBoundingRectMax(element ElementType, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer) {
 	o.Ptr().Send(_gKRTreeSelRemoveElementBoundingRectMinBoundingRectMax, element, boundingRectMin, boundingRectMax)
 }
 
-// Queries all the elements that are in this RTree within the given bounding rect. @param rectMin the min point (lower left) of the rect to query @param rectMax the max point (upper right) of the rect to query @return an NSArray of all of the elements that fall within the query rect
+// Searches the tree and returns all elements found within the specified bounding region.
 func (o *GKRTree[ElementType]) ElementsInBoundingRectMinRectMax(rectMin unsafe.Pointer, rectMax unsafe.Pointer) *foundation.NSArray[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRTreeSelElementsInBoundingRectMinRectMax, rectMin, rectMax)
 	if _ret != 0 {

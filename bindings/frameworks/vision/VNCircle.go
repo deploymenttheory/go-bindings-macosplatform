@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable 2D circle represented by its center point and radius.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vncircle
 type VNCircle struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func VNCircleFromID(id objc.ID) *VNCircle {
 	return o
 }
 
-// @brief Initializes VNCircle object with given circle center and circle radius.
+// Creates a circle with the specified center and radius.
 func (o *VNCircle) InitWithCenterRadius(center *VNPoint, radius float64) *VNCircle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNCircleSelInitWithCenterRadius, center.Ptr(), radius)
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func (o *VNCircle) InitWithCenterRadius(center *VNPoint, radius float64) *VNCirc
 	return VNCircleFromID(_ret)
 }
 
-// @brief Initializes VNCircle object with given circle center and circle diameter.
+// Creates a circle with the specified center and diameter.
 func (o *VNCircle) InitWithCenterDiameter(center *VNPoint, diameter float64) *VNCircle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNCircleSelInitWithCenterDiameter, center.Ptr(), diameter)
 	if _ret != 0 {
@@ -55,13 +57,13 @@ func (o *VNCircle) InitWithCenterDiameter(center *VNPoint, diameter float64) *VN
 	return VNCircleFromID(_ret)
 }
 
-// @brief Returns YES if the point is inside the circle, including the boundary.
+// Determines if this circle, including its boundary, contains the specified point.
 func (o *VNCircle) ContainsPoint(point *VNPoint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _vNCircleSelContainsPoint, point.Ptr())
 	return _ret
 }
 
-// @brief Returns YES if the point is within the ring bound by two circles [radius - delta; radius + delta].
+// Determines if a ring around this circle’s circumference contains the specified point.
 func (o *VNCircle) ContainsPointInCircumferentialRingOfWidth(point *VNPoint, ringWidth float64) bool {
 	_ret := objc.Send[bool](o.Ptr(), _vNCircleSelContainsPointInCircumferentialRingOfWidth, point.Ptr(), ringWidth)
 	return _ret

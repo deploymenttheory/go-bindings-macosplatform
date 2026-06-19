@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a two-dimensional braille display.
+//
 // Apple documentation: https://developer.apple.com/documentation/accessibility/axbraillemap
 type AXBrailleMap struct {
 	foundation.NSObject
@@ -36,15 +38,18 @@ func AXBrailleMapFromID(id objc.ID) *AXBrailleMap {
 	return o
 }
 
+// Sets the height of an individual pin on the braille display.
 func (o *AXBrailleMap) SetHeightAtPoint(status float32, point corefoundation.CGPoint) {
 	o.Ptr().Send(_aXBrailleMapSelSetHeightAtPoint, status, point)
 }
 
+// Retrieves the height of an individual pin on the braille display.
 func (o *AXBrailleMap) HeightAtPoint(point corefoundation.CGPoint) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _aXBrailleMapSelHeightAtPoint, point)
 	return _ret
 }
 
+// Converts the data from the image you specify into the braille map.
 func (o *AXBrailleMap) PresentImage(image unsafe.Pointer) {
 	o.Ptr().Send(_aXBrailleMapSelPresentImage, image)
 }

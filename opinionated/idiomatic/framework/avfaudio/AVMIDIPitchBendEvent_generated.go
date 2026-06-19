@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a MIDI pitch bend message.
+//
 // MIDIPitchBendEvent wraps [raw.AVMIDIPitchBendEvent] with a fluent Go API.
 type MIDIPitchBendEvent struct {
 	inner *raw.AVMIDIPitchBendEvent
@@ -29,7 +31,7 @@ func MIDIPitchBendEventFromID(id objc.ID) *MIDIPitchBendEvent {
 	return &MIDIPitchBendEvent{inner: raw.AVMIDIPitchBendEventFromID(id)}
 }
 
-// @method initWithChannel:value: @abstract Initialize the event with a channel and a pitch bend value. @param channel The MIDI channel for the message.  Range: 0-15. @param value The pitch bend value.  Range: 0-16383 (midpoint 8192).
+// Creates an event with a channel and pitch bend value.
 //
 // NewMIDIPitchBendEventWithChannelValue creates a new [MIDIPitchBendEvent].
 func NewMIDIPitchBendEventWithChannelValue(channel uint, value uint) *MIDIPitchBendEvent {
@@ -38,7 +40,7 @@ func NewMIDIPitchBendEventWithChannelValue(channel uint, value uint) *MIDIPitchB
 	return &MIDIPitchBendEvent{inner: raw.AVMIDIPitchBendEventFromID(_id)}
 }
 
-// @property value The value of the pitch bend event.  Range: 0-16383 (midpoint 8192).
+// The value of the pitch bend event.
 //
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *MIDIPitchBendEvent) WithValue(value uint) *MIDIPitchBendEvent {
@@ -46,7 +48,7 @@ func (x *MIDIPitchBendEvent) WithValue(value uint) *MIDIPitchBendEvent {
 	return x
 }
 
-// @property channel The MIDI channel for the event.  Range: 0-15.
+// The MIDI channel.
 //
 // WithChannel sets the channel property and returns the receiver for chaining.
 func (x *MIDIPitchBendEvent) WithChannel(channel uint) *MIDIPitchBendEvent {

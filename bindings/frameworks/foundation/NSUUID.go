@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A universally unique value that can be used to identify types, interfaces, and other items.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsuuid
 type NSUUID struct {
 	NSObject
@@ -35,6 +37,7 @@ func NSUUIDFromID(id objc.ID) *NSUUID {
 	return o
 }
 
+// Create and returns a new UUID with RFC 4122 version 4 random bytes.
 func NSUUIDUUID() *NSUUID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUUID), _nSUUIDSelUUID)
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func NSUUIDUUID() *NSUUID {
 	return NSUUIDFromID(_ret)
 }
 
+// Initializes a new UUID with RFC 4122 version 4 random bytes.
 func (o *NSUUID) Init() *NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUUIDSelInit)
 	if _ret != 0 {
@@ -51,6 +55,7 @@ func (o *NSUUID) Init() *NSUUID {
 	return NSUUIDFromID(_ret)
 }
 
+// Initializes a new UUID with the formatted string.
 func (o *NSUUID) InitWithUUIDString(string_ *NSString) *NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUUIDSelInitWithUUIDString, string_.Ptr())
 	if _ret != 0 {
@@ -59,6 +64,7 @@ func (o *NSUUID) InitWithUUIDString(string_ *NSString) *NSUUID {
 	return NSUUIDFromID(_ret)
 }
 
+// Initializes a new UUID with the given bytes.
 func (o *NSUUID) InitWithUUIDBytes(bytes_ *uint8) *NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUUIDSelInitWithUUIDBytes, bytes_)
 	if _ret != 0 {
@@ -67,10 +73,12 @@ func (o *NSUUID) InitWithUUIDBytes(bytes_ *uint8) *NSUUID {
 	return NSUUIDFromID(_ret)
 }
 
+// Returns the UUID as bytes.
 func (o *NSUUID) GetUUIDBytes(uuid *uint8) {
 	o.Ptr().Send(_nSUUIDSelGetUUIDBytes, uuid)
 }
 
+// Compares the receiver to another NSUUID in constant time.
 func (o *NSUUID) Compare(otherUUID *NSUUID) NSComparisonResult {
 	_ret := objc.Send[NSComparisonResult](o.Ptr(), _nSUUIDSelCompare, otherUUID.Ptr())
 	return _ret

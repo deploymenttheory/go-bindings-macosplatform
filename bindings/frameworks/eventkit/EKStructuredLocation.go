@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that specifies a geofence to activate the alarm of a calendar item.
+//
 // Apple documentation: https://developer.apple.com/documentation/eventkit/ekstructuredlocation
 type EKStructuredLocation struct {
 	EKObject
@@ -40,6 +42,7 @@ func EKStructuredLocationFromID(id objc.ID) *EKStructuredLocation {
 	return o
 }
 
+// Creates a new structured location with the specified title.
 func EKStructuredLocationLocationWithTitle(title *foundation.NSString) *EKStructuredLocation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKStructuredLocation), _eKStructuredLocationSelLocationWithTitle, title.Ptr())
 	if _ret != 0 {
@@ -48,6 +51,7 @@ func EKStructuredLocationLocationWithTitle(title *foundation.NSString) *EKStruct
 	return EKStructuredLocationFromID(_ret)
 }
 
+// Creates a new structured location with the specified map item.
 func EKStructuredLocationLocationWithMapItem(mapItem *mapkit.MKMapItem) *EKStructuredLocation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKStructuredLocation), _eKStructuredLocationSelLocationWithMapItem, mapItem.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that displays OpenGL content in a view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsopenglview
 type NSOpenGLView struct {
 	NSView
@@ -39,6 +41,7 @@ func NSOpenGLViewFromID(id objc.ID) *NSOpenGLView {
 	return o
 }
 
+// Returns a default NSOpenGLPixelFormat object.
 func NSOpenGLViewDefaultPixelFormat() *NSOpenGLPixelFormat {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOpenGLView), _nSOpenGLViewSelDefaultPixelFormat)
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func NSOpenGLViewDefaultPixelFormat() *NSOpenGLPixelFormat {
 	return NSOpenGLPixelFormatFromID(_ret)
 }
 
+// Returns an NSOpenGLView object initialized with the specified frame rectangle and pixel format.
 func (o *NSOpenGLView) InitWithFramePixelFormat(frameRect corefoundation.CGRect, format *NSOpenGLPixelFormat) *NSOpenGLView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLViewSelInitWithFramePixelFormat, frameRect, format.Ptr())
 	if _ret != 0 {
@@ -55,18 +59,22 @@ func (o *NSOpenGLView) InitWithFramePixelFormat(frameRect corefoundation.CGRect,
 	return NSOpenGLViewFromID(_ret)
 }
 
+// Releases the NSOpenGLContext object associated with the view.
 func (o *NSOpenGLView) ClearGLContext() {
 	o.Ptr().Send(_nSOpenGLViewSelClearGLContext)
 }
 
+// Called by Cocoa when the view’s window moves or when the view itself moves or is resized.
 func (o *NSOpenGLView) Update() {
 	o.Ptr().Send(_nSOpenGLViewSelUpdate)
 }
 
+// Called by Cocoa when the view’s visible rectangle or bounds change.
 func (o *NSOpenGLView) Reshape() {
 	o.Ptr().Send(_nSOpenGLViewSelReshape)
 }
 
+// Used by subclasses to initialize OpenGL state.
 func (o *NSOpenGLView) PrepareOpenGL() {
 	o.Ptr().Send(_nSOpenGLViewSelPrepareOpenGL)
 }

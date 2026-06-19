@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information that describes a rental car.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inrentalcar
 type INRentalCar struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func INRentalCarFromID(id objc.ID) *INRentalCar {
 	return o
 }
 
+// Creates a new rental car object with the specified contents and attributes.
 func (o *INRentalCar) InitWithRentalCompanyNameTypeMakeModelRentalCarDescription(rentalCompanyName *foundation.NSString, type_ *foundation.NSString, make_ *foundation.NSString, model *foundation.NSString, rentalCarDescription *foundation.NSString) *INRentalCar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRentalCarSelInitWithRentalCompanyNameTypeMakeModelRentalCarDescription, rentalCompanyName.Ptr(), type_.Ptr(), make_.Ptr(), model.Ptr(), rentalCarDescription.Ptr())
 	if _ret != 0 {

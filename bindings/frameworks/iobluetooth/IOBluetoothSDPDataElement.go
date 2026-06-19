@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance of this class represents a single SDP data element as defined by the Bluetooth SDP spec.
+//
 // Apple documentation: https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement
 type IOBluetoothSDPDataElement struct {
 	foundation.NSObject
@@ -48,6 +50,7 @@ func IOBluetoothSDPDataElementFromID(id objc.ID) *IOBluetoothSDPDataElement {
 	return o
 }
 
+// Creates a new IOBluetoothSDPDataElement with the given value.
 func IOBluetoothSDPDataElementWithElementValue(element *foundation.NSObject) *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPDataElement), _iOBluetoothSDPDataElementSelWithElementValue, element.Ptr())
 	if _ret != 0 {
@@ -56,6 +59,7 @@ func IOBluetoothSDPDataElementWithElementValue(element *foundation.NSObject) *IO
 	return IOBluetoothSDPDataElementFromID(_ret)
 }
 
+// Creates a new IOBluetoothSDPDataElement with the given attributes.
 func IOBluetoothSDPDataElementWithTypeSizeDescriptorSizeValue(type_ uint8, newSizeDescriptor uint8, newSize uint32, newValue *foundation.NSObject) *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPDataElement), _iOBluetoothSDPDataElementSelWithTypeSizeDescriptorSizeValue, type_, newSizeDescriptor, newSize, newValue.Ptr())
 	if _ret != 0 {
@@ -64,6 +68,7 @@ func IOBluetoothSDPDataElementWithTypeSizeDescriptorSizeValue(type_ uint8, newSi
 	return IOBluetoothSDPDataElementFromID(_ret)
 }
 
+// Method call to convert an IOBluetoothSDPDataElementRef into an IOBluetoothSDPDataElement *.
 func IOBluetoothSDPDataElementWithSDPDataElementRef(sdpDataElementRef unsafe.Pointer) *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPDataElement), _iOBluetoothSDPDataElementSelWithSDPDataElementRef, sdpDataElementRef)
 	if _ret != 0 {
@@ -72,6 +77,7 @@ func IOBluetoothSDPDataElementWithSDPDataElementRef(sdpDataElementRef unsafe.Poi
 	return IOBluetoothSDPDataElementFromID(_ret)
 }
 
+// Initializes a new IOBluetoothSDPDataElement with the given value.
 func (o *IOBluetoothSDPDataElement) InitWithElementValue(element *foundation.NSObject) *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPDataElementSelInitWithElementValue, element.Ptr())
 	if _ret != 0 {
@@ -80,6 +86,7 @@ func (o *IOBluetoothSDPDataElement) InitWithElementValue(element *foundation.NSO
 	return IOBluetoothSDPDataElementFromID(_ret)
 }
 
+// Initializes a new IOBluetoothSDPDataElement with the given attributes.
 func (o *IOBluetoothSDPDataElement) InitWithTypeSizeDescriptorSizeValue(newType uint8, newSizeDescriptor uint8, newSize uint32, newValue *foundation.NSObject) *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPDataElementSelInitWithTypeSizeDescriptorSizeValue, newType, newSizeDescriptor, newSize, newValue.Ptr())
 	if _ret != 0 {
@@ -88,26 +95,31 @@ func (o *IOBluetoothSDPDataElement) InitWithTypeSizeDescriptorSizeValue(newType 
 	return IOBluetoothSDPDataElementFromID(_ret)
 }
 
+// Returns an IOBluetoothSDPDataElementRef representation of the target IOBluetoothSDPDataElement object.
 func (o *IOBluetoothSDPDataElement) GetSDPDataElementRef() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOBluetoothSDPDataElementSelGetSDPDataElementRef)
 	return _ret
 }
 
+// Returns the SDP spec defined data element type descriptor for the target data element.
 func (o *IOBluetoothSDPDataElement) GetTypeDescriptor() uint8 {
 	_ret := objc.Send[uint8](o.Ptr(), _iOBluetoothSDPDataElementSelGetTypeDescriptor)
 	return _ret
 }
 
+// Returns the SDP spec defined data element size descriptor for the target data element.
 func (o *IOBluetoothSDPDataElement) GetSizeDescriptor() uint8 {
 	_ret := objc.Send[uint8](o.Ptr(), _iOBluetoothSDPDataElementSelGetSizeDescriptor)
 	return _ret
 }
 
+// Returns the size in bytes of the target data element.
 func (o *IOBluetoothSDPDataElement) GetSize() uint32 {
 	_ret := objc.Send[uint32](o.Ptr(), _iOBluetoothSDPDataElementSelGetSize)
 	return _ret
 }
 
+// If the data element is represented by a number, it returns the value as an NSNumber.
 func (o *IOBluetoothSDPDataElement) GetNumberValue() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPDataElementSelGetNumberValue)
 	if _ret != 0 {
@@ -116,6 +128,7 @@ func (o *IOBluetoothSDPDataElement) GetNumberValue() *foundation.NSNumber {
 	return foundation.NSNumberFromID(_ret)
 }
 
+// If the data element is represented by a data object, it returns the value as an NSData.
 func (o *IOBluetoothSDPDataElement) GetDataValue() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPDataElementSelGetDataValue)
 	if _ret != 0 {
@@ -124,6 +137,7 @@ func (o *IOBluetoothSDPDataElement) GetDataValue() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
+// If the data element is represented by a string object, it returns the value as an NSString.
 func (o *IOBluetoothSDPDataElement) GetStringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPDataElementSelGetStringValue)
 	if _ret != 0 {
@@ -132,11 +146,16 @@ func (o *IOBluetoothSDPDataElement) GetStringValue() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// If the data element is represented by an array object, it returns the value as an NSArray.
 func (o *IOBluetoothSDPDataElement) GetArrayValue() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iOBluetoothSDPDataElementSelGetArrayValue)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPDataElementSelGetArrayValue)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// If the data element is a UUID (type 3), it returns the value as an IOBluetoothSDPUUID.
 func (o *IOBluetoothSDPDataElement) GetUUIDValue() *IOBluetoothSDPUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPDataElementSelGetUUIDValue)
 	if _ret != 0 {
@@ -145,6 +164,7 @@ func (o *IOBluetoothSDPDataElement) GetUUIDValue() *IOBluetoothSDPUUID {
 	return IOBluetoothSDPUUIDFromID(_ret)
 }
 
+// Returns the object value of the data element.
 func (o *IOBluetoothSDPDataElement) GetValue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPDataElementSelGetValue)
 	if _ret != 0 {
@@ -153,11 +173,13 @@ func (o *IOBluetoothSDPDataElement) GetValue() *foundation.NSObject {
 	return foundation.NSObjectFromID(_ret)
 }
 
+// Checks to see if the target data element is the same as the dataElement parameter or if it contains the dataElement parameter (if its a sequence type).
 func (o *IOBluetoothSDPDataElement) ContainsDataElement(dataElement *IOBluetoothSDPDataElement) bool {
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothSDPDataElementSelContainsDataElement, dataElement.Ptr())
 	return _ret
 }
 
+// Checks to see if the target data element’s value is the same as the value parameter or if it contains the value parameter.
 func (o *IOBluetoothSDPDataElement) ContainsValue(cmpValue *foundation.NSObject) bool {
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothSDPDataElementSelContainsValue, cmpValue.Ptr())
 	return _ret

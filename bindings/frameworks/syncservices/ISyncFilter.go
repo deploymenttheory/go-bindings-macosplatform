@@ -33,12 +33,12 @@ func ISyncFilterFromID(id objc.ID) *ISyncFilter {
 
 // Deprecated: since macOS 10.7.
 func ISyncFilterFilterMatchingAllFilters(filters *foundation.NSArray[objc.ID]) ISyncFiltering {
-	_ret := objc.Send[ISyncFiltering](objc.ID(_clsISyncFilter), _iSyncFilterSelFilterMatchingAllFilters, filters)
+	_ret := objc.Send[ISyncFiltering](objc.ID(_clsISyncFilter), _iSyncFilterSelFilterMatchingAllFilters, filters.Ptr())
 	return _ret
 }
 
 // Deprecated: since macOS 10.7.
 func ISyncFilterFilterMatchingAtLeastOneFilter(filters *foundation.NSArray[objc.ID]) ISyncFiltering {
-	_ret := objc.Send[ISyncFiltering](objc.ID(_clsISyncFilter), _iSyncFilterSelFilterMatchingAtLeastOneFilter, filters)
+	_ret := objc.Send[ISyncFiltering](objc.ID(_clsISyncFilter), _iSyncFilterSelFilterMatchingAtLeastOneFilter, filters.Ptr())
 	return _ret
 }

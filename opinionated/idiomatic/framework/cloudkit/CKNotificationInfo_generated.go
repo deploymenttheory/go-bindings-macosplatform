@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that describes the configuration of a subscription’s push notifications.
+//
 // NotificationInfo wraps [raw.CKNotificationInfo] with a fluent Go API.
 type NotificationInfo struct {
 	inner *raw.CKNotificationInfo
@@ -38,7 +40,7 @@ func NewNotificationInfo() *NotificationInfo {
 	return &NotificationInfo{inner: raw.CKNotificationInfoFromID(_id)}
 }
 
-// The names of fields to include in the push notification's payload. This property contains an array of strings, each of which corresponds to the name of a field in the record that triggers the notification. When the system receives a notification, it includes the keys, and their corresponding values. You can request a maximum of three keys. For the keys you specify, the allowable types are <doc://com.apple.documentation/documentation/foundation/nsstring>, <doc://com.apple.documentation/documentation/foundation/nsnumber>, <doc://com.apple.documentation/documentation/corelocation/cllocation>, <doc://com.apple.documentation/documentation/foundation/nsdate>, and “CKRecord/Reference“. You can't specify keys with values that contain other data types. CloudKit may truncate strings that are more than 100 characters when it adds them to the notification's payload.
+// The names of fields to include in the push notification’s payload.
 //
 // WithDesiredKeys sets the collection, converting the Go slice to an NSArray.
 func (x *NotificationInfo) WithDesiredKeys(items ...*foundation.NSString) *NotificationInfo {

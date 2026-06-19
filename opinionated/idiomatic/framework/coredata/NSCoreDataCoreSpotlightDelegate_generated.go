@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A set of methods that enable integration with Core Spotlight.
+//
 // CoreDataCoreSpotlightDelegate wraps [raw.NSCoreDataCoreSpotlightDelegate] with a fluent Go API.
 type CoreDataCoreSpotlightDelegate struct {
 	inner *raw.NSCoreDataCoreSpotlightDelegate
@@ -33,6 +35,8 @@ func CoreDataCoreSpotlightDelegateFromID(id objc.ID) *CoreDataCoreSpotlightDeleg
 	return &CoreDataCoreSpotlightDelegate{inner: raw.NSCoreDataCoreSpotlightDelegateFromID(id)}
 }
 
+// Creates a Core Spotlight delegate with the specified store description and coordinator.
+//
 // NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionCoordinator creates a new [CoreDataCoreSpotlightDelegate].
 func NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionCoordinator(description *raw.NSPersistentStoreDescription, psc *raw.NSPersistentStoreCoordinator) *CoreDataCoreSpotlightDelegate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCoreDataCoreSpotlightDelegate")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionCoordinator(descript
 	return &CoreDataCoreSpotlightDelegate{inner: raw.NSCoreDataCoreSpotlightDelegateFromID(_id)}
 }
 
+// Creates a Core Spotlight delegate with the specified store description and managed object model.
+//
 // NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionModel creates a new [CoreDataCoreSpotlightDelegate].
 func NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionModel(description *raw.NSPersistentStoreDescription, model *raw.NSManagedObjectModel) *CoreDataCoreSpotlightDelegate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCoreDataCoreSpotlightDelegate")), objc.RegisterName("alloc"))
@@ -47,6 +53,8 @@ func NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionModel(description *r
 	return &CoreDataCoreSpotlightDelegate{inner: raw.NSCoreDataCoreSpotlightDelegateFromID(_id)}
 }
 
+// Returns the domain identifier.
+//
 // DomainIdentifier calls the underlying DomainIdentifier.
 func (x *CoreDataCoreSpotlightDelegate) DomainIdentifier() string {
 	_r := x.inner.DomainIdentifier()
@@ -56,6 +64,8 @@ func (x *CoreDataCoreSpotlightDelegate) DomainIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the index’s name.
+//
 // IndexName calls the underlying IndexName.
 func (x *CoreDataCoreSpotlightDelegate) IndexName() string {
 	_r := x.inner.IndexName()
@@ -65,16 +75,22 @@ func (x *CoreDataCoreSpotlightDelegate) IndexName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Starts the indexing of the store’s entities.
+//
 // StartSpotlightIndexing calls the underlying StartSpotlightIndexing.
 func (x *CoreDataCoreSpotlightDelegate) StartSpotlightIndexing() {
 	x.inner.StartSpotlightIndexing()
 }
 
+// Stops the indexing of the store’s entities.
+//
 // StopSpotlightIndexing calls the underlying StopSpotlightIndexing.
 func (x *CoreDataCoreSpotlightDelegate) StopSpotlightIndexing() {
 	x.inner.StopSpotlightIndexing()
 }
 
+// Deletes all searchable items from the configured index.
+//
 // DeleteSpotlightIndex blocks until the operation completes or ctx is cancelled.
 func (x *CoreDataCoreSpotlightDelegate) DeleteSpotlightIndex(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -93,11 +109,15 @@ func (x *CoreDataCoreSpotlightDelegate) DeleteSpotlightIndex(ctx context.Context
 	}
 }
 
+// Returns the searchable attributes for the specified managed object.
+//
 // AttributeSetForObject calls the underlying AttributeSetForObject.
 func (x *CoreDataCoreSpotlightDelegate) AttributeSetForObject(object *raw.NSManagedObject) objc.ID {
 	return x.inner.AttributeSetForObject(object)
 }
 
+// Reindexes all searchable items and clears any local state.
+//
 // SearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler blocks until the operation completes or ctx is cancelled.
 func (x *CoreDataCoreSpotlightDelegate) SearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler(ctx context.Context, searchableIndex objc.ID) error {
 	_ch := make(chan error, 1)
@@ -112,6 +132,8 @@ func (x *CoreDataCoreSpotlightDelegate) SearchableIndexReindexAllSearchableItems
 	}
 }
 
+// Reindexes the searchable items for the specified identifiers.
+//
 // SearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler blocks until the operation completes or ctx is cancelled.
 func (x *CoreDataCoreSpotlightDelegate) SearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler(ctx context.Context, searchableIndex objc.ID, identifiers *foundation.NSArray[*foundation.NSString]) error {
 	_ch := make(chan error, 1)

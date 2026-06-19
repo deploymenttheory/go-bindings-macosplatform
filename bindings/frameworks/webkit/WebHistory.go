@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// WebHistory objects are used to maintain the pages visited by users. Visited pages are represented by WebHistoryItem objects. You add and remove history items using the addItems: and removeItems: methods. These methods post appropriate notifications when items are added or removed so you can update the display. WebHistory organizes the WebHistoryItem objects by the day they were visited, ordered from most recent to oldest. You can request all the days that contain history items using the orderedLastVisitedDays method or request the items visited on a particular day using the orderedItemsLastVisitedOnDay: method. WebHistory objects can be loaded and saved by specifying a file URL (see loadFromURL:error:).
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/webhistory
 type WebHistory struct {
 	foundation.NSObject
@@ -45,7 +47,7 @@ func WebHistoryFromID(id objc.ID) *WebHistory {
 	return o
 }
 
-// @method optionalSharedHistory @abstract Returns a shared WebHistory instance initialized with the default history file. @result A WebHistory object.
+// Returns a shared web history object, if one exists.
 func WebHistoryOptionalSharedHistory() *WebHistory {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWebHistory), _webHistorySelOptionalSharedHistory)
 	if _ret != 0 {
@@ -54,12 +56,12 @@ func WebHistoryOptionalSharedHistory() *WebHistory {
 	return WebHistoryFromID(_ret)
 }
 
-// @method setOptionalSharedHistory: @param history The history to use for the global WebHistory.
+// Sets the web history object to share.
 func WebHistorySetOptionalSharedHistory(history *WebHistory) {
 	objc.ID(_clsWebHistory).Send(_webHistorySelSetOptionalSharedHistory, history.Ptr())
 }
 
-// @method loadFromURL:error: @param URL The URL to use to initialize the WebHistory. @param error Set to nil or an NSError instance if an error occurred. @abstract The designated initializer for WebHistory. @result Returns YES if successful, NO otherwise.
+// Loads the contents of the specified web history file.
 func (o *WebHistory) LoadFromURLError(uRL *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _webHistorySelLoadFromURLError, uRL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -69,7 +71,7 @@ func (o *WebHistory) LoadFromURLError(uRL *foundation.NSURL) (bool, error) {
 	return _ret, nil
 }
 
-// @method saveToURL:error: @discussion Save history to URL. It is the client's responsibility to call this at appropriate times. @param URL The URL to use to save the WebHistory. @param error Set to nil or an NSError instance if an error occurred. @result Returns YES if successful, NO otherwise.
+// Saves the web history to the specified file.
 func (o *WebHistory) SaveToURLError(uRL *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _webHistorySelSaveToURLError, uRL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -79,27 +81,31 @@ func (o *WebHistory) SaveToURLError(uRL *foundation.NSURL) (bool, error) {
 	return _ret, nil
 }
 
-// @method addItems: @param newItems An array of WebHistoryItems to add to the WebHistory.
+// Inserts or updates the specified items in the web history.
 func (o *WebHistory) AddItems(newItems *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_webHistorySelAddItems, newItems)
+	o.Ptr().Send(_webHistorySelAddItems, newItems.Ptr())
 }
 
-// @method removeItems: @param items An array of WebHistoryItems to remove from the WebHistory.
+// Removes the specified items from the web history.
 func (o *WebHistory) RemoveItems(items *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_webHistorySelRemoveItems, items)
+	o.Ptr().Send(_webHistorySelRemoveItems, items.Ptr())
 }
 
-// @method removeAllItems
+// Removes all items from the web history.
 func (o *WebHistory) RemoveAllItems() {
 	o.Ptr().Send(_webHistorySelRemoveAllItems)
 }
 
+// Returns web history items that were last visited on the specified date.
 func (o *WebHistory) OrderedItemsLastVisitedOnDay(calendarDate *foundation.NSCalendarDate) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _webHistorySelOrderedItemsLastVisitedOnDay, calendarDate.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _webHistorySelOrderedItemsLastVisitedOnDay, calendarDate.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
-// @method itemForURL: @abstract Get an item for a specific URL @param URL The URL of the history item to search for @result Returns an item matching the URL
+// Returns the web history item that corresponds to the specified web location.
 func (o *WebHistory) ItemForURL(uRL *foundation.NSURL) *WebHistoryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webHistorySelItemForURL, uRL.Ptr())
 	if _ret != 0 {
@@ -110,8 +116,11 @@ func (o *WebHistory) ItemForURL(uRL *foundation.NSURL) *WebHistoryItem {
 
 // @property orderedLastVisitedDays @abstract An array of NSCalendarDates for which history items exist in the WebHistory. @discussion An array of NSCalendarDates, each one representing a unique day that contains one or more history items, ordered from most recent to oldest.
 func (o *WebHistory) OrderedLastVisitedDays() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _webHistorySelOrderedLastVisitedDays)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _webHistorySelOrderedLastVisitedDays)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @property historyItemLimit @abstract The maximum number of items that will be stored by the WebHistory.

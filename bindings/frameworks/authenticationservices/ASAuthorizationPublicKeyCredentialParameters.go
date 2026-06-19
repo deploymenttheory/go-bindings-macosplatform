@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides required parameters for the credential during registration.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialparameters
 type ASAuthorizationPublicKeyCredentialParameters struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func ASAuthorizationPublicKeyCredentialParametersFromID(id objc.ID) *ASAuthoriza
 	return o
 }
 
+// Creates the object with an algorithm.
 func (o *ASAuthorizationPublicKeyCredentialParameters) InitWithAlgorithm(algorithm int) *ASAuthorizationPublicKeyCredentialParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialParametersSelInitWithAlgorithm, algorithm)
 	if _ret != 0 {

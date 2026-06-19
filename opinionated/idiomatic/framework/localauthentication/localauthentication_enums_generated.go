@@ -8,20 +8,21 @@ import (
 	"fmt"
 )
 
+// Operations to be evaluated for access control.
 type LAAccessControlOperation int64
 
 const (
-	// Access control will be used for item creation.
+	// Specifies that access control is used for item creation.
 	LAAccessControlOperationCreateItem LAAccessControlOperation = 0
-	// Access control will be used for accessing existing item.
+	// Specifies that access control is used for accessing an existing item.
 	LAAccessControlOperationUseItem LAAccessControlOperation = 1
-	// Access control will be used for key creation.
+	// Specifies that access control is used for key creation.
 	LAAccessControlOperationCreateKey LAAccessControlOperation = 2
-	// Access control will be used for sign operation with existing key.
+	// Specifies that access control is used for accessing an existing key.
 	LAAccessControlOperationUseKeySign LAAccessControlOperation = 3
-	// Access control will be used for data decryption using existing key.
+	// Specifies that access control is used for data decryption using existing key.
 	LAAccessControlOperationUseKeyDecrypt LAAccessControlOperation = 4
-	// Access control will be used for key exchange.
+	// Specifies that access control is used for key exchange.
 	LAAccessControlOperationUseKeyKeyExchange LAAccessControlOperation = 5
 )
 
@@ -44,11 +45,14 @@ func (e LAAccessControlOperation) String() string {
 	}
 }
 
+// The set of available biometric authentication types.
 type LABiometryType int64
 
 const (
-	// The device does not support biometry.
+	// No biometry type is supported.
 	LABiometryTypeNone LABiometryType = 0
+	// No biometry type is supported.
+	//
 	// Deprecated: since macOS 10.13.2.
 	LABiometryNone LABiometryType = 0
 	// The device supports Touch ID.
@@ -57,7 +61,7 @@ const (
 	LABiometryTypeTouchID LABiometryType = 1
 	// The device supports Face ID.
 	LABiometryTypeFaceID LABiometryType = 2
-	// The device supports Optic ID
+	// The device supports Optic ID.
 	LABiometryTypeOpticID LABiometryType = 4
 )
 
@@ -92,10 +96,11 @@ func (e LACompanionType) String() string {
 	}
 }
 
+// The types of credentials to be used for authentication.
 type LACredentialType int64
 
 const (
-	// Password provided by application @discussion If not set, LocalAuthentication will ask for the password when necessary. It will use its own user interface depending on the evaluated policy or ACL. Applications can provide the password using the setCredential method. In such case, LocalAuthentication will not show password entry user interface. When entered from the LocalAuthentication user interface, the password is stored as UTF-8 encoded string.
+	// Specifies that a password is provided by the application.
 	LACredentialTypeApplicationPassword LACredentialType = 0
 	// Smart card PIN provided by application @discussion If not set, LocalAuthentication will ask users for the smart card PIN when necessary. Applications can provide the PIN using setCredential method. In such case, LocalAuthentication will not show the smart card PIN user interface. When entered from the LocalAuthentication user interface, the PIN is stored as UTF-8 encoded string.
 	LACredentialTypeSmartCardPIN LACredentialType = -3
@@ -112,22 +117,23 @@ func (e LACredentialType) String() string {
 	}
 }
 
+// The set of available local authentication policies.
 type LAPolicy int64
 
 const (
-	// Device owner will be authenticated using a biometric method (Touch ID). @discussion Biometric authentication is required. If Touch ID is not available, not enrolled or locked out, then the evaluation of this policy will fail with LAErrorBiometryNotAvailable, LAErrorBiometryNotEnrolled or LAErrorBiometryLockout. Touch ID authentication dialog contains a cancel button with default title "Cancel" which can be customized using localizedCancelTitle property, and a fallback button with default title "Use Password…" which can be customized using localizedFallbackTitle property. Clicking either button causes evaluatePolicy call to fail, returning a distinct error code: LAErrorUserCancel or LAErrorUserFallback. Biometric authentication will get locked after 5 unsuccessful attempts. After that, users have to unlock it by entering their account password. The password can be entered either at login window or in the preference sheets or even in application by the means of LAPolicyDeviceOwnerAuthentication. The system unlock is preferred user experience because we generaly don't want users to enter their account password at application's request.
+	// User authentication with biometry.
 	LAPolicyDeviceOwnerAuthenticationWithBiometrics LAPolicy = 1
-	// Device owner will be authenticated by biometry or user password. @discussion Touch ID or user password authentication is required. If Touch ID is not available, not enrolled or locked out, then the user is asked for password right away. Touch ID authentication dialog behaves similarly as the one used by LAPolicyDeviceOwnerAuthenticationWithBiometrics. However, the "Use Password.." button does not end the authentication. Instead, it switches the authentication mechanism to user password.
+	// User authentication with biometry, Apple Watch, or the device passcode.
 	LAPolicyDeviceOwnerAuthentication LAPolicy = 2
-	// Device owner will be authenticated by a companion device e.g. Watch, Mac, etc. @discussion Companion authentication is required. If no nearby paired companion device can be found, LAErrorCompanionNotAvailable is returned. Users should follow instructions on the companion device to authenticate.
+	// Device owner will be authenticated by a companion device e.g. Watch, Mac, etc.
 	LAPolicyDeviceOwnerAuthenticationWithCompanion LAPolicy = 3
-	// Device owner will be authenticated by biometry or a companion device e.g. Watch, Mac, etc. @discussion Companion or biometric authentication is required. If no nearby paired companion device can be found, it behaves as LAPolicyDeviceOwnerAuthenticationWithBiometrics. Similarly, if biometry is unavailable it behaves as LAPolicyDeviceOwnerAuthenticationWithCompanion. Depending on the companion type and biometry and companion availability, either a user is asked to authenticate with biometry and on a companion device in parallel or the companion authentication takes precedence and a user is asked to authenticate exclusively on the companion device if available. Users should follow instructions on the companion device to authenticate.
+	// Device owner will be authenticated by biometry or a companion device e.g. Watch, Mac, etc.
 	LAPolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion LAPolicy = 4
-	// Device owner will be authenticated by Watch. @discussion Watch authentication is required. If no nearby paired watch device can be found, LAErrorWatchNotAvailable is returned. Watch authentication dialog looks and behaves similarly to the biometric variant. Users can confirm authentication by double-clicking the side button on their watch.
+	// User authentication with Apple Watch.
 	//
 	// Deprecated: since macOS 15.0.
 	LAPolicyDeviceOwnerAuthenticationWithWatch LAPolicy = 3
-	// Device owner will be authenticated by biometry or Watch. @discussion Watch or biometric authentication is required. If no nearby paired watch device can be found, it behaves as LAPolicyDeviceOwnerAuthenticationWithBiometrics. Similarly, if biometry is unavailable it behaves as LAPolicyDeviceOwnerAuthenticationWithWatch. Watch authentication dialog looks and behaves similarly to biometric variant. When both mechanisms are available, user is asked to use biometry and watch authentication will run in parallel.
+	// User authentication with either biometry or Apple Watch.
 	//
 	// Deprecated: since macOS 15.0.
 	LAPolicyDeviceOwnerAuthenticationWithBiometricsOrWatch LAPolicy = 4

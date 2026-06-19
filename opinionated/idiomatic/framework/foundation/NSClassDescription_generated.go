@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that provides the interface for querying the relationships and properties of a class.
+//
 // ClassDescription wraps [raw.NSClassDescription] with a fluent Go API.
 type ClassDescription struct {
 	inner *raw.NSClassDescription

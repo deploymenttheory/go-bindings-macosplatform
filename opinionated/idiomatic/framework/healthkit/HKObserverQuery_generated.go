@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A long-running query that monitors the HealthKit store and updates your app when the HealthKit store saves or deletes a matching sample.
+//
 // ObserverQuery wraps [raw.HKObserverQuery] with a fluent Go API.
 type ObserverQuery struct {
 	inner *raw.HKObserverQuery
@@ -31,6 +33,8 @@ func ObserverQueryFromID(id objc.ID) *ObserverQuery {
 	return &ObserverQuery{inner: raw.HKObserverQueryFromID(id)}
 }
 
+// Instantiates and returns a query that monitors the HealthKit store and responds to changes.
+//
 // NewObserverQueryWithSampleTypePredicateUpdateHandler creates a new [ObserverQuery].
 func NewObserverQueryWithSampleTypePredicateUpdateHandler(sampleType *raw.HKSampleType, predicate *foundation.NSPredicate, updateHandler func(*raw.HKObserverQuery, objc.Block, unsafe.Pointer)) *ObserverQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKObserverQuery")), objc.RegisterName("alloc"))
@@ -38,7 +42,7 @@ func NewObserverQueryWithSampleTypePredicateUpdateHandler(sampleType *raw.HKSamp
 	return &ObserverQuery{inner: raw.HKObserverQueryFromID(_id)}
 }
 
-// @method        initWithQueryDescriptors:updateHandler: @abstract      This method installs a handler that is called when a sample matching the query descriptors is added. @discussion    If you have subscribed to background updates you must call the passed completion block once you have processed data from this notification. Otherwise the system will continue to notify you of this data. @param         queryDescriptors   An array of query descriptors that describes the sample types and predicates for which you are interested in getting notified.
+// Creates a query that monitors the HealthKit store and responds to any changes matching any of the query descriptors you provided.
 //
 // NewObserverQueryWithQueryDescriptorsUpdateHandler creates a new [ObserverQuery].
 func NewObserverQueryWithQueryDescriptorsUpdateHandler(queryDescriptors *foundation.NSArray[*raw.HKQueryDescriptor], updateHandler func(*raw.HKObserverQuery, *foundation.NSSet[*raw.HKSampleType], objc.Block, unsafe.Pointer)) *ObserverQuery {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a tile-shading render pipeline’s color render target.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtltilerenderpipelinecolorattachmentdescriptor
 type MTLTileRenderPipelineColorAttachmentDescriptor struct {
 	foundation.NSObject

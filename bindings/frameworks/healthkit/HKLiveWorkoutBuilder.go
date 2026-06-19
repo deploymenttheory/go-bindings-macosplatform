@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A builder object that constructs a workout incrementally based on live data from an active workout session.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkliveworkoutbuilder
 type HKLiveWorkoutBuilder struct {
 	HKWorkoutBuilder

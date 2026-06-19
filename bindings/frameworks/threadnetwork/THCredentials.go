@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A class that contains credentials for a Thread network. A Thread network defines parameters that all connected devices use. “THCredentials“ provides these parameters.
+// A class that contains credentials for a Thread network.
 //
 // Apple documentation: https://developer.apple.com/documentation/threadnetwork/thcredentials
 type THCredentials struct {

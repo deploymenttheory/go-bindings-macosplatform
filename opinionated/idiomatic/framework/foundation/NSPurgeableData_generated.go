@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mutable data object containing bytes that can be discarded when they’re no longer needed.
+//
 // PurgeableData wraps [raw.NSPurgeableData] with a fluent Go API.
 type PurgeableData struct {
 	inner *raw.NSPurgeableData
@@ -35,6 +37,8 @@ func NewPurgeableData() *PurgeableData {
 	return &PurgeableData{inner: raw.NSPurgeableDataFromID(_id)}
 }
 
+// The number of bytes contained in the mutable data object.
+//
 // WithLength sets the length property and returns the receiver for chaining.
 func (x *PurgeableData) WithLength(length uint) *PurgeableData {
 	x.inner.NSMutableData.SetLength(length)

@@ -38,7 +38,7 @@ type CpHoverEffect struct{}
 // CpTextureTopology is an opaque type.
 type CpTextureTopology struct{}
 
-// A Mach absolute time clock value. Mach absolute time measures the number of ticks that have elapsed since an arbitrary point after system startup. Each value represents a unique point in time during the course of your app's execution.
+// A Mach absolute time clock value.
 // C struct: cp_time
 type CpTime struct {
 	Cp_mach_abs_time uint64

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about an error condition including a domain, a domain-specific error code, and application-specific information.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nserror
 type NSError struct {
 	NSObject
@@ -44,22 +46,25 @@ func NSErrorFromID(id objc.ID) *NSError {
 	return o
 }
 
+// Returns an NSError object initialized for a given domain and code with a given userInfo dictionary.
 func (o *NSError) InitWithDomainCodeUserInfo(domain *NSString, code int, dict *NSDictionary[*NSString, objc.ID]) *NSError {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelInitWithDomainCodeUserInfo, domain.Ptr(), code, dict)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelInitWithDomainCodeUserInfo, domain.Ptr(), code, dict.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSErrorFromID(_ret)
 }
 
+// Creates and initializes an NSError object for a given domain and code with a given userInfo dictionary.
 func NSErrorErrorWithDomainCodeUserInfo(domain *NSString, code int, dict *NSDictionary[*NSString, objc.ID]) *NSError {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSError), _nSErrorSelErrorWithDomainCodeUserInfo, domain.Ptr(), code, dict)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSError), _nSErrorSelErrorWithDomainCodeUserInfo, domain.Ptr(), code, dict.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSErrorFromID(_ret)
 }
 
+// Specifies a block to call when the corresponding property is not present in the user info dictionary.
 func NSErrorSetUserInfoValueProviderForDomainProvider(errorDomain *NSString, provider func(unsafe.Pointer, *NSString) objc.ID) {
 	var __block_provider objc.Block
 	if provider != nil {
@@ -74,6 +79,7 @@ func NSErrorSetUserInfoValueProviderForDomainProvider(errorDomain *NSString, pro
 	objc.ID(_clsNSError).Send(_nSErrorSelSetUserInfoValueProviderForDomainProvider, errorDomain.Ptr(), __block_provider)
 }
 
+// Returns any user info provider specified for a given error domain.
 func NSErrorUserInfoValueProviderForDomain(errorDomain *NSString) objc.Block {
 	_ret := objc.Send[objc.Block](objc.ID(_clsNSError), _nSErrorSelUserInfoValueProviderForDomain, errorDomain.Ptr())
 	return _ret
@@ -93,8 +99,11 @@ func (o *NSError) Code() int {
 }
 
 func (o *NSError) UserInfo() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSErrorSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSError) LocalizedDescription() *NSString {
@@ -143,6 +152,9 @@ func (o *NSError) HelpAnchor() *NSString {
 }
 
 func (o *NSError) UnderlyingErrors() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSErrorSelUnderlyingErrors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSErrorSelUnderlyingErrors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }

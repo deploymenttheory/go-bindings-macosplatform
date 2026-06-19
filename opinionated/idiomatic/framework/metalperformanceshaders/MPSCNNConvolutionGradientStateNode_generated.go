@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a gradient convolution state.
+//
 // CNNConvolutionGradientStateNode wraps [raw.MPSCNNConvolutionGradientStateNode] with a fluent Go API.
 type CNNConvolutionGradientStateNode struct {
 	inner *raw.MPSCNNConvolutionGradientStateNode

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration options for opening URLs or launching apps.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsworkspaceopenconfiguration
 type NSWorkspaceOpenConfiguration struct {
 	foundation.NSObject
@@ -56,6 +58,7 @@ func NSWorkspaceOpenConfigurationFromID(id objc.ID) *NSWorkspaceOpenConfiguratio
 	return o
 }
 
+// Creates and returns a new workspace configuration object containing default values.
 func NSWorkspaceOpenConfigurationConfiguration() *NSWorkspaceOpenConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSWorkspaceOpenConfiguration), _nSWorkspaceOpenConfigurationSelConfiguration)
 	if _ret != 0 {
@@ -137,21 +140,27 @@ func (o *NSWorkspaceOpenConfiguration) SetAllowsRunningApplicationSubstitution(a
 }
 
 func (o *NSWorkspaceOpenConfiguration) Arguments() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSWorkspaceOpenConfigurationSelArguments)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceOpenConfigurationSelArguments)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSWorkspaceOpenConfiguration) SetArguments(arguments *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSWorkspaceOpenConfigurationSelSetArguments, arguments)
+	o.Ptr().Send(_nSWorkspaceOpenConfigurationSelSetArguments, arguments.Ptr())
 }
 
 func (o *NSWorkspaceOpenConfiguration) Environment() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _nSWorkspaceOpenConfigurationSelEnvironment)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceOpenConfigurationSelEnvironment)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
 func (o *NSWorkspaceOpenConfiguration) SetEnvironment(environment *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
-	o.Ptr().Send(_nSWorkspaceOpenConfigurationSelSetEnvironment, environment)
+	o.Ptr().Send(_nSWorkspaceOpenConfigurationSelSetEnvironment, environment.Ptr())
 }
 
 func (o *NSWorkspaceOpenConfiguration) AppleEvent() *foundation.NSAppleEventDescriptor {

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// PDFActionResetForm, a subclass of PDFAction, defines methods for getting and clearing fields in a PDF form.
+//
 // ActionResetForm wraps [raw.PDFActionResetForm] with a fluent Go API.
 type ActionResetForm struct {
 	inner *raw.PDFActionResetForm
@@ -38,6 +40,8 @@ func NewActionResetForm() *ActionResetForm {
 	return &ActionResetForm{inner: raw.PDFActionResetFormFromID(_id)}
 }
 
+// Returns an array of fields associated with the reset action.
+//
 // WithFields sets the collection, converting the Go slice to an NSArray.
 func (x *ActionResetForm) WithFields(items ...*foundation.NSString) *ActionResetForm {
 	if len(items) == 0 {
@@ -59,6 +63,8 @@ func (x *ActionResetForm) WithFields(items ...*foundation.NSString) *ActionReset
 	return x
 }
 
+// Sets whether the fields associated with the reset action are cleared when the action is performed.
+//
 // WithFieldsIncludedAreCleared sets the fieldsIncludedAreCleared property and returns the receiver for chaining.
 func (x *ActionResetForm) WithFieldsIncludedAreCleared(fieldsIncludedAreCleared bool) *ActionResetForm {
 	x.inner.SetFieldsIncludedAreCleared(fieldsIncludedAreCleared)

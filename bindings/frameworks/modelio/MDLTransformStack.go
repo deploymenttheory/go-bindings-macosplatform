@@ -139,8 +139,11 @@ func (o *MDLTransformStack) Count() uint {
 }
 
 func (o *MDLTransformStack) KeyTimes() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mDLTransformStackSelKeyTimes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformStackSelKeyTimes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *MDLTransformStack) TransformOps() *foundation.NSArray[MDLTransformOp] {

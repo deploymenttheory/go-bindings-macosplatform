@@ -48,9 +48,9 @@ func (o *CKShareRequestAccessOperation) Init() *CKShareRequestAccessOperation {
 	return CKShareRequestAccessOperationFromID(_ret)
 }
 
-// Creates a share request access operation configured with specified share URLs. - Parameter shareURLs: An array of `NSURL` objects representing the shares to request access to. - Returns: A configured “CKShareRequestAccessOperation“ instance.
+// Creates a share request access operation configured with specified share URLs.
 func (o *CKShareRequestAccessOperation) InitWithShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL]) *CKShareRequestAccessOperation {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareRequestAccessOperationSelInitWithShareURLs, shareURLs)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareRequestAccessOperationSelInitWithShareURLs, shareURLs.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -59,12 +59,15 @@ func (o *CKShareRequestAccessOperation) InitWithShareURLs(shareURLs *foundation.
 
 // The URLs of the shares to request access to. Include multiple URLs to request access to multiple shares simultaneously. The server processes each URL independently.
 func (o *CKShareRequestAccessOperation) ShareURLs() *foundation.NSArray[*foundation.NSURL] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURL]](o.Ptr(), _cKShareRequestAccessOperationSelShareURLs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareRequestAccessOperationSelShareURLs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURL](_ret)
 }
 
 func (o *CKShareRequestAccessOperation) SetShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL]) {
-	o.Ptr().Send(_cKShareRequestAccessOperationSelSetShareURLs, shareURLs)
+	o.Ptr().Send(_cKShareRequestAccessOperationSelSetShareURLs, shareURLs.Ptr())
 }
 
 // The closure to execute when CloudKit processes a share access request. The server does not disclose share existence to protect user privacy. This property is a closure that returns no value and has the following parameters: - The URL of the share that was processed. - An error describing why the access request failed, or `nil` if successful. The closure executes once for each URL in the “CKShareRequestAccessOperation/shareURLs“ property. Each time the closure executes, it executes serially with respect to the other closure of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.

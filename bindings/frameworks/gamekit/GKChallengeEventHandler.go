@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A singleton object responsible for dispatching challenge-related events to its delegate
+// The GKChallengeEventHandler class is used to respond to events related to challenges sent or received by the local player.
 //
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkchallengeeventhandler
 // Deprecated: You should instead implement the GKChallengeListener protocol and register a listener with GKLocalPlayer.
@@ -35,6 +35,7 @@ func GKChallengeEventHandlerFromID(id objc.ID) *GKChallengeEventHandler {
 	return o
 }
 
+// Returns the shared instance of the event handler
 // Deprecated: No longer supported.
 func GKChallengeEventHandlerChallengeEventHandler() *GKChallengeEventHandler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKChallengeEventHandler), _gKChallengeEventHandlerSelChallengeEventHandler)

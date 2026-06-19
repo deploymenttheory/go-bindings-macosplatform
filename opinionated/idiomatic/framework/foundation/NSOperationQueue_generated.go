@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A queue that regulates the execution of operations.
+//
 // OperationQueue wraps [raw.NSOperationQueue] with a fluent Go API.
 type OperationQueue struct {
 	inner *raw.NSOperationQueue

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Groups together properties to create a pipeline data set serializer.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4pipelinedatasetserializerdescriptor
 type MTL4PipelineDataSetSerializerDescriptor struct {
 	foundation.NSObject

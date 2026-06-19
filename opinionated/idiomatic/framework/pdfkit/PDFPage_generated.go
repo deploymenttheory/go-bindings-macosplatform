@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// PDFPage, a subclass of NSObject, defines methods used to render PDF pages and work with annotations, text, and selections.
+//
 // Page wraps [raw.PDFPage] with a fluent Go API.
 type Page struct {
 	inner *raw.PDFPage
@@ -47,6 +49,8 @@ func NewPageWithImageOptions(image *appkit.NSImage, options purego.IDer) *Page {
 	return &Page{inner: raw.PDFPageFromID(_id)}
 }
 
+// Creates a new PDFPage object and initializes it with the specified NSImage object.
+//
 // NewPageWithImage creates a new [Page].
 func NewPageWithImage(image *appkit.NSImage) *Page {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFPage")), objc.RegisterName("alloc"))
@@ -54,38 +58,52 @@ func NewPageWithImage(image *appkit.NSImage) *Page {
 	return &Page{inner: raw.PDFPageFromID(_id)}
 }
 
+// Sets the rotation angle for the page in degrees.
+//
 // WithRotation sets the rotation property and returns the receiver for chaining.
 func (x *Page) WithRotation(rotation int) *Page {
 	x.inner.SetRotation(rotation)
 	return x
 }
 
+// Returns a Boolean value indicating whether annotations are displayed for the page.
+//
 // WithDisplaysAnnotations sets the displaysAnnotations property and returns the receiver for chaining.
 func (x *Page) WithDisplaysAnnotations(displaysAnnotations bool) *Page {
 	x.inner.SetDisplaysAnnotations(displaysAnnotations)
 	return x
 }
 
+// Returns the bounds for the specified PDF display box.
+//
 // BoundsForBox calls the underlying BoundsForBox.
 func (x *Page) BoundsForBox(box PDFDisplayBox) corefoundation.CGRect {
 	return x.inner.BoundsForBox(raw.PDFDisplayBox(box))
 }
 
+// Sets the bounds for the specified box.
+//
 // SetBoundsForBox calls the underlying SetBoundsForBox.
 func (x *Page) SetBoundsForBox(bounds corefoundation.CGRect, box PDFDisplayBox) {
 	x.inner.SetBoundsForBox(bounds, raw.PDFDisplayBox(box))
 }
 
+// Adds the specified annotation object to the page.
+//
 // AddAnnotation calls the underlying AddAnnotation.
 func (x *Page) AddAnnotation(annotation *raw.PDFAnnotation) {
 	x.inner.AddAnnotation(annotation)
 }
 
+// Removes the specified annotation from the page.
+//
 // RemoveAnnotation calls the underlying RemoveAnnotation.
 func (x *Page) RemoveAnnotation(annotation *raw.PDFAnnotation) {
 	x.inner.RemoveAnnotation(annotation)
 }
 
+// Returns the annotation, if there is one, at the specified point.
+//
 // AnnotationAtPoint calls the underlying AnnotationAtPoint.
 func (x *Page) AnnotationAtPoint(point corefoundation.CGPoint) *Annotation {
 	_r := x.inner.AnnotationAtPoint(point)
@@ -115,16 +133,22 @@ func (x *Page) ThumbnailOfSizeForBox(size corefoundation.CGSize, box PDFDisplayB
 	return x.inner.ThumbnailOfSizeForBox(size, raw.PDFDisplayBox(box))
 }
 
+// Returns the bounds, in page space, of the character at the specified index.
+//
 // CharacterBoundsAtIndex calls the underlying CharacterBoundsAtIndex.
 func (x *Page) CharacterBoundsAtIndex(index int) corefoundation.CGRect {
 	return x.inner.CharacterBoundsAtIndex(index)
 }
 
+// Returns the character index value for the specified point in page space.
+//
 // CharacterIndexAtPoint calls the underlying CharacterIndexAtPoint.
 func (x *Page) CharacterIndexAtPoint(point corefoundation.CGPoint) int {
 	return x.inner.CharacterIndexAtPoint(point)
 }
 
+// Returns the text enclosed within the specified rectangle, expressed in page (user) coordinates.
+//
 // SelectionForRect calls the underlying SelectionForRect.
 func (x *Page) SelectionForRect(rect corefoundation.CGRect) *Selection {
 	_r := x.inner.SelectionForRect(rect)
@@ -134,6 +158,8 @@ func (x *Page) SelectionForRect(rect corefoundation.CGRect) *Selection {
 	return &Selection{inner: _r}
 }
 
+// Returns the whole word that includes the specified point.
+//
 // SelectionForWordAtPoint calls the underlying SelectionForWordAtPoint.
 func (x *Page) SelectionForWordAtPoint(point corefoundation.CGPoint) *Selection {
 	_r := x.inner.SelectionForWordAtPoint(point)
@@ -143,6 +169,8 @@ func (x *Page) SelectionForWordAtPoint(point corefoundation.CGPoint) *Selection 
 	return &Selection{inner: _r}
 }
 
+// Returns the whole line of text that includes the specified point.
+//
 // SelectionForLineAtPoint calls the underlying SelectionForLineAtPoint.
 func (x *Page) SelectionForLineAtPoint(point corefoundation.CGPoint) *Selection {
 	_r := x.inner.SelectionForLineAtPoint(point)
@@ -152,6 +180,8 @@ func (x *Page) SelectionForLineAtPoint(point corefoundation.CGPoint) *Selection 
 	return &Selection{inner: _r}
 }
 
+// Returns the text between the two specified points in page space.
+//
 // SelectionFromPointToPoint calls the underlying SelectionFromPointToPoint.
 func (x *Page) SelectionFromPointToPoint(startPoint corefoundation.CGPoint, endPoint corefoundation.CGPoint) *Selection {
 	_r := x.inner.SelectionFromPointToPoint(startPoint, endPoint)
@@ -161,6 +191,8 @@ func (x *Page) SelectionFromPointToPoint(startPoint corefoundation.CGPoint, endP
 	return &Selection{inner: _r}
 }
 
+// Returns the text contained within the specified range.
+//
 // SelectionForRange calls the underlying SelectionForRange.
 func (x *Page) SelectionForRange(range_ foundation.NSRange) *Selection {
 	_r := x.inner.SelectionForRange(range_)
@@ -248,11 +280,15 @@ func (x *Page) DataRepresentation() *foundation.NSData {
 	return x.inner.DataRepresentation()
 }
 
+// Draws the page within the specified box.
+//
 // DrawWithBox calls the underlying DrawWithBox.
 func (x *Page) DrawWithBox(box PDFDisplayBox) {
 	x.inner.DrawWithBox(raw.PDFDisplayBox(box))
 }
 
+// Transforms the current context, given the specified box.
+//
 // TransformContextForBox2 calls the underlying TransformContextForBox2.
 func (x *Page) TransformContextForBox2(box PDFDisplayBox) {
 	x.inner.TransformContextForBox2(raw.PDFDisplayBox(box))

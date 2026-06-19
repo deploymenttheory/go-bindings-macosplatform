@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A formatter that provides localized descriptions of energy values.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsenergyformatter
 type NSEnergyFormatter struct {
 	NSFormatter

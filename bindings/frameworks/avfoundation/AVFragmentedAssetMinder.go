@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that periodically checks whether the system adds new fragments to a fragmented asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avfragmentedassetminder
 type AVFragmentedAssetMinder struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func AVFragmentedAssetMinderFromID(id objc.ID) *AVFragmentedAssetMinder {
 	return o
 }
 
-// Creates an AVFragmentedAssetMinder, adds the specified asset to it, and sets the mindingInterval to the specified value. - Parameter asset: An instance of AVFragmentedAsset to add to the AVFragmentedAssetMinder - Parameter mindingInterval: The initial minding interval of the AVFragmentedAssetMinder. - Returns: A new instance of AVFragmentedAssetMinder.
+// Creates a fragmented asset minder containing the specified asset and minding interval.
 func AVFragmentedAssetMinderFragmentedAssetMinderWithAssetMindingInterval(asset *AVAsset, mindingInterval float64) *AVFragmentedAssetMinder {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVFragmentedAssetMinder), _aVFragmentedAssetMinderSelFragmentedAssetMinderWithAssetMindingInterval, asset.Ptr(), mindingInterval)
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func AVFragmentedAssetMinderFragmentedAssetMinderWithAssetMindingInterval(asset 
 	return AVFragmentedAssetMinderFromID(_ret)
 }
 
-// Creates an AVFragmentedAssetMinder, adds the specified asset to it, and sets the mindingInterval to the specified value. - Parameter asset: An instance of AVFragmentedAsset to add to the AVFragmentedAssetMinder - Parameter mindingInterval: The initial minding interval of the AVFragmentedAssetMinder. - Returns: A new instance of AVFragmentedAssetMinder.
+// Creates a fragmented asset minder that monitors the specified asset at the indicated minding interval.
 func (o *AVFragmentedAssetMinder) InitWithAssetMindingInterval(asset *AVAsset, mindingInterval float64) *AVFragmentedAssetMinder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVFragmentedAssetMinderSelInitWithAssetMindingInterval, asset.Ptr(), mindingInterval)
 	if _ret != 0 {
@@ -54,12 +56,12 @@ func (o *AVFragmentedAssetMinder) InitWithAssetMindingInterval(asset *AVAsset, m
 	return AVFragmentedAssetMinderFromID(_ret)
 }
 
-// Adds a fragmented asset to the array of assets being minded. This method throws an exception if the asset is not a supported type (AVFragmentedAsset, AVFragmentedMovie), or if the asset is already being minded by another fragment minder. - Parameter asset: The fragmented asset to add to the minder.
+// Adds a fragmented asset to the array of minded assets.
 func (o *AVFragmentedAssetMinder) AddFragmentedAsset(asset *AVAsset) {
 	o.Ptr().Send(_aVFragmentedAssetMinderSelAddFragmentedAsset, asset.Ptr())
 }
 
-// Removes a fragmented asset from the array of assets being minded. This method throws an exception if the asset is not a supported type (AVFragmentedAsset, AVFragmentedMovie). - Parameter asset: The fragmented asset to remove from the minder.
+// Removes a fragmented asset from the array of minded assets.
 func (o *AVFragmentedAssetMinder) RemoveFragmentedAsset(asset *AVAsset) {
 	o.Ptr().Send(_aVFragmentedAssetMinderSelRemoveFragmentedAsset, asset.Ptr())
 }

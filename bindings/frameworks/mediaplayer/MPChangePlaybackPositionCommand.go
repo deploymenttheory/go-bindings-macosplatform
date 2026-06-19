@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that responds to requests to change the current playback position of the playing item.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpchangeplaybackpositioncommand
 type MPChangePlaybackPositionCommand struct {
 	MPRemoteCommand

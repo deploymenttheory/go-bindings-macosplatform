@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that exports assets in a format that you specify using an export preset.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetexportsession
 type AVAssetExportSession struct {
 	foundation.NSObject
@@ -79,7 +81,7 @@ func AVAssetExportSessionFromID(id objc.ID) *AVAssetExportSession {
 	return o
 }
 
-// @method						exportSessionWithAsset:presetName: @abstract					Returns an instance of AVAssetExportSession for the specified source asset and preset. @param		asset			An AVAsset object that is intended to be exported. @param		presetName		An NSString specifying the name of the preset template for the export. @result						An instance of AVAssetExportSession. @discussion					If the specified asset belongs to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, the results of any export-related operation are undefined if you mutate the asset after the operation commences. These operations include but are not limited to: 1) testing the compatibility of export presets with the asset, 2) calculating the maximum duration or estimated length of the output file, and 3) the export operation itself.
+// Returns a new asset export session that uses the specified preset.
 func AVAssetExportSessionExportSessionWithAssetPresetName(asset *AVAsset, presetName *foundation.NSString) *AVAssetExportSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetExportSession), _aVAssetExportSessionSelExportSessionWithAssetPresetName, asset.Ptr(), presetName.Ptr())
 	if _ret != 0 {
@@ -88,7 +90,7 @@ func AVAssetExportSessionExportSessionWithAssetPresetName(asset *AVAsset, preset
 	return AVAssetExportSessionFromID(_ret)
 }
 
-// @method						initWithAsset:presetName: @abstract					Initialize an AVAssetExportSession with the specified preset and set the source to the contents of the asset. @param		asset			An AVAsset object that is intended to be exported. @param		presetName		An NSString specifying the name of the preset template for the export. @result						Returns the initialized AVAssetExportSession. @discussion					If the specified asset belongs to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, the results of any export-related operation are undefined if you mutate the asset after the operation commences. These operations include but are not limited to: 1) testing the compatibility of export presets with the asset, 2) calculating the maximum duration or estimated length of the output file, and 3) the export operation itself.
+// Creates an export session with a preset configuration.
 func (o *AVAssetExportSession) InitWithAssetPresetName(asset *AVAsset, presetName *foundation.NSString) *AVAssetExportSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetExportSessionSelInitWithAssetPresetName, asset.Ptr(), presetName.Ptr())
 	if _ret != 0 {
@@ -97,7 +99,7 @@ func (o *AVAssetExportSession) InitWithAssetPresetName(asset *AVAsset, presetNam
 	return AVAssetExportSessionFromID(_ret)
 }
 
-// @method						exportAsynchronouslyWithCompletionHandler: @abstract					Starts the asynchronous execution of an export session. @param						handler If internal preparation for export fails, the handler will be invoked synchronously. The handler may also be called asynchronously after -exportAsynchronouslyWithCompletionHandler: returns, in the following cases: 1) if a failure occurs during the export, including failures of loading, re-encoding, or writing media data to the output, 2) if -cancelExport is invoked, 3) if export session succeeds, having completely written its output to the outputURL. In each case, AVAssetExportSession.status will signal the terminal state of the asset reader, and if a failure occurs, the NSError that describes the failure can be obtained from the error property. @discussion					Initiates an asynchronous export operation and returns immediately.
+// Starts the asynchronous execution of an export session.
 func (o *AVAssetExportSession) ExportAsynchronouslyWithCompletionHandler(handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -109,7 +111,7 @@ func (o *AVAssetExportSession) ExportAsynchronouslyWithCompletionHandler(handler
 	o.Ptr().Send(_aVAssetExportSessionSelExportAsynchronouslyWithCompletionHandler, __block_handler)
 }
 
-// @method						cancelExport @abstract					Cancels the execution of an export session. @discussion					Cancel can be invoked when the export is running.
+// Cancels the execution of an export session.
 func (o *AVAssetExportSession) CancelExport() {
 	o.Ptr().Send(_aVAssetExportSessionSelCancelExport)
 }
@@ -190,20 +192,26 @@ func (o *AVAssetExportSession) Progress() float32 {
 	return _ret
 }
 
-// @method						allExportPresets @abstract					Returns all available export preset names. @discussion					Returns an array of NSStrings with the names of all available presets. Note that not all presets are compatible with all AVAssets. @result						An NSArray containing an NSString for each of the available preset names.
+// Returns all available export preset names.
 func AVAssetExportSessionAllExportPresets() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsAVAssetExportSession), _aVAssetExportSessionSelAllExportPresets)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetExportSession), _aVAssetExportSessionSelAllExportPresets)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-// @method						exportPresetsCompatibleWithAsset: @abstract					Returns only the identifiers compatible with the given AVAsset object. @discussion					Not all export presets are compatible with all AVAssets. For example an video only asset is not compatible with an audio only preset. This method returns only the identifiers for presets that will be compatible with the given asset. A client should pass in an AVAsset that is ready to be exported. In order to ensure that the setup and running of an export operation will succeed using a given preset no significant changes (such as adding or deleting tracks) should be made to the asset between retrieving compatible identifiers and performing the export operation. This method will access the tracks property of the AVAsset to build the returned NSArray.  To avoid blocking the calling thread, the tracks property should be loaded using the AVAsynchronousKeyValueLoading protocol before calling this method. @param asset				An AVAsset object that is intended to be exported. @result						An NSArray containing NSString values for the identifiers of compatible export types. The array is a complete list of the valid identifiers that can be used as arguments to initWithAsset:presetName: with the specified asset.
+// Returns compatible export presets for the asset.
 // Deprecated: since macOS 13.0.
 func AVAssetExportSessionExportPresetsCompatibleWithAsset(asset *AVAsset) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsAVAssetExportSession), _aVAssetExportSessionSelExportPresetsCompatibleWithAsset, asset.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetExportSession), _aVAssetExportSessionSelExportPresetsCompatibleWithAsset, asset.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-// @method						determineCompatibilityOfExportPreset:withAsset:outputFileType:completionHandler: @abstract					Performs an inspection on the compatibility of an export preset, AVAsset and output file type.  Calls the completion handler with YES if the arguments are compatible; NO otherwise. @discussion					Not all export presets are compatible with all AVAssets and file types.  This method can be used to query compatibility. In order to ensure that the setup and running of an export operation will succeed using a given preset no significant changes (such as adding or deleting tracks) should be made to the asset between retrieving compatible identifiers and performing the export operation. @param presetName			An NSString specifying the name of the preset template for the export. @param asset				An AVAsset object that is intended to be exported. @param outputFileType		An AVFileType indicating a file type to check; or nil, to query whether there are any compatible types. @param handler				A block called with the compatibility result.
+// Determines an export preset’s compatibility to export the asset in a container of the output file type.
 func AVAssetExportSessionDetermineCompatibilityOfExportPresetWithAssetOutputFileTypeCompletionHandler(presetName *foundation.NSString, asset *AVAsset, outputFileType *foundation.NSString, handler func(bool)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -215,22 +223,35 @@ func AVAssetExportSessionDetermineCompatibilityOfExportPresetWithAssetOutputFile
 	objc.ID(_clsAVAssetExportSession).Send(_aVAssetExportSessionSelDetermineCompatibilityOfExportPresetWithAssetOutputFileTypeCompletionHandler, presetName.Ptr(), asset.Ptr(), outputFileType.Ptr(), __block_handler)
 }
 
-// @method						determineCompatibleFileTypesWithCompletionHandler: @abstract					Performs an inspection on the AVAsset and Preset the object was initialized with to determine a list of file types the ExportSession can write. @param						handler Called when the inspection completes with an array of file types the ExportSession can write.  Note that this may have a count of zero. @discussion					This method is different than the supportedFileTypes property in that it performs an inspection of the AVAsset in order to determine its compatibility with each of the session's supported file types.
-func (o *AVAssetExportSession) DetermineCompatibleFileTypesWithCompletionHandler(handler objc.Block) {
-	o.Ptr().Send(_aVAssetExportSessionSelDetermineCompatibleFileTypesWithCompletionHandler, handler)
+// Determines the output file types an asset export session supports writing in its current configuration.
+func (o *AVAssetExportSession) DetermineCompatibleFileTypesWithCompletionHandler(handler func(*foundation.NSArray[*foundation.NSString])) {
+	var __block_handler objc.Block
+	if handler != nil {
+		__block_handler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			handler(foundation.NSArrayFromID[*foundation.NSString](blockParam0))
+		})
+		defer __block_handler.Release()
+	}
+	o.Ptr().Send(_aVAssetExportSessionSelDetermineCompatibleFileTypesWithCompletionHandler, __block_handler)
 }
 
 func (o *AVAssetExportSession) SupportedFileTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVAssetExportSessionSelSupportedFileTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetExportSessionSelSupportedFileTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-// @method						estimateMaximumDurationWithCompletionHandler: @abstract					Starts the asynchronous execution of estimating the maximum duration of the export based on the asset, preset, and fileLengthLimit associated with the export session. @discussion 				If fileLengthLimit is not set on the export session, fileLengthLimit will be assumed to be the maximum file size specified by the preset (if any); else infinite. @param						handler A block called with the estimated maximum duration, or kCMTimeInvalid if an error occurs.  The error parameter will be non-nil if an error occurs.
+// Starts estimating the maximum duration of the export while considering the asset, preset, and time range configuration of the export session.
 func (o *AVAssetExportSession) EstimateMaximumDurationWithCompletionHandler(handler objc.Block) {
 	o.Ptr().Send(_aVAssetExportSessionSelEstimateMaximumDurationWithCompletionHandler, handler)
 }
 
-// @method						estimateOutputFileLengthWithCompletionHandler: @abstract 					Starts the asynchronous execution of estimating the output file length of the export based on the asset, preset, and timeRange associated with the export session. @discussion 				If timeRange is not set on the export session, timeRange will be assumed to be the full time range of the asset. @param						handler A block called with the estimated output file length in bytes, if it can be determined; 0 otherwise.  The error parameter will be non-nil if an error occurs.
+// Starts estimating the output file length of the export while considering the asset, preset, and time range configuration of the export session.
 func (o *AVAssetExportSession) EstimateOutputFileLengthWithCompletionHandler(handler func(int64, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The shape and data type constraints for a multidimensional array feature.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmultiarrayconstraint
 type MLMultiArrayConstraint struct {
 	foundation.NSObject
@@ -33,8 +35,11 @@ func MLMultiArrayConstraintFromID(id objc.ID) *MLMultiArrayConstraint {
 }
 
 func (o *MLMultiArrayConstraint) Shape() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLMultiArrayConstraintSelShape)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMultiArrayConstraintSelShape)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *MLMultiArrayConstraint) DataType() MLMultiArrayDataType {

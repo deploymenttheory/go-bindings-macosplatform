@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The visual representation of multiple polygon overlays.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmultipolygonrenderer
 type MKMultiPolygonRenderer struct {
 	MKOverlayPathRenderer
@@ -30,6 +32,7 @@ func MKMultiPolygonRendererFromID(id objc.ID) *MKMultiPolygonRenderer {
 	return o
 }
 
+// Creates and returns a renderer that handles drawing for the specified multipolygon overlay object.
 func (o *MKMultiPolygonRenderer) InitWithMultiPolygon(multiPolygon *MKMultiPolygon) *MKMultiPolygonRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMultiPolygonRendererSelInitWithMultiPolygon, multiPolygon.Ptr())
 	if _ret != 0 {

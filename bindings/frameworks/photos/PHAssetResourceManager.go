@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resource manager for the data storage underlying a Photos asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phassetresourcemanager
 type PHAssetResourceManager struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func PHAssetResourceManagerFromID(id objc.ID) *PHAssetResourceManager {
 	return o
 }
 
+// Returns the shared asset resource manager object.
 func PHAssetResourceManagerDefaultManager() *PHAssetResourceManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetResourceManager), _pHAssetResourceManagerSelDefaultManager)
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func PHAssetResourceManagerDefaultManager() *PHAssetResourceManager {
 	return PHAssetResourceManagerFromID(_ret)
 }
 
+// Requests the underlying data for the specified asset resource, to be delivered asynchronously.
 func (o *PHAssetResourceManager) RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler(resource *PHAssetResource, options *PHAssetResourceRequestOptions, handler func(*foundation.NSData), completionHandler func(unsafe.Pointer)) int32 {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -65,6 +69,7 @@ func (o *PHAssetResourceManager) RequestDataForAssetResourceOptionsDataReceivedH
 	return _ret
 }
 
+// Requests the underlying data for the specified asset resource, to be asynchronously written to a local file.
 func (o *PHAssetResourceManager) WriteDataForAssetResourceToFileOptionsCompletionHandler(resource *PHAssetResource, fileURL *foundation.NSURL, options *PHAssetResourceRequestOptions, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -76,6 +81,7 @@ func (o *PHAssetResourceManager) WriteDataForAssetResourceToFileOptionsCompletio
 	o.Ptr().Send(_pHAssetResourceManagerSelWriteDataForAssetResourceToFileOptionsCompletionHandler, resource.Ptr(), fileURL.Ptr(), options.Ptr(), __block_completionHandler)
 }
 
+// Cancels an asynchronous request.
 func (o *PHAssetResourceManager) CancelDataRequest(requestID int32) {
 	o.Ptr().Send(_pHAssetResourceManagerSelCancelDataRequest, requestID)
 }

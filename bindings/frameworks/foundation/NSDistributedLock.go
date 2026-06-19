@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A lock that multiple applications on multiple hosts can use to restrict access to some shared resource, such as a file.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdistributedlock
 type NSDistributedLock struct {
 	NSObject
@@ -34,6 +36,7 @@ func NSDistributedLockFromID(id objc.ID) *NSDistributedLock {
 	return o
 }
 
+// Returns an NSDistributedLock object initialized to use as the locking object the file-system entry specified by a given path.
 func NSDistributedLockLockWithPath(path *NSString) *NSDistributedLock {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDistributedLock), _nSDistributedLockSelLockWithPath, path.Ptr())
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func NSDistributedLockLockWithPath(path *NSString) *NSDistributedLock {
 	return NSDistributedLockFromID(_ret)
 }
 
+// Initializes an NSDistributedLock object to use as the lock the file-system entry specified by a given path.
 func (o *NSDistributedLock) InitWithPath(path *NSString) *NSDistributedLock {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDistributedLockSelInitWithPath, path.Ptr())
 	if _ret != 0 {
@@ -50,15 +54,18 @@ func (o *NSDistributedLock) InitWithPath(path *NSString) *NSDistributedLock {
 	return NSDistributedLockFromID(_ret)
 }
 
+// Attempts to acquire the receiver and immediately returns a Boolean value that indicates whether the attempt was successful.
 func (o *NSDistributedLock) TryLock() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDistributedLockSelTryLock)
 	return _ret
 }
 
+// Relinquishes the receiver.
 func (o *NSDistributedLock) Unlock() {
 	o.Ptr().Send(_nSDistributedLockSelUnlock)
 }
 
+// Forces the lock to be relinquished.
 func (o *NSDistributedLock) BreakLock() {
 	o.Ptr().Send(_nSDistributedLockSelBreakLock)
 }

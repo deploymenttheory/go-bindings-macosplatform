@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The shared infrastructure for drawing overlays on the map surface.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkoverlayrenderer
 type MKOverlayRenderer struct {
 	foundation.NSObject
@@ -46,6 +48,7 @@ func MKOverlayRendererFromID(id objc.ID) *MKOverlayRenderer {
 	return o
 }
 
+// Creates and returns the overlay renderer and associates it with the specified overlay object.
 func (o *MKOverlayRenderer) InitWithOverlay(overlay MKOverlay) *MKOverlayRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKOverlayRendererSelInitWithOverlay, overlay)
 	if _ret != 0 {
@@ -54,43 +57,52 @@ func (o *MKOverlayRenderer) InitWithOverlay(overlay MKOverlay) *MKOverlayRendere
 	return MKOverlayRendererFromID(_ret)
 }
 
+// Returns the point in the overlay renderer’s drawing area corresponding to the specified point on the map.
 func (o *MKOverlayRenderer) PointForMapPoint(mapPoint MKMapPoint) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _mKOverlayRendererSelPointForMapPoint, mapPoint)
 	return _ret
 }
 
+// Returns the point on the map that corresponds to the specified point in the overlay renderer’s drawing area.
 func (o *MKOverlayRenderer) MapPointForPoint(point corefoundation.CGPoint) MKMapPoint {
 	_ret := objc.Send[MKMapPoint](o.Ptr(), _mKOverlayRendererSelMapPointForPoint, point)
 	return _ret
 }
 
+// Returns the rectangle in the overlay renderer’s drawing area corresponding to the specified rectangle on the map.
 func (o *MKOverlayRenderer) RectForMapRect(mapRect MKMapRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _mKOverlayRendererSelRectForMapRect, mapRect)
 	return _ret
 }
 
+// Returns the rectangle on the map that corresponds to the specified rectangle in the overlay renderer’s drawing area.
 func (o *MKOverlayRenderer) MapRectForRect(rect corefoundation.CGRect) MKMapRect {
 	_ret := objc.Send[MKMapRect](o.Ptr(), _mKOverlayRendererSelMapRectForRect, rect)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the overlay view is ready to draw its content.
 func (o *MKOverlayRenderer) CanDrawMapRectZoomScale(mapRect MKMapRect, zoomScale float64) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mKOverlayRendererSelCanDrawMapRectZoomScale, mapRect, zoomScale)
 	return _ret
 }
 
+// Draws the overlay’s contents at the specified location on the map.
 func (o *MKOverlayRenderer) DrawMapRectZoomScaleInContext(mapRect MKMapRect, zoomScale float64, context_ unsafe.Pointer) {
 	o.Ptr().Send(_mKOverlayRendererSelDrawMapRectZoomScaleInContext, mapRect, zoomScale, context_)
 }
 
+// Invalidates the entire contents of the overlay for all zoom scales.
 func (o *MKOverlayRenderer) SetNeedsDisplay() {
 	o.Ptr().Send(_mKOverlayRendererSelSetNeedsDisplay)
 }
 
+// Invalidates the specified portion of the overlay at all zoom scales.
 func (o *MKOverlayRenderer) SetNeedsDisplayInMapRect(mapRect MKMapRect) {
 	o.Ptr().Send(_mKOverlayRendererSelSetNeedsDisplayInMapRect, mapRect)
 }
 
+// Invalidates the specified portion of the overlay, but only at the specified zoom scale.
 func (o *MKOverlayRenderer) SetNeedsDisplayInMapRectZoomScale(mapRect MKMapRect, zoomScale float64) {
 	o.Ptr().Send(_mKOverlayRendererSelSetNeedsDisplayInMapRectZoomScale, mapRect, zoomScale)
 }

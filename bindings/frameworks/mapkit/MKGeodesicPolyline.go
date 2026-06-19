@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An open polygon overlay consisting of line segments that follow the contours of the Earth to create the shortest path between the specified points.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkgeodesicpolyline
 type MKGeodesicPolyline struct {
 	MKPolyline
@@ -32,6 +34,7 @@ func MKGeodesicPolylineFromID(id objc.ID) *MKGeodesicPolyline {
 	return o
 }
 
+// Creates and returns a geodesic polyline using the specified map points.
 func MKGeodesicPolylinePolylineWithPointsCount(points *MKMapPoint, count uint) *MKGeodesicPolyline {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKGeodesicPolyline), _mKGeodesicPolylineSelPolylineWithPointsCount, points, count)
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func MKGeodesicPolylinePolylineWithPointsCount(points *MKMapPoint, count uint) *
 	return MKGeodesicPolylineFromID(_ret)
 }
 
+// Creates and returns a geodesic polyline using the specified coordinates.
 func MKGeodesicPolylinePolylineWithCoordinatesCount(coords unsafe.Pointer, count uint) *MKGeodesicPolyline {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKGeodesicPolyline), _mKGeodesicPolylineSelPolylineWithCoordinatesCount, coords, count)
 	if _ret != 0 {

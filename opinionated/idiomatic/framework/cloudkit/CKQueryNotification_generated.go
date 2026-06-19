@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A notification that triggers when a record that matches the subscription’s predicate changes.
+//
 // QueryNotification wraps [raw.CKQueryNotification] with a fluent Go API.
 type QueryNotification struct {
 	inner *raw.CKQueryNotification

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A string of text that manages data, layout, and stylistic information for ranges of characters to support rendering.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsattributedstring
 type NSAttributedString struct {
 	NSObject
@@ -55,9 +57,13 @@ func NSAttributedStringFromID(id objc.ID) *NSAttributedString {
 	return o
 }
 
+// Returns the attributes for the character at the specified index.
 func (o *NSAttributedString) AttributesAtIndexEffectiveRange(location uint, range_ *NSRange) *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSAttributedStringSelAttributesAtIndexEffectiveRange, location, range_)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelAttributesAtIndexEffectiveRange, location, range_)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSAttributedString) String() *NSString {
@@ -68,11 +74,13 @@ func (o *NSAttributedString) String() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the value for an attribute with the specified name of the character at the specified index and, by reference, the range where the attribute applies.
 func (o *NSAttributedString) AttributeAtIndexEffectiveRange(attrName *NSString, location uint, range_ *NSRange) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelAttributeAtIndexEffectiveRange, attrName.Ptr(), location, range_)
 	return _ret
 }
 
+// Returns an attributed string consisting of the characters and attributes within the specified range in the attributed string.
 func (o *NSAttributedString) AttributedSubstringFromRange(range_ NSRange) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelAttributedSubstringFromRange, range_)
 	if _ret != 0 {
@@ -81,16 +89,22 @@ func (o *NSAttributedString) AttributedSubstringFromRange(range_ NSRange) *NSAtt
 	return NSAttributedStringFromID(_ret)
 }
 
+// Returns the attributes for the character at the specified index and, by reference, the range where the attributes apply.
 func (o *NSAttributedString) AttributesAtIndexLongestEffectiveRangeInRange(location uint, range_ *NSRange, rangeLimit NSRange) *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSAttributedStringSelAttributesAtIndexLongestEffectiveRangeInRange, location, range_, rangeLimit)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelAttributesAtIndexLongestEffectiveRangeInRange, location, range_, rangeLimit)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
+// Returns the value for the attribute with the specified name of the character at the specified index and, by reference, the range where the attribute applies.
 func (o *NSAttributedString) AttributeAtIndexLongestEffectiveRangeInRange(attrName *NSString, location uint, range_ *NSRange, rangeLimit NSRange) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelAttributeAtIndexLongestEffectiveRangeInRange, attrName.Ptr(), location, range_, rangeLimit)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the attributed string is equal to the specified string.
 func (o *NSAttributedString) IsEqualToAttributedString(other *NSAttributedString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSAttributedStringSelIsEqualToAttributedString, other.Ptr())
 	return _ret
@@ -105,7 +119,7 @@ func (o *NSAttributedString) InitWithString(str *NSString) *NSAttributedString {
 }
 
 func (o *NSAttributedString) InitWithStringAttributes(str *NSString, attrs *NSDictionary[*NSString, objc.ID]) *NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithStringAttributes, str.Ptr(), attrs)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithStringAttributes, str.Ptr(), attrs.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -120,10 +134,12 @@ func (o *NSAttributedString) InitWithAttributedString(attrStr *NSAttributedStrin
 	return NSAttributedStringFromID(_ret)
 }
 
+// Executes the specified closure or block for each range of attributes in the attributed string.
 func (o *NSAttributedString) EnumerateAttributesInRangeOptionsUsing(enumerationRange NSRange, opts NSAttributedStringEnumerationOptions, block objc.Block) {
 	o.Ptr().Send(_nSAttributedStringSelEnumerateAttributesInRangeOptionsUsing, enumerationRange, opts, block)
 }
 
+// Executes the specified closure or block for each range of a particular attribute in the attributed string.
 func (o *NSAttributedString) EnumerateAttributeInRangeOptionsUsing(attrName *NSString, enumerationRange NSRange, opts NSAttributedStringEnumerationOptions, block objc.Block) {
 	o.Ptr().Send(_nSAttributedStringSelEnumerateAttributeInRangeOptionsUsing, attrName.Ptr(), enumerationRange, opts, block)
 }
@@ -207,7 +223,7 @@ func NSAttributedStringLocalizedAttributedStringWithFormatOptions(format *NSAttr
 
 // Formats the string using the specified locale (or the canonical one, if nil).
 func (o *NSAttributedString) InitWithFormatOptionsLocaleContext(format *NSAttributedString, options NSAttributedStringFormattingOptions, locale *NSLocale, context_ *NSDictionary[*NSString, objc.ID]) *NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithFormatOptionsLocaleContext, format.Ptr(), options, locale.Ptr(), context_)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithFormatOptionsLocaleContext, format.Ptr(), options, locale.Ptr(), context_.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -216,7 +232,7 @@ func (o *NSAttributedString) InitWithFormatOptionsLocaleContext(format *NSAttrib
 
 // Formats the string using the arguments list and the specified locale (or the canonical one, if nil).
 func (o *NSAttributedString) InitWithFormatOptionsLocaleContextArguments(format *NSAttributedString, options NSAttributedStringFormattingOptions, locale *NSLocale, context_ *NSDictionary[*NSString, objc.ID], arguments string) *NSAttributedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithFormatOptionsLocaleContextArguments, format.Ptr(), options, locale.Ptr(), context_, arguments)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithFormatOptionsLocaleContextArguments, format.Ptr(), options, locale.Ptr(), context_.Ptr(), arguments)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -225,7 +241,7 @@ func (o *NSAttributedString) InitWithFormatOptionsLocaleContextArguments(format 
 
 // Formats the string using the current locale and default options.
 func NSAttributedStringLocalizedAttributedStringWithFormatContext(format *NSAttributedString, context_ *NSDictionary[*NSString, objc.ID]) *NSAttributedString {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSAttributedString), _nSAttributedStringSelLocalizedAttributedStringWithFormatContext, format.Ptr(), context_)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSAttributedString), _nSAttributedStringSelLocalizedAttributedStringWithFormatContext, format.Ptr(), context_.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -234,7 +250,7 @@ func NSAttributedStringLocalizedAttributedStringWithFormatContext(format *NSAttr
 
 // Formats the string using the current locale and the specified options.
 func NSAttributedStringLocalizedAttributedStringWithFormatOptionsContext(format *NSAttributedString, options NSAttributedStringFormattingOptions, context_ *NSDictionary[*NSString, objc.ID]) *NSAttributedString {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSAttributedString), _nSAttributedStringSelLocalizedAttributedStringWithFormatOptionsContext, format.Ptr(), options, context_)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSAttributedString), _nSAttributedStringSelLocalizedAttributedStringWithFormatOptionsContext, format.Ptr(), options, context_.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

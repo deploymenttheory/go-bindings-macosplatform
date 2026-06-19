@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A distance over which the framework fades out sound.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasedistancemodelfadeoutparameters
 type PHASEDistanceModelFadeOutParameters struct {
 	foundation.NSObject
@@ -31,7 +33,7 @@ func PHASEDistanceModelFadeOutParametersFromID(id objc.ID) *PHASEDistanceModelFa
 	return o
 }
 
-// @method initWithCullDistance @abstract Initialize with a cullDistance. @param cullDistance The distance beyond which the sound will be culled. Values must be >= 1. @note The cullDistance is scaled by unitsPerMeter internally, so can be provided at the client's native spatial scale. The system will smoothly fade the sound to zero before reaching this distance to avoid any audible artifacts. @return An instance, or nil if initialization fails.
+// Creates a distance beyond which sound sources stop playing.
 func (o *PHASEDistanceModelFadeOutParameters) InitWithCullDistance(cullDistance float64) *PHASEDistanceModelFadeOutParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEDistanceModelFadeOutParametersSelInitWithCullDistance, cullDistance)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a location update.
+//
 // Update wraps [raw.CLUpdate] with a fluent Go API.
 type Update struct {
 	inner *raw.CLUpdate

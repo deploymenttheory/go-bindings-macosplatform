@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// PDFActionNamed defines methods used to work with actions in PDF documents, some of which are named in the Adobe PDF Specification.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfactionnamed
 type PDFActionNamed struct {
 	PDFAction
@@ -31,6 +33,7 @@ func PDFActionNamedFromID(id objc.ID) *PDFActionNamed {
 	return o
 }
 
+// Initializes the PDFActionName object with the specified named action.
 func (o *PDFActionNamed) InitWithName(name PDFActionNamedName) *PDFActionNamed {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFActionNamedSelInitWithName, name)
 	if _ret != 0 {

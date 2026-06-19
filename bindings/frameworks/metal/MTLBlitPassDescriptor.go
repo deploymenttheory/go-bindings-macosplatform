@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration you create to customize a blit command encoder, which affects the runtime behavior of the blit pass you encode with it.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlblitpassdescriptor
 type MTLBlitPassDescriptor struct {
 	foundation.NSObject
@@ -31,7 +33,7 @@ func MTLBlitPassDescriptorFromID(id objc.ID) *MTLBlitPassDescriptor {
 	return o
 }
 
-// @method blitPassDescriptor @abstract Create an autoreleased default frame buffer descriptor
+// Creates a new blit pass descriptor with a default configuration.
 func MTLBlitPassDescriptorBlitPassDescriptor() *MTLBlitPassDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLBlitPassDescriptor), _mTLBlitPassDescriptorSelBlitPassDescriptor)
 	if _ret != 0 {

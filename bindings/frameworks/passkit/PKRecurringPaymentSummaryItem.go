@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines a summary item for a payment that occurs repeatedly at a specified interval, such as a subscription.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkrecurringpaymentsummaryitem
 type PKRecurringPaymentSummaryItem struct {
 	PKPaymentSummaryItem

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract base class for gathering information about an activity.
+//
 // ActivityItem wraps [raw.CLSActivityItem] with a fluent Go API.
 type ActivityItem struct {
 	inner *raw.CLSActivityItem
@@ -37,7 +39,7 @@ func NewActivityItem() *ActivityItem {
 	return &ActivityItem{inner: raw.CLSActivityItemFromID(_id)}
 }
 
-// @abstract      Title of what this ActivityItem represents. @discussion    This will be the title associated with the activity item in the generated progress report.
+// A human readable name for the activity item.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ActivityItem) WithTitle(title string) *ActivityItem {

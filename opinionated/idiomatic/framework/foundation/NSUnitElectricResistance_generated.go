@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for electric resistance.
+//
 // UnitElectricResistance wraps [raw.NSUnitElectricResistance] with a fluent Go API.
 type UnitElectricResistance struct {
 	inner *raw.NSUnitElectricResistance

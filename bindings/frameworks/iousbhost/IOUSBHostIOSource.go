@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class   IOUSBHostIOSource @brief   The abstract class IOUSBHostPipe and IOUSBHostStream derive from. @details Defines common methods that are shared between IOUSBHostPipe and IOUSBHostStream.
+// This class provides basic functionality for deriving pipe and stream classes.
 //
 // Apple documentation: https://developer.apple.com/documentation/iousbhost/iousbhostiosource
 type IOUSBHostIOSource struct {

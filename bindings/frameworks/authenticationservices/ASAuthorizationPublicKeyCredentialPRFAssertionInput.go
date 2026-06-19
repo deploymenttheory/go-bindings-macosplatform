@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that represents input for the web authentication PRF extension in passkey assertion requests.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfassertioninput
 type ASAuthorizationPublicKeyCredentialPRFAssertionInput struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func ASAuthorizationPublicKeyCredentialPRFAssertionInputFromID(id objc.ID) *ASAu
 }
 
 func (o *ASAuthorizationPublicKeyCredentialPRFAssertionInput) InitWithInputValuesPerCredentialInputValues(inputValues *ASAuthorizationPublicKeyCredentialPRFAssertionInputValues, perCredentialInputValues *foundation.NSDictionary[*foundation.NSData, *ASAuthorizationPublicKeyCredentialPRFAssertionInputValues]) *ASAuthorizationPublicKeyCredentialPRFAssertionInput {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialPRFAssertionInputSelInitWithInputValuesPerCredentialInputValues, inputValues.Ptr(), perCredentialInputValues)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialPRFAssertionInputSelInitWithInputValuesPerCredentialInputValues, inputValues.Ptr(), perCredentialInputValues.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -49,6 +51,9 @@ func (o *ASAuthorizationPublicKeyCredentialPRFAssertionInput) InputValues() *ASA
 }
 
 func (o *ASAuthorizationPublicKeyCredentialPRFAssertionInput) PerCredentialInputValues() *foundation.NSDictionary[*foundation.NSData, *ASAuthorizationPublicKeyCredentialPRFAssertionInputValues] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSData, *ASAuthorizationPublicKeyCredentialPRFAssertionInputValues]](o.Ptr(), _aSAuthorizationPublicKeyCredentialPRFAssertionInputSelPerCredentialInputValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialPRFAssertionInputSelPerCredentialInputValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSData, *ASAuthorizationPublicKeyCredentialPRFAssertionInputValues](_ret)
 }

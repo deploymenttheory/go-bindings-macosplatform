@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that connects to the system’s audio output.
+//
 // AudioOutputNode wraps [raw.AVAudioOutputNode] with a fluent Go API.
 type AudioOutputNode struct {
 	inner *raw.AVAudioOutputNode

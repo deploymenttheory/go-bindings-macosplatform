@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that identifies samples that store information about a workout.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkworkouttype
 type HKWorkoutType struct {
 	HKSampleType

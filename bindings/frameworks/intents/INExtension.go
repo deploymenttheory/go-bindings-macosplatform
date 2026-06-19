@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The entry point for an Intents extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inextension
 type INExtension struct {
 	foundation.NSObject

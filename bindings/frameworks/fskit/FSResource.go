@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract resource a file system uses to provide data for a volume.
+//
 // Apple documentation: https://developer.apple.com/documentation/fskit/fsresource
 type FSResource struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func FSResourceFromID(id objc.ID) *FSResource {
 	return o
 }
 
-// Creates a proxy object of this resource. If you create a proxy from a proxy resource, this method returns a copy of the proxy.
+// Creates a proxy object of this resource.
 func (o *FSResource) MakeProxy() *FSResource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSResourceSelMakeProxy)
 	if _ret != 0 {
@@ -41,7 +43,7 @@ func (o *FSResource) MakeProxy() *FSResource {
 	return FSResourceFromID(_ret)
 }
 
-// Revokes the resource. This method works by stripping away any underlying privileges associated with the resource. This effectively disconnects this object from its underlying resource.
+// Revokes the resource.
 func (o *FSResource) Revoke() {
 	o.Ptr().Send(_fSResourceSelRevoke)
 }

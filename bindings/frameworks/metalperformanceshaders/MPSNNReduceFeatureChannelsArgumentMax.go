@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A reduction filter that returns the index of the location of the maximum value for each feature channel in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducefeaturechannelsargumentmax
 type MPSNNReduceFeatureChannelsArgumentMax struct {
 	mpsneuralnetwork.MPSNNReduceUnary

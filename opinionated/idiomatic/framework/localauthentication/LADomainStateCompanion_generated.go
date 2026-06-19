@@ -36,7 +36,7 @@ func NewDomainStateCompanion() *DomainStateCompanion {
 	return &DomainStateCompanion{inner: raw.LADomainStateCompanionFromID(_id)}
 }
 
-// Returns state hash data for the given companion type. @discussion  If database of paired devices of the given type was modified state hash data will change. Nature of such database changes cannot be determined but comparing data of state hash after different policy evaluation will reveal the fact database was changed between calls. @param companionType The companion type for which state hash data should be returned.
+// Returns state hash data for the given companion type.
 //
 // StateHashForCompanionType calls the underlying StateHashForCompanionType.
 func (x *DomainStateCompanion) StateHashForCompanionType(companionType LACompanionType) *foundation.NSData {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class representing an area that can be monitored.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clregion
 type CLRegion struct {
 	foundation.NSObject
@@ -40,6 +42,7 @@ func CLRegionFromID(id objc.ID) *CLRegion {
 	return o
 }
 
+// Initializes and returns a region object defining a circular area.
 // Deprecated: Please see CLCircularRegion
 func (o *CLRegion) InitCircularRegionWithCenterRadiusIdentifier(center unsafe.Pointer, radius unsafe.Pointer, identifier *foundation.NSString) *CLRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLRegionSelInitCircularRegionWithCenterRadiusIdentifier, center, radius, identifier.Ptr())
@@ -49,6 +52,7 @@ func (o *CLRegion) InitCircularRegionWithCenterRadiusIdentifier(center unsafe.Po
 	return CLRegionFromID(_ret)
 }
 
+// Returns a Boolean value indicating whether the region contains the specified coordinate.
 // Deprecated: Please see CLCircularRegion
 func (o *CLRegion) ContainsCoordinate(coordinate unsafe.Pointer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cLRegionSelContainsCoordinate, coordinate)

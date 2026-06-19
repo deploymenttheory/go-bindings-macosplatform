@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A gradient bilinear spatial upsampling filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsamplingbilineargradient
 type MPSCNNUpsamplingBilinearGradient struct {
 	mpsneuralnetwork.MPSCNNUpsamplingGradient

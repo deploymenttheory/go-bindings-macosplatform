@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A structure that represents an ink that specifies its type, color, and width.
+//
 // Ink wraps [raw.PKInk] with a fluent Go API.
 type Ink struct {
 	inner *raw.PKInk

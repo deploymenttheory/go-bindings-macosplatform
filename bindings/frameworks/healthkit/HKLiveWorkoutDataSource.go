@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A data source that automatically provides live data from an active workout session.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkliveworkoutdatasource
 type HKLiveWorkoutDataSource struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func HKLiveWorkoutDataSourceFromID(id objc.ID) *HKLiveWorkoutDataSource {
 	return o
 }
 
-// @method        initWithHealthStore:workoutConfiguration: @abstract      The designated initializer of HKLiveWorkoutDataSource. @param         healthStore     The HKHealthStore. This should match the one used to create the corresponding HKWorkoutBuilder. @param         configuration   An optional workout configuration. typesToCollect will be populated with default types for the workout configuration
+// Creates a new data source based on the provided workout configuration.
 func (o *HKLiveWorkoutDataSource) InitWithHealthStoreWorkoutConfiguration(healthStore *HKHealthStore, configuration *HKWorkoutConfiguration) *HKLiveWorkoutDataSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKLiveWorkoutDataSourceSelInitWithHealthStoreWorkoutConfiguration, healthStore.Ptr(), configuration.Ptr())
 	if _ret != 0 {
@@ -42,12 +44,12 @@ func (o *HKLiveWorkoutDataSource) InitWithHealthStoreWorkoutConfiguration(health
 	return HKLiveWorkoutDataSourceFromID(_ret)
 }
 
-// @method        enableCollectionForType:predicate @abstract      Adds a new type of quantity sample to collect. @discussion    Calling this method for a type that is already being collected will override the predicate for that type. @param         quantityType    The type of sample to collect. @param         predicate       If non-nil, collected samples must match this predicate.
+// Begins automatically calculating statistics for samples that match the quantity type and predicate.
 func (o *HKLiveWorkoutDataSource) EnableCollectionForTypePredicate(quantityType *HKQuantityType, predicate *foundation.NSPredicate) {
 	o.Ptr().Send(_hKLiveWorkoutDataSourceSelEnableCollectionForTypePredicate, quantityType.Ptr(), predicate.Ptr())
 }
 
-// @method        disableCollectionForType: @abstract      Removes the specified quantity type from the types to collect. @param         quantityType    The type of sample to no longer collect.
+// Stops automatically calculating statistics for the quantity type.
 func (o *HKLiveWorkoutDataSource) DisableCollectionForType(quantityType *HKQuantityType) {
 	o.Ptr().Send(_hKLiveWorkoutDataSourceSelDisableCollectionForType, quantityType.Ptr())
 }

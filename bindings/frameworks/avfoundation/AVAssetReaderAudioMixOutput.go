@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that reads audio samples that result from mixing audio from one or more tracks.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetreaderaudiomixoutput
 type AVAssetReaderAudioMixOutput struct {
 	AVAssetReaderOutput
@@ -37,18 +39,18 @@ func AVAssetReaderAudioMixOutputFromID(id objc.ID) *AVAssetReaderAudioMixOutput 
 	return o
 }
 
-// @method assetReaderAudioMixOutputWithAudioTracks:audioSettings: @abstract Returns an instance of AVAssetReaderAudioMixOutput for reading mixed audio from the specified audio tracks, with optional audio settings. @param tracks An NSArray of AVAssetTrack objects from which the created object should read sample buffers to be mixed. @param audioSettings An NSDictionary of audio settings to be used for audio output. @result An instance of AVAssetReaderAudioMixOutput. @discussion Each track must be one of the tracks owned by the target AVAssetReader's asset and must be of media type AVMediaTypeAudio. For non-nil values of audioSettings, the audio settings dictionary must contain values for keys in AVAudioSettings.h (linear PCM only). Initialization will fail if the audio settings cannot be used with the specified tracks. AVSampleRateConverterAudioQualityKey is not supported. A value of nil for audioSettings configures the output to return samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the specified audio tracks as well as other considerations that may vary according to device capabilities, operating system version, and other factors. Therefore if you wish to perform any processing on the output, you must examine the CMAudioFormatDescription of the CMSampleBuffers that are provided in order to ensure that your processing is appropriately configured for the output format.
+// Creates an object that reads mixed audio from the specified audio tracks.
 func AVAssetReaderAudioMixOutputAssetReaderAudioMixOutputWithAudioTracksAudioSettings(audioTracks *foundation.NSArray[*AVAssetTrack], audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetReaderAudioMixOutput {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetReaderAudioMixOutput), _aVAssetReaderAudioMixOutputSelAssetReaderAudioMixOutputWithAudioTracksAudioSettings, audioTracks.Ptr(), audioSettings)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetReaderAudioMixOutput), _aVAssetReaderAudioMixOutputSelAssetReaderAudioMixOutputWithAudioTracksAudioSettings, audioTracks.Ptr(), audioSettings.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVAssetReaderAudioMixOutputFromID(_ret)
 }
 
-// @method initWithAudioTracks:audioSettings: @abstract Creates an instance of AVAssetReaderAudioMixOutput for reading mixed audio from the specified audio tracks, with optional audio settings. @param tracks An NSArray of AVAssetTrack objects from which the created object should read sample buffers to be mixed. @param audioSettings An NSDictionary of audio settings to be used for audio output. @result An instance of AVAssetReaderAudioMixOutput. @discussion Each track must be one of the tracks owned by the target AVAssetReader's asset and must be of media type AVMediaTypeAudio. For non-nil values of audioSettings, the audio settings dictionary must contain values for keys in AVAudioSettings.h (linear PCM only). Initialization will fail if the audio settings cannot be used with the specified tracks. AVSampleRateConverterAudioQualityKey is not supported. A value of nil for audioSettings configures the output to return samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the specified audio tracks as well as other considerations that may vary according to device capabilities, operating system version, and other factors. Therefore if you wish to perform any processing on the output, you must examine the CMAudioFormatDescription of the CMSampleBuffers that are provided in order to ensure that your processing is appropriately configured for the output format. This method throws an exception for any of the following reasons: - an audio track does not have media type AVMediaTypeAudio - an audio track belongs to a different AVAsset - the audio settings contains an AVSampleRateConverterAudioQualityKey - the output would be compressed
+// Creates an object that reads mixed audio from the specified audio tracks.
 func (o *AVAssetReaderAudioMixOutput) InitWithAudioTracksAudioSettings(audioTracks *foundation.NSArray[*AVAssetTrack], audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetReaderAudioMixOutput {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderAudioMixOutputSelInitWithAudioTracksAudioSettings, audioTracks.Ptr(), audioSettings)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderAudioMixOutputSelInitWithAudioTracksAudioSettings, audioTracks.Ptr(), audioSettings.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -66,8 +68,11 @@ func (o *AVAssetReaderAudioMixOutput) AudioTracks() *foundation.NSArray[*AVAsset
 
 // @property audioSettings @abstract The audio settings used by the receiver. @discussion The value of this property is an NSDictionary that contains values for keys from AVAudioSettings.h (linear PCM only).  A value of nil indicates that the receiver will return audio samples in a convenient uncompressed format, with sample rate and other properties determined according to the properties of the receiver's audio tracks.
 func (o *AVAssetReaderAudioMixOutput) AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVAssetReaderAudioMixOutputSelAudioSettings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderAudioMixOutputSelAudioSettings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // @property audioMix @abstract The audio mix used by the receiver. @discussion The value of this property is an AVAudioMix that can be used to specify how the volume of audio samples read from each source track will change over the timeline of the source asset. This property throws an exception for any of the following reasons: - an audio mix is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) - setting an audio mix containing a track that was not used to create the receiver - an audio mix is set containing an invalid audio time pitch algorithm

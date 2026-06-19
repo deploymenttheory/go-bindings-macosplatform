@@ -10,7 +10,7 @@ import (
 	"unsafe"
 )
 
-// GKGraphNode coupled with a 2D position
+// A node in a navigation graph, associated with a point in continuous 2D space.
 //
 // GraphNode2D wraps [raw.GKGraphNode2D] with a fluent Go API.
 type GraphNode2D struct {
@@ -32,6 +32,8 @@ func GraphNode2DFromID(id objc.ID) *GraphNode2D {
 	return &GraphNode2D{inner: raw.GKGraphNode2DFromID(id)}
 }
 
+// Initializes a graph node with the specified point.
+//
 // NewGraphNode2DWithPoint creates a new [GraphNode2D].
 func NewGraphNode2DWithPoint(point unsafe.Pointer) *GraphNode2D {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGraphNode2D")), objc.RegisterName("alloc"))

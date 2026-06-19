@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resource that represents a path in the system file space.
+//
 // Apple documentation: https://developer.apple.com/documentation/fskit/fspathurlresource
 type FSPathURLResource struct {
 	FSResource
@@ -32,7 +34,7 @@ func FSPathURLResourceFromID(id objc.ID) *FSPathURLResource {
 	return o
 }
 
-// Creates a path URL resource. - Parameters: - URL: A URL in the system file space that represents the contents of a file system. This parameter uses the `file:` scheme. - writable: A Boolean value that indicates whether the file system supports writing to the contents of the URL.
+// Creates a path URL resource.
 func (o *FSPathURLResource) InitWithURLWritable(uRL *foundation.NSURL, writable bool) *FSPathURLResource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSPathURLResourceSelInitWithURLWritable, uRL.Ptr(), writable)
 	if _ret != 0 {

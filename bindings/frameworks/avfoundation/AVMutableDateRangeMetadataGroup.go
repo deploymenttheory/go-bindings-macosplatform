@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable collection of metadata items that are valid for use within a specific range of dates.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmutabledaterangemetadatagroup
 type AVMutableDateRangeMetadataGroup struct {
 	AVDateRangeMetadataGroup

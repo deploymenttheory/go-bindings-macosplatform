@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that resizes and changes the aspect ratio of an image using Lanczos resampling.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagelanczosscale
 type MPSImageLanczosScale struct {
 	mpsimage.MPSImageScale

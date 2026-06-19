@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Represents the result of authorizing a payment request and contains payment information, encrypted in the payment token.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpayment
 type PKPayment struct {
 	foundation.NSObject

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for the views whose layout is managed by a scrubber.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsscrubberarrangedview
 type NSScrubberArrangedView struct {
 	NSView
@@ -33,6 +35,7 @@ func NSScrubberArrangedViewFromID(id objc.ID) *NSScrubberArrangedView {
 	return o
 }
 
+// Updates the layout of the arranged view to respect the provided layout attributes.
 func (o *NSScrubberArrangedView) ApplyLayoutAttributes(layoutAttributes *NSScrubberLayoutAttributes) {
 	o.Ptr().Send(_nSScrubberArrangedViewSelApplyLayoutAttributes, layoutAttributes.Ptr())
 }

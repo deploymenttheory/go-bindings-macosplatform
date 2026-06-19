@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A migration manager instance that performs a migration of data from one persistent store to another using a given mapping model.
+//
 // MigrationManager wraps [raw.NSMigrationManager] with a fluent Go API.
 type MigrationManager struct {
 	inner *raw.NSMigrationManager
@@ -31,6 +33,8 @@ func MigrationManagerFromID(id objc.ID) *MigrationManager {
 	return &MigrationManager{inner: raw.NSMigrationManagerFromID(id)}
 }
 
+// Initializes a migration manager instance with given source and destination models.
+//
 // NewMigrationManagerWithSourceModelDestinationModel creates a new [MigrationManager].
 func NewMigrationManagerWithSourceModelDestinationModel(sourceModel *raw.NSManagedObjectModel, destinationModel *raw.NSManagedObjectModel) *MigrationManager {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMigrationManager")), objc.RegisterName("alloc"))
@@ -38,28 +42,38 @@ func NewMigrationManagerWithSourceModelDestinationModel(sourceModel *raw.NSManag
 	return &MigrationManager{inner: raw.NSMigrationManagerFromID(_id)}
 }
 
+// A Boolean value that indicates whether the migration manager tries to use a store specific migration manager to perform the migration.
+//
 // WithUsesStoreSpecificMigrationManager sets the usesStoreSpecificMigrationManager property and returns the receiver for chaining.
 func (x *MigrationManager) WithUsesStoreSpecificMigrationManager(usesStoreSpecificMigrationManager bool) *MigrationManager {
 	x.inner.SetUsesStoreSpecificMigrationManager(usesStoreSpecificMigrationManager)
 	return x
 }
 
+// The user info for the migration manager.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *MigrationManager) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *MigrationManager {
 	x.inner.SetUserInfo(userInfo)
 	return x
 }
 
+// Migrates the store at a given source URL to the store at a given destination URL, performing all of the mappings specified in a given mapping model.
+//
 // MigrateStoreFromURLTypeOptionsWithMappingModelToDestinationURLDestinationTypeDestinationOptionsError calls the underlying MigrateStoreFromURLTypeOptionsWithMappingModelToDestinationURLDestinationTypeDestinationOptionsError.
 func (x *MigrationManager) MigrateStoreFromURLTypeOptionsWithMappingModelToDestinationURLDestinationTypeDestinationOptionsError(sourceURL string, sStoreType string, sOptions *foundation.NSDictionary[objc.ID, objc.ID], mappings *raw.NSMappingModel, dURL string, dStoreType string, dOptions *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error) {
 	return x.inner.MigrateStoreFromURLTypeOptionsWithMappingModelToDestinationURLDestinationTypeDestinationOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(sourceURL)), foundation.NSStringStringWithUTF8String(sStoreType), sOptions, mappings, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(dURL)), foundation.NSStringStringWithUTF8String(dStoreType), dOptions)
 }
 
+// Resets the association tables for the migration.
+//
 // Reset calls the underlying Reset.
 func (x *MigrationManager) Reset() {
 	x.inner.Reset()
 }
 
+// Returns the entity description for the source entity of a given entity mapping.
+//
 // SourceEntityForEntityMapping calls the underlying SourceEntityForEntityMapping.
 func (x *MigrationManager) SourceEntityForEntityMapping(mEntity *raw.NSEntityMapping) *EntityDescription {
 	_r := x.inner.SourceEntityForEntityMapping(mEntity)
@@ -69,6 +83,8 @@ func (x *MigrationManager) SourceEntityForEntityMapping(mEntity *raw.NSEntityMap
 	return &EntityDescription{inner: _r}
 }
 
+// Returns the entity description for the destination entity of a given entity mapping.
+//
 // DestinationEntityForEntityMapping calls the underlying DestinationEntityForEntityMapping.
 func (x *MigrationManager) DestinationEntityForEntityMapping(mEntity *raw.NSEntityMapping) *EntityDescription {
 	_r := x.inner.DestinationEntityForEntityMapping(mEntity)
@@ -78,21 +94,29 @@ func (x *MigrationManager) DestinationEntityForEntityMapping(mEntity *raw.NSEnti
 	return &EntityDescription{inner: _r}
 }
 
+// Associates a given source managed object instance with an array of destination instances for a given property mapping.
+//
 // AssociateSourceInstanceWithDestinationInstanceForEntityMapping calls the underlying AssociateSourceInstanceWithDestinationInstanceForEntityMapping.
 func (x *MigrationManager) AssociateSourceInstanceWithDestinationInstanceForEntityMapping(sourceInstance *raw.NSManagedObject, destinationInstance *raw.NSManagedObject, entityMapping *raw.NSEntityMapping) {
 	x.inner.AssociateSourceInstanceWithDestinationInstanceForEntityMapping(sourceInstance, destinationInstance, entityMapping)
 }
 
+// Returns the managed object instances created in the destination store for the named entity mapping for the given array of source instances.
+//
 // DestinationInstancesForEntityMappingNamedSourceInstances calls the underlying DestinationInstancesForEntityMappingNamedSourceInstances.
 func (x *MigrationManager) DestinationInstancesForEntityMappingNamedSourceInstances(mappingName string, sourceInstances *foundation.NSArray[*raw.NSManagedObject]) *foundation.NSArray[*raw.NSManagedObject] {
 	return x.inner.DestinationInstancesForEntityMappingNamedSourceInstances(foundation.NSStringStringWithUTF8String(mappingName), sourceInstances)
 }
 
+// Returns the managed object instances in the source store used to create the given destination instances for the passed in property mapping.
+//
 // SourceInstancesForEntityMappingNamedDestinationInstances calls the underlying SourceInstancesForEntityMappingNamedDestinationInstances.
 func (x *MigrationManager) SourceInstancesForEntityMappingNamedDestinationInstances(mappingName string, destinationInstances *foundation.NSArray[*raw.NSManagedObject]) *foundation.NSArray[*raw.NSManagedObject] {
 	return x.inner.SourceInstancesForEntityMappingNamedDestinationInstances(foundation.NSStringStringWithUTF8String(mappingName), destinationInstances)
 }
 
+// Cancels the migration with a given error.
+//
 // CancelMigrationWithError calls the underlying CancelMigrationWithError.
 func (x *MigrationManager) CancelMigrationWithError(error_ unsafe.Pointer) {
 	x.inner.CancelMigrationWithError(error_)

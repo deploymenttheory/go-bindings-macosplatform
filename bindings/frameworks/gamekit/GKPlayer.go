@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A remote player who the local player running your game can invite and communicate with through Game Center.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkplayer
 type GKPlayer struct {
 	GKBasePlayer
@@ -42,12 +44,13 @@ func GKPlayerFromID(id objc.ID) *GKPlayer {
 	return o
 }
 
-// This convenience method checks if the gamePlayerID and the teamPlayerID (scopedIDs) are persistent or unique for the instantiation of this app.
+// Returns a Boolean value depending on whether the player identifiers are persistent across game instances or unique to the game instance.
 func (o *GKPlayer) ScopedIDsArePersistent() bool {
 	_ret := objc.Send[bool](o.Ptr(), _gKPlayerSelScopedIDsArePersistent)
 	return _ret
 }
 
+// Creates a guest player with the specified identifier.
 func GKPlayerAnonymousGuestPlayerWithIdentifier(guestIdentifier *foundation.NSString) *GKPlayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKPlayer), _gKPlayerSelAnonymousGuestPlayerWithIdentifier, guestIdentifier.Ptr())
 	if _ret != 0 {
@@ -96,7 +99,7 @@ func (o *GKPlayer) IsInvitable() bool {
 	return _ret
 }
 
-// Asynchronously load the player's photo. Error will be nil on success. Possible reasons for error: 1. Communications failure
+// Loads a photo of the player from Game Center.
 func (o *GKPlayer) LoadPhotoForSizeWithCompletionHandler(size GKPhotoSize, completionHandler func(*appkit.NSImage, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -111,7 +114,7 @@ func (o *GKPlayer) LoadPhotoForSizeWithCompletionHandler(size GKPhotoSize, compl
 	o.Ptr().Send(_gKPlayerSelLoadPhotoForSizeWithCompletionHandler, size, __block_completionHandler)
 }
 
-// Load the Game Center players for the playerIDs provided. Error will be nil on success. Possible reasons for error: 1. Unauthenticated local player 2. Communications failure 3. Invalid player identifier
+// Loads information about a list of players from Game Center.
 // Deprecated: since macOS 11.3.
 func GKPlayerLoadPlayersForIdentifiersWithCompletionHandler(identifiers *foundation.NSArray[*foundation.NSString], completionHandler func(*foundation.NSArray[*GKPlayer], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -124,7 +127,7 @@ func GKPlayerLoadPlayersForIdentifiersWithCompletionHandler(identifiers *foundat
 		})
 		defer __block_completionHandler.Release()
 	}
-	objc.ID(_clsGKPlayer).Send(_gKPlayerSelLoadPlayersForIdentifiersWithCompletionHandler, identifiers, __block_completionHandler)
+	objc.ID(_clsGKPlayer).Send(_gKPlayerSelLoadPlayersForIdentifiersWithCompletionHandler, identifiers.Ptr(), __block_completionHandler)
 }
 
 // Deprecated: since macOS 10.10.

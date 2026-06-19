@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A simple skybox visual effect for use in shader-based OpenGL rendering.
+//
 // Apple documentation: https://developer.apple.com/documentation/glkit/glkskyboxeffect
 type GLKSkyboxEffect struct {
 	foundation.NSObject
@@ -45,10 +47,12 @@ func GLKSkyboxEffectFromID(id objc.ID) *GLKSkyboxEffect {
 	return o
 }
 
+// Prepares an effect for rendering.
 func (o *GLKSkyboxEffect) PrepareToDraw() {
 	o.Ptr().Send(_gLKSkyboxEffectSelPrepareToDraw)
 }
 
+// Draws the skybox.
 func (o *GLKSkyboxEffect) Draw() {
 	o.Ptr().Send(_gLKSkyboxEffectSelDraw)
 }

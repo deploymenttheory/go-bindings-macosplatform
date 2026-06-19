@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a single attribute belonging to an entity.
+//
 // AttributeDescription wraps [raw.NSAttributeDescription] with a fluent Go API.
 type AttributeDescription struct {
 	inner *raw.NSAttributeDescription
@@ -37,96 +39,128 @@ func NewAttributeDescription() *AttributeDescription {
 	return &AttributeDescription{inner: raw.NSAttributeDescriptionFromID(_id)}
 }
 
+// The attribute’s type.
+//
 // WithAttributeType sets the attributeType property and returns the receiver for chaining.
 func (x *AttributeDescription) WithAttributeType(attributeType NSAttributeType) *AttributeDescription {
 	x.inner.SetAttributeType(raw.NSAttributeType(attributeType))
 	return x
 }
 
+// The class name that represents the attribute’s value.
+//
 // WithAttributeValueClassName sets the attributeValueClassName property and returns the receiver for chaining.
 func (x *AttributeDescription) WithAttributeValueClassName(attributeValueClassName string) *AttributeDescription {
 	x.inner.SetAttributeValueClassName(foundation.NSStringStringWithUTF8String(attributeValueClassName))
 	return x
 }
 
+// The default value of the attribute.
+//
 // WithDefaultValue sets the defaultValue property and returns the receiver for chaining.
 func (x *AttributeDescription) WithDefaultValue(defaultValue objc.ID) *AttributeDescription {
 	x.inner.SetDefaultValue(defaultValue)
 	return x
 }
 
+// The name of the transformer to use for the attribute value.
+//
 // WithValueTransformerName sets the valueTransformerName property and returns the receiver for chaining.
 func (x *AttributeDescription) WithValueTransformerName(valueTransformerName string) *AttributeDescription {
 	x.inner.SetValueTransformerName(foundation.NSStringStringWithUTF8String(valueTransformerName))
 	return x
 }
 
+// A Boolean value that indicates whether the attribute allows external binary storage.
+//
 // WithAllowsExternalBinaryDataStorage sets the allowsExternalBinaryDataStorage property and returns the receiver for chaining.
 func (x *AttributeDescription) WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *AttributeDescription {
 	x.inner.SetAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage)
 	return x
 }
 
+// A Boolean value that indicates whether the attribute records its value in the persistent history transaction for a managed object’s deletion.
+//
 // WithPreservesValueInHistoryOnDeletion sets the preservesValueInHistoryOnDeletion property and returns the receiver for chaining.
 func (x *AttributeDescription) WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *AttributeDescription {
 	x.inner.SetPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion)
 	return x
 }
 
+// A Boolean value that determines whether to encrypt the attribute’s value.
+//
 // WithAllowsCloudEncryption sets the allowsCloudEncryption property and returns the receiver for chaining.
 func (x *AttributeDescription) WithAllowsCloudEncryption(allowsCloudEncryption bool) *AttributeDescription {
 	x.inner.SetAllowsCloudEncryption(allowsCloudEncryption)
 	return x
 }
 
+// The name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *AttributeDescription) WithName(name string) *AttributeDescription {
 	x.inner.NSPropertyDescription.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is optional.
+//
 // WithOptional sets the optional property and returns the receiver for chaining.
 func (x *AttributeDescription) WithOptional(optional bool) *AttributeDescription {
 	x.inner.NSPropertyDescription.SetOptional(optional)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is transient.
+//
 // WithTransient sets the transient property and returns the receiver for chaining.
 func (x *AttributeDescription) WithTransient(transient bool) *AttributeDescription {
 	x.inner.NSPropertyDescription.SetTransient(transient)
 	return x
 }
 
+// The user info dictionary of the receiver.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *AttributeDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *AttributeDescription {
 	x.inner.NSPropertyDescription.SetUserInfo(userInfo)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver should be indexed for searching.
+//
 // WithIndexed sets the indexed property and returns the receiver for chaining.
 func (x *AttributeDescription) WithIndexed(indexed bool) *AttributeDescription {
 	x.inner.NSPropertyDescription.SetIndexed(indexed)
 	return x
 }
 
+// The version hash modifier for the receiver.
+//
 // WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
 func (x *AttributeDescription) WithVersionHashModifier(versionHashModifier string) *AttributeDescription {
 	x.inner.NSPropertyDescription.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
 	return x
 }
 
+// A Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
+//
 // WithIndexedBySpotlight sets the indexedBySpotlight property and returns the receiver for chaining.
 func (x *AttributeDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *AttributeDescription {
 	x.inner.NSPropertyDescription.SetIndexedBySpotlight(indexedBySpotlight)
 	return x
 }
 
+// A Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
+//
 // WithStoredInExternalRecord sets the storedInExternalRecord property and returns the receiver for chaining.
 func (x *AttributeDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *AttributeDescription {
 	x.inner.NSPropertyDescription.SetStoredInExternalRecord(storedInExternalRecord)
 	return x
 }
 
+// The renaming identifier for the receiver.
+//
 // WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
 func (x *AttributeDescription) WithRenamingIdentifier(renamingIdentifier string) *AttributeDescription {
 	x.inner.NSPropertyDescription.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))

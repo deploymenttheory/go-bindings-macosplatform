@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "framework": "DeviceDiscoveryExtension",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "DDDevice": {
+      "doc": "An object that describes a discovered device of interest.",
+      "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice"
+    },
+    "DDDeviceEvent": {
+      "doc": "An object that provides a device or communicates its change in status.",
+      "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddeviceevent"
+    },
+    "DDDiscoverySession": {
+      "doc": "An object that relays device discovery events from the extension to the system.",
+      "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddiscoverysession"
+    }
+  },
+  "enums": {
+    "DDDeviceCategory": {
+      "doc": "An option that determines the icon for the device in the picker UI.",
+      "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevicecategory"
+    },
+    "DDDeviceMediaPlaybackState": {
+      "doc": "States that indicate the status of a device’s media playback.",
+      "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevicemediaplaybackstate"
+    },
+    "DDDeviceProtocol": {
+      "doc": "An identifier for the manner in which an app interacts with a device.",
+      "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddeviceprotocol"
+    },
+    "DDDeviceState": {
+      "doc": "A state that represents the level of user interaction with the device.",
+      "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevicestate",
+      "members": {
+        "DDDeviceStateActivated": {
+          "doc": "A state that indicates when the user authorizes the device and the app connects to the device.",
+          "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevicestate/activated"
+        },
+        "DDDeviceStateActivating": {
+          "doc": "A state that indicates when the user selects the device in the picker UI.",
+          "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevicestate/activating"
+        },
+        "DDDeviceStateAuthorized": {
+          "doc": "A state that indicates when the user authorizes the device.",
+          "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevicestate/authorized"
+        },
+        "DDDeviceStateInvalid": {
+          "doc": "A state that indicates the device is invalid or that the user disapproves of the device.",
+          "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevicestate/invalid"
+        },
+        "DDDeviceStateInvalidating": {
+          "doc": "A state that indicates that the device is soon to be invalid.",
+          "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevicestate/invalidating"
+        }
+      }
+    },
+    "DDDeviceSupports": {
+      "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevicesupports",
+      "members": {
+        "DDDeviceSupportsBluetoothHID": {
+          "doc": "Device supports bring up of classic transport profiles when low energy transport for peripheral is connected.",
+          "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevicesupports/bluetoothhid"
+        }
+      }
+    },
+    "DDErrorCode": {
+      "doc": "Codes that identify errors that can occur during the framework’s use.",
+      "url": "https://developer.apple.com/documentation/devicediscoveryextension/dderrorcode"
+    },
+    "DDEventType": {
+      "doc": "Identifiers for the types of events that occur in the device discovery life cycle.",
+      "url": "https://developer.apple.com/documentation/devicediscoveryextension/ddeventtype"
+    }
+  },
+  "methods": {
+    "DDDevice": {
+      "-initWithDisplayName:category:protocolType:identifier:": {
+        "doc": "Creates an object that describes a discovered device.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/init(displayname:category:protocoltype:identifier:)"
+      }
+    },
+    "DDDeviceEvent": {
+      "-initWithEventType:device:": {
+        "doc": "Creates an event object that conveys status for a discovered device of interest.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddeviceevent/init(eventtype:device:)"
+      }
+    },
+    "DDDiscoverySession": {
+      "-reportEvent:": {
+        "doc": "Reports an event to the system.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddiscoverysession/report(_:)"
+      }
+    }
+  },
+  "properties": {
+    "DDDevice": {
+      "DDDeviceCategory": {
+        "doc": "An option that determines the icon for the device in the picker UI.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/category-swift.enum"
+      },
+      "DDDeviceMediaPlaybackState": {
+        "doc": "States that indicate the status of a device’s media playback.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/mediaplaybackstate-swift.enum"
+      },
+      "DDDeviceProtocol": {
+        "doc": "An identifier for the manner in which an app interacts with a device.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/protocol-swift.enum"
+      },
+      "bluetoothIdentifier": {
+        "doc": "An identifier to communicate with the device through Bluetooth wireless technology.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/bluetoothidentifier"
+      },
+      "category": {
+        "doc": "An option that determies the icon that the picker UI displays for the device.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/category-swift.property"
+      },
+      "displayName": {
+        "doc": "A name for the device to display to the user.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/displayname"
+      },
+      "identifier": {
+        "doc": "A unique identifier for the device.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/identifier"
+      },
+      "mediaContentSubtitle": {
+        "doc": "A subtitle for the current media that the device plays.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/mediacontentsubtitle"
+      },
+      "mediaContentTitle": {
+        "doc": "A title for the current media that the device plays.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/mediacontenttitle"
+      },
+      "mediaPlaybackState": {
+        "doc": "A playback status for the device’s current media.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/mediaplaybackstate-swift.property"
+      },
+      "networkEndpoint": {
+        "doc": "An object that describes a local-network device.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/networkendpoint-3lah1"
+      },
+      "protocol": {
+        "doc": "The manner in which the system applies your app’s device discovery extension.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/protocol-swift.property"
+      },
+      "protocolType": {
+        "doc": "A custom universal type that describes the device’s manner of communication with the extension.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/protocoltype"
+      },
+      "state": {
+        "doc": "A state that represents the level of user interaction with the device.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/state"
+      },
+      "supportsGrouping": {
+        "doc": "A Boolean value that indicates whether to group the device with others in the AirPlay UI.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/supportsgrouping"
+      },
+      "txtRecord": {
+        "doc": "A dictionary of metadata for the device that the extension communicates with over the local network.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/txtrecord"
+      },
+      "txtRecordData": {
+        "doc": "A dictionary of metadata for the device that the extension communicates with over the local network.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/txtrecorddata"
+      },
+      "url": {
+        "doc": "A resource locator for the simple service discovery protocol.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/url"
+      },
+      "wifiAwareModelName": {
+        "doc": "Device’s Wi-Fi Aware model name.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/wifiawaremodelname"
+      },
+      "wifiAwareServiceName": {
+        "doc": "Device’s Wi-Fi Aware’s service name.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/wifiawareservicename"
+      },
+      "wifiAwareServiceRole": {
+        "doc": "Device’s Wi-Fi Aware’s service. Default is DDDeviceWiFiAwareServiceRoleSubscriber",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/wifiawareservicerole-swift.property"
+      },
+      "wifiAwareVendorName": {
+        "doc": "Device’s Wi-Fi Aware vendor name.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddevice/wifiawarevendorname"
+      }
+    },
+    "DDDeviceEvent": {
+      "DDEventType": {
+        "doc": "Identifiers for the types of events that occur in the device discovery life cycle.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddeviceevent/eventtype-swift.enum"
+      },
+      "device": {
+        "doc": "An object that describes a third-party media receiver.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddeviceevent/device"
+      },
+      "eventType": {
+        "doc": "A type for the event that describes the discovery status.",
+        "url": "https://developer.apple.com/documentation/devicediscoveryextension/dddeviceevent/eventtype-swift.property"
+      }
+    }
+  }
+}

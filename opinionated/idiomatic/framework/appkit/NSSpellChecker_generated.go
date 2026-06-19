@@ -103,12 +103,12 @@ func (x *SpellChecker) CheckStringRangeTypesOptionsInSpellDocumentWithTagOrthogr
 // Requests that the string be checked in the background.
 //
 // RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler calls the underlying RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler.
-func (x *SpellChecker) RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler(stringToCheck string, range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, completionHandler objc.Block) int {
+func (x *SpellChecker) RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler(stringToCheck string, range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, completionHandler func(int, *foundation.NSArray[*foundation.NSTextCheckingResult], *foundation.NSOrthography, int)) int {
 	return x.inner.RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler(foundation.NSStringStringWithUTF8String(stringToCheck), range_, checkingTypes, options, tag, completionHandler)
 }
 
 // RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler calls the underlying RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler.
-func (x *SpellChecker) RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler(selectedRange foundation.NSRange, stringToCheck string, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, completionHandler objc.Block) int {
+func (x *SpellChecker) RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler(selectedRange foundation.NSRange, stringToCheck string, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, completionHandler func(int, *foundation.NSArray[*foundation.NSTextCheckingResult])) int {
 	return x.inner.RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler(selectedRange, foundation.NSStringStringWithUTF8String(stringToCheck), checkingTypes, options, tag, completionHandler)
 }
 
@@ -421,8 +421,8 @@ type SpellCheckerable interface {
 	CountWordsInStringLanguage(stringToCount string, language string) int
 	CheckGrammarOfStringStartingAtLanguageWrapInSpellDocumentWithTagDetails(stringToCheck string, startingOffset int, language string, wrapFlag bool, tag int, details *foundation.NSArray[objc.ID]) foundation.NSRange
 	CheckStringRangeTypesOptionsInSpellDocumentWithTagOrthographyWordCount(stringToCheck string, range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, orthography *foundation.NSOrthography, wordCount *int64) *foundation.NSArray[*foundation.NSTextCheckingResult]
-	RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler(stringToCheck string, range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, completionHandler objc.Block) int
-	RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler(selectedRange foundation.NSRange, stringToCheck string, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, completionHandler objc.Block) int
+	RequestCheckingOfStringRangeTypesOptionsInSpellDocumentWithTagCompletionHandler(stringToCheck string, range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, completionHandler func(int, *foundation.NSArray[*foundation.NSTextCheckingResult], *foundation.NSOrthography, int)) int
+	RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler(selectedRange foundation.NSRange, stringToCheck string, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], tag int, completionHandler func(int, *foundation.NSArray[*foundation.NSTextCheckingResult])) int
 	MenuForResultStringOptionsAtLocationInView(result *foundation.NSTextCheckingResult, checkedString string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], location corefoundation.CGPoint, view *raw.NSView) *Menu
 	UserQuotesArrayForLanguage(language string) *foundation.NSArray[*foundation.NSString]
 	UpdateSpellingPanelWithMisspelledWord(word string)

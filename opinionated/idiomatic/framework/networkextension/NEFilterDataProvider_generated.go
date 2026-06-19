@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// The principal class for a filter data provider extension.
+//
 // NEFilterDataProvider wraps [raw.NEFilterDataProvider] with a fluent Go API.
 type NEFilterDataProvider struct {
 	inner *raw.NEFilterDataProvider
@@ -39,7 +41,7 @@ func NewNEFilterDataProvider() *NEFilterDataProvider {
 	return &NEFilterDataProvider{inner: raw.NEFilterDataProviderFromID(_id)}
 }
 
-// @method handleNewFlow: @discussion This function is called by the framework when a filtering decision needs to be made about a new network data flow. Subclasses must override this method to implement the steps necessary to match the flow against some locally stored rules and return an appropriate verdict. @param flow An NEFilterFlow object containing details about the new flow. @return An NEFilterNewFlowVerdict object containing the verdict for the new flow.
+// Make a filtering decision for a newly-created flow of network content.
 //
 // HandleNewFlow calls the underlying HandleNewFlow.
 func (x *NEFilterDataProvider) HandleNewFlow(flow *raw.NEFilterFlow) *NEFilterNewFlowVerdict {
@@ -50,7 +52,7 @@ func (x *NEFilterDataProvider) HandleNewFlow(flow *raw.NEFilterFlow) *NEFilterNe
 	return &NEFilterNewFlowVerdict{inner: _r}
 }
 
-// @method handleInboundDataFromFlow:readBytesStartOffset:readBytes: @discussion This function is called by the framework when a filtering decision needs to be made about some inbound data that the filter previously requested access to via the NEFilterFlowDataVerdict or the NEFilterNewFlowVerdict. Subclasses must override this method. @param flow The NEFilterFlow from which the data was read. @param offset The offset in bytes from the start of the flow's inbound data at which readBytes begins. @param readBytes The data that was read.  For non-UDP/TCP flows, since data may optionally include the IP header, readBytes includes a 4-bytes NEFilterDataAttribute field preceding the user data.  Handler must examine the NEFilterDataAttribute field and handle the data accordingly. @return An NEFilterFlowDataVerdict containing the verdict for the flow.
+// Make a filtering decision about a chunk of inbound data.
 //
 // HandleInboundDataFromFlowReadBytesStartOffsetReadBytes calls the underlying HandleInboundDataFromFlowReadBytesStartOffsetReadBytes.
 func (x *NEFilterDataProvider) HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow *raw.NEFilterFlow, offset uint, readBytes *foundation.NSData) *NEFilterDataVerdict {
@@ -61,7 +63,7 @@ func (x *NEFilterDataProvider) HandleInboundDataFromFlowReadBytesStartOffsetRead
 	return &NEFilterDataVerdict{inner: _r}
 }
 
-// @method handleOutboundDataFromFlow:readBytesStartOffset:readBytes: @discussion This function is called by the framework when a filtering decision needs to be made about some outbound data that the filter previously requested access to via the NEFilterFlowDataVerdict or the NEFilterNewFlowVerdict. Subclasses must override this method. @param flow The NEFilterFlow from which the data was read. @param offset The offset in bytes from the start of the flow's outbound data at which readBytes begins. @param readBytes The data that was read.  For non-UDP/TCP flows, since data may optionally include the IP header, readBytes includes a 4-bytes NEFilterDataAttribute field preceding the user data.  Handler must examine the NEFilterDataAttribute field and handle the data accordingly. @return An NEFilterFlowDataVerdict containing the verdict for the flow.
+// Make a filtering decision about a chunk of outbound data.
 //
 // HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes calls the underlying HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes.
 func (x *NEFilterDataProvider) HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow *raw.NEFilterFlow, offset uint, readBytes *foundation.NSData) *NEFilterDataVerdict {
@@ -72,7 +74,7 @@ func (x *NEFilterDataProvider) HandleOutboundDataFromFlowReadBytesStartOffsetRea
 	return &NEFilterDataVerdict{inner: _r}
 }
 
-// @method handleInboundDataCompleteForFlow: @discussion This function is called by the framework after all of the inbound data for a flow has been seen by the filter. Subclasses must override this method to return an appropriate pass/block result. @param flow The flow @return The final NEFilterFlowDataVerdict verdict for the flow.
+// Make a filtering decision after seeing all of the inbound data for a flow.
 //
 // HandleInboundDataCompleteForFlow calls the underlying HandleInboundDataCompleteForFlow.
 func (x *NEFilterDataProvider) HandleInboundDataCompleteForFlow(flow *raw.NEFilterFlow) *NEFilterDataVerdict {
@@ -83,7 +85,7 @@ func (x *NEFilterDataProvider) HandleInboundDataCompleteForFlow(flow *raw.NEFilt
 	return &NEFilterDataVerdict{inner: _r}
 }
 
-// @method handleOutboundDataCompleteForFlow: @discussion This function is called by the framework after all of the outbound data for a flow has been seen by the filter. Subclasses must override this method to return an appropriate pass/block result. @param flow The flow @return The final NEFilterFlowDataVerdict verdict for the flow.
+// Make a filtering decision after seeing all of the outbound data for a flow.
 //
 // HandleOutboundDataCompleteForFlow calls the underlying HandleOutboundDataCompleteForFlow.
 func (x *NEFilterDataProvider) HandleOutboundDataCompleteForFlow(flow *raw.NEFilterFlow) *NEFilterDataVerdict {
@@ -94,7 +96,7 @@ func (x *NEFilterDataProvider) HandleOutboundDataCompleteForFlow(flow *raw.NEFil
 	return &NEFilterDataVerdict{inner: _r}
 }
 
-// @method applyFilterRules:defaultAction:withCompletionHandler: @discussion The provider calls this function to apply the current set of filtering rules associated with the provider and also change the default filtering action. @param settings A NEFilterSettings object containing the filter settings to apply to the system. Pass nil to revert to the default settings, which are an empty list of rules and a default action of NEFilterActionFilterData. @param completionHandler A block that will be executed when the settings have been applied to the system. If an error occurs then the error parameter will be non-nil.
+// Applies a set of filtering rules associated with the provider and changes the default filtering action.
 //
 // ApplySettings blocks until the operation completes or ctx is cancelled.
 func (x *NEFilterDataProvider) ApplySettings(ctx context.Context, settings *raw.NEFilterSettings) error {
@@ -114,14 +116,14 @@ func (x *NEFilterDataProvider) ApplySettings(ctx context.Context, settings *raw.
 	}
 }
 
-// @method resumeFlow:withVerdict: @discussion This function is called by the provider to resume a flow that was previously paused by the provider returning a pause verdict. @param flow The flow to resume @param verdict The next NEFilterDataVerdict for the flow. This verdict is used as the verdict corresponding to the flow handler callback (handleNewFlow:, handleInboundDataFromFlow:, etc.) that returned the pause verdict that paused the flow. This must be either a NEFilterDataVerdict or a NEFilterNewFlowVerdict. It is invalid to resume a flow that is not paused.
+// Resumes a previously-paused flow.
 //
 // ResumeFlowWithVerdict calls the underlying ResumeFlowWithVerdict.
 func (x *NEFilterDataProvider) ResumeFlowWithVerdict(flow *raw.NEFilterFlow, verdict *raw.NEFilterVerdict) {
 	x.inner.ResumeFlowWithVerdict(flow, verdict)
 }
 
-// @method updateFlow:withVerdict:forDirection: @discussion This function is called by the provider to update the verdict for a flow outside the context of any NEFilterDataProvider callback. @param flow The NEFilterSocketFlow to update the verdict for. @param verdict The NEFilterDataVerdict. Must be a +[NEFilterDataVerdict allowVerdict], a +[NEFilterDataVerdict dropVerdict], or a +[NEFilterDataVerdict dataVerdictWithPassBytes:peekBytes:]. @param direction The direction to which the verdict applies. Pass NETrafficDirectionAny to update the verdict for both the inbound and outbound directions. This parameter is ignored if the verdict is +[NEFilterDataVerdict dropVerdict].
+// Updates the verdict for a flow outside the context of any filter data provider callback.
 //
 // UpdateFlowUsingVerdictForDirection calls the underlying UpdateFlowUsingVerdictForDirection.
 func (x *NEFilterDataProvider) UpdateFlowUsingVerdictForDirection(flow *raw.NEFilterSocketFlow, verdict *raw.NEFilterDataVerdict, direction NETrafficDirection) {

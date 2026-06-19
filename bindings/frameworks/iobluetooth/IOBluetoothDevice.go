@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance of IOBluetoothDevice represents a single remote Bluetooth device.
+//
 // Apple documentation: https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice
 type IOBluetoothDevice struct {
 	IOBluetoothObject
@@ -104,6 +106,7 @@ func IOBluetoothDeviceFromID(id objc.ID) *IOBluetoothDevice {
 	return o
 }
 
+// Allows a client to register for device connect notifications for any connection.
 func IOBluetoothDeviceRegisterForConnectNotificationsSelector(observer objc.ID, inSelector objc.SEL) *IOBluetoothUserNotification {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDevice), _iOBluetoothDeviceSelRegisterForConnectNotificationsSelector, observer, inSelector)
 	if _ret != 0 {
@@ -112,6 +115,7 @@ func IOBluetoothDeviceRegisterForConnectNotificationsSelector(observer objc.ID, 
 	return IOBluetoothUserNotificationFromID(_ret)
 }
 
+// Allows a client to register for device disconnect notification.
 func (o *IOBluetoothDevice) RegisterForDisconnectNotificationSelector(observer objc.ID, inSelector objc.SEL) *IOBluetoothUserNotification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelRegisterForDisconnectNotificationSelector, observer, inSelector)
 	if _ret != 0 {
@@ -120,6 +124,7 @@ func (o *IOBluetoothDevice) RegisterForDisconnectNotificationSelector(observer o
 	return IOBluetoothUserNotificationFromID(_ret)
 }
 
+// Returns the IOBluetoothDevice object for the given BluetoothDeviceAddress
 func IOBluetoothDeviceDeviceWithAddress(address *BluetoothDeviceAddress) *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDevice), _iOBluetoothDeviceSelDeviceWithAddress, address)
 	if _ret != 0 {
@@ -136,6 +141,7 @@ func IOBluetoothDeviceWithAddress(address *BluetoothDeviceAddress) *IOBluetoothD
 	return IOBluetoothDeviceFromID(_ret)
 }
 
+// Returns the IOBluetoothDevice object for the given BluetoothDeviceAddress
 func IOBluetoothDeviceDeviceWithAddressString(address *foundation.NSString) *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDevice), _iOBluetoothDeviceSelDeviceWithAddressString, address.Ptr())
 	if _ret != 0 {
@@ -144,6 +150,7 @@ func IOBluetoothDeviceDeviceWithAddressString(address *foundation.NSString) *IOB
 	return IOBluetoothDeviceFromID(_ret)
 }
 
+// Method call to convert an IOBluetoothDeviceRef into an IOBluetoothDevice *.
 func IOBluetoothDeviceWithDeviceRef(deviceRef unsafe.Pointer) *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDevice), _iOBluetoothDeviceSelWithDeviceRef, deviceRef)
 	if _ret != 0 {
@@ -152,66 +159,79 @@ func IOBluetoothDeviceWithDeviceRef(deviceRef unsafe.Pointer) *IOBluetoothDevice
 	return IOBluetoothDeviceFromID(_ret)
 }
 
+// Returns an IOBluetoothDeviceRef representation of the target IOBluetoothDevice object.
 func (o *IOBluetoothDevice) GetDeviceRef() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOBluetoothDeviceSelGetDeviceRef)
 	return _ret
 }
 
+// Opens a new L2CAP channel to the target device. Returns only after the channel is opened.
 func (o *IOBluetoothDevice) OpenL2CAPChannelSyncWithPSMDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelDelegate objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelOpenL2CAPChannelSyncWithPSMDelegate, newChannel.Ptr(), psm, channelDelegate)
 	return _ret
 }
 
+// Opens a new L2CAP channel to the target device. Returns immediately after starting the opening process.
 func (o *IOBluetoothDevice) OpenL2CAPChannelAsyncWithPSMDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelDelegate objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelOpenL2CAPChannelAsyncWithPSMDelegate, newChannel.Ptr(), psm, channelDelegate)
 	return _ret
 }
 
+// Opens a new L2CAP channel to the target device. Returns immedialty after starting the opening process.
 func (o *IOBluetoothDevice) OpenL2CAPChannelFindExistingNewChannel(psm uint16, findExisting bool, newChannel *IOBluetoothL2CAPChannel) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelOpenL2CAPChannelFindExistingNewChannel, psm, findExisting, newChannel.Ptr())
 	return _ret
 }
 
+// Send an echo request over the L2CAP connection to a remote device.
 func (o *IOBluetoothDevice) SendL2CAPEchoRequestLength(data unsafe.Pointer, length uint16) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelSendL2CAPEchoRequestLength, data, length)
 	return _ret
 }
 
+// Opens a new RFCOMM channel to the target device. Returns only once the channel is open or failed to open.
 func (o *IOBluetoothDevice) OpenRFCOMMChannelChannel(channelID uint8, rfcommChannel *IOBluetoothRFCOMMChannel) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelOpenRFCOMMChannelChannel, channelID, rfcommChannel.Ptr())
 	return _ret
 }
 
+// Opens a new RFCOMM channel to the target device. Returns only once the channel is open or failed to open.
 func (o *IOBluetoothDevice) OpenRFCOMMChannelSyncWithChannelIDDelegate(rfcommChannel *IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelOpenRFCOMMChannelSyncWithChannelIDDelegate, rfcommChannel.Ptr(), channelID, channelDelegate)
 	return _ret
 }
 
+// Opens a new RFCOMM channel to the target device. Returns immediately.
 func (o *IOBluetoothDevice) OpenRFCOMMChannelAsyncWithChannelIDDelegate(rfcommChannel *IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelOpenRFCOMMChannelAsyncWithChannelIDDelegate, rfcommChannel.Ptr(), channelID, channelDelegate)
 	return _ret
 }
 
+// Gets the full class of device value for the remote device.
 func (o *IOBluetoothDevice) GetClassOfDevice() uint32 {
 	_ret := objc.Send[uint32](o.Ptr(), _iOBluetoothDeviceSelGetClassOfDevice)
 	return _ret
 }
 
+// Get the major service class of the device.
 func (o *IOBluetoothDevice) GetServiceClassMajor() uint32 {
 	_ret := objc.Send[uint32](o.Ptr(), _iOBluetoothDeviceSelGetServiceClassMajor)
 	return _ret
 }
 
+// Get the major device class of the device.
 func (o *IOBluetoothDevice) GetDeviceClassMajor() uint32 {
 	_ret := objc.Send[uint32](o.Ptr(), _iOBluetoothDeviceSelGetDeviceClassMajor)
 	return _ret
 }
 
+// Get the minor service class of the device.
 func (o *IOBluetoothDevice) GetDeviceClassMinor() uint32 {
 	_ret := objc.Send[uint32](o.Ptr(), _iOBluetoothDeviceSelGetDeviceClassMinor)
 	return _ret
 }
 
+// Get the human readable name of the remote device.
 func (o *IOBluetoothDevice) GetName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelGetName)
 	if _ret != 0 {
@@ -220,6 +240,7 @@ func (o *IOBluetoothDevice) GetName() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Get the human readable name of the remote device. If the name is not present, it will return a string containing the device’s address.
 func (o *IOBluetoothDevice) GetNameOrAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelGetNameOrAddress)
 	if _ret != 0 {
@@ -228,6 +249,7 @@ func (o *IOBluetoothDevice) GetNameOrAddress() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Get the date/time of the last successful remote name request.
 func (o *IOBluetoothDevice) GetLastNameUpdate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelGetLastNameUpdate)
 	if _ret != 0 {
@@ -236,11 +258,13 @@ func (o *IOBluetoothDevice) GetLastNameUpdate() *foundation.NSDate {
 	return foundation.NSDateFromID(_ret)
 }
 
+// Get the Bluetooth device address for the target device.
 func (o *IOBluetoothDevice) GetAddress() *BluetoothDeviceAddress {
 	_ret := objc.Send[*BluetoothDeviceAddress](o.Ptr(), _iOBluetoothDeviceSelGetAddress)
 	return _ret
 }
 
+// Get a string representation of the Bluetooth device address for the target device. The format of the string is the same as returned by IOBluetoothNSStringFromDeviceAddress().
 func (o *IOBluetoothDevice) GetAddressString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelGetAddressString)
 	if _ret != 0 {
@@ -249,26 +273,31 @@ func (o *IOBluetoothDevice) GetAddressString() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Get the value of the page scan repetition mode for the device.
 func (o *IOBluetoothDevice) GetPageScanRepetitionMode() uint8 {
 	_ret := objc.Send[uint8](o.Ptr(), _iOBluetoothDeviceSelGetPageScanRepetitionMode)
 	return _ret
 }
 
+// Get the value of the page scan period mode for the device.
 func (o *IOBluetoothDevice) GetPageScanPeriodMode() uint8 {
 	_ret := objc.Send[uint8](o.Ptr(), _iOBluetoothDeviceSelGetPageScanPeriodMode)
 	return _ret
 }
 
+// Get the page scan mode for the device.
 func (o *IOBluetoothDevice) GetPageScanMode() uint8 {
 	_ret := objc.Send[uint8](o.Ptr(), _iOBluetoothDeviceSelGetPageScanMode)
 	return _ret
 }
 
+// Get the clock offset value of the device.
 func (o *IOBluetoothDevice) GetClockOffset() uint16 {
 	_ret := objc.Send[uint16](o.Ptr(), _iOBluetoothDeviceSelGetClockOffset)
 	return _ret
 }
 
+// Get the date/time of the last time the device was returned during an inquiry.
 func (o *IOBluetoothDevice) GetLastInquiryUpdate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelGetLastInquiryUpdate)
 	if _ret != 0 {
@@ -277,92 +306,111 @@ func (o *IOBluetoothDevice) GetLastInquiryUpdate() *foundation.NSDate {
 	return foundation.NSDateFromID(_ret)
 }
 
+// Get the RSSI device (if connected), above or below the golden range. If the RSSI is within the golden range, a value of 0 is returned. For the actual RSSI value, use getRawRSSI. For more information, see the Bluetooth 4.0 Core Specification.
 func (o *IOBluetoothDevice) RSSI() int8 {
 	_ret := objc.Send[int8](o.Ptr(), _iOBluetoothDeviceSelRSSI)
 	return _ret
 }
 
+// Get the raw RSSI device (if connected).
 func (o *IOBluetoothDevice) RawRSSI() int8 {
 	_ret := objc.Send[int8](o.Ptr(), _iOBluetoothDeviceSelRawRSSI)
 	return _ret
 }
 
+// Indicates whether a baseband connection to the device exists.
 func (o *IOBluetoothDevice) IsConnected() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothDeviceSelIsConnected)
 	return _ret
 }
 
+// Create a baseband connection to the device.
 func (o *IOBluetoothDevice) OpenConnection() int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelOpenConnection)
 	return _ret
 }
 
+// Create a baseband connection to the device.
 func (o *IOBluetoothDevice) OpenConnection2(target objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelOpenConnection, target)
 	return _ret
 }
 
-// @property	openConnection:withPageTimeout:authenticationRequired: @abstract	Create a baseband connection to the device. @discussion	If a target is specified, the open connection call is asynchronous and on completion of the CREATE_CONNECTION command, the method -connectionComplete:status: will be called on the specified target. If no target is specified, the call is synchronous and will not return until the connection is open or the CREATE_CONNECTION call has failed. NOTE: This method is only available in Mac OS X 10.2.7 (Bluetooth v1.3) or later. As of Mac OS X 10.7, this method will no longer mask out "Connection Exists" 'errors' with a success result code; your code must account for the cases where the baseband connection is already open. @param		target The target to message when the create connection call is complete @param		pageTimeoutValue The page timeout value to use for this call @param		authenticationRequired BOOL value to indicate whether authentication should be required for the connection @result		Returns kIOReturnSuccess if the connection was successfully created (or if asynchronous, if the CREATE_CONNECTION command was successfully issued).
+// Create a baseband connection to the device.
 func (o *IOBluetoothDevice) OpenConnectionWithPageTimeoutAuthenticationRequired(target objc.ID, pageTimeoutValue uint16, authenticationRequired bool) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelOpenConnectionWithPageTimeoutAuthenticationRequired, target, pageTimeoutValue, authenticationRequired)
 	return _ret
 }
 
+// Close down the baseband connection to the device.
 func (o *IOBluetoothDevice) CloseConnection() int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelCloseConnection)
 	return _ret
 }
 
+// Issues a remote name request to the target device.
 func (o *IOBluetoothDevice) RemoteNameRequest(target objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelRemoteNameRequest, target)
 	return _ret
 }
 
+// Issues a remote name request to the target device.
 func (o *IOBluetoothDevice) RemoteNameRequestWithPageTimeout(target objc.ID, pageTimeoutValue uint16) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelRemoteNameRequestWithPageTimeout, target, pageTimeoutValue)
 	return _ret
 }
 
+// Requests that the existing baseband connection be authenticated.
 func (o *IOBluetoothDevice) RequestAuthentication() int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelRequestAuthentication)
 	return _ret
 }
 
+// Get the connection handle for the baseband connection.
 func (o *IOBluetoothDevice) GetConnectionHandle() uint16 {
 	_ret := objc.Send[uint16](o.Ptr(), _iOBluetoothDeviceSelGetConnectionHandle)
 	return _ret
 }
 
+// Returns TRUE if the device connection was generated by the remote host.
 func (o *IOBluetoothDevice) IsIncoming() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothDeviceSelIsIncoming)
 	return _ret
 }
 
+// Get the link type for the baseband connection.
 func (o *IOBluetoothDevice) GetLinkType() uint8 {
 	_ret := objc.Send[uint8](o.Ptr(), _iOBluetoothDeviceSelGetLinkType)
 	return _ret
 }
 
+// Get the encryption mode for the baseband connection.
 func (o *IOBluetoothDevice) GetEncryptionMode() uint8 {
 	_ret := objc.Send[uint8](o.Ptr(), _iOBluetoothDeviceSelGetEncryptionMode)
 	return _ret
 }
 
+// Performs an SDP query on the target device.
 func (o *IOBluetoothDevice) PerformSDPQuery(target objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelPerformSDPQuery, target)
 	return _ret
 }
 
+// Performs an SDP query on the target device with the specified service UUIDs.
 func (o *IOBluetoothDevice) PerformSDPQueryUuids(target objc.ID, uuidArray *foundation.NSArray[objc.ID]) int {
-	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelPerformSDPQueryUuids, target, uuidArray)
+	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelPerformSDPQueryUuids, target, uuidArray.Ptr())
 	return _ret
 }
 
 func (o *IOBluetoothDevice) GetServices() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iOBluetoothDeviceSelGetServices)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelGetServices)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Get the date/time of the last SDP query.
 func (o *IOBluetoothDevice) GetLastServicesUpdate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelGetLastServicesUpdate)
 	if _ret != 0 {
@@ -371,6 +419,7 @@ func (o *IOBluetoothDevice) GetLastServicesUpdate() *foundation.NSDate {
 	return foundation.NSDateFromID(_ret)
 }
 
+// Search for a service record containing the given UUID.
 func (o *IOBluetoothDevice) GetServiceRecordForUUID(sdpUUID *IOBluetoothSDPUUID) *IOBluetoothSDPServiceRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelGetServiceRecordForUUID, sdpUUID.Ptr())
 	if _ret != 0 {
@@ -379,31 +428,43 @@ func (o *IOBluetoothDevice) GetServiceRecordForUUID(sdpUUID *IOBluetoothSDPUUID)
 	return IOBluetoothSDPServiceRecordFromID(_ret)
 }
 
+// Gets an array of the user’s favorite devices.
 func IOBluetoothDeviceFavoriteDevices() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsIOBluetoothDevice), _iOBluetoothDeviceSelFavoriteDevices)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDevice), _iOBluetoothDeviceSelFavoriteDevices)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Reports whether the target device is a favorite for the user.
 func (o *IOBluetoothDevice) IsFavorite() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothDeviceSelIsFavorite)
 	return _ret
 }
 
+// Adds the target device to the user’s favorite devices list.
 func (o *IOBluetoothDevice) AddToFavorites() int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelAddToFavorites)
 	return _ret
 }
 
+// Removes the target device from the user’s favorite devices list.
 func (o *IOBluetoothDevice) RemoveFromFavorites() int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelRemoveFromFavorites)
 	return _ret
 }
 
+// Gets an array of recently used Bluetooth devices.
 func IOBluetoothDeviceRecentDevices(numDevices uint) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsIOBluetoothDevice), _iOBluetoothDeviceSelRecentDevices, numDevices)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDevice), _iOBluetoothDeviceSelRecentDevices, numDevices)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Returns the date/time of the most recent access of the target device.
 func (o *IOBluetoothDevice) RecentAccessDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelRecentAccessDate)
 	if _ret != 0 {
@@ -412,28 +473,36 @@ func (o *IOBluetoothDevice) RecentAccessDate() *foundation.NSDate {
 	return foundation.NSDateFromID(_ret)
 }
 
+// Gets an array of all of the paired devices on the system.
 func IOBluetoothDevicePairedDevices() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsIOBluetoothDevice), _iOBluetoothDeviceSelPairedDevices)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDevice), _iOBluetoothDeviceSelPairedDevices)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Returns whether the target device is paired.
 func (o *IOBluetoothDevice) IsPaired() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothDeviceSelIsPaired)
 	return _ret
 }
 
+// Sets the connection supervision timeout.
 func (o *IOBluetoothDevice) SetSupervisionTimeout(timeout uint16) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelSetSupervisionTimeout, timeout)
 	return _ret
 }
 
+// Opens a new L2CAP channel to the target device. Returns only after the channel is opened.
 func (o *IOBluetoothDevice) OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelConfiguration *foundation.NSDictionary[objc.ID, objc.ID], channelDelegate objc.ID) int {
-	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelOpenL2CAPChannelSyncWithPSMWithConfigurationDelegate, newChannel.Ptr(), psm, channelConfiguration, channelDelegate)
+	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelOpenL2CAPChannelSyncWithPSMWithConfigurationDelegate, newChannel.Ptr(), psm, channelConfiguration.Ptr(), channelDelegate)
 	return _ret
 }
 
+// Opens a new L2CAP channel to the target device. Returns immediately after starting the opening process.
 func (o *IOBluetoothDevice) OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelConfiguration *foundation.NSDictionary[objc.ID, objc.ID], channelDelegate objc.ID) int {
-	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelOpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate, newChannel.Ptr(), psm, channelConfiguration, channelDelegate)
+	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceSelOpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate, newChannel.Ptr(), psm, channelConfiguration.Ptr(), channelDelegate)
 	return _ret
 }
 
@@ -495,8 +564,11 @@ func (o *IOBluetoothDevice) ConnectionHandle() uint16 {
 }
 
 func (o *IOBluetoothDevice) Services() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iOBluetoothDeviceSelServices)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceSelServices)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @method		handsFreeAudioGatewayDriverID @abstract		Return the hands free gateway driver ID @discussion	Returns the hands free gateway driver ID which is unique based on BT Address. @result		The hands free gateway driver ID

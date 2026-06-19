@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An item used in a group with a custom layout arrangement.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionlayoutgroupcustomitem
 type NSCollectionLayoutGroupCustomItem struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func NSCollectionLayoutGroupCustomItemFromID(id objc.ID) *NSCollectionLayoutGrou
 	return o
 }
 
+// Creates a custom item with the specified frame.
 func NSCollectionLayoutGroupCustomItemCustomItemWithFrame(frame corefoundation.CGRect) *NSCollectionLayoutGroupCustomItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroupCustomItem), _nSCollectionLayoutGroupCustomItemSelCustomItemWithFrame, frame)
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func NSCollectionLayoutGroupCustomItemCustomItemWithFrame(frame corefoundation.C
 	return NSCollectionLayoutGroupCustomItemFromID(_ret)
 }
 
+// Creates a custom item with the specified frame and vertical stacking order in relation to other items in the group.
 func NSCollectionLayoutGroupCustomItemCustomItemWithFrameZIndex(frame corefoundation.CGRect, zIndex int) *NSCollectionLayoutGroupCustomItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroupCustomItem), _nSCollectionLayoutGroupCustomItemSelCustomItemWithFrameZIndex, frame, zIndex)
 	if _ret != 0 {

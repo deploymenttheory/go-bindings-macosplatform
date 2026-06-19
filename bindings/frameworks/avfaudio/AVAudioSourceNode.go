@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that supplies audio data.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiosourcenode
 type AVAudioSourceNode struct {
 	AVAudioNode
@@ -31,7 +33,7 @@ func AVAudioSourceNodeFromID(id objc.ID) *AVAudioSourceNode {
 	return o
 }
 
-// @method initWithRenderBlock: @abstract Create a node with a render block. @param block The block to supply audio data to the output. @discussion The block can be called on realtime or non-realtime threads depending on the engine’s operating mode and it is the client's responsibility to handle it in a thread-safe manner. The audio format for the output bus will be set from the connection format when connecting to another node. The audio format for the block will be set to the node's output format. If node is reconnected with a different output format, the audio format for the block will also change.
+// Creates an audio source node with a block that supplies audio data.
 func (o *AVAudioSourceNode) InitWithRenderBlock(block func(*bool, *coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) *AVAudioSourceNode {
 	var __block_block objc.Block
 	if block != nil {
@@ -47,7 +49,7 @@ func (o *AVAudioSourceNode) InitWithRenderBlock(block func(*bool, *coreaudiotype
 	return AVAudioSourceNodeFromID(_ret)
 }
 
-// @method initWithFormat:renderBlock: @abstract Create a node with a render block. @param format The format of the PCM audio data that will be supplied by the block. @param block The block to supply audio data to the output. @discussion The block can be called on realtime or non-realtime threads depending on the engine’s operating mode and it is the client's responsibility to handle it in a thread-safe manner. The audio format for the output bus will be set from the connection format when connecting to another node. AVAudioSourceNode supports different audio formats for the block and output, but only Linear PCM conversions are supported (sample rate, bit depth, interleaving).
+// Creates an audio source node with the audio format and a block that supplies audio data.
 func (o *AVAudioSourceNode) InitWithFormatRenderBlock(format *AVAudioFormat, block func(*bool, *coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) *AVAudioSourceNode {
 	var __block_block objc.Block
 	if block != nil {

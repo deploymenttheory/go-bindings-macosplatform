@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A notification dispatch mechanism that enables the broadcast of notifications across task boundaries.
+//
 // DistributedNotificationCenter wraps [raw.NSDistributedNotificationCenter] with a fluent Go API.
 type DistributedNotificationCenter struct {
 	inner *raw.NSDistributedNotificationCenter

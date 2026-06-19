@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A convenient interface to the garbage collection system.
+//
 // GarbageCollector wraps [raw.NSGarbageCollector] with a fluent Go API.
 type GarbageCollector struct {
 	inner *raw.NSGarbageCollector
@@ -42,46 +44,64 @@ func (x *GarbageCollector) WithScriptingProperties(scriptingProperties *raw.NSDi
 	return x
 }
 
+// Returns a Boolean value that indicates whether a collection is currently in progress.
+//
 // IsCollecting calls the underlying IsCollecting.
 func (x *GarbageCollector) IsCollecting() bool {
 	return x.inner.IsCollecting()
 }
 
+// Temporarily disables collections.
+//
 // Disable calls the underlying Disable.
 func (x *GarbageCollector) Disable() {
 	x.inner.Disable()
 }
 
+// Enables collection after collection has been disabled.
+//
 // Enable calls the underlying Enable.
 func (x *GarbageCollector) Enable() {
 	x.inner.Enable()
 }
 
+// Returns a Boolean value that indicates whether garbage collection is currently enabled for the current process.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *GarbageCollector) IsEnabled() bool {
 	return x.inner.IsEnabled()
 }
 
+// Tells the receiver to collect if memory consumption thresholds have been exceeded.
+//
 // CollectIfNeeded calls the underlying CollectIfNeeded.
 func (x *GarbageCollector) CollectIfNeeded() {
 	x.inner.CollectIfNeeded()
 }
 
+// Tells the receiver to collect iteratively.
+//
 // CollectExhaustively calls the underlying CollectExhaustively.
 func (x *GarbageCollector) CollectExhaustively() {
 	x.inner.CollectExhaustively()
 }
 
+// Specifies that a given pointer will not be collected.
+//
 // DisableCollectorForPointer calls the underlying DisableCollectorForPointer.
 func (x *GarbageCollector) DisableCollectorForPointer(ptr unsafe.Pointer) {
 	x.inner.DisableCollectorForPointer(ptr)
 }
 
+// Specifies that a given pointer may be collected.
+//
 // EnableCollectorForPointer calls the underlying EnableCollectorForPointer.
 func (x *GarbageCollector) EnableCollectorForPointer(ptr unsafe.Pointer) {
 	x.inner.EnableCollectorForPointer(ptr)
 }
 
+// Returns a zone of unscanned memory.
+//
 // Zone calls the underlying Zone.
 func (x *GarbageCollector) Zone() unsafe.Pointer {
 	return x.inner.Zone()

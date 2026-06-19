@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that convolves an image with a Gaussian pyramid.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagegaussianpyramid
 type MPSImageGaussianPyramid struct {
 	mpsimage.MPSImagePyramid

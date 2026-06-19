@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A piece of data that can be stored inside the HealthKit store.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkobject
 type HKObject struct {
 	foundation.NSObject
@@ -70,6 +72,9 @@ func (o *HKObject) Device() *HKDevice {
 
 // @property      metadata @abstract      Extra information describing properties of the receiver. @discussion    Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
 func (o *HKObject) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _hKObjectSelMetadata)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKObjectSelMetadata)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }

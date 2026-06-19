@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object space to manipulate and track changes to managed objects.
+//
 // ManagedObjectContext wraps [raw.NSManagedObjectContext] with a fluent Go API.
 type ManagedObjectContext struct {
 	inner *raw.NSManagedObjectContext
@@ -38,6 +40,8 @@ func NewManagedObjectContext() *ManagedObjectContext {
 	return &ManagedObjectContext{inner: raw.NSManagedObjectContextFromID(_id)}
 }
 
+// Creates a context that uses the specified concurrency type.
+//
 // NewManagedObjectContextWithConcurrencyType creates a new [ManagedObjectContext].
 func NewManagedObjectContextWithConcurrencyType(ct NSManagedObjectContextConcurrencyType) *ManagedObjectContext {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObjectContext")), objc.RegisterName("alloc"))
@@ -45,72 +49,96 @@ func NewManagedObjectContextWithConcurrencyType(ct NSManagedObjectContextConcurr
 	return &ManagedObjectContext{inner: raw.NSManagedObjectContextFromID(_id)}
 }
 
+// The persistent store coordinator of the context.
+//
 // WithPersistentStoreCoordinator sets the persistentStoreCoordinator property and returns the receiver for chaining.
 func (x *ManagedObjectContext) WithPersistentStoreCoordinator(persistentStoreCoordinator *PersistentStoreCoordinator) *ManagedObjectContext {
 	x.inner.SetPersistentStoreCoordinator(persistentStoreCoordinator.Unwrap())
 	return x
 }
 
+// The parent of the context.
+//
 // WithParentContext sets the parentContext property and returns the receiver for chaining.
 func (x *ManagedObjectContext) WithParentContext(parentContext *ManagedObjectContext) *ManagedObjectContext {
 	x.inner.SetParentContext(parentContext.Unwrap())
 	return x
 }
 
+// The developer-provided name of the context.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *ManagedObjectContext) WithName(name string) *ManagedObjectContext {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// The object that provides undo support for the context.
+//
 // WithUndoManager sets the undoManager property and returns the receiver for chaining.
 func (x *ManagedObjectContext) WithUndoManager(undoManager *foundation.NSUndoManager) *ManagedObjectContext {
 	x.inner.SetUndoManager(undoManager)
 	return x
 }
 
+// A Boolean value that indicates whether the context propagates deletes at the end of the event in which a change was made.
+//
 // WithPropagatesDeletesAtEndOfEvent sets the propagatesDeletesAtEndOfEvent property and returns the receiver for chaining.
 func (x *ManagedObjectContext) WithPropagatesDeletesAtEndOfEvent(propagatesDeletesAtEndOfEvent bool) *ManagedObjectContext {
 	x.inner.SetPropagatesDeletesAtEndOfEvent(propagatesDeletesAtEndOfEvent)
 	return x
 }
 
+// A Boolean value that indicates whether the context keeps strong references to all registered managed objects.
+//
 // WithRetainsRegisteredObjects sets the retainsRegisteredObjects property and returns the receiver for chaining.
 func (x *ManagedObjectContext) WithRetainsRegisteredObjects(retainsRegisteredObjects bool) *ManagedObjectContext {
 	x.inner.SetRetainsRegisteredObjects(retainsRegisteredObjects)
 	return x
 }
 
+// A Boolean value that determines whether the context turns inaccessible faults into deleted objects.
+//
 // WithShouldDeleteInaccessibleFaults sets the shouldDeleteInaccessibleFaults property and returns the receiver for chaining.
 func (x *ManagedObjectContext) WithShouldDeleteInaccessibleFaults(shouldDeleteInaccessibleFaults bool) *ManagedObjectContext {
 	x.inner.SetShouldDeleteInaccessibleFaults(shouldDeleteInaccessibleFaults)
 	return x
 }
 
+// The maximum length of time that may have elapsed since the store previously fetched data before fulfilling a fault issues a new fetch.
+//
 // WithStalenessInterval sets the stalenessInterval property and returns the receiver for chaining.
 func (x *ManagedObjectContext) WithStalenessInterval(stalenessInterval float64) *ManagedObjectContext {
 	x.inner.SetStalenessInterval(stalenessInterval)
 	return x
 }
 
+// The merge policy of the context.
+//
 // WithMergePolicy sets the mergePolicy property and returns the receiver for chaining.
 func (x *ManagedObjectContext) WithMergePolicy(mergePolicy objc.ID) *ManagedObjectContext {
 	x.inner.SetMergePolicy(mergePolicy)
 	return x
 }
 
+// A Boolean value that indicates whether the context automatically merges changes saved to its persistent store coordinator or parent context.
+//
 // WithAutomaticallyMergesChangesFromParent sets the automaticallyMergesChangesFromParent property and returns the receiver for chaining.
 func (x *ManagedObjectContext) WithAutomaticallyMergesChangesFromParent(automaticallyMergesChangesFromParent bool) *ManagedObjectContext {
 	x.inner.SetAutomaticallyMergesChangesFromParent(automaticallyMergesChangesFromParent)
 	return x
 }
 
+// The author for the context that is used as an identifier in persistent history transactions.
+//
 // WithTransactionAuthor sets the transactionAuthor property and returns the receiver for chaining.
 func (x *ManagedObjectContext) WithTransactionAuthor(transactionAuthor string) *ManagedObjectContext {
 	x.inner.SetTransactionAuthor(foundation.NSStringStringWithUTF8String(transactionAuthor))
 	return x
 }
 
+// Asynchronously performs the specified closure on the context’s queue.
+//
 // PerformBlock blocks until the operation completes or ctx is cancelled.
 func (x *ManagedObjectContext) PerformBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -125,6 +153,8 @@ func (x *ManagedObjectContext) PerformBlock(ctx context.Context) error {
 	}
 }
 
+// Synchronously performs the specified closure on the context’s queue.
+//
 // PerformBlockAndWait blocks until the operation completes or ctx is cancelled.
 func (x *ManagedObjectContext) PerformBlockAndWait(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -139,6 +169,8 @@ func (x *ManagedObjectContext) PerformBlockAndWait(ctx context.Context) error {
 	}
 }
 
+// Returns an object that exists in the context.
+//
 // ObjectRegisteredForID calls the underlying ObjectRegisteredForID.
 func (x *ManagedObjectContext) ObjectRegisteredForID(objectID *raw.NSManagedObjectID) *ManagedObject {
 	_r := x.inner.ObjectRegisteredForID(objectID)
@@ -148,6 +180,8 @@ func (x *ManagedObjectContext) ObjectRegisteredForID(objectID *raw.NSManagedObje
 	return &ManagedObject{inner: _r}
 }
 
+// Returns either an existing object from the context or a fault that represents that object.
+//
 // ObjectWithID calls the underlying ObjectWithID.
 func (x *ManagedObjectContext) ObjectWithID(objectID *raw.NSManagedObjectID) *ManagedObject {
 	_r := x.inner.ObjectWithID(objectID)
@@ -157,6 +191,8 @@ func (x *ManagedObjectContext) ObjectWithID(objectID *raw.NSManagedObjectID) *Ma
 	return &ManagedObject{inner: _r}
 }
 
+// Returns an existing object from either the context or the persistent store.
+//
 // ExistingObjectWithIDError calls the underlying ExistingObjectWithIDError.
 func (x *ManagedObjectContext) ExistingObjectWithIDError(objectID *raw.NSManagedObjectID) (*ManagedObject, error) {
 	_r, _err := x.inner.ExistingObjectWithIDError(objectID)
@@ -169,16 +205,22 @@ func (x *ManagedObjectContext) ExistingObjectWithIDError(objectID *raw.NSManaged
 	return &ManagedObject{inner: _r}, nil
 }
 
+// Returns an array of objects that meet the criteria of the specified fetch request.
+//
 // ExecuteFetchRequestError calls the underlying ExecuteFetchRequestError.
 func (x *ManagedObjectContext) ExecuteFetchRequestError(request *raw.NSFetchRequest[objc.ID]) (*foundation.NSArray[objc.ID], error) {
 	return x.inner.ExecuteFetchRequestError(request)
 }
 
+// Returns the number of objects the specified request fetches when it executes.
+//
 // CountForFetchRequestError calls the underlying CountForFetchRequestError.
 func (x *ManagedObjectContext) CountForFetchRequestError(request *raw.NSFetchRequest[objc.ID]) (uint, error) {
 	return x.inner.CountForFetchRequestError(request)
 }
 
+// Passes a request to the persistent store without affecting the contents of the managed object context, and returns a persistent store result.
+//
 // ExecuteRequestError calls the underlying ExecuteRequestError.
 func (x *ManagedObjectContext) ExecuteRequestError(request *raw.NSPersistentStoreRequest) (*PersistentStoreResult, error) {
 	_r, _err := x.inner.ExecuteRequestError(request)
@@ -191,62 +233,86 @@ func (x *ManagedObjectContext) ExecuteRequestError(request *raw.NSPersistentStor
 	return &PersistentStoreResult{inner: _r}, nil
 }
 
+// Registers an object to be inserted in the context’s persistent store the next time changes are saved.
+//
 // InsertObject calls the underlying InsertObject.
 func (x *ManagedObjectContext) InsertObject(object *raw.NSManagedObject) {
 	x.inner.InsertObject(object)
 }
 
+// Specifies an object that should be removed from its persistent store when changes are committed.
+//
 // DeleteObject calls the underlying DeleteObject.
 func (x *ManagedObjectContext) DeleteObject(object *raw.NSManagedObject) {
 	x.inner.DeleteObject(object)
 }
 
+// Updates the persistent properties of a managed object to use the latest values from the persistent store.
+//
 // RefreshObjectMergeChanges calls the underlying RefreshObjectMergeChanges.
 func (x *ManagedObjectContext) RefreshObjectMergeChanges(object *raw.NSManagedObject, flag bool) {
 	x.inner.RefreshObjectMergeChanges(object, flag)
 }
 
+// Marks an object for conflict detection.
+//
 // DetectConflictsForObject calls the underlying DetectConflictsForObject.
 func (x *ManagedObjectContext) DetectConflictsForObject(object *raw.NSManagedObject) {
 	x.inner.DetectConflictsForObject(object)
 }
 
+// Forces the context to process changes to the object graph.
+//
 // ProcessPendingChanges calls the underlying ProcessPendingChanges.
 func (x *ManagedObjectContext) ProcessPendingChanges() {
 	x.inner.ProcessPendingChanges()
 }
 
+// Specifies the store in which a newly inserted object will be saved.
+//
 // AssignObjectToPersistentStore calls the underlying AssignObjectToPersistentStore.
 func (x *ManagedObjectContext) AssignObjectToPersistentStore(object objc.ID, store *raw.NSPersistentStore) {
 	x.inner.AssignObjectToPersistentStore(object, store)
 }
 
+// Sends an undo message to the context’s undo manager, asking it to reverse the latest uncommitted changes applied to objects in the object graph.
+//
 // Undo calls the underlying Undo.
 func (x *ManagedObjectContext) Undo() {
 	x.inner.Undo()
 }
 
+// Sends a redo message to the context’s undo manager, asking it to reverse the latest undo operation applied to objects in the object graph.
+//
 // Redo calls the underlying Redo.
 func (x *ManagedObjectContext) Redo() {
 	x.inner.Redo()
 }
 
+// Returns the context to its base state.
+//
 // Reset calls the underlying Reset.
 func (x *ManagedObjectContext) Reset() {
 	x.inner.Reset()
 }
 
+// Removes everything from the undo stack, discards all insertions and deletions, and restores updated objects to their last committed values.
+//
 // Rollback calls the underlying Rollback.
 func (x *ManagedObjectContext) Rollback() {
 	x.inner.Rollback()
 }
 
+// Attempts to commit unsaved changes to registered objects to the context’s parent store.
+//
 // Save returns any validation error.
 func (x *ManagedObjectContext) Save() error {
 	_, err := x.inner.Save()
 	return err
 }
 
+// Refreshes all of the registered managed objects in the context.
+//
 // RefreshAllObjects calls the underlying RefreshAllObjects.
 func (x *ManagedObjectContext) RefreshAllObjects() {
 	x.inner.RefreshAllObjects()
@@ -267,21 +333,29 @@ func (x *ManagedObjectContext) TryLock() bool {
 	return x.inner.TryLock()
 }
 
+// Creates a log of the inaccessible fault.
+//
 // ShouldHandleInaccessibleFaultForObjectIDTriggeredByProperty calls the underlying ShouldHandleInaccessibleFaultForObjectIDTriggeredByProperty.
 func (x *ManagedObjectContext) ShouldHandleInaccessibleFaultForObjectIDTriggeredByProperty(fault *raw.NSManagedObject, oid *raw.NSManagedObjectID, property *raw.NSPropertyDescription) bool {
 	return x.inner.ShouldHandleInaccessibleFaultForObjectIDTriggeredByProperty(fault, oid, property)
 }
 
+// Converts to permanent IDs the object IDs of the objects in a given array.
+//
 // ObtainPermanentIDsForObjectsError calls the underlying ObtainPermanentIDsForObjectsError.
 func (x *ManagedObjectContext) ObtainPermanentIDsForObjectsError(objects *foundation.NSArray[*raw.NSManagedObject]) (bool, error) {
 	return x.inner.ObtainPermanentIDsForObjectsError(objects)
 }
 
+// Merges the changes specified in a given notification.
+//
 // MergeChangesFromContextDidSaveNotification calls the underlying MergeChangesFromContextDidSaveNotification.
 func (x *ManagedObjectContext) MergeChangesFromContextDidSaveNotification(notification *foundation.NSNotification) {
 	x.inner.MergeChangesFromContextDidSaveNotification(notification)
 }
 
+// Sets the query generation this context should use.
+//
 // SetQueryGenerationFromTokenError calls the underlying SetQueryGenerationFromTokenError.
 func (x *ManagedObjectContext) SetQueryGenerationFromTokenError(generation *raw.NSQueryGenerationToken) (bool, error) {
 	return x.inner.SetQueryGenerationFromTokenError(generation)

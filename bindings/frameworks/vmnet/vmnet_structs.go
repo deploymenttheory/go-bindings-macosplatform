@@ -20,7 +20,7 @@ type VmnetNetwork struct{}
 // VmnetNetworkConfiguration is an opaque type.
 type VmnetNetworkConfiguration struct{}
 
-// @struct vmpktdesc @abstract The type used to represent a network packet in the vmnet read/write routines. @field vm_pkt_size The size of the packet. @field vm_pkt_iov The array of buffers that make up the packet. @field vm_pkt_iovcnt The number of elements in vm_pkt_iov. @field vm_flags The flags associated with the packet.
+// Describes a packet.
 // C struct: vmpktdesc
 type Vmpktdesc struct {
 	Vm_pkt_size   uint

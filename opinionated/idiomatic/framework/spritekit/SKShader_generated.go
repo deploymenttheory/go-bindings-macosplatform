@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that allows you to apply a custom fragment shader.
+//
 // Shader wraps [raw.SKShader] with a fluent Go API.
 type Shader struct {
 	inner *raw.SKShader
@@ -32,7 +34,7 @@ func ShaderFromID(id objc.ID) *Shader {
 	return &Shader{inner: raw.SKShaderFromID(id)}
 }
 
-// Create a custom shader with source code. @param source the source code for the custom fragment shader.
+// Initializes a new shader object using the specified source code.
 //
 // NewShaderWithSource creates a new [Shader].
 func NewShaderWithSource(source string) *Shader {
@@ -41,7 +43,7 @@ func NewShaderWithSource(source string) *Shader {
 	return &Shader{inner: raw.SKShaderFromID(_id)}
 }
 
-// Create a custom shader with source code and uniforms. @param source the source code for the custom fragment shader. @param uniforms the array of uniforms supplied to this shader
+// Initializes a new shader object using the specified source and uniform data.
 //
 // NewShaderWithSourceUniforms creates a new [Shader].
 func NewShaderWithSourceUniforms(source string, uniforms *foundation.NSArray[*raw.SKUniform]) *Shader {
@@ -50,13 +52,15 @@ func NewShaderWithSourceUniforms(source string, uniforms *foundation.NSArray[*ra
 	return &Shader{inner: raw.SKShaderFromID(_id)}
 }
 
+// The source code for the shader.
+//
 // WithSource sets the source property and returns the receiver for chaining.
 func (x *Shader) WithSource(source string) *Shader {
 	x.inner.SetSource(foundation.NSStringStringWithUTF8String(source))
 	return x
 }
 
-// You may define additional uniforms to be used in your shader here. There is no need to declare them in you source, just use them by name. All uniforms declared must be used within the source.
+// The list of uniforms associated with the shader.
 //
 // WithUniforms sets the collection, converting the Go slice to an NSArray.
 func (x *Shader) WithUniforms(items ...*raw.SKUniform) *Shader {
@@ -79,6 +83,8 @@ func (x *Shader) WithUniforms(items ...*raw.SKUniform) *Shader {
 	return x
 }
 
+// The list of attributes associated with the shader.
+//
 // WithAttributes sets the collection, converting the Go slice to an NSArray.
 func (x *Shader) WithAttributes(items ...*raw.SKAttribute) *Shader {
 	if len(items) == 0 {
@@ -100,11 +106,15 @@ func (x *Shader) WithAttributes(items ...*raw.SKAttribute) *Shader {
 	return x
 }
 
+// Adds a uniform to the shader.
+//
 // AddUniform calls the underlying AddUniform.
 func (x *Shader) AddUniform(uniform *raw.SKUniform) {
 	x.inner.AddUniform(uniform)
 }
 
+// Returns the uniform object corresponding to a particular uniform variable.
+//
 // UniformNamed calls the underlying UniformNamed.
 func (x *Shader) UniformNamed(name string) *Uniform {
 	_r := x.inner.UniformNamed(foundation.NSStringStringWithUTF8String(name))
@@ -114,6 +124,8 @@ func (x *Shader) UniformNamed(name string) *Uniform {
 	return &Uniform{inner: _r}
 }
 
+// Removes a uniform from the shader.
+//
 // RemoveUniformNamed calls the underlying RemoveUniformNamed.
 func (x *Shader) RemoveUniformNamed(name string) {
 	x.inner.RemoveUniformNamed(foundation.NSStringStringWithUTF8String(name))

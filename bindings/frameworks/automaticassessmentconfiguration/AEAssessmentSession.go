@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A session that your app uses to protect an assessment.
+//
 // Apple documentation: https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentsession
 type AEAssessmentSession struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func AEAssessmentSessionFromID(id objc.ID) *AEAssessmentSession {
 	return o
 }
 
+// Creates a new assessment session.
 func (o *AEAssessmentSession) InitWithConfiguration(configuration *AEAssessmentConfiguration) *AEAssessmentSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentSessionSelInitWithConfiguration, configuration.Ptr())
 	if _ret != 0 {
@@ -47,14 +50,17 @@ func (o *AEAssessmentSession) InitWithConfiguration(configuration *AEAssessmentC
 	return AEAssessmentSessionFromID(_ret)
 }
 
+// Starts an assessment session.
 func (o *AEAssessmentSession) Begin() {
 	o.Ptr().Send(_aEAssessmentSessionSelBegin)
 }
 
+// Ends an assessment session.
 func (o *AEAssessmentSession) End() {
 	o.Ptr().Send(_aEAssessmentSessionSelEnd)
 }
 
+// Changes the session to use the specified configuration.
 func (o *AEAssessmentSession) UpdateToConfiguration(configuration *AEAssessmentConfiguration) {
 	o.Ptr().Send(_aEAssessmentSessionSelUpdateToConfiguration, configuration.Ptr())
 }

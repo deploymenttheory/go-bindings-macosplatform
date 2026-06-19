@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The IPv6 settings of an IP layer network tunnel.
+//
 // NEIPv6Settings wraps [raw.NEIPv6Settings] with a fluent Go API.
 type NEIPv6Settings struct {
 	inner *raw.NEIPv6Settings
@@ -32,7 +34,7 @@ func NEIPv6SettingsFromID(id objc.ID) *NEIPv6Settings {
 	return &NEIPv6Settings{inner: raw.NEIPv6SettingsFromID(id)}
 }
 
-// @method initWithAddresses:networkPrefixLengths: @discussion Initialize a newly-allocated NEIPv6Settings object. @param addresses An array of IPv6 addresses represented as dotted decimal strings. @param networkPrefixLengths An array of NSNumber objects each containing the length in bits of the network prefix of the corresponding address in the addresses parameter. @return The initialized object.
+// Initializes the IPv6 settings object.
 //
 // NewNEIPv6SettingsWithAddressesNetworkPrefixLengths creates a new [NEIPv6Settings].
 func NewNEIPv6SettingsWithAddressesNetworkPrefixLengths(addresses *foundation.NSArray[*foundation.NSString], networkPrefixLengths *foundation.NSArray[*foundation.NSNumber]) *NEIPv6Settings {
@@ -41,7 +43,7 @@ func NewNEIPv6SettingsWithAddressesNetworkPrefixLengths(addresses *foundation.NS
 	return &NEIPv6Settings{inner: raw.NEIPv6SettingsFromID(_id)}
 }
 
-// @property includedRoutes @discussion An array of NEIPv6Route objects. Traffic matching these routes will be routed through the virtual interface used by the VPN tunnel.
+// The IPv6 network traffic that the system routes to the TUN interface.
 //
 // WithIncludedRoutes sets the collection, converting the Go slice to an NSArray.
 func (x *NEIPv6Settings) WithIncludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Settings {
@@ -64,7 +66,7 @@ func (x *NEIPv6Settings) WithIncludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Se
 	return x
 }
 
-// @property excludedRoutes @discussion An array of NEIPv6Route objects. Traffic matching these routes will be routed through the current primary physical interface of the device.
+// The IPv6 network traffic that the system routes to the primary physical interface, not the TUN interface.
 //
 // WithExcludedRoutes sets the collection, converting the Go slice to an NSArray.
 func (x *NEIPv6Settings) WithExcludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Settings {

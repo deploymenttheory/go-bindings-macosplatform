@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A single action to present when the user swipes horizontally on a table row.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstableviewrowaction
 type NSTableViewRowAction struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func NSTableViewRowActionFromID(id objc.ID) *NSTableViewRowAction {
 	return o
 }
 
+// Creates and returns a new table view row action object.
 func NSTableViewRowActionRowActionWithStyleTitleHandler(style NSTableViewRowActionStyle, title *foundation.NSString, handler func(*NSTableViewRowAction, int)) *NSTableViewRowAction {
 	var __block_handler objc.Block
 	if handler != nil {

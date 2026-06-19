@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Prescription data for eye alignment.
+//
 // VisionPrism wraps [raw.HKVisionPrism] with a fluent Go API.
 type VisionPrism struct {
 	inner *raw.HKVisionPrism
@@ -29,7 +31,7 @@ func VisionPrismFromID(id objc.ID) *VisionPrism {
 	return &VisionPrism{inner: raw.HKVisionPrismFromID(id)}
 }
 
-// @method        initWithAmount:angle:eye @param         amount    The compensation for amount eye misalignment @param         angle     The angle of the lens required to correct diplopia @param         eye       The eye associated with the prism values
+// Creates a new vision prism object, using a single quantity and an alignment angle.
 //
 // NewVisionPrismWithAmountAngleEye creates a new [VisionPrism].
 func NewVisionPrismWithAmountAngleEye(amount *raw.HKQuantity, angle *raw.HKQuantity, eye HKVisionEye) *VisionPrism {
@@ -38,7 +40,7 @@ func NewVisionPrismWithAmountAngleEye(amount *raw.HKQuantity, angle *raw.HKQuant
 	return &VisionPrism{inner: raw.HKVisionPrismFromID(_id)}
 }
 
-// @method        initWithVerticalAmount:verticalBase:horizontalAmount:horizontalBase:eye @param         verticalAmount      The vertical component of compensation in prism diopters @param         verticalBase        The direction of the prism base relative to the vertical axis of the lens; base up or base down. @param         horizontalAmount    The horizontal component of compensation in prism diopters @param         horizontalBase      The direction of the prism base relative to the horizontal axis of the lens; base in (toward the nose) or base out (away from the nose). @param         eye                 The eye associated with the prism values
+// Creates a new vision prism object that separates the correction strength into horizontal and vertical components.
 //
 // NewVisionPrismWithVerticalAmountVerticalBaseHorizontalAmountHorizontalBaseEye creates a new [VisionPrism].
 func NewVisionPrismWithVerticalAmountVerticalBaseHorizontalAmountHorizontalBaseEye(verticalAmount *raw.HKQuantity, verticalBase HKPrismBase, horizontalAmount *raw.HKQuantity, horizontalBase HKPrismBase, eye HKVisionEye) *VisionPrism {

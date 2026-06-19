@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Meta-data about an endpoint of a Matter node.
+//
 // Apple documentation: https://developer.apple.com/documentation/matter/mtrendpointinfo
 type MTREndpointInfo struct {
 	foundation.NSObject
@@ -50,8 +52,11 @@ func (o *MTREndpointInfo) DeviceTypes() *foundation.NSArray[*MTRDeviceTypeRevisi
 }
 
 func (o *MTREndpointInfo) PartsList() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mTREndpointInfoSelPartsList)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTREndpointInfoSelPartsList)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // The direct children of this endpoint. This excludes indirect descendants even if they are listed in the PartsList attribute of this endpoint due to the Full-Family Pattern being used. Refer to Endpoint Composition Patterns in the Matter specification for details.

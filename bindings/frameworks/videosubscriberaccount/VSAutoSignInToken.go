@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A value that represents a person’s account and their consent to Automatic Sign-In.
+//
 // Apple documentation: https://developer.apple.com/documentation/videosubscriberaccount/vsautosignintoken
 type VSAutoSignInToken struct {
 	foundation.NSObject

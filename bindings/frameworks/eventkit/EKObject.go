@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract superclass for all EventKit classes that have persistent instances.
+//
 // Apple documentation: https://developer.apple.com/documentation/eventkit/ekobject
 type EKObject struct {
 	foundation.NSObject
@@ -34,14 +36,17 @@ func EKObjectFromID(id objc.ID) *EKObject {
 	return o
 }
 
+// Returns this object to its saved state.
 func (o *EKObject) Reset() {
 	o.Ptr().Send(_eKObjectSelReset)
 }
 
+// Rolls back the property values of this object to its original state when it was first fetched.
 func (o *EKObject) Rollback() {
 	o.Ptr().Send(_eKObjectSelRollback)
 }
 
+// Merges changes to this object with the latest saved values.
 func (o *EKObject) Refresh() bool {
 	_ret := objc.Send[bool](o.Ptr(), _eKObjectSelRefresh)
 	return _ret

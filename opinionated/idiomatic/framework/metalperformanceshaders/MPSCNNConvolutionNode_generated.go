@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a convolution kernel.
+//
 // CNNConvolutionNode wraps [raw.MPSCNNConvolutionNode] with a fluent Go API.
 type CNNConvolutionNode struct {
 	inner *raw.MPSCNNConvolutionNode

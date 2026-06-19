@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that reads sample references from an asset track.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetreadersamplereferenceoutput
 type AVAssetReaderSampleReferenceOutput struct {
 	AVAssetReaderOutput
@@ -31,7 +33,7 @@ func AVAssetReaderSampleReferenceOutputFromID(id objc.ID) *AVAssetReaderSampleRe
 	return o
 }
 
-// @method assetReaderSampleReferenceOutputWithTrack: @abstract Returns an instance of AVAssetReaderSampleReferenceOutput for supplying sample references. @param track The AVAssetTrack for which the resulting AVAssetReaderSampleReferenceOutput should provide sample references. @result An instance of AVAssetReaderSampleReferenceOutput. @discussion The track must be one of the tracks contained by the target AVAssetReader's asset.
+// Returns a new object that supplies sample references.
 func AVAssetReaderSampleReferenceOutputAssetReaderSampleReferenceOutputWithTrack(track *AVAssetTrack) *AVAssetReaderSampleReferenceOutput {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetReaderSampleReferenceOutput), _aVAssetReaderSampleReferenceOutputSelAssetReaderSampleReferenceOutputWithTrack, track.Ptr())
 	if _ret != 0 {
@@ -40,7 +42,7 @@ func AVAssetReaderSampleReferenceOutputAssetReaderSampleReferenceOutputWithTrack
 	return AVAssetReaderSampleReferenceOutputFromID(_ret)
 }
 
-// @method initWithTrack: @abstract Returns an instance of AVAssetReaderSampleReferenceOutput for supplying sample references. @param track The AVAssetTrack for which the resulting AVAssetReaderSampleReferenceOutput should provide sample references. @result An instance of AVAssetReaderTrackOutput. @discussion The track must be one of the tracks contained by the target AVAssetReader's asset.
+// Creates an object that supplies sample references.
 func (o *AVAssetReaderSampleReferenceOutput) InitWithTrack(track *AVAssetTrack) *AVAssetReaderSampleReferenceOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderSampleReferenceOutputSelInitWithTrack, track.Ptr())
 	if _ret != 0 {

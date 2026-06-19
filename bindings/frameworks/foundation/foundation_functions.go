@@ -14,29 +14,29 @@ import (
 var (
 	_fnCFBridgingRelease            func(unsafe.Pointer) unsafe.Pointer
 	_fnCFBridgingRetain             func(objc.ID) unsafe.Pointer
-	_fnNSAllHashTableObjects        func(*NSHashTable[objc.ID]) *NSArray[objc.ID]
-	_fnNSAllMapTableKeys            func(*NSMapTable[objc.ID, objc.ID]) *NSArray[objc.ID]
-	_fnNSAllMapTableValues          func(*NSMapTable[objc.ID, objc.ID]) *NSArray[objc.ID]
+	_fnNSAllHashTableObjects        func(objc.ID) objc.ID
+	_fnNSAllMapTableKeys            func(objc.ID) objc.ID
+	_fnNSAllMapTableValues          func(objc.ID) objc.ID
 	_fnNSAllocateCollectable        func(uint, uint) unsafe.Pointer
 	_fnNSAllocateMemoryPages        func(uint) unsafe.Pointer
 	_fnNSAllocateObject             func(objc.Class, uint, unsafe.Pointer) objc.ID
 	_fnNSClassFromString            func(objc.ID) objc.Class
-	_fnNSCompareHashTables          func(*NSHashTable[objc.ID], *NSHashTable[objc.ID]) bool
-	_fnNSCompareMapTables           func(*NSMapTable[objc.ID, objc.ID], *NSMapTable[objc.ID, objc.ID]) bool
+	_fnNSCompareHashTables          func(objc.ID, objc.ID) bool
+	_fnNSCompareMapTables           func(objc.ID, objc.ID) bool
 	_fnNSContainsRect               func(corefoundation.CGRect, corefoundation.CGRect) bool
 	_fnNSConvertHostDoubleToSwapped func(float64) NSSwappedDouble
 	_fnNSConvertHostFloatToSwapped  func(float32) NSSwappedFloat
 	_fnNSConvertSwappedDoubleToHost func(NSSwappedDouble) float64
 	_fnNSConvertSwappedFloatToHost  func(NSSwappedFloat) float32
-	_fnNSCopyHashTableWithZone      func(*NSHashTable[objc.ID], unsafe.Pointer) *NSHashTable[objc.ID]
-	_fnNSCopyMapTableWithZone       func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer) unsafe.Pointer
+	_fnNSCopyHashTableWithZone      func(objc.ID, unsafe.Pointer) objc.ID
+	_fnNSCopyMapTableWithZone       func(objc.ID, unsafe.Pointer) unsafe.Pointer
 	_fnNSCopyMemoryPages            func(unsafe.Pointer, unsafe.Pointer, uint)
 	// Deprecated: Not supported
 	_fnNSCopyObject                    func(objc.ID, uint, unsafe.Pointer) objc.ID
-	_fnNSCountHashTable                func(*NSHashTable[objc.ID]) uint
-	_fnNSCountMapTable                 func(*NSMapTable[objc.ID, objc.ID]) uint
-	_fnNSCreateHashTable               func(NSHashTableCallBacks, uint) *NSHashTable[objc.ID]
-	_fnNSCreateHashTableWithZone       func(NSHashTableCallBacks, uint, unsafe.Pointer) *NSHashTable[objc.ID]
+	_fnNSCountHashTable                func(objc.ID) uint
+	_fnNSCountMapTable                 func(objc.ID) uint
+	_fnNSCreateHashTable               func(NSHashTableCallBacks, uint) objc.ID
+	_fnNSCreateHashTableWithZone       func(NSHashTableCallBacks, uint, unsafe.Pointer) objc.ID
 	_fnNSCreateMapTable                func(NSMapTableKeyCallBacks, NSMapTableValueCallBacks, uint) unsafe.Pointer
 	_fnNSCreateMapTableWithZone        func(NSMapTableKeyCallBacks, NSMapTableValueCallBacks, uint, unsafe.Pointer) unsafe.Pointer
 	_fnNSCreateZone                    func(uint, uint, bool) unsafe.Pointer
@@ -62,26 +62,26 @@ var (
 	_fnNSEdgeInsetsMake                func(float64, float64, float64, float64) NSEdgeInsets
 	_fnNSEndHashTableEnumeration       func(*NSHashEnumerator)
 	_fnNSEndMapTableEnumeration        func(*NSMapEnumerator)
-	_fnNSEnumerateHashTable            func(*NSHashTable[objc.ID]) NSHashEnumerator
-	_fnNSEnumerateMapTable             func(*NSMapTable[objc.ID, objc.ID]) NSMapEnumerator
+	_fnNSEnumerateHashTable            func(objc.ID) NSHashEnumerator
+	_fnNSEnumerateMapTable             func(objc.ID) NSMapEnumerator
 	_fnNSEqualPoints                   func(corefoundation.CGPoint, corefoundation.CGPoint) bool
 	_fnNSEqualRanges                   func(NSRange, NSRange) bool
 	_fnNSEqualRects                    func(corefoundation.CGRect, corefoundation.CGRect) bool
 	_fnNSEqualSizes                    func(corefoundation.CGSize, corefoundation.CGSize) bool
 	_fnNSExtraRefCount                 func(objc.ID) uint
 	_fnNSFileTypeForHFSTypeCode        func(uint) objc.ID
-	_fnNSFreeHashTable                 func(*NSHashTable[objc.ID])
-	_fnNSFreeMapTable                  func(*NSMapTable[objc.ID, objc.ID])
+	_fnNSFreeHashTable                 func(objc.ID)
+	_fnNSFreeMapTable                  func(objc.ID)
 	_fnNSFullUserName                  func() objc.ID
 	_fnNSGetSizeAndAlignment           func(string, *uint, *uint) string
 	_fnNSGetUncaughtExceptionHandler   func() unsafe.Pointer
 	_fnNSHFSTypeCodeFromFileType       func(objc.ID) uint
 	_fnNSHFSTypeOfFile                 func(objc.ID) objc.ID
-	_fnNSHashGet                       func(*NSHashTable[objc.ID], unsafe.Pointer) unsafe.Pointer
-	_fnNSHashInsert                    func(*NSHashTable[objc.ID], unsafe.Pointer)
-	_fnNSHashInsertIfAbsent            func(*NSHashTable[objc.ID], unsafe.Pointer) unsafe.Pointer
-	_fnNSHashInsertKnownAbsent         func(*NSHashTable[objc.ID], unsafe.Pointer)
-	_fnNSHashRemove                    func(*NSHashTable[objc.ID], unsafe.Pointer)
+	_fnNSHashGet                       func(objc.ID, unsafe.Pointer) unsafe.Pointer
+	_fnNSHashInsert                    func(objc.ID, unsafe.Pointer)
+	_fnNSHashInsertIfAbsent            func(objc.ID, unsafe.Pointer) unsafe.Pointer
+	_fnNSHashInsertKnownAbsent         func(objc.ID, unsafe.Pointer)
+	_fnNSHashRemove                    func(objc.ID, unsafe.Pointer)
 	_fnNSHeight                        func(corefoundation.CGRect) float64
 	_fnNSHomeDirectory                 func() objc.ID
 	_fnNSHomeDirectoryForUser          func(objc.ID) objc.ID
@@ -103,12 +103,12 @@ var (
 	_fnNSMakeRange               func(uint, uint) NSRange
 	_fnNSMakeRect                func(float64, float64, float64, float64) corefoundation.CGRect
 	_fnNSMakeSize                func(float64, float64) corefoundation.CGSize
-	_fnNSMapGet                  func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer) unsafe.Pointer
-	_fnNSMapInsert               func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer, unsafe.Pointer)
-	_fnNSMapInsertIfAbsent       func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnNSMapInsertKnownAbsent    func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer, unsafe.Pointer)
-	_fnNSMapMember               func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnNSMapRemove               func(*NSMapTable[objc.ID, objc.ID], unsafe.Pointer)
+	_fnNSMapGet                  func(objc.ID, unsafe.Pointer) unsafe.Pointer
+	_fnNSMapInsert               func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+	_fnNSMapInsertIfAbsent       func(objc.ID, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnNSMapInsertKnownAbsent    func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+	_fnNSMapMember               func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnNSMapRemove               func(objc.ID, unsafe.Pointer)
 	_fnNSMaxRange                func(NSRange) uint
 	_fnNSMaxX                    func(corefoundation.CGRect) float64
 	_fnNSMaxY                    func(corefoundation.CGRect) float64
@@ -135,8 +135,8 @@ var (
 	_fnNSRectFromString                    func(objc.ID) corefoundation.CGRect
 	_fnNSRectToCGRect                      func(corefoundation.CGRect) corefoundation.CGRect
 	_fnNSRecycleZone                       func(unsafe.Pointer)
-	_fnNSResetHashTable                    func(*NSHashTable[objc.ID])
-	_fnNSResetMapTable                     func(*NSMapTable[objc.ID, objc.ID])
+	_fnNSResetHashTable                    func(objc.ID)
+	_fnNSResetMapTable                     func(objc.ID)
 	_fnNSRoundDownToMultipleOfPageSize     func(uint) uint
 	_fnNSRoundUpToMultipleOfPageSize       func(uint) uint
 	_fnNSSearchPathForDirectoriesInDomains func(NSSearchPathDirectory, NSSearchPathDomainMask, bool) objc.ID
@@ -149,8 +149,8 @@ var (
 	_fnNSSizeFromString           func(objc.ID) corefoundation.CGSize
 	_fnNSSizeToCGSize             func(corefoundation.CGSize) corefoundation.CGSize
 	_fnNSStringFromClass          func(objc.Class) objc.ID
-	_fnNSStringFromHashTable      func(*NSHashTable[objc.ID]) objc.ID
-	_fnNSStringFromMapTable       func(*NSMapTable[objc.ID, objc.ID]) objc.ID
+	_fnNSStringFromHashTable      func(objc.ID) objc.ID
+	_fnNSStringFromMapTable       func(objc.ID) objc.ID
 	_fnNSStringFromPoint          func(corefoundation.CGPoint) objc.ID
 	_fnNSStringFromProtocol       func(unsafe.Pointer) objc.ID
 	_fnNSStringFromRange          func(NSRange) objc.ID
@@ -223,15 +223,27 @@ func CFBridgingRetain(x objc.ID) unsafe.Pointer {
 }
 
 func NSAllHashTableObjects(table *NSHashTable[objc.ID]) *NSArray[objc.ID] {
-	return _fnNSAllHashTableObjects(table)
+	_ret := _fnNSAllHashTableObjects(table.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
 func NSAllMapTableKeys(table *NSMapTable[objc.ID, objc.ID]) *NSArray[objc.ID] {
-	return _fnNSAllMapTableKeys(table)
+	_ret := _fnNSAllMapTableKeys(table.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
 func NSAllMapTableValues(table *NSMapTable[objc.ID, objc.ID]) *NSArray[objc.ID] {
-	return _fnNSAllMapTableValues(table)
+	_ret := _fnNSAllMapTableValues(table.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
 func NSAllocateCollectable(size uint, options uint) unsafe.Pointer {
@@ -251,11 +263,11 @@ func NSClassFromString(aClassName *NSString) objc.Class {
 }
 
 func NSCompareHashTables(table1 *NSHashTable[objc.ID], table2 *NSHashTable[objc.ID]) bool {
-	return _fnNSCompareHashTables(table1, table2)
+	return _fnNSCompareHashTables(table1.Ptr(), table2.Ptr())
 }
 
 func NSCompareMapTables(table1 *NSMapTable[objc.ID, objc.ID], table2 *NSMapTable[objc.ID, objc.ID]) bool {
-	return _fnNSCompareMapTables(table1, table2)
+	return _fnNSCompareMapTables(table1.Ptr(), table2.Ptr())
 }
 
 func NSContainsRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) bool {
@@ -279,11 +291,15 @@ func NSConvertSwappedFloatToHost(x NSSwappedFloat) float32 {
 }
 
 func NSCopyHashTableWithZone(table *NSHashTable[objc.ID], zone unsafe.Pointer) *NSHashTable[objc.ID] {
-	return _fnNSCopyHashTableWithZone(table, zone)
+	_ret := _fnNSCopyHashTableWithZone(table.Ptr(), zone)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSHashTableFromID[objc.ID](_ret)
 }
 
 func NSCopyMapTableWithZone(table *NSMapTable[objc.ID, objc.ID], zone unsafe.Pointer) unsafe.Pointer {
-	return _fnNSCopyMapTableWithZone(table, zone)
+	return _fnNSCopyMapTableWithZone(table.Ptr(), zone)
 }
 
 func NSCopyMemoryPages(source unsafe.Pointer, dest unsafe.Pointer, bytes_ uint) {
@@ -296,19 +312,27 @@ func NSCopyObject(object objc.ID, extraBytes uint, zone unsafe.Pointer) objc.ID 
 }
 
 func NSCountHashTable(table *NSHashTable[objc.ID]) uint {
-	return _fnNSCountHashTable(table)
+	return _fnNSCountHashTable(table.Ptr())
 }
 
 func NSCountMapTable(table *NSMapTable[objc.ID, objc.ID]) uint {
-	return _fnNSCountMapTable(table)
+	return _fnNSCountMapTable(table.Ptr())
 }
 
 func NSCreateHashTable(callBacks NSHashTableCallBacks, capacity uint) *NSHashTable[objc.ID] {
-	return _fnNSCreateHashTable(callBacks, capacity)
+	_ret := _fnNSCreateHashTable(callBacks, capacity)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSHashTableFromID[objc.ID](_ret)
 }
 
 func NSCreateHashTableWithZone(callBacks NSHashTableCallBacks, capacity uint, zone unsafe.Pointer) *NSHashTable[objc.ID] {
-	return _fnNSCreateHashTableWithZone(callBacks, capacity, zone)
+	_ret := _fnNSCreateHashTableWithZone(callBacks, capacity, zone)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSHashTableFromID[objc.ID](_ret)
 }
 
 func NSCreateMapTable(keyCallBacks NSMapTableKeyCallBacks, valueCallBacks NSMapTableValueCallBacks, capacity uint) unsafe.Pointer {
@@ -416,11 +440,11 @@ func NSEndMapTableEnumeration(enumerator *NSMapEnumerator) {
 }
 
 func NSEnumerateHashTable(table *NSHashTable[objc.ID]) NSHashEnumerator {
-	return _fnNSEnumerateHashTable(table)
+	return _fnNSEnumerateHashTable(table.Ptr())
 }
 
 func NSEnumerateMapTable(table *NSMapTable[objc.ID, objc.ID]) NSMapEnumerator {
-	return _fnNSEnumerateMapTable(table)
+	return _fnNSEnumerateMapTable(table.Ptr())
 }
 
 func NSEqualPoints(aPoint corefoundation.CGPoint, bPoint corefoundation.CGPoint) bool {
@@ -452,11 +476,11 @@ func NSFileTypeForHFSTypeCode(hfsFileTypeCode uint) *NSString {
 }
 
 func NSFreeHashTable(table *NSHashTable[objc.ID]) {
-	_fnNSFreeHashTable(table)
+	_fnNSFreeHashTable(table.Ptr())
 }
 
 func NSFreeMapTable(table *NSMapTable[objc.ID, objc.ID]) {
-	_fnNSFreeMapTable(table)
+	_fnNSFreeMapTable(table.Ptr())
 }
 
 func NSFullUserName() *NSString {
@@ -488,23 +512,23 @@ func NSHFSTypeOfFile(fullFilePath *NSString) *NSString {
 }
 
 func NSHashGet(table *NSHashTable[objc.ID], pointer unsafe.Pointer) unsafe.Pointer {
-	return _fnNSHashGet(table, pointer)
+	return _fnNSHashGet(table.Ptr(), pointer)
 }
 
 func NSHashInsert(table *NSHashTable[objc.ID], pointer unsafe.Pointer) {
-	_fnNSHashInsert(table, pointer)
+	_fnNSHashInsert(table.Ptr(), pointer)
 }
 
 func NSHashInsertIfAbsent(table *NSHashTable[objc.ID], pointer unsafe.Pointer) unsafe.Pointer {
-	return _fnNSHashInsertIfAbsent(table, pointer)
+	return _fnNSHashInsertIfAbsent(table.Ptr(), pointer)
 }
 
 func NSHashInsertKnownAbsent(table *NSHashTable[objc.ID], pointer unsafe.Pointer) {
-	_fnNSHashInsertKnownAbsent(table, pointer)
+	_fnNSHashInsertKnownAbsent(table.Ptr(), pointer)
 }
 
 func NSHashRemove(table *NSHashTable[objc.ID], pointer unsafe.Pointer) {
-	_fnNSHashRemove(table, pointer)
+	_fnNSHashRemove(table.Ptr(), pointer)
 }
 
 func NSHeight(aRect corefoundation.CGRect) float64 {
@@ -597,27 +621,27 @@ func NSMakeSize(w float64, h float64) corefoundation.CGSize {
 }
 
 func NSMapGet(table *NSMapTable[objc.ID, objc.ID], key unsafe.Pointer) unsafe.Pointer {
-	return _fnNSMapGet(table, key)
+	return _fnNSMapGet(table.Ptr(), key)
 }
 
 func NSMapInsert(table *NSMapTable[objc.ID, objc.ID], key unsafe.Pointer, value unsafe.Pointer) {
-	_fnNSMapInsert(table, key, value)
+	_fnNSMapInsert(table.Ptr(), key, value)
 }
 
 func NSMapInsertIfAbsent(table *NSMapTable[objc.ID, objc.ID], key unsafe.Pointer, value unsafe.Pointer) unsafe.Pointer {
-	return _fnNSMapInsertIfAbsent(table, key, value)
+	return _fnNSMapInsertIfAbsent(table.Ptr(), key, value)
 }
 
 func NSMapInsertKnownAbsent(table *NSMapTable[objc.ID, objc.ID], key unsafe.Pointer, value unsafe.Pointer) {
-	_fnNSMapInsertKnownAbsent(table, key, value)
+	_fnNSMapInsertKnownAbsent(table.Ptr(), key, value)
 }
 
 func NSMapMember(table *NSMapTable[objc.ID, objc.ID], key unsafe.Pointer, originalKey unsafe.Pointer, value unsafe.Pointer) bool {
-	return _fnNSMapMember(table, key, originalKey, value)
+	return _fnNSMapMember(table.Ptr(), key, originalKey, value)
 }
 
 func NSMapRemove(table *NSMapTable[objc.ID, objc.ID], key unsafe.Pointer) {
-	_fnNSMapRemove(table, key)
+	_fnNSMapRemove(table.Ptr(), key)
 }
 
 func NSMaxRange(range_ NSRange) uint {
@@ -726,11 +750,11 @@ func NSRecycleZone(zone unsafe.Pointer) {
 }
 
 func NSResetHashTable(table *NSHashTable[objc.ID]) {
-	_fnNSResetHashTable(table)
+	_fnNSResetHashTable(table.Ptr())
 }
 
 func NSResetMapTable(table *NSMapTable[objc.ID, objc.ID]) {
-	_fnNSResetMapTable(table)
+	_fnNSResetMapTable(table.Ptr())
 }
 
 func NSRoundDownToMultipleOfPageSize(bytes_ uint) uint {
@@ -787,7 +811,7 @@ func NSStringFromClass(aClass objc.Class) *NSString {
 }
 
 func NSStringFromHashTable(table *NSHashTable[objc.ID]) *NSString {
-	_ret := _fnNSStringFromHashTable(table)
+	_ret := _fnNSStringFromHashTable(table.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -795,7 +819,7 @@ func NSStringFromHashTable(table *NSHashTable[objc.ID]) *NSString {
 }
 
 func NSStringFromMapTable(table *NSMapTable[objc.ID, objc.ID]) *NSString {
-	_ret := _fnNSStringFromMapTable(table)
+	_ret := _fnNSStringFromMapTable(table.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

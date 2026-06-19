@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An App Store response to a request for information about a list of products.
+//
 // ProductsResponse wraps [raw.SKProductsResponse] with a fluent Go API.
 type ProductsResponse struct {
 	inner *raw.SKProductsResponse

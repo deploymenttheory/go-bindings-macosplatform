@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Text recognized in an image through a text recognition request.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnrecognizedtext
 type VNRecognizedText struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func VNRecognizedTextFromID(id objc.ID) *VNRecognizedText {
 	return o
 }
 
-// @brief Calculate the bounding box around the characters in the range of the string. @discussion The bounding boxes are not guaranteed to be an exact fit around the characters and are purely meant for UI purposes and not for image processing.
+// Calculates the bounding box around the characters in the range of a string.
 func (o *VNRecognizedText) BoundingBoxForRangeError(range_ foundation.NSRange) (*VNRectangleObservation, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedTextSelBoundingBoxForRangeError, range_, unsafe.Pointer(&_nsErr))

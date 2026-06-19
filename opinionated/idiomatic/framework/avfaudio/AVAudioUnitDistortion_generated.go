@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that implements a multistage distortion effect.
+//
 // AudioUnitDistortion wraps [raw.AVAudioUnitDistortion] with a fluent Go API.
 type AudioUnitDistortion struct {
 	inner *raw.AVAudioUnitDistortion
@@ -35,7 +37,7 @@ func NewAudioUnitDistortion() *AudioUnitDistortion {
 	return &AudioUnitDistortion{inner: raw.AVAudioUnitDistortionFromID(_id)}
 }
 
-// @property preGain @abstract Gain applied to the signal before being distorted Range:      -80 -> 20 Default:    -6 Unit:       dB
+// The gain that the audio unit applies to the signal before distortion, in decibels.
 //
 // WithPreGain sets the preGain property and returns the receiver for chaining.
 func (x *AudioUnitDistortion) WithPreGain(preGain float32) *AudioUnitDistortion {
@@ -43,7 +45,7 @@ func (x *AudioUnitDistortion) WithPreGain(preGain float32) *AudioUnitDistortion 
 	return x
 }
 
-// @property wetDryMix @abstract Blend of the distorted and dry signals Range:      0 (all dry) -> 100 (all distorted) Default:    50 Unit:       Percent
+// The blend of the distorted and dry signals.
 //
 // WithWetDryMix sets the wetDryMix property and returns the receiver for chaining.
 func (x *AudioUnitDistortion) WithWetDryMix(wetDryMix float32) *AudioUnitDistortion {
@@ -51,7 +53,7 @@ func (x *AudioUnitDistortion) WithWetDryMix(wetDryMix float32) *AudioUnitDistort
 	return x
 }
 
-// @property bypass @abstract Bypass state of the audio unit.
+// The bypass state of the audio unit.
 //
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitDistortion) WithBypass(bypass bool) *AudioUnitDistortion {
@@ -59,7 +61,7 @@ func (x *AudioUnitDistortion) WithBypass(bypass bool) *AudioUnitDistortion {
 	return x
 }
 
-// @method loadFactoryPreset: @abstract Load a distortion preset. Default:    AVAudioUnitDistortionPresetDrumsBitBrush
+// Configures the audio distortion unit by loading a distortion preset.
 //
 // LoadFactoryPreset calls the underlying LoadFactoryPreset.
 func (x *AudioUnitDistortion) LoadFactoryPreset(preset AVAudioUnitDistortionPreset) {

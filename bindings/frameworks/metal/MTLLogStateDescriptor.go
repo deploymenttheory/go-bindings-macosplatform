@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface that represents a log state configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtllogstatedescriptor
 type MTLLogStateDescriptor struct {
 	foundation.NSObject

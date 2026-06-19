@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents an updated group event.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnchangehistoryupdategroupevent
 type CNChangeHistoryUpdateGroupEvent struct {
 	CNChangeHistoryEvent

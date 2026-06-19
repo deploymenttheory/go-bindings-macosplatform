@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An element that represents either a pattern or a sequential gear shift.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcgearshifterelement
 type GCGearShifterElement struct {
 	foundation.NSObject

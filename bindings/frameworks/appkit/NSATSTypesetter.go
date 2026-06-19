@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A concrete typesetter object that places glyphs during the text layout process.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsatstypesetter
 type NSATSTypesetter struct {
 	NSTypesetter
@@ -41,12 +43,14 @@ func NSATSTypesetterSharedTypesetter() *NSATSTypesetter {
 	return NSATSTypesetterFromID(_ret)
 }
 
+// This method has been deprecated. Use the NSTypesetter method getLineFragmentRect:usedRect:remainingRect:forStartingGlyphAtIndex:proposedRect:lineSpacing:paragraphSpacingBefore:paragraphSpacingAfter: instead.
 // Deprecated: since macOS 10.4.
 func (o *NSATSTypesetter) LineFragmentRectForProposedRectRemainingRect(proposedRect corefoundation.CGRect, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSATSTypesetterSelLineFragmentRectForProposedRectRemainingRect, proposedRect, remainingRect)
 	return _ret
 }
 
+// Extracts the information needed to lay out the glyphs in the given glyph buffer from the given glyph range.
 // Deprecated: since macOS 10.13.
 func (o *NSATSTypesetter) GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphsRange foundation.NSRange, glyphBuffer *uint, charIndexBuffer *uint, inscribeBuffer *NSGlyphInscription, elasticBuffer *bool) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSATSTypesetterSelGetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits, glyphsRange, glyphBuffer, charIndexBuffer, inscribeBuffer, elasticBuffer)

@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class      IMKInputController @abstract    The basic class that controls input on the input method side. @discussion  IMKInputController implements fully implements the protocols defined above.  Typically a developer does not override this class, but provides a delegate object that implements the methods that developer is interested in.  The IMKInputController versions of the protocol methods check if the delegate object implements a method, and  call the delegate version if it exists. The IMKServer class which is allocated in an input method's main function creates a controller class for each input session created by a client application. Therefore for every input session there is a corresponding IMKInputController.
+// The IMKInputController class provides a base class for custom input controller classes. The IMKServer class, which is allocated in the main function of an input method, creates an input controller object for each input session created by a client application. For every input session there is a corresponding IMKInputController object.
 //
 // Apple documentation: https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller
 type IMKInputController struct {
@@ -50,57 +50,63 @@ func IMKInputControllerFromID(id objc.ID) *IMKInputController {
 	return o
 }
 
-// @method @abstract   Initializes the controller class setting the delegate. The inputClient parameter is the client side object that will be sending messages to the controller via the IMKServer.  The client object always conforms to the IMKTextInput protocol. Methods in the protocols that are implemented by the delegate object always include a client parameter.  Methods in the IMKInputController class do not take a client.  This is because the client is stored as an ivar in the IMKInputController.
+// Initializes the input control by setting the delegate.
 func (o *IMKInputController) InitWithServerDelegateClient(server *IMKServer, delegate objc.ID, inputClient objc.ID) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iMKInputControllerSelInitWithServerDelegateClient, server.Ptr(), delegate, inputClient)
 	return _ret
 }
 
-// @method @abstract   Called to inform the controller that the composition has changed. @discussion This method will call the protocol method composedString: to obtain the current composition. The current composition will be sent to the client by a call to the method setMarkedText:
+// Informs the input controller that the composition has changed.
 func (o *IMKInputController) UpdateComposition() {
 	o.Ptr().Send(_iMKInputControllerSelUpdateComposition)
 }
 
-// @method @abstract   Stops the current composition and replaces marked text with the original text. @discussion Calls the method originalString to obtain the original text and sends that to the client via a call to IMKInputSession protocol method insertText:
+// Stops the current composition and replaces marked text with the original text.
 func (o *IMKInputController) CancelComposition() {
 	o.Ptr().Send(_iMKInputControllerSelCancelComposition)
 }
 
-// @method @abstract   Called to obtain a dictionary of text attributes. @discussion The default implementation returns an empty dictionary.  You should override this method if your input method wants to provide font or glyphInformation. The returned object should be an autoreleased object.
+// Returns a dictionary of text attributes.
 func (o *IMKInputController) CompositionAttributesAtRange(range_ foundation.NSRange) *foundation.NSMutableDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSMutableDictionary[objc.ID, objc.ID]](o.Ptr(), _iMKInputControllerSelCompositionAttributesAtRange, range_)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iMKInputControllerSelCompositionAttributesAtRange, range_)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMutableDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
-// @method @abstract   Returns where the selection should be placed inside markedText. @discussion This method is called by updateComposition: to obtain the selection range for markedText.  The default implementation sets the selection range at the end of the marked text.
+// Returns where the range of the selection that should be placed inside marked text.
 func (o *IMKInputController) SelectionRange() foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _iMKInputControllerSelSelectionRange)
 	return _ret
 }
 
-// @method @abstract   Returns the range in the client document that text should replace. @discussion This method is called by updateComposition to obtain the range in the client's document where markedText should be placed.  The default implementation returns an NSRange whose location and length are NSNotFound.  That indicates that the marked text should be placed at the current insertion point.  Input methods that wish to insert marked text somewhere other than at the current insertion point should override this method. An example of an input method that might override this method would be one replaced words with synonyms.  That input method would watch for certain words and when one of those words was seen it would be replaced by marked text that was a synonym of the word.
+// Returns the range in the client document that the text should replace.
 func (o *IMKInputController) ReplacementRange() foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _iMKInputControllerSelReplacementRange)
 	return _ret
 }
 
-// @method @abstract   Returns a dictionary of text attributes that can be used to mark a range of an attributed string that is going to be sent to a client. @discussion This utility function can be called by input methods to mark each range (i.e. clause ) of marked text.  The style parameter should be one of the following values: kTSMHiliteSelectedRawText, kTSMHiliteConvertedText or kTSMHiliteSelectedConvertedText. See AERegistry.h for the definition of these values. The default implementation begins by calling compositionAttributesAtRange: to obtain extra attributes that an input method wants to include such as font or  glyph information.  Then the appropriate underline and underline color information is added to the attributes dictionary for the style parameter. Finally the style value is added as dictionary value.  The key for the style value is NSMarkedClauseSegment. The returned object should be an autoreleased object.
+// Returns a dictionary of text attributes that can mark a range of an attributed string to send to a client.
 func (o *IMKInputController) MarkForStyleAtRange(style int, range_ foundation.NSRange) *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _iMKInputControllerSelMarkForStyleAtRange, style, range_)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iMKInputControllerSelMarkForStyleAtRange, style, range_)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
-// @method @abstract   Called to pass commands that are not generated as part of the text input. @discussion The default implementation checks if the controller object (i.e. self) responds to the selector.  If that is true the message performSelector:withObject  is sent to the controller class.  The object parameter in that case is the infoDictionary. This method is called when a user selects a command item from the text input menu.  To support this an input method merely needs to provide actions for each menu item that will be placed in the menu. i.e. -(void)menuAction:(id)sender Note that the sender in this instance will be the infoDictionary.  The dictionary contains two values: kIMKCommandMenuItemName			NSMenuItem  -- the NSMenuItem that was selected kIMKCommandClientName			id<IMKTextInput, NSObject> - the current client
+// Passes commands that are not generated as part of the text input process.
 func (o *IMKInputController) DoCommandBySelectorCommandDictionary(aSelector objc.SEL, infoDictionary *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_iMKInputControllerSelDoCommandBySelectorCommandDictionary, aSelector, infoDictionary)
+	o.Ptr().Send(_iMKInputControllerSelDoCommandBySelectorCommandDictionary, aSelector, infoDictionary.Ptr())
 }
 
-// @method @abstract   Called to inform an input method that any visible UI should be closed.
+// Informs an input method that it should close any visible user interface.
 func (o *IMKInputController) HidePalettes() {
 	o.Ptr().Send(_iMKInputControllerSelHidePalettes)
 }
 
-// @method @abstract   Returns a menu of input method specific commands. @discussion This method is called whenever the menu needs to be drawn so that input methods can update the menu to reflect their current state. The returned NSMenu is an autoreleased object.
+// Returns a menu of commands that are specific to an input method.
 func (o *IMKInputController) Menu() *appkit.NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iMKInputControllerSelMenu)
 	if _ret != 0 {
@@ -109,18 +115,18 @@ func (o *IMKInputController) Menu() *appkit.NSMenu {
 	return appkit.NSMenuFromID(_ret)
 }
 
-// @method     - (id)delegate; @abstract   Returns the input controller's delegate object. The returned id is an autoreleased object.
+// Returns the delegate for input controller object.
 func (o *IMKInputController) Delegate() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iMKInputControllerSelDelegate)
 	return _ret
 }
 
-// @method @abstract   Set the input controller's delegate object.
+// Sets the delegate for input controller object.
 func (o *IMKInputController) SetDelegate(newDelegate objc.ID) {
 	o.Ptr().Send(_iMKInputControllerSelSetDelegate, newDelegate)
 }
 
-// @method @abstract   Return the server object which is managing this input controller. The returned IMKServer is an autoreleased object.
+// Returns the server object that manages the input controller.
 func (o *IMKInputController) Server() *IMKServer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iMKInputControllerSelServer)
 	if _ret != 0 {
@@ -129,7 +135,7 @@ func (o *IMKInputController) Server() *IMKServer {
 	return IMKServerFromID(_ret)
 }
 
-// @method @abstract   Returns this controller's client object. @discussion The client object will conform to the IMKTextInput protocol. The returned object is an autoreleased object.
+// Returns the client object associated with the input controller.
 func (o *IMKInputController) Client() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iMKInputControllerSelClient)
 	return _ret
@@ -140,17 +146,17 @@ func (o *IMKInputController) InputControllerWillClose() {
 	o.Ptr().Send(_iMKInputControllerSelInputControllerWillClose)
 }
 
-// @method @abstract   Called when a user has selected a annotation in a candidate window. @discussion When a candidate window is displayed and the user selects an annotation the selected annotation is sent to the input controller via this method.  The currently selected candidateString is also sent to the input method.
+// Sends the selected candidate string and annotation string to the input controller.
 func (o *IMKInputController) AnnotationSelectedForCandidate(annotationString *foundation.NSAttributedString, candidateString *foundation.NSAttributedString) {
 	o.Ptr().Send(_iMKInputControllerSelAnnotationSelectedForCandidate, annotationString.Ptr(), candidateString.Ptr())
 }
 
-// @method @abstract   Informs an input controller that the current candidate selection in the candidate window has changed. @discussion The candidate parameter is the candidate string that the selection changed to.  Note this method is called to indicate that the user is moving around in the candidate window.  The candidate object is not a final selection.
+// Informs an input controller that the current candidate selection in the candidate window has changed.
 func (o *IMKInputController) CandidateSelectionChanged(candidateString *foundation.NSAttributedString) {
 	o.Ptr().Send(_iMKInputControllerSelCandidateSelectionChanged, candidateString.Ptr())
 }
 
-// @method @abstract   Called when a new candidate has been finally selected. @discussion The candidate parameter is the users final choice from the candidate window. The candidate window will have been closed before this method is called.
+// Informs an input controller that a new candidate is selected.
 func (o *IMKInputController) CandidateSelected(candidateString *foundation.NSAttributedString) {
 	o.Ptr().Send(_iMKInputControllerSelCandidateSelected, candidateString.Ptr())
 }

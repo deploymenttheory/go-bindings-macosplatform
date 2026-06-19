@@ -51,19 +51,25 @@ func (o *MTRControllerFactoryParams) SetStartServer(startServer bool) {
 }
 
 func (o *MTRControllerFactoryParams) PaaCerts() *foundation.NSArray[*foundation.NSData] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSData]](o.Ptr(), _mTRControllerFactoryParamsSelPaaCerts)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRControllerFactoryParamsSelPaaCerts)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSData](_ret)
 }
 
 func (o *MTRControllerFactoryParams) SetPaaCerts(paaCerts *foundation.NSArray[*foundation.NSData]) {
-	o.Ptr().Send(_mTRControllerFactoryParamsSelSetPaaCerts, paaCerts)
+	o.Ptr().Send(_mTRControllerFactoryParamsSelSetPaaCerts, paaCerts.Ptr())
 }
 
 func (o *MTRControllerFactoryParams) CdCerts() *foundation.NSArray[*foundation.NSData] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSData]](o.Ptr(), _mTRControllerFactoryParamsSelCdCerts)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRControllerFactoryParamsSelCdCerts)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSData](_ret)
 }
 
 func (o *MTRControllerFactoryParams) SetCdCerts(cdCerts *foundation.NSArray[*foundation.NSData]) {
-	o.Ptr().Send(_mTRControllerFactoryParamsSelSetCdCerts, cdCerts)
+	o.Ptr().Send(_mTRControllerFactoryParamsSelSetCdCerts, cdCerts.Ptr())
 }

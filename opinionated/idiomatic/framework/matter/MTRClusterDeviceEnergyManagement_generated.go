@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Device Energy Management This cluster allows a client to manage the power draw of a device. An example of such a client could be an Energy Management System (EMS) which controls an Energy Smart Appliance (ESA).
+//
 // MTRClusterDeviceEnergyManagement wraps [raw.MTRClusterDeviceEnergyManagement] with a fluent Go API.
 type MTRClusterDeviceEnergyManagement struct {
 	inner *raw.MTRClusterDeviceEnergyManagement

@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An entity is the general purpose object in an entity-component system. Entites have many components but components are associated with only a single entity. Note: GKEntity supports NSCopying and NSSecureCoding, but your custom GKComponent's must also support NSCopying and NSSecureCoding @see GKComponent @see GKComponentSystem
+// An object relevant to gameplay, with functionality entirely provided by a collection of component objects.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkentity
 type GKEntity struct {
@@ -38,7 +38,7 @@ func GKEntityFromID(id objc.ID) *GKEntity {
 	return o
 }
 
-// Creates a new entity ready to have components added to it.
+// Creates a new entity object.
 func GKEntityEntity() *GKEntity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKEntity), _gKEntitySelEntity)
 	if _ret != 0 {
@@ -47,7 +47,7 @@ func GKEntityEntity() *GKEntity {
 	return GKEntityFromID(_ret)
 }
 
-// Creates a new entity ready to have components added to it.
+// Initializes a new entity object.
 func (o *GKEntity) Init() *GKEntity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKEntitySelInit)
 	if _ret != 0 {
@@ -56,22 +56,22 @@ func (o *GKEntity) Init() *GKEntity {
 	return GKEntityFromID(_ret)
 }
 
-// General update loop for this entity, which also updates all components in this entity that are not currently in a dedicated component system. Per-entity component updates is a simpler and less flexible option to using per-component updates, however both can not be allowed to occur at the same time for a component. Thus components that are added to dedicated component systems will not be updated here as they have opted for the more powerful feature of per-component systems. Update those components via their system instead. @see GKComponentSystem @param seconds elapsed time, in seconds, since last frame
+// Performs periodic updates for each of the entity’s components.
 func (o *GKEntity) UpdateWithDeltaTime(seconds float64) {
 	o.Ptr().Send(_gKEntitySelUpdateWithDeltaTime, seconds)
 }
 
-// Adds a component to this entity.  If a component of the same class already exists it is overwritten with the new component. @param component the component to be added @see GKComponent
+// Adds a component to the entity.
 func (o *GKEntity) AddComponent(component *GKComponent) {
 	o.Ptr().Send(_gKEntitySelAddComponent, component.Ptr())
 }
 
-// Removes the component of the indicates class from this entity @param componentClass the class of the component you want to remove
+// Removes the component of the specified class from the entity.
 func (o *GKEntity) RemoveComponentForClass(componentClass objc.Class) {
 	o.Ptr().Send(_gKEntitySelRemoveComponentForClass, componentClass)
 }
 
-// Gets the component of the indicated class.  Returns nil if entity does not have this component @param componentClass the class of the component you want to get
+// Returns the entity’s component for the specified component class.
 func (o *GKEntity) ComponentForClass(componentClass objc.Class) *GKComponent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKEntitySelComponentForClass, componentClass)
 	if _ret != 0 {

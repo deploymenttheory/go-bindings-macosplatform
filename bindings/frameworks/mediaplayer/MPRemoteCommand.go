@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that responds to remote command events.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpremotecommand
 type MPRemoteCommand struct {
 	foundation.NSObject
@@ -35,19 +37,22 @@ func MPRemoteCommandFromID(id objc.ID) *MPRemoteCommand {
 	return o
 }
 
+// Adds a target object to be called when an event is received.
 func (o *MPRemoteCommand) AddTargetAction(target objc.ID, action objc.SEL) {
 	o.Ptr().Send(_mPRemoteCommandSelAddTargetAction, target, action)
 }
 
+// Removes a target and action from a remote command object.
 func (o *MPRemoteCommand) RemoveTargetAction(target objc.ID, action objc.SEL) {
 	o.Ptr().Send(_mPRemoteCommandSelRemoveTargetAction, target, action)
 }
 
+// Removes a target from the remote command object.
 func (o *MPRemoteCommand) RemoveTarget(target objc.ID) {
 	o.Ptr().Send(_mPRemoteCommandSelRemoveTarget, target)
 }
 
-// Returns an opaque object to act as the target.
+// Adds a block to be called when an event is received.
 func (o *MPRemoteCommand) AddTargetWithHandler(handler func(*MPRemoteCommandEvent) MPRemoteCommandHandlerStatus) objc.ID {
 	var __block_handler objc.Block
 	if handler != nil {

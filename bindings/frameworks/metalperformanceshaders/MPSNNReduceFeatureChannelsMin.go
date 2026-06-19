@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A reduction filter that returns the minimum value for each feature channel in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnreducefeaturechannelsmin
 type MPSNNReduceFeatureChannelsMin struct {
 	mpsneuralnetwork.MPSNNReduceUnary

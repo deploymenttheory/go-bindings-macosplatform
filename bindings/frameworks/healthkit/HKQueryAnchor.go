@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object used to identify all the samples previously returned by an anchored object query.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkqueryanchor
 type HKQueryAnchor struct {
 	foundation.NSObject
@@ -30,7 +32,7 @@ func HKQueryAnchorFromID(id objc.ID) *HKQueryAnchor {
 	return o
 }
 
-// @method        anchorFromValue: @discussion    Creates an HKQueryAnchor with an integer anchor which was previously obtained from an HKAnchoredObjectQuery prior to iOS 9.0.
+// Returns an anchor object from the provided anchor value.
 func HKQueryAnchorAnchorFromValue(value uint) *HKQueryAnchor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQueryAnchor), _hKQueryAnchorSelAnchorFromValue, value)
 	if _ret != 0 {

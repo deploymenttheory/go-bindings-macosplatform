@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A reference to a registered metaparameter that the app can share with multiple sound events or sources.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseglobalmetaparameterasset
 type PHASEGlobalMetaParameterAsset struct {
 	PHASEAsset

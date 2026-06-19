@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An active area inside a control.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsactioncell
 type NSActionCell struct {
 	NSCell

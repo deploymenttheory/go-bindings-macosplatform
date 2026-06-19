@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about OpenGL textures created by the GLKTextureLoader class.
+//
 // Apple documentation: https://developer.apple.com/documentation/glkit/glktextureinfo
 type GLKTextureInfo struct {
 	foundation.NSObject

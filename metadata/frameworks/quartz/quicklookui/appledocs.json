@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "framework": "QuickLookUI",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "QLFilePreviewRequest": {
+      "doc": "A Quick Look preview request that indicates the content to preview.",
+      "url": "https://developer.apple.com/documentation/quicklookui/qlfilepreviewrequest"
+    },
+    "QLPreviewPanel": {
+      "doc": "A class that implements the Quick Look preview panel to display a preview of a list of items.",
+      "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewpanel"
+    },
+    "QLPreviewProvider": {
+      "doc": "A class that you subclass to provide a data-based Quick Look preview extension.",
+      "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewprovider"
+    },
+    "QLPreviewReply": {
+      "doc": "The class you create when providing a data-based Quick Look preview extension.",
+      "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewreply"
+    },
+    "QLPreviewReplyAttachment": {
+      "doc": "An attachment for a Quick Look preview reply that provides additional content for the system to display a preview.",
+      "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewreplyattachment"
+    },
+    "QLPreviewView": {
+      "doc": "A Quick Look preview of an item that you can embed into your view hierarchy.",
+      "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewview"
+    }
+  },
+  "methods": {
+    "QLPreviewPanel": {
+      "+sharedPreviewPanel": {
+        "doc": "Returns the shared Quick Look preview panel instance.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewpanel/shared()"
+      },
+      "+sharedPreviewPanelExists": {
+        "doc": "Returns a Boolean value that indicates whether the system has created a shared Quick Look preview panel.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewpanel/sharedpreviewpanelexists()"
+      },
+      "-enterFullScreenMode:withOptions:": {
+        "doc": "Instructs the panel to enter full screen mode.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewpanel/enterfullscreenmode(_:withoptions:)"
+      },
+      "-exitFullScreenModeWithOptions:": {
+        "doc": "Instructs the panel to exit full screen mode.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewpanel/exitfullscreenmode(options:)"
+      },
+      "-refreshCurrentPreviewItem": {
+        "doc": "Asks the preview panel to recompute the preview of the current preview item.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewpanel/refreshcurrentpreviewitem()"
+      },
+      "-reloadData": {
+        "doc": "Asks the preview panel to reload its data from its data source.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewpanel/reloaddata()"
+      },
+      "-updateController": {
+        "doc": "Asks the preview panel to update its current controller.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewpanel/updatecontroller()"
+      }
+    },
+    "QLPreviewReply": {
+      "-initWithFileURL:": {
+        "doc": "Creates a preview reply from an existing file URL.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewreply/init(fileurl:)"
+      }
+    },
+    "QLPreviewReplyAttachment": {
+      "-initWithData:contentType:": {
+        "doc": "Creates a preview reply attachment with the specified type.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewreplyattachment/init(data:contenttype:)"
+      }
+    },
+    "QLPreviewView": {
+      "-close": {
+        "doc": "Closes the view, releasing the current preview item.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewview/close()"
+      },
+      "-initWithFrame:": {
+        "doc": "Creates a preview view with the provided frame.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewview/init(frame:)"
+      },
+      "-initWithFrame:style:": {
+        "doc": "Creates a preview view with the provided frame and style.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewview/init(frame:style:)"
+      },
+      "-refreshPreviewItem": {
+        "doc": "Updates the preview to display the currently previewed item.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewview/refreshpreviewitem()"
+      }
+    }
+  },
+  "properties": {
+    "QLFilePreviewRequest": {
+      "fileURL": {
+        "doc": "The URL that indicates the content to preview.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlfilepreviewrequest/fileurl"
+      }
+    },
+    "QLPreviewPanel": {
+      "currentController": {
+        "doc": "The current first responder accepting to control the preview panel.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewpanel/currentcontroller"
+      },
+      "currentPreviewItem": {
+        "doc": "The currently previewed item.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewpanel/currentpreviewitem"
+      },
+      "currentPreviewItemIndex": {
+        "doc": "The index of the current preview item.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewpanel/currentpreviewitemindex"
+      },
+      "dataSource": {
+        "doc": "The preview panel data source.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewpanel/datasource"
+      },
+      "delegate": {
+        "doc": "The delegate object that controls the preview panel’s behavior.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewpanel/delegate"
+      },
+      "displayState": {
+        "doc": "The preview panel’s display state.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewpanel/displaystate"
+      },
+      "inFullScreenMode": {
+        "doc": "The property that indicates whether the panel is in full screen mode.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewpanel/isinfullscreenmode"
+      }
+    },
+    "QLPreviewReply": {
+      "attachments": {
+        "doc": "The attachments for a preview reply that provide additional data for the system to display the preview.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewreply/attachments"
+      },
+      "stringEncoding": {
+        "doc": "String encoding for text or html based previews. Defaults to NSUTF8StringEncoding.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewreply/stringencoding-1k9kb"
+      },
+      "title": {
+        "doc": "The title for the system to display with the preview.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewreply/title"
+      }
+    },
+    "QLPreviewReplyAttachment": {
+      "contentType": {
+        "doc": "The content type of the preview attachment.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewreplyattachment/contenttype"
+      },
+      "data": {
+        "doc": "The data of the preview attachment.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewreplyattachment/data"
+      }
+    },
+    "QLPreviewView": {
+      "autostarts": {
+        "doc": "A Boolean value that determines whether the preview starts automatically.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewview/autostarts"
+      },
+      "displayState": {
+        "doc": "The current display state of the previewItem.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewview/displaystate"
+      },
+      "previewItem": {
+        "doc": "The item to preview.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewview/previewitem"
+      },
+      "shouldCloseWithWindow": {
+        "doc": "A Boolean value that determines whether the preview should close when its window closes.",
+        "url": "https://developer.apple.com/documentation/quicklookui/qlpreviewview/shouldclosewithwindow"
+      }
+    }
+  }
+}

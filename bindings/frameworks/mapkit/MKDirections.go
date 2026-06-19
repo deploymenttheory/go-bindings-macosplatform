@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A utility object that computes directions and travel-time information based on the route information you provide.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkdirections
 type MKDirections struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func MKDirectionsFromID(id objc.ID) *MKDirections {
 	return o
 }
 
+// Creates and returns a directions object using the specified request.
 func (o *MKDirections) InitWithRequest(request *MKDirectionsRequest) *MKDirections {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKDirectionsSelInitWithRequest, request.Ptr())
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func (o *MKDirections) InitWithRequest(request *MKDirectionsRequest) *MKDirectio
 	return MKDirectionsFromID(_ret)
 }
 
+// Begins calculating the requested route information asynchronously.
 func (o *MKDirections) CalculateDirectionsWithCompletionHandler(completionHandler func(*MKDirectionsResponse, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -58,6 +62,7 @@ func (o *MKDirections) CalculateDirectionsWithCompletionHandler(completionHandle
 	o.Ptr().Send(_mKDirectionsSelCalculateDirectionsWithCompletionHandler, __block_completionHandler)
 }
 
+// Begins calculating the requested travel-time information asynchronously.
 func (o *MKDirections) CalculateETAWithCompletionHandler(completionHandler func(*MKETAResponse, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -72,6 +77,7 @@ func (o *MKDirections) CalculateETAWithCompletionHandler(completionHandler func(
 	o.Ptr().Send(_mKDirectionsSelCalculateETAWithCompletionHandler, __block_completionHandler)
 }
 
+// Cancels a pending request.
 func (o *MKDirections) Cancel() {
 	o.Ptr().Send(_mKDirectionsSelCancel)
 }

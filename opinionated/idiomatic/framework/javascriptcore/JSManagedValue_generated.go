@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A JavaScript value with conditional retain behavior to provide automatic memory management.
+//
 // ManagedValue wraps [raw.JSManagedValue] with a fluent Go API.
 type ManagedValue struct {
 	inner *raw.JSManagedValue
@@ -29,7 +31,7 @@ func ManagedValueFromID(id objc.ID) *ManagedValue {
 	return &ManagedValue{inner: raw.JSManagedValueFromID(id)}
 }
 
-// @method @abstract Create a JSManagedValue. @result The new JSManagedValue.
+// Initializes a managed value with the specified JavaScript value.
 //
 // NewManagedValueWithValue creates a new [ManagedValue].
 func NewManagedValueWithValue(value *raw.JSValue) *ManagedValue {

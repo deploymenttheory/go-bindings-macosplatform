@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A kernel that consumes one matrix and produces one matrix.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixunarykernel
 type MPSMatrixUnaryKernel struct {
 	mpscore.MPSKernel

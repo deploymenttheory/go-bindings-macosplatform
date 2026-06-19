@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a single logical selection context that corresponds to an insertion point.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextselection
 type NSTextSelection struct {
 	foundation.NSObject
@@ -46,6 +48,7 @@ func NSTextSelectionFromID(id objc.ID) *NSTextSelection {
 	return o
 }
 
+// Creates a new text selection with the ranges, selection affinity, and granularity you provide.
 func (o *NSTextSelection) InitWithRangesAffinityGranularity(textRanges *foundation.NSArray[*NSTextRange], affinity NSTextSelectionAffinity, granularity NSTextSelectionGranularity) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionSelInitWithRangesAffinityGranularity, textRanges.Ptr(), affinity, granularity)
 	if _ret != 0 {
@@ -54,6 +57,7 @@ func (o *NSTextSelection) InitWithRangesAffinityGranularity(textRanges *foundati
 	return NSTextSelectionFromID(_ret)
 }
 
+// Creates a test selection from data in an unarchiver.
 func (o *NSTextSelection) InitWithCoder(coder *foundation.NSCoder) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -62,6 +66,7 @@ func (o *NSTextSelection) InitWithCoder(coder *foundation.NSCoder) *NSTextSelect
 	return NSTextSelectionFromID(_ret)
 }
 
+// Creates a new text selection with the range, selection affinity, and granularity you provide.
 func (o *NSTextSelection) InitWithRangeAffinityGranularity(range_ *NSTextRange, affinity NSTextSelectionAffinity, granularity NSTextSelectionGranularity) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionSelInitWithRangeAffinityGranularity, range_.Ptr(), affinity, granularity)
 	if _ret != 0 {
@@ -70,6 +75,7 @@ func (o *NSTextSelection) InitWithRangeAffinityGranularity(range_ *NSTextRange, 
 	return NSTextSelectionFromID(_ret)
 }
 
+// Creates a new text selection with the location and selection affinity you provide.
 func (o *NSTextSelection) InitWithLocationAffinity(location NSTextLocation, affinity NSTextSelectionAffinity) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionSelInitWithLocationAffinity, location, affinity)
 	if _ret != 0 {
@@ -78,6 +84,7 @@ func (o *NSTextSelection) InitWithLocationAffinity(location NSTextLocation, affi
 	return NSTextSelectionFromID(_ret)
 }
 
+// Creates a subselection of the current text selection with the ranges you specify.
 func (o *NSTextSelection) TextSelectionWithTextRanges(textRanges *foundation.NSArray[*NSTextRange]) *NSTextSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionSelTextSelectionWithTextRanges, textRanges.Ptr())
 	if _ret != 0 {
@@ -137,10 +144,13 @@ func (o *NSTextSelection) SetSecondarySelectionLocation(secondarySelectionLocati
 }
 
 func (o *NSTextSelection) TypingAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSTextSelectionSelTypingAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextSelectionSelTypingAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSTextSelection) SetTypingAttributes(typingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSTextSelectionSelSetTypingAttributes, typingAttributes)
+	o.Ptr().Send(_nSTextSelectionSelSetTypingAttributes, typingAttributes.Ptr())
 }

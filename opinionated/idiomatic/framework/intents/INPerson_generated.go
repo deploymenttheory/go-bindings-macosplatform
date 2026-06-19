@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about a person participating in a SiriKit interaction.
+//
 // Person wraps [raw.INPerson] with a fluent Go API.
 type Person struct {
 	inner *raw.INPerson
@@ -31,6 +33,8 @@ func PersonFromID(id objc.ID) *Person {
 	return &Person{inner: raw.INPersonFromID(id)}
 }
 
+// Creates a person with the specified name and contact information.
+//
 // NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifier creates a new [Person].
 func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifier(personHandle *raw.INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName string, image *raw.INImage, contactIdentifier string, customIdentifier string) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPerson")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCus
 	return &Person{inner: raw.INPersonFromID(_id)}
 }
 
+// Creates a person with the specified name, contact, and relationship information.
+//
 // NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierRelationship creates a new [Person].
 func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierRelationship(personHandle *raw.INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName string, image *raw.INImage, contactIdentifier string, customIdentifier string, relationship *foundation.NSString) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPerson")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCus
 	return &Person{inner: raw.INPersonFromID(_id)}
 }
 
+// Creates a person with information that indicates whether the person is the user of the device.
+//
 // NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMe creates a new [Person].
 func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMe(personHandle *raw.INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName string, image *raw.INImage, contactIdentifier string, customIdentifier string, isMe bool) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPerson")), objc.RegisterName("alloc"))
@@ -52,6 +60,8 @@ func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCus
 	return &Person{inner: raw.INPersonFromID(_id)}
 }
 
+// Creates a person that includes required metadata for messaging intents.
+//
 // NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMeSuggestionType creates a new [Person].
 func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMeSuggestionType(personHandle *raw.INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName string, image *raw.INImage, contactIdentifier string, customIdentifier string, isMe bool, suggestionType INPersonSuggestionType) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPerson")), objc.RegisterName("alloc"))
@@ -59,6 +69,8 @@ func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCus
 	return &Person{inner: raw.INPersonFromID(_id)}
 }
 
+// Creates a person with information Siri can use to suggestion the person at appropriate times.
+//
 // NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsContactSuggestionSuggestionType creates a new [Person].
 func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsContactSuggestionSuggestionType(personHandle *raw.INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName string, image *raw.INImage, contactIdentifier string, customIdentifier string, isContactSuggestion bool, suggestionType INPersonSuggestionType) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPerson")), objc.RegisterName("alloc"))
@@ -66,6 +78,8 @@ func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCus
 	return &Person{inner: raw.INPersonFromID(_id)}
 }
 
+// Creates a person with the specified name, contact, and alias information.
+//
 // NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierAliasesSuggestionType creates a new [Person].
 func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierAliasesSuggestionType(personHandle *raw.INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName string, image *raw.INImage, contactIdentifier string, customIdentifier string, aliases *foundation.NSArray[*raw.INPersonHandle], suggestionType INPersonSuggestionType) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPerson")), objc.RegisterName("alloc"))
@@ -73,6 +87,8 @@ func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCus
 	return &Person{inner: raw.INPersonFromID(_id)}
 }
 
+// Creates a person object with the specified display name and contact information.
+//
 // NewPersonWithHandleNameComponentsContactIdentifier creates a new [Person].
 func NewPersonWithHandleNameComponentsContactIdentifier(handle string, nameComponents *foundation.NSPersonNameComponents, contactIdentifier string) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPerson")), objc.RegisterName("alloc"))
@@ -80,6 +96,8 @@ func NewPersonWithHandleNameComponentsContactIdentifier(handle string, nameCompo
 	return &Person{inner: raw.INPersonFromID(_id)}
 }
 
+// Creates a person object with the specified display name and contact information.
+//
 // NewPersonWithHandleDisplayNameContactIdentifier creates a new [Person].
 func NewPersonWithHandleDisplayNameContactIdentifier(handle string, displayName string, contactIdentifier string) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPerson")), objc.RegisterName("alloc"))
@@ -87,6 +105,8 @@ func NewPersonWithHandleDisplayNameContactIdentifier(handle string, displayName 
 	return &Person{inner: raw.INPersonFromID(_id)}
 }
 
+// Creates a person object with the specified name and contact information.
+//
 // NewPersonWithHandleNameComponentsDisplayNameImageContactIdentifier creates a new [Person].
 func NewPersonWithHandleNameComponentsDisplayNameImageContactIdentifier(handle string, nameComponents *foundation.NSPersonNameComponents, displayName string, image *raw.INImage, contactIdentifier string) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPerson")), objc.RegisterName("alloc"))

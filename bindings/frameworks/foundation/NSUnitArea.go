@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A unit of measure for area.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitarea
 type NSUnitArea struct {
 	NSDimension

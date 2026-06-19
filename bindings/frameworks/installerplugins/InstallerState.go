@@ -39,8 +39,11 @@ func InstallerStateFromID(id objc.ID) *InstallerState {
 
 // @method     choiceDictionaryForIdentifier: @abstract   Retrieves choice dictionaries by identifier. @discussion See choiceDictionaries for the values returned.
 func (o *InstallerState) ChoiceDictionaryForIdentifier(choiceIdentifier *foundation.NSString) *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _installerStateSelChoiceDictionaryForIdentifier, choiceIdentifier.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _installerStateSelChoiceDictionaryForIdentifier, choiceIdentifier.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @method     licenseAgreed @abstract   Specifies the user agreed to the license, if there is no license, this will return NO.
@@ -78,8 +81,11 @@ func (o *InstallerState) TargetPath() *foundation.NSString {
 
 // @method     choiceDictionaries @abstract   Returns an array of choice dictionaries. @discussion Each choice dictionary contains the keys InstallerState_Choice_Identifier,InstallerState_Choice_Installed, and optionally InstallerState_Choice_CustomLocation.  These keys specify a choice and whether they were installed or not.  This is only available after choice selections have been made.
 func (o *InstallerState) ChoiceDictionaries() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _installerStateSelChoiceDictionaries)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _installerStateSelChoiceDictionaries)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @method     installStarted @abstract   Specifies if the install process has started or not. @discussion Will return YES after an install has been initiated.  If YES is returned, you can assume the install has taken place.

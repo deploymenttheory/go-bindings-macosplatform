@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that represents the code and data associated with a single task.
+//
 // Operation wraps [raw.NSOperation] with a fluent Go API.
 type Operation struct {
 	inner *raw.NSOperation

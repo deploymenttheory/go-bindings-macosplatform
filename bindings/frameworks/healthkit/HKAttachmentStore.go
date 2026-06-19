@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The access point for attachments associated with samples in the HealthKit store.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkattachmentstore
 type HKAttachmentStore struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func HKAttachmentStoreFromID(id objc.ID) *HKAttachmentStore {
 	return o
 }
 
-// @method        initWithHealthStore: @abstract      The designated initializer to create an HKAttachmentStore. @param         healthStore     Specifies the HKHealthStore object to use.
+// Creates an attachment store for the provided HealthKit store.
 func (o *HKAttachmentStore) InitWithHealthStore(healthStore *HKHealthStore) *HKAttachmentStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAttachmentStoreSelInitWithHealthStore, healthStore.Ptr())
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *HKAttachmentStore) InitWithHealthStore(healthStore *HKHealthStore) *HKA
 	return HKAttachmentStoreFromID(_ret)
 }
 
-// @method        addAttachmentToObject:name:contentType:URL:metadata:completion: @abstract      Creates a new HKAttachment using the passed in NSURL and attaches it to the specified HKObject. @param         object          The object for which to add the HKAttachment. @param         name            The name of the attachment. @param         contentType     The content type of the attachment. @param         URL             The NSURL to use to create the attachment. @param         metadata        Extra information describing the attachment. @param         completion      Called with an HKAttachment instance once the file was successfully saved and attached, otherwise called with an error.
+// Adds an attachment to the specified object.
 func (o *HKAttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataCompletion(object *HKObject, name *foundation.NSString, contentType *uniformtypeidentifiers.UTType, uRL *foundation.NSURL, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*HKAttachment, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -59,10 +61,10 @@ func (o *HKAttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataCompl
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_hKAttachmentStoreSelAddAttachmentToObjectNameContentTypeURLMetadataCompletion, object.Ptr(), name.Ptr(), contentType.Ptr(), uRL.Ptr(), metadata, __block_completion)
+	o.Ptr().Send(_hKAttachmentStoreSelAddAttachmentToObjectNameContentTypeURLMetadataCompletion, object.Ptr(), name.Ptr(), contentType.Ptr(), uRL.Ptr(), metadata.Ptr(), __block_completion)
 }
 
-// @method        removeAttachment:fromObject:completion: @abstract      Removes the given HKAttachment from the specified HKObject. @param         attachment      The HKAttachment to be removed. @param         object          The object from which to remove the attachment. @param         completion      Called once the remove operation finishes.
+// Removes the specified attachment.
 func (o *HKAttachmentStore) RemoveAttachmentFromObjectCompletion(attachment *HKAttachment, object *HKObject, completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -74,7 +76,7 @@ func (o *HKAttachmentStore) RemoveAttachmentFromObjectCompletion(attachment *HKA
 	o.Ptr().Send(_hKAttachmentStoreSelRemoveAttachmentFromObjectCompletion, attachment.Ptr(), object.Ptr(), __block_completion)
 }
 
-// @method        getAttachmentsForObject:completion: @abstract      Retrieves a list of attachments for a given object. @param         object               The object for which to retrieve attachments. @param         completion           Called with a list of attachments or an error.
+// Returns all the attachments for the specified object.
 func (o *HKAttachmentStore) GetAttachmentsForObjectCompletion(object *HKObject, completion func(*foundation.NSArray[*HKAttachment], unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -89,7 +91,7 @@ func (o *HKAttachmentStore) GetAttachmentsForObjectCompletion(object *HKObject, 
 	o.Ptr().Send(_hKAttachmentStoreSelGetAttachmentsForObjectCompletion, object.Ptr(), __block_completion)
 }
 
-// @method        getDataForAttachment:completion: @abstract      Retrieves the NSData for the given HKAttachment. @discussion    Prefer @c streamDataForAttachment:completion: for large files that support incremental reading to limit your app's peak memory usage. The attachment's data may not always be available locally, and could be stored in iCloud. @param         attachment           The attachment object to read data from. @param         completion           Called with an NSData or an error. @return        An NSProgress object to use for tracking the progress of downloading the attachment's data from iCloud.
+// Returns an attachment’s data.
 func (o *HKAttachmentStore) GetDataForAttachmentCompletion(attachment *HKAttachment, completion func(*foundation.NSData, unsafe.Pointer)) *foundation.NSProgress {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -108,7 +110,7 @@ func (o *HKAttachmentStore) GetDataForAttachmentCompletion(attachment *HKAttachm
 	return foundation.NSProgressFromID(_ret)
 }
 
-// @method        streamDataForAttachment:dataHandler: @abstract      Streams the given HKAttachment's data as ordered NSData chunks. @discussion    The dataHandler's done parameter is set to YES when all chunks have been streamed. The attachment's data may not always be available locally, and could be stored in iCloud. @param         attachment           The attachment object to read data from. @param         dataHandler          Called with an NSData chunk or an error. When done is YES, the operation has completed. @return        An NSProgress object to use for tracking the progress of downloading the attachment's data from iCloud.
+// Asynchronously returns the attachment’s data.
 func (o *HKAttachmentStore) StreamDataForAttachmentDataHandler(attachment *HKAttachment, dataHandler func(*foundation.NSData, unsafe.Pointer, bool)) *foundation.NSProgress {
 	var __block_dataHandler objc.Block
 	if dataHandler != nil {

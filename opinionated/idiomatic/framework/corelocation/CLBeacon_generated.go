@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// Information about an observed iBeacon device and its relative distance to a person’s device.
+//
 // Beacon wraps [raw.CLBeacon] with a fluent Go API.
 type Beacon struct {
 	inner *raw.CLBeacon

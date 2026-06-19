@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A static collection of objects associated with unique keys.
+//
 // Dictionary wraps [raw.NSDictionary] with a fluent Go API.
 type Dictionary struct {
 	inner *raw.NSDictionary[objc.ID, objc.ID]
@@ -38,6 +40,8 @@ func NewDictionary() *Dictionary {
 	return &Dictionary{inner: raw.NSDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 
+// Initializes a newly allocated dictionary with the specified number of key-value pairs constructed from the provided C arrays of keys and objects.
+//
 // NewDictionaryWithObjectsForKeysCount creates a new [Dictionary].
 func NewDictionaryWithObjectsForKeysCount(objects unsafe.Pointer, keys raw.NSCopying, cnt uint) *Dictionary {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDictionary")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewDictionaryWithObjectsForKeysCount(objects unsafe.Pointer, keys raw.NSCop
 	return &Dictionary{inner: raw.NSDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 
+// Creates a dictionary initialized from data in the provided unarchiver.
+//
 // NewDictionaryWithCoder creates a new [Dictionary].
 func NewDictionaryWithCoder(coder *raw.NSCoder) *Dictionary {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDictionary")), objc.RegisterName("alloc"))
@@ -52,6 +58,8 @@ func NewDictionaryWithCoder(coder *raw.NSCoder) *Dictionary {
 	return &Dictionary{inner: raw.NSDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 
+// Initializes a newly allocated dictionary using the keys and values found in a file at a given path.
+//
 // NewDictionaryWithContentsOfFile creates a new [Dictionary].
 func NewDictionaryWithContentsOfFile(path string) *Dictionary {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDictionary")), objc.RegisterName("alloc"))
@@ -59,6 +67,8 @@ func NewDictionaryWithContentsOfFile(path string) *Dictionary {
 	return &Dictionary{inner: raw.NSDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 
+// Initializes a newly allocated dictionary using the keys and values found at a given URL.
+//
 // NewDictionaryWithContentsOfURL creates a new [Dictionary].
 func NewDictionaryWithContentsOfURL(url string) *Dictionary {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDictionary")), objc.RegisterName("alloc"))
@@ -66,6 +76,8 @@ func NewDictionaryWithContentsOfURL(url string) *Dictionary {
 	return &Dictionary{inner: raw.NSDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 
+// Initializes a newly allocated dictionary with entries constructed from the specified set of values and keys.
+//
 // NewDictionaryWithObjectsAndKeys creates a new [Dictionary].
 func NewDictionaryWithObjectsAndKeys(firstObject objc.ID) *Dictionary {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDictionary")), objc.RegisterName("alloc"))
@@ -73,6 +85,8 @@ func NewDictionaryWithObjectsAndKeys(firstObject objc.ID) *Dictionary {
 	return &Dictionary{inner: raw.NSDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 
+// Initializes a newly allocated dictionary by placing in it the keys and values contained in another given dictionary.
+//
 // NewDictionaryWithDictionary creates a new [Dictionary].
 func NewDictionaryWithDictionary(otherDictionary purego.IDer) *Dictionary {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDictionary")), objc.RegisterName("alloc"))
@@ -80,6 +94,8 @@ func NewDictionaryWithDictionary(otherDictionary purego.IDer) *Dictionary {
 	return &Dictionary{inner: raw.NSDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 
+// Initializes a newly allocated dictionary using the objects contained in another given dictionary.
+//
 // NewDictionaryWithDictionaryCopyItems creates a new [Dictionary].
 func NewDictionaryWithDictionaryCopyItems(otherDictionary purego.IDer, flag bool) *Dictionary {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDictionary")), objc.RegisterName("alloc"))
@@ -87,6 +103,8 @@ func NewDictionaryWithDictionaryCopyItems(otherDictionary purego.IDer, flag bool
 	return &Dictionary{inner: raw.NSDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 
+// Initializes a newly allocated dictionary with key-value pairs constructed from the provided arrays of keys and objects.
+//
 // NewDictionaryWithObjectsForKeys creates a new [Dictionary].
 func NewDictionaryWithObjectsForKeys(objects *raw.NSArray[objc.ID], keys ...purego.IDer) *Dictionary {
 	_ptrs := make([]objc.ID, len(keys))
@@ -105,6 +123,8 @@ func NewDictionaryWithObjectsForKeys(objects *raw.NSArray[objc.ID], keys ...pure
 	return &Dictionary{inner: raw.NSDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 
+// Initializes a newly allocated dictionary using the keys and values found at a given URL.
+//
 // NewDictionaryWithContentsOfURLError creates a new [Dictionary].
 func NewDictionaryWithContentsOfURLError(url string) (*Dictionary, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDictionary")), objc.RegisterName("alloc"))
@@ -122,11 +142,15 @@ func (x *Dictionary) WithScriptingProperties(scriptingProperties *raw.NSDictiona
 	return x
 }
 
+// Returns the value associated with a given key.
+//
 // ObjectForKey calls the underlying ObjectForKey.
 func (x *Dictionary) ObjectForKey(aKey objc.ID) objc.ID {
 	return x.inner.ObjectForKey(aKey)
 }
 
+// Provides an enumerator to access the keys in the dictionary.
+//
 // KeyEnumerator calls the underlying KeyEnumerator.
 func (x *Dictionary) KeyEnumerator() *raw.NSEnumerator[objc.ID] {
 	return x.inner.KeyEnumerator()
@@ -137,11 +161,15 @@ func (x *Dictionary) Count() uint {
 	return x.inner.Count()
 }
 
+// Returns a new array containing the keys corresponding to all occurrences of a given object in the dictionary.
+//
 // AllKeysForObject calls the underlying AllKeysForObject.
 func (x *Dictionary) AllKeysForObject(anObject objc.ID) *raw.NSArray[objc.ID] {
 	return x.inner.AllKeysForObject(anObject)
 }
 
+// Returns a string object that represents the contents of the dictionary, formatted as a property list.
+//
 // DescriptionWithLocale calls the underlying DescriptionWithLocale.
 func (x *Dictionary) DescriptionWithLocale(locale objc.ID) *String {
 	_r := x.inner.DescriptionWithLocale(locale)
@@ -151,6 +179,8 @@ func (x *Dictionary) DescriptionWithLocale(locale objc.ID) *String {
 	return &String{inner: _r}
 }
 
+// Returns a string object that represents the contents of the dictionary, formatted as a property list.
+//
 // DescriptionWithLocaleIndent calls the underlying DescriptionWithLocaleIndent.
 func (x *Dictionary) DescriptionWithLocaleIndent(locale objc.ID, level uint) *String {
 	_r := x.inner.DescriptionWithLocaleIndent(locale, level)
@@ -160,66 +190,92 @@ func (x *Dictionary) DescriptionWithLocaleIndent(locale objc.ID, level uint) *St
 	return &String{inner: _r}
 }
 
+// Returns a Boolean value that indicates whether the contents of the receiving dictionary are equal to the contents of another given dictionary.
+//
 // IsEqualToDictionary calls the underlying IsEqualToDictionary.
 func (x *Dictionary) IsEqualToDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID]) bool {
 	return x.inner.IsEqualToDictionary(otherDictionary)
 }
 
+// Returns an enumerator object that lets you access each value in the dictionary.
+//
 // ObjectEnumerator calls the underlying ObjectEnumerator.
 func (x *Dictionary) ObjectEnumerator() *raw.NSEnumerator[objc.ID] {
 	return x.inner.ObjectEnumerator()
 }
 
+// Returns as a static array the set of objects from the dictionary that corresponds to the specified keys.
+//
 // ObjectsForKeysNotFoundMarker calls the underlying ObjectsForKeysNotFoundMarker.
 func (x *Dictionary) ObjectsForKeysNotFoundMarker(keys *raw.NSArray[objc.ID], marker objc.ID) *raw.NSArray[objc.ID] {
 	return x.inner.ObjectsForKeysNotFoundMarker(keys, marker)
 }
 
+// Writes a property list representation of the contents of the dictionary to a given URL.
+//
 // WriteToURLError calls the underlying WriteToURLError.
 func (x *Dictionary) WriteToURLError(url string) (bool, error) {
 	return x.inner.WriteToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
+// Returns an array of the dictionary’s keys, in the order they would be in if the dictionary were sorted by its values.
+//
 // KeysSortedByValueUsingSelector calls the underlying KeysSortedByValueUsingSelector.
 func (x *Dictionary) KeysSortedByValueUsingSelector(comparator objc.SEL) *raw.NSArray[objc.ID] {
 	return x.inner.KeysSortedByValueUsingSelector(comparator)
 }
 
+// Returns by reference C arrays of the keys and values in the dictionary.
+//
 // GetObjectsAndKeysCount calls the underlying GetObjectsAndKeysCount.
 func (x *Dictionary) GetObjectsAndKeysCount(objects unsafe.Pointer, keys unsafe.Pointer, count uint) {
 	x.inner.GetObjectsAndKeysCount(objects, keys, count)
 }
 
+// Returns the value associated with a given key.
+//
 // ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
 func (x *Dictionary) ObjectForKeyedSubscript(key objc.ID) objc.ID {
 	return x.inner.ObjectForKeyedSubscript(key)
 }
 
+// Applies a given block object to the entries of the dictionary.
+//
 // EnumerateKeysAndObjectsUsing calls the underlying EnumerateKeysAndObjectsUsing.
 func (x *Dictionary) EnumerateKeysAndObjectsUsing(block objc.Block) {
 	x.inner.EnumerateKeysAndObjectsUsing(block)
 }
 
+// Applies a given block object to the entries of the dictionary, with options specifying how the enumeration is performed.
+//
 // EnumerateKeysAndObjectsWithOptionsUsing calls the underlying EnumerateKeysAndObjectsWithOptionsUsing.
 func (x *Dictionary) EnumerateKeysAndObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block) {
 	x.inner.EnumerateKeysAndObjectsWithOptionsUsing(raw.NSEnumerationOptions(opts), block)
 }
 
+// Returns an array of the dictionary’s keys, in the order they would be in if the dictionary were sorted by its values using a given comparator block.
+//
 // KeysSortedByValueUsingComparator calls the underlying KeysSortedByValueUsingComparator.
 func (x *Dictionary) KeysSortedByValueUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID] {
 	return x.inner.KeysSortedByValueUsingComparator(func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
+// Returns an array of the dictionary’s keys, in the order they would be in if the dictionary were sorted by its values using a given comparator block and a specified set of options.
+//
 // KeysSortedByValueWithOptionsUsingComparator calls the underlying KeysSortedByValueWithOptionsUsingComparator.
 func (x *Dictionary) KeysSortedByValueWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID] {
 	return x.inner.KeysSortedByValueWithOptionsUsingComparator(raw.NSSortOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
+// Returns the set of keys whose corresponding value satisfies a constraint described by a block object.
+//
 // KeysOfEntriesPassingTest calls the underlying KeysOfEntriesPassingTest.
 func (x *Dictionary) KeysOfEntriesPassingTest(predicate objc.Block) *raw.NSSet[objc.ID] {
 	return x.inner.KeysOfEntriesPassingTest(predicate)
 }
 
+// Returns the set of keys whose corresponding value satisfies a constraint described by a block object.
+//
 // KeysOfEntriesWithOptionsPassingTest calls the underlying KeysOfEntriesWithOptionsPassingTest.
 func (x *Dictionary) KeysOfEntriesWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *raw.NSSet[objc.ID] {
 	return x.inner.KeysOfEntriesWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
@@ -244,33 +300,43 @@ func (x *Dictionary) DescriptionInStringsFileFormat() *String {
 	return &String{inner: _r}
 }
 
-// This method is unsafe because it could potentially cause buffer overruns. You should use -getObjects:andKeys:count:
+// Returns by reference C arrays of the keys and values in the dictionary.
 //
 // GetObjectsAndKeys calls the underlying GetObjectsAndKeys.
 func (x *Dictionary) GetObjectsAndKeys(objects unsafe.Pointer, keys unsafe.Pointer) {
 	x.inner.GetObjectsAndKeys(objects, keys)
 }
 
+// Writes a property list representation of the contents of the dictionary to a given path.
+//
 // WriteToFileAtomically calls the underlying WriteToFileAtomically.
 func (x *Dictionary) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
 	return x.inner.WriteToFileAtomically(foundation.NSStringStringWithUTF8String(path), useAuxiliaryFile)
 }
 
+// Writes a property list representation of the contents of the dictionary to a given URL.
+//
 // WriteToURLAtomically calls the underlying WriteToURLAtomically.
 func (x *Dictionary) WriteToURLAtomically(url string, atomically bool) bool {
 	return x.inner.WriteToURLAtomically(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), atomically)
 }
 
+// Returns by reference a C array of objects over which the sender should iterate.
+//
 // CountByEnumeratingWithStateObjectsCount calls the underlying CountByEnumeratingWithStateObjectsCount.
 func (x *Dictionary) CountByEnumeratingWithStateObjectsCount(state *raw.NSFastEnumerationState, buffer unsafe.Pointer, len_ uint) uint {
 	return x.inner.CountByEnumeratingWithStateObjectsCount(state, buffer, len_)
 }
 
+// Returns the file’s size, in bytes.
+//
 // FileSize calls the underlying FileSize.
 func (x *Dictionary) FileSize() uint64 {
 	return x.inner.FileSize()
 }
 
+// Returns file’s modification date.
+//
 // FileModificationDate calls the underlying FileModificationDate.
 func (x *Dictionary) FileModificationDate() *Date {
 	_r := x.inner.FileModificationDate()
@@ -280,6 +346,8 @@ func (x *Dictionary) FileModificationDate() *Date {
 	return &Date{inner: _r}
 }
 
+// Returns the file type.
+//
 // FileType calls the underlying FileType.
 func (x *Dictionary) FileType() *String {
 	_r := x.inner.FileType()
@@ -289,11 +357,15 @@ func (x *Dictionary) FileType() *String {
 	return &String{inner: _r}
 }
 
+// Returns the file’s POSIX permissions.
+//
 // FilePosixPermissions calls the underlying FilePosixPermissions.
 func (x *Dictionary) FilePosixPermissions() uint {
 	return x.inner.FilePosixPermissions()
 }
 
+// Returns the file’s owner account name.
+//
 // FileOwnerAccountName calls the underlying FileOwnerAccountName.
 func (x *Dictionary) FileOwnerAccountName() *String {
 	_r := x.inner.FileOwnerAccountName()
@@ -303,6 +375,8 @@ func (x *Dictionary) FileOwnerAccountName() *String {
 	return &String{inner: _r}
 }
 
+// Returns the file’s group owner account name.
+//
 // FileGroupOwnerAccountName calls the underlying FileGroupOwnerAccountName.
 func (x *Dictionary) FileGroupOwnerAccountName() *String {
 	_r := x.inner.FileGroupOwnerAccountName()
@@ -312,41 +386,57 @@ func (x *Dictionary) FileGroupOwnerAccountName() *String {
 	return &String{inner: _r}
 }
 
+// Returns the filesystem number.
+//
 // FileSystemNumber calls the underlying FileSystemNumber.
 func (x *Dictionary) FileSystemNumber() int {
 	return x.inner.FileSystemNumber()
 }
 
+// Returns the filesystem file number.
+//
 // FileSystemFileNumber calls the underlying FileSystemFileNumber.
 func (x *Dictionary) FileSystemFileNumber() uint {
 	return x.inner.FileSystemFileNumber()
 }
 
+// Returns a Boolean value indicating whether the file hides its extension.
+//
 // FileExtensionHidden calls the underlying FileExtensionHidden.
 func (x *Dictionary) FileExtensionHidden() bool {
 	return x.inner.FileExtensionHidden()
 }
 
+// Returns the file’s HFS creator code.
+//
 // FileHFSCreatorCode calls the underlying FileHFSCreatorCode.
 func (x *Dictionary) FileHFSCreatorCode() uint {
 	return x.inner.FileHFSCreatorCode()
 }
 
+// Returns file’s HFS type code.
+//
 // FileHFSTypeCode calls the underlying FileHFSTypeCode.
 func (x *Dictionary) FileHFSTypeCode() uint {
 	return x.inner.FileHFSTypeCode()
 }
 
+// Returns a Boolean value indicating whether the file is immutable.
+//
 // FileIsImmutable calls the underlying FileIsImmutable.
 func (x *Dictionary) FileIsImmutable() bool {
 	return x.inner.FileIsImmutable()
 }
 
+// Returns a Boolean value indicating whether the file is append only.
+//
 // FileIsAppendOnly calls the underlying FileIsAppendOnly.
 func (x *Dictionary) FileIsAppendOnly() bool {
 	return x.inner.FileIsAppendOnly()
 }
 
+// Returns the file’s creation date.
+//
 // FileCreationDate calls the underlying FileCreationDate.
 func (x *Dictionary) FileCreationDate() *Date {
 	_r := x.inner.FileCreationDate()
@@ -356,6 +446,8 @@ func (x *Dictionary) FileCreationDate() *Date {
 	return &Date{inner: _r}
 }
 
+// Returns the file’s owner account ID.
+//
 // FileOwnerAccountID calls the underlying FileOwnerAccountID.
 func (x *Dictionary) FileOwnerAccountID() *Number {
 	_r := x.inner.FileOwnerAccountID()
@@ -365,6 +457,8 @@ func (x *Dictionary) FileOwnerAccountID() *Number {
 	return &Number{inner: _r}
 }
 
+// Returns file’s group owner account ID.
+//
 // FileGroupOwnerAccountID calls the underlying FileGroupOwnerAccountID.
 func (x *Dictionary) FileGroupOwnerAccountID() *Number {
 	_r := x.inner.FileGroupOwnerAccountID()

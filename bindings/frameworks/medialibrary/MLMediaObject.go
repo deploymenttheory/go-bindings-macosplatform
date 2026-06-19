@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The MLMediaObject class describes a single media file, such as a photo, song, or movie. Each media object contains basic metadata including a name, media type, URL, and so on. Additional information about each object is stored in its list of attributes. For a list of possible object attribute keys, see Media Object Attribute Keys.
+//
 // Apple documentation: https://developer.apple.com/documentation/medialibrary/mlmediaobject
 type MLMediaObject struct {
 	foundation.NSObject
@@ -68,8 +70,11 @@ func (o *MLMediaObject) MediaSourceIdentifier() *foundation.NSString {
 }
 
 func (o *MLMediaObject) Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mLMediaObjectSelAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaObjectSelAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *MLMediaObject) MediaType() MLMediaType {

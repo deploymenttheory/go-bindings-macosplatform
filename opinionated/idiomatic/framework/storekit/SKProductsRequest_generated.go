@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that can retrieve localized information from the App Store about a specified list of products.
+//
 // ProductsRequest wraps [raw.SKProductsRequest] with a fluent Go API.
 type ProductsRequest struct {
 	inner *raw.SKProductsRequest
@@ -30,6 +32,8 @@ func ProductsRequestFromID(id objc.ID) *ProductsRequest {
 	return &ProductsRequest{inner: raw.SKProductsRequestFromID(id)}
 }
 
+// Initializes the request with the set of product identifiers.
+//
 // NewProductsRequestWithProductIdentifiers creates a new [ProductsRequest].
 func NewProductsRequestWithProductIdentifiers(productIdentifiers *foundation.NSSet[*foundation.NSString]) *ProductsRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKProductsRequest")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewProductsRequestWithProductIdentifiers(productIdentifiers *foundation.NSS
 	return &ProductsRequest{inner: raw.SKProductsRequestFromID(_id)}
 }
 
+// The delegate of the request object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *ProductsRequest) WithDelegate(delegate raw.SKRequestDelegate) *ProductsRequest {
 	x.inner.SKRequest.SetDelegate(delegate)

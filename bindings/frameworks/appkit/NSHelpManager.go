@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object for displaying online help for an app.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nshelpmanager
 type NSHelpManager struct {
 	foundation.NSObject
@@ -40,14 +42,17 @@ func NSHelpManagerFromID(id objc.ID) *NSHelpManager {
 	return o
 }
 
+// Associates help content with an object.
 func (o *NSHelpManager) SetContextHelpForObject(attrString *foundation.NSAttributedString, object objc.ID) {
 	o.Ptr().Send(_nSHelpManagerSelSetContextHelpForObject, attrString.Ptr(), object)
 }
 
+// Removes the association between an object and its context-sensitive help.
 func (o *NSHelpManager) RemoveContextHelpForObject(object objc.ID) {
 	o.Ptr().Send(_nSHelpManagerSelRemoveContextHelpForObject, object)
 }
 
+// Returns context-sensitive help for an object.
 func (o *NSHelpManager) ContextHelpForObject(object objc.ID) *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHelpManagerSelContextHelpForObject, object)
 	if _ret != 0 {
@@ -56,19 +61,23 @@ func (o *NSHelpManager) ContextHelpForObject(object objc.ID) *foundation.NSAttri
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
+// Displays the context-sensitive help for a given object at or near the point on the screen specified by a given point.
 func (o *NSHelpManager) ShowContextHelpForObjectLocationHint(object objc.ID, pt corefoundation.CGPoint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSHelpManagerSelShowContextHelpForObjectLocationHint, object, pt)
 	return _ret
 }
 
+// Finds and displays the text at the given anchor location in the given book.
 func (o *NSHelpManager) OpenHelpAnchorInBook(anchor *foundation.NSString, book *foundation.NSString) {
 	o.Ptr().Send(_nSHelpManagerSelOpenHelpAnchorInBook, anchor.Ptr(), book.Ptr())
 }
 
+// Performs a search for the specified string in the specified book.
 func (o *NSHelpManager) FindStringInBook(query *foundation.NSString, book *foundation.NSString) {
 	o.Ptr().Send(_nSHelpManagerSelFindStringInBook, query.Ptr(), book.Ptr())
 }
 
+// Registers one or more help books in the given bundle.
 func (o *NSHelpManager) RegisterBooksInBundle(bundle *foundation.NSBundle) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSHelpManagerSelRegisterBooksInBundle, bundle.Ptr())
 	return _ret

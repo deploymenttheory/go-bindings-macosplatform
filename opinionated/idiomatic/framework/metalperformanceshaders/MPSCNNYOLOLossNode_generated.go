@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class MPSCNNYOLOLossNode @discussion  This node calculates loss information during training typically immediately after the inference portion of network evaluation is performed. The result image of the loss operations is typically the first gradient image to be comsumed by the gradient passes that work their way back up the graph. In addition, the node will update the loss image in the MPSNNLabels with the desired estimate of correctness.
+// A representation of a YOLO loss kernel.
 //
 // CNNYOLOLossNode wraps [raw.MPSCNNYOLOLossNode] with a fluent Go API.
 type CNNYOLOLossNode struct {

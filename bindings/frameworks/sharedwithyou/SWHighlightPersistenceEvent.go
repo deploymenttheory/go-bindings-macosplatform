@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents persistence activity for a highlight.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyou/swhighlightpersistenceevent
 type SWHighlightPersistenceEvent struct {
 	foundation.NSObject
@@ -31,7 +33,7 @@ func SWHighlightPersistenceEventFromID(id objc.ID) *SWHighlightPersistenceEvent 
 	return o
 }
 
-// Initializes a highlight persistence event object when the highlight persistence is changed. @param highlight The object on which the event occurred. @param trigger The trigger persistence event for the highlight.
+// Creates and initializes a persistence event.
 func (o *SWHighlightPersistenceEvent) InitWithHighlightTrigger(highlight *SWHighlight, trigger SWHighlightPersistenceEventTrigger) *SWHighlightPersistenceEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWHighlightPersistenceEventSelInitWithHighlightTrigger, highlight.Ptr(), trigger)
 	if _ret != 0 {

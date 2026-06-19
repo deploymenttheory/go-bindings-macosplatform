@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides a detailed rating for the playing item.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpratingcommand
 type MPRatingCommand struct {
 	MPRemoteCommand

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event that represents a live streaming content key resource request.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetriccontentkeyrequestevent
 type AVMetricContentKeyRequestEvent struct {
 	AVMetricEvent

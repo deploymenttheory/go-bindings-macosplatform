@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes the roles of a set of audio channels.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiochannellayout
 type AVAudioChannelLayout struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func AVAudioChannelLayoutFromID(id objc.ID) *AVAudioChannelLayout {
 	return o
 }
 
-// @method initWithLayoutTag: @abstract Initialize from a layout tag. @param layoutTag The tag. @discussion Returns nil if the tag is either kAudioChannelLayoutTag_UseChannelDescriptions or kAudioChannelLayoutTag_UseChannelBitmap.
+// Creates an audio channel layout object from a layout tag.
 func (o *AVAudioChannelLayout) InitWithLayoutTag(layoutTag uint) *AVAudioChannelLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioChannelLayoutSelInitWithLayoutTag, layoutTag)
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *AVAudioChannelLayout) InitWithLayoutTag(layoutTag uint) *AVAudioChannel
 	return AVAudioChannelLayoutFromID(_ret)
 }
 
-// @method initWithLayout: @abstract Initialize from an AudioChannelLayout. @param layout The AudioChannelLayout. @discussion If the provided layout's tag is kAudioChannelLayoutTag_UseChannelDescriptions, this initializer attempts to convert it to a more specific tag.
+// Creates an audio channel layout object from an existing one.
 func (o *AVAudioChannelLayout) InitWithLayout(layout *coreaudiotypes.AudioChannelLayout) *AVAudioChannelLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioChannelLayoutSelInitWithLayout, layout)
 	if _ret != 0 {
@@ -56,13 +58,13 @@ func (o *AVAudioChannelLayout) InitWithLayout(layout *coreaudiotypes.AudioChanne
 	return AVAudioChannelLayoutFromID(_ret)
 }
 
-// @method isEqual: @abstract Determine whether another AVAudioChannelLayout is exactly equal to this layout. @param object The AVAudioChannelLayout to compare against. @discussion The underlying AudioChannelLayoutTag and AudioChannelLayout are compared for equality.
+// Indicates whether another audio channel layout is exactly equal to the current layout.
 func (o *AVAudioChannelLayout) IsEqual(object objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioChannelLayoutSelIsEqual, object)
 	return _ret
 }
 
-// @method layoutWithLayoutTag: @abstract Create from a layout tag.
+// Creates an audio channel layout object from an audio channel layout tag.
 func AVAudioChannelLayoutLayoutWithLayoutTag(layoutTag uint) *AVAudioChannelLayout {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioChannelLayout), _aVAudioChannelLayoutSelLayoutWithLayoutTag, layoutTag)
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func AVAudioChannelLayoutLayoutWithLayoutTag(layoutTag uint) *AVAudioChannelLayo
 	return AVAudioChannelLayoutFromID(_ret)
 }
 
-// @method layoutWithLayout: @abstract Create from an AudioChannelLayout
+// Creates an audio channel layout object from an existing one.
 func AVAudioChannelLayoutLayoutWithLayout(layout *coreaudiotypes.AudioChannelLayout) *AVAudioChannelLayout {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioChannelLayout), _aVAudioChannelLayoutSelLayoutWithLayout, layout)
 	if _ret != 0 {

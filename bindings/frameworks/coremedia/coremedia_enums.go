@@ -29,12 +29,16 @@ func (e CGLCPContextPriorityRequest) String() string {
 	}
 }
 
+// The type of packing within each video frame, if any.
 type CMPackingType int64
 
 const (
-	KCMPackingType_None       CMPackingType = 1852796517
+	// Each frame contains only a single image, and isn’t frame-packed.
+	KCMPackingType_None CMPackingType = 1852796517
+	// The video contains packed frames that have a left eye image on the left and right eye image on the right.
 	KCMPackingType_SideBySide CMPackingType = 1936286821
-	KCMPackingType_OverUnder  CMPackingType = 1870030194
+	// The video contains packed frames that have a left eye image on the top and right eye image on the bottom.
+	KCMPackingType_OverUnder CMPackingType = 1870030194
 )
 
 func (e CMPackingType) String() string {
@@ -50,12 +54,17 @@ func (e CMPackingType) String() string {
 	}
 }
 
+// Constants describing the projection surface information in a 3D video buffer or channel.
 type CMProjectionType int64
 
 const (
-	KCMProjectionType_Rectangular         CMProjectionType = 1919247220
-	KCMProjectionType_Equirectangular     CMProjectionType = 1701934441
+	// Video content displays on a flat, rectangular 2D surface.
+	KCMProjectionType_Rectangular CMProjectionType = 1919247220
+	// Video content displays as a 360 degree equirectangular projection.
+	KCMProjectionType_Equirectangular CMProjectionType = 1701934441
+	// Video content displays as a 180 degree equirectangular projection.
 	KCMProjectionType_HalfEquirectangular CMProjectionType = 1751478645
+	// Video content displays as a fisheye projection.
 	KCMProjectionType_Fisheye             CMProjectionType = 1718186856
 	KCMProjectionType_ParametricImmersive CMProjectionType = 1886546285
 )
@@ -77,11 +86,15 @@ func (e CMProjectionType) String() string {
 	}
 }
 
+// Constants describing the stereo views contained within a buffer or channel.
 type CMStereoViewComponents int64
 
 const (
-	KCMStereoView_None     CMStereoViewComponents = 0
-	KCMStereoView_LeftEye  CMStereoViewComponents = 1
+	// A constant for video metadata to have no available stereo frames.
+	KCMStereoView_None CMStereoViewComponents = 0
+	// The stereo video track includes a left eye layer.
+	KCMStereoView_LeftEye CMStereoViewComponents = 1
+	// The stereo video track includes a right eye layer.
 	KCMStereoView_RightEye CMStereoViewComponents = 2
 )
 
@@ -99,12 +112,16 @@ func (e CMStereoViewComponents) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Create a set of stereo view interpretation options from a constant.
 type CMStereoViewInterpretationOptions int64
 
 const (
-	KCMStereoViewInterpretation_Default             CMStereoViewInterpretationOptions = 0
+	// The default options for stereo video views.
+	KCMStereoViewInterpretation_Default CMStereoViewInterpretationOptions = 0
+	// Changes the default ordering of eye data, switching it from left-to-right to right-to-left.
 	KCMStereoViewInterpretation_StereoOrderReversed CMStereoViewInterpretationOptions = 1
-	KCMStereoViewInterpretation_AdditionalViews     CMStereoViewInterpretationOptions = 2
+	// A flag indicating that the video content contains additional views beyond the left or right eye.
+	KCMStereoViewInterpretation_AdditionalViews CMStereoViewInterpretationOptions = 2
 )
 
 func (e CMStereoViewInterpretationOptions) String() string {
@@ -121,19 +138,31 @@ func (e CMStereoViewInterpretationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A 64-bit representation of a tag’s category.
 type CMTagCategory int64
 
 const (
-	KCMTagCategory_Undefined                CMTagCategory = 0
-	KCMTagCategory_MediaType                CMTagCategory = 1835297121
-	KCMTagCategory_MediaSubType             CMTagCategory = 1836283234
-	KCMTagCategory_TrackID                  CMTagCategory = 1953653099
-	KCMTagCategory_ChannelID                CMTagCategory = 1986226286
-	KCMTagCategory_VideoLayerID             CMTagCategory = 1986814329
-	KCMTagCategory_PixelFormat              CMTagCategory = 1885960294
-	KCMTagCategory_PackingType              CMTagCategory = 1885430635
-	KCMTagCategory_ProjectionType           CMTagCategory = 1886547818
-	KCMTagCategory_StereoView               CMTagCategory = 1702454643
+	// An unknown or undefined tag category.
+	KCMTagCategory_Undefined CMTagCategory = 0
+	// A category used for tagging media type metadata.
+	KCMTagCategory_MediaType CMTagCategory = 1835297121
+	// A category used for tagging media subtype metadata.
+	KCMTagCategory_MediaSubType CMTagCategory = 1836283234
+	// A category used for tagging a track ID.
+	KCMTagCategory_TrackID CMTagCategory = 1953653099
+	// A category used for tagging a channel ID.
+	KCMTagCategory_ChannelID CMTagCategory = 1986226286
+	// A category used for tagging a video layer ID.
+	KCMTagCategory_VideoLayerID CMTagCategory = 1986814329
+	// A category used for tagging pixel format information.
+	KCMTagCategory_PixelFormat CMTagCategory = 1885960294
+	// A category used for tagging frame-packing information.
+	KCMTagCategory_PackingType CMTagCategory = 1885430635
+	// A category used for tagging projection surface information.
+	KCMTagCategory_ProjectionType CMTagCategory = 1886547818
+	// A category used for tagging eye information for 3D video.
+	KCMTagCategory_StereoView CMTagCategory = 1702454643
+	// A category used for tagging how to interpret stereo view metadata.
 	KCMTagCategory_StereoViewInterpretation CMTagCategory = 1702455664
 )
 
@@ -166,19 +195,30 @@ func (e CMTagCategory) String() string {
 	}
 }
 
+// Error codes returned by Core Media when working with tag collections.
 type CMTagCollectionError int64
 
 const (
-	KCMTagCollectionError_ParamErr                        CMTagCollectionError = -15740
-	KCMTagCollectionError_AllocationFailed                CMTagCollectionError = -15741
-	KCMTagCollectionError_InternalError                   CMTagCollectionError = -15742
-	KCMTagCollectionError_InvalidTag                      CMTagCollectionError = -15743
-	KCMTagCollectionError_InvalidTagCollectionDictionary  CMTagCollectionError = -15744
-	KCMTagCollectionError_InvalidTagCollectionData        CMTagCollectionError = -15745
-	KCMTagCollectionError_TagNotFound                     CMTagCollectionError = -15746
+	// Indicates a parameter to a function was of the wrong type or didn’t meet a necessary condition.
+	KCMTagCollectionError_ParamErr CMTagCollectionError = -15740
+	// Indicates an internal allocation failed.
+	KCMTagCollectionError_AllocationFailed CMTagCollectionError = -15741
+	// Indicates an error occurred inside of the Core Media framework.
+	KCMTagCollectionError_InternalError CMTagCollectionError = -15742
+	// Indicates that the collection contains an invalid tag.
+	KCMTagCollectionError_InvalidTag CMTagCollectionError = -15743
+	// Indicates that a Core Foundation dictionary instance failed to initialize a new tag collection.
+	KCMTagCollectionError_InvalidTagCollectionDictionary CMTagCollectionError = -15744
+	// Indicates that a Core Foundation data instance failed to initialize a new tag collection.
+	KCMTagCollectionError_InvalidTagCollectionData CMTagCollectionError = -15745
+	// Indicates that there was no match in a collection for a tag.
+	KCMTagCollectionError_TagNotFound CMTagCollectionError = -15746
+	// Indicates that a Core Foundation data instance failed to initialize a new tag collection due to a versioning problem.
 	KCMTagCollectionError_InvalidTagCollectionDataVersion CMTagCollectionError = -15747
-	KCMTagCollectionError_ExhaustedBufferSize             CMTagCollectionError = -15748
-	KCMTagCollectionError_NotYetImplemented               CMTagCollectionError = -15749
+	// Indicates that a buffer was smaller than the number of requested tags.
+	KCMTagCollectionError_ExhaustedBufferSize CMTagCollectionError = -15748
+	// Indicates a function lacks a necessary backing implementation in Core Media.
+	KCMTagCollectionError_NotYetImplemented CMTagCollectionError = -15749
 )
 
 func (e CMTagCollectionError) String() string {
@@ -208,14 +248,20 @@ func (e CMTagCollectionError) String() string {
 	}
 }
 
+// The data type of a tag’s value.
 type CMTagDataType int64
 
 const (
+	// The tag value isn’t associated with any known data type.
 	KCMTagDataType_Invalid CMTagDataType = 0
-	KCMTagDataType_SInt64  CMTagDataType = 2
+	// The tag value is a signed 64-bit integer.
+	KCMTagDataType_SInt64 CMTagDataType = 2
+	// The tag value is a 64-bit floating point number.
 	KCMTagDataType_Float64 CMTagDataType = 3
-	KCMTagDataType_OSType  CMTagDataType = 5
-	KCMTagDataType_Flags   CMTagDataType = 7
+	// The tag value is a 64-bit identifier used by the operating system.
+	KCMTagDataType_OSType CMTagDataType = 5
+	// The tag value is a 64-bit wide bitflag field.
+	KCMTagDataType_Flags CMTagDataType = 7
 )
 
 func (e CMTagDataType) String() string {
@@ -235,10 +281,13 @@ func (e CMTagDataType) String() string {
 	}
 }
 
+// Core media tagging errors reported by the framework.
 type CMTagError int64
 
 const (
-	KCMTagError_ParamErr         CMTagError = -15730
+	// An error where input or output parameters didn’t match the requirements of Core Media.
+	KCMTagError_ParamErr CMTagError = -15730
+	// An error where the system can’t allocate enough memory for the tag.
 	KCMTagError_AllocationFailed CMTagError = -15731
 )
 
@@ -253,12 +302,16 @@ func (e CMTagError) String() string {
 	}
 }
 
+// Error codes returned by Core Media when working with tagged buffer groups.
 type CMTaggedBufferGroupError int64
 
 const (
-	KCMTaggedBufferGroupError_ParamErr         CMTaggedBufferGroupError = -15780
+	// Indicates a parameter to a function was of the wrong type or didn’t meet a necessary condition.
+	KCMTaggedBufferGroupError_ParamErr CMTaggedBufferGroupError = -15780
+	// Indicates an internal allocation failed.
 	KCMTaggedBufferGroupError_AllocationFailed CMTaggedBufferGroupError = -15781
-	KCMTaggedBufferGroupError_InternalError    CMTaggedBufferGroupError = -15782
+	// Indicates an error occurred inside of the Core Media framework.
+	KCMTaggedBufferGroupError_InternalError CMTaggedBufferGroupError = -15782
 )
 
 func (e CMTaggedBufferGroupError) String() string {
@@ -274,14 +327,21 @@ func (e CMTaggedBufferGroupError) String() string {
 	}
 }
 
+// A structure that defines the flags for a time value.
 type CMTimeFlags int64
 
 const (
-	KCMTimeFlags_Valid                 CMTimeFlags = 1
-	KCMTimeFlags_HasBeenRounded        CMTimeFlags = 2
-	KCMTimeFlags_PositiveInfinity      CMTimeFlags = 4
-	KCMTimeFlags_NegativeInfinity      CMTimeFlags = 8
-	KCMTimeFlags_Indefinite            CMTimeFlags = 16
+	// A flag that indicates a time is valid.
+	KCMTimeFlags_Valid CMTimeFlags = 1
+	// A flag that indicates a previous time calculation rounded the result.
+	KCMTimeFlags_HasBeenRounded CMTimeFlags = 2
+	// A flag that indicates the time is positive infinity.
+	KCMTimeFlags_PositiveInfinity CMTimeFlags = 4
+	// A flag that indicates the time is negative infinity.
+	KCMTimeFlags_NegativeInfinity CMTimeFlags = 8
+	// A flag that indicates the time is indefinite.
+	KCMTimeFlags_Indefinite CMTimeFlags = 16
+	// A flag that indicates the time is positive or negative infinity, or indefinite.
 	KCMTimeFlags_ImpliedValueFlagsMask CMTimeFlags = 28
 )
 
@@ -311,16 +371,24 @@ func (e CMTimeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// An enumeration of rounding methods to use when performing time calculations.
 type CMTimeRoundingMethod int64
 
 const (
-	KCMTimeRoundingMethod_RoundHalfAwayFromZero       CMTimeRoundingMethod = 1
-	KCMTimeRoundingMethod_RoundTowardZero             CMTimeRoundingMethod = 2
-	KCMTimeRoundingMethod_RoundAwayFromZero           CMTimeRoundingMethod = 3
-	KCMTimeRoundingMethod_QuickTime                   CMTimeRoundingMethod = 4
+	// Rounds half away from zero.
+	KCMTimeRoundingMethod_RoundHalfAwayFromZero CMTimeRoundingMethod = 1
+	// Rounds toward zero.
+	KCMTimeRoundingMethod_RoundTowardZero CMTimeRoundingMethod = 2
+	// Rounds away from zero.
+	KCMTimeRoundingMethod_RoundAwayFromZero CMTimeRoundingMethod = 3
+	// Rounds using the QuickTime method.
+	KCMTimeRoundingMethod_QuickTime CMTimeRoundingMethod = 4
+	// Rounds toward positive infinity.
 	KCMTimeRoundingMethod_RoundTowardPositiveInfinity CMTimeRoundingMethod = 5
+	// Rounds toward negative infinity.
 	KCMTimeRoundingMethod_RoundTowardNegativeInfinity CMTimeRoundingMethod = 6
-	KCMTimeRoundingMethod_Default                     CMTimeRoundingMethod = 1
+	// The default rounding method.
+	KCMTimeRoundingMethod_Default CMTimeRoundingMethod = 1
 )
 
 func (e CMTimeRoundingMethod) String() string {

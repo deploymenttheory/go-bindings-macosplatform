@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An opaque token that represents a specific point in a database’s history.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckserverchangetoken
 type CKServerChangeToken struct {
 	foundation.NSObject

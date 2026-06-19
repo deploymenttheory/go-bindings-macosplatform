@@ -12,7 +12,7 @@ import (
 	"unsafe"
 )
 
-// A SpriteKit node that masks child nodes using another node's alpha component
+// A node that masks pixels drawn by its children so that only some pixels are seen.
 //
 // CropNode wraps [raw.SKCropNode] with a fluent Go API.
 type CropNode struct {
@@ -40,7 +40,7 @@ func NewCropNode() *CropNode {
 	return &CropNode{inner: raw.SKCropNodeFromID(_id)}
 }
 
-// SKNode to be used as the mask. The SKNode supplied as the mask must not be a child of another node, but it may have children. Anywhere the mask's output alpha component is less than 0.05 masks out that area for the SKCropNode's children. If the mask is nil, nothing is masked out.
+// The node used to determine the crop node’s mask.
 //
 // WithMaskNode sets the maskNode property and returns the receiver for chaining.
 func (x *CropNode) WithMaskNode(maskNode NodeProvider) *CropNode {
@@ -48,7 +48,7 @@ func (x *CropNode) WithMaskNode(maskNode NodeProvider) *CropNode {
 	return x
 }
 
-// The position of the node in the parent's coordinate system
+// The position of the node in its parent’s coordinate system.
 //
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *CropNode) WithPosition(position corefoundation.CGPoint) *CropNode {
@@ -56,7 +56,7 @@ func (x *CropNode) WithPosition(position corefoundation.CGPoint) *CropNode {
 	return x
 }
 
-// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+// The height of the node relative to its parent.
 //
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *CropNode) WithZPosition(zPosition float64) *CropNode {
@@ -64,7 +64,7 @@ func (x *CropNode) WithZPosition(zPosition float64) *CropNode {
 	return x
 }
 
-// The Euler rotation about the z axis (in radians)
+// The Euler rotation about the z axis (in radians).
 //
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *CropNode) WithZRotation(zRotation float64) *CropNode {
@@ -72,7 +72,7 @@ func (x *CropNode) WithZRotation(zRotation float64) *CropNode {
 	return x
 }
 
-// The scaling in the X axis
+// A scaling factor that multiplies the width of a node and its children.
 //
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *CropNode) WithXScale(xScale float64) *CropNode {
@@ -80,7 +80,7 @@ func (x *CropNode) WithXScale(xScale float64) *CropNode {
 	return x
 }
 
-// The scaling in the Y axis
+// A scaling factor that multiplies the height of a node and its children.
 //
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *CropNode) WithYScale(yScale float64) *CropNode {
@@ -88,7 +88,7 @@ func (x *CropNode) WithYScale(yScale float64) *CropNode {
 	return x
 }
 
-// The speed multiplier applied to all actions run on this node. Inherited by its children.
+// A speed modifier applied to all actions executed by a node and its descendants.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *CropNode) WithSpeed(speed float64) *CropNode {
@@ -96,7 +96,7 @@ func (x *CropNode) WithSpeed(speed float64) *CropNode {
 	return x
 }
 
-// Alpha of this node (multiplied by the output color to give the final result)
+// The transparency value applied to the node’s contents.
 //
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *CropNode) WithAlpha(alpha float64) *CropNode {
@@ -104,7 +104,7 @@ func (x *CropNode) WithAlpha(alpha float64) *CropNode {
 	return x
 }
 
-// Controls whether or not the node's actions is updated or paused.
+// A Boolean value that determines whether actions on the node and its descendants are processed.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *CropNode) WithPaused(paused bool) *CropNode {
@@ -112,7 +112,7 @@ func (x *CropNode) WithPaused(paused bool) *CropNode {
 	return x
 }
 
-// Controls whether or not the node and its children are rendered.
+// A Boolean value that determines whether a node and its descendants are rendered.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *CropNode) WithHidden(hidden bool) *CropNode {
@@ -120,7 +120,7 @@ func (x *CropNode) WithHidden(hidden bool) *CropNode {
 	return x
 }
 
-// Controls whether or not the node receives touch events
+// A Boolean value that indicates whether the node receives touch events.
 //
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *CropNode) WithUserInteractionEnabled(userInteractionEnabled bool) *CropNode {
@@ -128,7 +128,7 @@ func (x *CropNode) WithUserInteractionEnabled(userInteractionEnabled bool) *Crop
 	return x
 }
 
-// The client assignable name. In general, this should be unique among peers in the scene graph.
+// The node’s assignable name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *CropNode) WithName(name string) *CropNode {
@@ -136,7 +136,7 @@ func (x *CropNode) WithName(name string) *CropNode {
 	return x
 }
 
-// Physics body attached to the node, with synchronized scale, rotation, and position
+// The physics body associated with the node.
 //
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *CropNode) WithPhysicsBody(physicsBody *PhysicsBody) *CropNode {
@@ -144,7 +144,7 @@ func (x *CropNode) WithPhysicsBody(physicsBody *PhysicsBody) *CropNode {
 	return x
 }
 
-// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+// A dictionary containing arbitrary data.
 //
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *CropNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *CropNode {
@@ -152,7 +152,7 @@ func (x *CropNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID
 	return x
 }
 
-// Kinematic constraints, used in IK solving
+// The reach constraints to apply to the node when executing a reach action.
 //
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *CropNode) WithReachConstraints(reachConstraints *ReachConstraints) *CropNode {
@@ -160,7 +160,7 @@ func (x *CropNode) WithReachConstraints(reachConstraints *ReachConstraints) *Cro
 	return x
 }
 
-// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+// A list of constraints to apply to the node.
 //
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *CropNode) WithConstraints(items ...*raw.SKConstraint) *CropNode {
@@ -183,7 +183,7 @@ func (x *CropNode) WithConstraints(items ...*raw.SKConstraint) *CropNode {
 	return x
 }
 
-// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+// The values of each attribute associated with the node’s attached shader.
 //
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *CropNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *CropNode {
@@ -191,54 +191,72 @@ func (x *CropNode) WithAttributeValues(attributeValues *foundation.NSDictionary[
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+//
 // WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
 func (x *CropNode) WithAccessibilityElement(accessibilityElement bool) *CropNode {
 	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
 	return x
 }
 
+// A string value describing the user interface element type; for example, a button.
+//
 // WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
 func (x *CropNode) WithAccessibilityRole(accessibilityRole string) *CropNode {
 	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
 	return x
 }
 
+// A string value describing the user interface element name and type; for example, the Buy button.
+//
 // WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
 func (x *CropNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *CropNode {
 	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
 	return x
 }
 
+// A string that defines this user interface element’s subrole; for example, a full-screen button.
+//
 // WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
 func (x *CropNode) WithAccessibilitySubrole(accessibilitySubrole string) *CropNode {
 	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
 	return x
 }
 
+// The size of this user interface element, in screen points.
+//
 // WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
 func (x *CropNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *CropNode {
 	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
 	return x
 }
 
+// The user interface element that contains this element.
+//
 // WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
 func (x *CropNode) WithAccessibilityParent(accessibilityParent objc.ID) *CropNode {
 	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
 	return x
 }
 
+// The help description of this user interface element; for example, the text shown in a tooltip.
+//
 // WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
 func (x *CropNode) WithAccessibilityHelp(accessibilityHelp string) *CropNode {
 	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
 	return x
 }
 
+// A short description of this user interface element.
+//
 // WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
 func (x *CropNode) WithAccessibilityLabel(accessibilityLabel string) *CropNode {
 	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
+//
 // WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
 func (x *CropNode) WithAccessibilityEnabled(accessibilityEnabled bool) *CropNode {
 	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)

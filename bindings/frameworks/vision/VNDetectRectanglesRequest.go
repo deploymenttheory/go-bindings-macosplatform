@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An image-analysis request that finds projected rectangular regions in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetectrectanglesrequest
 type VNDetectRectanglesRequest struct {
 	VNImageBasedRequest

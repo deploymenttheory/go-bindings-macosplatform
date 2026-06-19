@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A rule that affects how an attributed string performs automatic grammatical agreement.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsinflectionrule
 type NSInflectionRule struct {
 	NSObject
@@ -39,6 +41,7 @@ func NSInflectionRuleAutomaticRule() *NSInflectionRule {
 	return NSInflectionRuleFromID(_ret)
 }
 
+// Returns a Boolean value that indicates whether the rule can inflect a given language.
 func NSInflectionRuleCanInflectLanguage(language *NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSInflectionRule), _nSInflectionRuleSelCanInflectLanguage, language.Ptr())
 	return _ret

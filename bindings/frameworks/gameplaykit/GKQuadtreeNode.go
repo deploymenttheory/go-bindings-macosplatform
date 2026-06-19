@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// The individual node(s) that make up a GKQuadtree. Used as a hint for faster removal via [GKQuadtree removeData:WithNode:]
+// A helper class for managing the objects you organize in a quadtree.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkquadtreenode
 type GKQuadtreeNode struct {

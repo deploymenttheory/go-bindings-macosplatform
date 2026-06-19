@@ -13,7 +13,7 @@ import (
 	"unsafe"
 )
 
-// A SpriteKit scene graph audio node that provides a way to link audio graphs to a SpriteKit scene. The currently presented scene is responsible for mixing the audio from nodes in the scene. Positional sounds will use their relative location and velocity to the scene's listener to apply distance attenuation, doppler shift and pan. @see AVAudio3DMixing @see SKScene.listener
+// A node that plays audio.
 //
 // AudioNode wraps [raw.SKAudioNode] with a fluent Go API.
 type AudioNode struct {
@@ -35,7 +35,7 @@ func AudioNodeFromID(id objc.ID) *AudioNode {
 	return &AudioNode{inner: raw.SKAudioNodeFromID(id)}
 }
 
-// Creates a SpriteKit scene graph audio node from the given AVAudioNode. @see AVAudioNode
+// Initializes an audio node from an AVFoundation audio node.
 //
 // NewAudioNodeWithAVAudioNode creates a new [AudioNode].
 func NewAudioNodeWithAVAudioNode(node *avfaudio.AVAudioNode) *AudioNode {
@@ -44,6 +44,8 @@ func NewAudioNodeWithAVAudioNode(node *avfaudio.AVAudioNode) *AudioNode {
 	return &AudioNode{inner: raw.SKAudioNodeFromID(_id)}
 }
 
+// Tells you when to initialize an audio node that has been unarchived.
+//
 // NewAudioNodeWithCoder creates a new [AudioNode].
 func NewAudioNodeWithCoder(aDecoder *foundation.NSCoder) *AudioNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKAudioNode")), objc.RegisterName("alloc"))
@@ -51,7 +53,7 @@ func NewAudioNodeWithCoder(aDecoder *foundation.NSCoder) *AudioNode {
 	return &AudioNode{inner: raw.SKAudioNodeFromID(_id)}
 }
 
-// Convenience initializer that creates an AVAudioNode from the named audio asset in the main bundle. @see initWithAVAudioNode
+// Initializes an audio node from an audio asset with the specified filename.
 //
 // NewAudioNodeWithFileNamed creates a new [AudioNode].
 func NewAudioNodeWithFileNamed(name string) *AudioNode {
@@ -60,7 +62,7 @@ func NewAudioNodeWithFileNamed(name string) *AudioNode {
 	return &AudioNode{inner: raw.SKAudioNodeFromID(_id)}
 }
 
-// Convenience initializer that creates an AVAudioNode from the URL that contain a audio asset. @see initWithAVAudioNode
+// Initializes an audio node from an audio asset with the specified URL.
 //
 // NewAudioNodeWithURL creates a new [AudioNode].
 func NewAudioNodeWithURL(url string) *AudioNode {
@@ -69,7 +71,7 @@ func NewAudioNodeWithURL(url string) *AudioNode {
 	return &AudioNode{inner: raw.SKAudioNodeFromID(_id)}
 }
 
-// Sets or gets the current AVAudioNode used by this instance.
+// The audio node’s current audio asset.
 //
 // WithAvAudioNode sets the avAudioNode property and returns the receiver for chaining.
 func (x *AudioNode) WithAvAudioNode(avAudioNode *avfaudio.AVAudioNode) *AudioNode {
@@ -77,7 +79,7 @@ func (x *AudioNode) WithAvAudioNode(avAudioNode *avfaudio.AVAudioNode) *AudioNod
 	return x
 }
 
-// Specifies whether the node is to automatically play sound when added to a scene. If autoplaysLooped is NO, the node and its sound must be explicitly scheduled and played using the scene's engine. If YES, the node will automatically play sound when added to a scene. Defaults to YES. @see SKView.paused
+// A Boolean value that indicates whether the audio should play in a loop when the node is added to the scene.
 //
 // WithAutoplayLooped sets the autoplayLooped property and returns the receiver for chaining.
 func (x *AudioNode) WithAutoplayLooped(autoplayLooped bool) *AudioNode {
@@ -85,7 +87,7 @@ func (x *AudioNode) WithAutoplayLooped(autoplayLooped bool) *AudioNode {
 	return x
 }
 
-// Marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the scene's current listener node. @see AVAudio3DMixing @see SKScene.listener
+// A Boolean property that indicates whether the node’s audio is altered based on the position of the node.
 //
 // WithPositional sets the positional property and returns the receiver for chaining.
 func (x *AudioNode) WithPositional(positional bool) *AudioNode {
@@ -93,7 +95,7 @@ func (x *AudioNode) WithPositional(positional bool) *AudioNode {
 	return x
 }
 
-// The position of the node in the parent's coordinate system
+// The position of the node in its parent’s coordinate system.
 //
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *AudioNode) WithPosition(position corefoundation.CGPoint) *AudioNode {
@@ -101,7 +103,7 @@ func (x *AudioNode) WithPosition(position corefoundation.CGPoint) *AudioNode {
 	return x
 }
 
-// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+// The height of the node relative to its parent.
 //
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *AudioNode) WithZPosition(zPosition float64) *AudioNode {
@@ -109,7 +111,7 @@ func (x *AudioNode) WithZPosition(zPosition float64) *AudioNode {
 	return x
 }
 
-// The Euler rotation about the z axis (in radians)
+// The Euler rotation about the z axis (in radians).
 //
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *AudioNode) WithZRotation(zRotation float64) *AudioNode {
@@ -117,7 +119,7 @@ func (x *AudioNode) WithZRotation(zRotation float64) *AudioNode {
 	return x
 }
 
-// The scaling in the X axis
+// A scaling factor that multiplies the width of a node and its children.
 //
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *AudioNode) WithXScale(xScale float64) *AudioNode {
@@ -125,7 +127,7 @@ func (x *AudioNode) WithXScale(xScale float64) *AudioNode {
 	return x
 }
 
-// The scaling in the Y axis
+// A scaling factor that multiplies the height of a node and its children.
 //
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *AudioNode) WithYScale(yScale float64) *AudioNode {
@@ -133,7 +135,7 @@ func (x *AudioNode) WithYScale(yScale float64) *AudioNode {
 	return x
 }
 
-// The speed multiplier applied to all actions run on this node. Inherited by its children.
+// A speed modifier applied to all actions executed by a node and its descendants.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *AudioNode) WithSpeed(speed float64) *AudioNode {
@@ -141,7 +143,7 @@ func (x *AudioNode) WithSpeed(speed float64) *AudioNode {
 	return x
 }
 
-// Alpha of this node (multiplied by the output color to give the final result)
+// The transparency value applied to the node’s contents.
 //
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *AudioNode) WithAlpha(alpha float64) *AudioNode {
@@ -149,7 +151,7 @@ func (x *AudioNode) WithAlpha(alpha float64) *AudioNode {
 	return x
 }
 
-// Controls whether or not the node's actions is updated or paused.
+// A Boolean value that determines whether actions on the node and its descendants are processed.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *AudioNode) WithPaused(paused bool) *AudioNode {
@@ -157,7 +159,7 @@ func (x *AudioNode) WithPaused(paused bool) *AudioNode {
 	return x
 }
 
-// Controls whether or not the node and its children are rendered.
+// A Boolean value that determines whether a node and its descendants are rendered.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *AudioNode) WithHidden(hidden bool) *AudioNode {
@@ -165,7 +167,7 @@ func (x *AudioNode) WithHidden(hidden bool) *AudioNode {
 	return x
 }
 
-// Controls whether or not the node receives touch events
+// A Boolean value that indicates whether the node receives touch events.
 //
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *AudioNode) WithUserInteractionEnabled(userInteractionEnabled bool) *AudioNode {
@@ -173,7 +175,7 @@ func (x *AudioNode) WithUserInteractionEnabled(userInteractionEnabled bool) *Aud
 	return x
 }
 
-// The client assignable name. In general, this should be unique among peers in the scene graph.
+// The node’s assignable name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *AudioNode) WithName(name string) *AudioNode {
@@ -181,7 +183,7 @@ func (x *AudioNode) WithName(name string) *AudioNode {
 	return x
 }
 
-// Physics body attached to the node, with synchronized scale, rotation, and position
+// The physics body associated with the node.
 //
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *AudioNode) WithPhysicsBody(physicsBody *PhysicsBody) *AudioNode {
@@ -189,7 +191,7 @@ func (x *AudioNode) WithPhysicsBody(physicsBody *PhysicsBody) *AudioNode {
 	return x
 }
 
-// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+// A dictionary containing arbitrary data.
 //
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *AudioNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *AudioNode {
@@ -197,7 +199,7 @@ func (x *AudioNode) WithUserData(userData *foundation.NSMutableDictionary[objc.I
 	return x
 }
 
-// Kinematic constraints, used in IK solving
+// The reach constraints to apply to the node when executing a reach action.
 //
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *AudioNode) WithReachConstraints(reachConstraints *ReachConstraints) *AudioNode {
@@ -205,7 +207,7 @@ func (x *AudioNode) WithReachConstraints(reachConstraints *ReachConstraints) *Au
 	return x
 }
 
-// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+// A list of constraints to apply to the node.
 //
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *AudioNode) WithConstraints(items ...*raw.SKConstraint) *AudioNode {
@@ -228,7 +230,7 @@ func (x *AudioNode) WithConstraints(items ...*raw.SKConstraint) *AudioNode {
 	return x
 }
 
-// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+// The values of each attribute associated with the node’s attached shader.
 //
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *AudioNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *AudioNode {
@@ -236,54 +238,72 @@ func (x *AudioNode) WithAttributeValues(attributeValues *foundation.NSDictionary
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+//
 // WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
 func (x *AudioNode) WithAccessibilityElement(accessibilityElement bool) *AudioNode {
 	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
 	return x
 }
 
+// A string value describing the user interface element type; for example, a button.
+//
 // WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
 func (x *AudioNode) WithAccessibilityRole(accessibilityRole string) *AudioNode {
 	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
 	return x
 }
 
+// A string value describing the user interface element name and type; for example, the Buy button.
+//
 // WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
 func (x *AudioNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *AudioNode {
 	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
 	return x
 }
 
+// A string that defines this user interface element’s subrole; for example, a full-screen button.
+//
 // WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
 func (x *AudioNode) WithAccessibilitySubrole(accessibilitySubrole string) *AudioNode {
 	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
 	return x
 }
 
+// The size of this user interface element, in screen points.
+//
 // WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
 func (x *AudioNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *AudioNode {
 	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
 	return x
 }
 
+// The user interface element that contains this element.
+//
 // WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
 func (x *AudioNode) WithAccessibilityParent(accessibilityParent objc.ID) *AudioNode {
 	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
 	return x
 }
 
+// The help description of this user interface element; for example, the text shown in a tooltip.
+//
 // WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
 func (x *AudioNode) WithAccessibilityHelp(accessibilityHelp string) *AudioNode {
 	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
 	return x
 }
 
+// A short description of this user interface element.
+//
 // WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
 func (x *AudioNode) WithAccessibilityLabel(accessibilityLabel string) *AudioNode {
 	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
+//
 // WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
 func (x *AudioNode) WithAccessibilityEnabled(accessibilityEnabled bool) *AudioNode {
 	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)

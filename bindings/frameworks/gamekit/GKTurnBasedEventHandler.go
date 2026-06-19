@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The GKTurnBasedEventHandler class is used to respond to important messages related to turn-based matches. To use it, call the sharedTurnBasedEventHandler class method to get the singleton instance and assign an object that implements the GKTurnBasedEventHandlerDelegate protocol to its delegate property. All methods are called on the main thread.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkturnbasedeventhandler
 // Deprecated: since macOS 10.10.
 type GKTurnBasedEventHandler struct {
@@ -33,6 +35,7 @@ func GKTurnBasedEventHandlerFromID(id objc.ID) *GKTurnBasedEventHandler {
 	return o
 }
 
+// Returns the shared instance of the event handler.
 // Deprecated: since macOS 10.10.
 func GKTurnBasedEventHandlerSharedTurnBasedEventHandler() *GKTurnBasedEventHandler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKTurnBasedEventHandler), _gKTurnBasedEventHandlerSelSharedTurnBasedEventHandler)

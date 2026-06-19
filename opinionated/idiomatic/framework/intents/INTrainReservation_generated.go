@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The information that describes a train reservation.
+//
 // TrainReservation wraps [raw.INTrainReservation] with a fluent Go API.
 type TrainReservation struct {
 	inner *raw.INTrainReservation
@@ -30,6 +32,8 @@ func TrainReservationFromID(id objc.ID) *TrainReservation {
 	return &TrainReservation{inner: raw.INTrainReservationFromID(id)}
 }
 
+// Creates a train reservation with the specified contents and attributes.
+//
 // NewTrainReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatTrainTrip creates a new [TrainReservation].
 func NewTrainReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatTrainTrip(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, reservedSeat *raw.INSeat, trainTrip *raw.INTrainTrip) *TrainReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INTrainReservation")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewTrainReservationWithItemReferenceReservationNumberBookingTimeReservation
 	return &TrainReservation{inner: raw.INTrainReservationFromID(_id)}
 }
 
+// Creates a new train reservation with the specified contents and attributes.
+//
 // NewTrainReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatTrainTrip creates a new [TrainReservation].
 func NewTrainReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatTrainTrip(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], reservedSeat *raw.INSeat, trainTrip *raw.INTrainTrip) *TrainReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INTrainReservation")), objc.RegisterName("alloc"))

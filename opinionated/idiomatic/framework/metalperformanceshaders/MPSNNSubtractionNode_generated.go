@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract returns elementwise difference of left - right
+// A representation of an subtraction operator.
 //
 // NNSubtractionNode wraps [raw.MPSNNSubtractionNode] with a fluent Go API.
 type NNSubtractionNode struct {

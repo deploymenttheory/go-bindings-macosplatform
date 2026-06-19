@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains a signed or encrypted message, or errors that indicate failure to encode the message.
+//
 // Apple documentation: https://developer.apple.com/documentation/mailkit/memessageencodingresult
 type MEMessageEncodingResult struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func MEMessageEncodingResultFromID(id objc.ID) *MEMessageEncodingResult {
 	return o
 }
 
+// Creates an encoding result object with a signed or encrypted message, or errors if the message encoder fails to encode the message.
 func (o *MEMessageEncodingResult) InitWithEncodedMessageSigningErrorEncryptionError(encodedMessage *MEEncodedOutgoingMessage, signingError unsafe.Pointer, encryptionError unsafe.Pointer) *MEMessageEncodingResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageEncodingResultSelInitWithEncodedMessageSigningErrorEncryptionError, encodedMessage.Ptr(), signingError, encryptionError)
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The NSFormCell class is used to implement text entry fields in a form. The left part of an NSFormCell object contains a title. The right part contains an editable text entry field.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsformcell
 type NSFormCell struct {
 	NSActionCell
@@ -48,6 +50,7 @@ func NSFormCellFromID(id objc.ID) *NSFormCell {
 	return o
 }
 
+// Returns an NSFormCell object initialized with the specified title string.
 func (o *NSFormCell) InitTextCell(string_ *foundation.NSString) *NSFormCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelInitTextCell, string_.Ptr())
 	if _ret != 0 {
@@ -64,6 +67,7 @@ func (o *NSFormCell) InitWithCoder(coder *foundation.NSCoder) *NSFormCell {
 	return NSFormCellFromID(_ret)
 }
 
+// Returns the width of the title field constrained to the specified size.
 func (o *NSFormCell) TitleWidth(size corefoundation.CGSize) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSFormCellSelTitleWidth, size)
 	return _ret

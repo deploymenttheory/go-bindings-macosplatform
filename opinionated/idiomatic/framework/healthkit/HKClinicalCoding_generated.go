@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A clinical coding that represents a medical concept using a standardized coding system.
+//
 // ClinicalCoding wraps [raw.HKClinicalCoding] with a fluent Go API.
 type ClinicalCoding struct {
 	inner *raw.HKClinicalCoding
@@ -31,7 +33,7 @@ func ClinicalCodingFromID(id objc.ID) *ClinicalCoding {
 	return &ClinicalCoding{inner: raw.HKClinicalCodingFromID(id)}
 }
 
-// Creates a clinical coding with the specified system, version, and code. @param system  The string that identifies the coding system, typically a HL7 URL. @param version The version of the system, if applicable. @param code    The clinical code string that represents the medical concept. Use when you need to explicitly construct a coding object to associate a HealthKit concept with a standardized medical code.
+// Creates a clinical coding with the specified system, version, and code.
 //
 // NewClinicalCodingWithSystemVersionCode creates a new [ClinicalCoding].
 func NewClinicalCodingWithSystemVersionCode(system string, version string, code string) *ClinicalCoding {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view subclass that renders a SpriteKit scene.
+//
 // View wraps [raw.SKView] with a fluent Go API.
 type View struct {
 	inner *raw.SKView
@@ -37,7 +39,7 @@ func NewView() *View {
 	return &View{inner: raw.SKViewFromID(_id)}
 }
 
-// Pause the entire view
+// A Boolean value that indicates whether the view’s scene animations are paused.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *View) WithPaused(paused bool) *View {
@@ -45,7 +47,7 @@ func (x *View) WithPaused(paused bool) *View {
 	return x
 }
 
-// Toggles display of performance stats in the view. All default to false.
+// A Boolean value that indicates whether the view displays a frame rate indicator.
 //
 // WithShowsFPS sets the showsFPS property and returns the receiver for chaining.
 func (x *View) WithShowsFPS(showsFPS bool) *View {
@@ -53,37 +55,47 @@ func (x *View) WithShowsFPS(showsFPS bool) *View {
 	return x
 }
 
+// A Boolean value that indicates whether the view displays the number of drawing passes it needed to render the view.
+//
 // WithShowsDrawCount sets the showsDrawCount property and returns the receiver for chaining.
 func (x *View) WithShowsDrawCount(showsDrawCount bool) *View {
 	x.inner.SetShowsDrawCount(showsDrawCount)
 	return x
 }
 
+// A Boolean value that indicates whether the view displays an overlay that shows physics bodies that are visible in the scene.
+//
 // WithShowsNodeCount sets the showsNodeCount property and returns the receiver for chaining.
 func (x *View) WithShowsNodeCount(showsNodeCount bool) *View {
 	x.inner.SetShowsNodeCount(showsNodeCount)
 	return x
 }
 
+// A Boolean value that indicates whether the view displays the number of rectangles used to render the scene.
+//
 // WithShowsQuadCount sets the showsQuadCount property and returns the receiver for chaining.
 func (x *View) WithShowsQuadCount(showsQuadCount bool) *View {
 	x.inner.SetShowsQuadCount(showsQuadCount)
 	return x
 }
 
+// A Boolean value that indicates whether the view displays physics-related debugging information.
+//
 // WithShowsPhysics sets the showsPhysics property and returns the receiver for chaining.
 func (x *View) WithShowsPhysics(showsPhysics bool) *View {
 	x.inner.SetShowsPhysics(showsPhysics)
 	return x
 }
 
+// A Boolean value that indicates whether the view displays information about physics fields in the scene.
+//
 // WithShowsFields sets the showsFields property and returns the receiver for chaining.
 func (x *View) WithShowsFields(showsFields bool) *View {
 	x.inner.SetShowsFields(showsFields)
 	return x
 }
 
-// Toggles whether the view updates is rendered asynchronously or aligned with Core Animation updates. Defaults to YES.
+// A Boolean value that indicates whether the content is rendered asynchronously.
 //
 // WithAsynchronous sets the asynchronous property and returns the receiver for chaining.
 func (x *View) WithAsynchronous(asynchronous bool) *View {
@@ -91,7 +103,7 @@ func (x *View) WithAsynchronous(asynchronous bool) *View {
 	return x
 }
 
-// Toggles whether the view allows transparent rendering. This allows content under the view to show through if a non-opaque backgroundColor is set on the scene. Defaults to NO.
+// A Boolean property that indicates whether the view is rendered using transparency.
 //
 // WithAllowsTransparency sets the allowsTransparency property and returns the receiver for chaining.
 func (x *View) WithAllowsTransparency(allowsTransparency bool) *View {
@@ -99,7 +111,7 @@ func (x *View) WithAllowsTransparency(allowsTransparency bool) *View {
 	return x
 }
 
-// Ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to NO, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to YES for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
+// A Boolean value that indicates whether parent-child and sibling relationships affect the rendering order of nodes in the scene.
 //
 // WithIgnoresSiblingOrder sets the ignoresSiblingOrder property and returns the receiver for chaining.
 func (x *View) WithIgnoresSiblingOrder(ignoresSiblingOrder bool) *View {
@@ -107,12 +119,16 @@ func (x *View) WithIgnoresSiblingOrder(ignoresSiblingOrder bool) *View {
 	return x
 }
 
+// A Boolean value that indicates whether the view automatically culls non-visible nodes from the rendering tree.
+//
 // WithShouldCullNonVisibleNodes sets the shouldCullNonVisibleNodes property and returns the receiver for chaining.
 func (x *View) WithShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) *View {
 	x.inner.SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes)
 	return x
 }
 
+// The animation frame rate that the view uses to render its scene.
+//
 // WithPreferredFramesPerSecond sets the preferredFramesPerSecond property and returns the receiver for chaining.
 func (x *View) WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View {
 	x.inner.SetPreferredFramesPerSecond(preferredFramesPerSecond)
@@ -125,7 +141,7 @@ func (x *View) WithDisableDepthStencilBuffer(disableDepthStencilBuffer bool) *Vi
 	return x
 }
 
-// Optional view delegate, see SKViewDelegate.
+// A delegate that allows dynamic control of the view’s render rate.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *View) WithDelegate(delegate *foundation.NSObject) *View {
@@ -133,6 +149,8 @@ func (x *View) WithDelegate(delegate *foundation.NSObject) *View {
 	return x
 }
 
+// The number of frames that must pass before the scene is called to update its contents.
+//
 // WithFrameInterval sets the frameInterval property and returns the receiver for chaining.
 func (x *View) WithFrameInterval(frameInterval int) *View {
 	x.inner.SetFrameInterval(frameInterval)
@@ -145,21 +163,21 @@ func (x *View) WithPreferredFrameRate(preferredFrameRate float32) *View {
 	return x
 }
 
-// Present an SKScene in the view, replacing the current scene. @param scene the scene to present.
+// Presents a scene.
 //
 // PresentScene calls the underlying PresentScene.
 func (x *View) PresentScene(scene *raw.SKScene) {
 	x.inner.PresentScene(scene)
 }
 
-// Present an SKScene in the view, replacing the current scene. If there is currently a scene being presented in the view, the transition is used to swap between them. @param scene the scene to present. @param transition the transition to use when presenting the scene.
+// Transitions from the current scene to a new scene.
 //
 // PresentSceneTransition calls the underlying PresentSceneTransition.
 func (x *View) PresentSceneTransition(scene *raw.SKScene, transition *raw.SKTransition) {
 	x.inner.PresentSceneTransition(scene, transition)
 }
 
-// Create an SKTexture containing a snapshot of how it would have been rendered in this view. The texture is tightly cropped to the size of the node. @param node the node subtree to render to the texture.
+// Renders the contents of a node tree and returns the rendered image as a texture.
 //
 // TextureFromNode calls the underlying TextureFromNode.
 func (x *View) TextureFromNode(node *raw.SKNode) *Texture {
@@ -170,7 +188,7 @@ func (x *View) TextureFromNode(node *raw.SKNode) *Texture {
 	return &Texture{inner: _r}
 }
 
-// Create an SKTexture containing a snapshot of how it would have been rendered in this view. The texture is cropped to the specified rectangle @param node the node subtree to render to the texture. @param crop the crop
+// Renders a portion of a node’s contents and returns the rendered image as a texture.
 //
 // TextureFromNodeCrop calls the underlying TextureFromNodeCrop.
 func (x *View) TextureFromNodeCrop(node *raw.SKNode, crop corefoundation.CGRect) *Texture {
@@ -181,14 +199,14 @@ func (x *View) TextureFromNodeCrop(node *raw.SKNode, crop corefoundation.CGRect)
 	return &Texture{inner: _r}
 }
 
-// Converts a point from view space to scene space. @param point the point to convert. @param scene the scene to convert the point into.
+// Converts a point from view coordinates to scene coordinates.
 //
 // ConvertPointToScene calls the underlying ConvertPointToScene.
 func (x *View) ConvertPointToScene(point corefoundation.CGPoint, scene *raw.SKScene) corefoundation.CGPoint {
 	return x.inner.ConvertPointToScene(point, scene)
 }
 
-// Converts a point from scene space to view space. @param point the point to convert. @param scene the scene to convert the point into.
+// Converts a point from scene coordinates to view coordinates.
 //
 // ConvertPointFromScene calls the underlying ConvertPointFromScene.
 func (x *View) ConvertPointFromScene(point corefoundation.CGPoint, scene *raw.SKScene) corefoundation.CGPoint {

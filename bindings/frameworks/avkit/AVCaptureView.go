@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that displays standard user interface controls for capturing media data.
+//
 // Apple documentation: https://developer.apple.com/documentation/avkit/avcaptureview
 type AVCaptureView struct {
 	appkit.NSView
@@ -40,7 +42,7 @@ func AVCaptureViewFromID(id objc.ID) *AVCaptureView {
 	return o
 }
 
-// @method		setSession:allowVideoSourceSelection:allowAudioSourceSelection: @abstract	Sets the session represented by this view. @param		session The session to be represented. @param		showVideoPreview Whether or not video preview should be shown. If YES, capture inputs for video media data will be added, removed, or modified depending on device availability and user selection. @param		showAudioPreview Whether or not audio preview should be shown. If YES, capture inputs for audio media data will be added, removed, or modified depending on device availability and user selection. @discussion The view must either show audio preview or video preview or both. Furthermore, the view may modify the capture session, for example, to access media data for preview or when the user select a new capture source. Only the default session is started and stopped automatically. The provided session must be manually started and stopped.
+// Sets the view’s capture session.
 func (o *AVCaptureView) SetSessionShowVideoPreviewShowAudioPreview(session *avfoundation.AVCaptureSession, showVideoPreview bool, showAudioPreview bool) {
 	o.Ptr().Send(_aVCaptureViewSelSetSessionShowVideoPreviewShowAudioPreview, session.Ptr(), showVideoPreview, showAudioPreview)
 }

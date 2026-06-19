@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An array of sample buffer attachments for a render pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlrenderpasssamplebufferattachmentdescriptorarray
 type MTLRenderPassSampleBufferAttachmentDescriptorArray struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func MTLRenderPassSampleBufferAttachmentDescriptorArrayFromID(id objc.ID) *MTLRe
 	return o
 }
 
+// Returns the descriptor object for the specified sample buffer attachment.
 func (o *MTLRenderPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *MTLRenderPassSampleBufferAttachmentDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPassSampleBufferAttachmentDescriptorArraySelObjectAtIndexedSubscript, attachmentIndex)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func (o *MTLRenderPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubs
 	return MTLRenderPassSampleBufferAttachmentDescriptorFromID(_ret)
 }
 
+// Sets the descriptor object for the specified sample buffer attachment.
 func (o *MTLRenderPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *MTLRenderPassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
 	o.Ptr().Send(_mTLRenderPassSampleBufferAttachmentDescriptorArraySelSetObjectAtIndexedSubscript, attachment.Ptr(), attachmentIndex)
 }

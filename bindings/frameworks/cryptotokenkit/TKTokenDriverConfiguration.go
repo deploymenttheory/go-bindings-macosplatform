@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration for one class of token.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktokendriverconfiguration
 type TKTokenDriverConfiguration struct {
 	foundation.NSObject
@@ -50,8 +52,11 @@ func (o *TKTokenDriverConfiguration) RemoveTokenConfigurationForTokenInstanceID(
 
 // Contains dictionary of token class configurations keyed by TKTokenDriverClassID of token driver. Hosting application of token extension will contain the list of configurations for hosted token extensions. All other callers will get an empty array. This means that only token's hosting application can actually modify token's configuration. Typically, hosting application will contain only one token extension, therefore this dictionary will have one element.
 func TKTokenDriverConfigurationDriverConfigurations() *foundation.NSDictionary[*foundation.NSString, *TKTokenDriverConfiguration] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *TKTokenDriverConfiguration]](objc.ID(_clsTKTokenDriverConfiguration), _tKTokenDriverConfigurationSelDriverConfigurations)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsTKTokenDriverConfiguration), _tKTokenDriverConfigurationSelDriverConfigurations)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *TKTokenDriverConfiguration](_ret)
 }
 
 // ClassID of the token configuration. ClassID is taken from @p com.apple.ctk.class-id token extension attribute.
@@ -65,6 +70,9 @@ func (o *TKTokenDriverConfiguration) ClassID() *foundation.NSString {
 
 // Dictionary of all currently configured tokens for this token class, keyed by instanceID.
 func (o *TKTokenDriverConfiguration) TokenConfigurations() *foundation.NSDictionary[*foundation.NSString, *TKTokenConfiguration] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *TKTokenConfiguration]](o.Ptr(), _tKTokenDriverConfigurationSelTokenConfigurations)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenDriverConfigurationSelTokenConfigurations)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *TKTokenConfiguration](_ret)
 }

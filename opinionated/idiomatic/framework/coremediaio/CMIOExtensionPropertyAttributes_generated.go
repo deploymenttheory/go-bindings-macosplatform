@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes the attributes of a property.
+//
 // ExtensionPropertyAttributes wraps [raw.CMIOExtensionPropertyAttributes] with a fluent Go API.
 type ExtensionPropertyAttributes struct {
 	inner *raw.CMIOExtensionPropertyAttributes[objc.ID]
@@ -32,7 +34,7 @@ func ExtensionPropertyAttributesFromID(id objc.ID) *ExtensionPropertyAttributes 
 	return &ExtensionPropertyAttributes{inner: raw.CMIOExtensionPropertyAttributesFromID[objc.ID](id)}
 }
 
-// @method propertyAttributesWithMinValue:maxValue:validValues:readonly: @abstract Initialize a property attributes instance. @param minValue The minimum value of the property. @param maxValue The maximum value of the property. @param validValues The array of valid values. @param readOnly A readOnly flag. @result A CMIOExtensionPropertyAttributes instance that describes the attributes of a property. @discussion Property attributes may contain a minValue in which case the property is bounded by a minimum value. Property attributes may contain a maxValue in which case the property is bounded by a maximum value. Property attributes may contain both minValue and maxValue in which case the property is bounded within a range. Property attributes may contain a validValues in which case the property is discrete and can only have a certain set of value. If a property does not have a minValue/maxValue/validValues attributes, the property can have any value.
+// Creates a property attributes object with the specified configuration.
 //
 // NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly creates a new [ExtensionPropertyAttributes].
 func NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minValue objc.ID, maxValue objc.ID, validValues *foundation.NSArray[objc.ID], readOnly bool) *ExtensionPropertyAttributes {

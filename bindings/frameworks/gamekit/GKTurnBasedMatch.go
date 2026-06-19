@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates the match data for games where players take turns.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkturnbasedmatch
 type GKTurnBasedMatch struct {
 	foundation.NSObject
@@ -66,10 +68,12 @@ func GKTurnBasedMatchFromID(id objc.ID) *GKTurnBasedMatch {
 	return o
 }
 
+// Sends a localized message from the current participant to all other participants when you end a turn, forfeit a match, or end a match.
 func (o *GKTurnBasedMatch) SetLocalizableMessageWithKeyArguments(key *foundation.NSString, arguments *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_gKTurnBasedMatchSelSetLocalizableMessageWithKeyArguments, key.Ptr(), arguments)
+	o.Ptr().Send(_gKTurnBasedMatchSelSetLocalizableMessageWithKeyArguments, key.Ptr(), arguments.Ptr())
 }
 
+// Creates a new match or finds an existing match that needs a player.
 func GKTurnBasedMatchFindMatchForRequestWithCompletionHandler(request *GKMatchRequest, completionHandler func(*GKTurnBasedMatch, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -84,6 +88,7 @@ func GKTurnBasedMatchFindMatchForRequestWithCompletionHandler(request *GKMatchRe
 	objc.ID(_clsGKTurnBasedMatch).Send(_gKTurnBasedMatchSelFindMatchForRequestWithCompletionHandler, request.Ptr(), __block_completionHandler)
 }
 
+// Fetches the turn-based matches from Game Center that the local player participates in.
 func GKTurnBasedMatchLoadMatchesWithCompletionHandler(completionHandler func(*foundation.NSArray[*GKTurnBasedMatch], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -98,6 +103,7 @@ func GKTurnBasedMatchLoadMatchesWithCompletionHandler(completionHandler func(*fo
 	objc.ID(_clsGKTurnBasedMatch).Send(_gKTurnBasedMatchSelLoadMatchesWithCompletionHandler, __block_completionHandler)
 }
 
+// Loads a specific match with the specified identifier.
 func GKTurnBasedMatchLoadMatchWithIDWithCompletionHandler(matchID *foundation.NSString, completionHandler func(*GKTurnBasedMatch, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -112,6 +118,7 @@ func GKTurnBasedMatchLoadMatchWithIDWithCompletionHandler(matchID *foundation.NS
 	objc.ID(_clsGKTurnBasedMatch).Send(_gKTurnBasedMatchSelLoadMatchWithIDWithCompletionHandler, matchID.Ptr(), __block_completionHandler)
 }
 
+// Creates a new turn-based match with the same participants from an existing match.
 func (o *GKTurnBasedMatch) RematchWithCompletionHandler(completionHandler func(*GKTurnBasedMatch, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -126,6 +133,7 @@ func (o *GKTurnBasedMatch) RematchWithCompletionHandler(completionHandler func(*
 	o.Ptr().Send(_gKTurnBasedMatchSelRematchWithCompletionHandler, __block_completionHandler)
 }
 
+// Accepts an invitation for the local player to join a turn-based match.
 func (o *GKTurnBasedMatch) AcceptInviteWithCompletionHandler(completionHandler func(*GKTurnBasedMatch, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -140,6 +148,7 @@ func (o *GKTurnBasedMatch) AcceptInviteWithCompletionHandler(completionHandler f
 	o.Ptr().Send(_gKTurnBasedMatchSelAcceptInviteWithCompletionHandler, __block_completionHandler)
 }
 
+// Declines an invitation for the local player to join a turn-based match.
 func (o *GKTurnBasedMatch) DeclineInviteWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -151,6 +160,7 @@ func (o *GKTurnBasedMatch) DeclineInviteWithCompletionHandler(completionHandler 
 	o.Ptr().Send(_gKTurnBasedMatchSelDeclineInviteWithCompletionHandler, __block_completionHandler)
 }
 
+// Removes a match from Game Center that the local player participants in.
 func (o *GKTurnBasedMatch) RemoveWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -162,6 +172,7 @@ func (o *GKTurnBasedMatch) RemoveWithCompletionHandler(completionHandler func(un
 	o.Ptr().Send(_gKTurnBasedMatchSelRemoveWithCompletionHandler, __block_completionHandler)
 }
 
+// Fetches your game-specific data that you store in Game Center when ending a turn, saving a turn, or leaving a match.
 func (o *GKTurnBasedMatch) LoadMatchDataWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -173,6 +184,7 @@ func (o *GKTurnBasedMatch) LoadMatchDataWithCompletionHandler(completionHandler 
 	o.Ptr().Send(_gKTurnBasedMatchSelLoadMatchDataWithCompletionHandler, __block_completionHandler)
 }
 
+// Passes the turn from the current participant to the next participant.
 func (o *GKTurnBasedMatch) EndTurnWithNextParticipantsTurnTimeoutMatchDataCompletionHandler(nextParticipants *foundation.NSArray[*GKTurnBasedParticipant], timeout float64, matchData *foundation.NSData, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -184,6 +196,7 @@ func (o *GKTurnBasedMatch) EndTurnWithNextParticipantsTurnTimeoutMatchDataComple
 	o.Ptr().Send(_gKTurnBasedMatchSelEndTurnWithNextParticipantsTurnTimeoutMatchDataCompletionHandler, nextParticipants.Ptr(), timeout, matchData.Ptr(), __block_completionHandler)
 }
 
+// Forfeits the match on behalf of the local player when it’s their turn.
 func (o *GKTurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchDataCompletionHandler(matchOutcome GKTurnBasedMatchOutcome, nextParticipants *foundation.NSArray[*GKTurnBasedParticipant], timeout float64, matchData *foundation.NSData, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -195,6 +208,7 @@ func (o *GKTurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantsTurnT
 	o.Ptr().Send(_gKTurnBasedMatchSelParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchDataCompletionHandler, matchOutcome, nextParticipants.Ptr(), timeout, matchData.Ptr(), __block_completionHandler)
 }
 
+// Forfeits the match on behalf of the local player when it’s not their turn.
 func (o *GKTurnBasedMatch) ParticipantQuitOutOfTurnWithOutcomeWithCompletionHandler(matchOutcome GKTurnBasedMatchOutcome, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -206,6 +220,7 @@ func (o *GKTurnBasedMatch) ParticipantQuitOutOfTurnWithOutcomeWithCompletionHand
 	o.Ptr().Send(_gKTurnBasedMatchSelParticipantQuitOutOfTurnWithOutcomeWithCompletionHandler, matchOutcome, __block_completionHandler)
 }
 
+// Ends the match.
 func (o *GKTurnBasedMatch) EndMatchInTurnWithMatchDataCompletionHandler(matchData *foundation.NSData, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -217,6 +232,7 @@ func (o *GKTurnBasedMatch) EndMatchInTurnWithMatchDataCompletionHandler(matchDat
 	o.Ptr().Send(_gKTurnBasedMatchSelEndMatchInTurnWithMatchDataCompletionHandler, matchData.Ptr(), __block_completionHandler)
 }
 
+// Ends the match while submitting all of the scores and achievements.
 // Deprecated: since macOS 11.0.
 func (o *GKTurnBasedMatch) EndMatchInTurnWithMatchDataScoresAchievementsCompletionHandler(matchData *foundation.NSData, scores *foundation.NSArray[*GKScore], achievements *foundation.NSArray[*GKAchievement], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -229,6 +245,7 @@ func (o *GKTurnBasedMatch) EndMatchInTurnWithMatchDataScoresAchievementsCompleti
 	o.Ptr().Send(_gKTurnBasedMatchSelEndMatchInTurnWithMatchDataScoresAchievementsCompletionHandler, matchData.Ptr(), scores.Ptr(), achievements.Ptr(), __block_completionHandler)
 }
 
+// Ends the match while submitting scores and achievements for all of the participants.
 func (o *GKTurnBasedMatch) EndMatchInTurnWithMatchDataLeaderboardScoresAchievementsCompletionHandler(matchData *foundation.NSData, scores *foundation.NSArray[*GKLeaderboardScore], achievements *foundation.NSArray[objc.ID], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -237,9 +254,10 @@ func (o *GKTurnBasedMatch) EndMatchInTurnWithMatchDataLeaderboardScoresAchieveme
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_gKTurnBasedMatchSelEndMatchInTurnWithMatchDataLeaderboardScoresAchievementsCompletionHandler, matchData.Ptr(), scores.Ptr(), achievements, __block_completionHandler)
+	o.Ptr().Send(_gKTurnBasedMatchSelEndMatchInTurnWithMatchDataLeaderboardScoresAchievementsCompletionHandler, matchData.Ptr(), scores.Ptr(), achievements.Ptr(), __block_completionHandler)
 }
 
+// Saves your match data in Game Center without ending the turn.
 func (o *GKTurnBasedMatch) SaveCurrentTurnWithMatchDataCompletionHandler(matchData *foundation.NSData, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -251,6 +269,7 @@ func (o *GKTurnBasedMatch) SaveCurrentTurnWithMatchDataCompletionHandler(matchDa
 	o.Ptr().Send(_gKTurnBasedMatchSelSaveCurrentTurnWithMatchDataCompletionHandler, matchData.Ptr(), __block_completionHandler)
 }
 
+// Saves match data for completed exchanges without ending the turn.
 func (o *GKTurnBasedMatch) SaveMergedMatchDataWithResolvedExchangesCompletionHandler(matchData *foundation.NSData, exchanges *foundation.NSArray[*GKTurnBasedExchange], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -262,6 +281,7 @@ func (o *GKTurnBasedMatch) SaveMergedMatchDataWithResolvedExchangesCompletionHan
 	o.Ptr().Send(_gKTurnBasedMatchSelSaveMergedMatchDataWithResolvedExchangesCompletionHandler, matchData.Ptr(), exchanges.Ptr(), __block_completionHandler)
 }
 
+// Sends an exchange request that contains your game data to one or more participants.
 func (o *GKTurnBasedMatch) SendExchangeToParticipantsDataLocalizableMessageKeyArgumentsTimeoutCompletionHandler(participants *foundation.NSArray[*GKTurnBasedParticipant], data *foundation.NSData, key *foundation.NSString, arguments *foundation.NSArray[*foundation.NSString], timeout float64, completionHandler func(*GKTurnBasedExchange, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -273,9 +293,10 @@ func (o *GKTurnBasedMatch) SendExchangeToParticipantsDataLocalizableMessageKeyAr
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_gKTurnBasedMatchSelSendExchangeToParticipantsDataLocalizableMessageKeyArgumentsTimeoutCompletionHandler, participants.Ptr(), data.Ptr(), key.Ptr(), arguments, timeout, __block_completionHandler)
+	o.Ptr().Send(_gKTurnBasedMatchSelSendExchangeToParticipantsDataLocalizableMessageKeyArgumentsTimeoutCompletionHandler, participants.Ptr(), data.Ptr(), key.Ptr(), arguments.Ptr(), timeout, __block_completionHandler)
 }
 
+// Sends a reminder from one participant to a specific set of other participants.
 func (o *GKTurnBasedMatch) SendReminderToParticipantsLocalizableMessageKeyArgumentsCompletionHandler(participants *foundation.NSArray[*GKTurnBasedParticipant], key *foundation.NSString, arguments *foundation.NSArray[*foundation.NSString], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -284,9 +305,10 @@ func (o *GKTurnBasedMatch) SendReminderToParticipantsLocalizableMessageKeyArgume
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_gKTurnBasedMatchSelSendReminderToParticipantsLocalizableMessageKeyArgumentsCompletionHandler, participants.Ptr(), key.Ptr(), arguments, __block_completionHandler)
+	o.Ptr().Send(_gKTurnBasedMatchSelSendReminderToParticipantsLocalizableMessageKeyArgumentsCompletionHandler, participants.Ptr(), key.Ptr(), arguments.Ptr(), __block_completionHandler)
 }
 
+// Updates the data stored on Game Center for the current match.
 // Deprecated: since macOS 10.9.
 func (o *GKTurnBasedMatch) EndTurnWithNextParticipantMatchDataCompletionHandler(nextParticipant *GKTurnBasedParticipant, matchData *foundation.NSData, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -299,6 +321,7 @@ func (o *GKTurnBasedMatch) EndTurnWithNextParticipantMatchDataCompletionHandler(
 	o.Ptr().Send(_gKTurnBasedMatchSelEndTurnWithNextParticipantMatchDataCompletionHandler, nextParticipant.Ptr(), matchData.Ptr(), __block_completionHandler)
 }
 
+// Resigns the current player from the match without ending the match.
 // Deprecated: since macOS 10.9.
 func (o *GKTurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantMatchDataCompletionHandler(matchOutcome GKTurnBasedMatchOutcome, nextParticipant *GKTurnBasedParticipant, matchData *foundation.NSData, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block

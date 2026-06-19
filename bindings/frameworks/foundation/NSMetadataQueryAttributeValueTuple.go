@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The NSMetadataQueryAttributeValueTuple class represents attribute-value tuples, which are objects that contain the attribute name and value of a metadata attribute.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmetadataqueryattributevaluetuple
 type NSMetadataQueryAttributeValueTuple struct {
 	NSObject

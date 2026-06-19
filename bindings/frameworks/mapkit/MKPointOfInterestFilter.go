@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that includes or excludes point of interest categories from a map view, local search, or local search completer.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkpointofinterestfilter
 type MKPointOfInterestFilter struct {
 	foundation.NSObject
@@ -35,27 +37,31 @@ func MKPointOfInterestFilterFromID(id objc.ID) *MKPointOfInterestFilter {
 	return o
 }
 
+// Initialize the point of interest filter with a list of categories to include.
 func (o *MKPointOfInterestFilter) InitIncludingCategories(categories *foundation.NSArray[*foundation.NSString]) *MKPointOfInterestFilter {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKPointOfInterestFilterSelInitIncludingCategories, categories)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mKPointOfInterestFilterSelInitIncludingCategories, categories.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MKPointOfInterestFilterFromID(_ret)
 }
 
+// Initialize the point of interest filter with a list of categories to exclude.
 func (o *MKPointOfInterestFilter) InitExcludingCategories(categories *foundation.NSArray[*foundation.NSString]) *MKPointOfInterestFilter {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mKPointOfInterestFilterSelInitExcludingCategories, categories)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mKPointOfInterestFilterSelInitExcludingCategories, categories.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return MKPointOfInterestFilterFromID(_ret)
 }
 
+// Returns a Boolean value indicating whether the filter includes the point of interest category.
 func (o *MKPointOfInterestFilter) IncludesCategory(category *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mKPointOfInterestFilterSelIncludesCategory, category.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the filter excludes the point of interest category.
 func (o *MKPointOfInterestFilter) ExcludesCategory(category *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mKPointOfInterestFilterSelExcludesCategory, category.Ptr())
 	return _ret

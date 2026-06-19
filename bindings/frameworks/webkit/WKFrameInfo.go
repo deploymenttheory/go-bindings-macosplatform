@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains information about a frame on a webpage.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkframeinfo
 type WKFrameInfo struct {
 	foundation.NSObject

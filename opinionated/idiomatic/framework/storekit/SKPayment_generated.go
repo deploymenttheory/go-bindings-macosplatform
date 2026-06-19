@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request to the App Store to process payment for additional functionality that your app offers.
+//
 // Payment wraps [raw.SKPayment] with a fluent Go API.
 type Payment struct {
 	inner *raw.SKPayment

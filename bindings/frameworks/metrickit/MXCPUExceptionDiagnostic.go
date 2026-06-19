@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing a diagnostic report for a fatal or nonfatal CPU exception.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxcpuexceptiondiagnostic
 type MXCPUExceptionDiagnostic struct {
 	MXDiagnostic
@@ -43,12 +45,18 @@ func (o *MXCPUExceptionDiagnostic) CallStackTree() *MXCallStackTree {
 
 // @property      totalCPUTime @abstract      Total CPU time consumed in the scope of this CPU exception. @discussion    Dimensioned as NSUnitDuration.
 func (o *MXCPUExceptionDiagnostic) TotalCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXCPUExceptionDiagnosticSelTotalCPUTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXCPUExceptionDiagnosticSelTotalCPUTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }
 
 // @property      totalSampledTime @abstract      Total time that the application was sampled for during the CPU exception. @discussion    Dimensioned as NSUnitDuration.
 func (o *MXCPUExceptionDiagnostic) TotalSampledTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXCPUExceptionDiagnosticSelTotalSampledTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXCPUExceptionDiagnosticSelTotalSampledTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }

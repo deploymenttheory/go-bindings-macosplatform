@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages the queue of scheduled asset downloads.
+//
 // Apple documentation: https://developer.apple.com/documentation/backgroundassets/badownloadmanager
 type BADownloadManager struct {
 	foundation.NSObject
@@ -54,7 +56,7 @@ func (o *BADownloadManager) FetchCurrentDownloads() (*foundation.NSArray[*BADown
 	return foundation.NSArrayFromID[*BADownload](_ret), nil
 }
 
-// @brief Fetches current downloads. @discussion Fetches the current list of scheduled or in-flight downloads queued by your application or extension. @param completionHandler A block to recieve the currently scheduled or in-flight downloads. The block is called on the same queue as all the other completion blocks in the class.
+// Fetches the contents of the manager’s download queue.
 func (o *BADownloadManager) FetchCurrentDownloadsWithCompletionHandler(completionHandler func(*foundation.NSArray[*BADownload], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -69,7 +71,7 @@ func (o *BADownloadManager) FetchCurrentDownloadsWithCompletionHandler(completio
 	o.Ptr().Send(_bADownloadManagerSelFetchCurrentDownloadsWithCompletionHandler, __block_completionHandler)
 }
 
-// @brief Schedules a background download. @discussion Specifies a download to schedule at a given priority. The download will automatically start at the discretion of the system. @param download A BADownload object representing a URL to be downloaded. @param error A NSError representing why the BADownload could not be scheduled. @return YES if @c download was scheduled. NO and @c error set if the download could not be scheduled.
+// Schedules an asset download to execute in the background at a nonspecific time in the future.
 func (o *BADownloadManager) ScheduleDownloadError(download *BADownload) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _bADownloadManagerSelScheduleDownloadError, download.Ptr(), unsafe.Pointer(&_nsErr))
@@ -79,7 +81,7 @@ func (o *BADownloadManager) ScheduleDownloadError(download *BADownload) (bool, e
 	return _ret, nil
 }
 
-// @brief Acquires exclusive access to the BADownloadManager across the app and application extension. @discussion Acquires exclusive access to the BADownloadManager across the app and application extension. This ensures that your extension and app do not perform operations at the same time. Both the extension and app must use this API to ensure exclusive access. @param performHandler A block that will be executed once exclusive control is acquired. If an error is non-nil then a problem occurred acquiring exclusive access.
+// Attempts to acquire immediate, exclusive access to the download manager.
 func (o *BADownloadManager) PerformWithExclusiveControl(performHandler func(bool, unsafe.Pointer)) {
 	var __block_performHandler objc.Block
 	if performHandler != nil {
@@ -103,7 +105,7 @@ func (o *BADownloadManager) PerformWithExclusiveControlBeforeDatePerformHandler(
 	o.Ptr().Send(_bADownloadManagerSelPerformWithExclusiveControlBeforeDatePerformHandler, date.Ptr(), __block_performHandler)
 }
 
-// @brief Attempts to schedule a BADownload in foreground mode. @discussion Attempts to schedule a BADownload in foreground mode. This download will start (if it has not been started) immediately regrardlesss of battery or network status. The download will remain in this foreground until the download manager is disconnected. This API only functions if the download manager is created in the application and not the download extension. If this API is called from the download extension, NO will be returned along with a NSError with the settings BAErrorDomain : BAErrorCodeCallFromExtensionNotAllowed. If this API is called from a app while it is in the background, NO will be returned along with a NSError with the settings BAErrorDomain : BAErrorCodeCallFromInactiveProcessNotAllowed.
+// Schedules an asset download that executes immediately in the foreground.
 func (o *BADownloadManager) StartForegroundDownloadError(download *BADownload) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _bADownloadManagerSelStartForegroundDownloadError, download.Ptr(), unsafe.Pointer(&_nsErr))
@@ -113,7 +115,7 @@ func (o *BADownloadManager) StartForegroundDownloadError(download *BADownload) (
 	return _ret, nil
 }
 
-// @brief Cancels a download. @discussion Attempts to cancel a BADownload. If the download has not been schduled or has already completed, NO is returned along with a NSError set to BAErrorDomain : BAErrorCodeDownloadNotScheduled. @return YES if the download is canceled. NO if the download could not be canceled, @c error will be set with a reason why.
+// Cancels an asset download.
 func (o *BADownloadManager) CancelDownloadError(download *BADownload) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _bADownloadManagerSelCancelDownloadError, download.Ptr(), unsafe.Pointer(&_nsErr))

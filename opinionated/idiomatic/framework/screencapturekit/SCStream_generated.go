@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An instance that represents a stream of shareable content.
+//
 // Stream wraps [raw.SCStream] with a fluent Go API.
 type Stream struct {
 	inner *raw.SCStream
@@ -33,7 +35,7 @@ func StreamFromID(id objc.ID) *Stream {
 	return &Stream{inner: raw.SCStreamFromID(id)}
 }
 
-// @abstract initWithFilter:configuration:delegate: @param contentFilter the requested content filter to be captured @param streamConfig the requested stream configuration to be applied to the SCStream @param delegate the SCStream delegate object @discussion this method create a SCStream object that has the particular output settings for the content stream
+// Creates a stream with a content filter and configuration.
 //
 // NewStreamWithFilterConfigurationDelegate creates a new [Stream].
 func NewStreamWithFilterConfigurationDelegate(contentFilter *raw.SCContentFilter, streamConfig *raw.SCStreamConfiguration, delegate raw.SCStreamDelegate) *Stream {
@@ -42,19 +44,21 @@ func NewStreamWithFilterConfigurationDelegate(contentFilter *raw.SCContentFilter
 	return &Stream{inner: raw.SCStreamFromID(_id)}
 }
 
-// @abstract addStreamOutput:type:sampleHandlerQueue:error: @param output an object that adheres to the SCStreamOutput protocol that will receive the frames and call its delegate frame call back on its sample handler queue @param type the SCStreamOutput type @param sampleHandlerQueue the return queue for the sample handler @param error the error pertaining to the add stream output @discussion An SCStreamOutput protocol object instance can only be added to a session using -addStreamOutput: Returns a BOOL denoting if the add was successful
+// Adds a destination that receives the stream output.
 //
 // AddStreamOutputTypeSampleHandlerQueueError calls the underlying AddStreamOutputTypeSampleHandlerQueueError.
 func (x *Stream) AddStreamOutputTypeSampleHandlerQueueError(output raw.SCStreamOutput, type_ SCStreamOutputType, sampleHandlerQueue *foundation.NSObject) (bool, error) {
 	return x.inner.AddStreamOutputTypeSampleHandlerQueueError(output, raw.SCStreamOutputType(type_), sampleHandlerQueue)
 }
 
+// Removes a destination from receiving stream output.
+//
 // RemoveStreamOutputTypeError calls the underlying RemoveStreamOutputTypeError.
 func (x *Stream) RemoveStreamOutputTypeError(output raw.SCStreamOutput, type_ SCStreamOutputType) (bool, error) {
 	return x.inner.RemoveStreamOutputTypeError(output, raw.SCStreamOutputType(type_))
 }
 
-// @abstract updateContentFilter:completionHandler: @param contentFilter the requested content filter to be updated @param completionHandler the handler to be called when the function completes @discussion this method will update the content filter for a content stream. A completion handler will be called when the update is complete with an error denoting if the update has failed.
+// Updates the stream by applying a new content filter.
 //
 // UpdateContentFilter blocks until the operation completes or ctx is cancelled.
 func (x *Stream) UpdateContentFilter(ctx context.Context, contentFilter *raw.SCContentFilter) error {
@@ -74,7 +78,7 @@ func (x *Stream) UpdateContentFilter(ctx context.Context, contentFilter *raw.SCC
 	}
 }
 
-// @abstract updateConfiguration:completionHandler: @param streamConfig the requested content filter to be updated @param completionHandler the handler to be called when the function completes @discussion this method will update the stream configuration for a content stream. A completion handler will be called when the update is complete with an error denoting if the update has failed.
+// Updates the stream with a new configuration.
 //
 // UpdateConfiguration blocks until the operation completes or ctx is cancelled.
 func (x *Stream) UpdateConfiguration(ctx context.Context, streamConfig *raw.SCStreamConfiguration) error {
@@ -94,7 +98,7 @@ func (x *Stream) UpdateConfiguration(ctx context.Context, streamConfig *raw.SCSt
 	}
 }
 
-// @abstract startCaptureWithCompletionHandler: @param completionHandler the handler to be called when the function completes @discussion this method starts the content stream. The handler will be called when the content stream start has completed with an error denoting if the start has failed.
+// Starts the stream with a callback to indicate whether it successfully starts.
 //
 // StartCapture blocks until the operation completes or ctx is cancelled.
 func (x *Stream) StartCapture(ctx context.Context) error {
@@ -114,7 +118,7 @@ func (x *Stream) StartCapture(ctx context.Context) error {
 	}
 }
 
-// @abstract stopCaptureWithCompletionHandler: @param completionHandler the handler to be called when the function completes @discussion this method stops the content stream. The handler will be called when the content stream stop has completed with an error denoting if the stop has failed.
+// Stops the stream.
 //
 // StopCapture blocks until the operation completes or ctx is cancelled.
 func (x *Stream) StopCapture(ctx context.Context) error {

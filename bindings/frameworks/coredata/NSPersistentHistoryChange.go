@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A change representing the insertion, update, or deletion of a managed object in the persistent store.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistenthistorychange
 type NSPersistentHistoryChange struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func NSPersistentHistoryChangeFromID(id objc.ID) *NSPersistentHistoryChange {
 	return o
 }
 
+// Requests an entity description for the managed object type affected by the change using the provided context.
 func NSPersistentHistoryChangeEntityDescriptionWithContext(context_ *NSManagedObjectContext) *NSEntityDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChange), _nSPersistentHistoryChangeSelEntityDescriptionWithContext, context_.Ptr())
 	if _ret != 0 {
@@ -55,8 +58,11 @@ func NSPersistentHistoryChangeEntityDescription() *NSEntityDescription {
 }
 
 func NSPersistentHistoryChangeFetchRequest() *NSFetchRequest[objc.ID] {
-	_ret := objc.Send[*NSFetchRequest[objc.ID]](objc.ID(_clsNSPersistentHistoryChange), _nSPersistentHistoryChangeSelFetchRequest)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChange), _nSPersistentHistoryChangeSelFetchRequest)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSFetchRequestFromID[objc.ID](_ret)
 }
 
 func (o *NSPersistentHistoryChange) ChangeID() int64 {
@@ -78,8 +84,11 @@ func (o *NSPersistentHistoryChange) ChangeType() NSPersistentHistoryChangeType {
 }
 
 func (o *NSPersistentHistoryChange) Tombstone() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSPersistentHistoryChangeSelTombstone)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryChangeSelTombstone)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSPersistentHistoryChange) Transaction() *NSPersistentHistoryTransaction {

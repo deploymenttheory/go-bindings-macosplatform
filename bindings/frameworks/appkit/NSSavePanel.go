@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A panel that prompts the user for information about where to save a file.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssavepanel
 type NSSavePanel struct {
 	NSPanel
@@ -87,7 +89,7 @@ func NSSavePanelFromID(id objc.ID) *NSSavePanel {
 	return o
 }
 
-// Creates a new instance of the NSSavePanel. This class is not a singleton.
+// Creates a new Save panel and initializes it with default information.
 func NSSavePanelSavePanel() *NSSavePanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSavePanel), _nSSavePanelSelSavePanel)
 	if _ret != 0 {
@@ -96,20 +98,22 @@ func NSSavePanelSavePanel() *NSSavePanel {
 	return NSSavePanelFromID(_ret)
 }
 
-// Refreshes the open or save panel's contents.
+// Validates and reloads the browser columns visible in the panel.
 func (o *NSSavePanel) ValidateVisibleColumns() {
 	o.Ptr().Send(_nSSavePanelSelValidateVisibleColumns)
 }
 
+// The action method that the panel calls when the user clicks the OK button.
 func (o *NSSavePanel) Ok(sender objc.ID) {
 	o.Ptr().Send(_nSSavePanelSelOk, sender)
 }
 
+// The action method that the panel calls when the user clicks the Cancel button.
 func (o *NSSavePanel) Cancel(sender objc.ID) {
 	o.Ptr().Send(_nSSavePanelSelCancel, sender)
 }
 
-// `NSSavePanel`/`NSOpenPanel`: Presents the panel as a sheet modal to `window` and returns immediately. Configure the panel before calling this method. The completion handler block will be called after the user has closed the panel, however, the open/save panel sheet may still be on screen. If you require the sheet to be offscreen (for example, to show an alert), first call `[savePanel orderOut:nil]` to close it. The `result` will be `NSModalResponseOK`, `NSModalResponseCancel`, or if the panel fails to display, `NSModalResponseAbort`.
+// Presents the panel as a sheet modal to the specified window.
 func (o *NSSavePanel) BeginSheetModalForWindowCompletionHandler(window *NSWindow, handler func(int)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -121,7 +125,7 @@ func (o *NSSavePanel) BeginSheetModalForWindowCompletionHandler(window *NSWindow
 	o.Ptr().Send(_nSSavePanelSelBeginSheetModalForWindowCompletionHandler, window.Ptr(), __block_handler)
 }
 
-// `NSSavePanel`/`NSOpenPanel`: Presents the panel as a modeless window and returns immediately. Configure the panel before calling this method. The completion handler block will be called after the user has closed the panel. The `result` will be `NSModalResponseOK`, `NSModalResponseCancel`, or if the panel fails to display, `NSModalResponseAbort`.
+// Presents the panel as a modeless window.
 func (o *NSSavePanel) BeginWithCompletionHandler(handler func(int)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -133,7 +137,7 @@ func (o *NSSavePanel) BeginWithCompletionHandler(handler func(int)) {
 	o.Ptr().Send(_nSSavePanelSelBeginWithCompletionHandler, __block_handler)
 }
 
-// `NSSavePanel`/`NSOpenPanel`: Presents the panel as an application modal window. Returns after the user has closed the panel. - Returns: `NSModalResponseOK`, `NSModalResponseCancel` or if the panel fails to display, `NSModalResponseAbort`.
+// Displays the panel and begins its event loop with the current working (or last-selected) directory as the default starting point.
 func (o *NSSavePanel) RunModal() int {
 	_ret := objc.Send[int](o.Ptr(), _nSSavePanelSelRunModal)
 	return _ret
@@ -178,13 +182,16 @@ func (o *NSSavePanel) SetDirectoryURL(directoryURL *foundation.NSURL) {
 
 // `NSSavePanel`: An array of UTTypes specifying the file types the user can save the file as. Set to `@[]` to specify that any file type can be used. If no extension is given by the user, the first preferred extension from the array will be used as the extension for the save panel. If the user specifies a type not in the array, and `allowsOtherFileTypes` is `YES`, they will be presented with another dialog when prompted to save. The default value is the empty array. `NSOpenPanel`: This property determines which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. `allowedContentTypes` can be changed while the panel is running (ie: from an accessory view). This is also known as the "enabled file types". Set to `@[]` to specify that all files should be enabled.
 func (o *NSSavePanel) AllowedContentTypes() *foundation.NSArray[*uniformtypeidentifiers.UTType] {
-	_ret := objc.Send[*foundation.NSArray[*uniformtypeidentifiers.UTType]](o.Ptr(), _nSSavePanelSelAllowedContentTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelAllowedContentTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*uniformtypeidentifiers.UTType](_ret)
 }
 
 // `NSSavePanel`: An array of UTTypes specifying the file types the user can save the file as. Set to `@[]` to specify that any file type can be used. If no extension is given by the user, the first preferred extension from the array will be used as the extension for the save panel. If the user specifies a type not in the array, and `allowsOtherFileTypes` is `YES`, they will be presented with another dialog when prompted to save. The default value is the empty array. `NSOpenPanel`: This property determines which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. `allowedContentTypes` can be changed while the panel is running (ie: from an accessory view). This is also known as the "enabled file types". Set to `@[]` to specify that all files should be enabled.
 func (o *NSSavePanel) SetAllowedContentTypes(allowedContentTypes *foundation.NSArray[*uniformtypeidentifiers.UTType]) {
-	o.Ptr().Send(_nSSavePanelSelSetAllowedContentTypes, allowedContentTypes)
+	o.Ptr().Send(_nSSavePanelSelSetAllowedContentTypes, allowedContentTypes.Ptr())
 }
 
 // `NSSavePanel`: Returns a BOOL value that indicates whether the panel allows the user to save files with an extension that is not in the list of `allowedFileTypes`. `NSOpenPanel`: Not used.
@@ -356,13 +363,16 @@ func (o *NSSavePanel) SetShowsTagField(showsTagField bool) {
 
 // `NSSavePanel`: When -showsTagField returns YES, set any initial Tag names to be displayed, if necessary, prior to displaying the receiver. Also, if the user clicks "Save", take the result of -tagNames, and set them on the resulting file after saving is complete. Tag names are NSStrings, arrays of which can be used directly with the NSURLTagNamesKey API for getting and setting tags on files. Passing `nil` or an empty array to -setTagNames: will result in no initial Tag names appearing in the receiver. When -showsTagField returns YES, -tagNames always returns a non-nil array, and when NO, -tagNames always returns `nil`. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) TagNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSSavePanelSelTagNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelTagNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // `NSSavePanel`: When -showsTagField returns YES, set any initial Tag names to be displayed, if necessary, prior to displaying the receiver. Also, if the user clicks "Save", take the result of -tagNames, and set them on the resulting file after saving is complete. Tag names are NSStrings, arrays of which can be used directly with the NSURLTagNamesKey API for getting and setting tags on files. Passing `nil` or an empty array to -setTagNames: will result in no initial Tag names appearing in the receiver. When -showsTagField returns YES, -tagNames always returns a non-nil array, and when NO, -tagNames always returns `nil`. `NSOpenPanel`: Not used.
 func (o *NSSavePanel) SetTagNames(tagNames *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSSavePanelSelSetTagNames, tagNames)
+	o.Ptr().Send(_nSSavePanelSelSetTagNames, tagNames.Ptr())
 }
 
 // `NSSavePanel`: Whether or not to show a control for selecting the type of the saved file. The control shows the types in `allowedContentTypes`. Default is `NO`. `NSOpenPanel`: Not used. - Note: If `allowedContentTypes` is empty, the control is not displayed.
@@ -432,12 +442,15 @@ func (o *NSSavePanel) SelectText(sender objc.ID) {
 // `NSSavePanel`: An array of NSStrings specifying the file types the user can save the file as. The file type can be a common file extension, or a UTI. A nil value indicates that any file type can be used. If the array is not nil and the array contains no items, an exception will be raised. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel. If the user specifies a type not in the array, and 'allowsOtherFileTypes' is YES, they will be presented with another dialog when prompted to save. The default value is 'nil'. `NSOpenPanel`: On versions less than 10.6, this property is ignored. For applications that link against 10.6 and higher, this property will determine which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. The allowedFileTypes can be changed while the panel is running (ie: from an accessory view). The file type can be a common file extension, or a UTI. This is also known as the "enabled file types". A nil value indicates that all files should be enabled.
 // Deprecated: Use -allowedContentTypes instead
 func (o *NSSavePanel) AllowedFileTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSSavePanelSelAllowedFileTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSavePanelSelAllowedFileTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // `NSSavePanel`: An array of NSStrings specifying the file types the user can save the file as. The file type can be a common file extension, or a UTI. A nil value indicates that any file type can be used. If the array is not nil and the array contains no items, an exception will be raised. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel. If the user specifies a type not in the array, and 'allowsOtherFileTypes' is YES, they will be presented with another dialog when prompted to save. The default value is 'nil'. `NSOpenPanel`: On versions less than 10.6, this property is ignored. For applications that link against 10.6 and higher, this property will determine which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. The allowedFileTypes can be changed while the panel is running (ie: from an accessory view). The file type can be a common file extension, or a UTI. This is also known as the "enabled file types". A nil value indicates that all files should be enabled.
 // Deprecated: Use -allowedContentTypes instead
 func (o *NSSavePanel) SetAllowedFileTypes(allowedFileTypes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSSavePanelSelSetAllowedFileTypes, allowedFileTypes)
+	o.Ptr().Send(_nSSavePanelSelSetAllowedFileTypes, allowedFileTypes.Ptr())
 }

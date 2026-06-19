@@ -5,10 +5,14 @@
 package photos
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
+// A set of options affecting the delivery of video asset data that you request from an image manager.
+//
 // VideoRequestOptions wraps [raw.PHVideoRequestOptions] with a fluent Go API.
 type VideoRequestOptions struct {
 	inner *raw.PHVideoRequestOptions
@@ -35,20 +39,26 @@ func NewVideoRequestOptions() *VideoRequestOptions {
 	return &VideoRequestOptions{inner: raw.PHVideoRequestOptionsFromID(_id)}
 }
 
+// A Boolean value that specifies whether Photos can download the requested video from iCloud.
+//
 // WithNetworkAccessAllowed sets the networkAccessAllowed property and returns the receiver for chaining.
 func (x *VideoRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *VideoRequestOptions {
 	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
 	return x
 }
 
+// A mode specifying the requested video quality and delivery priority.
+//
 // WithDeliveryMode sets the deliveryMode property and returns the receiver for chaining.
 func (x *VideoRequestOptions) WithDeliveryMode(deliveryMode PHVideoRequestOptionsDeliveryMode) *VideoRequestOptions {
 	x.inner.SetDeliveryMode(raw.PHVideoRequestOptionsDeliveryMode(deliveryMode))
 	return x
 }
 
+// A block Photos calls periodically while downloading the video.
+//
 // WithProgressHandler sets the progressHandler property and returns the receiver for chaining.
-func (x *VideoRequestOptions) WithProgressHandler(progressHandler objc.Block) *VideoRequestOptions {
+func (x *VideoRequestOptions) WithProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) *VideoRequestOptions {
 	x.inner.SetProgressHandler(progressHandler)
 	return x
 }
@@ -79,7 +89,7 @@ func (x *VideoRequestOptions) ProgressHandler() objc.Block {
 }
 
 // SetProgressHandler calls the underlying SetProgressHandler.
-func (x *VideoRequestOptions) SetProgressHandler(progressHandler objc.Block) {
+func (x *VideoRequestOptions) SetProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) {
 	x.inner.SetProgressHandler(progressHandler)
 }
 
@@ -88,13 +98,13 @@ type VideoRequestOptionsable interface {
 	Unwrap() *raw.PHVideoRequestOptions
 	WithNetworkAccessAllowed(networkAccessAllowed bool) *VideoRequestOptions
 	WithDeliveryMode(deliveryMode PHVideoRequestOptionsDeliveryMode) *VideoRequestOptions
-	WithProgressHandler(progressHandler objc.Block) *VideoRequestOptions
+	WithProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) *VideoRequestOptions
 	IsNetworkAccessAllowed() bool
 	SetNetworkAccessAllowed(networkAccessAllowed bool)
 	DeliveryMode() PHVideoRequestOptionsDeliveryMode
 	SetDeliveryMode(deliveryMode PHVideoRequestOptionsDeliveryMode)
 	ProgressHandler() objc.Block
-	SetProgressHandler(progressHandler objc.Block)
+	SetProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID]))
 }
 
 var _ VideoRequestOptionsable = (*VideoRequestOptions)(nil)

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An alternate resolution for a geometry that SceneKit automatically substitutes to improve rendering performance.
+//
 // LevelOfDetail wraps [raw.SCNLevelOfDetail] with a fluent Go API.
 type LevelOfDetail struct {
 	inner *raw.SCNLevelOfDetail

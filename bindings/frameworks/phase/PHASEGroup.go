@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container that shares audio parameters with a collection of sounds.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasegroup
 type PHASEGroup struct {
 	foundation.NSObject
@@ -45,7 +47,7 @@ func PHASEGroupFromID(id objc.ID) *PHASEGroup {
 	return o
 }
 
-// @method initWithIdentifier: @abstract Create a new group. @param identifier The identifier that uniquely represents this group.
+// Creates a group with a unique name.
 func (o *PHASEGroup) InitWithIdentifier(identifier *foundation.NSString) *PHASEGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEGroupSelInitWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -54,42 +56,42 @@ func (o *PHASEGroup) InitWithIdentifier(identifier *foundation.NSString) *PHASEG
 	return PHASEGroupFromID(_ret)
 }
 
-// @method registerWithEngine @abstract Registers a group with a particular engine so that referenced assets can find it. @note An exception will be thrown if the engine is invalid or the group already exists. @param engine An engine object to associate this group with.
+// Adds the group to the engine’s dictionary.
 func (o *PHASEGroup) RegisterWithEngine(engine *PHASEEngine) {
 	o.Ptr().Send(_pHASEGroupSelRegisterWithEngine, engine.Ptr())
 }
 
-// @method unregisterFromEngine @abstract Unregister the group from a particular engine.
+// Removes the group from the engine’s dictionary.
 func (o *PHASEGroup) UnregisterFromEngine() {
 	o.Ptr().Send(_pHASEGroupSelUnregisterFromEngine)
 }
 
-// @method fadeGain:duration:curveType: @abstract Fade the gain of this group over a specified duration and curve. @note The fade gain is applied on top of the base gain of the group. @param gain A target linear gain scalar. Values are clamped to the range [0, 1]. @param duration The duration over which to ramp to the target linear gain scalar. Values must be >= 0. The duration is scaled by unitsPerSecond internally, so can be provided at the client's native time scale. @param curveType The type of curve function that is applied during the fade.
+// Adjusts the volume of the sounds in a group gradually.
 func (o *PHASEGroup) FadeGainDurationCurveType(gain float64, duration float64, curveType PHASECurveType) {
 	o.Ptr().Send(_pHASEGroupSelFadeGainDurationCurveType, gain, duration, curveType)
 }
 
-// @method fadeRate:duration:curveType: @abstract Fade the playback rate of this group over a specified duration and curve. @note The fade gain is applied on top of the base gain of the group. @param rate A target linear rate scalar. Values are clamped to the range [0.25, 4.0]. @param duration The duration over which to ramp to the target linear rate scalar. Values must be >= 0. The duration is scaled by unitsPerSecond internally, so can be provided at the client's native time scale. @param curveType The type of curve function that is applied during the fade.
+// Adjusts the playback speed of the sounds in a group gradually.
 func (o *PHASEGroup) FadeRateDurationCurveType(rate float64, duration float64, curveType PHASECurveType) {
 	o.Ptr().Send(_pHASEGroupSelFadeRateDurationCurveType, rate, duration, curveType)
 }
 
-// @method mute @abstract Mute the group.
+// Silences the group.
 func (o *PHASEGroup) Mute() {
 	o.Ptr().Send(_pHASEGroupSelMute)
 }
 
-// @method unmute @abstract Unmute the group.
+// Restores the group’s volume.
 func (o *PHASEGroup) Unmute() {
 	o.Ptr().Send(_pHASEGroupSelUnmute)
 }
 
-// @method solo @abstract Solo the group.
+// Silences all other groups.
 func (o *PHASEGroup) Solo() {
 	o.Ptr().Send(_pHASEGroupSelSolo)
 }
 
-// @method unsolo @abstract Unsolo the group.
+// Restores the other groups’ volume.
 func (o *PHASEGroup) Unsolo() {
 	o.Ptr().Send(_pHASEGroupSelUnsolo)
 }

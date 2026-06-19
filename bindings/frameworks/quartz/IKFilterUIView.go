@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Input parameters for filtering core image filters.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/ikfilteruiview
 type IKFilterUIView struct {
 	appkit.NSView
@@ -35,19 +37,19 @@ func IKFilterUIViewFromID(id objc.ID) *IKFilterUIView {
 	return o
 }
 
-// @method     viewWithFrame:filter: @abstract   The viewWithFrame method creates a view that retains the filter passed into it.
+// Creates a view that contains controls for the input parameters of a filter.
 func IKFilterUIViewViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter *coreimage.CIFilter) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIKFilterUIView), _iKFilterUIViewSelViewWithFrameFilter, frameRect, inFilter.Ptr())
 	return _ret
 }
 
-// @method     initWithFrame:filter: @abstract   The initWithFrame method initializes a view that retains the filter passed into it.
+// Initializes a view that contains controls for the input parameters of a filter.
 func (o *IKFilterUIView) InitWithFrameFilter(frameRect corefoundation.CGRect, inFilter *coreimage.CIFilter) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterUIViewSelInitWithFrameFilter, frameRect, inFilter.Ptr())
 	return _ret
 }
 
-// @method     filter @abstract   Accessor method to return the filter instance that the view controls.
+// Returns the Core Image filter associated with the view.
 func (o *IKFilterUIView) Filter() *coreimage.CIFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterUIViewSelFilter)
 	if _ret != 0 {
@@ -56,7 +58,7 @@ func (o *IKFilterUIView) Filter() *coreimage.CIFilter {
 	return coreimage.CIFilterFromID(_ret)
 }
 
-// @method     objectController @abstract   Accessor method for the object controller for all bindings between the filter and the UI representation.
+// Returns the object controller for the bindings between the filter and its view.
 func (o *IKFilterUIView) ObjectController() *appkit.NSObjectController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterUIViewSelObjectController)
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a track in a fragmented movie.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avfragmentedmovietrack
 type AVFragmentedMovieTrack struct {
 	AVMovieTrack

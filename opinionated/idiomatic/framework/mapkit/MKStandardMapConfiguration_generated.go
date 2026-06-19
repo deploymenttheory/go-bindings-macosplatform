@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The class that represents the default map presentation, which is a street map that shows the position of all roads and some road names.
+//
 // StandardMapConfiguration wraps [raw.MKStandardMapConfiguration] with a fluent Go API.
 type StandardMapConfiguration struct {
 	inner *raw.MKStandardMapConfiguration
@@ -35,6 +37,8 @@ func NewStandardMapConfiguration() *StandardMapConfiguration {
 	return &StandardMapConfiguration{inner: raw.MKStandardMapConfigurationFromID(_id)}
 }
 
+// Creates a new standard map configuration with the specified elevation style.
+//
 // NewStandardMapConfigurationWithElevationStyle creates a new [StandardMapConfiguration].
 func NewStandardMapConfigurationWithElevationStyle(elevationStyle MKMapElevationStyle) *StandardMapConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKStandardMapConfiguration")), objc.RegisterName("alloc"))
@@ -42,6 +46,8 @@ func NewStandardMapConfigurationWithElevationStyle(elevationStyle MKMapElevation
 	return &StandardMapConfiguration{inner: raw.MKStandardMapConfigurationFromID(_id)}
 }
 
+// Creates a standard map configuration with the specified elevation and emphasis styles.
+//
 // NewStandardMapConfigurationWithElevationStyleEmphasisStyle creates a new [StandardMapConfiguration].
 func NewStandardMapConfigurationWithElevationStyleEmphasisStyle(elevationStyle MKMapElevationStyle, emphasisStyle MKStandardMapEmphasisStyle) *StandardMapConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKStandardMapConfiguration")), objc.RegisterName("alloc"))
@@ -49,6 +55,8 @@ func NewStandardMapConfigurationWithElevationStyleEmphasisStyle(elevationStyle M
 	return &StandardMapConfiguration{inner: raw.MKStandardMapConfigurationFromID(_id)}
 }
 
+// Creates a standard map configuration with the specified emphasis style.
+//
 // NewStandardMapConfigurationWithEmphasisStyle creates a new [StandardMapConfiguration].
 func NewStandardMapConfigurationWithEmphasisStyle(emphasisStyle MKStandardMapEmphasisStyle) *StandardMapConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKStandardMapConfiguration")), objc.RegisterName("alloc"))
@@ -56,24 +64,32 @@ func NewStandardMapConfigurationWithEmphasisStyle(emphasisStyle MKStandardMapEmp
 	return &StandardMapConfiguration{inner: raw.MKStandardMapConfigurationFromID(_id)}
 }
 
+// The value that indicates how the framework emphasizes map features.
+//
 // WithEmphasisStyle sets the emphasisStyle property and returns the receiver for chaining.
 func (x *StandardMapConfiguration) WithEmphasisStyle(emphasisStyle MKStandardMapEmphasisStyle) *StandardMapConfiguration {
 	x.inner.SetEmphasisStyle(raw.MKStandardMapEmphasisStyle(emphasisStyle))
 	return x
 }
 
+// The filter used to determine the points of interest shown on the map.
+//
 // WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
 func (x *StandardMapConfiguration) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *StandardMapConfiguration {
 	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
 	return x
 }
 
+// A Boolean value that controls whether the map displays traffic conditions.
+//
 // WithShowsTraffic sets the showsTraffic property and returns the receiver for chaining.
 func (x *StandardMapConfiguration) WithShowsTraffic(showsTraffic bool) *StandardMapConfiguration {
 	x.inner.SetShowsTraffic(showsTraffic)
 	return x
 }
 
+// The value that indicates the map’s elevation style.
+//
 // WithElevationStyle sets the elevationStyle property and returns the receiver for chaining.
 func (x *StandardMapConfiguration) WithElevationStyle(elevationStyle MKMapElevationStyle) *StandardMapConfiguration {
 	x.inner.MKMapConfiguration.SetElevationStyle(raw.MKMapElevationStyle(elevationStyle))

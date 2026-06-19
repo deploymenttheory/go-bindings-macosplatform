@@ -103,8 +103,11 @@ func (o *ODMappings) SetIdentifier(identifier *foundation.NSString) {
 }
 
 func (o *ODMappings) RecordTypes() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDMappingsSelRecordTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDMappingsSelRecordTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *ODMappings) Function() *foundation.NSString {
@@ -120,10 +123,13 @@ func (o *ODMappings) SetFunction(function *foundation.NSString) {
 }
 
 func (o *ODMappings) FunctionAttributes() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDMappingsSelFunctionAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDMappingsSelFunctionAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *ODMappings) SetFunctionAttributes(functionAttributes *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_oDMappingsSelSetFunctionAttributes, functionAttributes)
+	o.Ptr().Send(_oDMappingsSelSetFunctionAttributes, functionAttributes.Ptr())
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A workout sample that stores information about a single physical activity.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkworkout
 type HKWorkout struct {
 	HKSample
@@ -46,7 +48,7 @@ func HKWorkoutFromID(id objc.ID) *HKWorkout {
 	return o
 }
 
-// @method        statisticsForType: @discussion    Returns an HKStatistics object containing the statistics for all the samples of the given type that have been added to the workout. If there are no samples of the given type then nil is returned. @param         quantityType    The quantity type to gather statistics about.
+// Returns the workout’s statistics for the provided quantity type.
 func (o *HKWorkout) StatisticsForType(quantityType *HKQuantityType) *HKStatistics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutSelStatisticsForType, quantityType.Ptr())
 	if _ret != 0 {
@@ -55,7 +57,7 @@ func (o *HKWorkout) StatisticsForType(quantityType *HKQuantityType) *HKStatistic
 	return HKStatisticsFromID(_ret)
 }
 
-// @method        workoutWithActivityType:startDate:endDate: @param         workoutActivityType     The activity type of the workout @param         startDate               The point in time that the workout was started @param         endDate                 The point in time that the workout was ended
+// Instantiates a new workout.
 // Deprecated: Use HKWorkoutBuilder
 func HKWorkoutWorkoutWithActivityTypeStartDateEndDate(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate) *HKWorkout {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkout), _hKWorkoutSelWorkoutWithActivityTypeStartDateEndDate, workoutActivityType, startDate.Ptr(), endDate.Ptr())
@@ -65,60 +67,60 @@ func HKWorkoutWorkoutWithActivityTypeStartDateEndDate(workoutActivityType HKWork
 	return HKWorkoutFromID(_ret)
 }
 
-// @method        workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:metadata @discussion    If the optional total parameters are specified, matching samples that add up to the calculated total quantities should be associated with this workout using addSamples:toWorkout:completion: in HKHealthStore. @param         workoutActivityType     The activity type of the workout @param         startDate               The point in time that the workout was started @param         endDate                 The point in time that the workout was ended @param         workoutEvents           An array of HKWorkoutEvents. The workout's duration is derived from these events. (Optional) @param         totalEnergyBurned       The amount of energy that was burned during the workout. (Optional) @param         totalDistance           The total distance that was traveled during the workout. (Optional) @param         metadata                Metadata for the workout. (Optional)
+// Instantiates a new workout whose duration is calculated based on the start and end dates and the provided workout events.
 // Deprecated: Use HKWorkoutBuilder
 func HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*HKWorkoutEvent], totalEnergyBurned *HKQuantity, totalDistance *HKQuantity, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKWorkout {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkout), _hKWorkoutSelWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata, workoutActivityType, startDate.Ptr(), endDate.Ptr(), workoutEvents.Ptr(), totalEnergyBurned.Ptr(), totalDistance.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkout), _hKWorkoutSelWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata, workoutActivityType, startDate.Ptr(), endDate.Ptr(), workoutEvents.Ptr(), totalEnergyBurned.Ptr(), totalDistance.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return HKWorkoutFromID(_ret)
 }
 
-// @method        workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:metadata @discussion    If the optional total parameters are specified, matching samples that add up to the calculated total quantities should be associated with this workout using addSamples:toWorkout:completion: in HKHealthStore. @param         workoutActivityType     The activity type of the workout @param         startDate               The point in time that the workout was started @param         endDate                 The point in time that the workout was ended @param         workoutEvents           An array of HKWorkoutEvents. The workout's duration is derived from these events. (Optional) @param         totalEnergyBurned       The amount of energy that was burned during the workout. (Optional) @param         totalDistance           The total distance that was traveled during the workout. (Optional) @param         device                  The HKDevice associated with the workout. (Optional) @param         metadata                Metadata for the workout. (Optional)
+// Instantiates a workout that includes both workout events and the device that produced the sample data.
 // Deprecated: Use HKWorkoutBuilder
 func HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*HKWorkoutEvent], totalEnergyBurned *HKQuantity, totalDistance *HKQuantity, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKWorkout {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkout), _hKWorkoutSelWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata, workoutActivityType, startDate.Ptr(), endDate.Ptr(), workoutEvents.Ptr(), totalEnergyBurned.Ptr(), totalDistance.Ptr(), device.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkout), _hKWorkoutSelWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata, workoutActivityType, startDate.Ptr(), endDate.Ptr(), workoutEvents.Ptr(), totalEnergyBurned.Ptr(), totalDistance.Ptr(), device.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return HKWorkoutFromID(_ret)
 }
 
-// @method        workoutWithActivityType:startDate:endDate:duration:totalEnergyBurned:totalDistance:metadata: @discussion    If the optional total parameters are specified, matching samples that add up to the calculated total quantities should be associated with this workout using addSamples:toWorkout:completion: in HKHealthStore. @param         workoutActivityType     The activity type of the workout @param         startDate               The point in time that the workout was started @param         endDate                 The point in time that the workout was ended @param         duration                The duration of the workout. If 0, the difference between startDate and endDate is used. @param         totalEnergyBurned       The amount of energy that was burned during the workout. (Optional) @param         totalDistance           The total distance that was traveled during the workout. (Optional) @param         metadata                Metadata for the workout. (Optional)
+// Instantiates a new workout that includes the energy burned, distance, and metadata for the workout.
 // Deprecated: Use HKWorkoutBuilder
 func HKWorkoutWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, duration float64, totalEnergyBurned *HKQuantity, totalDistance *HKQuantity, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKWorkout {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkout), _hKWorkoutSelWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata, workoutActivityType, startDate.Ptr(), endDate.Ptr(), duration, totalEnergyBurned.Ptr(), totalDistance.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkout), _hKWorkoutSelWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata, workoutActivityType, startDate.Ptr(), endDate.Ptr(), duration, totalEnergyBurned.Ptr(), totalDistance.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return HKWorkoutFromID(_ret)
 }
 
-// @method        workoutWithActivityType:startDate:endDate:duration:totalEnergyBurned:totalDistance:device:metadata: @discussion    If the optional total parameters are specified, matching samples that add up to the calculated total quantities should be associated with this workout using addSamples:toWorkout:completion: in HKHealthStore. @param         workoutActivityType     The activity type of the workout @param         startDate               The point in time that the workout was started @param         endDate                 The point in time that the workout was ended @param         duration                The duration of the workout. If 0, the difference between startDate and endDate is used. @param         totalEnergyBurned       The amount of energy that was burned during the workout. (Optional) @param         totalDistance           The total distance that was traveled during the workout. (Optional) @param         device                  The HKDevice associated with the workout. (Optional) @param         metadata                Metadata for the workout. (Optional)
+// Instantiates a new workout activity that includes the device that produced the sample data.
 // Deprecated: Use HKWorkoutBuilder
 func HKWorkoutWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, duration float64, totalEnergyBurned *HKQuantity, totalDistance *HKQuantity, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKWorkout {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkout), _hKWorkoutSelWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata, workoutActivityType, startDate.Ptr(), endDate.Ptr(), duration, totalEnergyBurned.Ptr(), totalDistance.Ptr(), device.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkout), _hKWorkoutSelWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata, workoutActivityType, startDate.Ptr(), endDate.Ptr(), duration, totalEnergyBurned.Ptr(), totalDistance.Ptr(), device.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return HKWorkoutFromID(_ret)
 }
 
-// @method        workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:totalSwimmingStrokeCount:device:metadata: @discussion    If the optional total parameters are specified, matching samples that add up to the calculated total quantities should be associated with this workout using addSamples:toWorkout:completion: in HKHealthStore. @param         workoutActivityType         The activity type of the workout @param         startDate                   The point in time that the workout was started @param         endDate                     The point in time that the workout was ended @param         workoutEvents               An array of HKWorkoutEvents. The workout's duration is derived from these events. (Optional) @param         totalEnergyBurned           The amount of energy that was burned during the workout. (Optional) @param         totalDistance               The total distance that was traveled during the workout. (Optional) @param         totalSwimmingStrokeCount    The total count of swimming strokes that was accumulated during the workout. (Optional) @param         device                      The HKDevice associated with the workout. (Optional) @param         metadata                    Metadata for the workout. (Optional)
+// Instantiates a workout using a variety of data, including the number of strokes while swimming.
 // Deprecated: Use HKWorkoutBuilder
 func HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*HKWorkoutEvent], totalEnergyBurned *HKQuantity, totalDistance *HKQuantity, totalSwimmingStrokeCount *HKQuantity, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKWorkout {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkout), _hKWorkoutSelWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata, workoutActivityType, startDate.Ptr(), endDate.Ptr(), workoutEvents.Ptr(), totalEnergyBurned.Ptr(), totalDistance.Ptr(), totalSwimmingStrokeCount.Ptr(), device.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkout), _hKWorkoutSelWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata, workoutActivityType, startDate.Ptr(), endDate.Ptr(), workoutEvents.Ptr(), totalEnergyBurned.Ptr(), totalDistance.Ptr(), totalSwimmingStrokeCount.Ptr(), device.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return HKWorkoutFromID(_ret)
 }
 
-// @method        workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:totalFlightsClimbed:device:metadata: @discussion    If the optional total parameters are specified, matching samples that add up to the calculated total quantities should be associated with this workout using addSamples:toWorkout:completion: in HKHealthStore. @param         workoutActivityType         The activity type of the workout @param         startDate                   The point in time that the workout was started @param         endDate                     The point in time that the workout was ended @param         workoutEvents               An array of HKWorkoutEvents. The workout's duration is derived from these events. (Optional) @param         totalEnergyBurned           The amount of energy that was burned during the workout. (Optional) @param         totalDistance               The total distance that was traveled during the workout. (Optional) @param         totalFlightsClimbed         The total count of flights climbed that was accumulated during the workout. (Optional) @param         device                      The HKDevice associated with the workout. (Optional) @param         metadata                    Metadata for the workout. (Optional)
+// Instantiates a workout using a variety of data, including the number of flights of stairs climbed.
 // Deprecated: Use HKWorkoutBuilder
 func HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*HKWorkoutEvent], totalEnergyBurned *HKQuantity, totalDistance *HKQuantity, totalFlightsClimbed *HKQuantity, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKWorkout {
-	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkout), _hKWorkoutSelWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata, workoutActivityType, startDate.Ptr(), endDate.Ptr(), workoutEvents.Ptr(), totalEnergyBurned.Ptr(), totalDistance.Ptr(), totalFlightsClimbed.Ptr(), device.Ptr(), metadata)
+	_ret := objc.Send[objc.ID](objc.ID(_clsHKWorkout), _hKWorkoutSelWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata, workoutActivityType, startDate.Ptr(), endDate.Ptr(), workoutEvents.Ptr(), totalEnergyBurned.Ptr(), totalDistance.Ptr(), totalFlightsClimbed.Ptr(), device.Ptr(), metadata.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

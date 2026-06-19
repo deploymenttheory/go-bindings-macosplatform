@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A group of acceleration structures.
+//
 // AccelerationStructureGroup wraps [raw.MPSAccelerationStructureGroup] with a fluent Go API.
 type AccelerationStructureGroup struct {
 	inner *raw.MPSAccelerationStructureGroup

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing a haptic waveform.
+//
 // Apple documentation: https://developer.apple.com/documentation/corehaptics/chhapticpattern
 type CHHapticPattern struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func CHHapticPatternFromID(id objc.ID) *CHHapticPattern {
 	return o
 }
 
-// @method initWithEvents:parameters:error @abstract Initialize a new CHHapticPattern. @param events An NSArray of CHHapticEvents.  Can be empty. @param parameters An NSArray of CHHapticDynamicParameters.  Can be empty.
+// Constructs a haptic pattern from a series of events and parameters.
 func (o *CHHapticPattern) InitWithEventsParametersError(events *foundation.NSArray[*CHHapticEvent], parameters *foundation.NSArray[*CHHapticDynamicParameter]) (*CHHapticPattern, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticPatternSelInitWithEventsParametersError, events.Ptr(), parameters.Ptr(), unsafe.Pointer(&_nsErr))
@@ -50,7 +52,7 @@ func (o *CHHapticPattern) InitWithEventsParametersError(events *foundation.NSArr
 	return CHHapticPatternFromID(_ret), nil
 }
 
-// @method initWithEvents:parameterCurves:error @abstract Initialize a new CHHapticPattern with parameters modulated by parameter curves. @param events An NSArray of CHHapticEvents.  Can be empty. @param parameterCurves An NSArray of CHHapticParameterCurves.  Can be empty.
+// Constructs a haptic pattern from a series of events and parameter curves.
 func (o *CHHapticPattern) InitWithEventsParameterCurvesError(events *foundation.NSArray[*CHHapticEvent], parameterCurves *foundation.NSArray[*CHHapticParameterCurve]) (*CHHapticPattern, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticPatternSelInitWithEventsParameterCurvesError, events.Ptr(), parameterCurves.Ptr(), unsafe.Pointer(&_nsErr))
@@ -63,10 +65,10 @@ func (o *CHHapticPattern) InitWithEventsParameterCurvesError(events *foundation.
 	return CHHapticPatternFromID(_ret), nil
 }
 
-// @method initWithDictionary:error @abstract Initialize a new CHHapticPattern using the passed-in NSDictionary. @param patternDict NSDictionary containing a pattern property list.
+// Creates a haptic pattern from a property list dictionary.
 func (o *CHHapticPattern) InitWithDictionaryError(patternDict *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*CHHapticPattern, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticPatternSelInitWithDictionaryError, patternDict, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticPatternSelInitWithDictionaryError, patternDict.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -76,7 +78,7 @@ func (o *CHHapticPattern) InitWithDictionaryError(patternDict *foundation.NSDict
 	return CHHapticPatternFromID(_ret), nil
 }
 
-// @method initWithContentsOfURL:error @abstract Initialize a new CHHapticPattern using the contents of the passed-in NSURL. @param ahapURL NSURL of an ahap file. @discussion This URL must reference a valid AHAP file.
+// Creates a haptic pattern with the contents of an AHAP file.
 func (o *CHHapticPattern) InitWithContentsOfURLError(ahapURL *foundation.NSURL) (*CHHapticPattern, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticPatternSelInitWithContentsOfURLError, ahapURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -89,14 +91,17 @@ func (o *CHHapticPattern) InitWithContentsOfURLError(ahapURL *foundation.NSURL) 
 	return CHHapticPatternFromID(_ret), nil
 }
 
-// @method exportDictionaryAndReturnError:error @abstract Returns a NSDictionary representation of the contents of the pattern. @discussion Patterns containing custom audio resource IDs cannot be exported and will return nil with the error code set to CHHapticErrorCodeOperationNotPermitted.
+// Returns the dictionary representation of the haptic pattern.
 func (o *CHHapticPattern) ExportDictionaryAndReturnError() (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _cHHapticPatternSelExportDictionaryAndReturnError, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticPatternSelExportDictionaryAndReturnError, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret), nil
 }
 
 // @property duration Pattern duration is calculated as the start time of the pattern's last event or parameter, plus that event's duration if present.

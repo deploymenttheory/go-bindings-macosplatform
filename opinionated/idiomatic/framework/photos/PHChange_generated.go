@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a change that occurred in the photo library.
+//
 // Change wraps [raw.PHChange] with a fluent Go API.
 type Change struct {
 	inner *raw.PHChange
@@ -35,11 +37,15 @@ func NewChange() *Change {
 	return &Change{inner: raw.PHChangeFromID(_id)}
 }
 
+// Returns detailed change information for the specified asset or collection.
+//
 // ChangeDetailsForObject calls the underlying ChangeDetailsForObject.
 func (x *Change) ChangeDetailsForObject(object *raw.PHObject) *raw.PHObjectChangeDetails[objc.ID] {
 	return x.inner.ChangeDetailsForObject(object)
 }
 
+// Returns detailed change information for a fetch result.
+//
 // ChangeDetailsForFetchResult calls the underlying ChangeDetailsForFetchResult.
 func (x *Change) ChangeDetailsForFetchResult(object *raw.PHFetchResult[objc.ID]) *raw.PHFetchResultChangeDetails[objc.ID] {
 	return x.inner.ChangeDetailsForFetchResult(object)

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Groups together properties to configure and create a specialized function by passing it to a factory method.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4specializedfunctiondescriptor
 type MTL4SpecializedFunctionDescriptor struct {
 	MTL4FunctionDescriptor

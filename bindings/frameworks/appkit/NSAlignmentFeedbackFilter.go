@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that can filter the movement of an object and provides haptic feedback when alignment occurs.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsalignmentfeedbackfilter
 type NSAlignmentFeedbackFilter struct {
 	foundation.NSObject
@@ -37,29 +39,35 @@ func NSAlignmentFeedbackFilterFromID(id objc.ID) *NSAlignmentFeedbackFilter {
 	return o
 }
 
+// Informs the feedback filter about a new event.
 func (o *NSAlignmentFeedbackFilter) UpdateWithEvent(event *NSEvent) {
 	o.Ptr().Send(_nSAlignmentFeedbackFilterSelUpdateWithEvent, event.Ptr())
 }
 
+// Informs the feedback filter about a new pan (drag) gesture recognizer event.
 func (o *NSAlignmentFeedbackFilter) UpdateWithPanRecognizer(panRecognizer *NSPanGestureRecognizer) {
 	o.Ptr().Send(_nSAlignmentFeedbackFilterSelUpdateWithPanRecognizer, panRecognizer.Ptr())
 }
 
+// Requests a feedback token for the alignment of an object requiring horizontal and vertical movement.
 func (o *NSAlignmentFeedbackFilter) AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint(view *NSView, previousPoint corefoundation.CGPoint, alignedPoint corefoundation.CGPoint, defaultPoint corefoundation.CGPoint) NSAlignmentFeedbackToken {
 	_ret := objc.Send[NSAlignmentFeedbackToken](o.Ptr(), _nSAlignmentFeedbackFilterSelAlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint, view.Ptr(), previousPoint, alignedPoint, defaultPoint)
 	return _ret
 }
 
+// Requests a feedback token for the alignment of an object requiring horizontal movement only.
 func (o *NSAlignmentFeedbackFilter) AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX(view *NSView, previousX float64, alignedX float64, defaultX float64) NSAlignmentFeedbackToken {
 	_ret := objc.Send[NSAlignmentFeedbackToken](o.Ptr(), _nSAlignmentFeedbackFilterSelAlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX, view.Ptr(), previousX, alignedX, defaultX)
 	return _ret
 }
 
+// Requests a feedback token for the alignment of an object requiring vertical movement only.
 func (o *NSAlignmentFeedbackFilter) AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY(view *NSView, previousY float64, alignedY float64, defaultY float64) NSAlignmentFeedbackToken {
 	_ret := objc.Send[NSAlignmentFeedbackToken](o.Ptr(), _nSAlignmentFeedbackFilterSelAlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY, view.Ptr(), previousY, alignedY, defaultY)
 	return _ret
 }
 
+// Performs the haptic feedback described by one or more alignment feedback tokens.
 func (o *NSAlignmentFeedbackFilter) PerformFeedbackPerformanceTime(alignmentFeedbackTokens *foundation.NSArray[NSAlignmentFeedbackToken], performanceTime NSHapticFeedbackPerformanceTime) {
 	o.Ptr().Send(_nSAlignmentFeedbackFilterSelPerformFeedbackPerformanceTime, alignmentFeedbackTokens.Ptr(), performanceTime)
 }

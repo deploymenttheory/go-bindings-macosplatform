@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents matchmaking results, including the players that join the match and their properties that matchmaking rules uses.
+//
 // MatchedPlayers wraps [raw.GKMatchedPlayers] with a fluent Go API.
 type MatchedPlayers struct {
 	inner *raw.GKMatchedPlayers

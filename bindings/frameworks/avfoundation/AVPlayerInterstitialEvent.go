@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides instructions for how a player presents interstitial content.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayerinterstitialevent
 type AVPlayerInterstitialEvent struct {
 	foundation.NSObject
@@ -74,27 +76,27 @@ func AVPlayerInterstitialEventFromID(id objc.ID) *AVPlayerInterstitialEvent {
 	return o
 }
 
-// Returns an instance of AVPlayerInterstitialEvent for use in scheduling interstitial playback. - Parameter primaryItem: An AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates. - Parameter identifier: An external identifier for the event. - Parameter time: The time within the duration of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. - Parameter templateItems: An array of AVPlayerItems with configurations that will be reproduced for the playback of interstitial content. An NSInvalidArgumentException will be raised if any of the template items employs an AVAsset that lacks a URL, such as an AVComposition. - Parameter restrictions: Indicates restrictions on the use of end user playback controls that are imposed by the event. - Parameter resumptionOffset: Specifies the offset in time at which playback of the primary item should resume after interstitial playback has finished. Definite numeric values are supported. The value kCMTimeIndefinite can also be used, in order to specify that the effective resumption time offset should accord with the wallclock time elapsed during interstitial playback. - Parameter playoutLimit: Specifies the offset from the beginning of the interstitial at which interstitial playback should end, if the interstitial asset(s) are longer. Pass a positive numeric value, or kCMTimeInvalid to indicate no playout limit. - Parameter userDefinedAttributes: Storage for attributes defined by the client or the content vendor. Attribute names should begin with X- for uniformity with server insertion. - Returns: An instance of AVPlayerInterstitialEvent.
+// Creates an interstitial event, with user-defined attributes, for the specified time.
 // Deprecated: Use interstitialEventWithPrimaryItem:time: instead
 func AVPlayerInterstitialEventInterstitialEventWithPrimaryItemIdentifierTimeTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes(primaryItem *AVPlayerItem, identifier *foundation.NSString, time_ coremedia.CMTime, templateItems *foundation.NSArray[*AVPlayerItem], restrictions AVPlayerInterstitialEventRestrictions, resumptionOffset coremedia.CMTime, playoutLimit coremedia.CMTime, userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *AVPlayerInterstitialEvent {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerInterstitialEvent), _aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemIdentifierTimeTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes, primaryItem.Ptr(), identifier.Ptr(), time_, templateItems.Ptr(), restrictions, resumptionOffset, playoutLimit, userDefinedAttributes)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerInterstitialEvent), _aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemIdentifierTimeTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes, primaryItem.Ptr(), identifier.Ptr(), time_, templateItems.Ptr(), restrictions, resumptionOffset, playoutLimit, userDefinedAttributes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVPlayerInterstitialEventFromID(_ret)
 }
 
-// Returns an instance of AVPlayerInterstitialEvent for use in scheduling interstitial playback. - Parameter primaryItem: An AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates. - Parameter identifier: An external identifier for the event. - Parameter date: The date within the date range of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. - Parameter templateItems: An array of AVPlayerItems with configurations that will be reproduced for the playback of interstitial content. An NSInvalidArgumentException will be raised if any of the template items employs an AVAsset that lacks a URL, such as an AVComposition. - Parameter restrictions: Indicates restrictions on the use of end user playback controls that are imposed by the event. - Parameter resumptionOffset: Specifies the offset in time at which playback of the primary item should resume after interstitial playback has finished. Definite numeric values are supported. The value kCMTimeIndefinite can also be used, in order to specify that the effective resumption time offset should accord with the wallclock time elapsed during interstitial playback. - Parameter playoutLimit: Specifies the offset from the beginning of the interstitial at which interstitial playback should end, if the interstitial asset(s) are longer. Pass a positive numeric value, or kCMTimeInvalid to indicate no playout limit. - Parameter userDefinedAttributes: Storage for attributes defined by the client or the content vendor. Attribute names should begin with X- for uniformity with server insertion. - Returns: An instance of AVPlayerInterstitialEvent.
+// Creates an interstitial event, with user-defined attributes, for the specified date.
 // Deprecated: Use interstitialEventWithPrimaryItem:date: instead
 func AVPlayerInterstitialEventInterstitialEventWithPrimaryItemIdentifierDateTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes(primaryItem *AVPlayerItem, identifier *foundation.NSString, date *foundation.NSDate, templateItems *foundation.NSArray[*AVPlayerItem], restrictions AVPlayerInterstitialEventRestrictions, resumptionOffset coremedia.CMTime, playoutLimit coremedia.CMTime, userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *AVPlayerInterstitialEvent {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerInterstitialEvent), _aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemIdentifierDateTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes, primaryItem.Ptr(), identifier.Ptr(), date.Ptr(), templateItems.Ptr(), restrictions, resumptionOffset, playoutLimit, userDefinedAttributes)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerInterstitialEvent), _aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemIdentifierDateTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes, primaryItem.Ptr(), identifier.Ptr(), date.Ptr(), templateItems.Ptr(), restrictions, resumptionOffset, playoutLimit, userDefinedAttributes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVPlayerInterstitialEventFromID(_ret)
 }
 
-// Returns an instance of AVPlayerInterstitialEvent for use in scheduling interstitial playback. - Parameter primaryItem: An AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates. - Parameter time: The time within the duration of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. - Returns: An instance of AVPlayerInterstitialEvent.
+// Creates an interstitial event for the specified time.
 func AVPlayerInterstitialEventInterstitialEventWithPrimaryItemTime(primaryItem *AVPlayerItem, time_ coremedia.CMTime) *AVPlayerInterstitialEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerInterstitialEvent), _aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemTime, primaryItem.Ptr(), time_)
 	if _ret != 0 {
@@ -103,7 +105,7 @@ func AVPlayerInterstitialEventInterstitialEventWithPrimaryItemTime(primaryItem *
 	return AVPlayerInterstitialEventFromID(_ret)
 }
 
-// Returns an instance of AVPlayerInterstitialEvent for use in scheduling interstitial playback. - Parameter primaryItem: An AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates. - Parameter date: The date within the date range of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. - Returns: An instance of AVPlayerInterstitialEvent.
+// Creates an interstitial event for the specified date.
 func AVPlayerInterstitialEventInterstitialEventWithPrimaryItemDate(primaryItem *AVPlayerItem, date *foundation.NSDate) *AVPlayerInterstitialEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerInterstitialEvent), _aVPlayerInterstitialEventSelInterstitialEventWithPrimaryItemDate, primaryItem.Ptr(), date.Ptr())
 	if _ret != 0 {
@@ -201,14 +203,20 @@ func (o *AVPlayerInterstitialEvent) WillPlayOnce() bool {
 
 // Attributes of the event defined by the content vendor or the client. Dictionary keys are attribute names. Dictionary values are attribute values.
 func (o *AVPlayerInterstitialEvent) UserDefinedAttributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _aVPlayerInterstitialEventSelUserDefinedAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventSelUserDefinedAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // The asset list JSON response as a dictionary, or nil if no asset list response has been loaded for the event. If the AVPlayerInterstitialEvent's templateItems is empty and the assetListResponse is nil, then an asset list read is expected. If the AVPlayerInterstitialEvent's templateItems is not empty and the assetListResponse is nil, then an asset list read is not expected.
 func (o *AVPlayerInterstitialEvent) AssetListResponse() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _aVPlayerInterstitialEventSelAssetListResponse)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventSelAssetListResponse)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // The identifier of the daterange-schedule that produced this event. nil if the event was not a product of a daterange-schedule.
@@ -302,7 +310,7 @@ func (o *AVPlayerInterstitialEvent) SetWillPlayOnce(willPlayOnce bool) {
 }
 
 func (o *AVPlayerInterstitialEvent) SetUserDefinedAttributes(userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_aVPlayerInterstitialEventSelSetUserDefinedAttributes, userDefinedAttributes)
+	o.Ptr().Send(_aVPlayerInterstitialEventSelSetUserDefinedAttributes, userDefinedAttributes.Ptr())
 }
 
 func (o *AVPlayerInterstitialEvent) SetTimelineOccupancy(timelineOccupancy AVPlayerInterstitialEventTimelineOccupancy) {

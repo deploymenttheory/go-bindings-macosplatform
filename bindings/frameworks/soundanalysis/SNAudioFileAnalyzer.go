@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An analyzer that runs sound classification requests on an audio file.
+//
 // Apple documentation: https://developer.apple.com/documentation/soundanalysis/snaudiofileanalyzer
 type SNAudioFileAnalyzer struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func SNAudioFileAnalyzerFromID(id objc.ID) *SNAudioFileAnalyzer {
 	return o
 }
 
-// Creates a new analyzer - Parameters: - url: The url for the audio file to be analyzed - error: On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify nil for this parameter if you do not want the error information.
+// Creates a new audio file analyzer.
 func (o *SNAudioFileAnalyzer) InitWithURLError(url *foundation.NSURL) (*SNAudioFileAnalyzer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNAudioFileAnalyzerSelInitWithURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -51,7 +53,7 @@ func (o *SNAudioFileAnalyzer) InitWithURLError(url *foundation.NSURL) (*SNAudioF
 	return SNAudioFileAnalyzerFromID(_ret), nil
 }
 
-// Adds a new analysis request to the analyzer - Parameters: - request: An audio analysis request to be performed on the audio stream - observer: The object that will receive the analysis results for the supplied request. The observer is weakly retained by the analyzer. - error On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify nil for this parameter if you do not want the error information. - Returns: YES if the request was successfully added, and NO otherwise. If addRequest is called while the file is being processed, an error will be returned.
+// Adds a new analysis request to the audio file analyzer.
 func (o *SNAudioFileAnalyzer) AddRequestWithObserverError(request SNRequest, observer SNResultsObserving) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sNAudioFileAnalyzerSelAddRequestWithObserverError, request, observer, unsafe.Pointer(&_nsErr))
@@ -61,22 +63,22 @@ func (o *SNAudioFileAnalyzer) AddRequestWithObserverError(request SNRequest, obs
 	return _ret, nil
 }
 
-// Removes an existing analysis request from the analyzer - Parameter request: An audio analysis request to be removed Requests can be removed while analysis is in progress. Once the removeRequest method returns, the previously registered observer will not receive any more callbacks.
+// Removes an existing request from the audio file analyzer.
 func (o *SNAudioFileAnalyzer) RemoveRequest(request SNRequest) {
 	o.Ptr().Send(_sNAudioFileAnalyzerSelRemoveRequest, request)
 }
 
-// Removes all requests from the analyzer
+// Removes all the sound analysis requests from the audio file analyzer.
 func (o *SNAudioFileAnalyzer) RemoveAllRequests() {
 	o.Ptr().Send(_sNAudioFileAnalyzerSelRemoveAllRequests)
 }
 
-// Analyzes the audio file synchronously This function executes synchronously. Any errors produced during analysis will flow downstream to the request observers. This method may block for a long period of time, so be careful to ensure this call does not block UI or other important tasks.
+// Analyzes the audio file synchronously.
 func (o *SNAudioFileAnalyzer) Analyze() {
 	o.Ptr().Send(_sNAudioFileAnalyzerSelAnalyze)
 }
 
-// Analyzes the audio file asynchronously This function executes asynchronously, calling the completion after the entire file has completed analysis. Any errors produced during analysis will flow downstream to the request observers. If the cancelAnalysis method is called, the completionHandler will still be called, but with didReachEndOfFile set to NO.
+// Analyzes the audio file asynchronously.
 func (o *SNAudioFileAnalyzer) AnalyzeWithCompletionHandler(completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -88,7 +90,7 @@ func (o *SNAudioFileAnalyzer) AnalyzeWithCompletionHandler(completionHandler fun
 	o.Ptr().Send(_sNAudioFileAnalyzerSelAnalyzeWithCompletionHandler, __block_completionHandler)
 }
 
-// Cancels any in-progress analysis of the audio file This function executes asynchronously, and will trigger the completion handler provided in the analyzeWithCompletionHandler method after the cancellation is complete.
+// Cancels all the asynchronous sound analysis requests the analyzer is currently processing.
 func (o *SNAudioFileAnalyzer) CancelAnalysis() {
 	o.Ptr().Send(_sNAudioFileAnalyzerSelCancelAnalysis)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable object that represents a group of contacts.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnmutablegroup
 type CNMutableGroup struct {
 	CNGroup

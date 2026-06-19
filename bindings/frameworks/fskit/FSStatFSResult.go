@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type used to report a volume’s statistics.
+//
 // Apple documentation: https://developer.apple.com/documentation/fskit/fsstatfsresult
 type FSStatFSResult struct {
 	foundation.NSObject
@@ -57,7 +59,7 @@ func FSStatFSResultFromID(id objc.ID) *FSStatFSResult {
 	return o
 }
 
-// Creates an statistics result instance, using the given file system type name. - Parameters fileSystemTypeName: A type name for the file system. The maximum allowed length is `MFSTYPENAMELEN`, including the terminating `NUL` character.
+// Creates an statistics result instance, using the given file system type name.
 func (o *FSStatFSResult) InitWithFileSystemTypeName(fileSystemTypeName *foundation.NSString) *FSStatFSResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSStatFSResultSelInitWithFileSystemTypeName, fileSystemTypeName.Ptr())
 	if _ret != 0 {

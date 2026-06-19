@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An array of attribute descriptor objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlattributedescriptorarray
 type MTLAttributeDescriptorArray struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func MTLAttributeDescriptorArrayFromID(id objc.ID) *MTLAttributeDescriptorArray 
 	return o
 }
 
+// Returns the state of the specified attribute.
 func (o *MTLAttributeDescriptorArray) ObjectAtIndexedSubscript(index uint) *MTLAttributeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLAttributeDescriptorArraySelObjectAtIndexedSubscript, index)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func (o *MTLAttributeDescriptorArray) ObjectAtIndexedSubscript(index uint) *MTLA
 	return MTLAttributeDescriptorFromID(_ret)
 }
 
+// Sets state for the specified attribute.
 func (o *MTLAttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *MTLAttributeDescriptor, index uint) {
 	o.Ptr().Send(_mTLAttributeDescriptorArraySelSetObjectAtIndexedSubscript, attributeDesc.Ptr(), index)
 }

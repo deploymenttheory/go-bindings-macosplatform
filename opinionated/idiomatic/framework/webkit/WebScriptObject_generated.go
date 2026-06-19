@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A WebScriptObject object is an Objective-C wrapper for a scripting object passed to your application from the scripting environment.
+//
 // WebScriptObject wraps [raw.WebScriptObject] with a fluent Go API.
 type WebScriptObject struct {
 	inner *raw.WebScriptObject
@@ -39,35 +41,35 @@ func NewWebScriptObject() *WebScriptObject {
 	return &WebScriptObject{inner: raw.WebScriptObjectFromID(_id)}
 }
 
-// @method JSObject @result The equivalent JSObjectRef for this WebScriptObject. @discussion Use this method to bridge between the WebScriptObject and JavaScriptCore APIs.
+// Returns the JavaScript object corresponding to the receiver.
 //
 // JSObject calls the underlying JSObject.
 func (x *WebScriptObject) JSObject() unsafe.Pointer {
 	return x.inner.JSObject()
 }
 
-// @method callWebScriptMethod:withArguments: @param name The name of the method to call in the script environment. @param arguments The arguments to pass to the script environment. @discussion Calls the specified method in the script environment using the specified arguments. @result Returns the result of calling the script method. Returns WebUndefined when an exception is thrown in the script environment.
+// Returns the result of executing a method in the scripting environment.
 //
 // CallWebScriptMethodWithArguments calls the underlying CallWebScriptMethodWithArguments.
 func (x *WebScriptObject) CallWebScriptMethodWithArguments(name string, arguments *foundation.NSArray[objc.ID]) objc.ID {
 	return x.inner.CallWebScriptMethodWithArguments(foundation.NSStringStringWithUTF8String(name), arguments)
 }
 
-// @method evaluateWebScript: @param script The script to execute in the target script environment. @discussion The script will be executed in the target script environment. The format of the script is dependent of the target script environment. @result Returns the result of evaluating the script in the script environment. Returns WebUndefined when an exception is thrown in the script environment.
+// Returns the result of evaluating a script in the scripting environment.
 //
 // EvaluateWebScript calls the underlying EvaluateWebScript.
 func (x *WebScriptObject) EvaluateWebScript(script string) objc.ID {
 	return x.inner.EvaluateWebScript(foundation.NSStringStringWithUTF8String(script))
 }
 
-// @method removeWebScriptKey: @param name The name of the property to remove. @discussion Removes the property from the object in the script environment.
+// Removes a property from a scripting environment.
 //
 // RemoveWebScriptKey calls the underlying RemoveWebScriptKey.
 func (x *WebScriptObject) RemoveWebScriptKey(name string) {
 	x.inner.RemoveWebScriptKey(foundation.NSStringStringWithUTF8String(name))
 }
 
-// @method stringRepresentation @discussion Converts the target object to a string representation. The coercion of non string objects type is dependent on the script environment. @result Returns the string representation of the object.
+// Returns a string representation of the receiver.
 //
 // StringRepresentation calls the underlying StringRepresentation.
 func (x *WebScriptObject) StringRepresentation() string {
@@ -78,21 +80,21 @@ func (x *WebScriptObject) StringRepresentation() string {
 	return purego.GoString(_r.Ptr())
 }
 
-// @method webScriptValueAtIndex: @param index The index of the property to return. @discussion Gets the value of the property at the specified index. @result The value of the property. Returns WebUndefined when an exception is thrown in the script environment.
+// Returns the value of a property at the specified index.
 //
 // WebScriptValueAtIndex calls the underlying WebScriptValueAtIndex.
 func (x *WebScriptObject) WebScriptValueAtIndex(index uint) objc.ID {
 	return x.inner.WebScriptValueAtIndex(index)
 }
 
-// @method setWebScriptValueAtIndex:value: @param index The index of the property to set. @param value The value of the property to set. @discussion Sets the property value at the specified index.
+// Sets the value of a property at the specified index.
 //
 // SetWebScriptValueAtIndexValue calls the underlying SetWebScriptValueAtIndexValue.
 func (x *WebScriptObject) SetWebScriptValueAtIndexValue(index uint, value objc.ID) {
 	x.inner.SetWebScriptValueAtIndexValue(index, value)
 }
 
-// @method setException: @param description The description of the exception. @discussion Raises an exception in the script environment in the context of the current object.
+// Raises a scripting environment exception in the context of the current object.
 //
 // SetException calls the underlying SetException.
 func (x *WebScriptObject) SetException(description string) {

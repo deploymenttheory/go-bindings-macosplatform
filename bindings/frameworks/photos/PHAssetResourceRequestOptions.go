@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of options affecting the delivery of underlying asset data that you request from the asset resource manager.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phassetresourcerequestoptions
 type PHAssetResourceRequestOptions struct {
 	foundation.NSObject

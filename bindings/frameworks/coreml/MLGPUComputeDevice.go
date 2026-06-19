@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a GPU compute device.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlgpucomputedevice
 type MLGPUComputeDevice struct {
 	foundation.NSObject

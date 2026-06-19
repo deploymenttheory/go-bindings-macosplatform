@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A hyperbolic tangent neuron filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneurontanh
 type MPSCNNNeuronTanH struct {
 	mpsneuralnetwork.MPSCNNNeuron
@@ -31,7 +33,7 @@ func MPSCNNNeuronTanHFromID(id objc.ID) *MPSCNNNeuronTanH {
 	return o
 }
 
-// @abstract  Initialize the hyperbolic tangent neuron filter @param     device           The device the filter will run on @param     a                Filter property "a". See class discussion. @param     b                Filter property "b". See class discussion. @return    A valid MPSCNNNeuronTanH object or nil, if failure.
+// Initializes a hyperbolic tangent neuron filter.
 func (o *MPSCNNNeuronTanH) InitWithDeviceAB(device metal.MTLDevice, a float32, b float32) *MPSCNNNeuronTanH {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronTanHSelInitWithDeviceAB, device, a, b)
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a tempo change to a specific beats-per-minute value.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avextendedtempoevent
 type AVExtendedTempoEvent struct {
 	AVMusicEvent
@@ -31,7 +33,7 @@ func AVExtendedTempoEventFromID(id objc.ID) *AVExtendedTempoEvent {
 	return o
 }
 
-// @method initWithTempo: @abstract Initialize the event tempo. @param tempo The new tempo in beats-per-minute.  Range:  Any positive value. The new tempo will begin at the timestamp for this event.
+// Creates an extended tempo event.
 func (o *AVExtendedTempoEvent) InitWithTempo(tempo float64) *AVExtendedTempoEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVExtendedTempoEventSelInitWithTempo, tempo)
 	if _ret != 0 {

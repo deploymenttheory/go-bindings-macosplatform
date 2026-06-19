@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a new library of procedurally generated functions.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlstitchedlibrarydescriptor
 type MTLStitchedLibraryDescriptor struct {
 	foundation.NSObject

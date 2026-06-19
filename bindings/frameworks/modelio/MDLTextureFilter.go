@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of filtering modes for a renderer to use when sampling from a texture.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdltexturefilter
 type MDLTextureFilter struct {
 	foundation.NSObject

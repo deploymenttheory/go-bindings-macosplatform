@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An animation for a single property of the individual particles rendered by a particle system.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnparticlepropertycontroller
 type SCNParticlePropertyController struct {
 	foundation.NSObject
@@ -43,6 +45,7 @@ func SCNParticlePropertyControllerFromID(id objc.ID) *SCNParticlePropertyControl
 	return o
 }
 
+// Creates a particle property controller with the specified Core Animation animation.
 func SCNParticlePropertyControllerControllerWithAnimation(animation *quartzcore.CAAnimation) *SCNParticlePropertyController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNParticlePropertyController), _sCNParticlePropertyControllerSelControllerWithAnimation, animation.Ptr())
 	if _ret != 0 {

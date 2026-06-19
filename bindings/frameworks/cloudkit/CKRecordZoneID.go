@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that uniquely identifies a record zone in a database.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckrecordzoneid
 type CKRecordZoneID struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func CKRecordZoneIDFromID(id objc.ID) *CKRecordZoneID {
 	return o
 }
 
-// Creates a record zone ID with the specified name and owner. - Parameters: - zoneName: The name that identifies the record zone. Zone names consist of up to 255 ASCII characters, and don't start with an underscore. To specify the default zone of the current database, use “CKRecordZoneDefaultName-8mfij“. This parameter must not be `nil` or an empty string. - ownerName: The user who creates the record zone. To specify the current user, use “CKCurrentUserDefaultName“. If you provide `nil` or an empty string for this parameter, the method throws an exception. - Returns: A new record zone ID.
+// Creates a record zone ID with the specified name and owner.
 func (o *CKRecordZoneID) InitWithZoneNameOwnerName(zoneName *foundation.NSString, ownerName *foundation.NSString) *CKRecordZoneID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordZoneIDSelInitWithZoneNameOwnerName, zoneName.Ptr(), ownerName.Ptr())
 	if _ret != 0 {

@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The class you create when providing a data-based Quick Look preview extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/quicklookui/qlpreviewreply
 type QLPreviewReply struct {
 	foundation.NSObject
@@ -62,7 +64,7 @@ func (o *QLPreviewReply) InitWithContextSizeIsBitmapDrawingBlock(contextSize cor
 	return QLPreviewReplyFromID(_ret)
 }
 
-// @abstract Use this method to provide a preview by providing a URL to a file of a supported type. @param fileURL  A file URL representing a preview of the previewed URL. Currently supported types include: UTTypeImage, UTTypePDF, UTTypeHTML, UTTypeXML, UTTypePlainText, UTTypeRTF, UTTypeRTFD, UTTypeMovie, UTTypeAudio
+// Creates a preview reply from an existing file URL.
 func (o *QLPreviewReply) InitWithFileURL(fileURL *foundation.NSURL) *QLPreviewReply {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewReplySelInitWithFileURL, fileURL.Ptr())
 	if _ret != 0 {
@@ -91,12 +93,15 @@ func (o *QLPreviewReply) SetStringEncoding(stringEncoding uint) {
 
 // Attachments for HTML data previews. The keys of the dictionary are the attachment identifiers (eg foo) that can be referenced with the cid:id URL (eg cid:foo).
 func (o *QLPreviewReply) Attachments() *foundation.NSDictionary[*foundation.NSString, *QLPreviewReplyAttachment] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *QLPreviewReplyAttachment]](o.Ptr(), _qLPreviewReplySelAttachments)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewReplySelAttachments)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *QLPreviewReplyAttachment](_ret)
 }
 
 func (o *QLPreviewReply) SetAttachments(attachments *foundation.NSDictionary[*foundation.NSString, *QLPreviewReplyAttachment]) {
-	o.Ptr().Send(_qLPreviewReplySelSetAttachments, attachments)
+	o.Ptr().Send(_qLPreviewReplySelSetAttachments, attachments.Ptr())
 }
 
 // Custom display title for the preview. If left as the empty string, QuickLook will use the file name.

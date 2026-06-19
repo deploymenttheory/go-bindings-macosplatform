@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that arranges two or more views in a linear stack running horizontally or vertically.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssplitview
 type NSSplitView struct {
 	NSView
@@ -56,38 +58,46 @@ func NSSplitViewFromID(id objc.ID) *NSSplitView {
 	return o
 }
 
+// Draws a divider between two of the split view’s subviews.
 func (o *NSSplitView) DrawDividerInRect(rect corefoundation.CGRect) {
 	o.Ptr().Send(_nSSplitViewSelDrawDividerInRect, rect)
 }
 
+// Adjusts the sizes of the split view’s subviews so they (plus the dividers) fill the split view.
 func (o *NSSplitView) AdjustSubviews() {
 	o.Ptr().Send(_nSSplitViewSelAdjustSubviews)
 }
 
+// Returns whether the specified view is in a collapsed state.
 func (o *NSSplitView) IsSubviewCollapsed(subview *NSView) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSplitViewSelIsSubviewCollapsed, subview.Ptr())
 	return _ret
 }
 
+// Returns the minimum possible position of the divider at the specified index.
 func (o *NSSplitView) MinPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSSplitViewSelMinPossiblePositionOfDividerAtIndex, dividerIndex)
 	return _ret
 }
 
+// Returns the maximum possible position of the divider at the specified index.
 func (o *NSSplitView) MaxPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSSplitViewSelMaxPossiblePositionOfDividerAtIndex, dividerIndex)
 	return _ret
 }
 
+// Updates the location of a divider you specify by index.
 func (o *NSSplitView) SetPositionOfDividerAtIndex(position float64, dividerIndex int) {
 	o.Ptr().Send(_nSSplitViewSelSetPositionOfDividerAtIndex, position, dividerIndex)
 }
 
+// Returns the priority of the subview’s width or height when resizing.
 func (o *NSSplitView) HoldingPriorityForSubviewAtIndex(subviewIndex int) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _nSSplitViewSelHoldingPriorityForSubviewAtIndex, subviewIndex)
 	return _ret
 }
 
+// Sets the priority for split view subviews to maintain their width or height.
 func (o *NSSplitView) SetHoldingPriorityForSubviewAtIndex(priority float32, subviewIndex int) {
 	o.Ptr().Send(_nSSplitViewSelSetHoldingPriorityForSubviewAtIndex, priority, subviewIndex)
 }
@@ -144,17 +154,17 @@ func (o *NSSplitView) DividerThickness() float64 {
 	return _ret
 }
 
-// Adds a view as arranged split pane. If the view is not a subview of the receiver, it will be added as one.
+// Adds a view as an arranged split pane.
 func (o *NSSplitView) AddArrangedSubview(view *NSView) {
 	o.Ptr().Send(_nSSplitViewSelAddArrangedSubview, view.Ptr())
 }
 
-// Adds a view as an arranged split pane list at the specific index. If the view is already an arranged split view, it will move the view the specified index (but not move the subview index). If the view is not a subview of the receiver, it will be added as one (not necessarily at the same index).
+// Adds a view as an arranged split pane at the specified index.
 func (o *NSSplitView) InsertArrangedSubviewAtIndex(view *NSView, index int) {
 	o.Ptr().Send(_nSSplitViewSelInsertArrangedSubviewAtIndex, view.Ptr(), index)
 }
 
-// Removes a view as arranged split pane. If \c -arrangesAllSubviews is set to NO, this does not remove the view as a subview. Removing the view as a subview (either by -[view removeFromSuperview] or setting the receiver's subviews) will automatically remove it as an arranged subview.
+// Removes a view as an arranged split pane.
 func (o *NSSplitView) RemoveArrangedSubview(view *NSView) {
 	o.Ptr().Send(_nSSplitViewSelRemoveArrangedSubview, view.Ptr())
 }
@@ -179,11 +189,13 @@ func (o *NSSplitView) ArrangedSubviews() *foundation.NSArray[*NSView] {
 	return foundation.NSArrayFromID[*NSView](_ret)
 }
 
+// Sets the type of splitter.
 // Deprecated: since macOS 10.6.
 func (o *NSSplitView) SetIsPaneSplitter(flag bool) {
 	o.Ptr().Send(_nSSplitViewSelSetIsPaneSplitter, flag)
 }
 
+// The type of pane splitter.
 // Deprecated: since macOS 10.6.
 func (o *NSSplitView) IsPaneSplitter() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSplitViewSelIsPaneSplitter)

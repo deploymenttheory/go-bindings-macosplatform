@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides additional information about a local peripheral’s characteristic.
+//
 // Apple documentation: https://developer.apple.com/documentation/corebluetooth/cbmutabledescriptor
 type CBMutableDescriptor struct {
 	CBDescriptor
@@ -29,7 +31,7 @@ func CBMutableDescriptorFromID(id objc.ID) *CBMutableDescriptor {
 	return o
 }
 
-// @method initWithType:value: @param UUID		The Bluetooth UUID of the descriptor. @param value	The value of the descriptor. @discussion 	Returns a decriptor, initialized with a service type and value. The <i>value</i> is required and cannot be updated dynamically once the parent service has been published.
+// Creates a mutable descriptor with a specified value.
 func (o *CBMutableDescriptor) InitWithTypeValue(uUID *CBUUID, value objc.ID) *CBMutableDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBMutableDescriptorSelInitWithTypeValue, uUID.Ptr(), value)
 	if _ret != 0 {

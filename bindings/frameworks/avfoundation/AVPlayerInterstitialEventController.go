@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that schedules interstitial events for items played by the primary player.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayerinterstitialeventcontroller
 type AVPlayerInterstitialEventController struct {
 	AVPlayerInterstitialEventMonitor
@@ -39,7 +41,7 @@ func AVPlayerInterstitialEventControllerFromID(id objc.ID) *AVPlayerInterstitial
 	return o
 }
 
-// Returns an instance of AVPlayerInterstitialEvent for use in observing and scheduling interstitial playback. This method throws an exception if the primary player is an interstitial player. - Parameter primaryPlayer: The AVPlayer that will play the primaryItems of the receiver's interstitial events. - Returns: An instance of AVPlayerInterstitialEventController.
+// A convenience initializer that creates an event controller with a player item.
 func AVPlayerInterstitialEventControllerInterstitialEventControllerWithPrimaryPlayer(primaryPlayer *AVPlayer) *AVPlayerInterstitialEventController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerInterstitialEventController), _aVPlayerInterstitialEventControllerSelInterstitialEventControllerWithPrimaryPlayer, primaryPlayer.Ptr())
 	if _ret != 0 {
@@ -48,7 +50,7 @@ func AVPlayerInterstitialEventControllerInterstitialEventControllerWithPrimaryPl
 	return AVPlayerInterstitialEventControllerFromID(_ret)
 }
 
-// This method throws an exception if the primary player is an interstitial player.
+// Creates an event controller with a player item.
 func (o *AVPlayerInterstitialEventController) InitWithPrimaryPlayer(primaryPlayer *AVPlayer) *AVPlayerInterstitialEventController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventControllerSelInitWithPrimaryPlayer, primaryPlayer.Ptr())
 	if _ret != 0 {
@@ -57,12 +59,12 @@ func (o *AVPlayerInterstitialEventController) InitWithPrimaryPlayer(primaryPlaye
 	return AVPlayerInterstitialEventControllerFromID(_ret)
 }
 
-// Causes the playback of any and all interstitial content currently in progress to be abandoned and the playback of primary content to be resumed. If invoked during the handling of coinciding interstitial events, they will all be canceled. When you cancel interstitial events via the use of this method, the value of resumptionOffset that you pass overrides the events' resumptionOffset. Has no effect while currentEvent is nil. - Parameter resumptionOffset: Specifies the offset in time at which playback of the primary player's current item should resume after interstitial playback has finished. To specify that the effective resumption time offset should match with the wallclock time elapsed during interstitial playback, pass a value of kCMTimeIndefinite. To specify that the effective resumption time offset should match with the projected playback time, pass a value of kCMTimeInvalid.
+// Cancels the playback of all currently playing and scheduled interstitial events, and resumes playback of primary content.
 func (o *AVPlayerInterstitialEventController) CancelCurrentEventWithResumptionOffset(resumptionOffset coremedia.CMTime) {
 	o.Ptr().Send(_aVPlayerInterstitialEventControllerSelCancelCurrentEventWithResumptionOffset, resumptionOffset)
 }
 
-// Causes the playback of the currently playing interstital event to be abandoned. Note that coinciding events will NOT be skipped. This results in AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification being posted. Has no effect while the currentEvent is nil.
+// Causes the playback of the currently playing interstital event to be abandoned.
 func (o *AVPlayerInterstitialEventController) SkipCurrentEvent() {
 	o.Ptr().Send(_aVPlayerInterstitialEventControllerSelSkipCurrentEvent)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An image-analysis request that finds projected rectangular regions in an image.
+//
 // DetectRectanglesRequest wraps [raw.VNDetectRectanglesRequest] with a fluent Go API.
 type DetectRectanglesRequest struct {
 	inner *raw.VNDetectRectanglesRequest
@@ -36,7 +38,7 @@ func NewDetectRectanglesRequest() *DetectRectanglesRequest {
 	return &DetectRectanglesRequest{inner: raw.VNDetectRectanglesRequestFromID(_id)}
 }
 
-// @brief Specifies the minimum aspect ratio of the rectangle(s) to look for, range [0.0, 1.0], default 0.5
+// A float specifying the minimum aspect ratio of the rectangle to detect, defined as the shorter dimension over the longer dimension.
 //
 // WithMinimumAspectRatio sets the minimumAspectRatio property and returns the receiver for chaining.
 func (x *DetectRectanglesRequest) WithMinimumAspectRatio(minimumAspectRatio float32) *DetectRectanglesRequest {
@@ -44,7 +46,7 @@ func (x *DetectRectanglesRequest) WithMinimumAspectRatio(minimumAspectRatio floa
 	return x
 }
 
-// @brief Specifies the maximum aspect ratio of the rectangle(s) to look for, range [0.0, 1.0], default 1.0
+// A float specifying the maximum aspect ratio of the rectangle to detect, defined as the shorter dimension over the longer dimension.
 //
 // WithMaximumAspectRatio sets the maximumAspectRatio property and returns the receiver for chaining.
 func (x *DetectRectanglesRequest) WithMaximumAspectRatio(maximumAspectRatio float32) *DetectRectanglesRequest {
@@ -52,7 +54,7 @@ func (x *DetectRectanglesRequest) WithMaximumAspectRatio(maximumAspectRatio floa
 	return x
 }
 
-// @brief Specifies the maximum number of degrees a rectangle corner angle can deviate from 90 degrees, range [0,45], default 30
+// A float specifying the number of degrees a rectangle corner angle can deviate from 90°.
 //
 // WithQuadratureTolerance sets the quadratureTolerance property and returns the receiver for chaining.
 func (x *DetectRectanglesRequest) WithQuadratureTolerance(quadratureTolerance float32) *DetectRectanglesRequest {
@@ -60,7 +62,7 @@ func (x *DetectRectanglesRequest) WithQuadratureTolerance(quadratureTolerance fl
 	return x
 }
 
-// @brief Specifies the minimum size of the rectangle to be detected, as a proportion of the smallest dimension, range [0.0, 1.0], default .2. Any smaller rectangles that may have been detected will not be returned.
+// The minimum size of a rectangle to detect, as a proportion of the smallest dimension.
 //
 // WithMinimumSize sets the minimumSize property and returns the receiver for chaining.
 func (x *DetectRectanglesRequest) WithMinimumSize(minimumSize float32) *DetectRectanglesRequest {
@@ -68,7 +70,7 @@ func (x *DetectRectanglesRequest) WithMinimumSize(minimumSize float32) *DetectRe
 	return x
 }
 
-// @brief Specifies a minimum confidence score, range [0.0, 1.0], default 0.0. Any rectangles with a lower confidence score will not be returned.
+// A value specifying the minimum acceptable confidence level.
 //
 // WithMinimumConfidence sets the minimumConfidence property and returns the receiver for chaining.
 func (x *DetectRectanglesRequest) WithMinimumConfidence(minimumConfidence float32) *DetectRectanglesRequest {
@@ -76,7 +78,7 @@ func (x *DetectRectanglesRequest) WithMinimumConfidence(minimumConfidence float3
 	return x
 }
 
-// @brief Specifies the maximum number of rectangles to be returned.  The default is 1.  Setting this property to 0 will allow an unlimited number of observations to be returned.
+// An integer specifying the maximum number of rectangles Vision returns.
 //
 // WithMaximumObservations sets the maximumObservations property and returns the receiver for chaining.
 func (x *DetectRectanglesRequest) WithMaximumObservations(maximumObservations uint) *DetectRectanglesRequest {
@@ -84,7 +86,7 @@ func (x *DetectRectanglesRequest) WithMaximumObservations(maximumObservations ui
 	return x
 }
 
-// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+// The region of the image in which Vision will perform the request.
 //
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *DetectRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectRectanglesRequest {
@@ -92,7 +94,7 @@ func (x *DetectRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoun
 	return x
 }
 
-// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+// A hint to minimize the resource burden of the request.
 //
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *DetectRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectRectanglesRequest {
@@ -100,7 +102,7 @@ func (x *DetectRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroun
 	return x
 }
 
-// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+// A Boolean signifying that the Vision request should execute exclusively on the CPU.
 //
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *DetectRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectRectanglesRequest {
@@ -108,7 +110,7 @@ func (x *DetectRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectRecta
 	return x
 }
 
-// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+// The specific algorithm or implementation revision that’s used to perform the request.
 //
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *DetectRectanglesRequest) WithRevision(revision uint) *DetectRectanglesRequest {

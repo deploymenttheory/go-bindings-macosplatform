@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A challenge issued by the local player to another player.
+//
 // Challenge wraps [raw.GKChallenge] with a fluent Go API.
 type Challenge struct {
 	inner *raw.GKChallenge
@@ -37,7 +39,7 @@ func NewChallenge() *Challenge {
 	return &Challenge{inner: raw.GKChallengeFromID(_id)}
 }
 
-// Any GKChallenge object to be declined must be in a state of GKChallengeStatePending in order to be successfully cancelled
+// Declines a challenge that another player issues to the local player.
 //
 // Decline calls the underlying Decline.
 func (x *Challenge) Decline() {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that simulates a 3D audio environment.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudioenvironmentnode
 type AVAudioEnvironmentNode struct {
 	AVAudioNode
@@ -46,6 +48,7 @@ func AVAudioEnvironmentNodeFromID(id objc.ID) *AVAudioEnvironmentNode {
 	return o
 }
 
+// Creates a new environment node object.
 func (o *AVAudioEnvironmentNode) Init() *AVAudioEnvironmentNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioEnvironmentNodeSelInit)
 	if _ret != 0 {
@@ -130,8 +133,11 @@ func (o *AVAudioEnvironmentNode) ReverbParameters() *AVAudioEnvironmentReverbPar
 
 // @property applicableRenderingAlgorithms @abstract Returns an array of AVAudio3DMixingRenderingAlgorithm values based on the current output format @discussion AVAudioEnvironmentNode supports several rendering algorithms per input bus which are defined in <AVFAudio/AVAudioMixing.h>. Depending on the current output format of the environment node, this method returns an immutable array of the applicable rendering algorithms. This is important when the environment node has been configured to a multichannel output format because only a subset of the available rendering algorithms are designed to render to all of the channels. This information should be retrieved after a successful connection to the destination node via the engine's connect method.
 func (o *AVAudioEnvironmentNode) ApplicableRenderingAlgorithms() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAudioEnvironmentNodeSelApplicableRenderingAlgorithms)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioEnvironmentNodeSelApplicableRenderingAlgorithms)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property listenerHeadTrackingEnabled @abstract On capable devices, listener orientation will be automatically rotated based on user's head-orientation if enabled.

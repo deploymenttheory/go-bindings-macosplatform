@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that displays a user interface where users preview and edit a screen recording that you create with ReplayKit.
+//
 // Apple documentation: https://developer.apple.com/documentation/replaykit/rppreviewviewcontroller
 type RPPreviewViewController struct {
 	appkit.NSViewController

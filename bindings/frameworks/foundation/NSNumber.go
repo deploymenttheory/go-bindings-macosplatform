@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object wrapper for primitive scalar numeric values.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsnumber
 type NSNumber struct {
 	NSValue
@@ -87,6 +89,7 @@ func (o *NSNumber) InitWithCoder(coder *NSCoder) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as a signed char.
 func (o *NSNumber) InitWithChar(value int8) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithChar, value)
 	if _ret != 0 {
@@ -95,6 +98,7 @@ func (o *NSNumber) InitWithChar(value int8) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as an unsigned char.
 func (o *NSNumber) InitWithUnsignedChar(value uint8) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithUnsignedChar, value)
 	if _ret != 0 {
@@ -103,6 +107,7 @@ func (o *NSNumber) InitWithUnsignedChar(value uint8) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as a signed short.
 func (o *NSNumber) InitWithShort(value int16) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithShort, value)
 	if _ret != 0 {
@@ -111,6 +116,7 @@ func (o *NSNumber) InitWithShort(value int16) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as an unsigned short.
 func (o *NSNumber) InitWithUnsignedShort(value uint16) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithUnsignedShort, value)
 	if _ret != 0 {
@@ -119,6 +125,7 @@ func (o *NSNumber) InitWithUnsignedShort(value uint16) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as a signed int.
 func (o *NSNumber) InitWithInt(value int) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithInt, value)
 	if _ret != 0 {
@@ -127,6 +134,7 @@ func (o *NSNumber) InitWithInt(value int) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as an unsigned int.
 func (o *NSNumber) InitWithUnsignedInt(value uint) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithUnsignedInt, value)
 	if _ret != 0 {
@@ -135,6 +143,7 @@ func (o *NSNumber) InitWithUnsignedInt(value uint) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as a signed long.
 func (o *NSNumber) InitWithLong(value int) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithLong, value)
 	if _ret != 0 {
@@ -143,6 +152,7 @@ func (o *NSNumber) InitWithLong(value int) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as an unsigned long.
 func (o *NSNumber) InitWithUnsignedLong(value uint) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithUnsignedLong, value)
 	if _ret != 0 {
@@ -151,6 +161,7 @@ func (o *NSNumber) InitWithUnsignedLong(value uint) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSNumber object initialized to contain value, treated as a signed long long.
 func (o *NSNumber) InitWithLongLong(value int64) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithLongLong, value)
 	if _ret != 0 {
@@ -159,6 +170,7 @@ func (o *NSNumber) InitWithLongLong(value int64) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as an unsigned long long.
 func (o *NSNumber) InitWithUnsignedLongLong(value uint64) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithUnsignedLongLong, value)
 	if _ret != 0 {
@@ -167,6 +179,7 @@ func (o *NSNumber) InitWithUnsignedLongLong(value uint64) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as a float.
 func (o *NSNumber) InitWithFloat(value float32) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithFloat, value)
 	if _ret != 0 {
@@ -175,6 +188,7 @@ func (o *NSNumber) InitWithFloat(value float32) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSNumber object initialized to contain value, treated as a double.
 func (o *NSNumber) InitWithDouble(value float64) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithDouble, value)
 	if _ret != 0 {
@@ -183,6 +197,7 @@ func (o *NSNumber) InitWithDouble(value float64) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as a BOOL.
 func (o *NSNumber) InitWithBool(value bool) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithBool, value)
 	if _ret != 0 {
@@ -191,6 +206,7 @@ func (o *NSNumber) InitWithBool(value bool) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as an NSInteger.
 func (o *NSNumber) InitWithInteger(value int) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithInteger, value)
 	if _ret != 0 {
@@ -199,6 +215,7 @@ func (o *NSNumber) InitWithInteger(value int) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSNumber object initialized to contain a given value, treated as an NSUInteger.
 func (o *NSNumber) InitWithUnsignedInteger(value uint) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithUnsignedInteger, value)
 	if _ret != 0 {
@@ -207,16 +224,19 @@ func (o *NSNumber) InitWithUnsignedInteger(value uint) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Returns an NSComparisonResult value that indicates whether the number object’s value is greater than, equal to, or less than a given number.
 func (o *NSNumber) Compare(otherNumber *NSNumber) NSComparisonResult {
 	_ret := objc.Send[NSComparisonResult](o.Ptr(), _nSNumberSelCompare, otherNumber.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the number object’s value and a given number are equal.
 func (o *NSNumber) IsEqualToNumber(number *NSNumber) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSNumberSelIsEqualToNumber, number.Ptr())
 	return _ret
 }
 
+// Returns a string that represents the contents of the number object for a given locale.
 func (o *NSNumber) DescriptionWithLocale(locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelDescriptionWithLocale, locale)
 	if _ret != 0 {
@@ -308,6 +328,7 @@ func (o *NSNumber) StringValue() *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Creates and returns an NSNumber object containing a given value, treating it as a signed char.
 func NSNumberNumberWithChar(value int8) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithChar, value)
 	if _ret != 0 {
@@ -316,6 +337,7 @@ func NSNumberNumberWithChar(value int8) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Creates and returns an NSNumber object containing a given value, treating it as an unsigned char.
 func NSNumberNumberWithUnsignedChar(value uint8) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithUnsignedChar, value)
 	if _ret != 0 {
@@ -324,6 +346,7 @@ func NSNumberNumberWithUnsignedChar(value uint8) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Creates and returns an NSNumber object containing value, treating it as a signed short.
 func NSNumberNumberWithShort(value int16) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithShort, value)
 	if _ret != 0 {
@@ -332,6 +355,7 @@ func NSNumberNumberWithShort(value int16) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Creates and returns an NSNumber object containing a given value, treating it as an unsigned short.
 func NSNumberNumberWithUnsignedShort(value uint16) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithUnsignedShort, value)
 	if _ret != 0 {
@@ -340,6 +364,7 @@ func NSNumberNumberWithUnsignedShort(value uint16) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Creates and returns an NSNumber object containing a given value, treating it as a signed int.
 func NSNumberNumberWithInt(value int) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithInt, value)
 	if _ret != 0 {
@@ -348,6 +373,7 @@ func NSNumberNumberWithInt(value int) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Creates and returns an NSNumber object containing a given value, treating it as an unsigned int.
 func NSNumberNumberWithUnsignedInt(value uint) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithUnsignedInt, value)
 	if _ret != 0 {
@@ -356,6 +382,7 @@ func NSNumberNumberWithUnsignedInt(value uint) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Creates and returns an NSNumber object containing a given value, treating it as a signed long.
 func NSNumberNumberWithLong(value int) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithLong, value)
 	if _ret != 0 {
@@ -364,6 +391,7 @@ func NSNumberNumberWithLong(value int) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Creates and returns an NSNumber object containing a given value, treating it as an unsigned long.
 func NSNumberNumberWithUnsignedLong(value uint) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithUnsignedLong, value)
 	if _ret != 0 {
@@ -372,6 +400,7 @@ func NSNumberNumberWithUnsignedLong(value uint) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Creates and returns an NSNumber object containing a given value, treating it as a signed long long.
 func NSNumberNumberWithLongLong(value int64) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithLongLong, value)
 	if _ret != 0 {
@@ -380,6 +409,7 @@ func NSNumberNumberWithLongLong(value int64) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Creates and returns an NSNumber object containing a given value, treating it as an unsigned long long.
 func NSNumberNumberWithUnsignedLongLong(value uint64) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithUnsignedLongLong, value)
 	if _ret != 0 {
@@ -388,6 +418,7 @@ func NSNumberNumberWithUnsignedLongLong(value uint64) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Creates and returns an NSNumber object containing a given value, treating it as a float.
 func NSNumberNumberWithFloat(value float32) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithFloat, value)
 	if _ret != 0 {
@@ -396,6 +427,7 @@ func NSNumberNumberWithFloat(value float32) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Creates and returns an NSNumber object containing a given value, treating it as a double.
 func NSNumberNumberWithDouble(value float64) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithDouble, value)
 	if _ret != 0 {
@@ -404,6 +436,7 @@ func NSNumberNumberWithDouble(value float64) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Creates and returns an NSNumber object containing a given value, treating it as a BOOL.
 func NSNumberNumberWithBool(value bool) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithBool, value)
 	if _ret != 0 {
@@ -412,6 +445,7 @@ func NSNumberNumberWithBool(value bool) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Creates and returns an NSNumber object containing a given value, treating it as an NSInteger.
 func NSNumberNumberWithInteger(value int) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithInteger, value)
 	if _ret != 0 {
@@ -420,6 +454,7 @@ func NSNumberNumberWithInteger(value int) *NSNumber {
 	return NSNumberFromID(_ret)
 }
 
+// Creates and returns an NSNumber object containing a given value, treating it as an NSUInteger.
 func NSNumberNumberWithUnsignedInteger(value uint) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithUnsignedInteger, value)
 	if _ret != 0 {

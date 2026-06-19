@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract superclass defining the API through which Core Data communicates with a store.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsincrementalstore
 type NSIncrementalStore struct {
 	NSPersistentStore
@@ -40,6 +42,7 @@ func NSIncrementalStoreFromID(id objc.ID) *NSIncrementalStore {
 	return o
 }
 
+// Returns a value as appropriate for the given request, or nil if the request cannot be completed.
 func (o *NSIncrementalStore) ExecuteRequestWithContextError(request *NSPersistentStoreRequest, context_ *NSManagedObjectContext) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreSelExecuteRequestWithContextError, request.Ptr(), context_.Ptr(), unsafe.Pointer(&_nsErr))
@@ -49,6 +52,7 @@ func (o *NSIncrementalStore) ExecuteRequestWithContextError(request *NSPersisten
 	return _ret, nil
 }
 
+// Returns an incremental store node encapsulating the persistent external values of the object with a given object ID.
 func (o *NSIncrementalStore) NewValuesForObjectWithIDWithContextError(objectID *NSManagedObjectID, context_ *NSManagedObjectContext) (*NSIncrementalStoreNode, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreSelNewValuesForObjectWithIDWithContextError, objectID.Ptr(), context_.Ptr(), unsafe.Pointer(&_nsErr))
@@ -58,6 +62,7 @@ func (o *NSIncrementalStore) NewValuesForObjectWithIDWithContextError(objectID *
 	return NSIncrementalStoreNodeFromID(_ret), nil
 }
 
+// Returns the relationship for the given relationship of the object with a given object ID.
 func (o *NSIncrementalStore) NewValueForRelationshipForObjectWithIDWithContextError(relationship *NSRelationshipDescription, objectID *NSManagedObjectID, context_ *NSManagedObjectContext) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreSelNewValueForRelationshipForObjectWithIDWithContextError, relationship.Ptr(), objectID.Ptr(), context_.Ptr(), unsafe.Pointer(&_nsErr))
@@ -67,11 +72,13 @@ func (o *NSIncrementalStore) NewValueForRelationshipForObjectWithIDWithContextEr
 	return _ret, nil
 }
 
+// Returns the identifier for the store at a given URL.
 func NSIncrementalStoreIdentifierForNewStoreAtURL(storeURL *foundation.NSURL) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSIncrementalStore), _nSIncrementalStoreSelIdentifierForNewStoreAtURL, storeURL.Ptr())
 	return _ret
 }
 
+// Returns an array containing the object IDs for a given array of newly-inserted objects.
 func (o *NSIncrementalStore) ObtainPermanentIDsForObjectsError(array *foundation.NSArray[*NSManagedObject]) (*foundation.NSArray[*NSManagedObjectID], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreSelObtainPermanentIDsForObjectsError, array.Ptr(), unsafe.Pointer(&_nsErr))
@@ -84,19 +91,23 @@ func (o *NSIncrementalStore) ObtainPermanentIDsForObjectsError(array *foundation
 	return foundation.NSArrayFromID[*NSManagedObjectID](_ret), nil
 }
 
+// Indicates that objects identified by a given array of object IDs are in use in a managed object context.
 func (o *NSIncrementalStore) ManagedObjectContextDidRegisterObjectsWithIDs(objectIDs *foundation.NSArray[*NSManagedObjectID]) {
 	o.Ptr().Send(_nSIncrementalStoreSelManagedObjectContextDidRegisterObjectsWithIDs, objectIDs.Ptr())
 }
 
+// Indicates that objects identified by a given array of object IDs are no longer being used by a managed object context.
 func (o *NSIncrementalStore) ManagedObjectContextDidUnregisterObjectsWithIDs(objectIDs *foundation.NSArray[*NSManagedObjectID]) {
 	o.Ptr().Send(_nSIncrementalStoreSelManagedObjectContextDidUnregisterObjectsWithIDs, objectIDs.Ptr())
 }
 
+// Returns a new object ID that uses given data as the key.
 func (o *NSIncrementalStore) NewObjectIDForEntityReferenceObject(entity *NSEntityDescription, data objc.ID) *NSManagedObjectID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreSelNewObjectIDForEntityReferenceObject, entity.Ptr(), data)
 	return NSManagedObjectIDFromID(_ret)
 }
 
+// Returns the reference data used to construct a given object ID.
 func (o *NSIncrementalStore) ReferenceObjectForObjectID(objectID *NSManagedObjectID) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreSelReferenceObjectForObjectID, objectID.Ptr())
 	return _ret

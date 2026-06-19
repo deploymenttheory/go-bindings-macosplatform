@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An observation that provides the 3D body points the request recognizes.
+//
 // HumanBodyPose3DObservation wraps [raw.VNHumanBodyPose3DObservation] with a fluent Go API.
 type HumanBodyPose3DObservation struct {
 	inner *raw.VNHumanBodyPose3DObservation
@@ -38,13 +40,15 @@ func NewHumanBodyPose3DObservation() *HumanBodyPose3DObservation {
 	return &HumanBodyPose3DObservation{inner: raw.VNHumanBodyPose3DObservationFromID(_id)}
 }
 
-// @brief Obtains the collection of joints associated with a named human body joints group. @discussion The obtained collection is a dictionary that provides the mapping of human joint names to the recognized point. @param jointsGroupName The name of the human body joints group. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return a dictionary of recognized points in the group, or nil if an error was encountered.
+// Returns a collection of points for the group name you specify.
 //
 // RecognizedPointsForJointsGroupNameError calls the underlying RecognizedPointsForJointsGroupNameError.
 func (x *HumanBodyPose3DObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNHumanBodyRecognizedPoint3D], error) {
 	return x.inner.RecognizedPointsForJointsGroupNameError(jointsGroupName)
 }
 
+// Returns the point for a joint name that the observation recognizes.
+//
 // RecognizedPointForJointNameError calls the underlying RecognizedPointForJointNameError.
 func (x *HumanBodyPose3DObservation) RecognizedPointForJointNameError(jointName *foundation.NSString) (*HumanBodyRecognizedPoint3D, error) {
 	_r, _err := x.inner.RecognizedPointForJointNameError(jointName)
@@ -57,7 +61,7 @@ func (x *HumanBodyPose3DObservation) RecognizedPointForJointNameError(jointName 
 	return &HumanBodyRecognizedPoint3D{inner: _r}, nil
 }
 
-// @brief Obtain 2D point relative to the input image for named human body joint @param jointName The name of the human body joint @return A projection of the determined 3D position onto the original 2D image in normalized, lower left origin coordinates
+// Returns a 2D point for the joint name you specify, relative to the input image.
 //
 // PointInImageForJointNameError calls the underlying PointInImageForJointNameError.
 func (x *HumanBodyPose3DObservation) PointInImageForJointNameError(jointName *foundation.NSString) (*Point, error) {
@@ -71,7 +75,7 @@ func (x *HumanBodyPose3DObservation) PointInImageForJointNameError(jointName *fo
 	return &Point{inner: _r}, nil
 }
 
-// @brief Obtain the parent joint of a specified joint @param jointName The name of the human body joint @return The name of the parent joint
+// Returns the parent joint of the joint name you specify.
 //
 // ParentJointNameForJointName calls the underlying ParentJointNameForJointName.
 func (x *HumanBodyPose3DObservation) ParentJointNameForJointName(jointName *foundation.NSString) string {
@@ -82,7 +86,7 @@ func (x *HumanBodyPose3DObservation) ParentJointNameForJointName(jointName *foun
 	return purego.GoString(_r.Ptr())
 }
 
-// @brief Obtain position relative to camera for a named human body joint in meters @param modelPositionOut A reference to a simd_float4x4 that will be updated to contain position of a joint relative to the camera if successful @param jointName The name of the human body joint @return BOOL indicating success of determing position
+// Gets a position relative to the camera for the body joint you specify.
 //
 // GetCameraRelativePositionForJointNameError calls the underlying GetCameraRelativePositionForJointNameError.
 func (x *HumanBodyPose3DObservation) GetCameraRelativePositionForJointNameError(modelPositionOut unsafe.Pointer, jointName *foundation.NSString) (bool, error) {

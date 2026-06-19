@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event requesting a change in the feedback setting.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpfeedbackcommandevent
 type MPFeedbackCommandEvent struct {
 	MPRemoteCommandEvent

@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract returns gradient for either primary or secondary source image from the inference pass. Use the isSecondarySourceFilter property to indicate whether this filter is computing the gradient for the primary or secondary source image from the inference pass.
+// A representation of a gradient multiplication operator.
 //
 // NNMultiplicationGradientNode wraps [raw.MPSNNMultiplicationGradientNode] with a fluent Go API.
 type NNMultiplicationGradientNode struct {

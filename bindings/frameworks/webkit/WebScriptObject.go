@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A WebScriptObject object is an Objective-C wrapper for a scripting object passed to your application from the scripting environment.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/webscriptobject
 type WebScriptObject struct {
 	foundation.NSObject
@@ -42,36 +44,36 @@ func WebScriptObjectFromID(id objc.ID) *WebScriptObject {
 	return o
 }
 
-// @method throwException: @discussion Throws an exception in the current script execution context. @result Either NO if an exception could not be raised, YES otherwise.
+// Raises an exception in the current script execution context.
 func WebScriptObjectThrowException(exceptionMessage *foundation.NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsWebScriptObject), _webScriptObjectSelThrowException, exceptionMessage.Ptr())
 	return _ret
 }
 
-// @method JSObject @result The equivalent JSObjectRef for this WebScriptObject. @discussion Use this method to bridge between the WebScriptObject and JavaScriptCore APIs.
+// Returns the JavaScript object corresponding to the receiver.
 func (o *WebScriptObject) JSObject() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _webScriptObjectSelJSObject)
 	return _ret
 }
 
-// @method callWebScriptMethod:withArguments: @param name The name of the method to call in the script environment. @param arguments The arguments to pass to the script environment. @discussion Calls the specified method in the script environment using the specified arguments. @result Returns the result of calling the script method. Returns WebUndefined when an exception is thrown in the script environment.
+// Returns the result of executing a method in the scripting environment.
 func (o *WebScriptObject) CallWebScriptMethodWithArguments(name *foundation.NSString, arguments *foundation.NSArray[objc.ID]) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webScriptObjectSelCallWebScriptMethodWithArguments, name.Ptr(), arguments)
+	_ret := objc.Send[objc.ID](o.Ptr(), _webScriptObjectSelCallWebScriptMethodWithArguments, name.Ptr(), arguments.Ptr())
 	return _ret
 }
 
-// @method evaluateWebScript: @param script The script to execute in the target script environment. @discussion The script will be executed in the target script environment. The format of the script is dependent of the target script environment. @result Returns the result of evaluating the script in the script environment. Returns WebUndefined when an exception is thrown in the script environment.
+// Returns the result of evaluating a script in the scripting environment.
 func (o *WebScriptObject) EvaluateWebScript(script *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webScriptObjectSelEvaluateWebScript, script.Ptr())
 	return _ret
 }
 
-// @method removeWebScriptKey: @param name The name of the property to remove. @discussion Removes the property from the object in the script environment.
+// Removes a property from a scripting environment.
 func (o *WebScriptObject) RemoveWebScriptKey(name *foundation.NSString) {
 	o.Ptr().Send(_webScriptObjectSelRemoveWebScriptKey, name.Ptr())
 }
 
-// @method stringRepresentation @discussion Converts the target object to a string representation. The coercion of non string objects type is dependent on the script environment. @result Returns the string representation of the object.
+// Returns a string representation of the receiver.
 func (o *WebScriptObject) StringRepresentation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webScriptObjectSelStringRepresentation)
 	if _ret != 0 {
@@ -80,18 +82,18 @@ func (o *WebScriptObject) StringRepresentation() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-// @method webScriptValueAtIndex: @param index The index of the property to return. @discussion Gets the value of the property at the specified index. @result The value of the property. Returns WebUndefined when an exception is thrown in the script environment.
+// Returns the value of a property at the specified index.
 func (o *WebScriptObject) WebScriptValueAtIndex(index uint) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webScriptObjectSelWebScriptValueAtIndex, index)
 	return _ret
 }
 
-// @method setWebScriptValueAtIndex:value: @param index The index of the property to set. @param value The value of the property to set. @discussion Sets the property value at the specified index.
+// Sets the value of a property at the specified index.
 func (o *WebScriptObject) SetWebScriptValueAtIndexValue(index uint, value objc.ID) {
 	o.Ptr().Send(_webScriptObjectSelSetWebScriptValueAtIndexValue, index, value)
 }
 
-// @method setException: @param description The description of the exception. @discussion Raises an exception in the script environment in the context of the current object.
+// Raises a scripting environment exception in the context of the current object.
 func (o *WebScriptObject) SetException(description *foundation.NSString) {
 	o.Ptr().Send(_webScriptObjectSelSetException, description.Ptr())
 }

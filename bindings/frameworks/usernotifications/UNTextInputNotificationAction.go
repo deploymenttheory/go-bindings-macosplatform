@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An action that accepts user-typed text.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/untextinputnotificationaction
 type UNTextInputNotificationAction struct {
 	UNNotificationAction
@@ -33,6 +35,7 @@ func UNTextInputNotificationActionFromID(id objc.ID) *UNTextInputNotificationAct
 	return o
 }
 
+// Creates an action object that accepts text input from the user.
 func UNTextInputNotificationActionActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder(identifier *foundation.NSString, title *foundation.NSString, options UNNotificationActionOptions, textInputButtonTitle *foundation.NSString, textInputPlaceholder *foundation.NSString) *UNTextInputNotificationAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNTextInputNotificationAction), _uNTextInputNotificationActionSelActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder, identifier.Ptr(), title.Ptr(), options, textInputButtonTitle.Ptr(), textInputPlaceholder.Ptr())
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func UNTextInputNotificationActionActionWithIdentifierTitleOptionsTextInputButto
 	return UNTextInputNotificationActionFromID(_ret)
 }
 
+// Creates an action object with an icon that accepts text input from the user.
 func UNTextInputNotificationActionActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder(identifier *foundation.NSString, title *foundation.NSString, options UNNotificationActionOptions, icon *UNNotificationActionIcon, textInputButtonTitle *foundation.NSString, textInputPlaceholder *foundation.NSString) *UNTextInputNotificationAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNTextInputNotificationAction), _uNTextInputNotificationActionSelActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder, identifier.Ptr(), title.Ptr(), options, icon.Ptr(), textInputButtonTitle.Ptr(), textInputPlaceholder.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A newly created security key credential that results from a credential registration request.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialregistration
 type ASAuthorizationSecurityKeyPublicKeyCredentialRegistration struct {
 	foundation.NSObject
@@ -33,8 +35,11 @@ func ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationFromID(id objc.ID)
 
 // @abstract A list of transports that the authenticator is believed to support, if this could be determined.
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialRegistration) Transports() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationSelTransports)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationSelTransports)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialRegistration) Prf() *ASAuthorizationPublicKeyCredentialPRFRegistrationOutput {

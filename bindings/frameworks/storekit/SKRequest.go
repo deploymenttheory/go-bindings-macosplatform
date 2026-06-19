@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that represents a request to the App Store.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skrequest
 // Deprecated: No longer supported.
 type SKRequest struct {
@@ -34,10 +36,12 @@ func SKRequestFromID(id objc.ID) *SKRequest {
 	return o
 }
 
+// Cancels a previously started request.
 func (o *SKRequest) Cancel() {
 	o.Ptr().Send(_sKRequestSelCancel)
 }
 
+// Sends the request to the Apple App Store.
 func (o *SKRequest) Start() {
 	o.Ptr().Send(_sKRequestSelStart)
 }

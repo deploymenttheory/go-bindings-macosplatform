@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A structure that represents the properties of a specific point along a stroke’s path.
+//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pkstrokepoint
 type PKStrokePoint struct {
 	foundation.NSObject

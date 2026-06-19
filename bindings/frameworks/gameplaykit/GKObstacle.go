@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Represents an impassible area in 2D space. Able to be avoided by GKAgent's steering functions GKGraph can generate navigation graphs from a list of obstacles
+// The abstract base class for objects representing impassable areas in a game world.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkobstacle
 type GKObstacle struct {

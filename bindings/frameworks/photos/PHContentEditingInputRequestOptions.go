@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of options affecting the delivery of image or video data when you request to edit the content of a Photos asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phcontenteditinginputrequestoptions
 type PHContentEditingInputRequestOptions struct {
 	foundation.NSObject

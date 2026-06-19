@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that makes the layers of a symbol-based image appear separately or as a whole.
+//
 // SymbolAppearEffect wraps [raw.NSSymbolAppearEffect] with a fluent Go API.
 type SymbolAppearEffect struct {
 	inner *raw.NSSymbolAppearEffect
@@ -35,7 +37,7 @@ func NewSymbolAppearEffect() *SymbolAppearEffect {
 	return &SymbolAppearEffect{inner: raw.NSSymbolAppearEffectFromID(_id)}
 }
 
-// Returns a copy of the effect that animates incrementally, by layer.
+// An effect that makes each layer appear separately.
 //
 // EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolAppearEffect) EffectWithByLayer() *SymbolAppearEffect {
@@ -46,7 +48,7 @@ func (x *SymbolAppearEffect) EffectWithByLayer() *SymbolAppearEffect {
 	return &SymbolAppearEffect{inner: _r}
 }
 
-// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+// An effect that makes all layers appear simultaneously.
 //
 // EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolAppearEffect) EffectWithWholeSymbol() *SymbolAppearEffect {

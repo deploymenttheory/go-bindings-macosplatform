@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that defines a host’s interface to an audio unit.
+//
 // Apple documentation: https://developer.apple.com/documentation/audiotoolbox/auaudiounit
 type AUAudioUnit struct {
 	foundation.NSObject
@@ -138,7 +140,7 @@ func AUAudioUnitFromID(id objc.ID) *AUAudioUnit {
 	return o
 }
 
-// @method		initWithComponentDescription:options:error: @brief		Designated initializer. @param componentDescription A single AUAudioUnit subclass may implement multiple audio units, for example, an effect that can also function as a generator, or a cluster of related effects. The component description specifies the component which was instantiated. @param options Options for loading the unit in-process or out-of-process. @param outError Returned in the event of failure.
+// Synchronously initializes a new audio unit object.
 func (o *AUAudioUnit) InitWithComponentDescriptionOptionsError(componentDescription AudioComponentDescription, options AudioComponentInstantiationOptions) (*AUAudioUnit, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelInitWithComponentDescriptionOptionsError, componentDescription, options, unsafe.Pointer(&_nsErr))
@@ -151,7 +153,7 @@ func (o *AUAudioUnit) InitWithComponentDescriptionOptionsError(componentDescript
 	return AUAudioUnitFromID(_ret), nil
 }
 
-// @method		initWithComponentDescription:error: @brief		Convenience initializer (omits options).
+// Synchronously initializes a new audio unit object.
 func (o *AUAudioUnit) InitWithComponentDescriptionError(componentDescription AudioComponentDescription) (*AUAudioUnit, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelInitWithComponentDescriptionError, componentDescription, unsafe.Pointer(&_nsErr))
@@ -164,7 +166,7 @@ func (o *AUAudioUnit) InitWithComponentDescriptionError(componentDescription Aud
 	return AUAudioUnitFromID(_ret), nil
 }
 
-// @method	instantiateWithComponentDescription:options:completionHandler: @brief	Asynchronously create an AUAudioUnit instance. @param componentDescription The AudioComponentDescription of the audio unit to instantiate. @param options See the discussion of AudioComponentInstantiationOptions in AudioToolbox/AudioComponent.h. @param completionHandler Called in a thread/dispatch queue context internal to the implementation. The client should retain the supplied AUAudioUnit. @discussion Certain types of AUAudioUnits must be instantiated asynchronously -- see the discussion of kAudioComponentFlag_RequiresAsyncInstantiation in AudioToolbox/AudioComponent.h. Note: Do not block the main thread while waiting for the completion handler to be called; this can deadlock.
+// Asynchronously creates an audio unit instance.
 func AUAudioUnitInstantiateWithComponentDescriptionOptionsCompletionHandler(componentDescription AudioComponentDescription, options AudioComponentInstantiationOptions, completionHandler func(*AUAudioUnit, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -179,7 +181,7 @@ func AUAudioUnitInstantiateWithComponentDescriptionOptionsCompletionHandler(comp
 	objc.ID(_clsAUAudioUnit).Send(_aUAudioUnitSelInstantiateWithComponentDescriptionOptionsCompletionHandler, componentDescription, options, __block_completionHandler)
 }
 
-// @method		allocateRenderResourcesAndReturnError: @brief		Allocate resources required to render. @discussion Hosts must call this before beginning to render. Subclassers should call the superclass implementation. Bridged to the v2 API AudioUnitInitialize().
+// Allocates resources required to render audio.
 func (o *AUAudioUnit) AllocateRenderResourcesAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aUAudioUnitSelAllocateRenderResourcesAndReturnError, unsafe.Pointer(&_nsErr))
@@ -189,17 +191,17 @@ func (o *AUAudioUnit) AllocateRenderResourcesAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
-// @method		deallocateRenderResources @brief		Deallocate resources allocated by allocateRenderResourcesAndReturnError: @discussion Hosts should call this after finishing rendering. Subclassers should call the superclass implementation. Bridged to the v2 API AudioUnitUninitialize().
+// Deallocates resources required to render audio.
 func (o *AUAudioUnit) DeallocateRenderResources() {
 	o.Ptr().Send(_aUAudioUnitSelDeallocateRenderResources)
 }
 
-// @method		reset @brief		Reset transitory rendering state to its initial state. @discussion Hosts should call this at the point of a discontinuity in the input stream being provided to an audio unit, for example, when seeking forward or backward within a track. In response, implementations should clear delay lines, filters, etc. Subclassers should call the superclass implementation. Bridged to the v2 API AudioUnitReset(), in the global scope.
+// Resets transitory rendering state to its initial state.
 func (o *AUAudioUnit) Reset() {
 	o.Ptr().Send(_aUAudioUnitSelReset)
 }
 
-// @method		tokenByAddingRenderObserver: @brief		Add a block to be called on each render cycle. @discussion The supplied block is called at the beginning and ending of each render cycle. It should not make any blocking calls. This method is implemented in the base class AUAudioUnit, and should not be overridden. Bridged to the v2 API AudioUnitAddRenderNotify(). @param observer The block to call. @return A token to be used when removing the observer.
+// Adds a block to be called on each render cycle.
 func (o *AUAudioUnit) TokenByAddingRenderObserver(observer func(AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer)) int {
 	var __block_observer objc.Block
 	if observer != nil {
@@ -212,15 +214,18 @@ func (o *AUAudioUnit) TokenByAddingRenderObserver(observer func(AudioUnitRenderA
 	return _ret
 }
 
-// @method		removeRenderObserver: @brief		Remove an observer block added via tokenByAddingRenderObserver: @param token The token previously returned by tokenByAddingRenderObserver: Bridged to the v2 API AudioUnitRemoveRenderNotify().
+// Removes an observer block previously added to the render cycle.
 func (o *AUAudioUnit) RemoveRenderObserver(token int) {
 	o.Ptr().Send(_aUAudioUnitSelRemoveRenderObserver, token)
 }
 
-// @method		parametersForOverviewWithCount: @brief		Returns the audio unit's `count` most important parameters. @discussion This property allows a host to query an audio unit for some small number of parameters which are its "most important", to be displayed in a compact generic view. An audio unit subclass should return an array of NSNumbers representing the addresses of the `count` most important parameters. The base class returns an empty array regardless of count. Partially bridged to kAudioUnitProperty_ParametersForOverview (v2 hosts can use that property to access this v3 method of an audio unit).
+// Returns the audio unit’s most important parameters.
 func (o *AUAudioUnit) ParametersForOverviewWithCount(count int) *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aUAudioUnitSelParametersForOverviewWithCount, count)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelParametersForOverviewWithCount, count)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @method		saveUserPreset:error @brief		Persistently save the current state of the audio unit into a userPreset @discussion The new preset will be added to userPresets and will become selectable by assigning it to the currentPreset property. If a preset with the provided name already exists then it will be overwritten. For user presets, the preset number is required to be negative. If a positive number is passed, the sign will be changed to negative. If zero is passed, the number will be set to -1. These changes will be reflected on the userPreset argument. The default implementation of this method will save the user preset to an internal location. Audio Units are free to override this method to operate on a different location (e.g. their iCloud container). @param	userPreset The preset under which the current state will be saved. @param outError In the event of a failure, the method will return NO and outError will be set to an NSError, describing the problem. Some possible errors: - domain: NSOSStatusErrorDomain code: kAudioUnitErr_NoConnection - domain: NSOSStatusErrorDomain	code: kAudioUnitErr_InvalidFilePath - domain: NSOSStatusErrorDomain	code: kAudioUnitErr_MissingKey @return YES for success. NO in the event of a failure, in which case the error is returned in outError.
@@ -246,11 +251,14 @@ func (o *AUAudioUnit) DeleteUserPresetError(userPreset *AUAudioUnitPreset) (bool
 // @method		presetStateFor:error @brief		Retrieve the state stored in a user preset @discussion This method allows access to the contents of a preset without having to set that preset as current. The returned dictionary is assignable to the audio unit's fullState and/or fullStateForDocument properties. Audio units can override this method in order to vend user presets from a different location (e.g. their iCloud container). In order to restore the state from a user preset, the audio unit should override the setter for the currentPreset property and check the preset number to determine the type of preset. If the preset number is >= 0 then the preset is a factory preset. If the preset number is < 0 then it is a user preset. This method can then be called to retrieve the state stored in a user preset and the audio unit can assign this to fullState or fullStateForDocument. @param	userPreset The preset to be selected. @param	outError In the event of a failure, the method will return nil and outError will be set to an NSError, describing the problem. Some possible errors: - domain: NSOSStatusErrorDomain code: kAudioUnitErr_NoConnection - domain: NSPOSIXErrorDomain	code: ENOENT - domain: NSCocoaErrorDomain	code: NSCoderReadCorruptError @return Returns nil if there was an error, otherwise returns a dictionary containing the full state of the audio unit saved in the preset. For details on the possible keys present in the full state dictionary, please see the documentation for kAudioUnitProperty_ClassInfo. The minimal set of keys and their type is:	@kAUPresetTypeKey : NSNumber, @kAUPresetSubtypeKey : NSNumber, @kAUPresetManufacturerKey : NSNumber, @kAUPresetVersionKey : NSNumber, @kAUPresetNameKey : NSString, @kAUPresetNumberKey: NSNumber, @kAUPresetDataKey : NSData
 func (o *AUAudioUnit) PresetStateForError(userPreset *AUAudioUnitPreset) (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aUAudioUnitSelPresetStateForError, userPreset.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelPresetStateForError, userPreset.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret), nil
 }
 
 // @method		profileStateForCable:channel: @brief		Given a MIDI cable and channel number, return the supported MIDI-CI Profiles. @param cable The virtual MIDI cable for which the profiles are requested. @param channel The MIDI channel for which the profiles are requested. @return A MIDICIProfileState object containing all the supported MIDI-CI profiles for this channel on this cable.
@@ -279,7 +287,7 @@ func (o *AUAudioUnit) DisableProfileCableOnChannelError(profile objc.ID, cable u
 	return _ret, nil
 }
 
-// @method		messageChannelFor: @brief		Returns an object for bidirectional communication between an Audio Unit and its host. @discussion Message channels provide a flexible way for custom data exchange between an Audio Unit and its host. An Audio Unit can support multiple message channels which are identified by the `channelName`. The message channel object's lifetime is managed by the host. Message channel objects should be designed in such a way that they could outlive the AU that vended them. For further details see discussion for `AUMessageChannel`. @param	channelName The name of the message channel to be returned by the Audio Unit if supported. @return An object that conforms to the `AUMessageChannel` protocol.
+// Returns an object for bidirectional communication between an audio unit and its host.
 func (o *AUAudioUnit) MessageChannelFor(channelName *foundation.NSString) AUMessageChannel {
 	_ret := objc.Send[AUMessageChannel](o.Ptr(), _aUAudioUnitSelMessageChannelFor, channelName.Ptr())
 	return _ret
@@ -429,8 +437,11 @@ func (o *AUAudioUnit) ScheduleMIDIEventListBlock() objc.Block {
 
 // @property	MIDIOutputNames @brief		Count, and names of, a plug-in's MIDI outputs. @discussion A plug-in may override this method to inform hosts about its MIDI outputs. The size of the array is the number of outputs the Audio Unit supports. Each item in the array is the name of the MIDI output at that index. This is bridged to the v2 API property kAudioUnitProperty_MIDIOutputCallbackInfo.
 func (o *AUAudioUnit) MIDIOutputNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aUAudioUnitSelMIDIOutputNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelMIDIOutputNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property	providesUserInterface @brief		Specifies whether an audio unit provides UI (normally in the form of a view controller). @discussion Implemented in the framework and should not be overridden by implementators. The framework detects whether any subclass has implemented `requestViewControllerWithCompletionHandler:` or is implemented by an AU extension whose extension point identifier is `com.apple.AudioUnit-UI`. See also `requestViewControllerWithCompletionHandler:` in <CoreAudioKit/AUViewController.h>
@@ -491,22 +502,28 @@ func (o *AUAudioUnit) SetHostMIDIProtocol(hostMIDIProtocol objc.ID) {
 
 // @property	fullState @brief		A persistable snapshot of the Audio Unit's properties and parameters, suitable for saving as a user preset. @discussion Hosts may use this property to save and restore the state of an Audio Unit being used in a user preset or document. The Audio Unit should not persist transitory properties such as stream formats, but should save and restore all parameters and custom properties. The base class implementation of this property saves the values of all parameters currently in the parameter tree. A subclass which dynamically produces multiple variants of the parameter tree needs to be aware that the serialization method does a depth-first preorder traversal of the tree. Bridged to the v2 property kAudioUnitProperty_ClassInfo.
 func (o *AUAudioUnit) FullState() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aUAudioUnitSelFullState)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelFullState)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *AUAudioUnit) SetFullState(fullState *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_aUAudioUnitSelSetFullState, fullState)
+	o.Ptr().Send(_aUAudioUnitSelSetFullState, fullState.Ptr())
 }
 
 // @property	fullStateForDocument @brief		A persistable snapshot of the audio unit's properties and parameters, suitable for saving in a user's document. @discussion This property is distinct from fullState in that some state is suitable for saving in user presets, while other state is not. For example, a synthesizer's master tuning setting could be considered global state, inappropriate for storing in reusable presets, but desirable for storing in a document for a specific live performance. Hosts saving documents should use this property. If the audio unit does not implement it, the base class simply sets/gets fullState. Bridged to the v2 property kAudioUnitProperty_ClassInfoFromDocument.
 func (o *AUAudioUnit) FullStateForDocument() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aUAudioUnitSelFullStateForDocument)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelFullStateForDocument)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *AUAudioUnit) SetFullStateForDocument(fullStateForDocument *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_aUAudioUnitSelSetFullStateForDocument, fullStateForDocument)
+	o.Ptr().Send(_aUAudioUnitSelSetFullStateForDocument, fullStateForDocument.Ptr())
 }
 
 // @property	factoryPresets @brief		A collection of presets provided by the audio unit's developer. @discussion A preset provides users of an audio unit with an easily-selectable, fine-tuned set of parameters provided by the developer. This property returns all of the available factory presets. Bridged to the v2 property kAudioUnitProperty_FactoryPresets.
@@ -602,8 +619,11 @@ func (o *AUAudioUnit) SetRenderingOffline(renderingOffline bool) {
 
 // @property	channelCapabilities @brief		Expresses valid combinations of input and output channel counts. @discussion Elements are NSNumber containing integers; [0]=input count, [1]=output count, [2]=2nd input count, [3]=2nd output count, etc. An input, output count of (2, 2) signifies that the audio unit can process 2 input channels to 2 output channels. Negative numbers (-1, -2) indicate *any* number of channels. (-1, -1) means any number of channels on input and output as long as they are the same. (-1, -2) means any number of channels on input or output, without the requirement that the counts are the same. A negative number less than -2 is used to indicate a total number of channels across every bus in that scope, regardless of how many channels are set on any particular bus. For example, (-16, 2) indicates that a unit can accept up to 16 channels of input across its input busses, but will only produce 2 channels of output. Zero on either side (though typically input) means "not applicable", because there are no elements on that side. Bridged to the v2 property kAudioUnitProperty_SupportedNumChannels.
 func (o *AUAudioUnit) ChannelCapabilities() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aUAudioUnitSelChannelCapabilities)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelChannelCapabilities)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property	musicalContextBlock @brief		A callback for the AU to call the host for musical context information. @discussion Note that an audio unit implementation accessing this property should cache it in realtime-safe storage before beginning to render. Bridged to the HostCallback_GetBeatAndTempo and HostCallback_GetMusicalTimeLocation callback members in kAudioUnitProperty_HostCallbacks.
@@ -655,8 +675,11 @@ func (o *AUAudioUnit) SetContextName(contextName *foundation.NSString) {
 
 // @property	migrateFromPlugin @brief		Information for migrating data from other audio plug-ins to the v3 Audio Unit architecture. @discussion This can be used to migrate settings from an older Audio Unit; this allows manufacturers to deprecate older Audio Units and replace them with new ones. The data for the older Audio Unit is an array of NSData representing byte encoded AudioUnitOtherPluginDescs to migrate from. Can also be used to migrate from a v2 to a v3 Audio Unit. Bridged to the v2 property kAudioUnitMigrateProperty_FromPlugin.
 func (o *AUAudioUnit) MigrateFromPlugin() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _aUAudioUnitSelMigrateFromPlugin)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelMigrateFromPlugin)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @property	supportsMPE @brief		Specifies whether an audio unit supports Multi-dimensional Polyphonic Expression. @discussion Bridged to the v2 property kAudioUnitProperty_SupportsMPE.
@@ -667,12 +690,15 @@ func (o *AUAudioUnit) SupportsMPE() bool {
 
 // @property	channelMap @brief		Specify a mapping of input channels to output channels. @discussion Converter and input/output audio units may support re-ordering or splitting of input channels to output channels. The number of channels in the channel map is the number of channels of the destination (output format). The channel map entries contain a channel number of the source channel that should be mapped to that destination channel. If -1 is specified, then that destination channel will not contain any channel from the source (so it will be silent). If the property value is nil, then the audio unit does not support this property. Bridged to the v2 property kAudioOutputUnitProperty_ChannelMap.
 func (o *AUAudioUnit) ChannelMap() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aUAudioUnitSelChannelMap)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitSelChannelMap)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *AUAudioUnit) SetChannelMap(channelMap *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_aUAudioUnitSelSetChannelMap, channelMap)
+	o.Ptr().Send(_aUAudioUnitSelSetChannelMap, channelMap.Ptr())
 }
 
 // @property	profileChangedBlock @brief		A block called when a device notifies that a MIDI-CI profile has been enabled or disabled. @discussion Since enabling / disabling MIDI-CI profiles is an asynchronous operation, the host can set this block and the audio unit is expected to call it every time the state of a MIDI-CI profile has changed.
@@ -685,7 +711,7 @@ func (o *AUAudioUnit) SetProfileChangedBlock(profileChangedBlock unsafe.Pointer)
 	o.Ptr().Send(_aUAudioUnitSelSetProfileChangedBlock, profileChangedBlock)
 }
 
-// @method		setDeviceID:error: @brief		Set the I/O hardware device. @param deviceID The device to select. @param outError Returned in the event of failure.
+// Sets the I/O hardware device.
 func (o *AUAudioUnit) SetDeviceIDError(deviceID uint) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aUAudioUnitSelSetDeviceIDError, deviceID, unsafe.Pointer(&_nsErr))
@@ -695,7 +721,7 @@ func (o *AUAudioUnit) SetDeviceIDError(deviceID uint) (bool, error) {
 	return _ret, nil
 }
 
-// @method		startHardwareAndReturnError: @brief		Starts the audio hardware. @param outError Returned in the event of failure.
+// Starts the audio hardware.
 func (o *AUAudioUnit) StartHardwareAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aUAudioUnitSelStartHardwareAndReturnError, unsafe.Pointer(&_nsErr))
@@ -705,7 +731,7 @@ func (o *AUAudioUnit) StartHardwareAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
-// @method		stopHardware @brief		Stops the audio hardware.
+// Stops the audio hardware.
 func (o *AUAudioUnit) StopHardware() {
 	o.Ptr().Send(_aUAudioUnitSelStopHardware)
 }
@@ -815,18 +841,18 @@ func (o *AUAudioUnit) SetIntendedSpatialExperience(intendedSpatialExperience uns
 	o.Ptr().Send(_aUAudioUnitSelSetIntendedSpatialExperience, intendedSpatialExperience)
 }
 
-// @brief	Register an audio unit component implemented as an AUAudioUnit subclass. @discussion This method dynamically registers the supplied AUAudioUnit subclass with the Audio Component system, in the context of the current process (only). After registering the subclass, it can be instantiated via AudioComponentInstanceNew, -[AUAudioUnit initWithComponentDescription:options:error:], and via any other API's which instantiate audio units via their component descriptions (e.g. <AudioToolbox/AUGraph.h>, or <AVFoundation/AVAudioUnitEffect.h>).
+// Registers an audio unit subclass.
 func AUAudioUnitRegisterSubclassAsComponentDescriptionNameVersion(cls objc.Class, componentDescription AudioComponentDescription, name *foundation.NSString, version uint) {
 	objc.ID(_clsAUAudioUnit).Send(_aUAudioUnitSelRegisterSubclassAsComponentDescriptionNameVersion, cls, componentDescription, name.Ptr(), version)
 }
 
-// @method	shouldChangeToFormat:forBus: @param format An AVAudioFormat which is proposed as the new format. @param bus The AUAudioUnitBus on which the format will be changed. @discussion This is called when setting the format on an AUAudioUnitBus. The bus has already checked that the format meets the channel constraints of the bus. The AU can override this method to check before allowing a new format to be set on the bus. If this method returns NO, then the new format will not be set on the bus. The default implementation returns NO if the unit has renderResourcesAllocated, otherwise it results YES.
+// This is called when you set the format on a bus.
 func (o *AUAudioUnit) ShouldChangeToFormatForBus(format *avfaudio.AVAudioFormat, bus *AUAudioUnitBus) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aUAudioUnitSelShouldChangeToFormatForBus, format.Ptr(), bus.Ptr())
 	return _ret
 }
 
-// @method	setRenderResourcesAllocated: @param flag In the base class implementation of allocateRenderResourcesAndReturnError:, the property renderResourcesAllocated is set to YES. If allocateRenderResourcesAndReturnError: should fail in a subclass, subclassers must use this method to set renderResourcesAllocated to NO.
+// Sets the Boolean value of the renderResourcesAllocated property.
 func (o *AUAudioUnit) SetRenderResourcesAllocated(flag bool) {
 	o.Ptr().Send(_aUAudioUnitSelSetRenderResourcesAllocated, flag)
 }

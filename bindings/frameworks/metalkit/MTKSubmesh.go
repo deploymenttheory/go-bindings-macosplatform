@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container for the index data of a Model I/O submesh, suitable for use in a Metal app.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalkit/mtksubmesh
 type MTKSubmesh struct {
 	foundation.NSObject

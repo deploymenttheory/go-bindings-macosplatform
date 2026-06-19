@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A cached response to a URL request.
+//
 // CachedURLResponse wraps [raw.NSCachedURLResponse] with a fluent Go API.
 type CachedURLResponse struct {
 	inner *raw.NSCachedURLResponse

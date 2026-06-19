@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A command that closes one or more scriptable objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsclosecommand
 type NSCloseCommand struct {
 	NSScriptCommand

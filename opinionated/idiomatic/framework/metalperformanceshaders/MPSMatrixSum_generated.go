@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A kernel for performing a pointwise summation of a matrix.
+//
 // MatrixSum wraps [raw.MPSMatrixSum] with a fluent Go API.
 type MatrixSum struct {
 	inner *raw.MPSMatrixSum
@@ -59,7 +61,7 @@ func (x *MatrixSum) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixSum) WithOptions(options mpscore.MPSKernelOptions) *MatrixSum {
@@ -67,7 +69,7 @@ func (x *MatrixSum) WithOptions(options mpscore.MPSKernelOptions) *MatrixSum {
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixSum) WithLabel(label string) *MatrixSum {

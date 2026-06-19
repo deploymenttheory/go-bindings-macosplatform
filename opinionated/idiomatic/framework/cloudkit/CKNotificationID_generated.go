@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that uniquely identifies a push notification that a container sends.
+//
 // NotificationID wraps [raw.CKNotificationID] with a fluent Go API.
 type NotificationID struct {
 	inner *raw.CKNotificationID

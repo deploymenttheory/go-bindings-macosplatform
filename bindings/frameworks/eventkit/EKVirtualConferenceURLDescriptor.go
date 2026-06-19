@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Details about how users join a virtual conference, including a title and URL.
+//
 // Apple documentation: https://developer.apple.com/documentation/eventkit/ekvirtualconferenceurldescriptor
 type EKVirtualConferenceURLDescriptor struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func EKVirtualConferenceURLDescriptorFromID(id objc.ID) *EKVirtualConferenceURLD
 	return o
 }
 
-// @method     initWithTitle:URL: @abstract   Initializes an instance of EKVirtualConferenceURLDescriptor. @param      title       A user-readable title describing this URL. This string may be displayed in the UI. This string is optional and may be left nil. If your virtual conference only has one way to join it, then you can probably leave this nil. However, if your virtual conference has multiple ways to join it, you should have a title for each URL so that users can better understand what each URL represents. @param      URL         A URL that, when opened, will join the virtual conference.
+// Creates a URL descriptor with the given title and URL.
 func (o *EKVirtualConferenceURLDescriptor) InitWithTitleURL(title *foundation.NSString, uRL *foundation.NSURL) *EKVirtualConferenceURLDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKVirtualConferenceURLDescriptorSelInitWithTitleURL, title.Ptr(), uRL.Ptr())
 	if _ret != 0 {

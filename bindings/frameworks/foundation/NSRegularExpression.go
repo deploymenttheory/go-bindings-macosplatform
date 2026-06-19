@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable representation of a compiled regular expression that you apply to Unicode strings.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsregularexpression
 type NSRegularExpression struct {
 	NSObject
@@ -45,6 +47,7 @@ func NSRegularExpressionFromID(id objc.ID) *NSRegularExpression {
 	return o
 }
 
+// Creates an NSRegularExpression instance with the specified regular expression pattern and options.
 func NSRegularExpressionRegularExpressionWithPatternOptionsError(pattern *NSString, options NSRegularExpressionOptions) (*NSRegularExpression, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSRegularExpression), _nSRegularExpressionSelRegularExpressionWithPatternOptionsError, pattern.Ptr(), options, unsafe.Pointer(&_nsErr))
@@ -57,6 +60,7 @@ func NSRegularExpressionRegularExpressionWithPatternOptionsError(pattern *NSStri
 	return NSRegularExpressionFromID(_ret), nil
 }
 
+// Returns an initialized NSRegularExpression instance with the specified regular expression pattern and options.
 func (o *NSRegularExpression) InitWithPatternOptionsError(pattern *NSString, options NSRegularExpressionOptions) (*NSRegularExpression, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRegularExpressionSelInitWithPatternOptionsError, pattern.Ptr(), options, unsafe.Pointer(&_nsErr))
@@ -69,6 +73,7 @@ func (o *NSRegularExpression) InitWithPatternOptionsError(pattern *NSString, opt
 	return NSRegularExpressionFromID(_ret), nil
 }
 
+// Returns a string by adding backslash escapes as necessary to protect any characters that would match as pattern metacharacters.
 func NSRegularExpressionEscapedPatternForString(string_ *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSRegularExpression), _nSRegularExpressionSelEscapedPatternForString, string_.Ptr())
 	if _ret != 0 {
@@ -95,6 +100,7 @@ func (o *NSRegularExpression) NumberOfCaptureGroups() uint {
 	return _ret
 }
 
+// Enumerates the string allowing the Block to handle each regular expression match.
 func (o *NSRegularExpression) EnumerateMatchesInStringOptionsRangeUsing(string_ *NSString, options NSMatchingOptions, range_ NSRange, block func(*NSTextCheckingResult, NSMatchingFlags, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -109,6 +115,7 @@ func (o *NSRegularExpression) EnumerateMatchesInStringOptionsRangeUsing(string_ 
 	o.Ptr().Send(_nSRegularExpressionSelEnumerateMatchesInStringOptionsRangeUsing, string_.Ptr(), options, range_, __block_block)
 }
 
+// Returns an array containing all the matches of the regular expression in the string.
 func (o *NSRegularExpression) MatchesInStringOptionsRange(string_ *NSString, options NSMatchingOptions, range_ NSRange) *NSArray[*NSTextCheckingResult] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRegularExpressionSelMatchesInStringOptionsRange, string_.Ptr(), options, range_)
 	if _ret != 0 {
@@ -117,11 +124,13 @@ func (o *NSRegularExpression) MatchesInStringOptionsRange(string_ *NSString, opt
 	return NSArrayFromID[*NSTextCheckingResult](_ret)
 }
 
+// Returns the number of matches of the regular expression within the specified range of the string.
 func (o *NSRegularExpression) NumberOfMatchesInStringOptionsRange(string_ *NSString, options NSMatchingOptions, range_ NSRange) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSRegularExpressionSelNumberOfMatchesInStringOptionsRange, string_.Ptr(), options, range_)
 	return _ret
 }
 
+// Returns the first match of the regular expression within the specified range of the string.
 func (o *NSRegularExpression) FirstMatchInStringOptionsRange(string_ *NSString, options NSMatchingOptions, range_ NSRange) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRegularExpressionSelFirstMatchInStringOptionsRange, string_.Ptr(), options, range_)
 	if _ret != 0 {
@@ -130,11 +139,13 @@ func (o *NSRegularExpression) FirstMatchInStringOptionsRange(string_ *NSString, 
 	return NSTextCheckingResultFromID(_ret)
 }
 
+// Returns the range of the first match of the regular expression within the specified range of the string.
 func (o *NSRegularExpression) RangeOfFirstMatchInStringOptionsRange(string_ *NSString, options NSMatchingOptions, range_ NSRange) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSRegularExpressionSelRangeOfFirstMatchInStringOptionsRange, string_.Ptr(), options, range_)
 	return _ret
 }
 
+// Returns a new string containing matching regular expressions replaced with the template string.
 func (o *NSRegularExpression) StringByReplacingMatchesInStringOptionsRangeWithTemplate(string_ *NSString, options NSMatchingOptions, range_ NSRange, templ *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRegularExpressionSelStringByReplacingMatchesInStringOptionsRangeWithTemplate, string_.Ptr(), options, range_, templ.Ptr())
 	if _ret != 0 {
@@ -143,11 +154,13 @@ func (o *NSRegularExpression) StringByReplacingMatchesInStringOptionsRangeWithTe
 	return NSStringFromID(_ret)
 }
 
+// Replaces regular expression matches within the mutable string using the template string.
 func (o *NSRegularExpression) ReplaceMatchesInStringOptionsRangeWithTemplate(string_ *NSMutableString, options NSMatchingOptions, range_ NSRange, templ *NSString) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSRegularExpressionSelReplaceMatchesInStringOptionsRangeWithTemplate, string_.Ptr(), options, range_, templ.Ptr())
 	return _ret
 }
 
+// Used to perform template substitution for a single result for clients implementing their own replace functionality.
 func (o *NSRegularExpression) ReplacementStringForResultInStringOffsetTemplate(result *NSTextCheckingResult, string_ *NSString, offset int, templ *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRegularExpressionSelReplacementStringForResultInStringOffsetTemplate, result.Ptr(), string_.Ptr(), offset, templ.Ptr())
 	if _ret != 0 {
@@ -156,6 +169,7 @@ func (o *NSRegularExpression) ReplacementStringForResultInStringOffsetTemplate(r
 	return NSStringFromID(_ret)
 }
 
+// Returns a template string by adding backslash escapes as necessary to protect any characters that would match as pattern metacharacters
 func NSRegularExpressionEscapedTemplateForString(string_ *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSRegularExpression), _nSRegularExpressionSelEscapedTemplateForString, string_.Ptr())
 	if _ret != 0 {

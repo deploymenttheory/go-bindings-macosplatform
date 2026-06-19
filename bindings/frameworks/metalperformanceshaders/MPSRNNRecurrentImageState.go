@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that holds all the data that’s passed from one sequence iteration of the image-based recurrent neural network layer (stack) to the next.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsrnnrecurrentimagestate
 type MPSRNNRecurrentImageState struct {
 	mpscore.MPSState

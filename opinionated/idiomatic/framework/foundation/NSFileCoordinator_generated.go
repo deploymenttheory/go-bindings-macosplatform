@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that coordinates the reading and writing of files and directories among file presenters.
+//
 // FileCoordinator wraps [raw.NSFileCoordinator] with a fluent Go API.
 type FileCoordinator struct {
 	inner *raw.NSFileCoordinator
@@ -33,6 +35,8 @@ func FileCoordinatorFromID(id objc.ID) *FileCoordinator {
 	return &FileCoordinator{inner: raw.NSFileCoordinatorFromID(id)}
 }
 
+// Initializes and returns a file coordinator object using the specified file presenter.
+//
 // NewFileCoordinatorWithFilePresenter creates a new [FileCoordinator].
 func NewFileCoordinatorWithFilePresenter(filePresenterOrNil raw.NSFilePresenter) *FileCoordinator {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileCoordinator")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewFileCoordinatorWithFilePresenter(filePresenterOrNil raw.NSFilePresenter)
 	return &FileCoordinator{inner: raw.NSFileCoordinatorFromID(_id)}
 }
 
+// A string that uniquely identifies the file access that was performed by this file coordinator.
+//
 // WithPurposeIdentifier sets the purposeIdentifier property and returns the receiver for chaining.
 func (x *FileCoordinator) WithPurposeIdentifier(purposeIdentifier string) *FileCoordinator {
 	x.inner.SetPurposeIdentifier(foundation.NSStringStringWithUTF8String(purposeIdentifier))
@@ -52,6 +58,8 @@ func (x *FileCoordinator) WithScriptingProperties(scriptingProperties *raw.NSDic
 	return x
 }
 
+// Performs a number of coordinated-read or -write operations asynchronously.
+//
 // CoordinateAccessWithIntentsQueueByAccessor blocks until the operation completes or ctx is cancelled.
 func (x *FileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(ctx context.Context, intents *raw.NSArray[*raw.NSFileAccessIntent], queue *raw.NSOperationQueue) error {
 	_ch := make(chan error, 1)
@@ -70,6 +78,8 @@ func (x *FileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(ctx context
 	}
 }
 
+// Initiates a read operation on a single file or directory using the specified options.
+//
 // CoordinateReadingItemAtURLOptionsErrorByAccessor blocks until the operation completes or ctx is cancelled.
 func (x *FileCoordinator) CoordinateReadingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options NSFileCoordinatorReadingOptions, outError unsafe.Pointer) (*URL, error) {
 	type _result struct {
@@ -93,6 +103,8 @@ func (x *FileCoordinator) CoordinateReadingItemAtURLOptionsErrorByAccessor(ctx c
 	}
 }
 
+// Initiates a write operation on a single file or directory using the specified options.
+//
 // CoordinateWritingItemAtURLOptionsErrorByAccessor blocks until the operation completes or ctx is cancelled.
 func (x *FileCoordinator) CoordinateWritingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options NSFileCoordinatorWritingOptions, outError unsafe.Pointer) (*URL, error) {
 	type _result struct {
@@ -116,36 +128,50 @@ func (x *FileCoordinator) CoordinateWritingItemAtURLOptionsErrorByAccessor(ctx c
 	}
 }
 
+// Initiates a read operation that contains a follow-up write operation.
+//
 // CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor calls the underlying CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor.
 func (x *FileCoordinator) CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(readingURL string, readingOptions NSFileCoordinatorReadingOptions, writingURL string, writingOptions NSFileCoordinatorWritingOptions, outError unsafe.Pointer, readerWriter func(*raw.NSURL, *raw.NSURL)) {
 	x.inner.CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(readingURL)), raw.NSFileCoordinatorReadingOptions(readingOptions), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(writingURL)), raw.NSFileCoordinatorWritingOptions(writingOptions), outError, readerWriter)
 }
 
+// Initiates a write operation that involves a secondary write operation.
+//
 // CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor calls the underlying CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor.
 func (x *FileCoordinator) CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(url1 string, options1 NSFileCoordinatorWritingOptions, url2 string, options2 NSFileCoordinatorWritingOptions, outError unsafe.Pointer, writer func(*raw.NSURL, *raw.NSURL)) {
 	x.inner.CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url1)), raw.NSFileCoordinatorWritingOptions(options1), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url2)), raw.NSFileCoordinatorWritingOptions(options2), outError, writer)
 }
 
+// Prepare to read or write from multiple files in a single batch operation.
+//
 // PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor calls the underlying PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor.
 func (x *FileCoordinator) PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs *raw.NSArray[*raw.NSURL], readingOptions NSFileCoordinatorReadingOptions, writingURLs *raw.NSArray[*raw.NSURL], writingOptions NSFileCoordinatorWritingOptions, outError unsafe.Pointer, batchAccessor func(objc.Block)) {
 	x.inner.PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs, raw.NSFileCoordinatorReadingOptions(readingOptions), writingURLs, raw.NSFileCoordinatorWritingOptions(writingOptions), outError, batchAccessor)
 }
 
+// Announces that your app is moving a file to a new URL.
+//
 // ItemAtURLWillMoveToURL calls the underlying ItemAtURLWillMoveToURL.
 func (x *FileCoordinator) ItemAtURLWillMoveToURL(oldURL string, newURL string) {
 	x.inner.ItemAtURLWillMoveToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(oldURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(newURL)))
 }
 
+// Notifies relevant file presenters that the location of a file or directory changed.
+//
 // ItemAtURLDidMoveToURL calls the underlying ItemAtURLDidMoveToURL.
 func (x *FileCoordinator) ItemAtURLDidMoveToURL(oldURL string, newURL string) {
 	x.inner.ItemAtURLDidMoveToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(oldURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(newURL)))
 }
 
+// Tells observing file providers that the item’s ubiquity attributes have changed.
+//
 // ItemAtURLDidChangeUbiquityAttributes calls the underlying ItemAtURLDidChangeUbiquityAttributes.
 func (x *FileCoordinator) ItemAtURLDidChangeUbiquityAttributes(url string, attributes *raw.NSSet[*raw.NSString]) {
 	x.inner.ItemAtURLDidChangeUbiquityAttributes(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), attributes)
 }
 
+// Cancels any active file coordination calls.
+//
 // Cancel calls the underlying Cancel.
 func (x *FileCoordinator) Cancel() {
 	x.inner.Cancel()

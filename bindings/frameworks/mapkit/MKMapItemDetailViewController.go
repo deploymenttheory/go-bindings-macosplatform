@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that displays detailed information about a map item.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapitemdetailviewcontroller
 type MKMapItemDetailViewController struct {
 	appkit.NSViewController
@@ -35,6 +37,7 @@ func MKMapItemDetailViewControllerFromID(id objc.ID) *MKMapItemDetailViewControl
 	return o
 }
 
+// Create a map item detail view controller
 func (o *MKMapItemDetailViewController) InitWithMapItemDisplaysMap(mapItem *MKMapItem, displaysMap bool) *MKMapItemDetailViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemDetailViewControllerSelInitWithMapItemDisplaysMap, mapItem.Ptr(), displaysMap)
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func (o *MKMapItemDetailViewController) InitWithMapItemDisplaysMap(mapItem *MKMa
 	return MKMapItemDetailViewControllerFromID(_ret)
 }
 
+// Create a map item detail view controller.
 func (o *MKMapItemDetailViewController) InitWithMapItem(mapItem *MKMapItem) *MKMapItemDetailViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemDetailViewControllerSelInitWithMapItem, mapItem.Ptr())
 	if _ret != 0 {

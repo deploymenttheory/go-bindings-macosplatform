@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An image-analysis request that tracks movement of a previously identified rectangular object across multiple images or video frames.
+//
 // TrackRectangleRequest wraps [raw.VNTrackRectangleRequest] with a fluent Go API.
 type TrackRectangleRequest struct {
 	inner *raw.VNTrackRectangleRequest
@@ -31,7 +33,7 @@ func TrackRectangleRequestFromID(id objc.ID) *TrackRectangleRequest {
 	return &TrackRectangleRequest{inner: raw.VNTrackRectangleRequestFromID(id)}
 }
 
-// @brief Create a new rectangle tracking request with rectangle observation. @param    observation          Rectangle observation with bounding box and rectangle corners location info.
+// Creates a new rectangle tracking request with a rectangle observation.
 //
 // NewTrackRectangleRequestWithRectangleObservation creates a new [TrackRectangleRequest].
 func NewTrackRectangleRequestWithRectangleObservation(observation *raw.VNRectangleObservation) *TrackRectangleRequest {
@@ -40,7 +42,7 @@ func NewTrackRectangleRequestWithRectangleObservation(observation *raw.VNRectang
 	return &TrackRectangleRequest{inner: raw.VNTrackRectangleRequestFromID(_id)}
 }
 
-// @brief Create a new rectangle tracking request with rectangle observation. @param    observation          Rectangle observation with bounding box and rectangle corners location info. @param    completionHandler    The block that is invoked when the request has been performed.
+// Creates a new rectangle tracking request with a rectangle observation.
 //
 // NewTrackRectangleRequestWithRectangleObservationCompletionHandler creates a new [TrackRectangleRequest].
 func NewTrackRectangleRequestWithRectangleObservationCompletionHandler(observation *raw.VNRectangleObservation, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TrackRectangleRequest {
@@ -49,7 +51,7 @@ func NewTrackRectangleRequestWithRectangleObservationCompletionHandler(observati
 	return &TrackRectangleRequest{inner: raw.VNTrackRectangleRequestFromID(_id)}
 }
 
-// @property property inputObservation @abstract The observation object that defines a region to track. Providing an observation not returned from a tracker (e.g. user-defined, or from a detector) begins a new tracker for the sequence. Providing an observation that was returned from a tracker continues the use of that tracker, to track the region to the next frame. In general, unless documented in the request's documentation, the rectangle must be defined in normalized coordinates (both dimensions normalized to [0,1] with the origin at the lower-left corner).
+// The observation object defining a region to track.
 //
 // WithInputObservation sets the inputObservation property and returns the receiver for chaining.
 func (x *TrackRectangleRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackRectangleRequest {
@@ -57,7 +59,7 @@ func (x *TrackRectangleRequest) WithInputObservation(inputObservation DetectedOb
 	return x
 }
 
-// @property property trackingLevel @abstract Tracking level allows tuning tracking algorithm to prefer speed (VNRequestTrackingLevelFast) vs. tracking object location accuracy (VNRequestTrackingLevelAccurate). This property has no effect on general purpose object tracker (VNTrackObjectRequest) revision 2 (VNTrackObjectRequestRevision2)
+// A value for specifying whether to prioritize speed or location accuracy.
 //
 // WithTrackingLevel sets the trackingLevel property and returns the receiver for chaining.
 func (x *TrackRectangleRequest) WithTrackingLevel(trackingLevel VNRequestTrackingLevel) *TrackRectangleRequest {
@@ -65,7 +67,7 @@ func (x *TrackRectangleRequest) WithTrackingLevel(trackingLevel VNRequestTrackin
 	return x
 }
 
-// @property property lastFrame @abstract This property allows marking the last frame for tracking using current tracker. If set to YES, the results for this frame will be processed and returned and the current tracker will be released to the pool of available trackers
+// A Boolean that indicates the last frame in a tracking sequence.
 //
 // WithLastFrame sets the lastFrame property and returns the receiver for chaining.
 func (x *TrackRectangleRequest) WithLastFrame(lastFrame bool) *TrackRectangleRequest {
@@ -73,7 +75,7 @@ func (x *TrackRectangleRequest) WithLastFrame(lastFrame bool) *TrackRectangleReq
 	return x
 }
 
-// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+// The region of the image in which Vision will perform the request.
 //
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *TrackRectangleRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackRectangleRequest {
@@ -81,7 +83,7 @@ func (x *TrackRectangleRequest) WithRegionOfInterest(regionOfInterest corefounda
 	return x
 }
 
-// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+// A hint to minimize the resource burden of the request.
 //
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *TrackRectangleRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackRectangleRequest {
@@ -89,7 +91,7 @@ func (x *TrackRectangleRequest) WithPreferBackgroundProcessing(preferBackgroundP
 	return x
 }
 
-// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+// A Boolean signifying that the Vision request should execute exclusively on the CPU.
 //
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *TrackRectangleRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackRectangleRequest {
@@ -97,7 +99,7 @@ func (x *TrackRectangleRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackRectangl
 	return x
 }
 
-// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+// The specific algorithm or implementation revision that’s used to perform the request.
 //
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *TrackRectangleRequest) WithRevision(revision uint) *TrackRectangleRequest {

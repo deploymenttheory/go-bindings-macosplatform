@@ -60,10 +60,13 @@ func (o *MTRModeSelectClusterModeOptionStruct) SetMode(mode *foundation.NSNumber
 }
 
 func (o *MTRModeSelectClusterModeOptionStruct) SemanticTags() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRModeSelectClusterModeOptionStructSelSemanticTags)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRModeSelectClusterModeOptionStructSelSemanticTags)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRModeSelectClusterModeOptionStruct) SetSemanticTags(semanticTags *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRModeSelectClusterModeOptionStructSelSetSemanticTags, semanticTags)
+	o.Ptr().Send(_mTRModeSelectClusterModeOptionStructSelSetSemanticTags, semanticTags.Ptr())
 }

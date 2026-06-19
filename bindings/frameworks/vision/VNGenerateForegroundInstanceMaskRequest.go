@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request that generates an instance mask of noticable objects to separate from the background.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vngenerateforegroundinstancemaskrequest
 type VNGenerateForegroundInstanceMaskRequest struct {
 	VNImageBasedRequest

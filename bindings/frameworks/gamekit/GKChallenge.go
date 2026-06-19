@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A challenge issued by the local player to another player.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkchallenge
 // Deprecated: since macOS 26.0.
 type GKChallenge struct {
@@ -42,7 +44,7 @@ func GKChallengeFromID(id objc.ID) *GKChallenge {
 	return o
 }
 
-// Query challenges for the current game issued to the local player -- equivalent GKChallenge objects are not guaranteed to be pointer equivalent across calls, but equal GKChallenge objects will have equal hashes
+// Loads the list of outstanding challenges.
 // Deprecated: since macOS 26.0.
 func GKChallengeLoadReceivedChallengesWithCompletionHandler(completionHandler func(*foundation.NSArray[*GKChallenge], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -58,7 +60,7 @@ func GKChallengeLoadReceivedChallengesWithCompletionHandler(completionHandler fu
 	objc.ID(_clsGKChallenge).Send(_gKChallengeSelLoadReceivedChallengesWithCompletionHandler, __block_completionHandler)
 }
 
-// Any GKChallenge object to be declined must be in a state of GKChallengeStatePending in order to be successfully cancelled
+// Declines a challenge that another player issues to the local player.
 func (o *GKChallenge) Decline() {
 	o.Ptr().Send(_gKChallengeSelDecline)
 }

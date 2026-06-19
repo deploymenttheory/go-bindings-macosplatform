@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of the grammatical properties of a string.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmorphology
 type NSMorphology struct {
 	NSObject
@@ -122,6 +124,7 @@ func (o *NSMorphology) SetDefiniteness(definiteness NSGrammaticalDefiniteness) {
 	o.Ptr().Send(_nSMorphologySelSetDefiniteness, definiteness)
 }
 
+// Returns any custom pronoun behavior this morphology applies to the given language.
 // Deprecated: Use NSTermOfAddress instead
 func (o *NSMorphology) CustomPronounForLanguage(language *NSString) *NSMorphologyCustomPronoun {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMorphologySelCustomPronounForLanguage, language.Ptr())
@@ -131,6 +134,7 @@ func (o *NSMorphology) CustomPronounForLanguage(language *NSString) *NSMorpholog
 	return NSMorphologyCustomPronounFromID(_ret)
 }
 
+// Sets a custom pronoun behavior for this morphology to apply to the given language.
 // Deprecated: Use NSTermOfAddress instead
 func (o *NSMorphology) SetCustomPronounForLanguageError(features *NSMorphologyCustomPronoun, language *NSString) (bool, error) {
 	var _nsErr uintptr

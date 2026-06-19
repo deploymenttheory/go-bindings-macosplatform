@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable representation of the postal address for a contact.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnpostaladdress
 type CNPostalAddress struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func CNPostalAddressFromID(id objc.ID) *CNPostalAddress {
 	return o
 }
 
-// Returns a user displayable property name.
+// Returns the localized name for the property associated with the specified key.
 func CNPostalAddressLocalizedStringForKey(key *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNPostalAddress), _cNPostalAddressSelLocalizedStringForKey, key.Ptr())
 	if _ret != 0 {

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A PDFSelection object identifies a contiguous or noncontiguous selection of text in a PDF document.
+//
 // Selection wraps [raw.PDFSelection] with a fluent Go API.
 type Selection struct {
 	inner *raw.PDFSelection
@@ -33,6 +35,8 @@ func SelectionFromID(id objc.ID) *Selection {
 	return &Selection{inner: raw.PDFSelectionFromID(id)}
 }
 
+// Returns an empty PDFSelection object.
+//
 // NewSelectionWithDocument creates a new [Selection].
 func NewSelectionWithDocument(document *raw.PDFDocument) *Selection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFSelection")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewSelectionWithDocument(document *raw.PDFDocument) *Selection {
 	return &Selection{inner: raw.PDFSelectionFromID(_id)}
 }
 
+// Returns the bounds of the selection on the specified page.
+//
 // BoundsForPage calls the underlying BoundsForPage.
 func (x *Selection) BoundsForPage(page *raw.PDFPage) corefoundation.CGRect {
 	return x.inner.BoundsForPage(page)
@@ -55,6 +61,8 @@ func (x *Selection) RangeAtIndexOnPage(index uint, page *raw.PDFPage) foundation
 	return x.inner.RangeAtIndexOnPage(index, page)
 }
 
+// Returns an array of selections, one for each line of text covered by the receiver.
+//
 // SelectionsByLine returns the collection as a Go slice.
 func (x *Selection) SelectionsByLine() []*Selection {
 	arr := x.inner.SelectionsByLine()
@@ -66,21 +74,29 @@ func (x *Selection) SelectionsByLine() []*Selection {
 	})
 }
 
+// Adds the specified selection to the receiving selection.
+//
 // AddSelection calls the underlying AddSelection.
 func (x *Selection) AddSelection(selection *raw.PDFSelection) {
 	x.inner.AddSelection(selection)
 }
 
+// Adds the specified array of selections to the receiving selection.
+//
 // AddSelections calls the underlying AddSelections.
 func (x *Selection) AddSelections(selections *foundation.NSArray[*raw.PDFSelection]) {
 	x.inner.AddSelections(selections)
 }
 
+// Extends the selection from its end toward the end of the document.
+//
 // ExtendSelectionAtEnd calls the underlying ExtendSelectionAtEnd.
 func (x *Selection) ExtendSelectionAtEnd(succeed int) {
 	x.inner.ExtendSelectionAtEnd(succeed)
 }
 
+// Extends the selection from its start toward the beginning of the document.
+//
 // ExtendSelectionAtStart calls the underlying ExtendSelectionAtStart.
 func (x *Selection) ExtendSelectionAtStart(precede int) {
 	x.inner.ExtendSelectionAtStart(precede)
@@ -91,11 +107,15 @@ func (x *Selection) ExtendSelectionForLineBoundaries() {
 	x.inner.ExtendSelectionForLineBoundaries()
 }
 
+// Calls drawForPage:withBox:active: with a default value for box parameter.
+//
 // DrawForPageActive calls the underlying DrawForPageActive.
 func (x *Selection) DrawForPageActive(page *raw.PDFPage, active bool) {
 	x.inner.DrawForPageActive(page, active)
 }
 
+// Draws the selection relative to the origin of the specified box in page space.
+//
 // DrawForPageWithBoxActive calls the underlying DrawForPageWithBoxActive.
 func (x *Selection) DrawForPageWithBoxActive(page *raw.PDFPage, box PDFDisplayBox, active bool) {
 	x.inner.DrawForPageWithBoxActive(page, raw.PDFDisplayBox(box), active)

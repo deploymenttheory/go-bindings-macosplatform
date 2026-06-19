@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class for all the query classes in HealthKit.
+//
 // Query wraps [raw.HKQuery] with a fluent Go API.
 type Query struct {
 	inner *raw.HKQuery

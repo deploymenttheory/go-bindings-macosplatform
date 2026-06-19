@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a batch normalization kernel.
+//
 // CNNBatchNormalizationNode wraps [raw.MPSCNNBatchNormalizationNode] with a fluent Go API.
 type CNNBatchNormalizationNode struct {
 	inner *raw.MPSCNNBatchNormalizationNode

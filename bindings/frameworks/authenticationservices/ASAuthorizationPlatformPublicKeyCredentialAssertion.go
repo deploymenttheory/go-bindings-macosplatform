@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents the platform credential assertion type.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialassertion
 type ASAuthorizationPlatformPublicKeyCredentialAssertion struct {
 	foundation.NSObject

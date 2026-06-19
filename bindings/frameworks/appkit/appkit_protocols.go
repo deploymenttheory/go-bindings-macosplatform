@@ -1091,7 +1091,7 @@ type NSUserInterfaceItemIdentification interface {
 
 // NSUserInterfaceItemSearching wraps the ObjC protocol NSUserInterfaceItemSearching.
 type NSUserInterfaceItemSearching interface {
-	SearchForItemsWithSearchStringResultLimitMatchedItemHandler(searchString *foundation.NSString, resultLimit int, handleMatchedItems objc.Block)
+	SearchForItemsWithSearchStringResultLimitMatchedItemHandler(searchString *foundation.NSString, resultLimit int, handleMatchedItems func(*foundation.NSArray[objc.ID]))
 	LocalizedTitlesForItem(item objc.ID) *foundation.NSArray[*foundation.NSString]
 }
 

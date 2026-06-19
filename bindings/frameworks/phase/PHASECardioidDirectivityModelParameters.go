@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that directs sound in a heart-shaped curve surrounding a sound source.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasecardioiddirectivitymodelparameters
 type PHASECardioidDirectivityModelParameters struct {
 	PHASEDirectivityModelParameters
@@ -31,6 +33,7 @@ func PHASECardioidDirectivityModelParametersFromID(id objc.ID) *PHASECardioidDir
 	return o
 }
 
+// Creates an object that directs sound in a heart-shaped curve surrounding a sound source.
 func (o *PHASECardioidDirectivityModelParameters) InitWithSubbandParameters(subbandParameters *foundation.NSArray[*PHASECardioidDirectivityModelSubbandParameters]) *PHASECardioidDirectivityModelParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASECardioidDirectivityModelParametersSelInitWithSubbandParameters, subbandParameters.Ptr())
 	if _ret != 0 {

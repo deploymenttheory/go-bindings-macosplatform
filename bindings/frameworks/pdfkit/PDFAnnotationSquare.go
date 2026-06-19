@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A rectangle annotation on a page.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfannotationsquare
 type PDFAnnotationSquare struct {
 	PDFAnnotation

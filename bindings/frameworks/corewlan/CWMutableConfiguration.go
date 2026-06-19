@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Encapsulates a mutable configuration for an AirPort WLAN interface.
+//
 // Apple documentation: https://developer.apple.com/documentation/corewlan/cwmutableconfiguration
 type CWMutableConfiguration struct {
 	CWConfiguration

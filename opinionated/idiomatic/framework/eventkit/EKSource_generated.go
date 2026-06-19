@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract superclass that represents the account a calendar belongs to.
+//
 // Source wraps [raw.EKSource] with a fluent Go API.
 type Source struct {
 	inner *raw.EKSource
@@ -37,7 +39,7 @@ func NewSource() *Source {
 	return &Source{inner: raw.EKSourceFromID(_id)}
 }
 
-// @method      calendarsForEntityType @abstract    Returns the calendars that belong to this source that support a given entity type (reminders, events)
+// Returns the calendars that belong to this source object that support a particular entity type.
 //
 // CalendarsForEntityType calls the underlying CalendarsForEntityType.
 func (x *Source) CalendarsForEntityType(entityType EKEntityType) *foundation.NSSet[*raw.EKCalendar] {

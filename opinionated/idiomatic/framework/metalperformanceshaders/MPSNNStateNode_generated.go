@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A placeholder node denoting the position in the graph of a state object.
+//
 // NNStateNode wraps [raw.MPSNNStateNode] with a fluent Go API.
 type NNStateNode struct {
 	inner *raw.MPSNNStateNode

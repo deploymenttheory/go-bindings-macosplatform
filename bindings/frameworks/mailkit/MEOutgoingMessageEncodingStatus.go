@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains information about security measures the user can apply when composing a message.
+//
 // Apple documentation: https://developer.apple.com/documentation/mailkit/meoutgoingmessageencodingstatus
 type MEOutgoingMessageEncodingStatus struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func MEOutgoingMessageEncodingStatusFromID(id objc.ID) *MEOutgoingMessageEncodin
 	return o
 }
 
+// Creates an object that describes whether the message security handler can encrypt or sign an outgoing message.
 func (o *MEOutgoingMessageEncodingStatus) InitWithCanSignCanEncryptSecurityErrorAddressesFailingEncryption(canSign bool, canEncrypt bool, securityError unsafe.Pointer, addressesFailingEncryption *foundation.NSArray[*MEEmailAddress]) *MEOutgoingMessageEncodingStatus {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEOutgoingMessageEncodingStatusSelInitWithCanSignCanEncryptSecurityErrorAddressesFailingEncryption, canSign, canEncrypt, securityError, addressesFailingEncryption.Ptr())
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that normalizes a batch of inputs.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcbatchnormalizationlayer
 type MLCBatchNormalizationLayer struct {
 	MLCLayer
@@ -39,7 +41,7 @@ func MLCBatchNormalizationLayerFromID(id objc.ID) *MLCBatchNormalizationLayer {
 	return o
 }
 
-// @abstract   Create a batch normalization layer @param featureChannelCount The number of feature channels @param mean The mean tensor @param variance The variance tensor @param beta The beta tensor @param gamma The gamma tensor @param varianceEpsilon The  epslion value @return     A new batch normalization layer.
+// Creates a batch normalization layer with the number of feature channels, tensors, and variance epsilon you specify.
 func MLCBatchNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilon(featureChannelCount uint, mean *MLCTensor, variance *MLCTensor, beta *MLCTensor, gamma *MLCTensor, varianceEpsilon float32) *MLCBatchNormalizationLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCBatchNormalizationLayer), _mLCBatchNormalizationLayerSelLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilon, featureChannelCount, mean.Ptr(), variance.Ptr(), beta.Ptr(), gamma.Ptr(), varianceEpsilon)
 	if _ret != 0 {
@@ -48,7 +50,7 @@ func MLCBatchNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGamma
 	return MLCBatchNormalizationLayerFromID(_ret)
 }
 
-// @abstract   Create a batch normalization layer @param featureChannelCount The number of feature channels @param mean The mean tensor @param variance The variance tensor @param beta The beta tensor @param gamma The gamma tensor @param varianceEpsilon The  epslion value @param momentum The  momentum value for the running mean and variance computation @return A new batch normalization layer.
+// Creates a batch normalization layer with the number of feature channels, tensors, variance epsilon, and momentum you specify.
 func MLCBatchNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum(featureChannelCount uint, mean *MLCTensor, variance *MLCTensor, beta *MLCTensor, gamma *MLCTensor, varianceEpsilon float32, momentum float32) *MLCBatchNormalizationLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCBatchNormalizationLayer), _mLCBatchNormalizationLayerSelLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum, featureChannelCount, mean.Ptr(), variance.Ptr(), beta.Ptr(), gamma.Ptr(), varianceEpsilon, momentum)
 	if _ret != 0 {

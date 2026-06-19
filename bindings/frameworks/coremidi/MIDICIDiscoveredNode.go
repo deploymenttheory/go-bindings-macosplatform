@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A discovered MIDI-CI node that represents a MIDI source and destination that respond to capability inquiries.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremidi/midicidiscoverednode
 type MIDICIDiscoveredNode struct {
 	foundation.NSObject

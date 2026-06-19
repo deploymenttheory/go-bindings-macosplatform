@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// This class represents the artwork for a media item.
+//
 // Apple documentation: https://developer.apple.com/documentation/ituneslibrary/itlibartwork
 type ITLibArtwork struct {
 	foundation.NSObject

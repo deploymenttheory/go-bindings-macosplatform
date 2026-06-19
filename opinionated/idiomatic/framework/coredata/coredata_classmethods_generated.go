@@ -20,7 +20,7 @@ func BatchInsertRequestWithEntityNameObjects(entityName string, dictionaries *fo
 }
 
 // BatchInsertRequestWithEntityNameDictionaryHandler calls the underlying NSBatchInsertRequestBatchInsertRequestWithEntityNameDictionaryHandler.
-func BatchInsertRequestWithEntityNameDictionaryHandler(entityName string, handler objc.Block) *BatchInsertRequest {
+func BatchInsertRequestWithEntityNameDictionaryHandler(entityName string, handler func(*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) bool) *BatchInsertRequest {
 	_r := raw.NSBatchInsertRequestBatchInsertRequestWithEntityNameDictionaryHandler(foundation.NSStringStringWithUTF8String(entityName), handler)
 	if _r == nil {
 		return nil

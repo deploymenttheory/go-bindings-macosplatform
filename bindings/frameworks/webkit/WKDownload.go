@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the download of a web resource.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkdownload
 type WKDownload struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func WKDownloadFromID(id objc.ID) *WKDownload {
 	return o
 }
 
+// Cancels the download, and optionally captures data so that you can resume the download later.
 func (o *WKDownload) Cancel(completionHandler func(*foundation.NSData)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

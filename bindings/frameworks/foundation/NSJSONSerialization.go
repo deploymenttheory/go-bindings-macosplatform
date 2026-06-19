@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that converts between JSON and the equivalent Foundation objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsjsonserialization
 type NSJSONSerialization struct {
 	NSObject

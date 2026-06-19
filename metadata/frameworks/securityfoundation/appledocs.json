@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "framework": "SecurityFoundation",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SFAuthorization": {
+      "doc": "A class that allows you to restrict a user’s access to particular features in your Mac app or daemon.",
+      "url": "https://developer.apple.com/documentation/securityfoundation/sfauthorization"
+    }
+  },
+  "methods": {
+    "SFAuthorization": {
+      "+authorization": {
+        "doc": "Returns an authorization object initialized with a default environment, flags, and rights.",
+        "url": "https://developer.apple.com/documentation/securityfoundation/sfauthorization/authorization()"
+      },
+      "+authorizationWithFlags:rights:environment:": {
+        "doc": "Returns an authorization object initialized with the specified flags, rights and environment.",
+        "url": "https://developer.apple.com/documentation/securityfoundation/sfauthorization/authorization(with:rights:environment:)"
+      },
+      "-authorizationRef": {
+        "doc": "Returns the authorization reference for this object.",
+        "url": "https://developer.apple.com/documentation/securityfoundation/sfauthorization/authorizationref()"
+      },
+      "-init": {
+        "doc": "Initializes an authorization object with default environment, flags, and rights.",
+        "url": "https://developer.apple.com/documentation/securityfoundation/sfauthorization/init()"
+      },
+      "-initWithFlags:rights:environment:": {
+        "doc": "Initializes an authorization object with the specified flags, rights, and environment.",
+        "url": "https://developer.apple.com/documentation/securityfoundation/sfauthorization/init(flags:rights:environment:)"
+      },
+      "-invalidateCredentials": {
+        "doc": "Prevents any rights that were obtained by this object from being preserved.",
+        "url": "https://developer.apple.com/documentation/securityfoundation/sfauthorization/invalidatecredentials()"
+      },
+      "-obtainWithRight:flags:error:": {
+        "doc": "Authorizes and preauthorizes one specific right.",
+        "url": "https://developer.apple.com/documentation/securityfoundation/sfauthorization/obtain(withright:flags:)"
+      },
+      "-obtainWithRights:flags:environment:authorizedRights:error:": {
+        "doc": "Authorizes and preauthorizes rights to access a privileged operation and returns the granted rights.",
+        "url": "https://developer.apple.com/documentation/securityfoundation/sfauthorization/obtain(withrights:flags:environment:authorizedrights:)"
+      },
+      "-permitWithRight:flags:": {
+        "doc": "Authorizes and preauthorizes one specific right.",
+        "url": "https://developer.apple.com/documentation/securityfoundation/sfauthorization/permitwithright:flags:"
+      },
+      "-permitWithRights:flags:environment:authorizedRights:": {
+        "doc": "Authorizes and preauthorizes rights to access a privileged operation and returns the granted rights.",
+        "url": "https://developer.apple.com/documentation/securityfoundation/sfauthorization/permitwithrights:flags:environment:authorizedrights:"
+      }
+    }
+  }
+}

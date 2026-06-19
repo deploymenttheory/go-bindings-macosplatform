@@ -291,6 +291,7 @@ func (e MIDICIPropertyExchangeMessageType) String() string {
 	}
 }
 
+// MIDI status types.
 type MIDICVStatus uint32
 
 const (
@@ -348,6 +349,7 @@ func (e MIDICVStatus) String() string {
 	}
 }
 
+// Supported MIDI message types.
 type MIDIMessageType uint32
 
 const (
@@ -433,16 +435,24 @@ func (e MIDINoteAttribute) String() string {
 	}
 }
 
+// The types of state changes the system supports.
 type MIDINotificationMessageID int64
 
 const (
-	KMIDIMsgSetupChanged           MIDINotificationMessageID = 1
-	KMIDIMsgObjectAdded            MIDINotificationMessageID = 2
-	KMIDIMsgObjectRemoved          MIDINotificationMessageID = 3
-	KMIDIMsgPropertyChanged        MIDINotificationMessageID = 4
+	// Some aspect of the current MIDI setup changed.
+	KMIDIMsgSetupChanged MIDINotificationMessageID = 1
+	// The system added a device, entity, or endpoint.
+	KMIDIMsgObjectAdded MIDINotificationMessageID = 2
+	// The system removed a device, entity, or endpoint.
+	KMIDIMsgObjectRemoved MIDINotificationMessageID = 3
+	// An object’s property value changed.
+	KMIDIMsgPropertyChanged MIDINotificationMessageID = 4
+	// The system created or disposed of a persistent MIDI Thru connection.
 	KMIDIMsgThruConnectionsChanged MIDINotificationMessageID = 5
+	// The system changed a serial port owner.
 	KMIDIMsgSerialPortOwnerChanged MIDINotificationMessageID = 6
-	KMIDIMsgIOError                MIDINotificationMessageID = 7
+	// A driver I/O error occurred.
+	KMIDIMsgIOError MIDINotificationMessageID = 7
 )
 
 func (e MIDINotificationMessageID) String() string {
@@ -466,17 +476,27 @@ func (e MIDINotificationMessageID) String() string {
 	}
 }
 
+// The MIDI object types that the system supports.
 type MIDIObjectType int64
 
 const (
-	KMIDIObjectType_Other               MIDIObjectType = -1
-	KMIDIObjectType_Device              MIDIObjectType = 0
-	KMIDIObjectType_Entity              MIDIObjectType = 1
-	KMIDIObjectType_Source              MIDIObjectType = 2
-	KMIDIObjectType_Destination         MIDIObjectType = 3
-	KMIDIObjectType_ExternalDevice      MIDIObjectType = 16
-	KMIDIObjectType_ExternalEntity      MIDIObjectType = 17
-	KMIDIObjectType_ExternalSource      MIDIObjectType = 18
+	// A MIDI object with an undefined type.
+	KMIDIObjectType_Other MIDIObjectType = -1
+	// A MIDI device.
+	KMIDIObjectType_Device MIDIObjectType = 0
+	// A MIDI entity.
+	KMIDIObjectType_Entity MIDIObjectType = 1
+	// A MIDI source.
+	KMIDIObjectType_Source MIDIObjectType = 2
+	// A MIDI destination.
+	KMIDIObjectType_Destination MIDIObjectType = 3
+	// An external device.
+	KMIDIObjectType_ExternalDevice MIDIObjectType = 16
+	// An external entity.
+	KMIDIObjectType_ExternalEntity MIDIObjectType = 17
+	// An external source.
+	KMIDIObjectType_ExternalSource MIDIObjectType = 18
+	// An external destination.
 	KMIDIObjectType_ExternalDestination MIDIObjectType = 19
 )
 
@@ -543,6 +563,7 @@ func (e MIDIProgramChangeOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Specifies a MIDI protocol variant.
 type MIDIProtocolID int64
 
 const (
@@ -561,6 +582,7 @@ func (e MIDIProtocolID) String() string {
 	}
 }
 
+// MIDI System Exclusive (SysEx) types.
 type MIDISysExStatus uint32
 
 const (
@@ -591,6 +613,7 @@ func (e MIDISysExStatus) String() string {
 	}
 }
 
+// MIDI System status types.
 type MIDISystemStatus uint32
 
 const (
@@ -640,14 +663,21 @@ func (e MIDISystemStatus) String() string {
 	}
 }
 
+// A set of values that indicate how to interpret control numbers.
 type MIDITransformControlType int64
 
 const (
-	KMIDIControlType_7Bit      MIDITransformControlType = 0
-	KMIDIControlType_14Bit     MIDITransformControlType = 1
-	KMIDIControlType_7BitRPN   MIDITransformControlType = 2
-	KMIDIControlType_14BitRPN  MIDITransformControlType = 3
-	KMIDIControlType_7BitNRPN  MIDITransformControlType = 4
+	// A 7-bit control type.
+	KMIDIControlType_7Bit MIDITransformControlType = 0
+	// A 14-bit control type.
+	KMIDIControlType_14Bit MIDITransformControlType = 1
+	// A 7-bit Registered Parameter Number (RPN).
+	KMIDIControlType_7BitRPN MIDITransformControlType = 2
+	// A 14-bit Registered Parameter Number (RPN).
+	KMIDIControlType_14BitRPN MIDITransformControlType = 3
+	// A 7-bit Nonregistered Parameter Number (RPN).
+	KMIDIControlType_7BitNRPN MIDITransformControlType = 4
+	// A 14-bit Nonregistered Parameter Number (RPN).
 	KMIDIControlType_14BitNRPN MIDITransformControlType = 5
 )
 
@@ -670,17 +700,26 @@ func (e MIDITransformControlType) String() string {
 	}
 }
 
+// Values that specify the type of MIDI transformation.
 type MIDITransformType int64
 
 const (
-	KMIDITransform_None       MIDITransformType = 0
-	KMIDITransform_FilterOut  MIDITransformType = 1
+	// No transformation.
+	KMIDITransform_None MIDITransformType = 0
+	// A transformation that filters out an event type.
+	KMIDITransform_FilterOut MIDITransformType = 1
+	// A transformation that changes a specified control number to a supplied parameter value.
 	KMIDITransform_MapControl MIDITransformType = 2
-	KMIDITransform_Add        MIDITransformType = 8
-	KMIDITransform_Scale      MIDITransformType = 9
-	KMIDITransform_MinValue   MIDITransformType = 10
-	KMIDITransform_MaxValue   MIDITransformType = 11
-	KMIDITransform_MapValue   MIDITransformType = 12
+	// A transform that adds a parameter value.
+	KMIDITransform_Add MIDITransformType = 8
+	// A transform that multiplies by the specified parameter value.
+	KMIDITransform_Scale MIDITransformType = 9
+	// A transform that sets the minimum value to the specified parameter value.
+	KMIDITransform_MinValue MIDITransformType = 10
+	// A transform that sets the maximum value to the specified parameter value.
+	KMIDITransform_MaxValue MIDITransformType = 11
+	// A transform that maps one value to another.
+	KMIDITransform_MapValue MIDITransformType = 12
 )
 
 func (e MIDITransformType) String() string {

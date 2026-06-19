@@ -296,12 +296,16 @@ func (e Acl_type_t) String() string {
 	}
 }
 
+// The authorization states for a type of ARKit data.
 type Ar_authorization_status_t int64
 
 const (
+	// Permission for your app to use the associated kind of ARKit data is undetermined.
 	Ar_authorization_status_not_determined Ar_authorization_status_t = 0
-	Ar_authorization_status_allowed        Ar_authorization_status_t = 1
-	Ar_authorization_status_denied         Ar_authorization_status_t = 2
+	// Your app has permission to use the associated kind of ARKit data.
+	Ar_authorization_status_allowed Ar_authorization_status_t = 1
+	// Your app doesn’t have permission to use the associated kind of ARKit data.
+	Ar_authorization_status_denied Ar_authorization_status_t = 2
 )
 
 func (e Ar_authorization_status_t) String() string {
@@ -317,15 +321,17 @@ func (e Ar_authorization_status_t) String() string {
 	}
 }
 
+// The authorization types you can request from ARKit.
 type Ar_authorization_type_t int64
 
 const (
+	// There isn’t an authorization type.
 	Ar_authorization_type_none Ar_authorization_type_t = 0
-	// Authorization type used when requesting hand tracking. @see `ar_hand_tracking_provider_t`
+	// The authorization for access to detailed hand-tracking data.
 	Ar_authorization_type_hand_tracking Ar_authorization_type_t = 1
-	// Authorization type used when requesting: - Image tracking @see `ar_image_tracking_provider_t` - Plane detection @see `ar_plane_detection_provider_t` - Scene reconstruction @see `ar_scene_reconstruction_provider_t`
+	// The authorization for access to plane detection, scene reconstruction, and image tracking.
 	Ar_authorization_type_world_sensing Ar_authorization_type_t = 2
-	// Authorization type used when requesting: - Camera access @see `ar_camera_frame_provider_t`
+	// The authorization for camera access.
 	Ar_authorization_type_camera_access Ar_authorization_type_t = 8
 )
 
@@ -346,13 +352,18 @@ func (e Ar_authorization_type_t) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The possible states of a data provider.
 type Ar_data_provider_state_t int64
 
 const (
+	// The data provider has been created.
 	Ar_data_provider_state_initialized Ar_data_provider_state_t = 0
-	Ar_data_provider_state_running     Ar_data_provider_state_t = 1
-	Ar_data_provider_state_paused      Ar_data_provider_state_t = 2
-	Ar_data_provider_state_stopped     Ar_data_provider_state_t = 3
+	// The data provider is running.
+	Ar_data_provider_state_running Ar_data_provider_state_t = 1
+	// The data provider is paused.
+	Ar_data_provider_state_paused Ar_data_provider_state_t = 2
+	// The data provider is stopped.
+	Ar_data_provider_state_stopped Ar_data_provider_state_t = 3
 )
 
 func (e Ar_data_provider_state_t) String() string {
@@ -373,7 +384,9 @@ func (e Ar_data_provider_state_t) String() string {
 type Ar_device_anchor_query_status_t int64
 
 const (
+	// The device anchor query succeeded.
 	Ar_device_anchor_query_status_success Ar_device_anchor_query_status_t = 0
+	// The device anchor query failed.
 	Ar_device_anchor_query_status_failure Ar_device_anchor_query_status_t = 1
 )
 
@@ -388,12 +401,16 @@ func (e Ar_device_anchor_query_status_t) String() string {
 	}
 }
 
+// Values that describe the tracking states of a device anchor.
 type Ar_device_anchor_tracking_state_t int64
 
 const (
-	Ar_device_anchor_tracking_state_untracked           Ar_device_anchor_tracking_state_t = 0
+	// The value that indicates the framework isn’t tracking the anchor.
+	Ar_device_anchor_tracking_state_untracked Ar_device_anchor_tracking_state_t = 0
+	// The value that indicates that the framework is only currently tracking orientation.
 	Ar_device_anchor_tracking_state_orientation_tracked Ar_device_anchor_tracking_state_t = 1
-	Ar_device_anchor_tracking_state_tracked             Ar_device_anchor_tracking_state_t = 2
+	// The value that indicates that the framework is currently tracking both position and orientation.
+	Ar_device_anchor_tracking_state_tracked Ar_device_anchor_tracking_state_t = 2
 )
 
 func (e Ar_device_anchor_tracking_state_t) String() string {
@@ -409,12 +426,13 @@ func (e Ar_device_anchor_tracking_state_t) String() string {
 	}
 }
 
+// The error codes for ARKit sessions.
 type Ar_session_error_code_t int64
 
 const (
-	// Error code indicating that a data provider requires an authorization that has not been granted by the user.
+	// The error code for when a data provider is missing at least one authorization it needs to run.
 	Ar_session_error_code_data_provider_not_authorized Ar_session_error_code_t = 100
-	// Error code indicating a data provider has failed to run.
+	// The error code for when a data provider fails to run.
 	Ar_session_error_code_data_provider_failed_to_run Ar_session_error_code_t = 101
 )
 
@@ -429,12 +447,13 @@ func (e Ar_session_error_code_t) String() string {
 	}
 }
 
+// The error codes for errors that world tracking providers throw.
 type Ar_world_tracking_error_code_t int64
 
 const (
-	// Error code indicating that the maximum amount of world anchors have been added.
+	// The error code for when a world tracking provider reaches its world anchor limit.
 	Ar_world_tracking_error_code_anchor_max_limit_reached Ar_world_tracking_error_code_t = 201
-	// Error code indicating that a world anchor failed to be removed.
+	// The error code for when a world tracking provider can’t remove a world anchor.
 	Ar_world_tracking_error_code_remove_anchor_failed Ar_world_tracking_error_code_t = 202
 )
 

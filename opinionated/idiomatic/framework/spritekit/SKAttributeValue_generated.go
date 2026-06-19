@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A container for dynamic shader data associated with a node.
+//
 // AttributeValue wraps [raw.SKAttributeValue] with a fluent Go API.
 type AttributeValue struct {
 	inner *raw.SKAttributeValue
@@ -36,6 +38,8 @@ func NewAttributeValue() *AttributeValue {
 	return &AttributeValue{inner: raw.SKAttributeValueFromID(_id)}
 }
 
+// The receiver’s floating point value.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *AttributeValue) WithFloatValue(floatValue float32) *AttributeValue {
 	x.inner.SetFloatValue(floatValue)

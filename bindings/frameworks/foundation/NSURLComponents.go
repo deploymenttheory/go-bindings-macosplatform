@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that parses URLs into and constructs URLs from their constituent parts.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlcomponents
 type NSURLComponents struct {
 	NSObject
@@ -80,6 +82,7 @@ func NSURLComponentsFromID(id objc.ID) *NSURLComponents {
 	return o
 }
 
+// Creates a URL components object with all components left undefined.
 func (o *NSURLComponents) Init() *NSURLComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelInit)
 	if _ret != 0 {
@@ -88,6 +91,7 @@ func (o *NSURLComponents) Init() *NSURLComponents {
 	return NSURLComponentsFromID(_ret)
 }
 
+// Creates a URL components object by parsing the URL from an NSURL object.
 func (o *NSURLComponents) InitWithURLResolvingAgainstBaseURL(url *NSURL, resolve bool) *NSURLComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelInitWithURLResolvingAgainstBaseURL, url.Ptr(), resolve)
 	if _ret != 0 {
@@ -96,6 +100,7 @@ func (o *NSURLComponents) InitWithURLResolvingAgainstBaseURL(url *NSURL, resolve
 	return NSURLComponentsFromID(_ret)
 }
 
+// Returns a URL components object by parsing the URL from an NSURL object.
 func NSURLComponentsComponentsWithURLResolvingAgainstBaseURL(url *NSURL, resolve bool) *NSURLComponents {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLComponents), _nSURLComponentsSelComponentsWithURLResolvingAgainstBaseURL, url.Ptr(), resolve)
 	if _ret != 0 {
@@ -104,6 +109,7 @@ func NSURLComponentsComponentsWithURLResolvingAgainstBaseURL(url *NSURL, resolve
 	return NSURLComponentsFromID(_ret)
 }
 
+// Creates a URL components object by parsing a URL in string form.
 func (o *NSURLComponents) InitWithString(uRLString *NSString) *NSURLComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelInitWithString, uRLString.Ptr())
 	if _ret != 0 {
@@ -112,6 +118,7 @@ func (o *NSURLComponents) InitWithString(uRLString *NSString) *NSURLComponents {
 	return NSURLComponentsFromID(_ret)
 }
 
+// Returns a URL components object by parsing a URL in string form.
 func NSURLComponentsComponentsWithString(uRLString *NSString) *NSURLComponents {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLComponents), _nSURLComponentsSelComponentsWithString, uRLString.Ptr())
 	if _ret != 0 {
@@ -120,7 +127,7 @@ func NSURLComponentsComponentsWithString(uRLString *NSString) *NSURLComponents {
 	return NSURLComponentsFromID(_ret)
 }
 
-// Initializes an `NSURLComponents` with a URL string and the option to add (or skip) IDNA- and percent-encoding of invalid characters. If `encodingInvalidCharacters` is false, and the URL string is invalid according to RFC 3986, `nil` is returned. If `encodingInvalidCharacters` is true, `NSURLComponents` will try to encode the string to create a valid URL. If the URL string is still invalid after encoding, `nil` is returned. - Parameter URLString: The URL string. - Parameter encodingInvalidCharacters: True if `NSURLComponents` should try to encode an invalid URL string, false otherwise. - Returns: An `NSURLComponents` instance for a valid URL, or `nil` if the URL is invalid.
+// Creates a URL components instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
 func (o *NSURLComponents) InitWithStringEncodingInvalidCharacters(uRLString *NSString, encodingInvalidCharacters bool) *NSURLComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelInitWithStringEncodingInvalidCharacters, uRLString.Ptr(), encodingInvalidCharacters)
 	if _ret != 0 {
@@ -129,7 +136,7 @@ func (o *NSURLComponents) InitWithStringEncodingInvalidCharacters(uRLString *NSS
 	return NSURLComponentsFromID(_ret)
 }
 
-// Initializes and returns a newly created `NSURLComponents` with a URL string and the option to add (or skip) IDNA- and percent-encoding of invalid characters. If `encodingInvalidCharacters` is false, and the URL string is invalid according to RFC 3986, `nil` is returned. If `encodingInvalidCharacters` is true, `NSURLComponents` will try to encode the string to create a valid URL. If the URL string is still invalid after encoding, nil is returned. - Parameter URLString: The URL string. - Parameter encodingInvalidCharacters: True if `NSURLComponents` should try to encode an invalid URL string, false otherwise. - Returns: An `NSURLComponents` instance for a valid URL, or `nil` if the URL is invalid.
+// Returns a URL components instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
 func NSURLComponentsComponentsWithStringEncodingInvalidCharacters(uRLString *NSString, encodingInvalidCharacters bool) *NSURLComponents {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLComponents), _nSURLComponentsSelComponentsWithStringEncodingInvalidCharacters, uRLString.Ptr(), encodingInvalidCharacters)
 	if _ret != 0 {
@@ -138,6 +145,7 @@ func NSURLComponentsComponentsWithStringEncodingInvalidCharacters(uRLString *NSS
 	return NSURLComponentsFromID(_ret)
 }
 
+// Returns a URL object derived from the components object.
 func (o *NSURLComponents) URLRelativeToURL(baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelURLRelativeToURL, baseURL.Ptr())
 	if _ret != 0 {

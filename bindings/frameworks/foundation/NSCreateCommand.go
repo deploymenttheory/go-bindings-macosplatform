@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A command that creates a scriptable object.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nscreatecommand
 type NSCreateCommand struct {
 	NSScriptCommand
@@ -39,6 +41,9 @@ func (o *NSCreateCommand) CreateClassDescription() *NSScriptClassDescription {
 }
 
 func (o *NSCreateCommand) ResolvedKeyDictionary() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSCreateCommandSelResolvedKeyDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCreateCommandSelResolvedKeyDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }

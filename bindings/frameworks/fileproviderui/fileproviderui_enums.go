@@ -56,6 +56,7 @@ func (e EvCmd) String() string {
 	}
 }
 
+// The error codes for errors raised by the File Provider UI extension.
 type FPUIExtensionErrorCode uint64
 
 const (

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that enables an app’s contexts and the underlying persistent stores to work together.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator
 type NSPersistentStoreCoordinator struct {
 	foundation.NSObject
@@ -69,6 +71,7 @@ func NSPersistentStoreCoordinatorFromID(id objc.ID) *NSPersistentStoreCoordinato
 	return o
 }
 
+// Creates a persistent store coordinator with the specified managed object model.
 func (o *NSPersistentStoreCoordinator) InitWithManagedObjectModel(model *NSManagedObjectModel) *NSPersistentStoreCoordinator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelInitWithManagedObjectModel, model.Ptr())
 	if _ret != 0 {
@@ -77,6 +80,7 @@ func (o *NSPersistentStoreCoordinator) InitWithManagedObjectModel(model *NSManag
 	return NSPersistentStoreCoordinatorFromID(_ret)
 }
 
+// Returns the persistent store for the specified file URL.
 func (o *NSPersistentStoreCoordinator) PersistentStoreForURL(uRL *foundation.NSURL) *NSPersistentStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelPersistentStoreForURL, uRL.Ptr())
 	if _ret != 0 {
@@ -85,6 +89,7 @@ func (o *NSPersistentStoreCoordinator) PersistentStoreForURL(uRL *foundation.NSU
 	return NSPersistentStoreFromID(_ret)
 }
 
+// Returns the location of the provided persistent store.
 func (o *NSPersistentStoreCoordinator) URLForPersistentStore(store *NSPersistentStore) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelURLForPersistentStore, store.Ptr())
 	if _ret != 0 {
@@ -93,14 +98,16 @@ func (o *NSPersistentStoreCoordinator) URLForPersistentStore(store *NSPersistent
 	return foundation.NSURLFromID(_ret)
 }
 
+// Changes the location of the specified persistent store.
 func (o *NSPersistentStoreCoordinator) SetURLForPersistentStore(url *foundation.NSURL, store *NSPersistentStore) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentStoreCoordinatorSelSetURLForPersistentStore, url.Ptr(), store.Ptr())
 	return _ret
 }
 
+// Adds a specific type of persistent store at the provided location.
 func (o *NSPersistentStoreCoordinator) AddPersistentStoreWithTypeConfigurationURLOptionsError(storeType *foundation.NSString, configuration *foundation.NSString, storeURL *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) (*NSPersistentStore, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelAddPersistentStoreWithTypeConfigurationURLOptionsError, storeType.Ptr(), configuration.Ptr(), storeURL.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelAddPersistentStoreWithTypeConfigurationURLOptionsError, storeType.Ptr(), configuration.Ptr(), storeURL.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -110,6 +117,7 @@ func (o *NSPersistentStoreCoordinator) AddPersistentStoreWithTypeConfigurationUR
 	return NSPersistentStoreFromID(_ret), nil
 }
 
+// Adds a persistent store using the provided description.
 func (o *NSPersistentStoreCoordinator) AddPersistentStoreWithDescriptionCompletionHandler(storeDescription *NSPersistentStoreDescription, block func(*NSPersistentStoreDescription, unsafe.Pointer)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -124,6 +132,7 @@ func (o *NSPersistentStoreCoordinator) AddPersistentStoreWithDescriptionCompleti
 	o.Ptr().Send(_nSPersistentStoreCoordinatorSelAddPersistentStoreWithDescriptionCompletionHandler, storeDescription.Ptr(), __block_block)
 }
 
+// Removes the specified persistent store from the coordinator.
 func (o *NSPersistentStoreCoordinator) RemovePersistentStoreError(store *NSPersistentStore) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentStoreCoordinatorSelRemovePersistentStoreError, store.Ptr(), unsafe.Pointer(&_nsErr))
@@ -133,15 +142,21 @@ func (o *NSPersistentStoreCoordinator) RemovePersistentStoreError(store *NSPersi
 	return _ret, nil
 }
 
+// Updates the metadata for the specified persistent store.
 func (o *NSPersistentStoreCoordinator) SetMetadataForPersistentStore(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], store *NSPersistentStore) {
-	o.Ptr().Send(_nSPersistentStoreCoordinatorSelSetMetadataForPersistentStore, metadata, store.Ptr())
+	o.Ptr().Send(_nSPersistentStoreCoordinatorSelSetMetadataForPersistentStore, metadata.Ptr(), store.Ptr())
 }
 
+// Returns the metadata of the specified persistent store.
 func (o *NSPersistentStoreCoordinator) MetadataForPersistentStore(store *NSPersistentStore) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSPersistentStoreCoordinatorSelMetadataForPersistentStore, store.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelMetadataForPersistentStore, store.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
+// Returns the object identifier for the specified URI representation.
 func (o *NSPersistentStoreCoordinator) ManagedObjectIDForURIRepresentation(url *foundation.NSURL) *NSManagedObjectID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelManagedObjectIDForURIRepresentation, url.Ptr())
 	if _ret != 0 {
@@ -150,6 +165,7 @@ func (o *NSPersistentStoreCoordinator) ManagedObjectIDForURIRepresentation(url *
 	return NSManagedObjectIDFromID(_ret)
 }
 
+// Executes the specified request on each of the coordinator’s persistent stores.
 func (o *NSPersistentStoreCoordinator) ExecuteRequestWithContextError(request *NSPersistentStoreRequest, context_ *NSManagedObjectContext) (objc.ID, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelExecuteRequestWithContextError, request.Ptr(), context_.Ptr(), unsafe.Pointer(&_nsErr))
@@ -159,22 +175,28 @@ func (o *NSPersistentStoreCoordinator) ExecuteRequestWithContextError(request *N
 	return _ret, nil
 }
 
+// Registers a persistent store subclass using the specified store type identifier.
 func NSPersistentStoreCoordinatorRegisterStoreClassForStoreType(storeClass objc.Class, storeType *foundation.NSString) {
 	objc.ID(_clsNSPersistentStoreCoordinator).Send(_nSPersistentStoreCoordinatorSelRegisterStoreClassForStoreType, storeClass, storeType.Ptr())
 }
 
+// Returns the metadata of a specific type of persistent store at the provided location.
 func NSPersistentStoreCoordinatorMetadataForPersistentStoreOfTypeURLOptionsError(storeType *foundation.NSString, url *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelMetadataForPersistentStoreOfTypeURLOptionsError, storeType.Ptr(), url.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelMetadataForPersistentStoreOfTypeURLOptionsError, storeType.Ptr(), url.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret), nil
 }
 
+// Updates the metadata of a specific type of persistent store at the provided location.
 func NSPersistentStoreCoordinatorSetMetadataForPersistentStoreOfTypeURLOptionsError(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], storeType *foundation.NSString, url *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelSetMetadataForPersistentStoreOfTypeURLOptionsError, metadata, storeType.Ptr(), url.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelSetMetadataForPersistentStoreOfTypeURLOptionsError, metadata.Ptr(), storeType.Ptr(), url.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -183,7 +205,7 @@ func NSPersistentStoreCoordinatorSetMetadataForPersistentStoreOfTypeURLOptionsEr
 
 func NSPersistentStoreCoordinatorCachedModelForPersistentStoreAtURLOptionsError(url *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) (*NSManagedObjectModel, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelCachedModelForPersistentStoreAtURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelCachedModelForPersistentStoreAtURLOptionsError, url.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -195,14 +217,17 @@ func NSPersistentStoreCoordinatorCachedModelForPersistentStoreAtURLOptionsError(
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
 func NSPersistentStoreCoordinatorElementsDerivedFromExternalRecordURL(fileURL *foundation.NSURL) *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelElementsDerivedFromExternalRecordURL, fileURL.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelElementsDerivedFromExternalRecordURL, fileURL.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
 func (o *NSPersistentStoreCoordinator) ImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError(storeIdentifier *foundation.NSString, externalRecordsURL *foundation.NSURL, destinationURL *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID], storeType *foundation.NSString) (*NSPersistentStore, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError, storeIdentifier.Ptr(), externalRecordsURL.Ptr(), destinationURL.Ptr(), options, storeType.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError, storeIdentifier.Ptr(), externalRecordsURL.Ptr(), destinationURL.Ptr(), options.Ptr(), storeType.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -212,10 +237,11 @@ func (o *NSPersistentStoreCoordinator) ImportStoreWithIdentifierFromExternalReco
 	return NSPersistentStoreFromID(_ret), nil
 }
 
+// Changes the location and, if necessary, the store type of the specified persistent store.
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
 func (o *NSPersistentStoreCoordinator) MigratePersistentStoreToURLOptionsWithTypeError(store *NSPersistentStore, uRL *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID], storeType *foundation.NSString) (*NSPersistentStore, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelMigratePersistentStoreToURLOptionsWithTypeError, store.Ptr(), uRL.Ptr(), options, storeType.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelMigratePersistentStoreToURLOptionsWithTypeError, store.Ptr(), uRL.Ptr(), options.Ptr(), storeType.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -225,24 +251,27 @@ func (o *NSPersistentStoreCoordinator) MigratePersistentStoreToURLOptionsWithTyp
 	return NSPersistentStoreFromID(_ret), nil
 }
 
+// Deletes a specific type of persistent store at the provided location.
 func (o *NSPersistentStoreCoordinator) DestroyPersistentStoreAtURLWithTypeOptionsError(url *foundation.NSURL, storeType *foundation.NSString, options *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSPersistentStoreCoordinatorSelDestroyPersistentStoreAtURLWithTypeOptionsError, url.Ptr(), storeType.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _nSPersistentStoreCoordinatorSelDestroyPersistentStoreAtURLWithTypeOptionsError, url.Ptr(), storeType.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Replaces one persistent store with another.
 func (o *NSPersistentStoreCoordinator) ReplacePersistentStoreAtURLDestinationOptionsWithPersistentStoreFromURLSourceOptionsStoreTypeError(destinationURL *foundation.NSURL, destinationOptions *foundation.NSDictionary[objc.ID, objc.ID], sourceURL *foundation.NSURL, sourceOptions *foundation.NSDictionary[objc.ID, objc.ID], storeType *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSPersistentStoreCoordinatorSelReplacePersistentStoreAtURLDestinationOptionsWithPersistentStoreFromURLSourceOptionsStoreTypeError, destinationURL.Ptr(), destinationOptions, sourceURL.Ptr(), sourceOptions, storeType.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _nSPersistentStoreCoordinatorSelReplacePersistentStoreAtURLDestinationOptionsWithPersistentStoreFromURLSourceOptionsStoreTypeError, destinationURL.Ptr(), destinationOptions.Ptr(), sourceURL.Ptr(), sourceOptions.Ptr(), storeType.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Executes the provided closure asynchronously on the coordinator’s queue.
 func (o *NSPersistentStoreCoordinator) PerformBlock(block func()) {
 	var __block_block objc.Block
 	if block != nil {
@@ -254,6 +283,7 @@ func (o *NSPersistentStoreCoordinator) PerformBlock(block func()) {
 	o.Ptr().Send(_nSPersistentStoreCoordinatorSelPerformBlock, __block_block)
 }
 
+// Executes the provided closure on the coordinator’s queue and waits for it to finish.
 func (o *NSPersistentStoreCoordinator) PerformBlockAndWait(block func()) {
 	var __block_block objc.Block
 	if block != nil {
@@ -265,14 +295,16 @@ func (o *NSPersistentStoreCoordinator) PerformBlockAndWait(block func()) {
 	o.Ptr().Send(_nSPersistentStoreCoordinatorSelPerformBlockAndWait, __block_block)
 }
 
+// Returns a single persistent history token representing all of the specified stores.
 func (o *NSPersistentStoreCoordinator) CurrentPersistentHistoryTokenFromStores(stores *foundation.NSArray[objc.ID]) *NSPersistentHistoryToken {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelCurrentPersistentHistoryTokenFromStores, stores)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelCurrentPersistentHistoryTokenFromStores, stores.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSPersistentHistoryTokenFromID(_ret)
 }
 
+// Executes all remaining tasks of a deferred lightweight migration.
 func (o *NSPersistentStoreCoordinator) FinishDeferredLightweightMigration() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentStoreCoordinatorSelFinishDeferredLightweightMigration, unsafe.Pointer(&_nsErr))
@@ -282,6 +314,7 @@ func (o *NSPersistentStoreCoordinator) FinishDeferredLightweightMigration() (boo
 	return _ret, nil
 }
 
+// Executes a single pending task of a deferred lightweight migration.
 func (o *NSPersistentStoreCoordinator) FinishDeferredLightweightMigrationTask() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSPersistentStoreCoordinatorSelFinishDeferredLightweightMigrationTask, unsafe.Pointer(&_nsErr))
@@ -302,11 +335,14 @@ func (o *NSPersistentStoreCoordinator) ManagedObjectIDFromUTF8StringLength(utf8s
 // Deprecated: Use -metadataForPersistentStoreOfType:URL:options:error: and pass in an options dictionary matching addPersistentStoreWithType
 func NSPersistentStoreCoordinatorMetadataForPersistentStoreWithURLError(url *foundation.NSURL) (*foundation.NSDictionary[objc.ID, objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelMetadataForPersistentStoreWithURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelMetadataForPersistentStoreWithURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret), nil
 }
 
 // Deprecated: Use -performBlockAndWait: instead
@@ -328,17 +364,20 @@ func (o *NSPersistentStoreCoordinator) TryLock() bool {
 // Deprecated: Use -metadataForPersistentStoreOfType:URL:options:error: and pass in an options dictionary matching addPersistentStoreWithType
 func NSPersistentStoreCoordinatorMetadataForPersistentStoreOfTypeURLError(storeType *foundation.NSString, url *foundation.NSURL) (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelMetadataForPersistentStoreOfTypeURLError, storeType.Ptr(), url.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelMetadataForPersistentStoreOfTypeURLError, storeType.Ptr(), url.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret), nil
 }
 
 // Deprecated: Use  -setMetadata:forPersistentStoreOfType:URL:options:error: and pass in an options dictionary matching addPersistentStoreWithType
 func NSPersistentStoreCoordinatorSetMetadataForPersistentStoreOfTypeURLError(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], storeType *foundation.NSString, url *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelSetMetadataForPersistentStoreOfTypeURLError, metadata, storeType.Ptr(), url.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelSetMetadataForPersistentStoreOfTypeURLError, metadata.Ptr(), storeType.Ptr(), url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -348,7 +387,7 @@ func NSPersistentStoreCoordinatorSetMetadataForPersistentStoreOfTypeURLError(met
 // Deprecated: Please see the release notes and Core Data documentation.
 func NSPersistentStoreCoordinatorRemoveUbiquitousContentAndPersistentStoreAtURLOptionsError(storeURL *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelRemoveUbiquitousContentAndPersistentStoreAtURLOptionsError, storeURL.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelRemoveUbiquitousContentAndPersistentStoreAtURLOptionsError, storeURL.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -384,6 +423,9 @@ func (o *NSPersistentStoreCoordinator) SetName(name *foundation.NSString) {
 }
 
 func NSPersistentStoreCoordinatorRegisteredStoreTypes() *foundation.NSDictionary[*foundation.NSString, *foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSValue]](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelRegisteredStoreTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelRegisteredStoreTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSValue](_ret)
 }

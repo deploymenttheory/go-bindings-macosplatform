@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A remote peripheral device.
+//
 // Apple documentation: https://developer.apple.com/documentation/corebluetooth/cbperipheral
 type CBPeripheral struct {
 	CBPeer
@@ -48,63 +50,63 @@ func CBPeripheralFromID(id objc.ID) *CBPeripheral {
 	return o
 }
 
-// @method readRSSI @discussion While connected, retrieves the current RSSI of the link. @see        peripheral:didReadRSSI:error:
+// Retrieves the current RSSI value for the peripheral while connected to the central manager.
 func (o *CBPeripheral) ReadRSSI() {
 	o.Ptr().Send(_cBPeripheralSelReadRSSI)
 }
 
-// @method discoverServices: @param serviceUUIDs A list of <code>CBUUID</code> objects representing the service types to be discovered. If <i>nil</i>, all services will be discovered. @discussion			Discovers available service(s) on the peripheral. @see				peripheral:didDiscoverServices:
+// Discovers the specified services of the peripheral.
 func (o *CBPeripheral) DiscoverServices(serviceUUIDs *foundation.NSArray[*CBUUID]) {
 	o.Ptr().Send(_cBPeripheralSelDiscoverServices, serviceUUIDs.Ptr())
 }
 
-// @method discoverIncludedServices:forService: @param includedServiceUUIDs A list of <code>CBUUID</code> objects representing the included service types to be discovered. If <i>nil</i>, all of <i>service</i>s included services will be discovered, which is considerably slower and not recommended. @param service				A GATT service. @discussion					Discovers the specified included service(s) of <i>service</i>. @see						peripheral:didDiscoverIncludedServicesForService:error:
+// Discovers the specified included services of a previously-discovered service.
 func (o *CBPeripheral) DiscoverIncludedServicesForService(includedServiceUUIDs *foundation.NSArray[*CBUUID], service *CBService) {
 	o.Ptr().Send(_cBPeripheralSelDiscoverIncludedServicesForService, includedServiceUUIDs.Ptr(), service.Ptr())
 }
 
-// @method discoverCharacteristics:forService: @param characteristicUUIDs	A list of <code>CBUUID</code> objects representing the characteristic types to be discovered. If <i>nil</i>, all characteristics of <i>service</i> will be discovered. @param service				A GATT service. @discussion					Discovers the specified characteristic(s) of <i>service</i>. @see						peripheral:didDiscoverCharacteristicsForService:error:
+// Discovers the specified characteristics of a service.
 func (o *CBPeripheral) DiscoverCharacteristicsForService(characteristicUUIDs *foundation.NSArray[*CBUUID], service *CBService) {
 	o.Ptr().Send(_cBPeripheralSelDiscoverCharacteristicsForService, characteristicUUIDs.Ptr(), service.Ptr())
 }
 
-// @method readValueForCharacteristic: @param characteristic	A GATT characteristic. @discussion				Reads the characteristic value for <i>characteristic</i>. @see					peripheral:didUpdateValueForCharacteristic:error:
+// Retrieves the value of a specified characteristic.
 func (o *CBPeripheral) ReadValueForCharacteristic(characteristic *CBCharacteristic) {
 	o.Ptr().Send(_cBPeripheralSelReadValueForCharacteristic, characteristic.Ptr())
 }
 
-// @method		maximumWriteValueLengthForType: @discussion	The maximum amount of data, in bytes, that can be sent to a characteristic in a single write type. @see		writeValue:forCharacteristic:type:
+// The maximum amount of data, in bytes, you can send to a characteristic in a single write type.
 func (o *CBPeripheral) MaximumWriteValueLengthForType(type_ CBCharacteristicWriteType) uint {
 	_ret := objc.Send[uint](o.Ptr(), _cBPeripheralSelMaximumWriteValueLengthForType, type_)
 	return _ret
 }
 
-// @method writeValue:forCharacteristic:type: @param data				The value to write. @param characteristic	The characteristic whose characteristic value will be written. @param type				The type of write to be executed. @discussion				Writes <i>value</i> to <i>characteristic</i>'s characteristic value. If the <code>CBCharacteristicWriteWithResponse</code> type is specified, {@link peripheral:didWriteValueForCharacteristic:error:} is called with the result of the write request. If the <code>CBCharacteristicWriteWithoutResponse</code> type is specified, and canSendWriteWithoutResponse is false, the delivery of the data is best-effort and may not be guaranteed. @see					peripheral:didWriteValueForCharacteristic:error: @see					peripheralIsReadyToSendWriteWithoutResponse: @see					canSendWriteWithoutResponse @see					CBCharacteristicWriteType
+// Writes the value of a characteristic.
 func (o *CBPeripheral) WriteValueForCharacteristicType(data *foundation.NSData, characteristic *CBCharacteristic, type_ CBCharacteristicWriteType) {
 	o.Ptr().Send(_cBPeripheralSelWriteValueForCharacteristicType, data.Ptr(), characteristic.Ptr(), type_)
 }
 
-// @method setNotifyValue:forCharacteristic: @param enabled			Whether or not notifications/indications should be enabled. @param characteristic	The characteristic containing the client characteristic configuration descriptor. @discussion				Enables or disables notifications/indications for the characteristic value of <i>characteristic</i>. If <i>characteristic</i> allows both, notifications will be used. When notifications/indications are enabled, updates to the characteristic value will be received via delegate method @link peripheral:didUpdateValueForCharacteristic:error: @/link. Since it is the peripheral that chooses when to send an update, the application should be prepared to handle them as long as notifications/indications remain enabled. @see					peripheral:didUpdateNotificationStateForCharacteristic:error: @seealso                CBConnectPeripheralOptionNotifyOnNotificationKey
+// Sets notifications or indications for the value of a specified characteristic.
 func (o *CBPeripheral) SetNotifyValueForCharacteristic(enabled bool, characteristic *CBCharacteristic) {
 	o.Ptr().Send(_cBPeripheralSelSetNotifyValueForCharacteristic, enabled, characteristic.Ptr())
 }
 
-// @method discoverDescriptorsForCharacteristic: @param characteristic	A GATT characteristic. @discussion				Discovers the characteristic descriptor(s) of <i>characteristic</i>. @see					peripheral:didDiscoverDescriptorsForCharacteristic:error:
+// Discovers the descriptors of a characteristic.
 func (o *CBPeripheral) DiscoverDescriptorsForCharacteristic(characteristic *CBCharacteristic) {
 	o.Ptr().Send(_cBPeripheralSelDiscoverDescriptorsForCharacteristic, characteristic.Ptr())
 }
 
-// @method readValueForDescriptor: @param descriptor	A GATT characteristic descriptor. @discussion			Reads the value of <i>descriptor</i>. @see				peripheral:didUpdateValueForDescriptor:error:
+// Retrieves the value of a specified characteristic descriptor.
 func (o *CBPeripheral) ReadValueForDescriptor(descriptor *CBDescriptor) {
 	o.Ptr().Send(_cBPeripheralSelReadValueForDescriptor, descriptor.Ptr())
 }
 
-// @method writeValue:forDescriptor: @param data			The value to write. @param descriptor	A GATT characteristic descriptor. @discussion			Writes <i>data</i> to <i>descriptor</i>'s value. Client characteristic configuration descriptors cannot be written using this method, and should instead use @link setNotifyValue:forCharacteristic: @/link. @see				peripheral:didWriteValueForCharacteristic:error:
+// Writes the value of a characteristic descriptor.
 func (o *CBPeripheral) WriteValueForDescriptor(data *foundation.NSData, descriptor *CBDescriptor) {
 	o.Ptr().Send(_cBPeripheralSelWriteValueForDescriptor, data.Ptr(), descriptor.Ptr())
 }
 
-// @method openL2CAPChannel: @param PSM			The PSM of the channel to open @discussion			Attempt to open an L2CAP channel to the peripheral using the supplied PSM. @see				peripheral:didWriteValueForCharacteristic:error:
+// Attempts to open an L2CAP channel to the peripheral using the supplied Protocol/Service Multiplexer (PSM).
 func (o *CBPeripheral) OpenL2CAPChannel(pSM uint16) {
 	o.Ptr().Send(_cBPeripheralSelOpenL2CAPChannel, pSM)
 }

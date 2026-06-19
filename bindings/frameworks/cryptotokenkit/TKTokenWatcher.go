@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that tracks the tokens available in the system.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktokenwatcher
 type TKTokenWatcher struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func TKTokenWatcherFromID(id objc.ID) *TKTokenWatcher {
 	return o
 }
 
-// Init watcher
+// Initializes a token watcher.
 func (o *TKTokenWatcher) Init() *TKTokenWatcher {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenWatcherSelInit)
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *TKTokenWatcher) Init() *TKTokenWatcher {
 	return TKTokenWatcherFromID(_ret)
 }
 
-// Init watcher with insertion handler @disscussion init watcher with insertion handler which is called when a new token arrives @param insertionHandler called when a new token is inserted
+// Initializes a token watcher with the specified insertion handler.
 // Deprecated: since macOS 10.13.
 func (o *TKTokenWatcher) InitWithInsertionHandler(insertionHandler func(*foundation.NSString)) *TKTokenWatcher {
 	var __block_insertionHandler objc.Block
@@ -64,7 +66,7 @@ func (o *TKTokenWatcher) InitWithInsertionHandler(insertionHandler func(*foundat
 	return TKTokenWatcherFromID(_ret)
 }
 
-// Set insertion handler @disscussion when an insertion handler is set the TokenWatcher will call this handler when new token appears in the system. TokenWatcher will call the handler also for tokens which was registered in the system before the handler was set. @param insertionHandler called when a new token is inserted
+// Sets an insertion handler closure to be called when a new token is inserted into the system.
 func (o *TKTokenWatcher) SetInsertionHandler(insertionHandler func(*foundation.NSString)) {
 	var __block_insertionHandler objc.Block
 	if insertionHandler != nil {
@@ -79,7 +81,7 @@ func (o *TKTokenWatcher) SetInsertionHandler(insertionHandler func(*foundation.N
 	o.Ptr().Send(_tKTokenWatcherSelSetInsertionHandler, __block_insertionHandler)
 }
 
-// Add removal watcher for specific tokenID @disscussion after removalHandler for a specific tokenID is called the reference to this handler is removed. For one tokenID just one handler can be added, so next call to addRemovalHandler will replace previous handler @param removalHandler called when a token is removed @param tokenID specified tokenID, if tokenID does not exist removal handler is called imediately
+// Adds a removal handler for the specified token ID.
 func (o *TKTokenWatcher) AddRemovalHandlerForTokenID(removalHandler func(*foundation.NSString), tokenID *foundation.NSString) {
 	var __block_removalHandler objc.Block
 	if removalHandler != nil {
@@ -105,6 +107,9 @@ func (o *TKTokenWatcher) TokenInfoForTokenID(tokenID *foundation.NSString) *TKTo
 
 // Array of currently known TokenIDs in the system.  Tokens are identified by instance's names. It is possible to use KVO to be notified about token arrivals and removals.
 func (o *TKTokenWatcher) TokenIDs() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _tKTokenWatcherSelTokenIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenWatcherSelTokenIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

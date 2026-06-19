@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A password credential.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/aspasswordcredential
 type ASPasswordCredential struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func ASPasswordCredentialFromID(id objc.ID) *ASPasswordCredential {
 	return o
 }
 
-// @abstract Initializes an ASPasswordCredential object. @param user the user. @param password the password.
+// Initializes a password credential.
 func (o *ASPasswordCredential) InitWithUserPassword(user *foundation.NSString, password *foundation.NSString) *ASPasswordCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasswordCredentialSelInitWithUserPassword, user.Ptr(), password.Ptr())
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func (o *ASPasswordCredential) InitWithUserPassword(user *foundation.NSString, p
 	return ASPasswordCredentialFromID(_ret)
 }
 
-// @abstract Creates and initializes a new ASPasswordCredential object. @param user the user. @param password the password.
+// Creates a password credential instance with a given user name and password.
 func ASPasswordCredentialCredentialWithUserPassword(user *foundation.NSString, password *foundation.NSString) *ASPasswordCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASPasswordCredential), _aSPasswordCredentialSelCredentialWithUserPassword, user.Ptr(), password.Ptr())
 	if _ret != 0 {

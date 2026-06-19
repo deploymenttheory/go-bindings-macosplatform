@@ -102,7 +102,7 @@ func MTRCertificatesCreateIntermediateCertificateRootCertificateIntermediatePubl
 // Create an X.509 DER encoded certificate that has the right fields to be a valid Matter operational certificate. signingKeypair and signingCertificate are the root or intermediate that is signing the operational certificate. nodeID and fabricID are expected to be 64-bit unsigned integers. nodeID must be a valid Matter operational node id. fabricID must be a valid Matter fabric id. caseAuthenticatedTags may be nil to indicate no CASE Authenticated Tags should be used.  If caseAuthenticatedTags is not nil, it must contain at most 3 numbers, which are expected to be 32-bit unsigned Case Authenticated Tag values. validityPeriod specifies when the certificate will be valid. A certificate with no expiration time can be created by specifying [NSDate distantFuture] for the end of the period. On failure returns nil and if "error" is not null sets *error to the relevant error.
 func MTRCertificatesCreateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIDNodeIDCaseAuthenticatedTagsValidityPeriodError(signingKeypair MTRKeypair, signingCertificate *foundation.NSData, operationalPublicKey unsafe.Pointer, fabricID *foundation.NSNumber, nodeID *foundation.NSNumber, caseAuthenticatedTags *foundation.NSSet[*foundation.NSNumber], validityPeriod *foundation.NSDateInterval) (*foundation.NSData, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelCreateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIDNodeIDCaseAuthenticatedTagsValidityPeriodError, signingKeypair, signingCertificate.Ptr(), operationalPublicKey, fabricID.Ptr(), nodeID.Ptr(), caseAuthenticatedTags, validityPeriod.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelCreateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIDNodeIDCaseAuthenticatedTagsValidityPeriodError, signingKeypair, signingCertificate.Ptr(), operationalPublicKey, fabricID.Ptr(), nodeID.Ptr(), caseAuthenticatedTags.Ptr(), validityPeriod.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -115,7 +115,7 @@ func MTRCertificatesCreateOperationalCertificateSigningCertificateOperationalPub
 // As above, but defaults to no expiration time.
 func MTRCertificatesCreateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIDNodeIDCaseAuthenticatedTagsError(signingKeypair MTRKeypair, signingCertificate *foundation.NSData, operationalPublicKey unsafe.Pointer, fabricID *foundation.NSNumber, nodeID *foundation.NSNumber, caseAuthenticatedTags *foundation.NSSet[*foundation.NSNumber]) (*foundation.NSData, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelCreateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIDNodeIDCaseAuthenticatedTagsError, signingKeypair, signingCertificate.Ptr(), operationalPublicKey, fabricID.Ptr(), nodeID.Ptr(), caseAuthenticatedTags, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelCreateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIDNodeIDCaseAuthenticatedTagsError, signingKeypair, signingCertificate.Ptr(), operationalPublicKey, fabricID.Ptr(), nodeID.Ptr(), caseAuthenticatedTags.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -207,7 +207,7 @@ func MTRCertificatesGenerateIntermediateCertificateRootCertificateIntermediatePu
 
 func MTRCertificatesGenerateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIdNodeIdCaseAuthenticatedTagsError(signingKeypair MTRKeypair, signingCertificate *foundation.NSData, operationalPublicKey unsafe.Pointer, fabricId *foundation.NSNumber, nodeId *foundation.NSNumber, caseAuthenticatedTags *foundation.NSArray[*foundation.NSNumber]) (*foundation.NSData, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelGenerateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIdNodeIdCaseAuthenticatedTagsError, signingKeypair, signingCertificate.Ptr(), operationalPublicKey, fabricId.Ptr(), nodeId.Ptr(), caseAuthenticatedTags, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelGenerateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIdNodeIdCaseAuthenticatedTagsError, signingKeypair, signingCertificate.Ptr(), operationalPublicKey, fabricId.Ptr(), nodeId.Ptr(), caseAuthenticatedTags.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates the device token you use to deliver push notifications to your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/pushkit/pkpushcredentials
 type PKPushCredentials struct {
 	foundation.NSObject

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that stores subscription information that the system provides to the Apple TV app.
+//
 // VSSubscriptionRegistrationCenter wraps [raw.VSSubscriptionRegistrationCenter] with a fluent Go API.
 type VSSubscriptionRegistrationCenter struct {
 	inner *raw.VSSubscriptionRegistrationCenter
@@ -37,7 +39,7 @@ func NewVSSubscriptionRegistrationCenter() *VSSubscriptionRegistrationCenter {
 	return &VSSubscriptionRegistrationCenter{inner: raw.VSSubscriptionRegistrationCenterFromID(_id)}
 }
 
-// Provide a subscription when the subscriber first authenticates, and when the subscription changes. When the subscriber signs out or otherwise loses access to subscription content, invoke this method with nil. You might also want to call this method opportunistically, if you happen to have just confirmed the validity of the subscription, or in response to app lifecycle events, e.g. when your app becomes active.  The system may use this activity as a hint that the user is actively using the subscription. It is an error to provide a current subscription with an unknown access level; you should not provide a subscription if the user only has access to content that is offered for free without any account requirements.
+// Sets the subscription information for the current user.
 //
 // SetCurrentSubscription calls the underlying SetCurrentSubscription.
 func (x *VSSubscriptionRegistrationCenter) SetCurrentSubscription(currentSubscription *raw.VSSubscription) {

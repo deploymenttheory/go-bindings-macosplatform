@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A fetch request that retrieves results asynchronously and supports progress notification.
+//
 // AsynchronousFetchRequest wraps [raw.NSAsynchronousFetchRequest] with a fluent Go API.
 type AsynchronousFetchRequest struct {
 	inner *raw.NSAsynchronousFetchRequest[objc.ID]
@@ -31,6 +33,8 @@ func AsynchronousFetchRequestFromID(id objc.ID) *AsynchronousFetchRequest {
 	return &AsynchronousFetchRequest{inner: raw.NSAsynchronousFetchRequestFromID[objc.ID](id)}
 }
 
+// Initializes a new asynchronous fetch request configured with the provided fetch request and completion block.
+//
 // NewAsynchronousFetchRequestWithFetchRequestCompletionBlock creates a new [AsynchronousFetchRequest].
 func NewAsynchronousFetchRequestWithFetchRequestCompletionBlock(request *raw.NSFetchRequest[objc.ID], blk func(*raw.NSAsynchronousFetchResult[objc.ID])) *AsynchronousFetchRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAsynchronousFetchRequest")), objc.RegisterName("alloc"))
@@ -38,12 +42,16 @@ func NewAsynchronousFetchRequestWithFetchRequestCompletionBlock(request *raw.NSF
 	return &AsynchronousFetchRequest{inner: raw.NSAsynchronousFetchRequestFromID[objc.ID](_id)}
 }
 
+// A configuration parameter that assists Core Data with scheduling the asynchronous fetch request.
+//
 // WithEstimatedResultCount sets the estimatedResultCount property and returns the receiver for chaining.
 func (x *AsynchronousFetchRequest) WithEstimatedResultCount(estimatedResultCount int) *AsynchronousFetchRequest {
 	x.inner.SetEstimatedResultCount(estimatedResultCount)
 	return x
 }
 
+// The stores the request should be sent to.
+//
 // WithAffectedStores sets the collection, converting the Go slice to an NSArray.
 func (x *AsynchronousFetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *AsynchronousFetchRequest {
 	if len(items) == 0 {

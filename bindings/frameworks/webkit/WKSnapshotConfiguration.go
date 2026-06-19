@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration data to use when generating an image from a web view’s contents.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wksnapshotconfiguration
 type WKSnapshotConfiguration struct {
 	foundation.NSObject

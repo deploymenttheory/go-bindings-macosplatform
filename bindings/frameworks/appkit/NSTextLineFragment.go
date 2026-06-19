@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a line fragment as a single textual layout and rendering unit inside a text layout fragment.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextlinefragment
 type NSTextLineFragment struct {
 	foundation.NSObject
@@ -43,6 +45,7 @@ func NSTextLineFragmentFromID(id objc.ID) *NSTextLineFragment {
 	return o
 }
 
+// Creates a new line fragment from the attributed string for the range of characters you specify.
 func (o *NSTextLineFragment) InitWithAttributedStringRange(attributedString *foundation.NSAttributedString, range_ foundation.NSRange) *NSTextLineFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLineFragmentSelInitWithAttributedStringRange, attributedString.Ptr(), range_)
 	if _ret != 0 {
@@ -51,6 +54,7 @@ func (o *NSTextLineFragment) InitWithAttributedStringRange(attributedString *fou
 	return NSTextLineFragmentFromID(_ret)
 }
 
+// Creates a new line fragment with from data in an unarchiver.
 func (o *NSTextLineFragment) InitWithCoder(aDecoder *foundation.NSCoder) *NSTextLineFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLineFragmentSelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {
@@ -59,28 +63,33 @@ func (o *NSTextLineFragment) InitWithCoder(aDecoder *foundation.NSCoder) *NSText
 	return NSTextLineFragmentFromID(_ret)
 }
 
+// Creates a new line fragment using the string, attributes, and range you provide.
 func (o *NSTextLineFragment) InitWithStringAttributesRange(string_ *foundation.NSString, attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], range_ foundation.NSRange) *NSTextLineFragment {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLineFragmentSelInitWithStringAttributesRange, string_.Ptr(), attributes, range_)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLineFragmentSelInitWithStringAttributesRange, string_.Ptr(), attributes.Ptr(), range_)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSTextLineFragmentFromID(_ret)
 }
 
+// Renders the line fragment contents at the rendering origin.
 func (o *NSTextLineFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ unsafe.Pointer) {
 	o.Ptr().Send(_nSTextLineFragmentSelDrawAtPointInContext, point, context_)
 }
 
+// Returns the location of the character at the specified index.
 func (o *NSTextLineFragment) LocationForCharacterAtIndex(index int) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSTextLineFragmentSelLocationForCharacterAtIndex, index)
 	return _ret
 }
 
+// Returns character index for a point inside the line fragment coordinate system.
 func (o *NSTextLineFragment) CharacterIndexForPoint(point corefoundation.CGPoint) int {
 	_ret := objc.Send[int](o.Ptr(), _nSTextLineFragmentSelCharacterIndexForPoint, point)
 	return _ret
 }
 
+// Returns character index for a point inside the line fragment coordinate system.
 func (o *NSTextLineFragment) FractionOfDistanceThroughGlyphForPoint(point corefoundation.CGPoint) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTextLineFragmentSelFractionOfDistanceThroughGlyphForPoint, point)
 	return _ret

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A formatter that creates string representations of quantities of time.
+//
 // DateComponentsFormatter wraps [raw.NSDateComponentsFormatter] with a fluent Go API.
 type DateComponentsFormatter struct {
 	inner *raw.NSDateComponentsFormatter

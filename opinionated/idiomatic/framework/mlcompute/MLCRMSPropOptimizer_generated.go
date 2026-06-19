@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An optimizer that represents the root mean square propagation algorithm.
+//
 // RMSPropOptimizer wraps [raw.MLCRMSPropOptimizer] with a fluent Go API.
 type RMSPropOptimizer struct {
 	inner *raw.MLCRMSPropOptimizer
@@ -35,7 +37,7 @@ func NewRMSPropOptimizer() *RMSPropOptimizer {
 	return &RMSPropOptimizer{inner: raw.MLCRMSPropOptimizerFromID(_id)}
 }
 
-// @property   learningRate @abstract   The learning rate.  This property is 'readwrite' so that callers can implement a 'decay' during training
+// The learning rate.
 //
 // WithLearningRate sets the learningRate property and returns the receiver for chaining.
 func (x *RMSPropOptimizer) WithLearningRate(learningRate float32) *RMSPropOptimizer {
@@ -43,7 +45,7 @@ func (x *RMSPropOptimizer) WithLearningRate(learningRate float32) *RMSPropOptimi
 	return x
 }
 
-// @property   appliesGradientClipping @abstract   Whether gradient clipping should be applied or not.
+// A Boolean value that indicates whether you apply gradient clipping.
 //
 // WithAppliesGradientClipping sets the appliesGradientClipping property and returns the receiver for chaining.
 func (x *RMSPropOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *RMSPropOptimizer {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A notification that triggers when the contents of a record zone change.
+//
 // RecordZoneNotification wraps [raw.CKRecordZoneNotification] with a fluent Go API.
 type RecordZoneNotification struct {
 	inner *raw.CKRecordZoneNotification

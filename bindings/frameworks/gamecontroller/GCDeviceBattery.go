@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The charge level and state of a device’s battery.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcdevicebattery
 type GCDeviceBattery struct {
 	foundation.NSObject

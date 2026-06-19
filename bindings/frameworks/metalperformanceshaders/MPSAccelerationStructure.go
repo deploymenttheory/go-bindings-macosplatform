@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for data structures that are built over geometry and used to accelerate ray tracing.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsaccelerationstructure
 type MPSAccelerationStructure struct {
 	mpscore.MPSKernel

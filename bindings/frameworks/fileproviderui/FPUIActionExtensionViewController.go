@@ -13,7 +13,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// The custom user interface used to perform a selected action. Subclass this view controller to provide the user interface for your actions. No matter how many actions you define, your File Provider UI extension has only one “FPUIActionExtensionViewController“ subclass. When the user selects one of your actions, the system instantiates a copy of your subclass, calls its “FPUIActionExtensionViewController/prepareForActionWithIdentifier:itemIdentifiers:“ method, and presents it to the user. Your subclass must do the following: - Override the “FPUIActionExtensionViewController/prepareForActionWithIdentifier:itemIdentifiers:“ method to check the action identifiers and present an appropriate user interface for the selected actions. - Provide some sort of feedback, even if the action doesn't require interaction with the user. For example, present a view that quickly fades out and automatically completes the action. - Call the “FPUIActionExtensionViewController/extensionContext“ object's “FPUIActionExtensionContext/cancelRequestWithError:“ or “FPUIActionExtensionContext/completeRequest“ method when the action is finished to complete the action.
+// The custom user interface used to perform a selected action.
 //
 // Apple documentation: https://developer.apple.com/documentation/fileproviderui/fpuiactionextensionviewcontroller
 type FPUIActionExtensionViewController struct {
@@ -36,12 +36,12 @@ func FPUIActionExtensionViewControllerFromID(id objc.ID) *FPUIActionExtensionVie
 	return o
 }
 
-// Performs any necessary setup or configuration when an authentication error occurs. While your file provider is enumerating its content, the system calls this method whenever your file provider returns an <doc://com.apple.documentation/documentation/fileprovider/nsfileprovidererrordomain> error with a <doc://com.apple.documentation/documentation/fileprovider/nsfileprovidererrorcode/nsfileprovidererrornotauthenticated> code. Use this method to present an interface to authenticate the user. - Parameters: - error: An object representing the authentication error. Your File Provider extension can pass additional information in the error's <doc://com.apple.documentation/documentation/foundation/nserror/1411580-userinfo> property.
+// Performs any necessary setup or configuration when an authentication error occurs.
 func (o *FPUIActionExtensionViewController) PrepareForError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_fPUIActionExtensionViewControllerSelPrepareForError, error_)
 }
 
-// Performs any necessary setup or configuration for the specified action. Use this method to prepare a user interface for handling the action. At a minimum, you should display feedback about the action. For more information, see <doc:adding-actions-to-the-context-menu>. - Parameters: - actionIdentifier: The identifier for the action performed by the user. - itemIdentifiers: The identifiers of the items affected by the action.
+// Performs any necessary setup or configuration for the specified action.
 func (o *FPUIActionExtensionViewController) PrepareForActionWithIdentifierItemIdentifiers(actionIdentifier *foundation.NSString, itemIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_fPUIActionExtensionViewControllerSelPrepareForActionWithIdentifierItemIdentifiers, actionIdentifier.Ptr(), itemIdentifiers)
+	o.Ptr().Send(_fPUIActionExtensionViewControllerSelPrepareForActionWithIdentifierItemIdentifiers, actionIdentifier.Ptr(), itemIdentifiers.Ptr())
 }

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A representation of the state of your app at a moment in time.
+//
 // UserActivity wraps [raw.NSUserActivity] with a fluent Go API.
 type UserActivity struct {
 	inner *raw.NSUserActivity
@@ -37,6 +39,8 @@ func NewUserActivity() *UserActivity {
 	return &UserActivity{inner: raw.NSUserActivityFromID(_id)}
 }
 
+// Creates a user activity object with the specified type.
+//
 // NewUserActivityWithActivityType creates a new [UserActivity].
 func NewUserActivityWithActivityType(activityType string) *UserActivity {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserActivity")), objc.RegisterName("alloc"))
@@ -44,90 +48,120 @@ func NewUserActivityWithActivityType(activityType string) *UserActivity {
 	return &UserActivity{inner: raw.NSUserActivityFromID(_id)}
 }
 
+// An optional, user-visible title for this activity, such as a document name or web page title.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *UserActivity) WithTitle(title string) *UserActivity {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A dictionary containing app-specific state information needed to continue an activity on another device.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *UserActivity) WithUserInfo(userInfo *raw.NSDictionary[objc.ID, objc.ID]) *UserActivity {
 	x.inner.SetUserInfo(userInfo)
 	return x
 }
 
+// A set of keys that represent the minimal information about the activity that should be stored for later restoration.
+//
 // WithRequiredUserInfoKeys sets the requiredUserInfoKeys property and returns the receiver for chaining.
 func (x *UserActivity) WithRequiredUserInfoKeys(requiredUserInfoKeys *raw.NSSet[*raw.NSString]) *UserActivity {
 	x.inner.SetRequiredUserInfoKeys(requiredUserInfoKeys)
 	return x
 }
 
+// A Boolean value that indicates whether the state of the activity needs to be updated.
+//
 // WithNeedsSave sets the needsSave property and returns the receiver for chaining.
 func (x *UserActivity) WithNeedsSave(needsSave bool) *UserActivity {
 	x.inner.SetNeedsSave(needsSave)
 	return x
 }
 
+// The URL of the webpage to load in a browser to continue the activity.
+//
 // WithWebpageURL sets the webpageURL property and returns the receiver for chaining.
 func (x *UserActivity) WithWebpageURL(webpageURL string) *UserActivity {
 	x.inner.SetWebpageURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(webpageURL)))
 	return x
 }
 
+// The URL of the webpage that linked to the webpage URL.
+//
 // WithReferrerURL sets the referrerURL property and returns the receiver for chaining.
 func (x *UserActivity) WithReferrerURL(referrerURL string) *UserActivity {
 	x.inner.SetReferrerURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(referrerURL)))
 	return x
 }
 
+// The date after which the activity is no longer eligible for Handoff or indexing.
+//
 // WithExpirationDate sets the expirationDate property and returns the receiver for chaining.
 func (x *UserActivity) WithExpirationDate(expirationDate DateProvider) *UserActivity {
 	x.inner.SetExpirationDate(expirationDate.asDate())
 	return x
 }
 
+// A set of localized keywords that can help users find the activity in search results.
+//
 // WithKeywords sets the keywords property and returns the receiver for chaining.
 func (x *UserActivity) WithKeywords(keywords *raw.NSSet[*raw.NSString]) *UserActivity {
 	x.inner.SetKeywords(keywords)
 	return x
 }
 
+// A Boolean value that determines whether the continuing app can request streams to be opened back to the originating app.
+//
 // WithSupportsContinuationStreams sets the supportsContinuationStreams property and returns the receiver for chaining.
 func (x *UserActivity) WithSupportsContinuationStreams(supportsContinuationStreams bool) *UserActivity {
 	x.inner.SetSupportsContinuationStreams(supportsContinuationStreams)
 	return x
 }
 
+// The user activity object’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *UserActivity) WithDelegate(delegate raw.NSUserActivityDelegate) *UserActivity {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// A string that identifies the user activity’s content.
+//
 // WithTargetContentIdentifier sets the targetContentIdentifier property and returns the receiver for chaining.
 func (x *UserActivity) WithTargetContentIdentifier(targetContentIdentifier string) *UserActivity {
 	x.inner.SetTargetContentIdentifier(foundation.NSStringStringWithUTF8String(targetContentIdentifier))
 	return x
 }
 
+// A Boolean value that indicates whether the activity can continue on another device using Handoff.
+//
 // WithEligibleForHandoff sets the eligibleForHandoff property and returns the receiver for chaining.
 func (x *UserActivity) WithEligibleForHandoff(eligibleForHandoff bool) *UserActivity {
 	x.inner.SetEligibleForHandoff(eligibleForHandoff)
 	return x
 }
 
+// A Boolean value that indicates whether to add the activity to the on-device index.
+//
 // WithEligibleForSearch sets the eligibleForSearch property and returns the receiver for chaining.
 func (x *UserActivity) WithEligibleForSearch(eligibleForSearch bool) *UserActivity {
 	x.inner.SetEligibleForSearch(eligibleForSearch)
 	return x
 }
 
+// A Boolean value that indicates whether the activity is publicly accessible by all iOS users.
+//
 // WithEligibleForPublicIndexing sets the eligibleForPublicIndexing property and returns the receiver for chaining.
 func (x *UserActivity) WithEligibleForPublicIndexing(eligibleForPublicIndexing bool) *UserActivity {
 	x.inner.SetEligibleForPublicIndexing(eligibleForPublicIndexing)
 	return x
 }
 
+// A unique and persistent value you use to identify the activity.
+//
 // WithPersistentIdentifier sets the persistentIdentifier property and returns the receiver for chaining.
 func (x *UserActivity) WithPersistentIdentifier(persistentIdentifier StringProvider) *UserActivity {
 	x.inner.SetPersistentIdentifier(persistentIdentifier.asString())
@@ -140,26 +174,36 @@ func (x *UserActivity) WithScriptingProperties(scriptingProperties *raw.NSDictio
 	return x
 }
 
+// Adds the contents of the specified dictionary to the user info dictionary.
+//
 // AddUserInfoEntriesFromDictionary calls the underlying AddUserInfoEntriesFromDictionary.
 func (x *UserActivity) AddUserInfoEntriesFromDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID]) {
 	x.inner.AddUserInfoEntriesFromDictionary(otherDictionary)
 }
 
+// Marks the activity as currently in use by the user.
+//
 // BecomeCurrent calls the underlying BecomeCurrent.
 func (x *UserActivity) BecomeCurrent() {
 	x.inner.BecomeCurrent()
 }
 
+// Marks this activity object as inactive without invalidating it.
+//
 // ResignCurrent calls the underlying ResignCurrent.
 func (x *UserActivity) ResignCurrent() {
 	x.inner.ResignCurrent()
 }
 
+// Invalidates an activity and marks it as no longer eligible for continuation.
+//
 // Invalidate calls the underlying Invalidate.
 func (x *UserActivity) Invalidate() {
 	x.inner.Invalidate()
 }
 
+// Requests streams back to the originating app.
+//
 // GetContinuationStreamsWithCompletionHandler calls the underlying GetContinuationStreamsWithCompletionHandler.
 func (x *UserActivity) GetContinuationStreamsWithCompletionHandler(completionHandler func(*raw.NSInputStream, *raw.NSOutputStream, unsafe.Pointer)) {
 	x.inner.GetContinuationStreamsWithCompletionHandler(completionHandler)

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that can draw gradient fill colors
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsgradient
 type NSGradient struct {
 	foundation.NSObject
@@ -44,6 +46,7 @@ func NSGradientFromID(id objc.ID) *NSGradient {
 	return o
 }
 
+// Initializes a newly allocated gradient object with two colors.
 func (o *NSGradient) InitWithStartingColorEndingColor(startingColor *NSColor, endingColor *NSColor) *NSGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGradientSelInitWithStartingColorEndingColor, startingColor.Ptr(), endingColor.Ptr())
 	if _ret != 0 {
@@ -52,6 +55,7 @@ func (o *NSGradient) InitWithStartingColorEndingColor(startingColor *NSColor, en
 	return NSGradientFromID(_ret)
 }
 
+// Initializes a newly allocated gradient object with an array of colors.
 func (o *NSGradient) InitWithColors(colorArray *foundation.NSArray[*NSColor]) *NSGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGradientSelInitWithColors, colorArray.Ptr())
 	if _ret != 0 {
@@ -60,6 +64,7 @@ func (o *NSGradient) InitWithColors(colorArray *foundation.NSArray[*NSColor]) *N
 	return NSGradientFromID(_ret)
 }
 
+// Initializes a newly allocated gradient object with the specified colors, color locations, and color space.
 func (o *NSGradient) InitWithColorsAtLocationsColorSpace(colorArray *foundation.NSArray[*NSColor], locations *float64, colorSpace *NSColorSpace) *NSGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGradientSelInitWithColorsAtLocationsColorSpace, colorArray.Ptr(), locations, colorSpace.Ptr())
 	if _ret != 0 {
@@ -68,6 +73,7 @@ func (o *NSGradient) InitWithColorsAtLocationsColorSpace(colorArray *foundation.
 	return NSGradientFromID(_ret)
 }
 
+// Creates a gradient from data in an unarchiver.
 func (o *NSGradient) InitWithCoder(coder *foundation.NSCoder) *NSGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGradientSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -76,34 +82,42 @@ func (o *NSGradient) InitWithCoder(coder *foundation.NSCoder) *NSGradient {
 	return NSGradientFromID(_ret)
 }
 
+// Draws a linear gradient between the specified start and end points.
 func (o *NSGradient) DrawFromPointToPointOptions(startingPoint corefoundation.CGPoint, endingPoint corefoundation.CGPoint, options NSGradientDrawingOptions) {
 	o.Ptr().Send(_nSGradientSelDrawFromPointToPointOptions, startingPoint, endingPoint, options)
 }
 
+// Fills the specified rectangle with a linear gradient.
 func (o *NSGradient) DrawInRectAngle(rect corefoundation.CGRect, angle float64) {
 	o.Ptr().Send(_nSGradientSelDrawInRectAngle, rect, angle)
 }
 
+// Fills the specified path with a linear gradient.
 func (o *NSGradient) DrawInBezierPathAngle(path *NSBezierPath, angle float64) {
 	o.Ptr().Send(_nSGradientSelDrawInBezierPathAngle, path.Ptr(), angle)
 }
 
+// Draws a radial gradient between the specified circles.
 func (o *NSGradient) DrawFromCenterRadiusToCenterRadiusOptions(startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options NSGradientDrawingOptions) {
 	o.Ptr().Send(_nSGradientSelDrawFromCenterRadiusToCenterRadiusOptions, startCenter, startRadius, endCenter, endRadius, options)
 }
 
+// Draws a radial gradient starting at the center of the specified rectangle.
 func (o *NSGradient) DrawInRectRelativeCenterPosition(rect corefoundation.CGRect, relativeCenterPosition corefoundation.CGPoint) {
 	o.Ptr().Send(_nSGradientSelDrawInRectRelativeCenterPosition, rect, relativeCenterPosition)
 }
 
+// Draws a radial gradient starting at the center point of the specified path.
 func (o *NSGradient) DrawInBezierPathRelativeCenterPosition(path *NSBezierPath, relativeCenterPosition corefoundation.CGPoint) {
 	o.Ptr().Send(_nSGradientSelDrawInBezierPathRelativeCenterPosition, path.Ptr(), relativeCenterPosition)
 }
 
+// Returns information about the color stop at the specified index in the receiver’s color array.
 func (o *NSGradient) GetColorLocationAtIndex(color *NSColor, location *float64, index int) {
 	o.Ptr().Send(_nSGradientSelGetColorLocationAtIndex, color.Ptr(), location, index)
 }
 
+// Returns the color of the rendered gradient at the specified relative location.
 func (o *NSGradient) InterpolatedColorAtLocation(location float64) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGradientSelInterpolatedColorAtLocation, location)
 	if _ret != 0 {

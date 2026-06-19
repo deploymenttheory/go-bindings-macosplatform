@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance normalization kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnninstancenormalization
 type MPSCNNInstanceNormalization struct {
 	mpsneuralnetwork.MPSCNNKernel
@@ -77,7 +79,7 @@ func (o *MPSCNNInstanceNormalization) ReloadGammaAndBetaWithCommandBufferGammaAn
 
 // @abstract   Return a MPSCNNInstanceNormalizationGradientState object for the provided source image, source states, and destination image.
 func (o *MPSCNNInstanceNormalization) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNInstanceNormalizationGradientState {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNInstanceNormalizationSelResultStateForSourceImageSourceStatesDestinationImage, sourceImage.Ptr(), sourceStates, destinationImage.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNInstanceNormalizationSelResultStateForSourceImageSourceStatesDestinationImage, sourceImage.Ptr(), sourceStates.Ptr(), destinationImage.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -86,7 +88,7 @@ func (o *MPSCNNInstanceNormalization) ResultStateForSourceImageSourceStatesDesti
 
 // @abstract       Return a temporary MPSCNNInstanceNormalizationGradientState object which may be used with a MPSCNNInstanceNormalization filter.
 func (o *MPSCNNInstanceNormalization) TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNInstanceNormalizationGradientState {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNInstanceNormalizationSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage.Ptr(), sourceStates, destinationImage.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNInstanceNormalizationSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage.Ptr(), sourceStates.Ptr(), destinationImage.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

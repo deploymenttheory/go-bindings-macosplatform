@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A query that performs multiple statistics queries over a series of fixed-length time intervals.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkstatisticscollectionquery
 type HKStatisticsCollectionQuery struct {
 	HKQuery
@@ -39,6 +41,7 @@ func HKStatisticsCollectionQueryFromID(id objc.ID) *HKStatisticsCollectionQuery 
 	return o
 }
 
+// Initializes a statistics collection query to perform the specified calculations over a set of time intervals.
 func (o *HKStatisticsCollectionQuery) InitWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents(quantityType *HKQuantityType, quantitySamplePredicate *foundation.NSPredicate, options HKStatisticsOptions, anchorDate *foundation.NSDate, intervalComponents *foundation.NSDateComponents) *HKStatisticsCollectionQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsCollectionQuerySelInitWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents, quantityType.Ptr(), quantitySamplePredicate.Ptr(), options, anchorDate.Ptr(), intervalComponents.Ptr())
 	if _ret != 0 {

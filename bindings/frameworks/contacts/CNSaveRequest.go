@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that collects the changes you want to save to the user’s contacts database.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnsaverequest
 type CNSaveRequest struct {
 	foundation.NSObject
@@ -43,52 +45,52 @@ func CNSaveRequestFromID(id objc.ID) *CNSaveRequest {
 	return o
 }
 
-// @abstract Add a new contact to the contact store. @discussion The contact may be modified by the executing save request. If the contact was previously specified to be deleted in the save request that will no longer occur. @param contact The new contact to add. @param identifier The container identifier to add the new contact to. Set to nil for the default container.
+// Adds the specified contact to the contact store.
 func (o *CNSaveRequest) AddContactToContainerWithIdentifier(contact *CNMutableContact, identifier *foundation.NSString) {
 	o.Ptr().Send(_cNSaveRequestSelAddContactToContainerWithIdentifier, contact.Ptr(), identifier.Ptr())
 }
 
-// @abstract Update an existing contact in the contact store. @discussion The contact must already exist in the contact store. The contact may be modified by the executing save request.
+// Updates an existing contact in the contact store.
 func (o *CNSaveRequest) UpdateContact(contact *CNMutableContact) {
 	o.Ptr().Send(_cNSaveRequestSelUpdateContact, contact.Ptr())
 }
 
-// @abstract Delete a contact from the contact store. @discussion If the contact was previously specified to be added in the save request that will no longer occur.
+// Deletes a contact from the contact store.
 func (o *CNSaveRequest) DeleteContact(contact *CNMutableContact) {
 	o.Ptr().Send(_cNSaveRequestSelDeleteContact, contact.Ptr())
 }
 
-// @abstract Add a new group to the contact store. @discussion If the group was previously specified to be deleted in the save request that will no longer occur. @param group The new group to add. @param identifier The container identifier to add the new group to. Set to nil for the default container.
+// Adds a group to the contact store.
 func (o *CNSaveRequest) AddGroupToContainerWithIdentifier(group *CNMutableGroup, identifier *foundation.NSString) {
 	o.Ptr().Send(_cNSaveRequestSelAddGroupToContainerWithIdentifier, group.Ptr(), identifier.Ptr())
 }
 
-// @abstract Update an existing group in the contact store. @discussion The group must already exist in the contact store.
+// Updates an existing group in the contact store.
 func (o *CNSaveRequest) UpdateGroup(group *CNMutableGroup) {
 	o.Ptr().Send(_cNSaveRequestSelUpdateGroup, group.Ptr())
 }
 
-// @abstract Delete a group from the contact store. @discussion The contacts in the group are not deleted. If the group was previously specified to be added in the save request that will no longer occur.
+// Deletes a group from the contact store.
 func (o *CNSaveRequest) DeleteGroup(group *CNMutableGroup) {
 	o.Ptr().Send(_cNSaveRequestSelDeleteGroup, group.Ptr())
 }
 
-// @abstract Add a new subgroup to a group. @discussion If the subgroup was previously specified to be deleted in the save request that will no longer occur. @param subgroup The new group to add. @param group The group to add the subgroup to.
+// Add the specified group to a parent group.
 func (o *CNSaveRequest) AddSubgroupToGroup(subgroup *CNGroup, group *CNGroup) {
 	o.Ptr().Send(_cNSaveRequestSelAddSubgroupToGroup, subgroup.Ptr(), group.Ptr())
 }
 
-// @abstract Remove a subgroup from a group. @discussion The contacts in the subgroup's membership are not affected. If the subgroup was previously specified to be added in the save request that will no longer occur. @param subgroup The new group to add. @param group The group to add the subgroup to.
+// Remove a subgroup from the specified parent group.
 func (o *CNSaveRequest) RemoveSubgroupFromGroup(subgroup *CNGroup, group *CNGroup) {
 	o.Ptr().Send(_cNSaveRequestSelRemoveSubgroupFromGroup, subgroup.Ptr(), group.Ptr())
 }
 
-// @abstract Add a new member to a group. @discussion If the membership was previously specified to be deleted in the save request that will no longer occur. @param contact The new member to add to the group. @param group The group to add the member to.
+// Adds a contact as a member of a group.
 func (o *CNSaveRequest) AddMemberToGroup(contact *CNContact, group *CNGroup) {
 	o.Ptr().Send(_cNSaveRequestSelAddMemberToGroup, contact.Ptr(), group.Ptr())
 }
 
-// @abstract Remove a member from a group. @discussion The contact is not deleted. It is only removed as a member of the group. If the membership was previously specified to be added in the save request that will no longer occur. @param contact The member to remove from the group. @param group The group to remove the member from.
+// Removes a contact as a member of a group.
 func (o *CNSaveRequest) RemoveMemberFromGroup(contact *CNContact, group *CNGroup) {
 	o.Ptr().Send(_cNSaveRequestSelRemoveMemberFromGroup, contact.Ptr(), group.Ptr())
 }

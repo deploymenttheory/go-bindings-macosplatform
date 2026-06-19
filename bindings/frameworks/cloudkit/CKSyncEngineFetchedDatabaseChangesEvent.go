@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides information about fetched database changes.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginefetcheddatabasechangesevent
 type CKSyncEngineFetchedDatabaseChangesEvent struct {
 	CKSyncEngineEvent

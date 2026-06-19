@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that expresses an inclusive range of supported exposure bias values, in EV units.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avexposurebiasrange
 type AVExposureBiasRange struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func AVExposureBiasRangeFromID(id objc.ID) *AVExposureBiasRange {
 	return o
 }
 
-// @method containsExposureBias: @abstract Tests if a given exposure bias in EV units is within the exposure bias range. @param exposureBias The exposure bias to test. @result Returns YES if the given exposure bias is within the exposure bias, NO otherwise. @discussion Note that the exposure bias ranges are inclusive.
+// Determines whether the range contains the specified exposure bias.
 func (o *AVExposureBiasRange) ContainsExposureBias(exposureBias float32) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVExposureBiasRangeSelContainsExposureBias, exposureBias)
 	return _ret

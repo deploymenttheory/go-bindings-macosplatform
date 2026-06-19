@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An action the system performs on a message, such as setting a color or archiving it.
+//
 // Apple documentation: https://developer.apple.com/documentation/mailkit/memessageaction
 type MEMessageAction struct {
 	foundation.NSObject

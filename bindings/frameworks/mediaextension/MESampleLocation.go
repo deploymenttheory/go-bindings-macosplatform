@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides information about the sample location with the media.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaextension/mesamplelocation
 type MESampleLocation struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func MESampleLocationFromID(id objc.ID) *MESampleLocation {
 	return o
 }
 
-// @property		initWithByteSource @abstract		The initializer for the MESampleLocation class. @param			byteSource The MEByteSource to be used to read the data for the sample. @param			sampleLocation The starting file offset and size in bytes of the sample.
+// Creates a sample location object with the byte source and sample location that you specify.
 func (o *MESampleLocation) InitWithByteSourceSampleLocation(byteSource *MEByteSource, sampleLocation avfoundation.AVSampleCursorStorageRange) *MESampleLocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mESampleLocationSelInitWithByteSourceSampleLocation, byteSource.Ptr(), sampleLocation)
 	if _ret != 0 {

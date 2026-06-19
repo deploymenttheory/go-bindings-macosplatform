@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A token’s certificate as stored in the keychain.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktokenkeychaincertificate
 type TKTokenKeychainCertificate struct {
 	TKTokenKeychainItem
@@ -33,7 +35,7 @@ func TKTokenKeychainCertificateFromID(id objc.ID) *TKTokenKeychainCertificate {
 	return o
 }
 
-// @discussion initialize TKTokenKeychainCertificate with data from SecCertificateRef.  Use SecCertificateCreateWithData to obtain SecCertificateRef.  @c constraints property is initialized indicating that reading of certificate is always allowed, all other operations are disallowed.
+// Initializes a token keychain certificate with data from the specified certificate reference and a given object ID.
 func (o *TKTokenKeychainCertificate) InitWithCertificateObjectID(certificateRef unsafe.Pointer, objectID objc.ID) *TKTokenKeychainCertificate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainCertificateSelInitWithCertificateObjectID, certificateRef, objectID)
 	if _ret != 0 {

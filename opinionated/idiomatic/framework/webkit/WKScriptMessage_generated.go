@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that encapsulates a message sent by JavaScript code from a webpage.
+//
 // WKScriptMessage wraps [raw.WKScriptMessage] with a fluent Go API.
 type WKScriptMessage struct {
 	inner *raw.WKScriptMessage

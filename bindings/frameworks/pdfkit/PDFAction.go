@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An action that is performed when, for example, a PDF annotation is activated or an outline item is clicked.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfaction
 type PDFAction struct {
 	foundation.NSObject

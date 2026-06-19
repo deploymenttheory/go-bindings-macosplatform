@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A joint that simulates a spring connecting two physics bodies.
+//
 // PhysicsJointSpring wraps [raw.SKPhysicsJointSpring] with a fluent Go API.
 type PhysicsJointSpring struct {
 	inner *raw.SKPhysicsJointSpring
@@ -35,24 +37,32 @@ func NewPhysicsJointSpring() *PhysicsJointSpring {
 	return &PhysicsJointSpring{inner: raw.SKPhysicsJointSpringFromID(_id)}
 }
 
+// Defines how the spring’s motion should be damped due to the forces of friction.
+//
 // WithDamping sets the damping property and returns the receiver for chaining.
 func (x *PhysicsJointSpring) WithDamping(damping float64) *PhysicsJointSpring {
 	x.inner.SetDamping(damping)
 	return x
 }
 
+// Defines the frequency or stiffness characteristics of the spring.
+//
 // WithFrequency sets the frequency property and returns the receiver for chaining.
 func (x *PhysicsJointSpring) WithFrequency(frequency float64) *PhysicsJointSpring {
 	x.inner.SetFrequency(frequency)
 	return x
 }
 
+// The first body connected by the joint.
+//
 // WithBodyA sets the bodyA property and returns the receiver for chaining.
 func (x *PhysicsJointSpring) WithBodyA(bodyA *PhysicsBody) *PhysicsJointSpring {
 	x.inner.SKPhysicsJoint.SetBodyA(bodyA.Unwrap())
 	return x
 }
 
+// The second body connected by the joint.
+//
 // WithBodyB sets the bodyB property and returns the receiver for chaining.
 func (x *PhysicsJointSpring) WithBodyB(bodyB *PhysicsBody) *PhysicsJointSpring {
 	x.inner.SKPhysicsJoint.SetBodyB(bodyB.Unwrap())

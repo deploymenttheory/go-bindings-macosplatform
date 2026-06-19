@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A display of a file system path or virtual path information.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspathcontrol
 type NSPathControl struct {
 	NSControl
@@ -54,6 +56,7 @@ func NSPathControlFromID(id objc.ID) *NSPathControl {
 	return o
 }
 
+// Configures the drag operation mask.
 func (o *NSPathControl) SetDraggingSourceOperationMaskForLocal(mask NSDragOperation, isLocal bool) {
 	o.Ptr().Send(_nSPathControlSelSetDraggingSourceOperationMaskForLocal, mask, isLocal)
 }
@@ -68,12 +71,15 @@ func (o *NSPathControl) SetEditable(editable bool) {
 }
 
 func (o *NSPathControl) AllowedTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSPathControlSelAllowedTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathControlSelAllowedTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSPathControl) SetAllowedTypes(allowedTypes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSPathControlSelSetAllowedTypes, allowedTypes)
+	o.Ptr().Send(_nSPathControlSelSetAllowedTypes, allowedTypes.Ptr())
 }
 
 func (o *NSPathControl) PlaceholderString() *foundation.NSString {
@@ -171,6 +177,7 @@ func (o *NSPathControl) SetDelegate(delegate NSPathControlDelegate) {
 	o.Ptr().Send(_nSPathControlSelSetDelegate, delegate)
 }
 
+// Returns the clicked cell.
 // Deprecated: Use the clickedPathItem property instead
 func (o *NSPathControl) ClickedPathComponentCell() *NSPathComponentCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathControlSelClickedPathComponentCell)
@@ -180,6 +187,7 @@ func (o *NSPathControl) ClickedPathComponentCell() *NSPathComponentCell {
 	return NSPathComponentCellFromID(_ret)
 }
 
+// Returns an array of the NSPathComponentCell objects currently being displayed.
 // Deprecated: Use the pathItems property instead
 func (o *NSPathControl) PathComponentCells() *foundation.NSArray[*NSPathComponentCell] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathControlSelPathComponentCells)
@@ -189,6 +197,7 @@ func (o *NSPathControl) PathComponentCells() *foundation.NSArray[*NSPathComponen
 	return foundation.NSArrayFromID[*NSPathComponentCell](_ret)
 }
 
+// Sets the array of NSPathComponentCell objects currently being displayed.
 // Deprecated: Use the pathItems property instead
 func (o *NSPathControl) SetPathComponentCells(cells *foundation.NSArray[*NSPathComponentCell]) {
 	o.Ptr().Send(_nSPathControlSelSetPathComponentCells, cells.Ptr())

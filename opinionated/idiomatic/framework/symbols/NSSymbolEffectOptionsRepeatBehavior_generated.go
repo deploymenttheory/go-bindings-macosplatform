@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The behavior of repetition to use when a symbol effect is animating.
+//
 // SymbolEffectOptionsRepeatBehavior wraps [raw.NSSymbolEffectOptionsRepeatBehavior] with a fluent Go API.
 type SymbolEffectOptionsRepeatBehavior struct {
 	inner *raw.NSSymbolEffectOptionsRepeatBehavior

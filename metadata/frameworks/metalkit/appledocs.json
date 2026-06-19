@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "framework": "MetalKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "MTKMesh": {
+      "doc": "A container for the vertex data of a Model I/O mesh, suitable for use in a Metal app.",
+      "url": "https://developer.apple.com/documentation/metalkit/mtkmesh"
+    },
+    "MTKMeshBuffer": {
+      "doc": "A buffer that backs the vertex data of a Model I/O mesh, suitable for use in a Metal app.",
+      "url": "https://developer.apple.com/documentation/metalkit/mtkmeshbuffer"
+    },
+    "MTKMeshBufferAllocator": {
+      "doc": "An interface for allocating a MetalKit buffer that backs the vertex data of a Model I/O mesh, suitable for use in a Metal app.",
+      "url": "https://developer.apple.com/documentation/metalkit/mtkmeshbufferallocator"
+    },
+    "MTKSubmesh": {
+      "doc": "A container for the index data of a Model I/O submesh, suitable for use in a Metal app.",
+      "url": "https://developer.apple.com/documentation/metalkit/mtksubmesh"
+    },
+    "MTKTextureLoader": {
+      "doc": "An object that creates textures from existing data in common image formats.",
+      "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader"
+    },
+    "MTKView": {
+      "doc": "A specialized view that creates, configures, and displays Metal objects.",
+      "url": "https://developer.apple.com/documentation/metalkit/mtkview"
+    }
+  },
+  "protocols": {
+    "MTKViewDelegate": {
+      "doc": "Methods for responding to a MetalKit view’s drawing and resizing events.",
+      "url": "https://developer.apple.com/documentation/metalkit/mtkviewdelegate"
+    }
+  },
+  "methods": {
+    "MTKMesh": {
+      "+newMeshesFromAsset:device:sourceMeshes:error:": {
+        "doc": "Creates and initializes MetalKit meshes from all Model I/O meshes in a Model I/O asset.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkmesh/newmeshesfromasset:device:sourcemeshes:error:"
+      },
+      "-initWithMesh:device:error:": {
+        "doc": "Initializes a MetalKit mesh and its submeshes from a Model I/O mesh.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkmesh/init(mesh:device:)"
+      }
+    },
+    "MTKMeshBufferAllocator": {
+      "-initWithDevice:": {
+        "doc": "Initializes a new allocator object.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkmeshbufferallocator/init(device:)"
+      }
+    },
+    "MTKTextureLoader": {
+      "-initWithDevice:": {
+        "doc": "Initializes a new texture loader object.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/init(device:)"
+      },
+      "-newTextureWithCGImage:options:completionHandler:": {
+        "doc": "Asynchronously loads image data and creates a new Metal texture from a given bitmap image.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtexture(cgimage:options:completionhandler:)"
+      },
+      "-newTextureWithCGImage:options:error:": {
+        "doc": "Synchronously loads image data and creates a new Metal texture from a given bitmap image.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtexture(cgimage:options:)"
+      },
+      "-newTextureWithContentsOfURL:options:completionHandler:": {
+        "doc": "Asynchronously loads image data and creates a new Metal texture from a given URL.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtexture(url:options:completionhandler:)"
+      },
+      "-newTextureWithContentsOfURL:options:error:": {
+        "doc": "Synchronously loads image data and creates a new Metal texture from a given URL.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtexture(url:options:)"
+      },
+      "-newTextureWithData:options:completionHandler:": {
+        "doc": "Asynchronously creates a new Metal texture from an in-memory representation of the texture’s data.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtexture(data:options:completionhandler:)"
+      },
+      "-newTextureWithData:options:error:": {
+        "doc": "Synchronously creates a new Metal texture from an in-memory representation of the texture’s data.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtexture(data:options:)"
+      },
+      "-newTextureWithMDLTexture:options:completionHandler:": {
+        "doc": "Asynchronously loads image data and creates a Metal texture from the specified Model I/O texture.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtexture(texture:options:completionhandler:)"
+      },
+      "-newTextureWithMDLTexture:options:error:": {
+        "doc": "Synchronously loads image data and creates a Metal texture from the specified Model I/O texture.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtexture(texture:options:)"
+      },
+      "-newTextureWithName:scaleFactor:bundle:options:completionHandler:": {
+        "doc": "Asynchronously loads image data and creates a Metal texture from the named texture asset in an asset catalog.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtexture(name:scalefactor:bundle:options:completionhandler:)"
+      },
+      "-newTextureWithName:scaleFactor:bundle:options:error:": {
+        "doc": "Synchronously loads image data and creates a Metal texture from the named texture asset in an asset catalog.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtexture(name:scalefactor:bundle:options:)"
+      },
+      "-newTextureWithName:scaleFactor:displayGamut:bundle:options:completionHandler:": {
+        "doc": "Asynchronously loads image data and creates a Metal texture from the named texture asset in an asset catalog.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtexture(name:scalefactor:displaygamut:bundle:options:completionhandler:)"
+      },
+      "-newTextureWithName:scaleFactor:displayGamut:bundle:options:error:": {
+        "doc": "Synchronously loads image data and creates a Metal texture from the named texture asset in an asset catalog, using a specified display gamut.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtexture(name:scalefactor:displaygamut:bundle:options:)"
+      },
+      "-newTexturesWithContentsOfURLs:options:completionHandler:": {
+        "doc": "Asynchronously loads image data and creates new Metal textures from the specified list of URLs.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtextures(urls:options:completionhandler:)"
+      },
+      "-newTexturesWithContentsOfURLs:options:error:": {
+        "doc": "Synchronously loads image data and creates new Metal textures from the specified list of URLs.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtextures(urls:options:error:)"
+      },
+      "-newTexturesWithNames:scaleFactor:bundle:options:completionHandler:": {
+        "doc": "Asynchronously loads image data and creates Metal textures from the specified list of named texture assets in an asset catalog.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtextures(names:scalefactor:bundle:options:completionhandler:)"
+      },
+      "-newTexturesWithNames:scaleFactor:displayGamut:bundle:options:completionHandler:": {
+        "doc": "Asynchronously loads image data and creates Metal textures from the specified list of named texture assets in an asset catalog.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/newtextures(names:scalefactor:displaygamut:bundle:options:completionhandler:)"
+      }
+    },
+    "MTKView": {
+      "-draw": {
+        "doc": "Redraws the view’s contents immediately.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/draw()"
+      },
+      "-initWithCoder:": {
+        "doc": "Initializes a view from data in a given unarchiver.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/init(coder:)"
+      },
+      "-initWithFrame:device:": {
+        "doc": "Initializes a view with the specified frame rectangle and Metal device.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/init(frame:device:)"
+      },
+      "-releaseDrawables": {
+        "doc": "Releases the depthStencilTexture and multisampleColorTexture objects.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/releasedrawables()"
+      }
+    }
+  },
+  "properties": {
+    "MTKMesh": {
+      "name": {
+        "doc": "The name of the mesh.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkmesh/name"
+      },
+      "submeshes": {
+        "doc": "An array of submeshes containing index buffers referencing the mesh vertices.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkmesh/submeshes"
+      },
+      "vertexBuffers": {
+        "doc": "An array of buffers in which mesh vertex data resides.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkmesh/vertexbuffers"
+      },
+      "vertexCount": {
+        "doc": "The number of vertices in the vertex buffers.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkmesh/vertexcount"
+      },
+      "vertexDescriptor": {
+        "doc": "A Model I/O vertex descriptor specifying the data layout in the vertex buffers.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkmesh/vertexdescriptor"
+      }
+    },
+    "MTKMeshBuffer": {
+      "allocator": {
+        "doc": "The allocator object used to create this mesh buffer.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkmeshbuffer/allocator"
+      },
+      "buffer": {
+        "doc": "The Metal buffer backing all vertex and index data.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkmeshbuffer/buffer"
+      },
+      "length": {
+        "doc": "The logical size of the Metal buffer, in bytes.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkmeshbuffer/length"
+      },
+      "offset": {
+        "doc": "The byte offset of the data within the Metal buffer.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkmeshbuffer/offset"
+      },
+      "type": {
+        "doc": "The type of data contained in the originating Model I/O buffer.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkmeshbuffer/type"
+      },
+      "zone": {
+        "doc": "The zone, if any, from which this mesh buffer was created.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkmeshbuffer/zone"
+      }
+    },
+    "MTKMeshBufferAllocator": {
+      "device": {
+        "doc": "The device used to create Metal objects.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkmeshbufferallocator/device"
+      }
+    },
+    "MTKSubmesh": {
+      "indexBuffer": {
+        "doc": "The index buffer used to render the submesh object.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtksubmesh/indexbuffer"
+      },
+      "indexCount": {
+        "doc": "The number of indices in the index buffer.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtksubmesh/indexcount"
+      },
+      "indexType": {
+        "doc": "The type of index data in the index buffer.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtksubmesh/indextype"
+      },
+      "mesh": {
+        "doc": "The parent mesh containing the vertex data of this submesh.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtksubmesh/mesh"
+      },
+      "name": {
+        "doc": "The name of the submesh.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtksubmesh/name"
+      },
+      "primitiveType": {
+        "doc": "The primitive type with which to draw the submesh object.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtksubmesh/primitivetype"
+      }
+    },
+    "MTKTextureLoader": {
+      "MTKTextureLoaderArrayCallback": {
+        "doc": "The signature for the block executed after an asynchronous loading operation for multiple textures has completed.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/arraycallback"
+      },
+      "MTKTextureLoaderCallback": {
+        "doc": "The signature for the block executed after an asynchronous loading operation for a single texture has completed.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/callback"
+      },
+      "MTKTextureLoaderError": {
+        "doc": "Errors returned by the texture loader.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/error"
+      },
+      "MTKTextureLoaderOption": {
+        "doc": "Keys and values used to specify loading options.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/option"
+      },
+      "device": {
+        "doc": "The device object that the texture loader uses to create textures.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtktextureloader/device"
+      }
+    },
+    "MTKView": {
+      "autoResizeDrawable": {
+        "doc": "A Boolean value that controls whether to resize the drawable as the view changes size.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/autoresizedrawable"
+      },
+      "clearColor": {
+        "doc": "The color to use to clear the color target when creating a render pass descriptor.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/clearcolor"
+      },
+      "clearDepth": {
+        "doc": "The depth value to use to clear the depth target when creating a render pass descriptor.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/cleardepth"
+      },
+      "clearStencil": {
+        "doc": "The stencil value to use to clear the stencil target when creating a render pass descriptor.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/clearstencil"
+      },
+      "colorPixelFormat": {
+        "doc": "The color pixel format for the current drawable’s texture.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/colorpixelformat"
+      },
+      "colorspace": {
+        "doc": "The color space of the rendered content.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/colorspace"
+      },
+      "currentDrawable": {
+        "doc": "The drawable to use for the current frame.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/currentdrawable"
+      },
+      "currentRenderPassDescriptor": {
+        "doc": "A render pass descriptor to draw into the current drawable.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/currentrenderpassdescriptor"
+      },
+      "delegate": {
+        "doc": "The view’s delegate.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/delegate"
+      },
+      "depthStencilAttachmentTextureUsage": {
+        "doc": "The texture usage characteristics that the view uses when creating the depth and stencil textures.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/depthstencilattachmenttextureusage"
+      },
+      "depthStencilPixelFormat": {
+        "doc": "The format used to generate the depthStencilTexture object.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/depthstencilpixelformat"
+      },
+      "depthStencilStorageMode": {
+        "doc": "The storage mode that the packed depth and stencil texture use.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/depthstencilstoragemode"
+      },
+      "depthStencilTexture": {
+        "doc": "A packed depth and stencil texture associated with the current drawable object’s texture.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/depthstenciltexture"
+      },
+      "device": {
+        "doc": "The device object the view uses to create its Metal objects.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/device"
+      },
+      "drawableSize": {
+        "doc": "The current size of drawable textures.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/drawablesize"
+      },
+      "enableSetNeedsDisplay": {
+        "doc": "A Boolean value that indicates whether the view responds to setNeedsDisplay.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/enablesetneedsdisplay"
+      },
+      "framebufferOnly": {
+        "doc": "A Boolean value that determines whether the drawable’s textures are used only for rendering.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/framebufferonly"
+      },
+      "multisampleColorAttachmentTextureUsage": {
+        "doc": "The texture usage characteristics that the view uses when creating multisample textures.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/multisamplecolorattachmenttextureusage"
+      },
+      "multisampleColorTexture": {
+        "doc": "The multisample color sample texture to render into.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/multisamplecolortexture"
+      },
+      "paused": {
+        "doc": "A Boolean value that indicates whether the draw loop is paused.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/ispaused"
+      },
+      "preferredDevice": {
+        "doc": "The device object that the system recommends using for this view.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/preferreddevice"
+      },
+      "preferredDrawableSize": {
+        "doc": "The recommended dimensions of the drawable.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/preferreddrawablesize"
+      },
+      "preferredFramesPerSecond": {
+        "doc": "The rate at which the view redraws its contents.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/preferredframespersecond"
+      },
+      "presentsWithTransaction": {
+        "doc": "A Boolean value that determines whether the view presents its content using a Core Animation transaction.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/presentswithtransaction"
+      },
+      "sampleCount": {
+        "doc": "The sample count used to generate the multisampleColorTexture object.",
+        "url": "https://developer.apple.com/documentation/metalkit/mtkview/samplecount"
+      }
+    }
+  }
+}

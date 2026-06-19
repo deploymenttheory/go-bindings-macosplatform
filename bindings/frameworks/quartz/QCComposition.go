@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The QCComposition class represents a Quartz Composer composition that either:
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/qccomposition
 type QCComposition struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func QCCompositionFromID(id objc.ID) *QCComposition {
 	return o
 }
 
+// Returns a composition object initialized with a Quartz Composer composition file.
 func QCCompositionCompositionWithFile(path *foundation.NSString) *QCComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQCComposition), _qCCompositionSelCompositionWithFile, path.Ptr())
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func QCCompositionCompositionWithFile(path *foundation.NSString) *QCComposition 
 	return QCCompositionFromID(_ret)
 }
 
+// Returns a composition object initialized with the contents of a Quartz Composer composition file.
 func QCCompositionCompositionWithData(data *foundation.NSData) *QCComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQCComposition), _qCCompositionSelCompositionWithData, data.Ptr())
 	if _ret != 0 {
@@ -51,22 +55,38 @@ func QCCompositionCompositionWithData(data *foundation.NSData) *QCComposition {
 	return QCCompositionFromID(_ret)
 }
 
+// Returns the list of protocols to which the composition conforms.
 func (o *QCComposition) Protocols() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _qCCompositionSelProtocols)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionSelProtocols)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Returns the attributes of the composition.
 func (o *QCComposition) Attributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _qCCompositionSelAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionSelAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Returns an array listing the keys that identify the input ports of the root patch of the composition.
 func (o *QCComposition) InputKeys() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _qCCompositionSelInputKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionSelInputKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Returns an array listing the keys that identify the output ports of the root patch of the composition.
 func (o *QCComposition) OutputKeys() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _qCCompositionSelOutputKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionSelOutputKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

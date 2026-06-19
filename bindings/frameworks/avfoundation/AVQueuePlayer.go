@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that plays a sequence of player items.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avqueueplayer
 type AVQueuePlayer struct {
 	AVPlayer
@@ -37,7 +39,7 @@ func AVQueuePlayerFromID(id objc.ID) *AVQueuePlayer {
 	return o
 }
 
-// Creates an instance of AVQueuePlayer and enqueues the AVPlayerItems from the specified array. - Parameter items: An NSArray of AVPlayerItems with which to populate the player's queue initially. - Returns: An instance of AVQueuePlayer.
+// Returns an object that plays a queue of items.
 func AVQueuePlayerQueuePlayerWithItems(items *foundation.NSArray[*AVPlayerItem]) *AVQueuePlayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVQueuePlayer), _aVQueuePlayerSelQueuePlayerWithItems, items.Ptr())
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func AVQueuePlayerQueuePlayerWithItems(items *foundation.NSArray[*AVPlayerItem])
 	return AVQueuePlayerFromID(_ret)
 }
 
-// Initializes an instance of AVQueuePlayer by enqueueing the AVPlayerItems from the specified array. This method throws an exception if items contains duplicated values or values associated with another AVPlayer. - Parameter items: An NSArray of AVPlayerItems with which to populate the player's queue initially. - Returns: An instance of AVQueuePlayer.
+// Creates an object that plays a queue of items.
 func (o *AVQueuePlayer) InitWithItems(items *foundation.NSArray[*AVPlayerItem]) *AVQueuePlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVQueuePlayerSelInitWithItems, items.Ptr())
 	if _ret != 0 {
@@ -55,7 +57,7 @@ func (o *AVQueuePlayer) InitWithItems(items *foundation.NSArray[*AVPlayerItem]) 
 	return AVQueuePlayerFromID(_ret)
 }
 
-// Provides an array of the currently enqueued items. - Returns: An NSArray containing the enqueued AVPlayerItems.
+// Returns an array of the currently enqueued items.
 func (o *AVQueuePlayer) Items() *foundation.NSArray[*AVPlayerItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVQueuePlayerSelItems)
 	if _ret != 0 {
@@ -64,28 +66,28 @@ func (o *AVQueuePlayer) Items() *foundation.NSArray[*AVPlayerItem] {
 	return foundation.NSArrayFromID[*AVPlayerItem](_ret)
 }
 
-// Ends playback of the current item and initiates playback of the next item in the player's queue. Removes the current item from the play queue.
+// Ends playback of the current item and starts playback of the next item in the player’s queue.
 func (o *AVQueuePlayer) AdvanceToNextItem() {
 	o.Ptr().Send(_aVQueuePlayerSelAdvanceToNextItem)
 }
 
-// Tests whether an AVPlayerItem can be inserted into the player's queue. Note that adding the same AVPlayerItem to an AVQueuePlayer at more than one position in the queue is not supported. - Parameter item: The AVPlayerItem to be tested. - Parameter afterItem: The item that the item to be tested is to follow in the queue. Pass nil to test whether the item can be appended to the queue. - Returns: An indication of whether the item can be inserted into the queue after the specified item.
+// Returns a Boolean value that indicates whether you can insert a player item into the player’s queue.
 func (o *AVQueuePlayer) CanInsertItemAfterItem(item *AVPlayerItem, afterItem *AVPlayerItem) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVQueuePlayerSelCanInsertItemAfterItem, item.Ptr(), afterItem.Ptr())
 	return _ret
 }
 
-// Places an AVPlayerItem after the specified item in the queue. This method throws an exception if item already exists in the queue. - Parameter item: The item to be inserted. - Parameter afterItem: The item that the newly inserted item should follow in the queue. Pass nil to append the item to the queue.
+// Inserts a player item after another player item in the queue.
 func (o *AVQueuePlayer) InsertItemAfterItem(item *AVPlayerItem, afterItem *AVPlayerItem) {
 	o.Ptr().Send(_aVQueuePlayerSelInsertItemAfterItem, item.Ptr(), afterItem.Ptr())
 }
 
-// Removes an AVPlayerItem from the queue. If the item to be removed is currently playing, has the same effect as -advanceToNextItem. - Parameter item: The item to be removed.
+// Removes a given player item from the queue.
 func (o *AVQueuePlayer) RemoveItem(item *AVPlayerItem) {
 	o.Ptr().Send(_aVQueuePlayerSelRemoveItem, item.Ptr())
 }
 
-// Removes all items from the queue. Stops playback by the target.
+// Removes all player items from the queue.
 func (o *AVQueuePlayer) RemoveAllItems() {
 	o.Ptr().Send(_aVQueuePlayerSelRemoveAllItems)
 }

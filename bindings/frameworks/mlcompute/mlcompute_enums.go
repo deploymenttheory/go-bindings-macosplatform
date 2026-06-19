@@ -64,51 +64,53 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
+// An activation type that you specify for an activation descriptor.
 type MLCActivationType int64
 
 const (
-	// The identity activation type.
+	// An activation type that implements the identity function.
 	MLCActivationTypeNone MLCActivationType = 0
-	// The ReLU activation type. @discussion This activation type implements the following function: \code f(x) = x >= 0 ? x : a * x \endcode
+	// An activation type that implements the rectified linear unit activation function.
 	MLCActivationTypeReLU MLCActivationType = 1
-	// The linear activation type. @discussion This activation type implements the following function: \code f(x) = a * x + b \endcode
+	// An activation type that implements the linear activation function.
 	MLCActivationTypeLinear MLCActivationType = 2
-	// The sigmoid activation type. @discussion This activation type implements the following function: \code f(x) = 1 / (1 + e⁻ˣ) \endcode
+	// An activation type that implements the sigmoid activation function.
 	MLCActivationTypeSigmoid MLCActivationType = 3
-	// The hard sigmoid activation type. @discussion This activation type implements the following function: \code f(x) = clamp((x * a) + b, 0, 1) \endcode
+	// An activation type that implements the hard sigmoid activation function.
 	MLCActivationTypeHardSigmoid MLCActivationType = 4
-	// The hyperbolic tangent (TanH) activation type. @discussion This activation type implements the following function: \code f(x) = a * tanh(b * x) \endcode
+	// An activation type that implements the hyperbolic tangent activation function.
 	MLCActivationTypeTanh MLCActivationType = 5
-	// The absolute activation type. @discussion This activation type implements the following function: \code f(x) = fabs(x) \endcode
+	// An activation type that implements the absolute activation function.
 	MLCActivationTypeAbsolute MLCActivationType = 6
-	// The parametric soft plus activation type. @discussion This activation type implements the following function: \code f(x) = a * log(1 + e^(b * x)) \endcode
+	// An activation type that implements the soft plus activation function.
 	MLCActivationTypeSoftPlus MLCActivationType = 7
-	// The parametric soft sign activation type. @discussion This activation type implements the following function: \code f(x) = x / (1 + abs(x)) \endcod
+	// An activation type that implements the parametric soft sign activation function.
 	MLCActivationTypeSoftSign MLCActivationType = 8
-	// The parametric ELU activation type. @discussion This activation type implements the following function: \code f(x) = x >= 0 ? x : a * (exp(x) - 1) \endcode
+	// An activation type that implements the exponential linear unit activation function.
 	MLCActivationTypeELU MLCActivationType = 9
-	// The ReLUN activation type. @discussion This activation type implements the following function: \code f(x) = min((x >= 0 ? x : a * x), b) \endcode
+	// An activation type that implements the ReLUN activation function.
 	MLCActivationTypeReLUN MLCActivationType = 10
-	// The log sigmoid activation type. @discussion This activation type implements the following function: \code f(x) = log(1 / (1 + exp(-x))) \endcode
+	// An activation type that implements the log sigmoid activation function.
 	MLCActivationTypeLogSigmoid MLCActivationType = 11
-	// The SELU activation type. @discussion This activation type implements the following function: \code f(x) = scale * (max(0, x) + min(0, α * (exp(x) − 1))) \endcode where: \code α = 1.6732632423543772848170429916717 scale = 1.0507009873554804934193349852946 \endcode
+	// An activation type that implements the scaled exponential linear unit activation function.
 	MLCActivationTypeSELU MLCActivationType = 12
-	// The CELU activation type. @discussion This activation type implements the following function: \code f(x) = max(0, x) + min(0, a * (exp(x / a) − 1)) \endcode
+	// An activation type that implements the CELU activation function.
 	MLCActivationTypeCELU MLCActivationType = 13
-	// The hard shrink activation type. @discussion This activation type implements the following function: \code f(x) = x, if x > a or x < −a, else 0 \endcode
+	// An activation type that implements the hard shrink activation function.
 	MLCActivationTypeHardShrink MLCActivationType = 14
-	// The soft shrink activation type. @discussion This activation type implements the following function: \code f(x) = x - a, if x > a, x + a, if x < −a, else 0 \endcode
+	// An activation type that implements the soft shrink activation function.
 	MLCActivationTypeSoftShrink MLCActivationType = 15
-	// The hyperbolic tangent (TanH) shrink activation type. @discussion This activation type implements the following function: \code f(x) = x - tanh(x) \endcode
+	// An activation type that implements the hyperbolic tangent shrink activation function.
 	MLCActivationTypeTanhShrink MLCActivationType = 16
-	// The threshold activation type. @discussion This activation type implements the following function: \code f(x) = x, if x > a, else b \endcode
+	// An activation type that implements the threshold activation function.
 	MLCActivationTypeThreshold MLCActivationType = 17
-	// The GELU activation type. @discussion This activation type implements the following function: \code f(x) = x * CDF(x) \endcode
+	// An activation type that implements the gaussian error linear unit activation function.
 	MLCActivationTypeGELU MLCActivationType = 18
-	// The hardswish activation type. @discussion This activation type implements the following function: \code f(x) = 0, if x <= -3 f(x) = x, if x >= +3 f(x) = x * (x + 3)/6, otherwise \endcode
+	// An activation type that implements the hard swish activation function.
 	MLCActivationTypeHardSwish MLCActivationType = 19
-	// The clamp activation type. @discussion This activation type implements the following function: \code f(x) = min(max(x, a), b) \endcode
+	// An activation type that implements the clamp activation function.
 	MLCActivationTypeClamp MLCActivationType = 20
+	// The count of activation types.
 	MLCActivationTypeCount MLCActivationType = 21
 )
 
@@ -163,69 +165,71 @@ func (e MLCActivationType) String() string {
 	}
 }
 
+// Constants that describe an arithmetic operation.
 type MLCArithmeticOperation int64
 
 const (
-	// An operation that calculates the elementwise sum of its two inputs.
+	// Calculates the element-wise sum of the inputs.
 	MLCArithmeticOperationAdd MLCArithmeticOperation = 0
-	// An operation that calculates the elementwise difference of its two inputs.
+	// Calculates the element-wise difference between the inputs.
 	MLCArithmeticOperationSubtract MLCArithmeticOperation = 1
-	// An operation that calculates the elementwise product of its two inputs.
+	// Calculates the element-wise product of the inputs.
 	MLCArithmeticOperationMultiply MLCArithmeticOperation = 2
-	// An operation that calculates the elementwise division of its two inputs.
+	// Calculates the element-wise division of the inputs.
 	MLCArithmeticOperationDivide MLCArithmeticOperation = 3
-	// An operation that calculates the elementwise floor of its two inputs.
+	// Calculates the element-wise floor of the inputs.
 	MLCArithmeticOperationFloor MLCArithmeticOperation = 4
-	// An operation that calculates the elementwise round of its inputs.
+	// Calculates the element-wise rounding of the inputs.
 	MLCArithmeticOperationRound MLCArithmeticOperation = 5
-	// An operation that calculates the elementwise ceiling of its inputs.
+	// Calculates the element-wise ceiling of the inputs.
 	MLCArithmeticOperationCeil MLCArithmeticOperation = 6
-	// An operation that calculates the elementwise square root of its inputs.
+	// Calculates the element-wise square root of the input.
 	MLCArithmeticOperationSqrt MLCArithmeticOperation = 7
-	// An operation that calculates the elementwise reciprocal of the square root of its inputs.
+	// Calculates the element-wise reciprocal of the square root of the input.
 	MLCArithmeticOperationRsqrt MLCArithmeticOperation = 8
-	// An operation that calculates the elementwise sine of its inputs.
+	// Calculates the element-wise sine of the input.
 	MLCArithmeticOperationSin MLCArithmeticOperation = 9
-	// An operation that calculates the elementwise cosine of its inputs.
+	// Calculates the element-wise cosine of the input.
 	MLCArithmeticOperationCos MLCArithmeticOperation = 10
-	// An operation that calculates the elementwise tangent of its inputs.
+	// Calculates the element-wise tangent of the input.
 	MLCArithmeticOperationTan MLCArithmeticOperation = 11
-	// An operation that calculates the elementwise inverse sine of its inputs.
+	// Calculates the element-wise inverse sine of the input.
 	MLCArithmeticOperationAsin MLCArithmeticOperation = 12
-	// An operation that calculates the elementwise inverse cosine of its inputs.
+	// Calculates the element-wise inverse cosine of the input.
 	MLCArithmeticOperationAcos MLCArithmeticOperation = 13
-	// An operation that calculates the elementwise inverse tangent of its inputs.
+	// Calculates the element-wise inverse tangent of the input.
 	MLCArithmeticOperationAtan MLCArithmeticOperation = 14
-	// An operation that calculates the elementwise hyperbolic sine of its inputs.
+	// Calculates the element-wise hyperbolic sine of the input.
 	MLCArithmeticOperationSinh MLCArithmeticOperation = 15
-	// An operation that calculates the elementwise hyperbolic cosine of its inputs.
+	// Calculates the element-wise hyperbolic cosine of the input.
 	MLCArithmeticOperationCosh MLCArithmeticOperation = 16
-	// An operation that calculates the elementwise hyperbolic tangent of its inputs.
+	// Calculates the element-wise hyperbolic tangent of the input.
 	MLCArithmeticOperationTanh MLCArithmeticOperation = 17
-	// An operation that calculates the elementwise inverse hyperbolic sine of its inputs.
+	// Calculates the element-wise inverse hyperbolic sine of the input.
 	MLCArithmeticOperationAsinh MLCArithmeticOperation = 18
-	// An operation that calculates the elementwise inverse hyperbolic cosine of its inputs.
+	// Calculates the element-wise inverse hyperbolic cosine of the input.
 	MLCArithmeticOperationAcosh MLCArithmeticOperation = 19
-	// An operation that calculates the elementwise inverse hyperbolic tangent of its inputs.
+	// Calculates the element-wise inverse hyperbolic tangent of the input.
 	MLCArithmeticOperationAtanh MLCArithmeticOperation = 20
-	// An operation that calculates the elementwise first input raised to the power of its second input.
+	// Calculates the element-wise first input raised to the power of the second input.
 	MLCArithmeticOperationPow MLCArithmeticOperation = 21
-	// An operation that calculates the elementwise result of e raised to the power of its input.
+	// Calculates the element-wise result of the exponent raised to the power of the input.
 	MLCArithmeticOperationExp MLCArithmeticOperation = 22
-	// An operation that calculates the elementwise result of 2 raised to the power of its input.
+	// Calculates the element-wise result of the number 2 raised to the power of the input.
 	MLCArithmeticOperationExp2 MLCArithmeticOperation = 23
-	// An operation that calculates the elementwise natural logarithm of its input.
+	// Calculates the element-wise natural logarithm of the input.
 	MLCArithmeticOperationLog MLCArithmeticOperation = 24
-	// An operation that calculates the elementwise base 2 logarithm of its input.
+	// Calculates the element-wise base 2 logarithm of the input.
 	MLCArithmeticOperationLog2 MLCArithmeticOperation = 25
-	// An operation that calculates the elementwise product of its two inputs.  Returns 0 if y in x * y is zero, even if x is NaN or INF
+	// Calculates the element-wise product of the inputs, and returns 0 when the result isn’t a number or infinity.
 	MLCArithmeticOperationMultiplyNoNaN MLCArithmeticOperation = 26
-	// An operations that calculates the elementwise division of its two inputs.  Returns 0 if the denominator is 0.
+	// Calculates the element-wise division of the inputs, and returns 0 if the denominator is 0.
 	MLCArithmeticOperationDivideNoNaN MLCArithmeticOperation = 27
-	// An operation that calculates the elementwise min of two inputs.
+	// Calculates the element-wise minimum of the inputs.
 	MLCArithmeticOperationMin MLCArithmeticOperation = 28
-	// An operations that calculates the elementwise max of two inputs.
-	MLCArithmeticOperationMax   MLCArithmeticOperation = 29
+	// Calculates the element-wise maximum the inputs.
+	MLCArithmeticOperationMax MLCArithmeticOperation = 29
+	// The total number of arithmetic operations.
 	MLCArithmeticOperationCount MLCArithmeticOperation = 30
 )
 
@@ -298,6 +302,7 @@ func (e MLCArithmeticOperation) String() string {
 	}
 }
 
+// A comparison operation.
 type MLCComparisonOperation int64
 
 const (
@@ -313,7 +318,8 @@ const (
 	MLCComparisonOperationLogicalNAND    MLCComparisonOperation = 9
 	MLCComparisonOperationLogicalNOR     MLCComparisonOperation = 10
 	MLCComparisonOperationLogicalXOR     MLCComparisonOperation = 11
-	MLCComparisonOperationCount          MLCComparisonOperation = 12
+	// A number that represents the operation count.
+	MLCComparisonOperationCount MLCComparisonOperation = 12
 )
 
 func (e MLCComparisonOperation) String() string {
@@ -349,6 +355,7 @@ func (e MLCComparisonOperation) String() string {
 	}
 }
 
+// The convolution type specified for a convolution layer.
 type MLCConvolutionType int64
 
 const (
@@ -373,6 +380,7 @@ func (e MLCConvolutionType) String() string {
 	}
 }
 
+// A tensor data type.
 type MLCDataType int64
 
 const (
@@ -419,17 +427,19 @@ func (e MLCDataType) String() string {
 	}
 }
 
+// A device type for execution of a neural network.
 type MLCDeviceType int64
 
 const (
-	// The CPU device
+	// A device type that represents the CPU.
 	MLCDeviceTypeCPU MLCDeviceType = 0
-	// The GPU device.
+	// A device type that represents the GPU.
 	MLCDeviceTypeGPU MLCDeviceType = 1
-	// The any device type.  When selected, the framework will automatically use the appropriate devices to achieve the best performance.
+	// A device type that represents either the CPU or GPU.
 	MLCDeviceTypeAny MLCDeviceType = 2
-	// The  Apple Neural Engine device.  When selected, the framework will use the  Neural Engine to execute all layers that can be executed on it. Layers that cannot be executed on the ANE will run on the CPU or GPU.   The Neural Engine device must be explicitly selected.  MLDeviceTypeAny will not select the Neural Engine device.  In addition, this device can be used with inference graphs only.  This device cannot be used with a training graph or an inference graph that shares layers with a training graph.
-	MLCDeviceTypeANE   MLCDeviceType = 3
+	// A device type that represents the Apple Neural Engine.
+	MLCDeviceTypeANE MLCDeviceType = 3
+	// A number that represents the number of device types.
 	MLCDeviceTypeCount MLCDeviceType = 4
 )
 
@@ -450,19 +460,21 @@ func (e MLCDeviceType) String() string {
 	}
 }
 
+// A bitmask that specifies the options you use when executing a graph.
 type MLCExecutionOptions int64
 
 const (
+	// The option to execute the graph in the most efficient way possible.
 	MLCExecutionOptionsNone MLCExecutionOptions = 0
-	// The option to skip writing input data to device memory. @discussion this option to prevent writing the input tensors to device memory associated with these tensors when the framework executes the graph.
+	// The option to skip writing input data to device memory.
 	MLCExecutionOptionsSkipWritingInputDataToDevice MLCExecutionOptions = 1
-	// The option to execute the graph synchronously. @discussion Include this option to wait until execution of the graph on specified device finishes before returning from the \p execute method.
+	// The option to execute the graph synchronously.
 	MLCExecutionOptionsSynchronous MLCExecutionOptions = 2
-	// The option to return profiling information in the callback before returning from execution. @discussion Include this option to return profliling information in the graph execute completion handler callback, including device execution time.
+	// The option to return profiling information in the callback before returning from execution.
 	MLCExecutionOptionsProfiling MLCExecutionOptions = 4
-	// The option to execute the forward pass for inference only. @discussion If you include this option and execute a training graph using one of the \p execute methods, such as \p -executeWithInputsData:lossLabelsData:lossLabelWeightsData:batchSize:options:completionHandler: , the framework only executes the forward pass of the training graph, and it executes that forward pass for inference only. If you include this option and execute a training graph using one of the executeForward methods, such as \p -executeForwardWithBatchSize:options:completionHandler:), the framework executes the forward pass for inference only.
+	// The option to execute the forward pass for inference only.
 	MLCExecutionOptionsForwardForInference MLCExecutionOptions = 8
-	// The option to enable additional per layer profiling information currently emitted using signposts. @discussion The option to enable per layer profiling information emitted as signposts. The per layer information can be visualized using the Logging Instrument in Xcode's Instruments. This information may not be available for all MLCDevice.
+	// The option to enable additional per-layer profiling information using signposts.
 	MLCExecutionOptionsPerLayerProfiling MLCExecutionOptions = 16
 )
 
@@ -489,11 +501,15 @@ func (e MLCExecutionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A clipping type the system applies to a gradient.
 type MLCGradientClippingType int64
 
 const (
-	MLCGradientClippingTypeByValue      MLCGradientClippingType = 0
-	MLCGradientClippingTypeByNorm       MLCGradientClippingType = 1
+	// An option that clips by value.
+	MLCGradientClippingTypeByValue MLCGradientClippingType = 0
+	// An option that clips by norm.
+	MLCGradientClippingTypeByNorm MLCGradientClippingType = 1
+	// An option that clips by global norm.
 	MLCGradientClippingTypeByGlobalNorm MLCGradientClippingType = 2
 )
 
@@ -510,18 +526,19 @@ func (e MLCGradientClippingType) String() string {
 	}
 }
 
+// A bitmask that specifies the options you use when compiling a graph.
 type MLCGraphCompilationOptions int64
 
 const (
-	// No graph compilation options.
+	// The default option for graph compilation.
 	MLCGraphCompilationOptionsNone MLCGraphCompilationOptions = 0
-	// The option to debug layers during graph compilation. @discussion Include this option to disable various optimizations such as layer fusion, and ensure the framework synchronizes the resulting forward and gradients tensors host memory with device memory, for layers marked as debuggable.
+	// The option to debug layers during graph compilation.
 	MLCGraphCompilationOptionsDebugLayers MLCGraphCompilationOptions = 1
-	// The option to disable layer fusion during graph compilation. @discussion Include this option to disable fusion of layers, which is an important optimization that helps performance and memory footprint.
+	// The option to disable layer fusion during graph compilation.
 	MLCGraphCompilationOptionsDisableLayerFusion MLCGraphCompilationOptions = 2
-	// The option to link graphs during graph compilation. @discussion Include this option when you link together one or more sub-graphs when executing the forward, gradient, and optimizer update. For example, if the full computation graph includes a layer that the framework doesn’t support, you’ll need to create multiple sub-graphs and link them together using \p MLCGraphCompilationOptionsLinkGraphs. When doing so, include this option when you call \p -compileWithOptions: for graphs you want to link together.
+	// The option to link graphs during graph compilation.
 	MLCGraphCompilationOptionsLinkGraphs MLCGraphCompilationOptions = 4
-	// The option to compute all gradients during graph compilation. @discussion Include this option to compute gradients for layers with or without parameters that only take input tensors. For example, if the first layer of a graph is a convolution layer, the framework only computes the gradients for weights and biases associated with the convolution layer, but not the gradients for the input. Include this option if you want to compute all gradients for the input.
+	// The option to compute all gradients during graph compilation.
 	MLCGraphCompilationOptionsComputeAllGradients MLCGraphCompilationOptions = 8
 )
 
@@ -545,12 +562,13 @@ func (e MLCGraphCompilationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that describe the result of an LSTM layer.
 type MLCLSTMResultMode int64
 
 const (
-	// The output result mode. When selected for an LSTM layer, the layer will produce a single result tensor representing the final output of the LSTM.
+	// A result mode that indicates the layer produces a single result tensor that represents the final output of the LSTM.
 	MLCLSTMResultModeOutput MLCLSTMResultMode = 0
-	// The output and states result mode. When selected for an LSTM layer, the layer will produce three result tensors representing the final output of the LSTM, the last hidden state, and the cell state, respectively.
+	// A result mode that indicates the layer produces three result tensors that represent the final output of the LSTM, the last hidden state, and the cell state.
 	MLCLSTMResultModeOutputAndStates MLCLSTMResultMode = 1
 )
 
@@ -565,6 +583,7 @@ func (e MLCLSTMResultMode) String() string {
 	}
 }
 
+// A loss function.
 type MLCLossType int64
 
 const (
@@ -616,6 +635,7 @@ func (e MLCLossType) String() string {
 	}
 }
 
+// A padding policy that you specify for a convolution or pooling layer.
 type MLCPaddingPolicy int64
 
 const (
@@ -640,6 +660,7 @@ func (e MLCPaddingPolicy) String() string {
 	}
 }
 
+// A padding type that you specify for a padding layer.
 type MLCPaddingType int64
 
 const (
@@ -668,6 +689,7 @@ func (e MLCPaddingType) String() string {
 	}
 }
 
+// A pooling function type for a pooling layer.
 type MLCPoolingType int64
 
 const (
@@ -695,6 +717,7 @@ func (e MLCPoolingType) String() string {
 	}
 }
 
+// An initializer type you use to create a tensor with random data.
 type MLCRandomInitializerType int64
 
 const (
@@ -725,29 +748,31 @@ func (e MLCRandomInitializerType) String() string {
 	}
 }
 
+// Constants that describe a reduction operation type.
 type MLCReductionType int64
 
 const (
-	// No reduction.
+	// A reduction operation that applies no reduction.
 	MLCReductionTypeNone MLCReductionType = 0
-	// The sum reduction.
+	// A reduction operation that applies to the sum of the dimensions.
 	MLCReductionTypeSum MLCReductionType = 1
-	// The mean reduction.
+	// A reduction operation that applies to the mean of the dimensions.
 	MLCReductionTypeMean MLCReductionType = 2
-	// The max reduction.
+	// A reduction operation that applies to the maximum dimension.
 	MLCReductionTypeMax MLCReductionType = 3
-	// The min reduction.
+	// A reduction operation that applies to the minimum dimension.
 	MLCReductionTypeMin MLCReductionType = 4
-	// The argmax reduction.
+	// A reduction operation that applies to the maximum dimension you specify.
 	MLCReductionTypeArgMax MLCReductionType = 5
-	// The argmin reduction.
+	// A reduction operation that applies to the minimum dimension you specify.
 	MLCReductionTypeArgMin MLCReductionType = 6
-	// The L1norm reduction.
+	// A reduction operation that applies a lasso regularization penalty.
 	MLCReductionTypeL1Norm MLCReductionType = 7
-	// Any(X) = X_0 || X_1 || ... X_n
+	// A reduction operation that applies to any dimension.
 	MLCReductionTypeAny MLCReductionType = 8
-	// Alf(X) = X_0 && X_1 && ... X_n
-	MLCReductionTypeAll   MLCReductionType = 9
+	// A reduction operation that applies to all dimensions.
+	MLCReductionTypeAll MLCReductionType = 9
+	// The total number of reduction operations.
 	MLCReductionTypeCount MLCReductionType = 10
 )
 
@@ -780,6 +805,7 @@ func (e MLCReductionType) String() string {
 	}
 }
 
+// A regularization function to use with an optimizer.
 type MLCRegularizationType int64
 
 const (
@@ -804,6 +830,7 @@ func (e MLCRegularizationType) String() string {
 	}
 }
 
+// A sampling mode for an upsample layer.
 type MLCSampleMode int64
 
 const (
@@ -824,6 +851,7 @@ func (e MLCSampleMode) String() string {
 	}
 }
 
+// A softmax operation.
 type MLCSoftmaxOperation int64
 
 const (

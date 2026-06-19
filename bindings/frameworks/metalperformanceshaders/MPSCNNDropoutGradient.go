@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A gradient dropout filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnndropoutgradient
 type MPSCNNDropoutGradient struct {
 	mpsneuralnetwork.MPSCNNGradientKernel

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a payment card available to add as a payment pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionpaymentpassentry
 type PKIssuerProvisioningExtensionPaymentPassEntry struct {
 	PKIssuerProvisioningExtensionPassEntry
@@ -33,6 +35,7 @@ func PKIssuerProvisioningExtensionPaymentPassEntryFromID(id objc.ID) *PKIssuerPr
 	return o
 }
 
+// Creates a new entry for a payment pass that a user adds to Wallet.
 func (o *PKIssuerProvisioningExtensionPaymentPassEntry) InitWithIdentifierTitleArtAddRequestConfiguration(identifier *foundation.NSString, title *foundation.NSString, art unsafe.Pointer, configuration *PKAddPaymentPassRequestConfiguration) *PKIssuerProvisioningExtensionPaymentPassEntry {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKIssuerProvisioningExtensionPaymentPassEntrySelInitWithIdentifierTitleArtAddRequestConfiguration, identifier.Ptr(), title.Ptr(), art, configuration.Ptr())
 	if _ret != 0 {

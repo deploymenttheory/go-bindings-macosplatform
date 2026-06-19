@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A listener that waits for new incoming connections, configures them, and accepts or rejects them.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsxpclistener
 type NSXPCListener struct {
 	NSObject
@@ -39,6 +41,7 @@ func NSXPCListenerFromID(id objc.ID) *NSXPCListener {
 	return o
 }
 
+// Returns the singleton listener used to listen for incoming connections in an XPC service.
 func NSXPCListenerServiceListener() *NSXPCListener {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSXPCListener), _nSXPCListenerSelServiceListener)
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func NSXPCListenerServiceListener() *NSXPCListener {
 	return NSXPCListenerFromID(_ret)
 }
 
+// Returns a new anonymous listener connection.
 func NSXPCListenerAnonymousListener() *NSXPCListener {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSXPCListener), _nSXPCListenerSelAnonymousListener)
 	if _ret != 0 {
@@ -55,6 +59,7 @@ func NSXPCListenerAnonymousListener() *NSXPCListener {
 	return NSXPCListenerFromID(_ret)
 }
 
+// Initializes a listener in a LaunchAgent or LaunchDaemon which has a name advertised in a launchd.plist file.
 func (o *NSXPCListener) InitWithMachServiceName(name *NSString) *NSXPCListener {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCListenerSelInitWithMachServiceName, name.Ptr())
 	if _ret != 0 {
@@ -63,23 +68,27 @@ func (o *NSXPCListener) InitWithMachServiceName(name *NSString) *NSXPCListener {
 	return NSXPCListenerFromID(_ret)
 }
 
+// Starts processing of incoming requests.
 func (o *NSXPCListener) Resume() {
 	o.Ptr().Send(_nSXPCListenerSelResume)
 }
 
+// Suspends the listener.
 func (o *NSXPCListener) Suspend() {
 	o.Ptr().Send(_nSXPCListenerSelSuspend)
 }
 
+// Activates the listener.
 func (o *NSXPCListener) Activate() {
 	o.Ptr().Send(_nSXPCListenerSelActivate)
 }
 
+// Invalidates the listener.
 func (o *NSXPCListener) Invalidate() {
 	o.Ptr().Send(_nSXPCListenerSelInvalidate)
 }
 
-// Sets the code signing requirement for new connections. If the requirement is malformed, an exception is thrown. If new peer connections do not match the requirement, the incoming connection is automatically rejected before consulting the delegate. This method will only work on `anonymousListener` or `initWithMachServiceName` listener instances. Use on other types of listeners will result in an assertion failure. See https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/RequirementLang/RequirementLang.html for more information on the format.
+// Sets the code signing requirement for connections to this listener.
 func (o *NSXPCListener) SetConnectionCodeSigningRequirement(requirement *NSString) {
 	o.Ptr().Send(_nSXPCListenerSelSetConnectionCodeSigningRequirement, requirement.Ptr())
 }

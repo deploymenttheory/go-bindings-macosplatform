@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The object that the framework passes to the monitor’s callback handler upon receiving an event.
+//
 // MonitoringEvent wraps [raw.CLMonitoringEvent] with a fluent Go API.
 type MonitoringEvent struct {
 	inner *raw.CLMonitoringEvent

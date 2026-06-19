@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides information about the HEVC dependency attributes of a sample.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaextension/mehevcdependencyinfo
 type MEHEVCDependencyInfo struct {
 	foundation.NSObject

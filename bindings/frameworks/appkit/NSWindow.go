@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A window that an app displays on the screen.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nswindow
 type NSWindow struct {
 	NSResponder
@@ -374,31 +376,37 @@ func NSWindowFromID(id objc.ID) *NSWindow {
 	return o
 }
 
+// Returns the frame rectangle used by a window with a given content rectangle and window style.
 func NSWindowFrameRectForContentRectStyleMask(cRect corefoundation.CGRect, style NSWindowStyleMask) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](objc.ID(_clsNSWindow), _nSWindowSelFrameRectForContentRectStyleMask, cRect, style)
 	return _ret
 }
 
+// Returns the content rectangle used by a window with a given frame rectangle and window style.
 func NSWindowContentRectForFrameRectStyleMask(fRect corefoundation.CGRect, style NSWindowStyleMask) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](objc.ID(_clsNSWindow), _nSWindowSelContentRectForFrameRectStyleMask, fRect, style)
 	return _ret
 }
 
+// Returns the minimum width a window’s frame rectangle must have for it to display a title, with a given window style.
 func NSWindowMinFrameWidthWithTitleStyleMask(title *foundation.NSString, style NSWindowStyleMask) float64 {
 	_ret := objc.Send[float64](objc.ID(_clsNSWindow), _nSWindowSelMinFrameWidthWithTitleStyleMask, title.Ptr(), style)
 	return _ret
 }
 
+// Returns the window’s frame rectangle with a given content rectangle.
 func (o *NSWindow) FrameRectForContentRect(contentRect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelFrameRectForContentRect, contentRect)
 	return _ret
 }
 
+// Returns the window’s content rectangle with a given frame rectangle.
 func (o *NSWindow) ContentRectForFrameRect(frameRect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelContentRectForFrameRect, frameRect)
 	return _ret
 }
 
+// Initializes the window with the specified values.
 func (o *NSWindow) InitWithContentRectStyleMaskBackingDefer(contentRect corefoundation.CGRect, style NSWindowStyleMask, backingStoreType NSBackingStoreType, flag bool) *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelInitWithContentRectStyleMaskBackingDefer, contentRect, style, backingStoreType, flag)
 	if _ret != 0 {
@@ -407,6 +415,7 @@ func (o *NSWindow) InitWithContentRectStyleMaskBackingDefer(contentRect corefoun
 	return NSWindowFromID(_ret)
 }
 
+// Initializes an allocated window with the specified values.
 func (o *NSWindow) InitWithContentRectStyleMaskBackingDeferScreen(contentRect corefoundation.CGRect, style NSWindowStyleMask, backingStoreType NSBackingStoreType, flag bool, screen *NSScreen) *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelInitWithContentRectStyleMaskBackingDeferScreen, contentRect, style, backingStoreType, flag, screen.Ptr())
 	if _ret != 0 {
@@ -415,22 +424,27 @@ func (o *NSWindow) InitWithContentRectStyleMaskBackingDeferScreen(contentRect co
 	return NSWindowFromID(_ret)
 }
 
+// Adds the specified title bar accessory view controller to the window.
 func (o *NSWindow) AddTitlebarAccessoryViewController(childViewController *NSTitlebarAccessoryViewController) {
 	o.Ptr().Send(_nSWindowSelAddTitlebarAccessoryViewController, childViewController.Ptr())
 }
 
+// Inserts the view controller into the window’s array of title bar accessory view controllers at the specified index.
 func (o *NSWindow) InsertTitlebarAccessoryViewControllerAtIndex(childViewController *NSTitlebarAccessoryViewController, index int) {
 	o.Ptr().Send(_nSWindowSelInsertTitlebarAccessoryViewControllerAtIndex, childViewController.Ptr(), index)
 }
 
+// Removes the view controller at the specified index from the window’s array of title bar accessory view controllers.
 func (o *NSWindow) RemoveTitlebarAccessoryViewControllerAtIndex(index int) {
 	o.Ptr().Send(_nSWindowSelRemoveTitlebarAccessoryViewControllerAtIndex, index)
 }
 
+// Sets a given path as the window’s title, formatting it as a file-system path, and records this path as the window’s associated file.
 func (o *NSWindow) SetTitleWithRepresentedFilename(filename *foundation.NSString) {
 	o.Ptr().Send(_nSWindowSelSetTitleWithRepresentedFilename, filename.Ptr())
 }
 
+// Returns the window’s field editor, creating it if requested.
 func (o *NSWindow) FieldEditorForObject(createFlag bool, object objc.ID) *NSText {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelFieldEditorForObject, createFlag, object)
 	if _ret != 0 {
@@ -439,214 +453,252 @@ func (o *NSWindow) FieldEditorForObject(createFlag bool, object objc.ID) *NSText
 	return NSTextFromID(_ret)
 }
 
+// Forces the field editor to give up its first responder status and prepares it for its next assignment.
 func (o *NSWindow) EndEditingFor(object objc.ID) {
 	o.Ptr().Send(_nSWindowSelEndEditingFor, object)
 }
 
+// Modifies and returns a frame rectangle so that its top edge lies on a specific screen.
 func (o *NSWindow) ConstrainFrameRectToScreen(frameRect corefoundation.CGRect, screen *NSScreen) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelConstrainFrameRectToScreen, frameRect, screen.Ptr())
 	return _ret
 }
 
+// Sets the origin and size of the window’s frame rectangle according to a given frame rectangle, thereby setting its position and size onscreen.
 func (o *NSWindow) SetFrameDisplay(frameRect corefoundation.CGRect, flag bool) {
 	o.Ptr().Send(_nSWindowSelSetFrameDisplay, frameRect, flag)
 }
 
+// Sets the size of the window’s content view to a given size, which is expressed in the window’s base coordinate system.
 func (o *NSWindow) SetContentSize(size corefoundation.CGSize) {
 	o.Ptr().Send(_nSWindowSelSetContentSize, size)
 }
 
+// Positions the bottom-left corner of the window’s frame rectangle at a given point in screen coordinates.
 func (o *NSWindow) SetFrameOrigin(point corefoundation.CGPoint) {
 	o.Ptr().Send(_nSWindowSelSetFrameOrigin, point)
 }
 
+// Positions the top-left corner of the window’s frame rectangle at a given point in screen coordinates.
 func (o *NSWindow) SetFrameTopLeftPoint(point corefoundation.CGPoint) {
 	o.Ptr().Send(_nSWindowSelSetFrameTopLeftPoint, point)
 }
 
+// Positions the window’s top-left to a given point.
 func (o *NSWindow) CascadeTopLeftFromPoint(topLeftPoint corefoundation.CGPoint) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelCascadeTopLeftFromPoint, topLeftPoint)
 	return _ret
 }
 
-// Subclasses can override \c animationResizeTime: to control the total time for the frame change. \c newFrame is the rect passed into \c setFrame:display:animate:
+// Specifies the duration of a smooth frame-size change.
 func (o *NSWindow) AnimationResizeTime(newFrame corefoundation.CGRect) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSWindowSelAnimationResizeTime, newFrame)
 	return _ret
 }
 
-// \c setFrame:display:animate: is equivalent to \c setFrame:display: if the \c animateFlag is NO. If the \c animationFlag is YES, this method will perform a smooth resize of the window, where the total time for the resize is specified by \c -animationResizeTime:
+// Sets the origin and size of the window’s frame rectangle, with optional animation, according to a given frame rectangle, thereby setting its position and size onscreen.
 func (o *NSWindow) SetFrameDisplayAnimate(frameRect corefoundation.CGRect, displayFlag bool, animateFlag bool) {
 	o.Ptr().Send(_nSWindowSelSetFrameDisplayAnimate, frameRect, displayFlag, animateFlag)
 }
 
+// Passes a display message down the window’s view hierarchy, thus redrawing all views that need displaying.
 func (o *NSWindow) DisplayIfNeeded() {
 	o.Ptr().Send(_nSWindowSelDisplayIfNeeded)
 }
 
+// Passes a display message down the window’s view hierarchy, thus redrawing all views within the window.
 func (o *NSWindow) Display() {
 	o.Ptr().Send(_nSWindowSelDisplay)
 }
 
+// Updates the window.
 func (o *NSWindow) Update() {
 	o.Ptr().Send(_nSWindowSelUpdate)
 }
 
+// Attempts to make a given responder the first responder for the window.
 func (o *NSWindow) MakeFirstResponder(responder *NSResponder) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelMakeFirstResponder, responder.Ptr())
 	return _ret
 }
 
+// Removes the window from the screen.
 func (o *NSWindow) Close() {
 	o.Ptr().Send(_nSWindowSelClose)
 }
 
+// Removes the window from the screen list and displays the minimized window in the Dock.
 func (o *NSWindow) Miniaturize(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelMiniaturize, sender)
 }
 
+// De-minimizes the window.
 func (o *NSWindow) Deminiaturize(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelDeminiaturize, sender)
 }
 
+// Toggles the size and location of the window between its standard state (which the application provides as the best size to display the window’s data) and its user state (a new size and location the user may have set by moving or resizing the window).
 func (o *NSWindow) Zoom(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelZoom, sender)
 }
 
+// Specifies the thickness of a given border of the window.
 func (o *NSWindow) SetContentBorderThicknessForEdge(thickness float64, edge foundation.NSRectEdge) {
 	o.Ptr().Send(_nSWindowSelSetContentBorderThicknessForEdge, thickness, edge)
 }
 
+// Indicates the thickness of a given border of the window.
 func (o *NSWindow) ContentBorderThicknessForEdge(edge foundation.NSRectEdge) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSWindowSelContentBorderThicknessForEdge, edge)
 	return _ret
 }
 
+// Specifies whether the window calculates the thickness of a given border automatically.
 func (o *NSWindow) SetAutorecalculatesContentBorderThicknessForEdge(flag bool, edge foundation.NSRectEdge) {
 	o.Ptr().Send(_nSWindowSelSetAutorecalculatesContentBorderThicknessForEdge, flag, edge)
 }
 
+// Indicates whether the window calculates the thickness of a given border automatically.
 func (o *NSWindow) AutorecalculatesContentBorderThicknessForEdge(edge foundation.NSRectEdge) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelAutorecalculatesContentBorderThicknessForEdge, edge)
 	return _ret
 }
 
+// Sets the window’s location to the center of the screen.
 func (o *NSWindow) Center() {
 	o.Ptr().Send(_nSWindowSelCenter)
 }
 
+// Moves the window to the front of the screen list, within its level, and makes it the key window; that is, it shows the window.
 func (o *NSWindow) MakeKeyAndOrderFront(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelMakeKeyAndOrderFront, sender)
 }
 
+// Moves the window to the front of its level in the screen list, without changing either the key window or the main window.
 func (o *NSWindow) OrderFront(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelOrderFront, sender)
 }
 
+// Moves the window to the back of its level in the screen list, without changing either the key window or the main window.
 func (o *NSWindow) OrderBack(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelOrderBack, sender)
 }
 
+// Removes the window from the screen list, which hides the window.
 func (o *NSWindow) OrderOut(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelOrderOut, sender)
 }
 
+// Repositions the window’s window device in the window server’s screen list.
 func (o *NSWindow) OrderWindowRelativeTo(place NSWindowOrderingMode, otherWin int) {
 	o.Ptr().Send(_nSWindowSelOrderWindowRelativeTo, place, otherWin)
 }
 
+// Moves the window to the front of its level, even if its application isn’t active, without changing either the key window or the main window.
 func (o *NSWindow) OrderFrontRegardless() {
 	o.Ptr().Send(_nSWindowSelOrderFrontRegardless)
 }
 
-// Makes the window key and main if eligible, updating NSApplication's `-keyWindow` and `-mainWindow` properties.
+// Makes the window the key window.
 func (o *NSWindow) MakeKeyWindow() {
 	o.Ptr().Send(_nSWindowSelMakeKeyWindow)
 }
 
-// Makes the window main if eligible. Updates NSApplication's `-mainWindow` property.
+// Makes the window the main window.
 func (o *NSWindow) MakeMainWindow() {
 	o.Ptr().Send(_nSWindowSelMakeMainWindow)
 }
 
-// Informs the window that it has become the key window. This method exists as an override point. Do not invoke directly. Instead, invoke `-makeKeyWindow`.
+// Informs the window that it has become the key window.
 func (o *NSWindow) BecomeKeyWindow() {
 	o.Ptr().Send(_nSWindowSelBecomeKeyWindow)
 }
 
-// Informs the window that it has stopped being the key window. This method exists as an override point. Do not invoke directly. Windows automatically receive this message when deactivating or when another window has become key.
+// Resigns the window’s key window status.
 func (o *NSWindow) ResignKeyWindow() {
 	o.Ptr().Send(_nSWindowSelResignKeyWindow)
 }
 
-// Informs the window that it has become the main window. This method exists as an override point. Do not invoke directly. Instead, invoke `-makeMainWindow`.
+// Informs the window that it has become the main window.
 func (o *NSWindow) BecomeMainWindow() {
 	o.Ptr().Send(_nSWindowSelBecomeMainWindow)
 }
 
-// Informs the window that it has stopped being the main window. This method exists as an override point. Do not invoke directly. Windows automatically receive this message when deactivating or when another window has become main.
+// Resigns the window’s main window status.
 func (o *NSWindow) ResignMainWindow() {
 	o.Ptr().Send(_nSWindowSelResignMainWindow)
 }
 
+// Converts a rectangle to the screen coordinate system from the window’s coordinate system.
 func (o *NSWindow) ConvertRectToScreen(rect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelConvertRectToScreen, rect)
 	return _ret
 }
 
+// Converts a rectangle from the screen coordinate system to the window’s coordinate system.
 func (o *NSWindow) ConvertRectFromScreen(rect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelConvertRectFromScreen, rect)
 	return _ret
 }
 
+// Converts a point to the screen coordinate system from the window’s coordinate system.
 func (o *NSWindow) ConvertPointToScreen(point corefoundation.CGPoint) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertPointToScreen, point)
 	return _ret
 }
 
+// Converts a point from the screen coordinate system to the window’s coordinate system.
 func (o *NSWindow) ConvertPointFromScreen(point corefoundation.CGPoint) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertPointFromScreen, point)
 	return _ret
 }
 
+// Converts a rectangle from the window’s coordinate system to its pixel-aligned backing store coordinate system.
 func (o *NSWindow) ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelConvertRectToBacking, rect)
 	return _ret
 }
 
+// Converts a rectangle from its pixel-aligned backing store coordinate system to the window’s coordinate system.
 func (o *NSWindow) ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelConvertRectFromBacking, rect)
 	return _ret
 }
 
+// Converts a point from the window’s coordinate system to its pixel-aligned backing store coordinate system.
 func (o *NSWindow) ConvertPointToBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertPointToBacking, point)
 	return _ret
 }
 
+// Converts a point from its pixel-aligned backing store coordinate system to the window’s coordinate system.
 func (o *NSWindow) ConvertPointFromBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSWindowSelConvertPointFromBacking, point)
 	return _ret
 }
 
-// Use `NSIntegralRectWithOptions()` to produce a backing store pixel aligned rectangle from the given input rectangle in window coordinates.
+// Returns a backing store pixel-aligned rectangle in window coordinates.
 func (o *NSWindow) BackingAlignedRectOptions(rect corefoundation.CGRect, options foundation.NSAlignmentOptions) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSWindowSelBackingAlignedRectOptions, rect, options)
 	return _ret
 }
 
+// Simulates the user clicking the close button by momentarily highlighting the button and then closing the window.
 func (o *NSWindow) PerformClose(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelPerformClose, sender)
 }
 
+// Simulates the user clicking the minimize button by momentarily highlighting the button, then minimizing the window.
 func (o *NSWindow) PerformMiniaturize(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelPerformMiniaturize, sender)
 }
 
+// This action method simulates the user clicking the zoom box by momentarily highlighting the button and then zooming the window.
 func (o *NSWindow) PerformZoom(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelPerformZoom, sender)
 }
 
+// Returns EPS data that draws the region of the window within a given rectangle.
 func (o *NSWindow) DataWithEPSInsideRect(rect corefoundation.CGRect) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDataWithEPSInsideRect, rect)
 	if _ret != 0 {
@@ -655,6 +707,7 @@ func (o *NSWindow) DataWithEPSInsideRect(rect corefoundation.CGRect) *foundation
 	return foundation.NSDataFromID(_ret)
 }
 
+// Returns PDF data that draws the region of the window within a given rectangle.
 func (o *NSWindow) DataWithPDFInsideRect(rect corefoundation.CGRect) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDataWithPDFInsideRect, rect)
 	if _ret != 0 {
@@ -663,50 +716,60 @@ func (o *NSWindow) DataWithPDFInsideRect(rect corefoundation.CGRect) *foundation
 	return foundation.NSDataFromID(_ret)
 }
 
+// Runs the Print panel, and if the user chooses an option other than canceling, prints the window (its frame view and all subviews).
 func (o *NSWindow) Print(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelPrint, sender)
 }
 
+// Sets a Boolean value that indicates whether the window’s depth limit can change to match the depth of the screen it’s on.
 func (o *NSWindow) SetDynamicDepthLimit(flag bool) {
 	o.Ptr().Send(_nSWindowSelSetDynamicDepthLimit, flag)
 }
 
+// Invalidates the window shadow so that it is recomputed based on the current window shape.
 func (o *NSWindow) InvalidateShadow() {
 	o.Ptr().Send(_nSWindowSelInvalidateShadow)
 }
 
-// `-toggleFullScreen:` enters or exits for full screen. A window must have \c NSWindowCollectionBehaviorFullScreenAuxiliary or \c NSWindowCollectionBehaviorFullScreenPrimary included in the \c collectionBehavior property; if it does not, this method may simply do nothing.
+// Takes the window into or out of fullscreen mode,
 func (o *NSWindow) ToggleFullScreen(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelToggleFullScreen, sender)
 }
 
+// Sets the window’s frame rectangle from a given string representation.
 func (o *NSWindow) SetFrameFromString(string_ *foundation.NSString) {
 	o.Ptr().Send(_nSWindowSelSetFrameFromString, string_.Ptr())
 }
 
+// Saves the window’s frame rectangle in the user defaults system under a given name.
 func (o *NSWindow) SaveFrameUsingName(name *foundation.NSString) {
 	o.Ptr().Send(_nSWindowSelSaveFrameUsingName, name.Ptr())
 }
 
+// Sets the window’s frame rectangle by reading the rectangle data stored under a given name from the defaults system. Can operate on non-resizable windows.
 func (o *NSWindow) SetFrameUsingNameForce(name *foundation.NSString, force bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelSetFrameUsingNameForce, name.Ptr(), force)
 	return _ret
 }
 
+// Sets the window’s frame rectangle by reading the rectangle data stored under a given name from the defaults system.
 func (o *NSWindow) SetFrameUsingName(name *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelSetFrameUsingName, name.Ptr())
 	return _ret
 }
 
+// Sets the name AppKit uses to automatically save the window’s frame rectangle data in the defaults system.
 func (o *NSWindow) SetFrameAutosaveName(name *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelSetFrameAutosaveName, name.Ptr())
 	return _ret
 }
 
+// Removes the frame data stored under a given name from the application’s user defaults.
 func NSWindowRemoveFrameUsingName(name *foundation.NSString) {
 	objc.ID(_clsNSWindow).Send(_nSWindowSelRemoveFrameUsingName, name.Ptr())
 }
 
+// Starts a document-modal session and presents—or queues for presentation—a sheet.
 func (o *NSWindow) BeginSheetCompletionHandler(sheetWindow *NSWindow, handler func(int)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -718,6 +781,7 @@ func (o *NSWindow) BeginSheetCompletionHandler(sheetWindow *NSWindow, handler fu
 	o.Ptr().Send(_nSWindowSelBeginSheetCompletionHandler, sheetWindow.Ptr(), __block_handler)
 }
 
+// Starts a document-modal session and presents the specified critical sheet.
 func (o *NSWindow) BeginCriticalSheetCompletionHandler(sheetWindow *NSWindow, handler func(int)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -729,14 +793,17 @@ func (o *NSWindow) BeginCriticalSheetCompletionHandler(sheetWindow *NSWindow, ha
 	o.Ptr().Send(_nSWindowSelBeginCriticalSheetCompletionHandler, sheetWindow.Ptr(), __block_handler)
 }
 
+// Ends a document-modal session and dismisses the specified sheet.
 func (o *NSWindow) EndSheet(sheetWindow *NSWindow) {
 	o.Ptr().Send(_nSWindowSelEndSheet, sheetWindow.Ptr())
 }
 
+// Ends a document-modal session and dismisses the specified sheet.
 func (o *NSWindow) EndSheetReturnCode(sheetWindow *NSWindow, returnCode int) {
 	o.Ptr().Send(_nSWindowSelEndSheetReturnCode, sheetWindow.Ptr(), returnCode)
 }
 
+// Returns a new instance of a given standard window button, sized appropriately for a given window style.
 func NSWindowStandardWindowButtonForStyleMask(b NSWindowButton, styleMask NSWindowStyleMask) *NSButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSWindow), _nSWindowSelStandardWindowButtonForStyleMask, b, styleMask)
 	if _ret != 0 {
@@ -745,6 +812,7 @@ func NSWindowStandardWindowButtonForStyleMask(b NSWindowButton, styleMask NSWind
 	return NSButtonFromID(_ret)
 }
 
+// Returns the window button of a given window button kind in the window’s view hierarchy.
 func (o *NSWindow) StandardWindowButton(b NSWindowButton) *NSButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelStandardWindowButton, b)
 	if _ret != 0 {
@@ -753,33 +821,38 @@ func (o *NSWindow) StandardWindowButton(b NSWindowButton) *NSButton {
 	return NSButtonFromID(_ret)
 }
 
+// Adds a given window as a child window of the window.
 func (o *NSWindow) AddChildWindowOrdered(childWin *NSWindow, place NSWindowOrderingMode) {
 	o.Ptr().Send(_nSWindowSelAddChildWindowOrdered, childWin.Ptr(), place)
 }
 
+// Detaches a given child window from the window.
 func (o *NSWindow) RemoveChildWindow(childWin *NSWindow) {
 	o.Ptr().Send(_nSWindowSelRemoveChildWindow, childWin.Ptr())
 }
 
-// `-canRepresentDisplayGamut:` returns \c YES if the colorSpace of the receiving window, and the \c colorSpace of the screen containing that window, are capable of representing the given display gamut
+// A Boolean value that indicates if the window and its screen use a color space that can represent the specified display gamut.
 func (o *NSWindow) CanRepresentDisplayGamut(displayGamut NSDisplayGamut) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSWindowSelCanRepresentDisplayGamut, displayGamut)
 	return _ret
 }
 
-// `+windowNumbersWithOptions:` returns an autoreleased array of \c NSNumbers containing windowNumbers for all visible windows satisfying options.  If no options are specified, only visible windows belonging to the calling application and on the active space are included.  If options include \c NSWindowNumberListAllApplications, visible windows belonging to all applications are included.  If options include \c NSWindowNumberListAllSpaces, visible windows on all spaces are included.  Windows on the active space are returned in z-order. Examples: To get an array of windowNumbers visible on the current space and belonging to the calling application: `windowNumbers = [NSWindow windowNumbersWithOptions:0];` To get an array of windowNumbers visible on any space and belonging to any application: `windowNumbers = [NSWindow windowNumbersWithOptions:NSWindowNumberListAllApplications|NSWindowNumberListAllSpaces];` To get an array of windowNumbers visible on any space and belonging to the calling application: `windowNumbers = [NSWindow windowNumbersWithOptions:NSWindowNumberListAllSpaces];`
+// Returns the window numbers for all visible windows satisfying the specified options.
 func NSWindowWindowNumbersWithOptions(options NSWindowNumberListOptions) *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](objc.ID(_clsNSWindow), _nSWindowSelWindowNumbersWithOptions, options)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSWindow), _nSWindowSelWindowNumbersWithOptions, options)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
-// `+windowNumberAtPoint:belowWindowWithWindowNumber:` returns the number of the frontmost window that would be hit by a mouseDown at the screen location "point".  "windowNum" can be specified to exclude a given window along with all windows above it, and may belong to any application.  If no windows are to be excluded, specify 0 for "windowNum".  The windowNumber returned may correspond to a window in another application.
+// Returns the number of the frontmost window that would be hit by a mouse-down at the specified screen location.
 func NSWindowWindowNumberAtPointBelowWindowWithWindowNumber(point corefoundation.CGPoint, windowNumber int) int {
 	_ret := objc.Send[int](objc.ID(_clsNSWindow), _nSWindowSelWindowNumberAtPointBelowWindowWithWindowNumber, point, windowNumber)
 	return _ret
 }
 
-// Convenience method for creating an autoreleased titled window with the given contentViewController. A basic NSWindow with the following attributes is made: titled, closable, resizable, miniaturizable. The window's title is automatically bound to the contentViewController's title. The size of the window can easily be controlled by utilizing autolayout and applying size constraints to the view (or its subviews). The window has isReleasedWhenClosed set to NO, and it must be explicitly retained to keep the window instance alive. To have it automatically be freed when it is closed, do the following: [window retain] and [window setReleasedWhenClosed:YES].
+// Creates a titled window that contains the specified content view controller.
 func NSWindowWindowWithContentViewController(contentViewController *NSViewController) *NSWindow {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSWindow), _nSWindowSelWindowWithContentViewController, contentViewController.Ptr())
 	if _ret != 0 {
@@ -788,79 +861,92 @@ func NSWindowWindowWithContentViewController(contentViewController *NSViewContro
 	return NSWindowFromID(_ret)
 }
 
-// Call to start a drag (moving the window) in the Window Server process. In general, this can be done after a mouseDown event has come in and been examined by an application or view. The view may determine it wants to allow that portion of the window to start a window drag, and can hand off the work to the Window Server process by calling this method. This allows the window to participate in space switching, and other system features. Pass the original mouseDown event to the method. The method will return right away, and a mouseUp may not get sent.
+// Starts a window drag based on the specified mouse-down event.
 func (o *NSWindow) PerformWindowDragWithEvent(event *NSEvent) {
 	o.Ptr().Send(_nSWindowSelPerformWindowDragWithEvent, event.Ptr())
 }
 
+// Searches for a candidate next key view and, if it finds one, tries to make it the first responder.
 func (o *NSWindow) SelectNextKeyView(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelSelectNextKeyView, sender)
 }
 
+// Searches for a candidate previous key view and, if it finds one, tries to make it the first responder.
 func (o *NSWindow) SelectPreviousKeyView(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelSelectPreviousKeyView, sender)
 }
 
+// Gives key view status to the view that follows the given view.
 func (o *NSWindow) SelectKeyViewFollowingView(view *NSView) {
 	o.Ptr().Send(_nSWindowSelSelectKeyViewFollowingView, view.Ptr())
 }
 
+// Gives key view status to the view that precedes the given view.
 func (o *NSWindow) SelectKeyViewPrecedingView(view *NSView) {
 	o.Ptr().Send(_nSWindowSelSelectKeyViewPrecedingView, view.Ptr())
 }
 
+// Disables the default button cell’s key equivalent, so it doesn’t perform a click when the user presses Return (or Enter).
 func (o *NSWindow) DisableKeyEquivalentForDefaultButtonCell() {
 	o.Ptr().Send(_nSWindowSelDisableKeyEquivalentForDefaultButtonCell)
 }
 
+// Reenables the default button cell’s key equivalent, so it performs a click when the user presses Return (or Enter).
 func (o *NSWindow) EnableKeyEquivalentForDefaultButtonCell() {
 	o.Ptr().Send(_nSWindowSelEnableKeyEquivalentForDefaultButtonCell)
 }
 
+// Marks the key view loop as “dirty” and in need of recalculation.
 func (o *NSWindow) RecalculateKeyViewLoop() {
 	o.Ptr().Send(_nSWindowSelRecalculateKeyViewLoop)
 }
 
+// Toggles the visibility of the window’s toolbar.
 func (o *NSWindow) ToggleToolbarShown(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelToggleToolbarShown, sender)
 }
 
+// Presents the toolbar customization user interface.
 func (o *NSWindow) RunToolbarCustomizationPalette(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelRunToolbarCustomizationPalette, sender)
 }
 
-// Actions that can be called to perform various tabbed window behaviors. UI that is hooked up to these items can be automatically validated by calling `NSWindow`'s \c validateUserInterfaceItem.
+// Selects the next tab in the tab group in the trailing direction.
 func (o *NSWindow) SelectNextTab(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelSelectNextTab, sender)
 }
 
+// Selects the previous tab in the tab group in the leading direction.
 func (o *NSWindow) SelectPreviousTab(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelSelectPreviousTab, sender)
 }
 
+// Moves the tab to a new containing window.
 func (o *NSWindow) MoveTabToNewWindow(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelMoveTabToNewWindow, sender)
 }
 
+// Merges all open windows into a single tabbed window.
 func (o *NSWindow) MergeAllWindows(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelMergeAllWindows, sender)
 }
 
+// Shows or hides the tab bar.
 func (o *NSWindow) ToggleTabBar(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelToggleTabBar, sender)
 }
 
-// Toggle the Tab Picker / Tab Overview UI which is invoked via "Show All Tabs". Performs the toggle in an animated fashion. Use `tabGroup.isOverviewVisible` to find out if it is visible or not at a given time.
+// Shows or hides the tab overview.
 func (o *NSWindow) ToggleTabOverview(sender objc.ID) {
 	o.Ptr().Send(_nSWindowSelToggleTabOverview, sender)
 }
 
-// This is now a cover for `-[self.tabGroup addWindow:]`, which allows more precise placement.
+// Adds the provided window as a new tab in a tabbed window using the specified ordering instruction.
 func (o *NSWindow) AddTabbedWindowOrdered(window *NSWindow, ordered NSWindowOrderingMode) {
 	o.Ptr().Send(_nSWindowSelAddTabbedWindowOrdered, window.Ptr(), ordered)
 }
 
-// Attempts to move window sharing (i.e. within a SharePlay session) from the receiver to another window. In response to this request, the user may choose to transfer sharing to the new window, or simply stop sharing the content. In the event of a failed transfer request, a non-`nil` error contains details about the failure. @param window A window that is replacing the reciever in representing the user's current activity. @param completionHandler A completion block that is called after the request finishes.
+// Attempts to move window sharing (within a SharePlay session) from this window to another window.
 func (o *NSWindow) TransferWindowSharingToWindowCompletionHandler(window *NSWindow, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -1522,8 +1608,11 @@ func (o *NSWindow) SetMaxFullScreenContentSize(maxFullScreenContentSize corefoun
 }
 
 func (o *NSWindow) DeviceDescription() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSWindowSelDeviceDescription)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDeviceDescription)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSWindow) WindowController() *NSWindowController {
@@ -1788,7 +1877,7 @@ func (o *NSWindow) WindowTitlebarLayoutDirection() NSUserInterfaceLayoutDirectio
 	return _ret
 }
 
-// Tracks events matching the supplied mask with the supplied tracking handler until the tracking handler explicitly terminates tracking. Each event is removed from the event queue then passed to the tracking handler. If a matching event does not exist in the event queue, then the main thread blocks in the specified runloop mode until an event of the requested type is received or the timeout expires. If the timeout expires, the tracking handler is called with a nil event. A negative timeout is interpreted as 0. Use \c NSEventDurationForever to never timeout. Tracking continues until `*stop` is set to \c YES. Calls to `-nextEventMatchingMask:…` are allowed inside the trackingHandler block. This method returns once tracking is terminated.
+// Tracks events that match the specified mask using the specified tracking handler until the tracking handler explicitly terminates tracking.
 func (o *NSWindow) TrackEventsMatchingMaskTimeoutModeHandler(mask NSEventMask, timeout float64, mode *foundation.NSString, trackingHandler func(*NSEvent, *bool)) {
 	var __block_trackingHandler objc.Block
 	if trackingHandler != nil {
@@ -1803,6 +1892,7 @@ func (o *NSWindow) TrackEventsMatchingMaskTimeoutModeHandler(mask NSEventMask, t
 	o.Ptr().Send(_nSWindowSelTrackEventsMatchingMaskTimeoutModeHandler, mask, timeout, mode.Ptr(), __block_trackingHandler)
 }
 
+// Returns the next event matching a given mask.
 func (o *NSWindow) NextEventMatchingMask(mask NSEventMask) *NSEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelNextEventMatchingMask, mask)
 	if _ret != 0 {
@@ -1811,6 +1901,7 @@ func (o *NSWindow) NextEventMatchingMask(mask NSEventMask) *NSEvent {
 	return NSEventFromID(_ret)
 }
 
+// Forwards the message to the global application object.
 func (o *NSWindow) NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *NSEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelNextEventMatchingMaskUntilDateInModeDequeue, mask, expiration.Ptr(), mode.Ptr(), deqFlag)
 	if _ret != 0 {
@@ -1819,14 +1910,17 @@ func (o *NSWindow) NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask,
 	return NSEventFromID(_ret)
 }
 
+// Forwards the message to the global application object.
 func (o *NSWindow) DiscardEventsMatchingMaskBeforeEvent(mask NSEventMask, lastEvent *NSEvent) {
 	o.Ptr().Send(_nSWindowSelDiscardEventsMatchingMaskBeforeEvent, mask, lastEvent.Ptr())
 }
 
+// Forwards the message to the global application object.
 func (o *NSWindow) PostEventAtStart(event *NSEvent, flag bool) {
 	o.Ptr().Send(_nSWindowSelPostEventAtStart, event.Ptr(), flag)
 }
 
+// This action method dispatches mouse and keyboard events the global application object sends to the window.
 func (o *NSWindow) SendEvent(event *NSEvent) {
 	o.Ptr().Send(_nSWindowSelSendEvent, event.Ptr())
 }
@@ -1862,22 +1956,27 @@ func (o *NSWindow) MouseLocationOutsideOfEventStream() corefoundation.CGPoint {
 	return _ret
 }
 
+// Disables all cursor rectangle management within the window.
 func (o *NSWindow) DisableCursorRects() {
 	o.Ptr().Send(_nSWindowSelDisableCursorRects)
 }
 
+// Reenables cursor rectangle management within the window after a disableCursorRects message.
 func (o *NSWindow) EnableCursorRects() {
 	o.Ptr().Send(_nSWindowSelEnableCursorRects)
 }
 
+// Invalidates all cursor rectangles in the window.
 func (o *NSWindow) DiscardCursorRects() {
 	o.Ptr().Send(_nSWindowSelDiscardCursorRects)
 }
 
+// Marks as invalid the cursor rectangles of a given view object in the window, so they’ll be set up again when the window becomes key.
 func (o *NSWindow) InvalidateCursorRectsForView(view *NSView) {
 	o.Ptr().Send(_nSWindowSelInvalidateCursorRectsForView, view.Ptr())
 }
 
+// Clears the window’s cursor rectangles and the cursor rectangles of the NSView objects in its view hierarchy.
 func (o *NSWindow) ResetCursorRects() {
 	o.Ptr().Send(_nSWindowSelResetCursorRects)
 }
@@ -1895,22 +1994,25 @@ func (o *NSWindow) BeginDraggingSessionWithItemsEventSource(items *foundation.NS
 	return NSDraggingSessionFromID(_ret)
 }
 
+// Begins a dragging session.
 // Deprecated: Use -[NSWindow beginDraggingSessionWithItems:event:source:] instead.
 func (o *NSWindow) DragImageAtOffsetEventPasteboardSourceSlideBack(image *NSImage, baseLocation corefoundation.CGPoint, initialOffset corefoundation.CGSize, event *NSEvent, pboard *NSPasteboard, sourceObj objc.ID, slideFlag bool) {
 	o.Ptr().Send(_nSWindowSelDragImageAtOffsetEventPasteboardSourceSlideBack, image.Ptr(), baseLocation, initialOffset, event.Ptr(), pboard.Ptr(), sourceObj, slideFlag)
 }
 
+// Registers a set of pasteboard types that the window accepts as the destination of an image-dragging session.
 // Deprecated: Use -[NSWindow beginDraggingSessionWithItems:event:source:] instead.
 func (o *NSWindow) RegisterForDraggedTypes(newTypes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSWindowSelRegisterForDraggedTypes, newTypes)
+	o.Ptr().Send(_nSWindowSelRegisterForDraggedTypes, newTypes.Ptr())
 }
 
+// Unregisters the window as a possible destination for dragging operations.
 // Deprecated: Use -[NSWindow beginDraggingSessionWithItems:event:source:] instead.
 func (o *NSWindow) UnregisterDraggedTypes() {
 	o.Ptr().Send(_nSWindowSelUnregisterDraggedTypes)
 }
 
-// Returns a new display link whose callback will be invoked in-sync with the display the window is on. If the window is not on any display the callback will not be invoked.
+// Returns a new display link whose callback will be invoked in-sync with the display the window is on.
 func (o *NSWindow) DisplayLinkWithTargetSelector(target objc.ID, selector objc.SEL) *quartzcore.CADisplayLink {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelDisplayLinkWithTargetSelector, target, selector)
 	if _ret != 0 {
@@ -2003,6 +2105,7 @@ func (o *NSWindow) InitWithWindowRef(windowRef unsafe.Pointer) *NSWindow {
 	return NSWindowFromID(_ret)
 }
 
+// Disables the window’s screen updates until the window is flushed.
 // Deprecated: This method does not do anything and should not be called.
 func (o *NSWindow) DisableScreenUpdatesUntilFlush() {
 	o.Ptr().Send(_nSWindowSelDisableScreenUpdatesUntilFlush)
@@ -2079,23 +2182,28 @@ func (o *NSWindow) WindowRef() unsafe.Pointer {
 	return _ret
 }
 
+// Updates the constraints based on changes to views in the window since the last layout.
 func (o *NSWindow) UpdateConstraintsIfNeeded() {
 	o.Ptr().Send(_nSWindowSelUpdateConstraintsIfNeeded)
 }
 
+// Updates the layout of views in the window based on the current views and constraints.
 func (o *NSWindow) LayoutIfNeeded() {
 	o.Ptr().Send(_nSWindowSelLayoutIfNeeded)
 }
 
+// Returns the part of the window that stays stationary during constraint-based layout.
 func (o *NSWindow) AnchorAttributeForOrientation(orientation NSLayoutConstraintOrientation) NSLayoutAttribute {
 	_ret := objc.Send[NSLayoutAttribute](o.Ptr(), _nSWindowSelAnchorAttributeForOrientation, orientation)
 	return _ret
 }
 
+// Sets the part of the window that stays stationary during constraint-based layout.
 func (o *NSWindow) SetAnchorAttributeForOrientation(attr NSLayoutAttribute, orientation NSLayoutConstraintOrientation) {
 	o.Ptr().Send(_nSWindowSelSetAnchorAttributeForOrientation, attr, orientation)
 }
 
+// Displays a visual representation of the supplied constraints in the window.
 func (o *NSWindow) VisualizeConstraints(constraints *foundation.NSArray[*NSLayoutConstraint]) {
 	o.Ptr().Send(_nSWindowSelVisualizeConstraints, constraints.Ptr())
 }
@@ -2109,28 +2217,34 @@ func (o *NSWindow) Drawers() *foundation.NSArray[*NSDrawer] {
 	return foundation.NSArrayFromID[*NSDrawer](_ret)
 }
 
+// Sets the window’s miniaturized state to the value you specify.
 func (o *NSWindow) SetIsMiniaturized(flag bool) {
 	o.Ptr().Send(_nSWindowSelSetIsMiniaturized, flag)
 }
 
+// Sets the window’s visible state to the value you specify.
 func (o *NSWindow) SetIsVisible(flag bool) {
 	o.Ptr().Send(_nSWindowSelSetIsVisible, flag)
 }
 
+// Sets the window’s zoomed state to the value you specify.
 func (o *NSWindow) SetIsZoomed(flag bool) {
 	o.Ptr().Send(_nSWindowSelSetIsZoomed, flag)
 }
 
+// Handles the AppleScript command to close the window (and its associated document, if any).
 func (o *NSWindow) HandleCloseScriptCommand(command *foundation.NSCloseCommand) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelHandleCloseScriptCommand, command.Ptr())
 	return _ret
 }
 
+// Handles the AppleScript command to print the contents of the window (or its associated document, if any).
 func (o *NSWindow) HandlePrintScriptCommand(command *foundation.NSScriptCommand) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelHandlePrintScriptCommand, command.Ptr())
 	return _ret
 }
 
+// Handles the AppleScript command to save the window (and its associated document, if any).
 func (o *NSWindow) HandleSaveScriptCommand(command *foundation.NSScriptCommand) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowSelHandleSaveScriptCommand, command.Ptr())
 	return _ret
@@ -2180,10 +2294,12 @@ func (o *NSWindow) SetOrderedIndex(orderedIndex int) {
 	o.Ptr().Send(_nSWindowSelSetOrderedIndex, orderedIndex)
 }
 
+// Disables snapshot restoration.
 func (o *NSWindow) DisableSnapshotRestoration() {
 	o.Ptr().Send(_nSWindowSelDisableSnapshotRestoration)
 }
 
+// Enables snapshot restoration.
 func (o *NSWindow) EnableSnapshotRestoration() {
 	o.Ptr().Send(_nSWindowSelEnableSnapshotRestoration)
 }

@@ -14,7 +14,7 @@ import (
 	"unsafe"
 )
 
-// A controller that acts as a bridge between your Finder Sync extension and the Finder itself. Use the Finder Sync controller to configure your extension, to set badges on items in the Finder’s window, and to get a list of selected and targeted items.
+// A controller that acts as a bridge between your Finder Sync extension and the Finder itself.
 //
 // FinderSyncController wraps [raw.FIFinderSyncController] with a fluent Go API.
 type FinderSyncController struct {
@@ -42,7 +42,7 @@ func NewFinderSyncController() *FinderSyncController {
 	return &FinderSyncController{inner: raw.FIFinderSyncControllerFromID(_id)}
 }
 
-// The directories managed by this extension. The extension receives “FIFinderSync/beginObservingDirectoryAtURL:“ and “FIFinderSync/endObservingDirectoryAtURL:“ messages for every directory in this set and for all of their subdirectories. Always set `directoryURLs` when the extension starts. If there are no directories to watch, set `directoryURLs` to an empty set.
+// The directories managed by this extension.
 //
 // WithDirectoryURLs sets the directoryURLs property and returns the receiver for chaining.
 func (x *FinderSyncController) WithDirectoryURLs(directoryURLs *foundation.NSSet[*foundation.NSURL]) *FinderSyncController {
@@ -50,28 +50,28 @@ func (x *FinderSyncController) WithDirectoryURLs(directoryURLs *foundation.NSSet
 	return x
 }
 
-// Sets the badge image and label for the given ID. Use this method to configure your badges. Finder may display the image, the label or both. Your Finder Sync extension typically sets up a fixed number of badges during its `init` method. - Parameters: - image: An <doc://com.apple.documentation/documentation/appkit/nsimage> object. The system may or may not draw this image on top of the item’s icon; when it does, the system determines the overlay position. Don't add any padding to the image to adjust this positioning. The image draws at up to 320 x 320 points. - label: A label describing the sync state represented by this badge. Each label should be a short localized string, such as "Waiting." - badgeID: A unique ID, identifying this badge.
+// Sets the badge image and label for the given ID.
 //
 // SetBadgeImageLabelForBadgeIdentifier calls the underlying SetBadgeImageLabelForBadgeIdentifier.
 func (x *FinderSyncController) SetBadgeImageLabelForBadgeIdentifier(image *appkit.NSImage, label string, badgeID string) {
 	x.inner.SetBadgeImageLabelForBadgeIdentifier(image, foundation.NSStringStringWithUTF8String(label), foundation.NSStringStringWithUTF8String(badgeID))
 }
 
-// Sets the badge for a file or directory. Adds the specified badge to the given file or directory. Setting the identifier to an empty string (`@""`) removes the badge. Avoid adding badges to items that the Finder hasn't displayed yet. When setting the initial badge, call this method from your Finder Sync extension’s “FIFinderSync/requestBadgeIdentifierForURL:“ method. When updating badges, call this method only for items that have already received a badge. - Parameters: - badgeID: A unique ID, identifying the badge. - url: The URL of the file or directory. ## See Also - “FIFinderSync/requestBadgeIdentifierForURL:“
+// Sets the badge for a file or directory.
 //
 // SetBadgeIdentifierForURL calls the underlying SetBadgeIdentifierForURL.
 func (x *FinderSyncController) SetBadgeIdentifierForURL(badgeID string, url string) {
 	x.inner.SetBadgeIdentifierForURL(foundation.NSStringStringWithUTF8String(badgeID), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
-// Returns the URL of the Finder’s current target. Use this method when creating a custom shortcut menu for the Finder. This returns the URL of the item that the user Control-clicked, letting you customize the menu for that item. This method returns valid values only from the Finder Sync extension’s “FIFinderSync/menuForMenuKind:“ method or from one of the menu actions created in this method. If the selected items are outside the extension’s managed directories (for example, when the user clicks on the toolbar button), this method returns `nil`. - Returns: The URL of the Finder’s current target.
+// Returns the URL of the Finder’s current target.
 //
 // TargetedURL calls the underlying TargetedURL.
 func (x *FinderSyncController) TargetedURL() *foundation.NSURL {
 	return x.inner.TargetedURL()
 }
 
-// Returns an array of selected items. Use this method when creating a shortcut menu or a menu for the extension’s toolbar button. You can then modify the menu’s content based on the items currently selected. This method returns valid values only from the Finder Sync extension’s “FIFinderSync/menuForMenuKind:“ method or from one of the menu actions created in this method. If the selected items are outside the extension’s managed directories (for example, when the user clicks on the toolbar button), this method returns `nil`. - Returns: An array of items currently selected in the Finder window.
+// Returns an array of selected items.
 //
 // SelectedItemURLs returns the collection as a Go slice.
 func (x *FinderSyncController) SelectedItemURLs() []*foundation.NSURL {

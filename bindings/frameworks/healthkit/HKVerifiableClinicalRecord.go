@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sample that represents the contents of a SMART Health Card or EU Digital COVID Certificate.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkverifiableclinicalrecord
 type HKVerifiableClinicalRecord struct {
 	HKSample
@@ -43,8 +45,11 @@ func HKVerifiableClinicalRecordFromID(id objc.ID) *HKVerifiableClinicalRecord {
 
 // @property      recordTypes @abstract      The types present in this record.
 func (o *HKVerifiableClinicalRecord) RecordTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _hKVerifiableClinicalRecordSelRecordTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordSelRecordTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property      issuerIdentifier @abstract      The identifier for the issuer of this record.
@@ -94,8 +99,11 @@ func (o *HKVerifiableClinicalRecord) ExpirationDate() *foundation.NSDate {
 
 // @property      itemNames @abstract      A list of display names for each item contained in this record.
 func (o *HKVerifiableClinicalRecord) ItemNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _hKVerifiableClinicalRecordSelItemNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordSelItemNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property      sourceType @abstract      The type of the source leading to this verifiable record.

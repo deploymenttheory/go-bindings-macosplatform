@@ -60,19 +60,25 @@ func (o *DRErase) Start() {
 
 // @method			status @abstract		Returns a dictionary containing the status of the erase. @discussion		The same dictionary is returned through the @link //apple_ref/occ/data/DREraseStatusChangedNotification DREraseStatusChangedNotification @/link notification. @result			An NSDictionary containing the status of the erase.
 func (o *DRErase) Status() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _dREraseSelStatus)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _dREraseSelStatus)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @method 		properties @abstract		Returns the properties dictionary of the erase. @result  		An NSDictionary containing the properties of the erase.
 func (o *DRErase) Properties() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _dREraseSelProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _dREraseSelProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @method 		setProperties: @abstract		Sets the properties dictionary of the erase @param 			properties	NSDictionary of the properties to set.
 func (o *DRErase) SetProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_dREraseSelSetProperties, properties)
+	o.Ptr().Send(_dREraseSelSetProperties, properties.Ptr())
 }
 
 // @method 		device @abstract		Returns the device being used for the erase. @result  		The DRDevice the erase will use.

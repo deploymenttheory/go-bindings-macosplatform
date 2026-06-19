@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages metrics for drawing attributed strings.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsstringdrawingcontext
 type NSStringDrawingContext struct {
 	foundation.NSObject

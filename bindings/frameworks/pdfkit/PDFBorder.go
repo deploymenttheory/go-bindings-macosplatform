@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An optional border for an annotation that lies completely within the annotation rectangle.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfborder
 type PDFBorder struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func PDFBorderFromID(id objc.ID) *PDFBorder {
 	return o
 }
 
+// Draws the border.
 func (o *PDFBorder) DrawInRect(rect corefoundation.CGRect) {
 	o.Ptr().Send(_pDFBorderSelDrawInRect, rect)
 }
@@ -61,15 +64,21 @@ func (o *PDFBorder) SetLineWidth(lineWidth float64) {
 }
 
 func (o *PDFBorder) DashPattern() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _pDFBorderSelDashPattern)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pDFBorderSelDashPattern)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *PDFBorder) SetDashPattern(dashPattern *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_pDFBorderSelSetDashPattern, dashPattern)
+	o.Ptr().Send(_pDFBorderSelSetDashPattern, dashPattern.Ptr())
 }
 
 func (o *PDFBorder) BorderKeyValues() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _pDFBorderSelBorderKeyValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pDFBorderSelBorderKeyValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }

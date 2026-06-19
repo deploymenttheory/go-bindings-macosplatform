@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A capture output that provides a preview of the captured audio.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptureaudiopreviewoutput
 type AVCaptureAudioPreviewOutput struct {
 	AVCaptureOutput
@@ -35,6 +37,7 @@ func AVCaptureAudioPreviewOutputFromID(id objc.ID) *AVCaptureAudioPreviewOutput 
 	return o
 }
 
+// Creates an audio preview output object.
 func (o *AVCaptureAudioPreviewOutput) Init() *AVCaptureAudioPreviewOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureAudioPreviewOutputSelInit)
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func (o *AVCaptureAudioPreviewOutput) Init() *AVCaptureAudioPreviewOutput {
 	return AVCaptureAudioPreviewOutputFromID(_ret)
 }
 
+// Returns a new audio preview output object.
 func AVCaptureAudioPreviewOutputNew() *AVCaptureAudioPreviewOutput {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureAudioPreviewOutput), _aVCaptureAudioPreviewOutputSelNew)
 	return AVCaptureAudioPreviewOutputFromID(_ret)

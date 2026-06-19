@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that declares an interface for objects that create, interpret, and validate the textual representation of values.
+//
 // Formatter wraps [raw.NSFormatter] with a fluent Go API.
 type Formatter struct {
 	inner *raw.NSFormatter

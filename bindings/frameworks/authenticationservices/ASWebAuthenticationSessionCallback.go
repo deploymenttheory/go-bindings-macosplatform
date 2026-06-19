@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object for evaluating navigation events in an authentication session.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessioncallback
 type ASWebAuthenticationSessionCallback struct {
 	foundation.NSObject

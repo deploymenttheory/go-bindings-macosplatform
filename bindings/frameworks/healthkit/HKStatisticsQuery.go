@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A query that performs statistical calculations over a set of matching quantity samples, and returns the results.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkstatisticsquery
 type HKStatisticsQuery struct {
 	HKQuery
@@ -32,6 +34,7 @@ func HKStatisticsQueryFromID(id objc.ID) *HKStatisticsQuery {
 	return o
 }
 
+// Initializes a statistics query instance that performs the specified calculations over the matching samples in the HeathKit store.
 func (o *HKStatisticsQuery) InitWithQuantityTypeQuantitySamplePredicateOptionsCompletionHandler(quantityType *HKQuantityType, quantitySamplePredicate *foundation.NSPredicate, options HKStatisticsOptions, handler func(*HKStatisticsQuery, *HKStatistics, unsafe.Pointer)) *HKStatisticsQuery {
 	var __block_handler objc.Block
 	if handler != nil {

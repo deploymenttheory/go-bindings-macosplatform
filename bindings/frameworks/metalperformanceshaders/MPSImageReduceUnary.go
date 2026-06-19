@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for reduction filters that take a single source as input.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagereduceunary
 type MPSImageReduceUnary struct {
 	mpsimage.MPSUnaryImageKernel

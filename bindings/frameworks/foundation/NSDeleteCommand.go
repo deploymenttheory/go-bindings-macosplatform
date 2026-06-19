@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A command that deletes a scriptable object.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdeletecommand
 type NSDeleteCommand struct {
 	NSScriptCommand

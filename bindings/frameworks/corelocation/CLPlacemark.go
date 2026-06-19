@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A user-friendly description of a geographic coordinate, often containing the name of the place, its address, and other relevant information.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clplacemark
 // Deprecated: Use either GeoToolbox.PlaceDescriptor or MapKit
 type CLPlacemark struct {
@@ -52,6 +54,7 @@ func CLPlacemarkFromID(id objc.ID) *CLPlacemark {
 	return o
 }
 
+// Initializes and returns a placemark object from another placemark object.
 func (o *CLPlacemark) InitWithPlacemark(placemark *CLPlacemark) *CLPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLPlacemarkSelInitWithPlacemark, placemark.Ptr())
 	if _ret != 0 {
@@ -83,8 +86,11 @@ func (o *CLPlacemark) TimeZone() *foundation.NSTimeZone {
 
 // Deprecated: Use @properties
 func (o *CLPlacemark) AddressDictionary() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _cLPlacemarkSelAddressDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cLPlacemarkSelAddressDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // Deprecated: Use @properties
@@ -186,8 +192,11 @@ func (o *CLPlacemark) Ocean() *foundation.NSString {
 }
 
 func (o *CLPlacemark) AreasOfInterest() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cLPlacemarkSelAreasOfInterest)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cLPlacemarkSelAreasOfInterest)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // Deprecated: Use either GeoToolbox.PlaceDescriptor or MapKit

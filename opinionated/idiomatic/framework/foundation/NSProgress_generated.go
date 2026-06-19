@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that conveys ongoing progress to the user for a specified task.
+//
 // Progress wraps [raw.NSProgress] with a fluent Go API.
 type Progress struct {
 	inner *raw.NSProgress
@@ -99,12 +101,16 @@ func (x *Progress) WithKind(kind StringProvider) *Progress {
 	return x
 }
 
+// A value that indicates the estimated amount of time remaining to complete the progress.
+//
 // WithEstimatedTimeRemaining sets the estimatedTimeRemaining property and returns the receiver for chaining.
 func (x *Progress) WithEstimatedTimeRemaining(estimatedTimeRemaining NumberProvider) *Progress {
 	x.inner.SetEstimatedTimeRemaining(estimatedTimeRemaining.asNumber())
 	return x
 }
 
+// A value that represents the speed of data processing, in bytes per second.
+//
 // WithThroughput sets the throughput property and returns the receiver for chaining.
 func (x *Progress) WithThroughput(throughput NumberProvider) *Progress {
 	x.inner.SetThroughput(throughput.asNumber())
@@ -123,12 +129,16 @@ func (x *Progress) WithFileURL(fileURL string) *Progress {
 	return x
 }
 
+// The total number of files for a file progress object.
+//
 // WithFileTotalCount sets the fileTotalCount property and returns the receiver for chaining.
 func (x *Progress) WithFileTotalCount(fileTotalCount NumberProvider) *Progress {
 	x.inner.SetFileTotalCount(fileTotalCount.asNumber())
 	return x
 }
 
+// The number of completed files for a file progress object.
+//
 // WithFileCompletedCount sets the fileCompletedCount property and returns the receiver for chaining.
 func (x *Progress) WithFileCompletedCount(fileCompletedCount NumberProvider) *Progress {
 	x.inner.SetFileCompletedCount(fileCompletedCount.asNumber())
@@ -146,6 +156,8 @@ func (x *Progress) BecomeCurrentWithPendingUnitCount(unitCount int64) {
 	x.inner.BecomeCurrentWithPendingUnitCount(unitCount)
 }
 
+// Retrieves the current thread’s progress object, executes the specified block, and increments the progress object by the specified units of work.
+//
 // PerformAsCurrentWithPendingUnitCountUsing blocks until the operation completes or ctx is cancelled.
 func (x *Progress) PerformAsCurrentWithPendingUnitCountUsing(ctx context.Context, unitCount int64) error {
 	_ch := make(chan error, 1)

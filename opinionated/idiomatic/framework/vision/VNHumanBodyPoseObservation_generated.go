@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An observation that provides the body points the analysis recognized.
+//
 // HumanBodyPoseObservation wraps [raw.VNHumanBodyPoseObservation] with a fluent Go API.
 type HumanBodyPoseObservation struct {
 	inner *raw.VNHumanBodyPoseObservation
@@ -37,7 +39,7 @@ func NewHumanBodyPoseObservation() *HumanBodyPoseObservation {
 	return &HumanBodyPoseObservation{inner: raw.VNHumanBodyPoseObservationFromID(_id)}
 }
 
-// @brief Obtain a specific normalized point for a named human body joint. @param jointName The name of the human body joint. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the recognized point, or nil if the point could not be obtained.
+// Retrieves the recognized point for a joint name.
 //
 // RecognizedPointForJointNameError calls the underlying RecognizedPointForJointNameError.
 func (x *HumanBodyPoseObservation) RecognizedPointForJointNameError(jointName *foundation.NSString) (*RecognizedPoint, error) {
@@ -51,7 +53,7 @@ func (x *HumanBodyPoseObservation) RecognizedPointForJointNameError(jointName *f
 	return &RecognizedPoint{inner: _r}, nil
 }
 
-// @brief Obtains the collection of points associated with a named human body joints group. @discussion The obtained collection is a dictionary that provides the mapping of human body join names to the recognized point. @param jointsGroupName The name of the human body joints group. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return a dictionary of recognized points in the group, or nil if an error was encountered.
+// Retrieves the recognized points associated with the joint group name.
 //
 // RecognizedPointsForJointsGroupNameError calls the underlying RecognizedPointsForJointsGroupNameError.
 func (x *HumanBodyPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint], error) {

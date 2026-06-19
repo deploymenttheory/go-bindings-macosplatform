@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information associated with one of the user’s accounts.
+//
 // Apple documentation: https://developer.apple.com/documentation/accounts/acaccount
 // Deprecated: Use appropriate non-Apple SDK corresponding to the type of account you want to reference instead
 type ACAccount struct {
@@ -40,6 +42,7 @@ func ACAccountFromID(id objc.ID) *ACAccount {
 	return o
 }
 
+// Initializes a new account of the specified type.
 func (o *ACAccount) InitWithAccountType(type_ *ACAccountType) *ACAccount {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountSelInitWithAccountType, type_.Ptr())
 	if _ret != 0 {

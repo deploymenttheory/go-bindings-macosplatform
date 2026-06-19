@@ -34,7 +34,7 @@ func MDLSkeletonFromID(id objc.ID) *MDLSkeleton {
 }
 
 func (o *MDLSkeleton) InitWithNameJointPaths(name *foundation.NSString, jointPaths *foundation.NSArray[*foundation.NSString]) *MDLSkeleton {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSkeletonSelInitWithNameJointPaths, name.Ptr(), jointPaths)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSkeletonSelInitWithNameJointPaths, name.Ptr(), jointPaths.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -42,8 +42,11 @@ func (o *MDLSkeleton) InitWithNameJointPaths(name *foundation.NSString, jointPat
 }
 
 func (o *MDLSkeleton) JointPaths() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mDLSkeletonSelJointPaths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mDLSkeletonSelJointPaths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *MDLSkeleton) JointBindTransforms() *MDLMatrix4x4Array {

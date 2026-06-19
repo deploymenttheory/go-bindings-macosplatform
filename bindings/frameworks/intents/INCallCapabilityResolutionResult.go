@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for the call capability for the call.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/incallcapabilityresolutionresult
 type INCallCapabilityResolutionResult struct {
 	INIntentResolutionResult
@@ -30,6 +32,7 @@ func INCallCapabilityResolutionResultFromID(id objc.ID) *INCallCapabilityResolut
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified call capability.
 func INCallCapabilityResolutionResultSuccessWithResolvedCallCapability(resolvedCallCapability INCallCapability) *INCallCapabilityResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallCapabilityResolutionResult), _iNCallCapabilityResolutionResultSelSuccessWithResolvedCallCapability, resolvedCallCapability)
 	if _ret != 0 {
@@ -38,6 +41,7 @@ func INCallCapabilityResolutionResultSuccessWithResolvedCallCapability(resolvedC
 	return INCallCapabilityResolutionResultFromID(_ret)
 }
 
+// Creates a result that asks Siri to verify the request that the user wants to continue.
 func INCallCapabilityResolutionResultConfirmationRequiredWithCallCapabilityToConfirm(callCapabilityToConfirm INCallCapability) *INCallCapabilityResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallCapabilityResolutionResult), _iNCallCapabilityResolutionResultSelConfirmationRequiredWithCallCapabilityToConfirm, callCapabilityToConfirm)
 	if _ret != 0 {

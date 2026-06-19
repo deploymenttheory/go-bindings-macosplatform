@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages feedback-based image processing for tasks such as painting or fluid simulation.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/ciimageaccumulator
 type CIImageAccumulator struct {
 	foundation.NSObject
@@ -42,6 +44,7 @@ func CIImageAccumulatorFromID(id objc.ID) *CIImageAccumulator {
 	return o
 }
 
+// Creates an image accumulator with the specified extent and pixel format.
 func CIImageAccumulatorImageAccumulatorWithExtentFormat(extent corefoundation.CGRect, format int) *CIImageAccumulator {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImageAccumulator), _cIImageAccumulatorSelImageAccumulatorWithExtentFormat, extent, format)
 	if _ret != 0 {
@@ -50,6 +53,7 @@ func CIImageAccumulatorImageAccumulatorWithExtentFormat(extent corefoundation.CG
 	return CIImageAccumulatorFromID(_ret)
 }
 
+// Creates an image accumulator with the specified extent, pixel format, and color space.
 func CIImageAccumulatorImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect, format int, colorSpace unsafe.Pointer) *CIImageAccumulator {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIImageAccumulator), _cIImageAccumulatorSelImageAccumulatorWithExtentFormatColorSpace, extent, format, colorSpace)
 	if _ret != 0 {
@@ -58,6 +62,7 @@ func CIImageAccumulatorImageAccumulatorWithExtentFormatColorSpace(extent corefou
 	return CIImageAccumulatorFromID(_ret)
 }
 
+// Initializes an image accumulator with the specified extent and pixel format.
 func (o *CIImageAccumulator) InitWithExtentFormat(extent corefoundation.CGRect, format int) *CIImageAccumulator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageAccumulatorSelInitWithExtentFormat, extent, format)
 	if _ret != 0 {
@@ -66,6 +71,7 @@ func (o *CIImageAccumulator) InitWithExtentFormat(extent corefoundation.CGRect, 
 	return CIImageAccumulatorFromID(_ret)
 }
 
+// Initializes an image accumulator with the specified extent, pixel format, and color space.
 func (o *CIImageAccumulator) InitWithExtentFormatColorSpace(extent corefoundation.CGRect, format int, colorSpace unsafe.Pointer) *CIImageAccumulator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageAccumulatorSelInitWithExtentFormatColorSpace, extent, format, colorSpace)
 	if _ret != 0 {
@@ -74,6 +80,7 @@ func (o *CIImageAccumulator) InitWithExtentFormatColorSpace(extent corefoundatio
 	return CIImageAccumulatorFromID(_ret)
 }
 
+// Returns the current contents of the image accumulator.
 func (o *CIImageAccumulator) Image() *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIImageAccumulatorSelImage)
 	if _ret != 0 {
@@ -82,14 +89,17 @@ func (o *CIImageAccumulator) Image() *CIImage {
 	return CIImageFromID(_ret)
 }
 
+// Sets the contents of the image accumulator to the contents of the specified image object.
 func (o *CIImageAccumulator) SetImage(image *CIImage) {
 	o.Ptr().Send(_cIImageAccumulatorSelSetImage, image.Ptr())
 }
 
+// Updates an image accumulator with a subregion of an image object.
 func (o *CIImageAccumulator) SetImageDirtyRect(image *CIImage, dirtyRect corefoundation.CGRect) {
 	o.Ptr().Send(_cIImageAccumulatorSelSetImageDirtyRect, image.Ptr(), dirtyRect)
 }
 
+// Resets the accumulator, discarding any pending updates and the current content.
 func (o *CIImageAccumulator) Clear() {
 	o.Ptr().Send(_cIImageAccumulatorSelClear)
 }

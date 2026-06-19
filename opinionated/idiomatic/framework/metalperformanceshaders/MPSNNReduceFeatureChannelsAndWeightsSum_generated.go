@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A reduction filter that returns the weighted sum of all values for each feature channel in an image.
+//
 // NNReduceFeatureChannelsAndWeightsSum wraps [raw.MPSNNReduceFeatureChannelsAndWeightsSum] with a fluent Go API.
 type NNReduceFeatureChannelsAndWeightsSum struct {
 	inner *raw.MPSNNReduceFeatureChannelsAndWeightsSum
@@ -206,7 +208,7 @@ func (x *NNReduceFeatureChannelsAndWeightsSum) WithDestinationImageAllocator(des
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NNReduceFeatureChannelsAndWeightsSum) WithOptions(options mpscore.MPSKernelOptions) *NNReduceFeatureChannelsAndWeightsSum {
@@ -214,7 +216,7 @@ func (x *NNReduceFeatureChannelsAndWeightsSum) WithOptions(options mpscore.MPSKe
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NNReduceFeatureChannelsAndWeightsSum) WithLabel(label string) *NNReduceFeatureChannelsAndWeightsSum {

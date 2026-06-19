@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A utility class that encapsulates information the framework requires to retrieve and display a specific Look Around location’s imagery.
+//
 // LookAroundScene wraps [raw.MKLookAroundScene] with a fluent Go API.
 type LookAroundScene struct {
 	inner *raw.MKLookAroundScene

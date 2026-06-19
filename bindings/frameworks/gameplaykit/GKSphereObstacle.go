@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An obstacle with an impassible radius in 3D space For use with GKAgent3D.  Using this with a GKAgent2D is no different than using GKCircleObstacle.
+// A spherical impassable volume to be avoided by agents.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gksphereobstacle
 type GKSphereObstacle struct {
@@ -38,6 +38,7 @@ func GKSphereObstacleFromID(id objc.ID) *GKSphereObstacle {
 	return o
 }
 
+// Creates a spherical obstacle with the specified radius.
 func GKSphereObstacleObstacleWithRadius(radius float32) *GKSphereObstacle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKSphereObstacle), _gKSphereObstacleSelObstacleWithRadius, radius)
 	if _ret != 0 {
@@ -46,6 +47,7 @@ func GKSphereObstacleObstacleWithRadius(radius float32) *GKSphereObstacle {
 	return GKSphereObstacleFromID(_ret)
 }
 
+// Initializes a spherical obstacle with the specified radius.
 func (o *GKSphereObstacle) InitWithRadius(radius float32) *GKSphereObstacle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSphereObstacleSelInitWithRadius, radius)
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that enables you to start and stop URL requests.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlconnection
 type NSURLConnection struct {
 	NSObject
@@ -43,6 +45,7 @@ func NSURLConnectionFromID(id objc.ID) *NSURLConnection {
 	return o
 }
 
+// Returns an initialized URL connection and begins to load the data for the URL request, if specified.
 // Deprecated: Use NSURLSession (see NSURLSession.h)
 func (o *NSURLConnection) InitWithRequestDelegateStartImmediately(request *NSURLRequest, delegate objc.ID, startImmediately bool) *NSURLConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLConnectionSelInitWithRequestDelegateStartImmediately, request.Ptr(), delegate, startImmediately)
@@ -52,6 +55,7 @@ func (o *NSURLConnection) InitWithRequestDelegateStartImmediately(request *NSURL
 	return NSURLConnectionFromID(_ret)
 }
 
+// Returns an initialized URL connection and begins to load the data for the URL request.
 // Deprecated: Use NSURLSession (see NSURLSession.h)
 func (o *NSURLConnection) InitWithRequestDelegate(request *NSURLRequest, delegate objc.ID) *NSURLConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLConnectionSelInitWithRequestDelegate, request.Ptr(), delegate)
@@ -61,6 +65,7 @@ func (o *NSURLConnection) InitWithRequestDelegate(request *NSURLRequest, delegat
 	return NSURLConnectionFromID(_ret)
 }
 
+// Creates and returns an initialized URL connection and begins to load the data for the URL request.
 // Deprecated: Use NSURLSession (see NSURLSession.h)
 func NSURLConnectionConnectionWithRequestDelegate(request *NSURLRequest, delegate objc.ID) *NSURLConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLConnection), _nSURLConnectionSelConnectionWithRequestDelegate, request.Ptr(), delegate)
@@ -70,27 +75,32 @@ func NSURLConnectionConnectionWithRequestDelegate(request *NSURLRequest, delegat
 	return NSURLConnectionFromID(_ret)
 }
 
+// Causes the connection to begin loading data, if it has not already.
 func (o *NSURLConnection) Start() {
 	o.Ptr().Send(_nSURLConnectionSelStart)
 }
 
+// Cancels an asynchronous load of a request.
 func (o *NSURLConnection) Cancel() {
 	o.Ptr().Send(_nSURLConnectionSelCancel)
 }
 
+// Determines the run loop and mode that the connection uses to call methods on its delegate.
 func (o *NSURLConnection) ScheduleInRunLoopForMode(aRunLoop *NSRunLoop, mode *NSString) {
 	o.Ptr().Send(_nSURLConnectionSelScheduleInRunLoopForMode, aRunLoop.Ptr(), mode.Ptr())
 }
 
+// Causes the connection to stop calling delegate methods in the specified run loop and mode.
 func (o *NSURLConnection) UnscheduleFromRunLoopForMode(aRunLoop *NSRunLoop, mode *NSString) {
 	o.Ptr().Send(_nSURLConnectionSelUnscheduleFromRunLoopForMode, aRunLoop.Ptr(), mode.Ptr())
 }
 
+// Determines the operation queue that is used to call methods on the connection’s delegate.
 func (o *NSURLConnection) SetDelegateQueue(queue *NSOperationQueue) {
 	o.Ptr().Send(_nSURLConnectionSelSetDelegateQueue, queue.Ptr())
 }
 
-// @method         canHandleRequest: @abstract Performs a "preflight" operation that performs some speculative checks to see if a connection can be initialized, and the associated I/O that is started in the initializer methods can begin. @discussion The result of this method is valid only as long as no protocols are registered or unregistered, and as long as the request is not mutated (if the request is mutable). Hence, clients should be prepared to handle failures even if they have performed request preflighting by calling this method. @param request     The request to preflight. @result         YES if it is likely that the given request can be used to initialize a connection and the associated I/O can be started, NO otherwise.
+// Returns whether a request can be handled based on a preflight evaluation.
 func NSURLConnectionCanHandleRequest(request *NSURLRequest) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSURLConnection), _nSURLConnectionSelCanHandleRequest, request.Ptr())
 	return _ret
@@ -112,7 +122,7 @@ func (o *NSURLConnection) CurrentRequest() *NSURLRequest {
 	return NSURLRequestFromID(_ret)
 }
 
-// @method      sendSynchronousRequest:returningResponse:error: @abstract Performs a synchronous load of the given request, returning an NSURLResponse in the given out parameter. @discussion A synchronous load for the given request is built on top of the asynchronous loading code made available by the class.  The calling thread is blocked while the asynchronous loading system performs the URL load on a thread spawned specifically for this load request. No special threading or run loop configuration is necessary in the calling thread in order to perform a synchronous load. For instance, the calling thread need not be running its run loop. @param request   The request to load. Note that the request is deep-copied as part of the initialization process. Changes made to the request argument after this method returns do not affect the request that is used for the loading process. @param response  An out parameter which is filled in with the response generated by performing the load. @param error     Out parameter (may be NULL) used if an error occurs while processing the request. Will not be modified if the load succeeds. @result      The content of the URL resulting from performing the load, or nil if the load failed.
+// Performs a synchronous load of the specified URL request.
 // Deprecated: Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h
 func NSURLConnectionSendSynchronousRequestReturningResponseError(request *NSURLRequest, response *NSURLResponse) (*NSData, error) {
 	var _nsErr uintptr
@@ -126,7 +136,7 @@ func NSURLConnectionSendSynchronousRequestReturningResponseError(request *NSURLR
 	return NSDataFromID(_ret), nil
 }
 
-// @method       sendAsynchronousRequest:queue:completionHandler: @abstract Performs an asynchronous load of the given request. When the request has completed or failed, the block will be executed from the context of the specified NSOperationQueue. @discussion This is a convenience routine that allows for asynchronous loading of a url-based resource.  If the resource load is successful, the data parameter to the callback will contain the resource data and the error parameter will be nil.  If the resource load fails, the data parameter will be nil and the error will contain information about the failure. @param request   The request to load. Note that the request is deep-copied as part of the initialization process. Changes made to the request argument after this method returns do not affect the request that is used for the loading process. @param queue     An NSOperationQueue upon which    the handler block will be dispatched. @param handler   A block which receives the results of the resource load.
+// Loads the data for a URL request and executes a handler block on an operation queue when the request completes or fails.
 // Deprecated: Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h
 func NSURLConnectionSendAsynchronousRequestQueueCompletionHandler(request *NSURLRequest, queue *NSOperationQueue, handler func(*NSURLResponse, *NSData, unsafe.Pointer)) {
 	var __block_handler objc.Block

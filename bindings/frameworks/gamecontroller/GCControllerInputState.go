@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents an input state for gamepads and arcade sticks.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gccontrollerinputstate
 type GCControllerInputState struct {
 	foundation.NSObject

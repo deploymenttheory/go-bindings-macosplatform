@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that represents a scanner functional unit.
+//
 // Apple documentation: https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunit
 type ICScannerFunctionalUnit struct {
 	foundation.NSObject

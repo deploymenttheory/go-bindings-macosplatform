@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that emits, animates, and renders a particle system.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/caemitterlayer
 type CAEmitterLayer struct {
 	CALayer

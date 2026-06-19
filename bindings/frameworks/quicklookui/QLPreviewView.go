@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A Quick Look preview of an item that you can embed into your view hierarchy.
+//
 // Apple documentation: https://developer.apple.com/documentation/quicklookui/qlpreviewview
 type QLPreviewView struct {
 	appkit.NSView
@@ -42,24 +44,24 @@ func QLPreviewViewFromID(id objc.ID) *QLPreviewView {
 	return o
 }
 
-// Creates a preview view with the provided frame and style. This is the designated initializer for the `QLPreviewView` class. - Parameters: - frame: The frame rectangle for the initialized `QLPreviewView` object. - style: The desired style for the `QLPreviewView` object. For a list of possible styles, see “QuickLookUI/QLPreviewViewStyle“. - Returns: Returns a `QLPreviewView` object with the designated frame and style.
+// Creates a preview view with the provided frame and style.
 func (o *QLPreviewView) InitWithFrameStyle(frame corefoundation.CGRect, style QLPreviewViewStyle) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewViewSelInitWithFrameStyle, frame, style)
 	return _ret
 }
 
-// Creates a preview view with the provided frame. Calling this method is equivalent to calling “QuickLookUI/QLPreviewView/initWithFrame:style:“ with the `style` parameter being “QuickLookUI/QLPreviewViewStyle/QLPreviewViewStyleNormal“. - Parameters: - frame: The frame rectangle for the initialized `QLPreviewView` object. - Returns: Returns a `QLPreviewView` object with the designated frame and the default style.
+// Creates a preview view with the provided frame.
 func (o *QLPreviewView) InitWithFrame(frame corefoundation.CGRect) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewViewSelInitWithFrame, frame)
 	return _ret
 }
 
-// Updates the preview to display the currently previewed item. When you modify the object that the “QuickLookUI/QLPreviewView/previewItem“ property points to, call this method to generate and display the new preview.
+// Updates the preview to display the currently previewed item.
 func (o *QLPreviewView) RefreshPreviewItem() {
 	o.Ptr().Send(_qLPreviewViewSelRefreshPreviewItem)
 }
 
-// Closes the view, releasing the current preview item. Once a “QuickLookUI/QLPreviewView“ is closed, it won’t accept any more preview items. You only need to call this method if “QuickLookUI/QLPreviewView/shouldCloseWithWindow“ is set to <doc://com.apple.documentation/documentation/objectivec/no>. If you don’t close a “QuickLookUI/QLPreviewView“ when you are done using it, your app will leak memory.
+// Closes the view, releasing the current preview item.
 func (o *QLPreviewView) Close() {
 	o.Ptr().Send(_qLPreviewViewSelClose)
 }

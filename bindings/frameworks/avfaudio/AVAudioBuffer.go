@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a buffer of audio data with a format.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiobuffer
 type AVAudioBuffer struct {
 	foundation.NSObject

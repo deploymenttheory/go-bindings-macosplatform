@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An external sync device connected to a host device that can be used to drive the timing of an internal component, such as a camera sensor.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avexternalsyncdevice
 type AVExternalSyncDevice struct {
 	foundation.NSObject

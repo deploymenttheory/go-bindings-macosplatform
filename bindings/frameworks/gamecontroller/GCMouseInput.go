@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller profile that tracks input from a mouse.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcmouseinput
 type GCMouseInput struct {
 	GCPhysicalInputProfile

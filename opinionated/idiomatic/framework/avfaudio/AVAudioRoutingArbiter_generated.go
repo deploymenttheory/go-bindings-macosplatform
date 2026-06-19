@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object for configuring macOS apps to participate in AirPods Automatic Switching.
+//
 // AudioRoutingArbiter wraps [raw.AVAudioRoutingArbiter] with a fluent Go API.
 type AudioRoutingArbiter struct {
 	inner *raw.AVAudioRoutingArbiter
@@ -36,14 +38,14 @@ func NewAudioRoutingArbiter() *AudioRoutingArbiter {
 	return &AudioRoutingArbiter{inner: raw.AVAudioRoutingArbiterFromID(_id)}
 }
 
-// @method        beginArbitrationWithCategory:completionHandler: @abstract      Begin routing arbitration to take ownership of nearby Bluetooth audio routes. @discussion When an app wants to participate in automatic audio arbitration for the wireless headphones route, it has to begin arbitration specifying its arbitration session category. It provides the operating system time to arbitrate with other nearby Apple devices to obtain ownership of supported Bluetooth audio devices. Then upon completion of arbitration, the operating system will automatically determine  whether to route audio to the nearby Bluetooth device. Once arbitration completes, the application is free to start running audio I/O. I/O will be started upon the app request even if the -beginArbitrationWithCategory:completionHandler: fails. This method should also be used whenever restarting audio I/O in order to allow the system to arbitrate for ownership of a Bluetooth device that may have been taken by another nearby Apple device during the time that I/O was stopped. @param         category The category describes the general type of audio that the app plans to use. @param         handler A client-supplied block called asynchronously when audio routing arbitration is completed. This completion handler takes the following parameters: defaultDeviceChanged Indicating that the system default audio device has been changed as a result of the arbitration operation. error An error object that indicates why the request failed, or nil if the request was successful.
+// Begins routing arbitration to take ownership of a nearby Bluetooth audio route.
 //
 // BeginArbitrationWithCategoryCompletionHandler calls the underlying BeginArbitrationWithCategoryCompletionHandler.
 func (x *AudioRoutingArbiter) BeginArbitrationWithCategoryCompletionHandler(category AVAudioRoutingArbitrationCategory, handler func(bool, unsafe.Pointer)) {
 	x.inner.BeginArbitrationWithCategoryCompletionHandler(raw.AVAudioRoutingArbitrationCategory(category), handler)
 }
 
-// @method   leaveArbitration @abstract   Stop participating in audio routing arbitration. @discussion When an application has stopped using audio for the foreseeable future, it should notify the system. For example, in Voice over IP (VoIP)  use cases, the application should call -leaveArbitration when the VoIP call has ended. This allows the system to make a better decision when other participating Apple devices would like to take ownership of a nearby Bluetooth device. Applications should not call this API in cases where audio is only momentarily paused.
+// Stops an app’s participation in audio routing arbitration.
 //
 // LeaveArbitration calls the underlying LeaveArbitration.
 func (x *AudioRoutingArbiter) LeaveArbitration() {

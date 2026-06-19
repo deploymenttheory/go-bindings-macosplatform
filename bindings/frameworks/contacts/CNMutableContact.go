@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable object that stores information about a single contact, such as the contact’s first name, phone numbers, and addresses.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnmutablecontact
 type CNMutableContact struct {
 	CNContact
@@ -125,31 +127,31 @@ func (o *CNMutableContact) SetImageData(imageData *foundation.NSData) {
 }
 
 func (o *CNMutableContact) SetPhoneNumbers(phoneNumbers *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_cNMutableContactSelSetPhoneNumbers, phoneNumbers)
+	o.Ptr().Send(_cNMutableContactSelSetPhoneNumbers, phoneNumbers.Ptr())
 }
 
 func (o *CNMutableContact) SetEmailAddresses(emailAddresses *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_cNMutableContactSelSetEmailAddresses, emailAddresses)
+	o.Ptr().Send(_cNMutableContactSelSetEmailAddresses, emailAddresses.Ptr())
 }
 
 func (o *CNMutableContact) SetPostalAddresses(postalAddresses *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_cNMutableContactSelSetPostalAddresses, postalAddresses)
+	o.Ptr().Send(_cNMutableContactSelSetPostalAddresses, postalAddresses.Ptr())
 }
 
 func (o *CNMutableContact) SetUrlAddresses(urlAddresses *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_cNMutableContactSelSetUrlAddresses, urlAddresses)
+	o.Ptr().Send(_cNMutableContactSelSetUrlAddresses, urlAddresses.Ptr())
 }
 
 func (o *CNMutableContact) SetContactRelations(contactRelations *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_cNMutableContactSelSetContactRelations, contactRelations)
+	o.Ptr().Send(_cNMutableContactSelSetContactRelations, contactRelations.Ptr())
 }
 
 func (o *CNMutableContact) SetSocialProfiles(socialProfiles *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_cNMutableContactSelSetSocialProfiles, socialProfiles)
+	o.Ptr().Send(_cNMutableContactSelSetSocialProfiles, socialProfiles.Ptr())
 }
 
 func (o *CNMutableContact) SetInstantMessageAddresses(instantMessageAddresses *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_cNMutableContactSelSetInstantMessageAddresses, instantMessageAddresses)
+	o.Ptr().Send(_cNMutableContactSelSetInstantMessageAddresses, instantMessageAddresses.Ptr())
 }
 
 func (o *CNMutableContact) SetBirthday(birthday *foundation.NSDateComponents) {
@@ -161,5 +163,5 @@ func (o *CNMutableContact) SetNonGregorianBirthday(nonGregorianBirthday *foundat
 }
 
 func (o *CNMutableContact) SetDates(dates *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_cNMutableContactSelSetDates, dates)
+	o.Ptr().Send(_cNMutableContactSelSetDates, dates.Ptr())
 }

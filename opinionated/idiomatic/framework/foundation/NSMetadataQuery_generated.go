@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A query that you perform against Spotlight metadata.
+//
 // MetadataQuery wraps [raw.NSMetadataQuery] with a fluent Go API.
 type MetadataQuery struct {
 	inner *raw.NSMetadataQuery
@@ -38,18 +40,24 @@ func NewMetadataQuery() *MetadataQuery {
 	return &MetadataQuery{inner: raw.NSMetadataQueryFromID(_id)}
 }
 
+// The query’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *MetadataQuery) WithDelegate(delegate raw.NSMetadataQueryDelegate) *MetadataQuery {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The predicate used to filter query results.
+//
 // WithPredicate sets the predicate property and returns the receiver for chaining.
 func (x *MetadataQuery) WithPredicate(predicate PredicateProvider) *MetadataQuery {
 	x.inner.SetPredicate(predicate.asPredicate())
 	return x
 }
 
+// An array of sort descriptor objects.
+//
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MetadataQuery) WithSortDescriptors(items ...*raw.NSSortDescriptor) *MetadataQuery {
 	if len(items) == 0 {
@@ -71,6 +79,8 @@ func (x *MetadataQuery) WithSortDescriptors(items ...*raw.NSSortDescriptor) *Met
 	return x
 }
 
+// An array of attributes whose values are gathered by the query.
+//
 // WithValueListAttributes sets the collection, converting the Go slice to an NSArray.
 func (x *MetadataQuery) WithValueListAttributes(items ...StringProvider) *MetadataQuery {
 	if len(items) == 0 {
@@ -92,6 +102,8 @@ func (x *MetadataQuery) WithValueListAttributes(items ...StringProvider) *Metada
 	return x
 }
 
+// An array of grouping attributes. (read-only)
+//
 // WithGroupingAttributes sets the collection, converting the Go slice to an NSArray.
 func (x *MetadataQuery) WithGroupingAttributes(items ...StringProvider) *MetadataQuery {
 	if len(items) == 0 {
@@ -113,12 +125,16 @@ func (x *MetadataQuery) WithGroupingAttributes(items ...StringProvider) *Metadat
 	return x
 }
 
+// The interval at which notification of updated results occurs.
+//
 // WithNotificationBatchingInterval sets the notificationBatchingInterval property and returns the receiver for chaining.
 func (x *MetadataQuery) WithNotificationBatchingInterval(notificationBatchingInterval float64) *MetadataQuery {
 	x.inner.SetNotificationBatchingInterval(notificationBatchingInterval)
 	return x
 }
 
+// The queue on which query result notifications are posted.
+//
 // WithOperationQueue sets the operationQueue property and returns the receiver for chaining.
 func (x *MetadataQuery) WithOperationQueue(operationQueue *OperationQueue) *MetadataQuery {
 	x.inner.SetOperationQueue(operationQueue.Unwrap())
@@ -131,46 +147,64 @@ func (x *MetadataQuery) WithScriptingProperties(scriptingProperties *raw.NSDicti
 	return x
 }
 
+// Attempts to start the query.
+//
 // StartQuery calls the underlying StartQuery.
 func (x *MetadataQuery) StartQuery() bool {
 	return x.inner.StartQuery()
 }
 
+// Stops the receiver’s current query from gathering any further results.
+//
 // StopQuery calls the underlying StopQuery.
 func (x *MetadataQuery) StopQuery() {
 	x.inner.StopQuery()
 }
 
+// Disables updates to the query results.
+//
 // DisableUpdates calls the underlying DisableUpdates.
 func (x *MetadataQuery) DisableUpdates() {
 	x.inner.DisableUpdates()
 }
 
+// Enables updates to the query results.
+//
 // EnableUpdates calls the underlying EnableUpdates.
 func (x *MetadataQuery) EnableUpdates() {
 	x.inner.EnableUpdates()
 }
 
+// Returns the query result at a specific index.
+//
 // ResultAtIndex calls the underlying ResultAtIndex.
 func (x *MetadataQuery) ResultAtIndex(idx uint) objc.ID {
 	return x.inner.ResultAtIndex(idx)
 }
 
+// Enumerates the current set of results using the given block.
+//
 // EnumerateResultsUsing calls the underlying EnumerateResultsUsing.
 func (x *MetadataQuery) EnumerateResultsUsing(block func(objc.ID, uint, *bool)) {
 	x.inner.EnumerateResultsUsing(block)
 }
 
+// Enumerates the current set of results using the given options and block.
+//
 // EnumerateResultsWithOptionsUsing calls the underlying EnumerateResultsWithOptionsUsing.
 func (x *MetadataQuery) EnumerateResultsWithOptionsUsing(opts NSEnumerationOptions, block func(objc.ID, uint, *bool)) {
 	x.inner.EnumerateResultsWithOptionsUsing(raw.NSEnumerationOptions(opts), block)
 }
 
+// Returns the index of a query result object in the receiver’s results array.
+//
 // IndexOfResult calls the underlying IndexOfResult.
 func (x *MetadataQuery) IndexOfResult(result objc.ID) uint {
 	return x.inner.IndexOfResult(result)
 }
 
+// Returns the value for the attribute name attrName at the index in the results specified by idx.
+//
 // ValueOfAttributeForResultAtIndex calls the underlying ValueOfAttributeForResultAtIndex.
 func (x *MetadataQuery) ValueOfAttributeForResultAtIndex(attrName string, idx uint) objc.ID {
 	return x.inner.ValueOfAttributeForResultAtIndex(foundation.NSStringStringWithUTF8String(attrName), idx)

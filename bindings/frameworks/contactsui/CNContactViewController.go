@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view controller that displays a new, unknown, or existing contact.
+//
 // Apple documentation: https://developer.apple.com/documentation/contactsui/cncontactviewcontroller
 type CNContactViewController struct {
 	appkit.NSViewController
@@ -33,7 +35,7 @@ func CNContactViewControllerFromID(id objc.ID) *CNContactViewController {
 	return o
 }
 
-// @abstract Descriptor for all keys that must be fetched on a contact before setting it on the view controller. @discussion Pass this descriptor to the keysToFetch of the @c CNContactFetchRequest if you want to display the contact in a @c CNContactViewController.
+// Returns the descriptor for all the keys that must be fetched on the contact before setting it on the view controller.
 func CNContactViewControllerDescriptorForRequiredKeys() contacts.CNKeyDescriptor {
 	_ret := objc.Send[contacts.CNKeyDescriptor](objc.ID(_clsCNContactViewController), _cNContactViewControllerSelDescriptorForRequiredKeys)
 	return _ret

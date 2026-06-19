@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object used to add headers or footers to a collection view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionlayoutboundarysupplementaryitem
 type NSCollectionLayoutBoundarySupplementaryItem struct {
 	NSCollectionLayoutSupplementaryItem
@@ -38,6 +40,7 @@ func NSCollectionLayoutBoundarySupplementaryItemFromID(id objc.ID) *NSCollection
 	return o
 }
 
+// Creates a boundary supplementary item of the specified size and element kind, with an alignment relative to a section or layout.
 func NSCollectionLayoutBoundarySupplementaryItemBoundarySupplementaryItemWithLayoutSizeElementKindAlignment(layoutSize *NSCollectionLayoutSize, elementKind *foundation.NSString, alignment NSRectAlignment) *NSCollectionLayoutBoundarySupplementaryItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutBoundarySupplementaryItem), _nSCollectionLayoutBoundarySupplementaryItemSelBoundarySupplementaryItemWithLayoutSizeElementKindAlignment, layoutSize.Ptr(), elementKind.Ptr(), alignment)
 	if _ret != 0 {
@@ -46,6 +49,7 @@ func NSCollectionLayoutBoundarySupplementaryItemBoundarySupplementaryItemWithLay
 	return NSCollectionLayoutBoundarySupplementaryItemFromID(_ret)
 }
 
+// Creates a boundary supplementary item of the specified size and element kind, with an alignment relative to a section or layout at an absolute offset.
 func NSCollectionLayoutBoundarySupplementaryItemBoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset(layoutSize *NSCollectionLayoutSize, elementKind *foundation.NSString, alignment NSRectAlignment, absoluteOffset corefoundation.CGPoint) *NSCollectionLayoutBoundarySupplementaryItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutBoundarySupplementaryItem), _nSCollectionLayoutBoundarySupplementaryItemSelBoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset, layoutSize.Ptr(), elementKind.Ptr(), alignment, absoluteOffset)
 	if _ret != 0 {

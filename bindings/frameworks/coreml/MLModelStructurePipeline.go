@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class representing the structure of a Pipeline model.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmodelstructurepipeline
 type MLModelStructurePipeline struct {
 	foundation.NSObject
@@ -33,8 +35,11 @@ func MLModelStructurePipelineFromID(id objc.ID) *MLModelStructurePipeline {
 
 // The names of the sub models in the pipeline.
 func (o *MLModelStructurePipeline) SubModelNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mLModelStructurePipelineSelSubModelNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructurePipelineSelSubModelNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // The structure of the sub models in the pipeline.

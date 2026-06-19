@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for creating thumbnails of custom file types.
+//
 // Apple documentation: https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailprovider
 type QLThumbnailProvider struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func QLThumbnailProviderFromID(id objc.ID) *QLThumbnailProvider {
 	return o
 }
 
-// Subclass this method to provide a QLThumbnailReply that either contains a drawing block or an image file URL. @param request An object which contains information about the thumbnail that should be provided. It contains the URL of the file to provide a thumbnail for. @param handler Call the completion handler with a QLThumbnailReply if you can provide a thumbnail, or with an NSError if you cannot. If an error is passed or reply is nil, no thumbnail will be drawn. The handler can be called asynchronously after the method has returned.
+// Creates a thumbnail of a custom file type for a specific request.
 func (o *QLThumbnailProvider) ProvideThumbnailForFileRequestCompletionHandler(request *QLFileThumbnailRequest, handler func(*QLThumbnailReply, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {

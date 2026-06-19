@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that specifies the behaviors to use when loading and rendering page content.
+//
 // WKWebpagePreferences wraps [raw.WKWebpagePreferences] with a fluent Go API.
 type WKWebpagePreferences struct {
 	inner *raw.WKWebpagePreferences
@@ -35,7 +37,7 @@ func NewWKWebpagePreferences() *WKWebpagePreferences {
 	return &WKWebpagePreferences{inner: raw.WKWebpagePreferencesFromID(_id)}
 }
 
-// @abstract A WKContentMode indicating the content mode to prefer when loading and rendering a webpage. @discussion The default value is WKContentModeRecommended. The stated preference is ignored on subframe navigation
+// The content mode for the web view to use when it loads and renders a webpage.
 //
 // WithPreferredContentMode sets the preferredContentMode property and returns the receiver for chaining.
 func (x *WKWebpagePreferences) WithPreferredContentMode(preferredContentMode WKContentMode) *WKWebpagePreferences {
@@ -43,13 +45,15 @@ func (x *WKWebpagePreferences) WithPreferredContentMode(preferredContentMode WKC
 	return x
 }
 
+// A Boolean value that indicates whether JavaScript from web content is allowed to run.
+//
 // WithAllowsContentJavaScript sets the allowsContentJavaScript property and returns the receiver for chaining.
 func (x *WKWebpagePreferences) WithAllowsContentJavaScript(allowsContentJavaScript bool) *WKWebpagePreferences {
 	x.inner.SetAllowsContentJavaScript(allowsContentJavaScript)
 	return x
 }
 
-// @abstract A boolean indicating whether lockdown mode is enabled. @discussion This mode trades off performance and compatibility in favor of security. The default value depends on the system setting.
+// A Boolean value that indicates whether to use Lockdown Mode in the web view.
 //
 // WithLockdownModeEnabled sets the lockdownModeEnabled property and returns the receiver for chaining.
 func (x *WKWebpagePreferences) WithLockdownModeEnabled(lockdownModeEnabled bool) *WKWebpagePreferences {

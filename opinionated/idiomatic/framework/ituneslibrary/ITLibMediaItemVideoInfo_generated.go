@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// This class encapsulates the video information of a video media item.
+//
 // LibMediaItemVideoInfo wraps [raw.ITLibMediaItemVideoInfo] with a fluent Go API.
 type LibMediaItemVideoInfo struct {
 	inner *raw.ITLibMediaItemVideoInfo

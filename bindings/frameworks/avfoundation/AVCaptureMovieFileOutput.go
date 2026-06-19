@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A capture output that records video and audio to a QuickTime movie file.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturemoviefileoutput
 type AVCaptureMovieFileOutput struct {
 	AVCaptureFileOutput
@@ -46,6 +48,7 @@ func AVCaptureMovieFileOutputFromID(id objc.ID) *AVCaptureMovieFileOutput {
 	return o
 }
 
+// Creates a new of movie file output.
 func (o *AVCaptureMovieFileOutput) Init() *AVCaptureMovieFileOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureMovieFileOutputSelInit)
 	if _ret != 0 {
@@ -54,23 +57,27 @@ func (o *AVCaptureMovieFileOutput) Init() *AVCaptureMovieFileOutput {
 	return AVCaptureMovieFileOutputFromID(_ret)
 }
 
+// Returns a new movie file output object.
 func AVCaptureMovieFileOutputNew() *AVCaptureMovieFileOutput {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureMovieFileOutput), _aVCaptureMovieFileOutputSelNew)
 	return AVCaptureMovieFileOutputFromID(_ret)
 }
 
-// @method outputSettingsForConnection: @abstract Returns the options the receiver uses to encode media from the given connection as it is being recorded. @param connection The connection delivering the media to be encoded. @result An NSDictionary of output settings. @discussion See AVAudioSettings.h for audio connections or AVVideoSettings.h for video connections for more information on the structure of an output settings dictionary. If the returned value is an empty dictionary (i.e. [NSDictionary dictionary], the format of the media from the connection will not be changed before being written to the file. If -setOutputSettings:forConnection: was called with a nil dictionary, this method returns a non-nil dictionary reflecting the settings used by the AVCaptureSession's current sessionPreset.
+// Returns the settings the output uses to encode media from the specified connection.
 func (o *AVCaptureMovieFileOutput) OutputSettingsForConnection(connection *AVCaptureConnection) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVCaptureMovieFileOutputSelOutputSettingsForConnection, connection.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureMovieFileOutputSelOutputSettingsForConnection, connection.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
-// @method setOutputSettings:forConnection: @abstract Sets the options the receiver uses to encode media from the given connection as it is being recorded. @param outputSettings An NSDictionary of output settings. @param connection The connection delivering the media to be encoded. @discussion See AVAudioSettings.h for audio connections or AVVideoSettings.h for video connections for more information on how to construct an output settings dictionary. A value of an empty dictionary (i.e. +[NSDictionary dictionary]), means that the format of the media from the connection should not be changed before being written to the file. A value of nil means that the output format will be determined by the session preset. In this case, -outputSettingsForConnection: will return a non-nil dictionary reflecting the settings used by the AVCaptureSession's current sessionPreset. On iOS, your outputSettings dictionary may only contain keys listed in - supportedOutputSettingsKeysForConnection:. If you specify any other key, an NSInvalidArgumentException will be thrown. Further restrictions may be imposed on the AVVideoCodecTypeKey. Its value should be present in the -availableVideoCodecTypes array. If AVVideoCompressionPropertiesKey is specified, you must also specify a valid value for AVVideoCodecKey. On iOS versions prior to 12.0, the only settable key for video connections is AVVideoCodecTypeKey. On iOS 12.0 and later, video connections gain support for AVVideoCompressionPropertiesKey. On iOS, -outputSettingsForConnection: always provides a fully populated dictionary. If you call -outputSettingsForConnection: with the intent of overriding a few of the values, you must take care to exclude keys that are not supported before calling -setOutputSettings:forConnection:. When providing an AVVideoCompressionPropertiesKey sub dictionary, you may specify a sparse dictionary. AVCaptureMovieFileOutput will always fill in missing keys with default values for the current AVCaptureSession configuration.
+// Sets the options the output uses to encode media from the given connection while recording.
 func (o *AVCaptureMovieFileOutput) SetOutputSettingsForConnection(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], connection *AVCaptureConnection) {
-	o.Ptr().Send(_aVCaptureMovieFileOutputSelSetOutputSettingsForConnection, outputSettings, connection.Ptr())
+	o.Ptr().Send(_aVCaptureMovieFileOutputSelSetOutputSettingsForConnection, outputSettings.Ptr(), connection.Ptr())
 }
 
-// @method setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions: @abstract When primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled is set to YES, this method controls the switching behavior and conditions, while a movie file is being recorded. @discussion This controls the camera selection behavior used while recording a movie, when enabled through primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled. Setting the switching behavior to anything other than AVCapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported when connected to an AVCaptureDevice that does not support constituent device selection throws an NSInvalidArgumentException. Setting restrictedSwitchingBehaviorConditions to something other than AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone while setting switchingBehavior to something other than AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted throws an NSInvalidArgumentException exception.
+// Sets the camera switching behavior to use during recording.
 func (o *AVCaptureMovieFileOutput) SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions(switchingBehavior AVCapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) {
 	o.Ptr().Send(_aVCaptureMovieFileOutputSelSetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions, switchingBehavior, restrictedSwitchingBehaviorConditions)
 }

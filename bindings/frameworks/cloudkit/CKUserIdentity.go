@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The identity of a user.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckuseridentity
 type CKUserIdentity struct {
 	foundation.NSObject
@@ -70,6 +72,9 @@ func (o *CKUserIdentity) HasiCloudAccount() bool {
 // Identifiers that match contacts in the local Contacts database. Identities that CloudKit discovers using “CKDiscoverAllUserIdentitiesOperation“ correspond to entries in the local Contacts database, matching the identifier on <doc://com.apple.documentation/documentation/contacts/cncontact>.  Use these identifiers with the Contacts database to get additional information about the contacts. Multiple identifiers can exist for a single discovered user because multiple contacts can contain the same email addresses or phone numbers. To transform these identifiers into an array of unified contact identifiers, create a predicate by calling the <doc://com.apple.documentation/documentation/contacts/cncontact/predicateforcontacts(withidentifiers:)> method, and then pass that predicate to the <doc://com.apple.documentation/documentation/contacts/cncontactstore/unifiedcontacts(matching:keystofetch:)> method.
 // Deprecated: No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.
 func (o *CKUserIdentity) ContactIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKUserIdentitySelContactIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKUserIdentitySelContactIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

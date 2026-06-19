@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that provides a description of how to convert a unit to and from the base unit of its dimension.
+//
 // UnitConverter wraps [raw.NSUnitConverter] with a fluent Go API.
 type UnitConverter struct {
 	inner *raw.NSUnitConverter

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that takes any number of inputs and converts them into a single output.
+//
 // AudioMixerNode wraps [raw.AVAudioMixerNode] with a fluent Go API.
 type AudioMixerNode struct {
 	inner *raw.AVAudioMixerNode
@@ -35,7 +37,7 @@ func NewAudioMixerNode() *AudioMixerNode {
 	return &AudioMixerNode{inner: raw.AVAudioMixerNodeFromID(_id)}
 }
 
-// @property outputVolume @abstract The mixer's output volume. @discussion This accesses the mixer's output volume (0.0-1.0, inclusive).
+// The mixer’s output volume.
 //
 // WithOutputVolume sets the outputVolume property and returns the receiver for chaining.
 func (x *AudioMixerNode) WithOutputVolume(outputVolume float32) *AudioMixerNode {

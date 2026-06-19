@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A point of view for rendering a 3D scene, along with a set of parameters describing an intended appearance for rendering.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlcamera
 type MDLCamera struct {
 	MDLObject
@@ -80,28 +82,28 @@ func MDLCameraFromID(id objc.ID) *MDLCamera {
 	return o
 }
 
-// Move the camera back and orient the camera so that a bounding box is framed within the current field of view. Uses the Y axis as up. If setNearAndFar is YES, the near and far visibility distances will be set.
+// Moves the camera such that the specified bounding box lies entirely within the camera’s field of view.
 func (o *MDLCamera) FrameBoundingBoxSetNearAndFar(boundingBox MDLAxisAlignedBoundingBox, setNearAndFar bool) {
 	o.Ptr().Send(_mDLCameraSelFrameBoundingBoxSetNearAndFar, boundingBox, setNearAndFar)
 }
 
-// Orient the camera so that the camera points at focusPosition. Assumes that the Y axis is up.
+// Orients the camera to face toward the specified point.
 func (o *MDLCamera) LookAt(focusPosition unsafe.Pointer) {
 	o.Ptr().Send(_mDLCameraSelLookAt, focusPosition)
 }
 
-// Set the position of the camera and orient it so that it points at focusPosition. Assumes that the Y axis is up.
+// Sets the camera’s position and orients the camera to face toward the specified point.
 func (o *MDLCamera) LookAtFrom(focusPosition unsafe.Pointer, cameraPosition unsafe.Pointer) {
 	o.Ptr().Send(_mDLCameraSelLookAtFrom, focusPosition, cameraPosition)
 }
 
-// A convenience function to calculate a ray from the camera to a pixel in a viewport of a given size
+// Returns a point, in 3D world coordinates, corresponding to the specified 2D view coordinates.
 func (o *MDLCamera) RayToForViewPort(pixel unsafe.Pointer, size unsafe.Pointer) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mDLCameraSelRayToForViewPort, pixel, size)
 	return _ret
 }
 
-// Create a bokeh kernel corresponding to the apertureBladeCount
+// Creates and returns a texture, based on the camera’s aperture blade count, to be used in rendering out-of-focus highlights in a scene.
 func (o *MDLCamera) BokehKernelWithSize(size unsafe.Pointer) *MDLTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLCameraSelBokehKernelWithSize, size)
 	if _ret != 0 {

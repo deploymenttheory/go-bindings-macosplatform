@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A tagger that analyzes natural language text.
+//
 // Tagger wraps [raw.NLTagger] with a fluent Go API.
 type Tagger struct {
 	inner *raw.NLTagger
@@ -31,6 +33,8 @@ func TaggerFromID(id objc.ID) *Tagger {
 	return &Tagger{inner: raw.NLTaggerFromID(id)}
 }
 
+// Creates a linguistic tagger instance using the specified tag schemes and options.
+//
 // NewTaggerWithTagSchemes creates a new [Tagger].
 func NewTaggerWithTagSchemes(tagSchemes *foundation.NSArray[*foundation.NSString]) *Tagger {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NLTagger")), objc.RegisterName("alloc"))
@@ -38,27 +42,37 @@ func NewTaggerWithTagSchemes(tagSchemes *foundation.NSArray[*foundation.NSString
 	return &Tagger{inner: raw.NLTaggerFromID(_id)}
 }
 
+// The string being analyzed by the linguistic tagger.
+//
 // WithString sets the string_ property and returns the receiver for chaining.
 func (x *Tagger) WithString(string_ string) *Tagger {
 	x.inner.SetString(foundation.NSStringStringWithUTF8String(string_))
 	return x
 }
 
+// Returns the range of the linguistic unit containing the specified character index.
+//
 // TokenRangeAtIndexUnit calls the underlying TokenRangeAtIndexUnit.
 func (x *Tagger) TokenRangeAtIndexUnit(characterIndex uint, unit NLTokenUnit) foundation.NSRange {
 	return x.inner.TokenRangeAtIndexUnit(characterIndex, raw.NLTokenUnit(unit))
 }
 
+// Finds the entire range of all tokens of the specified linguistic unit contained completely or partially within the specified range.
+//
 // TokenRangeForRangeUnit calls the underlying TokenRangeForRangeUnit.
 func (x *Tagger) TokenRangeForRangeUnit(range_ foundation.NSRange, unit NLTokenUnit) foundation.NSRange {
 	return x.inner.TokenRangeForRangeUnit(range_, raw.NLTokenUnit(unit))
 }
 
+// Enumerates a block over the tagger’s string, given a range, token unit, and tag scheme.
+//
 // EnumerateTagsInRangeUnitSchemeOptionsUsing calls the underlying EnumerateTagsInRangeUnitSchemeOptionsUsing.
 func (x *Tagger) EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ foundation.NSRange, unit NLTokenUnit, scheme *foundation.NSString, options NLTaggerOptions, block objc.Block) {
 	x.inner.EnumerateTagsInRangeUnitSchemeOptionsUsing(range_, raw.NLTokenUnit(unit), scheme, raw.NLTaggerOptions(options), block)
 }
 
+// Finds a tag for a given linguistic unit, for a single scheme, at the specified character position.
+//
 // TagAtIndexUnitSchemeTokenRange calls the underlying TagAtIndexUnitSchemeTokenRange.
 func (x *Tagger) TagAtIndexUnitSchemeTokenRange(characterIndex uint, unit NLTokenUnit, scheme *foundation.NSString, tokenRange *foundation.NSRange) string {
 	_r := x.inner.TagAtIndexUnitSchemeTokenRange(characterIndex, raw.NLTokenUnit(unit), scheme, tokenRange)
@@ -68,41 +82,57 @@ func (x *Tagger) TagAtIndexUnitSchemeTokenRange(characterIndex uint, unit NLToke
 	return purego.GoString(_r.Ptr())
 }
 
+// Finds an array of linguistic tags and token ranges for a given string range and linguistic unit.
+//
 // TagsInRangeUnitSchemeOptionsTokenRanges calls the underlying TagsInRangeUnitSchemeOptionsTokenRanges.
 func (x *Tagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ foundation.NSRange, unit NLTokenUnit, scheme *foundation.NSString, options NLTaggerOptions, tokenRanges *foundation.NSArray[*foundation.NSValue]) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.TagsInRangeUnitSchemeOptionsTokenRanges(range_, raw.NLTokenUnit(unit), scheme, raw.NLTaggerOptions(options), tokenRanges)
 }
 
+// Finds multiple possible tags for a given linguistic unit, for a single scheme, at the specified character position.
+//
 // TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange calls the underlying TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange.
 func (x *Tagger) TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange(characterIndex uint, unit NLTokenUnit, scheme *foundation.NSString, maximumCount uint, tokenRange *foundation.NSRange) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber] {
 	return x.inner.TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange(characterIndex, raw.NLTokenUnit(unit), scheme, maximumCount, tokenRange)
 }
 
+// Sets the language for a range of text within the tagger’s string.
+//
 // SetLanguageRange calls the underlying SetLanguageRange.
 func (x *Tagger) SetLanguageRange(language *foundation.NSString, range_ foundation.NSRange) {
 	x.inner.SetLanguageRange(language, range_)
 }
 
+// Sets the orthography for the specified range.
+//
 // SetOrthographyRange calls the underlying SetOrthographyRange.
 func (x *Tagger) SetOrthographyRange(orthography *foundation.NSOrthography, range_ foundation.NSRange) {
 	x.inner.SetOrthographyRange(orthography, range_)
 }
 
+// Assigns models for a tag scheme.
+//
 // SetModelsForTagScheme calls the underlying SetModelsForTagScheme.
 func (x *Tagger) SetModelsForTagScheme(models *foundation.NSArray[*raw.NLModel], tagScheme *foundation.NSString) {
 	x.inner.SetModelsForTagScheme(models, tagScheme)
 }
 
+// Returns the models that apply to the given tag scheme.
+//
 // ModelsForTagScheme calls the underlying ModelsForTagScheme.
 func (x *Tagger) ModelsForTagScheme(tagScheme *foundation.NSString) *foundation.NSArray[*raw.NLModel] {
 	return x.inner.ModelsForTagScheme(tagScheme)
 }
 
+// Attaches gazetteers to a tag scheme, typically one gazetteer per language or one language-independent gazetteer.
+//
 // SetGazetteersForTagScheme calls the underlying SetGazetteersForTagScheme.
 func (x *Tagger) SetGazetteersForTagScheme(gazetteers *foundation.NSArray[*raw.NLGazetteer], tagScheme *foundation.NSString) {
 	x.inner.SetGazetteersForTagScheme(gazetteers, tagScheme)
 }
 
+// Retrieves the gazetteers attached to a tag scheme.
+//
 // GazetteersForTagScheme calls the underlying GazetteersForTagScheme.
 func (x *Tagger) GazetteersForTagScheme(tagScheme *foundation.NSString) *foundation.NSArray[*raw.NLGazetteer] {
 	return x.inner.GazetteersForTagScheme(tagScheme)

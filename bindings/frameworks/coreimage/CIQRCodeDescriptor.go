@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A concrete subclass of the Core Image Barcode Descriptor that represents a square QR code symbol.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/ciqrcodedescriptor
 type CIQRCodeDescriptor struct {
 	CIBarcodeDescriptor
@@ -35,7 +37,7 @@ func CIQRCodeDescriptorFromID(id objc.ID) *CIQRCodeDescriptor {
 	return o
 }
 
-// Initializes a QR code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the QR code symbol. - symbolVersion: The symbol version, from 1 through 40. - maskPattern: The mask pattern to use in the QR code, from 0 to 7. - errorCorrectionLevel: The QR code's error correction level: L, M, Q, or H. - Returns: An initialized “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
+// Initializes a QR code descriptor for the given payload and parameters.
 func (o *CIQRCodeDescriptor) InitWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload *foundation.NSData, symbolVersion int, maskPattern uint8, errorCorrectionLevel CIQRCodeErrorCorrectionLevel) *CIQRCodeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIQRCodeDescriptorSelInitWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel, errorCorrectedPayload.Ptr(), symbolVersion, maskPattern, errorCorrectionLevel)
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *CIQRCodeDescriptor) InitWithPayloadSymbolVersionMaskPatternErrorCorrect
 	return CIQRCodeDescriptorFromID(_ret)
 }
 
-// Creates a QR code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the QR code symbol. - symbolVersion: The symbol version, from 1 through 40. - maskPattern: The mask pattern to use in the QR code, from 0 to 7. - errorCorrectionLevel: The QR code's error correction level: L, M, Q, or H. - Returns: An autoreleased “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
+// Creates a QR code descriptor for the given payload and parameters.
 func CIQRCodeDescriptorDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload *foundation.NSData, symbolVersion int, maskPattern uint8, errorCorrectionLevel CIQRCodeErrorCorrectionLevel) *CIQRCodeDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIQRCodeDescriptor), _cIQRCodeDescriptorSelDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel, errorCorrectedPayload.Ptr(), symbolVersion, maskPattern, errorCorrectionLevel)
 	if _ret != 0 {

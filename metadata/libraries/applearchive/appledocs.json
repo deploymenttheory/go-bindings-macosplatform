@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "framework": "AppleArchive",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "AAACEQualifierTypes": {
+      "url": "https://developer.apple.com/documentation/applearchive/aaacequalifiertypes"
+    },
+    "AACompressionAlgorithms": {
+      "url": "https://developer.apple.com/documentation/applearchive/aacompressionalgorithms"
+    },
+    "AAEntryMessages": {
+      "url": "https://developer.apple.com/documentation/applearchive/aaentrymessages"
+    },
+    "AAEntryTypes": {
+      "url": "https://developer.apple.com/documentation/applearchive/aaentrytypes"
+    },
+    "AAFieldTypes": {
+      "url": "https://developer.apple.com/documentation/applearchive/aafieldtypes"
+    },
+    "AAFlags": {
+      "url": "https://developer.apple.com/documentation/applearchive/aaflags"
+    },
+    "AAHashFunctions": {
+      "url": "https://developer.apple.com/documentation/applearchive/aahashfunctions"
+    },
+    "AEAContextFieldRepresentations": {
+      "url": "https://developer.apple.com/documentation/applearchive/aeacontextfieldrepresentations"
+    },
+    "AEAContextFieldValues": {
+      "url": "https://developer.apple.com/documentation/applearchive/aeacontextfieldvalues"
+    },
+    "AEAContextFields": {
+      "url": "https://developer.apple.com/documentation/applearchive/aeacontextfields"
+    },
+    "AEAProfiles": {
+      "url": "https://developer.apple.com/documentation/applearchive/aeaprofiles"
+    }
+  },
+  "structs": {
+    "AAAccessControlEntry": {
+      "url": "https://developer.apple.com/documentation/applearchive/aaaccesscontrolentry"
+    },
+    "AAEntryAttributes": {
+      "url": "https://developer.apple.com/documentation/applearchive/aaentryattributes"
+    }
+  }
+}

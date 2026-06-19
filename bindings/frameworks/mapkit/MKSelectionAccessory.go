@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The type of accessory to display for a selected annotation.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkselectionaccessory
 type MKSelectionAccessory struct {
 	foundation.NSObject
@@ -30,6 +32,7 @@ func MKSelectionAccessoryFromID(id objc.ID) *MKSelectionAccessory {
 	return o
 }
 
+// Detailed information about a place
 func MKSelectionAccessoryMapItemDetailWithPresentationStyle(presentationStyle *MKMapItemDetailSelectionAccessoryPresentationStyle) *MKSelectionAccessory {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKSelectionAccessory), _mKSelectionAccessorySelMapItemDetailWithPresentationStyle, presentationStyle.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A task scheduler suitable for low priority operations that can run in the background.
+//
 // BackgroundActivityScheduler wraps [raw.NSBackgroundActivityScheduler] with a fluent Go API.
 type BackgroundActivityScheduler struct {
 	inner *raw.NSBackgroundActivityScheduler
@@ -30,6 +32,8 @@ func BackgroundActivitySchedulerFromID(id objc.ID) *BackgroundActivityScheduler 
 	return &BackgroundActivityScheduler{inner: raw.NSBackgroundActivitySchedulerFromID(id)}
 }
 
+// Initializes a background activity scheduler object with a specified unique identifier.
+//
 // NewBackgroundActivitySchedulerWithIdentifier creates a new [BackgroundActivityScheduler].
 func NewBackgroundActivitySchedulerWithIdentifier(identifier string) *BackgroundActivityScheduler {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBackgroundActivityScheduler")), objc.RegisterName("alloc"))
@@ -37,24 +41,32 @@ func NewBackgroundActivitySchedulerWithIdentifier(identifier string) *Background
 	return &BackgroundActivityScheduler{inner: raw.NSBackgroundActivitySchedulerFromID(_id)}
 }
 
+// A value of type NSQualityOfService, which controls how aggressively the system schedules the activity.
+//
 // WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
 func (x *BackgroundActivityScheduler) WithQualityOfService(qualityOfService NSQualityOfService) *BackgroundActivityScheduler {
 	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
 	return x
 }
 
+// A Boolean value indicating whether the activity should be rescheduled after it completes.
+//
 // WithRepeats sets the repeats property and returns the receiver for chaining.
 func (x *BackgroundActivityScheduler) WithRepeats(repeats bool) *BackgroundActivityScheduler {
 	x.inner.SetRepeats(repeats)
 	return x
 }
 
+// An integer providing a suggested interval between scheduling and invoking the activity.
+//
 // WithInterval sets the interval property and returns the receiver for chaining.
 func (x *BackgroundActivityScheduler) WithInterval(interval float64) *BackgroundActivityScheduler {
 	x.inner.SetInterval(interval)
 	return x
 }
 
+// A value of type NSTimeInterval, which specifies a range of time during which the background activity may occur.
+//
 // WithTolerance sets the tolerance property and returns the receiver for chaining.
 func (x *BackgroundActivityScheduler) WithTolerance(tolerance float64) *BackgroundActivityScheduler {
 	x.inner.SetTolerance(tolerance)
@@ -67,11 +79,15 @@ func (x *BackgroundActivityScheduler) WithScriptingProperties(scriptingPropertie
 	return x
 }
 
+// Begins scheduling the background activity.
+//
 // ScheduleWith calls the underlying ScheduleWith.
 func (x *BackgroundActivityScheduler) ScheduleWith(block func(objc.Block)) {
 	x.inner.ScheduleWith(block)
 }
 
+// Prevents the background activity from being scheduled again.
+//
 // Invalidate calls the underlying Invalidate.
 func (x *BackgroundActivityScheduler) Invalidate() {
 	x.inner.Invalidate()

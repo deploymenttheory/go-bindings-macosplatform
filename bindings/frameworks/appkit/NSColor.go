@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that stores color data and sometimes opacity (alpha value).
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscolor
 type NSColor struct {
 	foundation.NSObject
@@ -367,6 +369,7 @@ func NSColorColorWithPatternImage(image *NSImage) *NSColor {
 	return NSColorFromID(_ret)
 }
 
+// Returns a version of the color object that is compatible with the specified color type.
 func (o *NSColor) ColorUsingType(type_ NSColorType) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSelColorUsingType, type_)
 	if _ret != 0 {
@@ -375,6 +378,7 @@ func (o *NSColor) ColorUsingType(type_ NSColorType) *NSColor {
 	return NSColorFromID(_ret)
 }
 
+// Creates a new color object representing the color of the current color object in the specified color space.
 func (o *NSColor) ColorUsingColorSpace(space *NSColorSpace) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSelColorUsingColorSpace, space.Ptr())
 	if _ret != 0 {
@@ -401,7 +405,7 @@ func NSColorColorWithRedGreenBlueAlphaLinearExposure(red float64, green float64,
 	return NSColorFromID(_ret)
 }
 
-// Reinterpret the color by applying a new `contentHeadroom` without changing the color components. Changing the `contentHeadroom` redefines the color relative to a different peak white, changing its behavior under tone mapping and the result of calling `standardDynamicRangeColor`. The new color will have a `contentHeadroom` >= 1.0. If called on a color with a color space that does not support extended range, or does not have an equivalent extended range counterpart, this will return `self`.
+// Reinterpret the color by applying a new contentHeadroom without changing the color components. Changing the contentHeadroom redefines the color relative to a different peak white, changing its behavior under tone mapping and the result of calling standardDynamicRangeColor. The new color will have a contentHeadroom >= 1.0. If called on a color with a color space that does not support extended range, or does not have an equivalent extended range counterpart, this will return self.
 func (o *NSColor) ColorByApplyingContentHeadroom(contentHeadroom float64) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSelColorByApplyingContentHeadroom, contentHeadroom)
 	if _ret != 0 {
@@ -419,6 +423,7 @@ func NSColorColorForControlTint(controlTint NSControlTint) *NSColor {
 	return NSColorFromID(_ret)
 }
 
+// Creates a new color object that represents a blend between the current color and the highlight color.
 // Deprecated: NSControlTint does not describe the full range of available control accent colors. Use +[NSColor controlAccentColor] instead.
 func (o *NSColor) HighlightWithLevel(val float64) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSelHighlightWithLevel, val)
@@ -428,6 +433,7 @@ func (o *NSColor) HighlightWithLevel(val float64) *NSColor {
 	return NSColorFromID(_ret)
 }
 
+// Creates a new color object that represents a blend between the current color and the shadow color.
 func (o *NSColor) ShadowWithLevel(val float64) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSelShadowWithLevel, val)
 	if _ret != 0 {
@@ -436,7 +442,7 @@ func (o *NSColor) ShadowWithLevel(val float64) *NSColor {
 	return NSColorFromID(_ret)
 }
 
-// Returns a color representing the base color with a system defined effect applied to it. This color is safe to create before draw time, as the resolution of the final color only happens when being `-set`, retrieving its `CGColor`, resolving with `-colorWithType:`, etc. The return color type is `.named`.
+// Returns a new color object that represents the current color modified to include the specified visual effect.
 func (o *NSColor) ColorWithSystemEffect(systemEffect NSColorSystemEffect) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSelColorWithSystemEffect, systemEffect)
 	if _ret != 0 {
@@ -445,18 +451,22 @@ func (o *NSColor) ColorWithSystemEffect(systemEffect NSColorSystemEffect) *NSCol
 	return NSColorFromID(_ret)
 }
 
+// Sets the color of subsequent drawing to the color that the color object represents.
 func (o *NSColor) Set() {
 	o.Ptr().Send(_nSColorSelSet)
 }
 
+// Sets the fill color of subsequent drawing to the color object’s color.
 func (o *NSColor) SetFill() {
 	o.Ptr().Send(_nSColorSelSetFill)
 }
 
+// Sets the stroke color of subsequent drawing to the color object’s color.
 func (o *NSColor) SetStroke() {
 	o.Ptr().Send(_nSColorSelSetStroke)
 }
 
+// Creates a new color object whose component values are a weighted sum of the current color object and the specified color object’s.
 func (o *NSColor) BlendedColorWithFractionOfColor(fraction float64, color *NSColor) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSelBlendedColorWithFractionOfColor, fraction, color.Ptr())
 	if _ret != 0 {
@@ -465,6 +475,7 @@ func (o *NSColor) BlendedColorWithFractionOfColor(fraction float64, color *NSCol
 	return NSColorFromID(_ret)
 }
 
+// Creates a new color object that has the same color space and component values as the current color object, but the specified alpha component.
 func (o *NSColor) ColorWithAlphaComponent(alpha float64) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSelColorWithAlphaComponent, alpha)
 	if _ret != 0 {
@@ -473,26 +484,32 @@ func (o *NSColor) ColorWithAlphaComponent(alpha float64) *NSColor {
 	return NSColorFromID(_ret)
 }
 
+// Returns the color object’s RGB component and opacity values in the respective arguments.
 func (o *NSColor) GetRedGreenBlueAlpha(red *float64, green *float64, blue *float64, alpha *float64) {
 	o.Ptr().Send(_nSColorSelGetRedGreenBlueAlpha, red, green, blue, alpha)
 }
 
+// Returns the color object’s HSB component and opacity values in the respective arguments.
 func (o *NSColor) GetHueSaturationBrightnessAlpha(hue *float64, saturation *float64, brightness *float64, alpha *float64) {
 	o.Ptr().Send(_nSColorSelGetHueSaturationBrightnessAlpha, hue, saturation, brightness, alpha)
 }
 
+// Returns the grayscale and alpha values of the color.
 func (o *NSColor) GetWhiteAlpha(white *float64, alpha *float64) {
 	o.Ptr().Send(_nSColorSelGetWhiteAlpha, white, alpha)
 }
 
+// Returns the color object’s CMYK and opacity values.
 func (o *NSColor) GetCyanMagentaYellowBlackAlpha(cyan *float64, magenta *float64, yellow *float64, black *float64, alpha *float64) {
 	o.Ptr().Send(_nSColorSelGetCyanMagentaYellowBlackAlpha, cyan, magenta, yellow, black, alpha)
 }
 
+// Returns the components of the color as an array.
 func (o *NSColor) GetComponents(components *float64) {
 	o.Ptr().Send(_nSColorSelGetComponents, components)
 }
 
+// Creates a color object from color data currently on the pasteboard.
 func NSColorColorFromPasteboard(pasteBoard *NSPasteboard) *NSColor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColor), _nSColorSelColorFromPasteboard, pasteBoard.Ptr())
 	if _ret != 0 {
@@ -501,10 +518,12 @@ func NSColorColorFromPasteboard(pasteBoard *NSPasteboard) *NSColor {
 	return NSColorFromID(_ret)
 }
 
+// Writes the color object’s data to the specified pasteboard.
 func (o *NSColor) WriteToPasteboard(pasteBoard *NSPasteboard) {
 	o.Ptr().Send(_nSColorSelWriteToPasteboard, pasteBoard.Ptr())
 }
 
+// Draws the current color in the specified rectangle.
 func (o *NSColor) DrawSwatchInRect(rect corefoundation.CGRect) {
 	o.Ptr().Send(_nSColorSelDrawSwatchInRect, rect)
 }
@@ -1239,15 +1258,17 @@ func NSColorSetIgnoresAlpha(ignoresAlpha bool) {
 	objc.ID(_clsNSColor).Send(_nSColorSelSetIgnoresAlpha, ignoresAlpha)
 }
 
+// Creates a new color object for the same color, but in the specified color space and specific to the provided device.
 // Deprecated: Use -colorUsingType: or -colorUsingColorSpace: instead
 func (o *NSColor) ColorUsingColorSpaceNameDevice(name *foundation.NSString, deviceDescription *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSColor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSelColorUsingColorSpaceNameDevice, name.Ptr(), deviceDescription)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSelColorUsingColorSpaceNameDevice, name.Ptr(), deviceDescription.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSColorFromID(_ret)
 }
 
+// Creates a new color object whose color is the same as the receiver’s, except that the new color object is in the specified color space.
 // Deprecated: Use -colorUsingType: or -colorUsingColorSpace: instead
 func (o *NSColor) ColorUsingColorSpaceName(name *foundation.NSString) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSelColorUsingColorSpaceName, name.Ptr())

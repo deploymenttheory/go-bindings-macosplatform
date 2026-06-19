@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents zero or more captions that intersect in time.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptiongroup
 type AVCaptionGroup struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func AVCaptionGroupFromID(id objc.ID) *AVCaptionGroup {
 	return o
 }
 
-// @method initWithCaptions:timeRange: @abstract Initializes a caption group with the given set of captions and the time range. @discussion Every caption in the array must be equal or sub range of the time range, otherwise an exception is raised. @param captions The captions that will be included in the group. The array is coped. @result A newly-initialized caption group.
+// Creates a caption group with captions and a time range.
 func (o *AVCaptionGroup) InitWithCaptionsTimeRange(captions *foundation.NSArray[*AVCaption], timeRange coremedia.CMTimeRange) *AVCaptionGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionGroupSelInitWithCaptionsTimeRange, captions.Ptr(), timeRange)
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func (o *AVCaptionGroup) InitWithCaptionsTimeRange(captions *foundation.NSArray[
 	return AVCaptionGroupFromID(_ret)
 }
 
-// @method initWithTimeRange: @abstract Initializes an empty caption group with the given time range. @discussion This is a convenient initializer to create an empty caption group time range. @param timeRange The time range for which there are no captions. @result A newly-initialized empty caption group.
+// Creates a caption group with a time range.
 func (o *AVCaptionGroup) InitWithTimeRange(timeRange coremedia.CMTimeRange) *AVCaptionGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionGroupSelInitWithTimeRange, timeRange)
 	if _ret != 0 {

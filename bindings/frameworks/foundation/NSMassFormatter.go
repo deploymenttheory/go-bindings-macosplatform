@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A formatter that provides localized descriptions of mass and weight values.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmassformatter
 type NSMassFormatter struct {
 	NSFormatter

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents an audio buffer you use with PCM audio formats.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiopcmbuffer
 type AVAudioPCMBuffer struct {
 	AVAudioBuffer
@@ -40,7 +42,7 @@ func AVAudioPCMBufferFromID(id objc.ID) *AVAudioPCMBuffer {
 	return o
 }
 
-// @method initWithPCMFormat:frameCapacity: @abstract Initialize a buffer that is to contain PCM audio samples. @param format The format of the PCM audio to be contained in the buffer. @param frameCapacity The capacity of the buffer in PCM sample frames. @discussion An exception is raised if the format is not PCM. Returns nil in the following cases: - if the format has zero bytes per frame (format.streamDescription->mBytesPerFrame == 0) - if the buffer byte capacity (frameCapacity * format.streamDescription->mBytesPerFrame) cannot be represented by an uint32_t
+// Creates a PCM audio buffer instance for PCM audio data.
 func (o *AVAudioPCMBuffer) InitWithPCMFormatFrameCapacity(format *AVAudioFormat, frameCapacity uint32) *AVAudioPCMBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPCMBufferSelInitWithPCMFormatFrameCapacity, format.Ptr(), frameCapacity)
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func (o *AVAudioPCMBuffer) InitWithPCMFormatFrameCapacity(format *AVAudioFormat,
 	return AVAudioPCMBufferFromID(_ret)
 }
 
-// @method initWithPCMFormat:bufferListNoCopy:deallocator: @abstract Initialize a buffer that is to contain PCM audio samples with a given AudioBufferList without copying samples and a custom deallocator block. @param format The format of the PCM audio to be contained in the buffer. @param bufferList The buffer list with allocated memory to contain the PCM audio data. @param deallocator A block to invoke when the resulting AVAudioPCMBuffer object is deallocated. @discussion An exception is raised if the format is not PCM. Returns nil in the following cases: - if the format has zero bytes per frame (format.streamDescription->mBytesPerFrame == 0) - if supplied buffer has zero number of buffers - if each buffer's data byte size are not equal or if any of the buffers' data byte size is zero - if there is a mismatch between the format's number of buffers and the AudioBufferList's size (1 if interleaved, mChannelsPerFrame if deinterleaved) - if the AudioBufferList's pointer to the buffer of audio data is null. Use the deallocator block to define your own deallocation behavior for the provided AudioBufferList's underlying memory. The AudioBufferList passed to the deallocator is identical to the one which was passed to the initializer, in terms of the buffer count, and each buffer's mData and mDataByteSize members.
+// Creates a PCM audio buffer instance without copying samples, for PCM audio data, with a specified buffer list and a deallocator closure.
 func (o *AVAudioPCMBuffer) InitWithPCMFormatBufferListNoCopyDeallocator(format *AVAudioFormat, bufferList *coreaudiotypes.AudioBufferList, deallocator func(*coreaudiotypes.AudioBufferList)) *AVAudioPCMBuffer {
 	var __block_deallocator objc.Block
 	if deallocator != nil {

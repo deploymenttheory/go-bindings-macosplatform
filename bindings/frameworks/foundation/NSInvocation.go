@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An Objective-C message rendered as an object.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsinvocation
 type NSInvocation struct {
 	NSObject
@@ -45,6 +47,7 @@ func NSInvocationFromID(id objc.ID) *NSInvocation {
 	return o
 }
 
+// Returns an NSInvocation object able to construct messages using a given method signature.
 func NSInvocationInvocationWithMethodSignature(sig *NSMethodSignature) *NSInvocation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSInvocation), _nSInvocationSelInvocationWithMethodSignature, sig.Ptr())
 	if _ret != 0 {
@@ -53,30 +56,37 @@ func NSInvocationInvocationWithMethodSignature(sig *NSMethodSignature) *NSInvoca
 	return NSInvocationFromID(_ret)
 }
 
+// If the receiver hasn’t already done so, retains the target and all object arguments of the receiver and copies all of its C-string arguments and blocks. If a returnvalue has been set, this is also retained or copied.
 func (o *NSInvocation) RetainArguments() {
 	o.Ptr().Send(_nSInvocationSelRetainArguments)
 }
 
+// Gets the invocation’s return value.
 func (o *NSInvocation) GetReturnValue(retLoc unsafe.Pointer) {
 	o.Ptr().Send(_nSInvocationSelGetReturnValue, retLoc)
 }
 
+// Sets the receiver’s return value.
 func (o *NSInvocation) SetReturnValue(retLoc unsafe.Pointer) {
 	o.Ptr().Send(_nSInvocationSelSetReturnValue, retLoc)
 }
 
+// Returns by indirection the receiver’s argument at a specified index.
 func (o *NSInvocation) GetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int) {
 	o.Ptr().Send(_nSInvocationSelGetArgumentAtIndex, argumentLocation, idx)
 }
 
+// Sets an argument of the receiver.
 func (o *NSInvocation) SetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int) {
 	o.Ptr().Send(_nSInvocationSelSetArgumentAtIndex, argumentLocation, idx)
 }
 
+// Sends the receiver’s message (with arguments) to its target and sets the return value.
 func (o *NSInvocation) Invoke() {
 	o.Ptr().Send(_nSInvocationSelInvoke)
 }
 
+// Sets the receiver’s target, sends the receiver’s message (with arguments) to that target, and sets the return value.
 func (o *NSInvocation) InvokeWithTarget(target objc.ID) {
 	o.Ptr().Send(_nSInvocationSelInvokeWithTarget, target)
 }

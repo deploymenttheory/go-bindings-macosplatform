@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for implementing a full-featured file system.
+//
 // Apple documentation: https://developer.apple.com/documentation/fskit/fsfilesystem
 type FSFileSystem struct {
 	foundation.NSObject

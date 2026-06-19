@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for a time interval associated with an intent.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/intimeintervalresolutionresult
 type INTimeIntervalResolutionResult struct {
 	INIntentResolutionResult
@@ -30,6 +32,7 @@ func INTimeIntervalResolutionResultFromID(id objc.ID) *INTimeIntervalResolutionR
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INTimeIntervalResolutionResultSuccessWithResolvedTimeInterval(resolvedTimeInterval float64) *INTimeIntervalResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINTimeIntervalResolutionResult), _iNTimeIntervalResolutionResultSelSuccessWithResolvedTimeInterval, resolvedTimeInterval)
 	if _ret != 0 {
@@ -38,6 +41,7 @@ func INTimeIntervalResolutionResultSuccessWithResolvedTimeInterval(resolvedTimeI
 	return INTimeIntervalResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INTimeIntervalResolutionResultConfirmationRequiredWithTimeIntervalToConfirm(timeIntervalToConfirm float64) *INTimeIntervalResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINTimeIntervalResolutionResult), _iNTimeIntervalResolutionResultSelConfirmationRequiredWithTimeIntervalToConfirm, timeIntervalToConfirm)
 	if _ret != 0 {

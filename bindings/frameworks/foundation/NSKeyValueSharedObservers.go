@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of key-value observations which may be registered with multiple observable objects
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nskeyvaluesharedobservers
 type NSKeyValueSharedObservers struct {
 	NSObject
@@ -39,12 +41,12 @@ func (o *NSKeyValueSharedObservers) InitWithObservableClass(observableClass objc
 	return _ret
 }
 
-// Add a new observer to the collection. This method works like `-[NSObject addObserver: forKey: options: context:]`, but observations on nested and computed properties are disallowed. Observers are not registered until `setSharedObservers` is called on the observable. - Parameter observer: The observer object to register for KVO notifications. The observer must implement the key-value observing method “observeValue: forKeyPath: of: change: context:“ - Parameter key: key of the property being observed. This cannot be a nested key path or a computed property - Parameter options: A combination of NSKeyValueObservingOptions values that specify what is included in observation notifications. For possible values see NSKeyValueObservingOptions. - Parameter context: Arbitrary data which is passed to the observer object
+// Add a new observer to the collection.
 func (o *NSKeyValueSharedObservers) AddSharedObserverForKeyOptionsContext(observer *NSObject, key *NSString, options NSKeyValueObservingOptions, context_ unsafe.Pointer) {
 	o.Ptr().Send(_nSKeyValueSharedObserversSelAddSharedObserverForKeyOptionsContext, observer.Ptr(), key.Ptr(), options, context_)
 }
 
-// A momentary snapshot of all observers added to the collection thus far, that can be assigned to an observable using “-[NSObject setSharedObservers:]“
+// A momentary snapshot of all observers added to the collection thus far, that can be assigned to an observable using -[NSObject setSharedObservers:]
 func (o *NSKeyValueSharedObservers) Snapshot() *NSKeyValueSharedObserversSnapshot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyValueSharedObserversSelSnapshot)
 	if _ret != 0 {

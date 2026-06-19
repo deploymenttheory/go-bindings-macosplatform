@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages audio assets, controls playback, and configures environmental effects.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseengine
 type PHASEEngine struct {
 	foundation.NSObject
@@ -55,7 +57,7 @@ func PHASEEngineFromID(id objc.ID) *PHASEEngine {
 	return o
 }
 
-// @method initWithUpdateMode: @abstract Initialize a new engine with an update mode. @param updateMode Defines how the engine will be updated.
+// Creates an engine updated by the app or framework.
 func (o *PHASEEngine) InitWithUpdateMode(updateMode PHASEUpdateMode) *PHASEEngine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEngineSelInitWithUpdateMode, updateMode)
 	if _ret != 0 {
@@ -64,7 +66,7 @@ func (o *PHASEEngine) InitWithUpdateMode(updateMode PHASEUpdateMode) *PHASEEngin
 	return PHASEEngineFromID(_ret)
 }
 
-// @method startAndReturnError: @abstract Start or resume the engine. @return YES for success.
+// Starts or resumes all audio playback.
 func (o *PHASEEngine) StartAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _pHASEEngineSelStartAndReturnError, unsafe.Pointer(&_nsErr))
@@ -74,17 +76,17 @@ func (o *PHASEEngine) StartAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
-// @method pause @abstract Pause the engine.
+// Pauses all audio playback.
 func (o *PHASEEngine) Pause() {
 	o.Ptr().Send(_pHASEEngineSelPause)
 }
 
-// @method stop @abstract Stop the engine.
+// Stops all audio playback.
 func (o *PHASEEngine) Stop() {
 	o.Ptr().Send(_pHASEEngineSelStop)
 }
 
-// @method update: @abstract Manually update the engine instance on the calling thread. @discussion This will kick off all of the API commands called since the last call to update, update any systems and objects that need to be kept current, and call any registered handlers. @note This function has no effect if the engine's update mode is PHASEUpdateModeAutomatic.
+// Processes app commands and increments framework processing.
 func (o *PHASEEngine) Update() {
 	o.Ptr().Send(_pHASEEngineSelUpdate)
 }
@@ -177,8 +179,11 @@ func (o *PHASEEngine) SoundEvents() *foundation.NSArray[*PHASESoundEvent] {
 
 // @property groups @abstract A dictionary of the groups in the system @discussion Returns a dictionary of the groups at the time it is retrieved.
 func (o *PHASEEngine) Groups() *foundation.NSDictionary[*foundation.NSString, *PHASEGroup] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *PHASEGroup]](o.Ptr(), _pHASEEngineSelGroups)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEngineSelGroups)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *PHASEGroup](_ret)
 }
 
 // @property duckers @abstract An array of the ducker objects in the system @discussion Returns a dictionary of the ducker objects at the time it is retrieved.

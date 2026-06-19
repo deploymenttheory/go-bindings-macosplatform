@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A collection of terms and their labels, which take precedence over a word tagger.
+//
 // Gazetteer wraps [raw.NLGazetteer] with a fluent Go API.
 type Gazetteer struct {
 	inner *raw.NLGazetteer
@@ -32,6 +34,8 @@ func GazetteerFromID(id objc.ID) *Gazetteer {
 	return &Gazetteer{inner: raw.NLGazetteerFromID(id)}
 }
 
+// Creates a Natural Language gazetteer from a model created with the Create ML framework.
+//
 // NewGazetteerWithContentsOfURLError creates a new [Gazetteer].
 func NewGazetteerWithContentsOfURLError(url string) (*Gazetteer, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NLGazetteer")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewGazetteerWithContentsOfURLError(url string) (*Gazetteer, error) {
 	return &Gazetteer{inner: raw.NLGazetteerFromID(_id)}, nil
 }
 
+// Creates a gazetteer from a data instance.
+//
 // NewGazetteerWithDataError creates a new [Gazetteer].
 func NewGazetteerWithDataError(data *foundation.NSData) (*Gazetteer, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NLGazetteer")), objc.RegisterName("alloc"))
@@ -54,6 +60,8 @@ func NewGazetteerWithDataError(data *foundation.NSData) (*Gazetteer, error) {
 	return &Gazetteer{inner: raw.NLGazetteerFromID(_id)}, nil
 }
 
+// Creates a gazetteer from a set of labels for terms represented by a dictionary.
+//
 // NewGazetteerWithDictionaryLanguageError creates a new [Gazetteer].
 func NewGazetteerWithDictionaryLanguageError(dictionary purego.IDer, language *foundation.NSString) (*Gazetteer, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NLGazetteer")), objc.RegisterName("alloc"))
@@ -65,6 +73,8 @@ func NewGazetteerWithDictionaryLanguageError(dictionary purego.IDer, language *f
 	return &Gazetteer{inner: raw.NLGazetteerFromID(_id)}, nil
 }
 
+// Retrieves the label for the given term.
+//
 // LabelForString calls the underlying LabelForString.
 func (x *Gazetteer) LabelForString(string_ string) string {
 	_r := x.inner.LabelForString(foundation.NSStringStringWithUTF8String(string_))

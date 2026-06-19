@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object containing Fast Healthcare Interoperability Resources (FHIR) data.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkfhirresource
 type HKFHIRResource struct {
 	foundation.NSObject

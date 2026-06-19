@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a specific option for the presentation of media within a group of options.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmediaselectionoption
 type AVMediaSelectionOption struct {
 	foundation.NSObject
@@ -42,13 +44,13 @@ func AVMediaSelectionOptionFromID(id objc.ID) *AVMediaSelectionOption {
 	return o
 }
 
-// Reports whether the media selection option includes media with the specified media characteristic. - Parameter mediaCharacteristic: The media characteristic of interest, e.g. AVMediaCharacteristicVisual, AVMediaCharacteristicAudible, AVMediaCharacteristicLegible, etc. - Returns: YES if the media selection option includes media with the specified characteristic, otherwise NO.
+// Returns a Boolean value that indicates whether the receiver has media with the given media characteristic.
 func (o *AVMediaSelectionOption) HasMediaCharacteristic(mediaCharacteristic *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVMediaSelectionOptionSelHasMediaCharacteristic, mediaCharacteristic.Ptr())
 	return _ret
 }
 
-// Provides an NSArray of AVMetadataItems, one for each metadata item in the container of the specified format. - Parameter format: The metadata format for which items are requested. - Returns: An NSArray containing AVMetadataItems.
+// Returns an array of metadata items—one for each metadata item in the container of a given format.
 func (o *AVMediaSelectionOption) MetadataForFormat(format *foundation.NSString) *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionOptionSelMetadataForFormat, format.Ptr())
 	if _ret != 0 {
@@ -57,7 +59,7 @@ func (o *AVMediaSelectionOption) MetadataForFormat(format *foundation.NSString) 
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
-// If a media selection option in another group is associated with the specified option, returns a reference to the associated option. Audible media selection options often have associated legible media selection options; in particular, audible options are typically associated with forced-only subtitle options with the same locale. See AVMediaCharacteristicContainsOnlyForcedSubtitles in AVMediaFormat.h for a discussion of forced-only subtitles. - Parameter mediaSelectionGroup: A media selection group in which an associated option is to be sought. - Returns: An instance of AVMediaSelectionOption.
+// Returns a media selection option associated with the receiver in a given group.
 func (o *AVMediaSelectionOption) AssociatedMediaSelectionOptionInMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *AVMediaSelectionOption {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionOptionSelAssociatedMediaSelectionOptionInMediaSelectionGroup, mediaSelectionGroup.Ptr())
 	if _ret != 0 {
@@ -66,13 +68,13 @@ func (o *AVMediaSelectionOption) AssociatedMediaSelectionOptionInMediaSelectionG
 	return AVMediaSelectionOptionFromID(_ret)
 }
 
-// Returns a serializable property list that can be used to obtain an instance of AVMediaSelectionOption representing the same option as the receiver via -[AVMediaSelectionGroup mediaSelectionOptionWithPropertyList:]. - Returns: A serializable property list that's sufficient to identify the option within its group. For serialization utilities, see NSPropertyList.h.
+// Returns a serializable property list that’s sufficient to identify the option within its group.
 func (o *AVMediaSelectionOption) PropertyList() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionOptionSelPropertyList)
 	return _ret
 }
 
-// Provides an NSString suitable for display. May use this option's common metadata, media characteristics and locale properties in addition to the provided locale to formulate an NSString intended for display. Will only consider common metadata with the specified locale. - Parameter locale: Localize manufactured portions of the string using the specificed locale.
+// Returns a string suitable for display using the specified locale.
 func (o *AVMediaSelectionOption) DisplayNameWithLocale(locale *foundation.NSLocale) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionOptionSelDisplayNameWithLocale, locale.Ptr())
 	if _ret != 0 {
@@ -92,8 +94,11 @@ func (o *AVMediaSelectionOption) MediaType() *foundation.NSString {
 
 // The mediaSubTypes of the media data associated with the option. An NSArray of NSNumbers carrying four character codes (of type FourCharCode) as defined in CoreAudioTypes.h for audio media and in CMFormatDescription.h for video media. Also see CMFormatDescriptionGetMediaSubType in CMFormatDescription.h for more information about media subtypes. Note that if no information is available about the encoding of the media presented when a media option is selected, the value of mediaSubTypes will be an empty array. This can occur, for example, with streaming media. In these cases the value of mediaSubTypes should simply not be used as a criteria for selection.
 func (o *AVMediaSelectionOption) MediaSubTypes() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVMediaSelectionOptionSelMediaSubTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionOptionSelMediaSubTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Indicates whether a media selection option is playable. If the media data associated with the option cannot be decoded or otherwise rendered, playable is NO.
@@ -131,8 +136,11 @@ func (o *AVMediaSelectionOption) CommonMetadata() *foundation.NSArray[*AVMetadat
 
 // Provides an NSArray of NSStrings, each representing a metadata format that contains metadata associated with the option (e.g. ID3, iTunes metadata, etc.). Metadata formats are defined in AVMetadataFormat.h.
 func (o *AVMediaSelectionOption) AvailableMetadataFormats() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVMediaSelectionOptionSelAvailableMetadataFormats)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionOptionSelAvailableMetadataFormats)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // Provides an NSString suitable for display using the current system locale. May use this option's common metadata, media characteristics and locale properties in addition to the current system locale to formulate an NSString intended for display. In the event that common metadata is not available in the specified locale, displayName will fall back to considering locales with the multilingual ("mul") then undetermined ("und") locale identifiers. For a display name strictly with the specified locale use displayNameWithLocale: instead.

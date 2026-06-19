@@ -9,18 +9,19 @@ import (
 	"strings"
 )
 
+// Constants that indicate the availability of the user’s iCloud account.
 type CKAccountStatus int64
 
 const (
-	// CloudKit can't determine the status of the user's iCloud account.
+	// CloudKit can’t determine the status of the user’s iCloud account.
 	CKAccountStatusCouldNotDetermine CKAccountStatus = 0
-	// The user's iCloud account is available.
+	// The user’s iCloud account is available.
 	CKAccountStatusAvailable CKAccountStatus = 1
-	// The system denies access to the user's iCloud account. Your app can't access the user's iCloud account due to restrictions that Parental Controls or Mobile Device Management impose.
+	// The system denies access to the user’s iCloud account.
 	CKAccountStatusRestricted CKAccountStatus = 2
-	// The device doesn't have an iCloud account.
+	// The device doesn’t have an iCloud account.
 	CKAccountStatusNoAccount CKAccountStatus = 3
-	// The user's iCloud account is temporarily unavailable. You receive this account status when the user's iCloud account is available, but isn't ready to support CloudKit operations. Don't delete any cached data and don't enqueue any CloudKit operations after receipt of this account status. Instead, use the <doc://com.apple.documentation/documentation/foundation/nsnotification/name-swift.struct/ckaccountchanged> notification to listen for when the status changes to ``CKAccountStatus/available``.
+	// The user’s iCloud account is temporarily unavailable.
 	CKAccountStatusTemporarilyUnavailable CKAccountStatus = 4
 )
 
@@ -91,6 +92,7 @@ func (e CKApplicationPermissions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that represent the scope of a database.
 type CKDatabaseScope int64
 
 const (
@@ -278,6 +280,7 @@ func (e CKErrorCode) String() string {
 	}
 }
 
+// Constants that indicate the type of event that generates the push notification.
 type CKNotificationType int64
 
 const (
@@ -306,6 +309,7 @@ func (e CKNotificationType) String() string {
 	}
 }
 
+// Constants that represent possible data transfer sizes.
 type CKOperationGroupTransferSize int64
 
 const (
@@ -350,6 +354,7 @@ func (e CKOperationGroupTransferSize) String() string {
 	}
 }
 
+// Constants that indicate the event that triggers the notification.
 type CKQueryNotificationReason int64
 
 const (
@@ -374,6 +379,7 @@ func (e CKQueryNotificationReason) String() string {
 	}
 }
 
+// Configuration options for a query subscription.
 // Bitmask — values may be combined with |.
 type CKQuerySubscriptionOptions uint64
 
@@ -408,6 +414,7 @@ func (e CKQuerySubscriptionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that indicate which policy to apply when saving records.
 type CKRecordSavePolicy int64
 
 const (
@@ -432,6 +439,7 @@ func (e CKRecordSavePolicy) String() string {
 	}
 }
 
+// The capabilities that a record zone supports.
 // Bitmask — values may be combined with |.
 type CKRecordZoneCapabilities uint64
 
@@ -562,6 +570,7 @@ func (e CKShareParticipantPermission) String() string {
 	}
 }
 
+// Constants that represent the role of a share’s participant.
 type CKShareParticipantRole int64
 
 const (
@@ -594,6 +603,7 @@ func (e CKShareParticipantRole) String() string {
 	}
 }
 
+// An object that controls participant access options.
 // Bitmask — values may be combined with |.
 type CKSharingParticipantAccessOption uint64
 
@@ -623,6 +633,7 @@ func (e CKSharingParticipantAccessOption) String() string {
 	return strings.Join(parts, "|")
 }
 
+// An object that controls participant permission options.
 // Bitmask — values may be combined with |.
 type CKSharingParticipantPermissionOption uint64
 
@@ -652,6 +663,7 @@ func (e CKSharingParticipantPermissionOption) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that identify a subscription’s behavior.
 type CKSubscriptionType int64
 
 const (
@@ -676,14 +688,15 @@ func (e CKSubscriptionType) String() string {
 	}
 }
 
+// Describes a change to the device’s iCloud account.
 type CKSyncEngineAccountChangeType int64
 
 const (
-	// A change indicating a sign-in to an iCloud account. If your app has locally-stored data when ``CKSyncEngine-4b4w9`` notifies it about the device signing in to an iCloud account, perform one of the following actions: - Keep the local data separate from any remote data - Merge the local data with the account's remote data - Delete the local data - Prompt the account's owner to make the decision
+	// A change indicating a sign-in to an iCloud account.
 	CKSyncEngineAccountChangeTypeSignIn CKSyncEngineAccountChangeType = 0
-	// A change indicating a sign-out of an iCloud account. You should delete any locally-stored data for the previous account.
+	// A change indicating a sign-out of an iCloud account.
 	CKSyncEngineAccountChangeTypeSignOut CKSyncEngineAccountChangeType = 1
-	// A change indicating a switch between two iCloud accounts. You should delete any locally-stored data for the previous account.
+	// A change indicating a switch between two iCloud accounts.
 	CKSyncEngineAccountChangeTypeSwitchAccounts CKSyncEngineAccountChangeType = 2
 )
 
@@ -700,10 +713,11 @@ func (e CKSyncEngineAccountChangeType) String() string {
 	}
 }
 
+// Describes an event that occurs during a sync operation.
 type CKSyncEngineEventType int64
 
 const (
-	// The sync engine updated its state. You should persist it locally.
+	// The sync engine updated its state.
 	CKSyncEngineEventTypeStateUpdate CKSyncEngineEventType = 0
 	// The user signed in or out of their account.
 	CKSyncEngineEventTypeAccountChange CKSyncEngineEventType = 1
@@ -760,6 +774,7 @@ func (e CKSyncEngineEventType) String() string {
 	}
 }
 
+// Describes the type of a pending database change.
 type CKSyncEnginePendingDatabaseChangeType int64
 
 const (
@@ -778,6 +793,7 @@ func (e CKSyncEnginePendingDatabaseChangeType) String() string {
 	}
 }
 
+// A type of change in a record zone that needs to be sent to the server.
 type CKSyncEnginePendingRecordZoneChangeType int64
 
 const (
@@ -796,12 +812,13 @@ func (e CKSyncEnginePendingRecordZoneChangeType) String() string {
 	}
 }
 
+// Describes the reason for a sync operation.
 type CKSyncEngineSyncReason int64
 
 const (
 	// The sync engine automatically scheduled this sync.
 	CKSyncEngineSyncReasonScheduled CKSyncEngineSyncReason = 0
-	// A manual sync operation. The sync engine uses this reason only when your app invokes the ``CKSyncEngine/fetchChangesWithCompletionHandler:`` and ``CKSyncEngine/sendChangesWithCompletionHandler:`` methods and their variants.
+	// A manual sync operation.
 	CKSyncEngineSyncReasonManual CKSyncEngineSyncReason = 1
 )
 
@@ -816,14 +833,15 @@ func (e CKSyncEngineSyncReason) String() string {
 	}
 }
 
+// Describes the reason for a record zone deletion.
 type CKSyncEngineZoneDeletionReason int64
 
 const (
 	// Your app deleted the record zone.
 	CKSyncEngineZoneDeletionReasonDeleted CKSyncEngineZoneDeletionReason = 0
-	// The owner of the iCloud account purged your app's data using the Settings app. - Important: Upon receipt of deletions with this reason, you must delete any locally cached data and not resend it to iCloud.
+	// The owner of the iCloud account purged your app’s data using the Settings app.
 	CKSyncEngineZoneDeletionReasonPurged CKSyncEngineZoneDeletionReason = 1
-	// The owner of the iCloud account reset their encrypted data. - Important: Upon receipt of deletions with this reason, you must delete any locally cached data and not resend it to iCloud.
+	// The owner of the iCloud account reset their encrypted data.
 	CKSyncEngineZoneDeletionReasonEncryptedDataReset CKSyncEngineZoneDeletionReason = 2
 )
 

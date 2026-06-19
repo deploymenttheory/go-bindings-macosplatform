@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class       ODQuery @abstract    Class used for querying OpenDirectory. @discussion  OpenDirectory queries may be used to search for different types of records, e.g. users, groups.
+// An ODQuery object serves as a Cocoa wrapper for an Open Directory query.
 //
 // Apple documentation: https://developer.apple.com/documentation/opendirectory/odquery
 type ODQuery struct {
@@ -43,7 +43,7 @@ func ODQueryFromID(id objc.ID) *ODQuery {
 	return o
 }
 
-// @method     queryWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error: @abstract   Creates an autoreleased query with the node using the parameters provided @discussion Creates an autoreleased query with the node using the supplied query parameters.  Some parameters can either be NSString or NSData or an NSArray of either NSString or NSData.  Passing nil for returnAttributes is equivalent to passing kODAttributeTypeStandardOnly.  outError is optional parameter, nil can be passed if error details are not needed.
+// Returns an autoreleased query object created with provided parameters.
 func ODQueryQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode *ODNode, inRecordTypeOrList objc.ID, inAttribute *foundation.NSString, inMatchType uint32, inQueryValueOrList objc.ID, inReturnAttributeOrList objc.ID, inMaximumResults int) (*ODQuery, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsODQuery), _oDQuerySelQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError, inNode.Ptr(), inRecordTypeOrList, inAttribute.Ptr(), inMatchType, inQueryValueOrList, inReturnAttributeOrList, inMaximumResults, unsafe.Pointer(&_nsErr))
@@ -56,7 +56,7 @@ func ODQueryQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttrib
 	return ODQueryFromID(_ret), nil
 }
 
-// @method     initWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error: @abstract   Creates a query with the node using the parameters provided @discussion Creates a query with the node using the supplied query parameters.  Some parameters can either be NSString or NSData or an NSArray of either NSString or NSData.  Passing nil for returnAttributes is equivalent to passing kODAttributeTypeStandardOnly. outError is optional parameter, nil can be passed if error details are not needed.
+// Creates a query object with provided parameters.
 func (o *ODQuery) InitWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode *ODNode, inRecordTypeOrList objc.ID, inAttribute *foundation.NSString, inMatchType uint32, inQueryValueOrList objc.ID, inReturnAttributeOrList objc.ID, inMaximumResults int) (*ODQuery, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDQuerySelInitWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError, inNode.Ptr(), inRecordTypeOrList, inAttribute.Ptr(), inMatchType, inQueryValueOrList, inReturnAttributeOrList, inMaximumResults, unsafe.Pointer(&_nsErr))
@@ -69,27 +69,30 @@ func (o *ODQuery) InitWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnA
 	return ODQueryFromID(_ret), nil
 }
 
-// @method     resultsAllowingPartial:error: @abstract   Returns results from a provided ODQuery synchronously @discussion Returns results from a provided ODQuery synchronously.  Passing NO to inAllowPartialResults will block the call until all results are returned or an error occurs.  YES can be passed at any time even if previous calls were made with NO.  outError is optional parameter, nil can be passed if error details are not needed.
+// Returns results from a query synchronously.
 func (o *ODQuery) ResultsAllowingPartialError(inAllowPartialResults bool) (*foundation.NSArray[objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDQuerySelResultsAllowingPartialError, inAllowPartialResults, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDQuerySelResultsAllowingPartialError, inAllowPartialResults, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[objc.ID](_ret), nil
 }
 
-// @method     scheduleInRunLoop:forMode: @abstract   Adds the query object to the specified NSRunLoop to receive asynchronous results @discussion Adds the query object to the specified NSRunLoop to receive asynchronous results.  A delegate must be set in advance otherwise results may be lost due to the lack of a receiver.
+// Retrieves results from a query asynchronously by scheduling the query in a run loop.
 func (o *ODQuery) ScheduleInRunLoopForMode(inRunLoop *foundation.NSRunLoop, inMode *foundation.NSString) {
 	o.Ptr().Send(_oDQuerySelScheduleInRunLoopForMode, inRunLoop.Ptr(), inMode.Ptr())
 }
 
-// @method     removeFromRunLoop:forMode: @abstract   Removes the query object from the specified NSRunLoop @discussion Removes the query object from the specified NSRunLoop.
+// Removes the query from a specified run loop.
 func (o *ODQuery) RemoveFromRunLoopForMode(inRunLoop *foundation.NSRunLoop, inMode *foundation.NSString) {
 	o.Ptr().Send(_oDQuerySelRemoveFromRunLoopForMode, inRunLoop.Ptr(), inMode.Ptr())
 }
 
-// @method     synchronize @abstract   Will dispose of any results and restart the query. @discussion Will dispose of any results and restart the query for subsequent resultsAllowingPartial: calls.  If the query is currently scheduled on a RunLoop, then the delegate will be called with inResults == nil and [inError code] == kODErrorQuerySynchronize and [inError domain] == ODFrameworkErrorDomain, signifying that all existing results should be thrown away in preparation for new results.
+// Restarts a query, disposing of any results it has obtained.
 func (o *ODQuery) Synchronize() {
 	o.Ptr().Send(_oDQuerySelSynchronize)
 }

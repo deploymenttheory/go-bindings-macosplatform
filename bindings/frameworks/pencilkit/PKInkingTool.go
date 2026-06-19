@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A structure that defines the drawing characteristics (width, color, pen style) to use when drawing lines on a canvas view.
+//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pkinkingtool
 type PKInkingTool struct {
 	PKTool

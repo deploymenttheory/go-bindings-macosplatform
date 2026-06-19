@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for a duration of time.
+//
 // UnitDuration wraps [raw.NSUnitDuration] with a fluent Go API.
 type UnitDuration struct {
 	inner *raw.NSUnitDuration

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mutable representation of a property that might have multiple values.
+//
 // MutableMultiValue wraps [raw.ABMutableMultiValue] with a fluent Go API.
 type MutableMultiValue struct {
 	inner *raw.ABMutableMultiValue
@@ -37,6 +39,8 @@ func NewMutableMultiValue() *MutableMultiValue {
 	return &MutableMultiValue{inner: raw.ABMutableMultiValueFromID(_id)}
 }
 
+// Adds a value and its label to a multivalue list.
+//
 // AddValueWithLabel calls the underlying AddValueWithLabel.
 func (x *MutableMultiValue) AddValueWithLabel(value objc.ID, label string) string {
 	_r := x.inner.AddValueWithLabel(value, foundation.NSStringStringWithUTF8String(label))
@@ -46,6 +50,8 @@ func (x *MutableMultiValue) AddValueWithLabel(value objc.ID, label string) strin
 	return purego.GoString(_r.Ptr())
 }
 
+// Inserts a value and its label at the given index in a multivalue list.
+//
 // InsertValueWithLabelAtIndex calls the underlying InsertValueWithLabelAtIndex.
 func (x *MutableMultiValue) InsertValueWithLabelAtIndex(value objc.ID, label string, index uint) string {
 	_r := x.inner.InsertValueWithLabelAtIndex(value, foundation.NSStringStringWithUTF8String(label), index)
@@ -55,21 +61,29 @@ func (x *MutableMultiValue) InsertValueWithLabelAtIndex(value objc.ID, label str
 	return purego.GoString(_r.Ptr())
 }
 
+// Removes the value and label at the given index.
+//
 // RemoveValueAndLabelAtIndex calls the underlying RemoveValueAndLabelAtIndex.
 func (x *MutableMultiValue) RemoveValueAndLabelAtIndex(index uint) bool {
 	return x.inner.RemoveValueAndLabelAtIndex(index)
 }
 
+// Replaces the value at the given index.
+//
 // ReplaceValueAtIndexWithValue calls the underlying ReplaceValueAtIndexWithValue.
 func (x *MutableMultiValue) ReplaceValueAtIndexWithValue(index uint, value objc.ID) bool {
 	return x.inner.ReplaceValueAtIndexWithValue(index, value)
 }
 
+// Replaces the label at the given index.
+//
 // ReplaceLabelAtIndexWithLabel calls the underlying ReplaceLabelAtIndexWithLabel.
 func (x *MutableMultiValue) ReplaceLabelAtIndexWithLabel(index uint, label string) bool {
 	return x.inner.ReplaceLabelAtIndexWithLabel(index, foundation.NSStringStringWithUTF8String(label))
 }
 
+// Sets the primary value to be the value for the given identifier.
+//
 // SetPrimaryIdentifier calls the underlying SetPrimaryIdentifier.
 func (x *MutableMultiValue) SetPrimaryIdentifier(identifier string) bool {
 	return x.inner.SetPrimaryIdentifier(foundation.NSStringStringWithUTF8String(identifier))

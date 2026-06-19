@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An operation that fetches record zone changes.
+//
 // FetchRecordZoneChangesOperation wraps [raw.CKFetchRecordZoneChangesOperation] with a fluent Go API.
 type FetchRecordZoneChangesOperation struct {
 	inner *raw.CKFetchRecordZoneChangesOperation
@@ -41,7 +43,7 @@ func NewFetchRecordZoneChangesOperation() *FetchRecordZoneChangesOperation {
 	return &FetchRecordZoneChangesOperation{inner: raw.CKFetchRecordZoneChangesOperationFromID(_id)}
 }
 
-// Creates an operation for fetching record zone changes. - Parameters: - recordZoneIDs: The IDs of the record zones that you want to query for changes. You can specify `nil` for this parameter. - configurationsByRecordZoneID: A dictionary that maps record zone IDs to their corresponding configurations. You can specify `nil` for this parameter. CloudKit configures the operation for retrieving all of the record zones that you specify. If you want to reduce the amount of data that CloudKit returns, provide zone configurations for each record zone.
+// Creates an operation for fetching record zone changes.
 //
 // NewFetchRecordZoneChangesOperationWithRecordZoneIDsConfigurationsByRecordZoneID creates a new [FetchRecordZoneChangesOperation].
 func NewFetchRecordZoneChangesOperationWithRecordZoneIDsConfigurationsByRecordZoneID(recordZoneIDs *foundation.NSArray[*raw.CKRecordZoneID], configurationsByRecordZoneID purego.IDer) *FetchRecordZoneChangesOperation {
@@ -59,7 +61,7 @@ func NewFetchRecordZoneChangesOperationWithRecordZoneIDsOptionsByRecordZoneID(re
 	return &FetchRecordZoneChangesOperation{inner: raw.CKFetchRecordZoneChangesOperationFromID(_id)}
 }
 
-// The IDs of the record zones that contain the records to fetch. Typically, you set the value of this property when you create the operation. If you intend to change the record zone IDs, update the value before you execute the operation or submit it to a queue.
+// The IDs of the record zones that contain the records to fetch.
 //
 // WithRecordZoneIDs sets the collection, converting the Go slice to an NSArray.
 func (x *FetchRecordZoneChangesOperation) WithRecordZoneIDs(items ...*raw.CKRecordZoneID) *FetchRecordZoneChangesOperation {
@@ -90,7 +92,7 @@ func (x *FetchRecordZoneChangesOperation) WithConfigurationsByRecordZoneID(confi
 	return x
 }
 
-// A Boolean value that indicates whether to send repeated requests to the server. If <doc://com.apple.documentation/documentation/swift/true>, the operation sends repeat requests to the server until it fetches all changes. CloudKit executes the handler you set on the “CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock“ property with a change token after each request. The default value is <doc://com.apple.documentation/documentation/swift/true>.
+// A Boolean value that indicates whether to send repeated requests to the server.
 //
 // WithFetchAllChanges sets the fetchAllChanges property and returns the receiver for chaining.
 func (x *FetchRecordZoneChangesOperation) WithFetchAllChanges(fetchAllChanges bool) *FetchRecordZoneChangesOperation {
@@ -98,7 +100,7 @@ func (x *FetchRecordZoneChangesOperation) WithFetchAllChanges(fetchAllChanges bo
 	return x
 }
 
-// The closure to execute with the contents of a changed record. The closure returns no value and takes the following parameter: - The changed record. If you specify a value for the “CKFetchRecordZoneChangesConfiguration/desiredKeys“ property, the record contains only the corresponding fields. The operation executes this closure once for each record in the record zone with changes since the previous fetch request. Each time the closure executes, it executes serially with respect to the other closures of the operation. If there aren't any record changes, this closure doesn't execute. Set this property before you execute the operation or submit it to a queue.
+// The closure to execute with the contents of a changed record.
 //
 // WithRecordChangedBlock sets the recordChangedBlock property and returns the receiver for chaining.
 func (x *FetchRecordZoneChangesOperation) WithRecordChangedBlock(recordChangedBlock func(*raw.CKRecord)) *FetchRecordZoneChangesOperation {
@@ -106,7 +108,7 @@ func (x *FetchRecordZoneChangesOperation) WithRecordChangedBlock(recordChangedBl
 	return x
 }
 
-// The closure to execute with the results of retrieving a record change. The closure returns no value and takes the following parameters: - The ID of the changed record to retrieve. - The changed record, or `nil` if CloudKit can't retrieve the record. If you specify a value for the “CKFetchRecordZoneChangesConfiguration/desiredKeys“ property, the record contains only the corresponding fields. - An error that contains information about a problem, or `nil` if CloudKit retrieves the record successfully. The operation executes this closure once for each record in the record zone with changes since the previous fetch request. Each time the closure executes, it executes serially with respect to the other closures of the operation. If there aren't any record changes, this closure doesn't execute. Set this property before you execute the operation or submit it to a queue.
+// The closure to execute with the results of retrieving a record change.
 //
 // WithRecordWasChangedBlock sets the recordWasChangedBlock property and returns the receiver for chaining.
 func (x *FetchRecordZoneChangesOperation) WithRecordWasChangedBlock(recordWasChangedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) *FetchRecordZoneChangesOperation {
@@ -114,7 +116,7 @@ func (x *FetchRecordZoneChangesOperation) WithRecordWasChangedBlock(recordWasCha
 	return x
 }
 
-// The block to execute when a record no longer exists. The block returns no value and takes the following parameters: - term `recordID`: The deleted record's ID. - term `recordType`: The deleted record's type. The operation executes this block once for each record the server deletes after the previous change token. Each time the block executes, it executes serially with respect to the other blocks of the operation. If there aren't any record deletions, this block doesn't execute. Set this property before you execute the operation or submit it to a queue.
+// The block to execute when a record no longer exists.
 //
 // WithRecordWithIDWasDeletedBlock sets the recordWithIDWasDeletedBlock property and returns the receiver for chaining.
 func (x *FetchRecordZoneChangesOperation) WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(*raw.CKRecordID, *foundation.NSString)) *FetchRecordZoneChangesOperation {
@@ -122,7 +124,7 @@ func (x *FetchRecordZoneChangesOperation) WithRecordWithIDWasDeletedBlock(record
 	return x
 }
 
-// The closure to execute when the change token updates. The closure returns no value and takes the following parameters: - The record zone's ID. - The new change token from the server. You can store this token locally and use it during subsequent fetch operations to limit the results to records that change after this operation executes. - The most recent client change token from the device. If the change token isn't the most recent change token you provided, the server might not have received the associated changes. The operation executes this closure once for each retrieved change token. Each time the closure executes, it executes serially with respect to the other blocks of the operation. Set this property before you execute the operation or submit it to a queue.
+// The closure to execute when the change token updates.
 //
 // WithRecordZoneChangeTokensUpdatedBlock sets the recordZoneChangeTokensUpdatedBlock property and returns the receiver for chaining.
 func (x *FetchRecordZoneChangesOperation) WithRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData)) *FetchRecordZoneChangesOperation {
@@ -130,7 +132,7 @@ func (x *FetchRecordZoneChangesOperation) WithRecordZoneChangeTokensUpdatedBlock
 	return x
 }
 
-// The closure to execute when a record zone's fetch finishes. The closure returns no value and takes the following parameters: - The record zone's ID. - The change token to store and use in subsequent instances of “CKFetchRecordZoneChangesOperation“. - The more recent client change token from the device. If the change token isn't the more recent change token you provided, the server might not have received the associated changes. - A Boolean that indicates whether this is the final record zone change. If “CKFetchRecordZoneChangesOperation/fetchAllChanges“ is <doc://com.apple.documentation/documentation/swift/false>, it's the app's responsibility to create additional instances of “CKFetchRecordZoneChangesOperation“ to fetch further changes. - An error object that contains information about a problem, or `nil` if the operation successfully retrieves the results. The app is responsible for saving the change token at the end of the operation and providing it to future uses of “CKFetchRecordZoneChangesOperation“. Each time the closure executes, it executes serially with respect to the other closures of the operation. Set this property before you execute the operation or submit it to a queue.
+// The closure to execute when a record zone’s fetch finishes.
 //
 // WithRecordZoneFetchCompletionBlock sets the recordZoneFetchCompletionBlock property and returns the receiver for chaining.
 func (x *FetchRecordZoneChangesOperation) WithRecordZoneFetchCompletionBlock(recordZoneFetchCompletionBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData, bool, unsafe.Pointer)) *FetchRecordZoneChangesOperation {
@@ -138,7 +140,7 @@ func (x *FetchRecordZoneChangesOperation) WithRecordZoneFetchCompletionBlock(rec
 	return x
 }
 
-// The closure to execute when the operation finishes. The closure has no return value and takes the following parameter: - An error object that contains information about a problem, or `nil` if CloudKit successfully retrieves the record zone changes. This closure executes only once, and represents your final opportunity to process the results. The closure executes serially with respect to the other closures of the operation. Set this property before you execute the operation or submit it to a queue.
+// The closure to execute when the operation finishes.
 //
 // WithFetchRecordZoneChangesCompletionBlock sets the fetchRecordZoneChangesCompletionBlock property and returns the receiver for chaining.
 func (x *FetchRecordZoneChangesOperation) WithFetchRecordZoneChangesCompletionBlock(fetchRecordZoneChangesCompletionBlock func(unsafe.Pointer)) *FetchRecordZoneChangesOperation {
@@ -154,7 +156,7 @@ func (x *FetchRecordZoneChangesOperation) WithOptionsByRecordZoneID(optionsByRec
 	return x
 }
 
-// The database that the operation uses. For operations that you execute in a custom queue, use this property to specify the target database. Setting the database also sets the corresponding container, which it inherits from “CKOperation“. If this property's value is `nil`, the operation targets the user's private database. The default value is `nil`.
+// The database that the operation uses.
 //
 // WithDatabase sets the database property and returns the receiver for chaining.
 func (x *FetchRecordZoneChangesOperation) WithDatabase(database *Database) *FetchRecordZoneChangesOperation {
@@ -162,7 +164,7 @@ func (x *FetchRecordZoneChangesOperation) WithDatabase(database *Database) *Fetc
 	return x
 }
 
-// The operation's configuration.
+// The operation’s configuration.
 //
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *FetchRecordZoneChangesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordZoneChangesOperation {
@@ -170,7 +172,7 @@ func (x *FetchRecordZoneChangesOperation) WithConfiguration(configuration *Opera
 	return x
 }
 
-// The operation's group.
+// The operation’s group.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *FetchRecordZoneChangesOperation) WithGroup(group *OperationGroup) *FetchRecordZoneChangesOperation {
@@ -178,7 +180,7 @@ func (x *FetchRecordZoneChangesOperation) WithGroup(group *OperationGroup) *Fetc
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *FetchRecordZoneChangesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordZoneChangesOperation {
@@ -202,7 +204,7 @@ func (x *FetchRecordZoneChangesOperation) WithAllowsCellularAccess(allowsCellula
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A Boolean value that indicates whether the operation is long-lived.
 //
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *FetchRecordZoneChangesOperation) WithLongLived(longLived bool) *FetchRecordZoneChangesOperation {

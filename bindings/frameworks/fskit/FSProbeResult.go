@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the results of a specific probe.
+//
 // Apple documentation: https://developer.apple.com/documentation/fskit/fsproberesult
 type FSProbeResult struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func FSProbeResultFromID(id objc.ID) *FSProbeResult {
 	return o
 }
 
-// Creates a probe result for a recognized file system. - Parameters: - name: The resource name, as found during the probe operation. If the file system doesn't support names, or is awaiting naming, use an empty string. - containerID: The container identifier, as found during the probe operation. If the file system doesn't support durable identifiers, use a random UUID.
+// Creates a probe result for a recognized file system.
 func FSProbeResultRecognizedProbeResultWithNameContainerID(name *foundation.NSString, containerID *FSContainerIdentifier) *FSProbeResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSProbeResult), _fSProbeResultSelRecognizedProbeResultWithNameContainerID, name.Ptr(), containerID.Ptr())
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func FSProbeResultRecognizedProbeResultWithNameContainerID(name *foundation.NSSt
 	return FSProbeResultFromID(_ret)
 }
 
-// Creates a probe result for a recognized file system that is usable, but with limited capabilities. - Parameters: - name: The resource name, as found during the probe operation. If the file system doesn't support names, or is awaiting naming, use an empty string. - containerID: The container identifier, as found during the probe operation. If the file system doesn't support durable identifiers, use a random UUID.
+// Creates a probe result for a recognized file system that is usable, but with limited capabilities.
 func FSProbeResultUsableButLimitedProbeResultWithNameContainerID(name *foundation.NSString, containerID *FSContainerIdentifier) *FSProbeResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSProbeResult), _fSProbeResultSelUsableButLimitedProbeResultWithNameContainerID, name.Ptr(), containerID.Ptr())
 	if _ret != 0 {
@@ -55,7 +57,7 @@ func FSProbeResultUsableButLimitedProbeResultWithNameContainerID(name *foundatio
 	return FSProbeResultFromID(_ret)
 }
 
-// Creates a probe result for a recognized and usable file system. - Parameters: - name: The resource name, as found during the probe operation. If the file system doesn't support names, or is awaiting naming, use an empty string. - containerID: The container identifier, as found during the probe operation. If the file system doesn't support durable identifiers, use a random UUID.
+// Creates a probe result for a recognized and usable file system.
 func FSProbeResultUsableProbeResultWithNameContainerID(name *foundation.NSString, containerID *FSContainerIdentifier) *FSProbeResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSProbeResult), _fSProbeResultSelUsableProbeResultWithNameContainerID, name.Ptr(), containerID.Ptr())
 	if _ret != 0 {

@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a gradient dropout filter.
+//
 // CNNDropoutGradientNode wraps [raw.MPSCNNDropoutGradientNode] with a fluent Go API.
 type CNNDropoutGradientNode struct {
 	inner *raw.MPSCNNDropoutGradientNode

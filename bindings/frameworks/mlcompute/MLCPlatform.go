@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A utility class for setting global properties in the framework.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcplatform
 type MLCPlatform struct {
 	foundation.NSObject
@@ -31,12 +33,12 @@ func MLCPlatformFromID(id objc.ID) *MLCPlatform {
 	return o
 }
 
-// @method    setRNGSeedTo @abstract  sets the RNG seed. The seed should be of type long int.
+// Sets the global random number generator seed value.
 func MLCPlatformSetRNGSeedTo(seed *foundation.NSNumber) {
 	objc.ID(_clsMLCPlatform).Send(_mLCPlatformSelSetRNGSeedTo, seed.Ptr())
 }
 
-// @method    getRNGseed @abstract  gets the RNG seed value. If the value is not set it would return nil
+// Returns the global random number generator seed value.
 func MLCPlatformGetRNGseed() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPlatform), _mLCPlatformSelGetRNGseed)
 	if _ret != 0 {

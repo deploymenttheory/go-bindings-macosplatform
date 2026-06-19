@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The start and end points of a route, along with the planned mode of transportation.
+//
 // DirectionsRequest wraps [raw.MKDirectionsRequest] with a fluent Go API.
 type DirectionsRequest struct {
 	inner *raw.MKDirectionsRequest

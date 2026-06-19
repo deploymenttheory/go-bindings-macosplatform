@@ -112,10 +112,12 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
+// A type that represents a non-error status related to a frame decode operation.
 type MEDecodeFrameStatus uint64
 
 const (
-	MEDecodeFrameNoStatus     MEDecodeFrameStatus = 0
+	MEDecodeFrameNoStatus MEDecodeFrameStatus = 0
+	// A frame decode operation status that indicates the system dropped the output of the frame for a reason other than an error.
 	MEDecodeFrameFrameDropped MEDecodeFrameStatus = 1
 )
 
@@ -130,6 +132,7 @@ func (e MEDecodeFrameStatus) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A MediaExtension framework error.
 type MEError int64
 
 const (
@@ -178,6 +181,7 @@ func (e MEError) String() string {
 	}
 }
 
+// An enumeration that describes if a media asset contains or supports fragments.
 type MEFileInfoFragmentsStatus int64
 
 const (
@@ -199,11 +203,15 @@ func (e MEFileInfoFragmentsStatus) String() string {
 	}
 }
 
+// Informational status flags that the format reader returns after parsing additional fragments.
 type MEFormatReaderParseAdditionalFragmentsStatus uint64
 
 const (
-	MEFormatReaderParseAdditionalFragmentsStatusSizeIncreased     MEFormatReaderParseAdditionalFragmentsStatus = 1
-	MEFormatReaderParseAdditionalFragmentsStatusFragmentAdded     MEFormatReaderParseAdditionalFragmentsStatus = 2
+	// Indicates that the format reader file size increased.
+	MEFormatReaderParseAdditionalFragmentsStatusSizeIncreased MEFormatReaderParseAdditionalFragmentsStatus = 1
+	// Indicates that the format reader received one or more fragments.
+	MEFormatReaderParseAdditionalFragmentsStatusFragmentAdded MEFormatReaderParseAdditionalFragmentsStatus = 2
+	// Indicates that the format reader can’t receive any more fragments.
 	MEFormatReaderParseAdditionalFragmentsStatusFragmentsComplete MEFormatReaderParseAdditionalFragmentsStatus = 4
 )
 

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A File Provider extension’s domain.
+//
 // Apple documentation: https://developer.apple.com/documentation/fileprovider/nsfileproviderdomain
 type NSFileProviderDomain struct {
 	foundation.NSObject
@@ -51,7 +53,7 @@ func NSFileProviderDomainFromID(id objc.ID) *NSFileProviderDomain {
 	return o
 }
 
-// Initialize a new replicated NSFileProviderDomain The extension will be implementing NSFileProviderReplicatedExtension. The file provider extension implementation can pick any @c identifier as it sees fit to identify the group of items. The identifier must not contain any characters from this set: [/:] In order to migrate a non-replicated domain to a replicated one, implementers have to make sure that they do not use the default domain, and then call +[NSFileProviderManager addDomain:completionHandler:] using the NSFileProviderDomain object returned by that init method. A domain with a specific identifier can be added multiple times; subsequent adds will update the properties of the existing domain. If a replicated domain is added "on top" of a non-replicated domain, the domain will be migrated to be replicated; existing bookmarks will remain valid, but the (externally visible) location of items will change to reflect the replicated location. It is not possible to migrate the default domain in this manner (since the default domain can not be added). It is recommended to migrate usage of the default domain to a domain with an explicit identifier instead. @param displayName a user visible string representing the group of items the file provider extension is using.
+// Creates a new file provider domain with the specified identifier and display name.
 func (o *NSFileProviderDomain) InitWithIdentifierDisplayName(identifier *foundation.NSString, displayName *foundation.NSString) *NSFileProviderDomain {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderDomainSelInitWithIdentifierDisplayName, identifier.Ptr(), displayName.Ptr())
 	if _ret != 0 {
@@ -60,9 +62,9 @@ func (o *NSFileProviderDomain) InitWithIdentifierDisplayName(identifier *foundat
 	return NSFileProviderDomainFromID(_ret)
 }
 
-// Initialize a new replicated NSFileProviderDomain on a specific volume. If a volumeURL is specified, and that volume is eligible, the domain will be located on this volume. The URL is used to designate a volume but doesn't influence where on this volume is the domain going to be stored. In order to avoid domainID collisions between volumes, the NSFileProviderDomainIdentifier of external domains are generated randomly by FileProvider. The provider should therefore use the userInfo to associate all necessary information to map the created object to the corresponding account. The userInfo will be persisted on the volume where the domain was created. If that is an external volume, the userInfo can be used on other devices to assist in setting up the domain on those devices. See the`NSFileProviderExternalVolumeHandling` protocol for more details.
+// Creates a new file provider domain with the specified URL and display name.
 func (o *NSFileProviderDomain) InitWithDisplayNameUserInfoVolumeURL(displayName *foundation.NSString, userInfo *foundation.NSDictionary[objc.ID, objc.ID], volumeURL *foundation.NSURL) *NSFileProviderDomain {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderDomainSelInitWithDisplayNameUserInfoVolumeURL, displayName.Ptr(), userInfo, volumeURL.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderDomainSelInitWithDisplayNameUserInfoVolumeURL, displayName.Ptr(), userInfo.Ptr(), volumeURL.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -154,12 +156,15 @@ func (o *NSFileProviderDomain) VolumeUUID() *foundation.NSUUID {
 
 // A dictionary set by the client app. Keys must be strings, values must be [String, Number, Date, Data]
 func (o *NSFileProviderDomain) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSFileProviderDomainSelUserInfo)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderDomainSelUserInfo)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSFileProviderDomain) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSFileProviderDomainSelSetUserInfo, userInfo)
+	o.Ptr().Send(_nSFileProviderDomainSelSetUserInfo, userInfo.Ptr())
 }
 
 // List of known folders that are currently replicated by this domain.

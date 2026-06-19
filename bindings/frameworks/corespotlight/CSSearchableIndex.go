@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An on-device index for your app’s searchable content.
+//
 // Apple documentation: https://developer.apple.com/documentation/corespotlight/cssearchableindex
 type CSSearchableIndex struct {
 	foundation.NSObject
@@ -47,11 +49,13 @@ func CSSearchableIndexFromID(id objc.ID) *CSSearchableIndex {
 	return o
 }
 
+// Returns a Boolean value that indicates whether indexing is available on the current device.
 func CSSearchableIndexIsIndexingAvailable() bool {
 	_ret := objc.Send[bool](objc.ID(_clsCSSearchableIndex), _cSSearchableIndexSelIsIndexingAvailable)
 	return _ret
 }
 
+// Returns the default on-device index.
 func CSSearchableIndexDefaultSearchableIndex() *CSSearchableIndex {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCSSearchableIndex), _cSSearchableIndexSelDefaultSearchableIndex)
 	if _ret != 0 {
@@ -60,6 +64,7 @@ func CSSearchableIndexDefaultSearchableIndex() *CSSearchableIndex {
 	return CSSearchableIndexFromID(_ret)
 }
 
+// Returns an on-device index with the specified name.
 func (o *CSSearchableIndex) InitWithName(name *foundation.NSString) *CSSearchableIndex {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableIndexSelInitWithName, name.Ptr())
 	if _ret != 0 {
@@ -68,6 +73,7 @@ func (o *CSSearchableIndex) InitWithName(name *foundation.NSString) *CSSearchabl
 	return CSSearchableIndexFromID(_ret)
 }
 
+// Returns an on-device index with the specified name and data protection class.
 func (o *CSSearchableIndex) InitWithNameProtectionClass(name *foundation.NSString, protectionClass *foundation.NSString) *CSSearchableIndex {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchableIndexSelInitWithNameProtectionClass, name.Ptr(), protectionClass.Ptr())
 	if _ret != 0 {
@@ -76,6 +82,7 @@ func (o *CSSearchableIndex) InitWithNameProtectionClass(name *foundation.NSStrin
 	return CSSearchableIndexFromID(_ret)
 }
 
+// Adds or updates items in the index.
 func (o *CSSearchableIndex) IndexSearchableItemsCompletionHandler(items *foundation.NSArray[*CSSearchableItem], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -87,6 +94,7 @@ func (o *CSSearchableIndex) IndexSearchableItemsCompletionHandler(items *foundat
 	o.Ptr().Send(_cSSearchableIndexSelIndexSearchableItemsCompletionHandler, items.Ptr(), __block_completionHandler)
 }
 
+// Removes from the index all items with the specified identifiers.
 func (o *CSSearchableIndex) DeleteSearchableItemsWithIdentifiersCompletionHandler(identifiers *foundation.NSArray[*foundation.NSString], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -95,9 +103,10 @@ func (o *CSSearchableIndex) DeleteSearchableItemsWithIdentifiersCompletionHandle
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_cSSearchableIndexSelDeleteSearchableItemsWithIdentifiersCompletionHandler, identifiers, __block_completionHandler)
+	o.Ptr().Send(_cSSearchableIndexSelDeleteSearchableItemsWithIdentifiersCompletionHandler, identifiers.Ptr(), __block_completionHandler)
 }
 
+// Removes from the index all searchable items associated with the specified domain.
 func (o *CSSearchableIndex) DeleteSearchableItemsWithDomainIdentifiersCompletionHandler(domainIdentifiers *foundation.NSArray[*foundation.NSString], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -106,9 +115,10 @@ func (o *CSSearchableIndex) DeleteSearchableItemsWithDomainIdentifiersCompletion
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_cSSearchableIndexSelDeleteSearchableItemsWithDomainIdentifiersCompletionHandler, domainIdentifiers, __block_completionHandler)
+	o.Ptr().Send(_cSSearchableIndexSelDeleteSearchableItemsWithDomainIdentifiersCompletionHandler, domainIdentifiers.Ptr(), __block_completionHandler)
 }
 
+// Deletes all searchable items from the index.
 func (o *CSSearchableIndex) DeleteAllSearchableItemsWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -129,10 +139,12 @@ func (o *CSSearchableIndex) SetIndexDelegate(indexDelegate CSSearchableIndexDele
 	o.Ptr().Send(_cSSearchableIndexSelSetIndexDelegate, indexDelegate)
 }
 
+// Begins a batch of updates to an index.
 func (o *CSSearchableIndex) BeginIndexBatch() {
 	o.Ptr().Send(_cSSearchableIndexSelBeginIndexBatch)
 }
 
+// Ends a batch of index updates and stores the specified state information.
 func (o *CSSearchableIndex) EndIndexBatchWithExpectedClientStateNewClientStateCompletionHandler(expectedClientState *foundation.NSData, newClientState *foundation.NSData, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -144,6 +156,7 @@ func (o *CSSearchableIndex) EndIndexBatchWithExpectedClientStateNewClientStateCo
 	o.Ptr().Send(_cSSearchableIndexSelEndIndexBatchWithExpectedClientStateNewClientStateCompletionHandler, expectedClientState.Ptr(), newClientState.Ptr(), __block_completionHandler)
 }
 
+// Ends a batch of index updates and stores the specified state information.
 func (o *CSSearchableIndex) EndIndexBatchWithClientStateCompletionHandler(clientState *foundation.NSData, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -155,6 +168,7 @@ func (o *CSSearchableIndex) EndIndexBatchWithClientStateCompletionHandler(client
 	o.Ptr().Send(_cSSearchableIndexSelEndIndexBatchWithClientStateCompletionHandler, clientState.Ptr(), __block_completionHandler)
 }
 
+// Fetches the app’s most recent client state information asynchronously.
 func (o *CSSearchableIndex) FetchLastClientStateWithCompletionHandler(completionHandler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -169,6 +183,7 @@ func (o *CSSearchableIndex) FetchLastClientStateWithCompletionHandler(completion
 	o.Ptr().Send(_cSSearchableIndexSelFetchLastClientStateWithCompletionHandler, __block_completionHandler)
 }
 
+// Fetches data from an external provider.
 func (o *CSSearchableIndex) FetchDataForBundleIdentifierItemIdentifierContentTypeCompletionHandler(bundleIdentifier *foundation.NSString, itemIdentifier *foundation.NSString, contentType *uniformtypeidentifiers.UTType, completionHandler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

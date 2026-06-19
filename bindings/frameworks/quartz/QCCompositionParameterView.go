@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that allows users to edit the input parameters of a composition in real time. The composition can be rendering in any of the following objects: QCRenderer, QCView, or QCCompositionLayer.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/qccompositionparameterview
 type QCCompositionParameterView struct {
 	appkit.NSView
@@ -38,24 +40,29 @@ func QCCompositionParameterViewFromID(id objc.ID) *QCCompositionParameterView {
 	return o
 }
 
+// Sets the composition parameter view for editing the input parameters of the provided renderer object.
 func (o *QCCompositionParameterView) SetCompositionRenderer(renderer objc.ID) {
 	o.Ptr().Send(_qCCompositionParameterViewSelSetCompositionRenderer, renderer)
 }
 
+// Returns the renderer object associated with the composition parameter view.
 func (o *QCCompositionParameterView) CompositionRenderer() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionParameterViewSelCompositionRenderer)
 	return _ret
 }
 
+// Checks whether the composition that is currently edited by the composition parameter view has any input parameters.
 func (o *QCCompositionParameterView) HasParameters() bool {
 	_ret := objc.Send[bool](o.Ptr(), _qCCompositionParameterViewSelHasParameters)
 	return _ret
 }
 
+// Sets the background color of the composition parameter view.
 func (o *QCCompositionParameterView) SetBackgroundColor(color *appkit.NSColor) {
 	o.Ptr().Send(_qCCompositionParameterViewSelSetBackgroundColor, color.Ptr())
 }
 
+// Retrieves the background color of the composition parameter view.
 func (o *QCCompositionParameterView) BackgroundColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionParameterViewSelBackgroundColor)
 	if _ret != 0 {
@@ -64,19 +71,23 @@ func (o *QCCompositionParameterView) BackgroundColor() *appkit.NSColor {
 	return appkit.NSColorFromID(_ret)
 }
 
+// Sets whether the composition parameter view draws its background.
 func (o *QCCompositionParameterView) SetDrawsBackground(flag bool) {
 	o.Ptr().Send(_qCCompositionParameterViewSelSetDrawsBackground, flag)
 }
 
+// Returns whether the composition parameter view draws its background.
 func (o *QCCompositionParameterView) DrawsBackground() bool {
 	_ret := objc.Send[bool](o.Ptr(), _qCCompositionParameterViewSelDrawsBackground)
 	return _ret
 }
 
+// Sets the composition parameter view delegate.
 func (o *QCCompositionParameterView) SetDelegate(delegate objc.ID) {
 	o.Ptr().Send(_qCCompositionParameterViewSelSetDelegate, delegate)
 }
 
+// Returns the composition parameter view delegate.
 func (o *QCCompositionParameterView) Delegate() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionParameterViewSelDelegate)
 	return _ret

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A graphics coordinate transformation.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsaffinetransform
 type NSAffineTransform struct {
 	NSObject
@@ -44,6 +46,7 @@ func NSAffineTransformFromID(id objc.ID) *NSAffineTransform {
 	return o
 }
 
+// Creates a new affine transform initialized to the identity matrix.
 func NSAffineTransformTransform() *NSAffineTransform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAffineTransform), _nSAffineTransformSelTransform)
 	if _ret != 0 {
@@ -52,6 +55,7 @@ func NSAffineTransformTransform() *NSAffineTransform {
 	return NSAffineTransformFromID(_ret)
 }
 
+// Initializes the receiver’s matrix using another transform object.
 func (o *NSAffineTransform) InitWithTransform(transform *NSAffineTransform) *NSAffineTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAffineTransformSelInitWithTransform, transform.Ptr())
 	if _ret != 0 {
@@ -60,6 +64,7 @@ func (o *NSAffineTransform) InitWithTransform(transform *NSAffineTransform) *NSA
 	return NSAffineTransformFromID(_ret)
 }
 
+// Initializes an affine transform matrix to the identity matrix.
 func (o *NSAffineTransform) Init() *NSAffineTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAffineTransformSelInit)
 	if _ret != 0 {
@@ -68,43 +73,53 @@ func (o *NSAffineTransform) Init() *NSAffineTransform {
 	return NSAffineTransformFromID(_ret)
 }
 
+// Applies the specified translation factors to the receiver’s transformation matrix.
 func (o *NSAffineTransform) TranslateXByYBy(deltaX float64, deltaY float64) {
 	o.Ptr().Send(_nSAffineTransformSelTranslateXByYBy, deltaX, deltaY)
 }
 
+// Applies a rotation factor (measured in degrees) to the receiver’s transformation matrix.
 func (o *NSAffineTransform) RotateByDegrees(angle float64) {
 	o.Ptr().Send(_nSAffineTransformSelRotateByDegrees, angle)
 }
 
+// Applies a rotation factor (measured in radians) to the receiver’s transformation matrix.
 func (o *NSAffineTransform) RotateByRadians(angle float64) {
 	o.Ptr().Send(_nSAffineTransformSelRotateByRadians, angle)
 }
 
+// Applies the specified scaling factor along both x and y axes to the receiver’s transformation matrix.
 func (o *NSAffineTransform) ScaleBy(scale float64) {
 	o.Ptr().Send(_nSAffineTransformSelScaleBy, scale)
 }
 
+// Applies scaling factors to each axis of the receiver’s transformation matrix.
 func (o *NSAffineTransform) ScaleXByYBy(scaleX float64, scaleY float64) {
 	o.Ptr().Send(_nSAffineTransformSelScaleXByYBy, scaleX, scaleY)
 }
 
+// Replaces the receiver’s matrix with its inverse matrix.
 func (o *NSAffineTransform) Invert() {
 	o.Ptr().Send(_nSAffineTransformSelInvert)
 }
 
+// Appends the specified matrix to the receiver’s matrix.
 func (o *NSAffineTransform) AppendTransform(transform *NSAffineTransform) {
 	o.Ptr().Send(_nSAffineTransformSelAppendTransform, transform.Ptr())
 }
 
+// Prepends the specified matrix to the receiver’s matrix.
 func (o *NSAffineTransform) PrependTransform(transform *NSAffineTransform) {
 	o.Ptr().Send(_nSAffineTransformSelPrependTransform, transform.Ptr())
 }
 
+// Applies the receiver’s transform to the specified point and returns the result.
 func (o *NSAffineTransform) TransformPoint(aPoint corefoundation.CGPoint) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSAffineTransformSelTransformPoint, aPoint)
 	return _ret
 }
 
+// Applies the receiver’s transform to the specified size and returns the results.
 func (o *NSAffineTransform) TransformSize(aSize corefoundation.CGSize) corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSAffineTransformSelTransformSize, aSize)
 	return _ret

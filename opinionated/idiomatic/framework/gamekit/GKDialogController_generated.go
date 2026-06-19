@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides the ability to present the dashboard in macOS games.
+//
 // DialogController wraps [raw.GKDialogController] with a fluent Go API.
 type DialogController struct {
 	inner *raw.GKDialogController
@@ -36,17 +38,23 @@ func NewDialogController() *DialogController {
 	return &DialogController{inner: raw.GKDialogControllerFromID(_id)}
 }
 
+// The window that displays the dashboard.
+//
 // WithParentWindow sets the parentWindow property and returns the receiver for chaining.
 func (x *DialogController) WithParentWindow(parentWindow *appkit.NSWindow) *DialogController {
 	x.inner.SetParentWindow(parentWindow)
 	return x
 }
 
+// Presents the dashboard in the window.
+//
 // PresentViewController calls the underlying PresentViewController.
 func (x *DialogController) PresentViewController(viewController *appkit.NSViewController) bool {
 	return x.inner.PresentViewController(viewController)
 }
 
+// Dismisses the dashboard.
+//
 // Dismiss calls the underlying Dismiss.
 func (x *DialogController) Dismiss(sender objc.ID) {
 	x.inner.Dismiss(sender)

@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that generates images from a video asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetimagegenerator
 type AVAssetImageGenerator struct {
 	foundation.NSObject
@@ -55,7 +57,7 @@ func AVAssetImageGeneratorFromID(id objc.ID) *AVAssetImageGenerator {
 	return o
 }
 
-// @method			assetImageGeneratorWithAsset: @abstract		Returns an instance of AVAssetImageGenerator for use with the specified asset. @param			asset The asset from which images will be extracted. @result			An instance of AVAssetImageGenerator @discussion		This method may succeed even if the asset possesses no visual tracks at the time of initialization. Clients may wish to test whether an asset has any tracks with the visual characteristic via -[AVAsset tracksWithMediaCharacteristic:]. Note also that assets that belong to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, may gain visual tracks after initialization of an associated AVAssetImageGenerator. However, the results of image generation are undefined if mutations of the asset occur while images are being generated. AVAssetImageGenerator will use the default enabled video track(s) to generate images.
+// Returns a new object that generates images for times within a video asset.
 func AVAssetImageGeneratorAssetImageGeneratorWithAsset(asset *AVAsset) *AVAssetImageGenerator {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetImageGenerator), _aVAssetImageGeneratorSelAssetImageGeneratorWithAsset, asset.Ptr())
 	if _ret != 0 {
@@ -64,7 +66,7 @@ func AVAssetImageGeneratorAssetImageGeneratorWithAsset(asset *AVAsset) *AVAssetI
 	return AVAssetImageGeneratorFromID(_ret)
 }
 
-// @method			initWithAsset: @abstract		Initializes an instance of AVAssetImageGenerator for use with the specified asset. @param			asset The asset from which images will be extracted. @result			An instance of AVAssetImageGenerator @discussion		This method may succeed even if the asset possesses no visual tracks at the time of initialization. Clients may wish to test whether an asset has any tracks with the visual characteristic via -[AVAsset tracksWithMediaCharacteristic:]. Note also that assets that belong to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, may gain visual tracks after initialization of an associated AVAssetImageGenerator. However, the results of image generation are undefined if mutations of the asset occur while images are being generated. AVAssetImageGenerator will use the default enabled video track(s) to generate images.
+// Creates an object that generates images for times within a video asset.
 func (o *AVAssetImageGenerator) InitWithAsset(asset *AVAsset) *AVAssetImageGenerator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetImageGeneratorSelInitWithAsset, asset.Ptr())
 	if _ret != 0 {
@@ -73,7 +75,7 @@ func (o *AVAssetImageGenerator) InitWithAsset(asset *AVAsset) *AVAssetImageGener
 	return AVAssetImageGeneratorFromID(_ret)
 }
 
-// @method			copyCGImageAtTime:actualTime:error: @abstract		Returns a CFRetained CGImageRef for an asset at or near the specified time. @param			requestedTime The time at which the image of the asset is to be created. @param			actualTime A pointer to a CMTime to receive the time at which the image was actually generated. If you are not interested in this information, pass NULL. @param			outError An error object describing the reason for failure, in the event that this method returns NULL. @result			A CGImageRef. @discussion Returns the CGImage synchronously. Ownership follows the Create Rule. Because of the nature of timed audiovisual media, generating an image may take significant time. AVAssetImageGenerator may have to block the calling thread in order to do so.  In order to avoid blocking, clients can use -generateCGImagesAsynchronouslyForTimes:completionHandler: to request that one or more images be generated asynchronously and to be notified when they become available. On iOS and tvOS, it is particularly important to avoid blocking.  To preserve responsiveness, a synchronous request that blocks for too long (eg, a request to generate an image from an asset on a slow HTTP server) may lead to media services being reset.
+// Returns an image for the asset at or near a specified time.
 // Deprecated: Use generateCGImageAsynchronouslyForTime:completionHandler: instead
 func (o *AVAssetImageGenerator) CopyCGImageAtTimeActualTimeError(requestedTime coremedia.CMTime, actualTime *coremedia.CMTime) (unsafe.Pointer, error) {
 	var _nsErr uintptr
@@ -84,17 +86,17 @@ func (o *AVAssetImageGenerator) CopyCGImageAtTimeActualTimeError(requestedTime c
 	return _ret, nil
 }
 
-// @method			generateCGImagesAsynchronouslyForTimes:completionHandler: @abstract		Returns a series of CGImageRefs for an asset at or near the specified times. @param			requestedTimes An NSArray of NSValues, each containing a CMTime, specifying the asset times at which an image is requested. @param			handler A block that will be called when an image request is complete. @discussion		Employs an efficient "batch mode" for getting images in time order. The client will receive exactly one handler callback for each requested time in requestedTimes. Changes to generator properties (snap behavior, maximum size, etc...) will not affect outstanding asynchronous image generation requests. The generated image is not retained.  Clients should retain the image if they wish it to persist after the completion handler returns.
+// Generates images asynchronously for an array of requested times, and returns the results in a callback.
 func (o *AVAssetImageGenerator) GenerateCGImagesAsynchronouslyForTimesCompletionHandler(requestedTimes *foundation.NSArray[*foundation.NSValue], handler objc.Block) {
-	o.Ptr().Send(_aVAssetImageGeneratorSelGenerateCGImagesAsynchronouslyForTimesCompletionHandler, requestedTimes, handler)
+	o.Ptr().Send(_aVAssetImageGeneratorSelGenerateCGImagesAsynchronouslyForTimesCompletionHandler, requestedTimes.Ptr(), handler)
 }
 
-// @method			generateCGImageAsynchronouslyForTime:completionHandler: @abstract		Returns a CGImageRef for an asset at or near the specified time. @param			requestedTime A CMTime, specifying the asset time at which an image is requested. @param			handler A block that will be called when the image request is complete. @discussion		The client will receive exactly one handler callback for requestedTime. Changes to generator properties (snap behavior, maximum size, etc...) will not affect outstanding asynchronous image generation requests. The generated image is not retained.  Clients should retain the image if they wish it to persist after the completion handler returns. If image generation succeeds, the `image` parameter to the completion handler will be non-NULL and the `error` parameter will be nil.  If image generation fails or was cancelled, the `image` parameter will be NULL and the `error` parameter will describe what went wrong.  For cancelled images, the returned error will be AVErrorOperationCancelled.
+// Generates an image asynchronously for a requested time, and returns the result in a callback.
 func (o *AVAssetImageGenerator) GenerateCGImageAsynchronouslyForTimeCompletionHandler(requestedTime coremedia.CMTime, handler objc.Block) {
 	o.Ptr().Send(_aVAssetImageGeneratorSelGenerateCGImageAsynchronouslyForTimeCompletionHandler, requestedTime, handler)
 }
 
-// @method			cancelAllCGImageGeneration @abstract		Cancels all outstanding image generation requests. @discussion		Calls the handler block with AVAssetImageGeneratorCancelled for each image time in every previous invocation of -generateCGImagesAsynchronouslyForTimes:completionHandler: for which images have not yet been supplied.
+// Cancels all pending image generation requests.
 func (o *AVAssetImageGenerator) CancelAllCGImageGeneration() {
 	o.Ptr().Send(_aVAssetImageGeneratorSelCancelAllCGImageGeneration)
 }

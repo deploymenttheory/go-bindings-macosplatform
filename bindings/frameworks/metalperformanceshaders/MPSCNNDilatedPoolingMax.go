@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A dilated max pooling filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnndilatedpoolingmax
 type MPSCNNDilatedPoolingMax struct {
 	mpsneuralnetwork.MPSCNNPooling
@@ -35,7 +37,7 @@ func MPSCNNDilatedPoolingMaxFromID(id objc.ID) *MPSCNNDilatedPoolingMax {
 	return o
 }
 
-// @abstract   Initialize a MPSCNNDilatedPoolingMax pooling filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel.  Can be an odd or even value. @param      kernelHeight        The height of the kernel.  Can be an odd or even value. @param      dilationRateX       The dilation rate in the x dimension. @param      dilationRateY       The dilation rate in the y dimension. @param      strideInPixelsX     The output stride (downsampling factor) in the x dimension. @param      strideInPixelsY     The output stride (downsampling factor) in the y dimension. @return     A valid MPSCNNDilatedPoolingMax object or nil, if failure.
+// Initializes a dilated max pooling filter.
 func (o *MPSCNNDilatedPoolingMax) InitWithDeviceKernelWidthKernelHeightDilationRateXDilationRateYStrideInPixelsXStrideInPixelsY(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, dilationRateX uint, dilationRateY uint, strideInPixelsX uint, strideInPixelsY uint) *MPSCNNDilatedPoolingMax {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDilatedPoolingMaxSelInitWithDeviceKernelWidthKernelHeightDilationRateXDilationRateYStrideInPixelsXStrideInPixelsY, device, kernelWidth, kernelHeight, dilationRateX, dilationRateY, strideInPixelsX, strideInPixelsY)
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *MPSCNNDilatedPoolingMax) InitWithDeviceKernelWidthKernelHeightDilationR
 	return MPSCNNDilatedPoolingMaxFromID(_ret)
 }
 
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel.h initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNDilatedPoolingMax @param      device      The MTLDevice on which to make the MPSCNNDilatedPoolingMax @return     A new MPSCNNDilatedPoolingMax object, or nil if failure.
+// Initializes a dilated max pooling filter.
 func (o *MPSCNNDilatedPoolingMax) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNDilatedPoolingMax {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDilatedPoolingMaxSelInitWithCoderDevice, aDecoder.Ptr(), device)
 	if _ret != 0 {

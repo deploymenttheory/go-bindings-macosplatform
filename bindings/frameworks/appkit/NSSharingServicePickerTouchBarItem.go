@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bar item that, along with its delegate, provides a list of objects eligible for sharing.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssharingservicepickertouchbaritem
 type NSSharingServicePickerTouchBarItem struct {
 	NSTouchBarItem

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the catalog media items that match a query.
+//
 // Apple documentation: https://developer.apple.com/documentation/shazamkit/shmatch
 type SHMatch struct {
 	foundation.NSObject

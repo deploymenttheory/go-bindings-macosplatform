@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A symbol effect that applies the Breathe animation to symbol images.
+//
 // SymbolBreatheEffect wraps [raw.NSSymbolBreatheEffect] with a fluent Go API.
 type SymbolBreatheEffect struct {
 	inner *raw.NSSymbolBreatheEffect

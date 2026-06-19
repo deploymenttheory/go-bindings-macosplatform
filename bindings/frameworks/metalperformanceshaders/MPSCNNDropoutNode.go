@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a dropout filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnndropoutnode
 type MPSCNNDropoutNode struct {
 	mpsneuralnetwork.MPSNNFilterNode

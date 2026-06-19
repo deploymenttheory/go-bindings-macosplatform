@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A polygonal path that can be followed by an agent.
+//
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkpath
 type GKPath struct {
 	foundation.NSObject
@@ -45,7 +47,7 @@ func GKPathFromID(id objc.ID) *GKPath {
 	return o
 }
 
-// Creates a path from an array of points @param points an array of points to make a path from @param radius radius of the path to create @param cyclical is the path a cycle that loops back on itself?
+// Creates a path with the specified array of 2D points.
 func GKPathPathWithPointsCountRadiusCyclical(points unsafe.Pointer, count uint, radius float32, cyclical bool) *GKPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKPath), _gKPathSelPathWithPointsCountRadiusCyclical, points, count, radius, cyclical)
 	if _ret != 0 {
@@ -54,6 +56,7 @@ func GKPathPathWithPointsCountRadiusCyclical(points unsafe.Pointer, count uint, 
 	return GKPathFromID(_ret)
 }
 
+// Initializes a path with the specified array of 2D points.
 func (o *GKPath) InitWithPointsCountRadiusCyclical(points unsafe.Pointer, count uint, radius float32, cyclical bool) *GKPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKPathSelInitWithPointsCountRadiusCyclical, points, count, radius, cyclical)
 	if _ret != 0 {
@@ -62,6 +65,7 @@ func (o *GKPath) InitWithPointsCountRadiusCyclical(points unsafe.Pointer, count 
 	return GKPathFromID(_ret)
 }
 
+// Creates a path with the specified array of 3D points.
 func GKPathPathWithFloat3PointsCountRadiusCyclical(points unsafe.Pointer, count uint, radius float32, cyclical bool) *GKPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKPath), _gKPathSelPathWithFloat3PointsCountRadiusCyclical, points, count, radius, cyclical)
 	if _ret != 0 {
@@ -70,6 +74,7 @@ func GKPathPathWithFloat3PointsCountRadiusCyclical(points unsafe.Pointer, count 
 	return GKPathFromID(_ret)
 }
 
+// Initializes a path with the specified array of 3D points.
 func (o *GKPath) InitWithFloat3PointsCountRadiusCyclical(points unsafe.Pointer, count uint, radius float32, cyclical bool) *GKPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKPathSelInitWithFloat3PointsCountRadiusCyclical, points, count, radius, cyclical)
 	if _ret != 0 {
@@ -78,7 +83,7 @@ func (o *GKPath) InitWithFloat3PointsCountRadiusCyclical(points unsafe.Pointer, 
 	return GKPathFromID(_ret)
 }
 
-// Creates a path from an array of graph nodes (often a result of pathfinding) Accepts GKGraphNode2D and GKGraphNode3D Cyclical is set to NO @param graphNodes an array of graph nodes to make a path from @param radius radius of the path to create @see GKGraphNode
+// Creates a path using the positions of the specified graph nodes.
 func GKPathPathWithGraphNodesRadius(graphNodes *foundation.NSArray[*GKGraphNode], radius float32) *GKPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKPath), _gKPathSelPathWithGraphNodesRadius, graphNodes.Ptr(), radius)
 	if _ret != 0 {
@@ -87,6 +92,7 @@ func GKPathPathWithGraphNodesRadius(graphNodes *foundation.NSArray[*GKGraphNode]
 	return GKPathFromID(_ret)
 }
 
+// Initializes a path using the positions of the specified graph nodes.
 func (o *GKPath) InitWithGraphNodesRadius(graphNodes *foundation.NSArray[*GKGraphNode], radius float32) *GKPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKPathSelInitWithGraphNodesRadius, graphNodes.Ptr(), radius)
 	if _ret != 0 {
@@ -95,17 +101,20 @@ func (o *GKPath) InitWithGraphNodesRadius(graphNodes *foundation.NSArray[*GKGrap
 	return GKPathFromID(_ret)
 }
 
+// Returns the 2D point at the specified index in the path’s list of vertices.
 // Deprecated: since macOS 10.12.
 func (o *GKPath) PointAtIndex(index uint) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _gKPathSelPointAtIndex, index)
 	return _ret
 }
 
+// Returns the 2D point at the specified index in the path’s list of vertices.
 func (o *GKPath) Float2AtIndex(index uint) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _gKPathSelFloat2AtIndex, index)
 	return _ret
 }
 
+// Returns the 3D point at the specified index in the path’s list of vertices.
 func (o *GKPath) Float3AtIndex(index uint) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _gKPathSelFloat3AtIndex, index)
 	return _ret

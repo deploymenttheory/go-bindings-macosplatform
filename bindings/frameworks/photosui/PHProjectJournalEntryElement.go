@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An element that represents a journal entry within project section content.
+//
 // Apple documentation: https://developer.apple.com/documentation/photosui/phprojectjournalentryelement
 type PHProjectJournalEntryElement struct {
 	PHProjectElement

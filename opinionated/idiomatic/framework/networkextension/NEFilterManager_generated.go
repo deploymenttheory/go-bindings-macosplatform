@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object to create and manage a content filter’s configuration.
+//
 // NEFilterManager wraps [raw.NEFilterManager] with a fluent Go API.
 type NEFilterManager struct {
 	inner *raw.NEFilterManager
@@ -39,7 +41,7 @@ func NewNEFilterManager() *NEFilterManager {
 	return &NEFilterManager{inner: raw.NEFilterManagerFromID(_id)}
 }
 
-// @property localizedDescription @discussion A string containing a description of the filter.
+// A string containing a description of the filter configuration.
 //
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *NEFilterManager) WithLocalizedDescription(localizedDescription string) *NEFilterManager {
@@ -47,7 +49,7 @@ func (x *NEFilterManager) WithLocalizedDescription(localizedDescription string) 
 	return x
 }
 
-// @property providerConfiguration @discussion An NEFilterProviderConfiguration object containing the provider-specific portion of the filter configuration.
+// A NEFilterProviderConfiguration object containing the filter configuration settings.
 //
 // WithProviderConfiguration sets the providerConfiguration property and returns the receiver for chaining.
 func (x *NEFilterManager) WithProviderConfiguration(providerConfiguration *NEFilterProviderConfiguration) *NEFilterManager {
@@ -55,7 +57,7 @@ func (x *NEFilterManager) WithProviderConfiguration(providerConfiguration *NEFil
 	return x
 }
 
-// @property enabled @discussion Toggles the enabled status of the filter. On iOS, setting this property will disable filter configurations of other apps, and this property will be set to NO when other filter configurations are enabled. On macOS, up to 4 filter configurations of the same grade can be enabled simultaneously.
+// A Boolean used to toggle the enabled state of the filter.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *NEFilterManager) WithEnabled(enabled bool) *NEFilterManager {
@@ -63,7 +65,7 @@ func (x *NEFilterManager) WithEnabled(enabled bool) *NEFilterManager {
 	return x
 }
 
-// @property grade @discussion The grade of the filter. The default grade is NEFilterManagerGradeFirewall.
+// The grade of the filter, which determines when it acts relative to other filters.
 //
 // WithGrade sets the grade property and returns the receiver for chaining.
 func (x *NEFilterManager) WithGrade(grade NEFilterManagerGrade) *NEFilterManager {
@@ -79,7 +81,7 @@ func (x *NEFilterManager) WithDisableEncryptedDNSSettings(disableEncryptedDNSSet
 	return x
 }
 
-// @method loadFromPreferencesWithCompletionHandler: @discussion This function loads the current filter configuration from the caller's filter preferences. @param completionHandler A block that will be called when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+// Load the filter configuration from the Network Extension preferences.
 //
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEFilterManager) LoadFromPreferences(ctx context.Context) error {
@@ -99,7 +101,7 @@ func (x *NEFilterManager) LoadFromPreferences(ctx context.Context) error {
 	}
 }
 
-// @method removeFromPreferencesWithCompletionHandler: @discussion This function removes the filter configuration from the caller's filter preferences. If the filter is enabled, the filter becomes disabled. @param completionHandler A block that will be called when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
+// Remove the filter configuration from the Network Extension preferences.
 //
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEFilterManager) RemoveFromPreferences(ctx context.Context) error {
@@ -119,7 +121,7 @@ func (x *NEFilterManager) RemoveFromPreferences(ctx context.Context) error {
 	}
 }
 
-// @method saveToPreferencesWithCompletionHandler: @discussion This function saves the filter configuration in the caller's filter preferences. If the filter is enabled, it will become active. @param completionHandler A block that will be called when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
+// Save the filter configuration in the Network Extension preferences.
 //
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEFilterManager) SaveToPreferences(ctx context.Context) error {

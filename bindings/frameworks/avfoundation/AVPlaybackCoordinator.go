@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that coordinates the playback of players in a connected group.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplaybackcoordinator
 type AVPlaybackCoordinator struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func AVPlaybackCoordinatorFromID(id objc.ID) *AVPlaybackCoordinator {
 	return o
 }
 
-// Informs the coordinator that its playback object is detached from the group for some reason and should not receive any playback commands from the coordinator. Use this to tell the coordinator that its player cannot, or should not, participate in coordinated playback temporarily. The coordinator will not respond to playback commands coming from the group and it will also not send any commands to the group. To resume in group playback, end a suspension by calling one of the suspension's end methods. - Parameter suspensionReason: Indicates the reason for the suspension that is shared with other participants. Can be a system-defined reason (see AVCoordinatedPlaybackSuspensionReason*) or a custom string. - NOTE: See the description of AVPlaybackCoordinator subclasses for suspensions automatically begun on behalf of their playback objects, if any.
+// Tells the coordinator to stop sending playback commands temporarily when the playback object disconnects from the group activity.
 func (o *AVPlaybackCoordinator) BeginSuspensionForReason(suspensionReason *foundation.NSString) *AVCoordinatedPlaybackSuspension {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlaybackCoordinatorSelBeginSuspensionForReason, suspensionReason.Ptr())
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func (o *AVPlaybackCoordinator) BeginSuspensionForReason(suspensionReason *found
 	return AVCoordinatedPlaybackSuspensionFromID(_ret)
 }
 
-// Returns the item time (for the current item) that the coordinator expects to be playing at a given host clock time. This method is useful to decide if it is appropriate to end a suspension, e.g. a suspension with AVCoordinatedPlaybackSuspensionReasonStallRecovery, while other participants are continuing playback.
+// Returns a time in the current item’s timeline that the coordinator expects to play at the specified host time.
 func (o *AVPlaybackCoordinator) ExpectedItemTimeAtHostTime(hostClockTime coremedia.CMTime) coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVPlaybackCoordinatorSelExpectedItemTimeAtHostTime, hostClockTime)
 	return _ret
@@ -66,16 +68,19 @@ func (o *AVPlaybackCoordinator) OtherParticipants() *foundation.NSArray[*AVCoord
 
 // Describes why the coordinator is currently not able to participate in group playback. If the list of reasons is non-empty, the coordinator will not react to any changes of group playback state.
 func (o *AVPlaybackCoordinator) SuspensionReasons() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVPlaybackCoordinatorSelSuspensionReasons)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlaybackCoordinatorSelSuspensionReasons)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
-// Sets the amount of participants that can join a group before the coordinator stops waiting for this particular suspension reason. This allows additional configuration for suspension reasons in the suspensionReasonsThatTriggerWaiting array. When the coordinator decides whether one participant's suspensions should cause others to wait, it will also consider this limit of participants currently in the group.
+// Sets a limit on the number of partipants that a group may contain before the coordinator stops waiting on suspensions that occur for a particular reason.
 func (o *AVPlaybackCoordinator) SetParticipantLimitForWaitingOutSuspensionsWithReason(participantLimit int, reason *foundation.NSString) {
 	o.Ptr().Send(_aVPlaybackCoordinatorSelSetParticipantLimitForWaitingOutSuspensionsWithReason, participantLimit, reason.Ptr())
 }
 
-// Returns the maximum number of participants that can be in a group before the coordinator stops waiting out this particular suspensions reason. Default value is NSIntegerMax.
+// Returns the limit on the number of partipants that a group may contain before the coordinator stops waiting on suspensions that occur for a particular reason.
 func (o *AVPlaybackCoordinator) ParticipantLimitForWaitingOutSuspensionsWithReason(reason *foundation.NSString) int {
 	_ret := objc.Send[int](o.Ptr(), _aVPlaybackCoordinatorSelParticipantLimitForWaitingOutSuspensionsWithReason, reason.Ptr())
 	return _ret
@@ -83,12 +88,15 @@ func (o *AVPlaybackCoordinator) ParticipantLimitForWaitingOutSuspensionsWithReas
 
 // If the coordinator decides to delay playback to wait for others, it will wait out these reasons, but not others.
 func (o *AVPlaybackCoordinator) SuspensionReasonsThatTriggerWaiting() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVPlaybackCoordinatorSelSuspensionReasonsThatTriggerWaiting)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlaybackCoordinatorSelSuspensionReasonsThatTriggerWaiting)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *AVPlaybackCoordinator) SetSuspensionReasonsThatTriggerWaiting(suspensionReasonsThatTriggerWaiting *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_aVPlaybackCoordinatorSelSetSuspensionReasonsThatTriggerWaiting, suspensionReasonsThatTriggerWaiting)
+	o.Ptr().Send(_aVPlaybackCoordinatorSelSetSuspensionReasonsThatTriggerWaiting, suspensionReasonsThatTriggerWaiting.Ptr())
 }
 
 // Determines if participants should mirror the originator's stop time when pausing. If YES, all participants will seek to the originator's stop time after they pause. Use this if it is desirable to counteract any network delay incurred by communicating the originator's pause to the other participants. If NO, it's acceptable for participants to stop at slightly different offsets and a pause will not cause other participants' time to jump back.

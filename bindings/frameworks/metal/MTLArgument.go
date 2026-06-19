@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about an argument of a graphics or compute function.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlargument
 // Deprecated: since macOS 13.0.
 type MTLArgument struct {

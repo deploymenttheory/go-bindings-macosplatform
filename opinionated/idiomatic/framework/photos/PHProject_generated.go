@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a Photos app project extension.
+//
 // Project wraps [raw.PHProject] with a fluent Go API.
 type Project struct {
 	inner *raw.PHProject

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages an array of adjacent child views, and has a split view object for managing dividers between those views.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssplitviewcontroller
 type NSSplitViewController struct {
 	NSViewController
@@ -48,22 +50,22 @@ func NSSplitViewControllerFromID(id objc.ID) *NSSplitViewController {
 	return o
 }
 
-// Adds a SplitViewItem to the end of the SplitViewController. If the receiver's view is loaded and the SplitViewItem is not collapsed, the SplitViewItem's viewController's view will be loaded and added to the splitView. This calls through to -insertSplitViewItem:atIndex:. \param splitViewItem The SplitViewItem to add. It must have a viewController set by the time it is added or an exception will be thrown. An exception will also be thrown if splitViewItem is nil.
+// Adds a split view item to the end of the array of split view items.
 func (o *NSSplitViewController) AddSplitViewItem(splitViewItem *NSSplitViewItem) {
 	o.Ptr().Send(_nSSplitViewControllerSelAddSplitViewItem, splitViewItem.Ptr())
 }
 
-// Adds a SplitViewItem to a given index in the SplitViewController. If the receiver's view is loaded and the SplitViewItem is not collapsed, the SplitViewItem's viewController's view will be loaded and added to the \c splitView. Subclasses must call through \c -insertSplitViewItem:atIndex: to add a SplitViewItem. \param splitViewItem The SplitViewItem to add. It must have a \c viewController set by the time it is added or an exception will be thrown. An exception will also be thrown if splitViewItem is nil. \param index The index to add the SplitViewItem at. Will throw an exception if \c index < 0 or \c index > \c splitViewItems.count
+// Adds a split view item to the array of split view items at the specified index position.
 func (o *NSSplitViewController) InsertSplitViewItemAtIndex(splitViewItem *NSSplitViewItem, index int) {
 	o.Ptr().Send(_nSSplitViewControllerSelInsertSplitViewItemAtIndex, splitViewItem.Ptr(), index)
 }
 
-// Removes a SplitViewItem from the receiver. The layout of the \c splitView will be adjusted for its removal. Subclasses must call through \c -removeSplitViewItem: to remove a SplitViewItem. \param splitViewItem The SplitViewItem to remove. An exception will be thrown if \c splitViewItem is not in the SplitViewController or if it is nil.
+// Removes a specified split view item from the split view controller.
 func (o *NSSplitViewController) RemoveSplitViewItem(splitViewItem *NSSplitViewItem) {
 	o.Ptr().Send(_nSSplitViewControllerSelRemoveSplitViewItem, splitViewItem.Ptr())
 }
 
-// Returns the corresponding SplitViewItem for a given child ViewController. \param viewController The ViewController to look up. \return The corresponding SplitViewItem. Returns nil if \c viewController is not a child of the SplitViewController.
+// Returns the corresponding split view item for the specified child view controller of the split view controller.
 func (o *NSSplitViewController) SplitViewItemForViewController(viewController *NSViewController) *NSSplitViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewControllerSelSplitViewItemForViewController, viewController.Ptr())
 	if _ret != 0 {
@@ -146,12 +148,12 @@ func (o *NSSplitViewController) SetMinimumThicknessForInlineSidebars(minimumThic
 	o.Ptr().Send(_nSSplitViewControllerSelSetMinimumThicknessForInlineSidebars, minimumThicknessForInlineSidebars)
 }
 
-// Collapses or expands the first sidebar in the split view controller using an animation. If the split view controller doesn't contain a sidebar, calling this method does nothing.
+// Collapses or expands the first sidebar in the split view controller using an animation.
 func (o *NSSplitViewController) ToggleSidebar(sender objc.ID) {
 	o.Ptr().Send(_nSSplitViewControllerSelToggleSidebar, sender)
 }
 
-// Collapses or expands the first inspector in the split view controller using an animation. If the split view controller doesn't contain an inspector, calling this method does nothing.
+// Collapses or expands the first inspector in the split view controller using an animation.
 func (o *NSSplitViewController) ToggleInspector(sender objc.ID) {
 	o.Ptr().Send(_nSSplitViewControllerSelToggleInspector, sender)
 }

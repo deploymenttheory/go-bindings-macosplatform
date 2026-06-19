@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// An option that determines the icon for the device in the picker UI.
 type DDDeviceCategory int64
 
 const (
@@ -41,6 +42,7 @@ func (e DDDeviceCategory) String() string {
 	}
 }
 
+// States that indicate the status of a device’s media playback.
 type DDDeviceMediaPlaybackState int64
 
 const (
@@ -62,6 +64,7 @@ func (e DDDeviceMediaPlaybackState) String() string {
 	}
 }
 
+// An identifier for the manner in which an app interacts with a device.
 type DDDeviceProtocol int64
 
 const (
@@ -80,13 +83,19 @@ func (e DDDeviceProtocol) String() string {
 	}
 }
 
+// A state that represents the level of user interaction with the device.
 type DDDeviceState int64
 
 const (
-	DDDeviceStateInvalid      DDDeviceState = 0
-	DDDeviceStateActivating   DDDeviceState = 10
-	DDDeviceStateActivated    DDDeviceState = 20
-	DDDeviceStateAuthorized   DDDeviceState = 25
+	// A state that indicates the device is invalid or that the user disapproves of the device.
+	DDDeviceStateInvalid DDDeviceState = 0
+	// A state that indicates when the user selects the device in the picker UI.
+	DDDeviceStateActivating DDDeviceState = 10
+	// A state that indicates when the user authorizes the device and the app connects to the device.
+	DDDeviceStateActivated DDDeviceState = 20
+	// A state that indicates when the user authorizes the device.
+	DDDeviceStateAuthorized DDDeviceState = 25
+	// A state that indicates that the device is soon to be invalid.
 	DDDeviceStateInvalidating DDDeviceState = 30
 )
 
@@ -112,7 +121,8 @@ type DDDeviceSupports uint64
 const (
 	DDDeviceSupportsBluetoothPairingLE         DDDeviceSupports = 2
 	DDDeviceSupportsBluetoothTransportBridging DDDeviceSupports = 4
-	DDDeviceSupportsBluetoothHID               DDDeviceSupports = 8
+	// Device supports bring up of classic transport profiles when low energy transport for peripheral is connected.
+	DDDeviceSupportsBluetoothHID DDDeviceSupports = 8
 )
 
 func (e DDDeviceSupports) String() string {
@@ -150,6 +160,7 @@ func (e DDDeviceWiFiAwareServiceRole) String() string {
 	}
 }
 
+// Codes that identify errors that can occur during the framework’s use.
 type DDErrorCode int64
 
 const (
@@ -189,6 +200,7 @@ func (e DDErrorCode) String() string {
 	}
 }
 
+// Identifiers for the types of events that occur in the device discovery life cycle.
 type DDEventType int64
 
 const (

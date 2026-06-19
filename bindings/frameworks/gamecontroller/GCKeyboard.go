@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a physical keyboard connected to a device.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gckeyboard
 type GCKeyboard struct {
 	foundation.NSObject

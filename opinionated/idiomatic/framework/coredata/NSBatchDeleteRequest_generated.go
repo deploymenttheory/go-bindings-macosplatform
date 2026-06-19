@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A request that deletes objects in the SQLite persistent store without loading them into memory.
+//
 // BatchDeleteRequest wraps [raw.NSBatchDeleteRequest] with a fluent Go API.
 type BatchDeleteRequest struct {
 	inner *raw.NSBatchDeleteRequest
@@ -31,6 +33,8 @@ func BatchDeleteRequestFromID(id objc.ID) *BatchDeleteRequest {
 	return &BatchDeleteRequest{inner: raw.NSBatchDeleteRequestFromID(id)}
 }
 
+// Creates a request that deletes the results of the specified fetch request.
+//
 // NewBatchDeleteRequestWithFetchRequest creates a new [BatchDeleteRequest].
 func NewBatchDeleteRequestWithFetchRequest(fetch *raw.NSFetchRequest[objc.ID]) *BatchDeleteRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBatchDeleteRequest")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewBatchDeleteRequestWithFetchRequest(fetch *raw.NSFetchRequest[objc.ID]) *
 	return &BatchDeleteRequest{inner: raw.NSBatchDeleteRequestFromID(_id)}
 }
 
+// Creates a request that deletes the managed objects with the specified identifiers.
+//
 // NewBatchDeleteRequestWithObjectIDs creates a new [BatchDeleteRequest].
 func NewBatchDeleteRequestWithObjectIDs(objects *foundation.NSArray[*raw.NSManagedObjectID]) *BatchDeleteRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBatchDeleteRequest")), objc.RegisterName("alloc"))
@@ -45,12 +51,16 @@ func NewBatchDeleteRequestWithObjectIDs(objects *foundation.NSArray[*raw.NSManag
 	return &BatchDeleteRequest{inner: raw.NSBatchDeleteRequestFromID(_id)}
 }
 
+// The type of result the request provides when it executes.
+//
 // WithResultType sets the resultType property and returns the receiver for chaining.
 func (x *BatchDeleteRequest) WithResultType(resultType NSBatchDeleteRequestResultType) *BatchDeleteRequest {
 	x.inner.SetResultType(raw.NSBatchDeleteRequestResultType(resultType))
 	return x
 }
 
+// The stores the request should be sent to.
+//
 // WithAffectedStores sets the collection, converting the Go slice to an NSArray.
 func (x *BatchDeleteRequest) WithAffectedStores(items ...PersistentStoreProvider) *BatchDeleteRequest {
 	if len(items) == 0 {

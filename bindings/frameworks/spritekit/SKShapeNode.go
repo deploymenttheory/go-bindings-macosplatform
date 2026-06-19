@@ -14,7 +14,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A SpriteKit Node used to stroke or fill a shape. CGPaths are used to supply the path. See CGPath <a href="http://developer.apple.com/library/mac/#documentation/GraphicsImaging/Reference/CGPath/Reference/reference.html">reference pages</a> for details on how to construct a CGPath.
+// A mathematical shape that can be stroked or filled.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skshapenode
 type SKShapeNode struct {
@@ -75,6 +75,7 @@ func SKShapeNodeFromID(id objc.ID) *SKShapeNode {
 	return o
 }
 
+// Creates a shape node from a Core Graphics path.
 func SKShapeNodeShapeNodeWithPath(path unsafe.Pointer) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithPath, path)
 	if _ret != 0 {
@@ -83,6 +84,7 @@ func SKShapeNodeShapeNodeWithPath(path unsafe.Pointer) *SKShapeNode {
 	return SKShapeNodeFromID(_ret)
 }
 
+// Creates a shape node from a Core Graphics path, centered around its position.
 func SKShapeNodeShapeNodeWithPathCentered(path unsafe.Pointer, centered bool) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithPathCentered, path, centered)
 	if _ret != 0 {
@@ -91,6 +93,7 @@ func SKShapeNodeShapeNodeWithPathCentered(path unsafe.Pointer, centered bool) *S
 	return SKShapeNodeFromID(_ret)
 }
 
+// Creates a shape node with a rectangular path.
 func SKShapeNodeShapeNodeWithRect(rect corefoundation.CGRect) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRect, rect)
 	if _ret != 0 {
@@ -99,6 +102,7 @@ func SKShapeNodeShapeNodeWithRect(rect corefoundation.CGRect) *SKShapeNode {
 	return SKShapeNodeFromID(_ret)
 }
 
+// Creates a shape node with a rectangular path centered on the node’s origin.
 func SKShapeNodeShapeNodeWithRectOfSize(size corefoundation.CGSize) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRectOfSize, size)
 	if _ret != 0 {
@@ -107,6 +111,7 @@ func SKShapeNodeShapeNodeWithRectOfSize(size corefoundation.CGSize) *SKShapeNode
 	return SKShapeNodeFromID(_ret)
 }
 
+// Creates a shape with a rectangular path that has rounded corners.
 func SKShapeNodeShapeNodeWithRectCornerRadius(rect corefoundation.CGRect, cornerRadius float64) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRectCornerRadius, rect, cornerRadius)
 	if _ret != 0 {
@@ -115,6 +120,7 @@ func SKShapeNodeShapeNodeWithRectCornerRadius(rect corefoundation.CGRect, corner
 	return SKShapeNodeFromID(_ret)
 }
 
+// Creates a shape with a rectangular path that has rounded corners centered on the node’s position.
 func SKShapeNodeShapeNodeWithRectOfSizeCornerRadius(size corefoundation.CGSize, cornerRadius float64) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRectOfSizeCornerRadius, size, cornerRadius)
 	if _ret != 0 {
@@ -123,6 +129,7 @@ func SKShapeNodeShapeNodeWithRectOfSizeCornerRadius(size corefoundation.CGSize, 
 	return SKShapeNodeFromID(_ret)
 }
 
+// Creates a shape node with a circular path centered on the node’s origin.
 func SKShapeNodeShapeNodeWithCircleOfRadius(radius float64) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithCircleOfRadius, radius)
 	if _ret != 0 {
@@ -131,6 +138,7 @@ func SKShapeNodeShapeNodeWithCircleOfRadius(radius float64) *SKShapeNode {
 	return SKShapeNodeFromID(_ret)
 }
 
+// Creates a shape node with an elliptical path that fills the specified rectangle.
 func SKShapeNodeShapeNodeWithEllipseInRect(rect corefoundation.CGRect) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithEllipseInRect, rect)
 	if _ret != 0 {
@@ -139,6 +147,7 @@ func SKShapeNodeShapeNodeWithEllipseInRect(rect corefoundation.CGRect) *SKShapeN
 	return SKShapeNodeFromID(_ret)
 }
 
+// Creates a shape node with an elliptical path centered on the node’s origin.
 func SKShapeNodeShapeNodeWithEllipseOfSize(size corefoundation.CGSize) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithEllipseOfSize, size)
 	if _ret != 0 {
@@ -147,6 +156,7 @@ func SKShapeNodeShapeNodeWithEllipseOfSize(size corefoundation.CGSize) *SKShapeN
 	return SKShapeNodeFromID(_ret)
 }
 
+// Creates a shape node from a series of points.
 func SKShapeNodeShapeNodeWithPointsCount(points *corefoundation.CGPoint, numPoints uint) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithPointsCount, points, numPoints)
 	if _ret != 0 {
@@ -155,6 +165,7 @@ func SKShapeNodeShapeNodeWithPointsCount(points *corefoundation.CGPoint, numPoin
 	return SKShapeNodeFromID(_ret)
 }
 
+// Creates a shape node from a series of spline points.
 func SKShapeNodeShapeNodeWithSplinePointsCount(points *corefoundation.CGPoint, numPoints uint) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithSplinePointsCount, points, numPoints)
 	if _ret != 0 {

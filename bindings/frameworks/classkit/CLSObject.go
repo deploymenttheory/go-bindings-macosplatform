@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract base class for objects managed by ClassKit.
+//
 // Apple documentation: https://developer.apple.com/documentation/classkit/clsobject
 type CLSObject struct {
 	foundation.NSObject

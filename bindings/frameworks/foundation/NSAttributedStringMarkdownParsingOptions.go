@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Options that affect the parsing of Markdown content into an attributed string.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsattributedstringmarkdownparsingoptions
 type NSAttributedStringMarkdownParsingOptions struct {
 	NSObject
@@ -39,6 +41,7 @@ func NSAttributedStringMarkdownParsingOptionsFromID(id objc.ID) *NSAttributedStr
 	return o
 }
 
+// Creates a Markdown parsing options instance with the specified values.
 func (o *NSAttributedStringMarkdownParsingOptions) Init() *NSAttributedStringMarkdownParsingOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringMarkdownParsingOptionsSelInit)
 	if _ret != 0 {

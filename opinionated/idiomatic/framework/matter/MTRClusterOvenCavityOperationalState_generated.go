@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Oven Cavity Operational State This cluster supports remotely monitoring and, where supported, changing the operational state of an Oven.
+//
 // MTRClusterOvenCavityOperationalState wraps [raw.MTRClusterOvenCavityOperationalState] with a fluent Go API.
 type MTRClusterOvenCavityOperationalState struct {
 	inner *raw.MTRClusterOvenCavityOperationalState

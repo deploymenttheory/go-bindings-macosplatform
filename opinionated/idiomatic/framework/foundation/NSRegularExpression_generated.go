@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An immutable representation of a compiled regular expression that you apply to Unicode strings.
+//
 // RegularExpression wraps [raw.NSRegularExpression] with a fluent Go API.
 type RegularExpression struct {
 	inner *raw.NSRegularExpression
@@ -32,6 +34,8 @@ func RegularExpressionFromID(id objc.ID) *RegularExpression {
 	return &RegularExpression{inner: raw.NSRegularExpressionFromID(id)}
 }
 
+// Returns an initialized NSRegularExpression instance with the specified regular expression pattern and options.
+//
 // NewRegularExpressionWithPatternOptionsError creates a new [RegularExpression].
 func NewRegularExpressionWithPatternOptionsError(pattern string, options NSRegularExpressionOptions) (*RegularExpression, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRegularExpression")), objc.RegisterName("alloc"))
@@ -68,6 +72,8 @@ func (x *RegularExpression) NumberOfCaptureGroups() uint {
 	return x.inner.NumberOfCaptureGroups()
 }
 
+// Enumerates the string allowing the Block to handle each regular expression match.
+//
 // EnumerateMatchesInStringOptionsRangeUsing calls the underlying EnumerateMatchesInStringOptionsRangeUsing.
 func (x *RegularExpression) EnumerateMatchesInStringOptionsRangeUsing(string_ string, options NSMatchingOptions, range_ raw.NSRange, block func(*raw.NSTextCheckingResult, NSMatchingFlags, *bool)) {
 	x.inner.EnumerateMatchesInStringOptionsRangeUsing(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_, func(_a0 *raw.NSTextCheckingResult, _a1 raw.NSMatchingFlags, _a2 *bool) {
@@ -75,16 +81,22 @@ func (x *RegularExpression) EnumerateMatchesInStringOptionsRangeUsing(string_ st
 	})
 }
 
+// Returns an array containing all the matches of the regular expression in the string.
+//
 // MatchesInStringOptionsRange calls the underlying MatchesInStringOptionsRange.
 func (x *RegularExpression) MatchesInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) *raw.NSArray[*raw.NSTextCheckingResult] {
 	return x.inner.MatchesInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_)
 }
 
+// Returns the number of matches of the regular expression within the specified range of the string.
+//
 // NumberOfMatchesInStringOptionsRange calls the underlying NumberOfMatchesInStringOptionsRange.
 func (x *RegularExpression) NumberOfMatchesInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) uint {
 	return x.inner.NumberOfMatchesInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_)
 }
 
+// Returns the first match of the regular expression within the specified range of the string.
+//
 // FirstMatchInStringOptionsRange calls the underlying FirstMatchInStringOptionsRange.
 func (x *RegularExpression) FirstMatchInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) *TextCheckingResult {
 	_r := x.inner.FirstMatchInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_)
@@ -94,11 +106,15 @@ func (x *RegularExpression) FirstMatchInStringOptionsRange(string_ string, optio
 	return &TextCheckingResult{inner: _r}
 }
 
+// Returns the range of the first match of the regular expression within the specified range of the string.
+//
 // RangeOfFirstMatchInStringOptionsRange calls the underlying RangeOfFirstMatchInStringOptionsRange.
 func (x *RegularExpression) RangeOfFirstMatchInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) raw.NSRange {
 	return x.inner.RangeOfFirstMatchInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_)
 }
 
+// Returns a new string containing matching regular expressions replaced with the template string.
+//
 // StringByReplacingMatchesInStringOptionsRangeWithTemplate calls the underlying StringByReplacingMatchesInStringOptionsRangeWithTemplate.
 func (x *RegularExpression) StringByReplacingMatchesInStringOptionsRangeWithTemplate(string_ string, options NSMatchingOptions, range_ raw.NSRange, templ string) *String {
 	_r := x.inner.StringByReplacingMatchesInStringOptionsRangeWithTemplate(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_, foundation.NSStringStringWithUTF8String(templ))
@@ -108,11 +124,15 @@ func (x *RegularExpression) StringByReplacingMatchesInStringOptionsRangeWithTemp
 	return &String{inner: _r}
 }
 
+// Replaces regular expression matches within the mutable string using the template string.
+//
 // ReplaceMatchesInStringOptionsRangeWithTemplate calls the underlying ReplaceMatchesInStringOptionsRangeWithTemplate.
 func (x *RegularExpression) ReplaceMatchesInStringOptionsRangeWithTemplate(string_ *raw.NSMutableString, options NSMatchingOptions, range_ raw.NSRange, templ string) uint {
 	return x.inner.ReplaceMatchesInStringOptionsRangeWithTemplate(string_, raw.NSMatchingOptions(options), range_, foundation.NSStringStringWithUTF8String(templ))
 }
 
+// Used to perform template substitution for a single result for clients implementing their own replace functionality.
+//
 // ReplacementStringForResultInStringOffsetTemplate calls the underlying ReplacementStringForResultInStringOffsetTemplate.
 func (x *RegularExpression) ReplacementStringForResultInStringOffsetTemplate(result *raw.NSTextCheckingResult, string_ string, offset int, templ string) *String {
 	_r := x.inner.ReplacementStringForResultInStringOffsetTemplate(result, foundation.NSStringStringWithUTF8String(string_), offset, foundation.NSStringStringWithUTF8String(templ))

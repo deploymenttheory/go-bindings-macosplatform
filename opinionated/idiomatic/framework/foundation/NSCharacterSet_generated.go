@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing a fixed set of Unicode character values for use in search operations.
+//
 // CharacterSet wraps [raw.NSCharacterSet] with a fluent Go API.
 type CharacterSet struct {
 	inner *raw.NSCharacterSet
@@ -42,21 +44,29 @@ func (x *CharacterSet) WithScriptingProperties(scriptingProperties *raw.NSDictio
 	return x
 }
 
+// Returns a Boolean value that indicates whether a given character is in the receiver.
+//
 // CharacterIsMember calls the underlying CharacterIsMember.
 func (x *CharacterSet) CharacterIsMember(aCharacter uint16) bool {
 	return x.inner.CharacterIsMember(aCharacter)
 }
 
+// Returns a Boolean value that indicates whether a given long character is a member of the receiver.
+//
 // LongCharacterIsMember calls the underlying LongCharacterIsMember.
 func (x *CharacterSet) LongCharacterIsMember(theLongChar uint) bool {
 	return x.inner.LongCharacterIsMember(theLongChar)
 }
 
+// Returns a Boolean value that indicates whether the receiver is a superset of another given character set.
+//
 // IsSupersetOfSet calls the underlying IsSupersetOfSet.
 func (x *CharacterSet) IsSupersetOfSet(theOtherSet *raw.NSCharacterSet) bool {
 	return x.inner.IsSupersetOfSet(theOtherSet)
 }
 
+// Returns a Boolean value that indicates whether the receiver has at least one member in a given character plane.
+//
 // HasMemberInPlane calls the underlying HasMemberInPlane.
 func (x *CharacterSet) HasMemberInPlane(thePlane uint8) bool {
 	return x.inner.HasMemberInPlane(thePlane)

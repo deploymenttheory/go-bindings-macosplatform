@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A matrix multiplication kernel.
+//
 // MatrixMultiplication wraps [raw.MPSMatrixMultiplication] with a fluent Go API.
 type MatrixMultiplication struct {
 	inner *raw.MPSMatrixMultiplication
@@ -32,7 +34,7 @@ func MatrixMultiplicationFromID(id objc.ID) *MatrixMultiplication {
 	return &MatrixMultiplication{inner: raw.MPSMatrixMultiplicationFromID(id)}
 }
 
-// @abstract   Initialize an MPSMatrixMultiplication object on a device for a given size and desired transpose and scale values. @param      device          The device on which the kernel will execute. @param      transposeLeft   A boolean value which indicates if the left input matrix should be used in transposed form.  If 'YES' then op(A) = A**T, otherwise op(A) = A. @param      transposeRight  A boolean value which indicates if the right input matrix should be used in transposed form.  If 'YES' then op(B) = B**T, otherwise op(B) = B. @param      resultRows      The number of rows in the result matrix, M in BLAS GEMM description. @param      resultColumns   The number of columns in the result matrix, N in BLAS GEMM description. @param      interiorColumns The number of columns of the left input matrix after the appropriate transpose operation has been applied. K in BLAS GEMM description. @param      alpha           The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. @param      beta            The scale factor to apply to the initial values of C.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. @return     A valid MPSMatrixMultiplication object or nil, if failure.
+// Initializes a matrix multiplication kernel.
 //
 // NewMatrixMultiplicationWithDeviceTransposeLeftTransposeRightResultRowsResultColumnsInteriorColumnsAlphaBeta creates a new [MatrixMultiplication].
 func NewMatrixMultiplicationWithDeviceTransposeLeftTransposeRightResultRowsResultColumnsInteriorColumnsAlphaBeta(device metal.MTLDevice, transposeLeft bool, transposeRight bool, resultRows uint, resultColumns uint, interiorColumns uint, alpha float64, beta float64) *MatrixMultiplication {
@@ -50,7 +52,7 @@ func NewMatrixMultiplicationWithDeviceResultRowsResultColumnsInteriorColumns(dev
 	return &MatrixMultiplication{inner: raw.MPSMatrixMultiplicationFromID(_id)}
 }
 
-// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing (and reading if necessary) results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+// The origin of the result matrix.
 //
 // WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixMultiplication) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixMultiplication {
@@ -58,7 +60,7 @@ func (x *MatrixMultiplication) WithResultMatrixOrigin(resultMatrixOrigin metal.M
 	return x
 }
 
-// @property   leftMatrixOrigin @discussion The origin, relative to [0, 0] in the left input matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+// The origin of the left input matrix.
 //
 // WithLeftMatrixOrigin sets the leftMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixMultiplication) WithLeftMatrixOrigin(leftMatrixOrigin metal.MTLOrigin) *MatrixMultiplication {
@@ -66,7 +68,7 @@ func (x *MatrixMultiplication) WithLeftMatrixOrigin(leftMatrixOrigin metal.MTLOr
 	return x
 }
 
-// @property   rightMatrixOrigin @discussion The origin, relative to [0, 0] in the right input matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+// The origin of the right input matrix.
 //
 // WithRightMatrixOrigin sets the rightMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixMultiplication) WithRightMatrixOrigin(rightMatrixOrigin metal.MTLOrigin) *MatrixMultiplication {
@@ -90,7 +92,7 @@ func (x *MatrixMultiplication) WithBatchSize(batchSize uint) *MatrixMultiplicati
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixMultiplication) WithOptions(options mpscore.MPSKernelOptions) *MatrixMultiplication {
@@ -98,7 +100,7 @@ func (x *MatrixMultiplication) WithOptions(options mpscore.MPSKernelOptions) *Ma
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixMultiplication) WithLabel(label string) *MatrixMultiplication {
@@ -106,7 +108,7 @@ func (x *MatrixMultiplication) WithLabel(label string) *MatrixMultiplication {
 	return x
 }
 
-// @abstract   Encode a MPSMatrixMultiplication object to a command buffer. @param      commandBuffer   A valid MTLCommandBuffer to receive the encoded kernel. @param      leftMatrix      A valid MPSMatrix object which specifies the left input matrix. @param      rightMatrix     A valid MPSMatrix object which specifies the right input matrix. @param      resultMatrix    A valid MPSMatrix object which specifies the addend matrix which will also be overwritten by the result. @discussion Certain constraints apply to the sizes of the matrices depending on the transposition operations and sizes requested at initialization time as well as the origins at the time this routine is called: The left input matrix must be large enough to hold an array of size resultRows x interiorColumns elements beginning at leftMatrixOrigin. The right input matrix must be large enough to hold an array of size interiorColumns x resultColumns elements beginning at rightMatrixOrigin. The result matrix must be large enough to hold an array of size resultRows x resultColumns elements beginning at resultMatrixOrigin. Each matrix within the range specified by batchStart and batchSize, which also specifies a valid set of matrices within leftMatrix, rightMatrix, and resultMatrix, will be processed.
+// Encodes a matrix multiplication kernel to a command buffer.
 //
 // EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix calls the underlying EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix.
 func (x *MatrixMultiplication) EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, leftMatrix *mpscore.MPSMatrix, rightMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix) {

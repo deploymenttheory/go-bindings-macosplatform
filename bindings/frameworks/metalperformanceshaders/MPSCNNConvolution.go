@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A convolution kernel that convolves the input image with a set of filters, with each producing one feature map in the output image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolution
 type MPSCNNConvolution struct {
 	mpsneuralnetwork.MPSCNNKernel
@@ -68,7 +70,7 @@ func (o *MPSCNNConvolution) InitWithDeviceWeights(device metal.MTLDevice, weight
 	return MPSCNNConvolutionFromID(_ret)
 }
 
-// @abstract   Initializes a convolution kernel WARNING:                        This API is depreated and will be removed in the future. It cannot be used when training. Also serialization/unserialization wont work for MPSCNNConvolution objects created with this init. Please move onto using initWithDevice:weights:. @param      device                          The MTLDevice on which this MPSCNNConvolution filter will be used @param      convolutionDescriptor           A pointer to a MPSCNNConvolutionDescriptor. @param      kernelWeights                   A pointer to a weights array.  Each entry is a float value. The number of entries is = inputFeatureChannels * outputFeatureChannels * kernelHeight * kernelWidth The layout of filter weight is so that it can be reinterpreted as 4D tensor (array) weight[ outputChannels ][ kernelHeight ][ kernelWidth ][ inputChannels / groups ] Weights are converted to half float (fp16) internally for best performance. @param      biasTerms                       A pointer to bias terms to be applied to the convolution output.  Each entry is a float value. The number of entries is = numberOfOutputFeatureMaps @param      flags                           Currently unused. Pass MPSCNNConvolutionFlagsNone @return     A valid MPSCNNConvolution object or nil, if failure.
+// Initializes a convolution kernel.
 func (o *MPSCNNConvolution) InitWithDeviceConvolutionDescriptorKernelWeightsBiasTermsFlags(device metal.MTLDevice, convolutionDescriptor *mpsneuralnetwork.MPSCNNConvolutionDescriptor, kernelWeights *float32, biasTerms *float32, flags mpsneuralnetwork.MPSCNNConvolutionFlags) *MPSCNNConvolution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionSelInitWithDeviceConvolutionDescriptorKernelWeightsBiasTermsFlags, device, convolutionDescriptor.Ptr(), kernelWeights, biasTerms, flags)
 	if _ret != 0 {
@@ -88,7 +90,7 @@ func (o *MPSCNNConvolution) InitWithCoderDevice(aDecoder *foundation.NSCoder, de
 
 // @abstract   Allocate a MPCNNConvolutionGradientSState to hold the results from a -encodeBatchToCommandBuffer... operation @param      sourceImage         The MPSImage consumed by the associated -encode call. @param      sourceStates        The list of MPSStates consumed by the associated -encode call, for a batch size of 1. @return     The list of states produced by the -encode call for batch size of 1. -isResultStateReusedAcrossBatch returns YES for MPSCNNConvolution so same state is used across entire batch. State object is not reusasable across batches.
 func (o *MPSCNNConvolution) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNConvolutionGradientState {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionSelResultStateForSourceImageSourceStatesDestinationImage, sourceImage.Ptr(), sourceStates, destinationImage.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionSelResultStateForSourceImageSourceStatesDestinationImage, sourceImage.Ptr(), sourceStates.Ptr(), destinationImage.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -96,12 +98,12 @@ func (o *MPSCNNConvolution) ResultStateForSourceImageSourceStatesDestinationImag
 }
 
 func (o *MPSCNNConvolution) ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mPSCNNConvolutionSelResultStateBatchForSourceImageSourceStatesDestinationImage, sourceImage, sourceStates, destinationImage)
+	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mPSCNNConvolutionSelResultStateBatchForSourceImageSourceStatesDestinationImage, sourceImage, sourceStates.Ptr(), destinationImage)
 	return _ret
 }
 
 func (o *MPSCNNConvolution) TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNConvolutionGradientState {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage.Ptr(), sourceStates, destinationImage.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage.Ptr(), sourceStates.Ptr(), destinationImage.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -109,7 +111,7 @@ func (o *MPSCNNConvolution) TemporaryResultStateForCommandBufferSourceImageSourc
 }
 
 func (o *MPSCNNConvolution) TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mPSCNNConvolutionSelTemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage, sourceStates, destinationImage)
+	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mPSCNNConvolutionSelTemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage, sourceStates.Ptr(), destinationImage)
 	return _ret
 }
 

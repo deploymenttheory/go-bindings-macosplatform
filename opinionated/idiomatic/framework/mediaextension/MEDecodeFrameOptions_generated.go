@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that guides the video decoder operation on a per-frame basis.
+//
 // DecodeFrameOptions wraps [raw.MEDecodeFrameOptions] with a fluent Go API.
 type DecodeFrameOptions struct {
 	inner *raw.MEDecodeFrameOptions
@@ -35,7 +37,7 @@ func NewDecodeFrameOptions() *DecodeFrameOptions {
 	return &DecodeFrameOptions{inner: raw.MEDecodeFrameOptionsFromID(_id)}
 }
 
-// @property		doNotOutputFrame @abstract		A hint to the video decoder that a CVImageBuffer should not be emitted for this frame.  NULL will be returned instead.
+// A Boolean value that hints to the decoder whether or not it should emit an image buffer for the frame.
 //
 // WithDoNotOutputFrame sets the doNotOutputFrame property and returns the receiver for chaining.
 func (x *DecodeFrameOptions) WithDoNotOutputFrame(doNotOutputFrame bool) *DecodeFrameOptions {
@@ -43,7 +45,7 @@ func (x *DecodeFrameOptions) WithDoNotOutputFrame(doNotOutputFrame bool) *Decode
 	return x
 }
 
-// @property		realTimePlayback @abstract		A hint to the video decoder that it would be OK to use a low-power mode that can not decode faster than 1x realtime. @discussion		Note that this hint only takes the current decode session into account.  For example, if multiple instances of a decoder are operating at once, it may not actually be OK to use such a low-power mode if real-time playback might not be sustained across all the streams. This hint will be set to false during all uses other than 1x forward real-time playback, including seeking, playback at other rates, and export.
+// A Boolean value that hints to the decoder to use a low-power mode that can’t decode faster than 1x real-time.
 //
 // WithRealTimePlayback sets the realTimePlayback property and returns the receiver for chaining.
 func (x *DecodeFrameOptions) WithRealTimePlayback(realTimePlayback bool) *DecodeFrameOptions {

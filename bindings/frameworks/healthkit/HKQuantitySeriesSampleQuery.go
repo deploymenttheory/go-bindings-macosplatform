@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A query that accesses the series data associated with a quantity sample.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkquantityseriessamplequery
 type HKQuantitySeriesSampleQuery struct {
 	HKQuery
@@ -37,7 +39,7 @@ func HKQuantitySeriesSampleQueryFromID(id objc.ID) *HKQuantitySeriesSampleQuery 
 	return o
 }
 
-// @method        initWithSample:dataHandler: @abstract      Returns a query that will retrieve HKQuantity objects for samples of a specified type that match the specified predicate. @param         quantityType        The type of HKQuantitySample to retrieve. @param         predicate           The predicate which the query results should match. To query for the quantities for a specific quantity sample see: +[HKPredicates predicateForObjectWithUUID:] @param         quantityHandler     The block to invoke with results from the query. It will be called repeatedly with HKQuantity, and NSDateInterval objects in ascending dateInterval.startDate order, until all quantities are returned and the done parameter is YES or -[HKHealthStore stopQuery:] is called. The quantitySample parameter is nil unless includeSample is YES, in which case it will be the quantitySample which owns the current quantity anytime the quantity paramater is non-nil. The stopQuery call can be made within the quantityHandler block. Once done is YES, or stopQuery has been called, the query is complete and no more calls to quantityHandler will be made.
+// Creates a new query for a series of the specified quantity type.
 func (o *HKQuantitySeriesSampleQuery) InitWithQuantityTypePredicateQuantityHandler(quantityType *HKQuantityType, predicate *foundation.NSPredicate, quantityHandler func(*HKQuantitySeriesSampleQuery, *HKQuantity, *foundation.NSDateInterval, *HKQuantitySample, bool, unsafe.Pointer)) *HKQuantitySeriesSampleQuery {
 	var __block_quantityHandler objc.Block
 	if quantityHandler != nil {
@@ -65,6 +67,7 @@ func (o *HKQuantitySeriesSampleQuery) InitWithQuantityTypePredicateQuantityHandl
 	return HKQuantitySeriesSampleQueryFromID(_ret)
 }
 
+// Creates a new series query.
 func (o *HKQuantitySeriesSampleQuery) InitWithSampleQuantityHandler(quantitySample *HKQuantitySample, quantityHandler func(*HKQuantitySeriesSampleQuery, *HKQuantity, *foundation.NSDate, bool, unsafe.Pointer)) *HKQuantitySeriesSampleQuery {
 	var __block_quantityHandler objc.Block
 	if quantityHandler != nil {

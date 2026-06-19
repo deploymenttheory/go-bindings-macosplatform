@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract data class for a diagnostic.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxdiagnostic
 type MXDiagnostic struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func MXDiagnosticFromID(id objc.ID) *MXDiagnostic {
 	return o
 }
 
-// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this diagnostic. @result        An NSData object containing the JSON representation
+// Returns the contents of the diagnostic in JSON format.
 func (o *MXDiagnostic) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticSelJSONRepresentation)
 	if _ret != 0 {
@@ -43,10 +45,13 @@ func (o *MXDiagnostic) JSONRepresentation() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
-// @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this diagnostic. @result        An NSDictionary object containing the dictionary representation
+// Returns the contents of a diagnostic as a dictionary.
 func (o *MXDiagnostic) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _mXDiagnosticSelDictionaryRepresentation)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticSelDictionaryRepresentation)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *MXDiagnostic) MetaData() *MXMetaData {

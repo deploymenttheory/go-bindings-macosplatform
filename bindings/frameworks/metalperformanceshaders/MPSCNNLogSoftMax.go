@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A neural transfer function that is useful for constructing a loss function to be minimized when training neural networks.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlogsoftmax
 type MPSCNNLogSoftMax struct {
 	mpsneuralnetwork.MPSCNNKernel

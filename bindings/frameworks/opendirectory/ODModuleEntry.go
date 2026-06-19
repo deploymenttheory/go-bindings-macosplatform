@@ -74,8 +74,11 @@ func (o *ODModuleEntry) SetMappings(mappings *ODMappings) {
 }
 
 func (o *ODModuleEntry) SupportedOptions() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDModuleEntrySelSupportedOptions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _oDModuleEntrySelSupportedOptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *ODModuleEntry) Name() *foundation.NSString {

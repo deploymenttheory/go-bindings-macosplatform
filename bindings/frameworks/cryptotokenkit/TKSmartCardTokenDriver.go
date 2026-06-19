@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The driver that acts as an entry point for smart card app extensions.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tksmartcardtokendriver
 type TKSmartCardTokenDriver struct {
 	TKTokenDriver

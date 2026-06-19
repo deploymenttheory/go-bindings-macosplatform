@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An abstract class representing a stream.
+//
 // Stream wraps [raw.NSStream] with a fluent Go API.
 type Stream struct {
 	inner *raw.NSStream

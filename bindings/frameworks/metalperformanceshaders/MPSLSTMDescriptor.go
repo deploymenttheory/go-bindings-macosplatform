@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a long short-term memory block or layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpslstmdescriptor
 type MPSLSTMDescriptor struct {
 	mpsneuralnetwork.MPSRNNDescriptor

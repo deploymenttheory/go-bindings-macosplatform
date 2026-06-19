@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Information about a registered product in App Store Connect.
+//
 // Product wraps [raw.SKProduct] with a fluent Go API.
 type Product struct {
 	inner *raw.SKProduct

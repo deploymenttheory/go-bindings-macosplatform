@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The editable content for a notification.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent
 type UNMutableNotificationContent struct {
 	UNNotificationContent
@@ -72,7 +74,7 @@ func (o *UNMutableNotificationContent) SetTitle(title *foundation.NSString) {
 }
 
 func (o *UNMutableNotificationContent) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_uNMutableNotificationContentSelSetUserInfo, userInfo)
+	o.Ptr().Send(_uNMutableNotificationContentSelSetUserInfo, userInfo.Ptr())
 }
 
 func (o *UNMutableNotificationContent) SetSummaryArgument(summaryArgument *foundation.NSString) {

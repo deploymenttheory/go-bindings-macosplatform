@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A tab associated with a window that is part of a tabbing group.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nswindowtab
 type NSWindowTab struct {
 	foundation.NSObject

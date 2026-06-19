@@ -580,6 +580,7 @@ func (i Ipc_info_object_type_t) isMultiValue() bool {
 	return false
 }
 
+// A type that represents possible types of launch data.
 // [launch.h:204]
 type Launch_data_type_t int64
 
@@ -1108,12 +1109,15 @@ func (i Virtual_memory_guard_exception_code_t) isMultiValue() bool {
 	return false
 }
 
+// Options that control the listener’s configuration.
 // [listener.h:194]
 // Bitmask — values may be combined with |.
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	// Configures the listener in a default state.
+	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
+	// Prevents the system from automatically activating the listener after creation.
 	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
 	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4

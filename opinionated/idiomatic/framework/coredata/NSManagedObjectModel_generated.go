@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A programmatic representation of the .xcdatamodeld file describing your objects.
+//
 // ManagedObjectModel wraps [raw.NSManagedObjectModel] with a fluent Go API.
 type ManagedObjectModel struct {
 	inner *raw.NSManagedObjectModel
@@ -38,6 +40,8 @@ func NewManagedObjectModel() *ManagedObjectModel {
 	return &ManagedObjectModel{inner: raw.NSManagedObjectModelFromID(_id)}
 }
 
+// Initializes the managed object model using the model file at the specified URL.
+//
 // NewManagedObjectModelWithContentsOfURL creates a new [ManagedObjectModel].
 func NewManagedObjectModelWithContentsOfURL(url string) *ManagedObjectModel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObjectModel")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewManagedObjectModelWithContentsOfURL(url string) *ManagedObjectModel {
 	return &ManagedObjectModel{inner: raw.NSManagedObjectModelFromID(_id)}
 }
 
+// The entities in the model.
+//
 // WithEntities sets the collection, converting the Go slice to an NSArray.
 func (x *ManagedObjectModel) WithEntities(items ...*raw.NSEntityDescription) *ManagedObjectModel {
 	if len(items) == 0 {
@@ -66,43 +72,59 @@ func (x *ManagedObjectModel) WithEntities(items ...*raw.NSEntityDescription) *Ma
 	return x
 }
 
+// The localization dictionary of the model.
+//
 // WithLocalizationDictionary sets the localizationDictionary property and returns the receiver for chaining.
 func (x *ManagedObjectModel) WithLocalizationDictionary(localizationDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *ManagedObjectModel {
 	x.inner.SetLocalizationDictionary(localizationDictionary)
 	return x
 }
 
+// The set of developer-defined version identifiers for the object model.
+//
 // WithVersionIdentifiers sets the versionIdentifiers property and returns the receiver for chaining.
 func (x *ManagedObjectModel) WithVersionIdentifiers(versionIdentifiers *foundation.NSSet[objc.ID]) *ManagedObjectModel {
 	x.inner.SetVersionIdentifiers(versionIdentifiers)
 	return x
 }
 
+// Returns the entities of the model for a specified configuration.
+//
 // EntitiesForConfiguration calls the underlying EntitiesForConfiguration.
 func (x *ManagedObjectModel) EntitiesForConfiguration(configuration string) *foundation.NSArray[*raw.NSEntityDescription] {
 	return x.inner.EntitiesForConfiguration(foundation.NSStringStringWithUTF8String(configuration))
 }
 
+// Associates the specified entities with the model using the given configuration name.
+//
 // SetEntitiesForConfiguration calls the underlying SetEntitiesForConfiguration.
 func (x *ManagedObjectModel) SetEntitiesForConfiguration(entities *foundation.NSArray[*raw.NSEntityDescription], configuration string) {
 	x.inner.SetEntitiesForConfiguration(entities, foundation.NSStringStringWithUTF8String(configuration))
 }
 
+// Associates the specified fetch request with the receiver using the given name.
+//
 // SetFetchRequestTemplateForName calls the underlying SetFetchRequestTemplateForName.
 func (x *ManagedObjectModel) SetFetchRequestTemplateForName(fetchRequestTemplate *raw.NSFetchRequest[objc.ID], name string) {
 	x.inner.SetFetchRequestTemplateForName(fetchRequestTemplate, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Returns the fetch request with a specified name.
+//
 // FetchRequestTemplateForName calls the underlying FetchRequestTemplateForName.
 func (x *ManagedObjectModel) FetchRequestTemplateForName(name string) *raw.NSFetchRequest[objc.ID] {
 	return x.inner.FetchRequestTemplateForName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// Returns a copy of the fetch request template with the variables substituted by values from the substitutions dictionary.
+//
 // FetchRequestFromTemplateWithNameSubstitutionVariables calls the underlying FetchRequestFromTemplateWithNameSubstitutionVariables.
 func (x *ManagedObjectModel) FetchRequestFromTemplateWithNameSubstitutionVariables(name string, variables *foundation.NSDictionary[*foundation.NSString, objc.ID]) *raw.NSFetchRequest[objc.ID] {
 	return x.inner.FetchRequestFromTemplateWithNameSubstitutionVariables(foundation.NSStringStringWithUTF8String(name), variables)
 }
 
+// Returns a Boolean value that indicates whether a given configuration in the model is compatible with given metadata from a persistent store.
+//
 // IsConfigurationCompatibleWithStoreMetadata calls the underlying IsConfigurationCompatibleWithStoreMetadata.
 func (x *ManagedObjectModel) IsConfigurationCompatibleWithStoreMetadata(configuration string, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
 	return x.inner.IsConfigurationCompatibleWithStoreMetadata(foundation.NSStringStringWithUTF8String(configuration), metadata)

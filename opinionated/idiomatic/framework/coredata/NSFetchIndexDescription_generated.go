@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The description of the index.
+//
 // FetchIndexDescription wraps [raw.NSFetchIndexDescription] with a fluent Go API.
 type FetchIndexDescription struct {
 	inner *raw.NSFetchIndexDescription
@@ -32,6 +34,8 @@ func FetchIndexDescriptionFromID(id objc.ID) *FetchIndexDescription {
 	return &FetchIndexDescription{inner: raw.NSFetchIndexDescriptionFromID(id)}
 }
 
+// Creates a fetch index description using the specified name and element descriptions.
+//
 // NewFetchIndexDescriptionWithNameElements creates a new [FetchIndexDescription].
 func NewFetchIndexDescriptionWithNameElements(name string, elements *foundation.NSArray[*raw.NSFetchIndexElementDescription]) *FetchIndexDescription {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFetchIndexDescription")), objc.RegisterName("alloc"))
@@ -39,12 +43,16 @@ func NewFetchIndexDescriptionWithNameElements(name string, elements *foundation.
 	return &FetchIndexDescription{inner: raw.NSFetchIndexDescriptionFromID(_id)}
 }
 
+// The name of the fetch index description.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *FetchIndexDescription) WithName(name string) *FetchIndexDescription {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// An array of fetch index element descriptions.
+//
 // WithElements sets the collection, converting the Go slice to an NSArray.
 func (x *FetchIndexDescription) WithElements(items ...*raw.NSFetchIndexElementDescription) *FetchIndexDescription {
 	if len(items) == 0 {
@@ -66,6 +74,8 @@ func (x *FetchIndexDescription) WithElements(items ...*raw.NSFetchIndexElementDe
 	return x
 }
 
+// A predicate that selects rows for indexing, if the index is a partial index.
+//
 // WithPartialIndexPredicate sets the partialIndexPredicate property and returns the receiver for chaining.
 func (x *FetchIndexDescription) WithPartialIndexPredicate(partialIndexPredicate *foundation.NSPredicate) *FetchIndexDescription {
 	x.inner.SetPartialIndexPredicate(partialIndexPredicate)

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The view shown for a row in a table view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstablerowview
 type NSTableRowView struct {
 	NSView
@@ -58,22 +60,27 @@ func NSTableRowViewFromID(id objc.ID) *NSTableRowView {
 	return o
 }
 
+// Draws the background of the row in the rectangle.
 func (o *NSTableRowView) DrawBackgroundInRect(dirtyRect corefoundation.CGRect) {
 	o.Ptr().Send(_nSTableRowViewSelDrawBackgroundInRect, dirtyRect)
 }
 
+// Draws the selected row.
 func (o *NSTableRowView) DrawSelectionInRect(dirtyRect corefoundation.CGRect) {
 	o.Ptr().Send(_nSTableRowViewSelDrawSelectionInRect, dirtyRect)
 }
 
+// Draws the horizontal separator between table rows.
 func (o *NSTableRowView) DrawSeparatorInRect(dirtyRect corefoundation.CGRect) {
 	o.Ptr().Send(_nSTableRowViewSelDrawSeparatorInRect, dirtyRect)
 }
 
+// Draws the row’s dragging destination feedback when the entire row is a drop target.
 func (o *NSTableRowView) DrawDraggingDestinationFeedbackInRect(dirtyRect corefoundation.CGRect) {
 	o.Ptr().Send(_nSTableRowViewSelDrawDraggingDestinationFeedbackInRect, dirtyRect)
 }
 
+// Provides access to the given view at a particular column.
 func (o *NSTableRowView) ViewAtColumn(column int) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableRowViewSelViewAtColumn, column)
 	return _ret

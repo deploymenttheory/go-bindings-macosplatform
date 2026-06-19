@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of where to store GPU counter information at the start and end of a resource state pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlresourcestatepasssamplebufferattachmentdescriptor
 type MTLResourceStatePassSampleBufferAttachmentDescriptor struct {
 	foundation.NSObject

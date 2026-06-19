@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An interface adopted by drawing and writing tools used by a canvas view.
+//
 // Tool wraps [raw.PKTool] with a fluent Go API.
 type Tool struct {
 	inner *raw.PKTool

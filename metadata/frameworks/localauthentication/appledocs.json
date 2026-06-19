@@ -1,0 +1,468 @@
+{
+  "schema_version": 1,
+  "framework": "LocalAuthentication",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "LAAuthenticationRequirement": {
+      "doc": "A set of requirements that protect a right.",
+      "url": "https://developer.apple.com/documentation/localauthentication/laauthenticationrequirement"
+    },
+    "LABiometryFallbackRequirement": {
+      "doc": "A set of requirements to fall back on if biometrics aren’t present.",
+      "url": "https://developer.apple.com/documentation/localauthentication/labiometryfallbackrequirement"
+    },
+    "LAContext": {
+      "doc": "A mechanism for evaluating authentication policies and access controls.",
+      "url": "https://developer.apple.com/documentation/localauthentication/lacontext"
+    },
+    "LADomainState": {
+      "url": "https://developer.apple.com/documentation/localauthentication/ladomainstate"
+    },
+    "LADomainStateBiometry": {
+      "url": "https://developer.apple.com/documentation/localauthentication/ladomainstatebiometry"
+    },
+    "LADomainStateCompanion": {
+      "url": "https://developer.apple.com/documentation/localauthentication/ladomainstatecompanion"
+    },
+    "LAEnvironment": {
+      "url": "https://developer.apple.com/documentation/localauthentication/laenvironment"
+    },
+    "LAPersistedRight": {
+      "doc": "A right that gates access to a key and a secret.",
+      "url": "https://developer.apple.com/documentation/localauthentication/lapersistedright"
+    },
+    "LAPrivateKey": {
+      "doc": "The private portion of an asymmetric key pair.",
+      "url": "https://developer.apple.com/documentation/localauthentication/laprivatekey"
+    },
+    "LAPublicKey": {
+      "doc": "The public portion of an asymmetric key pair.",
+      "url": "https://developer.apple.com/documentation/localauthentication/lapublickey"
+    },
+    "LARight": {
+      "doc": "A grouped set of requirements that gate access to a resource or operation.",
+      "url": "https://developer.apple.com/documentation/localauthentication/laright"
+    },
+    "LARightStore": {
+      "doc": "A container for data protected by a right.",
+      "url": "https://developer.apple.com/documentation/localauthentication/larightstore"
+    },
+    "LASecret": {
+      "doc": "Data that’s protected by a persisted right.",
+      "url": "https://developer.apple.com/documentation/localauthentication/lasecret"
+    }
+  },
+  "enums": {
+    "LAAccessControlOperation": {
+      "doc": "Operations to be evaluated for access control.",
+      "url": "https://developer.apple.com/documentation/localauthentication/laaccesscontroloperation",
+      "members": {
+        "LAAccessControlOperationCreateItem": {
+          "doc": "Specifies that access control is used for item creation.",
+          "url": "https://developer.apple.com/documentation/localauthentication/laaccesscontroloperation/createitem"
+        },
+        "LAAccessControlOperationCreateKey": {
+          "doc": "Specifies that access control is used for key creation.",
+          "url": "https://developer.apple.com/documentation/localauthentication/laaccesscontroloperation/createkey"
+        },
+        "LAAccessControlOperationUseItem": {
+          "doc": "Specifies that access control is used for accessing an existing item.",
+          "url": "https://developer.apple.com/documentation/localauthentication/laaccesscontroloperation/useitem"
+        },
+        "LAAccessControlOperationUseKeyDecrypt": {
+          "doc": "Specifies that access control is used for data decryption using existing key.",
+          "url": "https://developer.apple.com/documentation/localauthentication/laaccesscontroloperation/usekeydecrypt"
+        },
+        "LAAccessControlOperationUseKeyKeyExchange": {
+          "doc": "Specifies that access control is used for key exchange.",
+          "url": "https://developer.apple.com/documentation/localauthentication/laaccesscontroloperation/usekeykeyexchange"
+        },
+        "LAAccessControlOperationUseKeySign": {
+          "doc": "Specifies that access control is used for accessing an existing key.",
+          "url": "https://developer.apple.com/documentation/localauthentication/laaccesscontroloperation/usekeysign"
+        }
+      }
+    },
+    "LABiometryType": {
+      "doc": "The set of available biometric authentication types.",
+      "url": "https://developer.apple.com/documentation/localauthentication/labiometrytype",
+      "members": {
+        "LABiometryNone": {
+          "doc": "No biometry type is supported.",
+          "url": "https://developer.apple.com/documentation/localauthentication/labiometrytype/labiometrynone"
+        },
+        "LABiometryTypeFaceID": {
+          "doc": "The device supports Face ID.",
+          "url": "https://developer.apple.com/documentation/localauthentication/labiometrytype/faceid"
+        },
+        "LABiometryTypeNone": {
+          "doc": "No biometry type is supported.",
+          "url": "https://developer.apple.com/documentation/localauthentication/labiometrytype/none"
+        },
+        "LABiometryTypeOpticID": {
+          "doc": "The device supports Optic ID.",
+          "url": "https://developer.apple.com/documentation/localauthentication/labiometrytype/opticid"
+        },
+        "LABiometryTypeTouchID": {
+          "doc": "The device supports Touch ID.",
+          "url": "https://developer.apple.com/documentation/localauthentication/labiometrytype/touchid"
+        }
+      }
+    },
+    "LACompanionType": {
+      "url": "https://developer.apple.com/documentation/localauthentication/lacompaniontype",
+      "members": {
+        "LACompanionTypeMac": {
+          "doc": "Paired Mac",
+          "url": "https://developer.apple.com/documentation/localauthentication/lacompaniontype/mac"
+        },
+        "LACompanionTypeVision": {
+          "doc": "Paired Vision Pro",
+          "url": "https://developer.apple.com/documentation/localauthentication/lacompaniontype/vision"
+        },
+        "LACompanionTypeWatch": {
+          "doc": "Paired Apple Watch",
+          "url": "https://developer.apple.com/documentation/localauthentication/lacompaniontype/watch"
+        }
+      }
+    },
+    "LACredentialType": {
+      "doc": "The types of credentials to be used for authentication.",
+      "url": "https://developer.apple.com/documentation/localauthentication/lacredentialtype",
+      "members": {
+        "LACredentialTypeApplicationPassword": {
+          "doc": "Specifies that a password is provided by the application.",
+          "url": "https://developer.apple.com/documentation/localauthentication/lacredentialtype/applicationpassword"
+        }
+      }
+    },
+    "LAError": {
+      "doc": "Errors issued by the LocalAuthentication framework.",
+      "url": "https://developer.apple.com/documentation/localauthentication/laerror"
+    },
+    "LAPolicy": {
+      "doc": "The set of available local authentication policies.",
+      "url": "https://developer.apple.com/documentation/localauthentication/lapolicy",
+      "members": {
+        "LAPolicyDeviceOwnerAuthentication": {
+          "doc": "User authentication with biometry, Apple Watch, or the device passcode.",
+          "url": "https://developer.apple.com/documentation/localauthentication/lapolicy/deviceownerauthentication"
+        },
+        "LAPolicyDeviceOwnerAuthenticationWithBiometrics": {
+          "doc": "User authentication with biometry.",
+          "url": "https://developer.apple.com/documentation/localauthentication/lapolicy/deviceownerauthenticationwithbiometrics"
+        },
+        "LAPolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion": {
+          "doc": "Device owner will be authenticated by biometry or a companion device e.g. Watch, Mac, etc.",
+          "url": "https://developer.apple.com/documentation/localauthentication/lapolicy/deviceownerauthenticationwithbiometricsorcompanion"
+        },
+        "LAPolicyDeviceOwnerAuthenticationWithBiometricsOrWatch": {
+          "doc": "User authentication with either biometry or Apple Watch.",
+          "url": "https://developer.apple.com/documentation/localauthentication/lapolicy/deviceownerauthenticationwithbiometricsorwatch"
+        },
+        "LAPolicyDeviceOwnerAuthenticationWithCompanion": {
+          "doc": "Device owner will be authenticated by a companion device e.g. Watch, Mac, etc.",
+          "url": "https://developer.apple.com/documentation/localauthentication/lapolicy/deviceownerauthenticationwithcompanion"
+        },
+        "LAPolicyDeviceOwnerAuthenticationWithWatch": {
+          "doc": "User authentication with Apple Watch.",
+          "url": "https://developer.apple.com/documentation/localauthentication/lapolicy/deviceownerauthenticationwithwatch"
+        },
+        "LAPolicyDeviceOwnerAuthenticationWithWristDetection": {
+          "doc": "User authentication with wrist detection on watchOS.",
+          "url": "https://developer.apple.com/documentation/localauthentication/lapolicy/deviceownerauthenticationwithwristdetection"
+        }
+      }
+    }
+  },
+  "methods": {
+    "LAAuthenticationRequirement": {
+      "+biometryRequirementWithFallback:": {
+        "doc": "Creates a requirement that requires biometric authentication or a fallback requirement that you specify.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laauthenticationrequirement/biometry(fallback:)"
+      }
+    },
+    "LAContext": {
+      "-canEvaluatePolicy:error:": {
+        "doc": "Assesses whether authentication can proceed for a given policy.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lacontext/canevaluatepolicy(_:error:)"
+      },
+      "-evaluateAccessControl:operation:localizedReason:reply:": {
+        "doc": "Evaluates an access control for a given operation.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lacontext/evaluateaccesscontrol(_:operation:localizedreason:reply:)"
+      },
+      "-evaluatePolicy:localizedReason:reply:": {
+        "doc": "Evaluates the specified policy.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lacontext/evaluatepolicy(_:localizedreason:reply:)"
+      },
+      "-invalidate": {
+        "doc": "Invalidates the authentication context.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lacontext/invalidate()"
+      },
+      "-isCredentialSet:": {
+        "doc": "Returns a Boolean value indicating whether the specified credential type is set.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lacontext/iscredentialset(_:)"
+      },
+      "-setCredential:type:": {
+        "doc": "Sets an application-provided credential to be used when evaluating authentication.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lacontext/setcredential(_:type:)"
+      }
+    },
+    "LADomainStateCompanion": {
+      "-stateHashForCompanionType:": {
+        "doc": "Returns state hash data for the given companion type.",
+        "url": "https://developer.apple.com/documentation/localauthentication/ladomainstatecompanion/statehash(for:)"
+      }
+    },
+    "LAPrivateKey": {
+      "-canDecryptUsingSecKeyAlgorithm:": {
+        "doc": "Checks whether the algorithm you supply is valid for decrypting data with the key.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laprivatekey/candecrypt(using:)"
+      },
+      "-canExchangeKeysUsingSecKeyAlgorithm:": {
+        "doc": "Checks whether the algorithm you supply is valid for performing key exchanges.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laprivatekey/canexchangekeys(using:)"
+      },
+      "-canSignUsingSecKeyAlgorithm:": {
+        "doc": "Checks whether the algorithm you supply is valid for signing data with the key.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laprivatekey/cansign(using:)"
+      },
+      "-decryptData:secKeyAlgorithm:completion:": {
+        "doc": "Decrypts the data you supply with a given algorithm.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laprivatekey/decrypt(_:algorithm:completion:)"
+      },
+      "-exchangeKeysWithPublicKey:secKeyAlgorithm:secKeyParameters:completion:": {
+        "doc": "Performs a Diffie-Hellman style key exchange operation.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laprivatekey/exchangekeys(publickey:algorithm:parameters:completion:)"
+      },
+      "-signData:secKeyAlgorithm:completion:": {
+        "doc": "Generates a digital signature for the data you supply.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laprivatekey/sign(_:algorithm:completion:)"
+      }
+    },
+    "LAPublicKey": {
+      "-canEncryptUsingSecKeyAlgorithm:": {
+        "doc": "Checks whether the algorithm you supply is valid for encrypting data with the key.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lapublickey/canencrypt(using:)"
+      },
+      "-canVerifyUsingSecKeyAlgorithm:": {
+        "doc": "Checks whether the algorithm you supply is valid for verifying signatures with the key.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lapublickey/canverify(using:)"
+      },
+      "-encryptData:secKeyAlgorithm:completion:": {
+        "doc": "Encrypts the data you supply with a given algorithm.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lapublickey/encrypt(_:algorithm:completion:)"
+      },
+      "-exportBytesWithCompletion:": {
+        "doc": "Exports the data that represents a public key.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lapublickey/exportbytes(completion:)"
+      },
+      "-verifyData:signature:secKeyAlgorithm:completion:": {
+        "doc": "Verifies a digital signature for the data you supply.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lapublickey/verify(_:signature:algorithm:completion:)"
+      }
+    },
+    "LARight": {
+      "-authorizeWithLocalizedReason:completion:": {
+        "doc": "Performs an authorization on the right.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laright/authorize(localizedreason:completion:)"
+      },
+      "-authorizeWithLocalizedReason:inPresentationContext:completion:": {
+        "doc": "Performs an authorization on the right with a window context you supply.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laright/authorize(localizedreason:in:completion:)"
+      },
+      "-checkCanAuthorizeWithCompletion:": {
+        "doc": "Checks whether the right has permission to perform authorization.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laright/checkcanauthorize(completion:)"
+      },
+      "-deauthorizeWithCompletion:": {
+        "doc": "Invalidates a previously authorized right.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laright/deauthorize(completion:)"
+      },
+      "-init": {
+        "doc": "Creates a right using the default authorization requirements.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laright/init()"
+      },
+      "-initWithRequirement:": {
+        "doc": "Creates a right with the authentication requirements you supply.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laright/init(requirement:)"
+      }
+    },
+    "LARightStore": {
+      "-removeAllRightsWithCompletion:": {
+        "doc": "Removes all rights associated with this client from the right store.",
+        "url": "https://developer.apple.com/documentation/localauthentication/larightstore/removeallrights(completion:)"
+      },
+      "-removeRight:completion:": {
+        "doc": "Removes a right from the right store given an instance of that right.",
+        "url": "https://developer.apple.com/documentation/localauthentication/larightstore/removeright(_:completion:)"
+      },
+      "-removeRightForIdentifier:completion:": {
+        "doc": "Removes a right from the right store given its unique identifier.",
+        "url": "https://developer.apple.com/documentation/localauthentication/larightstore/removeright(foridentifier:completion:)"
+      },
+      "-rightForIdentifier:completion:": {
+        "doc": "Fetches a previously stored right from the shared right store.",
+        "url": "https://developer.apple.com/documentation/localauthentication/larightstore/right(foridentifier:completion:)"
+      },
+      "-saveRight:identifier:completion:": {
+        "doc": "Saves a right to a persistent right store.",
+        "url": "https://developer.apple.com/documentation/localauthentication/larightstore/saveright(_:identifier:completion:)"
+      },
+      "-saveRight:identifier:secret:completion:": {
+        "doc": "Saves a right to a persistent store along with secret data you supply.",
+        "url": "https://developer.apple.com/documentation/localauthentication/larightstore/saveright(_:identifier:secret:completion:)"
+      }
+    },
+    "LASecret": {
+      "-loadDataWithCompletion:": {
+        "doc": "Retrieves data stored in a secret.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lasecret/loaddata(completion:)"
+      }
+    }
+  },
+  "properties": {
+    "LAAuthenticationRequirement": {
+      "biometryCurrentSetRequirement": {
+        "doc": "The requirement that requires user authentication with the current set of biometrics.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laauthenticationrequirement/biometrycurrentset"
+      },
+      "biometryRequirement": {
+        "doc": "The requirement that requires biometric authentication.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laauthenticationrequirement/biometry"
+      },
+      "defaultRequirement": {
+        "doc": "The requirement that requires user authentication.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laauthenticationrequirement/default"
+      }
+    },
+    "LABiometryFallbackRequirement": {
+      "defaultRequirement": {
+        "doc": "The default biometric fallback requirement.",
+        "url": "https://developer.apple.com/documentation/localauthentication/labiometryfallbackrequirement/default"
+      },
+      "devicePasscodeRequirement": {
+        "doc": "The fallback requirement that requires entering the device passcode.",
+        "url": "https://developer.apple.com/documentation/localauthentication/labiometryfallbackrequirement/devicepasscode"
+      }
+    },
+    "LAContext": {
+      "biometryType": {
+        "doc": "The type of biometric authentication supported by the device.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lacontext/biometrytype"
+      },
+      "domainState": {
+        "doc": "Contains authentication domain state.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lacontext/domainstate"
+      },
+      "evaluatedPolicyDomainState": {
+        "doc": "The current state of the evaluated policy domain.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lacontext/evaluatedpolicydomainstate"
+      },
+      "interactionNotAllowed": {
+        "doc": "A Boolean value indicating whether authentication can be interactive.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lacontext/interactionnotallowed"
+      },
+      "localizedCancelTitle": {
+        "doc": "The localized title for the cancel button in the dialog presented to the user during authentication.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lacontext/localizedcanceltitle"
+      },
+      "localizedFallbackTitle": {
+        "doc": "The localized title for the fallback button in the dialog presented to the user during authentication.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lacontext/localizedfallbacktitle"
+      },
+      "localizedReason": {
+        "doc": "The localized explanation for authentication shown in the dialog presented to the user.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lacontext/localizedreason"
+      },
+      "maxBiometryFailures": {
+        "doc": "The number of biometric authentication failures after which the context falls back to another mechanism.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lacontext/maxbiometryfailures"
+      },
+      "touchIDAuthenticationAllowableReuseDuration": {
+        "doc": "The duration for which Touch ID authentication reuse is allowable.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lacontext/touchidauthenticationallowablereuseduration"
+      }
+    },
+    "LADomainState": {
+      "biometry": {
+        "doc": "Contains biometric domain state.",
+        "url": "https://developer.apple.com/documentation/localauthentication/ladomainstate/biometry"
+      },
+      "companion": {
+        "doc": "Contains companion domain state.",
+        "url": "https://developer.apple.com/documentation/localauthentication/ladomainstate/companion"
+      },
+      "stateHash": {
+        "doc": "Contains combined state hash data for biometry and companion state hashes.",
+        "url": "https://developer.apple.com/documentation/localauthentication/ladomainstate/statehash"
+      }
+    },
+    "LADomainStateBiometry": {
+      "biometryType": {
+        "doc": "Indicates biometry type available on the device.",
+        "url": "https://developer.apple.com/documentation/localauthentication/ladomainstatebiometry/biometrytype"
+      },
+      "stateHash": {
+        "doc": "Contains state hash data for the available biometry type. Returns nil if no biometry entities are enrolled.",
+        "url": "https://developer.apple.com/documentation/localauthentication/ladomainstatebiometry/statehash"
+      }
+    },
+    "LADomainStateCompanion": {
+      "availableCompanionTypes": {
+        "doc": "Indicates types of companions paired with the device. The elements are NSNumber-wrapped instances of @c LACompanionType.",
+        "url": "https://developer.apple.com/documentation/localauthentication/ladomainstatecompanion/availablecompaniontypes-1ggnh"
+      },
+      "stateHash": {
+        "doc": "Contains combined state hash data for all available companion types. . Returns nil if no companion devices are paired.",
+        "url": "https://developer.apple.com/documentation/localauthentication/ladomainstatecompanion/statehash"
+      }
+    },
+    "LAEnvironment": {
+      "currentUser": {
+        "doc": "Environment of the current user.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laenvironment/currentuser"
+      },
+      "state": {
+        "doc": "The environment state information.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laenvironment/state-swift.property"
+      }
+    },
+    "LAPersistedRight": {
+      "key": {
+        "doc": "The private key that’s persisted by the right.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lapersistedright/key"
+      },
+      "secret": {
+        "doc": "The data kept secret by the right.",
+        "url": "https://developer.apple.com/documentation/localauthentication/lapersistedright/secret"
+      }
+    },
+    "LAPrivateKey": {
+      "publicKey": {
+        "doc": "The public key that corresponds with the private key in a key pair.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laprivatekey/publickey"
+      }
+    },
+    "LARight": {
+      "LARightState": {
+        "doc": "The possible states for a right during authorization.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laright/state-swift.enum"
+      },
+      "state": {
+        "doc": "The current authorization state for a right.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laright/state-swift.property"
+      },
+      "tag": {
+        "doc": "An integer you use to identify a right.",
+        "url": "https://developer.apple.com/documentation/localauthentication/laright/tag"
+      }
+    },
+    "LARightStore": {
+      "sharedStore": {
+        "doc": "A shared object that stores rights.",
+        "url": "https://developer.apple.com/documentation/localauthentication/larightstore/shared"
+      }
+    }
+  }
+}

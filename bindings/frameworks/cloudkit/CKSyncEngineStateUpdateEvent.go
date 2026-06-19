@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The sync engine state was updated, and you should persist it locally.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginestateupdateevent
 type CKSyncEngineStateUpdateEvent struct {
 	CKSyncEngineEvent

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type of challenge where a player must beat the leaderboard score of another player.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkscorechallenge
 // Deprecated: since macOS 26.0.
 type GKScoreChallenge struct {

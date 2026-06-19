@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates a daily metrics report.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxmetricpayload
 type MXMetricPayload struct {
 	foundation.NSObject
@@ -51,7 +53,7 @@ func MXMetricPayloadFromID(id objc.ID) *MXMetricPayload {
 	return o
 }
 
-// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this payload. @result        An NSData object containing the JSON representation
+// Returns the contents of the payload in JSON format.
 func (o *MXMetricPayload) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetricPayloadSelJSONRepresentation)
 	if _ret != 0 {
@@ -60,10 +62,13 @@ func (o *MXMetricPayload) JSONRepresentation() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
-// @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this payload. @result        An NSDictionary object containing the dictionary representation
+// Returns the results of the payload as a dictionary.
 func (o *MXMetricPayload) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _mXMetricPayloadSelDictionaryRepresentation)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetricPayloadSelDictionaryRepresentation)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @property      latestApplicationVersion @abstract      An NSString representation of the application version from which this payload was generated. @discussion    If the application version was changed during the aggregation of this data, this value will reflect the latest application version at the time of retrieval.

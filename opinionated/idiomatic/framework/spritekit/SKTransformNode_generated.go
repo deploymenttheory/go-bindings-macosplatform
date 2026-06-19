@@ -12,7 +12,7 @@ import (
 	"unsafe"
 )
 
-// An SKTransformNode can be applied a 3D rotation that will affect the visual aspect of its children. The physics and constraints of the children will behave as if none of them were transformed.
+// A node that allows its children to rotate in 3D.
 //
 // TransformNode wraps [raw.SKTransformNode] with a fluent Go API.
 type TransformNode struct {
@@ -52,7 +52,7 @@ func (x *TransformNode) WithYRotation(yRotation float64) *TransformNode {
 	return x
 }
 
-// The position of the node in the parent's coordinate system
+// The position of the node in its parent’s coordinate system.
 //
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *TransformNode) WithPosition(position corefoundation.CGPoint) *TransformNode {
@@ -60,7 +60,7 @@ func (x *TransformNode) WithPosition(position corefoundation.CGPoint) *Transform
 	return x
 }
 
-// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+// The height of the node relative to its parent.
 //
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *TransformNode) WithZPosition(zPosition float64) *TransformNode {
@@ -68,7 +68,7 @@ func (x *TransformNode) WithZPosition(zPosition float64) *TransformNode {
 	return x
 }
 
-// The Euler rotation about the z axis (in radians)
+// The Euler rotation about the z axis (in radians).
 //
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *TransformNode) WithZRotation(zRotation float64) *TransformNode {
@@ -76,7 +76,7 @@ func (x *TransformNode) WithZRotation(zRotation float64) *TransformNode {
 	return x
 }
 
-// The scaling in the X axis
+// A scaling factor that multiplies the width of a node and its children.
 //
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *TransformNode) WithXScale(xScale float64) *TransformNode {
@@ -84,7 +84,7 @@ func (x *TransformNode) WithXScale(xScale float64) *TransformNode {
 	return x
 }
 
-// The scaling in the Y axis
+// A scaling factor that multiplies the height of a node and its children.
 //
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *TransformNode) WithYScale(yScale float64) *TransformNode {
@@ -92,7 +92,7 @@ func (x *TransformNode) WithYScale(yScale float64) *TransformNode {
 	return x
 }
 
-// The speed multiplier applied to all actions run on this node. Inherited by its children.
+// A speed modifier applied to all actions executed by a node and its descendants.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *TransformNode) WithSpeed(speed float64) *TransformNode {
@@ -100,7 +100,7 @@ func (x *TransformNode) WithSpeed(speed float64) *TransformNode {
 	return x
 }
 
-// Alpha of this node (multiplied by the output color to give the final result)
+// The transparency value applied to the node’s contents.
 //
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *TransformNode) WithAlpha(alpha float64) *TransformNode {
@@ -108,7 +108,7 @@ func (x *TransformNode) WithAlpha(alpha float64) *TransformNode {
 	return x
 }
 
-// Controls whether or not the node's actions is updated or paused.
+// A Boolean value that determines whether actions on the node and its descendants are processed.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *TransformNode) WithPaused(paused bool) *TransformNode {
@@ -116,7 +116,7 @@ func (x *TransformNode) WithPaused(paused bool) *TransformNode {
 	return x
 }
 
-// Controls whether or not the node and its children are rendered.
+// A Boolean value that determines whether a node and its descendants are rendered.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *TransformNode) WithHidden(hidden bool) *TransformNode {
@@ -124,7 +124,7 @@ func (x *TransformNode) WithHidden(hidden bool) *TransformNode {
 	return x
 }
 
-// Controls whether or not the node receives touch events
+// A Boolean value that indicates whether the node receives touch events.
 //
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *TransformNode) WithUserInteractionEnabled(userInteractionEnabled bool) *TransformNode {
@@ -132,7 +132,7 @@ func (x *TransformNode) WithUserInteractionEnabled(userInteractionEnabled bool) 
 	return x
 }
 
-// The client assignable name. In general, this should be unique among peers in the scene graph.
+// The node’s assignable name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *TransformNode) WithName(name string) *TransformNode {
@@ -140,7 +140,7 @@ func (x *TransformNode) WithName(name string) *TransformNode {
 	return x
 }
 
-// Physics body attached to the node, with synchronized scale, rotation, and position
+// The physics body associated with the node.
 //
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *TransformNode) WithPhysicsBody(physicsBody *PhysicsBody) *TransformNode {
@@ -148,7 +148,7 @@ func (x *TransformNode) WithPhysicsBody(physicsBody *PhysicsBody) *TransformNode
 	return x
 }
 
-// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+// A dictionary containing arbitrary data.
 //
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *TransformNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *TransformNode {
@@ -156,7 +156,7 @@ func (x *TransformNode) WithUserData(userData *foundation.NSMutableDictionary[ob
 	return x
 }
 
-// Kinematic constraints, used in IK solving
+// The reach constraints to apply to the node when executing a reach action.
 //
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *TransformNode) WithReachConstraints(reachConstraints *ReachConstraints) *TransformNode {
@@ -164,7 +164,7 @@ func (x *TransformNode) WithReachConstraints(reachConstraints *ReachConstraints)
 	return x
 }
 
-// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+// A list of constraints to apply to the node.
 //
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *TransformNode) WithConstraints(items ...*raw.SKConstraint) *TransformNode {
@@ -187,7 +187,7 @@ func (x *TransformNode) WithConstraints(items ...*raw.SKConstraint) *TransformNo
 	return x
 }
 
-// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+// The values of each attribute associated with the node’s attached shader.
 //
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *TransformNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *TransformNode {
@@ -195,54 +195,72 @@ func (x *TransformNode) WithAttributeValues(attributeValues *foundation.NSDictio
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+//
 // WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
 func (x *TransformNode) WithAccessibilityElement(accessibilityElement bool) *TransformNode {
 	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
 	return x
 }
 
+// A string value describing the user interface element type; for example, a button.
+//
 // WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
 func (x *TransformNode) WithAccessibilityRole(accessibilityRole string) *TransformNode {
 	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
 	return x
 }
 
+// A string value describing the user interface element name and type; for example, the Buy button.
+//
 // WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
 func (x *TransformNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TransformNode {
 	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
 	return x
 }
 
+// A string that defines this user interface element’s subrole; for example, a full-screen button.
+//
 // WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
 func (x *TransformNode) WithAccessibilitySubrole(accessibilitySubrole string) *TransformNode {
 	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
 	return x
 }
 
+// The size of this user interface element, in screen points.
+//
 // WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
 func (x *TransformNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TransformNode {
 	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
 	return x
 }
 
+// The user interface element that contains this element.
+//
 // WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
 func (x *TransformNode) WithAccessibilityParent(accessibilityParent objc.ID) *TransformNode {
 	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
 	return x
 }
 
+// The help description of this user interface element; for example, the text shown in a tooltip.
+//
 // WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
 func (x *TransformNode) WithAccessibilityHelp(accessibilityHelp string) *TransformNode {
 	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
 	return x
 }
 
+// A short description of this user interface element.
+//
 // WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
 func (x *TransformNode) WithAccessibilityLabel(accessibilityLabel string) *TransformNode {
 	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
+//
 // WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
 func (x *TransformNode) WithAccessibilityEnabled(accessibilityEnabled bool) *TransformNode {
 	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)

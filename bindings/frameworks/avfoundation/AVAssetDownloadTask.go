@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A session used to download HTTP Live Streaming assets.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetdownloadtask
 type AVAssetDownloadTask struct {
 	foundation.NSURLSessionTask
@@ -44,13 +46,19 @@ func (o *AVAssetDownloadTask) URLAsset() *AVURLAsset {
 // The options supplied to the download task upon initialization.
 // Deprecated: Use AVAssetDownloadConfiguration instead
 func (o *AVAssetDownloadTask) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVAssetDownloadTaskSelOptions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadTaskSelOptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // This property provides a collection of time ranges for which the download task has media data already downloaded and playable. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
 // Deprecated: Use NSURLSessionTask.progress instead
 func (o *AVAssetDownloadTask) LoadedTimeRanges() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _aVAssetDownloadTaskSelLoadedTimeRanges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadTaskSelLoadedTimeRanges)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }

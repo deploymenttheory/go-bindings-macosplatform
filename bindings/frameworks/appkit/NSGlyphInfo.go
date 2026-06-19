@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A glyph attribute in an attributed string.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsglyphinfo
 type NSGlyphInfo struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func NSGlyphInfoFromID(id objc.ID) *NSGlyphInfo {
 	return o
 }
 
+// Creates a glyph info object from the specified glyph identifier and font informaton.
 func NSGlyphInfoGlyphInfoWithCGGlyphForFontBaseString(glyph uint16, font *NSFont, string_ *foundation.NSString) *NSGlyphInfo {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGlyphInfo), _nSGlyphInfoSelGlyphInfoWithCGGlyphForFontBaseString, glyph, font.Ptr(), string_.Ptr())
 	if _ret != 0 {
@@ -75,6 +78,7 @@ func NSGlyphInfoGlyphInfoWithGlyphForFontBaseString(glyph uint, font *NSFont, st
 	return NSGlyphInfoFromID(_ret)
 }
 
+// Instantiates and returns an NSGlyphInfo object using a character identifier and a character collection.
 func NSGlyphInfoGlyphInfoWithCharacterIdentifierCollectionBaseString(cid uint, characterCollection NSCharacterCollection, string_ *foundation.NSString) *NSGlyphInfo {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGlyphInfo), _nSGlyphInfoSelGlyphInfoWithCharacterIdentifierCollectionBaseString, cid, characterCollection, string_.Ptr())
 	if _ret != 0 {

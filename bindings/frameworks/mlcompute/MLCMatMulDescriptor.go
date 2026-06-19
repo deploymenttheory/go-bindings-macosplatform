@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object you use to create a matrix multiplication layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcmatmuldescriptor
 type MLCMatMulDescriptor struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func MLCMatMulDescriptorFromID(id objc.ID) *MLCMatMulDescriptor {
 	return o
 }
 
-// @abstract   A matrix multiplication layer descriptor @param      alpha  a scalar to scale the left hand side, C = alpha x X x Y @param      transposesX  if true, transposes the last two dimensions of X @param      transposesY  if true, transposes the last two dimensions of Y @return     A new matrix multiplication layer descriptor
+// Creates a batched matrix multiplication descriptor with the alpha value and transpose options you specify.
 func MLCMatMulDescriptorDescriptorWithAlphaTransposesXTransposesY(alpha float32, transposesX bool, transposesY bool) *MLCMatMulDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCMatMulDescriptor), _mLCMatMulDescriptorSelDescriptorWithAlphaTransposesXTransposesY, alpha, transposesX, transposesY)
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func MLCMatMulDescriptorDescriptorWithAlphaTransposesXTransposesY(alpha float32,
 	return MLCMatMulDescriptorFromID(_ret)
 }
 
-// @property   descriptor @abstract   A matrix multiplication layer descriptor
+// Creates a batched matrix multiplication descriptor.
 func MLCMatMulDescriptorDescriptor() *MLCMatMulDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCMatMulDescriptor), _mLCMatMulDescriptorSelDescriptor)
 	if _ret != 0 {

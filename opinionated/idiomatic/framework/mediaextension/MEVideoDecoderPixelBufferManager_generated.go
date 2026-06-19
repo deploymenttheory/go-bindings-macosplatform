@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// Describes pixel buffer requirements and creates new pixel buffers.
+//
 // VideoDecoderPixelBufferManager wraps [raw.MEVideoDecoderPixelBufferManager] with a fluent Go API.
 type VideoDecoderPixelBufferManager struct {
 	inner *raw.MEVideoDecoderPixelBufferManager
@@ -39,7 +41,7 @@ func NewVideoDecoderPixelBufferManager() *VideoDecoderPixelBufferManager {
 	return &VideoDecoderPixelBufferManager{inner: raw.MEVideoDecoderPixelBufferManagerFromID(_id)}
 }
 
-// @property		pixelBufferAttributes @abstract		VideoToolbox will use these attributes when creating a PixelBuffer for the decoder. @discussion		This can be updated by the decoder before requesting a new pixelBuffer.
+// A dictionary that contains the attributes Video Toolbox uses to create a pixel buffer for the decoder.
 //
 // WithPixelBufferAttributes sets the pixelBufferAttributes property and returns the receiver for chaining.
 func (x *VideoDecoderPixelBufferManager) WithPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VideoDecoderPixelBufferManager {
@@ -47,7 +49,7 @@ func (x *VideoDecoderPixelBufferManager) WithPixelBufferAttributes(pixelBufferAt
 	return x
 }
 
-// @method			createPixelBufferAndReturnError: @abstract		Generates a pixel buffer using the session's pixel buffer pool. @discussion		If implemented in Objective-C, the caller is responsible for releasing the returned CVPixelBuffer. @param			error If provided, returns error information in the event that the method fails. @result A pixel buffer compatible with the extension's most recently set pixelBufferAttributes
+// Generates a pixel buffer using the session’s pixel buffer pool.
 //
 // CreatePixelBufferAndReturnError calls the underlying CreatePixelBufferAndReturnError.
 func (x *VideoDecoderPixelBufferManager) CreatePixelBufferAndReturnError() (unsafe.Pointer, error) {

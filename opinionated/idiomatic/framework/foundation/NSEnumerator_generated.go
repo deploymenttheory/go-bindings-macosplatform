@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class whose subclasses enumerate collections of objects, such as arrays and dictionaries.
+//
 // Enumerator wraps [raw.NSEnumerator] with a fluent Go API.
 type Enumerator struct {
 	inner *raw.NSEnumerator[objc.ID]
@@ -41,6 +43,8 @@ func (x *Enumerator) WithScriptingProperties(scriptingProperties *raw.NSDictiona
 	return x
 }
 
+// Returns the next object from the collection being enumerated.
+//
 // NextObject calls the underlying NextObject.
 func (x *Enumerator) NextObject() objc.ID {
 	return x.inner.NextObject()

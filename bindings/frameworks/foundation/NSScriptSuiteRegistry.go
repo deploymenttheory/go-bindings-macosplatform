@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The top-level repository of scriptability information for an app at runtime.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsscriptsuiteregistry
 type NSScriptSuiteRegistry struct {
 	NSObject
@@ -43,6 +45,7 @@ func NSScriptSuiteRegistryFromID(id objc.ID) *NSScriptSuiteRegistry {
 	return o
 }
 
+// Returns the single, shared instance of NSScriptSuiteRegistry, creating it first if it doesn’t exist.
 func NSScriptSuiteRegistrySharedScriptSuiteRegistry() *NSScriptSuiteRegistry {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScriptSuiteRegistry), _nSScriptSuiteRegistrySelSharedScriptSuiteRegistry)
 	if _ret != 0 {
@@ -51,31 +54,38 @@ func NSScriptSuiteRegistrySharedScriptSuiteRegistry() *NSScriptSuiteRegistry {
 	return NSScriptSuiteRegistryFromID(_ret)
 }
 
+// Sets the single, shared instance of NSScriptSuiteRegistry to registry.
 func NSScriptSuiteRegistrySetSharedScriptSuiteRegistry(registry *NSScriptSuiteRegistry) {
 	objc.ID(_clsNSScriptSuiteRegistry).Send(_nSScriptSuiteRegistrySelSetSharedScriptSuiteRegistry, registry.Ptr())
 }
 
+// Loads the suite definitions in bundle aBundle, invoking loadSuiteWithDictionary:fromBundle: for each suite found.
 func (o *NSScriptSuiteRegistry) LoadSuitesFromBundle(bundle *NSBundle) {
 	o.Ptr().Send(_nSScriptSuiteRegistrySelLoadSuitesFromBundle, bundle.Ptr())
 }
 
+// Loads the suite definition encapsulated in dictionary; previously, this suite definition was parsed from a .scriptSuite property list contained in a framework or in bundle.
 func (o *NSScriptSuiteRegistry) LoadSuiteWithDictionaryFromBundle(suiteDeclaration *NSDictionary[objc.ID, objc.ID], bundle *NSBundle) {
-	o.Ptr().Send(_nSScriptSuiteRegistrySelLoadSuiteWithDictionaryFromBundle, suiteDeclaration, bundle.Ptr())
+	o.Ptr().Send(_nSScriptSuiteRegistrySelLoadSuiteWithDictionaryFromBundle, suiteDeclaration.Ptr(), bundle.Ptr())
 }
 
+// Registers class description classDescription for use by Cocoa’s built-in scripting support by storing it in a per-suite internal dictionary under the class name.
 func (o *NSScriptSuiteRegistry) RegisterClassDescription(classDescription *NSScriptClassDescription) {
 	o.Ptr().Send(_nSScriptSuiteRegistrySelRegisterClassDescription, classDescription.Ptr())
 }
 
+// Registers command description commandDesc for use by Cocoa’s built-in scripting support by storing it in a per-suite internal dictionary under the command name.
 func (o *NSScriptSuiteRegistry) RegisterCommandDescription(commandDescription *NSScriptCommandDescription) {
 	o.Ptr().Send(_nSScriptSuiteRegistrySelRegisterCommandDescription, commandDescription.Ptr())
 }
 
+// Returns the Apple event code associated with the suite named suiteName, such as ‘core’ for the Core suite.
 func (o *NSScriptSuiteRegistry) AppleEventCodeForSuite(suiteName *NSString) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSScriptSuiteRegistrySelAppleEventCodeForSuite, suiteName.Ptr())
 	return _ret
 }
 
+// Returns the bundle containing the suite-definition property list (extension .scriptSuite) identified by suiteName.
 func (o *NSScriptSuiteRegistry) BundleForSuite(suiteName *NSString) *NSBundle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelBundleForSuite, suiteName.Ptr())
 	if _ret != 0 {
@@ -84,6 +94,7 @@ func (o *NSScriptSuiteRegistry) BundleForSuite(suiteName *NSString) *NSBundle {
 	return NSBundleFromID(_ret)
 }
 
+// Returns the class descriptions contained in the suite identified by suiteName.
 func (o *NSScriptSuiteRegistry) ClassDescriptionsInSuite(suiteName *NSString) *NSDictionary[*NSString, *NSScriptClassDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelClassDescriptionsInSuite, suiteName.Ptr())
 	if _ret != 0 {
@@ -92,6 +103,7 @@ func (o *NSScriptSuiteRegistry) ClassDescriptionsInSuite(suiteName *NSString) *N
 	return NSDictionaryFromID[*NSString, *NSScriptClassDescription](_ret)
 }
 
+// Returns the command descriptions contained in the suite identified by suiteName.
 func (o *NSScriptSuiteRegistry) CommandDescriptionsInSuite(suiteName *NSString) *NSDictionary[*NSString, *NSScriptCommandDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelCommandDescriptionsInSuite, suiteName.Ptr())
 	if _ret != 0 {
@@ -100,6 +112,7 @@ func (o *NSScriptSuiteRegistry) CommandDescriptionsInSuite(suiteName *NSString) 
 	return NSDictionaryFromID[*NSString, *NSScriptCommandDescription](_ret)
 }
 
+// Returns the name of the suite definition associated with the given four-character Apple event code, code.
 func (o *NSScriptSuiteRegistry) SuiteForAppleEventCode(appleEventCode uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelSuiteForAppleEventCode, appleEventCode)
 	if _ret != 0 {
@@ -108,6 +121,7 @@ func (o *NSScriptSuiteRegistry) SuiteForAppleEventCode(appleEventCode uint) *NSS
 	return NSStringFromID(_ret)
 }
 
+// Returns the class description associated with the given four-character Apple event code, code.
 func (o *NSScriptSuiteRegistry) ClassDescriptionWithAppleEventCode(appleEventCode uint) *NSScriptClassDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelClassDescriptionWithAppleEventCode, appleEventCode)
 	if _ret != 0 {
@@ -116,6 +130,7 @@ func (o *NSScriptSuiteRegistry) ClassDescriptionWithAppleEventCode(appleEventCod
 	return NSScriptClassDescriptionFromID(_ret)
 }
 
+// Returns the command description identified by a suite’s four-character Apple event code of the class (eventClass) and the four-character Apple event code of the command (commandCode).
 func (o *NSScriptSuiteRegistry) CommandDescriptionWithAppleEventClassAndAppleEventCode(appleEventClassCode uint, appleEventIDCode uint) *NSScriptCommandDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelCommandDescriptionWithAppleEventClassAndAppleEventCode, appleEventClassCode, appleEventIDCode)
 	if _ret != 0 {
@@ -124,6 +139,7 @@ func (o *NSScriptSuiteRegistry) CommandDescriptionWithAppleEventClassAndAppleEve
 	return NSScriptCommandDescriptionFromID(_ret)
 }
 
+// Returns an NSData object that contains data in 'aete' resource format describing the scriptability information currently known to the application.
 func (o *NSScriptSuiteRegistry) AeteResource(languageName *NSString) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelAeteResource, languageName.Ptr())
 	if _ret != 0 {

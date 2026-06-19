@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The object you use to manage communications between your app and a connected hardware accessory.
+//
 // Session wraps [raw.EASession] with a fluent Go API.
 type Session struct {
 	inner *raw.EASession
@@ -31,6 +33,8 @@ func SessionFromID(id objc.ID) *Session {
 	return &Session{inner: raw.EASessionFromID(id)}
 }
 
+// Initializes the session for the specified accessory and protocol.
+//
 // NewSessionWithAccessoryForProtocol creates a new [Session].
 func NewSessionWithAccessoryForProtocol(accessory *raw.EAAccessory, protocolString string) *Session {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("EASession")), objc.RegisterName("alloc"))

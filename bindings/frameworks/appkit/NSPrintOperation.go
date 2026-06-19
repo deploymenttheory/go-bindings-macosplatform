@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that controls operations that generate Encapsulated PostScript (EPS) code, Portable Document Format (PDF) code, or print jobs.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsprintoperation
 type NSPrintOperation struct {
 	foundation.NSObject
@@ -76,6 +78,7 @@ func NSPrintOperationFromID(id objc.ID) *NSPrintOperation {
 	return o
 }
 
+// Creates and returns an print operation object ready to control the printing of the specified view using custom print settings.
 func NSPrintOperationPrintOperationWithViewPrintInfo(view *NSView, printInfo *NSPrintInfo) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelPrintOperationWithViewPrintInfo, view.Ptr(), printInfo.Ptr())
 	if _ret != 0 {
@@ -84,6 +87,7 @@ func NSPrintOperationPrintOperationWithViewPrintInfo(view *NSView, printInfo *NS
 	return NSPrintOperationFromID(_ret)
 }
 
+// Creates and returns a new print operation object ready to control the copying of PDF graphics from the specified view using the specified print settings.
 func NSPrintOperationPDFOperationWithViewInsideRectToDataPrintInfo(view *NSView, rect corefoundation.CGRect, data *foundation.NSMutableData, printInfo *NSPrintInfo) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelPDFOperationWithViewInsideRectToDataPrintInfo, view.Ptr(), rect, data.Ptr(), printInfo.Ptr())
 	if _ret != 0 {
@@ -92,6 +96,7 @@ func NSPrintOperationPDFOperationWithViewInsideRectToDataPrintInfo(view *NSView,
 	return NSPrintOperationFromID(_ret)
 }
 
+// Creates and returns a new print operation object ready to control the copying of PDF graphics from the specified view and write the resulting data to the specified file.
 func NSPrintOperationPDFOperationWithViewInsideRectToPathPrintInfo(view *NSView, rect corefoundation.CGRect, path *foundation.NSString, printInfo *NSPrintInfo) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelPDFOperationWithViewInsideRectToPathPrintInfo, view.Ptr(), rect, path.Ptr(), printInfo.Ptr())
 	if _ret != 0 {
@@ -100,6 +105,7 @@ func NSPrintOperationPDFOperationWithViewInsideRectToPathPrintInfo(view *NSView,
 	return NSPrintOperationFromID(_ret)
 }
 
+// Creates and returns a new print operation object ready to control the copying of EPS graphics from the specified view using the specified print settings.
 func NSPrintOperationEPSOperationWithViewInsideRectToDataPrintInfo(view *NSView, rect corefoundation.CGRect, data *foundation.NSMutableData, printInfo *NSPrintInfo) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelEPSOperationWithViewInsideRectToDataPrintInfo, view.Ptr(), rect, data.Ptr(), printInfo.Ptr())
 	if _ret != 0 {
@@ -108,6 +114,7 @@ func NSPrintOperationEPSOperationWithViewInsideRectToDataPrintInfo(view *NSView,
 	return NSPrintOperationFromID(_ret)
 }
 
+// Creates and returns a new print operation object ready to control the copying of EPS graphics from the specified view and write the resulting data to the specified file.
 func NSPrintOperationEPSOperationWithViewInsideRectToPathPrintInfo(view *NSView, rect corefoundation.CGRect, path *foundation.NSString, printInfo *NSPrintInfo) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelEPSOperationWithViewInsideRectToPathPrintInfo, view.Ptr(), rect, path.Ptr(), printInfo.Ptr())
 	if _ret != 0 {
@@ -116,6 +123,7 @@ func NSPrintOperationEPSOperationWithViewInsideRectToPathPrintInfo(view *NSView,
 	return NSPrintOperationFromID(_ret)
 }
 
+// Creates and returns an print operation object ready to control the printing of the specified view.
 func NSPrintOperationPrintOperationWithView(view *NSView) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelPrintOperationWithView, view.Ptr())
 	if _ret != 0 {
@@ -124,6 +132,7 @@ func NSPrintOperationPrintOperationWithView(view *NSView) *NSPrintOperation {
 	return NSPrintOperationFromID(_ret)
 }
 
+// Creates and returns a new print operation object ready to control the copying of PDF graphics from the specified view.
 func NSPrintOperationPDFOperationWithViewInsideRectToData(view *NSView, rect corefoundation.CGRect, data *foundation.NSMutableData) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelPDFOperationWithViewInsideRectToData, view.Ptr(), rect, data.Ptr())
 	if _ret != 0 {
@@ -132,6 +141,7 @@ func NSPrintOperationPDFOperationWithViewInsideRectToData(view *NSView, rect cor
 	return NSPrintOperationFromID(_ret)
 }
 
+// Creates and returns a new print operation object ready to control the copying of EPS graphics from the specified view.
 func NSPrintOperationEPSOperationWithViewInsideRectToData(view *NSView, rect corefoundation.CGRect, data *foundation.NSMutableData) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelEPSOperationWithViewInsideRectToData, view.Ptr(), rect, data.Ptr())
 	if _ret != 0 {
@@ -140,15 +150,18 @@ func NSPrintOperationEPSOperationWithViewInsideRectToData(view *NSView, rect cor
 	return NSPrintOperationFromID(_ret)
 }
 
+// Runs the print operation, calling your custom delegate method upon completion.
 func (o *NSPrintOperation) RunOperationModalForWindowDelegateDidRunSelectorContextInfo(docWindow *NSWindow, delegate objc.ID, didRunSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSPrintOperationSelRunOperationModalForWindowDelegateDidRunSelectorContextInfo, docWindow.Ptr(), delegate, didRunSelector, contextInfo)
 }
 
+// Runs the print operation on the current thread.
 func (o *NSPrintOperation) RunOperation() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPrintOperationSelRunOperation)
 	return _ret
 }
 
+// Creates the graphics context object used for drawing during the operation.
 func (o *NSPrintOperation) CreateContext() *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintOperationSelCreateContext)
 	if _ret != 0 {
@@ -157,15 +170,18 @@ func (o *NSPrintOperation) CreateContext() *NSGraphicsContext {
 	return NSGraphicsContextFromID(_ret)
 }
 
+// Destroys the print operation’s graphics context.
 func (o *NSPrintOperation) DestroyContext() {
 	o.Ptr().Send(_nSPrintOperationSelDestroyContext)
 }
 
+// Delivers the results of the print operation to the intended destination.
 func (o *NSPrintOperation) DeliverResult() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPrintOperationSelDeliverResult)
 	return _ret
 }
 
+// Called at the end of a print operation to remove the print operation as the current operation.
 func (o *NSPrintOperation) CleanUpOperation() {
 	o.Ptr().Send(_nSPrintOperationSelCleanUpOperation)
 }
@@ -302,11 +318,13 @@ func (o *NSPrintOperation) CurrentPage() int {
 	return _ret
 }
 
+// Sets the custom accessory view to be displayed by the print operation’s print panel.
 // Deprecated: Use -[NSPrintPanel addAccessoryController:] and -[NSPrintPanel removeAccessoryController:] instead
 func (o *NSPrintOperation) SetAccessoryView(view *NSView) {
 	o.Ptr().Send(_nSPrintOperationSelSetAccessoryView, view.Ptr())
 }
 
+// Returns the accessory view used by the print operation’s print panel.
 // Deprecated: Use -[NSPrintPanel accessoryControllers] instead
 func (o *NSPrintOperation) AccessoryView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintOperationSelAccessoryView)
@@ -316,11 +334,13 @@ func (o *NSPrintOperation) AccessoryView() *NSView {
 	return NSViewFromID(_ret)
 }
 
+// Sets the type of content that the print job is printing.
 // Deprecated: since macOS 10.5.
 func (o *NSPrintOperation) SetJobStyleHint(hint *foundation.NSString) {
 	o.Ptr().Send(_nSPrintOperationSelSetJobStyleHint, hint.Ptr())
 }
 
+// The type of content that the print job is printing.
 // Deprecated: since macOS 10.5.
 func (o *NSPrintOperation) JobStyleHint() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintOperationSelJobStyleHint)
@@ -330,11 +350,13 @@ func (o *NSPrintOperation) JobStyleHint() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Sets whether the print operation should display a print panel.
 // Deprecated: Use -setShowsPrintPanel: and -setShowsProgressPanel: instead
 func (o *NSPrintOperation) SetShowPanels(flag bool) {
 	o.Ptr().Send(_nSPrintOperationSelSetShowPanels, flag)
 }
 
+// Returns a Boolean value that indicates whether the print panel is to be displayed.
 // Deprecated: Use -showsPrintPanel and -showsProgressPanel instead
 func (o *NSPrintOperation) ShowPanels() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPrintOperationSelShowPanels)

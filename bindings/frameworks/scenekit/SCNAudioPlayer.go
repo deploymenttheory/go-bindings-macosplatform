@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller for playback of a positional audio source in a SceneKit scene.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnaudioplayer
 type SCNAudioPlayer struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func SCNAudioPlayerFromID(id objc.ID) *SCNAudioPlayer {
 	return o
 }
 
-// @property initWithSource: @abstract Init an audio player with a source. Most people should use audioPlayerWithSource as it permits to recycle previous players instead of creating new ones for each instance.
+// Initializes an audio player for playing the specified simple audio source.
 func (o *SCNAudioPlayer) InitWithSource(source *SCNAudioSource) *SCNAudioPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNAudioPlayerSelInitWithSource, source.Ptr())
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func (o *SCNAudioPlayer) InitWithSource(source *SCNAudioSource) *SCNAudioPlayer 
 	return SCNAudioPlayerFromID(_ret)
 }
 
-// @property initWithAVAudioNode: @abstract Init an audio player with an AVAudioNode. Most people should use audioPlayerWithAVAudioNode as it permits to recycle previous players instead of creating new ones for each instance.
+// Initializes an audio player for playing the specified AVFoundation audio node.
 func (o *SCNAudioPlayer) InitWithAVAudioNode(audioNode *avfaudio.AVAudioNode) *SCNAudioPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNAudioPlayerSelInitWithAVAudioNode, audioNode.Ptr())
 	if _ret != 0 {
@@ -58,7 +60,7 @@ func (o *SCNAudioPlayer) InitWithAVAudioNode(audioNode *avfaudio.AVAudioNode) *S
 	return SCNAudioPlayerFromID(_ret)
 }
 
-// @property audioPlayerWithSource: @abstract Create an audio player with a source.
+// Returns an audio player (creating one if necessary) to play a simple audio source.
 func SCNAudioPlayerAudioPlayerWithSource(source *SCNAudioSource) *SCNAudioPlayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAudioPlayer), _sCNAudioPlayerSelAudioPlayerWithSource, source.Ptr())
 	if _ret != 0 {
@@ -67,7 +69,7 @@ func SCNAudioPlayerAudioPlayerWithSource(source *SCNAudioSource) *SCNAudioPlayer
 	return SCNAudioPlayerFromID(_ret)
 }
 
-// @property audioPlayerWithAVAudioNode: @abstract Create an audio player with a custom AVAudioNode instance.
+// Returns an audio player (creating one if necessary) to play an audio node.
 func SCNAudioPlayerAudioPlayerWithAVAudioNode(audioNode *avfaudio.AVAudioNode) *SCNAudioPlayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAudioPlayer), _sCNAudioPlayerSelAudioPlayerWithAVAudioNode, audioNode.Ptr())
 	if _ret != 0 {

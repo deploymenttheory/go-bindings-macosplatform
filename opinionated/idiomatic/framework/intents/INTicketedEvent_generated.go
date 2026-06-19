@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The information that describes a ticketed event.
+//
 // TicketedEvent wraps [raw.INTicketedEvent] with a fluent Go API.
 type TicketedEvent struct {
 	inner *raw.INTicketedEvent
@@ -32,6 +34,8 @@ func TicketedEventFromID(id objc.ID) *TicketedEvent {
 	return &TicketedEvent{inner: raw.INTicketedEventFromID(id)}
 }
 
+// Creates a ticketed event object with the specified contents and attributes.
+//
 // NewTicketedEventWithCategoryNameEventDurationLocation creates a new [TicketedEvent].
 func NewTicketedEventWithCategoryNameEventDurationLocation(category INTicketedEventCategory, name string, eventDuration *raw.INDateComponentsRange, location *corelocation.CLPlacemark) *TicketedEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INTicketedEvent")), objc.RegisterName("alloc"))

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Description of an Index Element
+//
 // FetchIndexElementDescription wraps [raw.NSFetchIndexElementDescription] with a fluent Go API.
 type FetchIndexElementDescription struct {
 	inner *raw.NSFetchIndexElementDescription
@@ -30,6 +32,8 @@ func FetchIndexElementDescriptionFromID(id objc.ID) *FetchIndexElementDescriptio
 	return &FetchIndexElementDescription{inner: raw.NSFetchIndexElementDescriptionFromID(id)}
 }
 
+// Creates an index element description using the specified property description and collation type.
+//
 // NewFetchIndexElementDescriptionWithPropertyCollationType creates a new [FetchIndexElementDescription].
 func NewFetchIndexElementDescriptionWithPropertyCollationType(property *raw.NSPropertyDescription, collationType NSFetchIndexElementType) *FetchIndexElementDescription {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFetchIndexElementDescription")), objc.RegisterName("alloc"))
@@ -37,12 +41,16 @@ func NewFetchIndexElementDescriptionWithPropertyCollationType(property *raw.NSPr
 	return &FetchIndexElementDescription{inner: raw.NSFetchIndexElementDescriptionFromID(_id)}
 }
 
+// The type of collation that the index element uses, either binary or R-tree.
+//
 // WithCollationType sets the collationType property and returns the receiver for chaining.
 func (x *FetchIndexElementDescription) WithCollationType(collationType NSFetchIndexElementType) *FetchIndexElementDescription {
 	x.inner.SetCollationType(raw.NSFetchIndexElementType(collationType))
 	return x
 }
 
+// A Boolean value that controls whether an index that supports direction is an ascending or descending index.
+//
 // WithAscending sets the ascending property and returns the receiver for chaining.
 func (x *FetchIndexElementDescription) WithAscending(ascending bool) *FetchIndexElementDescription {
 	x.inner.SetAscending(ascending)

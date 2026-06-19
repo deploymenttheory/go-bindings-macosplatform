@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that contains the rules for how to load and filter content in the web view.
+//
 // WKContentRuleListStore wraps [raw.WKContentRuleListStore] with a fluent Go API.
 type WKContentRuleListStore struct {
 	inner *raw.WKContentRuleListStore
@@ -39,6 +41,8 @@ func NewWKContentRuleListStore() *WKContentRuleListStore {
 	return &WKContentRuleListStore{inner: raw.WKContentRuleListStoreFromID(_id)}
 }
 
+// Compiles the specified JSON content into a new rule list and adds it to the current data store.
+//
 // CompileContentRuleListForIdentifierEncodedContentRuleList blocks until the operation completes or ctx is cancelled.
 func (x *WKContentRuleListStore) CompileContentRuleListForIdentifierEncodedContentRuleList(ctx context.Context, identifier string, encodedContentRuleList string) (*WKContentRuleList, error) {
 	type _result struct {
@@ -65,6 +69,8 @@ func (x *WKContentRuleListStore) CompileContentRuleListForIdentifierEncodedConte
 	}
 }
 
+// Searches asynchronously for a specific rule list in the data store.
+//
 // LookUpContentRuleListForIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *WKContentRuleListStore) LookUpContentRuleListForIdentifier(ctx context.Context, identifier string) (*WKContentRuleList, error) {
 	type _result struct {
@@ -91,6 +97,8 @@ func (x *WKContentRuleListStore) LookUpContentRuleListForIdentifier(ctx context.
 	}
 }
 
+// Removes a rule list from the current data store asynchronously.
+//
 // RemoveContentRuleListForIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *WKContentRuleListStore) RemoveContentRuleListForIdentifier(ctx context.Context, identifier string) error {
 	_ch := make(chan error, 1)
@@ -109,9 +117,27 @@ func (x *WKContentRuleListStore) RemoveContentRuleListForIdentifier(ctx context.
 	}
 }
 
-// GetAvailableContentRuleListIdentifiers calls the underlying GetAvailableContentRuleListIdentifiers.
-func (x *WKContentRuleListStore) GetAvailableContentRuleListIdentifiers(completionHandler objc.Block) {
-	x.inner.GetAvailableContentRuleListIdentifiers(completionHandler)
+// Fetches the identifiers for all rule lists in the store asynchronously.
+//
+// GetAvailableContentRuleListIdentifiers blocks until the operation completes or ctx is cancelled.
+func (x *WKContentRuleListStore) GetAvailableContentRuleListIdentifiers(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error) {
+	type _result struct {
+		val *foundation.NSArray[*foundation.NSString]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetAvailableContentRuleListIdentifiers(func(_p0 *foundation.NSArray[*foundation.NSString]) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*foundation.NSString]
+		return _zero, ctx.Err()
+	}
 }
 
 // WKContentRuleListStoreable is the interface implemented by [WKContentRuleListStore], for mocking and DI.
@@ -120,7 +146,7 @@ type WKContentRuleListStoreable interface {
 	CompileContentRuleListForIdentifierEncodedContentRuleList(ctx context.Context, identifier string, encodedContentRuleList string) (*WKContentRuleList, error)
 	LookUpContentRuleListForIdentifier(ctx context.Context, identifier string) (*WKContentRuleList, error)
 	RemoveContentRuleListForIdentifier(ctx context.Context, identifier string) error
-	GetAvailableContentRuleListIdentifiers(completionHandler objc.Block)
+	GetAvailableContentRuleListIdentifiers(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error)
 }
 
 var _ WKContentRuleListStoreable = (*WKContentRuleListStore)(nil)

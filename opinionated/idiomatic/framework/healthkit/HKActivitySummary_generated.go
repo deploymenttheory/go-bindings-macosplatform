@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains the move, exercise, and stand data for a given day.
+//
 // ActivitySummary wraps [raw.HKActivitySummary] with a fluent Go API.
 type ActivitySummary struct {
 	inner *raw.HKActivitySummary
@@ -36,7 +38,7 @@ func NewActivitySummary() *ActivitySummary {
 	return &ActivitySummary{inner: raw.HKActivitySummaryFromID(_id)}
 }
 
-// @property      activityMoveMode @abstract      The move mode of this activity summary @discussion    The move mode of an activity summary determines if activeEnergyBurned or appleMoveTime are used for the move ring.
+// The move mode that they system used for this activity summary.
 //
 // WithActivityMoveMode sets the activityMoveMode property and returns the receiver for chaining.
 func (x *ActivitySummary) WithActivityMoveMode(activityMoveMode HKActivityMoveMode) *ActivitySummary {
@@ -52,7 +54,7 @@ func (x *ActivitySummary) WithPaused(paused bool) *ActivitySummary {
 	return x
 }
 
-// @property      activeEnergyBurned @abstract      The amount of active energy that the user burned. @discussion    This quantity is compatible with energy units.
+// The amount of active energy the user burned during the specified day.
 //
 // WithActiveEnergyBurned sets the activeEnergyBurned property and returns the receiver for chaining.
 func (x *ActivitySummary) WithActiveEnergyBurned(activeEnergyBurned *Quantity) *ActivitySummary {
@@ -60,7 +62,7 @@ func (x *ActivitySummary) WithActiveEnergyBurned(activeEnergyBurned *Quantity) *
 	return x
 }
 
-// @property      appleMoveTime @abstract      The amount of move time that the user performed. @discussion    This quantity is compatible with time units. The measurement criteria of move time time is defined by Apple.
+// The amount of time the user spent performing activities that involve full-body movements during the specified day.
 //
 // WithAppleMoveTime sets the appleMoveTime property and returns the receiver for chaining.
 func (x *ActivitySummary) WithAppleMoveTime(appleMoveTime *Quantity) *ActivitySummary {
@@ -68,7 +70,7 @@ func (x *ActivitySummary) WithAppleMoveTime(appleMoveTime *Quantity) *ActivitySu
 	return x
 }
 
-// @property      appleExerciseTime @abstract      The amount of exercise time that the user performed. @discussion    This quantity is compatible with time units. The measurement criteria of exercise time is defined by Apple.
+// The amount of time that the user has spent exercising during the specified day.
 //
 // WithAppleExerciseTime sets the appleExerciseTime property and returns the receiver for chaining.
 func (x *ActivitySummary) WithAppleExerciseTime(appleExerciseTime *Quantity) *ActivitySummary {
@@ -76,7 +78,7 @@ func (x *ActivitySummary) WithAppleExerciseTime(appleExerciseTime *Quantity) *Ac
 	return x
 }
 
-// @property      appleStandHours @abstract      The number of stand hours that the user earned. @discussion     This quantity is compatible with the count unit. The measurement criteria of stand hours is defined by Apple.
+// The number hours in the specified day during which the user has stood and moved for at least a minute per hour.
 //
 // WithAppleStandHours sets the appleStandHours property and returns the receiver for chaining.
 func (x *ActivitySummary) WithAppleStandHours(appleStandHours *Quantity) *ActivitySummary {
@@ -84,7 +86,7 @@ func (x *ActivitySummary) WithAppleStandHours(appleStandHours *Quantity) *Activi
 	return x
 }
 
-// @property      activeEnergyBurnedGoal @abstract      The user's active energy goal for the day. @discussion    This quantity is compatible with energy units.
+// The user’s daily goal for active energy burned.
 //
 // WithActiveEnergyBurnedGoal sets the activeEnergyBurnedGoal property and returns the receiver for chaining.
 func (x *ActivitySummary) WithActiveEnergyBurnedGoal(activeEnergyBurnedGoal *Quantity) *ActivitySummary {
@@ -92,7 +94,7 @@ func (x *ActivitySummary) WithActiveEnergyBurnedGoal(activeEnergyBurnedGoal *Qua
 	return x
 }
 
-// @property      appleMoveTimeGoal @abstract      The user's move time goal for the day. @discussion    This quantity is compatible with time units.
+// The user’s daily goal for move time.
 //
 // WithAppleMoveTimeGoal sets the appleMoveTimeGoal property and returns the receiver for chaining.
 func (x *ActivitySummary) WithAppleMoveTimeGoal(appleMoveTimeGoal *Quantity) *ActivitySummary {
@@ -100,7 +102,7 @@ func (x *ActivitySummary) WithAppleMoveTimeGoal(appleMoveTimeGoal *Quantity) *Ac
 	return x
 }
 
-// @property      appleExerciseTimeGoal @abstract      The user's exercise time goal for the day. @discussion    This quantity is compatible with time units.
+// The user’s daily exercise goal.
 //
 // WithAppleExerciseTimeGoal sets the appleExerciseTimeGoal property and returns the receiver for chaining.
 func (x *ActivitySummary) WithAppleExerciseTimeGoal(appleExerciseTimeGoal *Quantity) *ActivitySummary {
@@ -108,7 +110,7 @@ func (x *ActivitySummary) WithAppleExerciseTimeGoal(appleExerciseTimeGoal *Quant
 	return x
 }
 
-// @property      exerciseTimeGoal @abstract      The user's exercise time goal for the day. @discussion    This quantity is compatible with time units.
+// The user’s daily goal for exercise time.
 //
 // WithExerciseTimeGoal sets the exerciseTimeGoal property and returns the receiver for chaining.
 func (x *ActivitySummary) WithExerciseTimeGoal(exerciseTimeGoal *Quantity) *ActivitySummary {
@@ -116,7 +118,7 @@ func (x *ActivitySummary) WithExerciseTimeGoal(exerciseTimeGoal *Quantity) *Acti
 	return x
 }
 
-// @property      appleStandHoursGoal @abstract      The user's active stand hours goal for the day. @discussion    This quantity is compatible with the count unit.
+// The user’s daily goal for stand hours.
 //
 // WithAppleStandHoursGoal sets the appleStandHoursGoal property and returns the receiver for chaining.
 func (x *ActivitySummary) WithAppleStandHoursGoal(appleStandHoursGoal *Quantity) *ActivitySummary {
@@ -124,7 +126,7 @@ func (x *ActivitySummary) WithAppleStandHoursGoal(appleStandHoursGoal *Quantity)
 	return x
 }
 
-// @property      standHoursGoal @abstract      The user's active stand hours goal for the day. @discussion    This quantity is compatible with the count unit.
+// The user’s daily goal for stand hours.
 //
 // WithStandHoursGoal sets the standHoursGoal property and returns the receiver for chaining.
 func (x *ActivitySummary) WithStandHoursGoal(standHoursGoal *Quantity) *ActivitySummary {
@@ -132,7 +134,7 @@ func (x *ActivitySummary) WithStandHoursGoal(standHoursGoal *Quantity) *Activity
 	return x
 }
 
-// @method        dateComponentsForCalendar: @abstract      The date components representing the day for this particular HKActivitySummary. @discussion    These date components will contain era, year, month, and day components in the provided calendar.
+// Date components that uniquely identify the day represented by the summary object.
 //
 // DateComponentsForCalendar calls the underlying DateComponentsForCalendar.
 func (x *ActivitySummary) DateComponentsForCalendar(calendar *foundation.NSCalendar) *foundation.NSDateComponents {

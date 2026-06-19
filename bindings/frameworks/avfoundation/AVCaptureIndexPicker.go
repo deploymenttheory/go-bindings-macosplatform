@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A control for selecting from a set of mutually exclusive values by index.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptureindexpicker
 type AVCaptureIndexPicker struct {
 	AVCaptureControl
@@ -41,7 +43,7 @@ func AVCaptureIndexPickerFromID(id objc.ID) *AVCaptureIndexPicker {
 	return o
 }
 
-// @method initWithLocalizedTitle:symbolName:numberOfIndexes: @abstract Initializes an `AVCaptureIndexPicker` to pick between `numberOfIndexes` values. @param localizedTitle A localized string that describes the picker's `action`. @param symbolName The name of a symbol to represent the picker. @param numberOfIndexes The number of indexes to pick between. `numberOfIndexes` must be greater than 0, otherwise an `NSInvalidArgumentException` is thrown. @result An `AVCaptureIndexPicker` instance that picks between `numberOfIndexes` values. @discussion Suitable when your picked values don't need titles.
+// Creates a control to pick a value from the specified number of indexes.
 func (o *AVCaptureIndexPicker) InitWithLocalizedTitleSymbolNameNumberOfIndexes(localizedTitle *foundation.NSString, symbolName *foundation.NSString, numberOfIndexes int) *AVCaptureIndexPicker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureIndexPickerSelInitWithLocalizedTitleSymbolNameNumberOfIndexes, localizedTitle.Ptr(), symbolName.Ptr(), numberOfIndexes)
 	if _ret != 0 {
@@ -50,7 +52,7 @@ func (o *AVCaptureIndexPicker) InitWithLocalizedTitleSymbolNameNumberOfIndexes(l
 	return AVCaptureIndexPickerFromID(_ret)
 }
 
-// @method initWithLocalizedTitle:symbolName:numberOfIndexes:localizedTitleTransform: @abstract Initializes an `AVCaptureIndexPicker` to pick between `numberOfIndexes` values. @param localizedTitle A localized string that describes the picker's `action`. @param symbolName The name of a symbol to represent the picker. @param numberOfIndexes The number of indexes to pick between. `numberOfIndexes` must be greater than 0, otherwise an `NSInvalidArgumentException` is thrown. @param localizedTitleTransform A transformation from index to localized title. @result An `AVCaptureIndexPicker` instance that picks between `numberOfIndexes` values with a transformation from index to localized title. @discussion Suitable when you want to provide a title for each picked value lazily.
+// Creates a control to pick a value from the specified number of indices.
 func (o *AVCaptureIndexPicker) InitWithLocalizedTitleSymbolNameNumberOfIndexesLocalizedTitleTransform(localizedTitle *foundation.NSString, symbolName *foundation.NSString, numberOfIndexes int, localizedTitleTransform objc.Block) *AVCaptureIndexPicker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureIndexPickerSelInitWithLocalizedTitleSymbolNameNumberOfIndexesLocalizedTitleTransform, localizedTitle.Ptr(), symbolName.Ptr(), numberOfIndexes, localizedTitleTransform)
 	if _ret != 0 {
@@ -59,16 +61,16 @@ func (o *AVCaptureIndexPicker) InitWithLocalizedTitleSymbolNameNumberOfIndexesLo
 	return AVCaptureIndexPickerFromID(_ret)
 }
 
-// @method initWithLocalizedTitle:symbolName:localizedIndexTitles: @abstract Initializes an `AVCaptureIndexPicker` to pick between `localizedIndexTitles.count` values. @param localizedTitle A localized string that describes the picker's `action`. @param symbolName The name of a symbol to represent the picker. @param localizedIndexTitles The titles to use for each index. `localizedIndexTitles` must be greater than 0, otherwise an `NSInvalidArgumentException` is thrown. @result An `AVCaptureIndexPicker` instance that picks between `localizedIndexTitles.count` values. @discussion Suitable when you already have an array containing a title for each picked value.
+// Creates an object to select an index from a set of values.
 func (o *AVCaptureIndexPicker) InitWithLocalizedTitleSymbolNameLocalizedIndexTitles(localizedTitle *foundation.NSString, symbolName *foundation.NSString, localizedIndexTitles *foundation.NSArray[*foundation.NSString]) *AVCaptureIndexPicker {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureIndexPickerSelInitWithLocalizedTitleSymbolNameLocalizedIndexTitles, localizedTitle.Ptr(), symbolName.Ptr(), localizedIndexTitles)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureIndexPickerSelInitWithLocalizedTitleSymbolNameLocalizedIndexTitles, localizedTitle.Ptr(), symbolName.Ptr(), localizedIndexTitles.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVCaptureIndexPickerFromID(_ret)
 }
 
-// @method setActionQueue:action: @abstract Configures the picker's `action` which is called on `actionQueue` whenever the index of the picker is changed. @param actionQueue A queue for the `action` to be called. @param action An action called on `actionQueue` whenever the selected index of the picker is changed. @discussion Because the camera system may be independent from the main thread or `@MainActor`, `action` is always called on an internal `DispatchSerialQueue` targeted at `actionQueue`. If `action` modifies a property of the camera system, `actionQueue` must represent the same exclusive execution context as the camera system (see `isSameExclusiveExecutionContext`).
+// Sets the action to perform on the specified dispatch queue when the control’s value changes.
 func (o *AVCaptureIndexPicker) SetActionQueueAction(actionQueue *foundation.NSObject, action func(int)) {
 	var __block_action objc.Block
 	if action != nil {
@@ -116,8 +118,11 @@ func (o *AVCaptureIndexPicker) NumberOfIndexes() int {
 
 // @property localizedIndexTitles @abstract The titles used for each index.
 func (o *AVCaptureIndexPicker) LocalizedIndexTitles() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVCaptureIndexPickerSelLocalizedIndexTitles)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureIndexPickerSelLocalizedIndexTitles)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property accessibilityIdentifier @abstract A string that identifies the picker.

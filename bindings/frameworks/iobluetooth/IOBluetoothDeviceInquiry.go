@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Object representing a device inquiry that finds Bluetooth devices in-range of the computer, and (optionally) retrieves name information for them.
+//
 // Apple documentation: https://developer.apple.com/documentation/iobluetooth/iobluetoothdeviceinquiry
 type IOBluetoothDeviceInquiry struct {
 	foundation.NSObject
@@ -44,6 +46,7 @@ func IOBluetoothDeviceInquiryFromID(id objc.ID) *IOBluetoothDeviceInquiry {
 	return o
 }
 
+// Class method to create an inquiry object.
 func IOBluetoothDeviceInquiryInquiryWithDelegate(delegate objc.ID) *IOBluetoothDeviceInquiry {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDeviceInquiry), _iOBluetoothDeviceInquirySelInquiryWithDelegate, delegate)
 	if _ret != 0 {
@@ -52,6 +55,7 @@ func IOBluetoothDeviceInquiryInquiryWithDelegate(delegate objc.ID) *IOBluetoothD
 	return IOBluetoothDeviceInquiryFromID(_ret)
 }
 
+// Initializes an alloc’d inquiry object, and sets the delegate object, as if -setDelegate: were called on it.
 func (o *IOBluetoothDeviceInquiry) InitWithDelegate(delegate objc.ID) *IOBluetoothDeviceInquiry {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceInquirySelInitWithDelegate, delegate)
 	if _ret != 0 {
@@ -60,25 +64,33 @@ func (o *IOBluetoothDeviceInquiry) InitWithDelegate(delegate objc.ID) *IOBluetoo
 	return IOBluetoothDeviceInquiryFromID(_ret)
 }
 
+// Tells inquiry object to begin the inquiry and name updating process, if specified.
 func (o *IOBluetoothDeviceInquiry) Start() int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceInquirySelStart)
 	return _ret
 }
 
+// Halts the inquiry object. Could either stop the search for new devices, or the updating of found device names.
 func (o *IOBluetoothDeviceInquiry) Stop() int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothDeviceInquirySelStop)
 	return _ret
 }
 
+// Returns found IOBluetoothDevice objects as an array.
 func (o *IOBluetoothDeviceInquiry) FoundDevices() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iOBluetoothDeviceInquirySelFoundDevices)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceInquirySelFoundDevices)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Removes all found devices from the inquiry object.
 func (o *IOBluetoothDeviceInquiry) ClearFoundDevices() {
 	o.Ptr().Send(_iOBluetoothDeviceInquirySelClearFoundDevices)
 }
 
+// Use this method to set the criteria for the device search.
 func (o *IOBluetoothDeviceInquiry) SetSearchCriteriaMajorDeviceClassMinorDeviceClass(inServiceClassMajor uint32, inMajorDeviceClass uint32, inMinorDeviceClass uint32) {
 	o.Ptr().Send(_iOBluetoothDeviceInquirySelSetSearchCriteriaMajorDeviceClassMinorDeviceClass, inServiceClassMajor, inMajorDeviceClass, inMinorDeviceClass)
 }

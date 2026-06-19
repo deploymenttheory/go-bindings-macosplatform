@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A game session you can use to save game data, invite other players, and create turn-based and real-time game apps.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkgamesession
 // Deprecated: For real-time matches, use GKMatchmakerViewController. For turn-based matches, use GKTurnBasedMatchmakerViewController.
 type GKGameSession struct {
@@ -54,6 +56,7 @@ func GKGameSessionFromID(id objc.ID) *GKGameSession {
 	return o
 }
 
+// Creates a new game session inside of an iCloud container.
 func GKGameSessionCreateSessionInContainerWithTitleMaxConnectedPlayersCompletionHandler(containerName *foundation.NSString, title *foundation.NSString, maxPlayers int, completionHandler func(*GKGameSession, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -68,6 +71,7 @@ func GKGameSessionCreateSessionInContainerWithTitleMaxConnectedPlayersCompletion
 	objc.ID(_clsGKGameSession).Send(_gKGameSessionSelCreateSessionInContainerWithTitleMaxConnectedPlayersCompletionHandler, containerName.Ptr(), title.Ptr(), maxPlayers, __block_completionHandler)
 }
 
+// Retrieves all of the game sessions associated with a container.
 func GKGameSessionLoadSessionsInContainerCompletionHandler(containerName *foundation.NSString, completionHandler func(*foundation.NSArray[*GKGameSession], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -82,6 +86,7 @@ func GKGameSessionLoadSessionsInContainerCompletionHandler(containerName *founda
 	objc.ID(_clsGKGameSession).Send(_gKGameSessionSelLoadSessionsInContainerCompletionHandler, containerName.Ptr(), __block_completionHandler)
 }
 
+// Loads a specific game session.
 func GKGameSessionLoadSessionWithIdentifierCompletionHandler(identifier *foundation.NSString, completionHandler func(*GKGameSession, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -96,6 +101,7 @@ func GKGameSessionLoadSessionWithIdentifierCompletionHandler(identifier *foundat
 	objc.ID(_clsGKGameSession).Send(_gKGameSessionSelLoadSessionWithIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
 }
 
+// Removes the specified game session.
 func GKGameSessionRemoveSessionWithIdentifierCompletionHandler(identifier *foundation.NSString, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -107,6 +113,7 @@ func GKGameSessionRemoveSessionWithIdentifierCompletionHandler(identifier *found
 	objc.ID(_clsGKGameSession).Send(_gKGameSessionSelRemoveSessionWithIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
 }
 
+// Retrieves the URL used to share a game session.
 func (o *GKGameSession) GetShareURLWithCompletionHandler(completionHandler func(*foundation.NSURL, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -121,6 +128,7 @@ func (o *GKGameSession) GetShareURLWithCompletionHandler(completionHandler func(
 	o.Ptr().Send(_gKGameSessionSelGetShareURLWithCompletionHandler, __block_completionHandler)
 }
 
+// Retrieves the game data from the current game session.
 func (o *GKGameSession) LoadDataWithCompletionHandler(completionHandler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -135,6 +143,7 @@ func (o *GKGameSession) LoadDataWithCompletionHandler(completionHandler func(*fo
 	o.Ptr().Send(_gKGameSessionSelLoadDataWithCompletionHandler, __block_completionHandler)
 }
 
+// Saves the current game session data.
 func (o *GKGameSession) SaveDataCompletionHandler(data *foundation.NSData, completionHandler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -149,6 +158,7 @@ func (o *GKGameSession) SaveDataCompletionHandler(data *foundation.NSData, compl
 	o.Ptr().Send(_gKGameSessionSelSaveDataCompletionHandler, data.Ptr(), __block_completionHandler)
 }
 
+// Sets the connection state for the player.
 func (o *GKGameSession) SetConnectionStateCompletionHandler(state GKConnectionState, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -160,6 +170,7 @@ func (o *GKGameSession) SetConnectionStateCompletionHandler(state GKConnectionSt
 	o.Ptr().Send(_gKGameSessionSelSetConnectionStateCompletionHandler, state, __block_completionHandler)
 }
 
+// Retrieves a list of players with the specified connection state.
 func (o *GKGameSession) PlayersWithConnectionState(state GKConnectionState) *foundation.NSArray[*GKCloudPlayer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameSessionSelPlayersWithConnectionState, state)
 	if _ret != 0 {
@@ -168,6 +179,7 @@ func (o *GKGameSession) PlayersWithConnectionState(state GKConnectionState) *fou
 	return foundation.NSArrayFromID[*GKCloudPlayer](_ret)
 }
 
+// Sends the indicated data to all connected players.
 func (o *GKGameSession) SendDataWithTransportTypeCompletionHandler(data *foundation.NSData, transport GKTransportType, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -179,6 +191,7 @@ func (o *GKGameSession) SendDataWithTransportTypeCompletionHandler(data *foundat
 	o.Ptr().Send(_gKGameSessionSelSendDataWithTransportTypeCompletionHandler, data.Ptr(), transport, __block_completionHandler)
 }
 
+// Sends a message to players in a game session.
 func (o *GKGameSession) SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBadgePlayersCompletionHandler(key *foundation.NSString, arguments *foundation.NSArray[*foundation.NSString], data *foundation.NSData, players *foundation.NSArray[*GKCloudPlayer], badgePlayers bool, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -187,9 +200,10 @@ func (o *GKGameSession) SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersB
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_gKGameSessionSelSendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBadgePlayersCompletionHandler, key.Ptr(), arguments, data.Ptr(), players.Ptr(), badgePlayers, __block_completionHandler)
+	o.Ptr().Send(_gKGameSessionSelSendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBadgePlayersCompletionHandler, key.Ptr(), arguments.Ptr(), data.Ptr(), players.Ptr(), badgePlayers, __block_completionHandler)
 }
 
+// Clears the badge from the designated players.
 func (o *GKGameSession) ClearBadgeForPlayersCompletionHandler(players *foundation.NSArray[*GKCloudPlayer], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -262,11 +276,13 @@ func (o *GKGameSession) BadgedPlayers() *foundation.NSArray[*GKCloudPlayer] {
 	return foundation.NSArrayFromID[*GKCloudPlayer](_ret)
 }
 
+// Adds a new event listener object.
 // Deprecated: since macOS 10.14.
 func GKGameSessionAddEventListener(listener *foundation.NSObject) {
 	objc.ID(_clsGKGameSession).Send(_gKGameSessionSelAddEventListener, listener.Ptr())
 }
 
+// Stops listening to the event listener object.
 // Deprecated: since macOS 10.14.
 func GKGameSessionRemoveEventListener(listener *foundation.NSObject) {
 	objc.ID(_clsGKGameSession).Send(_gKGameSessionSelRemoveEventListener, listener.Ptr())

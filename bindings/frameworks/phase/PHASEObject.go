@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object in the scene.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseobject
 type PHASEObject struct {
 	foundation.NSObject
@@ -44,7 +46,7 @@ func PHASEObjectFromID(id objc.ID) *PHASEObject {
 	return o
 }
 
-// @method initWithEngine: @abstract Initialize a new object.
+// Creates an object in the scene.
 func (o *PHASEObject) InitWithEngine(engine *PHASEEngine) *PHASEObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEObjectSelInitWithEngine, engine.Ptr())
 	if _ret != 0 {
@@ -53,7 +55,7 @@ func (o *PHASEObject) InitWithEngine(engine *PHASEEngine) *PHASEObject {
 	return PHASEObjectFromID(_ret)
 }
 
-// @method addChild:error: @abstract Add a child to this object @param child The child object @param error Returns an error if the child already has a parent. @return YES for success
+// Adds the given object as a child.
 func (o *PHASEObject) AddChildError(child *PHASEObject) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _pHASEObjectSelAddChildError, child.Ptr(), unsafe.Pointer(&_nsErr))
@@ -63,12 +65,12 @@ func (o *PHASEObject) AddChildError(child *PHASEObject) (bool, error) {
 	return _ret, nil
 }
 
-// @method removeChild: @abstract Remove a child from this object.
+// Removes the given object as a child.
 func (o *PHASEObject) RemoveChild(child *PHASEObject) {
 	o.Ptr().Send(_pHASEObjectSelRemoveChild, child.Ptr())
 }
 
-// @method removeChildren @abstract Remove all the children from this object
+// Removes all child objects from the given object.
 func (o *PHASEObject) RemoveChildren() {
 	o.Ptr().Send(_pHASEObjectSelRemoveChildren)
 }

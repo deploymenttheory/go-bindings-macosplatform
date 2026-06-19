@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object in the payment queue.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skpaymenttransaction
 // Deprecated: Use PurchaseResult from Product.purchase(confirmIn:options:).
 type SKPaymentTransaction struct {

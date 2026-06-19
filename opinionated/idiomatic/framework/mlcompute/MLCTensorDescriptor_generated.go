@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object you use to create a tensor.
+//
 // TensorDescriptor wraps [raw.MLCTensorDescriptor] with a fluent Go API.
 type TensorDescriptor struct {
 	inner *raw.MLCTensorDescriptor

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The fundamental storage mechanism of TextKit that contains the text managed by the system.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextstorage
 type NSTextStorage struct {
 	foundation.NSMutableAttributedString
@@ -56,26 +58,32 @@ func NSTextStorageFromID(id objc.ID) *NSTextStorage {
 	return o
 }
 
+// Adds a layout manager to the text storage object’s set of layout managers.
 func (o *NSTextStorage) AddLayoutManager(aLayoutManager *NSLayoutManager) {
 	o.Ptr().Send(_nSTextStorageSelAddLayoutManager, aLayoutManager.Ptr())
 }
 
+// Removes a layout manager from the text storage object’s set of layout managers.
 func (o *NSTextStorage) RemoveLayoutManager(aLayoutManager *NSLayoutManager) {
 	o.Ptr().Send(_nSTextStorageSelRemoveLayoutManager, aLayoutManager.Ptr())
 }
 
+// Tracks changes made to the text storage object, allowing the text storage to record the full extent of changes.
 func (o *NSTextStorage) EditedRangeChangeInLength(editedMask NSTextStorageEditActions, editedRange foundation.NSRange, delta int) {
 	o.Ptr().Send(_nSTextStorageSelEditedRangeChangeInLength, editedMask, editedRange, delta)
 }
 
+// Cleans up changes to the text storage object and notifies its delegate and layout managers of changes.
 func (o *NSTextStorage) ProcessEditing() {
 	o.Ptr().Send(_nSTextStorageSelProcessEditing)
 }
 
+// Invalidates attributes in the specified range.
 func (o *NSTextStorage) InvalidateAttributesInRange(range_ foundation.NSRange) {
 	o.Ptr().Send(_nSTextStorageSelInvalidateAttributesInRange, range_)
 }
 
+// Ensures that attribute fixing occurs in the specified range.
 func (o *NSTextStorage) EnsureAttributesAreFixedInRange(range_ foundation.NSRange) {
 	o.Ptr().Send(_nSTextStorageSelEnsureAttributesAreFixedInRange, range_)
 }

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents an indexed change within an ordered collection.
+//
 // OrderedCollectionChange wraps [raw.NSOrderedCollectionChange] with a fluent Go API.
 type OrderedCollectionChange struct {
 	inner *raw.NSOrderedCollectionChange[objc.ID]
@@ -29,6 +31,8 @@ func OrderedCollectionChangeFromID(id objc.ID) *OrderedCollectionChange {
 	return &OrderedCollectionChange{inner: raw.NSOrderedCollectionChangeFromID[objc.ID](id)}
 }
 
+// Creates a change object that represents inserting or removing an object from an ordered collection at a specific index.
+//
 // NewOrderedCollectionChangeWithObjectTypeIndex creates a new [OrderedCollectionChange].
 func NewOrderedCollectionChangeWithObjectTypeIndex(anObject objc.ID, type_ NSCollectionChangeType, index uint) *OrderedCollectionChange {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedCollectionChange")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewOrderedCollectionChangeWithObjectTypeIndex(anObject objc.ID, type_ NSCol
 	return &OrderedCollectionChange{inner: raw.NSOrderedCollectionChangeFromID[objc.ID](_id)}
 }
 
+// Creates a change object that represents inserting, removing, or moving an object from an ordered collection at a specific index.
+//
 // NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex creates a new [OrderedCollectionChange].
 func NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex(anObject objc.ID, type_ NSCollectionChangeType, index uint, associatedIndex uint) *OrderedCollectionChange {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedCollectionChange")), objc.RegisterName("alloc"))

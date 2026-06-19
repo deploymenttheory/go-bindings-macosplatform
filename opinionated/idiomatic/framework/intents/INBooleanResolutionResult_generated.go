@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for a Boolean value associated with an intent.
+//
 // BooleanResolutionResult wraps [raw.INBooleanResolutionResult] with a fluent Go API.
 type BooleanResolutionResult struct {
 	inner *raw.INBooleanResolutionResult

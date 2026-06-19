@@ -8,11 +8,15 @@ import (
 	"strings"
 )
 
+// Flags that describe the display of a generic view.
 type AUGenericViewDisplayFlags int64
 
 const (
-	AUViewTitleDisplayFlag      AUGenericViewDisplayFlags = 1
+	// If set, the generic view displays the title and manufacturer of the audio unit.
+	AUViewTitleDisplayFlag AUGenericViewDisplayFlags = 1
+	// If set, the generic view displays the audio unit properties of the audio unit.
 	AUViewPropertiesDisplayFlag AUGenericViewDisplayFlags = 2
+	// If set, the generic view displays the audio unit parameters of the audio unit.
 	AUViewParametersDisplayFlag AUGenericViewDisplayFlags = 4
 )
 

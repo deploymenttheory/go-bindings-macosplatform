@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object you use to create an embedding layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor
 type MLCEmbeddingDescriptor struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func MLCEmbeddingDescriptorFromID(id objc.ID) *MLCEmbeddingDescriptor {
 	return o
 }
 
+// Creates an embedding descriptor with the size of the dictionary and dimension of embedding vectors you specify.
 func MLCEmbeddingDescriptorDescriptorWithEmbeddingCountEmbeddingDimension(embeddingCount *foundation.NSNumber, embeddingDimension *foundation.NSNumber) *MLCEmbeddingDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCEmbeddingDescriptor), _mLCEmbeddingDescriptorSelDescriptorWithEmbeddingCountEmbeddingDimension, embeddingCount.Ptr(), embeddingDimension.Ptr())
 	if _ret != 0 {
@@ -45,6 +48,7 @@ func MLCEmbeddingDescriptorDescriptorWithEmbeddingCountEmbeddingDimension(embedd
 	return MLCEmbeddingDescriptorFromID(_ret)
 }
 
+// Creates a new embedding descriptor with the size and dimension of embedding vectors, padding index, and norm and scaling options that you specify.
 func MLCEmbeddingDescriptorDescriptorWithEmbeddingCountEmbeddingDimensionPaddingIndexMaximumNormPNormScalesGradientByFrequency(embeddingCount *foundation.NSNumber, embeddingDimension *foundation.NSNumber, paddingIndex *foundation.NSNumber, maximumNorm *foundation.NSNumber, pNorm *foundation.NSNumber, scalesGradientByFrequency bool) *MLCEmbeddingDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCEmbeddingDescriptor), _mLCEmbeddingDescriptorSelDescriptorWithEmbeddingCountEmbeddingDimensionPaddingIndexMaximumNormPNormScalesGradientByFrequency, embeddingCount.Ptr(), embeddingDimension.Ptr(), paddingIndex.Ptr(), maximumNorm.Ptr(), pNorm.Ptr(), scalesGradientByFrequency)
 	if _ret != 0 {

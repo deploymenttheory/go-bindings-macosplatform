@@ -7,6 +7,7 @@ import (
 	"unsafe"
 )
 
+// A structure that defines the context or operating environment for an allocator (CFAllocator) object. Every Core Foundation allocator object must have a context defined for it.
 type CFAllocatorContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -19,6 +20,7 @@ type CFAllocatorContext struct {
 	PreferredSize   unsafe.Pointer
 }
 
+// Structure containing the callbacks of a CFArray.
 type CFArrayCallBacks struct {
 	Version         int
 	Retain          unsafe.Pointer
@@ -27,6 +29,7 @@ type CFArrayCallBacks struct {
 	Equal           unsafe.Pointer
 }
 
+// This structure contains the callbacks used to retain, release, describe, and compare the values of a CFBag object.
 type CFBagCallBacks struct {
 	Version         int
 	Retain          unsafe.Pointer
@@ -36,7 +39,7 @@ type CFBagCallBacks struct {
 	Hash            unsafe.Pointer
 }
 
-// @typedef CFBinaryHeapCallBacks Structure containing the callbacks for values of a CFBinaryHeap. @field version The version number of the structure type being passed in as a parameter to the CFBinaryHeap creation functions. This structure is version 0. @field retain The callback used to add a retain for the binary heap on values as they are put into the binary heap. This callback returns the value to use as the value in the binary heap, which is usually the value parameter passed to this callback, but may be a different value if a different value should be added to the binary heap. The binary heap's allocator is passed as the first argument. @field release The callback used to remove a retain previously added for the binary heap from values as they are removed from the binary heap. The binary heap's allocator is passed as the first argument. @field copyDescription The callback used to create a descriptive string representation of each value in the binary heap. This is used by the CFCopyDescription() function. @field compare The callback used to compare values in the binary heap for equality in some operations.
+// Structure containing the callbacks for values for a CFBinaryHeap object.
 type CFBinaryHeapCallBacks struct {
 	Version         int
 	Retain          unsafe.Pointer
@@ -45,6 +48,7 @@ type CFBinaryHeapCallBacks struct {
 	Compare         unsafe.Pointer
 }
 
+// Not used.
 type CFBinaryHeapCompareContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -53,6 +57,7 @@ type CFBinaryHeapCompareContext struct {
 	CopyDescription unsafe.Pointer
 }
 
+// This structure contains the callbacks used to retain, release, describe, and compare the keys in a dictionary.
 type CFDictionaryKeyCallBacks struct {
 	Version         int
 	Retain          unsafe.Pointer
@@ -62,7 +67,7 @@ type CFDictionaryKeyCallBacks struct {
 	Hash            unsafe.Pointer
 }
 
-// @typedef CFDictionaryValueCallBacks Structure containing the callbacks for values of a CFDictionary. @field version The version number of the structure type being passed in as a parameter to the CFDictionary creation functions. This structure is version 0. @field retain The callback used to add a retain for the dictionary on values as they are put into the dictionary. This callback returns the value to use as the value in the dictionary, which is usually the value parameter passed to this callback, but may be a different value if a different value should be added to the dictionary. The dictionary's allocator is passed as the first argument. @field release The callback used to remove a retain previously added for the dictionary from values as they are removed from the dictionary. The dictionary's allocator is passed as the first argument. @field copyDescription The callback used to create a descriptive string representation of each value in the dictionary. This is used by the CFCopyDescription() function. @field equal The callback used to compare values in the dictionary for equality in some operations.
+// This structure contains the callbacks used to retain, release, describe, and compare the values in a dictionary.
 type CFDictionaryValueCallBacks struct {
 	Version         int
 	Retain          unsafe.Pointer
@@ -71,6 +76,7 @@ type CFDictionaryValueCallBacks struct {
 	Equal           unsafe.Pointer
 }
 
+// Defines a structure for the context of a CFFileDescriptor.
 type CFFileDescriptorContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -79,6 +85,7 @@ type CFFileDescriptorContext struct {
 	CopyDescription unsafe.Pointer
 }
 
+// Structure used to represent a point in time using the Gregorian calendar.
 type CFGregorianDate struct {
 	Year   int
 	Month  int8
@@ -88,6 +95,7 @@ type CFGregorianDate struct {
 	Second float64
 }
 
+// Structure used to represent a time interval in Gregorian units.
 // Deprecated: Use CFCalendar or NSCalendar API instead
 type CFGregorianUnits struct {
 	Years   int
@@ -98,6 +106,7 @@ type CFGregorianUnits struct {
 	Seconds float64
 }
 
+// A structure that contains program-defined data and callbacks with which you can configure a CFMachPort object’s behavior.
 type CFMachPortContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -106,6 +115,7 @@ type CFMachPortContext struct {
 	CopyDescription unsafe.Pointer
 }
 
+// A structure that contains program-defined data and callbacks with which you can configure a CFMessagePort object’s behavior.
 type CFMessagePortContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -114,11 +124,13 @@ type CFMessagePortContext struct {
 	CopyDescription unsafe.Pointer
 }
 
+// A structure representing a range of sequential items in a container, such as characters in a buffer or elements in a collection.
 type CFRange struct {
 	Location int
 	Length   int
 }
 
+// A structure that contains program-defined data and callbacks with which you can configure a CFRunLoopObserver object’s behavior.
 type CFRunLoopObserverContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -127,6 +139,7 @@ type CFRunLoopObserverContext struct {
 	CopyDescription unsafe.Pointer
 }
 
+// A structure that contains program-defined data and callbacks with which you can configure a version 0 CFRunLoopSource’s behavior.
 type CFRunLoopSourceContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -140,6 +153,7 @@ type CFRunLoopSourceContext struct {
 	Perform         unsafe.Pointer
 }
 
+// A structure that contains program-defined data and callbacks with which you can configure a version 1 CFRunLoopSource’s behavior.
 type CFRunLoopSourceContext1 struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -152,6 +166,7 @@ type CFRunLoopSourceContext1 struct {
 	Perform         unsafe.Pointer
 }
 
+// A structure that contains program-defined data and callbacks with which you can configure a CFRunLoopTimer’s behavior.
 type CFRunLoopTimerContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -160,7 +175,7 @@ type CFRunLoopTimerContext struct {
 	CopyDescription unsafe.Pointer
 }
 
-// @typedef CFSetCallBacks Structure containing the callbacks of a CFSet. @field version The version number of the structure type being passed in as a parameter to the CFSet creation functions. This structure is version 0. @field retain The callback used to add a retain for the set on values as they are put into the set. This callback returns the value to store in the set, which is usually the value parameter passed to this callback, but may be a different value if a different value should be stored in the set. The set's allocator is passed as the first argument. @field release The callback used to remove a retain previously added for the set from values as they are removed from the set. The set's allocator is passed as the first argument. @field copyDescription The callback used to create a descriptive string representation of each value in the set. This is used by the CFCopyDescription() function. @field equal The callback used to compare values in the set for equality for some operations. @field hash The callback used to compare values in the set for uniqueness for some operations.
+// This structure contains the callbacks used to retain, release, describe, and compare the values of a CFSet object.
 type CFSetCallBacks struct {
 	Version         int
 	Retain          unsafe.Pointer
@@ -170,6 +185,7 @@ type CFSetCallBacks struct {
 	Hash            unsafe.Pointer
 }
 
+// A structure that contains program-defined data and callbacks with which you can configure a CFSocket object’s behavior.
 type CFSocketContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -178,6 +194,7 @@ type CFSocketContext struct {
 	CopyDescription unsafe.Pointer
 }
 
+// A structure that fully specifies the communication protocol and connection address of a CFSocket object.
 type CFSocketSignature struct {
 	ProtocolFamily int
 	SocketType     int
@@ -185,6 +202,7 @@ type CFSocketSignature struct {
 	Address        unsafe.Pointer
 }
 
+// A structure that contains program-defined data and callbacks with which you can configure a stream’s client behavior.
 type CFStreamClientContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -193,11 +211,13 @@ type CFStreamClientContext struct {
 	CopyDescription unsafe.Pointer
 }
 
+// The structure returned by CFReadStreamGetError and CFWriteStreamGetError.
 type CFStreamError struct {
 	Domain int
 	Error  int
 }
 
+// Defines the buffer and related fields used for in-line buffer access of characters in CFString objects.
 type CFStringInlineBuffer struct {
 	Buffer              [64]uint16
 	TheString           unsafe.Pointer
@@ -208,15 +228,17 @@ type CFStringInlineBuffer struct {
 	BufferedRangeEnd    int
 }
 
+// Structure holding a 32-bit float value in a platform-independentbyte order.
 type CFSwappedFloat32 struct {
 	V uint32
 }
 
+// Structure holding a 64-bit float value in a platform-independentbyte order.
 type CFSwappedFloat64 struct {
 	V uint64
 }
 
-// @typedef CFTreeContext Structure containing user-specified data and callbacks for a CFTree. @field version The version number of the structure type being passed in as a parameter to the CFTree creation function. This structure is version 0. @field info A C pointer to a user-specified block of data. @field retain The callback used to add a retain for the info field. If this parameter is not a pointer to a function of the correct prototype, the behavior is undefined.  The value may be NULL. @field release The calllback used to remove a retain previously added for the info field.  If this parameter is not a pointer to a function of the correct prototype, the behavior is undefined. The value may be NULL. @field copyDescription The callback used to provide a description of the info field.
+// Structure containing program-defined data and callbacks for a CFTree object.
 type CFTreeContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -225,6 +247,7 @@ type CFTreeContext struct {
 	CopyDescription unsafe.Pointer
 }
 
+// A 128-bit struct that represents a UUID as raw bytes.
 type CFUUIDBytes struct {
 	Byte0  uint8
 	Byte1  uint8
@@ -244,36 +267,43 @@ type CFUUIDBytes struct {
 	Byte15 uint8
 }
 
+// Contains information about an element attribute definition.
 type CFXMLAttributeDeclarationInfo struct {
 	AttributeName unsafe.Pointer
 	TypeString    unsafe.Pointer
 	DefaultString unsafe.Pointer
 }
 
+// Contains a list of the attributes associated with an element.
 type CFXMLAttributeListDeclarationInfo struct {
 	NumberOfAttributes int
 	Attributes         *CFXMLAttributeDeclarationInfo
 }
 
+// Contains the source URL and text encoding information for the XML document.
 type CFXMLDocumentInfo struct {
 	SourceURL unsafe.Pointer
 	Encoding  uint
 }
 
+// Contains the external ID of the DTD.
 type CFXMLDocumentTypeInfo struct {
 	ExternalID CFXMLExternalID
 }
 
+// Contains a list of element attributes packaged as CFDictionary key/value pairs.
 type CFXMLElementInfo struct {
 	Attributes     unsafe.Pointer
 	AttributeOrder unsafe.Pointer
 	IsEmpty        uint8
 }
 
+// Contains a description of the element type.
 type CFXMLElementTypeDeclarationInfo struct {
 	ContentDescription unsafe.Pointer
 }
 
+// Contains information describing an XML entity.
 type CFXMLEntityInfo struct {
 	EntityType      CFXMLEntityTypeCode
 	ReplacementText unsafe.Pointer
@@ -281,19 +311,23 @@ type CFXMLEntityInfo struct {
 	NotationName    unsafe.Pointer
 }
 
+// Contains information describing an XML entity reference.
 type CFXMLEntityReferenceInfo struct {
 	EntityType CFXMLEntityTypeCode
 }
 
+// Contains the system and public IDs for an external entity reference.
 type CFXMLExternalID struct {
 	SystemID unsafe.Pointer
 	PublicID unsafe.Pointer
 }
 
+// Contains the external ID of the notation.
 type CFXMLNotationInfo struct {
 	ExternalID CFXMLExternalID
 }
 
+// Contains version information and function pointers to callbacks needed when parsing XML.
 type CFXMLParserCallBacks struct {
 	Version               int
 	CreateXMLStructure    unsafe.Pointer
@@ -303,6 +337,7 @@ type CFXMLParserCallBacks struct {
 	HandleError           unsafe.Pointer
 }
 
+// Contains version information and function pointers to callbacks used when handling a program-defined context.
 type CFXMLParserContext struct {
 	Version         int
 	Info            unsafe.Pointer
@@ -311,6 +346,7 @@ type CFXMLParserContext struct {
 	CopyDescription unsafe.Pointer
 }
 
+// Contains the text of the processing instruction.
 type CFXMLProcessingInstructionInfo struct {
 	DataString unsafe.Pointer
 }
@@ -341,11 +377,13 @@ type CGRect struct {
 	Size   CGSize
 }
 
+// A structure that contains width and height values.
 type CGSize struct {
 	Width  float64
 	Height float64
 }
 
+// A structure that contains a two-dimensional vector.
 type CGVector struct {
 	Dx float64
 	Dy float64

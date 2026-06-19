@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that copies image data to a matrix.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagecopytomatrix
 type MPSImageCopyToMatrix struct {
 	mpscore.MPSKernel

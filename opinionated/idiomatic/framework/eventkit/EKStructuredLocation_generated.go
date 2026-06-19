@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A class that specifies a geofence to activate the alarm of a calendar item.
+//
 // StructuredLocation wraps [raw.EKStructuredLocation] with a fluent Go API.
 type StructuredLocation struct {
 	inner *raw.EKStructuredLocation
@@ -38,12 +40,16 @@ func NewStructuredLocation() *StructuredLocation {
 	return &StructuredLocation{inner: raw.EKStructuredLocationFromID(_id)}
 }
 
+// The title of the location.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *StructuredLocation) WithTitle(title string) *StructuredLocation {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A minimum distance from the core location that would trigger the alarm or reminder.
+//
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *StructuredLocation) WithRadius(radius float64) *StructuredLocation {
 	x.inner.SetRadius(radius)

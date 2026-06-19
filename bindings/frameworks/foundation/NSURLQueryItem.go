@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing a single name/value pair for an item in the query portion of a URL.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlqueryitem
 type NSURLQueryItem struct {
 	NSObject
@@ -32,6 +34,7 @@ func NSURLQueryItemFromID(id objc.ID) *NSURLQueryItem {
 	return o
 }
 
+// Initializes a newly allocated query item with the specified name and value.
 func (o *NSURLQueryItem) InitWithNameValue(name *NSString, value *NSString) *NSURLQueryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLQueryItemSelInitWithNameValue, name.Ptr(), value.Ptr())
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func (o *NSURLQueryItem) InitWithNameValue(name *NSString, value *NSString) *NSU
 	return NSURLQueryItemFromID(_ret)
 }
 
+// Creates a new query item with the specified name and value.
 func NSURLQueryItemQueryItemWithNameValue(name *NSString, value *NSString) *NSURLQueryItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLQueryItem), _nSURLQueryItemSelQueryItemWithNameValue, name.Ptr(), value.Ptr())
 	if _ret != 0 {

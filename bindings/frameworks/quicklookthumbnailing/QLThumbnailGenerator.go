@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that generates thumbnail images based on provided requirements.
+//
 // Apple documentation: https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerator
 type QLThumbnailGenerator struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func QLThumbnailGeneratorFromID(id objc.ID) *QLThumbnailGenerator {
 	return o
 }
 
-// @param completionHandler Always called when the thumbnail generation is over. The thumbnail passed to this handler is the most representative version of the thumbnail that was successfully generated (if any). If set, the error contains information about the issue that occurred while trying to generate the thumbnail. QLThumbnail error codes can be found in <QuickLookThumbnailing/QLThumbnailErrors.h>.
+// Generates the best possible thumbnail representation for a file and calls a handler upon completion.
 func (o *QLThumbnailGenerator) GenerateBestRepresentationForRequestCompletionHandler(request *QLThumbnailGenerationRequest, completionHandler func(*QLThumbnailRepresentation, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -53,7 +55,7 @@ func (o *QLThumbnailGenerator) GenerateBestRepresentationForRequestCompletionHan
 	o.Ptr().Send(_qLThumbnailGeneratorSelGenerateBestRepresentationForRequestCompletionHandler, request.Ptr(), __block_completionHandler)
 }
 
-// @param updateHandler Called for the successive requested representations of a thumbnail. If a representation was not successfully generated, this may be called with a nil representation. If a requested more representative version was successfully generated before a less representative one, this handler will be called only for the more representative version, skipping the less representative one. This handler is guaranteed to be called at least once, for the requested most representative version, whether a representation could be successfully generated or not. If set, the error contains information about the issue that occurred while trying to generate the representation of the given type. QLThumbnail error codes can be found in <QuickLookThumbnailing/QLThumbnailErrors.h>.
+// Generates various thumbnail representations for a file and calls the update handler for each thumbnail representation.
 func (o *QLThumbnailGenerator) GenerateRepresentationsForRequestUpdateHandler(request *QLThumbnailGenerationRequest, updateHandler func(*QLThumbnailRepresentation, QLThumbnailRepresentationType, unsafe.Pointer)) {
 	var __block_updateHandler objc.Block
 	if updateHandler != nil {
@@ -68,12 +70,12 @@ func (o *QLThumbnailGenerator) GenerateRepresentationsForRequestUpdateHandler(re
 	o.Ptr().Send(_qLThumbnailGeneratorSelGenerateRepresentationsForRequestUpdateHandler, request.Ptr(), __block_updateHandler)
 }
 
-// Cancels the given QLThumbnailGenerationRequest. @param request The request that should be cancelled.
+// Cancels the generation of a thumbnail for a given request.
 func (o *QLThumbnailGenerator) CancelRequest(request *QLThumbnailGenerationRequest) {
 	o.Ptr().Send(_qLThumbnailGeneratorSelCancelRequest, request.Ptr())
 }
 
-// Saves a thumbnail for the request on disk at fileURL. The file saved at fileURL has to be deleted when it is not used anymore. This is primarily intended for file provider extensions which need to upload thumbnails and have a small memory limit. @param contentType An image content type to save the thumbnail as, supported by CGImageDestination, such as UTTypePNG or UTTypeJPEG @param completionHandler Always called when the thumbnail generation is over. Will contain an error if the thumbnail could not be successfully saved to disk at fileURL.
+// Saves a thumbnail for the request on disk at fileURL. The file saved at fileURL has to be deleted when it is not used anymore. This is primarily intended for file provider extensions which need to upload thumbnails and have a small memory limit.
 func (o *QLThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLAsContentTypeCompletionHandler(request *QLThumbnailGenerationRequest, fileURL *foundation.NSURL, contentType *uniformtypeidentifiers.UTType, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -85,7 +87,7 @@ func (o *QLThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLAsCont
 	o.Ptr().Send(_qLThumbnailGeneratorSelSaveBestRepresentationForRequestToFileAtURLAsContentTypeCompletionHandler, request.Ptr(), fileURL.Ptr(), contentType.Ptr(), __block_completionHandler)
 }
 
-// Saves a thumbnail for the request on disk at fileURL. The file saved at fileURL has to be deleted when it is not used anymore. This is primarily intended for file provider extensions which need to upload thumbnails and have a small memory limit. @param contentType An image content type to save the thumbnail as, supported by CGImageDestination, such as kUTTypePNG or kUTTypeJPEG @param completionHandler Always called when the thumbnail generation is over. Will contain an error if the thumbnail could not be successfully saved to disk at fileURL.
+// Saves the best representation of thumbnail for a specific request to the specified URL.
 // Deprecated: since macOS 15.0.
 func (o *QLThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLWithContentTypeCompletionHandler(request *QLThumbnailGenerationRequest, fileURL *foundation.NSURL, contentType *foundation.NSString, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block

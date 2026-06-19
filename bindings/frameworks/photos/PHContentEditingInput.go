@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container that provides information about and access to the image, video, or Live Photo content of an asset to be edited.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phcontenteditinginput
 type PHContentEditingInput struct {
 	foundation.NSObject

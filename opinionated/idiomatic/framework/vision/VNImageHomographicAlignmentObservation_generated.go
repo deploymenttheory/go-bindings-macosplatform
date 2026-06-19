@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a perspective warp transformation.
+//
 // ImageHomographicAlignmentObservation wraps [raw.VNImageHomographicAlignmentObservation] with a fluent Go API.
 type ImageHomographicAlignmentObservation struct {
 	inner *raw.VNImageHomographicAlignmentObservation

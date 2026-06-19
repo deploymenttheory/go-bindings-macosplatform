@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for the recipient of a message.
+//
 // SendMessageRecipientResolutionResult wraps [raw.INSendMessageRecipientResolutionResult] with a fluent Go API.
 type SendMessageRecipientResolutionResult struct {
 	inner *raw.INSendMessageRecipientResolutionResult
@@ -31,6 +33,8 @@ func SendMessageRecipientResolutionResultFromID(id objc.ID) *SendMessageRecipien
 	return &SendMessageRecipientResolutionResult{inner: raw.INSendMessageRecipientResolutionResultFromID(id)}
 }
 
+// Creates a resolution result object with the specified person resolution result object.
+//
 // NewSendMessageRecipientResolutionResultWithPersonResolutionResult creates a new [SendMessageRecipientResolutionResult].
 func NewSendMessageRecipientResolutionResultWithPersonResolutionResult(personResolutionResult *raw.INPersonResolutionResult) *SendMessageRecipientResolutionResult {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSendMessageRecipientResolutionResult")), objc.RegisterName("alloc"))

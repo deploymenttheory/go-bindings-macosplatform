@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A legacy class for cross-process rendering.
+//
 // RemoteLayerClient wraps [raw.CARemoteLayerClient] with a fluent Go API.
 type RemoteLayerClient struct {
 	inner *raw.CARemoteLayerClient
@@ -29,6 +31,8 @@ func RemoteLayerClientFromID(id objc.ID) *RemoteLayerClient {
 	return &RemoteLayerClient{inner: raw.CARemoteLayerClientFromID(id)}
 }
 
+// Creates a layer client from a server port.
+//
 // NewRemoteLayerClientWithServerPort creates a new [RemoteLayerClient].
 func NewRemoteLayerClientWithServerPort(port uint) *RemoteLayerClient {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CARemoteLayerClient")), objc.RegisterName("alloc"))
@@ -36,12 +40,16 @@ func NewRemoteLayerClientWithServerPort(port uint) *RemoteLayerClient {
 	return &RemoteLayerClient{inner: raw.CARemoteLayerClientFromID(_id)}
 }
 
+// The layer associated with the remote client.
+//
 // WithLayer sets the layer property and returns the receiver for chaining.
 func (x *RemoteLayerClient) WithLayer(layer LayerProvider) *RemoteLayerClient {
 	x.inner.SetLayer(layer.asLayer())
 	return x
 }
 
+// Invalidates a remote layer client.
+//
 // Invalidate calls the underlying Invalidate.
 func (x *RemoteLayerClient) Invalidate() {
 	x.inner.Invalidate()

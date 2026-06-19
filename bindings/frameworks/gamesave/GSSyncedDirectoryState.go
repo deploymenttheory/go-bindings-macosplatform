@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Represents the state and its associated properties of the directory Use the “state“ property to determine the validity of the other properties
+// Represents the state and its associated properties of the directory
 //
 // Apple documentation: https://developer.apple.com/documentation/gamesave/gssynceddirectorystate
 type GSSyncedDirectoryState struct {

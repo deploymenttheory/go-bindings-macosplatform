@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about a text that was detected in a still or video image.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/citextfeature
 type CITextFeature struct {
 	CIFeature
@@ -61,6 +63,9 @@ func (o *CITextFeature) BottomRight() corefoundation.CGPoint {
 
 // An array containing additional features detected within the feature. A text detector can identify both a major region that is likely to contain text as well as the areas within that region that likely to contain individual text features. Such features might be single characters, groups of closely-packed characters, or entire words. To detect sub-features, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorReturnSubFeatures“ option set to true.
 func (o *CITextFeature) SubFeatures() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cITextFeatureSelSubFeatures)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cITextFeatureSelSubFeatures)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

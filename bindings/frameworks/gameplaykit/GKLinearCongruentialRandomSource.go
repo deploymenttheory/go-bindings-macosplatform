@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A deterministic pseudo-random source that generates random numbers based on a linear congruential algorithm. This is a deterministic random source suitable for creating reliable gameplay mechanics. It is slightly faster than an Arc4 source, but less random. In particular the lower bits of the generated values are less random than the higher bits. While deterministic, this is not a cryptographic random source. It is also not suitable for obfuscation of gameplay data.
+// A basic random number generator implementing the linear congruential generator algorithm, which is faster but less random than the default random source.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gklinearcongruentialrandomsource
 type GKLinearCongruentialRandomSource struct {
@@ -34,7 +34,7 @@ func GKLinearCongruentialRandomSourceFromID(id objc.ID) *GKLinearCongruentialRan
 	return o
 }
 
-// Initializes a linear congruential random source with bits from high entropy system resource like SecRandomCopyBytes.
+// Initializes a random source from a nondeterministic seed.
 func (o *GKLinearCongruentialRandomSource) Init() *GKLinearCongruentialRandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLinearCongruentialRandomSourceSelInit)
 	if _ret != 0 {
@@ -43,7 +43,7 @@ func (o *GKLinearCongruentialRandomSource) Init() *GKLinearCongruentialRandomSou
 	return GKLinearCongruentialRandomSourceFromID(_ret)
 }
 
-// Initializes a linear congruential random source with bits the given 64 bit seed.
+// Initializes a random source with the specified seed value.
 func (o *GKLinearCongruentialRandomSource) InitWithSeed(seed uint64) *GKLinearCongruentialRandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLinearCongruentialRandomSourceSelInitWithSeed, seed)
 	if _ret != 0 {

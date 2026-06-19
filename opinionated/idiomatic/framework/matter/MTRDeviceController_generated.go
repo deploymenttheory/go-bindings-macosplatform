@@ -106,14 +106,14 @@ func (x *MTRDeviceController) SetDeviceControllerDelegateQueue(delegate raw.MTRD
 	x.inner.SetDeviceControllerDelegateQueue(delegate, queue)
 }
 
-// Adds a Delegate to the device controller as well as the Queue on which the Delegate callbacks will be triggered Multiple delegates can be added to monitor MTRDeviceController state changes. Note that there should only be one delegate that responds to pairing related callbacks. If a delegate is added a second time, the call would be ignored. All delegates are held by weak references, and so if a delegate object goes away, it will be automatically removed. @param[in] delegate The delegate the commissioning process should use @param[in] queue The queue on which the callbacks will be delivered
+// Adds a Delegate to the device controller as well as the Queue on which the Delegate callbacks will be triggered
 //
 // AddDeviceControllerDelegateQueue calls the underlying AddDeviceControllerDelegateQueue.
 func (x *MTRDeviceController) AddDeviceControllerDelegateQueue(delegate raw.MTRDeviceControllerDelegate, queue *foundation.NSObject) {
 	x.inner.AddDeviceControllerDelegateQueue(delegate, queue)
 }
 
-// Removes a Delegate from the device controller @param[in] delegate The delegate to be removed
+// Removes a Delegate from the device controller
 //
 // RemoveDeviceControllerDelegate calls the underlying RemoveDeviceControllerDelegate.
 func (x *MTRDeviceController) RemoveDeviceControllerDelegate(delegate raw.MTRDeviceControllerDelegate) {
@@ -162,21 +162,21 @@ func (x *MTRDeviceController) RemoveServerEndpoint(endpoint *raw.MTRServerEndpoi
 	x.inner.RemoveServerEndpoint(endpoint)
 }
 
-// Forget any information we have about the device with the given node ID.  That includes clearing any information we have stored about it.
+// Forget any information we have about the device with the given node ID. That includes clearing any information we have stored about it.
 //
 // ForgetDeviceWithNodeID calls the underlying ForgetDeviceWithNodeID.
 func (x *MTRDeviceController) ForgetDeviceWithNodeID(nodeID *foundation.NSNumber) {
 	x.inner.ForgetDeviceWithNodeID(nodeID)
 }
 
-// Suspend the controller.  This will attempt to stop all network traffic associated with the controller.  The controller will remain suspended until it is resumed. Suspending an already-suspended controller has no effect.
+// Suspend the controller. This will attempt to stop all network traffic associated with the controller. The controller will remain suspended until it is resumed.
 //
 // Suspend calls the underlying Suspend.
 func (x *MTRDeviceController) Suspend() {
 	x.inner.Suspend()
 }
 
-// Resume the controller.  This has no effect if the controller is not suspended. A resume following any number of suspend calls will resume the controller; there does not need to be a resume call to match every suspend call.
+// Resume the controller. This has no effect if the controller is not suspended.
 //
 // Resume calls the underlying Resume.
 func (x *MTRDeviceController) Resume() {

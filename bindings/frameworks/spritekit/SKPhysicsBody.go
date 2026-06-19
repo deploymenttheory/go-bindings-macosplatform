@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that adds physics simulation to a node.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skphysicsbody
 type SKPhysicsBody struct {
 	foundation.NSObject
@@ -92,7 +94,7 @@ func SKPhysicsBodyFromID(id objc.ID) *SKPhysicsBody {
 	return o
 }
 
-// Creates a circle of radius r centered at the node's origin. @param r the radius in points
+// Creates a circular physics body centered on the owning node’s origin.
 func SKPhysicsBodyBodyWithCircleOfRadius(r float64) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithCircleOfRadius, r)
 	if _ret != 0 {
@@ -101,7 +103,7 @@ func SKPhysicsBodyBodyWithCircleOfRadius(r float64) *SKPhysicsBody {
 	return SKPhysicsBodyFromID(_ret)
 }
 
-// Creates a circle of radius r centered at a point in the node's coordinate space. @param r the radius in points
+// Creates a circular physics body centered on an arbitrary point.
 func SKPhysicsBodyBodyWithCircleOfRadiusCenter(r float64, center corefoundation.CGPoint) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithCircleOfRadiusCenter, r, center)
 	if _ret != 0 {
@@ -110,7 +112,7 @@ func SKPhysicsBodyBodyWithCircleOfRadiusCenter(r float64, center corefoundation.
 	return SKPhysicsBodyFromID(_ret)
 }
 
-// Creates a rectangle of the specified size centered at the node's origin. @param s the size in points
+// Creates a rectangular physics body centered on the owning node’s origin.
 func SKPhysicsBodyBodyWithRectangleOfSize(s corefoundation.CGSize) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithRectangleOfSize, s)
 	if _ret != 0 {
@@ -119,7 +121,7 @@ func SKPhysicsBodyBodyWithRectangleOfSize(s corefoundation.CGSize) *SKPhysicsBod
 	return SKPhysicsBodyFromID(_ret)
 }
 
-// Creates a rectangle of the specified size centered at a point in the node's coordinate space. @param s the size in points
+// Creates a rectangular physics body centered on an arbitrary point.
 func SKPhysicsBodyBodyWithRectangleOfSizeCenter(s corefoundation.CGSize, center corefoundation.CGPoint) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithRectangleOfSizeCenter, s, center)
 	if _ret != 0 {
@@ -128,7 +130,7 @@ func SKPhysicsBodyBodyWithRectangleOfSizeCenter(s corefoundation.CGSize, center 
 	return SKPhysicsBodyFromID(_ret)
 }
 
-// The path must represent a convex or concave polygon with counter clockwise winding and no self intersection. Positions are relative to the node's origin. @param path the path to use
+// Creates a polygonal physics body.
 func SKPhysicsBodyBodyWithPolygonFromPath(path unsafe.Pointer) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithPolygonFromPath, path)
 	if _ret != 0 {
@@ -137,7 +139,7 @@ func SKPhysicsBodyBodyWithPolygonFromPath(path unsafe.Pointer) *SKPhysicsBody {
 	return SKPhysicsBodyFromID(_ret)
 }
 
-// Creates an edge from p1 to p2. Edges have no volume and are intended to be used to create static environments. Edges can collide with bodies of volume, but not with each other. @param p1 start point @param p2 end point
+// Creates an edge between two points.
 func SKPhysicsBodyBodyWithEdgeFromPointToPoint(p1 corefoundation.CGPoint, p2 corefoundation.CGPoint) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithEdgeFromPointToPoint, p1, p2)
 	if _ret != 0 {
@@ -146,7 +148,7 @@ func SKPhysicsBodyBodyWithEdgeFromPointToPoint(p1 corefoundation.CGPoint, p2 cor
 	return SKPhysicsBodyFromID(_ret)
 }
 
-// Creates an edge chain from a path. The path must have no self intersection. Edges have no volume and are intended to be used to create static environments. Edges can collide with bodies of volume, but not with each other. @param path the path to use
+// Creates an edge chain from a path.
 func SKPhysicsBodyBodyWithEdgeChainFromPath(path unsafe.Pointer) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithEdgeChainFromPath, path)
 	if _ret != 0 {
@@ -155,7 +157,7 @@ func SKPhysicsBodyBodyWithEdgeChainFromPath(path unsafe.Pointer) *SKPhysicsBody 
 	return SKPhysicsBodyFromID(_ret)
 }
 
-// Creates an edge loop from a path. A loop is automatically created by joining the last point to the first. The path must have no self intersection. Edges have no volume and are intended to be used to create static environments. Edges can collide with body's of volume, but not with each other. @param path the path to use
+// Creates an edge loop from a path.
 func SKPhysicsBodyBodyWithEdgeLoopFromPath(path unsafe.Pointer) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithEdgeLoopFromPath, path)
 	if _ret != 0 {
@@ -164,7 +166,7 @@ func SKPhysicsBodyBodyWithEdgeLoopFromPath(path unsafe.Pointer) *SKPhysicsBody {
 	return SKPhysicsBodyFromID(_ret)
 }
 
-// Creates an edge loop from a CGRect. Edges have no volume and are intended to be used to create static environments. Edges can collide with body's of volume, but not with each other. @param rect the CGRect to use
+// Creates an edge loop from a rectangle.
 func SKPhysicsBodyBodyWithEdgeLoopFromRect(rect corefoundation.CGRect) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithEdgeLoopFromRect, rect)
 	if _ret != 0 {
@@ -173,7 +175,7 @@ func SKPhysicsBodyBodyWithEdgeLoopFromRect(rect corefoundation.CGRect) *SKPhysic
 	return SKPhysicsBodyFromID(_ret)
 }
 
-// Creates a body from the alpha values in the supplied texture. @param texture the texture to be interpreted @param size of the generated physics body
+// Creates a physics body from the contents of a texture.
 func SKPhysicsBodyBodyWithTextureSize(texture *SKTexture, size corefoundation.CGSize) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithTextureSize, texture.Ptr(), size)
 	if _ret != 0 {
@@ -182,7 +184,7 @@ func SKPhysicsBodyBodyWithTextureSize(texture *SKTexture, size corefoundation.CG
 	return SKPhysicsBodyFromID(_ret)
 }
 
-// Creates a body from the alpha values in the supplied texture. @param texture the texture to be interpreted @param alphaThreshold the alpha value above which a pixel is interpreted as opaque @param size of the generated physics body
+// Creates a physics body from the contents of a texture, capturing only the texels that exceed a specified transparency value.
 func SKPhysicsBodyBodyWithTextureAlphaThresholdSize(texture *SKTexture, alphaThreshold float32, size corefoundation.CGSize) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithTextureAlphaThresholdSize, texture.Ptr(), alphaThreshold, size)
 	if _ret != 0 {
@@ -191,7 +193,7 @@ func SKPhysicsBodyBodyWithTextureAlphaThresholdSize(texture *SKTexture, alphaThr
 	return SKPhysicsBodyFromID(_ret)
 }
 
-// Creates an compound body that is the union of the bodies used to create it.
+// Creates a physics body that’s shaped like a union of the argument physics bodies.
 func SKPhysicsBodyBodyWithBodies(bodies *foundation.NSArray[*SKPhysicsBody]) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithBodies, bodies.Ptr())
 	if _ret != 0 {
@@ -200,30 +202,37 @@ func SKPhysicsBodyBodyWithBodies(bodies *foundation.NSArray[*SKPhysicsBody]) *SK
 	return SKPhysicsBodyFromID(_ret)
 }
 
+// Applies a force to the center of gravity of a physics body.
 func (o *SKPhysicsBody) ApplyForce(force corefoundation.CGVector) {
 	o.Ptr().Send(_sKPhysicsBodySelApplyForce, force)
 }
 
+// Applies a force to a specific point of a physics body.
 func (o *SKPhysicsBody) ApplyForceAtPoint(force corefoundation.CGVector, point corefoundation.CGPoint) {
 	o.Ptr().Send(_sKPhysicsBodySelApplyForceAtPoint, force, point)
 }
 
+// Applies torque to an object.
 func (o *SKPhysicsBody) ApplyTorque(torque float64) {
 	o.Ptr().Send(_sKPhysicsBodySelApplyTorque, torque)
 }
 
+// Applies an impulse to the center of gravity of a physics body.
 func (o *SKPhysicsBody) ApplyImpulse(impulse corefoundation.CGVector) {
 	o.Ptr().Send(_sKPhysicsBodySelApplyImpulse, impulse)
 }
 
+// Applies an impulse to a specific point of a physics body.
 func (o *SKPhysicsBody) ApplyImpulseAtPoint(impulse corefoundation.CGVector, point corefoundation.CGPoint) {
 	o.Ptr().Send(_sKPhysicsBodySelApplyImpulseAtPoint, impulse, point)
 }
 
+// Applies an impulse that imparts angular momentum to an object.
 func (o *SKPhysicsBody) ApplyAngularImpulse(impulse float64) {
 	o.Ptr().Send(_sKPhysicsBodySelApplyAngularImpulse, impulse)
 }
 
+// The physics bodies that this physics body is in contact with.
 func (o *SKPhysicsBody) AllContactedBodies() *foundation.NSArray[*SKPhysicsBody] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPhysicsBodySelAllContactedBodies)
 	if _ret != 0 {

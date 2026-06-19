@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The layout of a scrubber item.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsscrubberlayoutattributes
 type NSScrubberLayoutAttributes struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func NSScrubberLayoutAttributesFromID(id objc.ID) *NSScrubberLayoutAttributes {
 	return o
 }
 
+// Creates a new layout attributes object for the specified scrubber item index.
 func NSScrubberLayoutAttributesLayoutAttributesForItemAtIndex(index int) *NSScrubberLayoutAttributes {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScrubberLayoutAttributes), _nSScrubberLayoutAttributesSelLayoutAttributesForItemAtIndex, index)
 	if _ret != 0 {

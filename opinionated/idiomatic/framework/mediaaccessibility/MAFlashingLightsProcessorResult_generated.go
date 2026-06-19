@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that reports the result of the flashing lights processor.
+//
 // FlashingLightsProcessorResult wraps [raw.MAFlashingLightsProcessorResult] with a fluent Go API.
 type FlashingLightsProcessorResult struct {
 	inner *raw.MAFlashingLightsProcessorResult

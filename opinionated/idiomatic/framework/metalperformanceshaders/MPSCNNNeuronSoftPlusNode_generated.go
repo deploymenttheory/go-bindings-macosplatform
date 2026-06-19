@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract   A node representing a MPSCNNNeuronSoftPlus kernel @discussion For each pixel, applies the following function: @code f(x) = a * log(1 + e^(b * x)) @endcode
+// A representation of a parametric softplus neuron filter.
 //
 // CNNNeuronSoftPlusNode wraps [raw.MPSCNNNeuronSoftPlusNode] with a fluent Go API.
 type CNNNeuronSoftPlusNode struct {

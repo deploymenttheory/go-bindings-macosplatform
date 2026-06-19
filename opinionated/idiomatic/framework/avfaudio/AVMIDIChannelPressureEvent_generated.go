@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a MIDI channel pressure message.
+//
 // MIDIChannelPressureEvent wraps [raw.AVMIDIChannelPressureEvent] with a fluent Go API.
 type MIDIChannelPressureEvent struct {
 	inner *raw.AVMIDIChannelPressureEvent
@@ -29,7 +31,7 @@ func MIDIChannelPressureEventFromID(id objc.ID) *MIDIChannelPressureEvent {
 	return &MIDIChannelPressureEvent{inner: raw.AVMIDIChannelPressureEventFromID(id)}
 }
 
-// @method initWithChannel:pressure: @abstract Initialize the event with a channel and a pressure value. @param channel The MIDI channel for the message.  Range: 0-15. @param pressure The MIDI channel pressure.  Range: 0-127.
+// Creates a pressure event with a channel and pressure value.
 //
 // NewMIDIChannelPressureEventWithChannelPressure creates a new [MIDIChannelPressureEvent].
 func NewMIDIChannelPressureEventWithChannelPressure(channel uint, pressure uint) *MIDIChannelPressureEvent {
@@ -38,7 +40,7 @@ func NewMIDIChannelPressureEventWithChannelPressure(channel uint, pressure uint)
 	return &MIDIChannelPressureEvent{inner: raw.AVMIDIChannelPressureEventFromID(_id)}
 }
 
-// @property pressure The MIDI channel pressure.
+// The MIDI channel pressure.
 //
 // WithPressure sets the pressure property and returns the receiver for chaining.
 func (x *MIDIChannelPressureEvent) WithPressure(pressure uint) *MIDIChannelPressureEvent {
@@ -46,7 +48,7 @@ func (x *MIDIChannelPressureEvent) WithPressure(pressure uint) *MIDIChannelPress
 	return x
 }
 
-// @property channel The MIDI channel for the event.  Range: 0-15.
+// The MIDI channel.
 //
 // WithChannel sets the channel property and returns the receiver for chaining.
 func (x *MIDIChannelPressureEvent) WithChannel(channel uint) *MIDIChannelPressureEvent {

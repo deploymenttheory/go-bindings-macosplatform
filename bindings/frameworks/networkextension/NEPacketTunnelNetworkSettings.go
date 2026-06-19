@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration for a packet tunnel provider’s virtual interface.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nepackettunnelnetworksettings
 type NEPacketTunnelNetworkSettings struct {
 	NETunnelNetworkSettings

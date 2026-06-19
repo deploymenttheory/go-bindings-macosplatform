@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides information about an imminent send of local changes.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginewillsendchangesevent
 type CKSyncEngineWillSendChangesEvent struct {
 	CKSyncEngineEvent

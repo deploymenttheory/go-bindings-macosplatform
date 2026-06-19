@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that manages asset packs.
+//
 // Apple documentation: https://developer.apple.com/documentation/backgroundassets/baassetpackmanager
 type BAAssetPackManager struct {
 	foundation.NSObject
@@ -47,7 +49,7 @@ func BAAssetPackManagerFromID(id objc.ID) *BAAssetPackManager {
 	return o
 }
 
-// Gets the asset packs that are available to download. This method might attempt to get the latest asset-pack information from the server. - Parameter completionHandler: A block that receives the asset packs or an error if one occurs.
+// Gets the asset packs that are available to download.
 func (o *BAAssetPackManager) GetAllAssetPacksWithCompletionHandler(completionHandler func(*foundation.NSSet[*BAAssetPack], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -62,7 +64,7 @@ func (o *BAAssetPackManager) GetAllAssetPacksWithCompletionHandler(completionHan
 	o.Ptr().Send(_bAAssetPackManagerSelGetAllAssetPacksWithCompletionHandler, __block_completionHandler)
 }
 
-// Gets the asset pack with the given identifier. If no asset pack with the given identifier is found, then the block will receive an `NSError` object with “BAManagedErrorCode/BAManagedErrorCodeAssetPackNotFound“ as its code for the `error` parameter. This method might attempt to get the latest asset-pack information from the server. To force the system to get the latest information from the server unconditionally, send “checkForUpdatesWithCompletionHandler:“ to the shared asset-pack manager. - Parameters: - assetPackIdentifier: The asset pack’s identifier. - completionHandler: A block that receives the asset pack or an error if one occurs.
+// Gets the asset pack with the given identifier.
 func (o *BAAssetPackManager) GetAssetPackWithIdentifierCompletionHandler(assetPackIdentifier *foundation.NSString, completionHandler func(*BAAssetPack, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -77,7 +79,7 @@ func (o *BAAssetPackManager) GetAssetPackWithIdentifierCompletionHandler(assetPa
 	o.Ptr().Send(_bAAssetPackManagerSelGetAssetPackWithIdentifierCompletionHandler, assetPackIdentifier.Ptr(), __block_completionHandler)
 }
 
-// Gets an asset pack’s status. This method checks whether any version of the specified asset pack is currently downloaded. If one is, then it determines the version relationship between the downloaded asset pack and the specified asset pack. If they have different version numbers, then the status value that it passes to `completionHandler` will contain “BAAssetPackStatus/BAAssetPackStatusOutOfDate“. The status value will contain “BAAssetPackStatus/BAAssetPackStatusUpdateAvailable“ only if the relevant asset pack on the server hasn’t been further updated since the initialization of the provided “BAAssetPack“ instance. For example, consider the following sequence of events, assuming that version 1 of the relevant asset pack is already available locally: 1.	Your application calls “getAssetPackWithIdentifier:completionHandler:“ to obtain a “BAAssetPack“ instance. 2.	The asset pack is updated to version 2 on the server. 3.	Your application calls this method, passing the “BAAssetPack“ instance from step 1. In this case, the status value will indicate that the downloaded asset pack is up to date. Generally, you shouldn’t need to handle this type of situation explicitly because the system automatically polls for updates periodically in the background. This method doesn’t automatically trigger any downloads, updates, or removals. - Parameters: - assetPack: The asset pack. - completionHandler: A block that receives the asset pack’s status or an error if one occurs.
+// Gets the current status relative to a particular asset pack.
 func (o *BAAssetPackManager) GetStatusRelativeToAssetPackCompletionHandler(assetPack *BAAssetPack, completionHandler func(BAAssetPackStatus, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -89,7 +91,7 @@ func (o *BAAssetPackManager) GetStatusRelativeToAssetPackCompletionHandler(asset
 	o.Ptr().Send(_bAAssetPackManagerSelGetStatusRelativeToAssetPackCompletionHandler, assetPack.Ptr(), __block_completionHandler)
 }
 
-// Gets an asset pack’s local status. This method checks only status values that are determinable offline. It doesn’t induce any network traffic or automatically trigger any downloads, updates, or removals. The following status values are determinable offline: - “BAAssetPackStatus/BAAssetPackStatusOutOfDate“ (in some situations) - “BAAssetPackStatus/BAAssetPackStatusObsolete“ (in some situations) - “BAAssetPackStatus/BAAssetPackStatusDownloaded“ Because this method doesn’t communicate with the server, it can’t determine whether a particular asset pack exists in the first place. Instead, it returns an empty status value when provided a nonexistent asset-pack ID, which is indistinguishable from the situation in which the asset pack does indeed exist but hasn’t yet been downloaded. Use “getStatusOfAssetPackWithIdentifier:completionHandler:“ to get a full view of an asset pack’s status. - Parameters: - assetPackIdentifier: The asset pack’s identifier. - completionHandler: A block that receives the asset pack’s local status.
+// Gets an asset pack’s local status.
 func (o *BAAssetPackManager) GetLocalStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier *foundation.NSString, completionHandler func(BAAssetPackStatus)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -101,13 +103,13 @@ func (o *BAAssetPackManager) GetLocalStatusOfAssetPackWithIdentifierCompletionHa
 	o.Ptr().Send(_bAAssetPackManagerSelGetLocalStatusOfAssetPackWithIdentifierCompletionHandler, assetPackIdentifier.Ptr(), __block_completionHandler)
 }
 
-// Checks whether the asset pack with the specified identifier is available locally. - Parameter assetPackIdentifier: The asset pack’s identifier. - Returns: Whether the asset pack is available locally.
+// Checks whether the asset pack with the specified identifier is available locally.
 func (o *BAAssetPackManager) AssetPackIsAvailableLocallyWithIdentifier(assetPackIdentifier *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _bAAssetPackManagerSelAssetPackIsAvailableLocallyWithIdentifier, assetPackIdentifier.Ptr())
 	return _ret
 }
 
-// Ensures that the specified asset pack be available locally. This method checks if the asset pack is currently downloaded. If it isn’t, then it schedules it to be downloaded and calls the block with `nil` for the block’s `error` parameter when the download completes. It’s guaranteed that the requested asset pack will be available locally once the block is called with `nil` for its `error` parameter. If a non-`nil` value is provided to the block’s `error` parameter, then the asset pack is **not** guaranteed to be available locally. You can optionally monitor download progress by attaching a delegate object to “delegate“. - Parameters: - assetPack: The asset pack the local availability of which to ensure. - completionHandler: A block that’s called when the asset pack is available locally or that receives an error if one occurs.
+// Ensures that the specified asset pack be available locally.
 func (o *BAAssetPackManager) EnsureLocalAvailabilityOfAssetPackCompletionHandler(assetPack *BAAssetPack, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -119,7 +121,7 @@ func (o *BAAssetPackManager) EnsureLocalAvailabilityOfAssetPackCompletionHandler
 	o.Ptr().Send(_bAAssetPackManagerSelEnsureLocalAvailabilityOfAssetPackCompletionHandler, assetPack.Ptr(), __block_completionHandler)
 }
 
-// Ensures that the specified asset pack be available locally. This method checks if the asset pack is currently downloaded. If it isn’t, then it schedules it to be downloaded and calls the block with `nil` for the block’s `error` parameter when the download completes. It’s guaranteed that the requested asset pack will be available locally once the block is called with `nil` for its `error` parameter. If a non-`nil` value is provided to the block’s `error` parameter, then the asset pack is **not** guaranteed to be available locally. You can optionally monitor download progress by attaching a delegate object to “delegate“. - Parameters: - assetPack: The asset pack the local availability of which to ensure. - shouldUpdate: Whether to require that the latest version be available locally. When `YES` is passed to this parameter, the method will wait for the update (if there indeed is one available) to be downloaded before returning. When `NO` is passed, the method won’t check for updates and won’t attempt to download any. - completionHandler: A block that’s called when the asset pack is available locally or that receives an error if one occurs.
+// Ensures that the specified asset pack is available locally, performing a download if necessary.
 func (o *BAAssetPackManager) EnsureLocalAvailabilityOfAssetPackRequireLatestVersionCompletionHandler(assetPack *BAAssetPack, shouldUpdate bool, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -131,12 +133,25 @@ func (o *BAAssetPackManager) EnsureLocalAvailabilityOfAssetPackRequireLatestVers
 	o.Ptr().Send(_bAAssetPackManagerSelEnsureLocalAvailabilityOfAssetPackRequireLatestVersionCompletionHandler, assetPack.Ptr(), shouldUpdate, __block_completionHandler)
 }
 
-// Gets the latest asset-pack information from the server, updates outdated asset packs, and removes obsolete asset packs. - Parameter completionHandler: A block that receives a set of identifiers of asset packs that are being updated and a set of identifiers of removed asset packs or an error if one occurs.
-func (o *BAAssetPackManager) CheckForUpdatesWithCompletionHandler(completionHandler objc.Block) {
-	o.Ptr().Send(_bAAssetPackManagerSelCheckForUpdatesWithCompletionHandler, completionHandler)
+// Gets the latest asset-pack information from the server, updates outdated asset packs, and removes obsolete asset packs.
+func (o *BAAssetPackManager) CheckForUpdatesWithCompletionHandler(completionHandler func(*foundation.NSSet[*foundation.NSString], *foundation.NSSet[*foundation.NSString], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID, blockParam2 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSSetFromID[*foundation.NSString](blockParam0), foundation.NSSetFromID[*foundation.NSString](blockParam1), blockParam2)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_bAAssetPackManagerSelCheckForUpdatesWithCompletionHandler, __block_completionHandler)
 }
 
-// Returns the contents of an asset file at the specified relative path. All asset packs share the same namespace, so you can treat the overall collection of downloaded asset packs as if it were a single root directory that contains all of your subdirectories and asset files, regardless of the specific asset pack in which any particular file resides. If there’s a file-path collision across multiple asset packs, then it’s undefined from which asset pack the file will be read unless you explicitly limit the search to a particular asset pack by passing a non-`nil` identifier to the `assetPackIdentifier` parameter. - Parameters: - path: The relative file path. - assetPackIdentifier: The identifier of the asset pack in which you want to search for the file or `nil` if you want to search in all asset packs. - options: Options for how to read the contents of the file into a data object. - error: A pointer to an error that will be set if an error occurs. If no file is found at `path`, then `error` will point to an `NSError` object with “BAManagedErrorCode/BAManagedErrorCodeFileNotFound“ as its code. - Returns: The file’s contents.
+// Returns the contents of an asset file at the specified relative path.
 func (o *BAAssetPackManager) ContentsAtPathSearchingInAssetPackWithIdentifierOptionsError(path *foundation.NSString, assetPackIdentifier *foundation.NSString, options foundation.NSDataReadingOptions) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManagerSelContentsAtPathSearchingInAssetPackWithIdentifierOptionsError, path.Ptr(), assetPackIdentifier.Ptr(), options, unsafe.Pointer(&_nsErr))
@@ -149,7 +164,7 @@ func (o *BAAssetPackManager) ContentsAtPathSearchingInAssetPackWithIdentifierOpt
 	return foundation.NSDataFromID(_ret), nil
 }
 
-// Opens and returns a file descriptor for the asset file at the specified relative path. All asset packs share the same namespace, so you can treat the overall collection of downloaded asset packs as if it were a single root directory that contains all of your subdirectories and asset files, regardless of the specific asset pack in which any particular file resides. If there’s a file-path collision across multiple asset packs, then it’s undefined from which asset pack the file will be opened unless you explicitly limit the search to a particular asset pack by passing a non-`nil` identifier to the `assetPackIdentifier` parameter. A return value of `-1` indicates that an error occurred. - Parameters: - path: The relative file path. - assetPackIdentifier: The identifier of the asset pack in which you want to search for the file or `nil` if you want to search in all asset packs. - error: A pointer to an error that will be set if an error occurs. If no file is found at `path`, then it will point to an `NSError` object with “BAManagedErrorCode/BAManagedErrorCodeFileNotFound“ as its code. - Returns: A descriptor for the opened file. - Important: It’s your responsibility to close the file descriptor when you’re done using it. - Remark: Use this method if you need low-level access to the file descriptor. If you don’t, then use “BAAssetPackManager/contentsAtPath:searchingInAssetPackWithIdentifier:options:error:“ instead.
+// Opens and returns a file descriptor for the asset file at the specified relative path.
 func (o *BAAssetPackManager) FileDescriptorForPathSearchingInAssetPackWithIdentifierError(path *foundation.NSString, assetPackIdentifier *foundation.NSString) (int, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[int](o.Ptr(), _bAAssetPackManagerSelFileDescriptorForPathSearchingInAssetPackWithIdentifierError, path.Ptr(), assetPackIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
@@ -159,7 +174,7 @@ func (o *BAAssetPackManager) FileDescriptorForPathSearchingInAssetPackWithIdenti
 	return _ret, nil
 }
 
-// Returns a URL for the specified relative path. All asset packs share the same namespace, so you can treat the overall collection of downloaded asset packs as if it were a single root directory that contains all of your subdirectories and asset files, regardless of the specific asset pack in which any particular file resides. Unlike “BAAssetPackManager/contentsAtPath:searchingInAssetPackWithIdentifier:options:error:“ and “BAAssetPackManager/fileDescriptorForPath:searchingInAssetPackWithIdentifier:error:“, this method supports retrieving entire directories—including packages—in which case it merges the corresponding slices of the shared logical directory from all downloaded asset packs that contain such slices. If there’s a file-path collision across multiple asset packs, then it’s undefined from which asset pack an individual file will be resolved. - Parameters: - path: The relative file path. - error: A pointer to an error that will be set if an error occurs. - Warning: Don’t persist the returned URL beyond the lifetime of the current process. - Warning: This method is less efficient than are “BAAssetPackManager/contentsAtPath:searchingInAssetPackWithIdentifier:options:error:“ and “BAAssetPackManager/fileDescriptorForPath:searchingInAssetPackWithIdentifier:error:“; use those methods instead if you can do so. In particular, this method shouldn’t be used to get the URL to the root of the shared asset-pack namespace. Don’t use this method to block the main thread. - Note: This method will return a well formed URL even if no item exists at the specified relative path in any asset pack, in which case any attempts to get its contents—whether it’s a file or a directory—will fail.
+// Returns a URL for the specified relative path.
 func (o *BAAssetPackManager) URLForPathError(path *foundation.NSString) (*foundation.NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManagerSelURLForPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
@@ -172,7 +187,7 @@ func (o *BAAssetPackManager) URLForPathError(path *foundation.NSString) (*founda
 	return foundation.NSURLFromID(_ret), nil
 }
 
-// Removes the specified asset pack from the device. - Parameters: - assetPackIdentifier: The asset pack’s identifier. - completionHandler: A block that receives an error if one occurs.
+// Removes the specified asset pack from the device.
 func (o *BAAssetPackManager) RemoveAssetPackWithIdentifierCompletionHandler(assetPackIdentifier *foundation.NSString, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -184,7 +199,7 @@ func (o *BAAssetPackManager) RemoveAssetPackWithIdentifierCompletionHandler(asse
 	o.Ptr().Send(_bAAssetPackManagerSelRemoveAssetPackWithIdentifierCompletionHandler, assetPackIdentifier.Ptr(), __block_completionHandler)
 }
 
-// Gets an asset pack’s status. If no asset pack with the specified identifier is found, then the block will receive an `NSError` object with “BAManagedErrorCode/BAManagedErrorCodeAssetPackNotFound“ as its code for the `error` parameter. This method attempts to get the latest asset-pack information from the server. It doesn’t automatically trigger any downloads, updates, or removals. - Parameters: - assetPackIdentifier: The asset pack’s identifier. - completionHandler: A block that receives the asset pack’s status or an error if one occurs.
+// Gets an asset pack’s status.
 // Deprecated: since macOS 26.4.
 func (o *BAAssetPackManager) GetStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier *foundation.NSString, completionHandler func(BAAssetPackStatus, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of an app that users can access during an assessment.
+//
 // Apple documentation: https://developer.apple.com/documentation/automaticassessmentconfiguration/aeassessmentapplication
 type AEAssessmentApplication struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func AEAssessmentApplicationFromID(id objc.ID) *AEAssessmentApplication {
 	return o
 }
 
+// Creates a representation of an app using its bundle identifier.
 func (o *AEAssessmentApplication) InitWithBundleIdentifier(bundleIdentifier *foundation.NSString) *AEAssessmentApplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentApplicationSelInitWithBundleIdentifier, bundleIdentifier.Ptr())
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func (o *AEAssessmentApplication) InitWithBundleIdentifier(bundleIdentifier *fou
 	return AEAssessmentApplicationFromID(_ret)
 }
 
+// Creates a representation of an app using its bundle and team identifiers.
 func (o *AEAssessmentApplication) InitWithBundleIdentifierTeamIdentifier(bundleIdentifier *foundation.NSString, teamIdentifier *foundation.NSString) *AEAssessmentApplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentApplicationSelInitWithBundleIdentifierTeamIdentifier, bundleIdentifier.Ptr(), teamIdentifier.Ptr())
 	if _ret != 0 {

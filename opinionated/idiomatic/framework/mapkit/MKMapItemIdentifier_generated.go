@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unique identifier for a place.
+//
 // MapItemIdentifier wraps [raw.MKMapItemIdentifier] with a fluent Go API.
 type MapItemIdentifier struct {
 	inner *raw.MKMapItemIdentifier

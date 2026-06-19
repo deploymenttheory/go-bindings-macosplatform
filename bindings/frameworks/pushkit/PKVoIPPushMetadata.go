@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains metadata about a received PushKit VoIP notification.
+//
 // Apple documentation: https://developer.apple.com/documentation/pushkit/pkvoippushmetadata
 type PKVoIPPushMetadata struct {
 	foundation.NSObject

@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides information about the media sample at the cursor’s current position.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avsamplecursor
 type AVSampleCursor struct {
 	foundation.NSObject
@@ -53,43 +55,43 @@ func AVSampleCursorFromID(id objc.ID) *AVSampleCursor {
 	return o
 }
 
-// @method			stepInDecodeOrderByCount: @abstract		Moves the cursor a given number of samples in decode order. @param			stepCount The number of samples to move across. If positive, step forward this many samples. If negative, step backward (-stepCount) samples. @result			The number of samples the cursor traversed. If the beginning or the end of the sample sequence was reached before the requested number of samples was traversed, the absolute value of the result will be less than the absolute value of stepCount.
+// Moves the cursor a given number of samples in decode order.
 func (o *AVSampleCursor) StepInDecodeOrderByCount(stepCount int64) int64 {
 	_ret := objc.Send[int64](o.Ptr(), _aVSampleCursorSelStepInDecodeOrderByCount, stepCount)
 	return _ret
 }
 
-// @method			stepInPresentationOrderByCount: @abstract		Moves the cursor a given number of samples in presentation order. @param			stepCount The number of samples to move across. If positive, step forward this many samples. If negative, step backward (-stepCount) samples. @result			The number of samples the cursor traversed. If the beginning or the end of the sample sequence was reached before the requested number of samples was traversed, the absolute value of the result will be less than the absolute value of stepCount.
+// Moves the cursor a given number of samples in presentation order.
 func (o *AVSampleCursor) StepInPresentationOrderByCount(stepCount int64) int64 {
 	_ret := objc.Send[int64](o.Ptr(), _aVSampleCursorSelStepInPresentationOrderByCount, stepCount)
 	return _ret
 }
 
-// @method			stepByDecodeTime:wasPinned: @abstract		Moves the cursor by a given deltaTime on the decode timeline. @param			deltaDecodeTime The amount of time to move in the decode timeline. @param			outWasPinned If the beginning or the end of the sample sequence was reached before the requested deltaDecodeTime was traversed, the BOOL value at the address specified by outWasPinned will be set to YES. May be NULL if this information isn't desired. @result			The amount of time the cursor was moved along the decode timeline. Because sample cursors snap to sample boundaries when stepped, this value may not be equal to deltaDecodeTime even if the cursor was not pinned.
+// Moves the cursor by a given delta time on the decode timeline.
 func (o *AVSampleCursor) StepByDecodeTimeWasPinned(deltaDecodeTime coremedia.CMTime, outWasPinned *bool) coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVSampleCursorSelStepByDecodeTimeWasPinned, deltaDecodeTime, outWasPinned)
 	return _ret
 }
 
-// @method			stepByPresentationTime:wasPinned: @abstract		Moves the cursor by a given deltaTime on the presentation timeline. @param			deltaPresentationTime The amount of time to move in the presentation timeline. @param			outWasPinned If the beginning or the end of the sample sequence was reached before the requested deltaPresentationTime was traversed, the BOOL value at the address specified by outWasPinned will be set to YES. May be NULL if this information isn't desired. @result			The amount of time the cursor was moved along the presentation timeline. Because sample cursors snap to sample boundaries when stepped, this value may not be equal to deltaPresentationTime even if the cursor was not pinned.
+// Moves the cursor by a given delta time on the presentation timeline.
 func (o *AVSampleCursor) StepByPresentationTimeWasPinned(deltaPresentationTime coremedia.CMTime, outWasPinned *bool) coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVSampleCursorSelStepByPresentationTimeWasPinned, deltaPresentationTime, outWasPinned)
 	return _ret
 }
 
-// @method			comparePositionInDecodeOrderWithPositionOfCursor: @abstract		Compares the relative positions of two AVSampleCursors. @param			cursor An instance of AVSampleCursor with which to compare positions. @result			kCFCompareLessThan, kCFCompareEqualTo or kCFCompareGreaterThan, depending on whether the receiver points at a sample before, the same as, or after the sample pointed to by the specified AVSampleCursor. @discussion		If the receiver and cursor reference different sequences of samples, as when they're created by different instances of AVAssetTrack, results are undefined.
+// Compares the relative positions of two sample cursors and returns their relative positions.
 func (o *AVSampleCursor) ComparePositionInDecodeOrderWithPositionOfCursor(cursor *AVSampleCursor) foundation.NSComparisonResult {
 	_ret := objc.Send[foundation.NSComparisonResult](o.Ptr(), _aVSampleCursorSelComparePositionInDecodeOrderWithPositionOfCursor, cursor.Ptr())
 	return _ret
 }
 
-// @method			samplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor: @abstract		This method tests a boundary in the reordering from decode order to presentation order, determining whether it's possible for any sample earlier in decode order than the sample at the position of the receiver can have a presentation timestamp later than that of the specified sample cursor. @param			cursor An instance of AVSampleCursor with which to test the sample reordering boundary. @result			YES if it's possible for any sample earlier in decode order than the sample at the position of the receiver can have a presentation timestamp later than that of the specified sample cursor. @discussion		If the receiver and cursor reference different sequences of samples, as when they're created by different instances of AVAssetTrack, results are undefined.
+// Determines whether a sample earlier in decode order can have a presentation timestamp later than that of the specified sample cursor.
 func (o *AVSampleCursor) SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor(cursor *AVSampleCursor) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVSampleCursorSelSamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor, cursor.Ptr())
 	return _ret
 }
 
-// @method			samplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor: @abstract		This method tests a boundary in the reordering from decode order to presentation order, determining whether it's possible for any sample later in decode order than the sample at the position of the receiver can have a presentation timestamp earlier than that of the specified sample cursor. @param			cursor An instance of AVSampleCursor with which to test the sample reordering boundary. @result			YES if it's possible for any sample later in decode order than the sample at the position of the receiver can have a presentation timestamp earlier than that of the specified sample cursor. @discussion		If the receiver and cursor reference different sequences of samples, as when they're created by different instances of AVAssetTrack, results are undefined.
+// Determines whether a sample later in decode order can have a presentation timestamp earlier than that of the specified sample cursor.
 func (o *AVSampleCursor) SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor(cursor *AVSampleCursor) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVSampleCursorSelSamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor, cursor.Ptr())
 	return _ret
@@ -107,7 +109,7 @@ func (o *AVSampleCursor) DecodeTimeStamp() coremedia.CMTime {
 	return _ret
 }
 
-// @method			copyCurrentSampleFormatDescription: @abstract		Provides the format description of the sample at the receiver's current position.
+// Returns the format description of the sample at the cursor’s current position.
 func (o *AVSampleCursor) CopyCurrentSampleFormatDescription() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVSampleCursorSelCopyCurrentSampleFormatDescription)
 	return _ret
@@ -133,8 +135,11 @@ func (o *AVSampleCursor) CurrentSampleDependencyInfo() AVSampleCursorDependencyI
 
 // @property               currentSampleDependencyAttachments @abstract               Provides a dictionary containing dependency related sample buffer attachments, if known.  See kCMSampleAttachmentKey_... in CoreMedia/CMSampleBuffer.h.
 func (o *AVSampleCursor) CurrentSampleDependencyAttachments() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _aVSampleCursorSelCurrentSampleDependencyAttachments)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleCursorSelCurrentSampleDependencyAttachments)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @property	currentSampleAudioDependencyInfo @abstract	Provides information about the independent decodability of an audio sample. @discussion	In order to position a sample cursor at the first sample that the audio decoder requires for a full refresh, you will need to walk it back from the current sample until you find a sample that is independently decodable, and whose audioSamplePacketRefreshCount is greater than or equal to the number of steps back you have taken.  This implies that if the current sample (before this walk) is independently decodable, with an audioSampleRefreshCount of zero, no walk is required.

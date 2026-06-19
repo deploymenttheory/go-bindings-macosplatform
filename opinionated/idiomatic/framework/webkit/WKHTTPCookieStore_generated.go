@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages the HTTP cookies associated with a particular web view.
+//
 // WKHTTPCookieStore wraps [raw.WKHTTPCookieStore] with a fluent Go API.
 type WKHTTPCookieStore struct {
 	inner *raw.WKHTTPCookieStore
@@ -36,14 +38,14 @@ func NewWKHTTPCookieStore() *WKHTTPCookieStore {
 	return &WKHTTPCookieStore{inner: raw.WKHTTPCookieStoreFromID(_id)}
 }
 
-// @abstract Fetches all stored cookies. @param completionHandler A block to invoke with the fetched cookies.
+// Fetches all stored cookies asynchronously and delivers them to the specified completion handler.
 //
 // GetAllCookies calls the underlying GetAllCookies.
-func (x *WKHTTPCookieStore) GetAllCookies(completionHandler objc.Block) {
+func (x *WKHTTPCookieStore) GetAllCookies(completionHandler func(*foundation.NSArray[*foundation.NSHTTPCookie])) {
 	x.inner.GetAllCookies(completionHandler)
 }
 
-// @abstract Set a cookie. @param cookie The cookie to set. @param completionHandler A block to invoke once the cookie has been stored.
+// Adds a cookie to the cookie store.
 //
 // SetCookieCompletionHandler calls the underlying SetCookieCompletionHandler.
 func (x *WKHTTPCookieStore) SetCookieCompletionHandler(cookie *foundation.NSHTTPCookie, completionHandler func()) {
@@ -57,35 +59,35 @@ func (x *WKHTTPCookieStore) SetCookiesCompletionHandler(cookies *foundation.NSAr
 	x.inner.SetCookiesCompletionHandler(cookies, completionHandler)
 }
 
-// @abstract Delete the specified cookie. @param completionHandler A block to invoke once the cookie has been deleted.
+// Deletes the specified cookie.
 //
 // DeleteCookieCompletionHandler calls the underlying DeleteCookieCompletionHandler.
 func (x *WKHTTPCookieStore) DeleteCookieCompletionHandler(cookie *foundation.NSHTTPCookie, completionHandler func()) {
 	x.inner.DeleteCookieCompletionHandler(cookie, completionHandler)
 }
 
-// @abstract Adds a WKHTTPCookieStoreObserver object with the cookie store. @param observer The observer object to add. @discussion The observer is not retained by the receiver. It is your responsibility to unregister the observer before it becomes invalid.
+// Adds an observer to the cookie store.
 //
 // AddObserver calls the underlying AddObserver.
 func (x *WKHTTPCookieStore) AddObserver(observer raw.WKHTTPCookieStoreObserver) {
 	x.inner.AddObserver(observer)
 }
 
-// @abstract Removes a WKHTTPCookieStoreObserver object from the cookie store. @param observer The observer to remove.
+// Removes an observer from the cookie store.
 //
 // RemoveObserver calls the underlying RemoveObserver.
 func (x *WKHTTPCookieStore) RemoveObserver(observer raw.WKHTTPCookieStoreObserver) {
 	x.inner.RemoveObserver(observer)
 }
 
-// @abstract Set whether cookies are allowed. @param policy A value indicating whether cookies are allowed. The default value is WKCookiePolicyAllow. @param completionHandler A block to invoke once the cookie policy has been set.
+// Sets a cookie policy that indicates whether the cookie store allows cookie storage.
 //
 // SetCookiePolicyCompletionHandler calls the underlying SetCookiePolicyCompletionHandler.
 func (x *WKHTTPCookieStore) SetCookiePolicyCompletionHandler(policy WKCookiePolicy, completionHandler func()) {
 	x.inner.SetCookiePolicyCompletionHandler(raw.WKCookiePolicy(policy), completionHandler)
 }
 
-// @abstract Get whether cookies are allowed. @param completionHandler A block to invoke with the value of whether cookies are allowed.
+// Returns a cookie policy that indicates whether the cookie store allows cookie storage.
 //
 // GetCookiePolicy calls the underlying GetCookiePolicy.
 func (x *WKHTTPCookieStore) GetCookiePolicy(completionHandler func(WKCookiePolicy)) {
@@ -95,7 +97,7 @@ func (x *WKHTTPCookieStore) GetCookiePolicy(completionHandler func(WKCookiePolic
 // WKHTTPCookieStoreable is the interface implemented by [WKHTTPCookieStore], for mocking and DI.
 type WKHTTPCookieStoreable interface {
 	Unwrap() *raw.WKHTTPCookieStore
-	GetAllCookies(completionHandler objc.Block)
+	GetAllCookies(completionHandler func(*foundation.NSArray[*foundation.NSHTTPCookie]))
 	SetCookieCompletionHandler(cookie *foundation.NSHTTPCookie, completionHandler func())
 	SetCookiesCompletionHandler(cookies *foundation.NSArray[*foundation.NSHTTPCookie], completionHandler func())
 	DeleteCookieCompletionHandler(cookie *foundation.NSHTTPCookie, completionHandler func())

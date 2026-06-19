@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A command that indicates to start buffering data in preparation for playback.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avdelegatingplaybackcoordinatorbufferingcommand
 type AVDelegatingPlaybackCoordinatorBufferingCommand struct {
 	AVDelegatingPlaybackCoordinatorPlaybackControlCommand

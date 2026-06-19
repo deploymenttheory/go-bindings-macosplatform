@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object for storing the reference signatures for custom audio recordings and their associated metadata.
+//
 // Apple documentation: https://developer.apple.com/documentation/shazamkit/shcustomcatalog
 type SHCustomCatalog struct {
 	SHCatalog
@@ -38,7 +40,7 @@ func SHCustomCatalogFromID(id objc.ID) *SHCustomCatalog {
 	return o
 }
 
-// Adds a reference signature and its associated metadata to a catalog. > Note: > This system ignores calls to `addReferenceSignature(_:representing:)` after adding the catalog to an `SHSession`. - Parameters: - signature: The reference signature for the audio recording. - mediaItems: The metadata for the recording.
+// Adds a reference signature and its associated metadata to a catalog.
 func (o *SHCustomCatalog) AddReferenceSignatureRepresentingMediaItemsError(signature *SHSignature, mediaItems *foundation.NSArray[*SHMediaItem]) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sHCustomCatalogSelAddReferenceSignatureRepresentingMediaItemsError, signature.Ptr(), mediaItems.Ptr(), unsafe.Pointer(&_nsErr))
@@ -48,7 +50,7 @@ func (o *SHCustomCatalog) AddReferenceSignatureRepresentingMediaItemsError(signa
 	return _ret, nil
 }
 
-// Loads a saved custom catalog from a file. - Parameters: - customCatalogURL: The file URL for a custom catalog. - error: An output value in Objective-C that indicates the type of error; otherwise, `nil`.
+// Loads a saved custom catalog from a file.
 func (o *SHCustomCatalog) AddCustomCatalogFromURLError(customCatalogURL *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sHCustomCatalogSelAddCustomCatalogFromURLError, customCatalogURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -58,7 +60,7 @@ func (o *SHCustomCatalog) AddCustomCatalogFromURLError(customCatalogURL *foundat
 	return _ret, nil
 }
 
-// Saves the custom catalog to a local file. If `destinationURL` is a directory, the system creates a `Signatures.shazamcatalog` file. - Parameters: - destinationURL: A URL for the saved custom catalog file. - error: An output value in Objective-C that indicates the type of error; otherwise, `nil`. - Returns: `YES` if the catalog writes to the file; otherwise, `NO`.
+// Saves the custom catalog to a local file.
 // Deprecated: Use dataRepresentation
 func (o *SHCustomCatalog) WriteToURLError(destinationURL *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
@@ -69,7 +71,7 @@ func (o *SHCustomCatalog) WriteToURLError(destinationURL *foundation.NSURL) (boo
 	return _ret, nil
 }
 
-// Creates a new custom catalog object for storing reference audio signatures and their associated metadata. - Returns: A new custom catalog for storing processed reference audio recordings and their associated metadata.
+// Creates a new custom catalog object for storing reference audio signatures and their associated metadata.
 func SHCustomCatalogNew() *SHCustomCatalog {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSHCustomCatalog), _sHCustomCatalogSelNew)
 	return SHCustomCatalogFromID(_ret)
@@ -84,7 +86,7 @@ func (o *SHCustomCatalog) Init() *SHCustomCatalog {
 	return SHCustomCatalogFromID(_ret)
 }
 
-// Load a @c SHCustomCatalog from data @param dataRepresentation The data representation of the @c SHCustomCatalog @param error Error populated if not a valid data representation
+// Load a @c SHCustomCatalog from data
 func (o *SHCustomCatalog) InitWithDataRepresentationError(dataRepresentation *foundation.NSData) (*SHCustomCatalog, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHCustomCatalogSelInitWithDataRepresentationError, dataRepresentation.Ptr(), unsafe.Pointer(&_nsErr))

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event requesting a change in the current skip interval.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpskipintervalcommandevent
 type MPSkipIntervalCommandEvent struct {
 	MPRemoteCommandEvent

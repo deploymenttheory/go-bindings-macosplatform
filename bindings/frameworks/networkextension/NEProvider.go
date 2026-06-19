@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for all NetworkExtension providers.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neprovider
 type NEProvider struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func NEProviderFromID(id objc.ID) *NEProvider {
 	return o
 }
 
-// @method sleepWithCompletionHandler: @discussion This function is called by the framework when the system is about to go to sleep. Subclass developers can override this method to implement custom behavior such as closing connections or pausing some network activity. @param completionHandler When the method is finished handling the sleep event it must execute this completion handler.
+// Handle a sleep event.
 func (o *NEProvider) SleepWithCompletionHandler(completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -50,12 +52,12 @@ func (o *NEProvider) SleepWithCompletionHandler(completionHandler func()) {
 	o.Ptr().Send(_nEProviderSelSleepWithCompletionHandler, __block_completionHandler)
 }
 
-// @method wake @discussion This function is called by the framework immediately after the system wakes up from sleep. Subclass developers can override this method to implement custom behavior such as re-establishing connections or resuming some network activity.
+// Handle a wake event.
 func (o *NEProvider) Wake() {
 	o.Ptr().Send(_nEProviderSelWake)
 }
 
-// @method createTCPConnectionToEndpoint:enableTLS:TLSParameters:delegate: @discussion This function can be called by subclass implementations to create a TCP connection to a given network endpoint. This function should not be overridden by subclasses. @param remoteEndpoint An NWEndpoint object that specifies the remote network endpoint to connect to. @param enableTLS A flag indicating if a TLS session should be negotiated on the connection. @param TLSParameters A set of optional TLS parameters. Only valid if enableTLS is YES. If TLSParameters is nil, the default system parameters will be used for TLS negotiation. @param delegate An object to use as the connections delegate. This object should conform to the NWTCPConnectionAuthenticationDelegate protocol. @return An NWTCPConnection object.
+// Create a TCP connection.
 // Deprecated: Use nw_connection_t in Network framework instead
 func (o *NEProvider) CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *NWTLSParameters, delegate objc.ID) *NWTCPConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEProviderSelCreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate, remoteEndpoint, enableTLS, tLSParameters.Ptr(), delegate)
@@ -65,7 +67,7 @@ func (o *NEProvider) CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate
 	return NWTCPConnectionFromID(_ret)
 }
 
-// @method createUDPSessionToEndpoint:fromEndpoint: @discussion This function can be called by subclass implementations to create a UDP session between a local network endpoint and a remote network endpoint. This function should not be overridden by subclasses. @param remoteEndpoint An NWEndpoint object that specifies the remote endpoint to which UDP datagrams will be sent by the UDP session. @param localEndpoint An NWHostEndpoint object that specifies the local IP address endpoint to use as the source endpoint of the UDP session. @return An NWUDPSession object.
+// Creates a UDP session.
 // Deprecated: Use nw_connection_t in Network framework instead
 func (o *NEProvider) CreateUDPSessionToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *NWHostEndpoint) *NWUDPSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEProviderSelCreateUDPSessionToEndpointFromEndpoint, remoteEndpoint, localEndpoint.Ptr())
@@ -75,7 +77,7 @@ func (o *NEProvider) CreateUDPSessionToEndpointFromEndpoint(remoteEndpoint unsaf
 	return NWUDPSessionFromID(_ret)
 }
 
-// @method displayMessage:completionHandler: @discussion This method can be called by subclass implementations to display a message to the user. @param message The message to be displayed. @param completionHandler A block that is executed when the user acknowledges the message. If this method is called on a NEFilterDataProvider instance or the message cannot be displayed, then the completion handler block will be executed immediately with success parameter set to NO. If the message was successfully displayed to the user, then the completion handler block is executed with the success parameter set to YES when the user dismisses the message.
+// Call this method from your NEProvider subclass if you want to display a message to the person using the app.
 // Deprecated: since macOS 10.14.
 func (o *NEProvider) DisplayMessageCompletionHandler(message *foundation.NSString, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
@@ -88,7 +90,7 @@ func (o *NEProvider) DisplayMessageCompletionHandler(message *foundation.NSStrin
 	o.Ptr().Send(_nEProviderSelDisplayMessageCompletionHandler, message.Ptr(), __block_completionHandler)
 }
 
-// @method startSystemExtensionMode @discussion Start the Network Extension machinery in a system extension (.system bundle). This class method will cause the calling system extension to start handling requests from nesessionmanager to instantiate appropriate NEProvider sub-class instances. The system extension must declare a mapping of Network Extension extension points to NEProvider sub-class instances in its Info.plist: Key: NetworkExtension Type: Dictionary containing information about the NetworkExtension capabilities of the system extension. Key: NEProviderClasses Type: Dictionary mapping NetworkExtension extension point identifiers to NEProvider sub-classes Example: <key>NetworkExtension</key> <dict> <key>NEProviderClasses</key> <dict> <key>com.apple.networkextension.app-proxy</key> <string>$(PRODUCT_MODULE_NAME).AppProxyProvider</string> <key>com.apple.networkextension.filter-data</key> <string>$(PRODUCT_MODULE_NAME).FilterDataProvider</string> </dict> </dict> This method should be called as early as possible after the system extension starts.
+// Starts the Network Extension machinery from inside a System Extension.
 func NEProviderStartSystemExtensionMode() {
 	objc.ID(_clsNEProvider).Send(_nEProviderSelStartSystemExtensionMode)
 }

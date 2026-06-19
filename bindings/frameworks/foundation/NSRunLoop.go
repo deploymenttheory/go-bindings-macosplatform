@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The programmatic interface to objects that manage input sources.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsrunloop
 type NSRunLoop struct {
 	NSObject
@@ -114,6 +116,7 @@ func (o *NSRunLoop) RunModeBeforeDate(mode *NSString, limitDate *NSDate) bool {
 	return _ret
 }
 
+// Deprecated. Does nothing.
 // Deprecated: Not supported
 func (o *NSRunLoop) ConfigureAsServer() {
 	o.Ptr().Send(_nSRunLoopSelConfigureAsServer)

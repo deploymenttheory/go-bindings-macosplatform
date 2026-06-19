@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The SBApplication class provides a mechanism enabling an Objective-C program to send Apple events to a scriptable application and receive Apple events in response. It thereby makes it possible for that program to control the application and exchange data with it. Scripting Bridge works by bridging data types between Apple event descriptors and Cocoa objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/scriptingbridge/sbapplication
 type SBApplication struct {
 	SBObject
@@ -47,7 +49,7 @@ func SBApplicationFromID(id objc.ID) *SBApplication {
 	return o
 }
 
-// Returns an instance of an `SBApplication` subclass that represents the target application identified by the given bundle identifier. If you must initialize an `SBApplication` object explictly, you should use this initializer if possible; unlike “SBApplication/initWithProcessIdentifier:“ and “SBApplication/initWithURL:“, this method is not dependent on changeable factors such as the target application's path or process ID. Even so, you should rarely have to initialize an `SBApplication` object yourself; instead, you should initialize an application-specific subclass such as `iTunesApplication`. Note that this method does not check whether an application with the given bundle identifier actually exists. - Parameters: - ident: A bundle identifier specifying an application that is OSA-compliant. - Returns: An initialized shared instance of an `SBApplication` subclass that represents a target application with the bundle identifier of `ident`. Returns `nil` if no such application can be found or if the application does not have a scripting interface.
+// Returns an instance of an SBApplication subclass that represents the target application identified by the given bundle identifier.
 func (o *SBApplication) InitWithBundleIdentifier(ident *foundation.NSString) *SBApplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sBApplicationSelInitWithBundleIdentifier, ident.Ptr())
 	if _ret != 0 {
@@ -56,7 +58,7 @@ func (o *SBApplication) InitWithBundleIdentifier(ident *foundation.NSString) *SB
 	return SBApplicationFromID(_ret)
 }
 
-// Returns an instance of an `SBApplication` subclass that represents the target application identified by the given URL. This approach to initializing `SBApplication` objects should be used only if you know for certain the URL of the target application. In most cases, it is better to use “SBApplication/applicationWithBundleIdentifier:“ which dynamically locates the target application at runtime. Even so, you should rarely have to initialize an `SBApplication` yourself. This method currently supports file URLs (`file:`) and remote application URLs (`eppc:`). It checks whether a file exists at the specified path, but it does not check whether an application identified via `eppc:` exists. - Parameters: - url: A Universal Resource Locator (URL) specifying an application that is OSA-compliant. - Returns: An initialized `SBApplication` that you can use to communicate with the target application specified by the process ID. Returns `nil` if an application could not be found or if the application does not have a scripting interface.
+// Returns an instance of an SBApplication subclass that represents the target application identified by the given URL.
 func (o *SBApplication) InitWithURL(url *foundation.NSURL) *SBApplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sBApplicationSelInitWithURL, url.Ptr())
 	if _ret != 0 {
@@ -65,7 +67,7 @@ func (o *SBApplication) InitWithURL(url *foundation.NSURL) *SBApplication {
 	return SBApplicationFromID(_ret)
 }
 
-// Returns an instance of an `SBApplication` subclass that represents the target application identified by the given process identifier. You should avoid using this method unless you know nothing about an external application but its PID. In most cases, it is better to use “SBApplication/initWithBundleIdentifier:“, which will dynamically locate the external application's path at runtime, or “SBApplication/initWithURL:“, which is not dependent on the external application being open at the time the method is called. - Parameters: - pid: A BSD process ID specifying an application that is OSA-compliant. Often you can get the process ID of a process using the <doc://com.apple.documentation/documentation/Foundation/Process/processIdentifier> method of `NSTask`. - Returns: An initialized `SBApplication` that you can use to communicate with the target application specified by the process ID. Returns `nil` if no such application can be found or if the application does not have a scripting interface.
+// Returns an instance of an SBApplication subclass that represents the target application identified by the given process identifier.
 func (o *SBApplication) InitWithProcessIdentifier(pid int) *SBApplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sBApplicationSelInitWithProcessIdentifier, pid)
 	if _ret != 0 {
@@ -74,7 +76,7 @@ func (o *SBApplication) InitWithProcessIdentifier(pid int) *SBApplication {
 	return SBApplicationFromID(_ret)
 }
 
-// Returns the shared instance representing the target application specified by its bundle identifier. For applications that declare themselves to have a dynamic scripting interface, this method will launch the application if it is not already running. - Parameters: - ident: A bundle identifier specifying an application that is OSA-compliant. - Returns: An instance of a `SBApplication` subclass that represents the target application whose bundle identifier is `ident`. Returns `nil` if no such application can be found or if the application does not have a scripting interface.
+// Returns the shared instance representing the target application specified by its bundle identifier.
 func SBApplicationApplicationWithBundleIdentifier(ident *foundation.NSString) *SBApplication {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSBApplication), _sBApplicationSelApplicationWithBundleIdentifier, ident.Ptr())
 	if _ret != 0 {
@@ -83,7 +85,7 @@ func SBApplicationApplicationWithBundleIdentifier(ident *foundation.NSString) *S
 	return SBApplicationFromID(_ret)
 }
 
-// Returns the shared instance representing a target application specified by the given URL. For applications that declare themselves to have a dynamic scripting interface, this method will launch the application if it is not already running. This approach to initializing `SBApplication` objects should be used only if you know for certain the URL of the target application. In most cases, it is better to use “SBApplication/applicationWithBundleIdentifier:“ which dynamically locates the target application at runtime. This method currently supports file URLs (`file:`) and remote application URLs (`eppc:`). It checks whether a file exists at the specified path, but it does not check whether an application identified via `eppc:` exists. - Parameters: - url: The Universal Resource Locator (URL) locating an OSA-compliant application. - Returns: An `SBApplication` subclass from which to generate a shared instance of the target application whose URL is `url`. Returns `nil` if no such application can be found or if the application does not have a scripting interface.
+// Returns the shared instance representing a target application specified by the given URL.
 func SBApplicationApplicationWithURL(url *foundation.NSURL) *SBApplication {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSBApplication), _sBApplicationSelApplicationWithURL, url.Ptr())
 	if _ret != 0 {
@@ -92,7 +94,7 @@ func SBApplicationApplicationWithURL(url *foundation.NSURL) *SBApplication {
 	return SBApplicationFromID(_ret)
 }
 
-// Returns the shared instance representing a target application specified by its process identifier. You should avoid using this method unless you know nothing about a target application but its process ID. In most cases, it is better to use “SBApplication/applicationWithBundleIdentifier:“, which will dynamically locate the application's path at runtime, or “SBApplication/applicationWithURL:“, which is not dependent on the target application being open at the time the method is called. - Parameters: - pid: The BSD process ID of a OSA-compliant application. Often you can get the process ID of a process using the <doc://com.apple.documentation/documentation/Foundation/Process/processIdentifier> method of `NSTask`. - Returns: An instance of an `SBApplication` subclass that represents the target application whose process identifier is `pid`. Returns `nil` if no such application can be found or if the application does not have a scripting interface.
+// Returns the shared instance representing a target application specified by its process identifier.
 func SBApplicationApplicationWithProcessIdentifier(pid int) *SBApplication {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSBApplication), _sBApplicationSelApplicationWithProcessIdentifier, pid)
 	if _ret != 0 {
@@ -101,13 +103,13 @@ func SBApplicationApplicationWithProcessIdentifier(pid int) *SBApplication {
 	return SBApplicationFromID(_ret)
 }
 
-// Returns a class object that represents a particular class in the target application. You invoke this method on an instance of a scriptable application. Once you have the class object, you may allocate an instance of the class and appropriately the raw instance. Or you may use it in a call to <doc://com.apple.documentation/documentation/ObjectiveC/NSObjectProtocol/isKind(of:)> to determine the class type of an object. - Parameters: - className: The name of the scripting class, as it appears in the scripting interface. For example, "document". - Returns: A `Class` object representing the scripting class.
+// Returns a class object that represents a particular class in the target application.
 func (o *SBApplication) ClassForScriptingClass(className *foundation.NSString) objc.Class {
 	_ret := objc.Send[objc.Class](o.Ptr(), _sBApplicationSelClassForScriptingClass, className.Ptr())
 	return _ret
 }
 
-// Moves the target application to the foreground immediately. If the target application is not already running, this method launches it.
+// Moves the target application to the foreground immediately.
 func (o *SBApplication) Activate() {
 	o.Ptr().Send(_sBApplicationSelActivate)
 }

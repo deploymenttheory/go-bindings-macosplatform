@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A keyed archiver that supports Metal Performance Shaders kernel decoding.
+//
 // KeyedUnarchiver wraps [raw.MPSKeyedUnarchiver] with a fluent Go API.
 type KeyedUnarchiver struct {
 	inner *raw.MPSKeyedUnarchiver

@@ -7,18 +7,19 @@ import (
 	"unsafe"
 )
 
-// Representation of an axis aligned box via its min corner (lower-left) and max corner (upper-right)
+// The definition of an axis-aligned rectangular bounding volume addressed by the tree.
 type GKBox struct {
 	BoxMin unsafe.Pointer
 	BoxMax unsafe.Pointer
 }
 
-// Representation of an axis aligned quad via its min corner (lower-left) and max corner (upper-right)
+// The definition of an axis-aligned rectangle addressed by the tree.
 type GKQuad struct {
 	QuadMin unsafe.Pointer
 	QuadMax unsafe.Pointer
 }
 
+// The definition of a triangle in the mesh, available with the triangleAtIndex: method.
 type GKTriangle struct {
 	Points [3]unsafe.Pointer
 }

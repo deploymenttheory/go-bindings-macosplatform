@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view for displaying 3D SceneKit content.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnview
 type SCNView struct {
 	appkit.NSView
@@ -58,16 +60,16 @@ func SCNViewFromID(id objc.ID) *SCNView {
 	return o
 }
 
-// @method initWithFrame:options: @abstract Initializes and returns a newly allocated SCNView object with a specified frame rectangle. @param frame The frame rectangle for the created view object. @param options An optional dictionary. See "View initialization options" above.
+// Initializes and returns a newly allocated SceneKit view object with the specified frame rectangle and options.
 func (o *SCNView) InitWithFrameOptions(frame corefoundation.CGRect, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SCNView {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelInitWithFrameOptions, frame, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelInitWithFrameOptions, frame, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return SCNViewFromID(_ret)
 }
 
-// @property snapshot @abstract Draws the contents of the view and returns them as a new image object @discussion This method is thread-safe and may be called at any time.
+// Renders the view’s scene into a new image object.
 func (o *SCNView) Snapshot() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNViewSelSnapshot)
 	if _ret != 0 {
@@ -76,17 +78,17 @@ func (o *SCNView) Snapshot() *appkit.NSImage {
 	return appkit.NSImageFromID(_ret)
 }
 
-// @method play: @abstract This action method begins playing the scene at its current location. @param sender The object (such as a button or menu item) sending the message to play the scene. @discussion This method does not do anything if the scene is already playing.
+// Resumes playback of the view’s scene.
 func (o *SCNView) Play(sender objc.ID) {
 	o.Ptr().Send(_sCNViewSelPlay, sender)
 }
 
-// @method pause: @abstract This action method pauses the scene playback. @param sender The object (such as a button or menu item) sending the message to pause the scene. @discussion This method does not do anything if the scene is already paused.
+// Pauses playback of the view’s scene.
 func (o *SCNView) Pause(sender objc.ID) {
 	o.Ptr().Send(_sCNViewSelPause, sender)
 }
 
-// @method stop: @abstract This action method stops the scene playback and resets the current time to the start time of the scene. @param sender The object (such as a button or menu item) sending the message to stop playing the scene.
+// Stops playback of the view’s scene and resets the scene time to its start time.
 func (o *SCNView) Stop(sender objc.ID) {
 	o.Ptr().Send(_sCNViewSelStop, sender)
 }

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A static, ordered collection of unique objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsorderedset
 type NSOrderedSet[ObjectType purego.AnyObject] struct {
 	NSObject
@@ -90,16 +92,19 @@ func NSOrderedSetFromID[ObjectType purego.AnyObject](id objc.ID) *NSOrderedSet[O
 	return o
 }
 
+// Returns the object at the specified index of the set.
 func (o *NSOrderedSet[ObjectType]) ObjectAtIndex(idx uint) ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSOrderedSetSelObjectAtIndex, idx)
 	return _ret
 }
 
+// Returns the index of the specified object.
 func (o *NSOrderedSet[ObjectType]) IndexOfObject(object ObjectType) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSOrderedSetSelIndexOfObject, object)
 	return _ret
 }
 
+// Initializes a newly allocated ordered set.
 func (o *NSOrderedSet[ObjectType]) Init() *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInit)
 	if _ret != 0 {
@@ -108,6 +113,7 @@ func (o *NSOrderedSet[ObjectType]) Init() *NSOrderedSet[ObjectType] {
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
+// Initializes a newly allocated set with a specified number of objects from a given C array of objects.
 func (o *NSOrderedSet[ObjectType]) InitWithObjectsCount(objects unsafe.Pointer, cnt uint) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithObjectsCount, objects, cnt)
 	if _ret != 0 {
@@ -129,10 +135,12 @@ func (o *NSOrderedSet[ObjectType]) Count() uint {
 	return _ret
 }
 
+// Copies the objects contained in the ordered set that fall within the specified range to objects.
 func (o *NSOrderedSet[ObjectType]) GetObjectsRange(objects unsafe.Pointer, range_ NSRange) {
 	o.Ptr().Send(_nSOrderedSetSelGetObjectsRange, objects, range_)
 }
 
+// Returns the objects in the ordered set at the specified indexes.
 func (o *NSOrderedSet[ObjectType]) ObjectsAtIndexes(indexes *NSIndexSet) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelObjectsAtIndexes, indexes.Ptr())
 	if _ret != 0 {
@@ -141,41 +149,49 @@ func (o *NSOrderedSet[ObjectType]) ObjectsAtIndexes(indexes *NSIndexSet) *NSArra
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Compares the receiving ordered set to another ordered set.
 func (o *NSOrderedSet[ObjectType]) IsEqualToOrderedSet(other *NSOrderedSet[ObjectType]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSOrderedSetSelIsEqualToOrderedSet, other.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether a given object is present in the ordered set.
 func (o *NSOrderedSet[ObjectType]) ContainsObject(object ObjectType) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSOrderedSetSelContainsObject, object)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether at least one object in the receiving ordered set is also present in another given ordered set.
 func (o *NSOrderedSet[ObjectType]) IntersectsOrderedSet(other *NSOrderedSet[ObjectType]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSOrderedSetSelIntersectsOrderedSet, other.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether at least one object in the receiving ordered set is also present in another given set.
 func (o *NSOrderedSet[ObjectType]) IntersectsSet(set *NSSet[ObjectType]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSOrderedSetSelIntersectsSet, set.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether every object in the receiving ordered set is also present in another given ordered set.
 func (o *NSOrderedSet[ObjectType]) IsSubsetOfOrderedSet(other *NSOrderedSet[ObjectType]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSOrderedSetSelIsSubsetOfOrderedSet, other.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether every object in the receiving ordered set is also present in another given set.
 func (o *NSOrderedSet[ObjectType]) IsSubsetOfSet(set *NSSet[ObjectType]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSOrderedSetSelIsSubsetOfSet, set.Ptr())
 	return _ret
 }
 
+// Returns the object at the specified index of the set.
 func (o *NSOrderedSet[ObjectType]) ObjectAtIndexedSubscript(idx uint) ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _nSOrderedSetSelObjectAtIndexedSubscript, idx)
 	return _ret
 }
 
+// Returns an enumerator object that lets you access each object in the ordered set.
 func (o *NSOrderedSet[ObjectType]) ObjectEnumerator() *NSEnumerator[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelObjectEnumerator)
 	if _ret != 0 {
@@ -184,6 +200,7 @@ func (o *NSOrderedSet[ObjectType]) ObjectEnumerator() *NSEnumerator[ObjectType] 
 	return NSEnumeratorFromID[ObjectType](_ret)
 }
 
+// Returns an enumerator object that lets you access each object in the ordered set.
 func (o *NSOrderedSet[ObjectType]) ReverseObjectEnumerator() *NSEnumerator[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelReverseObjectEnumerator)
 	if _ret != 0 {
@@ -192,33 +209,40 @@ func (o *NSOrderedSet[ObjectType]) ReverseObjectEnumerator() *NSEnumerator[Objec
 	return NSEnumeratorFromID[ObjectType](_ret)
 }
 
+// Executes a given block using each object in the ordered set.
 func (o *NSOrderedSet[ObjectType]) EnumerateObjectsUsing(block objc.Block) {
 	o.Ptr().Send(_nSOrderedSetSelEnumerateObjectsUsing, block)
 }
 
+// Executes a given block using each object in the set, using the specified enumeration options.
 func (o *NSOrderedSet[ObjectType]) EnumerateObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block) {
 	o.Ptr().Send(_nSOrderedSetSelEnumerateObjectsWithOptionsUsing, opts, block)
 }
 
+// Executes a given block using the objects in the ordered set at the specified indexes.
 func (o *NSOrderedSet[ObjectType]) EnumerateObjectsAtIndexesOptionsUsing(s *NSIndexSet, opts NSEnumerationOptions, block objc.Block) {
 	o.Ptr().Send(_nSOrderedSetSelEnumerateObjectsAtIndexesOptionsUsing, s.Ptr(), opts, block)
 }
 
+// Returns the index of the object in the ordered set that passes a test in a given block.
 func (o *NSOrderedSet[ObjectType]) IndexOfObjectPassingTest(predicate objc.Block) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSOrderedSetSelIndexOfObjectPassingTest, predicate)
 	return _ret
 }
 
+// Returns the index of an object in the ordered set that passes a test in a given block for a given set of enumeration options.
 func (o *NSOrderedSet[ObjectType]) IndexOfObjectWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSOrderedSetSelIndexOfObjectWithOptionsPassingTest, opts, predicate)
 	return _ret
 }
 
+// Returns the index, from a given set of indexes, of the object in the ordered set that passes a test in a given block for a given set of enumeration options.
 func (o *NSOrderedSet[ObjectType]) IndexOfObjectAtIndexesOptionsPassingTest(s *NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSOrderedSetSelIndexOfObjectAtIndexesOptionsPassingTest, s.Ptr(), opts, predicate)
 	return _ret
 }
 
+// Returns the index of the object in the ordered set that passes a test in a given block.
 func (o *NSOrderedSet[ObjectType]) IndexesOfObjectsPassingTest(predicate objc.Block) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelIndexesOfObjectsPassingTest, predicate)
 	if _ret != 0 {
@@ -227,6 +251,7 @@ func (o *NSOrderedSet[ObjectType]) IndexesOfObjectsPassingTest(predicate objc.Bl
 	return NSIndexSetFromID(_ret)
 }
 
+// Returns the index of an object in the ordered set that passes a test in a given block for a given set of enumeration options.
 func (o *NSOrderedSet[ObjectType]) IndexesOfObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelIndexesOfObjectsWithOptionsPassingTest, opts, predicate)
 	if _ret != 0 {
@@ -235,6 +260,7 @@ func (o *NSOrderedSet[ObjectType]) IndexesOfObjectsWithOptionsPassingTest(opts N
 	return NSIndexSetFromID(_ret)
 }
 
+// Returns the index, from a given set of indexes, of the object in the ordered set that passes a test in a given block for a given set of enumeration options.
 func (o *NSOrderedSet[ObjectType]) IndexesOfObjectsAtIndexesOptionsPassingTest(s *NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelIndexesOfObjectsAtIndexesOptionsPassingTest, s.Ptr(), opts, predicate)
 	if _ret != 0 {
@@ -243,6 +269,7 @@ func (o *NSOrderedSet[ObjectType]) IndexesOfObjectsAtIndexesOptionsPassingTest(s
 	return NSIndexSetFromID(_ret)
 }
 
+// Returns the index, within a specified range, of an object compared with elements in the ordered set using a given NSComparator block.
 func (o *NSOrderedSet[ObjectType]) IndexOfObjectInSortedRangeOptionsUsingComparator(object ObjectType, range_ NSRange, opts NSBinarySearchingOptions, cmp func(objc.ID, objc.ID) NSComparisonResult) uint {
 	var __block_cmp objc.Block
 	if cmp != nil {
@@ -255,6 +282,7 @@ func (o *NSOrderedSet[ObjectType]) IndexOfObjectInSortedRangeOptionsUsingCompara
 	return _ret
 }
 
+// Returns an array that lists the receiving ordered set’s elements in ascending order, as determined by the comparison method specified by a given NSComparator block
 func (o *NSOrderedSet[ObjectType]) SortedArrayUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) *NSArray[ObjectType] {
 	var __block_cmptr objc.Block
 	if cmptr != nil {
@@ -270,6 +298,7 @@ func (o *NSOrderedSet[ObjectType]) SortedArrayUsingComparator(cmptr func(objc.ID
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Returns an array that lists the receiving ordered set’s elements in ascending order, as determined by the comparison method specified by a given NSComparator block.
 func (o *NSOrderedSet[ObjectType]) SortedArrayWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) *NSArray[ObjectType] {
 	var __block_cmptr objc.Block
 	if cmptr != nil {
@@ -285,6 +314,7 @@ func (o *NSOrderedSet[ObjectType]) SortedArrayWithOptionsUsingComparator(opts NS
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Returns a string that represents the contents of the ordered set, formatted as a property list.
 func (o *NSOrderedSet[ObjectType]) DescriptionWithLocale(locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelDescriptionWithLocale, locale)
 	if _ret != 0 {
@@ -293,6 +323,7 @@ func (o *NSOrderedSet[ObjectType]) DescriptionWithLocale(locale objc.ID) *NSStri
 	return NSStringFromID(_ret)
 }
 
+// Returns a string that represents the contents of the ordered set, formatted as a property list.
 func (o *NSOrderedSet[ObjectType]) DescriptionWithLocaleIndent(locale objc.ID, level uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelDescriptionWithLocaleIndent, locale, level)
 	if _ret != 0 {
@@ -335,6 +366,7 @@ func (o *NSOrderedSet[ObjectType]) Set() *NSSet[ObjectType] {
 	return NSSetFromID[ObjectType](_ret)
 }
 
+// Creates and returns an empty ordered set
 func NSOrderedSetOrderedSet() *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSet)
 	if _ret != 0 {
@@ -343,6 +375,7 @@ func NSOrderedSetOrderedSet() *NSOrderedSet[objc.ID] {
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
+// Creates and returns a ordered set that contains a single given object.
 func NSOrderedSetOrderedSetWithObject(object objc.ID) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithObject, object)
 	if _ret != 0 {
@@ -351,6 +384,7 @@ func NSOrderedSetOrderedSetWithObject(object objc.ID) *NSOrderedSet[objc.ID] {
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
+// Creates and returns a set containing a specified number of objects from a given C array of objects.
 func NSOrderedSetOrderedSetWithObjectsCount(objects unsafe.Pointer, cnt uint) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithObjectsCount, objects, cnt)
 	if _ret != 0 {
@@ -359,6 +393,7 @@ func NSOrderedSetOrderedSetWithObjectsCount(objects unsafe.Pointer, cnt uint) *N
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
+// Creates and returns an ordered set containing the objects from another ordered set.
 func NSOrderedSetOrderedSetWithOrderedSet(set *NSOrderedSet[objc.ID]) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithOrderedSet, set.Ptr())
 	if _ret != 0 {
@@ -367,6 +402,7 @@ func NSOrderedSetOrderedSetWithOrderedSet(set *NSOrderedSet[objc.ID]) *NSOrdered
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
+// Creates and returns a new ordered set for a specified range of objects in an ordered set.
 func NSOrderedSetOrderedSetWithOrderedSetRangeCopyItems(set *NSOrderedSet[objc.ID], range_ NSRange, flag bool) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithOrderedSetRangeCopyItems, set.Ptr(), range_, flag)
 	if _ret != 0 {
@@ -375,6 +411,7 @@ func NSOrderedSetOrderedSetWithOrderedSetRangeCopyItems(set *NSOrderedSet[objc.I
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
+// Creates and returns a set containing a uniqued collection of the objects contained in a given array.
 func NSOrderedSetOrderedSetWithArray(array *NSArray[objc.ID]) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithArray, array.Ptr())
 	if _ret != 0 {
@@ -383,6 +420,7 @@ func NSOrderedSetOrderedSetWithArray(array *NSArray[objc.ID]) *NSOrderedSet[objc
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
+// Creates and returns a new ordered set for a specified range of objects in an array.
 func NSOrderedSetOrderedSetWithArrayRangeCopyItems(array *NSArray[objc.ID], range_ NSRange, flag bool) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithArrayRangeCopyItems, array.Ptr(), range_, flag)
 	if _ret != 0 {
@@ -391,6 +429,7 @@ func NSOrderedSetOrderedSetWithArrayRangeCopyItems(array *NSArray[objc.ID], rang
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
+// Creates and returns an ordered set with the contents of a set.
 func NSOrderedSetOrderedSetWithSet(set *NSSet[objc.ID]) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithSet, set.Ptr())
 	if _ret != 0 {
@@ -399,6 +438,7 @@ func NSOrderedSetOrderedSetWithSet(set *NSSet[objc.ID]) *NSOrderedSet[objc.ID] {
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
+// Creates and returns an ordered set with the contents of a set, optionally copying the items.
 func NSOrderedSetOrderedSetWithSetCopyItems(set *NSSet[objc.ID], flag bool) *NSOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedSet), _nSOrderedSetSelOrderedSetWithSetCopyItems, set.Ptr(), flag)
 	if _ret != 0 {
@@ -407,6 +447,7 @@ func NSOrderedSetOrderedSetWithSetCopyItems(set *NSSet[objc.ID], flag bool) *NSO
 	return NSOrderedSetFromID[objc.ID](_ret)
 }
 
+// Initializes a new ordered set with the object.
 func (o *NSOrderedSet[ObjectType]) InitWithObject(object ObjectType) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithObject, object)
 	if _ret != 0 {
@@ -415,6 +456,7 @@ func (o *NSOrderedSet[ObjectType]) InitWithObject(object ObjectType) *NSOrderedS
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
+// Initializes a new ordered set with the contents of a set.
 func (o *NSOrderedSet[ObjectType]) InitWithOrderedSet(set *NSOrderedSet[ObjectType]) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithOrderedSet, set.Ptr())
 	if _ret != 0 {
@@ -423,6 +465,7 @@ func (o *NSOrderedSet[ObjectType]) InitWithOrderedSet(set *NSOrderedSet[ObjectTy
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
+// Initializes a new ordered set with the contents of a set, optionally copying the items.
 func (o *NSOrderedSet[ObjectType]) InitWithOrderedSetCopyItems(set *NSOrderedSet[ObjectType], flag bool) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithOrderedSetCopyItems, set.Ptr(), flag)
 	if _ret != 0 {
@@ -431,6 +474,7 @@ func (o *NSOrderedSet[ObjectType]) InitWithOrderedSetCopyItems(set *NSOrderedSet
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
+// Initializes a new ordered set with the contents of an ordered set, optionally copying the items.
 func (o *NSOrderedSet[ObjectType]) InitWithOrderedSetRangeCopyItems(set *NSOrderedSet[ObjectType], range_ NSRange, flag bool) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithOrderedSetRangeCopyItems, set.Ptr(), range_, flag)
 	if _ret != 0 {
@@ -439,6 +483,7 @@ func (o *NSOrderedSet[ObjectType]) InitWithOrderedSetRangeCopyItems(set *NSOrder
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
+// Initializes a newly allocated set with the objects that are contained in a given array.
 func (o *NSOrderedSet[ObjectType]) InitWithArray(array *NSArray[ObjectType]) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithArray, array.Ptr())
 	if _ret != 0 {
@@ -447,6 +492,7 @@ func (o *NSOrderedSet[ObjectType]) InitWithArray(array *NSArray[ObjectType]) *NS
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
+// Initializes a newly allocated set with the objects that are contained in a given array, optionally copying the items.
 func (o *NSOrderedSet[ObjectType]) InitWithArrayCopyItems(set *NSArray[ObjectType], flag bool) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithArrayCopyItems, set.Ptr(), flag)
 	if _ret != 0 {
@@ -455,6 +501,7 @@ func (o *NSOrderedSet[ObjectType]) InitWithArrayCopyItems(set *NSArray[ObjectTyp
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
+// Initializes a newly allocated set with the objects that are contained in the specified range of an array, optionally copying the items.
 func (o *NSOrderedSet[ObjectType]) InitWithArrayRangeCopyItems(set *NSArray[ObjectType], range_ NSRange, flag bool) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithArrayRangeCopyItems, set.Ptr(), range_, flag)
 	if _ret != 0 {
@@ -463,6 +510,7 @@ func (o *NSOrderedSet[ObjectType]) InitWithArrayRangeCopyItems(set *NSArray[Obje
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
+// Initializes a new ordered set with the contents of a set.
 func (o *NSOrderedSet[ObjectType]) InitWithSet(set *NSSet[ObjectType]) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithSet, set.Ptr())
 	if _ret != 0 {
@@ -471,6 +519,7 @@ func (o *NSOrderedSet[ObjectType]) InitWithSet(set *NSSet[ObjectType]) *NSOrdere
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
+// Initializes a new ordered set with the contents of a set, optionally copying the objects in the set.
 func (o *NSOrderedSet[ObjectType]) InitWithSetCopyItems(set *NSSet[ObjectType], flag bool) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelInitWithSetCopyItems, set.Ptr(), flag)
 	if _ret != 0 {
@@ -479,6 +528,7 @@ func (o *NSOrderedSet[ObjectType]) InitWithSetCopyItems(set *NSSet[ObjectType], 
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
+// Compares two ordered sets, using the provided block and with options, to create a difference object that represents the changes between them.
 func (o *NSOrderedSet[ObjectType]) DifferenceFromOrderedSetWithOptionsUsingEquivalenceTest(other *NSOrderedSet[ObjectType], options NSOrderedCollectionDifferenceCalculationOptions, block objc.Block) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelDifferenceFromOrderedSetWithOptionsUsingEquivalenceTest, other.Ptr(), options, block)
 	if _ret != 0 {
@@ -487,6 +537,7 @@ func (o *NSOrderedSet[ObjectType]) DifferenceFromOrderedSetWithOptionsUsingEquiv
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
+// Compares two ordered sets, with options, to create a difference object that represents the changes between them.
 func (o *NSOrderedSet[ObjectType]) DifferenceFromOrderedSetWithOptions(other *NSOrderedSet[ObjectType], options NSOrderedCollectionDifferenceCalculationOptions) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelDifferenceFromOrderedSetWithOptions, other.Ptr(), options)
 	if _ret != 0 {
@@ -495,6 +546,7 @@ func (o *NSOrderedSet[ObjectType]) DifferenceFromOrderedSetWithOptions(other *NS
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
+// Compares two ordered sets to create a difference object that represents the changes between them.
 func (o *NSOrderedSet[ObjectType]) DifferenceFromOrderedSet(other *NSOrderedSet[ObjectType]) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelDifferenceFromOrderedSet, other.Ptr())
 	if _ret != 0 {
@@ -503,6 +555,7 @@ func (o *NSOrderedSet[ObjectType]) DifferenceFromOrderedSet(other *NSOrderedSet[
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
+// Creates a new ordered set by applying a difference object to an existing ordered set.
 func (o *NSOrderedSet[ObjectType]) OrderedSetByApplyingDifference(difference *NSOrderedCollectionDifference[ObjectType]) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelOrderedSetByApplyingDifference, difference.Ptr())
 	if _ret != 0 {
@@ -511,6 +564,7 @@ func (o *NSOrderedSet[ObjectType]) OrderedSetByApplyingDifference(difference *NS
 	return NSOrderedSetFromID[ObjectType](_ret)
 }
 
+// Returns an array of the ordered set’s elements sorted as specified by a given array of sort descriptors.
 func (o *NSOrderedSet[ObjectType]) SortedArrayUsingDescriptors(sortDescriptors *NSArray[*NSSortDescriptor]) *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelSortedArrayUsingDescriptors, sortDescriptors.Ptr())
 	if _ret != 0 {
@@ -519,6 +573,7 @@ func (o *NSOrderedSet[ObjectType]) SortedArrayUsingDescriptors(sortDescriptors *
 	return NSArrayFromID[ObjectType](_ret)
 }
 
+// Evaluates a given predicate against each object in the receiving ordered set and returns a new ordered set containing the objects for which the predicate returns true.
 func (o *NSOrderedSet[ObjectType]) FilteredOrderedSetUsingPredicate(p *NSPredicate) *NSOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedSetSelFilteredOrderedSetUsingPredicate, p.Ptr())
 	if _ret != 0 {

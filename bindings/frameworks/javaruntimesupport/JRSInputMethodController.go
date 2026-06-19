@@ -43,8 +43,11 @@ func JRSInputMethodControllerController() *JRSInputMethodController {
 }
 
 func (o *JRSInputMethodController) AvailableInputMethodLocales() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _jRSInputMethodControllerSelAvailableInputMethodLocales)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _jRSInputMethodControllerSelAvailableInputMethodLocales)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *JRSInputMethodController) CurrentInputMethodName() *foundation.NSString {

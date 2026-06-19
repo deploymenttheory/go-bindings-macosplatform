@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that configures and displays a Media Library Browser panel.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsmedialibrarybrowsercontroller
 type NSMediaLibraryBrowserController struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func NSMediaLibraryBrowserControllerFromID(id objc.ID) *NSMediaLibraryBrowserCon
 	return o
 }
 
+// Toggles the visibility of the Media Library Browser.
 func (o *NSMediaLibraryBrowserController) TogglePanel(sender objc.ID) {
 	o.Ptr().Send(_nSMediaLibraryBrowserControllerSelTogglePanel, sender)
 }

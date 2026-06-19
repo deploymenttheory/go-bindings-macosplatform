@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that responds to requests to change the playback rate of the playing item.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpchangeplaybackratecommand
 type MPChangePlaybackRateCommand struct {
 	MPRemoteCommand
@@ -32,10 +34,13 @@ func MPChangePlaybackRateCommandFromID(id objc.ID) *MPChangePlaybackRateCommand 
 }
 
 func (o *MPChangePlaybackRateCommand) SupportedPlaybackRates() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mPChangePlaybackRateCommandSelSupportedPlaybackRates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPChangePlaybackRateCommandSelSupportedPlaybackRates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *MPChangePlaybackRateCommand) SetSupportedPlaybackRates(supportedPlaybackRates *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_mPChangePlaybackRateCommandSelSetSupportedPlaybackRates, supportedPlaybackRates)
+	o.Ptr().Send(_mPChangePlaybackRateCommandSelSetSupportedPlaybackRates, supportedPlaybackRates.Ptr())
 }

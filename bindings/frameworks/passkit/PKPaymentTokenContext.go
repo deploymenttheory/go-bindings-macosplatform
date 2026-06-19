@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that defines the context for a single payment token in a payment request for multimerchant payments.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymenttokencontext
 type PKPaymentTokenContext struct {
 	foundation.NSObject
@@ -40,6 +42,7 @@ func PKPaymentTokenContextFromID(id objc.ID) *PKPaymentTokenContext {
 	return o
 }
 
+// Create a payment token context for a single merchant.
 func (o *PKPaymentTokenContext) InitWithMerchantIdentifierExternalIdentifierMerchantNameMerchantDomainAmount(merchantIdentifier *foundation.NSString, externalIdentifier *foundation.NSString, merchantName *foundation.NSString, merchantDomain *foundation.NSString, amount *foundation.NSDecimalNumber) *PKPaymentTokenContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentTokenContextSelInitWithMerchantIdentifierExternalIdentifierMerchantNameMerchantDomainAmount, merchantIdentifier.Ptr(), externalIdentifier.Ptr(), merchantName.Ptr(), merchantDomain.Ptr(), amount.Ptr())
 	if _ret != 0 {

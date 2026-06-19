@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A coder used to transmit object proxies (and sometimes objects themselves) between connections.
+//
 // PortCoder wraps [raw.NSPortCoder] with a fluent Go API.
 type PortCoder struct {
 	inner *raw.NSPortCoder
@@ -29,6 +31,8 @@ func PortCoderFromID(id objc.ID) *PortCoder {
 	return &PortCoder{inner: raw.NSPortCoderFromID(id)}
 }
 
+// Initializes and returns an NSPortCoder object.
+//
 // NewPortCoderWithReceivePortSendPortComponents creates a new [PortCoder].
 func NewPortCoderWithReceivePortSendPortComponents(rcvPort *raw.NSPort, sndPort *raw.NSPort, comps *raw.NSArray[objc.ID]) *PortCoder {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPortCoder")), objc.RegisterName("alloc"))
@@ -42,21 +46,29 @@ func (x *PortCoder) WithScriptingProperties(scriptingProperties *raw.NSDictionar
 	return x
 }
 
+// Returns a Boolean value that indicates whether the receiver is encoding an object by copying it.
+//
 // IsBycopy calls the underlying IsBycopy.
 func (x *PortCoder) IsBycopy() bool {
 	return x.inner.IsBycopy()
 }
 
+// Returns a Boolean value that indicates whether the receiver is encoding an object by reference.
+//
 // IsByref calls the underlying IsByref.
 func (x *PortCoder) IsByref() bool {
 	return x.inner.IsByref()
 }
 
+// Encodes a given port so it can be properly reconstituted in the receiving process or thread.
+//
 // EncodePortObject calls the underlying EncodePortObject.
 func (x *PortCoder) EncodePortObject(aport *raw.NSPort) {
 	x.inner.EncodePortObject(aport)
 }
 
+// Decodes and returns an NSPort object that was previously encoded with any of the general encode...Object: messages.
+//
 // DecodePortObject calls the underlying DecodePortObject.
 func (x *PortCoder) DecodePortObject() *Port {
 	_r := x.inner.DecodePortObject()
@@ -66,6 +78,8 @@ func (x *PortCoder) DecodePortObject() *Port {
 	return &Port{inner: _r}
 }
 
+// Returns the NSConnection object that uses the receiver.
+//
 // Connection calls the underlying Connection.
 func (x *PortCoder) Connection() *Connection {
 	_r := x.inner.Connection()
@@ -75,6 +89,8 @@ func (x *PortCoder) Connection() *Connection {
 	return &Connection{inner: _r}
 }
 
+// Processes and acts upon the distributed object message with which the receiver was initialized.
+//
 // Dispatch calls the underlying Dispatch.
 func (x *PortCoder) Dispatch() {
 	x.inner.Dispatch()

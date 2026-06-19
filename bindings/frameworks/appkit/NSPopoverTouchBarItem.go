@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bar item that provides a two-state control that can expand into its second state, showing the contents of a bar that it owns.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspopovertouchbaritem
 type NSPopoverTouchBarItem struct {
 	NSTouchBarItem
@@ -45,14 +47,17 @@ func NSPopoverTouchBarItemFromID(id objc.ID) *NSPopoverTouchBarItem {
 	return o
 }
 
+// Replaces the main bar with this item’s popover bar.
 func (o *NSPopoverTouchBarItem) ShowPopover(sender objc.ID) {
 	o.Ptr().Send(_nSPopoverTouchBarItemSelShowPopover, sender)
 }
 
+// Restores the previously visible main bar.
 func (o *NSPopoverTouchBarItem) DismissPopover(sender objc.ID) {
 	o.Ptr().Send(_nSPopoverTouchBarItemSelDismissPopover, sender)
 }
 
+// Returns a gesture recognizer, configured to invoke the showPopover: method.
 func (o *NSPopoverTouchBarItem) MakeStandardActivatePopoverGestureRecognizer() *NSGestureRecognizer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelMakeStandardActivatePopoverGestureRecognizer)
 	if _ret != 0 {

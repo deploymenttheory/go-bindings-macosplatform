@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Dishwasher Alarm Attributes and commands for configuring the Dishwasher alarm.
+//
 // MTRClusterDishwasherAlarm wraps [raw.MTRClusterDishwasherAlarm] with a fluent Go API.
 type MTRClusterDishwasherAlarm struct {
 	inner *raw.MTRClusterDishwasherAlarm

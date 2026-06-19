@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that wraps a version 2 audio unit as version 3 audio unit.
+//
 // Apple documentation: https://developer.apple.com/documentation/audiotoolbox/auaudiounitv2bridge
 type AUAudioUnitV2Bridge struct {
 	AUAudioUnit

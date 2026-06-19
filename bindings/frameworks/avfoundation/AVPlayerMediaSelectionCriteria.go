@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that specifies the preferred languages and media characteristics for a player.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayermediaselectioncriteria
 type AVPlayerMediaSelectionCriteria struct {
 	foundation.NSObject
@@ -34,18 +36,18 @@ func AVPlayerMediaSelectionCriteriaFromID(id objc.ID) *AVPlayerMediaSelectionCri
 	return o
 }
 
-// @method		initWithPreferredLanguages:preferredMediaCharacteristics: @abstract		Creates an instance of AVPlayerMediaSelectionCriteria. @param		preferredLanguages An NSArray of NSStrings containing language identifiers, in order of desirability, that are preferred for selection. Can be nil. @param		preferredMediaCharacteristics An NSArray of AVMediaCharacteristics indicating additional media characteristics, in order of desirability, that are preferred when selecting media with the characteristic for which the receiver is set on the AVPlayer as the selection criteria. Can be nil. @result		An instance of AVPlayerMediaSelectionCriteria.
+// Creates media selection criteria with the preferred languages and media characteristics.
 func (o *AVPlayerMediaSelectionCriteria) InitWithPreferredLanguagesPreferredMediaCharacteristics(preferredLanguages *foundation.NSArray[*foundation.NSString], preferredMediaCharacteristics *foundation.NSArray[*foundation.NSString]) *AVPlayerMediaSelectionCriteria {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerMediaSelectionCriteriaSelInitWithPreferredLanguagesPreferredMediaCharacteristics, preferredLanguages, preferredMediaCharacteristics)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerMediaSelectionCriteriaSelInitWithPreferredLanguagesPreferredMediaCharacteristics, preferredLanguages.Ptr(), preferredMediaCharacteristics.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVPlayerMediaSelectionCriteriaFromID(_ret)
 }
 
-// @method		initWithPrincipalMediaCharacteristics:principalMediaCharacteristics:preferredLanguages:preferredMediaCharacteristics: @abstract		Creates an instance of AVPlayerMediaSelectionCriteria. @param		principalMediaCharacteristics An NSArray of AVMediaCharacteristics indicating media characteristics that are considered essential when selecting media with the characteristic for which the receiver is set on the AVPlayer as the selection criteria. Can be nil. @param		preferredLanguages An NSArray of NSStrings containing language identifiers, in order of desirability, that are preferred for selection. Can be nil. @param		preferredMediaCharacteristics An NSArray of AVMediaCharacteristics indicating additional media characteristics, in order of desirability, that are preferred when selecting media with the characteristic for which the receiver is set on the AVPlayer as the selection criteria. Can be nil. @result		An instance of AVPlayerMediaSelectionCriteria. @discussion  Note that even though principal media characteristics, when present, will override language preferences when making a selection within a specific media selection group, language preferences may still pertain to selections in other groups. For example, language preferences for the group that corresponds to the audible characteristic may be considered when choosing whether or not to select non-forced subtitles for translation purposes.
+// Creates media selection criteria with the principal media characteristics, and preferred languages and media characteristics.
 func (o *AVPlayerMediaSelectionCriteria) InitWithPrincipalMediaCharacteristicsPreferredLanguagesPreferredMediaCharacteristics(principalMediaCharacteristics *foundation.NSArray[*foundation.NSString], preferredLanguages *foundation.NSArray[*foundation.NSString], preferredMediaCharacteristics *foundation.NSArray[*foundation.NSString]) *AVPlayerMediaSelectionCriteria {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerMediaSelectionCriteriaSelInitWithPrincipalMediaCharacteristicsPreferredLanguagesPreferredMediaCharacteristics, principalMediaCharacteristics, preferredLanguages, preferredMediaCharacteristics)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerMediaSelectionCriteriaSelInitWithPrincipalMediaCharacteristicsPreferredLanguagesPreferredMediaCharacteristics, principalMediaCharacteristics.Ptr(), preferredLanguages.Ptr(), preferredMediaCharacteristics.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -53,16 +55,25 @@ func (o *AVPlayerMediaSelectionCriteria) InitWithPrincipalMediaCharacteristicsPr
 }
 
 func (o *AVPlayerMediaSelectionCriteria) PreferredLanguages() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVPlayerMediaSelectionCriteriaSelPreferredLanguages)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerMediaSelectionCriteriaSelPreferredLanguages)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *AVPlayerMediaSelectionCriteria) PreferredMediaCharacteristics() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVPlayerMediaSelectionCriteriaSelPreferredMediaCharacteristics)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerMediaSelectionCriteriaSelPreferredMediaCharacteristics)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *AVPlayerMediaSelectionCriteria) PrincipalMediaCharacteristics() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVPlayerMediaSelectionCriteriaSelPrincipalMediaCharacteristics)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerMediaSelectionCriteriaSelPrincipalMediaCharacteristics)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

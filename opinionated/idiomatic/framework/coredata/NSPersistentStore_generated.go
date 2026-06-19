@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract base class for all Core Data persistent stores.
+//
 // PersistentStore wraps [raw.NSPersistentStore] with a fluent Go API.
 type PersistentStore struct {
 	inner *raw.NSPersistentStore
@@ -31,6 +33,8 @@ func PersistentStoreFromID(id objc.ID) *PersistentStore {
 	return &PersistentStore{inner: raw.NSPersistentStoreFromID(id)}
 }
 
+// Returns a store initialized with the given arguments.
+//
 // NewPersistentStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions creates a new [PersistentStore].
 func NewPersistentStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions(root *raw.NSPersistentStoreCoordinator, name string, url string, options purego.IDer) *PersistentStore {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentStore")), objc.RegisterName("alloc"))
@@ -38,41 +42,55 @@ func NewPersistentStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions
 	return &PersistentStore{inner: raw.NSPersistentStoreFromID(_id)}
 }
 
+// The URL for the persistent store.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *PersistentStore) WithURL(uRL string) *PersistentStore {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// The unique identifier for the persistent store.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *PersistentStore) WithIdentifier(identifier string) *PersistentStore {
 	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 	return x
 }
 
+// A Boolean value that indicates whether the persistent store is read-only.
+//
 // WithReadOnly sets the readOnly property and returns the receiver for chaining.
 func (x *PersistentStore) WithReadOnly(readOnly bool) *PersistentStore {
 	x.inner.SetReadOnly(readOnly)
 	return x
 }
 
+// The metadata for the persistent store.
+//
 // WithMetadata sets the metadata property and returns the receiver for chaining.
 func (x *PersistentStore) WithMetadata(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PersistentStore {
 	x.inner.SetMetadata(metadata)
 	return x
 }
 
+// Instructs the persistent store to load its metadata.
+//
 // LoadMetadata returns any validation error.
 func (x *PersistentStore) LoadMetadata() error {
 	_, err := x.inner.LoadMetadata()
 	return err
 }
 
+// Invoked after the persistent store has been added to the persistent store coordinator.
+//
 // DidAddToPersistentStoreCoordinator calls the underlying DidAddToPersistentStoreCoordinator.
 func (x *PersistentStore) DidAddToPersistentStoreCoordinator(coordinator *raw.NSPersistentStoreCoordinator) {
 	x.inner.DidAddToPersistentStoreCoordinator(coordinator)
 }
 
+// Invoked before the persistent store is removed from the persistent store coordinator.
+//
 // WillRemoveFromPersistentStoreCoordinator calls the underlying WillRemoveFromPersistentStoreCoordinator.
 func (x *PersistentStore) WillRemoveFromPersistentStoreCoordinator(coordinator *raw.NSPersistentStoreCoordinator) {
 	x.inner.WillRemoveFromPersistentStoreCoordinator(coordinator)

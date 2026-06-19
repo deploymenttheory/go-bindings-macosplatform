@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A snapshot of a particular touch at an instant in time.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstouch
 type NSTouch struct {
 	foundation.NSObject
@@ -69,11 +71,13 @@ func (o *NSTouch) DeviceSize() corefoundation.CGSize {
 	return _ret
 }
 
+// Indicates the location of the touch in the view’s coordinates.
 func (o *NSTouch) LocationInView(view *NSView) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSTouchSelLocationInView, view.Ptr())
 	return _ret
 }
 
+// Indicates the previous location of the touch in the view’s coordinates.
 func (o *NSTouch) PreviousLocationInView(view *NSView) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSTouchSelPreviousLocationInView, view.Ptr())
 	return _ret

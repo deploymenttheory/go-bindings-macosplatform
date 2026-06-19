@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// WebFrameView objects and their subviews display the web content contained in a frame. You never create instances of WebFrameView directly—WebView objects create and manage a hierarchy of WebFrameView objects, one for each frame. WebFrameView objects use a scroll view whose document view conforms to the WebDocumentView protocol.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/webframeview
 type WebFrameView struct {
 	appkit.NSView
@@ -37,7 +39,7 @@ func WebFrameViewFromID(id objc.ID) *WebFrameView {
 	return o
 }
 
-// @method printOperationWithPrintInfo @abstract Creates a print operation set up to print this frame @result A newly created print operation object
+// Returns a print operation object to print this frame.
 func (o *WebFrameView) PrintOperationWithPrintInfo(printInfo *appkit.NSPrintInfo) *appkit.NSPrintOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameViewSelPrintOperationWithPrintInfo, printInfo.Ptr())
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func (o *WebFrameView) PrintOperationWithPrintInfo(printInfo *appkit.NSPrintInfo
 	return appkit.NSPrintOperationFromID(_ret)
 }
 
-// @method printDocumentView @abstract Called by the host application when the WebFrameView returns YES from -documentViewShouldHandlePrint.
+// Prints the receiver.
 func (o *WebFrameView) PrintDocumentView() {
 	o.Ptr().Send(_webFrameViewSelPrintDocumentView)
 }

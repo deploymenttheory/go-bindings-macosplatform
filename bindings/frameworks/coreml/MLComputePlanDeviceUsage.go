@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The anticipated compute devices to use for executing a layer or operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlcomputeplandeviceusage
 type MLComputePlanDeviceUsage struct {
 	foundation.NSObject

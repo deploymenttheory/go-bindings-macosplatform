@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A compact, universal identifier for a managed object.
+//
 // ManagedObjectID wraps [raw.NSManagedObjectID] with a fluent Go API.
 type ManagedObjectID struct {
 	inner *raw.NSManagedObjectID
@@ -36,6 +38,8 @@ func NewManagedObjectID() *ManagedObjectID {
 	return &ManagedObjectID{inner: raw.NSManagedObjectIDFromID(_id)}
 }
 
+// Returns a URI that provides an archiveable reference to the object for the object ID.
+//
 // URIRepresentation calls the underlying URIRepresentation.
 func (x *ManagedObjectID) URIRepresentation() *foundation.NSURL {
 	return x.inner.URIRepresentation()

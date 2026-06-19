@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Produces a single, constant value at all positions in the space.
+// A procedural noise generator that outputs a field of a single constant value.
 //
 // ConstantNoiseSource wraps [raw.GKConstantNoiseSource] with a fluent Go API.
 type ConstantNoiseSource struct {
@@ -31,6 +31,8 @@ func ConstantNoiseSourceFromID(id objc.ID) *ConstantNoiseSource {
 	return &ConstantNoiseSource{inner: raw.GKConstantNoiseSourceFromID(id)}
 }
 
+// Initializes a noise source with the specified constant value.
+//
 // NewConstantNoiseSourceWithValue creates a new [ConstantNoiseSource].
 func NewConstantNoiseSourceWithValue(value float64) *ConstantNoiseSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKConstantNoiseSource")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewConstantNoiseSourceWithValue(value float64) *ConstantNoiseSource {
 	return &ConstantNoiseSource{inner: raw.GKConstantNoiseSourceFromID(_id)}
 }
 
+// The constant value for the generated noise.
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *ConstantNoiseSource) WithValue(value float64) *ConstantNoiseSource {
 	x.inner.SetValue(value)

@@ -46,14 +46,14 @@ func (x *MTRDevice) SetDelegateQueue(delegate raw.MTRDeviceDelegate, queue *foun
 	x.inner.SetDelegateQueue(delegate, queue)
 }
 
-// Adds a delegate to receive asynchronous callbacks about the device. The delegate will be called on the provided queue, for attribute reports, event reports, and device state changes. MTRDevice holds a weak reference to the delegate object.
+// Adds a delegate to receive asynchronous callbacks about the device.
 //
 // AddDelegateQueue calls the underlying AddDelegateQueue.
 func (x *MTRDevice) AddDelegateQueue(delegate raw.MTRDeviceDelegate, queue *foundation.NSObject) {
 	x.inner.AddDelegateQueue(delegate, queue)
 }
 
-// Adds a delegate to receive asynchronous callbacks about the device, and limit attribute and/or event reports to a specific set of paths. interestedPathsForAttributes may contain either MTRClusterPath or MTRAttributePath to specify interested clusters and attributes, or NSNumber for endpoints. interestedPathsForEvents may contain either MTRClusterPath or MTREventPath to specify interested clusters and events, or NSNumber for endpoints. For both interested paths arguments, if nil is specified, then no filter will be applied. Calling addDelegate: again with the same delegate object will update the interested paths for attributes and events for this delegate. MTRDevice holds a weak reference to the delegate object.
+// Adds a delegate to receive asynchronous callbacks about the device, and limit attribute and/or event reports to a specific set of paths.
 //
 // AddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents calls the underlying AddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents.
 func (x *MTRDevice) AddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents(delegate raw.MTRDeviceDelegate, queue *foundation.NSObject, interestedPathsForAttributes *foundation.NSArray[objc.ID], interestedPathsForEvents *foundation.NSArray[objc.ID]) {
@@ -81,14 +81,14 @@ func (x *MTRDevice) WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpecte
 	x.inner.WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout(endpointID, clusterID, attributeID, value, expectedValueInterval, timeout)
 }
 
-// Read the attributes identified by the provided attribute paths.  The paths can include wildcards. Paths that do not correspond to any existing attributes, or that the MTRDevice does not have attribute values for, will not be present in the return value from this function. @return an array of response-value dictionaries as described in the documentation for MTRDeviceResponseHandler.  Each one will have an MTRAttributePathKey and an MTRDataKey.
+// Read the attributes identified by the provided attribute paths. The paths can include wildcards.
 //
 // ReadAttributePaths calls the underlying ReadAttributePaths.
 func (x *MTRDevice) ReadAttributePaths(attributePaths *foundation.NSArray[*raw.MTRAttributeRequestPath]) *foundation.NSArray[objc.ID] {
 	return x.inner.ReadAttributePaths(attributePaths)
 }
 
-// Read all known attributes from descriptor clusters on all known endpoints. @return A dictionary with the paths of the attributes as keys and the data-values (as described in the documentation for MTRDeviceResponseHandler) as values.
+// Read all known attributes from descriptor clusters on all known endpoints.
 //
 // DescriptorClusters calls the underlying DescriptorClusters.
 func (x *MTRDevice) DescriptorClusters() *foundation.NSDictionary[*raw.MTRAttributePath, objc.ID] {
@@ -98,19 +98,19 @@ func (x *MTRDevice) DescriptorClusters() *foundation.NSDictionary[*raw.MTRAttrib
 // Invoke a command with a designated command path @param commandFields command fields object. If not nil, the object must be a data-value NSDictionary object as described in the MTRDeviceResponseHandler documentation. The value must be a Structure, i.e., the NSDictionary MTRTypeKey key must have the value MTRStructureValueType. If commandFields is nil, it will be treated as a Structure with no fields. @param expectedValues The expected values of attributes that will be affected by the command, if any.  If these are provided, the relevant attributes will have the provided values when read until one of the following happens: 1. Something (another invoke or a write) sets different expected values. 2. expectedValueInterval elapses without the device reporting the attributes changing their values to the expected values. 3. The command invoke fails. 4. The device reports some other values for these attributes. The dictionaries in this array are expected to be response-value dictionaries as documented in the documentation of MTRDeviceResponseHandler, and each one must have an MTRAttributePathKey. The expectedValues and expectedValueInterval arguments need to be both nil or both non-nil, or both will be both ignored. @param expectedValueInterval  maximum interval in milliseconds during which reads of the attributes that had expected values provided will return the expected values. If the value is less than 1, both this value and expectedValues will be ignored. If this value is greater than UINT32_MAX, it will be clamped to UINT32_MAX. @param completion  response handler will receive either values or error.  A path-specific error status from the command invocation will result in an error being passed to the completion, so values will only be passed in when the command succeeds. If values are passed, the array length will always be 1 and the single response-value in it will have an MTRCommandPathKey.  If the command response is just a success status, there will be no MTRDataKey.  If the command response has data fields, there will be an MTRDataKey, whose value will be of type MTRStructureValueType and describe the response payload.
 //
 // InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion calls the underlying InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion.
-func (x *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
+func (x *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	x.inner.InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion(endpointID, clusterID, commandID, commandFields, expectedValues, expectedValueInterval, queue, completion)
 }
 
 // InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion calls the underlying InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion.
-func (x *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
+func (x *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	x.inner.InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion(endpointID, clusterID, commandID, commandFields, expectedValues, expectedValueInterval, timeout, queue, completion)
 }
 
-// Invoke one or more groups of commands. For any given group, if any command in any preceding group failed, the group will be skipped.  If all commands in all preceding groups succeeded, the commands within the group will be invoked, with no ordering guarantees within that group. Results from all commands that were invoked will be passed to the provided completion as an array of response-value dictionaries.  Each of these will have the command path of the command (see MTRCommandPathKey) and one of three things: 1) No other fields, indicating that the command invoke returned a succcess status. 2) A field for MTRErrorKey, indicating that the invoke returned a failure status (which is the value of the field). 3) A field for MTRDataKey, indicating that the invoke returned a data response.  In this case the data-value representing the response will be the value of this field.
+// Invoke one or more groups of commands.
 //
 // InvokeCommandsQueueCompletion calls the underlying InvokeCommandsQueueCompletion.
-func (x *MTRDevice) InvokeCommandsQueueCompletion(commands *foundation.NSArray[objc.ID], queue *foundation.NSObject, completion objc.Block) {
+func (x *MTRDevice) InvokeCommandsQueueCompletion(commands *foundation.NSArray[objc.ID], queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	x.inner.InvokeCommandsQueueCompletion(commands, queue, completion)
 }
 
@@ -154,7 +154,7 @@ func (x *MTRDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context,
 	}
 }
 
-// Sets up the provided completion to be called when any of the following happens: 1) A set of attributes reaches certain values: completion called with nil. 2) The provided timeout expires: completion called with MTRErrorCodeTimeout error. 3) The wait is canceled: completion called with MTRErrorCodeCancelled error. If the MTRAttributeValueWaiter is destroyed before the completion is called, that is treated the same as canceling the waiter. The attributes and values to wait for are represented as a dictionary which has the attribute paths as keys and the expected data-values as values.
+// Sets up the provided completion to be called when any of the following happens:
 //
 // WaitForAttributeValuesTimeoutQueueCompletion calls the underlying WaitForAttributeValuesTimeoutQueueCompletion.
 func (x *MTRDevice) WaitForAttributeValuesTimeoutQueueCompletion(values *foundation.NSDictionary[*raw.MTRAttributePath, objc.ID], timeout float64, queue *foundation.NSObject, completion func(unsafe.Pointer)) *MTRAttributeValueWaiter {
@@ -231,7 +231,7 @@ func (x *MTRDevice) NetworkCommissioningFeatures() MTRNetworkCommissioningFeatur
 }
 
 // InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion calls the underlying InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion.
-func (x *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
+func (x *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	x.inner.InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion(endpointID, clusterID, commandID, commandFields, expectedValues, expectedValueInterval, timeout, queue, completion)
 }
 
@@ -246,9 +246,9 @@ type MTRDeviceable interface {
 	WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, value objc.ID, expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber)
 	ReadAttributePaths(attributePaths *foundation.NSArray[*raw.MTRAttributeRequestPath]) *foundation.NSArray[objc.ID]
 	DescriptorClusters() *foundation.NSDictionary[*raw.MTRAttributePath, objc.ID]
-	InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block)
-	InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block)
-	InvokeCommandsQueueCompletion(commands *foundation.NSArray[objc.ID], queue *foundation.NSObject, completion objc.Block)
+	InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer))
+	InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer))
+	InvokeCommandsQueueCompletion(commands *foundation.NSArray[objc.ID], queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer))
 	OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion(setupPasscode *foundation.NSNumber, discriminator *foundation.NSNumber, duration *foundation.NSNumber, queue *foundation.NSObject, completion func(*raw.MTRSetupPayload, unsafe.Pointer))
 	OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion(discriminator *foundation.NSNumber, duration *foundation.NSNumber, queue *foundation.NSObject, completion func(*raw.MTRSetupPayload, unsafe.Pointer))
 	DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue *foundation.NSObject) (*foundation.NSURL, error)
@@ -262,7 +262,7 @@ type MTRDeviceable interface {
 	VendorID() *foundation.NSNumber
 	ProductID() *foundation.NSNumber
 	NetworkCommissioningFeatures() MTRNetworkCommissioningFeature
-	InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block)
+	InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer))
 }
 
 var _ MTRDeviceable = (*MTRDevice)(nil)

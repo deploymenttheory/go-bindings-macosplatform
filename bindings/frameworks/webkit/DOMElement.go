@@ -447,6 +447,7 @@ func (o *DOMElement) ScrollByPages(pages int) {
 	o.Ptr().Send(_dOMElementSelScrollByPages, pages)
 }
 
+// Returns an image associated with the receiver.
 func (o *DOMElement) Image() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelImage)
 	if _ret != 0 {

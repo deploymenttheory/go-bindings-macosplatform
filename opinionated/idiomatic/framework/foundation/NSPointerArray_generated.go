@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A collection similar to an array, but with a broader range of available memory semantics.
+//
 // PointerArray wraps [raw.NSPointerArray] with a fluent Go API.
 type PointerArray struct {
 	inner *raw.NSPointerArray
@@ -30,6 +32,8 @@ func PointerArrayFromID(id objc.ID) *PointerArray {
 	return &PointerArray{inner: raw.NSPointerArrayFromID(id)}
 }
 
+// Initializes the receiver to use the given options.
+//
 // NewPointerArrayWithOptions creates a new [PointerArray].
 func NewPointerArrayWithOptions(options NSPointerFunctionsOptions) *PointerArray {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPointerArray")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewPointerArrayWithOptions(options NSPointerFunctionsOptions) *PointerArray
 	return &PointerArray{inner: raw.NSPointerArrayFromID(_id)}
 }
 
+// Initializes the receiver to use the given functions.
+//
 // NewPointerArrayWithPointerFunctions creates a new [PointerArray].
 func NewPointerArrayWithPointerFunctions(functions *raw.NSPointerFunctions) *PointerArray {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPointerArray")), objc.RegisterName("alloc"))
@@ -44,6 +50,8 @@ func NewPointerArrayWithPointerFunctions(functions *raw.NSPointerFunctions) *Poi
 	return &PointerArray{inner: raw.NSPointerArrayFromID(_id)}
 }
 
+// The number of elements in the receiver.
+//
 // WithCount sets the count property and returns the receiver for chaining.
 func (x *PointerArray) WithCount(count uint) *PointerArray {
 	x.inner.SetCount(count)
@@ -56,31 +64,43 @@ func (x *PointerArray) WithScriptingProperties(scriptingProperties *raw.NSDictio
 	return x
 }
 
+// Returns the pointer at a given index.
+//
 // PointerAtIndex calls the underlying PointerAtIndex.
 func (x *PointerArray) PointerAtIndex(index uint) unsafe.Pointer {
 	return x.inner.PointerAtIndex(index)
 }
 
+// Adds a given pointer to the receiver.
+//
 // AddPointer calls the underlying AddPointer.
 func (x *PointerArray) AddPointer(pointer unsafe.Pointer) {
 	x.inner.AddPointer(pointer)
 }
 
+// Removes the pointer at a given index.
+//
 // RemovePointerAtIndex calls the underlying RemovePointerAtIndex.
 func (x *PointerArray) RemovePointerAtIndex(index uint) {
 	x.inner.RemovePointerAtIndex(index)
 }
 
+// Inserts a pointer at a given index.
+//
 // InsertPointerAtIndex calls the underlying InsertPointerAtIndex.
 func (x *PointerArray) InsertPointerAtIndex(item unsafe.Pointer, index uint) {
 	x.inner.InsertPointerAtIndex(item, index)
 }
 
+// Replaces the pointer at a given index.
+//
 // ReplacePointerAtIndexWithPointer calls the underlying ReplacePointerAtIndexWithPointer.
 func (x *PointerArray) ReplacePointerAtIndexWithPointer(index uint, item unsafe.Pointer) {
 	x.inner.ReplacePointerAtIndexWithPointer(index, item)
 }
 
+// Removes NULL values from the receiver.
+//
 // Compact calls the underlying Compact.
 func (x *PointerArray) Compact() {
 	x.inner.Compact()

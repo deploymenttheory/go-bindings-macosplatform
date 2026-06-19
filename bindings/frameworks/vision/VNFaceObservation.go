@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Face or facial-feature information that an image analysis request detects.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnfaceobservation
 type VNFaceObservation struct {
 	VNDetectedObjectObservation
@@ -37,7 +39,7 @@ func VNFaceObservationFromID(id objc.ID) *VNFaceObservation {
 	return o
 }
 
-// @brief Create a new VNFaceObservation with a normalized bounding box, roll and yaw. @param requestRevision The revision of the VNDetectFaceRectanglesRequest that provided the bounding box.  If this observation is being created with data that did not originate from a Vision request, this parameter should be VNRequestRevisionUnspecified. @param roll The roll angle of the face, reported in radians.  A positive angle corresponds to counterclockwise direction, range [-Pi, Pi). If no roll information is available, this parameter should be nil. @param yaw The yaw angle of the face, reported in radians.  A positive angle corresponds to counterclockwise direction, range [-Pi/2, Pi/2). If no yaw information is available, this parameter should be nil. @param pitch The pitch angle of the face, reported in radians.  A positive angle corresponds to nodding head down direction, range [-Pi/2, Pi/2]. If no pitch information is available, this parameter should be nil.
+// Creates an observation that contains the roll and yaw of the face.
 // Deprecated: since macOS 12.0.
 func VNFaceObservationFaceObservationWithRequestRevisionBoundingBoxRollYaw(requestRevision uint, boundingBox corefoundation.CGRect, roll *foundation.NSNumber, yaw *foundation.NSNumber) *VNFaceObservation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNFaceObservation), _vNFaceObservationSelFaceObservationWithRequestRevisionBoundingBoxRollYaw, requestRevision, boundingBox, roll.Ptr(), yaw.Ptr())
@@ -47,6 +49,7 @@ func VNFaceObservationFaceObservationWithRequestRevisionBoundingBoxRollYaw(reque
 	return VNFaceObservationFromID(_ret)
 }
 
+// Creates an observation that contains the roll, yaw, and pitch of the face.
 func VNFaceObservationFaceObservationWithRequestRevisionBoundingBoxRollYawPitch(requestRevision uint, boundingBox corefoundation.CGRect, roll *foundation.NSNumber, yaw *foundation.NSNumber, pitch *foundation.NSNumber) *VNFaceObservation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNFaceObservation), _vNFaceObservationSelFaceObservationWithRequestRevisionBoundingBoxRollYawPitch, requestRevision, boundingBox, roll.Ptr(), yaw.Ptr(), pitch.Ptr())
 	if _ret != 0 {

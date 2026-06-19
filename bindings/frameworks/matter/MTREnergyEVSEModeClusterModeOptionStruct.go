@@ -60,10 +60,13 @@ func (o *MTREnergyEVSEModeClusterModeOptionStruct) SetMode(mode *foundation.NSNu
 }
 
 func (o *MTREnergyEVSEModeClusterModeOptionStruct) ModeTags() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTREnergyEVSEModeClusterModeOptionStructSelModeTags)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEModeClusterModeOptionStructSelModeTags)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTREnergyEVSEModeClusterModeOptionStruct) SetModeTags(modeTags *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTREnergyEVSEModeClusterModeOptionStructSelSetModeTags, modeTags)
+	o.Ptr().Send(_mTREnergyEVSEModeClusterModeOptionStructSelSetModeTags, modeTags.Ptr())
 }

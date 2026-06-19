@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An array instance that contains rasterization rates.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlrasterizationratesamplearray
 type MTLRasterizationRateSampleArray struct {
 	foundation.NSObject
@@ -31,7 +33,7 @@ func MTLRasterizationRateSampleArrayFromID(id objc.ID) *MTLRasterizationRateSamp
 	return o
 }
 
-// @method objectAtIndexedSubscript: @abstract Retrieves the sample value at the specified index. @return NSNumber instance describing the value of the sample at the specified index, or 0 if the index is out of range.
+// Retrieves the sample value at the specified index.
 func (o *MTLRasterizationRateSampleArray) ObjectAtIndexedSubscript(index uint) *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRasterizationRateSampleArraySelObjectAtIndexedSubscript, index)
 	if _ret != 0 {
@@ -40,7 +42,7 @@ func (o *MTLRasterizationRateSampleArray) ObjectAtIndexedSubscript(index uint) *
 	return foundation.NSNumberFromID(_ret)
 }
 
-// @method setObject:atIndexedSubscript: @abstract Stores a sample value at the specified index. @discussion The value will be converted to a single precision floating point value.
+// Stores a sample value at the specified index.
 func (o *MTLRasterizationRateSampleArray) SetObjectAtIndexedSubscript(value *foundation.NSNumber, index uint) {
 	o.Ptr().Send(_mTLRasterizationRateSampleArraySelSetObjectAtIndexedSubscript, value.Ptr(), index)
 }

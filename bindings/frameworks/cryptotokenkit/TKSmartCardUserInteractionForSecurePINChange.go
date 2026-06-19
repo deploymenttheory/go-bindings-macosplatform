@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of the user interaction for secure PIN change operations on a Smart Card reader.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteractionforsecurepinchange
 type TKSmartCardUserInteractionForSecurePINChange struct {
 	TKSmartCardUserInteractionForPINOperation

@@ -62,12 +62,15 @@ func (o *MTRAccessControlClusterAccessRestrictionEntryStruct) SetCluster(cluster
 }
 
 func (o *MTRAccessControlClusterAccessRestrictionEntryStruct) Restrictions() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRAccessControlClusterAccessRestrictionEntryStructSelRestrictions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessRestrictionEntryStructSelRestrictions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRAccessControlClusterAccessRestrictionEntryStruct) SetRestrictions(restrictions *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRAccessControlClusterAccessRestrictionEntryStructSelSetRestrictions, restrictions)
+	o.Ptr().Send(_mTRAccessControlClusterAccessRestrictionEntryStructSelSetRestrictions, restrictions.Ptr())
 }
 
 func (o *MTRAccessControlClusterAccessRestrictionEntryStruct) FabricIndex() *foundation.NSNumber {

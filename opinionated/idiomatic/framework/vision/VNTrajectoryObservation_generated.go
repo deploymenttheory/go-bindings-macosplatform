@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An observation that describes a detected trajectory.
+//
 // TrajectoryObservation wraps [raw.VNTrajectoryObservation] with a fluent Go API.
 type TrajectoryObservation struct {
 	inner *raw.VNTrajectoryObservation

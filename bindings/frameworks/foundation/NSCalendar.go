@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A definition of the relationships between calendar units and absolute points in time, providing features for calculation and comparison of dates.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nscalendar
 // Deprecated: since macOS 10.10.
 type NSCalendar struct {
@@ -97,6 +99,7 @@ func NSCalendarFromID(id objc.ID) *NSCalendar {
 	return o
 }
 
+// Creates a new calendar specified by a given identifier.
 func NSCalendarCalendarWithIdentifier(calendarIdentifierConstant *NSString) *NSCalendar {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCalendar), _nSCalendarSelCalendarWithIdentifier, calendarIdentifierConstant.Ptr())
 	if _ret != 0 {
@@ -105,36 +108,43 @@ func NSCalendarCalendarWithIdentifier(calendarIdentifierConstant *NSString) *NSC
 	return NSCalendarFromID(_ret)
 }
 
+// Initializes a calendar according to a given identifier.
 func (o *NSCalendar) InitWithCalendarIdentifier(ident *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelInitWithCalendarIdentifier, ident.Ptr())
 	return _ret
 }
 
+// Returns the minimum range limits of the values that a given unit can take on.
 func (o *NSCalendar) MinimumRangeOfUnit(unit NSCalendarUnit) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSCalendarSelMinimumRangeOfUnit, unit)
 	return _ret
 }
 
+// Returns the maximum range limits of the values that a given unit can take on.
 func (o *NSCalendar) MaximumRangeOfUnit(unit NSCalendarUnit) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSCalendarSelMaximumRangeOfUnit, unit)
 	return _ret
 }
 
+// Returns the range of absolute time values that a smaller calendar unit (such as a day) can take on in a larger calendar unit (such as a month) that includes a specified absolute time.
 func (o *NSCalendar) RangeOfUnitInUnitForDate(smaller NSCalendarUnit, larger NSCalendarUnit, date *NSDate) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSCalendarSelRangeOfUnitInUnitForDate, smaller, larger, date.Ptr())
 	return _ret
 }
 
+// Returns, for a given absolute time, the ordinal number of a smaller calendar unit (such as a day) within a specified larger calendar unit (such as a week).
 func (o *NSCalendar) OrdinalityOfUnitInUnitForDate(smaller NSCalendarUnit, larger NSCalendarUnit, date *NSDate) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSCalendarSelOrdinalityOfUnitInUnitForDate, smaller, larger, date.Ptr())
 	return _ret
 }
 
+// Returns by reference the starting time and duration of a given calendar unit that contains a given date.
 func (o *NSCalendar) RangeOfUnitStartDateIntervalForDate(unit NSCalendarUnit, datep *NSDate, tip *float64, date *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCalendarSelRangeOfUnitStartDateIntervalForDate, unit, datep.Ptr(), tip, date.Ptr())
 	return _ret
 }
 
+// Returns a date representing the absolute time calculated from given components.
 func (o *NSCalendar) DateFromComponents(comps *NSDateComponents) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelDateFromComponents, comps.Ptr())
 	if _ret != 0 {
@@ -143,6 +153,7 @@ func (o *NSCalendar) DateFromComponents(comps *NSDateComponents) *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Returns the date components representing a given date.
 func (o *NSCalendar) ComponentsFromDate(unitFlags NSCalendarUnit, date *NSDate) *NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelComponentsFromDate, unitFlags, date.Ptr())
 	if _ret != 0 {
@@ -151,6 +162,7 @@ func (o *NSCalendar) ComponentsFromDate(unitFlags NSCalendarUnit, date *NSDate) 
 	return NSDateComponentsFromID(_ret)
 }
 
+// Returns a date representing the absolute time calculated by adding given components to a given date.
 func (o *NSCalendar) DateByAddingComponentsToDateOptions(comps *NSDateComponents, date *NSDate, opts NSCalendarOptions) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelDateByAddingComponentsToDateOptions, comps.Ptr(), date.Ptr(), opts)
 	if _ret != 0 {
@@ -159,6 +171,7 @@ func (o *NSCalendar) DateByAddingComponentsToDateOptions(comps *NSDateComponents
 	return NSDateFromID(_ret)
 }
 
+// Returns the difference between two supplied dates as date components.
 func (o *NSCalendar) ComponentsFromDateToDateOptions(unitFlags NSCalendarUnit, startingDate *NSDate, resultDate *NSDate, opts NSCalendarOptions) *NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelComponentsFromDateToDateOptions, unitFlags, startingDate.Ptr(), resultDate.Ptr(), opts)
 	if _ret != 0 {
@@ -167,23 +180,28 @@ func (o *NSCalendar) ComponentsFromDateToDateOptions(unitFlags NSCalendarUnit, s
 	return NSDateComponentsFromID(_ret)
 }
 
+// Returns by reference the era, year, week of year, and weekday component values for a given date.
 func (o *NSCalendar) GetEraYearMonthDayFromDate(eraValuePointer *int64, yearValuePointer *int64, monthValuePointer *int64, dayValuePointer *int64, date *NSDate) {
 	o.Ptr().Send(_nSCalendarSelGetEraYearMonthDayFromDate, eraValuePointer, yearValuePointer, monthValuePointer, dayValuePointer, date.Ptr())
 }
 
+// Returns by reference the era, year, week of year, and weekday component values for a given date.
 func (o *NSCalendar) GetEraYearForWeekOfYearWeekOfYearWeekdayFromDate(eraValuePointer *int64, yearValuePointer *int64, weekValuePointer *int64, weekdayValuePointer *int64, date *NSDate) {
 	o.Ptr().Send(_nSCalendarSelGetEraYearForWeekOfYearWeekOfYearWeekdayFromDate, eraValuePointer, yearValuePointer, weekValuePointer, weekdayValuePointer, date.Ptr())
 }
 
+// Returns by reference the hour, minute, second, and nanosecond component values for a given date.
 func (o *NSCalendar) GetHourMinuteSecondNanosecondFromDate(hourValuePointer *int64, minuteValuePointer *int64, secondValuePointer *int64, nanosecondValuePointer *int64, date *NSDate) {
 	o.Ptr().Send(_nSCalendarSelGetHourMinuteSecondNanosecondFromDate, hourValuePointer, minuteValuePointer, secondValuePointer, nanosecondValuePointer, date.Ptr())
 }
 
+// Returns the specified date component from a given date.
 func (o *NSCalendar) ComponentFromDate(unit NSCalendarUnit, date *NSDate) int {
 	_ret := objc.Send[int](o.Ptr(), _nSCalendarSelComponentFromDate, unit, date.Ptr())
 	return _ret
 }
 
+// Returns a date created with the given components.
 func (o *NSCalendar) DateWithEraYearMonthDayHourMinuteSecondNanosecond(eraValue int, yearValue int, monthValue int, dayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelDateWithEraYearMonthDayHourMinuteSecondNanosecond, eraValue, yearValue, monthValue, dayValue, hourValue, minuteValue, secondValue, nanosecondValue)
 	if _ret != 0 {
@@ -192,6 +210,7 @@ func (o *NSCalendar) DateWithEraYearMonthDayHourMinuteSecondNanosecond(eraValue 
 	return NSDateFromID(_ret)
 }
 
+// Returns a new date created with the given components base on a week-of-year value.
 func (o *NSCalendar) DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond(eraValue int, yearValue int, weekValue int, weekdayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelDateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond, eraValue, yearValue, weekValue, weekdayValue, hourValue, minuteValue, secondValue, nanosecondValue)
 	if _ret != 0 {
@@ -200,6 +219,7 @@ func (o *NSCalendar) DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSeco
 	return NSDateFromID(_ret)
 }
 
+// Returns the first moment of a given date as a date instance.
 func (o *NSCalendar) StartOfDayForDate(date *NSDate) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelStartOfDayForDate, date.Ptr())
 	if _ret != 0 {
@@ -208,6 +228,7 @@ func (o *NSCalendar) StartOfDayForDate(date *NSDate) *NSDate {
 	return NSDateFromID(_ret)
 }
 
+// Returns all the date components of a date, as if in a given time zone (instead of the receiving calendar’s time zone).
 func (o *NSCalendar) ComponentsInTimeZoneFromDate(timezone *NSTimeZone, date *NSDate) *NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelComponentsInTimeZoneFromDate, timezone.Ptr(), date.Ptr())
 	if _ret != 0 {
@@ -216,51 +237,61 @@ func (o *NSCalendar) ComponentsInTimeZoneFromDate(timezone *NSTimeZone, date *NS
 	return NSDateComponentsFromID(_ret)
 }
 
+// Indicates the ordering of two given dates based on their components down to a given unit granularity.
 func (o *NSCalendar) CompareDateToDateToUnitGranularity(date1 *NSDate, date2 *NSDate, unit NSCalendarUnit) NSComparisonResult {
 	_ret := objc.Send[NSComparisonResult](o.Ptr(), _nSCalendarSelCompareDateToDateToUnitGranularity, date1.Ptr(), date2.Ptr(), unit)
 	return _ret
 }
 
+// Indicates whether two dates are equal to a given unit of granularity.
 func (o *NSCalendar) IsDateEqualToDateToUnitGranularity(date1 *NSDate, date2 *NSDate, unit NSCalendarUnit) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCalendarSelIsDateEqualToDateToUnitGranularity, date1.Ptr(), date2.Ptr(), unit)
 	return _ret
 }
 
+// Indicates whether two dates are in the same day.
 func (o *NSCalendar) IsDateInSameDayAsDate(date1 *NSDate, date2 *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCalendarSelIsDateInSameDayAsDate, date1.Ptr(), date2.Ptr())
 	return _ret
 }
 
+// Indicates whether the given date is in “today.”
 func (o *NSCalendar) IsDateInToday(date *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCalendarSelIsDateInToday, date.Ptr())
 	return _ret
 }
 
+// Indicates whether the given date is in “yesterday.”
 func (o *NSCalendar) IsDateInYesterday(date *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCalendarSelIsDateInYesterday, date.Ptr())
 	return _ret
 }
 
+// Indicates whether the given date is in “tomorrow.”
 func (o *NSCalendar) IsDateInTomorrow(date *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCalendarSelIsDateInTomorrow, date.Ptr())
 	return _ret
 }
 
+// Indicates whether a given date falls within a weekend period, as defined by the calendar and the calendar’s locale.
 func (o *NSCalendar) IsDateInWeekend(date *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCalendarSelIsDateInWeekend, date.Ptr())
 	return _ret
 }
 
+// Returns whether a given date falls within a weekend period, and if so, returns by reference the start date and time interval of the weekend range.
 func (o *NSCalendar) RangeOfWeekendStartDateIntervalContainingDate(datep *NSDate, tip *float64, date *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCalendarSelRangeOfWeekendStartDateIntervalContainingDate, datep.Ptr(), tip, date.Ptr())
 	return _ret
 }
 
+// Returns by reference the starting date and time interval range of the next weekend period after a given date.
 func (o *NSCalendar) NextWeekendStartDateIntervalOptionsAfterDate(datep *NSDate, tip *float64, options NSCalendarOptions, date *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCalendarSelNextWeekendStartDateIntervalOptionsAfterDate, datep.Ptr(), tip, options, date.Ptr())
 	return _ret
 }
 
+// Returns the difference between start and end dates given as date components.
 func (o *NSCalendar) ComponentsFromDateComponentsToDateComponentsOptions(unitFlags NSCalendarUnit, startingDateComp *NSDateComponents, resultDateComp *NSDateComponents, options NSCalendarOptions) *NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelComponentsFromDateComponentsToDateComponentsOptions, unitFlags, startingDateComp.Ptr(), resultDateComp.Ptr(), options)
 	if _ret != 0 {
@@ -269,6 +300,7 @@ func (o *NSCalendar) ComponentsFromDateComponentsToDateComponentsOptions(unitFla
 	return NSDateComponentsFromID(_ret)
 }
 
+// Returns a date representing the absolute time calculated by adding the value of a given component to a given date.
 func (o *NSCalendar) DateByAddingUnitValueToDateOptions(unit NSCalendarUnit, value int, date *NSDate, options NSCalendarOptions) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelDateByAddingUnitValueToDateOptions, unit, value, date.Ptr(), options)
 	if _ret != 0 {
@@ -277,6 +309,7 @@ func (o *NSCalendar) DateByAddingUnitValueToDateOptions(unit NSCalendarUnit, val
 	return NSDateFromID(_ret)
 }
 
+// Computes the dates that match (or most closely match) a given set of components, and calls the block once for each of them, until the enumeration is stopped.
 func (o *NSCalendar) EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing(start *NSDate, comps *NSDateComponents, opts NSCalendarOptions, block func(*NSDate, bool, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -291,6 +324,7 @@ func (o *NSCalendar) EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsi
 	o.Ptr().Send(_nSCalendarSelEnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing, start.Ptr(), comps.Ptr(), opts, __block_block)
 }
 
+// Returns the next date after a given date matching the given components.
 func (o *NSCalendar) NextDateAfterDateMatchingComponentsOptions(date *NSDate, comps *NSDateComponents, options NSCalendarOptions) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelNextDateAfterDateMatchingComponentsOptions, date.Ptr(), comps.Ptr(), options)
 	if _ret != 0 {
@@ -299,6 +333,7 @@ func (o *NSCalendar) NextDateAfterDateMatchingComponentsOptions(date *NSDate, co
 	return NSDateFromID(_ret)
 }
 
+// Returns the next date after a given date matching the given calendar unit value.
 func (o *NSCalendar) NextDateAfterDateMatchingUnitValueOptions(date *NSDate, unit NSCalendarUnit, value int, options NSCalendarOptions) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelNextDateAfterDateMatchingUnitValueOptions, date.Ptr(), unit, value, options)
 	if _ret != 0 {
@@ -307,6 +342,7 @@ func (o *NSCalendar) NextDateAfterDateMatchingUnitValueOptions(date *NSDate, uni
 	return NSDateFromID(_ret)
 }
 
+// Returns the next date after a given date that matches the given hour, minute, and second, component values.
 func (o *NSCalendar) NextDateAfterDateMatchingHourMinuteSecondOptions(date *NSDate, hourValue int, minuteValue int, secondValue int, options NSCalendarOptions) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelNextDateAfterDateMatchingHourMinuteSecondOptions, date.Ptr(), hourValue, minuteValue, secondValue, options)
 	if _ret != 0 {
@@ -315,6 +351,7 @@ func (o *NSCalendar) NextDateAfterDateMatchingHourMinuteSecondOptions(date *NSDa
 	return NSDateFromID(_ret)
 }
 
+// Returns a new date representing the date calculated by setting a specific component of a given date to a given value, while trying to keep lower components the same.
 func (o *NSCalendar) DateBySettingUnitValueOfDateOptions(unit NSCalendarUnit, v int, date *NSDate, opts NSCalendarOptions) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelDateBySettingUnitValueOfDateOptions, unit, v, date.Ptr(), opts)
 	if _ret != 0 {
@@ -323,6 +360,7 @@ func (o *NSCalendar) DateBySettingUnitValueOfDateOptions(unit NSCalendarUnit, v 
 	return NSDateFromID(_ret)
 }
 
+// Creates a new date calculated with the given time.
 func (o *NSCalendar) DateBySettingHourMinuteSecondOfDateOptions(h int, m int, s int, date *NSDate, opts NSCalendarOptions) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelDateBySettingHourMinuteSecondOfDateOptions, h, m, s, date.Ptr(), opts)
 	if _ret != 0 {
@@ -331,6 +369,7 @@ func (o *NSCalendar) DateBySettingHourMinuteSecondOfDateOptions(h int, m int, s 
 	return NSDateFromID(_ret)
 }
 
+// Returns whether a given date matches all of the given date components.
 func (o *NSCalendar) DateMatchesComponents(date *NSDate, components *NSDateComponents) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCalendarSelDateMatchesComponents, date.Ptr(), components.Ptr())
 	return _ret

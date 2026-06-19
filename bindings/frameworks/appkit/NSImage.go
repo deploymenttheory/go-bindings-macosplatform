@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A high-level interface for manipulating image data.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsimage
 type NSImage struct {
 	foundation.NSObject
@@ -128,6 +130,7 @@ func NSImageFromID(id objc.ID) *NSImage {
 	return o
 }
 
+// Returns the image object associated with the specified name.
 func NSImageImageNamed(name *foundation.NSString) *NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageNamed, name.Ptr())
 	if _ret != 0 {
@@ -136,7 +139,7 @@ func NSImageImageNamed(name *foundation.NSString) *NSImage {
 	return NSImageFromID(_ret)
 }
 
-// Creates a system symbol image with the specified name and value @param name A name from the system’s SF Symbols catalog @param description The image’s accessibility description. This description is used automatically by interface elements that display images. Like all accessibility descriptions, use a short localized string that does not include the name of the interface element. For instance, “delete” rather than “delete button”.
+// Creates a symbol image with the system symbol name and accessibility description you specify.
 func NSImageImageWithSystemSymbolNameAccessibilityDescription(name *foundation.NSString, description *foundation.NSString) *NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageWithSystemSymbolNameAccessibilityDescription, name.Ptr(), description.Ptr())
 	if _ret != 0 {
@@ -145,7 +148,7 @@ func NSImageImageWithSystemSymbolNameAccessibilityDescription(name *foundation.N
 	return NSImageFromID(_ret)
 }
 
-// Creates a system symbol image with the specified name and value. The `value` argument is only accommodated if the symbol supports variable rendering. @param name A name from the system’s SF Symbols catalog @param value The value represented by the symbol. The value should be between 0 and 1 inclusive ([0,1]). @param description The image’s accessibility description. This description is used automatically by interface elements that display images. Like all accessibility descriptions, use a short localized string that does not include the name of the interface element. For instance, “delete” rather than “delete button”. @note Values less than 0 or greater than 1 will be clamped to 0 and 1, respectively.
+// Creates a symbol image with the system symbol name and variable value you specify.
 func NSImageImageWithSystemSymbolNameVariableValueAccessibilityDescription(name *foundation.NSString, value float64, description *foundation.NSString) *NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageWithSystemSymbolNameVariableValueAccessibilityDescription, name.Ptr(), value, description.Ptr())
 	if _ret != 0 {
@@ -154,7 +157,7 @@ func NSImageImageWithSystemSymbolNameVariableValueAccessibilityDescription(name 
 	return NSImageFromID(_ret)
 }
 
-// Creates a symbol image with the specified name and value. The `value` argument is only accommodated if the symbol supports variable rendering. @param name A name of a symbol image file in the main bundle’s catalog @param value The value represented by the symbol. The value should be between 0 and 1 inclusive ([0,1]). @note Values less than 0 or greater than 1 will be clamped to 0 and 1, respectively.
+// Creates a symbol image with the symbol name and variable value you specify.
 func NSImageImageWithSymbolNameVariableValue(name *foundation.NSString, value float64) *NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageWithSymbolNameVariableValue, name.Ptr(), value)
 	if _ret != 0 {
@@ -163,7 +166,7 @@ func NSImageImageWithSymbolNameVariableValue(name *foundation.NSString, value fl
 	return NSImageFromID(_ret)
 }
 
-// Creates a symbol image with the specified name and value. The `value` argument is only accommodated if the symbol supports variable rendering. @param name A name of a symbol image file in the main bundle’s catalog @param bundle The bundle containing the image file or asset catalog. Specify `nil` to search the app’s main bundle. @param value The value represented by the symbol. The value should be between 0 and 1 inclusive ([0,1]). @note Values less than 0 or greater than 1 will be clamped to 0 and 1, respectively.
+// Creates a symbol image with the specified symbol name and variable value.
 func NSImageImageWithSymbolNameBundleVariableValue(name *foundation.NSString, bundle *foundation.NSBundle, value float64) *NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageWithSymbolNameBundleVariableValue, name.Ptr(), bundle.Ptr(), value)
 	if _ret != 0 {
@@ -172,6 +175,7 @@ func NSImageImageWithSymbolNameBundleVariableValue(name *foundation.NSString, bu
 	return NSImageFromID(_ret)
 }
 
+// Initializes and returns an image object with the specified dimensions.
 func (o *NSImage) InitWithSize(size corefoundation.CGSize) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithSize, size)
 	if _ret != 0 {
@@ -180,6 +184,7 @@ func (o *NSImage) InitWithSize(size corefoundation.CGSize) *NSImage {
 	return NSImageFromID(_ret)
 }
 
+// Initializes and returns an image object from data in an unarchiver.
 func (o *NSImage) InitWithCoder(coder *foundation.NSCoder) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -188,6 +193,7 @@ func (o *NSImage) InitWithCoder(coder *foundation.NSCoder) *NSImage {
 	return NSImageFromID(_ret)
 }
 
+// Initializes and returns an image object using the provided image data.
 func (o *NSImage) InitWithData(data *foundation.NSData) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithData, data.Ptr())
 	if _ret != 0 {
@@ -196,6 +202,7 @@ func (o *NSImage) InitWithData(data *foundation.NSData) *NSImage {
 	return NSImageFromID(_ret)
 }
 
+// Initializes and returns an image object with the contents of the specified file.
 func (o *NSImage) InitWithContentsOfFile(fileName *foundation.NSString) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithContentsOfFile, fileName.Ptr())
 	if _ret != 0 {
@@ -204,6 +211,7 @@ func (o *NSImage) InitWithContentsOfFile(fileName *foundation.NSString) *NSImage
 	return NSImageFromID(_ret)
 }
 
+// Initializes and returns an image object with the contents of the specified URL.
 func (o *NSImage) InitWithContentsOfURL(url *foundation.NSURL) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithContentsOfURL, url.Ptr())
 	if _ret != 0 {
@@ -212,6 +220,7 @@ func (o *NSImage) InitWithContentsOfURL(url *foundation.NSURL) *NSImage {
 	return NSImageFromID(_ret)
 }
 
+// Initializes and returns an image object using the specified file.
 func (o *NSImage) InitByReferencingFile(fileName *foundation.NSString) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitByReferencingFile, fileName.Ptr())
 	if _ret != 0 {
@@ -220,6 +229,7 @@ func (o *NSImage) InitByReferencingFile(fileName *foundation.NSString) *NSImage 
 	return NSImageFromID(_ret)
 }
 
+// Initializes and returns an image object using the specified URL.
 func (o *NSImage) InitByReferencingURL(url *foundation.NSURL) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitByReferencingURL, url.Ptr())
 	if _ret != 0 {
@@ -228,6 +238,7 @@ func (o *NSImage) InitByReferencingURL(url *foundation.NSURL) *NSImage {
 	return NSImageFromID(_ret)
 }
 
+// Initializes and returns an image object with data from the specified pasteboard.
 func (o *NSImage) InitWithPasteboard(pasteboard *NSPasteboard) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithPasteboard, pasteboard.Ptr())
 	if _ret != 0 {
@@ -236,6 +247,7 @@ func (o *NSImage) InitWithPasteboard(pasteboard *NSPasteboard) *NSImage {
 	return NSImageFromID(_ret)
 }
 
+// Initializes and returns an image object using the provided image data and ignoring the EXIF orientation tags.
 func (o *NSImage) InitWithDataIgnoringOrientation(data *foundation.NSData) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithDataIgnoringOrientation, data.Ptr())
 	if _ret != 0 {
@@ -244,6 +256,7 @@ func (o *NSImage) InitWithDataIgnoringOrientation(data *foundation.NSData) *NSIm
 	return NSImageFromID(_ret)
 }
 
+// Creates and returns an image object whose contents are drawn using the specified block.
 func NSImageImageWithSizeFlippedDrawingHandler(size corefoundation.CGSize, drawingHandlerShouldBeCalledWithFlippedContext bool, drawingHandler objc.Block) *NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageWithSizeFlippedDrawingHandler, size, drawingHandlerShouldBeCalledWithFlippedContext, drawingHandler)
 	if _ret != 0 {
@@ -252,11 +265,13 @@ func NSImageImageWithSizeFlippedDrawingHandler(size corefoundation.CGSize, drawi
 	return NSImageFromID(_ret)
 }
 
+// Registers the image object under the specified name.
 func (o *NSImage) SetName(string_ *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSImageSelSetName, string_.Ptr())
 	return _ret
 }
 
+// Returns the name associated with the image, if any.
 func (o *NSImage) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelName)
 	if _ret != 0 {
@@ -265,31 +280,38 @@ func (o *NSImage) Name() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Draws all or part of the image at the specified point in the current coordinate system.
 func (o *NSImage) DrawAtPointFromRectOperationFraction(point corefoundation.CGPoint, fromRect corefoundation.CGRect, op NSCompositingOperation, delta float64) {
 	o.Ptr().Send(_nSImageSelDrawAtPointFromRectOperationFraction, point, fromRect, op, delta)
 }
 
+// Draws all or part of the image in the specified rectangle in the current coordinate system.
 func (o *NSImage) DrawInRectFromRectOperationFraction(rect corefoundation.CGRect, fromRect corefoundation.CGRect, op NSCompositingOperation, delta float64) {
 	o.Ptr().Send(_nSImageSelDrawInRectFromRectOperationFraction, rect, fromRect, op, delta)
 }
 
+// Draws all or part of the image in the specified rectangle respecting the hints and the orientation of the current coordinate system.
 func (o *NSImage) DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op NSCompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSImageSelDrawInRectFromRectOperationFractionRespectFlippedHints, dstSpacePortionRect, srcSpacePortionRect, op, requestedAlpha, respectContextIsFlipped, hints)
+	o.Ptr().Send(_nSImageSelDrawInRectFromRectOperationFractionRespectFlippedHints, dstSpacePortionRect, srcSpacePortionRect, op, requestedAlpha, respectContextIsFlipped, hints.Ptr())
 }
 
+// Draws the image using the specified image representation object.
 func (o *NSImage) DrawRepresentationInRect(imageRep *NSImageRep, rect corefoundation.CGRect) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSImageSelDrawRepresentationInRect, imageRep.Ptr(), rect)
 	return _ret
 }
 
+// Draws the image in the specified rectangle.
 func (o *NSImage) DrawInRect(rect corefoundation.CGRect) {
 	o.Ptr().Send(_nSImageSelDrawInRect, rect)
 }
 
+// Invalidates and frees offscreen caches of all image representations.
 func (o *NSImage) Recache() {
 	o.Ptr().Send(_nSImageSelRecache)
 }
 
+// Returns a data object that contains TIFF data with the specified compression settings for all of the image representations in the image.
 func (o *NSImage) TIFFRepresentationUsingCompressionFactor(comp NSTIFFCompression, factor float32) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelTIFFRepresentationUsingCompressionFactor, comp, factor)
 	if _ret != 0 {
@@ -298,23 +320,28 @@ func (o *NSImage) TIFFRepresentationUsingCompressionFactor(comp NSTIFFCompressio
 	return foundation.NSDataFromID(_ret)
 }
 
+// Adds an array of image representation objects to the image.
 func (o *NSImage) AddRepresentations(imageReps *foundation.NSArray[*NSImageRep]) {
 	o.Ptr().Send(_nSImageSelAddRepresentations, imageReps.Ptr())
 }
 
+// Adds the specified image representation object to the image.
 func (o *NSImage) AddRepresentation(imageRep *NSImageRep) {
 	o.Ptr().Send(_nSImageSelAddRepresentation, imageRep.Ptr())
 }
 
+// Removes and releases the specified image representation.
 func (o *NSImage) RemoveRepresentation(imageRep *NSImageRep) {
 	o.Ptr().Send(_nSImageSelRemoveRepresentation, imageRep.Ptr())
 }
 
+// Tests whether the image can create an instance of itself using pasteboard data.
 func NSImageCanInitWithPasteboard(pasteboard *NSPasteboard) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSImage), _nSImageSelCanInitWithPasteboard, pasteboard.Ptr())
 	return _ret
 }
 
+// Creates a new image using the contents of the provided image.
 func (o *NSImage) InitWithCGImageSize(cgImage unsafe.Pointer, size corefoundation.CGSize) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithCGImageSize, cgImage, size)
 	if _ret != 0 {
@@ -323,34 +350,40 @@ func (o *NSImage) InitWithCGImageSize(cgImage unsafe.Pointer, size corefoundatio
 	return NSImageFromID(_ret)
 }
 
+// Returns a Core Graphics image based on the contents of the current image object.
 func (o *NSImage) CGImageForProposedRectContextHints(proposedDestRect *corefoundation.CGRect, referenceContext *NSGraphicsContext, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSImageSelCGImageForProposedRectContextHints, proposedDestRect, referenceContext.Ptr(), hints)
+	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSImageSelCGImageForProposedRectContextHints, proposedDestRect, referenceContext.Ptr(), hints.Ptr())
 	return _ret
 }
 
+// Returns the best representation of the image for the specified rectangle using the provided hints.
 func (o *NSImage) BestRepresentationForRectContextHints(rect corefoundation.CGRect, referenceContext *NSGraphicsContext, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSImageRep {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelBestRepresentationForRectContextHints, rect, referenceContext.Ptr(), hints)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelBestRepresentationForRectContextHints, rect, referenceContext.Ptr(), hints.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSImageRepFromID(_ret)
 }
 
+// Returns whether the destination rectangle would intersect a non-transparent portion of the image.
 func (o *NSImage) HitTestRectWithImageDestinationRectContextHintsFlipped(testRectDestSpace corefoundation.CGRect, imageRectDestSpace corefoundation.CGRect, context_ *NSGraphicsContext, hints *foundation.NSDictionary[*foundation.NSString, objc.ID], flipped bool) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSImageSelHitTestRectWithImageDestinationRectContextHintsFlipped, testRectDestSpace, imageRectDestSpace, context_.Ptr(), hints, flipped)
+	_ret := objc.Send[bool](o.Ptr(), _nSImageSelHitTestRectWithImageDestinationRectContextHintsFlipped, testRectDestSpace, imageRectDestSpace, context_.Ptr(), hints.Ptr(), flipped)
 	return _ret
 }
 
+// Returns the recommended layer contents scale for this image.
 func (o *NSImage) RecommendedLayerContentsScale(preferredContentsScale float64) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSImageSelRecommendedLayerContentsScale, preferredContentsScale)
 	return _ret
 }
 
+// Returns an object that may be used as the contents of a layer.
 func (o *NSImage) LayerContentsForContentsScale(layerContentsScale float64) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelLayerContentsForContentsScale, layerContentsScale)
 	return _ret
 }
 
+// Creates a new symbol image with the specified configuration.
 func (o *NSImage) ImageWithSymbolConfiguration(configuration *NSImageSymbolConfiguration) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelImageWithSymbolConfiguration, configuration.Ptr())
 	if _ret != 0 {
@@ -359,7 +392,7 @@ func (o *NSImage) ImageWithSymbolConfiguration(configuration *NSImageSymbolConfi
 	return NSImageFromID(_ret)
 }
 
-// Creates and returns a new image with the specified locale. If the receiver contains locale-sensitive representations, the returned image will prefer to draw using representations appropriate for the specified locale. If locale is `nil`, the returned image uses the default behavior of choosing representations appropriate for the system’s currently-configured locale.
+// Creates and returns a new image with the specified locale.
 func (o *NSImage) ImageWithLocale(locale *foundation.NSLocale) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelImageWithLocale, locale.Ptr())
 	if _ret != 0 {
@@ -456,13 +489,19 @@ func (o *NSImage) SetDelegate(delegate NSImageDelegate) {
 }
 
 func NSImageImageTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSImage), _nSImageSelImageTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func NSImageImageUnfilteredTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSImage), _nSImageSelImageUnfilteredTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageUnfilteredTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSImage) CacheMode() NSImageCacheMode {
@@ -541,26 +580,38 @@ func (o *NSImage) Locale() *foundation.NSLocale {
 
 // Deprecated: Use +imageUnfilteredTypes instead
 func NSImageImageUnfilteredFileTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSImage), _nSImageSelImageUnfilteredFileTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageUnfilteredFileTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // Deprecated: Use +imageUnfilteredTypes instead
 func NSImageImageUnfilteredPasteboardTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSImage), _nSImageSelImageUnfilteredPasteboardTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageUnfilteredPasteboardTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // Deprecated: Use +imageTypes instead
 func NSImageImageFileTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSImage), _nSImageSelImageFileTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageFileTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // Deprecated: Use +imageTypes instead
 func NSImageImagePasteboardTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSImage), _nSImageSelImagePasteboardTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImagePasteboardTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // Deprecated: Use -[NSWorkspace iconForFile:], -[NSWorkspace iconForFiles:], -[NSWorkspace iconForFileType:], or +[NSImage imageNamed:] instead.
@@ -574,7 +625,7 @@ func (o *NSImage) InitWithIconRef(iconRef unsafe.Pointer) *NSImage {
 
 // Deprecated: Use -[NSImage bestRepresentationForRect:context:hints:] instead.  Any deviceDescription dictionary is also a valid hints dictionary.
 func (o *NSImage) BestRepresentationForDevice(deviceDescription *foundation.NSDictionary[objc.ID, objc.ID]) *NSImageRep {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelBestRepresentationForDevice, deviceDescription)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelBestRepresentationForDevice, deviceDescription.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -686,6 +737,7 @@ func (o *NSImage) LockFocusOnRepresentation(imageRepresentation *NSImageRep) {
 	o.Ptr().Send(_nSImageSelLockFocusOnRepresentation, imageRepresentation.Ptr())
 }
 
+// Cancels the current download operation, if any, for an incrementally loaded image.
 // Deprecated: This method does not perform any operation on 10.4 or later.
 func (o *NSImage) CancelIncrementalLoad() {
 	o.Ptr().Send(_nSImageSelCancelIncrementalLoad)

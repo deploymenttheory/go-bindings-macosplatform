@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of settings for groups.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasegrouppreset
 type PHASEGroupPreset struct {
 	foundation.NSObject
@@ -37,39 +39,42 @@ func PHASEGroupPresetFromID(id objc.ID) *PHASEGroupPreset {
 	return o
 }
 
-// @method initWithEngine @abstract Create a new PHASEGroupPreset object with a given PHASEEngine object. @param engine The PHASEEngine object to register this preset with. @param settings A dictionary containing PHASEGroupPresetSetting objects paired with PHASEGroup objects as keys. @param timeToTarget The time interval that all group settings in this preset will take to gradually fade to the new value @param timeToReset The time interval that all group settings in this preset will take to gradually fade to the unity value @note The timeToTarget and timeToReset are scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
+// Creates a group preset with the designated engine, settings, and fade parameters.
 func (o *PHASEGroupPreset) InitWithEngineSettingsTimeToTargetTimeToReset(engine *PHASEEngine, settings *foundation.NSDictionary[*foundation.NSString, *PHASEGroupPresetSetting], timeToTarget float64, timeToReset float64) *PHASEGroupPreset {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEGroupPresetSelInitWithEngineSettingsTimeToTargetTimeToReset, engine.Ptr(), settings, timeToTarget, timeToReset)
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEGroupPresetSelInitWithEngineSettingsTimeToTargetTimeToReset, engine.Ptr(), settings.Ptr(), timeToTarget, timeToReset)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return PHASEGroupPresetFromID(_ret)
 }
 
-// @method activate @abstract Activate this preset in the PHASEEngine object it was initialized with. The internal timeToTarget value is used. The current preset will be deactivated automatically.
+// Applies settings to the designated groups.
 func (o *PHASEGroupPreset) Activate() {
 	o.Ptr().Send(_pHASEGroupPresetSelActivate)
 }
 
-// @method activateWithTimeToTargetOverride @abstract Activate this preset in the PHASEEngine object it was initialized with. The current preset will be deactivated automatically. @param timeToTargetOverride Override the timeToTarget value in the preset with this value. @note The timeToTargetOverride is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
+// Applies settings with an overriden fade duration.
 func (o *PHASEGroupPreset) ActivateWithTimeToTargetOverride(timeToTargetOverride float64) {
 	o.Ptr().Send(_pHASEGroupPresetSelActivateWithTimeToTargetOverride, timeToTargetOverride)
 }
 
-// @method deactivate @abstract Deactivate this preset and return the system to default unity values. The internal timeToReset value is used.
+// Reverts settings for the preset’s groups.
 func (o *PHASEGroupPreset) Deactivate() {
 	o.Ptr().Send(_pHASEGroupPresetSelDeactivate)
 }
 
-// @method deactivateWithTimeToResetOverride @abstract Deactivate this preset and return the system to default unity values. @param timeToResetOverride Override the timeToReset value in the preset with this value. @note The timeToResetOverride is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
+// Reverts settings for the preset’s groups using a timed adjustment.
 func (o *PHASEGroupPreset) DeactivateWithTimeToResetOverride(timeToResetOverride float64) {
 	o.Ptr().Send(_pHASEGroupPresetSelDeactivateWithTimeToResetOverride, timeToResetOverride)
 }
 
 // @property settings @abstract The collection of PHASEGroupPresetSetting objects to apply when this preset is activated.
 func (o *PHASEGroupPreset) Settings() *foundation.NSDictionary[*foundation.NSString, *PHASEGroupPresetSetting] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *PHASEGroupPresetSetting]](o.Ptr(), _pHASEGroupPresetSelSettings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEGroupPresetSelSettings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *PHASEGroupPresetSetting](_ret)
 }
 
 // @property timeToTarget @abstract The time interval that all group settings in this preset will take to gradually fade to the new value @note The timeToTarget is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.

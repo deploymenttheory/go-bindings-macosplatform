@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of how to dispatch execution of pass commands and GPU performance sampling.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlcomputepassdescriptor
 type MTLComputePassDescriptor struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func MTLComputePassDescriptorFromID(id objc.ID) *MTLComputePassDescriptor {
 	return o
 }
 
-// @method computePassDescriptor @abstract Create an autoreleased default frame buffer descriptor
+// Creates a default compute pass descriptor.
 func MTLComputePassDescriptorComputePassDescriptor() *MTLComputePassDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLComputePassDescriptor), _mTLComputePassDescriptorSelComputePassDescriptor)
 	if _ret != 0 {

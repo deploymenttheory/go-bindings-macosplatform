@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that updates the payment request after the payment method changes.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentrequestpaymentmethodupdate
 type PKPaymentRequestPaymentMethodUpdate struct {
 	PKPaymentRequestUpdate
@@ -34,8 +36,9 @@ func PKPaymentRequestPaymentMethodUpdateFromID(id objc.ID) *PKPaymentRequestPaym
 	return o
 }
 
+// Creates a payment-method update with your specified payment summary items.
 func (o *PKPaymentRequestPaymentMethodUpdate) InitWithErrorsPaymentSummaryItems(errors_ *foundation.NSArray[objc.ID], paymentSummaryItems *foundation.NSArray[*PKPaymentSummaryItem]) *PKPaymentRequestPaymentMethodUpdate {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestPaymentMethodUpdateSelInitWithErrorsPaymentSummaryItems, errors_, paymentSummaryItems.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestPaymentMethodUpdateSelInitWithErrorsPaymentSummaryItems, errors_.Ptr(), paymentSummaryItems.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -43,8 +46,11 @@ func (o *PKPaymentRequestPaymentMethodUpdate) InitWithErrorsPaymentSummaryItems(
 }
 
 func (o *PKPaymentRequestPaymentMethodUpdate) Errors() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _pKPaymentRequestPaymentMethodUpdateSelErrors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestPaymentMethodUpdateSelErrors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *PKPaymentRequestPaymentMethodUpdate) SetErrors() error {

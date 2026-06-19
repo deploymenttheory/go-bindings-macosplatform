@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A MDLVertexBufferLayout object describes layout information for a vertex buffer in a MDLMesh object. A collection of vertex layer objects, vertex attribute objects, and additional information forms a MDLVertexDescriptor object, which completely describes the layout of vertex buffers for a mesh.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlvertexbufferlayout
 type MDLVertexBufferLayout struct {
 	foundation.NSObject

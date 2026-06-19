@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides information about sample data in a track.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetsegmentreportsampleinformation
 type AVAssetSegmentReportSampleInformation struct {
 	foundation.NSObject

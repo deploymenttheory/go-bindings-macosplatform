@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that outputs a probability distribution as attention weights.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcsoftmaxlayer
 type MLCSoftmaxLayer struct {
 	MLCLayer
@@ -32,7 +34,7 @@ func MLCSoftmaxLayerFromID(id objc.ID) *MLCSoftmaxLayer {
 	return o
 }
 
-// @abstract   Create a softmax layer @param      operation  The softmax operation @return     A new softmax layer
+// Creates a softmax layer with the operation you specify.
 func MLCSoftmaxLayerLayerWithOperation(operation MLCSoftmaxOperation) *MLCSoftmaxLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSoftmaxLayer), _mLCSoftmaxLayerSelLayerWithOperation, operation)
 	if _ret != 0 {
@@ -41,7 +43,7 @@ func MLCSoftmaxLayerLayerWithOperation(operation MLCSoftmaxOperation) *MLCSoftma
 	return MLCSoftmaxLayerFromID(_ret)
 }
 
-// @abstract   Create a softmax layer @param      operation  The softmax operation @param      dimension  The  dimension over which softmax operation should be performed @return     A new softmax layer
+// Creates a softmax layer with the operation and dimension you specify.
 func MLCSoftmaxLayerLayerWithOperationDimension(operation MLCSoftmaxOperation, dimension uint) *MLCSoftmaxLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSoftmaxLayer), _mLCSoftmaxLayerSelLayerWithOperationDimension, operation, dimension)
 	if _ret != 0 {

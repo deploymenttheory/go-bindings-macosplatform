@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that displays localized text in search results related to your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/corespotlight/cslocalizedstring
 type CSLocalizedString struct {
 	foundation.NSString
@@ -31,14 +33,16 @@ func CSLocalizedStringFromID(id objc.ID) *CSLocalizedString {
 	return o
 }
 
+// Initializes a CSLocalizedString object with the specified dictionary of localized strings.
 func (o *CSLocalizedString) InitWithLocalizedStrings(localizedStrings *foundation.NSDictionary[objc.ID, objc.ID]) *CSLocalizedString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cSLocalizedStringSelInitWithLocalizedStrings, localizedStrings)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cSLocalizedStringSelInitWithLocalizedStrings, localizedStrings.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return CSLocalizedStringFromID(_ret)
 }
 
+// Returns the localized string for the current language.
 func (o *CSLocalizedString) LocalizedString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSLocalizedStringSelLocalizedString)
 	if _ret != 0 {

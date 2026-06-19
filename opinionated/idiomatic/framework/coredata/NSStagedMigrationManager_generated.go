@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that handles the migration event loop and provides access to the migrating persistent store.
+//
 // StagedMigrationManager wraps [raw.NSStagedMigrationManager] with a fluent Go API.
 type StagedMigrationManager struct {
 	inner *raw.NSStagedMigrationManager
@@ -32,6 +34,8 @@ func StagedMigrationManagerFromID(id objc.ID) *StagedMigrationManager {
 	return &StagedMigrationManager{inner: raw.NSStagedMigrationManagerFromID(id)}
 }
 
+// Creates a migration manager with the specified stages.
+//
 // NewStagedMigrationManagerWithMigrationStages creates a new [StagedMigrationManager].
 func NewStagedMigrationManagerWithMigrationStages(stages ...MigrationStageProvider) *StagedMigrationManager {
 	_ptrs := make([]objc.ID, len(stages))

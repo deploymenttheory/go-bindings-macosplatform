@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for Photos asset collections and collection lists.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phcollection
 type PHCollection struct {
 	PHObject
@@ -35,11 +37,13 @@ func PHCollectionFromID(id objc.ID) *PHCollection {
 	return o
 }
 
+// Returns whether the collection supports the specified editing operation.
 func (o *PHCollection) CanPerformEditOperation(anOperation PHCollectionEditOperation) bool {
 	_ret := objc.Send[bool](o.Ptr(), _pHCollectionSelCanPerformEditOperation, anOperation)
 	return _ret
 }
 
+// Retrieves collections from the specified collection list.
 func PHCollectionFetchCollectionsInCollectionListOptions(collectionList *PHCollectionList, options *PHFetchOptions) *PHFetchResult[*PHCollection] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollection), _pHCollectionSelFetchCollectionsInCollectionListOptions, collectionList.Ptr(), options.Ptr())
 	if _ret != 0 {
@@ -48,6 +52,7 @@ func PHCollectionFetchCollectionsInCollectionListOptions(collectionList *PHColle
 	return PHFetchResultFromID[*PHCollection](_ret)
 }
 
+// Retrieves collections from the root of the photo library’s hierarchy of user-created albums and folders.
 func PHCollectionFetchTopLevelUserCollectionsWithOptions(options *PHFetchOptions) *PHFetchResult[*PHCollection] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollection), _pHCollectionSelFetchTopLevelUserCollectionsWithOptions, options.Ptr())
 	if _ret != 0 {

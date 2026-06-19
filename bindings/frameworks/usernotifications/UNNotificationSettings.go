@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object for managing notification-related settings and the authorization status of your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/unnotificationsettings
 type UNNotificationSettings struct {
 	foundation.NSObject

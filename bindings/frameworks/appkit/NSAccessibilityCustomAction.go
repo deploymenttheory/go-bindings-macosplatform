@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A custom action to perform on an accessible object.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsaccessibilitycustomaction
 type NSAccessibilityCustomAction struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func NSAccessibilityCustomActionFromID(id objc.ID) *NSAccessibilityCustomAction 
 	return o
 }
 
+// Creates a custom action object with the specified name and handler.
 func (o *NSAccessibilityCustomAction) InitWithNameHandler(name *foundation.NSString, handler func() bool) *NSAccessibilityCustomAction {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -54,6 +57,7 @@ func (o *NSAccessibilityCustomAction) InitWithNameHandler(name *foundation.NSStr
 	return NSAccessibilityCustomActionFromID(_ret)
 }
 
+// Creates a custom action object with the specified name, target, and selector.
 func (o *NSAccessibilityCustomAction) InitWithNameTargetSelector(name *foundation.NSString, target foundation.NSObjectProtocol, selector objc.SEL) *NSAccessibilityCustomAction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAccessibilityCustomActionSelInitWithNameTargetSelector, name.Ptr(), target, selector)
 	if _ret != 0 {

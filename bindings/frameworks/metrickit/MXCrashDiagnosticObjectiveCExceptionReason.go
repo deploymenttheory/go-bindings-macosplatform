@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the exception reason for an uncaught ObjC exception.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxcrashdiagnosticobjectivecexceptionreason
 type MXCrashDiagnosticObjectiveCExceptionReason struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func MXCrashDiagnosticObjectiveCExceptionReasonFromID(id objc.ID) *MXCrashDiagno
 	return o
 }
 
-// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this MXCrashDiagnosticObjectiveCExceptionReason object. @result        An NSData object containing the JSON representation
+// Returns the contents of the exception reason in JSON format.
 func (o *MXCrashDiagnosticObjectiveCExceptionReason) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXCrashDiagnosticObjectiveCExceptionReasonSelJSONRepresentation)
 	if _ret != 0 {
@@ -47,8 +49,11 @@ func (o *MXCrashDiagnosticObjectiveCExceptionReason) JSONRepresentation() *found
 
 // @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this MXCrashDiagnosticObjectiveCExceptionReason object. @result        An NSDictionary object containing the dictionary representation
 func (o *MXCrashDiagnosticObjectiveCExceptionReason) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _mXCrashDiagnosticObjectiveCExceptionReasonSelDictionaryRepresentation)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXCrashDiagnosticObjectiveCExceptionReasonSelDictionaryRepresentation)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @property      composedMessage @abstract      A human-readable message string summarizing the reason for the exception.
@@ -71,8 +76,11 @@ func (o *MXCrashDiagnosticObjectiveCExceptionReason) FormatString() *foundation.
 
 // @property      arguments @abstract      An NSArray of strings representing arguments passed to the formatString.
 func (o *MXCrashDiagnosticObjectiveCExceptionReason) Arguments() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mXCrashDiagnosticObjectiveCExceptionReasonSelArguments)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXCrashDiagnosticObjectiveCExceptionReasonSelArguments)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property      exceptionType @abstract      A human-readable string denoting type of the exception

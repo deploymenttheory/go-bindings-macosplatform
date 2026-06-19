@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A progress reporting capability supported by a context.
+//
 // ProgressReportingCapability wraps [raw.CLSProgressReportingCapability] with a fluent Go API.
 type ProgressReportingCapability struct {
 	inner *raw.CLSProgressReportingCapability
@@ -31,7 +33,7 @@ func ProgressReportingCapabilityFromID(id objc.ID) *ProgressReportingCapability 
 	return &ProgressReportingCapability{inner: raw.CLSProgressReportingCapabilityFromID(id)}
 }
 
-// @abstract       Initialize and configure the type of progress reporting capability @param         kind        The kind of progress reporting capability @param         details     An optional localized string describing the capability. For example: "Reports percentage of progress", "Reports overall score". Schoolwork will use an appropriate default string if one is not provided.
+// Creates a new progress reporting capability of the given type with a descriptive string.
 //
 // NewProgressReportingCapabilityWithKindDetails creates a new [ProgressReportingCapability].
 func NewProgressReportingCapabilityWithKindDetails(kind CLSProgressReportingCapabilityKind, details string) *ProgressReportingCapability {

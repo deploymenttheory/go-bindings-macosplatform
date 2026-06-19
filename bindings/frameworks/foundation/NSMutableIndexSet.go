@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable collection of unique integer values that represent indexes in another collection.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmutableindexset
 type NSMutableIndexSet struct {
 	NSIndexSet
@@ -36,34 +38,42 @@ func NSMutableIndexSetFromID(id objc.ID) *NSMutableIndexSet {
 	return o
 }
 
+// Adds the indexes in an index set to the receiver.
 func (o *NSMutableIndexSet) AddIndexes(indexSet *NSIndexSet) {
 	o.Ptr().Send(_nSMutableIndexSetSelAddIndexes, indexSet.Ptr())
 }
 
+// Removes the indexes in an index set from the receiver.
 func (o *NSMutableIndexSet) RemoveIndexes(indexSet *NSIndexSet) {
 	o.Ptr().Send(_nSMutableIndexSetSelRemoveIndexes, indexSet.Ptr())
 }
 
+// Removes the receiver’s indexes.
 func (o *NSMutableIndexSet) RemoveAllIndexes() {
 	o.Ptr().Send(_nSMutableIndexSetSelRemoveAllIndexes)
 }
 
+// Adds an index to the receiver.
 func (o *NSMutableIndexSet) AddIndex(value uint) {
 	o.Ptr().Send(_nSMutableIndexSetSelAddIndex, value)
 }
 
+// Removes an index from the receiver.
 func (o *NSMutableIndexSet) RemoveIndex(value uint) {
 	o.Ptr().Send(_nSMutableIndexSetSelRemoveIndex, value)
 }
 
+// Adds the indexes in an index range to the receiver.
 func (o *NSMutableIndexSet) AddIndexesInRange(range_ NSRange) {
 	o.Ptr().Send(_nSMutableIndexSetSelAddIndexesInRange, range_)
 }
 
+// Removes the indexes in an index range from the receiver.
 func (o *NSMutableIndexSet) RemoveIndexesInRange(range_ NSRange) {
 	o.Ptr().Send(_nSMutableIndexSetSelRemoveIndexesInRange, range_)
 }
 
+// Shifts a group of indexes to the left or the right within the receiver.
 func (o *NSMutableIndexSet) ShiftIndexesStartingAtIndexBy(index uint, delta int) {
 	o.Ptr().Send(_nSMutableIndexSetSelShiftIndexesStartingAtIndexBy, index, delta)
 }

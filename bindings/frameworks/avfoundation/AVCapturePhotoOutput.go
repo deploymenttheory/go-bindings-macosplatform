@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A capture output for still image, Live Photos, and other photography workflows.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturephotooutput
 type AVCapturePhotoOutput struct {
 	AVCaptureOutput
@@ -62,6 +64,7 @@ func AVCapturePhotoOutputFromID(id objc.ID) *AVCapturePhotoOutput {
 	return o
 }
 
+// Creates a new photo capture output object.
 func (o *AVCapturePhotoOutput) Init() *AVCapturePhotoOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCapturePhotoOutputSelInit)
 	if _ret != 0 {
@@ -70,44 +73,60 @@ func (o *AVCapturePhotoOutput) Init() *AVCapturePhotoOutput {
 	return AVCapturePhotoOutputFromID(_ret)
 }
 
+// Creates a new photo capture output object.
 func AVCapturePhotoOutputNew() *AVCapturePhotoOutput {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCapturePhotoOutput), _aVCapturePhotoOutputSelNew)
 	return AVCapturePhotoOutputFromID(_ret)
 }
 
-// @method capturePhotoWithSettings:delegate: @abstract Method for initiating a photo capture request with progress monitoring through the supplied delegate. @param settings An AVCapturePhotoSettings object you have configured. May not be nil. @param delegate An object conforming to the AVCapturePhotoCaptureDelegate protocol. This object's delegate methods are called back as the photo advances from capture to processing to finished delivery. May not be nil. @discussion This method initiates a photo capture. The receiver copies your provided settings to prevent unintentional mutation. It is illegal to re-use settings. The receiver throws an NSInvalidArgumentException if your settings.uniqueID matches that of any previously used settings. This method is used to initiate all flavors of photo capture: single photo, RAW capture with or without a processed image (such as a JPEG), bracketed capture, and Live Photo. Clients need not wait for a capture photo request to complete before issuing another request. This is true for single photo captures as well as Live Photos, where movie complements of adjacent photo captures are allowed to overlap. This method validates your settings and enforces the following rules in order to ensure deterministic behavior. If any of these rules are violated, a NSInvalidArgumentException is thrown. RAW rules: See +isBayerRAWPixelFormat: and +isAppleProRAWPixelFormat: on the difference between Bayer RAW and Apple ProRAW pixel formats. Common RAW rules: - If rawPhotoPixelFormatType is non-zero, it must be present in the receiver's -availableRawPhotoPixelFormatTypes array. - If rawPhotoPixelFormatType is non-zero, your delegate must respond to -captureOutput:didFinishProcessingRawPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error:. - If rawPhotoPixelFormatType is non-zero, highResolutionPhotoEnabled may be YES or NO, but the setting only applies to the processed image, if you've specified one. - If rawPhotoPixelFormatType is non-zero, constantColorEnabled must be set to NO. - If rawFileType is specified, it must be present in -availableRawPhotoFileTypes and must support the rawPhotoPixelFormatType specified using -supportedRawPhotoPixelFormatTypesForFileType:. Bayer RAW rules (isBayerRAWPixelFormat: returns yes for rawPhotoPixelFormatType): - photoQualityPrioritization must be set to AVCapturePhotoQualityPrioritizationSpeed (deprecated autoStillImageStabilizationEnabled must be set to NO). - the videoZoomFactor of the source device and the videoScaleAndCropFactor of the photo output's video connection must both be 1.0. Ensure no zoom is applied before requesting a RAW capture, and don't change the zoom during RAW capture. Apple ProRAW rules (isAppleProRAWPixelFormat: returns yes for rawPhotoPixelFormatType): - livePhotoMovieFileURL must be nil in AVCapturePhotoSettings settings - autoContentAwareDistortionCorrectionEnabled will automatically be disabled in AVCapturePhotoSettings - autoRedEyeReductionEnabled will automatically be disabled in AVCapturePhotoSettings - portraitEffectsMatteDeliveryEnabled will automatically be disabled in AVCapturePhotoSettings - enabledSemanticSegmentationMatteTypes will automatically be cleared in AVCapturePhotoSettings Processed Format rules: - If format is non-nil, a kCVPixelBufferPixelFormatTypeKey or AVVideoCodecKey must be present. You cannot specify both. - If format has a kCVPixelBufferPixelFormatTypeKey, its value must be present in the receiver's -availablePhotoPixelFormatTypes array. - If format has an AVVideoCodecKey, its value must be present in the receiver's -availablePhotoCodecTypes array. - If format is non-nil, your delegate must respond to -captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error:. - If processedFileType is specified, it must be present in -availablePhotoFileTypes and must support the format's specified kCVPixelBufferPixelFormatTypeKey (using -supportedPhotoPixelFormatTypesForFileType:) or AVVideoCodecKey (using -supportedPhotoCodecTypesForFileType:). - The photoQualityPrioritization you specify may not be a greater number than the photo output's maxPhotoQualityPrioritization. You must set your AVCapturePhotoOutput maxPhotoQualityPrioritization up front. Flash rules: - The specified flashMode must be present in the receiver's -supportedFlashModes array. Live Photo rules: - The receiver's livePhotoCaptureEnabled must be YES if settings.livePhotoMovieURL is non-nil. - If settings.livePhotoMovieURL is non-nil, the receiver's livePhotoCaptureSuspended property must be set to NO. - If settings.livePhotoMovieURL is non-nil, it must be a file URL that's accessible to your app's sandbox. - If settings.livePhotoMovieURL is non-nil, your delegate must respond to -captureOutput:didFinishProcessingLivePhotoToMovieFileAtURL:duration:photoDisplayTime:resolvedSettings:error:. Bracketed capture rules: - bracketedSettings.count must be <= the receiver's maxBracketedCapturePhotoCount property. - For manual exposure brackets, ISO value must be within the source device activeFormat's minISO and maxISO values. - For manual exposure brackets, exposureDuration value must be within the source device activeFormat's minExposureDuration and maxExposureDuration values. - For auto exposure brackets, exposureTargetBias value must be within the source device's minExposureTargetBias and maxExposureTargetBias values. Deferred Photo Delivery rules: - If the receiver's autoDeferredPhotoDeliveryEnabled is YES, your delegate must respond to -captureOutput:didFinishCapturingDeferredPhotoProxy:error:. - The maxPhotoDimensions setting for 24MP (5712, 4284), when supported, is only serviced as 24MP via deferred photo delivery. Color space rules: - Photo capture is not supported when AVCaptureDevice has selected AVCaptureColorSpace_AppleLog or AVCaptureColorSpace_AppleLog2 as color space.
+// Initiates a photo capture using the specified settings.
 func (o *AVCapturePhotoOutput) CapturePhotoWithSettingsDelegate(settings *AVCapturePhotoSettings, delegate AVCapturePhotoCaptureDelegate) {
 	o.Ptr().Send(_aVCapturePhotoOutputSelCapturePhotoWithSettingsDelegate, settings.Ptr(), delegate)
 }
 
-// @method supportedPhotoPixelFormatTypesForFileType: @abstract An array of pixel format type values that are currently supported by the receiver for a particular file container. @param fileType The AVFileType container type intended for storage of a photo. @result An array of CVPixelBufferPixelFormatTypeKey values supported by the receiver for the file type in question. @discussion If you wish to capture a photo for storage in a particular file container, such as TIFF, you must ensure that the photo pixel format type you request is valid for that file type. If no pixel format types are supported for a given fileType, an empty array is returned. If you've not yet added your receiver to an AVCaptureSession with a video source, no pixel format types are supported.
+// Returns the list of uncompressed pixel formats supported for photo data in the specified file type.
 func (o *AVCapturePhotoOutput) SupportedPhotoPixelFormatTypesForFileType(fileType *foundation.NSString) *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVCapturePhotoOutputSelSupportedPhotoPixelFormatTypesForFileType, fileType.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCapturePhotoOutputSelSupportedPhotoPixelFormatTypesForFileType, fileType.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
-// @method supportedPhotoCodecTypesForFileType: @abstract An array of AVVideoCodecKey values that are currently supported by the receiver for a particular file container. @param fileType The AVFileType container type intended for storage of a photo. @result An array of AVVideoCodecKey values supported by the receiver for the file type in question. @discussion If you wish to capture a photo for storage in a particular file container, such as HEIF, you must ensure that the photo codec type you request is valid for that file type. If no codec types are supported for a given fileType, an empty array is returned. If you've not yet added your receiver to an AVCaptureSession with a video source, no codec types are supported.
+// Returns the list of photo codecs (such as JPEG or HEVC) supported for photo data in the specified file type.
 func (o *AVCapturePhotoOutput) SupportedPhotoCodecTypesForFileType(fileType *foundation.NSString) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVCapturePhotoOutputSelSupportedPhotoCodecTypesForFileType, fileType.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCapturePhotoOutputSelSupportedPhotoCodecTypesForFileType, fileType.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property availablePhotoPixelFormatTypes @abstract An array of kCVPixelBufferPixelFormatTypeKey values that are currently supported by the receiver. @discussion If you wish to capture a photo in an uncompressed format, such as 420f, 420v, or BGRA, you must ensure that the format you want is present in the receiver's availablePhotoPixelFormatTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no pixel format types are available. This property is key-value observable.
 func (o *AVCapturePhotoOutput) AvailablePhotoPixelFormatTypes() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVCapturePhotoOutputSelAvailablePhotoPixelFormatTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCapturePhotoOutputSelAvailablePhotoPixelFormatTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property availablePhotoCodecTypes @abstract An array of AVVideoCodecKey values that are currently supported by the receiver. @discussion If you wish to capture a photo in a compressed format, such as JPEG, you must ensure that the format you want is present in the receiver's availablePhotoCodecTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no codec types are available. This property is key-value observable.
 func (o *AVCapturePhotoOutput) AvailablePhotoCodecTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVCapturePhotoOutputSelAvailablePhotoCodecTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCapturePhotoOutputSelAvailablePhotoCodecTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property availablePhotoFileTypes @abstract An array of AVFileType values that are currently supported by the receiver. @discussion If you wish to capture a photo that is formatted for a particular file container, such as HEIF or DICOM, you must ensure that the fileType you desire is present in the receiver's availablePhotoFileTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no file types are available. This property is key-value observable.
 func (o *AVCapturePhotoOutput) AvailablePhotoFileTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVCapturePhotoOutputSelAvailablePhotoFileTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCapturePhotoOutputSelAvailablePhotoFileTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property maxPhotoQualityPrioritization @abstract Indicates the highest quality the receiver should be prepared to output on a capture-by-capture basis. @discussion Default value is AVCapturePhotoQualityPrioritizationBalanced when attached to an AVCaptureSession, and AVCapturePhotoQualityPrioritizationSpeed when attached to an AVCaptureMultiCamSession. The AVCapturePhotoOutput is capable of applying a variety of techniques to improve photo quality (reduce noise, preserve detail in low light, freeze motion, etc). Some techniques improve image quality at the expense of speed (shot-to-shot time). Before starting your session, you may set this property to indicate the highest quality prioritization you intend to request when calling -capturePhotoWithSettings:delegate:. When configuring an AVCapturePhotoSettings object, you may not exceed this quality prioritization level, but you may select a lower (speedier) prioritization level. Changing the maxPhotoQualityPrioritization while the session is running can result in a lengthy rebuild of the session in which video preview is disrupted. Setting the maxPhotoQualityPrioritization to .quality will turn on optical image stabilization if the -isHighPhotoQualitySupported of the source device's -activeFormat is true.
@@ -142,8 +161,11 @@ func (o *AVCapturePhotoOutput) SetFastCapturePrioritizationEnabled(fastCapturePr
 
 // @property supportedFlashModes @abstract An array of AVCaptureFlashMode constants for the current capture session configuration. @discussion This property supersedes AVCaptureDevice's isFlashModeSupported: It returns an array of AVCaptureFlashMode constants. To test whether a particular flash mode is supported, use NSArray's containsObject API: [photoOutput.supportedFlashModes containsObject:@(AVCaptureFlashModeAuto)]. This property is key-value observable.
 func (o *AVCapturePhotoOutput) SupportedFlashModes() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVCapturePhotoOutputSelSupportedFlashModes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCapturePhotoOutputSelSupportedFlashModes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property highResolutionCaptureEnabled @abstract Indicates whether the photo render pipeline should be configured to deliver high resolution still images. @discussion Some AVCaptureDeviceFormats support outputting higher resolution stills than their streaming resolution (See AVCaptureDeviceFormat.highResolutionStillImageDimensions). Under some conditions, AVCaptureSession needs to set up the photo render pipeline differently to support high resolution still image capture. If you intend to take high resolution still images at all, you should set this property to YES before calling -[AVCaptureSession startRunning]. Once you've opted in for high resolution capture, you are free to issue photo capture requests with or without highResolutionCaptureEnabled in the AVCapturePhotoSettings. If you have not set this property to YES and call capturePhotoWithSettings:delegate: with settings.highResolutionCaptureEnabled set to YES, an NSInvalidArgumentException will be thrown.

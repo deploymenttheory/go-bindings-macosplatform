@@ -56,12 +56,16 @@ func (e EvCmd) String() string {
 	}
 }
 
+// Indicates whether a session should use encryption when communicating with nearby peers.
 type MCEncryptionPreference int64
 
 const (
+	// The session prefers to use encryption, but accepts unencrypted connections. A connection uses encryption when all the peers choose either MCEncryptionOptional or MCEncryptionRequired. If some peers choose MCEncryptionNone, then the session will not be encrypted. For this reason, if some peers running your app can be configured without encryption, you should always assume that the session is unencrypted.
 	MCEncryptionOptional MCEncryptionPreference = 0
+	// The session requires encryption.
 	MCEncryptionRequired MCEncryptionPreference = 1
-	MCEncryptionNone     MCEncryptionPreference = 2
+	// The session should not be encrypted.
+	MCEncryptionNone MCEncryptionPreference = 2
 )
 
 func (e MCEncryptionPreference) String() string {
@@ -77,6 +81,7 @@ func (e MCEncryptionPreference) String() string {
 	}
 }
 
+// Error codes found in MCErrorDomain error domain NSError objects returned by methods in the Multipeer Connectivity framework.
 type MCErrorCode int64
 
 const (
@@ -110,10 +115,13 @@ func (e MCErrorCode) String() string {
 	}
 }
 
+// Indicates whether delivery of data should be guaranteed.
 type MCSessionSendDataMode int64
 
 const (
-	MCSessionSendDataReliable   MCSessionSendDataMode = 0
+	// The framework should guarantee delivery of each message, enqueueing and retransmitting data as needed, and ensuring in-order delivery.
+	MCSessionSendDataReliable MCSessionSendDataMode = 0
+	// Messages to peers should be sent immediately without socket-level queueing. If a message cannot be sent immediately, it should be dropped. The order of messages is not guaranteed.
 	MCSessionSendDataUnreliable MCSessionSendDataMode = 1
 )
 
@@ -128,12 +136,16 @@ func (e MCSessionSendDataMode) String() string {
 	}
 }
 
+// Indicates the current state of a given peer within a session.
 type MCSessionState int64
 
 const (
+	// The peer is not (or is no longer) in this session.
 	MCSessionStateNotConnected MCSessionState = 0
-	MCSessionStateConnecting   MCSessionState = 1
-	MCSessionStateConnected    MCSessionState = 2
+	// A connection to the peer is currently being established.
+	MCSessionStateConnecting MCSessionState = 1
+	// The peer is connected to this session.
+	MCSessionStateConnected MCSessionState = 2
 )
 
 func (e MCSessionState) String() string {

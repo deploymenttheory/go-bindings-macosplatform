@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @brief Groups a set of requirements that need to be satisfied in order to grant access to certain resource or operation
+// A grouped set of requirements that gate access to a resource or operation.
 //
 // Apple documentation: https://developer.apple.com/documentation/localauthentication/laright
 type LARight struct {
@@ -41,7 +41,7 @@ func LARightFromID(id objc.ID) *LARight {
 	return o
 }
 
-// @brief Constructs a right using default authorization requirements @discussion For authorizing a right with default requirements a user will be asked to authenticate using biometry or the device passcode. @return @c LARight instance
+// Creates a right using the default authorization requirements.
 func (o *LARight) Init() *LARight {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lARightSelInit)
 	if _ret != 0 {
@@ -50,7 +50,7 @@ func (o *LARight) Init() *LARight {
 	return LARightFromID(_ret)
 }
 
-// @brief Constructs a right that will be granted only when the given @c LAAuthenticationRequirement is satisfied. @param requirement Requirement that needs to be satisfied to authorize the right @return @c LARight instance
+// Creates a right with the authentication requirements you supply.
 func (o *LARight) InitWithRequirement(requirement *LAAuthenticationRequirement) *LARight {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lARightSelInitWithRequirement, requirement.Ptr())
 	if _ret != 0 {
@@ -59,7 +59,7 @@ func (o *LARight) InitWithRequirement(requirement *LAAuthenticationRequirement) 
 	return LARightFromID(_ret)
 }
 
-// @brief Tries to authorize the right. @param localizedReason Localized explanation for the authorization. Appears in the UI presented to the user. @param handler Completion handler called after the authorization finishes. Returns an error when the authorization fails.
+// Performs an authorization on the right.
 func (o *LARight) AuthorizeWithLocalizedReasonCompletion(localizedReason *foundation.NSString, handler func(unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -71,7 +71,7 @@ func (o *LARight) AuthorizeWithLocalizedReasonCompletion(localizedReason *founda
 	o.Ptr().Send(_lARightSelAuthorizeWithLocalizedReasonCompletion, localizedReason.Ptr(), __block_handler)
 }
 
-// @brief Checks whether the client can eventually be granted the right. @param handler Completion handler. Returns @c nil if the right can be authorized or an error otherwise.
+// Checks whether the right has permission to perform authorization.
 func (o *LARight) CheckCanAuthorizeWithCompletion(handler func(unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -83,7 +83,7 @@ func (o *LARight) CheckCanAuthorizeWithCompletion(handler func(unsafe.Pointer)) 
 	o.Ptr().Send(_lARightSelCheckCanAuthorizeWithCompletion, __block_handler)
 }
 
-// @brief Invalidates a previously authorized right. @param handler Completion handler called after the right is deauthorized.
+// Invalidates a previously authorized right.
 func (o *LARight) DeauthorizeWithCompletion(handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {

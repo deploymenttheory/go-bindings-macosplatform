@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object used to identify all the samples previously returned by an anchored object query.
+//
 // QueryAnchor wraps [raw.HKQueryAnchor] with a fluent Go API.
 type QueryAnchor struct {
 	inner *raw.HKQueryAnchor

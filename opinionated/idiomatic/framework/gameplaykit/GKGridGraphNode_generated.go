@@ -10,7 +10,7 @@ import (
 	"unsafe"
 )
 
-// GKGraphNode coupled with a position on a 2D grid
+// A node in a navigation graph, associated with a position on a discrete two-dimensional grid.
 //
 // GridGraphNode wraps [raw.GKGridGraphNode] with a fluent Go API.
 type GridGraphNode struct {
@@ -32,6 +32,8 @@ func GridGraphNodeFromID(id objc.ID) *GridGraphNode {
 	return &GridGraphNode{inner: raw.GKGridGraphNodeFromID(id)}
 }
 
+// Initializes a graph node with the specified position on a grid.
+//
 // NewGridGraphNodeWithGridPosition creates a new [GridGraphNode].
 func NewGridGraphNodeWithGridPosition(gridPosition unsafe.Pointer) *GridGraphNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGridGraphNode")), objc.RegisterName("alloc"))

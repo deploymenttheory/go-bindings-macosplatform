@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides information about the HEVC dependency attributes of a sample.
+//
 // HEVCDependencyInfo wraps [raw.MEHEVCDependencyInfo] with a fluent Go API.
 type HEVCDependencyInfo struct {
 	inner *raw.MEHEVCDependencyInfo
@@ -36,7 +38,7 @@ func NewHEVCDependencyInfo() *HEVCDependencyInfo {
 	return &HEVCDependencyInfo{inner: raw.MEHEVCDependencyInfoFromID(_id)}
 }
 
-// @property		temporalSubLayerAccess @abstract		YES if the sample is an HEVC 'TSA' picture, NO otherwise. @discussion		Maps to the kCMSampleAttachmentKey_HEVCTemporalSubLayerAccess sample buffer attachment.
+// A Boolean value that indicates if the sample has an HEVC temporal sublayer access (TSA) picture.
 //
 // WithTemporalSubLayerAccess sets the temporalSubLayerAccess property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithTemporalSubLayerAccess(temporalSubLayerAccess bool) *HEVCDependencyInfo {
@@ -44,7 +46,7 @@ func (x *HEVCDependencyInfo) WithTemporalSubLayerAccess(temporalSubLayerAccess b
 	return x
 }
 
-// @property		stepwiseTemporalSubLayerAccess @abstract		YES if the sample is an HEVC 'STSA' picture, NO otherwise. @discussion		Maps to the kCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess sample buffer attachment.
+// A Boolean value that indicates if the sample has an HEVC stepwise temporal sublayer access (STSA) picture.
 //
 // WithStepwiseTemporalSubLayerAccess sets the stepwiseTemporalSubLayerAccess property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithStepwiseTemporalSubLayerAccess(stepwiseTemporalSubLayerAccess bool) *HEVCDependencyInfo {
@@ -52,7 +54,7 @@ func (x *HEVCDependencyInfo) WithStepwiseTemporalSubLayerAccess(stepwiseTemporal
 	return x
 }
 
-// @property		syncSampleNALUnitType @abstract		The NAL unit type for HEVC 'sync' sample groups, or -1 if this information is not available. @discussion		Maps to the kCMSampleAttachmentKey_HEVCSyncSampleNALUnitType sample buffer attachment.
+// The NAL unit type for HEVC sync sample groups.
 //
 // WithSyncSampleNALUnitType sets the syncSampleNALUnitType property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithSyncSampleNALUnitType(syncSampleNALUnitType int16) *HEVCDependencyInfo {
@@ -60,7 +62,7 @@ func (x *HEVCDependencyInfo) WithSyncSampleNALUnitType(syncSampleNALUnitType int
 	return x
 }
 
-// @property		temporalLevel @abstract		The HEVC temporal level, or -1 if this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_TemporalLevel sample buffer attachment.
+// The HEVC temporal level, if available.
 //
 // WithTemporalLevel sets the temporalLevel property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithTemporalLevel(temporalLevel int16) *HEVCDependencyInfo {
@@ -68,7 +70,7 @@ func (x *HEVCDependencyInfo) WithTemporalLevel(temporalLevel int16) *HEVCDepende
 	return x
 }
 
-// @property		profileSpace @abstract		The HEVC profile space, or -1 if this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_ProfileSpace sample buffer attachment.
+// The HEVC profile space, if available.
 //
 // WithProfileSpace sets the profileSpace property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithProfileSpace(profileSpace int16) *HEVCDependencyInfo {
@@ -76,7 +78,7 @@ func (x *HEVCDependencyInfo) WithProfileSpace(profileSpace int16) *HEVCDependenc
 	return x
 }
 
-// @property		tierFlag @abstract		The HEVC tier level flag, or -1 if this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_TierFlag sample buffer attachment.
+// The HEVC tier level flag, if available.
 //
 // WithTierFlag sets the tierFlag property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithTierFlag(tierFlag int16) *HEVCDependencyInfo {
@@ -84,7 +86,7 @@ func (x *HEVCDependencyInfo) WithTierFlag(tierFlag int16) *HEVCDependencyInfo {
 	return x
 }
 
-// @property		profileIndex @abstract		The HEVC profile index, or -1 if this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_ProfileIndex sample buffer attachment.
+// The HEVC profile index, if available.
 //
 // WithProfileIndex sets the profileIndex property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithProfileIndex(profileIndex int16) *HEVCDependencyInfo {
@@ -92,7 +94,7 @@ func (x *HEVCDependencyInfo) WithProfileIndex(profileIndex int16) *HEVCDependenc
 	return x
 }
 
-// @property		profileCompatibilityFlags @abstract		The HEVC profile compatibility flags (4 bytes), or nil of this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags sample buffer attachment.
+// The HEVC profile compatibility flags (4 bytes), if available.
 //
 // WithProfileCompatibilityFlags sets the profileCompatibilityFlags property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithProfileCompatibilityFlags(profileCompatibilityFlags *foundation.NSData) *HEVCDependencyInfo {
@@ -100,7 +102,7 @@ func (x *HEVCDependencyInfo) WithProfileCompatibilityFlags(profileCompatibilityF
 	return x
 }
 
-// @property		constraintIndicatorFlags @abstract		The HEVC constraint indicator flags (6 bytes), or nil of this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags sample buffer attachment.
+// The HEVC constraint indicator flags (6 bytes), if available.
 //
 // WithConstraintIndicatorFlags sets the constraintIndicatorFlags property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithConstraintIndicatorFlags(constraintIndicatorFlags *foundation.NSData) *HEVCDependencyInfo {
@@ -108,7 +110,7 @@ func (x *HEVCDependencyInfo) WithConstraintIndicatorFlags(constraintIndicatorFla
 	return x
 }
 
-// @property		levelIndex @abstract		The HEVC level index, or -1 if this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_LevelIndex sample buffer attachment.
+// The HEVC level index, if available.
 //
 // WithLevelIndex sets the levelIndex property and returns the receiver for chaining.
 func (x *HEVCDependencyInfo) WithLevelIndex(levelIndex int16) *HEVCDependencyInfo {

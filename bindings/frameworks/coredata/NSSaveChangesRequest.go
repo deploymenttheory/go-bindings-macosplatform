@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An encapsulation of a collection of changes to be made by an object store in response to a save operation on a managed object context.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nssavechangesrequest
 type NSSaveChangesRequest struct {
 	NSPersistentStoreRequest
@@ -34,6 +36,7 @@ func NSSaveChangesRequestFromID(id objc.ID) *NSSaveChangesRequest {
 	return o
 }
 
+// Initializes a save changes request with collections of given changes.
 func (o *NSSaveChangesRequest) InitWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedObjects(insertedObjects *foundation.NSSet[*NSManagedObject], updatedObjects *foundation.NSSet[*NSManagedObject], deletedObjects *foundation.NSSet[*NSManagedObject], lockedObjects *foundation.NSSet[*NSManagedObject]) *NSSaveChangesRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSaveChangesRequestSelInitWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedObjects, insertedObjects.Ptr(), updatedObjects.Ptr(), deletedObjects.Ptr(), lockedObjects.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The metadata of speech in the audio of a speech recognition request.
+//
 // Apple documentation: https://developer.apple.com/documentation/speech/sfspeechrecognitionmetadata
 type SFSpeechRecognitionMetadata struct {
 	foundation.NSObject

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The GKLeaderboardViewController class provides a standard user interface that displays leaderboard scores to the player. If the GKGameCenterViewController class is available, you should use it instead.
+//
 // LeaderboardViewController wraps [raw.GKLeaderboardViewController] with a fluent Go API.
 type LeaderboardViewController struct {
 	inner *raw.GKLeaderboardViewController
@@ -37,24 +39,32 @@ func NewLeaderboardViewController() *LeaderboardViewController {
 	return &LeaderboardViewController{inner: raw.GKLeaderboardViewControllerFromID(_id)}
 }
 
+// A time filter used to restrict which scores are displayed to the player.
+//
 // WithTimeScope sets the timeScope property and returns the receiver for chaining.
 func (x *LeaderboardViewController) WithTimeScope(timeScope GKLeaderboardTimeScope) *LeaderboardViewController {
 	x.inner.SetTimeScope(raw.GKLeaderboardTimeScope(timeScope))
 	return x
 }
 
+// The named leaderboard that is displayed by the view controller.
+//
 // WithCategory sets the category property and returns the receiver for chaining.
 func (x *LeaderboardViewController) WithCategory(category string) *LeaderboardViewController {
 	x.inner.SetCategory(foundation.NSStringStringWithUTF8String(category))
 	return x
 }
 
+// The view controller’s delegate.
+//
 // WithLeaderboardDelegate sets the leaderboardDelegate property and returns the receiver for chaining.
 func (x *LeaderboardViewController) WithLeaderboardDelegate(leaderboardDelegate raw.GKLeaderboardViewControllerDelegate) *LeaderboardViewController {
 	x.inner.SetLeaderboardDelegate(leaderboardDelegate)
 	return x
 }
 
+// The view controller’s delegate.
+//
 // WithGameCenterDelegate sets the gameCenterDelegate property and returns the receiver for chaining.
 func (x *LeaderboardViewController) WithGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) *LeaderboardViewController {
 	x.inner.GKGameCenterViewController.SetGameCenterDelegate(gameCenterDelegate)

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance of this class represents an RFCOMM channel as defined by the Bluetooth SDP spec..
+//
 // Apple documentation: https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel
 type IOBluetoothRFCOMMChannel struct {
 	IOBluetoothObject
@@ -52,6 +54,7 @@ func IOBluetoothRFCOMMChannelFromID(id objc.ID) *IOBluetoothRFCOMMChannel {
 	return o
 }
 
+// Allows a client to register for RFCOMM channel open notifications for any RFCOMM channel.
 func IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelector(object objc.ID, selector objc.SEL) *IOBluetoothUserNotification {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothRFCOMMChannel), _iOBluetoothRFCOMMChannelSelRegisterForChannelOpenNotificationsSelector, object, selector)
 	if _ret != 0 {
@@ -60,6 +63,7 @@ func IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelector(object 
 	return IOBluetoothUserNotificationFromID(_ret)
 }
 
+// Allows a client to register for RFCOMM channel open notifications for certain types of RFCOMM channels.
 func IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelectorWithChannelIDDirection(object objc.ID, selector objc.SEL, channelID uint8, inDirection IOBluetoothUserNotificationChannelDirection) *IOBluetoothUserNotification {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothRFCOMMChannel), _iOBluetoothRFCOMMChannelSelRegisterForChannelOpenNotificationsSelectorWithChannelIDDirection, object, selector, channelID, inDirection)
 	if _ret != 0 {
@@ -68,7 +72,7 @@ func IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelectorWithChan
 	return IOBluetoothUserNotificationFromID(_ret)
 }
 
-// @method	withRFCOMMChannelRef: @abstract	Method call to convert an IOBluetoothRFCOMMChannelRef into an IOBluetoothRFCOMMChannel *. @param	rfcommChannelRef IOBluetoothRFCOMMChannelRef for which an IOBluetoothRFCOMMChannel * is desired. @result		Returns the IOBluetoothRFCOMMChannel * for the given IOBluetoothRFCOMMChannelRef.
+// Method call to convert an IOBluetoothRFCOMMChannelRef into an IOBluetoothRFCOMMChannel *.
 func IOBluetoothRFCOMMChannelWithRFCOMMChannelRef(rfcommChannelRef unsafe.Pointer) *IOBluetoothRFCOMMChannel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothRFCOMMChannel), _iOBluetoothRFCOMMChannelSelWithRFCOMMChannelRef, rfcommChannelRef)
 	if _ret != 0 {
@@ -77,6 +81,7 @@ func IOBluetoothRFCOMMChannelWithRFCOMMChannelRef(rfcommChannelRef unsafe.Pointe
 	return IOBluetoothRFCOMMChannelFromID(_ret)
 }
 
+// Returns the IObluetoothRFCOMMChannel with the given IOBluetoothObjectID.
 func IOBluetoothRFCOMMChannelWithObjectID(objectID uint) *IOBluetoothRFCOMMChannel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothRFCOMMChannel), _iOBluetoothRFCOMMChannelSelWithObjectID, objectID)
 	if _ret != 0 {
@@ -85,83 +90,97 @@ func IOBluetoothRFCOMMChannelWithObjectID(objectID uint) *IOBluetoothRFCOMMChann
 	return IOBluetoothRFCOMMChannelFromID(_ret)
 }
 
-// @method	getRFCOMMChannelRef @abstract	Returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object. @result		Returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object.
+// Returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object.
 func (o *IOBluetoothRFCOMMChannel) GetRFCOMMChannelRef() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOBluetoothRFCOMMChannelSelGetRFCOMMChannelRef)
 	return _ret
 }
 
+// Close the channel.
 func (o *IOBluetoothRFCOMMChannel) CloseChannel() int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothRFCOMMChannelSelCloseChannel)
 	return _ret
 }
 
+// Returns the state of the channel.
 func (o *IOBluetoothRFCOMMChannel) IsOpen() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothRFCOMMChannelSelIsOpen)
 	return _ret
 }
 
+// Returns the channel maximum transfer unit.
 func (o *IOBluetoothRFCOMMChannel) GetMTU() uint16 {
 	_ret := objc.Send[uint16](o.Ptr(), _iOBluetoothRFCOMMChannelSelGetMTU)
 	return _ret
 }
 
+// Returns TRUE if flow control is off.
 func (o *IOBluetoothRFCOMMChannel) IsTransmissionPaused() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothRFCOMMChannelSelIsTransmissionPaused)
 	return _ret
 }
 
+// Sends a block of data in the channel syncronously.
 func (o *IOBluetoothRFCOMMChannel) WriteLengthSleep(data unsafe.Pointer, length uint16, sleep bool) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothRFCOMMChannelSelWriteLengthSleep, data, length, sleep)
 	return _ret
 }
 
+// Sends a block of data in the channel asynchronously.
 func (o *IOBluetoothRFCOMMChannel) WriteAsyncLengthRefcon(data unsafe.Pointer, length uint16, refcon unsafe.Pointer) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothRFCOMMChannelSelWriteAsyncLengthRefcon, data, length, refcon)
 	return _ret
 }
 
+// Sends a block of data in the channel synchronously.
 func (o *IOBluetoothRFCOMMChannel) WriteSyncLength(data unsafe.Pointer, length uint16) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothRFCOMMChannelSelWriteSyncLength, data, length)
 	return _ret
 }
 
+// Sends a block of data in the channel.
 func (o *IOBluetoothRFCOMMChannel) WriteSimpleLengthSleepBytesSent(data unsafe.Pointer, length uint16, sleep bool, numBytesSent *uint) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothRFCOMMChannelSelWriteSimpleLengthSleepBytesSent, data, length, sleep, numBytesSent)
 	return _ret
 }
 
+// Changes the parameters of the serial connection.
 func (o *IOBluetoothRFCOMMChannel) SetSerialParametersDataBitsParityStopBits(speed uint, nBits uint8, parity BluetoothRFCOMMParityType, bitStop uint8) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothRFCOMMChannelSelSetSerialParametersDataBitsParityStopBits, speed, nBits, parity, bitStop)
 	return _ret
 }
 
+// Sends an error to the remote side.
 func (o *IOBluetoothRFCOMMChannel) SendRemoteLineStatus(lineStatus BluetoothRFCOMMLineStatus) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothRFCOMMChannelSelSendRemoteLineStatus, lineStatus)
 	return _ret
 }
 
+// Allows an object to register itself as a client of the RFCOMM channel.
 func (o *IOBluetoothRFCOMMChannel) SetDelegate(delegate objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothRFCOMMChannelSelSetDelegate, delegate)
 	return _ret
 }
 
-// @method	delegate @abstract	Returns the object delegate @result	the current delegate, or nil
+// Returns the object delegate
 func (o *IOBluetoothRFCOMMChannel) Delegate() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothRFCOMMChannelSelDelegate)
 	return _ret
 }
 
+// Returns the object rfcomm channel ID.
 func (o *IOBluetoothRFCOMMChannel) GetChannelID() uint8 {
 	_ret := objc.Send[uint8](o.Ptr(), _iOBluetoothRFCOMMChannelSelGetChannelID)
 	return _ret
 }
 
+// Returns the direction of the channel. An incoming channel is one that was opened by the remote device.
 func (o *IOBluetoothRFCOMMChannel) IsIncoming() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothRFCOMMChannelSelIsIncoming)
 	return _ret
 }
 
+// Returns the Bluetooth Device that carries the rfcomm data.
 func (o *IOBluetoothRFCOMMChannel) GetDevice() *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothRFCOMMChannelSelGetDevice)
 	if _ret != 0 {
@@ -170,11 +189,13 @@ func (o *IOBluetoothRFCOMMChannel) GetDevice() *IOBluetoothDevice {
 	return IOBluetoothDeviceFromID(_ret)
 }
 
+// Returns the IOBluetoothObjectID of the given IOBluetoothRFCOMMChannel.
 func (o *IOBluetoothRFCOMMChannel) GetObjectID() uint {
 	_ret := objc.Send[uint](o.Ptr(), _iOBluetoothRFCOMMChannelSelGetObjectID)
 	return _ret
 }
 
+// Allows a client to register for a channel close notification.
 func (o *IOBluetoothRFCOMMChannel) RegisterForChannelCloseNotificationSelector(observer objc.ID, inSelector objc.SEL) *IOBluetoothUserNotification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothRFCOMMChannelSelRegisterForChannelCloseNotificationSelector, observer, inSelector)
 	if _ret != 0 {

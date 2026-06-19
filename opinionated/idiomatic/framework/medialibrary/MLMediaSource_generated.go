@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The MLMediaSource class identifies a specific provider of media. Conceptually, a media source respresents a single app, such as iTunes or Aperture. Each media source contains multiple groups of media objects—individual files containing a piece of media such as a photo, song, or movie.
+//
 // MediaSource wraps [raw.MLMediaSource] with a fluent Go API.
 type MediaSource struct {
 	inner *raw.MLMediaSource
@@ -37,6 +39,8 @@ func NewMediaSource() *MediaSource {
 	return &MediaSource{inner: raw.MLMediaSourceFromID(_id)}
 }
 
+// Returns the media group with the specified identifier.
+//
 // MediaGroupForIdentifier calls the underlying MediaGroupForIdentifier.
 func (x *MediaSource) MediaGroupForIdentifier(mediaGroupIdentifier string) *MediaGroup {
 	_r := x.inner.MediaGroupForIdentifier(foundation.NSStringStringWithUTF8String(mediaGroupIdentifier))
@@ -46,11 +50,15 @@ func (x *MediaSource) MediaGroupForIdentifier(mediaGroupIdentifier string) *Medi
 	return &MediaGroup{inner: _r}
 }
 
+// Returns the media groups with the specified identifiers.
+//
 // MediaGroupsForIdentifiers calls the underlying MediaGroupsForIdentifiers.
 func (x *MediaSource) MediaGroupsForIdentifiers(mediaGroupIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSDictionary[*foundation.NSString, *raw.MLMediaGroup] {
 	return x.inner.MediaGroupsForIdentifiers(mediaGroupIdentifiers)
 }
 
+// Returns the media object with the specified identifier.
+//
 // MediaObjectForIdentifier calls the underlying MediaObjectForIdentifier.
 func (x *MediaSource) MediaObjectForIdentifier(mediaObjectIdentifier string) *MediaObject {
 	_r := x.inner.MediaObjectForIdentifier(foundation.NSStringStringWithUTF8String(mediaObjectIdentifier))
@@ -60,6 +68,8 @@ func (x *MediaSource) MediaObjectForIdentifier(mediaObjectIdentifier string) *Me
 	return &MediaObject{inner: _r}
 }
 
+// Returns the media objects with the specified identifiers.
+//
 // MediaObjectsForIdentifiers calls the underlying MediaObjectsForIdentifiers.
 func (x *MediaSource) MediaObjectsForIdentifiers(mediaObjectIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSDictionary[*foundation.NSString, *raw.MLMediaObject] {
 	return x.inner.MediaObjectsForIdentifiers(mediaObjectIdentifiers)

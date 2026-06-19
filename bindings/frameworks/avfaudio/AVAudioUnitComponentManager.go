@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides a way to search and query audio components that the system registers.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiounitcomponentmanager
 type AVAudioUnitComponentManager struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func AVAudioUnitComponentManagerFromID(id objc.ID) *AVAudioUnitComponentManager 
 	return o
 }
 
+// Gets the shared component manager instance.
 func AVAudioUnitComponentManagerSharedAudioUnitComponentManager() *AVAudioUnitComponentManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioUnitComponentManager), _aVAudioUnitComponentManagerSelSharedAudioUnitComponentManager)
 	if _ret != 0 {
@@ -43,7 +46,7 @@ func AVAudioUnitComponentManagerSharedAudioUnitComponentManager() *AVAudioUnitCo
 	return AVAudioUnitComponentManagerFromID(_ret)
 }
 
-// @method componentsMatchingPredicate: @abstract	returns an array of AVAudioUnitComponent objects that match the search predicate. @discussion AudioComponent's information or tags can be used to build a search criteria. For example, "typeName CONTAINS 'Effect'" or tags IN {'Sampler', 'MIDI'}"
+// Gets an array of audio component objects that match the search predicate.
 func (o *AVAudioUnitComponentManager) ComponentsMatchingPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*AVAudioUnitComponent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentManagerSelComponentsMatchingPredicate, predicate.Ptr())
 	if _ret != 0 {
@@ -52,7 +55,7 @@ func (o *AVAudioUnitComponentManager) ComponentsMatchingPredicate(predicate *fou
 	return foundation.NSArrayFromID[*AVAudioUnitComponent](_ret)
 }
 
-// @method componentsPassingTest: @abstract	returns an array of AVAudioUnitComponent objects that pass the user provided block method. @discussion For each AudioComponent found by the manager, the block method will be called. If the return value is YES then the AudioComponent is added to the resulting array else it will excluded. This gives more control to the block provider to filter out the components returned.
+// Gets an array of audio components that pass the block method.
 func (o *AVAudioUnitComponentManager) ComponentsPassingTest(testHandler func(*AVAudioUnitComponent, *bool) bool) *foundation.NSArray[*AVAudioUnitComponent] {
 	var __block_testHandler objc.Block
 	if testHandler != nil {
@@ -71,7 +74,7 @@ func (o *AVAudioUnitComponentManager) ComponentsPassingTest(testHandler func(*AV
 	return foundation.NSArrayFromID[*AVAudioUnitComponent](_ret)
 }
 
-// @method componentsMatchingDescription: @abstract	returns an array of AVAudioUnitComponent objects that match the description. @discussion This method provides a mechanism to search for AudioComponents using AudioComponentDescription structure. The type, subtype and manufacturer fields are used to search for audio units. A value of 0 for any of these fields is a wildcard and returns the first match found.
+// Gets an array of audio component objects that match the description.
 func (o *AVAudioUnitComponentManager) ComponentsMatchingDescription(desc objc.ID) *foundation.NSArray[*AVAudioUnitComponent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentManagerSelComponentsMatchingDescription, desc)
 	if _ret != 0 {
@@ -82,11 +85,17 @@ func (o *AVAudioUnitComponentManager) ComponentsMatchingDescription(desc objc.ID
 
 // @discussion returns all tags associated with the current user as well as all system tags defined by the audio unit(s).
 func (o *AVAudioUnitComponentManager) TagNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVAudioUnitComponentManagerSelTagNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentManagerSelTagNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *AVAudioUnitComponentManager) StandardLocalizedTagNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVAudioUnitComponentManagerSelStandardLocalizedTagNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentManagerSelStandardLocalizedTagNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

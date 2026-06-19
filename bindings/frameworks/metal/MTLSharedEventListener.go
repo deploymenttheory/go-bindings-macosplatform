@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A listener for shareable event notifications.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlsharedeventlistener
 type MTLSharedEventListener struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func MTLSharedEventListenerFromID(id objc.ID) *MTLSharedEventListener {
 	return o
 }
 
+// Creates a new shareable event listener.
 func (o *MTLSharedEventListener) Init() *MTLSharedEventListener {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLSharedEventListenerSelInit)
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func (o *MTLSharedEventListener) Init() *MTLSharedEventListener {
 	return MTLSharedEventListenerFromID(_ret)
 }
 
+// Creates a new shareable event listener with a specific dispatch queue.
 func (o *MTLSharedEventListener) InitWithDispatchQueue(dispatchQueue *foundation.NSObject) *MTLSharedEventListener {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLSharedEventListenerSelInitWithDispatchQueue, dispatchQueue.Ptr())
 	if _ret != 0 {

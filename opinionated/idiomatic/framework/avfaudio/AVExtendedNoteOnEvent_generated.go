@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a custom extension of a MIDI note on event.
+//
 // ExtendedNoteOnEvent wraps [raw.AVExtendedNoteOnEvent] with a fluent Go API.
 type ExtendedNoteOnEvent struct {
 	inner *raw.AVExtendedNoteOnEvent
@@ -29,7 +31,7 @@ func ExtendedNoteOnEventFromID(id objc.ID) *ExtendedNoteOnEvent {
 	return &ExtendedNoteOnEvent{inner: raw.AVExtendedNoteOnEventFromID(id)}
 }
 
-// @method initWithMIDINote:velocity:groupID:duration @abstract Initialize the event with a midi note, velocity, instrument and group ID, and a duration. @param midiNote The MIDI velocity represented as a floating point.  Range: Destination-dependent, usually 0.0 - 127.0. @param velocity The MIDI velocity represented as a floating point.  Range: Destination-dependent, usually 0.0 - 127.0. @param groupID An index indicating the AudioUnitElement within the Group Scope which should handle this event (see AudioUnitElement). This normally maps to a channel within the audio unit. Range: normally between 0 and 15, but may be higher if the AVMusicTrack's destinationAudioUnit supports more channels. @param duration The duration of this event in AVMusicTimeStamp beats.  Range:  Any nonnegative number.
+// Creates an event with a MIDI note, velocity, group identifier, and duration.
 //
 // NewExtendedNoteOnEventWithMIDINoteVelocityGroupIDDuration creates a new [ExtendedNoteOnEvent].
 func NewExtendedNoteOnEventWithMIDINoteVelocityGroupIDDuration(midiNote float32, velocity float32, groupID uint, duration float64) *ExtendedNoteOnEvent {
@@ -38,6 +40,8 @@ func NewExtendedNoteOnEventWithMIDINoteVelocityGroupIDDuration(midiNote float32,
 	return &ExtendedNoteOnEvent{inner: raw.AVExtendedNoteOnEventFromID(_id)}
 }
 
+// Creates a note on event with the default instrument.
+//
 // NewExtendedNoteOnEventWithMIDINoteVelocityInstrumentIDGroupIDDuration creates a new [ExtendedNoteOnEvent].
 func NewExtendedNoteOnEventWithMIDINoteVelocityInstrumentIDGroupIDDuration(midiNote float32, velocity float32, instrumentID uint, groupID uint, duration float64) *ExtendedNoteOnEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVExtendedNoteOnEvent")), objc.RegisterName("alloc"))
@@ -45,7 +49,7 @@ func NewExtendedNoteOnEventWithMIDINoteVelocityInstrumentIDGroupIDDuration(midiN
 	return &ExtendedNoteOnEvent{inner: raw.AVExtendedNoteOnEventFromID(_id)}
 }
 
-// @property midiNote The MIDI note number represented as a floating point.  If the instrument within the AVMusicTrack's destinationAudioUnit supports fractional values, this may be used to generate arbitrary macro- and micro-tunings.  Range: Destination-dependent, usually 0.0 - 127.0.
+// The MIDI note number.
 //
 // WithMidiNote sets the midiNote property and returns the receiver for chaining.
 func (x *ExtendedNoteOnEvent) WithMidiNote(midiNote float32) *ExtendedNoteOnEvent {
@@ -53,7 +57,7 @@ func (x *ExtendedNoteOnEvent) WithMidiNote(midiNote float32) *ExtendedNoteOnEven
 	return x
 }
 
-// @property velocity The MIDI velocity represented as a floating point.  If the instrument within the AVMusicTrack's destinationAudioUnit supports fractional values, this may be used to generate very precise changes in gain, etc.  Range: Destination-dependent, usually 0.0 - 127.0.
+// The MDI velocity.
 //
 // WithVelocity sets the velocity property and returns the receiver for chaining.
 func (x *ExtendedNoteOnEvent) WithVelocity(velocity float32) *ExtendedNoteOnEvent {
@@ -61,7 +65,7 @@ func (x *ExtendedNoteOnEvent) WithVelocity(velocity float32) *ExtendedNoteOnEven
 	return x
 }
 
-// @property instrumentID This should be set to AVExtendedNoteOnEventDefaultInstrument.
+// The instrument identifier.
 //
 // WithInstrumentID sets the instrumentID property and returns the receiver for chaining.
 func (x *ExtendedNoteOnEvent) WithInstrumentID(instrumentID uint) *ExtendedNoteOnEvent {
@@ -69,7 +73,7 @@ func (x *ExtendedNoteOnEvent) WithInstrumentID(instrumentID uint) *ExtendedNoteO
 	return x
 }
 
-// @property groupID This represents the audio unit channel (i.e., Group Scope) which should handle this event. Range: normally between 0 and 15, but may be higher if the AVMusicTrack's destinationAudioUnit supports more channels.
+// The audio unit channel that handles the event.
 //
 // WithGroupID sets the groupID property and returns the receiver for chaining.
 func (x *ExtendedNoteOnEvent) WithGroupID(groupID uint) *ExtendedNoteOnEvent {
@@ -77,7 +81,7 @@ func (x *ExtendedNoteOnEvent) WithGroupID(groupID uint) *ExtendedNoteOnEvent {
 	return x
 }
 
-// @property duration The duration of this event in AVMusicTimeStamp beats.  Range:  Any nonnegative number.
+// The duration of the event, in beats.
 //
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *ExtendedNoteOnEvent) WithDuration(duration float64) *ExtendedNoteOnEvent {

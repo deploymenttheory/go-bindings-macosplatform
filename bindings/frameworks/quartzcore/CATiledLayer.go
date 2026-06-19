@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that provides a way to asynchronously provide tiles of the layer’s content, potentially cached at multiple levels of detail.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/catiledlayer
 type CATiledLayer struct {
 	CALayer
@@ -36,6 +38,7 @@ func CATiledLayerFromID(id objc.ID) *CATiledLayer {
 	return o
 }
 
+// The time, in seconds, that newly added images take to “fade-in” to the rendered representation of the tiled layer.
 func CATiledLayerFadeDuration() float64 {
 	_ret := objc.Send[float64](objc.ID(_clsCATiledLayer), _cATiledLayerSelFadeDuration)
 	return _ret

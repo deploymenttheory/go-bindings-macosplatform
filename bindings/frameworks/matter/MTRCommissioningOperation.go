@@ -33,7 +33,7 @@ func MTRCommissioningOperationFromID(id objc.ID) *MTRCommissioningOperation {
 	return o
 }
 
-// Prepare to commission a device with the given parameters and the given setup payload (QR code, manual pairing code, etc).  Returns nil if the payload is not valid. The deviceAttestationDelegate property of MTRCommissioningParameters will be ignored. Device attestation notifications will be delivered to the MTRCommissioningDelegate instead.  The failSafeTimeout property of MTRCommissioningParameters will be respected. The provided delegate will be notified about various things as commissioning proceeds.  The calls into the delegate will happen on the provided queue. Modifying the parameters after this call will have no effect on the behavior of the MTRCommissioningOperation.
+// Prepare to commission a device with the given parameters and the given setup payload (QR code, manual pairing code, etc). Returns nil if the payload is not valid.
 func (o *MTRCommissioningOperation) InitWithParametersSetupPayloadDelegateQueue(parameters *MTRCommissioningParameters, payload *foundation.NSString, delegate MTRCommissioningDelegate, queue *foundation.NSObject) *MTRCommissioningOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioningOperationSelInitWithParametersSetupPayloadDelegateQueue, parameters.Ptr(), payload.Ptr(), delegate, queue.Ptr())
 	if _ret != 0 {
@@ -42,12 +42,12 @@ func (o *MTRCommissioningOperation) InitWithParametersSetupPayloadDelegateQueue(
 	return MTRCommissioningOperationFromID(_ret)
 }
 
-// Start commissioning with the given controller (which identifies the fabric the commissionee should be commissioned into).  The delegate will be notified if there are any failures.
+// Start commissioning with the given controller (which identifies the fabric the commissionee should be commissioned into). The delegate will be notified if there are any failures.
 func (o *MTRCommissioningOperation) StartWithController(controller *MTRDeviceController) {
 	o.Ptr().Send(_mTRCommissioningOperationSelStartWithController, controller.Ptr())
 }
 
-// Stop commissioning.  This will typically result in commissioning:failedWithError: callbacks to delegates. Returns YES if this commissioning was still in-progress and has now been stopped; returns NO if this commissioning wasn't in-progress. Note that this can return NO while there are still pending async calls to delegate callbacks for the end of the commissioning.
+// Stop commissioning. This will typically result in commissioning:failedWithError: callbacks to delegates.
 func (o *MTRCommissioningOperation) Stop() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTRCommissioningOperationSelStop)
 	return _ret

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A kernel for computing the solution of a linear system of equations using a Cholesky factorization.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixsolvecholesky
 type MPSMatrixSolveCholesky struct {
 	mpsmatrix.MPSMatrixBinaryKernel

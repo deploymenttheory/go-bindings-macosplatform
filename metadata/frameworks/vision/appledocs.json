@@ -1,0 +1,2479 @@
+{
+  "schema_version": 1,
+  "framework": "Vision",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "VNAnimalBodyPoseObservation": {
+      "doc": "An observation that provides the animal body points the analysis recognizes.",
+      "url": "https://developer.apple.com/documentation/vision/vnanimalbodyposeobservation"
+    },
+    "VNBarcodeObservation": {
+      "doc": "An object that represents barcode information that an image analysis request detects.",
+      "url": "https://developer.apple.com/documentation/vision/vnbarcodeobservation"
+    },
+    "VNCalculateImageAestheticsScoresRequest": {
+      "doc": "An object that analyzes an image for aesthetically pleasing attributes.",
+      "url": "https://developer.apple.com/documentation/vision/vncalculateimageaestheticsscoresrequest"
+    },
+    "VNCircle": {
+      "doc": "An immutable 2D circle represented by its center point and radius.",
+      "url": "https://developer.apple.com/documentation/vision/vncircle"
+    },
+    "VNClassificationObservation": {
+      "doc": "An object that represents classification information that an image-analysis request produces.",
+      "url": "https://developer.apple.com/documentation/vision/vnclassificationobservation"
+    },
+    "VNClassifyImageRequest": {
+      "doc": "A request to classify an image.",
+      "url": "https://developer.apple.com/documentation/vision/vnclassifyimagerequest"
+    },
+    "VNContour": {
+      "doc": "A class that represents a detected contour in an image.",
+      "url": "https://developer.apple.com/documentation/vision/vncontour"
+    },
+    "VNContoursObservation": {
+      "doc": "An object that represents the detected contours in an image.",
+      "url": "https://developer.apple.com/documentation/vision/vncontoursobservation"
+    },
+    "VNCoreMLFeatureValueObservation": {
+      "doc": "An object that represents a collection of key-value information that a Core ML image-analysis request produces.",
+      "url": "https://developer.apple.com/documentation/vision/vncoremlfeaturevalueobservation"
+    },
+    "VNCoreMLModel": {
+      "doc": "A container for the model to use with Vision requests.",
+      "url": "https://developer.apple.com/documentation/vision/vncoremlmodel"
+    },
+    "VNCoreMLRequest": {
+      "doc": "An image-analysis request that uses a Core ML model to process images.",
+      "url": "https://developer.apple.com/documentation/vision/vncoremlrequest"
+    },
+    "VNDetectAnimalBodyPoseRequest": {
+      "doc": "A request that detects an animal body pose.",
+      "url": "https://developer.apple.com/documentation/vision/vndetectanimalbodyposerequest"
+    },
+    "VNDetectBarcodesRequest": {
+      "doc": "A request that detects barcodes in an image.",
+      "url": "https://developer.apple.com/documentation/vision/vndetectbarcodesrequest"
+    },
+    "VNDetectContoursRequest": {
+      "doc": "A request that detects the contours of the edges of an image.",
+      "url": "https://developer.apple.com/documentation/vision/vndetectcontoursrequest"
+    },
+    "VNDetectDocumentSegmentationRequest": {
+      "doc": "An object that detects rectangular regions that contain text in the input image.",
+      "url": "https://developer.apple.com/documentation/vision/vndetectdocumentsegmentationrequest"
+    },
+    "VNDetectFaceCaptureQualityRequest": {
+      "doc": "A request that produces a floating-point number that represents the capture quality of a face in a photo.",
+      "url": "https://developer.apple.com/documentation/vision/vndetectfacecapturequalityrequest"
+    },
+    "VNDetectFaceLandmarksRequest": {
+      "doc": "An image-analysis request that finds facial features like eyes and mouth in an image.",
+      "url": "https://developer.apple.com/documentation/vision/vndetectfacelandmarksrequest"
+    },
+    "VNDetectFaceRectanglesRequest": {
+      "doc": "A request that finds faces within an image.",
+      "url": "https://developer.apple.com/documentation/vision/vndetectfacerectanglesrequest"
+    },
+    "VNDetectHorizonRequest": {
+      "doc": "An image-analysis request that determines the horizon angle in an image.",
+      "url": "https://developer.apple.com/documentation/vision/vndetecthorizonrequest"
+    },
+    "VNDetectHumanBodyPose3DRequest": {
+      "doc": "A request that detects points on human bodies in 3D space, relative to the camera.",
+      "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodypose3drequest"
+    },
+    "VNDetectHumanBodyPoseRequest": {
+      "doc": "A request that detects a human body pose.",
+      "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodyposerequest"
+    },
+    "VNDetectHumanHandPoseRequest": {
+      "doc": "A request that detects a human hand pose.",
+      "url": "https://developer.apple.com/documentation/vision/vndetecthumanhandposerequest"
+    },
+    "VNDetectHumanRectanglesRequest": {
+      "doc": "A request that finds rectangular regions that contain people in an image.",
+      "url": "https://developer.apple.com/documentation/vision/vndetecthumanrectanglesrequest"
+    },
+    "VNDetectRectanglesRequest": {
+      "doc": "An image-analysis request that finds projected rectangular regions in an image.",
+      "url": "https://developer.apple.com/documentation/vision/vndetectrectanglesrequest"
+    },
+    "VNDetectTextRectanglesRequest": {
+      "doc": "An image-analysis request that finds regions of visible text in an image.",
+      "url": "https://developer.apple.com/documentation/vision/vndetecttextrectanglesrequest"
+    },
+    "VNDetectTrajectoriesRequest": {
+      "doc": "A request that detects the trajectories of shapes moving along a parabolic path.",
+      "url": "https://developer.apple.com/documentation/vision/vndetecttrajectoriesrequest"
+    },
+    "VNDetectedObjectObservation": {
+      "doc": "An observation that provides the position and extent of an image feature that an image- analysis request detects.",
+      "url": "https://developer.apple.com/documentation/vision/vndetectedobjectobservation"
+    },
+    "VNDetectedPoint": {
+      "doc": "An object that represents a normalized point in an image, along with a confidence value.",
+      "url": "https://developer.apple.com/documentation/vision/vndetectedpoint"
+    },
+    "VNFaceLandmarkRegion": {
+      "doc": "The abstract superclass for information about a specific face landmark.",
+      "url": "https://developer.apple.com/documentation/vision/vnfacelandmarkregion"
+    },
+    "VNFaceLandmarkRegion2D": {
+      "doc": "2D geometry information for a specific facial feature.",
+      "url": "https://developer.apple.com/documentation/vision/vnfacelandmarkregion2d"
+    },
+    "VNFaceLandmarks": {
+      "doc": "The abstract superclass for containers of face landmark information.",
+      "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks"
+    },
+    "VNFaceLandmarks2D": {
+      "doc": "A collection of facial features that a request detects.",
+      "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks2d"
+    },
+    "VNFaceObservation": {
+      "doc": "Face or facial-feature information that an image analysis request detects.",
+      "url": "https://developer.apple.com/documentation/vision/vnfaceobservation"
+    },
+    "VNFeaturePrintObservation": {
+      "doc": "An observation that provides the recognized feature print.",
+      "url": "https://developer.apple.com/documentation/vision/vnfeatureprintobservation"
+    },
+    "VNGenerateAttentionBasedSaliencyImageRequest": {
+      "doc": "An object that produces a heat map that identifies the parts of an image most likely to draw attention.",
+      "url": "https://developer.apple.com/documentation/vision/vngenerateattentionbasedsaliencyimagerequest"
+    },
+    "VNGenerateForegroundInstanceMaskRequest": {
+      "doc": "A request that generates an instance mask of noticable objects to separate from the background.",
+      "url": "https://developer.apple.com/documentation/vision/vngenerateforegroundinstancemaskrequest"
+    },
+    "VNGenerateImageFeaturePrintRequest": {
+      "doc": "An image-based request to generate feature prints from an image.",
+      "url": "https://developer.apple.com/documentation/vision/vngenerateimagefeatureprintrequest"
+    },
+    "VNGenerateObjectnessBasedSaliencyImageRequest": {
+      "doc": "A request that generates a heat map that identifies the parts of an image most likely to represent objects.",
+      "url": "https://developer.apple.com/documentation/vision/vngenerateobjectnessbasedsaliencyimagerequest"
+    },
+    "VNGenerateOpticalFlowRequest": {
+      "doc": "An object that generates directional change vectors for each pixel in the targeted image.",
+      "url": "https://developer.apple.com/documentation/vision/vngenerateopticalflowrequest"
+    },
+    "VNGeneratePersonInstanceMaskRequest": {
+      "doc": "An object that produces a mask of individual people it finds in the input image.",
+      "url": "https://developer.apple.com/documentation/vision/vngeneratepersoninstancemaskrequest"
+    },
+    "VNGeneratePersonSegmentationRequest": {
+      "doc": "An object that produces a matte image for a person it finds in the input image.",
+      "url": "https://developer.apple.com/documentation/vision/vngeneratepersonsegmentationrequest"
+    },
+    "VNGeometryUtils": {
+      "doc": "Utility methods to determine the geometries of various Vision types.",
+      "url": "https://developer.apple.com/documentation/vision/vngeometryutils"
+    },
+    "VNHomographicImageRegistrationRequest": {
+      "doc": "An image-analysis request that determines the perspective warp matrix necessary to align the content of two images.",
+      "url": "https://developer.apple.com/documentation/vision/vnhomographicimageregistrationrequest"
+    },
+    "VNHorizonObservation": {
+      "doc": "The horizon angle information that an image-analysis request detects.",
+      "url": "https://developer.apple.com/documentation/vision/vnhorizonobservation"
+    },
+    "VNHumanBodyPose3DObservation": {
+      "doc": "An observation that provides the 3D body points the request recognizes.",
+      "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation"
+    },
+    "VNHumanBodyPoseObservation": {
+      "doc": "An observation that provides the body points the analysis recognized.",
+      "url": "https://developer.apple.com/documentation/vision/vnhumanbodyposeobservation"
+    },
+    "VNHumanBodyRecognizedPoint3D": {
+      "doc": "A recognized 3D point that includes a parent joint.",
+      "url": "https://developer.apple.com/documentation/vision/vnhumanbodyrecognizedpoint3d"
+    },
+    "VNHumanHandPoseObservation": {
+      "doc": "An observation that provides the hand points the analysis recognized.",
+      "url": "https://developer.apple.com/documentation/vision/vnhumanhandposeobservation"
+    },
+    "VNHumanObservation": {
+      "doc": "An object that represents a person that the request detects.",
+      "url": "https://developer.apple.com/documentation/vision/vnhumanobservation"
+    },
+    "VNImageAestheticsScoresObservation": {
+      "doc": "An object that represents the overall score of aesthetic attributes for an image.",
+      "url": "https://developer.apple.com/documentation/vision/vnimageaestheticsscoresobservation"
+    },
+    "VNImageAlignmentObservation": {
+      "doc": "The abstract superclass for image-analysis results that describe the relative alignment of two images.",
+      "url": "https://developer.apple.com/documentation/vision/vnimagealignmentobservation"
+    },
+    "VNImageBasedRequest": {
+      "doc": "The abstract superclass for image-analysis requests that focus on a specific part of an image.",
+      "url": "https://developer.apple.com/documentation/vision/vnimagebasedrequest"
+    },
+    "VNImageHomographicAlignmentObservation": {
+      "doc": "An object that represents a perspective warp transformation.",
+      "url": "https://developer.apple.com/documentation/vision/vnimagehomographicalignmentobservation"
+    },
+    "VNImageRegistrationRequest": {
+      "doc": "The abstract superclass for image-analysis requests that align images according to their content.",
+      "url": "https://developer.apple.com/documentation/vision/vnimageregistrationrequest"
+    },
+    "VNImageRequestHandler": {
+      "doc": "An object that processes one or more image-analysis request pertaining to a single image.",
+      "url": "https://developer.apple.com/documentation/vision/vnimagerequesthandler"
+    },
+    "VNImageTranslationAlignmentObservation": {
+      "doc": "Affine transform information that an image-alignment request produces.",
+      "url": "https://developer.apple.com/documentation/vision/vnimagetranslationalignmentobservation"
+    },
+    "VNInstanceMaskObservation": {
+      "doc": "An observation that contains an instance mask that labels instances in the mask.",
+      "url": "https://developer.apple.com/documentation/vision/vninstancemaskobservation"
+    },
+    "VNObservation": {
+      "doc": "The abstract superclass for analysis results.",
+      "url": "https://developer.apple.com/documentation/vision/vnobservation"
+    },
+    "VNPixelBufferObservation": {
+      "doc": "An object that represents an image that an image-analysis request produces.",
+      "url": "https://developer.apple.com/documentation/vision/vnpixelbufferobservation"
+    },
+    "VNPoint": {
+      "doc": "An immutable object that represents a single 2D point in an image.",
+      "url": "https://developer.apple.com/documentation/vision/vnpoint"
+    },
+    "VNPoint3D": {
+      "doc": "An object that represents a 3D point in an image.",
+      "url": "https://developer.apple.com/documentation/vision/vnpoint3d"
+    },
+    "VNRecognizeAnimalsRequest": {
+      "doc": "A request that recognizes animals in an image.",
+      "url": "https://developer.apple.com/documentation/vision/vnrecognizeanimalsrequest"
+    },
+    "VNRecognizeTextRequest": {
+      "doc": "An image-analysis request that finds and recognizes text in an image.",
+      "url": "https://developer.apple.com/documentation/vision/vnrecognizetextrequest"
+    },
+    "VNRecognizedObjectObservation": {
+      "doc": "A detected object observation with an array of classification labels that classify the recognized object.",
+      "url": "https://developer.apple.com/documentation/vision/vnrecognizedobjectobservation"
+    },
+    "VNRecognizedPoint": {
+      "doc": "An object that represents a normalized point in an image, along with an identifier label and a confidence value.",
+      "url": "https://developer.apple.com/documentation/vision/vnrecognizedpoint"
+    },
+    "VNRecognizedPoint3D": {
+      "doc": "A 3D point that includes an identifier to the point.",
+      "url": "https://developer.apple.com/documentation/vision/vnrecognizedpoint3d"
+    },
+    "VNRecognizedPoints3DObservation": {
+      "doc": "An observation that provides the 3D points for a request.",
+      "url": "https://developer.apple.com/documentation/vision/vnrecognizedpoints3dobservation"
+    },
+    "VNRecognizedPointsObservation": {
+      "doc": "An observation that provides the points the analysis recognized.",
+      "url": "https://developer.apple.com/documentation/vision/vnrecognizedpointsobservation"
+    },
+    "VNRecognizedText": {
+      "doc": "Text recognized in an image through a text recognition request.",
+      "url": "https://developer.apple.com/documentation/vision/vnrecognizedtext"
+    },
+    "VNRecognizedTextObservation": {
+      "doc": "A request that detects and recognizes regions of text in an image.",
+      "url": "https://developer.apple.com/documentation/vision/vnrecognizedtextobservation"
+    },
+    "VNRectangleObservation": {
+      "doc": "An object that represents the four vertices of a detected rectangle.",
+      "url": "https://developer.apple.com/documentation/vision/vnrectangleobservation"
+    },
+    "VNRequest": {
+      "doc": "The abstract superclass for analysis requests.",
+      "url": "https://developer.apple.com/documentation/vision/vnrequest"
+    },
+    "VNSaliencyImageObservation": {
+      "doc": "An observation that contains a grayscale heat map of important areas across an image.",
+      "url": "https://developer.apple.com/documentation/vision/vnsaliencyimageobservation"
+    },
+    "VNSequenceRequestHandler": {
+      "doc": "An object that processes image-analysis requests for each frame in a sequence.",
+      "url": "https://developer.apple.com/documentation/vision/vnsequencerequesthandler"
+    },
+    "VNStatefulRequest": {
+      "doc": "An abstract request type that builds evidence of a condition over time.",
+      "url": "https://developer.apple.com/documentation/vision/vnstatefulrequest"
+    },
+    "VNTargetedImageRequest": {
+      "doc": "The abstract superclass for image analysis requests that operate on both the processed image and a secondary image.",
+      "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest"
+    },
+    "VNTextObservation": {
+      "doc": "Information about regions of text that an image-analysis request detects.",
+      "url": "https://developer.apple.com/documentation/vision/vntextobservation"
+    },
+    "VNTrackHomographicImageRegistrationRequest": {
+      "doc": "An image-analysis request, as a stateful request you track over time, that determines the perspective warp matrix necessary to align the content of two images.",
+      "url": "https://developer.apple.com/documentation/vision/vntrackhomographicimageregistrationrequest"
+    },
+    "VNTrackObjectRequest": {
+      "doc": "An image-analysis request that tracks the movement of a previously identified object across multiple images or video frames.",
+      "url": "https://developer.apple.com/documentation/vision/vntrackobjectrequest"
+    },
+    "VNTrackOpticalFlowRequest": {
+      "doc": "An object that determines the direction change of vectors for each pixel from a previous to current image.",
+      "url": "https://developer.apple.com/documentation/vision/vntrackopticalflowrequest"
+    },
+    "VNTrackRectangleRequest": {
+      "doc": "An image-analysis request that tracks movement of a previously identified rectangular object across multiple images or video frames.",
+      "url": "https://developer.apple.com/documentation/vision/vntrackrectanglerequest"
+    },
+    "VNTrackTranslationalImageRegistrationRequest": {
+      "doc": "An image-analysis request, as a stateful request you track over time, that determines the affine transform necessary to align the content of two images.",
+      "url": "https://developer.apple.com/documentation/vision/vntracktranslationalimageregistrationrequest"
+    },
+    "VNTrackingRequest": {
+      "doc": "The abstract superclass for image-analysis requests that track unique features across multiple images or video frames.",
+      "url": "https://developer.apple.com/documentation/vision/vntrackingrequest"
+    },
+    "VNTrajectoryObservation": {
+      "doc": "An observation that describes a detected trajectory.",
+      "url": "https://developer.apple.com/documentation/vision/vntrajectoryobservation"
+    },
+    "VNTranslationalImageRegistrationRequest": {
+      "doc": "An image-analysis request that determines the affine transform necessary to align the content of two images.",
+      "url": "https://developer.apple.com/documentation/vision/vntranslationalimageregistrationrequest"
+    },
+    "VNVector": {
+      "doc": "An immutable 2D vector represented by its x-axis and y-axis projections.",
+      "url": "https://developer.apple.com/documentation/vision/vnvector"
+    },
+    "VNVideoProcessor": {
+      "doc": "An object that performs offline analysis of video content.",
+      "url": "https://developer.apple.com/documentation/vision/vnvideoprocessor"
+    },
+    "VNVideoProcessorCadence": {
+      "doc": "An object that defines the cadence at which to process video.",
+      "url": "https://developer.apple.com/documentation/vision/vnvideoprocessorcadence"
+    },
+    "VNVideoProcessorFrameRateCadence": {
+      "doc": "An object that defines a frame-based cadence for processing a video stream.",
+      "url": "https://developer.apple.com/documentation/vision/vnvideoprocessorframeratecadence"
+    },
+    "VNVideoProcessorRequestProcessingOptions": {
+      "doc": "An object that defines a video processor’s configuration options.",
+      "url": "https://developer.apple.com/documentation/vision/vnvideoprocessorrequestprocessingoptions"
+    },
+    "VNVideoProcessorTimeIntervalCadence": {
+      "doc": "An object that defines a time-based cadence for processing a video stream.",
+      "url": "https://developer.apple.com/documentation/vision/vnvideoprocessortimeintervalcadence"
+    }
+  },
+  "protocols": {
+    "VNFaceObservationAccepting": {
+      "doc": "An image analysis request that operates on face observations.",
+      "url": "https://developer.apple.com/documentation/vision/vnfaceobservationaccepting"
+    },
+    "VNRequestProgressProviding": {
+      "doc": "A protocol for providing progress information on long-running tasks in Vision.",
+      "url": "https://developer.apple.com/documentation/vision/vnrequestprogressproviding"
+    },
+    "VNRequestRevisionProviding": {
+      "doc": "A protocol for specifying the revision number of Vision algorithms.",
+      "url": "https://developer.apple.com/documentation/vision/vnrequestrevisionproviding"
+    }
+  },
+  "enums": {
+    "VNBarcodeCompositeType": {
+      "doc": "Composite types for barcode requests.",
+      "url": "https://developer.apple.com/documentation/vision/vnbarcodecompositetype",
+      "members": {
+        "VNBarcodeCompositeTypeGS1TypeA": {
+          "doc": "A type that represents trade items in bulk.",
+          "url": "https://developer.apple.com/documentation/vision/vnbarcodecompositetype/gs1typea"
+        },
+        "VNBarcodeCompositeTypeGS1TypeB": {
+          "doc": "A type that represents trade items by piece.",
+          "url": "https://developer.apple.com/documentation/vision/vnbarcodecompositetype/gs1typeb"
+        },
+        "VNBarcodeCompositeTypeGS1TypeC": {
+          "doc": "A type that represents trade items in varying quantity.",
+          "url": "https://developer.apple.com/documentation/vision/vnbarcodecompositetype/gs1typec"
+        },
+        "VNBarcodeCompositeTypeLinked": {
+          "doc": "A type that represents a linked composite type.",
+          "url": "https://developer.apple.com/documentation/vision/vnbarcodecompositetype/linked"
+        },
+        "VNBarcodeCompositeTypeNone": {
+          "doc": "A type that represents no composite type.",
+          "url": "https://developer.apple.com/documentation/vision/vnbarcodecompositetype/none"
+        }
+      }
+    },
+    "VNChirality": {
+      "doc": "Constants that the define the chirality, or handedness, of a pose.",
+      "url": "https://developer.apple.com/documentation/vision/vnchirality",
+      "members": {
+        "VNChiralityLeft": {
+          "doc": "Indicates a left-handed pose.",
+          "url": "https://developer.apple.com/documentation/vision/vnchirality/left"
+        },
+        "VNChiralityRight": {
+          "doc": "Indicates a right-handed pose.",
+          "url": "https://developer.apple.com/documentation/vision/vnchirality/right"
+        },
+        "VNChiralityUnknown": {
+          "doc": "Indicates that the pose chirality is unknown.",
+          "url": "https://developer.apple.com/documentation/vision/vnchirality/unknown"
+        }
+      }
+    },
+    "VNElementType": {
+      "doc": "An enumeration of the type of element in feature print data.",
+      "url": "https://developer.apple.com/documentation/vision/vnelementtype",
+      "members": {
+        "VNElementTypeDouble": {
+          "doc": "The elements are double-precision floating-point numbers.",
+          "url": "https://developer.apple.com/documentation/vision/vnelementtype/double"
+        },
+        "VNElementTypeFloat": {
+          "doc": "The elements are floating-point numbers.",
+          "url": "https://developer.apple.com/documentation/vision/vnelementtype/float"
+        },
+        "VNElementTypeUnknown": {
+          "doc": "The element type isn’t known.",
+          "url": "https://developer.apple.com/documentation/vision/vnelementtype/unknown"
+        }
+      }
+    },
+    "VNErrorCode": {
+      "doc": "Constants that identify errors from the framework.",
+      "url": "https://developer.apple.com/documentation/vision/vnerrorcode",
+      "members": {
+        "VNErrorDataUnavailable": {
+          "doc": "The data isn’t available.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/dataunavailable"
+        },
+        "VNErrorIOError": {
+          "doc": "An I/O error for an image, image sequence, or Core ML model.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/ioerror"
+        },
+        "VNErrorInternalError": {
+          "doc": "An internal error occurred within the framework.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/internalerror"
+        },
+        "VNErrorInvalidArgument": {
+          "doc": "An app passed an invalid parameter to a request.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/invalidargument"
+        },
+        "VNErrorInvalidFormat": {
+          "doc": "The format of the image is invalid.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/invalidformat"
+        },
+        "VNErrorInvalidImage": {
+          "doc": "The image is invalid.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/invalidimage"
+        },
+        "VNErrorInvalidModel": {
+          "doc": "The Core ML model is incompatible with the request.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/invalidmodel"
+        },
+        "VNErrorInvalidOperation": {
+          "doc": "An app requested an unsupported operation.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/invalidoperation"
+        },
+        "VNErrorInvalidOption": {
+          "doc": "An app specified an invalid option on a request.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/invalidoption"
+        },
+        "VNErrorMissingOption": {
+          "doc": "A request is missing a required option.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/missingoption"
+        },
+        "VNErrorNotImplemented": {
+          "doc": "The method isn’t implemented in the underlying model.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/notimplemented"
+        },
+        "VNErrorOK": {
+          "doc": "The operation finished without error.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/ok"
+        },
+        "VNErrorOperationFailed": {
+          "doc": "The requested operation failed.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/operationfailed"
+        },
+        "VNErrorOutOfBoundsError": {
+          "doc": "An app attempted to access data that’s out-of-bounds.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/outofboundserror"
+        },
+        "VNErrorOutOfMemory": {
+          "doc": "The system doesn’t have enough memory to complete the request.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/outofmemory"
+        },
+        "VNErrorRequestCancelled": {
+          "doc": "An app canceled the request.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/requestcancelled"
+        },
+        "VNErrorTimeStampNotFound": {
+          "doc": "The system can’t find a timestamp.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/timestampnotfound"
+        },
+        "VNErrorTimeout": {
+          "doc": "The requested operation timed out.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/timeout"
+        },
+        "VNErrorTuriCoreErrorCode": {
+          "doc": "An error occurred during Create ML training due to an invalid transformation or image.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/turicoreerrorcode"
+        },
+        "VNErrorUnknownError": {
+          "doc": "An unidentified error occurred.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/unknownerror"
+        },
+        "VNErrorUnsupportedComputeDevice": {
+          "doc": "An app requested an unsupported compute device.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/unsupportedcomputedevice"
+        },
+        "VNErrorUnsupportedComputeStage": {
+          "doc": "An app requested an unsupported compute stage.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/unsupportedcomputestage"
+        },
+        "VNErrorUnsupportedRequest": {
+          "doc": "An app attempted an unsupported request.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/unsupportedrequest"
+        },
+        "VNErrorUnsupportedRevision": {
+          "doc": "An app specified an unsupported request revision.",
+          "url": "https://developer.apple.com/documentation/vision/vnerrorcode/unsupportedrevision"
+        }
+      }
+    },
+    "VNGenerateOpticalFlowRequestComputationAccuracy": {
+      "doc": "The supported optical flow accuracy levels.",
+      "url": "https://developer.apple.com/documentation/vision/vngenerateopticalflowrequestcomputationaccuracy"
+    },
+    "VNGeneratePersonSegmentationRequestQualityLevel": {
+      "doc": "Constants that define the levels of quality for a person segmentation request.",
+      "url": "https://developer.apple.com/documentation/vision/vngeneratepersonsegmentationrequestqualitylevel"
+    },
+    "VNHumanBodyPose3DObservationHeightEstimation": {
+      "doc": "Constants that identify body height estimation techniques.",
+      "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservationheightestimation"
+    },
+    "VNImageCropAndScaleOption": {
+      "doc": "Options that define how Vision crops and scales an input-image.",
+      "url": "https://developer.apple.com/documentation/vision/vnimagecropandscaleoption",
+      "members": {
+        "VNImageCropAndScaleOptionCenterCrop": {
+          "doc": "An option that scales the image to fit its shorter side within the input dimensions, while preserving its aspect ratio, and center-crops the image.",
+          "url": "https://developer.apple.com/documentation/vision/vnimagecropandscaleoption/centercrop"
+        },
+        "VNImageCropAndScaleOptionScaleFill": {
+          "doc": "An option that scales the image to fill the input dimensions, resizing it if necessary.",
+          "url": "https://developer.apple.com/documentation/vision/vnimagecropandscaleoption/scalefill"
+        },
+        "VNImageCropAndScaleOptionScaleFillRotate90CCW": {
+          "doc": "An option that rotates the image 90 degrees counterclockwise and then scales it to fill the input dimensions.",
+          "url": "https://developer.apple.com/documentation/vision/vnimagecropandscaleoption/scalefillrotate90ccw"
+        },
+        "VNImageCropAndScaleOptionScaleFit": {
+          "doc": "An option that scales the image to fit its longer side within the input dimensions, while preserving its aspect ratio, and center-crops the image.",
+          "url": "https://developer.apple.com/documentation/vision/vnimagecropandscaleoption/scalefit"
+        },
+        "VNImageCropAndScaleOptionScaleFitRotate90CCW": {
+          "doc": "An option that rotates the image 90 degrees counterclockwise and then scales it, while preserving its aspect ratio, to fit on the long side.",
+          "url": "https://developer.apple.com/documentation/vision/vnimagecropandscaleoption/scalefitrotate90ccw"
+        }
+      }
+    },
+    "VNPointsClassification": {
+      "doc": "The set of classifications that describe how to interpret the points the region provides.",
+      "url": "https://developer.apple.com/documentation/vision/vnpointsclassification"
+    },
+    "VNRequestFaceLandmarksConstellation": {
+      "doc": "An enumeration of face landmarks in a constellation object.",
+      "url": "https://developer.apple.com/documentation/vision/vnrequestfacelandmarksconstellation",
+      "members": {
+        "VNRequestFaceLandmarksConstellation65Points": {
+          "doc": "A constellation with 65 points.",
+          "url": "https://developer.apple.com/documentation/vision/vnrequestfacelandmarksconstellation/constellation65points"
+        },
+        "VNRequestFaceLandmarksConstellation76Points": {
+          "doc": "A constellation with 76 points.",
+          "url": "https://developer.apple.com/documentation/vision/vnrequestfacelandmarksconstellation/constellation76points"
+        },
+        "VNRequestFaceLandmarksConstellationNotDefined": {
+          "doc": "An undefined constellation.",
+          "url": "https://developer.apple.com/documentation/vision/vnrequestfacelandmarksconstellation/constellationnotdefined"
+        }
+      }
+    },
+    "VNRequestTextRecognitionLevel": {
+      "doc": "Constants that identify the performance and accuracy of the text recognition.",
+      "url": "https://developer.apple.com/documentation/vision/vnrequesttextrecognitionlevel",
+      "members": {
+        "VNRequestTextRecognitionLevelAccurate": {
+          "doc": "Accurate text recognition takes more time to produce a more comprehensive result.",
+          "url": "https://developer.apple.com/documentation/vision/vnrequesttextrecognitionlevel/accurate"
+        },
+        "VNRequestTextRecognitionLevelFast": {
+          "doc": "Fast text recognition returns results more quickly at the expense of accuracy.",
+          "url": "https://developer.apple.com/documentation/vision/vnrequesttextrecognitionlevel/fast"
+        }
+      }
+    },
+    "VNRequestTrackingLevel": {
+      "doc": "An enumeration of tracking priorities.",
+      "url": "https://developer.apple.com/documentation/vision/vnrequesttrackinglevel",
+      "members": {
+        "VNRequestTrackingLevelAccurate": {
+          "doc": "Tracking level that favors location accuracy over speed.",
+          "url": "https://developer.apple.com/documentation/vision/vnrequesttrackinglevel/accurate"
+        },
+        "VNRequestTrackingLevelFast": {
+          "doc": "Tracking level that favors speed over location accuracy.",
+          "url": "https://developer.apple.com/documentation/vision/vnrequesttrackinglevel/fast"
+        }
+      }
+    },
+    "VNTrackOpticalFlowRequestComputationAccuracy": {
+      "doc": "Computational accuracy options.",
+      "url": "https://developer.apple.com/documentation/vision/vntrackopticalflowrequestcomputationaccuracy"
+    }
+  },
+  "methods": {
+    "VNAnimalBodyPoseObservation": {
+      "-recognizedPointForJointName:error:": {
+        "doc": "Returns the point for a joint name the observation recognizes.",
+        "url": "https://developer.apple.com/documentation/vision/vnanimalbodyposeobservation/recognizedpoint(_:)"
+      },
+      "-recognizedPointsForJointsGroupName:error:": {
+        "doc": "Returns the points for a joint group name the observation recognizes.",
+        "url": "https://developer.apple.com/documentation/vision/vnanimalbodyposeobservation/recognizedpoints(_:)"
+      }
+    },
+    "VNCircle": {
+      "-containsPoint:": {
+        "doc": "Determines if this circle, including its boundary, contains the specified point.",
+        "url": "https://developer.apple.com/documentation/vision/vncircle/contains(_:)"
+      },
+      "-containsPoint:inCircumferentialRingOfWidth:": {
+        "doc": "Determines if a ring around this circle’s circumference contains the specified point.",
+        "url": "https://developer.apple.com/documentation/vision/vncircle/contains(_:incircumferentialringofwidth:)"
+      },
+      "-initWithCenter:diameter:": {
+        "doc": "Creates a circle with the specified center and diameter.",
+        "url": "https://developer.apple.com/documentation/vision/vncircle/init(center:diameter:)"
+      },
+      "-initWithCenter:radius:": {
+        "doc": "Creates a circle with the specified center and radius.",
+        "url": "https://developer.apple.com/documentation/vision/vncircle/init(center:radius:)"
+      }
+    },
+    "VNClassificationObservation": {
+      "-hasMinimumPrecision:forRecall:": {
+        "doc": "Determines whether the observation for a specific recall has a minimum precision value.",
+        "url": "https://developer.apple.com/documentation/vision/vnclassificationobservation/hasminimumprecision(_:forrecall:)"
+      },
+      "-hasMinimumRecall:forPrecision:": {
+        "doc": "Determines whether the observation for a specific precision has a minimum recall value.",
+        "url": "https://developer.apple.com/documentation/vision/vnclassificationobservation/hasminimumrecall(_:forprecision:)"
+      }
+    },
+    "VNClassifyImageRequest": {
+      "+knownClassificationsForRevision:error:": {
+        "doc": "Requests the collection of classifications that the Vision framework recognizes.",
+        "url": "https://developer.apple.com/documentation/vision/vnclassifyimagerequest/knownclassifications(forrevision:)"
+      },
+      "-supportedIdentifiersAndReturnError:": {
+        "doc": "Returns the classification identifiers that the request supports in its current configuration.",
+        "url": "https://developer.apple.com/documentation/vision/vnclassifyimagerequest/supportedidentifiers()"
+      }
+    },
+    "VNContour": {
+      "-childContourAtIndex:error:": {
+        "doc": "Retrieves the child contour object at the specified index.",
+        "url": "https://developer.apple.com/documentation/vision/vncontour/childcontour(at:)"
+      },
+      "-polygonApproximationWithEpsilon:error:": {
+        "doc": "Simplifies the contour to a polygon using a Ramer-Douglas-Peucker algorithm.",
+        "url": "https://developer.apple.com/documentation/vision/vncontour/polygonapproximation(epsilon:)"
+      }
+    },
+    "VNContoursObservation": {
+      "-contourAtIndex:error:": {
+        "doc": "Retrieves the contour object at the specified index, irrespective of hierarchy.",
+        "url": "https://developer.apple.com/documentation/vision/vncontoursobservation/contour(at:)-9on0y"
+      },
+      "-contourAtIndexPath:error:": {
+        "doc": "Retrieves the contour object at the specified index path.",
+        "url": "https://developer.apple.com/documentation/vision/vncontoursobservation/contour(at:)-52odo"
+      }
+    },
+    "VNCoreMLModel": {
+      "+modelForMLModel:error:": {
+        "doc": "Creates a model container to use with a Core ML request.",
+        "url": "https://developer.apple.com/documentation/vision/vncoremlmodel/init(for:)"
+      }
+    },
+    "VNCoreMLRequest": {
+      "-initWithModel:": {
+        "doc": "Creates a model container to use with an image analysis request based on the model you provide.",
+        "url": "https://developer.apple.com/documentation/vision/vncoremlrequest/init(model:)"
+      },
+      "-initWithModel:completionHandler:": {
+        "doc": "Creates a model container to use with an image analysis request based on the model you provide, with an optional completion handler.",
+        "url": "https://developer.apple.com/documentation/vision/vncoremlrequest/init(model:completionhandler:)"
+      }
+    },
+    "VNDetectAnimalBodyPoseRequest": {
+      "-supportedJointNamesAndReturnError:": {
+        "doc": "Retrieves the joint names the request supports.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectanimalbodyposerequest/supportedjointnamesandreturnerror:"
+      },
+      "-supportedJointsGroupNamesAndReturnError:": {
+        "doc": "Retrieves the joint group names the request supports.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectanimalbodyposerequest/supportedjointsgroupnamesandreturnerror:"
+      }
+    },
+    "VNDetectBarcodesRequest": {
+      "-supportedSymbologiesAndReturnError:": {
+        "doc": "Returns the barcode symbologies that the request supports.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectbarcodesrequest/supportedsymbologies()"
+      }
+    },
+    "VNDetectFaceLandmarksRequest": {
+      "+revision:supportsConstellation:": {
+        "doc": "Returns a Boolean value that indicates whether a revision supports a constellation.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectfacelandmarksrequest/revision(_:supportsconstellation:)"
+      }
+    },
+    "VNDetectHumanBodyPose3DRequest": {
+      "-init": {
+        "doc": "Creates a new request with no completion handler.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodypose3drequest/init()"
+      },
+      "-initWithCompletionHandler:": {
+        "doc": "Creates a new 3D body pose request with a completion handler.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodypose3drequest/init(completionhandler:)"
+      },
+      "-supportedJointNamesAndReturnError:": {
+        "doc": "Returns the joint names the request supports.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodypose3drequest/supportedjointnamesandreturnerror:"
+      },
+      "-supportedJointsGroupNamesAndReturnError:": {
+        "doc": "Returns the joint group names the request supports.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodypose3drequest/supportedjointsgroupnamesandreturnerror:"
+      }
+    },
+    "VNDetectHumanBodyPoseRequest": {
+      "+supportedJointNamesForRevision:error:": {
+        "doc": "Retrieves the supported joint names for a revision.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodyposerequest/supportedjointnames(forrevision:)"
+      },
+      "+supportedJointsGroupNamesForRevision:error:": {
+        "doc": "Retrieves the supported joint group names for a revision.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodyposerequest/supportedjointsgroupnames(forrevision:)"
+      },
+      "-supportedJointNamesAndReturnError:": {
+        "doc": "Retrieves the supported joint names.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodyposerequest/supportedjointnamesandreturnerror:"
+      },
+      "-supportedJointsGroupNamesAndReturnError:": {
+        "doc": "Retrieves the supported joint group names.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodyposerequest/supportedjointsgroupnamesandreturnerror:"
+      }
+    },
+    "VNDetectHumanHandPoseRequest": {
+      "+supportedJointNamesForRevision:error:": {
+        "doc": "Retrieves the supported joint names for a revision.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanhandposerequest/supportedjointnames(forrevision:)"
+      },
+      "+supportedJointsGroupNamesForRevision:error:": {
+        "doc": "Retrieves the supported joint group names for a revision.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanhandposerequest/supportedjointsgroupnames(forrevision:)"
+      },
+      "-supportedJointNamesAndReturnError:": {
+        "doc": "Retrieves the supported joint names.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanhandposerequest/supportedjointnamesandreturnerror:"
+      },
+      "-supportedJointsGroupNamesAndReturnError:": {
+        "doc": "Retrieves the supported joint group names.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanhandposerequest/supportedjointsgroupnamesandreturnerror:"
+      }
+    },
+    "VNDetectTrajectoriesRequest": {
+      "-initWithFrameAnalysisSpacing:trajectoryLength:completionHandler:": {
+        "doc": "Creates a new request to detect trajectories.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecttrajectoriesrequest/init(frameanalysisspacing:trajectorylength:completionhandler:)"
+      }
+    },
+    "VNDetectedObjectObservation": {
+      "+observationWithBoundingBox:": {
+        "doc": "Creates an observation with a bounding box.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectedobjectobservation/init(boundingbox:)"
+      },
+      "+observationWithRequestRevision:boundingBox:": {
+        "doc": "Creates an observation with a revision number and bounding box.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectedobjectobservation/init(requestrevision:boundingbox:)"
+      }
+    },
+    "VNFaceLandmarkRegion2D": {
+      "-pointsInImageOfSize:": {
+        "doc": "A buffer in memory containing landmark points in the coordinate space of the specified image size.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarkregion2d/pointsinimageofsize:"
+      }
+    },
+    "VNFaceObservation": {
+      "+faceObservationWithRequestRevision:boundingBox:roll:yaw:": {
+        "doc": "Creates an observation that contains the roll and yaw of the face.",
+        "url": "https://developer.apple.com/documentation/vision/vnfaceobservation/init(requestrevision:boundingbox:roll:yaw:)"
+      },
+      "+faceObservationWithRequestRevision:boundingBox:roll:yaw:pitch:": {
+        "doc": "Creates an observation that contains the roll, yaw, and pitch of the face.",
+        "url": "https://developer.apple.com/documentation/vision/vnfaceobservation/init(requestrevision:boundingbox:roll:yaw:pitch:)"
+      }
+    },
+    "VNFeaturePrintObservation": {
+      "-computeDistance:toFeaturePrintObservation:error:": {
+        "doc": "Computes the distance between two feature print observations.",
+        "url": "https://developer.apple.com/documentation/vision/vnfeatureprintobservation/computedistance(_:to:)"
+      }
+    },
+    "VNGeneratePersonSegmentationRequest": {
+      "+new": {
+        "doc": "Returns a new generate person segmentation request.",
+        "url": "https://developer.apple.com/documentation/vision/vngeneratepersonsegmentationrequest/new"
+      },
+      "-init": {
+        "doc": "Creates a generate person segmentation request.",
+        "url": "https://developer.apple.com/documentation/vision/vngeneratepersonsegmentationrequest/init()"
+      },
+      "-initWithCompletionHandler:": {
+        "doc": "Creates a generate person segmentation request with a completion handler.",
+        "url": "https://developer.apple.com/documentation/vision/vngeneratepersonsegmentationrequest/init(completionhandler:)"
+      },
+      "-supportedOutputPixelFormatsAndReturnError:": {
+        "doc": "Returns a list of output pixel formats that the request supports.",
+        "url": "https://developer.apple.com/documentation/vision/vngeneratepersonsegmentationrequest/supportedoutputpixelformats()"
+      }
+    },
+    "VNGeometryUtils": {
+      "+boundingCircleForContour:error:": {
+        "doc": "Calculates a bounding circle for the specified contour object.",
+        "url": "https://developer.apple.com/documentation/vision/vngeometryutils/boundingcircle(for:)-423ll"
+      },
+      "+boundingCircleForPoints:error:": {
+        "doc": "Calculates a bounding circle for the specified array of points.",
+        "url": "https://developer.apple.com/documentation/vision/vngeometryutils/boundingcircle(for:)-9dggv"
+      },
+      "+boundingCircleForSIMDPoints:pointCount:error:": {
+        "doc": "Calculates a bounding circle for the specified points.",
+        "url": "https://developer.apple.com/documentation/vision/vngeometryutils/boundingcircle(forsimdpoints:pointcount:)"
+      },
+      "+calculateArea:forContour:orientedArea:error:": {
+        "doc": "Calculates the area for the specified contour.",
+        "url": "https://developer.apple.com/documentation/vision/vngeometryutils/calculatearea(_:for:orientedarea:)"
+      },
+      "+calculatePerimeter:forContour:error:": {
+        "doc": "Calculates the perimeter of a closed contour.",
+        "url": "https://developer.apple.com/documentation/vision/vngeometryutils/calculateperimeter(_:for:)"
+      }
+    },
+    "VNHorizonObservation": {
+      "-transformForImageWidth:height:": {
+        "doc": "Creates an affine transform for the specified image width and height.",
+        "url": "https://developer.apple.com/documentation/vision/vnhorizonobservation/transform(forimagewidth:height:)"
+      }
+    },
+    "VNHumanBodyPose3DObservation": {
+      "-getCameraRelativePosition:forJointName:error:": {
+        "doc": "Gets a position relative to the camera for the body joint you specify.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation/getcamerarelativeposition:forjointname:error:"
+      },
+      "-parentJointNameForJointName:": {
+        "doc": "Returns the parent joint of the joint name you specify.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation/parentjointname(_:)"
+      },
+      "-pointInImageForJointName:error:": {
+        "doc": "Returns a 2D point for the joint name you specify, relative to the input image.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation/pointinimage(_:)"
+      },
+      "-recognizedPointForJointName:error:": {
+        "doc": "Returns the point for a joint name that the observation recognizes.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation/recognizedpoint(_:)"
+      },
+      "-recognizedPointsForJointsGroupName:error:": {
+        "doc": "Returns a collection of points for the group name you specify.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation/recognizedpoints(_:)"
+      }
+    },
+    "VNHumanBodyPoseObservation": {
+      "-recognizedPointForJointName:error:": {
+        "doc": "Retrieves the recognized point for a joint name.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodyposeobservation/recognizedpoint(_:)"
+      },
+      "-recognizedPointsForJointsGroupName:error:": {
+        "doc": "Retrieves the recognized points associated with the joint group name.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodyposeobservation/recognizedpoints(_:)"
+      }
+    },
+    "VNHumanHandPoseObservation": {
+      "-recognizedPointForJointName:error:": {
+        "doc": "Retrieves the recognized point for a joint name.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanhandposeobservation/recognizedpoint(_:)"
+      },
+      "-recognizedPointsForJointsGroupName:error:": {
+        "doc": "Retrieves the recognized points associated with the joint group name.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanhandposeobservation/recognizedpoints(_:)"
+      }
+    },
+    "VNImageRequestHandler": {
+      "-initWithCGImage:options:": {
+        "doc": "Creates a handler to be used for performing requests on Core Graphics images.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagerequesthandler/init(cgimage:options:)-4qda6"
+      },
+      "-initWithCGImage:orientation:options:": {
+        "doc": "Creates a handler to be used for performing requests on a Core Graphics image with known orientation.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagerequesthandler/init(cgimage:orientation:options:)-63ojm"
+      },
+      "-initWithCIImage:options:": {
+        "doc": "Creates a handler to use for performing requests on Core Image image data.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagerequesthandler/init(ciimage:options:)-4wf33"
+      },
+      "-initWithCIImage:orientation:options:": {
+        "doc": "Creates a handler to be used for performing requests on Core Image image data of a known orientation.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagerequesthandler/init(ciimage:orientation:options:)-3svy6"
+      },
+      "-initWithCMSampleBuffer:depthData:orientation:options:": {
+        "doc": "Creates a request handler that performs requests on an image in a sample buffer that contains depth data.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagerequesthandler/init(cmsamplebuffer:depthdata:orientation:options:)-8bjyh"
+      },
+      "-initWithCMSampleBuffer:options:": {
+        "doc": "Creates a request handler that performs requests on an image contained within a sample buffer.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagerequesthandler/init(cmsamplebuffer:options:)-2yodn"
+      },
+      "-initWithCMSampleBuffer:orientation:options:": {
+        "doc": "Creates a request handler that performs requests on an image of a specified orientation contained within a sample buffer.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagerequesthandler/init(cmsamplebuffer:orientation:options:)-335k4"
+      },
+      "-initWithCVPixelBuffer:options:": {
+        "doc": "Creates a handler for performing requests on a Core Video pixel buffer.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagerequesthandler/init(cvpixelbuffer:options:)-bkd7"
+      },
+      "-initWithCVPixelBuffer:orientation:options:": {
+        "doc": "Creates a handler for performing requests on a Core Video pixel buffer of a known orientation.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagerequesthandler/init(cvpixelbuffer:orientation:options:)-9fxug"
+      },
+      "-initWithData:options:": {
+        "doc": "Creates a handler to use for performing requests on an image in a data object.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagerequesthandler/init(data:options:)"
+      },
+      "-initWithData:orientation:options:": {
+        "doc": "Creates a handler to use for performing requests on an image of known orientation.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagerequesthandler/init(data:orientation:options:)"
+      },
+      "-initWithURL:options:": {
+        "doc": "Creates a handler to be used for performing requests on an image at the specified URL.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagerequesthandler/init(url:options:)-4k623"
+      },
+      "-initWithURL:orientation:options:": {
+        "doc": "Creates a handler to be used for performing requests on an image with known orientation, at the specified URL.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagerequesthandler/init(url:orientation:options:)-70nta"
+      },
+      "-performRequests:error:": {
+        "doc": "Schedules Vision requests to perform.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagerequesthandler/perform(_:)"
+      }
+    },
+    "VNInstanceMaskObservation": {
+      "-generateMaskForInstances:error:": {
+        "doc": "Creates a low-resolution mask from the instances you specify.",
+        "url": "https://developer.apple.com/documentation/vision/vninstancemaskobservation/generatemask(forinstances:)"
+      },
+      "-generateMaskedImageOfInstances:fromRequestHandler:croppedToInstancesExtent:error:": {
+        "doc": "Creates a high-resolution image where everything becomes transparent black, except for the instances you specify.",
+        "url": "https://developer.apple.com/documentation/vision/vninstancemaskobservation/generatemaskedimage(ofinstances:from:croppedtoinstancesextent:)"
+      },
+      "-generateScaledMaskForImageForInstances:fromRequestHandler:error:": {
+        "doc": "Creates a high-resolution mask where everything becomes transparent black, except for the instances you specify.",
+        "url": "https://developer.apple.com/documentation/vision/vninstancemaskobservation/generatescaledmaskforimage(forinstances:from:)"
+      }
+    },
+    "VNPoint": {
+      "+distanceBetweenPoint:point:": {
+        "doc": "Calculates the distance between two points.",
+        "url": "https://developer.apple.com/documentation/vision/vnpoint/distance(_:_:)"
+      },
+      "+pointByApplyingVector:toPoint:": {
+        "doc": "Creates a point object that’s shifted by the X and Y offsets of the specified vector.",
+        "url": "https://developer.apple.com/documentation/vision/vnpoint/apply(_:to:)"
+      },
+      "-distanceToPoint:": {
+        "doc": "Returns the distance to another point.",
+        "url": "https://developer.apple.com/documentation/vision/vnpoint/distance(_:)"
+      },
+      "-initWithLocation:": {
+        "doc": "Creates a point object from the specified Core Graphics point.",
+        "url": "https://developer.apple.com/documentation/vision/vnpoint/init(location:)"
+      },
+      "-initWithX:y:": {
+        "doc": "Creates a point object with the specified coordinates.",
+        "url": "https://developer.apple.com/documentation/vision/vnpoint/init(x:y:)"
+      }
+    },
+    "VNPoint3D": {
+      "-initWithPosition:": {
+        "doc": "Creates a point object with the position you specify.",
+        "url": "https://developer.apple.com/documentation/vision/vnpoint3d/init(position:)"
+      }
+    },
+    "VNRecognizeAnimalsRequest": {
+      "+knownAnimalIdentifiersForRevision:error:": {
+        "doc": "Returns a list of animal identifiers the recognition algorithm supports for the specified revision.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizeanimalsrequest/knownanimalidentifiers(forrevision:)"
+      },
+      "-supportedIdentifiersAndReturnError:": {
+        "doc": "Returns the identifiers of the animals that the request detects.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizeanimalsrequest/supportedidentifiers()"
+      }
+    },
+    "VNRecognizeTextRequest": {
+      "+supportedRecognitionLanguagesForTextRecognitionLevel:revision:error:": {
+        "doc": "Requests a list of languages that the specified revision recognizes.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizetextrequest/supportedrecognitionlanguages(for:revision:)"
+      },
+      "-supportedRecognitionLanguagesAndReturnError:": {
+        "doc": "Returns the identifiers of the languages that the request supports.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizetextrequest/supportedrecognitionlanguages()"
+      }
+    },
+    "VNRecognizedPoints3DObservation": {
+      "-recognizedPointForKey:error:": {
+        "doc": "Returns a point for a key you specify.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedpoints3dobservation/recognizedpoint(forkey:)"
+      },
+      "-recognizedPointsForGroupKey:error:": {
+        "doc": "Returns a point for a group key you specify.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedpoints3dobservation/recognizedpoints(forgroupkey:)"
+      }
+    },
+    "VNRecognizedPointsObservation": {
+      "-keypointsMultiArrayAndReturnError:": {
+        "doc": "Retrieves the grouping of normalized point coordinates and confidence scores in a format compatible with Core ML.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedpointsobservation/keypointsmultiarray()"
+      },
+      "-recognizedPointForKey:error:": {
+        "doc": "Retrieves a recognized point for a key.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedpointsobservation/recognizedpoint(forkey:)"
+      },
+      "-recognizedPointsForGroupKey:error:": {
+        "doc": "Retrieves the recognized points for a key.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedpointsobservation/recognizedpoints(forgroupkey:)"
+      }
+    },
+    "VNRecognizedText": {
+      "-boundingBoxForRange:error:": {
+        "doc": "Calculates the bounding box around the characters in the range of a string.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedtext/boundingboxforrange:error:"
+      }
+    },
+    "VNRecognizedTextObservation": {
+      "-topCandidates:": {
+        "doc": "Requests the n top candidates for a recognized text string.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedtextobservation/topcandidates(_:)"
+      }
+    },
+    "VNRectangleObservation": {
+      "+rectangleObservationWithRequestRevision:topLeft:bottomLeft:bottomRight:topRight:": {
+        "doc": "Creates a rectangle observation from its corner points.",
+        "url": "https://developer.apple.com/documentation/vision/vnrectangleobservation/init(requestrevision:topleft:bottomleft:bottomright:topright:)"
+      },
+      "+rectangleObservationWithRequestRevision:topLeft:topRight:bottomRight:bottomLeft:": {
+        "doc": "Creates a rectangle observation from its corner points.",
+        "url": "https://developer.apple.com/documentation/vision/vnrectangleobservation/init(requestrevision:topleft:topright:bottomright:bottomleft:)"
+      }
+    },
+    "VNRequest": {
+      "-cancel": {
+        "doc": "Cancels the request before it can finish executing.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/cancel()"
+      },
+      "-computeDeviceForComputeStage:": {
+        "doc": "Returns the compute device for a compute stage.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/computedeviceforcomputestage:"
+      },
+      "-init": {
+        "doc": "Creates a new Vision request with no completion handler.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/init()"
+      },
+      "-initWithCompletionHandler:": {
+        "doc": "Creates a new Vision request with an optional completion handler.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/init(completionhandler:)"
+      },
+      "-setComputeDevice:forComputeStage:": {
+        "doc": "Assigns a compute device for a compute stage.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/setcomputedevice:forcomputestage:"
+      },
+      "-supportedComputeStageDevicesAndReturnError:": {
+        "doc": "The collection of compute devices per stage that a request supports.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/supportedcomputestagedevicesandreturnerror:"
+      }
+    },
+    "VNSequenceRequestHandler": {
+      "-init": {
+        "doc": "Initializes a sequence request handler.",
+        "url": "https://developer.apple.com/documentation/vision/vnsequencerequesthandler/init()"
+      },
+      "-performRequests:onCGImage:error:": {
+        "doc": "Schedules Vision requests to be performed on a Core Graphics image.",
+        "url": "https://developer.apple.com/documentation/vision/vnsequencerequesthandler/perform(_:on:)-3zt7l"
+      },
+      "-performRequests:onCGImage:orientation:error:": {
+        "doc": "Schedules one or more Vision requests to be performed on a Core Graphics image with known orientation.",
+        "url": "https://developer.apple.com/documentation/vision/vnsequencerequesthandler/perform(_:on:orientation:)-3gcmv"
+      },
+      "-performRequests:onCIImage:error:": {
+        "doc": "Schedules one or more Vision requests to be performed on Core Image image data.",
+        "url": "https://developer.apple.com/documentation/vision/vnsequencerequesthandler/perform(_:on:)-9jtgj"
+      },
+      "-performRequests:onCIImage:orientation:error:": {
+        "doc": "Schedules one or more Vision requests to be performed on Core Image image data with known orientation.",
+        "url": "https://developer.apple.com/documentation/vision/vnsequencerequesthandler/perform(_:on:orientation:)-1bkm1"
+      },
+      "-performRequests:onCMSampleBuffer:error:": {
+        "doc": "Performs one or more requests on an image contained within a sample buffer.",
+        "url": "https://developer.apple.com/documentation/vision/vnsequencerequesthandler/perform(_:on:)-45e73"
+      },
+      "-performRequests:onCMSampleBuffer:orientation:error:": {
+        "doc": "Performs one or more requests on an image of a specified orientation contained within a sample buffer.",
+        "url": "https://developer.apple.com/documentation/vision/vnsequencerequesthandler/perform(_:on:orientation:)-6b7rk"
+      },
+      "-performRequests:onCVPixelBuffer:error:": {
+        "doc": "Schedules one or more Vision requests to be performed on a Core Video pixel buffer.",
+        "url": "https://developer.apple.com/documentation/vision/vnsequencerequesthandler/perform(_:on:)-3d7nt"
+      },
+      "-performRequests:onCVPixelBuffer:orientation:error:": {
+        "doc": "Schedules one or more Vision requests to be performed on a Core Video pixel buffer with known orientation.",
+        "url": "https://developer.apple.com/documentation/vision/vnsequencerequesthandler/perform(_:on:orientation:)-2wvt8"
+      },
+      "-performRequests:onImageData:error:": {
+        "doc": "Schedules one or more Vision requests to be performed on raw image data.",
+        "url": "https://developer.apple.com/documentation/vision/vnsequencerequesthandler/perform(_:onimagedata:)"
+      },
+      "-performRequests:onImageData:orientation:error:": {
+        "doc": "Schedules one or more Vision requests to be performed on raw data containing an image with known orientation.",
+        "url": "https://developer.apple.com/documentation/vision/vnsequencerequesthandler/perform(_:onimagedata:orientation:)"
+      },
+      "-performRequests:onImageURL:error:": {
+        "doc": "Schedules one or more Vision requests to be performed on an image.",
+        "url": "https://developer.apple.com/documentation/vision/vnsequencerequesthandler/perform(_:onimageurl:)"
+      },
+      "-performRequests:onImageURL:orientation:error:": {
+        "doc": "Schedules one or more Vision requests to be performed on an image with known orientation, at a specific URL.",
+        "url": "https://developer.apple.com/documentation/vision/vnsequencerequesthandler/perform(_:onimageurl:orientation:)"
+      }
+    },
+    "VNStatefulRequest": {
+      "-initWithFrameAnalysisSpacing:completionHandler:": {
+        "doc": "Initializes a video-based request.",
+        "url": "https://developer.apple.com/documentation/vision/vnstatefulrequest/init(frameanalysisspacing:completionhandler:)"
+      }
+    },
+    "VNTargetedImageRequest": {
+      "-initWithTargetedCGImage:options:": {
+        "doc": "Creates a new request targeting a Core Graphics image.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/initwithtargetedcgimage:options:"
+      },
+      "-initWithTargetedCGImage:options:completionHandler:": {
+        "doc": "Creates a new request targeting a Core Graphics image, executing the completion handler when done.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/init(targetedcgimage:options:completionhandler:)"
+      },
+      "-initWithTargetedCGImage:orientation:options:": {
+        "doc": "Creates a new request targeting a Core Graphics image of known orientation.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/initwithtargetedcgimage:orientation:options:"
+      },
+      "-initWithTargetedCGImage:orientation:options:completionHandler:": {
+        "doc": "Creates a new request targeting a Core Graphics image of known orientation, executing the completion handler when done.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/init(targetedcgimage:orientation:options:completionhandler:)"
+      },
+      "-initWithTargetedCIImage:options:": {
+        "doc": "Creates a new request targeting a Core Image image.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/initwithtargetedciimage:options:"
+      },
+      "-initWithTargetedCIImage:options:completionHandler:": {
+        "doc": "Creates a new request targeting a Core Image image.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/init(targetedciimage:options:completionhandler:)"
+      },
+      "-initWithTargetedCIImage:orientation:options:": {
+        "doc": "Creates a new request targeting a Core Image image of known orientation.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/initwithtargetedciimage:orientation:options:"
+      },
+      "-initWithTargetedCIImage:orientation:options:completionHandler:": {
+        "doc": "Creates a new request targeting a Core Image image of known orientation, executing the completion handler when done.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/init(targetedciimage:orientation:options:completionhandler:)"
+      },
+      "-initWithTargetedCMSampleBuffer:options:": {
+        "doc": "Creates a new request that targets an image in a sample buffer.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/initwithtargetedcmsamplebuffer:options:"
+      },
+      "-initWithTargetedCMSampleBuffer:options:completionHandler:": {
+        "doc": "Creates a new request with a completion handler that targets an image in a sample buffer.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/init(targetedcmsamplebuffer:options:completionhandler:)"
+      },
+      "-initWithTargetedCMSampleBuffer:orientation:options:": {
+        "doc": "Creates a new request that targets an image of a known orientation in a sample buffer.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/initwithtargetedcmsamplebuffer:orientation:options:"
+      },
+      "-initWithTargetedCMSampleBuffer:orientation:options:completionHandler:": {
+        "doc": "Creates a new request with a completion handler that targets an image of a known orientation in a sample buffer.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/init(targetedcmsamplebuffer:orientation:options:completionhandler:)"
+      },
+      "-initWithTargetedCVPixelBuffer:options:": {
+        "doc": "Creates a new request targeting an image in a pixel buffer.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/initwithtargetedcvpixelbuffer:options:"
+      },
+      "-initWithTargetedCVPixelBuffer:options:completionHandler:": {
+        "doc": "Creates a new request targeting an image in a pixel buffer.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/init(targetedcvpixelbuffer:options:completionhandler:)"
+      },
+      "-initWithTargetedCVPixelBuffer:orientation:options:": {
+        "doc": "Creates a new request targeting an image in a pixel buffer of known orientation.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/initwithtargetedcvpixelbuffer:orientation:options:"
+      },
+      "-initWithTargetedCVPixelBuffer:orientation:options:completionHandler:": {
+        "doc": "Creates a new request targeting an image in a pixel buffer of known orientation.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/init(targetedcvpixelbuffer:orientation:options:completionhandler:)"
+      },
+      "-initWithTargetedImageData:options:": {
+        "doc": "Creates a new request targeting an image as raw data.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/initwithtargetedimagedata:options:"
+      },
+      "-initWithTargetedImageData:options:completionHandler:": {
+        "doc": "Creates a new request targeting an image as raw data, executing the completion handler when done.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/init(targetedimagedata:options:completionhandler:)"
+      },
+      "-initWithTargetedImageData:orientation:options:": {
+        "doc": "Creates a new request targeting a raw data image of known orientation.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/initwithtargetedimagedata:orientation:options:"
+      },
+      "-initWithTargetedImageData:orientation:options:completionHandler:": {
+        "doc": "Creates a new request targeting a raw data image of known orientation, executing the completion handler when done.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/init(targetedimagedata:orientation:options:completionhandler:)"
+      },
+      "-initWithTargetedImageURL:options:": {
+        "doc": "Creates a new request targeting an image at the specified URL.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/initwithtargetedimageurl:options:"
+      },
+      "-initWithTargetedImageURL:options:completionHandler:": {
+        "doc": "Creates a new request targeting an image at the specified URL, executing the completion handler when done.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/init(targetedimageurl:options:completionhandler:)"
+      },
+      "-initWithTargetedImageURL:orientation:options:": {
+        "doc": "Creates a new request targeting an image of known orientation, at the specified URL.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/initwithtargetedimageurl:orientation:options:"
+      },
+      "-initWithTargetedImageURL:orientation:options:completionHandler:": {
+        "doc": "Creates a new request targeting an image of known orientation, at the specified URL, executing the completion handler when done.",
+        "url": "https://developer.apple.com/documentation/vision/vntargetedimagerequest/init(targetedimageurl:orientation:options:completionhandler:)"
+      }
+    },
+    "VNTrackHomographicImageRegistrationRequest": {
+      "-init": {
+        "doc": "Creates a new request that tracks the homographic transformation of two images.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackhomographicimageregistrationrequest/init()"
+      },
+      "-initWithCompletionHandler:": {
+        "doc": "Creates a new request that tracks the homographic transformation of two images, with a system callback on completion.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackhomographicimageregistrationrequest/init(completionhandler:)"
+      }
+    },
+    "VNTrackObjectRequest": {
+      "-initWithDetectedObjectObservation:": {
+        "doc": "Creates a new object tracking request with a detected object observation.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackobjectrequest/init(detectedobjectobservation:)"
+      },
+      "-initWithDetectedObjectObservation:completionHandler:": {
+        "doc": "Creates a new object tracking request with a detected object observation.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackobjectrequest/init(detectedobjectobservation:completionhandler:)"
+      }
+    },
+    "VNTrackOpticalFlowRequest": {
+      "-init": {
+        "doc": "Creates a new request that tracks the optical from one image to another.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackopticalflowrequest/init()"
+      },
+      "-initWithCompletionHandler:": {
+        "doc": "Creates a new request that tracks the optical from one image to another, with a system callback on completion.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackopticalflowrequest/init(completionhandler:)"
+      }
+    },
+    "VNTrackRectangleRequest": {
+      "-initWithRectangleObservation:": {
+        "doc": "Creates a new rectangle tracking request with a rectangle observation.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackrectanglerequest/init(rectangleobservation:)"
+      },
+      "-initWithRectangleObservation:completionHandler:": {
+        "doc": "Creates a new rectangle tracking request with a rectangle observation.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackrectanglerequest/init(rectangleobservation:completionhandler:)"
+      }
+    },
+    "VNTrackTranslationalImageRegistrationRequest": {
+      "-init": {
+        "doc": "Creates a new request that tracks the translational registration of two images.",
+        "url": "https://developer.apple.com/documentation/vision/vntracktranslationalimageregistrationrequest/init()"
+      },
+      "-initWithCompletionHandler:": {
+        "doc": "Creates a new request that tracks the translational registration of two images, with a system callback on completion.",
+        "url": "https://developer.apple.com/documentation/vision/vntracktranslationalimageregistrationrequest/init(completionhandler:)"
+      }
+    },
+    "VNTrackingRequest": {
+      "-supportedNumberOfTrackersAndReturnError:": {
+        "doc": "Returns the maximum number of simultaneous trackers for the request.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackingrequest/supportednumber(oftrackersandreturnerror:)"
+      }
+    },
+    "VNVector": {
+      "+dotProductOfVector:vector:": {
+        "doc": "Caclulates the dot product of two vectors.",
+        "url": "https://developer.apple.com/documentation/vision/vnvector/dotproduct(of:vector:)"
+      },
+      "+unitVectorForVector:": {
+        "doc": "Calculates a vector that’s normalized by preserving its direction, so that the vector length equals 1.0.",
+        "url": "https://developer.apple.com/documentation/vision/vnvector/unitvector(for:)"
+      },
+      "+vectorByAddingVector:toVector:": {
+        "doc": "Creates a new vector by adding the specified vectors.",
+        "url": "https://developer.apple.com/documentation/vision/vnvector/init(byadding:to:)"
+      },
+      "+vectorByMultiplyingVector:byScalar:": {
+        "doc": "Creates a new vector by multiplying the specified vector’s x-axis and y-axis projections by the scalar value.",
+        "url": "https://developer.apple.com/documentation/vision/vnvector/init(bymultiplying:byscalar:)"
+      },
+      "+vectorBySubtractingVector:fromVector:": {
+        "doc": "Creates a new vector by subtracting the first vector from the second vector.",
+        "url": "https://developer.apple.com/documentation/vision/vnvector/init(bysubtracting:from:)"
+      },
+      "-initWithR:theta:": {
+        "doc": "Creates a new vector in polar coordinate space.",
+        "url": "https://developer.apple.com/documentation/vision/vnvector/init(r:theta:)"
+      },
+      "-initWithVectorHead:tail:": {
+        "doc": "Creates a new vector in Cartesian coordinate space.",
+        "url": "https://developer.apple.com/documentation/vision/vnvector/init(vectorhead:tail:)"
+      },
+      "-initWithXComponent:yComponent:": {
+        "doc": "Creates a new vector in Cartesian coordinate space, based on its x-axis and y-axis projections.",
+        "url": "https://developer.apple.com/documentation/vision/vnvector/init(xcomponent:ycomponent:)-3p5k3"
+      }
+    },
+    "VNVideoProcessor": {
+      "-addRequest:processingOptions:error:": {
+        "doc": "Adds a request with processing options to the video processor.",
+        "url": "https://developer.apple.com/documentation/vision/vnvideoprocessor/addrequest(_:processingoptions:)"
+      },
+      "-addRequest:withProcessingOptions:error:": {
+        "doc": "Adds a Vision request to perform with the specified configuration.",
+        "url": "https://developer.apple.com/documentation/vision/vnvideoprocessor/add(_:withprocessingoptions:)"
+      },
+      "-analyzeTimeRange:error:": {
+        "doc": "Analyzes a time range of video content.",
+        "url": "https://developer.apple.com/documentation/vision/vnvideoprocessor/analyze(_:)"
+      },
+      "-analyzeWithTimeRange:error:": {
+        "doc": "Analyzes the specifed time range of the video content.",
+        "url": "https://developer.apple.com/documentation/vision/vnvideoprocessor/analyze(with:)"
+      },
+      "-cancel": {
+        "doc": "Cancels the video processing.",
+        "url": "https://developer.apple.com/documentation/vision/vnvideoprocessor/cancel()"
+      },
+      "-initWithURL:": {
+        "doc": "Creates a video processor to perform Vision requests against the specified video asset.",
+        "url": "https://developer.apple.com/documentation/vision/vnvideoprocessor/init(url:)-94b7"
+      },
+      "-removeRequest:error:": {
+        "doc": "Removes a Vision request from the video processor’s request queue.",
+        "url": "https://developer.apple.com/documentation/vision/vnvideoprocessor/removerequest(_:)"
+      }
+    }
+  },
+  "properties": {
+    "VNAnimalBodyPoseObservation": {
+      "VNAnimalBodyPoseObservationJointName": {
+        "doc": "The joint names for an animal body pose.",
+        "url": "https://developer.apple.com/documentation/vision/vnanimalbodyposeobservation/jointname"
+      },
+      "VNAnimalBodyPoseObservationJointsGroupName": {
+        "doc": "The joint group names for an animal body pose.",
+        "url": "https://developer.apple.com/documentation/vision/vnanimalbodyposeobservation/jointsgroupname"
+      },
+      "availableJointGroupNames": {
+        "doc": "The available joint group names in the observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnanimalbodyposeobservation/availablejointgroupnames"
+      },
+      "availableJointNames": {
+        "doc": "The names of the available joints in the observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnanimalbodyposeobservation/availablejointnames"
+      }
+    },
+    "VNBarcodeObservation": {
+      "barcodeDescriptor": {
+        "doc": "An object that describes the low-level details about the barcode and its data.",
+        "url": "https://developer.apple.com/documentation/vision/vnbarcodeobservation/barcodedescriptor"
+      },
+      "isColorInverted": {
+        "doc": "A Boolean value that indicates whether the barcode is color inverted.",
+        "url": "https://developer.apple.com/documentation/vision/vnbarcodeobservation/iscolorinverted"
+      },
+      "isGS1DataCarrier": {
+        "doc": "A Boolean value that indicates whether the barcode carries any global standards data.",
+        "url": "https://developer.apple.com/documentation/vision/vnbarcodeobservation/isgs1datacarrier"
+      },
+      "payloadData": {
+        "doc": "The raw data representation of the barcode’s payload.",
+        "url": "https://developer.apple.com/documentation/vision/vnbarcodeobservation/payloaddata"
+      },
+      "payloadStringValue": {
+        "doc": "A string value that represents the barcode payload.",
+        "url": "https://developer.apple.com/documentation/vision/vnbarcodeobservation/payloadstringvalue"
+      },
+      "supplementalCompositeType": {
+        "doc": "The supplemental composite type.",
+        "url": "https://developer.apple.com/documentation/vision/vnbarcodeobservation/supplementalcompositetype"
+      },
+      "supplementalPayloadString": {
+        "doc": "The supplemental code decoded as a string value.",
+        "url": "https://developer.apple.com/documentation/vision/vnbarcodeobservation/supplementalpayloadstring"
+      },
+      "symbology": {
+        "doc": "The symbology of the observed barcode.",
+        "url": "https://developer.apple.com/documentation/vision/vnbarcodeobservation/symbology"
+      }
+    },
+    "VNCalculateImageAestheticsScoresRequest": {
+      "results": {
+        "doc": "The results of the aesthetics request.",
+        "url": "https://developer.apple.com/documentation/vision/vncalculateimageaestheticsscoresrequest/results"
+      }
+    },
+    "VNCircle": {
+      "center": {
+        "doc": "The circle’s center point.",
+        "url": "https://developer.apple.com/documentation/vision/vncircle/center"
+      },
+      "diameter": {
+        "doc": "The circle’s diameter.",
+        "url": "https://developer.apple.com/documentation/vision/vncircle/diameter"
+      },
+      "radius": {
+        "doc": "The circle’s radius.",
+        "url": "https://developer.apple.com/documentation/vision/vncircle/radius"
+      },
+      "zeroCircle": {
+        "doc": "A circle object centered at the origin, with a radius of zero.",
+        "url": "https://developer.apple.com/documentation/vision/vncircle/zero"
+      }
+    },
+    "VNClassificationObservation": {
+      "hasPrecisionRecallCurve": {
+        "doc": "A Boolean variable indicating whether the observation contains precision and recall curves.",
+        "url": "https://developer.apple.com/documentation/vision/vnclassificationobservation/hasprecisionrecallcurve"
+      },
+      "identifier": {
+        "doc": "Classification label identifying the type of observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnclassificationobservation/identifier"
+      }
+    },
+    "VNClassifyImageRequest": {
+      "results": {
+        "doc": "The results of the image classification request.",
+        "url": "https://developer.apple.com/documentation/vision/vnclassifyimagerequest/results"
+      }
+    },
+    "VNContour": {
+      "aspectRatio": {
+        "doc": "The aspect ratio of the contour.",
+        "url": "https://developer.apple.com/documentation/vision/vncontour/aspectratio"
+      },
+      "childContourCount": {
+        "doc": "The total number of detected child contours.",
+        "url": "https://developer.apple.com/documentation/vision/vncontour/childcontourcount"
+      },
+      "childContours": {
+        "doc": "An array of contours that this contour encloses.",
+        "url": "https://developer.apple.com/documentation/vision/vncontour/childcontours"
+      },
+      "indexPath": {
+        "doc": "The contour object’s index path.",
+        "url": "https://developer.apple.com/documentation/vision/vncontour/indexpath"
+      },
+      "normalizedPath": {
+        "doc": "The contour object as a path in normalized coordinates.",
+        "url": "https://developer.apple.com/documentation/vision/vncontour/normalizedpath"
+      },
+      "normalizedPoints": {
+        "doc": "The contour’s array of points in normalized coordinates.",
+        "url": "https://developer.apple.com/documentation/vision/vncontour/normalizedpoints-2orqj"
+      },
+      "pointCount": {
+        "doc": "The contour’s number of points.",
+        "url": "https://developer.apple.com/documentation/vision/vncontour/pointcount"
+      }
+    },
+    "VNContoursObservation": {
+      "contourCount": {
+        "doc": "The total number of detected contours.",
+        "url": "https://developer.apple.com/documentation/vision/vncontoursobservation/contourcount"
+      },
+      "normalizedPath": {
+        "doc": "The detected contours as a path object in normalized coordinates.",
+        "url": "https://developer.apple.com/documentation/vision/vncontoursobservation/normalizedpath"
+      },
+      "topLevelContourCount": {
+        "doc": "The total number of detected top-level contours.",
+        "url": "https://developer.apple.com/documentation/vision/vncontoursobservation/toplevelcontourcount"
+      },
+      "topLevelContours": {
+        "doc": "An array of contours that don’t have another contour enclosing them.",
+        "url": "https://developer.apple.com/documentation/vision/vncontoursobservation/toplevelcontours"
+      }
+    },
+    "VNCoreMLFeatureValueObservation": {
+      "featureName": {
+        "doc": "The name used in the model description of the CoreML model that produced this observation.",
+        "url": "https://developer.apple.com/documentation/vision/vncoremlfeaturevalueobservation/featurename"
+      },
+      "featureValue": {
+        "doc": "The feature result of a VNCoreMLRequest that outputs neither a classification nor an image.",
+        "url": "https://developer.apple.com/documentation/vision/vncoremlfeaturevalueobservation/featurevalue"
+      }
+    },
+    "VNCoreMLModel": {
+      "featureProvider": {
+        "doc": "An optional object to support inputs outside Vision.",
+        "url": "https://developer.apple.com/documentation/vision/vncoremlmodel/featureprovider"
+      },
+      "inputImageFeatureName": {
+        "doc": "The name of the feature value that Vision sets from the request handler.",
+        "url": "https://developer.apple.com/documentation/vision/vncoremlmodel/inputimagefeaturename"
+      }
+    },
+    "VNCoreMLRequest": {
+      "imageCropAndScaleOption": {
+        "doc": "An optional setting that tells the Vision algorithm how to scale an input image.",
+        "url": "https://developer.apple.com/documentation/vision/vncoremlrequest/imagecropandscaleoption"
+      },
+      "model": {
+        "doc": "The model to base the image analysis request on.",
+        "url": "https://developer.apple.com/documentation/vision/vncoremlrequest/model"
+      }
+    },
+    "VNDetectAnimalBodyPoseRequest": {
+      "results": {
+        "doc": "The animal body pose the request observes.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectanimalbodyposerequest/results"
+      },
+      "supportedJointNames": {
+        "doc": "Retrieves the joint names the request supports.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectanimalbodyposerequest/supportedjointnames"
+      },
+      "supportedJointsGroupNames": {
+        "doc": "Retrieves the joint group names the request supports.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectanimalbodyposerequest/supportedjointsgroupnames"
+      }
+    },
+    "VNDetectBarcodesRequest": {
+      "coalesceCompositeSymbologies": {
+        "doc": "A Boolean value that indicates whether to coalesce multiple codes based on the symbology.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectbarcodesrequest/coalescecompositesymbologies"
+      },
+      "results": {
+        "doc": "The results of a barcode detection request.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectbarcodesrequest/results"
+      },
+      "supportedSymbologies": {
+        "doc": "The array of barcode symbologies that the request supports.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectbarcodesrequest/supportedsymbologies"
+      },
+      "symbologies": {
+        "doc": "The barcode symbologies that the request detects in an image.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectbarcodesrequest/symbologies"
+      }
+    },
+    "VNDetectContoursRequest": {
+      "contrastAdjustment": {
+        "doc": "The amount by which to adjust the image contrast.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectcontoursrequest/contrastadjustment"
+      },
+      "contrastPivot": {
+        "doc": "The pixel value to use as a pivot for the contrast.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectcontoursrequest/contrastpivot"
+      },
+      "detectDarkOnLight": {
+        "doc": "A Boolean value that indicates whether the request detects a dark object on a light background.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectcontoursrequest/detectdarkonlight"
+      },
+      "detectsDarkOnLight": {
+        "doc": "A Boolean value that indicates whether the request detects a dark object on a light background to aid in detection.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectcontoursrequest/detectsdarkonlight"
+      },
+      "maximumImageDimension": {
+        "doc": "The maximum image dimension to use for contour detection.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectcontoursrequest/maximumimagedimension"
+      },
+      "results": {
+        "doc": "The results of the request to detect contours.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectcontoursrequest/results"
+      }
+    },
+    "VNDetectDocumentSegmentationRequest": {
+      "results": {
+        "doc": "The results of a document segmentation request.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectdocumentsegmentationrequest/results"
+      }
+    },
+    "VNDetectFaceCaptureQualityRequest": {
+      "results": {
+        "doc": "The results of the face-capture quality request.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectfacecapturequalityrequest/results"
+      }
+    },
+    "VNDetectFaceLandmarksRequest": {
+      "constellation": {
+        "doc": "A variable that describes how a face landmarks request orders or enumerates the resulting features.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectfacelandmarksrequest/constellation"
+      },
+      "results": {
+        "doc": "The results of the face landmarks request.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectfacelandmarksrequest/results"
+      }
+    },
+    "VNDetectFaceRectanglesRequest": {
+      "results": {
+        "doc": "The results of the face detection request.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectfacerectanglesrequest/results"
+      }
+    },
+    "VNDetectHorizonRequest": {
+      "results": {
+        "doc": "The results of the horizon detection request.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthorizonrequest/results"
+      }
+    },
+    "VNDetectHumanBodyPose3DRequest": {
+      "results": {
+        "doc": "The 3D body pose the request observes.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodypose3drequest/results"
+      },
+      "supportedJointNames": {
+        "doc": "Returns the joint group names the request supports.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodypose3drequest/supportedjointnames"
+      },
+      "supportedJointsGroupNames": {
+        "doc": "Returns the joint names the request supports.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodypose3drequest/supportedjointsgroupnames"
+      }
+    },
+    "VNDetectHumanBodyPoseRequest": {
+      "results": {
+        "doc": "The observed body poses.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodyposerequest/results"
+      },
+      "supportedJointNames": {
+        "doc": "Retrieves the supported joint names.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodyposerequest/supportedjointnames"
+      },
+      "supportedJointsGroupNames": {
+        "doc": "Retrieves the supported joint group names.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanbodyposerequest/supportedjointsgroupnames"
+      }
+    },
+    "VNDetectHumanHandPoseRequest": {
+      "maximumHandCount": {
+        "doc": "The maximum number of hands to detect in an image.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanhandposerequest/maximumhandcount"
+      },
+      "results": {
+        "doc": "The observed hand poses.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanhandposerequest/results"
+      },
+      "supportedJointNames": {
+        "doc": "Retrieves the supported joint names.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanhandposerequest/supportedjointnames"
+      },
+      "supportedJointsGroupNames": {
+        "doc": "Retrieves the supported joint group names.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanhandposerequest/supportedjointsgroupnames"
+      }
+    },
+    "VNDetectHumanRectanglesRequest": {
+      "results": {
+        "doc": "The results of the request to find rectangular regions that contain people in an image.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanrectanglesrequest/results"
+      },
+      "upperBodyOnly": {
+        "doc": "A Boolean value that indicates whether the request requires detecting a full body or upper body only to produce a result.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecthumanrectanglesrequest/upperbodyonly"
+      }
+    },
+    "VNDetectRectanglesRequest": {
+      "maximumAspectRatio": {
+        "doc": "A float specifying the maximum aspect ratio of the rectangle to detect, defined as the shorter dimension over the longer dimension.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectrectanglesrequest/maximumaspectratio"
+      },
+      "maximumObservations": {
+        "doc": "An integer specifying the maximum number of rectangles Vision returns.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectrectanglesrequest/maximumobservations"
+      },
+      "minimumAspectRatio": {
+        "doc": "A float specifying the minimum aspect ratio of the rectangle to detect, defined as the shorter dimension over the longer dimension.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectrectanglesrequest/minimumaspectratio"
+      },
+      "minimumConfidence": {
+        "doc": "A value specifying the minimum acceptable confidence level.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectrectanglesrequest/minimumconfidence"
+      },
+      "minimumSize": {
+        "doc": "The minimum size of a rectangle to detect, as a proportion of the smallest dimension.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectrectanglesrequest/minimumsize"
+      },
+      "quadratureTolerance": {
+        "doc": "A float specifying the number of degrees a rectangle corner angle can deviate from 90°.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectrectanglesrequest/quadraturetolerance"
+      },
+      "results": {
+        "doc": "The results of the request to detect rectangles.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectrectanglesrequest/results"
+      }
+    },
+    "VNDetectTextRectanglesRequest": {
+      "reportCharacterBoxes": {
+        "doc": "A Boolean value that indicates whether the request detects character bounding boxes.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecttextrectanglesrequest/reportcharacterboxes"
+      },
+      "results": {
+        "doc": "The results of the request to detect text rectangles.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecttextrectanglesrequest/results"
+      }
+    },
+    "VNDetectTrajectoriesRequest": {
+      "maximumObjectSize": {
+        "doc": "The maximum radius of the tracked shape’s bounding circle.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecttrajectoriesrequest/maximumobjectsize"
+      },
+      "minimumObjectSize": {
+        "doc": "The minimum radius of the tracked shape’s bounding circle.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecttrajectoriesrequest/minimumobjectsize"
+      },
+      "objectMaximumNormalizedRadius": {
+        "doc": "The maximum radius of the bounding circle of the object to track.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecttrajectoriesrequest/objectmaximumnormalizedradius"
+      },
+      "objectMinimumNormalizedRadius": {
+        "doc": "The minimum radius of the bounding circle of the object to track.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecttrajectoriesrequest/objectminimumnormalizedradius"
+      },
+      "results": {
+        "doc": "The array of detected trajectory observations.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecttrajectoriesrequest/results"
+      },
+      "targetFrameTime": {
+        "doc": "The requested target frame time for processing trajectory detection.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecttrajectoriesrequest/targetframetime"
+      },
+      "trajectoryLength": {
+        "doc": "The number of points to detect before calculating a trajectory.",
+        "url": "https://developer.apple.com/documentation/vision/vndetecttrajectoriesrequest/trajectorylength"
+      }
+    },
+    "VNDetectedObjectObservation": {
+      "boundingBox": {
+        "doc": "The bounding box of the object that the request detects.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectedobjectobservation/boundingbox"
+      },
+      "globalSegmentationMask": {
+        "doc": "A resulting pixel buffer from a request to generate a segmentation mask for an image.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectedobjectobservation/globalsegmentationmask"
+      }
+    },
+    "VNDetectedPoint": {
+      "confidence": {
+        "doc": "A confidence score that indicates the detected point’s accuracy.",
+        "url": "https://developer.apple.com/documentation/vision/vndetectedpoint/confidence"
+      }
+    },
+    "VNFaceLandmarkRegion": {
+      "pointCount": {
+        "doc": "The number of points in the face region.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarkregion/pointcount"
+      }
+    },
+    "VNFaceLandmarkRegion2D": {
+      "normalizedPoints": {
+        "doc": "The array of normalized landmark points.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarkregion2d/normalizedpoints-7s7im"
+      },
+      "pointsClassification": {
+        "doc": "An enumeration that describes how to interpret the points the region provides.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarkregion2d/pointsclassification"
+      },
+      "pointsInImage(imageSize:)": {
+        "doc": "Returns an array containing landmark points in the coordinate space of the specified image size.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarkregion2d/pointsinimage(imagesize:)"
+      },
+      "precisionEstimatesPerPoint": {
+        "doc": "Requests an array of precision estimates for each landmark point.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarkregion2d/precisionestimatesperpoint-5jl22"
+      }
+    },
+    "VNFaceLandmarks": {
+      "confidence": {
+        "doc": "A confidence estimate for the detected landmarks.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks/confidence"
+      }
+    },
+    "VNFaceLandmarks2D": {
+      "allPoints": {
+        "doc": "The region containing all face landmark points.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks2d/allpoints"
+      },
+      "faceContour": {
+        "doc": "The region containing points that trace the face contour from the left cheek, over the chin, to the right cheek.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks2d/facecontour"
+      },
+      "innerLips": {
+        "doc": "The region containing points that outline the space between the lips.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks2d/innerlips"
+      },
+      "leftEye": {
+        "doc": "The region containing points that outline the left eye.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks2d/lefteye"
+      },
+      "leftEyebrow": {
+        "doc": "The region containing points that trace the left eyebrow.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks2d/lefteyebrow"
+      },
+      "leftPupil": {
+        "doc": "The region containing the point where the left pupil is located.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks2d/leftpupil"
+      },
+      "medianLine": {
+        "doc": "The region containing points that trace a vertical line down the center of the face.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks2d/medianline"
+      },
+      "nose": {
+        "doc": "The region containing points that outline the nose.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks2d/nose"
+      },
+      "noseCrest": {
+        "doc": "The region containing points that trace the center crest of the nose.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks2d/nosecrest"
+      },
+      "outerLips": {
+        "doc": "The region containing points that outline the outside of the lips.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks2d/outerlips"
+      },
+      "rightEye": {
+        "doc": "The region containing points that outline the right eye.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks2d/righteye"
+      },
+      "rightEyebrow": {
+        "doc": "The region containing points that trace the right eyebrow.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks2d/righteyebrow"
+      },
+      "rightPupil": {
+        "doc": "The region containing the point where the right pupil is located.",
+        "url": "https://developer.apple.com/documentation/vision/vnfacelandmarks2d/rightpupil"
+      }
+    },
+    "VNFaceObservation": {
+      "faceCaptureQuality": {
+        "doc": "A value that indicates the quality of the face capture.",
+        "url": "https://developer.apple.com/documentation/vision/vnfaceobservation/facecapturequality-2o4xv"
+      },
+      "landmarks": {
+        "doc": "The facial features of the detected face.",
+        "url": "https://developer.apple.com/documentation/vision/vnfaceobservation/landmarks"
+      },
+      "pitch": {
+        "doc": "The pitch angle of a face in radians.",
+        "url": "https://developer.apple.com/documentation/vision/vnfaceobservation/pitch"
+      },
+      "roll": {
+        "doc": "The roll angle of a face in radians.",
+        "url": "https://developer.apple.com/documentation/vision/vnfaceobservation/roll"
+      },
+      "yaw": {
+        "doc": "The yaw angle of a face in radians.",
+        "url": "https://developer.apple.com/documentation/vision/vnfaceobservation/yaw"
+      }
+    },
+    "VNFeaturePrintObservation": {
+      "data": {
+        "doc": "The feature print data.",
+        "url": "https://developer.apple.com/documentation/vision/vnfeatureprintobservation/data"
+      },
+      "elementCount": {
+        "doc": "The total number of elements in the data.",
+        "url": "https://developer.apple.com/documentation/vision/vnfeatureprintobservation/elementcount"
+      },
+      "elementType": {
+        "doc": "The type of each element in the data.",
+        "url": "https://developer.apple.com/documentation/vision/vnfeatureprintobservation/elementtype"
+      }
+    },
+    "VNGenerateAttentionBasedSaliencyImageRequest": {
+      "results": {
+        "doc": "The results of the image saliency request.",
+        "url": "https://developer.apple.com/documentation/vision/vngenerateattentionbasedsaliencyimagerequest/results"
+      }
+    },
+    "VNGenerateForegroundInstanceMaskRequest": {
+      "results": {
+        "doc": "The instance masks the request observes.",
+        "url": "https://developer.apple.com/documentation/vision/vngenerateforegroundinstancemaskrequest/results"
+      }
+    },
+    "VNGenerateImageFeaturePrintRequest": {
+      "imageCropAndScaleOption": {
+        "doc": "An optional setting that tells the algorithm how to scale an input image before generating the feature print.",
+        "url": "https://developer.apple.com/documentation/vision/vngenerateimagefeatureprintrequest/imagecropandscaleoption"
+      },
+      "results": {
+        "doc": "The results of the feature print request.",
+        "url": "https://developer.apple.com/documentation/vision/vngenerateimagefeatureprintrequest/results"
+      }
+    },
+    "VNGenerateObjectnessBasedSaliencyImageRequest": {
+      "results": {
+        "doc": "The results of the image saliency request.",
+        "url": "https://developer.apple.com/documentation/vision/vngenerateobjectnessbasedsaliencyimagerequest/results"
+      }
+    },
+    "VNGenerateOpticalFlowRequest": {
+      "VNGenerateOpticalFlowRequestComputationAccuracy": {
+        "doc": "The supported optical flow accuracy levels.",
+        "url": "https://developer.apple.com/documentation/vision/vngenerateopticalflowrequest/computationaccuracy-swift.enum"
+      },
+      "computationAccuracy": {
+        "doc": "The accuracy level for computing optical flow.",
+        "url": "https://developer.apple.com/documentation/vision/vngenerateopticalflowrequest/computationaccuracy-swift.property"
+      },
+      "keepNetworkOutput": {
+        "doc": "A Boolean value that indicates whether to keep the raw pixel buffer coming from the machine learning network.",
+        "url": "https://developer.apple.com/documentation/vision/vngenerateopticalflowrequest/keepnetworkoutput"
+      },
+      "outputPixelFormat": {
+        "doc": "The output buffer’s pixel format.",
+        "url": "https://developer.apple.com/documentation/vision/vngenerateopticalflowrequest/outputpixelformat"
+      },
+      "results": {
+        "doc": "The results of the request to generate optical flow.",
+        "url": "https://developer.apple.com/documentation/vision/vngenerateopticalflowrequest/results"
+      }
+    },
+    "VNGeneratePersonInstanceMaskRequest": {
+      "results": {
+        "doc": "The results of the instance mask request.",
+        "url": "https://developer.apple.com/documentation/vision/vngeneratepersoninstancemaskrequest/results"
+      }
+    },
+    "VNGeneratePersonSegmentationRequest": {
+      "VNGeneratePersonSegmentationRequestQualityLevel": {
+        "doc": "Constants that define the levels of quality for a person segmentation request.",
+        "url": "https://developer.apple.com/documentation/vision/vngeneratepersonsegmentationrequest/qualitylevel-swift.enum"
+      },
+      "outputPixelFormat": {
+        "doc": "The pixel format of the output image.",
+        "url": "https://developer.apple.com/documentation/vision/vngeneratepersonsegmentationrequest/outputpixelformat"
+      },
+      "qualityLevel": {
+        "doc": "A value that indicates how the request balances accuracy and performance.",
+        "url": "https://developer.apple.com/documentation/vision/vngeneratepersonsegmentationrequest/qualitylevel-swift.property"
+      },
+      "results": {
+        "doc": "The results of the segmentation request.",
+        "url": "https://developer.apple.com/documentation/vision/vngeneratepersonsegmentationrequest/results"
+      }
+    },
+    "VNHomographicImageRegistrationRequest": {
+      "results": {
+        "doc": "The results of the image registration request.",
+        "url": "https://developer.apple.com/documentation/vision/vnhomographicimageregistrationrequest/results"
+      }
+    },
+    "VNHorizonObservation": {
+      "angle": {
+        "doc": "The angle of the observed horizon.",
+        "url": "https://developer.apple.com/documentation/vision/vnhorizonobservation/angle"
+      },
+      "transform": {
+        "doc": "The transform to apply to the detected horizon.",
+        "url": "https://developer.apple.com/documentation/vision/vnhorizonobservation/transform"
+      }
+    },
+    "VNHumanBodyPose3DObservation": {
+      "VNHumanBodyPose3DObservationHeightEstimation": {
+        "doc": "Constants that identify body height estimation techniques.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation/heightestimation-swift.enum"
+      },
+      "VNHumanBodyPose3DObservationJointName": {
+        "doc": "The joint names for a 3D body pose.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation/jointname"
+      },
+      "VNHumanBodyPose3DObservationJointsGroupName": {
+        "doc": "The joint group names for a 3D body pose.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation/jointsgroupname"
+      },
+      "availableJointNames": {
+        "doc": "The names of the available joints in the observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation/availablejointnames"
+      },
+      "availableJointsGroupNames": {
+        "doc": "The available joint group names in the observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation/availablejointsgroupnames"
+      },
+      "bodyHeight": {
+        "doc": "The estimated human body height, in meters.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation/bodyheight"
+      },
+      "cameraOriginMatrix": {
+        "doc": "A transform from the skeleton hip to the camera.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation/cameraoriginmatrix"
+      },
+      "cameraRelativePosition(_:)": {
+        "doc": "Returns a position relative to the camera for the body joint you specify.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation/camerarelativeposition(_:)"
+      },
+      "heightEstimation": {
+        "doc": "The technique the framework uses to estimate body height.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodypose3dobservation/heightestimation-swift.property"
+      }
+    },
+    "VNHumanBodyPoseObservation": {
+      "VNHumanBodyPoseObservationJointName": {
+        "doc": "The supported joint names for the body pose.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodyposeobservation/jointname"
+      },
+      "VNHumanBodyPoseObservationJointsGroupName": {
+        "doc": "The supported joint group names for the body pose.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodyposeobservation/jointsgroupname"
+      },
+      "availableJointNames": {
+        "doc": "The names of the available joints in the observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodyposeobservation/availablejointnames"
+      },
+      "availableJointsGroupNames": {
+        "doc": "The available joint group names in the observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodyposeobservation/availablejointsgroupnames"
+      }
+    },
+    "VNHumanBodyRecognizedPoint3D": {
+      "localPosition": {
+        "doc": "The three-dimensional position.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodyrecognizedpoint3d/localposition"
+      },
+      "parentJoint": {
+        "doc": "The parent joint in the observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanbodyrecognizedpoint3d/parentjoint"
+      }
+    },
+    "VNHumanHandPoseObservation": {
+      "VNHumanHandPoseObservationJointName": {
+        "doc": "The supported joint names for the hand pose.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanhandposeobservation/jointname"
+      },
+      "VNHumanHandPoseObservationJointsGroupName": {
+        "doc": "The supported joint group names for the hand pose.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanhandposeobservation/jointsgroupname"
+      },
+      "availableJointNames": {
+        "doc": "The names of the available joints in the observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanhandposeobservation/availablejointnames"
+      },
+      "availableJointsGroupNames": {
+        "doc": "The joint group names available in the observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanhandposeobservation/availablejointsgroupnames"
+      },
+      "chirality": {
+        "doc": "The chirality, or handedness, of a pose.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanhandposeobservation/chirality"
+      }
+    },
+    "VNHumanObservation": {
+      "upperBodyOnly": {
+        "doc": "A Boolean value that indicates whether the observation represents an upper-body or full-body rectangle.",
+        "url": "https://developer.apple.com/documentation/vision/vnhumanobservation/upperbodyonly"
+      }
+    },
+    "VNImageAestheticsScoresObservation": {
+      "isUtility": {
+        "doc": "A Boolean value that represents images that are not necessarily of poor image quality, but may not have memorable or exciting content.",
+        "url": "https://developer.apple.com/documentation/vision/vnimageaestheticsscoresobservation/isutility"
+      },
+      "overallScore": {
+        "doc": "A score which incorporates aesthetic score, failure score, and utility labels.",
+        "url": "https://developer.apple.com/documentation/vision/vnimageaestheticsscoresobservation/overallscore"
+      }
+    },
+    "VNImageBasedRequest": {
+      "regionOfInterest": {
+        "doc": "The region of the image in which Vision will perform the request.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagebasedrequest/regionofinterest"
+      }
+    },
+    "VNImageHomographicAlignmentObservation": {
+      "warpTransform": {
+        "doc": "The warp transform matrix to morph the floating image into the reference image.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagehomographicalignmentobservation/warptransform"
+      }
+    },
+    "VNImageTranslationAlignmentObservation": {
+      "alignmentTransform": {
+        "doc": "The alignment transform to align the floating image with the reference image.",
+        "url": "https://developer.apple.com/documentation/vision/vnimagetranslationalignmentobservation/alignmenttransform"
+      }
+    },
+    "VNInstanceMaskObservation": {
+      "allInstances": {
+        "doc": "The collection that contains all instances, excluding the background.",
+        "url": "https://developer.apple.com/documentation/vision/vninstancemaskobservation/allinstances"
+      },
+      "instanceMask": {
+        "doc": "The resulting mask that represents all instances.",
+        "url": "https://developer.apple.com/documentation/vision/vninstancemaskobservation/instancemask"
+      }
+    },
+    "VNObservation": {
+      "confidence": {
+        "doc": "The level of confidence in the observation’s accuracy.",
+        "url": "https://developer.apple.com/documentation/vision/vnobservation/confidence"
+      },
+      "timeRange": {
+        "doc": "The time range of the reported observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnobservation/timerange"
+      },
+      "uuid": {
+        "doc": "A unique identifier assigned to the Vision observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnobservation/uuid"
+      }
+    },
+    "VNPixelBufferObservation": {
+      "featureName": {
+        "doc": "A feature name that the CoreML model defines.",
+        "url": "https://developer.apple.com/documentation/vision/vnpixelbufferobservation/featurename"
+      },
+      "pixelBuffer": {
+        "doc": "The image that results from a request with image output.",
+        "url": "https://developer.apple.com/documentation/vision/vnpixelbufferobservation/pixelbuffer"
+      }
+    },
+    "VNPoint": {
+      "location": {
+        "doc": "The Core Graphics point for this point.",
+        "url": "https://developer.apple.com/documentation/vision/vnpoint/location"
+      },
+      "x": {
+        "doc": "The x-coordinate.",
+        "url": "https://developer.apple.com/documentation/vision/vnpoint/x"
+      },
+      "y": {
+        "doc": "The y-coordinate.",
+        "url": "https://developer.apple.com/documentation/vision/vnpoint/y"
+      },
+      "zeroPoint": {
+        "doc": "A point object that represents the origin.",
+        "url": "https://developer.apple.com/documentation/vision/vnpoint/zero"
+      }
+    },
+    "VNPoint3D": {
+      "position": {
+        "doc": "The three-dimensional position.",
+        "url": "https://developer.apple.com/documentation/vision/vnpoint3d/position"
+      }
+    },
+    "VNRecognizeAnimalsRequest": {
+      "results": {
+        "doc": "The results of the request to recognize animals.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizeanimalsrequest/results"
+      }
+    },
+    "VNRecognizeTextRequest": {
+      "automaticallyDetectsLanguage": {
+        "doc": "A Boolean value that indicates whether to attempt detecting the language to use the appropriate model for recognition and language correction.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizetextrequest/automaticallydetectslanguage"
+      },
+      "customWords": {
+        "doc": "An array of strings to supplement the recognized languages at the word-recognition stage.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizetextrequest/customwords"
+      },
+      "minimumTextHeight": {
+        "doc": "The minimum height, relative to the image height, of the text to recognize.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizetextrequest/minimumtextheight"
+      },
+      "recognitionLanguages": {
+        "doc": "An array of languages to detect, in priority order.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizetextrequest/recognitionlanguages"
+      },
+      "recognitionLevel": {
+        "doc": "A value that determines whether the request prioritizes accuracy or speed in text recognition.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizetextrequest/recognitionlevel"
+      },
+      "results": {
+        "doc": "The results of the text recognition request.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizetextrequest/results"
+      },
+      "usesLanguageCorrection": {
+        "doc": "A Boolean value that indicates whether the request applies language correction during the recognition process.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizetextrequest/useslanguagecorrection"
+      }
+    },
+    "VNRecognizedObjectObservation": {
+      "labels": {
+        "doc": "An array of observations that classify the recognized object.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedobjectobservation/labels"
+      }
+    },
+    "VNRecognizedPoint": {
+      "identifier": {
+        "doc": "The point’s identifier label.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedpoint/identifier"
+      }
+    },
+    "VNRecognizedPoint3D": {
+      "identifier": {
+        "doc": "The identifier that provides context about what kind of point the request recognizes.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedpoint3d/identifier"
+      }
+    },
+    "VNRecognizedPoints3DObservation": {
+      "availableGroupKeys": {
+        "doc": "The available point group keys in the observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedpoints3dobservation/availablegroupkeys"
+      },
+      "availableKeys": {
+        "doc": "The available point keys in the observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedpoints3dobservation/availablekeys"
+      }
+    },
+    "VNRecognizedPointsObservation": {
+      "availableGroupKeys": {
+        "doc": "The available point group keys in the observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedpointsobservation/availablegroupkeys"
+      },
+      "availableKeys": {
+        "doc": "The available point keys in the observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedpointsobservation/availablekeys"
+      }
+    },
+    "VNRecognizedText": {
+      "boundingBox(for:)": {
+        "doc": "Calculates the bounding box around the characters in the range of a string.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedtext/boundingbox(for:)"
+      },
+      "confidence": {
+        "doc": "A normalized confidence score for the text recognition result.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedtext/confidence"
+      },
+      "string": {
+        "doc": "The top candidate for recognized text.",
+        "url": "https://developer.apple.com/documentation/vision/vnrecognizedtext/string"
+      }
+    },
+    "VNRectangleObservation": {
+      "bottomLeft": {
+        "doc": "The coordinates of the lower-left corner of the observation bounding box.",
+        "url": "https://developer.apple.com/documentation/vision/vnrectangleobservation/bottomleft"
+      },
+      "bottomRight": {
+        "doc": "The coordinates of the lower-right corner of the observation bounding box.",
+        "url": "https://developer.apple.com/documentation/vision/vnrectangleobservation/bottomright"
+      },
+      "topLeft": {
+        "doc": "The coordinates of the upper-left corner of the observation bounding box.",
+        "url": "https://developer.apple.com/documentation/vision/vnrectangleobservation/topleft"
+      },
+      "topRight": {
+        "doc": "The coordinates of the upper-right corner of the observation bounding box.",
+        "url": "https://developer.apple.com/documentation/vision/vnrectangleobservation/topright"
+      }
+    },
+    "VNRequest": {
+      "completionHandler": {
+        "doc": "The completion handler the system invokes after the request finishes processing.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/completionhandler"
+      },
+      "computeDevice(for:)": {
+        "doc": "Returns the compute device for a compute stage.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/computedevice(for:)"
+      },
+      "currentRevision": {
+        "doc": "The current revison supported by the request.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/currentrevision"
+      },
+      "defaultRevision": {
+        "doc": "The revision of the latest request for the particular SDK linked with the client application.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/defaultrevision"
+      },
+      "preferBackgroundProcessing": {
+        "doc": "A hint to minimize the resource burden of the request.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/preferbackgroundprocessing"
+      },
+      "results": {
+        "doc": "The collection of observation results generated by request processing.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/results"
+      },
+      "revision": {
+        "doc": "The specific algorithm or implementation revision that’s used to perform the request.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/revision"
+      },
+      "setComputeDevice(_:for:)": {
+        "doc": "Assigns a compute device for a compute stage.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/setcomputedevice(_:for:)"
+      },
+      "supportedComputeStageDevices": {
+        "doc": "The collection of compute devices per stage that a request supports.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/supportedcomputestagedevices"
+      },
+      "supportedRevisions": {
+        "doc": "The collection of currently-supported algorithm versions for the class of request.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/supportedrevisions"
+      },
+      "usesCPUOnly": {
+        "doc": "A Boolean signifying that the Vision request should execute exclusively on the CPU.",
+        "url": "https://developer.apple.com/documentation/vision/vnrequest/usescpuonly"
+      }
+    },
+    "VNSaliencyImageObservation": {
+      "salientObjects": {
+        "doc": "A collection of objects describing the distinct areas of the saliency heat map.",
+        "url": "https://developer.apple.com/documentation/vision/vnsaliencyimageobservation/salientobjects"
+      }
+    },
+    "VNStatefulRequest": {
+      "frameAnalysisSpacing": {
+        "doc": "A time value that indicates the interval between analysis operations.",
+        "url": "https://developer.apple.com/documentation/vision/vnstatefulrequest/frameanalysisspacing"
+      },
+      "minimumLatencyFrameCount": {
+        "doc": "The minimum number of frames a request processes before reporting an observation.",
+        "url": "https://developer.apple.com/documentation/vision/vnstatefulrequest/minimumlatencyframecount"
+      }
+    },
+    "VNTextObservation": {
+      "characterBoxes": {
+        "doc": "An array of detected individual character bounding boxes.",
+        "url": "https://developer.apple.com/documentation/vision/vntextobservation/characterboxes"
+      }
+    },
+    "VNTrackHomographicImageRegistrationRequest": {
+      "results": {
+        "doc": "The observed homographic image alignment request.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackhomographicimageregistrationrequest/results"
+      }
+    },
+    "VNTrackOpticalFlowRequest": {
+      "VNTrackOpticalFlowRequestComputationAccuracy": {
+        "doc": "Computational accuracy options.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackopticalflowrequest/computationaccuracy-swift.enum"
+      },
+      "computationAccuracy": {
+        "doc": "The level of accuracy to compute the optical flow.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackopticalflowrequest/computationaccuracy-swift.property"
+      },
+      "keepNetworkOutput": {
+        "doc": "A Boolean value that indicates the raw pixel buffer continues to emit from the network.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackopticalflowrequest/keepnetworkoutput"
+      },
+      "outputPixelFormat": {
+        "doc": "The pixel format type of the output value.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackopticalflowrequest/outputpixelformat"
+      },
+      "results": {
+        "doc": "The optical flow results the request observes.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackopticalflowrequest/results"
+      }
+    },
+    "VNTrackTranslationalImageRegistrationRequest": {
+      "results": {
+        "doc": "The observed translational image alignment request.",
+        "url": "https://developer.apple.com/documentation/vision/vntracktranslationalimageregistrationrequest/results"
+      }
+    },
+    "VNTrackingRequest": {
+      "inputObservation": {
+        "doc": "The observation object defining a region to track.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackingrequest/inputobservation"
+      },
+      "lastFrame": {
+        "doc": "A Boolean that indicates the last frame in a tracking sequence.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackingrequest/islastframe"
+      },
+      "trackingLevel": {
+        "doc": "A value for specifying whether to prioritize speed or location accuracy.",
+        "url": "https://developer.apple.com/documentation/vision/vntrackingrequest/trackinglevel"
+      }
+    },
+    "VNTrajectoryObservation": {
+      "detectedPoints": {
+        "doc": "The centroid points of the detected contour along the trajectory.",
+        "url": "https://developer.apple.com/documentation/vision/vntrajectoryobservation/detectedpoints"
+      },
+      "equationCoefficients": {
+        "doc": "The coefficients of the parabolic equation.",
+        "url": "https://developer.apple.com/documentation/vision/vntrajectoryobservation/equationcoefficients"
+      },
+      "movingAverageRadius": {
+        "doc": "The moving average radius of the object the request is tracking.",
+        "url": "https://developer.apple.com/documentation/vision/vntrajectoryobservation/movingaverageradius"
+      },
+      "projectedPoints": {
+        "doc": "The centroids of the calculated trajectory from the detected points.",
+        "url": "https://developer.apple.com/documentation/vision/vntrajectoryobservation/projectedpoints"
+      }
+    },
+    "VNTranslationalImageRegistrationRequest": {
+      "results": {
+        "doc": "The results of a translational image alignment request.",
+        "url": "https://developer.apple.com/documentation/vision/vntranslationalimageregistrationrequest/results"
+      }
+    },
+    "VNVector": {
+      "length": {
+        "doc": "The length, or absolute value, of the vector.",
+        "url": "https://developer.apple.com/documentation/vision/vnvector/length"
+      },
+      "r": {
+        "doc": "The radius, absolute value, or length of the vector.",
+        "url": "https://developer.apple.com/documentation/vision/vnvector/r"
+      },
+      "squaredLength": {
+        "doc": "The squared length of the vector.",
+        "url": "https://developer.apple.com/documentation/vision/vnvector/squaredlength"
+      },
+      "theta": {
+        "doc": "The angle between the vector direction and the positive direction of the x-axis.",
+        "url": "https://developer.apple.com/documentation/vision/vnvector/theta"
+      },
+      "x": {
+        "doc": "A signed projection that indicates the vector’s direction on the x-axis.",
+        "url": "https://developer.apple.com/documentation/vision/vnvector/x"
+      },
+      "y": {
+        "doc": "A signed projection that indicates the vector’s direction on the y-axis.",
+        "url": "https://developer.apple.com/documentation/vision/vnvector/y"
+      },
+      "zeroVector": {
+        "doc": "A vector object with zero length.",
+        "url": "https://developer.apple.com/documentation/vision/vnvector/zero"
+      }
+    },
+    "VNVideoProcessor": {
+      "VNVideoProcessorRequestProcessingOptions": {
+        "doc": "An object that defines a video processor’s configuration options.",
+        "url": "https://developer.apple.com/documentation/vision/vnvideoprocessor/requestprocessingoptions"
+      }
+    }
+  }
+}

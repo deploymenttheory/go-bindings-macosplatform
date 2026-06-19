@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that resamples an existing MPS image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnupsampling
 type MPSCNNUpsampling struct {
 	mpsneuralnetwork.MPSCNNKernel

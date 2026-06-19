@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object you use to create and manage a network relay configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nerelaymanager
 type NERelayManager struct {
 	foundation.NSObject
@@ -57,7 +59,7 @@ func NERelayManagerFromID(id objc.ID) *NERelayManager {
 	return o
 }
 
-// @method sharedManager @return The singleton NERelayManager object for the calling process.
+// Access the single instance of a network relay manager.
 func NERelayManagerSharedManager() *NERelayManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNERelayManager), _nERelayManagerSelSharedManager)
 	if _ret != 0 {
@@ -66,7 +68,7 @@ func NERelayManagerSharedManager() *NERelayManager {
 	return NERelayManagerFromID(_ret)
 }
 
-// @method loadFromPreferencesWithCompletionHandler: @discussion This function loads the current relay configuration from the caller's relay preferences. @param completionHandler A block that will be called when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+// Load your relay configuration from the system networking preferences.
 func (o *NERelayManager) LoadFromPreferencesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -78,7 +80,7 @@ func (o *NERelayManager) LoadFromPreferencesWithCompletionHandler(completionHand
 	o.Ptr().Send(_nERelayManagerSelLoadFromPreferencesWithCompletionHandler, __block_completionHandler)
 }
 
-// @method removeFromPreferencesWithCompletionHandler: @discussion This function removes the relay configuration from the caller's relay preferences. If the relay is enabled, the relay becomes disabled. @param completionHandler A block that will be called when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
+// Remove your relay configuration from the system networking preferences.
 func (o *NERelayManager) RemoveFromPreferencesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -90,7 +92,7 @@ func (o *NERelayManager) RemoveFromPreferencesWithCompletionHandler(completionHa
 	o.Ptr().Send(_nERelayManagerSelRemoveFromPreferencesWithCompletionHandler, __block_completionHandler)
 }
 
-// @method saveToPreferencesWithCompletionHandler: @discussion This function saves the relay configuration in the caller's relay preferences. If the relay are enabled, they will become active. @param completionHandler A block that will be called when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
+// Save your relay configuration to the system networking preferences.
 func (o *NERelayManager) SaveToPreferencesWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -103,11 +105,21 @@ func (o *NERelayManager) SaveToPreferencesWithCompletionHandler(completionHandle
 }
 
 // @method getLastClientErrors @discussion This function will get errors that the client detected while using this relay configuration within the specified time period.  Errors will be from the NERelayClientErrorDomain and the NERelayManagerClientErrorNone value will be set for successful connections. @param seconds A NSTimeInterval that specifies how many seconds to report errors for.  The maximum supported value is 24 hours and any larger values will be automatically reduced to 24 hours. @param completionHandler A block that will be called when once the errors have been collected. The NSArray will contain a list of NERelayManagerClientError values detected within the last number of seconds as specified by the "seconds" parameter.  The values will be ordered from the error most recently detected to the oldest.  The error value of NERelayManagerClientErrorNone indicates the last successful use of the relay without error.  The NSArray will be empty if there are no values detected within the specified time period or nil if there was a problem in retrieving the errors.
-func (o *NERelayManager) GetLastClientErrorsCompletionHandler(seconds float64, completionHandler objc.Block) {
-	o.Ptr().Send(_nERelayManagerSelGetLastClientErrorsCompletionHandler, seconds, completionHandler)
+func (o *NERelayManager) GetLastClientErrorsCompletionHandler(seconds float64, completionHandler func(*foundation.NSArray[objc.ID])) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[objc.ID](blockParam0))
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_nERelayManagerSelGetLastClientErrorsCompletionHandler, seconds, __block_completionHandler)
 }
 
-// @method loadAllManagersFromPreferencesWithCompletionHandler: @discussion This function asynchronously reads all of the NERelay configurations created by the calling app that have previously been saved to disk and returns them as NERelayManager objects. @param completionHandler A block that takes an array NERelayManager objects. The array passed to the block may be empty if no NERelay configurations were successfully read from the disk.  The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+// Asynchronously reads all the relay configurations previously created and saved by the calling app.
 func NERelayManagerLoadAllManagersFromPreferencesWithCompletionHandler(completionHandler func(*foundation.NSArray[*NERelayManager], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -180,42 +192,54 @@ func (o *NERelayManager) SetRelays(relays *foundation.NSArray[*NERelay]) {
 
 // @property matchDomains @discussion An array of strings containing domain names. If this property is non-nil, the relay will be used to access hosts within the specified domains. If this and the match FQDNs property is nil, the relay will be used for all domains.
 func (o *NERelayManager) MatchDomains() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nERelayManagerSelMatchDomains)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nERelayManagerSelMatchDomains)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NERelayManager) SetMatchDomains(matchDomains *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nERelayManagerSelSetMatchDomains, matchDomains)
+	o.Ptr().Send(_nERelayManagerSelSetMatchDomains, matchDomains.Ptr())
 }
 
 // @property matchFQDNs @discussion An array of strings containing Fully Qualified Domain Names (FQDNs). If this property is non-nil, the relay will be used to access the specified hosts.  If this and the matchDomains property is nil, the relay will be used for all domains.
 func (o *NERelayManager) MatchFQDNs() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nERelayManagerSelMatchFQDNs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nERelayManagerSelMatchFQDNs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NERelayManager) SetMatchFQDNs(matchFQDNs *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nERelayManagerSelSetMatchFQDNs, matchFQDNs)
+	o.Ptr().Send(_nERelayManagerSelSetMatchFQDNs, matchFQDNs.Ptr())
 }
 
 // @property excludedDomains @discussion An array of strings containing domain names. If the destination host name of a connection shares a suffix with one of these strings then the relay will not be used.
 func (o *NERelayManager) ExcludedDomains() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nERelayManagerSelExcludedDomains)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nERelayManagerSelExcludedDomains)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NERelayManager) SetExcludedDomains(excludedDomains *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nERelayManagerSelSetExcludedDomains, excludedDomains)
+	o.Ptr().Send(_nERelayManagerSelSetExcludedDomains, excludedDomains.Ptr())
 }
 
 // @property excludedFQDNs @discussion An array of strings containing Fully Qualified Domain Names (FQDNs). If the destination host matches one of these strings then the relay will not be used.  An excluded FQDN takes priority over the matchDomain property.  This means the relay will not be used if the hostname matches an FQDN in this array even if the matchDomains contains a domain that would have been considered a match.
 func (o *NERelayManager) ExcludedFQDNs() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nERelayManagerSelExcludedFQDNs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nERelayManagerSelExcludedFQDNs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NERelayManager) SetExcludedFQDNs(excludedFQDNs *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nERelayManagerSelSetExcludedFQDNs, excludedFQDNs)
+	o.Ptr().Send(_nERelayManagerSelSetExcludedFQDNs, excludedFQDNs.Ptr())
 }
 
 // @property onDemandRules @discussion An array of NEOnDemandRule objects. If nil, the associated relay will always apply. If non-nil, the array describes the networks on which the relay should be used or not.

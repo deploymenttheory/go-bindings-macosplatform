@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A password-based authentication operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktokenpasswordauthoperation
 type TKTokenPasswordAuthOperation struct {
 	TKTokenAuthOperation

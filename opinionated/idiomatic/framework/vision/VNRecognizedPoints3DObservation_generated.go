@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An observation that provides the 3D points for a request.
+//
 // RecognizedPoints3DObservation wraps [raw.VNRecognizedPoints3DObservation] with a fluent Go API.
 type RecognizedPoints3DObservation struct {
 	inner *raw.VNRecognizedPoints3DObservation
@@ -37,7 +39,7 @@ func NewRecognizedPoints3DObservation() *RecognizedPoints3DObservation {
 	return &RecognizedPoints3DObservation{inner: raw.VNRecognizedPoints3DObservationFromID(_id)}
 }
 
-// @brief Obtains a specific normalized recognized point. @param pointKey The key specifying the desired recognized point. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the recognized point, or nil if the specific point is not defined.
+// Returns a point for a key you specify.
 //
 // RecognizedPointForKeyError calls the underlying RecognizedPointForKeyError.
 func (x *RecognizedPoints3DObservation) RecognizedPointForKeyError(pointKey *foundation.NSString) (*RecognizedPoint3D, error) {
@@ -51,7 +53,7 @@ func (x *RecognizedPoints3DObservation) RecognizedPointForKeyError(pointKey *fou
 	return &RecognizedPoint3D{inner: _r}, nil
 }
 
-// @brief Obtains the collection of points associated with an identified grouping. @discussion The obtained collection is a dictionary that provides the mapping of a recognized point's key to the recognized point. @param groupKey The key representing a specific grouping of points. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the dictionary of recognized points in the group, or nil if an error was encountered.
+// Returns a point for a group key you specify.
 //
 // RecognizedPointsForGroupKeyError calls the underlying RecognizedPointsForGroupKeyError.
 func (x *RecognizedPoints3DObservation) RecognizedPointsForGroupKeyError(groupKey *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint3D], error) {

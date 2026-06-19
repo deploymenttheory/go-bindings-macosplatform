@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that specifies properties used by a YOLO loss kernel.
+//
 // CNNYOLOLossDescriptor wraps [raw.MPSCNNYOLOLossDescriptor] with a fluent Go API.
 type CNNYOLOLossDescriptor struct {
 	inner *raw.MPSCNNYOLOLossDescriptor

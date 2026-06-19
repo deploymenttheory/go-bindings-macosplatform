@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// The various types of thumbnails that you can request.
 // Bitmask — values may be combined with |.
 type QLThumbnailGenerationRequestRepresentationTypes uint64
 
@@ -39,6 +40,7 @@ func (e QLThumbnailGenerationRequestRepresentationTypes) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The different types of thumbnails that you can create.
 type QLThumbnailRepresentationType int64
 
 const (

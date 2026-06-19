@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that returns the element-wise sum of its two input images.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimageadd
 type MPSImageAdd struct {
 	mpsimage.MPSImageArithmetic

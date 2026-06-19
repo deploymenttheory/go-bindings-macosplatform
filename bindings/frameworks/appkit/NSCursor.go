@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A pointer (also called a cursor).
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscursor
 type NSCursor struct {
 	foundation.NSObject
@@ -74,6 +76,7 @@ func NSCursorFromID(id objc.ID) *NSCursor {
 	return o
 }
 
+// Initializes a cursor with the given image and hot spot.
 func (o *NSCursor) InitWithImageHotSpot(newImage *NSImage, point corefoundation.CGPoint) *NSCursor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCursorSelInitWithImageHotSpot, newImage.Ptr(), point)
 	if _ret != 0 {
@@ -90,35 +93,42 @@ func (o *NSCursor) InitWithCoder(coder *foundation.NSCoder) *NSCursor {
 	return NSCursorFromID(_ret)
 }
 
+// Makes the current cursor invisible.
 func NSCursorHide() {
 	objc.ID(_clsNSCursor).Send(_nSCursorSelHide)
 }
 
+// Negates an earlier call to hide by showing the current cursor.
 func NSCursorUnhide() {
 	objc.ID(_clsNSCursor).Send(_nSCursorSelUnhide)
 }
 
+// Sets whether the cursor is hidden until the mouse moves.
 func NSCursorSetHiddenUntilMouseMoves(flag bool) {
 	objc.ID(_clsNSCursor).Send(_nSCursorSelSetHiddenUntilMouseMoves, flag)
 }
 
+// Pops the current cursor off the top of the stack.
 func NSCursorPop() {
 	objc.ID(_clsNSCursor).Send(_nSCursorSelPop)
 }
 
+// Sends a pop message to the receiver’s class.
 func (o *NSCursor) Pop() {
 	o.Ptr().Send(_nSCursorSelPop)
 }
 
+// Puts the receiver on top of the cursor stack and makes it the current cursor.
 func (o *NSCursor) Push() {
 	o.Ptr().Send(_nSCursorSelPush)
 }
 
+// Makes the receiver the current cursor.
 func (o *NSCursor) Set() {
 	o.Ptr().Send(_nSCursorSelSet)
 }
 
-// Returns the cursor for resizing a column (vertical divider) in the specified directions. - Parameter directions: The direction in which a column can be resized.
+// Returns the cursor for resizing a column (vertical divider) in the specified directions.
 func NSCursorColumnResizeCursorInDirections(directions NSHorizontalDirections) *NSCursor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCursor), _nSCursorSelColumnResizeCursorInDirections, directions)
 	if _ret != 0 {
@@ -127,7 +137,7 @@ func NSCursorColumnResizeCursorInDirections(directions NSHorizontalDirections) *
 	return NSCursorFromID(_ret)
 }
 
-// Returns the cursor for resizing a row (horizontal divider) in the specified directions. - Parameter directions: The direction in which a row can be resized.
+// Returns the cursor for resizing a row (horizontal divider) in the specified directions.
 func NSCursorRowResizeCursorInDirections(directions NSVerticalDirections) *NSCursor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCursor), _nSCursorSelRowResizeCursorInDirections, directions)
 	if _ret != 0 {
@@ -136,7 +146,7 @@ func NSCursorRowResizeCursorInDirections(directions NSVerticalDirections) *NSCur
 	return NSCursorFromID(_ret)
 }
 
-// Returns the cursor for resizing a rectangular frame from the specified edge or corner. - Parameters: - position: The position along the perimeter of a rectangular frame (its edges and corners) from which it’s resized. - directions: The directions in which a rectangular frame can be resized.
+// Returns the cursor for resizing a rectangular frame from the specified edge or corner.
 func NSCursorFrameResizeCursorFromPositionInDirections(position NSCursorFrameResizePosition, directions NSCursorFrameResizeDirections) *NSCursor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCursor), _nSCursorSelFrameResizeCursorFromPositionInDirections, position, directions)
 	if _ret != 0 {
@@ -364,6 +374,7 @@ func NSCursorResizeUpDownCursor() *NSCursor {
 	return NSCursorFromID(_ret)
 }
 
+// Initializes the cursor with the specified image and hot spot.
 // Deprecated: Color hints are ignored. Use -initWithImage:hotSpot: instead
 func (o *NSCursor) InitWithImageForegroundColorHintBackgroundColorHintHotSpot(newImage *NSImage, fg *NSColor, bg *NSColor, hotSpot corefoundation.CGPoint) *NSCursor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCursorSelInitWithImageForegroundColorHintBackgroundColorHintHotSpot, newImage.Ptr(), fg.Ptr(), bg.Ptr(), hotSpot)
@@ -373,21 +384,25 @@ func (o *NSCursor) InitWithImageForegroundColorHintBackgroundColorHintHotSpot(ne
 	return NSCursorFromID(_ret)
 }
 
+// Sets whether the receiver accepts mouseExited: events.
 // Deprecated: setOnMouseExited is unused and should not be called
 func (o *NSCursor) SetOnMouseExited(flag bool) {
 	o.Ptr().Send(_nSCursorSelSetOnMouseExited, flag)
 }
 
+// Specifies whether the receiver accepts mouseEntered: events.
 // Deprecated: setOnMouseEntered is unused and should not be called
 func (o *NSCursor) SetOnMouseEntered(flag bool) {
 	o.Ptr().Send(_nSCursorSelSetOnMouseEntered, flag)
 }
 
+// Automatically sent to the receiver when the cursor enters a cursor rectangle owned by the receiver.
 // Deprecated: mouseEntered: is unused and should not be called
 func (o *NSCursor) MouseEntered(event *NSEvent) {
 	o.Ptr().Send(_nSCursorSelMouseEntered, event.Ptr())
 }
 
+// Automatically sent to the receiver when the cursor exits a cursor rectangle owned by the receiver.
 // Deprecated: mouseExited: is unused and should not be called
 func (o *NSCursor) MouseExited(event *NSEvent) {
 	o.Ptr().Send(_nSCursorSelMouseExited, event.Ptr())

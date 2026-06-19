@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A node that plays all its children at the same time.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasecontainernodedefinition
 type PHASEContainerNodeDefinition struct {
 	PHASESoundEventNodeDefinition
@@ -33,7 +35,7 @@ func PHASEContainerNodeDefinitionFromID(id objc.ID) *PHASEContainerNodeDefinitio
 	return o
 }
 
-// @method init @abstract Create a container node definition @return A new PHASEContainerNodeDefinition object
+// Creates a container node.
 func (o *PHASEContainerNodeDefinition) Init() *PHASEContainerNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEContainerNodeDefinitionSelInit)
 	if _ret != 0 {
@@ -42,13 +44,13 @@ func (o *PHASEContainerNodeDefinition) Init() *PHASEContainerNodeDefinition {
 	return PHASEContainerNodeDefinitionFromID(_ret)
 }
 
-// @method new @abstract Create a container node definition @return A new PHASEContainerNodeDefinition object
+// Creates a container node.
 func PHASEContainerNodeDefinitionNew() *PHASEContainerNodeDefinition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHASEContainerNodeDefinition), _pHASEContainerNodeDefinitionSelNew)
 	return PHASEContainerNodeDefinitionFromID(_ret)
 }
 
-// @method initWithIdentifier @abstract Create a container node definition @param identifier An optional custom identifier to give to this object @return A new PHASEContainerNodeDefinition object
+// Creates a container node with the given name.
 func (o *PHASEContainerNodeDefinition) InitWithIdentifier(identifier *foundation.NSString) *PHASEContainerNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEContainerNodeDefinitionSelInitWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -57,7 +59,7 @@ func (o *PHASEContainerNodeDefinition) InitWithIdentifier(identifier *foundation
 	return PHASEContainerNodeDefinitionFromID(_ret)
 }
 
-// @method addSubtree @abstract Add a subtree to this node @param subtree Add a subtree of PHASESoundEventNodeDefinition nodes beneath this node.
+// Adds a sound event node as a child.
 func (o *PHASEContainerNodeDefinition) AddSubtree(subtree *PHASESoundEventNodeDefinition) {
 	o.Ptr().Send(_pHASEContainerNodeDefinitionSelAddSubtree, subtree.Ptr())
 }

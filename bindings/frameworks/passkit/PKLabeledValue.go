@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that can represent a detail about a payment card or other item.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pklabeledvalue
 type PKLabeledValue struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func PKLabeledValueFromID(id objc.ID) *PKLabeledValue {
 	return o
 }
 
+// Instantiates a new labeled value object with the specified label and value strings.
 func (o *PKLabeledValue) InitWithLabelValue(label *foundation.NSString, value *foundation.NSString) *PKLabeledValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKLabeledValueSelInitWithLabelValue, label.Ptr(), value.Ptr())
 	if _ret != 0 {

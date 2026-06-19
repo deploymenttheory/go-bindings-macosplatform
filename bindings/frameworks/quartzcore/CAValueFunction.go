@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides a flexible method of defining animated transformations.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/cavaluefunction
 type CAValueFunction struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func CAValueFunctionFromID(id objc.ID) *CAValueFunction {
 	return o
 }
 
+// Returns the value function object identified by the name.
 func CAValueFunctionFunctionWithName(name *foundation.NSString) *CAValueFunction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAValueFunction), _cAValueFunctionSelFunctionWithName, name.Ptr())
 	if _ret != 0 {

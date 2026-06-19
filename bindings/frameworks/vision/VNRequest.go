@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for analysis requests.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnrequest
 type VNRequest struct {
 	foundation.NSObject
@@ -49,7 +51,7 @@ func VNRequestFromID(id objc.ID) *VNRequest {
 	return o
 }
 
-// @abstract Creates a new VNRequest with no completion handler.
+// Creates a new Vision request with no completion handler.
 func (o *VNRequest) Init() *VNRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRequestSelInit)
 	if _ret != 0 {
@@ -58,7 +60,7 @@ func (o *VNRequest) Init() *VNRequest {
 	return VNRequestFromID(_ret)
 }
 
-// @abstract Creates a new VNRequest with an optional completion handler. @param completionHandler	The block to be invoked after the request has completed its processing. The completion handler gets executed on the same dispatch queue as the request being executed.
+// Creates a new Vision request with an optional completion handler.
 func (o *VNRequest) InitWithCompletionHandler(completionHandler func(*VNRequest, unsafe.Pointer)) *VNRequest {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -77,7 +79,7 @@ func (o *VNRequest) InitWithCompletionHandler(completionHandler func(*VNRequest,
 	return VNRequestFromID(_ret)
 }
 
-// @discussion Tries to abort the request as soon as possible. Results will be nil. The completionHandler (if present) will be called with an error of VNErrorRequestCancelled.
+// Cancels the request before it can finish executing.
 func (o *VNRequest) Cancel() {
 	o.Ptr().Send(_vNRequestSelCancel)
 }
@@ -150,23 +152,26 @@ func VNRequestCurrentRevision() uint {
 	return _ret
 }
 
-// @brief Obtain the collection of compute device per stage that are supported by the request. @discussion This method's result is based on the current state of configuration of the target request at the time of the call. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return A dictionary of per-stage supported compute devices, or `nil` if an error occurs.
+// The collection of compute devices per stage that a request supports.
 func (o *VNRequest) SupportedComputeStageDevicesAndReturnError() (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vNRequestSelSupportedComputeStageDevicesAndReturnError, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNRequestSelSupportedComputeStageDevicesAndReturnError, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret), nil
 }
 
-// @brief Determine what the currently configured compute device is for a specific compute stage. @param computeStage The compute stage to be introspected. @return The currently assigned compute device, or `nil` if there is no explicit assignment.
+// Returns the compute device for a compute stage.
 func (o *VNRequest) ComputeDeviceForComputeStage(computeStage *foundation.NSString) coreml.MLComputeDeviceProtocol {
 	_ret := objc.Send[coreml.MLComputeDeviceProtocol](o.Ptr(), _vNRequestSelComputeDeviceForComputeStage, computeStage.Ptr())
 	return _ret
 }
 
-// @brief Assign a specific compute device for a compute stage. @discussion It is important to note that any compute device can be configured for a given compute stage.  Only when the request is performed is the validity of the (compute device / compute stage) assignments checked.  Valid compute devices for a request's compute stages can be obtained via `-supportedComputeStageDevicesAndReturnError:`. @param computeDevice The compute device to assign to the compute stage.  Passing nil for this parameter will remove any explicit compute device assignment, allowing Vision to select which device to use. @param computeStage The compute stage being configured.
+// Assigns a compute device for a compute stage.
 func (o *VNRequest) SetComputeDeviceForComputeStage(computeDevice coreml.MLComputeDeviceProtocol, computeStage *foundation.NSString) {
 	o.Ptr().Send(_vNRequestSelSetComputeDeviceForComputeStage, computeDevice, computeStage.Ptr())
 }

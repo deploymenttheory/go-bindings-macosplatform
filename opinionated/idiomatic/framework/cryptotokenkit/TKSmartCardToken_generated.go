@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a smart card based cryptographic token.
+//
 // SmartCardToken wraps [raw.TKSmartCardToken] with a fluent Go API.
 type SmartCardToken struct {
 	inner *raw.TKSmartCardToken
@@ -30,7 +32,7 @@ func SmartCardTokenFromID(id objc.ID) *SmartCardToken {
 	return &SmartCardToken{inner: raw.TKSmartCardTokenFromID(id)}
 }
 
-// @discussion Initializes token instance with specified attributes. @param smartCard TKSmartCard instance representing connection to SmartCard on which the intance should operate. @param AID ISO7816-4 application ID which is preselected on the card. @param instanceID Unique, persistent identifier of this token.  This is typically implemented by some kind of SmartCard serial number. @param tokenDriver associated driver which initiated creation of this token.
+// Initializes a smart card token with the specified smart card, application identifier, and token driver.
 //
 // NewSmartCardTokenWithSmartCardAIDInstanceIDTokenDriver creates a new [SmartCardToken].
 func NewSmartCardTokenWithSmartCardAIDInstanceIDTokenDriver(smartCard *raw.TKSmartCard, aID *foundation.NSData, instanceID string, tokenDriver *raw.TKSmartCardTokenDriver) *SmartCardToken {
@@ -39,6 +41,8 @@ func NewSmartCardTokenWithSmartCardAIDInstanceIDTokenDriver(smartCard *raw.TKSma
 	return &SmartCardToken{inner: raw.TKSmartCardTokenFromID(_id)}
 }
 
+// The token delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SmartCardToken) WithDelegate(delegate raw.TKTokenDelegate) *SmartCardToken {
 	x.inner.TKToken.SetDelegate(delegate)

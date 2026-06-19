@@ -12,7 +12,7 @@ import (
 	"unsafe"
 )
 
-// Represents the state and its associated properties of the directory Use the “state“ property to determine the validity of the other properties
+// Represents the state and its associated properties of the directory
 //
 // SyncedDirectoryState wraps [raw.GSSyncedDirectoryState] with a fluent Go API.
 type SyncedDirectoryState struct {

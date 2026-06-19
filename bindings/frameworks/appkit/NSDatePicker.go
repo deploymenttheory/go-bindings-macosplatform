@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A display of a calendar date with controls for editing the date value.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsdatepicker
 type NSDatePicker struct {
 	NSControl

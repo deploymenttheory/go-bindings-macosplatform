@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A cloud-synced directory for game-save data. To get an instance of the directory, call “openDirectoryForContainerIdentifier:“, which returns the directory for the iCloud container associated with the specified identifier. Calling this method starts syncing the directory in the background on the specified container. When the game needs to access the contents of the directory, show a UI while the directory fully syncs using the “finishSyncing:completionHandler:“ method. If you're showing your own UI, call the “finishSyncingWithCompletionHandler:“ method to wait for the directory to finish syncing. After the directory is ready to use, syncing pauses until you close the directory object or the object is deallocated. To resume syncing during the game, close and re-open the directory by calling “close“ and then “openDirectoryForContainerIdentifier:“.
+// A cloud-synced directory for game-save data.
 //
 // Apple documentation: https://developer.apple.com/documentation/gamesave/gssynceddirectory
 type GSSyncedDirectory struct {
@@ -39,7 +39,7 @@ func GSSyncedDirectoryFromID(id objc.ID) *GSSyncedDirectory {
 	return o
 }
 
-// Requests an instance of the game-save directory. - Parameter containerIdentifier: The identifier of the directory to request. If you pass `nil`, this method uses the first container identifier listed in the `com.apple.developer.icloud-container-identifiers` entitlements array. This method returns immediately, and starts syncing the directory in the background. To wait for syncing to complete, call the “finishSyncingWithCompletionHandler:“ method.
+// Requests an instance of the game-save directory.
 func GSSyncedDirectoryOpenDirectoryForContainerIdentifier(containerIdentifier *foundation.NSString) *GSSyncedDirectory {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGSSyncedDirectory), _gSSyncedDirectorySelOpenDirectoryForContainerIdentifier, containerIdentifier.Ptr())
 	if _ret != 0 {
@@ -53,7 +53,7 @@ func (o *GSSyncedDirectory) Close() {
 	o.Ptr().Send(_gSSyncedDirectorySelClose)
 }
 
-// Triggers an upload of the directory for any changes that were pending. Calls the completion block with `YES` if there were pending uploads; otherwise with `NO`.
+// Triggers an upload of the directory for any changes that were pending.
 func (o *GSSyncedDirectory) TriggerPendingUploadWithCompletionHandler(completion func(bool)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -65,12 +65,12 @@ func (o *GSSyncedDirectory) TriggerPendingUploadWithCompletionHandler(completion
 	o.Ptr().Send(_gSSyncedDirectorySelTriggerPendingUploadWithCompletionHandler, __block_completion)
 }
 
-// Indicates that you resolved a conflict. - Parameter version: The version to use. If you're implementing your own conflict resolution, read all of the conflicting versions, and modify one of them to incorporate the state and changes from the others. Then call this method, passing that version. Call this method only when the directory is in the “GSSyncState/GSSyncStateConflicted“ state.
+// Indicates that you resolved a conflict.
 func (o *GSSyncedDirectory) ResolveConflictsWithVersion(version *GSSyncedDirectoryVersion) {
 	o.Ptr().Send(_gSSyncedDirectorySelResolveConflictsWithVersion, version.Ptr())
 }
 
-// Waits for the directory sync to complete, without showing any user interface. Use this method to wait if your app displays its own syncing UI.
+// Waits for the directory sync to complete, without showing any user interface.
 func (o *GSSyncedDirectory) FinishSyncingWithCompletionHandler(completion func()) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -82,7 +82,7 @@ func (o *GSSyncedDirectory) FinishSyncingWithCompletionHandler(completion func()
 	o.Ptr().Send(_gSSyncedDirectorySelFinishSyncingWithCompletionHandler, __block_completion)
 }
 
-// Waits for the directory sync to complete, showing the sync's progress in a modal alert. - Parameters: - statusDisplay: The window where the system shows progress and alerts. - completion: The block that GameSave calls after syncing finishes. If the sync results in a conflict, the framework displays a conflict resolution UI for the user to chose a version that will be used. If the user isn't signed in to iCloud or iCloud drive, the framework informs the user and then switches to local saving.
+// Waits for the directory sync to complete, showing the sync’s progress in a modal alert.
 func (o *GSSyncedDirectory) FinishSyncingCompletionHandler(statusDisplay *appkit.NSWindow, completion func()) {
 	var __block_completion objc.Block
 	if completion != nil {

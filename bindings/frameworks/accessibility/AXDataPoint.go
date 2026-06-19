@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a single data point in a chart.
+//
 // Apple documentation: https://developer.apple.com/documentation/accessibility/axdatapoint
 type AXDataPoint struct {
 	foundation.NSObject
@@ -42,6 +44,7 @@ func AXDataPointFromID(id objc.ID) *AXDataPoint {
 	return o
 }
 
+// Creates a data point with the specified x- and y-values.
 func (o *AXDataPoint) InitWithXY(xValue *AXDataPointValue, yValue *AXDataPointValue) *AXDataPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataPointSelInitWithXY, xValue.Ptr(), yValue.Ptr())
 	if _ret != 0 {
@@ -50,6 +53,7 @@ func (o *AXDataPoint) InitWithXY(xValue *AXDataPointValue, yValue *AXDataPointVa
 	return AXDataPointFromID(_ret)
 }
 
+// Creates a data point with the specified x-value, y-value, and additional values.
 func (o *AXDataPoint) InitWithXYAdditionalValues(xValue *AXDataPointValue, yValue *AXDataPointValue, additionalValues *foundation.NSArray[*AXDataPointValue]) *AXDataPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataPointSelInitWithXYAdditionalValues, xValue.Ptr(), yValue.Ptr(), additionalValues.Ptr())
 	if _ret != 0 {
@@ -58,6 +62,7 @@ func (o *AXDataPoint) InitWithXYAdditionalValues(xValue *AXDataPointValue, yValu
 	return AXDataPointFromID(_ret)
 }
 
+// Creates a data point with the specified x-value, y-value, additional values, and label.
 func (o *AXDataPoint) InitWithXYAdditionalValuesLabel(xValue *AXDataPointValue, yValue *AXDataPointValue, additionalValues *foundation.NSArray[*AXDataPointValue], label *foundation.NSString) *AXDataPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXDataPointSelInitWithXYAdditionalValuesLabel, xValue.Ptr(), yValue.Ptr(), additionalValues.Ptr(), label.Ptr())
 	if _ret != 0 {

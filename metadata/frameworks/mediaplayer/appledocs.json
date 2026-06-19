@@ -135,6 +135,10 @@
       "doc": "The abstract base class for audio media item and store queue descriptors.",
       "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerqueuedescriptor"
     },
+    "MPMusicPlayerStoreQueueDescriptor": {
+      "doc": "A set of properties and methods for modifying items, based on their store identifier, in the player’s queue.",
+      "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerstorequeuedescriptor"
+    },
     "MPNowPlayingInfoCenter": {
       "doc": "An object for setting the Now Playing information for media that your app plays.",
       "url": "https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfocenter"
@@ -889,6 +893,20 @@
         "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerplayparametersqueuedescriptor/setstarttime(_:foritemwith:)"
       }
     },
+    "MPMusicPlayerStoreQueueDescriptor": {
+      "-initWithStoreIDs:": {
+        "doc": "Creates a new queue descriptor using the designated store identifiers.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerstorequeuedescriptor/init(storeids:)"
+      },
+      "-setEndTime:forItemWithStoreID:": {
+        "doc": "Sets the time the designated store item is to stop playing.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerstorequeuedescriptor/setendtime(_:foritemwithstoreid:)"
+      },
+      "-setStartTime:forItemWithStoreID:": {
+        "doc": "Sets the time the designated store item is to start playing.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerstorequeuedescriptor/setstarttime(_:foritemwithstoreid:)"
+      }
+    },
     "MPNowPlayingInfoCenter": {
       "+defaultCenter": {
         "doc": "Returns the singleton Now Playing info center.",
@@ -1475,6 +1493,16 @@
       "startItemPlayParameters": {
         "doc": "The item identified by the play parameters to play first.",
         "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerplayparametersqueuedescriptor/startitemplayparameters"
+      }
+    },
+    "MPMusicPlayerStoreQueueDescriptor": {
+      "startItemID": {
+        "doc": "The item identified by the store identifier to play first.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerstorequeuedescriptor/startitemid"
+      },
+      "storeIDs": {
+        "doc": "An array containing the store identifiers found by the query used to create the queue descriptor.",
+        "url": "https://developer.apple.com/documentation/mediaplayer/mpmusicplayerstorequeuedescriptor/storeids"
       }
     },
     "MPNowPlayingInfoCenter": {

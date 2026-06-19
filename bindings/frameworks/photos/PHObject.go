@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for Photos model objects (assets and collections).
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phobject
 type PHObject struct {
 	foundation.NSObject

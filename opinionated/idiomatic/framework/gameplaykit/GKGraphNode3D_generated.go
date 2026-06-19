@@ -10,7 +10,7 @@ import (
 	"unsafe"
 )
 
-// GKGraphNode coupled with a 3D position
+// A node in a navigation graph, associated with a point in continuous 3D space.
 //
 // GraphNode3D wraps [raw.GKGraphNode3D] with a fluent Go API.
 type GraphNode3D struct {
@@ -32,6 +32,8 @@ func GraphNode3DFromID(id objc.ID) *GraphNode3D {
 	return &GraphNode3D{inner: raw.GKGraphNode3DFromID(id)}
 }
 
+// Initializes a graph node with the specified point.
+//
 // NewGraphNode3DWithPoint creates a new [GraphNode3D].
 func NewGraphNode3DWithPoint(point unsafe.Pointer) *GraphNode3D {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGraphNode3D")), objc.RegisterName("alloc"))

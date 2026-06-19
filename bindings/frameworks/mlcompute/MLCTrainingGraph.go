@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A training graph that you create from one or more graph objects plus additional layers you add directly to the training graph.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlctraininggraph
 type MLCTrainingGraph struct {
 	MLCGraph
@@ -57,7 +59,7 @@ func MLCTrainingGraphFromID(id objc.ID) *MLCTrainingGraph {
 	return o
 }
 
-// @abstract   Create a training graph @param      graphObjects    The layers from these graph objects will be added to the training graph @param      lossLayer           The loss layer to use.  The loss layer can also be added to the training graph using nodeWithLayer:sources:lossLabels @param      optimizer           The optimizer to use @return     A new training graph object
+// Creates a training graph with the layers from the graph objects, loss layer, and optimizer you specify.
 func MLCTrainingGraphGraphWithGraphObjectsLossLayerOptimizer(graphObjects *foundation.NSArray[*MLCGraph], lossLayer *MLCLayer, optimizer *MLCOptimizer) *MLCTrainingGraph {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTrainingGraph), _mLCTrainingGraphSelGraphWithGraphObjectsLossLayerOptimizer, graphObjects.Ptr(), lossLayer.Ptr(), optimizer.Ptr())
 	if _ret != 0 {
@@ -66,55 +68,55 @@ func MLCTrainingGraphGraphWithGraphObjectsLossLayerOptimizer(graphObjects *found
 	return MLCTrainingGraphFromID(_ret)
 }
 
-// @abstract   Add the list of inputs to the training graph @param      inputs           The inputs @param      lossLabels  The loss label inputs @return     A boolean indicating success or failure
+// Adds the inputs and loss label inputs that you specify to the training graph.
 func (o *MLCTrainingGraph) AddInputsLossLabels(inputs *foundation.NSDictionary[*foundation.NSString, *MLCTensor], lossLabels *foundation.NSDictionary[*foundation.NSString, *MLCTensor]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelAddInputsLossLabels, inputs, lossLabels)
+	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelAddInputsLossLabels, inputs.Ptr(), lossLabels.Ptr())
 	return _ret
 }
 
-// @abstract   Add the list of inputs to the training graph @discussion Each input, loss label or label weights tensor is identified by a NSString. When the training graph is executed, this NSString is used to identify which data object should be as input data for each tensor whose device memory needs to be updated before the graph is executed. @param      inputs                        The inputs @param      lossLabels               The loss label inputs @param      lossLabelWeights  The loss label weights @return     A boolean indicating success or failure
+// Adds the inputs, loss labels, and loss label weights that you specify to the training graph.
 func (o *MLCTrainingGraph) AddInputsLossLabelsLossLabelWeights(inputs *foundation.NSDictionary[*foundation.NSString, *MLCTensor], lossLabels *foundation.NSDictionary[*foundation.NSString, *MLCTensor], lossLabelWeights *foundation.NSDictionary[*foundation.NSString, *MLCTensor]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelAddInputsLossLabelsLossLabelWeights, inputs, lossLabels, lossLabelWeights)
+	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelAddInputsLossLabelsLossLabelWeights, inputs.Ptr(), lossLabels.Ptr(), lossLabelWeights.Ptr())
 	return _ret
 }
 
-// @abstract   Add the list of outputs to the training graph @param      outputs           The outputs @return     A boolean indicating success or failure
+// Adds the outputs to the training graph you specify.
 func (o *MLCTrainingGraph) AddOutputs(outputs *foundation.NSDictionary[*foundation.NSString, *MLCTensor]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelAddOutputs, outputs)
+	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelAddOutputs, outputs.Ptr())
 	return _ret
 }
 
-// @abstract   Add the list of tensors whose contributions are not to be taken when computing gradients during gradient pass @param      tensors           The list of tensors @return     A boolean indicating success or failure
+// Adds the tensors that you specify, to indicate which contributions the graph excludes when computing gradients during gradient pass.
 func (o *MLCTrainingGraph) StopGradientForTensors(tensors *foundation.NSArray[*MLCTensor]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelStopGradientForTensors, tensors.Ptr())
 	return _ret
 }
 
-// @abstract   Compile the training graph for a device. @param      options     The compiler options to use when compiling the training graph @param      device       The MLCDevice object @return     A boolean indicating success or failure
+// Compiles the training graph for the options and device you specify.
 func (o *MLCTrainingGraph) CompileWithOptionsDevice(options MLCGraphCompilationOptions, device *MLCDevice) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelCompileWithOptionsDevice, options, device.Ptr())
 	return _ret
 }
 
-// @abstract   Compile the training graph for a device. @discussion Specifying the list of constant tensors when we compile the graph allows MLCompute to perform additional optimizations at compile time. @param      options                      The compiler options to use when compiling the training graph @param      device                        The MLCDevice object @param      inputTensors           The list of input tensors that are constants @param      inputTensorsData  The tensor data to be used with these constant input tensors @return     A boolean indicating success or failure
+// Compiles the training graph for the options, device, and input tensors you specify.
 func (o *MLCTrainingGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options MLCGraphCompilationOptions, device *MLCDevice, inputTensors *foundation.NSDictionary[*foundation.NSString, *MLCTensor], inputTensorsData *foundation.NSDictionary[*foundation.NSString, *MLCTensorData]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelCompileWithOptionsDeviceInputTensorsInputTensorsData, options, device.Ptr(), inputTensors, inputTensorsData)
+	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelCompileWithOptionsDeviceInputTensorsInputTensorsData, options, device.Ptr(), inputTensors.Ptr(), inputTensorsData.Ptr())
 	return _ret
 }
 
-// @abstract   Compile the optimizer to be used with a training graph. @discussion Typically the optimizer to be used with a training graph is specifed when the training graph is created using graphWithGraphObjects:lossLayer:optimizer.  The optimizer will be compiled in when compileWithOptions:device is called if an optimizer is specified with the training graph.  In the case where the optimizer to be used is not known when the graph is created or compiled, this method can be used to associate and compile a training graph with an optimizer. @param      optimizer       The MLCOptimizer object @return     A boolean indicating success or failure
+// Compiles the optimizer to use with a training graph you specify.
 func (o *MLCTrainingGraph) CompileOptimizer(optimizer *MLCOptimizer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelCompileOptimizer, optimizer.Ptr())
 	return _ret
 }
 
-// @abstract   Link mutiple training graphs @discussion This is used to link subsequent training graphs with first training sub-graph. This method should be used when we have tensors shared by one or more layers in multiple sub-graphs @param      graphs       The list of training graphs to link @return     A boolean indicating success or failure
+// Links the training graphs you specify.
 func (o *MLCTrainingGraph) LinkWithGraphs(graphs *foundation.NSArray[*MLCTrainingGraph]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelLinkWithGraphs, graphs.Ptr())
 	return _ret
 }
 
-// @abstract   Get the gradient tensor for an input tensor @param      input   The input tensor @return     The gradient tensor
+// Gets the gradient tensor for the input tensor you specify.
 func (o *MLCTrainingGraph) GradientTensorForInput(input *MLCTensor) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTrainingGraphSelGradientTensorForInput, input.Ptr())
 	if _ret != 0 {
@@ -123,7 +125,7 @@ func (o *MLCTrainingGraph) GradientTensorForInput(input *MLCTensor) *MLCTensor {
 	return MLCTensorFromID(_ret)
 }
 
-// @abstract   Get the source gradient tensors for a layer in the training graph @param      layer   A layer in the training graph @return     A list of tensors
+// Gets the source gradient tensors for the layer in the training graph you specify.
 func (o *MLCTrainingGraph) SourceGradientTensorsForLayer(layer *MLCLayer) *foundation.NSArray[*MLCTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTrainingGraphSelSourceGradientTensorsForLayer, layer.Ptr())
 	if _ret != 0 {
@@ -132,7 +134,7 @@ func (o *MLCTrainingGraph) SourceGradientTensorsForLayer(layer *MLCLayer) *found
 	return foundation.NSArrayFromID[*MLCTensor](_ret)
 }
 
-// @abstract   Get the result gradient tensors for a layer in the training graph @param      layer   A layer in the training graph @return     A list of tensors
+// Gets the result gradient tensors for the layer in the training graph you specify.
 func (o *MLCTrainingGraph) ResultGradientTensorsForLayer(layer *MLCLayer) *foundation.NSArray[*MLCTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTrainingGraphSelResultGradientTensorsForLayer, layer.Ptr())
 	if _ret != 0 {
@@ -141,7 +143,7 @@ func (o *MLCTrainingGraph) ResultGradientTensorsForLayer(layer *MLCLayer) *found
 	return foundation.NSArrayFromID[*MLCTensor](_ret)
 }
 
-// @abstract   Get the gradient data for a trainable parameter associated with a layer @discussion This can be used to get the gradient data for weights or biases parameters associated with a convolution, fully connected or convolution transpose layer @param      parameter   The updatable parameter associated with the layer @param      layer   A layer in the training graph.  Must be one of the following: - MLCConvolutionLayer - MLCFullyConnectedLayer - MLCBatchNormalizationLayer - MLCInstanceNormalizationLayer - MLCGroupNormalizationLayer - MLCLayerNormalizationLayer - MLCEmbeddingLayer - MLCMultiheadAttentionLayer @return     The gradient data.  Will return nil if the layer is marked as not trainable or if training graph is not executed with separate calls to forward and gradient passes.
+// Gets the gradient data for the trainable parameter and associated layer you specify.
 func (o *MLCTrainingGraph) GradientDataForParameterLayer(parameter *MLCTensor, layer *MLCLayer) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTrainingGraphSelGradientDataForParameterLayer, parameter.Ptr(), layer.Ptr())
 	if _ret != 0 {
@@ -150,7 +152,7 @@ func (o *MLCTrainingGraph) GradientDataForParameterLayer(parameter *MLCTensor, l
 	return foundation.NSDataFromID(_ret)
 }
 
-// @abstract   Allocate an entry for a user specified gradient for a tensor @param      tensor   A result tensor produced by a layer in the training graph that is input to some user specified code and will need to provide a user gradient during the gradient pass. @return     A gradient tensor
+// Allocates an entry for a gradient for the result tensor you specify.
 func (o *MLCTrainingGraph) AllocateUserGradientForTensor(tensor *MLCTensor) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTrainingGraphSelAllocateUserGradientForTensor, tensor.Ptr())
 	if _ret != 0 {
@@ -159,7 +161,7 @@ func (o *MLCTrainingGraph) AllocateUserGradientForTensor(tensor *MLCTensor) *MLC
 	return MLCTensorFromID(_ret)
 }
 
-// @abstract   Execute the training graph (forward, gradient and optimizer update) with given source and label data @discussion Execute the training graph with given source and label data.  If an optimizer is specified, the optimizer update is applied. If MLCExecutionOptionsSynchronous is specified in 'options', this method returns after the graph has been executed. Otherwise, this method returns after the graph has been queued for execution. The completion handler is called after the graph has finished execution. @param      inputsData                               The data objects to use for inputs @param      lossLabelsData                      The data objects to use for loss labels @param      lossLabelWeightsData         The data objects to use for loss label weights @param      batchSize                                 The batch size to use.  For a graph where batch size changes between layers this value must be 0. @param      options                                      The execution options @param      completionHandler                The completion handler @return     A boolean indicating success or failure
+// Executes the training graph with the input data, batch size, execution options, and completion handler you specify.
 func (o *MLCTrainingGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*MLCTensor, unsafe.Pointer, float64)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -171,11 +173,11 @@ func (o *MLCTrainingGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDa
 		})
 		defer __block_completionHandler.Release()
 	}
-	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler, inputsData, lossLabelsData, lossLabelWeightsData, batchSize, options, __block_completionHandler)
+	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler, inputsData.Ptr(), lossLabelsData.Ptr(), lossLabelWeightsData.Ptr(), batchSize, options, __block_completionHandler)
 	return _ret
 }
 
-// @abstract   Execute the training graph (forward, gradient and optimizer update) with given source and label data @param      inputsData                               The data objects to use for inputs @param      lossLabelsData                      The data objects to use for loss labels @param      lossLabelWeightsData         The data objects to use for loss label weights @param      outputsData                             The data objects to use for outputs @param      batchSize                                 The batch size to use.  For a graph where batch size changes between layers this value must be 0. @param      options                                     The execution options @param      completionHandler               The completion handler @return     A boolean indicating success or failure
+// Executes the training graph with the input data, output data, batch size, execution options, and completion handler that you specify.
 func (o *MLCTrainingGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*MLCTensor, unsafe.Pointer, float64)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -187,11 +189,11 @@ func (o *MLCTrainingGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDa
 		})
 		defer __block_completionHandler.Release()
 	}
-	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler, inputsData, lossLabelsData, lossLabelWeightsData, outputsData, batchSize, options, __block_completionHandler)
+	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler, inputsData.Ptr(), lossLabelsData.Ptr(), lossLabelWeightsData.Ptr(), outputsData.Ptr(), batchSize, options, __block_completionHandler)
 	return _ret
 }
 
-// @abstract   Execute the forward pass of the training graph @param      batchSize                         The batch size to use.  For a graph where batch size changes between layers this value must be 0. @param      options                             The execution options @param      completionHandler       The completion handler @return     A boolean indicating success or failure
+// Executes the forward pass of the training graph with the batch size, execution options, and completion handler you specify.
 func (o *MLCTrainingGraph) ExecuteForwardWithBatchSizeOptionsCompletionHandler(batchSize uint, options MLCExecutionOptions, completionHandler func(*MLCTensor, unsafe.Pointer, float64)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -207,7 +209,7 @@ func (o *MLCTrainingGraph) ExecuteForwardWithBatchSizeOptionsCompletionHandler(b
 	return _ret
 }
 
-// @abstract   Execute the forward pass for the training graph @param      batchSize                         The batch size to use.  For a graph where batch size changes between layers this value must be 0. @param      options                             The execution options @param      outputsData                     The data objects to use for outputs @param      completionHandler       The completion handler @return     A boolean indicating success or failure
+// Executes the forward pass of the training graph with the batch size, execution options, output data, and completion handler you specify.
 func (o *MLCTrainingGraph) ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize uint, options MLCExecutionOptions, outputsData *foundation.NSDictionary[*foundation.NSString, *MLCTensorData], completionHandler func(*MLCTensor, unsafe.Pointer, float64)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -219,11 +221,11 @@ func (o *MLCTrainingGraph) ExecuteForwardWithBatchSizeOptionsOutputsDataCompleti
 		})
 		defer __block_completionHandler.Release()
 	}
-	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler, batchSize, options, outputsData, __block_completionHandler)
+	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler, batchSize, options, outputsData.Ptr(), __block_completionHandler)
 	return _ret
 }
 
-// @abstract   Execute the gradient pass of the training graph @param      batchSize                         The batch size to use.  For a graph where batch size changes between layers this value must be 0. @param      options                             The execution options @param      completionHandler       The completion handler @return     A boolean indicating success or failure
+// Executes the gradient pass of the training graph with the batch size, execution options, and completion handler you specify.
 func (o *MLCTrainingGraph) ExecuteGradientWithBatchSizeOptionsCompletionHandler(batchSize uint, options MLCExecutionOptions, completionHandler func(*MLCTensor, unsafe.Pointer, float64)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -239,7 +241,7 @@ func (o *MLCTrainingGraph) ExecuteGradientWithBatchSizeOptionsCompletionHandler(
 	return _ret
 }
 
-// @abstract   Execute the gradient pass of the training graph @param      batchSize                         The batch size to use.  For a graph where batch size changes between layers this value must be 0. @param      options                             The execution options @param      outputsData                     The data objects to use for outputs @param      completionHandler       The completion handler @return     A boolean indicating success or failure
+// Executes the gradient pass of the training graph with the batch size, execution options, output data, and completion handler you specify.
 func (o *MLCTrainingGraph) ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize uint, options MLCExecutionOptions, outputsData *foundation.NSDictionary[*foundation.NSString, *MLCTensorData], completionHandler func(*MLCTensor, unsafe.Pointer, float64)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -251,11 +253,11 @@ func (o *MLCTrainingGraph) ExecuteGradientWithBatchSizeOptionsOutputsDataComplet
 		})
 		defer __block_completionHandler.Release()
 	}
-	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler, batchSize, options, outputsData, __block_completionHandler)
+	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler, batchSize, options, outputsData.Ptr(), __block_completionHandler)
 	return _ret
 }
 
-// @abstract   Execute the optimizer update pass of the training graph @param      options                             The execution options @param      completionHandler       The completion handler @return     A boolean indicating success or failure
+// Executes the optimizer update pass of the training graph with the execution options and completion handler you specify.
 func (o *MLCTrainingGraph) ExecuteOptimizerUpdateWithOptionsCompletionHandler(options MLCExecutionOptions, completionHandler func(*MLCTensor, unsafe.Pointer, float64)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -271,18 +273,18 @@ func (o *MLCTrainingGraph) ExecuteOptimizerUpdateWithOptionsCompletionHandler(op
 	return _ret
 }
 
-// @abstract   Synchronize updates (weights/biases from convolution, fully connected and LSTM layers, tensor parameters) from device memory to host memory.
+// Synchronizes updates from device memory.
 func (o *MLCTrainingGraph) SynchronizeUpdates() {
 	o.Ptr().Send(_mLCTrainingGraphSelSynchronizeUpdates)
 }
 
-// @abstract   Set the input tensor parameters that also will be updated by the optimizer @discussion These represent the list of input tensors to be updated when we execute the optimizer update Weights, bias or beta, gamma tensors are not included in this list.  MLCompute automatically adds them to the parameter list based on whether the layer is marked as updatable or not. @param      parameters   The list of input tensors to be updated by the optimizer @return     A boolean indicating success or failure
+// Sets the input tensor parameters, which the optimizer then updates.
 func (o *MLCTrainingGraph) SetTrainingTensorParameters(parameters *foundation.NSArray[*MLCTensorParameter]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelSetTrainingTensorParameters, parameters.Ptr())
 	return _ret
 }
 
-// @abstract   Associates the given optimizer data and device data buffers with the tensor. Returns true if the data is successfully associated with the tensor and copied to the device. @discussion The caller must guarantee the lifetime of the underlying memory of \p data for the entirety of the tensor's lifetime.  The \p deviceData buffers are allocated by MLCompute.  This method must be called before executeOptimizerUpdateWithOptions or executeWithInputsData is called for the training graph. We recommend using this method instead of using [MLCTensor bindOptimizerData] especially if the optimizer update is being called multiple times for each batch. @param      data                The optimizer data to be associated with the tensor @param      deviceData  The optimizer device data to be associated with the tensor @param      tensor           The tensor @return     A Boolean value indicating whether the data is successfully associated with the tensor .
+// Associates the optimizer and device data you specify along with the tensor.
 func (o *MLCTrainingGraph) BindOptimizerDataDeviceDataWithTensor(data *foundation.NSArray[*MLCTensorData], deviceData *foundation.NSArray[*MLCTensorOptimizerDeviceData], tensor *MLCTensor) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLCTrainingGraphSelBindOptimizerDataDeviceDataWithTensor, data.Ptr(), deviceData.Ptr(), tensor.Ptr())
 	return _ret

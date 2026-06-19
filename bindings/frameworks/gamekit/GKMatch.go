@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A peer-to-peer network between a group of players that sign into Game Center.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkmatch
 type GKMatch struct {
 	foundation.NSObject
@@ -46,7 +48,7 @@ func GKMatchFromID(id objc.ID) *GKMatch {
 	return o
 }
 
-// Asynchronously send data to one or more GKPlayers. Returns YES if delivery started, NO if unable to start sending and error will be set.
+// Transmits data to one or more players connected to the match.
 func (o *GKMatch) SendDataToPlayersDataModeError(data *foundation.NSData, players *foundation.NSArray[*GKPlayer], mode GKMatchSendDataMode) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _gKMatchSelSendDataToPlayersDataModeError, data.Ptr(), players.Ptr(), mode, unsafe.Pointer(&_nsErr))
@@ -56,7 +58,7 @@ func (o *GKMatch) SendDataToPlayersDataModeError(data *foundation.NSData, player
 	return _ret, nil
 }
 
-// Asynchronously broadcasts data to all players. Returns YES if delivery started, NO if unable to start sending and error will be set.
+// Transmits data to all players connected to the match.
 func (o *GKMatch) SendDataToAllPlayersWithDataModeError(data *foundation.NSData, mode GKMatchSendDataMode) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _gKMatchSelSendDataToAllPlayersWithDataModeError, data.Ptr(), mode, unsafe.Pointer(&_nsErr))
@@ -66,12 +68,12 @@ func (o *GKMatch) SendDataToAllPlayersWithDataModeError(data *foundation.NSData,
 	return _ret, nil
 }
 
-// Disconnect the match. This will show all other players in the match that the local player has disconnected. This should be called before releasing the match instance.
+// Disconnects the local player from the match.
 func (o *GKMatch) Disconnect() {
 	o.Ptr().Send(_gKMatchSelDisconnect)
 }
 
-// Choose the best host from among the connected players using gathered estimates for bandwidth and packet loss. This is intended for applications that wish to implement a client-server model on top of the match. The returned player ID will be nil if the best host cannot currently be determined (e.g. players are still connecting).
+// Determines the best player in the game to act as the server for a client-server topology.
 func (o *GKMatch) ChooseBestHostingPlayerWithCompletionHandler(completionHandler func(*GKPlayer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -86,7 +88,7 @@ func (o *GKMatch) ChooseBestHostingPlayerWithCompletionHandler(completionHandler
 	o.Ptr().Send(_gKMatchSelChooseBestHostingPlayerWithCompletionHandler, __block_completionHandler)
 }
 
-// Automatching to recreate a previous peer-to-peer match that became disconnected. A new match with the same set of players will be returned by the completion handler. All players should perform this when the match has ended for automatching to succeed. Error will be nil on success. Possible reasons for error: 1. Communications failure 2. Timeout
+// Creates a new match with the players from an existing match.
 func (o *GKMatch) RematchWithCompletionHandler(completionHandler func(*GKMatch, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -101,7 +103,7 @@ func (o *GKMatch) RematchWithCompletionHandler(completionHandler func(*GKMatch, 
 	o.Ptr().Send(_gKMatchSelRematchWithCompletionHandler, __block_completionHandler)
 }
 
-// * This method is deprecated. GKVoiceChat is no longer supported. **
+// Joins the local player to a voice channel.
 // Deprecated: No longer supported
 func (o *GKMatch) VoiceChatWithName(name *foundation.NSString) *GKVoiceChat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchSelVoiceChatWithName, name.Ptr())
@@ -139,11 +141,14 @@ func (o *GKMatch) Properties() unsafe.Pointer {
 }
 
 func (o *GKMatch) PlayerProperties() *foundation.NSDictionary[*GKPlayer, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*GKPlayer, objc.ID]](o.Ptr(), _gKMatchSelPlayerProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchSelPlayerProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*GKPlayer, objc.ID](_ret)
 }
 
-// * This method is obsolete. It will never be invoked and its implementation does nothing**
+// Determines the best player in the game to act as the server for a client-server match.
 // Deprecated: since macOS 10.10.
 func (o *GKMatch) ChooseBestHostPlayerWithCompletionHandler(completionHandler func(*foundation.NSString)) {
 	var __block_completionHandler objc.Block
@@ -159,11 +164,11 @@ func (o *GKMatch) ChooseBestHostPlayerWithCompletionHandler(completionHandler fu
 	o.Ptr().Send(_gKMatchSelChooseBestHostPlayerWithCompletionHandler, __block_completionHandler)
 }
 
-// * This method is obsolete. It will never be invoked and its implementation does nothing**
+// Transmits data to a list of connected players.
 // Deprecated: since macOS 10.10.
 func (o *GKMatch) SendDataToPlayersWithDataModeError(data *foundation.NSData, playerIDs *foundation.NSArray[*foundation.NSString], mode GKMatchSendDataMode) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _gKMatchSelSendDataToPlayersWithDataModeError, data.Ptr(), playerIDs, mode, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _gKMatchSelSendDataToPlayersWithDataModeError, data.Ptr(), playerIDs.Ptr(), mode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -172,6 +177,9 @@ func (o *GKMatch) SendDataToPlayersWithDataModeError(data *foundation.NSData, pl
 
 // Deprecated: since macOS 10.10.
 func (o *GKMatch) PlayerIDs() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _gKMatchSelPlayerIDs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchSelPlayerIDs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

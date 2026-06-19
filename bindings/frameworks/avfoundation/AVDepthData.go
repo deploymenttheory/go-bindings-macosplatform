@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container for per-pixel distance or disparity information captured by compatible camera devices.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avdepthdata
 type AVDepthData struct {
 	foundation.NSObject
@@ -44,10 +46,10 @@ func AVDepthDataFromID(id objc.ID) *AVDepthData {
 	return o
 }
 
-// @method depthDataFromDictionaryRepresentation:error: @abstract Returns an AVDepthData instance from depth information in an image file. @param imageSourceAuxDataInfoDictionary A dictionary of primitive depth-related information obtained from CGImageSourceCopyAuxiliaryDataInfoAtIndex. @param outError On return, if the depth data cannot be created, points to an NSError describing the problem. @result An AVDepthData instance, or nil if the auxiliary data info dictionary was malformed. @discussion When using ImageIO framework's CGImageSource API to read from a HEIF or JPEG file containing depth data, AVDepthData can be instantiated using the result of CGImageSourceCopyAuxiliaryDataInfoAtIndex, which returns a CFDictionary of primitive map information.
+// Creates a depth data object from depth information such as that found in an image file.
 func AVDepthDataDepthDataFromDictionaryRepresentationError(imageSourceAuxDataInfoDictionary *foundation.NSDictionary[objc.ID, objc.ID]) (*AVDepthData, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVDepthData), _aVDepthDataSelDepthDataFromDictionaryRepresentationError, imageSourceAuxDataInfoDictionary, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVDepthData), _aVDepthDataSelDepthDataFromDictionaryRepresentationError, imageSourceAuxDataInfoDictionary.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -57,7 +59,7 @@ func AVDepthDataDepthDataFromDictionaryRepresentationError(imageSourceAuxDataInf
 	return AVDepthDataFromID(_ret), nil
 }
 
-// @method depthDataByConvertingToDepthDataType: @abstract Returns a converted, derivative AVDepthData instance in the specified depthDataType. @param depthDataType The OSType of depthData object to which you'd like to convert. Must be present in availableDepthDataTypes. @result An AVDepthData instance. @discussion This method throws an NSInvalidArgumentException if you pass an unrecognized depthDataType. See
+// Returns a derivative depth data object by converting the depth data map to the specified data type.
 func (o *AVDepthData) DepthDataByConvertingToDepthDataType(depthDataType uint) *AVDepthData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDepthDataSelDepthDataByConvertingToDepthDataType, depthDataType)
 	if _ret != 0 {
@@ -66,7 +68,7 @@ func (o *AVDepthData) DepthDataByConvertingToDepthDataType(depthDataType uint) *
 	return AVDepthDataFromID(_ret)
 }
 
-// @method depthDataByApplyingExifOrientation: @abstract Returns a derivative AVDepthData instance in which the specified Exif orientation has been applied. @param exifOrientation One of the 8 standard Exif orientation tags expressing how the depth data should be rotated / mirrored. @result An AVDepthData instance. @discussion When applying simple 90 degree rotation or mirroring edits to media containing depth data, you may use this initializer to create a derivative copy of the depth in which the specified orientation is applied to both the underlying pixel map data and the camera calibration data. This method throws an NSInvalidArgumentException if you pass an unrecognized exifOrientation.
+// Returns a derivative depth data object by mirroring or rotating it to the specified orientation.
 func (o *AVDepthData) DepthDataByApplyingExifOrientation(exifOrientation imageio.CGImagePropertyOrientation) *AVDepthData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDepthDataSelDepthDataByApplyingExifOrientation, exifOrientation)
 	if _ret != 0 {
@@ -75,7 +77,7 @@ func (o *AVDepthData) DepthDataByApplyingExifOrientation(exifOrientation imageio
 	return AVDepthDataFromID(_ret)
 }
 
-// @method depthDataByReplacingDepthDataMapWithPixelBuffer:error: @abstract Returns an AVDepthData instance wrapping the replacement depth data map pixel buffer. @param pixelBuffer A pixel buffer containing depth data information in one of the 4 supported disparity / depth pixel formats. @param outError On return, if the depth data cannot be created, points to an NSError describing the problem. @result An AVDepthData instance, or nil if the pixel buffer is malformed. @discussion When applying complex edits to media containing depth data, you may create a derivative map with arbitrary transforms applied to it, then use this initializer to create a new AVDepthData. Note that this new depth data object has no camera calibration data, so its cameraCalibrationData property always returns nil.
+// Returns a derivative depth data object by replacing the depth data map.
 func (o *AVDepthData) DepthDataByReplacingDepthDataMapWithPixelBufferError(pixelBuffer unsafe.Pointer) (*AVDepthData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDepthDataSelDepthDataByReplacingDepthDataMapWithPixelBufferError, pixelBuffer, unsafe.Pointer(&_nsErr))
@@ -88,16 +90,22 @@ func (o *AVDepthData) DepthDataByReplacingDepthDataMapWithPixelBufferError(pixel
 	return AVDepthDataFromID(_ret), nil
 }
 
-// @method dictionaryRepresentationForAuxiliaryDataType: @abstract Returns a dictionary of primitive map information to be used when writing an image file with depth data. @param outAuxDataType On output, either kCGImageAuxiliaryDataTypeDisparity or kCGImageAuxiliaryDataTypeDepth, depending on the depth data's file. @result A dictionary of CGImageDestination compatible depth information, or nil if the auxDataType is unsupported. @discussion When using ImageIO framework's CGImageDestination API to write depth data to a HEIF or JPEG file, you may use this method to generate a dictionary of primitive map information consumed by CGImageDestinationAddAuxiliaryDataInfo.
+// Returns a dictionary representation of the depth data suitable for writing into an image file.
 func (o *AVDepthData) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType *foundation.NSString) *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _aVDepthDataSelDictionaryRepresentationForAuxiliaryDataType, outAuxDataType.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVDepthDataSelDictionaryRepresentationForAuxiliaryDataType, outAuxDataType.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @property availableDepthDataTypes @abstract Specifies which depth data pixel formats may be used with depthDataByConvertingToDepthDataType:. @discussion This property presents the available pixel format types as an array of NSNumbers, each wrapping an OSType (CV pixel format type).
 func (o *AVDepthData) AvailableDepthDataTypes() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVDepthDataSelAvailableDepthDataTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVDepthDataSelAvailableDepthDataTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property depthDataType @abstract Specifies the pixel format type of this depth data object's internal map. @discussion One of kCVPixelFormatType_DisparityFloat16, kCVPixelFormatType_DisparityFloat32, kCVPixelFormatType_DepthFloat16, or kCVPixelFormatType_DepthFloat32.

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes a reservation.
+//
 // Reservation wraps [raw.INReservation] with a fluent Go API.
 type Reservation struct {
 	inner *raw.INReservation

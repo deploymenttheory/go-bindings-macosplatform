@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of an instance normalization kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnninstancenormalizationnode
 type MPSCNNInstanceNormalizationNode struct {
 	mpsneuralnetwork.MPSNNFilterNode

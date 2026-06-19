@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An abstract class that serves as the basis for objects that enable archiving and distribution of other objects.
+//
 // Coder wraps [raw.NSCoder] with a fluent Go API.
 type Coder struct {
 	inner *raw.NSCoder
@@ -44,16 +46,22 @@ func (x *Coder) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*r
 	return x
 }
 
+// Encodes a value of the given type at the given address.
+//
 // EncodeValueOfObjCTypeAt calls the underlying EncodeValueOfObjCTypeAt.
 func (x *Coder) EncodeValueOfObjCTypeAt(type_ string, addr unsafe.Pointer) {
 	x.inner.EncodeValueOfObjCTypeAt(type_, addr)
 }
 
+// Encodes a given data object.
+//
 // EncodeDataObject calls the underlying EncodeDataObject.
 func (x *Coder) EncodeDataObject(data *raw.NSData) {
 	x.inner.EncodeDataObject(data)
 }
 
+// Decodes and returns an NSData object that was previously encoded with encodeDataObject:. Subclasses must override this method.
+//
 // DecodeDataObject calls the underlying DecodeDataObject.
 func (x *Coder) DecodeDataObject() *Data {
 	_r := x.inner.DecodeDataObject()
@@ -63,264 +71,350 @@ func (x *Coder) DecodeDataObject() *Data {
 	return &Data{inner: _r}
 }
 
+// Decodes a single value of a known type from the specified data buffer.
+//
 // DecodeValueOfObjCTypeAtSize calls the underlying DecodeValueOfObjCTypeAtSize.
 func (x *Coder) DecodeValueOfObjCTypeAtSize(type_ string, data unsafe.Pointer, size uint) {
 	x.inner.DecodeValueOfObjCTypeAtSize(type_, data, size)
 }
 
+// This method is present for historical reasons and is not used with keyed archivers.
+//
 // VersionForClassName calls the underlying VersionForClassName.
 func (x *Coder) VersionForClassName(className string) int {
 	return x.inner.VersionForClassName(foundation.NSStringStringWithUTF8String(className))
 }
 
+// Encodes an object.
+//
 // EncodeObject calls the underlying EncodeObject.
 func (x *Coder) EncodeObject(object objc.ID) {
 	x.inner.EncodeObject(object)
 }
 
+// An encoding method for subclasses to override to encode an interconnected group of objects, starting with the provided root object.
+//
 // EncodeRootObject calls the underlying EncodeRootObject.
 func (x *Coder) EncodeRootObject(rootObject objc.ID) {
 	x.inner.EncodeRootObject(rootObject)
 }
 
+// An encoding method for subclasses to override such that it creates a copy, rather than a proxy, when decoded.
+//
 // EncodeBycopyObject calls the underlying EncodeBycopyObject.
 func (x *Coder) EncodeBycopyObject(anObject objc.ID) {
 	x.inner.EncodeBycopyObject(anObject)
 }
 
+// An encoding method for subclasses to override such that it creates a proxy, rather than a copy, when decoded.
+//
 // EncodeByrefObject calls the underlying EncodeByrefObject.
 func (x *Coder) EncodeByrefObject(anObject objc.ID) {
 	x.inner.EncodeByrefObject(anObject)
 }
 
+// An encoding method for subclasses to override to conditionally encode an object, preserving common references to it.
+//
 // EncodeConditionalObject calls the underlying EncodeConditionalObject.
 func (x *Coder) EncodeConditionalObject(object objc.ID) {
 	x.inner.EncodeConditionalObject(object)
 }
 
+// Encodes an array of the given Objective-C type, provided the number of items and a pointer.
+//
 // EncodeArrayOfObjCTypeCountAt calls the underlying EncodeArrayOfObjCTypeCountAt.
 func (x *Coder) EncodeArrayOfObjCTypeCountAt(type_ string, count uint, array unsafe.Pointer) {
 	x.inner.EncodeArrayOfObjCTypeCountAt(type_, count, array)
 }
 
+// Encodes a buffer of data of an unspecified type.
+//
 // EncodeBytesLength calls the underlying EncodeBytesLength.
 func (x *Coder) EncodeBytesLength(byteaddr unsafe.Pointer, length uint) {
 	x.inner.EncodeBytesLength(byteaddr, length)
 }
 
+// Decodes and returns an object that was previously encoded with any of the encode…Object methods.
+//
 // DecodeObject calls the underlying DecodeObject.
 func (x *Coder) DecodeObject() objc.ID {
 	return x.inner.DecodeObject()
 }
 
+// Decodes a previously-encoded object, populating an error if decoding fails.
+//
 // DecodeTopLevelObjectAndReturnError calls the underlying DecodeTopLevelObjectAndReturnError.
 func (x *Coder) DecodeTopLevelObjectAndReturnError() (objc.ID, error) {
 	return x.inner.DecodeTopLevelObjectAndReturnError()
 }
 
+// Decodes an array of count items, whose Objective-C type is given by itemType.
+//
 // DecodeArrayOfObjCTypeCountAt calls the underlying DecodeArrayOfObjCTypeCountAt.
 func (x *Coder) DecodeArrayOfObjCTypeCountAt(itemType string, count uint, array unsafe.Pointer) {
 	x.inner.DecodeArrayOfObjCTypeCountAt(itemType, count, array)
 }
 
+// Decodes a buffer of data whose types are unspecified.
+//
 // DecodeBytesWithReturnedLength calls the underlying DecodeBytesWithReturnedLength.
 func (x *Coder) DecodeBytesWithReturnedLength(lengthp *uint) unsafe.Pointer {
 	return x.inner.DecodeBytesWithReturnedLength(lengthp)
 }
 
+// Encodes a property list.
+//
 // EncodePropertyList calls the underlying EncodePropertyList.
 func (x *Coder) EncodePropertyList(aPropertyList objc.ID) {
 	x.inner.EncodePropertyList(aPropertyList)
 }
 
+// Decodes a property list that was previously encoded with encodePropertyList:.
+//
 // DecodePropertyList calls the underlying DecodePropertyList.
 func (x *Coder) DecodePropertyList() objc.ID {
 	return x.inner.DecodePropertyList()
 }
 
+// This method is present for historical reasons and has no effect.
+//
 // SetObjectZone calls the underlying SetObjectZone.
 func (x *Coder) SetObjectZone(zone unsafe.Pointer) {
 	x.inner.SetObjectZone(zone)
 }
 
+// This method is present for historical reasons and has no effect.
+//
 // ObjectZone calls the underlying ObjectZone.
 func (x *Coder) ObjectZone() unsafe.Pointer {
 	return x.inner.ObjectZone()
 }
 
+// Encodes an object and associates it with the string key.
+//
 // EncodeObjectForKey calls the underlying EncodeObjectForKey.
 func (x *Coder) EncodeObjectForKey(object objc.ID, key string) {
 	x.inner.EncodeObjectForKey(object, foundation.NSStringStringWithUTF8String(key))
 }
 
+// An encoding method for subclasses to override to conditionally encode an object, preserving common references to it, only if it has been unconditionally encoded.
+//
 // EncodeConditionalObjectForKey calls the underlying EncodeConditionalObjectForKey.
 func (x *Coder) EncodeConditionalObjectForKey(object objc.ID, key string) {
 	x.inner.EncodeConditionalObjectForKey(object, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Encodes a Boolean value and associates it with the string key.
+//
 // EncodeBoolForKey calls the underlying EncodeBoolForKey.
 func (x *Coder) EncodeBoolForKey(value bool, key string) {
 	x.inner.EncodeBoolForKey(value, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Encodes a C integer value and associates it with the string key.
+//
 // EncodeIntForKey calls the underlying EncodeIntForKey.
 func (x *Coder) EncodeIntForKey(value int, key string) {
 	x.inner.EncodeIntForKey(value, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Encodes a 32-bit integer value and associates it with the string key.
+//
 // EncodeInt32ForKey calls the underlying EncodeInt32ForKey.
 func (x *Coder) EncodeInt32ForKey(value int32, key string) {
 	x.inner.EncodeInt32ForKey(value, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Encodes a 64-bit integer value and associates it with the string key.
+//
 // EncodeInt64ForKey calls the underlying EncodeInt64ForKey.
 func (x *Coder) EncodeInt64ForKey(value int64, key string) {
 	x.inner.EncodeInt64ForKey(value, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Encodes a floating point value and associates it with the string key.
+//
 // EncodeFloatForKey calls the underlying EncodeFloatForKey.
 func (x *Coder) EncodeFloatForKey(value float32, key string) {
 	x.inner.EncodeFloatForKey(value, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Encodes a double-precision floating point value and associates it with the string key.
+//
 // EncodeDoubleForKey calls the underlying EncodeDoubleForKey.
 func (x *Coder) EncodeDoubleForKey(value float64, key string) {
 	x.inner.EncodeDoubleForKey(value, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Encodes a buffer of data, given its length and a pointer, and associates it with a string key.
+//
 // EncodeBytesLengthForKey calls the underlying EncodeBytesLengthForKey.
 func (x *Coder) EncodeBytesLengthForKey(bytes_ *uint8, length uint, key string) {
 	x.inner.EncodeBytesLengthForKey(bytes_, length, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Returns a Boolean value that indicates whether an encoded value is available for a string.
+//
 // ContainsValueForKey calls the underlying ContainsValueForKey.
 func (x *Coder) ContainsValueForKey(key string) bool {
 	return x.inner.ContainsValueForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes and returns a previously-encoded object that was previously encoded with encodeObject:forKey: or encodeConditionalObject:forKey: and associated with the string key.
+//
 // DecodeObjectForKey calls the underlying DecodeObjectForKey.
 func (x *Coder) DecodeObjectForKey(key string) objc.ID {
 	return x.inner.DecodeObjectForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes the previously-encoded object associated by a key, populating an error if decoding fails.
+//
 // DecodeTopLevelObjectForKeyError calls the underlying DecodeTopLevelObjectForKeyError.
 func (x *Coder) DecodeTopLevelObjectForKeyError(key string) (objc.ID, error) {
 	return x.inner.DecodeTopLevelObjectForKeyError(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes and returns a boolean value that was previously encoded with encodeBool:forKey: and associated with the string key.
+//
 // DecodeBoolForKey calls the underlying DecodeBoolForKey.
 func (x *Coder) DecodeBoolForKey(key string) bool {
 	return x.inner.DecodeBoolForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes and returns an int value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
+//
 // DecodeIntForKey calls the underlying DecodeIntForKey.
 func (x *Coder) DecodeIntForKey(key string) int {
 	return x.inner.DecodeIntForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes and returns a 32-bit integer value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
+//
 // DecodeInt32ForKey calls the underlying DecodeInt32ForKey.
 func (x *Coder) DecodeInt32ForKey(key string) int32 {
 	return x.inner.DecodeInt32ForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes and returns a 64-bit integer value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
+//
 // DecodeInt64ForKey calls the underlying DecodeInt64ForKey.
 func (x *Coder) DecodeInt64ForKey(key string) int64 {
 	return x.inner.DecodeInt64ForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes and returns a float value that was previously encoded with encodeFloat:forKey: or encodeDouble:forKey: and associated with the string key.
+//
 // DecodeFloatForKey calls the underlying DecodeFloatForKey.
 func (x *Coder) DecodeFloatForKey(key string) float32 {
 	return x.inner.DecodeFloatForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes and returns a double value that was previously encoded with either encodeFloat:forKey: or encodeDouble:forKey: and associated with the string key.
+//
 // DecodeDoubleForKey calls the underlying DecodeDoubleForKey.
 func (x *Coder) DecodeDoubleForKey(key string) float64 {
 	return x.inner.DecodeDoubleForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes a buffer of data that was previously encoded with encodeBytes:length:forKey: and associated with the string key.
+//
 // DecodeBytesForKeyReturnedLength calls the underlying DecodeBytesForKeyReturnedLength.
 func (x *Coder) DecodeBytesForKeyReturnedLength(key string, lengthp *uint) unsafe.Pointer {
 	return x.inner.DecodeBytesForKeyReturnedLength(foundation.NSStringStringWithUTF8String(key), lengthp)
 }
 
-// Decode bytes from the decoder. The length of the bytes must be greater than or equal to the `length` parameter. If the result exists, but is of insufficient length, then the decoder uses `failWithError` to fail the entire decode operation. The result of that is configurable on a per-NSCoder basis using `NSDecodingFailurePolicy`.
+// Decode bytes from the decoder. The length of the bytes must be greater than or equal to the length parameter. If the result exists, but is of insufficient length, then the decoder uses failWithError to fail the entire decode operation. The result of that is configurable on a per-NSCoder basis using NSDecodingFailurePolicy.
 //
 // DecodeBytesWithMinimumLength calls the underlying DecodeBytesWithMinimumLength.
 func (x *Coder) DecodeBytesWithMinimumLength(length uint) unsafe.Pointer {
 	return x.inner.DecodeBytesWithMinimumLength(length)
 }
 
-// Decode bytes from the decoder for a given key. The length of the bytes must be greater than or equal to the `length` parameter. If the result exists, but is of insufficient length, then the decoder uses `failWithError` to fail the entire decode operation. The result of that is configurable on a per-NSCoder basis using `NSDecodingFailurePolicy`.
+// Decode bytes from the decoder for a given key. The length of the bytes must be greater than or equal to the length parameter. If the result exists, but is of insufficient length, then the decoder uses failWithError to fail the entire decode operation. The result of that is configurable on a per-NSCoder basis using NSDecodingFailurePolicy.
 //
 // DecodeBytesForKeyMinimumLength calls the underlying DecodeBytesForKeyMinimumLength.
 func (x *Coder) DecodeBytesForKeyMinimumLength(key string, length uint) unsafe.Pointer {
 	return x.inner.DecodeBytesForKeyMinimumLength(foundation.NSStringStringWithUTF8String(key), length)
 }
 
+// Encodes an integer value and associates it with the string key.
+//
 // EncodeIntegerForKey calls the underlying EncodeIntegerForKey.
 func (x *Coder) EncodeIntegerForKey(value int, key string) {
 	x.inner.EncodeIntegerForKey(value, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes and returns an NSInteger value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
+//
 // DecodeIntegerForKey calls the underlying DecodeIntegerForKey.
 func (x *Coder) DecodeIntegerForKey(key string) int {
 	return x.inner.DecodeIntegerForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes an object for the key, restricted to the specified class.
+//
 // DecodeObjectOfClassForKey calls the underlying DecodeObjectOfClassForKey.
 func (x *Coder) DecodeObjectOfClassForKey(aClass objc.Class, key string) objc.ID {
 	return x.inner.DecodeObjectOfClassForKey(aClass, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decode an object as an expected type, failing if the archived type does not match.
+//
 // DecodeTopLevelObjectOfClassForKeyError calls the underlying DecodeTopLevelObjectOfClassForKeyError.
 func (x *Coder) DecodeTopLevelObjectOfClassForKeyError(aClass objc.Class, key string) (objc.ID, error) {
 	return x.inner.DecodeTopLevelObjectOfClassForKeyError(aClass, foundation.NSStringStringWithUTF8String(key))
 }
 
-// Decodes the \c NSArray object for the given  \c key, which should be an \c NSArray<cls>, containing the given non-collection class (no nested arrays or arrays of dictionaries, etc) from the coder. Requires \c NSSecureCoding otherwise an exception is thrown and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the object for \c key is not of the expected types, or cannot be decoded, and sets the \c error on the decoder.
+// Decodes the \c NSArray object for the given \c key, which should be an \c NSArray, containing the given non-collection class (no nested arrays or arrays of dictionaries, etc) from the coder.
 //
 // DecodeArrayOfObjectsOfClassForKey calls the underlying DecodeArrayOfObjectsOfClassForKey.
 func (x *Coder) DecodeArrayOfObjectsOfClassForKey(cls objc.Class, key string) *raw.NSArray[objc.ID] {
 	return x.inner.DecodeArrayOfObjectsOfClassForKey(cls, foundation.NSStringStringWithUTF8String(key))
 }
 
-// Decodes the \c NSDictionary object for the given \c key, which should be an \c NSDictionary<keyCls,objectCls> , with keys of type given in \c keyCls and objects of the given non-collection class \c objectCls (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the coder. Requires \c NSSecureCoding otherwise an exception is thrown and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the object for \c key is not of the expected types, or cannot be decoded, and sets the \c error on the decoder.
+// Decodes the \c NSDictionary object for the given \c key, which should be an \c NSDictionary<keyCls,objectCls> , with keys of type given in \c keyCls and objects of the given non-collection class \c objectCls (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the coder.
 //
 // DecodeDictionaryWithKeysOfClassObjectsOfClassForKey calls the underlying DecodeDictionaryWithKeysOfClassObjectsOfClassForKey.
 func (x *Coder) DecodeDictionaryWithKeysOfClassObjectsOfClassForKey(keyCls objc.Class, objectCls objc.Class, key string) *raw.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.DecodeDictionaryWithKeysOfClassObjectsOfClassForKey(keyCls, objectCls, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes an object for the key, restricted to the specified classes.
+//
 // DecodeObjectOfClassesForKey calls the underlying DecodeObjectOfClassesForKey.
 func (x *Coder) DecodeObjectOfClassesForKey(classes *raw.NSSet[objc.Class], key string) objc.ID {
 	return x.inner.DecodeObjectOfClassesForKey(classes, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decode an object as one of several expected types, failing if the archived type does not match.
+//
 // DecodeTopLevelObjectOfClassesForKeyError calls the underlying DecodeTopLevelObjectOfClassesForKeyError.
 func (x *Coder) DecodeTopLevelObjectOfClassesForKeyError(classes *raw.NSSet[objc.Class], key string) (objc.ID, error) {
 	return x.inner.DecodeTopLevelObjectOfClassesForKeyError(classes, foundation.NSStringStringWithUTF8String(key))
 }
 
-// Decodes the \c NSArray object for the given \c key, which should be an \c NSArray, containing the given non-collection classes (no nested arrays or arrays of dictionaries, etc) from the coder. Requires \c NSSecureCoding otherwise an exception is thrown and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the object for \c key is not of the expected types, or cannot be decoded, and sets the \c error on the decoder.
+// Decodes the \c NSArray object for the given \c key, which should be an \c NSArray, containing the given non-collection classes (no nested arrays or arrays of dictionaries, etc) from the coder.
 //
 // DecodeArrayOfObjectsOfClassesForKey calls the underlying DecodeArrayOfObjectsOfClassesForKey.
 func (x *Coder) DecodeArrayOfObjectsOfClassesForKey(classes *raw.NSSet[objc.Class], key string) *raw.NSArray[objc.ID] {
 	return x.inner.DecodeArrayOfObjectsOfClassesForKey(classes, foundation.NSStringStringWithUTF8String(key))
 }
 
-// Decodes the \c NSDictionary object for the given \c key, which should be an \c NSDictionary, with keys of the types given in \c keyClasses and objects of the given non-collection classes in \c objectClasses (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given coder. Requires \c NSSecureCoding otherwise an exception is thrown and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn. Returns \c nil if the object for \c key is not of the expected types, or cannot be decoded, and sets the \c error on the decoder.
+// Decodes the \c NSDictionary object for the given \c key, which should be an \c NSDictionary, with keys of the types given in \c keyClasses and objects of the given non-collection classes in \c objectClasses (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given coder.
 //
 // DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey calls the underlying DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey.
 func (x *Coder) DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey(keyClasses *raw.NSSet[objc.Class], objectClasses *raw.NSSet[objc.Class], key string) *raw.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey(keyClasses, objectClasses, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Returns a decoded property list for the specified key.
+//
 // DecodePropertyListForKey calls the underlying DecodePropertyListForKey.
 func (x *Coder) DecodePropertyListForKey(key string) objc.ID {
 	return x.inner.DecodePropertyListForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
-// @abstract Signals to this coder that the decode has failed. @parameter non-nil error that describes the reason why the decode failed @discussion Sets an error on this NSCoder once per TopLevel decode; calling it repeatedly will have no effect until the call stack unwinds to one of the TopLevel decode entry-points. This method is only meaningful to call for decodes. Typically, you would want to call this method in your -initWithCoder: implementation when you detect situations like: - lack of secure coding - corruption of your data - domain validation failures After calling -failWithError: within your -initWithCoder: implementation, you should clean up and return nil as early as possible. Once an error has been signaled to a decoder, it remains set until it has handed off to the first TopLevel decode invocation above it.  For example, consider the following call graph: A    -decodeTopLevelObjectForKey:error: B        -initWithCoder: C            -decodeObjectForKey: D                -initWithCoder: E                    -decodeObjectForKey: F                        -failWithError: In this case the error provided in stack-frame F will be returned via the outError in stack-frame A. Furthermore the result object from decodeTopLevelObjectForKey:error: will be nil, regardless of the result of stack-frame B. NSCoder implementations support two mechanisms for the stack-unwinding from F to A: - forced (NSException based) - particpatory (error based) The kind of unwinding you get is determined by the decodingFailurePolicy property of this NSCoder (which defaults to NSDecodingFailurePolicyRaiseException to match historical behavior).
+// Signals to this coder that the decode operation has failed.
 //
 // FailWithError calls the underlying FailWithError.
 func (x *Coder) FailWithError(error_ unsafe.Pointer) {
@@ -361,76 +455,106 @@ func (x *Coder) Error() unsafe.Pointer {
 	return x.inner.Error()
 }
 
+// Encodes an old-style object onto the coder.
+//
 // EncodeNXObject calls the underlying EncodeNXObject.
 func (x *Coder) EncodeNXObject(object objc.ID) {
 	x.inner.EncodeNXObject(object)
 }
 
+// Decodes an object previously written with encodeNXObject:.
+//
 // DecodeNXObject calls the underlying DecodeNXObject.
 func (x *Coder) DecodeNXObject() objc.ID {
 	return x.inner.DecodeNXObject()
 }
 
+// Decodes a single value, whose Objective-C type is given by valueType.
+//
 // DecodeValueOfObjCTypeAt calls the underlying DecodeValueOfObjCTypeAt.
 func (x *Coder) DecodeValueOfObjCTypeAt(type_ string, data unsafe.Pointer) {
 	x.inner.DecodeValueOfObjCTypeAt(type_, data)
 }
 
+// Encodes a point.
+//
 // EncodePoint calls the underlying EncodePoint.
 func (x *Coder) EncodePoint(point corefoundation.CGPoint) {
 	x.inner.EncodePoint(point)
 }
 
+// Decodes and returns an NSPoint structure that was previously encoded with encodePoint:.
+//
 // DecodePoint calls the underlying DecodePoint.
 func (x *Coder) DecodePoint() corefoundation.CGPoint {
 	return x.inner.DecodePoint()
 }
 
+// Encodes a size structure.
+//
 // EncodeSize calls the underlying EncodeSize.
 func (x *Coder) EncodeSize(size corefoundation.CGSize) {
 	x.inner.EncodeSize(size)
 }
 
+// Decodes and returns an NSSize structure that was previously encoded with encodeSize:.
+//
 // DecodeSize calls the underlying DecodeSize.
 func (x *Coder) DecodeSize() corefoundation.CGSize {
 	return x.inner.DecodeSize()
 }
 
+// Encodes a rectangle structure.
+//
 // EncodeRect calls the underlying EncodeRect.
 func (x *Coder) EncodeRect(rect corefoundation.CGRect) {
 	x.inner.EncodeRect(rect)
 }
 
+// Decodes and returns an NSRect structure that was previously encoded with encodeRect:.
+//
 // DecodeRect calls the underlying DecodeRect.
 func (x *Coder) DecodeRect() corefoundation.CGRect {
 	return x.inner.DecodeRect()
 }
 
+// Encodes a point and associates it with the string key.
+//
 // EncodePointForKey calls the underlying EncodePointForKey.
 func (x *Coder) EncodePointForKey(point corefoundation.CGPoint, key string) {
 	x.inner.EncodePointForKey(point, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Encodes a size structure and associates it with the given string key.
+//
 // EncodeSizeForKey calls the underlying EncodeSizeForKey.
 func (x *Coder) EncodeSizeForKey(size corefoundation.CGSize, key string) {
 	x.inner.EncodeSizeForKey(size, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Encodes a rectangle structure and associates it with the string key.
+//
 // EncodeRectForKey calls the underlying EncodeRectForKey.
 func (x *Coder) EncodeRectForKey(rect corefoundation.CGRect, key string) {
 	x.inner.EncodeRectForKey(rect, foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes and returns an NSPoint structure that was previously encoded with encodePoint:forKey:.
+//
 // DecodePointForKey calls the underlying DecodePointForKey.
 func (x *Coder) DecodePointForKey(key string) corefoundation.CGPoint {
 	return x.inner.DecodePointForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes and returns an NSSize structure that was previously encoded with encodeSize:forKey:.
+//
 // DecodeSizeForKey calls the underlying DecodeSizeForKey.
 func (x *Coder) DecodeSizeForKey(key string) corefoundation.CGSize {
 	return x.inner.DecodeSizeForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Decodes and returns an NSRect structure that was previously encoded with encodeRect:forKey:.
+//
 // DecodeRectForKey calls the underlying DecodeRectForKey.
 func (x *Coder) DecodeRectForKey(key string) corefoundation.CGRect {
 	return x.inner.DecodeRectForKey(foundation.NSStringStringWithUTF8String(key))

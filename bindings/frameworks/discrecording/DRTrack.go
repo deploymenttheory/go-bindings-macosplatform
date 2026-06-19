@@ -51,13 +51,16 @@ func (o *DRTrack) InitWithProducer(producer objc.ID) objc.ID {
 
 // @method 		properties @abstract		Returns the properties dictionary of the track. @result  		An NSDictionary containing the properties of the track.
 func (o *DRTrack) Properties() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _dRTrackSelProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _dRTrackSelProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @method 		setProperties: @abstract		Sets the properties dictionary of the track @param 			properties	NSDictionary of the properties to set.
 func (o *DRTrack) SetProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_dRTrackSelSetProperties, properties)
+	o.Ptr().Send(_dRTrackSelSetProperties, properties.Ptr())
 }
 
 // @method 		testProductionSpeedForInterval: @abstract		Tests the production speed for a specified interval. @discussion		Runs a fake "production" cycle, repeatedly asking the receiver for data by calling it's producer's @link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataIntoBuffer:length:atAddress:blockSize:ioFlags: produceDataIntoBuffer:length:atAddress:blockSize:ioFlags: @/link for the specified time interval. Use this function to verify that the the production code can produce data fast enough to satisfy the data throughput requirements of the burn. Returns the calculated maximum speed the at which the receiver can produce data. This value should be used when setting up a burn to limit the burn speed @param 			interval	The length of the test in seconds. @result			The maximum speed data can be produced at.

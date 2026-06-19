@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A snapshot of the text in your view, which the system uses to create user-visible effects.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextpreview
 type NSTextPreview struct {
 	foundation.NSObject
@@ -37,16 +39,16 @@ func NSTextPreviewFromID(id objc.ID) *NSTextPreview {
 	return o
 }
 
-// Creates a text preview using the specified image and rectangles that indicate the portions of text to highlight. - Parameters: - snapshotImage: An image that contains the requested text from your view. Create the image using a transparent background and the current rendering attributes for your text. - presentationFrame: A rectangle in the coordinate space of your text view. The system uses this rectangle to place your image precisely over your view’s actual text. Set its size to the size of your snapshot image, and set its origin to the point that allows the system to place your image directly over the text. - candidateRects: An array of <doc://com.apple.documentation/documentation/foundation/nsvalue> objects, each of which contains an <doc://com.apple.documentation/documentation/foundation/nsrect> in the coordinate space of your text view. Each rectangle contains a bounding rectangle for text that is part of the preview. When applying visual effects, the system adds highlights only to the text in the specified rectangles.
+// Creates a text preview using the specified image and rectangles that indicate the portions of text to highlight.
 func (o *NSTextPreview) InitWithSnapshotImagePresentationFrameCandidateRects(snapshotImage unsafe.Pointer, presentationFrame corefoundation.CGRect, candidateRects *foundation.NSArray[*foundation.NSValue]) *NSTextPreview {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextPreviewSelInitWithSnapshotImagePresentationFrameCandidateRects, snapshotImage, presentationFrame, candidateRects)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextPreviewSelInitWithSnapshotImagePresentationFrameCandidateRects, snapshotImage, presentationFrame, candidateRects.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSTextPreviewFromID(_ret)
 }
 
-// Creates a text preview using the specified image. - Parameters: - snapshotImage: An image that contains the requested text from your view. Create the image using a transparent background and the current rendering attributes for your text. - presentationFrame: A rectangle in your frame’s coordinate space. The system uses this rectangle to place your image precisely over your view’s actual text. Set its size to the size of your snapshot image, and set its origin to the point that allows the system to place your image directly over the text.
+// Creates a text preview using the specified image.
 func (o *NSTextPreview) InitWithSnapshotImagePresentationFrame(snapshotImage unsafe.Pointer, presentationFrame corefoundation.CGRect) *NSTextPreview {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextPreviewSelInitWithSnapshotImagePresentationFrame, snapshotImage, presentationFrame)
 	if _ret != 0 {
@@ -69,6 +71,9 @@ func (o *NSTextPreview) PresentationFrame() corefoundation.CGRect {
 
 // Rectangles that define the specific portions of text to highlight. At initialization time, you set this property to an array of <doc://com.apple.documentation/documentation/foundation/nsvalue> objects, each of which contains an <doc://com.apple.documentation/documentation/foundation/nsrect> in the coordinate space of the target view. Each rectangle contains a bounding rectangle for text that is part of the preview. When applying visual effects, the system adds highlights only to the text in the specified rectangles.
 func (o *NSTextPreview) CandidateRects() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _nSTextPreviewSelCandidateRects)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextPreviewSelCandidateRects)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }

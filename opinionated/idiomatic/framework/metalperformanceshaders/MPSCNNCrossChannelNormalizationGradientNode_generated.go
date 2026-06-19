@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a gradient normalization kernel applied across feature channels.
+//
 // CNNCrossChannelNormalizationGradientNode wraps [raw.MPSCNNCrossChannelNormalizationGradientNode] with a fluent Go API.
 type CNNCrossChannelNormalizationGradientNode struct {
 	inner *raw.MPSCNNCrossChannelNormalizationGradientNode

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specialized predicate for comparing expressions.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nscomparisonpredicate
 type NSComparisonPredicate struct {
 	NSPredicate
@@ -39,6 +41,7 @@ func NSComparisonPredicateFromID(id objc.ID) *NSComparisonPredicate {
 	return o
 }
 
+// Creates and returns a predicate of a given type formed by combining given left and right expressions using a given modifier and options.
 func NSComparisonPredicatePredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs *NSExpression, rhs *NSExpression, modifier NSComparisonPredicateModifier, type_ NSPredicateOperatorType, options NSComparisonPredicateOptions) *NSComparisonPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSComparisonPredicate), _nSComparisonPredicateSelPredicateWithLeftExpressionRightExpressionModifierTypeOptions, lhs.Ptr(), rhs.Ptr(), modifier, type_, options)
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func NSComparisonPredicatePredicateWithLeftExpressionRightExpressionModifierType
 	return NSComparisonPredicateFromID(_ret)
 }
 
+// Returns a new predicate formed by combining the left and right expressions using a given selector.
 func NSComparisonPredicatePredicateWithLeftExpressionRightExpressionCustomSelector(lhs *NSExpression, rhs *NSExpression, selector objc.SEL) *NSComparisonPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSComparisonPredicate), _nSComparisonPredicateSelPredicateWithLeftExpressionRightExpressionCustomSelector, lhs.Ptr(), rhs.Ptr(), selector)
 	if _ret != 0 {
@@ -55,6 +59,7 @@ func NSComparisonPredicatePredicateWithLeftExpressionRightExpressionCustomSelect
 	return NSComparisonPredicateFromID(_ret)
 }
 
+// Creates a predicate to a specified type that you form by combining specified left and right expressions using a specified modifier and options.
 func (o *NSComparisonPredicate) InitWithLeftExpressionRightExpressionModifierTypeOptions(lhs *NSExpression, rhs *NSExpression, modifier NSComparisonPredicateModifier, type_ NSPredicateOperatorType, options NSComparisonPredicateOptions) *NSComparisonPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSComparisonPredicateSelInitWithLeftExpressionRightExpressionModifierTypeOptions, lhs.Ptr(), rhs.Ptr(), modifier, type_, options)
 	if _ret != 0 {
@@ -63,6 +68,7 @@ func (o *NSComparisonPredicate) InitWithLeftExpressionRightExpressionModifierTyp
 	return NSComparisonPredicateFromID(_ret)
 }
 
+// Creates a predicate that you form by combining specified left and right expressions using a specified selector.
 func (o *NSComparisonPredicate) InitWithLeftExpressionRightExpressionCustomSelector(lhs *NSExpression, rhs *NSExpression, selector objc.SEL) *NSComparisonPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSComparisonPredicateSelInitWithLeftExpressionRightExpressionCustomSelector, lhs.Ptr(), rhs.Ptr(), selector)
 	if _ret != 0 {
@@ -71,6 +77,7 @@ func (o *NSComparisonPredicate) InitWithLeftExpressionRightExpressionCustomSelec
 	return NSComparisonPredicateFromID(_ret)
 }
 
+// Creates a predicate by decoding from the coder you specify.
 func (o *NSComparisonPredicate) InitWithCoder(coder *NSCoder) *NSComparisonPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSComparisonPredicateSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {

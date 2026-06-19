@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents appearance characteristics of a widget annotation.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfappearancecharacteristics
 type PDFAppearanceCharacteristics struct {
 	foundation.NSObject
@@ -124,6 +126,9 @@ func (o *PDFAppearanceCharacteristics) SetDownCaption(downCaption *foundation.NS
 }
 
 func (o *PDFAppearanceCharacteristics) AppearanceCharacteristicsKeyValues() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _pDFAppearanceCharacteristicsSelAppearanceCharacteristicsKeyValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAppearanceCharacteristicsSelAppearanceCharacteristicsKeyValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }

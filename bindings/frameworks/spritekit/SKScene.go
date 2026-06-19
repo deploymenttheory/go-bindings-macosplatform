@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A scene is the root node of your content. It is used to display SpriteKit content on an SKView. @see SKView
+// An object that organizes all of the active SpriteKit content.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skscene
 type SKScene struct {
@@ -63,7 +63,7 @@ func SKSceneFromID(id objc.ID) *SKScene {
 	return o
 }
 
-// A scene is infinitely large, but it has a viewport that is the frame through which you present the content of the scene. The passed in size defines the size of this viewport that you use to present the scene. @param size a size in points that signifies the viewport into the scene that defines your framing of the scene.
+// Initializes a new scene object.
 func (o *SKScene) InitWithSize(size corefoundation.CGSize) *SKScene {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelInitWithSize, size)
 	if _ret != 0 {
@@ -72,6 +72,7 @@ func (o *SKScene) InitWithSize(size corefoundation.CGSize) *SKScene {
 	return SKSceneFromID(_ret)
 }
 
+// Creates and returns a new scene object.
 func SKSceneSceneWithSize(size corefoundation.CGSize) *SKScene {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKScene), _sKSceneSelSceneWithSize, size)
 	if _ret != 0 {
@@ -80,53 +81,59 @@ func SKSceneSceneWithSize(size corefoundation.CGSize) *SKScene {
 	return SKSceneFromID(_ret)
 }
 
+// Tells you when the scene is presented.
 func (o *SKScene) SceneDidLoad() {
 	o.Ptr().Send(_sKSceneSelSceneDidLoad)
 }
 
+// Converts a point from view coordinates to scene coordinates.
 func (o *SKScene) ConvertPointFromView(point corefoundation.CGPoint) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKSceneSelConvertPointFromView, point)
 	return _ret
 }
 
+// Converts a point from scene coordinates to view coordinates.
 func (o *SKScene) ConvertPointToView(point corefoundation.CGPoint) corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _sKSceneSelConvertPointToView, point)
 	return _ret
 }
 
-// Override this to perform per-frame game logic. Called exactly once per frame before any actions are evaluated and any physics are simulated. @param currentTime the current time in the app. This must be monotonically increasing.
+// Tells your app to perform any app-specific logic to update your scene.
 func (o *SKScene) Update(currentTime float64) {
 	o.Ptr().Send(_sKSceneSelUpdate, currentTime)
 }
 
-// Override this to perform game logic. Called exactly once per frame after any actions have been evaluated but before any physics are simulated. Any additional actions applied is not evaluated until the next update.
+// Tells your app to peform any necessary logic after scene actions are evaluated.
 func (o *SKScene) DidEvaluateActions() {
 	o.Ptr().Send(_sKSceneSelDidEvaluateActions)
 }
 
-// Override this to perform game logic. Called exactly once per frame after any actions have been evaluated and any physics have been simulated. Any additional actions applied is not evaluated until the next update. Any changes to physics bodies is not simulated until the next update.
+// Tells your app to peform any necessary logic after physics simulations are performed.
 func (o *SKScene) DidSimulatePhysics() {
 	o.Ptr().Send(_sKSceneSelDidSimulatePhysics)
 }
 
-// Override this to perform game logic. Called exactly once per frame after any enabled constraints have been applied. Any additional actions applied is not evaluated until the next update. Any changes to physics bodies is not simulated until the next update. Any changes to constraints will not be applied until the next update.
+// Tells your app to peform any necessary logic after constraints are applied.
 func (o *SKScene) DidApplyConstraints() {
 	o.Ptr().Send(_sKSceneSelDidApplyConstraints)
 }
 
-// Override this to perform game logic. Called after all update logic has been completed. Any additional actions applied are not evaluated until the next update. Any changes to physics bodies are not simulated until the next update. Any changes to constraints will not be applied until the next update. No futher update logic will be applied to the scene after this call. Any values set on nodes here will be used when the scene is rendered for the current frame.
+// Tells your app to peform any necessary logic after the scene has finished all of the steps required to process animations.
 func (o *SKScene) DidFinishUpdate() {
 	o.Ptr().Send(_sKSceneSelDidFinishUpdate)
 }
 
+// Tells you when the scene is presented by a view.
 func (o *SKScene) DidMoveToView(view *SKView) {
 	o.Ptr().Send(_sKSceneSelDidMoveToView, view.Ptr())
 }
 
+// Tells you when the scene is about to be removed from a view.
 func (o *SKScene) WillMoveFromView(view *SKView) {
 	o.Ptr().Send(_sKSceneSelWillMoveFromView, view.Ptr())
 }
 
+// Tells you when the scene’s size has changed.
 func (o *SKScene) DidChangeSize(oldSize corefoundation.CGSize) {
 	o.Ptr().Send(_sKSceneSelDidChangeSize, oldSize)
 }

@@ -291,7 +291,7 @@ func PHImageManagerDefaultManager() *ImageManager {
 }
 
 // RequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler calls the underlying PHLivePhotoRequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler.
-func RequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler(fileURLs *foundation.NSArray[*foundation.NSURL], image *appkit.NSImage, targetSize corefoundation.CGSize, contentMode PHImageContentMode, resultHandler objc.Block) int32 {
+func RequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler(fileURLs *foundation.NSArray[*foundation.NSURL], image *appkit.NSImage, targetSize corefoundation.CGSize, contentMode PHImageContentMode, resultHandler func(*raw.PHLivePhoto, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
 	return raw.PHLivePhotoRequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler(fileURLs, image, targetSize, raw.PHImageContentMode(contentMode), resultHandler)
 }
 

@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "framework": "AVRouting",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "AVCustomDeviceRoute": {
+      "doc": "An object that represents a custom device route.",
+      "url": "https://developer.apple.com/documentation/avrouting/avcustomdeviceroute"
+    },
+    "AVCustomRoutingActionItem": {
+      "doc": "An object that represents a custom action item to display in a device route picker.",
+      "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingactionitem"
+    },
+    "AVCustomRoutingController": {
+      "doc": "An object that manages the connection from a device to a destination.",
+      "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingcontroller"
+    },
+    "AVCustomRoutingEvent": {
+      "doc": "An object that represents an event that occurs on a route.",
+      "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingevent"
+    },
+    "AVCustomRoutingPartialIP": {
+      "doc": "An object that represents a full or partial IP address.",
+      "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingpartialip"
+    },
+    "AVRoutingPlaybackArbiter": {
+      "doc": "An object that manages playback routing preferences.",
+      "url": "https://developer.apple.com/documentation/avrouting/avroutingplaybackarbiter"
+    }
+  },
+  "protocols": {
+    "AVCustomRoutingControllerDelegate": {
+      "doc": "A protocol for delegates of a custom routing controller.",
+      "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingcontrollerdelegate"
+    },
+    "AVRoutingPlaybackParticipant": {
+      "doc": "A protocol for objects that participate in playback routing arbitration.",
+      "url": "https://developer.apple.com/documentation/avrouting/avroutingplaybackparticipant"
+    }
+  },
+  "enums": {
+    "AVCustomRoutingEventReason": {
+      "doc": "Values that indicate the reason for a routing event.",
+      "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingeventreason",
+      "members": {
+        "AVCustomRoutingEventReasonActivate": {
+          "doc": "A value that indicates that a user selects a route in the picker.",
+          "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingeventreason/activate"
+        },
+        "AVCustomRoutingEventReasonDeactivate": {
+          "doc": "A value that indicates that a user deselects a route in the picker.",
+          "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingeventreason/deactivate"
+        },
+        "AVCustomRoutingEventReasonReactivate": {
+          "doc": "A value that indicates to reactivate a route a user authorized previously.",
+          "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingeventreason/reactivate"
+        }
+      }
+    }
+  },
+  "methods": {
+    "AVCustomRoutingController": {
+      "-invalidateAuthorizationForRoute:": {
+        "doc": "Revokes an app’s authorization to connect to a route.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingcontroller/invalidateauthorization(for:)"
+      },
+      "-isRouteActive:": {
+        "doc": "Returns a Boolean value that indicates whether a route is active.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingcontroller/isrouteactive(_:)"
+      },
+      "-setActive:forRoute:": {
+        "doc": "Sets the active state of a route.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingcontroller/setactive(_:for:)"
+      }
+    },
+    "AVCustomRoutingPartialIP": {
+      "-initWithAddress:mask:": {
+        "doc": "Creates an IP fragment.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingpartialip/init(address:mask:)"
+      }
+    },
+    "AVRoutingPlaybackArbiter": {
+      "+sharedRoutingPlaybackArbiter": {
+        "doc": "Returns the singleton playback arbiter instance.",
+        "url": "https://developer.apple.com/documentation/avrouting/avroutingplaybackarbiter/shared()"
+      }
+    }
+  },
+  "properties": {
+    "AVCustomDeviceRoute": {
+      "bluetoothIdentifier": {
+        "doc": "An identifier to use to establish a connection to a Bluetooth device.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomdeviceroute/bluetoothidentifier"
+      },
+      "networkEndpoint": {
+        "doc": "A local or remote endpoint to connect to.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomdeviceroute/networkendpoint"
+      }
+    },
+    "AVCustomRoutingActionItem": {
+      "overrideTitle": {
+        "doc": "A string to use to override the title of the item’s type.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingactionitem/overridetitle"
+      },
+      "type": {
+        "doc": "A type with an identifier that matches a value in the app’s configuration.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingactionitem/type"
+      }
+    },
+    "AVCustomRoutingController": {
+      "AVCustomRoutingControllerAuthorizedRoutesDidChangeNotification": {
+        "doc": "A notification the system posts when the list of authorized routes changes.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingcontroller/authorizedroutesdidchange"
+      },
+      "authorizedRoutes": {
+        "doc": "A list of authorized routes.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingcontroller/authorizedroutes"
+      },
+      "customActionItems": {
+        "doc": "An array of custom action items to add to a route picker.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingcontroller/customactionitems"
+      },
+      "delegate": {
+        "doc": "A delegate object for a routing controller.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingcontroller/delegate"
+      },
+      "knownRouteIPs": {
+        "doc": "An array of route addresses known to be on the local network.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingcontroller/knownrouteips"
+      }
+    },
+    "AVCustomRoutingEvent": {
+      "reason": {
+        "doc": "A reason for an event, such as a user request to activate or deactivate a route.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingevent/reason"
+      },
+      "route": {
+        "doc": "A route for the event.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingevent/route"
+      }
+    },
+    "AVCustomRoutingPartialIP": {
+      "address": {
+        "doc": "A full or partial IP address for a device known to be on the network.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingpartialip/address"
+      },
+      "mask": {
+        "doc": "A mask that represents how many octets of the IP address to respect.",
+        "url": "https://developer.apple.com/documentation/avrouting/avcustomroutingpartialip/mask"
+      }
+    },
+    "AVRoutingPlaybackArbiter": {
+      "preferredParticipantForExternalPlayback": {
+        "doc": "The participant that has priority to play on external playback interfaces.",
+        "url": "https://developer.apple.com/documentation/avrouting/avroutingplaybackarbiter/preferredparticipantforexternalplayback"
+      },
+      "preferredParticipantForNonMixableAudioRoutes": {
+        "doc": "The participant that has priority to play audio when it’s not possible to play multiple audio sources concurrently.",
+        "url": "https://developer.apple.com/documentation/avrouting/avroutingplaybackarbiter/preferredparticipantfornonmixableaudioroutes"
+      }
+    }
+  }
+}

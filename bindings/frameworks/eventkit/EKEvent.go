@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents an event in a calendar.
+//
 // Apple documentation: https://developer.apple.com/documentation/eventkit/ekevent
 type EKEvent struct {
 	EKCalendarItem
@@ -48,7 +50,7 @@ func EKEventFromID(id objc.ID) *EKEvent {
 	return o
 }
 
-// @method     eventWithEventStore: @abstract   Creates a new autoreleased event object.
+// Creates and returns a new event belonging to a specified event store.
 func EKEventEventWithEventStore(eventStore *EKEventStore) *EKEvent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKEvent), _eKEventSelEventWithEventStore, eventStore.Ptr())
 	if _ret != 0 {
@@ -57,7 +59,7 @@ func EKEventEventWithEventStore(eventStore *EKEventStore) *EKEvent {
 	return EKEventFromID(_ret)
 }
 
-// @method     compareStartDateWithEvent @abstract   Comparison function you can pass to sort NSArrays of EKEvents by start date.
+// Compares the start date of the receiving event with the start date of another event.
 func (o *EKEvent) CompareStartDateWithEvent(other *EKEvent) foundation.NSComparisonResult {
 	_ret := objc.Send[foundation.NSComparisonResult](o.Ptr(), _eKEventSelCompareStartDateWithEvent, other.Ptr())
 	return _ret

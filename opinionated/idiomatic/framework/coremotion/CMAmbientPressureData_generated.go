@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A measurement of the ambient pressure and temperature.
+//
 // AmbientPressureData wraps [raw.CMAmbientPressureData] with a fluent Go API.
 type AmbientPressureData struct {
 	inner *raw.CMAmbientPressureData

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A language model built from custom training data.
+//
 // Apple documentation: https://developer.apple.com/documentation/speech/sfspeechlanguagemodel
 type SFSpeechLanguageModel struct {
 	foundation.NSObject
@@ -57,7 +59,7 @@ func SFSpeechLanguageModelPrepareCustomLanguageModelForUrlClientIdentifierConfig
 	objc.ID(_clsSFSpeechLanguageModel).Send(_sFSpeechLanguageModelSelPrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCompletion, asset.Ptr(), clientIdentifier.Ptr(), configuration.Ptr(), ignoresCache, __block_completion)
 }
 
-// Creates a language model from custom training data. - Parameters: - asset: The URL of a file containing custom training data. Create this file with “SFCustomLanguageModelData/export(to:)“. - configuration: An object listing the URLs at which this method should create the language model and compiled vocabulary from the training data. - completion: Called when the language model has been created.
+// Creates a language model from custom training data.
 func SFSpeechLanguageModelPrepareCustomLanguageModelForUrlConfigurationCompletion(asset *foundation.NSURL, configuration *SFSpeechLanguageModelConfiguration, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -69,7 +71,7 @@ func SFSpeechLanguageModelPrepareCustomLanguageModelForUrlConfigurationCompletio
 	objc.ID(_clsSFSpeechLanguageModel).Send(_sFSpeechLanguageModelSelPrepareCustomLanguageModelForUrlConfigurationCompletion, asset.Ptr(), configuration.Ptr(), __block_completion)
 }
 
-// Creates a language model from custom training data. - Parameters: - asset: The URL of a file containing custom training data. Create this file with “SFCustomLanguageModelData/export(to:)“. - configuration: An object listing the URLs at which this method should create the language model and compiled vocabulary from the training data. - ignoresCache: If `true`, the language model identified by the configuration will be recreated even if the `asset` file is unchanged. - completion: Called when the language model has been created.
+// Creates a language model from custom training data.
 func SFSpeechLanguageModelPrepareCustomLanguageModelForUrlConfigurationIgnoresCacheCompletion(asset *foundation.NSURL, configuration *SFSpeechLanguageModelConfiguration, ignoresCache bool, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {

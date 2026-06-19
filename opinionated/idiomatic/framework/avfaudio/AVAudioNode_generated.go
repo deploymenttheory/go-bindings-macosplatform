@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object you use for audio generation, processing, or an I/O block.
+//
 // AudioNode wraps [raw.AVAudioNode] with a fluent Go API.
 type AudioNode struct {
 	inner *raw.AVAudioNode
@@ -36,14 +38,14 @@ func NewAudioNode() *AudioNode {
 	return &AudioNode{inner: raw.AVAudioNodeFromID(_id)}
 }
 
-// @method reset @abstract Clear a unit's previous processing state.
+// Clears a unit’s previous processing state.
 //
 // Reset calls the underlying Reset.
 func (x *AudioNode) Reset() {
 	x.inner.Reset()
 }
 
-// @method inputFormatForBus: @abstract Obtain an input bus's format.
+// Gets the input format for the bus you specify.
 //
 // InputFormatForBus calls the underlying InputFormatForBus.
 func (x *AudioNode) InputFormatForBus(bus uint) *AudioFormat {
@@ -54,7 +56,7 @@ func (x *AudioNode) InputFormatForBus(bus uint) *AudioFormat {
 	return &AudioFormat{inner: _r}
 }
 
-// @method outputFormatForBus: @abstract Obtain an output bus's format.
+// Retrieves the output format for the bus you specify.
 //
 // OutputFormatForBus calls the underlying OutputFormatForBus.
 func (x *AudioNode) OutputFormatForBus(bus uint) *AudioFormat {
@@ -65,7 +67,7 @@ func (x *AudioNode) OutputFormatForBus(bus uint) *AudioFormat {
 	return &AudioFormat{inner: _r}
 }
 
-// @method nameForInputBus: @abstract Return the name of an input bus.
+// Gets the name of the input bus you specify.
 //
 // NameForInputBus calls the underlying NameForInputBus.
 func (x *AudioNode) NameForInputBus(bus uint) string {
@@ -76,7 +78,7 @@ func (x *AudioNode) NameForInputBus(bus uint) string {
 	return purego.GoString(_r.Ptr())
 }
 
-// @method nameForOutputBus: @abstract Return the name of an output bus.
+// Retrieves the name of the output bus you specify.
 //
 // NameForOutputBus calls the underlying NameForOutputBus.
 func (x *AudioNode) NameForOutputBus(bus uint) string {
@@ -87,14 +89,14 @@ func (x *AudioNode) NameForOutputBus(bus uint) string {
 	return purego.GoString(_r.Ptr())
 }
 
-// @method installTapOnBus:bufferSize:format:block: @abstract Create a "tap" to record/monitor/observe the output of the node. @param bus the node output bus to which to attach the tap @param bufferSize the requested size of the incoming buffers in sample frames. Supported range is [100, 400] ms. @param format If non-nil, attempts to apply this as the format of the specified output bus. This should only be done when attaching to an output bus which is not connected to another node; an error will result otherwise. The tap and connection formats (if non-nil) on the specified bus should be identical. Otherwise, the latter operation will override any previously set format. @param tapBlock a block to be called with audio buffers @discussion Only one tap may be installed on any bus. Taps may be safely installed and removed while the engine is running. Note that if you have a tap installed on AVAudioOutputNode, there could be a mismatch between the tap buffer format and AVAudioOutputNode's output format, depending on the underlying physical device. Hence, instead of tapping the AVAudioOutputNode, it is advised to tap the node connected to it. E.g. to capture audio from input node: <pre> AVAudioEngine *engine = [[AVAudioEngine alloc] init]; AVAudioInputNode *input = [engine inputNode]; AVAudioFormat *format = [input outputFormatForBus: 0]; [input installTapOnBus: 0 bufferSize: 8192 format: format block: ^(AVAudioPCMBuffer *buf, AVAudioTime *when) { // ‘buf' contains audio captured from input node at time 'when' }]; .... // start engine </pre>
+// Installs an audio tap on a bus you specify to record, monitor, and observe the output of the node.
 //
 // InstallTapOnBusBufferSizeFormatBlock calls the underlying InstallTapOnBusBufferSizeFormatBlock.
 func (x *AudioNode) InstallTapOnBusBufferSizeFormatBlock(bus uint, bufferSize uint32, format *raw.AVAudioFormat, tapBlock func(*raw.AVAudioPCMBuffer, *raw.AVAudioTime)) {
 	x.inner.InstallTapOnBusBufferSizeFormatBlock(bus, bufferSize, format, tapBlock)
 }
 
-// @method removeTapOnBus: @abstract Destroy a tap. @param bus the node output bus whose tap is to be destroyed
+// Removes an audio tap on a bus you specify.
 //
 // RemoveTapOnBus calls the underlying RemoveTapOnBus.
 func (x *AudioNode) RemoveTapOnBus(bus uint) {

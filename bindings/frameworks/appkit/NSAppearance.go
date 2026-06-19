@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages standard appearance attributes for UI elements in an app.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsappearance
 type NSAppearance struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func NSAppearanceFromID(id objc.ID) *NSAppearance {
 	return o
 }
 
+// Sets the appearance to be the active drawing appearance and perform the specified block.
 func (o *NSAppearance) PerformAsCurrentDrawingAppearance(block func()) {
 	var __block_block objc.Block
 	if block != nil {
@@ -50,6 +53,7 @@ func (o *NSAppearance) PerformAsCurrentDrawingAppearance(block func()) {
 	o.Ptr().Send(_nSAppearanceSelPerformAsCurrentDrawingAppearance, __block_block)
 }
 
+// Creates an appearance object based on the name of one of the standard system appearances.
 func NSAppearanceAppearanceNamed(name *foundation.NSString) *NSAppearance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppearance), _nSAppearanceSelAppearanceNamed, name.Ptr())
 	if _ret != 0 {
@@ -58,6 +62,7 @@ func NSAppearanceAppearanceNamed(name *foundation.NSString) *NSAppearance {
 	return NSAppearanceFromID(_ret)
 }
 
+// Creates an appearance object from the named appearance file located in the specified bundle.
 func (o *NSAppearance) InitWithAppearanceNamedBundle(name *foundation.NSString, bundle *foundation.NSBundle) *NSAppearance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppearanceSelInitWithAppearanceNamedBundle, name.Ptr(), bundle.Ptr())
 	if _ret != 0 {
@@ -74,8 +79,9 @@ func (o *NSAppearance) InitWithCoder(coder *foundation.NSCoder) *NSAppearance {
 	return NSAppearanceFromID(_ret)
 }
 
+// Returns the appearance name that most closely matches the current appearance object.
 func (o *NSAppearance) BestMatchFromAppearancesWithNames(appearances *foundation.NSArray[*foundation.NSString]) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppearanceSelBestMatchFromAppearancesWithNames, appearances)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppearanceSelBestMatchFromAppearancesWithNames, appearances.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

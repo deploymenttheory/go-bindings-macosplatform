@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Options that affect the parsing of Markdown content into an attributed string.
+//
 // AttributedStringMarkdownParsingOptions wraps [raw.NSAttributedStringMarkdownParsingOptions] with a fluent Go API.
 type AttributedStringMarkdownParsingOptions struct {
 	inner *raw.NSAttributedStringMarkdownParsingOptions
@@ -38,30 +40,40 @@ func NewAttributedStringMarkdownParsingOptions() *AttributedStringMarkdownParsin
 	return &AttributedStringMarkdownParsingOptions{inner: raw.NSAttributedStringMarkdownParsingOptionsFromID(_id)}
 }
 
+// A Boolean value that indicates whether parsing allows extensions to Markdown that specify extended attributes.
+//
 // WithAllowsExtendedAttributes sets the allowsExtendedAttributes property and returns the receiver for chaining.
 func (x *AttributedStringMarkdownParsingOptions) WithAllowsExtendedAttributes(allowsExtendedAttributes bool) *AttributedStringMarkdownParsingOptions {
 	x.inner.SetAllowsExtendedAttributes(allowsExtendedAttributes)
 	return x
 }
 
+// The syntax for intepreting a Markdown string.
+//
 // WithInterpretedSyntax sets the interpretedSyntax property and returns the receiver for chaining.
 func (x *AttributedStringMarkdownParsingOptions) WithInterpretedSyntax(interpretedSyntax NSAttributedStringMarkdownInterpretedSyntax) *AttributedStringMarkdownParsingOptions {
 	x.inner.SetInterpretedSyntax(raw.NSAttributedStringMarkdownInterpretedSyntax(interpretedSyntax))
 	return x
 }
 
+// The policy for handling a parsing failure.
+//
 // WithFailurePolicy sets the failurePolicy property and returns the receiver for chaining.
 func (x *AttributedStringMarkdownParsingOptions) WithFailurePolicy(failurePolicy NSAttributedStringMarkdownParsingFailurePolicy) *AttributedStringMarkdownParsingOptions {
 	x.inner.SetFailurePolicy(raw.NSAttributedStringMarkdownParsingFailurePolicy(failurePolicy))
 	return x
 }
 
+// The BCP-47 language code for this document.
+//
 // WithLanguageCode sets the languageCode property and returns the receiver for chaining.
 func (x *AttributedStringMarkdownParsingOptions) WithLanguageCode(languageCode string) *AttributedStringMarkdownParsingOptions {
 	x.inner.SetLanguageCode(foundation.NSStringStringWithUTF8String(languageCode))
 	return x
 }
 
+// A Boolean value that indicates whether parsing applies attributes that indicate the position of attributed text in the original Markdown string.
+//
 // WithAppliesSourcePositionAttributes sets the appliesSourcePositionAttributes property and returns the receiver for chaining.
 func (x *AttributedStringMarkdownParsingOptions) WithAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) *AttributedStringMarkdownParsingOptions {
 	x.inner.SetAppliesSourcePositionAttributes(appliesSourcePositionAttributes)

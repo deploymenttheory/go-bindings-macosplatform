@@ -151,14 +151,19 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
+// Constants that indicate the type of authorization the customer has for accessing the Music library.
 // Deprecated: Use MusicAuthorization.Status from MusicKit.
 type SKCloudServiceAuthorizationStatus int64
 
 const (
+	// The authorization type cannot be determined.
 	SKCloudServiceAuthorizationStatusNotDetermined SKCloudServiceAuthorizationStatus = 0
-	SKCloudServiceAuthorizationStatusDenied        SKCloudServiceAuthorizationStatus = 1
-	SKCloudServiceAuthorizationStatusRestricted    SKCloudServiceAuthorizationStatus = 2
-	SKCloudServiceAuthorizationStatusAuthorized    SKCloudServiceAuthorizationStatus = 3
+	// The user does not authorize any access to their music library.
+	SKCloudServiceAuthorizationStatusDenied SKCloudServiceAuthorizationStatus = 1
+	// Access to the music library is restricted in a way that the user cannot change, so your app should not prompt for authorization. An example of this situation is if the device is in an education mode.
+	SKCloudServiceAuthorizationStatusRestricted SKCloudServiceAuthorizationStatus = 2
+	// The user authorizes playback of Apple Music tracks and the addition of tracks to their music library.
+	SKCloudServiceAuthorizationStatusAuthorized SKCloudServiceAuthorizationStatus = 3
 )
 
 func (e SKCloudServiceAuthorizationStatus) String() string {
@@ -176,14 +181,19 @@ func (e SKCloudServiceAuthorizationStatus) String() string {
 	}
 }
 
+// Constants that specify the current capabilities of the customer’s Music library on the device.
 // Deprecated: Use MusicSubscription from MusicKit.
 type SKCloudServiceCapability uint64
 
 const (
-	SKCloudServiceCapabilityNone                             SKCloudServiceCapability = 0
-	SKCloudServiceCapabilityMusicCatalogPlayback             SKCloudServiceCapability = 1
+	// The device does not allow playback of Apple Music content or the addition of tracks to the music library.
+	SKCloudServiceCapabilityNone SKCloudServiceCapability = 0
+	// The device allows playback of Apple Music catalog tracks.
+	SKCloudServiceCapabilityMusicCatalogPlayback SKCloudServiceCapability = 1
+	// The device allows subscription to the Apple Music catalog.
 	SKCloudServiceCapabilityMusicCatalogSubscriptionEligible SKCloudServiceCapability = 2
-	SKCloudServiceCapabilityAddToCloudMusicLibrary           SKCloudServiceCapability = 256
+	// The device allows tracks to be added to the user’s music library.
+	SKCloudServiceCapabilityAddToCloudMusicLibrary SKCloudServiceCapability = 256
 )
 
 func (e SKCloudServiceCapability) String() string {
@@ -203,15 +213,22 @@ func (e SKCloudServiceCapability) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The states that a download operation can be in.
 // Deprecated: Hosted content is no longer supported.
 type SKDownloadState int64
 
 const (
-	SKDownloadStateWaiting   SKDownloadState = 0
-	SKDownloadStateActive    SKDownloadState = 1
-	SKDownloadStatePaused    SKDownloadState = 2
-	SKDownloadStateFinished  SKDownloadState = 3
-	SKDownloadStateFailed    SKDownloadState = 4
+	// Indicates that the download has not started yet.
+	SKDownloadStateWaiting SKDownloadState = 0
+	// Indicates that the content is currently being downloaded.
+	SKDownloadStateActive SKDownloadState = 1
+	// Indicates that your app paused the download.
+	SKDownloadStatePaused SKDownloadState = 2
+	// Indicates that the content was successfully downloaded.
+	SKDownloadStateFinished SKDownloadState = 3
+	// Indicates that an error occurred while the file was being downloaded.
+	SKDownloadStateFailed SKDownloadState = 4
+	// Indicates that your app canceled the download.
 	SKDownloadStateCancelled SKDownloadState = 5
 )
 
@@ -234,6 +251,7 @@ func (e SKDownloadState) String() string {
 	}
 }
 
+// Error codes for StoreKit errors.
 type SKErrorCode int64
 
 const (
@@ -303,15 +321,21 @@ func (e SKErrorCode) String() string {
 	}
 }
 
+// Values representing the state of a transaction.
 // Deprecated: Use PurchaseResult from Product.purchase(confirmIn:options:).
 type SKPaymentTransactionState int64
 
 const (
+	// A transaction that is being processed by the App Store.
 	SKPaymentTransactionStatePurchasing SKPaymentTransactionState = 0
-	SKPaymentTransactionStatePurchased  SKPaymentTransactionState = 1
-	SKPaymentTransactionStateFailed     SKPaymentTransactionState = 2
-	SKPaymentTransactionStateRestored   SKPaymentTransactionState = 3
-	SKPaymentTransactionStateDeferred   SKPaymentTransactionState = 4
+	// A successfully processed transaction.
+	SKPaymentTransactionStatePurchased SKPaymentTransactionState = 1
+	// A failed transaction.
+	SKPaymentTransactionStateFailed SKPaymentTransactionState = 2
+	// A transaction that restores content previously purchased by the user.
+	SKPaymentTransactionStateRestored SKPaymentTransactionState = 3
+	// A transaction that is in the queue, but its final status is pending external action such as Ask to Buy.
+	SKPaymentTransactionStateDeferred SKPaymentTransactionState = 4
 )
 
 func (e SKPaymentTransactionState) String() string {
@@ -331,6 +355,7 @@ func (e SKPaymentTransactionState) String() string {
 	}
 }
 
+// Values representing the payment modes for a product discount.
 // Deprecated: Use Product.SubscriptionOffer.PaymentMode.
 type SKProductDiscountPaymentMode uint64
 
@@ -353,6 +378,7 @@ func (e SKProductDiscountPaymentMode) String() string {
 	}
 }
 
+// Values representing the types of discount offers an app can present.
 // Deprecated: Use Product.SubscriptionOffer.OfferType.
 type SKProductDiscountType uint64
 
@@ -372,6 +398,7 @@ func (e SKProductDiscountType) String() string {
 	}
 }
 
+// Values representing the duration of an interval, from a day up to a year.
 // Deprecated: Use Product.SubscriptionPeriod.Unit.
 type SKProductPeriodUnit uint64
 
@@ -397,13 +424,17 @@ func (e SKProductPeriodUnit) String() string {
 	}
 }
 
+// The visibility settings that determine if an in-app purchase is visible on a device.
 // Deprecated: Use Product.PromotionInfo.Visibility.
 type SKProductStorePromotionVisibility int64
 
 const (
+	// Indicates product visibility is the same as the default value set in App Store Connect.
 	SKProductStorePromotionVisibilityDefault SKProductStorePromotionVisibility = 0
-	SKProductStorePromotionVisibilityShow    SKProductStorePromotionVisibility = 1
-	SKProductStorePromotionVisibilityHide    SKProductStorePromotionVisibility = 2
+	// Indicates product is shown.
+	SKProductStorePromotionVisibilityShow SKProductStorePromotionVisibility = 1
+	// Indicates product is hidden.
+	SKProductStorePromotionVisibilityHide SKProductStorePromotionVisibility = 2
 )
 
 func (e SKProductStorePromotionVisibility) String() string {

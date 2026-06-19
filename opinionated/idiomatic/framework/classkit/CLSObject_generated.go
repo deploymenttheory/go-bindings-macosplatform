@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract base class for objects managed by ClassKit.
+//
 // Object wraps [raw.CLSObject] with a fluent Go API.
 type Object struct {
 	inner *raw.CLSObject

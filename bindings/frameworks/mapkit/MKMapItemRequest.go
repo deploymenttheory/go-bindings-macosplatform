@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A utility class you use to request additional information about a map feature.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapitemrequest
 type MKMapItemRequest struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func MKMapItemRequestFromID(id objc.ID) *MKMapItemRequest {
 	return o
 }
 
+// Create a request with a map item identifier.
 func (o *MKMapItemRequest) InitWithMapItemIdentifier(identifier *MKMapItemIdentifier) *MKMapItemRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemRequestSelInitWithMapItemIdentifier, identifier.Ptr())
 	if _ret != 0 {

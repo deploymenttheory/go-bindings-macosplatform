@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class that represents a machine-readable code’s attributes.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cibarcodedescriptor
 type CIBarcodeDescriptor struct {
 	foundation.NSObject

@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that animates and renders a system of small image sprites using a high-level simulation whose general behavior you specify.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnparticlesystem
 type SCNParticleSystem struct {
 	foundation.NSObject
@@ -167,6 +169,7 @@ func SCNParticleSystemFromID(id objc.ID) *SCNParticleSystem {
 	return o
 }
 
+// Creates a new particle system.
 func SCNParticleSystemParticleSystem() *SCNParticleSystem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNParticleSystem), _sCNParticleSystemSelParticleSystem)
 	if _ret != 0 {
@@ -175,6 +178,7 @@ func SCNParticleSystemParticleSystem() *SCNParticleSystem {
 	return SCNParticleSystemFromID(_ret)
 }
 
+// Loads a particle system from a file in the app’s bundle resources.
 func SCNParticleSystemParticleSystemNamedInDirectory(name *foundation.NSString, directory *foundation.NSString) *SCNParticleSystem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNParticleSystem), _sCNParticleSystemSelParticleSystemNamedInDirectory, name.Ptr(), directory.Ptr())
 	if _ret != 0 {
@@ -183,10 +187,12 @@ func SCNParticleSystemParticleSystemNamedInDirectory(name *foundation.NSString, 
 	return SCNParticleSystemFromID(_ret)
 }
 
+// Returns the particle system to its initial state.
 func (o *SCNParticleSystem) Reset() {
 	o.Ptr().Send(_sCNParticleSystemSelReset)
 }
 
+// Adds a block that modifies particle properties, to be executed at a specified event in the lifetimes of particles in the system.
 func (o *SCNParticleSystem) HandleEventForPropertiesWith(event SCNParticleEvent, properties *foundation.NSArray[*foundation.NSString], block func(unsafe.Pointer, *uint, *uint32, int)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -195,9 +201,10 @@ func (o *SCNParticleSystem) HandleEventForPropertiesWith(event SCNParticleEvent,
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_sCNParticleSystemSelHandleEventForPropertiesWith, event, properties, __block_block)
+	o.Ptr().Send(_sCNParticleSystemSelHandleEventForPropertiesWith, event, properties.Ptr(), __block_block)
 }
 
+// Adds a block that modifies particle properties, to be executed each time SceneKit renders a frame.
 func (o *SCNParticleSystem) AddModifierForPropertiesAtStageWith(properties *foundation.NSArray[*foundation.NSString], stage SCNParticleModifierStage, block func(unsafe.Pointer, *uint, int, int, float32)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -206,13 +213,15 @@ func (o *SCNParticleSystem) AddModifierForPropertiesAtStageWith(properties *foun
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_sCNParticleSystemSelAddModifierForPropertiesAtStageWith, properties, stage, __block_block)
+	o.Ptr().Send(_sCNParticleSystemSelAddModifierForPropertiesAtStageWith, properties.Ptr(), stage, __block_block)
 }
 
+// Removes particle modifier blocks for the specified stage of the particle simulation.
 func (o *SCNParticleSystem) RemoveModifiersOfStage(stage SCNParticleModifierStage) {
 	o.Ptr().Send(_sCNParticleSystemSelRemoveModifiersOfStage, stage)
 }
 
+// Removes all particle modifier blocks associated with the particle system.
 func (o *SCNParticleSystem) RemoveAllModifiers() {
 	o.Ptr().Send(_sCNParticleSystemSelRemoveAllModifiers)
 }
@@ -804,10 +813,13 @@ func (o *SCNParticleSystem) SetWritesToDepthBuffer(writesToDepthBuffer bool) {
 }
 
 func (o *SCNParticleSystem) PropertyControllers() *foundation.NSDictionary[*foundation.NSString, *SCNParticlePropertyController] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *SCNParticlePropertyController]](o.Ptr(), _sCNParticleSystemSelPropertyControllers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCNParticleSystemSelPropertyControllers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *SCNParticlePropertyController](_ret)
 }
 
 func (o *SCNParticleSystem) SetPropertyControllers(propertyControllers *foundation.NSDictionary[*foundation.NSString, *SCNParticlePropertyController]) {
-	o.Ptr().Send(_sCNParticleSystemSelSetPropertyControllers, propertyControllers)
+	o.Ptr().Send(_sCNParticleSystemSelSetPropertyControllers, propertyControllers.Ptr())
 }

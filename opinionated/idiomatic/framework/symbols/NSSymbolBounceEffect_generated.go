@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that applies a transitory scaling effect, or bounce, to the layers in a symbol-based image separately or as a whole.
+//
 // SymbolBounceEffect wraps [raw.NSSymbolBounceEffect] with a fluent Go API.
 type SymbolBounceEffect struct {
 	inner *raw.NSSymbolBounceEffect
@@ -35,7 +37,7 @@ func NewSymbolBounceEffect() *SymbolBounceEffect {
 	return &SymbolBounceEffect{inner: raw.NSSymbolBounceEffectFromID(_id)}
 }
 
-// Returns a copy of the effect that animates incrementally, by layer.
+// An effect that bounces each layer separately.
 //
 // EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolBounceEffect) EffectWithByLayer() *SymbolBounceEffect {
@@ -46,7 +48,7 @@ func (x *SymbolBounceEffect) EffectWithByLayer() *SymbolBounceEffect {
 	return &SymbolBounceEffect{inner: _r}
 }
 
-// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+// An effect that bounces all layers simultaneously.
 //
 // EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolBounceEffect) EffectWithWholeSymbol() *SymbolBounceEffect {

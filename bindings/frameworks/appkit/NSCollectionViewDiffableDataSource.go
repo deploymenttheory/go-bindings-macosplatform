@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object you use to manage data and provide items for a collection view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionviewdiffabledatasource
 type NSCollectionViewDiffableDataSource[SectionIdentifierType purego.AnyObject, ItemIdentifierType purego.AnyObject] struct {
 	foundation.NSObject

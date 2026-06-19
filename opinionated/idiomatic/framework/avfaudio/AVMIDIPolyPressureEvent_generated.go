@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a MIDI poly or key pressure event.
+//
 // MIDIPolyPressureEvent wraps [raw.AVMIDIPolyPressureEvent] with a fluent Go API.
 type MIDIPolyPressureEvent struct {
 	inner *raw.AVMIDIPolyPressureEvent
@@ -29,7 +31,7 @@ func MIDIPolyPressureEventFromID(id objc.ID) *MIDIPolyPressureEvent {
 	return &MIDIPolyPressureEvent{inner: raw.AVMIDIPolyPressureEventFromID(id)}
 }
 
-// @method initWithChannel:key:pressure @abstract Initialize the event with a channel, a MIDI key number, and a key pressure value. @param channel The MIDI channel for the message.  Range: 0-15. @param key The MIDI key number to which the pressure should be applied. @param pressure The poly pressure value.
+// Creates an event with a channel, MIDI key number, and a key pressure value.
 //
 // NewMIDIPolyPressureEventWithChannelKeyPressure creates a new [MIDIPolyPressureEvent].
 func NewMIDIPolyPressureEventWithChannelKeyPressure(channel uint, key uint, pressure uint) *MIDIPolyPressureEvent {
@@ -38,7 +40,7 @@ func NewMIDIPolyPressureEventWithChannelKeyPressure(channel uint, key uint, pres
 	return &MIDIPolyPressureEvent{inner: raw.AVMIDIPolyPressureEventFromID(_id)}
 }
 
-// @property key The MIDI key number.
+// The MIDI key number.
 //
 // WithKey sets the key property and returns the receiver for chaining.
 func (x *MIDIPolyPressureEvent) WithKey(key uint) *MIDIPolyPressureEvent {
@@ -46,7 +48,7 @@ func (x *MIDIPolyPressureEvent) WithKey(key uint) *MIDIPolyPressureEvent {
 	return x
 }
 
-// @property pressure The poly pressure value for the requested key.
+// The poly pressure value for the requested key.
 //
 // WithPressure sets the pressure property and returns the receiver for chaining.
 func (x *MIDIPolyPressureEvent) WithPressure(pressure uint) *MIDIPolyPressureEvent {
@@ -54,7 +56,7 @@ func (x *MIDIPolyPressureEvent) WithPressure(pressure uint) *MIDIPolyPressureEve
 	return x
 }
 
-// @property channel The MIDI channel for the event.  Range: 0-15.
+// The MIDI channel.
 //
 // WithChannel sets the channel property and returns the receiver for chaining.
 func (x *MIDIPolyPressureEvent) WithChannel(channel uint) *MIDIPolyPressureEvent {

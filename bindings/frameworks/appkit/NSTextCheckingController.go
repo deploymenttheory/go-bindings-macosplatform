@@ -78,7 +78,7 @@ func (o *NSTextCheckingController) ConsiderTextCheckingForRange(range_ foundatio
 }
 
 func (o *NSTextCheckingController) CheckTextInRangeTypesOptions(range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_nSTextCheckingControllerSelCheckTextInRangeTypesOptions, range_, checkingTypes, options)
+	o.Ptr().Send(_nSTextCheckingControllerSelCheckTextInRangeTypesOptions, range_, checkingTypes, options.Ptr())
 }
 
 func (o *NSTextCheckingController) CheckTextInSelection(sender objc.ID) {
@@ -114,8 +114,11 @@ func (o *NSTextCheckingController) UpdateCandidates() {
 }
 
 func (o *NSTextCheckingController) ValidAnnotations() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTextCheckingControllerSelValidAnnotations)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingControllerSelValidAnnotations)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSTextCheckingController) MenuAtIndexClickedOnSelectionEffectiveRange(location uint, clickedOnSelection bool, effectiveRange *foundation.NSRange) *NSMenu {

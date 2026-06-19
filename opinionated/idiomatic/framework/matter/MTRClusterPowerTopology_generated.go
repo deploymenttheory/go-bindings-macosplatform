@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Cluster Power Topology The Power Topology Cluster provides a mechanism for expressing how power is flowing between endpoints.
+//
 // MTRClusterPowerTopology wraps [raw.MTRClusterPowerTopology] with a fluent Go API.
 type MTRClusterPowerTopology struct {
 	inner *raw.MTRClusterPowerTopology

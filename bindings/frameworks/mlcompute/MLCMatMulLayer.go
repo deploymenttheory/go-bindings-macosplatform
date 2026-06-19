@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that multiplies matrices.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcmatmullayer
 type MLCMatMulLayer struct {
 	MLCLayer
@@ -30,7 +32,7 @@ func MLCMatMulLayerFromID(id objc.ID) *MLCMatMulLayer {
 	return o
 }
 
-// @abstract Create a matrix multiply layer @param    descriptor A matrix multiply descriptor @return   A new layer for matrix multiplication.
+// Creates a matrix multiplication layer with the specified descriptor you specify.
 func MLCMatMulLayerLayerWithDescriptor(descriptor *MLCMatMulDescriptor) *MLCMatMulLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCMatMulLayer), _mLCMatMulLayerSelLayerWithDescriptor, descriptor.Ptr())
 	if _ret != 0 {

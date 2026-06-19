@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that describes the properties of a create sparse operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphcreatesparseopdescriptor
 type MPSGraphCreateSparseOpDescriptor struct {
 	MPSGraphObject
@@ -34,7 +36,7 @@ func MPSGraphCreateSparseOpDescriptorFromID(id objc.ID) *MPSGraphCreateSparseOpD
 	return o
 }
 
-// Creates a descriptor for a sparse tensor. - Parameters: - sparseStorageType: A sparseStorageType. - dataType: A dataType of the sparse tensor. - Returns: The descriptor.
+// Creates a descriptor for a sparse tensor.
 func MPSGraphCreateSparseOpDescriptorDescriptorWithStorageTypeDataType(sparseStorageType MPSGraphSparseStorageType, dataType mpscore.MPSDataType) *MPSGraphCreateSparseOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphCreateSparseOpDescriptor), _mPSGraphCreateSparseOpDescriptorSelDescriptorWithStorageTypeDataType, sparseStorageType, dataType)
 	if _ret != 0 {

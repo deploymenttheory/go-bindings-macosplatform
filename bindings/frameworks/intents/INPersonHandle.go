@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The identifying information for a user of your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inpersonhandle
 type INPersonHandle struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func INPersonHandleFromID(id objc.ID) *INPersonHandle {
 	return o
 }
 
+// Initializes and returns a person handle with the specified data.
 func (o *INPersonHandle) InitWithValueTypeLabel(value *foundation.NSString, type_ INPersonHandleType, label *foundation.NSString) *INPersonHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonHandleSelInitWithValueTypeLabel, value.Ptr(), type_, label.Ptr())
 	if _ret != 0 {
@@ -42,6 +45,7 @@ func (o *INPersonHandle) InitWithValueTypeLabel(value *foundation.NSString, type
 	return INPersonHandleFromID(_ret)
 }
 
+// Initializes and returns a person handle with the specified data.
 func (o *INPersonHandle) InitWithValueType(value *foundation.NSString, type_ INPersonHandleType) *INPersonHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonHandleSelInitWithValueType, value.Ptr(), type_)
 	if _ret != 0 {

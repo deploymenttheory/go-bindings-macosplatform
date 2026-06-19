@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A utility class that represents range components of a stroke.
+//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pkfloatrange
 type PKFloatRange struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func PKFloatRangeFromID(id objc.ID) *PKFloatRange {
 	return o
 }
 
+// A utility class used to contain ranges returned by the PKStroke API.
 func (o *PKFloatRange) InitWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *PKFloatRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKFloatRangeSelInitWithLowerBoundUpperBound, lowerBound, upperBound)
 	if _ret != 0 {

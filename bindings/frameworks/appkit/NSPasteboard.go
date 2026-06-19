@@ -4,12 +4,16 @@
 package appkit
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that transfers data to and from the pasteboard server.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspasteboard
 type NSPasteboard struct {
 	foundation.NSObject
@@ -65,6 +69,7 @@ func NSPasteboardFromID(id objc.ID) *NSPasteboard {
 	return o
 }
 
+// Returns the pasteboard with the specified name.
 func NSPasteboardPasteboardWithName(name *foundation.NSString) *NSPasteboard {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPasteboard), _nSPasteboardSelPasteboardWithName, name.Ptr())
 	if _ret != 0 {
@@ -73,6 +78,7 @@ func NSPasteboardPasteboardWithName(name *foundation.NSString) *NSPasteboard {
 	return NSPasteboardFromID(_ret)
 }
 
+// Creates and returns a new pasteboard with a name that is guaranteed to be unique with respect to other pasteboards in the system.
 func NSPasteboardPasteboardWithUniqueName() *NSPasteboard {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPasteboard), _nSPasteboardSelPasteboardWithUniqueName)
 	if _ret != 0 {
@@ -81,78 +87,96 @@ func NSPasteboardPasteboardWithUniqueName() *NSPasteboard {
 	return NSPasteboardFromID(_ret)
 }
 
+// Releases the receiver’s resources in the pasteboard server.
 func (o *NSPasteboard) ReleaseGlobally() {
 	o.Ptr().Send(_nSPasteboardSelReleaseGlobally)
 }
 
+// Prepares the pasteboard to receive new contents, removing the existing pasteboard contents.
 func (o *NSPasteboard) PrepareForNewContentsWithOptions(options NSPasteboardContentsOptions) int {
 	_ret := objc.Send[int](o.Ptr(), _nSPasteboardSelPrepareForNewContentsWithOptions, options)
 	return _ret
 }
 
+// Clears the existing contents of the pasteboard.
 func (o *NSPasteboard) ClearContents() int {
 	_ret := objc.Send[int](o.Ptr(), _nSPasteboardSelClearContents)
 	return _ret
 }
 
+// Writes an array of objects to the receiver.
 func (o *NSPasteboard) WriteObjects(objects *foundation.NSArray[NSPasteboardWriting]) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPasteboardSelWriteObjects, objects.Ptr())
 	return _ret
 }
 
+// Reads from the receiver objects that best match the specified array of classes.
 func (o *NSPasteboard) ReadObjectsForClassesOptions(classArray *foundation.NSArray[objc.Class], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSPasteboardSelReadObjectsForClassesOptions, classArray, options)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelReadObjectsForClassesOptions, classArray.Ptr(), options.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
+// Returns the index of the specified pasteboard item.
 func (o *NSPasteboard) IndexOfPasteboardItem(pasteboardItem *NSPasteboardItem) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSPasteboardSelIndexOfPasteboardItem, pasteboardItem.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the receiver contains any items that conform to the specified UTIs.
 func (o *NSPasteboard) CanReadItemWithDataConformingToTypes(types *foundation.NSArray[*foundation.NSString]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPasteboardSelCanReadItemWithDataConformingToTypes, types)
+	_ret := objc.Send[bool](o.Ptr(), _nSPasteboardSelCanReadItemWithDataConformingToTypes, types.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the receiver contains any items that can be represented as an instance of any class in a given array.
 func (o *NSPasteboard) CanReadObjectForClassesOptions(classArray *foundation.NSArray[objc.Class], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPasteboardSelCanReadObjectForClassesOptions, classArray, options)
+	_ret := objc.Send[bool](o.Ptr(), _nSPasteboardSelCanReadObjectForClassesOptions, classArray.Ptr(), options.Ptr())
 	return _ret
 }
 
+// Prepares the receiver for a change in its contents by declaring the new types of data it will contain and a new owner.
 func (o *NSPasteboard) DeclareTypesOwner(newTypes *foundation.NSArray[*foundation.NSString], newOwner objc.ID) int {
-	_ret := objc.Send[int](o.Ptr(), _nSPasteboardSelDeclareTypesOwner, newTypes, newOwner)
+	_ret := objc.Send[int](o.Ptr(), _nSPasteboardSelDeclareTypesOwner, newTypes.Ptr(), newOwner)
 	return _ret
 }
 
+// Adds promises for the specified types to the first pasteboard item.
 func (o *NSPasteboard) AddTypesOwner(newTypes *foundation.NSArray[*foundation.NSString], newOwner objc.ID) int {
-	_ret := objc.Send[int](o.Ptr(), _nSPasteboardSelAddTypesOwner, newTypes, newOwner)
+	_ret := objc.Send[int](o.Ptr(), _nSPasteboardSelAddTypesOwner, newTypes.Ptr(), newOwner)
 	return _ret
 }
 
+// Scans the specified types for a type that the receiver supports.
 func (o *NSPasteboard) AvailableTypeFromArray(types *foundation.NSArray[*foundation.NSString]) *foundation.NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelAvailableTypeFromArray, types)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelAvailableTypeFromArray, types.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSStringFromID(_ret)
 }
 
+// Sets the data as the representation for the specified type for the first item on the receiver.
 func (o *NSPasteboard) SetDataForType(data *foundation.NSData, dataType *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPasteboardSelSetDataForType, data.Ptr(), dataType.Ptr())
 	return _ret
 }
 
+// Sets the given property list as the representation for the specified type for the first item on the receiver.
 func (o *NSPasteboard) SetPropertyListForType(plist objc.ID, dataType *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPasteboardSelSetPropertyListForType, plist, dataType.Ptr())
 	return _ret
 }
 
+// Sets the given string as the representation for the specified type for the first item on the receiver.
 func (o *NSPasteboard) SetStringForType(string_ *foundation.NSString, dataType *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPasteboardSelSetStringForType, string_.Ptr(), dataType.Ptr())
 	return _ret
 }
 
+// Returns the data for the specified type from the first item in the receiver that contains the type.
 func (o *NSPasteboard) DataForType(dataType *foundation.NSString) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelDataForType, dataType.Ptr())
 	if _ret != 0 {
@@ -161,11 +185,13 @@ func (o *NSPasteboard) DataForType(dataType *foundation.NSString) *foundation.NS
 	return foundation.NSDataFromID(_ret)
 }
 
+// Returns the property list for the specified type from the first item in the receiver that contains the type.
 func (o *NSPasteboard) PropertyListForType(dataType *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelPropertyListForType, dataType.Ptr())
 	return _ret
 }
 
+// Returns a concatenation of the strings for the specified type from all the items in the receiver that contain the type.
 func (o *NSPasteboard) StringForType(dataType *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelStringForType, dataType.Ptr())
 	if _ret != 0 {
@@ -174,19 +200,49 @@ func (o *NSPasteboard) StringForType(dataType *foundation.NSString) *foundation.
 	return foundation.NSStringFromID(_ret)
 }
 
-// Determines whether the first pasteboard item matches the specified patterns, without notifying the person using the app. This method only gives an indication of whether the first pasteboard item matches a particular pattern, and doesn’t allow the app to access the item's contents. As a result, the system doesn’t notify the person using the app about reading the contents of the pasteboard. The following example shows how to use this method to find email and postal addresses in the first pasteboard item: ```obj-c [NSPasteboard.generalPasteboard detectPatternsForPatterns:[NSSet setWithArray:@[NSPasteboardDetectionPatternEmailAddress, NSPasteboardDetectionPatternPostalAddress]] completionHandler:^(NSSet<NSPasteboardDetectionPattern> *matchedPatterns, NSError *error) { if (error) { NSLog(@"Error: %@", error); return; } BOOL matchedEmail = [matchedPatterns containsObject:NSPasteboardDetectionPatternEmailAddress]; BOOL matchedPostal = [matchedPatterns containsObject: NSPasteboardDetectionPatternPostalAddress]; if (matchedEmail) { NSLog(@"Email address(es) detected"); } if (matchedPostal) { NSLog(@"Postal address(es) detected"); } if (!matchedEmail && !matchedPostal) { NSLog(@"Matched neither email nor postal addresses."); } }]; ``` - Parameters: - patterns: The patterns to detect on the pasteboard. - completionHandler: A block the system invokes after detecting patterns on the pasteboard. The block receives either a set with the patterns the system finds on the pasteboard or an error if detection fails.
-func (o *NSPasteboard) DetectPatternsForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
-	o.Ptr().Send(_nSPasteboardSelDetectPatternsForPatternsCompletionHandler, patterns, completionHandler)
+// Determines whether the first pasteboard item matches the specified patterns, without notifying the person using the app.
+func (o *NSPasteboard) DetectPatternsForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSSet[*foundation.NSString], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSSetFromID[*foundation.NSString](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_nSPasteboardSelDetectPatternsForPatternsCompletionHandler, patterns.Ptr(), __block_completionHandler)
 }
 
-// Determines whether the first pasteboard item matches the specified patterns, reading the contents if it finds a match. For details about the types returned for each pattern, see “NSPasteboardDetectionPattern“. The following example shows how to use this method to find web URLs and web search terms in the first pasteboard item: ```obj-c [NSPasteboard.generalPasteboard detectValuesForPatterns:[NSSet setWithArray:@[NSPasteboardDetectionPatternProbableWebSearch, NSPasteboardDetectionPatternProbableWebURL]] completionHandler:^(NSDictionary<NSPasteboardDetectionPattern, id> *patternValues, NSError *error) { if (error) { NSLog(@"Error: %@", error); return; } NSString *searchString = (NSString*)patternValues[NSPasteboardDetectionPatternProbableWebSearch]; NSString *urlString = (NSString*)patternValues[NSPasteboardDetectionPatternProbableWebURL] ; if (searchString != nil) { NSLog(@"Web search retrieved: %@", searchString); } if (urlString != nil) { NSLog(@"Web URL retrieved: %@", urlString); } if (searchString == nil && urlString == nil) { NSLog(@"No web patterns retrieved."); } }]; ``` > Important: If the system finds a match when calling this method, the system informs the person using the app that the app is trying to read the contents of the pasteboard. If the person denies access to the pasteboard, the completion handler receives an error. - Parameters: - patterns: The patterns to detect on the pasteboard. - completionHandler: A block the system invokes after detecting patterns on the pasteboard. The block returns either a dictionary with the patterns the system finds on the pasteboard or an error if detection fails. The dictionary keys specify the matched patterns and the values specify the corresponding content of the pasteboard.
-func (o *NSPasteboard) DetectValuesForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
-	o.Ptr().Send(_nSPasteboardSelDetectValuesForPatternsCompletionHandler, patterns, completionHandler)
+// Determines whether the first pasteboard item matches the specified patterns, reading the contents if it finds a match.
+func (o *NSPasteboard) DetectValuesForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSDictionary[*foundation.NSString, objc.ID], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_nSPasteboardSelDetectValuesForPatternsCompletionHandler, patterns.Ptr(), __block_completionHandler)
 }
 
-// Determines available metadata from the specified metadata types for the first pasteboard item, without notifying the person using the app. This method only gives access to limited types of metadata and doesn’t allow the app to access the contents. As a result, the system doesn’t notify the person using the app about reading the contents of the pasteboard. For details about the metadata returned for each type, see “NSPasteboardMetadataType“. The following example shows how to use this method to find the content type of a file reference in the first item on the pasteboard: ```obj-c [NSPasteboard.generalPasteboard detectMetadataForTypes:[NSSet setWithArray:@[NSPasteboardMetadataTypeContentType]] completionHandler:^(NSDictionary<NSPasteboardMetadataType, id> *metadata, NSError *error) { if (error) { NSLog(@"Error: %@", error); return; } UTType *contentType = (UTType*)metadata[NSPasteboardMetadataTypeContentType]; if (contentType) { NSLog(@"Content type is: %@", contentType.identifier); } else { NSLog(@"Couldn't get content type"); } }]; ``` - Parameters: - types: The metadata types to detect on the pasteboard. - completionHandler: A block the system invokes after detecting metadata on the pasteboard. The block receives either a dictionary with the metadata types the system finds on the pasteboard or an error if detection fails. The dictionary keys specify the matched metadata types and the values specify the corresponding metadata.
-func (o *NSPasteboard) DetectMetadataForTypesCompletionHandler(types *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
-	o.Ptr().Send(_nSPasteboardSelDetectMetadataForTypesCompletionHandler, types, completionHandler)
+// Determines available metadata from the specified metadata types for the first pasteboard item, without notifying the person using the app.
+func (o *NSPasteboard) DetectMetadataForTypesCompletionHandler(types *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSDictionary[*foundation.NSString, objc.ID], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_nSPasteboardSelDetectMetadataForTypesCompletionHandler, types.Ptr(), __block_completionHandler)
 }
 
 func NSPasteboardGeneralPasteboard() *NSPasteboard {
@@ -225,15 +281,23 @@ func (o *NSPasteboard) PasteboardItems() *foundation.NSArray[*NSPasteboardItem] 
 }
 
 func (o *NSPasteboard) Types() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSPasteboardSelTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Returns the data types that can be converted to the specified type using the available filter services.
 func NSPasteboardTypesFilterableTo(type_ *foundation.NSString) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSPasteboard), _nSPasteboardSelTypesFilterableTo, type_.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPasteboard), _nSPasteboardSelTypesFilterableTo, type_.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Creates a new pasteboard object that supplies the specified file in as many types as possible based on the available filter services.
 func NSPasteboardPasteboardByFilteringFile(filename *foundation.NSString) *NSPasteboard {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPasteboard), _nSPasteboardSelPasteboardByFilteringFile, filename.Ptr())
 	if _ret != 0 {
@@ -242,6 +306,7 @@ func NSPasteboardPasteboardByFilteringFile(filename *foundation.NSString) *NSPas
 	return NSPasteboardFromID(_ret)
 }
 
+// Creates a new pasteboard object that supplies the specified data in as many types as possible based on the available filter services.
 func NSPasteboardPasteboardByFilteringDataOfType(data *foundation.NSData, type_ *foundation.NSString) *NSPasteboard {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPasteboard), _nSPasteboardSelPasteboardByFilteringDataOfType, data.Ptr(), type_.Ptr())
 	if _ret != 0 {
@@ -258,11 +323,13 @@ func NSPasteboardPasteboardByFilteringTypesInPasteboard(pboard *NSPasteboard) *N
 	return NSPasteboardFromID(_ret)
 }
 
+// Writes the contents of the specified file to the pasteboard.
 func (o *NSPasteboard) WriteFileContents(filename *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPasteboardSelWriteFileContents, filename.Ptr())
 	return _ret
 }
 
+// Reads data representing a file’s contents from the receiver and writes it to the specified file.
 func (o *NSPasteboard) ReadFileContentsTypeToFile(type_ *foundation.NSString, filename *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelReadFileContentsTypeToFile, type_.Ptr(), filename.Ptr())
 	if _ret != 0 {
@@ -271,11 +338,13 @@ func (o *NSPasteboard) ReadFileContentsTypeToFile(type_ *foundation.NSString, fi
 	return foundation.NSStringFromID(_ret)
 }
 
+// Writes the serialized contents of the specified file wrapper to the pasteboard.
 func (o *NSPasteboard) WriteFileWrapper(wrapper *foundation.NSFileWrapper) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPasteboardSelWriteFileWrapper, wrapper.Ptr())
 	return _ret
 }
 
+// Reads data representing a file’s contents from the receiver and returns it as a file wrapper.
 func (o *NSPasteboard) ReadFileWrapper() *foundation.NSFileWrapper {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelReadFileWrapper)
 	if _ret != 0 {

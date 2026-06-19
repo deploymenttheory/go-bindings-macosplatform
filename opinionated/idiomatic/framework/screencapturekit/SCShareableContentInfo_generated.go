@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An instance that provides information for the content in a given stream.
+//
 // ShareableContentInfo wraps [raw.SCShareableContentInfo] with a fluent Go API.
 type ShareableContentInfo struct {
 	inner *raw.SCShareableContentInfo

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The travel-time information that Apple servers return.
+//
 // ETAResponse wraps [raw.MKETAResponse] with a fluent Go API.
 type ETAResponse struct {
 	inner *raw.MKETAResponse

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that fades the opacity of some or all layers in a symbol-based image.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymbolpulseeffect
 type NSSymbolPulseEffect struct {
 	NSSymbolEffect
@@ -40,7 +42,7 @@ func NSSymbolPulseEffectEffect() *NSSymbolPulseEffect {
 	return NSSymbolPulseEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that only animates annotated pulse layers.
+// A copy of the effect requesting an animation that pulses only the layers marked to always pulse.
 func (o *NSSymbolPulseEffect) EffectWithByLayer() *NSSymbolPulseEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolPulseEffectSelEffectWithByLayer)
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func (o *NSSymbolPulseEffect) EffectWithByLayer() *NSSymbolPulseEffect {
 	return NSSymbolPulseEffectFromID(_ret)
 }
 
-// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+// A copy of the effect requesting an animation that pulses all layers simultaneously.
 func (o *NSSymbolPulseEffect) EffectWithWholeSymbol() *NSSymbolPulseEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolPulseEffectSelEffectWithWholeSymbol)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of music events that you can offset, set to a muted state, modify independently from other track events, and send to a specified destination.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avmusictrack
 type AVMusicTrack struct {
 	foundation.NSObject
@@ -167,36 +169,37 @@ func (o *AVMusicTrack) TimeResolution() uint {
 	return _ret
 }
 
+// Adds a music event to a track at the time you specify.
 func (o *AVMusicTrack) AddEventAtBeat(event *AVMusicEvent, beat float64) {
 	o.Ptr().Send(_aVMusicTrackSelAddEventAtBeat, event.Ptr(), beat)
 }
 
-// @method moveEventsInRange:byAmount @abstract	Shift the beat location of all events in the given beat range by the amount specified. @param		range			the range of beats.  Must be a valid AVBeatRange. @param		beatAmount		the amount in beats to shift each event.  The amount may be positive or negative.
+// Moves the beat location of all events in the given beat range by the amount you specify.
 func (o *AVMusicTrack) MoveEventsInRangeByAmount(range_ AVBeatRange, beatAmount float64) {
 	o.Ptr().Send(_aVMusicTrackSelMoveEventsInRangeByAmount, range_, beatAmount)
 }
 
-// @method clearEventsInRange: @abstract	Removes all events in the given beat range, erasing that portion of the AVMusicTrack. @param		range			the range of beats.  Must be a valid AVBeatRange. @discussion	All events outside of the specified range left unmodified.
+// Removes all events in the given beat range from the music track.
 func (o *AVMusicTrack) ClearEventsInRange(range_ AVBeatRange) {
 	o.Ptr().Send(_aVMusicTrackSelClearEventsInRange, range_)
 }
 
-// @method cutEventsInRange: @abstract	Removes all events in the given beat range, splicing out that portion of the AVMusicTrack. @param		range			the range of beats.  Must be a valid AVBeatRange. @discussion	All events past the end of the specified range will be shifted backward by the duration of the range.
+// Splices all events in the beat range from the music track.
 func (o *AVMusicTrack) CutEventsInRange(range_ AVBeatRange) {
 	o.Ptr().Send(_aVMusicTrackSelCutEventsInRange, range_)
 }
 
-// @method copyEventsInRange:fromTrack:insertAtBeat @abstract	Copies all events in the given beat range from the specified AVMusicTrack, splicing them into the current AVMusicTrack. @param		range			the range of beats.  Must be a valid AVBeatRange. @param		sourceTrack		the AVMusicTrack to copy the events from. @param		insertStartBeat	the start beat at which the copied events should be spliced in. @discussion	All events originally at or past insertStartBeat will be shifted forward by the duration of the copied-in range.
+// Copies the events from the source track and splices them into the current music track.
 func (o *AVMusicTrack) CopyEventsInRangeFromTrackInsertAtBeat(range_ AVBeatRange, sourceTrack *AVMusicTrack, insertStartBeat float64) {
 	o.Ptr().Send(_aVMusicTrackSelCopyEventsInRangeFromTrackInsertAtBeat, range_, sourceTrack.Ptr(), insertStartBeat)
 }
 
-// @method copyAndMergeEventsInRange:fromTrack:mergeAtBeat @abstract	Copies all events in the given beat range from the specified AVMusicTrack, merging them into the current AVMusicTrack. @param		range			the range of beats.  Must be a valid AVBeatRange. @param		sourceTrack		the AVMusicTrack to copy the events from. @param		insertStartBeat	the start beat at which the copied events should be merged. @discussion	All events originally at or past mergeStartBeat will be left unmodified. Copying events from track to track follows the same type-exclusion rules as adding events:  The operation will generate an exception.
+// Copies the events from the source track and merges them into the current music track.
 func (o *AVMusicTrack) CopyAndMergeEventsInRangeFromTrackMergeAtBeat(range_ AVBeatRange, sourceTrack *AVMusicTrack, mergeStartBeat float64) {
 	o.Ptr().Send(_aVMusicTrackSelCopyAndMergeEventsInRangeFromTrackMergeAtBeat, range_, sourceTrack.Ptr(), mergeStartBeat)
 }
 
-// @method enumerateEventsInRange:usingBlock: @abstract	Iterates through the AVMusicEvents within the AVMusicTrack whose timestamps fit within the range, calling the block for each. @param		block			the AVMusicEventEnumerationBlock to call for each event. @discussion	Each event returned via the block should be examined using `NSObject(isKindOfClass:)` to determine its subclass and then cast and accessed/edited accordingly. The iteration may continue after removing an event. The event objects returned via the block will not be the same instances which were added to the AVMusicTrack, though their contents will be identical.
+// Iterates through the music events within the track.
 func (o *AVMusicTrack) EnumerateEventsInRangeUsing(range_ AVBeatRange, block func(*AVMusicEvent, *float64, *bool)) {
 	var __block_block objc.Block
 	if block != nil {

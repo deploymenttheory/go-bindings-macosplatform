@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The physics simulation attributes attached to a scene graph node.
+//
 // PhysicsBody wraps [raw.SCNPhysicsBody] with a fluent Go API.
 type PhysicsBody struct {
 	inner *raw.SCNPhysicsBody
@@ -35,132 +37,176 @@ func NewPhysicsBody() *PhysicsBody {
 	return &PhysicsBody{inner: raw.SCNPhysicsBodyFromID(_id)}
 }
 
+// A constant that determines how the physics body responds to forces and collisions.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *PhysicsBody) WithType(type_ SCNPhysicsBodyType) *PhysicsBody {
 	x.inner.SetType(raw.SCNPhysicsBodyType(type_))
 	return x
 }
 
+// The mass of the body, in kilograms.
+//
 // WithMass sets the mass property and returns the receiver for chaining.
 func (x *PhysicsBody) WithMass(mass float64) *PhysicsBody {
 	x.inner.SetMass(mass)
 	return x
 }
 
+// The body’s moment of inertia, expressed in the local coordinate system of the node that contains the body.
+//
 // WithMomentOfInertia sets the momentOfInertia property and returns the receiver for chaining.
 func (x *PhysicsBody) WithMomentOfInertia(momentOfInertia raw.SCNVector3) *PhysicsBody {
 	x.inner.SetMomentOfInertia(momentOfInertia)
 	return x
 }
 
+// A Boolean value that determines whether SceneKit automatically calculates the body’s moment of inertia or allows setting a custom value.
+//
 // WithUsesDefaultMomentOfInertia sets the usesDefaultMomentOfInertia property and returns the receiver for chaining.
 func (x *PhysicsBody) WithUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia bool) *PhysicsBody {
 	x.inner.SetUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia)
 	return x
 }
 
+// The electric charge of the body, in coulombs.
+//
 // WithCharge sets the charge property and returns the receiver for chaining.
 func (x *PhysicsBody) WithCharge(charge float64) *PhysicsBody {
 	x.inner.SetCharge(charge)
 	return x
 }
 
+// The body’s resistance to sliding motion.
+//
 // WithFriction sets the friction property and returns the receiver for chaining.
 func (x *PhysicsBody) WithFriction(friction float64) *PhysicsBody {
 	x.inner.SetFriction(friction)
 	return x
 }
 
+// A factor that determines how much kinetic energy the body loses or gains in collisions.
+//
 // WithRestitution sets the restitution property and returns the receiver for chaining.
 func (x *PhysicsBody) WithRestitution(restitution float64) *PhysicsBody {
 	x.inner.SetRestitution(restitution)
 	return x
 }
 
+// The body’s resistance to rolling motion.
+//
 // WithRollingFriction sets the rollingFriction property and returns the receiver for chaining.
 func (x *PhysicsBody) WithRollingFriction(rollingFriction float64) *PhysicsBody {
 	x.inner.SetRollingFriction(rollingFriction)
 	return x
 }
 
+// An object that defines the solid volume of the physics body for use in collision detection.
+//
 // WithPhysicsShape sets the physicsShape property and returns the receiver for chaining.
 func (x *PhysicsBody) WithPhysicsShape(physicsShape *PhysicsShape) *PhysicsBody {
 	x.inner.SetPhysicsShape(physicsShape.Unwrap())
 	return x
 }
 
+// A Boolean value that specifies whether SceneKit can automatically mark the physics body at rest.
+//
 // WithAllowsResting sets the allowsResting property and returns the receiver for chaining.
 func (x *PhysicsBody) WithAllowsResting(allowsResting bool) *PhysicsBody {
 	x.inner.SetAllowsResting(allowsResting)
 	return x
 }
 
+// A vector describing both the current speed (in meters per second) and direction of motion of the physics body.
+//
 // WithVelocity sets the velocity property and returns the receiver for chaining.
 func (x *PhysicsBody) WithVelocity(velocity raw.SCNVector3) *PhysicsBody {
 	x.inner.SetVelocity(velocity)
 	return x
 }
 
+// A vector describing both the current rotation axis and rotational speed (in radians per second) of the physics body.
+//
 // WithAngularVelocity sets the angularVelocity property and returns the receiver for chaining.
 func (x *PhysicsBody) WithAngularVelocity(angularVelocity raw.SCNVector4) *PhysicsBody {
 	x.inner.SetAngularVelocity(angularVelocity)
 	return x
 }
 
+// A factor that reduces the body’s linear velocity.
+//
 // WithDamping sets the damping property and returns the receiver for chaining.
 func (x *PhysicsBody) WithDamping(damping float64) *PhysicsBody {
 	x.inner.SetDamping(damping)
 	return x
 }
 
+// A factor that reduces the body’s angular velocity.
+//
 // WithAngularDamping sets the angularDamping property and returns the receiver for chaining.
 func (x *PhysicsBody) WithAngularDamping(angularDamping float64) *PhysicsBody {
 	x.inner.SetAngularDamping(angularDamping)
 	return x
 }
 
+// A multiplier affecting how SceneKit applies translations computed by the physics simulation to the node containing the physics body.
+//
 // WithVelocityFactor sets the velocityFactor property and returns the receiver for chaining.
 func (x *PhysicsBody) WithVelocityFactor(velocityFactor raw.SCNVector3) *PhysicsBody {
 	x.inner.SetVelocityFactor(velocityFactor)
 	return x
 }
 
+// A multiplier affecting how SceneKit applies rotations computed by the physics simulation to the node containing the physics body.
+//
 // WithAngularVelocityFactor sets the angularVelocityFactor property and returns the receiver for chaining.
 func (x *PhysicsBody) WithAngularVelocityFactor(angularVelocityFactor raw.SCNVector3) *PhysicsBody {
 	x.inner.SetAngularVelocityFactor(angularVelocityFactor)
 	return x
 }
 
+// A mask that defines which categories this physics body belongs to.
+//
 // WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
 func (x *PhysicsBody) WithCategoryBitMask(categoryBitMask uint) *PhysicsBody {
 	x.inner.SetCategoryBitMask(categoryBitMask)
 	return x
 }
 
+// A mask that defines which categories of physics bodies can collide with this physics body.
+//
 // WithCollisionBitMask sets the collisionBitMask property and returns the receiver for chaining.
 func (x *PhysicsBody) WithCollisionBitMask(collisionBitMask uint) *PhysicsBody {
 	x.inner.SetCollisionBitMask(collisionBitMask)
 	return x
 }
 
+// A mask that defines which categories of bodies cause intersection notifications with this physics body.
+//
 // WithContactTestBitMask sets the contactTestBitMask property and returns the receiver for chaining.
 func (x *PhysicsBody) WithContactTestBitMask(contactTestBitMask uint) *PhysicsBody {
 	x.inner.SetContactTestBitMask(contactTestBitMask)
 	return x
 }
 
+// A Boolean value that determines whether the constant gravity of a scene accelerates the body.
+//
 // WithAffectedByGravity sets the affectedByGravity property and returns the receiver for chaining.
 func (x *PhysicsBody) WithAffectedByGravity(affectedByGravity bool) *PhysicsBody {
 	x.inner.SetAffectedByGravity(affectedByGravity)
 	return x
 }
 
+// The minimum distance the body must travel for SceneKit to apply a more precise (but more costly) algorithm to detect contacts with other bodies.
+//
 // WithContinuousCollisionDetectionThreshold sets the continuousCollisionDetectionThreshold property and returns the receiver for chaining.
 func (x *PhysicsBody) WithContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold float64) *PhysicsBody {
 	x.inner.SetContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold)
 	return x
 }
 
+// The position of the body’s center of mass relative to its local coordinate origin.
+//
 // WithCenterOfMassOffset sets the centerOfMassOffset property and returns the receiver for chaining.
 func (x *PhysicsBody) WithCenterOfMassOffset(centerOfMassOffset raw.SCNVector3) *PhysicsBody {
 	x.inner.SetCenterOfMassOffset(centerOfMassOffset)
@@ -179,31 +225,43 @@ func (x *PhysicsBody) WithAngularRestingThreshold(angularRestingThreshold float6
 	return x
 }
 
+// Applies a force or impulse to the body at its center of mass.
+//
 // ApplyForceImpulse calls the underlying ApplyForceImpulse.
 func (x *PhysicsBody) ApplyForceImpulse(direction raw.SCNVector3, impulse bool) {
 	x.inner.ApplyForceImpulse(direction, impulse)
 }
 
+// Applies a force or impulse to the body at a specific point.
+//
 // ApplyForceAtPositionImpulse calls the underlying ApplyForceAtPositionImpulse.
 func (x *PhysicsBody) ApplyForceAtPositionImpulse(direction raw.SCNVector3, position raw.SCNVector3, impulse bool) {
 	x.inner.ApplyForceAtPositionImpulse(direction, position, impulse)
 }
 
+// Applies a net torque or a change in angular momentum to the body.
+//
 // ApplyTorqueImpulse calls the underlying ApplyTorqueImpulse.
 func (x *PhysicsBody) ApplyTorqueImpulse(torque raw.SCNVector4, impulse bool) {
 	x.inner.ApplyTorqueImpulse(torque, impulse)
 }
 
+// Cancels all continuous forces and torques acting on the physics body during the current simulation step.
+//
 // ClearAllForces calls the underlying ClearAllForces.
 func (x *PhysicsBody) ClearAllForces() {
 	x.inner.ClearAllForces()
 }
 
+// Updates the position and orientation of a body in the physics simulation to match that of the node to which the body is attached.
+//
 // ResetTransform calls the underlying ResetTransform.
 func (x *PhysicsBody) ResetTransform() {
 	x.inner.ResetTransform()
 }
 
+// Tells SceneKit whether to treat the body as currently being in motion.
+//
 // SetResting calls the underlying SetResting.
 func (x *PhysicsBody) SetResting(resting bool) {
 	x.inner.SetResting(resting)

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Thread Border Router Management Manage the Thread network of Thread Border Router
+//
 // MTRClusterThreadBorderRouterManagement wraps [raw.MTRClusterThreadBorderRouterManagement] with a fluent Go API.
 type MTRClusterThreadBorderRouterManagement struct {
 	inner *raw.MTRClusterThreadBorderRouterManagement

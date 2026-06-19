@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A span of time.
+//
 // DateComponentsRange wraps [raw.INDateComponentsRange] with a fluent Go API.
 type DateComponentsRange struct {
 	inner *raw.INDateComponentsRange
@@ -31,6 +33,8 @@ func DateComponentsRangeFromID(id objc.ID) *DateComponentsRange {
 	return &DateComponentsRange{inner: raw.INDateComponentsRangeFromID(id)}
 }
 
+// Initializes the object using the specified start and end dates.
+//
 // NewDateComponentsRangeWithStartDateComponentsEndDateComponents creates a new [DateComponentsRange].
 func NewDateComponentsRangeWithStartDateComponentsEndDateComponents(startDateComponents *foundation.NSDateComponents, endDateComponents *foundation.NSDateComponents) *DateComponentsRange {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INDateComponentsRange")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewDateComponentsRangeWithStartDateComponentsEndDateComponents(startDateCom
 	return &DateComponentsRange{inner: raw.INDateComponentsRangeFromID(_id)}
 }
 
+// Initializes the date range to a repeating time period.
+//
 // NewDateComponentsRangeWithStartDateComponentsEndDateComponentsRecurrenceRule creates a new [DateComponentsRange].
 func NewDateComponentsRangeWithStartDateComponentsEndDateComponentsRecurrenceRule(startDateComponents *foundation.NSDateComponents, endDateComponents *foundation.NSDateComponents, recurrenceRule objc.ID) *DateComponentsRange {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INDateComponentsRange")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewDateComponentsRangeWithStartDateComponentsEndDateComponentsRecurrenceRul
 	return &DateComponentsRange{inner: raw.INDateComponentsRangeFromID(_id)}
 }
 
+// Initializes the date range using the specified recurrence rule.
+//
 // NewDateComponentsRangeWithEKRecurrenceRule creates a new [DateComponentsRange].
 func NewDateComponentsRangeWithEKRecurrenceRule(recurrenceRule *eventkit.EKRecurrenceRule) *DateComponentsRange {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INDateComponentsRange")), objc.RegisterName("alloc"))
@@ -52,6 +60,8 @@ func NewDateComponentsRangeWithEKRecurrenceRule(recurrenceRule *eventkit.EKRecur
 	return &DateComponentsRange{inner: raw.INDateComponentsRangeFromID(_id)}
 }
 
+// Returns an Event Kit recurrence rule that matches the available information.
+//
 // EKRecurrenceRule calls the underlying EKRecurrenceRule.
 func (x *DateComponentsRange) EKRecurrenceRule() *eventkit.EKRecurrenceRule {
 	return x.inner.EKRecurrenceRule()

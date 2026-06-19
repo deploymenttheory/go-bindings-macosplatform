@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A port that represents a BSD socket.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nssocketport
 type NSSocketPort struct {
 	NSPort

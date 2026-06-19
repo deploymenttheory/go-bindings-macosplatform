@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A placeholder node denoting the per-element weight buffer used by loss and gradient loss kernels.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnlabelsnode
 type MPSNNLabelsNode struct {
 	mpsneuralnetwork.MPSNNStateNode

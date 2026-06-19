@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A definition for a deformation of nodes that conform to SKWarpable.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skwarpgeometry
 type SKWarpGeometry struct {
 	foundation.NSObject

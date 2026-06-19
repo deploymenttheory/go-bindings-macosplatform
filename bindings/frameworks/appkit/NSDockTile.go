@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The visual representation of your app’s miniaturized windows and app icon as they appear in the Dock.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsdocktile
 type NSDockTile struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func NSDockTileFromID(id objc.ID) *NSDockTile {
 	return o
 }
 
+// Redraws the dock tile’s content.
 func (o *NSDockTile) Display() {
 	o.Ptr().Send(_nSDockTileSelDisplay)
 }

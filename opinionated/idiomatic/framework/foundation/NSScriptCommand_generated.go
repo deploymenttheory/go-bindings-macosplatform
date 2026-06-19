@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A self-contained scripting statement.
+//
 // ScriptCommand wraps [raw.NSScriptCommand] with a fluent Go API.
 type ScriptCommand struct {
 	inner *raw.NSScriptCommand
@@ -30,6 +32,8 @@ func ScriptCommandFromID(id objc.ID) *ScriptCommand {
 	return &ScriptCommand{inner: raw.NSScriptCommandFromID(id)}
 }
 
+// Returns an a script command object initialized from the passed command description.
+//
 // NewScriptCommandWithCommandDescription creates a new [ScriptCommand].
 func NewScriptCommandWithCommandDescription(commandDef *raw.NSScriptCommandDescription) *ScriptCommand {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScriptCommand")), objc.RegisterName("alloc"))
@@ -44,42 +48,56 @@ func NewScriptCommandWithCoder(inCoder *raw.NSCoder) *ScriptCommand {
 	return &ScriptCommand{inner: raw.NSScriptCommandFromID(_id)}
 }
 
+// Sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
+//
 // WithDirectParameter sets the directParameter property and returns the receiver for chaining.
 func (x *ScriptCommand) WithDirectParameter(directParameter objc.ID) *ScriptCommand {
 	x.inner.SetDirectParameter(directParameter)
 	return x
 }
 
+// Sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
+//
 // WithReceiversSpecifier sets the receiversSpecifier property and returns the receiver for chaining.
 func (x *ScriptCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *ScriptCommand {
 	x.inner.SetReceiversSpecifier(receiversSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets the arguments of the command to args.
+//
 // WithArguments sets the arguments property and returns the receiver for chaining.
 func (x *ScriptCommand) WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptCommand {
 	x.inner.SetArguments(arguments)
 	return x
 }
 
+// Sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
+//
 // WithScriptErrorNumber sets the scriptErrorNumber property and returns the receiver for chaining.
 func (x *ScriptCommand) WithScriptErrorNumber(scriptErrorNumber int) *ScriptCommand {
 	x.inner.SetScriptErrorNumber(scriptErrorNumber)
 	return x
 }
 
+// Sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+//
 // WithScriptErrorOffendingObjectDescriptor sets the scriptErrorOffendingObjectDescriptor property and returns the receiver for chaining.
 func (x *ScriptCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *ScriptCommand {
 	x.inner.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor.Unwrap())
 	return x
 }
 
+// Sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+//
 // WithScriptErrorExpectedTypeDescriptor sets the scriptErrorExpectedTypeDescriptor property and returns the receiver for chaining.
 func (x *ScriptCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *ScriptCommand {
 	x.inner.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor.Unwrap())
 	return x
 }
 
+// Sets a script error string that is associated with execution of the command.
+//
 // WithScriptErrorString sets the scriptErrorString property and returns the receiver for chaining.
 func (x *ScriptCommand) WithScriptErrorString(scriptErrorString string) *ScriptCommand {
 	x.inner.SetScriptErrorString(foundation.NSStringStringWithUTF8String(scriptErrorString))
@@ -92,21 +110,29 @@ func (x *ScriptCommand) WithScriptingProperties(scriptingProperties *raw.NSDicti
 	return x
 }
 
+// Overridden by subclasses to provide a default implementation for the command represented by the receiver.
+//
 // PerformDefaultImplementation calls the underlying PerformDefaultImplementation.
 func (x *ScriptCommand) PerformDefaultImplementation() objc.ID {
 	return x.inner.PerformDefaultImplementation()
 }
 
+// Executes the command if it is valid and returns the result, if any.
+//
 // ExecuteCommand calls the underlying ExecuteCommand.
 func (x *ScriptCommand) ExecuteCommand() objc.ID {
 	return x.inner.ExecuteCommand()
 }
 
+// Suspends the execution of the receiver.
+//
 // SuspendExecution calls the underlying SuspendExecution.
 func (x *ScriptCommand) SuspendExecution() {
 	x.inner.SuspendExecution()
 }
 
+// If a successful, unmatched, invocation of suspendExecution has been made, resume the execution of the command.
+//
 // ResumeExecutionWithResult calls the underlying ResumeExecutionWithResult.
 func (x *ScriptCommand) ResumeExecutionWithResult(result objc.ID) {
 	x.inner.ResumeExecutionWithResult(result)

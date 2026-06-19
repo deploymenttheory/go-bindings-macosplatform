@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An instance of NSPointerFunctions defines callout functions appropriate for managing a pointer reference held somewhere else.
+//
 // PointerFunctions wraps [raw.NSPointerFunctions] with a fluent Go API.
 type PointerFunctions struct {
 	inner *raw.NSPointerFunctions
@@ -30,6 +32,8 @@ func PointerFunctionsFromID(id objc.ID) *PointerFunctions {
 	return &PointerFunctions{inner: raw.NSPointerFunctionsFromID(id)}
 }
 
+// Returns an NSPointerFunctions object initialized with the given options.
+//
 // NewPointerFunctionsWithOptions creates a new [PointerFunctions].
 func NewPointerFunctionsWithOptions(options NSPointerFunctionsOptions) *PointerFunctions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPointerFunctions")), objc.RegisterName("alloc"))
@@ -37,12 +41,16 @@ func NewPointerFunctionsWithOptions(options NSPointerFunctionsOptions) *PointerF
 	return &PointerFunctions{inner: raw.NSPointerFunctionsFromID(_id)}
 }
 
+// Specifies whether, in a garbage collected environment, pointers should be assigned using a strong write barrier.
+//
 // WithUsesStrongWriteBarrier sets the usesStrongWriteBarrier property and returns the receiver for chaining.
 func (x *PointerFunctions) WithUsesStrongWriteBarrier(usesStrongWriteBarrier bool) *PointerFunctions {
 	x.inner.SetUsesStrongWriteBarrier(usesStrongWriteBarrier)
 	return x
 }
 
+// Specifies whether, in a garbage collected environment, pointers should use weak read and write barriers.
+//
 // WithUsesWeakReadAndWriteBarriers sets the usesWeakReadAndWriteBarriers property and returns the receiver for chaining.
 func (x *PointerFunctions) WithUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) *PointerFunctions {
 	x.inner.SetUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers)

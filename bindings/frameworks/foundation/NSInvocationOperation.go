@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation that manages the execution of a single encapsulated task specified as an invocation.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsinvocationoperation
 type NSInvocationOperation struct {
 	NSOperation
@@ -32,6 +34,7 @@ func NSInvocationOperationFromID(id objc.ID) *NSInvocationOperation {
 	return o
 }
 
+// Returns an NSInvocationOperation object initialized with the specified target and selector.
 func (o *NSInvocationOperation) InitWithTargetSelectorObject(target objc.ID, sel objc.SEL, arg objc.ID) *NSInvocationOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInvocationOperationSelInitWithTargetSelectorObject, target, sel, arg)
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func (o *NSInvocationOperation) InitWithTargetSelectorObject(target objc.ID, sel
 	return NSInvocationOperationFromID(_ret)
 }
 
+// Returns an NSInvocationOperation object initialized with the specified invocation object.
 func (o *NSInvocationOperation) InitWithInvocation(inv *NSInvocation) *NSInvocationOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInvocationOperationSelInitWithInvocation, inv.Ptr())
 	if _ret != 0 {

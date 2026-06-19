@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract  A node for a MPSCNNPooling kernel @discussion This is an abstract base class that does not correspond with any particular MPSCNNKernel. Please make one of the MPSCNNPooling subclasses instead.
+// A representation of a MPS CNN pooling kernel.
 //
 // CNNPoolingNode wraps [raw.MPSCNNPoolingNode] with a fluent Go API.
 type CNNPoolingNode struct {

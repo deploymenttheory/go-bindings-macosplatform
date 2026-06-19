@@ -4,13 +4,19 @@
 package authenticationservices
 
 import (
+	"github.com/ebitengine/purego/objc"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 var (
-	_fnASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports func() *foundation.NSArray[*foundation.NSString]
+	_fnASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports func() objc.ID
 )
 
 func ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports() *foundation.NSArray[*foundation.NSString] {
-	return _fnASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports()
+	_ret := _fnASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports()
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

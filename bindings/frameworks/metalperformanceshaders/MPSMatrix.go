@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A 2D array of data that stores the data’s values.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrix
 type MPSMatrix struct {
 	foundation.NSObject
@@ -45,7 +47,7 @@ func MPSMatrixFromID(id objc.ID) *MPSMatrix {
 	return o
 }
 
-// @abstract   Initialize a MPSMatrix object with a MTLBuffer. @param      buffer          The MTLBuffer object which contains the data to use for the MPSMatrix. May not be NULL. @param      descriptor      The MPSMatrixDescriptor. May not be NULL. @return     A valid MPSMatrix object or nil, if failure. @discussion This function returns a MPSMatrix object which uses the supplied MTLBuffer.  The dimensions and stride of the matrix are specified by the MPSMatrixDescriptor object. The provided MTLBuffer must have enough storage to hold (descriptor.matrices-1) * descriptor.matrixBytes + (descriptor.rows-1) * descriptor.rowBytes + descriptor.columns * (element size) bytes.
+// Initializes a matrix with a buffer.
 func (o *MPSMatrix) InitWithBufferDescriptor(buffer metal.MTLBuffer, descriptor *mpscore.MPSMatrixDescriptor) *MPSMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixSelInitWithBufferDescriptor, buffer, descriptor.Ptr())
 	if _ret != 0 {

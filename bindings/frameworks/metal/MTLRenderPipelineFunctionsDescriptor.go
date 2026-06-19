@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of functions for updating a render pipeline.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlrenderpipelinefunctionsdescriptor
 type MTLRenderPipelineFunctionsDescriptor struct {
 	foundation.NSObject

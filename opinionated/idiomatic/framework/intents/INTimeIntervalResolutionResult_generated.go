@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for a time interval associated with an intent.
+//
 // TimeIntervalResolutionResult wraps [raw.INTimeIntervalResolutionResult] with a fluent Go API.
 type TimeIntervalResolutionResult struct {
 	inner *raw.INTimeIntervalResolutionResult

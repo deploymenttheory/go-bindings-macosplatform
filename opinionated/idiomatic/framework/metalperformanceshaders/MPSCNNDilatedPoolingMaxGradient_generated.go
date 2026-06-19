@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A gradient dilated max pooling filter.
+//
 // CNNDilatedPoolingMaxGradient wraps [raw.MPSCNNDilatedPoolingMaxGradient] with a fluent Go API.
 type CNNDilatedPoolingMaxGradient struct {
 	inner *raw.MPSCNNDilatedPoolingMaxGradient
@@ -203,7 +205,7 @@ func (x *CNNDilatedPoolingMaxGradient) WithDestinationImageAllocator(destination
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNDilatedPoolingMaxGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNDilatedPoolingMaxGradient {
@@ -211,7 +213,7 @@ func (x *CNNDilatedPoolingMaxGradient) WithOptions(options mpscore.MPSKernelOpti
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNDilatedPoolingMaxGradient) WithLabel(label string) *CNNDilatedPoolingMaxGradient {

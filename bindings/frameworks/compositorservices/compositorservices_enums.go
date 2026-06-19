@@ -485,6 +485,7 @@ func (e Clockid_t) String() string {
 	}
 }
 
+// Constants that indicate the axis and direction to use for a perspective projection matrix.
 type Cp_axis_direction_convention int64
 
 const (
@@ -509,6 +510,7 @@ func (e Cp_axis_direction_convention) String() string {
 	}
 }
 
+// The state of ownership for the drawable.
 type Cp_drawable_state int64
 
 const (
@@ -553,40 +555,41 @@ func (e Cp_drawable_target) String() string {
 	}
 }
 
+// Errors that can occur during layer configuration.
 type Cp_layer_renderer_configuration_error_code int64
 
 const (
-	// An error that indicates the system didn't find a default layer renderer configuration.
+	// An error that indicates the system didn’t find a default layer configuration.
 	Cp_layer_renderer_configuration_error_code_missing_configuration Cp_layer_renderer_configuration_error_code = -20
-	// An error that indicates the layer doesn’t support the current pixel format for color textures. Compare the value the ``cp_layer_renderer_configuration_get_color_format`` function returns and make sure it matches one of the values the ``cp_layer_renderer_capabilities_supported_color_format`` function returns.
+	// An error that indicates the system doesn’t support the specified color format choice.
 	Cp_layer_renderer_configuration_error_code_unsupported_color_format Cp_layer_renderer_configuration_error_code = -4
-	// An error that indicates the layer doesn’t support the current texture usage for color textures. Compare the value the ``cp_layer_renderer_configuration_get_color_usage`` function returns and make sure it has at least `MTLTextureUsageShaderRead` and does not contain `MTLTextureUsageShaderAtomic` or `MTLTextureUsageShaderWrite`
+	// An error that indicates the system doesn’t support the specified color usage option.
 	Cp_layer_renderer_configuration_error_code_unsupported_color_usage Cp_layer_renderer_configuration_error_code = -5
-	// An error that indicates the layer doesn’t support the current pixel format for depth textures. Compare the value the ``cp_layer_renderer_configuration_get_depth_format`` function returns and make sure it matches one of the values the ``cp_layer_renderer_capabilities_supported_depth_format`` function returns.
+	// An error that indicates the system doesn’t support the specified depth format choice.
 	Cp_layer_renderer_configuration_error_code_unsupported_depth_format Cp_layer_renderer_configuration_error_code = -7
-	// An error that indicates the layer doesn’t support the current texture usage for depth textures. Compare the value the ``cp_layer_renderer_configuration_get_depth_usage`` function returns and make sure it has at least `MTLTextureUsageShaderRead` and does not contain `MTLTextureUsageShaderAtomic`
+	// An error that indicates the system doesn’t support the specified depth usage choice.
 	Cp_layer_renderer_configuration_error_code_unsupported_depth_usage Cp_layer_renderer_configuration_error_code = -8
-	// An error that indicates foveation is enabled but not supported. Disable foveation in your layer's configuration.
+	// An error that indicates foveation is enabled but not supported.
 	Cp_layer_renderer_configuration_error_code_variable_rasterization_rate_is_not_supported Cp_layer_renderer_configuration_error_code = -16
-	// An error that occurs when you try to enable temporal anti-aliasing but the current configuration parameters don't support it.
+	// An error that occurs when you try to enable temporal anti-aliasing but the current configuration parameters don’t support it.
 	Cp_layer_renderer_configuration_error_code_temporal_anti_aliasing_not_supported Cp_layer_renderer_configuration_error_code = -17
 	// An error that indicates not enough frames are available for rendering.
 	Cp_layer_renderer_configuration_error_code_not_enough_frames_requested Cp_layer_renderer_configuration_error_code = -10
-	// An error that indicates the system requested too many frames for rendering.
+	// An error that indicates your app requested too many frames for rendering.
 	Cp_layer_renderer_configuration_error_code_too_many_frames_requested Cp_layer_renderer_configuration_error_code = -11
-	// An error that indicates the depth range values aren't in reverse-z order. When you call the ``cp_drawable_set_depth_range`` function, make sure the first value in your `depth_range` vector contains the value for the far plane. In addition, make sure the distance to the far plane is greater than the distance to the near plane.
+	// An error that indicates the depth range values aren’t in reverse-z order.
 	Cp_layer_renderer_configuration_error_code_unsupported_forward_depth_range Cp_layer_renderer_configuration_error_code = -101
-	// An error that indicates the configuration's current layout value is invalid. Specify a supported layout value using the ``cp_layer_renderer_configuration_set_layout`` function. Get a list of supported layouts from the ``cp_layer_renderer_capabilities_supported_layout`` function.
+	// An error that indicates the configuration’s current layout value is invalid.
 	Cp_layer_renderer_configuration_error_code_layout_not_supported Cp_layer_renderer_configuration_error_code = -6
-	// An error that indicates the near plane of the client is smaller than the supported value.
+	// An error that indicates the near plane of the client is closer than the minimum supported distance.
 	Cp_layer_renderer_configuration_error_code_unsupported_near_plane_distance Cp_layer_renderer_configuration_error_code = -104
-	// An error that indicates the layer doesn’t support the current pixel format for tracking areas textures. Compare the value the ``cp_layer_renderer_configuration_get_tracking_areas_format`` function returns and make sure it matches one of the values the ``cp_layer_renderer_capabilities_supported_tracking_areas_format`` function returns.
+	// An error that indicates the layer doesn’t support the current pixel format for tracking areas textures.
 	Cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_format Cp_layer_renderer_configuration_error_code = -21
-	// An error that indicates the layer doesn’t support the current texture usage for tracking areas textures. Compare the value the ``cp_layer_renderer_configuration_get_tracking_areas_usage`` function returns and make sure it has at least `MTLTextureUsageShaderRead` and does not contain `MTLTextureUsageShaderAtomic`
+	// An error that indicates the layer doesn’t support the current texture usage for tracking areas textures.
 	Cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_usage Cp_layer_renderer_configuration_error_code = -22
-	// An error that indicates the layer doesn't support the current pixel format for stencil texture. Compare the value the ``cp_layer_renderer_configuration_get_drawable_render_context_stencil_format`` function returns and make sure it matches one of the values the ``cp_layer_renderer_capabilities_drawable_render_context_supported_stencil_format`` function returns.
+	// An error that indicates the layer doesn’t support the current pixel format for stencil texture.
 	Cp_layer_renderer_configuration_error_code_unsupported_drawable_render_context_stencil_format Cp_layer_renderer_configuration_error_code = -23
-	// An error that indicates the configuration's render quality is unsupported. This could be because foveation is disabled or the quality is outside of the valid range of [0, 1], the error `userInfo` will contain additional information.
+	// An error that indicates the configuration’s render quality is unsupported. This could be because foveation is disabled or the quality is outside of the valid range of [0, 1], the error userInfo will contain additional information.
 	Cp_layer_renderer_configuration_error_code_unsupported_render_quality Cp_layer_renderer_configuration_error_code = -18
 )
 
@@ -629,6 +632,7 @@ func (e Cp_layer_renderer_configuration_error_code) String() string {
 	}
 }
 
+// Constants that specify the organization of the textures you use for drawing.
 type Cp_layer_renderer_layout int64
 
 const (
@@ -653,6 +657,7 @@ func (e Cp_layer_renderer_layout) String() string {
 	}
 }
 
+// The states of the layer renderer, which tell you how to proceed with drawing operations.
 type Cp_layer_renderer_state int64
 
 const (
@@ -677,6 +682,7 @@ func (e Cp_layer_renderer_state) String() string {
 	}
 }
 
+// The options to provide when calling cp_layer_renderer_capabilities_supported_color_formats and cp_layer_renderer_capabilities_supported_color_formats_count
 type Cp_supported_color_formats_options int64
 
 const (
@@ -695,6 +701,7 @@ func (e Cp_supported_color_formats_options) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The options you can pass to functions that relate to rendering capabilities and layout support.
 type Cp_supported_layouts_options int64
 
 const (

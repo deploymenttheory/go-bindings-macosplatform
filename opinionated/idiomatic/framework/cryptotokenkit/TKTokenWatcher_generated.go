@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that tracks the tokens available in the system.
+//
 // TokenWatcher wraps [raw.TKTokenWatcher] with a fluent Go API.
 type TokenWatcher struct {
 	inner *raw.TKTokenWatcher
@@ -38,7 +40,7 @@ func NewTokenWatcher() *TokenWatcher {
 	return &TokenWatcher{inner: raw.TKTokenWatcherFromID(_id)}
 }
 
-// Init watcher with insertion handler @disscussion init watcher with insertion handler which is called when a new token arrives @param insertionHandler called when a new token is inserted
+// Initializes a token watcher with the specified insertion handler.
 //
 // NewTokenWatcherWithInsertionHandler creates a new [TokenWatcher].
 func NewTokenWatcherWithInsertionHandler(insertionHandler func(*foundation.NSString)) *TokenWatcher {
@@ -47,7 +49,7 @@ func NewTokenWatcherWithInsertionHandler(insertionHandler func(*foundation.NSStr
 	return &TokenWatcher{inner: raw.TKTokenWatcherFromID(_id)}
 }
 
-// Set insertion handler @disscussion when an insertion handler is set the TokenWatcher will call this handler when new token appears in the system. TokenWatcher will call the handler also for tokens which was registered in the system before the handler was set. @param insertionHandler called when a new token is inserted
+// Sets an insertion handler closure to be called when a new token is inserted into the system.
 //
 // SetInsertionHandler blocks until the operation completes or ctx is cancelled.
 func (x *TokenWatcher) SetInsertionHandler(ctx context.Context) (string, error) {
@@ -72,7 +74,7 @@ func (x *TokenWatcher) SetInsertionHandler(ctx context.Context) (string, error) 
 	}
 }
 
-// Add removal watcher for specific tokenID @disscussion after removalHandler for a specific tokenID is called the reference to this handler is removed. For one tokenID just one handler can be added, so next call to addRemovalHandler will replace previous handler @param removalHandler called when a token is removed @param tokenID specified tokenID, if tokenID does not exist removal handler is called imediately
+// Adds a removal handler for the specified token ID.
 //
 // AddRemovalHandlerForTokenID calls the underlying AddRemovalHandlerForTokenID.
 func (x *TokenWatcher) AddRemovalHandlerForTokenID(removalHandler func(*foundation.NSString), tokenID string) {

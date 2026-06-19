@@ -1,0 +1,2621 @@
+{
+  "schema_version": 1,
+  "framework": "GameKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "GKAccessPoint": {
+      "doc": "An object that allows players to view and manage their Game Center information from within your game.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint"
+    },
+    "GKAchievement": {
+      "doc": "An achievement you can award a player as they make progress toward and reach a goal in your game.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkachievement"
+    },
+    "GKAchievementChallenge": {
+      "doc": "A type of challenge where a player must earn another player’s achievement.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkachievementchallenge"
+    },
+    "GKAchievementDescription": {
+      "doc": "An object containing the text and artwork used to present an achievement to a player.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription"
+    },
+    "GKAchievementViewController": {
+      "doc": "An GKAchievementViewController object provides a standard user interface to display achievement progress for the local player. If the GKGameCenterViewController class is available, you should use it instead.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkachievementviewcontroller"
+    },
+    "GKBasePlayer": {
+      "doc": "A class that provides common data and methods for the different player objects.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkbaseplayer"
+    },
+    "GKChallenge": {
+      "doc": "A challenge issued by the local player to another player.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkchallenge"
+    },
+    "GKChallengeDefinition": {
+      "doc": "An object that represents the static metadata you define for the challenge.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkchallengedefinition"
+    },
+    "GKChallengeEventHandler": {
+      "doc": "The GKChallengeEventHandler class is used to respond to events related to challenges sent or received by the local player.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkchallengeeventhandler"
+    },
+    "GKChallengesViewController": {
+      "url": "https://developer.apple.com/documentation/gamekit/gkchallengesviewcontroller"
+    },
+    "GKCloudPlayer": {
+      "doc": "The object representing the currently signed-in iCloud user.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkcloudplayer"
+    },
+    "GKDialogController": {
+      "doc": "An object that provides the ability to present the dashboard in macOS games.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkdialogcontroller"
+    },
+    "GKFriendRequestComposeViewController": {
+      "doc": "Your game uses the GKFriendRequestComposeViewController class to present a screen that allows the local player to send friend requests to other players.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkfriendrequestcomposeviewcontroller"
+    },
+    "GKGameActivity": {
+      "doc": "An object that represents a single instance of a game activity for the current game.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity"
+    },
+    "GKGameActivityDefinition": {
+      "doc": "An object that represents the static metadata you define for the activity.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition"
+    },
+    "GKGameCenterViewController": {
+      "doc": "The dashboard that allows players to access their Game Center data in your game.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontroller"
+    },
+    "GKGameSession": {
+      "doc": "A game session you can use to save game data, invite other players, and create turn-based and real-time game apps.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkgamesession"
+    },
+    "GKInvite": {
+      "doc": "An invitation to join a match sent to the local player from another player.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkinvite"
+    },
+    "GKLeaderboard": {
+      "doc": "A leaderboard for a game that Game Center stores.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard"
+    },
+    "GKLeaderboardEntry": {
+      "doc": "Information about a single score by a player on a leaderboard.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardentry"
+    },
+    "GKLeaderboardScore": {
+      "doc": "Information about a player’s score on a leaderboard.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardscore"
+    },
+    "GKLeaderboardSet": {
+      "doc": "Organizes leaderboards into logical and coherent groups.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardset"
+    },
+    "GKLeaderboardViewController": {
+      "doc": "The GKLeaderboardViewController class provides a standard user interface that displays leaderboard scores to the player. If the GKGameCenterViewController class is available, you should use it instead.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardviewcontroller"
+    },
+    "GKLocalPlayer": {
+      "doc": "The local player who signs in to Game Center on the device running the game.",
+      "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer"
+    },
+    "GKMatch": {
+      "doc": "A peer-to-peer network between a group of players that sign into Game Center.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkmatch"
+    },
+    "GKMatchRequest": {
+      "doc": "An object that encapsulates the parameters to create a real-time or turn-based match.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest"
+    },
+    "GKMatchedPlayers": {
+      "doc": "An object that represents matchmaking results, including the players that join the match and their properties that matchmaking rules uses.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkmatchedplayers"
+    },
+    "GKMatchmaker": {
+      "doc": "An object that creates matches with other players without presenting an interface to the players.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker"
+    },
+    "GKMatchmakerViewController": {
+      "doc": "An interface that allows a player to invite other players to a real-time game and automatch to fill any empty slots.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakerviewcontroller"
+    },
+    "GKNotificationBanner": {
+      "doc": "A Game Center-style banner that displays a message to the local player.",
+      "url": "https://developer.apple.com/documentation/gamekit/gknotificationbanner"
+    },
+    "GKPlayer": {
+      "doc": "A remote player who the local player running your game can invite and communicate with through Game Center.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkplayer"
+    },
+    "GKSavedGame": {
+      "doc": "An object that represents a file containing saved game data.",
+      "url": "https://developer.apple.com/documentation/gamekit/gksavedgame"
+    },
+    "GKScore": {
+      "doc": "An object containing information for a score that was earned by the player.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkscore"
+    },
+    "GKScoreChallenge": {
+      "doc": "A type of challenge where a player must beat the leaderboard score of another player.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkscorechallenge"
+    },
+    "GKSession": {
+      "doc": "A GKSession object provides the ability to discover and connect to nearby iOS devices using Bluetooth or Wi-fi.",
+      "url": "https://developer.apple.com/documentation/gamekit/gksession"
+    },
+    "GKTurnBasedEventHandler": {
+      "doc": "The GKTurnBasedEventHandler class is used to respond to important messages related to turn-based matches. To use it, call the sharedTurnBasedEventHandler class method to get the singleton instance and assign an object that implements the GKTurnBasedEventHandlerDelegate protocol to its delegate property. All methods are called on the main thread.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedeventhandler"
+    },
+    "GKTurnBasedExchange": {
+      "doc": "Exchange request information that participants send in a turn-based match.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchange"
+    },
+    "GKTurnBasedExchangeReply": {
+      "doc": "Details about a recipient’s response to an exchange request.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchangereply"
+    },
+    "GKTurnBasedMatch": {
+      "doc": "An object that encapsulates the match data for games where players take turns.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch"
+    },
+    "GKTurnBasedMatchmakerViewController": {
+      "doc": "An interface that allows a player to invite other players to a turn-based match and automatch to fill any empty slots.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatchmakerviewcontroller"
+    },
+    "GKTurnBasedParticipant": {
+      "doc": "A participant in a turn-based match.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedparticipant"
+    },
+    "GKVoiceChat": {
+      "doc": "A voice channel that allows players to speak with each other in a multiplayer game.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkvoicechat"
+    },
+    "GKVoiceChatService": {
+      "doc": "The GKVoiceChatService class allows your application to connect two iOS devices into a voice chat.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice"
+    }
+  },
+  "protocols": {
+    "GKAchievementViewControllerDelegate": {
+      "doc": "An object implementing the GKAchievementViewControllerDelegate protocol is called when the user dismisses the achievements view controller. Typically, this protocol is implemented by the object in your game that originally displayed the achievements user interface.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkachievementviewcontrollerdelegate"
+    },
+    "GKChallengeEventHandlerDelegate": {
+      "doc": "You implement the GKChallengeEventHandlerDelegate delegate to control how challenges are displayed in your game.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkchallengeeventhandlerdelegate"
+    },
+    "GKChallengeListener": {
+      "doc": "An object that responds to challenge events.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkchallengelistener"
+    },
+    "GKChallengesViewControllerDelegate": {
+      "url": "https://developer.apple.com/documentation/gamekit/gkchallengesviewcontrollerdelegate"
+    },
+    "GKFriendRequestComposeViewControllerDelegate": {
+      "doc": "The GKFriendRequestComposeViewControllerDelegate protocol is implemented by delegates of the GKFriendRequestComposeViewController class. The delegate is called when the player dismisses the friend request.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkfriendrequestcomposeviewcontrollerdelegate"
+    },
+    "GKGameActivityListener": {
+      "doc": "An object that responds to activity events.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitylistener"
+    },
+    "GKGameCenterControllerDelegate": {
+      "doc": "The delegate that GameKit calls when the player dismisses the dashboard.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkgamecentercontrollerdelegate"
+    },
+    "GKGameSessionEventListener": {
+      "doc": "An event listener that handles game session events.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkgamesessioneventlistener"
+    },
+    "GKInviteEventListener": {
+      "doc": "A protocol that handles invite events from Game Center.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkinviteeventlistener"
+    },
+    "GKLeaderboardViewControllerDelegate": {
+      "doc": "The GKLeaderboardViewControllerDelegate protocol is implemented by delegates of the GKLeaderboardViewController class. The delegate is called when the player dismisses the leaderboard.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardviewcontrollerdelegate"
+    },
+    "GKLocalPlayerListener": {
+      "doc": "A protocol that handles events for Game Center players.",
+      "url": "https://developer.apple.com/documentation/gamekit/gklocalplayerlistener"
+    },
+    "GKMatchDelegate": {
+      "doc": "An object that receives connection status and data transmitted in a multiplayer game.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkmatchdelegate"
+    },
+    "GKMatchmakerViewControllerDelegate": {
+      "doc": "An object that handles when the status of matchmaking changes.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakerviewcontrollerdelegate"
+    },
+    "GKSavedGameListener": {
+      "doc": "A protocol that handles events related to saving game data.",
+      "url": "https://developer.apple.com/documentation/gamekit/gksavedgamelistener"
+    },
+    "GKSessionDelegate": {
+      "doc": "An object implements the GKSessionDelegate protocol to control the behavior of a GKSession object. The delegate is called when other visible peers change their state relative to the session. It is also called to determine whether another peer is allowed to connect to the session.",
+      "url": "https://developer.apple.com/documentation/gamekit/gksessiondelegate"
+    },
+    "GKTurnBasedEventHandlerDelegate": {
+      "doc": "The GKTurnBasedEventHandlerDelegate protocol is implemented by an object to receive notifications events for turn-based matches. All methods are called on the main thread.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedeventhandlerdelegate"
+    },
+    "GKTurnBasedEventListener": {
+      "doc": "The protocol that handles turn-based and data-exchange events between participants in a match.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedeventlistener"
+    },
+    "GKTurnBasedMatchmakerViewControllerDelegate": {
+      "doc": "A protocol that handles when the status of turn-based matchmaking changes.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatchmakerviewcontrollerdelegate"
+    },
+    "GKViewController": {
+      "doc": "The abstract base protocol adopted by GameKit view controller classes.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkviewcontroller"
+    },
+    "GKVoiceChatClient": {
+      "doc": "The GKVoiceChatClient protocol is implemented to control the behavior of the GKVoiceChatService object. The voice chat client has a number of responsibilities:",
+      "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatclient"
+    }
+  },
+  "enums": {
+    "GKAccessPointLocation": {
+      "doc": "Specifies the corner of the screen to display the access point.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkaccesspointlocation"
+    },
+    "GKChallengeState": {
+      "doc": "The state of a challenge.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkchallengestate",
+      "members": {
+        "GKChallengeStateCompleted": {
+          "doc": "The player successfully completed the challenge.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkchallengestate/completed"
+        },
+        "GKChallengeStateDeclined": {
+          "doc": "The player declined the challenge.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkchallengestate/declined"
+        },
+        "GKChallengeStateInvalid": {
+          "doc": "The challenge isn’t valid because an error occurred.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkchallengestate/invalid"
+        },
+        "GKChallengeStatePending": {
+          "doc": "The player issued a challenge, but the other player hasn’t accepted or refused it.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkchallengestate/pending"
+        }
+      }
+    },
+    "GKConnectionState": {
+      "doc": "Possible connection states for a player",
+      "url": "https://developer.apple.com/documentation/gamekit/gkconnectionstate",
+      "members": {
+        "GKConnectionStateConnected": {
+          "doc": "The player is connected to the game session.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkconnectionstate/connected"
+        },
+        "GKConnectionStateNotConnected": {
+          "doc": "The player is not connected to the game session.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkconnectionstate/notconnected"
+        }
+      }
+    },
+    "GKErrorCode": {
+      "doc": "Error codes for the GameKit error domain.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkerrorcode"
+    },
+    "GKFriendsAuthorizationStatus": {
+      "doc": "Constants that indicate if the local player grants access to their friends list.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkfriendsauthorizationstatus",
+      "members": {
+        "GKFriendsAuthorizationStatusAuthorized": {
+          "doc": "The player authorized your game to access their list of friends.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkfriendsauthorizationstatus/authorized"
+        },
+        "GKFriendsAuthorizationStatusDenied": {
+          "doc": "Access to the player’s friends’ data denied.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkfriendsauthorizationstatus/denied"
+        },
+        "GKFriendsAuthorizationStatusNotDetermined": {
+          "doc": "The player hasn’t choosen whether your game may access their friends list.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkfriendsauthorizationstatus/notdetermined"
+        },
+        "GKFriendsAuthorizationStatusRestricted": {
+          "doc": "Access to the player’s list of friends restricted.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkfriendsauthorizationstatus/restricted"
+        }
+      }
+    },
+    "GKGameActivityPlayStyle": {
+      "doc": "Play Style of the game activity. It can be either Asynchronous or Synchronous.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkgameactivityplaystyle"
+    },
+    "GKGameCenterViewControllerState": {
+      "doc": "The type of content for the view controller to present.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontrollerstate",
+      "members": {
+        "GKGameCenterViewControllerStateAchievements": {
+          "doc": "The view controller should present a list of achievements.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontrollerstate/achievements"
+        },
+        "GKGameCenterViewControllerStateChallenges": {
+          "doc": "The view controller should present a list of challenges.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontrollerstate/challenges"
+        },
+        "GKGameCenterViewControllerStateDashboard": {
+          "doc": "The view controller should present the dashboard.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontrollerstate/dashboard"
+        },
+        "GKGameCenterViewControllerStateDefault": {
+          "doc": "The view controller should present the default screen.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontrollerstate/default"
+        },
+        "GKGameCenterViewControllerStateLeaderboards": {
+          "doc": "The view controller should present leaderboard sets or leaderboards if there are no sets.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontrollerstate/leaderboards"
+        },
+        "GKGameCenterViewControllerStateLocalPlayerFriendsList": {
+          "doc": "The view controller should present the friends list.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontrollerstate/localplayerfriendslist"
+        },
+        "GKGameCenterViewControllerStateLocalPlayerProfile": {
+          "doc": "The view controller should present the local player’s profile.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontrollerstate/localplayerprofile"
+        }
+      }
+    },
+    "GKGameSessionErrorCode": {
+      "doc": "Error codes for the game session domain.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkgamesessionerrorcode"
+    },
+    "GKInviteRecipientResponse": {
+      "doc": "A player’s response to an invitation to join a match.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkinviterecipientresponse",
+      "members": {
+        "GKInviteRecipientResponseAccepted": {
+          "doc": "A response when the player accepts the invitation.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkinviterecipientresponse/accepted"
+        },
+        "GKInviteRecipientResponseDeclined": {
+          "doc": "A response when the player rejects the invitation.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkinviterecipientresponse/declined"
+        },
+        "GKInviteRecipientResponseFailed": {
+          "doc": "A response when the system fails to deliver the invitation to the player.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkinviterecipientresponse/failed"
+        },
+        "GKInviteRecipientResponseIncompatible": {
+          "doc": "A response when the player isn’t running a compatible version of the game.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkinviterecipientresponse/incompatible"
+        },
+        "GKInviteRecipientResponseNoAnswer": {
+          "doc": "A response when the invitation times out because the player doesn’t answer it.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkinviterecipientresponse/noanswer"
+        },
+        "GKInviteRecipientResponseUnableToConnect": {
+          "doc": "A response when the system can’t contact the player.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkinviterecipientresponse/unabletoconnect"
+        },
+        "GKInviteeResponseAccepted": {
+          "doc": "The player accepted the invitation.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkinviterecipientresponse/inviteeresponseaccepted"
+        },
+        "GKInviteeResponseDeclined": {
+          "doc": "The player rejected the invitation.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkinviterecipientresponse/inviteeresponsedeclined"
+        },
+        "GKInviteeResponseFailed": {
+          "doc": "The invitation was unable to be delivered.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkinviterecipientresponse/inviteeresponsefailed"
+        },
+        "GKInviteeResponseIncompatible": {
+          "doc": "The invitee isn’t running a compatible version of your game.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkinviterecipientresponse/inviteeresponseincompatible"
+        },
+        "GKInviteeResponseNoAnswer": {
+          "doc": "The invitation timed out without an answer.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkinviterecipientresponse/inviteeresponsenoanswer"
+        },
+        "GKInviteeResponseUnableToConnect": {
+          "doc": "The invitee couldn’t be contacted.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkinviterecipientresponse/inviteeresponseunabletoconnect"
+        }
+      }
+    },
+    "GKLeaderboardPlayerScope": {
+      "doc": "Specifies the type of players for filtering data.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardplayerscope"
+    },
+    "GKLeaderboardTimeScope": {
+      "doc": "Specifies the time period for filtering data.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardtimescope"
+    },
+    "GKLeaderboardType": {
+      "doc": "Specifies whether a leaderboard is recurring.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardtype"
+    },
+    "GKMatchSendDataMode": {
+      "doc": "The mechanism used to transmit data to other players.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkmatchsenddatamode"
+    },
+    "GKMatchType": {
+      "doc": "The kind of match managed by Game Center.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkmatchtype",
+      "members": {
+        "GKMatchTypeHosted": {
+          "doc": "A match hosted on your private server.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkmatchtype/hosted"
+        },
+        "GKMatchTypePeerToPeer": {
+          "doc": "A peer-to-peer match hosted by Game Center.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkmatchtype/peertopeer"
+        },
+        "GKMatchTypeTurnBased": {
+          "doc": "A turn-based match hosted by Game Center.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkmatchtype/turnbased"
+        }
+      }
+    },
+    "GKMatchmakingMode": {
+      "doc": "Possible modes that a multiplayer game uses to find matches.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakingmode",
+      "members": {
+        "GKMatchmakingModeAutomatchOnly": {
+          "doc": "A mode that matches the local player only with players who are also actively looking for a match.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakingmode/automatchonly"
+        },
+        "GKMatchmakingModeDefault": {
+          "doc": "The default matchmaking mode.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakingmode/default"
+        },
+        "GKMatchmakingModeInviteOnly": {
+          "doc": "A mode that matches the local player only with players who they invite, and doesn’t use automatch to fill empty slots.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakingmode/inviteonly"
+        },
+        "GKMatchmakingModeNearbyOnly": {
+          "doc": "A mode that matches the local player only with nearby players.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakingmode/nearbyonly"
+        }
+      }
+    },
+    "GKPeerConnectionState": {
+      "doc": "The state of a peer known to the session.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkpeerconnectionstate",
+      "members": {
+        "GKPeerStateAvailable": {
+          "doc": "A peer not connected to the session, but one that the session can connect to.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkpeerconnectionstate/stateavailable"
+        },
+        "GKPeerStateConnected": {
+          "doc": "A peer connected to the session.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkpeerconnectionstate/stateconnected"
+        },
+        "GKPeerStateConnecting": {
+          "doc": "A peer attempting to connect to the session.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkpeerconnectionstate/stateconnecting"
+        },
+        "GKPeerStateDisconnected": {
+          "doc": "A peer that disconnected from the session.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkpeerconnectionstate/statedisconnected"
+        },
+        "GKPeerStateUnavailable": {
+          "doc": "A peer that is no longer interested in receiving connections.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkpeerconnectionstate/stateunavailable"
+        }
+      }
+    },
+    "GKPhotoSize": {
+      "doc": "The size of a photo that Game Center loads.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkphotosize"
+    },
+    "GKPlayerConnectionState": {
+      "doc": "The possible states of a connection to a match.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkplayerconnectionstate",
+      "members": {
+        "GKPlayerStateConnected": {
+          "doc": "A state in which a player connects to the match and can receive data.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkplayerconnectionstate/connected"
+        },
+        "GKPlayerStateDisconnected": {
+          "doc": "A state in which a player disconnects from the match and can’t receive data.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkplayerconnectionstate/disconnected"
+        },
+        "GKPlayerStateUnknown": {
+          "doc": "An undetermined state in which the player can’t receive data.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkplayerconnectionstate/unknown"
+        }
+      }
+    },
+    "GKReleaseState": {
+      "doc": "Describes the release state of an App Store Connect resource, such as an Achievement or Leaderboard.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkreleasestate",
+      "members": {
+        "GKReleaseStatePrereleased": {
+          "doc": "The resource has been created in App Store Connect but isn’t yet associated with a released version of an App.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkreleasestate/prereleased"
+        },
+        "GKReleaseStateReleased": {
+          "doc": "The resource is associated with a release in App Store Connect. This has no relationship with the “archived” state of a resource (i.e., A resource can be release and archived).",
+          "url": "https://developer.apple.com/documentation/gamekit/gkreleasestate/released"
+        },
+        "GKReleaseStateUnknown": {
+          "doc": "The system can’t determine the release state of the resource.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkreleasestate/gkreleasestateunknown"
+        }
+      }
+    },
+    "GKSendDataMode": {
+      "doc": "The mechanism used to transmit data to other peers.",
+      "url": "https://developer.apple.com/documentation/gamekit/gksenddatamode",
+      "members": {
+        "GKSendDataReliable": {
+          "doc": "The data is sent continuously until it is successfully received by the intended recipients or the connection times out.",
+          "url": "https://developer.apple.com/documentation/gamekit/gksenddatamode/reliable"
+        },
+        "GKSendDataUnreliable": {
+          "doc": "The data is sent once and is not sent again if a transmission error occurred.",
+          "url": "https://developer.apple.com/documentation/gamekit/gksenddatamode/unreliable"
+        }
+      }
+    },
+    "GKSessionError": {
+      "url": "https://developer.apple.com/documentation/gamekit/gksessionerror"
+    },
+    "GKSessionMode": {
+      "doc": "Modes that determine how a session interacts with other peers.",
+      "url": "https://developer.apple.com/documentation/gamekit/gksessionmode",
+      "members": {
+        "GKSessionModeClient": {
+          "doc": "A client searches for servers advertising the same sessionID property.",
+          "url": "https://developer.apple.com/documentation/gamekit/gksessionmode/client"
+        },
+        "GKSessionModePeer": {
+          "doc": "A peer advertises like a server and searches like a client.",
+          "url": "https://developer.apple.com/documentation/gamekit/gksessionmode/peer"
+        },
+        "GKSessionModeServer": {
+          "doc": "A server advertises itself to local devices using its sessionID property.",
+          "url": "https://developer.apple.com/documentation/gamekit/gksessionmode/server"
+        }
+      }
+    },
+    "GKTransportType": {
+      "doc": "The mechanism used to send messages to other players in a game session.",
+      "url": "https://developer.apple.com/documentation/gamekit/gktransporttype",
+      "members": {
+        "GKTransportTypeReliable": {
+          "doc": "The data is sent continuously until it is successfully received by the intended recipients or the connection times out.",
+          "url": "https://developer.apple.com/documentation/gamekit/gktransporttype/reliable"
+        },
+        "GKTransportTypeUnreliable": {
+          "doc": "The data is sent once and is not sent again if a transmission error occurs.",
+          "url": "https://developer.apple.com/documentation/gamekit/gktransporttype/unreliable"
+        }
+      }
+    },
+    "GKTurnBasedExchangeStatus": {
+      "doc": "The status of an exchange or reply.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchangestatus",
+      "members": {
+        "GKTurnBasedExchangeStatusActive": {
+          "doc": "GameKit sent the exchange request to recipients but not all recipients replied.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchangestatus/active"
+        },
+        "GKTurnBasedExchangeStatusCanceled": {
+          "doc": "The sender canceled the exchange request.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchangestatus/canceled"
+        },
+        "GKTurnBasedExchangeStatusComplete": {
+          "doc": "All recipients of the exchange request replied.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchangestatus/complete"
+        },
+        "GKTurnBasedExchangeStatusResolved": {
+          "doc": "The current participant saved the exchange request.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchangestatus/resolved"
+        },
+        "GKTurnBasedExchangeStatusUnknown": {
+          "doc": "The state of the exchange request is unknown.",
+          "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchangestatus/unknown"
+        }
+      }
+    },
+    "GKTurnBasedMatchOutcome": {
+      "doc": "The state of a participant when they forfeit a match or when a match ends.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatchoutcome"
+    },
+    "GKTurnBasedMatchStatus": {
+      "doc": "The states of a match from when it’s created to when it ends.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatchstatus"
+    },
+    "GKTurnBasedParticipantStatus": {
+      "doc": "The state the participant is in during the match.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedparticipantstatus"
+    },
+    "GKVoiceChatPlayerState": {
+      "doc": "The state of a player in a voice chat.",
+      "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatplayerstate"
+    },
+    "GKVoiceChatServiceError": {
+      "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatserviceerror"
+    }
+  },
+  "methods": {
+    "GKAccessPoint": {
+      "-triggerAccessPointForArcadeWithHandler:": {
+        "doc": "Brings up the Arcade dashboard.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/triggerforarcade(handler:)"
+      },
+      "-triggerAccessPointForChallengesWithHandler:": {
+        "doc": "Displays the view that allows players to engage each other with challenges.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/triggerforchallenges(handler:)"
+      },
+      "-triggerAccessPointForFriendingWithHandler:": {
+        "doc": "Brings up the invite friends view.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/triggerforfriending(handler:)"
+      },
+      "-triggerAccessPointForPlayTogetherWithHandler:": {
+        "doc": "Displays the view that allows players to engage each other with activities and challenges.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/triggerforplaytogether(handler:)"
+      },
+      "-triggerAccessPointWithAchievementID:handler:": {
+        "doc": "Displays the Game Center dashboard in a state that shows a specific achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/trigger(achievementid:handler:)"
+      },
+      "-triggerAccessPointWithChallengeDefinitionID:handler:": {
+        "doc": "Displays the challenge creation view for the provided challenge definition ID.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/trigger(challengedefinitionid:handler:)"
+      },
+      "-triggerAccessPointWithGameActivity:handler:": {
+        "doc": "Displays the game activity view for the provided activity instance.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/trigger(gameactivity:handler:)-8i6w7"
+      },
+      "-triggerAccessPointWithGameActivityDefinitionID:handler:": {
+        "doc": "Displays the game activity creation view for the provided activity definition ID.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/trigger(gameactivitydefinitionid:handler:)-9hemd"
+      },
+      "-triggerAccessPointWithHandler:": {
+        "doc": "Displays the Game Center dashboard as if the player taps or presses the access point.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/trigger(handler:)"
+      },
+      "-triggerAccessPointWithLeaderboardID:playerScope:timeScope:handler:": {
+        "doc": "Displays the Game Center dashboard in a state that shows a specific leaderboard.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/trigger(leaderboardid:playerscope:timescope:handler:)"
+      },
+      "-triggerAccessPointWithLeaderboardSetID:handler:": {
+        "doc": "Displays the Game Center dashboard in a state that shows a specific leaderboard set.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/trigger(leaderboardsetid:handler:)"
+      },
+      "-triggerAccessPointWithPlayer:handler:": {
+        "doc": "Displays the Game Center dashboard in a state that shows a player profile.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/trigger(player:handler:)"
+      },
+      "-triggerAccessPointWithState:handler:": {
+        "doc": "Displays the Game Center dashboard in the specified state as if the player taps or presses the access point.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/trigger(state:handler:)"
+      }
+    },
+    "GKAchievement": {
+      "+loadAchievementsWithCompletionHandler:": {
+        "doc": "Loads the achievements that you previously reported the player making progress toward.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/loadachievements(completionhandler:)"
+      },
+      "+reportAchievements:withCompletionHandler:": {
+        "doc": "Reports the player’s progress of players toward one or more achievements.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/report(_:withcompletionhandler:)"
+      },
+      "+reportAchievements:withEligibleChallenges:withCompletionHandler:": {
+        "doc": "Reports the player’s progress on achievements and limits the challenges, associated with those achievements, that the player may complete.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/report(_:witheligiblechallenges:withcompletionhandler:)"
+      },
+      "+resetAchievementsWithCompletionHandler:": {
+        "doc": "Resets the percentage completed for all of the player’s achievements.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/resetachievements(completionhandler:)"
+      },
+      "-challengeComposeControllerWithMessage:players:completion:": {
+        "doc": "Provides a view controller that you present to the player to issue an achievement challenge.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/challengecomposecontroller(withmessage:players:completion:)"
+      },
+      "-challengeComposeControllerWithMessage:players:completionHandler:": {
+        "doc": "Provides a view controller that you present to the player to issue an achievement challenge.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/challengecomposecontroller(withmessage:players:completionhandler:)"
+      },
+      "-challengeComposeControllerWithPlayers:message:completionHandler:": {
+        "doc": "Provides a challenge compose view controller with preselected player identifiers and a message.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/challengecomposecontroller(withplayers:message:completionhandler:)"
+      },
+      "-initWithIdentifier:": {
+        "doc": "Initializes an achievement for the local player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/init(identifier:)"
+      },
+      "-initWithIdentifier:player:": {
+        "doc": "Initializes an achievement for a player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/init(identifier:player:)"
+      },
+      "-selectChallengeablePlayers:withCompletionHandler:": {
+        "doc": "Finds the subset of players who can earn an achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/selectchallengeableplayers(_:withcompletionhandler:)"
+      }
+    },
+    "GKAchievementDescription": {
+      "+incompleteAchievementImage": {
+        "doc": "A common image that you can display when the player hasn’t completed the achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/incompleteachievementimage()"
+      },
+      "+loadAchievementDescriptionsWithCompletionHandler:": {
+        "doc": "Downloads the localized descriptions of achievements from Game Center.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/loadachievementdescriptions(completionhandler:)"
+      },
+      "+placeholderCompletedAchievementImage": {
+        "doc": "A placeholder image that you can display when the player completes the achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/placeholdercompletedachievementimage()"
+      },
+      "-loadImageWithCompletionHandler:": {
+        "doc": "Loads the image to display when the player completes the achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/loadimage(completionhandler:)"
+      }
+    },
+    "GKChallenge": {
+      "+loadReceivedChallengesWithCompletionHandler:": {
+        "doc": "Loads the list of outstanding challenges.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallenge/loadreceivedchallenges(completionhandler:)"
+      },
+      "-decline": {
+        "doc": "Declines a challenge that another player issues to the local player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallenge/decline()"
+      }
+    },
+    "GKChallengeDefinition": {
+      "+loadChallengeDefinitionsWithCompletionHandler:": {
+        "doc": "Loads all the challenge definitions for the current game, returns an empty array if none exist.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallengedefinition/loadchallengedefinitions(completionhandler:)"
+      },
+      "-hasActiveChallengesWithCompletionHandler:": {
+        "doc": "Indicates if this definition has active challenges associated with it.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallengedefinition/hasactivechallenges(completionhandler:)"
+      },
+      "-loadImageWithCompletionHandler:": {
+        "doc": "Loads the image set on the challenge definition, which may be nil if none was set.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallengedefinition/loadimage(completionhandler:)"
+      }
+    },
+    "GKChallengeEventHandler": {
+      "+challengeEventHandler": {
+        "doc": "Returns the shared instance of the event handler",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallengeeventhandler/challengeeventhandler"
+      }
+    },
+    "GKCloudPlayer": {
+      "+getCurrentSignedInPlayerForContainer:completionHandler:": {
+        "doc": "Returns player information for the currently signed-in player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkcloudplayer/getcurrentsignedinplayer(forcontainer:completionhandler:)"
+      }
+    },
+    "GKDialogController": {
+      "+sharedDialogController": {
+        "doc": "Retrieves the shared instance of the dialog controller.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkdialogcontroller/shared()"
+      },
+      "-dismiss:": {
+        "doc": "Dismisses the dashboard.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkdialogcontroller/dismiss(_:)"
+      },
+      "-presentViewController:": {
+        "doc": "Presents the dashboard in the window.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkdialogcontroller/present(_:)"
+      }
+    },
+    "GKFriendRequestComposeViewController": {
+      "+maxNumberOfRecipients": {
+        "doc": "Returns the maximum number of recipients permitted in a single request.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkfriendrequestcomposeviewcontroller/maxnumberofrecipients()"
+      },
+      "-addRecipientPlayers:": {
+        "doc": "Adds recipients based on their Game Center player identifiers.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkfriendrequestcomposeviewcontroller/addrecipientplayers(_:)"
+      },
+      "-addRecipientsWithEmailAddresses:": {
+        "doc": "Adds recipients based on their email addresses.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkfriendrequestcomposeviewcontroller/addrecipients(withemailaddresses:)"
+      },
+      "-addRecipientsWithPlayerIDs:": {
+        "doc": "Adds recipients based on their Game Center player identifiers.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkfriendrequestcomposeviewcontroller/addrecipients(withplayerids:)"
+      },
+      "-setMessage:": {
+        "doc": "Sets the text message included in the friend invitation.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkfriendrequestcomposeviewcontroller/setmessage(_:)"
+      }
+    },
+    "GKGameActivity": {
+      "+checkPendingGameActivityExistenceWithCompletionHandler:": {
+        "doc": "Checks whether there is a pending activity to handle for the current game.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/checkpendinggameactivityexistence(completionhandler:)"
+      },
+      "+isValidPartyCode:": {
+        "doc": "Checks whether a party code is in valid format.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/isvalidpartycode(_:)"
+      },
+      "+startWithDefinition:error:": {
+        "doc": "Creates and starts a game activity with a definition.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/start(definition:)"
+      },
+      "+startWithDefinition:partyCode:error:": {
+        "doc": "Creates and starts a new game activity with a custom party code.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/start(definition:partycode:)"
+      },
+      "-end": {
+        "doc": "Ends the game activity if it’s not already ended.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/end()"
+      },
+      "-findMatchWithCompletionHandler:": {
+        "doc": "Use information from the activity to find matches for the local player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/findmatch(completionhandler:)"
+      },
+      "-findPlayersForHostedMatchWithCompletionHandler:": {
+        "doc": "Use information from the activity to find server hosted players for the local player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/findplayersforhostedmatch(completionhandler:)"
+      },
+      "-getProgressOnAchievement:": {
+        "doc": "Get the achievement progress from a specific achievement of the local player if previously set.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/progress(on:)"
+      },
+      "-getScoreOnLeaderboard:": {
+        "doc": "Get the leaderboard score from a specific leaderboard of the local player if previously set.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/score(on:)"
+      },
+      "-initWithDefinition:": {
+        "doc": "Creates a game activity with definition.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/init(definition:)"
+      },
+      "-makeMatchRequest": {
+        "doc": "Makes a match request object with information from the activity, which you can use to find matches for the local player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/makematchrequest()"
+      },
+      "-pause": {
+        "doc": "Pauses the game activity if it’s not already paused.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/pause()"
+      },
+      "-removeAchievements:": {
+        "doc": "Removes all achievements if they exist.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/removeachievements(_:)"
+      },
+      "-removeScoresFromLeaderboards:": {
+        "doc": "Removes all scores from leaderboards for a player if exist.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/removescores(from:)"
+      },
+      "-resume": {
+        "doc": "Resumes the game activity if it was paused.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/resume()"
+      },
+      "-setAchievementCompleted:": {
+        "doc": "Set progress to 100% for an achievement for a player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/setachievementcompleted(_:)"
+      },
+      "-setProgressOnAchievement:toPercentComplete:": {
+        "doc": "Set a progress for an achievement for a player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/setprogress(on:to:)"
+      },
+      "-setScoreOnLeaderboard:toScore:": {
+        "doc": "Set a score of a leaderboard for a player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/setscore(on:to:)"
+      },
+      "-setScoreOnLeaderboard:toScore:context:": {
+        "doc": "Set a score of a leaderboard with a context for a player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/setscore(on:to:context:)"
+      },
+      "-start": {
+        "doc": "Starts the game activity if it’s not already started.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/start()"
+      }
+    },
+    "GKGameActivityDefinition": {
+      "+loadGameActivityDefinitionsWithCompletionHandler:": {
+        "doc": "Loads all the game activity definitions for the current game.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/loadgameactivitydefinitions(completionhandler:)"
+      },
+      "+loadGameActivityDefinitionsWithIDs:completionHandler:": {
+        "doc": "Loads game activity definitions with the supplied App Store Connect identifiers.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/loadgameactivitydefinitions(ids:completionhandler:)"
+      },
+      "-loadAchievementDescriptionsWithCompletionHandler:": {
+        "doc": "Loads all associated achievements that have defined deep links to this game activity definition.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/loadachievementdescriptions(completionhandler:)"
+      },
+      "-loadImageWithCompletionHandler:": {
+        "doc": "Asynchronously load the image. Error will be nil on success.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/loadimage(completionhandler:)"
+      },
+      "-loadLeaderboardsWithCompletionHandler:": {
+        "doc": "Loads all associated leaderboards that have defined deep links to this game activity definition.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/loadleaderboards(completionhandler:)"
+      }
+    },
+    "GKGameCenterViewController": {
+      "-initWithAchievementID:": {
+        "doc": "Creates a view controller that presents an achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontroller/init(achievementid:)"
+      },
+      "-initWithLeaderboard:playerScope:": {
+        "doc": "Creates a view controller that presents a leaderboard with data for the specified players.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontroller/init(leaderboard:playerscope:)"
+      },
+      "-initWithLeaderboardID:playerScope:timeScope:": {
+        "doc": "Creates a view controller that presents a leaderboard with data from the specified players and time period.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontroller/init(leaderboardid:playerscope:timescope:)"
+      },
+      "-initWithLeaderboardSetID:": {
+        "doc": "Creates a view controller that presents a leaderboard set.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontroller/init(leaderboardsetid:)"
+      },
+      "-initWithPlayer:": {
+        "doc": "Creates a view controller that presents a player’s Game Center profile.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontroller/init(player:)"
+      },
+      "-initWithState:": {
+        "doc": "Creates a view controller that presents the specified Game Center content.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontroller/init(state:)"
+      }
+    },
+    "GKGameSession": {
+      "+addEventListener:": {
+        "doc": "Adds a new event listener object.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/add(listener:)"
+      },
+      "+createSessionInContainer:withTitle:maxConnectedPlayers:completionHandler:": {
+        "doc": "Creates a new game session inside of an iCloud container.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/createsession(incontainer:withtitle:maxconnectedplayers:completionhandler:)"
+      },
+      "+loadSessionWithIdentifier:completionHandler:": {
+        "doc": "Loads a specific game session.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/load(withidentifier:completionhandler:)"
+      },
+      "+loadSessionsInContainer:completionHandler:": {
+        "doc": "Retrieves all of the game sessions associated with a container.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/loadsessions(incontainer:completionhandler:)"
+      },
+      "+removeEventListener:": {
+        "doc": "Stops listening to the event listener object.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/remove(listener:)"
+      },
+      "+removeSessionWithIdentifier:completionHandler:": {
+        "doc": "Removes the specified game session.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/remove(withidentifier:completionhandler:)"
+      },
+      "-clearBadgeForPlayers:completionHandler:": {
+        "doc": "Clears the badge from the designated players.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/clearbadge(for:completionhandler:)"
+      },
+      "-getShareURLWithCompletionHandler:": {
+        "doc": "Retrieves the URL used to share a game session.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/getshareurl(completionhandler:)"
+      },
+      "-loadDataWithCompletionHandler:": {
+        "doc": "Retrieves the game data from the current game session.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/loaddata(completionhandler:)"
+      },
+      "-playersWithConnectionState:": {
+        "doc": "Retrieves a list of players with the specified connection state.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/players(with:)"
+      },
+      "-saveData:completionHandler:": {
+        "doc": "Saves the current game session data.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/save(_:completionhandler:)"
+      },
+      "-sendData:withTransportType:completionHandler:": {
+        "doc": "Sends the indicated data to all connected players.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/send(_:with:completionhandler:)"
+      },
+      "-sendMessageWithLocalizedFormatKey:arguments:data:toPlayers:badgePlayers:completionHandler:": {
+        "doc": "Sends a message to players in a game session.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/sendmessage(withlocalizedformatkey:arguments:data:to:badgeplayers:completionhandler:)"
+      },
+      "-setConnectionState:completionHandler:": {
+        "doc": "Sets the connection state for the player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/setconnectionstate(_:completionhandler:)"
+      }
+    },
+    "GKLeaderboard": {
+      "+loadLeaderboardsWithIDs:completionHandler:": {
+        "doc": "Loads leaderboards for the specified leaderboard IDs that Game Center uses.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/loadleaderboards(ids:completionhandler:)"
+      },
+      "+submitScore:context:player:leaderboardIDs:completionHandler:": {
+        "doc": "Submits a score to multiple leaderboards.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/submitscore(_:context:player:leaderboardids:completionhandler:)"
+      },
+      "-loadEntriesForPlayerScope:timeScope:range:completionHandler:": {
+        "doc": "Returns the scores for the local player and other players for the specified type of player, time period, and ranks.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/loadentries(for:timescope:range:completionhandler:)"
+      },
+      "-loadEntriesForPlayers:timeScope:completionHandler:": {
+        "doc": "Returns the scores for the local player and other players for the specified time period.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/loadentries(for:timescope:completionhandler:)"
+      },
+      "-loadImageWithCompletionHandler:": {
+        "doc": "Loads the image for the leaderboard.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/loadimage(completionhandler:)"
+      },
+      "-loadPreviousOccurrenceWithCompletionHandler:": {
+        "doc": "Loads the previous recurring leaderboard occurrence that the player submits a score to.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/loadpreviousoccurrence(completionhandler:)"
+      },
+      "-submitScore:context:player:completionHandler:": {
+        "doc": "Submits a score to the leaderboard.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/submitscore(_:context:player:completionhandler:)"
+      }
+    },
+    "GKLeaderboardSet": {
+      "+loadLeaderboardSetsWithCompletionHandler:": {
+        "doc": "Loads all of the leaderboard sets you configure for your game.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardset/loadleaderboardsets(completionhandler:)"
+      },
+      "-loadImageWithCompletionHandler:": {
+        "doc": "Loads the localized image that you associate with the leaderboard set.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardset/loadimage(completionhandler:)"
+      },
+      "-loadLeaderboardsWithCompletionHandler:": {
+        "doc": "Loads all of the leaderboards for the current leaderboard set.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardset/loadleaderboards(completionhandler:)"
+      },
+      "-loadLeaderboardsWithHandler:": {
+        "doc": "Loads the leaderboards in the leaderboard set.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardset/loadleaderboards(handler:)"
+      }
+    },
+    "GKLocalPlayer": {
+      "-deleteSavedGamesWithName:completionHandler:": {
+        "doc": "Deletes saved games with the specified filename.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/deletesavedgames(withname:completionhandler:)"
+      },
+      "-fetchItemsForIdentityVerificationSignature:": {
+        "doc": "Generates a signature that you can use to authenticate the local player on your own server.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/fetchitems(foridentityverificationsignature:)"
+      },
+      "-fetchSavedGamesWithCompletionHandler:": {
+        "doc": "Retrieves all available saved games.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/fetchsavedgames(completionhandler:)"
+      },
+      "-loadChallengableFriendsWithCompletionHandler:": {
+        "doc": "Loads players to whom the local player can issue a challenge.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/loadchallengablefriends(completionhandler:)"
+      },
+      "-loadDefaultLeaderboardIdentifierWithCompletionHandler:": {
+        "doc": "Loads the identifier for the local player’s default leaderboard.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/loaddefaultleaderboardidentifier(completionhandler:)"
+      },
+      "-loadFriends:": {
+        "doc": "Loads the local player’s friends list if the local player and their friends grant access.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/loadfriends(_:)"
+      },
+      "-loadFriendsAuthorizationStatus:": {
+        "doc": "Returns whether the player authorizes your game to access their friends list.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/loadfriendsauthorizationstatus(_:)"
+      },
+      "-loadFriendsWithIdentifiers:completionHandler:": {
+        "doc": "Loads the player’s friends list, scoped by the identifiers, if the player and their friends grant access.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/loadfriends(identifiedby:completionhandler:)"
+      },
+      "-loadRecentPlayersWithCompletionHandler:": {
+        "doc": "Loads players from the friends list or players that recently participated in a game with the local player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/loadrecentplayers(completionhandler:)"
+      },
+      "-presentFriendRequestCreatorFromViewController:error:": {
+        "doc": "Presents a view controller with a Messages sheet for the player to request friends.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/presentfriendrequestcreator(from:)-7j1kn"
+      },
+      "-presentFriendRequestCreatorFromWindow:error:": {
+        "doc": "Opens the Messages app with a sheet for the player to request friends.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/presentfriendrequestcreator(from:)-7clh6"
+      },
+      "-registerListener:": {
+        "doc": "Registers a listener for a particular event.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/register(_:)"
+      },
+      "-resolveConflictingSavedGames:withData:completionHandler:": {
+        "doc": "Replaces duplicate saved games that use the same filename with one file containing the specified game data.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/resolveconflictingsavedgames(_:with:completionhandler:)"
+      },
+      "-saveGameData:withName:completionHandler:": {
+        "doc": "Saves game data with the specified name.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/savegamedata(_:withname:completionhandler:)"
+      },
+      "-setDefaultLeaderboardIdentifier:completionHandler:": {
+        "doc": "Sets the local player’s default leaderboard.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/setdefaultleaderboardidentifier(_:completionhandler:)"
+      },
+      "-unregisterAllListeners": {
+        "doc": "Unregisters all listeners in your game.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/unregisteralllisteners()"
+      },
+      "-unregisterListener:": {
+        "doc": "Unregisters a listener object.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/unregisterlistener(_:)"
+      }
+    },
+    "GKMatch": {
+      "-chooseBestHostPlayerWithCompletionHandler:": {
+        "doc": "Determines the best player in the game to act as the server for a client-server match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatch/choosebesthostplayer(completionhandler:)"
+      },
+      "-chooseBestHostingPlayerWithCompletionHandler:": {
+        "doc": "Determines the best player in the game to act as the server for a client-server topology.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatch/choosebesthostingplayer(completionhandler:)"
+      },
+      "-disconnect": {
+        "doc": "Disconnects the local player from the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatch/disconnect()"
+      },
+      "-rematchWithCompletionHandler:": {
+        "doc": "Creates a new match with the players from an existing match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatch/rematch(completionhandler:)"
+      },
+      "-sendData:toPlayers:dataMode:error:": {
+        "doc": "Transmits data to one or more players connected to the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatch/send(_:to:datamode:)"
+      },
+      "-sendData:toPlayers:withDataMode:error:": {
+        "doc": "Transmits data to a list of connected players.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatch/send(_:toplayers:with:)"
+      },
+      "-sendDataToAllPlayers:withDataMode:error:": {
+        "doc": "Transmits data to all players connected to the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatch/senddata(toallplayers:with:)"
+      },
+      "-voiceChatWithName:": {
+        "doc": "Joins the local player to a voice channel.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatch/voicechat(withname:)"
+      }
+    },
+    "GKMatchRequest": {
+      "+maxPlayersAllowedForMatchOfType:": {
+        "doc": "Returns the maximum number of players allowed in the match request for a given match type.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest/maxplayersallowedformatch(of:)"
+      }
+    },
+    "GKMatchmaker": {
+      "+sharedMatchmaker": {
+        "doc": "Returns the singleton matchmaker instance.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/shared()"
+      },
+      "-addPlayersToMatch:matchRequest:completionHandler:": {
+        "doc": "Invites additional players to an existing match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/addplayers(to:matchrequest:completionhandler:)"
+      },
+      "-cancel": {
+        "doc": "Cancels a matchmaking request.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/cancel()"
+      },
+      "-cancelPendingInviteToPlayer:": {
+        "doc": "Cancels a pending invitation to another player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/cancelpendinginvite(to:)"
+      },
+      "-findMatchForRequest:withCompletionHandler:": {
+        "doc": "Initiates a request to find players for a peer-to-peer match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/findmatch(for:withcompletionhandler:)"
+      },
+      "-findMatchedPlayers:withCompletionHandler:": {
+        "doc": "Initiates a request to find players for a hosted match that uses matchmaking rules.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/findmatchedplayers(_:withcompletionhandler:)"
+      },
+      "-findPlayersForHostedMatchRequest:withCompletionHandler:": {
+        "doc": "Initiates a request to find players for a hosted match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/findplayers(forhostedmatchrequest:withcompletionhandler:)"
+      },
+      "-findPlayersForHostedRequest:withCompletionHandler:": {
+        "doc": "Initiates a request to find players for a hosted match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/findplayers(forhostedrequest:withcompletionhandler:)"
+      },
+      "-finishMatchmakingForMatch:": {
+        "doc": "Informs the server when programmatic matchmaking finishes.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/finishmatchmaking(for:)"
+      },
+      "-matchForInvite:completionHandler:": {
+        "doc": "Creates a match from an invitation that the local player accepts.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/match(for:completionhandler:)"
+      },
+      "-queryActivityWithCompletionHandler:": {
+        "doc": "Finds the number of players, across player groups, who recently requested a match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/queryactivity(completionhandler:)"
+      },
+      "-queryPlayerGroupActivity:withCompletionHandler:": {
+        "doc": "Finds the number of players in a player group who recently requested a match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/queryplayergroupactivity(_:withcompletionhandler:)"
+      },
+      "-queryQueueActivity:withCompletionHandler:": {
+        "doc": "Finds the number of players in a specific queue who recently requested a match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/queryqueueactivity(_:withcompletionhandler:)"
+      },
+      "-startBrowsingForNearbyPlayersWithHandler:": {
+        "doc": "Finds nearby players through Bluetooth or WiFi on the same subnet.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/startbrowsingfornearbyplayers(handler:)"
+      },
+      "-startGroupActivityWithPlayerHandler:": {
+        "doc": "Begins a SharePlay activity for your game when a FaceTime call is active.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/startgroupactivity(playerhandler:)"
+      },
+      "-stopBrowsingForNearbyPlayers": {
+        "doc": "Stops finding nearby players.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/stopbrowsingfornearbyplayers()"
+      },
+      "-stopGroupActivity": {
+        "doc": "Ends a SharePlay activity for the entire group, which the local player activates.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmaker/stopgroupactivity()"
+      }
+    },
+    "GKMatchmakerViewController": {
+      "-addPlayersToMatch:": {
+        "doc": "Invites additional players to join an existing match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakerviewcontroller/addplayers(to:)"
+      },
+      "-initWithInvite:": {
+        "doc": "Creates a matchmaker view controller to present to a player who accepts an invitation.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakerviewcontroller/init(invite:)"
+      },
+      "-initWithMatchRequest:": {
+        "doc": "Creates a matchmaker view controller for the local player to start inviting other players.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakerviewcontroller/init(matchrequest:)"
+      },
+      "-setHostedPlayer:connected:": {
+        "doc": "Updates a player’s status on the view to show that the player has connected or disconnected from your server.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakerviewcontroller/sethostedplayer(_:connected:)"
+      },
+      "-setHostedPlayer:didConnect:": {
+        "doc": "Updates the connection status of a player in a hosted game.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakerviewcontroller/sethostedplayer(_:didconnect:)"
+      },
+      "-setHostedPlayerReady:": {
+        "doc": "Informs the controller that a player has joined a hosted match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakerviewcontroller/sethostedplayerready(_:)"
+      }
+    },
+    "GKNotificationBanner": {
+      "+showBannerWithTitle:message:completionHandler:": {
+        "doc": "Displays a banner with a title and message to the player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gknotificationbanner/show(withtitle:message:completionhandler:)"
+      },
+      "+showBannerWithTitle:message:duration:completionHandler:": {
+        "doc": "Displays a banner to the player for a specified period of time.",
+        "url": "https://developer.apple.com/documentation/gamekit/gknotificationbanner/show(withtitle:message:duration:completionhandler:)"
+      }
+    },
+    "GKPlayer": {
+      "+anonymousGuestPlayerWithIdentifier:": {
+        "doc": "Creates a guest player with the specified identifier.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkplayer/anonymousguestplayer(withidentifier:)"
+      },
+      "+loadPlayersForIdentifiers:withCompletionHandler:": {
+        "doc": "Loads information about a list of players from Game Center.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkplayer/loadplayers(foridentifiers:withcompletionhandler:)"
+      },
+      "-loadPhotoForSize:withCompletionHandler:": {
+        "doc": "Loads a photo of the player from Game Center.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkplayer/loadphoto(for:withcompletionhandler:)"
+      },
+      "-scopedIDsArePersistent": {
+        "doc": "Returns a Boolean value depending on whether the player identifiers are persistent across game instances or unique to the game instance.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkplayer/scopedidsarepersistent()"
+      }
+    },
+    "GKSavedGame": {
+      "-loadDataWithCompletionHandler:": {
+        "doc": "Loads the game data from the file.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksavedgame/loaddata(completionhandler:)"
+      }
+    },
+    "GKScore": {
+      "+reportLeaderboardScores:withEligibleChallenges:withCompletionHandler:": {
+        "doc": "Submits a list of scores and all eligible challenges.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/report(_:witheligiblechallenges:withcompletionhandler:)-2tycl"
+      },
+      "+reportScores:withCompletionHandler:": {
+        "doc": "Reports a list of scores to Game Center",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/report(_:withcompletionhandler:)"
+      },
+      "+reportScores:withEligibleChallenges:withCompletionHandler:": {
+        "doc": "Submits a list of scores and all eligible challenges.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/report(_:witheligiblechallenges:withcompletionhandler:)-3c5lh"
+      },
+      "-challengeComposeControllerWithMessage:players:completion:": {
+        "doc": "Provides a challenge compose view controller with preselected player identifiers and a preformatted, player-editable message.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/challengecomposecontroller(withmessage:players:completion:)"
+      },
+      "-challengeComposeControllerWithMessage:players:completionHandler:": {
+        "doc": "Provides a challenge compose view controller with pre-selected player identifiers and a preformatted, player-editable message.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/challengecomposecontroller(withmessage:players:completionhandler:)"
+      },
+      "-challengeComposeControllerWithPlayers:message:completionHandler:": {
+        "doc": "Provides a challenge compose view controller with pre-selected player identifiers and a preformatted, player-editable message.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/challengecomposecontroller(withplayers:message:completionhandler:)"
+      },
+      "-initWithCategory:": {
+        "doc": "Returns an initialized score object.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/init(category:)"
+      },
+      "-initWithLeaderboardIdentifier:": {
+        "doc": "Returns an initialized score object using the local player and the current date.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/init(leaderboardidentifier:)"
+      },
+      "-initWithLeaderboardIdentifier:forPlayer:": {
+        "doc": "Returns an initialized score object for the specified leaderboard and player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/init(leaderboardidentifier:forplayer:)"
+      },
+      "-initWithLeaderboardIdentifier:player:": {
+        "doc": "Returns an initialized score object for the specified leaderboard and player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/init(leaderboardidentifier:player:)"
+      },
+      "-issueChallengeToPlayers:message:": {
+        "doc": "Issues a score challenge to a set of players.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/issuechallenge(toplayers:message:)"
+      },
+      "-reportScoreWithCompletionHandler:": {
+        "doc": "Reports a score to Game Center.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/report(completionhandler:)"
+      }
+    },
+    "GKSession": {
+      "-acceptConnectionFromPeer:error:": {
+        "doc": "Called by the delegate to accept a connection request received from a remote peer.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/acceptconnection(frompeer:)"
+      },
+      "-cancelConnectToPeer:": {
+        "doc": "Cancels a pending request to connect to another iOS device.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/cancelconnect(topeer:)"
+      },
+      "-connectToPeer:withTimeout:": {
+        "doc": "Creates a connection to another iOS device.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/connect(topeer:withtimeout:)"
+      },
+      "-denyConnectionFromPeer:": {
+        "doc": "Called by the delegate to reject a connection request received from a remote peer.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/denyconnection(frompeer:)"
+      },
+      "-disconnectFromAllPeers": {
+        "doc": "Disconnects the session from all connected peers.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/disconnectfromallpeers()"
+      },
+      "-disconnectPeerFromAllPeers:": {
+        "doc": "Disconnects a connected peer from all peers connected to the session.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/disconnectpeer(fromallpeers:)"
+      },
+      "-displayNameForPeer:": {
+        "doc": "Returns a user-readable name for a peer.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/displayname(forpeer:)"
+      },
+      "-initWithSessionID:displayName:sessionMode:": {
+        "doc": "Initializes and returns a newly allocated session.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/init(sessionid:displayname:sessionmode:)"
+      },
+      "-peersWithConnectionState:": {
+        "doc": "Returns a list of peers in the specified connection state.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/peers(with:)"
+      },
+      "-sendData:toPeers:withDataMode:error:": {
+        "doc": "Transmits a collection of bytes to a list of connected peers.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/send(_:topeers:with:)"
+      },
+      "-sendDataToAllPeers:withDataMode:error:": {
+        "doc": "Transmits a collection of bytes to all connected peers.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/senddata(toallpeers:with:)"
+      },
+      "-setDataReceiveHandler:withContext:": {
+        "doc": "Sets the object that handles data received from other peers connected to the session.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/setdatareceivehandler(_:withcontext:)"
+      }
+    },
+    "GKTurnBasedEventHandler": {
+      "+sharedTurnBasedEventHandler": {
+        "doc": "Returns the shared instance of the event handler.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedeventhandler/shared()"
+      }
+    },
+    "GKTurnBasedExchange": {
+      "-cancelWithLocalizableMessageKey:arguments:completionHandler:": {
+        "doc": "Cancels an exchange request.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchange/cancel(withlocalizablemessagekey:arguments:completionhandler:)"
+      },
+      "-replyWithLocalizableMessageKey:arguments:data:completionHandler:": {
+        "doc": "Replies to an exchange request on behalf of a recipient.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchange/reply(withlocalizablemessagekey:arguments:data:completionhandler:)"
+      }
+    },
+    "GKTurnBasedMatch": {
+      "+findMatchForRequest:withCompletionHandler:": {
+        "doc": "Creates a new match or finds an existing match that needs a player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/find(for:withcompletionhandler:)"
+      },
+      "+loadMatchWithID:withCompletionHandler:": {
+        "doc": "Loads a specific match with the specified identifier.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/load(withid:withcompletionhandler:)"
+      },
+      "+loadMatchesWithCompletionHandler:": {
+        "doc": "Fetches the turn-based matches from Game Center that the local player participates in.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/loadmatches(completionhandler:)"
+      },
+      "-acceptInviteWithCompletionHandler:": {
+        "doc": "Accepts an invitation for the local player to join a turn-based match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/acceptinvite(completionhandler:)"
+      },
+      "-declineInviteWithCompletionHandler:": {
+        "doc": "Declines an invitation for the local player to join a turn-based match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/declineinvite(completionhandler:)"
+      },
+      "-endMatchInTurnWithMatchData:completionHandler:": {
+        "doc": "Ends the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/endmatchinturn(withmatch:completionhandler:)"
+      },
+      "-endMatchInTurnWithMatchData:leaderboardScores:achievements:completionHandler:": {
+        "doc": "Ends the match while submitting scores and achievements for all of the participants.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/endmatchinturn(withmatch:leaderboardscores:achievements:completionhandler:)"
+      },
+      "-endMatchInTurnWithMatchData:scores:achievements:completionHandler:": {
+        "doc": "Ends the match while submitting all of the scores and achievements.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/endmatchinturn(withmatch:scores:achievements:completionhandler:)"
+      },
+      "-endTurnWithNextParticipant:matchData:completionHandler:": {
+        "doc": "Updates the data stored on Game Center for the current match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/endturn(withnextparticipant:match:completionhandler:)"
+      },
+      "-endTurnWithNextParticipants:turnTimeout:matchData:completionHandler:": {
+        "doc": "Passes the turn from the current participant to the next participant.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/endturn(withnextparticipants:turntimeout:match:completionhandler:)"
+      },
+      "-loadMatchDataWithCompletionHandler:": {
+        "doc": "Fetches your game-specific data that you store in Game Center when ending a turn, saving a turn, or leaving a match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/loadmatchdata(completionhandler:)"
+      },
+      "-participantQuitInTurnWithOutcome:nextParticipant:matchData:completionHandler:": {
+        "doc": "Resigns the current player from the match without ending the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/participantquitinturn(with:nextparticipant:match:completionhandler:)"
+      },
+      "-participantQuitInTurnWithOutcome:nextParticipants:turnTimeout:matchData:completionHandler:": {
+        "doc": "Forfeits the match on behalf of the local player when it’s their turn.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/participantquitinturn(with:nextparticipants:turntimeout:match:completionhandler:)"
+      },
+      "-participantQuitOutOfTurnWithOutcome:withCompletionHandler:": {
+        "doc": "Forfeits the match on behalf of the local player when it’s not their turn.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/participantquitoutofturn(with:withcompletionhandler:)"
+      },
+      "-rematchWithCompletionHandler:": {
+        "doc": "Creates a new turn-based match with the same participants from an existing match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/rematch(completionhandler:)"
+      },
+      "-removeWithCompletionHandler:": {
+        "doc": "Removes a match from Game Center that the local player participants in.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/remove(completionhandler:)"
+      },
+      "-saveCurrentTurnWithMatchData:completionHandler:": {
+        "doc": "Saves your match data in Game Center without ending the turn.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/savecurrentturn(withmatch:completionhandler:)"
+      },
+      "-saveMergedMatchData:withResolvedExchanges:completionHandler:": {
+        "doc": "Saves match data for completed exchanges without ending the turn.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/savemergedmatch(_:withresolvedexchanges:completionhandler:)"
+      },
+      "-sendExchangeToParticipants:data:localizableMessageKey:arguments:timeout:completionHandler:": {
+        "doc": "Sends an exchange request that contains your game data to one or more participants.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/sendexchange(to:data:localizablemessagekey:arguments:timeout:completionhandler:)"
+      },
+      "-sendReminderToParticipants:localizableMessageKey:arguments:completionHandler:": {
+        "doc": "Sends a reminder from one participant to a specific set of other participants.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/sendreminder(to:localizablemessagekey:arguments:completionhandler:)"
+      },
+      "-setLocalizableMessageWithKey:arguments:": {
+        "doc": "Sends a localized message from the current participant to all other participants when you end a turn, forfeit a match, or end a match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/setlocalizablemessagewithkey(_:arguments:)"
+      }
+    },
+    "GKTurnBasedMatchmakerViewController": {
+      "-initWithMatchRequest:": {
+        "doc": "Creates a matchmaker view controller for the local player to start inviting other players to a turn-based game.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatchmakerviewcontroller/init(matchrequest:)"
+      }
+    },
+    "GKVoiceChat": {
+      "+isVoIPAllowed": {
+        "doc": "Returns whether voice chat is available on the device.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechat/isvoipallowed()"
+      },
+      "-setMute:forPlayer:": {
+        "doc": "Mutes a player in a voice chat.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechat/setmute(_:forplayer:)"
+      },
+      "-setPlayer:muted:": {
+        "doc": "Mutes a player in the chat, including the local player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechat/setplayer(_:muted:)"
+      },
+      "-start": {
+        "doc": "Starts communication with other players in a channel.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechat/start()"
+      },
+      "-stop": {
+        "doc": "Ends communication with other players in a channel.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechat/stop()"
+      }
+    },
+    "GKVoiceChatService": {
+      "+defaultVoiceChatService": {
+        "doc": "Retrieves the singleton chat service.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice/default()"
+      },
+      "+isVoIPAllowed": {
+        "doc": "Returns whether voice chat is allowed to be used on the device.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice/isvoipallowed()"
+      },
+      "-acceptCallID:error:": {
+        "doc": "Accepts a request from a remote user to establish a voice chat.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice/acceptcallid(_:)"
+      },
+      "-denyCallID:": {
+        "doc": "Rejects a request to establish a voice chat.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice/denycallid(_:)"
+      },
+      "-receivedData:fromParticipantID:": {
+        "doc": "Called by the client to deliver new data received from a remote participant.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice/receiveddata(_:fromparticipantid:)"
+      },
+      "-receivedRealTimeData:fromParticipantID:": {
+        "doc": "Called by the client to deliver voice data received from a remote participant..",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice/receivedrealtime(_:fromparticipantid:)"
+      },
+      "-startVoiceChatWithParticipantID:error:": {
+        "doc": "Sends a request to another participant to join the voice chat.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice/startvoicechat(withparticipantid:)"
+      },
+      "-stopVoiceChatWithParticipantID:": {
+        "doc": "Ends a previously established voice chat.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice/stopvoicechat(withparticipantid:)"
+      }
+    }
+  },
+  "properties": {
+    "GKAccessPoint": {
+      "GKAccessPointLocation": {
+        "doc": "Specifies the corner of the screen to display the access point.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/location-swift.enum"
+      },
+      "active": {
+        "doc": "A Boolean value that determines whether to display the access point.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/isactive"
+      },
+      "focused": {
+        "doc": "A Boolean value that indicates whether the access point is in focus on tvOS.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/isfocused"
+      },
+      "frameInScreenCoordinates": {
+        "doc": "The frame of the access point in screen coordinates.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/frameinscreencoordinates"
+      },
+      "isPresentingGameCenter": {
+        "doc": "A Boolean value that indicates whether the game is presenting the Game Center dashboard.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/ispresentinggamecenter"
+      },
+      "location": {
+        "doc": "The corner of the screen to display the access point.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/location-swift.property"
+      },
+      "parentWindow": {
+        "doc": "The window that contains the access point.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/parentwindow"
+      },
+      "shared": {
+        "doc": "The shared access point object.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/shared"
+      },
+      "showHighlights": {
+        "doc": "A Boolean value that indicates whether to display highlights for achievements and current ranks for leaderboards.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/showhighlights"
+      },
+      "visible": {
+        "doc": "A Boolean value that indicates whether the access point is visible.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkaccesspoint/isvisible"
+      }
+    },
+    "GKAchievement": {
+      "completed": {
+        "doc": "A Boolean value that states whether the player has completed the achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/iscompleted"
+      },
+      "identifier": {
+        "doc": "The identifier for the achievement that you enter in App Store Connect.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/identifier"
+      },
+      "lastReportedDate": {
+        "doc": "The last time your game reported progress on the achievement for the player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/lastreporteddate"
+      },
+      "percentComplete": {
+        "doc": "A percentage value that states how far the player has progressed on the achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/percentcomplete"
+      },
+      "player": {
+        "doc": "The player who earned the achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/player"
+      },
+      "showsCompletionBanner": {
+        "doc": "A Boolean value that indicates whether GameKit displays a banner when the player completes the achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievement/showscompletionbanner"
+      }
+    },
+    "GKAchievementChallenge": {
+      "achievement": {
+        "doc": "The achievement that the player must earn to complete the challenge.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementchallenge/achievement"
+      }
+    },
+    "GKAchievementDescription": {
+      "achievedDescription": {
+        "doc": "A localized description of the achievement that you display when the player completes the achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/achieveddescription"
+      },
+      "activityIdentifier": {
+        "doc": "The identifier of the game activity associated with this achievement, as configured by the developer in App Store Connect.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/activityidentifier"
+      },
+      "activityProperties": {
+        "doc": "The properties when associating this achievement with a game activity, as configured by the developer in App Store Connect.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/activityproperties"
+      },
+      "groupIdentifier": {
+        "doc": "The identifier for the group that the achievement description is part of.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/groupidentifier"
+      },
+      "hidden": {
+        "doc": "A Boolean value that states whether the achievement is initially visible to players.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/ishidden"
+      },
+      "identifier": {
+        "doc": "The string you enter in App Store Connect that uniquely identifies the achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/identifier"
+      },
+      "image": {
+        "doc": "The achievement’s artwork that you display when the player completes the achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/image"
+      },
+      "maximumPoints": {
+        "doc": "The number of points that the player earns when completing the achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/maximumpoints"
+      },
+      "rarityPercent": {
+        "doc": "The percentage of players of this game that earned the achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/raritypercent-3zqw6"
+      },
+      "releaseState": {
+        "doc": "The release state of the achievement in App Store Connect.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/releasestate"
+      },
+      "replayable": {
+        "doc": "A Boolean value that states whether the player can earn the achievement multiple times.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/isreplayable"
+      },
+      "title": {
+        "doc": "A localized title for the achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/title"
+      },
+      "unachievedDescription": {
+        "doc": "A localized description of the achievement that you display when the player hasn’t completed the achievement.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementdescription/unachieveddescription"
+      }
+    },
+    "GKAchievementViewController": {
+      "achievementDelegate": {
+        "doc": "The achievement view controller’s delegate.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkachievementviewcontroller/achievementdelegate"
+      }
+    },
+    "GKBasePlayer": {
+      "displayName": {
+        "doc": "The Game Center profile name for a player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkbaseplayer/displayname"
+      },
+      "playerID": {
+        "doc": "A unique identifier for a player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkbaseplayer/playerid"
+      }
+    },
+    "GKChallenge": {
+      "completionDate": {
+        "doc": "The date the challenged player completed the challenge.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallenge/completiondate"
+      },
+      "issueDate": {
+        "doc": "The date the player issued the challenge.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallenge/issuedate"
+      },
+      "issuingPlayer": {
+        "doc": "The player who issues the challenge.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallenge/issuingplayer"
+      },
+      "issuingPlayerID": {
+        "doc": "The player who issues the challenge.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallenge/issuingplayerid"
+      },
+      "message": {
+        "doc": "A text message that describes the challenge.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallenge/message"
+      },
+      "receivingPlayer": {
+        "doc": "The player who receives the challenge.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallenge/receivingplayer"
+      },
+      "receivingPlayerID": {
+        "doc": "The player who receives the challenge.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallenge/receivingplayerid"
+      },
+      "state": {
+        "doc": "The current state of the challenge.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallenge/state"
+      }
+    },
+    "GKChallengeDefinition": {
+      "details": {
+        "doc": "A more detailed description of the challenge definition.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallengedefinition/details"
+      },
+      "durationOptions": {
+        "doc": "The duration options for the challenge, like 1 day or 1 week.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallengedefinition/durationoptions"
+      },
+      "groupIdentifier": {
+        "doc": "The group identifier for the challenge definition, if one exists.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallengedefinition/groupidentifier"
+      },
+      "identifier": {
+        "doc": "The developer defined identifier for a given challenge definition.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallengedefinition/identifier"
+      },
+      "isRepeatable": {
+        "doc": "Indicates if a challenge can be attempted more than once.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallengedefinition/isrepeatable"
+      },
+      "leaderboard": {
+        "doc": "Scores submitted to this leaderboard will also be submitted as scores in this challenge.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallengedefinition/leaderboard"
+      },
+      "releaseState": {
+        "doc": "The release state of the challenge definition in App Store Connect.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallengedefinition/releasestate"
+      },
+      "title": {
+        "doc": "A short title for the challenge definition.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallengedefinition/title"
+      }
+    },
+    "GKChallengeEventHandler": {
+      "delegate": {
+        "doc": "The delegate for the event handler.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkchallengeeventhandler/delegate"
+      }
+    },
+    "GKDialogController": {
+      "parentWindow": {
+        "doc": "The window that displays the dashboard.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkdialogcontroller/parentwindow"
+      }
+    },
+    "GKFriendRequestComposeViewController": {
+      "composeViewDelegate": {
+        "doc": "The view controller’s delegate",
+        "url": "https://developer.apple.com/documentation/gamekit/gkfriendrequestcomposeviewcontroller/composeviewdelegate"
+      }
+    },
+    "GKGameActivity": {
+      "GKGameActivityState": {
+        "doc": "The state of a game activity.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/state-swift.enum"
+      },
+      "achievements": {
+        "doc": "All achievements that have been associated with this activity.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/achievements"
+      },
+      "activityDefinition": {
+        "doc": "The activity definition that this activity instance is based on.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/activitydefinition"
+      },
+      "creationDate": {
+        "doc": "The date when the activity was created.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/creationdate"
+      },
+      "duration": {
+        "doc": "The total time elapsed while in active state.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/duration"
+      },
+      "endDate": {
+        "doc": "The date when the activity was officially ended.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/enddate"
+      },
+      "identifier": {
+        "doc": "The identifier of this activity instance.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/identifier"
+      },
+      "lastResumeDate": {
+        "doc": "The date when the activity was last resumed.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/lastresumedate"
+      },
+      "leaderboardScores": {
+        "doc": "All leaderboard scores that have been associated with this activity.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/leaderboardscores"
+      },
+      "partyCode": {
+        "doc": "If the game supports party code, this is the party code that can be shared among players to join the party.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/partycode"
+      },
+      "partyURL": {
+        "doc": "If the game supports party code, this is the URL that can be shared among players to join the party.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/partyurl"
+      },
+      "properties": {
+        "doc": "Properties that contain additional information about the activity.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/properties"
+      },
+      "startDate": {
+        "doc": "The date when the activity was initially started.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/startdate"
+      },
+      "state": {
+        "doc": "The state of the game activity.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/state-swift.property"
+      },
+      "validPartyCodeAlphabet": {
+        "doc": "Allowed characters for the party code to be used to share this activity.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivity/validpartycodealphabet"
+      }
+    },
+    "GKGameActivityDefinition": {
+      "defaultProperties": {
+        "doc": "Default properties defined by the developer for this type of game activity.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/defaultproperties"
+      },
+      "details": {
+        "doc": "A more detailed description of the game activity.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/details"
+      },
+      "fallbackURL": {
+        "doc": "A fallback URL that can be used to construct a game-specific URL for players to share or join, if the joining device does not support the default URL.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/fallbackurl"
+      },
+      "groupIdentifier": {
+        "doc": "The group identifier for the activity, if one exists.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/groupidentifier"
+      },
+      "identifier": {
+        "doc": "The developer defined identifier for a given game activity.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/identifier"
+      },
+      "maxPlayers": {
+        "doc": "The maximum number of participants that can join the activity. Returns nil when no maximum is set (unlimited players) or when player range is undefined. When not nil, the value is always greater than or equal to minPlayers.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/maxplayers"
+      },
+      "minPlayers": {
+        "doc": "The minimum number of participants that can join the activity.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/minplayers"
+      },
+      "playStyle": {
+        "doc": "The play style of the game activity.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/playstyle"
+      },
+      "playerRange": {
+        "doc": "The range of players supported by this type of game activity.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/playerrange"
+      },
+      "releaseState": {
+        "doc": "The release state of the game activity definition in App Store Connect.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/releasestate"
+      },
+      "supportsPartyCode": {
+        "doc": "Whether the activity can be joined by others via a party code.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/supportspartycode"
+      },
+      "supportsUnlimitedPlayers": {
+        "doc": "True if the activity supports an unlimited number of players. False if maxPlayers is set to a defined limit or if no player range is provided.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/supportsunlimitedplayers"
+      },
+      "title": {
+        "doc": "A short title for the game activity.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgameactivitydefinition/title"
+      }
+    },
+    "GKGameCenterViewController": {
+      "gameCenterDelegate": {
+        "doc": "The view controller’s delegate.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontroller/gamecenterdelegate"
+      }
+    },
+    "GKGameSession": {
+      "badgedPlayers": {
+        "doc": "An array containing all of the currently badged players.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/badgedplayers"
+      },
+      "identifier": {
+        "doc": "A unique identifier for a game session.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/identifier"
+      },
+      "lastModifiedDate": {
+        "doc": "The date that the game session was last modified.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/lastmodifieddate"
+      },
+      "lastModifiedPlayer": {
+        "doc": "The last player to modify the game session.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/lastmodifiedplayer"
+      },
+      "maxNumberOfConnectedPlayers": {
+        "doc": "The maximum number of players allowed to connect to the game session at the same time.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/maxnumberofconnectedplayers"
+      },
+      "owner": {
+        "doc": "A player object that represents the owner of the game session.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/owner"
+      },
+      "players": {
+        "doc": "An array of player objects associated with the game session.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/players"
+      },
+      "title": {
+        "doc": "The title of the game session.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkgamesession/title"
+      }
+    },
+    "GKInvite": {
+      "hosted": {
+        "doc": "A Boolean value that indicates whether you host the game on your own servers.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkinvite/ishosted"
+      },
+      "inviter": {
+        "doc": "The identifier for the player who sends the invitation.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkinvite/inviter"
+      },
+      "playerAttributes": {
+        "doc": "The player attributes for the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkinvite/playerattributes"
+      },
+      "playerGroup": {
+        "doc": "The player group for the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkinvite/playergroup"
+      },
+      "sender": {
+        "doc": "The player who sends the invitation.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkinvite/sender"
+      }
+    },
+    "GKLeaderboard": {
+      "GKLeaderboardEntry": {
+        "doc": "Information about a single score by a player on a leaderboard.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/entry"
+      },
+      "GKLeaderboardPlayerScope": {
+        "doc": "Specifies the type of players for filtering data.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/playerscope-swift.enum"
+      },
+      "GKLeaderboardTimeScope": {
+        "doc": "Specifies the time period for filtering data.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/timescope-swift.enum"
+      },
+      "GKLeaderboardType": {
+        "doc": "Specifies whether a leaderboard is recurring.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/leaderboardtype"
+      },
+      "activityIdentifier": {
+        "doc": "The identifier of the game activity associated with this leaderboard, as configured by the developer in App Store Connect.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/activityidentifier"
+      },
+      "activityProperties": {
+        "doc": "The properties when associating this leaderboard with a game activity, as configured by the developer in App Store Connect.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/activityproperties"
+      },
+      "baseLeaderboardID": {
+        "doc": "The ID that Game Center uses to identify this leaderboard.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/baseleaderboardid"
+      },
+      "duration": {
+        "doc": "The duration from the start date that a recurring leaderboard occurrence accepts scores.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/duration"
+      },
+      "groupIdentifier": {
+        "doc": "The identifier for the group the leaderboard belongs to.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/groupidentifier"
+      },
+      "isHidden": {
+        "doc": "A Boolean value that indicates whether the current leaderboard isn’t visible in Game Center views.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/ishidden"
+      },
+      "leaderboardDescription": {
+        "doc": "The description of this Leaderboard as configured by the developer in App Store Connect.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/leaderboarddescription"
+      },
+      "nextStartDate": {
+        "doc": "The date and time the next recurring leaderboard occurrence starts accepting scores.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/nextstartdate"
+      },
+      "releaseState": {
+        "doc": "The release state of the leaderboard in App Store Connect.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/releasestate"
+      },
+      "startDate": {
+        "doc": "The date and time a recurring leaderboard occurrence starts accepting scores.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/startdate"
+      },
+      "title": {
+        "doc": "The localized title for the leaderboard.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/title"
+      },
+      "type": {
+        "doc": "The type of leaderboard, classic or recurring.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboard/type"
+      }
+    },
+    "GKLeaderboardScore": {
+      "context": {
+        "doc": "An integer value that your game uses.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardscore/context"
+      },
+      "leaderboardID": {
+        "doc": "The ID that Game Center uses for the leaderboard.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardscore/leaderboardid"
+      },
+      "player": {
+        "doc": "The player who earns the score.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardscore/player"
+      },
+      "value": {
+        "doc": "The score that the player earns.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardscore/value"
+      }
+    },
+    "GKLeaderboardSet": {
+      "groupIdentifier": {
+        "doc": "The identifier for the group that the leaderboard set belongs to.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardset/groupidentifier"
+      },
+      "identifier": {
+        "doc": "The identifier for the leaderboard set.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardset/identifier"
+      },
+      "title": {
+        "doc": "The localized title for the leaderboard set.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardset/title"
+      }
+    },
+    "GKLeaderboardViewController": {
+      "category": {
+        "doc": "The named leaderboard that is displayed by the view controller.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardviewcontroller/category"
+      },
+      "leaderboardDelegate": {
+        "doc": "The view controller’s delegate.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardviewcontroller/leaderboarddelegate"
+      },
+      "timeScope": {
+        "doc": "A time filter used to restrict which scores are displayed to the player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkleaderboardviewcontroller/timescope"
+      }
+    },
+    "GKLocalPlayer": {
+      "authenticateHandler": {
+        "doc": "A handler that GameKit calls while initializing the local player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/authenticatehandler"
+      },
+      "authenticated": {
+        "doc": "A Boolean value that indicates whether a local player has signed in to Game Center.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/isauthenticated"
+      },
+      "isPresentingFriendRequestViewController": {
+        "doc": "A Boolean value that indicates whether your game presents the friends request view controller.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/ispresentingfriendrequestviewcontroller"
+      },
+      "local": {
+        "doc": "The shared instance of the local player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/local-1mzi0"
+      },
+      "localPlayer": {
+        "doc": "The shared instance of the local player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/local-oaa8"
+      },
+      "multiplayerGamingRestricted": {
+        "doc": "A Boolean value that indicates whether the player can join multiplayer games.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/ismultiplayergamingrestricted"
+      },
+      "personalizedCommunicationRestricted": {
+        "doc": "A Boolean value that indicates whether the player can use personalized communication on the device.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/ispersonalizedcommunicationrestricted"
+      },
+      "underage": {
+        "doc": "A Boolean value that indicates whether the local player is underage.",
+        "url": "https://developer.apple.com/documentation/gamekit/gklocalplayer/isunderage"
+      }
+    },
+    "GKMatch": {
+      "GKMatchSendDataMode": {
+        "doc": "The mechanism used to transmit data to other players.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatch/senddatamode"
+      },
+      "delegate": {
+        "doc": "The delegate that handles communication between players in a match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatch/delegate"
+      },
+      "expectedPlayerCount": {
+        "doc": "The remaining number of players invited but not yet connected to the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatch/expectedplayercount"
+      },
+      "playerIDs": {
+        "doc": "The player identifiers for remote players in the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatch/playerids"
+      },
+      "playerProperties": {
+        "doc": "The properties for other players that matchmaking rules uses to find players, with some additions.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatch/playerproperties"
+      },
+      "players": {
+        "doc": "The players that join the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatch/players"
+      },
+      "properties": {
+        "doc": "The local player’s properties that matchmaking rules used to find the players with some additions.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatch/properties"
+      }
+    },
+    "GKMatchRequest": {
+      "defaultNumberOfPlayers": {
+        "doc": "The default number of players for the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest/defaultnumberofplayers"
+      },
+      "inviteMessage": {
+        "doc": "The message sent to other players when the local player invites them to join a match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest/invitemessage"
+      },
+      "inviteeResponseHandler": {
+        "doc": "Handles when a player responds to an invitation.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest/inviteeresponsehandler"
+      },
+      "maxPlayers": {
+        "doc": "The maximum number of players that can join the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest/maxplayers"
+      },
+      "minPlayers": {
+        "doc": "The minimum number of players that can join the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest/minplayers"
+      },
+      "playerAttributes": {
+        "doc": "A mask that specifies the role that the local player would like to play in the game.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest/playerattributes"
+      },
+      "playerGroup": {
+        "doc": "A number identifying a subset of players invited to join a match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest/playergroup"
+      },
+      "playersToInvite": {
+        "doc": "A list of player identifiers for players to invite to the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest/playerstoinvite"
+      },
+      "properties": {
+        "doc": "The criteria for the local player that Game Center uses to find other players when using matchmaking rules.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest/properties"
+      },
+      "queueName": {
+        "doc": "The name of the queue that Game Center places the match request in.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest/queuename"
+      },
+      "recipientProperties": {
+        "doc": "The criteria for recipients of the match request that Game Center uses to find other players when using matchmaking rules.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest/recipientproperties"
+      },
+      "recipientResponseHandler": {
+        "doc": "A method that handles when a player responds to an invitation to join a match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest/recipientresponsehandler"
+      },
+      "recipients": {
+        "doc": "The players to invite to the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest/recipients"
+      },
+      "restrictToAutomatch": {
+        "doc": "A Boolean value that determines whether a game uses automatch to find players or the local player invites players.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchrequest/restricttoautomatch"
+      }
+    },
+    "GKMatchedPlayers": {
+      "playerProperties": {
+        "doc": "The properties for other players that matchmaking rules uses to find players, with some additions.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchedplayers/playerproperties"
+      },
+      "players": {
+        "doc": "The players that join the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchedplayers/players"
+      },
+      "properties": {
+        "doc": "The local player’s properties that matchmaking rules uses to find the players, with some additions.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchedplayers/properties"
+      }
+    },
+    "GKMatchmakerViewController": {
+      "canStartWithMinimumPlayers": {
+        "doc": "A Boolean value that indicates whether your game can start after a minimum number of players join a match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakerviewcontroller/canstartwithminimumplayers"
+      },
+      "defaultInvitationMessage": {
+        "doc": "The default invitation message sent to a player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakerviewcontroller/defaultinvitationmessage"
+      },
+      "hosted": {
+        "doc": "A Boolean value that indicates whether the match is hosted or peer-to-peer.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakerviewcontroller/ishosted"
+      },
+      "matchRequest": {
+        "doc": "The configuration for the desired match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakerviewcontroller/matchrequest"
+      },
+      "matchmakerDelegate": {
+        "doc": "The object that handles matchmaker view controller changes.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakerviewcontroller/matchmakerdelegate"
+      },
+      "matchmakingMode": {
+        "doc": "The mode that a multiplayer game uses to find players.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkmatchmakerviewcontroller/matchmakingmode"
+      }
+    },
+    "GKPlayer": {
+      "GKPhotoSize": {
+        "doc": "The size of a photo that Game Center loads.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkplayer/photosize"
+      },
+      "alias": {
+        "doc": "A string the player chooses to identify themself to other players.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkplayer/alias"
+      },
+      "displayName": {
+        "doc": "A string to display for the player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkplayer/displayname"
+      },
+      "gamePlayerID": {
+        "doc": "A unique identifier for a player of the game.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkplayer/gameplayerid"
+      },
+      "guestIdentifier": {
+        "doc": "A developer-created string that identifies a guest player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkplayer/guestidentifier"
+      },
+      "isFriend": {
+        "doc": "A Boolean value that indicates whether the player is a friend of the local player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkplayer/isfriend"
+      },
+      "isInvitable": {
+        "doc": "A Boolean value that indicates whether the local player can send an invitation to the player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkplayer/isinvitable"
+      },
+      "playerID": {
+        "doc": "A unique identifier for a player of the game.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkplayer/playerid"
+      },
+      "teamPlayerID": {
+        "doc": "A unique identifier for a player of all the games that you distribute using your developer account.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkplayer/teamplayerid"
+      }
+    },
+    "GKSavedGame": {
+      "deviceName": {
+        "doc": "The name of the device that the player uses to save the game.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksavedgame/devicename"
+      },
+      "modificationDate": {
+        "doc": "The date when you saved the game data or modified it.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksavedgame/modificationdate"
+      },
+      "name": {
+        "doc": "The name of the saved game.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksavedgame/name"
+      }
+    },
+    "GKScore": {
+      "category": {
+        "doc": "The leaderboard that this score belongs to.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/category"
+      },
+      "context": {
+        "doc": "An integer value used by your game.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/context"
+      },
+      "date": {
+        "doc": "The date and time when the score was earned.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/date"
+      },
+      "formattedValue": {
+        "doc": "Returns the player’s score as a localized string.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/formattedvalue"
+      },
+      "leaderboardIdentifier": {
+        "doc": "The identifier for the leaderboard.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/leaderboardidentifier"
+      },
+      "player": {
+        "doc": "The player who earned the score.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/player"
+      },
+      "playerID": {
+        "doc": "The player identifier for the player that earned the score.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/playerid"
+      },
+      "rank": {
+        "doc": "The position of the score in the results of a leaderboard search.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/rank"
+      },
+      "shouldSetDefaultLeaderboard": {
+        "doc": "A Boolean value that indicates whether this score should also update the default leaderboard.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/shouldsetdefaultleaderboard"
+      },
+      "value": {
+        "doc": "The score earned by the player.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscore/value"
+      }
+    },
+    "GKScoreChallenge": {
+      "leaderboardEntry": {
+        "doc": "The challenger’s leaderboard score that the player must beat.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscorechallenge/leaderboardentry"
+      },
+      "score": {
+        "doc": "The challenger’s leaderboard score that the player must beat.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkscorechallenge/score"
+      }
+    },
+    "GKSession": {
+      "available": {
+        "doc": "A Boolean value that determines whether or not the session wants to connect to new peers.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/isavailable"
+      },
+      "delegate": {
+        "doc": "The delegate of the session object.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/delegate"
+      },
+      "disconnectTimeout": {
+        "doc": "A time interval that expresses how long the session waits before it disconnects a nonresponsive peer.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/disconnecttimeout"
+      },
+      "displayName": {
+        "doc": "The name of the user.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/displayname"
+      },
+      "peerID": {
+        "doc": "A string that identifies your session to other peers.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/peerid"
+      },
+      "sessionID": {
+        "doc": "A string used to filter the list of peers who are allowed to see your session.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/sessionid"
+      },
+      "sessionMode": {
+        "doc": "The mode the session uses to find other peers.",
+        "url": "https://developer.apple.com/documentation/gamekit/gksession/sessionmode"
+      }
+    },
+    "GKTurnBasedEventHandler": {
+      "delegate": {
+        "doc": "The delegate for the event handler.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedeventhandler/delegate"
+      }
+    },
+    "GKTurnBasedExchange": {
+      "completionDate": {
+        "doc": "The date when all recipients of the exchange request reply.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchange/completiondate"
+      },
+      "data": {
+        "doc": "The game-specific exchange data that GameKit sends to participants.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchange/data"
+      },
+      "exchangeID": {
+        "doc": "The identifier for the exchange request.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchange/exchangeid"
+      },
+      "message": {
+        "doc": "A localized message from the sender to the recipients of an exchange request.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchange/message"
+      },
+      "recipients": {
+        "doc": "The participants who receives the exchange request.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchange/recipients"
+      },
+      "replies": {
+        "doc": "The replies from recipients of the exchange request.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchange/replies"
+      },
+      "sendDate": {
+        "doc": "The date that the sender initiates the exchange request.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchange/senddate"
+      },
+      "sender": {
+        "doc": "The participant who sends the exchange request to recipients.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchange/sender"
+      },
+      "status": {
+        "doc": "The status of the exchange request.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchange/status"
+      },
+      "timeoutDate": {
+        "doc": "The date that the recipients must reply by before the exchange request times out.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchange/timeoutdate"
+      }
+    },
+    "GKTurnBasedExchangeReply": {
+      "data": {
+        "doc": "The game-specific data that the recipent provides in the exchange request reply.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchangereply/data"
+      },
+      "message": {
+        "doc": "A message from the recipient to the sender of the exchange request.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchangereply/message"
+      },
+      "recipient": {
+        "doc": "The participant who replies to the exchange request.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchangereply/recipient"
+      },
+      "replyDate": {
+        "doc": "The date the recipient replies to the exchange request.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedexchangereply/replydate"
+      }
+    },
+    "GKTurnBasedMatch": {
+      "GKTurnBasedMatchOutcome": {
+        "doc": "The state of a participant when they forfeit a match or when a match ends.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/outcome"
+      },
+      "GKTurnBasedMatchStatus": {
+        "doc": "The states of a match from when it’s created to when it ends.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/status-swift.enum"
+      },
+      "activeExchanges": {
+        "doc": "The exchanges that the local player needs to accept or reject.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/activeexchanges"
+      },
+      "completedExchanges": {
+        "doc": "The exchange requests that all recipients replied to and the current participant needs to save.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/completedexchanges"
+      },
+      "creationDate": {
+        "doc": "The date that Game Center created the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/creationdate"
+      },
+      "currentParticipant": {
+        "doc": "The participant whose turn it is.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/currentparticipant"
+      },
+      "exchangeDataMaximumSize": {
+        "doc": "The maximum size of the exchange data.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/exchangedatamaximumsize"
+      },
+      "exchangeMaxInitiatedExchangesPerPlayer": {
+        "doc": "The maximum number of exchanges the local player can initiate.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/exchangemaxinitiatedexchangesperplayer"
+      },
+      "exchanges": {
+        "doc": "The exchange requests that are active or complete.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/exchanges"
+      },
+      "matchData": {
+        "doc": "The game-specific data that you store in Game Center and pass between participants through a match object.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/matchdata"
+      },
+      "matchDataMaximumSize": {
+        "doc": "The maximum size of the match data.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/matchdatamaximumsize"
+      },
+      "matchID": {
+        "doc": "A unique identifier for the turn-based match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/matchid"
+      },
+      "message": {
+        "doc": "A message from the current participant to all other participants when you end a turn, forfeit a match, or end a match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/message"
+      },
+      "participants": {
+        "doc": "The players that participate in a turn-based match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/participants"
+      },
+      "status": {
+        "doc": "The state of the match, such as whether the match is open or has ended.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatch/status-swift.property"
+      }
+    },
+    "GKTurnBasedMatchmakerViewController": {
+      "matchmakingMode": {
+        "doc": "The mode that a multiplayer game uses to find players.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatchmakerviewcontroller/matchmakingmode"
+      },
+      "showExistingMatches": {
+        "doc": "A Boolean value that determines whether the view controller shows existing matches.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatchmakerviewcontroller/showexistingmatches"
+      },
+      "turnBasedMatchmakerDelegate": {
+        "doc": "The object that handles turn-based matchmaker view controller changes.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedmatchmakerviewcontroller/turnbasedmatchmakerdelegate"
+      }
+    },
+    "GKTurnBasedParticipant": {
+      "GKTurnBasedParticipantStatus": {
+        "doc": "The state the participant is in during the match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedparticipant/status-swift.enum"
+      },
+      "lastTurnDate": {
+        "doc": "The date and time that this participant last took a turn in the game.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedparticipant/lastturndate"
+      },
+      "matchOutcome": {
+        "doc": "The conclusion or results of a participant in a match.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedparticipant/matchoutcome"
+      },
+      "player": {
+        "doc": "The player object containing the participant details.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedparticipant/player"
+      },
+      "playerID": {
+        "doc": "The player identifier for this participant.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedparticipant/playerid"
+      },
+      "status": {
+        "doc": "The status of the participant.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedparticipant/status-swift.property"
+      },
+      "timeoutDate": {
+        "doc": "The date and time that the participant’s turn timed out.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkturnbasedparticipant/timeoutdate"
+      }
+    },
+    "GKVoiceChat": {
+      "GKVoiceChatPlayerState": {
+        "doc": "The state of a player in a voice chat.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechat/playerstate"
+      },
+      "active": {
+        "doc": "A Boolean value that indicates whether the channel is sampling the microphone.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechat/isactive"
+      },
+      "name": {
+        "doc": "The name of the voice chat channel.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechat/name"
+      },
+      "playerIDs": {
+        "doc": "An array of strings containing the player identifiers for the players connected to the channel.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechat/playerids"
+      },
+      "playerStateUpdateHandler": {
+        "doc": "Handles when a player in the chat changes state.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechat/playerstateupdatehandler"
+      },
+      "playerVoiceChatStateDidChangeHandler": {
+        "doc": "A method that handles when a player’s voice chat changes state.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechat/playervoicechatstatedidchangehandler"
+      },
+      "players": {
+        "doc": "The players connected to the channel.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechat/players"
+      },
+      "volume": {
+        "doc": "The volume level for the channel.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechat/volume"
+      }
+    },
+    "GKVoiceChatService": {
+      "client": {
+        "doc": "An object that the voice chat service uses to communicate with remote participants.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice/client"
+      },
+      "inputMeterLevel": {
+        "doc": "The volume, in decibels (db), being received by the microphone.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice/inputmeterlevel"
+      },
+      "inputMeteringEnabled": {
+        "doc": "A Boolean value that indicates whether the microphone’s sound level is being monitored.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice/isinputmeteringenabled"
+      },
+      "microphoneMuted": {
+        "doc": "A Boolean value that determines whether the user’s microphone is muted.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice/ismicrophonemuted"
+      },
+      "outputMeterLevel": {
+        "doc": "The volume, in decibels (db), being received from all other participants.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice/outputmeterlevel"
+      },
+      "outputMeteringEnabled": {
+        "doc": "A Boolean value that indicates whether the voice level of remote participants is monitored.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice/isoutputmeteringenabled"
+      },
+      "remoteParticipantVolume": {
+        "doc": "A float that scales the volume of all remote participants.",
+        "url": "https://developer.apple.com/documentation/gamekit/gkvoicechatservice/remoteparticipantvolume"
+      }
+    }
+  }
+}

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A structure that represents the properties of a specific point along a stroke’s path.
+//
 // StrokePoint wraps [raw.PKStrokePoint] with a fluent Go API.
 type StrokePoint struct {
 	inner *raw.PKStrokePoint

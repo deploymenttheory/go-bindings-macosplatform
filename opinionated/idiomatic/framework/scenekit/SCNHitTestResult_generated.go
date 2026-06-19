@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Information about the result of a scene-space or view-space search for scene elements.
+//
 // HitTestResult wraps [raw.SCNHitTestResult] with a fluent Go API.
 type HitTestResult struct {
 	inner *raw.SCNHitTestResult
@@ -38,7 +40,7 @@ func NewHitTestResult() *HitTestResult {
 	return &HitTestResult{inner: raw.SCNHitTestResultFromID(_id)}
 }
 
-// @method textureCoordinatesWithMappingChannel: @abstract Returns the texture coordinates at the point of intersection, for a given mapping channel. @param channel The texture coordinates source index of the geometry to use. The channel must exists on the geometry otherwise {0,0} will be returned.
+// Returns the texture coordinates at the point of intersection for the specified texture mapping channel.
 //
 // TextureCoordinatesWithMappingChannel calls the underlying TextureCoordinatesWithMappingChannel.
 func (x *HitTestResult) TextureCoordinatesWithMappingChannel(channel int) corefoundation.CGPoint {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An image-analysis request that finds and recognizes text in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnrecognizetextrequest
 type VNRecognizeTextRequest struct {
 	VNImageBasedRequest
@@ -45,45 +47,57 @@ func VNRecognizeTextRequestFromID(id objc.ID) *VNRecognizeTextRequest {
 	return o
 }
 
-// @brief Returns all the supported languages for a given text recognition level. Note that a language supported in one recognition level might not be available in another.
+// Requests a list of languages that the specified revision recognizes.
 // Deprecated: since macOS 12.0.
 func VNRecognizeTextRequestSupportedRecognitionLanguagesForTextRecognitionLevelRevisionError(recognitionLevel VNRequestTextRecognitionLevel, requestRevision uint) (*foundation.NSArray[*foundation.NSString], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsVNRecognizeTextRequest), _vNRecognizeTextRequestSelSupportedRecognitionLanguagesForTextRecognitionLevelRevisionError, recognitionLevel, requestRevision, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsVNRecognizeTextRequest), _vNRecognizeTextRequestSelSupportedRecognitionLanguagesForTextRecognitionLevelRevisionError, recognitionLevel, requestRevision, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[*foundation.NSString](_ret), nil
 }
 
-// @brief Obtain the collection of supported recognition languages. @discussion This method will return the collection of all possible language identifiers that are recognized by the target request based on its current state of configuration at the time of the call. @param error The address of the variable that will be populated with the error if the call fails. @return The collection of language identifiers, or nil if a failure occurs.
+// Returns the identifiers of the languages that the request supports.
 func (o *VNRecognizeTextRequest) SupportedRecognitionLanguagesAndReturnError() (*foundation.NSArray[*foundation.NSString], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNRecognizeTextRequestSelSupportedRecognitionLanguagesAndReturnError, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizeTextRequestSelSupportedRecognitionLanguagesAndReturnError, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[*foundation.NSString](_ret), nil
 }
 
 // @brief Specify the languages used for the detection. The order of the languages in the array defines the order in which languages will be used during the language processing. The languages are specified as ISO language codes.
 func (o *VNRecognizeTextRequest) RecognitionLanguages() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNRecognizeTextRequestSelRecognitionLanguages)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizeTextRequestSelRecognitionLanguages)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *VNRecognizeTextRequest) SetRecognitionLanguages(recognitionLanguages *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_vNRecognizeTextRequestSelSetRecognitionLanguages, recognitionLanguages)
+	o.Ptr().Send(_vNRecognizeTextRequestSelSetRecognitionLanguages, recognitionLanguages.Ptr())
 }
 
 // @brief An array of strings that will be used at the word recognition stage in addition to the recognition languages. The customWords list takes precedence over the standard lexicon.
 func (o *VNRecognizeTextRequest) CustomWords() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNRecognizeTextRequestSelCustomWords)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizeTextRequestSelCustomWords)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *VNRecognizeTextRequest) SetCustomWords(customWords *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_vNRecognizeTextRequestSelSetCustomWords, customWords)
+	o.Ptr().Send(_vNRecognizeTextRequestSelSetCustomWords, customWords.Ptr())
 }
 
 // @brief The recognition level selects which techniques will be used during the text recognition. There are trade-offs between performance and accuracy.

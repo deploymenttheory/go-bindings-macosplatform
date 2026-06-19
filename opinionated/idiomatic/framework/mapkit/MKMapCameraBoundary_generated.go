@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A boundary of an area within which the map’s center needs to remain.
+//
 // MapCameraBoundary wraps [raw.MKMapCameraBoundary] with a fluent Go API.
 type MapCameraBoundary struct {
 	inner *raw.MKMapCameraBoundary

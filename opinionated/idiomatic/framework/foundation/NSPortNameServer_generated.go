@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object-oriented interface to the port registration service used by the distributed objects system.
+//
 // PortNameServer wraps [raw.NSPortNameServer] with a fluent Go API.
 type PortNameServer struct {
 	inner *raw.NSPortNameServer
@@ -42,6 +44,8 @@ func (x *PortNameServer) WithScriptingProperties(scriptingProperties *raw.NSDict
 	return x
 }
 
+// Looks up and returns the port registered under the specified name on the local host.
+//
 // PortForName calls the underlying PortForName.
 func (x *PortNameServer) PortForName(name string) *Port {
 	_r := x.inner.PortForName(foundation.NSStringStringWithUTF8String(name))
@@ -51,6 +55,8 @@ func (x *PortNameServer) PortForName(name string) *Port {
 	return &Port{inner: _r}
 }
 
+// Looks up and returns the port registered under the specified name on a specified host.
+//
 // PortForNameHost calls the underlying PortForNameHost.
 func (x *PortNameServer) PortForNameHost(name string, host string) *Port {
 	_r := x.inner.PortForNameHost(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(host))
@@ -60,11 +66,15 @@ func (x *PortNameServer) PortForNameHost(name string, host string) *Port {
 	return &Port{inner: _r}
 }
 
+// Makes a given port available on the network under a specified name.
+//
 // RegisterPortName calls the underlying RegisterPortName.
 func (x *PortNameServer) RegisterPortName(port *raw.NSPort, name string) bool {
 	return x.inner.RegisterPortName(port, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Unregisters the port for a given name on the local host.
+//
 // RemovePortForName calls the underlying RemovePortForName.
 func (x *PortNameServer) RemovePortForName(name string) bool {
 	return x.inner.RemovePortForName(foundation.NSStringStringWithUTF8String(name))

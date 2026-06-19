@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for a double value associated with an intent.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/indoubleresolutionresult
 type INDoubleResolutionResult struct {
 	INIntentResolutionResult
@@ -31,6 +33,7 @@ func INDoubleResolutionResultFromID(id objc.ID) *INDoubleResolutionResult {
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified value.
 func INDoubleResolutionResultSuccessWithResolvedValue(resolvedValue float64) *INDoubleResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINDoubleResolutionResult), _iNDoubleResolutionResultSelSuccessWithResolvedValue, resolvedValue)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func INDoubleResolutionResultSuccessWithResolvedValue(resolvedValue float64) *IN
 	return INDoubleResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INDoubleResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm *foundation.NSNumber) *INDoubleResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINDoubleResolutionResult), _iNDoubleResolutionResultSelConfirmationRequiredWithValueToConfirm, valueToConfirm.Ptr())
 	if _ret != 0 {

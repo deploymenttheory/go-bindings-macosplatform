@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A point of interest on the map.
+//
 // MapItem wraps [raw.MKMapItem] with a fluent Go API.
 type MapItem struct {
 	inner *raw.MKMapItem
@@ -32,6 +34,8 @@ func MapItemFromID(id objc.ID) *MapItem {
 	return &MapItem{inner: raw.MKMapItemFromID(id)}
 }
 
+// Creates and returns a map item object using the specified placemark object.
+//
 // NewMapItemWithPlacemark creates a new [MapItem].
 func NewMapItemWithPlacemark(placemark *raw.MKPlacemark) *MapItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapItem")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewMapItemWithPlacemark(placemark *raw.MKPlacemark) *MapItem {
 	return &MapItem{inner: raw.MKMapItemFromID(_id)}
 }
 
+// Creates and returns a map item object using the specified location and address objects.
+//
 // NewMapItemWithLocationAddress creates a new [MapItem].
 func NewMapItemWithLocationAddress(location unsafe.Pointer, address *raw.MKAddress) *MapItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapItem")), objc.RegisterName("alloc"))
@@ -46,41 +52,55 @@ func NewMapItemWithLocationAddress(location unsafe.Pointer, address *raw.MKAddre
 	return &MapItem{inner: raw.MKMapItemFromID(_id)}
 }
 
+// The descriptive name associated with the map item.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *MapItem) WithName(name string) *MapItem {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// The phone number associated with a business at the specified location.
+//
 // WithPhoneNumber sets the phoneNumber property and returns the receiver for chaining.
 func (x *MapItem) WithPhoneNumber(phoneNumber string) *MapItem {
 	x.inner.SetPhoneNumber(foundation.NSStringStringWithUTF8String(phoneNumber))
 	return x
 }
 
+// The URL associated with the specified location.
+//
 // WithUrl sets the url property and returns the receiver for chaining.
 func (x *MapItem) WithUrl(url string) *MapItem {
 	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 	return x
 }
 
+// The time zone of the specified location.
+//
 // WithTimeZone sets the timeZone property and returns the receiver for chaining.
 func (x *MapItem) WithTimeZone(timeZone *foundation.NSTimeZone) *MapItem {
 	x.inner.SetTimeZone(timeZone)
 	return x
 }
 
+// The point-of-interest category for the map item.
+//
 // WithPointOfInterestCategory sets the pointOfInterestCategory property and returns the receiver for chaining.
 func (x *MapItem) WithPointOfInterestCategory(pointOfInterestCategory *foundation.NSString) *MapItem {
 	x.inner.SetPointOfInterestCategory(pointOfInterestCategory)
 	return x
 }
 
+// Opens the Maps app and displays the map item.
+//
 // OpenInMapsWithLaunchOptions calls the underlying OpenInMapsWithLaunchOptions.
 func (x *MapItem) OpenInMapsWithLaunchOptions(launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
 	return x.inner.OpenInMapsWithLaunchOptions(launchOptions)
 }
 
+// Opens the Maps app and displays the map item.
+//
 // OpenInMapsWithLaunchOptionsCompletionHandler calls the underlying OpenInMapsWithLaunchOptionsCompletionHandler.
 func (x *MapItem) OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool)) {
 	x.inner.OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions, completion)

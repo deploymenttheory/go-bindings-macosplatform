@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bilinear resizing filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnresizebilinear
 type MPSNNResizeBilinear struct {
 	mpsneuralnetwork.MPSCNNKernel

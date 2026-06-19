@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An amount of money to transfer during a financial transaction.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/incurrencyamount
 type INCurrencyAmount struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func INCurrencyAmountFromID(id objc.ID) *INCurrencyAmount {
 	return o
 }
 
+// Initializes a currency amount object with the specified values.
 func (o *INCurrencyAmount) InitWithAmountCurrencyCode(amount *foundation.NSDecimalNumber, currencyCode *foundation.NSString) *INCurrencyAmount {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCurrencyAmountSelInitWithAmountCurrencyCode, amount.Ptr(), currencyCode.Ptr())
 	if _ret != 0 {

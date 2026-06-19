@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a gradient exponential neuron filter.
+//
 // CNNNeuronGradientNode wraps [raw.MPSCNNNeuronGradientNode] with a fluent Go API.
 type CNNNeuronGradientNode struct {
 	inner *raw.MPSCNNNeuronGradientNode

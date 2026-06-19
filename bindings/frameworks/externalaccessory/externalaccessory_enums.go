@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// The error codes that may be passed in an error object for the Bluetooth picker completion block.
 type EABluetoothAccessoryPickerErrorCode int64
 
 const (
@@ -32,13 +33,18 @@ func (e EABluetoothAccessoryPickerErrorCode) String() string {
 	}
 }
 
+// The possible states of an accessory browser.
 type EAWiFiUnconfiguredAccessoryBrowserState int64
 
 const (
+	// Wi-Fi is unavailable, typically because the user has placed the device in Airplane Mode or explicitly turned off Wi-Fi.
 	EAWiFiUnconfiguredAccessoryBrowserStateWiFiUnavailable EAWiFiUnconfiguredAccessoryBrowserState = 0
-	EAWiFiUnconfiguredAccessoryBrowserStateStopped         EAWiFiUnconfiguredAccessoryBrowserState = 1
-	EAWiFiUnconfiguredAccessoryBrowserStateSearching       EAWiFiUnconfiguredAccessoryBrowserState = 2
-	EAWiFiUnconfiguredAccessoryBrowserStateConfiguring     EAWiFiUnconfiguredAccessoryBrowserState = 3
+	// The browser is not actively searching for unconfigured accessories.
+	EAWiFiUnconfiguredAccessoryBrowserStateStopped EAWiFiUnconfiguredAccessoryBrowserState = 1
+	// The browser is actively searching for unconfigured accessory.
+	EAWiFiUnconfiguredAccessoryBrowserStateSearching EAWiFiUnconfiguredAccessoryBrowserState = 2
+	// The browser is actively configuring an accessory.
+	EAWiFiUnconfiguredAccessoryBrowserStateConfiguring EAWiFiUnconfiguredAccessoryBrowserState = 3
 )
 
 func (e EAWiFiUnconfiguredAccessoryBrowserState) String() string {
@@ -56,12 +62,16 @@ func (e EAWiFiUnconfiguredAccessoryBrowserState) String() string {
 	}
 }
 
+// Values that represent the state of the configuration process for an EAWiFiUnconfiguredAccessory object.
 type EAWiFiUnconfiguredAccessoryConfigurationStatus int64
 
 const (
-	EAWiFiUnconfiguredAccessoryConfigurationStatusSuccess                    EAWiFiUnconfiguredAccessoryConfigurationStatus = 0
+	// The configuration of the accessory succeeded.
+	EAWiFiUnconfiguredAccessoryConfigurationStatusSuccess EAWiFiUnconfiguredAccessoryConfigurationStatus = 0
+	// The user cancelled the configuration process.
 	EAWiFiUnconfiguredAccessoryConfigurationStatusUserCancelledConfiguration EAWiFiUnconfiguredAccessoryConfigurationStatus = 1
-	EAWiFiUnconfiguredAccessoryConfigurationStatusFailed                     EAWiFiUnconfiguredAccessoryConfigurationStatus = 2
+	// The configuration failed.
+	EAWiFiUnconfiguredAccessoryConfigurationStatusFailed EAWiFiUnconfiguredAccessoryConfigurationStatus = 2
 )
 
 func (e EAWiFiUnconfiguredAccessoryConfigurationStatus) String() string {
@@ -77,12 +87,16 @@ func (e EAWiFiUnconfiguredAccessoryConfigurationStatus) String() string {
 	}
 }
 
+// Options that can be combined using the C bitwise OR operator to represent the properties of an unconfigured accessory.
 type EAWiFiUnconfiguredAccessoryProperties uint64
 
 const (
-	EAWiFiUnconfiguredAccessoryPropertySupportsAirPlay  EAWiFiUnconfiguredAccessoryProperties = 1
+	// The accessory indicates that it supports AirPlay.
+	EAWiFiUnconfiguredAccessoryPropertySupportsAirPlay EAWiFiUnconfiguredAccessoryProperties = 1
+	// The accessory indicates that it supports AirPrint.
 	EAWiFiUnconfiguredAccessoryPropertySupportsAirPrint EAWiFiUnconfiguredAccessoryProperties = 2
-	EAWiFiUnconfiguredAccessoryPropertySupportsHomeKit  EAWiFiUnconfiguredAccessoryProperties = 4
+	// The accessory indicates that it supports HomeKit.
+	EAWiFiUnconfiguredAccessoryPropertySupportsHomeKit EAWiFiUnconfiguredAccessoryProperties = 4
 )
 
 func (e EAWiFiUnconfiguredAccessoryProperties) String() string {

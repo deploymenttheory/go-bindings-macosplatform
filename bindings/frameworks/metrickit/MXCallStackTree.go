@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing the call stack for an exception.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxcallstacktree
 type MXCallStackTree struct {
 	foundation.NSObject
@@ -30,7 +32,7 @@ func MXCallStackTreeFromID(id objc.ID) *MXCallStackTree {
 	return o
 }
 
-// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this callstack tree. @discussion    The JSON structure of MXCallStackTree is organized into individual groups of call stacks. Individual call stacks contain stack frames, which consist of information needed to symbolicate the frame off device. This includes binary image name, binary UUID, offset in binary text segment, address, and sample count (for stack trees that contain temporally sampled data.) @discussion    MXCallStackTrees can be organized into a single callstack for the entire application, or broken up into callstacks associated with individual threads. @result        An NSData object containing the JSON representation
+// Returns the contents of the stack tree in JSON format.
 func (o *MXCallStackTree) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXCallStackTreeSelJSONRepresentation)
 	if _ret != 0 {

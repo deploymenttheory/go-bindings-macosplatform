@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that provides common data and methods for the different player objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkbaseplayer
 type GKBasePlayer struct {
 	foundation.NSObject

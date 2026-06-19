@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// The base class for data structures that are built over geometry and used to accelerate ray tracing.
+//
 // AccelerationStructure wraps [raw.MPSAccelerationStructure] with a fluent Go API.
 type AccelerationStructure struct {
 	inner *raw.MPSAccelerationStructure
@@ -78,7 +80,7 @@ func (x *AccelerationStructure) WithUsage(usage mpsrayintersector.MPSAcceleratio
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *AccelerationStructure) WithOptions(options mpscore.MPSKernelOptions) *AccelerationStructure {
@@ -86,7 +88,7 @@ func (x *AccelerationStructure) WithOptions(options mpscore.MPSKernelOptions) *A
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *AccelerationStructure) WithLabel(label string) *AccelerationStructure {

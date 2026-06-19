@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for planar angle and rotation.
+//
 // UnitAngle wraps [raw.NSUnitAngle] with a fluent Go API.
 type UnitAngle struct {
 	inner *raw.NSUnitAngle

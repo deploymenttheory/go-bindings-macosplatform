@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A kernel for computing the top-K values and their corresponding indices in a matrix.
+//
 // MatrixFindTopK wraps [raw.MPSMatrixFindTopK] with a fluent Go API.
 type MatrixFindTopK struct {
 	inner *raw.MPSMatrixFindTopK
@@ -112,7 +114,7 @@ func (x *MatrixFindTopK) WithBatchSize(batchSize uint) *MatrixFindTopK {
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixFindTopK) WithOptions(options mpscore.MPSKernelOptions) *MatrixFindTopK {
@@ -120,7 +122,7 @@ func (x *MatrixFindTopK) WithOptions(options mpscore.MPSKernelOptions) *MatrixFi
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixFindTopK) WithLabel(label string) *MatrixFindTopK {

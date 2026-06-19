@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A database partition that contains related records.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckrecordzone
 type CKRecordZone struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func CKRecordZoneFromID(id objc.ID) *CKRecordZone {
 	return o
 }
 
-// Returns the default record zone. Always use this method to retrieve the default zone for a database. You can use the returned object to specify the default zone for either the public or private database of a container. You don't need to save the returned zone object before using it. The owner of the zone is “CKOwnerDefaultName“, which corresponds to the current user. The default zone of a database is a convenient place to store and access records. If you don't explicitly assign a zone to a record, CloudKit puts the record in the default zone. The disadvantage of using the default zone for storing records is that it doesn't have any special capabilities. You can't save a group of records to iCloud atomically in the default zone. Similarly, you can't use a “CKFetchRecordChangesOperation“ object on records in the default zone.
+// Returns the default record zone.
 func CKRecordZoneDefaultRecordZone() *CKRecordZone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCKRecordZone), _cKRecordZoneSelDefaultRecordZone)
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func CKRecordZoneDefaultRecordZone() *CKRecordZone {
 	return CKRecordZoneFromID(_ret)
 }
 
-// Creates a record zone object with the specified zone name. - Parameters: - zoneName: The name of the new zone. Zone names inside a user's private database are unique, consist of up to 255 ASCII characters, and don't start with an underscore. One way to satisfy the uniqueness of zone names is to create a string from a Universally Unique Identifier (UUID), but you can also use other techniques. If this parameter is `nil` or is an empty string, the method throws an exception. - Returns: The new custom zone. Use this method to create a new record zone. The new zone has the name you provide and the zone's owner is the current user. After creating the zone, save it to the server using a “CKModifyRecordZonesOperation“ object or the “CKDatabase/save(_:completionHandler:)-32ffr“ method of “CKDatabase“. You must save the zone to the server before you attempt to save any records to that zone. Don't use this method to create a `CKRecordZone` object that corresponds to a zone that already exists in the database. If the zone exists, fetch it using a “CKFetchRecordZonesOperation“ object or the “CKDatabase/fetch(withRecordZoneID:completionHandler:)“ method of “CKDatabase“.
+// Creates a record zone object with the specified zone name.
 func (o *CKRecordZone) InitWithZoneName(zoneName *foundation.NSString) *CKRecordZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordZoneSelInitWithZoneName, zoneName.Ptr())
 	if _ret != 0 {
@@ -55,7 +57,7 @@ func (o *CKRecordZone) InitWithZoneName(zoneName *foundation.NSString) *CKRecord
 	return CKRecordZoneFromID(_ret)
 }
 
-// Creates a record zone object with the specified zone ID. - Parameters: - zoneID: The ID for the new zone. This parameter must not be `nil`. - Returns: The custom record zone. Use this method when you want to create a new record zone from the information in a zone ID. After creating the zone, save it to the server using a “CKModifyRecordZonesOperation“ object or the “CKDatabase/save(_:completionHandler:)-32ffr“ method of “CKDatabase“. Don't use this method to create a “CKRecordZone“ object that corresponds to a zone that already exists in the database. If the zone exists, fetch it using a “CKFetchRecordZonesOperation“ object or the “CKDatabase/fetch(withRecordZoneID:completionHandler:)“ method of “CKDatabase“.
+// Creates a record zone object with the specified zone ID.
 func (o *CKRecordZone) InitWithZoneID(zoneID *CKRecordZoneID) *CKRecordZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKRecordZoneSelInitWithZoneID, zoneID.Ptr())
 	if _ret != 0 {

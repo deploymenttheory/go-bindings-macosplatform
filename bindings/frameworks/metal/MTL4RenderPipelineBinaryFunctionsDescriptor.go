@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Allows you to specify additional binary functions to link to each stage of a render pipeline.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4renderpipelinebinaryfunctionsdescriptor
 type MTL4RenderPipelineBinaryFunctionsDescriptor struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object containing seat information associated with a reservation.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inseat
 type INSeat struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func INSeatFromID(id objc.ID) *INSeat {
 	return o
 }
 
+// Creates a new seat object containing the required seat information.
 func (o *INSeat) InitWithSeatSectionSeatRowSeatNumberSeatingType(seatSection *foundation.NSString, seatRow *foundation.NSString, seatNumber *foundation.NSString, seatingType *foundation.NSString) *INSeat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSeatSelInitWithSeatSectionSeatRowSeatNumberSeatingType, seatSection.Ptr(), seatRow.Ptr(), seatNumber.Ptr(), seatingType.Ptr())
 	if _ret != 0 {

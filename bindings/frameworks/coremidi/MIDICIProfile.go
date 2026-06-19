@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mapping of MIDI messages to specific sounds and synthesis behaviors, such as General MIDI, a drawbar organ, and so on.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremidi/midiciprofile
 type MIDICIProfile struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func MIDICIProfileFromID(id objc.ID) *MIDICIProfile {
 	return o
 }
 
+// Creates a MIDI profile for the specified data.
 func (o *MIDICIProfile) InitWithData(data *foundation.NSData) *MIDICIProfile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIProfileSelInitWithData, data.Ptr())
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func (o *MIDICIProfile) InitWithData(data *foundation.NSData) *MIDICIProfile {
 	return MIDICIProfileFromID(_ret)
 }
 
+// Creates a named MIDI profile for the specified data.
 func (o *MIDICIProfile) InitWithDataName(data *foundation.NSData, inName *foundation.NSString) *MIDICIProfile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIProfileSelInitWithDataName, data.Ptr(), inName.Ptr())
 	if _ret != 0 {

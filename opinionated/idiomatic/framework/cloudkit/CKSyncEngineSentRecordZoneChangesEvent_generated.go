@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The sync engine finished sending a batch of record zone changes to the server.
+//
 // SyncEngineSentRecordZoneChangesEvent wraps [raw.CKSyncEngineSentRecordZoneChangesEvent] with a fluent Go API.
 type SyncEngineSentRecordZoneChangesEvent struct {
 	inner *raw.CKSyncEngineSentRecordZoneChangesEvent

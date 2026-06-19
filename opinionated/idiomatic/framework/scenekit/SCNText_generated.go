@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A geometry based on a string of text, optionally extruded to create a three-dimensional object.
+//
 // Text wraps [raw.SCNText] with a fluent Go API.
 type Text struct {
 	inner *raw.SCNText
@@ -40,7 +42,7 @@ func NewText() *Text {
 	return &Text{inner: raw.SCNTextFromID(_id)}
 }
 
-// @property extrusionDepth @abstract The extrusion depth. Animatable. @discussion If the value is 0, we get a mono-sided, 2D version of the text.
+// The extent of the extruded text in the z-axis direction. Animatable.
 //
 // WithExtrusionDepth sets the extrusionDepth property and returns the receiver for chaining.
 func (x *Text) WithExtrusionDepth(extrusionDepth float64) *Text {
@@ -48,7 +50,7 @@ func (x *Text) WithExtrusionDepth(extrusionDepth float64) *Text {
 	return x
 }
 
-// @property string @abstract The text to be represented. The text must be an instance of NSString or NSAttributedString. @discussion The default value is nil.
+// The string object whose text the geometry represents.
 //
 // WithString sets the string_ property and returns the receiver for chaining.
 func (x *Text) WithString(string_ objc.ID) *Text {
@@ -56,7 +58,7 @@ func (x *Text) WithString(string_ objc.ID) *Text {
 	return x
 }
 
-// @property font @abstract The font used to represent the text. @discussion The font property is only used when the string property is not an NSAttributedString. Defaults to the system font (12 point).
+// The font that SceneKit uses to create geometry from the text.
 //
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *Text) WithFont(font *appkit.NSFont) *Text {
@@ -64,7 +66,7 @@ func (x *Text) WithFont(font *appkit.NSFont) *Text {
 	return x
 }
 
-// @property wrapped @abstract Determines whether the text is wrapped to fit within the bounds. @discussion For the text to be wrapped you first need to set its bounds, otherwise the text is not wrapped. The default value is NO.
+// A Boolean value that specifies whether SceneKit wraps long lines of text.
 //
 // WithWrapped sets the wrapped property and returns the receiver for chaining.
 func (x *Text) WithWrapped(wrapped bool) *Text {
@@ -72,7 +74,7 @@ func (x *Text) WithWrapped(wrapped bool) *Text {
 	return x
 }
 
-// @property containerFrame @abstract A container within which the text may be wrapped or truncated. @discussion The text will start at the top-left corner of the rect. You need to set this property for text truncation or alignment to work. Getting this property when it has never been set returns CGRectZero.
+// A rectangle specifying the area in which SceneKit should lay out the text.
 //
 // WithContainerFrame sets the containerFrame property and returns the receiver for chaining.
 func (x *Text) WithContainerFrame(containerFrame corefoundation.CGRect) *Text {
@@ -80,7 +82,7 @@ func (x *Text) WithContainerFrame(containerFrame corefoundation.CGRect) *Text {
 	return x
 }
 
-// @property truncationMode @abstract Describes how the text is truncated to fit within the bounds. @discussion For the text to be truncated you first need to set its bounds, otherwise the text is not truncated. The default value is kCATruncationNone. See truncation modes in CATextLayer.h.
+// A constant that specifies how SceneKit truncates text that is too long to fit its container.
 //
 // WithTruncationMode sets the truncationMode property and returns the receiver for chaining.
 func (x *Text) WithTruncationMode(truncationMode string) *Text {
@@ -88,7 +90,7 @@ func (x *Text) WithTruncationMode(truncationMode string) *Text {
 	return x
 }
 
-// @property alignmentMode @abstract Determines how individual lines of text are horizontally aligned within the bounds. @discussion For the text to be aligned you first need to set its bounds, otherwise the text is not aligned. The default value is kCAAlignmentNatural. See alignments in CATextLayer.h.
+// A constant that specifies how SceneKit horizontally aligns each line of text within its container.
 //
 // WithAlignmentMode sets the alignmentMode property and returns the receiver for chaining.
 func (x *Text) WithAlignmentMode(alignmentMode string) *Text {
@@ -96,7 +98,7 @@ func (x *Text) WithAlignmentMode(alignmentMode string) *Text {
 	return x
 }
 
-// @property chamferRadius @abstract The chamfer radius. Animatable. @discussion Values are clamped to the range [0, extrusionDepth / 2]. The actual chamfer radius might be different to the one here specified: large values are clipped to a per-glyph max value. The default value is 0.
+// The width or depth of each chamfered edge. Animatable.
 //
 // WithChamferRadius sets the chamferRadius property and returns the receiver for chaining.
 func (x *Text) WithChamferRadius(chamferRadius float64) *Text {
@@ -104,7 +106,7 @@ func (x *Text) WithChamferRadius(chamferRadius float64) *Text {
 	return x
 }
 
-// @property chamferSegmentCount @abstract The number of chamfer subdivisions. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
+// The number of divisions SceneKit uses to create each chamfered edge of the text geometry. Animatable.
 //
 // WithChamferSegmentCount sets the chamferSegmentCount property and returns the receiver for chaining.
 func (x *Text) WithChamferSegmentCount(chamferSegmentCount int) *Text {
@@ -112,7 +114,7 @@ func (x *Text) WithChamferSegmentCount(chamferSegmentCount int) *Text {
 	return x
 }
 
-// @property chamferProfile @abstract Describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant. @discussion The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
+// A path that determines the cross-sectional contour of each chamfered edge.
 //
 // WithChamferProfile sets the chamferProfile property and returns the receiver for chaining.
 func (x *Text) WithChamferProfile(chamferProfile *appkit.NSBezierPath) *Text {
@@ -120,7 +122,7 @@ func (x *Text) WithChamferProfile(chamferProfile *appkit.NSBezierPath) *Text {
 	return x
 }
 
-// @property flatness @abstract Specifies the accuracy (or smoothness) with which fonts are rendered. @discussion Smaller numbers give smoother curves at the expense of more computation and heavier geometries in terms of vertices. The default value is 0.6, which yields smooth curves.
+// A number that determines the accuracy or smoothness of the text geometry.
 //
 // WithFlatness sets the flatness property and returns the receiver for chaining.
 func (x *Text) WithFlatness(flatness float64) *Text {
@@ -128,7 +130,7 @@ func (x *Text) WithFlatness(flatness float64) *Text {
 	return x
 }
 
-// @property name @abstract Determines the name of the receiver.
+// A name associated with the geometry object.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Text) WithName(name string) *Text {
@@ -136,7 +138,7 @@ func (x *Text) WithName(name string) *Text {
 	return x
 }
 
-// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+// An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 //
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Text) WithMaterials(items ...*raw.SCNMaterial) *Text {
@@ -159,7 +161,7 @@ func (x *Text) WithMaterials(items ...*raw.SCNMaterial) *Text {
 	return x
 }
 
-// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+// The first material attached to the geometry.
 //
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Text) WithFirstMaterial(firstMaterial *Material) *Text {
@@ -167,7 +169,7 @@ func (x *Text) WithFirstMaterial(firstMaterial *Material) *Text {
 	return x
 }
 
-// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+// An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 //
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Text) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Text {
@@ -196,7 +198,7 @@ func (x *Text) WithTessellator(tessellator *GeometryTessellator) *Text {
 	return x
 }
 
-// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+// The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 //
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Text) WithSubdivisionLevel(subdivisionLevel uint) *Text {
@@ -212,7 +214,7 @@ func (x *Text) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Text
 	return x
 }
 
-// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+// The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 //
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Text) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Text {
@@ -220,7 +222,7 @@ func (x *Text) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Text
 	return x
 }
 
-// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+// The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 //
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Text) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Text {

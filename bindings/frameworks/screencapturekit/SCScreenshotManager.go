@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance for the capture of single frames from a stream.
+//
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/scscreenshotmanager
 type SCScreenshotManager struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func SCScreenshotManagerFromID(id objc.ID) *SCScreenshotManager {
 	return o
 }
 
-// @abstract captureSampleBufferWithFilter:configuration:completionHandler: @param contentFilter is the filter containing the content to take a screenshot of @param config is the stream configuration containing information on how to format the screenshot @param completionHandler is the handler that will deliver the screenshot to the user @discussion this method takes a screenshot using the filter and configuration passed in and returns it as a CMSampleBuffer
+// Captures a single frame directly from a stream’s buffer, using a filter.
 func SCScreenshotManagerCaptureSampleBufferWithFilterConfigurationCompletionHandler(contentFilter *SCContentFilter, config *SCStreamConfiguration, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -49,7 +51,7 @@ func SCScreenshotManagerCaptureSampleBufferWithFilterConfigurationCompletionHand
 	objc.ID(_clsSCScreenshotManager).Send(_sCScreenshotManagerSelCaptureSampleBufferWithFilterConfigurationCompletionHandler, contentFilter.Ptr(), config.Ptr(), __block_completionHandler)
 }
 
-// @abstract captureImageWithFilter:configuration:completionHandler: @param contentFilter is the filter containing the content to take a screenshot of @param config is the stream configuration containing information on how to format the screenshot @param completionHandler is the handler that will deliver the screenshot to the user @discussion this method takes a screenshot using the filter and configuration passed in and returns it as a CGImage in BGRA format if captureDynamicRange is SCCaptureDynamicRangeSDR, in RGhA format if captureDynamicRange is SCCaptureDynamicRangeHDRLocalDisplay/SCCaptureDynamicRangeHDRCanonicalDisplay
+// Captures a single frame from a stream as an image, using a filter.
 func SCScreenshotManagerCaptureImageWithFilterConfigurationCompletionHandler(contentFilter *SCContentFilter, config *SCStreamConfiguration, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

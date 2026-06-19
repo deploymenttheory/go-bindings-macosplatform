@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An operation that converts user identities into share participants.
+//
 // FetchShareParticipantsOperation wraps [raw.CKFetchShareParticipantsOperation] with a fluent Go API.
 type FetchShareParticipantsOperation struct {
 	inner *raw.CKFetchShareParticipantsOperation
@@ -41,7 +43,7 @@ func NewFetchShareParticipantsOperation() *FetchShareParticipantsOperation {
 	return &FetchShareParticipantsOperation{inner: raw.CKFetchShareParticipantsOperationFromID(_id)}
 }
 
-// Creates an operation for generating share participants from the specified user data. - Parameters: - userIdentityLookupInfos: The user data for the participants. If you specify `nil`, you must assign a value to the “CKFetchShareParticipantsOperation/userIdentityLookupInfos“ property before you execute this operation. After you create the operation, assign a handler to the “CKFetchShareParticipantsOperation/fetchShareParticipantsCompletionBlock“ property to process the results.
+// Creates an operation for generating share participants from the specified user data.
 //
 // NewFetchShareParticipantsOperationWithUserIdentityLookupInfos creates a new [FetchShareParticipantsOperation].
 func NewFetchShareParticipantsOperationWithUserIdentityLookupInfos(userIdentityLookupInfos *foundation.NSArray[*raw.CKUserIdentityLookupInfo]) *FetchShareParticipantsOperation {
@@ -50,7 +52,7 @@ func NewFetchShareParticipantsOperationWithUserIdentityLookupInfos(userIdentityL
 	return &FetchShareParticipantsOperation{inner: raw.CKFetchShareParticipantsOperationFromID(_id)}
 }
 
-// The user data for the participants. Use this property to view or change the participants user data. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue. - Note: If you don't set “CKFetchShareParticipantsOperation/userIdentityLookupInfos“ prior to executing the operation, it returns immediately with no results.
+// The user data for the participants.
 //
 // WithUserIdentityLookupInfos sets the collection, converting the Go slice to an NSArray.
 func (x *FetchShareParticipantsOperation) WithUserIdentityLookupInfos(items ...*raw.CKUserIdentityLookupInfo) *FetchShareParticipantsOperation {
@@ -73,7 +75,7 @@ func (x *FetchShareParticipantsOperation) WithUserIdentityLookupInfos(items ...*
 	return x
 }
 
-// The closure to execute as the operation generates individual participants. The closure returns no value and takes the following parameters: - The participant that the operation generates. The operation executes this closure once for each item of user data in the “CKFetchShareParticipantsOperation/userIdentityLookupInfos“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute as the operation generates individual participants.
 //
 // WithShareParticipantFetchedBlock sets the shareParticipantFetchedBlock property and returns the receiver for chaining.
 func (x *FetchShareParticipantsOperation) WithShareParticipantFetchedBlock(shareParticipantFetchedBlock func(*raw.CKShareParticipant)) *FetchShareParticipantsOperation {
@@ -81,7 +83,7 @@ func (x *FetchShareParticipantsOperation) WithShareParticipantFetchedBlock(share
 	return x
 }
 
-// The closure to execute as the operation generates individual participants. The closure returns no value and takes the following parameters: - The lookup info of the share participant. - The generated share participant, or `nil` if CloudKit can't generate the share participant. - If CloudKit can't generate the share participant, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each item of user data in the “CKFetchShareParticipantsOperation/userIdentityLookupInfos“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute as the operation generates individual participants.
 //
 // WithPerShareParticipantCompletionBlock sets the perShareParticipantCompletionBlock property and returns the receiver for chaining.
 func (x *FetchShareParticipantsOperation) WithPerShareParticipantCompletionBlock(perShareParticipantCompletionBlock func(*raw.CKUserIdentityLookupInfo, *raw.CKShareParticipant, unsafe.Pointer)) *FetchShareParticipantsOperation {
@@ -89,7 +91,7 @@ func (x *FetchShareParticipantsOperation) WithPerShareParticipantCompletionBlock
 	return x
 }
 
-// The closure to execute when the operation finishes. The closure returns no value and takes the following parameter: - An error that contains information about a problem, or `nil` if CloudKit successfully generates the participants. The operation executes this closure only once. The closure executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The closure reports an error of type “CKError/Code/partialFailure“ when it can't generate some of the participants. The `userInfo` dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary identify the participants that CloudKit can't generate, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
+// The closure to execute when the operation finishes.
 //
 // WithFetchShareParticipantsCompletionBlock sets the fetchShareParticipantsCompletionBlock property and returns the receiver for chaining.
 func (x *FetchShareParticipantsOperation) WithFetchShareParticipantsCompletionBlock(fetchShareParticipantsCompletionBlock func(unsafe.Pointer)) *FetchShareParticipantsOperation {
@@ -97,7 +99,7 @@ func (x *FetchShareParticipantsOperation) WithFetchShareParticipantsCompletionBl
 	return x
 }
 
-// The operation's configuration.
+// The operation’s configuration.
 //
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *FetchShareParticipantsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchShareParticipantsOperation {
@@ -105,7 +107,7 @@ func (x *FetchShareParticipantsOperation) WithConfiguration(configuration *Opera
 	return x
 }
 
-// The operation's group.
+// The operation’s group.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *FetchShareParticipantsOperation) WithGroup(group *OperationGroup) *FetchShareParticipantsOperation {
@@ -113,7 +115,7 @@ func (x *FetchShareParticipantsOperation) WithGroup(group *OperationGroup) *Fetc
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *FetchShareParticipantsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareParticipantsOperation {
@@ -137,7 +139,7 @@ func (x *FetchShareParticipantsOperation) WithAllowsCellularAccess(allowsCellula
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A Boolean value that indicates whether the operation is long-lived.
 //
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *FetchShareParticipantsOperation) WithLongLived(longLived bool) *FetchShareParticipantsOperation {

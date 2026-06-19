@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class representing a unit of measure.
+//
 // Unit wraps [raw.NSUnit] with a fluent Go API.
 type Unit struct {
 	inner *raw.NSUnit

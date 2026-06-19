@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A query that accesses the series data associated with a quantity sample.
+//
 // QuantitySeriesSampleQuery wraps [raw.HKQuantitySeriesSampleQuery] with a fluent Go API.
 type QuantitySeriesSampleQuery struct {
 	inner *raw.HKQuantitySeriesSampleQuery
@@ -31,7 +33,7 @@ func QuantitySeriesSampleQueryFromID(id objc.ID) *QuantitySeriesSampleQuery {
 	return &QuantitySeriesSampleQuery{inner: raw.HKQuantitySeriesSampleQueryFromID(id)}
 }
 
-// @method        initWithSample:dataHandler: @abstract      Returns a query that will retrieve HKQuantity objects for samples of a specified type that match the specified predicate. @param         quantityType        The type of HKQuantitySample to retrieve. @param         predicate           The predicate which the query results should match. To query for the quantities for a specific quantity sample see: +[HKPredicates predicateForObjectWithUUID:] @param         quantityHandler     The block to invoke with results from the query. It will be called repeatedly with HKQuantity, and NSDateInterval objects in ascending dateInterval.startDate order, until all quantities are returned and the done parameter is YES or -[HKHealthStore stopQuery:] is called. The quantitySample parameter is nil unless includeSample is YES, in which case it will be the quantitySample which owns the current quantity anytime the quantity paramater is non-nil. The stopQuery call can be made within the quantityHandler block. Once done is YES, or stopQuery has been called, the query is complete and no more calls to quantityHandler will be made.
+// Creates a new query for a series of the specified quantity type.
 //
 // NewQuantitySeriesSampleQueryWithQuantityTypePredicateQuantityHandler creates a new [QuantitySeriesSampleQuery].
 func NewQuantitySeriesSampleQueryWithQuantityTypePredicateQuantityHandler(quantityType *raw.HKQuantityType, predicate *foundation.NSPredicate, quantityHandler func(*raw.HKQuantitySeriesSampleQuery, *raw.HKQuantity, *foundation.NSDateInterval, *raw.HKQuantitySample, bool, unsafe.Pointer)) *QuantitySeriesSampleQuery {
@@ -40,6 +42,8 @@ func NewQuantitySeriesSampleQueryWithQuantityTypePredicateQuantityHandler(quanti
 	return &QuantitySeriesSampleQuery{inner: raw.HKQuantitySeriesSampleQueryFromID(_id)}
 }
 
+// Creates a new series query.
+//
 // NewQuantitySeriesSampleQueryWithSampleQuantityHandler creates a new [QuantitySeriesSampleQuery].
 func NewQuantitySeriesSampleQueryWithSampleQuantityHandler(quantitySample *raw.HKQuantitySample, quantityHandler func(*raw.HKQuantitySeriesSampleQuery, *raw.HKQuantity, *foundation.NSDate, bool, unsafe.Pointer)) *QuantitySeriesSampleQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKQuantitySeriesSampleQuery")), objc.RegisterName("alloc"))
@@ -47,7 +51,7 @@ func NewQuantitySeriesSampleQueryWithSampleQuantityHandler(quantitySample *raw.H
 	return &QuantitySeriesSampleQuery{inner: raw.HKQuantitySeriesSampleQueryFromID(_id)}
 }
 
-// @property      includeSample @abstract      Include owning HKQuantitySample in quantityHandler handler. @discussion    Default value is NO. If includeSample is set then the quantitySample parameter of quantityHandler will be non-nil anytime the quantity parameter is non-nil. Specifying this option has a performance cost. This property may not be modified once the query has been executed.
+// A Boolean value that determines whether the query should return the series sample.
 //
 // WithIncludeSample sets the includeSample property and returns the receiver for chaining.
 func (x *QuantitySeriesSampleQuery) WithIncludeSample(includeSample bool) *QuantitySeriesSampleQuery {
@@ -55,7 +59,7 @@ func (x *QuantitySeriesSampleQuery) WithIncludeSample(includeSample bool) *Quant
 	return x
 }
 
-// @property      orderByQuantitySampleStartDate @abstract      Order enumerated results first by quantitySample.startDate, then by the quantity's dateInterval.startDate. @discussion    Default value is NO. All quantities owned by a given quantitySample will be enumerated before any quantities owned by any other quantity sample, and the quantity samples will be enumerated in their startDate order. Note that individual quantities may not be returned in their dateInterval.startDate order if more than one quantitySample overlap in time. This property may not be modified once the query has been executed.
+// A Boolean value that determines whether the query groups the results based on the quantity sample’s start date.
 //
 // WithOrderByQuantitySampleStartDate sets the orderByQuantitySampleStartDate property and returns the receiver for chaining.
 func (x *QuantitySeriesSampleQuery) WithOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate bool) *QuantitySeriesSampleQuery {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable type that represents a range of valid frame rates.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avframeraterange
 type AVFrameRateRange struct {
 	foundation.NSObject

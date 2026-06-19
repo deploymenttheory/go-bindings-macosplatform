@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that encapsulates the text for speech synthesis and parameters that affect the speech.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avspeechutterance
 type AVSpeechUtterance struct {
 	foundation.NSObject
@@ -51,6 +53,7 @@ func AVSpeechUtteranceFromID(id objc.ID) *AVSpeechUtterance {
 	return o
 }
 
+// Creates an utterance with the text string that you specify for the speech synthesizer to speak.
 func AVSpeechUtteranceSpeechUtteranceWithString(string_ *foundation.NSString) *AVSpeechUtterance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSpeechUtterance), _aVSpeechUtteranceSelSpeechUtteranceWithString, string_.Ptr())
 	if _ret != 0 {
@@ -59,6 +62,7 @@ func AVSpeechUtteranceSpeechUtteranceWithString(string_ *foundation.NSString) *A
 	return AVSpeechUtteranceFromID(_ret)
 }
 
+// Creates an utterance with the attributed text string that you specify for the speech synthesizer to speak.
 func AVSpeechUtteranceSpeechUtteranceWithAttributedString(string_ *foundation.NSAttributedString) *AVSpeechUtterance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSpeechUtterance), _aVSpeechUtteranceSelSpeechUtteranceWithAttributedString, string_.Ptr())
 	if _ret != 0 {
@@ -67,7 +71,7 @@ func AVSpeechUtteranceSpeechUtteranceWithAttributedString(string_ *foundation.NS
 	return AVSpeechUtteranceFromID(_ret)
 }
 
-// A speech utterance that expects markup written using the Speech Synthesis Markup Language (SSML) standard. Returns nil if invalid SSML is passed in.
+// Returns a new speech utterance with an Speech Synthesis Markup Language (SSML) string.
 func AVSpeechUtteranceSpeechUtteranceWithSSMLRepresentation(string_ *foundation.NSString) *AVSpeechUtterance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSpeechUtterance), _aVSpeechUtteranceSelSpeechUtteranceWithSSMLRepresentation, string_.Ptr())
 	if _ret != 0 {
@@ -76,6 +80,7 @@ func AVSpeechUtteranceSpeechUtteranceWithSSMLRepresentation(string_ *foundation.
 	return AVSpeechUtteranceFromID(_ret)
 }
 
+// Creates an utterance with the text string that you specify for the speech synthesizer to speak.
 func (o *AVSpeechUtterance) InitWithString(string_ *foundation.NSString) *AVSpeechUtterance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechUtteranceSelInitWithString, string_.Ptr())
 	if _ret != 0 {
@@ -84,6 +89,7 @@ func (o *AVSpeechUtterance) InitWithString(string_ *foundation.NSString) *AVSpee
 	return AVSpeechUtteranceFromID(_ret)
 }
 
+// Creates an utterance with the attributed text string that you specify for the speech synthesizer to speak.
 func (o *AVSpeechUtterance) InitWithAttributedString(string_ *foundation.NSAttributedString) *AVSpeechUtterance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechUtteranceSelInitWithAttributedString, string_.Ptr())
 	if _ret != 0 {
@@ -92,7 +98,7 @@ func (o *AVSpeechUtterance) InitWithAttributedString(string_ *foundation.NSAttri
 	return AVSpeechUtteranceFromID(_ret)
 }
 
-// @abstract A speech utterance that expects markup written using the Speech Synthesis Markup Language (SSML)  standard. @discussion Uses SSML markup to add attributes. If using SSML to request voices that fall under certain attributes, a single utterance may be split into multiple parts, each sent to the appropriate synthesizer. If no voice matches the properties, the voice in the @c voice property of the utterance will be used. If no @c voice is specified, the system's default will be used. @c AVSpeechUtterance properties that affect the prosidy of a voice such as @c rate, @c pitchMultiplier, @c pitchMultiplier will not apply to an utterance that uses an SSML representation. Returns nil if invalid SSML is passed in.
+// Creates a speech utterance with an Speech Synthesis Markup Language (SSML) string.
 func (o *AVSpeechUtterance) InitWithSSMLRepresentation(string_ *foundation.NSString) *AVSpeechUtterance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechUtteranceSelInitWithSSMLRepresentation, string_.Ptr())
 	if _ret != 0 {

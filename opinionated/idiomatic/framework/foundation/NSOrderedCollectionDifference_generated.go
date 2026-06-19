@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing the difference between two ordered collections.
+//
 // OrderedCollectionDifference wraps [raw.NSOrderedCollectionDifference] with a fluent Go API.
 type OrderedCollectionDifference struct {
 	inner *raw.NSOrderedCollectionDifference[objc.ID]
@@ -31,7 +33,7 @@ func OrderedCollectionDifferenceFromID(id objc.ID) *OrderedCollectionDifference 
 	return &OrderedCollectionDifference{inner: raw.NSOrderedCollectionDifferenceFromID[objc.ID](id)}
 }
 
-// Creates a new difference representing the changes in the parameter. For clients interested in the difference between two collections, the collection's differenceFrom method should be used instead. To guarantee that instances are unambiguous and safe for compatible base states, this method requires that its parameter conform to the following requirements: 1) All insertion offsets are unique 2) All removal offsets are unique 3) All associated indexes match a change with the opposite parity.
+// Creates an ordered collection difference using an array of ordered collection changes.
 //
 // NewOrderedCollectionDifferenceWithChanges creates a new [OrderedCollectionDifference].
 func NewOrderedCollectionDifferenceWithChanges(changes *raw.NSArray[objc.ID]) *OrderedCollectionDifference {
@@ -40,6 +42,8 @@ func NewOrderedCollectionDifferenceWithChanges(changes *raw.NSArray[objc.ID]) *O
 	return &OrderedCollectionDifference{inner: raw.NSOrderedCollectionDifferenceFromID[objc.ID](_id)}
 }
 
+// Creates an ordered collection difference from arrays of inserted and removed objects with corresponding sets of indices, in addition to an array of ordered collection changes.
+//
 // NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges creates a new [OrderedCollectionDifference].
 func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges(inserts *raw.NSIndexSet, insertedObjects *raw.NSArray[objc.ID], removes *raw.NSIndexSet, removedObjects *raw.NSArray[objc.ID], changes *raw.NSArray[objc.ID]) *OrderedCollectionDifference {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedCollectionDifference")), objc.RegisterName("alloc"))
@@ -47,6 +51,8 @@ func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexes
 	return &OrderedCollectionDifference{inner: raw.NSOrderedCollectionDifferenceFromID[objc.ID](_id)}
 }
 
+// Creates an ordered collection difference from arrays of inserted and removed objects with corresponding sets of indices.
+//
 // NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects creates a new [OrderedCollectionDifference].
 func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects(inserts *raw.NSIndexSet, insertedObjects *raw.NSArray[objc.ID], removes *raw.NSIndexSet, removedObjects *raw.NSArray[objc.ID]) *OrderedCollectionDifference {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedCollectionDifference")), objc.RegisterName("alloc"))
@@ -60,11 +66,15 @@ func (x *OrderedCollectionDifference) WithScriptingProperties(scriptingPropertie
 	return x
 }
 
+// Create a new ordered collection difference by mapping over this difference’s members, processing the change objects with the block provided.
+//
 // DifferenceByTransformingChangesWith calls the underlying DifferenceByTransformingChangesWith.
 func (x *OrderedCollectionDifference) DifferenceByTransformingChangesWith(block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID] {
 	return x.inner.DifferenceByTransformingChangesWith(block)
 }
 
+// Calculate the difference between two objects in the reverse direction of comparison.
+//
 // InverseDifference calls the underlying InverseDifference.
 func (x *OrderedCollectionDifference) InverseDifference() *raw.NSOrderedCollectionDifference[objc.ID] {
 	return x.inner.InverseDifference()

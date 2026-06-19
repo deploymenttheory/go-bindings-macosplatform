@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// This class describes a media item (a track) in the iTunes library, such as a song, a video, or a podcast.
+//
 // LibMediaItem wraps [raw.ITLibMediaItem] with a fluent Go API.
 type LibMediaItem struct {
 	inner *raw.ITLibMediaItem

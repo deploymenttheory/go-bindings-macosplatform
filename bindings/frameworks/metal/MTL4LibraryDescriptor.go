@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Serves as the base descriptor for creating a Metal library.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4librarydescriptor
 type MTL4LibraryDescriptor struct {
 	foundation.NSObject

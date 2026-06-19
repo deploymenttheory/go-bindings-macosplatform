@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A data object representing the captured data for a custom metric.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxsignpostintervaldata
 type MXSignpostIntervalData struct {
 	foundation.NSObject
@@ -36,30 +38,45 @@ func MXSignpostIntervalDataFromID(id objc.ID) *MXSignpostIntervalData {
 
 // @property      histogrammedSignpostDuration @abstract      A histogram of signpost intervals durations associated with the given signposts with signpostName and signpostCategory.
 func (o *MXSignpostIntervalData) HistogrammedSignpostDuration() *MXHistogram[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*MXHistogram[*foundation.NSUnitDuration]](o.Ptr(), _mXSignpostIntervalDataSelHistogrammedSignpostDuration)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostIntervalDataSelHistogrammedSignpostDuration)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return MXHistogramFromID[*foundation.NSUnitDuration](_ret)
 }
 
 // @property      cumulativeCPUTime @abstract      Cumulative CPU time aggregated over the MXSignpost intervals. @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
 func (o *MXSignpostIntervalData) CumulativeCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXSignpostIntervalDataSelCumulativeCPUTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostIntervalDataSelCumulativeCPUTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }
 
 // @property      averageMemory @abstract      Average value of memory snapshots taken at beginning and end of MXSignpost intervals @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
 func (o *MXSignpostIntervalData) AverageMemory() *MXAverage[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*MXAverage[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXSignpostIntervalDataSelAverageMemory)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostIntervalDataSelAverageMemory)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return MXAverageFromID[*foundation.NSUnitInformationStorage](_ret)
 }
 
 // @property      cumulativeLogicalWrites @abstract      Cumulative logical writes aggregated over the MXSignpost intervals. @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
 func (o *MXSignpostIntervalData) CumulativeLogicalWrites() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXSignpostIntervalDataSelCumulativeLogicalWrites)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostIntervalDataSelCumulativeLogicalWrites)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitInformationStorage](_ret)
 }
 
 // @property      cumulativeHitchTimeRatio @abstract      Cumulative hitch time ratio aggregated over the MXSignpostAnimation intervals. @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
 func (o *MXSignpostIntervalData) CumulativeHitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnit]](o.Ptr(), _mXSignpostIntervalDataSelCumulativeHitchTimeRatio)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXSignpostIntervalDataSelCumulativeHitchTimeRatio)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnit](_ret)
 }

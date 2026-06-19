@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing the difference between two ordered collections.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsorderedcollectiondifference
 type NSOrderedCollectionDifference[ObjectType purego.AnyObject] struct {
 	NSObject
@@ -36,23 +38,25 @@ func NSOrderedCollectionDifferenceFromID[ObjectType purego.AnyObject](id objc.ID
 	return o
 }
 
-// Creates a new difference representing the changes in the parameter. For clients interested in the difference between two collections, the collection's differenceFrom method should be used instead. To guarantee that instances are unambiguous and safe for compatible base states, this method requires that its parameter conform to the following requirements: 1) All insertion offsets are unique 2) All removal offsets are unique 3) All associated indexes match a change with the opposite parity.
+// Creates an ordered collection difference using an array of ordered collection changes.
 func (o *NSOrderedCollectionDifference[ObjectType]) InitWithChanges(changes *NSArray[objc.ID]) *NSOrderedCollectionDifference[ObjectType] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionDifferenceSelInitWithChanges, changes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionDifferenceSelInitWithChanges, changes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
+// Creates an ordered collection difference from arrays of inserted and removed objects with corresponding sets of indices, in addition to an array of ordered collection changes.
 func (o *NSOrderedCollectionDifference[ObjectType]) InitWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges(inserts *NSIndexSet, insertedObjects *NSArray[ObjectType], removes *NSIndexSet, removedObjects *NSArray[ObjectType], changes *NSArray[objc.ID]) *NSOrderedCollectionDifference[ObjectType] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionDifferenceSelInitWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges, inserts.Ptr(), insertedObjects.Ptr(), removes.Ptr(), removedObjects.Ptr(), changes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionDifferenceSelInitWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges, inserts.Ptr(), insertedObjects.Ptr(), removes.Ptr(), removedObjects.Ptr(), changes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
+// Creates an ordered collection difference from arrays of inserted and removed objects with corresponding sets of indices.
 func (o *NSOrderedCollectionDifference[ObjectType]) InitWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects(inserts *NSIndexSet, insertedObjects *NSArray[ObjectType], removes *NSIndexSet, removedObjects *NSArray[ObjectType]) *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionDifferenceSelInitWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects, inserts.Ptr(), insertedObjects.Ptr(), removes.Ptr(), removedObjects.Ptr())
 	if _ret != 0 {
@@ -61,11 +65,16 @@ func (o *NSOrderedCollectionDifference[ObjectType]) InitWithInsertIndexesInserte
 	return NSOrderedCollectionDifferenceFromID[ObjectType](_ret)
 }
 
+// Create a new ordered collection difference by mapping over this difference’s members, processing the change objects with the block provided.
 func (o *NSOrderedCollectionDifference[ObjectType]) DifferenceByTransformingChangesWith(block objc.Block) *NSOrderedCollectionDifference[objc.ID] {
-	_ret := objc.Send[*NSOrderedCollectionDifference[objc.ID]](o.Ptr(), _nSOrderedCollectionDifferenceSelDifferenceByTransformingChangesWith, block)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionDifferenceSelDifferenceByTransformingChangesWith, block)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSOrderedCollectionDifferenceFromID[objc.ID](_ret)
 }
 
+// Calculate the difference between two objects in the reverse direction of comparison.
 func (o *NSOrderedCollectionDifference[ObjectType]) InverseDifference() *NSOrderedCollectionDifference[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionDifferenceSelInverseDifference)
 	if _ret != 0 {
@@ -75,13 +84,19 @@ func (o *NSOrderedCollectionDifference[ObjectType]) InverseDifference() *NSOrder
 }
 
 func (o *NSOrderedCollectionDifference[ObjectType]) Insertions() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSOrderedCollectionDifferenceSelInsertions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionDifferenceSelInsertions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSOrderedCollectionDifference[ObjectType]) Removals() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSOrderedCollectionDifferenceSelRemovals)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionDifferenceSelRemovals)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSOrderedCollectionDifference[ObjectType]) HasChanges() bool {

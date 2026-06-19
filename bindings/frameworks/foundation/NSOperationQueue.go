@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A queue that regulates the execution of operations.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsoperationqueue
 type NSOperationQueue struct {
 	NSObject

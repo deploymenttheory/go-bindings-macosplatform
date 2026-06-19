@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A special kind of window that typically performs a function that is auxiliary to the main window.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspanel
 type NSPanel struct {
 	NSWindow

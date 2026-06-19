@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// This class provides information about an album in the iTunes library.
+//
 // LibAlbum wraps [raw.ITLibAlbum] with a fluent Go API.
 type LibAlbum struct {
 	inner *raw.ITLibAlbum

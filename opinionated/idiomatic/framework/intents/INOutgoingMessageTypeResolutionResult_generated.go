@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for the message’s format.
+//
 // OutgoingMessageTypeResolutionResult wraps [raw.INOutgoingMessageTypeResolutionResult] with a fluent Go API.
 type OutgoingMessageTypeResolutionResult struct {
 	inner *raw.INOutgoingMessageTypeResolutionResult

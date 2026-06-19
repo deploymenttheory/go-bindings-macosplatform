@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A capture output for capturing still photos.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturestillimageoutput
 // Deprecated: Use AVCapturePhotoOutput instead.
 type AVCaptureStillImageOutput struct {
@@ -43,6 +45,7 @@ func AVCaptureStillImageOutputFromID(id objc.ID) *AVCaptureStillImageOutput {
 	return o
 }
 
+// Creates new still image output.
 func (o *AVCaptureStillImageOutput) Init() *AVCaptureStillImageOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureStillImageOutputSelInit)
 	if _ret != 0 {
@@ -51,12 +54,13 @@ func (o *AVCaptureStillImageOutput) Init() *AVCaptureStillImageOutput {
 	return AVCaptureStillImageOutputFromID(_ret)
 }
 
+// Creates new still image output.
 func AVCaptureStillImageOutputNew() *AVCaptureStillImageOutput {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureStillImageOutput), _aVCaptureStillImageOutputSelNew)
 	return AVCaptureStillImageOutputFromID(_ret)
 }
 
-// @method captureStillImageAsynchronouslyFromConnection:completionHandler: @abstract Initiates an asynchronous still image capture, returning the result to a completion handler. @param connection The AVCaptureConnection object from which to capture the still image. @param handler A block that will be called when the still image capture is complete. The block will be passed a CMSampleBuffer object containing the image data or an NSError object if an image could not be captured. @discussion This method will return immediately after it is invoked, later calling the provided completion handler block when image data is ready. If the request could not be completed, the error parameter will contain an NSError object describing the failure. Attachments to the image data sample buffer may contain metadata appropriate to the image data format. For instance, a sample buffer containing JPEG data may carry a kCGImagePropertyExifDictionary as an attachment. See <ImageIO/CGImageProperties.h> for a list of keys and value types. Clients should not assume that the completion handler will be called on a specific thread. Calls to captureStillImageAsynchronouslyFromConnection:completionHandler: are not synchronized with AVCaptureDevice manual control completion handlers. Setting a device manual control, waiting for its completion, then calling captureStillImageAsynchronouslyFromConnection:completionHandler: DOES NOT ensure that the still image returned reflects your manual control change. It may be from an earlier time. You can compare your manual control completion handler sync time to the returned still image's presentation time. You can retrieve the sample buffer's pts using CMSampleBufferGetPresentationTimestamp(). If the still image has an earlier timestamp, your manual control command does not apply to it.
+// Initiates a still image capture and returns immediately.
 func (o *AVCaptureStillImageOutput) CaptureStillImageAsynchronouslyFromConnectionCompletionHandler(connection *AVCaptureConnection, handler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -68,7 +72,7 @@ func (o *AVCaptureStillImageOutput) CaptureStillImageAsynchronouslyFromConnectio
 	o.Ptr().Send(_aVCaptureStillImageOutputSelCaptureStillImageAsynchronouslyFromConnectionCompletionHandler, connection.Ptr(), __block_handler)
 }
 
-// @method jpegStillImageNSDataRepresentation: @abstract Converts the still image data and metadata attachments in a JPEG sample buffer to an NSData representation. @param jpegSampleBuffer The sample buffer carrying JPEG image data, optionally with Exif metadata sample buffer attachments. This method throws an NSInvalidArgumentException if jpegSampleBuffer is NULL or not in the JPEG format. @discussion This method returns an NSData representation of a JPEG still image sample buffer, merging the image data and Exif metadata sample buffer attachments without recompressing the image. The returned NSData is suitable for writing to disk.
+// Returns an NSData representation of a still image data and metadata attachments in a JPEG sample buffer.
 func AVCaptureStillImageOutputJpegStillImageNSDataRepresentation(jpegSampleBuffer unsafe.Pointer) *foundation.NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureStillImageOutput), _aVCaptureStillImageOutputSelJpegStillImageNSDataRepresentation, jpegSampleBuffer)
 	if _ret != 0 {
@@ -79,24 +83,33 @@ func AVCaptureStillImageOutputJpegStillImageNSDataRepresentation(jpegSampleBuffe
 
 // @property outputSettings @abstract Specifies the options the receiver uses to encode still images before they are delivered. @discussion See AVVideoSettings.h for more information on how to construct an output settings dictionary. On iOS, the only currently supported keys are AVVideoCodecKey and kCVPixelBufferPixelFormatTypeKey. Use -availableImageDataCVPixelFormatTypes and -availableImageDataCodecTypes to determine what codec keys and pixel formats are supported. AVVideoQualityKey is supported on iOS 6.0 and later and may only be used when AVVideoCodecKey is set to AVVideoCodecTypeJPEG.
 func (o *AVCaptureStillImageOutput) OutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVCaptureStillImageOutputSelOutputSettings)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureStillImageOutputSelOutputSettings)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *AVCaptureStillImageOutput) SetOutputSettings(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_aVCaptureStillImageOutputSelSetOutputSettings, outputSettings)
+	o.Ptr().Send(_aVCaptureStillImageOutputSelSetOutputSettings, outputSettings.Ptr())
 }
 
 // @property availableImageDataCVPixelFormatTypes @abstract Indicates the supported image pixel formats that can be specified in outputSettings. @discussion The value of this property is an NSArray of NSNumbers that can be used as values for the kCVPixelBufferPixelFormatTypeKey in the receiver's outputSettings property. The first format in the returned list is the most efficient output format.
 func (o *AVCaptureStillImageOutput) AvailableImageDataCVPixelFormatTypes() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVCaptureStillImageOutputSelAvailableImageDataCVPixelFormatTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureStillImageOutputSelAvailableImageDataCVPixelFormatTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property availableImageDataCodecTypes @abstract Indicates the supported image codec formats that can be specified in outputSettings. @discussion The value of this property is an NSArray of AVVideoCodecTypes that can be used as values for the AVVideoCodecKey in the receiver's outputSettings property.
 func (o *AVCaptureStillImageOutput) AvailableImageDataCodecTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVCaptureStillImageOutputSelAvailableImageDataCodecTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureStillImageOutputSelAvailableImageDataCodecTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property highResolutionStillImageOutputEnabled @abstract Indicates whether the receiver should emit still images at the highest resolution supported by its source AVCaptureDevice's activeFormat. @discussion By default, AVCaptureStillImageOutput emits images with the same dimensions as its source AVCaptureDevice's activeFormat.formatDescription. However, if you set this property to YES, the receiver emits still images at its source AVCaptureDevice's activeFormat.highResolutionStillImageDimensions. Note that if you enable video stabilization (see AVCaptureConnection's preferredVideoStabilizationMode) for any output, the high resolution still images emitted by AVCaptureStillImageOutput may be smaller by 10 or more percent.

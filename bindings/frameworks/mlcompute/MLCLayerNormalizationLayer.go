@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that applies layer normalization over inputs.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlclayernormalizationlayer
 type MLCLayerNormalizationLayer struct {
 	MLCLayer
@@ -36,9 +38,9 @@ func MLCLayerNormalizationLayerFromID(id objc.ID) *MLCLayerNormalizationLayer {
 	return o
 }
 
-// @abstract Create a layer normalization layer @param normalizedShape The shape of the axes over which normalization occurs, currently (C,H,W) only @param beta Training parameter @param gamma Training parameter @param varianceEpsilon  A small numerical value added to variance for stability @return A new layer normalization layer.
+// Creates a normalization layer with a shape, beta and gamma tensors, and variance epsilon you specify.
 func MLCLayerNormalizationLayerLayerWithNormalizedShapeBetaGammaVarianceEpsilon(normalizedShape *foundation.NSArray[*foundation.NSNumber], beta *MLCTensor, gamma *MLCTensor, varianceEpsilon float32) *MLCLayerNormalizationLayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLayerNormalizationLayer), _mLCLayerNormalizationLayerSelLayerWithNormalizedShapeBetaGammaVarianceEpsilon, normalizedShape, beta.Ptr(), gamma.Ptr(), varianceEpsilon)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLayerNormalizationLayer), _mLCLayerNormalizationLayerSelLayerWithNormalizedShapeBetaGammaVarianceEpsilon, normalizedShape.Ptr(), beta.Ptr(), gamma.Ptr(), varianceEpsilon)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -47,8 +49,11 @@ func MLCLayerNormalizationLayerLayerWithNormalizedShapeBetaGammaVarianceEpsilon(
 
 // @property   normalizedShape @abstract   The shape of the axes over which normalization occurs, (W), (H,W) or (C,H,W)
 func (o *MLCLayerNormalizationLayer) NormalizedShape() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCLayerNormalizationLayerSelNormalizedShape)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLayerNormalizationLayerSelNormalizedShape)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property   beta @abstract   The beta tensor

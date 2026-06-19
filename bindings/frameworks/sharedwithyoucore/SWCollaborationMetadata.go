@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A model object for conveying data during a collaboration.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyoucore/swcollaborationmetadata
 type SWCollaborationMetadata struct {
 	foundation.NSObject
@@ -43,6 +45,7 @@ func SWCollaborationMetadataFromID(id objc.ID) *SWCollaborationMetadata {
 	return o
 }
 
+// Creates and initializes a collaboration metadata object for the specified local identifier.
 func (o *SWCollaborationMetadata) InitWithLocalIdentifier(localIdentifier *foundation.NSString) *SWCollaborationMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationMetadataSelInitWithLocalIdentifier, localIdentifier.Ptr())
 	if _ret != 0 {
@@ -51,6 +54,7 @@ func (o *SWCollaborationMetadata) InitWithLocalIdentifier(localIdentifier *found
 	return SWCollaborationMetadataFromID(_ret)
 }
 
+// Creates and initializes a collaboration metadata object for the specified global identifier.
 func (o *SWCollaborationMetadata) InitWithCollaborationIdentifier(collaborationIdentifier *foundation.NSString) *SWCollaborationMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationMetadataSelInitWithCollaborationIdentifier, collaborationIdentifier.Ptr())
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration data to use when generating an image from a web view’s contents.
+//
 // WKSnapshotConfiguration wraps [raw.WKSnapshotConfiguration] with a fluent Go API.
 type WKSnapshotConfiguration struct {
 	inner *raw.WKSnapshotConfiguration
@@ -37,7 +39,7 @@ func NewWKSnapshotConfiguration() *WKSnapshotConfiguration {
 	return &WKSnapshotConfiguration{inner: raw.WKSnapshotConfigurationFromID(_id)}
 }
 
-// @abstract The rect to snapshot in view coordinates. @discussion This rect should be contained within WKWebView's bounds. If the rect is set to the null rect, the view's bounds will be used. The initial value is the null rect.
+// The portion of your web view to capture, specified as a rectangle in the view’s coordinate system.
 //
 // WithRect sets the rect property and returns the receiver for chaining.
 func (x *WKSnapshotConfiguration) WithRect(rect corefoundation.CGRect) *WKSnapshotConfiguration {
@@ -45,7 +47,7 @@ func (x *WKSnapshotConfiguration) WithRect(rect corefoundation.CGRect) *WKSnapsh
 	return x
 }
 
-// @abstract Specify a custom width to control the size of image you get back. The height will be computed to maintain the aspect ratio established by rect. @discussion snapshotWidth represents the width in points. If the snapshotWidth is nil, rect's width will be used.
+// The width of the captured image, in points.
 //
 // WithSnapshotWidth sets the snapshotWidth property and returns the receiver for chaining.
 func (x *WKSnapshotConfiguration) WithSnapshotWidth(snapshotWidth *foundation.NSNumber) *WKSnapshotConfiguration {
@@ -53,7 +55,7 @@ func (x *WKSnapshotConfiguration) WithSnapshotWidth(snapshotWidth *foundation.NS
 	return x
 }
 
-// @abstract A Boolean value that specifies whether the snapshot should be taken after recent changes have been incorporated. The value NO will capture the screen in its current state, which might not include recent changes. @discussion The default value is YES.
+// A Boolean value that indicates whether to take the snapshot after incorporating any pending screen updates.
 //
 // WithAfterScreenUpdates sets the afterScreenUpdates property and returns the receiver for chaining.
 func (x *WKSnapshotConfiguration) WithAfterScreenUpdates(afterScreenUpdates bool) *WKSnapshotConfiguration {

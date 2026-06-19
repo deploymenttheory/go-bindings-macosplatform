@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Time Synchronization Accurate time is required for a number of reasons, including scheduling, display and validating security materials.
+//
 // MTRClusterTimeSynchronization wraps [raw.MTRClusterTimeSynchronization] with a fluent Go API.
 type MTRClusterTimeSynchronization struct {
 	inner *raw.MTRClusterTimeSynchronization

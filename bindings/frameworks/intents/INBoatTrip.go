@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information that describes a boat trip.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inboattrip
 type INBoatTrip struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func INBoatTripFromID(id objc.ID) *INBoatTrip {
 	return o
 }
 
+// Creates a boat trip with the specified contents and attributes.
 func (o *INBoatTrip) InitWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalLocationArrivalBoatTerminalLocation(provider *foundation.NSString, boatName *foundation.NSString, boatNumber *foundation.NSString, tripDuration *INDateComponentsRange, departureBoatTerminalLocation *corelocation.CLPlacemark, arrivalBoatTerminalLocation *corelocation.CLPlacemark) *INBoatTrip {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBoatTripSelInitWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalLocationArrivalBoatTerminalLocation, provider.Ptr(), boatName.Ptr(), boatNumber.Ptr(), tripDuration.Ptr(), departureBoatTerminalLocation.Ptr(), arrivalBoatTerminalLocation.Ptr())
 	if _ret != 0 {

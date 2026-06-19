@@ -6,11 +6,16 @@ package photos
 import (
 	"github.com/ebitengine/purego/objc"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that facilitates retrieving or generating preview thumbnails and asset data.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phimagemanager
 type PHImageManager struct {
 	foundation.NSObject
@@ -38,6 +43,7 @@ func PHImageManagerFromID(id objc.ID) *PHImageManager {
 	return o
 }
 
+// Returns the shared image manager object.
 func PHImageManagerDefaultManager() *PHImageManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHImageManager), _pHImageManagerSelDefaultManager)
 	if _ret != 0 {
@@ -46,38 +52,127 @@ func PHImageManagerDefaultManager() *PHImageManager {
 	return PHImageManagerFromID(_ret)
 }
 
-func (o *PHImageManager) RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset *PHAsset, targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *PHImageRequestOptions, resultHandler objc.Block) int32 {
-	_ret := objc.Send[int32](o.Ptr(), _pHImageManagerSelRequestImageForAssetTargetSizeContentModeOptionsResultHandler, asset.Ptr(), targetSize, contentMode, options.Ptr(), resultHandler)
+// Requests an image representation for the specified asset.
+func (o *PHImageManager) RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset *PHAsset, targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *PHImageRequestOptions, resultHandler func(*appkit.NSImage, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
+	var __block_resultHandler objc.Block
+	if resultHandler != nil {
+		__block_resultHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			resultHandler(appkit.NSImageFromID(blockParam0), foundation.NSDictionaryFromID[objc.ID, objc.ID](blockParam1))
+		})
+		defer __block_resultHandler.Release()
+	}
+	_ret := objc.Send[int32](o.Ptr(), _pHImageManagerSelRequestImageForAssetTargetSizeContentModeOptionsResultHandler, asset.Ptr(), targetSize, contentMode, options.Ptr(), __block_resultHandler)
 	return _ret
 }
 
-// @abstract Request largest represented image as data bytes and EXIF orientation for the specified asset. @param asset The asset whose image data is to be loaded. @param options Options specifying how Photos should handle the request, format the requested image, and notify your app of progress or errors. If PHImageRequestOptionsVersionCurrent is requested and the asset has adjustments then the largest rendered image data is returned. In all other cases then the original image data is returned. @param resultHandler A block that is called exactly once either synchronously on the current thread or asynchronously on the main thread depending on the synchronous option specified in the PHImageRequestOptions options parameter (deliveryMode is ignored). Orientation is an EXIF orientation as an CGImagePropertyOrientation. For iOS or tvOS, convert this to an UIImageOrientation.
-func (o *PHImageManager) RequestImageDataAndOrientationForAssetOptionsResultHandler(asset *PHAsset, options *PHImageRequestOptions, resultHandler objc.Block) int32 {
-	_ret := objc.Send[int32](o.Ptr(), _pHImageManagerSelRequestImageDataAndOrientationForAssetOptionsResultHandler, asset.Ptr(), options.Ptr(), resultHandler)
+// Requests the largest represented image as data bytes and EXIF orientation for the specified asset.
+func (o *PHImageManager) RequestImageDataAndOrientationForAssetOptionsResultHandler(asset *PHAsset, options *PHImageRequestOptions, resultHandler func(*foundation.NSData, *foundation.NSString, imageio.CGImagePropertyOrientation, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
+	var __block_resultHandler objc.Block
+	if resultHandler != nil {
+		__block_resultHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID, blockParam2 imageio.CGImagePropertyOrientation, blockParam3 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			if blockParam3 != 0 {
+				blockParam3.Send(objc.RegisterName("retain"))
+			}
+			resultHandler(foundation.NSDataFromID(blockParam0), foundation.NSStringFromID(blockParam1), blockParam2, foundation.NSDictionaryFromID[objc.ID, objc.ID](blockParam3))
+		})
+		defer __block_resultHandler.Release()
+	}
+	_ret := objc.Send[int32](o.Ptr(), _pHImageManagerSelRequestImageDataAndOrientationForAssetOptionsResultHandler, asset.Ptr(), options.Ptr(), __block_resultHandler)
 	return _ret
 }
 
+// Cancels an asynchronous request
 func (o *PHImageManager) CancelImageRequest(requestID int32) {
 	o.Ptr().Send(_pHImageManagerSelCancelImageRequest, requestID)
 }
 
-// Requests a live photo representation of the asset. With PHImageRequestOptionsDeliveryModeOpportunistic (or if no options are specified), the resultHandler block may be called more than once (the first call may occur before the method returns). The PHImageResultIsDegradedKey key in the result handler's info parameter indicates when a temporary low-quality live photo is provided.
-func (o *PHImageManager) RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset *PHAsset, targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *PHLivePhotoRequestOptions, resultHandler objc.Block) int32 {
-	_ret := objc.Send[int32](o.Ptr(), _pHImageManagerSelRequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler, asset.Ptr(), targetSize, contentMode, options.Ptr(), resultHandler)
+// Requests a Live Photo representation for the specified asset.
+func (o *PHImageManager) RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset *PHAsset, targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *PHLivePhotoRequestOptions, resultHandler func(*PHLivePhoto, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
+	var __block_resultHandler objc.Block
+	if resultHandler != nil {
+		__block_resultHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			resultHandler(PHLivePhotoFromID(blockParam0), foundation.NSDictionaryFromID[objc.ID, objc.ID](blockParam1))
+		})
+		defer __block_resultHandler.Release()
+	}
+	_ret := objc.Send[int32](o.Ptr(), _pHImageManagerSelRequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler, asset.Ptr(), targetSize, contentMode, options.Ptr(), __block_resultHandler)
 	return _ret
 }
 
-func (o *PHImageManager) RequestPlayerItemForVideoOptionsResultHandler(asset *PHAsset, options *PHVideoRequestOptions, resultHandler objc.Block) int32 {
-	_ret := objc.Send[int32](o.Ptr(), _pHImageManagerSelRequestPlayerItemForVideoOptionsResultHandler, asset.Ptr(), options.Ptr(), resultHandler)
+// Requests a representation of the video asset for playback, to be loaded asynchronously.
+func (o *PHImageManager) RequestPlayerItemForVideoOptionsResultHandler(asset *PHAsset, options *PHVideoRequestOptions, resultHandler func(*avfoundation.AVPlayerItem, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
+	var __block_resultHandler objc.Block
+	if resultHandler != nil {
+		__block_resultHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			resultHandler(avfoundation.AVPlayerItemFromID(blockParam0), foundation.NSDictionaryFromID[objc.ID, objc.ID](blockParam1))
+		})
+		defer __block_resultHandler.Release()
+	}
+	_ret := objc.Send[int32](o.Ptr(), _pHImageManagerSelRequestPlayerItemForVideoOptionsResultHandler, asset.Ptr(), options.Ptr(), __block_resultHandler)
 	return _ret
 }
 
-func (o *PHImageManager) RequestExportSessionForVideoOptionsExportPresetResultHandler(asset *PHAsset, options *PHVideoRequestOptions, exportPreset *foundation.NSString, resultHandler objc.Block) int32 {
-	_ret := objc.Send[int32](o.Ptr(), _pHImageManagerSelRequestExportSessionForVideoOptionsExportPresetResultHandler, asset.Ptr(), options.Ptr(), exportPreset.Ptr(), resultHandler)
+// Requests an export session for writing the video asset’s data to a file, to be loaded asynchronously.
+func (o *PHImageManager) RequestExportSessionForVideoOptionsExportPresetResultHandler(asset *PHAsset, options *PHVideoRequestOptions, exportPreset *foundation.NSString, resultHandler func(*avfoundation.AVAssetExportSession, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
+	var __block_resultHandler objc.Block
+	if resultHandler != nil {
+		__block_resultHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			resultHandler(avfoundation.AVAssetExportSessionFromID(blockParam0), foundation.NSDictionaryFromID[objc.ID, objc.ID](blockParam1))
+		})
+		defer __block_resultHandler.Release()
+	}
+	_ret := objc.Send[int32](o.Ptr(), _pHImageManagerSelRequestExportSessionForVideoOptionsExportPresetResultHandler, asset.Ptr(), options.Ptr(), exportPreset.Ptr(), __block_resultHandler)
 	return _ret
 }
 
-func (o *PHImageManager) RequestAVAssetForVideoOptionsResultHandler(asset *PHAsset, options *PHVideoRequestOptions, resultHandler objc.Block) int32 {
-	_ret := objc.Send[int32](o.Ptr(), _pHImageManagerSelRequestAVAssetForVideoOptionsResultHandler, asset.Ptr(), options.Ptr(), resultHandler)
+// Requests AVFoundation objects representing the video asset’s content and state, to be loaded asynchronously.
+func (o *PHImageManager) RequestAVAssetForVideoOptionsResultHandler(asset *PHAsset, options *PHVideoRequestOptions, resultHandler func(*avfoundation.AVAsset, *avfoundation.AVAudioMix, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
+	var __block_resultHandler objc.Block
+	if resultHandler != nil {
+		__block_resultHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID, blockParam2 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			if blockParam2 != 0 {
+				blockParam2.Send(objc.RegisterName("retain"))
+			}
+			resultHandler(avfoundation.AVAssetFromID(blockParam0), avfoundation.AVAudioMixFromID(blockParam1), foundation.NSDictionaryFromID[objc.ID, objc.ID](blockParam2))
+		})
+		defer __block_resultHandler.Release()
+	}
+	_ret := objc.Send[int32](o.Ptr(), _pHImageManagerSelRequestAVAssetForVideoOptionsResultHandler, asset.Ptr(), options.Ptr(), __block_resultHandler)
 	return _ret
 }

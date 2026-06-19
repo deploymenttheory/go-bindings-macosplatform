@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a hardware or virtual capture device like a camera or microphone.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturedevice
 type AVCaptureDevice struct {
 	foundation.NSObject
@@ -171,7 +173,7 @@ func AVCaptureDeviceFromID(id objc.ID) *AVCaptureDevice {
 	return o
 }
 
-// @method devices @abstract Returns an array of devices currently available for use as media input sources. @result An NSArray of AVCaptureDevice instances for each available device. @discussion This method returns an array of AVCaptureDevice instances for input devices currently connected and available for capture. The returned array contains all devices that are available at the time the method is called. Applications should observe AVCaptureDeviceWasConnectedNotification and AVCaptureDeviceWasDisconnectedNotification to be notified when the list of available devices has changed.
+// Returns all available capture devices on the system.
 // Deprecated: Use AVCaptureDeviceDiscoverySession instead.
 func AVCaptureDeviceDevices() *foundation.NSArray[*AVCaptureDevice] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDevice), _aVCaptureDeviceSelDevices)
@@ -181,7 +183,7 @@ func AVCaptureDeviceDevices() *foundation.NSArray[*AVCaptureDevice] {
 	return foundation.NSArrayFromID[*AVCaptureDevice](_ret)
 }
 
-// @method devicesWithMediaType: @abstract Returns an array of devices currently available for use as sources of media with the given media type. @param mediaType The media type, such as AVMediaTypeVideo, AVMediaTypeAudio, or AVMediaTypeMuxed, supported by each returned device. @result An NSArray of AVCaptureDevice instances for each available device. @discussion This method returns an array of AVCaptureDevice instances for input devices currently connected and available for capture that provide media of the given type. Media type constants are defined in AVMediaFormat.h. The returned array contains all devices that are available at the time the method is called. Applications should observe AVCaptureDeviceWasConnectedNotification and AVCaptureDeviceWasDisconnectedNotification to be notified when the list of available devices has changed.
+// Returns devices capable of capturing media of the specified type.
 // Deprecated: Use AVCaptureDeviceDiscoverySession instead.
 func AVCaptureDeviceDevicesWithMediaType(mediaType *foundation.NSString) *foundation.NSArray[*AVCaptureDevice] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDevice), _aVCaptureDeviceSelDevicesWithMediaType, mediaType.Ptr())
@@ -191,7 +193,7 @@ func AVCaptureDeviceDevicesWithMediaType(mediaType *foundation.NSString) *founda
 	return foundation.NSArrayFromID[*AVCaptureDevice](_ret)
 }
 
-// @method defaultDeviceWithMediaType: @abstract Returns an AVCaptureDevice instance for the default device of the given media type. @param mediaType The media type, such as AVMediaTypeVideo, AVMediaTypeAudio, or AVMediaTypeMuxed, supported by the returned device. @result The default device with the given media type, or nil if no device with that media type exists. @discussion This method returns the default device of the given media type currently available on the system. For example, for AVMediaTypeVideo, this method will return the built in camera that is primarily used for capture and recording. Media type constants are defined in AVMediaFormat.h.
+// Returns the default device that captures the specified media type.
 func AVCaptureDeviceDefaultDeviceWithMediaType(mediaType *foundation.NSString) *AVCaptureDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDevice), _aVCaptureDeviceSelDefaultDeviceWithMediaType, mediaType.Ptr())
 	if _ret != 0 {
@@ -200,7 +202,7 @@ func AVCaptureDeviceDefaultDeviceWithMediaType(mediaType *foundation.NSString) *
 	return AVCaptureDeviceFromID(_ret)
 }
 
-// @method deviceWithUniqueID: @abstract Returns an AVCaptureDevice instance with the given unique ID. @param deviceUniqueID The unique ID of the device instance to be returned. @result An AVCaptureDevice instance with the given unique ID, or nil if no device with that unique ID is available. @discussion Every available capture device has a unique ID that persists on one system across device connections and disconnections, application restarts, and reboots of the system itself. This method can be used to recall or track the status of a specific device whose unique ID has previously been saved.
+// Creates an object that represents a device with the specified identifier.
 func AVCaptureDeviceDeviceWithUniqueID(deviceUniqueID *foundation.NSString) *AVCaptureDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDevice), _aVCaptureDeviceSelDeviceWithUniqueID, deviceUniqueID.Ptr())
 	if _ret != 0 {
@@ -209,13 +211,13 @@ func AVCaptureDeviceDeviceWithUniqueID(deviceUniqueID *foundation.NSString) *AVC
 	return AVCaptureDeviceFromID(_ret)
 }
 
-// @method hasMediaType: @abstract Returns whether the receiver provides media with the given media type. @param mediaType A media type, such as AVMediaTypeVideo, AVMediaTypeAudio, or AVMediaTypeMuxed. @result YES if the device outputs the given media type, NO otherwise. @discussion Media type constants are defined in AVMediaFormat.h.
+// Returns a Boolean value that indicates whether the device captures media of a particular type.
 func (o *AVCaptureDevice) HasMediaType(mediaType *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceSelHasMediaType, mediaType.Ptr())
 	return _ret
 }
 
-// @method lockForConfiguration: @abstract Requests exclusive access to configure device hardware properties. @param outError On return, if the device could not be locked, points to an NSError describing why the failure occurred. @result A BOOL indicating whether the device was successfully locked for configuration. @discussion In order to set hardware properties on an AVCaptureDevice, such as focusMode and exposureMode, clients must first acquire a lock on the device. Clients should only hold the device lock if they require settable device properties to remain unchanged. Holding the device lock unnecessarily may degrade capture quality in other applications sharing the device.
+// Requests exclusive access to configure device hardware properties.
 func (o *AVCaptureDevice) LockForConfiguration() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceSelLockForConfiguration, unsafe.Pointer(&_nsErr))
@@ -225,12 +227,12 @@ func (o *AVCaptureDevice) LockForConfiguration() (bool, error) {
 	return _ret, nil
 }
 
-// @method unlockForConfiguration @abstract Release exclusive control over device hardware properties. @discussion This method should be called to match an invocation of lockForConfiguration: when an application no longer needs to keep device hardware properties from changing automatically.
+// Releases exclusive control over device hardware properties.
 func (o *AVCaptureDevice) UnlockForConfiguration() {
 	o.Ptr().Send(_aVCaptureDeviceSelUnlockForConfiguration)
 }
 
-// @method supportsAVCaptureSessionPreset: @abstract Returns whether the receiver can be used in an AVCaptureSession configured with the given preset. @param preset An AVCaptureSession preset. @result YES if the receiver can be used with the given preset, NO otherwise. @discussion An AVCaptureSession instance can be associated with a preset that configures its inputs and outputs to fulfill common use cases. This method can be used to determine if the receiver can be used in a capture session with the given preset. Presets are defined in AVCaptureSession.h.
+// Returns a Boolean value that indicates whether you can use the device with capture session configured with the specified preset.
 func (o *AVCaptureDevice) SupportsAVCaptureSessionPreset(preset *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceSelSupportsAVCaptureSessionPreset, preset.Ptr())
 	return _ret
@@ -416,7 +418,7 @@ func (o *AVCaptureDevice) DeviceType() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-// @method defaultDeviceWithDeviceType:mediaType:position: @abstract Returns an AVCaptureDevice instance for the default device of the given device type, media type, and position. @param deviceType The device type supported by the returned device. It must be a valid AVCaptureDeviceType. @param mediaType The media type, such as AVMediaTypeVideo, AVMediaTypeAudio, or AVMediaTypeMuxed, supported by the returned device. Pass nil to consider devices with any media type. @param position The position supported by the returned device. Pass AVCaptureDevicePositionUnspecified to consider devices with any position. @result The default device with the given device type, media type and position or nil if no device with that media type exists and nil otherwise. @discussion This method returns the default device of the given combination of device type, media type, and position currently available on the system.
+// Returns the default device for the specified device type, media type, and position.
 func AVCaptureDeviceDefaultDeviceWithDeviceTypeMediaTypePosition(deviceType *foundation.NSString, mediaType *foundation.NSString, position AVCaptureDevicePosition) *AVCaptureDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDevice), _aVCaptureDeviceSelDefaultDeviceWithDeviceTypeMediaTypePosition, deviceType.Ptr(), mediaType.Ptr(), position)
 	if _ret != 0 {
@@ -447,7 +449,7 @@ func AVCaptureDeviceSystemPreferredCamera() *AVCaptureDevice {
 	return AVCaptureDeviceFromID(_ret)
 }
 
-// @method setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions: @abstract The switching behavior and conditions, unless overwritten via -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions]. @param switchingBehavior The desired switching behavior. @param restrictedSwitchingBehaviorConditions The desired conditions for restricting camera switching. This must be set to AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone whenever switchingBehavior is not equal to AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted. @discussion The switching behavior may be overridden on the AVCaptureMovieFileOutput while recording (see -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions]). This method throws an NSInvalidArgumentException if constituent device switching is not supported by the receiver or if restrictedSwitchingBehaviorConditions is not equal to AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone and switchingBehavior is not equal to AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted.
+// Sets the switching behavior of the primary constituent device.
 func (o *AVCaptureDevice) SetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions(switchingBehavior AVCapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) {
 	o.Ptr().Send(_aVCaptureDeviceSelSetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions, switchingBehavior, restrictedSwitchingBehaviorConditions)
 }
@@ -597,17 +599,17 @@ func (o *AVCaptureDevice) DefaultRectForFocusPointOfInterest(pointOfInterest cor
 	return _ret
 }
 
-// Focus on and start tracking a detected object. - Parameter detectedObjectID: The ID of the detected object. - Parameter focusMode: Specify whether to focus strongly or weakly.
+// Focus on and start tracking a detected object.
 func (o *AVCaptureDevice) SetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode(detectedObjectID int, focusMode AVCaptureCinematicVideoFocusMode) {
 	o.Ptr().Send(_aVCaptureDeviceSelSetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode, detectedObjectID, focusMode)
 }
 
-// Focus on and start tracking an object if it can be detected at the region specified by the point. - Parameter point: A normalized point of interest (i.e., [0,1]) in the coordinate space of the device. - Parameter focusMode: Specify whether to focus strongly or weakly.
+// Focus on and start tracking an object if it can be detected at the region specified by the point.
 func (o *AVCaptureDevice) SetCinematicVideoTrackingFocusAtPointFocusMode(point corefoundation.CGPoint, focusMode AVCaptureCinematicVideoFocusMode) {
 	o.Ptr().Send(_aVCaptureDeviceSelSetCinematicVideoTrackingFocusAtPointFocusMode, point, focusMode)
 }
 
-// Fix focus at a distance. - Parameter point: A normalized point of interest (i.e., [0,1]) in the coordinate space of the device. - Parameter focusMode: Specify whether to focus strongly or weakly. The distance at which focus is set is determined internally using signals such as depth data.
+// Fix focus at a distance.
 func (o *AVCaptureDevice) SetCinematicVideoFixedFocusAtPointFocusMode(point corefoundation.CGPoint, focusMode AVCaptureCinematicVideoFocusMode) {
 	o.Ptr().Send(_aVCaptureDeviceSelSetCinematicVideoFixedFocusAtPointFocusMode, point, focusMode)
 }
@@ -766,13 +768,13 @@ func (o *AVCaptureDevice) DisplayVideoZoomFactorMultiplier() float64 {
 	return _ret
 }
 
-// @method authorizationStatusForMediaType: @abstract Returns the client's authorization status for accessing the underlying hardware that supports a given media type. @param mediaType The media type, either AVMediaTypeVideo or AVMediaTypeAudio @result The authorization status of the client @discussion This method returns the AVAuthorizationStatus of the client for accessing the underlying hardware supporting the media type. Media type constants are defined in AVMediaFormat.h. If any media type other than AVMediaTypeVideo or AVMediaTypeAudio is supplied, an NSInvalidArgumentException will be thrown. If the status is AVAuthorizationStatusNotDetermined, you may use the +requestAccessForMediaType:completionHandler: method to request access by prompting the user.
+// Returns an authorization status that indicates whether the user grants the app permission to capture media of a particular type.
 func AVCaptureDeviceAuthorizationStatusForMediaType(mediaType *foundation.NSString) AVAuthorizationStatus {
 	_ret := objc.Send[AVAuthorizationStatus](objc.ID(_clsAVCaptureDevice), _aVCaptureDeviceSelAuthorizationStatusForMediaType, mediaType.Ptr())
 	return _ret
 }
 
-// @method requestAccessForMediaType:completionHandler: @abstract Requests access to the underlying hardware for the media type, showing a dialog to the user if necessary. @param mediaType The media type, either AVMediaTypeVideo or AVMediaTypeAudio @param handler A block called with the result of requesting access @discussion Use this function to request access to the hardware for a given media type. Media type constants are defined in AVMediaFormat.h. If any media type other than AVMediaTypeVideo or AVMediaTypeAudio is supplied, an NSInvalidArgumentException will be thrown. This call will not block while the user is being asked for access, allowing the client to continue running. Until access has been granted, any AVCaptureDevices for the media type will vend silent audio samples or black video frames. The user is only asked for permission the first time the client requests access. Later calls use the permission granted by the user. Note that the authorization dialog will automatically be shown if the status is AVAuthorizationStatusNotDetermined when creating an AVCaptureDeviceInput. Invoking this method with AVMediaTypeAudio is equivalent to calling -[AVAudioSession requestRecordPermission:]. The completion handler is called on an arbitrary dispatch queue. It is the client's responsibility to ensure that any UIKit-related updates are called on the main queue or main thread as a result.
+// Requests the user’s permission to allow the app to capture media of a particular type.
 func AVCaptureDeviceRequestAccessForMediaTypeCompletionHandler(mediaType *foundation.NSString, handler func(bool)) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -889,8 +891,11 @@ func (o *AVCaptureDevice) CanPerformReactionEffects() bool {
 
 // @property availableReactionTypes @abstract Returns a list of reaction types which can be passed to performEffectForReaction. @discussion The list may differ between devices, or be affected by changes to active format, and can be key-value observed.
 func (o *AVCaptureDevice) AvailableReactionTypes() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _aVCaptureDeviceSelAvailableReactionTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelAvailableReactionTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 // @property reactionEffectsInProgress @abstract Contains an array of reaction effects that are currently being performed by the device, sorted by timestamp. If observing old and new values in the KVO callback, the reaction effects which are still running in the new array will have kCMTimeInvalid as their endTime property. Reaction effects which have ended will only be in the old array, and will have their endTime property set to the presentation time of the first frame where the reaction effect was no longer present. @discussion Reaction effects which are triggered by either a call to performEffectForReaction: or by the automatic gesture detection will be reflected in this array. It is key-value observable to be notified when reaction effects begin or end.
@@ -945,16 +950,22 @@ func AVCaptureDeviceShowSystemUserInterface(systemUserInterface AVCaptureSystemU
 }
 
 func (o *AVCaptureDevice) SpatialCaptureDiscomfortReasons() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _aVCaptureDeviceSelSpatialCaptureDiscomfortReasons)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelSpatialCaptureDiscomfortReasons)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 func (o *AVCaptureDevice) CinematicVideoCaptureSceneMonitoringStatuses() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _aVCaptureDeviceSelCinematicVideoCaptureSceneMonitoringStatuses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelCinematicVideoCaptureSceneMonitoringStatuses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
-// Updates the dynamic aspect ratio of the device. - Parameter dynamicAspectRatio: The new “AVCaptureAspectRatio“ the device should output. - Parameter handler: A block called by the device when `dynamicAspectRatio` is set to the value specified. If you call “setDynamicAspectRatio:completionHandler:“ multiple times, the completion handlers are called in FIFO order. The block receives a timestamp which matches that of the first buffer to which all settings have been applied. Note that the timestamp is synchronized to the device clock, and thus must be converted to the “AVCaptureSession/synchronizationClock“ prior to comparison with the timestamps of buffers delivered via an “AVCaptureVideoDataOutput“. You may pass `nil` for the `handler` parameter if you do not need to know when the operation completes. This is the only way of setting “dynamicAspectRatio“. This method throws an `NSInvalidArgumentException` if `dynamicAspectRatio` is not a supported aspect ratio found in the device's activeFormat's “AVCaptureDeviceFormat/supportedDynamicAspectRatios“. This method throws an `NSGenericException` if you call it without first obtaining exclusive access to the device using “AVCaptureDevice/lockForConfiguration:“.
+// Updates the dynamic aspect ratio of the device.
 func (o *AVCaptureDevice) SetDynamicAspectRatioCompletionHandler(dynamicAspectRatio *foundation.NSString, handler objc.Block) {
 	o.Ptr().Send(_aVCaptureDeviceSelSetDynamicAspectRatioCompletionHandler, dynamicAspectRatio.Ptr(), handler)
 }
@@ -1003,7 +1014,7 @@ func AVCaptureDeviceIsEdgeLightActive() bool {
 	return _ret
 }
 
-// Specify whether to enable camera lens smudge detection, and the interval time between each run of detections. - Parameter cameraLensSmudgeDetectionEnabled: Specify whether camera lens smudge detection should be enabled. - Parameter detectionInterval: The detection running interval if detection is enabled. Each run of detection processes frames over a short period, and produces one detection result. Use `detectionInterval` to specify the interval time between each run of detections. For example, when “cameraLensSmudgeDetectionEnabled“ is set to `true` and `detectionInterval` is set to 1 minute, detection runs once per minute, and updates “AVCaptureCameraLensSmudgeDetectionStatus“. If `detectionInterval` is set to “kCMTimeInvalid“, detection runs only once after the session starts. If `detectionInterval` is set to “kCMTimeZero“, detection runs continuously. “AVCaptureDevice“ throws an `NSInvalidArgumentException` if the “AVCaptureDeviceFormat/cameraLensSmudgeDetectionSupported“ property on the current active format returns `false`. Enabling detection requires a lengthy reconfiguration of the capture render pipeline, so you should enable detection before calling “AVCaptureSession/startRunning“ or within “AVCaptureSession/beginConfiguration“ and “AVCaptureSession/commitConfiguration“ while running.
+// Specify whether to enable camera lens smudge detection, and the interval time between each run of detections.
 func (o *AVCaptureDevice) SetCameraLensSmudgeDetectionEnabledDetectionInterval(cameraLensSmudgeDetectionEnabled bool, detectionInterval coremedia.CMTime) {
 	o.Ptr().Send(_aVCaptureDeviceSelSetCameraLensSmudgeDetectionEnabledDetectionInterval, cameraLensSmudgeDetectionEnabled, detectionInterval)
 }

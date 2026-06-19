@@ -10,7 +10,7 @@ import (
 	"unsafe"
 )
 
-// An obstacle with an impassible closed polygon
+// A polygon-shaped impassable area in a 2D game world.
 //
 // PolygonObstacle wraps [raw.GKPolygonObstacle] with a fluent Go API.
 type PolygonObstacle struct {
@@ -32,6 +32,8 @@ func PolygonObstacleFromID(id objc.ID) *PolygonObstacle {
 	return &PolygonObstacle{inner: raw.GKPolygonObstacleFromID(id)}
 }
 
+// Initializes a polygon obstacle with the specified list of vertices.
+//
 // NewPolygonObstacleWithPointsCount creates a new [PolygonObstacle].
 func NewPolygonObstacleWithPointsCount(points unsafe.Pointer, numPoints uint) *PolygonObstacle {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKPolygonObstacle")), objc.RegisterName("alloc"))
@@ -39,7 +41,7 @@ func NewPolygonObstacleWithPointsCount(points unsafe.Pointer, numPoints uint) *P
 	return &PolygonObstacle{inner: raw.GKPolygonObstacleFromID(_id)}
 }
 
-// Returns the vertex at the indicated index @param index index of the vertex to retrieve
+// Returns the point coordinates of the specified vertex.
 //
 // VertexAtIndex calls the underlying VertexAtIndex.
 func (x *PolygonObstacle) VertexAtIndex(index uint) unsafe.Pointer {

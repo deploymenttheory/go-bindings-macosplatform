@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The definition of a particle emitted by a particle layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/caemittercell
 type CAEmitterCell struct {
 	foundation.NSObject
@@ -105,6 +107,7 @@ func CAEmitterCellFromID(id objc.ID) *CAEmitterCell {
 	return o
 }
 
+// Creates and returns an instance of CAEmitterCell.
 func CAEmitterCellEmitterCell() *CAEmitterCell {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAEmitterCell), _cAEmitterCellSelEmitterCell)
 	if _ret != 0 {
@@ -113,11 +116,13 @@ func CAEmitterCellEmitterCell() *CAEmitterCell {
 	return CAEmitterCellFromID(_ret)
 }
 
+// Returns the default value of the property with the specified key.
 func CAEmitterCellDefaultValueForKey(key *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAEmitterCell), _cAEmitterCellSelDefaultValueForKey, key.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value indicating whether the value for a given key should be archived.
 func (o *CAEmitterCell) ShouldArchiveValueForKey(key *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _cAEmitterCellSelShouldArchiveValueForKey, key.Ptr())
 	return _ret
@@ -442,10 +447,13 @@ func (o *CAEmitterCell) SetEmitterCells(emitterCells *foundation.NSArray[*CAEmit
 }
 
 func (o *CAEmitterCell) Style() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _cAEmitterCellSelStyle)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cAEmitterCellSelStyle)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *CAEmitterCell) SetStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_cAEmitterCellSelSetStyle, style)
+	o.Ptr().Send(_cAEmitterCellSelSetStyle, style.Ptr())
 }

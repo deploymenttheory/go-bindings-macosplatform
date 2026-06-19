@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for a double value associated with an intent.
+//
 // DoubleResolutionResult wraps [raw.INDoubleResolutionResult] with a fluent Go API.
 type DoubleResolutionResult struct {
 	inner *raw.INDoubleResolutionResult

@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A container that manages the storage of cookies.
+//
 // HTTPCookieStorage wraps [raw.NSHTTPCookieStorage] with a fluent Go API.
 type HTTPCookieStorage struct {
 	inner *raw.NSHTTPCookieStorage

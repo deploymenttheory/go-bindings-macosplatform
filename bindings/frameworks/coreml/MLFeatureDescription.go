@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The name, type, and constraints of an input or output feature.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlfeaturedescription
 type MLFeatureDescription struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func MLFeatureDescriptionFromID(id objc.ID) *MLFeatureDescription {
 	return o
 }
 
-// Check if MLFeatureValue is valid based on this description
+// Checks whether the model will accept an input feature value.
 func (o *MLFeatureDescription) IsAllowedValue(value *MLFeatureValue) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLFeatureDescriptionSelIsAllowedValue, value.Ptr())
 	return _ret

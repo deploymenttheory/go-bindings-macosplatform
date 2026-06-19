@@ -78,12 +78,18 @@ func (o *SCRecordingOutputConfiguration) SetOutputFileType(outputFileType *found
 
 // @abstract Returns an array of supported video codec formats that can be specified in SCRecordingOutputConfiguration for videoCodecType
 func (o *SCRecordingOutputConfiguration) AvailableVideoCodecTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _sCRecordingOutputConfigurationSelAvailableVideoCodecTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCRecordingOutputConfigurationSelAvailableVideoCodecTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @abstract Returns an array of supported file types that can be specified in SCRecordingOutputConfiguration for outputFileType Provides the file types AVCaptureAudioFileOutput can write.
 func (o *SCRecordingOutputConfiguration) AvailableOutputFileTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _sCRecordingOutputConfigurationSelAvailableOutputFileTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sCRecordingOutputConfigurationSelAvailableOutputFileTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

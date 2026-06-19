@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that executes unix applications.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsuserunixtask
 type NSUserUnixTask struct {
 	NSUserScriptTask
@@ -37,6 +39,7 @@ func NSUserUnixTaskFromID(id objc.ID) *NSUserUnixTask {
 	return o
 }
 
+// Execute the unix script with the specified arguments.
 func (o *NSUserUnixTask) ExecuteWithArgumentsCompletionHandler(arguments *NSArray[*NSString], handler func(unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {

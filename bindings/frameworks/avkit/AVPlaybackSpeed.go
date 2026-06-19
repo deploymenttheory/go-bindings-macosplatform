@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a user-selectable playback speed in a playback user interface.
+//
 // Apple documentation: https://developer.apple.com/documentation/avkit/avplaybackspeed
 type AVPlaybackSpeed struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func AVPlaybackSpeedFromID(id objc.ID) *AVPlaybackSpeed {
 	return o
 }
 
-// @method         initWithRate:localizedName: @param         rate The rate to be used when this playback speed is selected. @param         localizedName A localized name to be displayed representing this playback speed in a UI. @abstract      Initializes an AVPlaybackSpeed.
+// Creates a playback speed with a rate and localized name.
 func (o *AVPlaybackSpeed) InitWithRateLocalizedName(rate float32, localizedName *foundation.NSString) *AVPlaybackSpeed {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlaybackSpeedSelInitWithRateLocalizedName, rate, localizedName.Ptr())
 	if _ret != 0 {

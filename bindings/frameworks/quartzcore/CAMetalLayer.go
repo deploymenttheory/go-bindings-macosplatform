@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A Core Animation layer that Metal can render into, typically displayed onscreen.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/cametallayer
 type CAMetalLayer struct {
 	CALayer
@@ -58,6 +60,7 @@ func CAMetalLayerFromID(id objc.ID) *CAMetalLayer {
 	return o
 }
 
+// Waits until a Metal drawable is available, and then returns it.
 func (o *CAMetalLayer) NextDrawable() CAMetalDrawable {
 	_ret := objc.Send[CAMetalDrawable](o.Ptr(), _cAMetalLayerSelNextDrawable)
 	return _ret
@@ -162,12 +165,15 @@ func (o *CAMetalLayer) SetAllowsNextDrawableTimeout(allowsNextDrawableTimeout bo
 }
 
 func (o *CAMetalLayer) DeveloperHUDProperties() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _cAMetalLayerSelDeveloperHUDProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cAMetalLayerSelDeveloperHUDProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *CAMetalLayer) SetDeveloperHUDProperties(developerHUDProperties *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_cAMetalLayerSelSetDeveloperHUDProperties, developerHUDProperties)
+	o.Ptr().Send(_cAMetalLayerSelSetDeveloperHUDProperties, developerHUDProperties.Ptr())
 }
 
 func (o *CAMetalLayer) ResidencySet() metal.MTLResidencySet {

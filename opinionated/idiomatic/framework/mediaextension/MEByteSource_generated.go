@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// Provides read access to the data in a media asset file.
+//
 // ByteSource wraps [raw.MEByteSource] with a fluent Go API.
 type ByteSource struct {
 	inner *raw.MEByteSource
@@ -40,14 +42,14 @@ func NewByteSource() *ByteSource {
 	return &ByteSource{inner: raw.MEByteSourceFromID(_id)}
 }
 
-// @method     	readDataOfLength:fromOffset:toDestination:completionHandler: @abstract		Reads bytes from an MEByteSource asynchronously into a buffer. @discussion		Asynchronously reads out the specified number of bytes starting at the indicated offset. Returns the actual number of bytes read out in bytesRead. Read attempts that extend beyond the end of the MEByteSource will succeed if they include at least one valid byte before the end of the MEByteSource. @param			length The number of bytes to read. @param			offset The relative offset in bytes from the beginning of the file from which to start reading. @param			dest The block of memory to hold the data to be read.  Must be at least num bytes in length. @param 			completionHandler The handler that will be invoked when the method completes. 'bytesRead' The actual number of bytes read. 'error' An NSError object that will contain error information if the method fails, otherwise nil. Returns MEErrorEndOfStream if no more bytes can be read.
+// Reads bytes from a byte source into a buffer.
 //
 // ReadDataOfLengthFromOffsetToDestinationCompletionHandler calls the underlying ReadDataOfLengthFromOffsetToDestinationCompletionHandler.
 func (x *ByteSource) ReadDataOfLengthFromOffsetToDestinationCompletionHandler(length uint, offset int64, dest unsafe.Pointer, completionHandler func(uint, unsafe.Pointer)) {
 	x.inner.ReadDataOfLengthFromOffsetToDestinationCompletionHandler(length, offset, dest, completionHandler)
 }
 
-// @method     	readDataOfLength:fromOffset:completionHandler: @abstract		Reads bytes from an MEByteSource asynchronously into an NSData object. @discussion		Asynchronously reads out the specified number of bytes starting at the indicated offset. Returns the actual number of bytes read out in bytesRead. Read attempts that extend beyond the end of the MEByteSource will succeed if they include at least one valid byte before the end of the MEByteSource. @param			length The number of bytes to read. @param			offset The relative offset in bytes from the beginning of the file from which to start reading. @param			completionHandler Completion block called when the method completes. 'data' The NSData object holding the data that have been read. The NSData length property will indicate the actual number of bytes read. 'error' An NSError object that will contain error information if the method fails, otherwise nil. Returns MEErrorEndOfStream if no more bytes can be read.
+// Reads bytes from a byte source into a data object.
 //
 // ReadDataOfLengthFromOffset blocks until the operation completes or ctx is cancelled.
 func (x *ByteSource) ReadDataOfLengthFromOffset(ctx context.Context, length uint, offset int64) (*foundation.NSData, error) {
@@ -73,21 +75,21 @@ func (x *ByteSource) ReadDataOfLengthFromOffset(ctx context.Context, length uint
 	}
 }
 
-// @method     	readDataOfLength:fromOffset:toDestination:bytesRead:error @abstract		Reads bytes from an MEByteSource synchronously into a buffer. @discussion		Synchronously reads out the specified number of bytes starting at the indicated offset. Returns the actual number of bytes read out in bytesReadOut. Read attempts that extend beyond the end of the MEByteSource will succeed if they include at least one valid byte before the end of the MEByteSource. @param			length The number of bytes to read. @param			offset The relative offset in bytes from the beginning of the file from which to start reading. @param			dest The block of memory to hold the data to be read.  Must be at least num bytes in length. @param			bytesReadOut The actual number of bytes read. @param			error Reports any errors. Returns MEErrorEndOfStream if no more bytes can be read. @result			Returns YES if successful, NO if an error occured.
+// Reads bytes from a byte source into a buffer.
 //
 // ReadDataOfLengthFromOffsetToDestinationBytesReadError calls the underlying ReadDataOfLengthFromOffsetToDestinationBytesReadError.
 func (x *ByteSource) ReadDataOfLengthFromOffsetToDestinationBytesReadError(length uint, offset int64, dest unsafe.Pointer, bytesReadOut *uint) (bool, error) {
 	return x.inner.ReadDataOfLengthFromOffsetToDestinationBytesReadError(length, offset, dest, bytesReadOut)
 }
 
-// @method			availableLengthAtOffset: @abstract		Returns the number of available bytes from the offset within the MEByteSource. @discussion		Returns the number of available bytes at the time of the query. This value could change over time. Attempting to read past this value may cause slow I/O. @param			offset The offset in bytes from the beginning of the MEByteSource. @result			Returns the number of available bytes from the offset, or 0 if that information is not available.
+// Gets the number of available bytes from the offset within the byte source.
 //
 // AvailableLengthAtOffset calls the underlying AvailableLengthAtOffset.
 func (x *ByteSource) AvailableLengthAtOffset(offset int64) int64 {
 	return x.inner.AvailableLengthAtOffset(offset)
 }
 
-// @method			byteSourceForRelatedFileName:error: @abstract		Requests creation of a new MEByteSource for a related file. @discussion		Requests creation of a new MEByteSource for a file related to the receiving MEByteSource. The scope of fileName that may be opened is restricted. Only files in the same directory as the receiver MEByteSource may be accessed, and the file extension must match one of the extensions listed in the format reader bundle plist. @param			fileName The relative file name in the receiver MEByteSource's parent directory. @param			errorOut Reports any errors. Returns MEErrorPermissionDenied if the file cannot be accessed or is prohibited. @result			Returns nil if fileName refers to a file that cannot be accessed or is prohibited, or if an error occured. The returned MEByteSource is autoreleased.
+// Creates a new byte source for a related file.
 //
 // ByteSourceForRelatedFileNameError calls the underlying ByteSourceForRelatedFileNameError.
 func (x *ByteSource) ByteSourceForRelatedFileNameError(fileName string) (*ByteSource, error) {

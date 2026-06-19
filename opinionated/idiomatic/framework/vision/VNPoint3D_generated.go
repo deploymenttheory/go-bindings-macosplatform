@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a 3D point in an image.
+//
 // Point3D wraps [raw.VNPoint3D] with a fluent Go API.
 type Point3D struct {
 	inner *raw.VNPoint3D
@@ -30,6 +32,8 @@ func Point3DFromID(id objc.ID) *Point3D {
 	return &Point3D{inner: raw.VNPoint3DFromID(id)}
 }
 
+// Creates a point object with the position you specify.
+//
 // NewPoint3DWithPosition creates a new [Point3D].
 func NewPoint3DWithPosition(position unsafe.Pointer) *Point3D {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNPoint3D")), objc.RegisterName("alloc"))

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The user interface of a path control object.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspathcell
 type NSPathCell struct {
 	NSActionCell
@@ -54,11 +56,13 @@ func NSPathCellFromID(id objc.ID) *NSPathCell {
 	return o
 }
 
+// Returns the current rectangle being displayed for a given path component cell, with respect to a given frame in a given view.
 func (o *NSPathCell) RectOfPathComponentCellWithFrameInView(cell *NSPathComponentCell, frame corefoundation.CGRect, view *NSView) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSPathCellSelRectOfPathComponentCellWithFrameInView, cell.Ptr(), frame, view.Ptr())
 	return _ret
 }
 
+// Returns the cell located at the given point within the given frame of the given view.
 func (o *NSPathCell) PathComponentCellAtPointWithFrameInView(point corefoundation.CGPoint, frame corefoundation.CGRect, view *NSView) *NSPathComponentCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelPathComponentCellAtPointWithFrameInView, point, frame, view.Ptr())
 	if _ret != 0 {
@@ -67,10 +71,12 @@ func (o *NSPathCell) PathComponentCellAtPointWithFrameInView(point corefoundatio
 	return NSPathComponentCellFromID(_ret)
 }
 
+// Displays the cell component over which the mouse is hovering.
 func (o *NSPathCell) MouseEnteredWithFrameInView(event *NSEvent, frame corefoundation.CGRect, view *NSView) {
 	o.Ptr().Send(_nSPathCellSelMouseEnteredWithFrameInView, event.Ptr(), frame, view.Ptr())
 }
 
+// Hides the cell component over which the mouse is hovering.
 func (o *NSPathCell) MouseExitedWithFrameInView(event *NSEvent, frame corefoundation.CGRect, view *NSView) {
 	o.Ptr().Send(_nSPathCellSelMouseExitedWithFrameInView, event.Ptr(), frame, view.Ptr())
 }
@@ -97,12 +103,15 @@ func (o *NSPathCell) SetURL(uRL *foundation.NSURL) {
 }
 
 func (o *NSPathCell) AllowedTypes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSPathCellSelAllowedTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelAllowedTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSPathCell) SetAllowedTypes(allowedTypes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSPathCellSelSetAllowedTypes, allowedTypes)
+	o.Ptr().Send(_nSPathCellSelSetAllowedTypes, allowedTypes.Ptr())
 }
 
 func (o *NSPathCell) Delegate() NSPathCellDelegate {

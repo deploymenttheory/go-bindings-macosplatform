@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to the App Store to get the app receipt, which represents the customer’s transactions with your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skreceiptrefreshrequest
 // Deprecated: Use Transaction.all and AppTransaction.shared.
 type SKReceiptRefreshRequest struct {
@@ -32,8 +34,9 @@ func SKReceiptRefreshRequestFromID(id objc.ID) *SKReceiptRefreshRequest {
 	return o
 }
 
+// Creates a receipt refresh request with optional properties.
 func (o *SKReceiptRefreshRequest) InitWithReceiptProperties(properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SKReceiptRefreshRequest {
-	_ret := objc.Send[objc.ID](o.Ptr(), _sKReceiptRefreshRequestSelInitWithReceiptProperties, properties)
+	_ret := objc.Send[objc.ID](o.Ptr(), _sKReceiptRefreshRequestSelInitWithReceiptProperties, properties.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -41,6 +44,9 @@ func (o *SKReceiptRefreshRequest) InitWithReceiptProperties(properties *foundati
 }
 
 func (o *SKReceiptRefreshRequest) ReceiptProperties() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _sKReceiptRefreshRequestSelReceiptProperties)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sKReceiptRefreshRequestSelReceiptProperties)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }

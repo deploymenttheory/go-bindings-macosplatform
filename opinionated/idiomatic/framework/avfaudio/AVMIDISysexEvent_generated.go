@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a MIDI system exclusive message.
+//
 // MIDISysexEvent wraps [raw.AVMIDISysexEvent] with a fluent Go API.
 type MIDISysexEvent struct {
 	inner *raw.AVMIDISysexEvent
@@ -30,7 +32,7 @@ func MIDISysexEventFromID(id objc.ID) *MIDISysexEvent {
 	return &MIDISysexEvent{inner: raw.AVMIDISysexEventFromID(id)}
 }
 
-// @method initWithData: @abstract Initialize the event with an NSData. @param data An NSData object containing the raw contents of the system exclusive event.
+// Creates a system event with the data you specify.
 //
 // NewMIDISysexEventWithData creates a new [MIDISysexEvent].
 func NewMIDISysexEventWithData(data *foundation.NSData) *MIDISysexEvent {

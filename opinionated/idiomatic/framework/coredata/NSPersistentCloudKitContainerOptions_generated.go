@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that customizes how a store description aligns with a CloudKit database.
+//
 // PersistentCloudKitContainerOptions wraps [raw.NSPersistentCloudKitContainerOptions] with a fluent Go API.
 type PersistentCloudKitContainerOptions struct {
 	inner *raw.NSPersistentCloudKitContainerOptions
@@ -33,6 +35,8 @@ func PersistentCloudKitContainerOptionsFromID(id objc.ID) *PersistentCloudKitCon
 	return &PersistentCloudKitContainerOptions{inner: raw.NSPersistentCloudKitContainerOptionsFromID(id)}
 }
 
+// Initializes container options using the given CloudKit container identifier.
+//
 // NewPersistentCloudKitContainerOptionsWithContainerIdentifier creates a new [PersistentCloudKitContainerOptions].
 func NewPersistentCloudKitContainerOptionsWithContainerIdentifier(containerIdentifier string) *PersistentCloudKitContainerOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentCloudKitContainerOptions")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewPersistentCloudKitContainerOptionsWithContainerIdentifier(containerIdent
 	return &PersistentCloudKitContainerOptions{inner: raw.NSPersistentCloudKitContainerOptionsFromID(_id)}
 }
 
+// The database scope — public, private, or shared — to use for a specified store in a persistent CloudKit container.
+//
 // WithDatabaseScope sets the databaseScope property and returns the receiver for chaining.
 func (x *PersistentCloudKitContainerOptions) WithDatabaseScope(databaseScope objc.ID) *PersistentCloudKitContainerOptions {
 	x.inner.SetDatabaseScope(databaseScope)

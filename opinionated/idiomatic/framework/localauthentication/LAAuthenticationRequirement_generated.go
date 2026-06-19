@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @brief Builds requirements that can be used for protecting a @c LARight
+// A set of requirements that protect a right.
 //
 // AuthenticationRequirement wraps [raw.LAAuthenticationRequirement] with a fluent Go API.
 type AuthenticationRequirement struct {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The controller you use to report web usage and block restricted webpages.
+//
 // WebpageController wraps [raw.STWebpageController] with a fluent Go API.
 type WebpageController struct {
 	inner *raw.STWebpageController
@@ -37,7 +39,7 @@ func NewWebpageController() *WebpageController {
 	return &WebpageController{inner: raw.STWebpageControllerFromID(_id)}
 }
 
-// A Boolean that indicates whether the webpage controller is not recording web usage. Set to <doc://com.apple.documentation/documentation/objectivec/yes> to stop recording and reporting web-usage data.
+// A Boolean that indicates whether the webpage controller is not recording web usage.
 //
 // WithSuppressUsageRecording sets the suppressUsageRecording property and returns the receiver for chaining.
 func (x *WebpageController) WithSuppressUsageRecording(suppressUsageRecording bool) *WebpageController {
@@ -45,7 +47,7 @@ func (x *WebpageController) WithSuppressUsageRecording(suppressUsageRecording bo
 	return x
 }
 
-// The URL for the webpage. Set this value to the webpage’s URL when the user navigates to a new URL.
+// The URL for the webpage.
 //
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *WebpageController) WithURL(uRL string) *WebpageController {
@@ -53,7 +55,7 @@ func (x *WebpageController) WithURL(uRL string) *WebpageController {
 	return x
 }
 
-// A Boolean that indicates whether there are one or more videos currently playing in the webpage. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops playing video. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing “ScreenTime/STWebpageController/URL“ if the new webpage at that URL stops currently playing media and won’t immediately start playing new media.
+// A Boolean that indicates whether there are one or more videos currently playing in the webpage.
 //
 // WithURLIsPlayingVideo sets the uRLIsPlayingVideo property and returns the receiver for chaining.
 func (x *WebpageController) WithURLIsPlayingVideo(uRLIsPlayingVideo bool) *WebpageController {
@@ -61,7 +63,7 @@ func (x *WebpageController) WithURLIsPlayingVideo(uRLIsPlayingVideo bool) *Webpa
 	return x
 }
 
-// A Boolean that indicates whether the webpage is currently displaying a floating picture in picture window. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops displaying a Picture in Picture window. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing “ScreenTime/STWebpageController/URL“ if the new webpage at that URL ends all currently displayed Picture in Picture windows, and won’t immediately display a new one.
+// A Boolean that indicates whether the webpage is currently displaying a floating picture in picture window.
 //
 // WithURLIsPictureInPicture sets the uRLIsPictureInPicture property and returns the receiver for chaining.
 func (x *WebpageController) WithURLIsPictureInPicture(uRLIsPictureInPicture bool) *WebpageController {
@@ -69,7 +71,7 @@ func (x *WebpageController) WithURLIsPictureInPicture(uRLIsPictureInPicture bool
 	return x
 }
 
-// An optional identifier for the current browsing profile. The default value is `nil`. This identifier represents a profile and allows you to keep your browsing separate for topics like work, personal, or school. Using `nil` will report web history without a profile identifier. Web browsers with a "default" profile may want to use `nil` in order to match any web history reported prior to this API.
+// An optional identifier for the current browsing profile.
 //
 // WithProfileIdentifier sets the profileIdentifier property and returns the receiver for chaining.
 func (x *WebpageController) WithProfileIdentifier(profileIdentifier *foundation.NSString) *WebpageController {
@@ -77,7 +79,7 @@ func (x *WebpageController) WithProfileIdentifier(profileIdentifier *foundation.
 	return x
 }
 
-// Changes the bundle identifier used to report web usage. This is only supported for web browsers that have been properly registered with Screen Time. - Parameters: - bundleIdentifier: The bundle identifier that can be changed to facilitate web usage reporting for a parent web browser from one of its helper processes or extensions. - error: Any error that occurred while changing the bundle identifier.
+// Changes the bundle identifier used to report web usage.
 //
 // SetBundleIdentifierError calls the underlying SetBundleIdentifierError.
 func (x *WebpageController) SetBundleIdentifierError(bundleIdentifier string) (bool, error) {

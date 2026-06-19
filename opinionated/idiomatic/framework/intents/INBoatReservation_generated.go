@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The information that describes a boat reservation.
+//
 // BoatReservation wraps [raw.INBoatReservation] with a fluent Go API.
 type BoatReservation struct {
 	inner *raw.INBoatReservation
@@ -30,6 +32,8 @@ func BoatReservationFromID(id objc.ID) *BoatReservation {
 	return &BoatReservation{inner: raw.INBoatReservationFromID(id)}
 }
 
+// Creates a boat reservation with the specified contents and attributes.
+//
 // NewBoatReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBoatTrip creates a new [BoatReservation].
 func NewBoatReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBoatTrip(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, reservedSeat *raw.INSeat, boatTrip *raw.INBoatTrip) *BoatReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INBoatReservation")), objc.RegisterName("alloc"))

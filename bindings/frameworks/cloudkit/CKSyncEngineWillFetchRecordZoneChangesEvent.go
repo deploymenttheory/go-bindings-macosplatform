@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The sync engine finished fetching record zone changes from the server for a specific zone.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginewillfetchrecordzonechangesevent
 type CKSyncEngineWillFetchRecordZoneChangesEvent struct {
 	CKSyncEngineEvent

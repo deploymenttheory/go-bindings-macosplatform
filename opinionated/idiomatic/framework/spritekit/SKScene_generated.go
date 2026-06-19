@@ -15,7 +15,7 @@ import (
 	"unsafe"
 )
 
-// A scene is the root node of your content. It is used to display SpriteKit content on an SKView. @see SKView
+// An object that organizes all of the active SpriteKit content.
 //
 // Scene wraps [raw.SKScene] with a fluent Go API.
 type Scene struct {
@@ -37,7 +37,7 @@ func SceneFromID(id objc.ID) *Scene {
 	return &Scene{inner: raw.SKSceneFromID(id)}
 }
 
-// A scene is infinitely large, but it has a viewport that is the frame through which you present the content of the scene. The passed in size defines the size of this viewport that you use to present the scene. @param size a size in points that signifies the viewport into the scene that defines your framing of the scene.
+// Initializes a new scene object.
 //
 // NewSceneWithSize creates a new [Scene].
 func NewSceneWithSize(size corefoundation.CGSize) *Scene {
@@ -46,13 +46,15 @@ func NewSceneWithSize(size corefoundation.CGSize) *Scene {
 	return &Scene{inner: raw.SKSceneFromID(_id)}
 }
 
+// The dimensions of the scene, in points.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *Scene) WithSize(size corefoundation.CGSize) *Scene {
 	x.inner.SetSize(size)
 	return x
 }
 
-// Used to determine how to scale the scene to match the SKView it is being displayed in.
+// A setting that defines how the scene is mapped to the view that presents it.
 //
 // WithScaleMode sets the scaleMode property and returns the receiver for chaining.
 func (x *Scene) WithScaleMode(scaleMode SKSceneScaleMode) *Scene {
@@ -60,7 +62,7 @@ func (x *Scene) WithScaleMode(scaleMode SKSceneScaleMode) *Scene {
 	return x
 }
 
-// The camera that is used to obtain the view scale and translation based on where the camera is in relation to the scene.
+// The camera node in the scene that determines what part of the scene’s coordinate space is visible in the view.
 //
 // WithCamera sets the camera property and returns the receiver for chaining.
 func (x *Scene) WithCamera(camera *CameraNode) *Scene {
@@ -68,7 +70,7 @@ func (x *Scene) WithCamera(camera *CameraNode) *Scene {
 	return x
 }
 
-// The node that is currently the listener for positional audio coming from SKAudioNodes @see SKAudioNode
+// A node used to determine the position of the listener for positional audio in the scene.
 //
 // WithListener sets the listener property and returns the receiver for chaining.
 func (x *Scene) WithListener(listener NodeProvider) *Scene {
@@ -76,7 +78,7 @@ func (x *Scene) WithListener(listener NodeProvider) *Scene {
 	return x
 }
 
-// Background color, defaults to gray
+// The background color of the scene.
 //
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *Scene) WithBackgroundColor(backgroundColor *appkit.NSColor) *Scene {
@@ -84,13 +86,15 @@ func (x *Scene) WithBackgroundColor(backgroundColor *appkit.NSColor) *Scene {
 	return x
 }
 
+// A delegate to be called during the animation loop.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Scene) WithDelegate(delegate raw.SKSceneDelegate) *Scene {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
-// Used to choose the origin of the scene's coordinate system
+// The point in the view’s frame that corresponds to the scene’s origin.
 //
 // WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
 func (x *Scene) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Scene {
@@ -98,7 +102,7 @@ func (x *Scene) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Scene {
 	return x
 }
 
-// A CIFilter to be used as an effect Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed. The filter is applied to all children of the SKEffectNode. If the filter is nil, the children of this node is flattened before being drawn as long as the SKEffectNode is enabled.
+// The Core Image filter to apply.
 //
 // WithFilter sets the filter property and returns the receiver for chaining.
 func (x *Scene) WithFilter(filter *coreimage.CIFilter) *Scene {
@@ -106,13 +110,15 @@ func (x *Scene) WithFilter(filter *coreimage.CIFilter) *Scene {
 	return x
 }
 
+// A Boolean value that determines whether the effect node automatically sets the filter’s image center.
+//
 // WithShouldCenterFilter sets the shouldCenterFilter property and returns the receiver for chaining.
 func (x *Scene) WithShouldCenterFilter(shouldCenterFilter bool) *Scene {
 	x.inner.SKEffectNode.SetShouldCenterFilter(shouldCenterFilter)
 	return x
 }
 
-// Enable the SKEffectNode. The SKEffectNode has no effect when appliesEffects is not enabled, this is useful for setting up an effect to use later on. Defaults to YES.
+// A Boolean value that determines whether the effect node applies the filter to its children as they are drawn.
 //
 // WithShouldEnableEffects sets the shouldEnableEffects property and returns the receiver for chaining.
 func (x *Scene) WithShouldEnableEffects(shouldEnableEffects bool) *Scene {
@@ -120,7 +126,7 @@ func (x *Scene) WithShouldEnableEffects(shouldEnableEffects bool) *Scene {
 	return x
 }
 
-// Enable the rasterization on the SKEffectNode. The SKEffectNode's output is rasterized and cached internally. This cache is reused when rendering. When the SKEffectNode's children change, the cache is updated, but changing properties on the CIFilter does *not* cause an update (you must disable rasterization and then re-enable it for the changes to apply). This is more expensive than not rasterizing if the node's children change frequently, only enable this option if you know the children is largely static.
+// A Boolean value that indicates whether the results of rendering the child nodes should be cached.
 //
 // WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
 func (x *Scene) WithShouldRasterize(shouldRasterize bool) *Scene {
@@ -128,7 +134,7 @@ func (x *Scene) WithShouldRasterize(shouldRasterize bool) *Scene {
 	return x
 }
 
-// Sets the blend mode to use when composing the effect with the final framebuffer. @see SKNode.SKBlendMode
+// The blend mode used to draw the node’s contents into its parent’s framebuffer.
 //
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
 func (x *Scene) WithBlendMode(blendMode SKBlendMode) *Scene {
@@ -136,13 +142,15 @@ func (x *Scene) WithBlendMode(blendMode SKBlendMode) *Scene {
 	return x
 }
 
+// A custom shader that is called when the effect node is blended into the parent’s framebuffer.
+//
 // WithShader sets the shader property and returns the receiver for chaining.
 func (x *Scene) WithShader(shader *Shader) *Scene {
 	x.inner.SKEffectNode.SetShader(shader.Unwrap())
 	return x
 }
 
-// The position of the node in the parent's coordinate system
+// The position of the node in its parent’s coordinate system.
 //
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *Scene) WithPosition(position corefoundation.CGPoint) *Scene {
@@ -150,7 +158,7 @@ func (x *Scene) WithPosition(position corefoundation.CGPoint) *Scene {
 	return x
 }
 
-// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+// The height of the node relative to its parent.
 //
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *Scene) WithZPosition(zPosition float64) *Scene {
@@ -158,7 +166,7 @@ func (x *Scene) WithZPosition(zPosition float64) *Scene {
 	return x
 }
 
-// The Euler rotation about the z axis (in radians)
+// The Euler rotation about the z axis (in radians).
 //
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *Scene) WithZRotation(zRotation float64) *Scene {
@@ -166,7 +174,7 @@ func (x *Scene) WithZRotation(zRotation float64) *Scene {
 	return x
 }
 
-// The scaling in the X axis
+// A scaling factor that multiplies the width of a node and its children.
 //
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *Scene) WithXScale(xScale float64) *Scene {
@@ -174,7 +182,7 @@ func (x *Scene) WithXScale(xScale float64) *Scene {
 	return x
 }
 
-// The scaling in the Y axis
+// A scaling factor that multiplies the height of a node and its children.
 //
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *Scene) WithYScale(yScale float64) *Scene {
@@ -182,7 +190,7 @@ func (x *Scene) WithYScale(yScale float64) *Scene {
 	return x
 }
 
-// The speed multiplier applied to all actions run on this node. Inherited by its children.
+// A speed modifier applied to all actions executed by a node and its descendants.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *Scene) WithSpeed(speed float64) *Scene {
@@ -190,7 +198,7 @@ func (x *Scene) WithSpeed(speed float64) *Scene {
 	return x
 }
 
-// Alpha of this node (multiplied by the output color to give the final result)
+// The transparency value applied to the node’s contents.
 //
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *Scene) WithAlpha(alpha float64) *Scene {
@@ -198,7 +206,7 @@ func (x *Scene) WithAlpha(alpha float64) *Scene {
 	return x
 }
 
-// Controls whether or not the node's actions is updated or paused.
+// A Boolean value that determines whether actions on the node and its descendants are processed.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *Scene) WithPaused(paused bool) *Scene {
@@ -206,7 +214,7 @@ func (x *Scene) WithPaused(paused bool) *Scene {
 	return x
 }
 
-// Controls whether or not the node and its children are rendered.
+// A Boolean value that determines whether a node and its descendants are rendered.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *Scene) WithHidden(hidden bool) *Scene {
@@ -214,7 +222,7 @@ func (x *Scene) WithHidden(hidden bool) *Scene {
 	return x
 }
 
-// Controls whether or not the node receives touch events
+// A Boolean value that indicates whether the node receives touch events.
 //
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *Scene) WithUserInteractionEnabled(userInteractionEnabled bool) *Scene {
@@ -222,7 +230,7 @@ func (x *Scene) WithUserInteractionEnabled(userInteractionEnabled bool) *Scene {
 	return x
 }
 
-// The client assignable name. In general, this should be unique among peers in the scene graph.
+// The node’s assignable name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Scene) WithName(name string) *Scene {
@@ -230,7 +238,7 @@ func (x *Scene) WithName(name string) *Scene {
 	return x
 }
 
-// Physics body attached to the node, with synchronized scale, rotation, and position
+// The physics body associated with the node.
 //
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *Scene) WithPhysicsBody(physicsBody *PhysicsBody) *Scene {
@@ -238,7 +246,7 @@ func (x *Scene) WithPhysicsBody(physicsBody *PhysicsBody) *Scene {
 	return x
 }
 
-// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+// A dictionary containing arbitrary data.
 //
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *Scene) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *Scene {
@@ -246,7 +254,7 @@ func (x *Scene) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, o
 	return x
 }
 
-// Kinematic constraints, used in IK solving
+// The reach constraints to apply to the node when executing a reach action.
 //
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *Scene) WithReachConstraints(reachConstraints *ReachConstraints) *Scene {
@@ -254,7 +262,7 @@ func (x *Scene) WithReachConstraints(reachConstraints *ReachConstraints) *Scene 
 	return x
 }
 
-// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+// A list of constraints to apply to the node.
 //
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *Scene) WithConstraints(items ...*raw.SKConstraint) *Scene {
@@ -277,7 +285,7 @@ func (x *Scene) WithConstraints(items ...*raw.SKConstraint) *Scene {
 	return x
 }
 
-// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+// The values of each attribute associated with the node’s attached shader.
 //
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *Scene) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *Scene {
@@ -285,120 +293,150 @@ func (x *Scene) WithAttributeValues(attributeValues *foundation.NSDictionary[*fo
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+//
 // WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
 func (x *Scene) WithAccessibilityElement(accessibilityElement bool) *Scene {
 	x.inner.SKEffectNode.SKNode.SetAccessibilityElement(accessibilityElement)
 	return x
 }
 
+// A string value describing the user interface element type; for example, a button.
+//
 // WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
 func (x *Scene) WithAccessibilityRole(accessibilityRole string) *Scene {
 	x.inner.SKEffectNode.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
 	return x
 }
 
+// A string value describing the user interface element name and type; for example, the Buy button.
+//
 // WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
 func (x *Scene) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *Scene {
 	x.inner.SKEffectNode.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
 	return x
 }
 
+// A string that defines this user interface element’s subrole; for example, a full-screen button.
+//
 // WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
 func (x *Scene) WithAccessibilitySubrole(accessibilitySubrole string) *Scene {
 	x.inner.SKEffectNode.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
 	return x
 }
 
+// The size of this user interface element, in screen points.
+//
 // WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
 func (x *Scene) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *Scene {
 	x.inner.SKEffectNode.SKNode.SetAccessibilityFrame(accessibilityFrame)
 	return x
 }
 
+// The user interface element that contains this element.
+//
 // WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
 func (x *Scene) WithAccessibilityParent(accessibilityParent objc.ID) *Scene {
 	x.inner.SKEffectNode.SKNode.SetAccessibilityParent(accessibilityParent)
 	return x
 }
 
+// The help description of this user interface element; for example, the text shown in a tooltip.
+//
 // WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
 func (x *Scene) WithAccessibilityHelp(accessibilityHelp string) *Scene {
 	x.inner.SKEffectNode.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
 	return x
 }
 
+// A short description of this user interface element.
+//
 // WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
 func (x *Scene) WithAccessibilityLabel(accessibilityLabel string) *Scene {
 	x.inner.SKEffectNode.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
+//
 // WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
 func (x *Scene) WithAccessibilityEnabled(accessibilityEnabled bool) *Scene {
 	x.inner.SKEffectNode.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
 	return x
 }
 
+// Tells you when the scene is presented.
+//
 // SceneDidLoad calls the underlying SceneDidLoad.
 func (x *Scene) SceneDidLoad() {
 	x.inner.SceneDidLoad()
 }
 
+// Converts a point from view coordinates to scene coordinates.
+//
 // ConvertPointFromView calls the underlying ConvertPointFromView.
 func (x *Scene) ConvertPointFromView(point corefoundation.CGPoint) corefoundation.CGPoint {
 	return x.inner.ConvertPointFromView(point)
 }
 
+// Converts a point from scene coordinates to view coordinates.
+//
 // ConvertPointToView calls the underlying ConvertPointToView.
 func (x *Scene) ConvertPointToView(point corefoundation.CGPoint) corefoundation.CGPoint {
 	return x.inner.ConvertPointToView(point)
 }
 
-// Override this to perform per-frame game logic. Called exactly once per frame before any actions are evaluated and any physics are simulated. @param currentTime the current time in the app. This must be monotonically increasing.
+// Tells your app to perform any app-specific logic to update your scene.
 //
 // Update calls the underlying Update.
 func (x *Scene) Update(currentTime float64) {
 	x.inner.Update(currentTime)
 }
 
-// Override this to perform game logic. Called exactly once per frame after any actions have been evaluated but before any physics are simulated. Any additional actions applied is not evaluated until the next update.
+// Tells your app to peform any necessary logic after scene actions are evaluated.
 //
 // DidEvaluateActions calls the underlying DidEvaluateActions.
 func (x *Scene) DidEvaluateActions() {
 	x.inner.DidEvaluateActions()
 }
 
-// Override this to perform game logic. Called exactly once per frame after any actions have been evaluated and any physics have been simulated. Any additional actions applied is not evaluated until the next update. Any changes to physics bodies is not simulated until the next update.
+// Tells your app to peform any necessary logic after physics simulations are performed.
 //
 // DidSimulatePhysics calls the underlying DidSimulatePhysics.
 func (x *Scene) DidSimulatePhysics() {
 	x.inner.DidSimulatePhysics()
 }
 
-// Override this to perform game logic. Called exactly once per frame after any enabled constraints have been applied. Any additional actions applied is not evaluated until the next update. Any changes to physics bodies is not simulated until the next update. Any changes to constraints will not be applied until the next update.
+// Tells your app to peform any necessary logic after constraints are applied.
 //
 // DidApplyConstraints calls the underlying DidApplyConstraints.
 func (x *Scene) DidApplyConstraints() {
 	x.inner.DidApplyConstraints()
 }
 
-// Override this to perform game logic. Called after all update logic has been completed. Any additional actions applied are not evaluated until the next update. Any changes to physics bodies are not simulated until the next update. Any changes to constraints will not be applied until the next update. No futher update logic will be applied to the scene after this call. Any values set on nodes here will be used when the scene is rendered for the current frame.
+// Tells your app to peform any necessary logic after the scene has finished all of the steps required to process animations.
 //
 // DidFinishUpdate calls the underlying DidFinishUpdate.
 func (x *Scene) DidFinishUpdate() {
 	x.inner.DidFinishUpdate()
 }
 
+// Tells you when the scene is presented by a view.
+//
 // DidMoveToView calls the underlying DidMoveToView.
 func (x *Scene) DidMoveToView(view *raw.SKView) {
 	x.inner.DidMoveToView(view)
 }
 
+// Tells you when the scene is about to be removed from a view.
+//
 // WillMoveFromView calls the underlying WillMoveFromView.
 func (x *Scene) WillMoveFromView(view *raw.SKView) {
 	x.inner.WillMoveFromView(view)
 }
 
+// Tells you when the scene’s size has changed.
+//
 // DidChangeSize calls the underlying DidChangeSize.
 func (x *Scene) DidChangeSize(oldSize corefoundation.CGSize) {
 	x.inner.DidChangeSize(oldSize)

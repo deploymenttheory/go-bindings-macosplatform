@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An SKTransformNode can be applied a 3D rotation that will affect the visual aspect of its children. The physics and constraints of the children will behave as if none of them were transformed.
+// A node that allows its children to rotate in 3D.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/sktransformnode
 type SKTransformNode struct {

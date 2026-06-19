@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that models the timing and presentation state of an asset during playback.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayeritem
 type AVPlayerItem struct {
 	foundation.NSObject
@@ -144,7 +146,7 @@ func AVPlayerItemFromID(id objc.ID) *AVPlayerItem {
 	return o
 }
 
-// Returns an instance of AVPlayerItem for playing a resource at the specified location. Equivalent to +playerItemWithAsset:, passing [AVAsset assetWithURL:URL] as the value of asset. - Parameter URL: - Returns: An instance of AVPlayerItem.
+// Returns a new player item with a specified URL.
 func AVPlayerItemPlayerItemWithURL(uRL *foundation.NSURL) *AVPlayerItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerItem), _aVPlayerItemSelPlayerItemWithURL, uRL.Ptr())
 	if _ret != 0 {
@@ -153,7 +155,7 @@ func AVPlayerItemPlayerItemWithURL(uRL *foundation.NSURL) *AVPlayerItem {
 	return AVPlayerItemFromID(_ret)
 }
 
-// Returns an instance of AVPlayerItem for playing an AVAsset. Equivalent to +playerItemWithAsset:automaticallyLoadedAssetKeys:, passing @[ @"duration" ] as the value of automaticallyLoadedAssetKeys. This method, along with the companion `asset` property, is MainActor-isolated for Swift clients because AVAsset is not Sendable. If you are using a Sendable subclass of AVAsset, such as AVURLAsset, an overload of this initializer will be chosen automatically to allow you to initialize an AVPlayerItem while not running on the main actor. - Parameter asset: - Returns: An instance of AVPlayerItem.
+// Returns a new player item for a specified asset.
 func AVPlayerItemPlayerItemWithAsset(asset *AVAsset) *AVPlayerItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerItem), _aVPlayerItemSelPlayerItemWithAsset, asset.Ptr())
 	if _ret != 0 {
@@ -162,16 +164,16 @@ func AVPlayerItemPlayerItemWithAsset(asset *AVAsset) *AVPlayerItem {
 	return AVPlayerItemFromID(_ret)
 }
 
-// Returns an instance of AVPlayerItem for playing an AVAsset. The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be one of the terminal status values greater than AVKeyValueStatusLoading. This method, along with the companion `asset` property, is MainActor-isolated for Swift clients because AVAsset is not Sendable. If you are using a Sendable subclass of AVAsset, such as AVURLAsset, you can use `init(asset:automaticallyLoadedAssetKeys:)` to initialize an AVPlayerItem while not running on the main actor. - Parameter asset: - Parameter automaticallyLoadedAssetKeys: An NSArray of NSStrings, each representing a property key defined by AVAsset. See AVAsset.h for property keys, e.g. duration. - Returns: An instance of AVPlayerItem.
+// Creates a player item with the specified asset and the asset keys to automatically load.
 func AVPlayerItemPlayerItemWithAssetAutomaticallyLoadedAssetKeys(asset *AVAsset, automaticallyLoadedAssetKeys *foundation.NSArray[*foundation.NSString]) *AVPlayerItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerItem), _aVPlayerItemSelPlayerItemWithAssetAutomaticallyLoadedAssetKeys, asset.Ptr(), automaticallyLoadedAssetKeys)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerItem), _aVPlayerItemSelPlayerItemWithAssetAutomaticallyLoadedAssetKeys, asset.Ptr(), automaticallyLoadedAssetKeys.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVPlayerItemFromID(_ret)
 }
 
-// Initializes an AVPlayerItem with an NSURL. Equivalent to -initWithAsset:, passing [AVAsset assetWithURL:URL] as the value of asset. - Parameter URL: - Returns: An instance of AVPlayerItem
+// Creates a player item with a specified URL.
 func (o *AVPlayerItem) InitWithURL(uRL *foundation.NSURL) *AVPlayerItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelInitWithURL, uRL.Ptr())
 	if _ret != 0 {
@@ -180,7 +182,7 @@ func (o *AVPlayerItem) InitWithURL(uRL *foundation.NSURL) *AVPlayerItem {
 	return AVPlayerItemFromID(_ret)
 }
 
-// Initializes an AVPlayerItem with an AVAsset. Equivalent to -initWithAsset:automaticallyLoadedAssetKeys:, passing @[ @"duration" ] as the value of automaticallyLoadedAssetKeys. This method, along with the companion `asset` property, is MainActor-isolated for Swift clients because AVAsset is not Sendable. If you are using a Sendable subclass of AVAsset, such as AVURLAsset, an overload of this initializer will be chosen automatically to allow you to initialize an AVPlayerItem while not running on the main actor. - Parameter asset: - Returns: An instance of AVPlayerItem
+// Creates a player item for a specified asset.
 func (o *AVPlayerItem) InitWithAsset(asset *AVAsset) *AVPlayerItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelInitWithAsset, asset.Ptr())
 	if _ret != 0 {
@@ -189,9 +191,9 @@ func (o *AVPlayerItem) InitWithAsset(asset *AVAsset) *AVPlayerItem {
 	return AVPlayerItemFromID(_ret)
 }
 
-// Initializes an AVPlayerItem with an AVAsset. The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be one of the terminal status values greater than AVKeyValueStatusLoading. This method, along with the companion `asset` property, is MainActor-isolated for Swift clients because AVAsset is not Sendable. If you are using a Sendable subclass of AVAsset, such as AVURLAsset, you can use `init(asset:automaticallyLoadedAssetKeys:)` to initialize an AVPlayerItem while not running on the main actor. - Parameter asset: An instance of AVAsset. - Parameter automaticallyLoadedAssetKeys: An NSArray of NSStrings, each representing a property key defined by AVAsset. See AVAsset.h for property keys, e.g. duration. - Returns: An instance of AVPlayerItem
+// Creates a player item with the specified asset and the asset keys to automatically load.
 func (o *AVPlayerItem) InitWithAssetAutomaticallyLoadedAssetKeys(asset *AVAsset, automaticallyLoadedAssetKeys *foundation.NSArray[*foundation.NSString]) *AVPlayerItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelInitWithAssetAutomaticallyLoadedAssetKeys, asset.Ptr(), automaticallyLoadedAssetKeys)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelInitWithAssetAutomaticallyLoadedAssetKeys, asset.Ptr(), automaticallyLoadedAssetKeys.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -252,8 +254,11 @@ func (o *AVPlayerItem) TimedMetadata() *foundation.NSArray[*AVMetadataItem] {
 
 // An array of property keys defined on AVAsset. The value of each key in the array is automatically loaded while the receiver is being made ready to play. The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be AVKeyValueStatusLoaded. If loading of any of the values fails, the status of the AVPlayerItem will change instead to AVPlayerItemStatusFailed..
 func (o *AVPlayerItem) AutomaticallyLoadedAssetKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVPlayerItemSelAutomaticallyLoadedAssetKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelAutomaticallyLoadedAssetKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // For releases of macOS prior to 10.9 and releases of iOS prior to 7.0, indicates whether the item can be played at rates greater than 1.0. Starting with macOS 10.9 and iOS 7.0, all AVPlayerItems with status AVPlayerItemReadyToPlay can be played at rates between 1.0 and 2.0, inclusive, even if canPlayFastForward is NO; for those releases canPlayFastForward indicates whether the item can be played at rates greater than 2.0.
@@ -324,13 +329,13 @@ func (o *AVPlayerItem) SetAutomaticallyPreservesTimeOffsetFromLive(automatically
 	o.Ptr().Send(_aVPlayerItemSelSetAutomaticallyPreservesTimeOffsetFromLive, automaticallyPreservesTimeOffsetFromLive)
 }
 
-// Returns the current time of the item. Returns the current time of the item. Not key-value observable; use -[AVPlayer addPeriodicTimeObserverForInterval:queue:usingBlock:] instead. - Returns: A CMTime
+// Returns the current time of the item.
 func (o *AVPlayerItem) CurrentTime() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVPlayerItemSelCurrentTime)
 	return _ret
 }
 
-// Moves the playback cursor and invokes the specified block when the seek operation has either been completed or been interrupted. Use this method to seek to a specified time for the item and to be notified when the seek operation is complete. The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter set to NO. If the new request completes without being interrupted by another seek request or by any other operation the specified completion handler will be invoked with the finished parameter set to YES. If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled and the completion handler will be invoked with the finished parameter set to NO. This method throws an exception if time is invalid or indefinite. - Parameter time: - Parameter completionHandler:
+// Sets the current playback time to the specified time.
 func (o *AVPlayerItem) SeekToTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -342,7 +347,7 @@ func (o *AVPlayerItem) SeekToTimeCompletionHandler(time_ coremedia.CMTime, compl
 	o.Ptr().Send(_aVPlayerItemSelSeekToTimeCompletionHandler, time_, __block_completionHandler)
 }
 
-// Moves the playback cursor within a specified time bound and invokes the specified block when the seek operation has either been completed or been interrupted. Use this method to seek to a specified time for the item and to be notified when the seek operation is complete. The time seeked to will be within the range [time-toleranceBefore, time+toleranceAfter] and may differ from the specified time for efficiency. Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request sample accurate seeking which may incur additional decoding delay. Messaging this method with beforeTolerance:kCMTimePositiveInfinity and afterTolerance:kCMTimePositiveInfinity is the same as messaging seekToTime: directly. The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter set to NO. If the new request completes without being interrupted by another seek request or by any other operation the specified completion handler will be invoked with the finished parameter set to YES. If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled and the completion handler will be invoked with the finished parameter set to NO. This method throws an exception if time is invalid or indefinite or if tolerance before or tolerance after is invalid or negative. - Parameter time: - Parameter toleranceBefore: - Parameter toleranceAfter: - Parameter completionHandler:
+// Sets the current playback time within a specified time bound and invokes the specified block when the seek operation completes or is interrupted.
 func (o *AVPlayerItem) SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -354,12 +359,12 @@ func (o *AVPlayerItem) SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(
 	o.Ptr().Send(_aVPlayerItemSelSeekToTimeToleranceBeforeToleranceAfterCompletionHandler, time_, toleranceBefore, toleranceAfter, __block_completionHandler)
 }
 
-// Cancel any pending seek requests and invoke the corresponding completion handlers if present. Use this method to cancel and release the completion handlers of pending seeks. The finished parameter of the completion handlers will be set to NO.
+// Cancels any pending seek requests and invokes the corresponding completion handlers if present.
 func (o *AVPlayerItem) CancelPendingSeeks() {
 	o.Ptr().Send(_aVPlayerItemSelCancelPendingSeeks)
 }
 
-// If currentTime is mapped to a particular (real-time) date, return that date. - Returns: Returns the date of current playback, or nil if playback is not mapped to any date.
+// Returns the current time of the item as a date.
 func (o *AVPlayerItem) CurrentDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelCurrentDate)
 	if _ret != 0 {
@@ -368,7 +373,7 @@ func (o *AVPlayerItem) CurrentDate() *foundation.NSDate {
 	return foundation.NSDateFromID(_ret)
 }
 
-// move playhead to a point corresponding to a particular date, and invokes the specified block when the seek operation has either been completed or been interrupted. For playback content that is associated with a range of dates, move the playhead to point within that range and invokes the completion handler when the seek operation is complete. Will fail if the supplied date is outside the range or if the content is not associated with a range of dates. The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter set to NO. If the new request completes without being interrupted by another seek request or by any other operation, the specified completion handler will be invoked with the finished parameter set to YES. - Parameter date: The new position for the playhead. - Parameter completionHandler: The block to invoke when seek operation is complete - Returns: Returns true if the playhead was moved to the supplied date.
+// Sets the current playback time to the time specified by the date object.
 func (o *AVPlayerItem) SeekToDateCompletionHandler(date *foundation.NSDate, completionHandler func(bool)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -381,7 +386,7 @@ func (o *AVPlayerItem) SeekToDateCompletionHandler(date *foundation.NSDate, comp
 	return _ret
 }
 
-// Moves player's current item's current time forward or backward by the specified number of steps. The size of each step depends on the enabled AVPlayerItemTracks of the AVPlayerItem. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this method must be invoked on the main thread/queue. - Parameter stepCount: The number of steps by which to move. A positive number results in stepping forward, a negative number in stepping backward.
+// Moves the player item’s current time forward or backward by a specified number of steps.
 func (o *AVPlayerItem) StepByCount(stepCount int) {
 	o.Ptr().Send(_aVPlayerItemSelStepByCount, stepCount)
 }
@@ -408,8 +413,11 @@ func (o *AVPlayerItem) SetReversePlaybackEndTime(reversePlaybackEndTime coremedi
 
 // This property provides a collection of time ranges that the player item can seek to. The ranges provided might be discontinous. Returns an NSArray of NSValues containing CMTimeRanges.
 func (o *AVPlayerItem) SeekableTimeRanges() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _aVPlayerItemSelSeekableTimeRanges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelSeekableTimeRanges)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 // The item's timebase. You can examine the timebase to discover the relationship between the item's time and the source clock used for drift synchronization. This timebase is read-only; you cannot set its time or rate to affect playback.
@@ -534,8 +542,11 @@ func (o *AVPlayerItem) SetAudioMix(audioMix *AVAudioMix) {
 
 // This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
 func (o *AVPlayerItem) LoadedTimeRanges() *foundation.NSArray[*foundation.NSValue] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _aVPlayerItemSelLoadedTimeRanges)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelLoadedTimeRanges)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSValue](_ret)
 }
 
 // Indicates whether the item will likely play through without stalling. This property communicates a prediction of playability. Factors considered in this prediction include I/O throughput and media decode performance. It is possible for playbackLikelyToKeepUp to indicate NO while the property playbackBufferFull indicates YES. In this event the playback buffer has reached capacity but there isn't the statistical data to support a prediction that playback is likely to keep up. It is left to the application programmer to decide to continue media playback or not. See playbackBufferFull below.
@@ -635,12 +646,12 @@ func (o *AVPlayerItem) SetVariantPreferences(variantPreferences AVVariantPrefere
 	o.Ptr().Send(_aVPlayerItemSelSetVariantPreferences, variantPreferences)
 }
 
-// Selects the media option described by the specified instance of AVMediaSelectionOption in the specified AVMediaSelectionGroup and deselects all other options in that group. If the specified media selection option isn't a member of the specified media selection group, no change in presentation state will result. If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, you can pass nil for mediaSelectionOption to deselect all media selection options in the group. Note that if multiple options within a group meet your criteria for selection according to locale or other considerations, and if these options are otherwise indistinguishable to you according to media characteristics that are meaningful for your application, content is typically authored so that the first available option that meets your criteria is appropriate for selection. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this method must be invoked on the main thread/queue. - Parameter mediaSelectionOption: The option to select. - Parameter mediaSelectionGroup: The media selection group, obtained from the receiver's asset, that contains the specified option.
+// Selects a media option in a given media selection group and deselects all other options in that group.
 func (o *AVPlayerItem) SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *AVMediaSelectionOption, mediaSelectionGroup *AVMediaSelectionGroup) {
 	o.Ptr().Send(_aVPlayerItemSelSelectMediaOptionInMediaSelectionGroup, mediaSelectionOption.Ptr(), mediaSelectionGroup.Ptr())
 }
 
-// Selects the media option in the specified media selection group that best matches the AVPlayer's current automatic selection criteria. Also allows automatic selection to be re-applied to the specified group subsequently if the relevant criteria are changed. Has no effect unless the appliesMediaSelectionCriteriaAutomatically property of the associated AVPlayer is YES and unless automatic media selection has previously been overridden via -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:]. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this method must be invoked on the main thread/queue. - Parameter mediaSelectionGroup: The media selection group, obtained from the receiver's asset, that contains the specified option.
+// Selects the media option in the specified media selection group that best matches the receiver’s automatic selection criteria.
 func (o *AVPlayerItem) SelectMediaOptionAutomaticallyInMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) {
 	o.Ptr().Send(_aVPlayerItemSelSelectMediaOptionAutomaticallyInMediaSelectionGroup, mediaSelectionGroup.Ptr())
 }
@@ -653,12 +664,12 @@ func (o *AVPlayerItem) CurrentMediaSelection() *AVMediaSelection {
 	return AVMediaSelectionFromID(_ret)
 }
 
-// When the associated AVPlayer's appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular language, replacing any previous preference for available languages of the specified group's custom media selection scheme. Overrides preferences for languages specified by the AVPlayer's current media selection criteria. This method has no effect when the associated AVPlayer's appliesMediaSelectionCriteriaAutomatically property has a value of NO, in which case you must use -selectMediaOption:inMediaSelectionGroup: instead in order to alter the presentation state of the media. - Parameter languages: A BCP 47 language tag, typically obtained from the availableLanguages of the AVCustomMediaSelectionScheme of the specified AVMediaSelectionGroup. - Parameter mediaSelectionGroup: The media selection group, obtained from the receiver's asset, to which the specified setting is to be applied.
+// When the associated AVPlayer’s appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular language, replacing any previous preference for available languages of the specified group’s custom media selection scheme.
 func (o *AVPlayerItem) SelectMediaPresentationLanguageForMediaSelectionGroup(language *foundation.NSString, mediaSelectionGroup *AVMediaSelectionGroup) {
 	o.Ptr().Send(_aVPlayerItemSelSelectMediaPresentationLanguageForMediaSelectionGroup, language.Ptr(), mediaSelectionGroup.Ptr())
 }
 
-// Returns the selected media presentation language for the specified media selection group, if any language has previously been selected via use of -selectMediaPresentationLanguages:forMediaSelectionGroup:. - Parameter mediaSelectionGroup: The media selection group, obtained from the receiver's asset, for which the selected media presentation language is requested.
+// Returns the selected media presentation language for the specified media selection group, if any language has previously been selected via use of -selectMediaPresentationLanguages:forMediaSelectionGroup:.
 func (o *AVPlayerItem) SelectedMediaPresentationLanguageForMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelSelectedMediaPresentationLanguageForMediaSelectionGroup, mediaSelectionGroup.Ptr())
 	if _ret != 0 {
@@ -667,21 +678,27 @@ func (o *AVPlayerItem) SelectedMediaPresentationLanguageForMediaSelectionGroup(m
 	return foundation.NSStringFromID(_ret)
 }
 
-// When the associated AVPlayer's appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular presentation setting, replacing any previous preference for settings of the same media presentation selector. Note that preferences for media characteristics indicated by selected AVMediaPresentationSettings are treated as supplemental to the associated AVPlayer's media selection criteria for the AVMediaSelectionGroup. An AVPlayer's default media selection criteria can also indicate preferences for media characteristics, such as those indicating the availability of accessibility affordances such as audio descriptions, and these media characteristics can be left up to the AVPlayer to manage even when an AVCustomMediaSelectionScheme is in use. But if you wish to do so, you can use AVMediaPresentationSettings offered by a AVCustomMediaSelectionScheme in combination with custom AVPlayerMediaSelectionCriteria. If the specified setting isn't offered by an AVMediaPresentationSelector of the AVCustomMediaSelectionScheme of the specified AVMediaSelectionGroup, no change in the presentation of the media will result. This method has no effect when the associated AVPlayer's appliesMediaSelectionCriteriaAutomatically property has a value of NO, in which case you must use -selectMediaOption:inMediaSelectionGroup: instead in order to alter the presentation state of the media. - Parameter mediaPresentationSetting: The setting to select. - Parameter mediaSelectionGroup: The media selection group, obtained from the receiver's asset, to which the specified setting is to be applied.
+// When the associated AVPlayer’s appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular presentation setting, replacing any previous preference for settings of the same media presentation selector.
 func (o *AVPlayerItem) SelectMediaPresentationSettingForMediaSelectionGroup(mediaPresentationSetting *AVMediaPresentationSetting, mediaSelectionGroup *AVMediaSelectionGroup) {
 	o.Ptr().Send(_aVPlayerItemSelSelectMediaPresentationSettingForMediaSelectionGroup, mediaPresentationSetting.Ptr(), mediaSelectionGroup.Ptr())
 }
 
-// Indicates the media presentation settings that have most recently been selected for each AVMediaPresentationSelector of the AVCustomMediaSelectionScheme of the specified AVMediaSelectionGroup. - Parameter mediaSelectionGroup: An AVMediaSelectionGroup obtained from the receiver's asset for which the currently selected media presentation settings are desired. - Returns: A dictionary with AVMediaPresentationSelectors as keys and AVMediaPresentationSettings as values, providing the most recently selected setting for each selector or, if no setting has previously been selected, NSNull.
+// Indicates the media presentation settings that have most recently been selected for each AVMediaPresentationSelector of the AVCustomMediaSelectionScheme of the specified AVMediaSelectionGroup.
 func (o *AVPlayerItem) SelectedMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *foundation.NSDictionary[*AVMediaPresentationSelector, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*AVMediaPresentationSelector, objc.ID]](o.Ptr(), _aVPlayerItemSelSelectedMediaPresentationSettingsForMediaSelectionGroup, mediaSelectionGroup.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelSelectedMediaPresentationSettingsForMediaSelectionGroup, mediaSelectionGroup.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*AVMediaPresentationSelector, objc.ID](_ret)
 }
 
-// Indicates the media presentation settings with media characteristics that are possessed by the currently selected AVMediaSelectionOption in the specified AVMediaSelectionGroup. Effective media presentation settings can differ from the currently effective media presentation settings if no AVMediaSelectionOption of the specified AVMediaSelectionGroup with the currently selected media presentation language possesses all of the characteristics associated with the currently selected settings. A value of NSNull for an AVMediaPresentationSelector can occur if either the content is inappropriately authored for the use of the AVCustomMediaSelectionScheme or if the currently selected AVMediaSelectionOption has been selected by means other than through the use of AVMediaPresentationSettings. - Parameter mediaSelectionGroup: An AVMediaSelectionGroup obtained from the receiver's asset for which the currently effective media presentation settings are desired. - Returns: A dictionary with AVMediaPresentationSelectors as keys and AVMediaPresentationSettings as values, unless the AVMediaSelectionOption currently selected in the group possesses none of the characteristics associated with the selector's settings. In that case the dictionary value will be NSNull.
+// Indicates the media presentation settings with media characteristics that are possessed by the currently selected AVMediaSelectionOption in the specified AVMediaSelectionGroup.
 func (o *AVPlayerItem) EffectiveMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *foundation.NSDictionary[*AVMediaPresentationSelector, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*AVMediaPresentationSelector, objc.ID]](o.Ptr(), _aVPlayerItemSelEffectiveMediaPresentationSettingsForMediaSelectionGroup, mediaSelectionGroup.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelEffectiveMediaPresentationSettingsForMediaSelectionGroup, mediaSelectionGroup.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*AVMediaPresentationSelector, objc.ID](_ret)
 }
 
 // Indicates the AVCustomMediaSelectionSchemes of AVMediaSelectionGroups of the receiver's asset with which an associated UI implementation should configure its interface for media selection. Recommended usage: if use of a custom media selection scheme is desired, set this property before either replacing an AVPlayer's current item with the receiver or adding the receiver to an AVQueuePlayer's play queue. This will satisfy requirements of UI implementations that commit to a configuration of UI elements as the receiver becomes ready to play.
@@ -697,7 +714,7 @@ func (o *AVPlayerItem) SetPreferredCustomMediaSelectionSchemes(preferredCustomMe
 	o.Ptr().Send(_aVPlayerItemSelSetPreferredCustomMediaSelectionSchemes, preferredCustomMediaSelectionSchemes.Ptr())
 }
 
-// Returns an object that represents a snapshot of the network access log. Can be nil. An AVPlayerItemAccessLog provides methods to retrieve the network access log in a format suitable for serialization. If nil is returned then there is no logging information currently available for this AVPlayerItem. An AVPlayerItemNewAccessLogEntryNotification will be posted when new logging information becomes available. However, accessLog might already return a non-nil value even before the first notification is posted. In certain situations, this method may temporarily block the calling thread during the ongoing log collection process. It is strongly recommended that the caller take appropriate measures to prevent blocking essential services such as the user interface, for example, by avoiding calling this method in the main thread. - Returns: An autoreleased AVPlayerItemAccessLog instance.
+// Returns an object that represents a snapshot of the network access log.
 func (o *AVPlayerItem) AccessLog() *AVPlayerItemAccessLog {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelAccessLog)
 	if _ret != 0 {
@@ -706,7 +723,7 @@ func (o *AVPlayerItem) AccessLog() *AVPlayerItemAccessLog {
 	return AVPlayerItemAccessLogFromID(_ret)
 }
 
-// Returns an object that represents a snapshot of the error log. Can be nil. An AVPlayerItemErrorLog provides methods to retrieve the error log in a format suitable for serialization. If nil is returned then there is no logging information currently available for this AVPlayerItem. In certain situations, this method may temporarily block the calling thread during the ongoing log collection process. It is strongly recommended that the caller take appropriate measures to prevent blocking essential services such as the user interface, for example, by avoiding calling this method in the main thread. - Returns: An autoreleased AVPlayerItemErrorLog instance.
+// Returns an object that represents a snapshot of the error log.
 func (o *AVPlayerItem) ErrorLog() *AVPlayerItemErrorLog {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelErrorLog)
 	if _ret != 0 {
@@ -715,12 +732,12 @@ func (o *AVPlayerItem) ErrorLog() *AVPlayerItemErrorLog {
 	return AVPlayerItemErrorLogFromID(_ret)
 }
 
-// Adds the specified instance of AVPlayerItemOutput to the receiver's collection of outputs. The class of AVPlayerItemOutput provided dictates the data structure that decoded samples are vended in. When an AVPlayerItemOutput is associated with an AVPlayerItem, samples are provided for a media type in accordance with the rules for mixing, composition, or exclusion that the AVPlayer honors among multiple enabled tracks of that media type for its own rendering purposes. For example, video media will be composed according to the instructions provided via AVPlayerItem.videoComposition, if present. Audio media will be mixed according to the parameters provided via AVPlayerItem.audioMix, if present. - Parameter output: An instance of AVPlayerItemOutput
+// Adds the specified player item output object to the receiver.
 func (o *AVPlayerItem) AddOutput(output *AVPlayerItemOutput) {
 	o.Ptr().Send(_aVPlayerItemSelAddOutput, output.Ptr())
 }
 
-// Removes the specified instance of AVPlayerItemOutput from the receiver's collection of outputs. - Parameter output: An instance of AVPlayerItemOutput
+// Removes the specified player item output object from the receiver.
 func (o *AVPlayerItem) RemoveOutput(output *AVPlayerItemOutput) {
 	o.Ptr().Send(_aVPlayerItemSelRemoveOutput, output.Ptr())
 }
@@ -733,12 +750,12 @@ func (o *AVPlayerItem) Outputs() *foundation.NSArray[*AVPlayerItemOutput] {
 	return foundation.NSArrayFromID[*AVPlayerItemOutput](_ret)
 }
 
-// Adds the specified instance of AVPlayerItemMediaDataCollector to the receiver's collection of mediaDataCollectors. This method may incur additional I/O to collect the requested media data asynchronously. - Parameter collector: An instance of AVPlayerItemMediaDataCollector
+// Adds the specified media data collector to the player item’s collection of media collectors.
 func (o *AVPlayerItem) AddMediaDataCollector(collector *AVPlayerItemMediaDataCollector) {
 	o.Ptr().Send(_aVPlayerItemSelAddMediaDataCollector, collector.Ptr())
 }
 
-// Removes the specified instance of AVPlayerItemMediaDataCollector from the receiver's collection of mediaDataCollectors. - Parameter collector: An instance of AVPlayerItemMediaDataCollector
+// Removes the specified media data collector from the player item’s collection of media collectors.
 func (o *AVPlayerItem) RemoveMediaDataCollector(collector *AVPlayerItemMediaDataCollector) {
 	o.Ptr().Send(_aVPlayerItemSelRemoveMediaDataCollector, collector.Ptr())
 }
@@ -780,7 +797,7 @@ func (o *AVPlayerItem) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGr
 	return AVMediaSelectionOptionFromID(_ret)
 }
 
-// @method		requestContentAuthorizationAsynchronouslyWithTimeoutInterval:completionHandler: @abstract		Causes appropriate action to be taken to allow the user to authorize the content for playback. @discussion Calling this method will present the user with the opportunity to authorize the content (e.g. by launching iTunes and prompting the user to enter their Apple ID and password). When the user has taken action (or the timeout has elapsted), the completion handler will be invoked.  The status of the authorization attempt can be determined by checking the value of the contentAuthorizationRequestStatus property.  Note that even if the status indicates a completed authorization, the content may still not be authorized (e.g. if the user authorizes an Apple ID other than that associated with the content).  The contentAuthorizedForPlayback property should be re-checked to verify whether the content has actually been authorized before continuing.  It is not necessary to call this method if the value of contentAuthorizedForPlayback is already true. @param			timeoutInterval	The maximum amount of time to wait for the user to authorize the content in seconds before calling the handler block with a timeout result. @param			handler			Block to be called upon completion.
+// Presents the user the opportunity to authorize the content for playback.
 func (o *AVPlayerItem) RequestContentAuthorizationAsynchronouslyWithTimeoutIntervalCompletionHandler(timeoutInterval float64, handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -792,7 +809,7 @@ func (o *AVPlayerItem) RequestContentAuthorizationAsynchronouslyWithTimeoutInter
 	o.Ptr().Send(_aVPlayerItemSelRequestContentAuthorizationAsynchronouslyWithTimeoutIntervalCompletionHandler, timeoutInterval, __block_handler)
 }
 
-// @method		cancelContentAuthorizationRequest @abstract		Causes the currently outstanding content authorization request to be cancelled. @discussion Calling this method while a content authorization request is pending will cause that request to be cancelled and its completion handler to be invoked with a status of AVContentAuthorizationCancelled.  This call does not block.
+// Cancels the currently outstanding content authorization request.
 func (o *AVPlayerItem) CancelContentAuthorizationRequest() {
 	o.Ptr().Send(_aVPlayerItemSelCancelContentAuthorizationRequest)
 }

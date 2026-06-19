@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The nodes in the abstract, logical tree structure that represents an XML document.
+//
 // XMLNode wraps [raw.NSXMLNode] with a fluent Go API.
 type XMLNode struct {
 	inner *raw.NSXMLNode

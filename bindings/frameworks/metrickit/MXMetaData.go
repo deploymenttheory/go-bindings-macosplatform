@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object containing system-level information about the device.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxmetadata
 type MXMetaData struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func MXMetaDataFromID(id objc.ID) *MXMetaData {
 	return o
 }
 
-// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this metadata. @result        An NSData object containing the JSON representation
+// Returns the contents of the metadata in JSON format.
 func (o *MXMetaData) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetaDataSelJSONRepresentation)
 	if _ret != 0 {
@@ -49,10 +51,13 @@ func (o *MXMetaData) JSONRepresentation() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
-// @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this metadata. @result        An NSDictionary object containing the dictionary representation
+// Returns the contents of the metadata as a dictionary.
 func (o *MXMetaData) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _mXMetaDataSelDictionaryRepresentation)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetaDataSelDictionaryRepresentation)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // @property      regionFormat @abstract      An NSString designating the region format associated with the application.

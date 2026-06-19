@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A utility class for capturing a map and its content into an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapsnapshotter
 type MKMapSnapshotter struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func MKMapSnapshotterFromID(id objc.ID) *MKMapSnapshotter {
 	return o
 }
 
+// Creates and returns a snapshotter object based on the specified options.
 func (o *MKMapSnapshotter) InitWithOptions(options *MKMapSnapshotOptions) *MKMapSnapshotter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapSnapshotterSelInitWithOptions, options.Ptr())
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func (o *MKMapSnapshotter) InitWithOptions(options *MKMapSnapshotOptions) *MKMap
 	return MKMapSnapshotterFromID(_ret)
 }
 
+// Submits the request to create a snapshot and delivers the results to the specified block.
 func (o *MKMapSnapshotter) StartWithCompletionHandler(completionHandler func(*MKMapSnapshot, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -58,6 +62,7 @@ func (o *MKMapSnapshotter) StartWithCompletionHandler(completionHandler func(*MK
 	o.Ptr().Send(_mKMapSnapshotterSelStartWithCompletionHandler, __block_completionHandler)
 }
 
+// Submits the request to create a snapshot and executes the resulting block on the specified queue.
 func (o *MKMapSnapshotter) StartWithQueueCompletionHandler(queue *foundation.NSObject, completionHandler func(*MKMapSnapshot, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -72,6 +77,7 @@ func (o *MKMapSnapshotter) StartWithQueueCompletionHandler(queue *foundation.NSO
 	o.Ptr().Send(_mKMapSnapshotterSelStartWithQueueCompletionHandler, queue.Ptr(), __block_completionHandler)
 }
 
+// Cancels the request to create a snapshot.
 func (o *MKMapSnapshotter) Cancel() {
 	o.Ptr().Send(_mKMapSnapshotterSelCancel)
 }

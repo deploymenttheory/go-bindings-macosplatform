@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a gradient pooling kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolinggradientnode
 type MPSCNNPoolingGradientNode struct {
 	mpsneuralnetwork.MPSNNGradientFilterNode

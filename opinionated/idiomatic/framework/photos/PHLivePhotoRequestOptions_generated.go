@@ -5,10 +5,14 @@
 package photos
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
+// A set of options affecting the delivery of Live Photo assets you request from an image manager.
+//
 // LivePhotoRequestOptions wraps [raw.PHLivePhotoRequestOptions] with a fluent Go API.
 type LivePhotoRequestOptions struct {
 	inner *raw.PHLivePhotoRequestOptions
@@ -35,20 +39,26 @@ func NewLivePhotoRequestOptions() *LivePhotoRequestOptions {
 	return &LivePhotoRequestOptions{inner: raw.PHLivePhotoRequestOptionsFromID(_id)}
 }
 
+// The requested Live Photo quality and delivery priority.
+//
 // WithDeliveryMode sets the deliveryMode property and returns the receiver for chaining.
 func (x *LivePhotoRequestOptions) WithDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode) *LivePhotoRequestOptions {
 	x.inner.SetDeliveryMode(raw.PHImageRequestOptionsDeliveryMode(deliveryMode))
 	return x
 }
 
+// A Boolean value that specifies whether Photos can download the requested Live Photo data from iCloud.
+//
 // WithNetworkAccessAllowed sets the networkAccessAllowed property and returns the receiver for chaining.
 func (x *LivePhotoRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *LivePhotoRequestOptions {
 	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
 	return x
 }
 
+// A block that Photos calls periodically while downloading the Live Photo.
+//
 // WithProgressHandler sets the progressHandler property and returns the receiver for chaining.
-func (x *LivePhotoRequestOptions) WithProgressHandler(progressHandler objc.Block) *LivePhotoRequestOptions {
+func (x *LivePhotoRequestOptions) WithProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) *LivePhotoRequestOptions {
 	x.inner.SetProgressHandler(progressHandler)
 	return x
 }
@@ -79,7 +89,7 @@ func (x *LivePhotoRequestOptions) ProgressHandler() objc.Block {
 }
 
 // SetProgressHandler calls the underlying SetProgressHandler.
-func (x *LivePhotoRequestOptions) SetProgressHandler(progressHandler objc.Block) {
+func (x *LivePhotoRequestOptions) SetProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) {
 	x.inner.SetProgressHandler(progressHandler)
 }
 
@@ -88,13 +98,13 @@ type LivePhotoRequestOptionsable interface {
 	Unwrap() *raw.PHLivePhotoRequestOptions
 	WithDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode) *LivePhotoRequestOptions
 	WithNetworkAccessAllowed(networkAccessAllowed bool) *LivePhotoRequestOptions
-	WithProgressHandler(progressHandler objc.Block) *LivePhotoRequestOptions
+	WithProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) *LivePhotoRequestOptions
 	DeliveryMode() PHImageRequestOptionsDeliveryMode
 	SetDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode)
 	IsNetworkAccessAllowed() bool
 	SetNetworkAccessAllowed(networkAccessAllowed bool)
 	ProgressHandler() objc.Block
-	SetProgressHandler(progressHandler objc.Block)
+	SetProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID]))
 }
 
 var _ LivePhotoRequestOptionsable = (*LivePhotoRequestOptions)(nil)

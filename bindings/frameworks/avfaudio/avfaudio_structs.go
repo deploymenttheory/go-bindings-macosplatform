@@ -3,28 +3,33 @@
 
 package avfaudio
 
+// A structure that represents the angular orientation of the listener in 3D space.
 type AVAudio3DAngularOrientation struct {
 	Yaw   float32
 	Pitch float32
 	Roll  float32
 }
 
+// A structure that represents a point in 3D space.
 type AVAudio3DPoint struct {
 	X float32
 	Y float32
 	Z float32
 }
 
+// A structure that represents two orthogonal vectors that describe the orientation of the listener in 3D space.
 type AVAudio3DVectorOrientation struct {
 	Forward AVAudio3DPoint
 	Up      AVAudio3DPoint
 }
 
+// Priming information for audio conversion.
 type AVAudioConverterPrimeInfo struct {
 	LeadingFrames  uint32
 	TrailingFrames uint32
 }
 
+// The configuration of ducking non-voice audio.
 type AVAudioVoiceProcessingOtherAudioDuckingConfiguration struct {
 	EnableAdvancedDucking bool
 	DuckingLevel          AVAudioVoiceProcessingOtherAudioDuckingLevel

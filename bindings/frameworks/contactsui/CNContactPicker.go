@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A popover-based interface for selecting a contact.
+//
 // Apple documentation: https://developer.apple.com/documentation/contactsui/cncontactpicker
 type CNContactPicker struct {
 	foundation.NSObject
@@ -37,24 +39,27 @@ func CNContactPickerFromID(id objc.ID) *CNContactPicker {
 	return o
 }
 
-// @abstract Shows the picker popover relative to a positioning rect for a view with a preferred edge. See NSPopover for more information.
+// Shows the picker popover anchored to the specified view.
 func (o *CNContactPicker) ShowRelativeToRectOfViewPreferredEdge(positioningRect corefoundation.CGRect, positioningView *appkit.NSView, preferredEdge foundation.NSRectEdge) {
 	o.Ptr().Send(_cNContactPickerSelShowRelativeToRectOfViewPreferredEdge, positioningRect, positioningView.Ptr(), preferredEdge)
 }
 
-// @abstract Closes the popover.
+// Closes the popover.
 func (o *CNContactPicker) Close() {
 	o.Ptr().Send(_cNContactPickerSelClose)
 }
 
 // @abstract The CNContact keys to display when a contact is expanded. @discussion If no keys are provided, the picker will select contacts instead of values.
 func (o *CNContactPicker) DisplayedKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cNContactPickerSelDisplayedKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactPickerSelDisplayedKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CNContactPicker) SetDisplayedKeys(displayedKeys *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cNContactPickerSelSetDisplayedKeys, displayedKeys)
+	o.Ptr().Send(_cNContactPickerSelSetDisplayedKeys, displayedKeys.Ptr())
 }
 
 // @abstract The picker delegate to be notified when the user chooses a contact or value.

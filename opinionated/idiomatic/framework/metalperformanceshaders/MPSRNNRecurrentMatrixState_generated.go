@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class holds all the data that’s passed from one sequence iteration of the matrix-based recurrent neural network layer to the next.
+//
 // RNNRecurrentMatrixState wraps [raw.MPSRNNRecurrentMatrixState] with a fluent Go API.
 type RNNRecurrentMatrixState struct {
 	inner *raw.MPSRNNRecurrentMatrixState

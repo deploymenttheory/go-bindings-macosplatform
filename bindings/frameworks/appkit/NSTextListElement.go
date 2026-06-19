@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a text list node.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextlistelement
 type NSTextListElement struct {
 	NSTextParagraph
@@ -35,22 +37,25 @@ func NSTextListElementFromID(id objc.ID) *NSTextListElement {
 	return o
 }
 
+// Creates a text list element with the parent, list elements, nesting level, and marker attributes you provide.
 func (o *NSTextListElement) InitWithParentElementTextListContentsMarkerAttributesChildElements(parent *NSTextListElement, textList *NSTextList, contents *foundation.NSAttributedString, markerAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], children *foundation.NSArray[*NSTextListElement]) *NSTextListElement {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListElementSelInitWithParentElementTextListContentsMarkerAttributesChildElements, parent.Ptr(), textList.Ptr(), contents.Ptr(), markerAttributes, children.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListElementSelInitWithParentElementTextListContentsMarkerAttributesChildElements, parent.Ptr(), textList.Ptr(), contents.Ptr(), markerAttributes.Ptr(), children.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSTextListElementFromID(_ret)
 }
 
+// Creates a text list element with the list elements, nesting level, and marker attributes you provide.
 func NSTextListElementTextListElementWithContentsMarkerAttributesTextListChildElements(contents *foundation.NSAttributedString, markerAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], textList *NSTextList, children *foundation.NSArray[*NSTextListElement]) *NSTextListElement {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextListElement), _nSTextListElementSelTextListElementWithContentsMarkerAttributesTextListChildElements, contents.Ptr(), markerAttributes, textList.Ptr(), children.Ptr())
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextListElement), _nSTextListElementSelTextListElementWithContentsMarkerAttributesTextListChildElements, contents.Ptr(), markerAttributes.Ptr(), textList.Ptr(), children.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSTextListElementFromID(_ret)
 }
 
+// Creates a text list element with the list elements and nesting level you provide.
 func NSTextListElementTextListElementWithChildElementsTextListNestingLevel(children *foundation.NSArray[*NSTextListElement], textList *NSTextList, nestingLevel int) *NSTextListElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextListElement), _nSTextListElementSelTextListElementWithChildElementsTextListNestingLevel, children.Ptr(), textList.Ptr(), nestingLevel)
 	if _ret != 0 {
@@ -76,6 +81,9 @@ func (o *NSTextListElement) Contents() *foundation.NSAttributedString {
 }
 
 func (o *NSTextListElement) MarkerAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSTextListElementSelMarkerAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextListElementSelMarkerAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }

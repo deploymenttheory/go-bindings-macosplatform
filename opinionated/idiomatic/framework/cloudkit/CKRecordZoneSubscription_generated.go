@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A subscription that generates push notifications when CloudKit modifies records in a specific record zone.
+//
 // RecordZoneSubscription wraps [raw.CKRecordZoneSubscription] with a fluent Go API.
 type RecordZoneSubscription struct {
 	inner *raw.CKRecordZoneSubscription
@@ -31,7 +33,7 @@ func RecordZoneSubscriptionFromID(id objc.ID) *RecordZoneSubscription {
 	return &RecordZoneSubscription{inner: raw.CKRecordZoneSubscriptionFromID(id)}
 }
 
-// Creates a subscription for all records in the specified record zone. - Parameters: - zoneID: The ID of the record zone that contains the records you want to monitor. This parameter must not be `nil`. The subscription that this method returns is a zone-based subscription that generates push notifications when CloudKit changes any of the specified record zone's records.
+// Creates a subscription for all records in the specified record zone.
 //
 // NewRecordZoneSubscriptionWithZoneID creates a new [RecordZoneSubscription].
 func NewRecordZoneSubscriptionWithZoneID(zoneID *raw.CKRecordZoneID) *RecordZoneSubscription {
@@ -40,7 +42,7 @@ func NewRecordZoneSubscriptionWithZoneID(zoneID *raw.CKRecordZoneID) *RecordZone
 	return &RecordZoneSubscription{inner: raw.CKRecordZoneSubscriptionFromID(_id)}
 }
 
-// Creates a named subscription for all records in the specified record zone. - Parameters: - zoneID: The ID of the record zone that contains the records you want to monitor. This parameter must not be `nil`. - subscriptionID: The subscription's name. It must be unique in the container, and must not be `nil` or an empty string. The subscription that this method returns is a zone-based subscription that generates push notifications when CloudKit changes any of the specified record zone's records.
+// Creates a named subscription for all records in the specified record zone.
 //
 // NewRecordZoneSubscriptionWithZoneIDSubscriptionID creates a new [RecordZoneSubscription].
 func NewRecordZoneSubscriptionWithZoneIDSubscriptionID(zoneID *raw.CKRecordZoneID, subscriptionID *foundation.NSString) *RecordZoneSubscription {
@@ -49,7 +51,7 @@ func NewRecordZoneSubscriptionWithZoneIDSubscriptionID(zoneID *raw.CKRecordZoneI
 	return &RecordZoneSubscription{inner: raw.CKRecordZoneSubscriptionFromID(_id)}
 }
 
-// Creates a zone-based subscription from a serialized instance. - Parameters: - aDecoder: The coder for decoding the serialized record zone subscription.
+// Creates a zone-based subscription from a serialized instance.
 //
 // NewRecordZoneSubscriptionWithCoder creates a new [RecordZoneSubscription].
 func NewRecordZoneSubscriptionWithCoder(aDecoder *foundation.NSCoder) *RecordZoneSubscription {
@@ -66,7 +68,7 @@ func (x *RecordZoneSubscription) WithRecordType(recordType *foundation.NSString)
 	return x
 }
 
-// The configuration for a subscription's push notifications. If you want the system to display your subscription's push notifications, assign a value to this property. The server uses the configuration you provide to determine the delivery options for notifications. For example, you can specify the text to display to the user, and the sound to play. You can also specify which fields of the record to include in the notification's payload. If you don't assign a value to this property, CloudKit still sends push notifications, but the system doesn't display them to the user. The default value of this property is `nil`.
+// The configuration for a subscription’s push notifications.
 //
 // WithNotificationInfo sets the notificationInfo property and returns the receiver for chaining.
 func (x *RecordZoneSubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *RecordZoneSubscription {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A list of indexes that together represent the path to a specific location in a tree of nested arrays.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsindexpath
 type NSIndexPath struct {
 	NSObject
@@ -39,6 +41,7 @@ func NSIndexPathFromID(id objc.ID) *NSIndexPath {
 	return o
 }
 
+// Creates a one-node index path.
 func NSIndexPathIndexPathWithIndex(index uint) *NSIndexPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSIndexPath), _nSIndexPathSelIndexPathWithIndex, index)
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func NSIndexPathIndexPathWithIndex(index uint) *NSIndexPath {
 	return NSIndexPathFromID(_ret)
 }
 
+// Creates an index path with one or more nodes.
 func NSIndexPathIndexPathWithIndexesLength(indexes *uint, length uint) *NSIndexPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSIndexPath), _nSIndexPathSelIndexPathWithIndexesLength, indexes, length)
 	if _ret != 0 {
@@ -55,6 +59,7 @@ func NSIndexPathIndexPathWithIndexesLength(indexes *uint, length uint) *NSIndexP
 	return NSIndexPathFromID(_ret)
 }
 
+// Initializes an index path with the given nodes and length.
 func (o *NSIndexPath) InitWithIndexesLength(indexes *uint, length uint) *NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexPathSelInitWithIndexesLength, indexes, length)
 	if _ret != 0 {
@@ -63,6 +68,7 @@ func (o *NSIndexPath) InitWithIndexesLength(indexes *uint, length uint) *NSIndex
 	return NSIndexPathFromID(_ret)
 }
 
+// Initializes an index path with a single node.
 func (o *NSIndexPath) InitWithIndex(index uint) *NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexPathSelInitWithIndex, index)
 	if _ret != 0 {
@@ -71,6 +77,7 @@ func (o *NSIndexPath) InitWithIndex(index uint) *NSIndexPath {
 	return NSIndexPathFromID(_ret)
 }
 
+// Returns an index path containing the nodes in the receiving index path plus another given index.
 func (o *NSIndexPath) IndexPathByAddingIndex(index uint) *NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexPathSelIndexPathByAddingIndex, index)
 	if _ret != 0 {
@@ -79,6 +86,7 @@ func (o *NSIndexPath) IndexPathByAddingIndex(index uint) *NSIndexPath {
 	return NSIndexPathFromID(_ret)
 }
 
+// Returns an index path with the nodes in the receiving index path, excluding the last one.
 func (o *NSIndexPath) IndexPathByRemovingLastIndex() *NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexPathSelIndexPathByRemovingLastIndex)
 	if _ret != 0 {
@@ -87,16 +95,18 @@ func (o *NSIndexPath) IndexPathByRemovingLastIndex() *NSIndexPath {
 	return NSIndexPathFromID(_ret)
 }
 
+// Provides the value at a particular node in the index path.
 func (o *NSIndexPath) IndexAtPosition(position uint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSIndexPathSelIndexAtPosition, position)
 	return _ret
 }
 
-// @abstract Copies the indexes stored in this index path from the positions specified by positionRange into indexes. @param indexes Buffer of at least as many NSUIntegers as specified by the length of positionRange. On return, this memory will hold the index path's indexes. @param positionRange A range of valid positions within this index path.  If the location plus the length of positionRange is greater than the length of this index path, this method raises an NSRangeException. @discussion It is the developer’s responsibility to allocate the memory for the C array.
+// Copies the indexes stored in the index path from the positions specified by the position range into the specified indexes.
 func (o *NSIndexPath) GetIndexesRange(indexes *uint, positionRange NSRange) {
 	o.Ptr().Send(_nSIndexPathSelGetIndexesRange, indexes, positionRange)
 }
 
+// Indicates the depth-first traversal order of the receiving index path and another index path.
 func (o *NSIndexPath) Compare(otherObject *NSIndexPath) NSComparisonResult {
 	_ret := objc.Send[NSComparisonResult](o.Ptr(), _nSIndexPathSelCompare, otherObject.Ptr())
 	return _ret
@@ -107,7 +117,7 @@ func (o *NSIndexPath) Length() uint {
 	return _ret
 }
 
-// This method is unsafe because it could potentially cause buffer overruns. You should use -getIndexes:range: instead.
+// Copies the objects contained in the index path into indexes.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSIndexPath) GetIndexes(indexes *uint) {
 	o.Ptr().Send(_nSIndexPathSelGetIndexes, indexes)

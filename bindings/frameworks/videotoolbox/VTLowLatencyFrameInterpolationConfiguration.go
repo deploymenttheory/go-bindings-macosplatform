@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Configuration that you use to program Video Toolbox frame processor for low-latency frame interpolation.
+//
 // Apple documentation: https://developer.apple.com/documentation/videotoolbox/vtlowlatencyframeinterpolationconfiguration
 type VTLowLatencyFrameInterpolationConfiguration struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func VTLowLatencyFrameInterpolationConfigurationFromID(id objc.ID) *VTLowLatency
 	return o
 }
 
-// Creates a new low-latency frame interpolation configuration for frame-rate conversion. The available interpolation points are the equal to the value of (2^x - 1), where x is equal to `numberOfInterpolatedFrames`. For example, - If you request 1 interpolated frame, 1 interpolation point at 0.5 is available. - If you request 2 interpolated frames, 3 interpolation points at 0.25, 0.5 and 0.75 are available. You don't need to use all available interpolation points. Setting a higher `numberOfInterpolatedFrames` increases the resolution of interpolation in some cases, but also increases latency. - Parameters: - frameWidth: Width of source frame in pixels. - frameHeight: Height of source frame in pixels. - numberOfInterpolatedFrames: The number of uniformly spaced frames that you want to be used for interpolation.
+// Creates a new low-latency frame interpolation configuration for frame-rate conversion.
 func (o *VTLowLatencyFrameInterpolationConfiguration) InitWithFrameWidthFrameHeightNumberOfInterpolatedFrames(frameWidth int, frameHeight int, numberOfInterpolatedFrames int) *VTLowLatencyFrameInterpolationConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencyFrameInterpolationConfigurationSelInitWithFrameWidthFrameHeightNumberOfInterpolatedFrames, frameWidth, frameHeight, numberOfInterpolatedFrames)
 	if _ret != 0 {
@@ -48,7 +50,7 @@ func (o *VTLowLatencyFrameInterpolationConfiguration) InitWithFrameWidthFrameHei
 	return VTLowLatencyFrameInterpolationConfigurationFromID(_ret)
 }
 
-// Creates a new low-latency frame interpolation configuration for spatial scaling and temporal scaling. When you configure the processor for spatial scaling, the low-latency frame interpolation processor only supports 2x spatial upscaling and a single frame of temporal interpolation at a 0.5 interpolation phase. - Parameters: - frameWidth: Width of source frame in pixels. - frameHeight: Height of source frame in pixels. - spatialScaleFactor: The requested spatial scale factor as an integer. Currently, the processor supports only 2x spatial scaling.
+// Creates a new low-latency frame interpolation configuration for spatial scaling and temporal scaling.
 func (o *VTLowLatencyFrameInterpolationConfiguration) InitWithFrameWidthFrameHeightSpatialScaleFactor(frameWidth int, frameHeight int, spatialScaleFactor int) *VTLowLatencyFrameInterpolationConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencyFrameInterpolationConfigurationSelInitWithFrameWidthFrameHeightSpatialScaleFactor, frameWidth, frameHeight, spatialScaleFactor)
 	if _ret != 0 {
@@ -83,20 +85,29 @@ func (o *VTLowLatencyFrameInterpolationConfiguration) NumberOfInterpolatedFrames
 
 // Available supported pixel formats for current configuration.
 func (o *VTLowLatencyFrameInterpolationConfiguration) FrameSupportedPixelFormats() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _vTLowLatencyFrameInterpolationConfigurationSelFrameSupportedPixelFormats)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencyFrameInterpolationConfigurationSelFrameSupportedPixelFormats)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTLowLatencyFrameInterpolationConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTLowLatencyFrameInterpolationConfigurationSelSourcePixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencyFrameInterpolationConfigurationSelSourcePixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTLowLatencyFrameInterpolationConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTLowLatencyFrameInterpolationConfigurationSelDestinationPixelBufferAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vTLowLatencyFrameInterpolationConfigurationSelDestinationPixelBufferAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Reports whether the system supports this processor.

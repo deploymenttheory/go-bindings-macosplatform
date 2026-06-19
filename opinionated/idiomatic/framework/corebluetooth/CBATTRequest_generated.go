@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request that uses the Attribute Protocol (ATT).
+//
 // ATTRequest wraps [raw.CBATTRequest] with a fluent Go API.
 type ATTRequest struct {
 	inner *raw.CBATTRequest
@@ -36,7 +38,7 @@ func NewATTRequest() *ATTRequest {
 	return &ATTRequest{inner: raw.CBATTRequestFromID(_id)}
 }
 
-// @property value @discussion The data being read or written. For read requests, <i>value</i> will be nil and should be set before responding via @link respondToRequest:withResult: @/link. For write requests, <i>value</i> will contain the data to be written.
+// The data that the central reads from or writes to the peripheral.
 //
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *ATTRequest) WithValue(value *foundation.NSData) *ATTRequest {

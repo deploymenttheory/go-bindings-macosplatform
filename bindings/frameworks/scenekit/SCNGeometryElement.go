@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container for index data describing how vertices connect to define a three-dimensional object, or geometry.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scngeometryelement
 type SCNGeometryElement struct {
 	foundation.NSObject
@@ -48,7 +50,7 @@ func SCNGeometryElementFromID(id objc.ID) *SCNGeometryElement {
 	return o
 }
 
-// @method geometryElementWithData:primitiveType:primitiveCount:bytesPerIndex: @abstract Creates and returns a geometry element from the given data and data format info. @param data The data that contains element indices. You can pass nil to use an implicit vertex ordering (0,1,2,…). @param primitiveType The primitive type, as listed in the SCNGeometryPrimitiveType enumeration. @param primitiveCount The number of primitives in the data. @param bytesPerIndex The number of bytes that represent a single index value in the data.
+// Creates a geometry element from the specified data and options.
 func SCNGeometryElementGeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex(data *foundation.NSData, primitiveType SCNGeometryPrimitiveType, primitiveCount int, bytesPerIndex int) *SCNGeometryElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometryElement), _sCNGeometryElementSelGeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex, data.Ptr(), primitiveType, primitiveCount, bytesPerIndex)
 	if _ret != 0 {

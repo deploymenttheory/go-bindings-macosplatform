@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A dynamic collection of objects associated with unique keys.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmutabledictionary
 type NSMutableDictionary[KeyType purego.AnyObject, ObjectType purego.AnyObject] struct {
 	NSDictionary[KeyType, ObjectType]
@@ -44,14 +46,17 @@ func NSMutableDictionaryFromID[KeyType purego.AnyObject, ObjectType purego.AnyOb
 	return o
 }
 
+// Removes a given key and its associated value from the dictionary.
 func (o *NSMutableDictionary[KeyType, ObjectType]) RemoveObjectForKey(aKey KeyType) {
 	o.Ptr().Send(_nSMutableDictionarySelRemoveObjectForKey, aKey)
 }
 
+// Adds a given key-value pair to the dictionary.
 func (o *NSMutableDictionary[KeyType, ObjectType]) SetObjectForKey(anObject ObjectType, aKey NSCopying) {
 	o.Ptr().Send(_nSMutableDictionarySelSetObjectForKey, anObject, aKey)
 }
 
+// Initializes a newly allocated mutable dictionary.
 func (o *NSMutableDictionary[KeyType, ObjectType]) Init() *NSMutableDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableDictionarySelInit)
 	if _ret != 0 {
@@ -60,6 +65,7 @@ func (o *NSMutableDictionary[KeyType, ObjectType]) Init() *NSMutableDictionary[K
 	return NSMutableDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
+// Initializes a newly allocated mutable dictionary, allocating enough memory to hold numItems entries.
 func (o *NSMutableDictionary[KeyType, ObjectType]) InitWithCapacity(numItems uint) *NSMutableDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableDictionarySelInitWithCapacity, numItems)
 	if _ret != 0 {
@@ -76,26 +82,32 @@ func (o *NSMutableDictionary[KeyType, ObjectType]) InitWithCoder(coder *NSCoder)
 	return NSMutableDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
+// Adds to the receiving dictionary the entries from another dictionary.
 func (o *NSMutableDictionary[KeyType, ObjectType]) AddEntriesFromDictionary(otherDictionary *NSDictionary[KeyType, ObjectType]) {
 	o.Ptr().Send(_nSMutableDictionarySelAddEntriesFromDictionary, otherDictionary.Ptr())
 }
 
+// Empties the dictionary of its entries.
 func (o *NSMutableDictionary[KeyType, ObjectType]) RemoveAllObjects() {
 	o.Ptr().Send(_nSMutableDictionarySelRemoveAllObjects)
 }
 
+// Removes from the dictionary entries specified by elements in a given array.
 func (o *NSMutableDictionary[KeyType, ObjectType]) RemoveObjectsForKeys(keyArray *NSArray[KeyType]) {
 	o.Ptr().Send(_nSMutableDictionarySelRemoveObjectsForKeys, keyArray.Ptr())
 }
 
+// Sets the contents of the receiving dictionary to entries in a given dictionary.
 func (o *NSMutableDictionary[KeyType, ObjectType]) SetDictionary(otherDictionary *NSDictionary[KeyType, ObjectType]) {
 	o.Ptr().Send(_nSMutableDictionarySelSetDictionary, otherDictionary.Ptr())
 }
 
+// Adds a given key-value pair to the dictionary.
 func (o *NSMutableDictionary[KeyType, ObjectType]) SetObjectForKeyedSubscript(obj ObjectType, key NSCopying) {
 	o.Ptr().Send(_nSMutableDictionarySelSetObjectForKeyedSubscript, obj, key)
 }
 
+// Creates and returns a mutable dictionary, initially giving it enough allocated memory to hold a given number of entries.
 func NSMutableDictionaryDictionaryWithCapacity(numItems uint) *NSMutableDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableDictionary), _nSMutableDictionarySelDictionaryWithCapacity, numItems)
 	if _ret != 0 {
@@ -136,6 +148,7 @@ func (o *NSMutableDictionary[KeyType, ObjectType]) InitWithContentsOfURL(url *NS
 	return NSMutableDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
+// Creates a mutable dictionary which is optimized for dealing with a known set of keys.
 func NSMutableDictionaryDictionaryWithSharedKeySet(keyset objc.ID) *NSMutableDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableDictionary), _nSMutableDictionarySelDictionaryWithSharedKeySet, keyset)
 	if _ret != 0 {

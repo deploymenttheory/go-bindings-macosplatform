@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that specifies properties used by a loss kernel.
+//
 // CNNLossDescriptor wraps [raw.MPSCNNLossDescriptor] with a fluent Go API.
 type CNNLossDescriptor struct {
 	inner *raw.MPSCNNLossDescriptor

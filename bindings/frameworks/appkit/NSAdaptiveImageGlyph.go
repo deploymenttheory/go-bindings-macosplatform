@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A data object for an emoji-like image that can appear in attributed text.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsadaptiveimageglyph
 type NSAdaptiveImageGlyph struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func NSAdaptiveImageGlyphFromID(id objc.ID) *NSAdaptiveImageGlyph {
 	return o
 }
 
+// Create an adaptive image glyph from the previously saved data.
 func (o *NSAdaptiveImageGlyph) InitWithImageContent(imageContent *foundation.NSData) *NSAdaptiveImageGlyph {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAdaptiveImageGlyphSelInitWithImageContent, imageContent.Ptr())
 	if _ret != 0 {

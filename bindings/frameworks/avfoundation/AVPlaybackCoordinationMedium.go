@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The AVPlaybackCoordinationMedium passes states and messages between its connected playback coordinators.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplaybackcoordinationmedium
 type AVPlaybackCoordinationMedium struct {
 	foundation.NSObject

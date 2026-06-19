@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An ordered list of assets or collections returned from a Photos fetch method.
+//
 // FetchResult wraps [raw.PHFetchResult] with a fluent Go API.
 type FetchResult struct {
 	inner *raw.PHFetchResult[objc.ID]
@@ -36,51 +38,71 @@ func NewFetchResult() *FetchResult {
 	return &FetchResult{inner: raw.PHFetchResultFromID[objc.ID](_id)}
 }
 
+// Returns the object located at the specified index.
+//
 // ObjectAtIndex calls the underlying ObjectAtIndex.
 func (x *FetchResult) ObjectAtIndex(index uint) objc.ID {
 	return x.inner.ObjectAtIndex(index)
 }
 
+// Returns the object located at the specified index.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *FetchResult) ObjectAtIndexedSubscript(idx uint) objc.ID {
 	return x.inner.ObjectAtIndexedSubscript(idx)
 }
 
+// Returns whether the specified object is present in the fetch result.
+//
 // ContainsObject calls the underlying ContainsObject.
 func (x *FetchResult) ContainsObject(anObject objc.ID) bool {
 	return x.inner.ContainsObject(anObject)
 }
 
+// Returns the lowest index whose corresponding object in the fetch result is equal to the specified object.
+//
 // IndexOfObject calls the underlying IndexOfObject.
 func (x *FetchResult) IndexOfObject(anObject objc.ID) uint {
 	return x.inner.IndexOfObject(anObject)
 }
 
+// Returns the lowest index within the specified range whose corresponding object in the fetch result is equal to the specified object.
+//
 // IndexOfObjectInRange calls the underlying IndexOfObjectInRange.
 func (x *FetchResult) IndexOfObjectInRange(anObject objc.ID, range_ foundation.NSRange) uint {
 	return x.inner.IndexOfObjectInRange(anObject, range_)
 }
 
+// Returns an array containing the objects in the fetch result at the indexes in the specified index set.
+//
 // ObjectsAtIndexes calls the underlying ObjectsAtIndexes.
 func (x *FetchResult) ObjectsAtIndexes(indexes *foundation.NSIndexSet) *foundation.NSArray[objc.ID] {
 	return x.inner.ObjectsAtIndexes(indexes)
 }
 
+// Executes the specified block using each object in the fetch result, starting with the first object and continuing in order to the last object.
+//
 // EnumerateObjectsUsing calls the underlying EnumerateObjectsUsing.
 func (x *FetchResult) EnumerateObjectsUsing(block objc.Block) {
 	x.inner.EnumerateObjectsUsing(block)
 }
 
+// Executes the specified block using each object in the fetch result.
+//
 // EnumerateObjectsWithOptionsUsing calls the underlying EnumerateObjectsWithOptionsUsing.
 func (x *FetchResult) EnumerateObjectsWithOptionsUsing(opts foundation.NSEnumerationOptions, block objc.Block) {
 	x.inner.EnumerateObjectsWithOptionsUsing(opts, block)
 }
 
+// Executes the specified block using the objects in the fetch result at the specified indexes.
+//
 // EnumerateObjectsAtIndexesOptionsUsing calls the underlying EnumerateObjectsAtIndexesOptionsUsing.
 func (x *FetchResult) EnumerateObjectsAtIndexesOptionsUsing(s *foundation.NSIndexSet, opts foundation.NSEnumerationOptions, block objc.Block) {
 	x.inner.EnumerateObjectsAtIndexesOptionsUsing(s, opts, block)
 }
 
+// Returns the number of assets in the fetch result of a specified type.
+//
 // CountOfAssetsWithMediaType calls the underlying CountOfAssetsWithMediaType.
 func (x *FetchResult) CountOfAssetsWithMediaType(mediaType PHAssetMediaType) uint {
 	return x.inner.CountOfAssetsWithMediaType(raw.PHAssetMediaType(mediaType))

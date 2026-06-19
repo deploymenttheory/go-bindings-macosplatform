@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A single smart card reader slot in the system.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tksmartcardslot
 type TKSmartCardSlot struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func TKSmartCardSlotFromID(id objc.ID) *TKSmartCardSlot {
 	return o
 }
 
-// Creates new object representing currently inserted and valid card. @discussion It is possible to instantiate multiple objects for single card, exclusivity is handled by sessions on the level of created SmartCard objects. @return Newly created SmartCard object, or nil if slot does not contain valid card.
+// Creates a new TKSmartCard object representing the currently inserted Smart Card.
 func (o *TKSmartCardSlot) MakeSmartCard() *TKSmartCard {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSlotSelMakeSmartCard)
 	if _ret != 0 {

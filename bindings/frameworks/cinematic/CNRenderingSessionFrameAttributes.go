@@ -13,7 +13,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Frame-specific information required to render a frame in a rendering session.
+// Creates an object with the per frame attributes that control the appearance of a single frame of the Cinematic movie.
 //
 // Apple documentation: https://developer.apple.com/documentation/cinematic/cnrenderingsessionframeattributes
 type CNRenderingSessionFrameAttributes struct {
@@ -40,7 +40,7 @@ func CNRenderingSessionFrameAttributesFromID(id objc.ID) *CNRenderingSessionFram
 	return o
 }
 
-// Initialize rendering frame attributes from a sample buffer read from a cinematic metadata track. - Parameters: - sampleBuffer: A sample buffer read from the timed cinematic metadata track of a cinematic asset. - sessionAttributes: Rendering session attributes loaded from a cinematic asset.
+// Initializes the rendering frame attributes from a sample buffer read from a Cinematic metadata track.
 func (o *CNRenderingSessionFrameAttributes) InitWithSampleBufferSessionAttributes(sampleBuffer unsafe.Pointer, sessionAttributes *CNRenderingSessionAttributes) *CNRenderingSessionFrameAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNRenderingSessionFrameAttributesSelInitWithSampleBufferSessionAttributes, sampleBuffer, sessionAttributes.Ptr())
 	if _ret != 0 {
@@ -49,7 +49,7 @@ func (o *CNRenderingSessionFrameAttributes) InitWithSampleBufferSessionAttribute
 	return CNRenderingSessionFrameAttributesFromID(_ret)
 }
 
-// Initialize rendering frame attributes from a timed metadata group read from a cinematic metadata track. - Parameters: - metadataGroup: An AVTimedMetadataGroup read from the timed cinematic metadata track of a cinematic asset. - sessionAttributes: Rendering session attributes loaded from a cinematic asset.
+// Initializes the rendering frame attributes from a timed metadata group read from a Cinematic metadata track.
 func (o *CNRenderingSessionFrameAttributes) InitWithTimedMetadataGroupSessionAttributes(metadataGroup *avfoundation.AVTimedMetadataGroup, sessionAttributes *CNRenderingSessionAttributes) *CNRenderingSessionFrameAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNRenderingSessionFrameAttributesSelInitWithTimedMetadataGroupSessionAttributes, metadataGroup.Ptr(), sessionAttributes.Ptr())
 	if _ret != 0 {

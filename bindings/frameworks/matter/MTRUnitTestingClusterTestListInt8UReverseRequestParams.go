@@ -36,12 +36,15 @@ func MTRUnitTestingClusterTestListInt8UReverseRequestParamsFromID(id objc.ID) *M
 }
 
 func (o *MTRUnitTestingClusterTestListInt8UReverseRequestParams) Arg1() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRUnitTestingClusterTestListInt8UReverseRequestParamsSelArg1)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestListInt8UReverseRequestParamsSelArg1)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRUnitTestingClusterTestListInt8UReverseRequestParams) SetArg1(arg1 *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRUnitTestingClusterTestListInt8UReverseRequestParamsSelSetArg1, arg1)
+	o.Ptr().Send(_mTRUnitTestingClusterTestListInt8UReverseRequestParamsSelSetArg1, arg1.Ptr())
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.

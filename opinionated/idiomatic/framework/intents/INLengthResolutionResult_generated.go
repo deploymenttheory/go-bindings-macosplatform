@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for a length associated with an intent.
+//
 // LengthResolutionResult wraps [raw.INLengthResolutionResult] with a fluent Go API.
 type LengthResolutionResult struct {
 	inner *raw.INLengthResolutionResult

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents an image that an image-analysis request produces.
+//
 // PixelBufferObservation wraps [raw.VNPixelBufferObservation] with a fluent Go API.
 type PixelBufferObservation struct {
 	inner *raw.VNPixelBufferObservation

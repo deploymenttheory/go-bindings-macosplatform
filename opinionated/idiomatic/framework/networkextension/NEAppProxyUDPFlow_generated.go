@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object for reading and writing data to and from a UDP conversation being proxied by the provider.
+//
 // NEAppProxyUDPFlow wraps [raw.NEAppProxyUDPFlow] with a fluent Go API.
 type NEAppProxyUDPFlow struct {
 	inner *raw.NEAppProxyUDPFlow
@@ -39,7 +41,7 @@ func NewNEAppProxyUDPFlow() *NEAppProxyUDPFlow {
 	return &NEAppProxyUDPFlow{inner: raw.NEAppProxyUDPFlowFromID(_id)}
 }
 
-// @property networkInterface @discussion An nw_interface_t containing information about the network interface used by the flow. If the flow's data is transported using a different interface, this property should be set to that interface.
+// The network interface, if any, used by this flow.
 //
 // WithNetworkInterface sets the networkInterface property and returns the receiver for chaining.
 func (x *NEAppProxyUDPFlow) WithNetworkInterface(networkInterface *foundation.NSObject) *NEAppProxyUDPFlow {
@@ -50,14 +52,14 @@ func (x *NEAppProxyUDPFlow) WithNetworkInterface(networkInterface *foundation.NS
 // @method readDatagramsAndFlowEndpointsWithCompletionHandler: @discussion Read datagrams from the flow. @param completionHandler A block that will be executed when datagrams have been read from the flow. The block takes the datagrams that were read, the destination endpoints of the datagrams, and an NSError. If an error occurred while reading then the error parameter will be non-nil.
 //
 // ReadDatagramsAndFlowEndpointsWithCompletionHandler calls the underlying ReadDatagramsAndFlowEndpointsWithCompletionHandler.
-func (x *NEAppProxyUDPFlow) ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler objc.Block) {
+func (x *NEAppProxyUDPFlow) ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSData], unsafe.Pointer, unsafe.Pointer)) {
 	x.inner.ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler)
 }
 
-// @method readDatagramsWithCompletionHandler: @discussion Read datagrams from the flow. @param completionHandler A block that will be executed when datagrams have been read from the flow. The block takes the datagrams that were read, the destination endpoints of the datagrams, and an NSError. If an error occurred while reading then the error parameter will be non-nil.
+// Read datagrams from the flow.
 //
 // ReadDatagramsWithCompletionHandler calls the underlying ReadDatagramsWithCompletionHandler.
-func (x *NEAppProxyUDPFlow) ReadDatagramsWithCompletionHandler(completionHandler objc.Block) {
+func (x *NEAppProxyUDPFlow) ReadDatagramsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSData], *foundation.NSArray[objc.ID], unsafe.Pointer)) {
 	x.inner.ReadDatagramsWithCompletionHandler(completionHandler)
 }
 
@@ -81,7 +83,7 @@ func (x *NEAppProxyUDPFlow) WriteDatagramsSentByFlowEndpoints(ctx context.Contex
 	}
 }
 
-// @method writeDatagrams:sentByEndpoint:completionHandler: @discussion Write datagrams to the flow. @param datagrams An array of NSData objects containing the data to be written. @param remoteEndpoints The source endpoints of the datagrams. @param completionHandler A block that will be executed when the datagrams have been written to the corresponding socket's receive buffer.
+// Write datagrams to the flow.
 //
 // WriteDatagramsSentByEndpoints blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Context, datagrams *foundation.NSArray[*foundation.NSData], remoteEndpoints *foundation.NSArray[objc.ID]) error {
@@ -121,8 +123,8 @@ func (x *NEAppProxyUDPFlow) asNEAppProxyFlow() *raw.NEAppProxyFlow { return &x.i
 type NEAppProxyUDPFlowable interface {
 	Unwrap() *raw.NEAppProxyUDPFlow
 	WithNetworkInterface(networkInterface *foundation.NSObject) *NEAppProxyUDPFlow
-	ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler objc.Block)
-	ReadDatagramsWithCompletionHandler(completionHandler objc.Block)
+	ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSData], unsafe.Pointer, unsafe.Pointer))
+	ReadDatagramsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSData], *foundation.NSArray[objc.ID], unsafe.Pointer))
 	WriteDatagramsSentByFlowEndpoints(ctx context.Context, datagrams *foundation.NSArray[*foundation.NSData], remoteEndpoints unsafe.Pointer) error
 	WriteDatagramsSentByEndpoints(ctx context.Context, datagrams *foundation.NSArray[*foundation.NSData], remoteEndpoints *foundation.NSArray[objc.ID]) error
 	LocalFlowEndpoint() *foundation.NSObject

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that represents a communication channel.
+//
 // Port wraps [raw.NSPort] with a fluent Go API.
 type Port struct {
 	inner *raw.NSPort
@@ -76,11 +78,15 @@ func (x *Port) SendBeforeDateMsgidComponentsFromReserved(limitDate *raw.NSDate, 
 	return x.inner.SendBeforeDateMsgidComponentsFromReserved(limitDate, msgID, components, receivePort, headerSpaceReserved)
 }
 
+// Adds the receiver to the list of ports monitored by a given run loop for the given input mode.
+//
 // AddConnectionToRunLoopForMode calls the underlying AddConnectionToRunLoopForMode.
 func (x *Port) AddConnectionToRunLoopForMode(conn *raw.NSConnection, runLoop *raw.NSRunLoop, mode *raw.NSString) {
 	x.inner.AddConnectionToRunLoopForMode(conn, runLoop, mode)
 }
 
+// Removes the receiver from the list of ports monitored by runLoop in the given input mode, mode.
+//
 // RemoveConnectionFromRunLoopForMode calls the underlying RemoveConnectionFromRunLoopForMode.
 func (x *Port) RemoveConnectionFromRunLoopForMode(conn *raw.NSConnection, runLoop *raw.NSRunLoop, mode *raw.NSString) {
 	x.inner.RemoveConnectionFromRunLoopForMode(conn, runLoop, mode)

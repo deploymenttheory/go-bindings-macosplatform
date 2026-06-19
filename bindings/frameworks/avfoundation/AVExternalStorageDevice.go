@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Represents a physical external storage device that stores media assets.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avexternalstoragedevice
 type AVExternalStorageDevice struct {
 	foundation.NSObject
@@ -40,14 +42,17 @@ func AVExternalStorageDeviceFromID(id objc.ID) *AVExternalStorageDevice {
 	return o
 }
 
-// @method nextAvailableURLsWithPathExtensions:error: @abstract Next available security-scoped, DCF compliant URL array with different path extensions. @param extensionArray An array of path extensions for the next available URL requested. @param outError An out parameter with error information indicating why the URL could not be provided. If this method is successful, error will be nil. @result An array of DCF compliant security-scoped URL with all the path extensions requested. @discussion Configures the folder structure (create a DCIM folder if there isn't one already) on the external storage device to provide the next available unique DCF compliant security-scoped URL array with different path extensions. Security-scoped URL requires the use of startAccessingSecurityScopedResource, and stopAccessingSecurityScopedResource for access. [nextAvailableURL startAccessingSecurityScopedResource]; . . . // your code to capture image / video . . . [nextAvailableURL stopAccessingSecurityScopedResource]; Use the +requestAccessWithCompletionHandler: method to request access to external storage device before getting the next available URL array else an error will be thrown.
+// Generates an array of security scoped URLs that are compliant for digital camera formats, where each element has a different path extension.
 func (o *AVExternalStorageDevice) NextAvailableURLsWithPathExtensionsError(extensionArray *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*foundation.NSURL], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURL]](o.Ptr(), _aVExternalStorageDeviceSelNextAvailableURLsWithPathExtensionsError, extensionArray, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVExternalStorageDeviceSelNextAvailableURLsWithPathExtensionsError, extensionArray.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[*foundation.NSURL](_ret), nil
 }
 
 // @property displayName @abstract Display name of the external storage device. @discussion This property can be used for displaying the name of an external storage device in a user interface. Will return nil if we fail to extract information from external storage device.
@@ -92,7 +97,7 @@ func (o *AVExternalStorageDevice) IsNotRecommendedForCaptureUse() bool {
 	return _ret
 }
 
-// @method requestAccessWithCompletionHandler: @abstract Requests access to capture onto an external storage device connected to this device, showing a dialog to the user if necessary. @param handler A completion handler block called with the result of requesting access to capture onto an external storage device. @discussion Use this method to request access to capture onto an external storage device connected to this device. This call will not block while the user is being asked for access, allowing the client to continue running. Until access has been granted, trying to capture into detected external storage devices will result in an error. The user is only asked for permission the first time the client requests access, later calls use the authorization status selected by the user. The completion handler is called on an arbitrary dispatch queue. It is the client's responsibility to ensure that any UIKit-related updates are called on the main queue or main thread as a result.
+// Requests access to an external storage device on behalf of your app, which can present a dialog to a person on their device’s display.
 func AVExternalStorageDeviceRequestAccessWithCompletionHandler(handler func(bool)) {
 	var __block_handler objc.Block
 	if handler != nil {

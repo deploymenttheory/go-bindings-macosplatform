@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract superclass for objects that provide media output destinations for a capture session.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptureoutput
 type AVCaptureOutput struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func AVCaptureOutputFromID(id objc.ID) *AVCaptureOutput {
 	return o
 }
 
-// @method connectionWithMediaType: @abstract Returns the first connection in the connections array with an inputPort of the specified mediaType. @param mediaType An AVMediaType constant from AVMediaFormat.h, e.g. AVMediaTypeVideo. @discussion This convenience method returns the first AVCaptureConnection in the receiver's connections array that has an AVCaptureInputPort of the specified mediaType. If no connection with the specified mediaType is found, nil is returned.
+// Returns the first connection with an input port of a specified media type.
 func (o *AVCaptureOutput) ConnectionWithMediaType(mediaType *foundation.NSString) *AVCaptureConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureOutputSelConnectionWithMediaType, mediaType.Ptr())
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *AVCaptureOutput) ConnectionWithMediaType(mediaType *foundation.NSString
 	return AVCaptureConnectionFromID(_ret)
 }
 
-// @method transformedMetadataObjectForMetadataObject:connection: @abstract Converts an AVMetadataObject's visual properties to the receiver's coordinates. @param metadataObject An AVMetadataObject originating from the same AVCaptureInput as the receiver. @param connection The receiver's connection whose AVCaptureInput matches that of the metadata object to be converted. @result An AVMetadataObject whose properties are in output coordinates. @discussion AVMetadataObject bounds may be expressed as a rect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. Face metadata objects likewise express yaw and roll angles with respect to an unrotated picture. -transformedMetadataObjectForMetadataObject:connection: converts the visual properties in the coordinate space of the supplied AVMetadataObject to the coordinate space of the receiver. The conversion takes orientation, mirroring, and scaling into consideration. If the provided metadata object originates from an input source other than the preview layer's, nil will be returned. If an AVCaptureVideoDataOutput instance's connection's videoOrientation or videoMirrored properties are set to non-default values, the output applies the desired mirroring and orientation by physically rotating and or flipping sample buffers as they pass through it. AVCaptureStillImageOutput, on the other hand, does not physically rotate its buffers. It attaches an appropriate kCGImagePropertyOrientation number to captured still image buffers (see ImageIO/CGImageProperties.h) indicating how the image should be displayed on playback. Likewise, AVCaptureMovieFileOutput does not physically apply orientation/mirroring to its sample buffers -- it uses a QuickTime track matrix to indicate how the buffers should be rotated and/or flipped on playback. transformedMetadataObjectForMetadataObject:connection: alters the visual properties of the provided metadata object to match the physical rotation / mirroring of the sample buffers provided by the receiver through the indicated connection. I.e., for video data output, adjusted metadata object coordinates are rotated/mirrored. For still image and movie file output, they are not.
+// Converts a metadata object’s visual properties to layer coordinates.
 func (o *AVCaptureOutput) TransformedMetadataObjectForMetadataObjectConnection(metadataObject *AVMetadataObject, connection *AVCaptureConnection) *AVMetadataObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureOutputSelTransformedMetadataObjectForMetadataObjectConnection, metadataObject.Ptr(), connection.Ptr())
 	if _ret != 0 {
@@ -56,13 +58,13 @@ func (o *AVCaptureOutput) TransformedMetadataObjectForMetadataObjectConnection(m
 	return AVMetadataObjectFromID(_ret)
 }
 
-// @method metadataOutputRectOfInterestForRect: @abstract Converts a rectangle in the receiver's coordinate space to a rectangle of interest in the coordinate space of an AVCaptureMetadataOutput whose capture device is providing input to the receiver. @param rectInOutputCoordinates A CGRect in the receiver's coordinates. @result A CGRect in the coordinate space of the metadata output whose capture device is providing input to the receiver. @discussion AVCaptureMetadataOutput rectOfInterest is expressed as a CGRect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a rectangle in the coordinate space of the receiver to a rectangle of interest in the coordinate space of an AVCaptureMetadataOutput whose AVCaptureDevice is providing input to the receiver. The conversion takes orientation, mirroring, and scaling into consideration. See -transformedMetadataObjectForMetadataObject:connection: for a full discussion of how orientation and mirroring are applied to sample buffers passing through the output.
+// Converts a rectangle in the capture output object’s coordinate system to one in the coordinate system used for metadata outputs.
 func (o *AVCaptureOutput) MetadataOutputRectOfInterestForRect(rectInOutputCoordinates corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _aVCaptureOutputSelMetadataOutputRectOfInterestForRect, rectInOutputCoordinates)
 	return _ret
 }
 
-// @method rectForMetadataOutputRectOfInterest: @abstract Converts a rectangle of interest in the coordinate space of an AVCaptureMetadataOutput whose capture device is providing input to the receiver to a rectangle in the receiver's coordinates. @param rectInMetadataOutputCoordinates A CGRect in the coordinate space of the metadata output whose capture device is providing input to the receiver. @result A CGRect in the receiver's coordinates. @discussion AVCaptureMetadataOutput rectOfInterest is expressed as a CGRect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a rectangle in the coordinate space of an AVCaptureMetadataOutput whose AVCaptureDevice is providing input to the coordinate space of the receiver. The conversion takes orientation, mirroring, and scaling into consideration. See -transformedMetadataObjectForMetadataObject:connection: for a full discussion of how orientation and mirroring are applied to sample buffers passing through the output.
+// Converts a rectangle in the coordinate system used for metadata outputs to one in the capture output object’s coordinate system.
 func (o *AVCaptureOutput) RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _aVCaptureOutputSelRectForMetadataOutputRectOfInterest, rectInMetadataOutputCoordinates)
 	return _ret

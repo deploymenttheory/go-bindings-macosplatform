@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that reads media data from an asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetreader
 type AVAssetReader struct {
 	foundation.NSObject
@@ -44,7 +46,7 @@ func AVAssetReaderFromID(id objc.ID) *AVAssetReader {
 	return o
 }
 
-// @method assetReaderWithAsset:error: @abstract Returns an instance of AVAssetReader for reading media data from the specified asset. @param asset The asset from which media data is to be read. @param outError On return, if initialization of the AVAssetReader fails, points to an NSError describing the nature of the failure. @result An instance of AVAssetReader. @discussion If the specified asset belongs to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, the results of any asset reading operation are undefined if you mutate the asset after invoking -startReading.
+// Returns a new object to read media data from an asset.
 func AVAssetReaderAssetReaderWithAssetError(asset *AVAsset) (*AVAssetReader, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetReader), _aVAssetReaderSelAssetReaderWithAssetError, asset.Ptr(), unsafe.Pointer(&_nsErr))
@@ -57,7 +59,7 @@ func AVAssetReaderAssetReaderWithAssetError(asset *AVAsset) (*AVAssetReader, err
 	return AVAssetReaderFromID(_ret), nil
 }
 
-// @method initWithAsset:error: @abstract Creates an instance of AVAssetReader for reading media data from the specified asset. @param asset The asset from which media data is to be read. @param outError On return, if initialization of the AVAssetReader fails, points to an NSError describing the nature of the failure. @result An instance of AVAssetReader. @discussion If the specified asset belongs to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, the results of any asset reading operation are undefined if you mutate the asset after invoking -startReading.
+// Creates an object to read media data from an asset.
 func (o *AVAssetReader) InitWithAssetError(asset *AVAsset) (*AVAssetReader, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderSelInitWithAssetError, asset.Ptr(), unsafe.Pointer(&_nsErr))
@@ -70,24 +72,24 @@ func (o *AVAssetReader) InitWithAssetError(asset *AVAsset) (*AVAssetReader, erro
 	return AVAssetReaderFromID(_ret), nil
 }
 
-// @method canAddOutput: @abstract Tests whether an output can be added to the receiver. @param output The AVAssetReaderOutput object to be tested. @result A BOOL indicating whether the output can be added to the receiver. @discussion An output that reads from a track of an asset other than the asset used to initialize the receiver cannot be added.
+// Determines whether you can add the output to the asset reader.
 func (o *AVAssetReader) CanAddOutput(output *AVAssetReaderOutput) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAssetReaderSelCanAddOutput, output.Ptr())
 	return _ret
 }
 
-// @method addOutput: @abstract Adds an output to the receiver. @param output The AVAssetReaderOutput object to be added. @discussion Outputs are created with a reference to one or more AVAssetTrack objects. These tracks must be owned by the asset returned by the receiver's asset property. This method throws an exception if the output has already been added to an AVAssetReader or if reading has started (`status` has progressed beyond AVAssetReaderStatusUnknown).
+// Adds an output to the reader.
 func (o *AVAssetReader) AddOutput(output *AVAssetReaderOutput) {
 	o.Ptr().Send(_aVAssetReaderSelAddOutput, output.Ptr())
 }
 
-// @method startReading @abstract Prepares the receiver for reading sample buffers from the asset. @result A BOOL indicating whether reading could be started. @discussion This method validates the entire collection of settings for outputs for tracks, for audio mixing, and for video composition and initiates reading from the receiver's asset. If this method returns NO, clients can determine the nature of the failure by checking the value of the status and error properties. This method throws an exception if reading has already started (`status` has progressed beyond AVAssetReaderStatusUnknown).
+// Prepares the asset reader to start reading sample buffers from the asset.
 func (o *AVAssetReader) StartReading() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAssetReaderSelStartReading)
 	return _ret
 }
 
-// @method cancelReading @abstract Cancels any background work and prevents the receiver's outputs from reading more samples. @discussion Clients that want to stop reading samples from the receiver before reaching the end of its time range should call this method to stop any background read ahead operations that the may have been in progress. This method should not be called concurrently with any calls to -[AVAssetReaderOutput copyNextSampleBuffer].
+// Cancels any background work and stops the reader’s outputs from reading more samples.
 func (o *AVAssetReader) CancelReading() {
 	o.Ptr().Send(_aVAssetReaderSelCancelReading)
 }

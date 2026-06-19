@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that is run by a node to change its structure or content.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skaction
 type SKAction struct {
 	foundation.NSObject
@@ -770,7 +772,7 @@ func SKActionActionNamedDuration(name *foundation.NSString, duration float64) *S
 	return SKActionFromID(_ret)
 }
 
-// Creates an action of the given name from an action file. @param name The name of the action @param url The url of the file containing the action
+// Creates an action of the given name from an action file.
 func SKActionActionNamedFromURL(name *foundation.NSString, url *foundation.NSURL) *SKAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKAction), _sKActionSelActionNamedFromURL, name.Ptr(), url.Ptr())
 	if _ret != 0 {
@@ -779,7 +781,7 @@ func SKActionActionNamedFromURL(name *foundation.NSString, url *foundation.NSURL
 	return SKActionFromID(_ret)
 }
 
-// Creates an action of the given name from an action file with a new duration. @param name The name of the action @param url The url of the file containing the action @param duration The duration of the action
+// Creates an action of the given name from an action file with a new duration.
 func SKActionActionNamedFromURLDuration(name *foundation.NSString, url *foundation.NSURL, duration float64) *SKAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKAction), _sKActionSelActionNamedFromURLDuration, name.Ptr(), url.Ptr(), duration)
 	if _ret != 0 {
@@ -933,7 +935,7 @@ func SKActionWarpToDuration(warp *SKWarpGeometry, duration float64) *SKAction {
 }
 
 func SKActionAnimateWithWarpsTimes(warps *foundation.NSArray[*SKWarpGeometry], times *foundation.NSArray[*foundation.NSNumber]) *SKAction {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKAction), _sKActionSelAnimateWithWarpsTimes, warps.Ptr(), times)
+	_ret := objc.Send[objc.ID](objc.ID(_clsSKAction), _sKActionSelAnimateWithWarpsTimes, warps.Ptr(), times.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -941,7 +943,7 @@ func SKActionAnimateWithWarpsTimes(warps *foundation.NSArray[*SKWarpGeometry], t
 }
 
 func SKActionAnimateWithWarpsTimesRestore(warps *foundation.NSArray[*SKWarpGeometry], times *foundation.NSArray[*foundation.NSNumber], restore bool) *SKAction {
-	_ret := objc.Send[objc.ID](objc.ID(_clsSKAction), _sKActionSelAnimateWithWarpsTimesRestore, warps.Ptr(), times, restore)
+	_ret := objc.Send[objc.ID](objc.ID(_clsSKAction), _sKActionSelAnimateWithWarpsTimesRestore, warps.Ptr(), times.Ptr(), restore)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

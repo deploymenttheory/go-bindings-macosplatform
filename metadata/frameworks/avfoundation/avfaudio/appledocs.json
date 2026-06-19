@@ -1536,7 +1536,7 @@
       },
       "packetDependencies": {
         "doc": "The buffer’s array of packet dependencies.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiocompressedbuffer/packetdependencies-3a6ln"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiocompressedbuffer/packetdependencies-5oae6"
       },
       "packetDescriptions": {
         "doc": "The buffer’s array of packet descriptions.",
@@ -1834,7 +1834,7 @@
       },
       "withAudioUnit(_:)": {
         "doc": "Provides scoped access to the I/O node’s AudioUnit",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudioionode/withaudiounit(_:)-57kv"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudioionode/withaudiounit(_:)-6i8ld"
       }
     },
     "AVAudioInputNode": {
@@ -1941,8 +1941,8 @@
         "url": "https://developer.apple.com/documentation/avfaudio/avaudiopcmbuffer/framelength"
       },
       "init(copying:)": {
-        "doc": "Creates a mutable buffer by copying another PCM buffer’s audio data.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiopcmbuffer/init(copying:)-68es5"
+        "doc": "Creates a mutable buffer by copying a read-only buffer’s audio data.",
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiopcmbuffer/init(copying:)-875xm"
       },
       "int16ChannelData": {
         "doc": "The buffer’s 16-bit integer audio samples.",
@@ -2049,8 +2049,8 @@
         "url": "https://developer.apple.com/documentation/avfaudio/avaudioplayernode/isplaying"
       },
       "scheduleBuffer(_:atTime:options:completionCallbackType:completionHandler:)": {
-        "doc": "Schedules playing samples from an audio buffer.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudioplayernode/schedulebuffer(_:attime:options:completioncallbacktype:completionhandler:)-3ewd3"
+        "doc": "Schedules playing samples from a read-only audio buffer.",
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudioplayernode/schedulebuffer(_:attime:options:completioncallbacktype:completionhandler:)-81qje"
       }
     },
     "AVAudioRecorder": {
@@ -2306,7 +2306,7 @@
       },
       "intendedSpatialExperience": {
         "doc": "The spatial audio experience your app intends to provide the user.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession/intendedspatialexperience-1bpnq"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession/intendedspatialexperience-qlty"
       },
       "intendedSpatialExperienceOptions": {
         "doc": "A dictionary of options that customize the spatial experience.",

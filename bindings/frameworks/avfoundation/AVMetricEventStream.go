@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that allows clients to add publishers and then subscribe to specific metric event classes from those publishers.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetriceventstream
 type AVMetricEventStream struct {
 	foundation.NSObject
@@ -63,7 +65,7 @@ func (o *AVMetricEventStream) SubscribeToMetricEvent(metricEventClass objc.Class
 
 // Subscribe to set of metric event classes. - Parameter metricEventClasses: Set of metric event classes to subscribe to.
 func (o *AVMetricEventStream) SubscribeToMetricEvents(metricEventClasses *foundation.NSArray[objc.Class]) {
-	o.Ptr().Send(_aVMetricEventStreamSelSubscribeToMetricEvents, metricEventClasses)
+	o.Ptr().Send(_aVMetricEventStreamSelSubscribeToMetricEvents, metricEventClasses.Ptr())
 }
 
 // Subscribe to all metric event classes.

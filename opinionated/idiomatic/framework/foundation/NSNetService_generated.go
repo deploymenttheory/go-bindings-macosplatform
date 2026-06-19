@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A network service that broadcasts its availability using multicast DNS.
+//
 // NetService wraps [raw.NSNetService] with a fluent Go API.
 type NetService struct {
 	inner *raw.NSNetService

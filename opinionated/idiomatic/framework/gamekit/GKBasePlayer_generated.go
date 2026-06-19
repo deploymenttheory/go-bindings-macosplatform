@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that provides common data and methods for the different player objects.
+//
 // BasePlayer wraps [raw.GKBasePlayer] with a fluent Go API.
 type BasePlayer struct {
 	inner *raw.GKBasePlayer

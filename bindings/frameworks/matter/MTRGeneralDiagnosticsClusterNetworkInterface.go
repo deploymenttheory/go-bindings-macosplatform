@@ -106,21 +106,27 @@ func (o *MTRGeneralDiagnosticsClusterNetworkInterface) SetHardwareAddress(hardwa
 }
 
 func (o *MTRGeneralDiagnosticsClusterNetworkInterface) IPv4Addresses() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRGeneralDiagnosticsClusterNetworkInterfaceSelIPv4Addresses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterNetworkInterfaceSelIPv4Addresses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRGeneralDiagnosticsClusterNetworkInterface) SetIPv4Addresses(iPv4Addresses *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetIPv4Addresses, iPv4Addresses)
+	o.Ptr().Send(_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetIPv4Addresses, iPv4Addresses.Ptr())
 }
 
 func (o *MTRGeneralDiagnosticsClusterNetworkInterface) IPv6Addresses() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRGeneralDiagnosticsClusterNetworkInterfaceSelIPv6Addresses)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterNetworkInterfaceSelIPv6Addresses)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRGeneralDiagnosticsClusterNetworkInterface) SetIPv6Addresses(iPv6Addresses *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetIPv6Addresses, iPv6Addresses)
+	o.Ptr().Send(_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetIPv6Addresses, iPv6Addresses.Ptr())
 }
 
 func (o *MTRGeneralDiagnosticsClusterNetworkInterface) Type() *foundation.NSNumber {

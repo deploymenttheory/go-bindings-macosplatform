@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The result of a request to fetch persistent history.
+//
 // PersistentHistoryResult wraps [raw.NSPersistentHistoryResult] with a fluent Go API.
 type PersistentHistoryResult struct {
 	inner *raw.NSPersistentHistoryResult

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The user’s response to an actionable notification.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/unnotificationresponse
 type UNNotificationResponse struct {
 	foundation.NSObject

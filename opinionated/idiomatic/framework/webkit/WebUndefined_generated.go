@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// WebUndefined objects are simply used to represent the JavaScript “undefined” value in methods when bridging between JavaScript and Objective-C. For example, if you invoke a JavaScript function that returns the JavaScript “undefined” value, then a WebUndefined object is returned to the Objective-C calling context.
+//
 // WebUndefined wraps [raw.WebUndefined] with a fluent Go API.
 type WebUndefined struct {
 	inner *raw.WebUndefined

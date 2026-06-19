@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The details of a group call handled by your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/incallgroup
 type INCallGroup struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func INCallGroupFromID(id objc.ID) *INCallGroup {
 	return o
 }
 
+// Creates a call record with the group details.
 func (o *INCallGroup) InitWithGroupNameGroupId(groupName *foundation.NSString, groupId *foundation.NSString) *INCallGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallGroupSelInitWithGroupNameGroupId, groupName.Ptr(), groupId.Ptr())
 	if _ret != 0 {

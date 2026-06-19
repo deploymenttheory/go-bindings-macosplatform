@@ -1,0 +1,427 @@
+{
+  "schema_version": 1,
+  "framework": "ReplayKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "RPBroadcastActivityController": {
+      "doc": "A controller object that presents the macOS broadcast picker.",
+      "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastactivitycontroller"
+    },
+    "RPBroadcastController": {
+      "doc": "An object containing methods for starting and controlling a broadcast.",
+      "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastcontroller"
+    },
+    "RPBroadcastHandler": {
+      "doc": "An object that sends messages to the broadcasting app.",
+      "url": "https://developer.apple.com/documentation/replaykit/rpbroadcasthandler"
+    },
+    "RPBroadcastSampleHandler": {
+      "doc": "An object that processes buffer objects as received from ReplayKit.",
+      "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastsamplehandler"
+    },
+    "RPPreviewViewController": {
+      "doc": "An object that displays a user interface where users preview and edit a screen recording that you create with ReplayKit.",
+      "url": "https://developer.apple.com/documentation/replaykit/rppreviewviewcontroller"
+    },
+    "RPScreenRecorder": {
+      "doc": "The shared recorder object that provides the ability to record audio and video of your app.",
+      "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder"
+    }
+  },
+  "protocols": {
+    "RPBroadcastActivityControllerDelegate": {
+      "doc": "A protocol that defines the methods to implement to respond to selection events from a broadcast activity controller.",
+      "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastactivitycontrollerdelegate"
+    },
+    "RPBroadcastActivityViewControllerDelegate": {
+      "doc": "The protocol you implement to respond to changes to a broadcast activity user interface.",
+      "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastactivityviewcontrollerdelegate"
+    },
+    "RPBroadcastControllerDelegate": {
+      "doc": "The protocol you implement to respond to changes in a live broadcast.",
+      "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastcontrollerdelegate"
+    },
+    "RPPreviewViewControllerDelegate": {
+      "doc": "The protocol you implement to respond to changes to a screen-recording user interface.",
+      "url": "https://developer.apple.com/documentation/replaykit/rppreviewviewcontrollerdelegate"
+    },
+    "RPScreenRecorderDelegate": {
+      "doc": "The protocol you implement to receive notifications from the screen recorder.",
+      "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorderdelegate"
+    }
+  },
+  "enums": {
+    "RPCameraPosition": {
+      "doc": "The position of the camera being accessed.",
+      "url": "https://developer.apple.com/documentation/replaykit/rpcameraposition",
+      "members": {
+        "RPCameraPositionBack": {
+          "doc": "The back camera is used.",
+          "url": "https://developer.apple.com/documentation/replaykit/rpcameraposition/back"
+        },
+        "RPCameraPositionFront": {
+          "doc": "The front camera is used.",
+          "url": "https://developer.apple.com/documentation/replaykit/rpcameraposition/front"
+        }
+      }
+    },
+    "RPRecordingErrorCode": {
+      "doc": "The ReplayKit error domain codes.",
+      "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode",
+      "members": {
+        "RPRecordingErrorActivePhoneCall": {
+          "doc": "Unable to record due to an active phone call.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/activephonecall"
+        },
+        "RPRecordingErrorAttemptToStartInRecordingState": {
+          "doc": "Attempted to start a recording that’s already in a recording state.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/attempttostartinrecordingstate"
+        },
+        "RPRecordingErrorAttemptToStopNonRecording": {
+          "doc": "Attempted to stop a recording that’s not in a recording state.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/attempttostopnonrecording"
+        },
+        "RPRecordingErrorBroadcastInvalidSession": {
+          "doc": "Attempted to start a broadcast without a prior session.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/broadcastinvalidsession"
+        },
+        "RPRecordingErrorBroadcastSetupFailed": {
+          "doc": "The broadcast set up failed.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/broadcastsetupfailed"
+        },
+        "RPRecordingErrorCarPlay": {
+          "doc": "Failed to start recording because CarPlay is active.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/carplay"
+        },
+        "RPRecordingErrorCodeSuccessful": {
+          "doc": "Successfully saved the recording to the Camera Roll.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/codesuccessful"
+        },
+        "RPRecordingErrorContentResize": {
+          "doc": "Recording interrupted by multitasking and content resizing.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/contentresize"
+        },
+        "RPRecordingErrorDisabled": {
+          "doc": "Recording disabled via parental controls.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/disabled"
+        },
+        "RPRecordingErrorEntitlements": {
+          "doc": "Recording failed due to missing entitlements.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/entitlements"
+        },
+        "RPRecordingErrorFailed": {
+          "doc": "Recording error occurred.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failed"
+        },
+        "RPRecordingErrorFailedApplicationConnectionInterrupted": {
+          "doc": "The recording failed because the app’s connection was interrupted.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failedapplicationconnectioninterrupted"
+        },
+        "RPRecordingErrorFailedApplicationConnectionInvalid": {
+          "doc": "The recording failed because the app’s connection is invalid.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failedapplicationconnectioninvalid"
+        },
+        "RPRecordingErrorFailedAssetWriterExportCanceled": {
+          "doc": "The recording failed because the user canceled the export.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failedassetwriterexportcanceled"
+        },
+        "RPRecordingErrorFailedAssetWriterExportFailed": {
+          "doc": "The recording failed due to an error exporting the movie.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failedassetwriterexportfailed"
+        },
+        "RPRecordingErrorFailedAssetWriterFailedToSave": {
+          "doc": "The recording failed due to an asset writer failure.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failedassetwriterfailedtosave"
+        },
+        "RPRecordingErrorFailedAssetWriterInWrongState": {
+          "doc": "The recording failed because the asset writer is in an invalid state.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failedassetwriterinwrongstate"
+        },
+        "RPRecordingErrorFailedIncorrectTimeStamps": {
+          "doc": "The recording failed due to malformed start and end time intervals.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failedincorrecttimestamps"
+        },
+        "RPRecordingErrorFailedMediaServicesFailure": {
+          "doc": "The recording failed due to a mediaservices daemon failure.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failedmediaservicesfailure"
+        },
+        "RPRecordingErrorFailedNoAssetWriter": {
+          "doc": "The recording failed because there is no asset writer available.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failednoassetwriter"
+        },
+        "RPRecordingErrorFailedNoMatchingApplicationContext": {
+          "doc": "The context identifier doesn’t match the app identifier.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failednomatchingapplicationcontext"
+        },
+        "RPRecordingErrorFailedToObtainURL": {
+          "doc": "The recording failed due to a failure to obtain the URL.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failedtoobtainurl"
+        },
+        "RPRecordingErrorFailedToProcessFirstSample": {
+          "doc": "The recording failed because the asset writer failed to process the first media sample.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failedtoprocessfirstsample"
+        },
+        "RPRecordingErrorFailedToRemoveFile": {
+          "doc": "The recording failed because the temporary file wasn’t removed.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failedtoremovefile"
+        },
+        "RPRecordingErrorFailedToSave": {
+          "doc": "The recording failed to save.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failedtosave"
+        },
+        "RPRecordingErrorFailedToStart": {
+          "doc": "Recording failed to start.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failedtostart"
+        },
+        "RPRecordingErrorFailedToStartCaptureStack": {
+          "doc": "The system failed to configure the app for A/V recording.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/failedtostartcapturestack"
+        },
+        "RPRecordingErrorFilePermissions": {
+          "doc": "The recording failed due to a file permission error.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/filepermissions"
+        },
+        "RPRecordingErrorInsufficientStorage": {
+          "doc": "Not enough storage available on the device.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/insufficientstorage"
+        },
+        "RPRecordingErrorInterrupted": {
+          "doc": "Recording interrupted by another app.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/interrupted"
+        },
+        "RPRecordingErrorInvalidParameter": {
+          "doc": "The recording failed because of an invalid parameter.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/invalidparameter"
+        },
+        "RPRecordingErrorPhotoFailure": {
+          "doc": "Failed saving the video the Camera Roll.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/photofailure"
+        },
+        "RPRecordingErrorRecordingInvalidSession": {
+          "doc": "Attempted to start an invalid recording session.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/recordinginvalidsession"
+        },
+        "RPRecordingErrorSystemDormancy": {
+          "doc": "Recording forced to end by the user pressing the power button.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/systemdormancy"
+        },
+        "RPRecordingErrorUnknown": {
+          "doc": "Error cause unknown.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/unknown"
+        },
+        "RPRecordingErrorUserDeclined": {
+          "doc": "User declined recording request.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/userdeclined"
+        },
+        "RPRecordingErrorVideoMixingFailure": {
+          "doc": "The recording failed due to an A/V mixing failure.",
+          "url": "https://developer.apple.com/documentation/replaykit/rprecordingerrorcode/videomixingfailure"
+        }
+      }
+    },
+    "RPSampleBufferType": {
+      "doc": "The type of media clip sample being buffered.",
+      "url": "https://developer.apple.com/documentation/replaykit/rpsamplebuffertype",
+      "members": {
+        "RPSampleBufferTypeAudioApp": {
+          "doc": "The sample audio that originates from the app.",
+          "url": "https://developer.apple.com/documentation/replaykit/rpsamplebuffertype/audioapp"
+        },
+        "RPSampleBufferTypeAudioMic": {
+          "doc": "The sample audio that originates from the microphone.",
+          "url": "https://developer.apple.com/documentation/replaykit/rpsamplebuffertype/audiomic"
+        },
+        "RPSampleBufferTypeVideo": {
+          "doc": "The sample that contains a video clip.",
+          "url": "https://developer.apple.com/documentation/replaykit/rpsamplebuffertype/video"
+        }
+      }
+    }
+  },
+  "methods": {
+    "RPBroadcastActivityController": {
+      "+showBroadcastPickerAtPoint:fromWindow:preferredExtensionIdentifier:completionHandler:": {
+        "doc": "Presents a list of available broadcast services for the user to select.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastactivitycontroller/showbroadcastpicker(at:from:preferredextensionidentifier:completionhandler:)"
+      }
+    },
+    "RPBroadcastController": {
+      "-finishBroadcastWithHandler:": {
+        "doc": "Stops the current broadcast.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastcontroller/finishbroadcast(handler:)"
+      },
+      "-pauseBroadcast": {
+        "doc": "Pauses the current broadcast.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastcontroller/pausebroadcast()"
+      },
+      "-resumeBroadcast": {
+        "doc": "Resumes a paused broadcast.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastcontroller/resumebroadcast()"
+      },
+      "-startBroadcastWithHandler:": {
+        "doc": "Starts a broadcast.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastcontroller/startbroadcast(handler:)"
+      }
+    },
+    "RPBroadcastHandler": {
+      "-updateBroadcastURL:": {
+        "doc": "Sends the current broadcast URL to the broadcast controller.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcasthandler/updatebroadcast(_:)"
+      },
+      "-updateServiceInfo:": {
+        "doc": "Sends information about the current broadcast to the broadcasting app.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcasthandler/updateserviceinfo(_:)"
+      }
+    },
+    "RPBroadcastSampleHandler": {
+      "-broadcastAnnotatedWithApplicationInfo:": {
+        "doc": "Perform any required actions after starting a live broadcast.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastsamplehandler/broadcastannotated(withapplicationinfo:)"
+      },
+      "-broadcastFinished": {
+        "doc": "Perform any required actions after a live broadcast is finished.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastsamplehandler/broadcastfinished()"
+      },
+      "-broadcastPaused": {
+        "doc": "Perform any required actions after a live broadcast is paused.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastsamplehandler/broadcastpaused()"
+      },
+      "-broadcastResumed": {
+        "doc": "Perform any required actions after a live broadcast is resumed.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastsamplehandler/broadcastresumed()"
+      },
+      "-broadcastStartedWithSetupInfo:": {
+        "doc": "Perform any required actions after starting a live broadcast.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastsamplehandler/broadcaststarted(withsetupinfo:)"
+      },
+      "-finishBroadcastWithError:": {
+        "doc": "Stops the broadcast and passes an error back to the broadcasting app.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastsamplehandler/finishbroadcastwitherror(_:)"
+      },
+      "-processSampleBuffer:withType:": {
+        "doc": "Processes video and audio data as it becomes available during a live broadcast.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastsamplehandler/processsamplebuffer(_:with:)"
+      }
+    },
+    "RPScreenRecorder": {
+      "+sharedRecorder": {
+        "doc": "Returns an app’s instance of the shared screen recorder.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/shared()"
+      },
+      "-discardRecordingWithHandler:": {
+        "doc": "Discards the current recording.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/discardrecording(handler:)"
+      },
+      "-exportClipToURL:duration:completionHandler:": {
+        "doc": "Exports a clip recording to a file.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/exportclip(to:duration:completionhandler:)"
+      },
+      "-startCaptureWithHandler:completionHandler:": {
+        "doc": "Starts screen and audio capture.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/startcapture(handler:completionhandler:)"
+      },
+      "-startClipBufferingWithCompletionHandler:": {
+        "doc": "Starts buffering a clip recording.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/startclipbuffering(completionhandler:)"
+      },
+      "-startRecordingWithHandler:": {
+        "doc": "Starts recording the app display.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/startrecording(handler:)"
+      },
+      "-startRecordingWithMicrophoneEnabled:handler:": {
+        "doc": "Starts recording the app’s audio and video.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/startrecording(withmicrophoneenabled:handler:)"
+      },
+      "-stopCaptureWithHandler:": {
+        "doc": "Stops screen capture",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/stopcapture(handler:)"
+      },
+      "-stopClipBufferingWithCompletionHandler:": {
+        "doc": "Stops buffering a clip recording.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/stopclipbuffering(completionhandler:)"
+      },
+      "-stopRecordingWithHandler:": {
+        "doc": "Stops the current recording.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/stoprecording(handler:)"
+      },
+      "-stopRecordingWithOutputURL:completionHandler:": {
+        "doc": "Stops the current recording and writes the movie to the specified output URL.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/stoprecording(withoutput:completionhandler:)"
+      }
+    }
+  },
+  "properties": {
+    "RPBroadcastActivityController": {
+      "delegate": {
+        "doc": "The broadcast activity controller’s delegate object.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastactivitycontroller/delegate"
+      }
+    },
+    "RPBroadcastController": {
+      "broadcastExtensionBundleID": {
+        "doc": "The bundle ID for the selected broadcast service.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastcontroller/broadcastextensionbundleid"
+      },
+      "broadcastURL": {
+        "doc": "A URL that redirects users to an ongoing or completed broadcast.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastcontroller/broadcasturl"
+      },
+      "broadcasting": {
+        "doc": "A Boolean value indicating whether the controller is broadcasting.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastcontroller/isbroadcasting"
+      },
+      "delegate": {
+        "doc": "The delegate for the broadcast controller.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastcontroller/delegate"
+      },
+      "paused": {
+        "doc": "A Boolean value indicating whether the broadcast is paused.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastcontroller/ispaused"
+      },
+      "serviceInfo": {
+        "doc": "Information updated by the service during a broadcast.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpbroadcastcontroller/serviceinfo"
+      }
+    },
+    "RPPreviewViewController": {
+      "mode": {
+        "doc": "The type of screen that appears when the view is presented.",
+        "url": "https://developer.apple.com/documentation/replaykit/rppreviewviewcontroller/mode"
+      },
+      "previewControllerDelegate": {
+        "doc": "The preview view controller’s delegate.",
+        "url": "https://developer.apple.com/documentation/replaykit/rppreviewviewcontroller/previewcontrollerdelegate"
+      }
+    },
+    "RPScreenRecorder": {
+      "available": {
+        "doc": "A Boolean value that indicates whether the screen recorder is available for recording.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/isavailable"
+      },
+      "cameraEnabled": {
+        "doc": "A Boolean value that indicates whether the camera is currently enabled.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/iscameraenabled"
+      },
+      "cameraPosition": {
+        "doc": "The camera position to use.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/cameraposition"
+      },
+      "cameraPreviewView": {
+        "doc": "A view containing the contents of the front-facing camera.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/camerapreviewview"
+      },
+      "delegate": {
+        "doc": "The delegate for the screen recorder.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/delegate"
+      },
+      "microphoneEnabled": {
+        "doc": "A Boolean value that indicates whether the microphone is currently enabled.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/ismicrophoneenabled"
+      },
+      "recording": {
+        "doc": "A Boolean value that indicates whether the app is currently recording.",
+        "url": "https://developer.apple.com/documentation/replaykit/rpscreenrecorder/isrecording"
+      }
+    }
+  }
+}

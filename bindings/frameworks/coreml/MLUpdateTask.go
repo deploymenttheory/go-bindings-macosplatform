@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A task that updates a model with additional training data.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlupdatetask
 type MLUpdateTask struct {
 	MLTask
@@ -36,6 +38,7 @@ func MLUpdateTaskFromID(id objc.ID) *MLUpdateTask {
 	return o
 }
 
+// Creates a task that updates the model at the URL with the training data and configuration, and calls the completion handler when the update completes.
 func MLUpdateTaskUpdateTaskForModelAtURLTrainingDataConfigurationCompletionHandlerError(modelURL *foundation.NSURL, trainingData MLBatchProvider, configuration *MLModelConfiguration, completionHandler func(*MLUpdateContext)) (*MLUpdateTask, error) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -58,6 +61,7 @@ func MLUpdateTaskUpdateTaskForModelAtURLTrainingDataConfigurationCompletionHandl
 	return MLUpdateTaskFromID(_ret), nil
 }
 
+// Creates a task that updates the model at the URL with the training data, and calls the completion handler when the update completes.
 func MLUpdateTaskUpdateTaskForModelAtURLTrainingDataCompletionHandlerError(modelURL *foundation.NSURL, trainingData MLBatchProvider, completionHandler func(*MLUpdateContext)) (*MLUpdateTask, error) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -80,6 +84,7 @@ func MLUpdateTaskUpdateTaskForModelAtURLTrainingDataCompletionHandlerError(model
 	return MLUpdateTaskFromID(_ret), nil
 }
 
+// Creates a task that updates the model at the URL with the training data and configuration, and calls the progress handlers during and after the update.
 func MLUpdateTaskUpdateTaskForModelAtURLTrainingDataConfigurationProgressHandlersError(modelURL *foundation.NSURL, trainingData MLBatchProvider, configuration *MLModelConfiguration, progressHandlers *MLUpdateProgressHandlers) (*MLUpdateTask, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLUpdateTask), _mLUpdateTaskSelUpdateTaskForModelAtURLTrainingDataConfigurationProgressHandlersError, modelURL.Ptr(), trainingData, configuration.Ptr(), progressHandlers.Ptr(), unsafe.Pointer(&_nsErr))
@@ -92,6 +97,7 @@ func MLUpdateTaskUpdateTaskForModelAtURLTrainingDataConfigurationProgressHandler
 	return MLUpdateTaskFromID(_ret), nil
 }
 
+// Creates a task that updates the model at the URL with the training data, and calls the progress handlers during and after the update.
 func MLUpdateTaskUpdateTaskForModelAtURLTrainingDataProgressHandlersError(modelURL *foundation.NSURL, trainingData MLBatchProvider, progressHandlers *MLUpdateProgressHandlers) (*MLUpdateTask, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLUpdateTask), _mLUpdateTaskSelUpdateTaskForModelAtURLTrainingDataProgressHandlersError, modelURL.Ptr(), trainingData, progressHandlers.Ptr(), unsafe.Pointer(&_nsErr))
@@ -104,6 +110,7 @@ func MLUpdateTaskUpdateTaskForModelAtURLTrainingDataProgressHandlersError(modelU
 	return MLUpdateTaskFromID(_ret), nil
 }
 
+// Resumes a model update with updated parameter values.
 func (o *MLUpdateTask) ResumeWithParameters(updateParameters *foundation.NSDictionary[*MLParameterKey, objc.ID]) {
-	o.Ptr().Send(_mLUpdateTaskSelResumeWithParameters, updateParameters)
+	o.Ptr().Send(_mLUpdateTaskSelResumeWithParameters, updateParameters.Ptr())
 }

@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract   A node representing a MPSCNNNeuronExponential kernel @discussion For each pixel, applies the following function: @code f(x) = c ^ (a * x + b) @endcode
+// A representation of an exponential neuron filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronexponentialnode
 type MPSCNNNeuronExponentialNode struct {

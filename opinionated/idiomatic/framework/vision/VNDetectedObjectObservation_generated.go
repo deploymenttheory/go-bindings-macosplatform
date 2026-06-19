@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An observation that provides the position and extent of an image feature that an image- analysis request detects.
+//
 // DetectedObjectObservation wraps [raw.VNDetectedObjectObservation] with a fluent Go API.
 type DetectedObjectObservation struct {
 	inner *raw.VNDetectedObjectObservation

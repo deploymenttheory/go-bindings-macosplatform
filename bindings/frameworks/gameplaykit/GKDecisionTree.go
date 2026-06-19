@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A data structure that models a set of specific questions, their possible answers, and the actions that follow from a series of answers.
+//
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkdecisiontree
 type GKDecisionTree struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func GKDecisionTreeFromID(id objc.ID) *GKDecisionTree {
 	return o
 }
 
-// Initializes the decision tree with a root node containing the provided attribute @param attribute The attribute to be contained at the root of the tree @return GKDecisionTree with the set root
+// Creates a decision tree starting with the specified initial attribute to test.
 func (o *GKDecisionTree) InitWithAttribute(attribute foundation.NSObjectProtocol) *GKDecisionTree {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKDecisionTreeSelInitWithAttribute, attribute)
 	if _ret != 0 {
@@ -48,9 +50,9 @@ func (o *GKDecisionTree) InitWithAttribute(attribute foundation.NSObjectProtocol
 	return GKDecisionTreeFromID(_ret)
 }
 
-// Initializes and constructs a decision tree by learning from the provided examples & attributes @param examples Must be an array of examples (with each example being a collection of the various attributes at a given state) @param actions An array of the corresponding actions for each example. Ordered such that the first action matches with the first example in examples. @param attributes The list of attributes. Ordered such that the first attribute matches with the first result in each example. So if we have two attributes: [distance, jump height], and two examples: [[20, 8], [15, 14]], and the resulting actions here: [Roll, Jump], we can think of this as a matrix: distance| height            <-  Attributes _______|_______ |       |       | |  20   |   8   |  jump |-------|-------|-------    <-  Results |  15   |   14  |  roll |_______|_______| ^ | Examples @return GKDecisionTree created by learning from the provided examples for the provided attributes
+// Creates an automatically learned decision tree using the specified attributes, example items, and actions.
 func (o *GKDecisionTree) InitWithExamplesActionsAttributes(examples *foundation.NSArray[objc.ID], actions *foundation.NSArray[foundation.NSObjectProtocol], attributes *foundation.NSArray[foundation.NSObjectProtocol]) *GKDecisionTree {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKDecisionTreeSelInitWithExamplesActionsAttributes, examples, actions, attributes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKDecisionTreeSelInitWithExamplesActionsAttributes, examples.Ptr(), actions.Ptr(), attributes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -72,9 +74,9 @@ func (o *GKDecisionTree) ExportToURLError(url *foundation.NSURL, error_ unsafe.P
 	return _ret
 }
 
-// Will branch down from the root node to find the correct action attribute for the given collection of results and their respective attributes @param answers The dictionary of attributes (keys) and their answers (values) @return The attribute found by traversing the tree given the provided answers
+// Searches the decision tree, following the branches corresponding to each of the specified answers, and returns the resulting action object.
 func (o *GKDecisionTree) FindActionForAnswers(answers *foundation.NSDictionary[foundation.NSObjectProtocol, foundation.NSObjectProtocol]) foundation.NSObjectProtocol {
-	_ret := objc.Send[foundation.NSObjectProtocol](o.Ptr(), _gKDecisionTreeSelFindActionForAnswers, answers)
+	_ret := objc.Send[foundation.NSObjectProtocol](o.Ptr(), _gKDecisionTreeSelFindActionForAnswers, answers.Ptr())
 	return _ret
 }
 

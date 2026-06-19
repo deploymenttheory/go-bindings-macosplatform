@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object describing the location of a custom language model and specialized vocabulary.
+//
 // Apple documentation: https://developer.apple.com/documentation/speech/sfspeechlanguagemodelconfiguration
 type SFSpeechLanguageModelConfiguration struct {
 	foundation.NSObject

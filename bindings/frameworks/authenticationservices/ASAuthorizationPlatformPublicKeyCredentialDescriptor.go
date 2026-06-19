@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that holds the credential.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialdescriptor
 type ASAuthorizationPlatformPublicKeyCredentialDescriptor struct {
 	foundation.NSObject
@@ -30,6 +32,7 @@ func ASAuthorizationPlatformPublicKeyCredentialDescriptorFromID(id objc.ID) *ASA
 	return o
 }
 
+// Creates the descriptor with a credential.
 func (o *ASAuthorizationPlatformPublicKeyCredentialDescriptor) InitWithCredentialID(credentialID *foundation.NSData) *ASAuthorizationPlatformPublicKeyCredentialDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPlatformPublicKeyCredentialDescriptorSelInitWithCredentialID, credentialID.Ptr())
 	if _ret != 0 {

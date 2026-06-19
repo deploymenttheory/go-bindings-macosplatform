@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// This class acts as a wrapper for the HKBloodType enumeration.
+//
 // BloodTypeObject wraps [raw.HKBloodTypeObject] with a fluent Go API.
 type BloodTypeObject struct {
 	inner *raw.HKBloodTypeObject

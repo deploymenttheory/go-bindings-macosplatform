@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A script that the web view injects into a webpage.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkuserscript
 type WKUserScript struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func WKUserScriptFromID(id objc.ID) *WKUserScript {
 	return o
 }
 
-// @abstract Returns an initialized user script that can be added to a @link WKUserContentController @/link. @param source The script source. @param injectionTime When the script should be injected. @param forMainFrameOnly Whether the script should be injected into all frames or just the main frame. @discussion Calling this method is the same as calling `initWithSource:injectionTime:forMainFrameOnly:inContentWorld:` with a `contentWorld` value of `WKContentWorld.pageWorld`
+// Creates a user script object that contains the specified source code and attributes.
 func (o *WKUserScript) InitWithSourceInjectionTimeForMainFrameOnly(source *foundation.NSString, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool) *WKUserScript {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKUserScriptSelInitWithSourceInjectionTimeForMainFrameOnly, source.Ptr(), injectionTime, forMainFrameOnly)
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func (o *WKUserScript) InitWithSourceInjectionTimeForMainFrameOnly(source *found
 	return WKUserScriptFromID(_ret)
 }
 
-// @abstract Returns an initialized user script that can be added to a @link WKUserContentController @/link. @param source The script source. @param injectionTime When the script should be injected. @param forMainFrameOnly Whether the script should be injected into all frames or just the main frame. @param contentWorld The WKContentWorld in which to inject the script.
+// Creates a user script object that is scoped to a particular content world.
 func (o *WKUserScript) InitWithSourceInjectionTimeForMainFrameOnlyInContentWorld(source *foundation.NSString, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool, contentWorld *WKContentWorld) *WKUserScript {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKUserScriptSelInitWithSourceInjectionTimeForMainFrameOnlyInContentWorld, source.Ptr(), injectionTime, forMainFrameOnly, contentWorld.Ptr())
 	if _ret != 0 {

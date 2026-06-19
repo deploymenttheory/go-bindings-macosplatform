@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object you use to convert to and from a vCard representation of the user’s contacts.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cncontactvcardserialization
 type CNContactVCardSerialization struct {
 	foundation.NSObject
@@ -34,13 +36,13 @@ func CNContactVCardSerializationFromID(id objc.ID) *CNContactVCardSerialization 
 	return o
 }
 
-// @abstract    Descriptor for all contact keys required by vCard serialization @discussion  This descriptor must be passed to the fetch request if the returned contacts are to be serialized with dataWithContacts:error:.
+// Use to fetch all contact keys required to create vCard data from a contact.
 func CNContactVCardSerializationDescriptorForRequiredKeys() CNKeyDescriptor {
 	_ret := objc.Send[CNKeyDescriptor](objc.ID(_clsCNContactVCardSerialization), _cNContactVCardSerializationSelDescriptorForRequiredKeys)
 	return _ret
 }
 
-// @abstract    Serialize contacts to data. @discussion  The contacts to be serialized must have been fetched with @c +descriptorForRequiredKeys. @param       contacts The contacts to serialize. @param       error An optional outparameter. If the serialization fails, this will be set. @returns     The encoded data. If the serialization fails, this will be @c nil.
+// Returns the vCard representation of the specified contacts.
 func CNContactVCardSerializationDataWithContactsError(contacts *foundation.NSArray[*CNContact]) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactVCardSerialization), _cNContactVCardSerializationSelDataWithContactsError, contacts.Ptr(), unsafe.Pointer(&_nsErr))
@@ -53,7 +55,7 @@ func CNContactVCardSerializationDataWithContactsError(contacts *foundation.NSArr
 	return foundation.NSDataFromID(_ret), nil
 }
 
-// @abstract    Parse data into contacts. @param       data The data to parse. @param       error An optional outparameter. If the parsing fails, this will be set. @returns     The parsed contacts. If the parsing fails, this will be @c nil.
+// Returns the contacts from the vCard data.
 func CNContactVCardSerializationContactsWithDataError(data *foundation.NSData) (*foundation.NSArray[*CNContact], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactVCardSerialization), _cNContactVCardSerializationSelContactsWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))

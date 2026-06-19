@@ -13,7 +13,7 @@ import (
 	"unsafe"
 )
 
-// A SpriteKit node that applies frame buffer effects to the rendered results of its child nodes. This is done continuously on live content and is not a simple snapshot of the rendered result at one instant of time.
+// A node that renders its children into a separate buffer, optionally applying an effect, before drawing the final result.
 //
 // EffectNode wraps [raw.SKEffectNode] with a fluent Go API.
 type EffectNode struct {
@@ -41,7 +41,7 @@ func NewEffectNode() *EffectNode {
 	return &EffectNode{inner: raw.SKEffectNodeFromID(_id)}
 }
 
-// A CIFilter to be used as an effect Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed. The filter is applied to all children of the SKEffectNode. If the filter is nil, the children of this node is flattened before being drawn as long as the SKEffectNode is enabled.
+// The Core Image filter to apply.
 //
 // WithFilter sets the filter property and returns the receiver for chaining.
 func (x *EffectNode) WithFilter(filter *coreimage.CIFilter) *EffectNode {
@@ -49,13 +49,15 @@ func (x *EffectNode) WithFilter(filter *coreimage.CIFilter) *EffectNode {
 	return x
 }
 
+// A Boolean value that determines whether the effect node automatically sets the filter’s image center.
+//
 // WithShouldCenterFilter sets the shouldCenterFilter property and returns the receiver for chaining.
 func (x *EffectNode) WithShouldCenterFilter(shouldCenterFilter bool) *EffectNode {
 	x.inner.SetShouldCenterFilter(shouldCenterFilter)
 	return x
 }
 
-// Enable the SKEffectNode. The SKEffectNode has no effect when appliesEffects is not enabled, this is useful for setting up an effect to use later on. Defaults to YES.
+// A Boolean value that determines whether the effect node applies the filter to its children as they are drawn.
 //
 // WithShouldEnableEffects sets the shouldEnableEffects property and returns the receiver for chaining.
 func (x *EffectNode) WithShouldEnableEffects(shouldEnableEffects bool) *EffectNode {
@@ -63,7 +65,7 @@ func (x *EffectNode) WithShouldEnableEffects(shouldEnableEffects bool) *EffectNo
 	return x
 }
 
-// Enable the rasterization on the SKEffectNode. The SKEffectNode's output is rasterized and cached internally. This cache is reused when rendering. When the SKEffectNode's children change, the cache is updated, but changing properties on the CIFilter does *not* cause an update (you must disable rasterization and then re-enable it for the changes to apply). This is more expensive than not rasterizing if the node's children change frequently, only enable this option if you know the children is largely static.
+// A Boolean value that indicates whether the results of rendering the child nodes should be cached.
 //
 // WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
 func (x *EffectNode) WithShouldRasterize(shouldRasterize bool) *EffectNode {
@@ -71,7 +73,7 @@ func (x *EffectNode) WithShouldRasterize(shouldRasterize bool) *EffectNode {
 	return x
 }
 
-// Sets the blend mode to use when composing the effect with the final framebuffer. @see SKNode.SKBlendMode
+// The blend mode used to draw the node’s contents into its parent’s framebuffer.
 //
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
 func (x *EffectNode) WithBlendMode(blendMode SKBlendMode) *EffectNode {
@@ -79,13 +81,15 @@ func (x *EffectNode) WithBlendMode(blendMode SKBlendMode) *EffectNode {
 	return x
 }
 
+// A custom shader that is called when the effect node is blended into the parent’s framebuffer.
+//
 // WithShader sets the shader property and returns the receiver for chaining.
 func (x *EffectNode) WithShader(shader *Shader) *EffectNode {
 	x.inner.SetShader(shader.Unwrap())
 	return x
 }
 
-// The position of the node in the parent's coordinate system
+// The position of the node in its parent’s coordinate system.
 //
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *EffectNode) WithPosition(position corefoundation.CGPoint) *EffectNode {
@@ -93,7 +97,7 @@ func (x *EffectNode) WithPosition(position corefoundation.CGPoint) *EffectNode {
 	return x
 }
 
-// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+// The height of the node relative to its parent.
 //
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *EffectNode) WithZPosition(zPosition float64) *EffectNode {
@@ -101,7 +105,7 @@ func (x *EffectNode) WithZPosition(zPosition float64) *EffectNode {
 	return x
 }
 
-// The Euler rotation about the z axis (in radians)
+// The Euler rotation about the z axis (in radians).
 //
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *EffectNode) WithZRotation(zRotation float64) *EffectNode {
@@ -109,7 +113,7 @@ func (x *EffectNode) WithZRotation(zRotation float64) *EffectNode {
 	return x
 }
 
-// The scaling in the X axis
+// A scaling factor that multiplies the width of a node and its children.
 //
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *EffectNode) WithXScale(xScale float64) *EffectNode {
@@ -117,7 +121,7 @@ func (x *EffectNode) WithXScale(xScale float64) *EffectNode {
 	return x
 }
 
-// The scaling in the Y axis
+// A scaling factor that multiplies the height of a node and its children.
 //
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *EffectNode) WithYScale(yScale float64) *EffectNode {
@@ -125,7 +129,7 @@ func (x *EffectNode) WithYScale(yScale float64) *EffectNode {
 	return x
 }
 
-// The speed multiplier applied to all actions run on this node. Inherited by its children.
+// A speed modifier applied to all actions executed by a node and its descendants.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *EffectNode) WithSpeed(speed float64) *EffectNode {
@@ -133,7 +137,7 @@ func (x *EffectNode) WithSpeed(speed float64) *EffectNode {
 	return x
 }
 
-// Alpha of this node (multiplied by the output color to give the final result)
+// The transparency value applied to the node’s contents.
 //
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *EffectNode) WithAlpha(alpha float64) *EffectNode {
@@ -141,7 +145,7 @@ func (x *EffectNode) WithAlpha(alpha float64) *EffectNode {
 	return x
 }
 
-// Controls whether or not the node's actions is updated or paused.
+// A Boolean value that determines whether actions on the node and its descendants are processed.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *EffectNode) WithPaused(paused bool) *EffectNode {
@@ -149,7 +153,7 @@ func (x *EffectNode) WithPaused(paused bool) *EffectNode {
 	return x
 }
 
-// Controls whether or not the node and its children are rendered.
+// A Boolean value that determines whether a node and its descendants are rendered.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *EffectNode) WithHidden(hidden bool) *EffectNode {
@@ -157,7 +161,7 @@ func (x *EffectNode) WithHidden(hidden bool) *EffectNode {
 	return x
 }
 
-// Controls whether or not the node receives touch events
+// A Boolean value that indicates whether the node receives touch events.
 //
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *EffectNode) WithUserInteractionEnabled(userInteractionEnabled bool) *EffectNode {
@@ -165,7 +169,7 @@ func (x *EffectNode) WithUserInteractionEnabled(userInteractionEnabled bool) *Ef
 	return x
 }
 
-// The client assignable name. In general, this should be unique among peers in the scene graph.
+// The node’s assignable name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *EffectNode) WithName(name string) *EffectNode {
@@ -173,7 +177,7 @@ func (x *EffectNode) WithName(name string) *EffectNode {
 	return x
 }
 
-// Physics body attached to the node, with synchronized scale, rotation, and position
+// The physics body associated with the node.
 //
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *EffectNode) WithPhysicsBody(physicsBody *PhysicsBody) *EffectNode {
@@ -181,7 +185,7 @@ func (x *EffectNode) WithPhysicsBody(physicsBody *PhysicsBody) *EffectNode {
 	return x
 }
 
-// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+// A dictionary containing arbitrary data.
 //
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *EffectNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *EffectNode {
@@ -189,7 +193,7 @@ func (x *EffectNode) WithUserData(userData *foundation.NSMutableDictionary[objc.
 	return x
 }
 
-// Kinematic constraints, used in IK solving
+// The reach constraints to apply to the node when executing a reach action.
 //
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *EffectNode) WithReachConstraints(reachConstraints *ReachConstraints) *EffectNode {
@@ -197,7 +201,7 @@ func (x *EffectNode) WithReachConstraints(reachConstraints *ReachConstraints) *E
 	return x
 }
 
-// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+// A list of constraints to apply to the node.
 //
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *EffectNode) WithConstraints(items ...*raw.SKConstraint) *EffectNode {
@@ -220,7 +224,7 @@ func (x *EffectNode) WithConstraints(items ...*raw.SKConstraint) *EffectNode {
 	return x
 }
 
-// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+// The values of each attribute associated with the node’s attached shader.
 //
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *EffectNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *EffectNode {
@@ -228,54 +232,72 @@ func (x *EffectNode) WithAttributeValues(attributeValues *foundation.NSDictionar
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+//
 // WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
 func (x *EffectNode) WithAccessibilityElement(accessibilityElement bool) *EffectNode {
 	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
 	return x
 }
 
+// A string value describing the user interface element type; for example, a button.
+//
 // WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
 func (x *EffectNode) WithAccessibilityRole(accessibilityRole string) *EffectNode {
 	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
 	return x
 }
 
+// A string value describing the user interface element name and type; for example, the Buy button.
+//
 // WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
 func (x *EffectNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *EffectNode {
 	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
 	return x
 }
 
+// A string that defines this user interface element’s subrole; for example, a full-screen button.
+//
 // WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
 func (x *EffectNode) WithAccessibilitySubrole(accessibilitySubrole string) *EffectNode {
 	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
 	return x
 }
 
+// The size of this user interface element, in screen points.
+//
 // WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
 func (x *EffectNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *EffectNode {
 	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
 	return x
 }
 
+// The user interface element that contains this element.
+//
 // WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
 func (x *EffectNode) WithAccessibilityParent(accessibilityParent objc.ID) *EffectNode {
 	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
 	return x
 }
 
+// The help description of this user interface element; for example, the text shown in a tooltip.
+//
 // WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
 func (x *EffectNode) WithAccessibilityHelp(accessibilityHelp string) *EffectNode {
 	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
 	return x
 }
 
+// A short description of this user interface element.
+//
 // WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
 func (x *EffectNode) WithAccessibilityLabel(accessibilityLabel string) *EffectNode {
 	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
+//
 // WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
 func (x *EffectNode) WithAccessibilityEnabled(accessibilityEnabled bool) *EffectNode {
 	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)

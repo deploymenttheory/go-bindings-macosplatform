@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that pairs a source of texture data with sampling parameters to be used in rendering the texture.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdltexturesampler
 type MDLTextureSampler struct {
 	foundation.NSObject

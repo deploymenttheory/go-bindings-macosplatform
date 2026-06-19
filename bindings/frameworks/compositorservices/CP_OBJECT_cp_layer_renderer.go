@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that provides the Metal types and timing information you need to draw your content.
+//
 // Apple documentation: https://developer.apple.com/documentation/compositorservices/cp_object_cp_layer_renderer
 type CP_OBJECT_cp_layer_renderer struct {
 	foundation.NSObject

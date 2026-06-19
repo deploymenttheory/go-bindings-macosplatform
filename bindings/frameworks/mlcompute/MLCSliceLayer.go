@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that extracts a slice from a tensor.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcslicelayer
 type MLCSliceLayer struct {
 	MLCLayer
@@ -33,9 +35,9 @@ func MLCSliceLayerFromID(id objc.ID) *MLCSliceLayer {
 	return o
 }
 
-// @abstract Create a slice layer @param    stride If set to nil, it will be set to 1. @return   A new layer for slicing tensors.
+// Creates a slice layer with the specified start, end, and stride.
 func MLCSliceLayerSliceLayerWithStartEndStride(start *foundation.NSArray[*foundation.NSNumber], end *foundation.NSArray[*foundation.NSNumber], stride *foundation.NSArray[*foundation.NSNumber]) *MLCSliceLayer {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSliceLayer), _mLCSliceLayerSelSliceLayerWithStartEndStride, start, end, stride)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSliceLayer), _mLCSliceLayerSelSliceLayerWithStartEndStride, start.Ptr(), end.Ptr(), stride.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -44,18 +46,27 @@ func MLCSliceLayerSliceLayerWithStartEndStride(start *foundation.NSArray[*founda
 
 // @property   start @abstract   A vector of length equal to that of source. The element at index i specifies the beginning of slice in dimension i.
 func (o *MLCSliceLayer) Start() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCSliceLayerSelStart)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCSliceLayerSelStart)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property   end @abstract   A vector of length equal to that of source. The element at index i specifies the end of slice in dimension i.
 func (o *MLCSliceLayer) End() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCSliceLayerSelEnd)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCSliceLayerSelEnd)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property   stride @abstract   A vector of length equal to that of source. The element at index i specifies the stride of slice in dimension i.
 func (o *MLCSliceLayer) Stride() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCSliceLayerSelStride)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCSliceLayerSelStride)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }

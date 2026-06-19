@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that finds the minimum pixel value in a rectangular region by applying an erosion function.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimageerode
 type MPSImageErode struct {
 	mpsimage.MPSImageDilate

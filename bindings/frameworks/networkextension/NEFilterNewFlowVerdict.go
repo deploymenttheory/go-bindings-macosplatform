@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The result from a filter data provder after the initial examination of a flow.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nefilternewflowverdict
 type NEFilterNewFlowVerdict struct {
 	NEFilterVerdict
@@ -34,7 +36,7 @@ func NEFilterNewFlowVerdictFromID(id objc.ID) *NEFilterNewFlowVerdict {
 	return o
 }
 
-// @method allowVerdict @discussion This class method returns a verdict indicating that the flow should be allowed. @return The NEFilterNewFlowVerdict object.
+// Create a verdict that indicates to the system that the all of the new flow’s data should be allowed to pass to its final destination.
 func NEFilterNewFlowVerdictAllowVerdict() *NEFilterNewFlowVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterNewFlowVerdict), _nEFilterNewFlowVerdictSelAllowVerdict)
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func NEFilterNewFlowVerdictAllowVerdict() *NEFilterNewFlowVerdict {
 	return NEFilterNewFlowVerdictFromID(_ret)
 }
 
-// @method dropVerdict @discussion This class method returns a verdict indicating that the flow should be dropped. @return The NEFilterNewFlowVerdict object.
+// Create a verdict that indicates to the system that all of the new flow’s data should dropped, and the user should not be given the opportunity to request access.
 func NEFilterNewFlowVerdictDropVerdict() *NEFilterNewFlowVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterNewFlowVerdict), _nEFilterNewFlowVerdictSelDropVerdict)
 	if _ret != 0 {
@@ -52,7 +54,7 @@ func NEFilterNewFlowVerdictDropVerdict() *NEFilterNewFlowVerdict {
 	return NEFilterNewFlowVerdictFromID(_ret)
 }
 
-// @method filterDataVerdictWithFilterInbound:peekInboundBytes:filterOutbound:peekOutboundBytes: @discussion This class method returns a new flow verdict indicating that the filter needs to make a decision about a new flow after seeing a portion of the flow's data. @param filterInbound A boolean indicating if the filter needs to see inbound data @param peekInboundBytes The number of inbound bytes that the filter needs to see in the subsequent call to -[NEFilterDataProvider handleInboundDataFromFlow:readBytesStartOffset:readBytes:]. @param filterOutbound  boolean indicating if the filter needs to see outbound data @param peekOutboundBytes The number of outbound bytes that the filter needs to see in the subsequent call to -[NEFilterDataProvider handleOutboundDataFromFlow:readBytesStartOffset:readBytes:]. @return The new flow verdict.
+// Create a verdict that indicates to the system that the filter needs to make a decision about a new flow after seeing a portion of the flow’s data.
 func NEFilterNewFlowVerdictFilterDataVerdictWithFilterInboundPeekInboundBytesFilterOutboundPeekOutboundBytes(filterInbound bool, peekInboundBytes uint, filterOutbound bool, peekOutboundBytes uint) *NEFilterNewFlowVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterNewFlowVerdict), _nEFilterNewFlowVerdictSelFilterDataVerdictWithFilterInboundPeekInboundBytesFilterOutboundPeekOutboundBytes, filterInbound, peekInboundBytes, filterOutbound, peekOutboundBytes)
 	if _ret != 0 {
@@ -61,7 +63,7 @@ func NEFilterNewFlowVerdictFilterDataVerdictWithFilterInboundPeekInboundBytesFil
 	return NEFilterNewFlowVerdictFromID(_ret)
 }
 
-// @method pauseVerdict @discussion This class method returns a verdict indicating that none of the data provider's handler callbacks shall be called for the flow until after the flow is resumed by a call to -[NEFilterDataProvider resumeFlow:withVerdict:]. TCP flows may be paused indefinitely. UDP flows will be dropped if not resumed within 10 seconds of being paused. It is invalid to pause a flow that is already paused. @return The NEFilterNewFlowVerdict object.
+// Creates a verdict that tells the system to pause the flow.
 func NEFilterNewFlowVerdictPauseVerdict() *NEFilterNewFlowVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterNewFlowVerdict), _nEFilterNewFlowVerdictSelPauseVerdict)
 	if _ret != 0 {

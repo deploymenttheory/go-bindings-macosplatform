@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Parameters for an IKEv2 Security Association.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nevpnikev2securityassociationparameters
 type NEVPNIKEv2SecurityAssociationParameters struct {
 	foundation.NSObject
@@ -71,12 +73,15 @@ func (o *NEVPNIKEv2SecurityAssociationParameters) SetDiffieHellmanGroup(diffieHe
 
 // @property postQuantumKeyExchangeMethods @discussion The post-quantum key exchange method(s) used by the Security Association, if any. Values are taken from NEVPNIKEv2PostQuantumKeyExchangeMethod. Up to 7 methods may be specified, mapping to ADDKE1 - ADDKE7 from RFC 9370.
 func (o *NEVPNIKEv2SecurityAssociationParameters) PostQuantumKeyExchangeMethods() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _nEVPNIKEv2SecurityAssociationParametersSelPostQuantumKeyExchangeMethods)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNIKEv2SecurityAssociationParametersSelPostQuantumKeyExchangeMethods)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *NEVPNIKEv2SecurityAssociationParameters) SetPostQuantumKeyExchangeMethods(postQuantumKeyExchangeMethods *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_nEVPNIKEv2SecurityAssociationParametersSelSetPostQuantumKeyExchangeMethods, postQuantumKeyExchangeMethods)
+	o.Ptr().Send(_nEVPNIKEv2SecurityAssociationParametersSelSetPostQuantumKeyExchangeMethods, postQuantumKeyExchangeMethods.Ptr())
 }
 
 // @property lifetimeMinutes @discussion The life time of the Security Association, in minutes. Default is 60 for IKE Security Associations, and 30 for Child Security Associations. Before the lifetime is reached, IKEv2 will attempt to rekey the Security Association to maintain the connection.

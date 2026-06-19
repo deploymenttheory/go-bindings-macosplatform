@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that allows multiple animations to be grouped and run concurrently.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/caanimationgroup
 type CAAnimationGroup struct {
 	CAAnimation

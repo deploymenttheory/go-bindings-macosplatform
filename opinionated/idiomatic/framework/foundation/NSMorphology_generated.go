@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of the grammatical properties of a string.
+//
 // Morphology wraps [raw.NSMorphology] with a fluent Go API.
 type Morphology struct {
 	inner *raw.NSMorphology
@@ -36,18 +38,24 @@ func NewMorphology() *Morphology {
 	return &Morphology{inner: raw.NSMorphologyFromID(_id)}
 }
 
+// The grammatical gender used for inflecting strings with this morphology.
+//
 // WithGrammaticalGender sets the grammaticalGender property and returns the receiver for chaining.
 func (x *Morphology) WithGrammaticalGender(grammaticalGender NSGrammaticalGender) *Morphology {
 	x.inner.SetGrammaticalGender(raw.NSGrammaticalGender(grammaticalGender))
 	return x
 }
 
+// The grammatical part of speech used for inflecting strings with this morphology.
+//
 // WithPartOfSpeech sets the partOfSpeech property and returns the receiver for chaining.
 func (x *Morphology) WithPartOfSpeech(partOfSpeech NSGrammaticalPartOfSpeech) *Morphology {
 	x.inner.SetPartOfSpeech(raw.NSGrammaticalPartOfSpeech(partOfSpeech))
 	return x
 }
 
+// The grammatical number used for inflecting strings with this morphology.
+//
 // WithNumber sets the number property and returns the receiver for chaining.
 func (x *Morphology) WithNumber(number NSGrammaticalNumber) *Morphology {
 	x.inner.SetNumber(raw.NSGrammaticalNumber(number))
@@ -170,6 +178,8 @@ func (x *Morphology) SetDefiniteness(definiteness NSGrammaticalDefiniteness) {
 	x.inner.SetDefiniteness(raw.NSGrammaticalDefiniteness(definiteness))
 }
 
+// Returns any custom pronoun behavior this morphology applies to the given language.
+//
 // CustomPronounForLanguage calls the underlying CustomPronounForLanguage.
 func (x *Morphology) CustomPronounForLanguage(language string) *MorphologyCustomPronoun {
 	_r := x.inner.CustomPronounForLanguage(foundation.NSStringStringWithUTF8String(language))
@@ -179,6 +189,8 @@ func (x *Morphology) CustomPronounForLanguage(language string) *MorphologyCustom
 	return &MorphologyCustomPronoun{inner: _r}
 }
 
+// Sets a custom pronoun behavior for this morphology to apply to the given language.
+//
 // SetCustomPronounForLanguageError calls the underlying SetCustomPronounForLanguageError.
 func (x *Morphology) SetCustomPronounForLanguageError(features *raw.NSMorphologyCustomPronoun, language string) (bool, error) {
 	return x.inner.SetCustomPronounForLanguageError(features, foundation.NSStringStringWithUTF8String(language))

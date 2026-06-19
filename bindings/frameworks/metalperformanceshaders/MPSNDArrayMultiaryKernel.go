@@ -57,7 +57,7 @@ func (o *MPSNDArrayMultiaryKernel) InitWithCoderDevice(coder *foundation.NSCoder
 
 // @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArrays    The list of sources for the filter in a NSArray. Ordering to be defined by subclass @result     A newly allocated MPSNDArray that will contain the result of the calculation when the command buffer completes successfully.
 func (o *MPSNDArrayMultiaryKernel) EncodeToCommandBufferSourceArrays(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray]) *mpscore.MPSNDArray {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArrays, cmdBuf, sourceArrays)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArrays, cmdBuf, sourceArrays.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -66,12 +66,12 @@ func (o *MPSNDArrayMultiaryKernel) EncodeToCommandBufferSourceArrays(cmdBuf meta
 
 // @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArrays    The list of sources for the filter in a NSArray. Ordering to be defined by subclass @param      destination     The NDArray to receive the result
 func (o *MPSNDArrayMultiaryKernel) EncodeToCommandBufferSourceArraysDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray) {
-	o.Ptr().Send(_mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArraysDestinationArray, cmdBuf, sourceArrays, destination.Ptr())
+	o.Ptr().Send(_mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArraysDestinationArray, cmdBuf, sourceArrays.Ptr(), destination.Ptr())
 }
 
 // @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArrays    The list of sources for the filter in a NSArray. Ordering to be defined by subclass @param      outGradientState If non-nil, the address output gradient state is written to this address @param      outputStateIsTemporary  If YES, the state if any will be allocated to contain temporary textures and buffers as needed @result     A newly allocated MPSNDArray that will contain the result of the calculation when the command buffer completes successfully.
 func (o *MPSNDArrayMultiaryKernel) EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary, cmdBuf, sourceArrays, outGradientState.Ptr(), outputStateIsTemporary)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary, cmdBuf, sourceArrays.Ptr(), outGradientState.Ptr(), outputStateIsTemporary)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -80,10 +80,10 @@ func (o *MPSNDArrayMultiaryKernel) EncodeToCommandBufferSourceArraysResultStateO
 
 // @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArrays    The list of sources for the filter in a NSArray. Ordering to be defined by subclass @param      outGradientState The output gradient state to record the operation for later use by gradient @param      destination     A destination array to contain the result of the calculation when the command buffer completes successfully.
 func (o *MPSNDArrayMultiaryKernel) EncodeToCommandBufferSourceArraysResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray) {
-	o.Ptr().Send(_mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArraysResultStateDestinationArray, cmdBuf, sourceArrays, outGradientState.Ptr(), destination.Ptr())
+	o.Ptr().Send(_mPSNDArrayMultiaryKernelSelEncodeToCommandBufferSourceArraysResultStateDestinationArray, cmdBuf, sourceArrays.Ptr(), outGradientState.Ptr(), destination.Ptr())
 }
 
 // @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      encoder                       The MTLComputeCommandEncoder that the kernel will be encoded on @param      commandBuffer          The command buffer into which to encode the kernel @param      sourceArrays             The list of sources for the filter in a NSArray. Ordering to be defined by subclass @param      destination               A destination array to contain the result of the calculation when the command buffer completes successfully.
 func (o *MPSNDArrayMultiaryKernel) EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray(encoder metal.MTLComputeCommandEncoder, commandBuffer metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray) {
-	o.Ptr().Send(_mPSNDArrayMultiaryKernelSelEncodeToCommandEncoderCommandBufferSourceArraysDestinationArray, encoder, commandBuffer, sourceArrays, destination.Ptr())
+	o.Ptr().Send(_mPSNDArrayMultiaryKernelSelEncodeToCommandEncoderCommandBufferSourceArraysDestinationArray, encoder, commandBuffer, sourceArrays.Ptr(), destination.Ptr())
 }

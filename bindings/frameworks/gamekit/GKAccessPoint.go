@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that allows players to view and manage their Game Center information from within your game.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkaccesspoint
 type GKAccessPoint struct {
 	foundation.NSObject
@@ -54,7 +56,7 @@ func GKAccessPointFromID(id objc.ID) *GKAccessPoint {
 	return o
 }
 
-// this lets the developer trigger the access point as if the user had touched it.  This is useful for games that use controllers or the remote on AppleTV.  the argument lets you specify a specific state (default, profile, achievements, leaderboards) for GameCenterViewController
+// Displays the Game Center dashboard as if the player taps or presses the access point.
 func (o *GKAccessPoint) TriggerAccessPointWithHandler(handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -66,6 +68,7 @@ func (o *GKAccessPoint) TriggerAccessPointWithHandler(handler func()) {
 	o.Ptr().Send(_gKAccessPointSelTriggerAccessPointWithHandler, __block_handler)
 }
 
+// Displays the Game Center dashboard in the specified state as if the player taps or presses the access point.
 func (o *GKAccessPoint) TriggerAccessPointWithStateHandler(state GKGameCenterViewControllerState, handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -77,6 +80,7 @@ func (o *GKAccessPoint) TriggerAccessPointWithStateHandler(state GKGameCenterVie
 	o.Ptr().Send(_gKAccessPointSelTriggerAccessPointWithStateHandler, state, __block_handler)
 }
 
+// Displays the Game Center dashboard in a state that shows a specific achievement.
 func (o *GKAccessPoint) TriggerAccessPointWithAchievementIDHandler(achievementID *foundation.NSString, handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -88,6 +92,7 @@ func (o *GKAccessPoint) TriggerAccessPointWithAchievementIDHandler(achievementID
 	o.Ptr().Send(_gKAccessPointSelTriggerAccessPointWithAchievementIDHandler, achievementID.Ptr(), __block_handler)
 }
 
+// Displays the Game Center dashboard in a state that shows a specific leaderboard set.
 func (o *GKAccessPoint) TriggerAccessPointWithLeaderboardSetIDHandler(leaderboardSetID *foundation.NSString, handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -99,6 +104,7 @@ func (o *GKAccessPoint) TriggerAccessPointWithLeaderboardSetIDHandler(leaderboar
 	o.Ptr().Send(_gKAccessPointSelTriggerAccessPointWithLeaderboardSetIDHandler, leaderboardSetID.Ptr(), __block_handler)
 }
 
+// Displays the Game Center dashboard in a state that shows a specific leaderboard.
 func (o *GKAccessPoint) TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler(leaderboardID *foundation.NSString, playerScope GKLeaderboardPlayerScope, timeScope GKLeaderboardTimeScope, handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -110,6 +116,7 @@ func (o *GKAccessPoint) TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeH
 	o.Ptr().Send(_gKAccessPointSelTriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler, leaderboardID.Ptr(), playerScope, timeScope, __block_handler)
 }
 
+// Displays the Game Center dashboard in a state that shows a player profile.
 func (o *GKAccessPoint) TriggerAccessPointWithPlayerHandler(player *GKPlayer, handler func()) {
 	var __block_handler objc.Block
 	if handler != nil {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration details of a file upload control in your web content.
+//
 // WKOpenPanelParameters wraps [raw.WKOpenPanelParameters] with a fluent Go API.
 type WKOpenPanelParameters struct {
 	inner *raw.WKOpenPanelParameters

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for a mass associated with an intent.
+//
 // MassResolutionResult wraps [raw.INMassResolutionResult] with a fluent Go API.
 type MassResolutionResult struct {
 	inner *raw.INMassResolutionResult

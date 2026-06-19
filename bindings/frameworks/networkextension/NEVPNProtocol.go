@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Settings common to both IKEv2 and IPsec VPN configurations.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nevpnprotocol
 type NEVPNProtocol struct {
 	foundation.NSObject

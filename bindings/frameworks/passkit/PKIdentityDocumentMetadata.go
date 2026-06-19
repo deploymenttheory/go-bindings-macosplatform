@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of configured metadata that defines the required information to add the corresponding pass to Wallet.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkidentitydocumentmetadata
 type PKIdentityDocumentMetadata struct {
 	foundation.NSObject

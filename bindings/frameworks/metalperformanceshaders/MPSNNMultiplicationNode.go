@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract returns elementwise product of left * right
+// A representation of a multiplication operator.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnmultiplicationnode
 type MPSNNMultiplicationNode struct {

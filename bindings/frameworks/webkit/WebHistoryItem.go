@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// WebHistoryItem objects encapsulate information about visiting a page so that users can return to that page. WebHistory and WebBackForwardList objects manage lists of WebHistoryItem objects. WebHistoryItem objects are created and added to these lists automatically when loading pages, so you do not need to create WebHistoryItem objects directly.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/webhistoryitem
 type WebHistoryItem struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func WebHistoryItemFromID(id objc.ID) *WebHistoryItem {
 	return o
 }
 
-// @method initWithURLString:title:lastVisitedTimeInterval: @param URLString The URL string for the item. @param title The title to use for the item.  This is normally the <title> of a page. @param time The time used to indicate when the item was used. @abstract Initialize a new WebHistoryItem @discussion WebHistoryItems are normally created for you by the WebKit. You may use this method to prepopulate a WebBackForwardList, or create 'artificial' items to add to a WebBackForwardList.  When first initialized the URLString and originalURLString will be the same.
+// Initializes the receiver with a URL,URLString, a title specified by title and the last time this item was visited specified by time title, and time last visited.
 func (o *WebHistoryItem) InitWithURLStringTitleLastVisitedTimeInterval(uRLString *foundation.NSString, title *foundation.NSString, time_ float64) *WebHistoryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webHistoryItemSelInitWithURLStringTitleLastVisitedTimeInterval, uRLString.Ptr(), title.Ptr(), time_)
 	if _ret != 0 {

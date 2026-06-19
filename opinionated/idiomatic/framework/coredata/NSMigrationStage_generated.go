@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract base class for describing an individual stage of a migration.
+//
 // MigrationStage wraps [raw.NSMigrationStage] with a fluent Go API.
 type MigrationStage struct {
 	inner *raw.NSMigrationStage
@@ -37,6 +39,8 @@ func NewMigrationStage() *MigrationStage {
 	return &MigrationStage{inner: raw.NSMigrationStageFromID(_id)}
 }
 
+// The textual description of the migration stage’s purpose.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MigrationStage) WithLabel(label string) *MigrationStage {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))

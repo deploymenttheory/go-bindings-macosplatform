@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller profile that supports the DualShock 4 controller.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gcdualshockgamepad
 type GCDualShockGamepad struct {
 	GCExtendedGamepad

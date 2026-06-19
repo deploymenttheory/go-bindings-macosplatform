@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a custom color space.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscolorspace
 type NSColorSpace struct {
 	foundation.NSObject
@@ -53,6 +55,7 @@ func NSColorSpaceFromID(id objc.ID) *NSColorSpace {
 	return o
 }
 
+// Initializes and returns a color space object from the specified ICC profile.
 func (o *NSColorSpace) InitWithICCProfileData(iccData *foundation.NSData) *NSColorSpace {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSpaceSelInitWithICCProfileData, iccData.Ptr())
 	if _ret != 0 {
@@ -61,6 +64,7 @@ func (o *NSColorSpace) InitWithICCProfileData(iccData *foundation.NSData) *NSCol
 	return NSColorSpaceFromID(_ret)
 }
 
+// Initializes and returns a color space object from the specified ColorSync profile.
 func (o *NSColorSpace) InitWithColorSyncProfile(prof unsafe.Pointer) *NSColorSpace {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSpaceSelInitWithColorSyncProfile, prof)
 	if _ret != 0 {
@@ -69,6 +73,7 @@ func (o *NSColorSpace) InitWithColorSyncProfile(prof unsafe.Pointer) *NSColorSpa
 	return NSColorSpaceFromID(_ret)
 }
 
+// Initializes and returns a color space object initialized from a Core Graphics color-space object.
 func (o *NSColorSpace) InitWithCGColorSpace(cgColorSpace unsafe.Pointer) *NSColorSpace {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSpaceSelInitWithCGColorSpace, cgColorSpace)
 	if _ret != 0 {
@@ -77,6 +82,7 @@ func (o *NSColorSpace) InitWithCGColorSpace(cgColorSpace unsafe.Pointer) *NSColo
 	return NSColorSpaceFromID(_ret)
 }
 
+// Returns the list of color spaces available on the system that are displayed in the color panel, in the order they are displayed in the color panel.
 func NSColorSpaceAvailableColorSpacesWithModel(model NSColorSpaceModel) *foundation.NSArray[*NSColorSpace] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorSpace), _nSColorSpaceSelAvailableColorSpacesWithModel, model)
 	if _ret != 0 {

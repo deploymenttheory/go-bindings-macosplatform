@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A change in the user’s pedestrian activity.
+//
 // PedometerEvent wraps [raw.CMPedometerEvent] with a fluent Go API.
 type PedometerEvent struct {
 	inner *raw.CMPedometerEvent

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides the ability to load, compile, and execute scripts.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsapplescript
 type NSAppleScript struct {
 	NSObject
@@ -35,14 +37,16 @@ func NSAppleScriptFromID(id objc.ID) *NSAppleScript {
 	return o
 }
 
+// Initializes a newly allocated script instance from the source identified by the passed URL.
 func (o *NSAppleScript) InitWithContentsOfURLError(url *NSURL, errorInfo *NSDictionary[*NSString, objc.ID]) *NSAppleScript {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleScriptSelInitWithContentsOfURLError, url.Ptr(), errorInfo)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleScriptSelInitWithContentsOfURLError, url.Ptr(), errorInfo.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSAppleScriptFromID(_ret)
 }
 
+// Initializes a newly allocated script instance from the passed source.
 func (o *NSAppleScript) InitWithSource(source *NSString) *NSAppleScript {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleScriptSelInitWithSource, source.Ptr())
 	if _ret != 0 {
@@ -51,21 +55,24 @@ func (o *NSAppleScript) InitWithSource(source *NSString) *NSAppleScript {
 	return NSAppleScriptFromID(_ret)
 }
 
+// Compiles the receiver, if it is not already compiled.
 func (o *NSAppleScript) CompileAndReturnError(errorInfo *NSDictionary[*NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSAppleScriptSelCompileAndReturnError, errorInfo)
+	_ret := objc.Send[bool](o.Ptr(), _nSAppleScriptSelCompileAndReturnError, errorInfo.Ptr())
 	return _ret
 }
 
+// Executes the receiver, compiling it first if it is not already compiled.
 func (o *NSAppleScript) ExecuteAndReturnError(errorInfo *NSDictionary[*NSString, objc.ID]) *NSAppleEventDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleScriptSelExecuteAndReturnError, errorInfo)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleScriptSelExecuteAndReturnError, errorInfo.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
+// Executes an Apple event in the context of the receiver, as a means of allowing the application to invoke a handler in the script.
 func (o *NSAppleScript) ExecuteAppleEventError(event *NSAppleEventDescriptor, errorInfo *NSDictionary[*NSString, objc.ID]) *NSAppleEventDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleScriptSelExecuteAppleEventError, event.Ptr(), errorInfo)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleScriptSelExecuteAppleEventError, event.Ptr(), errorInfo.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

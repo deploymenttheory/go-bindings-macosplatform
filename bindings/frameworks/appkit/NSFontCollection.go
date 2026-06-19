@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A font collection, which is a group of font descriptors taken together as a single object.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsfontcollection
 type NSFontCollection struct {
 	foundation.NSObject
@@ -46,6 +48,7 @@ func NSFontCollectionFromID(id objc.ID) *NSFontCollection {
 	return o
 }
 
+// Returns a font collection matching the given descriptors.
 func NSFontCollectionFontCollectionWithDescriptors(queryDescriptors *foundation.NSArray[*NSFontDescriptor]) *NSFontCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFontCollection), _nSFontCollectionSelFontCollectionWithDescriptors, queryDescriptors.Ptr())
 	if _ret != 0 {
@@ -54,6 +57,7 @@ func NSFontCollectionFontCollectionWithDescriptors(queryDescriptors *foundation.
 	return NSFontCollectionFromID(_ret)
 }
 
+// Returns a collection of fonts matching the given locale.
 func NSFontCollectionFontCollectionWithLocale(locale *foundation.NSLocale) *NSFontCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFontCollection), _nSFontCollectionSelFontCollectionWithLocale, locale.Ptr())
 	if _ret != 0 {
@@ -62,6 +66,7 @@ func NSFontCollectionFontCollectionWithLocale(locale *foundation.NSLocale) *NSFo
 	return NSFontCollectionFromID(_ret)
 }
 
+// Make the given font collection visible by giving it a name.
 func NSFontCollectionShowFontCollectionWithNameVisibilityError(collection *NSFontCollection, name *foundation.NSString, visibility NSFontCollectionVisibility) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsNSFontCollection), _nSFontCollectionSelShowFontCollectionWithNameVisibilityError, collection.Ptr(), name.Ptr(), visibility, unsafe.Pointer(&_nsErr))
@@ -71,6 +76,7 @@ func NSFontCollectionShowFontCollectionWithNameVisibilityError(collection *NSFon
 	return _ret, nil
 }
 
+// Remove from view the named font collection with the specified visibility.
 func NSFontCollectionHideFontCollectionWithNameVisibilityError(name *foundation.NSString, visibility NSFontCollectionVisibility) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsNSFontCollection), _nSFontCollectionSelHideFontCollectionWithNameVisibilityError, name.Ptr(), visibility, unsafe.Pointer(&_nsErr))
@@ -80,6 +86,7 @@ func NSFontCollectionHideFontCollectionWithNameVisibilityError(name *foundation.
 	return _ret, nil
 }
 
+// Renames the font collection with the specified name and visibility to the second name specified.
 func NSFontCollectionRenameFontCollectionWithNameVisibilityToNameError(oldName *foundation.NSString, visibility NSFontCollectionVisibility, newName *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsNSFontCollection), _nSFontCollectionSelRenameFontCollectionWithNameVisibilityToNameError, oldName.Ptr(), visibility, newName.Ptr(), unsafe.Pointer(&_nsErr))
@@ -89,6 +96,7 @@ func NSFontCollectionRenameFontCollectionWithNameVisibilityToNameError(oldName *
 	return _ret, nil
 }
 
+// Creates a named font collection object.
 func NSFontCollectionFontCollectionWithName(name *foundation.NSString) *NSFontCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFontCollection), _nSFontCollectionSelFontCollectionWithName, name.Ptr())
 	if _ret != 0 {
@@ -97,6 +105,7 @@ func NSFontCollectionFontCollectionWithName(name *foundation.NSString) *NSFontCo
 	return NSFontCollectionFromID(_ret)
 }
 
+// Creates a font collection with the specified name and font visibility.
 func NSFontCollectionFontCollectionWithNameVisibility(name *foundation.NSString, visibility NSFontCollectionVisibility) *NSFontCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFontCollection), _nSFontCollectionSelFontCollectionWithNameVisibility, name.Ptr(), visibility)
 	if _ret != 0 {
@@ -105,14 +114,16 @@ func NSFontCollectionFontCollectionWithNameVisibility(name *foundation.NSString,
 	return NSFontCollectionFromID(_ret)
 }
 
+// Returns an array of font descriptors matching the logical descriptors with the given options.
 func (o *NSFontCollection) MatchingDescriptorsWithOptions(options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) *foundation.NSArray[*NSFontDescriptor] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontCollectionSelMatchingDescriptorsWithOptions, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontCollectionSelMatchingDescriptorsWithOptions, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*NSFontDescriptor](_ret)
 }
 
+// Returns an array of font descriptors matching the logical descriptors for the given font family.
 func (o *NSFontCollection) MatchingDescriptorsForFamily(family *foundation.NSString) *foundation.NSArray[*NSFontDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontCollectionSelMatchingDescriptorsForFamily, family.Ptr())
 	if _ret != 0 {
@@ -121,8 +132,9 @@ func (o *NSFontCollection) MatchingDescriptorsForFamily(family *foundation.NSStr
 	return foundation.NSArrayFromID[*NSFontDescriptor](_ret)
 }
 
+// Returns an array of font descriptors matching the logical descriptors for the given font family and options.
 func (o *NSFontCollection) MatchingDescriptorsForFamilyOptions(family *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) *foundation.NSArray[*NSFontDescriptor] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontCollectionSelMatchingDescriptorsForFamilyOptions, family.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontCollectionSelMatchingDescriptorsForFamilyOptions, family.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -138,8 +150,11 @@ func NSFontCollectionFontCollectionWithAllAvailableDescriptors() *NSFontCollecti
 }
 
 func NSFontCollectionAllFontCollectionNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSFontCollection), _nSFontCollectionSelAllFontCollectionNames)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSFontCollection), _nSFontCollectionSelAllFontCollectionNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSFontCollection) QueryDescriptors() *foundation.NSArray[*NSFontDescriptor] {

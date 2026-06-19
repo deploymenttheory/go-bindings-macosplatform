@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Provides read access to the data in a media asset file.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaextension/mebytesource
 type MEByteSource struct {
 	foundation.NSObject
@@ -41,7 +43,7 @@ func MEByteSourceFromID(id objc.ID) *MEByteSource {
 	return o
 }
 
-// @method     	readDataOfLength:fromOffset:toDestination:completionHandler: @abstract		Reads bytes from an MEByteSource asynchronously into a buffer. @discussion		Asynchronously reads out the specified number of bytes starting at the indicated offset. Returns the actual number of bytes read out in bytesRead. Read attempts that extend beyond the end of the MEByteSource will succeed if they include at least one valid byte before the end of the MEByteSource. @param			length The number of bytes to read. @param			offset The relative offset in bytes from the beginning of the file from which to start reading. @param			dest The block of memory to hold the data to be read.  Must be at least num bytes in length. @param 			completionHandler The handler that will be invoked when the method completes. 'bytesRead' The actual number of bytes read. 'error' An NSError object that will contain error information if the method fails, otherwise nil. Returns MEErrorEndOfStream if no more bytes can be read.
+// Reads bytes from a byte source into a buffer.
 func (o *MEByteSource) ReadDataOfLengthFromOffsetToDestinationCompletionHandler(length uint, offset int64, dest unsafe.Pointer, completionHandler func(uint, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -53,7 +55,7 @@ func (o *MEByteSource) ReadDataOfLengthFromOffsetToDestinationCompletionHandler(
 	o.Ptr().Send(_mEByteSourceSelReadDataOfLengthFromOffsetToDestinationCompletionHandler, length, offset, dest, __block_completionHandler)
 }
 
-// @method     	readDataOfLength:fromOffset:completionHandler: @abstract		Reads bytes from an MEByteSource asynchronously into an NSData object. @discussion		Asynchronously reads out the specified number of bytes starting at the indicated offset. Returns the actual number of bytes read out in bytesRead. Read attempts that extend beyond the end of the MEByteSource will succeed if they include at least one valid byte before the end of the MEByteSource. @param			length The number of bytes to read. @param			offset The relative offset in bytes from the beginning of the file from which to start reading. @param			completionHandler Completion block called when the method completes. 'data' The NSData object holding the data that have been read. The NSData length property will indicate the actual number of bytes read. 'error' An NSError object that will contain error information if the method fails, otherwise nil. Returns MEErrorEndOfStream if no more bytes can be read.
+// Reads bytes from a byte source into a data object.
 func (o *MEByteSource) ReadDataOfLengthFromOffsetCompletionHandler(length uint, offset int64, completionHandler func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -68,7 +70,7 @@ func (o *MEByteSource) ReadDataOfLengthFromOffsetCompletionHandler(length uint, 
 	o.Ptr().Send(_mEByteSourceSelReadDataOfLengthFromOffsetCompletionHandler, length, offset, __block_completionHandler)
 }
 
-// @method     	readDataOfLength:fromOffset:toDestination:bytesRead:error @abstract		Reads bytes from an MEByteSource synchronously into a buffer. @discussion		Synchronously reads out the specified number of bytes starting at the indicated offset. Returns the actual number of bytes read out in bytesReadOut. Read attempts that extend beyond the end of the MEByteSource will succeed if they include at least one valid byte before the end of the MEByteSource. @param			length The number of bytes to read. @param			offset The relative offset in bytes from the beginning of the file from which to start reading. @param			dest The block of memory to hold the data to be read.  Must be at least num bytes in length. @param			bytesReadOut The actual number of bytes read. @param			error Reports any errors. Returns MEErrorEndOfStream if no more bytes can be read. @result			Returns YES if successful, NO if an error occured.
+// Reads bytes from a byte source into a buffer.
 func (o *MEByteSource) ReadDataOfLengthFromOffsetToDestinationBytesReadError(length uint, offset int64, dest unsafe.Pointer, bytesReadOut *uint) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _mEByteSourceSelReadDataOfLengthFromOffsetToDestinationBytesReadError, length, offset, dest, bytesReadOut, unsafe.Pointer(&_nsErr))
@@ -78,13 +80,13 @@ func (o *MEByteSource) ReadDataOfLengthFromOffsetToDestinationBytesReadError(len
 	return _ret, nil
 }
 
-// @method			availableLengthAtOffset: @abstract		Returns the number of available bytes from the offset within the MEByteSource. @discussion		Returns the number of available bytes at the time of the query. This value could change over time. Attempting to read past this value may cause slow I/O. @param			offset The offset in bytes from the beginning of the MEByteSource. @result			Returns the number of available bytes from the offset, or 0 if that information is not available.
+// Gets the number of available bytes from the offset within the byte source.
 func (o *MEByteSource) AvailableLengthAtOffset(offset int64) int64 {
 	_ret := objc.Send[int64](o.Ptr(), _mEByteSourceSelAvailableLengthAtOffset, offset)
 	return _ret
 }
 
-// @method			byteSourceForRelatedFileName:error: @abstract		Requests creation of a new MEByteSource for a related file. @discussion		Requests creation of a new MEByteSource for a file related to the receiving MEByteSource. The scope of fileName that may be opened is restricted. Only files in the same directory as the receiver MEByteSource may be accessed, and the file extension must match one of the extensions listed in the format reader bundle plist. @param			fileName The relative file name in the receiver MEByteSource's parent directory. @param			errorOut Reports any errors. Returns MEErrorPermissionDenied if the file cannot be accessed or is prohibited. @result			Returns nil if fileName refers to a file that cannot be accessed or is prohibited, or if an error occured. The returned MEByteSource is autoreleased.
+// Creates a new byte source for a related file.
 func (o *MEByteSource) ByteSourceForRelatedFileNameError(fileName *foundation.NSString) (*MEByteSource, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEByteSourceSelByteSourceForRelatedFileNameError, fileName.Ptr(), unsafe.Pointer(&_nsErr))
@@ -123,6 +125,9 @@ func (o *MEByteSource) FileLength() int64 {
 
 // @property		relatedFileNamesInSameDirectory @abstract		The array of related file names in the MEByteSource's parent directory. @discussion		The array of related files within the MEByteSource's parent directory that are accessible to the MEByteSource. Only the relative file names are returned, not the paths. If no related files are available, returns an empty array.
 func (o *MEByteSource) RelatedFileNamesInSameDirectory() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mEByteSourceSelRelatedFileNamesInSameDirectory)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mEByteSourceSelRelatedFileNamesInSameDirectory)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

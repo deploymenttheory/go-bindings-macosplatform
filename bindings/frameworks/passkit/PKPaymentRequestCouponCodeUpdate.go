@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that updates the payment request after the coupon code changes.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentrequestcouponcodeupdate
 type PKPaymentRequestCouponCodeUpdate struct {
 	PKPaymentRequestUpdate
@@ -34,8 +36,9 @@ func PKPaymentRequestCouponCodeUpdateFromID(id objc.ID) *PKPaymentRequestCouponC
 	return o
 }
 
+// Creates a payment coupon update with your specified payment summary items, errors, and shipping methods.
 func (o *PKPaymentRequestCouponCodeUpdate) InitWithErrorsPaymentSummaryItemsShippingMethods(errors_ *foundation.NSArray[objc.ID], paymentSummaryItems *foundation.NSArray[*PKPaymentSummaryItem], shippingMethods *foundation.NSArray[*PKShippingMethod]) *PKPaymentRequestCouponCodeUpdate {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestCouponCodeUpdateSelInitWithErrorsPaymentSummaryItemsShippingMethods, errors_, paymentSummaryItems.Ptr(), shippingMethods.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestCouponCodeUpdateSelInitWithErrorsPaymentSummaryItemsShippingMethods, errors_.Ptr(), paymentSummaryItems.Ptr(), shippingMethods.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -43,8 +46,11 @@ func (o *PKPaymentRequestCouponCodeUpdate) InitWithErrorsPaymentSummaryItemsShip
 }
 
 func (o *PKPaymentRequestCouponCodeUpdate) Errors() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _pKPaymentRequestCouponCodeUpdateSelErrors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentRequestCouponCodeUpdateSelErrors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *PKPaymentRequestCouponCodeUpdate) SetErrors() error {

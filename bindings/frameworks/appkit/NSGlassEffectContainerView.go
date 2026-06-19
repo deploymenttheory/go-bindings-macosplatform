@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that efficiently merges descendant glass effect views together when they are within a specified proximity to each other.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsglasseffectcontainerview
 type NSGlassEffectContainerView struct {
 	NSView

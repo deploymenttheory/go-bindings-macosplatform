@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a gradient instance normalization kernel.
+//
 // CNNInstanceNormalizationGradientNode wraps [raw.MPSCNNInstanceNormalizationGradientNode] with a fluent Go API.
 type CNNInstanceNormalizationGradientNode struct {
 	inner *raw.MPSCNNInstanceNormalizationGradientNode

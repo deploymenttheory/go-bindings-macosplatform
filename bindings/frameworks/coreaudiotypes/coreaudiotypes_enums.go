@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// Codes that describe error conditions that may occur when performing audio session operations.
 type AVAudioSessionErrorCode int64
 
 const (
@@ -65,36 +66,64 @@ func (e AVAudioSessionErrorCode) String() string {
 	}
 }
 
+// The supported channel bitmaps to use when defining channel layouts.
 type AudioChannelBitmap int64
 
 const (
-	KAudioChannelBit_Left                 AudioChannelBitmap = 1
-	KAudioChannelBit_Right                AudioChannelBitmap = 2
-	KAudioChannelBit_Center               AudioChannelBitmap = 4
-	KAudioChannelBit_LFEScreen            AudioChannelBitmap = 8
-	KAudioChannelBit_LeftSurround         AudioChannelBitmap = 16
-	KAudioChannelBit_RightSurround        AudioChannelBitmap = 32
-	KAudioChannelBit_LeftCenter           AudioChannelBitmap = 64
-	KAudioChannelBit_RightCenter          AudioChannelBitmap = 128
-	KAudioChannelBit_CenterSurround       AudioChannelBitmap = 256
-	KAudioChannelBit_LeftSurroundDirect   AudioChannelBitmap = 512
-	KAudioChannelBit_RightSurroundDirect  AudioChannelBitmap = 1024
-	KAudioChannelBit_TopCenterSurround    AudioChannelBitmap = 2048
-	KAudioChannelBit_VerticalHeightLeft   AudioChannelBitmap = 4096
+	// The left channel.
+	KAudioChannelBit_Left AudioChannelBitmap = 1
+	// The right channel.
+	KAudioChannelBit_Right AudioChannelBitmap = 2
+	// The center channel.
+	KAudioChannelBit_Center AudioChannelBitmap = 4
+	// The Low Frequency Effects (LFE) screen channel.
+	KAudioChannelBit_LFEScreen AudioChannelBitmap = 8
+	// The left surround channel.
+	KAudioChannelBit_LeftSurround AudioChannelBitmap = 16
+	// The rIght surround channel.
+	KAudioChannelBit_RightSurround AudioChannelBitmap = 32
+	// The left center channel.
+	KAudioChannelBit_LeftCenter AudioChannelBitmap = 64
+	// The right center channel.
+	KAudioChannelBit_RightCenter AudioChannelBitmap = 128
+	// The center surround channel.
+	KAudioChannelBit_CenterSurround AudioChannelBitmap = 256
+	// The left surround direct channel.
+	KAudioChannelBit_LeftSurroundDirect AudioChannelBitmap = 512
+	// The right surround direct channel.
+	KAudioChannelBit_RightSurroundDirect AudioChannelBitmap = 1024
+	// The top center surround channel.
+	KAudioChannelBit_TopCenterSurround AudioChannelBitmap = 2048
+	// The vertical height left channel.
+	KAudioChannelBit_VerticalHeightLeft AudioChannelBitmap = 4096
+	// The vertical height center channel.
 	KAudioChannelBit_VerticalHeightCenter AudioChannelBitmap = 8192
-	KAudioChannelBit_VerticalHeightRight  AudioChannelBitmap = 16384
-	KAudioChannelBit_TopBackLeft          AudioChannelBitmap = 32768
-	KAudioChannelBit_TopBackCenter        AudioChannelBitmap = 65536
-	KAudioChannelBit_TopBackRight         AudioChannelBitmap = 131072
-	KAudioChannelBit_LeftTopFront         AudioChannelBitmap = 4096
-	KAudioChannelBit_CenterTopFront       AudioChannelBitmap = 8192
-	KAudioChannelBit_RightTopFront        AudioChannelBitmap = 16384
-	KAudioChannelBit_LeftTopMiddle        AudioChannelBitmap = 2097152
-	KAudioChannelBit_CenterTopMiddle      AudioChannelBitmap = 2048
-	KAudioChannelBit_RightTopMiddle       AudioChannelBitmap = 8388608
-	KAudioChannelBit_LeftTopRear          AudioChannelBitmap = 16777216
-	KAudioChannelBit_CenterTopRear        AudioChannelBitmap = 33554432
-	KAudioChannelBit_RightTopRear         AudioChannelBitmap = 67108864
+	// The vertical height right channel.
+	KAudioChannelBit_VerticalHeightRight AudioChannelBitmap = 16384
+	// The top-back left channel.
+	KAudioChannelBit_TopBackLeft AudioChannelBitmap = 32768
+	// The top-back center channel.
+	KAudioChannelBit_TopBackCenter AudioChannelBitmap = 65536
+	// The top-back right channel.
+	KAudioChannelBit_TopBackRight AudioChannelBitmap = 131072
+	// The left-top front channel.
+	KAudioChannelBit_LeftTopFront AudioChannelBitmap = 4096
+	// The top-front center channel.
+	KAudioChannelBit_CenterTopFront AudioChannelBitmap = 8192
+	// The top-front front channel.
+	KAudioChannelBit_RightTopFront AudioChannelBitmap = 16384
+	// The left-top middle channel.
+	KAudioChannelBit_LeftTopMiddle AudioChannelBitmap = 2097152
+	// The top-middle center channel.
+	KAudioChannelBit_CenterTopMiddle AudioChannelBitmap = 2048
+	// The top-middle right channel.
+	KAudioChannelBit_RightTopMiddle AudioChannelBitmap = 8388608
+	// The left-top rear channel.
+	KAudioChannelBit_LeftTopRear AudioChannelBitmap = 16777216
+	// The top-right center channel.
+	KAudioChannelBit_CenterTopRear AudioChannelBitmap = 33554432
+	// The top-rear right channel.
+	KAudioChannelBit_RightTopRear AudioChannelBitmap = 67108864
 )
 
 func (e AudioChannelBitmap) String() string {
@@ -186,15 +215,22 @@ func (e AudioChannelBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Indexes the fields of the mCoordinates array in an AudioChannelDescription structure.
 type AudioChannelCoordinateIndex int64
 
 const (
+	// For rectangular coordinates, negative is left and positive is right. The units are specified by the mChannelFlags field of the AudioChannelDescription structure.
 	KAudioChannelCoordinates_LeftRight AudioChannelCoordinateIndex = 0
+	// For rectangular coordinates, negative is back and positive is front. The units are specified by the mChannelFlags field.
 	KAudioChannelCoordinates_BackFront AudioChannelCoordinateIndex = 1
-	KAudioChannelCoordinates_DownUp    AudioChannelCoordinateIndex = 2
-	KAudioChannelCoordinates_Azimuth   AudioChannelCoordinateIndex = 0
+	// For rectangular coordinates, negative is below ground level, 0 is ground level, and positive is above ground level. The units are specified by the mChannelFlags field.
+	KAudioChannelCoordinates_DownUp AudioChannelCoordinateIndex = 2
+	// For spherical coordinates, 0 is front center, positive is right, negative is left, and measurements are in degrees.
+	KAudioChannelCoordinates_Azimuth AudioChannelCoordinateIndex = 0
+	// For spherical coordinates, +90 is zenith, 0 is horizontal, -90 is nadir, and measurements are in degrees.
 	KAudioChannelCoordinates_Elevation AudioChannelCoordinateIndex = 1
-	KAudioChannelCoordinates_Distance  AudioChannelCoordinateIndex = 2
+	// For spherical coordinates, distance is radially from the center. The units are specified by the mChannelFlags field of the AudioChannelDescription structure.
+	KAudioChannelCoordinates_Distance AudioChannelCoordinateIndex = 2
 )
 
 func (e AudioChannelCoordinateIndex) String() string {
@@ -210,13 +246,18 @@ func (e AudioChannelCoordinateIndex) String() string {
 	}
 }
 
+// Constants that define the audio channel flags of an audio channel description.
 type AudioChannelFlags int64
 
 const (
-	KAudioChannelFlags_AllOff                 AudioChannelFlags = 0
+	// All flags are clear.
+	KAudioChannelFlags_AllOff AudioChannelFlags = 0
+	// A flag that indicates the channel uses the speaker position’s cartesian coordinates.
 	KAudioChannelFlags_RectangularCoordinates AudioChannelFlags = 1
-	KAudioChannelFlags_SphericalCoordinates   AudioChannelFlags = 2
-	KAudioChannelFlags_Meters                 AudioChannelFlags = 4
+	// A flag that indicates the channel uses the speaker position’s spherical coordinates.
+	KAudioChannelFlags_SphericalCoordinates AudioChannelFlags = 2
+	// A flag that indicates that unit values are in meters.
+	KAudioChannelFlags_Meters AudioChannelFlags = 4
 )
 
 func (e AudioChannelFlags) String() string {
@@ -236,15 +277,23 @@ func (e AudioChannelFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A structure that represents flags for a timestamp.
 type AudioTimeStampFlags int64
 
 const (
-	KAudioTimeStampNothingValid        AudioTimeStampFlags = 0
-	KAudioTimeStampSampleTimeValid     AudioTimeStampFlags = 1
-	KAudioTimeStampHostTimeValid       AudioTimeStampFlags = 2
-	KAudioTimeStampRateScalarValid     AudioTimeStampFlags = 4
-	KAudioTimeStampWordClockTimeValid  AudioTimeStampFlags = 8
-	KAudioTimeStampSMPTETimeValid      AudioTimeStampFlags = 16
+	// A flag that indicates no fields are valid.
+	KAudioTimeStampNothingValid AudioTimeStampFlags = 0
+	// A flag that indicates that the sample frame time is valid.
+	KAudioTimeStampSampleTimeValid AudioTimeStampFlags = 1
+	// A flag that indicates that the host time is valid.
+	KAudioTimeStampHostTimeValid AudioTimeStampFlags = 2
+	// A flag that indicates that the rate scalar is valid.
+	KAudioTimeStampRateScalarValid AudioTimeStampFlags = 4
+	// A flag that indicates that the word clock time is valid.
+	KAudioTimeStampWordClockTimeValid AudioTimeStampFlags = 8
+	// A flag that indicates that the SMPTE time is valid.
+	KAudioTimeStampSMPTETimeValid AudioTimeStampFlags = 16
+	// A flag that indicates that the sample frame time and the host time are valid.
 	KAudioTimeStampSampleHostTimeValid AudioTimeStampFlags = 3
 )
 
@@ -274,18 +323,28 @@ func (e AudioTimeStampFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that define the type of MPEG-4 audio data.
 type MPEG4ObjectID int64
 
 const (
-	KMPEG4Object_AAC_Main     MPEG4ObjectID = 1
-	KMPEG4Object_AAC_LC       MPEG4ObjectID = 2
-	KMPEG4Object_AAC_SSR      MPEG4ObjectID = 3
-	KMPEG4Object_AAC_LTP      MPEG4ObjectID = 4
-	KMPEG4Object_AAC_SBR      MPEG4ObjectID = 5
+	// A constant that specifies advanced audio coding, which is the basic MPEG-4 technology.
+	KMPEG4Object_AAC_Main MPEG4ObjectID = 1
+	// A constant that specifies lossless coding, which provides compression with no loss of quality.
+	KMPEG4Object_AAC_LC MPEG4ObjectID = 2
+	// A constant that specifies scalable sampling rate, which provides different sampling frequencies for different targets.
+	KMPEG4Object_AAC_SSR MPEG4ObjectID = 3
+	// A constant that specifies long-term prediction, which reduces redundancy in a coded signal.
+	KMPEG4Object_AAC_LTP MPEG4ObjectID = 4
+	// A constant that specifies spectral band replication, which reconstructs high-frequency content from lower frequencies and side information.
+	KMPEG4Object_AAC_SBR MPEG4ObjectID = 5
+	// A constant that specifies scalable lossless coding.
 	KMPEG4Object_AAC_Scalable MPEG4ObjectID = 6
-	KMPEG4Object_TwinVQ       MPEG4ObjectID = 7
-	KMPEG4Object_CELP         MPEG4ObjectID = 8
-	KMPEG4Object_HVXC         MPEG4ObjectID = 9
+	// A constant that specifies transform-domain weighted interleaved vector quantization.
+	KMPEG4Object_TwinVQ MPEG4ObjectID = 7
+	// A constant that specifies code-excited linear prediction, which is a narrow-band/wide-band speech codec.
+	KMPEG4Object_CELP MPEG4ObjectID = 8
+	// A constant that specifies harmonic vector excitation coding, which is a very-low bit-rate parametric speech codec.
+	KMPEG4Object_HVXC MPEG4ObjectID = 9
 )
 
 func (e MPEG4ObjectID) String() string {
@@ -313,6 +372,7 @@ func (e MPEG4ObjectID) String() string {
 	}
 }
 
+// A structure that defines SMPTE time flags.
 type SMPTETimeFlags int64
 
 const (
@@ -335,6 +395,7 @@ func (e SMPTETimeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that define SMPTE time types.
 type SMPTETimeType int64
 
 const (

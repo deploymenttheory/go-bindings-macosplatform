@@ -3,7 +3,7 @@
 
 package hypervisor
 
-// @abstract Contains details of a vcpu exception.
+// The structure that describes information about an exit from the virtual CPU (vCPU) to the host.
 // C struct: hv_vcpu_exit_exception_t
 type HvVcpuExitExceptionT struct {
 	Syndrome         uint64
@@ -11,7 +11,7 @@ type HvVcpuExitExceptionT struct {
 	Physical_address uint64
 }
 
-// @abstract Contains information about an exit from the vcpu to the host.
+// Information about an exit from the vCPU to the host.
 // C struct: hv_vcpu_exit_t
 type HvVcpuExitT struct {
 	Reason    Hv_exit_reason_t

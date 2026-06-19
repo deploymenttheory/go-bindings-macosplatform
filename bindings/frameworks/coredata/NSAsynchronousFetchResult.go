@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A fetch result object that encompasses the response from an executed asynchronous fetch request.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsasynchronousfetchresult
 type NSAsynchronousFetchResult[ResultType purego.AnyObject] struct {
 	NSPersistentStoreAsynchronousResult

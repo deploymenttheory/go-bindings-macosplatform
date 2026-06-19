@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The information that describes a bus reservation.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inbusreservation
 type INBusReservation struct {
 	INReservation
@@ -32,6 +34,7 @@ func INBusReservationFromID(id objc.ID) *INBusReservation {
 	return o
 }
 
+// Creates a bus reservation with the specified contents and attributes.
 func (o *INBusReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], uRL *foundation.NSURL, reservedSeat *INSeat, busTrip *INBusTrip) *INBusReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBusReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), uRL.Ptr(), reservedSeat.Ptr(), busTrip.Ptr())
 	if _ret != 0 {

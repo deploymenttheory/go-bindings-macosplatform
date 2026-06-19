@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a MPSCNNLogSoftMaxGradient kernel
+// A representation of a gradient logarithmic softmax filter kernel.
 //
 // CNNLogSoftMaxGradientNode wraps [raw.MPSCNNLogSoftMaxGradientNode] with a fluent Go API.
 type CNNLogSoftMaxGradientNode struct {

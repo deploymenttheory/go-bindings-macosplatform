@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that produces synthesized speech from text utterances and enables monitoring or controlling of ongoing speech.
+//
 // SpeechSynthesizer wraps [raw.AVSpeechSynthesizer] with a fluent Go API.
 type SpeechSynthesizer struct {
 	inner *raw.AVSpeechSynthesizer
@@ -36,39 +38,51 @@ func NewSpeechSynthesizer() *SpeechSynthesizer {
 	return &SpeechSynthesizer{inner: raw.AVSpeechSynthesizerFromID(_id)}
 }
 
+// The delegate object for the speech synthesizer.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SpeechSynthesizer) WithDelegate(delegate raw.AVSpeechSynthesizerDelegate) *SpeechSynthesizer {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Adds the utterance you specify to the speech synthesizer’s queue.
+//
 // SpeakUtterance calls the underlying SpeakUtterance.
 func (x *SpeechSynthesizer) SpeakUtterance(utterance *raw.AVSpeechUtterance) {
 	x.inner.SpeakUtterance(utterance)
 }
 
+// Generates speech for the utterance and invokes the callback with the audio buffer.
+//
 // WriteUtteranceToBufferCallback calls the underlying WriteUtteranceToBufferCallback.
 func (x *SpeechSynthesizer) WriteUtteranceToBufferCallback(utterance *raw.AVSpeechUtterance, bufferCallback func(*raw.AVAudioBuffer)) {
 	x.inner.WriteUtteranceToBufferCallback(utterance, bufferCallback)
 }
 
-// Use this method to receive audio buffers and associated metadata that can be used to store or further process synthesized speech. The dictionary provided by -[AVSpeechSynthesisVoice audioFileSettings] can be used to create an AVAudioFile.
+// Generates audio buffers and associated metadata for storage or further speech synthesis processing.
 //
 // WriteUtteranceToBufferCallbackToMarkerCallback calls the underlying WriteUtteranceToBufferCallbackToMarkerCallback.
 func (x *SpeechSynthesizer) WriteUtteranceToBufferCallbackToMarkerCallback(utterance *raw.AVSpeechUtterance, bufferCallback func(*raw.AVAudioBuffer), markerCallback func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker])) {
 	x.inner.WriteUtteranceToBufferCallbackToMarkerCallback(utterance, bufferCallback, markerCallback)
 }
 
+// Stops speech at the boundary you specify.
+//
 // StopSpeakingAtBoundary calls the underlying StopSpeakingAtBoundary.
 func (x *SpeechSynthesizer) StopSpeakingAtBoundary(boundary AVSpeechBoundary) bool {
 	return x.inner.StopSpeakingAtBoundary(raw.AVSpeechBoundary(boundary))
 }
 
+// Pauses speech at the boundary you specify.
+//
 // PauseSpeakingAtBoundary calls the underlying PauseSpeakingAtBoundary.
 func (x *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary AVSpeechBoundary) bool {
 	return x.inner.PauseSpeakingAtBoundary(raw.AVSpeechBoundary(boundary))
 }
 
+// Resumes speech from its paused point.
+//
 // ContinueSpeaking calls the underlying ContinueSpeaking.
 func (x *SpeechSynthesizer) ContinueSpeaking() bool {
 	return x.inner.ContinueSpeaking()

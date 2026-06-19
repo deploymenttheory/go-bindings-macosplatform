@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class that you subclass to handle events in your Safari app extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/safariservices/sfsafariextensionhandler
 type SFSafariExtensionHandler struct {
 	foundation.NSObject

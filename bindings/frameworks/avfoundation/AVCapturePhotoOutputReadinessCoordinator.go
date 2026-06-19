@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that monitors changes to a photo output’s capture readiness.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturephotooutputreadinesscoordinator
 type AVCapturePhotoOutputReadinessCoordinator struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func AVCapturePhotoOutputReadinessCoordinatorFromID(id objc.ID) *AVCapturePhotoO
 	return o
 }
 
+// Creates an object that helps coordinate user interface changes with a photo output that runs on a background queue.
 func (o *AVCapturePhotoOutputReadinessCoordinator) InitWithPhotoOutput(photoOutput *AVCapturePhotoOutput) *AVCapturePhotoOutputReadinessCoordinator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCapturePhotoOutputReadinessCoordinatorSelInitWithPhotoOutput, photoOutput.Ptr())
 	if _ret != 0 {
@@ -43,12 +46,12 @@ func (o *AVCapturePhotoOutputReadinessCoordinator) InitWithPhotoOutput(photoOutp
 	return AVCapturePhotoOutputReadinessCoordinatorFromID(_ret)
 }
 
-// @method startTrackingCaptureRequestUsingPhotoSettings: @abstract Track the capture request represented by the specified photo settings until it is enqueued to the photo output and update captureReadiness to include this request. @param settings The AVCapturePhotoSettings which will be passed to -[AVCapturePhotoOutput capturePhotoWithSettings:delegate] for this capture request. @discussion The captureReadiness property is updated to include the tracked request until the the photo output receives a settings object with the same or a newer uniqueID. It is recommended that the same photo settings be passed to -[AVCapturePhotoOutput capturePhotoWithSettings:delegate] to ensure the captureReadiness value is consistent once the capture begins. When called on the main queue the delegate callback is invoked synchronously before returning to ensure shutter availability is updated immediately and prevent queued touch events from initiating unwanted captures. The -startTrackingCaptureRequestUsingPhotoSettings: method can be called while in the SessionNotRunning state to allow the shutter button to be interactive while the session is being started on a background queue. An NSInvalidArgumentException is thrown if the photo settings are invalid.
+// Tracks a capture request that uses the specified photo settings.
 func (o *AVCapturePhotoOutputReadinessCoordinator) StartTrackingCaptureRequestUsingPhotoSettings(settings *AVCapturePhotoSettings) {
 	o.Ptr().Send(_aVCapturePhotoOutputReadinessCoordinatorSelStartTrackingCaptureRequestUsingPhotoSettings, settings.Ptr())
 }
 
-// @method stopTrackingCaptureRequestUsingPhotoSettingsUniqueID: @abstract Stop tracking the capture request represented by the specified photo settings uniqueID and update captureReadiness to no longer include this request. @param settingsUniqueID The AVCapturePhotoSettings.uniqueID of the settings passed to -startTrackingCaptureRequestUsingPhotoSettings:. @discussion Tracking automatically stops when -[AVCapturePhotoOutput capturePhotoWithSettings:delegate] is called with a photo settings objects with the same or a newer uniqueID, but in cases where an error or other condition prevents calling -capturePhotoWithSettings:delegate tracking should be explicitly stopped to ensure the captureReadiness value is up to date. When called on the main queue the delegate callback is invoked synchronously before returning to ensure shutter availability is updated immediately.
+// Stop tracking the capture request represented by the specified photo setting’s unique identifier.
 func (o *AVCapturePhotoOutputReadinessCoordinator) StopTrackingCaptureRequestUsingPhotoSettingsUniqueID(settingsUniqueID int64) {
 	o.Ptr().Send(_aVCapturePhotoOutputReadinessCoordinatorSelStopTrackingCaptureRequestUsingPhotoSettingsUniqueID, settingsUniqueID)
 }

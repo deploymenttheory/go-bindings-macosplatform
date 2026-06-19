@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An embeddable map interface, similar to the one that the Maps app provides.
+//
 // MapView wraps [raw.MKMapView] with a fluent Go API.
 type MapView struct {
 	inner *raw.MKMapView
@@ -40,230 +42,312 @@ func NewMapView() *MapView {
 	return &MapView{inner: raw.MKMapViewFromID(_id)}
 }
 
+// The receiver’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *MapView) WithDelegate(delegate raw.MKMapViewDelegate) *MapView {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The type of data the map view displays.
+//
 // WithMapType sets the mapType property and returns the receiver for chaining.
 func (x *MapView) WithMapType(mapType MKMapType) *MapView {
 	x.inner.SetMapType(raw.MKMapType(mapType))
 	return x
 }
 
+// The characteristics of the map view, including the map type and features the map displays.
+//
 // WithPreferredConfiguration sets the preferredConfiguration property and returns the receiver for chaining.
 func (x *MapView) WithPreferredConfiguration(preferredConfiguration MapConfigurationProvider) *MapView {
 	x.inner.SetPreferredConfiguration(preferredConfiguration.asMapConfiguration())
 	return x
 }
 
+// The area the map view displays.
+//
 // WithRegion sets the region property and returns the receiver for chaining.
 func (x *MapView) WithRegion(region raw.MKCoordinateRegion) *MapView {
 	x.inner.SetRegion(region)
 	return x
 }
 
+// The area visible in the map view.
+//
 // WithVisibleMapRect sets the visibleMapRect property and returns the receiver for chaining.
 func (x *MapView) WithVisibleMapRect(visibleMapRect raw.MKMapRect) *MapView {
 	x.inner.SetVisibleMapRect(visibleMapRect)
 	return x
 }
 
+// The camera to use for determining the appearance of the map.
+//
 // WithCamera sets the camera property and returns the receiver for chaining.
 func (x *MapView) WithCamera(camera *MapCamera) *MapView {
 	x.inner.SetCamera(camera.Unwrap())
 	return x
 }
 
+// The zoom range to apply to the map view.
+//
 // WithCameraZoomRange sets the cameraZoomRange property and returns the receiver for chaining.
 func (x *MapView) WithCameraZoomRange(cameraZoomRange *MapCameraZoomRange) *MapView {
 	x.inner.SetCameraZoomRange(cameraZoomRange.Unwrap())
 	return x
 }
 
+// The boundary of the area within which the map view’s center needs to remain.
+//
 // WithCameraBoundary sets the cameraBoundary property and returns the receiver for chaining.
 func (x *MapView) WithCameraBoundary(cameraBoundary *MapCameraBoundary) *MapView {
 	x.inner.SetCameraBoundary(cameraBoundary.Unwrap())
 	return x
 }
 
+// A Boolean value that determines whether the user may use pinch gestures to zoom in and out of the map.
+//
 // WithZoomEnabled sets the zoomEnabled property and returns the receiver for chaining.
 func (x *MapView) WithZoomEnabled(zoomEnabled bool) *MapView {
 	x.inner.SetZoomEnabled(zoomEnabled)
 	return x
 }
 
+// A Boolean value that determines whether the user may scroll around the map.
+//
 // WithScrollEnabled sets the scrollEnabled property and returns the receiver for chaining.
 func (x *MapView) WithScrollEnabled(scrollEnabled bool) *MapView {
 	x.inner.SetScrollEnabled(scrollEnabled)
 	return x
 }
 
+// A Boolean value that indicates whether the map uses the camera’s heading information.
+//
 // WithRotateEnabled sets the rotateEnabled property and returns the receiver for chaining.
 func (x *MapView) WithRotateEnabled(rotateEnabled bool) *MapView {
 	x.inner.SetRotateEnabled(rotateEnabled)
 	return x
 }
 
+// A Boolean value that indicates whether the map uses the camera’s pitch information.
+//
 // WithPitchEnabled sets the pitchEnabled property and returns the receiver for chaining.
 func (x *MapView) WithPitchEnabled(pitchEnabled bool) *MapView {
 	x.inner.SetPitchEnabled(pitchEnabled)
 	return x
 }
 
+// A Boolean value that indicates whether the map displays the user tracking button.
+//
 // WithShowsUserTrackingButton sets the showsUserTrackingButton property and returns the receiver for chaining.
 func (x *MapView) WithShowsUserTrackingButton(showsUserTrackingButton bool) *MapView {
 	x.inner.SetShowsUserTrackingButton(showsUserTrackingButton)
 	return x
 }
 
+// A value that indicates whether the map’s pitch button is visible.
+//
 // WithPitchButtonVisibility sets the pitchButtonVisibility property and returns the receiver for chaining.
 func (x *MapView) WithPitchButtonVisibility(pitchButtonVisibility MKFeatureVisibility) *MapView {
 	x.inner.SetPitchButtonVisibility(raw.MKFeatureVisibility(pitchButtonVisibility))
 	return x
 }
 
+// A Boolean value that indicates whether the map displays the pitch control.
+//
 // WithShowsPitchControl sets the showsPitchControl property and returns the receiver for chaining.
 func (x *MapView) WithShowsPitchControl(showsPitchControl bool) *MapView {
 	x.inner.SetShowsPitchControl(showsPitchControl)
 	return x
 }
 
+// A Boolean value that indicates whether the map displays zoom controls.
+//
 // WithShowsZoomControls sets the showsZoomControls property and returns the receiver for chaining.
 func (x *MapView) WithShowsZoomControls(showsZoomControls bool) *MapView {
 	x.inner.SetShowsZoomControls(showsZoomControls)
 	return x
 }
 
+// A Boolean value that indicates whether the map displays a compass control.
+//
 // WithShowsCompass sets the showsCompass property and returns the receiver for chaining.
 func (x *MapView) WithShowsCompass(showsCompass bool) *MapView {
 	x.inner.SetShowsCompass(showsCompass)
 	return x
 }
 
+// A Boolean value that indicates whether the map shows scale information.
+//
 // WithShowsScale sets the showsScale property and returns the receiver for chaining.
 func (x *MapView) WithShowsScale(showsScale bool) *MapView {
 	x.inner.SetShowsScale(showsScale)
 	return x
 }
 
+// The filter to use for determining the points of interest that appear on the map.
+//
 // WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
 func (x *MapView) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *MapView {
 	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the map displays point-of-interest information.
+//
 // WithShowsPointsOfInterest sets the showsPointsOfInterest property and returns the receiver for chaining.
 func (x *MapView) WithShowsPointsOfInterest(showsPointsOfInterest bool) *MapView {
 	x.inner.SetShowsPointsOfInterest(showsPointsOfInterest)
 	return x
 }
 
+// A Boolean value that indicates whether the map displays extruded building information on supported map types.
+//
 // WithShowsBuildings sets the showsBuildings property and returns the receiver for chaining.
 func (x *MapView) WithShowsBuildings(showsBuildings bool) *MapView {
 	x.inner.SetShowsBuildings(showsBuildings)
 	return x
 }
 
+// A Boolean value that indicates whether the map displays traffic information.
+//
 // WithShowsTraffic sets the showsTraffic property and returns the receiver for chaining.
 func (x *MapView) WithShowsTraffic(showsTraffic bool) *MapView {
 	x.inner.SetShowsTraffic(showsTraffic)
 	return x
 }
 
+// A Boolean value that indicates whether the map tries to display the user’s location.
+//
 // WithShowsUserLocation sets the showsUserLocation property and returns the receiver for chaining.
 func (x *MapView) WithShowsUserLocation(showsUserLocation bool) *MapView {
 	x.inner.SetShowsUserLocation(showsUserLocation)
 	return x
 }
 
+// The mode to use for tracking the user’s location.
+//
 // WithUserTrackingMode sets the userTrackingMode property and returns the receiver for chaining.
 func (x *MapView) WithUserTrackingMode(userTrackingMode MKUserTrackingMode) *MapView {
 	x.inner.SetUserTrackingMode(raw.MKUserTrackingMode(userTrackingMode))
 	return x
 }
 
+// Changes the currently visible region, and optionally animates the change.
+//
 // SetRegionAnimated calls the underlying SetRegionAnimated.
 func (x *MapView) SetRegionAnimated(region raw.MKCoordinateRegion, animated bool) {
 	x.inner.SetRegionAnimated(region, animated)
 }
 
+// Changes the center coordinate of the map, and optionally animates the change.
+//
 // SetCenterCoordinateAnimated calls the underlying SetCenterCoordinateAnimated.
 func (x *MapView) SetCenterCoordinateAnimated(coordinate unsafe.Pointer, animated bool) {
 	x.inner.SetCenterCoordinateAnimated(coordinate, animated)
 }
 
+// Adjusts the aspect ratio of the specified region to ensure that it fits in the map view’s frame.
+//
 // RegionThatFits calls the underlying RegionThatFits.
 func (x *MapView) RegionThatFits(region raw.MKCoordinateRegion) raw.MKCoordinateRegion {
 	return x.inner.RegionThatFits(region)
 }
 
+// Changes the currently visible portion of the map, and optionally animates the change.
+//
 // SetVisibleMapRectAnimated calls the underlying SetVisibleMapRectAnimated.
 func (x *MapView) SetVisibleMapRectAnimated(mapRect raw.MKMapRect, animate bool) {
 	x.inner.SetVisibleMapRectAnimated(mapRect, animate)
 }
 
+// Returns a centered map rectangle with the same aspect ratio as the map view’s frame.
+//
 // MapRectThatFits calls the underlying MapRectThatFits.
 func (x *MapView) MapRectThatFits(mapRect raw.MKMapRect) raw.MKMapRect {
 	return x.inner.MapRectThatFits(mapRect)
 }
 
+// Changes the currently visible portion of the map, allowing you to specify additional space around the edges.
+//
 // SetVisibleMapRectEdgePaddingAnimated calls the underlying SetVisibleMapRectEdgePaddingAnimated.
 func (x *MapView) SetVisibleMapRectEdgePaddingAnimated(mapRect raw.MKMapRect, insets foundation.NSEdgeInsets, animate bool) {
 	x.inner.SetVisibleMapRectEdgePaddingAnimated(mapRect, insets, animate)
 }
 
+// Returns a centered, inset map rectangle with the same aspect ratio as the map view’s frame.
+//
 // MapRectThatFitsEdgePadding calls the underlying MapRectThatFitsEdgePadding.
 func (x *MapView) MapRectThatFitsEdgePadding(mapRect raw.MKMapRect, insets foundation.NSEdgeInsets) raw.MKMapRect {
 	return x.inner.MapRectThatFitsEdgePadding(mapRect, insets)
 }
 
+// Changes the camera to use for determining the map’s viewing parameters, and optionally animates the change.
+//
 // SetCameraAnimated calls the underlying SetCameraAnimated.
 func (x *MapView) SetCameraAnimated(camera *raw.MKMapCamera, animated bool) {
 	x.inner.SetCameraAnimated(camera, animated)
 }
 
+// Sets the camera zoom range for the map view, specifying whether to use animation.
+//
 // SetCameraZoomRangeAnimated calls the underlying SetCameraZoomRangeAnimated.
 func (x *MapView) SetCameraZoomRangeAnimated(cameraZoomRange *raw.MKMapCameraZoomRange, animated bool) {
 	x.inner.SetCameraZoomRangeAnimated(cameraZoomRange, animated)
 }
 
+// Sets the camera boundary for the map view, specifying whether to use animation.
+//
 // SetCameraBoundaryAnimated calls the underlying SetCameraBoundaryAnimated.
 func (x *MapView) SetCameraBoundaryAnimated(cameraBoundary *raw.MKMapCameraBoundary, animated bool) {
 	x.inner.SetCameraBoundaryAnimated(cameraBoundary, animated)
 }
 
+// Converts a map coordinate to a point in the specified view.
+//
 // ConvertCoordinateToPointToView calls the underlying ConvertCoordinateToPointToView.
 func (x *MapView) ConvertCoordinateToPointToView(coordinate unsafe.Pointer, view *appkit.NSView) corefoundation.CGPoint {
 	return x.inner.ConvertCoordinateToPointToView(coordinate, view)
 }
 
+// Converts a point in the specified view’s coordinate system to a map coordinate.
+//
 // ConvertPointToCoordinateFromView calls the underlying ConvertPointToCoordinateFromView.
 func (x *MapView) ConvertPointToCoordinateFromView(point corefoundation.CGPoint, view *appkit.NSView) unsafe.Pointer {
 	return x.inner.ConvertPointToCoordinateFromView(point, view)
 }
 
+// Converts a map region to a rectangle in the specified view.
+//
 // ConvertRegionToRectToView calls the underlying ConvertRegionToRectToView.
 func (x *MapView) ConvertRegionToRectToView(region raw.MKCoordinateRegion, view *appkit.NSView) corefoundation.CGRect {
 	return x.inner.ConvertRegionToRectToView(region, view)
 }
 
+// Converts a rectangle in the specified view’s coordinate system to a map region.
+//
 // ConvertRectToRegionFromView calls the underlying ConvertRectToRegionFromView.
 func (x *MapView) ConvertRectToRegionFromView(rect corefoundation.CGRect, view *appkit.NSView) raw.MKCoordinateRegion {
 	return x.inner.ConvertRectToRegionFromView(rect, view)
 }
 
+// Sets the mode to use for tracking the user’s location, with optional animation.
+//
 // SetUserTrackingModeAnimated calls the underlying SetUserTrackingModeAnimated.
 func (x *MapView) SetUserTrackingModeAnimated(mode MKUserTrackingMode, animated bool) {
 	x.inner.SetUserTrackingModeAnimated(raw.MKUserTrackingMode(mode), animated)
 }
 
+// Adds the specified annotation to the map view.
+//
 // AddAnnotation calls the underlying AddAnnotation.
 func (x *MapView) AddAnnotation(annotation raw.MKAnnotation) {
 	x.inner.AddAnnotation(annotation)
 }
 
+// Adds an array of annotation objects to the map view.
+//
 // AddAnnotations calls the underlying AddAnnotations.
 func (x *MapView) AddAnnotations(annotations ...purego.IDer) {
 	_ptrs := make([]objc.ID, len(annotations))
@@ -280,11 +364,15 @@ func (x *MapView) AddAnnotations(annotations ...purego.IDer) {
 	x.inner.AddAnnotations(_arg0)
 }
 
+// Removes the specified annotation object from the map view.
+//
 // RemoveAnnotation calls the underlying RemoveAnnotation.
 func (x *MapView) RemoveAnnotation(annotation raw.MKAnnotation) {
 	x.inner.RemoveAnnotation(annotation)
 }
 
+// Removes an array of annotation objects from the map view.
+//
 // RemoveAnnotations calls the underlying RemoveAnnotations.
 func (x *MapView) RemoveAnnotations(annotations ...purego.IDer) {
 	_ptrs := make([]objc.ID, len(annotations))
@@ -301,11 +389,15 @@ func (x *MapView) RemoveAnnotations(annotations ...purego.IDer) {
 	x.inner.RemoveAnnotations(_arg0)
 }
 
+// Returns the annotation objects within the specified map rectangle.
+//
 // AnnotationsInMapRect calls the underlying AnnotationsInMapRect.
 func (x *MapView) AnnotationsInMapRect(mapRect raw.MKMapRect) *foundation.NSSet[raw.MKAnnotation] {
 	return x.inner.AnnotationsInMapRect(mapRect)
 }
 
+// Returns the annotation view associated with the specified annotation object, if any.
+//
 // ViewForAnnotation calls the underlying ViewForAnnotation.
 func (x *MapView) ViewForAnnotation(annotation raw.MKAnnotation) *AnnotationView {
 	_r := x.inner.ViewForAnnotation(annotation)
@@ -315,6 +407,8 @@ func (x *MapView) ViewForAnnotation(annotation raw.MKAnnotation) *AnnotationView
 	return &AnnotationView{inner: _r}
 }
 
+// Returns a reusable annotation view using its identifier.
+//
 // DequeueReusableAnnotationViewWithIdentifier calls the underlying DequeueReusableAnnotationViewWithIdentifier.
 func (x *MapView) DequeueReusableAnnotationViewWithIdentifier(identifier string) *AnnotationView {
 	_r := x.inner.DequeueReusableAnnotationViewWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
@@ -324,6 +418,8 @@ func (x *MapView) DequeueReusableAnnotationViewWithIdentifier(identifier string)
 	return &AnnotationView{inner: _r}
 }
 
+// Returns a reusable annotation view using the specified identifier with a specified existing annotation view, if possible.
+//
 // DequeueReusableAnnotationViewWithIdentifierForAnnotation calls the underlying DequeueReusableAnnotationViewWithIdentifierForAnnotation.
 func (x *MapView) DequeueReusableAnnotationViewWithIdentifierForAnnotation(identifier string, annotation raw.MKAnnotation) *AnnotationView {
 	_r := x.inner.DequeueReusableAnnotationViewWithIdentifierForAnnotation(foundation.NSStringStringWithUTF8String(identifier), annotation)
@@ -333,21 +429,29 @@ func (x *MapView) DequeueReusableAnnotationViewWithIdentifierForAnnotation(ident
 	return &AnnotationView{inner: _r}
 }
 
+// Registers an annotation view class that the map can create automatically.
+//
 // RegisterClassForAnnotationViewWithReuseIdentifier calls the underlying RegisterClassForAnnotationViewWithReuseIdentifier.
 func (x *MapView) RegisterClassForAnnotationViewWithReuseIdentifier(viewClass objc.Class, identifier string) {
 	x.inner.RegisterClassForAnnotationViewWithReuseIdentifier(viewClass, foundation.NSStringStringWithUTF8String(identifier))
 }
 
+// Selects the specified annotation and displays a callout view for it.
+//
 // SelectAnnotationAnimated calls the underlying SelectAnnotationAnimated.
 func (x *MapView) SelectAnnotationAnimated(annotation raw.MKAnnotation, animated bool) {
 	x.inner.SelectAnnotationAnimated(annotation, animated)
 }
 
+// Deselects the specified annotation and hides its callout view.
+//
 // DeselectAnnotationAnimated calls the underlying DeselectAnnotationAnimated.
 func (x *MapView) DeselectAnnotationAnimated(annotation raw.MKAnnotation, animated bool) {
 	x.inner.DeselectAnnotationAnimated(annotation, animated)
 }
 
+// Sets the visible region so that the map displays the specified annotations.
+//
 // ShowAnnotationsAnimated calls the underlying ShowAnnotationsAnimated.
 func (x *MapView) ShowAnnotationsAnimated(annotations *foundation.NSArray[raw.MKAnnotation], animated bool) {
 	x.inner.ShowAnnotationsAnimated(annotations, animated)
@@ -668,21 +772,29 @@ func (x *MapView) AnnotationVisibleRect() corefoundation.CGRect {
 	return x.inner.AnnotationVisibleRect()
 }
 
+// Adds the overlay object to the map at the specified level.
+//
 // AddOverlayLevel calls the underlying AddOverlayLevel.
 func (x *MapView) AddOverlayLevel(overlay raw.MKOverlay, level MKOverlayLevel) {
 	x.inner.AddOverlayLevel(overlay, raw.MKOverlayLevel(level))
 }
 
+// Adds an array of overlay objects to the map at the specified level.
+//
 // AddOverlaysLevel calls the underlying AddOverlaysLevel.
 func (x *MapView) AddOverlaysLevel(overlays *foundation.NSArray[raw.MKOverlay], level MKOverlayLevel) {
 	x.inner.AddOverlaysLevel(overlays, raw.MKOverlayLevel(level))
 }
 
+// Removes a single overlay object from the map.
+//
 // RemoveOverlay calls the underlying RemoveOverlay.
 func (x *MapView) RemoveOverlay(overlay raw.MKOverlay) {
 	x.inner.RemoveOverlay(overlay)
 }
 
+// Removes one or more overlay objects from the map.
+//
 // RemoveOverlays calls the underlying RemoveOverlays.
 func (x *MapView) RemoveOverlays(overlays ...purego.IDer) {
 	_ptrs := make([]objc.ID, len(overlays))
@@ -699,31 +811,43 @@ func (x *MapView) RemoveOverlays(overlays ...purego.IDer) {
 	x.inner.RemoveOverlays(_arg0)
 }
 
+// Inserts an overlay object into the level at the specified index.
+//
 // InsertOverlayAtIndexLevel calls the underlying InsertOverlayAtIndexLevel.
 func (x *MapView) InsertOverlayAtIndexLevel(overlay raw.MKOverlay, index uint, level MKOverlayLevel) {
 	x.inner.InsertOverlayAtIndexLevel(overlay, index, raw.MKOverlayLevel(level))
 }
 
+// Inserts one overlay object above another.
+//
 // InsertOverlayAboveOverlay calls the underlying InsertOverlayAboveOverlay.
 func (x *MapView) InsertOverlayAboveOverlay(overlay raw.MKOverlay, sibling raw.MKOverlay) {
 	x.inner.InsertOverlayAboveOverlay(overlay, sibling)
 }
 
+// Inserts one overlay object below another.
+//
 // InsertOverlayBelowOverlay calls the underlying InsertOverlayBelowOverlay.
 func (x *MapView) InsertOverlayBelowOverlay(overlay raw.MKOverlay, sibling raw.MKOverlay) {
 	x.inner.InsertOverlayBelowOverlay(overlay, sibling)
 }
 
+// Exchanges the positions of two overlay objects.
+//
 // ExchangeOverlayWithOverlay calls the underlying ExchangeOverlayWithOverlay.
 func (x *MapView) ExchangeOverlayWithOverlay(overlay1 raw.MKOverlay, overlay2 raw.MKOverlay) {
 	x.inner.ExchangeOverlayWithOverlay(overlay1, overlay2)
 }
 
+// Returns overlay objects in the specified level of the map.
+//
 // OverlaysInLevel calls the underlying OverlaysInLevel.
 func (x *MapView) OverlaysInLevel(level MKOverlayLevel) *foundation.NSArray[raw.MKOverlay] {
 	return x.inner.OverlaysInLevel(raw.MKOverlayLevel(level))
 }
 
+// Returns the renderer object for drawing the contents of the specified overlay object.
+//
 // RendererForOverlay calls the underlying RendererForOverlay.
 func (x *MapView) RendererForOverlay(overlay raw.MKOverlay) *OverlayRenderer {
 	_r := x.inner.RendererForOverlay(overlay)
@@ -733,11 +857,15 @@ func (x *MapView) RendererForOverlay(overlay raw.MKOverlay) *OverlayRenderer {
 	return &OverlayRenderer{inner: _r}
 }
 
+// Adds a single overlay object to the map.
+//
 // AddOverlay calls the underlying AddOverlay.
 func (x *MapView) AddOverlay(overlay raw.MKOverlay) {
 	x.inner.AddOverlay(overlay)
 }
 
+// Adds an array of overlay objects to the map.
+//
 // AddOverlays calls the underlying AddOverlays.
 func (x *MapView) AddOverlays(overlays ...purego.IDer) {
 	_ptrs := make([]objc.ID, len(overlays))
@@ -754,11 +882,15 @@ func (x *MapView) AddOverlays(overlays ...purego.IDer) {
 	x.inner.AddOverlays(_arg0)
 }
 
+// Inserts an overlay object into the list associated with the map.
+//
 // InsertOverlayAtIndex calls the underlying InsertOverlayAtIndex.
 func (x *MapView) InsertOverlayAtIndex(overlay raw.MKOverlay, index uint) {
 	x.inner.InsertOverlayAtIndex(overlay, index)
 }
 
+// Exchanges the position of two overlay objects at the specified index.
+//
 // ExchangeOverlayAtIndexWithOverlayAtIndex calls the underlying ExchangeOverlayAtIndexWithOverlayAtIndex.
 func (x *MapView) ExchangeOverlayAtIndexWithOverlayAtIndex(index1 uint, index2 uint) {
 	x.inner.ExchangeOverlayAtIndexWithOverlayAtIndex(index1, index2)

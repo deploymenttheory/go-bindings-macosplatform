@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration parameters to use when searching the contents of the web view.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkfindconfiguration
 type WKFindConfiguration struct {
 	foundation.NSObject

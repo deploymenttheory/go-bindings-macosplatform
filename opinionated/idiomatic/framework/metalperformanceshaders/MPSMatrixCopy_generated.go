@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that can perform multiple matrix copy operations.
+//
 // MatrixCopy wraps [raw.MPSMatrixCopy] with a fluent Go API.
 type MatrixCopy struct {
 	inner *raw.MPSMatrixCopy
@@ -51,7 +53,7 @@ func NewMatrixCopyWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTL
 	return &MatrixCopy{inner: raw.MPSMatrixCopyFromID(_id)}
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixCopy) WithOptions(options mpscore.MPSKernelOptions) *MatrixCopy {
@@ -59,7 +61,7 @@ func (x *MatrixCopy) WithOptions(options mpscore.MPSKernelOptions) *MatrixCopy {
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixCopy) WithLabel(label string) *MatrixCopy {

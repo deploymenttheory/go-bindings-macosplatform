@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class your Metal app uses to register for callbacks to synchronize its animations for a display.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/cametaldisplaylink
 type CAMetalDisplayLink struct {
 	foundation.NSObject
@@ -41,6 +43,7 @@ func CAMetalDisplayLinkFromID(id objc.ID) *CAMetalDisplayLink {
 	return o
 }
 
+// Creates a display link for Metal from a Core Animation layer.
 func (o *CAMetalDisplayLink) InitWithMetalLayer(layer *CAMetalLayer) *CAMetalDisplayLink {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAMetalDisplayLinkSelInitWithMetalLayer, layer.Ptr())
 	if _ret != 0 {
@@ -49,14 +52,17 @@ func (o *CAMetalDisplayLink) InitWithMetalLayer(layer *CAMetalLayer) *CAMetalDis
 	return CAMetalDisplayLinkFromID(_ret)
 }
 
+// Registers the display link with a run loop.
 func (o *CAMetalDisplayLink) AddToRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
 	o.Ptr().Send(_cAMetalDisplayLinkSelAddToRunLoopForMode, runloop.Ptr(), mode.Ptr())
 }
 
+// Removes a mode’s display link from a run loop.
 func (o *CAMetalDisplayLink) RemoveFromRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
 	o.Ptr().Send(_cAMetalDisplayLinkSelRemoveFromRunLoopForMode, runloop.Ptr(), mode.Ptr())
 }
 
+// Removes the display link from all run loops for all modes.
 func (o *CAMetalDisplayLink) Invalidate() {
 	o.Ptr().Send(_cAMetalDisplayLinkSelInvalidate)
 }

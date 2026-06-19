@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a user updating a contact.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnchangehistoryupdatecontactevent
 type CNChangeHistoryUpdateContactEvent struct {
 	CNChangeHistoryEvent

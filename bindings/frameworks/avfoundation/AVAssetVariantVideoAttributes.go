@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the video attributes for an asset variant.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetvariantvideoattributes
 type AVAssetVariantVideoAttributes struct {
 	foundation.NSObject
@@ -46,8 +48,11 @@ func (o *AVAssetVariantVideoAttributes) VideoRange() *foundation.NSString {
 
 // Provides an array of video sample codec types present in the variant's renditions if any are declared. Each value in the array is a NSNumber representation of CMVideoCodecType.
 func (o *AVAssetVariantVideoAttributes) CodecTypes() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAssetVariantVideoAttributesSelCodecTypes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetVariantVideoAttributesSelCodecTypes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // If it is not declared, it will be CGSizeZero.

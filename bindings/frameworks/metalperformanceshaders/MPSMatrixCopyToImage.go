@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A kernel that copies matrix data to a Metal Performance Shaders image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixcopytoimage
 type MPSMatrixCopyToImage struct {
 	mpscore.MPSKernel

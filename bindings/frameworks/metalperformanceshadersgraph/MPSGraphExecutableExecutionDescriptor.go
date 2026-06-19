@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that consists of all the levers to synchronize and schedule executable execution.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphexecutableexecutiondescriptor
 type MPSGraphExecutableExecutionDescriptor struct {
 	MPSGraphObject
@@ -40,12 +42,12 @@ func MPSGraphExecutableExecutionDescriptorFromID(id objc.ID) *MPSGraphExecutable
 	return o
 }
 
-// Waits on these shared events before scheduling execution on the HW. This does not include encoding which can still continue. - Parameters: - event: Shared event to wait on. - value: Value for shared event to wait on.
+// Waits on these shared events before scheduling execution on the HW.
 func (o *MPSGraphExecutableExecutionDescriptor) WaitForEventValue(event metal.MTLSharedEvent, value uint64) {
 	o.Ptr().Send(_mPSGraphExecutableExecutionDescriptorSelWaitForEventValue, event, value)
 }
 
-// Signals these shared events at execution stage and immediately proceeds. - Parameters: - event: Shared event to signal. - executionStage: Execution stage to signal event at. - value: Value for shared event to wait on.
+// Signals these shared events at execution stage and immediately proceeds.
 func (o *MPSGraphExecutableExecutionDescriptor) SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage MPSGraphExecutionStage, value uint64) {
 	o.Ptr().Send(_mPSGraphExecutableExecutionDescriptorSelSignalEventAtExecutionEventValue, event, executionStage, value)
 }

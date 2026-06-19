@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Handle to the state buffers.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlstate
 type MLState struct {
 	foundation.NSObject
@@ -30,7 +32,7 @@ func MLStateFromID(id objc.ID) *MLState {
 	return o
 }
 
-// Gets a mutable view into a state buffer. The underlying state buffer's address can differ for each call; one shall not access the state buffer outside of the closure. - Parameters: - handler: Block to access the state buffer through `MLMultiArray`.
+// Gets a mutable view into a state buffer.
 func (o *MLState) GetMultiArrayForStateNamedHandler(stateName *foundation.NSString, handler func(*MLMultiArray)) {
 	var __block_handler objc.Block
 	if handler != nil {

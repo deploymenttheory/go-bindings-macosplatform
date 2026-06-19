@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a time range segment of an asset track.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassettracksegment
 type AVAssetTrackSegment struct {
 	foundation.NSObject

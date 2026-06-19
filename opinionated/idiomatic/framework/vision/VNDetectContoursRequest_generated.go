@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request that detects the contours of the edges of an image.
+//
 // DetectContoursRequest wraps [raw.VNDetectContoursRequest] with a fluent Go API.
 type DetectContoursRequest struct {
 	inner *raw.VNDetectContoursRequest
@@ -37,7 +39,7 @@ func NewDetectContoursRequest() *DetectContoursRequest {
 	return &DetectContoursRequest{inner: raw.VNDetectContoursRequestFromID(_id)}
 }
 
-// @brief The amount to adjust the image's contrast by. A value of +1.0 means that the contrast is not adjusted. The default value is +2.0. @discussion Contour detection works best with high contrast images. The default value of 2 doubles the image's contrast to aid in detection. If the image already has a high contrast then this value should be set to 1.
+// The amount by which to adjust the image contrast.
 //
 // WithContrastAdjustment sets the contrastAdjustment property and returns the receiver for chaining.
 func (x *DetectContoursRequest) WithContrastAdjustment(contrastAdjustment float32) *DetectContoursRequest {
@@ -45,7 +47,7 @@ func (x *DetectContoursRequest) WithContrastAdjustment(contrastAdjustment float3
 	return x
 }
 
-// @brief The pixel value to use as a pivot for the contrast. Valid values are from [0.0 ... +1.0], or nil to auto-detect based on image intensity. The default value is +0.5 (i.e. pixel center).
+// The pixel value to use as a pivot for the contrast.
 //
 // WithContrastPivot sets the contrastPivot property and returns the receiver for chaining.
 func (x *DetectContoursRequest) WithContrastPivot(contrastPivot *foundation.NSNumber) *DetectContoursRequest {
@@ -53,7 +55,7 @@ func (x *DetectContoursRequest) WithContrastPivot(contrastPivot *foundation.NSNu
 	return x
 }
 
-// @brief Identifies to the request if detecting a dark object on a light background, or vice versa, to aid in detection. The default value is YES.
+// A Boolean value that indicates whether the request detects a dark object on a light background to aid in detection.
 //
 // WithDetectsDarkOnLight sets the detectsDarkOnLight property and returns the receiver for chaining.
 func (x *DetectContoursRequest) WithDetectsDarkOnLight(detectsDarkOnLight bool) *DetectContoursRequest {
@@ -61,13 +63,15 @@ func (x *DetectContoursRequest) WithDetectsDarkOnLight(detectsDarkOnLight bool) 
 	return x
 }
 
+// A Boolean value that indicates whether the request detects a dark object on a light background.
+//
 // WithDetectDarkOnLight sets the detectDarkOnLight property and returns the receiver for chaining.
 func (x *DetectContoursRequest) WithDetectDarkOnLight(detectDarkOnLight bool) *DetectContoursRequest {
 	x.inner.SetDetectDarkOnLight(detectDarkOnLight)
 	return x
 }
 
-// @brief The limit on the maximum dimension of the image to be used for contour detection. Valid range of values is [64 ... NSUIntegerMax]. The default value is 512. @discussion As the contour request is compute intensive, the input image is scaled down maintaining aspect ratio (if needed), such that its maximum dimension is the value of this property. The image never gets scaled up, so specifying the maximum value ensures that the image gets processed in its original size and not downscaled.
+// The maximum image dimension to use for contour detection.
 //
 // WithMaximumImageDimension sets the maximumImageDimension property and returns the receiver for chaining.
 func (x *DetectContoursRequest) WithMaximumImageDimension(maximumImageDimension uint) *DetectContoursRequest {
@@ -75,7 +79,7 @@ func (x *DetectContoursRequest) WithMaximumImageDimension(maximumImageDimension 
 	return x
 }
 
-// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+// The region of the image in which Vision will perform the request.
 //
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *DetectContoursRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectContoursRequest {
@@ -83,7 +87,7 @@ func (x *DetectContoursRequest) WithRegionOfInterest(regionOfInterest corefounda
 	return x
 }
 
-// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+// A hint to minimize the resource burden of the request.
 //
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *DetectContoursRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectContoursRequest {
@@ -91,7 +95,7 @@ func (x *DetectContoursRequest) WithPreferBackgroundProcessing(preferBackgroundP
 	return x
 }
 
-// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+// A Boolean signifying that the Vision request should execute exclusively on the CPU.
 //
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *DetectContoursRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectContoursRequest {
@@ -99,7 +103,7 @@ func (x *DetectContoursRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectContour
 	return x
 }
 
-// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+// The specific algorithm or implementation revision that’s used to perform the request.
 //
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *DetectContoursRequest) WithRevision(revision uint) *DetectContoursRequest {

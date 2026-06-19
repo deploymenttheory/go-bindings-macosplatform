@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Analyze natural language text to tag part of speech and lexical class, identify names, perform lemmatization, and determine the language and script.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nslinguistictagger
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 type NSLinguisticTagger struct {
@@ -52,6 +54,7 @@ func NSLinguisticTaggerFromID(id objc.ID) *NSLinguisticTagger {
 	return o
 }
 
+// Creates a linguistic tagger instance using the specified tag schemes and options.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) InitWithTagSchemesOptions(tagSchemes *NSArray[*NSString], opts uint) *NSLinguisticTagger {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelInitWithTagSchemesOptions, tagSchemes.Ptr(), opts)
@@ -61,6 +64,7 @@ func (o *NSLinguisticTagger) InitWithTagSchemesOptions(tagSchemes *NSArray[*NSSt
 	return NSLinguisticTaggerFromID(_ret)
 }
 
+// Returns the tag schemes available for a particular unit and language on the current device.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTaggerAvailableTagSchemesForUnitLanguage(unit NSLinguisticTaggerUnit, language *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLinguisticTagger), _nSLinguisticTaggerSelAvailableTagSchemesForUnitLanguage, unit, language.Ptr())
@@ -70,6 +74,7 @@ func NSLinguisticTaggerAvailableTagSchemesForUnitLanguage(unit NSLinguisticTagge
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns the tag schemes available for a particular language on the current device.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTaggerAvailableTagSchemesForLanguage(language *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLinguisticTagger), _nSLinguisticTaggerSelAvailableTagSchemesForLanguage, language.Ptr())
@@ -79,11 +84,13 @@ func NSLinguisticTaggerAvailableTagSchemesForLanguage(language *NSString) *NSArr
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Sets the orthography for the specified range.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) SetOrthographyRange(orthography *NSOrthography, range_ NSRange) {
 	o.Ptr().Send(_nSLinguisticTaggerSelSetOrthographyRange, orthography.Ptr(), range_)
 }
 
+// Returns the orthography at the index and also returns the effective range.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) OrthographyAtIndexEffectiveRange(charIndex uint, effectiveRange *NSRange) *NSOrthography {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelOrthographyAtIndexEffectiveRange, charIndex, effectiveRange)
@@ -93,28 +100,33 @@ func (o *NSLinguisticTagger) OrthographyAtIndexEffectiveRange(charIndex uint, ef
 	return NSOrthographyFromID(_ret)
 }
 
+// Notifies the linguistic tagger that the string (if mutable) has changed as specified by the parameters.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) StringEditedInRangeChangeInLength(newRange NSRange, delta int) {
 	o.Ptr().Send(_nSLinguisticTaggerSelStringEditedInRangeChangeInLength, newRange, delta)
 }
 
+// Returns the range of the linguistic unit containing the specified character index.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) TokenRangeAtIndexUnit(charIndex uint, unit NSLinguisticTaggerUnit) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSLinguisticTaggerSelTokenRangeAtIndexUnit, charIndex, unit)
 	return _ret
 }
 
+// Returns the range of a sentence containing the specified range.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) SentenceRangeForRange(range_ NSRange) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSLinguisticTaggerSelSentenceRangeForRange, range_)
 	return _ret
 }
 
+// Enumerates over a given range of the string for a particular unit and calls the specified block for each tag.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ NSRange, unit NSLinguisticTaggerUnit, scheme *NSString, options NSLinguisticTaggerOptions, block objc.Block) {
 	o.Ptr().Send(_nSLinguisticTaggerSelEnumerateTagsInRangeUnitSchemeOptionsUsing, range_, unit, scheme.Ptr(), options, block)
 }
 
+// Returns a tag for a single scheme, for a given linguistic unit, at the specified character position.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) TagAtIndexUnitSchemeTokenRange(charIndex uint, unit NSLinguisticTaggerUnit, scheme *NSString, tokenRange *NSRange) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelTagAtIndexUnitSchemeTokenRange, charIndex, unit, scheme.Ptr(), tokenRange)
@@ -124,6 +136,7 @@ func (o *NSLinguisticTagger) TagAtIndexUnitSchemeTokenRange(charIndex uint, unit
 	return NSStringFromID(_ret)
 }
 
+// Returns an array of linguistic tags and token ranges for a given string range and linguistic unit.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ NSRange, unit NSLinguisticTaggerUnit, scheme *NSString, options NSLinguisticTaggerOptions, tokenRanges *NSArray[*NSValue]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelTagsInRangeUnitSchemeOptionsTokenRanges, range_, unit, scheme.Ptr(), options, tokenRanges.Ptr())
@@ -133,11 +146,13 @@ func (o *NSLinguisticTagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ NSRa
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Enumerates over a given range of the string and calls the specified block for each tag.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) EnumerateTagsInRangeSchemeOptionsUsing(range_ NSRange, tagScheme *NSString, opts NSLinguisticTaggerOptions, block objc.Block) {
 	o.Ptr().Send(_nSLinguisticTaggerSelEnumerateTagsInRangeSchemeOptionsUsing, range_, tagScheme.Ptr(), opts, block)
 }
 
+// Returns a tag for a single scheme at the specified character position.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) TagAtIndexSchemeTokenRangeSentenceRange(charIndex uint, scheme *NSString, tokenRange *NSRange, sentenceRange *NSRange) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelTagAtIndexSchemeTokenRangeSentenceRange, charIndex, scheme.Ptr(), tokenRange, sentenceRange)
@@ -147,6 +162,7 @@ func (o *NSLinguisticTagger) TagAtIndexSchemeTokenRangeSentenceRange(charIndex u
 	return NSStringFromID(_ret)
 }
 
+// Returns an array of linguistic tags and token ranges for a given string range.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) TagsInRangeSchemeOptionsTokenRanges(range_ NSRange, tagScheme *NSString, opts NSLinguisticTaggerOptions, tokenRanges *NSArray[*NSValue]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelTagsInRangeSchemeOptionsTokenRanges, range_, tagScheme.Ptr(), opts, tokenRanges.Ptr())
@@ -156,6 +172,7 @@ func (o *NSLinguisticTagger) TagsInRangeSchemeOptionsTokenRanges(range_ NSRange,
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Returns the dominant language for the specified string.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTaggerDominantLanguageForString(string_ *NSString) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLinguisticTagger), _nSLinguisticTaggerSelDominantLanguageForString, string_.Ptr())
@@ -165,6 +182,7 @@ func NSLinguisticTaggerDominantLanguageForString(string_ *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns a tag for a single scheme, for a given linguistic unit, at the specified character position in a string.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTaggerTagForStringAtIndexUnitSchemeOrthographyTokenRange(string_ *NSString, charIndex uint, unit NSLinguisticTaggerUnit, scheme *NSString, orthography *NSOrthography, tokenRange *NSRange) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLinguisticTagger), _nSLinguisticTaggerSelTagForStringAtIndexUnitSchemeOrthographyTokenRange, string_.Ptr(), charIndex, unit, scheme.Ptr(), orthography.Ptr(), tokenRange)
@@ -174,6 +192,7 @@ func NSLinguisticTaggerTagForStringAtIndexUnitSchemeOrthographyTokenRange(string
 	return NSStringFromID(_ret)
 }
 
+// Returns an array of linguistic tags and token ranges for a given string and linguistic unit.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTaggerTagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges(string_ *NSString, range_ NSRange, unit NSLinguisticTaggerUnit, scheme *NSString, options NSLinguisticTaggerOptions, orthography *NSOrthography, tokenRanges *NSArray[*NSValue]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSLinguisticTagger), _nSLinguisticTaggerSelTagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges, string_.Ptr(), range_, unit, scheme.Ptr(), options, orthography.Ptr(), tokenRanges.Ptr())
@@ -183,11 +202,13 @@ func NSLinguisticTaggerTagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges
 	return NSArrayFromID[*NSString](_ret)
 }
 
+// Enumerates over a given string and calls the specified block for each tag.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTaggerEnumerateTagsForStringRangeUnitSchemeOptionsOrthographyUsing(string_ *NSString, range_ NSRange, unit NSLinguisticTaggerUnit, scheme *NSString, options NSLinguisticTaggerOptions, orthography *NSOrthography, block objc.Block) {
 	objc.ID(_clsNSLinguisticTagger).Send(_nSLinguisticTaggerSelEnumerateTagsForStringRangeUnitSchemeOptionsOrthographyUsing, string_.Ptr(), range_, unit, scheme.Ptr(), options, orthography.Ptr(), block)
 }
 
+// Returns an array of possible tags for the given scheme at the specified range, supplying matching scores.
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func (o *NSLinguisticTagger) PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex uint, tagScheme *NSString, tokenRange *NSRange, sentenceRange *NSRange, scores *NSArray[*NSValue]) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLinguisticTaggerSelPossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores, charIndex, tagScheme.Ptr(), tokenRange, sentenceRange, scores.Ptr())

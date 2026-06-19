@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Surface characteristics that determine the acoustic properties of an object.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phasematerial
 type PHASEMaterial struct {
 	foundation.NSObject
@@ -30,7 +32,7 @@ func PHASEMaterialFromID(id objc.ID) *PHASEMaterial {
 	return o
 }
 
-// @method initWithEngine:preset @abstract Initialize a new material from a preset.
+// Creates a material with the given preset.
 func (o *PHASEMaterial) InitWithEnginePreset(engine *PHASEEngine, preset PHASEMaterialPreset) *PHASEMaterial {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEMaterialSelInitWithEnginePreset, engine.Ptr(), preset)
 	if _ret != 0 {

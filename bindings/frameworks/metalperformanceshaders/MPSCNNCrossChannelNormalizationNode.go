@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a normalization kernel across feature channels.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnncrosschannelnormalizationnode
 type MPSCNNCrossChannelNormalizationNode struct {
 	mpsneuralnetwork.MPSCNNNormalizationNode

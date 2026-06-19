@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about the thumbnail that the thumbnail generator returns.
+//
 // Apple documentation: https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailrepresentation
 type QLThumbnailRepresentation struct {
 	foundation.NSObject

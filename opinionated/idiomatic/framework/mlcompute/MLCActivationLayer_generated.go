@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A layer that applies an activation function to the source tensor and produces an output.
+//
 // ActivationLayer wraps [raw.MLCActivationLayer] with a fluent Go API.
 type ActivationLayer struct {
 	inner *raw.MLCActivationLayer
@@ -36,7 +38,7 @@ func NewActivationLayer() *ActivationLayer {
 	return &ActivationLayer{inner: raw.MLCActivationLayerFromID(_id)}
 }
 
-// @property   label @abstract   A string to help identify this object.
+// A string that helps identify this layer.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ActivationLayer) WithLabel(label string) *ActivationLayer {
@@ -44,7 +46,7 @@ func (x *ActivationLayer) WithLabel(label string) *ActivationLayer {
 	return x
 }
 
-// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 //
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *ActivationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ActivationLayer {

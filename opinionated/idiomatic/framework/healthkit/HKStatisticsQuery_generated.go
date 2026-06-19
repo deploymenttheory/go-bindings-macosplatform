@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A query that performs statistical calculations over a set of matching quantity samples, and returns the results.
+//
 // StatisticsQuery wraps [raw.HKStatisticsQuery] with a fluent Go API.
 type StatisticsQuery struct {
 	inner *raw.HKStatisticsQuery
@@ -31,6 +33,8 @@ func StatisticsQueryFromID(id objc.ID) *StatisticsQuery {
 	return &StatisticsQuery{inner: raw.HKStatisticsQueryFromID(id)}
 }
 
+// Initializes a statistics query instance that performs the specified calculations over the matching samples in the HeathKit store.
+//
 // NewStatisticsQueryWithQuantityTypeQuantitySamplePredicateOptionsCompletionHandler creates a new [StatisticsQuery].
 func NewStatisticsQueryWithQuantityTypeQuantitySamplePredicateOptionsCompletionHandler(quantityType *raw.HKQuantityType, quantitySamplePredicate *foundation.NSPredicate, options HKStatisticsOptions, handler func(*raw.HKStatisticsQuery, *raw.HKStatistics, unsafe.Pointer)) *StatisticsQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKStatisticsQuery")), objc.RegisterName("alloc"))

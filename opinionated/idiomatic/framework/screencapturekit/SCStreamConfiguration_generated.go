@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An instance that provides the output configuration for a stream.
+//
 // StreamConfiguration wraps [raw.SCStreamConfiguration] with a fluent Go API.
 type StreamConfiguration struct {
 	inner *raw.SCStreamConfiguration
@@ -40,7 +42,7 @@ func NewStreamConfiguration() *StreamConfiguration {
 	return &StreamConfiguration{inner: raw.SCStreamConfigurationFromID(_id)}
 }
 
-// @abstract SCStreamProperty for output width as measured in pixels. Default is set to 1920.
+// The width of the output.
 //
 // WithWidth sets the width property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithWidth(width uint) *StreamConfiguration {
@@ -48,7 +50,7 @@ func (x *StreamConfiguration) WithWidth(width uint) *StreamConfiguration {
 	return x
 }
 
-// @abstract SCStreamProperty for output height as measured in pixels. Default is set to 1080.
+// The height of the output.
 //
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithHeight(height uint) *StreamConfiguration {
@@ -56,7 +58,7 @@ func (x *StreamConfiguration) WithHeight(height uint) *StreamConfiguration {
 	return x
 }
 
-// @abstract SCStreamProperty that specifies the desired minimum time in seconds between frame updates, allowing you to throttle the rate at which updates are received. The default value is 1/60, meaning that updates are coming in at or up to 60fps. Set this to kCMTimeZero to capture at display's native refresh rate.
+// The desired minimum time between frame updates, in seconds.
 //
 // WithMinimumFrameInterval sets the minimumFrameInterval property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithMinimumFrameInterval(minimumFrameInterval coremedia.CMTime) *StreamConfiguration {
@@ -64,7 +66,7 @@ func (x *StreamConfiguration) WithMinimumFrameInterval(minimumFrameInterval core
 	return x
 }
 
-// @abstract SCStreamProperty for output pixel format. Supported pixel formats are: 'BGRA': Packed Little Endian ARGB8888 'l10r': Packed Little Endian ARGB2101010 '420v': 2-plane "video" range YCbCr 4:2:0 '420f': 2-plane "full" range YCbCr 4:2:0 'xf44': 2 plane "full" range YCbCr10 4:4:4 'RGhA': 64 bit RGBA IEEE half-precision float, 16-bit little-endian See https://developer.apple.com/documentation/coregraphics/1455170-cgdisplaystreamcreate
+// A pixel format for sample buffers that a stream outputs.
 //
 // WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithPixelFormat(pixelFormat uint) *StreamConfiguration {
@@ -72,7 +74,7 @@ func (x *StreamConfiguration) WithPixelFormat(pixelFormat uint) *StreamConfigura
 	return x
 }
 
-// @abstract SCStreamProperty for output to be always scaled to fit into the provided width and height. For use for independent window capture. When true, the output scales up and down. When false, the output only scales down.
+// A Boolean value that indicates whether to scale the output to fit the configured width and height.
 //
 // WithScalesToFit sets the scalesToFit property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithScalesToFit(scalesToFit bool) *StreamConfiguration {
@@ -80,7 +82,7 @@ func (x *StreamConfiguration) WithScalesToFit(scalesToFit bool) *StreamConfigura
 	return x
 }
 
-// @abstract SCStreamProperty that specifies whether the  stream preserves the aspect ratio of the source pixel data. By default the aspect ratio is preserved.
+// A Boolean value that determines if the stream preserves aspect ratio.
 //
 // WithPreservesAspectRatio sets the preservesAspectRatio property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithPreservesAspectRatio(preservesAspectRatio bool) *StreamConfiguration {
@@ -88,7 +90,7 @@ func (x *StreamConfiguration) WithPreservesAspectRatio(preservesAspectRatio bool
 	return x
 }
 
-// @abstract SCStreamProperty the name of the stream
+// A name that you provide for identifying the stream.
 //
 // WithStreamName sets the streamName property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithStreamName(streamName string) *StreamConfiguration {
@@ -96,7 +98,7 @@ func (x *StreamConfiguration) WithStreamName(streamName string) *StreamConfigura
 	return x
 }
 
-// @abstract SCStreamProperty that specifies whether the cursor should appear in the stream.  By default the cursor is visible.
+// A Boolean value that determines whether the cursor is visible in the stream.
 //
 // WithShowsCursor sets the showsCursor property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithShowsCursor(showsCursor bool) *StreamConfiguration {
@@ -112,7 +114,7 @@ func (x *StreamConfiguration) WithShowMouseClicks(showMouseClicks bool) *StreamC
 	return x
 }
 
-// @abstract SCStreamProperty that specifies that the stream only samples a subset of the frame input. For display streams, if not set, then the entire display is streamed. For independent window streams, if not set, then the entire window is streamed. The rectangle is specified in points in the display’s logical coordinate system.
+// A rectangle that specifies the source area to capture.
 //
 // WithSourceRect sets the sourceRect property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithSourceRect(sourceRect corefoundation.CGRect) *StreamConfiguration {
@@ -120,7 +122,7 @@ func (x *StreamConfiguration) WithSourceRect(sourceRect corefoundation.CGRect) *
 	return x
 }
 
-// @abstract SCStreamProperty that specifies that the stream outputs the frame data into a subset of the output IOSurface object. For both display streams and independent window streams, if not set, then the entire output surface is used. The rectangle is specified in pixels in the display's coordinate system.
+// A rectangle that specifies a destination into which to write the output.
 //
 // WithDestinationRect sets the destinationRect property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithDestinationRect(destinationRect corefoundation.CGRect) *StreamConfiguration {
@@ -128,7 +130,7 @@ func (x *StreamConfiguration) WithDestinationRect(destinationRect corefoundation
 	return x
 }
 
-// @abstract SCStreamProperty that specifies the number of frames to keep in the queue.  If not set the default value is 8 frames.  Specifying more frames uses more memory, but may allow you to process frame data without stalling the display stream and should not exceed 8 frames.
+// The maximum number of frames for the queue to store.
 //
 // WithQueueDepth sets the queueDepth property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithQueueDepth(queueDepth int) *StreamConfiguration {
@@ -136,7 +138,7 @@ func (x *StreamConfiguration) WithQueueDepth(queueDepth int) *StreamConfiguratio
 	return x
 }
 
-// @abstract SCStreamProperty that specifies whether the audio will be captured.  By default audio is not captured.
+// A Boolean value that indicates whether to capture audio.
 //
 // WithCapturesAudio sets the capturesAudio property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithCapturesAudio(capturesAudio bool) *StreamConfiguration {
@@ -144,7 +146,7 @@ func (x *StreamConfiguration) WithCapturesAudio(capturesAudio bool) *StreamConfi
 	return x
 }
 
-// @abstract SCStreamProperty to specify the sample rate for audio. Default is set to 48000.
+// The sample rate for audio capture.
 //
 // WithSampleRate sets the sampleRate property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithSampleRate(sampleRate int) *StreamConfiguration {
@@ -152,7 +154,7 @@ func (x *StreamConfiguration) WithSampleRate(sampleRate int) *StreamConfiguratio
 	return x
 }
 
-// @abstract SCStreamProperty to specify channel count. Default is set to two.
+// The number of audio channels to capture.
 //
 // WithChannelCount sets the channelCount property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithChannelCount(channelCount int) *StreamConfiguration {
@@ -160,7 +162,7 @@ func (x *StreamConfiguration) WithChannelCount(channelCount int) *StreamConfigur
 	return x
 }
 
-// @abstract SCAudioProperty whether to exclude audio from current process. Default is set to NO.
+// A Boolean value that indicates whether to exclude audio from your app during capture.
 //
 // WithExcludesCurrentProcessAudio sets the excludesCurrentProcessAudio property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithExcludesCurrentProcessAudio(excludesCurrentProcessAudio bool) *StreamConfiguration {
@@ -168,7 +170,7 @@ func (x *StreamConfiguration) WithExcludesCurrentProcessAudio(excludesCurrentPro
 	return x
 }
 
-// @abstract SCStreamProperty to ignore framing on windows in the display sharing case (will ignore shadows).
+// A Boolean value that indicates if the stream ignores the capturing of window shadows when streaming in display style.
 //
 // WithIgnoreShadowsDisplay sets the ignoreShadowsDisplay property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithIgnoreShadowsDisplay(ignoreShadowsDisplay bool) *StreamConfiguration {
@@ -176,7 +178,7 @@ func (x *StreamConfiguration) WithIgnoreShadowsDisplay(ignoreShadowsDisplay bool
 	return x
 }
 
-// @abstract SCStreamProperty to ignore framing on windows in the single window sharing case (will ignore shadows).
+// A Boolean value that indicates if the stream ignores the capturing of window shadows when streaming in window style.
 //
 // WithIgnoreShadowsSingleWindow sets the ignoreShadowsSingleWindow property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithIgnoreShadowsSingleWindow(ignoreShadowsSingleWindow bool) *StreamConfiguration {
@@ -184,7 +186,7 @@ func (x *StreamConfiguration) WithIgnoreShadowsSingleWindow(ignoreShadowsSingleW
 	return x
 }
 
-// @abstract captureResolution Choose between automatic, best, and nominal.
+// The resolution at which to capture source content.
 //
 // WithCaptureResolution sets the captureResolution property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithCaptureResolution(captureResolution SCCaptureResolutionType) *StreamConfiguration {
@@ -192,7 +194,7 @@ func (x *StreamConfiguration) WithCaptureResolution(captureResolution SCCaptureR
 	return x
 }
 
-// @abstract SCStreamProperty to capture only the shadows of windows.
+// A Boolean value that indicates if the stream only captures shadows.
 //
 // WithCapturesShadowsOnly sets the capturesShadowsOnly property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithCapturesShadowsOnly(capturesShadowsOnly bool) *StreamConfiguration {
@@ -200,7 +202,7 @@ func (x *StreamConfiguration) WithCapturesShadowsOnly(capturesShadowsOnly bool) 
 	return x
 }
 
-// @abstract SCStreamProperty to ensure partially transparent areas on windows are backed by a solid white color so that the resulting image is fully opaque.
+// A Boolean value that indicates if semitransparent content presents as opaque.
 //
 // WithShouldBeOpaque sets the shouldBeOpaque property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithShouldBeOpaque(shouldBeOpaque bool) *StreamConfiguration {
@@ -208,7 +210,7 @@ func (x *StreamConfiguration) WithShouldBeOpaque(shouldBeOpaque bool) *StreamCon
 	return x
 }
 
-// @abstract SCStreamProperty to ignore framing on windows in the display sharing case (will ignore shadows).
+// A Boolean value that indicates if the stream ignores content clipped past the edge of a display, when streaming in display style.
 //
 // WithIgnoreGlobalClipDisplay sets the ignoreGlobalClipDisplay property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithIgnoreGlobalClipDisplay(ignoreGlobalClipDisplay bool) *StreamConfiguration {
@@ -216,7 +218,7 @@ func (x *StreamConfiguration) WithIgnoreGlobalClipDisplay(ignoreGlobalClipDispla
 	return x
 }
 
-// @abstract SCStreamProperty to ignore global clipping when on single window share. When set to true, single window captures that are partially off the screen will not be clipped. (will ignore window placement in display context).
+// A Boolean value that indicates if the stream ignores content clipped past the edge of a display, when streaming in window style.
 //
 // WithIgnoreGlobalClipSingleWindow sets the ignoreGlobalClipSingleWindow property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithIgnoreGlobalClipSingleWindow(ignoreGlobalClipSingleWindow bool) *StreamConfiguration {
@@ -224,7 +226,7 @@ func (x *StreamConfiguration) WithIgnoreGlobalClipSingleWindow(ignoreGlobalClipS
 	return x
 }
 
-// @abstract SCStreamProperty that informs the system if a privacy alert should be shown when using presenter overlay for a stream. Defaults to SCPresenterOverlayAlertSettingSystem;
+// A value indicating if alerts appear to presenters while using Presenter Overlay.
 //
 // WithPresenterOverlayPrivacyAlertSetting sets the presenterOverlayPrivacyAlertSetting property and returns the receiver for chaining.
 func (x *StreamConfiguration) WithPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting SCPresenterOverlayAlertSetting) *StreamConfiguration {

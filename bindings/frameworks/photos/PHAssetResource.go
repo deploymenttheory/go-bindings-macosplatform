@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An underlying data resource associated with a photo, video, or Live Photo asset in the Photos library.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phassetresource
 type PHAssetResource struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func PHAssetResourceFromID(id objc.ID) *PHAssetResource {
 	return o
 }
 
+// Returns the list of data resources associated with an asset.
 func PHAssetResourceAssetResourcesForAsset(asset *PHAsset) *foundation.NSArray[*PHAssetResource] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetResource), _pHAssetResourceSelAssetResourcesForAsset, asset.Ptr())
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func PHAssetResourceAssetResourcesForAsset(asset *PHAsset) *foundation.NSArray[*
 	return foundation.NSArrayFromID[*PHAssetResource](_ret)
 }
 
+// Returns the list of data resources associated with a Live Photo object.
 func PHAssetResourceAssetResourcesForLivePhoto(livePhoto *PHLivePhoto) *foundation.NSArray[*PHAssetResource] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetResource), _pHAssetResourceSelAssetResourcesForLivePhoto, livePhoto.Ptr())
 	if _ret != 0 {

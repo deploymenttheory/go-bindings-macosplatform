@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that finds the maximum pixel value in a rectangular region by applying a dilation function.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagedilate
 type MPSImageDilate struct {
 	mpsimage.MPSUnaryImageKernel
@@ -35,7 +37,7 @@ func MPSImageDilateFromID(id objc.ID) *MPSImageDilate {
 	return o
 }
 
-// @abstract   Init a object with kernel height, width and weight values. @discussion Each dilate shape probe defines a 3D surface of values. These are arranged in order left to right, then top to bottom in a 1D array. (values[kernelWidth*y+x] = probe[y][x]) Values should be generally be in the range [0,1] with the center pixel tending towards 0 and edges towards 1. However, any numerical value is allowed. Calculations are subject to the usual floating-point rounding error. @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel. Must be an odd number. @param      kernelHeight        The height of the kernel. Must be an odd number. @param      values              The set of values to use as the dilate probe. The values are copied into the filter. To avoid image ligthening or darkening, the center value should be 0.0f.
+// Initializes the kernel with a specified width, height, and weight values.
 func (o *MPSImageDilate) InitWithDeviceKernelWidthKernelHeightValues(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, values *float32) *MPSImageDilate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageDilateSelInitWithDeviceKernelWidthKernelHeightValues, device, kernelWidth, kernelHeight, values)
 	if _ret != 0 {

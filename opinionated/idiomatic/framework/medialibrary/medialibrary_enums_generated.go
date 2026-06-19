@@ -8,11 +8,15 @@ import (
 	"fmt"
 )
 
+// Specifies the media type associated with a particular media object. These constants are used to specify a media object’s mediaType attribute.
 type MLMediaType uint64
 
 const (
+	// Audio media type.
 	MLMediaTypeAudio MLMediaType = 1
+	// Image media type.
 	MLMediaTypeImage MLMediaType = 2
+	// Video media type.
 	MLMediaTypeMovie MLMediaType = 4
 )
 

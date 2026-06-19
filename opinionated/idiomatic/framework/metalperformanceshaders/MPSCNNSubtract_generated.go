@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A subtraction operator.
+//
 // CNNSubtract wraps [raw.MPSCNNSubtract] with a fluent Go API.
 type CNNSubtract struct {
 	inner *raw.MPSCNNSubtract
@@ -220,7 +222,7 @@ func (x *CNNSubtract) WithDestinationImageAllocator(destinationImageAllocator mp
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNSubtract) WithOptions(options mpscore.MPSKernelOptions) *CNNSubtract {
@@ -228,7 +230,7 @@ func (x *CNNSubtract) WithOptions(options mpscore.MPSKernelOptions) *CNNSubtract
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNSubtract) WithLabel(label string) *CNNSubtract {

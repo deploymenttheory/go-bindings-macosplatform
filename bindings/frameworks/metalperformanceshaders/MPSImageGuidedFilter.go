@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that performs edge-aware filtering on an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimageguidedfilter
 type MPSImageGuidedFilter struct {
 	mpscore.MPSKernel

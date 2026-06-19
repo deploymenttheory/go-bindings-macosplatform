@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An alternate resolution for a geometry that SceneKit automatically substitutes to improve rendering performance.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnlevelofdetail
 type SCNLevelOfDetail struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func SCNLevelOfDetailFromID(id objc.ID) *SCNLevelOfDetail {
 	return o
 }
 
-// @method levelOfDetailWithGeometry:screenSpaceRadius: @abstract This is a convenience method to create a level of detail with a coverage radius threshold mode. @param geometry The geometry for this level of detail. nil is supported and indicates that no geometry should be rendered for this level of detail. @param radius The maximum radius in screen-space that this level of detail is suitable for. The coverage radius is calculated from the projected bounding sphere and expressed in pixels.
+// Creates a level of detail with the specified geometry and threshold pixel radius.
 func SCNLevelOfDetailLevelOfDetailWithGeometryScreenSpaceRadius(geometry *SCNGeometry, radius float64) *SCNLevelOfDetail {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNLevelOfDetail), _sCNLevelOfDetailSelLevelOfDetailWithGeometryScreenSpaceRadius, geometry.Ptr(), radius)
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func SCNLevelOfDetailLevelOfDetailWithGeometryScreenSpaceRadius(geometry *SCNGeo
 	return SCNLevelOfDetailFromID(_ret)
 }
 
-// @method levelOfDetailWithGeometry:worldSpaceDistance: @abstract This is a convenience method to create a level of detail with a distance threshold mode. @param geometry The geometry for this level of detail. nil is supported and indicates that no geometry should be rendered for this level of detail. @param distance The minimum distance to the current point of view that this level of detail is suitable for.
+// Creates a level of detail with the specified geometry and threshold camera distance.
 func SCNLevelOfDetailLevelOfDetailWithGeometryWorldSpaceDistance(geometry *SCNGeometry, distance float64) *SCNLevelOfDetail {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNLevelOfDetail), _sCNLevelOfDetailSelLevelOfDetailWithGeometryWorldSpaceDistance, geometry.Ptr(), distance)
 	if _ret != 0 {

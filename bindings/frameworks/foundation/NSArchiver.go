@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A coder that stores an object’s data to an archive.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsarchiver
 // Deprecated: Use NSKeyedArchiver instead
 type NSArchiver struct {
@@ -36,6 +38,7 @@ func NSArchiverFromID(id objc.ID) *NSArchiver {
 	return o
 }
 
+// Returns an archiver, initialized to encode stream and version information into a given mutable data object.
 func (o *NSArchiver) InitForWritingWithMutableData(mdata *NSMutableData) *NSArchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArchiverSelInitForWritingWithMutableData, mdata.Ptr())
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func (o *NSArchiver) InitForWritingWithMutableData(mdata *NSMutableData) *NSArch
 	return NSArchiverFromID(_ret)
 }
 
+// Returns a data object containing the encoded form of the object graph whose root object is given.
 func NSArchiverArchivedDataWithRootObject(rootObject objc.ID) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSArchiver), _nSArchiverSelArchivedDataWithRootObject, rootObject)
 	if _ret != 0 {
@@ -52,15 +56,18 @@ func NSArchiverArchivedDataWithRootObject(rootObject objc.ID) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Creates a temporary instance of NSArchiver and archives an object graph by encoding it into a data object and writing the resulting data object to a specified file.
 func NSArchiverArchiveRootObjectToFile(rootObject objc.ID, path *NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSArchiver), _nSArchiverSelArchiveRootObjectToFile, rootObject, path.Ptr())
 	return _ret
 }
 
+// Encodes a substitute name for the class with a given true name.
 func (o *NSArchiver) EncodeClassNameIntoClassName(trueName *NSString, inArchiveName *NSString) {
 	o.Ptr().Send(_nSArchiverSelEncodeClassNameIntoClassName, trueName.Ptr(), inArchiveName.Ptr())
 }
 
+// Returns the name of the class used to archive instances of the class with a given true name.
 func (o *NSArchiver) ClassNameEncodedForTrueClassName(trueName *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSArchiverSelClassNameEncodedForTrueClassName, trueName.Ptr())
 	if _ret != 0 {
@@ -69,6 +76,7 @@ func (o *NSArchiver) ClassNameEncodedForTrueClassName(trueName *NSString) *NSStr
 	return NSStringFromID(_ret)
 }
 
+// Causes the receiver to treat subsequent requests to encode a given object as though they were requests to encode another given object.
 func (o *NSArchiver) ReplaceObjectWithObject(object objc.ID, newObject objc.ID) {
 	o.Ptr().Send(_nSArchiverSelReplaceObjectWithObject, object, newObject)
 }

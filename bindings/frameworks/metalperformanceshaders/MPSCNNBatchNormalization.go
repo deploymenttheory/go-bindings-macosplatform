@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A batch normalization kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbatchnormalization
 type MPSCNNBatchNormalization struct {
 	mpsneuralnetwork.MPSCNNKernel
@@ -88,7 +90,7 @@ func (o *MPSCNNBatchNormalization) EncodeBatchToCommandBufferSourceImagesBatchNo
 
 // @abstract       Return a temporary MPSCNNBatchNormalizationState object which may be used with a MPSCNNBatchNormalization filter.
 func (o *MPSCNNBatchNormalization) TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNBatchNormalizationState {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBatchNormalizationSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage.Ptr(), sourceStates, destinationImage.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBatchNormalizationSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage.Ptr(), sourceStates.Ptr(), destinationImage.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

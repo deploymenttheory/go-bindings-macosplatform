@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains layout-related attributes for an element in a collection view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionviewlayoutattributes
 type NSCollectionViewLayoutAttributes struct {
 	foundation.NSObject
@@ -48,6 +50,7 @@ func NSCollectionViewLayoutAttributesFromID(id objc.ID) *NSCollectionViewLayoutA
 	return o
 }
 
+// Creates and returns a layout attributes object for the item at the specified index path.
 func NSCollectionViewLayoutAttributesLayoutAttributesForItemWithIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForItemWithIndexPath, indexPath.Ptr())
 	if _ret != 0 {
@@ -56,6 +59,7 @@ func NSCollectionViewLayoutAttributesLayoutAttributesForItemWithIndexPath(indexP
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
+// Creates and returns a layout attributes object for an inter-item gap view at the specified index path.
 func NSCollectionViewLayoutAttributesLayoutAttributesForInterItemGapBeforeIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForInterItemGapBeforeIndexPath, indexPath.Ptr())
 	if _ret != 0 {
@@ -64,6 +68,7 @@ func NSCollectionViewLayoutAttributesLayoutAttributesForInterItemGapBeforeIndexP
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
+// Creates and returns a layout attributes object for a supplementary view based on the specified information.
 func NSCollectionViewLayoutAttributesLayoutAttributesForSupplementaryViewOfKindWithIndexPath(elementKind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForSupplementaryViewOfKindWithIndexPath, elementKind.Ptr(), indexPath.Ptr())
 	if _ret != 0 {
@@ -72,6 +77,7 @@ func NSCollectionViewLayoutAttributesLayoutAttributesForSupplementaryViewOfKindW
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
+// Creates and returns a layout attributes object for a decoration view based on the specified information.
 func NSCollectionViewLayoutAttributesLayoutAttributesForDecorationViewOfKindWithIndexPath(decorationViewKind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForDecorationViewOfKindWithIndexPath, decorationViewKind.Ptr(), indexPath.Ptr())
 	if _ret != 0 {

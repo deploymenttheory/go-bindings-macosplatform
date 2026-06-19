@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides information about an imminent send of local changes.
+//
 // SyncEngineWillSendChangesEvent wraps [raw.CKSyncEngineWillSendChangesEvent] with a fluent Go API.
 type SyncEngineWillSendChangesEvent struct {
 	inner *raw.CKSyncEngineWillSendChangesEvent

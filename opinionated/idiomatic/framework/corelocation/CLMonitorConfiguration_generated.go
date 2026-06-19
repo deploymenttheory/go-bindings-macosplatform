@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object for configuring a location monitor instance.
+//
 // MonitorConfiguration wraps [raw.CLMonitorConfiguration] with a fluent Go API.
 type MonitorConfiguration struct {
 	inner *raw.CLMonitorConfiguration

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A convenient interface to the garbage collection system.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsgarbagecollector
 // Deprecated: Building Garbage Collected apps is no longer supported.
 type NSGarbageCollector struct {
@@ -41,49 +43,59 @@ func NSGarbageCollectorFromID(id objc.ID) *NSGarbageCollector {
 	return o
 }
 
+// Returns the default garbage collector.
 func NSGarbageCollectorDefaultCollector() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGarbageCollector), _nSGarbageCollectorSelDefaultCollector)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether a collection is currently in progress.
 // Deprecated: since macOS 10.6.
 func (o *NSGarbageCollector) IsCollecting() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSGarbageCollectorSelIsCollecting)
 	return _ret
 }
 
+// Temporarily disables collections.
 // Deprecated: since macOS 10.6.
 func (o *NSGarbageCollector) Disable() {
 	o.Ptr().Send(_nSGarbageCollectorSelDisable)
 }
 
+// Enables collection after collection has been disabled.
 // Deprecated: since macOS 10.6.
 func (o *NSGarbageCollector) Enable() {
 	o.Ptr().Send(_nSGarbageCollectorSelEnable)
 }
 
+// Returns a Boolean value that indicates whether garbage collection is currently enabled for the current process.
 // Deprecated: since macOS 10.6.
 func (o *NSGarbageCollector) IsEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSGarbageCollectorSelIsEnabled)
 	return _ret
 }
 
+// Tells the receiver to collect if memory consumption thresholds have been exceeded.
 func (o *NSGarbageCollector) CollectIfNeeded() {
 	o.Ptr().Send(_nSGarbageCollectorSelCollectIfNeeded)
 }
 
+// Tells the receiver to collect iteratively.
 func (o *NSGarbageCollector) CollectExhaustively() {
 	o.Ptr().Send(_nSGarbageCollectorSelCollectExhaustively)
 }
 
+// Specifies that a given pointer will not be collected.
 func (o *NSGarbageCollector) DisableCollectorForPointer(ptr unsafe.Pointer) {
 	o.Ptr().Send(_nSGarbageCollectorSelDisableCollectorForPointer, ptr)
 }
 
+// Specifies that a given pointer may be collected.
 func (o *NSGarbageCollector) EnableCollectorForPointer(ptr unsafe.Pointer) {
 	o.Ptr().Send(_nSGarbageCollectorSelEnableCollectorForPointer, ptr)
 }
 
+// Returns a zone of unscanned memory.
 func (o *NSGarbageCollector) Zone() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSGarbageCollectorSelZone)
 	return _ret

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the local identifiers that change between requests using a change token.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phpersistentobjectchangedetails
 type PHPersistentObjectChangeDetails struct {
 	foundation.NSObject
@@ -39,16 +41,25 @@ func (o *PHPersistentObjectChangeDetails) ObjectType() PHObjectType {
 }
 
 func (o *PHPersistentObjectChangeDetails) InsertedLocalIdentifiers() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _pHPersistentObjectChangeDetailsSelInsertedLocalIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHPersistentObjectChangeDetailsSelInsertedLocalIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 func (o *PHPersistentObjectChangeDetails) UpdatedLocalIdentifiers() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _pHPersistentObjectChangeDetailsSelUpdatedLocalIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHPersistentObjectChangeDetailsSelUpdatedLocalIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 func (o *PHPersistentObjectChangeDetails) DeletedLocalIdentifiers() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _pHPersistentObjectChangeDetailsSelDeletedLocalIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pHPersistentObjectChangeDetailsSelDeletedLocalIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }

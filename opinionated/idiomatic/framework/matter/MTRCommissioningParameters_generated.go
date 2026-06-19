@@ -118,7 +118,7 @@ func (x *MTRCommissioningParameters) WithReadEndpointInformation(readEndpointInf
 	return x
 }
 
-// List of attribute paths to read from the commissionee (in addition to whatever attributes are already read to handle readEndpointInformation being YES, or to handle other commissioning tasks). The FeatureMap attribute of all Network Commissioning clusters on the commissionee will always be read and does not need to be included in this list.
+// List of attribute paths to read from the commissionee (in addition to whatever attributes are already read to handle readEndpointInformation being YES, or to handle other commissioning tasks).
 //
 // WithExtraAttributesToRead sets the collection, converting the Go slice to an NSArray.
 func (x *MTRCommissioningParameters) WithExtraAttributesToRead(items ...*raw.MTRAttributeRequestPath) *MTRCommissioningParameters {
@@ -141,7 +141,7 @@ func (x *MTRCommissioningParameters) WithExtraAttributesToRead(items ...*raw.MTR
 	return x
 }
 
-// Whether to force a network scan before requesting Wi-Fi credentials. The default is NO. Even if this value is NO a scan may still be performed. This value will be ignored if Wi-Fi credentials are provided or not needed. NOTE: Not all APIs that take MTRCommissioningParameters pay attention to this flag.
+// Whether to force a network scan before requesting Wi-Fi credentials. The default is NO.
 //
 // WithForceWiFiScan sets the forceWiFiScan property and returns the receiver for chaining.
 func (x *MTRCommissioningParameters) WithForceWiFiScan(forceWiFiScan bool) *MTRCommissioningParameters {
@@ -149,7 +149,7 @@ func (x *MTRCommissioningParameters) WithForceWiFiScan(forceWiFiScan bool) *MTRC
 	return x
 }
 
-// Whether to force a network scan before requesting Thread credentials. The default is NO. Even if this value is NO a scan may still be performed. This value will be ignored if a Thread operational dataset is provided or not needed. NOTE: Not all APIs that take MTRCommissioningParameters pay attention to this flag.
+// Whether to force a network scan before requesting Thread credentials. The default is NO.
 //
 // WithForceThreadScan sets the forceThreadScan property and returns the receiver for chaining.
 func (x *MTRCommissioningParameters) WithForceThreadScan(forceThreadScan bool) *MTRCommissioningParameters {

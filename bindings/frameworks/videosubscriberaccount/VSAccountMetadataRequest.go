@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that specifies what subscriber account information your app retrieves.
+//
 // Apple documentation: https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadatarequest
 type VSAccountMetadataRequest struct {
 	foundation.NSObject
@@ -70,23 +72,29 @@ func (o *VSAccountMetadataRequest) SetChannelIdentifier(channelIdentifier *found
 
 // If non-empty, limits which account providers can respond to the request.
 func (o *VSAccountMetadataRequest) SupportedAccountProviderIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vSAccountMetadataRequestSelSupportedAccountProviderIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountMetadataRequestSelSupportedAccountProviderIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *VSAccountMetadataRequest) SetSupportedAccountProviderIdentifiers(supportedAccountProviderIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_vSAccountMetadataRequestSelSetSupportedAccountProviderIdentifiers, supportedAccountProviderIdentifiers)
+	o.Ptr().Send(_vSAccountMetadataRequestSelSetSupportedAccountProviderIdentifiers, supportedAccountProviderIdentifiers.Ptr())
 }
 
 // If non-empty, specifies providers which may be given more prominent placement when choosing an account provider during authentication.
 func (o *VSAccountMetadataRequest) FeaturedAccountProviderIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vSAccountMetadataRequestSelFeaturedAccountProviderIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountMetadataRequestSelFeaturedAccountProviderIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // If non-empty, specifies providers which may be given more prominent placement when choosing an account provider during authentication.
 func (o *VSAccountMetadataRequest) SetFeaturedAccountProviderIdentifiers(featuredAccountProviderIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_vSAccountMetadataRequestSelSetFeaturedAccountProviderIdentifiers, featuredAccountProviderIdentifiers)
+	o.Ptr().Send(_vSAccountMetadataRequestSelSetFeaturedAccountProviderIdentifiers, featuredAccountProviderIdentifiers.Ptr())
 }
 
 // A value that the account provider may use to verify the identity of the requesting app.
@@ -157,23 +165,29 @@ func (o *VSAccountMetadataRequest) SetForceAuthentication(forceAuthentication bo
 
 // Attributes to add to a SAML attributeQuery request and sent to the account provider.
 func (o *VSAccountMetadataRequest) AttributeNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vSAccountMetadataRequestSelAttributeNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountMetadataRequestSelAttributeNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *VSAccountMetadataRequest) SetAttributeNames(attributeNames *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_vSAccountMetadataRequestSelSetAttributeNames, attributeNames)
+	o.Ptr().Send(_vSAccountMetadataRequestSelSetAttributeNames, attributeNames.Ptr())
 }
 
 // The collection of authentication schemes that the app supports for this request. This list may be used to determine compatibility of the app with providers. Defaults to SAML.
 func (o *VSAccountMetadataRequest) SupportedAuthenticationSchemes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vSAccountMetadataRequestSelSupportedAuthenticationSchemes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountMetadataRequestSelSupportedAuthenticationSchemes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // The collection of authentication schemes that the app supports for this request. This list may be used to determine compatibility of the app with providers. Defaults to SAML.
 func (o *VSAccountMetadataRequest) SetSupportedAuthenticationSchemes(supportedAuthenticationSchemes *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_vSAccountMetadataRequestSelSetSupportedAuthenticationSchemes, supportedAuthenticationSchemes)
+	o.Ptr().Send(_vSAccountMetadataRequestSelSetSupportedAuthenticationSchemes, supportedAuthenticationSchemes.Ptr())
 }
 
 // A value that an account provider application may set to pass an existing authentication session. For use by TV Provider applications only.

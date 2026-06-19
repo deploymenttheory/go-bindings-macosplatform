@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines a scope of execution for JavaScript code, and which you use to prevent conflicts between different scripts.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkcontentworld
 type WKContentWorld struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func WKContentWorldFromID(id objc.ID) *WKContentWorld {
 	return o
 }
 
-// @abstract Retrieves a named content world for API client use. @param name The name of the WKContentWorld to retrieve. @discussion When using a content world different from the page content world you can still manipulate the DOM and built-in DOM APIs but without conflicting with other aspects of the page content (e.g. JavaScript from the web page content itself) As long as a particular named WKContentWorld instance has not been deallocated, repeated calls with the same name will retrieve that same WKContentWorld instance. Each named content world is distinct from all other named content worlds, the defaultClientWorld, and the pageWorld. The name can be used to keep distinct worlds identifiable anywhere a world might be surfaced in a user interface. For example, the different worlds used in your application will be surfaced by name in the WebKit Web Inspector.
+// Returns the custom content world with the specified name.
 func WKContentWorldWorldWithName(name *foundation.NSString) *WKContentWorld {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKContentWorld), _wKContentWorldSelWorldWithName, name.Ptr())
 	if _ret != 0 {

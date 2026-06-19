@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "framework": "InputMethodKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "IMKCandidates": {
+      "doc": "The IMKCandidates class presents candidates to users and notifies the appropriate IMKInputController object when the user selects a candidate. Candidates are alternate characters for a given input sequence. The IMKCandidates class supports using a candidates window in your input method; using IMKCandidates is optional. Not all input methods require them.",
+      "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates"
+    },
+    "IMKInputController": {
+      "doc": "The IMKInputController class provides a base class for custom input controller classes. The IMKServer class, which is allocated in the main function of an input method, creates an input controller object for each input session created by a client application. For every input session there is a corresponding IMKInputController object.",
+      "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller"
+    },
+    "IMKServer": {
+      "doc": "The IMKServer class manages client connections to your input method. When you write the main function for your input method, you create an IMKServer object. You should never need to override this class.",
+      "url": "https://developer.apple.com/documentation/inputmethodkit/imkserver"
+    }
+  },
+  "protocols": {
+    "IMKMouseHandling": {
+      "doc": "The IMKMouseHandling protocol defines methods that your input method can implement to handle mouse events.",
+      "url": "https://developer.apple.com/documentation/inputmethodkit/imkmousehandling"
+    },
+    "IMKStateSetting": {
+      "doc": "The IMKStateSetting protocol defines methods for setting or accessing values that indicate the state of an input method.",
+      "url": "https://developer.apple.com/documentation/inputmethodkit/imkstatesetting"
+    }
+  },
+  "methods": {
+    "IMKCandidates": {
+      "-attributes": {
+        "doc": "Returns a dictionary of the style attributes used for the candidates window..",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/attributes()"
+      },
+      "-dismissesAutomatically": {
+        "doc": "Returns the state of the flag that determines whether the candidates window dismisses automatically.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/dismissesautomatically()"
+      },
+      "-hide": {
+        "doc": "Hides a candidates window, if it is visible.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/hide()"
+      },
+      "-initWithServer:panelType:": {
+        "doc": "Returns the initialized IMKCandidates object.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/init(server:paneltype:)"
+      },
+      "-isVisible": {
+        "doc": "Returns whether or not the candidates window is visible.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/isvisible()"
+      },
+      "-panelType": {
+        "doc": "Returns the style of the candidates window.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/paneltype()"
+      },
+      "-selectionKeys": {
+        "doc": "Returns an array of NSNumber objects where each NSNumber object represents a virtual key code.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/selectionkeys()"
+      },
+      "-selectionKeysKeylayout": {
+        "doc": "Returns the key layout that maps virtual key codes to selection keys.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/selectionkeyskeylayout()"
+      },
+      "-setAttributes:": {
+        "doc": "Sets the style attributes for the candidates window.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/setattributes(_:)"
+      },
+      "-setDismissesAutomatically:": {
+        "doc": "Sets the state of the flag that determines whether the candidates window dismisses automatically.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/setdismissesautomatically(_:)"
+      },
+      "-setPanelType:": {
+        "doc": "Sets the style of the candidates window.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/setpaneltype(_:)"
+      },
+      "-setSelectionKeys:": {
+        "doc": "Sets the selection keys for the candidates.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/setselectionkeys(_:)"
+      },
+      "-setSelectionKeysKeylayout:": {
+        "doc": "Sets the key layout that is used to map virtual key codes to characters.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/setselectionkeyskeylayout(_:)"
+      },
+      "-show:": {
+        "doc": "Shows the candidates window.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/show(_:)"
+      },
+      "-showAnnotation:": {
+        "doc": "Displays an annotation string in an annotation window.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/showannotation(_:)"
+      },
+      "-updateCandidates": {
+        "doc": "Updates the candidates that are displayed in the candidates window.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkcandidates/update()"
+      }
+    },
+    "IMKInputController": {
+      "-annotationSelected:forCandidate:": {
+        "doc": "Sends the selected candidate string and annotation string to the input controller.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/annotationselected(_:forcandidate:)"
+      },
+      "-cancelComposition": {
+        "doc": "Stops the current composition and replaces marked text with the original text.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/cancelcomposition()"
+      },
+      "-candidateSelected:": {
+        "doc": "Informs an input controller that a new candidate is selected.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/candidateselected(_:)"
+      },
+      "-candidateSelectionChanged:": {
+        "doc": "Informs an input controller that the current candidate selection in the candidate window has changed.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/candidateselectionchanged(_:)"
+      },
+      "-client": {
+        "doc": "Returns the client object associated with the input controller.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/client()"
+      },
+      "-compositionAttributesAtRange:": {
+        "doc": "Returns a dictionary of text attributes.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/compositionattributes(at:)"
+      },
+      "-delegate": {
+        "doc": "Returns the delegate for input controller object.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/delegate()"
+      },
+      "-doCommandBySelector:commandDictionary:": {
+        "doc": "Passes commands that are not generated as part of the text input process.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/docommand(by:command:)"
+      },
+      "-hidePalettes": {
+        "doc": "Informs an input method that it should close any visible user interface.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/hidepalettes()"
+      },
+      "-initWithServer:delegate:client:": {
+        "doc": "Initializes the input control by setting the delegate.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/init(server:delegate:client:)"
+      },
+      "-markForStyle:atRange:": {
+        "doc": "Returns a dictionary of text attributes that can mark a range of an attributed string to send to a client.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/mark(forstyle:at:)"
+      },
+      "-menu": {
+        "doc": "Returns a menu of commands that are specific to an input method.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/menu()"
+      },
+      "-replacementRange": {
+        "doc": "Returns the range in the client document that the text should replace.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/replacementrange()"
+      },
+      "-selectionRange": {
+        "doc": "Returns where the range of the selection that should be placed inside marked text.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/selectionrange()"
+      },
+      "-server": {
+        "doc": "Returns the server object that manages the input controller.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/server()"
+      },
+      "-setDelegate:": {
+        "doc": "Sets the delegate for input controller object.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/setdelegate(_:)"
+      },
+      "-updateComposition": {
+        "doc": "Informs the input controller that the composition has changed.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkinputcontroller/updatecomposition()"
+      }
+    },
+    "IMKServer": {
+      "-bundle": {
+        "doc": "Returns an NSBundle object for the input method.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkserver/bundle()"
+      },
+      "-initWithName:bundleIdentifier:": {
+        "doc": "Creates and returns a server object from property list information contained in the provided bundle.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkserver/init(name:bundleidentifier:)"
+      },
+      "-initWithName:controllerClass:delegateClass:": {
+        "doc": "Creates and returns a server object initialized with the provided parameters.",
+        "url": "https://developer.apple.com/documentation/inputmethodkit/imkserver/init(name:controllerclass:delegateclass:)"
+      }
+    }
+  }
+}

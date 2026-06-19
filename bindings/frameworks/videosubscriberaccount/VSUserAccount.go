@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a user’s account.
+//
 // Apple documentation: https://developer.apple.com/documentation/videosubscriberaccount/vsuseraccount
 type VSUserAccount struct {
 	foundation.NSObject
@@ -138,12 +140,15 @@ func (o *VSUserAccount) SetSubscriptionBillingCycleEndDate(subscriptionBillingCy
 }
 
 func (o *VSUserAccount) TierIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vSUserAccountSelTierIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vSUserAccountSelTierIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *VSUserAccount) SetTierIdentifiers(tierIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_vSUserAccountSelSetTierIdentifiers, tierIdentifiers)
+	o.Ptr().Send(_vSUserAccountSelSetTierIdentifiers, tierIdentifiers.Ptr())
 }
 
 func (o *VSUserAccount) BillingIdentifier() *foundation.NSString {

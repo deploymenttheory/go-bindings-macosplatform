@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the download of a web resource.
+//
 // WKDownload wraps [raw.WKDownload] with a fluent Go API.
 type WKDownload struct {
 	inner *raw.WKDownload
@@ -36,12 +38,16 @@ func NewWKDownload() *WKDownload {
 	return &WKDownload{inner: raw.WKDownloadFromID(_id)}
 }
 
+// An object you use to track download progress and handle redirects, authentication challenges, and failures.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *WKDownload) WithDelegate(delegate raw.WKDownloadDelegate) *WKDownload {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Cancels the download, and optionally captures data so that you can resume the download later.
+//
 // Cancel calls the underlying Cancel.
 func (x *WKDownload) Cancel(completionHandler func(*foundation.NSData)) {
 	x.inner.Cancel(completionHandler)

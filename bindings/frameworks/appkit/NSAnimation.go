@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages the timing and progress of animations in the user interface.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsanimation
 type NSAnimation struct {
 	foundation.NSObject
@@ -56,6 +58,7 @@ func NSAnimationFromID(id objc.ID) *NSAnimation {
 	return o
 }
 
+// Returns an NSAnimation object initialized with the specified duration and animation-curve values.
 func (o *NSAnimation) InitWithDurationAnimationCurve(duration float64, animationCurve NSAnimationCurve) *NSAnimation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAnimationSelInitWithDurationAnimationCurve, duration, animationCurve)
 	if _ret != 0 {
@@ -72,34 +75,42 @@ func (o *NSAnimation) InitWithCoder(coder *foundation.NSCoder) *NSAnimation {
 	return NSAnimationFromID(_ret)
 }
 
+// Starts the animation represented by the receiver.
 func (o *NSAnimation) StartAnimation() {
 	o.Ptr().Send(_nSAnimationSelStartAnimation)
 }
 
+// Stops the animation represented by the receiver.
 func (o *NSAnimation) StopAnimation() {
 	o.Ptr().Send(_nSAnimationSelStopAnimation)
 }
 
+// Adds the progress mark to the receiver.
 func (o *NSAnimation) AddProgressMark(progressMark float32) {
 	o.Ptr().Send(_nSAnimationSelAddProgressMark, progressMark)
 }
 
+// Removes progress mark from the receiver.
 func (o *NSAnimation) RemoveProgressMark(progressMark float32) {
 	o.Ptr().Send(_nSAnimationSelRemoveProgressMark, progressMark)
 }
 
+// Starts running the animation represented by the receiver when another animation reaches a specific progress mark.
 func (o *NSAnimation) StartWhenAnimationReachesProgress(animation *NSAnimation, startProgress float32) {
 	o.Ptr().Send(_nSAnimationSelStartWhenAnimationReachesProgress, animation.Ptr(), startProgress)
 }
 
+// Stops running the animation represented by the receiver when another animation reaches a specific progress mark.
 func (o *NSAnimation) StopWhenAnimationReachesProgress(animation *NSAnimation, stopProgress float32) {
 	o.Ptr().Send(_nSAnimationSelStopWhenAnimationReachesProgress, animation.Ptr(), stopProgress)
 }
 
+// Clears linkage to another animation that causes the receiver to start.
 func (o *NSAnimation) ClearStartAnimation() {
 	o.Ptr().Send(_nSAnimationSelClearStartAnimation)
 }
 
+// Clears linkage to another animation that causes the receiver to stop.
 func (o *NSAnimation) ClearStopAnimation() {
 	o.Ptr().Send(_nSAnimationSelClearStopAnimation)
 }
@@ -169,15 +180,21 @@ func (o *NSAnimation) SetDelegate(delegate NSAnimationDelegate) {
 }
 
 func (o *NSAnimation) ProgressMarks() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _nSAnimationSelProgressMarks)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSAnimationSelProgressMarks)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *NSAnimation) SetProgressMarks(progressMarks *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_nSAnimationSelSetProgressMarks, progressMarks)
+	o.Ptr().Send(_nSAnimationSelSetProgressMarks, progressMarks.Ptr())
 }
 
 func (o *NSAnimation) RunLoopModesForAnimating() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSAnimationSelRunLoopModesForAnimating)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSAnimationSelRunLoopModesForAnimating)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

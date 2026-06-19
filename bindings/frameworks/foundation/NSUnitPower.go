@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A unit of measure for power.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitpower
 type NSUnitPower struct {
 	NSDimension

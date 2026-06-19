@@ -11,11 +11,11 @@ import (
 type NEDNSProtocol int64
 
 const (
-	// @const NEDNSProtocolCleartext Use traditional cleartext DNS over UDP and TCP port 53
+	// The DNS server uses cleartext UDP or TCP over port 53.
 	NEDNSProtocolCleartext NEDNSProtocol = 1
-	// @const NEDNSProtocolTLS Use DNS-over-TLS
+	// The DNS server uses DNS-over-TLS.
 	NEDNSProtocolTLS NEDNSProtocol = 2
-	// @const NEDNSProtocolHTTPS Use DNS-over-HTTPS
+	// The DNS server uses DNS-over-HTTPS.
 	NEDNSProtocolHTTPS NEDNSProtocol = 3
 )
 
@@ -35,9 +35,9 @@ func (e NEDNSProtocol) String() string {
 type NEEvaluateConnectionRuleAction int64
 
 const (
-	// @const NEEvaluateConnectionRuleActionConnectIfNeeded Start the VPN connection if the destination host is not accessible directly
+	// Start the VPN if connections to the matching hostname cannot be resolved.
 	NEEvaluateConnectionRuleActionConnectIfNeeded NEEvaluateConnectionRuleAction = 1
-	// @const NEEvaluateConnectionRuleActionNeverConnect Do not start the VPN connection
+	// Do not start the VPN.
 	NEEvaluateConnectionRuleActionNeverConnect NEEvaluateConnectionRuleAction = 2
 )
 
@@ -52,18 +52,19 @@ func (e NEEvaluateConnectionRuleAction) String() string {
 	}
 }
 
+// The actions a data provider can take on a filter flow.
 type NEFilterAction int64
 
 const (
-	// @const NEFilterActionInvalid Invalid action, represents an error
+	// Invalid action used to represent an error.
 	NEFilterActionInvalid NEFilterAction = 0
-	// @const NEFilterActionAllow Allowing the flow
+	// Allow the flow.
 	NEFilterActionAllow NEFilterAction = 1
-	// @const NEFilterActionDrop Dropping the flow
+	// Drop the flow.
 	NEFilterActionDrop NEFilterAction = 2
-	// @const NEFilterActionRemediate Remediating the flow (a "content blocked" page displayed to the user)
+	// Remediate the flow.
 	NEFilterActionRemediate NEFilterAction = 3
-	// @const NEFilterActionFilterData Filtering data on the flow
+	// Filter data on the flow.
 	NEFilterActionFilterData NEFilterAction = 4
 )
 
@@ -84,6 +85,7 @@ func (e NEFilterAction) String() string {
 	}
 }
 
+// A type for the grade or priority of the filter.
 type NEFilterManagerGrade int64
 
 const (
@@ -104,6 +106,7 @@ func (e NEFilterManagerGrade) String() string {
 	}
 }
 
+// The verdict returned by a packet handler indicating what the framework should do with a packet.
 type NEFilterPacketProviderVerdict int64
 
 const (
@@ -127,6 +130,7 @@ func (e NEFilterPacketProviderVerdict) String() string {
 	}
 }
 
+// A type that represents the kind of event indicated by a report.
 type NEFilterReportEvent int64
 
 const (
@@ -155,6 +159,7 @@ func (e NEFilterReportEvent) String() string {
 	}
 }
 
+// An enumeration that represents the frequency of filter report delivery.
 type NEFilterReportFrequency int64
 
 const (
@@ -183,6 +188,7 @@ func (e NEFilterReportFrequency) String() string {
 	}
 }
 
+// A type to represent network protocols used by routing rules.
 type NENetworkRuleProtocol int64
 
 const (
@@ -210,13 +216,13 @@ func (e NENetworkRuleProtocol) String() string {
 type NEOnDemandRuleAction int64
 
 const (
-	// @const NEOnDemandRuleActionConnect Start the VPN connection
+	// Start the VPN connection for every connection attempt.
 	NEOnDemandRuleActionConnect NEOnDemandRuleAction = 1
-	// @const NEOnDemandRuleActionDisconnect Do not start the VPN connection, and disconnect the VPN connection if it is not currently disconnected
+	// Do not start the VPN connection, and disconnect the VPN connection if it is not currently disconnected.
 	NEOnDemandRuleActionDisconnect NEOnDemandRuleAction = 2
-	// @const NEOnDemandRuleActionEvaluateConnection Start the VPN after evaluating the destination host being accessed against the rule's connection rules
+	// Start the VPN after evaluating the destination host being accessed against the rule’s parameters.
 	NEOnDemandRuleActionEvaluateConnection NEOnDemandRuleAction = 3
-	// @const NEOnDemandRuleActionIgnore Do not start the VPN connection, and leave the VPN connection in its current state
+	// Do not start the VPN connection, but do not disconnect it if it is currently connected.
 	NEOnDemandRuleActionIgnore NEOnDemandRuleAction = 4
 )
 
@@ -238,11 +244,11 @@ func (e NEOnDemandRuleAction) String() string {
 type NEOnDemandRuleInterfaceType int64
 
 const (
-	// @const NEOnDemandRuleInterfaceTypeAny
+	// Match any interface type
 	NEOnDemandRuleInterfaceTypeAny NEOnDemandRuleInterfaceType = 0
-	// @const NEOnDemandRuleInterfaceTypeEthernet Wired Ethernet
+	// Match wired ethernet interfaces
 	NEOnDemandRuleInterfaceTypeEthernet NEOnDemandRuleInterfaceType = 1
-	// @const NEOnDemandRuleInterfaceTypeWiFi WiFi
+	// Match Wi-Fi interfaces
 	NEOnDemandRuleInterfaceTypeWiFi NEOnDemandRuleInterfaceType = 2
 )
 
@@ -259,44 +265,45 @@ func (e NEOnDemandRuleInterfaceType) String() string {
 	}
 }
 
+// Reasons why the provider extension was stopped.
 type NEProviderStopReason int64
 
 const (
-	// @const NEProviderStopReasonNone No specific reason.
+	// No specific reason.
 	NEProviderStopReasonNone NEProviderStopReason = 0
-	// @const NEProviderStopReasonUserInitiated The user stopped the provider.
+	// The user stopped the provider extension.
 	NEProviderStopReasonUserInitiated NEProviderStopReason = 1
-	// @const NEProviderStopReasonProviderFailed The provider failed.
+	// The provider failed to function correctly.
 	NEProviderStopReasonProviderFailed NEProviderStopReason = 2
-	// @const NEProviderStopReasonNoNetworkAvailable There is no network connectivity.
+	// No network connectivity is currently available.
 	NEProviderStopReasonNoNetworkAvailable NEProviderStopReason = 3
-	// @const NEProviderStopReasonUnrecoverableNetworkChange The device attached to a new network.
+	// The device’s network connectivity changed.
 	NEProviderStopReasonUnrecoverableNetworkChange NEProviderStopReason = 4
-	// @const NEProviderStopReasonProviderDisabled The provider was disabled.
+	// The provider was disabled.
 	NEProviderStopReasonProviderDisabled NEProviderStopReason = 5
-	// @const NEProviderStopReasonAuthenticationCanceled The authentication process was cancelled.
+	// The authentication process was canceled.
 	NEProviderStopReasonAuthenticationCanceled NEProviderStopReason = 6
-	// @const NEProviderStopReasonConfigurationFailed The provider could not be configured.
+	// The configuration is invalid.
 	NEProviderStopReasonConfigurationFailed NEProviderStopReason = 7
-	// @const NEProviderStopReasonIdleTimeout The provider was idle for too long.
+	// The session timed out.
 	NEProviderStopReasonIdleTimeout NEProviderStopReason = 8
-	// @const NEProviderStopReasonConfigurationDisabled The associated configuration was disabled.
+	// The configuration was disabled.
 	NEProviderStopReasonConfigurationDisabled NEProviderStopReason = 9
-	// @const NEProviderStopReasonConfigurationRemoved The associated configuration was deleted.
+	// The configuration was removed.
 	NEProviderStopReasonConfigurationRemoved NEProviderStopReason = 10
-	// @const NEProviderStopReasonSuperceded A high-priority configuration was started.
+	// The configuration was superceded by a higher-priority configuration.
 	NEProviderStopReasonSuperceded NEProviderStopReason = 11
-	// @const NEProviderStopReasonUserLogout The user logged out.
+	// The user logged out.
 	NEProviderStopReasonUserLogout NEProviderStopReason = 12
-	// @const NEProviderStopReasonUserSwitch The active user changed.
+	// The current console user changed.
 	NEProviderStopReasonUserSwitch NEProviderStopReason = 13
-	// @const NEProviderStopReasonConnectionFailed Failed to establish connection.
+	// The connection failed.
 	NEProviderStopReasonConnectionFailed NEProviderStopReason = 14
-	// @const NEProviderStopReasonSleep The device went to sleep and disconnectOnSleep is enabled in the configuration
+	// A stop reason indicating the configuration enabled disconnect on sleep and the device went to sleep.
 	NEProviderStopReasonSleep NEProviderStopReason = 15
 	// @const NEProviderStopReasonAppUpdate The NEProvider is being updated
 	NEProviderStopReasonAppUpdate NEProviderStopReason = 16
-	// @const NEProviderStopReasonInternalError An internal error occurred in the NetworkExtension framework
+	// The provider encountered an internal error.
 	NEProviderStopReasonInternalError NEProviderStopReason = 17
 )
 
@@ -343,14 +350,15 @@ func (e NEProviderStopReason) String() string {
 	}
 }
 
+// A type to represent the direction of network traffic.
 type NETrafficDirection int64
 
 const (
-	// @const NETrafficDirectionAny Any direction
+	// A direction that matches either inbound or outbound traffic.
 	NETrafficDirectionAny NETrafficDirection = 0
-	// @const NETrafficDirectionInbound Inbound direction
+	// The inbound traffic direction.
 	NETrafficDirectionInbound NETrafficDirection = 1
-	// @const NETrafficDirectionOutbound Outbound direction
+	// The outbound traffic direction.
 	NETrafficDirectionOutbound NETrafficDirection = 2
 )
 
@@ -370,11 +378,11 @@ func (e NETrafficDirection) String() string {
 type NETunnelProviderRoutingMethod int64
 
 const (
-	// @const NETunnelProviderRoutingMethodDestinationIP Route network traffic to the tunnel based on destination IP
+	// Route network traffic to the tunnel based on destination IP.
 	NETunnelProviderRoutingMethodDestinationIP NETunnelProviderRoutingMethod = 1
-	// @const NETunnelProviderRoutingMethodSourceApplication Route network traffic to the tunnel based on source application
+	// Route network traffic to the tunnel based on source application.
 	NETunnelProviderRoutingMethodSourceApplication NETunnelProviderRoutingMethod = 2
-	// @const NETunnelProviderRoutingMethodNetworkRule Route traffic to the tunnel (or proxy) based on NENetworkRule objects specified by the provider
+	// A routing method that routes traffic based on network rule objects specified by the provider.
 	NETunnelProviderRoutingMethodNetworkRule NETunnelProviderRoutingMethod = 3
 )
 
@@ -415,14 +423,15 @@ func (e NEURLFilterVerdict) String() string {
 	}
 }
 
+// Internet Key Exchange (IKE) authentication methods used to authenticate with the IPSec server.
 type NEVPNIKEAuthenticationMethod int64
 
 const (
-	// @const NEVPNIKEAuthenticationMethodNone Do not authenticate with the IPSec server
+	// Do not authenticate with the IPSec server. Note that extended authentication may still be performed if the useExtendedAuthentication property is set. This value is only valid for IKE version 2 (IKEv2)
 	NEVPNIKEAuthenticationMethodNone NEVPNIKEAuthenticationMethod = 0
-	// @const NEVPNIKEAuthenticationMethodCertificate Use a certificate and private key as the authentication credential
+	// Use a certificate and private key as the authentication credential. The certificate and private key set in the identityReference or identityData property will be used.
 	NEVPNIKEAuthenticationMethodCertificate NEVPNIKEAuthenticationMethod = 1
-	// @const NEVPNIKEAuthenticationMethodSharedSecret Use a shared secret as the authentication credential
+	// Use a shared secret as the authentication credential. The shared secret set in the sharedSecretReference property will be used.
 	NEVPNIKEAuthenticationMethodSharedSecret NEVPNIKEAuthenticationMethod = 2
 )
 
@@ -439,20 +448,21 @@ func (e NEVPNIKEAuthenticationMethod) String() string {
 	}
 }
 
+// An enumeration of certificate type values.
 type NEVPNIKEv2CertificateType int64
 
 const (
-	// @const NEVPNIKEv2CertificateType RSA
+	// The RSA certificate type.
 	NEVPNIKEv2CertificateTypeRSA NEVPNIKEv2CertificateType = 1
-	// @const NEVPNIKEv2CertificateTypeECDSA256 ECDSA with p-256 curve
+	// The ECDSA with p-256 curve certificate type.
 	NEVPNIKEv2CertificateTypeECDSA256 NEVPNIKEv2CertificateType = 2
-	// @const NEVPNIKEv2CertificateTypeECDSA384 ECDSA with p-384 curve
+	// The ECDSA with p-384 curve certificate type.
 	NEVPNIKEv2CertificateTypeECDSA384 NEVPNIKEv2CertificateType = 3
-	// @const NEVPNIKEv2CertificateTypeECDSA521 ECDSA with p-521 curve
+	// The ECDSA with p-521 curve certificate type.
 	NEVPNIKEv2CertificateTypeECDSA521 NEVPNIKEv2CertificateType = 4
-	// @const NEVPNIKEv2CertificateTypeEd25519 EdDSA with Edwards Curve25519
+	// The Edwards 25519 curve certificate type.
 	NEVPNIKEv2CertificateTypeEd25519 NEVPNIKEv2CertificateType = 5
-	// @const NEVPNIKEv2CertificateTypeRSAPSS RSA-PSS
+	// The RSA-PSS certificate type.
 	NEVPNIKEv2CertificateTypeRSAPSS NEVPNIKEv2CertificateType = 6
 )
 
@@ -475,16 +485,17 @@ func (e NEVPNIKEv2CertificateType) String() string {
 	}
 }
 
+// An enumeration of values for the frequency at which the IKEv2 client runs the dead peer detection algorithm.
 type NEVPNIKEv2DeadPeerDetectionRate int64
 
 const (
-	// @const NEVPNIKEv2DeadPeerDetectionRateNone Do not perform dead peer detection
+	// Do not perform dead peer detection.
 	NEVPNIKEv2DeadPeerDetectionRateNone NEVPNIKEv2DeadPeerDetectionRate = 0
-	// @const NEVPNIKEv2DeadPeerDetectionRateLow Run dead peer detection once every 30 minutes. If the peer does not respond, retry 5 times at 1 second intervals before declaring the peer dead
+	// Run dead peer detection once every 30 minutes. If the peer does not respond, retry 5 times at 1 second intervals before declaring the peer dead and terminating the session.
 	NEVPNIKEv2DeadPeerDetectionRateLow NEVPNIKEv2DeadPeerDetectionRate = 1
-	// @const NEVPNIKEv2DeadPeerDetectionRateMedium Run dead peer detection once every 10 minutes. If the peer does not respond, retry 5 times at 1 second intervals before declaring the peer dead
+	// Run dead peer detection once every 10 minutes. If the peer does not respond, retry 5 times at 1 second intervals before declaring the peer dead and terminating the session.
 	NEVPNIKEv2DeadPeerDetectionRateMedium NEVPNIKEv2DeadPeerDetectionRate = 2
-	// @const NEVPNIKEv2DeadPeerDetectionRateHigh Run dead peer detection once every 1 minute. If the peer does not respond, retry 5 times at 1 second intervals before declaring the peer dead
+	// Run dead peer detection once every 1 minute. If the peer does not respond, retry 5 times at 1 second intervals before declaring the peer dead and terminating the session.
 	NEVPNIKEv2DeadPeerDetectionRateHigh NEVPNIKEv2DeadPeerDetectionRate = 3
 )
 
@@ -503,10 +514,11 @@ func (e NEVPNIKEv2DeadPeerDetectionRate) String() string {
 	}
 }
 
+// An enumeration of Diffie-Hellman group values.
 type NEVPNIKEv2DiffieHellmanGroup int64
 
 const (
-	// @const NEVPNIKEv2DiffieHellmanGroupInvalid Diffie Hellman group 0 is not a valid DH group
+	// A value indicating the group is not a valid Diffie-Hellman group.
 	NEVPNIKEv2DiffieHellmanGroupInvalid NEVPNIKEv2DiffieHellmanGroup = 0
 	// @const NEVPNIKEv2DiffieHellmanGroup1 Diffie Hellman group 1 (768-bit MODP)
 	NEVPNIKEv2DiffieHellmanGroup1 NEVPNIKEv2DiffieHellmanGroup = 1
@@ -514,25 +526,25 @@ const (
 	NEVPNIKEv2DiffieHellmanGroup2 NEVPNIKEv2DiffieHellmanGroup = 2
 	// @const NEVPNIKEv2DiffieHellmanGroup5 Diffie Hellman group 5 (1536-bit MODP)
 	NEVPNIKEv2DiffieHellmanGroup5 NEVPNIKEv2DiffieHellmanGroup = 5
-	// @const NEVPNIKEv2DiffieHellmanGroup14 Diffie Hellman group 14 (2048-bit MODP)
+	// Diffie Hellman group 14 (2048-bit modular exponential [MODP]).
 	NEVPNIKEv2DiffieHellmanGroup14 NEVPNIKEv2DiffieHellmanGroup = 14
-	// @const NEVPNIKEv2DiffieHellmanGroup15 Diffie Hellman group 15 (3072-bit MODP)
+	// Diffie Hellman group 15 (3072-bit modular exponential [MODP]).
 	NEVPNIKEv2DiffieHellmanGroup15 NEVPNIKEv2DiffieHellmanGroup = 15
-	// @const NEVPNIKEv2DiffieHellmanGroup16 Diffie Hellman group 16 (4096-bit MODP)
+	// Diffie Hellman group 16 (4096-bit modular exponential [MODP]).
 	NEVPNIKEv2DiffieHellmanGroup16 NEVPNIKEv2DiffieHellmanGroup = 16
-	// @const NEVPNIKEv2DiffieHellmanGroup17 Diffie Hellman group 17 (6144-bit MODP)
+	// Diffie Hellman group 17 (6144-bit modular exponential [MODP]).
 	NEVPNIKEv2DiffieHellmanGroup17 NEVPNIKEv2DiffieHellmanGroup = 17
-	// @const NEVPNIKEv2DiffieHellmanGroup18 Diffie Hellman group 18 (8192-bit MODP)
+	// Diffie Hellman group 18 (8192-bit modular exponential [MODP]).
 	NEVPNIKEv2DiffieHellmanGroup18 NEVPNIKEv2DiffieHellmanGroup = 18
-	// @const NEVPNIKEv2DiffieHellmanGroup19 Diffie Hellman group 19 (256-bit random ECP)
+	// Diffie Hellman group 19 (256-bit random elliptic curve group over GF[P] [ECP]).
 	NEVPNIKEv2DiffieHellmanGroup19 NEVPNIKEv2DiffieHellmanGroup = 19
-	// @const NEVPNIKEv2DiffieHellmanGroup20 Diffie Hellman group 20 (384-bit random ECP)
+	// Diffie Hellman group 20 (384-bit random elliptic curve group over GF[P] [ECP]).
 	NEVPNIKEv2DiffieHellmanGroup20 NEVPNIKEv2DiffieHellmanGroup = 20
-	// @const NEVPNIKEv2DiffieHellmanGroup21 Diffie Hellman group 21 (521-bit random ECP)
+	// Diffie Hellman group 21 (521-bit random elliptic curve group over GF[P] [ECP]).
 	NEVPNIKEv2DiffieHellmanGroup21 NEVPNIKEv2DiffieHellmanGroup = 21
-	// @const NEVPNIKEv2DiffieHellmanGroup31 Diffie Hellman group 31 (Curve25519)
+	// Diffie Hellman group 31 (Curve 25519).
 	NEVPNIKEv2DiffieHellmanGroup31 NEVPNIKEv2DiffieHellmanGroup = 31
-	// @const NEVPNIKEv2DiffieHellmanGroup32 Diffie Hellman group 32 (Curve448)
+	// Diffie Hellman group 32 (Curve 448).
 	NEVPNIKEv2DiffieHellmanGroup32 NEVPNIKEv2DiffieHellmanGroup = 32
 )
 
@@ -571,6 +583,7 @@ func (e NEVPNIKEv2DiffieHellmanGroup) String() string {
 	}
 }
 
+// An enumeration of encryption algorithm values.
 type NEVPNIKEv2EncryptionAlgorithm int64
 
 const (
@@ -578,21 +591,21 @@ const (
 	NEVPNIKEv2EncryptionAlgorithmDES NEVPNIKEv2EncryptionAlgorithm = 1
 	// @const NEVPNIKEv2EncryptionAlgorithm3DES Triple Data Encryption Algorithm (aka 3DES)
 	NEVPNIKEv2EncryptionAlgorithm3DES NEVPNIKEv2EncryptionAlgorithm = 2
-	// @const NEVPNIKEv2EncryptionAlgorithmAES128 Advanced Encryption Standard 128 bit (AES128)
+	// Advanced Encryption Standard 256-bit (AES256).
 	//
 	// Deprecated: Use an encryption algorithm with 256-bit keys instead
 	NEVPNIKEv2EncryptionAlgorithmAES128 NEVPNIKEv2EncryptionAlgorithm = 3
-	// @const NEVPNIKEv2EncryptionAlgorithmAES256 Advanced Encryption Standard 256 bit (AES256)
+	// Advanced Encryption Standard 256 bit (AES256).
 	//
 	// Deprecated: Use an encryption algorithm with 256-bit keys instead
 	NEVPNIKEv2EncryptionAlgorithmAES256 NEVPNIKEv2EncryptionAlgorithm = 4
-	// @const NEVPNIKEv2EncryptionAlgorithmAES128GCM Advanced Encryption Standard 128 bit (AES128GCM)
+	// Advanced Encryption Standard 128-bit Galois/Counter Mode (AES128GCM).
 	//
 	// Deprecated: Use an encryption algorithm with 256-bit keys instead
 	NEVPNIKEv2EncryptionAlgorithmAES128GCM NEVPNIKEv2EncryptionAlgorithm = 5
-	// @const NEVPNIKEv2EncryptionAlgorithmAES256GCM Advanced Encryption Standard 256 bit (AES256GCM)
+	// Advanced Encryption Standard 256-bit Galois/Counter Mode (AES256GCM).
 	NEVPNIKEv2EncryptionAlgorithmAES256GCM NEVPNIKEv2EncryptionAlgorithm = 6
-	// @const NEVPNIKEv2EncryptionAlgorithmChaCha20Poly1305 ChaCha20 and Poly1305 (ChaCha20Poly1305)
+	// ChaCha20 and Poly1305 (ChaCha20Poly1305).
 	NEVPNIKEv2EncryptionAlgorithmChaCha20Poly1305 NEVPNIKEv2EncryptionAlgorithm = 7
 )
 
@@ -624,11 +637,11 @@ const (
 	NEVPNIKEv2IntegrityAlgorithmSHA96 NEVPNIKEv2IntegrityAlgorithm = 1
 	// @const NEVPNIKEv2IntegrityAlgorithmSHA160 SHA-1 160 bit
 	NEVPNIKEv2IntegrityAlgorithmSHA160 NEVPNIKEv2IntegrityAlgorithm = 2
-	// @const NEVPNIKEv2IntegrityAlgorithmSHA256 SHA-2 256 bit
+	// SHA-2 256-bit.
 	NEVPNIKEv2IntegrityAlgorithmSHA256 NEVPNIKEv2IntegrityAlgorithm = 3
-	// @const NEVPNIKEv2IntegrityAlgorithmSHA384 SHA-2 384 bit
+	// SHA-2 384-bit.
 	NEVPNIKEv2IntegrityAlgorithmSHA384 NEVPNIKEv2IntegrityAlgorithm = 4
-	// @const NEVPNIKEv2IntegrityAlgorithmSHA512 SHA-2 512 bit
+	// SHA-2 512-bit.
 	NEVPNIKEv2IntegrityAlgorithmSHA512 NEVPNIKEv2IntegrityAlgorithm = 5
 )
 
@@ -649,16 +662,17 @@ func (e NEVPNIKEv2IntegrityAlgorithm) String() string {
 	}
 }
 
+// An enumeration of TLS Versions for use in EAP-TLS.
 type NEVPNIKEv2TLSVersion int64
 
 const (
-	// @const NEVPNIKEv2TLSVersionDefault Use the default TLS configuration
+	// A value to use the default TLS configuration.
 	NEVPNIKEv2TLSVersionDefault NEVPNIKEv2TLSVersion = 0
-	// @const NEVPNIKEv2TLSVersion1_0 TLS 1.0
+	// A value to use TLS version 1.0.
 	NEVPNIKEv2TLSVersion1_0 NEVPNIKEv2TLSVersion = 1
-	// @const NEVPNIKEv2TLSVersion1_0 TLS 1.1
+	// A value to use TLS version 1.1.
 	NEVPNIKEv2TLSVersion1_1 NEVPNIKEv2TLSVersion = 2
-	// @const NEVPNIKEv2TLSVersion1_0 TLS 1.2
+	// A value to use TLS version 1.2.
 	NEVPNIKEv2TLSVersion1_2 NEVPNIKEv2TLSVersion = 3
 )
 
@@ -677,20 +691,21 @@ func (e NEVPNIKEv2TLSVersion) String() string {
 	}
 }
 
+// The possible states of a VPN connection.
 type NEVPNStatus int64
 
 const (
-	// @const NEVPNStatusInvalid The VPN is not configured.
+	// The associated VPN configuration doesn’t exist in the Network Extension preferences or isn’t enabled.
 	NEVPNStatusInvalid NEVPNStatus = 0
-	// @const NEVPNStatusDisconnected The VPN is disconnected.
+	// The VPN is disconnected.
 	NEVPNStatusDisconnected NEVPNStatus = 1
-	// @const NEVPNStatusConnecting The VPN is connecting.
+	// The VPN is in the process of connecting.
 	NEVPNStatusConnecting NEVPNStatus = 2
-	// @const NEVPNStatusConnected The VPN is connected.
+	// The VPN is connected.
 	NEVPNStatusConnected NEVPNStatus = 3
-	// @const NEVPNStatusReasserting The VPN is reconnecting following loss of underlying network connectivity.
+	// The VPN is in the process of reconnecting.
 	NEVPNStatusReasserting NEVPNStatus = 4
-	// @const NEVPNStatusDisconnecting The VPN is disconnecting.
+	// The VPN is in the process of disconnecting.
 	NEVPNStatusDisconnecting NEVPNStatus = 5
 )
 
@@ -717,13 +732,13 @@ func (e NEVPNStatus) String() string {
 type NWPathStatus int64
 
 const (
-	// @const NWPathStatusInvalid The path cannot be evaluated.
+	// The path cannot be evaluated.
 	NWPathStatusInvalid NWPathStatus = 0
-	// @const NWPathStatusSatisfied The path is ready to be used for traffic.
+	// The path is ready to be used for network connections.
 	NWPathStatusSatisfied NWPathStatus = 1
-	// @const NWPathStatusUnsatisfied The network for this connection is not available.
+	// The path for network connections is not available, either due to lack of network connectivity or being prohibited by system policy.
 	NWPathStatusUnsatisfied NWPathStatus = 2
-	// @const NWPathStatusSatisfiable The path may become satisfied upon a connection attempt.
+	// The path is not currently satisfied, but may become satisfied upon a connection attempt. This can be due to a service, such as a VPN or a cellular data connection not being activated.
 	NWPathStatusSatisfiable NWPathStatus = 3
 )
 
@@ -742,21 +757,23 @@ func (e NWPathStatus) String() string {
 	}
 }
 
+// Defined connection states. New types may be defined in the future.
+//
 // Deprecated: Use `nw_connection_state_t` in Network framework instead, see deprecation notice in <NetworkExtension/NWTCPConnection.h>
 type NWTCPConnectionState int64
 
 const (
-	// @constant NWTCPConnectionStateInvalid The connection is in an invalid or uninitialized state
+	// The connection is in an invalid or uninitialized state.
 	NWTCPConnectionStateInvalid NWTCPConnectionState = 0
-	// @constant NWTCPConnectionStateConnecting The connection is attempting
+	// The connection is attempting to connect. This includes endpoint resolution when applicable.
 	NWTCPConnectionStateConnecting NWTCPConnectionState = 1
-	// @constant NWTCPConnectionStateWaiting The connection has attempted but failed. It is now waiting for better condition(s) before trying again.
+	// The connection has attempted to connect but failed. It is now waiting for better conditions before trying again.
 	NWTCPConnectionStateWaiting NWTCPConnectionState = 2
-	// @constant NWTCPConnectionStateConnected The connection is established. It is now possible to transfer data. If TLS is in use, the TLS handshake would have finished when the connection is in this state.
+	// The connection is established. It is now possible to transfer data. If TLS is in use, the TLS handshake has finished.
 	NWTCPConnectionStateConnected NWTCPConnectionState = 3
-	// @constant NWTCPConnectionStateDisconnected The connection is disconnected. It is no longer possible to transfer data. The application should call cancellation method to clean up resources when the connection is in this state.
+	// The connection is disconnected. It is no longer possible to transfer data. The application should call cancel to clean up resources.
 	NWTCPConnectionStateDisconnected NWTCPConnectionState = 4
-	// @constant NWTCPConnectionStateCancelled The connection is cancelled. This is triggered by the cancellation method.
+	// The connection has been cancelled by the client calling cancel.
 	NWTCPConnectionStateCancelled NWTCPConnectionState = 5
 )
 
@@ -783,17 +800,17 @@ func (e NWTCPConnectionState) String() string {
 type NWUDPSessionState int64
 
 const (
-	// @constant NWUDPSessionStateInvalid The session is in an invalid or uninitialized state.
+	// The session is in an invalid or uninitialized state.
 	NWUDPSessionStateInvalid NWUDPSessionState = 0
-	// @constant NWUDPSessionStateWaiting The session is waiting for better conditions before attempting to make the session ready.
+	// The session is waiting for better conditions before attempting to make the session ready.
 	NWUDPSessionStateWaiting NWUDPSessionState = 1
-	// @constant NWUDPSessionStatePreparing The endpoint is being resolved
+	// The remote endpoint is being resolved.
 	NWUDPSessionStatePreparing NWUDPSessionState = 2
-	// @constant NWUDPSessionStateReady The session is ready for reading and writing data
+	// The session is ready for reading and writing data.
 	NWUDPSessionStateReady NWUDPSessionState = 3
-	// @constant NWUDPSessionStateFailed None of the currently resolved endpoints can be used at this time, either due to problems with the path or the client rejecting the endpoints.
+	// None of the currently resolved endpoints can be used at this time, either due to problems with the path or the client rejecting the endpoints.
 	NWUDPSessionStateFailed NWUDPSessionState = 4
-	// @constant NWUDPSessionStateCancelled The session has been cancelled by the client
+	// The session has been cancelled by the client calling cancel.
 	NWUDPSessionStateCancelled NWUDPSessionState = 5
 )
 

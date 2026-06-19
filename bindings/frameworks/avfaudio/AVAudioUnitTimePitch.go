@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides a good-quality playback rate and pitch shifting independently of each other.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiounittimepitch
 type AVAudioUnitTimePitch struct {
 	AVAudioUnitTimeEffect

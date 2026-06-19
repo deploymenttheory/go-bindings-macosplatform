@@ -64,6 +64,7 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
+// The log level at which the entry was generated.
 type OSLogEntryLogLevel int64
 
 const (
@@ -94,6 +95,7 @@ func (e OSLogEntryLogLevel) String() string {
 	}
 }
 
+// The available signpost types.
 type OSLogEntrySignpostType int64
 
 const (
@@ -118,6 +120,7 @@ func (e OSLogEntrySignpostType) String() string {
 	}
 }
 
+// A classification of how the entry was to be stored and rotated at the point when it was created.
 type OSLogEntryStoreCategory int64
 
 const (
@@ -157,6 +160,7 @@ func (e OSLogEntryStoreCategory) String() string {
 	}
 }
 
+// Option to control the direction of the iteration.
 type OSLogEnumeratorOptions uint64
 
 const (
@@ -174,6 +178,7 @@ func (e OSLogEnumeratorOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The data type corresponding to the argument provided in a message payload.
 type OSLogMessageComponentArgumentCategory int64
 
 const (

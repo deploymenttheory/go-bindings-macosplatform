@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract base class of the framework’s photo library change requests.
+//
 // ChangeRequest wraps [raw.PHChangeRequest] with a fluent Go API.
 type ChangeRequest struct {
 	inner *raw.PHChangeRequest

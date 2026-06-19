@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that contains a full address, and, optionally, a short address.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkaddress
 type MKAddress struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func MKAddressFromID(id objc.ID) *MKAddress {
 	return o
 }
 
+// Initializes a new address with a location’s full address using a string and a short address that provides an abbreviated form of the address such as a street address.
 func (o *MKAddress) InitWithFullAddressShortAddress(fullAddress *foundation.NSString, shortAddress *foundation.NSString) *MKAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressSelInitWithFullAddressShortAddress, fullAddress.Ptr(), shortAddress.Ptr())
 	if _ret != 0 {

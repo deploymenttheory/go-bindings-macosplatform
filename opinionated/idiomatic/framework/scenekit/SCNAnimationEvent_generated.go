@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A container for a closure, a block in Objective-C, to be executed at a specific time during playback of an animation.
+//
 // AnimationEvent wraps [raw.SCNAnimationEvent] with a fluent Go API.
 type AnimationEvent struct {
 	inner *raw.SCNAnimationEvent

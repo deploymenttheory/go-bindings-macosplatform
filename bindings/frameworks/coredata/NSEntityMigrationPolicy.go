@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A policy instance that customizes the migration process for an entity mapping.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsentitymigrationpolicy
 type NSEntityMigrationPolicy struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func NSEntityMigrationPolicyFromID(id objc.ID) *NSEntityMigrationPolicy {
 	return o
 }
 
+// Sets up state information before the start of a given entity mapping.
 func (o *NSEntityMigrationPolicy) BeginEntityMappingManagerError(mapping *NSEntityMapping, manager *NSMigrationManager) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSEntityMigrationPolicySelBeginEntityMappingManagerError, mapping.Ptr(), manager.Ptr(), unsafe.Pointer(&_nsErr))
@@ -47,6 +50,7 @@ func (o *NSEntityMigrationPolicy) BeginEntityMappingManagerError(mapping *NSEnti
 	return _ret, nil
 }
 
+// Creates the destination instance(s) for a given source instance.
 func (o *NSEntityMigrationPolicy) CreateDestinationInstancesForSourceInstanceEntityMappingManagerError(sInstance *NSManagedObject, mapping *NSEntityMapping, manager *NSMigrationManager) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSEntityMigrationPolicySelCreateDestinationInstancesForSourceInstanceEntityMappingManagerError, sInstance.Ptr(), mapping.Ptr(), manager.Ptr(), unsafe.Pointer(&_nsErr))
@@ -56,6 +60,7 @@ func (o *NSEntityMigrationPolicy) CreateDestinationInstancesForSourceInstanceEnt
 	return _ret, nil
 }
 
+// Indicates the end of the instance creation stage for the specified entity mapping, and the precursor to the next migration stage.
 func (o *NSEntityMigrationPolicy) EndInstanceCreationForEntityMappingManagerError(mapping *NSEntityMapping, manager *NSMigrationManager) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSEntityMigrationPolicySelEndInstanceCreationForEntityMappingManagerError, mapping.Ptr(), manager.Ptr(), unsafe.Pointer(&_nsErr))
@@ -65,6 +70,7 @@ func (o *NSEntityMigrationPolicy) EndInstanceCreationForEntityMappingManagerErro
 	return _ret, nil
 }
 
+// Constructs the relationships between the newly-created destination instances.
 func (o *NSEntityMigrationPolicy) CreateRelationshipsForDestinationInstanceEntityMappingManagerError(dInstance *NSManagedObject, mapping *NSEntityMapping, manager *NSMigrationManager) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSEntityMigrationPolicySelCreateRelationshipsForDestinationInstanceEntityMappingManagerError, dInstance.Ptr(), mapping.Ptr(), manager.Ptr(), unsafe.Pointer(&_nsErr))
@@ -74,6 +80,7 @@ func (o *NSEntityMigrationPolicy) CreateRelationshipsForDestinationInstanceEntit
 	return _ret, nil
 }
 
+// Indicates the end of the relationship creation stage for the specified entity mapping.
 func (o *NSEntityMigrationPolicy) EndRelationshipCreationForEntityMappingManagerError(mapping *NSEntityMapping, manager *NSMigrationManager) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSEntityMigrationPolicySelEndRelationshipCreationForEntityMappingManagerError, mapping.Ptr(), manager.Ptr(), unsafe.Pointer(&_nsErr))
@@ -83,6 +90,7 @@ func (o *NSEntityMigrationPolicy) EndRelationshipCreationForEntityMappingManager
 	return _ret, nil
 }
 
+// Provides the option to perform custom validation on migrated objects during the validation stage of the entity migration policy.
 func (o *NSEntityMigrationPolicy) PerformCustomValidationForEntityMappingManagerError(mapping *NSEntityMapping, manager *NSMigrationManager) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSEntityMigrationPolicySelPerformCustomValidationForEntityMappingManagerError, mapping.Ptr(), manager.Ptr(), unsafe.Pointer(&_nsErr))
@@ -92,6 +100,7 @@ func (o *NSEntityMigrationPolicy) PerformCustomValidationForEntityMappingManager
 	return _ret, nil
 }
 
+// Performs cleanup at the end of the migration, from any phase of the mapping.
 func (o *NSEntityMigrationPolicy) EndEntityMappingManagerError(mapping *NSEntityMapping, manager *NSMigrationManager) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSEntityMigrationPolicySelEndEntityMappingManagerError, mapping.Ptr(), manager.Ptr(), unsafe.Pointer(&_nsErr))

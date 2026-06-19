@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that connects each input to each output within its layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcfullyconnectedlayer
 type MLCFullyConnectedLayer struct {
 	MLCLayer
@@ -34,7 +36,7 @@ func MLCFullyConnectedLayerFromID(id objc.ID) *MLCFullyConnectedLayer {
 	return o
 }
 
-// @abstract   Create a fully connected layer @param      weights        The weights tensor @param      biases         The bias tensor @param      descriptor     The convolution descriptor @return     A new fully connected layer
+// Creates a fully connected layer with the weights, biases, and convolution descriptor you specify.
 func MLCFullyConnectedLayerLayerWithWeightsBiasesDescriptor(weights *MLCTensor, biases *MLCTensor, descriptor *MLCConvolutionDescriptor) *MLCFullyConnectedLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCFullyConnectedLayer), _mLCFullyConnectedLayerSelLayerWithWeightsBiasesDescriptor, weights.Ptr(), biases.Ptr(), descriptor.Ptr())
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A port name server that takes and returns socket ports.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nssocketportnameserver
 // Deprecated: Use NSXPCConnection instead
 type NSSocketPortNameServer struct {
@@ -34,11 +36,13 @@ func NSSocketPortNameServerFromID(id objc.ID) *NSSocketPortNameServer {
 	return o
 }
 
+// Returns the shared socket port name server.
 func NSSocketPortNameServerSharedInstance() objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSocketPortNameServer), _nSSocketPortNameServerSelSharedInstance)
 	return _ret
 }
 
+// Looks up and returns the port registered under the specified name on a specified host.
 func (o *NSSocketPortNameServer) PortForNameHostNameServerPortNumber(name *NSString, host *NSString, portNumber uint16) *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortNameServerSelPortForNameHostNameServerPortNumber, name.Ptr(), host.Ptr(), portNumber)
 	if _ret != 0 {
@@ -47,6 +51,7 @@ func (o *NSSocketPortNameServer) PortForNameHostNameServerPortNumber(name *NSStr
 	return NSPortFromID(_ret)
 }
 
+// Registers a given port as a network service with the specified name in the local domain.
 func (o *NSSocketPortNameServer) RegisterPortNameNameServerPortNumber(port *NSPort, name *NSString, portNumber uint16) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSocketPortNameServerSelRegisterPortNameNameServerPortNumber, port.Ptr(), name.Ptr(), portNumber)
 	return _ret

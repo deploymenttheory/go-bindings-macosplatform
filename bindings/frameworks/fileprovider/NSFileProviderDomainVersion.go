@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An opaque object that identifies a specific version of a domain.
+//
 // Apple documentation: https://developer.apple.com/documentation/fileprovider/nsfileproviderdomainversion
 type NSFileProviderDomainVersion struct {
 	foundation.NSObject
@@ -31,7 +33,7 @@ func NSFileProviderDomainVersionFromID(id objc.ID) *NSFileProviderDomainVersion 
 	return o
 }
 
-// Build a version that is strictly greater than the receiver.
+// Creates a new version that supersedes the current version.
 func (o *NSFileProviderDomainVersion) Next() *NSFileProviderDomainVersion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderDomainVersionSelNext)
 	if _ret != 0 {
@@ -40,7 +42,7 @@ func (o *NSFileProviderDomainVersion) Next() *NSFileProviderDomainVersion {
 	return NSFileProviderDomainVersionFromID(_ret)
 }
 
-// Compare two domain versions. This returns the NSComparisonResult of the comparison of the receiver and the other version: - NSOrderedAscending if the receiver predates the otherVersion - NSOrderedDescending if the otherVersion predates the receiver - NSOrderedSame if both versions are equal In Swift, NSFileProviderDomainVersion is comparable.
+// Compares another domain version with this one.
 func (o *NSFileProviderDomainVersion) Compare(otherVersion *NSFileProviderDomainVersion) foundation.NSComparisonResult {
 	_ret := objc.Send[foundation.NSComparisonResult](o.Ptr(), _nSFileProviderDomainVersionSelCompare, otherVersion.Ptr())
 	return _ret

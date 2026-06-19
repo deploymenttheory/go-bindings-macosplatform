@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that contains credentials for a Thread network. A Thread network defines parameters that all connected devices use. “THCredentials“ provides these parameters.
+// A class that contains credentials for a Thread network.
 //
 // THCredentials wraps [raw.THCredentials] with a fluent Go API.
 type THCredentials struct {

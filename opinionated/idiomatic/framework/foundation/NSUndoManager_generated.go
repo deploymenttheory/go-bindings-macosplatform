@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A general-purpose recorder of operations that enables undo and redo.
+//
 // UndoManager wraps [raw.NSUndoManager] with a fluent Go API.
 type UndoManager struct {
 	inner *raw.NSUndoManager
@@ -160,7 +162,7 @@ func (x *UndoManager) PrepareWithInvocationTarget(target objc.ID) objc.ID {
 	return x.inner.PrepareWithInvocationTarget(target)
 }
 
-// Records a single undo operation for a given target so that when an undo is performed, it executes the specified block. As with other undo operations, this does not strongly retain target. Care should be taken to avoid introducing retain cycles by other references captured by the block. - Parameter target: The target of the undo operation. - Parameter undoHandler: The block to be executed when an operation is undone. The block takes a single argument, the target of the undo operation.
+// Records a single undo operation for a given target so that when the manager performs an undo, it executes the specified block.
 //
 // RegisterUndoWithTargetHandler calls the underlying RegisterUndoWithTargetHandler.
 func (x *UndoManager) RegisterUndoWithTargetHandler(target objc.ID, undoHandler func(objc.ID)) {

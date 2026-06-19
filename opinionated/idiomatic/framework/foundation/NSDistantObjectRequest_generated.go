@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object used by the distributed objects system to help handle invocations between different processes.
+//
 // DistantObjectRequest wraps [raw.NSDistantObjectRequest] with a fluent Go API.
 type DistantObjectRequest struct {
 	inner *raw.NSDistantObjectRequest
@@ -41,6 +43,8 @@ func (x *DistantObjectRequest) WithScriptingProperties(scriptingProperties *raw.
 	return x
 }
 
+// Sends a reply back to the remote object making the distant object request.
+//
 // ReplyWithException calls the underlying ReplyWithException.
 func (x *DistantObjectRequest) ReplyWithException(exception *raw.NSException) {
 	x.inner.ReplyWithException(exception)

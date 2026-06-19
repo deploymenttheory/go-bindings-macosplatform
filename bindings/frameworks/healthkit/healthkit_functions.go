@@ -23,7 +23,7 @@ var (
 	// @abstract Retrieves the minimum quantity in percent unit for an Apple Walking Steadiness classification. @param classification Apple Walking Steadiness classification for desired minimum value.
 	_fnHKAppleWalkingSteadinessMinimumQuantityForClassification func(HKAppleWalkingSteadinessClassification) objc.ID
 	// Returns the set of `HKCategoryValueSleepAnalysis` values that are considered to be asleep.
-	_fnHKCategoryValueSleepAnalysisAsleepValues func() *foundation.NSSet[*foundation.NSNumber]
+	_fnHKCategoryValueSleepAnalysisAsleepValues func() objc.ID
 	// Returns the valence classification appropriate for a valence value. If the given valence is outside the supported range of values, this function returns @c nil.
 	_fnHKStateOfMindValenceClassificationForValence func(float64) objc.ID
 )
@@ -71,7 +71,11 @@ func HKAppleWalkingSteadinessMinimumQuantityForClassification(classification HKA
 
 // Returns the set of `HKCategoryValueSleepAnalysis` values that are considered to be asleep.
 func HKCategoryValueSleepAnalysisAsleepValues() *foundation.NSSet[*foundation.NSNumber] {
-	return _fnHKCategoryValueSleepAnalysisAsleepValues()
+	_ret := _fnHKCategoryValueSleepAnalysisAsleepValues()
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSNumber](_ret)
 }
 
 // Returns the valence classification appropriate for a valence value. If the given valence is outside the supported range of values, this function returns @c nil.

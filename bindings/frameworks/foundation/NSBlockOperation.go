@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation that manages the concurrent execution of one or more blocks.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsblockoperation
 type NSBlockOperation struct {
 	NSOperation

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that contains the collaboration content and options.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyou/swcollaborationview
 type SWCollaborationView struct {
 	appkit.NSView
@@ -51,10 +53,12 @@ func SWCollaborationViewFromID(id objc.ID) *SWCollaborationView {
 	return o
 }
 
+// Sets the content view.
 func (o *SWCollaborationView) SetContentView(detailViewListContentView *appkit.NSView) {
 	o.Ptr().Send(_sWCollaborationViewSelSetContentView, detailViewListContentView.Ptr())
 }
 
+// Creates and initializes a collaboration view.
 func (o *SWCollaborationView) InitWithItemProvider(itemProvider *foundation.NSItemProvider) *SWCollaborationView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationViewSelInitWithItemProvider, itemProvider.Ptr())
 	if _ret != 0 {
@@ -63,7 +67,7 @@ func (o *SWCollaborationView) InitWithItemProvider(itemProvider *foundation.NSIt
 	return SWCollaborationViewFromID(_ret)
 }
 
-// @abstract Dismisses the popover, if presented. @param completion Called when the popover dismissal finishes.
+// Dismisses the popover.
 func (o *SWCollaborationView) DismissPopover(completion func()) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -75,7 +79,7 @@ func (o *SWCollaborationView) DismissPopover(completion func()) {
 	o.Ptr().Send(_sWCollaborationViewSelDismissPopover, __block_completion)
 }
 
-// @abstract whether the collaboration popover should show the default manage participants button in the popover, defaults to YES @param showManageButton whether the button should be hidden
+// A Boolean value the system uses to show or hide the default manage-participants button in the collaboration popover.
 func (o *SWCollaborationView) SetShowManageButton(showManageButton bool) {
 	o.Ptr().Send(_sWCollaborationViewSelSetShowManageButton, showManageButton)
 }

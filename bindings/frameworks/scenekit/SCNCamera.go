@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of camera attributes that can be attached to a node to provide a point of view for displaying the scene.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scncamera
 type SCNCamera struct {
 	foundation.NSObject
@@ -142,7 +144,7 @@ func SCNCameraFromID(id objc.ID) *SCNCamera {
 	return o
 }
 
-// @method camera @abstract Creates and returns a camera instance.
+// Creates a new camera object.
 func SCNCameraCamera() *SCNCamera {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNCamera), _sCNCameraSelCamera)
 	if _ret != 0 {

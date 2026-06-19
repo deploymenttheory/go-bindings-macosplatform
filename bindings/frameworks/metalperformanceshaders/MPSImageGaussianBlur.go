@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that convolves an image with a Gaussian blur of a given sigma in both the x and y directions.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagegaussianblur
 type MPSImageGaussianBlur struct {
 	mpsimage.MPSUnaryImageKernel
@@ -34,6 +36,7 @@ func MPSImageGaussianBlurFromID(id objc.ID) *MPSImageGaussianBlur {
 	return o
 }
 
+// Initializes a Gaussian blur filter.
 func (o *MPSImageGaussianBlur) InitWithDeviceSigma(device metal.MTLDevice, sigma float32) *MPSImageGaussianBlur {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageGaussianBlurSelInitWithDeviceSigma, device, sigma)
 	if _ret != 0 {

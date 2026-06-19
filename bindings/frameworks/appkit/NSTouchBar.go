@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides dynamic contextual controls in the Touch Bar of supported models of MacBook Pro.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstouchbar
 type NSTouchBar struct {
 	foundation.NSObject
@@ -52,6 +54,7 @@ func NSTouchBarFromID(id objc.ID) *NSTouchBar {
 	return o
 }
 
+// Creates a Touch Bar object.
 func (o *NSTouchBar) Init() *NSTouchBar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelInit)
 	if _ret != 0 {
@@ -60,6 +63,7 @@ func (o *NSTouchBar) Init() *NSTouchBar {
 	return NSTouchBarFromID(_ret)
 }
 
+// Creates a Touch Bar object from a coder object provided by a storyboard or NIB file.
 func (o *NSTouchBar) InitWithCoder(coder *foundation.NSCoder) *NSTouchBar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -68,6 +72,7 @@ func (o *NSTouchBar) InitWithCoder(coder *foundation.NSCoder) *NSTouchBar {
 	return NSTouchBarFromID(_ret)
 }
 
+// Returns the Touch Bar item that corresponds to a given identifier.
 func (o *NSTouchBar) ItemForIdentifier(identifier *foundation.NSString) *NSTouchBarItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelItemForIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -89,35 +94,47 @@ func (o *NSTouchBar) SetCustomizationIdentifier(customizationIdentifier *foundat
 }
 
 func (o *NSTouchBar) CustomizationAllowedItemIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTouchBarSelCustomizationAllowedItemIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelCustomizationAllowedItemIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSTouchBar) SetCustomizationAllowedItemIdentifiers(customizationAllowedItemIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSTouchBarSelSetCustomizationAllowedItemIdentifiers, customizationAllowedItemIdentifiers)
+	o.Ptr().Send(_nSTouchBarSelSetCustomizationAllowedItemIdentifiers, customizationAllowedItemIdentifiers.Ptr())
 }
 
 func (o *NSTouchBar) CustomizationRequiredItemIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTouchBarSelCustomizationRequiredItemIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelCustomizationRequiredItemIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSTouchBar) SetCustomizationRequiredItemIdentifiers(customizationRequiredItemIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSTouchBarSelSetCustomizationRequiredItemIdentifiers, customizationRequiredItemIdentifiers)
+	o.Ptr().Send(_nSTouchBarSelSetCustomizationRequiredItemIdentifiers, customizationRequiredItemIdentifiers.Ptr())
 }
 
 func (o *NSTouchBar) DefaultItemIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTouchBarSelDefaultItemIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelDefaultItemIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSTouchBar) SetDefaultItemIdentifiers(defaultItemIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSTouchBarSelSetDefaultItemIdentifiers, defaultItemIdentifiers)
+	o.Ptr().Send(_nSTouchBarSelSetDefaultItemIdentifiers, defaultItemIdentifiers.Ptr())
 }
 
 func (o *NSTouchBar) ItemIdentifiers() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTouchBarSelItemIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTouchBarSelItemIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSTouchBar) PrincipalItemIdentifier() *foundation.NSString {

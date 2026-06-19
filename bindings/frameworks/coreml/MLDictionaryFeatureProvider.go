@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A convenience wrapper for the given dictionary of data.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mldictionaryfeatureprovider
 type MLDictionaryFeatureProvider struct {
 	foundation.NSObject
@@ -34,10 +36,10 @@ func MLDictionaryFeatureProviderFromID(id objc.ID) *MLDictionaryFeatureProvider 
 	return o
 }
 
-// Create from a generic dictionary by converting all values to MLFeatureValues or from a dictionary with values already stored as MLFeatureValues. An error results if the values are not or cannot be represented as MLFeatureValues.
+// Creates the feature provider based on a dictionary.
 func (o *MLDictionaryFeatureProvider) InitWithDictionaryError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLDictionaryFeatureProvider, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _mLDictionaryFeatureProviderSelInitWithDictionaryError, dictionary, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLDictionaryFeatureProviderSelInitWithDictionaryError, dictionary.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -47,7 +49,7 @@ func (o *MLDictionaryFeatureProvider) InitWithDictionaryError(dictionary *founda
 	return MLDictionaryFeatureProviderFromID(_ret), nil
 }
 
-// Get the value for specified feature
+// Subscript interface for the feature provider to pass through to the dictionary.
 func (o *MLDictionaryFeatureProvider) ObjectForKeyedSubscript(featureName *foundation.NSString) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLDictionaryFeatureProviderSelObjectForKeyedSubscript, featureName.Ptr())
 	if _ret != 0 {
@@ -58,6 +60,9 @@ func (o *MLDictionaryFeatureProvider) ObjectForKeyedSubscript(featureName *found
 
 // Dictionary holding the feature values
 func (o *MLDictionaryFeatureProvider) Dictionary() *foundation.NSDictionary[*foundation.NSString, *MLFeatureValue] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *MLFeatureValue]](o.Ptr(), _mLDictionaryFeatureProviderSelDictionary)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLDictionaryFeatureProviderSelDictionary)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *MLFeatureValue](_ret)
 }

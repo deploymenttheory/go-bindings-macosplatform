@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance describing the desired GPU state for a kernel call in a compute pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlcomputepipelinedescriptor
 type MTLComputePipelineDescriptor struct {
 	foundation.NSObject
@@ -59,7 +61,7 @@ func MTLComputePipelineDescriptorFromID(id objc.ID) *MTLComputePipelineDescripto
 	return o
 }
 
-// @method reset @abstract Restore all compute pipeline descriptor properties to their default values.
+// Resets all compute pipeline descriptor properties to their default values.
 func (o *MTLComputePipelineDescriptor) Reset() {
 	o.Ptr().Send(_mTLComputePipelineDescriptorSelReset)
 }

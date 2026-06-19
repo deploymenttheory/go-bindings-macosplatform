@@ -38,10 +38,10 @@ func MTRThermostatClusterAtomicResponseParamsFromID(id objc.ID) *MTRThermostatCl
 	return o
 }
 
-// Initialize an MTRThermostatClusterAtomicResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+// Initialize an MTRThermostatClusterAtomicResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
 func (o *MTRThermostatClusterAtomicResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRThermostatClusterAtomicResponseParams, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterAtomicResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterAtomicResponseParamsSelInitWithResponseValueError, responseValue.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -64,12 +64,15 @@ func (o *MTRThermostatClusterAtomicResponseParams) SetStatusCode(statusCode *fou
 }
 
 func (o *MTRThermostatClusterAtomicResponseParams) AttributeStatus() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRThermostatClusterAtomicResponseParamsSelAttributeStatus)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterAtomicResponseParamsSelAttributeStatus)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRThermostatClusterAtomicResponseParams) SetAttributeStatus(attributeStatus *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRThermostatClusterAtomicResponseParamsSelSetAttributeStatus, attributeStatus)
+	o.Ptr().Send(_mTRThermostatClusterAtomicResponseParamsSelSetAttributeStatus, attributeStatus.Ptr())
 }
 
 func (o *MTRThermostatClusterAtomicResponseParams) Timeout() *foundation.NSNumber {

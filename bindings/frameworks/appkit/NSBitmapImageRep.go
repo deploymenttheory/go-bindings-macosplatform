@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that renders an image from bitmap data.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsbitmapimagerep
 type NSBitmapImageRep struct {
 	NSImageRep
@@ -74,6 +76,7 @@ func NSBitmapImageRepFromID(id objc.ID) *NSBitmapImageRep {
 	return o
 }
 
+// Initializes a newly allocated bitmap image representation with bitmap data from a rendered image.
 // Deprecated: Use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view.
 func (o *NSBitmapImageRep) InitWithFocusedViewRect(rect corefoundation.CGRect) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelInitWithFocusedViewRect, rect)
@@ -83,6 +86,7 @@ func (o *NSBitmapImageRep) InitWithFocusedViewRect(rect corefoundation.CGRect) *
 	return NSBitmapImageRepFromID(_ret)
 }
 
+// Initializes a newly allocated bitmap image representation so it can render the specified image.
 // Deprecated: Use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view.
 func (o *NSBitmapImageRep) InitWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBytesPerRowBitsPerPixel(planes *uint8, width int, height int, bps int, spp int, alpha bool, isPlanar bool, colorSpaceName *foundation.NSString, rBytes int, pBits int) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelInitWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBytesPerRowBitsPerPixel, planes, width, height, bps, spp, alpha, isPlanar, colorSpaceName.Ptr(), rBytes, pBits)
@@ -92,6 +96,7 @@ func (o *NSBitmapImageRep) InitWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSa
 	return NSBitmapImageRepFromID(_ret)
 }
 
+// Initializes a newly allocated bitmap image representation so it can render the specified image.
 // Deprecated: Use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view.
 func (o *NSBitmapImageRep) InitWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBitmapFormatBytesPerRowBitsPerPixel(planes *uint8, width int, height int, bps int, spp int, alpha bool, isPlanar bool, colorSpaceName *foundation.NSString, bitmapFormat NSBitmapFormat, rBytes int, pBits int) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelInitWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBitmapFormatBytesPerRowBitsPerPixel, planes, width, height, bps, spp, alpha, isPlanar, colorSpaceName.Ptr(), bitmapFormat, rBytes, pBits)
@@ -101,6 +106,7 @@ func (o *NSBitmapImageRep) InitWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSa
 	return NSBitmapImageRepFromID(_ret)
 }
 
+// Returns a bitmap image representation from a Core Graphics image object.
 func (o *NSBitmapImageRep) InitWithCGImage(cgImage unsafe.Pointer) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelInitWithCGImage, cgImage)
 	if _ret != 0 {
@@ -109,6 +115,7 @@ func (o *NSBitmapImageRep) InitWithCGImage(cgImage unsafe.Pointer) *NSBitmapImag
 	return NSBitmapImageRepFromID(_ret)
 }
 
+// Returns a bitmap image representation from a Core Image object.
 func (o *NSBitmapImageRep) InitWithCIImage(ciImage *coreimage.CIImage) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelInitWithCIImage, ciImage.Ptr())
 	if _ret != 0 {
@@ -117,6 +124,7 @@ func (o *NSBitmapImageRep) InitWithCIImage(ciImage *coreimage.CIImage) *NSBitmap
 	return NSBitmapImageRepFromID(_ret)
 }
 
+// Creates and returns an array of bitmap image representation objects that correspond to the images in the specified data.
 func NSBitmapImageRepImageRepsWithData(data *foundation.NSData) *foundation.NSArray[*NSImageRep] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBitmapImageRep), _nSBitmapImageRepSelImageRepsWithData, data.Ptr())
 	if _ret != 0 {
@@ -125,6 +133,7 @@ func NSBitmapImageRepImageRepsWithData(data *foundation.NSData) *foundation.NSAr
 	return foundation.NSArrayFromID[*NSImageRep](_ret)
 }
 
+// Creates and returns a bitmap image representation with the first image in the specified data.
 func NSBitmapImageRepImageRepWithData(data *foundation.NSData) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBitmapImageRep), _nSBitmapImageRepSelImageRepWithData, data.Ptr())
 	if _ret != 0 {
@@ -133,6 +142,7 @@ func NSBitmapImageRepImageRepWithData(data *foundation.NSData) *NSBitmapImageRep
 	return NSBitmapImageRepFromID(_ret)
 }
 
+// Initializes a newly allocated bitmap image representation from the specified data.
 func (o *NSBitmapImageRep) InitWithData(data *foundation.NSData) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelInitWithData, data.Ptr())
 	if _ret != 0 {
@@ -141,18 +151,22 @@ func (o *NSBitmapImageRep) InitWithData(data *foundation.NSData) *NSBitmapImageR
 	return NSBitmapImageRepFromID(_ret)
 }
 
+// Returns by indirection bitmap data of the bitmap image representation separated into planes.
 func (o *NSBitmapImageRep) GetBitmapDataPlanes(data *uint8) {
 	o.Ptr().Send(_nSBitmapImageRepSelGetBitmapDataPlanes, data)
 }
 
+// Returns by indirection the bitmap image representation’s compression type and compression factor.
 func (o *NSBitmapImageRep) GetCompressionFactor(compression *NSTIFFCompression, factor *float32) {
 	o.Ptr().Send(_nSBitmapImageRepSelGetCompressionFactor, compression, factor)
 }
 
+// Sets the bitmap image representation’s compression type and compression factor.
 func (o *NSBitmapImageRep) SetCompressionFactor(compression NSTIFFCompression, factor float32) {
 	o.Ptr().Send(_nSBitmapImageRepSelSetCompressionFactor, compression, factor)
 }
 
+// Returns a TIFF representation of the image using the specified compression.
 func (o *NSBitmapImageRep) TIFFRepresentationUsingCompressionFactor(comp NSTIFFCompression, factor float32) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelTIFFRepresentationUsingCompressionFactor, comp, factor)
 	if _ret != 0 {
@@ -161,6 +175,7 @@ func (o *NSBitmapImageRep) TIFFRepresentationUsingCompressionFactor(comp NSTIFFC
 	return foundation.NSDataFromID(_ret)
 }
 
+// Returns a TIFF representation of the specified images.
 func NSBitmapImageRepTIFFRepresentationOfImageRepsInArray(array *foundation.NSArray[*NSImageRep]) *foundation.NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBitmapImageRep), _nSBitmapImageRepSelTIFFRepresentationOfImageRepsInArray, array.Ptr())
 	if _ret != 0 {
@@ -169,6 +184,7 @@ func NSBitmapImageRepTIFFRepresentationOfImageRepsInArray(array *foundation.NSAr
 	return foundation.NSDataFromID(_ret)
 }
 
+// Returns a TIFF representation of the specified images using the specified compression scheme and factor.
 func NSBitmapImageRepTIFFRepresentationOfImageRepsInArrayUsingCompressionFactor(array *foundation.NSArray[*NSImageRep], comp NSTIFFCompression, factor float32) *foundation.NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBitmapImageRep), _nSBitmapImageRepSelTIFFRepresentationOfImageRepsInArrayUsingCompressionFactor, array.Ptr(), comp, factor)
 	if _ret != 0 {
@@ -177,10 +193,12 @@ func NSBitmapImageRepTIFFRepresentationOfImageRepsInArrayUsingCompressionFactor(
 	return foundation.NSDataFromID(_ret)
 }
 
+// Returns by indirection an array of all available compression types that can be used when writing a TIFF image.
 func NSBitmapImageRepGetTIFFCompressionTypesCount(list *NSTIFFCompression, numTypes *int64) {
 	objc.ID(_clsNSBitmapImageRep).Send(_nSBitmapImageRepSelGetTIFFCompressionTypesCount, list, numTypes)
 }
 
+// Returns an autoreleased string containing the localized name for the specified compression type.
 func NSBitmapImageRepLocalizedNameForTIFFCompressionType(compression NSTIFFCompression) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBitmapImageRep), _nSBitmapImageRepSelLocalizedNameForTIFFCompressionType, compression)
 	if _ret != 0 {
@@ -189,15 +207,18 @@ func NSBitmapImageRepLocalizedNameForTIFFCompressionType(compression NSTIFFCompr
 	return foundation.NSStringFromID(_ret)
 }
 
+// Tests whether the bitmap image representation can be compressed by the specified compression scheme.
 func (o *NSBitmapImageRep) CanBeCompressedUsing(compression NSTIFFCompression) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSBitmapImageRepSelCanBeCompressedUsing, compression)
 	return _ret
 }
 
+// Colorizes a grayscale image.
 func (o *NSBitmapImageRep) ColorizeByMappingGrayToColorBlackMappingWhiteMapping(midPoint float64, midPointColor *NSColor, shadowColor *NSColor, lightColor *NSColor) {
 	o.Ptr().Send(_nSBitmapImageRepSelColorizeByMappingGrayToColorBlackMappingWhiteMapping, midPoint, midPointColor.Ptr(), shadowColor.Ptr(), lightColor.Ptr())
 }
 
+// Initializes a newly allocated bitmap image representation for incremental loading.
 func (o *NSBitmapImageRep) InitForIncrementalLoad() *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelInitForIncrementalLoad)
 	if _ret != 0 {
@@ -206,15 +227,18 @@ func (o *NSBitmapImageRep) InitForIncrementalLoad() *NSBitmapImageRep {
 	return NSBitmapImageRepFromID(_ret)
 }
 
+// Loads the current image data into an incrementally-loaded image representation and returns the current status of the image.
 func (o *NSBitmapImageRep) IncrementalLoadFromDataComplete(data *foundation.NSData, complete bool) int {
 	_ret := objc.Send[int](o.Ptr(), _nSBitmapImageRepSelIncrementalLoadFromDataComplete, data.Ptr(), complete)
 	return _ret
 }
 
+// Changes the color of the pixel at the specified coordinates.
 func (o *NSBitmapImageRep) SetColorAtXY(color *NSColor, x int, y int) {
 	o.Ptr().Send(_nSBitmapImageRepSelSetColorAtXY, color.Ptr(), x, y)
 }
 
+// Returns the color of the pixel at the specified coordinates.
 func (o *NSBitmapImageRep) ColorAtXY(x int, y int) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelColorAtXY, x, y)
 	if _ret != 0 {
@@ -223,14 +247,17 @@ func (o *NSBitmapImageRep) ColorAtXY(x int, y int) *NSColor {
 	return NSColorFromID(_ret)
 }
 
+// Returns by indirection the pixel data for the specified location in the bitmap image representation.
 func (o *NSBitmapImageRep) GetPixelAtXY(p *uint, x int, y int) {
 	o.Ptr().Send(_nSBitmapImageRepSelGetPixelAtXY, p, x, y)
 }
 
+// Sets the bitmap image representation’s pixel at the specified coordinates to the specified raw pixel values.
 func (o *NSBitmapImageRep) SetPixelAtXY(p *uint, x int, y int) {
 	o.Ptr().Send(_nSBitmapImageRepSelSetPixelAtXY, p, x, y)
 }
 
+// Converts the bitmap image representation to the specified color space.
 func (o *NSBitmapImageRep) BitmapImageRepByConvertingToColorSpaceRenderingIntent(targetSpace *NSColorSpace, renderingIntent NSColorRenderingIntent) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelBitmapImageRepByConvertingToColorSpaceRenderingIntent, targetSpace.Ptr(), renderingIntent)
 	if _ret != 0 {
@@ -239,6 +266,7 @@ func (o *NSBitmapImageRep) BitmapImageRepByConvertingToColorSpaceRenderingIntent
 	return NSBitmapImageRepFromID(_ret)
 }
 
+// Changes the color space tag of the bitmap image representation.
 func (o *NSBitmapImageRep) BitmapImageRepByRetaggingWithColorSpace(newSpace *NSColorSpace) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelBitmapImageRepByRetaggingWithColorSpace, newSpace.Ptr())
 	if _ret != 0 {
@@ -308,26 +336,30 @@ func (o *NSBitmapImageRep) ColorSpace() *NSColorSpace {
 	return NSColorSpaceFromID(_ret)
 }
 
+// Formats the specified bitmap images using the specified storage type and properties and returns them in a data object.
 func NSBitmapImageRepRepresentationOfImageRepsInArrayUsingTypeProperties(imageReps *foundation.NSArray[*NSImageRep], storageType NSBitmapImageFileType, properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSBitmapImageRep), _nSBitmapImageRepSelRepresentationOfImageRepsInArrayUsingTypeProperties, imageReps.Ptr(), storageType, properties)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSBitmapImageRep), _nSBitmapImageRepSelRepresentationOfImageRepsInArrayUsingTypeProperties, imageReps.Ptr(), storageType, properties.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSDataFromID(_ret)
 }
 
+// Formats the bitmap representation’s image data using the specified storage type and properties and returns it in a data object.
 func (o *NSBitmapImageRep) RepresentationUsingTypeProperties(storageType NSBitmapImageFileType, properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelRepresentationUsingTypeProperties, storageType, properties)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelRepresentationUsingTypeProperties, storageType, properties.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSDataFromID(_ret)
 }
 
+// Sets the specified property of the bitmap image representation to the specified value.
 func (o *NSBitmapImageRep) SetPropertyWithValue(property *foundation.NSString, value objc.ID) {
 	o.Ptr().Send(_nSBitmapImageRepSelSetPropertyWithValue, property.Ptr(), value)
 }
 
+// Returns the value for the specified property.
 func (o *NSBitmapImageRep) ValueForProperty(property *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBitmapImageRepSelValueForProperty, property.Ptr())
 	return _ret

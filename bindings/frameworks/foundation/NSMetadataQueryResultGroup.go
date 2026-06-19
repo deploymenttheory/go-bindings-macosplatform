@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The NSMetadataQueryResultGroup class represents a collection of grouped attribute results returned by an NSMetadataQuery object.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmetadataqueryresultgroup
 type NSMetadataQueryResultGroup struct {
 	NSObject
@@ -34,6 +36,7 @@ func NSMetadataQueryResultGroupFromID(id objc.ID) *NSMetadataQueryResultGroup {
 	return o
 }
 
+// Returns the query result at a specific index.
 func (o *NSMetadataQueryResultGroup) ResultAtIndex(idx uint) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQueryResultGroupSelResultAtIndex, idx)
 	return _ret
@@ -66,6 +69,9 @@ func (o *NSMetadataQueryResultGroup) ResultCount() uint {
 }
 
 func (o *NSMetadataQueryResultGroup) Results() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSMetadataQueryResultGroupSelResults)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataQueryResultGroupSelResults)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }

@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A panel or sheet that allows users to change their keychain settings.
+//
 // Apple documentation: https://developer.apple.com/documentation/securityinterface/sfkeychainsettingspanel
 type SFKeychainSettingsPanel struct {
 	appkit.NSPanel
@@ -35,7 +37,7 @@ func SFKeychainSettingsPanelFromID(id objc.ID) *SFKeychainSettingsPanel {
 	return o
 }
 
-// @method sharedKeychainSettingsPanel @abstract Returns a global instance of SFKeychainSettingsPanel object.
+// Returns a shared keychain settings panel object.
 func SFKeychainSettingsPanelSharedKeychainSettingsPanel() *SFKeychainSettingsPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSFKeychainSettingsPanel), _sFKeychainSettingsPanelSelSharedKeychainSettingsPanel)
 	if _ret != 0 {
@@ -44,13 +46,13 @@ func SFKeychainSettingsPanelSharedKeychainSettingsPanel() *SFKeychainSettingsPan
 	return SFKeychainSettingsPanelFromID(_ret)
 }
 
-// @method runModalForSettings:keychain: @abstract Changes the keychain settings using the settings panel. The panel contains settings such as "lock on sleep", "automatic lock", etc. If the user attempts to change the settings of a locked keychain, the unlock panel will be presented. It returns NSOKButton or NSCancelButton. @param settings A pointer to a keychain settings structure. Since this structure is versioned, you must preallocate it and fill in the version of the structure. @param keychain The keychain that will have its settings changed.
+// Displays a panel that allows users to change keychain settings.
 func (o *SFKeychainSettingsPanel) RunModalForSettingsKeychain(settings *security.SecKeychainSettings, keychain unsafe.Pointer) int {
 	_ret := objc.Send[int](o.Ptr(), _sFKeychainSettingsPanelSelRunModalForSettingsKeychain, settings, keychain)
 	return _ret
 }
 
-// @method beginSheetForWindow:settings:keychain:modalDelegate:didEndSelector:contextInfo: @abstract Presents a sheet version of SFKeychainSettingsPanel. The didEndSelector returnCode will contain either NSOKButton or NSCancelButton. @param docWindow The panel in which the settings sheet slides down; acting as a document modal window. If docWindow is nil, the behavior defaults to a standalone modal window. @param delegate Delegate object in which didEndSelector is a method. @param didEndSelector The didEndSelector method is optional. If implemented by the delegate, this method is invoked after the modal session has ended, but before dismissing the same panel. The didEndSelector may dismiss the keychain panel itself; otherwise it will be dismissed on return from the method. The didEndSelector should have the following signature: - (void)settingsPanelDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo; @param contextInfo A client-defined context. @param settings A pointer to a keychain settings structure. Since this structure is versioned, you must preallocate it and fill in the version of the structure. @param keychain The keychain that will have its settings changed.
+// Displays a sheet that allows users to change keychain settings.
 func (o *SFKeychainSettingsPanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoSettingsKeychain(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, settings *security.SecKeychainSettings, keychain unsafe.Pointer) {
 	o.Ptr().Send(_sFKeychainSettingsPanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoSettingsKeychain, docWindow.Ptr(), delegate, didEndSelector, contextInfo, settings, keychain)
 }

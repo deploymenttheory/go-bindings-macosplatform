@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a running browser rendering extension process.
+//
 // Apple documentation: https://developer.apple.com/documentation/browserenginekit/berenderingprocess
 type BERenderingProcess struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func BERenderingProcessFromID(id objc.ID) *BERenderingProcess {
 	return o
 }
 
-// Asynchronously finds an existing extension process or launches one. This initializer finds an existing extension rendering process. If it’s unable to find an existing process, it launches a new extension process. - Parameters: - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new “BERenderingProcess“ when the extension process has launched or with an error.
+// Launches a rendering extension process asynchronously.
 func BERenderingProcessRenderingProcessWithInterruptionHandlerCompletion(interruptionHandler func(), completion func(*BERenderingProcess, unsafe.Pointer)) {
 	var __block_interruptionHandler objc.Block
 	if interruptionHandler != nil {
@@ -59,7 +61,7 @@ func BERenderingProcessRenderingProcessWithInterruptionHandlerCompletion(interru
 	objc.ID(_clsBERenderingProcess).Send(_bERenderingProcessSelRenderingProcessWithInterruptionHandlerCompletion, __block_interruptionHandler, __block_completion)
 }
 
-// Asynchronously launches a rendering extension process. This initializer launches a new rendering extension process with the provided bundle identifier. - Parameters: - `bundleID` : The bundle identifier of the rendering extension process to launch. - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new “BERenderingProcess“ when the extension process has launched or with an error.
+// Launches a rendering extension process asynchronously.
 func BERenderingProcessRenderingProcessWithBundleIDInterruptionHandlerCompletion(bundleID *foundation.NSString, interruptionHandler func(), completion func(*BERenderingProcess, unsafe.Pointer)) {
 	var __block_interruptionHandler objc.Block
 	if interruptionHandler != nil {
@@ -81,12 +83,12 @@ func BERenderingProcessRenderingProcessWithBundleIDInterruptionHandlerCompletion
 	objc.ID(_clsBERenderingProcess).Send(_bERenderingProcessSelRenderingProcessWithBundleIDInterruptionHandlerCompletion, bundleID.Ptr(), __block_interruptionHandler, __block_completion)
 }
 
-// Stops the extension process. When you call this method, you tell the system your app no longer needs this extension process. If this is the last connection from the host process to the extension process, the system terminates the extension process.
+// Stops the rendering process.
 func (o *BERenderingProcess) Invalidate() {
 	o.Ptr().Send(_bERenderingProcessSelInvalidate)
 }
 
-// Creates a new libXPC connection to the extension process. This method creates a connection to the extension process and returns it. If it is not possible to make an XPC connection, this method will return nil and populate the `error` out param. - Returns: The connection object representing the created libXPC connection or nil.
+// Creates a new XPC connection to the extension process.
 func (o *BERenderingProcess) MakeLibXPCConnectionError() (*foundation.NSObject, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _bERenderingProcessSelMakeLibXPCConnectionError, unsafe.Pointer(&_nsErr))
@@ -99,7 +101,7 @@ func (o *BERenderingProcess) MakeLibXPCConnectionError() (*foundation.NSObject, 
 	return foundation.NSObjectFromID(_ret), nil
 }
 
-// Grants the specified capability to the process. This method grants the specified capability to the process or returns nil and an error if it can not be granted. - Parameters: - capability: The capability to be granted - error: The error out param populated if the capability cannot be granted. - Returns: an invalidatable grant object that represents the granted capability.
+// Grants the specified capability to the process.
 func (o *BERenderingProcess) GrantCapabilityError(capability *BEProcessCapability) (BEProcessCapabilityGrant, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[BEProcessCapabilityGrant](o.Ptr(), _bERenderingProcessSelGrantCapabilityError, capability.Ptr(), unsafe.Pointer(&_nsErr))
@@ -109,7 +111,7 @@ func (o *BERenderingProcess) GrantCapabilityError(capability *BEProcessCapabilit
 	return _ret, nil
 }
 
-// Grants the specified capability to the process with invalidation handler. This method grants the specified capability to the process or returns nil and an error if it can not be granted. - Parameters: - capability: The capability to be granted - error: The error out param populated if the capability cannot be granted. - invalidationHandler: The invalidation handler - Returns: an invalidatable grant object that represents the granted capability.
+// Grants the specified capability to the process, invoking the handler when the capability becomes invalid.
 func (o *BERenderingProcess) GrantCapabilityErrorInvalidationHandler(capability *BEProcessCapability, error_ unsafe.Pointer, invalidationHandler func()) BEProcessCapabilityGrant {
 	var __block_invalidationHandler objc.Block
 	if invalidationHandler != nil {

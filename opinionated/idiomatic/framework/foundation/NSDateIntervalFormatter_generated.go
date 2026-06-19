@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A formatter that creates string representations of time intervals.
+//
 // DateIntervalFormatter wraps [raw.NSDateIntervalFormatter] with a fluent Go API.
 type DateIntervalFormatter struct {
 	inner *raw.NSDateIntervalFormatter

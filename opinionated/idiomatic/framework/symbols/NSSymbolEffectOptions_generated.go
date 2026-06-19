@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Options that configure how effects apply to symbol-based images.
+//
 // SymbolEffectOptions wraps [raw.NSSymbolEffectOptions] with a fluent Go API.
 type SymbolEffectOptions struct {
 	inner *raw.NSSymbolEffectOptions
@@ -35,7 +37,7 @@ func NewSymbolEffectOptions() *SymbolEffectOptions {
 	return &SymbolEffectOptions{inner: raw.NSSymbolEffectOptionsFromID(_id)}
 }
 
-// Return a copy of the options that prefers to repeat indefinitely.
+// A set of effect options that prefers to repeat indefinitely.
 //
 // OptionsWithRepeating calls the underlying OptionsWithRepeating.
 func (x *SymbolEffectOptions) OptionsWithRepeating() *SymbolEffectOptions {
@@ -46,7 +48,7 @@ func (x *SymbolEffectOptions) OptionsWithRepeating() *SymbolEffectOptions {
 	return &SymbolEffectOptions{inner: _r}
 }
 
-// Return a copy of the options that prefers not to repeat.
+// A set of effect options that prefers to not repeat.
 //
 // OptionsWithNonRepeating calls the underlying OptionsWithNonRepeating.
 func (x *SymbolEffectOptions) OptionsWithNonRepeating() *SymbolEffectOptions {
@@ -57,7 +59,7 @@ func (x *SymbolEffectOptions) OptionsWithNonRepeating() *SymbolEffectOptions {
 	return &SymbolEffectOptions{inner: _r}
 }
 
-// Return a copy of the options setting a preferred repeat count. - Parameter count: The preferred number of times to play the effect. Very large or small values may be clamped. - Returns: A new options object with the preferred repeat count.
+// Creates a set of effect options with a preferred repeat count.
 //
 // OptionsWithRepeatCount calls the underlying OptionsWithRepeatCount.
 func (x *SymbolEffectOptions) OptionsWithRepeatCount(count int) *SymbolEffectOptions {
@@ -68,7 +70,7 @@ func (x *SymbolEffectOptions) OptionsWithRepeatCount(count int) *SymbolEffectOpt
 	return &SymbolEffectOptions{inner: _r}
 }
 
-// Return a copy of the options setting the preferred speed multiplier. - Parameter speed: The preferred speed multiplier to play the effect with. The default multiplier is `1.0`. Very large or small values may be clamped. - Returns: A new instance with the preferred speed multiplier.
+// Creates a set of effect options with a preferred speed multiplier.
 //
 // OptionsWithSpeed calls the underlying OptionsWithSpeed.
 func (x *SymbolEffectOptions) OptionsWithSpeed(speed float64) *SymbolEffectOptions {
@@ -79,7 +81,7 @@ func (x *SymbolEffectOptions) OptionsWithSpeed(speed float64) *SymbolEffectOptio
 	return &SymbolEffectOptions{inner: _r}
 }
 
-// Return a copy of the options setting a preferred repeat behavior. - Parameter behavior: The preferred behavior when the effect is repeated. - Returns: A new options object with the preferred repeat behavior.
+// Return a copy of the options setting a preferred repeat behavior.
 //
 // OptionsWithRepeatBehavior calls the underlying OptionsWithRepeatBehavior.
 func (x *SymbolEffectOptions) OptionsWithRepeatBehavior(behavior *raw.NSSymbolEffectOptionsRepeatBehavior) *SymbolEffectOptions {

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class shared by content filters.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nefilterprovider
 type NEFilterProvider struct {
 	NEProvider
@@ -34,7 +36,7 @@ func NEFilterProviderFromID(id objc.ID) *NEFilterProvider {
 	return o
 }
 
-// @method startFilterWithCompletionHandler: @discussion This function is called by the framework when the content filter is being started. Subclasses must override this method and perform whatever steps are necessary to start the filter. @param completionHandler A block that must be called when the process of starting the filter is complete. If the filter was started successfully, subclass implementations must pass the nil value to this block. If an error occurred while starting the filter, sublcass implementations must pass a non-nil NSError containing more details about the error.
+// Start the filter.
 func (o *NEFilterProvider) StartFilterWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -46,7 +48,7 @@ func (o *NEFilterProvider) StartFilterWithCompletionHandler(completionHandler fu
 	o.Ptr().Send(_nEFilterProviderSelStartFilterWithCompletionHandler, __block_completionHandler)
 }
 
-// @method stopFilterWithReason:completionHandler: @discussion This function is called by the framework when the content filter is being stopped. Subclasses must override this method and perform whatever steps are necessary to stop the filter. @param reason An NEProviderStopReason indicating why the filter is being stopped. @param completionHandler A block that must be called when the process of stopping the filter is complete.
+// Stop the filter.
 func (o *NEFilterProvider) StopFilterWithReasonCompletionHandler(reason NEProviderStopReason, completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -58,7 +60,7 @@ func (o *NEFilterProvider) StopFilterWithReasonCompletionHandler(reason NEProvid
 	o.Ptr().Send(_nEFilterProviderSelStopFilterWithReasonCompletionHandler, reason, __block_completionHandler)
 }
 
-// @method handleReport: @discussion This function is called by the framework when the data provider extension returns a verdict with the report property set to True. Subclass implementations may override this method to handle the flow report. @param report The report being delivered.
+// Receives a report from the framework.
 func (o *NEFilterProvider) HandleReport(report *NEFilterReport) {
 	o.Ptr().Send(_nEFilterProviderSelHandleReport, report.Ptr())
 }

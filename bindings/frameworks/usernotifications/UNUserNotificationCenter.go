@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The central object for managing notification-related activities for your app or app extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/unusernotificationcenter
 type UNUserNotificationCenter struct {
 	foundation.NSObject
@@ -47,6 +49,7 @@ func UNUserNotificationCenterFromID(id objc.ID) *UNUserNotificationCenter {
 	return o
 }
 
+// Returns your app’s notification center.
 func UNUserNotificationCenterCurrentNotificationCenter() *UNUserNotificationCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNUserNotificationCenter), _uNUserNotificationCenterSelCurrentNotificationCenter)
 	if _ret != 0 {
@@ -55,6 +58,7 @@ func UNUserNotificationCenterCurrentNotificationCenter() *UNUserNotificationCent
 	return UNUserNotificationCenterFromID(_ret)
 }
 
+// Requests a person’s authorization to allow local and remote notifications for your app.
 func (o *UNUserNotificationCenter) RequestAuthorizationWithOptionsCompletionHandler(options UNAuthorizationOptions, completionHandler func(bool, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -66,10 +70,12 @@ func (o *UNUserNotificationCenter) RequestAuthorizationWithOptionsCompletionHand
 	o.Ptr().Send(_uNUserNotificationCenterSelRequestAuthorizationWithOptionsCompletionHandler, options, __block_completionHandler)
 }
 
+// Registers the notification categories that your app supports.
 func (o *UNUserNotificationCenter) SetNotificationCategories(categories *foundation.NSSet[*UNNotificationCategory]) {
 	o.Ptr().Send(_uNUserNotificationCenterSelSetNotificationCategories, categories.Ptr())
 }
 
+// Fetches your app’s registered notification categories.
 func (o *UNUserNotificationCenter) GetNotificationCategoriesWithCompletionHandler(completionHandler func(*foundation.NSSet[*UNNotificationCategory])) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -84,6 +90,7 @@ func (o *UNUserNotificationCenter) GetNotificationCategoriesWithCompletionHandle
 	o.Ptr().Send(_uNUserNotificationCenterSelGetNotificationCategoriesWithCompletionHandler, __block_completionHandler)
 }
 
+// Retrieves the authorization and feature-related settings for your app.
 func (o *UNUserNotificationCenter) GetNotificationSettingsWithCompletionHandler(completionHandler func(*UNNotificationSettings)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -98,6 +105,7 @@ func (o *UNUserNotificationCenter) GetNotificationSettingsWithCompletionHandler(
 	o.Ptr().Send(_uNUserNotificationCenterSelGetNotificationSettingsWithCompletionHandler, __block_completionHandler)
 }
 
+// Schedules the delivery of a local notification.
 func (o *UNUserNotificationCenter) AddNotificationRequestWithCompletionHandler(request *UNNotificationRequest, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -109,6 +117,7 @@ func (o *UNUserNotificationCenter) AddNotificationRequestWithCompletionHandler(r
 	o.Ptr().Send(_uNUserNotificationCenterSelAddNotificationRequestWithCompletionHandler, request.Ptr(), __block_completionHandler)
 }
 
+// Fetches all of your app’s local notifications that are pending delivery.
 func (o *UNUserNotificationCenter) GetPendingNotificationRequestsWithCompletionHandler(completionHandler func(*foundation.NSArray[*UNNotificationRequest])) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -123,14 +132,17 @@ func (o *UNUserNotificationCenter) GetPendingNotificationRequestsWithCompletionH
 	o.Ptr().Send(_uNUserNotificationCenterSelGetPendingNotificationRequestsWithCompletionHandler, __block_completionHandler)
 }
 
+// Removes your app’s local notifications that are pending and match the specified identifiers.
 func (o *UNUserNotificationCenter) RemovePendingNotificationRequestsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_uNUserNotificationCenterSelRemovePendingNotificationRequestsWithIdentifiers, identifiers)
+	o.Ptr().Send(_uNUserNotificationCenterSelRemovePendingNotificationRequestsWithIdentifiers, identifiers.Ptr())
 }
 
+// Removes all of your app’s pending local notifications.
 func (o *UNUserNotificationCenter) RemoveAllPendingNotificationRequests() {
 	o.Ptr().Send(_uNUserNotificationCenterSelRemoveAllPendingNotificationRequests)
 }
 
+// Fetches all of your app’s delivered notifications that are still present in Notification Center.
 func (o *UNUserNotificationCenter) GetDeliveredNotificationsWithCompletionHandler(completionHandler func(*foundation.NSArray[*UNNotification])) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -145,14 +157,17 @@ func (o *UNUserNotificationCenter) GetDeliveredNotificationsWithCompletionHandle
 	o.Ptr().Send(_uNUserNotificationCenterSelGetDeliveredNotificationsWithCompletionHandler, __block_completionHandler)
 }
 
+// Removes your app’s notifications from Notification Center that match the specified identifiers.
 func (o *UNUserNotificationCenter) RemoveDeliveredNotificationsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_uNUserNotificationCenterSelRemoveDeliveredNotificationsWithIdentifiers, identifiers)
+	o.Ptr().Send(_uNUserNotificationCenterSelRemoveDeliveredNotificationsWithIdentifiers, identifiers.Ptr())
 }
 
+// Removes all of your app’s delivered notifications from Notification Center.
 func (o *UNUserNotificationCenter) RemoveAllDeliveredNotifications() {
 	o.Ptr().Send(_uNUserNotificationCenterSelRemoveAllDeliveredNotifications)
 }
 
+// Updates the badge count for your app’s icon.
 func (o *UNUserNotificationCenter) SetBadgeCountWithCompletionHandler(newBadgeCount int, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

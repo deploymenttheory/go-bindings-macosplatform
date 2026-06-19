@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that identifies samples that store a prescription.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkprescriptiontype
 type HKPrescriptionType struct {
 	HKSampleType

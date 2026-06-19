@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A linear neuron filter.
+//
 // CNNNeuronLinear wraps [raw.MPSCNNNeuronLinear] with a fluent Go API.
 type CNNNeuronLinear struct {
 	inner *raw.MPSCNNNeuronLinear
@@ -33,7 +35,7 @@ func CNNNeuronLinearFromID(id objc.ID) *CNNNeuronLinear {
 	return &CNNNeuronLinear{inner: raw.MPSCNNNeuronLinearFromID(id)}
 }
 
-// @abstract  Initialize the linear neuron filter @param     device   The device the filter will run on @param     a        Filter property "a". See class discussion. @param     b        Filter property "b". See class discussion. @return    A valid MPSCNNNeuronLinear object or nil, if failure.
+// Initializes a linear neuron filter.
 //
 // NewCNNNeuronLinearWithDeviceAB creates a new [CNNNeuronLinear].
 func NewCNNNeuronLinearWithDeviceAB(device metal.MTLDevice, a float32, b float32) *CNNNeuronLinear {
@@ -42,7 +44,7 @@ func NewCNNNeuronLinearWithDeviceAB(device metal.MTLDevice, a float32, b float32
 	return &CNNNeuronLinear{inner: raw.MPSCNNNeuronLinearFromID(_id)}
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+// The position of the destination image’s clip rectangle origin, relative to the source image.
 //
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *CNNNeuronLinear) WithOffset(offset mpscore.MPSOffset) *CNNNeuronLinear {
@@ -50,7 +52,7 @@ func (x *CNNNeuronLinear) WithOffset(offset mpscore.MPSOffset) *CNNNeuronLinear 
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
 //
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *CNNNeuronLinear) WithClipRect(clipRect metal.MTLRegion) *CNNNeuronLinear {
@@ -58,7 +60,7 @@ func (x *CNNNeuronLinear) WithClipRect(clipRect metal.MTLRegion) *CNNNeuronLinea
 	return x
 }
 
-// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+// The number of channels in the destination image to skip before writing output data.
 //
 // WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
 func (x *CNNNeuronLinear) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronLinear {
@@ -82,7 +84,7 @@ func (x *CNNNeuronLinear) WithSourceFeatureChannelMaxCount(sourceFeatureChannelM
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode Note: For @ref MPSCNNPoolingAverage specifying edge mode @ref MPSImageEdgeModeClamp is interpreted as a "shrink-to-edge" operation, which shrinks the effective filtering window to remain within the source image borders.
+// The edge mode to use when texture reads stray off the edge of an image.
 //
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *CNNNeuronLinear) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronLinear {
@@ -106,7 +108,7 @@ func (x *CNNNeuronLinear) WithDestinationImageAllocator(destinationImageAllocato
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNNeuronLinear) WithOptions(options mpscore.MPSKernelOptions) *CNNNeuronLinear {
@@ -114,7 +116,7 @@ func (x *CNNNeuronLinear) WithOptions(options mpscore.MPSKernelOptions) *CNNNeur
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNNeuronLinear) WithLabel(label string) *CNNNeuronLinear {

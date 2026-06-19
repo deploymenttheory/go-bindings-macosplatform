@@ -72,6 +72,9 @@ func (o *MTRDistinguishedNameInfo) IntermediateCACertificateID() *foundation.NSN
 
 // The set of CASE Authenticated Tags contained in the DN.  Maybe be non-empty for the subject of a valid node operational certificate.
 func (o *MTRDistinguishedNameInfo) CaseAuthenticatedTags() *foundation.NSSet[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSNumber]](o.Ptr(), _mTRDistinguishedNameInfoSelCaseAuthenticatedTags)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDistinguishedNameInfoSelCaseAuthenticatedTags)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSNumber](_ret)
 }

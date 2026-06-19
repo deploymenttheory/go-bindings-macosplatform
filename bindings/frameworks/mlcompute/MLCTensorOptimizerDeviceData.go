@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An encapsulation of the device memory associated with a tensor that an optimizer uses.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlctensoroptimizerdevicedata
 type MLCTensorOptimizerDeviceData struct {
 	foundation.NSObject

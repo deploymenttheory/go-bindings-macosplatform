@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An interface for allocating a MetalKit buffer that backs the vertex data of a Model I/O mesh, suitable for use in a Metal app.
+//
 // MeshBufferAllocator wraps [raw.MTKMeshBufferAllocator] with a fluent Go API.
 type MeshBufferAllocator struct {
 	inner *raw.MTKMeshBufferAllocator
@@ -30,7 +32,7 @@ func MeshBufferAllocatorFromID(id objc.ID) *MeshBufferAllocator {
 	return &MeshBufferAllocator{inner: raw.MTKMeshBufferAllocatorFromID(id)}
 }
 
-// @method initWithDevice @abstract Initialize the allocator with a device to be used to create buffers. @discussion The designated initializer for this class.
+// Initializes a new allocator object.
 //
 // NewMeshBufferAllocatorWithDevice creates a new [MeshBufferAllocator].
 func NewMeshBufferAllocatorWithDevice(device metal.MTLDevice) *MeshBufferAllocator {

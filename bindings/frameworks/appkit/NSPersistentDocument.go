@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A document object that can integrate with Core Data.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspersistentdocument
 type NSPersistentDocument struct {
 	NSDocument
@@ -38,15 +40,17 @@ func NSPersistentDocumentFromID(id objc.ID) *NSPersistentDocument {
 	return o
 }
 
+// Configures the receiver’s persistent store coordinator with the appropriate stores for a given URL.
 func (o *NSPersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError(url *foundation.NSURL, fileType *foundation.NSString, configuration *foundation.NSString, storeOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSPersistentDocumentSelConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError, url.Ptr(), fileType.Ptr(), configuration.Ptr(), storeOptions, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _nSPersistentDocumentSelConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError, url.Ptr(), fileType.Ptr(), configuration.Ptr(), storeOptions.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
+// Returns the type of persistent store associated with the specified file type.
 func (o *NSPersistentDocument) PersistentStoreTypeForFileType(fileType *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentDocumentSelPersistentStoreTypeForFileType, fileType.Ptr())
 	if _ret != 0 {
@@ -75,6 +79,7 @@ func (o *NSPersistentDocument) ManagedObjectModel() *coredata.NSManagedObjectMod
 	return coredata.NSManagedObjectModelFromID(_ret)
 }
 
+// Configures the receiver’s persistent store coordinator for a given URL and document type.
 // Deprecated: since macOS 10.5.
 func (o *NSPersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeError(url *foundation.NSURL, fileType *foundation.NSString) (bool, error) {
 	var _nsErr uintptr

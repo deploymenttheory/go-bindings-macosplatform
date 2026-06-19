@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A right that gates access to a key and a secret.
+//
 // Apple documentation: https://developer.apple.com/documentation/localauthentication/lapersistedright
 type LAPersistedRight struct {
 	LARight

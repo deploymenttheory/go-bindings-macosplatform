@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes a series of models suitable for lightweight migration.
+//
 // LightweightMigrationStage wraps [raw.NSLightweightMigrationStage] with a fluent Go API.
 type LightweightMigrationStage struct {
 	inner *raw.NSLightweightMigrationStage
@@ -31,6 +33,8 @@ func LightweightMigrationStageFromID(id objc.ID) *LightweightMigrationStage {
 	return &LightweightMigrationStage{inner: raw.NSLightweightMigrationStageFromID(id)}
 }
 
+// Creates a lightweight migration stage with the specified version checksums.
+//
 // NewLightweightMigrationStageWithVersionChecksums creates a new [LightweightMigrationStage].
 func NewLightweightMigrationStageWithVersionChecksums(versionChecksums *foundation.NSArray[*foundation.NSString]) *LightweightMigrationStage {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLightweightMigrationStage")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewLightweightMigrationStageWithVersionChecksums(versionChecksums *foundati
 	return &LightweightMigrationStage{inner: raw.NSLightweightMigrationStageFromID(_id)}
 }
 
+// The textual description of the migration stage’s purpose.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *LightweightMigrationStage) WithLabel(label string) *LightweightMigrationStage {
 	x.inner.NSMigrationStage.SetLabel(foundation.NSStringStringWithUTF8String(label))

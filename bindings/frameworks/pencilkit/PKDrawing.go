@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A structure representing the drawing information captured by a canvas view.
+//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pkdrawing
 type PKDrawing struct {
 	foundation.NSObject

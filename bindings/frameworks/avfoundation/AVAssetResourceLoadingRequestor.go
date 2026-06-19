@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains information about the originator of a resource-loading request.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetresourceloadingrequestor
 type AVAssetResourceLoadingRequestor struct {
 	foundation.NSObject

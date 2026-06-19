@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A definition for one specific aspect of the rendering parameters for a material.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlmaterialproperty
 type MDLMaterialProperty struct {
 	foundation.NSObject
@@ -68,6 +70,7 @@ func MDLMaterialPropertyFromID(id objc.ID) *MDLMaterialProperty {
 	return o
 }
 
+// Initializes a material property without a value.
 func (o *MDLMaterialProperty) InitWithNameSemantic(name *foundation.NSString, semantic MDLMaterialSemantic) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemantic, name.Ptr(), semantic)
 	if _ret != 0 {
@@ -76,6 +79,7 @@ func (o *MDLMaterialProperty) InitWithNameSemantic(name *foundation.NSString, se
 	return MDLMaterialPropertyFromID(_ret)
 }
 
+// Initializes a material property with a scalar value.
 func (o *MDLMaterialProperty) InitWithNameSemanticFloat(name *foundation.NSString, semantic MDLMaterialSemantic, value float32) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticFloat, name.Ptr(), semantic, value)
 	if _ret != 0 {
@@ -84,6 +88,7 @@ func (o *MDLMaterialProperty) InitWithNameSemanticFloat(name *foundation.NSStrin
 	return MDLMaterialPropertyFromID(_ret)
 }
 
+// Initializes a material property with a 2-component vector value.
 func (o *MDLMaterialProperty) InitWithNameSemanticFloat2(name *foundation.NSString, semantic MDLMaterialSemantic, value unsafe.Pointer) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticFloat2, name.Ptr(), semantic, value)
 	if _ret != 0 {
@@ -92,6 +97,7 @@ func (o *MDLMaterialProperty) InitWithNameSemanticFloat2(name *foundation.NSStri
 	return MDLMaterialPropertyFromID(_ret)
 }
 
+// Initializes a material property with a 3-component vector value.
 func (o *MDLMaterialProperty) InitWithNameSemanticFloat3(name *foundation.NSString, semantic MDLMaterialSemantic, value unsafe.Pointer) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticFloat3, name.Ptr(), semantic, value)
 	if _ret != 0 {
@@ -100,6 +106,7 @@ func (o *MDLMaterialProperty) InitWithNameSemanticFloat3(name *foundation.NSStri
 	return MDLMaterialPropertyFromID(_ret)
 }
 
+// Initializes a material property with a 4-component vector value.
 func (o *MDLMaterialProperty) InitWithNameSemanticFloat4(name *foundation.NSString, semantic MDLMaterialSemantic, value unsafe.Pointer) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticFloat4, name.Ptr(), semantic, value)
 	if _ret != 0 {
@@ -108,6 +115,7 @@ func (o *MDLMaterialProperty) InitWithNameSemanticFloat4(name *foundation.NSStri
 	return MDLMaterialPropertyFromID(_ret)
 }
 
+// Initializes a material property with a 4 x 4 matrix value.
 func (o *MDLMaterialProperty) InitWithNameSemanticMatrix4x4(name *foundation.NSString, semantic MDLMaterialSemantic, value unsafe.Pointer) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticMatrix4x4, name.Ptr(), semantic, value)
 	if _ret != 0 {
@@ -116,6 +124,7 @@ func (o *MDLMaterialProperty) InitWithNameSemanticMatrix4x4(name *foundation.NSS
 	return MDLMaterialPropertyFromID(_ret)
 }
 
+// Initializes a material property with a URL value.
 func (o *MDLMaterialProperty) InitWithNameSemanticURL(name *foundation.NSString, semantic MDLMaterialSemantic, uRL *foundation.NSURL) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticURL, name.Ptr(), semantic, uRL.Ptr())
 	if _ret != 0 {
@@ -124,6 +133,7 @@ func (o *MDLMaterialProperty) InitWithNameSemanticURL(name *foundation.NSString,
 	return MDLMaterialPropertyFromID(_ret)
 }
 
+// Initializes a material property with a string value.
 func (o *MDLMaterialProperty) InitWithNameSemanticString(name *foundation.NSString, semantic MDLMaterialSemantic, string_ *foundation.NSString) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticString, name.Ptr(), semantic, string_.Ptr())
 	if _ret != 0 {
@@ -132,6 +142,7 @@ func (o *MDLMaterialProperty) InitWithNameSemanticString(name *foundation.NSStri
 	return MDLMaterialPropertyFromID(_ret)
 }
 
+// Initializes a material property with a texture sampler object.
 func (o *MDLMaterialProperty) InitWithNameSemanticTextureSampler(name *foundation.NSString, semantic MDLMaterialSemantic, textureSampler *MDLTextureSampler) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticTextureSampler, name.Ptr(), semantic, textureSampler.Ptr())
 	if _ret != 0 {
@@ -140,6 +151,7 @@ func (o *MDLMaterialProperty) InitWithNameSemanticTextureSampler(name *foundatio
 	return MDLMaterialPropertyFromID(_ret)
 }
 
+// Initializes a material property with a color value.
 func (o *MDLMaterialProperty) InitWithNameSemanticColor(name *foundation.NSString, semantic MDLMaterialSemantic, color unsafe.Pointer) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialPropertySelInitWithNameSemanticColor, name.Ptr(), semantic, color)
 	if _ret != 0 {
@@ -148,6 +160,7 @@ func (o *MDLMaterialProperty) InitWithNameSemanticColor(name *foundation.NSStrin
 	return MDLMaterialPropertyFromID(_ret)
 }
 
+// Sets the material property’s attributes to those of the specified material property.
 func (o *MDLMaterialProperty) SetProperties(property *MDLMaterialProperty) {
 	o.Ptr().Send(_mDLMaterialPropertySelSetProperties, property.Ptr())
 }

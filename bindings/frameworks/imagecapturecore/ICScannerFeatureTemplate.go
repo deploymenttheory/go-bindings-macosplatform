@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A group of one or more rectangular scan areas that can be used with a scanner functional unit.
+//
 // Apple documentation: https://developer.apple.com/documentation/imagecapturecore/icscannerfeaturetemplate
 type ICScannerFeatureTemplate struct {
 	ICScannerFeature
@@ -31,6 +33,9 @@ func ICScannerFeatureTemplateFromID(id objc.ID) *ICScannerFeatureTemplate {
 }
 
 func (o *ICScannerFeatureTemplate) Targets() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iCScannerFeatureTemplateSelTargets)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFeatureTemplateSelTargets)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A layer that pads a tensor with the padding sizes you specify.
+//
 // PaddingLayer wraps [raw.MLCPaddingLayer] with a fluent Go API.
 type PaddingLayer struct {
 	inner *raw.MLCPaddingLayer
@@ -36,7 +38,7 @@ func NewPaddingLayer() *PaddingLayer {
 	return &PaddingLayer{inner: raw.MLCPaddingLayerFromID(_id)}
 }
 
-// @property   label @abstract   A string to help identify this object.
+// A string that helps identify this layer.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *PaddingLayer) WithLabel(label string) *PaddingLayer {
@@ -44,7 +46,7 @@ func (x *PaddingLayer) WithLabel(label string) *PaddingLayer {
 	return x
 }
 
-// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 //
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *PaddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *PaddingLayer {

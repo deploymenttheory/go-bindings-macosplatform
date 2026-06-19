@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that defines the assertion request type for security key credentials.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialassertionrequest
 type ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest struct {
 	ASAuthorizationRequest

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object you use to create a loss layer.
+//
 // LossDescriptor wraps [raw.MLCLossDescriptor] with a fluent Go API.
 type LossDescriptor struct {
 	inner *raw.MLCLossDescriptor

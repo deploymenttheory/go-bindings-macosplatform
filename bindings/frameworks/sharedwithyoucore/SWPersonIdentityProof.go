@@ -34,8 +34,11 @@ func SWPersonIdentityProofFromID(id objc.ID) *SWPersonIdentityProof {
 
 // @abstract Hashes of missing Merkle tree nodes that can provide proof of inclusion. @discussion The data contains an array of SHA256 hash of the user's combined public identities.
 func (o *SWPersonIdentityProof) InclusionHashes() *foundation.NSArray[*foundation.NSData] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSData]](o.Ptr(), _sWPersonIdentityProofSelInclusionHashes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _sWPersonIdentityProofSelInclusionHashes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSData](_ret)
 }
 
 // @abstract Public key of local device

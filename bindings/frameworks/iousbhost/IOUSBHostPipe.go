@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class       IOUSBHostPipe @brief       The IOUSBHostIOSource representing a USB endpoint @discussion  This class provides functionality to transfer data across USB.
+// The class that sends control, bulk, interrupt, and isochronous input/output requests for function drivers, and manages stream capabilities.
 //
 // Apple documentation: https://developer.apple.com/documentation/iousbhost/iousbhostpipe
 type IOUSBHostPipe struct {
@@ -56,7 +56,7 @@ func IOUSBHostPipeFromID(id objc.ID) *IOUSBHostPipe {
 	return o
 }
 
-// @brief       Adjust behavior of periodic endpoints to consume a different amount of bus bandwidth @discussion  Periodic (interrupt and isochronous) endpoints reserve bus bandwidth when they are created, which takes into account max packet size, burst size, and the endpoint service interval.  If a function driver knows the endpoint will not use all of the allocated bandwidth, the <code>adjustPolicy</code> method may be used to reduce the bandwidth reserved for the endpoint.  The original endpoint descriptors should be copied and modified to adjust max packet size, mult, burst, and interval, and then passed to <code>adjustPolicy</code>.  The altered descriptors must pass <code>validateEndpointDescriptor(...)</code> from the kernel for policy changes to be processed. @param       descriptors Reference to an IOUSBHostIOSourceDescriptors describing the new endpoint policy @return      YES on success, an IOReturn error code will be reported on failure
+// Adjusts the behavior of periodic endpoints to consume a different amount of bus bandwidth.
 func (o *IOUSBHostPipe) AdjustPipeWithDescriptorsError(descriptors *IOUSBHostIOSourceDescriptors) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelAdjustPipeWithDescriptorsError, descriptors, unsafe.Pointer(&_nsErr))
@@ -66,7 +66,7 @@ func (o *IOUSBHostPipe) AdjustPipeWithDescriptorsError(descriptors *IOUSBHostIOS
 	return _ret, nil
 }
 
-// @brief       Sets the desired idle suspend timeout for the interface @discussion  Once the interface is considered idle, it will defer electrical suspend of the device for the specified duration. @param       idleTimeout The amount of time after all pipes are idle to wait before suspending the device. @return      YES on success. An IOReturn error code will be reported on failure.
+// Sets the desired idle suspend timeout for the interface.
 func (o *IOUSBHostPipe) SetIdleTimeoutError(idleTimeout float64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSetIdleTimeoutError, idleTimeout, unsafe.Pointer(&_nsErr))
@@ -76,7 +76,7 @@ func (o *IOUSBHostPipe) SetIdleTimeoutError(idleTimeout float64) (bool, error) {
 	return _ret, nil
 }
 
-// @brief       Clear the halt condition of the pipe. @discussion  When a bulk or interrupt USB endpoint encounters any IO error other than a timeout, it transitions to a Halted state which must be cleared to perform additional IO on the endpoint.  This method will clear the halted condition for the endpoint, including sending a CLEAR_TT_BUFFER control request  (USB 2.0 11.24.2.3) to an intermediate hub if required.  All pending IO on the endpoint will be aborted, and the data toggle for the endpoint will also be reset. ClearStall is not required for control endpoints. @return      YES on success, an IOReturn error code will be reported on failure
+// Clears the halt condition of the pipe.
 func (o *IOUSBHostPipe) ClearStallWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelClearStallWithError, unsafe.Pointer(&_nsErr))
@@ -86,7 +86,7 @@ func (o *IOUSBHostPipe) ClearStallWithError() (bool, error) {
 	return _ret, nil
 }
 
-// @brief       Send a request on a control endpoint @discussion  This method will send a synchronous request on a control endpoint, and will not return until the request is complete. @param       request IOUSBDeviceRequest structure. @param       data An NSMutableData* defining the memory to use for the request's data phase. @param       bytesTransferred An NSUInteger reference which will be updated with the byte count of the completed data phase. @param       completionTimeout Timeout of the request.  If 0, the request will never timeout. The default value is IOUSBHostDefaultControlCompletionTimeout. @return      YES on success, an IOReturn error code will be reported on failure
+// Sends a request on a control endpoint.
 func (o *IOUSBHostPipe) SendControlRequestDataBytesTransferredCompletionTimeoutError(request unsafe.Pointer, data *foundation.NSMutableData, bytesTransferred *uint, completionTimeout float64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSendControlRequestDataBytesTransferredCompletionTimeoutError, request, data.Ptr(), bytesTransferred, completionTimeout, unsafe.Pointer(&_nsErr))
@@ -96,7 +96,7 @@ func (o *IOUSBHostPipe) SendControlRequestDataBytesTransferredCompletionTimeoutE
 	return _ret, nil
 }
 
-// @brief       Send a request on a control endpoint @discussion  This method will send a synchronous request on a control endpoint, and will not return until the request is complete. @param       request IOUSBDeviceRequest structure. @param       data An NSMutableData* defining the memory to use for the request's data phase. @param       bytesTransferred An NSUInteger reference which will be updated with the byte count of the completed data phase. @return      YES on success, an IOReturn error code will be reported on failure
+// Sends a request on a control endpoint with a default timeout.
 func (o *IOUSBHostPipe) SendControlRequestDataBytesTransferredError(request unsafe.Pointer, data *foundation.NSMutableData, bytesTransferred *uint) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSendControlRequestDataBytesTransferredError, request, data.Ptr(), bytesTransferred, unsafe.Pointer(&_nsErr))
@@ -106,7 +106,7 @@ func (o *IOUSBHostPipe) SendControlRequestDataBytesTransferredError(request unsa
 	return _ret, nil
 }
 
-// @brief       Send a request on a control endpoint @discussion  This method will send a synchronous request on a control endpoint, and will not return until the request is complete. @param       request IOUSBDeviceRequest structure. @return      YES on success, an IOReturn error code will be reported on failure
+// Sends a request on a control endpoint without a data phase and a default completion timeout.
 func (o *IOUSBHostPipe) SendControlRequestError(request unsafe.Pointer) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSendControlRequestError, request, unsafe.Pointer(&_nsErr))
@@ -116,7 +116,7 @@ func (o *IOUSBHostPipe) SendControlRequestError(request unsafe.Pointer) (bool, e
 	return _ret, nil
 }
 
-// @brief       Enqueue a request on a control endpoint @discussion  This method will enqueue an asynchronous request on a control endpoint. If successful, the provided completion routine will be called to report the status of the completed IO. Completions will be serviced in the IOUSBHostCompletionHandler on the IOUSBHostInterface's dispatch queue. @param       request Reference IOUSBDeviceRequest structure. @param       data An NSMutableData* defining the memory to use for the request's data phase. @param       completionTimeout Timeout of the request.  If 0, the request will never timeout. The default value is IOUSBHostDefaultControlCompletionTimeout. @param       completionHandler an IOUSBHostCompletionHandler @return      YES on success, an IOReturn error code will be reported on failure
+// Enqueues a request on a control endpoint.
 func (o *IOUSBHostPipe) EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler(request unsafe.Pointer, data *foundation.NSMutableData, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -129,7 +129,7 @@ func (o *IOUSBHostPipe) EnqueueControlRequestDataCompletionTimeoutErrorCompletio
 	return _ret
 }
 
-// @brief       Enqueue a request on a control endpoint @discussion  This method will enqueue an asynchronous request on a control endpoint. If successful, the provided completion routine will be called to report the status of the completed IO. Completions will be serviced in the IOUSBHostCompletionHandler on the IOUSBHostInterface's dispatch queue. @param       request Reference IOUSBDeviceRequest structure. @param       data An NSMutableData* defining the memory to use for the request's data phase. @param       completionHandler an IOUSBHostCompletionHandler @return      YES on success, an IOReturn error code will be reported on failure
+// Enqueues a request on a control endpoint with a default completion timeout.
 func (o *IOUSBHostPipe) EnqueueControlRequestDataErrorCompletionHandler(request unsafe.Pointer, data *foundation.NSMutableData, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -142,7 +142,7 @@ func (o *IOUSBHostPipe) EnqueueControlRequestDataErrorCompletionHandler(request 
 	return _ret
 }
 
-// @brief       Enqueue a request on a control endpoint @discussion  This method will enqueue an asynchronous request on a control endpoint. If successful, the provided completion routine will be called to report the status of the completed IO. Completions will be serviced in the IOUSBHostCompletionHandler on the IOUSBHostInterface's dispatch queue. @param       request Reference IOUSBDeviceRequest structure. @param       completionHandler an IOUSBHostCompletionHandler @return      YES on success, an IOReturn error code will be reported on failure
+// Enqueues a request on a control endpoint without a data phase and a default completion timeout.
 func (o *IOUSBHostPipe) EnqueueControlRequestErrorCompletionHandler(request unsafe.Pointer, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -155,7 +155,7 @@ func (o *IOUSBHostPipe) EnqueueControlRequestErrorCompletionHandler(request unsa
 	return _ret
 }
 
-// @brief       Abort pending I/O requests. @discussion  This method will abort all pending I/O requests.  If <code>option</code> includes <code>IOUSBHostAbortOptionSynchronous</code>, this method will block any new IO requests unless they are submitted from an aborted IO's completion routine. @param       option IOUSBHostAbortOption by default IOUSBHostAbortOptionSynchronous is used @return      YES on success, an IOReturn error code will be reported on failure
+// Aborts pending input/output requests.
 func (o *IOUSBHostPipe) AbortWithOptionError(option IOUSBHostAbortOption) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelAbortWithOptionError, option, unsafe.Pointer(&_nsErr))
@@ -165,7 +165,7 @@ func (o *IOUSBHostPipe) AbortWithOptionError(option IOUSBHostAbortOption) (bool,
 	return _ret, nil
 }
 
-// @brief       Abort pending I/O requests. @discussion  This method will abort all pending I/O requests.  If <code>option</code> includes <code>IOUSBHostAbortOptionSynchronous</code>, this method will block any new IO requests unless they are submitted from an aborted IO's completion routine. @return      YES on success, an IOReturn error code will be reported on failure
+// Aborts pending input/output requests synchronously.
 func (o *IOUSBHostPipe) AbortWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelAbortWithError, unsafe.Pointer(&_nsErr))
@@ -175,7 +175,7 @@ func (o *IOUSBHostPipe) AbortWithError() (bool, error) {
 	return _ret, nil
 }
 
-// @brief       Send an IO request on the source @discussion  This method will send a synchronous request on the IO source, and will not return until the request is complete. @param       data An NSMutableData* containing the buffer to use for the transfer. nil will send a zero length packet. @param       bytesTransferred NSUInteger pointer which will be updated with the bytes transferred during the request @param       completionTimeout Timeout of the request.  If 0, the request will never timeout. Must be 0 for interrupt pipes and streams. @return      YES on success, an IOReturn error code will be reported on failure
+// Sends an input/output request on the pipe.
 func (o *IOUSBHostPipe) SendIORequestWithDataBytesTransferredCompletionTimeoutError(data *foundation.NSMutableData, bytesTransferred *uint, completionTimeout float64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSendIORequestWithDataBytesTransferredCompletionTimeoutError, data.Ptr(), bytesTransferred, completionTimeout, unsafe.Pointer(&_nsErr))
@@ -185,7 +185,7 @@ func (o *IOUSBHostPipe) SendIORequestWithDataBytesTransferredCompletionTimeoutEr
 	return _ret, nil
 }
 
-// @brief       Enqueue an IO request on the source @discussion  This method is used to issue an asynchronous I/O request on a bulk or interrupt pipe. @param       data An NSMutableData* containing the buffer to use for the transfer. nil will send a zero length packet. @param       completionTimeout Timeout of the request.  If 0, the request will never timeout. Must be 0 for interrupt pipes and streams. @param       completionHandler an IOUSBHostCompletionHandler @return      YES on success, an IOReturn error code will be reported on failure
+// Enqueues an input/output request on the pipe.
 func (o *IOUSBHostPipe) EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHandler(data *foundation.NSMutableData, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -198,7 +198,7 @@ func (o *IOUSBHostPipe) EnqueueIORequestWithDataCompletionTimeoutErrorCompletion
 	return _ret
 }
 
-// @brief       Send a request on an isochronous endpoint @discussion  This method is used to issue isochronous requests.  The caller allocates and initializes  an array of IOUSBHostIsochronousFrame structures, which is used to describe the frames that will be transferred.  See @link IOUSBHostIsochronousFrame @/link for information regarding structure initialization requirements and usage. @param       data An NSMutableData* to be used as the backing store for the I/O. @param       frameList Pointer first element in an IOUSBHostIsochronousFrame array.  The array must contain at least frameListCount elements. @param       frameListCount Number of elements in <code>frameList</code>. @param       firstFrameNumber Frame number which this request should begin on.  The current frame number can be queried via <code>[IOUSBHostObject getFrameNumber]</code> If 0, the transfer will start on the next available frame (XHCI only). @return      YES on success, an IOReturn error code will be reported on failure
+// Sends a request on an isochronous endpoint.
 func (o *IOUSBHostPipe) SendIORequestWithDataFrameListFrameListCountFirstFrameNumberError(data *foundation.NSMutableData, frameList *IOUSBHostIsochronousFrame, frameListCount uint, firstFrameNumber uint64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSendIORequestWithDataFrameListFrameListCountFirstFrameNumberError, data.Ptr(), frameList, frameListCount, firstFrameNumber, unsafe.Pointer(&_nsErr))
@@ -208,7 +208,7 @@ func (o *IOUSBHostPipe) SendIORequestWithDataFrameListFrameListCountFirstFrameNu
 	return _ret, nil
 }
 
-// @brief       Send a request on an isochronous endpoint @discussion  This method is used to issue isochronous requests.  The caller allocates and initializes an array of IOUSBHostIsochronousFrame structures, which is used to describe the frames that will be transferred.  See @link IOUSBHostIsochronousFrame @/link for information regarding structure initialization requirements and usage. @param       data An NSMutableData* to be used as the backing store for the I/O. @param       frameList Pointer first element in an IOUSBHostIsochronousFrame array.  The array must contain at least frameListCount elements. @param       frameListCount Number of elements in <code>frameList</code>. @param       firstFrameNumber Frame number which this request should begin on.  The current frame number can be queried via <code>[IOUSBHostObject frameNumberWithTime]</code> If 0, the transfer will start on the next available frame (XHCI only). @param       completionHandler an IOUSBHostIsochronousCompletionHandler @return      YES on success, an IOReturn error code will be reported on failure
+// Enqueues a request on an isochronous endpoint.
 func (o *IOUSBHostPipe) EnqueueIORequestWithDataFrameListFrameListCountFirstFrameNumberErrorCompletionHandler(data *foundation.NSMutableData, frameList *IOUSBHostIsochronousFrame, frameListCount uint, firstFrameNumber uint64, error_ unsafe.Pointer, completionHandler func(int, *IOUSBHostIsochronousFrame)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -244,7 +244,7 @@ func (o *IOUSBHostPipe) EnqueueIORequestWithDataTransactionListTransactionListCo
 	return _ret
 }
 
-// @brief       Enable streams for the IOUSBHostPipe @discussion  This method changes the operational mode of the IOUSBHostPipe to allow streaming endpoint transfers, and must be called before copyStream will return any IOUSBHostStream objects. @return      YES on success, an An IOReturn error will be returned if the pipe, device, or underlying host controller does not support streams.
+// Enables streams for the pipe.
 func (o *IOUSBHostPipe) EnableStreamsWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelEnableStreamsWithError, unsafe.Pointer(&_nsErr))
@@ -254,7 +254,7 @@ func (o *IOUSBHostPipe) EnableStreamsWithError() (bool, error) {
 	return _ret, nil
 }
 
-// @brief       Disable streams for the IOUSBHostPipe @discussion  This method changes the operational mode of the IOUSBHostPipe to disable streaming endpoint transfers.  Calling this method will synchronously abort any outstanding calls on existing IOUSBHostStream objects, and therefore all stream contexts should first be set as non-active on the device via an out-of-band (class-defined) mechanism (USB 3.1 8.12.1.4). @return      YES on success,  An IOReturn error will be returned if streams were not enabled for this IOUSBHostPipe.
+// Disables streams for the pipe.
 func (o *IOUSBHostPipe) DisableStreamsWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelDisableStreamsWithError, unsafe.Pointer(&_nsErr))
@@ -264,7 +264,7 @@ func (o *IOUSBHostPipe) DisableStreamsWithError() (bool, error) {
 	return _ret, nil
 }
 
-// @brief       Return the stream associated with <code>streamID</code> @discussion  This method will return the stream associated with <code>streamID</code>. The caller must release the IOUSBHostStream when finished using it. <code>[IOUSBHostPipe enableStreams]</code> must be called before this method will return a stream object. @param       streamID Stream ID in the range of 1 to <code>max</code>, where <code>max</code> can be retrieved by calling <code>getEndpointMaxStreams</code> with the endpoint descriptors. @return      Pointer to an IOUSBHostStream object or nil. nil may be returned if either the device or the underlying host controller do not support that stream ID.
+// Returns the stream for a stream ID.
 func (o *IOUSBHostPipe) CopyStreamWithStreamIDError(streamID uint) (*IOUSBHostStream, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostPipeSelCopyStreamWithStreamIDError, streamID, unsafe.Pointer(&_nsErr))

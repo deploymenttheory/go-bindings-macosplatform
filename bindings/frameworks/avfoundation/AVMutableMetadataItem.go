@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable metadata item for an audiovisual asset or for one of its tracks.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmutablemetadataitem
 type AVMutableMetadataItem struct {
 	AVMetadataItem
@@ -42,7 +44,7 @@ func AVMutableMetadataItemFromID(id objc.ID) *AVMutableMetadataItem {
 	return o
 }
 
-// @method			metadataItem @abstract		Returns an instance of AVMutableMetadataItem.
+// Returns a new mutable metadata item.
 func AVMutableMetadataItemMetadataItem() *AVMutableMetadataItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMetadataItem), _aVMutableMetadataItemSelMetadataItem)
 	if _ret != 0 {
@@ -80,7 +82,7 @@ func (o *AVMutableMetadataItem) SetValue(value objc.ID) {
 }
 
 func (o *AVMutableMetadataItem) SetExtraAttributes(extraAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_aVMutableMetadataItemSelSetExtraAttributes, extraAttributes)
+	o.Ptr().Send(_aVMutableMetadataItemSelSetExtraAttributes, extraAttributes.Ptr())
 }
 
 func (o *AVMutableMetadataItem) SetStartDate(startDate *foundation.NSDate) {

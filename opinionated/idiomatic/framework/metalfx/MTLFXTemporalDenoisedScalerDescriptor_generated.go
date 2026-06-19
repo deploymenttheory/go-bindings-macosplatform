@@ -102,7 +102,7 @@ func (x *TemporalDenoisedScalerDescriptor) WithSpecularHitDistanceTextureFormat(
 	return x
 }
 
-// The pixel format of the input denoise strength mask texture for the scaler you create with this descriptor. You typically set this to a single-channel texture format.
+// The pixel format of the input denoise strength mask texture for the scaler you create with this descriptor.
 //
 // WithDenoiseStrengthMaskTextureFormat sets the denoiseStrengthMaskTextureFormat property and returns the receiver for chaining.
 func (x *TemporalDenoisedScalerDescriptor) WithDenoiseStrengthMaskTextureFormat(denoiseStrengthMaskTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor {
@@ -110,7 +110,7 @@ func (x *TemporalDenoisedScalerDescriptor) WithDenoiseStrengthMaskTextureFormat(
 	return x
 }
 
-// The pixel format of the input transparency overlay texture for the scaler you create with this descriptor. You typically set this to a 4-channel RGBA texture format.
+// The pixel format of the input transparency overlay texture for the scaler you create with this descriptor.
 //
 // WithTransparencyOverlayTextureFormat sets the transparencyOverlayTextureFormat property and returns the receiver for chaining.
 func (x *TemporalDenoisedScalerDescriptor) WithTransparencyOverlayTextureFormat(transparencyOverlayTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor {
@@ -158,7 +158,7 @@ func (x *TemporalDenoisedScalerDescriptor) WithOutputHeight(outputHeight uint) *
 	return x
 }
 
-// A Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance. This property gives you the option to decide when it’s better for your app to give MetalFX the time it needs to compile the underlying upscaler of the temporal scaling effect. The two choices are: * As you create the effect * After you create the effect, likely when your app needs to upscale the initial textures You can create a temporal denoised scaler instance that can denoise and upscale textures at its best speed immediately after you create it by setting this property to <doc://com.apple.documentation/documentation/swift/true> and then calling an initialization method like “newTemporalDenoisedScalerWithDevice:“. However, it may take MetalFX more time for that method to return while it creates the denoiser scaler and compiles its underlying pipelines. By default, the property is equal to <doc://com.apple.documentation/documentation/swift/false>, which tells MetalFX to quickly create and return the temporal scaling-effect instance, and then compile a faster upscaler in the background. However, this means the effect can take more time to upscale textures while the framework compiles the underlying upscaler. When the framework finishes compiling, the effect runs just as fast as if you set the property to <doc://com.apple.documentation/documentation/swift/true>. * Note: The image quality of the effect’s output texture is consistent, whether it’s using the slower interim upscaler or the final, faster upscaler.
+// A Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance.
 //
 // WithRequiresSynchronousInitialization sets the requiresSynchronousInitialization property and returns the receiver for chaining.
 func (x *TemporalDenoisedScalerDescriptor) WithRequiresSynchronousInitialization(requiresSynchronousInitialization bool) *TemporalDenoisedScalerDescriptor {
@@ -166,7 +166,7 @@ func (x *TemporalDenoisedScalerDescriptor) WithRequiresSynchronousInitialization
 	return x
 }
 
-// A Boolean value that indicates whether MetalFX calculates the exposure for each frame. Set this property to <doc://com.apple.documentation/documentation/swift/true> to create a scaler that automatically calculates the exposure level for each image it scales. * Note: Denoiser scaler instances that use auto exposure ignore their “MTLFXTemporalScalerBase/exposureTexture“ property. This property's default value is <doc://com.apple.documentation/documentation/swift/false>.
+// A Boolean value that indicates whether MetalFX calculates the exposure for each frame.
 //
 // WithAutoExposureEnabled sets the autoExposureEnabled property and returns the receiver for chaining.
 func (x *TemporalDenoisedScalerDescriptor) WithAutoExposureEnabled(autoExposureEnabled bool) *TemporalDenoisedScalerDescriptor {
@@ -214,14 +214,14 @@ func (x *TemporalDenoisedScalerDescriptor) WithTransparencyOverlayTextureEnabled
 	return x
 }
 
-// Creates a denoiser scaler instance for a Metal device. - Parameters: - device: The Metal device that creates the denoiser scaler. - Returns: A denoiser scaler instance upon success, or `nil` otherwise.
+// Creates a denoiser scaler instance for a Metal device.
 //
 // NewTemporalDenoisedScalerWithDevice calls the underlying NewTemporalDenoisedScalerWithDevice.
 func (x *TemporalDenoisedScalerDescriptor) NewTemporalDenoisedScalerWithDevice(device metal.MTLDevice) raw.MTLFXTemporalDenoisedScaler {
 	return x.inner.NewTemporalDenoisedScalerWithDevice(device)
 }
 
-// Creates a denoiser scaler instance for a Metal device. - Parameters: - device: The Metal device that creates the denoiser scaler. - compiler: A compiler instance this method can use to build pipeline state objects. - Returns: A denoiser scaler instance upon success, or `nil` otherwise.
+// Creates a denoiser scaler instance for a Metal device.
 //
 // NewTemporalDenoisedScalerWithDeviceCompiler calls the underlying NewTemporalDenoisedScalerWithDeviceCompiler.
 func (x *TemporalDenoisedScalerDescriptor) NewTemporalDenoisedScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXTemporalDenoisedScaler {

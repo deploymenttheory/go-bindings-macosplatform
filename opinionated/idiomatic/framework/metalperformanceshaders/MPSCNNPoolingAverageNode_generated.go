@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract  A node representing a MPSCNNPoolingAverage kernel @discussion The default edge mode is MPSImageEdgeModeClamp
+// A representation of an average pooling filter.
 //
 // CNNPoolingAverageNode wraps [raw.MPSCNNPoolingAverageNode] with a fluent Go API.
 type CNNPoolingAverageNode struct {

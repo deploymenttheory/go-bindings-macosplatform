@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of user interaction for secure PIN operations on a Smart Card reader.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tksmartcarduserinteractionforpinoperation
 type TKSmartCardUserInteractionForPINOperation struct {
 	TKSmartCardUserInteraction
@@ -51,12 +53,15 @@ func (o *TKSmartCardUserInteractionForPINOperation) SetPINCompletion(pINCompleti
 
 // List of message indices referring to a predefined message table. It is used to specify the type and number of messages displayed during the PIN operation. @discussion If nil, the reader does not display any message (reader specific). Typically, PIN verification takes 1 message, PIN modification 1-3 messages. @note Default value: nil
 func (o *TKSmartCardUserInteractionForPINOperation) PINMessageIndices() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _tKSmartCardUserInteractionForPINOperationSelPINMessageIndices)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardUserInteractionForPINOperationSelPINMessageIndices)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *TKSmartCardUserInteractionForPINOperation) SetPINMessageIndices(pINMessageIndices *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_tKSmartCardUserInteractionForPINOperationSelSetPINMessageIndices, pINMessageIndices)
+	o.Ptr().Send(_tKSmartCardUserInteractionForPINOperationSelSetPINMessageIndices, pINMessageIndices.Ptr())
 }
 
 // Locale defining the language of displayed messages. If set to nil, the user's current locale is used. @note Default value: the user's current locale

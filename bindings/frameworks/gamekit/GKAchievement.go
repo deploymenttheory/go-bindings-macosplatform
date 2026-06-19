@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An achievement you can award a player as they make progress toward and reach a goal in your game.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkachievement
 type GKAchievement struct {
 	foundation.NSObject
@@ -56,7 +58,7 @@ func GKAchievementFromID(id objc.ID) *GKAchievement {
 	return o
 }
 
-// Asynchronously load all achievements for the local player
+// Loads the achievements that you previously reported the player making progress toward.
 func GKAchievementLoadAchievementsWithCompletionHandler(completionHandler func(*foundation.NSArray[*GKAchievement], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -71,7 +73,7 @@ func GKAchievementLoadAchievementsWithCompletionHandler(completionHandler func(*
 	objc.ID(_clsGKAchievement).Send(_gKAchievementSelLoadAchievementsWithCompletionHandler, __block_completionHandler)
 }
 
-// Reset the achievements progress for the local player. All the entries for the local player are removed from the server. Error will be nil on success. Possible reasons for error: 1. Local player not authenticated 2. Communications failure
+// Resets the percentage completed for all of the player’s achievements.
 func GKAchievementResetAchievementsWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -83,7 +85,7 @@ func GKAchievementResetAchievementsWithCompletionHandler(completionHandler func(
 	objc.ID(_clsGKAchievement).Send(_gKAchievementSelResetAchievementsWithCompletionHandler, __block_completionHandler)
 }
 
-// Designated initializer
+// Initializes an achievement for the local player.
 func (o *GKAchievement) InitWithIdentifier(identifier *foundation.NSString) *GKAchievement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementSelInitWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -92,7 +94,7 @@ func (o *GKAchievement) InitWithIdentifier(identifier *foundation.NSString) *GKA
 	return GKAchievementFromID(_ret)
 }
 
-// Initialize the achievement for a specific player. Use to submit participant achievements when ending a turn-based match.
+// Initializes an achievement for a player.
 func (o *GKAchievement) InitWithIdentifierPlayer(identifier *foundation.NSString, player *GKPlayer) *GKAchievement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementSelInitWithIdentifierPlayer, identifier.Ptr(), player.Ptr())
 	if _ret != 0 {
@@ -101,7 +103,7 @@ func (o *GKAchievement) InitWithIdentifierPlayer(identifier *foundation.NSString
 	return GKAchievementFromID(_ret)
 }
 
-// Report an array of achievements to the server. Percent complete is required. Points, completed state are set based on percentComplete. isHidden is set to NO anytime this method is invoked. Date is optional. Error will be nil on success. Possible reasons for error: 1. Local player not authenticated 2. Communications failure 3. Reported Achievement does not exist
+// Reports the player’s progress of players toward one or more achievements.
 func GKAchievementReportAchievementsWithCompletionHandler(achievements *foundation.NSArray[*GKAchievement], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -207,7 +209,7 @@ func (o *GKAchievement) PlayerID() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-// Given a list of players, return a subset of that list containing only players that are eligible to receive a challenge for the achievement.
+// Finds the subset of players who can earn an achievement.
 // Deprecated: since macOS 26.0.
 func (o *GKAchievement) SelectChallengeablePlayersWithCompletionHandler(players *foundation.NSArray[*GKPlayer], completionHandler func(*foundation.NSArray[*GKPlayer], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -223,7 +225,7 @@ func (o *GKAchievement) SelectChallengeablePlayersWithCompletionHandler(players 
 	o.Ptr().Send(_gKAchievementSelSelectChallengeablePlayersWithCompletionHandler, players.Ptr(), __block_completionHandler)
 }
 
-// Use this alternative to reportAchievements:withCompletionHandler: to allow only certain specific challenges to be completed. Pass nil to avoid completing any challenges.
+// Reports the player’s progress on achievements and limits the challenges, associated with those achievements, that the player may complete.
 // Deprecated: since macOS 26.0.
 func GKAchievementReportAchievementsWithEligibleChallengesWithCompletionHandler(achievements *foundation.NSArray[*GKAchievement], challenges *foundation.NSArray[*GKChallenge], completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -239,24 +241,49 @@ func GKAchievementReportAchievementsWithEligibleChallengesWithCompletionHandler(
 // * This method is obsolete. It will never be invoked and its implementation does nothing**
 // Deprecated: since macOS 10.10.
 func (o *GKAchievement) IssueChallengeToPlayersMessage(playerIDs *foundation.NSArray[*foundation.NSString], message *foundation.NSString) {
-	o.Ptr().Send(_gKAchievementSelIssueChallengeToPlayersMessage, playerIDs, message.Ptr())
+	o.Ptr().Send(_gKAchievementSelIssueChallengeToPlayersMessage, playerIDs.Ptr(), message.Ptr())
 }
 
 // * This method is obsolete. It will never be invoked and its implementation does nothing**
 // Deprecated: This method is obsolete.
-func (o *GKAchievement) SelectChallengeablePlayerIDsWithCompletionHandler(playerIDs *foundation.NSArray[*foundation.NSString], completionHandler objc.Block) {
-	o.Ptr().Send(_gKAchievementSelSelectChallengeablePlayerIDsWithCompletionHandler, playerIDs, completionHandler)
+func (o *GKAchievement) SelectChallengeablePlayerIDsWithCompletionHandler(playerIDs *foundation.NSArray[*foundation.NSString], completionHandler func(*foundation.NSArray[*foundation.NSString], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[*foundation.NSString](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_gKAchievementSelSelectChallengeablePlayerIDsWithCompletionHandler, playerIDs.Ptr(), __block_completionHandler)
 }
 
+// Provides a view controller that you present to the player to issue an achievement challenge.
 // Deprecated: since macOS 14.0.
-func (o *GKAchievement) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message *foundation.NSString, players *foundation.NSArray[*GKPlayer], completionHandler objc.Block) *appkit.NSViewController {
-	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementSelChallengeComposeControllerWithMessagePlayersCompletionHandler, message.Ptr(), players.Ptr(), completionHandler)
+func (o *GKAchievement) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message *foundation.NSString, players *foundation.NSArray[*GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*foundation.NSString])) *appkit.NSViewController {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 bool, blockParam2 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam2 != 0 {
+				blockParam2.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(appkit.NSViewControllerFromID(blockParam0), blockParam1, foundation.NSArrayFromID[*foundation.NSString](blockParam2))
+		})
+		defer __block_completionHandler.Release()
+	}
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementSelChallengeComposeControllerWithMessagePlayersCompletionHandler, message.Ptr(), players.Ptr(), __block_completionHandler)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return appkit.NSViewControllerFromID(_ret)
 }
 
+// Provides a view controller that you present to the player to issue an achievement challenge.
 // Deprecated: since macOS 26.0.
 func (o *GKAchievement) ChallengeComposeControllerWithMessagePlayersCompletion(message *foundation.NSString, players *foundation.NSArray[*GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*GKPlayer])) *appkit.NSViewController {
 	var __block_completionHandler objc.Block

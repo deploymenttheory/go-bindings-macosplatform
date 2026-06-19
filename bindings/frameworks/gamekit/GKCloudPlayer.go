@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object representing the currently signed-in iCloud user.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkcloudplayer
 // Deprecated: since macOS 10.14.
 type GKCloudPlayer struct {
@@ -33,7 +35,7 @@ func GKCloudPlayerFromID(id objc.ID) *GKCloudPlayer {
 	return o
 }
 
-// Retrieve a player instance representing the active iCloud account for a given iCloud container. Returns nil and an error if the user is not signed in to iCloud or the container is invalid.
+// Returns player information for the currently signed-in player.
 func GKCloudPlayerGetCurrentSignedInPlayerForContainerCompletionHandler(containerName *foundation.NSString, handler func(*GKCloudPlayer, unsafe.Pointer)) {
 	var __block_handler objc.Block
 	if handler != nil {

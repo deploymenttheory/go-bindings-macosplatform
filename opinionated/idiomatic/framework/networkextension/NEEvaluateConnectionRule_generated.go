@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// NEEvaluateConnectionRule associates properties of network connections with an action.
+//
 // NEEvaluateConnectionRule wraps [raw.NEEvaluateConnectionRule] with a fluent Go API.
 type NEEvaluateConnectionRule struct {
 	inner *raw.NEEvaluateConnectionRule
@@ -32,7 +34,7 @@ func NEEvaluateConnectionRuleFromID(id objc.ID) *NEEvaluateConnectionRule {
 	return &NEEvaluateConnectionRule{inner: raw.NEEvaluateConnectionRuleFromID(id)}
 }
 
-// @method initWithMatchDomains:andAction @discussion Initialize an NEEvaluateConnectionRule instance with a list of destination host domains and an action
+// Initialize an NEEvaluateConnectionRule instance with a list of destination host domains and an action.
 //
 // NewNEEvaluateConnectionRuleWithMatchDomainsAndAction creates a new [NEEvaluateConnectionRule].
 func NewNEEvaluateConnectionRuleWithMatchDomainsAndAction(domains *foundation.NSArray[*foundation.NSString], action NEEvaluateConnectionRuleAction) *NEEvaluateConnectionRule {
@@ -41,7 +43,7 @@ func NewNEEvaluateConnectionRuleWithMatchDomainsAndAction(domains *foundation.NS
 	return &NEEvaluateConnectionRule{inner: raw.NEEvaluateConnectionRuleFromID(_id)}
 }
 
-// @property useDNSServers @discussion An array of NSString objects. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded, the DNS servers specified in this array are used to resolve the host name of the destination while evaluating connectivity to the destination. If the resolution fails for any reason, the VPN is started.
+// If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded, the DNS servers specified in this array are used to resolve the destination hostname of the connection while evaluating connectivity to the destination of the connection. If the resolution fails for any reason, the VPN is started.
 //
 // WithUseDNSServers sets the collection, converting the Go slice to an NSArray.
 func (x *NEEvaluateConnectionRule) WithUseDNSServers(items ...*foundation.NSString) *NEEvaluateConnectionRule {
@@ -64,7 +66,7 @@ func (x *NEEvaluateConnectionRule) WithUseDNSServers(items ...*foundation.NSStri
 	return x
 }
 
-// @property probeURL @discussion An HTTP or HTTPS URL. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded and a request sent to this URL results in a response with an HTTP response code other than 200, then the VPN is started.
+// An HTTP or HTTPS URL. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded and a request sent to this URL results in a response with an HTTP response code other than 200, then the VPN is started.
 //
 // WithProbeURL sets the probeURL property and returns the receiver for chaining.
 func (x *NEEvaluateConnectionRule) WithProbeURL(probeURL string) *NEEvaluateConnectionRule {

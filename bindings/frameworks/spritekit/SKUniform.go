@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container for uniform shader data.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skuniform
 type SKUniform struct {
 	foundation.NSObject
@@ -91,7 +93,7 @@ func SKUniformFromID(id objc.ID) *SKUniform {
 	return o
 }
 
-// Create a shader uniform with a given name. @param name the name of the shader uniform.
+// Creates and initializes a new uniform object.
 func SKUniformUniformWithName(name *foundation.NSString) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithName, name.Ptr())
 	if _ret != 0 {
@@ -100,7 +102,7 @@ func SKUniformUniformWithName(name *foundation.NSString) *SKUniform {
 	return SKUniformFromID(_ret)
 }
 
-// Create a shader uniform with a given name, and texture data @param name the name of the shader uniform. @param texture the texture data associated with this uniform.
+// Creates and initializes a new uniform object that holds a reference to a texture.
 func SKUniformUniformWithNameTexture(name *foundation.NSString, texture *SKTexture) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameTexture, name.Ptr(), texture.Ptr())
 	if _ret != 0 {
@@ -109,7 +111,7 @@ func SKUniformUniformWithNameTexture(name *foundation.NSString, texture *SKTextu
 	return SKUniformFromID(_ret)
 }
 
-// Create a shader uniform with a given name, and a float value @param name the name of the shader uniform. @param value the floating point value associated with this uniform.
+// Creates and initializes a new uniform object that holds a floating-point number.
 func SKUniformUniformWithNameFloat(name *foundation.NSString, value float32) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameFloat, name.Ptr(), value)
 	if _ret != 0 {
@@ -172,6 +174,7 @@ func SKUniformUniformWithNameMatrixFloat4x4(name *foundation.NSString, value uns
 	return SKUniformFromID(_ret)
 }
 
+// Initializes a new uniform object.
 func (o *SKUniform) InitWithName(name *foundation.NSString) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithName, name.Ptr())
 	if _ret != 0 {
@@ -180,6 +183,7 @@ func (o *SKUniform) InitWithName(name *foundation.NSString) *SKUniform {
 	return SKUniformFromID(_ret)
 }
 
+// Initializes a new uniform object that holds a reference to a texture.
 func (o *SKUniform) InitWithNameTexture(name *foundation.NSString, texture *SKTexture) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameTexture, name.Ptr(), texture.Ptr())
 	if _ret != 0 {
@@ -188,6 +192,7 @@ func (o *SKUniform) InitWithNameTexture(name *foundation.NSString, texture *SKTe
 	return SKUniformFromID(_ret)
 }
 
+// Initializes a new uniform object that holds a floating-point number.
 func (o *SKUniform) InitWithNameFloat(name *foundation.NSString, value float32) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameFloat, name.Ptr(), value)
 	if _ret != 0 {
@@ -244,6 +249,7 @@ func (o *SKUniform) InitWithNameMatrixFloat4x4(name *foundation.NSString, value 
 	return SKUniformFromID(_ret)
 }
 
+// Creates and initializes a new uniform object that holds a vector of two floating-point numbers.
 // Deprecated: since macOS 10.12.
 func SKUniformUniformWithNameFloatVector2(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameFloatVector2, name.Ptr(), value)
@@ -253,6 +259,7 @@ func SKUniformUniformWithNameFloatVector2(name *foundation.NSString, value unsaf
 	return SKUniformFromID(_ret)
 }
 
+// Creates and initializes a new uniform object that holds a vector of three floating-point numbers.
 // Deprecated: since macOS 10.12.
 func SKUniformUniformWithNameFloatVector3(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameFloatVector3, name.Ptr(), value)
@@ -262,6 +269,7 @@ func SKUniformUniformWithNameFloatVector3(name *foundation.NSString, value unsaf
 	return SKUniformFromID(_ret)
 }
 
+// Creates and initializes a new uniform object that holds a vector of four floating-point numbers.
 // Deprecated: since macOS 10.12.
 func SKUniformUniformWithNameFloatVector4(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameFloatVector4, name.Ptr(), value)
@@ -271,6 +279,7 @@ func SKUniformUniformWithNameFloatVector4(name *foundation.NSString, value unsaf
 	return SKUniformFromID(_ret)
 }
 
+// Creates and initializes a new uniform object that holds a 2 x 2 matrix of floating-point numbers.
 // Deprecated: since macOS 10.12.
 func SKUniformUniformWithNameFloatMatrix2(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameFloatMatrix2, name.Ptr(), value)
@@ -280,6 +289,7 @@ func SKUniformUniformWithNameFloatMatrix2(name *foundation.NSString, value unsaf
 	return SKUniformFromID(_ret)
 }
 
+// Creates and initializes a new uniform object that holds a 3 x 3 matrix of floating-point numbers.
 // Deprecated: since macOS 10.12.
 func SKUniformUniformWithNameFloatMatrix3(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameFloatMatrix3, name.Ptr(), value)
@@ -289,6 +299,7 @@ func SKUniformUniformWithNameFloatMatrix3(name *foundation.NSString, value unsaf
 	return SKUniformFromID(_ret)
 }
 
+// Creates and initializes a new uniform object that holds a 4 x 4 matrix of floating-point numbers.
 // Deprecated: since macOS 10.12.
 func SKUniformUniformWithNameFloatMatrix4(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameFloatMatrix4, name.Ptr(), value)
@@ -298,6 +309,7 @@ func SKUniformUniformWithNameFloatMatrix4(name *foundation.NSString, value unsaf
 	return SKUniformFromID(_ret)
 }
 
+// Initializes a new uniform object that holds a vector of two floating-point numbers.
 // Deprecated: since macOS 10.12.
 func (o *SKUniform) InitWithNameFloatVector2(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameFloatVector2, name.Ptr(), value)
@@ -307,6 +319,7 @@ func (o *SKUniform) InitWithNameFloatVector2(name *foundation.NSString, value un
 	return SKUniformFromID(_ret)
 }
 
+// Creates and initializes a new uniform object that holds a vector of three floating-point numbers.
 // Deprecated: since macOS 10.12.
 func (o *SKUniform) InitWithNameFloatVector3(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameFloatVector3, name.Ptr(), value)
@@ -316,6 +329,7 @@ func (o *SKUniform) InitWithNameFloatVector3(name *foundation.NSString, value un
 	return SKUniformFromID(_ret)
 }
 
+// Initializes a new uniform object that holds a vector of four floating-point numbers.
 // Deprecated: since macOS 10.12.
 func (o *SKUniform) InitWithNameFloatVector4(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameFloatVector4, name.Ptr(), value)
@@ -325,6 +339,7 @@ func (o *SKUniform) InitWithNameFloatVector4(name *foundation.NSString, value un
 	return SKUniformFromID(_ret)
 }
 
+// Initializes a new uniform object that holds a 2 x 2 matrix of floating-point numbers.
 // Deprecated: since macOS 10.12.
 func (o *SKUniform) InitWithNameFloatMatrix2(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameFloatMatrix2, name.Ptr(), value)
@@ -334,6 +349,7 @@ func (o *SKUniform) InitWithNameFloatMatrix2(name *foundation.NSString, value un
 	return SKUniformFromID(_ret)
 }
 
+// Initializes a new uniform object that holds a 3 x 3 matrix of floating-point numbers.
 // Deprecated: since macOS 10.12.
 func (o *SKUniform) InitWithNameFloatMatrix3(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameFloatMatrix3, name.Ptr(), value)
@@ -343,6 +359,7 @@ func (o *SKUniform) InitWithNameFloatMatrix3(name *foundation.NSString, value un
 	return SKUniformFromID(_ret)
 }
 
+// Initializes a new uniform object that holds a 4 x 4 matrix of floating-point numbers.
 // Deprecated: since macOS 10.12.
 func (o *SKUniform) InitWithNameFloatMatrix4(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameFloatMatrix4, name.Ptr(), value)

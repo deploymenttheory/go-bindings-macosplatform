@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of the local coordinate space transformations for a 3D object.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdltransform
 type MDLTransform struct {
 	foundation.NSObject
@@ -65,6 +67,7 @@ func (o *MDLTransform) Init() *MDLTransform {
 	return MDLTransformFromID(_ret)
 }
 
+// Initializes a transform object to the identity transformation.
 // Deprecated: since macOS 10.13.
 func (o *MDLTransform) InitWithIdentity() *MDLTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformSelInitWithIdentity)
@@ -74,6 +77,7 @@ func (o *MDLTransform) InitWithIdentity() *MDLTransform {
 	return MDLTransformFromID(_ret)
 }
 
+// Initializes a transform object to match the specified transform component.
 // Deprecated: since macOS 10.13.
 func (o *MDLTransform) InitWithTransformComponent(component MDLTransformComponent) *MDLTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformSelInitWithTransformComponent, component)
@@ -92,7 +96,7 @@ func (o *MDLTransform) InitWithTransformComponentResetsTransform(component MDLTr
 	return MDLTransformFromID(_ret)
 }
 
-// Initialization with a matrix assumes the matrix is an invertible, homogeneous affine transform matrix. Retrieving transform components after initialization with a non-affine matrix will yield those of the identity transform.
+// Initializes a transform object with the specified transform matrix.
 func (o *MDLTransform) InitWithMatrix(matrix unsafe.Pointer) *MDLTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformSelInitWithMatrix, matrix)
 	if _ret != 0 {
@@ -109,26 +113,30 @@ func (o *MDLTransform) InitWithMatrixResetsTransform(matrix unsafe.Pointer, rese
 	return MDLTransformFromID(_ret)
 }
 
-// Set all transform components to identity
+// Sets all factors of the transform to those of the identity transformation.
 func (o *MDLTransform) SetIdentity() {
 	o.Ptr().Send(_mDLTransformSelSetIdentity)
 }
 
+// Returns the x-, y-, and z-axis offsets of the transform relative to its parent coordinate space, as of the specified time sample.
 func (o *MDLTransform) TranslationAtTime(time_ float64) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mDLTransformSelTranslationAtTime, time_)
 	return _ret
 }
 
+// Returns the orientation of the transform relative to its parent coordinate space, as of the specified time sample.
 func (o *MDLTransform) RotationAtTime(time_ float64) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mDLTransformSelRotationAtTime, time_)
 	return _ret
 }
 
+// Returns the x-, y-, and z-axis shear factors of the transform relative to its parent coordinate space, as of the specified time sample.
 func (o *MDLTransform) ShearAtTime(time_ float64) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mDLTransformSelShearAtTime, time_)
 	return _ret
 }
 
+// Returns the x-, y-, and z-axis scale factors of the transform relative to its parent coordinate space, as of the specified time sample.
 func (o *MDLTransform) ScaleAtTime(time_ float64) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mDLTransformSelScaleAtTime, time_)
 	return _ret
@@ -138,23 +146,27 @@ func (o *MDLTransform) SetMatrixForTime(matrix unsafe.Pointer, time_ float64) {
 	o.Ptr().Send(_mDLTransformSelSetMatrixForTime, matrix, time_)
 }
 
+// Sets the x-, y-, and z-axis offsets of the transform for the specified time sample.
 func (o *MDLTransform) SetTranslationForTime(translation unsafe.Pointer, time_ float64) {
 	o.Ptr().Send(_mDLTransformSelSetTranslationForTime, translation, time_)
 }
 
+// Sets the orientation of the transform for the specified time sample.
 func (o *MDLTransform) SetRotationForTime(rotation unsafe.Pointer, time_ float64) {
 	o.Ptr().Send(_mDLTransformSelSetRotationForTime, rotation, time_)
 }
 
+// Sets the x-, y-, and z-axis shear factors of the transform for the specified time sample.
 func (o *MDLTransform) SetShearForTime(shear unsafe.Pointer, time_ float64) {
 	o.Ptr().Send(_mDLTransformSelSetShearForTime, shear, time_)
 }
 
+// Sets the x-, y-, and z-axis scale factors of the transform for the specified time sample.
 func (o *MDLTransform) SetScaleForTime(scale unsafe.Pointer, time_ float64) {
 	o.Ptr().Send(_mDLTransformSelSetScaleForTime, scale, time_)
 }
 
-// Construct a right handed rotation matrix at the specified time
+// Returns the orientation of the transform as a rotation matrix, as of the specified time sample.
 func (o *MDLTransform) RotationMatrixAtTime(time_ float64) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mDLTransformSelRotationMatrixAtTime, time_)
 	return _ret

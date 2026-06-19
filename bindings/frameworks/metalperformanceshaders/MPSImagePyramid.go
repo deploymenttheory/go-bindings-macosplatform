@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class for creating different kinds of pyramid images.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagepyramid
 type MPSImagePyramid struct {
 	mpsimage.MPSUnaryImageKernel
@@ -37,6 +39,7 @@ func MPSImagePyramidFromID(id objc.ID) *MPSImagePyramid {
 	return o
 }
 
+// Initializes a downwards 5-tap image pyramid with the default filter kernel and device.
 func (o *MPSImagePyramid) InitWithDevice(device metal.MTLDevice) *MPSImagePyramid {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImagePyramidSelInitWithDevice, device)
 	if _ret != 0 {
@@ -45,6 +48,7 @@ func (o *MPSImagePyramid) InitWithDevice(device metal.MTLDevice) *MPSImagePyrami
 	return MPSImagePyramidFromID(_ret)
 }
 
+// Initialize a downwards 5-tap image pyramid with a central weight parameter and device.
 func (o *MPSImagePyramid) InitWithDeviceCenterWeight(device metal.MTLDevice, centerWeight float32) *MPSImagePyramid {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImagePyramidSelInitWithDeviceCenterWeight, device, centerWeight)
 	if _ret != 0 {
@@ -53,6 +57,7 @@ func (o *MPSImagePyramid) InitWithDeviceCenterWeight(device metal.MTLDevice, cen
 	return MPSImagePyramidFromID(_ret)
 }
 
+// Initialize a downwards n-tap image pyramid with a custom filter kernel and device.
 func (o *MPSImagePyramid) InitWithDeviceKernelWidthKernelHeightWeights(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, kernelWeights *float32) *MPSImagePyramid {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImagePyramidSelInitWithDeviceKernelWidthKernelHeightWeights, device, kernelWidth, kernelHeight, kernelWeights)
 	if _ret != 0 {

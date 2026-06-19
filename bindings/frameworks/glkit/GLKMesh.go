@@ -55,7 +55,7 @@ func (o *GLKMesh) InitWithMeshError(mesh *modelio.MDLMesh) (*GLKMesh, error) {
 // @method newMeshesFromAsset:sourceMeshes:error: @abstract Initialize all meshes in a Model I/O asset. @result An array of GLKit meshes built an asset @param asset Model I/O asset from which to create GLKit meshes @param sourceMeshes Model I/O meshes corresponding the newly created GLKMeshes @param error Pointer to an NSError object set if an error occurred @param return GLKit meshes created from the Model I/O asset @dicussion A convenience method to create GLKit meshes from each mesh in a Model/IO asset.  Resulting meshes are returned while Model I/O meshes from which they were generated will appear in the sourceMeshes array.
 func GLKMeshNewMeshesFromAssetSourceMeshesError(asset *modelio.MDLAsset, sourceMeshes *foundation.NSArray[*modelio.MDLMesh]) (*foundation.NSArray[*GLKMesh], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsGLKMesh), _gLKMeshSelNewMeshesFromAssetSourceMeshesError, asset.Ptr(), sourceMeshes, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsGLKMesh), _gLKMeshSelNewMeshesFromAssetSourceMeshesError, asset.Ptr(), sourceMeshes.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

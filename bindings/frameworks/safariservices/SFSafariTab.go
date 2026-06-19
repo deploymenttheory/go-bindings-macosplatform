@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A proxy for a tab in a Safari window.
+//
 // Apple documentation: https://developer.apple.com/documentation/safariservices/sfsafaritab
 type SFSafariTab struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func SFSafariTabFromID(id objc.ID) *SFSafariTab {
 	return o
 }
 
-// This calls the completion handler passing the active page in the tab.
+// Calls the completion handler passing the active page in the tab.
 func (o *SFSafariTab) GetActivePageWithCompletionHandler(completionHandler func(*SFSafariPage)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -50,7 +52,7 @@ func (o *SFSafariTab) GetActivePageWithCompletionHandler(completionHandler func(
 	o.Ptr().Send(_sFSafariTabSelGetActivePageWithCompletionHandler, __block_completionHandler)
 }
 
-// This calls the completion handler passing all the pages in the tab. This includes the active page and any pages being preloaded by Safari.
+// Calls the completion handler with all of the tab’s active and preloading pages.
 func (o *SFSafariTab) GetPagesWithCompletionHandler(completionHandler func(*foundation.NSArray[*SFSafariPage])) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -80,7 +82,7 @@ func (o *SFSafariTab) GetContainingWindowWithCompletionHandler(completionHandler
 	o.Ptr().Send(_sFSafariTabSelGetContainingWindowWithCompletionHandler, __block_completionHandler)
 }
 
-// Activates this tab in the window it belongs to.
+// Activates the tab.
 func (o *SFSafariTab) ActivateWithCompletionHandler(completionHandler func()) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A descriptor that specifies a set of samples based on the data type and a predicate.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkquerydescriptor
 type HKQueryDescriptor struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func HKQueryDescriptorFromID(id objc.ID) *HKQueryDescriptor {
 	return o
 }
 
-// @method        initWithSampleType:predicate: @abstract      Returns a query descriptor that describes a data type and predicate to be used in an HKQuery. @param         sampleType      The type of sample to retrieve. @param         predicate       The predicate which samples should match.
+// Creates a new descriptor for the data type and predicate you provided.
 func (o *HKQueryDescriptor) InitWithSampleTypePredicate(sampleType *HKSampleType, predicate *foundation.NSPredicate) *HKQueryDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKQueryDescriptorSelInitWithSampleTypePredicate, sampleType.Ptr(), predicate.Ptr())
 	if _ret != 0 {

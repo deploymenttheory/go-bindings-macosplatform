@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance that describes how to organize and map data to a vertex function.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlvertexdescriptor
 type MTLVertexDescriptor struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func MTLVertexDescriptorFromID(id objc.ID) *MTLVertexDescriptor {
 	return o
 }
 
+// Creates and returns a new vertex descriptor.
 func MTLVertexDescriptorVertexDescriptor() *MTLVertexDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLVertexDescriptor), _mTLVertexDescriptorSelVertexDescriptor)
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func MTLVertexDescriptorVertexDescriptor() *MTLVertexDescriptor {
 	return MTLVertexDescriptorFromID(_ret)
 }
 
+// Resets the default state for the vertex descriptor.
 func (o *MTLVertexDescriptor) Reset() {
 	o.Ptr().Send(_mTLVertexDescriptorSelReset)
 }

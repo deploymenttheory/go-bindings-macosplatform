@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A key for the metrics dictionary in an update context.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmetrickey
 type MLMetricKey struct {
 	MLKey

@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// Error codes that the framework returns if a session fails.
 type AEAssessmentErrorCode int64
 
 const (
@@ -35,6 +36,7 @@ func (e AEAssessmentErrorCode) String() string {
 	}
 }
 
+// The set of autocorrect features that you can enable during an assessment.
 type AEAutocorrectMode uint64
 
 const (

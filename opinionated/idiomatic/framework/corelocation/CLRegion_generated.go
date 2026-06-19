@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A base class representing an area that can be monitored.
+//
 // Region wraps [raw.CLRegion] with a fluent Go API.
 type Region struct {
 	inner *raw.CLRegion
@@ -32,6 +34,8 @@ func RegionFromID(id objc.ID) *Region {
 	return &Region{inner: raw.CLRegionFromID(id)}
 }
 
+// Initializes and returns a region object defining a circular area.
+//
 // NewRegionCircularRegionWithCenterRadiusIdentifier creates a new [Region].
 func NewRegionCircularRegionWithCenterRadiusIdentifier(center unsafe.Pointer, radius unsafe.Pointer, identifier string) *Region {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLRegion")), objc.RegisterName("alloc"))
@@ -39,18 +43,24 @@ func NewRegionCircularRegionWithCenterRadiusIdentifier(center unsafe.Pointer, ra
 	return &Region{inner: raw.CLRegionFromID(_id)}
 }
 
+// A Boolean indicating that notifications are generated upon entry into the region.
+//
 // WithNotifyOnEntry sets the notifyOnEntry property and returns the receiver for chaining.
 func (x *Region) WithNotifyOnEntry(notifyOnEntry bool) *Region {
 	x.inner.SetNotifyOnEntry(notifyOnEntry)
 	return x
 }
 
+// A Boolean indicating that notifications are generated upon exit from the region.
+//
 // WithNotifyOnExit sets the notifyOnExit property and returns the receiver for chaining.
 func (x *Region) WithNotifyOnExit(notifyOnExit bool) *Region {
 	x.inner.SetNotifyOnExit(notifyOnExit)
 	return x
 }
 
+// Returns a Boolean value indicating whether the region contains the specified coordinate.
+//
 // ContainsCoordinate calls the underlying ContainsCoordinate.
 func (x *Region) ContainsCoordinate(coordinate unsafe.Pointer) bool {
 	return x.inner.ContainsCoordinate(coordinate)

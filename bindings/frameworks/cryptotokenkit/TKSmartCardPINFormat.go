@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The formatting properties for a PIN, such as character encoding and length constraints.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tksmartcardpinformat
 type TKSmartCardPINFormat struct {
 	foundation.NSObject

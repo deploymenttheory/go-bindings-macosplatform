@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a stream of media data.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremediaio/cmioextensionstream
 type CMIOExtensionStream struct {
 	foundation.NSObject
@@ -46,7 +48,7 @@ func CMIOExtensionStreamFromID(id objc.ID) *CMIOExtensionStream {
 	return o
 }
 
-// @method streamWithLocalizedName:streamID:direction:clockType:source: @abstract Returns a stream instance. @param localizedName The localized name of the stream. @param streamID The stream identifier. @param direction The stream direction. @param clockType The stream clock type. @param source The stream source. @result A CMIOExtensionStream instance that provides data. @discussion Note that the clockType parameter may not be CMIOExtensionStreamClockTypeCustom; that value is reserved for streams created with a custom clock configuration. For streams that have a custom clock, use streamWithLocalizedName:streamID:direction:customClockConfiguration:source:.
+// Returns a new stream.
 func CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionClockTypeSource(localizedName *foundation.NSString, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, clockType CMIOExtensionStreamClockType, source CMIOExtensionStreamSource) *CMIOExtensionStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionStream), _cMIOExtensionStreamSelStreamWithLocalizedNameStreamIDDirectionClockTypeSource, localizedName.Ptr(), streamID.Ptr(), direction, clockType, source)
 	if _ret != 0 {
@@ -55,7 +57,7 @@ func CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionClockTypeSource(
 	return CMIOExtensionStreamFromID(_ret)
 }
 
-// @method streamWithLocalizedName:streamID:direction:customClockConfiguration:source: @abstract Returns a stream instance. @param localizedName The localized name of the stream. @param streamID The stream identifier. @param direction The stream direction. @param customClockConfiguration A CMIOExtensionStreamCustomClockConfiguration object that defines the custom clock configuration. @param source The stream source. @result A CMIOExtensionStream instance that provides data.
+// Returns a new stream that uses a custom clock configuration.
 func CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource(localizedName *foundation.NSString, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, customClockConfiguration *CMIOExtensionStreamCustomClockConfiguration, source CMIOExtensionStreamSource) *CMIOExtensionStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionStream), _cMIOExtensionStreamSelStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource, localizedName.Ptr(), streamID.Ptr(), direction, customClockConfiguration.Ptr(), source)
 	if _ret != 0 {
@@ -64,7 +66,7 @@ func CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionCustomClockConfi
 	return CMIOExtensionStreamFromID(_ret)
 }
 
-// @method initWithLocalizedName:streamID:direction:clockType:source: @abstract Initialize a stream instance. @param localizedName The localized name of the stream. @param streamID The stream identifier. @param direction The stream direction. @param clockType The stream clock type. @param source The stream source. @result A CMIOExtensionStream instance that provides data. @discussion Note that the clockType parameter may not be CMIOExtensionStreamClockTypeCustom; that value is reserved for streams created with a custom clock configuration. For streams that have a custom clock, use streamWithLocalizedName:streamID:direction:customClockConfiguration:source:.
+// Creates a stream.
 func (o *CMIOExtensionStream) InitWithLocalizedNameStreamIDDirectionClockTypeSource(localizedName *foundation.NSString, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, clockType CMIOExtensionStreamClockType, source CMIOExtensionStreamSource) *CMIOExtensionStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamSelInitWithLocalizedNameStreamIDDirectionClockTypeSource, localizedName.Ptr(), streamID.Ptr(), direction, clockType, source)
 	if _ret != 0 {
@@ -73,6 +75,7 @@ func (o *CMIOExtensionStream) InitWithLocalizedNameStreamIDDirectionClockTypeSou
 	return CMIOExtensionStreamFromID(_ret)
 }
 
+// Creates a stream that uses a custom clock configuration.
 func (o *CMIOExtensionStream) InitWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource(localizedName *foundation.NSString, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, customClockConfiguration *CMIOExtensionStreamCustomClockConfiguration, source CMIOExtensionStreamSource) *CMIOExtensionStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamSelInitWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource, localizedName.Ptr(), streamID.Ptr(), direction, customClockConfiguration.Ptr(), source)
 	if _ret != 0 {
@@ -81,17 +84,17 @@ func (o *CMIOExtensionStream) InitWithLocalizedNameStreamIDDirectionCustomClockC
 	return CMIOExtensionStreamFromID(_ret)
 }
 
-// @method notifyPropertiesChanged: @abstract Notify client(s) of stream properties changes. @param propertyStates The dictionary of properties having changed.
+// Notifies clients about stream property changes.
 func (o *CMIOExtensionStream) NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_cMIOExtensionStreamSelNotifyPropertiesChanged, propertyStates)
+	o.Ptr().Send(_cMIOExtensionStreamSelNotifyPropertiesChanged, propertyStates.Ptr())
 }
 
-// @method sendSampleBuffer:discontinuity:hostTimeInNanoseconds: @abstract Send media sample to client(s). @param sampleBuffer The sample buffer containing media data. @param discontinuity The discontinuity flag indicating if the sample buffer represents a discontinuity boundary. @param hostTimeInNanoseconds The host time in nanoseconds when the buffer was captured. @discussion The sample will be deliver to clients whose media type authorization status is authorized. The sample buffer timestamps should be relative to the clock timebase specified with clockType. Attempting to send a sample buffer on a sink stream will throw an exception.
+// Sends a media sample to stream client.
 func (o *CMIOExtensionStream) SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer unsafe.Pointer, discontinuity CMIOExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64) {
 	o.Ptr().Send(_cMIOExtensionStreamSelSendSampleBufferDiscontinuityHostTimeInNanoseconds, sampleBuffer, discontinuity, hostTimeInNanoseconds)
 }
 
-// @method consumeSampleBufferFromClient:completionHandler: @abstract Consume a sample buffer from a client. @param client The client. @param completionHandler A block that will be called when the operation is completed. If the capture request is successful, the "sampleBuffer" parameter contains a valid CMSampleBuffer, the "sampleBufferSequenceNumber" parameter is the sample buffer sequence number, the "discontinuity" parameter is the discontinuity flag, the "hasMoreSampleBuffers" parameter indicates whether or not more sample buffers are available, the "error" parameter is nil.
+// Consumes a sample buffer from a client.
 func (o *CMIOExtensionStream) ConsumeSampleBufferFromClientCompletionHandler(client *CMIOExtensionClient, completionHandler func(unsafe.Pointer, uint64, CMIOExtensionStreamDiscontinuityFlags, bool, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -103,7 +106,7 @@ func (o *CMIOExtensionStream) ConsumeSampleBufferFromClientCompletionHandler(cli
 	o.Ptr().Send(_cMIOExtensionStreamSelConsumeSampleBufferFromClientCompletionHandler, client.Ptr(), __block_completionHandler)
 }
 
-// @method notifyScheduledOutputChanged: @abstract Notify client(s) when a particular buffer was output. @param scheduledOutput The stream scheduled output.
+// Notifies clients when a particular buffer is output.
 func (o *CMIOExtensionStream) NotifyScheduledOutputChanged(scheduledOutput *CMIOExtensionScheduledOutput) {
 	o.Ptr().Send(_cMIOExtensionStreamSelNotifyScheduledOutputChanged, scheduledOutput.Ptr())
 }

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A type that encapsulates input for various WebAuthn extensions during passkey assertion.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredentialextensioninput
 type ASPasskeyAssertionCredentialExtensionInput struct {
 	foundation.NSObject

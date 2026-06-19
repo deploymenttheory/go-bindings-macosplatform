@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that reflects the feedback state for the playing item.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpfeedbackcommand
 type MPFeedbackCommand struct {
 	MPRemoteCommand

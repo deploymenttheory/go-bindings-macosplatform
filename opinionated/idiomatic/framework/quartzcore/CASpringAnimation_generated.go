@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An animation that applies a spring-like force to a layer’s properties.
+//
 // SpringAnimation wraps [raw.CASpringAnimation] with a fluent Go API.
 type SpringAnimation struct {
 	inner *raw.CASpringAnimation
@@ -43,24 +45,32 @@ func NewSpringAnimationWithPerceptualDurationBounce(perceptualDuration float64, 
 	return &SpringAnimation{inner: raw.CASpringAnimationFromID(_id)}
 }
 
+// The mass of the object attached to the end of the spring.
+//
 // WithMass sets the mass property and returns the receiver for chaining.
 func (x *SpringAnimation) WithMass(mass float64) *SpringAnimation {
 	x.inner.SetMass(mass)
 	return x
 }
 
+// The spring stiffness coefficient.
+//
 // WithStiffness sets the stiffness property and returns the receiver for chaining.
 func (x *SpringAnimation) WithStiffness(stiffness float64) *SpringAnimation {
 	x.inner.SetStiffness(stiffness)
 	return x
 }
 
+// Defines how the spring’s motion should be damped due to the forces of friction.
+//
 // WithDamping sets the damping property and returns the receiver for chaining.
 func (x *SpringAnimation) WithDamping(damping float64) *SpringAnimation {
 	x.inner.SetDamping(damping)
 	return x
 }
 
+// The initial velocity of the object attached to the spring.
+//
 // WithInitialVelocity sets the initialVelocity property and returns the receiver for chaining.
 func (x *SpringAnimation) WithInitialVelocity(initialVelocity float64) *SpringAnimation {
 	x.inner.SetInitialVelocity(initialVelocity)
@@ -73,60 +83,80 @@ func (x *SpringAnimation) WithAllowsOverdamping(allowsOverdamping bool) *SpringA
 	return x
 }
 
+// Defines the value the receiver uses to start interpolation.
+//
 // WithFromValue sets the fromValue property and returns the receiver for chaining.
 func (x *SpringAnimation) WithFromValue(fromValue objc.ID) *SpringAnimation {
 	x.inner.CABasicAnimation.SetFromValue(fromValue)
 	return x
 }
 
+// Defines the value the receiver uses to end interpolation.
+//
 // WithToValue sets the toValue property and returns the receiver for chaining.
 func (x *SpringAnimation) WithToValue(toValue objc.ID) *SpringAnimation {
 	x.inner.CABasicAnimation.SetToValue(toValue)
 	return x
 }
 
+// Defines the value the receiver uses to perform relative interpolation.
+//
 // WithByValue sets the byValue property and returns the receiver for chaining.
 func (x *SpringAnimation) WithByValue(byValue objc.ID) *SpringAnimation {
 	x.inner.CABasicAnimation.SetByValue(byValue)
 	return x
 }
 
+// Specifies the key path the receiver animates.
+//
 // WithKeyPath sets the keyPath property and returns the receiver for chaining.
 func (x *SpringAnimation) WithKeyPath(keyPath string) *SpringAnimation {
 	x.inner.CABasicAnimation.CAPropertyAnimation.SetKeyPath(foundation.NSStringStringWithUTF8String(keyPath))
 	return x
 }
 
+// Determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
+//
 // WithAdditive sets the additive property and returns the receiver for chaining.
 func (x *SpringAnimation) WithAdditive(additive bool) *SpringAnimation {
 	x.inner.CABasicAnimation.CAPropertyAnimation.SetAdditive(additive)
 	return x
 }
 
+// Determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
+//
 // WithCumulative sets the cumulative property and returns the receiver for chaining.
 func (x *SpringAnimation) WithCumulative(cumulative bool) *SpringAnimation {
 	x.inner.CABasicAnimation.CAPropertyAnimation.SetCumulative(cumulative)
 	return x
 }
 
+// An optional value function that is applied to interpolated values.
+//
 // WithValueFunction sets the valueFunction property and returns the receiver for chaining.
 func (x *SpringAnimation) WithValueFunction(valueFunction *ValueFunction) *SpringAnimation {
 	x.inner.CABasicAnimation.CAPropertyAnimation.SetValueFunction(valueFunction.Unwrap())
 	return x
 }
 
+// An optional timing function defining the pacing of the animation.
+//
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
 func (x *SpringAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *SpringAnimation {
 	x.inner.CABasicAnimation.CAPropertyAnimation.CAAnimation.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
+// Specifies the receiver’s delegate object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SpringAnimation) WithDelegate(delegate raw.CAAnimationDelegate) *SpringAnimation {
 	x.inner.CABasicAnimation.CAPropertyAnimation.CAAnimation.SetDelegate(delegate)
 	return x
 }
 
+// Determines if the animation is removed from the target layer’s animations upon completion.
+//
 // WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
 func (x *SpringAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *SpringAnimation {
 	x.inner.CABasicAnimation.CAPropertyAnimation.CAAnimation.SetRemovedOnCompletion(removedOnCompletion)

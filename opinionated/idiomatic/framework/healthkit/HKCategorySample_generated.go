@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A sample with values from a short list of possible values.
+//
 // CategorySample wraps [raw.HKCategorySample] with a fluent Go API.
 type CategorySample struct {
 	inner *raw.HKCategorySample

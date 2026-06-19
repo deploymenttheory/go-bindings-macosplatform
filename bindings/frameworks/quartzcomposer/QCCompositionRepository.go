@@ -51,11 +51,17 @@ func (o *QCCompositionRepository) CompositionWithIdentifier(identifier *foundati
 }
 
 func (o *QCCompositionRepository) CompositionsWithProtocolsAndAttributes(protocols *foundation.NSArray[objc.ID], attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _qCCompositionRepositorySelCompositionsWithProtocolsAndAttributes, protocols, attributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionRepositorySelCompositionsWithProtocolsAndAttributes, protocols.Ptr(), attributes.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *QCCompositionRepository) AllCompositions() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _qCCompositionRepositorySelAllCompositions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionRepositorySelAllCompositions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

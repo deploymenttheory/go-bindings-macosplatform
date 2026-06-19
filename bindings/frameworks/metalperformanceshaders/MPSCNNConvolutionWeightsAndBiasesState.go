@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that stores weights and biases.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutionweightsandbiasesstate
 type MPSCNNConvolutionWeightsAndBiasesState struct {
 	mpscore.MPSState

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class for managing the units of measure within HealthKit.
+//
 // Unit wraps [raw.HKUnit] with a fluent Go API.
 type Unit struct {
 	inner *raw.HKUnit
@@ -36,6 +38,8 @@ func NewUnit() *Unit {
 	return &Unit{inner: raw.HKUnitFromID(_id)}
 }
 
+// Returns a Boolean value indicating whether the unit is null.
+//
 // IsNull calls the underlying IsNull.
 func (x *Unit) IsNull() bool {
 	return x.inner.IsNull()
@@ -52,6 +56,8 @@ func (x *Unit) UnitString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Creates a complex unit by multiplying the receiving unit with another unit.
+//
 // UnitMultipliedByUnit calls the underlying UnitMultipliedByUnit.
 func (x *Unit) UnitMultipliedByUnit(unit *raw.HKUnit) *Unit {
 	_r := x.inner.UnitMultipliedByUnit(unit)
@@ -61,6 +67,8 @@ func (x *Unit) UnitMultipliedByUnit(unit *raw.HKUnit) *Unit {
 	return &Unit{inner: _r}
 }
 
+// Creates a complex unit by dividing the receiving unit by another unit.
+//
 // UnitDividedByUnit calls the underlying UnitDividedByUnit.
 func (x *Unit) UnitDividedByUnit(unit *raw.HKUnit) *Unit {
 	_r := x.inner.UnitDividedByUnit(unit)
@@ -70,6 +78,8 @@ func (x *Unit) UnitDividedByUnit(unit *raw.HKUnit) *Unit {
 	return &Unit{inner: _r}
 }
 
+// Creates a complex unit by raising the unit to the given power.
+//
 // UnitRaisedToPower calls the underlying UnitRaisedToPower.
 func (x *Unit) UnitRaisedToPower(power int) *Unit {
 	_r := x.inner.UnitRaisedToPower(power)
@@ -79,6 +89,8 @@ func (x *Unit) UnitRaisedToPower(power int) *Unit {
 	return &Unit{inner: _r}
 }
 
+// Returns a complex unit representing the unit’s reciprocal.
+//
 // ReciprocalUnit calls the underlying ReciprocalUnit.
 func (x *Unit) ReciprocalUnit() *Unit {
 	_r := x.inner.ReciprocalUnit()

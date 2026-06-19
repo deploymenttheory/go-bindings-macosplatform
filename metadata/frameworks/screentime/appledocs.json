@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "framework": "ScreenTime",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "STScreenTimeConfiguration": {
+      "doc": "The configuration for this device.",
+      "url": "https://developer.apple.com/documentation/screentime/stscreentimeconfiguration"
+    },
+    "STScreenTimeConfigurationObserver": {
+      "doc": "The object you use to observe changes to the current configuration.",
+      "url": "https://developer.apple.com/documentation/screentime/stscreentimeconfigurationobserver"
+    },
+    "STWebHistory": {
+      "doc": "The object you use to delete web-usage data.",
+      "url": "https://developer.apple.com/documentation/screentime/stwebhistory"
+    },
+    "STWebpageController": {
+      "doc": "The controller you use to report web usage and block restricted webpages.",
+      "url": "https://developer.apple.com/documentation/screentime/stwebpagecontroller"
+    }
+  },
+  "methods": {
+    "STScreenTimeConfigurationObserver": {
+      "-initWithUpdateQueue:": {
+        "doc": "Creates a configuration observer that reports updates on the queue you specify.",
+        "url": "https://developer.apple.com/documentation/screentime/stscreentimeconfigurationobserver/init(updatequeue:)"
+      },
+      "-startObserving": {
+        "doc": "Starts observing changes to the current configuration.",
+        "url": "https://developer.apple.com/documentation/screentime/stscreentimeconfigurationobserver/startobserving()"
+      },
+      "-stopObserving": {
+        "doc": "Stops observing changes to the current configuration.",
+        "url": "https://developer.apple.com/documentation/screentime/stscreentimeconfigurationobserver/stopobserving()"
+      }
+    },
+    "STWebHistory": {
+      "-deleteAllHistory": {
+        "doc": "Deletes all web history associated with the bundle identifier you specified during initialization.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebhistory/deleteallhistory()"
+      },
+      "-deleteHistoryDuringInterval:": {
+        "doc": "Deletes web history that occurred during the date interval you specify.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebhistory/deletehistory(during:)"
+      },
+      "-deleteHistoryForURL:": {
+        "doc": "Deletes all the web history for the URL you specify.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebhistory/deletehistory(for:)"
+      },
+      "-fetchAllHistoryWithCompletionHandler:": {
+        "doc": "Fetches all web history associated with the bundle identifier and profile identifier you specified during initialization.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebhistory/fetchallhistory(completionhandler:)"
+      },
+      "-fetchHistoryDuringInterval:completionHandler:": {
+        "doc": "Fetches web history that occurred during the date interval you specify.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebhistory/fetchhistory(during:completionhandler:)"
+      },
+      "-initWithBundleIdentifier:error:": {
+        "doc": "Creates a web history instance to delete web-usage data associated to the bundle identifier you specify.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebhistory/init(bundleidentifier:)"
+      },
+      "-initWithBundleIdentifier:profileIdentifier:error:": {
+        "doc": "Creates a web history instance to delete web-usage data associated to the bundle identifier and profile identifier you specify.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebhistory/init(bundleidentifier:profileidentifier:)"
+      },
+      "-initWithProfileIdentifier:": {
+        "doc": "Creates a web history instance to delete web-usage data associated to the profile identifier you specify.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebhistory/init(profileidentifier:)"
+      }
+    },
+    "STWebpageController": {
+      "-setBundleIdentifier:error:": {
+        "doc": "Changes the bundle identifier used to report web usage.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebpagecontroller/setbundleidentifier(_:)"
+      }
+    }
+  },
+  "properties": {
+    "STScreenTimeConfiguration": {
+      "enforcesChildRestrictions": {
+        "doc": "A Boolean that indicates whether the device is currently enforcing child restrictions.",
+        "url": "https://developer.apple.com/documentation/screentime/stscreentimeconfiguration/enforceschildrestrictions"
+      }
+    },
+    "STScreenTimeConfigurationObserver": {
+      "configuration": {
+        "doc": "The configuration being observed.",
+        "url": "https://developer.apple.com/documentation/screentime/stscreentimeconfigurationobserver/configuration"
+      }
+    },
+    "STWebHistory": {
+      "STWebHistoryProfileIdentifier": {
+        "doc": "An identifier representing a web history profile.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebhistory/profileidentifier"
+      }
+    },
+    "STWebpageController": {
+      "URL": {
+        "doc": "The URL for the webpage.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebpagecontroller/url"
+      },
+      "URLIsBlocked": {
+        "doc": "A Boolean that indicates whether a parent or guardian has blocked the URL.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebpagecontroller/urlisblocked"
+      },
+      "URLIsPictureInPicture": {
+        "doc": "A Boolean that indicates whether the webpage is currently displaying a floating picture in picture window.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebpagecontroller/urlispictureinpicture"
+      },
+      "URLIsPlayingVideo": {
+        "doc": "A Boolean that indicates whether there are one or more videos currently playing in the webpage.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebpagecontroller/urlisplayingvideo"
+      },
+      "profileIdentifier": {
+        "doc": "An optional identifier for the current browsing profile.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebpagecontroller/profileidentifier"
+      },
+      "suppressUsageRecording": {
+        "doc": "A Boolean that indicates whether the webpage controller is not recording web usage.",
+        "url": "https://developer.apple.com/documentation/screentime/stwebpagecontroller/suppressusagerecording"
+      }
+    }
+  }
+}

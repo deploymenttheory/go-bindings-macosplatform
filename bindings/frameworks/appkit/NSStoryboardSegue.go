@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A transition or containment relationship between two scenes in a storyboard.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsstoryboardsegue
 type NSStoryboardSegue struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func NSStoryboardSegueFromID(id objc.ID) *NSStoryboardSegue {
 	return o
 }
 
+// Creates a storyboard segue and a block used when the segue is performed.
 func NSStoryboardSegueSegueWithIdentifierSourceDestinationPerformHandler(identifier *foundation.NSString, sourceController objc.ID, destinationController objc.ID, performHandler func()) *NSStoryboardSegue {
 	var __block_performHandler objc.Block
 	if performHandler != nil {
@@ -50,6 +53,7 @@ func NSStoryboardSegueSegueWithIdentifierSourceDestinationPerformHandler(identif
 	return NSStoryboardSegueFromID(_ret)
 }
 
+// The designated initializer for a storyboard segue.
 func (o *NSStoryboardSegue) InitWithIdentifierSourceDestination(identifier *foundation.NSString, sourceController objc.ID, destinationController objc.ID) *NSStoryboardSegue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStoryboardSegueSelInitWithIdentifierSourceDestination, identifier.Ptr(), sourceController, destinationController)
 	if _ret != 0 {
@@ -58,6 +62,7 @@ func (o *NSStoryboardSegue) InitWithIdentifierSourceDestination(identifier *foun
 	return NSStoryboardSegueFromID(_ret)
 }
 
+// Performs a visual transition from one controller to another.
 func (o *NSStoryboardSegue) Perform() {
 	o.Ptr().Send(_nSStoryboardSegueSelPerform)
 }

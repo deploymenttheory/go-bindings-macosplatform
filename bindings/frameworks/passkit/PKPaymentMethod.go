@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains information about payment methods.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkpaymentmethod
 type PKPaymentMethod struct {
 	foundation.NSObject

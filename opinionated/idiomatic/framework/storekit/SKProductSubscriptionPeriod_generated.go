@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object containing the subscription period duration information.
+//
 // ProductSubscriptionPeriod wraps [raw.SKProductSubscriptionPeriod] with a fluent Go API.
 type ProductSubscriptionPeriod struct {
 	inner *raw.SKProductSubscriptionPeriod

@@ -8,13 +8,18 @@ import (
 	"fmt"
 )
 
+// Indicates the request method used in the request.
 type SLRequestMethod int64
 
 const (
-	SLRequestMethodGET    SLRequestMethod = 0
-	SLRequestMethodPOST   SLRequestMethod = 1
+	// Requests information from the specified resource.
+	SLRequestMethodGET SLRequestMethod = 0
+	// Submits data to be processed.
+	SLRequestMethodPOST SLRequestMethod = 1
+	// Deletes the specified resource.
 	SLRequestMethodDELETE SLRequestMethod = 2
-	SLRequestMethodPUT    SLRequestMethod = 3
+	// Uses a PUT request to submit the data.
+	SLRequestMethodPUT SLRequestMethod = 3
 )
 
 func (e SLRequestMethod) String() string {

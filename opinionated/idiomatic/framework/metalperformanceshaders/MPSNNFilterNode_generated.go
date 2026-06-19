@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A placeholder node denoting a neural network filter stage.
+//
 // NNFilterNode wraps [raw.MPSNNFilterNode] with a fluent Go API.
 type NNFilterNode struct {
 	inner *raw.MPSNNFilterNode

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specialized view that displays the compass heading for its associated map.
+//
 // CompassButton wraps [raw.MKCompassButton] with a fluent Go API.
 type CompassButton struct {
 	inner *raw.MKCompassButton
@@ -35,12 +37,16 @@ func NewCompassButton() *CompassButton {
 	return &CompassButton{inner: raw.MKCompassButtonFromID(_id)}
 }
 
+// The map view that provides the heading information for the compass button.
+//
 // WithMapView sets the mapView property and returns the receiver for chaining.
 func (x *CompassButton) WithMapView(mapView *MapView) *CompassButton {
 	x.inner.SetMapView(mapView.Unwrap())
 	return x
 }
 
+// The visibility of the compass button.
+//
 // WithCompassVisibility sets the compassVisibility property and returns the receiver for chaining.
 func (x *CompassButton) WithCompassVisibility(compassVisibility MKFeatureVisibility) *CompassButton {
 	x.inner.SetCompassVisibility(raw.MKFeatureVisibility(compassVisibility))

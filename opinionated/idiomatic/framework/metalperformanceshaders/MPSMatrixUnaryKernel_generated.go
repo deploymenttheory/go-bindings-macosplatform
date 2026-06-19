@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A kernel that consumes one matrix and produces one matrix.
+//
 // MatrixUnaryKernel wraps [raw.MPSMatrixUnaryKernel] with a fluent Go API.
 type MatrixUnaryKernel struct {
 	inner *raw.MPSMatrixUnaryKernel
@@ -70,7 +72,7 @@ func (x *MatrixUnaryKernel) WithBatchSize(batchSize uint) *MatrixUnaryKernel {
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixUnaryKernel) WithOptions(options mpscore.MPSKernelOptions) *MatrixUnaryKernel {
@@ -78,7 +80,7 @@ func (x *MatrixUnaryKernel) WithOptions(options mpscore.MPSKernelOptions) *Matri
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixUnaryKernel) WithLabel(label string) *MatrixUnaryKernel {

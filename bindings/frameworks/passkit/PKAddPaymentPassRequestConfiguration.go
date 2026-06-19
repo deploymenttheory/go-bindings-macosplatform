@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Contains the configuration data for a view controller that lets the user add a payment pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkaddpaymentpassrequestconfiguration
 type PKAddPaymentPassRequestConfiguration struct {
 	foundation.NSObject
@@ -49,6 +51,7 @@ func PKAddPaymentPassRequestConfigurationFromID(id objc.ID) *PKAddPaymentPassReq
 	return o
 }
 
+// Instantiates a new request configuration with the given encryption scheme.
 func (o *PKAddPaymentPassRequestConfiguration) InitWithEncryptionScheme(encryptionScheme *foundation.NSString) *PKAddPaymentPassRequestConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPaymentPassRequestConfigurationSelInitWithEncryptionScheme, encryptionScheme.Ptr())
 	if _ret != 0 {
@@ -147,12 +150,15 @@ func (o *PKAddPaymentPassRequestConfiguration) SetPaymentNetwork(paymentNetwork 
 }
 
 func (o *PKAddPaymentPassRequestConfiguration) ProductIdentifiers() *foundation.NSSet[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _pKAddPaymentPassRequestConfigurationSelProductIdentifiers)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPaymentPassRequestConfigurationSelProductIdentifiers)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSString](_ret)
 }
 
 func (o *PKAddPaymentPassRequestConfiguration) SetProductIdentifiers(productIdentifiers *foundation.NSSet[*foundation.NSString]) {
-	o.Ptr().Send(_pKAddPaymentPassRequestConfigurationSelSetProductIdentifiers, productIdentifiers)
+	o.Ptr().Send(_pKAddPaymentPassRequestConfigurationSelSetProductIdentifiers, productIdentifiers.Ptr())
 }
 
 func (o *PKAddPaymentPassRequestConfiguration) RequiresFelicaSecureElement() bool {

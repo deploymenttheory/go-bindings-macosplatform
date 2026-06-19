@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that convolves an image with a Laplacian filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagelaplacianpyramid
 type MPSImageLaplacianPyramid struct {
 	mpsimage.MPSImagePyramid

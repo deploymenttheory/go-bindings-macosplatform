@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An item that represents an eraser tool in the tool picker.
+//
 // Apple documentation: https://developer.apple.com/documentation/pencilkit/pktoolpickereraseritem
 type PKToolPickerEraserItem struct {
 	PKToolPickerItem
@@ -31,7 +33,7 @@ func PKToolPickerEraserItemFromID(id objc.ID) *PKToolPickerEraserItem {
 	return o
 }
 
-// Create a new eraser tool item.
+// Creates a new eraser item.
 func (o *PKToolPickerEraserItem) InitWithEraserType(eraserType PKEraserType) *PKToolPickerEraserItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerEraserItemSelInitWithEraserType, eraserType)
 	if _ret != 0 {
@@ -40,7 +42,7 @@ func (o *PKToolPickerEraserItem) InitWithEraserType(eraserType PKEraserType) *PK
 	return PKToolPickerEraserItemFromID(_ret)
 }
 
-// Create a new eraser tool item with a width. @param eraserType The type of eraser. @param width The width of the eraser.
+// Creates a new eraser item with the specified width.
 func (o *PKToolPickerEraserItem) InitWithEraserTypeWidth(eraserType PKEraserType, width float64) *PKToolPickerEraserItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerEraserItemSelInitWithEraserTypeWidth, eraserType, width)
 	if _ret != 0 {

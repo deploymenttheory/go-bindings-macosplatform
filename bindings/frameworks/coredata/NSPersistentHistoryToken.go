@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bookmark for keeping track the most recent history that you’ve processed.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nspersistenthistorytoken
 type NSPersistentHistoryToken struct {
 	foundation.NSObject

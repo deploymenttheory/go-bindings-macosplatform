@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @class CHHapticParameterCurve @abstract A CHHapticParameterCurve is a set of CHHapticParameterCurveControlPoints which describe the control (inflection) points for the parameter values to be applied to the associated pattern. @discussion The CHHapticParameterCurve generates an interpolated value output which passed through each control point at its associated relative time.  These times will all be relative to the start time of the CHHapticParameterCurve within the playing pattern.
+// A curve that you send to a haptic pattern player to alter a property value gradually during playback.
 //
 // Apple documentation: https://developer.apple.com/documentation/corehaptics/chhapticparametercurve
 type CHHapticParameterCurve struct {
@@ -36,7 +36,7 @@ func CHHapticParameterCurveFromID(id objc.ID) *CHHapticParameterCurve {
 	return o
 }
 
-// @method initWithParameterID:controlPoints:relativeTime @abstract Initialize a CHHapticParameterCurve with a parameter ID, time, and an array of CHHapticParameterCurveControlPoint. @param parameterID The CHHapticDynamicParameterID for the desired parameter. @param controlPoints An array of CHHapticParameterCurveControlPoints. @param relativeTime The time at which this parameter curve should start, relative to the start time of the CHHapticPattern to which this parameter curve belongs.
+// Creates a parameter curve from its parameter ID, control points, and start time.
 func (o *CHHapticParameterCurve) InitWithParameterIDControlPointsRelativeTime(parameterID *foundation.NSString, controlPoints *foundation.NSArray[*CHHapticParameterCurveControlPoint], relativeTime float64) *CHHapticParameterCurve {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticParameterCurveSelInitWithParameterIDControlPointsRelativeTime, parameterID.Ptr(), controlPoints.Ptr(), relativeTime)
 	if _ret != 0 {

@@ -53,22 +53,28 @@ func (o *MTRDeviceControllerParameters) SetOTAProviderDelegateQueue(otaProviderD
 
 // The Product Attestation Authority certificates that are trusted to sign device attestation information (and in particular to sign Product Attestation Intermediate certificates, which then sign Device Attestation Certificates). Defaults to nil.
 func (o *MTRDeviceControllerParameters) ProductAttestationAuthorityCertificates() *foundation.NSArray[*foundation.NSData] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSData]](o.Ptr(), _mTRDeviceControllerParametersSelProductAttestationAuthorityCertificates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerParametersSelProductAttestationAuthorityCertificates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSData](_ret)
 }
 
 func (o *MTRDeviceControllerParameters) SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates *foundation.NSArray[*foundation.NSData]) {
-	o.Ptr().Send(_mTRDeviceControllerParametersSelSetProductAttestationAuthorityCertificates, productAttestationAuthorityCertificates)
+	o.Ptr().Send(_mTRDeviceControllerParametersSelSetProductAttestationAuthorityCertificates, productAttestationAuthorityCertificates.Ptr())
 }
 
 // The Certification Declaration certificates whose public keys correspond to private keys that are trusted to sign certification declarations.  Defaults to nil. These certificates are used in addition to, not replacing, the default set of well-known certification declaration signing keys.
 func (o *MTRDeviceControllerParameters) CertificationDeclarationCertificates() *foundation.NSArray[*foundation.NSData] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSData]](o.Ptr(), _mTRDeviceControllerParametersSelCertificationDeclarationCertificates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerParametersSelCertificationDeclarationCertificates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSData](_ret)
 }
 
 func (o *MTRDeviceControllerParameters) SetCertificationDeclarationCertificates(certificationDeclarationCertificates *foundation.NSArray[*foundation.NSData]) {
-	o.Ptr().Send(_mTRDeviceControllerParametersSelSetCertificationDeclarationCertificates, certificationDeclarationCertificates)
+	o.Ptr().Send(_mTRDeviceControllerParametersSelSetCertificationDeclarationCertificates, certificationDeclarationCertificates.Ptr())
 }
 
 // Whether the controller should advertise its operational identity.  Defaults to NO.

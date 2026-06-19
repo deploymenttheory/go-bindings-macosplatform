@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract superclass for all EventKit classes that have persistent instances.
+//
 // Object wraps [raw.EKObject] with a fluent Go API.
 type Object struct {
 	inner *raw.EKObject
@@ -35,16 +37,22 @@ func NewObject() *Object {
 	return &Object{inner: raw.EKObjectFromID(_id)}
 }
 
+// Returns this object to its saved state.
+//
 // Reset calls the underlying Reset.
 func (x *Object) Reset() {
 	x.inner.Reset()
 }
 
+// Rolls back the property values of this object to its original state when it was first fetched.
+//
 // Rollback calls the underlying Rollback.
 func (x *Object) Rollback() {
 	x.inner.Rollback()
 }
 
+// Merges changes to this object with the latest saved values.
+//
 // Refresh calls the underlying Refresh.
 func (x *Object) Refresh() bool {
 	return x.inner.Refresh()

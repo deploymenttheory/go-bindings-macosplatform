@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that indicates the validity of an email address.
+//
 // AddressAnnotation wraps [raw.MEAddressAnnotation] with a fluent Go API.
 type AddressAnnotation struct {
 	inner *raw.MEAddressAnnotation

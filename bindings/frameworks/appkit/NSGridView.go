@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container that aligns views in a flexible grid of rows and columns.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsgridview
 type NSGridView struct {
 	NSView
@@ -61,6 +63,7 @@ func NSGridViewFromID(id objc.ID) *NSGridView {
 	return o
 }
 
+// Creates a newly allocated grid view object with the specified frame rectangle.
 func (o *NSGridView) InitWithFrame(frameRect corefoundation.CGRect) *NSGridView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInitWithFrame, frameRect)
 	if _ret != 0 {
@@ -69,6 +72,7 @@ func (o *NSGridView) InitWithFrame(frameRect corefoundation.CGRect) *NSGridView 
 	return NSGridViewFromID(_ret)
 }
 
+// Creates a newly allocated grid view object from the coder.
 func (o *NSGridView) InitWithCoder(coder *foundation.NSCoder) *NSGridView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -77,6 +81,7 @@ func (o *NSGridView) InitWithCoder(coder *foundation.NSCoder) *NSGridView {
 	return NSGridViewFromID(_ret)
 }
 
+// Creates a newly allocated grid view object with the specified number of columns and rows.
 func NSGridViewGridViewWithNumberOfColumnsRows(columnCount int, rowCount int) *NSGridView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGridView), _nSGridViewSelGridViewWithNumberOfColumnsRows, columnCount, rowCount)
 	if _ret != 0 {
@@ -85,14 +90,16 @@ func NSGridViewGridViewWithNumberOfColumnsRows(columnCount int, rowCount int) *N
 	return NSGridViewFromID(_ret)
 }
 
+// Creates a newly allocated grid view object with the specified array of arrays of views.
 func NSGridViewGridViewWithViews(rows *foundation.NSArray[objc.ID]) *NSGridView {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSGridView), _nSGridViewSelGridViewWithViews, rows)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSGridView), _nSGridViewSelGridViewWithViews, rows.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSGridViewFromID(_ret)
 }
 
+// Returns the grid row object at the specified index.
 func (o *NSGridView) RowAtIndex(index int) *NSGridRow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelRowAtIndex, index)
 	if _ret != 0 {
@@ -101,11 +108,13 @@ func (o *NSGridView) RowAtIndex(index int) *NSGridRow {
 	return NSGridRowFromID(_ret)
 }
 
+// Returns the index of the specified grid row.
 func (o *NSGridView) IndexOfRow(row *NSGridRow) int {
 	_ret := objc.Send[int](o.Ptr(), _nSGridViewSelIndexOfRow, row.Ptr())
 	return _ret
 }
 
+// Returns the grid column object at the specified index.
 func (o *NSGridView) ColumnAtIndex(index int) *NSGridColumn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelColumnAtIndex, index)
 	if _ret != 0 {
@@ -114,11 +123,13 @@ func (o *NSGridView) ColumnAtIndex(index int) *NSGridColumn {
 	return NSGridColumnFromID(_ret)
 }
 
+// Returns the index of the specified grid column.
 func (o *NSGridView) IndexOfColumn(column *NSGridColumn) int {
 	_ret := objc.Send[int](o.Ptr(), _nSGridViewSelIndexOfColumn, column.Ptr())
 	return _ret
 }
 
+// Returns the grid cell object at the specified column and row index.
 func (o *NSGridView) CellAtColumnIndexRowIndex(columnIndex int, rowIndex int) *NSGridCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelCellAtColumnIndexRowIndex, columnIndex, rowIndex)
 	if _ret != 0 {
@@ -127,6 +138,7 @@ func (o *NSGridView) CellAtColumnIndexRowIndex(columnIndex int, rowIndex int) *N
 	return NSGridCellFromID(_ret)
 }
 
+// Returns the grid cell object that contains the given view or one of its ancestors.
 func (o *NSGridView) CellForView(view *NSView) *NSGridCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelCellForView, view.Ptr())
 	if _ret != 0 {
@@ -135,6 +147,7 @@ func (o *NSGridView) CellForView(view *NSView) *NSGridCell {
 	return NSGridCellFromID(_ret)
 }
 
+// Adds an array of views to a new row.
 func (o *NSGridView) AddRowWithViews(views *foundation.NSArray[*NSView]) *NSGridRow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelAddRowWithViews, views.Ptr())
 	if _ret != 0 {
@@ -143,6 +156,7 @@ func (o *NSGridView) AddRowWithViews(views *foundation.NSArray[*NSView]) *NSGrid
 	return NSGridRowFromID(_ret)
 }
 
+// Inserts the array of view objects into the grid view at the index.
 func (o *NSGridView) InsertRowAtIndexWithViews(index int, views *foundation.NSArray[*NSView]) *NSGridRow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInsertRowAtIndexWithViews, index, views.Ptr())
 	if _ret != 0 {
@@ -151,14 +165,17 @@ func (o *NSGridView) InsertRowAtIndexWithViews(index int, views *foundation.NSAr
 	return NSGridRowFromID(_ret)
 }
 
+// Moves the specified row to the new row location.
 func (o *NSGridView) MoveRowAtIndexToIndex(fromIndex int, toIndex int) {
 	o.Ptr().Send(_nSGridViewSelMoveRowAtIndexToIndex, fromIndex, toIndex)
 }
 
+// Removes the row from the grid view at the index.
 func (o *NSGridView) RemoveRowAtIndex(index int) {
 	o.Ptr().Send(_nSGridViewSelRemoveRowAtIndex, index)
 }
 
+// Adds a new column containing the array of views.
 func (o *NSGridView) AddColumnWithViews(views *foundation.NSArray[*NSView]) *NSGridColumn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelAddColumnWithViews, views.Ptr())
 	if _ret != 0 {
@@ -167,6 +184,7 @@ func (o *NSGridView) AddColumnWithViews(views *foundation.NSArray[*NSView]) *NSG
 	return NSGridColumnFromID(_ret)
 }
 
+// Inserts the array of view objects at the specified index.
 func (o *NSGridView) InsertColumnAtIndexWithViews(index int, views *foundation.NSArray[*NSView]) *NSGridColumn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridViewSelInsertColumnAtIndexWithViews, index, views.Ptr())
 	if _ret != 0 {
@@ -175,14 +193,17 @@ func (o *NSGridView) InsertColumnAtIndexWithViews(index int, views *foundation.N
 	return NSGridColumnFromID(_ret)
 }
 
+// Moves the specified column to a new column location.
 func (o *NSGridView) MoveColumnAtIndexToIndex(fromIndex int, toIndex int) {
 	o.Ptr().Send(_nSGridViewSelMoveColumnAtIndexToIndex, fromIndex, toIndex)
 }
 
+// Removes the column from the grid view at the specified index.
 func (o *NSGridView) RemoveColumnAtIndex(index int) {
 	o.Ptr().Send(_nSGridViewSelRemoveColumnAtIndex, index)
 }
 
+// Expands the cell at the top-leading corner of the horizontal and vertical range to cover the entire area.
 func (o *NSGridView) MergeCellsInHorizontalRangeVerticalRange(hRange foundation.NSRange, vRange foundation.NSRange) {
 	o.Ptr().Send(_nSGridViewSelMergeCellsInHorizontalRangeVerticalRange, hRange, vRange)
 }

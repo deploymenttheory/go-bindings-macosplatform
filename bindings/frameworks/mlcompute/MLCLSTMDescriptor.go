@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration object you use to create the LSTM layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlclstmdescriptor
 type MLCLSTMDescriptor struct {
 	foundation.NSObject
@@ -43,7 +45,7 @@ func MLCLSTMDescriptorFromID(id objc.ID) *MLCLSTMDescriptor {
 	return o
 }
 
-// @abstract   Creates a LSTM descriptor with batchFirst = YES @param      inputSize The number of expected features in the input @param      hiddenSize The number of features in the hidden state @param      layerCount Number of recurrent layers @return     A valid MLCLSTMDescriptor object or nil, if failure.
+// Creates a batch first LSTM descriptor with the input size and number of layers you specify.
 func MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCount(inputSize uint, hiddenSize uint, layerCount uint) *MLCLSTMDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLSTMDescriptor), _mLCLSTMDescriptorSelDescriptorWithInputSizeHiddenSizeLayerCount, inputSize, hiddenSize, layerCount)
 	if _ret != 0 {
@@ -52,7 +54,7 @@ func MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCount(inputSize uint
 	return MLCLSTMDescriptorFromID(_ret)
 }
 
-// @abstract   Creates a LSTM descriptor descriptor with batchFirst = YES @param      inputSize The number of expected features in the input @param      hiddenSize The number of features in the hidden state @param      layerCount Number of recurrent layers @param      usesBiases  If NO, the layer does not use bias weights.  Default: YES @param      isBidirectional  If YES, becomes a bi-directional LSTM.  Default: NO @param      dropout  If non-zero, introduces a dropout layer on the outputs of each LSTM layer except the last layer with dropout probability equal to dropout. @return     A valid MLCLSTMDescriptor object or nil, if failure.
+// Creates a batch first LSTM descriptor with bias and bidirectional options you specify.
 func MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesIsBidirectionalDropout(inputSize uint, hiddenSize uint, layerCount uint, usesBiases bool, isBidirectional bool, dropout float32) *MLCLSTMDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLSTMDescriptor), _mLCLSTMDescriptorSelDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesIsBidirectionalDropout, inputSize, hiddenSize, layerCount, usesBiases, isBidirectional, dropout)
 	if _ret != 0 {
@@ -61,6 +63,7 @@ func MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesIsBid
 	return MLCLSTMDescriptorFromID(_ret)
 }
 
+// Creates a batch first LSTM descriptor that allows you to indicate whether the input and output shape is batch first.
 func MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalDropout(inputSize uint, hiddenSize uint, layerCount uint, usesBiases bool, batchFirst bool, isBidirectional bool, dropout float32) *MLCLSTMDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLSTMDescriptor), _mLCLSTMDescriptorSelDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalDropout, inputSize, hiddenSize, layerCount, usesBiases, batchFirst, isBidirectional, dropout)
 	if _ret != 0 {
@@ -69,6 +72,7 @@ func MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatch
 	return MLCLSTMDescriptorFromID(_ret)
 }
 
+// Creates a batch first LSTM descriptor that allows you to indicate whether the layer returns output for all sequences, or output for only the last sequence.
 func MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropout(inputSize uint, hiddenSize uint, layerCount uint, usesBiases bool, batchFirst bool, isBidirectional bool, returnsSequences bool, dropout float32) *MLCLSTMDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLSTMDescriptor), _mLCLSTMDescriptorSelDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropout, inputSize, hiddenSize, layerCount, usesBiases, batchFirst, isBidirectional, returnsSequences, dropout)
 	if _ret != 0 {
@@ -77,7 +81,7 @@ func MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatch
 	return MLCLSTMDescriptorFromID(_ret)
 }
 
-// @abstract   Creates a LSTM descriptor. @param      inputSize The number of expected features in the input @param      hiddenSize The number of features in the hidden state @param      layerCount Number of recurrent layers @param      usesBiases  If NO, the layer does not use bias weights.  Default: YES @param      batchFirst LSTM only supports batchFirst=YES. This means the input and output will have shape [batch size, time steps, feature]. Default is YES. @param      isBidirectional  If YES, becomes a bi-directional LSTM.  Default: NO @param      returnsSequences if YES return output for all sequences else return output only for the last sequences. Default: YES @param      dropout  If non-zero, introduces a dropout layer on the outputs of each LSTM layer except the last layer with dropout probability equal to dropout. @param      resultMode expected result tensors. MLCLSTMResultModeOutput returns output data. MLCLSTMResultModeOutputAndStates returns output data, last hidden state h_n, and last cell state c_n. Default: MLCLSTMResultModeOutput. @return     A valid MLCLSTMDescriptor object or nil, if failure.
+// Creates a descriptor with the number of features and layers, dropout, and options for use of biases, batch order, return sequences, bidirectionality, and expected tensors you specify.
 func MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropoutResultMode(inputSize uint, hiddenSize uint, layerCount uint, usesBiases bool, batchFirst bool, isBidirectional bool, returnsSequences bool, dropout float32, resultMode MLCLSTMResultMode) *MLCLSTMDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLSTMDescriptor), _mLCLSTMDescriptorSelDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropoutResultMode, inputSize, hiddenSize, layerCount, usesBiases, batchFirst, isBidirectional, returnsSequences, dropout, resultMode)
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A toolbar item that displays the macOS share sheet.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssharingservicepickertoolbaritem
 type NSSharingServicePickerToolbarItem struct {
 	NSToolbarItem

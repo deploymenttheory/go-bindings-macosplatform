@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that animates and renders a system of small image sprites using a high-level simulation whose general behavior you specify.
+//
 // ParticleSystem wraps [raw.SCNParticleSystem] with a fluent Go API.
 type ParticleSystem struct {
 	inner *raw.SCNParticleSystem
@@ -39,78 +41,104 @@ func NewParticleSystem() *ParticleSystem {
 	return &ParticleSystem{inner: raw.SCNParticleSystemFromID(_id)}
 }
 
+// The duration, in seconds, over which the system spawns new particles. Animatable.
+//
 // WithEmissionDuration sets the emissionDuration property and returns the receiver for chaining.
 func (x *ParticleSystem) WithEmissionDuration(emissionDuration float64) *ParticleSystem {
 	x.inner.SetEmissionDuration(emissionDuration)
 	return x
 }
 
+// The range, in seconds, of randomized emission duration values. Animatable.
+//
 // WithEmissionDurationVariation sets the emissionDurationVariation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithEmissionDurationVariation(emissionDurationVariation float64) *ParticleSystem {
 	x.inner.SetEmissionDurationVariation(emissionDurationVariation)
 	return x
 }
 
+// The duration, in seconds, of periods when the system emits no particles. Animatable.
+//
 // WithIdleDuration sets the idleDuration property and returns the receiver for chaining.
 func (x *ParticleSystem) WithIdleDuration(idleDuration float64) *ParticleSystem {
 	x.inner.SetIdleDuration(idleDuration)
 	return x
 }
 
+// The range, in seconds, of randomized idle duration values. Animatable.
+//
 // WithIdleDurationVariation sets the idleDurationVariation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithIdleDurationVariation(idleDurationVariation float64) *ParticleSystem {
 	x.inner.SetIdleDurationVariation(idleDurationVariation)
 	return x
 }
 
+// A Boolean value that determines whether the system repeats its emission and idle periods.
+//
 // WithLoops sets the loops property and returns the receiver for chaining.
 func (x *ParticleSystem) WithLoops(loops bool) *ParticleSystem {
 	x.inner.SetLoops(loops)
 	return x
 }
 
+// The number of particles spawned during each emission period. Animatable.
+//
 // WithBirthRate sets the birthRate property and returns the receiver for chaining.
 func (x *ParticleSystem) WithBirthRate(birthRate float64) *ParticleSystem {
 	x.inner.SetBirthRate(birthRate)
 	return x
 }
 
+// The range of randomized particle birth rate values. Animatable.
+//
 // WithBirthRateVariation sets the birthRateVariation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithBirthRateVariation(birthRateVariation float64) *ParticleSystem {
 	x.inner.SetBirthRateVariation(birthRateVariation)
 	return x
 }
 
+// The duration, in seconds, for which particles are spawned before the system is first rendered. Animatable.
+//
 // WithWarmupDuration sets the warmupDuration property and returns the receiver for chaining.
 func (x *ParticleSystem) WithWarmupDuration(warmupDuration float64) *ParticleSystem {
 	x.inner.SetWarmupDuration(warmupDuration)
 	return x
 }
 
+// The shape of the region of space where the system spawns new particles.
+//
 // WithEmitterShape sets the emitterShape property and returns the receiver for chaining.
 func (x *ParticleSystem) WithEmitterShape(emitterShape GeometryProvider) *ParticleSystem {
 	x.inner.SetEmitterShape(emitterShape.asGeometry())
 	return x
 }
 
+// The possible locations for newly spawned particles, relative to the emitter shape.
+//
 // WithBirthLocation sets the birthLocation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithBirthLocation(birthLocation SCNParticleBirthLocation) *ParticleSystem {
 	x.inner.SetBirthLocation(raw.SCNParticleBirthLocation(birthLocation))
 	return x
 }
 
+// The possible initial directions for newly spawned particles, relative to the emitter shape.
+//
 // WithBirthDirection sets the birthDirection property and returns the receiver for chaining.
 func (x *ParticleSystem) WithBirthDirection(birthDirection SCNParticleBirthDirection) *ParticleSystem {
 	x.inner.SetBirthDirection(raw.SCNParticleBirthDirection(birthDirection))
 	return x
 }
 
+// The range, in degrees, of randomized initial particle directions. Animatable.
+//
 // WithSpreadingAngle sets the spreadingAngle property and returns the receiver for chaining.
 func (x *ParticleSystem) WithSpreadingAngle(spreadingAngle float64) *ParticleSystem {
 	x.inner.SetSpreadingAngle(spreadingAngle)
 	return x
 }
 
+// The initial direction for newly spawned particles. Animatable.
+//
 // WithEmittingDirection sets the emittingDirection property and returns the receiver for chaining.
 func (x *ParticleSystem) WithEmittingDirection(emittingDirection raw.SCNVector3) *ParticleSystem {
 	x.inner.SetEmittingDirection(emittingDirection)
@@ -123,150 +151,200 @@ func (x *ParticleSystem) WithOrientationDirection(orientationDirection raw.SCNVe
 	return x
 }
 
+// The constant acceleration vector, in units per second per second, applied to all particles in the system. Animatable.
+//
 // WithAcceleration sets the acceleration property and returns the receiver for chaining.
 func (x *ParticleSystem) WithAcceleration(acceleration raw.SCNVector3) *ParticleSystem {
 	x.inner.SetAcceleration(acceleration)
 	return x
 }
 
+// A Boolean value that specifies whether the particle simulation runs in the local coordinate space of the node containing it.
+//
 // WithLocal sets the local property and returns the receiver for chaining.
 func (x *ParticleSystem) WithLocal(local bool) *ParticleSystem {
 	x.inner.SetLocal(local)
 	return x
 }
 
+// The rotation angle, in degrees, of newly spawned particles. Animatable.
+//
 // WithParticleAngle sets the particleAngle property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleAngle(particleAngle float64) *ParticleSystem {
 	x.inner.SetParticleAngle(particleAngle)
 	return x
 }
 
+// The range, in degrees of randomized initial particle angles. Animatable.
+//
 // WithParticleAngleVariation sets the particleAngleVariation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleAngleVariation(particleAngleVariation float64) *ParticleSystem {
 	x.inner.SetParticleAngleVariation(particleAngleVariation)
 	return x
 }
 
+// The initial speed, in units per second, for newly spawned particles. Animatable.
+//
 // WithParticleVelocity sets the particleVelocity property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleVelocity(particleVelocity float64) *ParticleSystem {
 	x.inner.SetParticleVelocity(particleVelocity)
 	return x
 }
 
+// The range, in units per second, of randomized initial particle speeds. Animatable.
+//
 // WithParticleVelocityVariation sets the particleVelocityVariation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleVelocityVariation(particleVelocityVariation float64) *ParticleSystem {
 	x.inner.SetParticleVelocityVariation(particleVelocityVariation)
 	return x
 }
 
+// The initial spin rate, in degrees per second, of newly spawned particles. Animatable.
+//
 // WithParticleAngularVelocity sets the particleAngularVelocity property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleAngularVelocity(particleAngularVelocity float64) *ParticleSystem {
 	x.inner.SetParticleAngularVelocity(particleAngularVelocity)
 	return x
 }
 
+// The range, in degrees per second, of randomized initial angular velocities for particles. Animatable.
+//
 // WithParticleAngularVelocityVariation sets the particleAngularVelocityVariation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleAngularVelocityVariation(particleAngularVelocityVariation float64) *ParticleSystem {
 	x.inner.SetParticleAngularVelocityVariation(particleAngularVelocityVariation)
 	return x
 }
 
+// The duration, in seconds, for which each particle is rendered before being removed from the scene. Animatable.
+//
 // WithParticleLifeSpan sets the particleLifeSpan property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleLifeSpan(particleLifeSpan float64) *ParticleSystem {
 	x.inner.SetParticleLifeSpan(particleLifeSpan)
 	return x
 }
 
+// The range, in seconds, of randomized particle life spans. Animatable.
+//
 // WithParticleLifeSpanVariation sets the particleLifeSpanVariation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleLifeSpanVariation(particleLifeSpanVariation float64) *ParticleSystem {
 	x.inner.SetParticleLifeSpanVariation(particleLifeSpanVariation)
 	return x
 }
 
+// Another particle system to be added to the scene when a particle dies.
+//
 // WithSystemSpawnedOnDying sets the systemSpawnedOnDying property and returns the receiver for chaining.
 func (x *ParticleSystem) WithSystemSpawnedOnDying(systemSpawnedOnDying *ParticleSystem) *ParticleSystem {
 	x.inner.SetSystemSpawnedOnDying(systemSpawnedOnDying.Unwrap())
 	return x
 }
 
+// Another particle system to be added to the scene when a particle collides with scene geometry.
+//
 // WithSystemSpawnedOnCollision sets the systemSpawnedOnCollision property and returns the receiver for chaining.
 func (x *ParticleSystem) WithSystemSpawnedOnCollision(systemSpawnedOnCollision *ParticleSystem) *ParticleSystem {
 	x.inner.SetSystemSpawnedOnCollision(systemSpawnedOnCollision.Unwrap())
 	return x
 }
 
+// Another particle system to be added to the scene for each living particle in the system.
+//
 // WithSystemSpawnedOnLiving sets the systemSpawnedOnLiving property and returns the receiver for chaining.
 func (x *ParticleSystem) WithSystemSpawnedOnLiving(systemSpawnedOnLiving *ParticleSystem) *ParticleSystem {
 	x.inner.SetSystemSpawnedOnLiving(systemSpawnedOnLiving.Unwrap())
 	return x
 }
 
+// The texture image SceneKit uses to render each particle.
+//
 // WithParticleImage sets the particleImage property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleImage(particleImage objc.ID) *ParticleSystem {
 	x.inner.SetParticleImage(particleImage)
 	return x
 }
 
+// The number of columns for treating the particle image as a grid of animation frames.
+//
 // WithImageSequenceColumnCount sets the imageSequenceColumnCount property and returns the receiver for chaining.
 func (x *ParticleSystem) WithImageSequenceColumnCount(imageSequenceColumnCount uint) *ParticleSystem {
 	x.inner.SetImageSequenceColumnCount(imageSequenceColumnCount)
 	return x
 }
 
+// The number of rows for treating the particle image as a grid of animation frames.
+//
 // WithImageSequenceRowCount sets the imageSequenceRowCount property and returns the receiver for chaining.
 func (x *ParticleSystem) WithImageSequenceRowCount(imageSequenceRowCount uint) *ParticleSystem {
 	x.inner.SetImageSequenceRowCount(imageSequenceRowCount)
 	return x
 }
 
+// The index of the first frame in a particle image animation. Animatable.
+//
 // WithImageSequenceInitialFrame sets the imageSequenceInitialFrame property and returns the receiver for chaining.
 func (x *ParticleSystem) WithImageSequenceInitialFrame(imageSequenceInitialFrame float64) *ParticleSystem {
 	x.inner.SetImageSequenceInitialFrame(imageSequenceInitialFrame)
 	return x
 }
 
+// The range of randomized initial frames for particle image animation. Animatable.
+//
 // WithImageSequenceInitialFrameVariation sets the imageSequenceInitialFrameVariation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithImageSequenceInitialFrameVariation(imageSequenceInitialFrameVariation float64) *ParticleSystem {
 	x.inner.SetImageSequenceInitialFrameVariation(imageSequenceInitialFrameVariation)
 	return x
 }
 
+// The rate, in frames per second, of particle image animation. Animatable.
+//
 // WithImageSequenceFrameRate sets the imageSequenceFrameRate property and returns the receiver for chaining.
 func (x *ParticleSystem) WithImageSequenceFrameRate(imageSequenceFrameRate float64) *ParticleSystem {
 	x.inner.SetImageSequenceFrameRate(imageSequenceFrameRate)
 	return x
 }
 
+// The range, in frames per second, of randomized frame rates for particle image animation. Animatable.
+//
 // WithImageSequenceFrameRateVariation sets the imageSequenceFrameRateVariation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithImageSequenceFrameRateVariation(imageSequenceFrameRateVariation float64) *ParticleSystem {
 	x.inner.SetImageSequenceFrameRateVariation(imageSequenceFrameRateVariation)
 	return x
 }
 
+// The animation mode for particle image animation.
+//
 // WithImageSequenceAnimationMode sets the imageSequenceAnimationMode property and returns the receiver for chaining.
 func (x *ParticleSystem) WithImageSequenceAnimationMode(imageSequenceAnimationMode SCNParticleImageSequenceAnimationMode) *ParticleSystem {
 	x.inner.SetImageSequenceAnimationMode(raw.SCNParticleImageSequenceAnimationMode(imageSequenceAnimationMode))
 	return x
 }
 
+// The color of newly spawned particles. Animatable.
+//
 // WithParticleColor sets the particleColor property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleColor(particleColor *appkit.NSColor) *ParticleSystem {
 	x.inner.SetParticleColor(particleColor)
 	return x
 }
 
+// The ranges of randomized particle color components. Animatable.
+//
 // WithParticleColorVariation sets the particleColorVariation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleColorVariation(particleColorVariation raw.SCNVector4) *ParticleSystem {
 	x.inner.SetParticleColorVariation(particleColorVariation)
 	return x
 }
 
+// The rendered size, in units of the scene’s world coordinate space, of the particle image. Animatable.
+//
 // WithParticleSize sets the particleSize property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleSize(particleSize float64) *ParticleSystem {
 	x.inner.SetParticleSize(particleSize)
 	return x
 }
 
+// The range of randomized particle sizes. Animatable.
+//
 // WithParticleSizeVariation sets the particleSizeVariation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleSizeVariation(particleSizeVariation float64) *ParticleSystem {
 	x.inner.SetParticleSizeVariation(particleSizeVariation)
@@ -285,54 +363,72 @@ func (x *ParticleSystem) WithParticleIntensityVariation(particleIntensityVariati
 	return x
 }
 
+// The blending mode for compositing particle images into the rendered scene.
+//
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
 func (x *ParticleSystem) WithBlendMode(blendMode SCNParticleBlendMode) *ParticleSystem {
 	x.inner.SetBlendMode(raw.SCNParticleBlendMode(blendMode))
 	return x
 }
 
+// A Boolean value that determines whether SceneKit renders particles in black before rendering the particle image.
+//
 // WithBlackPassEnabled sets the blackPassEnabled property and returns the receiver for chaining.
 func (x *ParticleSystem) WithBlackPassEnabled(blackPassEnabled bool) *ParticleSystem {
 	x.inner.SetBlackPassEnabled(blackPassEnabled)
 	return x
 }
 
+// The mode defining whether and how particles may rotate.
+//
 // WithOrientationMode sets the orientationMode property and returns the receiver for chaining.
 func (x *ParticleSystem) WithOrientationMode(orientationMode SCNParticleOrientationMode) *ParticleSystem {
 	x.inner.SetOrientationMode(raw.SCNParticleOrientationMode(orientationMode))
 	return x
 }
 
+// The mode defining the order in which SceneKit renders the system’s particles.
+//
 // WithSortingMode sets the sortingMode property and returns the receiver for chaining.
 func (x *ParticleSystem) WithSortingMode(sortingMode SCNParticleSortingMode) *ParticleSystem {
 	x.inner.SetSortingMode(raw.SCNParticleSortingMode(sortingMode))
 	return x
 }
 
+// A Boolean value that determines whether SceneKit applies lighting to particle images when rendering.
+//
 // WithLightingEnabled sets the lightingEnabled property and returns the receiver for chaining.
 func (x *ParticleSystem) WithLightingEnabled(lightingEnabled bool) *ParticleSystem {
 	x.inner.SetLightingEnabled(lightingEnabled)
 	return x
 }
 
+// A Boolean value that determines whether gravity, as defined by the scene’s physics simulation, affects the motion of particles.
+//
 // WithAffectedByGravity sets the affectedByGravity property and returns the receiver for chaining.
 func (x *ParticleSystem) WithAffectedByGravity(affectedByGravity bool) *ParticleSystem {
 	x.inner.SetAffectedByGravity(affectedByGravity)
 	return x
 }
 
+// A Boolean value that determines whether physics fields in the scene affect the motion of particles.
+//
 // WithAffectedByPhysicsFields sets the affectedByPhysicsFields property and returns the receiver for chaining.
 func (x *ParticleSystem) WithAffectedByPhysicsFields(affectedByPhysicsFields bool) *ParticleSystem {
 	x.inner.SetAffectedByPhysicsFields(affectedByPhysicsFields)
 	return x
 }
 
+// A Boolean value that determines whether particles are removed from the scene upon colliding with another object.
+//
 // WithParticleDiesOnCollision sets the particleDiesOnCollision property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleDiesOnCollision(particleDiesOnCollision bool) *ParticleSystem {
 	x.inner.SetParticleDiesOnCollision(particleDiesOnCollision)
 	return x
 }
 
+// The nodes whose geometry the system’s particles can collide with.
+//
 // WithColliderNodes sets the collection, converting the Go slice to an NSArray.
 func (x *ParticleSystem) WithColliderNodes(items ...NodeProvider) *ParticleSystem {
 	if len(items) == 0 {
@@ -354,72 +450,96 @@ func (x *ParticleSystem) WithColliderNodes(items ...NodeProvider) *ParticleSyste
 	return x
 }
 
+// The mass, in kilograms, of each particle in the system. Animatable.
+//
 // WithParticleMass sets the particleMass property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleMass(particleMass float64) *ParticleSystem {
 	x.inner.SetParticleMass(particleMass)
 	return x
 }
 
+// The range, in kilograms, of randomized particle masses. Animatable.
+//
 // WithParticleMassVariation sets the particleMassVariation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleMassVariation(particleMassVariation float64) *ParticleSystem {
 	x.inner.SetParticleMassVariation(particleMassVariation)
 	return x
 }
 
+// The restitution coefficient of each particle in the system. Animatable.
+//
 // WithParticleBounce sets the particleBounce property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleBounce(particleBounce float64) *ParticleSystem {
 	x.inner.SetParticleBounce(particleBounce)
 	return x
 }
 
+// The range of randomized restitution coefficients for particles. Animatable.
+//
 // WithParticleBounceVariation sets the particleBounceVariation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleBounceVariation(particleBounceVariation float64) *ParticleSystem {
 	x.inner.SetParticleBounceVariation(particleBounceVariation)
 	return x
 }
 
+// The friction coefficient of each particle in the system. Animatable.
+//
 // WithParticleFriction sets the particleFriction property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleFriction(particleFriction float64) *ParticleSystem {
 	x.inner.SetParticleFriction(particleFriction)
 	return x
 }
 
+// The range of randomized friction coefficients for particles. Animatable.
+//
 // WithParticleFrictionVariation sets the particleFrictionVariation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleFrictionVariation(particleFrictionVariation float64) *ParticleSystem {
 	x.inner.SetParticleFrictionVariation(particleFrictionVariation)
 	return x
 }
 
+// The electric charge, in coulombs, of each particle in the system. Animatable.
+//
 // WithParticleCharge sets the particleCharge property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleCharge(particleCharge float64) *ParticleSystem {
 	x.inner.SetParticleCharge(particleCharge)
 	return x
 }
 
+// The range, in coulombs, of randomized particle charges. Animatable.
+//
 // WithParticleChargeVariation sets the particleChargeVariation property and returns the receiver for chaining.
 func (x *ParticleSystem) WithParticleChargeVariation(particleChargeVariation float64) *ParticleSystem {
 	x.inner.SetParticleChargeVariation(particleChargeVariation)
 	return x
 }
 
+// A factor that slows particles relative to their velocity. Animatable.
+//
 // WithDampingFactor sets the dampingFactor property and returns the receiver for chaining.
 func (x *ParticleSystem) WithDampingFactor(dampingFactor float64) *ParticleSystem {
 	x.inner.SetDampingFactor(dampingFactor)
 	return x
 }
 
+// A multiplier for the speed at which SceneKit runs the particle simulation. Animatable.
+//
 // WithSpeedFactor sets the speedFactor property and returns the receiver for chaining.
 func (x *ParticleSystem) WithSpeedFactor(speedFactor float64) *ParticleSystem {
 	x.inner.SetSpeedFactor(speedFactor)
 	return x
 }
 
+// A multiplier for stretching particle images along their direction of motion. Animatable.
+//
 // WithStretchFactor sets the stretchFactor property and returns the receiver for chaining.
 func (x *ParticleSystem) WithStretchFactor(stretchFactor float64) *ParticleSystem {
 	x.inner.SetStretchFactor(stretchFactor)
 	return x
 }
 
+// The reflectivity exponent SceneKit uses when rendering the particle’s image as a cube map. Animatable.
+//
 // WithFresnelExponent sets the fresnelExponent property and returns the receiver for chaining.
 func (x *ParticleSystem) WithFresnelExponent(fresnelExponent float64) *ParticleSystem {
 	x.inner.SetFresnelExponent(fresnelExponent)
@@ -434,32 +554,44 @@ func (x *ParticleSystem) WithWritesToDepthBuffer(writesToDepthBuffer bool) *Part
 	return x
 }
 
+// A dictionary that optionally associates particle properties with objects that animate a property’s value for each particle.
+//
 // WithPropertyControllers sets the propertyControllers property and returns the receiver for chaining.
 func (x *ParticleSystem) WithPropertyControllers(propertyControllers *foundation.NSDictionary[*foundation.NSString, *raw.SCNParticlePropertyController]) *ParticleSystem {
 	x.inner.SetPropertyControllers(propertyControllers)
 	return x
 }
 
+// Returns the particle system to its initial state.
+//
 // Reset calls the underlying Reset.
 func (x *ParticleSystem) Reset() {
 	x.inner.Reset()
 }
 
+// Adds a block that modifies particle properties, to be executed at a specified event in the lifetimes of particles in the system.
+//
 // HandleEventForPropertiesWith calls the underlying HandleEventForPropertiesWith.
 func (x *ParticleSystem) HandleEventForPropertiesWith(event SCNParticleEvent, properties *foundation.NSArray[*foundation.NSString], block func(unsafe.Pointer, *uint, *uint32, int)) {
 	x.inner.HandleEventForPropertiesWith(raw.SCNParticleEvent(event), properties, block)
 }
 
+// Adds a block that modifies particle properties, to be executed each time SceneKit renders a frame.
+//
 // AddModifierForPropertiesAtStageWith calls the underlying AddModifierForPropertiesAtStageWith.
 func (x *ParticleSystem) AddModifierForPropertiesAtStageWith(properties *foundation.NSArray[*foundation.NSString], stage SCNParticleModifierStage, block func(unsafe.Pointer, *uint, int, int, float32)) {
 	x.inner.AddModifierForPropertiesAtStageWith(properties, raw.SCNParticleModifierStage(stage), block)
 }
 
+// Removes particle modifier blocks for the specified stage of the particle simulation.
+//
 // RemoveModifiersOfStage calls the underlying RemoveModifiersOfStage.
 func (x *ParticleSystem) RemoveModifiersOfStage(stage SCNParticleModifierStage) {
 	x.inner.RemoveModifiersOfStage(raw.SCNParticleModifierStage(stage))
 }
 
+// Removes all particle modifier blocks associated with the particle system.
+//
 // RemoveAllModifiers calls the underlying RemoveAllModifiers.
 func (x *ParticleSystem) RemoveAllModifiers() {
 	x.inner.RemoveAllModifiers()

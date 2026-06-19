@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that configures how a render pipeline fetches data to send to the vertex function.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlvertexbufferlayoutdescriptor
 type MTLVertexBufferLayoutDescriptor struct {
 	foundation.NSObject

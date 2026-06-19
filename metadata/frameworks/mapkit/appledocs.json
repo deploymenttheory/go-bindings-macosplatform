@@ -1,0 +1,2521 @@
+{
+  "schema_version": 1,
+  "framework": "MapKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "MKAddress": {
+      "doc": "A class that contains a full address, and, optionally, a short address.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkaddress"
+    },
+    "MKAddressFilter": {
+      "doc": "An object that filters which address options to include or exclude in search results.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkaddressfilter"
+    },
+    "MKAddressRepresentations": {
+      "doc": "A class that provides formatted address strings.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkaddressrepresentations"
+    },
+    "MKAnnotationView": {
+      "doc": "The visual representation of one of your annotation objects.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkannotationview"
+    },
+    "MKCircle": {
+      "doc": "A circular overlay with a configurable radius that you center on a geographic coordinate.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkcircle"
+    },
+    "MKCircleRenderer": {
+      "doc": "The visual representation of a circular overlay.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkcirclerenderer"
+    },
+    "MKClusterAnnotation": {
+      "doc": "An annotation that groups two or more distinct annotations into a single entity.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkclusterannotation"
+    },
+    "MKCompassButton": {
+      "doc": "A specialized view that displays the compass heading for its associated map.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkcompassbutton"
+    },
+    "MKDirections": {
+      "doc": "A utility object that computes directions and travel-time information based on the route information you provide.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkdirections"
+    },
+    "MKDirectionsRequest": {
+      "doc": "The start and end points of a route, along with the planned mode of transportation.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkdirectionsrequest"
+    },
+    "MKDirectionsResponse": {
+      "doc": "The route information that Apple servers return in response to your request for directions.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkdirectionsresponse"
+    },
+    "MKDistanceFormatter": {
+      "doc": "A utility object that converts between a geographic distance and a string-based expression of that distance.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkdistanceformatter"
+    },
+    "MKETAResponse": {
+      "doc": "The travel-time information that Apple servers return.",
+      "url": "https://developer.apple.com/documentation/mapkit/mketaresponse"
+    },
+    "MKGeoJSONDecoder": {
+      "doc": "An object that decodes GeoJSON objects into MapKit types.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkgeojsondecoder"
+    },
+    "MKGeoJSONFeature": {
+      "doc": "The decoded representation of a GeoJSON feature.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkgeojsonfeature"
+    },
+    "MKGeocodingRequest": {
+      "doc": "A class that looks up a geographic coordinate using the provided string.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkgeocodingrequest"
+    },
+    "MKGeodesicPolyline": {
+      "doc": "An open polygon overlay consisting of line segments that follow the contours of the Earth to create the shortest path between the specified points.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkgeodesicpolyline"
+    },
+    "MKGradientPolylineRenderer": {
+      "doc": "A visual representation of any polyline overlay object with a gradient.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkgradientpolylinerenderer"
+    },
+    "MKHybridMapConfiguration": {
+      "doc": "The class that represents a satellite image of the area with road and road name information layers on top.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkhybridmapconfiguration"
+    },
+    "MKImageryMapConfiguration": {
+      "doc": "The class that represents an imagery-based map presentation, such as one using satellite imagery.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkimagerymapconfiguration"
+    },
+    "MKLocalPointsOfInterestRequest": {
+      "doc": "A structured request to use when searching for points of interest.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklocalpointsofinterestrequest"
+    },
+    "MKLocalSearch": {
+      "doc": "A utility object for initiating map-based searches and processing the results.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklocalsearch"
+    },
+    "MKLocalSearchCompleter": {
+      "doc": "A utility object for generating a list of completion strings based on a partial search string that you provide.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter"
+    },
+    "MKLocalSearchCompletion": {
+      "doc": "A fully formed string that completes a partial string.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompletion"
+    },
+    "MKLocalSearchRequest": {
+      "doc": "The parameters to use when searching for points of interest on the map.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchrequest"
+    },
+    "MKLocalSearchResponse": {
+      "doc": "The results from a map-based search.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchresponse"
+    },
+    "MKLookAroundScene": {
+      "doc": "A utility class that encapsulates information the framework requires to retrieve and display a specific Look Around location’s imagery.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklookaroundscene"
+    },
+    "MKLookAroundSceneRequest": {
+      "doc": "A class you use to request a LookAround scene at the location you specify.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklookaroundscenerequest"
+    },
+    "MKLookAroundSnapshot": {
+      "doc": "An object that contains a snapshot image.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklookaroundsnapshot"
+    },
+    "MKLookAroundSnapshotOptions": {
+      "doc": "Values you use to customize LookAround snapshots.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklookaroundsnapshotoptions"
+    },
+    "MKLookAroundSnapshotter": {
+      "doc": "A utility class that you use to create a static image from a LookAround scene.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklookaroundsnapshotter"
+    },
+    "MKLookAroundViewController": {
+      "doc": "A class that manages the presentation and display of a LookAround view.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklookaroundviewcontroller"
+    },
+    "MKMapCamera": {
+      "doc": "A virtual camera for defining the appearance of the map.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapcamera"
+    },
+    "MKMapCameraBoundary": {
+      "doc": "A boundary of an area within which the map’s center needs to remain.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapcameraboundary"
+    },
+    "MKMapCameraZoomRange": {
+      "doc": "A camera zoom range that limits the distances to which the user can zoom.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapcamerazoomrange"
+    },
+    "MKMapConfiguration": {
+      "doc": "An abstract class that represents the shared elements of map configurations.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapconfiguration"
+    },
+    "MKMapItem": {
+      "doc": "A point of interest on the map.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapitem"
+    },
+    "MKMapItemAnnotation": {
+      "doc": "An annotation that represents a map item",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapitemannotation"
+    },
+    "MKMapItemDetailSelectionAccessoryPresentationStyle": {
+      "doc": "The type of map item detail accessory presentation to use.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapitemdetailselectionaccessorypresentationstyle"
+    },
+    "MKMapItemDetailViewController": {
+      "doc": "An object that displays detailed information about a map item.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapitemdetailviewcontroller"
+    },
+    "MKMapItemIdentifier": {
+      "doc": "A unique identifier for a place.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapitemidentifier"
+    },
+    "MKMapItemRequest": {
+      "doc": "A utility class you use to request additional information about a map feature.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapitemrequest"
+    },
+    "MKMapSnapshot": {
+      "doc": "An image that a snapshotter object generates.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapsnapshot"
+    },
+    "MKMapSnapshotOptions": {
+      "doc": "The options the snapshotter initializer uses to create a snapshotter to capture map-based imagery.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapsnapshotoptions"
+    },
+    "MKMapSnapshotter": {
+      "doc": "A utility class for capturing a map and its content into an image.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapsnapshotter"
+    },
+    "MKMapView": {
+      "doc": "An embeddable map interface, similar to the one that the Maps app provides.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapview"
+    },
+    "MKMarkerAnnotationView": {
+      "doc": "An annotation view that displays a balloon-shaped marker at the designated location.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmarkerannotationview"
+    },
+    "MKMultiPoint": {
+      "doc": "An abstract class that defines the common behavior that open and closed polygon overlays share.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmultipoint"
+    },
+    "MKMultiPolygon": {
+      "doc": "A collection of multiple closed polygon overlays.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmultipolygon"
+    },
+    "MKMultiPolygonRenderer": {
+      "doc": "The visual representation of multiple polygon overlays.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmultipolygonrenderer"
+    },
+    "MKMultiPolyline": {
+      "doc": "A collection of multipolyline shapes, each consisting of one or more connected line segments.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmultipolyline"
+    },
+    "MKMultiPolylineRenderer": {
+      "doc": "A visual representation of multiple polyline overlay objects.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmultipolylinerenderer"
+    },
+    "MKOverlayPathRenderer": {
+      "doc": "The visual representation of a path-based overlay.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer"
+    },
+    "MKOverlayRenderer": {
+      "doc": "The shared infrastructure for drawing overlays on the map surface.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkoverlayrenderer"
+    },
+    "MKPinAnnotationView": {
+      "doc": "An annotation view that displays a pin image on the map.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkpinannotationview"
+    },
+    "MKPitchControl": {
+      "doc": "A specialized view that displays and controls the pitch angle of the map view.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkpitchcontrol"
+    },
+    "MKPlacemark": {
+      "doc": "A user-friendly description of a location on the map.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkplacemark"
+    },
+    "MKPointAnnotation": {
+      "doc": "A string-based piece of location-specific data that you apply to a specific point on a map.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkpointannotation"
+    },
+    "MKPointOfInterestFilter": {
+      "doc": "A filter that includes or excludes point of interest categories from a map view, local search, or local search completer.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkpointofinterestfilter"
+    },
+    "MKPolygon": {
+      "doc": "A closed polygon overlay.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkpolygon"
+    },
+    "MKPolygonRenderer": {
+      "doc": "The visual representation of a single polygon overlay.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkpolygonrenderer"
+    },
+    "MKPolyline": {
+      "doc": "An open polygon overlay consisting of one or more connected line segments.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkpolyline"
+    },
+    "MKPolylineRenderer": {
+      "doc": "A visual representation of any polyline overlay object.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkpolylinerenderer"
+    },
+    "MKReverseGeocodingRequest": {
+      "doc": "A class that looks up address strings for the provided geographic coordinates.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkreversegeocodingrequest"
+    },
+    "MKRoute": {
+      "doc": "A single route between a requested start and end point.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkroute"
+    },
+    "MKRouteStep": {
+      "doc": "One portion of an overall route.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkroutestep"
+    },
+    "MKSelectionAccessory": {
+      "doc": "The type of accessory to display for a selected annotation.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkselectionaccessory"
+    },
+    "MKShape": {
+      "doc": "An abstract class that defines the basic properties for all shape-based overlay objects.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkshape"
+    },
+    "MKStandardMapConfiguration": {
+      "doc": "The class that represents the default map presentation, which is a street map that shows the position of all roads and some road names.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkstandardmapconfiguration"
+    },
+    "MKTileOverlay": {
+      "doc": "An overlay that covers an area of the map with tiles of bitmap images.",
+      "url": "https://developer.apple.com/documentation/mapkit/mktileoverlay"
+    },
+    "MKTileOverlayRenderer": {
+      "doc": "The renderer for a tile overlay that handles the drawing of bitmap images on the map surface.",
+      "url": "https://developer.apple.com/documentation/mapkit/mktileoverlayrenderer"
+    },
+    "MKUserLocation": {
+      "doc": "An annotation that reflects the user’s location on the map.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkuserlocation"
+    },
+    "MKUserLocationView": {
+      "doc": "A configurable annotation that shows the user’s location using the default MapKit style.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkuserlocationview"
+    },
+    "MKZoomControl": {
+      "doc": "A specialized view that displays and controls the zoom level of the map view.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkzoomcontrol"
+    }
+  },
+  "protocols": {
+    "MKAnnotation": {
+      "doc": "An interface for associating your content with a specific map location.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkannotation"
+    },
+    "MKGeoJSONObject": {
+      "doc": "Objects that the GeoJSON decoder can return.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkgeojsonobject"
+    },
+    "MKLocalSearchCompleterDelegate": {
+      "doc": "Methods the delegate calls with search completion data.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleterdelegate"
+    },
+    "MKLookAroundViewControllerDelegate": {
+      "doc": "Methods you implement to respond to changes in the LookAround view controller.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklookaroundviewcontrollerdelegate"
+    },
+    "MKMapItemDetailViewControllerDelegate": {
+      "doc": "The methods that you use to receive events from an associated map view controller.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapitemdetailviewcontrollerdelegate"
+    },
+    "MKMapViewDelegate": {
+      "doc": "Optional methods that you use to receive map-related update messages.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapviewdelegate"
+    },
+    "MKOverlay": {
+      "doc": "An interface for associating content with a specific map region.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkoverlay"
+    }
+  },
+  "enums": {
+    "MKAddressFilterOption": {
+      "doc": "A structure that contains options for filtering results in a search.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkaddressfilteroption"
+    },
+    "MKAnnotationViewCollisionMode": {
+      "doc": "Constants that indicates how to interpret the collision frame rectangle of an annotation view.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkannotationviewcollisionmode"
+    },
+    "MKAnnotationViewDragState": {
+      "doc": "Constants that indicate the drag state of an annotation view.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkannotationviewdragstate"
+    },
+    "MKDirectionsRoutePreference": {
+      "doc": "Options that modify how the framework selects routes when calculating directions.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkdirectionsroutepreference"
+    },
+    "MKDirectionsTransportType": {
+      "doc": "Constants that specify the type of conveyance to use.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkdirectionstransporttype",
+      "members": {
+        "MKDirectionsTransportTypeAny": {
+          "doc": "Directions suitable for any transportation option.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkdirectionstransporttype/any"
+        },
+        "MKDirectionsTransportTypeAutomobile": {
+          "doc": "Directions suitable for use while driving.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkdirectionstransporttype/automobile"
+        },
+        "MKDirectionsTransportTypeCycling": {
+          "doc": "Directions suitable for use while cycling.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkdirectionstransporttype/cycling"
+        },
+        "MKDirectionsTransportTypeTransit": {
+          "doc": "Directions suitable for public transportation.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkdirectionstransporttype/transit"
+        },
+        "MKDirectionsTransportTypeWalking": {
+          "doc": "Directions suitable for a pedestrian.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkdirectionstransporttype/walking"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a direction transport type using a raw unsigned integer value.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkdirectionstransporttype/init(rawvalue:)"
+        }
+      }
+    },
+    "MKDistanceFormatterUnitStyle": {
+      "doc": "The preferred style for units.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkdistanceformatterunitstyle"
+    },
+    "MKDistanceFormatterUnits": {
+      "doc": "Constants that reflect the type of units to use in the string.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkdistanceformatterunits"
+    },
+    "MKErrorCode": {
+      "doc": "Error constants for the MapKit framework.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkerrorcode"
+    },
+    "MKFeatureVisibility": {
+      "doc": "Constants that indicate the visibility of different map features.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkfeaturevisibility",
+      "members": {
+        "MKFeatureVisibilityAdaptive": {
+          "doc": "A constant indicating that the feature adapts to the current map state.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkfeaturevisibility/adaptive"
+        },
+        "MKFeatureVisibilityHidden": {
+          "doc": "A constant indicating that the feature is hidden.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkfeaturevisibility/hidden"
+        },
+        "MKFeatureVisibilityVisible": {
+          "doc": "A constant indicating that the feature is visible.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkfeaturevisibility/visible"
+        }
+      }
+    },
+    "MKLocalSearchCompleterResultType": {
+      "doc": "Options that indicate types of search completions.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleterresulttype"
+    },
+    "MKLocalSearchRegionPriority": {
+      "doc": "A value that indicates the importance of the configured region.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchregionpriority",
+      "members": {
+        "MKLocalSearchRegionPriorityDefault": {
+          "doc": "A value indicating that the results can originate from outside the specified region.",
+          "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchregionpriority/default"
+        },
+        "MKLocalSearchRegionPriorityRequired": {
+          "doc": "A value indicating that no results can originate from outside the specified region.",
+          "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchregionpriority/required"
+        }
+      }
+    },
+    "MKLocalSearchResultType": {
+      "doc": "Options that indicate types of search results.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchresulttype"
+    },
+    "MKLookAroundBadgePosition": {
+      "doc": "Constants that control the position of badges on LookAround views.",
+      "url": "https://developer.apple.com/documentation/mapkit/mklookaroundbadgeposition",
+      "members": {
+        "MKLookAroundBadgePositionBottomTrailing": {
+          "doc": "The value that indicates the bottom-right badge position.",
+          "url": "https://developer.apple.com/documentation/mapkit/mklookaroundbadgeposition/bottomtrailing"
+        },
+        "MKLookAroundBadgePositionTopLeading": {
+          "doc": "The value that indicates the top-left badge position.",
+          "url": "https://developer.apple.com/documentation/mapkit/mklookaroundbadgeposition/topleading"
+        },
+        "MKLookAroundBadgePositionTopTrailing": {
+          "doc": "The value that indicates the top-right badge position.",
+          "url": "https://developer.apple.com/documentation/mapkit/mklookaroundbadgeposition/toptrailing"
+        }
+      }
+    },
+    "MKMapElevationStyle": {
+      "doc": "Values that control the map’s elevation style.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapelevationstyle"
+    },
+    "MKMapItemDetailSelectionAccessoryCalloutStyle": {
+      "doc": "The style to use for a map item detail callout presentation.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapitemdetailselectionaccessorycalloutstyle"
+    },
+    "MKMapType": {
+      "doc": "The type of map to display.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmaptype",
+      "members": {
+        "MKMapTypeHybrid": {
+          "doc": "A satellite image of the area with road and road name information layered on top.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkmaptype/hybrid"
+        },
+        "MKMapTypeHybridFlyover": {
+          "doc": "A hybrid satellite image with flyover data where available.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkmaptype/hybridflyover"
+        },
+        "MKMapTypeMutedStandard": {
+          "doc": "A street map where MapKit emphasizes your data over the underlying map details.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkmaptype/mutedstandard"
+        },
+        "MKMapTypeSatellite": {
+          "doc": "Satellite imagery of the area.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkmaptype/satellite"
+        },
+        "MKMapTypeSatelliteFlyover": {
+          "doc": "A satellite image of the area with flyover data where available.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkmaptype/satelliteflyover"
+        },
+        "MKMapTypeStandard": {
+          "doc": "A street map that shows the position of all roads and some road names.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkmaptype/standard"
+        }
+      }
+    },
+    "MKOverlayLevel": {
+      "doc": "Constants that indicate the position of overlays relative to other content.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkoverlaylevel",
+      "members": {
+        "MKOverlayLevelAboveLabels": {
+          "doc": "Place the overlay above map labels, shields, or point-of-interest icons but below annotations and 3D projections of buildings.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkoverlaylevel/abovelabels"
+        },
+        "MKOverlayLevelAboveRoads": {
+          "doc": "Place the overlay above roadways but below map labels, shields, or point-of-interest icons.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkoverlaylevel/aboveroads"
+        }
+      }
+    },
+    "MKPinAnnotationColor": {
+      "doc": "The supported colors for pin annotations.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkpinannotationcolor"
+    },
+    "MKSearchCompletionFilterType": {
+      "doc": "Constants indicating the types of search completions to return.",
+      "url": "https://developer.apple.com/documentation/mapkit/mksearchcompletionfiltertype"
+    },
+    "MKStandardMapEmphasisStyle": {
+      "doc": "Values that control how the framework emphasizes map features.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkstandardmapemphasisstyle"
+    },
+    "MKUserTrackingMode": {
+      "doc": "The mode to use for tracking the user’s location on the map.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkusertrackingmode",
+      "members": {
+        "MKUserTrackingModeFollow": {
+          "doc": "The map follows the user location.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkusertrackingmode/follow"
+        },
+        "MKUserTrackingModeFollowWithHeading": {
+          "doc": "The map follows the user’s location and rotates when the heading changes.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkusertrackingmode/followwithheading"
+        },
+        "MKUserTrackingModeNone": {
+          "doc": "The map doesn’t follow the user’s location.",
+          "url": "https://developer.apple.com/documentation/mapkit/mkusertrackingmode/none"
+        }
+      }
+    }
+  },
+  "structs": {
+    "MKCoordinateRegion": {
+      "doc": "A rectangular geographic region that centers around a specific latitude and longitude.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkcoordinateregion"
+    },
+    "MKCoordinateSpan": {
+      "doc": "The width and height of a map region.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkcoordinatespan"
+    },
+    "MKMapPoint": {
+      "doc": "A point on a two-dimensional map projection.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmappoint"
+    },
+    "MKMapRect": {
+      "doc": "A rectangular area on a two-dimensional map projection.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmaprect"
+    },
+    "MKMapSize": {
+      "doc": "Width and height information on a two-dimensional map projection.",
+      "url": "https://developer.apple.com/documentation/mapkit/mkmapsize"
+    },
+    "MKTileOverlayPath": {
+      "doc": "Values that specify the path indexes for a single overlay tile.",
+      "url": "https://developer.apple.com/documentation/mapkit/mktileoverlaypath"
+    }
+  },
+  "methods": {
+    "MKAddress": {
+      "-initWithFullAddress:shortAddress:": {
+        "doc": "Initializes a new address with a location’s full address using a string and a short address that provides an abbreviated form of the address such as a street address.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddress/init(fulladdress:shortaddress:)"
+      }
+    },
+    "MKAddressFilter": {
+      "-excludesOptions:": {
+        "doc": "Indicates whether options are excluded from filtering.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddressfilter/excludes(_:)"
+      },
+      "-includesOptions:": {
+        "doc": "Indicates whether options are included for filtering.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddressfilter/includes(_:)"
+      },
+      "-initExcludingOptions:": {
+        "doc": "Creates an address filter with options for excluding results in a search.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddressfilter/init(excluding:)"
+      },
+      "-initIncludingOptions:": {
+        "doc": "Creates an address filter with options for including results in a search.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddressfilter/init(including:)"
+      }
+    },
+    "MKAddressRepresentations": {
+      "-cityWithContextUsingStyle:": {
+        "doc": "The city name and, optionally and if applicable, state and region to provide additional disambiguating context.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddressrepresentations/citywithcontext(_:)"
+      },
+      "-fullAddressIncludingRegion:singleLine:": {
+        "doc": "Returns the the location’s full address, optionally including the country or on a single link without line breaks.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddressrepresentations/fulladdress(includingregion:singleline:)"
+      }
+    },
+    "MKAnnotationView": {
+      "-initWithAnnotation:reuseIdentifier:": {
+        "doc": "Creates and returns a new annotation view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/init(annotation:reuseidentifier:)"
+      },
+      "-initWithCoder:": {
+        "doc": "Creates an annotation view using data from the specified unarchiver.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/init(coder:)"
+      },
+      "-prepareForDisplay": {
+        "doc": "Notifies the annotation view that the map view is about to display it.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/preparefordisplay()"
+      },
+      "-prepareForReuse": {
+        "doc": "Calls this method when removing the view from the reuse queue.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/prepareforreuse()"
+      },
+      "-setDragState:animated:": {
+        "doc": "Sets the drag state for the annotation view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/setdragstate(_:animated:)"
+      },
+      "-setSelected:animated:": {
+        "doc": "Sets the selection state of the annotation view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/setselected(_:animated:)"
+      }
+    },
+    "MKCircle": {
+      "+circleWithCenterCoordinate:radius:": {
+        "doc": "Creates and returns a circle object using the specified coordinate and radius.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkcircle/init(center:radius:)"
+      },
+      "+circleWithMapRect:": {
+        "doc": "Creates and returns a circle object that derives the circular area from the specified rectangle.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkcircle/init(maprect:)"
+      }
+    },
+    "MKCircleRenderer": {
+      "-initWithCircle:": {
+        "doc": "Creates a new overlay view using the specified circle overlay object.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkcirclerenderer/init(circle:)"
+      }
+    },
+    "MKClusterAnnotation": {
+      "-initWithMemberAnnotations:": {
+        "doc": "Creates a cluster annotation with the specified individual annotations.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkclusterannotation/init(memberannotations:)"
+      }
+    },
+    "MKCompassButton": {
+      "+compassButtonWithMapView:": {
+        "doc": "Creates a compass button and associates it with the specified map view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkcompassbutton/init(mapview:)"
+      }
+    },
+    "MKDirections": {
+      "-calculateDirectionsWithCompletionHandler:": {
+        "doc": "Begins calculating the requested route information asynchronously.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdirections/calculate(completionhandler:)"
+      },
+      "-calculateETAWithCompletionHandler:": {
+        "doc": "Begins calculating the requested travel-time information asynchronously.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdirections/calculateeta(completionhandler:)"
+      },
+      "-cancel": {
+        "doc": "Cancels a pending request.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdirections/cancel()"
+      },
+      "-initWithRequest:": {
+        "doc": "Creates and returns a directions object using the specified request.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdirections/init(request:)"
+      }
+    },
+    "MKDistanceFormatter": {
+      "-distanceFromString:": {
+        "doc": "Returns the distance value parsed from the specified string.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdistanceformatter/distance(from:)"
+      },
+      "-stringFromDistance:": {
+        "doc": "Creates a string representation of the specified distance.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdistanceformatter/string(fromdistance:)"
+      }
+    },
+    "MKGeoJSONDecoder": {
+      "-geoJSONObjectsWithData:error:": {
+        "doc": "Decodes the provided data into native MapKit types that a map can display.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgeojsondecoder/decode(_:)"
+      }
+    },
+    "MKGeocodingRequest": {
+      "-cancel": {
+        "doc": "A function you call to cancel a geocoding request that’s in progress.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgeocodingrequest/cancel()"
+      },
+      "-getMapItemsWithCompletionHandler:": {
+        "doc": "Returns the map items relevant to the geocoded location.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgeocodingrequest/getmapitems(completionhandler:)"
+      },
+      "-initWithAddressString:": {
+        "doc": "Initializes a new geocoder request object with the provided address string.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgeocodingrequest/init(addressstring:)"
+      }
+    },
+    "MKGeodesicPolyline": {
+      "+polylineWithCoordinates:count:": {
+        "doc": "Creates and returns a geodesic polyline using the specified coordinates.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgeodesicpolyline/init(coordinates:count:)"
+      },
+      "+polylineWithPoints:count:": {
+        "doc": "Creates and returns a geodesic polyline using the specified map points.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgeodesicpolyline/init(points:count:)"
+      }
+    },
+    "MKGradientPolylineRenderer": {
+      "-setColors:atLocations:": {
+        "doc": "Sets the colors and corresponding unit distance values to create gradients.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgradientpolylinerenderer/setcolors:atlocations:"
+      }
+    },
+    "MKHybridMapConfiguration": {
+      "-init": {
+        "doc": "Creates a new hybrid map configuration.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkhybridmapconfiguration/init()"
+      },
+      "-initWithElevationStyle:": {
+        "doc": "Creates a new hybrid map configuration with the specified elevation style.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkhybridmapconfiguration/init(elevationstyle:)"
+      }
+    },
+    "MKImageryMapConfiguration": {
+      "-init": {
+        "doc": "Creates a new imagery based map configuration.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkimagerymapconfiguration/init()"
+      },
+      "-initWithElevationStyle:": {
+        "doc": "Creates a new imagery based map configuration with the specified elevation style.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkimagerymapconfiguration/init(elevationstyle:)"
+      }
+    },
+    "MKLocalPointsOfInterestRequest": {
+      "-initWithCenterCoordinate:radius:": {
+        "doc": "Creates a points of interest search request centered on the provided coordinate with the provided radius.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalpointsofinterestrequest/init(center:radius:)"
+      },
+      "-initWithCoordinateRegion:": {
+        "doc": "Creates a points of interest search request based on existing region.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalpointsofinterestrequest/init(coordinateregion:)"
+      }
+    },
+    "MKLocalSearch": {
+      "-cancel": {
+        "doc": "Cancels an in-progress search operation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearch/cancel()"
+      },
+      "-initWithPointsOfInterestRequest:": {
+        "doc": "Creates and returns a search object for fetching points of interest.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearch/init(request:)-9x8kn"
+      },
+      "-initWithRequest:": {
+        "doc": "Creates and returns a search object with the specified parameters.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearch/init(request:)-12tf0"
+      },
+      "-startWithCompletionHandler:": {
+        "doc": "Starts the search and delivers the results to the specified completion handler.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearch/start(completionhandler:)"
+      }
+    },
+    "MKLocalSearchCompleter": {
+      "-cancel": {
+        "doc": "Cancels an in-progress search operation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter/cancel()"
+      }
+    },
+    "MKLookAroundSceneRequest": {
+      "-cancel": {
+        "doc": "Cancels the pending scene request.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundscenerequest/cancel()"
+      },
+      "-getSceneWithCompletionHandler:": {
+        "doc": "Requests a LookAround scene and calls the specified completion handler.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundscenerequest/getscenewithcompletionhandler(_:)"
+      },
+      "-initWithCoordinate:": {
+        "doc": "Creates a LookAround scene at the specified coordinates.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundscenerequest/init(coordinate:)"
+      },
+      "-initWithMapItem:": {
+        "doc": "Creates a LookAround scene with the location described by the specified map item.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundscenerequest/init(mapitem:)"
+      }
+    },
+    "MKLookAroundSnapshotter": {
+      "-cancel": {
+        "doc": "Cancels an in-progress snapshot request.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundsnapshotter/cancel()"
+      },
+      "-getSnapshotWithCompletionHandler:": {
+        "doc": "Requests a new snapshot and calls the completion handler you provide.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundsnapshotter/getsnapshotwithcompletionhandler(_:)"
+      },
+      "-initWithScene:options:": {
+        "doc": "Create a new snapshotter object with the scene and options you specify.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundsnapshotter/init(scene:options:)"
+      }
+    },
+    "MKLookAroundViewController": {
+      "-initWithCoder:": {
+        "doc": "Creates a new LookAround view controller object from a coder object provided by a storyboard or nib file.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundviewcontroller/init(coder:)"
+      },
+      "-initWithNibName:bundle:": {
+        "doc": "Creates a new LookAround view controller from the specified nib and bundle.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundviewcontroller/init(nibname:bundle:)"
+      },
+      "-initWithScene:": {
+        "doc": "Creates a new LookAround view controller with the specified scene.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundviewcontroller/init(scene:)"
+      }
+    },
+    "MKMapCamera": {
+      "+camera": {
+        "doc": "Returns a new camera object for you to configure.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapcamera/camera"
+      },
+      "+cameraLookingAtCenterCoordinate:fromDistance:pitch:heading:": {
+        "doc": "Returns a new camera object using the specified distance, pitch, and heading information.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapcamera/init(lookingatcenter:fromdistance:pitch:heading:)"
+      },
+      "+cameraLookingAtCenterCoordinate:fromEyeCoordinate:eyeAltitude:": {
+        "doc": "Returns a new camera object using the specified viewing angle information.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapcamera/init(lookingatcenter:fromeyecoordinate:eyealtitude:)"
+      },
+      "+cameraLookingAtMapItem:forViewSize:allowPitch:": {
+        "doc": "Returns a new camera object using the specified map item, view size, and pitch.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapcamera/init(lookingat:forviewsize:allowpitch:)"
+      }
+    },
+    "MKMapItem": {
+      "+mapItemForCurrentLocation": {
+        "doc": "Creates and returns a singleton map item object representing the user’s location.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/forcurrentlocation()"
+      },
+      "+openMapsWithItems:launchOptions:": {
+        "doc": "Opens the Maps app and displays the specified map items.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/openmaps(with:launchoptions:)"
+      },
+      "+openMapsWithItems:launchOptions:completionHandler:": {
+        "doc": "Opens the Maps app using the specified map items and options.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/openmaps(with:launchoptions:completionhandler:)"
+      },
+      "+openMapsWithItems:launchOptions:fromScene:completionHandler:": {
+        "doc": "Opens the Maps app from a particular scene using the specified map items and options.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/openmaps(with:launchoptions:from:completionhandler:)"
+      },
+      "-initWithLocation:address:": {
+        "doc": "Creates and returns a map item object using the specified location and address objects.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/init(location:address:)"
+      },
+      "-initWithPlacemark:": {
+        "doc": "Creates and returns a map item object using the specified placemark object.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/init(placemark:)"
+      },
+      "-openInMapsWithLaunchOptions:": {
+        "doc": "Opens the Maps app and displays the map item.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/openinmaps(launchoptions:)"
+      },
+      "-openInMapsWithLaunchOptions:completionHandler:": {
+        "doc": "Opens the Maps app and displays the map item.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/openinmaps(launchoptions:completionhandler:)"
+      },
+      "-openInMapsWithLaunchOptions:fromScene:completionHandler:": {
+        "doc": "Opens the Maps app from a particular scene using the specified options.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/openinmaps(launchoptions:from:completionhandler:)"
+      }
+    },
+    "MKMapItemAnnotation": {
+      "-initWithMapItem:": {
+        "doc": "Creates a map item annotation",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemannotation/init(mapitem:)"
+      }
+    },
+    "MKMapItemDetailSelectionAccessoryPresentationStyle": {
+      "+automaticWithPresentationViewController:": {
+        "doc": "An appropriate presentation style will be chosen automatically.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemdetailselectionaccessorypresentationstyle/automaticwithpresentationviewcontroller:"
+      },
+      "+calloutWithCalloutStyle:": {
+        "doc": "Show map item detail as an annotation callout on the map",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemdetailselectionaccessorypresentationstyle/calloutwithcalloutstyle:"
+      }
+    },
+    "MKMapItemDetailViewController": {
+      "-initWithMapItem:": {
+        "doc": "Create a map item detail view controller.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemdetailviewcontroller/init(mapitem:)"
+      },
+      "-initWithMapItem:displaysMap:": {
+        "doc": "Create a map item detail view controller",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemdetailviewcontroller/init(mapitem:displaysmap:)"
+      }
+    },
+    "MKMapItemRequest": {
+      "-cancel": {
+        "doc": "Cancels an in-progress map item request.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemrequest/cancel()"
+      },
+      "-getMapItemWithCompletionHandler:": {
+        "doc": "Requests a map item and calls the provided completion handler.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemrequest/getmapitem(completionhandler:)"
+      },
+      "-initWithMapFeatureAnnotation:": {
+        "doc": "Creates a new map item request with the specified feature annotation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemrequest/init(mapfeatureannotation:)"
+      },
+      "-initWithMapItemIdentifier:": {
+        "doc": "Create a request with a map item identifier.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemrequest/init(mapitemidentifier:)"
+      }
+    },
+    "MKMapSnapshotter": {
+      "-cancel": {
+        "doc": "Cancels the request to create a snapshot.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapsnapshotter/cancel()"
+      },
+      "-initWithOptions:": {
+        "doc": "Creates and returns a snapshotter object based on the specified options.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapsnapshotter/init(options:)"
+      },
+      "-startWithCompletionHandler:": {
+        "doc": "Submits the request to create a snapshot and delivers the results to the specified block.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapsnapshotter/start(completionhandler:)"
+      },
+      "-startWithQueue:completionHandler:": {
+        "doc": "Submits the request to create a snapshot and executes the resulting block on the specified queue.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapsnapshotter/start(with:completionhandler:)"
+      }
+    },
+    "MKMapView": {
+      "-addAnnotation:": {
+        "doc": "Adds the specified annotation to the map view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/addannotation(_:)"
+      },
+      "-addAnnotations:": {
+        "doc": "Adds an array of annotation objects to the map view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/addannotations(_:)"
+      },
+      "-addOverlay:": {
+        "doc": "Adds a single overlay object to the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/addoverlay(_:)"
+      },
+      "-addOverlay:level:": {
+        "doc": "Adds the overlay object to the map at the specified level.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/addoverlay(_:level:)"
+      },
+      "-addOverlays:": {
+        "doc": "Adds an array of overlay objects to the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/addoverlays(_:)"
+      },
+      "-addOverlays:level:": {
+        "doc": "Adds an array of overlay objects to the map at the specified level.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/addoverlays(_:level:)"
+      },
+      "-annotationsInMapRect:": {
+        "doc": "Returns the annotation objects within the specified map rectangle.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/annotations(in:)"
+      },
+      "-convertCoordinate:toPointToView:": {
+        "doc": "Converts a map coordinate to a point in the specified view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/convert(_:topointto:)"
+      },
+      "-convertPoint:toCoordinateFromView:": {
+        "doc": "Converts a point in the specified view’s coordinate system to a map coordinate.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/convert(_:tocoordinatefrom:)"
+      },
+      "-convertRect:toRegionFromView:": {
+        "doc": "Converts a rectangle in the specified view’s coordinate system to a map region.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/convert(_:toregionfrom:)"
+      },
+      "-convertRegion:toRectToView:": {
+        "doc": "Converts a map region to a rectangle in the specified view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/convert(_:torectto:)"
+      },
+      "-dequeueReusableAnnotationViewWithIdentifier:": {
+        "doc": "Returns a reusable annotation view using its identifier.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/dequeuereusableannotationview(withidentifier:)"
+      },
+      "-dequeueReusableAnnotationViewWithIdentifier:forAnnotation:": {
+        "doc": "Returns a reusable annotation view using the specified identifier with a specified existing annotation view, if possible.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/dequeuereusableannotationview(withidentifier:for:)"
+      },
+      "-deselectAnnotation:animated:": {
+        "doc": "Deselects the specified annotation and hides its callout view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/deselectannotation(_:animated:)"
+      },
+      "-exchangeOverlay:withOverlay:": {
+        "doc": "Exchanges the positions of two overlay objects.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/exchangeoverlay(_:with:)"
+      },
+      "-exchangeOverlayAtIndex:withOverlayAtIndex:": {
+        "doc": "Exchanges the position of two overlay objects at the specified index.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/exchangeoverlay(at:withoverlayat:)"
+      },
+      "-insertOverlay:aboveOverlay:": {
+        "doc": "Inserts one overlay object above another.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/insertoverlay(_:above:)"
+      },
+      "-insertOverlay:atIndex:": {
+        "doc": "Inserts an overlay object into the list associated with the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/insertoverlay(_:at:)"
+      },
+      "-insertOverlay:atIndex:level:": {
+        "doc": "Inserts an overlay object into the level at the specified index.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/insertoverlay(_:at:level:)"
+      },
+      "-insertOverlay:belowOverlay:": {
+        "doc": "Inserts one overlay object below another.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/insertoverlay(_:below:)"
+      },
+      "-mapRectThatFits:": {
+        "doc": "Returns a centered map rectangle with the same aspect ratio as the map view’s frame.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/maprectthatfits(_:)"
+      },
+      "-mapRectThatFits:edgePadding:": {
+        "doc": "Returns a centered, inset map rectangle with the same aspect ratio as the map view’s frame.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/maprectthatfits(_:edgepadding:)"
+      },
+      "-overlaysInLevel:": {
+        "doc": "Returns overlay objects in the specified level of the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/overlays(in:)"
+      },
+      "-regionThatFits:": {
+        "doc": "Adjusts the aspect ratio of the specified region to ensure that it fits in the map view’s frame.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/regionthatfits(_:)"
+      },
+      "-registerClass:forAnnotationViewWithReuseIdentifier:": {
+        "doc": "Registers an annotation view class that the map can create automatically.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/register(_:forannotationviewwithreuseidentifier:)"
+      },
+      "-removeAnnotation:": {
+        "doc": "Removes the specified annotation object from the map view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/removeannotation(_:)"
+      },
+      "-removeAnnotations:": {
+        "doc": "Removes an array of annotation objects from the map view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/removeannotations(_:)"
+      },
+      "-removeOverlay:": {
+        "doc": "Removes a single overlay object from the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/removeoverlay(_:)"
+      },
+      "-removeOverlays:": {
+        "doc": "Removes one or more overlay objects from the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/removeoverlays(_:)"
+      },
+      "-rendererForOverlay:": {
+        "doc": "Returns the renderer object for drawing the contents of the specified overlay object.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/renderer(for:)"
+      },
+      "-selectAnnotation:animated:": {
+        "doc": "Selects the specified annotation and displays a callout view for it.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/selectannotation(_:animated:)"
+      },
+      "-setCamera:animated:": {
+        "doc": "Changes the camera to use for determining the map’s viewing parameters, and optionally animates the change.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/setcamera(_:animated:)"
+      },
+      "-setCameraBoundary:animated:": {
+        "doc": "Sets the camera boundary for the map view, specifying whether to use animation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/setcameraboundary(_:animated:)"
+      },
+      "-setCameraZoomRange:animated:": {
+        "doc": "Sets the camera zoom range for the map view, specifying whether to use animation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/setcamerazoomrange(_:animated:)"
+      },
+      "-setCenterCoordinate:animated:": {
+        "doc": "Changes the center coordinate of the map, and optionally animates the change.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/setcenter(_:animated:)"
+      },
+      "-setRegion:animated:": {
+        "doc": "Changes the currently visible region, and optionally animates the change.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/setregion(_:animated:)"
+      },
+      "-setUserTrackingMode:animated:": {
+        "doc": "Sets the mode to use for tracking the user’s location, with optional animation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/setusertrackingmode(_:animated:)"
+      },
+      "-setVisibleMapRect:animated:": {
+        "doc": "Changes the currently visible portion of the map, and optionally animates the change.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/setvisiblemaprect(_:animated:)"
+      },
+      "-setVisibleMapRect:edgePadding:animated:": {
+        "doc": "Changes the currently visible portion of the map, allowing you to specify additional space around the edges.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/setvisiblemaprect(_:edgepadding:animated:)"
+      },
+      "-showAnnotations:animated:": {
+        "doc": "Sets the visible region so that the map displays the specified annotations.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/showannotations(_:animated:)"
+      },
+      "-viewForAnnotation:": {
+        "doc": "Returns the annotation view associated with the specified annotation object, if any.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/view(for:)-33w8k"
+      },
+      "-viewForOverlay:": {
+        "doc": "Returns the view associated with the overlay object, if any.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/view(for:)-38z60"
+      }
+    },
+    "MKMultiPoint": {
+      "-getCoordinates:range:": {
+        "doc": "Retrieves one or more points associated with the shape and converts them to coordinate values.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmultipoint/getcoordinates(_:range:)"
+      },
+      "-locationAtPointIndex:": {
+        "doc": "Translates a point index into a unit distance along the shape.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmultipoint/location(atpointindex:)"
+      },
+      "-locationsAtPointIndexes:": {
+        "doc": "Returns a set of unit distance values that correspond to the point indexes along the shape.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmultipoint/locationsatpointindexes:"
+      },
+      "-points": {
+        "doc": "Returns an array of map points associated with the shape.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmultipoint/points()"
+      }
+    },
+    "MKMultiPolygon": {
+      "-initWithPolygons:": {
+        "doc": "Creates a multipolygon object using the provided polygons.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmultipolygon/init(_:)"
+      }
+    },
+    "MKMultiPolygonRenderer": {
+      "-initWithMultiPolygon:": {
+        "doc": "Creates and returns a renderer that handles drawing for the specified multipolygon overlay object.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmultipolygonrenderer/init(multipolygon:)"
+      }
+    },
+    "MKMultiPolyline": {
+      "-initWithPolylines:": {
+        "doc": "Creates a multipolyline object using the provided polylines.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmultipolyline/init(_:)"
+      }
+    },
+    "MKMultiPolylineRenderer": {
+      "-initWithMultiPolyline:": {
+        "doc": "Creates an object that renders a visual representation of multiple polyline objects.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmultipolylinerenderer/init(multipolyline:)"
+      }
+    },
+    "MKOverlayPathRenderer": {
+      "-applyFillPropertiesToContext:atZoomScale:": {
+        "doc": "Applies the receiver’s fill-related drawing properties to the specified graphics context.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/applyfillproperties(to:atzoomscale:)"
+      },
+      "-applyStrokePropertiesToContext:atZoomScale:": {
+        "doc": "Applies the renderer’s stroke-related drawing properties to the specified graphics context.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/applystrokeproperties(to:atzoomscale:)"
+      },
+      "-createPath": {
+        "doc": "Creates the path for the overlay.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/createpath()"
+      },
+      "-fillPath:inContext:": {
+        "doc": "Fills the area that the specified path encloses.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/fillpath(_:in:)"
+      },
+      "-invalidatePath": {
+        "doc": "Updates the path associated with the overlay renderer.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/invalidatepath()"
+      },
+      "-strokePath:inContext:": {
+        "doc": "Draws a line along the specified path.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/strokepath(_:in:)"
+      }
+    },
+    "MKOverlayRenderer": {
+      "-canDrawMapRect:zoomScale:": {
+        "doc": "Returns a Boolean value that indicates whether the overlay view is ready to draw its content.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlayrenderer/candraw(_:zoomscale:)"
+      },
+      "-drawMapRect:zoomScale:inContext:": {
+        "doc": "Draws the overlay’s contents at the specified location on the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlayrenderer/draw(_:zoomscale:in:)"
+      },
+      "-initWithOverlay:": {
+        "doc": "Creates and returns the overlay renderer and associates it with the specified overlay object.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlayrenderer/init(overlay:)"
+      },
+      "-mapPointForPoint:": {
+        "doc": "Returns the point on the map that corresponds to the specified point in the overlay renderer’s drawing area.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlayrenderer/mappoint(for:)"
+      },
+      "-mapRectForRect:": {
+        "doc": "Returns the rectangle on the map that corresponds to the specified rectangle in the overlay renderer’s drawing area.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlayrenderer/maprect(for:)"
+      },
+      "-pointForMapPoint:": {
+        "doc": "Returns the point in the overlay renderer’s drawing area corresponding to the specified point on the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlayrenderer/point(for:)"
+      },
+      "-rectForMapRect:": {
+        "doc": "Returns the rectangle in the overlay renderer’s drawing area corresponding to the specified rectangle on the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlayrenderer/rect(for:)"
+      },
+      "-setNeedsDisplay": {
+        "doc": "Invalidates the entire contents of the overlay for all zoom scales.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlayrenderer/setneedsdisplay()"
+      },
+      "-setNeedsDisplayInMapRect:": {
+        "doc": "Invalidates the specified portion of the overlay at all zoom scales.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlayrenderer/setneedsdisplay(_:)"
+      },
+      "-setNeedsDisplayInMapRect:zoomScale:": {
+        "doc": "Invalidates the specified portion of the overlay, but only at the specified zoom scale.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlayrenderer/setneedsdisplay(_:zoomscale:)"
+      }
+    },
+    "MKPinAnnotationView": {
+      "+greenPinColor": {
+        "doc": "Returns the standard color for green pins.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpinannotationview/greenpincolor()"
+      },
+      "+purplePinColor": {
+        "doc": "Returns the standard color for purple pins.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpinannotationview/purplepincolor()"
+      },
+      "+redPinColor": {
+        "doc": "Returns the standard color for red pins.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpinannotationview/redpincolor()"
+      }
+    },
+    "MKPitchControl": {
+      "+pitchControlWithMapView:": {
+        "doc": "Creates a pitch control and associates it with the specified map view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpitchcontrol/init(mapview:)"
+      }
+    },
+    "MKPlacemark": {
+      "-initWithCoordinate:": {
+        "doc": "Creates and returns a placemark object using the specified coordinate.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkplacemark/init(coordinate:)"
+      },
+      "-initWithCoordinate:addressDictionary:": {
+        "doc": "Creates and returns a placemark object using the specified coordinate and Address Book dictionary.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkplacemark/init(coordinate:addressdictionary:)"
+      },
+      "-initWithCoordinate:postalAddress:": {
+        "doc": "Creates and returns a placemark object with the specified coordinate and postal address from the user’s Contacts database.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkplacemark/init(coordinate:postaladdress:)"
+      }
+    },
+    "MKPointAnnotation": {
+      "-init": {
+        "doc": "Creates a map annotation that shows a title string at a point on a map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpointannotation/init()"
+      },
+      "-initWithCoordinate:": {
+        "doc": "Creates a point annotation at the specified coordinate on the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpointannotation/init(coordinate:)"
+      },
+      "-initWithCoordinate:title:subtitle:": {
+        "doc": "Creates a point annotation displaying a title and subtitle string at the specified coordinate on the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpointannotation/init(coordinate:title:subtitle:)"
+      }
+    },
+    "MKPointOfInterestFilter": {
+      "-excludesCategory:": {
+        "doc": "Returns a Boolean value indicating whether the filter excludes the point of interest category.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpointofinterestfilter/excludes(_:)"
+      },
+      "-includesCategory:": {
+        "doc": "Returns a Boolean value indicating whether the filter includes the point of interest category.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpointofinterestfilter/includes(_:)"
+      },
+      "-initExcludingCategories:": {
+        "doc": "Initialize the point of interest filter with a list of categories to exclude.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpointofinterestfilter/init(excluding:)"
+      },
+      "-initIncludingCategories:": {
+        "doc": "Initialize the point of interest filter with a list of categories to include.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpointofinterestfilter/init(including:)"
+      }
+    },
+    "MKPolygon": {
+      "+polygonWithCoordinates:count:": {
+        "doc": "Creates and returns a polygon object from the specified set of coordinates.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpolygon/init(coordinates:count:)"
+      },
+      "+polygonWithCoordinates:count:interiorPolygons:": {
+        "doc": "Creates and returns a polygon object from the specified set of coordinates and interior polygons.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpolygon/init(coordinates:count:interiorpolygons:)"
+      },
+      "+polygonWithPoints:count:": {
+        "doc": "Creates and returns a polygon object from the specified set of map points.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpolygon/init(points:count:)"
+      },
+      "+polygonWithPoints:count:interiorPolygons:": {
+        "doc": "Creates and returns a polygon object from the specified set of map points and interior polygons.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpolygon/init(points:count:interiorpolygons:)"
+      }
+    },
+    "MKPolygonRenderer": {
+      "-initWithPolygon:": {
+        "doc": "Creates a new renderer that handles drawing for the specified polygon overlay object.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpolygonrenderer/init(polygon:)"
+      }
+    },
+    "MKPolyline": {
+      "+polylineWithCoordinates:count:": {
+        "doc": "Creates a polyline object from the specified set of coordinates.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpolyline/init(coordinates:count:)"
+      },
+      "+polylineWithPoints:count:": {
+        "doc": "Creates a polyline object from the specified set of map points.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpolyline/init(points:count:)"
+      }
+    },
+    "MKPolylineRenderer": {
+      "-initWithPolyline:": {
+        "doc": "Creates a new overlay view using the specified polyline overlay object.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpolylinerenderer/init(polyline:)"
+      }
+    },
+    "MKReverseGeocodingRequest": {
+      "-cancel": {
+        "doc": "A method you call to cancel a reverse geocoding request that’s in progress.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkreversegeocodingrequest/cancel()"
+      },
+      "-getMapItemsWithCompletionHandler:": {
+        "doc": "Returns the map items relevant to the reverse geocoded location.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkreversegeocodingrequest/getmapitems(completionhandler:)"
+      },
+      "-initWithLocation:": {
+        "doc": "Initializes a new reverse geocoder request object with the provided location.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkreversegeocodingrequest/init(location:)"
+      }
+    },
+    "MKSelectionAccessory": {
+      "+mapItemDetailWithPresentationStyle:": {
+        "doc": "Detailed information about a place",
+        "url": "https://developer.apple.com/documentation/mapkit/mkselectionaccessory/mapitemdetail(_:)"
+      }
+    },
+    "MKStandardMapConfiguration": {
+      "-init": {
+        "doc": "Creates a new standard map configuration.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkstandardmapconfiguration/init()"
+      },
+      "-initWithElevationStyle:": {
+        "doc": "Creates a new standard map configuration with the specified elevation style.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkstandardmapconfiguration/init(elevationstyle:)"
+      },
+      "-initWithElevationStyle:emphasisStyle:": {
+        "doc": "Creates a standard map configuration with the specified elevation and emphasis styles.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkstandardmapconfiguration/init(elevationstyle:emphasisstyle:)"
+      },
+      "-initWithEmphasisStyle:": {
+        "doc": "Creates a standard map configuration with the specified emphasis style.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkstandardmapconfiguration/init(emphasisstyle:)"
+      }
+    },
+    "MKTileOverlay": {
+      "-URLForTilePath:": {
+        "doc": "Returns the URL to use to access the specified tile.",
+        "url": "https://developer.apple.com/documentation/mapkit/mktileoverlay/url(fortilepath:)"
+      },
+      "-initWithURLTemplate:": {
+        "doc": "Creates and returns a tile overlay object using the specified tile-access template.",
+        "url": "https://developer.apple.com/documentation/mapkit/mktileoverlay/init(urltemplate:)-9s8h7"
+      },
+      "-loadTileAtPath:result:": {
+        "doc": "Loads the specified tile asynchronously.",
+        "url": "https://developer.apple.com/documentation/mapkit/mktileoverlay/loadtile(at:result:)"
+      }
+    },
+    "MKTileOverlayRenderer": {
+      "-initWithTileOverlay:": {
+        "doc": "Initializes and returns a tile renderer with the specified overlay object.",
+        "url": "https://developer.apple.com/documentation/mapkit/mktileoverlayrenderer/init(tileoverlay:)"
+      },
+      "-reloadData": {
+        "doc": "Forces the tile overlay renderer to reload and redisplay the tiles.",
+        "url": "https://developer.apple.com/documentation/mapkit/mktileoverlayrenderer/reloaddata()"
+      }
+    },
+    "MKZoomControl": {
+      "+zoomControlWithMapView:": {
+        "doc": "Creates a zoom control and associates it with the specified map view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkzoomcontrol/init(mapview:)"
+      }
+    }
+  },
+  "properties": {
+    "MKAddress": {
+      "fullAddress": {
+        "doc": "A string that represents a place’s full address",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddress/fulladdress"
+      },
+      "shortAddress": {
+        "doc": "A string that represents the short address of a location, such as it’s street address and city.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddress/shortaddress"
+      }
+    },
+    "MKAddressFilter": {
+      "MKAddressFilterOption": {
+        "doc": "A structure that contains options for filtering results in a search.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddressfilter/options"
+      },
+      "filterExcludingAll": {
+        "doc": "A list of categories to exclude from a search.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddressfilter/excludingall"
+      },
+      "filterIncludingAll": {
+        "doc": "A list of categories to include in a search.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddressfilter/includingall"
+      }
+    },
+    "MKAddressRepresentations": {
+      "MKAddressRepresentationsContextStyle": {
+        "doc": "Values that describe the degree of disambiguation context to include in an address representation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddressrepresentations/contextstyle"
+      },
+      "cityName": {
+        "doc": "The name of the city.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddressrepresentations/cityname"
+      },
+      "cityWithContext": {
+        "doc": "The city name along with the country name, to provide additional disambiguating context.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddressrepresentations/citywithcontext"
+      },
+      "regionCode": {
+        "doc": "The region’s ISO 3166-2 region code, such as “US”.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddressrepresentations/regioncode"
+      },
+      "regionName": {
+        "doc": "The region name, such as “United States”.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkaddressrepresentations/regionname"
+      }
+    },
+    "MKAnnotationView": {
+      "MKAnnotationViewCollisionMode": {
+        "doc": "Constants that indicates how to interpret the collision frame rectangle of an annotation view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/collisionmode-swift.enum"
+      },
+      "MKAnnotationViewDragState": {
+        "doc": "Constants that indicate the drag state of an annotation view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/dragstate-swift.enum"
+      },
+      "accessoryOffset": {
+        "doc": "An offset that changes the accessory’s default anchor point.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/accessoryoffset"
+      },
+      "annotation": {
+        "doc": "The annotation object associated with the view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/annotation"
+      },
+      "calloutOffset": {
+        "doc": "The offset (in points) at which to place the callout.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/calloutoffset"
+      },
+      "canShowCallout": {
+        "doc": "A Boolean value that indicates whether the annotation view is able to display extra information in a callout.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/canshowcallout"
+      },
+      "centerOffset": {
+        "doc": "The offset (in points) at which to display the view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/centeroffset"
+      },
+      "clusterAnnotationView": {
+        "doc": "The clustering annotation view that replaces the annotation view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/cluster"
+      },
+      "clusteringIdentifier": {
+        "doc": "An identifier that determines whether the annotation view participates in clustering.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/clusteringidentifier"
+      },
+      "collisionMode": {
+        "doc": "The collision mode to use when interpreting the collision frame rectangle.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/collisionmode-swift.property"
+      },
+      "detailCalloutAccessoryView": {
+        "doc": "The detail accessory view to use in the standard callout.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/detailcalloutaccessoryview"
+      },
+      "displayPriority": {
+        "doc": "The display priority of the annotation view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/displaypriority"
+      },
+      "dragState": {
+        "doc": "The drag state of the annotation view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/dragstate-swift.property"
+      },
+      "draggable": {
+        "doc": "A Boolean value that indicates whether the annotation view is draggable.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/isdraggable"
+      },
+      "enabled": {
+        "doc": "A Boolean value that indicates whether the annotation is in an enabled state.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/isenabled"
+      },
+      "highlighted": {
+        "doc": "A Boolean value that indicates whether the map view highlights the annotation view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/ishighlighted"
+      },
+      "image": {
+        "doc": "The image the annotation view displays.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/image"
+      },
+      "leftCalloutAccessoryView": {
+        "doc": "The view to display on the left side of the standard callout.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/leftcalloutaccessoryview"
+      },
+      "leftCalloutOffset": {
+        "doc": "The offset in points from the middle-left of the annotation view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/leftcalloutoffset"
+      },
+      "reuseIdentifier": {
+        "doc": "The string that identifies that the annotation view is reusable.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/reuseidentifier"
+      },
+      "rightCalloutAccessoryView": {
+        "doc": "The view to display on the right side of the standard callout.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/rightcalloutaccessoryview"
+      },
+      "rightCalloutOffset": {
+        "doc": "The offset in points from the middle-right of the annotation view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/rightcalloutoffset"
+      },
+      "selected": {
+        "doc": "A Boolean value that indicates whether the annotation view is in a selected state.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/isselected"
+      },
+      "selectedZPriority": {
+        "doc": "The relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/selectedzpriority"
+      },
+      "zPriority": {
+        "doc": "The relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkannotationview/zpriority"
+      }
+    },
+    "MKCircle": {
+      "boundingMapRect": {
+        "doc": "The bounding rectangle of the circular area.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkcircle/boundingmaprect"
+      },
+      "coordinate": {
+        "doc": "The center point of the circular area, specified as a latitude and longitude.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkcircle/coordinate"
+      },
+      "radius": {
+        "doc": "The radius of the circular area, in meters.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkcircle/radius"
+      }
+    },
+    "MKCircleRenderer": {
+      "circle": {
+        "doc": "The circle overlay object that contains the information for drawing the overlay.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkcirclerenderer/circle"
+      },
+      "strokeEnd": {
+        "doc": "The unit distance along the circle where the stroke ends.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkcirclerenderer/strokeend"
+      },
+      "strokeStart": {
+        "doc": "The unit distance along the circle where the stroke starts.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkcirclerenderer/strokestart"
+      }
+    },
+    "MKClusterAnnotation": {
+      "memberAnnotations": {
+        "doc": "The annotations that the cluster contains.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkclusterannotation/memberannotations"
+      },
+      "subtitle": {
+        "doc": "The subtitle string to display for the group of annotations.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkclusterannotation/subtitle"
+      },
+      "title": {
+        "doc": "The title string to display for the group of annotations.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkclusterannotation/title"
+      }
+    },
+    "MKCompassButton": {
+      "compassVisibility": {
+        "doc": "The visibility of the compass button.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkcompassbutton/compassvisibility"
+      },
+      "mapView": {
+        "doc": "The map view that provides the heading information for the compass button.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkcompassbutton/mapview"
+      }
+    },
+    "MKDirections": {
+      "MKDirectionsHandler": {
+        "doc": "The block to use for processing the requested route information.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdirections/directionshandler"
+      },
+      "MKDirectionsRequest": {
+        "doc": "The start and end points of a route, along with the planned mode of transportation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdirections/request"
+      },
+      "MKDirectionsResponse": {
+        "doc": "The route information that Apple servers return in response to your request for directions.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdirections/response"
+      },
+      "MKDirectionsRoutePreference": {
+        "doc": "Options that modify how the framework selects routes when calculating directions.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdirections/routepreference"
+      },
+      "MKETAHandler": {
+        "doc": "The block to use for processing travel-time information.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdirections/etahandler"
+      },
+      "MKETAResponse": {
+        "doc": "The travel-time information that Apple servers return.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdirections/etaresponse"
+      },
+      "calculating": {
+        "doc": "A Boolean value that indicates whether a request is in process.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdirections/iscalculating"
+      }
+    },
+    "MKDistanceFormatter": {
+      "MKDistanceFormatterUnitStyle": {
+        "doc": "Constants that indicate the format style to use for strings.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdistanceformatter/distanceunitstyle"
+      },
+      "MKDistanceFormatterUnits": {
+        "doc": "Constants that reflect the type of units to use in the string.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdistanceformatter/units-swift.enum"
+      },
+      "locale": {
+        "doc": "The locale to use when formatting strings.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdistanceformatter/locale"
+      },
+      "unitStyle": {
+        "doc": "The preferred style for units.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdistanceformatter/unitstyle"
+      },
+      "units": {
+        "doc": "The measuring system — imperial or metric — to use for units.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkdistanceformatter/units-swift.property"
+      }
+    },
+    "MKGeoJSONFeature": {
+      "geometry": {
+        "doc": "The shape or shapes associated with the GeoJSON feature.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgeojsonfeature/geometry"
+      },
+      "identifier": {
+        "doc": "An optional identifier the class returns as a string.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgeojsonfeature/identifier"
+      },
+      "properties": {
+        "doc": "Optional serialized JSON data that corresponds to the properties key.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgeojsonfeature/properties"
+      }
+    },
+    "MKGeocodingRequest": {
+      "addressString": {
+        "doc": "The string used to initialize the geocoder.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgeocodingrequest/addressstring"
+      },
+      "cancelled": {
+        "doc": "A Boolean value that indicates whether the current geocoding request is in a cancelled state.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgeocodingrequest/iscancelled"
+      },
+      "loading": {
+        "doc": "A Boolean value that indicates whether the current geocoding request is in a loading state.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgeocodingrequest/isloading"
+      },
+      "preferredLocale": {
+        "doc": "A value that indicates the default locale the geocoder should use when processing requests.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgeocodingrequest/preferredlocale"
+      },
+      "region": {
+        "doc": "The geographic region for the framework to use as the bounds for the request; defaults to a region that covers the whole world.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgeocodingrequest/region"
+      }
+    },
+    "MKGradientPolylineRenderer": {
+      "colors": {
+        "doc": "An array that represents the gradient’s color transition points.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgradientpolylinerenderer/colors"
+      },
+      "locations": {
+        "doc": "An array of location indices corresponding to their respective colors.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgradientpolylinerenderer/locations-50knt"
+      },
+      "setColors(_:locations:)": {
+        "doc": "Sets the iOS colors and corresponding unit distance values to create gradients.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgradientpolylinerenderer/setcolors(_:locations:)-3xrou"
+      }
+    },
+    "MKHybridMapConfiguration": {
+      "pointOfInterestFilter": {
+        "doc": "The filter the framework uses to determine the points of interest to show on the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkhybridmapconfiguration/pointofinterestfilter"
+      },
+      "showsTraffic": {
+        "doc": "A Boolean value that indicates whether the maps shows traffic conditions.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkhybridmapconfiguration/showstraffic"
+      }
+    },
+    "MKLocalPointsOfInterestRequest": {
+      "MKPointsOfInterestRequestMaxRadius": {
+        "doc": "The maximum distance respected for fetching points of interest from the center of the region.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalpointsofinterestrequest/maxradius"
+      },
+      "coordinate": {
+        "doc": "The center of the point of request as latitude and longitude.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalpointsofinterestrequest/coordinate"
+      },
+      "pointOfInterestFilter": {
+        "doc": "A filter that lists points of interest categories to include or exclude.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalpointsofinterestrequest/pointofinterestfilter"
+      },
+      "radius": {
+        "doc": "The distance provided in meters or the longest distance derived from the center point to the region’s bounding box.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalpointsofinterestrequest/radius"
+      },
+      "region": {
+        "doc": "The region of the bounding box of the request provided or the derived bounding box of the circle created by the radius.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalpointsofinterestrequest/region"
+      }
+    },
+    "MKLocalSearch": {
+      "MKLocalSearchCompletionHandler": {
+        "doc": "A completion handler block for a search operation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearch/completionhandler"
+      },
+      "MKLocalSearchRequest": {
+        "doc": "The parameters to use when searching for points of interest on the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearch/request"
+      },
+      "MKLocalSearchResponse": {
+        "doc": "The results from a map-based search.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearch/response"
+      },
+      "MKLocalSearchResultType": {
+        "doc": "Options that indicate types of search results.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearch/resulttype"
+      },
+      "searching": {
+        "doc": "A Boolean value that indicates whether the search is in progress.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearch/issearching"
+      }
+    },
+    "MKLocalSearchCompleter": {
+      "MKLocalSearchCompleterResultType": {
+        "doc": "Options that indicate types of search completions.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter/resulttype"
+      },
+      "MKSearchCompletionFilterType": {
+        "doc": "Constants indicating the types of search completions to return.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter/filtertype-swift.enum"
+      },
+      "addressFilter": {
+        "doc": "A filter that lists which address options to include or exclude in search results.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter/addressfilter"
+      },
+      "delegate": {
+        "doc": "The object that receives the completion results.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter/delegate"
+      },
+      "filterType": {
+        "doc": "The filter options for the search results.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter/filtertype-swift.property"
+      },
+      "pointOfInterestFilter": {
+        "doc": "A filter that lists point of interest categories to include or exclude in the search.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter/pointofinterestfilter"
+      },
+      "queryFragment": {
+        "doc": "The search string that you want completions for.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter/queryfragment"
+      },
+      "region": {
+        "doc": "The region that defines the geographic scope of the search.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter/region"
+      },
+      "regionPriority": {
+        "doc": "A value that indicates the importance of the configured region.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter/regionpriority"
+      },
+      "resultTypes": {
+        "doc": "The types of search completions to include.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter/resulttypes"
+      },
+      "results": {
+        "doc": "The most recently received search completions.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter/results"
+      },
+      "searching": {
+        "doc": "A Boolean value that indicates whether a search operation is in progress.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter/issearching"
+      }
+    },
+    "MKLocalSearchCompletion": {
+      "subtitle": {
+        "doc": "The subtitle (if any) associated with the point of interest.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompletion/subtitle"
+      },
+      "subtitleHighlightRanges": {
+        "doc": "The ranges of characters to highlight in the subtitle string.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompletion/subtitlehighlightranges"
+      },
+      "title": {
+        "doc": "The title string associated with the point of interest.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompletion/title"
+      },
+      "titleHighlightRanges": {
+        "doc": "The ranges of characters to highlight in the title string.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompletion/titlehighlightranges"
+      }
+    },
+    "MKLookAroundSceneRequest": {
+      "cancelled": {
+        "doc": "A Boolean value that indicates if the cancellation of a scene request was successful.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundscenerequest/iscancelled"
+      },
+      "coordinate": {
+        "doc": "A coordinate value that describes the location of the LookAround scene.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundscenerequest/coordinate"
+      },
+      "loading": {
+        "doc": "A Boolean value that indicates whether a scene request is loading.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundscenerequest/isloading"
+      },
+      "mapItem": {
+        "doc": "A map item that describes the location of the LookAround scene.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundscenerequest/mapitem"
+      }
+    },
+    "MKLookAroundSnapshotter": {
+      "MKLookAroundSnapshot": {
+        "doc": "An object that contains a snapshot image.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundsnapshotter/snapshot"
+      },
+      "MKLookAroundSnapshotOptions": {
+        "doc": "Values you use to customize LookAround snapshots.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundsnapshotter/options"
+      },
+      "loading": {
+        "doc": "A Boolean value that indicates whether the snapshot request is loading.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundsnapshotter/isloading"
+      }
+    },
+    "MKLookAroundViewController": {
+      "badgePosition": {
+        "doc": "A value that indicates the badge’s position on the LookAround view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundviewcontroller/badgeposition"
+      },
+      "delegate": {
+        "doc": "An object you provide to receive events related to the user’s interaction with the LookAround view controller.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundviewcontroller/delegate"
+      },
+      "navigationEnabled": {
+        "doc": "A Boolean value that indicates whether the map’s navigation controls are visible.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundviewcontroller/isnavigationenabled"
+      },
+      "pointOfInterestFilter": {
+        "doc": "The filter used to determine the points of interest shown on the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundviewcontroller/pointofinterestfilter"
+      },
+      "scene": {
+        "doc": "The LookAround scene.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundviewcontroller/scene"
+      },
+      "showsRoadLabels": {
+        "doc": "A Boolean value that indicates whether the map display road labels.",
+        "url": "https://developer.apple.com/documentation/mapkit/mklookaroundviewcontroller/showsroadlabels"
+      }
+    },
+    "MKMapCamera": {
+      "altitude": {
+        "doc": "The altitude above the ground, in meters.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapcamera/altitude"
+      },
+      "centerCoordinate": {
+        "doc": "The map coordinate at the center of the map view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapcamera/centercoordinate"
+      },
+      "centerCoordinateDistance": {
+        "doc": "The distance from the center point of the map to the camera, in meters.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapcamera/centercoordinatedistance"
+      },
+      "heading": {
+        "doc": "The heading of the camera (in degrees) relative to true north.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapcamera/heading"
+      },
+      "pitch": {
+        "doc": "The viewing angle of the camera, in degrees.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapcamera/pitch"
+      }
+    },
+    "MKMapConfiguration": {
+      "MKMapElevationStyle": {
+        "doc": "Values that control the map’s elevation style.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapconfiguration/elevationstyle-swift.enum"
+      },
+      "elevationStyle": {
+        "doc": "The value that indicates the map’s elevation style.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapconfiguration/elevationstyle-swift.property"
+      }
+    },
+    "MKMapItem": {
+      "MKMapItemIdentifier": {
+        "doc": "A unique identifier for a place.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/identifier-swift.class"
+      },
+      "address": {
+        "doc": "The address object.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/address"
+      },
+      "addressRepresentations": {
+        "doc": "The address representations object that contains various address representations useful for display purposes.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/addressrepresentations"
+      },
+      "alternateIdentifiers": {
+        "doc": "A set of alternative identifiers for a place.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/alternateidentifiers"
+      },
+      "identifier": {
+        "doc": "A unique identifier for a place.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/identifier-swift.property"
+      },
+      "isCurrentLocation": {
+        "doc": "A Boolean value that indicates whether the map item represents the user’s location.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/iscurrentlocation"
+      },
+      "location": {
+        "doc": "The location object.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/location"
+      },
+      "name": {
+        "doc": "The descriptive name associated with the map item.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/name"
+      },
+      "phoneNumber": {
+        "doc": "The phone number associated with a business at the specified location.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/phonenumber"
+      },
+      "placemark": {
+        "doc": "The placemark object containing the location information.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/placemark"
+      },
+      "pointOfInterestCategory": {
+        "doc": "The point-of-interest category for the map item.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/pointofinterestcategory"
+      },
+      "timeZone": {
+        "doc": "The time zone of the specified location.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/timezone"
+      },
+      "url": {
+        "doc": "The URL associated with the specified location.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitem/url"
+      }
+    },
+    "MKMapItemAnnotation": {
+      "mapItem": {
+        "doc": "The map item represented by this annotation",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemannotation/mapitem"
+      }
+    },
+    "MKMapItemDetailViewController": {
+      "delegate": {
+        "doc": "The map item detail view controller’s delegate.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemdetailviewcontroller/delegate"
+      },
+      "mapItem": {
+        "doc": "The map item to display.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemdetailviewcontroller/mapitem"
+      }
+    },
+    "MKMapItemRequest": {
+      "cancelled": {
+        "doc": "A Boolean value that indicates if the cancellation of the request was successful.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemrequest/iscancelled"
+      },
+      "feature": {
+        "doc": "The map feature.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemrequest/feature"
+      },
+      "featureAnnotation": {
+        "doc": "The feature annotation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemrequest/featureannotation"
+      },
+      "init(feature:)": {
+        "doc": "Creates a new map item request with the specified map feature.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemrequest/init(feature:)"
+      },
+      "init(placeDescriptor:)": {
+        "doc": "Creates a new map item request with the specified place descriptor",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemrequest/init(placedescriptor:)"
+      },
+      "loading": {
+        "doc": "A Boolean value that indicates if the request is loading.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemrequest/isloading"
+      },
+      "mapFeature": {
+        "doc": "The map feature.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemrequest/mapfeature"
+      },
+      "mapFeatureAnnotation": {
+        "doc": "The feature annotation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemrequest/mapfeatureannotation"
+      },
+      "mapItemIdentifier": {
+        "doc": "The map item identifer.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemrequest/mapitemidentifier"
+      },
+      "placeDescriptor": {
+        "doc": "The place descriptor that contains information that’s helpful in uniquely identifying this place.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapitemrequest/placedescriptor"
+      }
+    },
+    "MKMapSnapshotter": {
+      "MKMapSnapshot": {
+        "doc": "An image that a snapshotter object generates.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapsnapshotter/snapshot"
+      },
+      "MKMapSnapshotCompletionHandler": {
+        "doc": "A block that processes the results of a snapshot request.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapsnapshotter/completionhandler"
+      },
+      "MKMapSnapshotOptions": {
+        "doc": "The options the snapshotter initializer uses to create a snapshotter to capture map-based imagery.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapsnapshotter/options"
+      },
+      "loading": {
+        "doc": "A Boolean value that indicates whether the snapshotter is generating an image.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapsnapshotter/isloading"
+      }
+    },
+    "MKMapView": {
+      "MKMapCameraBoundary": {
+        "doc": "A boundary of an area within which the map’s center needs to remain.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/cameraboundary-swift.class"
+      },
+      "MKMapCameraZoomRange": {
+        "doc": "A camera zoom range that limits the distances to which the user can zoom.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/camerazoomrange-swift.class"
+      },
+      "annotationVisibleRect": {
+        "doc": "The visible rectangle where the map is displaying annotation views.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/annotationvisiblerect"
+      },
+      "annotations": {
+        "doc": "The annotations associated with the map view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/annotations"
+      },
+      "camera": {
+        "doc": "The camera to use for determining the appearance of the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/camera"
+      },
+      "cameraBoundary": {
+        "doc": "The boundary of the area within which the map view’s center needs to remain.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/cameraboundary-swift.property"
+      },
+      "cameraZoomRange": {
+        "doc": "The zoom range to apply to the map view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/camerazoomrange-swift.property"
+      },
+      "centerCoordinate": {
+        "doc": "The map coordinate at the center of the map view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/centercoordinate"
+      },
+      "delegate": {
+        "doc": "The receiver’s delegate.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/delegate"
+      },
+      "mapType": {
+        "doc": "The type of data the map view displays.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/maptype"
+      },
+      "overlays": {
+        "doc": "The overlay objects associated with the map view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/overlays"
+      },
+      "pitchButtonVisibility": {
+        "doc": "A value that indicates whether the map’s pitch button is visible.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/pitchbuttonvisibility"
+      },
+      "pitchEnabled": {
+        "doc": "A Boolean value that indicates whether the map uses the camera’s pitch information.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/ispitchenabled"
+      },
+      "pointOfInterestFilter": {
+        "doc": "The filter to use for determining the points of interest that appear on the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/pointofinterestfilter"
+      },
+      "preferredConfiguration": {
+        "doc": "The characteristics of the map view, including the map type and features the map displays.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/preferredconfiguration"
+      },
+      "region": {
+        "doc": "The area the map view displays.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/region"
+      },
+      "rotateEnabled": {
+        "doc": "A Boolean value that indicates whether the map uses the camera’s heading information.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/isrotateenabled"
+      },
+      "scrollEnabled": {
+        "doc": "A Boolean value that determines whether the user may scroll around the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/isscrollenabled"
+      },
+      "selectableMapFeatures": {
+        "doc": "The property that describes which selectable features the map responds to.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/selectablemapfeatures"
+      },
+      "selectedAnnotations": {
+        "doc": "The selected annotations.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/selectedannotations"
+      },
+      "showsBuildings": {
+        "doc": "A Boolean value that indicates whether the map displays extruded building information on supported map types.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/showsbuildings"
+      },
+      "showsCompass": {
+        "doc": "A Boolean value that indicates whether the map displays a compass control.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/showscompass"
+      },
+      "showsPitchControl": {
+        "doc": "A Boolean value that indicates whether the map displays the pitch control.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/showspitchcontrol"
+      },
+      "showsPointsOfInterest": {
+        "doc": "A Boolean value that indicates whether the map displays point-of-interest information.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/showspointsofinterest"
+      },
+      "showsScale": {
+        "doc": "A Boolean value that indicates whether the map shows scale information.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/showsscale"
+      },
+      "showsTraffic": {
+        "doc": "A Boolean value that indicates whether the map displays traffic information.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/showstraffic"
+      },
+      "showsUserLocation": {
+        "doc": "A Boolean value that indicates whether the map tries to display the user’s location.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/showsuserlocation"
+      },
+      "showsUserTrackingButton": {
+        "doc": "A Boolean value that indicates whether the map displays the user tracking button.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/showsusertrackingbutton"
+      },
+      "showsZoomControls": {
+        "doc": "A Boolean value that indicates whether the map displays zoom controls.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/showszoomcontrols"
+      },
+      "userLocation": {
+        "doc": "The annotation object that represents the user’s location.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/userlocation"
+      },
+      "userLocationVisible": {
+        "doc": "A Boolean value that indicates whether the user’s location is visible in the map view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/isuserlocationvisible"
+      },
+      "userTrackingMode": {
+        "doc": "The mode to use for tracking the user’s location.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/usertrackingmode"
+      },
+      "visibleMapRect": {
+        "doc": "The area visible in the map view.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/visiblemaprect"
+      },
+      "zoomEnabled": {
+        "doc": "A Boolean value that determines whether the user may use pinch gestures to zoom in and out of the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmapview/iszoomenabled"
+      }
+    },
+    "MKMarkerAnnotationView": {
+      "animatesWhenAdded": {
+        "doc": "A Boolean that indicates whether the marker animates into position onscreen.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmarkerannotationview/animateswhenadded"
+      },
+      "glyphImage": {
+        "doc": "An image to display in the marker balloon.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmarkerannotationview/glyphimage"
+      },
+      "glyphText": {
+        "doc": "The text to display in the marker balloon.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmarkerannotationview/glyphtext"
+      },
+      "glyphTintColor": {
+        "doc": "The color to apply to the glyph text or image.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmarkerannotationview/glyphtintcolor"
+      },
+      "markerTintColor": {
+        "doc": "The background color of the marker balloon.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmarkerannotationview/markertintcolor"
+      },
+      "selectedGlyphImage": {
+        "doc": "An image to display when the user selects the marker.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmarkerannotationview/selectedglyphimage"
+      },
+      "subtitleVisibility": {
+        "doc": "The visibility of the subtitle text rendered beneath the marker balloon.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmarkerannotationview/subtitlevisibility"
+      },
+      "titleVisibility": {
+        "doc": "The visibility of the title text rendered beneath the marker balloon.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmarkerannotationview/titlevisibility"
+      }
+    },
+    "MKMultiPoint": {
+      "locations(at:)": {
+        "doc": "Translates a point index set into a unit distance along the shape.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmultipoint/locations(at:)"
+      },
+      "pointCount": {
+        "doc": "The number of points associated with the shape.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmultipoint/pointcount"
+      }
+    },
+    "MKMultiPolygon": {
+      "polygons": {
+        "doc": "An array containing the polygons that make up the multipolygon object.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmultipolygon/polygons"
+      }
+    },
+    "MKMultiPolygonRenderer": {
+      "multiPolygon": {
+        "doc": "The multipolygon object that the renderer uses to draw the overlay’s contents.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmultipolygonrenderer/multipolygon"
+      }
+    },
+    "MKMultiPolyline": {
+      "polylines": {
+        "doc": "An array containing the polyline objects that make up the multipolyline object.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmultipolyline/polylines"
+      }
+    },
+    "MKMultiPolylineRenderer": {
+      "multiPolyline": {
+        "doc": "An object that represents multiple polyline shapes, each consisting of one or more connected line segments.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkmultipolylinerenderer/multipolyline"
+      }
+    },
+    "MKOverlayPathRenderer": {
+      "fillColor": {
+        "doc": "The fill color to use for the path.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/fillcolor"
+      },
+      "lineCap": {
+        "doc": "The line cap style to apply to the open ends of the path.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/linecap"
+      },
+      "lineDashPattern": {
+        "doc": "An array of numbers specifying the dash pattern to use for the path.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/linedashpattern"
+      },
+      "lineDashPhase": {
+        "doc": "The offset (in points) at which to start drawing the dash pattern.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/linedashphase"
+      },
+      "lineJoin": {
+        "doc": "The line join style to apply to the corners of the path.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/linejoin"
+      },
+      "lineWidth": {
+        "doc": "The stroke width to use for the path.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/linewidth"
+      },
+      "miterLimit": {
+        "doc": "The limiting value that helps avoid spikes at junctions between connected line segments.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/miterlimit"
+      },
+      "path": {
+        "doc": "The path representing the overlay’s shape.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/path"
+      },
+      "shouldRasterize": {
+        "doc": "A Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/shouldrasterize"
+      },
+      "strokeColor": {
+        "doc": "The stroke color to use for the path.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer/strokecolor"
+      }
+    },
+    "MKOverlayRenderer": {
+      "alpha": {
+        "doc": "The amount of transparency to apply to the overlay.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlayrenderer/alpha"
+      },
+      "blendMode": {
+        "doc": "The blend mode to apply to the overlay.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlayrenderer/blendmode"
+      },
+      "contentScaleFactor": {
+        "doc": "The scale factor for drawing the overlay’s content.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlayrenderer/contentscalefactor"
+      },
+      "overlay": {
+        "doc": "The overlay object containing the data for drawing.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkoverlayrenderer/overlay"
+      }
+    },
+    "MKPinAnnotationView": {
+      "animatesDrop": {
+        "doc": "A Boolean value indicating whether the annotation view is animated onto the screen.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpinannotationview/animatesdrop"
+      },
+      "pinColor": {
+        "doc": "The color of the pin head.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpinannotationview/pincolor"
+      },
+      "pinTintColor": {
+        "doc": "The color of the pin head.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpinannotationview/pintintcolor"
+      }
+    },
+    "MKPitchControl": {
+      "mapView": {
+        "doc": "The map view associated with this control.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpitchcontrol/mapview"
+      }
+    },
+    "MKPlacemark": {
+      "countryCode": {
+        "doc": "The abbreviated country or region name.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkplacemark/countrycode"
+      }
+    },
+    "MKPointAnnotation": {
+      "coordinate": {
+        "doc": "The coordinate point of the annotation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpointannotation/coordinate"
+      }
+    },
+    "MKPointOfInterestFilter": {
+      "filterExcludingAllCategories": {
+        "doc": "A filter that excludes all point of interest categories.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpointofinterestfilter/excludingall"
+      },
+      "filterIncludingAllCategories": {
+        "doc": "A filter that includes all point of interest categories.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpointofinterestfilter/includingall"
+      }
+    },
+    "MKPolygon": {
+      "interiorPolygons": {
+        "doc": "The array of polygons that nest inside the enclosing polygon.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpolygon/interiorpolygons"
+      }
+    },
+    "MKPolygonRenderer": {
+      "polygon": {
+        "doc": "The polygon object that contains the information used to draw the overlay’s contents.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpolygonrenderer/polygon"
+      },
+      "strokeEnd": {
+        "doc": "The unit distance along the polygon where the stroke ends.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpolygonrenderer/strokeend"
+      },
+      "strokeStart": {
+        "doc": "The unit distance along the polygon where the stroke starts.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpolygonrenderer/strokestart"
+      }
+    },
+    "MKPolylineRenderer": {
+      "polyline": {
+        "doc": "The polyline overlay object that contains the information for drawing the overlay.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpolylinerenderer/polyline"
+      },
+      "strokeEnd": {
+        "doc": "The unit distance along the line where the stroke ends.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpolylinerenderer/strokeend"
+      },
+      "strokeStart": {
+        "doc": "The unit distance along the line where the stroke starts.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkpolylinerenderer/strokestart"
+      }
+    },
+    "MKReverseGeocodingRequest": {
+      "cancelled": {
+        "doc": "A Boolean value that indicates whether the current reverse geocoding request is in a cancelled state.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkreversegeocodingrequest/iscancelled"
+      },
+      "loading": {
+        "doc": "A Boolean value that indicates whether the current reverse geocoding request is in a loading state.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkreversegeocodingrequest/isloading"
+      },
+      "location": {
+        "doc": "The location provided to the initializer.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkreversegeocodingrequest/location"
+      },
+      "preferredLocale": {
+        "doc": "A value that indicates the preferred locale for the addresses the request returns, or nil if the framework should use the device locale.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkreversegeocodingrequest/preferredlocale"
+      }
+    },
+    "MKRoute": {
+      "MKRouteStep": {
+        "doc": "One portion of an overall route.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkroute/step"
+      },
+      "advisoryNotices": {
+        "doc": "An array of advisory notice strings for the route.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkroute/advisorynotices"
+      },
+      "distance": {
+        "doc": "The route distance, in meters.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkroute/distance"
+      },
+      "expectedTravelTime": {
+        "doc": "The expected travel time, in seconds.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkroute/expectedtraveltime"
+      },
+      "hasHighways": {
+        "doc": "A Boolean value that indicates whether the route contains highways.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkroute/hashighways"
+      },
+      "hasTolls": {
+        "doc": "A Boolean value that indicates whether the route has tolls.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkroute/hastolls"
+      },
+      "name": {
+        "doc": "The assigned name for the route.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkroute/name"
+      },
+      "polyline": {
+        "doc": "The detailed route geometry.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkroute/polyline"
+      },
+      "steps": {
+        "doc": "The array of steps that create the overall route.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkroute/steps"
+      },
+      "transportType": {
+        "doc": "The overall route transport type.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkroute/transporttype"
+      }
+    },
+    "MKSelectionAccessory": {
+      "MKMapItemDetailSelectionAccessoryPresentationStyle": {
+        "doc": "The type of map item detail accessory presentation to use.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkselectionaccessory/mapitemdetailpresentationstyle"
+      }
+    },
+    "MKShape": {
+      "subtitle": {
+        "doc": "The subtitle of the shape annotation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkshape/subtitle"
+      },
+      "title": {
+        "doc": "The title of the shape annotation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkshape/title"
+      }
+    },
+    "MKStandardMapConfiguration": {
+      "MKStandardMapEmphasisStyle": {
+        "doc": "Values that control how the framework emphasizes map features.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkstandardmapconfiguration/emphasisstyle-swift.enum"
+      },
+      "emphasisStyle": {
+        "doc": "The value that indicates how the framework emphasizes map features.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkstandardmapconfiguration/emphasisstyle-swift.property"
+      },
+      "pointOfInterestFilter": {
+        "doc": "The filter used to determine the points of interest shown on the map.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkstandardmapconfiguration/pointofinterestfilter"
+      },
+      "showsTraffic": {
+        "doc": "A Boolean value that controls whether the map displays traffic conditions.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkstandardmapconfiguration/showstraffic"
+      }
+    },
+    "MKTileOverlay": {
+      "URLTemplate": {
+        "doc": "The template for generating tile image URLs.",
+        "url": "https://developer.apple.com/documentation/mapkit/mktileoverlay/urltemplate"
+      },
+      "canReplaceMapContent": {
+        "doc": "A Boolean value that indicates whether the tile content is fully opaque.",
+        "url": "https://developer.apple.com/documentation/mapkit/mktileoverlay/canreplacemapcontent"
+      },
+      "geometryFlipped": {
+        "doc": "A Boolean value that indicates the orientation of tile indexes along the y-axis.",
+        "url": "https://developer.apple.com/documentation/mapkit/mktileoverlay/isgeometryflipped"
+      },
+      "maximumZ": {
+        "doc": "The maximum zoom level that the tiles of this overlay object support.",
+        "url": "https://developer.apple.com/documentation/mapkit/mktileoverlay/maximumz"
+      },
+      "minimumZ": {
+        "doc": "The minimum zoom level that the tiles of this overlay object support.",
+        "url": "https://developer.apple.com/documentation/mapkit/mktileoverlay/minimumz"
+      },
+      "tileSize": {
+        "doc": "The size (in pixels) of your tile images.",
+        "url": "https://developer.apple.com/documentation/mapkit/mktileoverlay/tilesize"
+      }
+    },
+    "MKUserLocation": {
+      "heading": {
+        "doc": "The heading of the user’s location.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkuserlocation/heading"
+      },
+      "location": {
+        "doc": "The location of the device.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkuserlocation/location"
+      },
+      "subtitle": {
+        "doc": "The subtitle to display for the user’s location annotation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkuserlocation/subtitle"
+      },
+      "title": {
+        "doc": "The title to display for the user’s location annotation.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkuserlocation/title"
+      },
+      "updating": {
+        "doc": "A Boolean value that indicates whether the map view is updating the user’s location.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkuserlocation/isupdating"
+      }
+    },
+    "MKZoomControl": {
+      "mapView": {
+        "doc": "The map view associated with this control.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkzoomcontrol/mapview"
+      }
+    }
+  }
+}

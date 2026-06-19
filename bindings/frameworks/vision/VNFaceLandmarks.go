@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract superclass for containers of face landmark information.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnfacelandmarks
 type VNFaceLandmarks struct {
 	foundation.NSObject

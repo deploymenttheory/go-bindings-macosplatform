@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A URL load request that is independent of protocol or URL scheme.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlrequest
 type NSURLRequest struct {
 	NSObject
@@ -54,7 +56,7 @@ func NSURLRequestFromID(id objc.ID) *NSURLRequest {
 	return o
 }
 
-// @method requestWithURL: @abstract Allocates and initializes an NSURLRequest with the given URL. @discussion Default values are used for cache policy (NSURLRequestUseProtocolCachePolicy) and timeout interval (60 seconds). @param URL The URL for the request. @result A newly-created and autoreleased NSURLRequest instance.
+// Creates and returns a URL request for a specified URL.
 func NSURLRequestRequestWithURL(uRL *NSURL) *NSURLRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLRequest), _nSURLRequestSelRequestWithURL, uRL.Ptr())
 	if _ret != 0 {
@@ -63,7 +65,7 @@ func NSURLRequestRequestWithURL(uRL *NSURL) *NSURLRequest {
 	return NSURLRequestFromID(_ret)
 }
 
-// @method requestWithURL:cachePolicy:timeoutInterval: @abstract Allocates and initializes a NSURLRequest with the given URL and cache policy. @param URL The URL for the request. @param cachePolicy The cache policy for the request. @param timeoutInterval The timeout interval for the request. See the commentary for the <tt>timeoutInterval</tt> for more information on timeout intervals. @result A newly-created and autoreleased NSURLRequest instance.
+// Creates and returns an initialized URL request with specified URL, cache policy, and timeout values.
 func NSURLRequestRequestWithURLCachePolicyTimeoutInterval(uRL *NSURL, cachePolicy NSURLRequestCachePolicy, timeoutInterval float64) *NSURLRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLRequest), _nSURLRequestSelRequestWithURLCachePolicyTimeoutInterval, uRL.Ptr(), cachePolicy, timeoutInterval)
 	if _ret != 0 {
@@ -72,7 +74,7 @@ func NSURLRequestRequestWithURLCachePolicyTimeoutInterval(uRL *NSURL, cachePolic
 	return NSURLRequestFromID(_ret)
 }
 
-// @method initWithURL: @abstract Initializes an NSURLRequest with the given URL. @discussion Default values are used for cache policy (NSURLRequestUseProtocolCachePolicy) and timeout interval (60 seconds). @param URL The URL for the request. @result An initialized NSURLRequest.
+// Creates a URL request for a specified URL.
 func (o *NSURLRequest) InitWithURL(uRL *NSURL) *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelInitWithURL, uRL.Ptr())
 	if _ret != 0 {
@@ -81,7 +83,7 @@ func (o *NSURLRequest) InitWithURL(uRL *NSURL) *NSURLRequest {
 	return NSURLRequestFromID(_ret)
 }
 
-// @method initWithURL: @abstract Initializes an NSURLRequest with the given URL and cache policy. @discussion This is the designated initializer for the NSURLRequest class. @param URL The URL for the request. @param cachePolicy The cache policy for the request. @param timeoutInterval The timeout interval for the request. See the commentary for the <tt>timeoutInterval</tt> for more information on timeout intervals. @result An initialized NSURLRequest.
+// Creates a URL request with the specified URL, cache policy, and timeout values.
 func (o *NSURLRequest) InitWithURLCachePolicyTimeoutInterval(uRL *NSURL, cachePolicy NSURLRequestCachePolicy, timeoutInterval float64) *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelInitWithURLCachePolicyTimeoutInterval, uRL.Ptr(), cachePolicy, timeoutInterval)
 	if _ret != 0 {
@@ -188,7 +190,7 @@ func (o *NSURLRequest) CookiePartitionIdentifier() *NSString {
 	return NSStringFromID(_ret)
 }
 
-// @method valueForHTTPHeaderField: @abstract Returns the value which corresponds to the given header field. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive. @param field the header field name to use for the lookup (case-insensitive). @result the value associated with the given header field, or nil if there is no value associated with the given header field.
+// Returns the value of the specified HTTP header field.
 func (o *NSURLRequest) ValueForHTTPHeaderField(field *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLRequestSelValueForHTTPHeaderField, field.Ptr())
 	if _ret != 0 {

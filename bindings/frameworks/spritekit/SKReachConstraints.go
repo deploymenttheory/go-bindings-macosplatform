@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specification of the degree of freedom when solving inverse kinematics.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skreachconstraints
 type SKReachConstraints struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func SKReachConstraintsFromID(id objc.ID) *SKReachConstraints {
 	return o
 }
 
+// Initializes a new reach constraint object.
 func (o *SKReachConstraints) InitWithLowerAngleLimitUpperAngleLimit(lowerAngleLimit float64, upperAngleLimit float64) *SKReachConstraints {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKReachConstraintsSelInitWithLowerAngleLimitUpperAngleLimit, lowerAngleLimit, upperAngleLimit)
 	if _ret != 0 {

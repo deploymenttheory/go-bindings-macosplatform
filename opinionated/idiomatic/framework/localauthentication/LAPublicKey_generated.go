@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// The public portion of an asymmetric key pair.
+//
 // PublicKey wraps [raw.LAPublicKey] with a fluent Go API.
 type PublicKey struct {
 	inner *raw.LAPublicKey
@@ -39,7 +41,7 @@ func NewPublicKey() *PublicKey {
 	return &PublicKey{inner: raw.LAPublicKeyFromID(_id)}
 }
 
-// @brief Exports public key bytes. @param handler Completion handler with the raw bytes of the public key or an error on failure
+// Exports the data that represents a public key.
 //
 // ExportBytesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *PublicKey) ExportBytesWithCompletion(ctx context.Context) (*foundation.NSData, error) {
@@ -65,7 +67,7 @@ func (x *PublicKey) ExportBytesWithCompletion(ctx context.Context) (*foundation.
 	}
 }
 
-// @brief Encrypts the given data @param data The data to encrypt. @param algorithm A @c SecKeyAlgorithm suitable for encrypting with this key –e.g: @c kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA256AESGCM . @param handler Completion handler with the cipher text or an error on failure.
+// Encrypts the data you supply with a given algorithm.
 //
 // EncryptDataSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
 func (x *PublicKey) EncryptDataSecKeyAlgorithmCompletion(ctx context.Context, data *foundation.NSData, algorithm unsafe.Pointer) (*foundation.NSData, error) {
@@ -91,14 +93,14 @@ func (x *PublicKey) EncryptDataSecKeyAlgorithmCompletion(ctx context.Context, da
 	}
 }
 
-// @brief Checks if the the provided algorithm can be used for encryption with the key. @param algorithm Cryptographic algorithm @return @c YES in case the key supports the provided algorithm with the specified operation.
+// Checks whether the algorithm you supply is valid for encrypting data with the key.
 //
 // CanEncryptUsingSecKeyAlgorithm calls the underlying CanEncryptUsingSecKeyAlgorithm.
 func (x *PublicKey) CanEncryptUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
 	return x.inner.CanEncryptUsingSecKeyAlgorithm(algorithm)
 }
 
-// @brief Verifies a digital signature for the given data. @param signedData The signed data. @param signature The signature of the given data. @param algorithm One of @c SecKeyAlgorithm suitable for verifying signatures with this key –e.g: @c kSecKeyAlgorithmECDSASignatureMessageX962SHA256 @param handler Completion handler with the signature of given data or an error on failure.
+// Verifies a digital signature for the data you supply.
 //
 // VerifyDataSignatureSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
 func (x *PublicKey) VerifyDataSignatureSecKeyAlgorithmCompletion(ctx context.Context, signedData *foundation.NSData, signature *foundation.NSData, algorithm unsafe.Pointer) error {
@@ -118,7 +120,7 @@ func (x *PublicKey) VerifyDataSignatureSecKeyAlgorithmCompletion(ctx context.Con
 	}
 }
 
-// @brief Checks if the the provided algorithm can be used for verifying signatures with the key. @param algorithm Cryptographic algorithm @return @c YES in case the key supports the provided algorithm with the specified operation.
+// Checks whether the algorithm you supply is valid for verifying signatures with the key.
 //
 // CanVerifyUsingSecKeyAlgorithm calls the underlying CanVerifyUsingSecKeyAlgorithm.
 func (x *PublicKey) CanVerifyUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {

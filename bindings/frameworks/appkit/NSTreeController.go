@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bindings-compatible controller that manages a tree of objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstreecontroller
 type NSTreeController struct {
 	NSObjectController
@@ -69,66 +71,81 @@ func NSTreeControllerFromID(id objc.ID) *NSTreeController {
 	return o
 }
 
+// Use this method to trigger reordering of the tree controller’s content.
 func (o *NSTreeController) RearrangeObjects() {
 	o.Ptr().Send(_nSTreeControllerSelRearrangeObjects)
 }
 
+// Adds a child object to the currently selected item.
 func (o *NSTreeController) AddChild(sender objc.ID) {
 	o.Ptr().Send(_nSTreeControllerSelAddChild, sender)
 }
 
+// Creates a new object of the class specified by objectClass and inserts it into the tree controller’s content.
 func (o *NSTreeController) Insert(sender objc.ID) {
 	o.Ptr().Send(_nSTreeControllerSelInsert, sender)
 }
 
+// Creates a new object of the class specified by objectClass and inserts it into the tree controller’s content as a child of the current selection.
 func (o *NSTreeController) InsertChild(sender objc.ID) {
 	o.Ptr().Send(_nSTreeControllerSelInsertChild, sender)
 }
 
+// Inserts object into the tree controller’s arranged objects array at the location specified by indexPath, and adds it to the tree controller’s content.
 func (o *NSTreeController) InsertObjectAtArrangedObjectIndexPath(object objc.ID, indexPath *foundation.NSIndexPath) {
 	o.Ptr().Send(_nSTreeControllerSelInsertObjectAtArrangedObjectIndexPath, object, indexPath.Ptr())
 }
 
+// Inserts objects into the tree controller’s arranged objects array at the locations specified in indexPaths, and adds them to the tree controller’s content.
 func (o *NSTreeController) InsertObjectsAtArrangedObjectIndexPaths(objects *foundation.NSArray[objc.ID], indexPaths *foundation.NSArray[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSTreeControllerSelInsertObjectsAtArrangedObjectIndexPaths, objects, indexPaths)
+	o.Ptr().Send(_nSTreeControllerSelInsertObjectsAtArrangedObjectIndexPaths, objects.Ptr(), indexPaths.Ptr())
 }
 
+// Removes the object at the specified indexPath in the tree controller’s arranged objects from the tree controller’s content.
 func (o *NSTreeController) RemoveObjectAtArrangedObjectIndexPath(indexPath *foundation.NSIndexPath) {
 	o.Ptr().Send(_nSTreeControllerSelRemoveObjectAtArrangedObjectIndexPath, indexPath.Ptr())
 }
 
+// Removes the objects at the specified indexPaths in the tree controller’s arranged objects from the tree controller’s content.
 func (o *NSTreeController) RemoveObjectsAtArrangedObjectIndexPaths(indexPaths *foundation.NSArray[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSTreeControllerSelRemoveObjectsAtArrangedObjectIndexPaths, indexPaths)
+	o.Ptr().Send(_nSTreeControllerSelRemoveObjectsAtArrangedObjectIndexPaths, indexPaths.Ptr())
 }
 
+// Sets the tree controller’s current selection to the specified index paths.
 func (o *NSTreeController) SetSelectionIndexPaths(indexPaths *foundation.NSArray[*foundation.NSIndexPath]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTreeControllerSelSetSelectionIndexPaths, indexPaths)
+	_ret := objc.Send[bool](o.Ptr(), _nSTreeControllerSelSetSelectionIndexPaths, indexPaths.Ptr())
 	return _ret
 }
 
+// Sets the tree controller’s current selection.
 func (o *NSTreeController) SetSelectionIndexPath(indexPath *foundation.NSIndexPath) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTreeControllerSelSetSelectionIndexPath, indexPath.Ptr())
 	return _ret
 }
 
+// Adds the objects at the specified indexPaths in the tree controller’s content to the current selection.
 func (o *NSTreeController) AddSelectionIndexPaths(indexPaths *foundation.NSArray[*foundation.NSIndexPath]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTreeControllerSelAddSelectionIndexPaths, indexPaths)
+	_ret := objc.Send[bool](o.Ptr(), _nSTreeControllerSelAddSelectionIndexPaths, indexPaths.Ptr())
 	return _ret
 }
 
+// Removes the objects at the specified index paths from the tree controller’s current selection.
 func (o *NSTreeController) RemoveSelectionIndexPaths(indexPaths *foundation.NSArray[*foundation.NSIndexPath]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSTreeControllerSelRemoveSelectionIndexPaths, indexPaths)
+	_ret := objc.Send[bool](o.Ptr(), _nSTreeControllerSelRemoveSelectionIndexPaths, indexPaths.Ptr())
 	return _ret
 }
 
+// Moves the specified tree node to the new index path.
 func (o *NSTreeController) MoveNodeToIndexPath(node *NSTreeNode, indexPath *foundation.NSIndexPath) {
 	o.Ptr().Send(_nSTreeControllerSelMoveNodeToIndexPath, node.Ptr(), indexPath.Ptr())
 }
 
+// Moves the specified tree nodes to the new index path.
 func (o *NSTreeController) MoveNodesToIndexPath(nodes *foundation.NSArray[*NSTreeNode], startingIndexPath *foundation.NSIndexPath) {
 	o.Ptr().Send(_nSTreeControllerSelMoveNodesToIndexPath, nodes.Ptr(), startingIndexPath.Ptr())
 }
 
+// Returns the key path used to find the children in the specified tree node.
 func (o *NSTreeController) ChildrenKeyPathForNode(node *NSTreeNode) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeControllerSelChildrenKeyPathForNode, node.Ptr())
 	if _ret != 0 {
@@ -137,6 +154,7 @@ func (o *NSTreeController) ChildrenKeyPathForNode(node *NSTreeNode) *foundation.
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns the key path that provides the number of children for a specified node.
 func (o *NSTreeController) CountKeyPathForNode(node *NSTreeNode) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeControllerSelCountKeyPathForNode, node.Ptr())
 	if _ret != 0 {
@@ -145,6 +163,7 @@ func (o *NSTreeController) CountKeyPathForNode(node *NSTreeNode) *foundation.NSS
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns the key path that specifies whether the node is a leaf node.
 func (o *NSTreeController) LeafKeyPathForNode(node *NSTreeNode) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeControllerSelLeafKeyPathForNode, node.Ptr())
 	if _ret != 0 {
@@ -198,12 +217,15 @@ func (o *NSTreeController) SetLeafKeyPath(leafKeyPath *foundation.NSString) {
 }
 
 func (o *NSTreeController) SortDescriptors() *foundation.NSArray[*foundation.NSSortDescriptor] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSSortDescriptor]](o.Ptr(), _nSTreeControllerSelSortDescriptors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeControllerSelSortDescriptors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSSortDescriptor](_ret)
 }
 
 func (o *NSTreeController) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
-	o.Ptr().Send(_nSTreeControllerSelSetSortDescriptors, sortDescriptors)
+	o.Ptr().Send(_nSTreeControllerSelSetSortDescriptors, sortDescriptors.Ptr())
 }
 
 func (o *NSTreeController) CanInsert() bool {
@@ -258,8 +280,11 @@ func (o *NSTreeController) SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleV
 }
 
 func (o *NSTreeController) SelectionIndexPaths() *foundation.NSArray[*foundation.NSIndexPath] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSIndexPath]](o.Ptr(), _nSTreeControllerSelSelectionIndexPaths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTreeControllerSelSelectionIndexPaths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSIndexPath](_ret)
 }
 
 func (o *NSTreeController) SelectionIndexPath() *foundation.NSIndexPath {

@@ -36,7 +36,7 @@ func NewMTRAttributeValueWaiter() *MTRAttributeValueWaiter {
 	return &MTRAttributeValueWaiter{inner: raw.MTRAttributeValueWaiterFromID(_id)}
 }
 
-// Cancel the wait for the set of attribute path/value pairs represented by this MTRAttributeValueWaiter.  If the completion has not been called yet, it will becalled with MTRErrorCodeCancelled.
+// Cancel the wait for the set of attribute path/value pairs represented by this MTRAttributeValueWaiter. If the completion has not been called yet, it will becalled with MTRErrorCodeCancelled.
 //
 // Cancel calls the underlying Cancel.
 func (x *MTRAttributeValueWaiter) Cancel() {

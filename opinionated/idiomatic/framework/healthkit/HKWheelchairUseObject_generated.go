@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// This class acts as a wrapper for the wheelchair use enumeration.
+//
 // WheelchairUseObject wraps [raw.HKWheelchairUseObject] with a fluent Go API.
 type WheelchairUseObject struct {
 	inner *raw.HKWheelchairUseObject

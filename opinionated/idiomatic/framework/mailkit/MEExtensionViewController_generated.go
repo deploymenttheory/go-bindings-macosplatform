@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages a view for compose session and message security handlers.
+//
 // ExtensionViewController wraps [raw.MEExtensionViewController] with a fluent Go API.
 type ExtensionViewController struct {
 	inner *raw.MEExtensionViewController

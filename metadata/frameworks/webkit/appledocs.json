@@ -1,0 +1,3269 @@
+{
+  "schema_version": 1,
+  "framework": "WebKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "DOMAbstractView": {
+      "url": "https://developer.apple.com/documentation/webkit/domabstractview"
+    },
+    "DOMAttr": {
+      "url": "https://developer.apple.com/documentation/webkit/domattr"
+    },
+    "DOMBlob": {
+      "url": "https://developer.apple.com/documentation/webkit/domblob"
+    },
+    "DOMCDATASection": {
+      "url": "https://developer.apple.com/documentation/webkit/domcdatasection"
+    },
+    "DOMCSSCharsetRule": {
+      "url": "https://developer.apple.com/documentation/webkit/domcsscharsetrule"
+    },
+    "DOMCSSFontFaceRule": {
+      "url": "https://developer.apple.com/documentation/webkit/domcssfontfacerule"
+    },
+    "DOMCSSImportRule": {
+      "url": "https://developer.apple.com/documentation/webkit/domcssimportrule"
+    },
+    "DOMCSSMediaRule": {
+      "url": "https://developer.apple.com/documentation/webkit/domcssmediarule"
+    },
+    "DOMCSSPageRule": {
+      "url": "https://developer.apple.com/documentation/webkit/domcsspagerule"
+    },
+    "DOMCSSPrimitiveValue": {
+      "url": "https://developer.apple.com/documentation/webkit/domcssprimitivevalue"
+    },
+    "DOMCSSRule": {
+      "url": "https://developer.apple.com/documentation/webkit/domcssrule"
+    },
+    "DOMCSSRuleList": {
+      "url": "https://developer.apple.com/documentation/webkit/domcssrulelist"
+    },
+    "DOMCSSStyleDeclaration": {
+      "url": "https://developer.apple.com/documentation/webkit/domcssstyledeclaration"
+    },
+    "DOMCSSStyleRule": {
+      "url": "https://developer.apple.com/documentation/webkit/domcssstylerule"
+    },
+    "DOMCSSStyleSheet": {
+      "url": "https://developer.apple.com/documentation/webkit/domcssstylesheet"
+    },
+    "DOMCSSUnknownRule": {
+      "url": "https://developer.apple.com/documentation/webkit/domcssunknownrule"
+    },
+    "DOMCSSValue": {
+      "url": "https://developer.apple.com/documentation/webkit/domcssvalue"
+    },
+    "DOMCSSValueList": {
+      "url": "https://developer.apple.com/documentation/webkit/domcssvaluelist"
+    },
+    "DOMCharacterData": {
+      "url": "https://developer.apple.com/documentation/webkit/domcharacterdata"
+    },
+    "DOMComment": {
+      "url": "https://developer.apple.com/documentation/webkit/domcomment"
+    },
+    "DOMCounter": {
+      "url": "https://developer.apple.com/documentation/webkit/domcounter"
+    },
+    "DOMDocument": {
+      "url": "https://developer.apple.com/documentation/webkit/domdocument"
+    },
+    "DOMDocumentFragment": {
+      "url": "https://developer.apple.com/documentation/webkit/domdocumentfragment"
+    },
+    "DOMDocumentType": {
+      "url": "https://developer.apple.com/documentation/webkit/domdocumenttype"
+    },
+    "DOMElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domelement"
+    },
+    "DOMEntity": {
+      "url": "https://developer.apple.com/documentation/webkit/domentity"
+    },
+    "DOMEntityReference": {
+      "url": "https://developer.apple.com/documentation/webkit/domentityreference"
+    },
+    "DOMEvent": {
+      "url": "https://developer.apple.com/documentation/webkit/domevent"
+    },
+    "DOMFile": {
+      "url": "https://developer.apple.com/documentation/webkit/domfile"
+    },
+    "DOMFileList": {
+      "url": "https://developer.apple.com/documentation/webkit/domfilelist"
+    },
+    "DOMHTMLAnchorElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlanchorelement"
+    },
+    "DOMHTMLAppletElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlappletelement"
+    },
+    "DOMHTMLAreaElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlareaelement"
+    },
+    "DOMHTMLBRElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlbrelement"
+    },
+    "DOMHTMLBaseElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlbaseelement"
+    },
+    "DOMHTMLBaseFontElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlbasefontelement"
+    },
+    "DOMHTMLBodyElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlbodyelement"
+    },
+    "DOMHTMLButtonElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlbuttonelement"
+    },
+    "DOMHTMLCollection": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlcollection"
+    },
+    "DOMHTMLDListElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmldlistelement"
+    },
+    "DOMHTMLDirectoryElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmldirectoryelement"
+    },
+    "DOMHTMLDivElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmldivelement"
+    },
+    "DOMHTMLDocument": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmldocument"
+    },
+    "DOMHTMLElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlelement"
+    },
+    "DOMHTMLEmbedElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlembedelement"
+    },
+    "DOMHTMLFieldSetElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlfieldsetelement"
+    },
+    "DOMHTMLFontElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlfontelement"
+    },
+    "DOMHTMLFormElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlformelement"
+    },
+    "DOMHTMLFrameElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlframeelement"
+    },
+    "DOMHTMLFrameSetElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlframesetelement"
+    },
+    "DOMHTMLHRElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlhrelement"
+    },
+    "DOMHTMLHeadElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlheadelement"
+    },
+    "DOMHTMLHeadingElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlheadingelement"
+    },
+    "DOMHTMLHtmlElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlhtmlelement"
+    },
+    "DOMHTMLIFrameElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmliframeelement"
+    },
+    "DOMHTMLImageElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlimageelement"
+    },
+    "DOMHTMLInputElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlinputelement"
+    },
+    "DOMHTMLLIElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmllielement"
+    },
+    "DOMHTMLLabelElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmllabelelement"
+    },
+    "DOMHTMLLegendElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmllegendelement"
+    },
+    "DOMHTMLLinkElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmllinkelement"
+    },
+    "DOMHTMLMapElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlmapelement"
+    },
+    "DOMHTMLMarqueeElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlmarqueeelement"
+    },
+    "DOMHTMLMenuElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlmenuelement"
+    },
+    "DOMHTMLMetaElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlmetaelement"
+    },
+    "DOMHTMLModElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlmodelement"
+    },
+    "DOMHTMLOListElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlolistelement"
+    },
+    "DOMHTMLObjectElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlobjectelement"
+    },
+    "DOMHTMLOptGroupElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmloptgroupelement"
+    },
+    "DOMHTMLOptionElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmloptionelement"
+    },
+    "DOMHTMLOptionsCollection": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmloptionscollection"
+    },
+    "DOMHTMLParagraphElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlparagraphelement"
+    },
+    "DOMHTMLParamElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlparamelement"
+    },
+    "DOMHTMLPreElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlpreelement"
+    },
+    "DOMHTMLQuoteElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlquoteelement"
+    },
+    "DOMHTMLScriptElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlscriptelement"
+    },
+    "DOMHTMLSelectElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlselectelement"
+    },
+    "DOMHTMLStyleElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlstyleelement"
+    },
+    "DOMHTMLTableCaptionElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmltablecaptionelement"
+    },
+    "DOMHTMLTableCellElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmltablecellelement"
+    },
+    "DOMHTMLTableColElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmltablecolelement"
+    },
+    "DOMHTMLTableElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmltableelement"
+    },
+    "DOMHTMLTableRowElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmltablerowelement"
+    },
+    "DOMHTMLTableSectionElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmltablesectionelement"
+    },
+    "DOMHTMLTextAreaElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmltextareaelement"
+    },
+    "DOMHTMLTitleElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmltitleelement"
+    },
+    "DOMHTMLUListElement": {
+      "url": "https://developer.apple.com/documentation/webkit/domhtmlulistelement"
+    },
+    "DOMImplementation": {
+      "url": "https://developer.apple.com/documentation/webkit/domimplementation"
+    },
+    "DOMKeyboardEvent": {
+      "url": "https://developer.apple.com/documentation/webkit/domkeyboardevent"
+    },
+    "DOMMediaList": {
+      "url": "https://developer.apple.com/documentation/webkit/dommedialist"
+    },
+    "DOMMouseEvent": {
+      "url": "https://developer.apple.com/documentation/webkit/dommouseevent"
+    },
+    "DOMMutationEvent": {
+      "url": "https://developer.apple.com/documentation/webkit/dommutationevent"
+    },
+    "DOMNamedNodeMap": {
+      "url": "https://developer.apple.com/documentation/webkit/domnamednodemap"
+    },
+    "DOMNode": {
+      "url": "https://developer.apple.com/documentation/webkit/domnode"
+    },
+    "DOMNodeIterator": {
+      "url": "https://developer.apple.com/documentation/webkit/domnodeiterator"
+    },
+    "DOMNodeList": {
+      "url": "https://developer.apple.com/documentation/webkit/domnodelist"
+    },
+    "DOMObject": {
+      "url": "https://developer.apple.com/documentation/webkit/domobject"
+    },
+    "DOMOverflowEvent": {
+      "url": "https://developer.apple.com/documentation/webkit/domoverflowevent"
+    },
+    "DOMProcessingInstruction": {
+      "url": "https://developer.apple.com/documentation/webkit/domprocessinginstruction"
+    },
+    "DOMProgressEvent": {
+      "url": "https://developer.apple.com/documentation/webkit/domprogressevent"
+    },
+    "DOMRGBColor": {
+      "url": "https://developer.apple.com/documentation/webkit/domrgbcolor"
+    },
+    "DOMRange": {
+      "url": "https://developer.apple.com/documentation/webkit/domrange"
+    },
+    "DOMRect": {
+      "url": "https://developer.apple.com/documentation/webkit/domrect"
+    },
+    "DOMStyleSheet": {
+      "url": "https://developer.apple.com/documentation/webkit/domstylesheet"
+    },
+    "DOMStyleSheetList": {
+      "url": "https://developer.apple.com/documentation/webkit/domstylesheetlist"
+    },
+    "DOMText": {
+      "url": "https://developer.apple.com/documentation/webkit/domtext"
+    },
+    "DOMTreeWalker": {
+      "url": "https://developer.apple.com/documentation/webkit/domtreewalker"
+    },
+    "DOMUIEvent": {
+      "url": "https://developer.apple.com/documentation/webkit/domuievent"
+    },
+    "DOMWheelEvent": {
+      "url": "https://developer.apple.com/documentation/webkit/domwheelevent"
+    },
+    "DOMXPathExpression": {
+      "url": "https://developer.apple.com/documentation/webkit/domxpathexpression"
+    },
+    "DOMXPathResult": {
+      "url": "https://developer.apple.com/documentation/webkit/domxpathresult"
+    },
+    "WKBackForwardList": {
+      "doc": "An object that manages the list of previously loaded webpages, which the web view uses for forward and backward navigation.",
+      "url": "https://developer.apple.com/documentation/webkit/wkbackforwardlist"
+    },
+    "WKBackForwardListItem": {
+      "doc": "A representation of a webpage that the web view previously visited.",
+      "url": "https://developer.apple.com/documentation/webkit/wkbackforwardlistitem"
+    },
+    "WKContentRuleList": {
+      "doc": "A compiled list of rules to apply to web content.",
+      "url": "https://developer.apple.com/documentation/webkit/wkcontentrulelist"
+    },
+    "WKContentRuleListStore": {
+      "doc": "An object that contains the rules for how to load and filter content in the web view.",
+      "url": "https://developer.apple.com/documentation/webkit/wkcontentruleliststore"
+    },
+    "WKContentWorld": {
+      "doc": "An object that defines a scope of execution for JavaScript code, and which you use to prevent conflicts between different scripts.",
+      "url": "https://developer.apple.com/documentation/webkit/wkcontentworld"
+    },
+    "WKDownload": {
+      "doc": "An object that represents the download of a web resource.",
+      "url": "https://developer.apple.com/documentation/webkit/wkdownload"
+    },
+    "WKFindConfiguration": {
+      "doc": "The configuration parameters to use when searching the contents of the web view.",
+      "url": "https://developer.apple.com/documentation/webkit/wkfindconfiguration"
+    },
+    "WKFindResult": {
+      "doc": "An object that contains the results of searching the web view’s contents.",
+      "url": "https://developer.apple.com/documentation/webkit/wkfindresult"
+    },
+    "WKFrameInfo": {
+      "doc": "An object that contains information about a frame on a webpage.",
+      "url": "https://developer.apple.com/documentation/webkit/wkframeinfo"
+    },
+    "WKHTTPCookieStore": {
+      "doc": "An object that manages the HTTP cookies associated with a particular web view.",
+      "url": "https://developer.apple.com/documentation/webkit/wkhttpcookiestore"
+    },
+    "WKNavigation": {
+      "doc": "An object that tracks the loading progress of a webpage.",
+      "url": "https://developer.apple.com/documentation/webkit/wknavigation"
+    },
+    "WKNavigationAction": {
+      "doc": "An object that contains information about an action that causes navigation to occur.",
+      "url": "https://developer.apple.com/documentation/webkit/wknavigationaction"
+    },
+    "WKNavigationResponse": {
+      "doc": "An object that contains the response to a navigation request, and which you use to make navigation-related policy decisions.",
+      "url": "https://developer.apple.com/documentation/webkit/wknavigationresponse"
+    },
+    "WKOpenPanelParameters": {
+      "doc": "The configuration details of a file upload control in your web content.",
+      "url": "https://developer.apple.com/documentation/webkit/wkopenpanelparameters"
+    },
+    "WKPDFConfiguration": {
+      "doc": "The configuration data to use when generating a PDF representation of a web view’s contents.",
+      "url": "https://developer.apple.com/documentation/webkit/wkpdfconfiguration"
+    },
+    "WKPreferences": {
+      "doc": "An object that encapsulates the standard behaviors to apply to websites.",
+      "url": "https://developer.apple.com/documentation/webkit/wkpreferences"
+    },
+    "WKProcessPool": {
+      "doc": "An opaque token that you use to run multiple web views in a single process.",
+      "url": "https://developer.apple.com/documentation/webkit/wkprocesspool"
+    },
+    "WKScriptMessage": {
+      "doc": "An object that encapsulates a message sent by JavaScript code from a webpage.",
+      "url": "https://developer.apple.com/documentation/webkit/wkscriptmessage"
+    },
+    "WKSecurityOrigin": {
+      "doc": "An object that identifies the origin of a particular resource.",
+      "url": "https://developer.apple.com/documentation/webkit/wksecurityorigin"
+    },
+    "WKSnapshotConfiguration": {
+      "doc": "The configuration data to use when generating an image from a web view’s contents.",
+      "url": "https://developer.apple.com/documentation/webkit/wksnapshotconfiguration"
+    },
+    "WKUserContentController": {
+      "doc": "An object for managing interactions between JavaScript code and your web view, and for filtering content in your web view.",
+      "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller"
+    },
+    "WKUserScript": {
+      "doc": "A script that the web view injects into a webpage.",
+      "url": "https://developer.apple.com/documentation/webkit/wkuserscript"
+    },
+    "WKWebExtension": {
+      "doc": "An object that encapsulates a web extension’s resources that the manifest file defines.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebextension"
+    },
+    "WKWebExtensionContext": {
+      "doc": "An object that represents the runtime environment for a web extension.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext"
+    },
+    "WKWebExtensionController": {
+      "doc": "An object that manages a set of loaded extension contexts.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller"
+    },
+    "WKWebView": {
+      "doc": "An object that displays interactive web content, such as for an in-app browser.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebview"
+    },
+    "WKWebViewConfiguration": {
+      "doc": "A collection of properties that you use to initialize a web view.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration"
+    },
+    "WKWebpagePreferences": {
+      "doc": "An object that specifies the behaviors to use when loading and rendering page content.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebpagepreferences"
+    },
+    "WKWebsiteDataRecord": {
+      "doc": "A record of the data that a particular website stores persistently.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatarecord"
+    },
+    "WKWebsiteDataStore": {
+      "doc": "An object that manages cookies, disk and memory caches, and other types of data for a web view.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatastore"
+    },
+    "WKWindowFeatures": {
+      "doc": "Display-related attributes that a webpage requests for its window.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwindowfeatures"
+    },
+    "WebArchive": {
+      "doc": "A WebArchive object represents a webpage that can be archived—for example, archived on disk or on the pasteboard. A WebArchive object contains the main resource, as well as the subresources and subframes of the main resource. The main resource can be an entire webpage, a portion of a webpage, or some other kind of data such as an image. Use this class to archive webpages, or place a portion of a webpage on the pasteboard, or to represent rich web content in any application.",
+      "url": "https://developer.apple.com/documentation/webkit/webarchive"
+    },
+    "WebBackForwardList": {
+      "doc": "A WebBackForwardList object maintains a list of visited pages used to go back and forward to the most recent page. A WebBackForwardList object maintains only the list data—it does not perform actual page loads (in other words, it does not make any client requests). If you need to perform a page load, see the loadRequest: method in WebFrame to find out how to do this.",
+      "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist"
+    },
+    "WebDataSource": {
+      "doc": "WebDataSource encapsulates the web content to be displayed in a web frame view. A WebDataSource object has a representation object, conforming to the WebDocumentRepresentation protocol, that holds the data in an appropriate format depending on the MIME type. You can extend WebKit to support new MIME types by implementing your own view and representation classes, and specifying the mapping between them using the registerViewClass:representationClass:forMIMEType: WebView class method.",
+      "url": "https://developer.apple.com/documentation/webkit/webdatasource"
+    },
+    "WebDownload": {
+      "doc": "WebDownload objects initiate download client requests on behalf of a delegate. A download request involves loading the data, decoding it (if necessary), and saving it to a file. Instances of this class behave similar to NSURLDownload except delegates of WebDownload may implement an additional delegate method. The method allows the delegate to specify the window to be used for authentication sheets. If the delegate does not implement this method, the WebDownload object will prompt the user for authentication using the standard WebKit authentication panel, as either a sheet or window. There are no additional methods defined in this class. See WebDownloadDelegate for the delegate method.",
+      "url": "https://developer.apple.com/documentation/webkit/webdownload"
+    },
+    "WebFrame": {
+      "doc": "A WebFrame object encapsulates the data displayed in a WebFrameView object. There is one WebFrame object per frame displayed in a WebView. An entire webpage is represented by a hierarchy of WebFrame objects in which the root object is called the main frame.",
+      "url": "https://developer.apple.com/documentation/webkit/webframe"
+    },
+    "WebFrameView": {
+      "doc": "WebFrameView objects and their subviews display the web content contained in a frame. You never create instances of WebFrameView directly—WebView objects create and manage a hierarchy of WebFrameView objects, one for each frame. WebFrameView objects use a scroll view whose document view conforms to the WebDocumentView protocol.",
+      "url": "https://developer.apple.com/documentation/webkit/webframeview"
+    },
+    "WebHistory": {
+      "doc": "WebHistory objects are used to maintain the pages visited by users. Visited pages are represented by WebHistoryItem objects. You add and remove history items using the addItems: and removeItems: methods. These methods post appropriate notifications when items are added or removed so you can update the display. WebHistory organizes the WebHistoryItem objects by the day they were visited, ordered from most recent to oldest. You can request all the days that contain history items using the orderedLastVisitedDays method or request the items visited on a particular day using the orderedItemsLastVisitedOnDay: method. WebHistory objects can be loaded and saved by specifying a file URL (see loadFromURL:error:).",
+      "url": "https://developer.apple.com/documentation/webkit/webhistory"
+    },
+    "WebHistoryItem": {
+      "doc": "WebHistoryItem objects encapsulate information about visiting a page so that users can return to that page. WebHistory and WebBackForwardList objects manage lists of WebHistoryItem objects. WebHistoryItem objects are created and added to these lists automatically when loading pages, so you do not need to create WebHistoryItem objects directly.",
+      "url": "https://developer.apple.com/documentation/webkit/webhistoryitem"
+    },
+    "WebPreferences": {
+      "doc": "WebPreferences encapsulates the preferences you can change per WebView object. These preferences include font, text encoding, and image settings. Normally a WebView object uses the standard preferences returned by the standardPreferences class method. However, you can modify the preferences for individual WebView instances too. Use the preferencesIdentifier WebView method to change a WebView object’s preferences, or to share preferences between WebView objects. Use the autosaves method to specify if the preferences object should be automatically saved to the user defaults database.",
+      "url": "https://developer.apple.com/documentation/webkit/webpreferences"
+    },
+    "WebResource": {
+      "doc": "A WebResource object represents a downloaded URL. It encapsulates the data of the download as well as other resource properties such as the URL, MIME type, and frame name.",
+      "url": "https://developer.apple.com/documentation/webkit/webresource"
+    },
+    "WebScriptObject": {
+      "doc": "A WebScriptObject object is an Objective-C wrapper for a scripting object passed to your application from the scripting environment.",
+      "url": "https://developer.apple.com/documentation/webkit/webscriptobject"
+    },
+    "WebUndefined": {
+      "doc": "WebUndefined objects are simply used to represent the JavaScript “undefined” value in methods when bridging between JavaScript and Objective-C. For example, if you invoke a JavaScript function that returns the JavaScript “undefined” value, then a WebUndefined object is returned to the Objective-C calling context.",
+      "url": "https://developer.apple.com/documentation/webkit/webundefined"
+    }
+  },
+  "protocols": {
+    "DOMEventListener": {
+      "url": "https://developer.apple.com/documentation/webkit/domeventlistener"
+    },
+    "DOMEventTarget": {
+      "url": "https://developer.apple.com/documentation/webkit/domeventtarget"
+    },
+    "DOMNodeFilter": {
+      "url": "https://developer.apple.com/documentation/webkit/domnodefilter"
+    },
+    "DOMXPathNSResolver": {
+      "url": "https://developer.apple.com/documentation/webkit/domxpathnsresolver"
+    },
+    "WKDownloadDelegate": {
+      "doc": "A protocol you implement to track download progress and handle redirects, authentication challenges, and failures.",
+      "url": "https://developer.apple.com/documentation/webkit/wkdownloaddelegate"
+    },
+    "WKHTTPCookieStoreObserver": {
+      "doc": "The methods to adopt in an object that monitors changes to a webpage’s cookies.",
+      "url": "https://developer.apple.com/documentation/webkit/wkhttpcookiestoreobserver"
+    },
+    "WKNavigationDelegate": {
+      "doc": "Methods for accepting or rejecting navigation changes, and for tracking the progress of navigation requests.",
+      "url": "https://developer.apple.com/documentation/webkit/wknavigationdelegate"
+    },
+    "WKScriptMessageHandler": {
+      "doc": "An interface for receiving messages from JavaScript code running in a webpage.",
+      "url": "https://developer.apple.com/documentation/webkit/wkscriptmessagehandler"
+    },
+    "WKScriptMessageHandlerWithReply": {
+      "doc": "An interface for responding to messages from JavaScript code running in a webpage.",
+      "url": "https://developer.apple.com/documentation/webkit/wkscriptmessagehandlerwithreply"
+    },
+    "WKUIDelegate": {
+      "doc": "The methods for presenting native user interface elements on behalf of a webpage.",
+      "url": "https://developer.apple.com/documentation/webkit/wkuidelegate"
+    },
+    "WKURLSchemeHandler": {
+      "doc": "A protocol for loading resources with URL schemes that WebKit doesn’t handle.",
+      "url": "https://developer.apple.com/documentation/webkit/wkurlschemehandler"
+    },
+    "WKURLSchemeTask": {
+      "doc": "An interface that WebKit uses to request custom resources from your app.",
+      "url": "https://developer.apple.com/documentation/webkit/wkurlschemetask"
+    },
+    "WKWebExtensionControllerDelegate": {
+      "doc": "A group of methods you use to customize web extension interactions.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontrollerdelegate"
+    },
+    "WKWebExtensionTab": {
+      "doc": "A protocol with methods that represent a tab to web extensions.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebextensiontab"
+    },
+    "WKWebExtensionWindow": {
+      "doc": "A protocol with methods that represent a window to web extensions.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebextensionwindow"
+    },
+    "WebDocumentRepresentation": {
+      "doc": "This protocol is adopted by document representation classes that handle specific MIME types. You can implement your own document view classes and document representation classes to render data for specific MIME types, and register those classes using the WebFrame registerViewClass:representationClass:forMIMEType: method.",
+      "url": "https://developer.apple.com/documentation/webkit/webdocumentrepresentation"
+    },
+    "WebDocumentSearching": {
+      "doc": "WebDocumentSearching is an optional protocol for document view objects that support searching. Classes that adopt this protocol should also adopt WebDocumentView and inherit from NSView.",
+      "url": "https://developer.apple.com/documentation/webkit/webdocumentsearching"
+    },
+    "WebDocumentText": {
+      "doc": "WebDocumentText is an optional protocol for document view objects that display text. This protocol defines methods for accessing document content as strings, and methods for text selection. Classes that adopt this protocol should also adopt WebDocumentView and inherit from NSView.",
+      "url": "https://developer.apple.com/documentation/webkit/webdocumenttext"
+    },
+    "WebDocumentView": {
+      "doc": "This protocol is adopted by the document view of a WebFrameView. You can extend WebKit to support additional MIME types by implementing your own document view and document representation classes to render data for specific MIME types. You register those classes using the WebFrame registerViewClass:representationClass:forMIMEType: method. Classes that adopt this protocol are expected to be subclasses of NSView.",
+      "url": "https://developer.apple.com/documentation/webkit/webdocumentview"
+    },
+    "WebDownloadDelegate": {
+      "doc": "The WebDownloadDelegate protocol declares one additional method for delegates of WebDownload.",
+      "url": "https://developer.apple.com/documentation/webkit/webdownloaddelegate"
+    },
+    "WebEditingDelegate": {
+      "url": "https://developer.apple.com/documentation/webkit/webeditingdelegate"
+    },
+    "WebFrameLoadDelegate": {
+      "url": "https://developer.apple.com/documentation/webkit/webframeloaddelegate"
+    },
+    "WebOpenPanelResultListener": {
+      "doc": "WebView user interface delegates that implement the webView:runOpenPanelForFileButtonWithResultListener: method use the methods defined in this protocol to communicate with the listener object. The methods allow the delegate to send a cancel message, or set the selected file name.",
+      "url": "https://developer.apple.com/documentation/webkit/webopenpanelresultlistener"
+    },
+    "WebPlugInViewFactory": {
+      "url": "https://developer.apple.com/documentation/webkit/webpluginviewfactory"
+    },
+    "WebPolicyDecisionListener": {
+      "doc": "This protocol enables WebView policy delegates to communicate with listener objects. A listener object conforming to this protocol is passed as one of the arguments to web view policy delegate methods.",
+      "url": "https://developer.apple.com/documentation/webkit/webpolicydecisionlistener"
+    },
+    "WebPolicyDelegate": {
+      "url": "https://developer.apple.com/documentation/webkit/webpolicydelegate"
+    },
+    "WebResourceLoadDelegate": {
+      "doc": "Web view resource load delegates implement this protocol to be notified on the progress of loading individual resources. Note that there can be hundreds of resources, such as images and other media, per page. So, if you just want to get page loading status see the WebFrameLoadDelegate protocol.",
+      "url": "https://developer.apple.com/documentation/webkit/webresourceloaddelegate"
+    },
+    "WebUIDelegate": {
+      "doc": "Web view user interface delegates implement this protocol to control the opening of new windows, augment the behavior of default menu items displayed when the user clicks elements, and perform other user interface–related tasks. These methods can be invoked as a result of handling JavaScript or other plug-in content. Delegates that display more than one web view per window, for example, need to implement some of these methods to handle that case. The default implementation assumes one window per web view, so non-conventional user interfaces might implement a user interface delegate.",
+      "url": "https://developer.apple.com/documentation/webkit/webuidelegate"
+    }
+  },
+  "enums": {
+    "DOMEventExceptionCode": {
+      "url": "https://developer.apple.com/documentation/webkit/domeventexceptioncode"
+    },
+    "DOMExceptionCode": {
+      "url": "https://developer.apple.com/documentation/webkit/domexceptioncode"
+    },
+    "DOMRangeExceptionCode": {
+      "url": "https://developer.apple.com/documentation/webkit/domrangeexceptioncode"
+    },
+    "DOMXPathExceptionCode": {
+      "url": "https://developer.apple.com/documentation/webkit/domxpathexceptioncode"
+    },
+    "WKAudiovisualMediaTypes": {
+      "doc": "The media types that require a user gesture to begin playing.",
+      "url": "https://developer.apple.com/documentation/webkit/wkaudiovisualmediatypes",
+      "members": {
+        "WKAudiovisualMediaTypeAll": {
+          "doc": "All media types require a user gesture to begin playing.",
+          "url": "https://developer.apple.com/documentation/webkit/wkaudiovisualmediatypes/all"
+        },
+        "WKAudiovisualMediaTypeAudio": {
+          "doc": "Media types that contain audio require a user gesture to begin playing.",
+          "url": "https://developer.apple.com/documentation/webkit/wkaudiovisualmediatypes/audio"
+        },
+        "WKAudiovisualMediaTypeNone": {
+          "doc": "No media types require a user gesture to begin playing.",
+          "url": "https://developer.apple.com/documentation/webkit/wkaudiovisualmediatypes/wkaudiovisualmediatypenone"
+        },
+        "WKAudiovisualMediaTypeVideo": {
+          "doc": "Media types that contain video require a user gesture to begin playing.",
+          "url": "https://developer.apple.com/documentation/webkit/wkaudiovisualmediatypes/video"
+        }
+      }
+    },
+    "WKContentMode": {
+      "doc": "Constants that indicate how to render web view content.",
+      "url": "https://developer.apple.com/documentation/webkit/wkcontentmode"
+    },
+    "WKCookiePolicy": {
+      "doc": "An enumeration with cases that indicate whether a cookie store allows cookie storage.",
+      "url": "https://developer.apple.com/documentation/webkit/wkcookiepolicy"
+    },
+    "WKDialogResult": {
+      "doc": "An enumeration that lists the possible ways a delegate handled displaying a custom Lockdown Mode first use dialog.",
+      "url": "https://developer.apple.com/documentation/webkit/wkdialogresult",
+      "members": {
+        "WKDialogResultAskAgain": {
+          "doc": "A result that indicates the delegate didn’t display a message, so other web views should check again.",
+          "url": "https://developer.apple.com/documentation/webkit/wkdialogresult/askagain"
+        },
+        "WKDialogResultHandled": {
+          "doc": "A result that indicates the delegate displayed the first use message.",
+          "url": "https://developer.apple.com/documentation/webkit/wkdialogresult/handled"
+        },
+        "WKDialogResultShowDefault": {
+          "doc": "A result that indicates the delegate didn’t display a message, so the web view should show the default Lockdown Mode message.",
+          "url": "https://developer.apple.com/documentation/webkit/wkdialogresult/showdefault"
+        }
+      }
+    },
+    "WKDownloadPlaceholderPolicy": {
+      "url": "https://developer.apple.com/documentation/webkit/wkdownloadplaceholderpolicy"
+    },
+    "WKDownloadRedirectPolicy": {
+      "doc": "An enumeration with cases that indicate whether to proceed with a redirect.",
+      "url": "https://developer.apple.com/documentation/webkit/wkdownloadredirectpolicy"
+    },
+    "WKErrorCode": {
+      "doc": "Possible error values that WebKit APIs can return.",
+      "url": "https://developer.apple.com/documentation/webkit/wkerrorcode"
+    },
+    "WKFullscreenState": {
+      "url": "https://developer.apple.com/documentation/webkit/wkfullscreenstate"
+    },
+    "WKInactiveSchedulingPolicy": {
+      "doc": "An enumeration that lists policies for how a web view that’s not in a window handles tasks.",
+      "url": "https://developer.apple.com/documentation/webkit/wkinactiveschedulingpolicy"
+    },
+    "WKMediaCaptureState": {
+      "doc": "An enumeration that describes whether a media device, like a camera or microphone, is currently capturing audio or video.",
+      "url": "https://developer.apple.com/documentation/webkit/wkmediacapturestate",
+      "members": {
+        "WKMediaCaptureStateActive": {
+          "doc": "The media device is actively capturing audio or video.",
+          "url": "https://developer.apple.com/documentation/webkit/wkmediacapturestate/active"
+        },
+        "WKMediaCaptureStateMuted": {
+          "doc": "The media device is muted, and not actively capturing audio or video.",
+          "url": "https://developer.apple.com/documentation/webkit/wkmediacapturestate/muted"
+        },
+        "WKMediaCaptureStateNone": {
+          "doc": "The media device is off.",
+          "url": "https://developer.apple.com/documentation/webkit/wkmediacapturestate/none"
+        }
+      }
+    },
+    "WKMediaCaptureType": {
+      "doc": "An enumeration listing the types of media devices that can capture audio, video, or both.",
+      "url": "https://developer.apple.com/documentation/webkit/wkmediacapturetype",
+      "members": {
+        "WKMediaCaptureTypeCamera": {
+          "doc": "A media device that can capture video.",
+          "url": "https://developer.apple.com/documentation/webkit/wkmediacapturetype/camera"
+        },
+        "WKMediaCaptureTypeCameraAndMicrophone": {
+          "doc": "A media device or devices that can capture audio and video.",
+          "url": "https://developer.apple.com/documentation/webkit/wkmediacapturetype/cameraandmicrophone"
+        },
+        "WKMediaCaptureTypeMicrophone": {
+          "doc": "A media device that can capture audio.",
+          "url": "https://developer.apple.com/documentation/webkit/wkmediacapturetype/microphone"
+        }
+      }
+    },
+    "WKMediaPlaybackState": {
+      "doc": "An enumeration that describes whether an audio or video presentation is playing, paused, or suspended.",
+      "url": "https://developer.apple.com/documentation/webkit/wkmediaplaybackstate",
+      "members": {
+        "WKMediaPlaybackStateNone": {
+          "doc": "There is no media to play back.",
+          "url": "https://developer.apple.com/documentation/webkit/wkmediaplaybackstate/none"
+        },
+        "WKMediaPlaybackStatePaused": {
+          "doc": "The media playback is paused.",
+          "url": "https://developer.apple.com/documentation/webkit/wkmediaplaybackstate/paused"
+        },
+        "WKMediaPlaybackStatePlaying": {
+          "doc": "The media is playing.",
+          "url": "https://developer.apple.com/documentation/webkit/wkmediaplaybackstate/playing"
+        },
+        "WKMediaPlaybackStateSuspended": {
+          "doc": "The media is not playing, and cannot be resumed until the user revokes the suspension.",
+          "url": "https://developer.apple.com/documentation/webkit/wkmediaplaybackstate/suspended"
+        }
+      }
+    },
+    "WKNavigationActionPolicy": {
+      "doc": "Constants that indicate whether to allow or cancel navigation to a webpage from an action.",
+      "url": "https://developer.apple.com/documentation/webkit/wknavigationactionpolicy",
+      "members": {
+        "WKNavigationActionPolicyAllow": {
+          "doc": "Allow the navigation to continue.",
+          "url": "https://developer.apple.com/documentation/webkit/wknavigationactionpolicy/allow"
+        },
+        "WKNavigationActionPolicyCancel": {
+          "doc": "Cancel the navigation.",
+          "url": "https://developer.apple.com/documentation/webkit/wknavigationactionpolicy/cancel"
+        },
+        "WKNavigationActionPolicyDownload": {
+          "doc": "Allow the download to proceed.",
+          "url": "https://developer.apple.com/documentation/webkit/wknavigationactionpolicy/download"
+        }
+      }
+    },
+    "WKNavigationResponsePolicy": {
+      "doc": "Constants that indicate whether to allow or cancel navigation to a webpage from a response.",
+      "url": "https://developer.apple.com/documentation/webkit/wknavigationresponsepolicy",
+      "members": {
+        "WKNavigationResponsePolicyAllow": {
+          "doc": "Allow the navigation to continue.",
+          "url": "https://developer.apple.com/documentation/webkit/wknavigationresponsepolicy/allow"
+        },
+        "WKNavigationResponsePolicyCancel": {
+          "doc": "Cancel the navigation.",
+          "url": "https://developer.apple.com/documentation/webkit/wknavigationresponsepolicy/cancel"
+        },
+        "WKNavigationResponsePolicyDownload": {
+          "doc": "Allow the download to proceed.",
+          "url": "https://developer.apple.com/documentation/webkit/wknavigationresponsepolicy/download"
+        }
+      }
+    },
+    "WKNavigationType": {
+      "doc": "The type of action that triggered the navigation.",
+      "url": "https://developer.apple.com/documentation/webkit/wknavigationtype",
+      "members": {
+        "WKNavigationTypeBackForward": {
+          "doc": "A request for the frame’s next or previous item.",
+          "url": "https://developer.apple.com/documentation/webkit/wknavigationtype/backforward"
+        },
+        "WKNavigationTypeFormResubmitted": {
+          "doc": "A request to resubmit a form.",
+          "url": "https://developer.apple.com/documentation/webkit/wknavigationtype/formresubmitted"
+        },
+        "WKNavigationTypeFormSubmitted": {
+          "doc": "A request to submit a form.",
+          "url": "https://developer.apple.com/documentation/webkit/wknavigationtype/formsubmitted"
+        },
+        "WKNavigationTypeLinkActivated": {
+          "doc": "A link activation.",
+          "url": "https://developer.apple.com/documentation/webkit/wknavigationtype/linkactivated"
+        },
+        "WKNavigationTypeOther": {
+          "doc": "A navigation request that originates for some other reason.",
+          "url": "https://developer.apple.com/documentation/webkit/wknavigationtype/other"
+        },
+        "WKNavigationTypeReload": {
+          "doc": "A request to reload the webpage.",
+          "url": "https://developer.apple.com/documentation/webkit/wknavigationtype/reload"
+        }
+      }
+    },
+    "WKPermissionDecision": {
+      "doc": "An enumeration of possible permission decisions for device resource access.",
+      "url": "https://developer.apple.com/documentation/webkit/wkpermissiondecision",
+      "members": {
+        "WKPermissionDecisionDeny": {
+          "doc": "Deny permission for the requested resource.",
+          "url": "https://developer.apple.com/documentation/webkit/wkpermissiondecision/deny"
+        },
+        "WKPermissionDecisionGrant": {
+          "doc": "Grant permission for the requested resource.",
+          "url": "https://developer.apple.com/documentation/webkit/wkpermissiondecision/grant"
+        },
+        "WKPermissionDecisionPrompt": {
+          "doc": "Prompt the user for permission for the requested resource.",
+          "url": "https://developer.apple.com/documentation/webkit/wkpermissiondecision/prompt"
+        }
+      }
+    },
+    "WKSecurityRestrictionMode": {
+      "url": "https://developer.apple.com/documentation/webkit/wksecurityrestrictionmode"
+    },
+    "WKUserInterfaceDirectionPolicy": {
+      "doc": "The policy that determines the directionality of user interface elements in a web view.",
+      "url": "https://developer.apple.com/documentation/webkit/wkuserinterfacedirectionpolicy",
+      "members": {
+        "WKUserInterfaceDirectionPolicyContent": {
+          "doc": "The directionality follows the CSS/HTML/XHTML specifications.",
+          "url": "https://developer.apple.com/documentation/webkit/wkuserinterfacedirectionpolicy/content"
+        },
+        "WKUserInterfaceDirectionPolicySystem": {
+          "doc": "The directionality follows the view’s user interface layout direction.",
+          "url": "https://developer.apple.com/documentation/webkit/wkuserinterfacedirectionpolicy/system"
+        }
+      }
+    },
+    "WKUserScriptInjectionTime": {
+      "doc": "Constants for the times at which to inject script content into a webpage.",
+      "url": "https://developer.apple.com/documentation/webkit/wkuserscriptinjectiontime",
+      "members": {
+        "WKUserScriptInjectionTimeAtDocumentEnd": {
+          "doc": "A constant to inject the script after the document finishes loading, but before loading any other subresources.",
+          "url": "https://developer.apple.com/documentation/webkit/wkuserscriptinjectiontime/atdocumentend"
+        },
+        "WKUserScriptInjectionTimeAtDocumentStart": {
+          "doc": "A constant to inject the script after the creation of the webpage’s document element, but before loading any other content.",
+          "url": "https://developer.apple.com/documentation/webkit/wkuserscriptinjectiontime/atdocumentstart"
+        }
+      }
+    },
+    "WKWebExtensionDataRecordError": {
+      "doc": "Constants that indicate errors in the WKWebExtensionDataRecord domain.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebextensiondatarecorderror"
+    },
+    "WKWebExtensionMatchPatternError": {
+      "doc": "Constants that indicate errors in the WKWebExtensionMatchPattern domain.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebextensionmatchpatternerror"
+    },
+    "WKWebExtensionMatchPatternOptions": {
+      "doc": "Constants used by WKWebExtensionMatchPattern to indicate matching options.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebextensionmatchpatternoptions",
+      "members": {
+        "WKWebExtensionMatchPatternOptionsNone": {
+          "doc": "Indicates no special matching options.",
+          "url": "https://developer.apple.com/documentation/webkit/wkwebextensionmatchpatternoptions/wkwebextensionmatchpatternoptionsnone"
+        }
+      }
+    },
+    "WKWebExtensionMessagePortError": {
+      "doc": "Constants that indicate errors in the WKWebExtensionMessagePort domain.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebextensionmessageporterror"
+    },
+    "WKWebExtensionWindowState": {
+      "doc": "Constants used by WKWebExtensionWindow to indicate possible states of a window.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebextensionwindowstate"
+    },
+    "WKWebExtensionWindowType": {
+      "doc": "Constants used by WKWebExtensionWindow to indicate the type of a window.",
+      "url": "https://developer.apple.com/documentation/webkit/wkwebextensionwindowtype"
+    },
+    "WKWebViewDataType": {
+      "url": "https://developer.apple.com/documentation/webkit/wkwebviewdatatype"
+    },
+    "WKWebpagePreferencesUpgradeToHTTPSPolicy": {
+      "url": "https://developer.apple.com/documentation/webkit/wkwebpagepreferencesupgradetohttpspolicy"
+    },
+    "WebCacheModel": {
+      "doc": "Specifies the caching model for a web view.",
+      "url": "https://developer.apple.com/documentation/webkit/webcachemodel",
+      "members": {
+        "WebCacheModelDocumentBrowser": {
+          "doc": "Caches a reasonable number of resources and previously viewed documents in memory and on disk. This model is appropriate for displaying and navigating between multiple documents.",
+          "url": "https://developer.apple.com/documentation/webkit/webcachemodel/documentbrowser"
+        },
+        "WebCacheModelDocumentViewer": {
+          "doc": "Releases resources when they are no longer referenced and caches remote resources on disk. This model is appropriate for displaying a static document with no navigation user interface. This is the most memory-efficient model.",
+          "url": "https://developer.apple.com/documentation/webkit/webcachemodel/documentviewer"
+        },
+        "WebCacheModelPrimaryWebBrowser": {
+          "doc": "Caches a large number of resources and previously viewed documents in memory and on disk. This model is appropriate for a web view that behaves like a web browser.",
+          "url": "https://developer.apple.com/documentation/webkit/webcachemodel/primarywebbrowser"
+        }
+      }
+    },
+    "WebDragDestinationAction": {
+      "doc": "Actions that the destination object of a drag operation can perform.",
+      "url": "https://developer.apple.com/documentation/webkit/webdragdestinationaction",
+      "members": {
+        "WebDragDestinationActionAny": {
+          "doc": "Allows any defined action to occur.",
+          "url": "https://developer.apple.com/documentation/webkit/webdragdestinationaction/any"
+        },
+        "WebDragDestinationActionDHTML": {
+          "doc": "Allows DHTML (such as JavaScript) to handle the drag.",
+          "url": "https://developer.apple.com/documentation/webkit/webdragdestinationaction/dhtml"
+        },
+        "WebDragDestinationActionEdit": {
+          "doc": "Allows editable documents to be changed by the drag operation.",
+          "url": "https://developer.apple.com/documentation/webkit/webdragdestinationaction/edit"
+        },
+        "WebDragDestinationActionLoad": {
+          "doc": "Allows the drag operation to change the location.",
+          "url": "https://developer.apple.com/documentation/webkit/webdragdestinationaction/load"
+        },
+        "WebDragDestinationActionNone": {
+          "doc": "No action.",
+          "url": "https://developer.apple.com/documentation/webkit/webdragdestinationaction/webdragdestinationactionnone"
+        }
+      }
+    },
+    "WebDragSourceAction": {
+      "doc": "Actions that the source object of a drag operation can perform.",
+      "url": "https://developer.apple.com/documentation/webkit/webdragsourceaction",
+      "members": {
+        "WebDragSourceActionAny": {
+          "doc": "Allows any defined action to occur.",
+          "url": "https://developer.apple.com/documentation/webkit/webdragsourceaction/any"
+        },
+        "WebDragSourceActionDHTML": {
+          "doc": "Allows DHTML (such as JavaScript) in the source object to initiate a drag operation.",
+          "url": "https://developer.apple.com/documentation/webkit/webdragsourceaction/dhtml"
+        },
+        "WebDragSourceActionImage": {
+          "doc": "Allows the user to drag an image in the source object.",
+          "url": "https://developer.apple.com/documentation/webkit/webdragsourceaction/image"
+        },
+        "WebDragSourceActionLink": {
+          "doc": "Allows the user to drag a link in the source object.",
+          "url": "https://developer.apple.com/documentation/webkit/webdragsourceaction/link"
+        },
+        "WebDragSourceActionNone": {
+          "doc": "No action.",
+          "url": "https://developer.apple.com/documentation/webkit/webdragsourceaction/webdragsourceactionnone"
+        },
+        "WebDragSourceActionSelection": {
+          "doc": "Allows the user to drag a selection in the source object.",
+          "url": "https://developer.apple.com/documentation/webkit/webdragsourceaction/selection"
+        }
+      }
+    },
+    "WebNavigationType": {
+      "doc": "Possible values for the WebActionNavigationTypeKey key that appears in an action dictionary.",
+      "url": "https://developer.apple.com/documentation/webkit/webnavigationtype",
+      "members": {
+        "WebNavigationTypeBackForward": {
+          "doc": "The user clicked back or forward button.",
+          "url": "https://developer.apple.com/documentation/webkit/webnavigationtype/backforward"
+        },
+        "WebNavigationTypeFormResubmitted": {
+          "doc": "A form was resubmitted (through a back, forward or reload action).",
+          "url": "https://developer.apple.com/documentation/webkit/webnavigationtype/formresubmitted"
+        },
+        "WebNavigationTypeFormSubmitted": {
+          "doc": "A form was submitted.",
+          "url": "https://developer.apple.com/documentation/webkit/webnavigationtype/formsubmitted"
+        },
+        "WebNavigationTypeLinkClicked": {
+          "doc": "A link (an href) was clicked.",
+          "url": "https://developer.apple.com/documentation/webkit/webnavigationtype/linkclicked"
+        },
+        "WebNavigationTypeOther": {
+          "doc": "Navigation is taking place for some other reason.",
+          "url": "https://developer.apple.com/documentation/webkit/webnavigationtype/other"
+        },
+        "WebNavigationTypeReload": {
+          "doc": "The user hit the reload button.",
+          "url": "https://developer.apple.com/documentation/webkit/webnavigationtype/reload"
+        }
+      }
+    },
+    "WebViewInsertAction": {
+      "doc": "The type of user action that initiated a delegate message.",
+      "url": "https://developer.apple.com/documentation/webkit/webviewinsertaction",
+      "members": {
+        "WebViewInsertActionDropped": {
+          "doc": "Indicates the user inserted content by dropping.",
+          "url": "https://developer.apple.com/documentation/webkit/webviewinsertaction/dropped"
+        },
+        "WebViewInsertActionPasted": {
+          "doc": "Indicates the user inserted content by pasting.",
+          "url": "https://developer.apple.com/documentation/webkit/webviewinsertaction/pasted"
+        },
+        "WebViewInsertActionTyped": {
+          "doc": "Indicates the user inserted content by typing.",
+          "url": "https://developer.apple.com/documentation/webkit/webviewinsertaction/typed"
+        }
+      }
+    }
+  },
+  "structs": {
+    "DOMObjectInternal": {
+      "url": "https://developer.apple.com/documentation/webkit/domobjectinternal"
+    },
+    "WebPreferencesPrivate": {
+      "url": "https://developer.apple.com/documentation/webkit/webpreferencesprivate"
+    }
+  },
+  "methods": {
+    "DOMDocument": {
+      "-URLWithAttributeString:": {
+        "doc": "Constructs a URL given an attribute string.",
+        "url": "https://developer.apple.com/documentation/webkit/domdocument/url(withattributestring:)"
+      }
+    },
+    "DOMElement": {
+      "-image": {
+        "doc": "Returns an image associated with the receiver.",
+        "url": "https://developer.apple.com/documentation/webkit/domelement/image()"
+      }
+    },
+    "DOMHTMLDocument": {
+      "-createDocumentFragmentWithMarkupString:baseURL:": {
+        "doc": "Creates a document fragment containing the given HTML markup.",
+        "url": "https://developer.apple.com/documentation/webkit/domhtmldocument/createdocumentfragment(withmarkupstring:baseurl:)"
+      },
+      "-createDocumentFragmentWithText:": {
+        "doc": "Creates a document fragment containing the given text.",
+        "url": "https://developer.apple.com/documentation/webkit/domhtmldocument/createdocumentfragment(withtext:)"
+      }
+    },
+    "DOMNode": {
+      "-boundingBox": {
+        "doc": "Returns a rectangle that bounds the onscreen rendering of the node.",
+        "url": "https://developer.apple.com/documentation/webkit/domnode/boundingbox()"
+      },
+      "-lineBoxRects": {
+        "doc": "Returns the rectangles that bound each line of text in the node.",
+        "url": "https://developer.apple.com/documentation/webkit/domnode/lineboxrects()"
+      }
+    },
+    "WKBackForwardList": {
+      "-itemAtIndex:": {
+        "doc": "Returns the item at the relative offset from the current item.",
+        "url": "https://developer.apple.com/documentation/webkit/wkbackforwardlist/item(at:)"
+      }
+    },
+    "WKContentRuleListStore": {
+      "+defaultStore": {
+        "doc": "Returns the default content rule list store.",
+        "url": "https://developer.apple.com/documentation/webkit/wkcontentruleliststore/default()"
+      },
+      "+storeWithURL:": {
+        "doc": "Creates a new content rule list store in the specified directory.",
+        "url": "https://developer.apple.com/documentation/webkit/wkcontentruleliststore/init(url:)-dile"
+      },
+      "-compileContentRuleListForIdentifier:encodedContentRuleList:completionHandler:": {
+        "doc": "Compiles the specified JSON content into a new rule list and adds it to the current data store.",
+        "url": "https://developer.apple.com/documentation/webkit/wkcontentruleliststore/compilecontentrulelist(foridentifier:encodedcontentrulelist:completionhandler:)"
+      },
+      "-getAvailableContentRuleListIdentifiers:": {
+        "doc": "Fetches the identifiers for all rule lists in the store asynchronously.",
+        "url": "https://developer.apple.com/documentation/webkit/wkcontentruleliststore/getavailablecontentrulelistidentifiers(_:)"
+      },
+      "-lookUpContentRuleListForIdentifier:completionHandler:": {
+        "doc": "Searches asynchronously for a specific rule list in the data store.",
+        "url": "https://developer.apple.com/documentation/webkit/wkcontentruleliststore/lookupcontentrulelist(foridentifier:completionhandler:)"
+      },
+      "-removeContentRuleListForIdentifier:completionHandler:": {
+        "doc": "Removes a rule list from the current data store asynchronously.",
+        "url": "https://developer.apple.com/documentation/webkit/wkcontentruleliststore/removecontentrulelist(foridentifier:completionhandler:)"
+      }
+    },
+    "WKContentWorld": {
+      "+worldWithName:": {
+        "doc": "Returns the custom content world with the specified name.",
+        "url": "https://developer.apple.com/documentation/webkit/wkcontentworld/world(name:)"
+      }
+    },
+    "WKDownload": {
+      "-cancel:": {
+        "doc": "Cancels the download, and optionally captures data so that you can resume the download later.",
+        "url": "https://developer.apple.com/documentation/webkit/wkdownload/cancel(_:)"
+      }
+    },
+    "WKHTTPCookieStore": {
+      "-addObserver:": {
+        "doc": "Adds an observer to the cookie store.",
+        "url": "https://developer.apple.com/documentation/webkit/wkhttpcookiestore/add(_:)"
+      },
+      "-deleteCookie:completionHandler:": {
+        "doc": "Deletes the specified cookie.",
+        "url": "https://developer.apple.com/documentation/webkit/wkhttpcookiestore/delete(_:completionhandler:)"
+      },
+      "-getAllCookies:": {
+        "doc": "Fetches all stored cookies asynchronously and delivers them to the specified completion handler.",
+        "url": "https://developer.apple.com/documentation/webkit/wkhttpcookiestore/getallcookies(_:)"
+      },
+      "-getCookiePolicy:": {
+        "doc": "Returns a cookie policy that indicates whether the cookie store allows cookie storage.",
+        "url": "https://developer.apple.com/documentation/webkit/wkhttpcookiestore/getcookiepolicy(_:)"
+      },
+      "-removeObserver:": {
+        "doc": "Removes an observer from the cookie store.",
+        "url": "https://developer.apple.com/documentation/webkit/wkhttpcookiestore/remove(_:)"
+      },
+      "-setCookie:completionHandler:": {
+        "doc": "Adds a cookie to the cookie store.",
+        "url": "https://developer.apple.com/documentation/webkit/wkhttpcookiestore/setcookie(_:completionhandler:)"
+      },
+      "-setCookiePolicy:completionHandler:": {
+        "doc": "Sets a cookie policy that indicates whether the cookie store allows cookie storage.",
+        "url": "https://developer.apple.com/documentation/webkit/wkhttpcookiestore/setcookiepolicy(_:completionhandler:)"
+      }
+    },
+    "WKUserContentController": {
+      "-addContentRuleList:": {
+        "doc": "Adds the specified content rule list to the content controller object.",
+        "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/add(_:)"
+      },
+      "-addScriptMessageHandler:contentWorld:name:": {
+        "doc": "Installs a message handler that you can call from the specified content world in your JavaScript code.",
+        "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/add(_:contentworld:name:)"
+      },
+      "-addScriptMessageHandler:name:": {
+        "doc": "Installs a message handler that you can call from your JavaScript code.",
+        "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/add(_:name:)"
+      },
+      "-addScriptMessageHandlerWithReply:contentWorld:name:": {
+        "doc": "Installs a message handler that returns a reply to your JavaScript code.",
+        "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/addscriptmessagehandler(_:contentworld:name:)"
+      },
+      "-addUserScript:": {
+        "doc": "Injects the specified script into the webpage’s content.",
+        "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/adduserscript(_:)"
+      },
+      "-removeAllContentRuleLists": {
+        "doc": "Removes all rules lists from the content controller.",
+        "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/removeallcontentrulelists()"
+      },
+      "-removeAllScriptMessageHandlers": {
+        "doc": "Uninstalls all custom message handlers associated with the user content controller.",
+        "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/removeallscriptmessagehandlers()"
+      },
+      "-removeAllScriptMessageHandlersFromContentWorld:": {
+        "doc": "Uninstalls all custom message handlers from the specified content world in your JavaScript code.",
+        "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/removeallscriptmessagehandlers(from:)"
+      },
+      "-removeAllUserScripts": {
+        "doc": "Removes all user scripts from the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/removealluserscripts()"
+      },
+      "-removeContentRuleList:": {
+        "doc": "Removes the specified rule list from the content controller object.",
+        "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/remove(_:)"
+      },
+      "-removeScriptMessageHandlerForName:": {
+        "doc": "Uninstalls the custom message handler with the specified name from your JavaScript code.",
+        "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/removescriptmessagehandler(forname:)"
+      },
+      "-removeScriptMessageHandlerForName:contentWorld:": {
+        "doc": "Uninstalls a custom message handler from the specified content world in your JavaScript code.",
+        "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/removescriptmessagehandler(forname:contentworld:)"
+      }
+    },
+    "WKUserScript": {
+      "-initWithSource:injectionTime:forMainFrameOnly:": {
+        "doc": "Creates a user script object that contains the specified source code and attributes.",
+        "url": "https://developer.apple.com/documentation/webkit/wkuserscript/init(source:injectiontime:formainframeonly:)"
+      },
+      "-initWithSource:injectionTime:forMainFrameOnly:inContentWorld:": {
+        "doc": "Creates a user script object that is scoped to a particular content world.",
+        "url": "https://developer.apple.com/documentation/webkit/wkuserscript/init(source:injectiontime:formainframeonly:in:)"
+      }
+    },
+    "WKWebExtension": {
+      "+extensionWithAppExtensionBundle:completionHandler:": {
+        "doc": "Returns a web extension initialized with a specified app extension bundle.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/extensionwithappextensionbundle:completionhandler:"
+      },
+      "+extensionWithResourceBaseURL:completionHandler:": {
+        "doc": "Returns a web extension initialized with a specified resource base URL, which can point to either a directory or a ZIP archive.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/extensionwithresourcebaseurl:completionhandler:"
+      },
+      "-actionIconForSize:": {
+        "doc": "Returns the default action icon for the specified size.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/actionicon(for:)"
+      },
+      "-iconForSize:": {
+        "doc": "Returns the extension’s icon image for the specified size.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/icon(for:)"
+      },
+      "-supportsManifestVersion:": {
+        "doc": "Checks if a manifest version is supported by the extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/supportsmanifestversion(_:)"
+      }
+    },
+    "WKWebExtensionContext": {
+      "+contextForExtension:": {
+        "doc": "Returns a web extension context initialized with the specified extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/contextforextension:"
+      },
+      "-actionForTab:": {
+        "doc": "Retrieves the extension action for a given tab, or the default action if nil is passed.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/action(for:)"
+      },
+      "-clearUserGestureInTab:": {
+        "doc": "Called by the app to clear a user gesture in a specific tab.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/clearusergesture(in:)"
+      },
+      "-commandForEvent:": {
+        "doc": "Retrieves the command associated with the given event without performing it.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/command(for:)"
+      },
+      "-didActivateTab:previousActiveTab:": {
+        "doc": "Called by the app when a tab is activated to notify only this specific extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/didactivatetab:previousactivetab:"
+      },
+      "-didChangeTabProperties:forTab:": {
+        "doc": "Called by the app when the properties of a tab are changed to fire appropriate events with only this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/didchangetabproperties(_:for:)"
+      },
+      "-didCloseTab:windowIsClosing:": {
+        "doc": "Called by the app when a tab is closed to fire appropriate events with only this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/didclosetab:windowisclosing:"
+      },
+      "-didCloseWindow:": {
+        "doc": "Called by the app when a window is closed to fire appropriate events with only this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/didclosewindow(_:)"
+      },
+      "-didDeselectTabs:": {
+        "doc": "Called by the app when tabs are deselected to fire appropriate events with only this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/diddeselecttabs(_:)"
+      },
+      "-didFocusWindow:": {
+        "doc": "Called by the app when a window gains focus to fire appropriate events with only this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/didfocuswindow(_:)"
+      },
+      "-didMoveTab:fromIndex:inWindow:": {
+        "doc": "Called by the app when a tab is moved to fire appropriate events with only this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/didmovetab:fromindex:inwindow:"
+      },
+      "-didOpenTab:": {
+        "doc": "Called by the app when a new tab is opened to fire appropriate events with only this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/didopentab(_:)"
+      },
+      "-didOpenWindow:": {
+        "doc": "Called by the app when a new window is opened to fire appropriate events with only this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/didopenwindow(_:)"
+      },
+      "-didReplaceTab:withTab:": {
+        "doc": "Called by the app when a tab is replaced by another tab to fire appropriate events with only this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/didreplacetab(_:with:)"
+      },
+      "-didSelectTabs:": {
+        "doc": "Called by the app when tabs are selected to fire appropriate events with only this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/didselecttabs(_:)"
+      },
+      "-hasAccessToURL:": {
+        "doc": "Checks the specified URL against the currently granted permission match patterns.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/hasaccess(to:)"
+      },
+      "-hasAccessToURL:inTab:": {
+        "doc": "Checks the specified URL against the currently granted permission match patterns in a specific tab.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/hasaccess(to:in:)"
+      },
+      "-hasActiveUserGestureInTab:": {
+        "doc": "Indicates if a user gesture is currently active in the specified tab.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/hasactiveusergesture(in:)"
+      },
+      "-hasInjectedContentForURL:": {
+        "doc": "Checks if the extension has script or stylesheet content that can be injected into the specified URL.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/hasinjectedcontent(for:)"
+      },
+      "-hasPermission:": {
+        "doc": "Checks the specified permission against the currently granted permissions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/haspermission(_:)"
+      },
+      "-hasPermission:inTab:": {
+        "doc": "Checks the specified permission against the currently granted permissions in a specific tab.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/haspermission(_:in:)"
+      },
+      "-initForExtension:": {
+        "doc": "Returns a web extension context initialized with a specified extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/init(for:)"
+      },
+      "-loadBackgroundContentWithCompletionHandler:": {
+        "doc": "Loads the background content if needed for the extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/loadbackgroundcontent(completionhandler:)"
+      },
+      "-menuItemsForTab:": {
+        "doc": "Retrieves the menu items for a given tab.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/menuitems(for:)"
+      },
+      "-performActionForTab:": {
+        "doc": "Performs the extension action associated with the specified tab or performs the default action if nil is passed.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/performaction(for:)"
+      },
+      "-performCommand:": {
+        "doc": "Performs the specified command, triggering events specific to this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/performcommand(_:)"
+      },
+      "-performCommandForEvent:": {
+        "doc": "Performs the command associated with the given event.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/performcommand(for:)-8btj0"
+      },
+      "-performCommandForKeyCommand:": {
+        "doc": "Performs the command associated with the given key command.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/performcommand(for:)-25rd1"
+      },
+      "-permissionStatusForMatchPattern:": {
+        "doc": "Checks the specified match pattern against the currently denied, granted, and requested permission match patterns.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/permissionstatus(for:)-7mu8"
+      },
+      "-permissionStatusForMatchPattern:inTab:": {
+        "doc": "Checks the specified match pattern against the currently denied, granted, and requested permission match patterns.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/permissionstatus(for:in:)-nqhm"
+      },
+      "-permissionStatusForPermission:": {
+        "doc": "Checks the specified permission against the currently denied, granted, and requested permissions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/permissionstatus(for:)-3qq2w"
+      },
+      "-permissionStatusForPermission:inTab:": {
+        "doc": "Checks the specified permission against the currently denied, granted, and requested permissions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/permissionstatus(for:in:)-4h82n"
+      },
+      "-permissionStatusForURL:": {
+        "doc": "Checks the specified URL against the currently denied, granted, and requested permission match patterns.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/permissionstatus(for:)-7ojrb"
+      },
+      "-permissionStatusForURL:inTab:": {
+        "doc": "Checks the specified URL against the currently denied, granted, and requested permission match patterns.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/permissionstatus(for:in:)-96xaf"
+      },
+      "-setPermissionStatus:forMatchPattern:": {
+        "doc": "Sets the status of a match pattern with a distant future expiration date.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/setpermissionstatus(_:for:)-6auqv"
+      },
+      "-setPermissionStatus:forMatchPattern:expirationDate:": {
+        "doc": "Sets the status of a match pattern with a specific expiration date.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/setpermissionstatus(_:for:expirationdate:)-7038f"
+      },
+      "-setPermissionStatus:forPermission:": {
+        "doc": "Sets the status of a permission with a distant future expiration date.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/setpermissionstatus(_:for:)-4u95f"
+      },
+      "-setPermissionStatus:forPermission:expirationDate:": {
+        "doc": "Sets the status of a permission with a specific expiration date.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/setpermissionstatus(_:for:expirationdate:)-692ui"
+      },
+      "-setPermissionStatus:forURL:": {
+        "doc": "Sets the permission status of a URL with a distant future expiration date.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/setpermissionstatus(_:for:)-5xahd"
+      },
+      "-setPermissionStatus:forURL:expirationDate:": {
+        "doc": "Sets the permission status of a URL with a distant future expiration date.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/setpermissionstatus(_:for:expirationdate:)-5q9id"
+      },
+      "-userGesturePerformedInTab:": {
+        "doc": "Should be called by the app when a user gesture is performed in a specific tab.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/usergestureperformed(in:)"
+      }
+    },
+    "WKWebExtensionController": {
+      "-didActivateTab:previousActiveTab:": {
+        "doc": "Should be called by the app when a tab is activated to notify all loaded web extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/didactivatetab:previousactivetab:"
+      },
+      "-didChangeTabProperties:forTab:": {
+        "doc": "Should be called by the app when the properties of a tab are changed to fire appropriate events with all loaded web extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/didchangetabproperties(_:for:)"
+      },
+      "-didCloseTab:windowIsClosing:": {
+        "doc": "Should be called by the app when a tab is closed to fire appropriate events with all loaded web extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/didclosetab:windowisclosing:"
+      },
+      "-didCloseWindow:": {
+        "doc": "Should be called by the app when a window is closed to fire appropriate events with all loaded web extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/didclosewindow(_:)"
+      },
+      "-didDeselectTabs:": {
+        "doc": "Should be called by the app when tabs are deselected to fire appropriate events with all loaded web extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/diddeselecttabs(_:)"
+      },
+      "-didFocusWindow:": {
+        "doc": "Should be called by the app when a window gains focus to fire appropriate events with all loaded web extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/didfocuswindow(_:)"
+      },
+      "-didMoveTab:fromIndex:inWindow:": {
+        "doc": "Should be called by the app when a tab is moved to fire appropriate events with all loaded web extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/didmovetab:fromindex:inwindow:"
+      },
+      "-didOpenTab:": {
+        "doc": "Should be called by the app when a new tab is opened to fire appropriate events with all loaded web extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/didopentab(_:)"
+      },
+      "-didOpenWindow:": {
+        "doc": "Should be called by the app when a new window is opened to fire appropriate events with all loaded web extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/didopenwindow(_:)"
+      },
+      "-didReplaceTab:withTab:": {
+        "doc": "Should be called by the app when a tab is replaced by another tab to fire appropriate events with all loaded web extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/didreplacetab(_:with:)"
+      },
+      "-didSelectTabs:": {
+        "doc": "Should be called by the app when tabs are selected to fire appropriate events with all loaded web extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/didselecttabs(_:)"
+      },
+      "-extensionContextForExtension:": {
+        "doc": "Returns a loaded extension context for the specified extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/extensioncontext(for:)-6ecpm"
+      },
+      "-extensionContextForURL:": {
+        "doc": "Returns a loaded extension context matching the specified URL.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/extensioncontext(for:)-2kr4"
+      },
+      "-fetchDataRecordOfTypes:forExtensionContext:completionHandler:": {
+        "doc": "Fetches a data record containing the given extension data types for a specific known web extension context.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/fetchdatarecord(oftypes:for:completionhandler:)"
+      },
+      "-fetchDataRecordsOfTypes:completionHandler:": {
+        "doc": "Fetches data records containing the given extension data types for all known extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/fetchdatarecords(oftypes:completionhandler:)"
+      },
+      "-init": {
+        "doc": "Returns a web extension controller initialized with the default configuration.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/init()"
+      },
+      "-initWithConfiguration:": {
+        "doc": "Returns a web extension controller initialized with the specified configuration.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/init(configuration:)"
+      },
+      "-loadExtensionContext:error:": {
+        "doc": "Loads the specified extension context.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/load(_:)"
+      },
+      "-removeDataOfTypes:fromDataRecords:completionHandler:": {
+        "doc": "Removes extension data of the given types for the given data records.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/removedata(oftypes:from:completionhandler:)"
+      },
+      "-unloadExtensionContext:error:": {
+        "doc": "Unloads the specified extension context.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/unload(_:)"
+      }
+    },
+    "WKWebView": {
+      "+handlesURLScheme:": {
+        "doc": "Returns a Boolean value that indicates whether WebKit natively supports resources with the specified URL scheme.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/handlesurlscheme(_:)"
+      },
+      "-callAsyncJavaScript:arguments:inFrame:inContentWorld:completionHandler:": {
+        "doc": "Executes the specified string as an asynchronous JavaScript function.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/callasyncjavascript:arguments:inframe:incontentworld:completionhandler:"
+      },
+      "-closeAllMediaPresentationsWithCompletionHandler:": {
+        "doc": "Closes all media the web view is presenting, including picture-in-picture video and fullscreen video.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/closeallmediapresentations(completionhandler:)"
+      },
+      "-createPDFWithConfiguration:completionHandler:": {
+        "doc": "Generates PDF data from the web view’s contents asynchronously.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/createpdfwithconfiguration:completionhandler:"
+      },
+      "-createWebArchiveDataWithCompletionHandler:": {
+        "doc": "Creates a web archive of the web view’s contents asynchronously.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/createwebarchivedatawithcompletionhandler:"
+      },
+      "-evaluateJavaScript:completionHandler:": {
+        "doc": "Evaluates the specified JavaScript string.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/evaluatejavascript(_:completionhandler:)"
+      },
+      "-evaluateJavaScript:inFrame:inContentWorld:completionHandler:": {
+        "doc": "Evaluates the specified JavaScript string in the specified frame and content world.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/evaluatejavascript:inframe:incontentworld:completionhandler:"
+      },
+      "-findString:withConfiguration:completionHandler:": {
+        "doc": "Searches for the specified string in the web view’s content.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/findstring:withconfiguration:completionhandler:"
+      },
+      "-goBack": {
+        "doc": "Navigates to the back item in the back-forward list.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/goback()"
+      },
+      "-goBack:": {
+        "doc": "Navigates to the back item in the back-forward list.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/goback(_:)"
+      },
+      "-goForward": {
+        "doc": "Navigates to the forward item in the back-forward list.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/goforward()"
+      },
+      "-goForward:": {
+        "doc": "Navigates to the forward item in the back-forward list.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/goforward(_:)"
+      },
+      "-goToBackForwardListItem:": {
+        "doc": "Navigates to an item from the back-forward list and sets it as the current item.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/go(to:)"
+      },
+      "-initWithCoder:": {
+        "doc": "Returns an object initialized from data in the specified coder object.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/init(coder:)"
+      },
+      "-initWithFrame:configuration:": {
+        "doc": "Creates a web view and initializes it with the specified frame and configuration data.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/init(frame:configuration:)"
+      },
+      "-loadData:MIMEType:characterEncodingName:baseURL:": {
+        "doc": "Loads the content of the specified data object and navigates to it.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/load(_:mimetype:characterencodingname:baseurl:)"
+      },
+      "-loadFileRequest:allowingReadAccessToURL:": {
+        "doc": "Loads the web content from the file the URL request object specifies and navigates to that content.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/loadfilerequest(_:allowingreadaccessto:)"
+      },
+      "-loadFileURL:allowingReadAccessToURL:": {
+        "doc": "Loads the web content from the specified file and navigates to it.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/loadfileurl(_:allowingreadaccessto:)"
+      },
+      "-loadHTMLString:baseURL:": {
+        "doc": "Loads the contents of the specified HTML string and navigates to it.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/loadhtmlstring(_:baseurl:)"
+      },
+      "-loadSimulatedRequest:response:responseData:": {
+        "doc": "Loads the web content from the data you provide as if the data were the response to the request.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/loadsimulatedrequest(_:response:responsedata:)"
+      },
+      "-loadSimulatedRequest:responseHTMLString:": {
+        "doc": "Loads the web content from the HTML you provide as if the HTML were the response to the request.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/loadsimulatedrequest(_:responsehtml:)"
+      },
+      "-pauseAllMediaPlayback:": {
+        "doc": "Pauses playback of all media in the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/pauseallmediaplayback:"
+      },
+      "-pauseAllMediaPlaybackWithCompletionHandler:": {
+        "doc": "Pauses playback of all media in the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/pauseallmediaplayback(completionhandler:)"
+      },
+      "-printOperationWithPrintInfo:": {
+        "doc": "Returns the print operation object to use when printing the contents of the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/printoperation(with:)"
+      },
+      "-reload": {
+        "doc": "Reloads the current webpage.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/reload()"
+      },
+      "-reload:": {
+        "doc": "Reloads the current webpage.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/reload(_:)"
+      },
+      "-reloadFromOrigin": {
+        "doc": "Reloads the current webpage, and performs end-to-end revalidation of the content using cache-validating conditionals, if possible.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/reloadfromorigin()"
+      },
+      "-reloadFromOrigin:": {
+        "doc": "Reloads the current webpage, and performs end-to-end revalidation of the content using cache-validating conditionals, if possible.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/reloadfromorigin(_:)"
+      },
+      "-requestMediaPlaybackState:": {
+        "doc": "Requests the playback status of media in the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/requestmediaplaybackstate:"
+      },
+      "-requestMediaPlaybackStateWithCompletionHandler:": {
+        "doc": "Requests the playback status of media in the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/requestmediaplaybackstate(completionhandler:)"
+      },
+      "-resumeAllMediaPlayback:": {
+        "doc": "Resumes playback of all media in a web view.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/resumeallmediaplayback:"
+      },
+      "-resumeDownloadFromResumeData:completionHandler:": {
+        "doc": "Resumes a failed or canceled download.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/resumedownload(fromresumedata:completionhandler:)"
+      },
+      "-setAllMediaPlaybackSuspended:completionHandler:": {
+        "doc": "Changes whether the webpage is suspending playback of all media in the page.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/setallmediaplaybacksuspended(_:completionhandler:)"
+      },
+      "-setCameraCaptureState:completionHandler:": {
+        "doc": "Changes whether the webpage is using the camera to capture images or video.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/setcameracapturestate(_:completionhandler:)"
+      },
+      "-setMagnification:centeredAtPoint:": {
+        "doc": "Scales the page content and centers the result on the specified point.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/setmagnification(_:centeredat:)"
+      },
+      "-setMicrophoneCaptureState:completionHandler:": {
+        "doc": "Changes whether the webpage is using the microphone to capture audio.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/setmicrophonecapturestate(_:completionhandler:)"
+      },
+      "-startDownloadUsingRequest:completionHandler:": {
+        "doc": "Starts to download the resource at the URL in the request.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/startdownload(using:completionhandler:)"
+      },
+      "-stopLoading": {
+        "doc": "Stops loading all resources on the current page.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/stoploading()"
+      },
+      "-stopLoading:": {
+        "doc": "Stops loading all resources on the current page.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/stoploading(_:)"
+      },
+      "-suspendAllMediaPlayback:": {
+        "doc": "Changes whether the webpage is suspending playback of all media in the page.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/suspendallmediaplayback:"
+      },
+      "-takeSnapshotWithConfiguration:completionHandler:": {
+        "doc": "Generates a platform-native image from the web view’s contents asynchronously.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/takesnapshot(with:completionhandler:)"
+      }
+    },
+    "WKWebViewConfiguration": {
+      "-setURLSchemeHandler:forURLScheme:": {
+        "doc": "Registers an object to load resources associated with the specified URL scheme.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/seturlschemehandler(_:forurlscheme:)"
+      },
+      "-urlSchemeHandlerForURLScheme:": {
+        "doc": "Returns the currently registered handler object for the specified URL scheme.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/urlschemehandler(forurlscheme:)"
+      }
+    },
+    "WKWebsiteDataStore": {
+      "+allWebsiteDataTypes": {
+        "doc": "Returns the set of all the available data types.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatastore/allwebsitedatatypes()"
+      },
+      "+dataStoreForIdentifier:": {
+        "doc": "Returns the persistent data store with the unique identifier you provide.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatastore/init(foridentifier:)"
+      },
+      "+defaultDataStore": {
+        "doc": "Returns the default data store, which stores data persistently to disk.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatastore/default()"
+      },
+      "+fetchAllDataStoreIdentifiers:": {
+        "doc": "Fetches an array of identifiers from existing data stores that have identifiers.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatastore/fetchalldatastoreidentifiers(_:)"
+      },
+      "+nonPersistentDataStore": {
+        "doc": "Creates a new data store object that stores website data in memory, and doesn’t write that data to disk.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatastore/nonpersistent()"
+      },
+      "+removeDataStoreForIdentifier:completionHandler:": {
+        "doc": "Removes the data store that matches the identifier you provide.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatastore/remove(foridentifier:completionhandler:)"
+      },
+      "-fetchDataRecordsOfTypes:completionHandler:": {
+        "doc": "Fetches the specified types of records from the data store.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatastore/fetchdatarecords(oftypes:completionhandler:)"
+      },
+      "-removeDataOfTypes:forDataRecords:completionHandler:": {
+        "doc": "Removes the specified types of website data from one or more data records.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatastore/removedata(oftypes:for:completionhandler:)"
+      },
+      "-removeDataOfTypes:modifiedSince:completionHandler:": {
+        "doc": "Removes website data that changed after the specified date.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatastore/removedata(oftypes:modifiedsince:completionhandler:)"
+      }
+    },
+    "WebArchive": {
+      "-initWithData:": {
+        "doc": "Initializes and returns the receiver, specifying the initial content data.",
+        "url": "https://developer.apple.com/documentation/webkit/webarchive/init(data:)"
+      },
+      "-initWithMainResource:subresources:subframeArchives:": {
+        "doc": "Initializes the receiver with a resource and optional subresources and subframe archives..",
+        "url": "https://developer.apple.com/documentation/webkit/webarchive/init(mainresource:subresources:subframearchives:)"
+      }
+    },
+    "WebBackForwardList": {
+      "-addItem:": {
+        "doc": "Inserts an item into the back-forward list, immediately after the current item.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/add(_:)"
+      },
+      "-backListWithLimit:": {
+        "doc": "Returns the items that precede the current item in the back-forward list, up to the specified number of items.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/back(withlimit:)"
+      },
+      "-containsItem:": {
+        "doc": "Returns a Boolean value indicating whether the back-forward list contains the specified item.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/contains(_:)"
+      },
+      "-forwardListWithLimit:": {
+        "doc": "Returns the items that follow the current item in the back-forward list, up to the specified number of items.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/forwardlist(withlimit:)"
+      },
+      "-goBack": {
+        "doc": "Moves backward one item in the back-forward list.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/goback()"
+      },
+      "-goForward": {
+        "doc": "Moves forward one item in the back-forward list.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/goforward()"
+      },
+      "-goToItem:": {
+        "doc": "Makes the specified item in the back-forward list the current item.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/go(to:)"
+      },
+      "-itemAtIndex:": {
+        "doc": "Returns the item at the specified index in the back-forward list.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/item(at:)"
+      },
+      "-pageCacheSize": {
+        "doc": "Returns the maximum number of pages that the receiver can cache.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/pagecachesize()"
+      },
+      "-setPageCacheSize:": {
+        "doc": "Sets the maximum number of pages the receiver can cache.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/setpagecachesize(_:)"
+      }
+    },
+    "WebDataSource": {
+      "-addSubresource:": {
+        "doc": "Adds a resource to the data source’s list of subresources.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/addsubresource(_:)"
+      },
+      "-initWithRequest:": {
+        "doc": "initializes a data source with a URL request.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/init(request:)"
+      },
+      "-subresourceForURL:": {
+        "doc": "Returns a subresource for the given URL.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/subresource(for:)"
+      }
+    },
+    "WebFrame": {
+      "-findFrameNamed:": {
+        "doc": "Returns a web frame that matches the given name.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/findnamed(_:)"
+      },
+      "-initWithName:webFrameView:webView:": {
+        "doc": "Initializes the receiver with a frame name, web frame view, and controlling web view.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/init(name:webframeview:webview:)"
+      },
+      "-loadAlternateHTMLString:baseURL:forUnreachableURL:": {
+        "doc": "Loads alternate content for a frame whose URL is unreachable.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/loadalternatehtmlstring(_:baseurl:forunreachableurl:)"
+      },
+      "-loadArchive:": {
+        "doc": "Loads an archive into the web frame.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/load(_:)-6wkx6"
+      },
+      "-loadData:MIMEType:textEncodingName:baseURL:": {
+        "doc": "Sets the main page contents, MIME type, content encoding, and base URL.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/load(_:mimetype:textencodingname:baseurl:)"
+      },
+      "-loadHTMLString:baseURL:": {
+        "doc": "Sets the main page contents and base URL.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/loadhtmlstring(_:baseurl:)"
+      },
+      "-loadRequest:": {
+        "doc": "Connects to a given URL by initiating an asynchronous client request.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/load(_:)-47p2s"
+      },
+      "-reload": {
+        "doc": "Reloads the initial request passed as an argument to loadRequest:.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/reload()"
+      },
+      "-reloadFromOrigin": {
+        "doc": "Performs an end-to-end revalidation using cache-validating conditionals if possible.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/reloadfromorigin()"
+      },
+      "-stopLoading": {
+        "doc": "Stops any pending loads on the receiver’s data source, and those of its children.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/stoploading()"
+      }
+    },
+    "WebFrameView": {
+      "-printDocumentView": {
+        "doc": "Prints the receiver.",
+        "url": "https://developer.apple.com/documentation/webkit/webframeview/printdocumentview()"
+      },
+      "-printOperationWithPrintInfo:": {
+        "doc": "Returns a print operation object to print this frame.",
+        "url": "https://developer.apple.com/documentation/webkit/webframeview/printoperation(with:)"
+      }
+    },
+    "WebHistory": {
+      "+optionalSharedHistory": {
+        "doc": "Returns a shared web history object, if one exists.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistory/optionalshared()"
+      },
+      "+setOptionalSharedHistory:": {
+        "doc": "Sets the web history object to share.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistory/setoptionalshared(_:)"
+      },
+      "-addItems:": {
+        "doc": "Inserts or updates the specified items in the web history.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistory/additems(_:)"
+      },
+      "-itemForURL:": {
+        "doc": "Returns the web history item that corresponds to the specified web location.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistory/item(for:)"
+      },
+      "-loadFromURL:error:": {
+        "doc": "Loads the contents of the specified web history file.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistory/load(from:)"
+      },
+      "-orderedItemsLastVisitedOnDay:": {
+        "doc": "Returns web history items that were last visited on the specified date.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistory/ordereditemslastvisited(onday:)"
+      },
+      "-removeAllItems": {
+        "doc": "Removes all items from the web history.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistory/removeallitems()"
+      },
+      "-removeItems:": {
+        "doc": "Removes the specified items from the web history.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistory/removeitems(_:)"
+      },
+      "-saveToURL:error:": {
+        "doc": "Saves the web history to the specified file.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistory/save(to:)"
+      }
+    },
+    "WebHistoryItem": {
+      "-initWithURLString:title:lastVisitedTimeInterval:": {
+        "doc": "Initializes the receiver with a URL,URLString, a title specified by title and the last time this item was visited specified by time title, and time last visited.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistoryitem/init(urlstring:title:lastvisitedtimeinterval:)-5amr"
+      }
+    },
+    "WebPreferences": {
+      "+standardPreferences": {
+        "doc": "Returns the standard set of preferences that may be used by all WebView objects.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/standard()"
+      },
+      "-initWithIdentifier:": {
+        "doc": "Returns an initialized WebPreferences object, creating one if it does not exist.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/init(identifier:)"
+      }
+    },
+    "WebResource": {
+      "-initWithData:URL:MIMEType:textEncodingName:frameName:": {
+        "doc": "Initializes and returns a web resource instance.",
+        "url": "https://developer.apple.com/documentation/webkit/webresource/init(data:url:mimetype:textencodingname:framename:)-914h4"
+      }
+    },
+    "WebScriptObject": {
+      "+throwException:": {
+        "doc": "Raises an exception in the current script execution context.",
+        "url": "https://developer.apple.com/documentation/webkit/webscriptobject/throwexception(_:)"
+      },
+      "-JSObject": {
+        "doc": "Returns the JavaScript object corresponding to the receiver.",
+        "url": "https://developer.apple.com/documentation/webkit/webscriptobject/jsobject()"
+      },
+      "-callWebScriptMethod:withArguments:": {
+        "doc": "Returns the result of executing a method in the scripting environment.",
+        "url": "https://developer.apple.com/documentation/webkit/webscriptobject/callwebscriptmethod(_:witharguments:)"
+      },
+      "-evaluateWebScript:": {
+        "doc": "Returns the result of evaluating a script in the scripting environment.",
+        "url": "https://developer.apple.com/documentation/webkit/webscriptobject/evaluatewebscript(_:)"
+      },
+      "-removeWebScriptKey:": {
+        "doc": "Removes a property from a scripting environment.",
+        "url": "https://developer.apple.com/documentation/webkit/webscriptobject/removewebscriptkey(_:)"
+      },
+      "-setException:": {
+        "doc": "Raises a scripting environment exception in the context of the current object.",
+        "url": "https://developer.apple.com/documentation/webkit/webscriptobject/setexception(_:)"
+      },
+      "-setWebScriptValueAtIndex:value:": {
+        "doc": "Sets the value of a property at the specified index.",
+        "url": "https://developer.apple.com/documentation/webkit/webscriptobject/setwebscriptvalueat(_:value:)"
+      },
+      "-stringRepresentation": {
+        "doc": "Returns a string representation of the receiver.",
+        "url": "https://developer.apple.com/documentation/webkit/webscriptobject/stringrepresentation()"
+      },
+      "-webScriptValueAtIndex:": {
+        "doc": "Returns the value of a property at the specified index.",
+        "url": "https://developer.apple.com/documentation/webkit/webscriptobject/webscriptvalue(at:)"
+      }
+    },
+    "WebUndefined": {
+      "+undefined": {
+        "doc": "Returns the shared WebUndefined instance.",
+        "url": "https://developer.apple.com/documentation/webkit/webundefined/undefined"
+      }
+    }
+  },
+  "properties": {
+    "DOMDocument": {
+      "webFrame": {
+        "doc": "The web frame associated with the DOM document.",
+        "url": "https://developer.apple.com/documentation/webkit/domdocument/webframe"
+      }
+    },
+    "DOMHTMLFrameElement": {
+      "contentFrame": {
+        "doc": "The content frame of the element.",
+        "url": "https://developer.apple.com/documentation/webkit/domhtmlframeelement/contentframe"
+      }
+    },
+    "DOMHTMLIFrameElement": {
+      "contentFrame": {
+        "doc": "The content frame of the element.",
+        "url": "https://developer.apple.com/documentation/webkit/domhtmliframeelement/contentframe"
+      }
+    },
+    "DOMHTMLObjectElement": {
+      "contentFrame": {
+        "doc": "The content frame of the element.",
+        "url": "https://developer.apple.com/documentation/webkit/domhtmlobjectelement/contentframe"
+      }
+    },
+    "DOMNode": {
+      "webArchive": {
+        "doc": "A web archive of the content of the node and its children.",
+        "url": "https://developer.apple.com/documentation/webkit/domnode/webarchive"
+      }
+    },
+    "DOMRange": {
+      "markupString": {
+        "doc": "A string in markup format corresponding to the content in the range.",
+        "url": "https://developer.apple.com/documentation/webkit/domrange/markupstring"
+      },
+      "webArchive": {
+        "doc": "A web archive of the content in the range.",
+        "url": "https://developer.apple.com/documentation/webkit/domrange/webarchive"
+      }
+    },
+    "WKBackForwardList": {
+      "backItem": {
+        "doc": "The item immediately preceding the current item, if any.",
+        "url": "https://developer.apple.com/documentation/webkit/wkbackforwardlist/backitem"
+      },
+      "backList": {
+        "doc": "The array of items that precede the current item.",
+        "url": "https://developer.apple.com/documentation/webkit/wkbackforwardlist/backlist"
+      },
+      "currentItem": {
+        "doc": "The current item.",
+        "url": "https://developer.apple.com/documentation/webkit/wkbackforwardlist/currentitem"
+      },
+      "forwardItem": {
+        "doc": "The item immediately following the current item, if any.",
+        "url": "https://developer.apple.com/documentation/webkit/wkbackforwardlist/forwarditem"
+      },
+      "forwardList": {
+        "doc": "The array of items that follow the current item.",
+        "url": "https://developer.apple.com/documentation/webkit/wkbackforwardlist/forwardlist"
+      }
+    },
+    "WKBackForwardListItem": {
+      "URL": {
+        "doc": "The URL of the webpage this item represents.",
+        "url": "https://developer.apple.com/documentation/webkit/wkbackforwardlistitem/url"
+      },
+      "initialURL": {
+        "doc": "The source URL that originally asked the web view to load this page.",
+        "url": "https://developer.apple.com/documentation/webkit/wkbackforwardlistitem/initialurl"
+      },
+      "title": {
+        "doc": "The title of the webpage this item represents.",
+        "url": "https://developer.apple.com/documentation/webkit/wkbackforwardlistitem/title"
+      }
+    },
+    "WKContentRuleList": {
+      "identifier": {
+        "doc": "The identifier for the rule list.",
+        "url": "https://developer.apple.com/documentation/webkit/wkcontentrulelist/identifier"
+      }
+    },
+    "WKContentWorld": {
+      "defaultClientWorld": {
+        "doc": "The default world for clients.",
+        "url": "https://developer.apple.com/documentation/webkit/wkcontentworld/defaultclient"
+      },
+      "name": {
+        "doc": "The name of a custom content world.",
+        "url": "https://developer.apple.com/documentation/webkit/wkcontentworld/name"
+      },
+      "pageWorld": {
+        "doc": "The content world for the current webpage’s content.",
+        "url": "https://developer.apple.com/documentation/webkit/wkcontentworld/page"
+      }
+    },
+    "WKDownload": {
+      "WKDownloadRedirectPolicy": {
+        "doc": "An enumeration with cases that indicate whether to proceed with a redirect.",
+        "url": "https://developer.apple.com/documentation/webkit/wkdownload/redirectpolicy"
+      },
+      "delegate": {
+        "doc": "An object you use to track download progress and handle redirects, authentication challenges, and failures.",
+        "url": "https://developer.apple.com/documentation/webkit/wkdownload/delegate"
+      },
+      "originalRequest": {
+        "doc": "An object that represents the request that initiated the download.",
+        "url": "https://developer.apple.com/documentation/webkit/wkdownload/originalrequest"
+      },
+      "webView": {
+        "doc": "The web view where the download initiated.",
+        "url": "https://developer.apple.com/documentation/webkit/wkdownload/webview"
+      }
+    },
+    "WKFindConfiguration": {
+      "backwards": {
+        "doc": "A Boolean value that indicates the search direction, relative to the current selection.",
+        "url": "https://developer.apple.com/documentation/webkit/wkfindconfiguration/backwards"
+      },
+      "caseSensitive": {
+        "doc": "A Boolean value that indicates whether to consider case when matching the search string.",
+        "url": "https://developer.apple.com/documentation/webkit/wkfindconfiguration/casesensitive"
+      },
+      "wraps": {
+        "doc": "A Boolean value that indicates whether the search wraps around to the other side of the page.",
+        "url": "https://developer.apple.com/documentation/webkit/wkfindconfiguration/wraps"
+      }
+    },
+    "WKFindResult": {
+      "matchFound": {
+        "doc": "A Boolean value that indicates whether the web view found a match during the search.",
+        "url": "https://developer.apple.com/documentation/webkit/wkfindresult/matchfound"
+      }
+    },
+    "WKFrameInfo": {
+      "mainFrame": {
+        "doc": "A Boolean value indicating whether the frame is the web site’s main frame or a subframe.",
+        "url": "https://developer.apple.com/documentation/webkit/wkframeinfo/ismainframe"
+      },
+      "request": {
+        "doc": "The frame’s current request.",
+        "url": "https://developer.apple.com/documentation/webkit/wkframeinfo/request"
+      },
+      "securityOrigin": {
+        "doc": "The frame’s security origin.",
+        "url": "https://developer.apple.com/documentation/webkit/wkframeinfo/securityorigin"
+      },
+      "webView": {
+        "doc": "The web view that contains this frame and the containing webpage.",
+        "url": "https://developer.apple.com/documentation/webkit/wkframeinfo/webview"
+      }
+    },
+    "WKHTTPCookieStore": {
+      "WKCookiePolicy": {
+        "doc": "An enumeration with cases that indicate whether a cookie store allows cookie storage.",
+        "url": "https://developer.apple.com/documentation/webkit/wkhttpcookiestore/cookiepolicy"
+      }
+    },
+    "WKNavigation": {
+      "effectiveContentMode": {
+        "doc": "The content mode WebKit uses to load the webpage.",
+        "url": "https://developer.apple.com/documentation/webkit/wknavigation/effectivecontentmode"
+      }
+    },
+    "WKNavigationAction": {
+      "buttonNumber": {
+        "doc": "The number of the mouse button that caused the navigation request.",
+        "url": "https://developer.apple.com/documentation/webkit/wknavigationaction/buttonnumber"
+      },
+      "modifierFlags": {
+        "doc": "The modifier keys that were pressed at the time of the navigation request.",
+        "url": "https://developer.apple.com/documentation/webkit/wknavigationaction/modifierflags"
+      },
+      "navigationType": {
+        "doc": "The type of action that triggered the navigation.",
+        "url": "https://developer.apple.com/documentation/webkit/wknavigationaction/navigationtype"
+      },
+      "request": {
+        "doc": "The URL request object associated with the navigation action.",
+        "url": "https://developer.apple.com/documentation/webkit/wknavigationaction/request"
+      },
+      "shouldPerformDownload": {
+        "doc": "A Boolean value that indicates whether the web content provided an attribute that indicates a download.",
+        "url": "https://developer.apple.com/documentation/webkit/wknavigationaction/shouldperformdownload"
+      },
+      "sourceFrame": {
+        "doc": "The frame that requested the navigation.",
+        "url": "https://developer.apple.com/documentation/webkit/wknavigationaction/sourceframe"
+      },
+      "targetFrame": {
+        "doc": "The frame in which to display the new content.",
+        "url": "https://developer.apple.com/documentation/webkit/wknavigationaction/targetframe"
+      }
+    },
+    "WKNavigationResponse": {
+      "canShowMIMEType": {
+        "doc": "A Boolean value that indicates whether WebKit is capable of displaying the response’s MIME type natively.",
+        "url": "https://developer.apple.com/documentation/webkit/wknavigationresponse/canshowmimetype"
+      },
+      "forMainFrame": {
+        "doc": "A Boolean value that indicates whether the response targets the web view’s main frame.",
+        "url": "https://developer.apple.com/documentation/webkit/wknavigationresponse/isformainframe"
+      },
+      "response": {
+        "doc": "The frame’s response.",
+        "url": "https://developer.apple.com/documentation/webkit/wknavigationresponse/response"
+      }
+    },
+    "WKOpenPanelParameters": {
+      "allowsDirectories": {
+        "doc": "A Boolean value that indicates whether the file upload control supports the selection of directories.",
+        "url": "https://developer.apple.com/documentation/webkit/wkopenpanelparameters/allowsdirectories"
+      },
+      "allowsMultipleSelection": {
+        "doc": "A Boolean value that indicates whether the file upload control supports multiple files.",
+        "url": "https://developer.apple.com/documentation/webkit/wkopenpanelparameters/allowsmultipleselection"
+      }
+    },
+    "WKPDFConfiguration": {
+      "allowTransparentBackground": {
+        "doc": "A Boolean value that indicates whether the PDF may have a transparent background.",
+        "url": "https://developer.apple.com/documentation/webkit/wkpdfconfiguration/allowtransparentbackground"
+      },
+      "rect": {
+        "doc": "The portion of your web view to capture, specified as a rectangle in the view’s coordinate system.",
+        "url": "https://developer.apple.com/documentation/webkit/wkpdfconfiguration/rect-2a0vp"
+      }
+    },
+    "WKPreferences": {
+      "WKInactiveSchedulingPolicy": {
+        "doc": "An enumeration that lists policies for how a web view that’s not in a window handles tasks.",
+        "url": "https://developer.apple.com/documentation/webkit/wkpreferences/inactiveschedulingpolicy-swift.enum"
+      },
+      "elementFullscreenEnabled": {
+        "doc": "A Boolean value that indicates whether a web view can display content full screen.",
+        "url": "https://developer.apple.com/documentation/webkit/wkpreferences/iselementfullscreenenabled"
+      },
+      "fraudulentWebsiteWarningEnabled": {
+        "doc": "A Boolean value that indicates whether the web view shows warnings for suspected fraudulent content, such as malware or phishing attemps.",
+        "url": "https://developer.apple.com/documentation/webkit/wkpreferences/isfraudulentwebsitewarningenabled"
+      },
+      "inactiveSchedulingPolicy": {
+        "doc": "A policy you set to specify how a web view that’s not in a window handles tasks.",
+        "url": "https://developer.apple.com/documentation/webkit/wkpreferences/inactiveschedulingpolicy-swift.property"
+      },
+      "javaEnabled": {
+        "doc": "A Boolean value that indicates whether Java is enabled.",
+        "url": "https://developer.apple.com/documentation/webkit/wkpreferences/javaenabled"
+      },
+      "javaScriptCanOpenWindowsAutomatically": {
+        "doc": "A Boolean value that indicates whether JavaScript can open windows without user interaction.",
+        "url": "https://developer.apple.com/documentation/webkit/wkpreferences/javascriptcanopenwindowsautomatically"
+      },
+      "javaScriptEnabled": {
+        "doc": "A Boolean value that indicates whether JavaScript is enabled.",
+        "url": "https://developer.apple.com/documentation/webkit/wkpreferences/javascriptenabled"
+      },
+      "minimumFontSize": {
+        "doc": "The minimum font size, in points.",
+        "url": "https://developer.apple.com/documentation/webkit/wkpreferences/minimumfontsize"
+      },
+      "plugInsEnabled": {
+        "doc": "A Boolean value that indicates whether plug-ins are enabled.",
+        "url": "https://developer.apple.com/documentation/webkit/wkpreferences/pluginsenabled"
+      },
+      "shouldPrintBackgrounds": {
+        "doc": "A Boolean value that indicates whether to include any background color or graphics when printing content.",
+        "url": "https://developer.apple.com/documentation/webkit/wkpreferences/shouldprintbackgrounds"
+      },
+      "siteSpecificQuirksModeEnabled": {
+        "doc": "A Boolean that indicates whether to apply site-specific compatibility workarounds.",
+        "url": "https://developer.apple.com/documentation/webkit/wkpreferences/issitespecificquirksmodeenabled"
+      },
+      "tabFocusesLinks": {
+        "doc": "A Boolean value that indicates whether pressing the tab key changes the focus to links and form controls.",
+        "url": "https://developer.apple.com/documentation/webkit/wkpreferences/tabfocuseslinks"
+      },
+      "textInteractionEnabled": {
+        "doc": "A Boolean value that indicates whether to allow people to select or otherwise interact with text.",
+        "url": "https://developer.apple.com/documentation/webkit/wkpreferences/istextinteractionenabled"
+      }
+    },
+    "WKScriptMessage": {
+      "body": {
+        "doc": "The body of the message.",
+        "url": "https://developer.apple.com/documentation/webkit/wkscriptmessage/body"
+      },
+      "frameInfo": {
+        "doc": "The frame that sent the message.",
+        "url": "https://developer.apple.com/documentation/webkit/wkscriptmessage/frameinfo"
+      },
+      "name": {
+        "doc": "The name of the message handler to which the message is sent.",
+        "url": "https://developer.apple.com/documentation/webkit/wkscriptmessage/name"
+      },
+      "webView": {
+        "doc": "The web view that sent the message.",
+        "url": "https://developer.apple.com/documentation/webkit/wkscriptmessage/webview"
+      },
+      "world": {
+        "doc": "The namespace in which the JavaScript code executes.",
+        "url": "https://developer.apple.com/documentation/webkit/wkscriptmessage/world"
+      }
+    },
+    "WKSecurityOrigin": {
+      "host": {
+        "doc": "The security origin’s host.",
+        "url": "https://developer.apple.com/documentation/webkit/wksecurityorigin/host"
+      },
+      "port": {
+        "doc": "The security origin’s port.",
+        "url": "https://developer.apple.com/documentation/webkit/wksecurityorigin/port"
+      },
+      "protocol": {
+        "doc": "The security origin’s protocol.",
+        "url": "https://developer.apple.com/documentation/webkit/wksecurityorigin/protocol"
+      }
+    },
+    "WKSnapshotConfiguration": {
+      "afterScreenUpdates": {
+        "doc": "A Boolean value that indicates whether to take the snapshot after incorporating any pending screen updates.",
+        "url": "https://developer.apple.com/documentation/webkit/wksnapshotconfiguration/afterscreenupdates"
+      },
+      "rect": {
+        "doc": "The portion of your web view to capture, specified as a rectangle in the view’s coordinate system.",
+        "url": "https://developer.apple.com/documentation/webkit/wksnapshotconfiguration/rect"
+      },
+      "snapshotWidth": {
+        "doc": "The width of the captured image, in points.",
+        "url": "https://developer.apple.com/documentation/webkit/wksnapshotconfiguration/snapshotwidth"
+      }
+    },
+    "WKUserContentController": {
+      "userScripts": {
+        "doc": "The user scripts associated with the user content controller.",
+        "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller/userscripts"
+      }
+    },
+    "WKUserScript": {
+      "forMainFrameOnly": {
+        "doc": "A Boolean value that indicates whether to inject the script into the main frame or all frames.",
+        "url": "https://developer.apple.com/documentation/webkit/wkuserscript/isformainframeonly"
+      },
+      "injectionTime": {
+        "doc": "The time at which to inject the script into the webpage.",
+        "url": "https://developer.apple.com/documentation/webkit/wkuserscript/injectiontime"
+      },
+      "source": {
+        "doc": "The script’s source code.",
+        "url": "https://developer.apple.com/documentation/webkit/wkuserscript/source"
+      }
+    },
+    "WKWebExtension": {
+      "WKWebExtension.Error": {
+        "doc": "Constants that indicate errors in the WKWebExtension domain.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/error"
+      },
+      "WKWebExtensionAction": {
+        "doc": "An object that encapsulates the properties for an individual web extension action.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/action"
+      },
+      "WKWebExtensionCommand": {
+        "doc": "An object that encapsulates the properties for an individual web extension command.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/command"
+      },
+      "WKWebExtensionDataRecord": {
+        "doc": "An object that represents a record of stored data for a specific web extension context.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/datarecord"
+      },
+      "WKWebExtensionDataType": {
+        "doc": "Constants for specifying data types for a WKWebExtensionDataRecord.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/datatype"
+      },
+      "WKWebExtensionErrorDomain": {
+        "doc": "Indicates a web extension error.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/errordomain"
+      },
+      "WKWebExtensionMatchPattern": {
+        "doc": "An object that represents a way to specify groups of URLs.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/matchpattern"
+      },
+      "WKWebExtensionMessagePort": {
+        "doc": "An object that manages message-based communication with a web extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/messageport"
+      },
+      "WKWebExtensionPermission": {
+        "doc": "Constants for specifying permission in a WKWebExtensionContext.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/permission"
+      },
+      "WKWebExtensionTabChangedProperties": {
+        "doc": "Constants the web extension controller and web extension context use to indicate tab changes.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/tabchangedproperties"
+      },
+      "WKWebExtensionTabConfiguration": {
+        "doc": "An object that encapsulates configuration options for a tab in an extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/tabconfiguration"
+      },
+      "WKWebExtensionWindowConfiguration": {
+        "doc": "An object that encapsulates configuration options for a window in an extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/windowconfiguration"
+      },
+      "WKWebExtensionWindowState": {
+        "doc": "Constants used by WKWebExtensionWindow to indicate possible states of a window.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/windowstate"
+      },
+      "WKWebExtensionWindowType": {
+        "doc": "Constants used by WKWebExtensionWindow to indicate the type of a window.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/windowtype"
+      },
+      "allRequestedMatchPatterns": {
+        "doc": "The set of websites that the extension requires access to for injected content and for receiving messages from websites.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/allrequestedmatchpatterns"
+      },
+      "defaultLocale": {
+        "doc": "The default locale for the extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/defaultlocale"
+      },
+      "displayActionLabel": {
+        "doc": "The default localized extension action label.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/displayactionlabel"
+      },
+      "displayDescription": {
+        "doc": "The localized extension description.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/displaydescription"
+      },
+      "displayName": {
+        "doc": "The localized extension name.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/displayname"
+      },
+      "displayShortName": {
+        "doc": "The localized extension short name.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/displayshortname"
+      },
+      "displayVersion": {
+        "doc": "The localized extension display version.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/displayversion"
+      },
+      "errors": {
+        "doc": "An array of all errors that occurred during the processing of the extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/errors"
+      },
+      "hasBackgroundContent": {
+        "doc": "A Boolean value indicating whether the extension has background content that can run when needed.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/hasbackgroundcontent"
+      },
+      "hasCommands": {
+        "doc": "A Boolean value indicating whether the extension includes commands that users can invoke.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/hascommands"
+      },
+      "hasContentModificationRules": {
+        "doc": "A Boolean value indicating whether the extension includes rules used for content modification or blocking.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/hascontentmodificationrules"
+      },
+      "hasInjectedContent": {
+        "doc": "A Boolean value indicating whether the extension has script or stylesheet content that can be injected into webpages.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/hasinjectedcontent"
+      },
+      "hasOptionsPage": {
+        "doc": "A Boolean value indicating whether the extension has an options page.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/hasoptionspage"
+      },
+      "hasOverrideNewTabPage": {
+        "doc": "A Boolean value indicating whether the extension provides an alternative to the default new tab page.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/hasoverridenewtabpage"
+      },
+      "hasPersistentBackgroundContent": {
+        "doc": "A Boolean value indicating whether the extension has background content that stays in memory as long as the extension is loaded.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/haspersistentbackgroundcontent"
+      },
+      "init(appExtensionBundle:)": {
+        "doc": "Creates a web extension initialized with a specified app extension bundle.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/init(appextensionbundle:)"
+      },
+      "init(resourceBaseURL:)": {
+        "doc": "Creates a web extension initialized with a specified resource base URL, which can point to either a directory or a ZIP archive.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/init(resourcebaseurl:)"
+      },
+      "manifest": {
+        "doc": "The parsed manifest as a dictionary.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/manifest"
+      },
+      "manifestVersion": {
+        "doc": "The parsed manifest version, or 0 if there is no version specified in the manifest.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/manifestversion"
+      },
+      "optionalPermissionMatchPatterns": {
+        "doc": "The set of websites that the extension may need access to for optional functionality.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/optionalpermissionmatchpatterns"
+      },
+      "optionalPermissions": {
+        "doc": "The set of permissions that the extension may need for optional functionality.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/optionalpermissions"
+      },
+      "requestedPermissionMatchPatterns": {
+        "doc": "The set of websites that the extension requires access to for its base functionality.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/requestedpermissionmatchpatterns"
+      },
+      "requestedPermissions": {
+        "doc": "The set of permissions that the extension requires for its base functionality.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/requestedpermissions"
+      },
+      "version": {
+        "doc": "The extension version.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextension/version"
+      }
+    },
+    "WKWebExtensionContext": {
+      "WKWebExtensionContext.Error": {
+        "doc": "Constants used to indicate errors in the web extension context domain.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/error"
+      },
+      "WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification": {
+        "doc": "A notification the system sends whenever a web extension context has newly removed denied permission match patterns.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/deniedpermissionmatchpatternswereremovednotification"
+      },
+      "WKWebExtensionContextDeniedPermissionsWereRemovedNotification": {
+        "doc": "A notification the system sends whenever a web extension context has newly removed denied permissions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/deniedpermissionswereremovednotification"
+      },
+      "WKWebExtensionContextErrorsDidUpdateNotification": {
+        "doc": "This notification is sent whenever a web extension context has new errors or errors were cleared.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/errorsdidupdatenotification"
+      },
+      "WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification": {
+        "doc": "This notification is sent whenever a web extension context has newly removed granted permission match patterns.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/grantedpermissionmatchpatternswereremovednotification"
+      },
+      "WKWebExtensionContextGrantedPermissionsWereRemovedNotification": {
+        "doc": "This notification is sent whenever a web extension context has newly removed granted permissions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/grantedpermissionswereremovednotification"
+      },
+      "WKWebExtensionContextNotificationUserInfoKey": {
+        "doc": "Constants for specifying web extension context information in notifications.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/notificationuserinfokey"
+      },
+      "WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification": {
+        "doc": "This notification is sent whenever a web extension context has newly denied permission match patterns.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/permissionmatchpatternsweredeniednotification"
+      },
+      "WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification": {
+        "doc": "This notification is sent whenever a web extension context has newly granted permission match patterns.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/permissionmatchpatternsweregrantednotification"
+      },
+      "WKWebExtensionContextPermissionStatus": {
+        "doc": "Constants used to indicate permission status in web extension context.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/permissionstatus"
+      },
+      "WKWebExtensionContextPermissionsWereDeniedNotification": {
+        "doc": "This notification is sent whenever a web extension context has newly denied permissions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/permissionsweredeniednotification"
+      },
+      "WKWebExtensionContextPermissionsWereGrantedNotification": {
+        "doc": "This notification is sent whenever a web extension context has newly granted permissions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/permissionsweregrantednotification"
+      },
+      "baseURL": {
+        "doc": "The base URL the context uses for loading extension resources or injecting content into webpages.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/baseurl"
+      },
+      "commands": {
+        "doc": "The commands associated with the extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/commands"
+      },
+      "currentPermissionMatchPatterns": {
+        "doc": "The currently granted permission match patterns that have not expired.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/currentpermissionmatchpatterns"
+      },
+      "currentPermissions": {
+        "doc": "The currently granted permissions that have not expired.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/currentpermissions"
+      },
+      "deniedPermissionMatchPatterns": {
+        "doc": "The currently denied permission match patterns and their expiration dates.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/deniedpermissionmatchpatterns"
+      },
+      "deniedPermissions": {
+        "doc": "The currently denied permissions and their expiration dates.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/deniedpermissions"
+      },
+      "didActivateTab(_:previousActiveTab:)": {
+        "doc": "Called by the app when a tab is activated to notify only this specific extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/didactivatetab(_:previousactivetab:)"
+      },
+      "didCloseTab(_:windowIsClosing:)": {
+        "doc": "Called by the app when a tab is closed to fire appropriate events with only this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/didclosetab(_:windowisclosing:)"
+      },
+      "didMoveTab(_:from:in:)": {
+        "doc": "Called by the app when a tab is moved to fire appropriate events with only this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/didmovetab(_:from:in:)"
+      },
+      "errors": {
+        "doc": "All errors that occurred in the extension context.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/errors"
+      },
+      "focusedWindow": {
+        "doc": "The window that currently has focus for this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/focusedwindow"
+      },
+      "grantedPermissionMatchPatterns": {
+        "doc": "The currently granted permission match patterns and their expiration dates.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/grantedpermissionmatchpatterns"
+      },
+      "grantedPermissions": {
+        "doc": "The currently granted permissions and their expiration dates.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/grantedpermissions"
+      },
+      "hasAccessToAllHosts": {
+        "doc": "A Boolean value indicating if the currently granted permission match patterns set contains the \u003call_urls\u003e pattern or any * host patterns.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/hasaccesstoallhosts"
+      },
+      "hasAccessToAllURLs": {
+        "doc": "A Boolean value indicating if the currently granted permission match patterns set contains the \u003call_urls\u003e pattern.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/hasaccesstoallurls"
+      },
+      "hasAccessToPrivateData": {
+        "doc": "A Boolean value indicating if the extension has access to private data.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/hasaccesstoprivatedata"
+      },
+      "hasContentModificationRules": {
+        "doc": "A boolean value indicating whether the extension includes rules used for content modification or blocking.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/hascontentmodificationrules"
+      },
+      "hasInjectedContent": {
+        "doc": "A Boolean value indicating whether the extension has script or stylesheet content that can be injected into webpages.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/hasinjectedcontent"
+      },
+      "hasRequestedOptionalAccessToAllHosts": {
+        "doc": "A Boolean value indicating if the extension has requested optional access to all hosts.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/hasrequestedoptionalaccesstoallhosts"
+      },
+      "inspectable": {
+        "doc": "Determines whether Web Inspector can inspect the WKWebView instances for this context.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/isinspectable"
+      },
+      "inspectionName": {
+        "doc": "The name shown when inspecting the background web view.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/inspectionname"
+      },
+      "loaded": {
+        "doc": "A Boolean value indicating if this context is loaded in an extension controller.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/isloaded"
+      },
+      "openTabs": {
+        "doc": "A set of open tabs in all open windows that are exposed to this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/opentabs"
+      },
+      "openWindows": {
+        "doc": "The open windows that are exposed to this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/openwindows"
+      },
+      "optionsPageURL": {
+        "doc": "The URL of the extension’s options page, if the extension has one.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/optionspageurl"
+      },
+      "overrideNewTabPageURL": {
+        "doc": "The URL to use as an alternative to the default new tab page, if the extension has one.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/overridenewtabpageurl"
+      },
+      "uniqueIdentifier": {
+        "doc": "A unique identifier used to distinguish the extension from other extensions and target it for messages.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/uniqueidentifier"
+      },
+      "unsupportedAPIs": {
+        "doc": "Specifies unsupported APIs for this extension, making them undefined in JavaScript.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/unsupportedapis"
+      },
+      "webExtension": {
+        "doc": "The extension this context represents.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/webextension"
+      },
+      "webExtensionController": {
+        "doc": "The extension controller this context is loaded in, otherwise nil if it isn’t loaded.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/webextensioncontroller"
+      },
+      "webViewConfiguration": {
+        "doc": "The web view configuration to use for web views that load pages from this extension.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontext/webviewconfiguration"
+      }
+    },
+    "WKWebExtensionController": {
+      "allExtensionDataTypes": {
+        "doc": "Returns a set of all available extension data types.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/allextensiondatatypes"
+      },
+      "configuration": {
+        "doc": "A copy of the configuration with which the web extension controller was initialized.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/configuration-swift.property"
+      },
+      "delegate": {
+        "doc": "The extension controller delegate.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/delegate"
+      },
+      "didActivateTab(_:previousActiveTab:)": {
+        "doc": "Should be called by the app when a tab is activated to notify all loaded web extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/didactivatetab(_:previousactivetab:)"
+      },
+      "didCloseTab(_:windowIsClosing:)": {
+        "doc": "Should be called by the app when a tab is closed to fire appropriate events with all loaded web extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/didclosetab(_:windowisclosing:)"
+      },
+      "didMoveTab(_:from:in:)": {
+        "doc": "Should be called by the app when a tab is moved to fire appropriate events with all loaded web extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/didmovetab(_:from:in:)"
+      },
+      "extensionContexts": {
+        "doc": "A set of all the currently loaded extension contexts.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/extensioncontexts"
+      },
+      "extensions": {
+        "doc": "A set of all the currently loaded extensions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/extensions"
+      }
+    },
+    "WKWebView": {
+      "UIDelegate": {
+        "doc": "The object you use to integrate custom user interface elements, such as contextual menus or panels, into web view interactions.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/uidelegate"
+      },
+      "URL": {
+        "doc": "The URL for the current webpage.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/url"
+      },
+      "allowsBackForwardNavigationGestures": {
+        "doc": "A Boolean value that indicates whether horizontal swipe gestures trigger backward and forward page navigation.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/allowsbackforwardnavigationgestures"
+      },
+      "allowsLinkPreview": {
+        "doc": "A Boolean value that determines whether pressing a link displays a preview of the destination for the link.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/allowslinkpreview"
+      },
+      "allowsMagnification": {
+        "doc": "A Boolean value that indicates whether magnify gestures change the web view’s magnification.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/allowsmagnification"
+      },
+      "backForwardList": {
+        "doc": "The web view’s back-forward list.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/backforwardlist"
+      },
+      "callAsyncJavaScript(_:arguments:in:contentWorld:)": {
+        "doc": "Executes the specified string as an asynchronous JavaScript function.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/callasyncjavascript(_:arguments:in:contentworld:)"
+      },
+      "callAsyncJavaScript(_:arguments:in:in:completionHandler:)": {
+        "doc": "Executes the specified string as an asynchronous JavaScript function.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/callasyncjavascript(_:arguments:in:in:completionhandler:)"
+      },
+      "cameraCaptureState": {
+        "doc": "An enumeration case that indicates whether the webpage is using the camera to capture images or video.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/cameracapturestate"
+      },
+      "canGoBack": {
+        "doc": "A Boolean value that indicates whether there is a valid back item in the back-forward list.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/cangoback"
+      },
+      "canGoForward": {
+        "doc": "A Boolean value that indicates whether there is a valid forward item in the back-forward list.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/cangoforward"
+      },
+      "configuration": {
+        "doc": "The object that contains the configuration details for the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/configuration"
+      },
+      "createPDF(configuration:completionHandler:)": {
+        "doc": "Generates PDF data from the web view’s contents asynchronously.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/createpdf(configuration:completionhandler:)"
+      },
+      "createWebArchiveData(completionHandler:)": {
+        "doc": "Creates a web archive of the web view’s current contents asynchronously.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/createwebarchivedata(completionhandler:)"
+      },
+      "customUserAgent": {
+        "doc": "The custom user agent string.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/customuseragent"
+      },
+      "estimatedProgress": {
+        "doc": "An estimate of what fraction of the current navigation has been loaded.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/estimatedprogress"
+      },
+      "evaluateJavaScript(_:in:contentWorld:)": {
+        "doc": "Evaluates a JavaScript string in the context of the specified frame and content world.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/evaluatejavascript(_:in:contentworld:)"
+      },
+      "evaluateJavaScript(_:in:in:completionHandler:)": {
+        "doc": "Evaluates a JavaScript string in the context of the specified frame and content world.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/evaluatejavascript(_:in:in:completionhandler:)"
+      },
+      "find(_:configuration:)": {
+        "doc": "Searches for the specified string in the web view’s content.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/find(_:configuration:)"
+      },
+      "find(_:configuration:completionHandler:)": {
+        "doc": "Searches for the specified string in the web view’s content.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/find(_:configuration:completionhandler:)"
+      },
+      "hasOnlySecureContent": {
+        "doc": "A Boolean value that indicates whether the web view loaded all resources on the page through securely encrypted connections.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/hasonlysecurecontent"
+      },
+      "inspectable": {
+        "doc": "A Boolean value that indicates whether you can inspect the view with Safari Web Inspector.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/isinspectable"
+      },
+      "interactionState": {
+        "doc": "An object you use to capture the current state of interaction in a web view so that you can restore that state later to another web view.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/interactionstate"
+      },
+      "loading": {
+        "doc": "A Boolean value that indicates whether the view is currently loading content.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/isloading"
+      },
+      "magnification": {
+        "doc": "The factor by which the page content is currently scaled.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/magnification"
+      },
+      "mediaType": {
+        "doc": "The media type for the contents of the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/mediatype"
+      },
+      "microphoneCaptureState": {
+        "doc": "An enumeration case that indicates whether the webpage is using the microphone to capture audio.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/microphonecapturestate"
+      },
+      "navigationDelegate": {
+        "doc": "The object you use to manage navigation behavior for the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/navigationdelegate"
+      },
+      "pageZoom": {
+        "doc": "The scale factor by which the web view scales content relative to its bounds.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/pagezoom"
+      },
+      "pdf(configuration:)": {
+        "doc": "Generates PDF data from the web view’s contents asynchronously.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/pdf(configuration:)"
+      },
+      "scrollView": {
+        "doc": "The scroll view associated with the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/scrollview"
+      },
+      "serverTrust": {
+        "doc": "The trust management object you use to evaluate trust for the current webpage.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/servertrust"
+      },
+      "themeColor": {
+        "doc": "The theme color that the system gets from the first valid meta tag in the webpage.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/themecolor"
+      },
+      "title": {
+        "doc": "The page title.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/title"
+      },
+      "underPageBackgroundColor": {
+        "doc": "The color the web view displays behind the active page, visible when the user scrolls beyond the bounds of the page.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview/underpagebackgroundcolor"
+      }
+    },
+    "WKWebViewConfiguration": {
+      "allowsAirPlayForMediaPlayback": {
+        "doc": "A Boolean value that indicates whether the web view allows media playback over AirPlay.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/allowsairplayformediaplayback"
+      },
+      "allowsInlineMediaPlayback": {
+        "doc": "A Boolean value that indicates whether HTML5 videos play inline or use the native full-screen controller.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/allowsinlinemediaplayback"
+      },
+      "allowsPictureInPictureMediaPlayback": {
+        "doc": "A Boolean value that indicates whether HTML5 videos can play Picture in Picture.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/allowspictureinpicturemediaplayback"
+      },
+      "applicationNameForUserAgent": {
+        "doc": "The app name that appears in the user agent string.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/applicationnameforuseragent"
+      },
+      "dataDetectorTypes": {
+        "doc": "The types of data detectors to apply to the web view’s content.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/datadetectortypes"
+      },
+      "defaultWebpagePreferences": {
+        "doc": "The default preferences to use when loading and rendering content.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/defaultwebpagepreferences"
+      },
+      "ignoresViewportScaleLimits": {
+        "doc": "A Boolean value that determines whether a web view allows scaling of the webpage.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/ignoresviewportscalelimits"
+      },
+      "limitsNavigationsToAppBoundDomains": {
+        "doc": "A Boolean value that indicates whether the web view limits navigation to pages within the app’s domain.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/limitsnavigationstoappbounddomains"
+      },
+      "mediaPlaybackAllowsAirPlay": {
+        "doc": "Deprecated property.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/mediaplaybackallowsairplay"
+      },
+      "mediaPlaybackRequiresUserAction": {
+        "doc": "Deprecated property.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/mediaplaybackrequiresuseraction"
+      },
+      "mediaTypesRequiringUserActionForPlayback": {
+        "doc": "The media types that require a user gesture to begin playing.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/mediatypesrequiringuseractionforplayback"
+      },
+      "preferences": {
+        "doc": "The object that manages the preference-related settings for the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/preferences"
+      },
+      "processPool": {
+        "doc": "The object that coordinates the processes the web view uses to render its web content and execute scripts.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/processpool"
+      },
+      "requiresUserActionForMediaPlayback": {
+        "doc": "A Boolean value that indicates whether HTML5 videos require the user to start playing them (true) or whether the videos play automatically (false).",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/requiresuseractionformediaplayback"
+      },
+      "selectionGranularity": {
+        "doc": "The level of granularity with which the user can interactively select web view content.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/selectiongranularity"
+      },
+      "suppressesIncrementalRendering": {
+        "doc": "A Boolean value that indicates whether the web view suppresses content rendering until the content is fully loaded into memory.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/suppressesincrementalrendering"
+      },
+      "upgradeKnownHostsToHTTPS": {
+        "doc": "A Boolean value that indicates whether the web view should automatically upgrade supported HTTP requests to HTTPS.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/upgradeknownhoststohttps"
+      },
+      "userContentController": {
+        "doc": "The object that coordinates interactions between your app’s native code and the webpage’s scripts and other content.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/usercontentcontroller"
+      },
+      "userInterfaceDirectionPolicy": {
+        "doc": "The directionality of user interface elements.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/userinterfacedirectionpolicy"
+      },
+      "websiteDataStore": {
+        "doc": "The object you use to get and set the site’s cookies and to track the cached data objects.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/websitedatastore"
+      }
+    },
+    "WKWebpagePreferences": {
+      "WKContentMode": {
+        "doc": "Constants that indicate how to render web view content.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebpagepreferences/contentmode"
+      },
+      "allowsContentJavaScript": {
+        "doc": "A Boolean value that indicates whether JavaScript from web content is allowed to run.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebpagepreferences/allowscontentjavascript"
+      },
+      "lockdownModeEnabled": {
+        "doc": "A Boolean value that indicates whether to use Lockdown Mode in the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebpagepreferences/islockdownmodeenabled"
+      },
+      "preferredContentMode": {
+        "doc": "The content mode for the web view to use when it loads and renders a webpage.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebpagepreferences/preferredcontentmode"
+      }
+    },
+    "WKWebsiteDataRecord": {
+      "dataTypes": {
+        "doc": "The types of data associated with the record.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatarecord/datatypes"
+      },
+      "displayName": {
+        "doc": "The display name for the data record.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatarecord/displayname"
+      }
+    },
+    "WKWebsiteDataStore": {
+      "httpCookieStore": {
+        "doc": "The object that manages the HTTP cookies for your website.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatastore/httpcookiestore"
+      },
+      "identifier": {
+        "doc": "An identifier that uniquely identifies a data store.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatastore/identifier"
+      },
+      "persistent": {
+        "doc": "A Boolean value that indicates whether this object stores data to disk.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatastore/ispersistent"
+      }
+    },
+    "WKWindowFeatures": {
+      "allowsResizing": {
+        "doc": "A Boolean value that indicates whether to make the containing window window resizable.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwindowfeatures/allowsresizing"
+      },
+      "height": {
+        "doc": "The requested height of the containing window.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwindowfeatures/height"
+      },
+      "menuBarVisibility": {
+        "doc": "A Boolean value that indicates whether the webpage requests a visible menu bar.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwindowfeatures/menubarvisibility"
+      },
+      "statusBarVisibility": {
+        "doc": "A Boolean value that indicates whether the webpage requested a visible status bar.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwindowfeatures/statusbarvisibility"
+      },
+      "toolbarsVisibility": {
+        "doc": "A Boolean value that indicates whether the webpage requested a visible toolbar.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwindowfeatures/toolbarsvisibility"
+      },
+      "width": {
+        "doc": "The requested width of the containing window.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwindowfeatures/width"
+      },
+      "x": {
+        "doc": "The requested x-coordinate of the containing window.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwindowfeatures/x"
+      },
+      "y": {
+        "doc": "The requested y-coordinate of the containing window.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwindowfeatures/y"
+      }
+    },
+    "WebArchive": {
+      "data": {
+        "doc": "The data representation of the receiver.",
+        "url": "https://developer.apple.com/documentation/webkit/webarchive/data"
+      },
+      "mainResource": {
+        "doc": "The receiver’s main resource.",
+        "url": "https://developer.apple.com/documentation/webkit/webarchive/mainresource"
+      },
+      "subframeArchives": {
+        "doc": "Archives representing the receiver’s subresources or nil if there are none.",
+        "url": "https://developer.apple.com/documentation/webkit/webarchive/subframearchives"
+      },
+      "subresources": {
+        "doc": "The receiver’s subresources, or nil if there are none.",
+        "url": "https://developer.apple.com/documentation/webkit/webarchive/subresources"
+      }
+    },
+    "WebBackForwardList": {
+      "backItem": {
+        "doc": "The item that precedes the current item in the back-forward list.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/backitem"
+      },
+      "backListCount": {
+        "doc": "The number of items that precede the current item in the back-forward list.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/backlistcount"
+      },
+      "capacity": {
+        "doc": "The maximum number of items that the back-forward list can contain.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/capacity"
+      },
+      "currentItem": {
+        "doc": "The current item in the back-forward list.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/currentitem"
+      },
+      "forwardItem": {
+        "doc": "The item that follows the current item in the back-forward list.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/forwarditem"
+      },
+      "forwardListCount": {
+        "doc": "The number of items that follow the current item in the back-forward list.",
+        "url": "https://developer.apple.com/documentation/webkit/webbackforwardlist/forwardlistcount"
+      }
+    },
+    "WebDataSource": {
+      "data": {
+        "doc": "The raw data that represents the data source’s content.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/data"
+      },
+      "initialRequest": {
+        "doc": "A reference to the original request that was used to load the web content.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/initialrequest"
+      },
+      "loading": {
+        "doc": "A Boolean that indicates whether the data source is loading its content.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/isloading"
+      },
+      "mainResource": {
+        "doc": "AWebResource object representing the data source.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/mainresource"
+      },
+      "pageTitle": {
+        "doc": "The title of the data source’s page.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/pagetitle"
+      },
+      "representation": {
+        "doc": "The data source’s representation depending on its MIME type.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/representation"
+      },
+      "request": {
+        "doc": "The request that was used to create the data source.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/request"
+      },
+      "response": {
+        "doc": "The response for this data source.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/response"
+      },
+      "subresources": {
+        "doc": "The data source’s subresources that have finished downloading.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/subresources"
+      },
+      "textEncodingName": {
+        "doc": "The text encoding for the data source’s web view, if set, or the text encoding of the response.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/textencodingname"
+      },
+      "unreachableURL": {
+        "doc": "The data source’s unreachable URL.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/unreachableurl"
+      },
+      "webArchive": {
+        "doc": "A web archive representing the data source, its subresources, and subframes.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/webarchive"
+      },
+      "webFrame": {
+        "doc": "The web frame that represents this data source.",
+        "url": "https://developer.apple.com/documentation/webkit/webdatasource/webframe"
+      }
+    },
+    "WebFrame": {
+      "DOMDocument": {
+        "doc": "The web frame’s DOM document.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/domdocument"
+      },
+      "childFrames": {
+        "doc": "The frames of the web frame’s immediate children.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/childframes"
+      },
+      "dataSource": {
+        "doc": "The committed data source.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/datasource"
+      },
+      "frameElement": {
+        "doc": "The web view’s DOM frame element.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/frameelement"
+      },
+      "frameView": {
+        "doc": "The web frame’s view object.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/frameview"
+      },
+      "globalContext": {
+        "doc": "The global JavaScript execution context for bridging between the WebKit and JavaScriptCore C API.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/globalcontext"
+      },
+      "javaScriptContext": {
+        "doc": "The frame’s global JavaScript execution context.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/javascriptcontext"
+      },
+      "name": {
+        "doc": "The web frame’s name.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/name"
+      },
+      "parentFrame": {
+        "doc": "The web frame’s parent web frame.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/parent"
+      },
+      "provisionalDataSource": {
+        "doc": "The provisional data source, or nil if either a load request is not in progress or a load request has completed.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/provisionaldatasource"
+      },
+      "webView": {
+        "doc": "The view object that manages the web frame.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/webview"
+      },
+      "windowObject": {
+        "doc": "The JavaScript window object.",
+        "url": "https://developer.apple.com/documentation/webkit/webframe/windowobject"
+      }
+    },
+    "WebFrameView": {
+      "allowsScrolling": {
+        "doc": "A Boolean that indicates whether the frame view should allow users to scroll.",
+        "url": "https://developer.apple.com/documentation/webkit/webframeview/allowsscrolling"
+      },
+      "canPrintHeadersAndFooters": {
+        "doc": "A Boolean value indicating whether the receiver can print headers and footers.",
+        "url": "https://developer.apple.com/documentation/webkit/webframeview/canprintheadersandfooters"
+      },
+      "documentView": {
+        "doc": "The subview that displays the web content.",
+        "url": "https://developer.apple.com/documentation/webkit/webframeview/documentview"
+      },
+      "documentViewShouldHandlePrint": {
+        "doc": "A Boolean value indicating whether the document view should handle a print operation.",
+        "url": "https://developer.apple.com/documentation/webkit/webframeview/documentviewshouldhandleprint"
+      },
+      "webFrame": {
+        "doc": "The web frame.",
+        "url": "https://developer.apple.com/documentation/webkit/webframeview/webframe"
+      }
+    },
+    "WebHistory": {
+      "historyAgeInDaysLimit": {
+        "doc": "The maximum age of web history items that can be retrieved.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistory/historyageindayslimit"
+      },
+      "historyItemLimit": {
+        "doc": "The maximum number of web history items that can be stored.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistory/historyitemlimit"
+      },
+      "orderedLastVisitedDays": {
+        "doc": "An array of all calendar days represented in the web history.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistory/orderedlastvisiteddays"
+      }
+    },
+    "WebHistoryItem": {
+      "URLString": {
+        "doc": "The string representation of the URL for the receiver’s page.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistoryitem/urlstring"
+      },
+      "alternateTitle": {
+        "doc": "An alternate title that may be used in place of the receiver’s page title.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistoryitem/alternatetitle"
+      },
+      "icon": {
+        "doc": "The icon for the receiver’s page, or nil if none exists.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistoryitem/icon"
+      },
+      "lastVisitedTimeInterval": {
+        "doc": "The last time and date the receiver’s page was visited.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistoryitem/lastvisitedtimeinterval"
+      },
+      "originalURLString": {
+        "doc": "The string representation of the original URL for the receiver’s page.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistoryitem/originalurlstring"
+      },
+      "title": {
+        "doc": "The receiver’s original page title.",
+        "url": "https://developer.apple.com/documentation/webkit/webhistoryitem/title"
+      }
+    },
+    "WebPreferences": {
+      "allowsAnimatedImageLooping": {
+        "doc": "A Boolean that indicates whether or not the receiver allows animated images to loop.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/allowsanimatedimagelooping"
+      },
+      "allowsAnimatedImages": {
+        "doc": "A Boolean that indicates whether or not the receiver allows animated images.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/allowsanimatedimages"
+      },
+      "autosaves": {
+        "doc": "A Boolean that indicates whether or not the receiver’s attributes are automatically stored in the user defaults database.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/autosaves"
+      },
+      "cacheModel": {
+        "doc": "The cache model for the web views associated with the receiver.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/cachemodel"
+      },
+      "cursiveFontFamily": {
+        "doc": "The cursive font family of the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/cursivefontfamily"
+      },
+      "defaultFixedFontSize": {
+        "doc": "The default fixed font size of the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/defaultfixedfontsize"
+      },
+      "defaultFontSize": {
+        "doc": "The default font size of the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/defaultfontsize"
+      },
+      "defaultTextEncodingName": {
+        "doc": "The default text encoding of the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/defaulttextencodingname"
+      },
+      "fantasyFontFamily": {
+        "doc": "The fantasy font family of the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/fantasyfontfamily"
+      },
+      "fixedFontFamily": {
+        "doc": "The fixed font family of the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/fixedfontfamily"
+      },
+      "identifier": {
+        "doc": "The receiver’s identifier.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/identifier"
+      },
+      "javaEnabled": {
+        "doc": "A Boolean that indicates whether or not the web view allows Java.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/isjavaenabled"
+      },
+      "javaScriptCanOpenWindowsAutomatically": {
+        "doc": "A Boolean that indicates whether or not the web view allows JavaScript to open windows automatically.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/javascriptcanopenwindowsautomatically"
+      },
+      "javaScriptEnabled": {
+        "doc": "A Boolean that indicates whether or not the web view allows JavaScript.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/isjavascriptenabled"
+      },
+      "loadsImagesAutomatically": {
+        "doc": "A Boolean that indicates whether or not the web view allows images to be loaded automatically.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/loadsimagesautomatically"
+      },
+      "minimumFontSize": {
+        "doc": "The minimum font size of the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/minimumfontsize"
+      },
+      "minimumLogicalFontSize": {
+        "doc": "The minimum logical font size of the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/minimumlogicalfontsize"
+      },
+      "plugInsEnabled": {
+        "doc": "A Boolean that indicates whether or not the web view allows plug-ins.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/arepluginsenabled"
+      },
+      "privateBrowsingEnabled": {
+        "doc": "A Boolean that indicates whether or not private browsing is enabled.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/privatebrowsingenabled"
+      },
+      "sansSerifFontFamily": {
+        "doc": "The sans serif font family of the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/sansseriffontfamily"
+      },
+      "serifFontFamily": {
+        "doc": "The serif font family of the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/seriffontfamily"
+      },
+      "shouldPrintBackgrounds": {
+        "doc": "A Boolean that indicates whether or not the web view should include backgrounds when printing.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/shouldprintbackgrounds"
+      },
+      "standardFontFamily": {
+        "doc": "The standard font family of the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/standardfontfamily"
+      },
+      "suppressesIncrementalRendering": {
+        "doc": "A Boolean that indicates whether incremental rendering should be suppressed.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/suppressesincrementalrendering"
+      },
+      "tabsToLinks": {
+        "doc": "A Boolean that indicates whether or not the tab key will focus links.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/tabstolinks"
+      },
+      "userStyleSheetEnabled": {
+        "doc": "A Boolean that indicates whether or not user style sheets are enabled in the web view.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/userstylesheetenabled"
+      },
+      "usesPageCache": {
+        "doc": "A Boolean that indicates whether the web views associated with the receiver should use the shared page cache.",
+        "url": "https://developer.apple.com/documentation/webkit/webpreferences/usespagecache"
+      }
+    },
+    "WebResource": {
+      "MIMEType": {
+        "doc": "The receiver’s MIME type.",
+        "url": "https://developer.apple.com/documentation/webkit/webresource/mimetype"
+      },
+      "URL": {
+        "doc": "The receiver’s URL.",
+        "url": "https://developer.apple.com/documentation/webkit/webresource/url"
+      },
+      "data": {
+        "doc": "The receiver’s data.",
+        "url": "https://developer.apple.com/documentation/webkit/webresource/data"
+      },
+      "frameName": {
+        "doc": "The name of the frame. If the receiver does not represent the contents of an entire HTML frame, this is nil.",
+        "url": "https://developer.apple.com/documentation/webkit/webresource/framename"
+      },
+      "textEncodingName": {
+        "doc": "The receiver’s text encoding name.",
+        "url": "https://developer.apple.com/documentation/webkit/webresource/textencodingname"
+      }
+    }
+  }
+}

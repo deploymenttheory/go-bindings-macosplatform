@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract   A node representing a MPSCNNNeuronLinear kernel @discussion For each pixel, applies the following function: @code f(x) = a * x + b @endcode
+// A representation of a linear neuron filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronlinearnode
 type MPSCNNNeuronLinearNode struct {

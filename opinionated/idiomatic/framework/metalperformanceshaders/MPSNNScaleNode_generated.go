@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Abstract node representing an image resampling filter.
+//
 // NNScaleNode wraps [raw.MPSNNScaleNode] with a fluent Go API.
 type NNScaleNode struct {
 	inner *raw.MPSNNScaleNode

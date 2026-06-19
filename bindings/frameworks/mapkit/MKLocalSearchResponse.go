@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The results from a map-based search.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mklocalsearchresponse
 type MKLocalSearchResponse struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Activity information that signifies a score out of a possible maximum.
+//
 // ScoreItem wraps [raw.CLSScoreItem] with a fluent Go API.
 type ScoreItem struct {
 	inner *raw.CLSScoreItem
@@ -30,7 +32,7 @@ func ScoreItemFromID(id objc.ID) *ScoreItem {
 	return &ScoreItem{inner: raw.CLSScoreItemFromID(id)}
 }
 
-// @abstract      Create a score item with identifiers, title, score and maximum score. @param         identifier      An identifier that is unique within activity. @param         title           Title of score. Ex @em Biology- Cellular Division Quiz @param         score           The score the user received. @param         maxScore        The maximum score possible.
+// Initializes an activity item that holds a score value.
 //
 // NewScoreItemWithIdentifierTitleScoreMaxScore creates a new [ScoreItem].
 func NewScoreItemWithIdentifierTitleScoreMaxScore(identifier string, title string, score float64, maxScore float64) *ScoreItem {
@@ -39,7 +41,7 @@ func NewScoreItemWithIdentifierTitleScoreMaxScore(identifier string, title strin
 	return &ScoreItem{inner: raw.CLSScoreItemFromID(_id)}
 }
 
-// @abstract      Score out of @c maxScore. @discussion    Should be between zero and @c maxScore [0.0,maxScore].
+// The score earned by a user in completing the task.
 //
 // WithScore sets the score property and returns the receiver for chaining.
 func (x *ScoreItem) WithScore(score float64) *ScoreItem {
@@ -47,7 +49,7 @@ func (x *ScoreItem) WithScore(score float64) *ScoreItem {
 	return x
 }
 
-// @abstract      Total score possible. @discussion    Must be greater than zero.
+// The maximum possible score that the user can earn on a given task.
 //
 // WithMaxScore sets the maxScore property and returns the receiver for chaining.
 func (x *ScoreItem) WithMaxScore(maxScore float64) *ScoreItem {
@@ -55,7 +57,7 @@ func (x *ScoreItem) WithMaxScore(maxScore float64) *ScoreItem {
 	return x
 }
 
-// @abstract      Title of what this ActivityItem represents. @discussion    This will be the title associated with the activity item in the generated progress report.
+// A human readable name for the activity item.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ScoreItem) WithTitle(title string) *ScoreItem {

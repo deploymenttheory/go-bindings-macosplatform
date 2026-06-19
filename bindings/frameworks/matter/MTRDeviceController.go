@@ -168,12 +168,12 @@ func (o *MTRDeviceController) SetDeviceControllerDelegateQueue(delegate MTRDevic
 	o.Ptr().Send(_mTRDeviceControllerSelSetDeviceControllerDelegateQueue, delegate, queue.Ptr())
 }
 
-// Adds a Delegate to the device controller as well as the Queue on which the Delegate callbacks will be triggered Multiple delegates can be added to monitor MTRDeviceController state changes. Note that there should only be one delegate that responds to pairing related callbacks. If a delegate is added a second time, the call would be ignored. All delegates are held by weak references, and so if a delegate object goes away, it will be automatically removed. @param[in] delegate The delegate the commissioning process should use @param[in] queue The queue on which the callbacks will be delivered
+// Adds a Delegate to the device controller as well as the Queue on which the Delegate callbacks will be triggered
 func (o *MTRDeviceController) AddDeviceControllerDelegateQueue(delegate MTRDeviceControllerDelegate, queue *foundation.NSObject) {
 	o.Ptr().Send(_mTRDeviceControllerSelAddDeviceControllerDelegateQueue, delegate, queue.Ptr())
 }
 
-// Removes a Delegate from the device controller @param[in] delegate The delegate to be removed
+// Removes a Delegate from the device controller
 func (o *MTRDeviceController) RemoveDeviceControllerDelegate(delegate MTRDeviceControllerDelegate) {
 	o.Ptr().Send(_mTRDeviceControllerSelRemoveDeviceControllerDelegate, delegate)
 }
@@ -222,7 +222,7 @@ func (o *MTRDeviceController) RemoveServerEndpoint(endpoint *MTRServerEndpoint) 
 	o.Ptr().Send(_mTRDeviceControllerSelRemoveServerEndpoint, endpoint.Ptr())
 }
 
-// Forget any information we have about the device with the given node ID.  That includes clearing any information we have stored about it.
+// Forget any information we have about the device with the given node ID. That includes clearing any information we have stored about it.
 func (o *MTRDeviceController) ForgetDeviceWithNodeID(nodeID *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDeviceControllerSelForgetDeviceWithNodeID, nodeID.Ptr())
 }
@@ -240,12 +240,12 @@ func MTRDeviceControllerComputePASEVerifierForSetupPasscodeIterationsSaltError(s
 	return foundation.NSDataFromID(_ret), nil
 }
 
-// Suspend the controller.  This will attempt to stop all network traffic associated with the controller.  The controller will remain suspended until it is resumed. Suspending an already-suspended controller has no effect.
+// Suspend the controller. This will attempt to stop all network traffic associated with the controller. The controller will remain suspended until it is resumed.
 func (o *MTRDeviceController) Suspend() {
 	o.Ptr().Send(_mTRDeviceControllerSelSuspend)
 }
 
-// Resume the controller.  This has no effect if the controller is not suspended. A resume following any number of suspend calls will resume the controller; there does not need to be a resume call to match every suspend call.
+// Resume the controller. This has no effect if the controller is not suspended.
 func (o *MTRDeviceController) Resume() {
 	o.Ptr().Send(_mTRDeviceControllerSelResume)
 }
@@ -295,8 +295,11 @@ func (o *MTRDeviceController) Devices() *foundation.NSArray[*MTRDevice] {
 
 // Returns the list of node IDs for which this controller has stored information.  Returns empty list if the controller does not have any information stored.
 func (o *MTRDeviceController) NodesWithStoredData() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mTRDeviceControllerSelNodesWithStoredData)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerSelNodesWithStoredData)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *MTRDeviceController) FetchAttestationChallengeForDeviceId(deviceId uint64) *foundation.NSData {
@@ -435,25 +438,34 @@ func MTRDeviceControllerSharedControllerWithIDXpcConnectBlock(controllerID found
 
 // Returns an encoded values object to send over XPC for read, write and command interactions
 func MTRDeviceControllerEncodeXPCResponseValues(values *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelEncodeXPCResponseValues, values)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelEncodeXPCResponseValues, values.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Returns a decoded values object from a values object received from XPC for read, write and command interactions
 func MTRDeviceControllerDecodeXPCResponseValues(values *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelDecodeXPCResponseValues, values)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelDecodeXPCResponseValues, values.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Returns a serialized read parameter object to send over XPC
 func MTRDeviceControllerEncodeXPCReadParams(params *MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelEncodeXPCReadParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelEncodeXPCReadParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Returns a deserialized read parameter object from an object received over XPC
 func MTRDeviceControllerDecodeXPCReadParams(params *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTRReadParams {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelDecodeXPCReadParams, params)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelDecodeXPCReadParams, params.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -462,13 +474,16 @@ func MTRDeviceControllerDecodeXPCReadParams(params *foundation.NSDictionary[*fou
 
 // Returns a serialized subscribe parameter object to send over XPC
 func MTRDeviceControllerEncodeXPCSubscribeParams(params *MTRSubscribeParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelEncodeXPCSubscribeParams, params.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelEncodeXPCSubscribeParams, params.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // Returns a deserialized subscribe parameter object from an object received over XPC
 func MTRDeviceControllerDecodeXPCSubscribeParams(params *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTRSubscribeParams {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelDecodeXPCSubscribeParams, params)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceController), _mTRDeviceControllerSelDecodeXPCSubscribeParams, params.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

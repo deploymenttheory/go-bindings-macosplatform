@@ -99,7 +99,7 @@ func (x *ReplicatorConstraint) WithEnabled(enabled bool) *ReplicatorConstraint {
 	return x
 }
 
-// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+// The influence of the constraint on the node’s transformation.
 //
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *ReplicatorConstraint) WithInfluenceFactor(influenceFactor float64) *ReplicatorConstraint {

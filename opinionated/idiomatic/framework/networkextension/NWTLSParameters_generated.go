@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// TLS properties for creating a connection.
+//
 // NWTLSParameters wraps [raw.NWTLSParameters] with a fluent Go API.
 type NWTLSParameters struct {
 	inner *raw.NWTLSParameters
@@ -36,7 +38,7 @@ func NewNWTLSParameters() *NWTLSParameters {
 	return &NWTLSParameters{inner: raw.NWTLSParametersFromID(_id)}
 }
 
-// @property TLSSessionID @discussion The session ID for the associated connection, used for TLS session resumption. This property is optional when using TLS.
+// The Session ID to use for the associated TCP connection.
 //
 // WithTLSSessionID sets the tLSSessionID property and returns the receiver for chaining.
 func (x *NWTLSParameters) WithTLSSessionID(tLSSessionID *foundation.NSData) *NWTLSParameters {
@@ -44,7 +46,7 @@ func (x *NWTLSParameters) WithTLSSessionID(tLSSessionID *foundation.NSData) *NWT
 	return x
 }
 
-// @property SSLCipherSuites @discussion The set of allowed cipher suites, as defined in <Security/CipherSuite.h>. If set to nil, the default cipher suites will be used.
+// The set of allowed cipher suites when negotiating TLS.
 //
 // WithSSLCipherSuites sets the sSLCipherSuites property and returns the receiver for chaining.
 func (x *NWTLSParameters) WithSSLCipherSuites(sSLCipherSuites *foundation.NSSet[*foundation.NSNumber]) *NWTLSParameters {
@@ -52,7 +54,7 @@ func (x *NWTLSParameters) WithSSLCipherSuites(sSLCipherSuites *foundation.NSSet[
 	return x
 }
 
-// @property minimumSSLProtocolVersion @discussion The minimum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version older than the minimum.
+// The minimum allowed SSLProtocol value to use when negotiating TLS.
 //
 // WithMinimumSSLProtocolVersion sets the minimumSSLProtocolVersion property and returns the receiver for chaining.
 func (x *NWTLSParameters) WithMinimumSSLProtocolVersion(minimumSSLProtocolVersion uint) *NWTLSParameters {
@@ -60,7 +62,7 @@ func (x *NWTLSParameters) WithMinimumSSLProtocolVersion(minimumSSLProtocolVersio
 	return x
 }
 
-// @property maximumSSLProtocolVersion @discussion The maximum allowed SSLProtocol value. as defined in <Security/SecureTransport.h>. If set, the SSL handshake will not accept any protocol version newer than the maximum. This property should be used with caution, since it may limit the use of preferred SSL protocols.
+// The maximum allowed SSLProtocol value to use when negotiating TLS.
 //
 // WithMaximumSSLProtocolVersion sets the maximumSSLProtocolVersion property and returns the receiver for chaining.
 func (x *NWTLSParameters) WithMaximumSSLProtocolVersion(maximumSSLProtocolVersion uint) *NWTLSParameters {

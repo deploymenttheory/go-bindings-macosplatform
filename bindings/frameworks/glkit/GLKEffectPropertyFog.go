@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Fog drawing information for use in GLKit rendering effects.
+//
 // Apple documentation: https://developer.apple.com/documentation/glkit/glkeffectpropertyfog
 type GLKEffectPropertyFog struct {
 	GLKEffectProperty

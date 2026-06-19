@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for describing an individual stage of a migration.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsmigrationstage
 type NSMigrationStage struct {
 	foundation.NSObject

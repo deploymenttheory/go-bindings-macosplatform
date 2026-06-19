@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A rule system consists of 3 things: - The current state, which upon creation is considered the inital state. - The current set of rules. - The current set of facts. Each time a fact is added to the system, the set of rules are evaluated in order and their actions executed in the system if their predicates are true. Rules can be fuzzy, allowing predicates and facts to be asserted to a degree of confidence instead of just boolean on/off. The facts can be any kind of objects as long as they correctly determine equality using isEqual: The simplest approach is to use strings or dictionaries as they provide the most flexibility in defining facts, but user defined classes work just as well and may describe the problem space better. The fact set is at all times a fuzzy set, as defined by fact membership in the set being modulated by their grade of membership. The rules may use the grade of membership to predicate their actions and in such a manner create fuzzy logic. The fuzzy logic Zadeh operators are available on the system itself in order to query multiple facts for combined membership grade.
+// A list of rules, together with a context for evaluating them and interpreting results, for use in constructing data-driven logic or fuzzy logic systems.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkrulesystem
 type GKRuleSystem struct {
@@ -49,7 +49,7 @@ func GKRuleSystemFromID(id objc.ID) *GKRuleSystem {
 	return o
 }
 
-// Initializes a clean rule system with no state, rules or facts.
+// Initializes a new, empty rule system.
 func (o *GKRuleSystem) Init() *GKRuleSystem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRuleSystemSelInit)
 	if _ret != 0 {
@@ -58,73 +58,76 @@ func (o *GKRuleSystem) Init() *GKRuleSystem {
 	return GKRuleSystemFromID(_ret)
 }
 
-// Explicitly evaluate the agenda of the rule system based on the current state and the current set of facts. This may in turn assert or retract more facts or change the state of the system, including activating more rules in the agenda.
+// Evaluates the rule system, executing the list of rules in its agenda.
 func (o *GKRuleSystem) Evaluate() {
 	o.Ptr().Send(_gKRuleSystemSelEvaluate)
 }
 
-// Adds a rule to the system. Also adds it to the agenda in salience order.
+// Adds the specified rule to the system.
 func (o *GKRuleSystem) AddRule(rule *GKRule) {
 	o.Ptr().Send(_gKRuleSystemSelAddRule, rule.Ptr())
 }
 
-// Adds rules to the system. Also adds them to the agenda in salience order.
+// Adds the specified list of rules to the system.
 func (o *GKRuleSystem) AddRulesFromArray(rules *foundation.NSArray[*GKRule]) {
 	o.Ptr().Send(_gKRuleSystemSelAddRulesFromArray, rules.Ptr())
 }
 
-// Removes all rules from the system.  This also removes them from the agenda and executed sets.
+// Removes all rules from the system.
 func (o *GKRuleSystem) RemoveAllRules() {
 	o.Ptr().Send(_gKRuleSystemSelRemoveAllRules)
 }
 
-// Returns the current membership grade for the given fact, which is 0.0 if the fact is not a member of the current set of facts. @return The membership grade of the given fact, in the range [0.0, 1.0].
+// Returns the membership grade of the specified fact.
 func (o *GKRuleSystem) GradeForFact(fact foundation.NSObjectProtocol) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _gKRuleSystemSelGradeForFact, fact)
 	return _ret
 }
 
-// Returns the combined membership grade for the all the given facts. This performs the logical AND operation between the given facts. @return The membership grade by applying the AND operator on the given facts, in the range [0.0, 1.0].
+// Returns the lowest membership grade among the specified facts.
 func (o *GKRuleSystem) MinimumGradeForFacts(facts *foundation.NSArray[objc.ID]) float32 {
-	_ret := objc.Send[float32](o.Ptr(), _gKRuleSystemSelMinimumGradeForFacts, facts)
+	_ret := objc.Send[float32](o.Ptr(), _gKRuleSystemSelMinimumGradeForFacts, facts.Ptr())
 	return _ret
 }
 
-// Returns the maximum membership grade for the any one of the given facts. This performs the logical OR operation between the given facts. @return The membership grade by applying the OR operator on the given facts, in the range [0.0, 1.0].
+// Returns the highest membership grade among the specified facts.
 func (o *GKRuleSystem) MaximumGradeForFacts(facts *foundation.NSArray[objc.ID]) float32 {
-	_ret := objc.Send[float32](o.Ptr(), _gKRuleSystemSelMaximumGradeForFacts, facts)
+	_ret := objc.Send[float32](o.Ptr(), _gKRuleSystemSelMaximumGradeForFacts, facts.Ptr())
 	return _ret
 }
 
-// Asserts a fact with membership grade of 1.0. This will cause the current rules to be evaluated, which may in turn assert or retract more facts or change the state of the system. This is shorthand for calling assertFact:grade: with a grade of 1.0 @see assertFact:grade: @see evaluate @see NSObject.isEqual:
+// Adds the specified fact to the fact set with a membership grade of 1.0, and reevaluates the rules in the system’s agenda.
 func (o *GKRuleSystem) AssertFact(fact foundation.NSObjectProtocol) {
 	o.Ptr().Send(_gKRuleSystemSelAssertFact, fact)
 }
 
-// Asserts a fact with the supplied membership grade. This will cause the current rules to be evaluated, which may in turn assert or retract more facts or change the state of the system. @see evaluate
+// Increases the membership grade of the specified fact by the specified amount, adding it to the fact set if necessary, and reevaluates the rules in the system’s agenda.
 func (o *GKRuleSystem) AssertFactGrade(fact foundation.NSObjectProtocol, grade float32) {
 	o.Ptr().Send(_gKRuleSystemSelAssertFactGrade, fact, grade)
 }
 
-// Retracts a fact, setting its membership grade to 0, which also removes it from the fact set. This will cause the current rules to be evaluated, which may in turn assert or retract more facts or change the state of the system. This is short hand for calling retractFact:grade: with a grade of 1.0 @see retractFact:grade: @see evaluate
+// Removes the specified fact from the fact set, and reevaluates the rules in the system’s agenda.
 func (o *GKRuleSystem) RetractFact(fact foundation.NSObjectProtocol) {
 	o.Ptr().Send(_gKRuleSystemSelRetractFact, fact)
 }
 
-// Retracts a fact, reducing its membership grade by the supplied grade. If this brings the grade to 0 it is also removed from the fact set. This will cause the current rules to be evaluated, which may in turn assert or retract more facts or change the state of the system. @see evaluate
+// Reduces the membership grade of the specified fact by the specified amount, removing it from the fact set if necessary, and reevaluates the rules in the system’s agenda.
 func (o *GKRuleSystem) RetractFactGrade(fact foundation.NSObjectProtocol, grade float32) {
 	o.Ptr().Send(_gKRuleSystemSelRetractFactGrade, fact, grade)
 }
 
-// Clears the agenda and executed sets and removes all facts currently in the system. It then fills the agenda with rules from the rule set, in salience order. @see rules @see facts
+// Returns the rule system to its original agenda and clears all facts.
 func (o *GKRuleSystem) Reset() {
 	o.Ptr().Send(_gKRuleSystemSelReset)
 }
 
 // The implementation-defined state. If any changes are made on this outside the system you must call evaluate to have the system take account of the changes. @see evaluate
 func (o *GKRuleSystem) State() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSMutableDictionary[objc.ID, objc.ID]](o.Ptr(), _gKRuleSystemSelState)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKRuleSystemSelState)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMutableDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // The current set of rules that will be used to set the agenda when rules are first added to the system. They will also be used to refill the agenda whenever it is set. This is at all times the union of the agenda and executed sets. @see agenda @see executed
@@ -156,6 +159,9 @@ func (o *GKRuleSystem) Executed() *foundation.NSArray[*GKRule] {
 
 // The current set of facts. Facts have a grade of membership that is >= 0.0. Query the system for the individual grades of membership with gradeForFact: @see gradeForFact:
 func (o *GKRuleSystem) Facts() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _gKRuleSystemSelFacts)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKRuleSystemSelFacts)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

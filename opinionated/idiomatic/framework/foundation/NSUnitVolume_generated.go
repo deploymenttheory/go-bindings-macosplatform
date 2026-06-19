@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for volume.
+//
 // UnitVolume wraps [raw.NSUnitVolume] with a fluent Go API.
 type UnitVolume struct {
 	inner *raw.NSUnitVolume

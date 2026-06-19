@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the document feeder unit on a scanner.
+//
 // Apple documentation: https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunitdocumentfeeder
 type ICScannerFunctionalUnitDocumentFeeder struct {
 	ICScannerFunctionalUnit

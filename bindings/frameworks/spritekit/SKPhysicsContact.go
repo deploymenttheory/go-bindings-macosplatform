@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of the contact between two physics bodies.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skphysicscontact
 type SKPhysicsContact struct {
 	foundation.NSObject

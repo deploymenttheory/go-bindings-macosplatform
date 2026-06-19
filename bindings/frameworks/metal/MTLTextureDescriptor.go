@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance that you use to configure new Metal texture instances.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtltexturedescriptor
 type MTLTextureDescriptor struct {
 	foundation.NSObject
@@ -66,7 +68,7 @@ func MTLTextureDescriptorFromID(id objc.ID) *MTLTextureDescriptor {
 	return o
 }
 
-// @method texture2DDescriptorWithPixelFormat:width:height:mipmapped: @abstract Create a TextureDescriptor for a common 2D texture.
+// Creates a texture descriptor object for a 2D texture.
 func MTLTextureDescriptorTexture2DDescriptorWithPixelFormatWidthHeightMipmapped(pixelFormat MTLPixelFormat, width uint, height uint, mipmapped bool) *MTLTextureDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLTextureDescriptor), _mTLTextureDescriptorSelTexture2DDescriptorWithPixelFormatWidthHeightMipmapped, pixelFormat, width, height, mipmapped)
 	if _ret != 0 {
@@ -75,7 +77,7 @@ func MTLTextureDescriptorTexture2DDescriptorWithPixelFormatWidthHeightMipmapped(
 	return MTLTextureDescriptorFromID(_ret)
 }
 
-// @method textureCubeDescriptorWithPixelFormat:size:mipmapped: @abstract Create a TextureDescriptor for a common Cube texture.
+// Creates a texture descriptor object for a cube texture.
 func MTLTextureDescriptorTextureCubeDescriptorWithPixelFormatSizeMipmapped(pixelFormat MTLPixelFormat, size uint, mipmapped bool) *MTLTextureDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLTextureDescriptor), _mTLTextureDescriptorSelTextureCubeDescriptorWithPixelFormatSizeMipmapped, pixelFormat, size, mipmapped)
 	if _ret != 0 {
@@ -84,7 +86,7 @@ func MTLTextureDescriptorTextureCubeDescriptorWithPixelFormatSizeMipmapped(pixel
 	return MTLTextureDescriptorFromID(_ret)
 }
 
-// @method textureBufferDescriptorWithPixelFormat:width:resourceOptions:usage: @abstract Create a TextureDescriptor for a common texture buffer.
+// Creates a texture descriptor object for a texture buffer.
 func MTLTextureDescriptorTextureBufferDescriptorWithPixelFormatWidthResourceOptionsUsage(pixelFormat MTLPixelFormat, width uint, resourceOptions MTLResourceOptions, usage MTLTextureUsage) *MTLTextureDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLTextureDescriptor), _mTLTextureDescriptorSelTextureBufferDescriptorWithPixelFormatWidthResourceOptionsUsage, pixelFormat, width, resourceOptions, usage)
 	if _ret != 0 {

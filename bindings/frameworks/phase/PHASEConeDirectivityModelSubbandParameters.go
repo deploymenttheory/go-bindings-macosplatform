@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A data set that projects sound of a certain frequency outward in the shape of a cone.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseconedirectivitymodelsubbandparameters
 type PHASEConeDirectivityModelSubbandParameters struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func PHASEConeDirectivityModelSubbandParametersFromID(id objc.ID) *PHASEConeDire
 	return o
 }
 
+// Creates a data set that projects sound of a certain frequency outward in the shape of a cone.
 func (o *PHASEConeDirectivityModelSubbandParameters) Init() *PHASEConeDirectivityModelSubbandParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEConeDirectivityModelSubbandParametersSelInit)
 	if _ret != 0 {
@@ -45,7 +48,7 @@ func (o *PHASEConeDirectivityModelSubbandParameters) Init() *PHASEConeDirectivit
 	return PHASEConeDirectivityModelSubbandParametersFromID(_ret)
 }
 
-// @method setInnerAngle:outerAngle @abstract Set the innerAngle and outerAngle of the Cone Directivity Model Subband @param innerAngle The inner angle of the cone directivity model, must be less than or equal to outer angle. @param outerAngle The outer angle of the cone directivity model, must be greater than or equal to inner angle. @note The default value for each angle is 360.0. outerAngle must be >= innerAngle.
+// Configures a focus area for cone-based sound directivity.
 func (o *PHASEConeDirectivityModelSubbandParameters) SetInnerAngleOuterAngle(innerAngle float64, outerAngle float64) {
 	o.Ptr().Send(_pHASEConeDirectivityModelSubbandParametersSelSetInnerAngleOuterAngle, innerAngle, outerAngle)
 }

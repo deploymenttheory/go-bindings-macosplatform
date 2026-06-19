@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of terms and their labels, which take precedence over a word tagger.
+//
 // Apple documentation: https://developer.apple.com/documentation/naturallanguage/nlgazetteer
 type NLGazetteer struct {
 	foundation.NSObject
@@ -39,6 +41,7 @@ func NLGazetteerFromID(id objc.ID) *NLGazetteer {
 	return o
 }
 
+// Creates a Natural Language gazetteer from a model created with the Create ML framework.
 func NLGazetteerGazetteerWithContentsOfURLError(url *foundation.NSURL) (*NLGazetteer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLGazetteer), _nLGazetteerSelGazetteerWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -51,6 +54,7 @@ func NLGazetteerGazetteerWithContentsOfURLError(url *foundation.NSURL) (*NLGazet
 	return NLGazetteerFromID(_ret), nil
 }
 
+// Creates a Natural Language gazetteer from a model created with the Create ML framework.
 func (o *NLGazetteer) InitWithContentsOfURLError(url *foundation.NSURL) (*NLGazetteer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLGazetteerSelInitWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -63,6 +67,7 @@ func (o *NLGazetteer) InitWithContentsOfURLError(url *foundation.NSURL) (*NLGaze
 	return NLGazetteerFromID(_ret), nil
 }
 
+// Creates a gazetteer from a data instance.
 func (o *NLGazetteer) InitWithDataError(data *foundation.NSData) (*NLGazetteer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLGazetteerSelInitWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
@@ -75,9 +80,10 @@ func (o *NLGazetteer) InitWithDataError(data *foundation.NSData) (*NLGazetteer, 
 	return NLGazetteerFromID(_ret), nil
 }
 
+// Creates a gazetteer from a set of labels for terms represented by a dictionary.
 func (o *NLGazetteer) InitWithDictionaryLanguageError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], language *foundation.NSString) (*NLGazetteer, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _nLGazetteerSelInitWithDictionaryLanguageError, dictionary, language.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nLGazetteerSelInitWithDictionaryLanguageError, dictionary.Ptr(), language.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -87,6 +93,7 @@ func (o *NLGazetteer) InitWithDictionaryLanguageError(dictionary *foundation.NSD
 	return NLGazetteerFromID(_ret), nil
 }
 
+// Retrieves the label for the given term.
 func (o *NLGazetteer) LabelForString(string_ *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLGazetteerSelLabelForString, string_.Ptr())
 	if _ret != 0 {
@@ -95,9 +102,10 @@ func (o *NLGazetteer) LabelForString(string_ *foundation.NSString) *foundation.N
 	return foundation.NSStringFromID(_ret)
 }
 
+// Creates a gazetteer from a set of labels for terms represented by a dictionary and saves the gazetteer to a file.
 func NLGazetteerWriteGazetteerForDictionaryLanguageToURLError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], language *foundation.NSString, url *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](objc.ID(_clsNLGazetteer), _nLGazetteerSelWriteGazetteerForDictionaryLanguageToURLError, dictionary, language.Ptr(), url.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](objc.ID(_clsNLGazetteer), _nLGazetteerSelWriteGazetteerForDictionaryLanguageToURLError, dictionary.Ptr(), language.Ptr(), url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}

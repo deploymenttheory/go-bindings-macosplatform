@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An alert that prompts the user to remove a participant from a Messages group.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyou/swremoveparticipantalert
 type SWRemoveParticipantAlert struct {
 	foundation.NSObject

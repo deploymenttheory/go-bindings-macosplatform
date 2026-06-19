@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request that finds faces within an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetectfacerectanglesrequest
 type VNDetectFaceRectanglesRequest struct {
 	VNImageBasedRequest

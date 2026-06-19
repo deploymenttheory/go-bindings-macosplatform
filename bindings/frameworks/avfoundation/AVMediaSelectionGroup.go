@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a collection of mutually exclusive options for the presentation of media within an asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmediaselectiongroup
 type AVMediaSelectionGroup struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func AVMediaSelectionGroupFromID(id objc.ID) *AVMediaSelectionGroup {
 	return o
 }
 
-// Returns the instance of AVMediaSelectionOption with properties that match the specified property list. - Parameter plist: A property list previously obtained from an option in the group via -[AVMediaSelectionOption propertyList]. - Returns: If the specified properties match those of an option in the group, an instance of AVMediaSelectionOption. Otherwise nil.
+// Returns the media selection options that match the given property list.
 func (o *AVMediaSelectionGroup) MediaSelectionOptionWithPropertyList(plist objc.ID) *AVMediaSelectionOption {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionGroupSelMediaSelectionOptionWithPropertyList, plist)
 	if _ret != 0 {
@@ -72,7 +74,7 @@ func (o *AVMediaSelectionGroup) AllowsEmptySelection() bool {
 	return _ret
 }
 
-// Filters an array of AVMediaSelectionOptions according to whether they are playable. - Parameter mediaSelectionOptions: An array of AVMediaSelectionOption to be filtered according to whether they are playable. - Returns: An instance of NSArray containing the media selection options of the specified NSArray that are playable.
+// Returns an array containing the media selection options from a given array that are playable.
 func AVMediaSelectionGroupPlayableMediaSelectionOptionsFromArray(mediaSelectionOptions *foundation.NSArray[*AVMediaSelectionOption]) *foundation.NSArray[*AVMediaSelectionOption] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMediaSelectionGroup), _aVMediaSelectionGroupSelPlayableMediaSelectionOptionsFromArray, mediaSelectionOptions.Ptr())
 	if _ret != 0 {
@@ -81,16 +83,16 @@ func AVMediaSelectionGroupPlayableMediaSelectionOptionsFromArray(mediaSelectionO
 	return foundation.NSArrayFromID[*AVMediaSelectionOption](_ret)
 }
 
-// Filters an array of AVMediaSelectionOptions according to whether their locales match any language identifier in the specified array of preferred languages. The returned array is sorted according to the order of preference of the language each matches. - Parameter mediaSelectionOptions: An array of AVMediaSelectionOptions to be filtered and sorted. - Parameter preferredLanguages: An array of language identifiers in order of preference, each of which is an IETF BCP 47 (RFC 4646) language identifier. If your goal is to provide the best match for the end user's preferred languages without consideration of your app's available localizations, pass [NSLocale preferredLanguages] as the value of preferredLanguages. However, if you want to filter the available choices in order to obtain the best match among the localizations that are available for your app, pass [NSBundle preferredLocalizationsFromArray:[[NSBundle mainBundle] localizations] forPreferences:[NSLocale preferredLanguages]] instead. The latter choice is normally more appropriate for strings intended for display as part of the app's UI. - Returns: An instance of NSArray containing media selection options of the specified NSArray that match a preferred language, sorted according to the order of preference of the language each matches.
+// Returns an array of media selection options, filtering them according to whether their locales match one of the specified languages.
 func AVMediaSelectionGroupMediaSelectionOptionsFromArrayFilteredAndSortedAccordingToPreferredLanguages(mediaSelectionOptions *foundation.NSArray[*AVMediaSelectionOption], preferredLanguages *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*AVMediaSelectionOption] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVMediaSelectionGroup), _aVMediaSelectionGroupSelMediaSelectionOptionsFromArrayFilteredAndSortedAccordingToPreferredLanguages, mediaSelectionOptions.Ptr(), preferredLanguages)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVMediaSelectionGroup), _aVMediaSelectionGroupSelMediaSelectionOptionsFromArrayFilteredAndSortedAccordingToPreferredLanguages, mediaSelectionOptions.Ptr(), preferredLanguages.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*AVMediaSelectionOption](_ret)
 }
 
-// Filters an array of AVMediaSelectionOptions according to locale. - Parameter mediaSelectionOptions: An array of AVMediaSelectionOption to be filtered by locale. - Parameter locale: The NSLocale that must be matched for a media selection option to be copied to the output array. - Returns: An instance of NSArray containing the media selection options of the specified NSArray that match the specified locale.
+// Returns an array containing the media selection options from a given array that match the specified locale.
 func AVMediaSelectionGroupMediaSelectionOptionsFromArrayWithLocale(mediaSelectionOptions *foundation.NSArray[*AVMediaSelectionOption], locale *foundation.NSLocale) *foundation.NSArray[*AVMediaSelectionOption] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMediaSelectionGroup), _aVMediaSelectionGroupSelMediaSelectionOptionsFromArrayWithLocale, mediaSelectionOptions.Ptr(), locale.Ptr())
 	if _ret != 0 {
@@ -99,18 +101,18 @@ func AVMediaSelectionGroupMediaSelectionOptionsFromArrayWithLocale(mediaSelectio
 	return foundation.NSArrayFromID[*AVMediaSelectionOption](_ret)
 }
 
-// Filters an array of AVMediaSelectionOptions according to one or more media characteristics. - Parameter mediaSelectionOptions: An array of AVMediaSelectionOptions to be filtered by media characteristic. - Parameter mediaCharacteristics: The media characteristics that must be matched for a media selection option to be copied to the output array. - Returns: An instance of NSArray containing the media selection options of the specified NSArray that match the specified media characteristics.
+// Returns an array containing the media selection options from a given array that match given media characteristics.
 func AVMediaSelectionGroupMediaSelectionOptionsFromArrayWithMediaCharacteristics(mediaSelectionOptions *foundation.NSArray[*AVMediaSelectionOption], mediaCharacteristics *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*AVMediaSelectionOption] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVMediaSelectionGroup), _aVMediaSelectionGroupSelMediaSelectionOptionsFromArrayWithMediaCharacteristics, mediaSelectionOptions.Ptr(), mediaCharacteristics)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVMediaSelectionGroup), _aVMediaSelectionGroupSelMediaSelectionOptionsFromArrayWithMediaCharacteristics, mediaSelectionOptions.Ptr(), mediaCharacteristics.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*AVMediaSelectionOption](_ret)
 }
 
-// Filters an array of AVMediaSelectionOptions according to whether they lack one or more media characteristics. - Parameter mediaSelectionOptions: An array of AVMediaSelectionOptions to be filtered by media characteristic. - Parameter mediaCharacteristics: The media characteristics that must not be present for a media selection option to be copied to the output array. - Returns: An instance of NSArray containing the media selection options of the specified NSArray that lack the specified media characteristics.
+// Returns an array containing the media selection options from a given array that do not match given media characteristics.
 func AVMediaSelectionGroupMediaSelectionOptionsFromArrayWithoutMediaCharacteristics(mediaSelectionOptions *foundation.NSArray[*AVMediaSelectionOption], mediaCharacteristics *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*AVMediaSelectionOption] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVMediaSelectionGroup), _aVMediaSelectionGroupSelMediaSelectionOptionsFromArrayWithoutMediaCharacteristics, mediaSelectionOptions.Ptr(), mediaCharacteristics)
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVMediaSelectionGroup), _aVMediaSelectionGroupSelMediaSelectionOptionsFromArrayWithoutMediaCharacteristics, mediaSelectionOptions.Ptr(), mediaCharacteristics.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An occurrence of textual content found during the analysis of a block of text, such as when matching a regular expression.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nstextcheckingresult
 type NSTextCheckingResult struct {
 	NSObject
@@ -71,6 +73,7 @@ func (o *NSTextCheckingResult) Range() NSRange {
 	return _ret
 }
 
+// Returns the result type that the range represents.
 func (o *NSTextCheckingResult) RangeAtIndex(idx uint) NSRange {
 	_ret := objc.Send[NSRange](o.Ptr(), _nSTextCheckingResultSelRangeAtIndex, idx)
 	return _ret
@@ -81,6 +84,7 @@ func (o *NSTextCheckingResult) RangeWithName(name *NSString) NSRange {
 	return _ret
 }
 
+// Returns a new text checking result after adjusting the ranges as specified by the offset.
 func (o *NSTextCheckingResult) ResultByAdjustingRangesWithOffset(offset int) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelResultByAdjustingRangesWithOffset, offset)
 	if _ret != 0 {
@@ -98,8 +102,11 @@ func (o *NSTextCheckingResult) Orthography() *NSOrthography {
 }
 
 func (o *NSTextCheckingResult) GrammarDetails() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSTextCheckingResultSelGrammarDetails)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelGrammarDetails)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSTextCheckingResult) Date() *NSDate {
@@ -184,6 +191,7 @@ func (o *NSTextCheckingResult) AddressComponents() *NSDictionary[*NSString, *NSS
 	return NSDictionaryFromID[*NSString, *NSString](_ret)
 }
 
+// Creates and returns a text checking result with the specified orthography.
 func NSTextCheckingResultOrthographyCheckingResultWithRangeOrthography(range_ NSRange, orthography *NSOrthography) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelOrthographyCheckingResultWithRangeOrthography, range_, orthography.Ptr())
 	if _ret != 0 {
@@ -192,6 +200,7 @@ func NSTextCheckingResultOrthographyCheckingResultWithRangeOrthography(range_ NS
 	return NSTextCheckingResultFromID(_ret)
 }
 
+// Creates and returns a text checking result with the range of a misspelled word.
 func NSTextCheckingResultSpellCheckingResultWithRange(range_ NSRange) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelSpellCheckingResultWithRange, range_)
 	if _ret != 0 {
@@ -200,14 +209,16 @@ func NSTextCheckingResultSpellCheckingResultWithRange(range_ NSRange) *NSTextChe
 	return NSTextCheckingResultFromID(_ret)
 }
 
+// Creates and returns a text checking result with the specified array of grammatical errors.
 func NSTextCheckingResultGrammarCheckingResultWithRangeDetails(range_ NSRange, details *NSArray[objc.ID]) *NSTextCheckingResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelGrammarCheckingResultWithRangeDetails, range_, details)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelGrammarCheckingResultWithRangeDetails, range_, details.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
+// Creates and returns a text checking result with the specified date.
 func NSTextCheckingResultDateCheckingResultWithRangeDate(range_ NSRange, date *NSDate) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelDateCheckingResultWithRangeDate, range_, date.Ptr())
 	if _ret != 0 {
@@ -216,6 +227,7 @@ func NSTextCheckingResultDateCheckingResultWithRangeDate(range_ NSRange, date *N
 	return NSTextCheckingResultFromID(_ret)
 }
 
+// Creates and returns a text checking result with the specified date, time zone, and duration.
 func NSTextCheckingResultDateCheckingResultWithRangeDateTimeZoneDuration(range_ NSRange, date *NSDate, timeZone *NSTimeZone, duration float64) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelDateCheckingResultWithRangeDateTimeZoneDuration, range_, date.Ptr(), timeZone.Ptr(), duration)
 	if _ret != 0 {
@@ -224,6 +236,7 @@ func NSTextCheckingResultDateCheckingResultWithRangeDateTimeZoneDuration(range_ 
 	return NSTextCheckingResultFromID(_ret)
 }
 
+// Creates and returns a text checking result with the specified address components.
 func NSTextCheckingResultAddressCheckingResultWithRangeComponents(range_ NSRange, components *NSDictionary[*NSString, *NSString]) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelAddressCheckingResultWithRangeComponents, range_, components.Ptr())
 	if _ret != 0 {
@@ -232,6 +245,7 @@ func NSTextCheckingResultAddressCheckingResultWithRangeComponents(range_ NSRange
 	return NSTextCheckingResultFromID(_ret)
 }
 
+// Creates and returns a text checking result with the specified URL.
 func NSTextCheckingResultLinkCheckingResultWithRangeURL(range_ NSRange, url *NSURL) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelLinkCheckingResultWithRangeURL, range_, url.Ptr())
 	if _ret != 0 {
@@ -240,6 +254,7 @@ func NSTextCheckingResultLinkCheckingResultWithRangeURL(range_ NSRange, url *NSU
 	return NSTextCheckingResultFromID(_ret)
 }
 
+// Creates and returns a text checking result with the specified quote-balanced replacement string.
 func NSTextCheckingResultQuoteCheckingResultWithRangeReplacementString(range_ NSRange, replacementString *NSString) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelQuoteCheckingResultWithRangeReplacementString, range_, replacementString.Ptr())
 	if _ret != 0 {
@@ -248,6 +263,7 @@ func NSTextCheckingResultQuoteCheckingResultWithRangeReplacementString(range_ NS
 	return NSTextCheckingResultFromID(_ret)
 }
 
+// Creates and returns a text checking result with the specified dash corrected replacement string.
 func NSTextCheckingResultDashCheckingResultWithRangeReplacementString(range_ NSRange, replacementString *NSString) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelDashCheckingResultWithRangeReplacementString, range_, replacementString.Ptr())
 	if _ret != 0 {
@@ -256,6 +272,7 @@ func NSTextCheckingResultDashCheckingResultWithRangeReplacementString(range_ NSR
 	return NSTextCheckingResultFromID(_ret)
 }
 
+// Creates and returns a text checking result with the specified replacement string.
 func NSTextCheckingResultReplacementCheckingResultWithRangeReplacementString(range_ NSRange, replacementString *NSString) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelReplacementCheckingResultWithRangeReplacementString, range_, replacementString.Ptr())
 	if _ret != 0 {
@@ -264,6 +281,7 @@ func NSTextCheckingResultReplacementCheckingResultWithRangeReplacementString(ran
 	return NSTextCheckingResultFromID(_ret)
 }
 
+// Creates and returns a text checking result after detecting a possible correction.
 func NSTextCheckingResultCorrectionCheckingResultWithRangeReplacementString(range_ NSRange, replacementString *NSString) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelCorrectionCheckingResultWithRangeReplacementString, range_, replacementString.Ptr())
 	if _ret != 0 {
@@ -280,6 +298,7 @@ func NSTextCheckingResultCorrectionCheckingResultWithRangeReplacementStringAlter
 	return NSTextCheckingResultFromID(_ret)
 }
 
+// Creates and returns a type checking result with the specified regular expression data.
 func NSTextCheckingResultRegularExpressionCheckingResultWithRangesCountRegularExpression(ranges *NSRange, count uint, regularExpression *NSRegularExpression) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelRegularExpressionCheckingResultWithRangesCountRegularExpression, ranges, count, regularExpression.Ptr())
 	if _ret != 0 {
@@ -288,6 +307,7 @@ func NSTextCheckingResultRegularExpressionCheckingResultWithRangesCountRegularEx
 	return NSTextCheckingResultFromID(_ret)
 }
 
+// Creates and returns a text checking result with the specified phone number.
 func NSTextCheckingResultPhoneNumberCheckingResultWithRangePhoneNumber(range_ NSRange, phoneNumber *NSString) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelPhoneNumberCheckingResultWithRangePhoneNumber, range_, phoneNumber.Ptr())
 	if _ret != 0 {
@@ -296,6 +316,7 @@ func NSTextCheckingResultPhoneNumberCheckingResultWithRangePhoneNumber(range_ NS
 	return NSTextCheckingResultFromID(_ret)
 }
 
+// Creates and returns a text checking result with the specified transit information.
 func NSTextCheckingResultTransitInformationCheckingResultWithRangeComponents(range_ NSRange, components *NSDictionary[*NSString, *NSString]) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelTransitInformationCheckingResultWithRangeComponents, range_, components.Ptr())
 	if _ret != 0 {

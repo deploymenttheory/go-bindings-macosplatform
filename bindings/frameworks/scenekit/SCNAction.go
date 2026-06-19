@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A simple, reusable animation that changes attributes of any node you attach it to.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnaction
 type SCNAction struct {
 	foundation.NSObject
@@ -66,7 +68,7 @@ func SCNActionFromID(id objc.ID) *SCNAction {
 	return o
 }
 
-// @method reversedAction @abstract Creates an action that reverses the behavior of another action.
+// Creates an action that reverses the behavior of another action.
 func (o *SCNAction) ReversedAction() *SCNAction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNActionSelReversedAction)
 	if _ret != 0 {
@@ -75,6 +77,7 @@ func (o *SCNAction) ReversedAction() *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that moves a node relative to its current position.
 func SCNActionMoveByXYZDuration(deltaX float64, deltaY float64, deltaZ float64, duration float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelMoveByXYZDuration, deltaX, deltaY, deltaZ, duration)
 	if _ret != 0 {
@@ -83,6 +86,7 @@ func SCNActionMoveByXYZDuration(deltaX float64, deltaY float64, deltaZ float64, 
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that moves a node relative to its current position.
 func SCNActionMoveByDuration(delta SCNVector3, duration float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelMoveByDuration, delta, duration)
 	if _ret != 0 {
@@ -91,6 +95,7 @@ func SCNActionMoveByDuration(delta SCNVector3, duration float64) *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that moves a node to a new position.
 func SCNActionMoveToDuration(location SCNVector3, duration float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelMoveToDuration, location, duration)
 	if _ret != 0 {
@@ -99,6 +104,7 @@ func SCNActionMoveToDuration(location SCNVector3, duration float64) *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that rotates the node in each of the three principal axes by angles relative to its current orientation.
 func SCNActionRotateByXYZDuration(xAngle float64, yAngle float64, zAngle float64, duration float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRotateByXYZDuration, xAngle, yAngle, zAngle, duration)
 	if _ret != 0 {
@@ -107,6 +113,7 @@ func SCNActionRotateByXYZDuration(xAngle float64, yAngle float64, zAngle float64
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that rotates the node to absolute angles in each of the three principal axes.
 func SCNActionRotateToXYZDuration(xAngle float64, yAngle float64, zAngle float64, duration float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRotateToXYZDuration, xAngle, yAngle, zAngle, duration)
 	if _ret != 0 {
@@ -115,6 +122,7 @@ func SCNActionRotateToXYZDuration(xAngle float64, yAngle float64, zAngle float64
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that rotates the node to absolute angles in each of the three principal axes.
 func SCNActionRotateToXYZDurationShortestUnitArc(xAngle float64, yAngle float64, zAngle float64, duration float64, shortestUnitArc bool) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRotateToXYZDurationShortestUnitArc, xAngle, yAngle, zAngle, duration, shortestUnitArc)
 	if _ret != 0 {
@@ -123,6 +131,7 @@ func SCNActionRotateToXYZDurationShortestUnitArc(xAngle float64, yAngle float64,
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that rotates the node by an angle around a specified axis.
 func SCNActionRotateByAngleAroundAxisDuration(angle float64, axis SCNVector3, duration float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRotateByAngleAroundAxisDuration, angle, axis, duration)
 	if _ret != 0 {
@@ -131,6 +140,7 @@ func SCNActionRotateByAngleAroundAxisDuration(angle float64, axis SCNVector3, du
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that rotates the node to an absolute angle around a specified axis.
 func SCNActionRotateToAxisAngleDuration(axisAngle SCNVector4, duration float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRotateToAxisAngleDuration, axisAngle, duration)
 	if _ret != 0 {
@@ -139,6 +149,7 @@ func SCNActionRotateToAxisAngleDuration(axisAngle SCNVector4, duration float64) 
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that uniformly changes the scale factor of a node by a relative value.
 func SCNActionScaleByDuration(scale float64, sec float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelScaleByDuration, scale, sec)
 	if _ret != 0 {
@@ -147,6 +158,7 @@ func SCNActionScaleByDuration(scale float64, sec float64) *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that uniformly changes the scale factor of a node to an absolute value.
 func SCNActionScaleToDuration(scale float64, sec float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelScaleToDuration, scale, sec)
 	if _ret != 0 {
@@ -155,6 +167,7 @@ func SCNActionScaleToDuration(scale float64, sec float64) *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that runs a collection of actions sequentially.
 func SCNActionSequence(actions *foundation.NSArray[*SCNAction]) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelSequence, actions.Ptr())
 	if _ret != 0 {
@@ -163,6 +176,7 @@ func SCNActionSequence(actions *foundation.NSArray[*SCNAction]) *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that runs a collection of actions in parallel.
 func SCNActionGroup(actions *foundation.NSArray[*SCNAction]) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelGroup, actions.Ptr())
 	if _ret != 0 {
@@ -171,6 +185,7 @@ func SCNActionGroup(actions *foundation.NSArray[*SCNAction]) *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that repeats another action a specified number of times.
 func SCNActionRepeatActionCount(action *SCNAction, count uint) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRepeatActionCount, action.Ptr(), count)
 	if _ret != 0 {
@@ -179,6 +194,7 @@ func SCNActionRepeatActionCount(action *SCNAction, count uint) *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that repeats another action forever.
 func SCNActionRepeatActionForever(action *SCNAction) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRepeatActionForever, action.Ptr())
 	if _ret != 0 {
@@ -187,6 +203,7 @@ func SCNActionRepeatActionForever(action *SCNAction) *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that changes the opacity of the node to 1.0.
 func SCNActionFadeInWithDuration(sec float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelFadeInWithDuration, sec)
 	if _ret != 0 {
@@ -195,6 +212,7 @@ func SCNActionFadeInWithDuration(sec float64) *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that changes the opacity of the node to 0.0.
 func SCNActionFadeOutWithDuration(sec float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelFadeOutWithDuration, sec)
 	if _ret != 0 {
@@ -203,6 +221,7 @@ func SCNActionFadeOutWithDuration(sec float64) *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that adjusts the opacity of a node by a relative value.
 func SCNActionFadeOpacityByDuration(factor float64, sec float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelFadeOpacityByDuration, factor, sec)
 	if _ret != 0 {
@@ -211,6 +230,7 @@ func SCNActionFadeOpacityByDuration(factor float64, sec float64) *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that adjusts the opacity of a node to a new value.
 func SCNActionFadeOpacityToDuration(opacity float64, sec float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelFadeOpacityToDuration, opacity, sec)
 	if _ret != 0 {
@@ -219,6 +239,7 @@ func SCNActionFadeOpacityToDuration(opacity float64, sec float64) *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that hides a node.
 func SCNActionHide() *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelHide)
 	if _ret != 0 {
@@ -227,6 +248,7 @@ func SCNActionHide() *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that ensures a node is not hidden.
 func SCNActionUnhide() *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelUnhide)
 	if _ret != 0 {
@@ -235,6 +257,7 @@ func SCNActionUnhide() *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that idles for a specified period of time.
 func SCNActionWaitForDuration(sec float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelWaitForDuration, sec)
 	if _ret != 0 {
@@ -243,6 +266,7 @@ func SCNActionWaitForDuration(sec float64) *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that idles for a randomized period of time.
 func SCNActionWaitForDurationWithRange(sec float64, durationRange float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelWaitForDurationWithRange, sec, durationRange)
 	if _ret != 0 {
@@ -251,6 +275,7 @@ func SCNActionWaitForDurationWithRange(sec float64, durationRange float64) *SCNA
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that removes the node from its parent.
 func SCNActionRemoveFromParentNode() *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRemoveFromParentNode)
 	if _ret != 0 {
@@ -259,6 +284,7 @@ func SCNActionRemoveFromParentNode() *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that executes a block.
 func SCNActionRunBlock(block func(*SCNNode)) *SCNAction {
 	var __block_block objc.Block
 	if block != nil {
@@ -277,6 +303,7 @@ func SCNActionRunBlock(block func(*SCNNode)) *SCNAction {
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that executes a block on a specific dispatch queue.
 func SCNActionRunBlockQueue(block func(*SCNNode), queue *foundation.NSObject) *SCNAction {
 	var __block_block objc.Block
 	if block != nil {
@@ -295,6 +322,7 @@ func SCNActionRunBlockQueue(block func(*SCNNode), queue *foundation.NSObject) *S
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that executes a JavaScript script periodically over a specified duration.
 func SCNActionJavaScriptActionWithScriptDuration(script *foundation.NSString, seconds float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelJavaScriptActionWithScriptDuration, script.Ptr(), seconds)
 	if _ret != 0 {
@@ -303,6 +331,7 @@ func SCNActionJavaScriptActionWithScriptDuration(script *foundation.NSString, se
 	return SCNActionFromID(_ret)
 }
 
+// Creates an action that executes a block periodically over a specified duration.
 func SCNActionCustomActionWithDurationActionBlock(seconds float64, block func(*SCNNode, float64)) *SCNAction {
 	var __block_block objc.Block
 	if block != nil {
@@ -321,7 +350,7 @@ func SCNActionCustomActionWithDurationActionBlock(seconds float64, block func(*S
 	return SCNActionFromID(_ret)
 }
 
-// Creates an action that plays a sound @param source The audio source to play (see SCNAudioSource.h) @param wait If YES, then the duration of this action is the same as the length of the audio playback. If NO, the action is considered to have completed immediately.
+// Creates an action that plays an audio source.
 func SCNActionPlayAudioSourceWaitForCompletion(source *SCNAudioSource, wait bool) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelPlayAudioSourceWaitForCompletion, source.Ptr(), wait)
 	if _ret != 0 {

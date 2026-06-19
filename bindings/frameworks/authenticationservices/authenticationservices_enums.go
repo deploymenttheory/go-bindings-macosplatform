@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// A style for the authorization button.
 type ASAuthorizationAppleIDButtonStyle int64
 
 const (
@@ -29,6 +30,7 @@ func (e ASAuthorizationAppleIDButtonStyle) String() string {
 	}
 }
 
+// A type for the authorization button.
 type ASAuthorizationAppleIDButtonType int64
 
 const (
@@ -51,6 +53,7 @@ func (e ASAuthorizationAppleIDButtonType) String() string {
 	}
 }
 
+// Possible values for the credential state of a user.
 type ASAuthorizationAppleIDProviderCredentialState int64
 
 const (
@@ -75,6 +78,7 @@ func (e ASAuthorizationAppleIDProviderCredentialState) String() string {
 	}
 }
 
+// Options that modify how a controller performs authorization requests.
 type ASAuthorizationControllerRequestOptions uint64
 
 const (
@@ -93,6 +97,7 @@ func (e ASAuthorizationControllerRequestOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Errors that can occur during authorization.
 type ASAuthorizationError int64
 
 const (
@@ -163,10 +168,13 @@ func (e ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) Stri
 	}
 }
 
+// The platform single sign-on method for the user.
 type ASAuthorizationProviderExtensionAuthenticationMethod int64
 
 const (
-	ASAuthorizationProviderExtensionAuthenticationMethodPassword             ASAuthorizationProviderExtensionAuthenticationMethod = 1
+	// Password authentication.
+	ASAuthorizationProviderExtensionAuthenticationMethodPassword ASAuthorizationProviderExtensionAuthenticationMethod = 1
+	// Secure Enclave key authentication.
 	ASAuthorizationProviderExtensionAuthenticationMethodUserSecureEnclaveKey ASAuthorizationProviderExtensionAuthenticationMethod = 2
 	ASAuthorizationProviderExtensionAuthenticationMethodSmartCard            ASAuthorizationProviderExtensionAuthenticationMethod = 3
 )
@@ -205,14 +213,15 @@ func (e ASAuthorizationProviderExtensionFederationType) String() string {
 	}
 }
 
+// The key types for platform single sign-on.
 type ASAuthorizationProviderExtensionKeyType int64
 
 const (
-	// The user's device signing key.
+	// The user device signing key.
 	ASAuthorizationProviderExtensionKeyTypeUserDeviceSigning ASAuthorizationProviderExtensionKeyType = 1
-	// The user's device encryption key.
+	// The user device encryption key.
 	ASAuthorizationProviderExtensionKeyTypeUserDeviceEncryption ASAuthorizationProviderExtensionKeyType = 2
-	// The user's Secure Enclave backed key.
+	// The user Secure Enclave key.
 	ASAuthorizationProviderExtensionKeyTypeUserSecureEnclaveKey ASAuthorizationProviderExtensionKeyType = 3
 	// The shared device signing key.
 	ASAuthorizationProviderExtensionKeyTypeSharedDeviceSigning ASAuthorizationProviderExtensionKeyType = 4
@@ -266,13 +275,18 @@ func (e ASAuthorizationProviderExtensionPlatformSSOProtocolVersion) String() str
 	}
 }
 
+// The registration result.
 type ASAuthorizationProviderExtensionRegistrationResult int64
 
 const (
-	ASAuthorizationProviderExtensionRegistrationResultSuccess               ASAuthorizationProviderExtensionRegistrationResult = 0
-	ASAuthorizationProviderExtensionRegistrationResultFailed                ASAuthorizationProviderExtensionRegistrationResult = 1
+	// The registration succeeds.
+	ASAuthorizationProviderExtensionRegistrationResultSuccess ASAuthorizationProviderExtensionRegistrationResult = 0
+	// The registration fails to complete and the system retries later.
+	ASAuthorizationProviderExtensionRegistrationResultFailed ASAuthorizationProviderExtensionRegistrationResult = 1
+	// The user interface is required to complete registration.
 	ASAuthorizationProviderExtensionRegistrationResultUserInterfaceRequired ASAuthorizationProviderExtensionRegistrationResult = 2
-	ASAuthorizationProviderExtensionRegistrationResultFailedNoRetry         ASAuthorizationProviderExtensionRegistrationResult = 3
+	// The registration fails to complete and the system doesn’t retry later.
+	ASAuthorizationProviderExtensionRegistrationResultFailedNoRetry ASAuthorizationProviderExtensionRegistrationResult = 3
 )
 
 func (e ASAuthorizationProviderExtensionRegistrationResult) String() string {
@@ -290,11 +304,15 @@ func (e ASAuthorizationProviderExtensionRegistrationResult) String() string {
 	}
 }
 
+// The options for the extension to obtain the status of the registration.
 type ASAuthorizationProviderExtensionRequestOptions uint64
 
 const (
-	ASAuthorizationProviderExtensionRequestOptionsNone                           ASAuthorizationProviderExtensionRequestOptions = 0
-	ASAuthorizationProviderExtensionRequestOptionsUserInteractionEnabled         ASAuthorizationProviderExtensionRequestOptions = 1
+	// Options aren’t available.
+	ASAuthorizationProviderExtensionRequestOptionsNone ASAuthorizationProviderExtensionRequestOptions = 0
+	// Indicates that the user interface is in an enabled state.
+	ASAuthorizationProviderExtensionRequestOptionsUserInteractionEnabled ASAuthorizationProviderExtensionRequestOptions = 1
+	// Indicates that the registration is undergoing repair.
 	ASAuthorizationProviderExtensionRequestOptionsRegistrationRepair             ASAuthorizationProviderExtensionRequestOptions = 2
 	ASAuthorizationProviderExtensionRequestOptionsRegistrationSharedDeviceKeys   ASAuthorizationProviderExtensionRequestOptions = 4
 	ASAuthorizationProviderExtensionRequestOptionsRegistrationDeviceKeyMigration ASAuthorizationProviderExtensionRequestOptions = 8
@@ -409,10 +427,13 @@ func (e ASAuthorizationPublicKeyCredentialAttachment) String() string {
 	}
 }
 
+// A type that represents the operation of the large blob assertion.
 type ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation int64
 
 const (
-	ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationRead  ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation = 0
+	// An operation to read data from the blob.
+	ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationRead ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation = 0
+	// An operation to write data to the blob.
 	ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationWrite ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation = 1
 )
 
@@ -427,10 +448,13 @@ func (e ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation) String() 
 	}
 }
 
+// An enumeration of large binary object support requirement values.
 type ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement int64
 
 const (
-	ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementRequired  ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement = 0
+	// A value that indicates the app requires large binary object support.
+	ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementRequired ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement = 0
+	// A value that indicates the app needs large binary object support.
 	ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementPreferred ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement = 1
 )
 
@@ -445,6 +469,7 @@ func (e ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement) String() 
 	}
 }
 
+// An enumeration of values that indicate whether the browser app has access to a person’s passkeys.
 type ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState int64
 
 const (
@@ -466,6 +491,7 @@ func (e ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState) S
 	}
 }
 
+// Constants that represent credential identity store error codes.
 type ASCredentialIdentityStoreErrorCode int64
 
 const (
@@ -487,9 +513,11 @@ func (e ASCredentialIdentityStoreErrorCode) String() string {
 	}
 }
 
+// The defined identity types for use in retrieving credentials.
 type ASCredentialIdentityTypes uint64
 
 const (
+	// A value that matches all identity types.
 	ASCredentialIdentityTypesAll         ASCredentialIdentityTypes = 0
 	ASCredentialIdentityTypesPassword    ASCredentialIdentityTypes = 1
 	ASCredentialIdentityTypesPasskey     ASCredentialIdentityTypes = 2
@@ -513,13 +541,18 @@ func (e ASCredentialIdentityTypes) String() string {
 	return strings.Join(parts, "|")
 }
 
+// An enumeration that identifies different types of credentials that apps and websites can request.
 type ASCredentialRequestType int64
 
 const (
-	ASCredentialRequestTypePassword            ASCredentialRequestType = 0
-	ASCredentialRequestTypePasskeyAssertion    ASCredentialRequestType = 1
+	// The app or website is requesting a password credential.
+	ASCredentialRequestTypePassword ASCredentialRequestType = 0
+	// The app or website is requesting a passkey assertion credential.
+	ASCredentialRequestTypePasskeyAssertion ASCredentialRequestType = 1
+	// The app or website is requesting a passkey registration credential.
 	ASCredentialRequestTypePasskeyRegistration ASCredentialRequestType = 2
-	ASCredentialRequestTypeOneTimeCode         ASCredentialRequestType = 3
+	// The app or website is requesting a one-time passcode.
+	ASCredentialRequestTypeOneTimeCode ASCredentialRequestType = 3
 )
 
 func (e ASCredentialRequestType) String() string {
@@ -537,6 +570,7 @@ func (e ASCredentialRequestType) String() string {
 	}
 }
 
+// Possible values for the service identifier type.
 type ASCredentialServiceIdentifierType int64
 
 const (
@@ -559,6 +593,7 @@ func (e ASCredentialServiceIdentifierType) String() string {
 	}
 }
 
+// The codes for a credential provider extension error.
 type ASExtensionErrorCode int64
 
 const (
@@ -629,12 +664,16 @@ func (e ASUserAgeRange) String() string {
 	}
 }
 
+// Possible values for the real user indicator.
 type ASUserDetectionStatus int64
 
 const (
+	// The system can’t determine this user’s status as a real person.
 	ASUserDetectionStatusUnsupported ASUserDetectionStatus = 0
-	ASUserDetectionStatusUnknown     ASUserDetectionStatus = 1
-	ASUserDetectionStatusLikelyReal  ASUserDetectionStatus = 2
+	// The system hasn’t determined whether the user might be a real person.
+	ASUserDetectionStatusUnknown ASUserDetectionStatus = 1
+	// The user appears to be a real person.
+	ASUserDetectionStatusLikelyReal ASUserDetectionStatus = 2
 )
 
 func (e ASUserDetectionStatus) String() string {
@@ -650,6 +689,7 @@ func (e ASUserDetectionStatus) String() string {
 	}
 }
 
+// The error code for a web authentication session error.
 type ASWebAuthenticationSessionErrorCode int64
 
 const (

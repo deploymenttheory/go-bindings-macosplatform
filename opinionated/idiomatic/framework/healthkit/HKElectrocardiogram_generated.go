@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A sample for electrocardiogram data.
+//
 // Electrocardiogram wraps [raw.HKElectrocardiogram] with a fluent Go API.
 type Electrocardiogram struct {
 	inner *raw.HKElectrocardiogram

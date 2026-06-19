@@ -11,10 +11,14 @@ import (
 type AU3DMixerAttenuationCurve int64
 
 const (
-	K3DMixerAttenuationCurve_Power       AU3DMixerAttenuationCurve = 0
+	// An equal-power-based attenuation curve.
+	K3DMixerAttenuationCurve_Power AU3DMixerAttenuationCurve = 0
+	// An exponential attenuation curve.
 	K3DMixerAttenuationCurve_Exponential AU3DMixerAttenuationCurve = 1
-	K3DMixerAttenuationCurve_Inverse     AU3DMixerAttenuationCurve = 2
-	K3DMixerAttenuationCurve_Linear      AU3DMixerAttenuationCurve = 3
+	// An inverse attenuation curve.
+	K3DMixerAttenuationCurve_Inverse AU3DMixerAttenuationCurve = 2
+	// A linear attenuation curve.
+	K3DMixerAttenuationCurve_Linear AU3DMixerAttenuationCurve = 3
 )
 
 func (e AU3DMixerAttenuationCurve) String() string {
@@ -118,7 +122,9 @@ func (e AUAudioMixRenderingStyle) String() string {
 type AUAudioUnitBusType int64
 
 const (
-	AUAudioUnitBusTypeInput  AUAudioUnitBusType = 1
+	// An input bus.
+	AUAudioUnitBusTypeInput AUAudioUnitBusType = 1
+	// An output bus.
 	AUAudioUnitBusTypeOutput AUAudioUnitBusType = 2
 )
 
@@ -136,10 +142,14 @@ func (e AUAudioUnitBusType) String() string {
 type AUHostTransportStateFlags uint64
 
 const (
-	AUHostTransportStateChanged   AUHostTransportStateFlags = 1
-	AUHostTransportStateMoving    AUHostTransportStateFlags = 2
+	// Indicates such state changes as start, stop, or seeking to another position in the timeline. Can be active if there was a change to the state of, or discontinuities in, the audio transport since the AUHostTransportStateBlock callback was last called.
+	AUHostTransportStateChanged AUHostTransportStateFlags = 1
+	// Indicates that the audio transport is moving.
+	AUHostTransportStateMoving AUHostTransportStateFlags = 2
+	// Indicates that the host is recording, or is prepared to record. Can be active with or without a moving state.
 	AUHostTransportStateRecording AUHostTransportStateFlags = 4
-	AUHostTransportStateCycling   AUHostTransportStateFlags = 8
+	// Indicates that the host is cycling or looping.
+	AUHostTransportStateCycling AUHostTransportStateFlags = 8
 )
 
 func (e AUHostTransportStateFlags) String() string {
@@ -183,11 +193,14 @@ func (e AUParameterAutomationEventType) String() string {
 	}
 }
 
+// Audio unit parameter event types.
 type AUParameterEventType int64
 
 const (
+	// An immediate change from the parameter’s previous value to a new value.
 	KParameterEvent_Immediate AUParameterEventType = 1
-	KParameterEvent_Ramped    AUParameterEventType = 2
+	// A gradual change from the parameter’s previous value to a new value, applied linearly over a specified period of time
+	KParameterEvent_Ramped AUParameterEventType = 2
 )
 
 func (e AUParameterEventType) String() string {
@@ -241,9 +254,13 @@ func (e AUParameterMIDIMappingFlags) String() string {
 type AURenderEventType int64
 
 const (
-	AURenderEventParameter     AURenderEventType = 1
+	// A parameter event.
+	AURenderEventParameter AURenderEventType = 1
+	// A ramped parameter event.
 	AURenderEventParameterRamp AURenderEventType = 2
-	AURenderEventMIDI          AURenderEventType = 8
+	// A MIDI event.
+	AURenderEventMIDI AURenderEventType = 8
+	// A system-exclusive MIDI event.
 	AURenderEventMIDISysEx     AURenderEventType = 9
 	AURenderEventMIDIEventList AURenderEventType = 10
 )
@@ -518,13 +535,18 @@ func (e AUSpatializationAlgorithm) String() string {
 	}
 }
 
+// The ducking level to apply to other non-voice audio.
 type AUVoiceIOOtherAudioDuckingLevel int64
 
 const (
+	// The default ducking level of other non-voice audio in a typical voice chat.
 	KAUVoiceIOOtherAudioDuckingLevelDefault AUVoiceIOOtherAudioDuckingLevel = 0
-	KAUVoiceIOOtherAudioDuckingLevelMin     AUVoiceIOOtherAudioDuckingLevel = 10
-	KAUVoiceIOOtherAudioDuckingLevelMid     AUVoiceIOOtherAudioDuckingLevel = 20
-	KAUVoiceIOOtherAudioDuckingLevelMax     AUVoiceIOOtherAudioDuckingLevel = 30
+	// The minimum ducking level of other non-voice audio.
+	KAUVoiceIOOtherAudioDuckingLevelMin AUVoiceIOOtherAudioDuckingLevel = 10
+	// A medium ducking level of other non-voice audio.
+	KAUVoiceIOOtherAudioDuckingLevelMid AUVoiceIOOtherAudioDuckingLevel = 20
+	// The maximum ducking level of other non-voice audio.
+	KAUVoiceIOOtherAudioDuckingLevelMax AUVoiceIOOtherAudioDuckingLevel = 30
 )
 
 func (e AUVoiceIOOtherAudioDuckingLevel) String() string {
@@ -542,11 +564,14 @@ func (e AUVoiceIOOtherAudioDuckingLevel) String() string {
 	}
 }
 
+// Constants that indicate the state of muted speech.
 type AUVoiceIOSpeechActivityEvent int64
 
 const (
+	// A state that indicates speech started.
 	KAUVoiceIOSpeechActivityHasStarted AUVoiceIOSpeechActivityEvent = 0
-	KAUVoiceIOSpeechActivityHasEnded   AUVoiceIOSpeechActivityEvent = 1
+	// A state that indicates speech ended.
+	KAUVoiceIOSpeechActivityHasEnded AUVoiceIOSpeechActivityEvent = 1
 )
 
 func (e AUVoiceIOSpeechActivityEvent) String() string {
@@ -560,11 +585,14 @@ func (e AUVoiceIOSpeechActivityEvent) String() string {
 	}
 }
 
+// Identifiers for audio balance fade types.
 type AudioBalanceFadeType int64
 
 const (
+	// Ensures that the overall gain value never exceeds 1.0 by fading one channel as the other channel’s level rises. This can reduce overall loudness when the balance or fade is not in the center.
 	KAudioBalanceFadeType_MaxUnityGain AudioBalanceFadeType = 0
-	KAudioBalanceFadeType_EqualPower   AudioBalanceFadeType = 1
+	// Overall loudness remains constant, but gain can exceed 1.0. The gain value is 1.0 when the balance and fade are in the center. From there they can increase to +3dB (1.414) and decrease to silence.
+	KAudioBalanceFadeType_EqualPower AudioBalanceFadeType = 1
 )
 
 func (e AudioBalanceFadeType) String() string {
@@ -581,6 +609,7 @@ func (e AudioBalanceFadeType) String() string {
 type AudioBytePacketTranslationFlags int64
 
 const (
+	// If set, the result value is an estimate.
 	KBytePacketTranslationFlag_IsEstimate AudioBytePacketTranslationFlags = 1
 )
 
@@ -699,7 +728,8 @@ func (e AudioConverterOptions) String() string {
 type AudioFileFlags int64
 
 const (
-	KAudioFileFlags_EraseFile              AudioFileFlags = 1
+	KAudioFileFlags_EraseFile AudioFileFlags = 1
+	// Typically, the audio data in a file is page aligned. To make reading the file data as fast as possible, you can use page-aligned data to take advantage of optimized code paths in the file system. However, when space is at a premium, you might want to avoid the additional padding required to attain alignment. To do so, set this flag when calling AudioFileCreate or AudioFileCreateWithURL.
 	KAudioFileFlags_DontPageAlignAudioData AudioFileFlags = 2
 )
 
@@ -717,11 +747,15 @@ func (e AudioFileFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Flags for use when opening an audio file.
 type AudioFilePermissions int64
 
 const (
-	KAudioFileReadPermission      AudioFilePermissions = 1
-	KAudioFileWritePermission     AudioFilePermissions = 2
+	// File is read-only.
+	KAudioFileReadPermission AudioFilePermissions = 1
+	// File is write-only.
+	KAudioFileWritePermission AudioFilePermissions = 2
+	// File has read-write permission.
 	KAudioFileReadWritePermission AudioFilePermissions = 3
 )
 
@@ -738,11 +772,15 @@ func (e AudioFilePermissions) String() string {
 	}
 }
 
+// Flags that specify a playback direction for an audio file region structure.
 type AudioFileRegionFlags int64
 
 const (
-	KAudioFileRegionFlag_LoopEnable   AudioFileRegionFlags = 1
-	KAudioFileRegionFlag_PlayForward  AudioFileRegionFlags = 2
+	// If set, the region is looped. You must set one or both of the remaining flags must also be set for the region to be looped.
+	KAudioFileRegionFlag_LoopEnable AudioFileRegionFlags = 1
+	// If set, the region is played forward.
+	KAudioFileRegionFlag_PlayForward AudioFileRegionFlags = 2
+	// If set, the region is played backward.
 	KAudioFileRegionFlag_PlayBackward AudioFileRegionFlags = 4
 )
 
@@ -766,6 +804,7 @@ func (e AudioFileRegionFlags) String() string {
 type AudioFileStreamParseFlags int64
 
 const (
+	// Pass this flag to the AudioFileStreamParseBytes function to signal a discontinuity in the audio data.
 	KAudioFileStreamParseFlag_Discontinuity AudioFileStreamParseFlags = 1
 )
 
@@ -783,8 +822,10 @@ func (e AudioFileStreamParseFlags) String() string {
 type AudioFileStreamPropertyFlags int64
 
 const (
+	// This flag is set when the callback AudioFileStream_PropertyListenerProc is invoked in the case that the value of the property has been cached and can be obtained later.
 	KAudioFileStreamPropertyFlag_PropertyIsCached AudioFileStreamPropertyFlags = 1
-	KAudioFileStreamPropertyFlag_CacheProperty    AudioFileStreamPropertyFlags = 2
+	// A property listener sets this flag to instruct the parser to cache the property value so that it remains available after the callback returns.
+	KAudioFileStreamPropertyFlag_CacheProperty AudioFileStreamPropertyFlags = 2
 )
 
 func (e AudioFileStreamPropertyFlags) String() string {
@@ -804,6 +845,7 @@ func (e AudioFileStreamPropertyFlags) String() string {
 type AudioFileStreamSeekFlags int64
 
 const (
+	// This flag is returned by the AudioFileStreamSeek function if the byte offset is only an estimate.
 	KAudioFileStreamSeekFlag_OffsetIsEstimated AudioFileStreamSeekFlags = 1
 )
 
@@ -818,10 +860,13 @@ func (e AudioFileStreamSeekFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Identifiers for audio panning algorithms.
 type AudioPanningMode int64
 
 const (
-	KPanningMode_SoundField         AudioPanningMode = 3
+	// The SoundField panning algorithm.
+	KPanningMode_SoundField AudioPanningMode = 3
+	// A vector-based panning algorithm.
 	KPanningMode_VectorBasedPanning AudioPanningMode = 4
 )
 
@@ -922,11 +967,14 @@ func (e AudioUnitEventType) String() string {
 	}
 }
 
+// Value options for audio unit parameters.
 type AudioUnitParameterOptions int64
 
 const (
-	KAudioUnitParameterFlag_CFNameRelease      AudioUnitParameterOptions = 16
-	KAudioUnitParameterFlag_OmitFromPresets    AudioUnitParameterOptions = 8192
+	// If an audio unit can generate parameter names dynamically, it should set this flag.
+	KAudioUnitParameterFlag_CFNameRelease   AudioUnitParameterOptions = 16
+	KAudioUnitParameterFlag_OmitFromPresets AudioUnitParameterOptions = 8192
+	// If set, getting the kAudioUnitProperty_ParameterHistoryInfo property fills out the AudioUnitParameterHistoryInfo struct containing the recommended update rate and history duration.
 	KAudioUnitParameterFlag_PlotHistory        AudioUnitParameterOptions = 16384
 	KAudioUnitParameterFlag_MeterReadOnly      AudioUnitParameterOptions = 32768
 	KAudioUnitParameterFlag_DisplayMask        AudioUnitParameterOptions = 4653056
@@ -1023,37 +1071,65 @@ func (e AudioUnitParameterOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The unit-of-measure for an audio unit parameter.
 type AudioUnitParameterUnit int64
 
 const (
-	KAudioUnitParameterUnit_Generic             AudioUnitParameterUnit = 0
-	KAudioUnitParameterUnit_Indexed             AudioUnitParameterUnit = 1
-	KAudioUnitParameterUnit_Boolean             AudioUnitParameterUnit = 2
-	KAudioUnitParameterUnit_Percent             AudioUnitParameterUnit = 3
-	KAudioUnitParameterUnit_Seconds             AudioUnitParameterUnit = 4
-	KAudioUnitParameterUnit_SampleFrames        AudioUnitParameterUnit = 5
-	KAudioUnitParameterUnit_Phase               AudioUnitParameterUnit = 6
-	KAudioUnitParameterUnit_Rate                AudioUnitParameterUnit = 7
-	KAudioUnitParameterUnit_Hertz               AudioUnitParameterUnit = 8
-	KAudioUnitParameterUnit_Cents               AudioUnitParameterUnit = 9
-	KAudioUnitParameterUnit_RelativeSemiTones   AudioUnitParameterUnit = 10
-	KAudioUnitParameterUnit_MIDINoteNumber      AudioUnitParameterUnit = 11
-	KAudioUnitParameterUnit_MIDIController      AudioUnitParameterUnit = 12
-	KAudioUnitParameterUnit_Decibels            AudioUnitParameterUnit = 13
-	KAudioUnitParameterUnit_LinearGain          AudioUnitParameterUnit = 14
-	KAudioUnitParameterUnit_Degrees             AudioUnitParameterUnit = 15
+	// A generic unit of measure.
+	KAudioUnitParameterUnit_Generic AudioUnitParameterUnit = 0
+	// An indexed unit of measure.
+	KAudioUnitParameterUnit_Indexed AudioUnitParameterUnit = 1
+	// A Boolean-like unit of measure.
+	KAudioUnitParameterUnit_Boolean AudioUnitParameterUnit = 2
+	// A percentage unit of measure.
+	KAudioUnitParameterUnit_Percent AudioUnitParameterUnit = 3
+	// A whole-seconds unit of measure, indicating either absolute or relative time.
+	KAudioUnitParameterUnit_Seconds AudioUnitParameterUnit = 4
+	// A sample-frame-count unit of measure.
+	KAudioUnitParameterUnit_SampleFrames AudioUnitParameterUnit = 5
+	// An angular degree unit of measure.
+	KAudioUnitParameterUnit_Phase AudioUnitParameterUnit = 6
+	// A multiplication factor unit of measure.
+	KAudioUnitParameterUnit_Rate AudioUnitParameterUnit = 7
+	// A hertz unit of measure.
+	KAudioUnitParameterUnit_Hertz AudioUnitParameterUnit = 8
+	// A logarithmic unit of measure for a musical interval between two notes.
+	KAudioUnitParameterUnit_Cents AudioUnitParameterUnit = 9
+	// A relative unit of measure for a musical interval between two notes.
+	KAudioUnitParameterUnit_RelativeSemiTones AudioUnitParameterUnit = 10
+	// A whole-number unit of measure corresponding to audio frequency.
+	KAudioUnitParameterUnit_MIDINoteNumber AudioUnitParameterUnit = 11
+	// A whole-number unit of measure corresponding to standard MIDI control numbers.
+	KAudioUnitParameterUnit_MIDIController AudioUnitParameterUnit = 12
+	// A logarithmic unit of measure representing the ratio between two audio levels.
+	KAudioUnitParameterUnit_Decibels AudioUnitParameterUnit = 13
+	// A linear unit of measure representing the difference between two audio levels.
+	KAudioUnitParameterUnit_LinearGain AudioUnitParameterUnit = 14
+	// An angular degree unit of measure.
+	KAudioUnitParameterUnit_Degrees AudioUnitParameterUnit = 15
+	// An audio power unit of measure.
 	KAudioUnitParameterUnit_EqualPowerCrossfade AudioUnitParameterUnit = 16
-	KAudioUnitParameterUnit_MixerFaderCurve1    AudioUnitParameterUnit = 17
-	KAudioUnitParameterUnit_Pan                 AudioUnitParameterUnit = 18
-	KAudioUnitParameterUnit_Meters              AudioUnitParameterUnit = 19
-	KAudioUnitParameterUnit_AbsoluteCents       AudioUnitParameterUnit = 20
-	KAudioUnitParameterUnit_Octaves             AudioUnitParameterUnit = 21
-	KAudioUnitParameterUnit_BPM                 AudioUnitParameterUnit = 22
-	KAudioUnitParameterUnit_Beats               AudioUnitParameterUnit = 23
-	KAudioUnitParameterUnit_Milliseconds        AudioUnitParameterUnit = 24
-	KAudioUnitParameterUnit_Ratio               AudioUnitParameterUnit = 25
-	KAudioUnitParameterUnit_CustomUnit          AudioUnitParameterUnit = 26
-	KAudioUnitParameterUnit_MIDI2Controller     AudioUnitParameterUnit = 27
+	// An audio power unit of measure.
+	KAudioUnitParameterUnit_MixerFaderCurve1 AudioUnitParameterUnit = 17
+	// An audio position unit of measure.
+	KAudioUnitParameterUnit_Pan AudioUnitParameterUnit = 18
+	// A distance unit of measure, corresponding to meters.
+	KAudioUnitParameterUnit_Meters AudioUnitParameterUnit = 19
+	// An absolute unit of measure for the musical pitch of a note.
+	KAudioUnitParameterUnit_AbsoluteCents AudioUnitParameterUnit = 20
+	// A relative unit of measure for the musical interval between two notes.
+	KAudioUnitParameterUnit_Octaves AudioUnitParameterUnit = 21
+	// A whole-number unit of measure for musical tempo, representing beats per minute.
+	KAudioUnitParameterUnit_BPM AudioUnitParameterUnit = 22
+	// A time unit of measure in musical beats.
+	KAudioUnitParameterUnit_Beats AudioUnitParameterUnit = 23
+	// A time unit of measure representing milliseconds.
+	KAudioUnitParameterUnit_Milliseconds AudioUnitParameterUnit = 24
+	// A unitless ratio unit of measure.
+	KAudioUnitParameterUnit_Ratio AudioUnitParameterUnit = 25
+	// A custom unit of measure.
+	KAudioUnitParameterUnit_CustomUnit      AudioUnitParameterUnit = 26
+	KAudioUnitParameterUnit_MIDI2Controller AudioUnitParameterUnit = 27
 )
 
 func (e AudioUnitParameterUnit) String() string {
@@ -1140,16 +1216,25 @@ func (e AudioUnitRemoteControlEvent) String() string {
 	}
 }
 
+// Flags for configuring audio unit rendering.
 type AudioUnitRenderActionFlags int64
 
 const (
-	KAudioUnitRenderAction_PreRender            AudioUnitRenderActionFlags = 4
-	KAudioUnitRenderAction_PostRender           AudioUnitRenderActionFlags = 8
-	KAudioUnitRenderAction_OutputIsSilence      AudioUnitRenderActionFlags = 16
-	KAudioOfflineUnitRenderAction_Preflight     AudioUnitRenderActionFlags = 32
-	KAudioOfflineUnitRenderAction_Render        AudioUnitRenderActionFlags = 64
-	KAudioOfflineUnitRenderAction_Complete      AudioUnitRenderActionFlags = 128
-	KAudioUnitRenderAction_PostRenderError      AudioUnitRenderActionFlags = 256
+	// Called on a render notification Proc - which is called either before or after the render operation of the audio unit. If this flag is set, the proc is being called before the render operation is performed.
+	KAudioUnitRenderAction_PreRender AudioUnitRenderActionFlags = 4
+	// Called on a render notification Proc - which is called either before or after the render operation of the audio unit. If this flag is set, the proc is being called after the render operation is completed.
+	KAudioUnitRenderAction_PostRender AudioUnitRenderActionFlags = 8
+	// This flag can be set in a render input callback (or in the audio unit’s render operation itself) and is used to indicate that the render buffer contains only silence. It can then be used by the caller as a hint to whether the buffer needs to be processed or not.
+	KAudioUnitRenderAction_OutputIsSilence AudioUnitRenderActionFlags = 16
+	// This is used with offline audio units (of type 'auol'). It is used when an offline unit is being preflighted, which is performed prior to the actual offline rendering actions are performed. It is used for those cases where the offline process needs it (for example, with an offline unit that normalizes an audio file, it needs to see all of the audio data first before it can perform its normalization).
+	KAudioOfflineUnitRenderAction_Preflight AudioUnitRenderActionFlags = 32
+	// Once an offline unit has been successfully preflighted, it is then put into its render mode. So this flag is set to indicate to the audio unit that it is now in that state and that it should perform its processing on the input data.
+	KAudioOfflineUnitRenderAction_Render AudioUnitRenderActionFlags = 64
+	// This flag is set when an offline unit has completed either its preflight or performed render operation.
+	KAudioOfflineUnitRenderAction_Complete AudioUnitRenderActionFlags = 128
+	// If this flag is set on the post-render call an error was returned by the audio unit’s render operation. In this case, the error can be retrieved through the lastRenderError property and the audio data in ioData handed to the post-render notification will be invalid.
+	KAudioUnitRenderAction_PostRenderError AudioUnitRenderActionFlags = 256
+	// If this flag is set, then checks that are done on the arguments provided to render are not performed. This can be useful to use to save computation time in situations where you are sure you are providing the correct arguments and structures to the various render calls.
 	KAudioUnitRenderAction_DoNotCheckRenderArgs AudioUnitRenderActionFlags = 512
 )
 
@@ -1446,10 +1531,12 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
+// Flags that configure the behavior of the MusicSequenceFileCreate and MusicSequenceFileCreateData functions.
 type MusicSequenceFileFlags int64
 
 const (
-	KMusicSequenceFileFlags_Default   MusicSequenceFileFlags = 0
+	KMusicSequenceFileFlags_Default MusicSequenceFileFlags = 0
+	// Specifies that an existing file should be erased when creating a new file.
 	KMusicSequenceFileFlags_EraseFile MusicSequenceFileFlags = 1
 )
 
@@ -1464,11 +1551,14 @@ func (e MusicSequenceFileFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The various types of files that can be parsed by a music sequence.
 type MusicSequenceFileTypeID int64
 
 const (
-	KMusicSequenceFile_AnyType     MusicSequenceFileTypeID = 0
-	KMusicSequenceFile_MIDIType    MusicSequenceFileTypeID = 1835623529
+	KMusicSequenceFile_AnyType MusicSequenceFileTypeID = 0
+	// A MIDI file type
+	KMusicSequenceFile_MIDIType MusicSequenceFileTypeID = 1835623529
+	// An iMelody file type.
 	KMusicSequenceFile_iMelodyType MusicSequenceFileTypeID = 1768777068
 )
 
@@ -1485,10 +1575,12 @@ func (e MusicSequenceFileTypeID) String() string {
 	}
 }
 
+// Flags used to configure the behavior of the MusicSequenceFileLoad and MusicSequenceFileLoadData functions.
 type MusicSequenceLoadFlags int64
 
 const (
-	KMusicSequenceLoadSMF_PreserveTracks   MusicSequenceLoadFlags = 0
+	KMusicSequenceLoadSMF_PreserveTracks MusicSequenceLoadFlags = 0
+	// If this flag is set the resultant Sequence will contain a tempo track, 1 track for each MIDI Channel that is found in the SMF, 1 track for SysEx or MetaEvents - and this will be the last track in the sequence after the LoadSMFWithFlags calls.
 	KMusicSequenceLoadSMF_ChannelsToTracks MusicSequenceLoadFlags = 1
 )
 
@@ -1503,11 +1595,15 @@ func (e MusicSequenceLoadFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The various types of music sequences.
 type MusicSequenceType int64
 
 const (
-	KMusicSequenceType_Beats   MusicSequenceType = 1650811252
+	// Used for a music sequence that corresponds to a normal MIDI file. The tempo track defines the number of beats per second and can have multiple tempo events.
+	KMusicSequenceType_Beats MusicSequenceType = 1650811252
+	// Used for a music sequence that corresponds to a MIDI file, but employs SMPTE timecode. The tempo track contains a single tempo event that specifies 60 beat-per-minute.
 	KMusicSequenceType_Seconds MusicSequenceType = 1936024435
+	// Used for audio samples; a music sequence of this type cannot be saved to a MIDI file. The tempo track contains a single tempo event that specifies an audio sample rate in samples-per-second.
 	KMusicSequenceType_Samples MusicSequenceType = 1935764848
 )
 

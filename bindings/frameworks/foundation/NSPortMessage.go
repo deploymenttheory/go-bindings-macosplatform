@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A low-level, operating system-independent type for inter-application (and inter-thread) messages.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsportmessage
 type NSPortMessage struct {
 	NSObject
@@ -36,7 +38,7 @@ func NSPortMessageFromID(id objc.ID) *NSPortMessage {
 }
 
 func (o *NSPortMessage) InitWithSendPortReceivePortComponents(sendPort *NSPort, replyPort *NSPort, components *NSArray[objc.ID]) *NSPortMessage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortMessageSelInitWithSendPortReceivePortComponents, sendPort.Ptr(), replyPort.Ptr(), components)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortMessageSelInitWithSendPortReceivePortComponents, sendPort.Ptr(), replyPort.Ptr(), components.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -49,8 +51,11 @@ func (o *NSPortMessage) SendBeforeDate(date *NSDate) bool {
 }
 
 func (o *NSPortMessage) Components() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSPortMessageSelComponents)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortMessageSelComponents)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSPortMessage) ReceivePort() *NSPort {

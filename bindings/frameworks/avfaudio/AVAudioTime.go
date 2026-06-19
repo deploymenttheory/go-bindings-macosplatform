@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object you use to represent a moment in time.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiotime
 type AVAudioTime struct {
 	foundation.NSObject
@@ -47,7 +49,7 @@ func AVAudioTimeFromID(id objc.ID) *AVAudioTime {
 	return o
 }
 
-// @method initWithAudioTimeStamp:sampleRate:
+// Creates an audio time object with the specified timestamp and sample rate.
 func (o *AVAudioTime) InitWithAudioTimeStampSampleRate(ts *coreaudiotypes.AudioTimeStamp, sampleRate float64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioTimeSelInitWithAudioTimeStampSampleRate, ts, sampleRate)
 	if _ret != 0 {
@@ -56,7 +58,7 @@ func (o *AVAudioTime) InitWithAudioTimeStampSampleRate(ts *coreaudiotypes.AudioT
 	return AVAudioTimeFromID(_ret)
 }
 
-// @method initWithHostTime:
+// Creates an audio time object with the specified host time.
 func (o *AVAudioTime) InitWithHostTime(hostTime uint64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioTimeSelInitWithHostTime, hostTime)
 	if _ret != 0 {
@@ -65,7 +67,7 @@ func (o *AVAudioTime) InitWithHostTime(hostTime uint64) *AVAudioTime {
 	return AVAudioTimeFromID(_ret)
 }
 
-// @method initWithSampleTime:atRate:
+// Creates an audio time object with the specified timestamp and sample rate.
 func (o *AVAudioTime) InitWithSampleTimeAtRate(sampleTime int64, sampleRate float64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioTimeSelInitWithSampleTimeAtRate, sampleTime, sampleRate)
 	if _ret != 0 {
@@ -74,7 +76,7 @@ func (o *AVAudioTime) InitWithSampleTimeAtRate(sampleTime int64, sampleRate floa
 	return AVAudioTimeFromID(_ret)
 }
 
-// @method initWithHostTime:sampleTime:atRate:
+// Creates an audio time object with the specified host time, sample time, and sample rate.
 func (o *AVAudioTime) InitWithHostTimeSampleTimeAtRate(hostTime uint64, sampleTime int64, sampleRate float64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioTimeSelInitWithHostTimeSampleTimeAtRate, hostTime, sampleTime, sampleRate)
 	if _ret != 0 {
@@ -83,7 +85,7 @@ func (o *AVAudioTime) InitWithHostTimeSampleTimeAtRate(hostTime uint64, sampleTi
 	return AVAudioTimeFromID(_ret)
 }
 
-// @method timeWithAudioTimeStamp:sampleRate:
+// Creates an audio time object with the specified timestamp and sample rate.
 func AVAudioTimeTimeWithAudioTimeStampSampleRate(ts *coreaudiotypes.AudioTimeStamp, sampleRate float64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioTime), _aVAudioTimeSelTimeWithAudioTimeStampSampleRate, ts, sampleRate)
 	if _ret != 0 {
@@ -92,7 +94,7 @@ func AVAudioTimeTimeWithAudioTimeStampSampleRate(ts *coreaudiotypes.AudioTimeSta
 	return AVAudioTimeFromID(_ret)
 }
 
-// @method timeWithHostTime:
+// Creates an audio time object with the specified host time.
 func AVAudioTimeTimeWithHostTime(hostTime uint64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioTime), _aVAudioTimeSelTimeWithHostTime, hostTime)
 	if _ret != 0 {
@@ -101,7 +103,7 @@ func AVAudioTimeTimeWithHostTime(hostTime uint64) *AVAudioTime {
 	return AVAudioTimeFromID(_ret)
 }
 
-// @method timeWithSampleTime:atRate:
+// Creates an audio time object with the specified sample time and sample rate.
 func AVAudioTimeTimeWithSampleTimeAtRate(sampleTime int64, sampleRate float64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioTime), _aVAudioTimeSelTimeWithSampleTimeAtRate, sampleTime, sampleRate)
 	if _ret != 0 {
@@ -110,7 +112,7 @@ func AVAudioTimeTimeWithSampleTimeAtRate(sampleTime int64, sampleRate float64) *
 	return AVAudioTimeFromID(_ret)
 }
 
-// @method timeWithHostTime:sampleTime:atRate:
+// Creates an audio time object with the specified host time, sample time, and sample rate.
 func AVAudioTimeTimeWithHostTimeSampleTimeAtRate(hostTime uint64, sampleTime int64, sampleRate float64) *AVAudioTime {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioTime), _aVAudioTimeSelTimeWithHostTimeSampleTimeAtRate, hostTime, sampleTime, sampleRate)
 	if _ret != 0 {
@@ -119,19 +121,19 @@ func AVAudioTimeTimeWithHostTimeSampleTimeAtRate(hostTime uint64, sampleTime int
 	return AVAudioTimeFromID(_ret)
 }
 
-// @method hostTimeForSeconds: @abstract Convert seconds to host time.
+// Converts seconds to host time.
 func AVAudioTimeHostTimeForSeconds(seconds float64) uint64 {
 	_ret := objc.Send[uint64](objc.ID(_clsAVAudioTime), _aVAudioTimeSelHostTimeForSeconds, seconds)
 	return _ret
 }
 
-// @method secondsForHostTime: @abstract Convert host time to seconds.
+// Converts host time to seconds.
 func AVAudioTimeSecondsForHostTime(hostTime uint64) float64 {
 	_ret := objc.Send[float64](objc.ID(_clsAVAudioTime), _aVAudioTimeSelSecondsForHostTime, hostTime)
 	return _ret
 }
 
-// @method extrapolateTimeFromAnchor: @abstract Converts between host and sample time. @param anchorTime An AVAudioTime with a more complete AudioTimeStamp than that of the receiver (self). @return the extrapolated time @discussion If anchorTime is an AVAudioTime where both host time and sample time are valid, and self is another timestamp where only one of the two is valid, this method returns a new AVAudioTime copied from self and where any additional valid fields provided by the anchor are also valid. Note that the anchorTime must have both host and sample time valid, and self must have sample rate and at least one of host or sample time valid. Otherwise this method returns nil. <pre> // time0 has a valid audio sample representation, but no host time representation. AVAudioTime *time0 = [AVAudioTime timeWithSampleTime: 0.0 atRate: 44100.0]; // anchor has a valid host time representation and sample time representation. AVAudioTime *anchor = [player playerTimeForNodeTime: player.lastRenderTime]; // fill in valid host time representation AVAudioTime *fullTime0 = [time0 extrapolateTimeFromAnchor: anchor]; </pre>
+// Creates an audio time object by converting between host time and sample time.
 func (o *AVAudioTime) ExtrapolateTimeFromAnchor(anchorTime *AVAudioTime) *AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioTimeSelExtrapolateTimeFromAnchor, anchorTime.Ptr())
 	if _ret != 0 {

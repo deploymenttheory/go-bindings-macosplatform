@@ -971,8 +971,8 @@
     },
     "MLModel": {
       "availableComputeDevices": {
-        "doc": "The list of available compute devices that the model’s prediction methods use.",
-        "url": "https://developer.apple.com/documentation/coreml/mlmodel/availablecomputedevices-6klyt"
+        "doc": "The list of available compute devices that the model’s prediction can use.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/availablecomputedevices-42uzt"
       },
       "compileModel(at:completionHandler:)": {
         "doc": "Compile a model for a device.",

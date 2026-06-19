@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A URL load request that is independent of protocol or URL scheme.
+//
 // URLRequest wraps [raw.NSURLRequest] with a fluent Go API.
 type URLRequest struct {
 	inner *raw.NSURLRequest
@@ -30,7 +32,7 @@ func URLRequestFromID(id objc.ID) *URLRequest {
 	return &URLRequest{inner: raw.NSURLRequestFromID(id)}
 }
 
-// @method initWithURL: @abstract Initializes an NSURLRequest with the given URL. @discussion Default values are used for cache policy (NSURLRequestUseProtocolCachePolicy) and timeout interval (60 seconds). @param URL The URL for the request. @result An initialized NSURLRequest.
+// Creates a URL request for a specified URL.
 //
 // NewURLRequestWithURL creates a new [URLRequest].
 func NewURLRequestWithURL(uRL string) *URLRequest {
@@ -39,7 +41,7 @@ func NewURLRequestWithURL(uRL string) *URLRequest {
 	return &URLRequest{inner: raw.NSURLRequestFromID(_id)}
 }
 
-// @method initWithURL: @abstract Initializes an NSURLRequest with the given URL and cache policy. @discussion This is the designated initializer for the NSURLRequest class. @param URL The URL for the request. @param cachePolicy The cache policy for the request. @param timeoutInterval The timeout interval for the request. See the commentary for the <tt>timeoutInterval</tt> for more information on timeout intervals. @result An initialized NSURLRequest.
+// Creates a URL request with the specified URL, cache policy, and timeout values.
 //
 // NewURLRequestWithURLCachePolicyTimeoutInterval creates a new [URLRequest].
 func NewURLRequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy NSURLRequestCachePolicy, timeoutInterval float64) *URLRequest {
@@ -162,7 +164,7 @@ func (x *URLRequest) CookiePartitionIdentifier() *String {
 	return &String{inner: _r}
 }
 
-// @method valueForHTTPHeaderField: @abstract Returns the value which corresponds to the given header field. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive. @param field the header field name to use for the lookup (case-insensitive). @result the value associated with the given header field, or nil if there is no value associated with the given header field.
+// Returns the value of the specified HTTP header field.
 //
 // ValueForHTTPHeaderField calls the underlying ValueForHTTPHeaderField.
 func (x *URLRequest) ValueForHTTPHeaderField(field string) *String {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a reminder in a calendar.
+//
 // Apple documentation: https://developer.apple.com/documentation/eventkit/ekreminder
 type EKReminder struct {
 	EKCalendarItem
@@ -40,7 +42,7 @@ func EKReminderFromID(id objc.ID) *EKReminder {
 	return o
 }
 
-// @method     reminderWithEventStore: @abstract   Creates a new reminder in the given event store.
+// Creates and returns a new reminder in the given event store.
 func EKReminderReminderWithEventStore(eventStore *EKEventStore) *EKReminder {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKReminder), _eKReminderSelReminderWithEventStore, eventStore.Ptr())
 	if _ret != 0 {

@@ -132,12 +132,15 @@ func (o *MTRDeviceEnergyManagementClusterForecastStruct) SetIsPausable(isPausabl
 }
 
 func (o *MTRDeviceEnergyManagementClusterForecastStruct) Slots() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRDeviceEnergyManagementClusterForecastStructSelSlots)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterForecastStructSelSlots)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRDeviceEnergyManagementClusterForecastStruct) SetSlots(slots *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRDeviceEnergyManagementClusterForecastStructSelSetSlots, slots)
+	o.Ptr().Send(_mTRDeviceEnergyManagementClusterForecastStructSelSetSlots, slots.Ptr())
 }
 
 func (o *MTRDeviceEnergyManagementClusterForecastStruct) ForecastUpdateReason() *foundation.NSNumber {

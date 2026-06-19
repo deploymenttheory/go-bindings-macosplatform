@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract superclass with subclasses that identify a specific type of data for the HealthKit store.
+//
 // ObjectType wraps [raw.HKObjectType] with a fluent Go API.
 type ObjectType struct {
 	inner *raw.HKObjectType
@@ -36,7 +38,7 @@ func NewObjectType() *ObjectType {
 	return &ObjectType{inner: raw.HKObjectTypeFromID(_id)}
 }
 
-// @method        requiresPerObjectAuthorization @abstract      Returns YES if the authorization for the object type needs to be requested on per object basis.
+// Returns a Boolean that indicates whether the data type requires per-object authorization.
 //
 // RequiresPerObjectAuthorization calls the underlying RequiresPerObjectAuthorization.
 func (x *ObjectType) RequiresPerObjectAuthorization() bool {

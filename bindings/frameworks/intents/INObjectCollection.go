@@ -36,7 +36,7 @@ func INObjectCollectionFromID[ObjectType purego.AnyObject](id objc.ID) *INObject
 }
 
 func (o *INObjectCollection[ObjectType]) InitWithSections(sections *foundation.NSArray[objc.ID]) *INObjectCollection[ObjectType] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectCollectionSelInitWithSections, sections)
+	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectCollectionSelInitWithSections, sections.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -52,8 +52,11 @@ func (o *INObjectCollection[ObjectType]) InitWithItems(items *foundation.NSArray
 }
 
 func (o *INObjectCollection[ObjectType]) Sections() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iNObjectCollectionSelSections)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectCollectionSelSections)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *INObjectCollection[ObjectType]) AllItems() *foundation.NSArray[ObjectType] {

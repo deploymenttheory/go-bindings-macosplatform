@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object that the framework passes to the monitor’s callback handler upon receiving an event.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/clmonitoringevent
 type CLMonitoringEvent struct {
 	foundation.NSObject

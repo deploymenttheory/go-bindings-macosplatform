@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that performs audio input or output in the engine.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudioionode
 type AVAudioIONode struct {
 	AVAudioNode
@@ -35,7 +37,7 @@ func AVAudioIONodeFromID(id objc.ID) *AVAudioIONode {
 	return o
 }
 
-// @method setVoiceProcessingEnabled:error: @abstract Enable or disable voice processing on the IO node. @param enabled Whether voice processing is to be enabled. @param outError On exit, if the IO node cannot enable or diable voice processing, a description of the error @return YES for success @discussion If enabled, the input node does signal processing on the incoming audio (taking out any of the audio that is played from the device at a given time from the incoming audio). Disabling this mode on either of the IO nodes automatically disabled it on the other IO node. Voice processing requires both input and output nodes to be in the voice processing mode. Enabling this mode on either of the IO nodes automatically enables it on the other IO node. Voice processing is only supported when the engine is rendering to the audio device and not in the manual rendering mode. Voice processing can only be be enabled or disabled when the engine is in a stopped state. The output format of the input node and the input format of the output node have to be the same and they can only be changed when the engine is in a stopped state.
+// Enables or disables voice processing on the I/O node.
 func (o *AVAudioIONode) SetVoiceProcessingEnabledError(enabled bool) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioIONodeSelSetVoiceProcessingEnabledError, enabled, unsafe.Pointer(&_nsErr))

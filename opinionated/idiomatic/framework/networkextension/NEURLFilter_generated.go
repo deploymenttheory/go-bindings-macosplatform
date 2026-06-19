@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class used to voluntarily validate URLs for apps that don’t use WebKit or the URL session API.
+//
 // NEURLFilter wraps [raw.NEURLFilter] with a fluent Go API.
 type NEURLFilter struct {
 	inner *raw.NEURLFilter

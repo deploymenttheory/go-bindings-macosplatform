@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An NSStepperCell object controls the appearance and behavior of an NSStepper object.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssteppercell
 type NSStepperCell struct {
 	NSActionCell

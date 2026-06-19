@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a region of interest in a photo asset.
+//
 // Apple documentation: https://developer.apple.com/documentation/photosui/phprojectregionofinterest
 type PHProjectRegionOfInterest struct {
 	foundation.NSObject

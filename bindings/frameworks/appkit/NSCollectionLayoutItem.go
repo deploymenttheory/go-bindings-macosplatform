@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The most basic component of a collection view’s layout.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionlayoutitem
 type NSCollectionLayoutItem struct {
 	foundation.NSObject
@@ -37,6 +39,7 @@ func NSCollectionLayoutItemFromID(id objc.ID) *NSCollectionLayoutItem {
 	return o
 }
 
+// Creates an item of the specified size.
 func NSCollectionLayoutItemItemWithLayoutSize(layoutSize *NSCollectionLayoutSize) *NSCollectionLayoutItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutItem), _nSCollectionLayoutItemSelItemWithLayoutSize, layoutSize.Ptr())
 	if _ret != 0 {
@@ -45,6 +48,7 @@ func NSCollectionLayoutItemItemWithLayoutSize(layoutSize *NSCollectionLayoutSize
 	return NSCollectionLayoutItemFromID(_ret)
 }
 
+// Creates an item of the specified size with an array of supplementary items to attach to the item.
 func NSCollectionLayoutItemItemWithLayoutSizeSupplementaryItems(layoutSize *NSCollectionLayoutSize, supplementaryItems *foundation.NSArray[*NSCollectionLayoutSupplementaryItem]) *NSCollectionLayoutItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutItem), _nSCollectionLayoutItemSelItemWithLayoutSizeSupplementaryItems, layoutSize.Ptr(), supplementaryItems.Ptr())
 	if _ret != 0 {

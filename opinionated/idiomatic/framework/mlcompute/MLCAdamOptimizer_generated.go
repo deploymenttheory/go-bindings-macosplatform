@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An optimizer that represents the adaptive moment estimation algorithm.
+//
 // AdamOptimizer wraps [raw.MLCAdamOptimizer] with a fluent Go API.
 type AdamOptimizer struct {
 	inner *raw.MLCAdamOptimizer
@@ -35,7 +37,7 @@ func NewAdamOptimizer() *AdamOptimizer {
 	return &AdamOptimizer{inner: raw.MLCAdamOptimizerFromID(_id)}
 }
 
-// @property   learningRate @abstract   The learning rate.  This property is 'readwrite' so that callers can implement a 'decay' during training
+// The learning rate.
 //
 // WithLearningRate sets the learningRate property and returns the receiver for chaining.
 func (x *AdamOptimizer) WithLearningRate(learningRate float32) *AdamOptimizer {
@@ -43,7 +45,7 @@ func (x *AdamOptimizer) WithLearningRate(learningRate float32) *AdamOptimizer {
 	return x
 }
 
-// @property   appliesGradientClipping @abstract   Whether gradient clipping should be applied or not.
+// A Boolean value that indicates whether you apply gradient clipping.
 //
 // WithAppliesGradientClipping sets the appliesGradientClipping property and returns the receiver for chaining.
 func (x *AdamOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *AdamOptimizer {

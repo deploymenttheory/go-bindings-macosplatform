@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A light source that can be attached to a node to illuminate the scene.
+//
 // Light wraps [raw.SCNLight] with a fluent Go API.
 type Light struct {
 	inner *raw.SCNLight
@@ -39,7 +41,7 @@ func NewLight() *Light {
 	return &Light{inner: raw.SCNLightFromID(_id)}
 }
 
-// @property type @abstract Specifies the receiver's type. @discussion Defaults to SCNLightTypeOmni on iOS 8 and later, and on macOS 10.10 and later (otherwise defaults to SCNLightTypeAmbient).
+// A constant identifying the general behavior of the light.
 //
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *Light) WithType(type_ *foundation.NSString) *Light {
@@ -47,7 +49,7 @@ func (x *Light) WithType(type_ *foundation.NSString) *Light {
 	return x
 }
 
-// @property color @abstract Specifies the receiver's color (NSColor or CGColorRef). Animatable. Defaults to white. @discussion The initial value is a NSColor. The renderer multiplies the light's color is by the color derived from the light's temperature.
+// The color of the light. Animatable.
 //
 // WithColor sets the color property and returns the receiver for chaining.
 func (x *Light) WithColor(color objc.ID) *Light {
@@ -55,7 +57,7 @@ func (x *Light) WithColor(color objc.ID) *Light {
 	return x
 }
 
-// @property temperature @abstract Specifies the receiver's temperature. @discussion This specifies the temperature of the light in Kelvin. The renderer multiplies the light's color by the color derived from the light's temperature. Defaults to 6500 (pure white). Animatable.
+// The color temperature, in degrees Kelvin, of the light source. Animatable.
 //
 // WithTemperature sets the temperature property and returns the receiver for chaining.
 func (x *Light) WithTemperature(temperature float64) *Light {
@@ -63,7 +65,7 @@ func (x *Light) WithTemperature(temperature float64) *Light {
 	return x
 }
 
-// @property intensity @abstract Specifies the receiver's intensity. @discussion This intensity is used to modulate the light color. When used with a physically-based material, this corresponds to the luminous flux of the light, expressed in lumens (lm). Defaults to 1000. Animatable.
+// The luminous flux, in lumens, or total brightness of the light. Animatable.
 //
 // WithIntensity sets the intensity property and returns the receiver for chaining.
 func (x *Light) WithIntensity(intensity float64) *Light {
@@ -71,7 +73,7 @@ func (x *Light) WithIntensity(intensity float64) *Light {
 	return x
 }
 
-// @property name @abstract Determines the name of the receiver.
+// A name associated with the light.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Light) WithName(name string) *Light {
@@ -79,7 +81,7 @@ func (x *Light) WithName(name string) *Light {
 	return x
 }
 
-// @property castsShadow @abstract Determines whether the receiver casts a shadow. Defaults to NO. @discussion Shadows are only supported by spot and directional lights.
+// A Boolean value that determines whether the light casts shadows.
 //
 // WithCastsShadow sets the castsShadow property and returns the receiver for chaining.
 func (x *Light) WithCastsShadow(castsShadow bool) *Light {
@@ -87,7 +89,7 @@ func (x *Light) WithCastsShadow(castsShadow bool) *Light {
 	return x
 }
 
-// @property shadowColor @abstract Specifies the color (CGColorRef or NSColor) of the shadow casted by the receiver. Defaults to black. Animatable. @discussion On iOS 9 or earlier and macOS 10.11 or earlier, this defaults to black 50% transparent.
+// The color of shadows cast by the light. Animatable.
 //
 // WithShadowColor sets the shadowColor property and returns the receiver for chaining.
 func (x *Light) WithShadowColor(shadowColor objc.ID) *Light {
@@ -95,7 +97,7 @@ func (x *Light) WithShadowColor(shadowColor objc.ID) *Light {
 	return x
 }
 
-// @property shadowRadius @abstract Specifies the sample radius used to render the receiver’s shadow. Default value is 3.0. Animatable.
+// A number that specifies the amount of blurring around the edges of shadows cast by the light. Animatable.
 //
 // WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
 func (x *Light) WithShadowRadius(shadowRadius float64) *Light {
@@ -103,7 +105,7 @@ func (x *Light) WithShadowRadius(shadowRadius float64) *Light {
 	return x
 }
 
-// @property shadowMapSize @abstract Specifies the size of the shadow map. @discussion The larger the shadow map is the more precise the shadows are but the slower the computation is. If set to {0,0} the size of the shadow map is automatically chosen. Defaults to {0,0}.
+// The size of the shadow map image that SceneKit renders when creating shadows.
 //
 // WithShadowMapSize sets the shadowMapSize property and returns the receiver for chaining.
 func (x *Light) WithShadowMapSize(shadowMapSize corefoundation.CGSize) *Light {
@@ -111,7 +113,7 @@ func (x *Light) WithShadowMapSize(shadowMapSize corefoundation.CGSize) *Light {
 	return x
 }
 
-// @property shadowSampleCount @abstract Specifies the number of sample per fragment to compute the shadow map. Defaults to 0. @discussion On macOS 10.11 or earlier, the shadowSampleCount defaults to 16. On iOS 9 or earlier it defaults to 1.0. On macOS 10.12, iOS 10 and greater, when the shadowSampleCount is set to 0, a default sample count is chosen depending on the platform.
+// The number of samples from the shadow map that SceneKit uses to render each pixel.
 //
 // WithShadowSampleCount sets the shadowSampleCount property and returns the receiver for chaining.
 func (x *Light) WithShadowSampleCount(shadowSampleCount uint) *Light {
@@ -119,7 +121,7 @@ func (x *Light) WithShadowSampleCount(shadowSampleCount uint) *Light {
 	return x
 }
 
-// @property shadowMode @abstract Specified the mode to use to cast shadows. See above for the available modes and their description. Defaults to SCNShadowModeDefered on 10.9 and before, defaults to SCNShadowModeForward otherwise.
+// The mode SceneKit uses to render shadows.
 //
 // WithShadowMode sets the shadowMode property and returns the receiver for chaining.
 func (x *Light) WithShadowMode(shadowMode SCNShadowMode) *Light {
@@ -127,7 +129,7 @@ func (x *Light) WithShadowMode(shadowMode SCNShadowMode) *Light {
 	return x
 }
 
-// @property shadowBias @abstract Specifies the correction to apply to the shadow map to correct acne artefacts. It is multiplied by an implementation-specific value to create a constant depth offset. Defaults to 1.0
+// The amount of correction to apply to the shadow to prevent rendering artifacts.
 //
 // WithShadowBias sets the shadowBias property and returns the receiver for chaining.
 func (x *Light) WithShadowBias(shadowBias float64) *Light {
@@ -183,7 +185,7 @@ func (x *Light) WithShadowCascadeSplittingFactor(shadowCascadeSplittingFactor fl
 	return x
 }
 
-// @property orthographicScale @abstract Specifies the orthographic scale used to render from the directional light into the shadow map. Defaults to 1. @discussion This is only applicable for directional lights.
+// The orthographic scale SceneKit uses when rendering the shadow map for a directional light.
 //
 // WithOrthographicScale sets the orthographicScale property and returns the receiver for chaining.
 func (x *Light) WithOrthographicScale(orthographicScale float64) *Light {
@@ -191,7 +193,7 @@ func (x *Light) WithOrthographicScale(orthographicScale float64) *Light {
 	return x
 }
 
-// @property zNear @abstract Specifies the minimal distance between the light and the surface to cast shadow on. If a surface is closer to the light than this minimal distance, then the surface won't be shadowed. The near value must be different than zero. Animatable. Defaults to 1.
+// The minimum distance between the light and a visible surface for casting shadows. Animatable.
 //
 // WithZNear sets the zNear property and returns the receiver for chaining.
 func (x *Light) WithZNear(zNear float64) *Light {
@@ -199,7 +201,7 @@ func (x *Light) WithZNear(zNear float64) *Light {
 	return x
 }
 
-// @property zFar @abstract Specifies the maximal distance between the light and a visible surface to cast shadow on. If a surface is further from the light than this maximal distance, then the surface won't be shadowed. Animatable. Defaults to 100.
+// The maximum distance between the light and a visible surface for casting shadows.
 //
 // WithZFar sets the zFar property and returns the receiver for chaining.
 func (x *Light) WithZFar(zFar float64) *Light {
@@ -207,7 +209,7 @@ func (x *Light) WithZFar(zFar float64) *Light {
 	return x
 }
 
-// @property attenuationStartDistance @abstract The distance at which the attenuation starts (Omni or Spot light types only). Animatable. Defaults to 0.
+// The distance from the light at which its intensity begins to diminish. Animatable.
 //
 // WithAttenuationStartDistance sets the attenuationStartDistance property and returns the receiver for chaining.
 func (x *Light) WithAttenuationStartDistance(attenuationStartDistance float64) *Light {
@@ -215,7 +217,7 @@ func (x *Light) WithAttenuationStartDistance(attenuationStartDistance float64) *
 	return x
 }
 
-// @property attenuationEndDistance @abstract The distance at which the attenuation ends (Omni or Spot light types only). Animatable. Defaults to 0.
+// The distance from the light at which its intensity is completely diminished. Animatable.
 //
 // WithAttenuationEndDistance sets the attenuationEndDistance property and returns the receiver for chaining.
 func (x *Light) WithAttenuationEndDistance(attenuationEndDistance float64) *Light {
@@ -223,7 +225,7 @@ func (x *Light) WithAttenuationEndDistance(attenuationEndDistance float64) *Ligh
 	return x
 }
 
-// @property attenuationFalloffExponent @abstract Specifies the attenuation between the start and end attenuation distances. 0 means a constant attenuation, 1 a linear attenuation and 2 a quadratic attenuation, but any positive value will work (Omni or Spot light types only). Animatable. Defaults to 2.
+// The transition curve for the light’s intensity between its attenuation start and end distances. Animatable.
 //
 // WithAttenuationFalloffExponent sets the attenuationFalloffExponent property and returns the receiver for chaining.
 func (x *Light) WithAttenuationFalloffExponent(attenuationFalloffExponent float64) *Light {
@@ -231,7 +233,7 @@ func (x *Light) WithAttenuationFalloffExponent(attenuationFalloffExponent float6
 	return x
 }
 
-// @property spotInnerAngle @abstract The angle in degrees between the spot direction and the lit element below which the lighting is at full strength. Animatable. Defaults to 0.
+// The angle, in degrees, of the area fully lit by a spotlight. Animatable.
 //
 // WithSpotInnerAngle sets the spotInnerAngle property and returns the receiver for chaining.
 func (x *Light) WithSpotInnerAngle(spotInnerAngle float64) *Light {
@@ -239,7 +241,7 @@ func (x *Light) WithSpotInnerAngle(spotInnerAngle float64) *Light {
 	return x
 }
 
-// @property spotOuterAngle @abstract The angle in degrees between the spot direction and the lit element after which the lighting is at zero strength. Animatable. Defaults to 45 degrees.
+// The angle, in degrees, of the area partially lit by a spotlight. Animatable.
 //
 // WithSpotOuterAngle sets the spotOuterAngle property and returns the receiver for chaining.
 func (x *Light) WithSpotOuterAngle(spotOuterAngle float64) *Light {
@@ -247,7 +249,7 @@ func (x *Light) WithSpotOuterAngle(spotOuterAngle float64) *Light {
 	return x
 }
 
-// @property IESProfileURL @abstract Specifies the IES file from which the shape, direction, and intensity of illumination is determined. Defaults to nil.
+// The URL for a file that contains photometry data describing the intended appearance of the light.
 //
 // WithIESProfileURL sets the iESProfileURL property and returns the receiver for chaining.
 func (x *Light) WithIESProfileURL(iESProfileURL string) *Light {
@@ -320,7 +322,7 @@ func (x *Light) WithDoubleSided(doubleSided bool) *Light {
 	return x
 }
 
-// @property categoryBitMask @abstract Determines the node categories that will be lit by the receiver. Defaults to all bit set.
+// A mask that defines which categories this light belongs to.
 //
 // WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
 func (x *Light) WithCategoryBitMask(categoryBitMask uint) *Light {
@@ -835,14 +837,14 @@ func (x *Light) SetCategoryBitMask(categoryBitMask uint) {
 	x.inner.SetCategoryBitMask(categoryBitMask)
 }
 
-// @method attributeForKey: @param key The key for which to return the corresponding attribute. @abstract Returns the attribute for the specified key. The valid keys are described in the "Light Attributes" constants.
+// Returns the value of a lighting attribute.
 //
 // AttributeForKey calls the underlying AttributeForKey.
 func (x *Light) AttributeForKey(key string) objc.ID {
 	return x.inner.AttributeForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
-// @method setAttribute:forKey: @param attribute The attribute for the property identified by key. @param key The name of a property. @abstract Set the specified attribute for the specified key. The valid keys are described in the "Light Attributes" constants.
+// Sets the value for a lighting attribute.
 //
 // SetAttributeForKey calls the underlying SetAttributeForKey.
 func (x *Light) SetAttributeForKey(attribute objc.ID, key string) {

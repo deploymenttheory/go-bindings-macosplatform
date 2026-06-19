@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A notification dispatch mechanism that enables the broadcast of information to registered observers.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsnotificationcenter
 type NSNotificationCenter struct {
 	NSObject
@@ -49,7 +51,7 @@ func (o *NSNotificationCenter) PostNotificationNameObject(aName *NSString, anObj
 }
 
 func (o *NSNotificationCenter) PostNotificationNameObjectUserInfo(aName *NSString, anObject objc.ID, aUserInfo *NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSNotificationCenterSelPostNotificationNameObjectUserInfo, aName.Ptr(), anObject, aUserInfo)
+	o.Ptr().Send(_nSNotificationCenterSelPostNotificationNameObjectUserInfo, aName.Ptr(), anObject, aUserInfo.Ptr())
 }
 
 func (o *NSNotificationCenter) RemoveObserver(observer objc.ID) {

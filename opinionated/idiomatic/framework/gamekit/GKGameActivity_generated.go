@@ -44,7 +44,7 @@ func NewGameActivityWithDefinition(activityDefinition *raw.GKGameActivityDefinit
 	return &GameActivity{inner: raw.GKGameActivityFromID(_id)}
 }
 
-// Properties that contain additional information about the activity. This takes precedence over “GKGameActivityDefinition/defaultProperties“ on the activity definition. 1. The framework initializes this dictionary with the default properties from the activity definition and deep linked properties, if any. 2. If deep linking contains the same key as the default properties, the deep linked value overrides the default value. 3. You can update the properties at runtime.
+// Properties that contain additional information about the activity.
 //
 // WithProperties sets the properties property and returns the receiver for chaining.
 func (x *GameActivity) WithProperties(properties *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *GameActivity {
@@ -52,14 +52,14 @@ func (x *GameActivity) WithProperties(properties *foundation.NSDictionary[*found
 	return x
 }
 
-// Starts the game activity if it's not already started.
+// Starts the game activity if it’s not already started.
 //
 // Start calls the underlying Start.
 func (x *GameActivity) Start() {
 	x.inner.Start()
 }
 
-// Pauses the game activity if it's not already paused.
+// Pauses the game activity if it’s not already paused.
 //
 // Pause calls the underlying Pause.
 func (x *GameActivity) Pause() {
@@ -73,21 +73,21 @@ func (x *GameActivity) Resume() {
 	x.inner.Resume()
 }
 
-// Ends the game activity if it's not already ended. This reports all associated achievements and submit scores to leaderboards.
+// Ends the game activity if it’s not already ended.
 //
 // End calls the underlying End.
 func (x *GameActivity) End() {
 	x.inner.End()
 }
 
-// Set a score of a leaderboard with a context for a player. The framewwork submits the score to the leaderboard when the activity ends.
+// Set a score of a leaderboard with a context for a player.
 //
 // SetScoreOnLeaderboardToScoreContext calls the underlying SetScoreOnLeaderboardToScoreContext.
 func (x *GameActivity) SetScoreOnLeaderboardToScoreContext(leaderboard *raw.GKLeaderboard, score int, context_ uint) {
 	x.inner.SetScoreOnLeaderboardToScoreContext(leaderboard, score, context_)
 }
 
-// Set a score of a leaderboard for a player. The framewowrk submits the score to the leaderboard when the activity ends.
+// Set a score of a leaderboard for a player.
 //
 // SetScoreOnLeaderboardToScore calls the underlying SetScoreOnLeaderboardToScore.
 func (x *GameActivity) SetScoreOnLeaderboardToScore(leaderboard *raw.GKLeaderboard, score int) {
@@ -112,21 +112,21 @@ func (x *GameActivity) RemoveScoresFromLeaderboards(leaderboards *foundation.NSA
 	x.inner.RemoveScoresFromLeaderboards(leaderboards)
 }
 
-// Set a progress for an achievement for a player. The framework reports achievement progress when the activity ends.
+// Set a progress for an achievement for a player.
 //
 // SetProgressOnAchievementToPercentComplete calls the underlying SetProgressOnAchievementToPercentComplete.
 func (x *GameActivity) SetProgressOnAchievementToPercentComplete(achievement *raw.GKAchievement, percentComplete float64) {
 	x.inner.SetProgressOnAchievementToPercentComplete(achievement, percentComplete)
 }
 
-// Set progress to 100% for an achievement for a player. The system reports achievement completion when the activity ends.
+// Set progress to 100% for an achievement for a player.
 //
 // SetAchievementCompleted calls the underlying SetAchievementCompleted.
 func (x *GameActivity) SetAchievementCompleted(achievement *raw.GKAchievement) {
 	x.inner.SetAchievementCompleted(achievement)
 }
 
-// Get the achievement progress from a specific achievement of the local player if previously set. Returns `0` if the achievement hasn't been set in the current activity.
+// Get the achievement progress from a specific achievement of the local player if previously set.
 //
 // GetProgressOnAchievement calls the underlying GetProgressOnAchievement.
 func (x *GameActivity) GetProgressOnAchievement(achievement *raw.GKAchievement) float64 {
@@ -259,7 +259,7 @@ func (x *GameActivity) MakeMatchRequest() *MatchRequest {
 	return &MatchRequest{inner: _r}
 }
 
-// Use information from the activity to find matches for the local player. GameKit creates a classic match making request with the activity's party code and other information, and returns the match object in the completion handler or any error that occurred. An error occurs if this activity doesn't support party code, or has an unsupported range of players, which is used to be configured as match request's `minPlayers` and `maxPlayers`.
+// Use information from the activity to find matches for the local player.
 //
 // FindMatch blocks until the operation completes or ctx is cancelled.
 func (x *GameActivity) FindMatch(ctx context.Context) (*Match, error) {
@@ -287,7 +287,7 @@ func (x *GameActivity) FindMatch(ctx context.Context) (*Match, error) {
 	}
 }
 
-// Use information from the activity to find server hosted players for the local player. GameKit creates a classic server hosted match making request with the activity's party code and other information, and returns the players in the completion handler or any error that occurred. An error occurs if this activity doesn't support party code, or has unsupported range of players, which is used to be configured as match request's `minPlayers` and `maxPlayers`.
+// Use information from the activity to find server hosted players for the local player.
 //
 // FindPlayersForHostedMatch blocks until the operation completes or ctx is cancelled.
 func (x *GameActivity) FindPlayersForHostedMatch(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error) {

@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A shuffled distribution tries to make sure individual samples are not clustered whilst retaining a uniform distribution of values over time. This is often referred to as fair or less random, as the predicatability of the outcomes in a series is vastly increased, yet the distribution of values is uniform. Do not use with distributions ranging more than 256 between lowest and highest as the shuffling seqeunce is stored internally in memory.
+// A generator for random numbers that are uniformly distributed across many samplings, but where short sequences of similar values are unlikely.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkshuffleddistribution
 type GKShuffledDistribution struct {

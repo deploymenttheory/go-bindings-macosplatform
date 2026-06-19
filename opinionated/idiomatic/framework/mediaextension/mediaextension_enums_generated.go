@@ -8,6 +8,7 @@ import (
 	"fmt"
 )
 
+// An enumeration that describes if a media asset contains or supports fragments.
 type MEFileInfoFragmentsStatus int64
 
 const (

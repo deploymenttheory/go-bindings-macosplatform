@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Cryptographic algorithms used by token keys.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tktokenkeyalgorithm
 type TKTokenKeyAlgorithm struct {
 	foundation.NSObject
@@ -33,13 +35,13 @@ func TKTokenKeyAlgorithmFromID(id objc.ID) *TKTokenKeyAlgorithm {
 	return o
 }
 
-// @brief Checks if specified algorithm is base operation algorithm.
+// Returns whether the specified algorithm is the target operation algorithm.
 func (o *TKTokenKeyAlgorithm) IsAlgorithm(algorithm unsafe.Pointer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _tKTokenKeyAlgorithmSelIsAlgorithm, algorithm)
 	return _ret
 }
 
-// @brief Checks whether specified algorithm is either target algorithm or one of the algorithms through which the operation passed.
+// Whether the specified algorithm is the target operation algorithm, or one of the other algorithms used.
 func (o *TKTokenKeyAlgorithm) SupportsAlgorithm(algorithm unsafe.Pointer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _tKTokenKeyAlgorithmSelSupportsAlgorithm, algorithm)
 	return _ret

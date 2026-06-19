@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A dynamic plain-text Unicode string object.
+//
 // MutableString wraps [raw.NSMutableString] with a fluent Go API.
 type MutableString struct {
 	inner *raw.NSMutableString
@@ -30,6 +32,8 @@ func MutableStringFromID(id objc.ID) *MutableString {
 	return &MutableString{inner: raw.NSMutableStringFromID(id)}
 }
 
+// Returns an NSMutableString object initialized with initial storage for a given number of characters,
+//
 // NewMutableStringWithCapacity creates a new [MutableString].
 func NewMutableStringWithCapacity(capacity uint) *MutableString {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableString")), objc.RegisterName("alloc"))
@@ -43,41 +47,57 @@ func (x *MutableString) WithScriptingProperties(scriptingProperties *raw.NSDicti
 	return x
 }
 
+// Replaces the characters from range with those in aString.
+//
 // ReplaceCharactersInRangeWithString calls the underlying ReplaceCharactersInRangeWithString.
 func (x *MutableString) ReplaceCharactersInRangeWithString(range_ raw.NSRange, aString string) {
 	x.inner.ReplaceCharactersInRangeWithString(range_, foundation.NSStringStringWithUTF8String(aString))
 }
 
+// Inserts into the receiver the characters of a given string at a given location.
+//
 // InsertStringAtIndex calls the underlying InsertStringAtIndex.
 func (x *MutableString) InsertStringAtIndex(aString string, loc uint) {
 	x.inner.InsertStringAtIndex(foundation.NSStringStringWithUTF8String(aString), loc)
 }
 
+// Removes from the receiver the characters in a given range.
+//
 // DeleteCharactersInRange calls the underlying DeleteCharactersInRange.
 func (x *MutableString) DeleteCharactersInRange(range_ raw.NSRange) {
 	x.inner.DeleteCharactersInRange(range_)
 }
 
+// Adds to the end of the receiver the characters of a given string.
+//
 // AppendString calls the underlying AppendString.
 func (x *MutableString) AppendString(aString string) {
 	x.inner.AppendString(foundation.NSStringStringWithUTF8String(aString))
 }
 
+// Adds a constructed string to the receiver.
+//
 // AppendFormat calls the underlying AppendFormat.
 func (x *MutableString) AppendFormat(format string) {
 	x.inner.AppendFormat(foundation.NSStringStringWithUTF8String(format))
 }
 
+// Replaces the characters of the receiver with those in a given string.
+//
 // SetString calls the underlying SetString.
 func (x *MutableString) SetString(aString string) {
 	x.inner.SetString(foundation.NSStringStringWithUTF8String(aString))
 }
 
+// Replaces all occurrences of a given string in a given range with another given string, returning the number of replacements.
+//
 // ReplaceOccurrencesOfStringWithStringOptionsRange calls the underlying ReplaceOccurrencesOfStringWithStringOptionsRange.
 func (x *MutableString) ReplaceOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options NSStringCompareOptions, searchRange raw.NSRange) uint {
 	return x.inner.ReplaceOccurrencesOfStringWithStringOptionsRange(foundation.NSStringStringWithUTF8String(target), foundation.NSStringStringWithUTF8String(replacement), raw.NSStringCompareOptions(options), searchRange)
 }
 
+// Transliterates the receiver by applying a specified ICU string transform.
+//
 // ApplyTransformReverseRangeUpdatedRange calls the underlying ApplyTransformReverseRangeUpdatedRange.
 func (x *MutableString) ApplyTransformReverseRangeUpdatedRange(transform *raw.NSString, reverse bool, range_ raw.NSRange, resultingRange *raw.NSRange) bool {
 	return x.inner.ApplyTransformReverseRangeUpdatedRange(transform, reverse, range_, resultingRange)

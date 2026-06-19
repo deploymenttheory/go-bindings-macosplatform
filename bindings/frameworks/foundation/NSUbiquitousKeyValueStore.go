@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An iCloud-based container of key-value pairs you share among instances of your app running on a person’s devices.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsubiquitouskeyvaluestore
 type NSUbiquitousKeyValueStore struct {
 	NSObject
@@ -48,19 +50,23 @@ func NSUbiquitousKeyValueStoreFromID(id objc.ID) *NSUbiquitousKeyValueStore {
 	return o
 }
 
+// Returns the object associated with the specified key.
 func (o *NSUbiquitousKeyValueStore) ObjectForKey(aKey *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUbiquitousKeyValueStoreSelObjectForKey, aKey.Ptr())
 	return _ret
 }
 
+// Sets the value of the specified key to a property list object.
 func (o *NSUbiquitousKeyValueStore) SetObjectForKey(anObject objc.ID, aKey *NSString) {
 	o.Ptr().Send(_nSUbiquitousKeyValueStoreSelSetObjectForKey, anObject, aKey.Ptr())
 }
 
+// Removes the value for the specified key from the iCloud key-value store.
 func (o *NSUbiquitousKeyValueStore) RemoveObjectForKey(aKey *NSString) {
 	o.Ptr().Send(_nSUbiquitousKeyValueStoreSelRemoveObjectForKey, aKey.Ptr())
 }
 
+// Returns the string associated with the specified key.
 func (o *NSUbiquitousKeyValueStore) StringForKey(aKey *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUbiquitousKeyValueStoreSelStringForKey, aKey.Ptr())
 	if _ret != 0 {
@@ -69,16 +75,25 @@ func (o *NSUbiquitousKeyValueStore) StringForKey(aKey *NSString) *NSString {
 	return NSStringFromID(_ret)
 }
 
+// Returns the array associated with the specified key.
 func (o *NSUbiquitousKeyValueStore) ArrayForKey(aKey *NSString) *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSUbiquitousKeyValueStoreSelArrayForKey, aKey.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSUbiquitousKeyValueStoreSelArrayForKey, aKey.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
+// Returns the dictionary object associated with the specified key.
 func (o *NSUbiquitousKeyValueStore) DictionaryForKey(aKey *NSString) *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSUbiquitousKeyValueStoreSelDictionaryForKey, aKey.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSUbiquitousKeyValueStoreSelDictionaryForKey, aKey.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
+// Returns the data object associated with the specified key.
 func (o *NSUbiquitousKeyValueStore) DataForKey(aKey *NSString) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUbiquitousKeyValueStoreSelDataForKey, aKey.Ptr())
 	if _ret != 0 {
@@ -87,49 +102,60 @@ func (o *NSUbiquitousKeyValueStore) DataForKey(aKey *NSString) *NSData {
 	return NSDataFromID(_ret)
 }
 
+// Returns the 64-bit integer value associated with the specified key.
 func (o *NSUbiquitousKeyValueStore) LongLongForKey(aKey *NSString) int64 {
 	_ret := objc.Send[int64](o.Ptr(), _nSUbiquitousKeyValueStoreSelLongLongForKey, aKey.Ptr())
 	return _ret
 }
 
+// Returns the double value associated with the specified key.
 func (o *NSUbiquitousKeyValueStore) DoubleForKey(aKey *NSString) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSUbiquitousKeyValueStoreSelDoubleForKey, aKey.Ptr())
 	return _ret
 }
 
+// Returns the Boolean value associated with the specified key.
 func (o *NSUbiquitousKeyValueStore) BoolForKey(aKey *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUbiquitousKeyValueStoreSelBoolForKey, aKey.Ptr())
 	return _ret
 }
 
+// Sets the value of the specified key to a string value.
 func (o *NSUbiquitousKeyValueStore) SetStringForKey(aString *NSString, aKey *NSString) {
 	o.Ptr().Send(_nSUbiquitousKeyValueStoreSelSetStringForKey, aString.Ptr(), aKey.Ptr())
 }
 
+// Sets the value of the specified key to a data object.
 func (o *NSUbiquitousKeyValueStore) SetDataForKey(aData *NSData, aKey *NSString) {
 	o.Ptr().Send(_nSUbiquitousKeyValueStoreSelSetDataForKey, aData.Ptr(), aKey.Ptr())
 }
 
+// Sets the value of the specified key to an array of property list objects.
 func (o *NSUbiquitousKeyValueStore) SetArrayForKey(anArray *NSArray[objc.ID], aKey *NSString) {
-	o.Ptr().Send(_nSUbiquitousKeyValueStoreSelSetArrayForKey, anArray, aKey.Ptr())
+	o.Ptr().Send(_nSUbiquitousKeyValueStoreSelSetArrayForKey, anArray.Ptr(), aKey.Ptr())
 }
 
+// Sets the value of the specified key to a dictionary of property list objects.
 func (o *NSUbiquitousKeyValueStore) SetDictionaryForKey(aDictionary *NSDictionary[*NSString, objc.ID], aKey *NSString) {
-	o.Ptr().Send(_nSUbiquitousKeyValueStoreSelSetDictionaryForKey, aDictionary, aKey.Ptr())
+	o.Ptr().Send(_nSUbiquitousKeyValueStoreSelSetDictionaryForKey, aDictionary.Ptr(), aKey.Ptr())
 }
 
+// Sets the value of the specified key to a 64-bit integer value.
 func (o *NSUbiquitousKeyValueStore) SetLongLongForKey(value int64, aKey *NSString) {
 	o.Ptr().Send(_nSUbiquitousKeyValueStoreSelSetLongLongForKey, value, aKey.Ptr())
 }
 
+// Sets the value of the specified key to a double value.
 func (o *NSUbiquitousKeyValueStore) SetDoubleForKey(value float64, aKey *NSString) {
 	o.Ptr().Send(_nSUbiquitousKeyValueStoreSelSetDoubleForKey, value, aKey.Ptr())
 }
 
+// Sets the value of the specified key to a Boolean value.
 func (o *NSUbiquitousKeyValueStore) SetBoolForKey(value bool, aKey *NSString) {
 	o.Ptr().Send(_nSUbiquitousKeyValueStoreSelSetBoolForKey, value, aKey.Ptr())
 }
 
+// Synchronizes the in-memory keys and values with the ones stored in iCloud.
 func (o *NSUbiquitousKeyValueStore) Synchronize() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUbiquitousKeyValueStoreSelSynchronize)
 	return _ret
@@ -144,6 +170,9 @@ func NSUbiquitousKeyValueStoreDefaultStore() *NSUbiquitousKeyValueStore {
 }
 
 func (o *NSUbiquitousKeyValueStore) DictionaryRepresentation() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSUbiquitousKeyValueStoreSelDictionaryRepresentation)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSUbiquitousKeyValueStoreSelDictionaryRepresentation)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }

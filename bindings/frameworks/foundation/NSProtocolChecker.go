@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that restricts the messages that can be sent to another object (referred to as the checker’s delegate).
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsprotocolchecker
 type NSProtocolChecker struct {
 	NSProxy
@@ -47,6 +49,7 @@ func (o *NSProtocolChecker) Target() *NSObject {
 	return NSObjectFromID(_ret)
 }
 
+// Allocates and initializes an NSProtocolChecker instance that will forward any messages in aProtocol to anObject, the protocol checker’s target.
 func NSProtocolCheckerProtocolCheckerWithTargetProtocol(anObject *NSObject, aProtocol unsafe.Pointer) *NSProtocolChecker {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSProtocolChecker), _nSProtocolCheckerSelProtocolCheckerWithTargetProtocol, anObject.Ptr(), aProtocol)
 	if _ret != 0 {
@@ -55,6 +58,7 @@ func NSProtocolCheckerProtocolCheckerWithTargetProtocol(anObject *NSObject, aPro
 	return NSProtocolCheckerFromID(_ret)
 }
 
+// Initializes a newly allocated NSProtocolChecker instance that will forward any messages in aProtocol to anObject, the protocol checker’s target.
 func (o *NSProtocolChecker) InitWithTargetProtocol(anObject *NSObject, aProtocol unsafe.Pointer) *NSProtocolChecker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProtocolCheckerSelInitWithTargetProtocol, anObject.Ptr(), aProtocol)
 	if _ret != 0 {

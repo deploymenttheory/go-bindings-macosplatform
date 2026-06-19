@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that configures new render pipeline state objects for tile shading.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtltilerenderpipelinedescriptor
 type MTLTileRenderPipelineDescriptor struct {
 	foundation.NSObject
@@ -56,6 +58,7 @@ func MTLTileRenderPipelineDescriptorFromID(id objc.ID) *MTLTileRenderPipelineDes
 	return o
 }
 
+// Specifies the default rendering pipeline state values for the descriptor.
 func (o *MTLTileRenderPipelineDescriptor) Reset() {
 	o.Ptr().Send(_mTLTileRenderPipelineDescriptorSelReset)
 }

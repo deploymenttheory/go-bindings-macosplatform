@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "framework": "ThreadNetwork",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "THClient": {
+      "doc": "A class that supports safely sharing Thread credentials between multiple clients.",
+      "url": "https://developer.apple.com/documentation/threadnetwork/thclient"
+    },
+    "THCredentials": {
+      "doc": "A class that contains credentials for a Thread network.",
+      "url": "https://developer.apple.com/documentation/threadnetwork/thcredentials"
+    }
+  },
+  "methods": {
+    "THClient": {
+      "-checkPreferredNetworkForActiveOperationalDataset:completion:": {
+        "doc": "Determines if the essential operating parameters match the preferred network’s parameters.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thclient/checkpreferrednetwork(foractiveoperationaldataset:completion:)"
+      },
+      "-deleteCredentialsForBorderAgent:completion:": {
+        "doc": "Deletes Thread network credentials from the framework database for a Border Agent.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thclient/deletecredentials(forborderagent:completion:)"
+      },
+      "-enableCredentialSharingMode:": {
+        "doc": "Triggers Credential Share mode on a nearby eligible Apple Border Router (tvOS(27.0)).",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thclient/enablecredentialsharingmode(_:)"
+      },
+      "-init": {
+        "doc": "Creates the client object.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thclient/init()"
+      },
+      "-isPreferredNetworkAvailableWithCompletion:": {
+        "doc": "Indicates whether a preferred network is available.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thclient/ispreferrednetworkavailable(completion:)"
+      },
+      "-retrieveAllActiveCredentials:": {
+        "doc": "Returns a set of the active credentials.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thclient/retrieveallactivecredentials(_:)"
+      },
+      "-retrieveAllCredentials:": {
+        "doc": "Requests all Thread credentials from the framework.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thclient/retrieveallcredentials(_:)"
+      },
+      "-retrieveCredentialsForBorderAgent:completion:": {
+        "doc": "Requests Thread credentials for a Border Agent.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thclient/retrievecredentials(forborderagent:completion:)"
+      },
+      "-retrieveCredentialsForExtendedPANID:completion:": {
+        "doc": "Requests Thread credentials for an extended Personal Area Network (PAN) ID.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thclient/retrievecredentials(forextendedpanid:completion:)"
+      },
+      "-retrievePreferredCredentials:": {
+        "doc": "Requests Thread credentials for the preferred network.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thclient/retrievepreferredcredentials(_:)"
+      },
+      "-storeCredentialsForBorderAgent:activeOperationalDataSet:completion:": {
+        "doc": "Stores Thread network credentials into the framework database that a Border Agent provides.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thclient/storecredentials(forborderagent:activeoperationaldataset:completion:)"
+      }
+    }
+  },
+  "properties": {
+    "THCredentials": {
+      "PSKC": {
+        "doc": "The Thread network pre-shared key (PSKC) for the Commissioner.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thcredentials/pskc"
+      },
+      "activeOperationalDataSet": {
+        "doc": "The essential operational parameters for the Thread network.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thcredentials/activeoperationaldataset"
+      },
+      "borderAgentID": {
+        "doc": "The identifier of an active Thread network Border Agent.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thcredentials/borderagentid"
+      },
+      "channel": {
+        "doc": "The Thread network radio channel.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thcredentials/channel"
+      },
+      "creationDate": {
+        "doc": "The date and time that the framework stored the credential in the database.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thcredentials/creationdate"
+      },
+      "extendedPANID": {
+        "doc": "The Thread network extended PAN identifier.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thcredentials/extendedpanid"
+      },
+      "lastModificationDate": {
+        "doc": "The date and time that the framework updated the credential in the database.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thcredentials/lastmodificationdate"
+      },
+      "networkKey": {
+        "doc": "The Thread network key.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thcredentials/networkkey"
+      },
+      "networkName": {
+        "doc": "The Thread network name.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thcredentials/networkname"
+      },
+      "panID": {
+        "doc": "The Thread network PAN identifier.",
+        "url": "https://developer.apple.com/documentation/threadnetwork/thcredentials/panid"
+      }
+    }
+  }
+}

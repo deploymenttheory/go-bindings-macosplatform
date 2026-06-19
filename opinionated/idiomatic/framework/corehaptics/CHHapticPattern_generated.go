@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object representing a haptic waveform.
+//
 // HapticPattern wraps [raw.CHHapticPattern] with a fluent Go API.
 type HapticPattern struct {
 	inner *raw.CHHapticPattern
@@ -32,7 +34,7 @@ func HapticPatternFromID(id objc.ID) *HapticPattern {
 	return &HapticPattern{inner: raw.CHHapticPatternFromID(id)}
 }
 
-// @method initWithEvents:parameters:error @abstract Initialize a new CHHapticPattern. @param events An NSArray of CHHapticEvents.  Can be empty. @param parameters An NSArray of CHHapticDynamicParameters.  Can be empty.
+// Constructs a haptic pattern from a series of events and parameters.
 //
 // NewHapticPatternWithEventsParametersError creates a new [HapticPattern].
 func NewHapticPatternWithEventsParametersError(events *foundation.NSArray[*raw.CHHapticEvent], parameters *foundation.NSArray[*raw.CHHapticDynamicParameter]) (*HapticPattern, error) {
@@ -45,7 +47,7 @@ func NewHapticPatternWithEventsParametersError(events *foundation.NSArray[*raw.C
 	return &HapticPattern{inner: raw.CHHapticPatternFromID(_id)}, nil
 }
 
-// @method initWithEvents:parameterCurves:error @abstract Initialize a new CHHapticPattern with parameters modulated by parameter curves. @param events An NSArray of CHHapticEvents.  Can be empty. @param parameterCurves An NSArray of CHHapticParameterCurves.  Can be empty.
+// Constructs a haptic pattern from a series of events and parameter curves.
 //
 // NewHapticPatternWithEventsParameterCurvesError creates a new [HapticPattern].
 func NewHapticPatternWithEventsParameterCurvesError(events *foundation.NSArray[*raw.CHHapticEvent], parameterCurves *foundation.NSArray[*raw.CHHapticParameterCurve]) (*HapticPattern, error) {
@@ -58,7 +60,7 @@ func NewHapticPatternWithEventsParameterCurvesError(events *foundation.NSArray[*
 	return &HapticPattern{inner: raw.CHHapticPatternFromID(_id)}, nil
 }
 
-// @method initWithDictionary:error @abstract Initialize a new CHHapticPattern using the passed-in NSDictionary. @param patternDict NSDictionary containing a pattern property list.
+// Creates a haptic pattern from a property list dictionary.
 //
 // NewHapticPatternWithDictionaryError creates a new [HapticPattern].
 func NewHapticPatternWithDictionaryError(patternDict purego.IDer) (*HapticPattern, error) {
@@ -71,7 +73,7 @@ func NewHapticPatternWithDictionaryError(patternDict purego.IDer) (*HapticPatter
 	return &HapticPattern{inner: raw.CHHapticPatternFromID(_id)}, nil
 }
 
-// @method initWithContentsOfURL:error @abstract Initialize a new CHHapticPattern using the contents of the passed-in NSURL. @param ahapURL NSURL of an ahap file. @discussion This URL must reference a valid AHAP file.
+// Creates a haptic pattern with the contents of an AHAP file.
 //
 // NewHapticPatternWithContentsOfURLError creates a new [HapticPattern].
 func NewHapticPatternWithContentsOfURLError(ahapURL string) (*HapticPattern, error) {
@@ -84,7 +86,7 @@ func NewHapticPatternWithContentsOfURLError(ahapURL string) (*HapticPattern, err
 	return &HapticPattern{inner: raw.CHHapticPatternFromID(_id)}, nil
 }
 
-// @method exportDictionaryAndReturnError:error @abstract Returns a NSDictionary representation of the contents of the pattern. @discussion Patterns containing custom audio resource IDs cannot be exported and will return nil with the error code set to CHHapticErrorCodeOperationNotPermitted.
+// Returns the dictionary representation of the haptic pattern.
 //
 // ExportDictionaryAndReturnError calls the underlying ExportDictionaryAndReturnError.
 func (x *HapticPattern) ExportDictionaryAndReturnError() (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {

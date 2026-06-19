@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "framework": "MediaAccessibility",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "MAFlashingLightsProcessor": {
+      "doc": "A class that processes a framebuffer object to detect and dim sequences of flashing lights.",
+      "url": "https://developer.apple.com/documentation/mediaaccessibility/maflashinglightsprocessor"
+    },
+    "MAFlashingLightsProcessorResult": {
+      "doc": "An object that reports the result of the flashing lights processor.",
+      "url": "https://developer.apple.com/documentation/mediaaccessibility/maflashinglightsprocessorresult"
+    },
+    "MAMusicHapticsManager": {
+      "doc": "A class that reports information about the Music Haptics feature.",
+      "url": "https://developer.apple.com/documentation/mediaaccessibility/mamusichapticsmanager"
+    }
+  },
+  "enums": {
+    "MACaptionAppearanceBehavior": {
+      "doc": "A value that indicates the preferred behavior for a preference setting.",
+      "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancebehavior",
+      "members": {
+        "kMACaptionAppearanceBehaviorUseContentIfAvailable": {
+          "doc": "The preference setting should be used unless the content media being played has its own custom value for this setting.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancebehavior/usecontentifavailable"
+        },
+        "kMACaptionAppearanceBehaviorUseValue": {
+          "doc": "The preference setting should always be used.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancebehavior/usevalue"
+        }
+      }
+    },
+    "MACaptionAppearanceDisplayType": {
+      "doc": "A value that specifies the type of captions to display.",
+      "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancedisplaytype",
+      "members": {
+        "kMACaptionAppearanceDisplayTypeAlwaysOn": {
+          "doc": "The most robust available captioning track should always be displayed, whether subtitles, CC, or SDH. This option is selected by a switch labeled “Closed Captions + SDH” (on the Subtitles \u0026 Captioning page of iOS) and “Prefer Closed Captions and SDH” checkbox (on the Captions pane of the Accessibility options in macOS).",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancedisplaytype/alwayson"
+        },
+        "kMACaptionAppearanceDisplayTypeAutomatic": {
+          "doc": "If the language of the audio track differs from the system locale, then captions matching the system locale should be displayed (if available). If the language of the audio and the language of the system locale match, no captions are shown.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancedisplaytype/automatic"
+        },
+        "kMACaptionAppearanceDisplayTypeForcedOnly": {
+          "doc": "Do not display captions unless they are forced for translation.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancedisplaytype/forcedonly"
+        }
+      }
+    },
+    "MACaptionAppearanceDomain": {
+      "doc": "A value that specifies which domain to retrieve a preference setting from.",
+      "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancedomain",
+      "members": {
+        "kMACaptionAppearanceDomainDefault": {
+          "doc": "The system default value for the setting should be returned.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancedomain/default"
+        },
+        "kMACaptionAppearanceDomainUser": {
+          "doc": "The user’s preferred value for the setting should be returned.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancedomain/user"
+        }
+      }
+    },
+    "MACaptionAppearanceFontStyle": {
+      "doc": "A value that specifies a font style.",
+      "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancefontstyle",
+      "members": {
+        "kMACaptionAppearanceFontStyleCasual": {
+          "doc": "The font style preferred for the casual font style.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancefontstyle/casual"
+        },
+        "kMACaptionAppearanceFontStyleCursive": {
+          "doc": "The font style preferred for the cursive font style.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancefontstyle/cursive"
+        },
+        "kMACaptionAppearanceFontStyleDefault": {
+          "doc": "The default font style for all caption text.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancefontstyle/default"
+        },
+        "kMACaptionAppearanceFontStyleMonospacedWithSerif": {
+          "doc": "The font style preferred for the monospaced serif font style.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancefontstyle/monospacedwithserif"
+        },
+        "kMACaptionAppearanceFontStyleMonospacedWithoutSerif": {
+          "doc": "The font style preferred for the monospaced sans serif font style.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancefontstyle/monospacedwithoutserif"
+        },
+        "kMACaptionAppearanceFontStyleProportionalWithSerif": {
+          "doc": "The font style preferred for the proportional serif font style.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancefontstyle/proportionalwithserif"
+        },
+        "kMACaptionAppearanceFontStyleProportionalWithoutSerif": {
+          "doc": "The font style preferred for the proportional sans serif font style.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancefontstyle/proportionalwithoutserif"
+        },
+        "kMACaptionAppearanceFontStyleSmallCapital": {
+          "doc": "The font style preferred for the small capital font style.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancefontstyle/smallcapital"
+        }
+      }
+    },
+    "MACaptionAppearanceTextEdgeStyle": {
+      "doc": "A value that specifies a style for the outside of the text.",
+      "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancetextedgestyle",
+      "members": {
+        "kMACaptionAppearanceTextEdgeStyleDepressed": {
+          "doc": "An edge makes the text appear pushed in.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancetextedgestyle/depressed"
+        },
+        "kMACaptionAppearanceTextEdgeStyleDropShadow": {
+          "doc": "An edge makes the text appear to float above the background.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancetextedgestyle/dropshadow"
+        },
+        "kMACaptionAppearanceTextEdgeStyleNone": {
+          "doc": "The text should not have a styled edge.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancetextedgestyle/none"
+        },
+        "kMACaptionAppearanceTextEdgeStyleRaised": {
+          "doc": "An edge makes the text appear to rise above the background.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancetextedgestyle/raised"
+        },
+        "kMACaptionAppearanceTextEdgeStyleUndefined": {
+          "doc": "An edge style has not been specified.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancetextedgestyle/undefined"
+        },
+        "kMACaptionAppearanceTextEdgeStyleUniform": {
+          "doc": "A thin outline lies along the edge of the text.",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/macaptionappearancetextedgestyle/uniform"
+        }
+      }
+    }
+  },
+  "methods": {
+    "MAFlashingLightsProcessor": {
+      "-canProcessSurface:": {
+        "doc": "Returns a Boolean value that indicates whether the flashing lights processor can process the content in the surface for sequences of flashing lights.",
+        "url": "https://developer.apple.com/documentation/mediaaccessibility/maflashinglightsprocessor/canprocesssurface(_:)"
+      },
+      "-processSurface:outSurface:timestamp:options:": {
+        "doc": "Processes a surface by analyzing pixels for sequences of flashing lights and mitigates them by dimming the content.",
+        "url": "https://developer.apple.com/documentation/mediaaccessibility/maflashinglightsprocessor/processsurface:outsurface:timestamp:options:"
+      }
+    },
+    "MAMusicHapticsManager": {
+      "-addStatusObserver:": {
+        "doc": "Adds an observer to monitor the status of haptic playback for the Now Playing song.",
+        "url": "https://developer.apple.com/documentation/mediaaccessibility/mamusichapticsmanager/addstatusobserver(_:)"
+      },
+      "-checkHapticTrackAvailabilityForMediaMatchingCode:completionHandler:": {
+        "doc": "Checks whether a haptic track is available for the song with the specified International Standard Recording Code (ISRC).",
+        "url": "https://developer.apple.com/documentation/mediaaccessibility/mamusichapticsmanager/checkhaptictrackavailabilityformedia(matchingcode:completionhandler:)"
+      },
+      "-removeStatusObserver:": {
+        "doc": "Removes the observer monitoring the status of haptic playback for the Now Playing song.",
+        "url": "https://developer.apple.com/documentation/mediaaccessibility/mamusichapticsmanager/removestatusobserver(_:)"
+      }
+    }
+  },
+  "properties": {
+    "MAFlashingLightsProcessor": {
+      "MAFlashingLightsProcessor.Result": {
+        "doc": "An object that reports the result of the flashing lights processor.",
+        "url": "https://developer.apple.com/documentation/mediaaccessibility/maflashinglightsprocessor/result"
+      },
+      "MAFlashingLightsProcessorOptionKey": {
+        "doc": "Options for the flashing lights processor.",
+        "url": "https://developer.apple.com/documentation/mediaaccessibility/maflashinglightsprocessor/optionkey"
+      },
+      "processSurface(_:outSurface:timestamp:options:)": {
+        "doc": "Processes a surface by analyzing pixels for sequences of flashing lights and mitigates them by dimming the content.",
+        "url": "https://developer.apple.com/documentation/mediaaccessibility/maflashinglightsprocessor/processsurface(_:outsurface:timestamp:options:)"
+      }
+    },
+    "MAFlashingLightsProcessorResult": {
+      "intensityLevel": {
+        "doc": "The intensity of flashing lights in the input surface.",
+        "url": "https://developer.apple.com/documentation/mediaaccessibility/maflashinglightsprocessorresult/intensitylevel"
+      },
+      "mitigationLevel": {
+        "doc": "The amount of mitigation in the output surface.",
+        "url": "https://developer.apple.com/documentation/mediaaccessibility/maflashinglightsprocessorresult/mitigationlevel"
+      },
+      "surfaceProcessed": {
+        "doc": "A Boolean value that indicates whether the flashing lights processor successfully processed the input surface.",
+        "url": "https://developer.apple.com/documentation/mediaaccessibility/maflashinglightsprocessorresult/surfaceprocessed"
+      }
+    },
+    "MAMusicHapticsManager": {
+      "MAMusicHapticsManagerActiveStatusDidChangeNotification": {
+        "doc": "A notification that posts when the value of the Music Haptics system setting changes.",
+        "url": "https://developer.apple.com/documentation/mediaaccessibility/mamusichapticsmanager/activestatusdidchangenotification"
+      },
+      "isActive": {
+        "doc": "A Boolean value that indicates whether the system setting for Music Haptics is on.",
+        "url": "https://developer.apple.com/documentation/mediaaccessibility/mamusichapticsmanager/isactive"
+      },
+      "sharedManager": {
+        "doc": "The shared Music Haptics manager object.",
+        "url": "https://developer.apple.com/documentation/mediaaccessibility/mamusichapticsmanager/shared"
+      }
+    }
+  }
+}

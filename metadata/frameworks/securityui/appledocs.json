@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "framework": "SecurityUI",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SFCertificatePresentation": {
+      "doc": "An object that displays a certificate sheet for a provided certificate trust.",
+      "url": "https://developer.apple.com/documentation/securityui/sfcertificatepresentation"
+    }
+  },
+  "methods": {
+    "SFCertificatePresentation": {
+      "-dismissSheet": {
+        "doc": "Dismisses the certificate sheet.",
+        "url": "https://developer.apple.com/documentation/securityui/sfcertificatepresentation/dismisssheet()"
+      },
+      "-initWithTrust:": {
+        "doc": "Initialize the certificate presentation with a certificate trust reference.",
+        "url": "https://developer.apple.com/documentation/securityui/sfcertificatepresentation/init(trust:)"
+      }
+    }
+  },
+  "properties": {
+    "SFCertificatePresentation": {
+      "helpURL": {
+        "doc": "The URL that will be opened by clicking the “Learn More” button.",
+        "url": "https://developer.apple.com/documentation/securityui/sfcertificatepresentation/helpurl"
+      },
+      "message": {
+        "doc": "Message string to be displayed. If no message is provided, a default message will be used.",
+        "url": "https://developer.apple.com/documentation/securityui/sfcertificatepresentation/message"
+      },
+      "title": {
+        "doc": "Title string to be displayed. If no title is provided, a default title will be used.",
+        "url": "https://developer.apple.com/documentation/securityui/sfcertificatepresentation/title"
+      },
+      "trust": {
+        "doc": "A trust reference, previously created with SecTrustCreateWithCertificates (see \u003cSecurity/SecTrust.h\u003e).",
+        "url": "https://developer.apple.com/documentation/securityui/sfcertificatepresentation/trust"
+      }
+    }
+  }
+}

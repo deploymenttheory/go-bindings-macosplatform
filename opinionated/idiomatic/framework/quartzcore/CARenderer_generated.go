@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A layer that allows an application to render a layer tree into a Core OpenGL context.
+//
 // Renderer wraps [raw.CARenderer] with a fluent Go API.
 type Renderer struct {
 	inner *raw.CARenderer
@@ -38,43 +40,59 @@ func NewRenderer() *Renderer {
 	return &Renderer{inner: raw.CARendererFromID(_id)}
 }
 
+// The root layer of the layer-tree the receiver should render.
+//
 // WithLayer sets the layer property and returns the receiver for chaining.
 func (x *Renderer) WithLayer(layer LayerProvider) *Renderer {
 	x.inner.SetLayer(layer.asLayer())
 	return x
 }
 
+// The bounds of the receiver.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *Renderer) WithBounds(bounds corefoundation.CGRect) *Renderer {
 	x.inner.SetBounds(bounds)
 	return x
 }
 
+// Begin rendering a frame at the specified time.
+//
 // BeginFrameAtTimeTimeStamp calls the underlying BeginFrameAtTimeTimeStamp.
 func (x *Renderer) BeginFrameAtTimeTimeStamp(t float64, ts *corevideo.CVTimeStamp) {
 	x.inner.BeginFrameAtTimeTimeStamp(t, ts)
 }
 
+// Returns the bounds of the update region that contains all pixels that will be rendered by the current frame.
+//
 // UpdateBounds calls the underlying UpdateBounds.
 func (x *Renderer) UpdateBounds() corefoundation.CGRect {
 	return x.inner.UpdateBounds()
 }
 
+// Adds the rectangle to the update region of the current frame.
+//
 // AddUpdateRect calls the underlying AddUpdateRect.
 func (x *Renderer) AddUpdateRect(r corefoundation.CGRect) {
 	x.inner.AddUpdateRect(r)
 }
 
+// Render the update region of the current frame to the target context.
+//
 // Render calls the underlying Render.
 func (x *Renderer) Render() {
 	x.inner.Render()
 }
 
+// Returns the time at which the next update should happen.
+//
 // NextFrameTime calls the underlying NextFrameTime.
 func (x *Renderer) NextFrameTime() float64 {
 	return x.inner.NextFrameTime()
 }
 
+// Release any data associated with the current frame.
+//
 // EndFrame calls the underlying EndFrame.
 func (x *Renderer) EndFrame() {
 	x.inner.EndFrame()

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The context object provided to the filter packet handler.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nefilterpacketcontext
 type NEFilterPacketContext struct {
 	foundation.NSObject

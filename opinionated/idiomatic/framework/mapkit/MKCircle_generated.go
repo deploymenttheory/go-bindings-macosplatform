@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A circular overlay with a configurable radius that you center on a geographic coordinate.
+//
 // Circle wraps [raw.MKCircle] with a fluent Go API.
 type Circle struct {
 	inner *raw.MKCircle
@@ -37,12 +39,16 @@ func NewCircle() *Circle {
 	return &Circle{inner: raw.MKCircleFromID(_id)}
 }
 
+// The title of the shape annotation.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Circle) WithTitle(title string) *Circle {
 	x.inner.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The subtitle of the shape annotation.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *Circle) WithSubtitle(subtitle string) *Circle {
 	x.inner.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))

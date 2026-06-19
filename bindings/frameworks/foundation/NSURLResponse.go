@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The metadata associated with the response to a URL load request, independent of protocol and URL scheme.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlresponse
 type NSURLResponse struct {
 	NSObject

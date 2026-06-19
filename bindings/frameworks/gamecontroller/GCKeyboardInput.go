@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller profile that uses the keyboard as the input device.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gckeyboardinput
 type GCKeyboardInput struct {
 	GCPhysicalInputProfile
@@ -32,7 +34,7 @@ func GCKeyboardInputFromID(id objc.ID) *GCKeyboardInput {
 	return o
 }
 
-// Alongside general subscript notation of GCPhysicalInputProfile keys can be accessed using this method. @example [keyboard buttonForKey:GCKeyCode.UpArrow] == keyboard[GCKeyUpArrow] @param code is a low level key code that can be used for accessing a keyboard button. @note Full list of supported key constants can be found in GCKeyCodes.h and GCKeyNames.h
+// Returns the button element for the specified key code.
 func (o *GCKeyboardInput) ButtonForKeyCode(code int) *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCKeyboardInputSelButtonForKeyCode, code)
 	if _ret != 0 {

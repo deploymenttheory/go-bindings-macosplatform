@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing metrics about the use of the GPU.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxgpumetric
 type MXGPUMetric struct {
 	MXMetric
@@ -31,6 +33,9 @@ func MXGPUMetricFromID(id objc.ID) *MXGPUMetric {
 }
 
 func (o *MXGPUMetric) CumulativeGPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXGPUMetricSelCumulativeGPUTime)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXGPUMetricSelCumulativeGPUTime)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitDuration](_ret)
 }

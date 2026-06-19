@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A 1D array of data that stores the data’s values.
+//
 // Vector wraps [raw.MPSVector] with a fluent Go API.
 type Vector struct {
 	inner *raw.MPSVector

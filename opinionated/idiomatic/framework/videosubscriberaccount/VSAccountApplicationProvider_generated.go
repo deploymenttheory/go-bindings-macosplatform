@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object to display app-specific providers in your app.
+//
 // VSAccountApplicationProvider wraps [raw.VSAccountApplicationProvider] with a fluent Go API.
 type VSAccountApplicationProvider struct {
 	inner *raw.VSAccountApplicationProvider
@@ -31,7 +33,7 @@ func VSAccountApplicationProviderFromID(id objc.ID) *VSAccountApplicationProvide
 	return &VSAccountApplicationProvider{inner: raw.VSAccountApplicationProviderFromID(id)}
 }
 
-// Returns an application provider using a given display name and identifier. Both the localizedDisplayName and identifier parameters must be non-empty strings.
+// Returns an application provider using a given display name and identifier.
 //
 // NewVSAccountApplicationProviderWithLocalizedDisplayNameIdentifier creates a new [VSAccountApplicationProvider].
 func NewVSAccountApplicationProviderWithLocalizedDisplayNameIdentifier(localizedDisplayName string, identifier string) *VSAccountApplicationProvider {

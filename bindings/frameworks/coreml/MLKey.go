@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for machine learning key types.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlkey
 type MLKey struct {
 	foundation.NSObject

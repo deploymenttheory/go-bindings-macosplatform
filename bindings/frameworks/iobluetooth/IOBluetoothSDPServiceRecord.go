@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance of this class represents a single SDP service record.
+//
 // Apple documentation: https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord
 type IOBluetoothSDPServiceRecord struct {
 	foundation.NSObject
@@ -52,35 +54,40 @@ func IOBluetoothSDPServiceRecordFromID(id objc.ID) *IOBluetoothSDPServiceRecord 
 	return o
 }
 
+// Adds a service to the local SDP server.
 func IOBluetoothSDPServiceRecordPublishedServiceRecordWithDictionary(serviceDict *foundation.NSDictionary[objc.ID, objc.ID]) *IOBluetoothSDPServiceRecord {
-	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPServiceRecord), _iOBluetoothSDPServiceRecordSelPublishedServiceRecordWithDictionary, serviceDict)
+	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPServiceRecord), _iOBluetoothSDPServiceRecordSelPublishedServiceRecordWithDictionary, serviceDict.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return IOBluetoothSDPServiceRecordFromID(_ret)
 }
 
+// Removes the service from the local SDP server.
 func (o *IOBluetoothSDPServiceRecord) RemoveServiceRecord() int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothSDPServiceRecordSelRemoveServiceRecord)
 	return _ret
 }
 
+// Returns an IOBluetoothSDPServiceRecord * with the attributes specified in the provided service dictionary. Provide a pointer to an IOBlueotothDevice if you wish to associate the record to a specific IOBluetoothDevice.
 func IOBluetoothSDPServiceRecordWithServiceDictionaryDevice(serviceDict *foundation.NSDictionary[objc.ID, objc.ID], device *IOBluetoothDevice) *IOBluetoothSDPServiceRecord {
-	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPServiceRecord), _iOBluetoothSDPServiceRecordSelWithServiceDictionaryDevice, serviceDict, device.Ptr())
+	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPServiceRecord), _iOBluetoothSDPServiceRecordSelWithServiceDictionaryDevice, serviceDict.Ptr(), device.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return IOBluetoothSDPServiceRecordFromID(_ret)
 }
 
+// Returns an initialized IOBluetoothSDPServiceRecord * with the attributes specified in the provided service dictionary. Provide a pointer to an IOBlueotothDevice if you wish to associate the record to a specific IOBluetoothDevice.
 func (o *IOBluetoothSDPServiceRecord) InitWithServiceDictionaryDevice(serviceDict *foundation.NSDictionary[objc.ID, objc.ID], device *IOBluetoothDevice) *IOBluetoothSDPServiceRecord {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceRecordSelInitWithServiceDictionaryDevice, serviceDict, device.Ptr())
+	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceRecordSelInitWithServiceDictionaryDevice, serviceDict.Ptr(), device.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return IOBluetoothSDPServiceRecordFromID(_ret)
 }
 
+// Method call to convert an IOBluetoothSDPServiceRecordRef into an IOBluetoothSDPServiceRecord *.
 func IOBluetoothSDPServiceRecordWithSDPServiceRecordRef(sdpServiceRecordRef unsafe.Pointer) *IOBluetoothSDPServiceRecord {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPServiceRecord), _iOBluetoothSDPServiceRecordSelWithSDPServiceRecordRef, sdpServiceRecordRef)
 	if _ret != 0 {
@@ -89,6 +96,7 @@ func IOBluetoothSDPServiceRecordWithSDPServiceRecordRef(sdpServiceRecordRef unsa
 	return IOBluetoothSDPServiceRecordFromID(_ret)
 }
 
+// Returns an IOBluetoothSDPServiceRecordRef representation of the target IOBluetoothSDPServiceRecord object.
 func (o *IOBluetoothSDPServiceRecord) GetSDPServiceRecordRef() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOBluetoothSDPServiceRecordSelGetSDPServiceRecordRef)
 	return _ret
@@ -103,10 +111,14 @@ func (o *IOBluetoothSDPServiceRecord) GetDevice() *IOBluetoothDevice {
 }
 
 func (o *IOBluetoothSDPServiceRecord) GetAttributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _iOBluetoothSDPServiceRecordSelGetAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceRecordSelGetAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
+// Returns the data element for the given attribute ID in the target service.
 func (o *IOBluetoothSDPServiceRecord) GetAttributeDataElement(attributeID uint16) *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceRecordSelGetAttributeDataElement, attributeID)
 	if _ret != 0 {
@@ -115,6 +127,7 @@ func (o *IOBluetoothSDPServiceRecord) GetAttributeDataElement(attributeID uint16
 	return IOBluetoothSDPDataElementFromID(_ret)
 }
 
+// Returns the name of the service.
 func (o *IOBluetoothSDPServiceRecord) GetServiceName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceRecordSelGetServiceName)
 	if _ret != 0 {
@@ -123,41 +136,45 @@ func (o *IOBluetoothSDPServiceRecord) GetServiceName() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Allows the discovery of the RFCOMM channel ID assigned to the service.
 func (o *IOBluetoothSDPServiceRecord) GetRFCOMMChannelID(rfcommChannelID *uint8) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothSDPServiceRecordSelGetRFCOMMChannelID, rfcommChannelID)
 	return _ret
 }
 
+// Allows the discovery of the L2CAP PSM assigned to the service.
 func (o *IOBluetoothSDPServiceRecord) GetL2CAPPSM(outPSM *uint16) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothSDPServiceRecordSelGetL2CAPPSM, outPSM)
 	return _ret
 }
 
+// Allows the discovery of the service record handle assigned to the service.
 func (o *IOBluetoothSDPServiceRecord) GetServiceRecordHandle(outServiceRecordHandle *uint32) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothSDPServiceRecordSelGetServiceRecordHandle, outServiceRecordHandle)
 	return _ret
 }
 
-// @method		matchesUUID16: @abstract	Returns TRUE the UUID16 is found in the target service. NOTE: This method is only available in Mac OS X 10.7 or later. @param uuid16 A BluetoothSDPUUID16 to search for in the target service. @result Returns TRUE if the UUID16 is present in the service.
+// Returns TRUE the UUID16 is found in the target service.
 func (o *IOBluetoothSDPServiceRecord) MatchesUUID16(uuid16 uint16) bool {
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothSDPServiceRecordSelMatchesUUID16, uuid16)
 	return _ret
 }
 
-// @method		matchesUUIDArray: @abstract	Returns TRUE if ALL of the UUIDs in the given array is found in the target service. @discussion The given array should contain IOBluetoothSDPUUID objects.  It only returns TRUE if all of the UUIDs are found.  This method is like hasServiceFromArray: except that it requires that all UUIDs match instead of any of them matching. NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later. @param array An NSArray of IOBluetoothSDPUUID objects to search for in the target service. @result Returns TRUE if all of the given UUIDs are present in the service.
+// Returns TRUE if ALL of the UUIDs in the given array is found in the target service.
 func (o *IOBluetoothSDPServiceRecord) MatchesUUIDArray(uuidArray *foundation.NSArray[objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothSDPServiceRecordSelMatchesUUIDArray, uuidArray)
+	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothSDPServiceRecordSelMatchesUUIDArray, uuidArray.Ptr())
 	return _ret
 }
 
-// @method		matchesSearchArray: @abstract	Returns TRUE any of the UUID arrays in the search array match the target service. @discussion The given array should contain NSArray objects.  Each sub-NSArray should contain IOBluetoothSDPUUID objects.  In turn, each sub-NSArray gets passed to -matchesUUIDArray: If any of those returns TRUE, then the search stops and TRUE is returned. Essentially the master NSArray contains the OR operations and each sub-array contains the AND operations. NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later. @param		array An NSArray of NSArrays of IOBluetoothSDPUUID objects. @result		Returns TRUE if any of the UUID arrays match.
+// Returns TRUE any of the UUID arrays in the search array match the target service.
 func (o *IOBluetoothSDPServiceRecord) MatchesSearchArray(searchArray *foundation.NSArray[objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothSDPServiceRecordSelMatchesSearchArray, searchArray)
+	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothSDPServiceRecordSelMatchesSearchArray, searchArray.Ptr())
 	return _ret
 }
 
+// Returns TRUE if any one of the UUIDs in the given array is found in the target service.
 func (o *IOBluetoothSDPServiceRecord) HasServiceFromArray(array *foundation.NSArray[objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothSDPServiceRecordSelHasServiceFromArray, array)
+	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothSDPServiceRecordSelHasServiceFromArray, array.Ptr())
 	return _ret
 }
 
@@ -170,13 +187,19 @@ func (o *IOBluetoothSDPServiceRecord) Device() *IOBluetoothDevice {
 }
 
 func (o *IOBluetoothSDPServiceRecord) Attributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _iOBluetoothSDPServiceRecordSelAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceRecordSelAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *IOBluetoothSDPServiceRecord) SortedAttributes() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iOBluetoothSDPServiceRecordSelSortedAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceRecordSelSortedAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // @method		handsFreeSupportedFeatures @abstract		Return the hands free supported features @discussion	Returns the hands free supported features bitmap stored in the SDP record. See “IOBluetoothHandsFreeDeviceFeatures and IOBluetoothHandsFreeAudioGatewayFeatures.” @result		The supported features bitmap.

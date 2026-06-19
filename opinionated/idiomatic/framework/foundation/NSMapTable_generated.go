@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection similar to a dictionary, but with a broader range of available memory semantics.
+//
 // MapTable wraps [raw.NSMapTable] with a fluent Go API.
 type MapTable struct {
 	inner *raw.NSMapTable[objc.ID, objc.ID]
@@ -29,6 +31,8 @@ func MapTableFromID(id objc.ID) *MapTable {
 	return &MapTable{inner: raw.NSMapTableFromID[objc.ID, objc.ID](id)}
 }
 
+// Returns a map table, initialized with the given options.
+//
 // NewMapTableWithKeyOptionsValueOptionsCapacity creates a new [MapTable].
 func NewMapTableWithKeyOptionsValueOptionsCapacity(keyOptions NSPointerFunctionsOptions, valueOptions NSPointerFunctionsOptions, initialCapacity uint) *MapTable {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMapTable")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewMapTableWithKeyOptionsValueOptionsCapacity(keyOptions NSPointerFunctions
 	return &MapTable{inner: raw.NSMapTableFromID[objc.ID, objc.ID](_id)}
 }
 
+// Returns a map table, initialized with the given functions.
+//
 // NewMapTableWithKeyPointerFunctionsValuePointerFunctionsCapacity creates a new [MapTable].
 func NewMapTableWithKeyPointerFunctionsValuePointerFunctionsCapacity(keyFunctions *raw.NSPointerFunctions, valueFunctions *raw.NSPointerFunctions, initialCapacity uint) *MapTable {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMapTable")), objc.RegisterName("alloc"))
@@ -49,36 +55,50 @@ func (x *MapTable) WithScriptingProperties(scriptingProperties *raw.NSDictionary
 	return x
 }
 
+// Returns a the value associated with a given key.
+//
 // ObjectForKey calls the underlying ObjectForKey.
 func (x *MapTable) ObjectForKey(aKey objc.ID) objc.ID {
 	return x.inner.ObjectForKey(aKey)
 }
 
+// Removes a given key and its associated value from the map table.
+//
 // RemoveObjectForKey calls the underlying RemoveObjectForKey.
 func (x *MapTable) RemoveObjectForKey(aKey objc.ID) {
 	x.inner.RemoveObjectForKey(aKey)
 }
 
+// Adds a given key-value pair to the map table.
+//
 // SetObjectForKey calls the underlying SetObjectForKey.
 func (x *MapTable) SetObjectForKey(anObject objc.ID, aKey objc.ID) {
 	x.inner.SetObjectForKey(anObject, aKey)
 }
 
+// Returns an enumerator object that lets you access each key in the map table.
+//
 // KeyEnumerator calls the underlying KeyEnumerator.
 func (x *MapTable) KeyEnumerator() *raw.NSEnumerator[objc.ID] {
 	return x.inner.KeyEnumerator()
 }
 
+// Returns an enumerator object that lets you access each value in the map table.
+//
 // ObjectEnumerator calls the underlying ObjectEnumerator.
 func (x *MapTable) ObjectEnumerator() *raw.NSEnumerator[objc.ID] {
 	return x.inner.ObjectEnumerator()
 }
 
+// Empties the map table of its entries.
+//
 // RemoveAllObjects calls the underlying RemoveAllObjects.
 func (x *MapTable) RemoveAllObjects() {
 	x.inner.RemoveAllObjects()
 }
 
+// Returns a dictionary representation of the map table.
+//
 // DictionaryRepresentation calls the underlying DictionaryRepresentation.
 func (x *MapTable) DictionaryRepresentation() *raw.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.DictionaryRepresentation()

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that implements the Quick Look preview panel to display a preview of a list of items.
+//
 // Apple documentation: https://developer.apple.com/documentation/quicklookui/qlpreviewpanel
 type QLPreviewPanel struct {
 	appkit.NSPanel
@@ -46,7 +48,7 @@ func QLPreviewPanelFromID(id objc.ID) *QLPreviewPanel {
 	return o
 }
 
-// Returns the shared Quick Look preview panel instance. This method creates the panel if it doesn’t exist yet. Use “QuickLookUI/QLPreviewPanel/sharedPreviewPanelExists“ if you want to determine whether the panel exists without creating it. - Returns: The shared Quick Look preview panel instance for the application.
+// Returns the shared Quick Look preview panel instance.
 func QLPreviewPanelSharedPreviewPanel() *QLPreviewPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQLPreviewPanel), _qLPreviewPanelSelSharedPreviewPanel)
 	if _ret != 0 {
@@ -55,18 +57,18 @@ func QLPreviewPanelSharedPreviewPanel() *QLPreviewPanel {
 	return QLPreviewPanelFromID(_ret)
 }
 
-// Returns a Boolean value that indicates whether the system has created a shared Quick Look preview panel. - Returns: <doc://com.apple.documentation/documentation/objectivec/yes> if the shared Quick Look preview panel instance has been created, otherwise <doc://com.apple.documentation/documentation/objectivec/no>.
+// Returns a Boolean value that indicates whether the system has created a shared Quick Look preview panel.
 func QLPreviewPanelSharedPreviewPanelExists() bool {
 	_ret := objc.Send[bool](objc.ID(_clsQLPreviewPanel), _qLPreviewPanelSelSharedPreviewPanelExists)
 	return _ret
 }
 
-// Asks the preview panel to update its current controller. The preview panel automatically updates its controller (by searching the responder chain) whenever the main or key window changes. You should only invoke this method if the responder chain changes without explicit notice.
+// Asks the preview panel to update its current controller.
 func (o *QLPreviewPanel) UpdateController() {
 	o.Ptr().Send(_qLPreviewPanelSelUpdateController)
 }
 
-// Asks the preview panel to reload its data from its data source. This method doesn’t refresh the visible item if it hasn’t changed.
+// Asks the preview panel to reload its data from its data source.
 func (o *QLPreviewPanel) ReloadData() {
 	o.Ptr().Send(_qLPreviewPanelSelReloadData)
 }
@@ -76,15 +78,15 @@ func (o *QLPreviewPanel) RefreshCurrentPreviewItem() {
 	o.Ptr().Send(_qLPreviewPanelSelRefreshCurrentPreviewItem)
 }
 
-// Instructs the panel to enter full screen mode. If the panel isn’t onscreen, the panel goes directly to full screen mode. The panel chooses the appropriate screen depending on where the panel is or, if entering fullscreen directly, where the panel zooms from. - Parameters: - screen: This parameter isn’t currently used—pass `nil`. - options: This parameter isn’t currently used—pass `nil`. - Returns: <doc://com.apple.documentation/documentation/objectivec/yes> if the panel was able to enter full screen mode; otherwise, <doc://com.apple.documentation/documentation/objectivec/no>.
+// Instructs the panel to enter full screen mode.
 func (o *QLPreviewPanel) EnterFullScreenModeWithOptions(screen *appkit.NSScreen, options *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _qLPreviewPanelSelEnterFullScreenModeWithOptions, screen.Ptr(), options)
+	_ret := objc.Send[bool](o.Ptr(), _qLPreviewPanelSelEnterFullScreenModeWithOptions, screen.Ptr(), options.Ptr())
 	return _ret
 }
 
-// Instructs the panel to exit full screen mode. - Parameters: - options: This parameter isn’t used — pass `nil`.
+// Instructs the panel to exit full screen mode.
 func (o *QLPreviewPanel) ExitFullScreenModeWithOptions(options *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_qLPreviewPanelSelExitFullScreenModeWithOptions, options)
+	o.Ptr().Send(_qLPreviewPanelSelExitFullScreenModeWithOptions, options.Ptr())
 }
 
 // The current first responder accepting to control the preview panel. You should never change the preview panel’s state (for example, its delegate, datasource, and so on) if you aren’t controlling it.

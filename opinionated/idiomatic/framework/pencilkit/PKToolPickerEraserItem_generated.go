@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An item that represents an eraser tool in the tool picker.
+//
 // ToolPickerEraserItem wraps [raw.PKToolPickerEraserItem] with a fluent Go API.
 type ToolPickerEraserItem struct {
 	inner *raw.PKToolPickerEraserItem
@@ -29,7 +31,7 @@ func ToolPickerEraserItemFromID(id objc.ID) *ToolPickerEraserItem {
 	return &ToolPickerEraserItem{inner: raw.PKToolPickerEraserItemFromID(id)}
 }
 
-// Create a new eraser tool item.
+// Creates a new eraser item.
 //
 // NewToolPickerEraserItemWithEraserType creates a new [ToolPickerEraserItem].
 func NewToolPickerEraserItemWithEraserType(eraserType PKEraserType) *ToolPickerEraserItem {
@@ -38,7 +40,7 @@ func NewToolPickerEraserItemWithEraserType(eraserType PKEraserType) *ToolPickerE
 	return &ToolPickerEraserItem{inner: raw.PKToolPickerEraserItemFromID(_id)}
 }
 
-// Create a new eraser tool item with a width. @param eraserType The type of eraser. @param width The width of the eraser.
+// Creates a new eraser item with the specified width.
 //
 // NewToolPickerEraserItemWithEraserTypeWidth creates a new [ToolPickerEraserItem].
 func NewToolPickerEraserItemWithEraserTypeWidth(eraserType PKEraserType, width float64) *ToolPickerEraserItem {

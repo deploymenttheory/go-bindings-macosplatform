@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An image-analysis request that tracks movement of a previously identified rectangular object across multiple images or video frames.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vntrackrectanglerequest
 type VNTrackRectangleRequest struct {
 	VNTrackingRequest
@@ -32,7 +34,7 @@ func VNTrackRectangleRequestFromID(id objc.ID) *VNTrackRectangleRequest {
 	return o
 }
 
-// @brief Create a new rectangle tracking request with rectangle observation. @param    observation          Rectangle observation with bounding box and rectangle corners location info.
+// Creates a new rectangle tracking request with a rectangle observation.
 func (o *VNTrackRectangleRequest) InitWithRectangleObservation(observation *VNRectangleObservation) *VNTrackRectangleRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackRectangleRequestSelInitWithRectangleObservation, observation.Ptr())
 	if _ret != 0 {
@@ -41,7 +43,7 @@ func (o *VNTrackRectangleRequest) InitWithRectangleObservation(observation *VNRe
 	return VNTrackRectangleRequestFromID(_ret)
 }
 
-// @brief Create a new rectangle tracking request with rectangle observation. @param    observation          Rectangle observation with bounding box and rectangle corners location info. @param    completionHandler    The block that is invoked when the request has been performed.
+// Creates a new rectangle tracking request with a rectangle observation.
 func (o *VNTrackRectangleRequest) InitWithRectangleObservationCompletionHandler(observation *VNRectangleObservation, completionHandler func(*VNRequest, unsafe.Pointer)) *VNTrackRectangleRequest {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

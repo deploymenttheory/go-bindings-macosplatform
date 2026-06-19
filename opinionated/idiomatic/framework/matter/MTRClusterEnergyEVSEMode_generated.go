@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Energy EVSE Mode Attributes and commands for selecting a mode from a list of supported options.
+//
 // MTRClusterEnergyEVSEMode wraps [raw.MTRClusterEnergyEVSEMode] with a fluent Go API.
 type MTRClusterEnergyEVSEMode struct {
 	inner *raw.MTRClusterEnergyEVSEMode

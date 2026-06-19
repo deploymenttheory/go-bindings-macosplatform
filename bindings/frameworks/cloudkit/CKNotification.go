@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract base class for CloudKit notifications.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cknotification
 type CKNotification struct {
 	foundation.NSObject
@@ -52,9 +54,9 @@ func CKNotificationFromID(id objc.ID) *CKNotification {
 	return o
 }
 
-// Creates a new notification using the specified payload data. - Parameters: - notificationDictionary: The push notification's payload data. Use the dictionary that the system provides to your app delegate's <doc://com.apple.documentation/documentation/uikit/uiapplicationdelegate/application(_:didreceiveremotenotification:fetchcompletionhandler:)> method. This parameter must not be `nil`.
+// Creates a new notification using the specified payload data.
 func CKNotificationNotificationFromRemoteNotificationDictionary(notificationDictionary *foundation.NSDictionary[objc.ID, objc.ID]) *CKNotification {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCKNotification), _cKNotificationSelNotificationFromRemoteNotificationDictionary, notificationDictionary)
+	_ret := objc.Send[objc.ID](objc.ID(_clsCKNotification), _cKNotificationSelNotificationFromRemoteNotificationDictionary, notificationDictionary.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Defines the range within which an ear’s sensitivity point may have been clamped, if any.
+//
 // AudiogramSensitivityPointClampingRange wraps [raw.HKAudiogramSensitivityPointClampingRange] with a fluent Go API.
 type AudiogramSensitivityPointClampingRange struct {
 	inner *raw.HKAudiogramSensitivityPointClampingRange

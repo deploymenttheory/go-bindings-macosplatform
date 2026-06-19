@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Represents a single state in a state machine. By default, states allow transitions freely to and from the states in the machine. If a more restricted set of valid transitions are needed in the state machine, you may override isValidNextState: where applicable. @see GKStateMachine @see isValidNextState:
+// The abstract superclass for defining state-specific logic as part of a state machine.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkstate
 type GKState struct {
@@ -38,7 +38,7 @@ func GKStateFromID(id objc.ID) *GKState {
 	return o
 }
 
-// Creates a new state to be used in a state machine. @see GKStateMachine
+// Creates a state object with the specified list of valid next states.
 func GKStateState() *GKState {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKState), _gKStateSelState)
 	if _ret != 0 {
@@ -47,6 +47,7 @@ func GKStateState() *GKState {
 	return GKStateFromID(_ret)
 }
 
+// Initializes a state object.
 func (o *GKState) Init() *GKState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKStateSelInit)
 	if _ret != 0 {
@@ -55,23 +56,23 @@ func (o *GKState) Init() *GKState {
 	return GKStateFromID(_ret)
 }
 
-// Returns YES if the given class is a valid next state to enter. By default GKState will return YES for any class that is subclass of GKState. Override this in a subclass to enforce limited edge traversals in the state machine. @see GKStateMachine.canEnterState: @see GKStateMachine.enterState: @param stateClass the class to be checked @return YES if the class is kind of GKState and the state transition is valid, else NO.
+// Returns a Boolean value indicating whether a state machine currently in this state is allowed to transition into the specified state.
 func (o *GKState) IsValidNextState(stateClass objc.Class) bool {
 	_ret := objc.Send[bool](o.Ptr(), _gKStateSelIsValidNextState, stateClass)
 	return _ret
 }
 
-// Called by GKStateMachine when this state is entered. @param previousState the state that was exited to enter this state.  This is nil if this is the state machine's first entered state. @see stateMachineWithStates:initialStateClass:
+// Performs custom actions when a state machine transitions into this state.
 func (o *GKState) DidEnterWithPreviousState(previousState *GKState) {
 	o.Ptr().Send(_gKStateSelDidEnterWithPreviousState, previousState.Ptr())
 }
 
-// Called by GKStateMachine when it is updated @param seconds the time in seconds since the last update
+// Performs custom actions when a state machine updates while in this state.
 func (o *GKState) UpdateWithDeltaTime(seconds float64) {
 	o.Ptr().Send(_gKStateSelUpdateWithDeltaTime, seconds)
 }
 
-// Called by GKStateMachine when this state is exited @param nextState the state that is being entered next
+// Performs custom actions when a state machine transitions out of this state.
 func (o *GKState) WillExitWithNextState(nextState *GKState) {
 	o.Ptr().Send(_gKStateSelWillExitWithNextState, nextState.Ptr())
 }

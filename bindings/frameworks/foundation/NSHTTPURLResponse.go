@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The metadata associated with the response to an HTTP protocol URL load request.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nshttpurlresponse
 type NSHTTPURLResponse struct {
 	NSURLResponse
@@ -68,6 +70,9 @@ func (o *NSHTTPURLResponse) StatusCode() int {
 
 // @abstract Returns a dictionary containing all the HTTP header fields of the receiver. @discussion By examining this header dictionary, clients can see the "raw" header information which was reported to the protocol implementation by the HTTP server. This may be of use to sophisticated or special-purpose HTTP clients. @result A dictionary containing all the HTTP header fields of the receiver.
 func (o *NSHTTPURLResponse) AllHeaderFields() *NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSHTTPURLResponseSelAllHeaderFields)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSHTTPURLResponseSelAllHeaderFields)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }

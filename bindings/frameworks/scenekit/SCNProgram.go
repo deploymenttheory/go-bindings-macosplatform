@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A complete Metal or OpenGL shader program that replaces SceneKit’s rendering of a geometry or material.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnprogram
 type SCNProgram struct {
 	foundation.NSObject
@@ -54,7 +56,7 @@ func SCNProgramFromID(id objc.ID) *SCNProgram {
 	return o
 }
 
-// @method program @abstract Creates and initialize a program instance.
+// Creates a new program object.
 func SCNProgramProgram() *SCNProgram {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNProgram), _sCNProgramSelProgram)
 	if _ret != 0 {
@@ -63,7 +65,7 @@ func SCNProgramProgram() *SCNProgram {
 	return SCNProgramFromID(_ret)
 }
 
-// @method handleBindingOfBufferNamed:frequency:usingBlock: @abstract Sets the block to call at render time to bind the buffer of the specified symbol of the receiver's program. @param name The name of the buffer to bind. @param frequency The frequency at which the block has to be invoked. Can be per frame, per node or per geometry or material. See SCNBufferBindingBlock above. @param block The block that binds the buffer. @discussion This method can only be used with Metal based programs.
+// Registers a block for SceneKit to call at render time for binding a Metal buffer to the shader program.
 func (o *SCNProgram) HandleBindingOfBufferNamedFrequencyUsing(name *foundation.NSString, frequency SCNBufferFrequency, block func(objc.ID, *SCNNode, objc.ID, *SCNRenderer)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -81,12 +83,12 @@ func (o *SCNProgram) HandleBindingOfBufferNamedFrequencyUsing(name *foundation.N
 	o.Ptr().Send(_sCNProgramSelHandleBindingOfBufferNamedFrequencyUsing, name.Ptr(), frequency, __block_block)
 }
 
-// @method setSemantic:forSymbol:options: @abstract Associates a SceneKit semantic to a symbol. @param semantic The SceneKit semantic to associate to the specified symbol. @param symbol A symbol from the program source code. @param options An optional dictionary. See the 'Semantic options' above. @discussion Associates semantics handled by the SceneKit runtime to a symbol from the program. Supported semantics are listed in SCNGeometry.h and SCNNode.h.
+// Associates a SceneKit semantic identifier with the specified GLSL vertex attribute or uniform variable.
 func (o *SCNProgram) SetSemanticForSymbolOptions(semantic *foundation.NSString, symbol *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	o.Ptr().Send(_sCNProgramSelSetSemanticForSymbolOptions, semantic.Ptr(), symbol.Ptr(), options)
+	o.Ptr().Send(_sCNProgramSelSetSemanticForSymbolOptions, semantic.Ptr(), symbol.Ptr(), options.Ptr())
 }
 
-// @method semanticForSymbol: @abstract Retrieves the SceneKit semantic associated to a symbol from the program source code. @param symbol A symbol from the program source code.
+// Returns the SceneKit semantic identifiers associated with the specified GLSL vertex attribute or uniform variable.
 func (o *SCNProgram) SemanticForSymbol(symbol *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNProgramSelSemanticForSymbol, symbol.Ptr())
 	if _ret != 0 {

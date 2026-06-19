@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance that represents a stream of shareable content.
+//
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/scstream
 type SCStream struct {
 	foundation.NSObject
@@ -41,7 +43,7 @@ func SCStreamFromID(id objc.ID) *SCStream {
 	return o
 }
 
-// @abstract initWithFilter:configuration:delegate: @param contentFilter the requested content filter to be captured @param streamConfig the requested stream configuration to be applied to the SCStream @param delegate the SCStream delegate object @discussion this method create a SCStream object that has the particular output settings for the content stream
+// Creates a stream with a content filter and configuration.
 func (o *SCStream) InitWithFilterConfigurationDelegate(contentFilter *SCContentFilter, streamConfig *SCStreamConfiguration, delegate SCStreamDelegate) *SCStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCStreamSelInitWithFilterConfigurationDelegate, contentFilter.Ptr(), streamConfig.Ptr(), delegate)
 	if _ret != 0 {
@@ -50,7 +52,7 @@ func (o *SCStream) InitWithFilterConfigurationDelegate(contentFilter *SCContentF
 	return SCStreamFromID(_ret)
 }
 
-// @abstract addStreamOutput:type:sampleHandlerQueue:error: @param output an object that adheres to the SCStreamOutput protocol that will receive the frames and call its delegate frame call back on its sample handler queue @param type the SCStreamOutput type @param sampleHandlerQueue the return queue for the sample handler @param error the error pertaining to the add stream output @discussion An SCStreamOutput protocol object instance can only be added to a session using -addStreamOutput: Returns a BOOL denoting if the add was successful
+// Adds a destination that receives the stream output.
 func (o *SCStream) AddStreamOutputTypeSampleHandlerQueueError(output SCStreamOutput, type_ SCStreamOutputType, sampleHandlerQueue *foundation.NSObject) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sCStreamSelAddStreamOutputTypeSampleHandlerQueueError, output, type_, sampleHandlerQueue.Ptr(), unsafe.Pointer(&_nsErr))
@@ -60,6 +62,7 @@ func (o *SCStream) AddStreamOutputTypeSampleHandlerQueueError(output SCStreamOut
 	return _ret, nil
 }
 
+// Removes a destination from receiving stream output.
 func (o *SCStream) RemoveStreamOutputTypeError(output SCStreamOutput, type_ SCStreamOutputType) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _sCStreamSelRemoveStreamOutputTypeError, output, type_, unsafe.Pointer(&_nsErr))
@@ -69,7 +72,7 @@ func (o *SCStream) RemoveStreamOutputTypeError(output SCStreamOutput, type_ SCSt
 	return _ret, nil
 }
 
-// @abstract updateContentFilter:completionHandler: @param contentFilter the requested content filter to be updated @param completionHandler the handler to be called when the function completes @discussion this method will update the content filter for a content stream. A completion handler will be called when the update is complete with an error denoting if the update has failed.
+// Updates the stream by applying a new content filter.
 func (o *SCStream) UpdateContentFilterCompletionHandler(contentFilter *SCContentFilter, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -81,7 +84,7 @@ func (o *SCStream) UpdateContentFilterCompletionHandler(contentFilter *SCContent
 	o.Ptr().Send(_sCStreamSelUpdateContentFilterCompletionHandler, contentFilter.Ptr(), __block_completionHandler)
 }
 
-// @abstract updateConfiguration:completionHandler: @param streamConfig the requested content filter to be updated @param completionHandler the handler to be called when the function completes @discussion this method will update the stream configuration for a content stream. A completion handler will be called when the update is complete with an error denoting if the update has failed.
+// Updates the stream with a new configuration.
 func (o *SCStream) UpdateConfigurationCompletionHandler(streamConfig *SCStreamConfiguration, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -93,7 +96,7 @@ func (o *SCStream) UpdateConfigurationCompletionHandler(streamConfig *SCStreamCo
 	o.Ptr().Send(_sCStreamSelUpdateConfigurationCompletionHandler, streamConfig.Ptr(), __block_completionHandler)
 }
 
-// @abstract startCaptureWithCompletionHandler: @param completionHandler the handler to be called when the function completes @discussion this method starts the content stream. The handler will be called when the content stream start has completed with an error denoting if the start has failed.
+// Starts the stream with a callback to indicate whether it successfully starts.
 func (o *SCStream) StartCaptureWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -105,7 +108,7 @@ func (o *SCStream) StartCaptureWithCompletionHandler(completionHandler func(unsa
 	o.Ptr().Send(_sCStreamSelStartCaptureWithCompletionHandler, __block_completionHandler)
 }
 
-// @abstract stopCaptureWithCompletionHandler: @param completionHandler the handler to be called when the function completes @discussion this method stops the content stream. The handler will be called when the content stream stop has completed with an error denoting if the stop has failed.
+// Stops the stream.
 func (o *SCStream) StopCaptureWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

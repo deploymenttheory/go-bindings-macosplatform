@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes the deletion of an individual record.
+//
 // SyncEngineFetchedRecordDeletion wraps [raw.CKSyncEngineFetchedRecordDeletion] with a fluent Go API.
 type SyncEngineFetchedRecordDeletion struct {
 	inner *raw.CKSyncEngineFetchedRecordDeletion

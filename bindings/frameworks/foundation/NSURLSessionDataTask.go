@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A URL session task that returns downloaded data directly to the app in memory.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlsessiondatatask
 type NSURLSessionDataTask struct {
 	NSURLSessionTask

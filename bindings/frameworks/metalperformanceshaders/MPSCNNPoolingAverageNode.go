@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract  A node representing a MPSCNNPoolingAverage kernel @discussion The default edge mode is MPSImageEdgeModeClamp
+// A representation of an average pooling filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingaveragenode
 type MPSCNNPoolingAverageNode struct {

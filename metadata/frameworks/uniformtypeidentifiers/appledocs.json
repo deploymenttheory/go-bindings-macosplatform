@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "framework": "UniformTypeIdentifiers",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "UTType": {
+      "doc": "A structure that represents a type of data to load, send, or receive.",
+      "url": "https://developer.apple.com/documentation/uniformtypeidentifiers/uttype"
+    }
+  }
+}

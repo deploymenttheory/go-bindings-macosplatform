@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An Objective-C message rendered as an object.
+//
 // Invocation wraps [raw.NSInvocation] with a fluent Go API.
 type Invocation struct {
 	inner *raw.NSInvocation
@@ -36,12 +38,16 @@ func NewInvocation() *Invocation {
 	return &Invocation{inner: raw.NSInvocationFromID(_id)}
 }
 
+// The receiver’s target, or nil if the receiver has no target.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *Invocation) WithTarget(target objc.ID) *Invocation {
 	x.inner.SetTarget(target)
 	return x
 }
 
+// The receiver’s selector, or 0 if it hasn’t been set.
+//
 // WithSelector sets the selector property and returns the receiver for chaining.
 func (x *Invocation) WithSelector(selector objc.SEL) *Invocation {
 	x.inner.SetSelector(selector)
@@ -54,36 +60,50 @@ func (x *Invocation) WithScriptingProperties(scriptingProperties *raw.NSDictiona
 	return x
 }
 
+// If the receiver hasn’t already done so, retains the target and all object arguments of the receiver and copies all of its C-string arguments and blocks. If a returnvalue has been set, this is also retained or copied.
+//
 // RetainArguments calls the underlying RetainArguments.
 func (x *Invocation) RetainArguments() {
 	x.inner.RetainArguments()
 }
 
+// Gets the invocation’s return value.
+//
 // GetReturnValue calls the underlying GetReturnValue.
 func (x *Invocation) GetReturnValue(retLoc unsafe.Pointer) {
 	x.inner.GetReturnValue(retLoc)
 }
 
+// Sets the receiver’s return value.
+//
 // SetReturnValue calls the underlying SetReturnValue.
 func (x *Invocation) SetReturnValue(retLoc unsafe.Pointer) {
 	x.inner.SetReturnValue(retLoc)
 }
 
+// Returns by indirection the receiver’s argument at a specified index.
+//
 // GetArgumentAtIndex calls the underlying GetArgumentAtIndex.
 func (x *Invocation) GetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int) {
 	x.inner.GetArgumentAtIndex(argumentLocation, idx)
 }
 
+// Sets an argument of the receiver.
+//
 // SetArgumentAtIndex calls the underlying SetArgumentAtIndex.
 func (x *Invocation) SetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int) {
 	x.inner.SetArgumentAtIndex(argumentLocation, idx)
 }
 
+// Sends the receiver’s message (with arguments) to its target and sets the return value.
+//
 // Invoke calls the underlying Invoke.
 func (x *Invocation) Invoke() {
 	x.inner.Invoke()
 }
 
+// Sets the receiver’s target, sends the receiver’s message (with arguments) to that target, and sets the return value.
+//
 // InvokeWithTarget calls the underlying InvokeWithTarget.
 func (x *Invocation) InvokeWithTarget(target objc.ID) {
 	x.inner.InvokeWithTarget(target)

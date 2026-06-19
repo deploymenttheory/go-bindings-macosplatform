@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Details about a recipient’s response to an exchange request.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkturnbasedexchangereply
 type GKTurnBasedExchangeReply struct {
 	foundation.NSObject

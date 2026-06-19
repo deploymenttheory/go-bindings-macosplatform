@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event requesting that the player seek to a new position.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpseekcommandevent
 type MPSeekCommandEvent struct {
 	MPRemoteCommandEvent

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The report of the data provider’s action on a flow.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nefilterreport
 type NEFilterReport struct {
 	foundation.NSObject

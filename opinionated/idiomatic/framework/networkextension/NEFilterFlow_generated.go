@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract base class for types that represent flows of network data.
+//
 // NEFilterFlow wraps [raw.NEFilterFlow] with a fluent Go API.
 type NEFilterFlow struct {
 	inner *raw.NEFilterFlow

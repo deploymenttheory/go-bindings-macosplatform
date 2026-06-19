@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Groups together properties you use to create a mesh render pipeline state object.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4meshrenderpipelinedescriptor
 type MTL4MeshRenderPipelineDescriptor struct {
 	MTL4PipelineDescriptor

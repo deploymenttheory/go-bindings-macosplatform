@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mechanism for converting one kind of scripting data to another.
+//
 // ScriptCoercionHandler wraps [raw.NSScriptCoercionHandler] with a fluent Go API.
 type ScriptCoercionHandler struct {
 	inner *raw.NSScriptCoercionHandler
@@ -41,11 +43,15 @@ func (x *ScriptCoercionHandler) WithScriptingProperties(scriptingProperties *raw
 	return x
 }
 
+// Returns an object of a given class representing a given value.
+//
 // CoerceValueToClass calls the underlying CoerceValueToClass.
 func (x *ScriptCoercionHandler) CoerceValueToClass(value objc.ID, toClass objc.Class) objc.ID {
 	return x.inner.CoerceValueToClass(value, toClass)
 }
 
+// Registers a given object (typically a class) to handle coercions (conversions) from one given class to another.
+//
 // RegisterCoercerSelectorToConvertFromClassToClass calls the underlying RegisterCoercerSelectorToConvertFromClassToClass.
 func (x *ScriptCoercionHandler) RegisterCoercerSelectorToConvertFromClassToClass(coercer objc.ID, selector objc.SEL, fromClass objc.Class, toClass objc.Class) {
 	x.inner.RegisterCoercerSelectorToConvertFromClassToClass(coercer, selector, fromClass, toClass)

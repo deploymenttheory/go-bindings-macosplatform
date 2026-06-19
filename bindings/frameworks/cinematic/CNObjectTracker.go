@@ -15,7 +15,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Converts a normalized point or rectangle into a detection track that tracks an object over time.
+// An object that converts a normalized point or rectangle into a detection track that tracks an object over time.
 //
 // Apple documentation: https://developer.apple.com/documentation/cinematic/cnobjecttracker
 type CNObjectTracker struct {

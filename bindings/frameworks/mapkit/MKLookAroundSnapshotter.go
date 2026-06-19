@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A utility class that you use to create a static image from a LookAround scene.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mklookaroundsnapshotter
 type MKLookAroundSnapshotter struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func MKLookAroundSnapshotterFromID(id objc.ID) *MKLookAroundSnapshotter {
 	return o
 }
 
+// Create a new snapshotter object with the scene and options you specify.
 func (o *MKLookAroundSnapshotter) InitWithSceneOptions(scene *MKLookAroundScene, options *MKLookAroundSnapshotOptions) *MKLookAroundSnapshotter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundSnapshotterSelInitWithSceneOptions, scene.Ptr(), options.Ptr())
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func (o *MKLookAroundSnapshotter) InitWithSceneOptions(scene *MKLookAroundScene,
 	return MKLookAroundSnapshotterFromID(_ret)
 }
 
+// Requests a new snapshot and calls the completion handler you provide.
 func (o *MKLookAroundSnapshotter) GetSnapshotWithCompletionHandler(completionHandler func(*MKLookAroundSnapshot, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -57,6 +61,7 @@ func (o *MKLookAroundSnapshotter) GetSnapshotWithCompletionHandler(completionHan
 	o.Ptr().Send(_mKLookAroundSnapshotterSelGetSnapshotWithCompletionHandler, __block_completionHandler)
 }
 
+// Cancels an in-progress snapshot request.
 func (o *MKLookAroundSnapshotter) Cancel() {
 	o.Ptr().Send(_mKLookAroundSnapshotterSelCancel)
 }

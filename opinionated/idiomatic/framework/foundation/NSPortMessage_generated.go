@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A low-level, operating system-independent type for inter-application (and inter-thread) messages.
+//
 // PortMessage wraps [raw.NSPortMessage] with a fluent Go API.
 type PortMessage struct {
 	inner *raw.NSPortMessage

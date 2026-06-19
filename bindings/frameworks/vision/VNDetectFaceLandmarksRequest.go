@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An image-analysis request that finds facial features like eyes and mouth in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetectfacelandmarksrequest
 type VNDetectFaceLandmarksRequest struct {
 	VNImageBasedRequest
@@ -31,6 +33,7 @@ func VNDetectFaceLandmarksRequestFromID(id objc.ID) *VNDetectFaceLandmarksReques
 	return o
 }
 
+// Returns a Boolean value that indicates whether a revision supports a constellation.
 func VNDetectFaceLandmarksRequestRevisionSupportsConstellation(requestRevision uint, constellation VNRequestFaceLandmarksConstellation) bool {
 	_ret := objc.Send[bool](objc.ID(_clsVNDetectFaceLandmarksRequest), _vNDetectFaceLandmarksRequestSelRevisionSupportsConstellation, requestRevision, constellation)
 	return _ret

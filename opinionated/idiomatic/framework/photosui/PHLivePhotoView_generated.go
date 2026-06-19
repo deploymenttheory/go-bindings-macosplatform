@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view that displays a Live Photo—a picture that also includes motion and sound from the moments just before and after its capture.
+//
 // LivePhotoView wraps [raw.PHLivePhotoView] with a fluent Go API.
 type LivePhotoView struct {
 	inner *raw.PHLivePhotoView
@@ -38,13 +40,15 @@ func NewLivePhotoView() *LivePhotoView {
 	return &LivePhotoView{inner: raw.PHLivePhotoViewFromID(_id)}
 }
 
+// An object to be notified when Live Photo playback begins or ends.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *LivePhotoView) WithDelegate(delegate raw.PHLivePhotoViewDelegate) *LivePhotoView {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
-// Live photo displayed in the receiver.
+// The Live Photo displayed in the view.
 //
 // WithLivePhoto sets the livePhoto property and returns the receiver for chaining.
 func (x *LivePhotoView) WithLivePhoto(livePhoto *photos.PHLivePhoto) *LivePhotoView {
@@ -52,7 +56,7 @@ func (x *LivePhotoView) WithLivePhoto(livePhoto *photos.PHLivePhoto) *LivePhotoV
 	return x
 }
 
-// The mode in which the receiver will display its content. Defaults to PHLivePhotoViewContentModeAspectFit.
+// The mode in which the view displays its content.
 //
 // WithContentMode sets the contentMode property and returns the receiver for chaining.
 func (x *LivePhotoView) WithContentMode(contentMode PHLivePhotoViewContentMode) *LivePhotoView {
@@ -68,7 +72,7 @@ func (x *LivePhotoView) WithContentsRect(contentsRect corefoundation.CGRect) *Li
 	return x
 }
 
-// The audio volume during playback
+// The audio gain to apply to the Live Photo’s movie content during playback.
 //
 // WithAudioVolume sets the audioVolume property and returns the receiver for chaining.
 func (x *LivePhotoView) WithAudioVolume(audioVolume float32) *LivePhotoView {
@@ -76,7 +80,7 @@ func (x *LivePhotoView) WithAudioVolume(audioVolume float32) *LivePhotoView {
 	return x
 }
 
-// Indicates whether the audio of the Live Photo is muted.
+// A Boolean value that determines whether the view plays the audio content of its Live Photo.
 //
 // WithMuted sets the muted property and returns the receiver for chaining.
 func (x *LivePhotoView) WithMuted(muted bool) *LivePhotoView {
@@ -84,19 +88,21 @@ func (x *LivePhotoView) WithMuted(muted bool) *LivePhotoView {
 	return x
 }
 
-// The following methods allow the client to manually trigger playback. If the live photo is changed during playback, it will be immediately interrupted.
+// Begins playback of Live Photo content in the view.
 //
 // StartPlaybackWithStyle calls the underlying StartPlaybackWithStyle.
 func (x *LivePhotoView) StartPlaybackWithStyle(playbackStyle PHLivePhotoViewPlaybackStyle) {
 	x.inner.StartPlaybackWithStyle(raw.PHLivePhotoViewPlaybackStyle(playbackStyle))
 }
 
+// Stops playback of a Live Photo.
+//
 // StopPlayback calls the underlying StopPlayback.
 func (x *LivePhotoView) StopPlayback() {
 	x.inner.StopPlayback()
 }
 
-// Stops live photo playback. If animated is NO, the photo is immediately displayed.
+// Stops playback of a Live Photo in an animated manner.
 //
 // StopPlaybackAnimated calls the underlying StopPlaybackAnimated.
 func (x *LivePhotoView) StopPlaybackAnimated(animated bool) {

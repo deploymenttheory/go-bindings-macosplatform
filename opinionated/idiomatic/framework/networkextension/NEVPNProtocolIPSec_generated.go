@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Settings for an IPsec VPN configuration.
+//
 // NEVPNProtocolIPSec wraps [raw.NEVPNProtocolIPSec] with a fluent Go API.
 type NEVPNProtocolIPSec struct {
 	inner *raw.NEVPNProtocolIPSec
@@ -37,7 +39,7 @@ func NewNEVPNProtocolIPSec() *NEVPNProtocolIPSec {
 	return &NEVPNProtocolIPSec{inner: raw.NEVPNProtocolIPSecFromID(_id)}
 }
 
-// @property authenticationMethod @discussion The method used to authenticate with the IPSec server. Note that if this property is set to NEVPNIKEAuthenticationMethodNone, extended authentication will still be negotiated if useExtendedAuthentication is set to YES.
+// The method used to authenticate the device with the IPSec server. For IKE version 2, when using extended authentication, this authentication method only affects how the client validates the authentication payload presented by the server.
 //
 // WithAuthenticationMethod sets the authenticationMethod property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithAuthenticationMethod(authenticationMethod NEVPNIKEAuthenticationMethod) *NEVPNProtocolIPSec {
@@ -45,7 +47,7 @@ func (x *NEVPNProtocolIPSec) WithAuthenticationMethod(authenticationMethod NEVPN
 	return x
 }
 
-// @property useExtendedAuthentication @discussion A flag indicating if extended authentication will be negotiated. This authentication is in addition to the IKE authentication used to authenticate the endpoints of the IKE session. For IKE version 1, when this flag is set X-Auth authentication will be negotiated as part of the IKE session, using the username and password properties as the credential. For IKE version 2, when this flag is set EAP authentication will be negotiated as part of the IKE session, using the username, password, and/or identity properties as the credential depending on which EAP method the server requires.
+// A flag indicating if extended authentication will be negotiated.
 //
 // WithUseExtendedAuthentication sets the useExtendedAuthentication property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithUseExtendedAuthentication(useExtendedAuthentication bool) *NEVPNProtocolIPSec {
@@ -53,7 +55,7 @@ func (x *NEVPNProtocolIPSec) WithUseExtendedAuthentication(useExtendedAuthentica
 	return x
 }
 
-// @property sharedSecretReference @discussion A persistent reference to a keychain item of class kSecClassGenericPassword containing the IKE shared secret.
+// A persistent keychain reference to a keychain item containing the IKE shared secret.
 //
 // WithSharedSecretReference sets the sharedSecretReference property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithSharedSecretReference(sharedSecretReference *foundation.NSData) *NEVPNProtocolIPSec {
@@ -61,7 +63,7 @@ func (x *NEVPNProtocolIPSec) WithSharedSecretReference(sharedSecretReference *fo
 	return x
 }
 
-// @property localIdentifier @discussion A string identifying the local IPSec endpoint for authentication purposes.
+// A string identifying the iOS or macOS device for authentication purposes
 //
 // WithLocalIdentifier sets the localIdentifier property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithLocalIdentifier(localIdentifier string) *NEVPNProtocolIPSec {
@@ -69,7 +71,7 @@ func (x *NEVPNProtocolIPSec) WithLocalIdentifier(localIdentifier string) *NEVPNP
 	return x
 }
 
-// @property remoteIdentifier @discussion A string identifying the remote IPSec endpoint for authentication purposes.
+// A string identifying the IPSec server for authentication purposes
 //
 // WithRemoteIdentifier sets the remoteIdentifier property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithRemoteIdentifier(remoteIdentifier string) *NEVPNProtocolIPSec {
@@ -77,7 +79,7 @@ func (x *NEVPNProtocolIPSec) WithRemoteIdentifier(remoteIdentifier string) *NEVP
 	return x
 }
 
-// @property serverAddress @discussion The VPN server. Depending on the protocol, may be an IP address, host name, or URL.
+// The address of the VPN server.
 //
 // WithServerAddress sets the serverAddress property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithServerAddress(serverAddress string) *NEVPNProtocolIPSec {
@@ -85,7 +87,7 @@ func (x *NEVPNProtocolIPSec) WithServerAddress(serverAddress string) *NEVPNProto
 	return x
 }
 
-// @property username @discussion The username component of the VPN authentication credential.
+// The user name component of the tunneling protocol authentication credential.
 //
 // WithUsername sets the username property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithUsername(username string) *NEVPNProtocolIPSec {
@@ -93,7 +95,7 @@ func (x *NEVPNProtocolIPSec) WithUsername(username string) *NEVPNProtocolIPSec {
 	return x
 }
 
-// @property passwordReference @discussion The password component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassGenericPassword class.
+// A persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
 //
 // WithPasswordReference sets the passwordReference property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithPasswordReference(passwordReference *foundation.NSData) *NEVPNProtocolIPSec {
@@ -101,7 +103,7 @@ func (x *NEVPNProtocolIPSec) WithPasswordReference(passwordReference *foundation
 	return x
 }
 
-// @property identityReference @discussion The certificate and private key component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassIdentity class.
+// A persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
 //
 // WithIdentityReference sets the identityReference property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithIdentityReference(identityReference *foundation.NSData) *NEVPNProtocolIPSec {
@@ -109,7 +111,7 @@ func (x *NEVPNProtocolIPSec) WithIdentityReference(identityReference *foundation
 	return x
 }
 
-// @property identityData @discussion The PKCS12 data for the VPN authentication identity. The value is a NSData in PKCS12 format.
+// The certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
 //
 // WithIdentityData sets the identityData property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithIdentityData(identityData *foundation.NSData) *NEVPNProtocolIPSec {
@@ -117,7 +119,7 @@ func (x *NEVPNProtocolIPSec) WithIdentityData(identityData *foundation.NSData) *
 	return x
 }
 
-// @property identityDataPassword @discussion The password to be used to decrypt the PKCS12 identity data.
+// The password for the PKCS12 tunneling protocol authentication credentials.
 //
 // WithIdentityDataPassword sets the identityDataPassword property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithIdentityDataPassword(identityDataPassword string) *NEVPNProtocolIPSec {
@@ -125,7 +127,7 @@ func (x *NEVPNProtocolIPSec) WithIdentityDataPassword(identityDataPassword strin
 	return x
 }
 
-// @property disconnectOnSleep @discussion If YES, the VPN connection will be disconnected when the device goes to sleep. The default is NO.
+// A Boolean value that indicates whether the VPN disconnects when the device sleeps.
 //
 // WithDisconnectOnSleep sets the disconnectOnSleep property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithDisconnectOnSleep(disconnectOnSleep bool) *NEVPNProtocolIPSec {
@@ -133,7 +135,7 @@ func (x *NEVPNProtocolIPSec) WithDisconnectOnSleep(disconnectOnSleep bool) *NEVP
 	return x
 }
 
-// @property proxySettings @discussion An NEProxySettings object containing the proxy settings to use for connections routed through the tunnel.
+// The proxy settings to use for HTTP and HTTPS connections that route through the VPN.
 //
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithProxySettings(proxySettings *NEProxySettings) *NEVPNProtocolIPSec {
@@ -141,7 +143,7 @@ func (x *NEVPNProtocolIPSec) WithProxySettings(proxySettings *NEProxySettings) *
 	return x
 }
 
-// @property includeAllNetworks @discussion If this property is set to YES then all network traffic is routed through the tunnel, with some exclusions. Several of the exclusions can be controlled with the excludeLocalNetworks, excludeCellularServices, excludeAPNs and excludeDeviceCommunication properties. See the documentation for those properties. The following traffic is always excluded from the tunnel: - Traffic necessary for connecting and maintaining the device's network connection, such as DHCP. - Traffic necessary for connecting to captive networks. - Certain cellular services traffic that is not routable over the internet and is instead directly routed to the cellular network. See the excludeCellularServices property for more details. - Network communication with a companion device such as a watchOS device. The default value of this property is NO.
+// A Boolean value that indicates whether the system sends most network traffic over the tunnel.
 //
 // WithIncludeAllNetworks sets the includeAllNetworks property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithIncludeAllNetworks(includeAllNetworks bool) *NEVPNProtocolIPSec {
@@ -149,7 +151,7 @@ func (x *NEVPNProtocolIPSec) WithIncludeAllNetworks(includeAllNetworks bool) *NE
 	return x
 }
 
-// @property excludeLocalNetworks @discussion If YES, all traffic destined for local networks will be excluded from the tunnel. The default is NO on macOS and YES on iOS.
+// A Boolean value that indicates whether the system excludes all traffic destined for local networks from the tunnel.
 //
 // WithExcludeLocalNetworks sets the excludeLocalNetworks property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEVPNProtocolIPSec {
@@ -157,7 +159,7 @@ func (x *NEVPNProtocolIPSec) WithExcludeLocalNetworks(excludeLocalNetworks bool)
 	return x
 }
 
-// @property excludeCellularServices @discussion If includeAllNetworks is set to YES and this property is set to YES, then internet-routable network traffic for cellular services (VoLTE, Wi-Fi Calling, IMS, MMS, Visual Voicemail, etc.) is excluded from the tunnel. Note that some cellular carriers route cellular services traffic directly to the carrier network, bypassing the internet. Such cellular services traffic is always excluded from the tunnel. The default value of this property is YES.
+// A Boolean value that indicates whether the system excludes all cellular services network traffic from the tunnel.
 //
 // WithExcludeCellularServices sets the excludeCellularServices property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithExcludeCellularServices(excludeCellularServices bool) *NEVPNProtocolIPSec {
@@ -165,7 +167,7 @@ func (x *NEVPNProtocolIPSec) WithExcludeCellularServices(excludeCellularServices
 	return x
 }
 
-// @property excludeAPNs @discussion If includeAllNetworks is set to YES and this property is set to YES, then network traffic for the Apple Push Notification service (APNs) is excluded from the tunnel. The default value of this property is YES.
+// A Boolean value that indicates whether the system excludes all APNs network traffic from the tunnel.
 //
 // WithExcludeAPNs sets the excludeAPNs property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithExcludeAPNs(excludeAPNs bool) *NEVPNProtocolIPSec {
@@ -181,7 +183,7 @@ func (x *NEVPNProtocolIPSec) WithExcludeDeviceCommunication(excludeDeviceCommuni
 	return x
 }
 
-// @property enforceRoutes @discussion If YES, route rules for this tunnel will take precendence over any locally-defined routes. The default is NO.
+// A Boolean value that indicates whether route rules for the tunnel take precedence over any locally defined routes.
 //
 // WithEnforceRoutes sets the enforceRoutes property and returns the receiver for chaining.
 func (x *NEVPNProtocolIPSec) WithEnforceRoutes(enforceRoutes bool) *NEVPNProtocolIPSec {

@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "framework": "GameSave",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "GSSyncedDirectory": {
+      "doc": "A cloud-synced directory for game-save data.",
+      "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectory"
+    },
+    "GSSyncedDirectoryState": {
+      "doc": "Represents the state and its associated properties of the directory",
+      "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectorystate"
+    },
+    "GSSyncedDirectoryVersion": {
+      "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectoryversion"
+    }
+  },
+  "enums": {
+    "GSSyncState": {
+      "url": "https://developer.apple.com/documentation/gamesave/gssyncstate",
+      "members": {
+        "GSSyncStateClosed": {
+          "doc": "The directory is closed.",
+          "url": "https://developer.apple.com/documentation/gamesave/gssyncstate/closed"
+        },
+        "GSSyncStateConflicted": {
+          "doc": "The directory has conflicts with the cloud, which the game needs to resolve.",
+          "url": "https://developer.apple.com/documentation/gamesave/gssyncstate/conflicted"
+        },
+        "GSSyncStateError": {
+          "doc": "The directory is in error state and can’t be used.",
+          "url": "https://developer.apple.com/documentation/gamesave/gssyncstate/error"
+        },
+        "GSSyncStateLocal": {
+          "doc": "The directory is local-only and not synced to iCloud.",
+          "url": "https://developer.apple.com/documentation/gamesave/gssyncstate/local"
+        },
+        "GSSyncStateOffline": {
+          "doc": "The directory is available locally, but not fully synced because the device is offline.",
+          "url": "https://developer.apple.com/documentation/gamesave/gssyncstate/offline"
+        },
+        "GSSyncStateReady": {
+          "doc": "The directory is fully synced and ready to use.",
+          "url": "https://developer.apple.com/documentation/gamesave/gssyncstate/ready"
+        },
+        "GSSyncStateSyncing": {
+          "doc": "The directory is currently syncing and is not ready yet.",
+          "url": "https://developer.apple.com/documentation/gamesave/gssyncstate/syncing"
+        }
+      }
+    }
+  },
+  "methods": {
+    "GSSyncedDirectory": {
+      "+openDirectoryForContainerIdentifier:": {
+        "doc": "Requests an instance of the game-save directory.",
+        "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectory/open(forcontaineridentifier:)"
+      },
+      "-close": {
+        "doc": "Closes the directory, and resumes syncing the directory to the cloud.",
+        "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectory/close()"
+      },
+      "-finishSyncing:completionHandler:": {
+        "doc": "Waits for the directory sync to complete, showing the sync’s progress in a modal alert.",
+        "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectory/finishsyncing(_:completionhandler:)"
+      },
+      "-finishSyncingWithCompletionHandler:": {
+        "doc": "Waits for the directory sync to complete, without showing any user interface.",
+        "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectory/finishsyncing(completionhandler:)"
+      },
+      "-resolveConflictsWithVersion:": {
+        "doc": "Indicates that you resolved a conflict.",
+        "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectory/resolveconflicts(with:)"
+      },
+      "-triggerPendingUploadWithCompletionHandler:": {
+        "doc": "Triggers an upload of the directory for any changes that were pending.",
+        "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectory/triggerpendingupload(completionhandler:)"
+      }
+    }
+  },
+  "properties": {
+    "GSSyncedDirectory": {
+      "directoryState": {
+        "doc": "The state of the directory.",
+        "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectory/directorystate"
+      }
+    },
+    "GSSyncedDirectoryState": {
+      "conflictedVersions": {
+        "doc": "The conflicting versions.",
+        "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectorystate/conflictedversions"
+      },
+      "error": {
+        "doc": "The error preventing you from using the directory.",
+        "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectorystate/error"
+      },
+      "state": {
+        "doc": "Specifies the current state of the directory",
+        "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectorystate/state"
+      },
+      "url": {
+        "doc": "The URL of a directory to read and write game-save data in.",
+        "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectorystate/url"
+      }
+    },
+    "GSSyncedDirectoryVersion": {
+      "isLocal": {
+        "doc": "YES if the directory version is local; otherwise NO.",
+        "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectoryversion/islocal"
+      },
+      "localizedNameOfSavingComputer": {
+        "doc": "The localized name of the device that saved this version.",
+        "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectoryversion/localizednameofsavingcomputer"
+      },
+      "modifiedDate": {
+        "doc": "The date that this version was last modified.",
+        "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectoryversion/modifieddate"
+      },
+      "url": {
+        "doc": "The URL of a directory where you read and write game-save data.",
+        "url": "https://developer.apple.com/documentation/gamesave/gssynceddirectoryversion/url"
+      }
+    }
+  }
+}

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages the synchronization of local and remote record data.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncengine
 type CKSyncEngine struct {
 	foundation.NSObject

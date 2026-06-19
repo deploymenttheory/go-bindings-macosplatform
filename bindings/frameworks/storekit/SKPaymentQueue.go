@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A queue of payment transactions for the App Store to process.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skpaymentqueue
 // Deprecated: No longer supported.
 type SKPaymentQueue struct {
@@ -47,6 +49,7 @@ func SKPaymentQueueFromID(id objc.ID) *SKPaymentQueue {
 	return o
 }
 
+// Returns the default payment queue instance.
 // Deprecated: Use Storefront.current.
 func SKPaymentQueueDefaultQueue() *SKPaymentQueue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPaymentQueue), _sKPaymentQueueSelDefaultQueue)
@@ -56,57 +59,68 @@ func SKPaymentQueueDefaultQueue() *SKPaymentQueue {
 	return SKPaymentQueueFromID(_ret)
 }
 
+// A method that indicates whether the person can make purchases.
 // Deprecated: Use AppStore.canMakePayments.
 func SKPaymentQueueCanMakePayments() bool {
 	_ret := objc.Send[bool](objc.ID(_clsSKPaymentQueue), _sKPaymentQueueSelCanMakePayments)
 	return _ret
 }
 
+// Adds a payment request to the queue.
 // Deprecated: Use Product.purchase(confirmIn:options:).
 func (o *SKPaymentQueue) AddPayment(payment *SKPayment) {
 	o.Ptr().Send(_sKPaymentQueueSelAddPayment, payment.Ptr())
 }
 
+// Asks the payment queue to restore previously completed purchases.
 // Deprecated: Use AppStore.sync().
 func (o *SKPaymentQueue) RestoreCompletedTransactions() {
 	o.Ptr().Send(_sKPaymentQueueSelRestoreCompletedTransactions)
 }
 
+// Asks the payment queue to restore previously completed purchases, providing an opaque identifier for the user’s account.
 // Deprecated: Use AppStore.sync().
 func (o *SKPaymentQueue) RestoreCompletedTransactionsWithApplicationUsername(username *foundation.NSString) {
 	o.Ptr().Send(_sKPaymentQueueSelRestoreCompletedTransactionsWithApplicationUsername, username.Ptr())
 }
 
+// Notifies the App Store that the app finished processing the transaction.
 // Deprecated: Use Transaction.finish().
 func (o *SKPaymentQueue) FinishTransaction(transaction *SKPaymentTransaction) {
 	o.Ptr().Send(_sKPaymentQueueSelFinishTransaction, transaction.Ptr())
 }
 
+// Adds a set of downloads to the download list.
 // Deprecated: Hosted content is no longer supported.
 func (o *SKPaymentQueue) StartDownloads(downloads *foundation.NSArray[*SKDownload]) {
 	o.Ptr().Send(_sKPaymentQueueSelStartDownloads, downloads.Ptr())
 }
 
+// Pauses a set of downloads.
 // Deprecated: Hosted content is no longer supported.
 func (o *SKPaymentQueue) PauseDownloads(downloads *foundation.NSArray[*SKDownload]) {
 	o.Ptr().Send(_sKPaymentQueueSelPauseDownloads, downloads.Ptr())
 }
 
+// Resumes a set of downloads.
 // Deprecated: Hosted content is no longer supported.
 func (o *SKPaymentQueue) ResumeDownloads(downloads *foundation.NSArray[*SKDownload]) {
 	o.Ptr().Send(_sKPaymentQueueSelResumeDownloads, downloads.Ptr())
 }
 
+// Removes a set of downloads from the download list.
 // Deprecated: Hosted content is no longer supported.
 func (o *SKPaymentQueue) CancelDownloads(downloads *foundation.NSArray[*SKDownload]) {
 	o.Ptr().Send(_sKPaymentQueueSelCancelDownloads, downloads.Ptr())
 }
 
+// Adds an observer to the payment queue.
 // Deprecated: Use Transaction.updates or PurchaseResult from Product.purchase(confirmIn:options:).
 func (o *SKPaymentQueue) AddTransactionObserver(observer SKPaymentTransactionObserver) {
 	o.Ptr().Send(_sKPaymentQueueSelAddTransactionObserver, observer)
 }
 
+// Removes an observer from the payment queue.
 // Deprecated: No longer supported.
 func (o *SKPaymentQueue) RemoveTransactionObserver(observer SKPaymentTransactionObserver) {
 	o.Ptr().Send(_sKPaymentQueueSelRemoveTransactionObserver, observer)

@@ -60,12 +60,15 @@ func QCCompositionPickerViewFromID(id objc.ID) *QCCompositionPickerView {
 }
 
 func (o *QCCompositionPickerView) SetCompositionsFromRepositoryWithProtocolAndAttributes(protocol *foundation.NSString, attributes *foundation.NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_qCCompositionPickerViewSelSetCompositionsFromRepositoryWithProtocolAndAttributes, protocol.Ptr(), attributes)
+	o.Ptr().Send(_qCCompositionPickerViewSelSetCompositionsFromRepositoryWithProtocolAndAttributes, protocol.Ptr(), attributes.Ptr())
 }
 
 func (o *QCCompositionPickerView) Compositions() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _qCCompositionPickerViewSelCompositions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionPickerViewSelCompositions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *QCCompositionPickerView) SetDelegate(delegate objc.ID) {

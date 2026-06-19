@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An object that displays interactive web content, such as for an in-app browser.
+//
 // WKWebView wraps [raw.WKWebView] with a fluent Go API.
 type WKWebView struct {
 	inner *raw.WKWebView
@@ -34,7 +36,7 @@ func WKWebViewFromID(id objc.ID) *WKWebView {
 	return &WKWebView{inner: raw.WKWebViewFromID(id)}
 }
 
-// @abstract Returns a web view initialized with a specified frame and configuration. @param frame The frame for the new web view. @param configuration The configuration for the new web view. @result An initialized web view, or nil if the object could not be initialized. @discussion This is a designated initializer. You can use @link -initWithFrame: @/link to initialize an instance with the default configuration. The initializer copies the specified configuration, so mutating the configuration after invoking the initializer has no effect on the web view.
+// Creates a web view and initializes it with the specified frame and configuration data.
 //
 // NewWKWebViewWithFrameConfiguration creates a new [WKWebView].
 func NewWKWebViewWithFrameConfiguration(frame corefoundation.CGRect, configuration *raw.WKWebViewConfiguration) *WKWebView {
@@ -43,6 +45,8 @@ func NewWKWebViewWithFrameConfiguration(frame corefoundation.CGRect, configurati
 	return &WKWebView{inner: raw.WKWebViewFromID(_id)}
 }
 
+// Returns an object initialized from data in the specified coder object.
+//
 // NewWKWebViewWithCoder creates a new [WKWebView].
 func NewWKWebViewWithCoder(coder *foundation.NSCoder) *WKWebView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WKWebView")), objc.RegisterName("alloc"))
@@ -50,7 +54,7 @@ func NewWKWebViewWithCoder(coder *foundation.NSCoder) *WKWebView {
 	return &WKWebView{inner: raw.WKWebViewFromID(_id)}
 }
 
-// @abstract The web view's navigation delegate.
+// The object you use to manage navigation behavior for the web view.
 //
 // WithNavigationDelegate sets the navigationDelegate property and returns the receiver for chaining.
 func (x *WKWebView) WithNavigationDelegate(navigationDelegate raw.WKNavigationDelegate) *WKWebView {
@@ -58,7 +62,7 @@ func (x *WKWebView) WithNavigationDelegate(navigationDelegate raw.WKNavigationDe
 	return x
 }
 
-// @abstract The web view's user interface delegate.
+// The object you use to integrate custom user interface elements, such as contextual menus or panels, into web view interactions.
 //
 // WithUIDelegate sets the uIDelegate property and returns the receiver for chaining.
 func (x *WKWebView) WithUIDelegate(uIDelegate raw.WKUIDelegate) *WKWebView {
@@ -66,7 +70,7 @@ func (x *WKWebView) WithUIDelegate(uIDelegate raw.WKUIDelegate) *WKWebView {
 	return x
 }
 
-// @abstract A Boolean value indicating whether horizontal swipe gestures will trigger back-forward list navigations. @discussion The default value is NO.
+// A Boolean value that indicates whether horizontal swipe gestures trigger backward and forward page navigation.
 //
 // WithAllowsBackForwardNavigationGestures sets the allowsBackForwardNavigationGestures property and returns the receiver for chaining.
 func (x *WKWebView) WithAllowsBackForwardNavigationGestures(allowsBackForwardNavigationGestures bool) *WKWebView {
@@ -74,7 +78,7 @@ func (x *WKWebView) WithAllowsBackForwardNavigationGestures(allowsBackForwardNav
 	return x
 }
 
-// @abstract The custom user agent string or nil if no custom user agent string has been set.
+// The custom user agent string.
 //
 // WithCustomUserAgent sets the customUserAgent property and returns the receiver for chaining.
 func (x *WKWebView) WithCustomUserAgent(customUserAgent string) *WKWebView {
@@ -82,7 +86,7 @@ func (x *WKWebView) WithCustomUserAgent(customUserAgent string) *WKWebView {
 	return x
 }
 
-// @abstract A Boolean value indicating whether link preview is allowed for any links inside this WKWebView. @discussion The default value is YES on Mac and iOS.
+// A Boolean value that determines whether pressing a link displays a preview of the destination for the link.
 //
 // WithAllowsLinkPreview sets the allowsLinkPreview property and returns the receiver for chaining.
 func (x *WKWebView) WithAllowsLinkPreview(allowsLinkPreview bool) *WKWebView {
@@ -90,43 +94,55 @@ func (x *WKWebView) WithAllowsLinkPreview(allowsLinkPreview bool) *WKWebView {
 	return x
 }
 
+// A Boolean value that indicates whether magnify gestures change the web view’s magnification.
+//
 // WithAllowsMagnification sets the allowsMagnification property and returns the receiver for chaining.
 func (x *WKWebView) WithAllowsMagnification(allowsMagnification bool) *WKWebView {
 	x.inner.SetAllowsMagnification(allowsMagnification)
 	return x
 }
 
+// The factor by which the page content is currently scaled.
+//
 // WithMagnification sets the magnification property and returns the receiver for chaining.
 func (x *WKWebView) WithMagnification(magnification float64) *WKWebView {
 	x.inner.SetMagnification(magnification)
 	return x
 }
 
+// The scale factor by which the web view scales content relative to its bounds.
+//
 // WithPageZoom sets the pageZoom property and returns the receiver for chaining.
 func (x *WKWebView) WithPageZoom(pageZoom float64) *WKWebView {
 	x.inner.SetPageZoom(pageZoom)
 	return x
 }
 
+// The media type for the contents of the web view.
+//
 // WithMediaType sets the mediaType property and returns the receiver for chaining.
 func (x *WKWebView) WithMediaType(mediaType string) *WKWebView {
 	x.inner.SetMediaType(foundation.NSStringStringWithUTF8String(mediaType))
 	return x
 }
 
+// An object you use to capture the current state of interaction in a web view so that you can restore that state later to another web view.
+//
 // WithInteractionState sets the interactionState property and returns the receiver for chaining.
 func (x *WKWebView) WithInteractionState(interactionState objc.ID) *WKWebView {
 	x.inner.SetInteractionState(interactionState)
 	return x
 }
 
+// The color the web view displays behind the active page, visible when the user scrolls beyond the bounds of the page.
+//
 // WithUnderPageBackgroundColor sets the underPageBackgroundColor property and returns the receiver for chaining.
 func (x *WKWebView) WithUnderPageBackgroundColor(underPageBackgroundColor *appkit.NSColor) *WKWebView {
 	x.inner.SetUnderPageBackgroundColor(underPageBackgroundColor)
 	return x
 }
 
-// @abstract Controls whether this @link WKWebView @/link is inspectable in Web Inspector. @discussion The default value is NO.
+// A Boolean value that indicates whether you can inspect the view with Safari Web Inspector.
 //
 // WithInspectable sets the inspectable property and returns the receiver for chaining.
 func (x *WKWebView) WithInspectable(inspectable bool) *WKWebView {
@@ -151,7 +167,7 @@ func (x *WKWebView) LoadRequest(request *foundation.NSURLRequest) *WKNavigation 
 	return &WKNavigation{inner: _r}
 }
 
-// @abstract Navigates to the requested file URL on the filesystem. @param URL The file URL to which to navigate. @param readAccessURL The URL to allow read access to. @discussion If readAccessURL references a single file, only that file may be loaded by WebKit. If readAccessURL references a directory, files inside that file may be loaded by WebKit. @result A new navigation for the given file URL.
+// Loads the web content from the specified file and navigates to it.
 //
 // LoadFileURLAllowingReadAccessToURL calls the underlying LoadFileURLAllowingReadAccessToURL.
 func (x *WKWebView) LoadFileURLAllowingReadAccessToURL(uRL string, readAccessURL string) *WKNavigation {
@@ -162,7 +178,7 @@ func (x *WKWebView) LoadFileURLAllowingReadAccessToURL(uRL string, readAccessURL
 	return &WKNavigation{inner: _r}
 }
 
-// @abstract Sets the webpage contents and base URL. @param string The string to use as the contents of the webpage. @param baseURL A URL that is used to resolve relative URLs within the document. @result A new navigation.
+// Loads the contents of the specified HTML string and navigates to it.
 //
 // LoadHTMLStringBaseURL calls the underlying LoadHTMLStringBaseURL.
 func (x *WKWebView) LoadHTMLStringBaseURL(string_ string, baseURL string) *WKNavigation {
@@ -173,7 +189,7 @@ func (x *WKWebView) LoadHTMLStringBaseURL(string_ string, baseURL string) *WKNav
 	return &WKNavigation{inner: _r}
 }
 
-// @abstract Sets the webpage contents and base URL. @param data The data to use as the contents of the webpage. @param MIMEType The MIME type of the data. @param characterEncodingName The data's character encoding name. @param baseURL A URL that is used to resolve relative URLs within the document. @result A new navigation.
+// Loads the content of the specified data object and navigates to it.
 //
 // LoadDataMIMETypeCharacterEncodingNameBaseURL calls the underlying LoadDataMIMETypeCharacterEncodingNameBaseURL.
 func (x *WKWebView) LoadDataMIMETypeCharacterEncodingNameBaseURL(data *foundation.NSData, mIMEType string, characterEncodingName string, baseURL string) *WKNavigation {
@@ -184,7 +200,7 @@ func (x *WKWebView) LoadDataMIMETypeCharacterEncodingNameBaseURL(data *foundatio
 	return &WKNavigation{inner: _r}
 }
 
-// @abstract Navigates to an item from the back-forward list and sets it as the current item. @param item The item to which to navigate. Must be one of the items in the web view's back-forward list. @result A new navigation to the requested item, or nil if it is already the current item or is not part of the web view's back-forward list. @seealso backForwardList
+// Navigates to an item from the back-forward list and sets it as the current item.
 //
 // GoToBackForwardListItem calls the underlying GoToBackForwardListItem.
 func (x *WKWebView) GoToBackForwardListItem(item *raw.WKBackForwardListItem) *WKNavigation {
@@ -195,7 +211,7 @@ func (x *WKWebView) GoToBackForwardListItem(item *raw.WKBackForwardListItem) *WK
 	return &WKNavigation{inner: _r}
 }
 
-// @abstract Navigates to the back item in the back-forward list. @result A new navigation to the requested item, or nil if there is no back item in the back-forward list.
+// Navigates to the back item in the back-forward list.
 //
 // GoBack calls the underlying GoBack.
 func (x *WKWebView) GoBack() *WKNavigation {
@@ -206,7 +222,7 @@ func (x *WKWebView) GoBack() *WKNavigation {
 	return &WKNavigation{inner: _r}
 }
 
-// @abstract Navigates to the forward item in the back-forward list. @result A new navigation to the requested item, or nil if there is no forward item in the back-forward list.
+// Navigates to the forward item in the back-forward list.
 //
 // GoForward calls the underlying GoForward.
 func (x *WKWebView) GoForward() *WKNavigation {
@@ -217,7 +233,7 @@ func (x *WKWebView) GoForward() *WKNavigation {
 	return &WKNavigation{inner: _r}
 }
 
-// @abstract Reloads the current page. @result A new navigation representing the reload.
+// Reloads the current webpage.
 //
 // Reload calls the underlying Reload.
 func (x *WKWebView) Reload() *WKNavigation {
@@ -228,7 +244,7 @@ func (x *WKWebView) Reload() *WKNavigation {
 	return &WKNavigation{inner: _r}
 }
 
-// @abstract Reloads the current page, performing end-to-end revalidation using cache-validating conditionals if possible. @result A new navigation representing the reload.
+// Reloads the current webpage, and performs end-to-end revalidation of the content using cache-validating conditionals, if possible.
 //
 // ReloadFromOrigin calls the underlying ReloadFromOrigin.
 func (x *WKWebView) ReloadFromOrigin() *WKNavigation {
@@ -239,29 +255,35 @@ func (x *WKWebView) ReloadFromOrigin() *WKNavigation {
 	return &WKNavigation{inner: _r}
 }
 
-// @abstract Stops loading all resources on the current page.
+// Stops loading all resources on the current page.
 //
 // StopLoading calls the underlying StopLoading.
 func (x *WKWebView) StopLoading() {
 	x.inner.StopLoading()
 }
 
+// Evaluates the specified JavaScript string.
+//
 // EvaluateJavaScriptCompletionHandler calls the underlying EvaluateJavaScriptCompletionHandler.
 func (x *WKWebView) EvaluateJavaScriptCompletionHandler(javaScriptString string, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	x.inner.EvaluateJavaScriptCompletionHandler(foundation.NSStringStringWithUTF8String(javaScriptString), completionHandler)
 }
 
+// Evaluates the specified JavaScript string in the specified frame and content world.
+//
 // EvaluateJavaScriptInFrameInContentWorldCompletionHandler calls the underlying EvaluateJavaScriptInFrameInContentWorldCompletionHandler.
 func (x *WKWebView) EvaluateJavaScriptInFrameInContentWorldCompletionHandler(javaScriptString string, frame *raw.WKFrameInfo, contentWorld *raw.WKContentWorld, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	x.inner.EvaluateJavaScriptInFrameInContentWorldCompletionHandler(foundation.NSStringStringWithUTF8String(javaScriptString), frame, contentWorld, completionHandler)
 }
 
+// Executes the specified string as an asynchronous JavaScript function.
+//
 // CallAsyncJavaScriptArgumentsInFrameInContentWorldCompletionHandler calls the underlying CallAsyncJavaScriptArgumentsInFrameInContentWorldCompletionHandler.
 func (x *WKWebView) CallAsyncJavaScriptArgumentsInFrameInContentWorldCompletionHandler(functionBody string, arguments *foundation.NSDictionary[*foundation.NSString, objc.ID], frame *raw.WKFrameInfo, contentWorld *raw.WKContentWorld, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	x.inner.CallAsyncJavaScriptArgumentsInFrameInContentWorldCompletionHandler(foundation.NSStringStringWithUTF8String(functionBody), arguments, frame, contentWorld, completionHandler)
 }
 
-// @abstract Closes all out-of-window media presentations in a WKWebView. @discussion Includes picture-in-picture and fullscreen.
+// Closes all media the web view is presenting, including picture-in-picture video and fullscreen video.
 //
 // CloseAllMediaPresentationsWithCompletionHandler calls the underlying CloseAllMediaPresentationsWithCompletionHandler.
 func (x *WKWebView) CloseAllMediaPresentationsWithCompletionHandler(completionHandler func()) {
@@ -273,99 +295,119 @@ func (x *WKWebView) CloseAllMediaPresentations() {
 	x.inner.CloseAllMediaPresentations()
 }
 
-// @abstract Pauses media playback in WKWebView. @discussion Pauses media playback. Media in the page can be restarted by calling play() on a media element or resume() on an AudioContext in JavaScript. A user can also use media controls to play media content after it has been paused.
+// Pauses playback of all media in the web view.
 //
 // PauseAllMediaPlaybackWithCompletionHandler calls the underlying PauseAllMediaPlaybackWithCompletionHandler.
 func (x *WKWebView) PauseAllMediaPlaybackWithCompletionHandler(completionHandler func()) {
 	x.inner.PauseAllMediaPlaybackWithCompletionHandler(completionHandler)
 }
 
+// Pauses playback of all media in the web view.
+//
 // PauseAllMediaPlayback calls the underlying PauseAllMediaPlayback.
 func (x *WKWebView) PauseAllMediaPlayback(completionHandler func()) {
 	x.inner.PauseAllMediaPlayback(completionHandler)
 }
 
-// @abstract Suspends or resumes all media playback in WKWebView. @param suspended Whether media playback should be suspended or resumed. @discussion If suspended is true, this pauses media playback and blocks all attempts by the page or the user to resume until setAllMediaPlaybackSuspended is called again with suspended set to false. Media playback should always be suspended and resumed in pairs.
+// Changes whether the webpage is suspending playback of all media in the page.
 //
 // SetAllMediaPlaybackSuspendedCompletionHandler calls the underlying SetAllMediaPlaybackSuspendedCompletionHandler.
 func (x *WKWebView) SetAllMediaPlaybackSuspendedCompletionHandler(suspended bool, completionHandler func()) {
 	x.inner.SetAllMediaPlaybackSuspendedCompletionHandler(suspended, completionHandler)
 }
 
+// Resumes playback of all media in a web view.
+//
 // ResumeAllMediaPlayback calls the underlying ResumeAllMediaPlayback.
 func (x *WKWebView) ResumeAllMediaPlayback(completionHandler func()) {
 	x.inner.ResumeAllMediaPlayback(completionHandler)
 }
 
+// Changes whether the webpage is suspending playback of all media in the page.
+//
 // SuspendAllMediaPlayback calls the underlying SuspendAllMediaPlayback.
 func (x *WKWebView) SuspendAllMediaPlayback(completionHandler func()) {
 	x.inner.SuspendAllMediaPlayback(completionHandler)
 }
 
-// @abstract Get the current media playback state of a WKWebView. @param completionHandler A block to invoke with the return value of the function call. @discussion If media playback exists, WKMediaPlaybackState will be one of three values: WKMediaPlaybackPaused, WKMediaPlaybackSuspended, or WKMediaPlaybackPlaying. If no media playback exists in the current WKWebView, WKMediaPlaybackState will equal WKMediaPlaybackStateNone.
+// Requests the playback status of media in the web view.
 //
 // RequestMediaPlaybackStateWithCompletionHandler calls the underlying RequestMediaPlaybackStateWithCompletionHandler.
 func (x *WKWebView) RequestMediaPlaybackStateWithCompletionHandler(completionHandler func(WKMediaPlaybackState)) {
 	x.inner.RequestMediaPlaybackStateWithCompletionHandler(func(_a0 raw.WKMediaPlaybackState) { completionHandler(WKMediaPlaybackState(_a0)) })
 }
 
+// Requests the playback status of media in the web view.
+//
 // RequestMediaPlaybackState calls the underlying RequestMediaPlaybackState.
 func (x *WKWebView) RequestMediaPlaybackState(completionHandler func(WKMediaPlaybackState)) {
 	x.inner.RequestMediaPlaybackState(func(_a0 raw.WKMediaPlaybackState) { completionHandler(WKMediaPlaybackState(_a0)) })
 }
 
-// @abstract Set camera capture state of a WKWebView. @param state State to apply for capture. @param completionHandler A block to invoke after the camera state has been changed. @discussion If value is WKMediaCaptureStateNone, this will stop any camera capture. If value is WKMediaCaptureStateMuted, any active camera capture will become muted. If value is WKMediaCaptureStateActive, any muted camera capture will become active.
+// Changes whether the webpage is using the camera to capture images or video.
 //
 // SetCameraCaptureStateCompletionHandler calls the underlying SetCameraCaptureStateCompletionHandler.
 func (x *WKWebView) SetCameraCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func()) {
 	x.inner.SetCameraCaptureStateCompletionHandler(raw.WKMediaCaptureState(state), completionHandler)
 }
 
-// @abstract Set microphone capture state of a WKWebView. @param state state to apply for capture. @param completionHandler A block to invoke after the microphone state has been changed. @discussion If value is WKMediaCaptureStateNone, this will stop any microphone capture. If value is WKMediaCaptureStateMuted, any active microphone capture will become muted. If value is WKMediaCaptureStateActive, any muted microphone capture will become active.
+// Changes whether the webpage is using the microphone to capture audio.
 //
 // SetMicrophoneCaptureStateCompletionHandler calls the underlying SetMicrophoneCaptureStateCompletionHandler.
 func (x *WKWebView) SetMicrophoneCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func()) {
 	x.inner.SetMicrophoneCaptureStateCompletionHandler(raw.WKMediaCaptureState(state), completionHandler)
 }
 
+// Generates a platform-native image from the web view’s contents asynchronously.
+//
 // TakeSnapshotWithConfigurationCompletionHandler calls the underlying TakeSnapshotWithConfigurationCompletionHandler.
 func (x *WKWebView) TakeSnapshotWithConfigurationCompletionHandler(snapshotConfiguration *raw.WKSnapshotConfiguration, completionHandler func(*appkit.NSImage, unsafe.Pointer)) {
 	x.inner.TakeSnapshotWithConfigurationCompletionHandler(snapshotConfiguration, completionHandler)
 }
 
-// @abstract Create a PDF document representation from the web page currently displayed in the WKWebView @param pdfConfiguration An object that specifies how the PDF capture is configured. @param completionHandler A block to invoke when the pdf document data is ready. @discussion If the WKPDFConfiguration is nil, the method will create a PDF document representing the bounds of the currently displayed web page. The completionHandler is passed the resulting PDF document data or an error. The data can be used to create a PDFDocument object. If the data is written to a file the resulting file is a valid PDF document.
+// Generates PDF data from the web view’s contents asynchronously.
 //
 // CreatePDFWithConfigurationCompletionHandler calls the underlying CreatePDFWithConfigurationCompletionHandler.
 func (x *WKWebView) CreatePDFWithConfigurationCompletionHandler(pdfConfiguration *raw.WKPDFConfiguration, completionHandler func(*foundation.NSData, unsafe.Pointer)) {
 	x.inner.CreatePDFWithConfigurationCompletionHandler(pdfConfiguration, completionHandler)
 }
 
+// Creates a web archive of the web view’s contents asynchronously.
+//
 // CreateWebArchiveDataWithCompletionHandler calls the underlying CreateWebArchiveDataWithCompletionHandler.
 func (x *WKWebView) CreateWebArchiveDataWithCompletionHandler(completionHandler func(*foundation.NSData, unsafe.Pointer)) {
 	x.inner.CreateWebArchiveDataWithCompletionHandler(completionHandler)
 }
 
+// Scales the page content and centers the result on the specified point.
+//
 // SetMagnificationCenteredAtPoint calls the underlying SetMagnificationCenteredAtPoint.
 func (x *WKWebView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
 	x.inner.SetMagnificationCenteredAtPoint(magnification, point)
 }
 
+// Searches for the specified string in the web view’s content.
+//
 // FindStringWithConfigurationCompletionHandler calls the underlying FindStringWithConfigurationCompletionHandler.
 func (x *WKWebView) FindStringWithConfigurationCompletionHandler(string_ string, configuration *raw.WKFindConfiguration, completionHandler func(*raw.WKFindResult)) {
 	x.inner.FindStringWithConfigurationCompletionHandler(foundation.NSStringStringWithUTF8String(string_), configuration, completionHandler)
 }
 
+// Starts to download the resource at the URL in the request.
+//
 // StartDownloadUsingRequestCompletionHandler calls the underlying StartDownloadUsingRequestCompletionHandler.
 func (x *WKWebView) StartDownloadUsingRequestCompletionHandler(request *foundation.NSURLRequest, completionHandler func(*raw.WKDownload)) {
 	x.inner.StartDownloadUsingRequestCompletionHandler(request, completionHandler)
 }
 
+// Resumes a failed or canceled download.
+//
 // ResumeDownloadFromResumeDataCompletionHandler calls the underlying ResumeDownloadFromResumeDataCompletionHandler.
 func (x *WKWebView) ResumeDownloadFromResumeDataCompletionHandler(resumeData *foundation.NSData, completionHandler func(*raw.WKDownload)) {
 	x.inner.ResumeDownloadFromResumeDataCompletionHandler(resumeData, completionHandler)
 }
 
-// @abstract Sets the webpage contents from the passed data as if it was the response to the supplied request. The request is never actually sent to the supplied URL, though loads of resources defined in the NSData object would be performed. @param request The request specifying the base URL and other loading details to be used while interpreting the supplied data object. @param response A response that is used to interpret the supplied data object. @param data The data to use as the contents of the webpage. @result A new navigation.
+// Loads the web content from the data you provide as if the data were the response to the request.
 //
 // LoadSimulatedRequestResponseResponseData calls the underlying LoadSimulatedRequestResponseResponseData.
 func (x *WKWebView) LoadSimulatedRequestResponseResponseData(request *foundation.NSURLRequest, response *foundation.NSURLResponse, data *foundation.NSData) *WKNavigation {
@@ -385,7 +427,7 @@ func (x *WKWebView) LoadSimulatedRequestWithResponseResponseData(request *founda
 	return &WKNavigation{inner: _r}
 }
 
-// @abstract Navigates to the requested file URL on the filesystem. @param request The request specifying the file URL to which to navigate. @param readAccessURL The URL to allow read access to. @discussion If readAccessURL references a single file, only that file may be loaded by WebKit. If readAccessURL references a directory, files inside that file may be loaded by WebKit. @result A new navigation for the given file URL.
+// Loads the web content from the file the URL request object specifies and navigates to that content.
 //
 // LoadFileRequestAllowingReadAccessToURL calls the underlying LoadFileRequestAllowingReadAccessToURL.
 func (x *WKWebView) LoadFileRequestAllowingReadAccessToURL(request *foundation.NSURLRequest, readAccessURL string) *WKNavigation {
@@ -396,7 +438,7 @@ func (x *WKWebView) LoadFileRequestAllowingReadAccessToURL(request *foundation.N
 	return &WKNavigation{inner: _r}
 }
 
-// @abstract Sets the webpage contents from the passed HTML string as if it was the response to the supplied request. The request is never actually sent to the supplied URL, though loads of resources defined in the HTML string would be performed. @param request The request specifying the base URL and other loading details to be used while interpreting the supplied data object. @param string The data to use as the contents of the webpage. @result A new navigation.
+// Loads the web content from the HTML you provide as if the HTML were the response to the request.
 //
 // LoadSimulatedRequestResponseHTMLString calls the underlying LoadSimulatedRequestResponseHTMLString.
 func (x *WKWebView) LoadSimulatedRequestResponseHTMLString(request *foundation.NSURLRequest, string_ string) *WKNavigation {
@@ -416,6 +458,8 @@ func (x *WKWebView) LoadSimulatedRequestWithResponseHTMLString(request *foundati
 	return &WKNavigation{inner: _r}
 }
 
+// Returns the print operation object to use when printing the contents of the web view.
+//
 // PrintOperationWithPrintInfo calls the underlying PrintOperationWithPrintInfo.
 func (x *WKWebView) PrintOperationWithPrintInfo(printInfo *appkit.NSPrintInfo) *appkit.NSPrintOperation {
 	return x.inner.PrintOperationWithPrintInfo(printInfo)
@@ -718,35 +762,35 @@ func (x *WKWebView) SetObscuredContentInsets(obscuredContentInsets foundation.NS
 	x.inner.SetObscuredContentInsets(obscuredContentInsets)
 }
 
-// @abstract Action method that navigates to the back item in the back-forward list. @param sender The object that sent this message.
+// Navigates to the back item in the back-forward list.
 //
 // GoBack2 calls the underlying GoBack2.
 func (x *WKWebView) GoBack2(sender objc.ID) {
 	x.inner.GoBack2(sender)
 }
 
-// @abstract Action method that navigates to the forward item in the back-forward list. @param sender The object that sent this message.
+// Navigates to the forward item in the back-forward list.
 //
 // GoForward2 calls the underlying GoForward2.
 func (x *WKWebView) GoForward2(sender objc.ID) {
 	x.inner.GoForward2(sender)
 }
 
-// @abstract Action method that reloads the current page. @param sender The object that sent this message.
+// Reloads the current webpage.
 //
 // Reload2 calls the underlying Reload2.
 func (x *WKWebView) Reload2(sender objc.ID) {
 	x.inner.Reload2(sender)
 }
 
-// @abstract Action method that reloads the current page, performing end-to-end revalidation using cache-validating conditionals if possible. @param sender The object that sent this message.
+// Reloads the current webpage, and performs end-to-end revalidation of the content using cache-validating conditionals, if possible.
 //
 // ReloadFromOrigin2 calls the underlying ReloadFromOrigin2.
 func (x *WKWebView) ReloadFromOrigin2(sender objc.ID) {
 	x.inner.ReloadFromOrigin2(sender)
 }
 
-// @abstract Action method that stops loading all resources on the current page. @param sender The object that sent this message.
+// Stops loading all resources on the current page.
 //
 // StopLoading2 calls the underlying StopLoading2.
 func (x *WKWebView) StopLoading2(sender objc.ID) {

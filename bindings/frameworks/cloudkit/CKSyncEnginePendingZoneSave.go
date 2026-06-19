@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes an unsent record zone modification.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginependingzonesave
 type CKSyncEnginePendingZoneSave struct {
 	CKSyncEnginePendingDatabaseChange
@@ -30,7 +32,7 @@ func CKSyncEnginePendingZoneSaveFromID(id objc.ID) *CKSyncEnginePendingZoneSave 
 	return o
 }
 
-// Creates a pending zone save for the specified record zone. - Parameters: - zone: The record zone to save. - Returns: An initialized pending zone save.
+// Creates a pending zone save for the specified record zone.
 func (o *CKSyncEnginePendingZoneSave) InitWithZone(zone *CKRecordZone) *CKSyncEnginePendingZoneSave {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEnginePendingZoneSaveSelInitWithZone, zone.Ptr())
 	if _ret != 0 {

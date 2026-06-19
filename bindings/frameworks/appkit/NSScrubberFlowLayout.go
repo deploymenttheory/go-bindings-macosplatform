@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A concrete layout object that arranges items end-to-end in a linear strip.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsscrubberflowlayout
 type NSScrubberFlowLayout struct {
 	NSScrubberLayout
@@ -35,6 +37,7 @@ func NSScrubberFlowLayoutFromID(id objc.ID) *NSScrubberFlowLayout {
 	return o
 }
 
+// Informs the scrubber that it should perform a new layout pass for the items at the specified indexes.
 func (o *NSScrubberFlowLayout) InvalidateLayoutForItemsAtIndexes(invalidItemIndexes *foundation.NSIndexSet) {
 	o.Ptr().Send(_nSScrubberFlowLayoutSelInvalidateLayoutForItemsAtIndexes, invalidItemIndexes.Ptr())
 }

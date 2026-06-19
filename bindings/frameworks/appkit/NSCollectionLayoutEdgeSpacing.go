@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines the space around the edges of items in a collection view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionlayoutedgespacing
 type NSCollectionLayoutEdgeSpacing struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func NSCollectionLayoutEdgeSpacingFromID(id objc.ID) *NSCollectionLayoutEdgeSpac
 	return o
 }
 
+// Creates an edge spacing object with the specified leading, top, trailing, and bottom spacing.
 func NSCollectionLayoutEdgeSpacingSpacingForLeadingTopTrailingBottom(leading *NSCollectionLayoutSpacing, top *NSCollectionLayoutSpacing, trailing *NSCollectionLayoutSpacing, bottom *NSCollectionLayoutSpacing) *NSCollectionLayoutEdgeSpacing {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutEdgeSpacing), _nSCollectionLayoutEdgeSpacingSelSpacingForLeadingTopTrailingBottom, leading.Ptr(), top.Ptr(), trailing.Ptr(), bottom.Ptr())
 	if _ret != 0 {

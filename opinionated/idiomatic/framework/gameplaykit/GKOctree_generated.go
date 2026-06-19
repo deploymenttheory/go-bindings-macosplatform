@@ -11,7 +11,7 @@ import (
 	"unsafe"
 )
 
-// A tree data structure where each level has 8 children that subdivide a given space into the eight octants. Stores arbitrary NSObject elements via points and boxes.
+// A data structure for organizing objects based on their locations in a three-dimensional space.
 //
 // Octree wraps [raw.GKOctree] with a fluent Go API.
 type Octree struct {
@@ -33,6 +33,8 @@ func OctreeFromID(id objc.ID) *Octree {
 	return &Octree{inner: raw.GKOctreeFromID[objc.ID](id)}
 }
 
+// Initializes an octree with the specified dimensions.
+//
 // NewOctreeWithBoundingBoxMinimumCellSize creates a new [Octree].
 func NewOctreeWithBoundingBoxMinimumCellSize(box raw.GKBox, minCellSize float32) *Octree {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKOctree")), objc.RegisterName("alloc"))
@@ -40,7 +42,7 @@ func NewOctreeWithBoundingBoxMinimumCellSize(box raw.GKBox, minCellSize float32)
 	return &Octree{inner: raw.GKOctreeFromID[objc.ID](_id)}
 }
 
-// Adds an NSObject to this octree with a given point. This element will always reside in the leaf node its point is in. @param element the element to be stored @param point the point associated with the element you want to store @return the node the element was added to
+// Adds an object to the tree corresponding to the specified point in 3D space.
 //
 // AddElementWithPoint calls the underlying AddElementWithPoint.
 func (x *Octree) AddElementWithPoint(element objc.ID, point unsafe.Pointer) *OctreeNode {
@@ -51,7 +53,7 @@ func (x *Octree) AddElementWithPoint(element objc.ID, point unsafe.Pointer) *Oct
 	return &OctreeNode{inner: _r}
 }
 
-// Adds an NSObject to this octtree with a given axis-aligned box This element will reside in the lowest node that it's box fits in completely. @param element the element to be stored @param box the box associated with the element to be stored @return the node that the element was added to
+// Adds an object to the tree corresponding to the specified volume of 3D space.
 //
 // AddElementWithBox calls the underlying AddElementWithBox.
 func (x *Octree) AddElementWithBox(element objc.ID, box raw.GKBox) *OctreeNode {
@@ -62,28 +64,28 @@ func (x *Octree) AddElementWithBox(element objc.ID, box raw.GKBox) *OctreeNode {
 	return &OctreeNode{inner: _r}
 }
 
-// Returns all of the elements in the node this point would be placed in @param point the point to query @return an NSArray of all the element found at the node this point would be placed in
+// Returns all objects whose corresponding locations overlap the specified point.
 //
 // ElementsAtPoint calls the underlying ElementsAtPoint.
 func (x *Octree) ElementsAtPoint(point unsafe.Pointer) *foundation.NSArray[objc.ID] {
 	return x.inner.ElementsAtPoint(point)
 }
 
-// Returns all of the elements that resides in nodes which intersect the given box @param box the box tha specifies which elements you would like to retrieve @return an NSArray of all the elements in all of the nodes that intersect the given box
+// Returns all objects whose corresponding locations overlap the specified volume.
 //
 // ElementsInBox calls the underlying ElementsInBox.
 func (x *Octree) ElementsInBox(box raw.GKBox) *foundation.NSArray[objc.ID] {
 	return x.inner.ElementsInBox(box)
 }
 
-// Removes the given NSObject from this octree Note that this is an exhaustive search and is can be slow for larger trees. Cache the relevant GKOctreeNode and use removeElement:WithNode: for better performance. @param element the element to be removed @return returns YES if the data was removed, NO otherwise
+// Searches for the specified object and removes it from the tree.
 //
 // RemoveElement calls the underlying RemoveElement.
 func (x *Octree) RemoveElement(element objc.ID) bool {
 	return x.inner.RemoveElement(element)
 }
 
-// Removes the given NSObject from the given node Note that this is not an exhaustive search and is faster than removeData: @param element the element to be removed @param node the node in which this data resides @return returns YES if the element was removed, NO otherwise
+// Removes the specified object from the tree, using a reference to its containing node.
 //
 // RemoveElementWithNode calls the underlying RemoveElementWithNode.
 func (x *Octree) RemoveElementWithNode(element objc.ID, node *raw.GKOctreeNode) bool {

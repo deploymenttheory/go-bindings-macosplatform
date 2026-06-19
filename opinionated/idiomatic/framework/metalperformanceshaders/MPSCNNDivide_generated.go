@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A division operator.
+//
 // CNNDivide wraps [raw.MPSCNNDivide] with a fluent Go API.
 type CNNDivide struct {
 	inner *raw.MPSCNNDivide
@@ -220,7 +222,7 @@ func (x *CNNDivide) WithDestinationImageAllocator(destinationImageAllocator mpsc
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNDivide) WithOptions(options mpscore.MPSKernelOptions) *CNNDivide {
@@ -228,7 +230,7 @@ func (x *CNNDivide) WithOptions(options mpscore.MPSKernelOptions) *CNNDivide {
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNDivide) WithLabel(label string) *CNNDivide {

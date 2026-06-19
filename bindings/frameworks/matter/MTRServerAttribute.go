@@ -38,7 +38,7 @@ func MTRServerAttributeFromID(id objc.ID) *MTRServerAttribute {
 
 // Initialize as a readonly attribute.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute ID is not valid per the Matter specification or the attribute value is not a valid data-value. requiredPrivilege is the privilege required to read the attribute. This initializer may fail if the provided attributeID is a global attribute and the provided requiredPrivilege value is not correct for that attribute ID.
 func (o *MTRServerAttribute) InitReadonlyAttributeWithIDInitialValueRequiredPrivilege(attributeID *foundation.NSNumber, value *foundation.NSDictionary[*foundation.NSString, objc.ID], requiredPrivilege MTRAccessControlEntryPrivilege) *MTRServerAttribute {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServerAttributeSelInitReadonlyAttributeWithIDInitialValueRequiredPrivilege, attributeID.Ptr(), value, requiredPrivilege)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServerAttributeSelInitReadonlyAttributeWithIDInitialValueRequiredPrivilege, attributeID.Ptr(), value.Ptr(), requiredPrivilege)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -47,7 +47,7 @@ func (o *MTRServerAttribute) InitReadonlyAttributeWithIDInitialValueRequiredPriv
 
 // Change the value of the attribute to a new value.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute is not a valid data-value.
 func (o *MTRServerAttribute) SetValue(value *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _mTRServerAttributeSelSetValue, value)
+	_ret := objc.Send[bool](o.Ptr(), _mTRServerAttributeSelSetValue, value.Ptr())
 	return _ret
 }
 
@@ -66,8 +66,11 @@ func (o *MTRServerAttribute) AttributeID() *foundation.NSNumber {
 }
 
 func (o *MTRServerAttribute) Value() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _mTRServerAttributeSelValue)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServerAttributeSelValue)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 // The privilege level necessary to read this attribute.

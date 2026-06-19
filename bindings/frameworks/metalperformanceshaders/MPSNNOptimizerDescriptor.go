@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that specifies properties used by an optimizer kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnoptimizerdescriptor
 type MPSNNOptimizerDescriptor struct {
 	foundation.NSObject

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specifier that indicates an object in a collection by its position relative to another object.
+//
 // RelativeSpecifier wraps [raw.NSRelativeSpecifier] with a fluent Go API.
 type RelativeSpecifier struct {
 	inner *raw.NSRelativeSpecifier
@@ -37,6 +39,8 @@ func NewRelativeSpecifierWithCoder(inCoder *raw.NSCoder) *RelativeSpecifier {
 	return &RelativeSpecifier{inner: raw.NSRelativeSpecifierFromID(_id)}
 }
 
+// Invokes the super class’s initWithContainerClassDescription:containerSpecifier:key: method and initializes the relative position and base specifier to relPos and baseSpecifier.
+//
 // NewRelativeSpecifierWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier creates a new [RelativeSpecifier].
 func NewRelativeSpecifierWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier(classDesc *raw.NSScriptClassDescription, container *raw.NSScriptObjectSpecifier, property string, relPos NSRelativePosition, baseSpecifier *raw.NSScriptObjectSpecifier) *RelativeSpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRelativeSpecifier")), objc.RegisterName("alloc"))
@@ -44,54 +48,72 @@ func NewRelativeSpecifierWithContainerClassDescriptionContainerSpecifierKeyRelat
 	return &RelativeSpecifier{inner: raw.NSRelativeSpecifierFromID(_id)}
 }
 
+// Sets the relative position encapsulated by the receiver.
+//
 // WithRelativePosition sets the relativePosition property and returns the receiver for chaining.
 func (x *RelativeSpecifier) WithRelativePosition(relativePosition NSRelativePosition) *RelativeSpecifier {
 	x.inner.SetRelativePosition(raw.NSRelativePosition(relativePosition))
 	return x
 }
 
+// Sets the specifier for the base object.
+//
 // WithBaseSpecifier sets the baseSpecifier property and returns the receiver for chaining.
 func (x *RelativeSpecifier) WithBaseSpecifier(baseSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier {
 	x.inner.SetBaseSpecifier(baseSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets the receiver’s child reference.
+//
 // WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
 func (x *RelativeSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets the container specifier of the receiver.
+//
 // WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
 func (x *RelativeSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
+//
 // WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
 func (x *RelativeSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *RelativeSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
 	return x
 }
 
+// Sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
+//
 // WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
 func (x *RelativeSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *RelativeSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
 	return x
 }
 
+// Sets the key of the receiver.
+//
 // WithKey sets the key property and returns the receiver for chaining.
 func (x *RelativeSpecifier) WithKey(key string) *RelativeSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetKey(foundation.NSStringStringWithUTF8String(key))
 	return x
 }
 
+// Sets the class description of the receiver’s container specifier to a given specifier.
+//
 // WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
 func (x *RelativeSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *RelativeSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription.Unwrap())
 	return x
 }
 
+// Sets the value of the evaluation error.
+//
 // WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
 func (x *RelativeSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *RelativeSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetEvaluationErrorNumber(evaluationErrorNumber)

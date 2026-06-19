@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class WebResource @discussion A WebResource represents a fully downloaded URL. It includes the data of the resource as well as the metadata associated with the resource.
+// A WebResource object represents a downloaded URL. It encapsulates the data of the download as well as other resource properties such as the URL, MIME type, and frame name.
 //
 // WebResource wraps [raw.WebResource] with a fluent Go API.
 type WebResource struct {
@@ -33,7 +33,7 @@ func WebResourceFromID(id objc.ID) *WebResource {
 	return &WebResource{inner: raw.WebResourceFromID(id)}
 }
 
-// @method initWithData:URL:MIMEType:textEncodingName:frameName @abstract The initializer for WebResource. @param data The data of the resource. @param URL The URL of the resource. @param MIMEType The MIME type of the resource. @param textEncodingName The text encoding name of the resource (can be nil). @param frameName The frame name of the resource if the resource represents the contents of an entire HTML frame (can be nil). @result An initialized WebResource.
+// Initializes and returns a web resource instance.
 //
 // NewWebResourceWithDataURLMIMETypeTextEncodingNameFrameName creates a new [WebResource].
 func NewWebResourceWithDataURLMIMETypeTextEncodingNameFrameName(data *foundation.NSData, uRL string, mIMEType string, textEncodingName string, frameName string) *WebResource {

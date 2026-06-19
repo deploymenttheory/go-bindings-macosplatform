@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that handles the loading of protocol-specific URL data.
+//
 // URLProtocol wraps [raw.NSURLProtocol] with a fluent Go API.
 type URLProtocol struct {
 	inner *raw.NSURLProtocol

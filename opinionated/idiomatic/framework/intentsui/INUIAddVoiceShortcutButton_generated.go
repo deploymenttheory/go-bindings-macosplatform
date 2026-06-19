@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A button that allows the user to add or edit a shortcut.
+//
 // AddVoiceShortcutButton wraps [raw.INUIAddVoiceShortcutButton] with a fluent Go API.
 type AddVoiceShortcutButton struct {
 	inner *raw.INUIAddVoiceShortcutButton
@@ -30,6 +32,8 @@ func AddVoiceShortcutButtonFromID(id objc.ID) *AddVoiceShortcutButton {
 	return &AddVoiceShortcutButton{inner: raw.INUIAddVoiceShortcutButtonFromID(id)}
 }
 
+// Creates an Add to Siri button with the specified style.
+//
 // NewAddVoiceShortcutButtonWithStyle creates a new [AddVoiceShortcutButton].
 func NewAddVoiceShortcutButtonWithStyle(style INUIAddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INUIAddVoiceShortcutButton")), objc.RegisterName("alloc"))
@@ -37,18 +41,24 @@ func NewAddVoiceShortcutButtonWithStyle(style INUIAddVoiceShortcutButtonStyle) *
 	return &AddVoiceShortcutButton{inner: raw.INUIAddVoiceShortcutButtonFromID(_id)}
 }
 
+// The button style.
+//
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *AddVoiceShortcutButton) WithStyle(style INUIAddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
 	x.inner.SetStyle(raw.INUIAddVoiceShortcutButtonStyle(style))
 	return x
 }
 
+// The object that receives presentation requests from the button.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *AddVoiceShortcutButton) WithDelegate(delegate raw.INUIAddVoiceShortcutButtonDelegate) *AddVoiceShortcutButton {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The shortcut Siri invokes when the user speaks the invocation phrase.
+//
 // WithShortcut sets the shortcut property and returns the receiver for chaining.
 func (x *AddVoiceShortcutButton) WithShortcut(shortcut *intents.INShortcut) *AddVoiceShortcutButton {
 	x.inner.SetShortcut(shortcut)

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable 2D circle represented by its center point and radius.
+//
 // Circle wraps [raw.VNCircle] with a fluent Go API.
 type Circle struct {
 	inner *raw.VNCircle
@@ -29,7 +31,7 @@ func CircleFromID(id objc.ID) *Circle {
 	return &Circle{inner: raw.VNCircleFromID(id)}
 }
 
-// @brief Initializes VNCircle object with given circle center and circle radius.
+// Creates a circle with the specified center and radius.
 //
 // NewCircleWithCenterRadius creates a new [Circle].
 func NewCircleWithCenterRadius(center *raw.VNPoint, radius float64) *Circle {
@@ -38,7 +40,7 @@ func NewCircleWithCenterRadius(center *raw.VNPoint, radius float64) *Circle {
 	return &Circle{inner: raw.VNCircleFromID(_id)}
 }
 
-// @brief Initializes VNCircle object with given circle center and circle diameter.
+// Creates a circle with the specified center and diameter.
 //
 // NewCircleWithCenterDiameter creates a new [Circle].
 func NewCircleWithCenterDiameter(center *raw.VNPoint, diameter float64) *Circle {
@@ -47,14 +49,14 @@ func NewCircleWithCenterDiameter(center *raw.VNPoint, diameter float64) *Circle 
 	return &Circle{inner: raw.VNCircleFromID(_id)}
 }
 
-// @brief Returns YES if the point is inside the circle, including the boundary.
+// Determines if this circle, including its boundary, contains the specified point.
 //
 // ContainsPoint calls the underlying ContainsPoint.
 func (x *Circle) ContainsPoint(point *raw.VNPoint) bool {
 	return x.inner.ContainsPoint(point)
 }
 
-// @brief Returns YES if the point is within the ring bound by two circles [radius - delta; radius + delta].
+// Determines if a ring around this circle’s circumference contains the specified point.
 //
 // ContainsPointInCircumferentialRingOfWidth calls the underlying ContainsPointInCircumferentialRingOfWidth.
 func (x *Circle) ContainsPointInCircumferentialRingOfWidth(point *raw.VNPoint, ringWidth float64) bool {

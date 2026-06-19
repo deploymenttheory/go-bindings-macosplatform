@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A graphical image, such as music album cover art, associated with a media item.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpmediaitemartwork
 type MPMediaItemArtwork struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func MPMediaItemArtworkFromID(id objc.ID) *MPMediaItemArtwork {
 	return o
 }
 
+// Creates a new image from existing artwork with the specified bounds.
 func (o *MPMediaItemArtwork) InitWithBoundsSizeRequestHandler(boundsSize corefoundation.CGSize, requestHandler objc.Block) *MPMediaItemArtwork {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPMediaItemArtworkSelInitWithBoundsSizeRequestHandler, boundsSize, requestHandler)
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func (o *MPMediaItemArtwork) InitWithBoundsSizeRequestHandler(boundsSize corefou
 	return MPMediaItemArtworkFromID(_ret)
 }
 
+// Returns the artwork image for an item at the given size.
 func (o *MPMediaItemArtwork) ImageWithSize(size corefoundation.CGSize) *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPMediaItemArtworkSelImageWithSize, size)
 	if _ret != 0 {

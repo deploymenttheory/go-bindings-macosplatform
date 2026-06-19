@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "framework": "ParavirtualizedGraphics",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "PGDeviceDescriptor": {
+      "doc": "A description of the paravirtualized graphics device to create.",
+      "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdevicedescriptor"
+    },
+    "PGDisplayDescriptor": {
+      "doc": "A descriptor for a virtual display.",
+      "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplaydescriptor"
+    },
+    "PGDisplayMode": {
+      "doc": "A description of a supported display mode.",
+      "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplaymode"
+    }
+  },
+  "protocols": {
+    "PGDevice": {
+      "doc": "A paravirtualized GPU device object.",
+      "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdevice"
+    },
+    "PGDisplay": {
+      "doc": "An object that provides display functionality to the guest operating system in a way that the host-side virtual machine app can intercept.",
+      "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplay"
+    }
+  },
+  "enums": {
+    "PGResumeErrorCode": {
+      "doc": "Error codes for suspend-resume actions.",
+      "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgresumeerrorcode",
+      "members": {
+        "PGResumeErrorCodeIncompatibleDevice": {
+          "doc": "The resume device is missing capabilities that the suspended device provided.",
+          "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgresumeerrorcode/incompatibledevice"
+        },
+        "PGResumeErrorCodeInternalFault": {
+          "doc": "An internal error occurred.",
+          "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgresumeerrorcode/internalfault"
+        },
+        "PGResumeErrorCodeInvalidContent": {
+          "doc": "The content of the suspend state or the guest memory isn’t valid.",
+          "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgresumeerrorcode/invalidcontent"
+        },
+        "PGResumeErrorCodeInvalidGuestVersion": {
+          "doc": "The guest version is incompatible with this framework version.",
+          "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgresumeerrorcode/invalidguestversion"
+        },
+        "PGResumeErrorCodeInvalidSuspendStateVersion": {
+          "doc": "The suspend state version is incompatible with this framework version.",
+          "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgresumeerrorcode/invalidsuspendstateversion"
+        }
+      }
+    }
+  },
+  "structs": {
+    "PGDisplayCoord_t": {
+      "doc": "Coordinates that describe sizes or offsets within a 2D array of pixels.",
+      "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplaycoord_t"
+    },
+    "PGPhysicalMemoryRange_s": {
+      "doc": "A range in the guest virtual machine’s physical memory address space.",
+      "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgphysicalmemoryrange_s"
+    }
+  },
+  "methods": {
+    "PGDisplayMode": {
+      "-initWithSizeInPixels:refreshRateInHz:": {
+        "doc": "Creates a new display mode.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplaymode/init(sizeinpixels:refreshrateinhz:)"
+      }
+    }
+  },
+  "properties": {
+    "PGDeviceDescriptor": {
+      "addTraceRange": {
+        "doc": "A handler that the framework calls to add a trace range.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdevicedescriptor/addtracerange"
+      },
+      "createTask": {
+        "doc": "A handler that the framework calls to create a task object.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdevicedescriptor/createtask"
+      },
+      "destroyTask": {
+        "doc": "A handler that the framework calls to destroy a task object.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdevicedescriptor/destroytask"
+      },
+      "device": {
+        "doc": "The Metal device object to use to back the virtual graphics device.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdevicedescriptor/device"
+      },
+      "mapMemory": {
+        "doc": "A handler that the framework calls to map memory into the virtual machine.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdevicedescriptor/mapmemory"
+      },
+      "mmioLength": {
+        "doc": "The length in bytes of the memory-mapped IO section.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdevicedescriptor/mmiolength"
+      },
+      "raiseInterrupt": {
+        "doc": "A handler that the system calls to raise an interrupt in the guest environment.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdevicedescriptor/raiseinterrupt"
+      },
+      "readMemory": {
+        "doc": "A handler that the framework calls to read data from the guest’s memory.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdevicedescriptor/readmemory"
+      },
+      "removeTraceRange": {
+        "doc": "A handler that the framework calls to remove a trace range.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdevicedescriptor/removetracerange"
+      },
+      "unmapMemory": {
+        "doc": "A handler that the framework calls to unmap memory from the virtual machine.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdevicedescriptor/unmapmemory"
+      }
+    },
+    "PGDisplayDescriptor": {
+      "cursorGlyphHandler": {
+        "doc": "A handler that the framework calls to change the cursor’s appearance.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplaydescriptor/cursorglyphhandler"
+      },
+      "cursorShowHandler": {
+        "doc": "A handler that the framework calls to change the cursor’s visibility.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplaydescriptor/cursorshowhandler"
+      },
+      "modeChangeHandler": {
+        "doc": "A handler that the framework calls to change the virtual display’s graphics mode.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplaydescriptor/modechangehandler"
+      },
+      "name": {
+        "doc": "The display’s name as seen in the guest operating environment.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplaydescriptor/name"
+      },
+      "newFrameEventHandler": {
+        "doc": "A handler that the framework calls when the guest environment has a new frame to display.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplaydescriptor/newframeeventhandler"
+      },
+      "queue": {
+        "doc": "The queue that the framework uses when dispatching messages to any of the display’s registered handlers.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplaydescriptor/queue"
+      },
+      "sizeInMillimeters": {
+        "doc": "The size in millimeters of the virtual display.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplaydescriptor/sizeinmillimeters"
+      }
+    },
+    "PGDisplayMode": {
+      "refreshRate": {
+        "doc": "The mode’s refresh rate.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplaymode/refreshrate"
+      },
+      "sizeInPixels": {
+        "doc": "The display mode’s dimensions in pixels.",
+        "url": "https://developer.apple.com/documentation/paravirtualizedgraphics/pgdisplaymode/sizeinpixels"
+      }
+    }
+  }
+}

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that contains the local identifier result from looking up a cloud identifier, or an error indicating why the lookup failed.
+//
 // LocalIdentifierMapping wraps [raw.PHLocalIdentifierMapping] with a fluent Go API.
 type LocalIdentifierMapping struct {
 	inner *raw.PHLocalIdentifierMapping

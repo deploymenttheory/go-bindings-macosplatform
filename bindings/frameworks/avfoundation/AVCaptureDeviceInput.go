@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides media input from a capture device to a capture session.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturedeviceinput
 type AVCaptureDeviceInput struct {
 	AVCaptureInput
@@ -56,7 +58,7 @@ func AVCaptureDeviceInputFromID(id objc.ID) *AVCaptureDeviceInput {
 	return o
 }
 
-// @method deviceInputWithDevice:error: @abstract Returns an AVCaptureDeviceInput instance that provides media data from the given device. @param device An AVCaptureDevice instance to be used for capture. @param outError On return, if the given device cannot be used for capture, points to an NSError describing the problem. @result An AVCaptureDeviceInput instance that provides data from the given device, or nil, if the device could not be used for capture. @discussion This method returns an instance of AVCaptureDeviceInput that can be used to capture data from an AVCaptureDevice in an AVCaptureSession. This method attempts to open the device for capture, taking exclusive control of it if necessary. If the device cannot be opened because it is no longer available or because it is in use, for example, this method returns nil, and the optional outError parameter points to an NSError describing the problem.
+// Returns a new input for the specified capture device.
 func AVCaptureDeviceInputDeviceInputWithDeviceError(device *AVCaptureDevice) (*AVCaptureDeviceInput, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDeviceInput), _aVCaptureDeviceInputSelDeviceInputWithDeviceError, device.Ptr(), unsafe.Pointer(&_nsErr))
@@ -69,7 +71,7 @@ func AVCaptureDeviceInputDeviceInputWithDeviceError(device *AVCaptureDevice) (*A
 	return AVCaptureDeviceInputFromID(_ret), nil
 }
 
-// @method initWithDevice:error: @abstract Creates an AVCaptureDeviceInput instance that provides media data from the given device. @param device An AVCaptureDevice instance to be used for capture. @param outError On return, if the given device cannot be used for capture, points to an NSError describing the problem. @result An AVCaptureDeviceInput instance that provides data from the given device, or nil, if the device could not be used for capture. @discussion This method creates an instance of AVCaptureDeviceInput that can be used to capture data from an AVCaptureDevice in an AVCaptureSession. This method attempts to open the device for capture, taking exclusive control of it if necessary. If the device cannot be opened because it is no longer available or because it is in use, for example, this method returns nil, and the optional outError parameter points to an NSError describing the problem.
+// Creates an input for the specified capture device.
 func (o *AVCaptureDeviceInput) InitWithDeviceError(device *AVCaptureDevice) (*AVCaptureDeviceInput, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceInputSelInitWithDeviceError, device.Ptr(), unsafe.Pointer(&_nsErr))
@@ -82,17 +84,17 @@ func (o *AVCaptureDeviceInput) InitWithDeviceError(device *AVCaptureDevice) (*AV
 	return AVCaptureDeviceInputFromID(_ret), nil
 }
 
-// Configures the the device input to follow an external sync device at the given frame duration. - Parameter externalSyncDevice: The “AVExternalSyncDevice“ hardware to follow. - Parameter videoFrameDuration: The frame duration to which the “AVExternalSyncDevice“ is calibrated. - Parameter delegate: The delegate to notify when the connection status changes, or an error occurs. Call this method to direct your “AVCaptureDeviceInput“ to follow the external sync pulse from a sync device at the given frame duration. Your provided `videoFrameDuration` value must match the sync pulse duration of the external sync device. If it does not, the request times out, the external sync device's status returns to “AVExternalSyncDeviceStatusReady“, and your session stops running, posting a “AVCaptureSessionRuntimeErrorNotification“ with “AVErrorFollowExternalSyncDeviceTimedOut“. The ability to follow an external sync device may change depending on the device configuration. For example, “followExternalSyncDevice:videoFrameDuration:delegate:“ cannot be used when “AVCaptureDevice/autoVideoFrameRateEnabled“ is `true`. To stop following an external pulse, call “unfollowExternalSyncDevice“. External sync device following is also disabled when your device's “AVCaptureDeviceFormat“ changes. Your provided delegate's “AVExternalSyncDeviceDelegate/externalSyncDeviceStatusDidChange:“ method is called with a status of “AVExternalSyncDeviceStatusReady“ if the external pulse signal is not close enough to the provided `videoFrameDuration` for successful calibration. Once your “AVExternalSyncDevice/status“ changes to “AVExternalSyncDeviceStatusActiveSync“, your input's  “AVCaptureInput/activeExternalSyncVideoFrameDuration“ property reports the up-to-date frame duration. “AVCaptureInput/activeExternalSyncVideoFrameDuration“ is also reflected in the “AVCaptureDevice/activeVideoMinFrameDuration“ and “AVCaptureDevice/activeVideoMaxFrameDuration“ of your input's associated device. - Note: Calling this method may cause a lengthy reconfiguration of the receiver, similar to setting a new active format or “AVCaptureSession/sessionPreset“. - Note: When using this property, set the exposure duration with “AVCaptureDevice/setExposureModeCustomWithDuration:ISO:completionHandler:“ to one half the frame duration (or less) to maintain full dynamic range. - Important: Calling this method throws an `NSInvalidArgumentException` if “AVCaptureDeviceInput/externalSyncSupported“ returns `false`. - Important: The provided external sync device's “status“ must be “AVExternalSyncDeviceStatusReady“ when you call this method, otherwise an `NSInvalidArgumentException` is thrown.
+// Configures the the device input to follow an external sync device at the given frame duration.
 func (o *AVCaptureDeviceInput) FollowExternalSyncDeviceVideoFrameDurationDelegate(externalSyncDevice *AVExternalSyncDevice, frameDuration coremedia.CMTime, delegate AVExternalSyncDeviceDelegate) {
 	o.Ptr().Send(_aVCaptureDeviceInputSelFollowExternalSyncDeviceVideoFrameDurationDelegate, externalSyncDevice.Ptr(), frameDuration, delegate)
 }
 
-// Discontinues external sync. This method stops your input from syncing to the external sync device you specified in “followExternalSyncDevice:videoFrameDuration:delegate:“.
+// Discontinues external sync.
 func (o *AVCaptureDeviceInput) UnfollowExternalSyncDevice() {
 	o.Ptr().Send(_aVCaptureDeviceInputSelUnfollowExternalSyncDevice)
 }
 
-// @method isMultichannelAudioModeSupported: @abstract Returns whether the receiver supports the given multichannel audio mode. @param multichannelAudioMode An AVCaptureMultichannelAudioMode to be checked. @result YES if the receiver supports the given multichannel audio mode, NO otherwise. @discussion The receiver's multichannelAudioMode property can only be set to a certain mode if this method returns YES for that mode.
+// A Boolean value that indicates whether the input supports the specified multichannel audio mode.
 func (o *AVCaptureDeviceInput) IsMultichannelAudioModeSupported(multichannelAudioMode AVCaptureMultichannelAudioMode) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceInputSelIsMultichannelAudioModeSupported, multichannelAudioMode)
 	return _ret

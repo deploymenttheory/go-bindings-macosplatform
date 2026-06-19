@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract   A node representing a MPSCNNNeuronSoftPlus kernel @discussion For each pixel, applies the following function: @code f(x) = a * log(1 + e^(b * x)) @endcode
+// A representation of a parametric softplus neuron filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronsoftplusnode
 type MPSCNNNeuronSoftPlusNode struct {

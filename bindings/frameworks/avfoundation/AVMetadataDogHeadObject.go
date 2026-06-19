@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A concrete metadata object subclass representing a dog head.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmetadatadogheadobject
 type AVMetadataDogHeadObject struct {
 	AVMetadataObject

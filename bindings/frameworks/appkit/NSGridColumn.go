@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A column within a grid view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsgridcolumn
 type NSGridColumn struct {
 	foundation.NSObject

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An animation context, which contains information about environment and state.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsanimationcontext
 type NSAnimationContext struct {
 	foundation.NSObject
@@ -43,6 +45,7 @@ func NSAnimationContextFromID(id objc.ID) *NSAnimationContext {
 	return o
 }
 
+// Allows you to specify a completion block body after the set of animation actions whose completion will trigger the completion block.
 func NSAnimationContextRunAnimationGroupCompletionHandler(changes func(*NSAnimationContext), completionHandler func()) {
 	var __block_changes objc.Block
 	if changes != nil {
@@ -78,10 +81,12 @@ func NSAnimationContextRunAnimationGroup(changes func(*NSAnimationContext)) {
 	objc.ID(_clsNSAnimationContext).Send(_nSAnimationContextSelRunAnimationGroup, __block_changes)
 }
 
+// Creates a new animation grouping.
 func NSAnimationContextBeginGrouping() {
 	objc.ID(_clsNSAnimationContext).Send(_nSAnimationContextSelBeginGrouping)
 }
 
+// Ends the current animation grouping.
 func NSAnimationContextEndGrouping() {
 	objc.ID(_clsNSAnimationContext).Send(_nSAnimationContextSelEndGrouping)
 }

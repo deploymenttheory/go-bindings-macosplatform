@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An annotation view that displays a pin image on the map.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkpinannotationview
 // Deprecated: since macOS 13.0.
 type MKPinAnnotationView struct {
@@ -39,6 +41,7 @@ func MKPinAnnotationViewFromID(id objc.ID) *MKPinAnnotationView {
 	return o
 }
 
+// Returns the standard color for red pins.
 func MKPinAnnotationViewRedPinColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPinAnnotationView), _mKPinAnnotationViewSelRedPinColor)
 	if _ret != 0 {
@@ -47,6 +50,7 @@ func MKPinAnnotationViewRedPinColor() *appkit.NSColor {
 	return appkit.NSColorFromID(_ret)
 }
 
+// Returns the standard color for green pins.
 func MKPinAnnotationViewGreenPinColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPinAnnotationView), _mKPinAnnotationViewSelGreenPinColor)
 	if _ret != 0 {
@@ -55,6 +59,7 @@ func MKPinAnnotationViewGreenPinColor() *appkit.NSColor {
 	return appkit.NSColorFromID(_ret)
 }
 
+// Returns the standard color for purple pins.
 func MKPinAnnotationViewPurplePinColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPinAnnotationView), _mKPinAnnotationViewSelPurplePinColor)
 	if _ret != 0 {

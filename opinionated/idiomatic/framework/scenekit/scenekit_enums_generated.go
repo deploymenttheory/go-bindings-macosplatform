@@ -9,12 +9,17 @@ import (
 	"strings"
 )
 
+// Constants affecting the animation curve of an action, used by the timingMode property.
 type SCNActionTimingMode int64
 
 const (
-	SCNActionTimingModeLinear        SCNActionTimingMode = 0
-	SCNActionTimingModeEaseIn        SCNActionTimingMode = 1
-	SCNActionTimingModeEaseOut       SCNActionTimingMode = 2
+	// Linear pacing. The animation progresses evenly throughout its duration.
+	SCNActionTimingModeLinear SCNActionTimingMode = 0
+	// Ease-in pacing. The animation begins slowly, and then speeds up as it progresses.
+	SCNActionTimingModeEaseIn SCNActionTimingMode = 1
+	// Ease-out pacing. The animation begins quickly, and then slows as it completes.
+	SCNActionTimingModeEaseOut SCNActionTimingMode = 2
+	// Ease-in ease-out pacing. The animation begins slowly, accelerates through the middle of its duration, and then slows again before completing.
 	SCNActionTimingModeEaseInEaseOut SCNActionTimingMode = 3
 )
 
@@ -33,13 +38,19 @@ func (e SCNActionTimingMode) String() string {
 	}
 }
 
+// Modes for antialiased rendering of the view’s scene, used by the SCNView property.
 type SCNAntialiasingMode uint64
 
 const (
-	SCNAntialiasingModeNone             SCNAntialiasingMode = 0
-	SCNAntialiasingModeMultisampling2X  SCNAntialiasingMode = 1
-	SCNAntialiasingModeMultisampling4X  SCNAntialiasingMode = 2
-	SCNAntialiasingModeMultisampling8X  SCNAntialiasingMode = 3
+	// Disables antialiased rendering.
+	SCNAntialiasingModeNone SCNAntialiasingMode = 0
+	// Enables multisample antialiasing, with two samples per screen pixel.
+	SCNAntialiasingModeMultisampling2X SCNAntialiasingMode = 1
+	// Enables multisample antialiasing, with four samples per screen pixel.
+	SCNAntialiasingModeMultisampling4X SCNAntialiasingMode = 2
+	// Enables multisample antialiasing, with eight samples per screen pixel.
+	SCNAntialiasingModeMultisampling8X SCNAntialiasingMode = 3
+	// Enables multisample antialiasing, with sixteen samples per screen pixel.
 	SCNAntialiasingModeMultisampling16X SCNAntialiasingMode = 4
 )
 
@@ -60,13 +71,18 @@ func (e SCNAntialiasingMode) String() string {
 	}
 }
 
+// Options for locking the orientation of nodes affected by a billboard constraint.
 // Bitmask — values may be combined with |.
 type SCNBillboardAxis uint64
 
 const (
-	SCNBillboardAxisX   SCNBillboardAxis = 1
-	SCNBillboardAxisY   SCNBillboardAxis = 2
-	SCNBillboardAxisZ   SCNBillboardAxis = 4
+	// Align an affected node such that its x-axis is always parallel to that of the view, leaving it free to rotate otherwise.
+	SCNBillboardAxisX SCNBillboardAxis = 1
+	// Align an affected node such that its y-axis is always parallel to that of the view, leaving it free to rotate otherwise.
+	SCNBillboardAxisY SCNBillboardAxis = 2
+	// Align an affected node such that its z-axis is always perpendicular to the viewing plane, leaving it free to rotate otherwise.
+	SCNBillboardAxisZ SCNBillboardAxis = 4
+	// Align an affected node such that its orientation always matches that of the view.
 	SCNBillboardAxisAll SCNBillboardAxis = 7
 )
 
@@ -90,16 +106,23 @@ func (e SCNBillboardAxis) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Modes that describe how SceneKit blends source colors rendered using a material with destination colors already in a rendering target, used by the blendMode property.
 type SCNBlendMode int64
 
 const (
-	SCNBlendModeAlpha    SCNBlendMode = 0
-	SCNBlendModeAdd      SCNBlendMode = 1
+	// Blend by multiplying source and destination color values by their corresponding alpha values.
+	SCNBlendModeAlpha SCNBlendMode = 0
+	// Blend by adding the source color to the destination color.
+	SCNBlendModeAdd SCNBlendMode = 1
+	// Blend by subtracting the source color from the destination color.
 	SCNBlendModeSubtract SCNBlendMode = 2
+	// Blend by multiplying the source color with the background color.
 	SCNBlendModeMultiply SCNBlendMode = 3
-	SCNBlendModeScreen   SCNBlendMode = 4
-	SCNBlendModeReplace  SCNBlendMode = 5
-	SCNBlendModeMax      SCNBlendMode = 6
+	// Blend by multiplying the inverse of the source color with the inverse of the destination color.
+	SCNBlendModeScreen SCNBlendMode = 4
+	// Blend by replacing the destination color with the source color, ignoring alpha.
+	SCNBlendModeReplace SCNBlendMode = 5
+	SCNBlendModeMax     SCNBlendMode = 6
 )
 
 func (e SCNBlendMode) String() string {
@@ -123,11 +146,15 @@ func (e SCNBlendMode) String() string {
 	}
 }
 
+// Options for how often SceneKit should execute the binding handler you provide with the handleBindingOfBufferNamed:frequency:usingBlock: method.
 type SCNBufferFrequency int64
 
 const (
-	SCNBufferFrequencyPerFrame    SCNBufferFrequency = 0
-	SCNBufferFrequencyPerNode     SCNBufferFrequency = 1
+	// Execute the binding handler once for each frame to be rendered using the shader.
+	SCNBufferFrequencyPerFrame SCNBufferFrequency = 0
+	// Execute the binding handler once for each frame, for each node to be rendered using the shader.
+	SCNBufferFrequencyPerNode SCNBufferFrequency = 1
+	// Execute the binding handler once for each frame, for each node, for each material or geometry to be rendered using the shader.
 	SCNBufferFrequencyPerShadable SCNBufferFrequency = 2
 )
 
@@ -144,10 +171,13 @@ func (e SCNBufferFrequency) String() string {
 	}
 }
 
+// Options for the axis used to determine field of view or orthographic projection.
 type SCNCameraProjectionDirection int64
 
 const (
-	SCNCameraProjectionDirectionVertical   SCNCameraProjectionDirection = 0
+	// The camera’s field of view or orthographic scale are measured vertically.
+	SCNCameraProjectionDirectionVertical SCNCameraProjectionDirection = 0
+	// The camera’s field of view or orthographic scale are measured horizontally.
 	SCNCameraProjectionDirectionHorizontal SCNCameraProjectionDirection = 1
 )
 
@@ -162,12 +192,16 @@ func (e SCNCameraProjectionDirection) String() string {
 	}
 }
 
+// Options for which edges of an extruded shape are chamfered, used by the chamferMode property.
 type SCNChamferMode int64
 
 const (
-	SCNChamferModeBoth  SCNChamferMode = 0
+	// Apply a chamfer to both front and back edges of the extruded shape.
+	SCNChamferModeBoth SCNChamferMode = 0
+	// Apply a chamfer to only the front edge of the extruded shape.
 	SCNChamferModeFront SCNChamferMode = 1
-	SCNChamferModeBack  SCNChamferMode = 2
+	// Apply a chamfer to only the back edge of the extruded shape.
+	SCNChamferModeBack SCNChamferMode = 2
 )
 
 func (e SCNChamferMode) String() string {
@@ -218,6 +252,7 @@ func (e SCNColorMask) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The modes SceneKit uses to determine which polygons to render in a surface, used by the cullMode property.
 type SCNCullMode int64
 
 const (
@@ -254,12 +289,16 @@ func (e SCNFillMode) String() string {
 	}
 }
 
+// Texture filtering modes, used by the minificationFilter, magnificationFilter, and mipFilter properties.
 type SCNFilterMode int64
 
 const (
-	SCNFilterModeNone    SCNFilterMode = 0
+	// No texture filtering is applied.
+	SCNFilterModeNone SCNFilterMode = 0
+	// Texture filtering returns the color from only one texel, whose location is nearest to the coordinates being sampled.
 	SCNFilterModeNearest SCNFilterMode = 1
-	SCNFilterModeLinear  SCNFilterMode = 2
+	// Texture filtering sample texels from the neighborhood of the coordinates being sampled and linearly interpolates their colors.
+	SCNFilterModeLinear SCNFilterMode = 2
 )
 
 func (e SCNFilterMode) String() string {
@@ -275,14 +314,19 @@ func (e SCNFilterMode) String() string {
 	}
 }
 
+// The drawing primitive that connects vertices when rendering a geometry element, used by the primitiveType property to specify how SceneKit interprets the geometry element’s data.
 type SCNGeometryPrimitiveType int64
 
 const (
-	SCNGeometryPrimitiveTypeTriangles     SCNGeometryPrimitiveType = 0
+	// The geometry element’s data is a sequence of triangles, with each triangle described by three new vertices.
+	SCNGeometryPrimitiveTypeTriangles SCNGeometryPrimitiveType = 0
+	// The geometry element’s data is a sequence of triangles, with each triangle described by one new vertex and two vertices from the previous triangle.
 	SCNGeometryPrimitiveTypeTriangleStrip SCNGeometryPrimitiveType = 1
-	SCNGeometryPrimitiveTypeLine          SCNGeometryPrimitiveType = 2
-	SCNGeometryPrimitiveTypePoint         SCNGeometryPrimitiveType = 3
-	SCNGeometryPrimitiveTypePolygon       SCNGeometryPrimitiveType = 4
+	// The geometry element’s data is a sequence of line segments, with each line segment described by two new vertices.
+	SCNGeometryPrimitiveTypeLine SCNGeometryPrimitiveType = 2
+	// The geometry element’s data is a sequence of unconnected points.
+	SCNGeometryPrimitiveTypePoint   SCNGeometryPrimitiveType = 3
+	SCNGeometryPrimitiveTypePolygon SCNGeometryPrimitiveType = 4
 )
 
 func (e SCNGeometryPrimitiveType) String() string {
@@ -389,11 +433,14 @@ func (e SCNLightProbeUpdateType) String() string {
 	}
 }
 
+// The interpolation formulas for blending between target geometries.
 type SCNMorpherCalculationMode int64
 
 const (
+	// Target weights must be in the range between 0.0 and 1.0, and the contribution of the base geometry to the morphed surface is related to the sum of target weights. This is the default mode.
 	SCNMorpherCalculationModeNormalized SCNMorpherCalculationMode = 0
-	SCNMorpherCalculationModeAdditive   SCNMorpherCalculationMode = 1
+	// Target weights may take on any value, and weighted contributions for each target are added to the base geometry,
+	SCNMorpherCalculationModeAdditive SCNMorpherCalculationMode = 1
 )
 
 func (e SCNMorpherCalculationMode) String() string {
@@ -407,10 +454,13 @@ func (e SCNMorpherCalculationMode) String() string {
 	}
 }
 
+// Values that inform SceneKit’s rendering for movement-related effects, used by the movabilityHint property.
 type SCNMovabilityHint int64
 
 const (
-	SCNMovabilityHintFixed   SCNMovabilityHint = 0
+	// The node is not expected to move over time.
+	SCNMovabilityHintFixed SCNMovabilityHint = 0
+	// The node is expected to move over time.
 	SCNMovabilityHintMovable SCNMovabilityHint = 1
 )
 
@@ -425,11 +475,15 @@ func (e SCNMovabilityHint) String() string {
 	}
 }
 
+// Options for the focusable states of a SceneKit node.
 type SCNNodeFocusBehavior int64
 
 const (
-	SCNNodeFocusBehaviorNone      SCNNodeFocusBehavior = 0
+	// Node is not focusable.
+	SCNNodeFocusBehaviorNone SCNNodeFocusBehavior = 0
+	// Node is not focusable and prevents nodes that it visually obscures from becoming focusable.
 	SCNNodeFocusBehaviorOccluding SCNNodeFocusBehavior = 1
+	// Node is focusable and prevents nodes that it visually obscures from becoming focusable.
 	SCNNodeFocusBehaviorFocusable SCNNodeFocusBehavior = 2
 )
 
@@ -446,12 +500,16 @@ func (e SCNNodeFocusBehavior) String() string {
 	}
 }
 
+// Options for the initial direction of each emitted particle, used by the birthDirection property.
 type SCNParticleBirthDirection int64
 
 const (
-	SCNParticleBirthDirectionConstant      SCNParticleBirthDirection = 0
+	// The emitting direction is the same for all particles.
+	SCNParticleBirthDirectionConstant SCNParticleBirthDirection = 0
+	// The emitting direction for each particle is along the surface normal vector at the point where the particle is emitted.
 	SCNParticleBirthDirectionSurfaceNormal SCNParticleBirthDirection = 1
-	SCNParticleBirthDirectionRandom        SCNParticleBirthDirection = 2
+	// SceneKit randomizes the emitting direction for each particle.
+	SCNParticleBirthDirectionRandom SCNParticleBirthDirection = 2
 )
 
 func (e SCNParticleBirthDirection) String() string {
@@ -467,12 +525,16 @@ func (e SCNParticleBirthDirection) String() string {
 	}
 }
 
+// Options for the initial location of each emitted particle, used by the birthLocation property.
 type SCNParticleBirthLocation int64
 
 const (
+	// New particles can be created at any location on the surface of the emitter shape.
 	SCNParticleBirthLocationSurface SCNParticleBirthLocation = 0
-	SCNParticleBirthLocationVolume  SCNParticleBirthLocation = 1
-	SCNParticleBirthLocationVertex  SCNParticleBirthLocation = 2
+	// New particles can be created at any location within the volume of the emitter shape.
+	SCNParticleBirthLocationVolume SCNParticleBirthLocation = 1
+	// New particles can be created at only at the locations of the vertices in the emitter shape.
+	SCNParticleBirthLocationVertex SCNParticleBirthLocation = 2
 )
 
 func (e SCNParticleBirthLocation) String() string {
@@ -488,15 +550,22 @@ func (e SCNParticleBirthLocation) String() string {
 	}
 }
 
+// Options for combining source and destination pixel colors when compositing particles during rendering, used by the blendMode property.
 type SCNParticleBlendMode int64
 
 const (
+	// The source and destination colors are added together.
 	SCNParticleBlendModeAdditive SCNParticleBlendMode = 0
+	// The source color is subtracted from the destination color.
 	SCNParticleBlendModeSubtract SCNParticleBlendMode = 1
+	// The source color is multiplied by the destination color.
 	SCNParticleBlendModeMultiply SCNParticleBlendMode = 2
-	SCNParticleBlendModeScreen   SCNParticleBlendMode = 3
-	SCNParticleBlendModeAlpha    SCNParticleBlendMode = 4
-	SCNParticleBlendModeReplace  SCNParticleBlendMode = 5
+	// The source color is added to the destination color times the inverted source color.
+	SCNParticleBlendModeScreen SCNParticleBlendMode = 3
+	// The source and destination colors are blended by multiplying the source alpha value.
+	SCNParticleBlendModeAlpha SCNParticleBlendMode = 4
+	// The source color replaces the destination color.
+	SCNParticleBlendModeReplace SCNParticleBlendMode = 5
 )
 
 func (e SCNParticleBlendMode) String() string {
@@ -518,11 +587,15 @@ func (e SCNParticleBlendMode) String() string {
 	}
 }
 
+// Significant events in the life spans of simulate particles, used by the handleEvent:forProperties:withBlock: method.
 type SCNParticleEvent int64
 
 const (
-	SCNParticleEventBirth     SCNParticleEvent = 0
-	SCNParticleEventDeath     SCNParticleEvent = 1
+	// Occurs when new particles spawn.
+	SCNParticleEventBirth SCNParticleEvent = 0
+	// Occurs when particles reach the end of their life span.
+	SCNParticleEventDeath SCNParticleEvent = 1
+	// Occurs when particles collide with scene geometry.
 	SCNParticleEventCollision SCNParticleEvent = 2
 )
 
@@ -539,11 +612,15 @@ func (e SCNParticleEvent) String() string {
 	}
 }
 
+// Options for animating each particle with a sequence of images, used by the imageSequenceAnimationMode property.
 type SCNParticleImageSequenceAnimationMode int64
 
 const (
-	SCNParticleImageSequenceAnimationModeRepeat      SCNParticleImageSequenceAnimationMode = 0
-	SCNParticleImageSequenceAnimationModeClamp       SCNParticleImageSequenceAnimationMode = 1
+	// The animation loops after displaying all of its images.
+	SCNParticleImageSequenceAnimationModeRepeat SCNParticleImageSequenceAnimationMode = 0
+	// The animation stops after displaying all of its images.
+	SCNParticleImageSequenceAnimationModeClamp SCNParticleImageSequenceAnimationMode = 1
+	// After the animation displays all of its images, it plays again in reverse order.
 	SCNParticleImageSequenceAnimationModeAutoReverse SCNParticleImageSequenceAnimationMode = 2
 )
 
@@ -560,11 +637,15 @@ func (e SCNParticleImageSequenceAnimationMode) String() string {
 	}
 }
 
+// Options for the input value of the property controller’s animation, used by the inputMode property.
 type SCNParticleInputMode int64
 
 const (
-	SCNParticleInputModeOverLife          SCNParticleInputMode = 0
-	SCNParticleInputModeOverDistance      SCNParticleInputMode = 1
+	// The controller’s effect on a particle property is a function of the time since the particle’s birth.
+	SCNParticleInputModeOverLife SCNParticleInputMode = 0
+	// The controller’s effect on a particle property is a function of the particle’s distance from the position of a specified node.
+	SCNParticleInputModeOverDistance SCNParticleInputMode = 1
+	// The controller’s effect on a particle property is a function of another of the particle’s properties.
 	SCNParticleInputModeOverOtherProperty SCNParticleInputMode = 2
 )
 
@@ -581,12 +662,17 @@ func (e SCNParticleInputMode) String() string {
 	}
 }
 
+// Stages of SceneKit’s particle simulation process into which you can insert modifier blocks, used by the addModifierForProperties:atStage:withBlock: method.
 type SCNParticleModifierStage int64
 
 const (
-	SCNParticleModifierStagePreDynamics   SCNParticleModifierStage = 0
-	SCNParticleModifierStagePostDynamics  SCNParticleModifierStage = 1
-	SCNParticleModifierStagePreCollision  SCNParticleModifierStage = 2
+	// The stage before SceneKit simulates the motion of particles.
+	SCNParticleModifierStagePreDynamics SCNParticleModifierStage = 0
+	// The stage after SceneKit simulates the motion of particles.
+	SCNParticleModifierStagePostDynamics SCNParticleModifierStage = 1
+	// The stage before SceneKit simulates the results of collisions between particles and scene geometry.
+	SCNParticleModifierStagePreCollision SCNParticleModifierStage = 2
+	// The stage after SceneKit simulates the results of collisions between particles and scene geometry.
 	SCNParticleModifierStagePostCollision SCNParticleModifierStage = 3
 )
 
@@ -605,13 +691,18 @@ func (e SCNParticleModifierStage) String() string {
 	}
 }
 
+// Options for restricting the orientation of particles, used by the orientationMode property.
 type SCNParticleOrientationMode int64
 
 const (
+	// Each particle’s orientation is always fixed with respect to the point of view camera.
 	SCNParticleOrientationModeBillboardScreenAligned SCNParticleOrientationMode = 0
-	SCNParticleOrientationModeBillboardViewAligned   SCNParticleOrientationMode = 1
-	SCNParticleOrientationModeFree                   SCNParticleOrientationMode = 2
-	SCNParticleOrientationModeBillboardYAligned      SCNParticleOrientationMode = 3
+	// Each particle always faces the point of view camera (but may rotate about an axis parallel to the view direction).
+	SCNParticleOrientationModeBillboardViewAligned SCNParticleOrientationMode = 1
+	// Particle orientations are not restricted; they may rotate freely in all axes.
+	SCNParticleOrientationModeFree SCNParticleOrientationMode = 2
+	// The y-axis direction of each particle is always fixed with respect to the point of view camera.
+	SCNParticleOrientationModeBillboardYAligned SCNParticleOrientationMode = 3
 )
 
 func (e SCNParticleOrientationMode) String() string {
@@ -629,14 +720,20 @@ func (e SCNParticleOrientationMode) String() string {
 	}
 }
 
+// Options for the rendering order of particles, used by the sortingMode property.
 type SCNParticleSortingMode int64
 
 const (
-	SCNParticleSortingModeNone           SCNParticleSortingMode = 0
+	// Particles are not sorted; they may be rendered in any order.
+	SCNParticleSortingModeNone SCNParticleSortingMode = 0
+	// Particles farther from the point of view (as measured using projected depth) are rendered before closer particles.
 	SCNParticleSortingModeProjectedDepth SCNParticleSortingMode = 1
-	SCNParticleSortingModeDistance       SCNParticleSortingMode = 2
-	SCNParticleSortingModeOldestFirst    SCNParticleSortingMode = 3
-	SCNParticleSortingModeYoungestFirst  SCNParticleSortingMode = 4
+	// Particles farther from the point of view (as measured using distance from the camera in scene space) are rendered before closer particles.
+	SCNParticleSortingModeDistance SCNParticleSortingMode = 2
+	// Particles emitted earlier are rendered before particles emitted more recently.
+	SCNParticleSortingModeOldestFirst SCNParticleSortingMode = 3
+	// Particles emitted more recently are rendered before particles emitted earlier.
+	SCNParticleSortingModeYoungestFirst SCNParticleSortingMode = 4
 )
 
 func (e SCNParticleSortingMode) String() string {
@@ -656,11 +753,15 @@ func (e SCNParticleSortingMode) String() string {
 	}
 }
 
+// Constants that determine how a physics body interacts with forces and other bodies, used by the type property and when creating a physics body.
 type SCNPhysicsBodyType int64
 
 const (
-	SCNPhysicsBodyTypeStatic    SCNPhysicsBodyType = 0
-	SCNPhysicsBodyTypeDynamic   SCNPhysicsBodyType = 1
+	// A physics body that is unaffected by forces or collisions and cannot move.
+	SCNPhysicsBodyTypeStatic SCNPhysicsBodyType = 0
+	// A physics body that can be affected by forces and collisions.
+	SCNPhysicsBodyTypeDynamic SCNPhysicsBodyType = 1
+	// A physics body that is unaffected by forces or collisions but that can cause collisions affecting other bodies when moved.
 	SCNPhysicsBodyTypeKinematic SCNPhysicsBodyType = 2
 )
 
@@ -677,10 +778,13 @@ func (e SCNPhysicsBodyType) String() string {
 	}
 }
 
+// Options for defining the region of space affected by a physics field, used by the scope property.
 type SCNPhysicsFieldScope int64
 
 const (
-	SCNPhysicsFieldScopeInsideExtent  SCNPhysicsFieldScope = 0
+	// The field’s effect applies only to objects within the region of space defined by its position and extent.
+	SCNPhysicsFieldScopeInsideExtent SCNPhysicsFieldScope = 0
+	// The field’s effect applies only to objects outside the region of space defined by its position and extent.
 	SCNPhysicsFieldScopeOutsideExtent SCNPhysicsFieldScope = 1
 )
 
@@ -695,11 +799,14 @@ func (e SCNPhysicsFieldScope) String() string {
 	}
 }
 
+// Options for when to load the reference node’s content, used by the loadingPolicy property.
 type SCNReferenceLoadingPolicy int64
 
 const (
+	// Load the node’s external content immediately when the reference node is unarchived.
 	SCNReferenceLoadingPolicyImmediate SCNReferenceLoadingPolicy = 0
-	SCNReferenceLoadingPolicyOnDemand  SCNReferenceLoadingPolicy = 1
+	// Load the node’s external comment only when the load method is called.
+	SCNReferenceLoadingPolicyOnDemand SCNReferenceLoadingPolicy = 1
 )
 
 func (e SCNReferenceLoadingPolicy) String() string {
@@ -713,14 +820,20 @@ func (e SCNReferenceLoadingPolicy) String() string {
 	}
 }
 
+// Constants identifying phases of SceneKit’s scene loading process, used in a SCNSceneSourceStatusHandler block.
 type SCNSceneSourceStatus int64
 
 const (
-	SCNSceneSourceStatusError      SCNSceneSourceStatus = -1
-	SCNSceneSourceStatusParsing    SCNSceneSourceStatus = 4
+	// An error occurred when SceneKit attempted to load the scene.
+	SCNSceneSourceStatusError SCNSceneSourceStatus = -1
+	// SceneKit has begun deserializing the source file.
+	SCNSceneSourceStatusParsing SCNSceneSourceStatus = 4
+	// SceneKit has begun validating the scene file’s format.
 	SCNSceneSourceStatusValidating SCNSceneSourceStatus = 8
+	// SceneKit has begun generating scene graph objects from the scene file’s contents.
 	SCNSceneSourceStatusProcessing SCNSceneSourceStatus = 12
-	SCNSceneSourceStatusComplete   SCNSceneSourceStatus = 16
+	// SceneKit has successfully finished loading the scene file’s contents.
+	SCNSceneSourceStatusComplete SCNSceneSourceStatus = 16
 )
 
 func (e SCNSceneSourceStatus) String() string {
@@ -740,11 +853,15 @@ func (e SCNSceneSourceStatus) String() string {
 	}
 }
 
+// Options for SceneKit’s rendering of shadows cast by a light, used by the shadowMode property.
 type SCNShadowMode int64
 
 const (
-	SCNShadowModeForward   SCNShadowMode = 0
-	SCNShadowModeDeferred  SCNShadowMode = 1
+	// SceneKit renders shadows during lighting computations.
+	SCNShadowModeForward SCNShadowMode = 0
+	// SceneKit renders shadows in a postprocessing pass.
+	SCNShadowModeDeferred SCNShadowMode = 1
+	// SceneKit renders shadows by projecting the light’s gobo image. The light does not illuminate the scene.
 	SCNShadowModeModulated SCNShadowMode = 2
 )
 
@@ -782,10 +899,13 @@ func (e SCNTessellationSmoothingMode) String() string {
 	}
 }
 
+// The modes SceneKit uses to calculate the opacity of pixels rendered with a material, used by the transparencyMode property.
 type SCNTransparencyMode int64
 
 const (
-	SCNTransparencyModeAOne        SCNTransparencyMode = 0
+	// SceneKit derives transparency information from the alpha channel of colors. The value 1.0 is opaque.
+	SCNTransparencyModeAOne SCNTransparencyMode = 0
+	// SceneKit derives transparency information from the luminance of colors. The value 0.0 is opaque.
 	SCNTransparencyModeRGBZero     SCNTransparencyMode = 1
 	SCNTransparencyModeSingleLayer SCNTransparencyMode = 2
 	SCNTransparencyModeDualLayer   SCNTransparencyMode = 3
@@ -807,13 +927,18 @@ func (e SCNTransparencyMode) String() string {
 	}
 }
 
+// Modes to apply to texture wrapping, used by the wrapT and wrapS properties.
 type SCNWrapMode int64
 
 const (
-	SCNWrapModeClamp         SCNWrapMode = 1
-	SCNWrapModeRepeat        SCNWrapMode = 2
+	// Texture coordinates are clamped to the range from 0.0 to 1.0, inclusive.
+	SCNWrapModeClamp SCNWrapMode = 1
+	// Texture sampling uses only the fractional part of texture coordinates, passing through the range from 0.0 to (but not including) 1.0.
+	SCNWrapModeRepeat SCNWrapMode = 2
+	// Texture sampling uses texture colors for coordinates in the range from 0.0 to 1.0 (inclusive) and the material property’s borderColor value otherwise.
 	SCNWrapModeClampToBorder SCNWrapMode = 3
-	SCNWrapModeMirror        SCNWrapMode = 4
+	// Texture sampling of texture coordinates outside range from 0.0 to 1.0 should behave as if the range reverses before repeating.
+	SCNWrapModeMirror SCNWrapMode = 4
 )
 
 func (e SCNWrapMode) String() string {

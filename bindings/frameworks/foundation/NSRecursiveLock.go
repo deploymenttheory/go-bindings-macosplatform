@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A lock that may be acquired multiple times by the same thread without causing a deadlock.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsrecursivelock
 type NSRecursiveLock struct {
 	NSObject
@@ -32,11 +34,13 @@ func NSRecursiveLockFromID(id objc.ID) *NSRecursiveLock {
 	return o
 }
 
+// Attempts to acquire a lock, and immediately returns a Boolean value that indicates whether the attempt was successful.
 func (o *NSRecursiveLock) TryLock() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSRecursiveLockSelTryLock)
 	return _ret
 }
 
+// Attempts to acquire a lock before a given date.
 func (o *NSRecursiveLock) LockBeforeDate(limit *NSDate) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSRecursiveLockSelLockBeforeDate, limit.Ptr())
 	return _ret

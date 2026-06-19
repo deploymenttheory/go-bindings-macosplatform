@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An abstract base class shared by content filters.
+//
 // NEFilterProvider wraps [raw.NEFilterProvider] with a fluent Go API.
 type NEFilterProvider struct {
 	inner *raw.NEFilterProvider
@@ -38,7 +40,7 @@ func NewNEFilterProvider() *NEFilterProvider {
 	return &NEFilterProvider{inner: raw.NEFilterProviderFromID(_id)}
 }
 
-// @method startFilterWithCompletionHandler: @discussion This function is called by the framework when the content filter is being started. Subclasses must override this method and perform whatever steps are necessary to start the filter. @param completionHandler A block that must be called when the process of starting the filter is complete. If the filter was started successfully, subclass implementations must pass the nil value to this block. If an error occurred while starting the filter, sublcass implementations must pass a non-nil NSError containing more details about the error.
+// Start the filter.
 //
 // StartFilter blocks until the operation completes or ctx is cancelled.
 func (x *NEFilterProvider) StartFilter(ctx context.Context) error {
@@ -58,7 +60,7 @@ func (x *NEFilterProvider) StartFilter(ctx context.Context) error {
 	}
 }
 
-// @method stopFilterWithReason:completionHandler: @discussion This function is called by the framework when the content filter is being stopped. Subclasses must override this method and perform whatever steps are necessary to stop the filter. @param reason An NEProviderStopReason indicating why the filter is being stopped. @param completionHandler A block that must be called when the process of stopping the filter is complete.
+// Stop the filter.
 //
 // StopFilterWithReason blocks until the operation completes or ctx is cancelled.
 func (x *NEFilterProvider) StopFilterWithReason(ctx context.Context, reason NEProviderStopReason) error {
@@ -74,7 +76,7 @@ func (x *NEFilterProvider) StopFilterWithReason(ctx context.Context, reason NEPr
 	}
 }
 
-// @method handleReport: @discussion This function is called by the framework when the data provider extension returns a verdict with the report property set to True. Subclass implementations may override this method to handle the flow report. @param report The report being delivered.
+// Receives a report from the framework.
 //
 // HandleReport calls the underlying HandleReport.
 func (x *NEFilterProvider) HandleReport(report *raw.NEFilterReport) {

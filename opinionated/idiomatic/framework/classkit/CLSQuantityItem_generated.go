@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Activity information that signifies a quantity.
+//
 // QuantityItem wraps [raw.CLSQuantityItem] with a fluent Go API.
 type QuantityItem struct {
 	inner *raw.CLSQuantityItem
@@ -30,7 +32,7 @@ func QuantityItemFromID(id objc.ID) *QuantityItem {
 	return &QuantityItem{inner: raw.CLSQuantityItemFromID(id)}
 }
 
-// @abstract      Create a quantity item with an identifier and title. @param         identifier      An identifier that is unique within activity. @param         title           Title of the quantity. Ex @em Hints
+// Initializes an activity item that records a discrete quantity.
 //
 // NewQuantityItemWithIdentifierTitle creates a new [QuantityItem].
 func NewQuantityItemWithIdentifierTitle(identifier string, title string) *QuantityItem {
@@ -39,7 +41,7 @@ func NewQuantityItemWithIdentifierTitle(identifier string, title string) *Quanti
 	return &QuantityItem{inner: raw.CLSQuantityItemFromID(_id)}
 }
 
-// @abstract      Quantity awarded.
+// A quantity associated with the task.
 //
 // WithQuantity sets the quantity property and returns the receiver for chaining.
 func (x *QuantityItem) WithQuantity(quantity float64) *QuantityItem {
@@ -47,7 +49,7 @@ func (x *QuantityItem) WithQuantity(quantity float64) *QuantityItem {
 	return x
 }
 
-// @abstract      Title of what this ActivityItem represents. @discussion    This will be the title associated with the activity item in the generated progress report.
+// A human readable name for the activity item.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *QuantityItem) WithTitle(title string) *QuantityItem {

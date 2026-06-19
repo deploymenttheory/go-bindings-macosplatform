@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of entries from the unified logging system.
+//
 // Apple documentation: https://developer.apple.com/documentation/oslog/oslogstore
 type OSLogStore struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func OSLogStoreFromID(id objc.ID) *OSLogStore {
 	return o
 }
 
-// @method localStoreAndReturnError @abstract Create an OSLogStore representing the Mac's local store. @param error If initialization is unsuccessful --- for example, this process does not have access to local logs --- return nil and set this parameter to a pointer to an error object describing the reason. @discussion This enables processing of a sequence of logs as of the particular point in time when this object is created. Gaining access to the local unified logging system requires permission from the system. The caller must be run by an admin account.
+// Creates a log store representing the Mac’s local store.
 func OSLogStoreLocalStoreAndReturnError() (*OSLogStore, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSLogStore), _oSLogStoreSelLocalStoreAndReturnError, unsafe.Pointer(&_nsErr))
@@ -66,7 +68,7 @@ func OSLogStoreStoreWithScopeError(scope OSLogStoreScope) (*OSLogStore, error) {
 	return OSLogStoreFromID(_ret), nil
 }
 
-// @method storeWithURL @abstract Create an OSLogStore based on a logarchive. @param url The path identifying a logarchive to be read. @param error If initialization is unsuccessful --- for example, the path is not to a valid logarchive or the logarchive is not compatible because it is from a newer version --- return nil and set this parameter to a pointer to an error object that describes the reason.
+// Creates a log store based on a log archive.
 func OSLogStoreStoreWithURLError(url *foundation.NSURL) (*OSLogStore, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSLogStore), _oSLogStoreSelStoreWithURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
@@ -88,7 +90,7 @@ func (o *OSLogStore) Init() *OSLogStore {
 	return OSLogStoreFromID(_ret)
 }
 
-// @method entriesEnumeratorWithOptions @abstract Return an OSLogEnumerator object based on an underlying store. This object represents the sequence of entries for the store. OSLogStore. Additional parameters control which entries are yielded and their order. @param options Control the direction of iteration. @param position Where to start iteration. If nil, depend on the direction of the iteration: if forwards, start with the earliest entry; if reverse, start with the latest entry. @param predicate A predicate that filters which entries are in the sequence. If this is nil, yield all entries. @param error If the enumerator cannot be set up --- for example, the predicate has an unrecognized key --- return nil and set this to a pointer to an error object that describes the reason.
+// Returns a log enumerator based on an underlying store.
 func (o *OSLogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options OSLogEnumeratorOptions, position *OSLogPosition, predicate *foundation.NSPredicate) (*OSLogEnumerator, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogStoreSelEntriesEnumeratorWithOptionsPositionPredicateError, options, position.Ptr(), predicate.Ptr(), unsafe.Pointer(&_nsErr))
@@ -101,7 +103,7 @@ func (o *OSLogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options 
 	return OSLogEnumeratorFromID(_ret), nil
 }
 
-// @method entriesEnumeratorAndReturnError @abstract Return an OSLogEnumerator object with default options for viewing the entries; all are viewed, from earliest to latest. @param error If the enumerator cannot be set up, return nil and set this to a pointer to an error object that describes the reason.
+// Returns a log enumerator with default options for viewing the entries.
 func (o *OSLogStore) EntriesEnumeratorAndReturnError() (*OSLogEnumerator, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogStoreSelEntriesEnumeratorAndReturnError, unsafe.Pointer(&_nsErr))
@@ -114,7 +116,7 @@ func (o *OSLogStore) EntriesEnumeratorAndReturnError() (*OSLogEnumerator, error)
 	return OSLogEnumeratorFromID(_ret), nil
 }
 
-// @method positionWithDate @abstract Return a position representing the time specified. @param date The date to look for. @discussion If there are multiple occurences of the same time --- if, for example, there was a time change during the range of entries --- the earliest occurrence is used.
+// Returns a position representing the time specified.
 func (o *OSLogStore) PositionWithDate(date *foundation.NSDate) *OSLogPosition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogStoreSelPositionWithDate, date.Ptr())
 	if _ret != 0 {
@@ -123,7 +125,7 @@ func (o *OSLogStore) PositionWithDate(date *foundation.NSDate) *OSLogPosition {
 	return OSLogPositionFromID(_ret)
 }
 
-// @method positionWithTimeIntervalSinceEnd @abstract Return a position representing an offset since the end of the time range that the entries span. @param seconds The seconds to add to the last time point in the range of entries.
+// Returns a position representing time since the end of the time range that the entries span.
 func (o *OSLogStore) PositionWithTimeIntervalSinceEnd(seconds float64) *OSLogPosition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogStoreSelPositionWithTimeIntervalSinceEnd, seconds)
 	if _ret != 0 {
@@ -132,7 +134,7 @@ func (o *OSLogStore) PositionWithTimeIntervalSinceEnd(seconds float64) *OSLogPos
 	return OSLogPositionFromID(_ret)
 }
 
-// @method positionWithTimeIntervalSinceLatestBoot @abstract Return a position representing time since the last boot in the series of entries. @param seconds The seconds to add to the boot time point in the log time range. @discussion Negative seconds would create an ambiguous or imprecise position; this function asserts that the interval is positive.
+// Returns a position representing time since the last boot in the series of entries.
 func (o *OSLogStore) PositionWithTimeIntervalSinceLatestBoot(seconds float64) *OSLogPosition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogStoreSelPositionWithTimeIntervalSinceLatestBoot, seconds)
 	if _ret != 0 {

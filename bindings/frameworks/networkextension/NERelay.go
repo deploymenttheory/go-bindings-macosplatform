@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A single relay server configuration that you can chain together with other relays.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nerelay
 type NERelay struct {
 	foundation.NSObject
@@ -114,22 +116,28 @@ func (o *NERelay) SetSyntheticDNSAnswerIPv6Prefix(syntheticDNSAnswerIPv6Prefix *
 
 // @property additionalHTTPHeaderFields @discussion Additional HTTP header field names and values to be added to all relay requests.
 func (o *NERelay) AdditionalHTTPHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _nERelaySelAdditionalHTTPHeaderFields)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nERelaySelAdditionalHTTPHeaderFields)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, *foundation.NSString](_ret)
 }
 
 func (o *NERelay) SetAdditionalHTTPHeaderFields(additionalHTTPHeaderFields *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
-	o.Ptr().Send(_nERelaySelSetAdditionalHTTPHeaderFields, additionalHTTPHeaderFields)
+	o.Ptr().Send(_nERelaySelSetAdditionalHTTPHeaderFields, additionalHTTPHeaderFields.Ptr())
 }
 
 // @property rawPublicKeys @discussion TLS 1.3 raw public keys to use to authenticate the relay servers.
 func (o *NERelay) RawPublicKeys() *foundation.NSArray[*foundation.NSData] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSData]](o.Ptr(), _nERelaySelRawPublicKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nERelaySelRawPublicKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSData](_ret)
 }
 
 func (o *NERelay) SetRawPublicKeys(rawPublicKeys *foundation.NSArray[*foundation.NSData]) {
-	o.Ptr().Send(_nERelaySelSetRawPublicKeys, rawPublicKeys)
+	o.Ptr().Send(_nERelaySelSetRawPublicKeys, rawPublicKeys.Ptr())
 }
 
 // @property identityData @discussion The PKCS12 data for the relay client authentication. The value is a NSData in PKCS12 format.

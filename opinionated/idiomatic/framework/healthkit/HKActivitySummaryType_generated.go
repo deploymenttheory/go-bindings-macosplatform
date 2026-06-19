@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that identifies activity summary objects.
+//
 // ActivitySummaryType wraps [raw.HKActivitySummaryType] with a fluent Go API.
 type ActivitySummaryType struct {
 	inner *raw.HKActivitySummaryType

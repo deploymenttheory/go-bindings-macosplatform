@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract base class that manages central and peripheral objects.
+//
 // Manager wraps [raw.CBManager] with a fluent Go API.
 type Manager struct {
 	inner *raw.CBManager

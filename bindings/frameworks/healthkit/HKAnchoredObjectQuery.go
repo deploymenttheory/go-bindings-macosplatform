@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A query that returns changes to the HealthKit store, including a snapshot of new changes and continuous monitoring as a long-running query.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkanchoredobjectquery
 type HKAnchoredObjectQuery struct {
 	HKQuery
@@ -36,7 +38,7 @@ func HKAnchoredObjectQueryFromID(id objc.ID) *HKAnchoredObjectQuery {
 	return o
 }
 
-// @method        initWithType:predicate:anchor:limit:resultsHandler: @abstract      Returns a query that will retrieve HKSamples and HKDeletedObjects matching the given predicate that are newer than the given anchor. @discussion    If no updateHandler is set on the query, the query will automatically stop after calling resultsHandler. Otherwise, the query continues to run and call updateHandler as samples matching the predicate are created or deleted. @param         type            The type of sample to retrieve. @param         predicate       The predicate which samples should match. @param         anchor          The anchor which was returned by a previous HKAnchoredObjectQuery result or update handler.  Pass nil when querying for the first time. @param         limit           The maximum number of samples and deleted objects to return.  Pass HKObjectQueryNoLimit for no limit. @param         handler         The block to invoke with results when the query has finished finding.
+// Initializes a new anchored object query.
 func (o *HKAnchoredObjectQuery) InitWithTypePredicateAnchorLimitResultsHandler(type_ *HKSampleType, predicate *foundation.NSPredicate, anchor *HKQueryAnchor, limit uint, handler func(*HKAnchoredObjectQuery, *foundation.NSArray[*HKSample], *foundation.NSArray[*HKDeletedObject], *HKQueryAnchor, unsafe.Pointer)) *HKAnchoredObjectQuery {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -64,6 +66,7 @@ func (o *HKAnchoredObjectQuery) InitWithTypePredicateAnchorLimitResultsHandler(t
 	return HKAnchoredObjectQueryFromID(_ret)
 }
 
+// Initializes a new anchored object query.
 func (o *HKAnchoredObjectQuery) InitWithTypePredicateAnchorLimitCompletionHandler(type_ *HKSampleType, predicate *foundation.NSPredicate, anchor uint, limit uint, handler func(*HKAnchoredObjectQuery, *foundation.NSArray[*HKSample], uint, unsafe.Pointer)) *HKAnchoredObjectQuery {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -85,7 +88,7 @@ func (o *HKAnchoredObjectQuery) InitWithTypePredicateAnchorLimitCompletionHandle
 	return HKAnchoredObjectQueryFromID(_ret)
 }
 
-// @method        initWithQueryDescriptors:anchor:limit:resultsHandler @abstract      Returns a query that will retrieve HKSamples and HKDeletedObjects matching the given query descriptors that are newer than the given anchor. @discussion    If no updateHandler is set on the query, the query will automatically stop after calling resultsHandler. Otherwise, the query continues to run and call updateHandler as samples matching the query descriptors are created or deleted. @param         queryDescriptors   An array of query descriptors that describes the sample types and predicates that you are interested in getting notified for. @param         anchor             The anchor which was returned by a previous HKAnchoredObjectQuery result or update handler.  Pass nil when querying for the first time. @param         limit              The maximum number of samples and deleted objects to return. Pass HKObjectQueryNoLimit for no limit. @param         handler            The block to invoke with results when the query has finished finding.
+// Creates an anchored object query that matches any of the query descriptors you provided.
 func (o *HKAnchoredObjectQuery) InitWithQueryDescriptorsAnchorLimitResultsHandler(queryDescriptors *foundation.NSArray[*HKQueryDescriptor], anchor *HKQueryAnchor, limit int, handler func(*HKAnchoredObjectQuery, *foundation.NSArray[*HKSample], *foundation.NSArray[*HKDeletedObject], *HKQueryAnchor, unsafe.Pointer)) *HKAnchoredObjectQuery {
 	var __block_handler objc.Block
 	if handler != nil {

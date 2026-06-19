@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A circular geographic condition that a center point and radius define.
+//
 // CircularGeographicCondition wraps [raw.CLCircularGeographicCondition] with a fluent Go API.
 type CircularGeographicCondition struct {
 	inner *raw.CLCircularGeographicCondition
@@ -30,6 +32,8 @@ func CircularGeographicConditionFromID(id objc.ID) *CircularGeographicCondition 
 	return &CircularGeographicCondition{inner: raw.CLCircularGeographicConditionFromID(id)}
 }
 
+// Creates a new circular geographic condition with the center point and radius you provide.
+//
 // NewCircularGeographicConditionWithCenterRadius creates a new [CircularGeographicCondition].
 func NewCircularGeographicConditionWithCenterRadius(center unsafe.Pointer, radius unsafe.Pointer) *CircularGeographicCondition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLCircularGeographicCondition")), objc.RegisterName("alloc"))

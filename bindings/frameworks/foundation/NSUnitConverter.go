@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that provides a description of how to convert a unit to and from the base unit of its dimension.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsunitconverter
 type NSUnitConverter struct {
 	NSObject

@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// The base class for encapsulating user interaction with a Smart Card reader.
+//
 // SmartCardUserInteraction wraps [raw.TKSmartCardUserInteraction] with a fluent Go API.
 type SmartCardUserInteraction struct {
 	inner *raw.TKSmartCardUserInteraction
@@ -36,7 +38,7 @@ func NewSmartCardUserInteraction() *SmartCardUserInteraction {
 	return &SmartCardUserInteraction{inner: raw.TKSmartCardUserInteractionFromID(_id)}
 }
 
-// Delegate for state observing of the interaction.
+// The delegate for observing events that occur during the user interaction.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SmartCardUserInteraction) WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteraction {
@@ -44,7 +46,7 @@ func (x *SmartCardUserInteraction) WithDelegate(delegate raw.TKSmartCardUserInte
 	return x
 }
 
-// Initial interaction timeout. If set to 0, the reader-defined default timeout is used. @note Default value: 0
+// The timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
 //
 // WithInitialTimeout sets the initialTimeout property and returns the receiver for chaining.
 func (x *SmartCardUserInteraction) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteraction {
@@ -52,7 +54,7 @@ func (x *SmartCardUserInteraction) WithInitialTimeout(initialTimeout float64) *S
 	return x
 }
 
-// Timeout after the first key stroke. If set to 0, the reader-defined default timeout is used. @note Default value: 0
+// The timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
 //
 // WithInteractionTimeout sets the interactionTimeout property and returns the receiver for chaining.
 func (x *SmartCardUserInteraction) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteraction {
@@ -60,14 +62,14 @@ func (x *SmartCardUserInteraction) WithInteractionTimeout(interactionTimeout flo
 	return x
 }
 
-// Runs the interaction.
+// Runs the user interaction and asynchronously receives a reply.
 //
 // RunWithReply calls the underlying RunWithReply.
 func (x *SmartCardUserInteraction) RunWithReply(reply func(bool, unsafe.Pointer)) {
 	x.inner.RunWithReply(reply)
 }
 
-// Attempts to cancel a running interaction. Note that for some interactions, this functionality might not be available. @return Returns NO if the operation is not running, or cancelling is not supported.
+// Attempts to cancel an interaction started by calling runWithReply:. For certain interactions, cancellation may not be available.
 //
 // Cancel calls the underlying Cancel.
 func (x *SmartCardUserInteraction) Cancel() bool {

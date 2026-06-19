@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The visual representation of a path-based overlay.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer
 type MKOverlayPathRenderer struct {
 	MKOverlayRenderer
@@ -59,26 +61,32 @@ func MKOverlayPathRendererFromID(id objc.ID) *MKOverlayPathRenderer {
 	return o
 }
 
+// Creates the path for the overlay.
 func (o *MKOverlayPathRenderer) CreatePath() {
 	o.Ptr().Send(_mKOverlayPathRendererSelCreatePath)
 }
 
+// Updates the path associated with the overlay renderer.
 func (o *MKOverlayPathRenderer) InvalidatePath() {
 	o.Ptr().Send(_mKOverlayPathRendererSelInvalidatePath)
 }
 
+// Applies the renderer’s stroke-related drawing properties to the specified graphics context.
 func (o *MKOverlayPathRenderer) ApplyStrokePropertiesToContextAtZoomScale(context_ unsafe.Pointer, zoomScale float64) {
 	o.Ptr().Send(_mKOverlayPathRendererSelApplyStrokePropertiesToContextAtZoomScale, context_, zoomScale)
 }
 
+// Applies the receiver’s fill-related drawing properties to the specified graphics context.
 func (o *MKOverlayPathRenderer) ApplyFillPropertiesToContextAtZoomScale(context_ unsafe.Pointer, zoomScale float64) {
 	o.Ptr().Send(_mKOverlayPathRendererSelApplyFillPropertiesToContextAtZoomScale, context_, zoomScale)
 }
 
+// Draws a line along the specified path.
 func (o *MKOverlayPathRenderer) StrokePathInContext(path unsafe.Pointer, context_ unsafe.Pointer) {
 	o.Ptr().Send(_mKOverlayPathRendererSelStrokePathInContext, path, context_)
 }
 
+// Fills the area that the specified path encloses.
 func (o *MKOverlayPathRenderer) FillPathInContext(path unsafe.Pointer, context_ unsafe.Pointer) {
 	o.Ptr().Send(_mKOverlayPathRendererSelFillPathInContext, path, context_)
 }
@@ -153,12 +161,15 @@ func (o *MKOverlayPathRenderer) SetLineDashPhase(lineDashPhase float64) {
 }
 
 func (o *MKOverlayPathRenderer) LineDashPattern() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mKOverlayPathRendererSelLineDashPattern)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mKOverlayPathRendererSelLineDashPattern)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *MKOverlayPathRenderer) SetLineDashPattern(lineDashPattern *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_mKOverlayPathRendererSelSetLineDashPattern, lineDashPattern)
+	o.Ptr().Send(_mKOverlayPathRendererSelSetLineDashPattern, lineDashPattern.Ptr())
 }
 
 func (o *MKOverlayPathRenderer) ShouldRasterize() bool {

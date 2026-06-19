@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A generator of texel data that creates a gradient between two specified colors.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlcolorswatchtexture
 type MDLColorSwatchTexture struct {
 	MDLTexture
@@ -33,6 +35,7 @@ func MDLColorSwatchTextureFromID(id objc.ID) *MDLColorSwatchTexture {
 	return o
 }
 
+// Initializes a texture that creates a vertical gradient between two color temperatures.
 func (o *MDLColorSwatchTexture) InitWithColorTemperatureGradientFromToColorTemperatureNameTextureDimensions(colorTemperature1 float32, colorTemperature2 float32, name *foundation.NSString, textureDimensions unsafe.Pointer) *MDLColorSwatchTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLColorSwatchTextureSelInitWithColorTemperatureGradientFromToColorTemperatureNameTextureDimensions, colorTemperature1, colorTemperature2, name.Ptr(), textureDimensions)
 	if _ret != 0 {
@@ -41,6 +44,7 @@ func (o *MDLColorSwatchTexture) InitWithColorTemperatureGradientFromToColorTempe
 	return MDLColorSwatchTextureFromID(_ret)
 }
 
+// Initializes a texture that creates a vertical gradient between two colors.
 func (o *MDLColorSwatchTexture) InitWithColorGradientFromToColorNameTextureDimensions(color1 unsafe.Pointer, color2 unsafe.Pointer, name *foundation.NSString, textureDimensions unsafe.Pointer) *MDLColorSwatchTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLColorSwatchTextureSelInitWithColorGradientFromToColorNameTextureDimensions, color1, color2, name.Ptr(), textureDimensions)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A filter that includes or excludes point of interest categories from a map view, local search, or local search completer.
+//
 // PointOfInterestFilter wraps [raw.MKPointOfInterestFilter] with a fluent Go API.
 type PointOfInterestFilter struct {
 	inner *raw.MKPointOfInterestFilter
@@ -30,6 +32,8 @@ func PointOfInterestFilterFromID(id objc.ID) *PointOfInterestFilter {
 	return &PointOfInterestFilter{inner: raw.MKPointOfInterestFilterFromID(id)}
 }
 
+// Initialize the point of interest filter with a list of categories to include.
+//
 // NewPointOfInterestFilterIncludingCategories creates a new [PointOfInterestFilter].
 func NewPointOfInterestFilterIncludingCategories(categories *foundation.NSArray[*foundation.NSString]) *PointOfInterestFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPointOfInterestFilter")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewPointOfInterestFilterIncludingCategories(categories *foundation.NSArray[
 	return &PointOfInterestFilter{inner: raw.MKPointOfInterestFilterFromID(_id)}
 }
 
+// Initialize the point of interest filter with a list of categories to exclude.
+//
 // NewPointOfInterestFilterExcludingCategories creates a new [PointOfInterestFilter].
 func NewPointOfInterestFilterExcludingCategories(categories *foundation.NSArray[*foundation.NSString]) *PointOfInterestFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPointOfInterestFilter")), objc.RegisterName("alloc"))
@@ -44,11 +50,15 @@ func NewPointOfInterestFilterExcludingCategories(categories *foundation.NSArray[
 	return &PointOfInterestFilter{inner: raw.MKPointOfInterestFilterFromID(_id)}
 }
 
+// Returns a Boolean value indicating whether the filter includes the point of interest category.
+//
 // IncludesCategory calls the underlying IncludesCategory.
 func (x *PointOfInterestFilter) IncludesCategory(category *foundation.NSString) bool {
 	return x.inner.IncludesCategory(category)
 }
 
+// Returns a Boolean value indicating whether the filter excludes the point of interest category.
+//
 // ExcludesCategory calls the underlying ExcludesCategory.
 func (x *PointOfInterestFilter) ExcludesCategory(category *foundation.NSString) bool {
 	return x.inner.ExcludesCategory(category)

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a simple recurrent block or layer.
+//
 // RNNSingleGateDescriptor wraps [raw.MPSRNNSingleGateDescriptor] with a fluent Go API.
 type RNNSingleGateDescriptor struct {
 	inner *raw.MPSRNNSingleGateDescriptor

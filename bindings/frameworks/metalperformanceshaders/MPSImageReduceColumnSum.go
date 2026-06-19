@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that returns the sum of all values for a column in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagereducecolumnsum
 type MPSImageReduceColumnSum struct {
 	mpsimage.MPSImageReduceUnary

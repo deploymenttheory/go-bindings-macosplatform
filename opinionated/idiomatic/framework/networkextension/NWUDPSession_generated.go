@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object to manage a UDP session to a network endpoint.
+//
 // NWUDPSession wraps [raw.NWUDPSession] with a fluent Go API.
 type NWUDPSession struct {
 	inner *raw.NWUDPSession
@@ -33,7 +35,7 @@ func NWUDPSessionFromID(id objc.ID) *NWUDPSession {
 	return &NWUDPSession{inner: raw.NWUDPSessionFromID(id)}
 }
 
-// @method initWithUpgradeForSession: @discussion This convenience initializer can be used to create a new session based on the original session's endpoint and parameters. The application should create an NWUDPSession and watch the "hasBetterPath" property. When this property is YES, it should call initWithUpgradeForSession: to create a new session, with the goal to start transferring data on the new better path as soon as possible to reduce power and potentially monetary cost. When the new "upgrade" session becomes ready and when the application wraps up the previous application session on the original session, the application can start using the new "upgrade" session and tear down the original one. @param session The original session from which the application will upgrade @return An initialized NWUDPSession object.
+// This convenience initializer can be used to create a new session based on the original session’s endpoint and parameters.
 //
 // NewNWUDPSessionWithUpgradeForSession creates a new [NWUDPSession].
 func NewNWUDPSessionWithUpgradeForSession(session *raw.NWUDPSession) *NWUDPSession {
@@ -42,21 +44,21 @@ func NewNWUDPSessionWithUpgradeForSession(session *raw.NWUDPSession) *NWUDPSessi
 	return &NWUDPSession{inner: raw.NWUDPSessionFromID(_id)}
 }
 
-// @method tryNextResolvedEndpoint @discussion Mark the current value of resolvedEndpoint as unusable, and try to switch to the next available endpoint. This should be used when the caller has attempted to communicate with the current resolvedEndpoint, and the caller has determined that it is unusable. If there are no other resolved endpoints, the session will move to the failed state.
+// Mark the current value of resolvedEndpoint as unusable, and try to switch to the next available endpoint.
 //
 // TryNextResolvedEndpoint calls the underlying TryNextResolvedEndpoint.
 func (x *NWUDPSession) TryNextResolvedEndpoint() {
 	x.inner.TryNextResolvedEndpoint()
 }
 
-// @method setReadHandler:maxDatagrams @discussion Set a read handler for datagrams. Reads will be scheduled by the system, so this method only needs to be called once for a session. @param handler A handler called when datagrams have been read, or when an error has occurred. @param maxDatagrams The maximum number of datagrams to send to the handler.
+// Set a read handler for datagrams.
 //
 // SetReadHandlerMaxDatagrams calls the underlying SetReadHandlerMaxDatagrams.
-func (x *NWUDPSession) SetReadHandlerMaxDatagrams(handler objc.Block, maxDatagrams uint) {
+func (x *NWUDPSession) SetReadHandlerMaxDatagrams(handler func(*foundation.NSArray[*foundation.NSData], unsafe.Pointer), maxDatagrams uint) {
 	x.inner.SetReadHandlerMaxDatagrams(handler, maxDatagrams)
 }
 
-// @method writeMultipleDatagrams:completionHandler @discussion Write multiple datagrams. Callers should wait until the completionHandler is executed before issuing another write. @param datagramArray An NSArray of NSData objects, containing the ordered list datagrams to write. @param completionHandler A handler called when the write request has either succeeded or failed.
+// Write multiple datagrams.
 //
 // WriteMultipleDatagrams blocks until the operation completes or ctx is cancelled.
 func (x *NWUDPSession) WriteMultipleDatagrams(ctx context.Context, datagramArray *foundation.NSArray[*foundation.NSData]) error {
@@ -76,7 +78,7 @@ func (x *NWUDPSession) WriteMultipleDatagrams(ctx context.Context, datagramArray
 	}
 }
 
-// @method writeDatagram:completionHandler @discussion Write a single datagram. Callers should wait until the completionHandler is executed before issuing another write. @param datagram An NSData containing the datagram to write. @param completionHandler A handler called when the write request has either succeeded or failed.
+// Write a single datagram.
 //
 // WriteDatagram blocks until the operation completes or ctx is cancelled.
 func (x *NWUDPSession) WriteDatagram(ctx context.Context, datagram *foundation.NSData) error {
@@ -96,7 +98,7 @@ func (x *NWUDPSession) WriteDatagram(ctx context.Context, datagram *foundation.N
 	}
 }
 
-// @method cancel @discussion Move into the NWUDPSessionStateCancelled state. The connection will be terminated, and all handlers will be cancelled.
+// Cancel the session.
 //
 // Cancel calls the underlying Cancel.
 func (x *NWUDPSession) Cancel() {
@@ -160,7 +162,7 @@ func (x *NWUDPSession) MaximumDatagramLength() uint {
 type NWUDPSessionable interface {
 	Unwrap() *raw.NWUDPSession
 	TryNextResolvedEndpoint()
-	SetReadHandlerMaxDatagrams(handler objc.Block, maxDatagrams uint)
+	SetReadHandlerMaxDatagrams(handler func(*foundation.NSArray[*foundation.NSData], unsafe.Pointer), maxDatagrams uint)
 	WriteMultipleDatagrams(ctx context.Context, datagramArray *foundation.NSArray[*foundation.NSData]) error
 	WriteDatagram(ctx context.Context, datagram *foundation.NSData) error
 	Cancel()

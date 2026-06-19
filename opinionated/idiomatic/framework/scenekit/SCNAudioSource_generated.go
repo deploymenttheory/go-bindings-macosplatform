@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A simple, reusable audio source—music or sound effects loaded from a file—for use in positional audio playback.
+//
 // AudioSource wraps [raw.SCNAudioSource] with a fluent Go API.
 type AudioSource struct {
 	inner *raw.SCNAudioSource
@@ -30,7 +32,7 @@ func AudioSourceFromID(id objc.ID) *AudioSource {
 	return &AudioSource{inner: raw.SCNAudioSourceFromID(id)}
 }
 
-// @method initWithFileNamed: @abstract Convenience initializer that creates an AVAudioNode from the named audio asset in the main bundle.
+// Initializes an audio source from an audio file in the application’s main bundle.
 //
 // NewAudioSourceWithFileNamed creates a new [AudioSource].
 func NewAudioSourceWithFileNamed(name string) *AudioSource {
@@ -39,7 +41,7 @@ func NewAudioSourceWithFileNamed(name string) *AudioSource {
 	return &AudioSource{inner: raw.SCNAudioSourceFromID(_id)}
 }
 
-// @method initWithURL: @abstract Convenience initializer that creates an AVAudioNode from the URL that contain a audio asset.
+// Initializes an audio source from the specified audio file.
 //
 // NewAudioSourceWithURL creates a new [AudioSource].
 func NewAudioSourceWithURL(url string) *AudioSource {
@@ -48,7 +50,7 @@ func NewAudioSourceWithURL(url string) *AudioSource {
 	return &AudioSource{inner: raw.SCNAudioSourceFromID(_id)}
 }
 
-// @property positional @abstract Marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the SCNSceneRenderer's current listener node. Defaults to YES. @discussion shouldStream must be set to false in order to get positional audio (see shouldStream). @see SCNSceneRenderer audioListener.
+// A Boolean value that determines whether audio from this source uses 3D positional mixing.
 //
 // WithPositional sets the positional property and returns the receiver for chaining.
 func (x *AudioSource) WithPositional(positional bool) *AudioSource {
@@ -56,7 +58,7 @@ func (x *AudioSource) WithPositional(positional bool) *AudioSource {
 	return x
 }
 
-// @property volume @abstract The default volume for this audio buffer. Default is 1.0 (full volume).
+// The default playback volume for the audio source.
 //
 // WithVolume sets the volume property and returns the receiver for chaining.
 func (x *AudioSource) WithVolume(volume float32) *AudioSource {
@@ -64,7 +66,7 @@ func (x *AudioSource) WithVolume(volume float32) *AudioSource {
 	return x
 }
 
-// @property rate @abstract The default rate for this audio buffer. Default is 1.0 (original rate of the audio source).
+// The default playback rate for the audio source.
 //
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *AudioSource) WithRate(rate float32) *AudioSource {
@@ -72,7 +74,7 @@ func (x *AudioSource) WithRate(rate float32) *AudioSource {
 	return x
 }
 
-// @property reverbBlend @abstract The default reverbBlend for this audio buffer. Default is 0.0 (no sound is sent to the reverb).
+// The default blend of blend of unmodified and reverb-processed (also called dry and wet) audio for playback of the audio source.
 //
 // WithReverbBlend sets the reverbBlend property and returns the receiver for chaining.
 func (x *AudioSource) WithReverbBlend(reverbBlend float32) *AudioSource {
@@ -80,7 +82,7 @@ func (x *AudioSource) WithReverbBlend(reverbBlend float32) *AudioSource {
 	return x
 }
 
-// @property loops @abstract Specifies whether the audio source should loop or not. Defaults to NO.
+// A Boolean value that determines whether the audio source should play repeatedly.
 //
 // WithLoops sets the loops property and returns the receiver for chaining.
 func (x *AudioSource) WithLoops(loops bool) *AudioSource {
@@ -88,7 +90,7 @@ func (x *AudioSource) WithLoops(loops bool) *AudioSource {
 	return x
 }
 
-// @property shouldStream @abstract Specifies whether the audio source should be streamed or not. Defaults to NO.
+// A Boolean value that determines whether the audio source should stream content from its source URL when playing.
 //
 // WithShouldStream sets the shouldStream property and returns the receiver for chaining.
 func (x *AudioSource) WithShouldStream(shouldStream bool) *AudioSource {
@@ -96,7 +98,7 @@ func (x *AudioSource) WithShouldStream(shouldStream bool) *AudioSource {
 	return x
 }
 
-// @method load @abstract Load and uncompress the audio source in memory. This method has no effect if "shouldStream" is set to YES or if the audio source is already loaded. @discussion This method let you preload your audio sources. If an audio source is not preloaded, it will be loaded anyway when playing it.
+// Loads audio data from the source and prepares it for playing.
 //
 // Load calls the underlying Load.
 func (x *AudioSource) Load() {

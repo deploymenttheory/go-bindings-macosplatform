@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An opaque token that represents a specific point in a database’s history.
+//
 // ServerChangeToken wraps [raw.CKServerChangeToken] with a fluent Go API.
 type ServerChangeToken struct {
 	inner *raw.CKServerChangeToken

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A manager object that you use to communicate with the file provider from either your app or your File Provider extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/fileprovider/nsfileprovidermanager
 type NSFileProviderManager struct {
 	foundation.NSObject
@@ -62,7 +64,7 @@ func NSFileProviderManagerFromID(id objc.ID) *NSFileProviderManager {
 	return o
 }
 
-// Return the manager for the specified domain.
+// Returns a newly created file provider manager for the specified domain.
 func NSFileProviderManagerManagerForDomain(domain *NSFileProviderDomain) *NSFileProviderManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileProviderManager), _nSFileProviderManagerSelManagerForDomain, domain.Ptr())
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func NSFileProviderManagerManagerForDomain(domain *NSFileProviderDomain) *NSFile
 	return NSFileProviderManagerFromID(_ret)
 }
 
-// Call this method either in the app or in the extension to trigger an enumeration, typically in response to a push. When using NSFileProviderExtension, the system will enumerate containers while the user is viewing them in the UI. If there are changes to the container while an enumerator is open, call this method with the identifier of that container. This will trigger another call to -[NSFileProviderEnumerator enumerateChangesForObserver:fromSyncAnchor:] on that enumerator, and the UI will be refreshed, giving the user live updates on the presented enumeration. If there are changes in the working set, call this method with containerItemIdentifier set to NSFileProviderWorkingSetContainerItemIdentifier, even if there is no live enumeration for the working set container. When using NSFileProviderReplicatedExtension, only call this method with NSFileProviderWorkingSetContainerItemIdentifier. Other container identifiers are ignored. The system will automatically propagate working set changes to the UI, without explicitly signaling the containers currently being viewed in the UI. In addition to using this method, your application/extension can register for pushes using the PKPushTypeFileProvider push type. Pushes of the form { "container-identifier": "<identifier>", "domain": "<domain identifier>" } with a topic of "<your application identifier>.pushkit.fileprovider" will be translated into a call to signalEnumeratorForContainerItemIdentifier:completionHandler:.
+// Alerts the system to changes in the specified folder’s content.
 func (o *NSFileProviderManager) SignalEnumeratorForContainerItemIdentifierCompletionHandler(containerItemIdentifier *foundation.NSString, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -83,7 +85,7 @@ func (o *NSFileProviderManager) SignalEnumeratorForContainerItemIdentifierComple
 	o.Ptr().Send(_nSFileProviderManagerSelSignalEnumeratorForContainerItemIdentifierCompletionHandler, containerItemIdentifier.Ptr(), __block_completion)
 }
 
-// Return the security scoped URL to the user visible location for an item identifier. The caller must use file coordination (see NSFileCoordinator) if it wishes to read the content or list the children of the URL. The caller should not try to manipulate files in the user visible location. All changes coming from the provider should go through updates in the working set that will be applied to the user visible items by the system. The location may differ from the logical parentURL/filename. If an item on disk cannot be assigned the requested name (e.g. because the local file system has different case collision rules from the provider), one of the items can be assigned a different local name. In that case, the "com.apple.fileprovider.before-bounce#PX" extended attribute will contain the filename before collision resolution. This attribute is only set if the item has been assigned a different local name following a collision. Such local names are not synced up to the provider; the purpose of the attribute is to enable consistency checkers to detect this case. Before accessing the content of the returned URL, the caller must call `-[NSURL startAccessingSecurityScopedResource] on the returned URL and call `-[NSURL stopAccessingSecurityScopedResource]` when done accessing the content. The returned URL grants read-write access to the user visible location for the corresponding item. On iOS, for replicated domains, the extension process will never be granted access to the user visible location, this function will always fail with `NSFileReadNoPermissionError`.
+// Returns the user-visible URL for an item.
 func (o *NSFileProviderManager) GetUserVisibleURLForItemIdentifierCompletionHandler(itemIdentifier *foundation.NSString, completionHandler func(*foundation.NSURL, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -98,7 +100,7 @@ func (o *NSFileProviderManager) GetUserVisibleURLForItemIdentifierCompletionHand
 	o.Ptr().Send(_nSFileProviderManagerSelGetUserVisibleURLForItemIdentifierCompletionHandler, itemIdentifier.Ptr(), __block_completionHandler)
 }
 
-// Return the identifier and domain for a user visible URL. This method returns the identifier and domain of a user visible URL if applicable. Calling this method on a file which doesn't reside in your provider/domain, or which hasn't yet been assigned an identifier by the provider will return the Cocoa error NSFileNoSuchFileError.
+// Returns the identifier and domain for a user-visible URL.
 func NSFileProviderManagerGetIdentifierForUserVisibleFileAtURLCompletionHandler(url *foundation.NSURL, completionHandler func(*foundation.NSString, *foundation.NSString, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -116,7 +118,7 @@ func NSFileProviderManagerGetIdentifierForUserVisibleFileAtURLCompletionHandler(
 	objc.ID(_clsNSFileProviderManager).Send(_nSFileProviderManagerSelGetIdentifierForUserVisibleFileAtURLCompletionHandler, url.Ptr(), __block_completionHandler)
 }
 
-// Registers the given NSURLSessionTask to be responsible for the specified item. A given item can only have one task registered at a time. The task must be suspended at the time of calling. The task's progress is displayed on the item when the task is executed.
+// Registers the URL session task responsible for the specified item.
 func (o *NSFileProviderManager) RegisterURLSessionTaskForItemWithIdentifierCompletionHandler(task *foundation.NSURLSessionTask, identifier *foundation.NSString, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -128,7 +130,7 @@ func (o *NSFileProviderManager) RegisterURLSessionTaskForItemWithIdentifierCompl
 	o.Ptr().Send(_nSFileProviderManagerSelRegisterURLSessionTaskForItemWithIdentifierCompletionHandler, task.Ptr(), identifier.Ptr(), __block_completion)
 }
 
-// A temporary directory suitable to store files that will be exchanged with the system. The returned URL is guaranteed to be on the same volume as the user visible URL, making sure the system can atomatically clone/move files from that location to the user visible URL. The provider can also use that directory as a target for moves and clones of content URL passed to createItemBasedOnTemplate or modifyItem. If the system cannot find a suitable directory, this calls will fail. This could happen e.g. if the domain does not exist or is in instance of initialization. This call succeeds when called from the extension process with an instance of the extension for the domain unless domain was disconnected by `-[NSFileProviderExternalVolumeHandling shouldConnectExternalDomainWithCompletionHandler:]`. It can also fail in the extension process if the domain (external) is being setup for the very first time (meaning it never existed).
+// Returns the URL of a directory that the File Provider extension can use to temporarily store files before passing them to the system.
 func (o *NSFileProviderManager) TemporaryDirectoryURLWithError() (*foundation.NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderManagerSelTemporaryDirectoryURLWithError, unsafe.Pointer(&_nsErr))
@@ -141,7 +143,7 @@ func (o *NSFileProviderManager) TemporaryDirectoryURLWithError() (*foundation.NS
 	return foundation.NSURLFromID(_ret), nil
 }
 
-// Register a domain in which items can be stored. If a domain with the same identifier already exists, `addDomain` will update the display name and hidden state of the domain and succeed. When the domain is backed by a NSFileProviderReplicatedExtension, the system will create a disk location where the domain will be replicated. If that location already exists on disk this call will fail with the code NSFileWriteFileExistsError.
+// Adds a domain to the File Provider extension.
 func NSFileProviderManagerAddDomainCompletionHandler(domain *NSFileProviderDomain, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -153,7 +155,7 @@ func NSFileProviderManagerAddDomainCompletionHandler(domain *NSFileProviderDomai
 	objc.ID(_clsNSFileProviderManager).Send(_nSFileProviderManagerSelAddDomainCompletionHandler, domain.Ptr(), __block_completionHandler)
 }
 
-// Remove a domain.
+// Removes a domain from the File Provider extension.
 func NSFileProviderManagerRemoveDomainCompletionHandler(domain *NSFileProviderDomain, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -165,7 +167,7 @@ func NSFileProviderManagerRemoveDomainCompletionHandler(domain *NSFileProviderDo
 	objc.ID(_clsNSFileProviderManager).Send(_nSFileProviderManagerSelRemoveDomainCompletionHandler, domain.Ptr(), __block_completionHandler)
 }
 
-// Remove a domain with options
+// Removes a domain from the File Provider extension using the specified options.
 func NSFileProviderManagerRemoveDomainModeCompletionHandler(domain *NSFileProviderDomain, mode NSFileProviderDomainRemovalMode, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -177,7 +179,7 @@ func NSFileProviderManagerRemoveDomainModeCompletionHandler(domain *NSFileProvid
 	objc.ID(_clsNSFileProviderManager).Send(_nSFileProviderManagerSelRemoveDomainModeCompletionHandler, domain.Ptr(), mode, __block_completionHandler)
 }
 
-// Get all registered domains.
+// Returns all of the File Provider extension’s domains.
 func NSFileProviderManagerGetDomainsWithCompletionHandler(completionHandler func(*foundation.NSArray[*NSFileProviderDomain], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -192,7 +194,7 @@ func NSFileProviderManagerGetDomainsWithCompletionHandler(completionHandler func
 	objc.ID(_clsNSFileProviderManager).Send(_nSFileProviderManagerSelGetDomainsWithCompletionHandler, __block_completionHandler)
 }
 
-// Remove all registered domains.
+// Removes all domains from the File Provider extension.
 func NSFileProviderManagerRemoveAllDomainsWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -204,7 +206,7 @@ func NSFileProviderManagerRemoveAllDomainsWithCompletionHandler(completionHandle
 	objc.ID(_clsNSFileProviderManager).Send(_nSFileProviderManagerSelRemoveAllDomainsWithCompletionHandler, __block_completionHandler)
 }
 
-// Calling this method will cause the system to cancel throttling on every item which has been throttled due to the given error. This call supports the following errors: - NSFileProviderErrorNotAuthenticated - NSFileProviderErrorInsufficientQuota - NSFileProviderErrorServerUnreachable - NSFileProviderErrorCannotSynchronize - NSFileProviderErrorExcludedFromSync
+// Indicates a resolved error.
 func (o *NSFileProviderManager) SignalErrorResolvedCompletionHandler(error_ unsafe.Pointer, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -216,7 +218,7 @@ func (o *NSFileProviderManager) SignalErrorResolvedCompletionHandler(error_ unsa
 	o.Ptr().Send(_nSFileProviderManagerSelSignalErrorResolvedCompletionHandler, error_, __block_completionHandler)
 }
 
-// Returns the global progress for the specified kind of operations This progress tracks all the ongoing kind of operations (from disk to the provider). Uploading operations are the operations from disk to the provider. Downloading operations are the operations from the provider to the disk. The global progress exposes the two following data: - Number of items with an ongoing matching kind operation along with the grand total; - Number of bytes already transferred along with the total amount of bytes to transfer. `totalUnitCount` will only be reset when there are no operations left. If new operations of the matching kind arrive while the global progress is already ongoing, they will just be summed to the existing global progress. By default, when no matching kind operations are active, the progress has its values set to 1 and its state set to finished. The progress will be updated on the main queue. It is to be retained by the caller and to be observed through KVO. The two only supported values for kind are: - NSProgressFileOperationKindUploading - NSProgressFileOperationKindDownloading The returned progress will have its fileOperationKind property set.
+// Returns a progress object that tracks either the uploading or downloading of items from the File Provider extension’s remote storage.
 func (o *NSFileProviderManager) GlobalProgressForKind(kind *foundation.NSString) *foundation.NSProgress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderManagerSelGlobalProgressForKind, kind.Ptr())
 	if _ret != 0 {
@@ -225,19 +227,19 @@ func (o *NSFileProviderManager) GlobalProgressForKind(kind *foundation.NSString)
 	return foundation.NSProgressFromID(_ret)
 }
 
-// Returns an enumerator for the set of materialized items. When calling -[NSFileProviderEnumerator enumerateItemsForObserver:startingAtPage:] on the returned enumerator, pass the result of [NSData new] as the starting page. The sorting page constants (NSFileProviderInitialPageSortedByName and NSFileProviderInitialPageSortedByDate) will not influence the order of the items enumerated from the materialized set. This enumerator is unlike other enumerators because the roles of the system and the app/extension are reversed: - The system enumerates the working set after the extension calls 'signalEnumeratorForContainerItemIdentifier'; - The app/extension enumerates the materialized set after the system calls 'materializedItemsDidChangeWithCompletionHandler'.
+// Returns an enumerator for all the items the system currently stores on disk.
 func (o *NSFileProviderManager) EnumeratorForMaterializedItems() NSFileProviderEnumerator {
 	_ret := objc.Send[NSFileProviderEnumerator](o.Ptr(), _nSFileProviderManagerSelEnumeratorForMaterializedItems)
 	return _ret
 }
 
-// Returns an enumerator for the set of pending items. This enumerator behaves like the materialized set enumerator. On later modifications in the set, the system will call 'pendingItemsDidChangeWithCompletionHandler'.
+// Returns an enumerator for the set of pending items.
 func (o *NSFileProviderManager) EnumeratorForPendingItems() NSFileProviderPendingSetEnumerator {
 	_ret := objc.Send[NSFileProviderPendingSetEnumerator](o.Ptr(), _nSFileProviderManagerSelEnumeratorForPendingItems)
 	return _ret
 }
 
-// Request the creation of a new domain that will take ownership of on-disk data that were previously managed without a file provider. You can use this method in order to migrate from a software that managed a file hierarchy on disk to a NSFileProviderExtension without having to redownload the data that was already on disk. The URL is expected to point to a directory. That directory will be moved away, its ownership being taken by the system. From this point, your extension's createItemFromTemplate method will be called for every item found in the directory with the special NSFileProviderCreateItemMayAlreadyExist option. In case a domain with the same name already exists in the file provider manager, the call will fail with the code NSFileWriteFileExistsError. The URL will remain untouched. In case the system does not allow the extension to request a migration, the call will fail with NSFeatureUnsupportedError. In case of success, the URL will become invalid and the domain will be created. The completion handler is called as soon as the domain is created. Your provider will receive calls to createItemBasedOnTemplate afterward. When the import of the file hierarchy is finished, the system calls -[NSFileProviderExtension signalDidFinishImportingItemsFromDiskWithCompletionHandler:]. In case -[NSFileProviderManager reimportItemsBelowItemWithIdentifier:completionHandler:] is called before the end of the import, a single call to importDidFinishWithCompletionHandler will be received for both the import and the scan.
+// Creates a new domain that takes ownership of on-disk data that your app previously managed without a file provider.
 func NSFileProviderManagerImportDomainFromDirectoryAtURLCompletionHandler(domain *NSFileProviderDomain, url *foundation.NSURL, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -249,7 +251,7 @@ func NSFileProviderManagerImportDomainFromDirectoryAtURLCompletionHandler(domain
 	objc.ID(_clsNSFileProviderManager).Send(_nSFileProviderManagerSelImportDomainFromDirectoryAtURLCompletionHandler, domain.Ptr(), url.Ptr(), __block_completionHandler)
 }
 
-// Notify the system that the itemIdentifiers known by the system are not valid anymore. This can be called by an extension in case it has lost track of its synchronisation state and as a consequence is not able to guarantee the stability of the itemIdentifiers anymore. In that case, the system will trigger a scan of any data that is cached on disk and call createItemBasedOnTemplate with the special NSFileProviderCreateItemMayAlreadyExist option so that the extension can specify the new itemIdentifier for those items. The provided item identifier is inclusive, meaning the specified item will be re-import as well as any children in case it is a container. In case the extension has lost its synchronisation state but is still able to guarantee the stability of the itemIdentifiers, it should make sure that querying the working set enumerator with an anchor that predates the synchronisation loss will cause a NSFileProviderErrorSyncAnchorExpired error. In case the extension has lost its synchronisation state and is not interested in preserving the data cached on disk, it can remove and re-add the affected domain. The completion handler is called as soon as the reimport is initiated and does not not reflect the end of the import. When the import of the file hierarchy is finished, the system calls -[NSFileProviderExtension importDidFinishWithCompletionHandler:]. In some circumstances, in particular in case the requested item is the root item, calling reimport will cause the system to stop the extension process. If the call is initiated from the extension, the system does not guarantee that the completion handler will be called before the extension is stopped. When called on the root item, reimport will cause the system to rebuild its backing store for the domain. See `-[NSFileProviderDomain backingStoreIdentity]`. If this method succeeds, the system will reimport at least the requested sub-tree, but may import more. If the requested item has no on-disk representation, the completion handler will be called with a NSFileProviderErrorNoSuchItem error. The same error will be reported if the reimport request happens quickly after a previous import / reimport and the corresponding item hasn't been reimported yet.
+// Tells the system to reimport the item and its content recursively.
 func (o *NSFileProviderManager) ReimportItemsBelowItemWithIdentifierCompletionHandler(itemIdentifier *foundation.NSString, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -261,7 +263,7 @@ func (o *NSFileProviderManager) ReimportItemsBelowItemWithIdentifierCompletionHa
 	o.Ptr().Send(_nSFileProviderManagerSelReimportItemsBelowItemWithIdentifierCompletionHandler, itemIdentifier.Ptr(), __block_completionHandler)
 }
 
-// Request that the system remove an item from its cache. When called on a file, the file will be made dataless. When called on a directory, first each of the directory's children will be evicted (child files are made dataless, child directories are recursively evicted). Then the directory itself will be made dataless. If a non-evictable child is encountered, eviction will stop immediately and the completionHandler will be called with the NSFileProviderErrorNonEvictableChildren error. The error will include information on why and which children could not be evicted in -[NSError underlyingErrors]. The materialization state of the remaining items may be either materialized or evicted, depending on the traversal order. The completion handler is called after the items have been evicted from disk or immediately when an error occurs. Eviction might fail with the following errors : - NSFileProviderErrorDomain.NSFileProviderErrorUnsyncedEdits if the item had non-uploaded changes. - NSFileProviderErrorDomain.NSFileProviderErrorNonEvictable if the item has been marked as non-purgeable by the provider. - NSPOSIXErrorDomain.EBUSY : if the item has open file descriptors on it. - NSPOSIXErrorDomain.EMLINK : if the item has several hardlinks. - other NSPOSIXErrorDomain error codes if the system was unable to access or manipulate the corresponding file.
+// Asks the system to remove an item from its cache.
 func (o *NSFileProviderManager) EvictItemWithIdentifierCompletionHandler(itemIdentifier *foundation.NSString, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -273,7 +275,7 @@ func (o *NSFileProviderManager) EvictItemWithIdentifierCompletionHandler(itemIde
 	o.Ptr().Send(_nSFileProviderManagerSelEvictItemWithIdentifierCompletionHandler, itemIdentifier.Ptr(), __block_completionHandler)
 }
 
-// Wait for all changes on disk in the sub-hierarchy of the item to be acknowledged by the extension. This call can be used to guarantee operation ordering in a sub-hierarchy of the provider. The completion handler is called when all the changes for descendents of the item have been acknowledged by the extension. If any error is met during that process, an error will be raised, in which case the caller should not assume all the changes have been received. This call will only wait for changes affecting items that were already descendents of the requested item in the provider, or items that have been newly created on disk. It will not wait for items that are already known from the provider and are being moved in the directory. As a consequence, that call can be used from within a call to -[NSFileProviderReplicatedExtension modifyItem:baseVersion:changedFields:contents:options:completionHandler:]. Also note that the call will return immediately on items that are not directories. In case a change cannot be applied to the provider, the call will fail with NSFileProviderErrorCannotSynchronize including the NSFileProviderErrorItemKey with the identifier of the item that could not be synced if that item is known by the provider.
+// Requests a notification after the system completes all the specified changes.
 func (o *NSFileProviderManager) WaitForChangesOnItemsBelowItemWithIdentifierCompletionHandler(itemIdentifier *foundation.NSString, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -285,7 +287,7 @@ func (o *NSFileProviderManager) WaitForChangesOnItemsBelowItemWithIdentifierComp
 	o.Ptr().Send(_nSFileProviderManagerSelWaitForChangesOnItemsBelowItemWithIdentifierCompletionHandler, itemIdentifier.Ptr(), __block_completionHandler)
 }
 
-// Wait for stabilization of the domain. The system will wait until it is caught up with the file system's changes up to the time of the call, then wait until it is caught up with the provider's changes up to the time of the call. The completion handler is called when both sets of changes are caught up to at least the time of the call. This is useful to enforce a consistent state for testing.
+// Requests a notification after the domain stabilizes.
 func (o *NSFileProviderManager) WaitForStabilizationWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -297,6 +299,7 @@ func (o *NSFileProviderManager) WaitForStabilizationWithCompletionHandler(comple
 	o.Ptr().Send(_nSFileProviderManagerSelWaitForStabilizationWithCompletionHandler, __block_completionHandler)
 }
 
+// Disconnects the domain from the extension.
 func (o *NSFileProviderManager) DisconnectWithReasonOptionsCompletionHandler(localizedReason *foundation.NSString, options NSFileProviderManagerDisconnectionOptions, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -308,6 +311,7 @@ func (o *NSFileProviderManager) DisconnectWithReasonOptionsCompletionHandler(loc
 	o.Ptr().Send(_nSFileProviderManagerSelDisconnectWithReasonOptionsCompletionHandler, localizedReason.Ptr(), options, __block_completionHandler)
 }
 
+// Reconnects the domain with the extension.
 func (o *NSFileProviderManager) ReconnectWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -331,7 +335,7 @@ func (o *NSFileProviderManager) RequestDownloadForItemWithIdentifierRequestedRan
 	o.Ptr().Send(_nSFileProviderManagerSelRequestDownloadForItemWithIdentifierRequestedRangeCompletionHandler, itemIdentifier.Ptr(), rangeToMaterialize, __block_completionHandler)
 }
 
-// A directory suitable for storing state information for the domain. The returned URL is guaranteed to be on the same volume as the user visible URL and the temporary URL, making sure the system can atomatically clone/move files from that location to the user visible URL. The caller is responsible for managing the security scope of the returned URL. When syncing a domain on an external volume, all information about the sync state must be kept in this directory if the volume is to be shared between multiple machines. If the system cannot find a suitable directory, this call will fail. This could happen e.g. if the domain does not exist or is in instance of initialization. This call will not fail when called from the extension process with an active instance of the extension for that domain unless the domain is being setup for the very first time (meaning it never existed). Removing the domain will remove the corresponding directory along with it.
+// Returns a URL for a directory for storing state information for the domain.
 func (o *NSFileProviderManager) StateDirectoryURLWithError() (*foundation.NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderManagerSelStateDirectoryURLWithError, unsafe.Pointer(&_nsErr))
@@ -344,7 +348,7 @@ func (o *NSFileProviderManager) StateDirectoryURLWithError() (*foundation.NSURL,
 	return foundation.NSURLFromID(_ret), nil
 }
 
-// Check if a URL is eligible for storing a domain. This returns whether the check has been performed succesfully - NOT whether the drive is eligible. If an error was encountered while checking, this method returns FALSE and an error describing the problem will be set. The eligible parameter will contain the result of the check and indicate whether the volume can be used to store FP domains. Its value is only defined if the call returns YES. The url can be any existing and accessible URL on the volume for which you want to assess eligibility. The checks are volume-wide and the exact location on the volume doesn't impact them. If a drive is eligible, unsupportedReason will be empty (0). Otherwise it will contain the list of identified conditions that currently prevent this drive from being used to store FP domains.
+// Check if a URL is eligible for storing a domain.
 func NSFileProviderManagerCheckDomainsCanBeStoredOnVolumeAtURLUnsupportedReasonError(eligible *bool, url *foundation.NSURL, unsupportedReason *NSFileProviderVolumeUnsupportedReason) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsNSFileProviderManager), _nSFileProviderManagerSelCheckDomainsCanBeStoredOnVolumeAtURLUnsupportedReasonError, eligible, url.Ptr(), unsupportedReason, unsafe.Pointer(&_nsErr))
@@ -354,7 +358,7 @@ func NSFileProviderManagerCheckDomainsCanBeStoredOnVolumeAtURLUnsupportedReasonE
 	return _ret, nil
 }
 
-// Request diagnostics collection for the item. This will prompt the user about an issue with the sync in the provider and ask their permission to collection diagnostic information and to send them to Apple for further analysis. This call is to be used wisely with care given there's global throttling on it preventing spamming the users. Furthermore it should be used in collaboration with Apple when you detect a misbehavior in the sync in your provider likely caused by a system bug and you need to work with Apple in order to resolve it. This will return whether the call was allowed or not - not if it suceed This method will only return an error if the user was not on a Seed build It is mandatory to provide an error for the item why the collection is requested. The error won't be shown to the user (a generic message will be shown instead) It will surface in the generated report though It is important to note that even if the call is allowed, it might not trigger diagnostic collection nor prompt to the user depending on the system state and other throttling parameters
+// Requests a diagnostics collection for use when working directly with Apple to improve sync behavior.
 func (o *NSFileProviderManager) RequestDiagnosticCollectionForItemWithIdentifierErrorReasonCompletionHandler(itemIdentifier *foundation.NSString, errorReason unsafe.Pointer, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -378,7 +382,7 @@ func (o *NSFileProviderManager) GetServiceWithNameItemIdentifierCompletionHandle
 	o.Ptr().Send(_nSFileProviderManagerSelGetServiceWithNameItemIdentifierCompletionHandler, serviceName.Ptr(), itemIdentifier.Ptr(), __block_completionHandler)
 }
 
-// List the available operations. This lists all of the operations that are ready to be scheduled by the system. The system waits for all the pending disk and working set updates to be known before returning. The operations that are returned may become invalid if the system receives new disk or working set events, or if some operation are scheduled using -runTestingOperations:error:.
+// Lists all the operations that are ready for scheduling.
 func (o *NSFileProviderManager) ListAvailableTestingOperationsWithError() (*foundation.NSArray[NSFileProviderTestingOperation], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderManagerSelListAvailableTestingOperationsWithError, unsafe.Pointer(&_nsErr))
@@ -391,17 +395,20 @@ func (o *NSFileProviderManager) ListAvailableTestingOperationsWithError() (*foun
 	return foundation.NSArrayFromID[NSFileProviderTestingOperation](_ret), nil
 }
 
-// Run a set of operations. Ask the system to schedule the execution of the listed operations. The system will wait until all those operations have completed and report a per-operation error in case an operation fails.
+// Asks the system to schedule and execute the specified operations.
 func (o *NSFileProviderManager) RunTestingOperationsError(operations *foundation.NSArray[NSFileProviderTestingOperation]) (*foundation.NSDictionary[NSFileProviderTestingOperation, objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSDictionary[NSFileProviderTestingOperation, objc.ID]](o.Ptr(), _nSFileProviderManagerSelRunTestingOperationsError, operations.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderManagerSelRunTestingOperationsError, operations.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSDictionaryFromID[NSFileProviderTestingOperation, objc.ID](_ret), nil
 }
 
-// Request the specified known folders to be synced by this domain. This method allows the provider to claim a set of known folders described by the non-null properties of the knownFolders parameter. The system will only enable sync for those folders in that domain if the set of locations is valid and if the user agrees. This API should only be called as a result of the user requesting, via UI in the provider's application, that they wish to start syncing the Desktop and Document folders. If the provider chooses to implement a UI which invokes this API, the provider should also implement a UI for the user to request to stop syncing the Desktop and Document folders, using the `-[NSFileProviderManager releaseKnownFolders:localizedReason:completionHandler:]` method. The reason specified in this call is a custom string that the provider can pass and will be presented to the user as a way to explain why it is claiming those known folders. One suggested phrasing would be: > Keep your Desktop & Documents in sync with <Provider name> and access them from other devices and from <Provider website>. If the user denies the transition of the known folders, the call will fail with `NSUserCancelledError`. The call will fail if: - one or more locations are not folders - multiple locations are backed by the same folder - a known folder doesn't live on the same volume as the root of the domain - the known folders don't have the same parent folder - ... Currently, only claiming both ~/Desktop and ~/Documents together is allowed.
+// Asks the domain to sync the specified known folders.
 func (o *NSFileProviderManager) ClaimKnownFoldersLocalizedReasonCompletionHandler(knownFolders *NSFileProviderKnownFolderLocations, localizedReason *foundation.NSString, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -413,7 +420,7 @@ func (o *NSFileProviderManager) ClaimKnownFoldersLocalizedReasonCompletionHandle
 	o.Ptr().Send(_nSFileProviderManagerSelClaimKnownFoldersLocalizedReasonCompletionHandler, knownFolders.Ptr(), localizedReason.Ptr(), __block_completionHandler)
 }
 
-// Request that the system stops replicating the specified known folders in the domain. This call can be used by the provider to immediately disable replication of the specified known folders.
+// Asks the system to stop replicating the specified known folders in the domain.
 func (o *NSFileProviderManager) ReleaseKnownFoldersLocalizedReasonCompletionHandler(knownFolders NSFileProviderKnownFolders, localizedReason *foundation.NSString, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

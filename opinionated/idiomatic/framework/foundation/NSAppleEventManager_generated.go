@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A mechanism for registering handler routines for specific types of Apple events and dispatching events to those handlers.
+//
 // AppleEventManager wraps [raw.NSAppleEventManager] with a fluent Go API.
 type AppleEventManager struct {
 	inner *raw.NSAppleEventManager
@@ -43,26 +45,36 @@ func (x *AppleEventManager) WithScriptingProperties(scriptingProperties *raw.NSD
 	return x
 }
 
+// Registers the Apple event handler specified by handler for the event specified by eventClass and eventID.
+//
 // SetEventHandlerAndSelectorForEventClassAndEventID calls the underlying SetEventHandlerAndSelectorForEventClassAndEventID.
 func (x *AppleEventManager) SetEventHandlerAndSelectorForEventClassAndEventID(handler objc.ID, handleEventSelector objc.SEL, eventClass uint, eventID uint) {
 	x.inner.SetEventHandlerAndSelectorForEventClassAndEventID(handler, handleEventSelector, eventClass, eventID)
 }
 
+// If an Apple event handler has been registered for the event specified by eventClass and eventID, removes it.
+//
 // RemoveEventHandlerForEventClassAndEventID calls the underlying RemoveEventHandlerForEventClassAndEventID.
 func (x *AppleEventManager) RemoveEventHandlerForEventClassAndEventID(eventClass uint, eventID uint) {
 	x.inner.RemoveEventHandlerForEventClassAndEventID(eventClass, eventID)
 }
 
+// Causes the Apple event specified by theAppleEvent to be dispatched to the appropriate Apple event handler, if one has been registered by calling setEventHandler:andSelector:forEventClass:andEventID:.
+//
 // DispatchRawAppleEventWithRawReplyHandlerRefCon calls the underlying DispatchRawAppleEventWithRawReplyHandlerRefCon.
 func (x *AppleEventManager) DispatchRawAppleEventWithRawReplyHandlerRefCon(theAppleEvent *ae.AEDesc, theReply *ae.AEDesc, handlerRefCon unsafe.Pointer) int16 {
 	return x.inner.DispatchRawAppleEventWithRawReplyHandlerRefCon(theAppleEvent, theReply, handlerRefCon)
 }
 
+// Suspends the handling of the current event and returns an ID that must be used to resume the handling of the event if an Apple event is being handled on the current thread.
+//
 // SuspendCurrentAppleEvent calls the underlying SuspendCurrentAppleEvent.
 func (x *AppleEventManager) SuspendCurrentAppleEvent() unsafe.Pointer {
 	return x.inner.SuspendCurrentAppleEvent()
 }
 
+// Given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, returns the descriptor for the event whose handling was suspended.
+//
 // AppleEventForSuspensionID calls the underlying AppleEventForSuspensionID.
 func (x *AppleEventManager) AppleEventForSuspensionID(suspensionID unsafe.Pointer) *AppleEventDescriptor {
 	_r := x.inner.AppleEventForSuspensionID(suspensionID)
@@ -72,6 +84,8 @@ func (x *AppleEventManager) AppleEventForSuspensionID(suspensionID unsafe.Pointe
 	return &AppleEventDescriptor{inner: _r}
 }
 
+// Given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, returns the corresponding reply event descriptor.
+//
 // ReplyAppleEventForSuspensionID calls the underlying ReplyAppleEventForSuspensionID.
 func (x *AppleEventManager) ReplyAppleEventForSuspensionID(suspensionID unsafe.Pointer) *AppleEventDescriptor {
 	_r := x.inner.ReplyAppleEventForSuspensionID(suspensionID)
@@ -81,11 +95,15 @@ func (x *AppleEventManager) ReplyAppleEventForSuspensionID(suspensionID unsafe.P
 	return &AppleEventDescriptor{inner: _r}
 }
 
+// Given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, sets the values that will be returned by subsequent invocations of currentAppleEvent and currentReplyAppleEvent to be the event whose handling was suspended and its corresponding reply event, respectively.
+//
 // SetCurrentAppleEventAndReplyEventWithSuspensionID calls the underlying SetCurrentAppleEventAndReplyEventWithSuspensionID.
 func (x *AppleEventManager) SetCurrentAppleEventAndReplyEventWithSuspensionID(suspensionID unsafe.Pointer) {
 	x.inner.SetCurrentAppleEventAndReplyEventWithSuspensionID(suspensionID)
 }
 
+// Given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, signal that handling of the suspended event may now continue.
+//
 // ResumeWithSuspensionID calls the underlying ResumeWithSuspensionID.
 func (x *AppleEventManager) ResumeWithSuspensionID(suspensionID unsafe.Pointer) {
 	x.inner.ResumeWithSuspensionID(suspensionID)

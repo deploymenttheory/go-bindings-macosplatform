@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains a movement mode value.
+//
 // ActivityMoveModeObject wraps [raw.HKActivityMoveModeObject] with a fluent Go API.
 type ActivityMoveModeObject struct {
 	inner *raw.HKActivityMoveModeObject

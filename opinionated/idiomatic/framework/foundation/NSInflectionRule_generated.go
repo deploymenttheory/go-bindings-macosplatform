@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A rule that affects how an attributed string performs automatic grammatical agreement.
+//
 // InflectionRule wraps [raw.NSInflectionRule] with a fluent Go API.
 type InflectionRule struct {
 	inner *raw.NSInflectionRule

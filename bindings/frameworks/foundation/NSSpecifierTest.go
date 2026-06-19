@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A comparison between an object specifier and a test object.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsspecifiertest
 type NSSpecifierTest struct {
 	NSScriptWhoseTest
@@ -38,6 +40,7 @@ func (o *NSSpecifierTest) InitWithCoder(inCoder *NSCoder) *NSSpecifierTest {
 	return NSSpecifierTestFromID(_ret)
 }
 
+// Returns a specifier test initialized to evaluate a test object against an object specified by an object specifier using a given comparison operation.
 func (o *NSSpecifierTest) InitWithObjectSpecifierComparisonOperatorTestObject(obj1 *NSScriptObjectSpecifier, compOp NSTestComparisonOperation, obj2 objc.ID) *NSSpecifierTest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpecifierTestSelInitWithObjectSpecifierComparisonOperatorTestObject, obj1.Ptr(), compOp, obj2)
 	if _ret != 0 {

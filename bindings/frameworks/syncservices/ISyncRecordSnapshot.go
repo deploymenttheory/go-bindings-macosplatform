@@ -39,26 +39,38 @@ func ISyncRecordSnapshotFromID(id objc.ID) *ISyncRecordSnapshot {
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncRecordSnapshot) RecordsWithIdentifiers(recordIds *foundation.NSArray[objc.ID]) *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _iSyncRecordSnapshotSelRecordsWithIdentifiers, recordIds)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncRecordSnapshotSelRecordsWithIdentifiers, recordIds.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncRecordSnapshot) TargetIdentifiersForRelationshipNameWithSourceIdentifier(relationshipName *foundation.NSString, sourceId *foundation.NSString) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iSyncRecordSnapshotSelTargetIdentifiersForRelationshipNameWithSourceIdentifier, relationshipName.Ptr(), sourceId.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncRecordSnapshotSelTargetIdentifiersForRelationshipNameWithSourceIdentifier, relationshipName.Ptr(), sourceId.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncRecordSnapshot) SourceIdentifiersForRelationshipNameWithTargetIdentifier(relationshipName *foundation.NSString, sourceId *foundation.NSString) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iSyncRecordSnapshotSelSourceIdentifiersForRelationshipNameWithTargetIdentifier, relationshipName.Ptr(), sourceId.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncRecordSnapshotSelSourceIdentifiersForRelationshipNameWithTargetIdentifier, relationshipName.Ptr(), sourceId.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncRecordSnapshot) RecordsWithMatchingAttributes(attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _iSyncRecordSnapshotSelRecordsWithMatchingAttributes, attributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncRecordSnapshotSelRecordsWithMatchingAttributes, attributes.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.7.

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A local-contrast normalization kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnlocalcontrastnormalization
 type MPSCNNLocalContrastNormalization struct {
 	mpsneuralnetwork.MPSCNNKernel
@@ -45,7 +47,7 @@ func MPSCNNLocalContrastNormalizationFromID(id objc.ID) *MPSCNNLocalContrastNorm
 	return o
 }
 
-// @abstract  Initialize a local contrast normalization filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel @param      kernelHeight        The height of the kernel @return     A valid MPSCNNLocalContrastNormalization object or nil, if failure. NOTE:  For now, kernelWidth must be equal to kernelHeight
+// Initializes a local contrast normalization kernel.
 func (o *MPSCNNLocalContrastNormalization) InitWithDeviceKernelWidthKernelHeight(device metal.MTLDevice, kernelWidth uint, kernelHeight uint) *MPSCNNLocalContrastNormalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNLocalContrastNormalizationSelInitWithDeviceKernelWidthKernelHeight, device, kernelWidth, kernelHeight)
 	if _ret != 0 {
@@ -54,7 +56,7 @@ func (o *MPSCNNLocalContrastNormalization) InitWithDeviceKernelWidthKernelHeight
 	return MPSCNNLocalContrastNormalizationFromID(_ret)
 }
 
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+// Initializes a local contrast normalization kernel.
 func (o *MPSCNNLocalContrastNormalization) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNLocalContrastNormalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNLocalContrastNormalizationSelInitWithCoderDevice, aDecoder.Ptr(), device)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An action that contains the cryptographic identities the system uses to add to or remove from an existing collaboration.
+//
 // Apple documentation: https://developer.apple.com/documentation/sharedwithyoucore/swupdatecollaborationparticipantsaction
 type SWUpdateCollaborationParticipantsAction struct {
 	SWAction

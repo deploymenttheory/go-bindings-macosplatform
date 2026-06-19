@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that supports using Core Image filters to process an individual video frame in a video composition.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avasynchronousciimagefilteringrequest
 type AVAsynchronousCIImageFilteringRequest struct {
 	foundation.NSObject
@@ -38,12 +40,12 @@ func AVAsynchronousCIImageFilteringRequestFromID(id objc.ID) *AVAsynchronousCIIm
 	return o
 }
 
-// Callback the filter should call when filtering succeeded. If context is nil then a default context will be used, GPU-accelerated if possible. It is safe to pass in the sourceImage in which case the filter will appear to have no effect, essentially functioning as a pass-through.
+// Provides the filtered video frame image to AVFoundation for further processing or display.
 func (o *AVAsynchronousCIImageFilteringRequest) FinishWithImageContext(filteredImage objc.ID, context_ objc.ID) {
 	o.Ptr().Send(_aVAsynchronousCIImageFilteringRequestSelFinishWithImageContext, filteredImage, context_)
 }
 
-// Callback the filter should call when filtering failed. The error parameter should describe the actual error.
+// Notifies AVFoundation that you cannot fulfill the image filtering request.
 func (o *AVAsynchronousCIImageFilteringRequest) FinishWithError(error_ unsafe.Pointer) {
 	o.Ptr().Send(_aVAsynchronousCIImageFilteringRequestSelFinishWithError, error_)
 }

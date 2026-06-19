@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A Quick Look preview request that indicates the content to preview.
+//
 // FilePreviewRequest wraps [raw.QLFilePreviewRequest] with a fluent Go API.
 type FilePreviewRequest struct {
 	inner *raw.QLFilePreviewRequest

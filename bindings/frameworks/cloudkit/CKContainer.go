@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A conduit to your app’s databases.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckcontainer
 type CKContainer struct {
 	foundation.NSObject
@@ -54,7 +56,7 @@ func CKContainerFromID(id objc.ID) *CKContainer {
 	return o
 }
 
-// Returns the app's default container. Use this method to retrieve your app's default container. This is the one you typically use to store your app's data. If you want the container for a different app, create a container using the “CKContainer/init(identifier:)“ method. During development, the container uses the development environment. When you release your app, the container uses the production environment.
+// Returns the app’s default container.
 func CKContainerDefaultContainer() *CKContainer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCKContainer), _cKContainerSelDefaultContainer)
 	if _ret != 0 {
@@ -63,7 +65,7 @@ func CKContainerDefaultContainer() *CKContainer {
 	return CKContainerFromID(_ret)
 }
 
-// Creates a container for the specified identifier. - Parameters: - containerIdentifier: The bundle identifier of the app with the container that you want to access. The bundle identifier must be in the app's `com.apple.developer.icloud-container-identifiers` entitlement. This parameter must not be `nil`. The specified identifier must correspond to one of the containers in the iCloud capabilities section of your Xcode project. Including the identifier with your app's capabilities adds the corresponding entitlements to your app. To access your app's default container, use the “CKContainer/default()“ method instead.
+// Creates a container for the specified identifier.
 func CKContainerContainerWithIdentifier(containerIdentifier *foundation.NSString) *CKContainer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCKContainer), _cKContainerSelContainerWithIdentifier, containerIdentifier.Ptr())
 	if _ret != 0 {
@@ -72,7 +74,7 @@ func CKContainerContainerWithIdentifier(containerIdentifier *foundation.NSString
 	return CKContainerFromID(_ret)
 }
 
-// Adds an operation to the container's queue. - Parameters: - operation: The operation to add to the queue. Make sure you fully configure the operation and have it ready to execute. Don't change the operation's configuration after you queue it. This method adds the operation to a queue that the container manages. The queue's operations execute on background threads concurrently, and with default priorities. When you add an operation to the queue, its container becomes the current container.
+// Adds an operation to the container’s queue.
 func (o *CKContainer) AddOperation(operation *CKOperation) {
 	o.Ptr().Send(_cKContainerSelAddOperation, operation.Ptr())
 }
@@ -86,7 +88,7 @@ func (o *CKContainer) ContainerIdentifier() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-// Returns the database with the specified scope. - Parameters: - databaseScope: The database's scope. See “CKDatabase/Scope“ for the available options.
+// Returns the database with the specified scope.
 func (o *CKContainer) DatabaseWithDatabaseScope(databaseScope CKDatabaseScope) *CKDatabase {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKContainerSelDatabaseWithDatabaseScope, databaseScope)
 	if _ret != 0 {
@@ -122,7 +124,7 @@ func (o *CKContainer) SharedCloudDatabase() *CKDatabase {
 	return CKDatabaseFromID(_ret)
 }
 
-// Determines whether the system can access the user's iCloud account. - Parameters: - completionHandler: The handler to execute when the call completes. The closure has no return value and takes the following parameters: - The status of the user's iCloud account. - An error that describes the failure, or `nil` if the system successfully determines the status. This method determines the status of the user's iCloud account asynchronously, passing the results to the closure that you provide. Call this method before accessing the private database to determine whether that database is available. While your app is running, use the <doc://com.apple.documentation/documentation/foundation/nsnotification/name-swift.struct/ckaccountchanged> notification to detect account changes, and call this method again to determine the status of the new account.
+// Determines whether the system can access the user’s iCloud account.
 func (o *CKContainer) AccountStatusWithCompletionHandler(completionHandler func(CKAccountStatus, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -134,7 +136,7 @@ func (o *CKContainer) AccountStatusWithCompletionHandler(completionHandler func(
 	o.Ptr().Send(_cKContainerSelAccountStatusWithCompletionHandler, __block_completionHandler)
 }
 
-// Determines the authorization status of the specified permission. - Parameters: - applicationPermission: The permission to check. For a list of possible values, see “CKContainer/ApplicationPermissions“. - completionHandler: The handler to execute with the outcome. Use this method to determine the extra capabilities that the user grants to your app. If your app doesn't have a specific permission, calling this method yields “CKContainer/ApplicationPermissionStatus/initialState“. In response, call the “CKContainer/requestApplicationPermission:completionHandler:“ method to prompt the user to provide their permission.
+// Determines the authorization status of the specified permission.
 // Deprecated: No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.
 func (o *CKContainer) StatusForApplicationPermissionCompletionHandler(applicationPermission CKApplicationPermissions, completionHandler func(CKApplicationPermissionStatus, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -147,7 +149,7 @@ func (o *CKContainer) StatusForApplicationPermissionCompletionHandler(applicatio
 	o.Ptr().Send(_cKContainerSelStatusForApplicationPermissionCompletionHandler, applicationPermission, __block_completionHandler)
 }
 
-// Prompts the user to authorize the specified permission. - Parameters: - applicationPermission: The permission to request. This permission applies only to the current container. For a list of possible values, see “CKContainer/ApplicationPermissions“. - completionHandler: The handler to execute with the outcome. To implement social features in your app, it's possible to correlate a user record with the user's actual name, but your app must get permission from the user to do so. Making a user record discoverable to the contacts of that user involves calling the “CKContainer/requestApplicationPermission:completionHandler:“ method and asking for the “CKContainer/ApplicationPermissions/userDiscoverability“ permission. When you call that method, CloudKit asks the user whether the user record can become discoverable. If the user grants the request, that user's contacts can discover that user's true identity when running the app. To discover the contacts of the current user, you use the `discoverAllContactUserInfos(completionHandler:)` method or one of several other methods to get the related user information. The first time you request a permission on any of the user's devices, the user receives a prompt to grant or deny the request. After the user grants or denies a permission, subsequent requests for the same permission (on the same or separate devices), don't prompt the user again. This method runs asynchronously, and the system calls your completion handler on an arbitary queue and provides the outcome.
+// Prompts the user to authorize the specified permission.
 // Deprecated: No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.
 func (o *CKContainer) RequestApplicationPermissionCompletionHandler(applicationPermission CKApplicationPermissions, completionHandler func(CKApplicationPermissionStatus, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -160,7 +162,7 @@ func (o *CKContainer) RequestApplicationPermissionCompletionHandler(applicationP
 	o.Ptr().Send(_cKContainerSelRequestApplicationPermissionCompletionHandler, applicationPermission, __block_completionHandler)
 }
 
-// Fetches the user record ID of the current user. - Parameters: - completionHandler: The handler to execute with the fetch results. The closure doesn't return a value and takes the following parameters: - The user record ID, or `nil` if the user disables iCloud or the device doesn't have an iCloud account. - An error if a problem occurs, or `nil` if CloudKit successfully retrieves the user record ID. CloudKit returns a “CKError/Code/notAuthenticated“ error when any of the following conditions are met: - The device has an iCloud account but the user disables iCloud. - The device has an iCloud account with restricted access. - The device doesn't have an iCloud account. - Note: At startup, fetching the user record ID may take longer while CloudKit makes the initial iCloud account request. After the initial fetch, accessing the ID generally takes less time.
+// Fetches the user record ID of the current user.
 func (o *CKContainer) FetchUserRecordIDWithCompletionHandler(completionHandler func(*CKRecordID, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -175,7 +177,7 @@ func (o *CKContainer) FetchUserRecordIDWithCompletionHandler(completionHandler f
 	o.Ptr().Send(_cKContainerSelFetchUserRecordIDWithCompletionHandler, __block_completionHandler)
 }
 
-// Fetches all user identities that match entries in the user's Contacts. - Parameters: - completionHandler: The handler to execute with the fetch results. The closure doesn't return a value and takes the following parameters: - The user identities that match entries in the user's Contacts. - An error if a problem occurs, or `nil` if the system successfully completes the request. This method searches for the users asynchronously and with a low priority. If you want the task to execute with a higher priority, create an instance of “CKDiscoverAllUserIdentitiesOperation“ and configure it to use the necessary priority.
+// Fetches all user identities that match entries in the user’s Contacts.
 // Deprecated: No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.
 func (o *CKContainer) DiscoverAllIdentitiesWithCompletionHandler(completionHandler func(*foundation.NSArray[*CKUserIdentity], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -191,7 +193,7 @@ func (o *CKContainer) DiscoverAllIdentitiesWithCompletionHandler(completionHandl
 	o.Ptr().Send(_cKContainerSelDiscoverAllIdentitiesWithCompletionHandler, __block_completionHandler)
 }
 
-// Fetches the user identity for the specified email address. - Parameters: - email: The user's email address. - completionHandler: The handler to execute with the fetch results. This closure doesn't return a value and takes the following parameters: - The user identity for the email address, or `nil` if CloudKit can't find an identity. - An error if a problem occurs, or `nil` if CloudKit successfully fetches a user identity. Use this method to retrieve the identity of a user who the current user knows. The user you're searching for must meet the following criteria: - The user has run the app. - The user grants the “CKContainer/ApplicationPermissions/userDiscoverability“ permission for the container. This method searches for the user asynchronously and with a low priority. If you want the task to execute the request with a higher priority, create an instance of “CKDiscoverUserIdentitiesOperation“ and configure it to use the necessary priority.
+// Fetches the user identity for the specified email address.
 // Deprecated: No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.
 func (o *CKContainer) DiscoverUserIdentityWithEmailAddressCompletionHandler(email *foundation.NSString, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -204,7 +206,7 @@ func (o *CKContainer) DiscoverUserIdentityWithEmailAddressCompletionHandler(emai
 	o.Ptr().Send(_cKContainerSelDiscoverUserIdentityWithEmailAddressCompletionHandler, email.Ptr(), __block_completionHandler)
 }
 
-// Fetches the user identity for the specified phone number. - Parameters: - phoneNumber: The user's phone number. - completionHandler: The handler to execute with the fetch results. This closure doesn't return a value and takes the following parameters: - The user identity for the phone number, or `nil` if CloudKit can't find an identity. - An error if a problem occurs, or `nil` if CloudKit successfully fetches a user identity. Use this method to retrieve the identity of a user who the current user knows. The user you're searching for must meet the following criteria: - The user has run the app. - The user grants the “CKContainer/ApplicationPermissions/userDiscoverability“ permission for the container. This method searches for the user asynchronously and with a low priority. If you want the task to execute the request with a higher priority, create an instance of “CKDiscoverUserIdentitiesOperation“ and configure it to use the necessary priority.
+// Fetches the user identity for the specified phone number.
 // Deprecated: No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.
 func (o *CKContainer) DiscoverUserIdentityWithPhoneNumberCompletionHandler(phoneNumber *foundation.NSString, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -217,7 +219,7 @@ func (o *CKContainer) DiscoverUserIdentityWithPhoneNumberCompletionHandler(phone
 	o.Ptr().Send(_cKContainerSelDiscoverUserIdentityWithPhoneNumberCompletionHandler, phoneNumber.Ptr(), __block_completionHandler)
 }
 
-// Fetches the user identity for the specified user record ID. - Parameters: - userRecordID: The user record's ID. - completionHandler: The handler to execute with the fetch results. This closure doesn't return a value and takes the following parameters: - The user identity for the user record ID, or `nil` if CloudKit can't find an identity. - An error if a problem occurs, or `nil` if CloudKit successfully fetches a user identity. Use this method to retrieve the identity of a user who you already have a user record ID for. The user you're searching for must meet the following criteria: - The user has run the app. - The user grants the “CKContainer/ApplicationPermissions/userDiscoverability“ permission for the container. This method searches for the user asynchronously and with a low priority. If you want the task to execute the request with a higher priority, create an instance of “CKDiscoverUserIdentitiesOperation“ and configure it to use the necessary priority.
+// Fetches the user identity for the specified user record ID.
 // Deprecated: No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.
 func (o *CKContainer) DiscoverUserIdentityWithUserRecordIDCompletionHandler(userRecordID *CKRecordID, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
@@ -230,7 +232,7 @@ func (o *CKContainer) DiscoverUserIdentityWithUserRecordIDCompletionHandler(user
 	o.Ptr().Send(_cKContainerSelDiscoverUserIdentityWithUserRecordIDCompletionHandler, userRecordID.Ptr(), __block_completionHandler)
 }
 
-// Fetches the share participant with the specified email address. - Parameters: - emailAddress: The share participant's email address. - completionHandler: The handler to execute with the fetch results. The closure doesn't return a value and takes the following parameters: - The share participant, or `nil` if CloudKit can't find the participant. - An error if a problem occurs, or `nil` if CloudKit successfully retrieves the participant. CloudKit can translate any valid email address into a share participant.  If the email address doesn't correspond to a known iCloud account, then at share-accept-time, CloudKit offers the accepting participant a vetting process. The accepting participant uses this vetting process to link the email address to an iCloud account. This method searches for the share participant asynchronously and with a low priority. If you want the task to execute with a higher priority, create an instance of “CKFetchShareParticipantsOperation“ and configure it to use the necessary priority.
+// Fetches the share participant with the specified email address.
 func (o *CKContainer) FetchShareParticipantWithEmailAddressCompletionHandler(emailAddress *foundation.NSString, completionHandler func(*CKShareParticipant, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -245,7 +247,7 @@ func (o *CKContainer) FetchShareParticipantWithEmailAddressCompletionHandler(ema
 	o.Ptr().Send(_cKContainerSelFetchShareParticipantWithEmailAddressCompletionHandler, emailAddress.Ptr(), __block_completionHandler)
 }
 
-// Fetches the share participant with the specified phone number. - Parameters: - phoneNumber: The share participant's phone number. - completionHandler: The handler to execute with the fetch results. The closure doesn't return a value and takes the following parameters: - The share participant, or `nil` if CloudKit can't find the participant. - An error if a problem occurs, or `nil` if CloudKit successfully retrieves the participant. CloudKit can translate any valid phone number into a share participant.  If the phone number doesn't correspond to a known iCloud account, then at share-accept-time, CloudKit offers the accepting participant a vetting process. The accepting participant uses this vetting process to link the phone number to an iCloud account. This method searches for the share participant asynchronously and with a low priority. If you want the task to execute with a higher priority, create an instance of “CKFetchShareParticipantsOperation“ and configure it to use the necessary priority.
+// Fetches the share participant with the specified phone number.
 func (o *CKContainer) FetchShareParticipantWithPhoneNumberCompletionHandler(phoneNumber *foundation.NSString, completionHandler func(*CKShareParticipant, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -260,7 +262,7 @@ func (o *CKContainer) FetchShareParticipantWithPhoneNumberCompletionHandler(phon
 	o.Ptr().Send(_cKContainerSelFetchShareParticipantWithPhoneNumberCompletionHandler, phoneNumber.Ptr(), __block_completionHandler)
 }
 
-// Fetches the share participant with the specified user record ID. - Parameters: - userRecordID: The share participant's user record ID. - completionHandler: The handler to execute with the fetch results. The closure doesn't return a value and takes the following parameters: - The share participant, or `nil` if CloudKit can't find the participant. - An error if a problem occurs, or `nil` if CloudKit successfully retrieves the participant. This method searches for the share participant asynchronously and with a low priority. If you want the task to execute with a higher priority, create an instance of “CKFetchShareParticipantsOperation“ and configure it to use the necessary priority.
+// Fetches the share participant with the specified user record ID.
 func (o *CKContainer) FetchShareParticipantWithUserRecordIDCompletionHandler(userRecordID *CKRecordID, completionHandler func(*CKShareParticipant, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -275,7 +277,7 @@ func (o *CKContainer) FetchShareParticipantWithUserRecordIDCompletionHandler(use
 	o.Ptr().Send(_cKContainerSelFetchShareParticipantWithUserRecordIDCompletionHandler, userRecordID.Ptr(), __block_completionHandler)
 }
 
-// Fetches the share metadata for the specified share URL. - Parameters: - url: The share URL that CloudKit uses to locate the metadata. - completionHandler: The handler to execute with the fetch results. The closure doesn't return a value and takes the following parameters: - The share metadata, or `nil` if CloudKit can't find the metadata. - An error if a problem occurs, or `nil` if CloudKit successfully retrieves the metadata.
+// Fetches the share metadata for the specified share URL.
 func (o *CKContainer) FetchShareMetadataWithURLCompletionHandler(url *foundation.NSURL, completionHandler func(*CKShareMetadata, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -290,7 +292,7 @@ func (o *CKContainer) FetchShareMetadataWithURLCompletionHandler(url *foundation
 	o.Ptr().Send(_cKContainerSelFetchShareMetadataWithURLCompletionHandler, url.Ptr(), __block_completionHandler)
 }
 
-// Accepts the specified share metadata. - Parameters: - metadata: The metadata of the share to accept. - completionHandler: The handler to execute when the process finishes. The closure doesn't return a value and takes the following parameters: - The corresponding share, or `nil` if CloudKit can't accept the metadata. - An error if a problem occurs, or `nil` if CloudKit successfully accepts the metadata.
+// Accepts the specified share metadata.
 func (o *CKContainer) AcceptShareMetadataCompletionHandler(metadata *CKShareMetadata, completionHandler func(*CKShare, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -305,12 +307,22 @@ func (o *CKContainer) AcceptShareMetadataCompletionHandler(metadata *CKShareMeta
 	o.Ptr().Send(_cKContainerSelAcceptShareMetadataCompletionHandler, metadata.Ptr(), __block_completionHandler)
 }
 
-// Fetches the IDs of any long-lived operations that are running. - Parameters: - completionHandler: The block doesn't return a value and takes the following parameters: - term `outstandingOperationsByIDs`: The IDs of all of the long-lived operations that are running. - term `error`: An error if a problem occurs, or `nil` if CloudKit successfully retrieves the IDs. A long-lived operation is one that continues to run after the user closes the app. When a long-lived operation completes, or your app or the system cancels it, it's no longer active and CloudKit doesn't include its ID in `outstandingOperationsByIDs`. An operation is complete when the system calls its completion handler. Use the “CKContainer/fetchLongLivedOperationWithID:completionHandler:“ method to fetch the operation for a specific ID.
-func (o *CKContainer) FetchAllLongLivedOperationIDsWithCompletionHandler(completionHandler objc.Block) {
-	o.Ptr().Send(_cKContainerSelFetchAllLongLivedOperationIDsWithCompletionHandler, completionHandler)
+// Fetches the IDs of any long-lived operations that are running.
+func (o *CKContainer) FetchAllLongLivedOperationIDsWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSString], unsafe.Pointer)) {
+	var __block_completionHandler objc.Block
+	if completionHandler != nil {
+		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			completionHandler(foundation.NSArrayFromID[*foundation.NSString](blockParam0), blockParam1)
+		})
+		defer __block_completionHandler.Release()
+	}
+	o.Ptr().Send(_cKContainerSelFetchAllLongLivedOperationIDsWithCompletionHandler, __block_completionHandler)
 }
 
-// Fetches the long-lived operation for the specified operation ID. - Parameters: - operationID: The operation's ID. - completionHandler: The block doesn't return a value and takes the following parameters: - term `outstandingOperation`: The long-lived operation. If the operation completes, or your app or the system cancels it, this parameter is `nil`. - term `error`: An error if a problem occurs, or `nil` if CloudKit successfully retrieves the operation. A long-lived operation is one that continues to run after the user closes your app. When a long-lived operation completes, the system calls its completion block to notify you.
+// Fetches the long-lived operation for the specified operation ID.
 func (o *CKContainer) FetchLongLivedOperationWithIDCompletionHandler(operationID *foundation.NSString, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

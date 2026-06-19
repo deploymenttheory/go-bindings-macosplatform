@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resolution result for the types of calls that your app handled.
+//
 // CallRecordTypeResolutionResult wraps [raw.INCallRecordTypeResolutionResult] with a fluent Go API.
 type CallRecordTypeResolutionResult struct {
 	inner *raw.INCallRecordTypeResolutionResult

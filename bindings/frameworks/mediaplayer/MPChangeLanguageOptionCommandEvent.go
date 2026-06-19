@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An event requesting a change in the language option.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaplayer/mpchangelanguageoptioncommandevent
 type MPChangeLanguageOptionCommandEvent struct {
 	MPRemoteCommandEvent

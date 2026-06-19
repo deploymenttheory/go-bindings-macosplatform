@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A transition style from one scene to another.
+// An object used to perform an animated transition to a new scene.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/sktransition
 type SKTransition struct {
@@ -51,6 +51,7 @@ func SKTransitionFromID(id objc.ID) *SKTransition {
 	return o
 }
 
+// Creates a cross fade transition.
 func SKTransitionCrossFadeWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelCrossFadeWithDuration, sec)
 	if _ret != 0 {
@@ -59,6 +60,7 @@ func SKTransitionCrossFadeWithDuration(sec float64) *SKTransition {
 	return SKTransitionFromID(_ret)
 }
 
+// Creates a transition that first fades to black and then fades to the new scene.
 func SKTransitionFadeWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelFadeWithDuration, sec)
 	if _ret != 0 {
@@ -67,6 +69,7 @@ func SKTransitionFadeWithDuration(sec float64) *SKTransition {
 	return SKTransitionFromID(_ret)
 }
 
+// Creates a transition that first fades to a constant color and then fades to the new scene.
 func SKTransitionFadeWithColorDuration(color *appkit.NSColor, sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelFadeWithColorDuration, color.Ptr(), sec)
 	if _ret != 0 {
@@ -75,6 +78,7 @@ func SKTransitionFadeWithColorDuration(color *appkit.NSColor, sec float64) *SKTr
 	return SKTransitionFromID(_ret)
 }
 
+// Creates a transition where the two scenes are flipped across a horizontal line running through the center of the view.
 func SKTransitionFlipHorizontalWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelFlipHorizontalWithDuration, sec)
 	if _ret != 0 {
@@ -83,6 +87,7 @@ func SKTransitionFlipHorizontalWithDuration(sec float64) *SKTransition {
 	return SKTransitionFromID(_ret)
 }
 
+// Creates a transition where the two scenes are flipped across a vertical line running through the center of the view.
 func SKTransitionFlipVerticalWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelFlipVerticalWithDuration, sec)
 	if _ret != 0 {
@@ -91,6 +96,7 @@ func SKTransitionFlipVerticalWithDuration(sec float64) *SKTransition {
 	return SKTransitionFromID(_ret)
 }
 
+// Creates a transition where the old scene moves out of the view, revealing the new scene underneath it.
 func SKTransitionRevealWithDirectionDuration(direction SKTransitionDirection, sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelRevealWithDirectionDuration, direction, sec)
 	if _ret != 0 {
@@ -99,6 +105,7 @@ func SKTransitionRevealWithDirectionDuration(direction SKTransitionDirection, se
 	return SKTransitionFromID(_ret)
 }
 
+// Creates a transition where the new scene moves in on top of the old scene.
 func SKTransitionMoveInWithDirectionDuration(direction SKTransitionDirection, sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelMoveInWithDirectionDuration, direction, sec)
 	if _ret != 0 {
@@ -107,6 +114,7 @@ func SKTransitionMoveInWithDirectionDuration(direction SKTransitionDirection, se
 	return SKTransitionFromID(_ret)
 }
 
+// Creates a transition where the new scene moves in, pushing the old scene out of the view.
 func SKTransitionPushWithDirectionDuration(direction SKTransitionDirection, sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelPushWithDirectionDuration, direction, sec)
 	if _ret != 0 {
@@ -115,6 +123,7 @@ func SKTransitionPushWithDirectionDuration(direction SKTransitionDirection, sec 
 	return SKTransitionFromID(_ret)
 }
 
+// Creates a transition where the new scene appears as a pair of opening horizontal doors.
 func SKTransitionDoorsOpenHorizontalWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelDoorsOpenHorizontalWithDuration, sec)
 	if _ret != 0 {
@@ -123,6 +132,7 @@ func SKTransitionDoorsOpenHorizontalWithDuration(sec float64) *SKTransition {
 	return SKTransitionFromID(_ret)
 }
 
+// Creates a transition where the new scene appears as a pair of opening vertical doors.
 func SKTransitionDoorsOpenVerticalWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelDoorsOpenVerticalWithDuration, sec)
 	if _ret != 0 {
@@ -131,6 +141,7 @@ func SKTransitionDoorsOpenVerticalWithDuration(sec float64) *SKTransition {
 	return SKTransitionFromID(_ret)
 }
 
+// Creates a transition where the new scene appears as a pair of closing horizontal doors.
 func SKTransitionDoorsCloseHorizontalWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelDoorsCloseHorizontalWithDuration, sec)
 	if _ret != 0 {
@@ -139,6 +150,7 @@ func SKTransitionDoorsCloseHorizontalWithDuration(sec float64) *SKTransition {
 	return SKTransitionFromID(_ret)
 }
 
+// Creates a transition where the new scene appears as a pair of closing vertical doors.
 func SKTransitionDoorsCloseVerticalWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelDoorsCloseVerticalWithDuration, sec)
 	if _ret != 0 {
@@ -147,6 +159,7 @@ func SKTransitionDoorsCloseVerticalWithDuration(sec float64) *SKTransition {
 	return SKTransitionFromID(_ret)
 }
 
+// Creates a transition where the previous scene disappears as a pair of opening doors.
 func SKTransitionDoorwayWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelDoorwayWithDuration, sec)
 	if _ret != 0 {
@@ -155,6 +168,7 @@ func SKTransitionDoorwayWithDuration(sec float64) *SKTransition {
 	return SKTransitionFromID(_ret)
 }
 
+// Creates a transition that uses a Core Image filter to perform the transition.
 func SKTransitionTransitionWithCIFilterDuration(filter *coreimage.CIFilter, sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelTransitionWithCIFilterDuration, filter.Ptr(), sec)
 	if _ret != 0 {

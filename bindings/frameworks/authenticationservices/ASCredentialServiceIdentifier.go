@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An identifier representing a particular service for which the user needs a credential, like a web site.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/ascredentialserviceidentifier
 type ASCredentialServiceIdentifier struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func ASCredentialServiceIdentifierFromID(id objc.ID) *ASCredentialServiceIdentif
 	return o
 }
 
-// @abstract Initializes an ASCredentialServiceIdentifier object. @param identifier string value for the service identifier. @param type the type that the service identifier string represents.
+// Initializes a credential service identifier instance.
 func (o *ASCredentialServiceIdentifier) InitWithIdentifierType(identifier *foundation.NSString, type_ ASCredentialServiceIdentifierType) *ASCredentialServiceIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSCredentialServiceIdentifierSelInitWithIdentifierType, identifier.Ptr(), type_)
 	if _ret != 0 {
@@ -43,7 +45,7 @@ func (o *ASCredentialServiceIdentifier) InitWithIdentifierType(identifier *found
 	return ASCredentialServiceIdentifierFromID(_ret)
 }
 
-// Initializes an ASCredentialServiceIdentifier object. - Parameters: - identifier: The string value for the service identifier. - type: The type that the service identifier string represents. - displayName: A user visible name that describes the service.
+// Initializes an ASCredentialServiceIdentifier object.
 func (o *ASCredentialServiceIdentifier) InitWithIdentifierTypeDisplayName(identifier *foundation.NSString, type_ ASCredentialServiceIdentifierType, displayName *foundation.NSString) *ASCredentialServiceIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSCredentialServiceIdentifierSelInitWithIdentifierTypeDisplayName, identifier.Ptr(), type_, displayName.Ptr())
 	if _ret != 0 {

@@ -32,7 +32,7 @@ func (e JSRelationCondition) String() string {
 	}
 }
 
-// @enum JSType @abstract     A constant identifying the type of a JSValue. @constant     kJSTypeUndefined  The unique undefined value. @constant     kJSTypeNull       The unique null value. @constant     kJSTypeBoolean    A primitive boolean value, one of true or false. @constant     kJSTypeNumber     A primitive number value. @constant     kJSTypeString     A primitive string value. @constant     kJSTypeObject     An object value (meaning that this JSValueRef is a JSObjectRef). @constant     kJSTypeSymbol     A primitive symbol value. @constant     kJSTypeBigInt     A primitive BigInt value.
+// Constants that identify the type of a JavaScript value.
 type JSType int64
 
 const (
@@ -69,7 +69,7 @@ func (e JSType) String() string {
 	}
 }
 
-// @enum JSTypedArrayType @abstract     A constant identifying the Typed Array type of a JSObjectRef. @constant     kJSTypedArrayTypeInt8Array            Int8Array @constant     kJSTypedArrayTypeInt16Array           Int16Array @constant     kJSTypedArrayTypeInt32Array           Int32Array @constant     kJSTypedArrayTypeUint8Array           Uint8Array @constant     kJSTypedArrayTypeUint8ClampedArray    Uint8ClampedArray @constant     kJSTypedArrayTypeUint16Array          Uint16Array @constant     kJSTypedArrayTypeUint32Array          Uint32Array @constant     kJSTypedArrayTypeFloat32Array         Float32Array @constant     kJSTypedArrayTypeFloat64Array         Float64Array @constant     kJSTypedArrayTypeBigInt64Array        BigInt64Array @constant     kJSTypedArrayTypeBigUint64Array       BigUint64Array @constant     kJSTypedArrayTypeArrayBuffer          ArrayBuffer @constant     kJSTypedArrayTypeNone                 Not a Typed Array
+// The type of a JavaScript typed array object.
 type JSTypedArrayType int64
 
 const (

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines a summary item for an automatic reload or refill payment, such as a store card top-up.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkautomaticreloadpaymentsummaryitem
 type PKAutomaticReloadPaymentSummaryItem struct {
 	PKPaymentSummaryItem

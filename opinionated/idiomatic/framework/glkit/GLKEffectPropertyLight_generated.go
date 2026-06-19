@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// Lighting information for use in GLKit rendering effects.
+//
 // EffectPropertyLight wraps [raw.GLKEffectPropertyLight] with a fluent Go API.
 type EffectPropertyLight struct {
 	inner *raw.GLKEffectPropertyLight
@@ -36,42 +38,56 @@ func NewEffectPropertyLight() *EffectPropertyLight {
 	return &EffectPropertyLight{inner: raw.GLKEffectPropertyLightFromID(_id)}
 }
 
+// A Boolean value that indicates whether calculations should be performed on this light.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *EffectPropertyLight) WithEnabled(enabled uint8) *EffectPropertyLight {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// A value indicating how focused the spotlight is.
+//
 // WithSpotExponent sets the spotExponent property and returns the receiver for chaining.
 func (x *EffectPropertyLight) WithSpotExponent(spotExponent float32) *EffectPropertyLight {
 	x.inner.SetSpotExponent(spotExponent)
 	return x
 }
 
+// The angle in degrees where the spotlight is cut off.
+//
 // WithSpotCutoff sets the spotCutoff property and returns the receiver for chaining.
 func (x *EffectPropertyLight) WithSpotCutoff(spotCutoff float32) *EffectPropertyLight {
 	x.inner.SetSpotCutoff(spotCutoff)
 	return x
 }
 
+// A constant factor applied to the attenuation of a point light or spotlight.
+//
 // WithConstantAttenuation sets the constantAttenuation property and returns the receiver for chaining.
 func (x *EffectPropertyLight) WithConstantAttenuation(constantAttenuation float32) *EffectPropertyLight {
 	x.inner.SetConstantAttenuation(constantAttenuation)
 	return x
 }
 
+// A linear factor applied to the attenuation of a point light or spotlight.
+//
 // WithLinearAttenuation sets the linearAttenuation property and returns the receiver for chaining.
 func (x *EffectPropertyLight) WithLinearAttenuation(linearAttenuation float32) *EffectPropertyLight {
 	x.inner.SetLinearAttenuation(linearAttenuation)
 	return x
 }
 
+// A quadratic factor applied to the attenuation of a point light or spotlight.
+//
 // WithQuadraticAttenuation sets the quadraticAttenuation property and returns the receiver for chaining.
 func (x *EffectPropertyLight) WithQuadraticAttenuation(quadraticAttenuation float32) *EffectPropertyLight {
 	x.inner.SetQuadraticAttenuation(quadraticAttenuation)
 	return x
 }
 
+// A transform applied to the light’s position and direction before calculating the contribution of the light.
+//
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *EffectPropertyLight) WithTransform(transform *EffectPropertyTransform) *EffectPropertyLight {
 	x.inner.SetTransform(transform.Unwrap())

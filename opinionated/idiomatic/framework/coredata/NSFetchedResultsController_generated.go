@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A controller that you use to manage the results of a Core Data fetch request and to display data to the user.
+//
 // FetchedResultsController wraps [raw.NSFetchedResultsController] with a fluent Go API.
 type FetchedResultsController struct {
 	inner *raw.NSFetchedResultsController[objc.ID]
@@ -31,6 +33,8 @@ func FetchedResultsControllerFromID(id objc.ID) *FetchedResultsController {
 	return &FetchedResultsController{inner: raw.NSFetchedResultsControllerFromID[objc.ID](id)}
 }
 
+// Returns a fetch request controller initialized using the given arguments.
+//
 // NewFetchedResultsControllerWithFetchRequestManagedObjectContextSectionNameKeyPathCacheName creates a new [FetchedResultsController].
 func NewFetchedResultsControllerWithFetchRequestManagedObjectContextSectionNameKeyPathCacheName(fetchRequest *raw.NSFetchRequest[objc.ID], context_ *raw.NSManagedObjectContext, sectionNameKeyPath string, name string) *FetchedResultsController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFetchedResultsController")), objc.RegisterName("alloc"))
@@ -38,28 +42,38 @@ func NewFetchedResultsControllerWithFetchRequestManagedObjectContextSectionNameK
 	return &FetchedResultsController{inner: raw.NSFetchedResultsControllerFromID[objc.ID](_id)}
 }
 
+// The object that is notified when the fetched results changed.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *FetchedResultsController) WithDelegate(delegate raw.NSFetchedResultsControllerDelegate) *FetchedResultsController {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Executes the controller’s fetch request.
+//
 // PerformFetch returns any validation error.
 func (x *FetchedResultsController) PerformFetch() error {
 	_, err := x.inner.PerformFetch()
 	return err
 }
 
+// Returns the object at the given index path in the fetch results.
+//
 // ObjectAtIndexPath calls the underlying ObjectAtIndexPath.
 func (x *FetchedResultsController) ObjectAtIndexPath(indexPath *foundation.NSIndexPath) objc.ID {
 	return x.inner.ObjectAtIndexPath(indexPath)
 }
 
+// Returns the index path of a given object.
+//
 // IndexPathForObject calls the underlying IndexPathForObject.
 func (x *FetchedResultsController) IndexPathForObject(object objc.ID) *foundation.NSIndexPath {
 	return x.inner.IndexPathForObject(object)
 }
 
+// Returns the corresponding section index entry for a given section name.
+//
 // SectionIndexTitleForSectionName calls the underlying SectionIndexTitleForSectionName.
 func (x *FetchedResultsController) SectionIndexTitleForSectionName(sectionName string) string {
 	_r := x.inner.SectionIndexTitleForSectionName(foundation.NSStringStringWithUTF8String(sectionName))
@@ -69,6 +83,8 @@ func (x *FetchedResultsController) SectionIndexTitleForSectionName(sectionName s
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the section number for a given section title and index in the section index.
+//
 // SectionForSectionIndexTitleAtIndex calls the underlying SectionForSectionIndexTitleAtIndex.
 func (x *FetchedResultsController) SectionForSectionIndexTitleAtIndex(title string, sectionIndex int) int {
 	return x.inner.SectionForSectionIndexTitleAtIndex(foundation.NSStringStringWithUTF8String(title), sectionIndex)

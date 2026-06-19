@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing a custom metric.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxsignpostmetric
 type MXSignpostMetric struct {
 	MXMetric

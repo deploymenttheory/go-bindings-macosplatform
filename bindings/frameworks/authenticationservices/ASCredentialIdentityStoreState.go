@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of the state of a credential identity store.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystorestate
 type ASCredentialIdentityStoreState struct {
 	foundation.NSObject

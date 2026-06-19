@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A physics behavior that modifies a physics body to behave like a car, motorcycle, or other wheeled vehicle.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnphysicsvehicle
 type SCNPhysicsVehicle struct {
 	SCNPhysicsBehavior
@@ -36,6 +38,7 @@ func SCNPhysicsVehicleFromID(id objc.ID) *SCNPhysicsVehicle {
 	return o
 }
 
+// Creates a vehicle behavior.
 func SCNPhysicsVehicleVehicleWithChassisBodyWheels(chassisBody *SCNPhysicsBody, wheels *foundation.NSArray[*SCNPhysicsVehicleWheel]) *SCNPhysicsVehicle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsVehicle), _sCNPhysicsVehicleSelVehicleWithChassisBodyWheels, chassisBody.Ptr(), wheels.Ptr())
 	if _ret != 0 {
@@ -44,14 +47,17 @@ func SCNPhysicsVehicleVehicleWithChassisBodyWheels(chassisBody *SCNPhysicsBody, 
 	return SCNPhysicsVehicleFromID(_ret)
 }
 
+// Applies a force between the specified wheel and the ground under the vehicle.
 func (o *SCNPhysicsVehicle) ApplyEngineForceForWheelAtIndex(value float64, index int) {
 	o.Ptr().Send(_sCNPhysicsVehicleSelApplyEngineForceForWheelAtIndex, value, index)
 }
 
+// Pivots the specified wheel around its steering axis.
 func (o *SCNPhysicsVehicle) SetSteeringAngleForWheelAtIndex(value float64, index int) {
 	o.Ptr().Send(_sCNPhysicsVehicleSelSetSteeringAngleForWheelAtIndex, value, index)
 }
 
+// Applies a force between the specified wheel and the ground under the vehicle.
 func (o *SCNPhysicsVehicle) ApplyBrakingForceForWheelAtIndex(value float64, index int) {
 	o.Ptr().Send(_sCNPhysicsVehicleSelApplyBrakingForceForWheelAtIndex, value, index)
 }

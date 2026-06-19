@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract   A MPSNNFilterNode representing a MPSCNNBinaryFullyConnected kernel
+// A representation of a fully connected convolution layer with binary weights and optionally binarized input image.
 //
 // CNNBinaryFullyConnectedNode wraps [raw.MPSCNNBinaryFullyConnectedNode] with a fluent Go API.
 type CNNBinaryFullyConnectedNode struct {

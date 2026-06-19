@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object wrapper, or container, for an Interface Builder nib file.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsnib
 type NSNib struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func NSNibFromID(id objc.ID) *NSNib {
 	return o
 }
 
+// Returns an NSNib object initialized to the nib file in the specified bundle.
 func (o *NSNib) InitWithNibNamedBundle(nibName *foundation.NSString, bundle *foundation.NSBundle) *NSNib {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNibSelInitWithNibNamedBundle, nibName.Ptr(), bundle.Ptr())
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func (o *NSNib) InitWithNibNamedBundle(nibName *foundation.NSString, bundle *fou
 	return NSNibFromID(_ret)
 }
 
+// Initializes an instance with nib data and specified bundle for locating resources.
 func (o *NSNib) InitWithNibDataBundle(nibData *foundation.NSData, bundle *foundation.NSBundle) *NSNib {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNibSelInitWithNibDataBundle, nibData.Ptr(), bundle.Ptr())
 	if _ret != 0 {
@@ -51,25 +55,29 @@ func (o *NSNib) InitWithNibDataBundle(nibData *foundation.NSData, bundle *founda
 	return NSNibFromID(_ret)
 }
 
+// Instantiates objects in the nib file with the specified owner.
 func (o *NSNib) InstantiateWithOwnerTopLevelObjects(owner objc.ID, topLevelObjects *foundation.NSArray[objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSNibSelInstantiateWithOwnerTopLevelObjects, owner, topLevelObjects)
+	_ret := objc.Send[bool](o.Ptr(), _nSNibSelInstantiateWithOwnerTopLevelObjects, owner, topLevelObjects.Ptr())
 	return _ret
 }
 
+// Returns an NSNib object initialized to the nib file at the specified URL.
 // Deprecated: since macOS 10.8.
 func (o *NSNib) InitWithContentsOfURL(nibFileURL *foundation.NSURL) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNibSelInitWithContentsOfURL, nibFileURL.Ptr())
 	return _ret
 }
 
+// Unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and top level objects.
 // Deprecated: since macOS 10.8.
 func (o *NSNib) InstantiateNibWithExternalNameTable(externalNameTable *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSNibSelInstantiateNibWithExternalNameTable, externalNameTable)
+	_ret := objc.Send[bool](o.Ptr(), _nSNibSelInstantiateNibWithExternalNameTable, externalNameTable.Ptr())
 	return _ret
 }
 
+// Unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and set of top level objects.
 // Deprecated: since macOS 10.8.
 func (o *NSNib) InstantiateNibWithOwnerTopLevelObjects(owner objc.ID, topLevelObjects *foundation.NSArray[objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSNibSelInstantiateNibWithOwnerTopLevelObjects, owner, topLevelObjects)
+	_ret := objc.Send[bool](o.Ptr(), _nSNibSelInstantiateNibWithOwnerTopLevelObjects, owner, topLevelObjects.Ptr())
 	return _ret
 }

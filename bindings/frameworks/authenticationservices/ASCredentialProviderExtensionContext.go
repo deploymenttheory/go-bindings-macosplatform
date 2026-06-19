@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mechanism that credential provider extensions use to communicate with the system.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/ascredentialproviderextensioncontext
 type ASCredentialProviderExtensionContext struct {
 	foundation.NSExtensionContext
@@ -34,7 +36,7 @@ func ASCredentialProviderExtensionContextFromID(id objc.ID) *ASCredentialProvide
 	return o
 }
 
-// @abstract Complete the request by providing the user selected credential. @param credential the credential that the user has selected. @param completionHandler optionally contains any work which the extension may need to perform after the request has been completed, as a background-priority task. The `expired` parameter will be YES if the system decides to prematurely terminate a previous non-expiration invocation of the completionHandler. @discussion Calling this method will eventually dismiss the associated view controller.
+// Provides the user-selected credential.
 func (o *ASCredentialProviderExtensionContext) CompleteRequestWithSelectedCredentialCompletionHandler(credential *ASPasswordCredential, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -46,7 +48,7 @@ func (o *ASCredentialProviderExtensionContext) CompleteRequestWithSelectedCreden
 	o.Ptr().Send(_aSCredentialProviderExtensionContextSelCompleteRequestWithSelectedCredentialCompletionHandler, credential.Ptr(), __block_completionHandler)
 }
 
-// @abstract Complete the assertion request by providing the user selected passkey credential. @param credential the credential that the user has selected. Includes assertion response. @param completionHandler optionally contains any work which the extension may need to perform after the request has been completed, as a background-priority task. The `expired` parameter will be YES if the system decides to prematurely terminate a previous non-expiration invocation of the completionHandler. @discussion Calling this method will eventually dismiss the associated view controller.
+// Complete the passkey assertion request by providing the user-selected passkey credential.
 func (o *ASCredentialProviderExtensionContext) CompleteAssertionRequestWithSelectedPasskeyCredentialCompletionHandler(credential *ASPasskeyAssertionCredential, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -58,7 +60,7 @@ func (o *ASCredentialProviderExtensionContext) CompleteAssertionRequestWithSelec
 	o.Ptr().Send(_aSCredentialProviderExtensionContextSelCompleteAssertionRequestWithSelectedPasskeyCredentialCompletionHandler, credential.Ptr(), __block_completionHandler)
 }
 
-// @abstract Complete the registration request by providing the newly created passkey credential. @param credential the credential that was created in response to the registration request. @param completionHandler optionally contains any work which the extension may need to perform after the request has been completed, as a background-priority task. The `expired` parameter will be YES if the system decides to prematurely terminate a previous non-expiration invocation of the completionHandler. @discussion Calling this method will eventually dismiss the associated view controller.
+// Complete the registration request by providing the newly-created passkey credential.
 func (o *ASCredentialProviderExtensionContext) CompleteRegistrationRequestWithSelectedPasskeyCredentialCompletionHandler(credential *ASPasskeyRegistrationCredential, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -70,7 +72,7 @@ func (o *ASCredentialProviderExtensionContext) CompleteRegistrationRequestWithSe
 	o.Ptr().Send(_aSCredentialProviderExtensionContextSelCompleteRegistrationRequestWithSelectedPasskeyCredentialCompletionHandler, credential.Ptr(), __block_completionHandler)
 }
 
-// @abstract Complete the request by providing the user selected one time code credential. @param credential the credential that the user has selected. @param completionHandler optionally contains any work which the extension may need to perform after the request has been completed, as a background-priority task. The `expired` parameter will be YES if the system decides to prematurely terminate a previous non-expiration invocation of the completionHandler. @discussion Calling this method will eventually dismiss the associated view controller.
+// Provides the user-selected one-time passcode (OTP).
 func (o *ASCredentialProviderExtensionContext) CompleteOneTimeCodeRequestWithSelectedCredentialCompletionHandler(credential *ASOneTimeCodeCredential, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -82,7 +84,7 @@ func (o *ASCredentialProviderExtensionContext) CompleteOneTimeCodeRequestWithSel
 	o.Ptr().Send(_aSCredentialProviderExtensionContextSelCompleteOneTimeCodeRequestWithSelectedCredentialCompletionHandler, credential.Ptr(), __block_completionHandler)
 }
 
-// @abstract Complete the request to configure the extension. @discussion Calling this method will eventually dismiss the associated view controller.
+// Completes the request to configure the extension.
 func (o *ASCredentialProviderExtensionContext) CompleteExtensionConfigurationRequest() {
 	o.Ptr().Send(_aSCredentialProviderExtensionContextSelCompleteExtensionConfigurationRequest)
 }

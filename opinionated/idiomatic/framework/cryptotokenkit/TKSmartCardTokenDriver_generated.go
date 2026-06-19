@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The driver that acts as an entry point for smart card app extensions.
+//
 // SmartCardTokenDriver wraps [raw.TKSmartCardTokenDriver] with a fluent Go API.
 type SmartCardTokenDriver struct {
 	inner *raw.TKSmartCardTokenDriver
@@ -35,6 +37,8 @@ func NewSmartCardTokenDriver() *SmartCardTokenDriver {
 	return &SmartCardTokenDriver{inner: raw.TKSmartCardTokenDriverFromID(_id)}
 }
 
+// The token driver delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SmartCardTokenDriver) WithDelegate(delegate raw.TKTokenDriverDelegate) *SmartCardTokenDriver {
 	x.inner.TKTokenDriver.SetDelegate(delegate)

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster ICD Management Allows servers to ensure that listed clients are notified when a server is available for communication.
+//
 // MTRClusterICDManagement wraps [raw.MTRClusterICDManagement] with a fluent Go API.
 type MTRClusterICDManagement struct {
 	inner *raw.MTRClusterICDManagement

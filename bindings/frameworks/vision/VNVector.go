@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An immutable 2D vector represented by its x-axis and y-axis projections.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnvector
 type VNVector struct {
 	foundation.NSObject
@@ -44,7 +46,7 @@ func VNVectorFromID(id objc.ID) *VNVector {
 	return o
 }
 
-// @brief Returns a vector that is normalized by preserving direction, such as |v|, or vector length = 1.0.
+// Calculates a vector that’s normalized by preserving its direction, so that the vector length equals 1.0.
 func VNVectorUnitVectorForVector(vector *VNVector) *VNVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNVector), _vNVectorSelUnitVectorForVector, vector.Ptr())
 	if _ret != 0 {
@@ -53,7 +55,7 @@ func VNVectorUnitVectorForVector(vector *VNVector) *VNVector {
 	return VNVectorFromID(_ret)
 }
 
-// @brief Returns a vector that whose X and Y projections multiplied by a scalar value.
+// Creates a new vector by multiplying the specified vector’s x-axis and y-axis projections by the scalar value.
 func VNVectorVectorByMultiplyingVectorByScalar(vector *VNVector, scalar float64) *VNVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNVector), _vNVectorSelVectorByMultiplyingVectorByScalar, vector.Ptr(), scalar)
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func VNVectorVectorByMultiplyingVectorByScalar(vector *VNVector, scalar float64)
 	return VNVectorFromID(_ret)
 }
 
-// @brief Adds two vectors v1 and v2 and returns a resulting vector v, such as v = v1 + v2.
+// Creates a new vector by adding the specified vectors.
 func VNVectorVectorByAddingVectorToVector(v1 *VNVector, v2 *VNVector) *VNVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNVector), _vNVectorSelVectorByAddingVectorToVector, v1.Ptr(), v2.Ptr())
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func VNVectorVectorByAddingVectorToVector(v1 *VNVector, v2 *VNVector) *VNVector 
 	return VNVectorFromID(_ret)
 }
 
-// @brief Substructs vector v1 from v2 and returns a resulting vector v, such as v = v2 - v1.
+// Creates a new vector by subtracting the first vector from the second vector.
 func VNVectorVectorBySubtractingVectorFromVector(v1 *VNVector, v2 *VNVector) *VNVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNVector), _vNVectorSelVectorBySubtractingVectorFromVector, v1.Ptr(), v2.Ptr())
 	if _ret != 0 {
@@ -80,13 +82,13 @@ func VNVectorVectorBySubtractingVectorFromVector(v1 *VNVector, v2 *VNVector) *VN
 	return VNVectorFromID(_ret)
 }
 
-// @brief Caclulates a dot product (aka 'scalar product' or 'inner product') of two vectors v1 and v2 and returns dot product value.
+// Caclulates the dot product of two vectors.
 func VNVectorDotProductOfVectorVector(v1 *VNVector, v2 *VNVector) float64 {
 	_ret := objc.Send[float64](objc.ID(_clsVNVector), _vNVectorSelDotProductOfVectorVector, v1.Ptr(), v2.Ptr())
 	return _ret
 }
 
-// @brief Initializes a vector in Cartesian Coordinate space, using its X and Y axis projections.
+// Creates a new vector in Cartesian coordinate space, based on its x-axis and y-axis projections.
 func (o *VNVector) InitWithXComponentYComponent(x float64, y float64) *VNVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNVectorSelInitWithXComponentYComponent, x, y)
 	if _ret != 0 {
@@ -95,7 +97,7 @@ func (o *VNVector) InitWithXComponentYComponent(x float64, y float64) *VNVector 
 	return VNVectorFromID(_ret)
 }
 
-// @brief Initializes a vector in polar coordinate space, using R and Theta (radians), where R is the length of the vector and Theta is the ange that the vector forms with the positive direction of X axis.
+// Creates a new vector in polar coordinate space.
 func (o *VNVector) InitWithRTheta(r float64, theta float64) *VNVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNVectorSelInitWithRTheta, r, theta)
 	if _ret != 0 {
@@ -104,7 +106,7 @@ func (o *VNVector) InitWithRTheta(r float64, theta float64) *VNVector {
 	return VNVectorFromID(_ret)
 }
 
-// @brief Initializes a vector in Cartesian Coordinate space, using two VNPoints - the head and the tail of the vector.
+// Creates a new vector in Cartesian coordinate space.
 func (o *VNVector) InitWithVectorHeadTail(head *VNPoint, tail *VNPoint) *VNVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNVectorSelInitWithVectorHeadTail, head.Ptr(), tail.Ptr())
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that indicates the data stored in a series sample.
+//
 // SeriesType wraps [raw.HKSeriesType] with a fluent Go API.
 type SeriesType struct {
 	inner *raw.HKSeriesType

@@ -12,7 +12,7 @@ import (
 	"unsafe"
 )
 
-// A Camera node is a full fledged SKNode that can have actions and physics applied to it. It also uses the standard SKNode transform system so modifying the camera node's position is how you translate the camera's viewport. Applying a scale to the node would zoom the viewport in or out etc. As an added benefit you can now rotate the viewport by applying a zRotation to the camera node, just as you would with any other SKNode. The camera viewport is centered on the camera's position. It uses the scene's frame and scale mode along with the node transforms to determine the size, origin and rotation of the viewport. There are some convenience functions included for testing if nodes are contained within the camera viewport. It can be used to determine if objects are no longer visible on the display. In order to use a camera; set it on the scene that contains the camera. @see SKScene.camera
+// A node that determines which parts of the scene are visible within a view.
 //
 // CameraNode wraps [raw.SKCameraNode] with a fluent Go API.
 type CameraNode struct {
@@ -40,7 +40,7 @@ func NewCameraNode() *CameraNode {
 	return &CameraNode{inner: raw.SKCameraNodeFromID(_id)}
 }
 
-// The position of the node in the parent's coordinate system
+// The position of the node in its parent’s coordinate system.
 //
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *CameraNode) WithPosition(position corefoundation.CGPoint) *CameraNode {
@@ -48,7 +48,7 @@ func (x *CameraNode) WithPosition(position corefoundation.CGPoint) *CameraNode {
 	return x
 }
 
-// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+// The height of the node relative to its parent.
 //
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *CameraNode) WithZPosition(zPosition float64) *CameraNode {
@@ -56,7 +56,7 @@ func (x *CameraNode) WithZPosition(zPosition float64) *CameraNode {
 	return x
 }
 
-// The Euler rotation about the z axis (in radians)
+// The Euler rotation about the z axis (in radians).
 //
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *CameraNode) WithZRotation(zRotation float64) *CameraNode {
@@ -64,7 +64,7 @@ func (x *CameraNode) WithZRotation(zRotation float64) *CameraNode {
 	return x
 }
 
-// The scaling in the X axis
+// A scaling factor that multiplies the width of a node and its children.
 //
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *CameraNode) WithXScale(xScale float64) *CameraNode {
@@ -72,7 +72,7 @@ func (x *CameraNode) WithXScale(xScale float64) *CameraNode {
 	return x
 }
 
-// The scaling in the Y axis
+// A scaling factor that multiplies the height of a node and its children.
 //
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *CameraNode) WithYScale(yScale float64) *CameraNode {
@@ -80,7 +80,7 @@ func (x *CameraNode) WithYScale(yScale float64) *CameraNode {
 	return x
 }
 
-// The speed multiplier applied to all actions run on this node. Inherited by its children.
+// A speed modifier applied to all actions executed by a node and its descendants.
 //
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *CameraNode) WithSpeed(speed float64) *CameraNode {
@@ -88,7 +88,7 @@ func (x *CameraNode) WithSpeed(speed float64) *CameraNode {
 	return x
 }
 
-// Alpha of this node (multiplied by the output color to give the final result)
+// The transparency value applied to the node’s contents.
 //
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *CameraNode) WithAlpha(alpha float64) *CameraNode {
@@ -96,7 +96,7 @@ func (x *CameraNode) WithAlpha(alpha float64) *CameraNode {
 	return x
 }
 
-// Controls whether or not the node's actions is updated or paused.
+// A Boolean value that determines whether actions on the node and its descendants are processed.
 //
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *CameraNode) WithPaused(paused bool) *CameraNode {
@@ -104,7 +104,7 @@ func (x *CameraNode) WithPaused(paused bool) *CameraNode {
 	return x
 }
 
-// Controls whether or not the node and its children are rendered.
+// A Boolean value that determines whether a node and its descendants are rendered.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *CameraNode) WithHidden(hidden bool) *CameraNode {
@@ -112,7 +112,7 @@ func (x *CameraNode) WithHidden(hidden bool) *CameraNode {
 	return x
 }
 
-// Controls whether or not the node receives touch events
+// A Boolean value that indicates whether the node receives touch events.
 //
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *CameraNode) WithUserInteractionEnabled(userInteractionEnabled bool) *CameraNode {
@@ -120,7 +120,7 @@ func (x *CameraNode) WithUserInteractionEnabled(userInteractionEnabled bool) *Ca
 	return x
 }
 
-// The client assignable name. In general, this should be unique among peers in the scene graph.
+// The node’s assignable name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *CameraNode) WithName(name string) *CameraNode {
@@ -128,7 +128,7 @@ func (x *CameraNode) WithName(name string) *CameraNode {
 	return x
 }
 
-// Physics body attached to the node, with synchronized scale, rotation, and position
+// The physics body associated with the node.
 //
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *CameraNode) WithPhysicsBody(physicsBody *PhysicsBody) *CameraNode {
@@ -136,7 +136,7 @@ func (x *CameraNode) WithPhysicsBody(physicsBody *PhysicsBody) *CameraNode {
 	return x
 }
 
-// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+// A dictionary containing arbitrary data.
 //
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *CameraNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *CameraNode {
@@ -144,7 +144,7 @@ func (x *CameraNode) WithUserData(userData *foundation.NSMutableDictionary[objc.
 	return x
 }
 
-// Kinematic constraints, used in IK solving
+// The reach constraints to apply to the node when executing a reach action.
 //
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *CameraNode) WithReachConstraints(reachConstraints *ReachConstraints) *CameraNode {
@@ -152,7 +152,7 @@ func (x *CameraNode) WithReachConstraints(reachConstraints *ReachConstraints) *C
 	return x
 }
 
-// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+// A list of constraints to apply to the node.
 //
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *CameraNode) WithConstraints(items ...*raw.SKConstraint) *CameraNode {
@@ -175,7 +175,7 @@ func (x *CameraNode) WithConstraints(items ...*raw.SKConstraint) *CameraNode {
 	return x
 }
 
-// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+// The values of each attribute associated with the node’s attached shader.
 //
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *CameraNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *CameraNode {
@@ -183,68 +183,86 @@ func (x *CameraNode) WithAttributeValues(attributeValues *foundation.NSDictionar
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+//
 // WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
 func (x *CameraNode) WithAccessibilityElement(accessibilityElement bool) *CameraNode {
 	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
 	return x
 }
 
+// A string value describing the user interface element type; for example, a button.
+//
 // WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
 func (x *CameraNode) WithAccessibilityRole(accessibilityRole string) *CameraNode {
 	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
 	return x
 }
 
+// A string value describing the user interface element name and type; for example, the Buy button.
+//
 // WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
 func (x *CameraNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *CameraNode {
 	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
 	return x
 }
 
+// A string that defines this user interface element’s subrole; for example, a full-screen button.
+//
 // WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
 func (x *CameraNode) WithAccessibilitySubrole(accessibilitySubrole string) *CameraNode {
 	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
 	return x
 }
 
+// The size of this user interface element, in screen points.
+//
 // WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
 func (x *CameraNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *CameraNode {
 	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
 	return x
 }
 
+// The user interface element that contains this element.
+//
 // WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
 func (x *CameraNode) WithAccessibilityParent(accessibilityParent objc.ID) *CameraNode {
 	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
 	return x
 }
 
+// The help description of this user interface element; for example, the text shown in a tooltip.
+//
 // WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
 func (x *CameraNode) WithAccessibilityHelp(accessibilityHelp string) *CameraNode {
 	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
 	return x
 }
 
+// A short description of this user interface element.
+//
 // WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
 func (x *CameraNode) WithAccessibilityLabel(accessibilityLabel string) *CameraNode {
 	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
 	return x
 }
 
+// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
+//
 // WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
 func (x *CameraNode) WithAccessibilityEnabled(accessibilityEnabled bool) *CameraNode {
 	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
 	return x
 }
 
-// Checks if the node is contained inside the viewport of the camera. The camera and node must both be in the same scene and presented on a view in order to determine if the node is inside the camera viewport rectangle. @return YES if the node is inside the viewport. NO if node is nil or the node is outside the viewport.
+// Checks to see if a node is visible in the camera’s viewport.
 //
 // ContainsNode calls the underlying ContainsNode.
 func (x *CameraNode) ContainsNode(node *raw.SKNode) bool {
 	return x.inner.ContainsNode(node)
 }
 
-// Returns the set of nodes in the same scene as the camera that are contained within its viewport. @return the set of nodes contained
+// Finds nodes that are visible in the camera’s viewport.
 //
 // ContainedNodeSet calls the underlying ContainedNodeSet.
 func (x *CameraNode) ContainedNodeSet() *foundation.NSSet[*raw.SKNode] {

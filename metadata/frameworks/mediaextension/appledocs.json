@@ -1,0 +1,429 @@
+{
+  "schema_version": 1,
+  "framework": "MediaExtension",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "MEByteSource": {
+      "doc": "Provides read access to the data in a media asset file.",
+      "url": "https://developer.apple.com/documentation/mediaextension/mebytesource"
+    },
+    "MEDecodeFrameOptions": {
+      "doc": "An object that guides the video decoder operation on a per-frame basis.",
+      "url": "https://developer.apple.com/documentation/mediaextension/medecodeframeoptions"
+    },
+    "MEEstimatedSampleLocation": {
+      "doc": "An object that provides information about the estimated sample location with the media.",
+      "url": "https://developer.apple.com/documentation/mediaextension/meestimatedsamplelocation"
+    },
+    "MEFileInfo": {
+      "doc": "An object that contains file properties from the media asset.",
+      "url": "https://developer.apple.com/documentation/mediaextension/mefileinfo"
+    },
+    "MEFormatReaderInstantiationOptions": {
+      "doc": "An object that contains options to pass to a format reader extension.",
+      "url": "https://developer.apple.com/documentation/mediaextension/meformatreaderinstantiationoptions"
+    },
+    "MEHEVCDependencyInfo": {
+      "doc": "An object that provides information about the HEVC dependency attributes of a sample.",
+      "url": "https://developer.apple.com/documentation/mediaextension/mehevcdependencyinfo"
+    },
+    "MERAWProcessingParameter": {
+      "doc": "An object for the RAW processor to describe each processing parameter the processor exposes.",
+      "url": "https://developer.apple.com/documentation/mediaextension/merawprocessingparameter"
+    },
+    "MERAWProcessorPixelBufferManager": {
+      "doc": "Describes pixel buffer requirements and creates new pixel buffers.",
+      "url": "https://developer.apple.com/documentation/mediaextension/merawprocessorpixelbuffermanager"
+    },
+    "MESampleCursorChunk": {
+      "doc": "An object that provides information about the chunk of media at the location of a sample.",
+      "url": "https://developer.apple.com/documentation/mediaextension/mesamplecursorchunk"
+    },
+    "MESampleLocation": {
+      "doc": "An object that provides information about the sample location with the media.",
+      "url": "https://developer.apple.com/documentation/mediaextension/mesamplelocation"
+    },
+    "METrackInfo": {
+      "doc": "An object that includes track properties parsed from the media asset.",
+      "url": "https://developer.apple.com/documentation/mediaextension/metrackinfo"
+    },
+    "MEVideoDecoderPixelBufferManager": {
+      "doc": "Describes pixel buffer requirements and creates new pixel buffers.",
+      "url": "https://developer.apple.com/documentation/mediaextension/mevideodecoderpixelbuffermanager"
+    }
+  },
+  "protocols": {
+    "MEFormatReader": {
+      "doc": "A protocol that defines the requirements for a format reader, which represents a single media asset.",
+      "url": "https://developer.apple.com/documentation/mediaextension/meformatreader"
+    },
+    "MEFormatReaderExtension": {
+      "doc": "A protocol that defines a factory to create a new format reader with a byte source.",
+      "url": "https://developer.apple.com/documentation/mediaextension/meformatreaderextension"
+    },
+    "MERAWProcessor": {
+      "doc": "A protocol that defines the requirements for a RAW processor.",
+      "url": "https://developer.apple.com/documentation/mediaextension/merawprocessor"
+    },
+    "MERAWProcessorExtension": {
+      "doc": "A protocol that defines a factory to create RAW processors for a codec type that the extension implements.",
+      "url": "https://developer.apple.com/documentation/mediaextension/merawprocessorextension"
+    },
+    "MESampleCursor": {
+      "doc": "A protocol that defines the information to provide about samples within a track of a media asset, and enables stepping through samples in the track in decode or presentation order.",
+      "url": "https://developer.apple.com/documentation/mediaextension/mesamplecursor"
+    },
+    "METrackReader": {
+      "doc": "A protocol that defines the information to provide about a track within a media asset.",
+      "url": "https://developer.apple.com/documentation/mediaextension/metrackreader"
+    },
+    "MEVideoDecoder": {
+      "doc": "A protocol that defines the requirements for a video decoder.",
+      "url": "https://developer.apple.com/documentation/mediaextension/mevideodecoder"
+    },
+    "MEVideoDecoderExtension": {
+      "doc": "A protocol that defines a factory to create new video decoders for a codec type that the extension implements.",
+      "url": "https://developer.apple.com/documentation/mediaextension/mevideodecoderextension"
+    }
+  },
+  "enums": {
+    "MEDecodeFrameStatus": {
+      "doc": "A type that represents a non-error status related to a frame decode operation.",
+      "url": "https://developer.apple.com/documentation/mediaextension/medecodeframestatus",
+      "members": {
+        "MEDecodeFrameFrameDropped": {
+          "doc": "A frame decode operation status that indicates the system dropped the output of the frame for a reason other than an error.",
+          "url": "https://developer.apple.com/documentation/mediaextension/medecodeframestatus/framedropped"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new frame decode operation status with the raw value that you specify.",
+          "url": "https://developer.apple.com/documentation/mediaextension/medecodeframestatus/init(rawvalue:)"
+        }
+      }
+    },
+    "MEError": {
+      "doc": "A MediaExtension framework error.",
+      "url": "https://developer.apple.com/documentation/mediaextension/meerror"
+    },
+    "MEFileInfoFragmentsStatus": {
+      "doc": "An enumeration that describes if a media asset contains or supports fragments.",
+      "url": "https://developer.apple.com/documentation/mediaextension/mefileinfofragmentsstatus"
+    },
+    "MEFormatReaderParseAdditionalFragmentsStatus": {
+      "doc": "Informational status flags that the format reader returns after parsing additional fragments.",
+      "url": "https://developer.apple.com/documentation/mediaextension/meformatreaderparseadditionalfragmentsstatus",
+      "members": {
+        "MEFormatReaderParseAdditionalFragmentsStatusFragmentAdded": {
+          "doc": "Indicates that the format reader received one or more fragments.",
+          "url": "https://developer.apple.com/documentation/mediaextension/meformatreaderparseadditionalfragmentsstatus/fragmentadded"
+        },
+        "MEFormatReaderParseAdditionalFragmentsStatusFragmentsComplete": {
+          "doc": "Indicates that the format reader can’t receive any more fragments.",
+          "url": "https://developer.apple.com/documentation/mediaextension/meformatreaderparseadditionalfragmentsstatus/fragmentscomplete"
+        },
+        "MEFormatReaderParseAdditionalFragmentsStatusSizeIncreased": {
+          "doc": "Indicates that the format reader file size increased.",
+          "url": "https://developer.apple.com/documentation/mediaextension/meformatreaderparseadditionalfragmentsstatus/sizeincreased"
+        },
+        "init(rawValue:)": {
+          "doc": "Create a new information status flag for parsing additional fragments.",
+          "url": "https://developer.apple.com/documentation/mediaextension/meformatreaderparseadditionalfragmentsstatus/init(rawvalue:)"
+        }
+      }
+    }
+  },
+  "methods": {
+    "MEByteSource": {
+      "-availableLengthAtOffset:": {
+        "doc": "Gets the number of available bytes from the offset within the byte source.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mebytesource/availablelength(at:)"
+      },
+      "-byteSourceForRelatedFileName:error:": {
+        "doc": "Creates a new byte source for a related file.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mebytesource/bytesourceforrelatedfilename(_:)"
+      },
+      "-readDataOfLength:fromOffset:completionHandler:": {
+        "doc": "Reads bytes from a byte source into a data object.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mebytesource/read(length:from:completionhandler:)"
+      },
+      "-readDataOfLength:fromOffset:toDestination:bytesRead:error:": {
+        "doc": "Reads bytes from a byte source into a buffer.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mebytesource/readdataoflength:fromoffset:todestination:bytesread:error:"
+      },
+      "-readDataOfLength:fromOffset:toDestination:completionHandler:": {
+        "doc": "Reads bytes from a byte source into a buffer.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mebytesource/readdataoflength:fromoffset:todestination:completionhandler:"
+      }
+    },
+    "MEEstimatedSampleLocation": {
+      "-initWithByteSource:estimatedSampleLocation:refinementDataLocation:": {
+        "doc": "Creates an estimated sample location object with the byte source, sample location, and data location that you specify.",
+        "url": "https://developer.apple.com/documentation/mediaextension/meestimatedsamplelocation/init(bytesource:estimatedsamplelocation:refinementdatalocation:)"
+      }
+    },
+    "MERAWProcessorPixelBufferManager": {
+      "-createPixelBufferAndReturnError:": {
+        "doc": "Generates a pixel buffer using the session’s pixel buffer pool.",
+        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessorpixelbuffermanager/makepixelbuffer()"
+      }
+    },
+    "MESampleCursorChunk": {
+      "-initWithByteSource:chunkStorageRange:chunkInfo:sampleIndexWithinChunk:": {
+        "doc": "Creates a new sample cursor chunk with byte source and chunk data that you provide.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mesamplecursorchunk/init(bytesource:chunkstoragerange:chunkinfo:sampleindexwithinchunk:)"
+      }
+    },
+    "MESampleLocation": {
+      "-initWithByteSource:sampleLocation:": {
+        "doc": "Creates a sample location object with the byte source and sample location that you specify.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mesamplelocation/init(bytesource:samplelocation:)"
+      }
+    },
+    "METrackInfo": {
+      "-initWithMediaType:trackID:formatDescriptions:": {
+        "doc": "Creates a new track info object with the media type, track ID, and format descriptions that you specify.",
+        "url": "https://developer.apple.com/documentation/mediaextension/metrackinfo/initwithmediatype:trackid:formatdescriptions:"
+      }
+    },
+    "MEVideoDecoderPixelBufferManager": {
+      "-createPixelBufferAndReturnError:": {
+        "doc": "Generates a pixel buffer using the session’s pixel buffer pool.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mevideodecoderpixelbuffermanager/makepixelbuffer()"
+      }
+    }
+  },
+  "properties": {
+    "MEByteSource": {
+      "contentType": {
+        "doc": "The format of the byte source file.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mebytesource/contenttype"
+      },
+      "fileLength": {
+        "doc": "The length of the byte source file.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mebytesource/filelength"
+      },
+      "fileName": {
+        "doc": "The name of the file for the byte source.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mebytesource/filename"
+      },
+      "relatedFileNamesInSameDirectory": {
+        "doc": "An array of related file names in the parent directory of the byte source file.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mebytesource/relatedfilenamesinsamedirectory"
+      }
+    },
+    "MEDecodeFrameOptions": {
+      "doNotOutputFrame": {
+        "doc": "A Boolean value that hints to the decoder whether or not it should emit an image buffer for the frame.",
+        "url": "https://developer.apple.com/documentation/mediaextension/medecodeframeoptions/donotoutputframe"
+      },
+      "realTimePlayback": {
+        "doc": "A Boolean value that hints to the decoder to use a low-power mode that can’t decode faster than 1x real-time.",
+        "url": "https://developer.apple.com/documentation/mediaextension/medecodeframeoptions/realtimeplayback"
+      }
+    },
+    "MEEstimatedSampleLocation": {
+      "byteSource": {
+        "doc": "The byte source to use to read the data for the sample.",
+        "url": "https://developer.apple.com/documentation/mediaextension/meestimatedsamplelocation/bytesource"
+      },
+      "estimatedSampleLocation": {
+        "doc": "The estimated starting file offset and size in bytes of the sample.",
+        "url": "https://developer.apple.com/documentation/mediaextension/meestimatedsamplelocation/estimatedsamplelocation"
+      },
+      "refinementDataLocation": {
+        "doc": "The starting file offset and size in bytes of the data necessary to provide an accurate sample location.",
+        "url": "https://developer.apple.com/documentation/mediaextension/meestimatedsamplelocation/refinementdatalocation"
+      }
+    },
+    "MEFileInfo": {
+      "MEFileInfoFragmentsStatus": {
+        "doc": "An enumeration that describes if a media asset contains or supports fragments.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mefileinfo/fragmentsstatus-swift.enum"
+      },
+      "duration": {
+        "doc": "The duration of the media asset, if available.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mefileinfo/duration"
+      },
+      "fragmentsStatus": {
+        "doc": "Indicates if the media asset contains fragments or is extendable by fragments.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mefileinfo/fragmentsstatus-swift.property"
+      }
+    },
+    "MEFormatReaderInstantiationOptions": {
+      "allowIncrementalFragmentParsing": {
+        "doc": "Enables support for parsing additional fragments.",
+        "url": "https://developer.apple.com/documentation/mediaextension/meformatreaderinstantiationoptions/allowincrementalfragmentparsing"
+      }
+    },
+    "MEHEVCDependencyInfo": {
+      "constraintIndicatorFlags": {
+        "doc": "The HEVC constraint indicator flags (6 bytes), if available.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mehevcdependencyinfo/constraintindicatorflags"
+      },
+      "levelIndex": {
+        "doc": "The HEVC level index, if available.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mehevcdependencyinfo/levelindex"
+      },
+      "profileCompatibilityFlags": {
+        "doc": "The HEVC profile compatibility flags (4 bytes), if available.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mehevcdependencyinfo/profilecompatibilityflags"
+      },
+      "profileIndex": {
+        "doc": "The HEVC profile index, if available.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mehevcdependencyinfo/profileindex"
+      },
+      "profileSpace": {
+        "doc": "The HEVC profile space, if available.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mehevcdependencyinfo/profilespace"
+      },
+      "stepwiseTemporalSubLayerAccess": {
+        "doc": "A Boolean value that indicates if the sample has an HEVC stepwise temporal sublayer access (STSA) picture.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mehevcdependencyinfo/hasstepwisetemporalsublayeraccess"
+      },
+      "syncSampleNALUnitType": {
+        "doc": "The NAL unit type for HEVC sync sample groups.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mehevcdependencyinfo/syncsamplenalunittype"
+      },
+      "temporalLevel": {
+        "doc": "The HEVC temporal level, if available.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mehevcdependencyinfo/temporallevel"
+      },
+      "temporalSubLayerAccess": {
+        "doc": "A Boolean value that indicates if the sample has an HEVC temporal sublayer access (TSA) picture.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mehevcdependencyinfo/hastemporalsublayeraccess"
+      },
+      "tierFlag": {
+        "doc": "The HEVC tier level flag, if available.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mehevcdependencyinfo/tierflag"
+      }
+    },
+    "MERAWProcessingParameter": {
+      "MERAWProcessingBooleanParameter": {
+        "doc": "An object that describes a Boolean parameter of a RAW processor.",
+        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessingparameter/boolean"
+      },
+      "MERAWProcessingFloatParameter": {
+        "doc": "An object that describes a floating-point parameter of a RAW processor.",
+        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessingparameter/floatingpoint"
+      },
+      "MERAWProcessingIntegerParameter": {
+        "doc": "An object that describes an integer parameter of a RAW processor.",
+        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessingparameter/integer"
+      },
+      "MERAWProcessingListElementParameter": {
+        "doc": "An object that describes a list element parameter of a RAW processor.",
+        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessingparameter/listelement"
+      },
+      "MERAWProcessingListParameter": {
+        "doc": "An object that describes a list parameter of a RAW processor.",
+        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessingparameter/list"
+      },
+      "MERAWProcessingSubGroupParameter": {
+        "doc": "An object that describes a sub group parameter of a RAW processor.",
+        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessingparameter/subgroup"
+      },
+      "enabled": {
+        "doc": "A Boolean value that indicates whether the extension enables the parameter.",
+        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessingparameter/enabled"
+      },
+      "key": {
+        "doc": "A unique key string identifying the parameter.",
+        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessingparameter/key"
+      },
+      "longDescription": {
+        "doc": "A localized description of the parameter, suitable for displaying in a tool tip or similar explanatory UI.",
+        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessingparameter/longdescription"
+      },
+      "name": {
+        "doc": "A localized human-readable name for the parameter, suitable for displaying in application UI.",
+        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessingparameter/name"
+      }
+    },
+    "MERAWProcessorPixelBufferManager": {
+      "pixelBufferAttributes": {
+        "doc": "A dictionary that contains the attributes Video Toolbox uses to create a pixel buffer for the video RAW processor.",
+        "url": "https://developer.apple.com/documentation/mediaextension/merawprocessorpixelbuffermanager/pixelbufferattributes-2cki6"
+      }
+    },
+    "MESampleCursorChunk": {
+      "byteSource": {
+        "doc": "The byte source to use to read the data for the sample.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mesamplecursorchunk/bytesource"
+      },
+      "chunkInfo": {
+        "doc": "An object that provides details about the chunk in the media.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mesamplecursorchunk/chunkinfo"
+      },
+      "chunkStorageRange": {
+        "doc": "The offset location and length of the sample’s chunk within the byte source.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mesamplecursorchunk/chunkstoragerange"
+      },
+      "sampleIndexWithinChunk": {
+        "doc": "The offset index of the sample within the chunk, in samples.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mesamplecursorchunk/sampleindexwithinchunk"
+      }
+    },
+    "MESampleLocation": {
+      "byteSource": {
+        "doc": "The byte source to use to read the data for the sample.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mesamplelocation/bytesource"
+      },
+      "sampleLocation": {
+        "doc": "The starting file offset and size in bytes of the sample.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mesamplelocation/samplelocation"
+      }
+    },
+    "METrackInfo": {
+      "enabled": {
+        "doc": "A Boolean value that indicates whether the track is enabled by default.",
+        "url": "https://developer.apple.com/documentation/mediaextension/metrackinfo/isenabled"
+      },
+      "extendedLanguageTag": {
+        "doc": "A string that indicates the language tag associated with the track, as an IETF BCP 47 (RFC 4646) language identifier.",
+        "url": "https://developer.apple.com/documentation/mediaextension/metrackinfo/extendedlanguagetag"
+      },
+      "formatDescriptions": {
+        "doc": "An array of format descriptions for the track.",
+        "url": "https://developer.apple.com/documentation/mediaextension/metrackinfo/formatdescriptions"
+      },
+      "mediaType": {
+        "doc": "The media type of the track.",
+        "url": "https://developer.apple.com/documentation/mediaextension/metrackinfo/mediatype"
+      },
+      "naturalSize": {
+        "doc": "Indicates the natural dimensions of the media data referenced by the track.",
+        "url": "https://developer.apple.com/documentation/mediaextension/metrackinfo/naturalsize"
+      },
+      "naturalTimescale": {
+        "doc": "The natural timescale of the track.",
+        "url": "https://developer.apple.com/documentation/mediaextension/metrackinfo/naturaltimescale"
+      },
+      "nominalFrameRate": {
+        "doc": "The frame rate of the track in frames per second, as a 32-bit floating point number.",
+        "url": "https://developer.apple.com/documentation/mediaextension/metrackinfo/nominalframerate"
+      },
+      "preferredTransform": {
+        "doc": "Indicates the preferred affine display transform of the track media for visual display.",
+        "url": "https://developer.apple.com/documentation/mediaextension/metrackinfo/preferredtransform"
+      },
+      "requiresFrameReordering": {
+        "doc": "A Boolean value that indicates whether frame reordering occurs in the track.",
+        "url": "https://developer.apple.com/documentation/mediaextension/metrackinfo/requiresframereordering"
+      },
+      "trackEdits": {
+        "doc": "An array of edit segments for the given track.",
+        "url": "https://developer.apple.com/documentation/mediaextension/metrackinfo/trackedits"
+      },
+      "trackID": {
+        "doc": "An integer that identifies the track within the media asset.",
+        "url": "https://developer.apple.com/documentation/mediaextension/metrackinfo/trackid"
+      }
+    },
+    "MEVideoDecoderPixelBufferManager": {
+      "pixelBufferAttributes": {
+        "doc": "A dictionary that contains the attributes Video Toolbox uses to create a pixel buffer for the decoder.",
+        "url": "https://developer.apple.com/documentation/mediaextension/mevideodecoderpixelbuffermanager/pixelbufferattributes"
+      }
+    }
+  }
+}

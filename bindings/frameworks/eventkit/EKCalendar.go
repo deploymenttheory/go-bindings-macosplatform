@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a calendar in EventKit.
+//
 // Apple documentation: https://developer.apple.com/documentation/eventkit/ekcalendar
 type EKCalendar struct {
 	EKObject
@@ -48,7 +50,7 @@ func EKCalendarFromID(id objc.ID) *EKCalendar {
 	return o
 }
 
-// @method     calendarForEntityType: @abstract   Creates a new autoreleased calendar that may contain the given entity type. @discussion You can only create calendars that accept either reminders or events via our API. However, other servers might allow mixing the two (though it is not common). @param      entityType    The entity type that this calendar may support. @param      eventStore    The event store in which to create this calendar.
+// Creates a new calendar that can contain the given entity type.
 func EKCalendarCalendarForEntityTypeEventStore(entityType EKEntityType, eventStore *EKEventStore) *EKCalendar {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKCalendar), _eKCalendarSelCalendarForEntityTypeEventStore, entityType, eventStore.Ptr())
 	if _ret != 0 {

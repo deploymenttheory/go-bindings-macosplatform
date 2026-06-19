@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object to create and manage the tunnel provider’s VPN configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/netunnelprovidermanager
 type NETunnelProviderManager struct {
 	NEVPNManager
@@ -49,7 +51,7 @@ func NETunnelProviderManagerFromID(id objc.ID) *NETunnelProviderManager {
 	return o
 }
 
-// @method loadAllFromPreferencesWithCompletionHandler: @discussion This function asynchronously reads all of the NETunnelProvider configurations created by the calling app that have previously been saved to disk and returns them as NETunnelProviderManager objects. @param completionHandler A block that takes an array NETunnelProviderManager objects. The array passed to the block may be empty if no NETunnelProvider configurations were successfully read from the disk.  The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+// Read all of the VPN configurations created by the calling app that have previously been saved to the Network Extension preferences.
 func NETunnelProviderManagerLoadAllFromPreferencesWithCompletionHandler(completionHandler func(*foundation.NSArray[*NETunnelProviderManager], unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -64,7 +66,7 @@ func NETunnelProviderManagerLoadAllFromPreferencesWithCompletionHandler(completi
 	objc.ID(_clsNETunnelProviderManager).Send(_nETunnelProviderManagerSelLoadAllFromPreferencesWithCompletionHandler, __block_completionHandler)
 }
 
-// @method forPerAppVPN @discussion Create a NETunnelProviderManager instance that is used to manage a per-app VPN configuration.
+// Returns a tunnel provider manager for managing a per-app VPN configuration.
 func NETunnelProviderManagerForPerAppVPN() *NETunnelProviderManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNETunnelProviderManager), _nETunnelProviderManagerSelForPerAppVPN)
 	if _ret != 0 {
@@ -73,7 +75,7 @@ func NETunnelProviderManagerForPerAppVPN() *NETunnelProviderManager {
 	return NETunnelProviderManagerFromID(_ret)
 }
 
-// @method copyAppRules @discussion This function returns an array of NEAppRule objects.
+// Returns a copy of the app rules currently set in the configuration.
 func (o *NETunnelProviderManager) CopyAppRules() *foundation.NSArray[*NEAppRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelProviderManagerSelCopyAppRules)
 	return foundation.NSArrayFromID[*NEAppRule](_ret)
@@ -87,42 +89,54 @@ func (o *NETunnelProviderManager) RoutingMethod() NETunnelProviderRoutingMethod 
 
 // @property safariDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled and the user navigates in Safari to a web site within one of these domains, the web site network traffic is routed through the per-app VPN.
 func (o *NETunnelProviderManager) SafariDomains() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nETunnelProviderManagerSelSafariDomains)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelProviderManagerSelSafariDomains)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NETunnelProviderManager) SetSafariDomains(safariDomains *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nETunnelProviderManagerSelSetSafariDomains, safariDomains)
+	o.Ptr().Send(_nETunnelProviderManagerSelSetSafariDomains, safariDomains.Ptr())
 }
 
 // @property mailDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections from the Mail app to mail servers within one of these domains are routed through the per-app VPN.
 func (o *NETunnelProviderManager) MailDomains() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nETunnelProviderManagerSelMailDomains)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelProviderManagerSelMailDomains)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NETunnelProviderManager) SetMailDomains(mailDomains *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nETunnelProviderManagerSelSetMailDomains, mailDomains)
+	o.Ptr().Send(_nETunnelProviderManagerSelSetMailDomains, mailDomains.Ptr())
 }
 
 // @property calendarDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections from the Calendar app to calendar servers within one of these domains are routed through the per-app VPN.
 func (o *NETunnelProviderManager) CalendarDomains() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nETunnelProviderManagerSelCalendarDomains)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelProviderManagerSelCalendarDomains)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NETunnelProviderManager) SetCalendarDomains(calendarDomains *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nETunnelProviderManagerSelSetCalendarDomains, calendarDomains)
+	o.Ptr().Send(_nETunnelProviderManagerSelSetCalendarDomains, calendarDomains.Ptr())
 }
 
 // @property contactsDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections from the Contacts app to contacts servers within one of these domains are routed through the per-app VPN.
 func (o *NETunnelProviderManager) ContactsDomains() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nETunnelProviderManagerSelContactsDomains)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelProviderManagerSelContactsDomains)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NETunnelProviderManager) SetContactsDomains(contactsDomains *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nETunnelProviderManagerSelSetContactsDomains, contactsDomains)
+	o.Ptr().Send(_nETunnelProviderManagerSelSetContactsDomains, contactsDomains.Ptr())
 }
 
 // @property appRules @property An array of NEAppRule objects. Only applies to per-app VPN configurations. Network traffic originating from apps matching one of these rules is routed through the per-app VPN.
@@ -140,20 +154,26 @@ func (o *NETunnelProviderManager) SetAppRules(appRules *foundation.NSArray[*NEAp
 
 // @property excludedDomains @property An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections to servers within one of these domains are excluded from the per-app VPN.
 func (o *NETunnelProviderManager) ExcludedDomains() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nETunnelProviderManagerSelExcludedDomains)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelProviderManagerSelExcludedDomains)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NETunnelProviderManager) SetExcludedDomains(excludedDomains *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nETunnelProviderManagerSelSetExcludedDomains, excludedDomains)
+	o.Ptr().Send(_nETunnelProviderManagerSelSetExcludedDomains, excludedDomains.Ptr())
 }
 
 // @property associatedDomains @property An array of domain strings. Only applies to per-app VPN configurations. HTTP requests to download the Apple App Site Association files for domains in this list are routed through the per-app VPN.
 func (o *NETunnelProviderManager) AssociatedDomains() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nETunnelProviderManagerSelAssociatedDomains)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelProviderManagerSelAssociatedDomains)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NETunnelProviderManager) SetAssociatedDomains(associatedDomains *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nETunnelProviderManagerSelSetAssociatedDomains, associatedDomains)
+	o.Ptr().Send(_nETunnelProviderManagerSelSetAssociatedDomains, associatedDomains.Ptr())
 }

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Oven Mode Attributes and commands for selecting a mode from a list of supported options.
+//
 // MTRClusterOvenMode wraps [raw.MTRClusterOvenMode] with a fluent Go API.
 type MTRClusterOvenMode struct {
 	inner *raw.MTRClusterOvenMode

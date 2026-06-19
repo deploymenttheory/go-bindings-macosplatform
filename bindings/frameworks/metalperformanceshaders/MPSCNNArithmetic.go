@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for arithmetic operators.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnarithmetic
 type MPSCNNArithmetic struct {
 	mpsneuralnetwork.MPSCNNBinaryKernel

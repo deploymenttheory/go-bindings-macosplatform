@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A tab in a paragraph.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstexttab
 type NSTextTab struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func NSTextTabFromID(id objc.ID) *NSTextTab {
 	return o
 }
 
+// Returns the column terminators for the specified locale.
 func NSTextTabColumnTerminatorsForLocale(aLocale *foundation.NSLocale) *foundation.NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextTab), _nSTextTabSelColumnTerminatorsForLocale, aLocale.Ptr())
 	if _ret != 0 {
@@ -50,12 +53,16 @@ func (o *NSTextTab) Location() float64 {
 }
 
 func (o *NSTextTab) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSTextTabSelOptions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTabSelOptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
+// Initializes a text tab with the specified text alignment, location, and options.
 func (o *NSTextTab) InitWithTextAlignmentLocationOptions(alignment NSTextAlignment, loc float64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSTextTab {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTabSelInitWithTextAlignmentLocationOptions, alignment, loc, options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTabSelInitWithTextAlignmentLocationOptions, alignment, loc, options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -67,6 +74,7 @@ func (o *NSTextTab) Alignment() NSTextAlignment {
 	return _ret
 }
 
+// Initializes a newly allocated text tab with the specified alignment and location.
 func (o *NSTextTab) InitWithTypeLocation(type_ NSTextTabType, loc float64) *NSTextTab {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTabSelInitWithTypeLocation, type_, loc)
 	if _ret != 0 {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A string-based piece of location-specific data that you apply to a specific point on a map.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkpointannotation
 type MKPointAnnotation struct {
 	MKShape
@@ -36,6 +38,7 @@ func MKPointAnnotationFromID(id objc.ID) *MKPointAnnotation {
 	return o
 }
 
+// Creates a map annotation that shows a title string at a point on a map.
 func (o *MKPointAnnotation) Init() *MKPointAnnotation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPointAnnotationSelInit)
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func (o *MKPointAnnotation) Init() *MKPointAnnotation {
 	return MKPointAnnotationFromID(_ret)
 }
 
+// Creates a point annotation at the specified coordinate on the map.
 func (o *MKPointAnnotation) InitWithCoordinate(coordinate unsafe.Pointer) *MKPointAnnotation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPointAnnotationSelInitWithCoordinate, coordinate)
 	if _ret != 0 {
@@ -52,6 +56,7 @@ func (o *MKPointAnnotation) InitWithCoordinate(coordinate unsafe.Pointer) *MKPoi
 	return MKPointAnnotationFromID(_ret)
 }
 
+// Creates a point annotation displaying a title and subtitle string at the specified coordinate on the map.
 func (o *MKPointAnnotation) InitWithCoordinateTitleSubtitle(coordinate unsafe.Pointer, title *foundation.NSString, subtitle *foundation.NSString) *MKPointAnnotation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPointAnnotationSelInitWithCoordinateTitleSubtitle, coordinate, title.Ptr(), subtitle.Ptr())
 	if _ret != 0 {

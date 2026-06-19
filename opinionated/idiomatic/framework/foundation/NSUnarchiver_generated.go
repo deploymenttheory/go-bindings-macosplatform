@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A decoder that restores data from an archive.
+//
 // Unarchiver wraps [raw.NSUnarchiver] with a fluent Go API.
 type Unarchiver struct {
 	inner *raw.NSUnarchiver
@@ -30,6 +32,8 @@ func UnarchiverFromID(id objc.ID) *Unarchiver {
 	return &Unarchiver{inner: raw.NSUnarchiverFromID(id)}
 }
 
+// Returns an NSUnarchiver object initialized to read an archive from a given data object.
+//
 // NewUnarchiverForReadingWithData creates a new [Unarchiver].
 func NewUnarchiverForReadingWithData(data *raw.NSData) *Unarchiver {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnarchiver")), objc.RegisterName("alloc"))
@@ -43,11 +47,15 @@ func (x *Unarchiver) WithScriptingProperties(scriptingProperties *raw.NSDictiona
 	return x
 }
 
+// Instructs the receiver to use the class with a given name when instantiating objects whose ostensible class, according to the archived data, is another given name.
+//
 // DecodeClassNameAsClassName calls the underlying DecodeClassNameAsClassName.
 func (x *Unarchiver) DecodeClassNameAsClassName(inArchiveName string, trueName string) {
 	x.inner.DecodeClassNameAsClassName(foundation.NSStringStringWithUTF8String(inArchiveName), foundation.NSStringStringWithUTF8String(trueName))
 }
 
+// Returns the name of the class that will be used when instantiating objects whose ostensible class, according to the archived data, is a given name.
+//
 // ClassNameDecodedForArchiveClassName calls the underlying ClassNameDecodedForArchiveClassName.
 func (x *Unarchiver) ClassNameDecodedForArchiveClassName(inArchiveName string) *String {
 	_r := x.inner.ClassNameDecodedForArchiveClassName(foundation.NSStringStringWithUTF8String(inArchiveName))
@@ -57,6 +65,8 @@ func (x *Unarchiver) ClassNameDecodedForArchiveClassName(inArchiveName string) *
 	return &String{inner: _r}
 }
 
+// Causes the receiver to substitute one given object for another whenever the latter is extracted from the archive.
+//
 // ReplaceObjectWithObject calls the underlying ReplaceObjectWithObject.
 func (x *Unarchiver) ReplaceObjectWithObject(object objc.ID, newObject objc.ID) {
 	x.inner.ReplaceObjectWithObject(object, newObject)

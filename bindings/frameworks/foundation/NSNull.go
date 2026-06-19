@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A singleton object used to represent null values in collection objects that don’t allow nil values.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsnull
 type NSNull struct {
 	NSObject
@@ -29,6 +31,7 @@ func NSNullFromID(id objc.ID) *NSNull {
 	return o
 }
 
+// Returns the singleton instance of NSNull.
 func NSNullNull() *NSNull {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNull), _nSNullSelNull)
 	if _ret != 0 {

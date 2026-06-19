@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A concrete random source that can generate random numbers. The implementation details are up to the system and if a particular algorithm is needed then use one of the provided subclasses. For certain specialized applications a shared system source may be needed and for those instances there is a wrapped interface over arc4random_*, accessible via +[GKRandomSource sharedRandom]. @see GKARC4RandomSource @see GKLinearCongruentialRandomSource @see GKMersenneTwisterRandomSource @see GKRandomSource.systemRandom
+// The superclass for all basic randomization classes in GameplayKit.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkrandomsource
 type GKRandomSource struct {
@@ -35,7 +35,7 @@ func GKRandomSourceFromID(id objc.ID) *GKRandomSource {
 	return o
 }
 
-// Creates a new random source initialized using bits from an entropy source like SecRandomCopyBytes. When used directly from the base class; this source is deterministic and performant but the underlying implementation details are not specified. Use a subclass with a specific algorithm implementation guaranteed if your application requires very stringent random source charateristics. @see GKARC4RandomSource @see GKLinearCongruentialRandomSource @see GKMersenneTwisterRandomSource
+// Initializes a new random source object.
 func (o *GKRandomSource) Init() *GKRandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRandomSourceSelInit)
 	if _ret != 0 {
@@ -53,7 +53,7 @@ func (o *GKRandomSource) InitWithCoder(aDecoder *foundation.NSCoder) *GKRandomSo
 	return GKRandomSourceFromID(_ret)
 }
 
-// Returns a shared instance of a random source that uses the system's underlying random source. Using this instance modifies the outcome of future calls to the arc4random family of C calls. It is also affected by calls to the C apis and should not be used for sources that are intended to be deterministic. @discussion Note that while it may seem semantically similar to a GKARC4RandomSource, this is not a drop in replacement.
+// Returns a shared instance that shares a system-wide random source.
 func GKRandomSourceSharedRandom() *GKRandomSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRandomSource), _gKRandomSourceSelSharedRandom)
 	if _ret != 0 {
@@ -62,8 +62,11 @@ func GKRandomSourceSharedRandom() *GKRandomSource {
 	return GKRandomSourceFromID(_ret)
 }
 
-// Returns a shuffled instance of the given array. The objects in the array are shuffled based on a Fisher-Yates shuffle. Any random, be it custom, source or a distribution, that can provide a number with an upper bound of at least the array.count is suitable for this shuffle.
+// Returns an array whose contents are the same as those of the specified array, but in a random order determined by the random source.
 func (o *GKRandomSource) ArrayByShufflingObjectsInArray(array *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _gKRandomSourceSelArrayByShufflingObjectsInArray, array)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _gKRandomSourceSelArrayByShufflingObjectsInArray, array.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object containing methods for starting and controlling a broadcast.
+//
 // BroadcastController wraps [raw.RPBroadcastController] with a fluent Go API.
 type BroadcastController struct {
 	inner *raw.RPBroadcastController
@@ -39,22 +41,30 @@ func NewBroadcastController() *BroadcastController {
 	return &BroadcastController{inner: raw.RPBroadcastControllerFromID(_id)}
 }
 
+// The delegate for the broadcast controller.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *BroadcastController) WithDelegate(delegate raw.RPBroadcastControllerDelegate) *BroadcastController {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Pauses the current broadcast.
+//
 // PauseBroadcast calls the underlying PauseBroadcast.
 func (x *BroadcastController) PauseBroadcast() {
 	x.inner.PauseBroadcast()
 }
 
+// Resumes a paused broadcast.
+//
 // ResumeBroadcast calls the underlying ResumeBroadcast.
 func (x *BroadcastController) ResumeBroadcast() {
 	x.inner.ResumeBroadcast()
 }
 
+// Stops the current broadcast.
+//
 // FinishBroadcastWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *BroadcastController) FinishBroadcastWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that configures how to present Desk View.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcapturedeskviewapplicationlaunchconfiguration
 type AVCaptureDeskViewApplicationLaunchConfiguration struct {
 	foundation.NSObject

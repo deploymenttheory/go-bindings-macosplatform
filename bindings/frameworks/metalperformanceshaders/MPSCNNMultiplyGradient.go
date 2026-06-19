@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A gradient multiply operator.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnmultiplygradient
 type MPSCNNMultiplyGradient struct {
 	mpsneuralnetwork.MPSCNNArithmeticGradient

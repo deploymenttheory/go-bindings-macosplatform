@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// The Monte Carlo Strategist is a generic AI that selects a game model update for a given player that results in the highest likelihood for that player to eventually win the game. It does this by sampling the updates available to the player in question. In doing this it will select the update it knows to produce the best result so far, expanding on this selection, simulating the rest of the game from that expansion, and then propogating the results (win or loss) upwards. It will do this until the budget has been reached, then returning the choice it has deemed best suited for the player in question.
+// An AI that chooses moves in turn-based games using a probabilistic strategy.
 //
 // MonteCarloStrategist wraps [raw.GKMonteCarloStrategist] with a fluent Go API.
 type MonteCarloStrategist struct {
@@ -37,7 +37,7 @@ func NewMonteCarloStrategist() *MonteCarloStrategist {
 	return &MonteCarloStrategist{inner: raw.GKMonteCarloStrategistFromID(_id)}
 }
 
-// The maximum number of samples that will be processed when searching for a move.
+// The maximum number of game model states the strategist will examine when searching for a move.
 //
 // WithBudget sets the budget property and returns the receiver for chaining.
 func (x *MonteCarloStrategist) WithBudget(budget uint) *MonteCarloStrategist {
@@ -45,7 +45,7 @@ func (x *MonteCarloStrategist) WithBudget(budget uint) *MonteCarloStrategist {
 	return x
 }
 
-// A weight that encourages exploration of less visited updates versus the continued exploitation of previously visited updates.
+// A value that influences whether the strategist searches more broadly or more deeply for winning game model states.
 //
 // WithExplorationParameter sets the explorationParameter property and returns the receiver for chaining.
 func (x *MonteCarloStrategist) WithExplorationParameter(explorationParameter uint) *MonteCarloStrategist {

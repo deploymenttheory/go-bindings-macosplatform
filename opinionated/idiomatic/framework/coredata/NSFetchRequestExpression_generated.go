@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An expression that evaluates the result of a fetch request on a managed object context.
+//
 // FetchRequestExpression wraps [raw.NSFetchRequestExpression] with a fluent Go API.
 type FetchRequestExpression struct {
 	inner *raw.NSFetchRequestExpression

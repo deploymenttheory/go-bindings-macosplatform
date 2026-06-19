@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base type that identifies containers and volumes.
+//
 // Apple documentation: https://developer.apple.com/documentation/fskit/fsentityidentifier
 type FSEntityIdentifier struct {
 	foundation.NSObject
@@ -46,7 +48,7 @@ func (o *FSEntityIdentifier) Init() *FSEntityIdentifier {
 	return FSEntityIdentifierFromID(_ret)
 }
 
-// Creates an entity identifier with the given UUID. - Parameter uuid: The UUID to use for this identifier.
+// Creates an entity identifier with the given UUID.
 func (o *FSEntityIdentifier) InitWithUUID(uuid *foundation.NSUUID) *FSEntityIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSEntityIdentifierSelInitWithUUID, uuid.Ptr())
 	if _ret != 0 {
@@ -55,7 +57,7 @@ func (o *FSEntityIdentifier) InitWithUUID(uuid *foundation.NSUUID) *FSEntityIden
 	return FSEntityIdentifierFromID(_ret)
 }
 
-// Creates an entity identifier with the given UUID and qualifier data as a 64-bit unsigned integer. - Parameters: - uuid: The UUID to use for this identifier. - qualifier: The data to distinguish entities that otherwise share the same UUID.
+// Creates an entity identifier with the given UUID and qualifier data as a 64-bit unsigned integer.
 func (o *FSEntityIdentifier) InitWithUUIDQualifier(uuid *foundation.NSUUID, qualifier uint64) *FSEntityIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSEntityIdentifierSelInitWithUUIDQualifier, uuid.Ptr(), qualifier)
 	if _ret != 0 {
@@ -64,7 +66,7 @@ func (o *FSEntityIdentifier) InitWithUUIDQualifier(uuid *foundation.NSUUID, qual
 	return FSEntityIdentifierFromID(_ret)
 }
 
-// Creates an entity identifier with the given UUID and qualifier data. - Parameters: - uuid: The UUID to use for this identifier. - qualifierData: The data to distinguish entities that otherwise share the same UUID.
+// Creates an entity identifier with the given UUID and qualifier data.
 func (o *FSEntityIdentifier) InitWithUUIDData(uuid *foundation.NSUUID, qualifierData *foundation.NSData) *FSEntityIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSEntityIdentifierSelInitWithUUIDData, uuid.Ptr(), qualifierData.Ptr())
 	if _ret != 0 {

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that contains information about security measures the user can apply when composing a message.
+//
 // OutgoingMessageEncodingStatus wraps [raw.MEOutgoingMessageEncodingStatus] with a fluent Go API.
 type OutgoingMessageEncodingStatus struct {
 	inner *raw.MEOutgoingMessageEncodingStatus
@@ -32,6 +34,8 @@ func OutgoingMessageEncodingStatusFromID(id objc.ID) *OutgoingMessageEncodingSta
 	return &OutgoingMessageEncodingStatus{inner: raw.MEOutgoingMessageEncodingStatusFromID(id)}
 }
 
+// Creates an object that describes whether the message security handler can encrypt or sign an outgoing message.
+//
 // NewOutgoingMessageEncodingStatusWithCanSignCanEncryptSecurityErrorAddressesFailingEncryption creates a new [OutgoingMessageEncodingStatus].
 func NewOutgoingMessageEncodingStatusWithCanSignCanEncryptSecurityErrorAddressesFailingEncryption(canSign bool, canEncrypt bool, securityError unsafe.Pointer, addressesFailingEncryption *foundation.NSArray[*raw.MEEmailAddress]) *OutgoingMessageEncodingStatus {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEOutgoingMessageEncodingStatus")), objc.RegisterName("alloc"))

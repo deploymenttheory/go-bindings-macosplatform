@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view controller that lets the user edit or remove an existing shortcut.
+//
 // Apple documentation: https://developer.apple.com/documentation/intentsui/inuieditvoiceshortcutviewcontroller
 type INUIEditVoiceShortcutViewController struct {
 	appkit.NSViewController
@@ -33,7 +35,7 @@ func INUIEditVoiceShortcutViewControllerFromID(id objc.ID) *INUIEditVoiceShortcu
 	return o
 }
 
-// @param voiceShortcut The voice shortcut to be edited.
+// Creates a view controller with the shortcut to edit or remove.
 func (o *INUIEditVoiceShortcutViewController) InitWithVoiceShortcut(voiceShortcut *intents.INVoiceShortcut) *INUIEditVoiceShortcutViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNUIEditVoiceShortcutViewControllerSelInitWithVoiceShortcut, voiceShortcut.Ptr())
 	if _ret != 0 {

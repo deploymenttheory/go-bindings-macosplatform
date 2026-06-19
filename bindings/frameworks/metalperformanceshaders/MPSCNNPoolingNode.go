@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract  A node for a MPSCNNPooling kernel @discussion This is an abstract base class that does not correspond with any particular MPSCNNKernel. Please make one of the MPSCNNPooling subclasses instead.
+// A representation of a MPS CNN pooling kernel.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnpoolingnode
 type MPSCNNPoolingNode struct {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An observation that contains a grayscale heat map of important areas across an image.
+//
 // SaliencyImageObservation wraps [raw.VNSaliencyImageObservation] with a fluent Go API.
 type SaliencyImageObservation struct {
 	inner *raw.VNSaliencyImageObservation

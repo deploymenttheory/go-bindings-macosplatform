@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that implements the client side of a custom transparent network proxy solution.
+//
 // NETransparentProxyProvider wraps [raw.NETransparentProxyProvider] with a fluent Go API.
 type NETransparentProxyProvider struct {
 	inner *raw.NETransparentProxyProvider
@@ -35,7 +37,7 @@ func NewNETransparentProxyProvider() *NETransparentProxyProvider {
 	return &NETransparentProxyProvider{inner: raw.NETransparentProxyProviderFromID(_id)}
 }
 
-// @property reasserting @discussion A flag that indicates to the framework if this NETunnelProvider is currently re-establishing the tunnel. Setting this flag will cause the session status visible to the user to change to "Reasserting". Clearing this flag will change the user-visible status of the session back to "Connected". Setting and clearing this flag only has an effect if the session is in the "Connected" state.
+// Indicate to the system that the tunnel is being re-established.
 //
 // WithReasserting sets the reasserting property and returns the receiver for chaining.
 func (x *NETransparentProxyProvider) WithReasserting(reasserting bool) *NETransparentProxyProvider {

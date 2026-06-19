@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that implements encoding using Compact-TLV encoding according to ISO 7816-4.
+//
 // Apple documentation: https://developer.apple.com/documentation/cryptotokenkit/tkcompacttlvrecord
 type TKCompactTLVRecord struct {
 	TKTLVRecord
@@ -30,7 +32,7 @@ func TKCompactTLVRecordFromID(id objc.ID) *TKCompactTLVRecord {
 	return o
 }
 
-// Creates TLV record with specified tag and value. @param tag Tag value for the new record. @param value Value for the new record. @return Newly created TLV record.
+// Initializes a TLV record with the specified tag and value.
 func (o *TKCompactTLVRecord) InitWithTagValue(tag uint8, value *foundation.NSData) *TKCompactTLVRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKCompactTLVRecordSelInitWithTagValue, tag, value.Ptr())
 	if _ret != 0 {

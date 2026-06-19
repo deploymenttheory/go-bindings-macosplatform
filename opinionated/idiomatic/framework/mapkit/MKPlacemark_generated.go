@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A user-friendly description of a location on the map.
+//
 // Placemark wraps [raw.MKPlacemark] with a fluent Go API.
 type Placemark struct {
 	inner *raw.MKPlacemark
@@ -32,6 +34,8 @@ func PlacemarkFromID(id objc.ID) *Placemark {
 	return &Placemark{inner: raw.MKPlacemarkFromID(id)}
 }
 
+// Creates and returns a placemark object using the specified coordinate.
+//
 // NewPlacemarkWithCoordinate creates a new [Placemark].
 func NewPlacemarkWithCoordinate(coordinate unsafe.Pointer) *Placemark {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPlacemark")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewPlacemarkWithCoordinate(coordinate unsafe.Pointer) *Placemark {
 	return &Placemark{inner: raw.MKPlacemarkFromID(_id)}
 }
 
+// Creates and returns a placemark object using the specified coordinate and Address Book dictionary.
+//
 // NewPlacemarkWithCoordinateAddressDictionary creates a new [Placemark].
 func NewPlacemarkWithCoordinateAddressDictionary(coordinate unsafe.Pointer, addressDictionary purego.IDer) *Placemark {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPlacemark")), objc.RegisterName("alloc"))
@@ -46,6 +52,8 @@ func NewPlacemarkWithCoordinateAddressDictionary(coordinate unsafe.Pointer, addr
 	return &Placemark{inner: raw.MKPlacemarkFromID(_id)}
 }
 
+// Creates and returns a placemark object with the specified coordinate and postal address from the user’s Contacts database.
+//
 // NewPlacemarkWithCoordinatePostalAddress creates a new [Placemark].
 func NewPlacemarkWithCoordinatePostalAddress(coordinate unsafe.Pointer, postalAddress *contacts.CNPostalAddress) *Placemark {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPlacemark")), objc.RegisterName("alloc"))

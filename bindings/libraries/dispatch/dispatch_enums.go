@@ -13,13 +13,17 @@ const (
 	DISPATCH_WALLTIME_NOW = 18446744073709551614
 )
 
+// Constants indicating the frequency with which a dispatch queue creates autorelease pools for its tasks.
 // [queue.h:300]
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
+	// The queue inherits its autorelease frequency from its target queue.
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	// The queue configures an autorelease pool before the execution of a block and releases the objects in that pool after the block finishes executing.
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
+	// The queue does not set up an autorelease pool around executed blocks.
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
 )
 
 func (i Dispatch_autorelease_frequency_t) String() string {
@@ -62,20 +66,27 @@ func (i Dispatch_autorelease_frequency_t) isMultiValue() bool {
 	return false
 }
 
+// Flags to pass to the dispatch_block_create and dispatch_block_create_with_qos_class functions.
 // [block.h:302]
 // Bitmask — values may be combined with |.
 type Dispatch_block_flags_t uint64
 
 const (
+	// Cause the work item to act as a barrier block when submitted to a concurrent queue.
 	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
+	// Disassociate the work item’s attributes from the current execution context.
 	// Introduced: macOS 10.10
 	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
+	// Set the attributes of the work item to match the attributes of the current execution context.
 	// Introduced: macOS 10.10
 	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
+	// Execute the work item without assigning a quality-of-service class.
 	// Introduced: macOS 10.10
 	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	// Prefer the quality-of-service class associated with the current execution context.
 	// Introduced: macOS 10.10
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
+	// Prefer the quality-of-service class associated with the block.
 	// Introduced: macOS 10.10
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )

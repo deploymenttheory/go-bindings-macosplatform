@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A ReLU (Rectified Linear Unit) neuron filter.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronrelu
 type MPSCNNNeuronReLU struct {
 	mpsneuralnetwork.MPSCNNNeuron
@@ -31,7 +33,7 @@ func MPSCNNNeuronReLUFromID(id objc.ID) *MPSCNNNeuronReLU {
 	return o
 }
 
-// @abstract  Initialize the ReLU neuron filter @param     device           The device the filter will run on @param     a                Filter property "a". See class discussion. @return    A valid MPSCNNNeuronReLU object or nil, if failure.
+// Initializes a ReLU neuron filter.
 func (o *MPSCNNNeuronReLU) InitWithDeviceA(device metal.MTLDevice, a float32) *MPSCNNNeuronReLU {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronReLUSelInitWithDeviceA, device, a)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of information for a subscriber’s account.
+//
 // Apple documentation: https://developer.apple.com/documentation/videosubscriberaccount/vsaccountmetadata
 type VSAccountMetadata struct {
 	foundation.NSObject

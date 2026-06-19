@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Describes a render pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4renderpassdescriptor
 type MTL4RenderPassDescriptor struct {
 	foundation.NSObject
@@ -60,12 +62,12 @@ func MTL4RenderPassDescriptorFromID(id objc.ID) *MTL4RenderPassDescriptor {
 	return o
 }
 
-// Configures the custom sample positions to use in MSAA rendering. - Parameters: - positions: Array of “MTLSamplePosition“ instances. - count:     Number of “MTLSamplePosition“ instances in the array. This value needs to be a valid sample count, or `0` to disable custom sample positions.
+// Configures the custom sample positions to use in MSAA rendering.
 func (o *MTL4RenderPassDescriptor) SetSamplePositionsCount(positions *MTLSamplePosition, count uint) {
 	o.Ptr().Send(_mTL4RenderPassDescriptorSelSetSamplePositionsCount, positions, count)
 }
 
-// Retrieves the previously-configured custom sample positions. This method stores the app's last set custom sample positions into an output array. Metal only modifies the array when the `count` parameter consists of a length sufficient to store the number of sample positions. - Parameters: - positions: The destination array where Metal stores “MTLSamplePosition“ instances. - count:     Number of “MTLSamplePosition“ instances in the array. This array needs to be large enough to store all sample positions. - Returns: The number of previously-configured custom sample positions.
+// Retrieves the previously-configured custom sample positions.
 func (o *MTL4RenderPassDescriptor) GetSamplePositionsCount(positions *MTLSamplePosition, count uint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _mTL4RenderPassDescriptorSelGetSamplePositionsCount, positions, count)
 	return _ret

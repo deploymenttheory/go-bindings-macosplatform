@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A service that provides a custom communication channel between your app and a File Provider extension.
+//
 // FileProviderService wraps [raw.NSFileProviderService] with a fluent Go API.
 type FileProviderService struct {
 	inner *raw.NSFileProviderService
@@ -44,6 +46,8 @@ func (x *FileProviderService) WithScriptingProperties(scriptingProperties *raw.N
 	return x
 }
 
+// Asynchronously returns the service’s connection object.
+//
 // GetFileProviderConnection blocks until the operation completes or ctx is cancelled.
 func (x *FileProviderService) GetFileProviderConnection(ctx context.Context) (*XPCConnection, error) {
 	type _result struct {

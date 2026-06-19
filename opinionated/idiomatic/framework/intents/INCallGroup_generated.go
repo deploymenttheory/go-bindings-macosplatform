@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The details of a group call handled by your app.
+//
 // CallGroup wraps [raw.INCallGroup] with a fluent Go API.
 type CallGroup struct {
 	inner *raw.INCallGroup
@@ -31,6 +33,8 @@ func CallGroupFromID(id objc.ID) *CallGroup {
 	return &CallGroup{inner: raw.INCallGroupFromID(id)}
 }
 
+// Creates a call record with the group details.
+//
 // NewCallGroupWithGroupNameGroupId creates a new [CallGroup].
 func NewCallGroupWithGroupNameGroupId(groupName string, groupId string) *CallGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallGroup")), objc.RegisterName("alloc"))

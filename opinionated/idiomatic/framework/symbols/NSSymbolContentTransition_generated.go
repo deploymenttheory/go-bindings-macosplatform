@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract base class for transitions you can apply to symbol-based images.
+//
 // SymbolContentTransition wraps [raw.NSSymbolContentTransition] with a fluent Go API.
 type SymbolContentTransition struct {
 	inner *raw.NSSymbolContentTransition

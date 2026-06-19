@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a contiguous range between two locations inside document contents.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextrange
 type NSTextRange struct {
 	foundation.NSObject
@@ -40,7 +42,7 @@ func NSTextRangeFromID(id objc.ID) *NSTextRange {
 	return o
 }
 
-// Creates a new text range with the starting and ending locations you specify. - Parameters: - location: The starting location. - endLocation: The ending location.
+// Creates a new text range with the starting and ending locations you specify.
 func (o *NSTextRange) InitWithLocationEndLocation(location NSTextLocation, endLocation NSTextLocation) *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextRangeSelInitWithLocationEndLocation, location, endLocation)
 	if _ret != 0 {
@@ -49,7 +51,7 @@ func (o *NSTextRange) InitWithLocationEndLocation(location NSTextLocation, endLo
 	return NSTextRangeFromID(_ret)
 }
 
-// Creates a new text range at the location you specify. - Parameters: - location: An “NSTextLocation“.
+// Creates a new text range at the location you specify.
 func (o *NSTextRange) InitWithLocation(location NSTextLocation) *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextRangeSelInitWithLocation, location)
 	if _ret != 0 {
@@ -58,31 +60,31 @@ func (o *NSTextRange) InitWithLocation(location NSTextLocation) *NSTextRange {
 	return NSTextRangeFromID(_ret)
 }
 
-// Compares two text ranges. - Parameters: - textRange: The range used to compare against the current range to evaluate for differences. - Returns: Returns `true` if the ranges are equal.
+// Compares two text ranges.
 func (o *NSTextRange) IsEqualToTextRange(textRange *NSTextRange) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextRangeSelIsEqualToTextRange, textRange.Ptr())
 	return _ret
 }
 
-// Determines if the text location you specify is in the current text range. - Parameters: - location: An “NSTextLocation“. - Returns: Returns `true` if the location is in the range otherwise `false` .
+// Determines if the text location you specify is in the current text range.
 func (o *NSTextRange) ContainsLocation(location NSTextLocation) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextRangeSelContainsLocation, location)
 	return _ret
 }
 
-// Determines if the text range you specify is in the current text range. - Parameters: - textRange: An “NSTextRange“. - Returns: Returns `true` if the range you provide is in the current range; otherwise `false`.
+// Determines if the text range you specify is in the current text range.
 func (o *NSTextRange) ContainsRange(textRange *NSTextRange) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextRangeSelContainsRange, textRange.Ptr())
 	return _ret
 }
 
-// Determines if two ranges intersect. - Parameters: - textRange: The range used to compare against the current range to evaluate for differences. - Returns: Returns `true` if the ranges intersect.
+// Determines if two ranges intersect.
 func (o *NSTextRange) IntersectsWithTextRange(textRange *NSTextRange) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextRangeSelIntersectsWithTextRange, textRange.Ptr())
 	return _ret
 }
 
-// Returns the range, if any, where two text ranges intersect. - Parameters: - textRange: The range used to compare against the current range to evaluate for differences. - Returns: An <doc://com.apple.documentation/documentation/foundation/nsrange> that represents the intersection of the ranges, or `nil` if they don't intersect.
+// Returns the range, if any, where two text ranges intersect.
 func (o *NSTextRange) TextRangeByIntersectingWithTextRange(textRange *NSTextRange) *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextRangeSelTextRangeByIntersectingWithTextRange, textRange.Ptr())
 	if _ret != 0 {
@@ -91,7 +93,7 @@ func (o *NSTextRange) TextRangeByIntersectingWithTextRange(textRange *NSTextRang
 	return NSTextRangeFromID(_ret)
 }
 
-// Returns a new text range by forming the union with the text range you provide. - Parameters: - textRange: The range to use to create the union. - Returns: An “NSTextRange“ that represent the union of the two ranges.
+// Returns a new text range by forming the union with the text range you provide.
 func (o *NSTextRange) TextRangeByFormingUnionWithTextRange(textRange *NSTextRange) *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextRangeSelTextRangeByFormingUnionWithTextRange, textRange.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a point in a sequence of entries in the unified logging system.
+//
 // Apple documentation: https://developer.apple.com/documentation/oslog/oslogposition
 type OSLogPosition struct {
 	foundation.NSObject

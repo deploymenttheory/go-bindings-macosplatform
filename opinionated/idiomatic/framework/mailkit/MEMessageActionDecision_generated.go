@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The action that the system performs on a message, or a request to ask the action handler again later when the message content is available.
+//
 // MessageActionDecision wraps [raw.MEMessageActionDecision] with a fluent Go API.
 type MessageActionDecision struct {
 	inner *raw.MEMessageActionDecision

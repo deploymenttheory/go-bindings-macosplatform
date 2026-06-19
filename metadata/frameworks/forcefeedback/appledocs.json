@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "framework": "ForceFeedback",
+  "source": "developer.apple.com DocC render API",
+  "structs": {
+    "FFCAPABILITIES": {
+      "doc": "Used by the FFDeviceGetForceFeedbackCapabilities method to retrieve device force-feedback capabilities.",
+      "url": "https://developer.apple.com/documentation/forcefeedback/ffcapabilities"
+    },
+    "FFCONDITION": {
+      "doc": "A structure containing type-specific information for certain effects.",
+      "url": "https://developer.apple.com/documentation/forcefeedback/ffcondition"
+    },
+    "FFCONSTANTFORCE": {
+      "doc": "Contains type-specific information for the CONSTANTFORCE effect.",
+      "url": "https://developer.apple.com/documentation/forcefeedback/ffconstantforce"
+    },
+    "FFCUSTOMFORCE": {
+      "doc": "Contains type-specific information for the CUSTOMFORCE effect.",
+      "url": "https://developer.apple.com/documentation/forcefeedback/ffcustomforce"
+    },
+    "FFEFFECT": {
+      "doc": "UsUsed by the FFDeviceCreateEffect method to initialize a new effect object. It is also used by the FFEffectSetParameters and FFEffectGetParameters functions.",
+      "url": "https://developer.apple.com/documentation/forcefeedback/ffeffect"
+    },
+    "FFEFFESCAPE": {
+      "doc": "The FFEFFESCAPE structure passes hardware-specific data directly to the Force Feedback plugIn.",
+      "url": "https://developer.apple.com/documentation/forcefeedback/ffeffescape"
+    },
+    "FFENVELOPE": {
+      "doc": "Used by the FFEFFECT structure to specify the optional envelope parameters for an effect.",
+      "url": "https://developer.apple.com/documentation/forcefeedback/ffenvelope"
+    },
+    "FFPERIODIC": {
+      "doc": "A structure containing type-specific information for certain effects.",
+      "url": "https://developer.apple.com/documentation/forcefeedback/ffperiodic"
+    },
+    "FFRAMPFORCE": {
+      "doc": "Contains type-specific information for the RAMPFORCE effect.",
+      "url": "https://developer.apple.com/documentation/forcefeedback/fframpforce"
+    }
+  }
+}

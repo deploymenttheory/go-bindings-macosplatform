@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages a custom view—known as an accessory view—in the title bar–toolbar area of a window.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstitlebaraccessoryviewcontroller
 type NSTitlebarAccessoryViewController struct {
 	NSViewController

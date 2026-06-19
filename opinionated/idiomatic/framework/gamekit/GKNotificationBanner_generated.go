@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A Game Center-style banner that displays a message to the local player.
+//
 // NotificationBanner wraps [raw.GKNotificationBanner] with a fluent Go API.
 type NotificationBanner struct {
 	inner *raw.GKNotificationBanner

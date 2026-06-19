@@ -6,7 +6,7 @@ package compression
 
 import "fmt"
 
-// @enum compression_algorithm @abstract Tag used to select a compression algorithm. @discussion libcompression supports a number of different compression algorithms, but we have only implemented algorithms that we believe are the best choice in some set of circumstances; there are many, many compression algorithms that we do not provide because using one of the algorithms we do provide is [almost] always a better choice. There are four commonly-known encoders implemented: LZ4, zlib (level 5), LZMA (level 6) and Brotli (level 2). If you require that your compression be interoperable with non-Apple devices, you should use one of these three schemes: - Use LZ4 if speed is critical, and you are willing to sacrifice compression ratio to achieve it. - Use LZMA if compression ratio is critical, and you are willing to sacrifice speed to achieve it.  (Note: the performance impact of making this choice cannot be overstated.  LZMA is an order of magnitude slower for both compression and decompression than other schemes). - Use zlib otherwise. If you do not require interoperability with non-Apple devices, use LZFSE in the place of zlib in the hierarchy above.  It is an Apple-developed algorithm that is faster than, and generally compresses better than zlib. It is slower than LZ4 and does not compress as well as LZMA, however, so you will still want to use those algorithms in the situations described. Brotli is a widely adopted content-encoding-method for the web. Thus, Brotli is included in libcompression especially to provide decoding capabilities. In many other use-cases, one of the above mentioned algorithms is probably a better choice. Further details on the supported public formats, and their implementation in the compression library: - LZ4 is an extremely high-performance compressor.  The open source version is already one of the fastest compressors of which we are aware, and we have optimized it still further in our implementation.  The encoded format we produce and consume is compatible with the open source version, except that we add a very simple frame to the raw stream to allow some additional validation and functionality. The frame is documented here so that you can easily wrap another LZ4 encoder/decoder to produce/consume the same data stream if necessary.  An LZ4 encoded buffer is a sequence of blocks, each of which begins with a header.  There are three possible headers: a "compressed block header" is (hex) 62 76 34 31, followed by the size in bytes of the decoded (plaintext) data represented by the block and the size (in bytes) of the encoded data stored in the block.  Both size fields are stored as (possibly unaligned) 32-bit little-endian values.  The compressed block header is followed immediately by the actual lz4-encoded data stream. an "uncompressed block header" is (hex) 62 76 34 2d, followed by the size of the data stored in the uncompressed block as a (possibly unaligned) 32-bit little-endian value.  The uncompressed block header is followed immediately by the uncompressed data buffer of the specified size. an "end of stream header" is (hex) 62 76 34 24, and marks the end of the lz4 frame.  No further data may be written or read beyond this header. If you are implementing a wrapper for a raw LZ4 decoder, keep in mind that a compressed block may reference data from the previous block, so the (decoded) previous block must be available to the decoder. - We implement the LZMA level 6 encoder only.  This is the default compression level for open source LZMA, and provides excellent compression.  The LZMA decoder supports decoding data compressed with any compression level. - We implement the zlib level 5 encoder only.  This compression level provides a good balance between compression speed and compression ratio.  The zlib decoder supports decoding data compressed with any compression level. The encoded format is the raw DEFLATE format as described in IETF RFC 1951. Using the ZLIB library, the equivalent configuration of the encoder would be obtained with a call to: deflateInit2(zstream,5,Z_DEFLATED,-15,8,Z_DEFAULT_STRATEGY) - LZ4_RAW is supported by the buffer APIs only, and encodes/decodes payloads compatible with the LZ4 library, without the frame headers described above. - We implement Brotli level 2 encoder only. This compression level provides a good balance between compression speed and compression ratio. The Brotli decoder supports decoding data compressed with any compression level.
+// A structure for values that represent compression algorithms.
 // [compression.h:115]
 type Compression_algorithm int64
 
@@ -76,6 +76,7 @@ func (i Compression_algorithm) isMultiValue() bool {
 	return false
 }
 
+// A set of values used to represent the status of stream compression.
 // [compression.h:349]
 type Compression_status int64
 
@@ -125,6 +126,7 @@ func (i Compression_status) isMultiValue() bool {
 	return false
 }
 
+// A set of values used to represent stream compression flags.
 // [compression.h:342]
 type Compression_stream_flags int64
 
@@ -164,6 +166,7 @@ func (i Compression_stream_flags) isMultiValue() bool {
 	return false
 }
 
+// A set of values used to represent a stream compression operation.
 // [compression.h:331]
 type Compression_stream_operation int64
 

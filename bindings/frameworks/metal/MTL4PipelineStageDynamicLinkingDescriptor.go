@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Groups together properties to drive the dynamic linking process of a pipeline stage.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtl4pipelinestagedynamiclinkingdescriptor
 type MTL4PipelineStageDynamicLinkingDescriptor struct {
 	foundation.NSObject

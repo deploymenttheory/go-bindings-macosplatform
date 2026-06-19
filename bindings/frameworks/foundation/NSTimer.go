@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A timer that fires after a certain time interval has elapsed, sending a specified message to a target object.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nstimer
 type NSTimer struct {
 	NSObject

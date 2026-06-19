@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Produces noise in a checkerboard pattern.
+// A procedural noise generator whose output is an alternating square pattern.
 //
 // CheckerboardNoiseSource wraps [raw.GKCheckerboardNoiseSource] with a fluent Go API.
 type CheckerboardNoiseSource struct {
@@ -31,6 +31,8 @@ func CheckerboardNoiseSourceFromID(id objc.ID) *CheckerboardNoiseSource {
 	return &CheckerboardNoiseSource{inner: raw.GKCheckerboardNoiseSourceFromID(id)}
 }
 
+// Initializes a checkerboard noise source with the specified square size.
+//
 // NewCheckerboardNoiseSourceWithSquareSize creates a new [CheckerboardNoiseSource].
 func NewCheckerboardNoiseSourceWithSquareSize(squareSize float64) *CheckerboardNoiseSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKCheckerboardNoiseSource")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewCheckerboardNoiseSourceWithSquareSize(squareSize float64) *CheckerboardN
 	return &CheckerboardNoiseSource{inner: raw.GKCheckerboardNoiseSourceFromID(_id)}
 }
 
+// The size (both width and height) of squares in the generated checkerboard pattern.
+//
 // WithSquareSize sets the squareSize property and returns the receiver for chaining.
 func (x *CheckerboardNoiseSource) WithSquareSize(squareSize float64) *CheckerboardNoiseSource {
 	x.inner.SetSquareSize(squareSize)

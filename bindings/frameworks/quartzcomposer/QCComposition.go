@@ -54,23 +54,35 @@ func QCCompositionCompositionWithData(data *foundation.NSData) *quartz.QCComposi
 }
 
 func (o *QCComposition) Protocols() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _qCCompositionSelProtocols)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionSelProtocols)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *QCComposition) Attributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _qCCompositionSelAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionSelAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *QCComposition) InputKeys() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _qCCompositionSelInputKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionSelInputKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *QCComposition) OutputKeys() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _qCCompositionSelOutputKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionSelOutputKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *QCComposition) Identifier() *foundation.NSString {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration you create to customize an indirect command buffer.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlindirectcommandbufferdescriptor
 type MTLIndirectCommandBufferDescriptor struct {
 	foundation.NSObject

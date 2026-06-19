@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing a diagnostic report for an app crash.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxcrashdiagnostic
 type MXCrashDiagnostic struct {
 	MXDiagnostic

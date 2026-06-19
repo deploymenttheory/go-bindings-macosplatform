@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// This class is a representation of a Bluetooth Host Controller Interface that is present on the local computer (either plugged in externally or available internally).
+//
 // Apple documentation: https://developer.apple.com/documentation/iobluetooth/iobluetoothhostcontroller
 type IOBluetoothHostController struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func IOBluetoothHostControllerFromID(id objc.ID) *IOBluetoothHostController {
 	return o
 }
 
+// Gets the default HCI controller object.
 func IOBluetoothHostControllerDefaultController() *IOBluetoothHostController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothHostController), _iOBluetoothHostControllerSelDefaultController)
 	if _ret != 0 {
@@ -46,16 +49,19 @@ func IOBluetoothHostControllerDefaultController() *IOBluetoothHostController {
 	return IOBluetoothHostControllerFromID(_ret)
 }
 
+// Gets the current class of device value.
 func (o *IOBluetoothHostController) ClassOfDevice() uint32 {
 	_ret := objc.Send[uint32](o.Ptr(), _iOBluetoothHostControllerSelClassOfDevice)
 	return _ret
 }
 
+// Sets the current class of device value, for the specified amount of time. Note that the time interval must be set and valid. The range of acceptable values is 30-120 seconds. Anything above or below will be rounded up, or down, as appropriate.
 func (o *IOBluetoothHostController) SetClassOfDeviceForTimeInterval(classOfDevice uint32, seconds float64) int {
 	_ret := objc.Send[int](o.Ptr(), _iOBluetoothHostControllerSelSetClassOfDeviceForTimeInterval, classOfDevice, seconds)
 	return _ret
 }
 
+// Convience routine to get the HCI controller’s Bluetooth address as an NSString object.
 func (o *IOBluetoothHostController) AddressAsString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothHostControllerSelAddressAsString)
 	if _ret != 0 {
@@ -64,6 +70,7 @@ func (o *IOBluetoothHostController) AddressAsString() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Gets the “friendly” name of HCI controller.
 func (o *IOBluetoothHostController) NameAsString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothHostControllerSelNameAsString)
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for the details of a call.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/incallrecordresolutionresult
 type INCallRecordResolutionResult struct {
 	INIntentResolutionResult
@@ -32,6 +34,7 @@ func INCallRecordResolutionResultFromID(id objc.ID) *INCallRecordResolutionResul
 	return o
 }
 
+// Creates a result that contains the call record that matches the users request.
 func INCallRecordResolutionResultSuccessWithResolvedCallRecord(resolvedCallRecord *INCallRecord) *INCallRecordResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallRecordResolutionResult), _iNCallRecordResolutionResultSelSuccessWithResolvedCallRecord, resolvedCallRecord.Ptr())
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func INCallRecordResolutionResultSuccessWithResolvedCallRecord(resolvedCallRecor
 	return INCallRecordResolutionResultFromID(_ret)
 }
 
+// Creates a result that requires the user to select from an array of choices.
 func INCallRecordResolutionResultDisambiguationWithCallRecordsToDisambiguate(callRecordsToDisambiguate *foundation.NSArray[*INCallRecord]) *INCallRecordResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallRecordResolutionResult), _iNCallRecordResolutionResultSelDisambiguationWithCallRecordsToDisambiguate, callRecordsToDisambiguate.Ptr())
 	if _ret != 0 {
@@ -48,6 +52,7 @@ func INCallRecordResolutionResultDisambiguationWithCallRecordsToDisambiguate(cal
 	return INCallRecordResolutionResultFromID(_ret)
 }
 
+// Creates a result that requires the user to confirm the value before proceeding.
 func INCallRecordResolutionResultConfirmationRequiredWithCallRecordToConfirm(callRecordToConfirm *INCallRecord) *INCallRecordResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallRecordResolutionResult), _iNCallRecordResolutionResultSelConfirmationRequiredWithCallRecordToConfirm, callRecordToConfirm.Ptr())
 	if _ret != 0 {

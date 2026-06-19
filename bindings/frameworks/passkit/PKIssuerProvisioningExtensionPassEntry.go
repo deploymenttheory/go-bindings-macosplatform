@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents an item available to add to as a Wallet pass.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionpassentry
 type PKIssuerProvisioningExtensionPassEntry struct {
 	foundation.NSObject

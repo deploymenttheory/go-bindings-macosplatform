@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a connection from a capture input to a capture output.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptureconnection
 type AVCaptureConnection struct {
 	foundation.NSObject
@@ -61,7 +63,7 @@ func AVCaptureConnectionFromID(id objc.ID) *AVCaptureConnection {
 	return o
 }
 
-// @method connectionWithInputPorts:output: @abstract Returns an AVCaptureConnection instance describing a connection between the specified inputPorts and the specified output. @param ports An array of AVCaptureInputPort objects associated with AVCaptureInput objects. @param output An AVCaptureOutput object. @result An AVCaptureConnection instance joining the specified inputPorts to the specified output port. @discussion This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using -addInput: or -addOutput:, connections are formed between all compatible inputs and outputs automatically. You do not need to manually create and add connections to the session unless you use the primitive -addInputWithNoConnections: or -addOutputWithNoConnections: methods.
+// Returns a capture connection that represents a connection between multiple input ports and an output.
 func AVCaptureConnectionConnectionWithInputPortsOutput(ports *foundation.NSArray[*AVCaptureInputPort], output *AVCaptureOutput) *AVCaptureConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureConnection), _aVCaptureConnectionSelConnectionWithInputPortsOutput, ports.Ptr(), output.Ptr())
 	if _ret != 0 {
@@ -70,7 +72,7 @@ func AVCaptureConnectionConnectionWithInputPortsOutput(ports *foundation.NSArray
 	return AVCaptureConnectionFromID(_ret)
 }
 
-// @method connectionWithInputPort:videoPreviewLayer: @abstract Returns an AVCaptureConnection instance describing a connection between the specified inputPort and the specified AVCaptureVideoPreviewLayer instance. @param port An AVCaptureInputPort object associated with an AVCaptureInput object. @param layer An AVCaptureVideoPreviewLayer object. @result An AVCaptureConnection instance joining the specified inputPort to the specified video preview layer. @discussion This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using AVCaptureVideoPreviewLayer's -initWithSession: or -setSession:, a connection is formed between the first compatible input port and the video preview layer automatically. You do not need to manually create and add connections to the session unless you use AVCaptureVideoPreviewLayer's primitive -initWithSessionWithNoConnection: or -setSessionWithNoConnection: methods.
+// Returns a capture connection that represents a connection between an input port and a video preview layer.
 func AVCaptureConnectionConnectionWithInputPortVideoPreviewLayer(port *AVCaptureInputPort, layer *AVCaptureVideoPreviewLayer) *AVCaptureConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureConnection), _aVCaptureConnectionSelConnectionWithInputPortVideoPreviewLayer, port.Ptr(), layer.Ptr())
 	if _ret != 0 {
@@ -79,7 +81,7 @@ func AVCaptureConnectionConnectionWithInputPortVideoPreviewLayer(port *AVCapture
 	return AVCaptureConnectionFromID(_ret)
 }
 
-// @method initWithInputPorts:output: @abstract Returns an AVCaptureConnection instance describing a connection between the specified inputPorts and the specified output. @param ports An array of AVCaptureInputPort objects associated with AVCaptureInput objects. @param output An AVCaptureOutput object. @result An AVCaptureConnection instance joining the specified inputPorts to the specified output port. @discussion This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using -addInput: or -addOutput:, connections are formed between all compatible inputs and outputs automatically. You do not need to manually create and add connections to the session unless you use the primitive -addInputWithNoConnections: or -addOutputWithNoConnections: methods.
+// Creates a capture connection that represents a connection between multiple input ports and an output.
 func (o *AVCaptureConnection) InitWithInputPortsOutput(ports *foundation.NSArray[*AVCaptureInputPort], output *AVCaptureOutput) *AVCaptureConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureConnectionSelInitWithInputPortsOutput, ports.Ptr(), output.Ptr())
 	if _ret != 0 {
@@ -88,7 +90,7 @@ func (o *AVCaptureConnection) InitWithInputPortsOutput(ports *foundation.NSArray
 	return AVCaptureConnectionFromID(_ret)
 }
 
-// @method initWithInputPort:videoPreviewLayer: @abstract Returns an AVCaptureConnection instance describing a connection between the specified inputPort and the specified AVCaptureVideoPreviewLayer instance. @param port An AVCaptureInputPort object associated with an AVCaptureInput object. @param layer An AVCaptureVideoPreviewLayer object. @result An AVCaptureConnection instance joining the specified inputPort to the specified video preview layer. @discussion This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using AVCaptureVideoPreviewLayer's -initWithSession: or -setSession:, a connection is formed between the first compatible input port and the video preview layer automatically. You do not need to manually create and add connections to the session unless you use AVCaptureVideoPreviewLayer's primitive -initWithSessionWithNoConnection: or -setSessionWithNoConnection: methods.
+// Creates a capture connection that represents a connection between an input port and a video preview layer.
 func (o *AVCaptureConnection) InitWithInputPortVideoPreviewLayer(port *AVCaptureInputPort, layer *AVCaptureVideoPreviewLayer) *AVCaptureConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureConnectionSelInitWithInputPortVideoPreviewLayer, port.Ptr(), layer.Ptr())
 	if _ret != 0 {
@@ -97,7 +99,7 @@ func (o *AVCaptureConnection) InitWithInputPortVideoPreviewLayer(port *AVCapture
 	return AVCaptureConnectionFromID(_ret)
 }
 
-// @method isVideoRotationAngleSupported: @abstract Returns whether the connection supports the given rotation angle in degrees. @param videoRotationAngle A video rotation angle to be checked. @result YES if the connection supports the given video rotation angle, NO otherwise. @discussion The connection's videoRotationAngle property can only be set to a certain angle if this method returns YES for that angle. Only rotation angles of 0, 90, 180 and 270 are supported.
+// Returns a Boolean value that indicates whether the connection supports a rotation angle.
 func (o *AVCaptureConnection) IsVideoRotationAngleSupported(videoRotationAngle float64) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureConnectionSelIsVideoRotationAngleSupported, videoRotationAngle)
 	return _ret

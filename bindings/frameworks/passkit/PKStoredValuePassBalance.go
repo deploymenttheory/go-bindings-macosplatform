@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a balance that’s available for transactions, such as points or money.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance
 type PKStoredValuePassBalance struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func PKStoredValuePassBalanceFromID(id objc.ID) *PKStoredValuePassBalance {
 	return o
 }
 
+// Returns a Boolean value that indicates whether two pass balance objects contain the same values.
 func (o *PKStoredValuePassBalance) IsEqualToBalance(balance *PKStoredValuePassBalance) bool {
 	_ret := objc.Send[bool](o.Ptr(), _pKStoredValuePassBalanceSelIsEqualToBalance, balance.Ptr())
 	return _ret

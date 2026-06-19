@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A means to display additional content related to existing content on the screen.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspopover
 type NSPopover struct {
 	NSResponder
@@ -71,20 +73,22 @@ func (o *NSPopover) InitWithCoder(coder *foundation.NSCoder) *NSPopover {
 	return NSPopoverFromID(_ret)
 }
 
-// Shows the popover anchored to the specified view. The popover will animate onscreen and eventually animate offscreen when it is closed (unless the property `animates` is set to `NO`). - Parameters: - positioningRect: The rectangle within `positioningView` relative to which the popover should be positioned. Normally set to the bounds of `positioningView`. May be an empty rectangle, which will default to the bounds of `positioningView`. - positioningView: The view relative to which the popover should be positioned. Causes the method to raise `NSInvalidArgumentException` if `nil`. - preferredEdge: The edge of `positioningView` the popover should prefer to be anchored to (respects to the `-isFlipped` state of `positioningView`). The current (but not guaranteed) behavior is that AppKit will place the anchor towards the `preferredEdge` of the `positioningRect` unless such a placement would cause the popover not to fit on the screen of `positioningView`. If the anchor cannot be placed towards the `preferredEdge`, AppKit will (in the current implementation) attempt to place the anchor on the opposite side of the `positioningRect`. If that cannot be done, AppKit will attempt to place the anchor on a remaining side of the popover, and failing that will center the popover on the screen, causing it to (at least temporarily) lose its anchor. - Note: This method will throw a `NSInvalidArgumentException` if view is `nil` or if `view` is not in a window, or if the popover’s behavior is `NSPopoverBehaviorSemitransient` and the popover’s `positioningView` is in a popover or child window. It will throw a `NSInternalInconsistencyException` if the popover’s  content view controller (or the view controller’s view) is `nil`. If the popover is already being shown, this method will update to be associated with the new `view` and `positioningRect` passed. - Note: If the positioning view isn’t visible (its window isn’t visible, or the positioning rect is outside of its visible rect), this method does nothing.
+// Shows the popover anchored to the specified view.
 func (o *NSPopover) ShowRelativeToRectOfViewPreferredEdge(positioningRect corefoundation.CGRect, positioningView *NSView, preferredEdge foundation.NSRectEdge) {
 	o.Ptr().Send(_nSPopoverSelShowRelativeToRectOfViewPreferredEdge, positioningRect, positioningView.Ptr(), preferredEdge)
 }
 
-// Shows the popover positioned relative to \c toolbarItem . When the item is in the overflow menu, the popover will be presented from another appropriate affordance in the window. See the comments in \c -showRelativeToRect:ofView:preferredEdge: for the popover behavior. This method will throw an \c NSInvalidArgumentException if it cannot locate the toolbar item. This could happen because the item is not in a toolbar, or because the toolbar is not in a window.
+// Shows the popover anchored to the specified toolbar item.
 func (o *NSPopover) ShowRelativeToToolbarItem(toolbarItem *NSToolbarItem) {
 	o.Ptr().Send(_nSPopoverSelShowRelativeToToolbarItem, toolbarItem.Ptr())
 }
 
+// Attempts to close the popover.
 func (o *NSPopover) PerformClose(sender objc.ID) {
 	o.Ptr().Send(_nSPopoverSelPerformClose, sender)
 }
 
+// Forces the popover to close without consulting its delegate.
 func (o *NSPopover) Close() {
 	o.Ptr().Send(_nSPopoverSelClose)
 }

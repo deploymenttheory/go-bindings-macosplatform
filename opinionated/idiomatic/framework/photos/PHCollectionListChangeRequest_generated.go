@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request to create, delete, or modify a Photos collection list, for use in a photo library change block.
+//
 // CollectionListChangeRequest wraps [raw.PHCollectionListChangeRequest] with a fluent Go API.
 type CollectionListChangeRequest struct {
 	inner *raw.PHCollectionListChangeRequest
@@ -37,37 +39,51 @@ func NewCollectionListChangeRequest() *CollectionListChangeRequest {
 	return &CollectionListChangeRequest{inner: raw.PHCollectionListChangeRequestFromID(_id)}
 }
 
+// The displayed name of the collection list.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *CollectionListChangeRequest) WithTitle(title string) *CollectionListChangeRequest {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// Adds the specified collections as children of the collection list.
+//
 // AddChildCollections calls the underlying AddChildCollections.
 func (x *CollectionListChangeRequest) AddChildCollections(collections foundation.NSFastEnumeration) {
 	x.inner.AddChildCollections(collections)
 }
 
+// Inserts the specified collections into the collection list at the specified indexes.
+//
 // InsertChildCollectionsAtIndexes calls the underlying InsertChildCollectionsAtIndexes.
 func (x *CollectionListChangeRequest) InsertChildCollectionsAtIndexes(collections foundation.NSFastEnumeration, indexes *foundation.NSIndexSet) {
 	x.inner.InsertChildCollectionsAtIndexes(collections, indexes)
 }
 
+// Removes the specified child collections from the collection list.
+//
 // RemoveChildCollections calls the underlying RemoveChildCollections.
 func (x *CollectionListChangeRequest) RemoveChildCollections(collections foundation.NSFastEnumeration) {
 	x.inner.RemoveChildCollections(collections)
 }
 
+// Removes the child collections at the specified indexes from the collection list.
+//
 // RemoveChildCollectionsAtIndexes calls the underlying RemoveChildCollectionsAtIndexes.
 func (x *CollectionListChangeRequest) RemoveChildCollectionsAtIndexes(indexes *foundation.NSIndexSet) {
 	x.inner.RemoveChildCollectionsAtIndexes(indexes)
 }
 
+// Replaces the child collections at the specified indexes in the collection list with the specified collections.
+//
 // ReplaceChildCollectionsAtIndexesWithChildCollections calls the underlying ReplaceChildCollectionsAtIndexesWithChildCollections.
 func (x *CollectionListChangeRequest) ReplaceChildCollectionsAtIndexesWithChildCollections(indexes *foundation.NSIndexSet, collections foundation.NSFastEnumeration) {
 	x.inner.ReplaceChildCollectionsAtIndexesWithChildCollections(indexes, collections)
 }
 
+// Moves the child collections at the specified indexes in the collection list to a new index.
+//
 // MoveChildCollectionsAtIndexesToIndex calls the underlying MoveChildCollectionsAtIndexesToIndex.
 func (x *CollectionListChangeRequest) MoveChildCollectionsAtIndexesToIndex(indexes *foundation.NSIndexSet, toIndex uint) {
 	x.inner.MoveChildCollectionsAtIndexesToIndex(indexes, toIndex)

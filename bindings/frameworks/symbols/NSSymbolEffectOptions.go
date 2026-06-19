@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Options that configure how effects apply to symbol-based images.
+//
 // Apple documentation: https://developer.apple.com/documentation/symbols/nssymboleffectoptions
 type NSSymbolEffectOptions struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func NSSymbolEffectOptionsFromID(id objc.ID) *NSSymbolEffectOptions {
 	return o
 }
 
-// The default options.
+// The default set of effect options.
 func NSSymbolEffectOptionsOptions() *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptions), _nSSymbolEffectOptionsSelOptions)
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func NSSymbolEffectOptionsOptions() *NSSymbolEffectOptions {
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
-// Convenience initializer that prefers to repeat indefinitely.
+// A default set of effect options that prefers to repeat indefinitely.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func NSSymbolEffectOptionsOptionsWithRepeating() *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptions), _nSSymbolEffectOptionsSelOptionsWithRepeating)
@@ -54,7 +56,7 @@ func NSSymbolEffectOptionsOptionsWithRepeating() *NSSymbolEffectOptions {
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
-// Return a copy of the options that prefers to repeat indefinitely.
+// A set of effect options that prefers to repeat indefinitely.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSSymbolEffectOptions) OptionsWithRepeating() *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolEffectOptionsSelOptionsWithRepeating)
@@ -64,7 +66,7 @@ func (o *NSSymbolEffectOptions) OptionsWithRepeating() *NSSymbolEffectOptions {
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
-// Convenience initializer that prefers not to repeat.
+// A default set of effect options that prefers to not repeat.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func NSSymbolEffectOptionsOptionsWithNonRepeating() *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptions), _nSSymbolEffectOptionsSelOptionsWithNonRepeating)
@@ -74,7 +76,7 @@ func NSSymbolEffectOptionsOptionsWithNonRepeating() *NSSymbolEffectOptions {
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
-// Return a copy of the options that prefers not to repeat.
+// A set of effect options that prefers to not repeat.
 func (o *NSSymbolEffectOptions) OptionsWithNonRepeating() *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolEffectOptionsSelOptionsWithNonRepeating)
 	if _ret != 0 {
@@ -83,7 +85,7 @@ func (o *NSSymbolEffectOptions) OptionsWithNonRepeating() *NSSymbolEffectOptions
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
-// Convenience initializer setting a preferred repeat count. - Parameter count: The preferred number of times to play the effect. Very large or small values may be clamped. - Returns: A new options object with the preferred repeat count.
+// A default set of effect options with a preferred repeat count.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func NSSymbolEffectOptionsOptionsWithRepeatCount(count int) *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptions), _nSSymbolEffectOptionsSelOptionsWithRepeatCount, count)
@@ -93,7 +95,7 @@ func NSSymbolEffectOptionsOptionsWithRepeatCount(count int) *NSSymbolEffectOptio
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
-// Return a copy of the options setting a preferred repeat count. - Parameter count: The preferred number of times to play the effect. Very large or small values may be clamped. - Returns: A new options object with the preferred repeat count.
+// Creates a set of effect options with a preferred repeat count.
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSSymbolEffectOptions) OptionsWithRepeatCount(count int) *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolEffectOptionsSelOptionsWithRepeatCount, count)
@@ -103,7 +105,7 @@ func (o *NSSymbolEffectOptions) OptionsWithRepeatCount(count int) *NSSymbolEffec
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
-// Convenience initializer setting the preferred speed multiplier. - Parameter speed: the preferred speed multiplier to play the effect with. The default multiplier is `1.0`. Very large or small values may be clamped. - Returns: A new instance with the preferred speed multiplier.
+// A default set of effect options with a preferred speed multiplier.
 func NSSymbolEffectOptionsOptionsWithSpeed(speed float64) *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptions), _nSSymbolEffectOptionsSelOptionsWithSpeed, speed)
 	if _ret != 0 {
@@ -112,7 +114,7 @@ func NSSymbolEffectOptionsOptionsWithSpeed(speed float64) *NSSymbolEffectOptions
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
-// Return a copy of the options setting the preferred speed multiplier. - Parameter speed: The preferred speed multiplier to play the effect with. The default multiplier is `1.0`. Very large or small values may be clamped. - Returns: A new instance with the preferred speed multiplier.
+// Creates a set of effect options with a preferred speed multiplier.
 func (o *NSSymbolEffectOptions) OptionsWithSpeed(speed float64) *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolEffectOptionsSelOptionsWithSpeed, speed)
 	if _ret != 0 {
@@ -121,7 +123,7 @@ func (o *NSSymbolEffectOptions) OptionsWithSpeed(speed float64) *NSSymbolEffectO
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
-// Convenience initializer setting a preferred repeat behavior. - Parameter behavior: The preferred behavior when the effect is repeated. - Returns: A new options object with the preferred repeat behavior.
+// Convenience initializer setting a preferred repeat behavior.
 func NSSymbolEffectOptionsOptionsWithRepeatBehavior(behavior *NSSymbolEffectOptionsRepeatBehavior) *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptions), _nSSymbolEffectOptionsSelOptionsWithRepeatBehavior, behavior.Ptr())
 	if _ret != 0 {
@@ -130,7 +132,7 @@ func NSSymbolEffectOptionsOptionsWithRepeatBehavior(behavior *NSSymbolEffectOpti
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
-// Return a copy of the options setting a preferred repeat behavior. - Parameter behavior: The preferred behavior when the effect is repeated. - Returns: A new options object with the preferred repeat behavior.
+// Return a copy of the options setting a preferred repeat behavior.
 func (o *NSSymbolEffectOptions) OptionsWithRepeatBehavior(behavior *NSSymbolEffectOptionsRepeatBehavior) *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolEffectOptionsSelOptionsWithRepeatBehavior, behavior.Ptr())
 	if _ret != 0 {

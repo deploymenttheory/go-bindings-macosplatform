@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that exposes a gradient convolution kernel’s gradient with respect to weights and biases.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnconvolutiongradientstate
 type MPSCNNConvolutionGradientState struct {
 	mpsneuralnetwork.MPSNNGradientState

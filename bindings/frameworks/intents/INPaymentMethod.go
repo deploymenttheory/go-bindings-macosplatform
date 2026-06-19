@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about a form of payment supported by your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inpaymentmethod
 type INPaymentMethod struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func INPaymentMethodFromID(id objc.ID) *INPaymentMethod {
 	return o
 }
 
+// Initializes the payment method object with the specified type and descriptive information.
 func (o *INPaymentMethod) InitWithTypeNameIdentificationHintIcon(type_ INPaymentMethodType, name *foundation.NSString, identificationHint *foundation.NSString, icon *INImage) *INPaymentMethod {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPaymentMethodSelInitWithTypeNameIdentificationHintIcon, type_, name.Ptr(), identificationHint.Ptr(), icon.Ptr())
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func (o *INPaymentMethod) InitWithTypeNameIdentificationHintIcon(type_ INPayment
 	return INPaymentMethodFromID(_ret)
 }
 
+// Creates and returns a payment method object that represents payment through Apple Pay.
 func INPaymentMethodApplePayPaymentMethod() *INPaymentMethod {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPaymentMethod), _iNPaymentMethodSelApplePayPaymentMethod)
 	if _ret != 0 {

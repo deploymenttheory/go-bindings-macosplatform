@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The user interface of a combo box.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscomboboxcell
 type NSComboBoxCell struct {
 	NSTextFieldCell
@@ -66,30 +68,37 @@ func NSComboBoxCellFromID(id objc.ID) *NSComboBoxCell {
 	return o
 }
 
+// Marks the combo box as needing redisplay, so that it will reload the data for visible pop-up items and draw the new values.
 func (o *NSComboBoxCell) ReloadData() {
 	o.Ptr().Send(_nSComboBoxCellSelReloadData)
 }
 
+// Informs the combo box that the number of items in its data source has changed.
 func (o *NSComboBoxCell) NoteNumberOfItemsChanged() {
 	o.Ptr().Send(_nSComboBoxCellSelNoteNumberOfItemsChanged)
 }
 
+// Scrolls the combo box’s pop-up list vertically so that the item at the given index is as close to the top as possible.
 func (o *NSComboBoxCell) ScrollItemAtIndexToTop(index int) {
 	o.Ptr().Send(_nSComboBoxCellSelScrollItemAtIndexToTop, index)
 }
 
+// Scrolls the combo box’s pop-up list vertically so that the item at the given index is visible.
 func (o *NSComboBoxCell) ScrollItemAtIndexToVisible(index int) {
 	o.Ptr().Send(_nSComboBoxCellSelScrollItemAtIndexToVisible, index)
 }
 
+// Selects the pop-up list row at the given index.
 func (o *NSComboBoxCell) SelectItemAtIndex(index int) {
 	o.Ptr().Send(_nSComboBoxCellSelSelectItemAtIndex, index)
 }
 
+// Deselects the pop-up list item at the given index if it’s selected.
 func (o *NSComboBoxCell) DeselectItemAtIndex(index int) {
 	o.Ptr().Send(_nSComboBoxCellSelDeselectItemAtIndex, index)
 }
 
+// Returns a string from the combo box’s pop-up list that starts with the given substring.
 func (o *NSComboBoxCell) CompletedString(string_ *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSComboBoxCellSelCompletedString, string_.Ptr())
 	if _ret != 0 {
@@ -98,39 +107,48 @@ func (o *NSComboBoxCell) CompletedString(string_ *foundation.NSString) *foundati
 	return foundation.NSStringFromID(_ret)
 }
 
+// Adds the specified object to the internal item list.
 func (o *NSComboBoxCell) AddItemWithObjectValue(object objc.ID) {
 	o.Ptr().Send(_nSComboBoxCellSelAddItemWithObjectValue, object)
 }
 
+// Adds multiple objects to the internal item list.
 func (o *NSComboBoxCell) AddItemsWithObjectValues(objects *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSComboBoxCellSelAddItemsWithObjectValues, objects)
+	o.Ptr().Send(_nSComboBoxCellSelAddItemsWithObjectValues, objects.Ptr())
 }
 
+// Inserts an object at the specified location in the internal item list.
 func (o *NSComboBoxCell) InsertItemWithObjectValueAtIndex(object objc.ID, index int) {
 	o.Ptr().Send(_nSComboBoxCellSelInsertItemWithObjectValueAtIndex, object, index)
 }
 
+// Removes all occurrences of the specified object from the combo box’s internal item list.
 func (o *NSComboBoxCell) RemoveItemWithObjectValue(object objc.ID) {
 	o.Ptr().Send(_nSComboBoxCellSelRemoveItemWithObjectValue, object)
 }
 
+// Removes the object at the specified location from the combo box’s internal item list.
 func (o *NSComboBoxCell) RemoveItemAtIndex(index int) {
 	o.Ptr().Send(_nSComboBoxCellSelRemoveItemAtIndex, index)
 }
 
+// Removes all items from the combo box’s internal item list.
 func (o *NSComboBoxCell) RemoveAllItems() {
 	o.Ptr().Send(_nSComboBoxCellSelRemoveAllItems)
 }
 
+// Selects the first pop-up list item that corresponds to the specified object.
 func (o *NSComboBoxCell) SelectItemWithObjectValue(object objc.ID) {
 	o.Ptr().Send(_nSComboBoxCellSelSelectItemWithObjectValue, object)
 }
 
+// Returns the object located at the specified location in the internal item list.
 func (o *NSComboBoxCell) ItemObjectValueAtIndex(index int) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSComboBoxCellSelItemObjectValueAtIndex, index)
 	return _ret
 }
 
+// Searches the combo box’s internal item list for the given object and returns the matching index number.
 func (o *NSComboBoxCell) IndexOfItemWithObjectValue(object objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _nSComboBoxCellSelIndexOfItemWithObjectValue, object)
 	return _ret
@@ -224,6 +242,9 @@ func (o *NSComboBoxCell) ObjectValueOfSelectedItem() objc.ID {
 }
 
 func (o *NSComboBoxCell) ObjectValues() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSComboBoxCellSelObjectValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSComboBoxCellSelObjectValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

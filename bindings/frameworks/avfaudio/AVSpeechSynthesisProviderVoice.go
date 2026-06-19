@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a voice that an audio unit provides to its host.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avspeechsynthesisprovidervoice
 type AVSpeechSynthesisProviderVoice struct {
 	foundation.NSObject
@@ -41,15 +43,16 @@ func AVSpeechSynthesisProviderVoiceFromID(id objc.ID) *AVSpeechSynthesisProvider
 	return o
 }
 
+// Creates a voice with a name, an identifier, and language information.
 func (o *AVSpeechSynthesisProviderVoice) InitWithNameIdentifierPrimaryLanguagesSupportedLanguages(name *foundation.NSString, identifier *foundation.NSString, primaryLanguages *foundation.NSArray[*foundation.NSString], supportedLanguages *foundation.NSArray[*foundation.NSString]) *AVSpeechSynthesisProviderVoice {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisProviderVoiceSelInitWithNameIdentifierPrimaryLanguagesSupportedLanguages, name.Ptr(), identifier.Ptr(), primaryLanguages, supportedLanguages)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisProviderVoiceSelInitWithNameIdentifierPrimaryLanguagesSupportedLanguages, name.Ptr(), identifier.Ptr(), primaryLanguages.Ptr(), supportedLanguages.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVSpeechSynthesisProviderVoiceFromID(_ret)
 }
 
-// @brief  A call that indicates that a new voice or set of voices is available, or no longer available, for system use. @discussion Call this method to indicate to the system that there has been change in the availability of the voices your application is providing to the system.
+// Updates the voices your app provides to the system.
 func AVSpeechSynthesisProviderVoiceUpdateSpeechVoices() {
 	objc.ID(_clsAVSpeechSynthesisProviderVoice).Send(_aVSpeechSynthesisProviderVoiceSelUpdateSpeechVoices)
 }
@@ -74,14 +77,20 @@ func (o *AVSpeechSynthesisProviderVoice) Identifier() *foundation.NSString {
 
 // @brief  A set of BCP 47 codes identifying the languages this synthesizer is primarily used for. @discussion These languages are what a user would expect a synthesizer to fully support and be primarily used for.
 func (o *AVSpeechSynthesisProviderVoice) PrimaryLanguages() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVSpeechSynthesisProviderVoiceSelPrimaryLanguages)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisProviderVoiceSelPrimaryLanguages)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @brief  A superset of BCP 47 codes identifying the voice’s supported languages. @discussion These languages are what a user would expect a voice to be able to speak such that if the voice is given a multi-lingual phrase, it would be able to speak the entire phrase without a need to to switch voices. For example, a zh-CN voice could have @c ["zh-CN"] as its @c primaryLanguages, but in @c supportedLanguages have @c ["zh-CN","en-US"] indicating if it received "你好 means Hello", it would be able to speak the entire phrase.
 func (o *AVSpeechSynthesisProviderVoice) SupportedLanguages() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVSpeechSynthesisProviderVoiceSelSupportedLanguages)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisProviderVoiceSelSupportedLanguages)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @brief  The size of the voice (optional) @discussion This reported size of the voice package on disk, in bytes. Defaults to 0.

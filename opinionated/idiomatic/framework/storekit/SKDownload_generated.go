@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Downloadable content associated with a product.
+//
 // Download wraps [raw.SKDownload] with a fluent Go API.
 type Download struct {
 	inner *raw.SKDownload

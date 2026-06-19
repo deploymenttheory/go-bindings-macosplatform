@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that implements the client side of a custom transparent network proxy solution.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/netransparentproxyprovider
 type NETransparentProxyProvider struct {
 	NEAppProxyProvider

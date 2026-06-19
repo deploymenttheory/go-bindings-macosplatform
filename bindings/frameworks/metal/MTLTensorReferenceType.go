@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a tensor in the shading language in a struct or array.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtltensorreferencetype
 type MTLTensorReferenceType struct {
 	MTLType

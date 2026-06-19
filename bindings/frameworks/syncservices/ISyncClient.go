@@ -105,8 +105,11 @@ func (o *ISyncClient) SetImagePath(path *foundation.NSString) {
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncClient) SupportedEntityNames() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iSyncClientSelSupportedEntityNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncClientSelSupportedEntityNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.7.
@@ -138,8 +141,11 @@ func (o *ISyncClient) LastSyncStatusForEntityName(entityName *foundation.NSStrin
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncClient) EnabledEntityNames() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iSyncClientSelEnabledEntityNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncClientSelEnabledEntityNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.7.
@@ -150,7 +156,7 @@ func (o *ISyncClient) IsEnabledForEntityName(entityName *foundation.NSString) bo
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncClient) SetEnabledForEntityNames(flag bool, entityNames *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_iSyncClientSelSetEnabledForEntityNames, flag, entityNames)
+	o.Ptr().Send(_iSyncClientSelSetEnabledForEntityNames, flag, entityNames.Ptr())
 }
 
 // Deprecated: since macOS 10.7.
@@ -172,7 +178,7 @@ func (o *ISyncClient) ShouldReplaceClientRecordsForEntityName(entityName *founda
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncClient) SetShouldReplaceClientRecordsForEntityNames(flag bool, entityNames *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_iSyncClientSelSetShouldReplaceClientRecordsForEntityNames, flag, entityNames)
+	o.Ptr().Send(_iSyncClientSelSetShouldReplaceClientRecordsForEntityNames, flag, entityNames.Ptr())
 }
 
 // Deprecated: since macOS 10.7.
@@ -188,13 +194,16 @@ func (o *ISyncClient) SetObjectForKey(value foundation.NSCoding, key *foundation
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncClient) Filters() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iSyncClientSelFilters)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncClientSelFilters)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncClient) SetFilters(filters *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_iSyncClientSelSetFilters, filters)
+	o.Ptr().Send(_iSyncClientSelSetFilters, filters.Ptr())
 }
 
 // Deprecated: since macOS 10.7.

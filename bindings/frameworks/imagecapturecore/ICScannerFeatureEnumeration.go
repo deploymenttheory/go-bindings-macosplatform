@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A feature that can have one of several discrete values, strings or numbers.
+//
 // Apple documentation: https://developer.apple.com/documentation/imagecapturecore/icscannerfeatureenumeration
 type ICScannerFeatureEnumeration struct {
 	ICScannerFeature
@@ -53,18 +55,27 @@ func (o *ICScannerFeatureEnumeration) DefaultValue() objc.ID {
 
 // @property values @abstract An array of possible values. All items in this array must be of same type￼.
 func (o *ICScannerFeatureEnumeration) Values() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _iCScannerFeatureEnumerationSelValues)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFeatureEnumerationSelValues)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 // @property menuItemLabels @abstract ￼The human readable menu item labels to be used in a menu to allow the user to select the current value from an array of possible values.
 func (o *ICScannerFeatureEnumeration) MenuItemLabels() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _iCScannerFeatureEnumerationSelMenuItemLabels)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFeatureEnumerationSelMenuItemLabels)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @property menuItemLabelsTooltips @abstract ￼Tooltip text associated with the menu items.
 func (o *ICScannerFeatureEnumeration) MenuItemLabelsTooltips() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _iCScannerFeatureEnumerationSelMenuItemLabelsTooltips)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFeatureEnumerationSelMenuItemLabelsTooltips)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }

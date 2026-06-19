@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A voice channel that allows players to speak with each other in a multiplayer game.
+//
 // VoiceChat wraps [raw.GKVoiceChat] with a fluent Go API.
 type VoiceChat struct {
 	inner *raw.GKVoiceChat
@@ -37,6 +39,8 @@ func NewVoiceChat() *VoiceChat {
 	return &VoiceChat{inner: raw.GKVoiceChatFromID(_id)}
 }
 
+// A method that handles when a player’s voice chat changes state.
+//
 // WithPlayerVoiceChatStateDidChangeHandler sets the playerVoiceChatStateDidChangeHandler property and returns the receiver for chaining.
 func (x *VoiceChat) WithPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler func(*raw.GKPlayer, GKVoiceChatPlayerState)) *VoiceChat {
 	x.inner.SetPlayerVoiceChatStateDidChangeHandler(func(_a0 *raw.GKPlayer, _a1 raw.GKVoiceChatPlayerState) {
@@ -45,18 +49,24 @@ func (x *VoiceChat) WithPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStat
 	return x
 }
 
+// A Boolean value that indicates whether the channel is sampling the microphone.
+//
 // WithActive sets the active property and returns the receiver for chaining.
 func (x *VoiceChat) WithActive(active bool) *VoiceChat {
 	x.inner.SetActive(active)
 	return x
 }
 
+// The volume level for the channel.
+//
 // WithVolume sets the volume property and returns the receiver for chaining.
 func (x *VoiceChat) WithVolume(volume float32) *VoiceChat {
 	x.inner.SetVolume(volume)
 	return x
 }
 
+// Handles when a player in the chat changes state.
+//
 // WithPlayerStateUpdateHandler sets the playerStateUpdateHandler property and returns the receiver for chaining.
 func (x *VoiceChat) WithPlayerStateUpdateHandler(playerStateUpdateHandler func(*foundation.NSString, GKVoiceChatPlayerState)) *VoiceChat {
 	x.inner.SetPlayerStateUpdateHandler(func(_a0 *foundation.NSString, _a1 raw.GKVoiceChatPlayerState) {
@@ -65,16 +75,22 @@ func (x *VoiceChat) WithPlayerStateUpdateHandler(playerStateUpdateHandler func(*
 	return x
 }
 
+// Starts communication with other players in a channel.
+//
 // Start calls the underlying Start.
 func (x *VoiceChat) Start() {
 	x.inner.Start()
 }
 
+// Ends communication with other players in a channel.
+//
 // Stop calls the underlying Stop.
 func (x *VoiceChat) Stop() {
 	x.inner.Stop()
 }
 
+// Mutes a player in the chat, including the local player.
+//
 // SetPlayerMuted calls the underlying SetPlayerMuted.
 func (x *VoiceChat) SetPlayerMuted(player *raw.GKPlayer, isMuted bool) {
 	x.inner.SetPlayerMuted(player, isMuted)
@@ -144,7 +160,7 @@ func (x *VoiceChat) SetPlayerStateUpdateHandler(playerStateUpdateHandler func(*f
 	})
 }
 
-// * This method is obsolete. It will never be invoked and its implementation does nothing**
+// Mutes a player in a voice chat.
 //
 // SetMuteForPlayer calls the underlying SetMuteForPlayer.
 func (x *VoiceChat) SetMuteForPlayer(isMuted bool, playerID string) {

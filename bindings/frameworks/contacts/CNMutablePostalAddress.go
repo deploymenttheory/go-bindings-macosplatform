@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable representation of the postal address for a contact.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnmutablepostaladdress
 type CNMutablePostalAddress struct {
 	CNPostalAddress

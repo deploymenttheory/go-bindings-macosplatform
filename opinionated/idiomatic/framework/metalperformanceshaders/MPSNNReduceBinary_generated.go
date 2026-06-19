@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for binary reduction filters.
+//
 // NNReduceBinary wraps [raw.MPSNNReduceBinary] with a fluent Go API.
 type NNReduceBinary struct {
 	inner *raw.MPSNNReduceBinary
@@ -183,7 +185,7 @@ func (x *NNReduceBinary) WithDestinationImageAllocator(destinationImageAllocator
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NNReduceBinary) WithOptions(options mpscore.MPSKernelOptions) *NNReduceBinary {
@@ -191,7 +193,7 @@ func (x *NNReduceBinary) WithOptions(options mpscore.MPSKernelOptions) *NNReduce
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NNReduceBinary) WithLabel(label string) *NNReduceBinary {

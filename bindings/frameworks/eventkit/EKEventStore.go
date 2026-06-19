@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that accesses a person’s calendar events and reminders and supports the scheduling of new events.
+//
 // Apple documentation: https://developer.apple.com/documentation/eventkit/ekeventstore
 type EKEventStore struct {
 	foundation.NSObject
@@ -69,25 +71,26 @@ func EKEventStoreFromID(id objc.ID) *EKEventStore {
 	return o
 }
 
+// Determines the authorization status for the given entity type.
 func EKEventStoreAuthorizationStatusForEntityType(entityType EKEntityType) EKAuthorizationStatus {
 	_ret := objc.Send[EKAuthorizationStatus](objc.ID(_clsEKEventStore), _eKEventStoreSelAuthorizationStatusForEntityType, entityType)
 	return _ret
 }
 
-// @method     initWithAccessToEntityTypes: @discussion Users are able to grant or deny access to event and reminder data on a per-app basis. To request access to event and/or reminder data, instantiate an EKEventStore using this method. This call will not block the program while the user is being asked to grant or deny access. Until access has been granted for an entity type, this event store will not contain any calendars for that entity type, and any attempt to save entities of that entity type will fail. If access is later granted or declined, the event store will broadcast an EKEventStoreChangedNotification. You can check the current access status for an entity type using +authorizationStatusForEntityType:. The user will only be prompted the first time access is requested; any subsequent instantiations of EKEventStore will use the existing permissions. @param      entityTypes         A bit mask of entity types to which you want access
+// Initializes access to the event store with support for the given entity type.
 // Deprecated: since macOS 10.9.
 func (o *EKEventStore) InitWithAccessToEntityTypes(entityTypes EKEntityMask) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelInitWithAccessToEntityTypes, entityTypes)
 	return _ret
 }
 
-// @method     init
+// Creates a new event store.
 func (o *EKEventStore) Init() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelInit)
 	return _ret
 }
 
-// @method     initWithSources: @abstract   Creates a new event store that only includes items and calendars for a subset of sources. @param      sources The sources you want this event store to recognize. This may include delegate sources.
+// Creates an event store that contains data for the specified sources.
 func (o *EKEventStore) InitWithSources(sources *foundation.NSArray[*EKSource]) *EKEventStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelInitWithSources, sources.Ptr())
 	if _ret != 0 {
@@ -96,6 +99,7 @@ func (o *EKEventStore) InitWithSources(sources *foundation.NSArray[*EKSource]) *
 	return EKEventStoreFromID(_ret)
 }
 
+// Prompts people to grant or deny read and write access to event data.
 func (o *EKEventStore) RequestFullAccessToEventsWithCompletion(completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -107,6 +111,7 @@ func (o *EKEventStore) RequestFullAccessToEventsWithCompletion(completion func(b
 	o.Ptr().Send(_eKEventStoreSelRequestFullAccessToEventsWithCompletion, __block_completion)
 }
 
+// Prompts the person using your app to grant or deny write access to event data.
 func (o *EKEventStore) RequestWriteOnlyAccessToEventsWithCompletion(completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -118,6 +123,7 @@ func (o *EKEventStore) RequestWriteOnlyAccessToEventsWithCompletion(completion f
 	o.Ptr().Send(_eKEventStoreSelRequestWriteOnlyAccessToEventsWithCompletion, __block_completion)
 }
 
+// Prompts people to grant or deny read and write access to reminders.
 func (o *EKEventStore) RequestFullAccessToRemindersWithCompletion(completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -129,6 +135,7 @@ func (o *EKEventStore) RequestFullAccessToRemindersWithCompletion(completion fun
 	o.Ptr().Send(_eKEventStoreSelRequestFullAccessToRemindersWithCompletion, __block_completion)
 }
 
+// Prompts the person using your app to grant or deny access to event or reminder data.
 // Deprecated: Use -requestFullAccessToEventsWithCompletion:, -requestWriteOnlyAccessToEventsWithCompletion:, or -requestFullAccessToRemindersWithCompletion:
 func (o *EKEventStore) RequestAccessToEntityTypeCompletion(entityType EKEntityType, completion func(bool, unsafe.Pointer)) {
 	var __block_completion objc.Block
@@ -141,7 +148,7 @@ func (o *EKEventStore) RequestAccessToEntityTypeCompletion(entityType EKEntityTy
 	o.Ptr().Send(_eKEventStoreSelRequestAccessToEntityTypeCompletion, entityType, __block_completion)
 }
 
-// @method     sourceWithIdentifier: @abstract   Returns a source with a specified identifier.
+// Locates an event source with the specified identifier.
 func (o *EKEventStore) SourceWithIdentifier(identifier *foundation.NSString) *EKSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelSourceWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -150,7 +157,7 @@ func (o *EKEventStore) SourceWithIdentifier(identifier *foundation.NSString) *EK
 	return EKSourceFromID(_ret)
 }
 
-// @method     calendarsForEntityType @abstract   Returns calendars that support a given entity type (reminders, events)
+// Identifies the calendars that support a given entity type, such as reminders or events.
 func (o *EKEventStore) CalendarsForEntityType(entityType EKEntityType) *foundation.NSArray[*EKCalendar] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelCalendarsForEntityType, entityType)
 	if _ret != 0 {
@@ -159,7 +166,7 @@ func (o *EKEventStore) CalendarsForEntityType(entityType EKEntityType) *foundati
 	return foundation.NSArrayFromID[*EKCalendar](_ret)
 }
 
-// @method     defaultCalendarForNewReminders @abstract   Returns the calendar that reminders should be added to by default. @discussion This may be nil if there is no default calendar for new reminders.
+// Identifies the default calendar for adding reminders to, as specified by user settings.
 func (o *EKEventStore) DefaultCalendarForNewReminders() *EKCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelDefaultCalendarForNewReminders)
 	if _ret != 0 {
@@ -168,7 +175,7 @@ func (o *EKEventStore) DefaultCalendarForNewReminders() *EKCalendar {
 	return EKCalendarFromID(_ret)
 }
 
-// @method     calendarWithIdentifier: @abstract   Returns a calendar with a specified identifier.
+// Locates a calendar with the specified identifier.
 func (o *EKEventStore) CalendarWithIdentifier(identifier *foundation.NSString) *EKCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelCalendarWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -177,7 +184,7 @@ func (o *EKEventStore) CalendarWithIdentifier(identifier *foundation.NSString) *
 	return EKCalendarFromID(_ret)
 }
 
-// @method     saveCalendar:commit:error: @abstract   Saves changes to a calendar, or adds a new calendar to the database. @discussion This method attempts to save the given calendar to the calendar database. It returns YES if successful and NO otherwise. Passing a calendar fetched from another EKEventStore instance into this function will raise an exception. On WatchOS, saving changes is not supported. @param      calendar    The calendar to save. @param      commit      Pass YES to cause the database to save. You can pass NO to save multiple calendars and then call commit: to save them all at once. @param      error       If an error occurs, this will contain a valid NSError object on exit.
+// Saves a calendar to the event store by either committing or batching the changes.
 func (o *EKEventStore) SaveCalendarCommitError(calendar *EKCalendar, commit bool) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelSaveCalendarCommitError, calendar.Ptr(), commit, unsafe.Pointer(&_nsErr))
@@ -187,7 +194,7 @@ func (o *EKEventStore) SaveCalendarCommitError(calendar *EKCalendar, commit bool
 	return _ret, nil
 }
 
-// @method     removeCalendar:commit:error: @abstract   Removes a calendar from the database. @discussion This method attempts to delete the given calendar from the calendar database. It returns YES if successful and NO otherwise. Passing a calendar fetched from another EKEventStore instance into this function will raise an exception. If the calendar supports multiple entity types (allowedEntityTypes), but the user has not granted you access to all those entity types, then we will delete all of the entity types for which you have access and remove that entity type from the allowedEntityTypes. For example: If a calendar supports both events and reminders, but you only have access to reminders, we will delete all the reminders and make the calendar only support events. If you have access to all of its allowedEntityTypes, then it will delete the calendar and all of the events and reminders in the calendar. On WatchOS, modifying the database is not supported. @param      calendar    The calendar to delete. @param      commit      Pass YES to cause the database to save. You can pass NO to batch multiple changes and then call commit: to save them all at once. @param      error       If an error occurs, this will contain a valid NSError object on exit.
+// Removes a calendar from the event store by either committing or batching the changes.
 func (o *EKEventStore) RemoveCalendarCommitError(calendar *EKCalendar, commit bool) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelRemoveCalendarCommitError, calendar.Ptr(), commit, unsafe.Pointer(&_nsErr))
@@ -197,7 +204,7 @@ func (o *EKEventStore) RemoveCalendarCommitError(calendar *EKCalendar, commit bo
 	return _ret, nil
 }
 
-// @method     calendarItemWithIdentifier: @abstract   Returns either a reminder or the first occurrence of an event.
+// Locates a reminder or the first occurrence of an event with the specified identifier.
 func (o *EKEventStore) CalendarItemWithIdentifier(identifier *foundation.NSString) *EKCalendarItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelCalendarItemWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -206,7 +213,7 @@ func (o *EKEventStore) CalendarItemWithIdentifier(identifier *foundation.NSStrin
 	return EKCalendarItemFromID(_ret)
 }
 
-// @method     calendarItemsWithExternalIdentifier: @abstract   Returns either matching reminders or the first occurrences of any events matching the given external identifier. @discussion This method returns a set of EKEvents or EKReminders with the given external identifier. Due to reasons discussed in -[EKCalendarItem calendarItemExternalIdentifier], there may be more than one matching calendar item. @param      externalIdentifier  The value obtained from EKCalendarItem's calendarItemExternalIdentifier property @result     An unsorted array of EKCalendarItem instances
+// Locates all reminders or the first occurrences of all events with the specified external identifier.
 func (o *EKEventStore) CalendarItemsWithExternalIdentifier(externalIdentifier *foundation.NSString) *foundation.NSArray[*EKCalendarItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelCalendarItemsWithExternalIdentifier, externalIdentifier.Ptr())
 	if _ret != 0 {
@@ -215,7 +222,7 @@ func (o *EKEventStore) CalendarItemsWithExternalIdentifier(externalIdentifier *f
 	return foundation.NSArrayFromID[*EKCalendarItem](_ret)
 }
 
-// @method     saveEvent:span:error: @abstract   Saves changes to an event permanently. @discussion This method attempts to save the event to the calendar database. It returns YES if successful and NO otherwise. It's possible for this method to return NO, and error will be set to nil. This occurs if the event wasn't dirty and didn't need saving. This means the correct way to detect failure is a result of NO and a non-nil error parameter. Passing an event fetched from another EKEventStore instance into this function will raise an exception. After an event is successfully saved, it is also put into sync with the database, meaning that all fields you did not change will be updated to the latest values. If you save the event, but it was deleted by a different store/process, you will effectively recreate the event as a new event. On WatchOS, saving changes is not supported. @param      event       The event to save. @param      span        The span to use (this event, or this and future events). @param      error       If an error occurs, this will contain a valid NSError object on exit.
+// Saves changes to an event permanently.
 func (o *EKEventStore) SaveEventSpanError(event *EKEvent, span EKSpan) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelSaveEventSpanError, event.Ptr(), span, unsafe.Pointer(&_nsErr))
@@ -225,7 +232,7 @@ func (o *EKEventStore) SaveEventSpanError(event *EKEvent, span EKSpan) (bool, er
 	return _ret, nil
 }
 
-// @method     removeEvent:span:error: @abstract   Removes an event from the calendar store. @discussion This method attempts to remove the event from the calendar database. It returns YES if successful and NO otherwise. It's possible for this method to return NO, and error will be set to nil. This occurs if the event wasn't ever added and didn't need removing. This means the correct way to detect failure is a result of NO and a non-nil error parameter. Passing an event from another CalendarStore into this function will raise an exception. After an event is removed, it is no longer tied to this calendar store, and all data in the event is cleared except for the eventIdentifier. On WatchOS, modifying the database is not supported. @param      event       The event to save. @param      span        The span to use (this event, or this and future events). @param      error       If an error occurs, this will contain a valid NSError object on exit.
+// Removes an event from the event store.
 func (o *EKEventStore) RemoveEventSpanError(event *EKEvent, span EKSpan) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelRemoveEventSpanError, event.Ptr(), span, unsafe.Pointer(&_nsErr))
@@ -235,6 +242,7 @@ func (o *EKEventStore) RemoveEventSpanError(event *EKEvent, span EKSpan) (bool, 
 	return _ret, nil
 }
 
+// Saves an event or recurring events to the event store by either committing or batching the changes.
 func (o *EKEventStore) SaveEventSpanCommitError(event *EKEvent, span EKSpan, commit bool) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelSaveEventSpanCommitError, event.Ptr(), span, commit, unsafe.Pointer(&_nsErr))
@@ -244,6 +252,7 @@ func (o *EKEventStore) SaveEventSpanCommitError(event *EKEvent, span EKSpan, com
 	return _ret, nil
 }
 
+// Removes an event or recurring events from the event store by either committing or batching the changes.
 func (o *EKEventStore) RemoveEventSpanCommitError(event *EKEvent, span EKSpan, commit bool) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelRemoveEventSpanCommitError, event.Ptr(), span, commit, unsafe.Pointer(&_nsErr))
@@ -253,7 +262,7 @@ func (o *EKEventStore) RemoveEventSpanCommitError(event *EKEvent, span EKSpan, c
 	return _ret, nil
 }
 
-// @method     eventWithIdentifier: @abstract   Returns the first occurrence of an event matching the given event identifier. @param      identifier   The eventIdentifier to search for. @result     An EKEvent object, or nil if not found.
+// Locates the first occurrence of an event with a given identifier.
 func (o *EKEventStore) EventWithIdentifier(identifier *foundation.NSString) *EKEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelEventWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -262,7 +271,7 @@ func (o *EKEventStore) EventWithIdentifier(identifier *foundation.NSString) *EKE
 	return EKEventFromID(_ret)
 }
 
-// @method     eventsMatchingPredicate: @abstract   Searches for events that match the given predicate. @discussion This call executes a search for the events indicated by the predicate passed to it. It is synchronous. If you want async behavior, you should either use dispatch_async or NSOperation to run the query someplace other than the main thread, and then funnel the array back to the main thread. @param      predicate   The predicate to invoke. If this predicate was not created with the predicate creation functions in this class, an exception is raised. @result     An array of EKEvent objects, or nil. There is no guaranteed order to the events.
+// Finds all events that match a given predicate.
 func (o *EKEventStore) EventsMatchingPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*EKEvent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelEventsMatchingPredicate, predicate.Ptr())
 	if _ret != 0 {
@@ -271,7 +280,7 @@ func (o *EKEventStore) EventsMatchingPredicate(predicate *foundation.NSPredicate
 	return foundation.NSArrayFromID[*EKEvent](_ret)
 }
 
-// @method     enumerateEventsMatchingPredicate:usingBlock: @abstract   Searches for events that match the given predicate. @discussion This call executes a search for the events indicated by the predicate passed to it, calling the block specified in the callback parameter for each event. This method is synchronous. If you want async behavior, you should either use dispatch_async or NSOperation to run the query someplace other than the main thread. @param      predicate   The predicate to invoke. If this predicate was not created with the predicate creation functions in this class, an exception is raised. @param      block       The block to call for each event. Your block should return YES in the stop parameter to stop iterating.
+// Finds all events that match a given predicate and calls a given callback for each event found.
 func (o *EKEventStore) EnumerateEventsMatchingPredicateUsing(predicate *foundation.NSPredicate, block func(*EKEvent, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -286,7 +295,7 @@ func (o *EKEventStore) EnumerateEventsMatchingPredicateUsing(predicate *foundati
 	o.Ptr().Send(_eKEventStoreSelEnumerateEventsMatchingPredicateUsing, predicate.Ptr(), __block_block)
 }
 
-// @method     predicateForEventsWithStartDate:endDate:calendars: @abstract   Creates a predicate for use with eventsMatchingPredicate or enumerateEventsMatchingPredicate:usingBlock:. @discussion Creates a simple query predicate to search for events within a certain date range. At present, this will return events in the default time zone ([NSTimeZone defaultTimeZone]). For performance reasons, this method will only return events within a four year timespan. If the date range between the startDate and endDate is greater than four years, then it will be shortened to the first four years. @param      startDate   The start date. @param      endDate     The end date. @param      calendars   The calendars to search for events in, or nil to search all calendars.
+// Creates a predicate to identify events that occur within a given date range.
 func (o *EKEventStore) PredicateForEventsWithStartDateEndDateCalendars(startDate *foundation.NSDate, endDate *foundation.NSDate, calendars *foundation.NSArray[*EKCalendar]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelPredicateForEventsWithStartDateEndDateCalendars, startDate.Ptr(), endDate.Ptr(), calendars.Ptr())
 	if _ret != 0 {
@@ -295,7 +304,7 @@ func (o *EKEventStore) PredicateForEventsWithStartDateEndDateCalendars(startDate
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method     saveReminder:commit:error: @abstract   Saves changes to a reminder. @discussion This method attempts to save the reminder to the event store database. It returns YES if successful and NO otherwise. Passing a reminder fetched from another EKEventStore instance into this function will raise an exception. After a reminder is successfully saved, its fields are updated to the latest values in the database. On WatchOS, saving changes is not supported. @param      reminder    The reminder to save. @param      commit      Whether to save to the database or not. Pass NO to batch changes together and commit with [EKEventStore commit:]. @param      error       If an error occurs, this will contain a valid NSError object on exit.
+// Saves changes to a reminder by either committing or batching the changes.
 func (o *EKEventStore) SaveReminderCommitError(reminder *EKReminder, commit bool) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelSaveReminderCommitError, reminder.Ptr(), commit, unsafe.Pointer(&_nsErr))
@@ -305,7 +314,7 @@ func (o *EKEventStore) SaveReminderCommitError(reminder *EKReminder, commit bool
 	return _ret, nil
 }
 
-// @method     removeReminder:commit:error: @abstract   Removes a reminder from the event store. @discussion This method attempts to remove the reminder from the event store database. It returns YES if successful and NO otherwise. Passing a reminder from another EKEventStore into this function will raise an exception. After a reminder is removed, it is no longer tied to this event store. On WatchOS, modifying the database is not supported. @param      reminder    The reminder to save. @param      commit      Whether to save to the database or not. Pass NO to batch changes together and commit with [EKEventStore commit:]. @param      error       If an error occurs, this will contain a valid NSError object on exit.
+// Removes a reminder from the event store by either committing or batching the changes.
 func (o *EKEventStore) RemoveReminderCommitError(reminder *EKReminder, commit bool) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelRemoveReminderCommitError, reminder.Ptr(), commit, unsafe.Pointer(&_nsErr))
@@ -315,7 +324,7 @@ func (o *EKEventStore) RemoveReminderCommitError(reminder *EKReminder, commit bo
 	return _ret, nil
 }
 
-// @method     fetchRemindersMatchingPredicate:completion: @abstract   Fetches reminders asynchronously. @discussion This method fetches reminders asynchronously and returns a value which can be used in cancelFetchRequest: to cancel the request later if desired. The completion block is called with an array of reminders that match the given predicate (or potentially nil).
+// Fetches reminders that match a given predicate.
 func (o *EKEventStore) FetchRemindersMatchingPredicateCompletion(predicate *foundation.NSPredicate, completion func(*foundation.NSArray[*EKReminder])) objc.ID {
 	var __block_completion objc.Block
 	if completion != nil {
@@ -331,12 +340,12 @@ func (o *EKEventStore) FetchRemindersMatchingPredicateCompletion(predicate *foun
 	return _ret
 }
 
-// @method     cancelFetchRequest: @discussion Given a value returned from fetchRemindersMatchingPredicate, this method can be used to cancel the request. Once called, the completion block specified in fetchReminders... will not be called.
+// Cancels the request to fetch reminders.
 func (o *EKEventStore) CancelFetchRequest(fetchIdentifier objc.ID) {
 	o.Ptr().Send(_eKEventStoreSelCancelFetchRequest, fetchIdentifier)
 }
 
-// @method     predicateForRemindersInCalendars: @abstract   Fetch all reminders in a set of calendars. @discussion You can pass nil for calendars to fetch from all available calendars.
+// Creates a predicate to identify all reminders in a collection of calendars.
 func (o *EKEventStore) PredicateForRemindersInCalendars(calendars *foundation.NSArray[*EKCalendar]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelPredicateForRemindersInCalendars, calendars.Ptr())
 	if _ret != 0 {
@@ -345,7 +354,7 @@ func (o *EKEventStore) PredicateForRemindersInCalendars(calendars *foundation.NS
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method     predicateForIncompleteRemindersWithDueDateStarting:ending:calendars: @abstract   Fetch incomplete reminders in a set of calendars. @discussion You can use this method to search for incomplete reminders due in a range. You can pass nil for start date to find all reminders due before endDate. You can pass nil for both start and end date to get all incomplete reminders in the specified calendars. You can pass nil for calendars to fetch from all available calendars.
+// Creates a predicate to identify all incomplete reminders that occur within a given date range.
 func (o *EKEventStore) PredicateForIncompleteRemindersWithDueDateStartingEndingCalendars(startDate *foundation.NSDate, endDate *foundation.NSDate, calendars *foundation.NSArray[*EKCalendar]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelPredicateForIncompleteRemindersWithDueDateStartingEndingCalendars, startDate.Ptr(), endDate.Ptr(), calendars.Ptr())
 	if _ret != 0 {
@@ -354,7 +363,7 @@ func (o *EKEventStore) PredicateForIncompleteRemindersWithDueDateStartingEndingC
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method     predicateForCompletedRemindersWithCompletionDateStarting:ending:calendars: @abstract   Fetch completed reminders in a set of calendars. @discussion You can use this method to search for reminders completed between a range of dates. You can pass nil for start date to find all reminders completed before endDate. You can pass nil for both start and end date to get all completed reminders in the specified calendars. You can pass nil for calendars to fetch from all available calendars.
+// Creates a predicate to identify all completed reminders that occur within a given date range.
 func (o *EKEventStore) PredicateForCompletedRemindersWithCompletionDateStartingEndingCalendars(startDate *foundation.NSDate, endDate *foundation.NSDate, calendars *foundation.NSArray[*EKCalendar]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKEventStoreSelPredicateForCompletedRemindersWithCompletionDateStartingEndingCalendars, startDate.Ptr(), endDate.Ptr(), calendars.Ptr())
 	if _ret != 0 {
@@ -363,7 +372,7 @@ func (o *EKEventStore) PredicateForCompletedRemindersWithCompletionDateStartingE
 	return foundation.NSPredicateFromID(_ret)
 }
 
-// @method     commit: @abstract   Commits pending changes to the database. @discussion If you use saveCalendar/saveEvent/removeCalendar/removeEvent, etc. and you pass NO to their parameter, you are batching changes for a later commit. This method does that commit. This allows you to save the database only once for many additions or changes.  If you pass YES to methods' commit parameter, then you don't need to call this method. This method will return YES as long as nothing went awry, even if nothing was actually committed. If it returns NO, error should contain the reason it became unhappy. On WatchOS, modifying the database is not supported.
+// Commits all unsaved changes to the event store.
 func (o *EKEventStore) Commit() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _eKEventStoreSelCommit, unsafe.Pointer(&_nsErr))
@@ -373,12 +382,12 @@ func (o *EKEventStore) Commit() (bool, error) {
 	return _ret, nil
 }
 
-// @method     reset @abstract   Resets the event store. @discussion You can use this method to forget ALL changes made to the event store (all additions, all fetched objects, etc.). It essentially is as if you released the store and then created a new one. It brings it back to its initial state. All objects ever created/fetched, etc. using this store are no longer connected to it and are considered invalid.
+// Reverts the event store to its saved state.
 func (o *EKEventStore) Reset() {
 	o.Ptr().Send(_eKEventStoreSelReset)
 }
 
-// @method     refreshSourcesIfNecessary @abstract   Cause a sync to potentially occur taking into account the necessity of it. @discussion You can call this method to pull new data from remote sources. This only updates the event store's data.  If you want to update your objects after refreshing the sources, you should call refresh on each of them afterwards. On iOS and macOS, this sync only occurs if deemed necessary. On WatchOS, initiating sync is not available. Sync will occur automatically with the paired iOS device.
+// Pulls new data from remote sources, if necessary.
 func (o *EKEventStore) RefreshSourcesIfNecessary() {
 	o.Ptr().Send(_eKEventStoreSelRefreshSourcesIfNecessary)
 }

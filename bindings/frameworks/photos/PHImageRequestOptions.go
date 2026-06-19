@@ -4,6 +4,8 @@
 package photos
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
@@ -11,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of options affecting the delivery of still image representations of Photos assets you request from an image manager.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phimagerequestoptions
 type PHImageRequestOptions struct {
 	foundation.NSObject
@@ -94,8 +98,18 @@ func (o *PHImageRequestOptions) ProgressHandler() objc.Block {
 	return _ret
 }
 
-func (o *PHImageRequestOptions) SetProgressHandler(progressHandler objc.Block) {
-	o.Ptr().Send(_pHImageRequestOptionsSelSetProgressHandler, progressHandler)
+func (o *PHImageRequestOptions) SetProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) {
+	var __block_progressHandler objc.Block
+	if progressHandler != nil {
+		__block_progressHandler = objc.NewBlock(func(_ objc.Block, blockParam0 float64, blockParam1 unsafe.Pointer, blockParam2 *bool, blockParam3 objc.ID) {
+			if blockParam3 != 0 {
+				blockParam3.Send(objc.RegisterName("retain"))
+			}
+			progressHandler(blockParam0, blockParam1, blockParam2, foundation.NSDictionaryFromID[objc.ID, objc.ID](blockParam3))
+		})
+		defer __block_progressHandler.Release()
+	}
+	o.Ptr().Send(_pHImageRequestOptionsSelSetProgressHandler, __block_progressHandler)
 }
 
 func (o *PHImageRequestOptions) AllowSecondaryDegradedImage() bool {

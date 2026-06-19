@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that contains the cloud identifier result from looking up a local identifier, or an error indicating why the lookup failed.
+//
 // CloudIdentifierMapping wraps [raw.PHCloudIdentifierMapping] with a fluent Go API.
 type CloudIdentifierMapping struct {
 	inner *raw.PHCloudIdentifierMapping

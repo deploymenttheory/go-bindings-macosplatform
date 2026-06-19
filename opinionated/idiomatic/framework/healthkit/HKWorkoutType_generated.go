@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that identifies samples that store information about a workout.
+//
 // WorkoutType wraps [raw.HKWorkoutType] with a fluent Go API.
 type WorkoutType struct {
 	inner *raw.HKWorkoutType

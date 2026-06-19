@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains information about a single, connected hardware accessory.
+//
 // Apple documentation: https://developer.apple.com/documentation/externalaccessory/eaaccessory
 type EAAccessory struct {
 	foundation.NSObject

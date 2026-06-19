@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that updates the output at an index you specify.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcscatterlayer
 type MLCScatterLayer struct {
 	MLCLayer
@@ -31,7 +33,7 @@ func MLCScatterLayerFromID(id objc.ID) *MLCScatterLayer {
 	return o
 }
 
-// @abstract   Create a scatter layer @param      dimension  The dimension along which to index @param      reductionType  The reduction type to use @return     A new scatter layer
+// Creates a scatter layer with the dimension and reduction type you specify.
 func MLCScatterLayerLayerWithDimensionReductionType(dimension uint, reductionType MLCReductionType) *MLCScatterLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCScatterLayer), _mLCScatterLayerSelLayerWithDimensionReductionType, dimension, reductionType)
 	if _ret != 0 {

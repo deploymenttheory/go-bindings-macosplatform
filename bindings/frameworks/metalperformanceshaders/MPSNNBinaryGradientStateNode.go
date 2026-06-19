@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of the state created to record the properties of a binary gradient kernel.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnbinarygradientstatenode
 type MPSNNBinaryGradientStateNode struct {
 	mpsneuralnetwork.MPSNNStateNode

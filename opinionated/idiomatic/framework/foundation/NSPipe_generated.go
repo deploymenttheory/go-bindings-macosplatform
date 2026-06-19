@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A one-way communications channel between related processes.
+//
 // Pipe wraps [raw.NSPipe] with a fluent Go API.
 type Pipe struct {
 	inner *raw.NSPipe

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides access to the haptic feedback management attributes on a system with a Force Touch trackpad.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nshapticfeedbackmanager
 type NSHapticFeedbackManager struct {
 	foundation.NSObject

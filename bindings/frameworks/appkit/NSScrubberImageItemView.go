@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A concrete view subclass for displaying images in a scrubber items.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsscrubberimageitemview
 type NSScrubberImageItemView struct {
 	NSScrubberItemView

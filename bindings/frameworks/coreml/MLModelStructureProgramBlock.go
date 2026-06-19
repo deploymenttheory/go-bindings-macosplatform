@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class representing a block in the Program.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlmodelstructureprogramblock
 type MLModelStructureProgramBlock struct {
 	foundation.NSObject
@@ -43,8 +45,11 @@ func (o *MLModelStructureProgramBlock) Inputs() *foundation.NSArray[*MLModelStru
 
 // The output names.
 func (o *MLModelStructureProgramBlock) OutputNames() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mLModelStructureProgramBlockSelOutputNames)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureProgramBlockSelOutputNames)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // The list of topologically sorted operations in the block.

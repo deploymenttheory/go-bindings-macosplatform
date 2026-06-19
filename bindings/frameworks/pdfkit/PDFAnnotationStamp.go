@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A PDFAnnotationStamp object allows you to display a word or phrase, such as “Confidential,” in a PDF page.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfannotationstamp
 type PDFAnnotationStamp struct {
 	PDFAnnotation
@@ -31,6 +33,7 @@ func PDFAnnotationStampFromID(id objc.ID) *PDFAnnotationStamp {
 	return o
 }
 
+// Returns name associated with the stamp annotation.
 func (o *PDFAnnotationStamp) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationStampSelName)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func (o *PDFAnnotationStamp) Name() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Sets the name associated with the stamp annotation.
 func (o *PDFAnnotationStamp) SetName(name *foundation.NSString) {
 	o.Ptr().Send(_pDFAnnotationStampSelSetName, name.Ptr())
 }

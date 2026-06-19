@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract   A node representing a MPSCNNNeuronAbsolute kernel @discussion For each pixel, applies the following function: @code f(x) = fabs(x) @endcode
+// A representation of an absolute neuron filter.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnneuronabsolutenode
 type MPSCNNNeuronAbsoluteNode struct {

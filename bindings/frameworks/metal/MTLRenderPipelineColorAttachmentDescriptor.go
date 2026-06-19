@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A color render target that specifies the color configuration and color operations for a render pipeline.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlrenderpipelinecolorattachmentdescriptor
 type MTLRenderPipelineColorAttachmentDescriptor struct {
 	foundation.NSObject

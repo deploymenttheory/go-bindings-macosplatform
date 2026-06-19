@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The Core Image class that defines a vector object.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/civector
 type CIVector struct {
 	foundation.NSObject
@@ -58,7 +60,7 @@ func CIVectorFromID(id objc.ID) *CIVector {
 	return o
 }
 
-// Create a Core Image vector object that is initialized with the specified values. - Parameters: - values: The pointer `CGFloat` values to initialize the vector with. - count: The number of `CGFloats` specified by the `values` parameter. - Returns: An autoreleased “CIVector“ object of length `count`.
+// Create a Core Image vector object that is initialized with the specified values.
 func CIVectorVectorWithValuesCount(values *float64, count uint) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithValuesCount, values, count)
 	if _ret != 0 {
@@ -67,7 +69,7 @@ func CIVectorVectorWithValuesCount(values *float64, count uint) *CIVector {
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object that is initialized with one value. - Parameters: - x: The value for the first position in the vector. - Returns: An autoreleased “CIVector“ object of length 1.
+// Create a Core Image vector object that is initialized with one value.
 func CIVectorVectorWithX(x float64) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithX, x)
 	if _ret != 0 {
@@ -76,7 +78,7 @@ func CIVectorVectorWithX(x float64) *CIVector {
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object that is initialized with two values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - Returns: An autoreleased “CIVector“ object of length 2.
+// Create a Core Image vector object that is initialized with two values.
 func CIVectorVectorWithXY(x float64, y float64) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithXY, x, y)
 	if _ret != 0 {
@@ -85,7 +87,7 @@ func CIVectorVectorWithXY(x float64, y float64) *CIVector {
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object that is initialized with three values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - z: The value for the third position in the vector. - Returns: An autoreleased “CIVector“ object of length 3.
+// Create a Core Image vector object that is initialized with three values.
 func CIVectorVectorWithXYZ(x float64, y float64, z float64) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithXYZ, x, y, z)
 	if _ret != 0 {
@@ -94,7 +96,7 @@ func CIVectorVectorWithXYZ(x float64, y float64, z float64) *CIVector {
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object that is initialized with four values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - z: The value for the third position in the vector. - w: The value for the forth position in the vector. - Returns: An autoreleased “CIVector“ object of length 4.
+// Create a Core Image vector object that is initialized with four values.
 func CIVectorVectorWithXYZW(x float64, y float64, z float64, w float64) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithXYZW, x, y, z, w)
 	if _ret != 0 {
@@ -103,7 +105,7 @@ func CIVectorVectorWithXYZW(x float64, y float64, z float64, w float64) *CIVecto
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object that is initialized with two values provided by a `CGPoint` structure. The `CGRect` structure’s `y` and `y` values are stored in the vector’s two values. - Parameters: - p: The `CGPoint` structure. - Returns: An autoreleased “CIVector“ object of length 2.
+// Create a Core Image vector object that is initialized with two values provided by a CGPoint structure.
 func CIVectorVectorWithCGPoint(p corefoundation.CGPoint) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithCGPoint, p)
 	if _ret != 0 {
@@ -112,7 +114,7 @@ func CIVectorVectorWithCGPoint(p corefoundation.CGPoint) *CIVector {
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object that is initialized with four values provided by a `CGRect` structure. The `CGRect` structure’s `x`, `y`, `height` and `width` values are stored in the vector’s four values. - Parameters: - r: The `CGRect` structure. - Returns: An autoreleased “CIVector“ object of length 4.
+// Create a Core Image vector object that is initialized with four values provided by a CGRect structure.
 func CIVectorVectorWithCGRect(r corefoundation.CGRect) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithCGRect, r)
 	if _ret != 0 {
@@ -121,7 +123,7 @@ func CIVectorVectorWithCGRect(r corefoundation.CGRect) *CIVector {
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object that is initialized with six values provided by a `CGAffineTransform` structure. The `CGAffineTransform` structure’s `a`, `b`, `c`, `d`, `tx` and `ty` values are stored in the vector’s six values. - Parameters: - t: The `CGAffineTransform` structure. - Returns: An autoreleased “CIVector“ object of length 6.
+// Create a Core Image vector object that is initialized with six values provided by a CGAffineTransform structure.
 func CIVectorVectorWithCGAffineTransform(t corefoundation.CGAffineTransform) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithCGAffineTransform, t)
 	if _ret != 0 {
@@ -130,7 +132,7 @@ func CIVectorVectorWithCGAffineTransform(t corefoundation.CGAffineTransform) *CI
 	return CIVectorFromID(_ret)
 }
 
-// Create a Core Image vector object with values provided in a string representation. - Parameters: - representation: A string that is in one of the formats returned by the `stringRepresentation` method. - Returns: An autoreleased “CIVector“ object.
+// Create a Core Image vector object with values provided in a string representation.
 func CIVectorVectorWithString(representation *foundation.NSString) *CIVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIVector), _cIVectorSelVectorWithString, representation.Ptr())
 	if _ret != 0 {
@@ -139,7 +141,7 @@ func CIVectorVectorWithString(representation *foundation.NSString) *CIVector {
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with the specified the values. - Parameters: - values: A pointer `CGFloat` values for vector. - count: The number of `CGFloats` specified by the `values` parameter. - Returns: An initialized “CIVector“ object of length `count`.
+// Initialize a Core Image vector object with the specified the values.
 func (o *CIVector) InitWithValuesCount(values *float64, count uint) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithValuesCount, values, count)
 	if _ret != 0 {
@@ -148,7 +150,7 @@ func (o *CIVector) InitWithValuesCount(values *float64, count uint) *CIVector {
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with one value. - Parameters: - x: The value for the first position in the vector. - Returns: An initialized “CIVector“ object of length 1.
+// Initialize a Core Image vector object with one value.
 func (o *CIVector) InitWithX(x float64) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithX, x)
 	if _ret != 0 {
@@ -157,7 +159,7 @@ func (o *CIVector) InitWithX(x float64) *CIVector {
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with two values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - Returns: An initialized “CIVector“ object of length 2.
+// Initialize a Core Image vector object with two values.
 func (o *CIVector) InitWithXY(x float64, y float64) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithXY, x, y)
 	if _ret != 0 {
@@ -166,7 +168,7 @@ func (o *CIVector) InitWithXY(x float64, y float64) *CIVector {
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with three values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - z: The value for the third position in the vector. - Returns: An initialized “CIVector“ object of length 3.
+// Initialize a Core Image vector object with three values.
 func (o *CIVector) InitWithXYZ(x float64, y float64, z float64) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithXYZ, x, y, z)
 	if _ret != 0 {
@@ -175,7 +177,7 @@ func (o *CIVector) InitWithXYZ(x float64, y float64, z float64) *CIVector {
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with four values. - Parameters: - x: The value for the first position in the vector. - y: The value for the second position in the vector. - z: The value for the third position in the vector. - w: The value for the forth position in the vector. - Returns: An initialized “CIVector“ object of length 4.
+// Initialize a Core Image vector object with four values.
 func (o *CIVector) InitWithXYZW(x float64, y float64, z float64, w float64) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithXYZW, x, y, z, w)
 	if _ret != 0 {
@@ -184,7 +186,7 @@ func (o *CIVector) InitWithXYZW(x float64, y float64, z float64, w float64) *CIV
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with two values provided by a `CGPoint` structure. The `CGRect` structure’s `y` and `y` values are stored in the vector’s two values. - Parameters: - p: The `CGPoint` structure. - Returns: An initialized “CIVector“ object of length 2.
+// Initialize a Core Image vector object with two values provided by a CGPoint structure.
 func (o *CIVector) InitWithCGPoint(p corefoundation.CGPoint) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithCGPoint, p)
 	if _ret != 0 {
@@ -193,7 +195,7 @@ func (o *CIVector) InitWithCGPoint(p corefoundation.CGPoint) *CIVector {
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with four values provided by a `CGRect` structure. The `CGRect` structure’s `x`, `y`, `height` and `width` values are stored in the vector’s four values. - Parameters: - r: The `CGRect` structure. - Returns: An initialized “CIVector“ object of length 4.
+// Initialize a Core Image vector object with four values provided by a CGRect structure.
 func (o *CIVector) InitWithCGRect(r corefoundation.CGRect) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithCGRect, r)
 	if _ret != 0 {
@@ -202,7 +204,7 @@ func (o *CIVector) InitWithCGRect(r corefoundation.CGRect) *CIVector {
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with six values provided by a `CGAffineTransform` structure. The `CGAffineTransform` structure’s `a`, `b`, `c`, `c`, `tx` and `ty` values are stored in the vector’s six values. - Parameters: - t: The `CGAffineTransform` structure. - Returns: An initialized “CIVector“ object of length 6.
+// Initialize a Core Image vector object with six values provided by a CGAffineTransform structure.
 func (o *CIVector) InitWithCGAffineTransform(t corefoundation.CGAffineTransform) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithCGAffineTransform, t)
 	if _ret != 0 {
@@ -211,7 +213,7 @@ func (o *CIVector) InitWithCGAffineTransform(t corefoundation.CGAffineTransform)
 	return CIVectorFromID(_ret)
 }
 
-// Initialize a Core Image vector object with values provided in a string representation. - Parameters: - representation: A string that is in one of the formats returned by the `stringRepresentation` method. - Returns: An initialized “CIVector“ object.
+// Initialize a Core Image vector object with values provided in a string representation.
 func (o *CIVector) InitWithString(representation *foundation.NSString) *CIVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIVectorSelInitWithString, representation.Ptr())
 	if _ret != 0 {
@@ -220,7 +222,7 @@ func (o *CIVector) InitWithString(representation *foundation.NSString) *CIVector
 	return CIVectorFromID(_ret)
 }
 
-// Returns a value from a specific position in the vector. The numbering of elements in a vector begins with zero. - Parameters: - index: The position in the vector of the value that you want to retrieve. - Returns: The value retrieved from the vector or `0` if the position is undefined.
+// Returns a value from a specific position in the vector.
 func (o *CIVector) ValueAtIndex(index uint) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _cIVectorSelValueAtIndex, index)
 	return _ret

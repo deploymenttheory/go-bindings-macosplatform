@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for a file associated with an intent.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/infileresolutionresult
 type INFileResolutionResult struct {
 	INIntentResolutionResult
@@ -32,6 +34,7 @@ func INFileResolutionResultFromID(id objc.ID) *INFileResolutionResult {
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INFileResolutionResultSuccessWithResolvedFile(resolvedFile *INFile) *INFileResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINFileResolutionResult), _iNFileResolutionResultSelSuccessWithResolvedFile, resolvedFile.Ptr())
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func INFileResolutionResultSuccessWithResolvedFile(resolvedFile *INFile) *INFile
 	return INFileResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires the user to select from among the specified objects.
 func INFileResolutionResultDisambiguationWithFilesToDisambiguate(filesToDisambiguate *foundation.NSArray[*INFile]) *INFileResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINFileResolutionResult), _iNFileResolutionResultSelDisambiguationWithFilesToDisambiguate, filesToDisambiguate.Ptr())
 	if _ret != 0 {
@@ -48,6 +52,7 @@ func INFileResolutionResultDisambiguationWithFilesToDisambiguate(filesToDisambig
 	return INFileResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INFileResolutionResultConfirmationRequiredWithFileToConfirm(fileToConfirm *INFile) *INFileResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINFileResolutionResult), _iNFileResolutionResultSelConfirmationRequiredWithFileToConfirm, fileToConfirm.Ptr())
 	if _ret != 0 {

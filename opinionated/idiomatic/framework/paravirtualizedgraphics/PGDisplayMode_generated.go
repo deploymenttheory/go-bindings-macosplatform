@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a supported display mode.
+//
 // PGDisplayMode wraps [raw.PGDisplayMode] with a fluent Go API.
 type PGDisplayMode struct {
 	inner *raw.PGDisplayMode
@@ -29,7 +31,7 @@ func PGDisplayModeFromID(id objc.ID) *PGDisplayMode {
 	return &PGDisplayMode{inner: raw.PGDisplayModeFromID(id)}
 }
 
-// @method initWithSizeInPixels:refreshRateInHz @abstract Used to conjure up display mode objects (to be arranged into NSArrays for modeList). @param sizeInPixels Width/height of supported display mode. @param refreshRateInHz Refresh rate of supported display mode.
+// Creates a new display mode.
 //
 // NewPGDisplayModeWithSizeInPixelsRefreshRateInHz creates a new [PGDisplayMode].
 func NewPGDisplayModeWithSizeInPixelsRefreshRateInHz(sizeInPixels raw.PGDisplayCoord_t, refreshRateInHz float64) *PGDisplayMode {

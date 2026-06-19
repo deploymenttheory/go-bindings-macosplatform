@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bar item that provides a picker control with multiple options.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nspickertouchbaritem
 type NSPickerTouchBarItem struct {
 	NSTouchBarItem
@@ -59,7 +61,7 @@ func NSPickerTouchBarItemFromID(id objc.ID) *NSPickerTouchBarItem {
 }
 
 func NSPickerTouchBarItemPickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction(identifier *foundation.NSString, labels *foundation.NSArray[*foundation.NSString], selectionMode NSPickerTouchBarItemSelectionMode, target objc.ID, action objc.SEL) *NSPickerTouchBarItem {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSPickerTouchBarItem), _nSPickerTouchBarItemSelPickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction, identifier.Ptr(), labels, selectionMode, target, action)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSPickerTouchBarItem), _nSPickerTouchBarItemSelPickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction, identifier.Ptr(), labels.Ptr(), selectionMode, target, action)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

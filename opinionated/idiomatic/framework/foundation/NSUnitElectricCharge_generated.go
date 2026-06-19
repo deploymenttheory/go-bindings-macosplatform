@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for electric charge.
+//
 // UnitElectricCharge wraps [raw.NSUnitElectricCharge] with a fluent Go API.
 type UnitElectricCharge struct {
 	inner *raw.NSUnitElectricCharge

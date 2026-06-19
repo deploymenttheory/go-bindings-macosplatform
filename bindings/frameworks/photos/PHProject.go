@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of a Photos app project extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phproject
 type PHProject struct {
 	PHAssetCollection

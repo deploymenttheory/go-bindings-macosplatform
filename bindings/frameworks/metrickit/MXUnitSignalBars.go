@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A unit of measure for the number of bars of cellular network connectivity.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxunitsignalbars
 type MXUnitSignalBars struct {
 	foundation.NSDimension

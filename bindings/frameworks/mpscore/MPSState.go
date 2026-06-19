@@ -127,7 +127,7 @@ func MPSStateTemporaryStateWithCommandBufferResourceList(commandBuffer metal.MTL
 
 // @abstract Create a state object with a list of MTLResources @discussion     Because MPS prefers deferred allocation of resources your application should use -initWithTextures:bufferSizes:bufferCount: whenever possible. This method is useful for cases when the MTLResources must be initialized by the CPU.
 func (o *MPSState) InitWithResources(resources *foundation.NSArray[metal.MTLResource]) *MPSState {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSStateSelInitWithResources, resources)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSStateSelInitWithResources, resources.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

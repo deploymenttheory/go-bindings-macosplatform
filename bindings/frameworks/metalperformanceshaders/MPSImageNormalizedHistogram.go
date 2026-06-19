@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A filter that computes the normalized histogram of an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsimagenormalizedhistogram
 type MPSImageNormalizedHistogram struct {
 	mpscore.MPSKernel

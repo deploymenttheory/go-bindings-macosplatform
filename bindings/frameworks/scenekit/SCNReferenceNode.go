@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A scene graph node that serves as a placeholder for content to be loaded from a separate scene file.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnreferencenode
 type SCNReferenceNode struct {
 	SCNNode
@@ -39,7 +41,7 @@ func SCNReferenceNodeFromID(id objc.ID) *SCNReferenceNode {
 	return o
 }
 
-// @method initWithURL: @abstract Creates a reference node with a url.
+// Initializes a node whose content is to be loaded from the referenced URL.
 func (o *SCNReferenceNode) InitWithURL(referenceURL *foundation.NSURL) *SCNReferenceNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNReferenceNodeSelInitWithURL, referenceURL.Ptr())
 	if _ret != 0 {
@@ -57,7 +59,7 @@ func (o *SCNReferenceNode) InitWithCoder(aDecoder *foundation.NSCoder) *SCNRefer
 	return SCNReferenceNodeFromID(_ret)
 }
 
-// @method referenceNodeWithURL: @abstract Creates a reference node with a url.
+// Creates a node whose content is to be loaded from the referenced URL.
 func SCNReferenceNodeReferenceNodeWithURL(referenceURL *foundation.NSURL) *SCNReferenceNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNReferenceNode), _sCNReferenceNodeSelReferenceNodeWithURL, referenceURL.Ptr())
 	if _ret != 0 {
@@ -66,12 +68,12 @@ func SCNReferenceNodeReferenceNodeWithURL(referenceURL *foundation.NSURL) *SCNRe
 	return SCNReferenceNodeFromID(_ret)
 }
 
-// @method load @abstract Force the reference to be loaded if it hasn't been loaded already. The resolved nodes will be added as child nodes of the receiver.
+// Loads content into the node from its referenced external scene file.
 func (o *SCNReferenceNode) Load() {
 	o.Ptr().Send(_sCNReferenceNodeSelLoad)
 }
 
-// @method unload @abstract Remove the child nodes and mark as unloaded.
+// Removes the node’s children and marks the node as not loaded.
 func (o *SCNReferenceNode) Unload() {
 	o.Ptr().Send(_sCNReferenceNodeSelUnload)
 }

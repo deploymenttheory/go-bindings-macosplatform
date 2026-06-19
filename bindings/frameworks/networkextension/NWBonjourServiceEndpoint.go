@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A network endpoint specified as a Bonjour service name, type, and domain.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nwbonjourserviceendpoint
 // Deprecated: Use `nw_endpoint_t` in Network framework instead, see deprecation notice in <NetworkExtension/NWBonjourServiceEndpoint.h>
 type NWBonjourServiceEndpoint struct {
@@ -38,7 +40,7 @@ func NWBonjourServiceEndpointFromID(id objc.ID) *NWBonjourServiceEndpoint {
 	return o
 }
 
-// @method endpointWithName:type:domain: @param name The Bonjour service name. @param type The Bonjour service type. @param domain The Bonjour service domain. @return An initialized NWBonjourServiceEndpoint object.
+// Create an endpoint with a Bonjour service name, type, and domain. All fields must be specified.
 // Deprecated: Use `nw_endpoint_create_bonjour_service` in Network framework instead, see deprecation notice in <NetworkExtension/NWBonjourServiceEndpoint.h>
 func NWBonjourServiceEndpointEndpointWithNameTypeDomain(name *foundation.NSString, type_ *foundation.NSString, domain *foundation.NSString) *NWBonjourServiceEndpoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNWBonjourServiceEndpoint), _nWBonjourServiceEndpointSelEndpointWithNameTypeDomain, name.Ptr(), type_.Ptr(), domain.Ptr())

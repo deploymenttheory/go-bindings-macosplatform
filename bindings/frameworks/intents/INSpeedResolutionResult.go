@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for a speed associated with an intent.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inspeedresolutionresult
 type INSpeedResolutionResult struct {
 	INIntentResolutionResult
@@ -32,24 +34,27 @@ func INSpeedResolutionResultFromID(id objc.ID) *INSpeedResolutionResult {
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INSpeedResolutionResultSuccessWithResolvedSpeed(resolvedSpeed *foundation.NSMeasurement[*foundation.NSUnitSpeed]) *INSpeedResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINSpeedResolutionResult), _iNSpeedResolutionResultSelSuccessWithResolvedSpeed, resolvedSpeed)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINSpeedResolutionResult), _iNSpeedResolutionResultSelSuccessWithResolvedSpeed, resolvedSpeed.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return INSpeedResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires the user to select from among the specified objects.
 func INSpeedResolutionResultDisambiguationWithSpeedToDisambiguate(speedToDisambiguate *foundation.NSArray[objc.ID]) *INSpeedResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINSpeedResolutionResult), _iNSpeedResolutionResultSelDisambiguationWithSpeedToDisambiguate, speedToDisambiguate)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINSpeedResolutionResult), _iNSpeedResolutionResultSelDisambiguationWithSpeedToDisambiguate, speedToDisambiguate.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return INSpeedResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INSpeedResolutionResultConfirmationRequiredWithSpeedToConfirm(speedToConfirm *foundation.NSMeasurement[*foundation.NSUnitSpeed]) *INSpeedResolutionResult {
-	_ret := objc.Send[objc.ID](objc.ID(_clsINSpeedResolutionResult), _iNSpeedResolutionResultSelConfirmationRequiredWithSpeedToConfirm, speedToConfirm)
+	_ret := objc.Send[objc.ID](objc.ID(_clsINSpeedResolutionResult), _iNSpeedResolutionResultSelConfirmationRequiredWithSpeedToConfirm, speedToConfirm.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines a policy to automatically manage the storage of downloaded assets.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avassetdownloadstoragemanagementpolicy
 type AVAssetDownloadStorageManagementPolicy struct {
 	foundation.NSObject

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that defines the parameters for a 2D-depthwise convolution operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphdepthwiseconvolution2dopdescriptor
 type MPSGraphDepthwiseConvolution2DOpDescriptor struct {
 	MPSGraphObject
@@ -53,7 +55,7 @@ func MPSGraphDepthwiseConvolution2DOpDescriptorFromID(id objc.ID) *MPSGraphDepth
 	return o
 }
 
-// Creates a 2D-depthwise convolution descriptor with given values. - Parameters: - strideInX: See `strideInX` property. - strideInY: See `strideInY` property. - dilationRateInX: See `dilationRateInX` property. - dilationRateInY: See `dilationRateInY` property. - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property. - paddingStyle: See `paddingStyle` property. - dataLayout: See `dataLayout` property. - weightsLayout: See `weightsLayout` property. - Returns: The descriptor on autoreleasepool.
+// Creates a 2D-depthwise convolution descriptor with given values.
 func MPSGraphDepthwiseConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout, weightsLayout MPSGraphTensorNamedDataLayout) *MPSGraphDepthwiseConvolution2DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphDepthwiseConvolution2DOpDescriptor), _mPSGraphDepthwiseConvolution2DOpDescriptorSelDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout, strideInX, strideInY, dilationRateInX, dilationRateInY, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingStyle, dataLayout, weightsLayout)
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func MPSGraphDepthwiseConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYD
 	return MPSGraphDepthwiseConvolution2DOpDescriptorFromID(_ret)
 }
 
-// Creates a 2D-depthwise convolution descriptor with given properties and default values. - Parameters: - dataLayout: See `dataLayout` property. - weightsLayout: See `weightsLayout` property. - Returns: The descriptor on autoreleasepool.
+// Creates a 2D-depthwise convolution descriptor with given properties and default values.
 func MPSGraphDepthwiseConvolution2DOpDescriptorDescriptorWithDataLayoutWeightsLayout(dataLayout MPSGraphTensorNamedDataLayout, weightsLayout MPSGraphTensorNamedDataLayout) *MPSGraphDepthwiseConvolution2DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphDepthwiseConvolution2DOpDescriptor), _mPSGraphDepthwiseConvolution2DOpDescriptorSelDescriptorWithDataLayoutWeightsLayout, dataLayout, weightsLayout)
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func MPSGraphDepthwiseConvolution2DOpDescriptorDescriptorWithDataLayoutWeightsLa
 	return MPSGraphDepthwiseConvolution2DOpDescriptorFromID(_ret)
 }
 
-// Sets the explicit padding values. Note: this method also sets `paddingStyle` to `MPSGraphPaddingStyleExplicit` (see “MPSGraphPaddingStyle“). - Parameters: - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property.
+// Sets the explicit padding values.
 func (o *MPSGraphDepthwiseConvolution2DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {
 	o.Ptr().Send(_mPSGraphDepthwiseConvolution2DOpDescriptorSelSetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom, paddingLeft, paddingRight, paddingTop, paddingBottom)
 }

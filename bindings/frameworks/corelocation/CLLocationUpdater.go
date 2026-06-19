@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides device location updates.
+//
 // Apple documentation: https://developer.apple.com/documentation/corelocation/cllocationupdater
 type CLLocationUpdater struct {
 	foundation.NSObject
@@ -34,6 +36,7 @@ func CLLocationUpdaterFromID(id objc.ID) *CLLocationUpdater {
 	return o
 }
 
+// Creates a location updater on the queue you specify.
 func CLLocationUpdaterLiveUpdaterWithQueueHandler(queue *foundation.NSObject, handler func(*CLUpdate)) *CLLocationUpdater {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -52,6 +55,7 @@ func CLLocationUpdaterLiveUpdaterWithQueueHandler(queue *foundation.NSObject, ha
 	return CLLocationUpdaterFromID(_ret)
 }
 
+// Creates a location updater with the configuration and queue that you specify.
 func CLLocationUpdaterLiveUpdaterWithConfigurationQueueHandler(configuration CLLiveUpdateConfiguration, queue *foundation.NSObject, handler func(*CLUpdate)) *CLLocationUpdater {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -70,14 +74,17 @@ func CLLocationUpdaterLiveUpdaterWithConfigurationQueueHandler(configuration CLL
 	return CLLocationUpdaterFromID(_ret)
 }
 
+// Resumes the updater.
 func (o *CLLocationUpdater) Resume() {
 	o.Ptr().Send(_cLLocationUpdaterSelResume)
 }
 
+// Pauses the updater.
 func (o *CLLocationUpdater) Pause() {
 	o.Ptr().Send(_cLLocationUpdaterSelPause)
 }
 
+// Invalidates the updater.
 func (o *CLLocationUpdater) Invalidate() {
 	o.Ptr().Send(_cLLocationUpdaterSelInvalidate)
 }

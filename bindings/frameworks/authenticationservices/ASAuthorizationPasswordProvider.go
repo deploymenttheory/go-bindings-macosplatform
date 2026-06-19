@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mechanism for generating requests to perform keychain credential sharing.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationpasswordprovider
 type ASAuthorizationPasswordProvider struct {
 	foundation.NSObject
@@ -30,6 +32,7 @@ func ASAuthorizationPasswordProviderFromID(id objc.ID) *ASAuthorizationPasswordP
 	return o
 }
 
+// Creates a new password authorization request.
 func (o *ASAuthorizationPasswordProvider) CreateRequest() *ASAuthorizationPasswordRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPasswordProviderSelCreateRequest)
 	if _ret != 0 {

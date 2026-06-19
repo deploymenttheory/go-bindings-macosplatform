@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A convenient interface to the contents of the file system, and the primary means of interacting with it.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsfilemanager
 type NSFileManager struct {
 	NSObject
@@ -176,7 +178,7 @@ func (o *NSFileManager) GetRelationshipOfDirectoryInDomainToItemAtURLError(outRe
 
 func (o *NSFileManager) CreateDirectoryAtURLWithIntermediateDirectoriesAttributesError(url *NSURL, createIntermediates bool, attributes *NSDictionary[*NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateDirectoryAtURLWithIntermediateDirectoriesAttributesError, url.Ptr(), createIntermediates, attributes, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateDirectoryAtURLWithIntermediateDirectoriesAttributesError, url.Ptr(), createIntermediates, attributes.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -194,7 +196,7 @@ func (o *NSFileManager) CreateSymbolicLinkAtURLWithDestinationURLError(url *NSUR
 
 func (o *NSFileManager) SetAttributesOfItemAtPathError(attributes *NSDictionary[*NSString, objc.ID], path *NSString) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelSetAttributesOfItemAtPathError, attributes, path.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelSetAttributesOfItemAtPathError, attributes.Ptr(), path.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -203,7 +205,7 @@ func (o *NSFileManager) SetAttributesOfItemAtPathError(attributes *NSDictionary[
 
 func (o *NSFileManager) CreateDirectoryAtPathWithIntermediateDirectoriesAttributesError(path *NSString, createIntermediates bool, attributes *NSDictionary[*NSString, objc.ID]) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateDirectoryAtPathWithIntermediateDirectoriesAttributesError, path.Ptr(), createIntermediates, attributes, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateDirectoryAtPathWithIntermediateDirectoriesAttributesError, path.Ptr(), createIntermediates, attributes.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -236,20 +238,26 @@ func (o *NSFileManager) SubpathsOfDirectoryAtPathError(path *NSString) (*NSArray
 
 func (o *NSFileManager) AttributesOfItemAtPathError(path *NSString) (*NSDictionary[*NSString, objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSFileManagerSelAttributesOfItemAtPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelAttributesOfItemAtPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return NSDictionaryFromID[*NSString, objc.ID](_ret), nil
 }
 
 func (o *NSFileManager) AttributesOfFileSystemForPathError(path *NSString) (*NSDictionary[*NSString, objc.ID], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSFileManagerSelAttributesOfFileSystemForPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelAttributesOfFileSystemForPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return NSDictionaryFromID[*NSString, objc.ID](_ret), nil
 }
 
 func (o *NSFileManager) CreateSymbolicLinkAtPathWithDestinationPathError(path *NSString, destPath *NSString) (bool, error) {
@@ -356,26 +364,35 @@ func (o *NSFileManager) TrashItemAtURLResultingItemURLError(url *NSURL, outResul
 
 // Deprecated: Use -attributesOfItemAtPath:error: instead
 func (o *NSFileManager) FileAttributesAtPathTraverseLink(path *NSString, yorn bool) *NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSFileManagerSelFileAttributesAtPathTraverseLink, path.Ptr(), yorn)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelFileAttributesAtPathTraverseLink, path.Ptr(), yorn)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // Deprecated: Use -setAttributes:ofItemAtPath:error: instead
 func (o *NSFileManager) ChangeFileAttributesAtPath(attributes *NSDictionary[objc.ID, objc.ID], path *NSString) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelChangeFileAttributesAtPath, attributes, path.Ptr())
+	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelChangeFileAttributesAtPath, attributes.Ptr(), path.Ptr())
 	return _ret
 }
 
 // Deprecated: Use -contentsOfDirectoryAtPath:error: instead
 func (o *NSFileManager) DirectoryContentsAtPath(path *NSString) *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSFileManagerSelDirectoryContentsAtPath, path.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelDirectoryContentsAtPath, path.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
 // Deprecated: Use -attributesOfFileSystemForPath:error: instead
 func (o *NSFileManager) FileSystemAttributesAtPath(path *NSString) *NSDictionary[objc.ID, objc.ID] {
-	_ret := objc.Send[*NSDictionary[objc.ID, objc.ID]](o.Ptr(), _nSFileManagerSelFileSystemAttributesAtPath, path.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelFileSystemAttributesAtPath, path.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 // Deprecated: Use -destinationOfSymbolicLinkAtPath:error:
@@ -395,28 +412,32 @@ func (o *NSFileManager) CreateSymbolicLinkAtPathPathContent(path *NSString, othe
 
 // Deprecated: Use -createDirectoryAtPath:withIntermediateDirectories:attributes:error: instead
 func (o *NSFileManager) CreateDirectoryAtPathAttributes(path *NSString, attributes *NSDictionary[objc.ID, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateDirectoryAtPathAttributes, path.Ptr(), attributes)
+	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateDirectoryAtPathAttributes, path.Ptr(), attributes.Ptr())
 	return _ret
 }
 
+// Creates a link from a source to a destination.
 // Deprecated: Not supported
 func (o *NSFileManager) LinkPathToPathHandler(src *NSString, dest *NSString, handler objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelLinkPathToPathHandler, src.Ptr(), dest.Ptr(), handler)
 	return _ret
 }
 
+// Copies the directory or file specified in a given path to a different location in the file system identified by another path.
 // Deprecated: Not supported
 func (o *NSFileManager) CopyPathToPathHandler(src *NSString, dest *NSString, handler objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCopyPathToPathHandler, src.Ptr(), dest.Ptr(), handler)
 	return _ret
 }
 
+// Moves the directory or file specified by a given path to a different location in the file system identified by another path.
 // Deprecated: Not supported
 func (o *NSFileManager) MovePathToPathHandler(src *NSString, dest *NSString, handler objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelMovePathToPathHandler, src.Ptr(), dest.Ptr(), handler)
 	return _ret
 }
 
+// Deletes the file, link, or directory (including, recursively, all subdirectories, files, and links in the directory) identified by a given path.
 // Deprecated: Not supported
 func (o *NSFileManager) RemoveFileAtPathHandler(path *NSString, handler objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelRemoveFileAtPathHandler, path.Ptr(), handler)
@@ -487,6 +508,7 @@ func (o *NSFileManager) EnumeratorAtPath(path *NSString) *NSDirectoryEnumerator[
 	return NSDirectoryEnumeratorFromID[*NSString](_ret)
 }
 
+// Returns a directory enumerator object that can be used to perform a deep enumeration of the directory at the specified URL.
 func (o *NSFileManager) EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler(url *NSURL, keys *NSArray[*NSString], mask NSDirectoryEnumerationOptions, handler func(*NSURL, unsafe.Pointer) bool) *NSDirectoryEnumerator[*NSURL] {
 	var __block_handler objc.Block
 	if handler != nil {
@@ -522,7 +544,7 @@ func (o *NSFileManager) ContentsAtPath(path *NSString) *NSData {
 }
 
 func (o *NSFileManager) CreateFileAtPathContentsAttributes(path *NSString, data *NSData, attr *NSDictionary[*NSString, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateFileAtPathContentsAttributes, path.Ptr(), data.Ptr(), attr)
+	_ret := objc.Send[bool](o.Ptr(), _nSFileManagerSelCreateFileAtPathContentsAttributes, path.Ptr(), data.Ptr(), attr.Ptr())
 	return _ret
 }
 

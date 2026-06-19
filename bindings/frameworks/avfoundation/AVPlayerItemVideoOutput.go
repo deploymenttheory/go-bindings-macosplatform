@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that outputs video frames from a player item.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avplayeritemvideooutput
 type AVPlayerItemVideoOutput struct {
 	AVPlayerItemOutput
@@ -40,36 +42,42 @@ func AVPlayerItemVideoOutputFromID(id objc.ID) *AVPlayerItemVideoOutput {
 	return o
 }
 
+// Creates a video output object using the specified pixel buffer attributes.
 func (o *AVPlayerItemVideoOutput) InitWithPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVPlayerItemVideoOutput {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemVideoOutputSelInitWithPixelBufferAttributes, pixelBufferAttributes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemVideoOutputSelInitWithPixelBufferAttributes, pixelBufferAttributes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVPlayerItemVideoOutputFromID(_ret)
 }
 
+// Creates a video output object initialized with the specified output settings.
 func (o *AVPlayerItemVideoOutput) InitWithOutputSettings(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVPlayerItemVideoOutput {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemVideoOutputSelInitWithOutputSettings, outputSettings)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemVideoOutputSelInitWithOutputSettings, outputSettings.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVPlayerItemVideoOutputFromID(_ret)
 }
 
+// Returns a Boolean value that indicates whether video output is available for the specified item time.
 func (o *AVPlayerItemVideoOutput) HasNewPixelBufferForItemTime(itemTime coremedia.CMTime) bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVPlayerItemVideoOutputSelHasNewPixelBufferForItemTime, itemTime)
 	return _ret
 }
 
+// Retrieves an image that is appropriate for display at the specified item time, and marks the image as acquired.
 func (o *AVPlayerItemVideoOutput) CopyPixelBufferForItemTimeItemTimeForDisplay(itemTime coremedia.CMTime, outItemTimeForDisplay *coremedia.CMTime) unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVPlayerItemVideoOutputSelCopyPixelBufferForItemTimeItemTimeForDisplay, itemTime, outItemTimeForDisplay)
 	return _ret
 }
 
+// Sets the delegate and dispatch queue for the receiver.
 func (o *AVPlayerItemVideoOutput) SetDelegateQueue(delegate AVPlayerItemOutputPullDelegate, delegateQueue *foundation.NSObject) {
 	o.Ptr().Send(_aVPlayerItemVideoOutputSelSetDelegateQueue, delegate, delegateQueue.Ptr())
 }
 
+// Tells the receiver that the video out put client is entering a quiescent state.
 func (o *AVPlayerItemVideoOutput) RequestNotificationOfMediaDataChangeWithAdvanceInterval(interval float64) {
 	o.Ptr().Send(_aVPlayerItemVideoOutputSelRequestNotificationOfMediaDataChangeWithAdvanceInterval, interval)
 }

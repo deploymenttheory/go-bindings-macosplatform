@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A GPU-based image-processing routine used to create custom Core Image filters.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreimage/cikernel
 type CIKernel struct {
 	foundation.NSObject
@@ -41,6 +43,7 @@ func CIKernelFromID(id objc.ID) *CIKernel {
 	return o
 }
 
+// Creates and returns and array of CIKernel objects.
 func CIKernelKernelsWithString(string_ *foundation.NSString) *foundation.NSArray[*CIKernel] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIKernel), _cIKernelSelKernelsWithString, string_.Ptr())
 	if _ret != 0 {
@@ -49,6 +52,7 @@ func CIKernelKernelsWithString(string_ *foundation.NSString) *foundation.NSArray
 	return foundation.NSArrayFromID[*CIKernel](_ret)
 }
 
+// Load kernels from a Metal language string.
 func CIKernelKernelsWithMetalStringError(source *foundation.NSString) (*foundation.NSArray[*CIKernel], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIKernel), _cIKernelSelKernelsWithMetalStringError, source.Ptr(), unsafe.Pointer(&_nsErr))
@@ -61,6 +65,7 @@ func CIKernelKernelsWithMetalStringError(source *foundation.NSString) (*foundati
 	return foundation.NSArrayFromID[*CIKernel](_ret), nil
 }
 
+// Creates a single kernel object.
 func CIKernelKernelWithString(string_ *foundation.NSString) *CIKernel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIKernel), _cIKernelSelKernelWithString, string_.Ptr())
 	if _ret != 0 {
@@ -69,6 +74,7 @@ func CIKernelKernelWithString(string_ *foundation.NSString) *CIKernel {
 	return CIKernelFromID(_ret)
 }
 
+// Creates a single kernel object using a Metal Shading Language (MSL) kernel function.
 func CIKernelKernelWithFunctionNameFromMetalLibraryDataError(name *foundation.NSString, data *foundation.NSData) (*CIKernel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIKernel), _cIKernelSelKernelWithFunctionNameFromMetalLibraryDataError, name.Ptr(), data.Ptr(), unsafe.Pointer(&_nsErr))
@@ -81,6 +87,7 @@ func CIKernelKernelWithFunctionNameFromMetalLibraryDataError(name *foundation.NS
 	return CIKernelFromID(_ret), nil
 }
 
+// Creates a single kernel object using a Metal Shading Language kernel function with optional pixel format.
 func CIKernelKernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError(name *foundation.NSString, data *foundation.NSData, format int) (*CIKernel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIKernel), _cIKernelSelKernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError, name.Ptr(), data.Ptr(), format, unsafe.Pointer(&_nsErr))
@@ -93,17 +100,23 @@ func CIKernelKernelWithFunctionNameFromMetalLibraryDataOutputPixelFormatError(na
 	return CIKernelFromID(_ret), nil
 }
 
+// Return an array of strings containing the names of all of the kernels contained in the Metal library.
 func CIKernelKernelNamesFromMetalLibraryData(data *foundation.NSData) *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsCIKernel), _cIKernelSelKernelNamesFromMetalLibraryData, data.Ptr())
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsCIKernel), _cIKernelSelKernelNamesFromMetalLibraryData, data.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
+// Sets the selector Core Image uses to query the region of interest for image processing with the kernel.
 func (o *CIKernel) SetROISelector(method objc.SEL) {
 	o.Ptr().Send(_cIKernelSelSetROISelector, method)
 }
 
+// Creates a new image using the kernel and specified arguments.
 func (o *CIKernel) ApplyWithExtentRoiCallbackArguments(extent corefoundation.CGRect, callback objc.Block, args *foundation.NSArray[objc.ID]) *CIImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cIKernelSelApplyWithExtentRoiCallbackArguments, extent, callback, args)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cIKernelSelApplyWithExtentRoiCallbackArguments, extent, callback, args.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

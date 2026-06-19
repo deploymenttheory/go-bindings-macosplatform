@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that produces a mask of individual people it finds in the input image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vngeneratepersoninstancemaskrequest
 type VNGeneratePersonInstanceMaskRequest struct {
 	VNImageBasedRequest

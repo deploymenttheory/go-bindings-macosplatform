@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of the length and data type of a vector.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsvectordescriptor
 type MPSVectorDescriptor struct {
 	foundation.NSObject

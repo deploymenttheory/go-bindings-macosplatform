@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A network endpoint specified by DNS name (or IP address) and port.
+//
 // NWHostEndpoint wraps [raw.NWHostEndpoint] with a fluent Go API.
 type NWHostEndpoint struct {
 	inner *raw.NWHostEndpoint

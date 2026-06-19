@@ -1,0 +1,416 @@
+{
+  "schema_version": 1,
+  "framework": "MetalFX",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "MTLFXFrameInterpolatorDescriptor": {
+      "doc": "A set of properties that configure a frame interpolator, and a factory method that creates the effect.",
+      "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor"
+    },
+    "MTLFXSpatialScalerDescriptor": {
+      "doc": "A set of properties that configure a spatial scaling effect, and a factory method that creates the effect.",
+      "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalerdescriptor"
+    },
+    "MTLFXTemporalDenoisedScalerDescriptor": {
+      "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor"
+    },
+    "MTLFXTemporalScalerDescriptor": {
+      "doc": "A set of properties that configure a temporal scaling effect, and a factory method that creates the effect.",
+      "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor"
+    }
+  },
+  "protocols": {
+    "MTL4FXFrameInterpolator": {
+      "url": "https://developer.apple.com/documentation/metalfx/mtl4fxframeinterpolator"
+    },
+    "MTL4FXSpatialScaler": {
+      "doc": "An upscaling effect that generates a higher resolution texture in a render pass by spatially analyzing an input texture.",
+      "url": "https://developer.apple.com/documentation/metalfx/mtl4fxspatialscaler"
+    },
+    "MTL4FXTemporalDenoisedScaler": {
+      "url": "https://developer.apple.com/documentation/metalfx/mtl4fxtemporaldenoisedscaler"
+    },
+    "MTL4FXTemporalScaler": {
+      "url": "https://developer.apple.com/documentation/metalfx/mtl4fxtemporalscaler"
+    },
+    "MTLFXFrameInterpolatableScaler": {
+      "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatablescaler"
+    },
+    "MTLFXFrameInterpolator": {
+      "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolator"
+    },
+    "MTLFXFrameInterpolatorBase": {
+      "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatorbase"
+    },
+    "MTLFXSpatialScaler": {
+      "doc": "An upscaling effect that generates a higher resolution texture in a render pass by spatially analyzing an input texture.",
+      "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscaler"
+    },
+    "MTLFXSpatialScalerBase": {
+      "doc": "An upscaling effect that generates a higher resolution texture in a render pass by spatially analyzing an input texture.",
+      "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalerbase"
+    },
+    "MTLFXTemporalDenoisedScaler": {
+      "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscaler"
+    },
+    "MTLFXTemporalDenoisedScalerBase": {
+      "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerbase"
+    },
+    "MTLFXTemporalScaler": {
+      "doc": "An upscaling effect that generates a higher resolution texture in a render pass by analyzing multiple input textures over time.",
+      "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscaler"
+    },
+    "MTLFXTemporalScalerBase": {
+      "doc": "An upscaling effect that generates a higher resolution texture in a render pass by analyzing multiple input textures over time.",
+      "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerbase"
+    }
+  },
+  "enums": {
+    "MTLFXSpatialScalerColorProcessingMode": {
+      "doc": "The color space modes for the input and output textures you use with a spatial scaling effect instance.",
+      "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalercolorprocessingmode",
+      "members": {
+        "MTLFXSpatialScalerColorProcessingModeHDR": {
+          "doc": "Indicates your input and output textures use a high dynamic range color space.",
+          "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalercolorprocessingmode/hdr"
+        },
+        "MTLFXSpatialScalerColorProcessingModeLinear": {
+          "doc": "Indicates your input and output textures use a linear color space.",
+          "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalercolorprocessingmode/linear"
+        },
+        "MTLFXSpatialScalerColorProcessingModePerceptual": {
+          "doc": "Indicates your input and output textures use a perceptual color space.",
+          "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalercolorprocessingmode/perceptual"
+        }
+      }
+    }
+  },
+  "methods": {
+    "MTLFXFrameInterpolatorDescriptor": {
+      "+supportsDevice:": {
+        "doc": "Queries whether a Metal device supports frame interpolation.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor/supportsdevice(_:)"
+      },
+      "+supportsMetal4FX:": {
+        "doc": "Queries whether a Metal device supports frame interpolation compatible with a Metal 4 command buffer.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor/supportsmetal4fx(_:)"
+      },
+      "-newFrameInterpolatorWithDevice:": {
+        "doc": "Creates a frame interpolator instance for a Metal device.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor/makeframeinterpolator(device:)"
+      },
+      "-newFrameInterpolatorWithDevice:compiler:": {
+        "doc": "Creates a frame interpolator instance for a Metal device.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor/makeframeinterpolator(device:compiler:)"
+      }
+    },
+    "MTLFXSpatialScalerDescriptor": {
+      "+supportsDevice:": {
+        "doc": "Returns a Boolean value that indicates whether the spatial scaler works with a GPU.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalerdescriptor/supportsdevice(_:)"
+      },
+      "+supportsMetal4FX:": {
+        "doc": "Queries whether a Metal device supports spatial scaling compatible with Metal 4.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalerdescriptor/supportsmetal4fx(_:)"
+      },
+      "-newSpatialScalerWithDevice:": {
+        "doc": "Creates a spatial scaler instance from this descriptor’s current property values.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalerdescriptor/makespatialscaler(device:)"
+      },
+      "-newSpatialScalerWithDevice:compiler:": {
+        "doc": "Creates a spatial scaler instance for a Metal device.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalerdescriptor/makespatialscaler(device:compiler:)"
+      }
+    },
+    "MTLFXTemporalDenoisedScalerDescriptor": {
+      "+supportedInputContentMaxScaleForDevice:": {
+        "doc": "Returns the largest temporal scaling factor the device supports as a floating-point value.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/supportedinputcontentmaxscale(device:)"
+      },
+      "+supportedInputContentMinScaleForDevice:": {
+        "doc": "Returns the smallest temporal scaling factor the device supports as a floating-point value.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/supportedinputcontentminscale(device:)"
+      },
+      "+supportsDevice:": {
+        "doc": "Queries whether a Metal device supports denoising scaling.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/supportsdevice(_:)"
+      },
+      "+supportsMetal4FX:": {
+        "doc": "Queries whether a Metal device supports denosing scaling compatible on Metal 4.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/supportsmetal4fx(_:)"
+      },
+      "-newTemporalDenoisedScalerWithDevice:": {
+        "doc": "Creates a denoiser scaler instance for a Metal device.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/maketemporaldenoisedscaler(device:)"
+      },
+      "-newTemporalDenoisedScalerWithDevice:compiler:": {
+        "doc": "Creates a denoiser scaler instance for a Metal device.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/maketemporaldenoisedscaler(device:compiler:)"
+      }
+    },
+    "MTLFXTemporalScalerDescriptor": {
+      "+supportedInputContentMaxScaleForDevice:": {
+        "doc": "Returns the largest temporal scaling factor the device supports as a floating-point value.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/supportedinputcontentmaxscale(device:)"
+      },
+      "+supportedInputContentMinScaleForDevice:": {
+        "doc": "Returns the smallest temporal scaling factor the device supports as a floating-point value.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/supportedinputcontentminscale(device:)"
+      },
+      "+supportsDevice:": {
+        "doc": "Returns a Boolean value that indicates whether the temporal scaler works with a GPU.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/supportsdevice(_:)"
+      },
+      "+supportsMetal4FX:": {
+        "doc": "Queries whether a Metal device supports temporal scaling compatible with Metal 4.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/supportsmetal4fx(_:)"
+      },
+      "-newTemporalScalerWithDevice:": {
+        "doc": "Creates a temporal scaler instance from this descriptor’s current property values.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/maketemporalscaler(device:)"
+      },
+      "-newTemporalScalerWithDevice:compiler:": {
+        "doc": "Creates a temporal scaler instance for a Metal device.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/maketemporalscaler(device:compiler:)"
+      }
+    }
+  },
+  "properties": {
+    "MTLFXFrameInterpolatorDescriptor": {
+      "colorTextureFormat": {
+        "doc": "The pixel format of the input color texture for the frame interpolator you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor/colortextureformat"
+      },
+      "depthTextureFormat": {
+        "doc": "The pixel format of the input depth texture for the frame interpolator you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor/depthtextureformat"
+      },
+      "distortionTextureEnabled": {
+        "doc": "A Boolean value that indicates whether the frame interpolator supports barrel distortion correction.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor/isdistortiontextureenabled"
+      },
+      "inputHeight": {
+        "doc": "The height, in pixels, of the input motion and depth texture for the frame interpolator.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor/inputheight"
+      },
+      "inputWidth": {
+        "doc": "The width, in pixels, of the input motion and depth texture for the frame interpolator.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor/inputwidth"
+      },
+      "motionTextureFormat": {
+        "doc": "The pixel format of the input motion texture for the frame interpolator you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor/motiontextureformat"
+      },
+      "outputHeight": {
+        "doc": "The height, in pixels, of the output color texture for the frame interpolator.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor/outputheight"
+      },
+      "outputTextureFormat": {
+        "doc": "The pixel format of the output color texture for the frame interpolator you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor/outputtextureformat"
+      },
+      "outputWidth": {
+        "doc": "The width, in pixels, of the output color texture for the frame interpolator.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor/outputwidth"
+      },
+      "requiresPrevColorTexture": {
+        "doc": "A Boolean value that indicates whether the frame interpolator requires the client to provide a previous color texture.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor/requiresprevcolortexture"
+      },
+      "uiTextureFormat": {
+        "doc": "The pixel format for the frame interpolator of an input texture containing your game’s custom UI.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxframeinterpolatordescriptor/uitextureformat"
+      }
+    },
+    "MTLFXSpatialScalerDescriptor": {
+      "colorProcessingMode": {
+        "doc": "The color space of the input color texture for the spatial scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalerdescriptor/colorprocessingmode"
+      },
+      "colorTextureFormat": {
+        "doc": "The pixel format of the input color texture for the spatial scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalerdescriptor/colortextureformat"
+      },
+      "inputHeight": {
+        "doc": "The height of the input color texture for the spatial scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalerdescriptor/inputheight"
+      },
+      "inputWidth": {
+        "doc": "The width of the input color texture for the spatial scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalerdescriptor/inputwidth"
+      },
+      "outputHeight": {
+        "doc": "The height of the output color texture for the spatial scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalerdescriptor/outputheight"
+      },
+      "outputTextureFormat": {
+        "doc": "The pixel format of the output color texture for the spatial scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalerdescriptor/outputtextureformat"
+      },
+      "outputWidth": {
+        "doc": "The width of the output color texture for the spatial scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxspatialscalerdescriptor/outputwidth"
+      }
+    },
+    "MTLFXTemporalDenoisedScalerDescriptor": {
+      "autoExposureEnabled": {
+        "doc": "A Boolean value that indicates whether MetalFX calculates the exposure for each frame.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/isautoexposureenabled"
+      },
+      "colorTextureFormat": {
+        "doc": "The pixel format of the input color texture for the scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/colortextureformat"
+      },
+      "denoiseStrengthMaskTextureEnabled": {
+        "doc": "A Boolean value indicating whether the scaler evaluates a denoise strength mask texture as part of its operation.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/isdenoisestrengthmasktextureenabled"
+      },
+      "denoiseStrengthMaskTextureFormat": {
+        "doc": "The pixel format of the input denoise strength mask texture for the scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/denoisestrengthmasktextureformat"
+      },
+      "depthTextureFormat": {
+        "doc": "The pixel format of the input depth texture for the scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/depthtextureformat"
+      },
+      "diffuseAlbedoTextureFormat": {
+        "doc": "The pixel format of the input diffuse albedo texture for the scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/diffusealbedotextureformat"
+      },
+      "inputHeight": {
+        "doc": "The height, in pixels, of the input color texture for the denoiser scaler.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/inputheight"
+      },
+      "inputWidth": {
+        "doc": "The width, in pixels, of the input color texture for the denoiser scaler.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/inputwidth"
+      },
+      "motionTextureFormat": {
+        "doc": "The pixel format of the input motion texture for the scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/motiontextureformat"
+      },
+      "normalTextureFormat": {
+        "doc": "The pixel format of the input normal texture for the scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/normaltextureformat"
+      },
+      "outputHeight": {
+        "doc": "The height, in pixels, of the input color texture for the denoiser scaler.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/outputheight"
+      },
+      "outputTextureFormat": {
+        "doc": "The pixel format of the output color texture for the scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/outputtextureformat"
+      },
+      "outputWidth": {
+        "doc": "The width, in pixels, of the output color texture for the denoiser scaler.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/outputwidth"
+      },
+      "reactiveMaskTextureEnabled": {
+        "doc": "A Boolean value that indicates whether a scaler you create from this descriptor applies a reactive mask.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/isreactivemasktextureenabled"
+      },
+      "reactiveMaskTextureFormat": {
+        "doc": "The pixel format of the reactive mask input texture for a scaler you create from this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/reactivemasktextureformat"
+      },
+      "requiresSynchronousInitialization": {
+        "doc": "A Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/requiressynchronousinitialization"
+      },
+      "roughnessTextureFormat": {
+        "doc": "The pixel format of the input roughness texture for the scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/roughnesstextureformat"
+      },
+      "specularAlbedoTextureFormat": {
+        "doc": "The pixel format of the input specular albedo texture for the scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/specularalbedotextureformat"
+      },
+      "specularHitDistanceTextureEnabled": {
+        "doc": "A Boolean value indicating whether the scaler evaluates a specular hit distance texture as part of its operation.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/isspecularhitdistancetextureenabled"
+      },
+      "specularHitDistanceTextureFormat": {
+        "doc": "The pixel format of the input specular hit texture for the scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/specularhitdistancetextureformat"
+      },
+      "transparencyOverlayTextureEnabled": {
+        "doc": "A Boolean value indicating whether the scaler evaluates a transparency overlay texture as part of its operation.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/istransparencyoverlaytextureenabled"
+      },
+      "transparencyOverlayTextureFormat": {
+        "doc": "The pixel format of the input transparency overlay texture for the scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporaldenoisedscalerdescriptor/transparencyoverlaytextureformat"
+      }
+    },
+    "MTLFXTemporalScalerDescriptor": {
+      "autoExposureEnabled": {
+        "doc": "A Boolean value that indicates whether MetalFX calculates the exposure for each frame.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/isautoexposureenabled"
+      },
+      "colorTextureFormat": {
+        "doc": "The pixel format of the input color texture for the temporal scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/colortextureformat"
+      },
+      "depthTextureFormat": {
+        "doc": "The pixel format of the input depth texture for the temporal scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/depthtextureformat"
+      },
+      "inputContentMaxScale": {
+        "doc": "The largest scale factor the temporal scaler you create with this descriptor can use to generate output textures.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/inputcontentmaxscale"
+      },
+      "inputContentMinScale": {
+        "doc": "The smallest scale factor the temporal scaler you create with this descriptor can use to generate output textures.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/inputcontentminscale"
+      },
+      "inputContentPropertiesEnabled": {
+        "doc": "A Boolean value that indicates whether the temporal scaler you create with this descriptor uses dynamic resolution.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/isinputcontentpropertiesenabled"
+      },
+      "inputHeight": {
+        "doc": "The height of the input color texture for the temporal scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/inputheight"
+      },
+      "inputWidth": {
+        "doc": "The width of the input color texture for the temporal scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/inputwidth"
+      },
+      "jitteredMotionVectorsEnabled": {
+        "doc": "A Boolean value that indicates whether the motion vectors include the jittering pattern.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/isjitteredmotionvectorsenabled"
+      },
+      "motionTextureFormat": {
+        "doc": "The pixel format of the input motion texture for the temporal scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/motiontextureformat"
+      },
+      "outputHeight": {
+        "doc": "The height of the output color texture for the temporal scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/outputheight"
+      },
+      "outputResolutionMotionVectorsEnabled": {
+        "doc": "A Boolean value that indicates whether the scaler expects motion vectors at output resolution.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/isoutputresolutionmotionvectorsenabled"
+      },
+      "outputTextureFormat": {
+        "doc": "The pixel format of the output color texture for the temporal scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/outputtextureformat"
+      },
+      "outputWidth": {
+        "doc": "The width of the output color texture for the temporal scaler you create with this descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/outputwidth"
+      },
+      "reactiveMaskTextureEnabled": {
+        "doc": "A Boolean value that indicates whether a temporal scaler you create with the descriptor applies a reactive mask.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/isreactivemasktextureenabled"
+      },
+      "reactiveMaskTextureFormat": {
+        "doc": "The pixel format of the reactive mask input texture for a temporal scaler you create with the descriptor.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/reactivemasktextureformat"
+      },
+      "requiresSynchronousInitialization": {
+        "doc": "A Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance.",
+        "url": "https://developer.apple.com/documentation/metalfx/mtlfxtemporalscalerdescriptor/requiressynchronousinitialization"
+      }
+    }
+  }
+}

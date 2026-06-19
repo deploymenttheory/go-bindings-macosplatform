@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A list of sharing services that the user can choose from.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nssharingservicepicker
 type NSSharingServicePicker struct {
 	foundation.NSObject
@@ -36,21 +38,21 @@ func NSSharingServicePickerFromID(id objc.ID) *NSSharingServicePicker {
 	return o
 }
 
-// Returns a new picker. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
+// Creates a new sharing service picker for the selected items.
 func (o *NSSharingServicePicker) InitWithItems(items *foundation.NSArray[objc.ID]) *NSSharingServicePicker {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServicePickerSelInitWithItems, items)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServicePickerSelInitWithItems, items.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSSharingServicePickerFromID(_ret)
 }
 
-// Shows the picker, populated with sharing services related to the instance items. When the user selects one of the sharing services, the sharing service will be performed. Note that this method must be called on mouseDown.
+// Shows the picker interface and populates it with the relevant sharing services.
 func (o *NSSharingServicePicker) ShowRelativeToRectOfViewPreferredEdge(rect corefoundation.CGRect, view *NSView, preferredEdge foundation.NSRectEdge) {
 	o.Ptr().Send(_nSSharingServicePickerSelShowRelativeToRectOfViewPreferredEdge, rect, view.Ptr(), preferredEdge)
 }
 
-// Closes the picker UI. `-[NSSharingServicePickerDelegate sharingServicePicker:didChooseSharingService:]` will be invoked if `delegate` is set, with a `nil` service.
+// Closes the picker interface.
 func (o *NSSharingServicePicker) Close() {
 	o.Ptr().Send(_nSSharingServicePickerSelClose)
 }

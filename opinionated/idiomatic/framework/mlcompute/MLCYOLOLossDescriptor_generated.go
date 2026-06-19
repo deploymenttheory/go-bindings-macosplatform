@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration object you use to create the YOLO loss layer.
+//
 // YOLOLossDescriptor wraps [raw.MLCYOLOLossDescriptor] with a fluent Go API.
 type YOLOLossDescriptor struct {
 	inner *raw.MLCYOLOLossDescriptor
@@ -36,7 +38,7 @@ func NewYOLOLossDescriptor() *YOLOLossDescriptor {
 	return &YOLOLossDescriptor{inner: raw.MLCYOLOLossDescriptorFromID(_id)}
 }
 
-// @property   shouldRescore @abstract   Rescore pertains to multiplying the confidence groundTruth with IOU (intersection over union) of predicted bounding box and the groundTruth boundingBox.  The default is YES
+// A Boolean that indicates whether the layer scales the object confidence loss by the intersection over union (IOU) overlap.
 //
 // WithShouldRescore sets the shouldRescore property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithShouldRescore(shouldRescore bool) *YOLOLossDescriptor {
@@ -44,7 +46,7 @@ func (x *YOLOLossDescriptor) WithShouldRescore(shouldRescore bool) *YOLOLossDesc
 	return x
 }
 
-// @property   scaleSpatialPositionLoss @abstract   The scale factor for spatial position loss and loss gradient.  The default is 10.0
+// The scale factor you use for spatial position loss and loss gradient.
 //
 // WithScaleSpatialPositionLoss sets the scaleSpatialPositionLoss property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithScaleSpatialPositionLoss(scaleSpatialPositionLoss float32) *YOLOLossDescriptor {
@@ -52,7 +54,7 @@ func (x *YOLOLossDescriptor) WithScaleSpatialPositionLoss(scaleSpatialPositionLo
 	return x
 }
 
-// @property   scaleSpatialSizeLoss @abstract   The scale factor for spatial size loss and loss gradient.  The default is 10.0
+// The scale factor you use for spatial size loss and loss gradient.
 //
 // WithScaleSpatialSizeLoss sets the scaleSpatialSizeLoss property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithScaleSpatialSizeLoss(scaleSpatialSizeLoss float32) *YOLOLossDescriptor {
@@ -60,7 +62,7 @@ func (x *YOLOLossDescriptor) WithScaleSpatialSizeLoss(scaleSpatialSizeLoss float
 	return x
 }
 
-// @property   scaleNoObject @abstract   The scale factor for no object confidence loss and loss gradient.  The default is 5.0
+// The scale factor you use for no object confidence loss and loss gradient.
 //
 // WithScaleNoObjectConfidenceLoss sets the scaleNoObjectConfidenceLoss property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithScaleNoObjectConfidenceLoss(scaleNoObjectConfidenceLoss float32) *YOLOLossDescriptor {
@@ -68,7 +70,7 @@ func (x *YOLOLossDescriptor) WithScaleNoObjectConfidenceLoss(scaleNoObjectConfid
 	return x
 }
 
-// @property   scaleObject @abstract   The scale factor for object confidence loss and loss gradient.  The default is 100.0
+// The scale factor you use for object confidence loss and loss gradient.
 //
 // WithScaleObjectConfidenceLoss sets the scaleObjectConfidenceLoss property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithScaleObjectConfidenceLoss(scaleObjectConfidenceLoss float32) *YOLOLossDescriptor {
@@ -76,7 +78,7 @@ func (x *YOLOLossDescriptor) WithScaleObjectConfidenceLoss(scaleObjectConfidence
 	return x
 }
 
-// @property   scaleClass @abstract   The scale factor for no object classes loss and loss gradient.  The default is 2.0
+// The scale factor you use for loss when there are no object classes, and for loss gradient.
 //
 // WithScaleClassLoss sets the scaleClassLoss property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithScaleClassLoss(scaleClassLoss float32) *YOLOLossDescriptor {
@@ -84,7 +86,7 @@ func (x *YOLOLossDescriptor) WithScaleClassLoss(scaleClassLoss float32) *YOLOLos
 	return x
 }
 
-// @property   positive IOU @abstract   If the prediction IOU with groundTruth is higher than this value we consider it a confident object presence, The default is 0.7
+// The positive intersection over union (IOU).
 //
 // WithMinimumIOUForObjectPresence sets the minimumIOUForObjectPresence property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithMinimumIOUForObjectPresence(minimumIOUForObjectPresence float32) *YOLOLossDescriptor {
@@ -92,7 +94,7 @@ func (x *YOLOLossDescriptor) WithMinimumIOUForObjectPresence(minimumIOUForObject
 	return x
 }
 
-// @property   negative IOU @abstract   If the prediction IOU with groundTruth is lower than this value we consider it a confident object absence.  The default is 0.3
+// The negative intersection over union (IOU).
 //
 // WithMaximumIOUForObjectAbsence sets the maximumIOUForObjectAbsence property and returns the receiver for chaining.
 func (x *YOLOLossDescriptor) WithMaximumIOUForObjectAbsence(maximumIOUForObjectAbsence float32) *YOLOLossDescriptor {

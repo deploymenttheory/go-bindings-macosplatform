@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A singleton object used to represent null values in collection objects that don’t allow nil values.
+//
 // Null wraps [raw.NSNull] with a fluent Go API.
 type Null struct {
 	inner *raw.NSNull

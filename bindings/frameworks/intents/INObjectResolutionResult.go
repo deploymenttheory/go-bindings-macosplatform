@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for an Object associated with an intent.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inobjectresolutionresult
 type INObjectResolutionResult struct {
 	INIntentResolutionResult
@@ -32,6 +34,7 @@ func INObjectResolutionResultFromID(id objc.ID) *INObjectResolutionResult {
 	return o
 }
 
+// Creates an object whose resolution involves the successful matching of the specified parameter.
 func INObjectResolutionResultSuccessWithResolvedObject(resolvedObject *INObject) *INObjectResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINObjectResolutionResult), _iNObjectResolutionResultSelSuccessWithResolvedObject, resolvedObject.Ptr())
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func INObjectResolutionResultSuccessWithResolvedObject(resolvedObject *INObject)
 	return INObjectResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires the user to select from among the specified objects.
 func INObjectResolutionResultDisambiguationWithObjectsToDisambiguate(objectsToDisambiguate *foundation.NSArray[*INObject]) *INObjectResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINObjectResolutionResult), _iNObjectResolutionResultSelDisambiguationWithObjectsToDisambiguate, objectsToDisambiguate.Ptr())
 	if _ret != 0 {
@@ -48,6 +52,7 @@ func INObjectResolutionResultDisambiguationWithObjectsToDisambiguate(objectsToDi
 	return INObjectResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution requires that the user must confirm the value before proceeding.
 func INObjectResolutionResultConfirmationRequiredWithObjectToConfirm(objectToConfirm *INObject) *INObjectResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINObjectResolutionResult), _iNObjectResolutionResultSelConfirmationRequiredWithObjectToConfirm, objectToConfirm.Ptr())
 	if _ret != 0 {

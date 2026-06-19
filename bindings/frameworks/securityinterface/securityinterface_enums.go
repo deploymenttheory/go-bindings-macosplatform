@@ -151,7 +151,7 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
-// @typedef SFAuthorizationViewState @abstract Defines the current state of the authorization view. @constant SFAuthorizationStartupState Indicates the state is starting up. @constant SFAuthorizationViewLockedState Indicates the state is locked. @constant SFAuthorizationViewInProgressState Indicates the state is 'in progress'. @constant SFAuthorizationViewUnlockedState Indicates the state is unlocked.
+// Defines the current state of the authorization view.
 type SFAuthorizationViewState int64
 
 const (
@@ -176,7 +176,7 @@ func (e SFAuthorizationViewState) String() string {
 	}
 }
 
-// @typedef SFButtonType @abstract Defines the button types that are used by AuthorizationPlugins. @constant SFButtonTypeCancel Indicates the Cancel button was pressed. @constant SFButtonTypeOK Indicates the OK button was pressed. @constant SFButtonTypeBack Indicates the Back button was pressed. @constant SFButtonTypeLogin Indicates the Login button was pressed.
+// These constants define the button types used by authorization plug-ins.
 type SFButtonType int64
 
 const (
@@ -197,7 +197,7 @@ func (e SFButtonType) String() string {
 	}
 }
 
-// @typedef SFViewType @abstract Defines the view types requested by AuthorizationPlugins. @constant SFViewTypeIdentityAndCredentials Indicates a view that has controls for identity and credentials was requested. @constant SFViewTypeCredentials Indicates a view that has controls for credentials was requested.
+// These constants define the view type requested by the authorization plug-in.
 type SFViewType int64
 
 const (

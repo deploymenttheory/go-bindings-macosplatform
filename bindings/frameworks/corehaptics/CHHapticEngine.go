@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the connection to the haptic server.
+//
 // Apple documentation: https://developer.apple.com/documentation/corehaptics/chhapticengine
 type CHHapticEngine struct {
 	foundation.NSObject
@@ -59,13 +61,13 @@ func CHHapticEngineFromID(id objc.ID) *CHHapticEngine {
 	return o
 }
 
-// @method capabilitiesForHardware @abstract Get the protocol that describes haptic and audio capabilities on this device. @discussion Detailed description on the capability protocol is in CHHapticDeviceCapability.h.
+// Returns a device capability object that describes the device’s haptic support and limitations.
 func CHHapticEngineCapabilitiesForHardware() CHHapticDeviceCapability {
 	_ret := objc.Send[CHHapticDeviceCapability](objc.ID(_clsCHHapticEngine), _cHHapticEngineSelCapabilitiesForHardware)
 	return _ret
 }
 
-// @method initAndReturnError: @abstract Create an instance of the CHHapticEngine. @discussion More than one instance may exist within a process.  Each will function independently of the others. CHHapticEngines created using this method will be associated with the device's internal haptics hardware system, if one exists.  For systems without internal haptics, this method will fail with the error `CHHapticErrorCodeNotSupported`. To access engine instances associated with external game controllers, see the GameController framework documentation for the `hapticEngines` property on the GCController class.
+// Creates an instance of the haptic engine.
 func (o *CHHapticEngine) InitAndReturnError() (*CHHapticEngine, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticEngineSelInitAndReturnError, unsafe.Pointer(&_nsErr))
@@ -78,7 +80,7 @@ func (o *CHHapticEngine) InitAndReturnError() (*CHHapticEngine, error) {
 	return CHHapticEngineFromID(_ret), nil
 }
 
-// @method initWithAudioSession:error @abstract Create an instance of an CHHapticEngine and associate it with an audio session.  If 'audioSession' is nil, the engine will create its own. @discussion More than one instance may exist within a process.  Each will function independently of the others, but all CHHapticEngines which share an audio session will have identical audio behavior with regard to interruptions, etc. CHHapticEngines created using this method will be associated with the device's internal haptics hardware system, if one exists.  For systems without internal haptics, this method will fail with the error `CHHapticErrorCodeNotSupported`. To access engine instances associated with external game controllers, see the GameController framework documentation for the `hapticEngines` property on the GCController class.
+// Creates a haptic engine from an audio session.
 func (o *CHHapticEngine) InitWithAudioSessionError(audioSession objc.ID) (*CHHapticEngine, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticEngineSelInitWithAudioSessionError, audioSession, unsafe.Pointer(&_nsErr))
@@ -91,7 +93,7 @@ func (o *CHHapticEngine) InitWithAudioSessionError(audioSession objc.ID) (*CHHap
 	return CHHapticEngineFromID(_ret), nil
 }
 
-// @method startWithCompletionHandler: @abstract Asynchronously start the engine. The handler will be called when the operation completes. @discussion The handler is guaranteed to be called on either success or failure.
+// Asynchronously starts the haptic engine.
 func (o *CHHapticEngine) StartWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -103,7 +105,7 @@ func (o *CHHapticEngine) StartWithCompletionHandler(completionHandler func(unsaf
 	o.Ptr().Send(_cHHapticEngineSelStartWithCompletionHandler, __block_completionHandler)
 }
 
-// @method startAndReturnError: @abstract Start the engine and block until the engine has started. @discussion This method will return NO upon failure, and outError will be set to a valid NSError describing the error.
+// Synchronously starts the haptic engine.
 func (o *CHHapticEngine) StartAndReturnError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cHHapticEngineSelStartAndReturnError, unsafe.Pointer(&_nsErr))
@@ -113,7 +115,7 @@ func (o *CHHapticEngine) StartAndReturnError() (bool, error) {
 	return _ret, nil
 }
 
-// @method stopWithCompletionHandler: @abstract Asynchronously stop the engine.  The handler will be called when the operation completes. @discussion The handler is guaranteed to be called on either success or failure.
+// Asynchronously stops the haptic engine and executes the completion handler once the engine has stopped.
 func (o *CHHapticEngine) StopWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -125,7 +127,7 @@ func (o *CHHapticEngine) StopWithCompletionHandler(completionHandler func(unsafe
 	o.Ptr().Send(_cHHapticEngineSelStopWithCompletionHandler, __block_completionHandler)
 }
 
-// @method notifyWhenPlayersFinished: @abstract Tell the engine to asynchronously call the passed-in handler when all active pattern players associated with this engine have stopped. @param finishedHandler The block that will be called asynchronously.  The return value of this block determines the action the engine will take when the block finishes (see `CHHapticEngineFinishedHandler`). @discussion If additional players are started after this call is made, they will delay the callback. If no players are active or the engine is stopped, the callback will happen immediately.
+// Notifies you when all haptic pattern players have finished playing their haptic patterns.
 func (o *CHHapticEngine) NotifyWhenPlayersFinished(finishedHandler func(unsafe.Pointer) CHHapticEngineFinishedAction) {
 	var __block_finishedHandler objc.Block
 	if finishedHandler != nil {
@@ -137,7 +139,7 @@ func (o *CHHapticEngine) NotifyWhenPlayersFinished(finishedHandler func(unsafe.P
 	o.Ptr().Send(_cHHapticEngineSelNotifyWhenPlayersFinished, __block_finishedHandler)
 }
 
-// @method createPlayerWithPattern:error @abstract Factory method for creating a CHHapticPatternPlayer from a CHHapticPattern. @param pattern The pattern to be played.
+// Creates a standard haptic pattern player from a haptic pattern.
 func (o *CHHapticEngine) CreatePlayerWithPatternError(pattern *CHHapticPattern) (CHHapticPatternPlayer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[CHHapticPatternPlayer](o.Ptr(), _cHHapticEngineSelCreatePlayerWithPatternError, pattern.Ptr(), unsafe.Pointer(&_nsErr))
@@ -147,7 +149,7 @@ func (o *CHHapticEngine) CreatePlayerWithPatternError(pattern *CHHapticPattern) 
 	return _ret, nil
 }
 
-// @method createAdvancedPlayerWithPattern:error @abstract Factory method for creating a CHHapticAdvancedPatternPlayer from a CHHapticPattern. @param pattern The pattern to be played.
+// Creates an advanced haptic pattern player from a haptic pattern.
 func (o *CHHapticEngine) CreateAdvancedPlayerWithPatternError(pattern *CHHapticPattern) (CHHapticAdvancedPatternPlayer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[CHHapticAdvancedPatternPlayer](o.Ptr(), _cHHapticEngineSelCreateAdvancedPlayerWithPatternError, pattern.Ptr(), unsafe.Pointer(&_nsErr))
@@ -157,17 +159,17 @@ func (o *CHHapticEngine) CreateAdvancedPlayerWithPatternError(pattern *CHHapticP
 	return _ret, nil
 }
 
-// @method registerAudioResource:options:error @abstract Register an external audio file for use as a custom waveform. @param resourceURL A URL referencing the location of the audio file to be registered. @param options A dictionary containing CHHapticAudioResourceKey/value pairs describing how this resource should be played. @param outError If register operation fails, this will be set to a valid NSError describing the error.
+// Registers an external audio to use as a custom waveform.
 func (o *CHHapticEngine) RegisterAudioResourceOptionsError(resourceURL *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) (uint, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[uint](o.Ptr(), _cHHapticEngineSelRegisterAudioResourceOptionsError, resourceURL.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[uint](o.Ptr(), _cHHapticEngineSelRegisterAudioResourceOptionsError, resourceURL.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return 0, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return _ret, nil
 }
 
-// @method unregisterAudioResource:error @abstract Unregister and remove a previously-registered audio resource. @param resourceID The resource ID that was returned when the resource was registered. @param outError If the unregister operation fails, this will be set to a valid NSError describing the error.
+// Unregisters an external audio file that you previously registered with the engine.
 func (o *CHHapticEngine) UnregisterAudioResourceError(resourceID uint) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cHHapticEngineSelUnregisterAudioResourceError, resourceID, unsafe.Pointer(&_nsErr))
@@ -177,7 +179,7 @@ func (o *CHHapticEngine) UnregisterAudioResourceError(resourceID uint) (bool, er
 	return _ret, nil
 }
 
-// @method playPatternFromURL:error @abstract Simple one-shot call to play a pattern specified by a URL. @param fileURL The URL of the file containing a haptic/audio pattern dictionary. @param outError If the operation fails, this will be set to a valid NSError describing the error. @discussion The engine should be started prior to calling this method if low latency is desired. If this is not done, this method will start it, which can cause a significant delay.
+// Plays a pattern that’s defined in a file at the specified URL.
 func (o *CHHapticEngine) PlayPatternFromURLError(fileURL *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cHHapticEngineSelPlayPatternFromURLError, fileURL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -187,7 +189,7 @@ func (o *CHHapticEngine) PlayPatternFromURLError(fileURL *foundation.NSURL) (boo
 	return _ret, nil
 }
 
-// @method playPatternFromData:error @abstract Simple one-shot call to play a pattern specified by NSData. @param data The NSData containing a haptic/audio pattern dictionary. @param outError If the operation fails, this will be set to a valid NSError describing the error. @discussion The engine should be started prior to calling this method if low latency is desired. If this is not done, this method will start it, which can cause a significant delay.
+// Plays a pattern from the specified data.
 func (o *CHHapticEngine) PlayPatternFromDataError(data *foundation.NSData) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _cHHapticEngineSelPlayPatternFromDataError, data.Ptr(), unsafe.Pointer(&_nsErr))

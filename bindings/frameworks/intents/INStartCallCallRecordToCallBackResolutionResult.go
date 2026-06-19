@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for the redial capabilities of a missed call.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/instartcallcallrecordtocallbackresolutionresult
 type INStartCallCallRecordToCallBackResolutionResult struct {
 	INCallRecordResolutionResult
@@ -30,6 +32,7 @@ func INStartCallCallRecordToCallBackResolutionResultFromID(id objc.ID) *INStartC
 	return o
 }
 
+// Creates a result that requires the user to confirm the request, because your app is unable to support the current request.
 func INStartCallCallRecordToCallBackResolutionResultUnsupportedForReason(reason INStartCallCallRecordToCallBackUnsupportedReason) *INStartCallCallRecordToCallBackResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINStartCallCallRecordToCallBackResolutionResult), _iNStartCallCallRecordToCallBackResolutionResultSelUnsupportedForReason, reason)
 	if _ret != 0 {
@@ -38,6 +41,7 @@ func INStartCallCallRecordToCallBackResolutionResultUnsupportedForReason(reason 
 	return INStartCallCallRecordToCallBackResolutionResultFromID(_ret)
 }
 
+// Creates an object whose resolution involves successfully redialing a call.
 func (o *INStartCallCallRecordToCallBackResolutionResult) InitWithCallRecordResolutionResult(callRecordResolutionResult *INCallRecordResolutionResult) *INStartCallCallRecordToCallBackResolutionResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNStartCallCallRecordToCallBackResolutionResultSelInitWithCallRecordResolutionResult, callRecordResolutionResult.Ptr())
 	if _ret != 0 {

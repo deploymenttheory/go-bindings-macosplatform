@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a connection to a mixer node from a node that conforms to the audio mixing protocol.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiomixingdestination
 type AVAudioMixingDestination struct {
 	foundation.NSObject

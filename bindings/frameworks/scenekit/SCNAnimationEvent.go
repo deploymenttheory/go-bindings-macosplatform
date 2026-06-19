@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A container for a closure, a block in Objective-C, to be executed at a specific time during playback of an animation.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnanimationevent
 type SCNAnimationEvent struct {
 	foundation.NSObject
@@ -30,7 +32,7 @@ func SCNAnimationEventFromID(id objc.ID) *SCNAnimationEvent {
 	return o
 }
 
-// @method animationEventWithKeyTime:block: @abstract Returns an animation event instance @param time The relative time to trigger the event. @param eventBlock The block to call when the event is triggered. @discussion "time" is relative to animation duration and therefor it has to be a value in the range [0,1].
+// Creates an animation event.
 func SCNAnimationEventAnimationEventWithKeyTimeBlock(time_ float64, eventBlock func(objc.ID, objc.ID, bool)) *SCNAnimationEvent {
 	var __block_eventBlock objc.Block
 	if eventBlock != nil {

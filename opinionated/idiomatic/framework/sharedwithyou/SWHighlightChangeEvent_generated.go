@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents change activity for a highlight.
+//
 // HighlightChangeEvent wraps [raw.SWHighlightChangeEvent] with a fluent Go API.
 type HighlightChangeEvent struct {
 	inner *raw.SWHighlightChangeEvent
@@ -30,7 +32,7 @@ func HighlightChangeEventFromID(id objc.ID) *HighlightChangeEvent {
 	return &HighlightChangeEvent{inner: raw.SWHighlightChangeEventFromID(id)}
 }
 
-// Initializes a highlight change event object to represent changes to a highlight. @param highlight The object on which the event occurred. @param trigger The trigger change event for the highlight.
+// Creates and initializes a change event.
 //
 // NewHighlightChangeEventWithHighlightTrigger creates a new [HighlightChangeEvent].
 func NewHighlightChangeEventWithHighlightTrigger(highlight *raw.SWHighlight, trigger SWHighlightChangeEventTrigger) *HighlightChangeEvent {

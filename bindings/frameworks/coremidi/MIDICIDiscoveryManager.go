@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A singleton object that performs systemwide MIDI-CI discovery.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremidi/midicidiscoverymanager
 type MIDICIDiscoveryManager struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func MIDICIDiscoveryManagerFromID(id objc.ID) *MIDICIDiscoveryManager {
 	return o
 }
 
+// Returns the singleton discovery manager instance.
 func MIDICIDiscoveryManagerSharedInstance() *MIDICIDiscoveryManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMIDICIDiscoveryManager), _mIDICIDiscoveryManagerSelSharedInstance)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func MIDICIDiscoveryManagerSharedInstance() *MIDICIDiscoveryManager {
 	return MIDICIDiscoveryManagerFromID(_ret)
 }
 
+// Discovers the available MIDI-CI nodes.
 func (o *MIDICIDiscoveryManager) DiscoverWithHandler(completedHandler func(*foundation.NSArray[*MIDICIDiscoveredNode])) {
 	var __block_completedHandler objc.Block
 	if completedHandler != nil {

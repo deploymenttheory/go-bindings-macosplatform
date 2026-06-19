@@ -60,10 +60,13 @@ func (o *MTRDeviceEnergyManagementModeClusterModeOptionStruct) SetMode(mode *fou
 }
 
 func (o *MTRDeviceEnergyManagementModeClusterModeOptionStruct) ModeTags() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRDeviceEnergyManagementModeClusterModeOptionStructSelModeTags)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementModeClusterModeOptionStructSelModeTags)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRDeviceEnergyManagementModeClusterModeOptionStruct) SetModeTags(modeTags *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRDeviceEnergyManagementModeClusterModeOptionStructSelSetModeTags, modeTags)
+	o.Ptr().Send(_mTRDeviceEnergyManagementModeClusterModeOptionStructSelSetModeTags, modeTags.Ptr())
 }

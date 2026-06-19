@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides additional information about a local peripheral’s characteristic.
+//
 // MutableDescriptor wraps [raw.CBMutableDescriptor] with a fluent Go API.
 type MutableDescriptor struct {
 	inner *raw.CBMutableDescriptor
@@ -29,7 +31,7 @@ func MutableDescriptorFromID(id objc.ID) *MutableDescriptor {
 	return &MutableDescriptor{inner: raw.CBMutableDescriptorFromID(id)}
 }
 
-// @method initWithType:value: @param UUID		The Bluetooth UUID of the descriptor. @param value	The value of the descriptor. @discussion 	Returns a decriptor, initialized with a service type and value. The <i>value</i> is required and cannot be updated dynamically once the parent service has been published.
+// Creates a mutable descriptor with a specified value.
 //
 // NewMutableDescriptorWithTypeValue creates a new [MutableDescriptor].
 func NewMutableDescriptorWithTypeValue(uUID *raw.CBUUID, value objc.ID) *MutableDescriptor {

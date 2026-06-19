@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A layer that draws a color gradient over its background color, filling the shape of the layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/cagradientlayer
 type CAGradientLayer struct {
 	CALayer
@@ -41,21 +43,27 @@ func CAGradientLayerFromID(id objc.ID) *CAGradientLayer {
 }
 
 func (o *CAGradientLayer) Colors() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cAGradientLayerSelColors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cAGradientLayerSelColors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *CAGradientLayer) SetColors(colors *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_cAGradientLayerSelSetColors, colors)
+	o.Ptr().Send(_cAGradientLayerSelSetColors, colors.Ptr())
 }
 
 func (o *CAGradientLayer) Locations() *foundation.NSArray[*foundation.NSNumber] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _cAGradientLayerSelLocations)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cAGradientLayerSelLocations)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
 func (o *CAGradientLayer) SetLocations(locations *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_cAGradientLayerSelSetLocations, locations)
+	o.Ptr().Send(_cAGradientLayerSelSetLocations, locations.Ptr())
 }
 
 func (o *CAGradientLayer) StartPoint() corefoundation.CGPoint {

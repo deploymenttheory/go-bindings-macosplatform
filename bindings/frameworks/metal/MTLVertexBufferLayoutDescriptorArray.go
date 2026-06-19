@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An array of vertex buffer layout descriptor instances.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlvertexbufferlayoutdescriptorarray
 type MTLVertexBufferLayoutDescriptorArray struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func MTLVertexBufferLayoutDescriptorArrayFromID(id objc.ID) *MTLVertexBufferLayo
 	return o
 }
 
+// Returns the state of the specified vertex buffer layout.
 func (o *MTLVertexBufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index uint) *MTLVertexBufferLayoutDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLVertexBufferLayoutDescriptorArraySelObjectAtIndexedSubscript, index)
 	if _ret != 0 {
@@ -39,6 +42,7 @@ func (o *MTLVertexBufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index ui
 	return MTLVertexBufferLayoutDescriptorFromID(_ret)
 }
 
+// Sets the state of the specified vertex buffer layout.
 func (o *MTLVertexBufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *MTLVertexBufferLayoutDescriptor, index uint) {
 	o.Ptr().Send(_mTLVertexBufferLayoutDescriptorArraySelSetObjectAtIndexedSubscript, bufferDesc.Ptr(), index)
 }

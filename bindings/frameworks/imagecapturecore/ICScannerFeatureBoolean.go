@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A feature with a value of YES or NO.
+//
 // Apple documentation: https://developer.apple.com/documentation/imagecapturecore/icscannerfeatureboolean
 type ICScannerFeatureBoolean struct {
 	ICScannerFeature

@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An authentication credential consisting of information specific to the type of credential and the type of persistent storage to use, if any.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlcredential
 type NSURLCredential struct {
 	NSObject
@@ -56,7 +58,7 @@ func (o *NSURLCredential) InitWithUserPasswordPersistence(user *NSString, passwo
 	return NSURLCredentialFromID(_ret)
 }
 
-// @method credentialWithUser:password:persistence: @abstract Create a new NSURLCredential with a user and password @param user the username @param password the password @param persistence enum that says to store per session, permanently or not at all @result The new autoreleased NSURLCredential
+// Creates a URL credential instance for internet password authentication with a given user name and password, using a given persistence setting.
 func NSURLCredentialCredentialWithUserPasswordPersistence(user *NSString, password *NSString, persistence NSURLCredentialPersistence) *NSURLCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLCredential), _nSURLCredentialSelCredentialWithUserPasswordPersistence, user.Ptr(), password.Ptr(), persistence)
 	if _ret != 0 {
@@ -91,16 +93,16 @@ func (o *NSURLCredential) HasPassword() bool {
 
 // @method initWithIdentity:certificates:persistence: @abstract Initialize an NSURLCredential with an identity and array of at least 1 client certificates (SecCertificateRef) @param identity a SecIdentityRef object @param certArray an array containing at least one SecCertificateRef objects @param persistence enum that says to store per session, permanently or not at all @result the Initialized NSURLCredential
 func (o *NSURLCredential) InitWithIdentityCertificatesPersistence(identity unsafe.Pointer, certArray *NSArray[objc.ID], persistence NSURLCredentialPersistence) *NSURLCredential {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialSelInitWithIdentityCertificatesPersistence, identity, certArray, persistence)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialSelInitWithIdentityCertificatesPersistence, identity, certArray.Ptr(), persistence)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSURLCredentialFromID(_ret)
 }
 
-// @method credentialWithIdentity:certificates:persistence: @abstract Create a new NSURLCredential with an identity and certificate array @param identity a SecIdentityRef object @param certArray an array containing at least one SecCertificateRef objects @param persistence enum that says to store per session, permanently or not at all @result The new autoreleased NSURLCredential
+// Creates a URL credential instance for resolving a client certificate authentication challenge.
 func NSURLCredentialCredentialWithIdentityCertificatesPersistence(identity unsafe.Pointer, certArray *NSArray[objc.ID], persistence NSURLCredentialPersistence) *NSURLCredential {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLCredential), _nSURLCredentialSelCredentialWithIdentityCertificatesPersistence, identity, certArray, persistence)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLCredential), _nSURLCredentialSelCredentialWithIdentityCertificatesPersistence, identity, certArray.Ptr(), persistence)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -115,8 +117,11 @@ func (o *NSURLCredential) Identity() unsafe.Pointer {
 
 // @abstract Returns an NSArray of SecCertificateRef objects representing the client certificate for this credential, if this credential was created with an identity and certificate. @result an NSArray of SecCertificateRef or NULL if this is a username/password credential
 func (o *NSURLCredential) Certificates() *NSArray[objc.ID] {
-	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSURLCredentialSelCertificates)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialSelCertificates)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSArrayFromID[objc.ID](_ret)
 }
 
 // @method initWithTrust: @abstract Initialize a new NSURLCredential which specifies that the specified trust has been accepted. @result the Initialized NSURLCredential
@@ -128,7 +133,7 @@ func (o *NSURLCredential) InitWithTrust(trust unsafe.Pointer) *NSURLCredential {
 	return NSURLCredentialFromID(_ret)
 }
 
-// @method credentialForTrust: @abstract Create a new NSURLCredential which specifies that a handshake has been trusted. @result The new autoreleased NSURLCredential
+// Creates a URL credential instance for server trust authentication with a given accepted trust.
 func NSURLCredentialCredentialForTrust(trust unsafe.Pointer) *NSURLCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLCredential), _nSURLCredentialSelCredentialForTrust, trust)
 	if _ret != 0 {

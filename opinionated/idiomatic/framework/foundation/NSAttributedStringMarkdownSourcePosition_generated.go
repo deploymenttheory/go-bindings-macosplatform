@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The position of attributed string text in its original Markdown source string.
+//
 // AttributedStringMarkdownSourcePosition wraps [raw.NSAttributedStringMarkdownSourcePosition] with a fluent Go API.
 type AttributedStringMarkdownSourcePosition struct {
 	inner *raw.NSAttributedStringMarkdownSourcePosition
@@ -32,6 +34,8 @@ func AttributedStringMarkdownSourcePositionFromID(id objc.ID) *AttributedStringM
 	return &AttributedStringMarkdownSourcePosition{inner: raw.NSAttributedStringMarkdownSourcePositionFromID(id)}
 }
 
+// Creates a Markdown source position instance from its start and end line and column.
+//
 // NewAttributedStringMarkdownSourcePositionWithStartLineStartColumnEndLineEndColumn creates a new [AttributedStringMarkdownSourcePosition].
 func NewAttributedStringMarkdownSourcePositionWithStartLineStartColumnEndLineEndColumn(startLine int, startColumn int, endLine int, endColumn int) *AttributedStringMarkdownSourcePosition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedStringMarkdownSourcePosition")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func (x *AttributedStringMarkdownSourcePosition) WithScriptingProperties(scripti
 	return x
 }
 
+// Returns a range indicating the source portion within a Markdown string.
+//
 // RangeInString calls the underlying RangeInString.
 func (x *AttributedStringMarkdownSourcePosition) RangeInString(string_ string) raw.NSRange {
 	return x.inner.RangeInString(foundation.NSStringStringWithUTF8String(string_))

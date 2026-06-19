@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A deterministic pseudo-random source that generates random numbers based on an arc4 algorithm. This is a deterministic random source suitable for creating reliable gameplay mechanics. While deterministic, this is not a cryptographic random source, however it may be useful for obfuscation of gameplay data in manner similar to a stream cipher.
+// A basic random number generator implementing the ARC4 algorithm, which is suitable for most gameplay mechanics.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkarc4randomsource
 type GKARC4RandomSource struct {
@@ -36,7 +36,7 @@ func GKARC4RandomSourceFromID(id objc.ID) *GKARC4RandomSource {
 	return o
 }
 
-// Initializes an arc4 random source with bits from high entropy system resource like SecRandomCopyBytes.
+// Initializes a random source from a nondeterministic seed.
 func (o *GKARC4RandomSource) Init() *GKARC4RandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKARC4RandomSourceSelInit)
 	if _ret != 0 {
@@ -45,7 +45,7 @@ func (o *GKARC4RandomSource) Init() *GKARC4RandomSource {
 	return GKARC4RandomSourceFromID(_ret)
 }
 
-// Initializes an arc4 random source with bits from the seed.
+// Initializes a random source with the specified seed data.
 func (o *GKARC4RandomSource) InitWithSeed(seed *foundation.NSData) *GKARC4RandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKARC4RandomSourceSelInitWithSeed, seed.Ptr())
 	if _ret != 0 {
@@ -54,7 +54,7 @@ func (o *GKARC4RandomSource) InitWithSeed(seed *foundation.NSData) *GKARC4Random
 	return GKARC4RandomSourceFromID(_ret)
 }
 
-// Arc4 based random sources have repeatable initial sequences. If used for obfuscation you should drop N values from the start, where N should be any number larger than 768 to ensure the initial sequence is flushed.
+// Skips the specified number of values in the random sequence.
 func (o *GKARC4RandomSource) DropValuesWithCount(count uint) {
 	o.Ptr().Send(_gKARC4RandomSourceSelDropValuesWithCount, count)
 }

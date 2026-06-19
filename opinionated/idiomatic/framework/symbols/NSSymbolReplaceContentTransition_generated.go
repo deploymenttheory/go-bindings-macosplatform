@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that replaces the layers of one symbol-based image with those of another.
+//
 // SymbolReplaceContentTransition wraps [raw.NSSymbolReplaceContentTransition] with a fluent Go API.
 type SymbolReplaceContentTransition struct {
 	inner *raw.NSSymbolReplaceContentTransition
@@ -37,7 +39,7 @@ func NewSymbolReplaceContentTransition() *SymbolReplaceContentTransition {
 	return &SymbolReplaceContentTransition{inner: raw.NSSymbolReplaceContentTransitionFromID(_id)}
 }
 
-// Returns a copy of the content transition that animates incrementally, by layer.
+// An effect that replaces each layer separately.
 //
 // TransitionWithByLayer calls the underlying TransitionWithByLayer.
 func (x *SymbolReplaceContentTransition) TransitionWithByLayer() *SymbolReplaceContentTransition {
@@ -48,7 +50,7 @@ func (x *SymbolReplaceContentTransition) TransitionWithByLayer() *SymbolReplaceC
 	return &SymbolReplaceContentTransition{inner: _r}
 }
 
-// Returns a copy of the content transition that animates all layers of the symbol simultaneously.
+// An effect that replaces all layers simultaneously.
 //
 // TransitionWithWholeSymbol calls the underlying TransitionWithWholeSymbol.
 func (x *SymbolReplaceContentTransition) TransitionWithWholeSymbol() *SymbolReplaceContentTransition {

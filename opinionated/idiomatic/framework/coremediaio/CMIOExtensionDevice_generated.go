@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a physical or virtual device.
+//
 // ExtensionDevice wraps [raw.CMIOExtensionDevice] with a fluent Go API.
 type ExtensionDevice struct {
 	inner *raw.CMIOExtensionDevice
@@ -31,7 +33,7 @@ func ExtensionDeviceFromID(id objc.ID) *ExtensionDevice {
 	return &ExtensionDevice{inner: raw.CMIOExtensionDeviceFromID(id)}
 }
 
-// @method initWithLocalizedName:deviceID:legacyDeviceID:source: @abstract Initialize a device instance. @param localizedName The localized name of the device. @param deviceID The device id (as a UUID). @param legacyDeviceID The device identifier as a string (for backward compatibility with existing CMIO DAL clients, it may differ from deviceID.UUIDString). May be nil if your device has no compatibility requirements. @param source The device source, a client instantiated object for the device that conforms to the CMIOExtensionDeviceSource protocol. @result A CMIOExtensionDevice instance.
+// Creates an extension device with an optional legacy device identifier.
 //
 // NewExtensionDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource creates a new [ExtensionDevice].
 func NewExtensionDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource(localizedName string, deviceID *foundation.NSUUID, legacyDeviceID string, source raw.CMIOExtensionDeviceSource) *ExtensionDevice {
@@ -40,21 +42,21 @@ func NewExtensionDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource(localizedNa
 	return &ExtensionDevice{inner: raw.CMIOExtensionDeviceFromID(_id)}
 }
 
-// @method addStream:error: @abstract Add a stream to the device streams array. @param stream The stream to be added to the device streams array. @param outError An error return on failure. @result Return YES on success, NO otherwise.
+// Adds a stream to a device.
 //
 // AddStreamError calls the underlying AddStreamError.
 func (x *ExtensionDevice) AddStreamError(stream *raw.CMIOExtensionStream) (bool, error) {
 	return x.inner.AddStreamError(stream)
 }
 
-// @method removeStream:error: @abstract Remove a stream from the device streams array. @param stream The stream to be removed from the device streams array. @param outError An error return on failure. @result Return YES on success, NO otherwise.
+// Removes a stream from the device.
 //
 // RemoveStreamError calls the underlying RemoveStreamError.
 func (x *ExtensionDevice) RemoveStreamError(stream *raw.CMIOExtensionStream) (bool, error) {
 	return x.inner.RemoveStreamError(stream)
 }
 
-// @method notifyPropertiesChanged: @abstract Notify client(s) of device properties changes. @param propertyStates The dictionary of properties having changed.
+// Notifies clients of property changes.
 //
 // NotifyPropertiesChanged calls the underlying NotifyPropertiesChanged.
 func (x *ExtensionDevice) NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID]) {

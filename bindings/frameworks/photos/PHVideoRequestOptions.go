@@ -4,12 +4,16 @@
 package photos
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of options affecting the delivery of video asset data that you request from an image manager.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phvideorequestoptions
 type PHVideoRequestOptions struct {
 	foundation.NSObject
@@ -58,6 +62,16 @@ func (o *PHVideoRequestOptions) ProgressHandler() objc.Block {
 	return _ret
 }
 
-func (o *PHVideoRequestOptions) SetProgressHandler(progressHandler objc.Block) {
-	o.Ptr().Send(_pHVideoRequestOptionsSelSetProgressHandler, progressHandler)
+func (o *PHVideoRequestOptions) SetProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) {
+	var __block_progressHandler objc.Block
+	if progressHandler != nil {
+		__block_progressHandler = objc.NewBlock(func(_ objc.Block, blockParam0 float64, blockParam1 unsafe.Pointer, blockParam2 *bool, blockParam3 objc.ID) {
+			if blockParam3 != 0 {
+				blockParam3.Send(objc.RegisterName("retain"))
+			}
+			progressHandler(blockParam0, blockParam1, blockParam2, foundation.NSDictionaryFromID[objc.ID, objc.ID](blockParam3))
+		})
+		defer __block_progressHandler.Release()
+	}
+	o.Ptr().Send(_pHVideoRequestOptionsSelSetProgressHandler, __block_progressHandler)
 }

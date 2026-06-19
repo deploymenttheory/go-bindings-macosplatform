@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A placeholder node denoting the position of a neural network image in a graph.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnimagenode
 type MPSNNImageNode struct {
 	foundation.NSObject

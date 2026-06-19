@@ -177,6 +177,7 @@ func (e MPSDeviceOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options that define a Metal Performance Shaders image type.
 type MPSImageType int64
 
 const (

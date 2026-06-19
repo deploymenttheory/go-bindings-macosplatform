@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for area.
+//
 // UnitArea wraps [raw.NSUnitArea] with a fluent Go API.
 type UnitArea struct {
 	inner *raw.NSUnitArea

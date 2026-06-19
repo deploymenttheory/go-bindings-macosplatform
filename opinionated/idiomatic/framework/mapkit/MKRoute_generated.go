@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A single route between a requested start and end point.
+//
 // Route wraps [raw.MKRoute] with a fluent Go API.
 type Route struct {
 	inner *raw.MKRoute

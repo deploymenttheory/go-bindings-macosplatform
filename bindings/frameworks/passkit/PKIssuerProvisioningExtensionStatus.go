@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that indicates whether there are any payment cards available to add as Wallet passes.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkissuerprovisioningextensionstatus
 type PKIssuerProvisioningExtensionStatus struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func PKIssuerProvisioningExtensionStatusFromID(id objc.ID) *PKIssuerProvisioning
 	return o
 }
 
+// Creates a new extension-handler status object.
 func (o *PKIssuerProvisioningExtensionStatus) Init() *PKIssuerProvisioningExtensionStatus {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKIssuerProvisioningExtensionStatusSelInit)
 	if _ret != 0 {

@@ -189,7 +189,7 @@ func (x *PassLibrary) SignDataWithSecureElementPassCompletion(signData *foundati
 }
 
 // EncryptedServiceProviderDataForSecureElementPassCompletion calls the underlying EncryptedServiceProviderDataForSecureElementPassCompletion.
-func (x *PassLibrary) EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass *raw.PKSecureElementPass, completion objc.Block) {
+func (x *PassLibrary) EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass *raw.PKSecureElementPass, completion func(*foundation.NSDictionary[objc.ID, objc.ID], unsafe.Pointer)) {
 	x.inner.EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass, completion)
 }
 
@@ -269,7 +269,7 @@ type PassLibraryable interface {
 	ActivatePaymentPassWithActivationCodeCompletion(paymentPass *raw.PKPaymentPass, activationCode string, completion func(bool, unsafe.Pointer))
 	ActivateSecureElementPassWithActivationDataCompletion(secureElementPass *raw.PKSecureElementPass, activationData *foundation.NSData, completion func(bool, unsafe.Pointer))
 	SignDataWithSecureElementPassCompletion(signData *foundation.NSData, secureElementPass *raw.PKSecureElementPass, completion func(*foundation.NSData, *foundation.NSData, unsafe.Pointer))
-	EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass *raw.PKSecureElementPass, completion objc.Block)
+	EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass *raw.PKSecureElementPass, completion func(*foundation.NSDictionary[objc.ID, objc.ID], unsafe.Pointer))
 	ServiceProviderDataForSecureElementPassCompletion(ctx context.Context, secureElementPass *raw.PKSecureElementPass) (*foundation.NSData, error)
 	AuthorizationStatusForCapability(capability PKPassLibraryCapability) PKPassLibraryAuthorizationStatus
 	RequestAuthorizationForCapabilityCompletion(capability PKPassLibraryCapability, completion func(PKPassLibraryAuthorizationStatus))

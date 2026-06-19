@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A type that describes an unsuccessful attempt to modify an individual record.
+//
 // SyncEngineFailedRecordSave wraps [raw.CKSyncEngineFailedRecordSave] with a fluent Go API.
 type SyncEngineFailedRecordSave struct {
 	inner *raw.CKSyncEngineFailedRecordSave

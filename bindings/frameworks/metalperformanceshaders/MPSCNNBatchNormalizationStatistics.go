@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that stores statistics required to execute batch normalization.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbatchnormalizationstatistics
 type MPSCNNBatchNormalizationStatistics struct {
 	mpsneuralnetwork.MPSCNNKernel

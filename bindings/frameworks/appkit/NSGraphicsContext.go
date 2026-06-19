@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a graphics context.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsgraphicscontext
 type NSGraphicsContext struct {
 	foundation.NSObject
@@ -63,14 +65,16 @@ func NSGraphicsContextFromID(id objc.ID) *NSGraphicsContext {
 	return o
 }
 
+// Creates a graphics context using the specified attributes.
 func NSGraphicsContextGraphicsContextWithAttributes(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSGraphicsContext {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSGraphicsContext), _nSGraphicsContextSelGraphicsContextWithAttributes, attributes)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSGraphicsContext), _nSGraphicsContextSelGraphicsContextWithAttributes, attributes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSGraphicsContextFromID(_ret)
 }
 
+// Creates a new graphics context using the specified bitmap image representation object as the context destination.
 func NSGraphicsContextGraphicsContextWithBitmapImageRep(bitmapRep *NSBitmapImageRep) *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGraphicsContext), _nSGraphicsContextSelGraphicsContextWithBitmapImageRep, bitmapRep.Ptr())
 	if _ret != 0 {
@@ -79,6 +83,7 @@ func NSGraphicsContextGraphicsContextWithBitmapImageRep(bitmapRep *NSBitmapImage
 	return NSGraphicsContextFromID(_ret)
 }
 
+// Creates a new graphics context from the specified Core Graphics context and the initial flipped state.
 func NSGraphicsContextGraphicsContextWithCGContextFlipped(graphicsPort unsafe.Pointer, initialFlippedState bool) *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGraphicsContext), _nSGraphicsContextSelGraphicsContextWithCGContextFlipped, graphicsPort, initialFlippedState)
 	if _ret != 0 {
@@ -87,27 +92,33 @@ func NSGraphicsContextGraphicsContextWithCGContextFlipped(graphicsPort unsafe.Po
 	return NSGraphicsContextFromID(_ret)
 }
 
+// Returns a Boolean value that indicates whether the current context is drawing to the screen.
 func NSGraphicsContextCurrentContextDrawingToScreen() bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSGraphicsContext), _nSGraphicsContextSelCurrentContextDrawingToScreen)
 	return _ret
 }
 
+// Saves the graphics state of the current graphics context.
 func NSGraphicsContextSaveGraphicsState() {
 	objc.ID(_clsNSGraphicsContext).Send(_nSGraphicsContextSelSaveGraphicsState)
 }
 
+// Pops a graphics context from the per-thread stack, makes it current, and sends the context a restore graphics state message.
 func NSGraphicsContextRestoreGraphicsState() {
 	objc.ID(_clsNSGraphicsContext).Send(_nSGraphicsContextSelRestoreGraphicsState)
 }
 
+// Saves the current graphics state and creates a new graphics state on the top of the stack.
 func (o *NSGraphicsContext) SaveGraphicsState() {
 	o.Ptr().Send(_nSGraphicsContextSelSaveGraphicsState)
 }
 
+// Removes the context’s graphics state from the top of the graphics state stack and makes the next graphics state the current graphics state.
 func (o *NSGraphicsContext) RestoreGraphicsState() {
 	o.Ptr().Send(_nSGraphicsContextSelRestoreGraphicsState)
 }
 
+// Forces any buffered operations or data to be sent to the graphics context’s destination.
 func (o *NSGraphicsContext) FlushGraphics() {
 	o.Ptr().Send(_nSGraphicsContextSelFlushGraphics)
 }
@@ -125,8 +136,11 @@ func NSGraphicsContextSetCurrentContext(currentContext *NSGraphicsContext) {
 }
 
 func (o *NSGraphicsContext) Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSGraphicsContextSelAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSGraphicsContextSelAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSGraphicsContext) IsDrawingToScreen() bool {
@@ -197,22 +211,26 @@ func (o *NSGraphicsContext) CIContext() *coreimage.CIContext {
 	return coreimage.CIContextFromID(_ret)
 }
 
+// Makes the graphics context of the specified graphics state current, and resets graphics state.
 // Deprecated: This method has no effect
 func NSGraphicsContextSetGraphicsState(gState int) {
 	objc.ID(_clsNSGraphicsContext).Send(_nSGraphicsContextSelSetGraphicsState, gState)
 }
 
+// Returns the object used by the context to track the hierarchy of views with locked focus.
 // Deprecated: since macOS 10.6.
 func (o *NSGraphicsContext) FocusStack() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGraphicsContextSelFocusStack)
 	return _ret
 }
 
+// Sets the object used by the receiver to track the hierarchy of views with locked focus.
 // Deprecated: since macOS 10.6.
 func (o *NSGraphicsContext) SetFocusStack(stack objc.ID) {
 	o.Ptr().Send(_nSGraphicsContextSelSetFocusStack, stack)
 }
 
+// Creates a new graphics context from the specified graphics port.
 // Deprecated: since macOS 10.14.
 func NSGraphicsContextGraphicsContextWithGraphicsPortFlipped(graphicsPort unsafe.Pointer, initialFlippedState bool) *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGraphicsContext), _nSGraphicsContextSelGraphicsContextWithGraphicsPortFlipped, graphicsPort, initialFlippedState)
@@ -222,6 +240,7 @@ func NSGraphicsContextGraphicsContextWithGraphicsPortFlipped(graphicsPort unsafe
 	return NSGraphicsContextFromID(_ret)
 }
 
+// Creates a new graphics context for drawing into a window.
 // Deprecated: Add instances of NSView to display content in a window
 func NSGraphicsContextGraphicsContextWithWindow(window *NSWindow) *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGraphicsContext), _nSGraphicsContextSelGraphicsContextWithWindow, window.Ptr())

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The user’s preference for receiving notifications.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/infocusstatus
 type INFocusStatus struct {
 	foundation.NSObject
@@ -31,6 +33,7 @@ func INFocusStatusFromID(id objc.ID) *INFocusStatus {
 	return o
 }
 
+// Creates an object that indicates the user’s ability to receive communication notifications.
 func (o *INFocusStatus) InitWithIsFocused(isFocused *foundation.NSNumber) *INFocusStatus {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFocusStatusSelInitWithIsFocused, isFocused.Ptr())
 	if _ret != 0 {

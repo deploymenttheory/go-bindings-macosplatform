@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An audio-layering object that outputs sound in a particular direction in 3D space.
+//
 // Apple documentation: https://developer.apple.com/documentation/phase/phaseambientmixerdefinition
 type PHASEAmbientMixerDefinition struct {
 	PHASEMixerDefinition
@@ -36,7 +38,7 @@ func PHASEAmbientMixerDefinitionFromID(id objc.ID) *PHASEAmbientMixerDefinition 
 	return o
 }
 
-// @method initWithChannelLayout:orientation:identifier @abstract Create a new PHASEAmbientMixerDefinition @param layout The input channel layout for this ambient mixer node. Any connected sampler must match this channel layout. @param orientation The orientation of the speaker layout, relative to scene root, as a quaternion. @param identifier An optional custom identifier to give to this object @return A new PHASEAmbientMixerDefinition object
+// Creates a named ambient mixer with the given channel layout and orientation.
 func (o *PHASEAmbientMixerDefinition) InitWithChannelLayoutOrientationIdentifier(layout *avfaudio.AVAudioChannelLayout, orientation unsafe.Pointer, identifier *foundation.NSString) *PHASEAmbientMixerDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAmbientMixerDefinitionSelInitWithChannelLayoutOrientationIdentifier, layout.Ptr(), orientation, identifier.Ptr())
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func (o *PHASEAmbientMixerDefinition) InitWithChannelLayoutOrientationIdentifier
 	return PHASEAmbientMixerDefinitionFromID(_ret)
 }
 
-// @method initWithChannelLayout:orientation @abstract Create a new PHASEAmbientMixerDefinition @param layout The input channel layout for this channel mixer node. Any connected sampler must match this channel layout. @param orientation The orientation of the speaker layout, relative to scene root, as a quaternion. @return A new PHASEAmbientMixerDefinition object
+// Creates an ambient mixer with the given channel layout and orientation.
 func (o *PHASEAmbientMixerDefinition) InitWithChannelLayoutOrientation(layout *avfaudio.AVAudioChannelLayout, orientation unsafe.Pointer) *PHASEAmbientMixerDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAmbientMixerDefinitionSelInitWithChannelLayoutOrientation, layout.Ptr(), orientation)
 	if _ret != 0 {

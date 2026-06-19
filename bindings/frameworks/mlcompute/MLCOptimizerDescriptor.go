@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object you use to create an optimizer.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcoptimizerdescriptor
 type MLCOptimizerDescriptor struct {
 	foundation.NSObject
@@ -42,7 +44,7 @@ func MLCOptimizerDescriptorFromID(id objc.ID) *MLCOptimizerDescriptor {
 	return o
 }
 
-// @abstract   Create a MLCOptimizerDescriptor object @param      learningRate                    The learning rate @param      gradientRescale              The gradient rescale value @param      regularizationType       The regularization type @param      regularizationScale     The regularization scale @return     A new MLCOptimizerDescriptor object.
+// Creates an optimizer descriptor with the learning rate, gradient rescale, regularization type, and regulation scale that you specify.
 func MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, regularizationType MLCRegularizationType, regularizationScale float32) *MLCOptimizerDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCOptimizerDescriptor), _mLCOptimizerDescriptorSelDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale, learningRate, gradientRescale, regularizationType, regularizationScale)
 	if _ret != 0 {
@@ -51,7 +53,7 @@ func MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleRegularizati
 	return MLCOptimizerDescriptorFromID(_ret)
 }
 
-// @abstract   Create a MLCOptimizerDescriptor object @param      learningRate                      The learning rate @param      gradientRescale                The gradient rescale value @param      appliesGradientClipping   Whether to apply gradient clipping @param      gradientClipMax                The maximum gradient value to be used with gradient clipping @param      gradientClipMin                The minimum gradient value to be used with gradient clipping @param      regularizationType          The regularization type @param      regularizationScale        The regularization scale @return     A new MLCOptimizerDescriptor object.
+// Creates a descriptor with the learning rate, gradient rescale, clipping option and values, and regularization type and scale that you specify.
 func MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, appliesGradientClipping bool, gradientClipMax float32, gradientClipMin float32, regularizationType MLCRegularizationType, regularizationScale float32) *MLCOptimizerDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCOptimizerDescriptor), _mLCOptimizerDescriptorSelDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale, learningRate, gradientRescale, appliesGradientClipping, gradientClipMax, gradientClipMin, regularizationType, regularizationScale)
 	if _ret != 0 {
@@ -60,7 +62,7 @@ func MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleAppliesGradi
 	return MLCOptimizerDescriptorFromID(_ret)
 }
 
-// @abstract   Create an MLCOptimizerDescriptor object @param      learningRate                            The learning rate @param      gradientRescale                      The gradient rescale value @param      appliesGradientClipping    Whether to apply gradient clipping @param      gradientClippingType           The type of clipping applied to gradients @param      gradientClipMax                      The maximum gradient value to be used with gradient clipping @param      gradientClipMin                      The minimum gradient value to be used with gradient clipping @param      maximumClippingNorm             The maximum norm to be used with gradient clipping @param      customGlobalNorm                    If non-zero, the norm to be used instead of calculating the global norm @param      regularizationType               The regularization type @param      regularizationScale             The regularization scale @return     A new MLCOptimizerDescriptor object.
+// Creates a descriptor with the learning rate, gradient rescale, clipping option and values, and regularization type and scale that you specify.
 func MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, appliesGradientClipping bool, gradientClippingType MLCGradientClippingType, gradientClipMax float32, gradientClipMin float32, maximumClippingNorm float32, customGlobalNorm float32, regularizationType MLCRegularizationType, regularizationScale float32) *MLCOptimizerDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCOptimizerDescriptor), _mLCOptimizerDescriptorSelDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale, learningRate, gradientRescale, appliesGradientClipping, gradientClippingType, gradientClipMax, gradientClipMin, maximumClippingNorm, customGlobalNorm, regularizationType, regularizationScale)
 	if _ret != 0 {

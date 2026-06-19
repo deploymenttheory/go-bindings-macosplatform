@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages a view for compose session and message security handlers.
+//
 // Apple documentation: https://developer.apple.com/documentation/mailkit/meextensionviewcontroller
 type MEExtensionViewController struct {
 	appkit.NSViewController

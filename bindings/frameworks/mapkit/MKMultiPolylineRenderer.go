@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A visual representation of multiple polyline overlay objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmultipolylinerenderer
 type MKMultiPolylineRenderer struct {
 	MKOverlayPathRenderer
@@ -30,6 +32,7 @@ func MKMultiPolylineRendererFromID(id objc.ID) *MKMultiPolylineRenderer {
 	return o
 }
 
+// Creates an object that renders a visual representation of multiple polyline objects.
 func (o *MKMultiPolylineRenderer) InitWithMultiPolyline(multiPolyline *MKMultiPolyline) *MKMultiPolylineRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMultiPolylineRendererSelInitWithMultiPolyline, multiPolyline.Ptr())
 	if _ret != 0 {

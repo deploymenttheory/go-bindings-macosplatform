@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The metadata that partitions sequences of other entries.
+//
 // Apple documentation: https://developer.apple.com/documentation/oslog/oslogentryboundary
 type OSLogEntryBoundary struct {
 	OSLogEntry

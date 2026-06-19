@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An individual dimension representing an item’s width or height in a collection view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionlayoutdimension
 type NSCollectionLayoutDimension struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func NSCollectionLayoutDimensionFromID(id objc.ID) *NSCollectionLayoutDimension 
 	return o
 }
 
+// Creates a dimension that is computed as a fraction of the width of the containing group.
 func NSCollectionLayoutDimensionFractionalWidthDimension(fractionalWidth float64) *NSCollectionLayoutDimension {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelFractionalWidthDimension, fractionalWidth)
 	if _ret != 0 {
@@ -46,6 +49,7 @@ func NSCollectionLayoutDimensionFractionalWidthDimension(fractionalWidth float64
 	return NSCollectionLayoutDimensionFromID(_ret)
 }
 
+// Creates a dimension that is computed as a fraction of the height of the containing group.
 func NSCollectionLayoutDimensionFractionalHeightDimension(fractionalHeight float64) *NSCollectionLayoutDimension {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelFractionalHeightDimension, fractionalHeight)
 	if _ret != 0 {
@@ -54,6 +58,7 @@ func NSCollectionLayoutDimensionFractionalHeightDimension(fractionalHeight float
 	return NSCollectionLayoutDimensionFromID(_ret)
 }
 
+// Creates a dimension with an absolute point value.
 func NSCollectionLayoutDimensionAbsoluteDimension(absoluteDimension float64) *NSCollectionLayoutDimension {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelAbsoluteDimension, absoluteDimension)
 	if _ret != 0 {
@@ -62,6 +67,7 @@ func NSCollectionLayoutDimensionAbsoluteDimension(absoluteDimension float64) *NS
 	return NSCollectionLayoutDimensionFromID(_ret)
 }
 
+// Creates a dimension with an estimated point value.
 func NSCollectionLayoutDimensionEstimatedDimension(estimatedDimension float64) *NSCollectionLayoutDimension {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelEstimatedDimension, estimatedDimension)
 	if _ret != 0 {

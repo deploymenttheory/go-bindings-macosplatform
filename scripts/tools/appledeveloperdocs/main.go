@@ -25,6 +25,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
@@ -42,7 +43,8 @@ func main() {
 	metadataDir := fs.String("metadata", "./metadata", "metadata directory holding .gometa.json files")
 	cacheDir := fs.String("cache", "", "HTTP response cache dir (default <metadata>/.appledocs-httpcache)")
 	deep := fs.Bool("deep", false, "also harvest each symbol's Discussion, not just the abstract")
-	delay := fs.Duration("delay", 50*time.Millisecond, "minimum delay between live HTTP requests")
+	delay := fs.Duration("delay", 50*time.Millisecond, "minimum delay between live HTTP requests (per worker)")
+	concurrency := fs.Int("concurrency", 5, "number of parallel fetch workers, each rate-limited by --delay")
 	_ = fs.Parse(os.Args[2:])
 
 	if *frameworks == "" {
@@ -54,13 +56,13 @@ func main() {
 		*cacheDir = filepath.Join(*metadataDir, ".appledocs-httpcache")
 	}
 
-	if err := run(*frameworks, *metadataDir, *cacheDir, *deep, *delay); err != nil {
+	if err := run(*frameworks, *metadataDir, *cacheDir, *deep, *delay, *concurrency); err != nil {
 		fmt.Fprintln(os.Stderr, "error:", err)
 		os.Exit(1)
 	}
 }
 
-func run(frameworkArg, metadataDir, cacheDir string, deep bool, delay time.Duration) error {
+func run(frameworkArg, metadataDir, cacheDir string, deep bool, delay time.Duration, concurrency int) error {
 	wanted := parseWanted(frameworkArg)
 
 	paths, err := discoverMetaFiles(metadataDir)
@@ -70,37 +72,70 @@ func run(frameworkArg, metadataDir, cacheDir string, deep bool, delay time.Durat
 	if len(paths) == 0 {
 		return fmt.Errorf("no .gometa.json files found under %s", metadataDir)
 	}
-
-	h := &harvester{
-		client: docc.NewClient(cacheDir, delay),
-		deep:   deep,
-		logf:   func(format string, args ...any) { fmt.Fprintf(os.Stderr, format+"\n", args...) },
+	if concurrency < 1 {
+		concurrency = 1
 	}
 
-	matched := 0
+	// Each worker owns its own client (and thus its own --delay rate limit), so
+	// up to `concurrency` requests are in flight at once, each lane still
+	// pausing --delay between its calls. Frameworks are independent units —
+	// every worker builds and writes its own sidecar with no shared state — so
+	// only the run log and aggregate counters need a mutex.
+	var (
+		mu       sync.Mutex
+		matched  int
+		firstErr error
+		wg       sync.WaitGroup
+	)
+	logf := func(format string, args ...any) {
+		mu.Lock()
+		defer mu.Unlock()
+		fmt.Fprintf(os.Stderr, format+"\n", args...)
+	}
+
+	jobs := make(chan string)
+	worker := func() {
+		defer wg.Done()
+		h := &harvester{client: docc.NewClient(cacheDir, delay), deep: deep, logf: logf}
+		for path := range jobs {
+			framework, err := macosplatformmetadata.Read(path)
+			if err != nil {
+				logf("warn: skipping %s: %v", path, err)
+				continue
+			}
+			if framework.IsSwiftOnly {
+				continue
+			}
+			if !wanted["all"] && !wanted[strings.ToLower(framework.Framework)] {
+				continue
+			}
+			docs, stats := h.extract(framework)
+			out, werr := writeSidecar(path, docs)
+			mu.Lock()
+			matched++
+			if werr != nil && firstErr == nil {
+				firstErr = werr
+			}
+			if werr == nil {
+				fmt.Printf("==> %s (%s)\n    %s\n    wrote %s\n", framework.Framework, path, stats, out)
+			}
+			mu.Unlock()
+		}
+	}
+
+	wg.Add(concurrency)
+	for i := 0; i < concurrency; i++ {
+		go worker()
+	}
 	for _, path := range paths {
-		framework, err := macosplatformmetadata.Read(path)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "warn: skipping %s: %v\n", path, err)
-			continue
-		}
-		if framework.IsSwiftOnly {
-			continue
-		}
-		if !wanted["all"] && !wanted[strings.ToLower(framework.Framework)] {
-			continue
-		}
-		matched++
-
-		fmt.Printf("==> %s (%s)\n", framework.Framework, path)
-		docs, stats := h.extract(framework)
-		out, err := writeSidecar(path, docs)
-		if err != nil {
-			return err
-		}
-		fmt.Printf("    %s\n    wrote %s\n", stats, out)
+		jobs <- path
 	}
+	close(jobs)
+	wg.Wait()
 
+	if firstErr != nil {
+		return firstErr
+	}
 	if matched == 0 {
 		return fmt.Errorf("no frameworks matched %q (under %s)", frameworkArg, metadataDir)
 	}

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that indicates whether sensitive content is present and includes intervention guidance.
+//
 // SensitivityAnalysis wraps [raw.SCSensitivityAnalysis] with a fluent Go API.
 type SensitivityAnalysis struct {
 	inner *raw.SCSensitivityAnalysis

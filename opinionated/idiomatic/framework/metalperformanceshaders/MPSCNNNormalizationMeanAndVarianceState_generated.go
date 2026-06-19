@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that stores mean and variance terms used to execute batch normalization.
+//
 // CNNNormalizationMeanAndVarianceState wraps [raw.MPSCNNNormalizationMeanAndVarianceState] with a fluent Go API.
 type CNNNormalizationMeanAndVarianceState struct {
 	inner *raw.MPSCNNNormalizationMeanAndVarianceState

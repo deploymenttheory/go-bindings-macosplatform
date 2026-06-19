@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An annotation view that displays a pin image on the map.
+//
 // PinAnnotationView wraps [raw.MKPinAnnotationView] with a fluent Go API.
 type PinAnnotationView struct {
 	inner *raw.MKPinAnnotationView
@@ -38,144 +40,192 @@ func NewPinAnnotationView() *PinAnnotationView {
 	return &PinAnnotationView{inner: raw.MKPinAnnotationViewFromID(_id)}
 }
 
+// The color of the pin head.
+//
 // WithPinTintColor sets the pinTintColor property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithPinTintColor(pinTintColor *appkit.NSColor) *PinAnnotationView {
 	x.inner.SetPinTintColor(pinTintColor)
 	return x
 }
 
+// A Boolean value indicating whether the annotation view is animated onto the screen.
+//
 // WithAnimatesDrop sets the animatesDrop property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithAnimatesDrop(animatesDrop bool) *PinAnnotationView {
 	x.inner.SetAnimatesDrop(animatesDrop)
 	return x
 }
 
+// The color of the pin head.
+//
 // WithPinColor sets the pinColor property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithPinColor(pinColor MKPinAnnotationColor) *PinAnnotationView {
 	x.inner.SetPinColor(raw.MKPinAnnotationColor(pinColor))
 	return x
 }
 
+// The annotation object associated with the view.
+//
 // WithAnnotation sets the annotation property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithAnnotation(annotation raw.MKAnnotation) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetAnnotation(annotation)
 	return x
 }
 
+// The image the annotation view displays.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithImage(image *appkit.NSImage) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetImage(image)
 	return x
 }
 
+// The offset (in points) at which to display the view.
+//
 // WithCenterOffset sets the centerOffset property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetCenterOffset(centerOffset)
 	return x
 }
 
+// An offset that changes the accessory’s default anchor point.
+//
 // WithAccessoryOffset sets the accessoryOffset property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetAccessoryOffset(accessoryOffset)
 	return x
 }
 
+// The offset (in points) at which to place the callout.
+//
 // WithCalloutOffset sets the calloutOffset property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetCalloutOffset(calloutOffset)
 	return x
 }
 
+// The offset in points from the middle-left of the annotation view.
+//
 // WithLeftCalloutOffset sets the leftCalloutOffset property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetLeftCalloutOffset(leftCalloutOffset)
 	return x
 }
 
+// The offset in points from the middle-right of the annotation view.
+//
 // WithRightCalloutOffset sets the rightCalloutOffset property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetRightCalloutOffset(rightCalloutOffset)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation is in an enabled state.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithEnabled(enabled bool) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value that indicates whether the map view highlights the annotation view.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithHighlighted(highlighted bool) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetHighlighted(highlighted)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation view is in a selected state.
+//
 // WithSelected sets the selected property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithSelected(selected bool) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetSelected(selected)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation view is able to display extra information in a callout.
+//
 // WithCanShowCallout sets the canShowCallout property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithCanShowCallout(canShowCallout bool) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetCanShowCallout(canShowCallout)
 	return x
 }
 
+// The view to display on the left side of the standard callout.
+//
 // WithLeftCalloutAccessoryView sets the leftCalloutAccessoryView property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView *appkit.NSView) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetLeftCalloutAccessoryView(leftCalloutAccessoryView)
 	return x
 }
 
+// The view to display on the right side of the standard callout.
+//
 // WithRightCalloutAccessoryView sets the rightCalloutAccessoryView property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetRightCalloutAccessoryView(rightCalloutAccessoryView)
 	return x
 }
 
+// The detail accessory view to use in the standard callout.
+//
 // WithDetailCalloutAccessoryView sets the detailCalloutAccessoryView property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetDetailCalloutAccessoryView(detailCalloutAccessoryView)
 	return x
 }
 
+// A Boolean value that indicates whether the annotation view is draggable.
+//
 // WithDraggable sets the draggable property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithDraggable(draggable bool) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetDraggable(draggable)
 	return x
 }
 
+// The drag state of the annotation view.
+//
 // WithDragState sets the dragState property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithDragState(dragState MKAnnotationViewDragState) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetDragState(raw.MKAnnotationViewDragState(dragState))
 	return x
 }
 
+// An identifier that determines whether the annotation view participates in clustering.
+//
 // WithClusteringIdentifier sets the clusteringIdentifier property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithClusteringIdentifier(clusteringIdentifier string) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetClusteringIdentifier(foundation.NSStringStringWithUTF8String(clusteringIdentifier))
 	return x
 }
 
+// The display priority of the annotation view.
+//
 // WithDisplayPriority sets the displayPriority property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithDisplayPriority(displayPriority float32) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetDisplayPriority(displayPriority)
 	return x
 }
 
+// The relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
+//
 // WithZPriority sets the zPriority property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithZPriority(zPriority float32) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetZPriority(zPriority)
 	return x
 }
 
+// The relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
+//
 // WithSelectedZPriority sets the selectedZPriority property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithSelectedZPriority(selectedZPriority float32) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetSelectedZPriority(selectedZPriority)
 	return x
 }
 
+// The collision mode to use when interpreting the collision frame rectangle.
+//
 // WithCollisionMode sets the collisionMode property and returns the receiver for chaining.
 func (x *PinAnnotationView) WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *PinAnnotationView {
 	x.inner.MKAnnotationView.SetCollisionMode(raw.MKAnnotationViewCollisionMode(collisionMode))

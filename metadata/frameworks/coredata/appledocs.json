@@ -1,0 +1,3237 @@
+{
+  "schema_version": 1,
+  "framework": "CoreData",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "NSAsynchronousFetchRequest": {
+      "doc": "A fetch request that retrieves results asynchronously and supports progress notification.",
+      "url": "https://developer.apple.com/documentation/coredata/nsasynchronousfetchrequest"
+    },
+    "NSAsynchronousFetchResult": {
+      "doc": "A fetch result object that encompasses the response from an executed asynchronous fetch request.",
+      "url": "https://developer.apple.com/documentation/coredata/nsasynchronousfetchresult"
+    },
+    "NSAtomicStore": {
+      "doc": "An abstract superclass that you subclass to create a Core Data atomic store.",
+      "url": "https://developer.apple.com/documentation/coredata/nsatomicstore"
+    },
+    "NSAtomicStoreCacheNode": {
+      "doc": "A concrete class that you use to represent basic nodes in a Core Data atomic store.",
+      "url": "https://developer.apple.com/documentation/coredata/nsatomicstorecachenode"
+    },
+    "NSAttributeDescription": {
+      "doc": "A description of a single attribute belonging to an entity.",
+      "url": "https://developer.apple.com/documentation/coredata/nsattributedescription"
+    },
+    "NSBatchDeleteRequest": {
+      "doc": "A request that deletes objects in the SQLite persistent store without loading them into memory.",
+      "url": "https://developer.apple.com/documentation/coredata/nsbatchdeleterequest"
+    },
+    "NSBatchDeleteResult": {
+      "doc": "An object that describes the result of a batch delete request.",
+      "url": "https://developer.apple.com/documentation/coredata/nsbatchdeleteresult"
+    },
+    "NSBatchInsertRequest": {
+      "doc": "A request to insert a batch of data in a persistent store.",
+      "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequest"
+    },
+    "NSBatchInsertResult": {
+      "doc": "The result that Core Data returns when executing a batch-insertion request.",
+      "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertresult"
+    },
+    "NSBatchUpdateRequest": {
+      "doc": "A request to Core Data to do a batch update of data in a persistent store without loading any data into memory.",
+      "url": "https://developer.apple.com/documentation/coredata/nsbatchupdaterequest"
+    },
+    "NSBatchUpdateResult": {
+      "doc": "The result returned when executing a batch update request.",
+      "url": "https://developer.apple.com/documentation/coredata/nsbatchupdateresult"
+    },
+    "NSCompositeAttributeDescription": {
+      "doc": "A description of an attribute that derives its value by composing other attributes.",
+      "url": "https://developer.apple.com/documentation/coredata/nscompositeattributedescription"
+    },
+    "NSConstraintConflict": {
+      "doc": "An encapsulation of conflicts that occur during an attempt to save a managed object.",
+      "url": "https://developer.apple.com/documentation/coredata/nsconstraintconflict"
+    },
+    "NSCoreDataCoreSpotlightDelegate": {
+      "doc": "A set of methods that enable integration with Core Spotlight.",
+      "url": "https://developer.apple.com/documentation/coredata/nscoredatacorespotlightdelegate"
+    },
+    "NSCustomMigrationStage": {
+      "doc": "An object that enables you to participate in the migration between two versions of the same model.",
+      "url": "https://developer.apple.com/documentation/coredata/nscustommigrationstage"
+    },
+    "NSDerivedAttributeDescription": {
+      "doc": "A description of an attribute that derives its value by performing a calculation on a related attribute.",
+      "url": "https://developer.apple.com/documentation/coredata/nsderivedattributedescription"
+    },
+    "NSEntityDescription": {
+      "doc": "A description of a Core Data entity.",
+      "url": "https://developer.apple.com/documentation/coredata/nsentitydescription"
+    },
+    "NSEntityMapping": {
+      "doc": "A mapping instance that specifies how to map an entity from a source to a destination managed object model.",
+      "url": "https://developer.apple.com/documentation/coredata/nsentitymapping"
+    },
+    "NSEntityMigrationPolicy": {
+      "doc": "A policy instance that customizes the migration process for an entity mapping.",
+      "url": "https://developer.apple.com/documentation/coredata/nsentitymigrationpolicy"
+    },
+    "NSExpressionDescription": {
+      "doc": "An object that describes an expression to include with a fetch request.",
+      "url": "https://developer.apple.com/documentation/coredata/nsexpressiondescription"
+    },
+    "NSFetchIndexDescription": {
+      "doc": "The description of the index.",
+      "url": "https://developer.apple.com/documentation/coredata/nsfetchindexdescription"
+    },
+    "NSFetchIndexElementDescription": {
+      "doc": "Description of an Index Element",
+      "url": "https://developer.apple.com/documentation/coredata/nsfetchindexelementdescription"
+    },
+    "NSFetchRequest": {
+      "doc": "A description of search criteria used to retrieve data from a persistent store.",
+      "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest"
+    },
+    "NSFetchRequestExpression": {
+      "doc": "An expression that evaluates the result of a fetch request on a managed object context.",
+      "url": "https://developer.apple.com/documentation/coredata/nsfetchrequestexpression"
+    },
+    "NSFetchedPropertyDescription": {
+      "doc": "A description object used to define which properties are fetched from Core Data.",
+      "url": "https://developer.apple.com/documentation/coredata/nsfetchedpropertydescription"
+    },
+    "NSFetchedResultsController": {
+      "doc": "A controller that you use to manage the results of a Core Data fetch request and to display data to the user.",
+      "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller"
+    },
+    "NSIncrementalStore": {
+      "doc": "An abstract superclass defining the API through which Core Data communicates with a store.",
+      "url": "https://developer.apple.com/documentation/coredata/nsincrementalstore"
+    },
+    "NSIncrementalStoreNode": {
+      "doc": "A concrete class used to represent basic nodes in a Core Data incremental store.",
+      "url": "https://developer.apple.com/documentation/coredata/nsincrementalstorenode"
+    },
+    "NSLightweightMigrationStage": {
+      "doc": "An object that describes a series of models suitable for lightweight migration.",
+      "url": "https://developer.apple.com/documentation/coredata/nslightweightmigrationstage"
+    },
+    "NSManagedObject": {
+      "doc": "The base class that all Core Data model objects inherit from.",
+      "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject"
+    },
+    "NSManagedObjectContext": {
+      "doc": "An object space to manipulate and track changes to managed objects.",
+      "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext"
+    },
+    "NSManagedObjectID": {
+      "doc": "A compact, universal identifier for a managed object.",
+      "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectid"
+    },
+    "NSManagedObjectModel": {
+      "doc": "A programmatic representation of the .xcdatamodeld file describing your objects.",
+      "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel"
+    },
+    "NSManagedObjectModelReference": {
+      "doc": "An object that describes a specific version of an object model.",
+      "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodelreference"
+    },
+    "NSMappingModel": {
+      "doc": "A model instance that specifies how to map a model from a source to a destination managed object model.",
+      "url": "https://developer.apple.com/documentation/coredata/nsmappingmodel"
+    },
+    "NSMergeConflict": {
+      "doc": "An encapsulation of conflicts that occur during an attempt to save changes in a managed object context.",
+      "url": "https://developer.apple.com/documentation/coredata/nsmergeconflict"
+    },
+    "NSMergePolicy": {
+      "doc": "A policy object that you use to resolve conflicts between the persistent store and in-memory versions of managed objects.",
+      "url": "https://developer.apple.com/documentation/coredata/nsmergepolicy"
+    },
+    "NSMigrationManager": {
+      "doc": "A migration manager instance that performs a migration of data from one persistent store to another using a given mapping model.",
+      "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager"
+    },
+    "NSMigrationStage": {
+      "doc": "An abstract base class for describing an individual stage of a migration.",
+      "url": "https://developer.apple.com/documentation/coredata/nsmigrationstage"
+    },
+    "NSPersistentCloudKitContainer": {
+      "doc": "A container that encapsulates the Core Data stack in your app, and mirrors select persistent stores to a CloudKit private database.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer"
+    },
+    "NSPersistentCloudKitContainerEvent": {
+      "doc": "An object that represents activity in a persistent CloudKit container.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainerevent"
+    },
+    "NSPersistentCloudKitContainerEventRequest": {
+      "doc": "A request to fetch setup, import, or export events in a persistent CloudKit container.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventrequest"
+    },
+    "NSPersistentCloudKitContainerEventResult": {
+      "doc": "The result of a request to fetch persistent CloudKit container events.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventresult"
+    },
+    "NSPersistentCloudKitContainerOptions": {
+      "doc": "An object that customizes how a store description aligns with a CloudKit database.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontaineroptions"
+    },
+    "NSPersistentContainer": {
+      "doc": "A container that encapsulates the Core Data stack in your app.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentcontainer"
+    },
+    "NSPersistentHistoryChange": {
+      "doc": "A change representing the insertion, update, or deletion of a managed object in the persistent store.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychange"
+    },
+    "NSPersistentHistoryChangeRequest": {
+      "doc": "A request to fetch or purge persistent history.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychangerequest"
+    },
+    "NSPersistentHistoryResult": {
+      "doc": "The result of a request to fetch persistent history.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistenthistoryresult"
+    },
+    "NSPersistentHistoryToken": {
+      "doc": "A bookmark for keeping track the most recent history that you’ve processed.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorytoken"
+    },
+    "NSPersistentHistoryTransaction": {
+      "doc": "A set of changes in the persistent history based on a context save or batch operation.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorytransaction"
+    },
+    "NSPersistentStore": {
+      "doc": "The abstract base class for all Core Data persistent stores.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentstore"
+    },
+    "NSPersistentStoreAsynchronousResult": {
+      "doc": "A concrete class used to represent the results of an asynchronous request.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentstoreasynchronousresult"
+    },
+    "NSPersistentStoreCoordinator": {
+      "doc": "An object that enables an app’s contexts and the underlying persistent stores to work together.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator"
+    },
+    "NSPersistentStoreDescription": {
+      "doc": "A description object used to create and load a persistent store.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription"
+    },
+    "NSPersistentStoreRequest": {
+      "doc": "Criteria used to retrieve data from or save data to a persistent store.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentstorerequest"
+    },
+    "NSPersistentStoreResult": {
+      "doc": "The abstract base class for results returned from a persistent store coordinator.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentstoreresult"
+    },
+    "NSPropertyDescription": {
+      "doc": "A description of a single property belonging to an entity.",
+      "url": "https://developer.apple.com/documentation/coredata/nspropertydescription"
+    },
+    "NSPropertyMapping": {
+      "doc": "A mapping instance that specifies in a model how to map from a property in a source entity to a property in a destination entity.",
+      "url": "https://developer.apple.com/documentation/coredata/nspropertymapping"
+    },
+    "NSQueryGenerationToken": {
+      "doc": "A token that indicates which generation of the persistent store is being accessed.",
+      "url": "https://developer.apple.com/documentation/coredata/nsquerygenerationtoken"
+    },
+    "NSRelationshipDescription": {
+      "doc": "A description of a relationship between two entities.",
+      "url": "https://developer.apple.com/documentation/coredata/nsrelationshipdescription"
+    },
+    "NSSaveChangesRequest": {
+      "doc": "An encapsulation of a collection of changes to be made by an object store in response to a save operation on a managed object context.",
+      "url": "https://developer.apple.com/documentation/coredata/nssavechangesrequest"
+    },
+    "NSStagedMigrationManager": {
+      "doc": "An object that handles the migration event loop and provides access to the migrating persistent store.",
+      "url": "https://developer.apple.com/documentation/coredata/nsstagedmigrationmanager"
+    }
+  },
+  "protocols": {
+    "NSFetchRequestResult": {
+      "doc": "An abstract protocol used with parameterized fetch requests.",
+      "url": "https://developer.apple.com/documentation/coredata/nsfetchrequestresult"
+    },
+    "NSFetchedResultsControllerDelegate": {
+      "doc": "A delegate protocol that describes the methods that the associated fetched results controller calls when the fetch results change.",
+      "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontrollerdelegate"
+    },
+    "NSFetchedResultsSectionInfo": {
+      "doc": "A protocol that defines the interface for section objects vended by a fetched results controller.",
+      "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultssectioninfo"
+    }
+  },
+  "enums": {
+    "NSAttributeType": {
+      "doc": "The types of attribute that Core Data supports.",
+      "url": "https://developer.apple.com/documentation/coredata/nsattributetype",
+      "members": {
+        "NSBinaryDataAttributeType": {
+          "doc": "An attribute that stores binary data.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/binarydataattributetype"
+        },
+        "NSBooleanAttributeType": {
+          "doc": "An attribute that stores a Boolean value.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/booleanattributetype"
+        },
+        "NSCompositeAttributeType": {
+          "doc": "An attribute that derives its value by composing other attributes.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/compositeattributetype"
+        },
+        "NSDateAttributeType": {
+          "doc": "An attribute that stores a date.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/dateattributetype"
+        },
+        "NSDecimalAttributeType": {
+          "doc": "An attribute that stores a decimal value.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/decimalattributetype"
+        },
+        "NSDoubleAttributeType": {
+          "doc": "An attribute that stores a double value.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/doubleattributetype"
+        },
+        "NSFloatAttributeType": {
+          "doc": "An attribute that stores a float value.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/floatattributetype"
+        },
+        "NSInteger16AttributeType": {
+          "doc": "An attribute that stores a 16-bit signed integer value.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/integer16attributetype"
+        },
+        "NSInteger32AttributeType": {
+          "doc": "An attribute that stores a 32-bit signed integer value.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/integer32attributetype"
+        },
+        "NSInteger64AttributeType": {
+          "doc": "An attribute that stores a 64-bit signed integer value.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/integer64attributetype"
+        },
+        "NSObjectIDAttributeType": {
+          "doc": "An attribute that stores a managed object’s ID.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/objectidattributetype"
+        },
+        "NSStringAttributeType": {
+          "doc": "An attribute that stores a string.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/stringattributetype"
+        },
+        "NSTransformableAttributeType": {
+          "doc": "An attribute that uses a value transformer to derive its value.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/transformableattributetype"
+        },
+        "NSURIAttributeType": {
+          "doc": "An attribute that stores a uniform resource identifier.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/uriattributetype"
+        },
+        "NSUUIDAttributeType": {
+          "doc": "An attribute that stores a universally unique identifier.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/uuidattributetype"
+        },
+        "NSUndefinedAttributeType": {
+          "doc": "An attribute that doesn’t have an explicit type.",
+          "url": "https://developer.apple.com/documentation/coredata/nsattributetype/undefinedattributetype"
+        }
+      }
+    },
+    "NSBatchDeleteRequestResultType": {
+      "doc": "The types of result a batch delete request can provide when it executes.",
+      "url": "https://developer.apple.com/documentation/coredata/nsbatchdeleterequestresulttype",
+      "members": {
+        "NSBatchDeleteResultTypeCount": {
+          "doc": "Returns the number of managed objects the request deletes.",
+          "url": "https://developer.apple.com/documentation/coredata/nsbatchdeleterequestresulttype/resulttypecount"
+        },
+        "NSBatchDeleteResultTypeObjectIDs": {
+          "doc": "Returns an array of the deleted managed objects’ identifiers.",
+          "url": "https://developer.apple.com/documentation/coredata/nsbatchdeleterequestresulttype/resulttypeobjectids"
+        },
+        "NSBatchDeleteResultTypeStatusOnly": {
+          "doc": "Returns a Boolean value that indicates if the request succeeds.",
+          "url": "https://developer.apple.com/documentation/coredata/nsbatchdeleterequestresulttype/resulttypestatusonly"
+        }
+      }
+    },
+    "NSBatchInsertRequestResultType": {
+      "doc": "Result types for a batch-insertion request.",
+      "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequestresulttype",
+      "members": {
+        "NSBatchInsertRequestResultTypeCount": {
+          "doc": "A value that indicates that the return type is the number of inserted rows.",
+          "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequestresulttype/count"
+        },
+        "NSBatchInsertRequestResultTypeObjectIDs": {
+          "doc": "A value that indicates the return type is an array of object IDs that corresponds to the inserted rows.",
+          "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequestresulttype/objectids"
+        },
+        "NSBatchInsertRequestResultTypeStatusOnly": {
+          "doc": "A value that indicates that the return type is a Boolean value representing whether the batch-insertion request succeeded.",
+          "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequestresulttype/statusonly"
+        }
+      }
+    },
+    "NSBatchUpdateRequestResultType": {
+      "doc": "Result types for a batch-update request.",
+      "url": "https://developer.apple.com/documentation/coredata/nsbatchupdaterequestresulttype",
+      "members": {
+        "NSStatusOnlyResultType": {
+          "doc": "A value that indicates the return type is a Boolean value representing whether the batch-update request succeeds.",
+          "url": "https://developer.apple.com/documentation/coredata/nsbatchupdaterequestresulttype/statusonlyresulttype"
+        },
+        "NSUpdatedObjectIDsResultType": {
+          "doc": "A value that indicates the return type is an array of object IDs that corresponds to the updated rows.",
+          "url": "https://developer.apple.com/documentation/coredata/nsbatchupdaterequestresulttype/updatedobjectidsresulttype"
+        },
+        "NSUpdatedObjectsCountResultType": {
+          "doc": "A value that indicates the return type is the number of updated rows.",
+          "url": "https://developer.apple.com/documentation/coredata/nsbatchupdaterequestresulttype/updatedobjectscountresulttype"
+        }
+      }
+    },
+    "NSDeleteRule": {
+      "doc": "Constants that determine what happens when you delete a relationship’s owning managed object.",
+      "url": "https://developer.apple.com/documentation/coredata/nsdeleterule",
+      "members": {
+        "NSCascadeDeleteRule": {
+          "doc": "A rule that deletes the referenced managed objects.",
+          "url": "https://developer.apple.com/documentation/coredata/nsdeleterule/cascadedeleterule"
+        },
+        "NSDenyDeleteRule": {
+          "doc": "A rule that prevents the deletion of the owning managed object if the relationship has references to other objects.",
+          "url": "https://developer.apple.com/documentation/coredata/nsdeleterule/denydeleterule"
+        },
+        "NSNoActionDeleteRule": {
+          "doc": "A rule that prevents modification of the referenced managed objects.",
+          "url": "https://developer.apple.com/documentation/coredata/nsdeleterule/noactiondeleterule"
+        },
+        "NSNullifyDeleteRule": {
+          "doc": "A rule that nullifies the inverse relationship of the referenced managed objects.",
+          "url": "https://developer.apple.com/documentation/coredata/nsdeleterule/nullifydeleterule"
+        }
+      }
+    },
+    "NSEntityMappingType": {
+      "doc": "The types for mapping an entity between a source model and a destination model.",
+      "url": "https://developer.apple.com/documentation/coredata/nsentitymappingtype",
+      "members": {
+        "NSAddEntityMappingType": {
+          "doc": "Specifies that this is a new entity in the destination model.",
+          "url": "https://developer.apple.com/documentation/coredata/nsentitymappingtype/addentitymappingtype"
+        },
+        "NSCopyEntityMappingType": {
+          "doc": "Specifies that source instances are migrated as-is.",
+          "url": "https://developer.apple.com/documentation/coredata/nsentitymappingtype/copyentitymappingtype"
+        },
+        "NSCustomEntityMappingType": {
+          "doc": "Specifies a custom mapping.",
+          "url": "https://developer.apple.com/documentation/coredata/nsentitymappingtype/customentitymappingtype"
+        },
+        "NSRemoveEntityMappingType": {
+          "doc": "Specifies that this entity is not present in the destination model.",
+          "url": "https://developer.apple.com/documentation/coredata/nsentitymappingtype/removeentitymappingtype"
+        },
+        "NSTransformEntityMappingType": {
+          "doc": "Specifies that entity exists in source and destination and is mapped.",
+          "url": "https://developer.apple.com/documentation/coredata/nsentitymappingtype/transformentitymappingtype"
+        },
+        "NSUndefinedEntityMappingType": {
+          "doc": "Specifies that the developer handles destination instance creation.",
+          "url": "https://developer.apple.com/documentation/coredata/nsentitymappingtype/undefinedentitymappingtype"
+        }
+      }
+    },
+    "NSFetchIndexElementType": {
+      "doc": "Defines the possible types of index elements.",
+      "url": "https://developer.apple.com/documentation/coredata/nsfetchindexelementtype",
+      "members": {
+        "NSFetchIndexElementTypeBinary": {
+          "doc": "A binary index type.",
+          "url": "https://developer.apple.com/documentation/coredata/nsfetchindexelementtype/binary"
+        },
+        "NSFetchIndexElementTypeRTree": {
+          "doc": "An R-tree index type.",
+          "url": "https://developer.apple.com/documentation/coredata/nsfetchindexelementtype/rtree"
+        }
+      }
+    },
+    "NSFetchRequestResultType": {
+      "doc": "Constants that specify the possible result types a fetch request can return.",
+      "url": "https://developer.apple.com/documentation/coredata/nsfetchrequestresulttype",
+      "members": {
+        "NSCountResultType": {
+          "doc": "The request returns the count of the objects that match the request.",
+          "url": "https://developer.apple.com/documentation/coredata/nsfetchrequestresulttype/countresulttype"
+        },
+        "NSDictionaryResultType": {
+          "doc": "The request returns dictionaries.",
+          "url": "https://developer.apple.com/documentation/coredata/nsfetchrequestresulttype/dictionaryresulttype"
+        },
+        "NSManagedObjectIDResultType": {
+          "doc": "The request returns managed object IDs.",
+          "url": "https://developer.apple.com/documentation/coredata/nsfetchrequestresulttype/managedobjectidresulttype"
+        },
+        "NSManagedObjectResultType": {
+          "doc": "The request returns managed objects.",
+          "url": "https://developer.apple.com/documentation/coredata/nsfetchrequestresulttype/managedobjectresulttype"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a fetch request result type using the specified raw value.",
+          "url": "https://developer.apple.com/documentation/coredata/nsfetchrequestresulttype/init(rawvalue:)"
+        }
+      }
+    },
+    "NSFetchedResultsChangeType": {
+      "doc": "Constants that specify the possible types of changes that are reported.",
+      "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultschangetype",
+      "members": {
+        "NSFetchedResultsChangeDelete": {
+          "doc": "Specifies that an object was deleted.",
+          "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultschangetype/delete"
+        },
+        "NSFetchedResultsChangeInsert": {
+          "doc": "Specifies that an object was inserted.",
+          "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultschangetype/insert"
+        },
+        "NSFetchedResultsChangeMove": {
+          "doc": "Specifies that an object was moved.",
+          "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultschangetype/move"
+        },
+        "NSFetchedResultsChangeUpdate": {
+          "doc": "Specifies that an object was changed.",
+          "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultschangetype/update"
+        }
+      }
+    },
+    "NSManagedObjectContextConcurrencyType": {
+      "doc": "The concurrency types you can use with a managed object context.",
+      "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontextconcurrencytype",
+      "members": {
+        "NSConfinementConcurrencyType": {
+          "doc": "Specifies that the context will use the thread confinement pattern.",
+          "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontextconcurrencytype/confinementconcurrencytype"
+        },
+        "NSMainQueueConcurrencyType": {
+          "doc": "Specifies that the context will be associated with the main queue.",
+          "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontextconcurrencytype/mainqueueconcurrencytype"
+        },
+        "NSPrivateQueueConcurrencyType": {
+          "doc": "Specifies that the context will be associated with a private dispatch queue.",
+          "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontextconcurrencytype/privatequeueconcurrencytype"
+        }
+      }
+    },
+    "NSMergePolicyType": {
+      "doc": "Constants that define merge policy types.",
+      "url": "https://developer.apple.com/documentation/coredata/nsmergepolicytype",
+      "members": {
+        "NSErrorMergePolicyType": {
+          "doc": "The default merge policy for all managed object contexts.",
+          "url": "https://developer.apple.com/documentation/coredata/nsmergepolicytype/errormergepolicytype"
+        },
+        "NSMergeByPropertyObjectTrumpMergePolicyType": {
+          "doc": "A property-based merge policy that applies in-memory changes.",
+          "url": "https://developer.apple.com/documentation/coredata/nsmergepolicytype/mergebypropertyobjecttrumpmergepolicytype"
+        },
+        "NSMergeByPropertyStoreTrumpMergePolicyType": {
+          "doc": "A property-based merge policy that applies external changes.",
+          "url": "https://developer.apple.com/documentation/coredata/nsmergepolicytype/mergebypropertystoretrumpmergepolicytype"
+        },
+        "NSOverwriteMergePolicyType": {
+          "doc": "A merge policy type that overwrites the entire stored object.",
+          "url": "https://developer.apple.com/documentation/coredata/nsmergepolicytype/overwritemergepolicytype"
+        },
+        "NSRollbackMergePolicyType": {
+          "doc": "A merge policy that discards unsaved changes.",
+          "url": "https://developer.apple.com/documentation/coredata/nsmergepolicytype/rollbackmergepolicytype"
+        }
+      }
+    },
+    "NSPersistentCloudKitContainerEventResultType": {
+      "doc": "The types of results from a persistent CloudKit container event fetch request.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventresulttype"
+    },
+    "NSPersistentCloudKitContainerEventType": {
+      "doc": "The type of event in a persistent CloudKit container, either setup, import, or export.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventtype"
+    },
+    "NSPersistentCloudKitContainerSchemaInitializationOptions": {
+      "doc": "Options that control the behavior when promoting the container’s schema to CloudKit.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainerschemainitializationoptions",
+      "members": {
+        "NSPersistentCloudKitContainerSchemaInitializationOptionsDryRun": {
+          "doc": "A flag that indicates the container validates the model and generates the records, but doesn’t upload them to CloudKit.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainerschemainitializationoptions/dryrun"
+        },
+        "NSPersistentCloudKitContainerSchemaInitializationOptionsNone": {
+          "doc": "Indicates there are no specified schema options.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainerschemainitializationoptions/nspersistentcloudkitcontainerschemainitializationoptionsnone"
+        },
+        "NSPersistentCloudKitContainerSchemaInitializationOptionsPrintSchema": {
+          "doc": "Prints the generated records to the console.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainerschemainitializationoptions/printschema"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates the schema initialization options using the specified raw value.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainerschemainitializationoptions/init(rawvalue:)"
+        }
+      }
+    },
+    "NSPersistentHistoryChangeType": {
+      "doc": "The types of changes to managed objects reflected in persistent history.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychangetype",
+      "members": {
+        "NSPersistentHistoryChangeTypeDelete": {
+          "doc": "The deletion of a managed object from the persistent store.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychangetype/delete"
+        },
+        "NSPersistentHistoryChangeTypeInsert": {
+          "doc": "The insertion of a managed object into the persistent store.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychangetype/insert"
+        },
+        "NSPersistentHistoryChangeTypeUpdate": {
+          "doc": "An update to a managed object’s properties in the persistent store.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychangetype/update"
+        }
+      }
+    },
+    "NSPersistentHistoryResultType": {
+      "doc": "The types of results from a persistent history change request.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistenthistoryresulttype",
+      "members": {
+        "NSPersistentHistoryResultTypeChangesOnly": {
+          "doc": "The persistent history changes since the requested date, token, or transaction.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistenthistoryresulttype/changesonly"
+        },
+        "NSPersistentHistoryResultTypeCount": {
+          "doc": "The number of persistent history changes since the requested date, token, or transaction.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistenthistoryresulttype/count"
+        },
+        "NSPersistentHistoryResultTypeObjectIDs": {
+          "doc": "The identifiers of managed objects changed since the requested date, token, or transaction.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistenthistoryresulttype/objectids"
+        },
+        "NSPersistentHistoryResultTypeStatusOnly": {
+          "doc": "The status of the persistent history change request.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistenthistoryresulttype/statusonly"
+        },
+        "NSPersistentHistoryResultTypeTransactionsAndChanges": {
+          "doc": "The persistent history transactions and changes since the requested date, token, or transaction.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistenthistoryresulttype/transactionsandchanges"
+        },
+        "NSPersistentHistoryResultTypeTransactionsOnly": {
+          "doc": "The persistent history transactions since the requested date, token, or transaction.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistenthistoryresulttype/transactionsonly"
+        }
+      }
+    },
+    "NSPersistentStoreRequestType": {
+      "doc": "Constants that specify the types of fetch requests.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentstorerequesttype",
+      "members": {
+        "NSBatchDeleteRequestType": {
+          "doc": "A request that deletes data for multiple managed objects from a persistent store.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistentstorerequesttype/batchdeleterequesttype"
+        },
+        "NSBatchInsertRequestType": {
+          "doc": "A request that inserts data into a persistent store using a batch of managed objects or dictionaries.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistentstorerequesttype/batchinsertrequesttype"
+        },
+        "NSBatchUpdateRequestType": {
+          "doc": "A request that updates data for multiple managed objects in a persistent store.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistentstorerequesttype/batchupdaterequesttype"
+        },
+        "NSFetchRequestType": {
+          "doc": "Specifies that the request returns managed objects.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistentstorerequesttype/fetchrequesttype"
+        },
+        "NSSaveRequestType": {
+          "doc": "Specifies that the request saves managed objects.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistentstorerequesttype/saverequesttype"
+        }
+      }
+    },
+    "NSPersistentStoreUbiquitousTransitionType": {
+      "doc": "These constants are used as the value corresponding to the NSPersistentStoreUbiquitousTransitionTypeKey in the user info dictionary of NSPersistentStoreCoordinatorStoresWillChangeNotification and NSPersistentStoreCoordinatorStoresDidChangeNotification notifications to identify the type of event leading to a change.",
+      "url": "https://developer.apple.com/documentation/coredata/nspersistentstoreubiquitoustransitiontype",
+      "members": {
+        "NSPersistentStoreUbiquitousTransitionTypeAccountAdded": {
+          "doc": "This value indicates that a new iCloud account is available, and the persistent store in use will or did transition to the new account.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistentstoreubiquitoustransitiontype/accountadded"
+        },
+        "NSPersistentStoreUbiquitousTransitionTypeAccountRemoved": {
+          "doc": "This value indicates that no iCloud account is available, and the persistent store in use will or did transition to the “local” store.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistentstoreubiquitoustransitiontype/accountremoved"
+        },
+        "NSPersistentStoreUbiquitousTransitionTypeContentRemoved": {
+          "doc": "This value indicates that the user has wiped the contents of the iCloud account, usually using Delete All from Documents \u0026 Data in Settings.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistentstoreubiquitoustransitiontype/contentremoved"
+        },
+        "NSPersistentStoreUbiquitousTransitionTypeInitialImportCompleted": {
+          "doc": "This value indicates that the Core Data integration has finished building a store file that is consistent with the contents of the iCloud account, and is ready to replace the fallback store with that file.",
+          "url": "https://developer.apple.com/documentation/coredata/nspersistentstoreubiquitoustransitiontype/initialimportcompleted"
+        }
+      }
+    },
+    "NSSnapshotEventType": {
+      "doc": "Constants that specify the reason the managed object may need to reinitialize its values.",
+      "url": "https://developer.apple.com/documentation/coredata/nssnapshoteventtype",
+      "members": {
+        "NSSnapshotEventMergePolicy": {
+          "doc": "Specifies a change due to conflict resolution during a save operation.",
+          "url": "https://developer.apple.com/documentation/coredata/nssnapshoteventtype/mergepolicy"
+        },
+        "NSSnapshotEventRefresh": {
+          "doc": "Specifies a change due to the managed object being refreshed.",
+          "url": "https://developer.apple.com/documentation/coredata/nssnapshoteventtype/refresh"
+        },
+        "NSSnapshotEventRollback": {
+          "doc": "Specifies a change due to the managed object context being rolled back.",
+          "url": "https://developer.apple.com/documentation/coredata/nssnapshoteventtype/rollback"
+        },
+        "NSSnapshotEventUndoDeletion": {
+          "doc": "Specifies a change due to undo from deletion.",
+          "url": "https://developer.apple.com/documentation/coredata/nssnapshoteventtype/undodeletion"
+        },
+        "NSSnapshotEventUndoInsertion": {
+          "doc": "Specifies a change due to undo from insertion.",
+          "url": "https://developer.apple.com/documentation/coredata/nssnapshoteventtype/undoinsertion"
+        },
+        "NSSnapshotEventUndoUpdate": {
+          "doc": "Specifies a change due to a property-level undo.",
+          "url": "https://developer.apple.com/documentation/coredata/nssnapshoteventtype/undoupdate"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a snapshot event using a raw value.",
+          "url": "https://developer.apple.com/documentation/coredata/nssnapshoteventtype/init(rawvalue:)"
+        }
+      }
+    }
+  },
+  "methods": {
+    "NSAsynchronousFetchRequest": {
+      "-initWithFetchRequest:completionBlock:": {
+        "doc": "Initializes a new asynchronous fetch request configured with the provided fetch request and completion block.",
+        "url": "https://developer.apple.com/documentation/coredata/nsasynchronousfetchrequest/init(fetchrequest:completionblock:)"
+      }
+    },
+    "NSAtomicStore": {
+      "-addCacheNodes:": {
+        "doc": "Registers a set of cache nodes with the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstore/addcachenodes(_:)"
+      },
+      "-cacheNodeForObjectID:": {
+        "doc": "Returns the cache node for a given managed object ID.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstore/cachenode(for:)"
+      },
+      "-cacheNodes": {
+        "doc": "Returns the set of cache nodes registered with the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstore/cachenodes()"
+      },
+      "-initWithPersistentStoreCoordinator:configurationName:URL:options:": {
+        "doc": "Creates an atomic store at the specified location.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstore/init(persistentstorecoordinator:configurationname:at:options:)"
+      },
+      "-load:": {
+        "doc": "Loads the cache nodes for the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstore/load()"
+      },
+      "-newCacheNodeForManagedObject:": {
+        "doc": "Returns a new cache node for a given managed object.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstore/newcachenode(for:)"
+      },
+      "-newReferenceObjectForManagedObject:": {
+        "doc": "Returns a new reference object for a given managed object.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstore/newreferenceobject(for:)"
+      },
+      "-objectIDForEntity:referenceObject:": {
+        "doc": "Returns a managed object ID from the reference data for a specified entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstore/objectid(for:withreferenceobject:)"
+      },
+      "-referenceObjectForObjectID:": {
+        "doc": "Returns the reference object for a given managed object ID.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstore/referenceobject(for:)"
+      },
+      "-save:": {
+        "doc": "Saves the cache nodes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstore/save()"
+      },
+      "-updateCacheNode:fromManagedObject:": {
+        "doc": "Updates the given cache node using the values in a given managed object.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstore/updatecachenode(_:from:)"
+      },
+      "-willRemoveCacheNodes:": {
+        "doc": "Method invoked before the store removes the given collection of cache nodes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstore/willremovecachenodes(_:)"
+      }
+    },
+    "NSAtomicStoreCacheNode": {
+      "-initWithObjectID:": {
+        "doc": "Returns a cache node for the given managed object ID.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstorecachenode/init(objectid:)"
+      },
+      "-setValue:forKey:": {
+        "doc": "Sets the value for the given key.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstorecachenode/setvalue(_:forkey:)"
+      },
+      "-valueForKey:": {
+        "doc": "Returns the value for a given key.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstorecachenode/value(forkey:)"
+      }
+    },
+    "NSBatchDeleteRequest": {
+      "-initWithFetchRequest:": {
+        "doc": "Creates a request that deletes the results of the specified fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchdeleterequest/init(fetchrequest:)"
+      },
+      "-initWithObjectIDs:": {
+        "doc": "Creates a request that deletes the managed objects with the specified identifiers.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchdeleterequest/init(objectids:)"
+      }
+    },
+    "NSBatchInsertRequest": {
+      "+batchInsertRequestWithEntityName:dictionaryHandler:": {
+        "doc": "Creates a batch-insertion request for a named managed entity, and specifies a closure that provides data dictionaries for insertion.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequest/init(entityname:dictionaryhandler:)-5l4ps"
+      },
+      "+batchInsertRequestWithEntityName:managedObjectHandler:": {
+        "doc": "Creates a batch-insertion request for a named managed entity, and specifies a closure that inserts data into the entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequest/init(entityname:managedobjecthandler:)-7dr6p"
+      },
+      "+batchInsertRequestWithEntityName:objects:": {
+        "doc": "Creates a batch-insertion request for a named managed entity, and provides an array of data dictionaries for insertion.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequest/batchinsertrequestwithentityname:objects:"
+      },
+      "-init": {
+        "doc": "Creates a Core Data batch-insertion request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequest/init()"
+      },
+      "-initWithEntity:dictionaryHandler:": {
+        "doc": "Creates a batch-insertion request for a managed entity, and specifies a closure that provides data dictionaries for insertion.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequest/init(entity:dictionaryhandler:)"
+      },
+      "-initWithEntity:managedObjectHandler:": {
+        "doc": "Creates a batch-insertion request for a managed entity, and specifies a closure that inserts data into the entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequest/init(entity:managedobjecthandler:)"
+      },
+      "-initWithEntity:objects:": {
+        "doc": "Creates a batch-insertion request for a managed entity, and provides an array of data dictionaries for insertion.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequest/init(entity:objects:)"
+      },
+      "-initWithEntityName:objects:": {
+        "doc": "Creates a batch-insertion request for a named managed entity, and provides an array of data dictionaries for insertion.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequest/init(entityname:objects:)"
+      }
+    },
+    "NSBatchUpdateRequest": {
+      "+batchUpdateRequestWithEntityName:": {
+        "doc": "Creates a batch-update request for a named managed entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchupdaterequest/batchupdaterequestwithentityname:"
+      },
+      "-initWithEntity:": {
+        "doc": "Creates a batch-update request for a managed entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchupdaterequest/init(entity:)"
+      },
+      "-initWithEntityName:": {
+        "doc": "Creates a batch-update request for a named managed entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchupdaterequest/init(entityname:)"
+      }
+    },
+    "NSConstraintConflict": {
+      "-initWithConstraint:databaseObject:databaseSnapshot:conflictingObjects:conflictingSnapshots:": {
+        "doc": "Initializes a constraint conflict.",
+        "url": "https://developer.apple.com/documentation/coredata/nsconstraintconflict/init(constraint:database:databasesnapshot:conflicting:conflictingsnapshots:)"
+      }
+    },
+    "NSCoreDataCoreSpotlightDelegate": {
+      "-attributeSetForObject:": {
+        "doc": "Returns the searchable attributes for the specified managed object.",
+        "url": "https://developer.apple.com/documentation/coredata/nscoredatacorespotlightdelegate/attributeset(for:)"
+      },
+      "-deleteSpotlightIndexWithCompletionHandler:": {
+        "doc": "Deletes all searchable items from the configured index.",
+        "url": "https://developer.apple.com/documentation/coredata/nscoredatacorespotlightdelegate/deletespotlightindex(completionhandler:)"
+      },
+      "-domainIdentifier": {
+        "doc": "Returns the domain identifier.",
+        "url": "https://developer.apple.com/documentation/coredata/nscoredatacorespotlightdelegate/domainidentifier()"
+      },
+      "-indexName": {
+        "doc": "Returns the index’s name.",
+        "url": "https://developer.apple.com/documentation/coredata/nscoredatacorespotlightdelegate/indexname()"
+      },
+      "-initForStoreWithDescription:coordinator:": {
+        "doc": "Creates a Core Spotlight delegate with the specified store description and coordinator.",
+        "url": "https://developer.apple.com/documentation/coredata/nscoredatacorespotlightdelegate/init(forstorewith:coordinator:)"
+      },
+      "-initForStoreWithDescription:model:": {
+        "doc": "Creates a Core Spotlight delegate with the specified store description and managed object model.",
+        "url": "https://developer.apple.com/documentation/coredata/nscoredatacorespotlightdelegate/init(forstorewith:model:)"
+      },
+      "-searchableIndex:reindexAllSearchableItemsWithAcknowledgementHandler:": {
+        "doc": "Reindexes all searchable items and clears any local state.",
+        "url": "https://developer.apple.com/documentation/coredata/nscoredatacorespotlightdelegate/searchableindex(_:reindexallsearchableitemswithacknowledgementhandler:)"
+      },
+      "-searchableIndex:reindexSearchableItemsWithIdentifiers:acknowledgementHandler:": {
+        "doc": "Reindexes the searchable items for the specified identifiers.",
+        "url": "https://developer.apple.com/documentation/coredata/nscoredatacorespotlightdelegate/searchableindex(_:reindexsearchableitemswithidentifiers:acknowledgementhandler:)"
+      },
+      "-startSpotlightIndexing": {
+        "doc": "Starts the indexing of the store’s entities.",
+        "url": "https://developer.apple.com/documentation/coredata/nscoredatacorespotlightdelegate/startspotlightindexing()"
+      },
+      "-stopSpotlightIndexing": {
+        "doc": "Stops the indexing of the store’s entities.",
+        "url": "https://developer.apple.com/documentation/coredata/nscoredatacorespotlightdelegate/stopspotlightindexing()"
+      }
+    },
+    "NSCustomMigrationStage": {
+      "-initWithCurrentModelReference:nextModelReference:": {
+        "doc": "Creates a custom migration stage with the specified source and destination model references.",
+        "url": "https://developer.apple.com/documentation/coredata/nscustommigrationstage/initwithcurrentmodelreference:nextmodelreference:"
+      }
+    },
+    "NSEntityDescription": {
+      "+entityForName:inManagedObjectContext:": {
+        "doc": "Returns the entity with the specified name from the managed object model associated with the specified managed object context’s persistent store coordinator.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/entity(forentityname:in:)"
+      },
+      "+insertNewObjectForEntityForName:inManagedObjectContext:": {
+        "doc": "Creates, configures, and returns an instance of the class for the entity with a given name.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/insertnewobject(forentityname:into:)"
+      },
+      "-isKindOfEntity:": {
+        "doc": "Returns a Boolean value that indicates whether the receiver is a sub-entity of another given entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/iskindof(entity:)"
+      },
+      "-relationshipsWithDestinationEntity:": {
+        "doc": "Returns an array containing the relationships of the receiver where the entity description of the relationship is a given entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/relationships(fordestination:)"
+      }
+    },
+    "NSEntityMigrationPolicy": {
+      "-beginEntityMapping:manager:error:": {
+        "doc": "Sets up state information before the start of a given entity mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymigrationpolicy/begin(_:with:)"
+      },
+      "-createDestinationInstancesForSourceInstance:entityMapping:manager:error:": {
+        "doc": "Creates the destination instance(s) for a given source instance.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymigrationpolicy/createdestinationinstances(forsource:in:manager:)"
+      },
+      "-createRelationshipsForDestinationInstance:entityMapping:manager:error:": {
+        "doc": "Constructs the relationships between the newly-created destination instances.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymigrationpolicy/createrelationships(fordestination:in:manager:)"
+      },
+      "-endEntityMapping:manager:error:": {
+        "doc": "Performs cleanup at the end of the migration, from any phase of the mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymigrationpolicy/end(_:manager:)"
+      },
+      "-endInstanceCreationForEntityMapping:manager:error:": {
+        "doc": "Indicates the end of the instance creation stage for the specified entity mapping, and the precursor to the next migration stage.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymigrationpolicy/endinstancecreation(formapping:manager:)"
+      },
+      "-endRelationshipCreationForEntityMapping:manager:error:": {
+        "doc": "Indicates the end of the relationship creation stage for the specified entity mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymigrationpolicy/endrelationshipcreation(formapping:manager:)"
+      },
+      "-performCustomValidationForEntityMapping:manager:error:": {
+        "doc": "Provides the option to perform custom validation on migrated objects during the validation stage of the entity migration policy.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymigrationpolicy/performcustomvalidation(formapping:manager:)"
+      }
+    },
+    "NSFetchIndexDescription": {
+      "-initWithName:elements:": {
+        "doc": "Creates a fetch index description using the specified name and element descriptions.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchindexdescription/init(name:elements:)"
+      }
+    },
+    "NSFetchIndexElementDescription": {
+      "-initWithProperty:collationType:": {
+        "doc": "Creates an index element description using the specified property description and collation type.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchindexelementdescription/init(property:collationtype:)"
+      }
+    },
+    "NSFetchRequest": {
+      "+fetchRequestWithEntityName:": {
+        "doc": "Returns a fetch request configured with a given entity name.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/init(entityname:)-5anoo"
+      },
+      "-execute:": {
+        "doc": "Executes the fetch request against the managed object context that is associated with the current queue.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/execute()"
+      },
+      "-init": {
+        "doc": "Creates a new fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/init()"
+      }
+    },
+    "NSFetchRequestExpression": {
+      "+expressionForFetch:context:countOnly:": {
+        "doc": "Returns an expression which will evaluate to the result of executing a fetch request on a context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequestexpression/expression(forfetch:context:countonly:)"
+      }
+    },
+    "NSFetchedResultsController": {
+      "+deleteCacheWithName:": {
+        "doc": "Deletes the cached section information with the given name.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller/deletecache(withname:)"
+      },
+      "-indexPathForObject:": {
+        "doc": "Returns the index path of a given object.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller/indexpath(forobject:)"
+      },
+      "-initWithFetchRequest:managedObjectContext:sectionNameKeyPath:cacheName:": {
+        "doc": "Returns a fetch request controller initialized using the given arguments.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller/init(fetchrequest:managedobjectcontext:sectionnamekeypath:cachename:)"
+      },
+      "-objectAtIndexPath:": {
+        "doc": "Returns the object at the given index path in the fetch results.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller/object(at:)"
+      },
+      "-performFetch:": {
+        "doc": "Executes the controller’s fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller/performfetch()"
+      },
+      "-sectionForSectionIndexTitle:atIndex:": {
+        "doc": "Returns the section number for a given section title and index in the section index.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller/section(forsectionindextitle:at:)"
+      },
+      "-sectionIndexTitleForSectionName:": {
+        "doc": "Returns the corresponding section index entry for a given section name.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller/sectionindextitle(forsectionname:)"
+      }
+    },
+    "NSIncrementalStore": {
+      "+identifierForNewStoreAtURL:": {
+        "doc": "Returns the identifier for the store at a given URL.",
+        "url": "https://developer.apple.com/documentation/coredata/nsincrementalstore/identifierfornewstore(at:)"
+      },
+      "-executeRequest:withContext:error:": {
+        "doc": "Returns a value as appropriate for the given request, or nil if the request cannot be completed.",
+        "url": "https://developer.apple.com/documentation/coredata/nsincrementalstore/execute(_:with:)"
+      },
+      "-loadMetadata:": {
+        "doc": "Loads the metadata for the store.",
+        "url": "https://developer.apple.com/documentation/coredata/nsincrementalstore/loadmetadata()"
+      },
+      "-managedObjectContextDidRegisterObjectsWithIDs:": {
+        "doc": "Indicates that objects identified by a given array of object IDs are in use in a managed object context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsincrementalstore/managedobjectcontextdidregisterobjects(with:)"
+      },
+      "-managedObjectContextDidUnregisterObjectsWithIDs:": {
+        "doc": "Indicates that objects identified by a given array of object IDs are no longer being used by a managed object context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsincrementalstore/managedobjectcontextdidunregisterobjects(with:)"
+      },
+      "-newObjectIDForEntity:referenceObject:": {
+        "doc": "Returns a new object ID that uses given data as the key.",
+        "url": "https://developer.apple.com/documentation/coredata/nsincrementalstore/newobjectid(for:referenceobject:)"
+      },
+      "-newValueForRelationship:forObjectWithID:withContext:error:": {
+        "doc": "Returns the relationship for the given relationship of the object with a given object ID.",
+        "url": "https://developer.apple.com/documentation/coredata/nsincrementalstore/newvalue(forrelationship:forobjectwith:with:)"
+      },
+      "-newValuesForObjectWithID:withContext:error:": {
+        "doc": "Returns an incremental store node encapsulating the persistent external values of the object with a given object ID.",
+        "url": "https://developer.apple.com/documentation/coredata/nsincrementalstore/newvaluesforobject(with:with:)"
+      },
+      "-obtainPermanentIDsForObjects:error:": {
+        "doc": "Returns an array containing the object IDs for a given array of newly-inserted objects.",
+        "url": "https://developer.apple.com/documentation/coredata/nsincrementalstore/obtainpermanentids(for:)"
+      },
+      "-referenceObjectForObjectID:": {
+        "doc": "Returns the reference data used to construct a given object ID.",
+        "url": "https://developer.apple.com/documentation/coredata/nsincrementalstore/referenceobject(for:)"
+      }
+    },
+    "NSIncrementalStoreNode": {
+      "-initWithObjectID:withValues:version:": {
+        "doc": "Returns an object initialized with the given values.",
+        "url": "https://developer.apple.com/documentation/coredata/nsincrementalstorenode/init(objectid:withvalues:version:)"
+      },
+      "-updateWithValues:version:": {
+        "doc": "Update the values and version to reflect new data being saved to or loaded from the external store.",
+        "url": "https://developer.apple.com/documentation/coredata/nsincrementalstorenode/update(withvalues:version:)"
+      },
+      "-valueForPropertyDescription:": {
+        "doc": "Returns the value for the given property.",
+        "url": "https://developer.apple.com/documentation/coredata/nsincrementalstorenode/value(for:)"
+      }
+    },
+    "NSLightweightMigrationStage": {
+      "-initWithVersionChecksums:": {
+        "doc": "Creates a lightweight migration stage with the specified version checksums.",
+        "url": "https://developer.apple.com/documentation/coredata/nslightweightmigrationstage/initwithversionchecksums:"
+      }
+    },
+    "NSManagedObject": {
+      "+entity": {
+        "doc": "Returns the entity description that is associated with this subclass.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/entity()"
+      },
+      "+fetchRequest": {
+        "doc": "Returns an initialized fetch request with the entity this subclass represents.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/fetchrequest"
+      },
+      "-awakeFromFetch": {
+        "doc": "Provides an opportunity to add code into the life cycle of the managed object when fufilling it from a fault.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/awakefromfetch()"
+      },
+      "-awakeFromInsert": {
+        "doc": "Provides an opportunity to add code into the life cycle of the managed object when initially creating it.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/awakefrominsert()"
+      },
+      "-awakeFromSnapshotEvents:": {
+        "doc": "Provides an opportunity to add code into the life cycle of the managed object when fulfilling it from a snapshot.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/awake(fromsnapshotevents:)"
+      },
+      "-changedValues": {
+        "doc": "Returns a dictionary containing the keys and new values of persistent properties with changes since the last fetching or saving of the managed object.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/changedvalues()"
+      },
+      "-changedValuesForCurrentEvent": {
+        "doc": "Returns a dictionary containing the keys and new values of persistent properties with changes since the last fetching or saving of the managed object.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/changedvaluesforcurrentevent()"
+      },
+      "-committedValuesForKeys:": {
+        "doc": "Returns a dictionary of the most recent fetched or saved values of the managed object for the properties of the specified keys.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/committedvalues(forkeys:)"
+      },
+      "-didAccessValueForKey:": {
+        "doc": "Provides support for key-value observing access notification.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/didaccessvalue(forkey:)"
+      },
+      "-didChangeValueForKey:": {
+        "doc": "Provides an opportunity to respond when a value of a given property has changed.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/didchangevalue(forkey:)"
+      },
+      "-didChangeValueForKey:withSetMutation:usingObjects:": {
+        "doc": "Provides an opportunity to respond when a change was made to a specified to-many relationship.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/didchangevalue(forkey:withsetmutation:using:)"
+      },
+      "-didSave": {
+        "doc": "Provides an opportunity to add code into the life cycle of the managed object after the managed object’s context completes a save operation.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/didsave()"
+      },
+      "-didTurnIntoFault": {
+        "doc": "Provides an opportunity to add code into the life cycle of the managed object after converting it to a fault.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/didturnintofault()"
+      },
+      "-hasFaultForRelationshipNamed:": {
+        "doc": "Returns a Boolean value that indicates whether the relationship for a given key is a fault.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/hasfault(forrelationshipnamed:)"
+      },
+      "-initWithContext:": {
+        "doc": "Initializes a managed object subclass and inserts it into the specified managed object context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/init(context:)"
+      },
+      "-initWithEntity:insertIntoManagedObjectContext:": {
+        "doc": "Initializes a managed object from an entity description and inserts it into the specified managed object context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/init(entity:insertinto:)"
+      },
+      "-objectIDsForRelationshipNamed:": {
+        "doc": "Returns the object IDs for all of the managed objects that are in the named relationship.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/objectids(forrelationshipnamed:)"
+      },
+      "-observationInfo": {
+        "doc": "Returns the observation info of the managed object.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/observationinfo()"
+      },
+      "-prepareForDeletion": {
+        "doc": "Provides an opportunity to add code into the life cycle of the managed object before deleting it.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/preparefordeletion()"
+      },
+      "-primitiveValueForKey:": {
+        "doc": "Returns the value for the specified property from the managed object’s private internal storage .",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/primitivevalue(forkey:)"
+      },
+      "-setObservationInfo:": {
+        "doc": "Sets the observation info of the managed object.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/setobservationinfo(_:)"
+      },
+      "-setPrimitiveValue:forKey:": {
+        "doc": "Sets the value of a given property in the managed object’s private internal storage.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/setprimitivevalue(_:forkey:)"
+      },
+      "-setValue:forKey:": {
+        "doc": "Sets the specified property of the managed object to the specified value.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/setvalue(_:forkey:)"
+      },
+      "-validateForDelete:": {
+        "doc": "Determines whether the managed object can be deleted in its current state.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/validatefordelete()"
+      },
+      "-validateForInsert:": {
+        "doc": "Determines whether the managed object can be inserted in its current state.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/validateforinsert()"
+      },
+      "-validateForUpdate:": {
+        "doc": "Determines whether the managed object’s current state is valid.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/validateforupdate()"
+      },
+      "-validateValue:forKey:error:": {
+        "doc": "Validates a property value for a given key.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/validatevalue(_:forkey:)"
+      },
+      "-valueForKey:": {
+        "doc": "Returns the value for the property specified by key.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/value(forkey:)"
+      },
+      "-willAccessValueForKey:": {
+        "doc": "Provides support for key-value observing access notification.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/willaccessvalue(forkey:)"
+      },
+      "-willChangeValueForKey:": {
+        "doc": "Provides an opportunity to respond when a value of a given property is about to change.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/willchangevalue(forkey:)"
+      },
+      "-willChangeValueForKey:withSetMutation:usingObjects:": {
+        "doc": "Provides an opportunity to respond when a change is about to be made to a specified to-many relationship.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/willchangevalue(forkey:withsetmutation:using:)"
+      },
+      "-willSave": {
+        "doc": "Provides an opportunity to add code into the life cycle of the managed object before saving it.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/willsave()"
+      },
+      "-willTurnIntoFault": {
+        "doc": "Provides an opportunity to add code into the life cycle of the managed object before converting it to a fault.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/willturnintofault()"
+      }
+    },
+    "NSManagedObjectContext": {
+      "+mergeChangesFromRemoteContextSave:intoContexts:": {
+        "doc": "Handles changes from other processes or from a serialized state.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/mergechanges(fromremotecontextsave:into:)"
+      },
+      "-assignObject:toPersistentStore:": {
+        "doc": "Specifies the store in which a newly inserted object will be saved.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/assign(_:to:)"
+      },
+      "-countForFetchRequest:error:": {
+        "doc": "Returns the number of objects the specified request fetches when it executes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/count(for:)-93zbm"
+      },
+      "-deleteObject:": {
+        "doc": "Specifies an object that should be removed from its persistent store when changes are committed.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/delete(_:)"
+      },
+      "-detectConflictsForObject:": {
+        "doc": "Marks an object for conflict detection.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/detectconflicts(for:)"
+      },
+      "-executeFetchRequest:error:": {
+        "doc": "Returns an array of objects that meet the criteria of the specified fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/executefetchrequest:error:"
+      },
+      "-executeRequest:error:": {
+        "doc": "Passes a request to the persistent store without affecting the contents of the managed object context, and returns a persistent store result.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/execute(_:)"
+      },
+      "-existingObjectWithID:error:": {
+        "doc": "Returns an existing object from either the context or the persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/existingobject(with:)"
+      },
+      "-initWithConcurrencyType:": {
+        "doc": "Creates a context that uses the specified concurrency type.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/init(concurrencytype:)"
+      },
+      "-insertObject:": {
+        "doc": "Registers an object to be inserted in the context’s persistent store the next time changes are saved.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/insert(_:)"
+      },
+      "-mergeChangesFromContextDidSaveNotification:": {
+        "doc": "Merges the changes specified in a given notification.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/mergechanges(fromcontextdidsave:)"
+      },
+      "-objectRegisteredForID:": {
+        "doc": "Returns an object that exists in the context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/registeredobject(for:)"
+      },
+      "-objectWithID:": {
+        "doc": "Returns either an existing object from the context or a fault that represents that object.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/object(with:)"
+      },
+      "-observeValueForKeyPath:ofObject:change:context:": {
+        "doc": "Allows a context that has registered as an observer of a value to be notified of a change to that value.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/observevalue(forkeypath:of:change:context:)"
+      },
+      "-obtainPermanentIDsForObjects:error:": {
+        "doc": "Converts to permanent IDs the object IDs of the objects in a given array.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/obtainpermanentids(for:)"
+      },
+      "-performBlock:": {
+        "doc": "Asynchronously performs the specified closure on the context’s queue.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/perform(_:)"
+      },
+      "-performBlockAndWait:": {
+        "doc": "Synchronously performs the specified closure on the context’s queue.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/performandwait(_:)-ypye"
+      },
+      "-processPendingChanges": {
+        "doc": "Forces the context to process changes to the object graph.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/processpendingchanges()"
+      },
+      "-redo": {
+        "doc": "Sends a redo message to the context’s undo manager, asking it to reverse the latest undo operation applied to objects in the object graph.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/redo()"
+      },
+      "-refreshAllObjects": {
+        "doc": "Refreshes all of the registered managed objects in the context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/refreshallobjects()"
+      },
+      "-refreshObject:mergeChanges:": {
+        "doc": "Updates the persistent properties of a managed object to use the latest values from the persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/refresh(_:mergechanges:)"
+      },
+      "-reset": {
+        "doc": "Returns the context to its base state.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/reset()"
+      },
+      "-rollback": {
+        "doc": "Removes everything from the undo stack, discards all insertions and deletions, and restores updated objects to their last committed values.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/rollback()"
+      },
+      "-save:": {
+        "doc": "Attempts to commit unsaved changes to registered objects to the context’s parent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/save()"
+      },
+      "-setQueryGenerationFromToken:error:": {
+        "doc": "Sets the query generation this context should use.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/setquerygenerationfrom(_:)"
+      },
+      "-shouldHandleInaccessibleFault:forObjectID:triggeredByProperty:": {
+        "doc": "Creates a log of the inaccessible fault.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/shouldhandleinaccessiblefault(_:for:triggeredbyproperty:)"
+      },
+      "-undo": {
+        "doc": "Sends an undo message to the context’s undo manager, asking it to reverse the latest uncommitted changes applied to objects in the object graph.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/undo()"
+      }
+    },
+    "NSManagedObjectID": {
+      "-URIRepresentation": {
+        "doc": "Returns a URI that provides an archiveable reference to the object for the object ID.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectid/urirepresentation()"
+      }
+    },
+    "NSManagedObjectModel": {
+      "+mergedModelFromBundles:": {
+        "doc": "Returns a model created by merging all the models found in given bundles.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/mergedmodel(from:)"
+      },
+      "+mergedModelFromBundles:forStoreMetadata:": {
+        "doc": "Returns a merged model from a specified array for the version information in provided metadata.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/mergedmodel(from:forstoremetadata:)"
+      },
+      "+modelByMergingModels:": {
+        "doc": "Creates a single model from an array of existing models.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/init(bymerging:)"
+      },
+      "+modelByMergingModels:forStoreMetadata:": {
+        "doc": "Returns, for the version information in given metadata, a model merged from a given array of models.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/init(bymerging:forstoremetadata:)"
+      },
+      "-entitiesForConfiguration:": {
+        "doc": "Returns the entities of the model for a specified configuration.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/entities(forconfigurationname:)"
+      },
+      "-fetchRequestFromTemplateWithName:substitutionVariables:": {
+        "doc": "Returns a copy of the fetch request template with the variables substituted by values from the substitutions dictionary.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/fetchrequestfromtemplate(withname:substitutionvariables:)"
+      },
+      "-fetchRequestTemplateForName:": {
+        "doc": "Returns the fetch request with a specified name.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/fetchrequesttemplate(forname:)"
+      },
+      "-init": {
+        "doc": "Initializes an empty managed object model.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/init()"
+      },
+      "-initWithContentsOfURL:": {
+        "doc": "Initializes the managed object model using the model file at the specified URL.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/init(contentsof:)"
+      },
+      "-isConfiguration:compatibleWithStoreMetadata:": {
+        "doc": "Returns a Boolean value that indicates whether a given configuration in the model is compatible with given metadata from a persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/isconfiguration(withname:compatiblewithstoremetadata:)"
+      },
+      "-setEntities:forConfiguration:": {
+        "doc": "Associates the specified entities with the model using the given configuration name.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/setentities(_:forconfigurationname:)"
+      },
+      "-setFetchRequestTemplate:forName:": {
+        "doc": "Associates the specified fetch request with the receiver using the given name.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/setfetchrequesttemplate(_:forname:)"
+      }
+    },
+    "NSManagedObjectModelReference": {
+      "-initWithEntityVersionHashes:inBundle:versionChecksum:": {
+        "doc": "Creates an object model reference with the entities corresponding to the specified entity version hashes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodelreference/init(entityversionhashes:in:versionchecksum:)"
+      },
+      "-initWithFileURL:versionChecksum:": {
+        "doc": "Creates an object model reference for the model at the specified file URL.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodelreference/init(fileurl:versionchecksum:)"
+      },
+      "-initWithModel:versionChecksum:": {
+        "doc": "Creates an object model reference for the specified model.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodelreference/init(model:versionchecksum:)"
+      },
+      "-initWithName:inBundle:versionChecksum:": {
+        "doc": "Creates an object model reference for the named model in the specified bundle.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodelreference/init(name:in:versionchecksum:)"
+      }
+    },
+    "NSMappingModel": {
+      "+inferredMappingModelForSourceModel:destinationModel:error:": {
+        "doc": "Returns a newly created mapping model that will migrate data from the source to the destination model.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmappingmodel/inferredmappingmodel(forsourcemodel:destinationmodel:)"
+      },
+      "+mappingModelFromBundles:forSourceModel:destinationModel:": {
+        "doc": "Returns the mapping model that will translate data from the source to the destination model.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmappingmodel/init(from:forsourcemodel:destinationmodel:)"
+      },
+      "-initWithContentsOfURL:": {
+        "doc": "Returns a mapping model initialized from a given URL.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmappingmodel/init(contentsof:)"
+      }
+    },
+    "NSMergeConflict": {
+      "-initWithSource:newVersion:oldVersion:cachedSnapshot:persistedSnapshot:": {
+        "doc": "Initializes a merge conflict.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergeconflict/init(source:newversion:oldversion:cachedsnapshot:persistedsnapshot:)"
+      }
+    },
+    "NSMergePolicy": {
+      "-initWithMergeType:": {
+        "doc": "Returns a merge policy initialized with a given policy type.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergepolicy/init(merge:)"
+      },
+      "-resolveConflicts:error:": {
+        "doc": "Resolves the conflicts in a given list.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergepolicy/resolve(mergeconflicts:)"
+      },
+      "-resolveConstraintConflicts:error:": {
+        "doc": "Resolves the conflicts in a given list.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergepolicy/resolve(constraintconflicts:)"
+      },
+      "-resolveOptimisticLockingVersionConflicts:error:": {
+        "doc": "Resolves the conflicts in a given list.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergepolicy/resolve(optimisticlockingconflicts:)"
+      }
+    },
+    "NSMigrationManager": {
+      "-associateSourceInstance:withDestinationInstance:forEntityMapping:": {
+        "doc": "Associates a given source managed object instance with an array of destination instances for a given property mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/associate(sourceinstance:withdestinationinstance:for:)"
+      },
+      "-cancelMigrationWithError:": {
+        "doc": "Cancels the migration with a given error.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/cancelmigrationwitherror(_:)"
+      },
+      "-destinationEntityForEntityMapping:": {
+        "doc": "Returns the entity description for the destination entity of a given entity mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/destinationentity(for:)"
+      },
+      "-destinationInstancesForEntityMappingNamed:sourceInstances:": {
+        "doc": "Returns the managed object instances created in the destination store for the named entity mapping for the given array of source instances.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/destinationinstances(forentitymappingname:sourceinstances:)"
+      },
+      "-initWithSourceModel:destinationModel:": {
+        "doc": "Initializes a migration manager instance with given source and destination models.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/init(sourcemodel:destinationmodel:)"
+      },
+      "-migrateStoreFromURL:type:options:withMappingModel:toDestinationURL:destinationType:destinationOptions:error:": {
+        "doc": "Migrates the store at a given source URL to the store at a given destination URL, performing all of the mappings specified in a given mapping model.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/migratestore(from:sourcetype:options:with:todestinationurl:destinationtype:destinationoptions:)"
+      },
+      "-reset": {
+        "doc": "Resets the association tables for the migration.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/reset()"
+      },
+      "-sourceEntityForEntityMapping:": {
+        "doc": "Returns the entity description for the source entity of a given entity mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/sourceentity(for:)"
+      },
+      "-sourceInstancesForEntityMappingNamed:destinationInstances:": {
+        "doc": "Returns the managed object instances in the source store used to create the given destination instances for the passed in property mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/sourceinstances(forentitymappingname:destinationinstances:)"
+      }
+    },
+    "NSPersistentCloudKitContainer": {
+      "-acceptShareInvitationsFromMetadata:intoPersistentStore:completion:": {
+        "doc": "Accepts one or more invitations to participate in sharing using the specified metadata.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/acceptshareinvitationsfrommetadata:intopersistentstore:completion:"
+      },
+      "-canDeleteRecordForManagedObjectWithID:": {
+        "doc": "Returns a Boolean value that indicates whether the user can delete the managed object’s underlying CloudKit record.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/candeleterecord(formanagedobjectwith:)"
+      },
+      "-canModifyManagedObjectsInStore:": {
+        "doc": "Returns a Boolean value that indicates whether the user can modify the specified persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/canmodifymanagedobjects(in:)"
+      },
+      "-canUpdateRecordForManagedObjectWithID:": {
+        "doc": "Returns a Boolean value that indicates whether the user can modify the managed object’s underlying CloudKit record.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/canupdaterecord(formanagedobjectwith:)"
+      },
+      "-fetchParticipantsMatchingLookupInfos:intoPersistentStore:completion:": {
+        "doc": "Fetches all participants that match the specified critieria.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/fetchparticipantsmatchinglookupinfos:intopersistentstore:completion:"
+      },
+      "-fetchSharesInPersistentStore:error:": {
+        "doc": "Returns an array that contains all share records in the specified persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/fetchsharesinpersistentstore:error:"
+      },
+      "-fetchSharesMatchingObjectIDs:error:": {
+        "doc": "Returns a dictionary that contains the share records that CloudKit associates with specified managed object IDs.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/fetchsharesmatchingobjectids:error:"
+      },
+      "-initializeCloudKitSchemaWithOptions:error:": {
+        "doc": "Creates the CloudKit schema for all stores in the container that manage a CloudKit database.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/initializecloudkitschema(options:)"
+      },
+      "-persistUpdatedShare:inPersistentStore:completion:": {
+        "doc": "Saves the share record and schedules it for export to iCloud.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/persistupdatedshare:inpersistentstore:completion:"
+      },
+      "-purgeObjectsAndRecordsInZoneWithID:inPersistentStore:completion:": {
+        "doc": "Deletes all CloudKit records in the specified record zone, along with their corresponding managed objects.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/purgeobjectsandrecordsinzonewithid:inpersistentstore:completion:"
+      },
+      "-recordForManagedObjectID:": {
+        "doc": "Returns the CloudKit record for the specified managed object ID.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/recordformanagedobjectid:"
+      },
+      "-recordIDForManagedObjectID:": {
+        "doc": "Returns the CloudKit record ID for the specified managed object ID.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/recordidformanagedobjectid:"
+      },
+      "-recordIDsForManagedObjectIDs:": {
+        "doc": "Returns a dictionary that contains the CloudKit record IDs for the specified managed object IDs.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/recordidsformanagedobjectids:"
+      },
+      "-recordsForManagedObjectIDs:": {
+        "doc": "Returns a dictionary that contains the CloudKit records for the specified managed object IDs.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/recordsformanagedobjectids:"
+      },
+      "-shareManagedObjects:toShare:completion:": {
+        "doc": "Associates the specified managed objects with a new or existing share record.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/sharemanagedobjects:toshare:completion:"
+      }
+    },
+    "NSPersistentCloudKitContainerEventRequest": {
+      "+fetchEventsAfterDate:": {
+        "doc": "Creates a fetch request for events after a specified date from a persistent CloudKit container.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventrequest/fetchevents(after:)-5izg7"
+      },
+      "+fetchEventsAfterEvent:": {
+        "doc": "Creates a fetch request for events that occur after a specified event from a persistent CloudKit container.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventrequest/fetchevents(after:)-3yfp"
+      },
+      "+fetchEventsMatchingFetchRequest:": {
+        "doc": "Creates a fetch request for events that match a specified fetch request from a persistent CloudKit container.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventrequest/fetchevents(matchingfetch:)"
+      },
+      "+fetchRequestForEvents": {
+        "doc": "Creates a fetch request for all events in a persistent CloudKit container.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventrequest/fetchforevents()"
+      }
+    },
+    "NSPersistentCloudKitContainerOptions": {
+      "-initWithContainerIdentifier:": {
+        "doc": "Initializes container options using the given CloudKit container identifier.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontaineroptions/init(containeridentifier:)"
+      }
+    },
+    "NSPersistentContainer": {
+      "+defaultDirectoryURL": {
+        "doc": "Returns the location of the directory that contains the persistent stores.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcontainer/defaultdirectoryurl()"
+      },
+      "+persistentContainerWithName:": {
+        "doc": "Initializes a new persistent container using the provided name for the container.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcontainer/persistentcontainerwithname:"
+      },
+      "+persistentContainerWithName:managedObjectModel:": {
+        "doc": "Initializes a new persistent container using the provided name and managed object model.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcontainer/persistentcontainerwithname:managedobjectmodel:"
+      },
+      "-initWithName:": {
+        "doc": "Creates a container with the specified name.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcontainer/init(name:)"
+      },
+      "-initWithName:managedObjectModel:": {
+        "doc": "Create a container with the specified name and managed object model.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcontainer/init(name:managedobjectmodel:)"
+      },
+      "-loadPersistentStoresWithCompletionHandler:": {
+        "doc": "Loads the persistent stores.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcontainer/loadpersistentstores(completionhandler:)"
+      },
+      "-newBackgroundContext": {
+        "doc": "Returns a new managed object context that executes on a private queue.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcontainer/newbackgroundcontext()"
+      },
+      "-performBackgroundTask:": {
+        "doc": "Executes a closure on a private queue using an ephemeral managed object context.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcontainer/performbackgroundtask(_:)-39sch"
+      }
+    },
+    "NSPersistentHistoryChange": {
+      "+entityDescriptionWithContext:": {
+        "doc": "Requests an entity description for the managed object type affected by the change using the provided context.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychange/entitydescription(with:)"
+      }
+    },
+    "NSPersistentHistoryChangeRequest": {
+      "+deleteHistoryBeforeDate:": {
+        "doc": "Purges history older than a given date.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychangerequest/deletehistory(before:)-7t2th"
+      },
+      "+deleteHistoryBeforeToken:": {
+        "doc": "Purges history older than that defined by a given token.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychangerequest/deletehistory(before:)-5kghb"
+      },
+      "+deleteHistoryBeforeTransaction:": {
+        "doc": "Purges history older than a given transaction.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychangerequest/deletehistory(before:)-9l06p"
+      },
+      "+fetchHistoryAfterDate:": {
+        "doc": "Retrieves history since a given date.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychangerequest/fetchhistory(after:)-qi5b"
+      },
+      "+fetchHistoryAfterToken:": {
+        "doc": "Retrieves the request history after a given token.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychangerequest/fetchhistory(after:)-3rmfm"
+      },
+      "+fetchHistoryAfterTransaction:": {
+        "doc": "Retrieves history since a given transaction.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychangerequest/fetchhistory(after:)-9cuj5"
+      },
+      "+fetchHistoryWithFetchRequest:": {
+        "doc": "Retrieves history based on a fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychangerequest/fetchhistory(withfetch:)"
+      }
+    },
+    "NSPersistentHistoryTransaction": {
+      "+entityDescriptionWithContext:": {
+        "doc": "Requests an entity description using the provided context for the managed object type affected by the transaction.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorytransaction/entitydescription(with:)"
+      },
+      "-objectIDNotification": {
+        "doc": "Obtains a notification for use in merging the transaction’s changes into a managed object context.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorytransaction/objectidnotification()"
+      }
+    },
+    "NSPersistentStore": {
+      "+metadataForPersistentStoreWithURL:error:": {
+        "doc": "Returns the metadata from the persistent store at the given URL.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/metadataforpersistentstore(with:)"
+      },
+      "+migrationManagerClass": {
+        "doc": "Returns the migration manager class for this store class.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/migrationmanagerclass()"
+      },
+      "+setMetadata:forPersistentStoreWithURL:error:": {
+        "doc": "Sets the metadata for the store at a given URL.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/setmetadata(_:forpersistentstoreat:)"
+      },
+      "-didAddToPersistentStoreCoordinator:": {
+        "doc": "Invoked after the persistent store has been added to the persistent store coordinator.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/didadd(to:)"
+      },
+      "-initWithPersistentStoreCoordinator:configurationName:URL:options:": {
+        "doc": "Returns a store initialized with the given arguments.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/init(persistentstorecoordinator:configurationname:at:options:)"
+      },
+      "-loadMetadata:": {
+        "doc": "Instructs the persistent store to load its metadata.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/loadmetadata()"
+      },
+      "-willRemoveFromPersistentStoreCoordinator:": {
+        "doc": "Invoked before the persistent store is removed from the persistent store coordinator.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/willremove(from:)"
+      }
+    },
+    "NSPersistentStoreAsynchronousResult": {
+      "-cancel": {
+        "doc": "Cancels the asynchronous fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoreasynchronousresult/cancel()"
+      }
+    },
+    "NSPersistentStoreCoordinator": {
+      "+metadataForPersistentStoreOfType:URL:options:error:": {
+        "doc": "Returns the metadata of a specific type of persistent store at the provided location.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/metadataforpersistentstore(oftype:at:options:)"
+      },
+      "+registerStoreClass:forStoreType:": {
+        "doc": "Registers a persistent store subclass using the specified store type identifier.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/registerstoreclass(_:forstoretype:)"
+      },
+      "+setMetadata:forPersistentStoreOfType:URL:options:error:": {
+        "doc": "Updates the metadata of a specific type of persistent store at the provided location.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/setmetadata(_:forpersistentstoreoftype:at:options:)"
+      },
+      "-URLForPersistentStore:": {
+        "doc": "Returns the location of the provided persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/url(for:)"
+      },
+      "-addPersistentStoreWithDescription:completionHandler:": {
+        "doc": "Adds a persistent store using the provided description.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/addpersistentstore(with:completionhandler:)"
+      },
+      "-addPersistentStoreWithType:configuration:URL:options:error:": {
+        "doc": "Adds a specific type of persistent store at the provided location.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/addpersistentstore(oftype:configurationname:at:options:)"
+      },
+      "-currentPersistentHistoryTokenFromStores:": {
+        "doc": "Returns a single persistent history token representing all of the specified stores.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/currentpersistenthistorytoken(fromstores:)"
+      },
+      "-destroyPersistentStoreAtURL:withType:options:error:": {
+        "doc": "Deletes a specific type of persistent store at the provided location.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/destroypersistentstore(at:oftype:options:)"
+      },
+      "-executeRequest:withContext:error:": {
+        "doc": "Executes the specified request on each of the coordinator’s persistent stores.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/execute(_:with:)"
+      },
+      "-finishDeferredLightweightMigration:": {
+        "doc": "Executes all remaining tasks of a deferred lightweight migration.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/finishdeferredlightweightmigration()"
+      },
+      "-finishDeferredLightweightMigrationTask:": {
+        "doc": "Executes a single pending task of a deferred lightweight migration.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/finishdeferredlightweightmigrationtask()"
+      },
+      "-initWithManagedObjectModel:": {
+        "doc": "Creates a persistent store coordinator with the specified managed object model.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/init(managedobjectmodel:)"
+      },
+      "-managedObjectIDForURIRepresentation:": {
+        "doc": "Returns the object identifier for the specified URI representation.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/managedobjectid(forurirepresentation:)"
+      },
+      "-metadataForPersistentStore:": {
+        "doc": "Returns the metadata of the specified persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/metadata(for:)"
+      },
+      "-migratePersistentStore:toURL:options:withType:error:": {
+        "doc": "Changes the location and, if necessary, the store type of the specified persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/migratepersistentstore(_:to:options:withtype:)"
+      },
+      "-performBlock:": {
+        "doc": "Executes the provided closure asynchronously on the coordinator’s queue.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/perform(_:)-7jqb"
+      },
+      "-performBlockAndWait:": {
+        "doc": "Executes the provided closure on the coordinator’s queue and waits for it to finish.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/performandwait(_:)-d3kq"
+      },
+      "-persistentStoreForURL:": {
+        "doc": "Returns the persistent store for the specified file URL.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/persistentstore(for:)"
+      },
+      "-removePersistentStore:error:": {
+        "doc": "Removes the specified persistent store from the coordinator.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/remove(_:)"
+      },
+      "-replacePersistentStoreAtURL:destinationOptions:withPersistentStoreFromURL:sourceOptions:storeType:error:": {
+        "doc": "Replaces one persistent store with another.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/replacepersistentstore(at:destinationoptions:withpersistentstorefrom:sourceoptions:oftype:)"
+      },
+      "-setMetadata:forPersistentStore:": {
+        "doc": "Updates the metadata for the specified persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/setmetadata(_:for:)"
+      },
+      "-setURL:forPersistentStore:": {
+        "doc": "Changes the location of the specified persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/seturl(_:for:)"
+      }
+    },
+    "NSPersistentStoreDescription": {
+      "+persistentStoreDescriptionWithURL:": {
+        "doc": "Initializes and returns a persistent store description with the given URL.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription/persistentstoredescriptionwithurl:"
+      },
+      "-initWithURL:": {
+        "doc": "Initializes the receiver with a URL for the store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription/init(url:)-ko0l"
+      },
+      "-setOption:forKey:": {
+        "doc": "Sets an option on the store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription/setoption(_:forkey:)"
+      },
+      "-setValue:forPragmaNamed:": {
+        "doc": "Allows you to set pragmas for the SQLite store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription/setvalue(_:forpragmanamed:)"
+      }
+    },
+    "NSPropertyDescription": {
+      "-setValidationPredicates:withValidationWarnings:": {
+        "doc": "Sets the validation predicates and warnings of the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertydescription/setvalidationpredicates(_:withvalidationwarnings:)"
+      }
+    },
+    "NSSaveChangesRequest": {
+      "-initWithInsertedObjects:updatedObjects:deletedObjects:lockedObjects:": {
+        "doc": "Initializes a save changes request with collections of given changes.",
+        "url": "https://developer.apple.com/documentation/coredata/nssavechangesrequest/init(inserted:updated:deleted:locked:)"
+      }
+    },
+    "NSStagedMigrationManager": {
+      "-initWithMigrationStages:": {
+        "doc": "Creates a migration manager with the specified stages.",
+        "url": "https://developer.apple.com/documentation/coredata/nsstagedmigrationmanager/initwithmigrationstages:"
+      }
+    }
+  },
+  "properties": {
+    "NSAsynchronousFetchRequest": {
+      "completionBlock": {
+        "doc": "The block that is executed when the fetch request has completed.",
+        "url": "https://developer.apple.com/documentation/coredata/nsasynchronousfetchrequest/completionblock"
+      },
+      "estimatedResultCount": {
+        "doc": "A configuration parameter that assists Core Data with scheduling the asynchronous fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsasynchronousfetchrequest/estimatedresultcount"
+      },
+      "fetchRequest": {
+        "doc": "The underlying fetch request that is executed asynchronously.",
+        "url": "https://developer.apple.com/documentation/coredata/nsasynchronousfetchrequest/fetchrequest"
+      }
+    },
+    "NSAsynchronousFetchResult": {
+      "fetchRequest": {
+        "doc": "The underlying fetch request that was executed.",
+        "url": "https://developer.apple.com/documentation/coredata/nsasynchronousfetchresult/fetchrequest"
+      },
+      "finalResult": {
+        "doc": "The results that were received from the fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsasynchronousfetchresult/finalresult"
+      }
+    },
+    "NSAtomicStoreCacheNode": {
+      "objectID": {
+        "doc": "The managed object ID of the node.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstorecachenode/objectid"
+      },
+      "propertyCache": {
+        "doc": "The property cache dictionary of the node.",
+        "url": "https://developer.apple.com/documentation/coredata/nsatomicstorecachenode/propertycache"
+      }
+    },
+    "NSAttributeDescription": {
+      "NSAttributeDescription.AttributeType": {
+        "doc": "The types of attributes that Core Data supports.",
+        "url": "https://developer.apple.com/documentation/coredata/nsattributedescription/attributetype-swift.struct"
+      },
+      "allowsCloudEncryption": {
+        "doc": "A Boolean value that determines whether to encrypt the attribute’s value.",
+        "url": "https://developer.apple.com/documentation/coredata/nsattributedescription/allowscloudencryption"
+      },
+      "allowsExternalBinaryDataStorage": {
+        "doc": "A Boolean value that indicates whether the attribute allows external binary storage.",
+        "url": "https://developer.apple.com/documentation/coredata/nsattributedescription/allowsexternalbinarydatastorage"
+      },
+      "attributeType": {
+        "doc": "The attribute’s type.",
+        "url": "https://developer.apple.com/documentation/coredata/nsattributedescription/attributetype-swift.property"
+      },
+      "attributeValueClassName": {
+        "doc": "The class name that represents the attribute’s value.",
+        "url": "https://developer.apple.com/documentation/coredata/nsattributedescription/attributevalueclassname"
+      },
+      "defaultValue": {
+        "doc": "The default value of the attribute.",
+        "url": "https://developer.apple.com/documentation/coredata/nsattributedescription/defaultvalue"
+      },
+      "preservesValueInHistoryOnDeletion": {
+        "doc": "A Boolean value that indicates whether the attribute records its value in the persistent history transaction for a managed object’s deletion.",
+        "url": "https://developer.apple.com/documentation/coredata/nsattributedescription/preservesvalueinhistoryondeletion"
+      },
+      "type": {
+        "doc": "The attribute’s type.",
+        "url": "https://developer.apple.com/documentation/coredata/nsattributedescription/type"
+      },
+      "valueTransformerName": {
+        "doc": "The name of the transformer to use for the attribute value.",
+        "url": "https://developer.apple.com/documentation/coredata/nsattributedescription/valuetransformername"
+      },
+      "versionHash": {
+        "doc": "The version hash for the attribute.",
+        "url": "https://developer.apple.com/documentation/coredata/nsattributedescription/versionhash"
+      }
+    },
+    "NSBatchDeleteRequest": {
+      "fetchRequest": {
+        "doc": "The fetch request that identifies the managed objects to delete.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchdeleterequest/fetchrequest"
+      },
+      "resultType": {
+        "doc": "The type of result the request provides when it executes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchdeleterequest/resulttype"
+      }
+    },
+    "NSBatchDeleteResult": {
+      "result": {
+        "doc": "The value the request returns after it executes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchdeleteresult/result"
+      },
+      "resultType": {
+        "doc": "The data type of the request’s result value.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchdeleteresult/resulttype"
+      }
+    },
+    "NSBatchInsertRequest": {
+      "dictionaryHandler": {
+        "doc": "A closure that provides a dictionary for your app to insert data into.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequest/dictionaryhandler"
+      },
+      "entity": {
+        "doc": "The managed entity to insert data into.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequest/entity"
+      },
+      "entityName": {
+        "doc": "The name of the managed entity to insert data into.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequest/entityname"
+      },
+      "managedObjectHandler": {
+        "doc": "A closure that provides a managed object for your app to insert data into.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequest/managedobjecthandler"
+      },
+      "objectsToInsert": {
+        "doc": "An array of dictionaries that represents the objects to insert with the keys as attribute names and their assigned values.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequest/objectstoinsert"
+      },
+      "resultType": {
+        "doc": "The type of result that Core Data returns from this request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertrequest/resulttype"
+      }
+    },
+    "NSBatchInsertResult": {
+      "result": {
+        "doc": "The result of a batch-insertion request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertresult/result"
+      },
+      "resultType": {
+        "doc": "The type of result that Core Data returns from this request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchinsertresult/resulttype"
+      }
+    },
+    "NSBatchUpdateRequest": {
+      "entity": {
+        "doc": "The managed entity to update data for.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchupdaterequest/entity"
+      },
+      "entityName": {
+        "doc": "The name of the managed entity to update data for.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchupdaterequest/entityname"
+      },
+      "includesSubentities": {
+        "doc": "A Boolean value that indicates whether to update subentities.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchupdaterequest/includessubentities"
+      },
+      "predicate": {
+        "doc": "A predicate that identifies the objects to update.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchupdaterequest/predicate"
+      },
+      "propertiesToUpdate": {
+        "doc": "A dictionary of property description pairs that describe the updates.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchupdaterequest/propertiestoupdate"
+      },
+      "resultType": {
+        "doc": "The type of result that Core Data returns from the request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchupdaterequest/resulttype"
+      }
+    },
+    "NSBatchUpdateResult": {
+      "result": {
+        "doc": "The result of a batch-update request, either the number of updated objects, the identifiers of the updated objects, or a status value.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchupdateresult/result"
+      },
+      "resultType": {
+        "doc": "The type of result that Core Data returns from the request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsbatchupdateresult/resulttype"
+      }
+    },
+    "NSCompositeAttributeDescription": {
+      "elements": {
+        "doc": "The composed attribute descriptions.",
+        "url": "https://developer.apple.com/documentation/coredata/nscompositeattributedescription/elements"
+      }
+    },
+    "NSConstraintConflict": {
+      "conflictingObjects": {
+        "doc": "The managed objects that are in conflict.",
+        "url": "https://developer.apple.com/documentation/coredata/nsconstraintconflict/conflictingobjects"
+      },
+      "conflictingSnapshots": {
+        "doc": "The original property values of objects in violation of the constraint.",
+        "url": "https://developer.apple.com/documentation/coredata/nsconstraintconflict/conflictingsnapshots"
+      },
+      "constraint": {
+        "doc": "The constraint that has been violated.",
+        "url": "https://developer.apple.com/documentation/coredata/nsconstraintconflict/constraint"
+      },
+      "constraintValues": {
+        "doc": "The values that the conflicting objects had when the conflict was created.",
+        "url": "https://developer.apple.com/documentation/coredata/nsconstraintconflict/constraintvalues"
+      },
+      "databaseObject": {
+        "doc": "The object whose database row is using constraint values.",
+        "url": "https://developer.apple.com/documentation/coredata/nsconstraintconflict/databaseobject"
+      },
+      "databaseSnapshot": {
+        "doc": "The values currently stored in the database.",
+        "url": "https://developer.apple.com/documentation/coredata/nsconstraintconflict/databasesnapshot"
+      }
+    },
+    "NSCoreDataCoreSpotlightDelegate": {
+      "NSCoreDataCoreSpotlightDelegate.IndexDidUpdateMessage": {
+        "doc": "Posted when the Core Spotlight index is updated on a private queue.",
+        "url": "https://developer.apple.com/documentation/coredata/nscoredatacorespotlightdelegate/indexdidupdatemessage"
+      },
+      "indexDidUpdateNotification": {
+        "doc": "The notification the delegate posts after Spotlight updates the index.",
+        "url": "https://developer.apple.com/documentation/coredata/nscoredatacorespotlightdelegate/indexdidupdatenotification"
+      },
+      "indexingEnabled": {
+        "doc": "A Boolean value that indicates whether Core Data is currently updating the Core Spotlight index with the persistent store’s entities.",
+        "url": "https://developer.apple.com/documentation/coredata/nscoredatacorespotlightdelegate/isindexingenabled"
+      }
+    },
+    "NSCustomMigrationStage": {
+      "currentModel": {
+        "doc": "The reference that represents the migration’s source model.",
+        "url": "https://developer.apple.com/documentation/coredata/nscustommigrationstage/currentmodel"
+      },
+      "didMigrateHandler": {
+        "doc": "The handler to execute after the stage runs.",
+        "url": "https://developer.apple.com/documentation/coredata/nscustommigrationstage/didmigratehandler-36uhx"
+      },
+      "init(migratingFrom:to:)": {
+        "doc": "Creates a custom migration stage with the specified source and destination model references.",
+        "url": "https://developer.apple.com/documentation/coredata/nscustommigrationstage/init(migratingfrom:to:)"
+      },
+      "nextModel": {
+        "doc": "The reference that represents the migration’s destination model.",
+        "url": "https://developer.apple.com/documentation/coredata/nscustommigrationstage/nextmodel"
+      },
+      "willMigrateHandler": {
+        "doc": "The handler to execute before the stage runs.",
+        "url": "https://developer.apple.com/documentation/coredata/nscustommigrationstage/willmigratehandler-5wead"
+      }
+    },
+    "NSDerivedAttributeDescription": {
+      "derivationExpression": {
+        "doc": "An expression for generating derived data.",
+        "url": "https://developer.apple.com/documentation/coredata/nsderivedattributedescription/derivationexpression"
+      }
+    },
+    "NSEntityDescription": {
+      "abstract": {
+        "doc": "A Boolean value that indicates whether the receiver represents an abstract entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/isabstract"
+      },
+      "attributesByName": {
+        "doc": "The attributes of the receiver in a dictionary.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/attributesbyname"
+      },
+      "compoundIndexes": {
+        "doc": "The compound indexes for the entity as an array of arrays.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/compoundindexes"
+      },
+      "coreSpotlightDisplayNameExpression": {
+        "doc": "The expression that computes the CoreSpotlight display name for instances of the entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/corespotlightdisplaynameexpression"
+      },
+      "indexes": {
+        "doc": "An array of fetch index descriptions for the entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/indexes"
+      },
+      "managedObjectClassName": {
+        "doc": "The name of the class that represents the receiver’s entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/managedobjectclassname"
+      },
+      "managedObjectModel": {
+        "doc": "The managed object model with which the receiver is associated.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/managedobjectmodel"
+      },
+      "name": {
+        "doc": "The entity name of the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/name"
+      },
+      "properties": {
+        "doc": "An array containing the properties of the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/properties"
+      },
+      "propertiesByName": {
+        "doc": "A dictionary containing the properties of the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/propertiesbyname"
+      },
+      "relationshipsByName": {
+        "doc": "The relationships of the receiver in a dictionary.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/relationshipsbyname"
+      },
+      "renamingIdentifier": {
+        "doc": "The renaming identifier for the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/renamingidentifier"
+      },
+      "subentities": {
+        "doc": "An array containing the sub-entities of the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/subentities"
+      },
+      "subentitiesByName": {
+        "doc": "A dictionary containing the receiver’s sub-entities.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/subentitiesbyname"
+      },
+      "superentity": {
+        "doc": "The super-entity of the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/superentity"
+      },
+      "uniquenessConstraints": {
+        "doc": "An array of arrays that contains one or more attributes with a value that must be unique over the instances of that entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/uniquenessconstraints"
+      },
+      "userInfo": {
+        "doc": "The user info dictionary of the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/userinfo"
+      },
+      "versionHash": {
+        "doc": "The version hash for the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/versionhash"
+      },
+      "versionHashModifier": {
+        "doc": "The version hash modifier for the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitydescription/versionhashmodifier"
+      }
+    },
+    "NSEntityMapping": {
+      "attributeMappings": {
+        "doc": "The array of attribute mappings for the entity mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymapping/attributemappings"
+      },
+      "destinationEntityName": {
+        "doc": "The destination entity name for the entity mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymapping/destinationentityname"
+      },
+      "destinationEntityVersionHash": {
+        "doc": "The version hash for the destination entity for the entity mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymapping/destinationentityversionhash"
+      },
+      "entityMigrationPolicyClassName": {
+        "doc": "The class name of the migration policy for the entity mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymapping/entitymigrationpolicyclassname"
+      },
+      "mappingType": {
+        "doc": "The mapping type for the entity mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymapping/mappingtype"
+      },
+      "name": {
+        "doc": "The name of the entity mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymapping/name"
+      },
+      "relationshipMappings": {
+        "doc": "The array of relationship mappings for the entity mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymapping/relationshipmappings"
+      },
+      "sourceEntityName": {
+        "doc": "The source entity name for the entity mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymapping/sourceentityname"
+      },
+      "sourceEntityVersionHash": {
+        "doc": "The version hash of the source entity for the entity mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymapping/sourceentityversionhash"
+      },
+      "sourceExpression": {
+        "doc": "The source expression for the entity mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymapping/sourceexpression"
+      },
+      "userInfo": {
+        "doc": "The user info dictionary for the entity mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nsentitymapping/userinfo"
+      }
+    },
+    "NSExpressionDescription": {
+      "expression": {
+        "doc": "The expression to evaluate.",
+        "url": "https://developer.apple.com/documentation/coredata/nsexpressiondescription/expression"
+      },
+      "expressionResultType": {
+        "doc": "The attribute type of the expression’s result.",
+        "url": "https://developer.apple.com/documentation/coredata/nsexpressiondescription/expressionresulttype"
+      },
+      "resultType": {
+        "doc": "The attribute type of the expression’s result.",
+        "url": "https://developer.apple.com/documentation/coredata/nsexpressiondescription/resulttype"
+      }
+    },
+    "NSFetchIndexDescription": {
+      "elements": {
+        "doc": "An array of fetch index element descriptions.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchindexdescription/elements"
+      },
+      "entity": {
+        "doc": "The entity description for the fetch index description.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchindexdescription/entity"
+      },
+      "name": {
+        "doc": "The name of the fetch index description.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchindexdescription/name"
+      },
+      "partialIndexPredicate": {
+        "doc": "A predicate that selects rows for indexing, if the index is a partial index.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchindexdescription/partialindexpredicate"
+      }
+    },
+    "NSFetchIndexElementDescription": {
+      "ascending": {
+        "doc": "A Boolean value that controls whether an index that supports direction is an ascending or descending index.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchindexelementdescription/isascending"
+      },
+      "collationType": {
+        "doc": "The type of collation that the index element uses, either binary or R-tree.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchindexelementdescription/collationtype"
+      },
+      "property": {
+        "doc": "A property description.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchindexelementdescription/property"
+      },
+      "propertyName": {
+        "doc": "The specified name in the property description.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchindexelementdescription/propertyname"
+      }
+    },
+    "NSFetchRequest": {
+      "affectedStores": {
+        "doc": "An array of persistent stores specified for the fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/affectedstores"
+      },
+      "entity": {
+        "doc": "The entity specified for the fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/entity"
+      },
+      "entityName": {
+        "doc": "The name of the entity the request is configured to fetch.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/entityname"
+      },
+      "fetchBatchSize": {
+        "doc": "The batch size of the objects specified in the fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/fetchbatchsize"
+      },
+      "fetchLimit": {
+        "doc": "The fetch limit of the fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/fetchlimit"
+      },
+      "fetchOffset": {
+        "doc": "The fetch offset of the fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/fetchoffset"
+      },
+      "havingPredicate": {
+        "doc": "The predicate used to filter rows being returned by a query containing a GROUP BY directive.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/havingpredicate"
+      },
+      "includesPendingChanges": {
+        "doc": "A Boolean value that indicates whether, when the fetch is executed, it matches against currently unsaved changes in the managed object context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/includespendingchanges"
+      },
+      "includesPropertyValues": {
+        "doc": "A Boolean value that indicates whether, when the fetch is executed, property data is obtained from the persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/includespropertyvalues"
+      },
+      "includesSubentities": {
+        "doc": "A Boolean value that indicates whether the fetch request includes subentities in the results.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/includessubentities"
+      },
+      "predicate": {
+        "doc": "The predicate of the fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/predicate"
+      },
+      "propertiesToFetch": {
+        "doc": "A collection of either property descriptions or string property names that specify which properties should be returned by the fetch.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/propertiestofetch"
+      },
+      "propertiesToGroupBy": {
+        "doc": "An array of objects that indicates how data should be grouped before a select statement is run in a SQL database.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/propertiestogroupby"
+      },
+      "relationshipKeyPathsForPrefetching": {
+        "doc": "The relationship key paths to prefetch along with the entity for the request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/relationshipkeypathsforprefetching"
+      },
+      "resultType": {
+        "doc": "The result type of the fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/resulttype"
+      },
+      "returnsDistinctResults": {
+        "doc": "A Boolean value that indicates whether the fetch request returns only distinct values for the fields specified by propertiesToFetch.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/returnsdistinctresults"
+      },
+      "returnsObjectsAsFaults": {
+        "doc": "A Boolean value that indicates whether the objects resulting from a fetch request are faults.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/returnsobjectsasfaults"
+      },
+      "shouldRefreshRefetchedObjects": {
+        "doc": "A Boolean value that indicates whether the property values of fetched objects will be updated with the current values in the persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/shouldrefreshrefetchedobjects"
+      },
+      "sortDescriptors": {
+        "doc": "The sort descriptors of the fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequest/sortdescriptors"
+      }
+    },
+    "NSFetchRequestExpression": {
+      "contextExpression": {
+        "doc": "The expression for the receiver’s managed object context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequestexpression/contextexpression"
+      },
+      "countOnlyRequest": {
+        "doc": "Returns a Boolean value that indicates whether the receiver represents a count-only fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequestexpression/iscountonlyrequest"
+      },
+      "requestExpression": {
+        "doc": "The expression for the receiver’s fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchrequestexpression/requestexpression"
+      }
+    },
+    "NSFetchedPropertyDescription": {
+      "fetchRequest": {
+        "doc": "The fetch request of the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedpropertydescription/fetchrequest"
+      }
+    },
+    "NSFetchedResultsController": {
+      "cacheName": {
+        "doc": "The name of the file used to cache section information.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller/cachename"
+      },
+      "delegate": {
+        "doc": "The object that is notified when the fetched results changed.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller/delegate"
+      },
+      "fetchRequest": {
+        "doc": "The fetch request used to do the fetching.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller/fetchrequest"
+      },
+      "fetchedObjects": {
+        "doc": "The results of the fetch.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller/fetchedobjects"
+      },
+      "managedObjectContext": {
+        "doc": "The managed object context used to fetch objects.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller/managedobjectcontext"
+      },
+      "sectionIndexTitles": {
+        "doc": "The array of section index titles.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller/sectionindextitles"
+      },
+      "sectionNameKeyPath": {
+        "doc": "The key path of the attribute that determines which section the fetched entity belongs to.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller/sectionnamekeypath"
+      },
+      "sections": {
+        "doc": "The sections for the fetch results.",
+        "url": "https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller/sections"
+      }
+    },
+    "NSIncrementalStoreNode": {
+      "objectID": {
+        "doc": "The object ID that identifies the data stored by the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nsincrementalstorenode/objectid"
+      },
+      "version": {
+        "doc": "The version of data in the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nsincrementalstorenode/version"
+      }
+    },
+    "NSLightweightMigrationStage": {
+      "init(_:)": {
+        "doc": "Creates a lightweight migration stage with the specified version checksums.",
+        "url": "https://developer.apple.com/documentation/coredata/nslightweightmigrationstage/init(_:)"
+      },
+      "versionChecksums": {
+        "doc": "The array of version checksums.",
+        "url": "https://developer.apple.com/documentation/coredata/nslightweightmigrationstage/versionchecksums"
+      }
+    },
+    "NSManagedObject": {
+      "contextShouldIgnoreUnmodeledPropertyChanges": {
+        "doc": "A Boolean value that indicates whether to mark instances of the class as having changes when an unmodeled property changes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/contextshouldignoreunmodeledpropertychanges"
+      },
+      "deleted": {
+        "doc": "A Boolean value that indicates whether the managed object will be deleted during the next save.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/isdeleted"
+      },
+      "entity": {
+        "doc": "The entity description of the managed object.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/entity-swift.property"
+      },
+      "fault": {
+        "doc": "A Boolean value that indicates whether the managed object is a fault.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/isfault"
+      },
+      "faultingState": {
+        "doc": "The faulting state of the managed object.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/faultingstate"
+      },
+      "fetchRequest()": {
+        "doc": "Returns an initialized fetch request with the entity this subclass represents.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/fetchrequest()"
+      },
+      "hasChanges": {
+        "doc": "A Boolean value that indicates whether the managed object has been inserted, has been deleted, or has unsaved changes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/haschanges"
+      },
+      "hasPersistentChangedValues": {
+        "doc": "A Boolean value that indicates whether the managed object has persistent changes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/haspersistentchangedvalues"
+      },
+      "inserted": {
+        "doc": "A Boolean value that indicates whether the managed object has been inserted in a managed object context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/isinserted"
+      },
+      "managedObjectContext": {
+        "doc": "The managed object context with which the managed object is registered.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/managedobjectcontext"
+      },
+      "objectID": {
+        "doc": "The object ID of the managed object.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/objectid"
+      },
+      "updated": {
+        "doc": "A Boolean value that indicates whether the managed object has unsaved changes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobject/isupdated"
+      }
+    },
+    "NSManagedObjectContext": {
+      "NSManagedObjectContext.ConcurrencyType": {
+        "doc": "The concurrency types to use with a managed object context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/concurrencytype-swift.struct"
+      },
+      "NSManagedObjectContext.DidMergeChangesAsyncMessage": {
+        "doc": "Posted after a private queue context merges changes from another context, containing object IDs.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/didmergechangesasyncmessage"
+      },
+      "NSManagedObjectContext.DidMergeChangesMessage": {
+        "doc": "Posted after a main queue context merges changes from another context, containing object IDs.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/didmergechangesmessage"
+      },
+      "NSManagedObjectContext.DidSaveMessage": {
+        "doc": "Posted after a main queue context saves.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/didsavemessage"
+      },
+      "NSManagedObjectContext.DidSaveObjectIDsAsyncMessage": {
+        "doc": "Posted after a private queue context saves, containing object IDs rather than full objects.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/didsaveobjectidsasyncmessage"
+      },
+      "NSManagedObjectContext.DidSaveObjectIDsMessage": {
+        "doc": "Posted after a main queue context saves, containing object IDs rather than full objects.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/didsaveobjectidsmessage"
+      },
+      "NSManagedObjectContext.NotificationKey": {
+        "doc": "Keys to access details in user info dictionaries of managed object context notifications.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/notificationkey"
+      },
+      "NSManagedObjectContext.ObjectsDidChangeMessage": {
+        "doc": "Posted when objects in a main queue context change (inserted, updated, deleted, refreshed, or invalidated).",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/objectsdidchangemessage"
+      },
+      "NSManagedObjectContext.ScheduledTaskType": {
+        "doc": "The different types of scheduled tasks.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/scheduledtasktype"
+      },
+      "NSManagedObjectContext.WillSaveMessage": {
+        "doc": "Posted before a main queue context saves.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/willsavemessage"
+      },
+      "automaticallyMergesChangesFromParent": {
+        "doc": "A Boolean value that indicates whether the context automatically merges changes saved to its persistent store coordinator or parent context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/automaticallymergeschangesfromparent"
+      },
+      "concurrencyType": {
+        "doc": "The concurrency type for the context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/concurrencytype-swift.property"
+      },
+      "count(for:)": {
+        "doc": "Returns a count of the objects the specified request fetches when it executes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/count(for:)-3r91z"
+      },
+      "deletedObjects": {
+        "doc": "The set of objects that will be removed from their persistent store during the next save operation.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/deletedobjects"
+      },
+      "didChangeObjectsNotification": {
+        "doc": "A notification that posts when a context makes changes to its registered objects.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/didchangeobjectsnotification"
+      },
+      "didMergeChangesObjectIDsNotification": {
+        "doc": "A notification that posts after a context finishes merging changes from another notification.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/didmergechangesobjectidsnotification"
+      },
+      "didSaveObjectIDsNotification": {
+        "doc": "A notification that posts after a context finishes saving changes to its managed objects.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/didsaveobjectidsnotification"
+      },
+      "didSaveObjectsNotification": {
+        "doc": "A notification that posts after a context completes a save.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/didsaveobjectsnotification"
+      },
+      "fetch(_:)": {
+        "doc": "Returns an array of items of the specified type that meet the fetch request’s critieria.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/fetch(_:)-4xeoz"
+      },
+      "hasChanges": {
+        "doc": "A Boolean value that indicates whether the context has uncommitted changes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/haschanges"
+      },
+      "init(_:)": {
+        "doc": "Creates a context that uses the specified concurrency type.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/init(_:)"
+      },
+      "insertedObjects": {
+        "doc": "The set of objects that have been inserted into the context but not yet saved in a persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/insertedobjects"
+      },
+      "mergePolicy": {
+        "doc": "The merge policy of the context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/mergepolicy"
+      },
+      "name": {
+        "doc": "The developer-provided name of the context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/name"
+      },
+      "parentContext": {
+        "doc": "The parent of the context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/parent"
+      },
+      "perform(schedule:_:)": {
+        "doc": "Submits a closure to the context’s queue for asynchronous execution.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/perform(schedule:_:)"
+      },
+      "performAndWait(_:)": {
+        "doc": "Submits a closure to the context’s queue for synchronous execution.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/performandwait(_:)-6aaf1"
+      },
+      "persistentStoreCoordinator": {
+        "doc": "The persistent store coordinator of the context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/persistentstorecoordinator"
+      },
+      "propagatesDeletesAtEndOfEvent": {
+        "doc": "A Boolean value that indicates whether the context propagates deletes at the end of the event in which a change was made.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/propagatesdeletesatendofevent"
+      },
+      "queryGenerationToken": {
+        "doc": "Returns the token associated with the query generation currently in use by this context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/querygenerationtoken"
+      },
+      "registeredObjects": {
+        "doc": "The set of registered managed objects in the context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/registeredobjects"
+      },
+      "retainsRegisteredObjects": {
+        "doc": "A Boolean value that indicates whether the context keeps strong references to all registered managed objects.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/retainsregisteredobjects"
+      },
+      "shouldDeleteInaccessibleFaults": {
+        "doc": "A Boolean value that determines whether the context turns inaccessible faults into deleted objects.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/shoulddeleteinaccessiblefaults"
+      },
+      "stalenessInterval": {
+        "doc": "The maximum length of time that may have elapsed since the store previously fetched data before fulfilling a fault issues a new fetch.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/stalenessinterval"
+      },
+      "transactionAuthor": {
+        "doc": "The author for the context that is used as an identifier in persistent history transactions.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/transactionauthor"
+      },
+      "undoManager": {
+        "doc": "The object that provides undo support for the context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/undomanager"
+      },
+      "updatedObjects": {
+        "doc": "The set of objects registered with the context that have uncommitted changes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/updatedobjects"
+      },
+      "userInfo": {
+        "doc": "The user information for the context.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/userinfo"
+      },
+      "willSaveObjectsNotification": {
+        "doc": "A notification that posts before a context writes pending changes to disk.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/willsaveobjectsnotification"
+      }
+    },
+    "NSManagedObjectID": {
+      "entity": {
+        "doc": "The entity description associated with the object ID.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectid/entity"
+      },
+      "persistentStore": {
+        "doc": "The persistent store that fetched the object for the object ID.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectid/persistentstore"
+      },
+      "temporaryID": {
+        "doc": "A Boolean value that indicates whether the object ID is temporary.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectid/istemporaryid"
+      }
+    },
+    "NSManagedObjectModel": {
+      "configurations": {
+        "doc": "All the available configuration names of the model.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/configurations"
+      },
+      "entities": {
+        "doc": "The entities in the model.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/entities"
+      },
+      "entitiesByName": {
+        "doc": "The entities of the model, keyed by name.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/entitiesbyname"
+      },
+      "entityVersionHashesByName": {
+        "doc": "The dictionary of the model’s entity names and their corresponding version hashes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/entityversionhashesbyname"
+      },
+      "fetchRequestTemplatesByName": {
+        "doc": "A dictionary of the receiver’s fetch request templates, keyed by name.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/fetchrequesttemplatesbyname"
+      },
+      "localizationDictionary": {
+        "doc": "The localization dictionary of the model.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/localizationdictionary"
+      },
+      "versionChecksum": {
+        "doc": "The Base64-encoded 128-bit model version hash.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/versionchecksum"
+      },
+      "versionIdentifiers": {
+        "doc": "The set of developer-defined version identifiers for the object model.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodel/versionidentifiers"
+      }
+    },
+    "NSManagedObjectModelReference": {
+      "resolvedModel": {
+        "doc": "The resolved object model.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodelreference/resolvedmodel"
+      },
+      "versionChecksum": {
+        "doc": "The version checksum of the resolved model.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectmodelreference/versionchecksum"
+      }
+    },
+    "NSMappingModel": {
+      "entityMappings": {
+        "doc": "The entity mappings for the mapping model.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmappingmodel/entitymappings"
+      },
+      "entityMappingsByName": {
+        "doc": "The entity mappings for the mapping model, keyed by name.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmappingmodel/entitymappingsbyname"
+      }
+    },
+    "NSMergeConflict": {
+      "cachedSnapshot": {
+        "doc": "A dictionary containing the values of the source object held in the persistent store coordinator layer.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergeconflict/cachedsnapshot"
+      },
+      "newVersionNumber": {
+        "doc": "The new version number for the change.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergeconflict/newversionnumber"
+      },
+      "objectSnapshot": {
+        "doc": "A dictionary containing the values of the source object.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergeconflict/objectsnapshot"
+      },
+      "oldVersionNumber": {
+        "doc": "The old version number for the change.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergeconflict/oldversionnumber"
+      },
+      "persistedSnapshot": {
+        "doc": "A dictionary containing the values of the source object held in the persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergeconflict/persistedsnapshot"
+      },
+      "sourceObject": {
+        "doc": "The source object for the conflict.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergeconflict/sourceobject"
+      }
+    },
+    "NSMergePolicy": {
+      "errorMergePolicy": {
+        "doc": "The default merge policy for all managed object contexts.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergepolicy/error"
+      },
+      "mergeByPropertyObjectTrumpMergePolicy": {
+        "doc": "A property-based merge policy that applies in-memory changes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergepolicy/mergebypropertyobjecttrump"
+      },
+      "mergeByPropertyStoreTrumpMergePolicy": {
+        "doc": "A property-based merge policy that applies external changes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergepolicy/mergebypropertystoretrump"
+      },
+      "mergeType": {
+        "doc": "The merge type.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergepolicy/mergetype"
+      },
+      "overwriteMergePolicy": {
+        "doc": "A merge policy that overwrites the entire stored object.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergepolicy/overwrite"
+      },
+      "rollbackMergePolicy": {
+        "doc": "A merge policy that discards unsaved changes.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmergepolicy/rollback"
+      }
+    },
+    "NSMigrationManager": {
+      "currentEntityMapping": {
+        "doc": "The entity mapping currently being processed.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/currententitymapping"
+      },
+      "destinationContext": {
+        "doc": "The managed object context the migration manager uses for writing the destination persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/destinationcontext"
+      },
+      "destinationModel": {
+        "doc": "The destination model for the migration manager.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/destinationmodel"
+      },
+      "mappingModel": {
+        "doc": "The mapping model for the migration manager.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/mappingmodel"
+      },
+      "migrateStore(from:type:options:mapping:to:type:options:)": {
+        "doc": "Migrates the source store to the destination using the specified mapping model.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/migratestore(from:type:options:mapping:to:type:options:)"
+      },
+      "migrationProgress": {
+        "doc": "A number between 0 and 1 that indicates the proportion of completeness of the migration.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/migrationprogress"
+      },
+      "sourceContext": {
+        "doc": "The managed object context the migration manager uses for reading the source persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/sourcecontext"
+      },
+      "sourceModel": {
+        "doc": "The source model for the migration manager.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/sourcemodel"
+      },
+      "userInfo": {
+        "doc": "The user info for the migration manager.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/userinfo"
+      },
+      "usesStoreSpecificMigrationManager": {
+        "doc": "A Boolean value that indicates whether the migration manager tries to use a store specific migration manager to perform the migration.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationmanager/usesstorespecificmigrationmanager"
+      }
+    },
+    "NSMigrationStage": {
+      "label": {
+        "doc": "The textual description of the migration stage’s purpose.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmigrationstage/label"
+      }
+    },
+    "NSPersistentCloudKitContainer": {
+      "NSPersistentCloudKitContainer.EventChangedMessage": {
+        "doc": "Posted when a CloudKit event occurs on the CloudKit private serial queue.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/eventchangedmessage"
+      },
+      "NSPersistentCloudKitContainerEvent": {
+        "doc": "An object that represents activity in a persistent CloudKit container.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/event"
+      },
+      "NSPersistentCloudKitContainerEventChangedNotification": {
+        "doc": "A notification that contains details about an event in a persistent CloudKit container.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/eventchangednotification"
+      },
+      "NSPersistentCloudKitContainerEventType": {
+        "doc": "The type of event in a persistent CloudKit container, either setup, import, or export.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/eventtype"
+      },
+      "NSPersistentCloudKitContainerEventUserInfoKey": {
+        "doc": "The user info dictionary key for the persistent CloudKit container event.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer/eventnotificationuserinfokey"
+      }
+    },
+    "NSPersistentCloudKitContainerEventRequest": {
+      "resultType": {
+        "doc": "The type of result that the request returns.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventrequest/resulttype"
+      }
+    },
+    "NSPersistentCloudKitContainerEventResult": {
+      "NSPersistentCloudKitContainerEventResultType": {
+        "doc": "The types of results from a persistent CloudKit container event fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventresult/resulttype-swift.enum"
+      },
+      "result": {
+        "doc": "The result of the persistent CloudKit container event request, which the result type determines.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventresult/result"
+      },
+      "resultType": {
+        "doc": "The type of result that the CloudKit container event fetch request returns.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainereventresult/resulttype-swift.property"
+      }
+    },
+    "NSPersistentCloudKitContainerOptions": {
+      "containerIdentifier": {
+        "doc": "The identifier of the CloudKit container associated with a given store description.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontaineroptions/containeridentifier"
+      },
+      "databaseScope": {
+        "doc": "The database scope — public, private, or shared — to use for a specified store in a persistent CloudKit container.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontaineroptions/databasescope-2784h"
+      }
+    },
+    "NSPersistentContainer": {
+      "defaultDirectoryURL": {
+        "doc": "The location of the directory that contains the persistent stores.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcontainer/defaultdirectoryurl-swift.type.property"
+      },
+      "managedObjectModel": {
+        "doc": "The container’s managed object model.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcontainer/managedobjectmodel"
+      },
+      "name": {
+        "doc": "The container’s name.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcontainer/name"
+      },
+      "persistentStoreCoordinator": {
+        "doc": "The container’s persistent store coordinator.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcontainer/persistentstorecoordinator"
+      },
+      "persistentStoreDescriptions": {
+        "doc": "The descriptions of the container’s persistent stores.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcontainer/persistentstoredescriptions"
+      },
+      "viewContext": {
+        "doc": "The main queue’s managed object context.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcontainer/viewcontext"
+      }
+    },
+    "NSPersistentHistoryChange": {
+      "changeID": {
+        "doc": "The change’s numeric identifier.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychange/changeid"
+      },
+      "changeType": {
+        "doc": "The type of change to the managed object in the persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychange/changetype"
+      },
+      "changedObjectID": {
+        "doc": "The identifier of the managed object that changed. (swift) Declaration: @property(readonly, copy) NSManagedObjectID *changedObjectID; (objc) Availability: iOS: 11.0 — iPadOS: 11.0 — Mac Catalyst: 13.1 — macOS: 10.13 — tvOS: 11.0 — visionOS: 1.0 — watchOS: 4.0 (objc,swift) }",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychange/changedobjectid"
+      },
+      "entityDescription": {
+        "doc": "The entity description of the persistent history change entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychange/entitydescription"
+      },
+      "fetchRequest": {
+        "doc": "A fetch request that has the persistent history change as the entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychange/fetchrequest"
+      },
+      "tombstone": {
+        "doc": "A dictionary of attributes marked for preservation after deletion, and their values when deleted.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychange/tombstone"
+      },
+      "transaction": {
+        "doc": "The persistent history transaction containing this change.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychange/transaction"
+      },
+      "updatedProperties": {
+        "doc": "The set of properties that were updated on the managed object.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychange/updatedproperties"
+      }
+    },
+    "NSPersistentHistoryChangeRequest": {
+      "fetchRequest": {
+        "doc": "The specified fetch request, when retrieving history.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychangerequest/fetchrequest"
+      },
+      "resultType": {
+        "doc": "The type of result that this request returns.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychangerequest/resulttype"
+      },
+      "token": {
+        "doc": "The specified token, when retrieving history defined by a token.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorychangerequest/token"
+      }
+    },
+    "NSPersistentHistoryResult": {
+      "result": {
+        "doc": "The result of the history request determined by the persistent history result type.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistoryresult/result"
+      },
+      "resultType": {
+        "doc": "The type of result that the persistent history change request returns.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistoryresult/resulttype"
+      }
+    },
+    "NSPersistentHistoryTransaction": {
+      "author": {
+        "doc": "A granular description of the context that made the persistent history change, if available.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorytransaction/author"
+      },
+      "bundleID": {
+        "doc": "The originating bundle’s identifier.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorytransaction/bundleid"
+      },
+      "changes": {
+        "doc": "The array of persistent history changes.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorytransaction/changes"
+      },
+      "contextName": {
+        "doc": "The originating context’s name.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorytransaction/contextname"
+      },
+      "entityDescription": {
+        "doc": "The entity description of the persistent history transaction entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorytransaction/entitydescription"
+      },
+      "fetchRequest": {
+        "doc": "A fetch request that has the persistent history transaction as the entity.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorytransaction/fetchrequest"
+      },
+      "processID": {
+        "doc": "The originating process’s identifier.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorytransaction/processid"
+      },
+      "storeID": {
+        "doc": "The originating store’s identifier.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorytransaction/storeid"
+      },
+      "timestamp": {
+        "doc": "The date of the persistent history change.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorytransaction/timestamp"
+      },
+      "token": {
+        "doc": "The token that represents this transaction in the persistent history.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorytransaction/token"
+      },
+      "transactionNumber": {
+        "doc": "The transaction’s numeric identifier.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistenthistorytransaction/transactionnumber"
+      }
+    },
+    "NSPersistentStore": {
+      "NSPersistentStore.StoreType": {
+        "doc": "The types of persistent stores that Core Data supports.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/storetype"
+      },
+      "URL": {
+        "doc": "The URL for the persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/url"
+      },
+      "configurationName": {
+        "doc": "The name of the managed object model configuration that creates the persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/configurationname"
+      },
+      "coreSpotlightExporter": {
+        "doc": "The spotlight exporter associated with this persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/corespotlightexporter"
+      },
+      "identifier": {
+        "doc": "The unique identifier for the persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/identifier"
+      },
+      "metadata": {
+        "doc": "The metadata for the persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/metadata"
+      },
+      "options": {
+        "doc": "The options that Core Data uses to create the store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/options"
+      },
+      "persistentStoreCoordinator": {
+        "doc": "The persistent store coordinator that loads the persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/persistentstorecoordinator"
+      },
+      "readOnly": {
+        "doc": "A Boolean value that indicates whether the persistent store is read-only.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/isreadonly"
+      },
+      "type": {
+        "doc": "The type string of the persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstore/type"
+      }
+    },
+    "NSPersistentStoreAsynchronousResult": {
+      "managedObjectContext": {
+        "doc": "The managed object context for the result.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoreasynchronousresult/managedobjectcontext"
+      },
+      "operationError": {
+        "doc": "An error that contains details if the asynchronous fetch request fails.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoreasynchronousresult/operationerror"
+      },
+      "progress": {
+        "doc": "An object that reports progress for the asynchronous fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoreasynchronousresult/progress"
+      }
+    },
+    "NSPersistentStoreCoordinator": {
+      "NSPersistentStoreCoordinator.RemoteChangeMessage": {
+        "doc": "Posted when a store receives a remote change notification from another process.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/remotechangemessage"
+      },
+      "NSPersistentStoreCoordinator.StoresDidChangeAsyncMessage": {
+        "doc": "Posted when stores are added to or removed from the persistent store coordinator on a background queue.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/storesdidchangeasyncmessage"
+      },
+      "NSPersistentStoreCoordinator.StoresDidChangeMessage": {
+        "doc": "Posted when stores are added to or removed from the persistent store coordinator on the main queue.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/storesdidchangemessage"
+      },
+      "addPersistentStore(type:configuration:at:options:)": {
+        "doc": "Adds a specific type of persistent store at the provided location.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/addpersistentstore(type:configuration:at:options:)"
+      },
+      "destroyPersistentStore(at:type:options:)": {
+        "doc": "Deletes a specific type of persistent store at the provided location.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/destroypersistentstore(at:type:options:)"
+      },
+      "managedObjectModel": {
+        "doc": "The coordinator’s managed object model.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/managedobjectmodel"
+      },
+      "metadataForPersistentStore(type:at:options:)": {
+        "doc": "Returns the metadata of a specific type of persistent store at the provided location.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/metadataforpersistentstore(type:at:options:)"
+      },
+      "migratePersistentStore(_:to:options:type:)": {
+        "doc": "Changes the location and, if necessary, the store type of the specified persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/migratepersistentstore(_:to:options:type:)"
+      },
+      "name": {
+        "doc": "The coordinator’s name.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/name"
+      },
+      "perform(_:)": {
+        "doc": "Executes the provided closure asynchronously on the coordinator’s queue and awaits the result.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/perform(_:)-74udx"
+      },
+      "performAndWait(_:)": {
+        "doc": "Executes the provided closure on the coordinator’s queue and waits for it to finish.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/performandwait(_:)-15ude"
+      },
+      "persistentStores": {
+        "doc": "The coordinator’s persistent stores.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/persistentstores"
+      },
+      "registerStoreClass(_:type:)": {
+        "doc": "Registers a persistent store subclass using the specified store type.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/registerstoreclass(_:type:)"
+      },
+      "registeredStoreTypes": {
+        "doc": "The coordinator’s registered store types.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/registeredstoretypes"
+      },
+      "replacePersistentStore(at:destinationOptions:withPersistentStoreFrom:sourceOptions:type:)": {
+        "doc": "Replaces one persistent store with another.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/replacepersistentstore(at:destinationoptions:withpersistentstorefrom:sourceoptions:type:)"
+      },
+      "setMetadata(_:type:at:options:)": {
+        "doc": "Updates the metadata of a specific type of persistent store at the provided location.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorecoordinator/setmetadata(_:type:at:options:)"
+      }
+    },
+    "NSPersistentStoreDescription": {
+      "URL": {
+        "doc": "The URL that the store will use for its location.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription/url"
+      },
+      "cloudKitContainerOptions": {
+        "doc": "Options that customize how this store description aligns with a CloudKit database.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription/cloudkitcontaineroptions"
+      },
+      "configuration": {
+        "doc": "The name of the configuration used by this store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription/configuration"
+      },
+      "options": {
+        "doc": "A dictionary representation of the options set on the associated persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription/options"
+      },
+      "readOnly": {
+        "doc": "A flag that indicates whether this store will be read-only.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription/isreadonly"
+      },
+      "shouldAddStoreAsynchronously": {
+        "doc": "A flag that determines whether the store is added asynchronously.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription/shouldaddstoreasynchronously"
+      },
+      "shouldInferMappingModelAutomatically": {
+        "doc": "A flag indicating whether a mapping model should be created automatically.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription/shouldinfermappingmodelautomatically"
+      },
+      "shouldMigrateStoreAutomatically": {
+        "doc": "A flag indicating whether the associated persistent store should be migrated automatically.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription/shouldmigratestoreautomatically"
+      },
+      "sqlitePragmas": {
+        "doc": "The SQLite pragmas set for the associated persistent store. (read-only)",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription/sqlitepragmas"
+      },
+      "timeout": {
+        "doc": "The connection timeout for the associated store.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription/timeout"
+      },
+      "type": {
+        "doc": "The type of store this description represents.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstoredescription/type"
+      }
+    },
+    "NSPersistentStoreRequest": {
+      "affectedStores": {
+        "doc": "The stores the request should be sent to.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorerequest/affectedstores"
+      },
+      "requestType": {
+        "doc": "The type of the fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentstorerequest/requesttype"
+      }
+    },
+    "NSPropertyDescription": {
+      "entity": {
+        "doc": "The entity description of the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertydescription/entity"
+      },
+      "indexed": {
+        "doc": "A Boolean value that indicates whether the receiver should be indexed for searching.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertydescription/isindexed"
+      },
+      "indexedBySpotlight": {
+        "doc": "A Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertydescription/isindexedbyspotlight"
+      },
+      "name": {
+        "doc": "The name of the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertydescription/name"
+      },
+      "optional": {
+        "doc": "A Boolean value that indicates whether the receiver is optional.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertydescription/isoptional"
+      },
+      "renamingIdentifier": {
+        "doc": "The renaming identifier for the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertydescription/renamingidentifier"
+      },
+      "storedInExternalRecord": {
+        "doc": "A Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertydescription/isstoredinexternalrecord"
+      },
+      "transient": {
+        "doc": "A Boolean value that indicates whether the receiver is transient.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertydescription/istransient"
+      },
+      "userInfo": {
+        "doc": "The user info dictionary of the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertydescription/userinfo"
+      },
+      "validationPredicates": {
+        "doc": "The validation predicates of the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertydescription/validationpredicates"
+      },
+      "validationWarnings": {
+        "doc": "The error strings associated with the receiver’s validation predicates.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertydescription/validationwarnings"
+      },
+      "versionHash": {
+        "doc": "The version hash for the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertydescription/versionhash"
+      },
+      "versionHashModifier": {
+        "doc": "The version hash modifier for the receiver.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertydescription/versionhashmodifier"
+      }
+    },
+    "NSPropertyMapping": {
+      "name": {
+        "doc": "The name of the property in the destination entity for the property mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertymapping/name"
+      },
+      "userInfo": {
+        "doc": "The user info for the property mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertymapping/userinfo"
+      },
+      "valueExpression": {
+        "doc": "The value expression for the property mapping.",
+        "url": "https://developer.apple.com/documentation/coredata/nspropertymapping/valueexpression"
+      }
+    },
+    "NSQueryGenerationToken": {
+      "currentQueryGenerationToken": {
+        "doc": "A token that informs a context to use the current generation.",
+        "url": "https://developer.apple.com/documentation/coredata/nsquerygenerationtoken/current"
+      }
+    },
+    "NSRelationshipDescription": {
+      "deleteRule": {
+        "doc": "The rule to apply when you delete the relationship’s owning managed object.",
+        "url": "https://developer.apple.com/documentation/coredata/nsrelationshipdescription/deleterule"
+      },
+      "destinationEntity": {
+        "doc": "The type of object the relationship contains.",
+        "url": "https://developer.apple.com/documentation/coredata/nsrelationshipdescription/destinationentity"
+      },
+      "inverseRelationship": {
+        "doc": "The relationship that represents the inverse of the current relationship.",
+        "url": "https://developer.apple.com/documentation/coredata/nsrelationshipdescription/inverserelationship"
+      },
+      "maxCount": {
+        "doc": "The maximum number of managed objects the relationship can reference.",
+        "url": "https://developer.apple.com/documentation/coredata/nsrelationshipdescription/maxcount"
+      },
+      "minCount": {
+        "doc": "The minimum number of managed objects the relationship can reference.",
+        "url": "https://developer.apple.com/documentation/coredata/nsrelationshipdescription/mincount"
+      },
+      "ordered": {
+        "doc": "A Boolean value that determines whether the relationship preserves the order of the referenced managed objects.",
+        "url": "https://developer.apple.com/documentation/coredata/nsrelationshipdescription/isordered"
+      },
+      "toMany": {
+        "doc": "Returns a Boolean value that indicates whether the relationship can contain many managed objects.",
+        "url": "https://developer.apple.com/documentation/coredata/nsrelationshipdescription/istomany"
+      },
+      "versionHash": {
+        "doc": "The relationship’s unique identity.",
+        "url": "https://developer.apple.com/documentation/coredata/nsrelationshipdescription/versionhash"
+      }
+    },
+    "NSSaveChangesRequest": {
+      "deletedObjects": {
+        "doc": "The objects that were deleted in the calling context.",
+        "url": "https://developer.apple.com/documentation/coredata/nssavechangesrequest/deletedobjects"
+      },
+      "insertedObjects": {
+        "doc": "The objects that were inserted into the calling context.",
+        "url": "https://developer.apple.com/documentation/coredata/nssavechangesrequest/insertedobjects"
+      },
+      "lockedObjects": {
+        "doc": "The objects that were flagged for optimistic locking on the calling context.",
+        "url": "https://developer.apple.com/documentation/coredata/nssavechangesrequest/lockedobjects"
+      },
+      "updatedObjects": {
+        "doc": "The objects that were modified in the calling context.",
+        "url": "https://developer.apple.com/documentation/coredata/nssavechangesrequest/updatedobjects"
+      }
+    },
+    "NSStagedMigrationManager": {
+      "container": {
+        "doc": "The container that provides access to the migrating persistent store.",
+        "url": "https://developer.apple.com/documentation/coredata/nsstagedmigrationmanager/container"
+      },
+      "init(_:)": {
+        "doc": "Creates a migration manager with the specified stages.",
+        "url": "https://developer.apple.com/documentation/coredata/nsstagedmigrationmanager/init(_:)"
+      },
+      "stages": {
+        "doc": "The migration stages.",
+        "url": "https://developer.apple.com/documentation/coredata/nsstagedmigrationmanager/stages"
+      }
+    }
+  }
+}

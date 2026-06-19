@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sample that stores a clinical record.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkclinicalrecord
 type HKClinicalRecord struct {
 	HKSample

@@ -78,12 +78,15 @@ func (o *MTRThermostatClusterSetWeeklyScheduleParams) SetModeForSequence(modeFor
 }
 
 func (o *MTRThermostatClusterSetWeeklyScheduleParams) Transitions() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _mTRThermostatClusterSetWeeklyScheduleParamsSelTransitions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterSetWeeklyScheduleParamsSelTransitions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *MTRThermostatClusterSetWeeklyScheduleParams) SetTransitions(transitions *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_mTRThermostatClusterSetWeeklyScheduleParamsSelSetTransitions, transitions)
+	o.Ptr().Send(_mTRThermostatClusterSetWeeklyScheduleParamsSelSetTransitions, transitions.Ptr())
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.

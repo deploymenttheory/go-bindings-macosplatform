@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that provides locale-correct formatting of a list of items using the appropriate separator and conjunction.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nslistformatter
 type NSListFormatter struct {
 	NSFormatter
@@ -43,7 +45,7 @@ func NSListFormatterLocalizedStringByJoiningStrings(strings_ *NSArray[*NSString]
 }
 
 func (o *NSListFormatter) StringFromItems(items *NSArray[objc.ID]) *NSString {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSListFormatterSelStringFromItems, items)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSListFormatterSelStringFromItems, items.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

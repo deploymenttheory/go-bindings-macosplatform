@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that stores data required to execute batch normalization.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbatchnormalizationstate
 type MPSCNNBatchNormalizationState struct {
 	mpsneuralnetwork.MPSNNGradientState

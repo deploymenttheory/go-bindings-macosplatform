@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A PDFAnnotationButtonWidget object provides user interactivity on a page of a PDF document. There are three types of buttons available: push button, radio button, and checkbox.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget
 type PDFAnnotationButtonWidget struct {
 	PDFAnnotation
@@ -35,24 +37,29 @@ func PDFAnnotationButtonWidgetFromID(id objc.ID) *PDFAnnotationButtonWidget {
 	return o
 }
 
+// Returns the type of the control.
 func (o *PDFAnnotationButtonWidget) ControlType() PDFWidgetControlType {
 	_ret := objc.Send[PDFWidgetControlType](o.Ptr(), _pDFAnnotationButtonWidgetSelControlType)
 	return _ret
 }
 
+// Sets the type of the control.
 func (o *PDFAnnotationButtonWidget) SetControlType(type_ PDFWidgetControlType) {
 	o.Ptr().Send(_pDFAnnotationButtonWidgetSelSetControlType, type_)
 }
 
+// Returns the state of the control.
 func (o *PDFAnnotationButtonWidget) State() int {
 	_ret := objc.Send[int](o.Ptr(), _pDFAnnotationButtonWidgetSelState)
 	return _ret
 }
 
+// Sets the state of the control.
 func (o *PDFAnnotationButtonWidget) SetState(value int) {
 	o.Ptr().Send(_pDFAnnotationButtonWidgetSelSetState, value)
 }
 
+// Returns the string associated with the on state of a radio button or checkbox control.
 func (o *PDFAnnotationButtonWidget) OnStateValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationButtonWidgetSelOnStateValue)
 	if _ret != 0 {
@@ -61,6 +68,7 @@ func (o *PDFAnnotationButtonWidget) OnStateValue() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Sets the string that is associated with the on state of a radio button or checkbox control.
 func (o *PDFAnnotationButtonWidget) SetOnStateValue(name *foundation.NSString) {
 	o.Ptr().Send(_pDFAnnotationButtonWidgetSelSetOnStateValue, name.Ptr())
 }

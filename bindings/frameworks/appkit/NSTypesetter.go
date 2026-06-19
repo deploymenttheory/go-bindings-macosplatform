@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that performs various type layout tasks.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstypesetter
 type NSTypesetter struct {
 	foundation.NSObject
@@ -91,6 +93,7 @@ func NSTypesetterFromID(id objc.ID) *NSTypesetter {
 	return o
 }
 
+// Returns a screen font suitable for use in place of a given font.
 func (o *NSTypesetter) SubstituteFontForFont(originalFont *NSFont) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTypesetterSelSubstituteFontForFont, originalFont.Ptr())
 	if _ret != 0 {
@@ -99,6 +102,7 @@ func (o *NSTypesetter) SubstituteFontForFont(originalFont *NSFont) *NSFont {
 	return NSFontFromID(_ret)
 }
 
+// Returns the text tab next closest to a given glyph location within the given parameters.
 func (o *NSTypesetter) TextTabForGlyphLocationWritingDirectionMaxLocation(glyphLocation float64, direction NSWritingDirection, maxLocation float64) *NSTextTab {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTypesetterSelTextTabForGlyphLocationWritingDirectionMaxLocation, glyphLocation, direction, maxLocation)
 	if _ret != 0 {
@@ -107,73 +111,89 @@ func (o *NSTypesetter) TextTabForGlyphLocationWritingDirectionMaxLocation(glyphL
 	return NSTextTabFromID(_ret)
 }
 
+// Sets the current glyph range being processed.
 func (o *NSTypesetter) SetParagraphGlyphRangeSeparatorGlyphRange(paragraphRange foundation.NSRange, paragraphSeparatorRange foundation.NSRange) {
 	o.Ptr().Send(_nSTypesetterSelSetParagraphGlyphRangeSeparatorGlyphRange, paragraphRange, paragraphSeparatorRange)
 }
 
+// Lays out glyphs in the current glyph range until the next paragraph separator is reached.
 func (o *NSTypesetter) LayoutParagraphAtPoint(lineFragmentOrigin *corefoundation.CGPoint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSTypesetterSelLayoutParagraphAtPoint, lineFragmentOrigin)
 	return _ret
 }
 
+// Sets up layout parameters at the beginning of a paragraph.
 func (o *NSTypesetter) BeginParagraph() {
 	o.Ptr().Send(_nSTypesetterSelBeginParagraph)
 }
 
+// Sets up layout parameters at the end of a paragraph.
 func (o *NSTypesetter) EndParagraph() {
 	o.Ptr().Send(_nSTypesetterSelEndParagraph)
 }
 
+// Sets up layout parameters at the beginning of a line during typesetting.
 func (o *NSTypesetter) BeginLineWithGlyphAtIndex(glyphIndex uint) {
 	o.Ptr().Send(_nSTypesetterSelBeginLineWithGlyphAtIndex, glyphIndex)
 }
 
+// Sets up layout parameters at the end of a line during typesetting.
 func (o *NSTypesetter) EndLineWithGlyphRange(lineGlyphRange foundation.NSRange) {
 	o.Ptr().Send(_nSTypesetterSelEndLineWithGlyphRange, lineGlyphRange)
 }
 
+// Returns the line spacing in effect following the specified glyph.
 func (o *NSTypesetter) LineSpacingAfterGlyphAtIndexWithProposedLineFragmentRect(glyphIndex uint, rect corefoundation.CGRect) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTypesetterSelLineSpacingAfterGlyphAtIndexWithProposedLineFragmentRect, glyphIndex, rect)
 	return _ret
 }
 
+// Returns the number of points of space—added before a paragraph—that is in effect before the specified glyph.
 func (o *NSTypesetter) ParagraphSpacingBeforeGlyphAtIndexWithProposedLineFragmentRect(glyphIndex uint, rect corefoundation.CGRect) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTypesetterSelParagraphSpacingBeforeGlyphAtIndexWithProposedLineFragmentRect, glyphIndex, rect)
 	return _ret
 }
 
+// Returns the paragraph spacing that is in effect after the specified glyph.
 func (o *NSTypesetter) ParagraphSpacingAfterGlyphAtIndexWithProposedLineFragmentRect(glyphIndex uint, rect corefoundation.CGRect) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTypesetterSelParagraphSpacingAfterGlyphAtIndexWithProposedLineFragmentRect, glyphIndex, rect)
 	return _ret
 }
 
+// Calculates the line fragment rectangle and line fragment used rectangle for blank lines.
 func (o *NSTypesetter) GetLineFragmentRectUsedRectForParagraphSeparatorGlyphRangeAtProposedOrigin(lineFragmentRect *corefoundation.CGRect, lineFragmentUsedRect *corefoundation.CGRect, paragraphSeparatorGlyphRange foundation.NSRange, lineOrigin corefoundation.CGPoint) {
 	o.Ptr().Send(_nSTypesetterSelGetLineFragmentRectUsedRectForParagraphSeparatorGlyphRangeAtProposedOrigin, lineFragmentRect, lineFragmentUsedRect, paragraphSeparatorGlyphRange, lineOrigin)
 }
 
+// Sets whether to force the layout manager to invalidate the specified portion of the glyph cache when invalidating layout.
 func (o *NSTypesetter) SetHardInvalidationForGlyphRange(flag bool, glyphRange foundation.NSRange) {
 	o.Ptr().Send(_nSTypesetterSelSetHardInvalidationForGlyphRange, flag, glyphRange)
 }
 
+// Lays out glyphs in the specified layout manager starting at a specified glyph.
 func (o *NSTypesetter) LayoutGlyphsInLayoutManagerStartingAtGlyphIndexMaxNumberOfLineFragmentsNextGlyphIndex(layoutManager *NSLayoutManager, startGlyphIndex uint, maxNumLines uint, nextGlyph *uint) {
 	o.Ptr().Send(_nSTypesetterSelLayoutGlyphsInLayoutManagerStartingAtGlyphIndexMaxNumberOfLineFragmentsNextGlyphIndex, layoutManager.Ptr(), startGlyphIndex, maxNumLines, nextGlyph)
 }
 
+// Lays out characters in the given character range for the specified layout manager.
 func (o *NSTypesetter) LayoutCharactersInRangeForLayoutManagerMaximumNumberOfLineFragments(characterRange foundation.NSRange, layoutManager *NSLayoutManager, maxNumLines uint) foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTypesetterSelLayoutCharactersInRangeForLayoutManagerMaximumNumberOfLineFragments, characterRange, layoutManager.Ptr(), maxNumLines)
 	return _ret
 }
 
+// Returns the interglyph spacing in the specified range when sent to a printer.
 func NSTypesetterPrintingAdjustmentInLayoutManagerForNominallySpacedGlyphRangePackedGlyphsCount(layoutMgr *NSLayoutManager, nominallySpacedGlyphsRange foundation.NSRange, packedGlyphs *uint8, packedGlyphsCount uint) corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](objc.ID(_clsNSTypesetter), _nSTypesetterSelPrintingAdjustmentInLayoutManagerForNominallySpacedGlyphRangePackedGlyphsCount, layoutMgr.Ptr(), nominallySpacedGlyphsRange, packedGlyphs, packedGlyphsCount)
 	return _ret
 }
 
+// Returns the distance from the bottom of the line fragment rectangle in which the glyph resides to the glyph baseline.
 func (o *NSTypesetter) BaselineOffsetInLayoutManagerGlyphIndex(layoutMgr *NSLayoutManager, glyphIndex uint) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSTypesetterSelBaselineOffsetInLayoutManagerGlyphIndex, layoutMgr.Ptr(), glyphIndex)
 	return _ret
 }
 
+// Returns a shared instance of a reentrant typesetter that implements typesetting with the specified behavior.
 func NSTypesetterSharedSystemTypesetterForBehavior(behavior NSTypesetterBehavior) objc.ID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTypesetter), _nSTypesetterSelSharedSystemTypesetterForBehavior, behavior)
 	return _ret
@@ -257,8 +277,11 @@ func (o *NSTypesetter) ParagraphSeparatorCharacterRange() foundation.NSRange {
 }
 
 func (o *NSTypesetter) AttributesForExtraLineFragment() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSTypesetterSelAttributesForExtraLineFragment)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTypesetterSelAttributesForExtraLineFragment)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSTypesetter) LayoutManager() *NSLayoutManager {
@@ -306,94 +329,114 @@ func NSTypesetterDefaultTypesetterBehavior() NSTypesetterBehavior {
 	return _ret
 }
 
+// Called by the typesetter just prior to storing the actual line fragment rectangle location in the layout manager.
 func (o *NSTypesetter) WillSetLineFragmentRectForGlyphRangeUsedRectBaselineOffset(lineRect *corefoundation.CGRect, glyphRange foundation.NSRange, usedRect *corefoundation.CGRect, baselineOffset *float64) {
 	o.Ptr().Send(_nSTypesetterSelWillSetLineFragmentRectForGlyphRangeUsedRectBaselineOffset, lineRect, glyphRange, usedRect, baselineOffset)
 }
 
+// Returns whether the line being laid out should be broken by a word break at the specified character.
 func (o *NSTypesetter) ShouldBreakLineByWordBeforeCharacterAtIndex(charIndex uint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTypesetterSelShouldBreakLineByWordBeforeCharacterAtIndex, charIndex)
 	return _ret
 }
 
+// Returns whether the line being laid out should be broken by hyphenating at the specified character.
 func (o *NSTypesetter) ShouldBreakLineByHyphenatingBeforeCharacterAtIndex(charIndex uint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTypesetterSelShouldBreakLineByHyphenatingBeforeCharacterAtIndex, charIndex)
 	return _ret
 }
 
+// Returns the hyphenation factor in effect at a specified location.
 func (o *NSTypesetter) HyphenationFactorForGlyphAtIndex(glyphIndex uint) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _nSTypesetterSelHyphenationFactorForGlyphAtIndex, glyphIndex)
 	return _ret
 }
 
+// Returns the hyphen character to be inserted after the specified glyph.
 func (o *NSTypesetter) HyphenCharacterForGlyphAtIndex(glyphIndex uint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSTypesetterSelHyphenCharacterForGlyphAtIndex, glyphIndex)
 	return _ret
 }
 
+// Returns the bounding rectangle for the specified control glyph with the specified parameters.
 func (o *NSTypesetter) BoundingBoxForControlGlyphAtIndexForTextContainerProposedLineFragmentGlyphPositionCharacterIndex(glyphIndex uint, textContainer *NSTextContainer, proposedRect corefoundation.CGRect, glyphPosition corefoundation.CGPoint, charIndex uint) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSTypesetterSelBoundingBoxForControlGlyphAtIndexForTextContainerProposedLineFragmentGlyphPositionCharacterIndex, glyphIndex, textContainer.Ptr(), proposedRect, glyphPosition, charIndex)
 	return _ret
 }
 
+// Returns the range for the characters in the receiver’s text store that are mapped to the specified glyphs.
 func (o *NSTypesetter) CharacterRangeForGlyphRangeActualGlyphRange(glyphRange foundation.NSRange, actualGlyphRange *foundation.NSRange) foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTypesetterSelCharacterRangeForGlyphRangeActualGlyphRange, glyphRange, actualGlyphRange)
 	return _ret
 }
 
+// Returns the range for the glyphs mapped to the characters of the text store in the specified range.
 func (o *NSTypesetter) GlyphRangeForCharacterRangeActualCharacterRange(charRange foundation.NSRange, actualCharRange *foundation.NSRange) foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _nSTypesetterSelGlyphRangeForCharacterRangeActualCharacterRange, charRange, actualCharRange)
 	return _ret
 }
 
+// Calculates line fragment rectangle, line fragment used rectangle, and remaining rectangle for a line fragment.
 func (o *NSTypesetter) GetLineFragmentRectUsedRectRemainingRectForStartingGlyphAtIndexProposedRectLineSpacingParagraphSpacingBeforeParagraphSpacingAfter(lineFragmentRect *corefoundation.CGRect, lineFragmentUsedRect *corefoundation.CGRect, remainingRect *corefoundation.CGRect, startingGlyphIndex uint, proposedRect corefoundation.CGRect, lineSpacing float64, paragraphSpacingBefore float64, paragraphSpacingAfter float64) {
 	o.Ptr().Send(_nSTypesetterSelGetLineFragmentRectUsedRectRemainingRectForStartingGlyphAtIndexProposedRectLineSpacingParagraphSpacingBeforeParagraphSpacingAfter, lineFragmentRect, lineFragmentUsedRect, remainingRect, startingGlyphIndex, proposedRect, lineSpacing, paragraphSpacingBefore, paragraphSpacingAfter)
 }
 
+// Sets the line fragment rectangle where the specified glyphs are laid out.
 func (o *NSTypesetter) SetLineFragmentRectForGlyphRangeUsedRectBaselineOffset(fragmentRect corefoundation.CGRect, glyphRange foundation.NSRange, usedRect corefoundation.CGRect, baselineOffset float64) {
 	o.Ptr().Send(_nSTypesetterSelSetLineFragmentRectForGlyphRangeUsedRectBaselineOffset, fragmentRect, glyphRange, usedRect, baselineOffset)
 }
 
+// Sets whether the specified glyphs are not shown.
 func (o *NSTypesetter) SetNotShownAttributeForGlyphRange(flag bool, glyphRange foundation.NSRange) {
 	o.Ptr().Send(_nSTypesetterSelSetNotShownAttributeForGlyphRange, flag, glyphRange)
 }
 
+// Sets whether the specified glyphs exceed the bounds of the line fragment in which they are laid out.
 func (o *NSTypesetter) SetDrawsOutsideLineFragmentForGlyphRange(flag bool, glyphRange foundation.NSRange) {
 	o.Ptr().Send(_nSTypesetterSelSetDrawsOutsideLineFragmentForGlyphRange, flag, glyphRange)
 }
 
+// Sets the location where the specified glyphs are laid out.
 func (o *NSTypesetter) SetLocationWithAdvancementsForStartOfGlyphRange(location corefoundation.CGPoint, advancements *float64, glyphRange foundation.NSRange) {
 	o.Ptr().Send(_nSTypesetterSelSetLocationWithAdvancementsForStartOfGlyphRange, location, advancements, glyphRange)
 }
 
+// Sets the size the specified glyphs (assumed to be attachments) will be asked to draw themselves at.
 func (o *NSTypesetter) SetAttachmentSizeForGlyphRange(attachmentSize corefoundation.CGSize, glyphRange foundation.NSRange) {
 	o.Ptr().Send(_nSTypesetterSelSetAttachmentSizeForGlyphRange, attachmentSize, glyphRange)
 }
 
+// Sets the direction of the specified glyphs for bidirectional text.
 func (o *NSTypesetter) SetBidiLevelsForGlyphRange(levels *uint8, glyphRange foundation.NSRange) {
 	o.Ptr().Send(_nSTypesetterSelSetBidiLevelsForGlyphRange, levels, glyphRange)
 }
 
+// Returns the action associated with a control character.
 func (o *NSTypesetter) ActionForControlCharacterAtIndex(charIndex uint) NSTypesetterControlCharacterAction {
 	_ret := objc.Send[NSTypesetterControlCharacterAction](o.Ptr(), _nSTypesetterSelActionForControlCharacterAtIndex, charIndex)
 	return _ret
 }
 
+// Extracts the information needed to lay out the provided glyphs from the provided range.
 // Deprecated: since macOS 10.13.
 func (o *NSTypesetter) GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels(glyphsRange foundation.NSRange, glyphBuffer *uint, charIndexBuffer *uint, inscribeBuffer *NSGlyphInscription, elasticBuffer *bool, bidiLevelBuffer *uint8) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSTypesetterSelGetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels, glyphsRange, glyphBuffer, charIndexBuffer, inscribeBuffer, elasticBuffer, bidiLevelBuffer)
 	return _ret
 }
 
+// Replaces the specified glyphs with specified replacement glyphs.
 // Deprecated: since macOS 10.13.
 func (o *NSTypesetter) SubstituteGlyphsInRangeWithGlyphs(glyphRange foundation.NSRange, glyphs *uint) {
 	o.Ptr().Send(_nSTypesetterSelSubstituteGlyphsInRangeWithGlyphs, glyphRange, glyphs)
 }
 
+// Enables the typesetter to insert a new glyph into the stream.
 // Deprecated: since macOS 10.13.
 func (o *NSTypesetter) InsertGlyphAtGlyphIndexCharacterIndex(glyph uint, glyphIndex uint, characterIndex uint) {
 	o.Ptr().Send(_nSTypesetterSelInsertGlyphAtGlyphIndexCharacterIndex, glyph, glyphIndex, characterIndex)
 }
 
+// Deletes the specified glyphs from the glyph cache maintained by the layout manager.
 // Deprecated: since macOS 10.13.
 func (o *NSTypesetter) DeleteGlyphsInRange(glyphRange foundation.NSRange) {
 	o.Ptr().Send(_nSTypesetterSelDeleteGlyphsInRange, glyphRange)

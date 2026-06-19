@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a MIDI pitch bend message.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avmidipitchbendevent
 type AVMIDIPitchBendEvent struct {
 	AVMIDIChannelEvent
@@ -31,7 +33,7 @@ func AVMIDIPitchBendEventFromID(id objc.ID) *AVMIDIPitchBendEvent {
 	return o
 }
 
-// @method initWithChannel:value: @abstract Initialize the event with a channel and a pitch bend value. @param channel The MIDI channel for the message.  Range: 0-15. @param value The pitch bend value.  Range: 0-16383 (midpoint 8192).
+// Creates an event with a channel and pitch bend value.
 func (o *AVMIDIPitchBendEvent) InitWithChannelValue(channel uint, value uint) *AVMIDIPitchBendEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIPitchBendEventSelInitWithChannelValue, channel, value)
 	if _ret != 0 {

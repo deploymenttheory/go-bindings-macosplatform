@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A self-contained scripting statement.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsscriptcommand
 type NSScriptCommand struct {
 	NSObject
@@ -54,6 +56,7 @@ func NSScriptCommandFromID(id objc.ID) *NSScriptCommand {
 	return o
 }
 
+// Returns an a script command object initialized from the passed command description.
 func (o *NSScriptCommand) InitWithCommandDescription(commandDef *NSScriptCommandDescription) *NSScriptCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelInitWithCommandDescription, commandDef.Ptr())
 	if _ret != 0 {
@@ -70,16 +73,19 @@ func (o *NSScriptCommand) InitWithCoder(inCoder *NSCoder) *NSScriptCommand {
 	return NSScriptCommandFromID(_ret)
 }
 
+// Overridden by subclasses to provide a default implementation for the command represented by the receiver.
 func (o *NSScriptCommand) PerformDefaultImplementation() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelPerformDefaultImplementation)
 	return _ret
 }
 
+// Executes the command if it is valid and returns the result, if any.
 func (o *NSScriptCommand) ExecuteCommand() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelExecuteCommand)
 	return _ret
 }
 
+// If a command is being executed in the current thread by Cocoa scripting’s built-in Apple event handling, return the command.
 func NSScriptCommandCurrentCommand() *NSScriptCommand {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScriptCommand), _nSScriptCommandSelCurrentCommand)
 	if _ret != 0 {
@@ -88,10 +94,12 @@ func NSScriptCommandCurrentCommand() *NSScriptCommand {
 	return NSScriptCommandFromID(_ret)
 }
 
+// Suspends the execution of the receiver.
 func (o *NSScriptCommand) SuspendExecution() {
 	o.Ptr().Send(_nSScriptCommandSelSuspendExecution)
 }
 
+// If a successful, unmatched, invocation of suspendExecution has been made, resume the execution of the command.
 func (o *NSScriptCommand) ResumeExecutionWithResult(result objc.ID) {
 	o.Ptr().Send(_nSScriptCommandSelResumeExecutionWithResult, result)
 }
@@ -131,17 +139,23 @@ func (o *NSScriptCommand) EvaluatedReceivers() objc.ID {
 }
 
 func (o *NSScriptCommand) Arguments() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSScriptCommandSelArguments)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelArguments)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSScriptCommand) SetArguments(arguments *NSDictionary[*NSString, objc.ID]) {
-	o.Ptr().Send(_nSScriptCommandSelSetArguments, arguments)
+	o.Ptr().Send(_nSScriptCommandSelSetArguments, arguments.Ptr())
 }
 
 func (o *NSScriptCommand) EvaluatedArguments() *NSDictionary[*NSString, objc.ID] {
-	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSScriptCommandSelEvaluatedArguments)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandSelEvaluatedArguments)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NSDictionaryFromID[*NSString, objc.ID](_ret)
 }
 
 func (o *NSScriptCommand) IsWellFormed() bool {

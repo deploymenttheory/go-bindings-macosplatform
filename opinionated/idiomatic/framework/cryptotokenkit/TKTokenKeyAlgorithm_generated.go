@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// Cryptographic algorithms used by token keys.
+//
 // TokenKeyAlgorithm wraps [raw.TKTokenKeyAlgorithm] with a fluent Go API.
 type TokenKeyAlgorithm struct {
 	inner *raw.TKTokenKeyAlgorithm
@@ -36,14 +38,14 @@ func NewTokenKeyAlgorithm() *TokenKeyAlgorithm {
 	return &TokenKeyAlgorithm{inner: raw.TKTokenKeyAlgorithmFromID(_id)}
 }
 
-// @brief Checks if specified algorithm is base operation algorithm.
+// Returns whether the specified algorithm is the target operation algorithm.
 //
 // IsAlgorithm calls the underlying IsAlgorithm.
 func (x *TokenKeyAlgorithm) IsAlgorithm(algorithm unsafe.Pointer) bool {
 	return x.inner.IsAlgorithm(algorithm)
 }
 
-// @brief Checks whether specified algorithm is either target algorithm or one of the algorithms through which the operation passed.
+// Whether the specified algorithm is the target operation algorithm, or one of the other algorithms used.
 //
 // SupportsAlgorithm calls the underlying SupportsAlgorithm.
 func (x *TokenKeyAlgorithm) SupportsAlgorithm(algorithm unsafe.Pointer) bool {

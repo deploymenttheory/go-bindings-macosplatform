@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a user’s account.
+//
 // VSUserAccount wraps [raw.VSUserAccount] with a fluent Go API.
 type VSUserAccount struct {
 	inner *raw.VSUserAccount

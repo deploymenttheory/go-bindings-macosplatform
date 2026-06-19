@@ -27,6 +27,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
+// Specify the execution mode for a query.
 type MDQueryOptionFlags int64
 
 const (

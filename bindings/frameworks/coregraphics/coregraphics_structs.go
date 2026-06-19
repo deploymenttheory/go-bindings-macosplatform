@@ -23,6 +23,7 @@ type CGBitmapParameters struct {
 	EdrTargetHeadroom     float32
 }
 
+// A set of components that define a color, with a color space specifying how to interpret them.
 // CGColor is an opaque type.
 type CGColor struct{}
 
@@ -34,6 +35,7 @@ type CGColorBufferFormat struct {
 	BytesPerRow      uint
 }
 
+// An object that describes how to convert between color spaces for use by other system services.
 // CGColorConversionInfo is an opaque type.
 type CGColorConversionInfo struct{}
 
@@ -47,6 +49,7 @@ type CGColorDataFormat struct {
 	Decode             *float64
 }
 
+// A profile that specifies how to interpret a color value for display.
 // CGColorSpace is an opaque type.
 type CGColorSpace struct{}
 
@@ -63,20 +66,25 @@ type CGContentToneMappingInfo struct {
 	Options unsafe.Pointer
 }
 
+// A Quartz 2D drawing environment.
 // CGContext is an opaque type.
 type CGContext struct{}
 
+// An abstraction for data-writing tasks that eliminates the need to manage a raw memory buffer.
 // CGDataConsumer is an opaque type.
 type CGDataConsumer struct{}
 
+// A structure that contains pointers to callback functions that manage the copying of data for a data consumer.
 type CGDataConsumerCallbacks struct {
 	PutBytes        unsafe.Pointer
 	ReleaseConsumer unsafe.Pointer
 }
 
+// An abstraction for data-reading tasks that eliminates the need to manage a raw memory buffer.
 // CGDataProvider is an opaque type.
 type CGDataProvider struct{}
 
+// Defines pointers to client-defined callback functions that manage the sending of data for a direct-access data provider.
 type CGDataProviderDirectCallbacks struct {
 	Version            uint
 	GetBytePointer     unsafe.Pointer
@@ -85,6 +93,7 @@ type CGDataProviderDirectCallbacks struct {
 	ReleaseInfo        unsafe.Pointer
 }
 
+// Defines a structure containing pointers to client-defined callback functions that manage the sending of data for a sequential-access data provider.
 type CGDataProviderSequentialCallbacks struct {
 	Version     uint
 	GetBytes    unsafe.Pointer
@@ -99,71 +108,90 @@ type CGDeviceColor struct {
 	Blue  float32
 }
 
+// A reference to a display mode object.
 // CGDisplayMode is an opaque type.
 type CGDisplayMode struct{}
 
-// @typedef CGDisplayStreamRef @abstract An opaque reference to a CGDisplayStream object @discussion A CGDisplayStream provides a streaming API for capturing display updates in a realtime manner.  It can also provide scaling and color space conversion services, as well as allow capturing sub regions of the display.   Callbacks can be targetted at either a traditional CFRunLoop, or at a dispatch queue.
+// A reference to a display stream object.
 // CGDisplayStream is an opaque type.
 type CGDisplayStream struct{}
 
-// @typedef CGDisplayStreamUpdateRef @abstract An opaque reference to a single frame's extra metadata that describes useful frame delta information @discussion A CGDisplayStreamUpdate encapsulates information about what portions of a frame have changed relative to a previously delivered frame.   This includes regions that were changed in any way, which ones were actually redrawn, and which regions were merely copied from one place to another.   A routine is provided to merge two update refs together in cases where apps need to coalesce the values because they decided to skip processing for one or more frames.
+// A reference to frame update’s metadata.
 // CGDisplayStreamUpdate is an opaque type.
 type CGDisplayStreamUpdate struct{}
 
+// A set of character glyphs and layout information for drawing text.
 // CGFont is an opaque type.
 type CGFont struct{}
 
+// A general facility for defining and using callback functions.
 // CGFunction is an opaque type.
 type CGFunction struct{}
 
+// A structure that contains callbacks needed by a CGFunctionRef object.
 type CGFunctionCallbacks struct {
 	Version     uint
 	Evaluate    unsafe.Pointer
 	ReleaseInfo unsafe.Pointer
 }
 
+// A definition for a smooth transition between colors for drawing radial and axial gradient fills.
 // CGGradient is an opaque type.
 type CGGradient struct{}
 
+// A bitmap image or image mask.
 // CGImage is an opaque type.
 type CGImage struct{}
 
+// An offscreen context for reusing content drawn with Core Graphics.
 // CGLayer is an opaque type.
 type CGLayer struct{}
 
+// An array structure within a PDF document.
 // CGPDFArray is an opaque type.
 type CGPDFArray struct{}
 
+// A representation of one or more content data streams in a PDF page.
 // CGPDFContentStream is an opaque type.
 type CGPDFContentStream struct{}
 
+// A dictionary structure within a PDF document.
 // CGPDFDictionary is an opaque type.
 type CGPDFDictionary struct{}
 
+// A document that contains PDF (Portable Document Format) drawing information.
 // CGPDFDocument is an opaque type.
 type CGPDFDocument struct{}
 
+// An object representing content within a PDF document.
 // CGPDFObject is an opaque type.
 type CGPDFObject struct{}
 
+// A set of callback functions for operators used when scanning content in a PDF document.
 // CGPDFOperatorTable is an opaque type.
 type CGPDFOperatorTable struct{}
 
+// A type that represents a page in a PDF document.
 // CGPDFPage is an opaque type.
 type CGPDFPage struct{}
 
+// A parser object for handling content and operators in a PDF content stream.
 // CGPDFScanner is an opaque type.
 type CGPDFScanner struct{}
 
+// A stream or sequence of data bytes in a PDF document.
 // CGPDFStream is an opaque type.
 type CGPDFStream struct{}
 
+// A text string in a PDF document.
 // CGPDFString is an opaque type.
 type CGPDFString struct{}
 
+// An opaque data type used to convert PostScript data to PDF data.
 // CGPSConverter is an opaque type.
 type CGPSConverter struct{}
 
+// A structure for holding the callbacks provided when you create a PostScript converter object.
 type CGPSConverterCallbacks struct {
 	Version       uint
 	BeginDocument unsafe.Pointer
@@ -175,17 +203,21 @@ type CGPSConverterCallbacks struct {
 	ReleaseInfo   unsafe.Pointer
 }
 
+// An immutable graphics path: a mathematical description of shapes or lines to be drawn in a graphics context.
 // CGPath is an opaque type.
 type CGPath struct{}
 
+// A data structure that provides information about a path element.
 type CGPathElement struct {
 	Type   CGPathElementType
 	Points *corefoundation.CGPoint
 }
 
+// A 2D pattern to be used for drawing graphics paths.
 // CGPattern is an opaque type.
 type CGPattern struct{}
 
+// A structure that holds a version and two callback functions for drawing a custom pattern.
 type CGPatternCallbacks struct {
 	Version     uint
 	DrawPattern unsafe.Pointer
@@ -195,11 +227,13 @@ type CGPatternCallbacks struct {
 // CGRenderingBufferProvider is an opaque type.
 type CGRenderingBufferProvider struct{}
 
+// The distance, in pixel units, that an onscreen region moves.
 type CGScreenUpdateMoveDelta struct {
 	DX int32
 	DY int32
 }
 
+// A definition for a smooth transition between colors, controlled by a custom function you provide, for drawing radial and axial gradient fills.
 // CGShading is an opaque type.
 type CGShading struct{}
 

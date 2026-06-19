@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface that allows a player to invite other players to a turn-based match and automatch to fill any empty slots.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamekit/gkturnbasedmatchmakerviewcontroller
 type GKTurnBasedMatchmakerViewController struct {
 	appkit.NSViewController
@@ -63,6 +65,7 @@ func (o *GKTurnBasedMatchmakerViewController) SetMatchmakingMode(matchmakingMode
 	o.Ptr().Send(_gKTurnBasedMatchmakerViewControllerSelSetMatchmakingMode, matchmakingMode)
 }
 
+// Creates a matchmaker view controller for the local player to start inviting other players to a turn-based game.
 func (o *GKTurnBasedMatchmakerViewController) InitWithMatchRequest(request *GKMatchRequest) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedMatchmakerViewControllerSelInitWithMatchRequest, request.Ptr())
 	return _ret

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information read from the commissionee device during commissioning.
+//
 // Apple documentation: https://developer.apple.com/documentation/matter/mtrcommissioneeinfo
 type MTRCommissioneeInfo struct {
 	foundation.NSObject
@@ -44,8 +46,11 @@ func (o *MTRCommissioneeInfo) ProductIdentity() *MTRProductIdentity {
 
 // Endpoint information for all endpoints of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters. Use `rootEndpoint` and `-[MTREndpointInfo children]` to traverse endpoints in composition order.
 func (o *MTRCommissioneeInfo) EndpointsById() *foundation.NSDictionary[*foundation.NSNumber, *MTREndpointInfo] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSNumber, *MTREndpointInfo]](o.Ptr(), _mTRCommissioneeInfoSelEndpointsById)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioneeInfoSelEndpointsById)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSNumber, *MTREndpointInfo](_ret)
 }
 
 // Endpoint information for the root endpoint of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters.
@@ -59,6 +64,9 @@ func (o *MTRCommissioneeInfo) RootEndpoint() *MTREndpointInfo {
 
 // Attributes that were read from the commissionee.  This will contain the following, if they are available: 1) The attributes in extraAttributesToRead on MTRCommissioningParameters. 2) The FeatureMap attributes of all Network Commissioning clusters on the commissionee.
 func (o *MTRCommissioneeInfo) Attributes() *foundation.NSDictionary[*MTRAttributePath, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*MTRAttributePath, objc.ID]](o.Ptr(), _mTRCommissioneeInfoSelAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioneeInfoSelAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*MTRAttributePath, objc.ID](_ret)
 }

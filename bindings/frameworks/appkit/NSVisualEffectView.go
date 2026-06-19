@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that adds translucency and vibrancy effects to the views in your interface.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsvisualeffectview
 type NSVisualEffectView struct {
 	NSView

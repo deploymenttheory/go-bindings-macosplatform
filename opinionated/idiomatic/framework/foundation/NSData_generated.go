@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A static byte buffer in memory.
+//
 // Data wraps [raw.NSData] with a fluent Go API.
 type Data struct {
 	inner *raw.NSData
@@ -32,6 +34,8 @@ func DataFromID(id objc.ID) *Data {
 	return &Data{inner: raw.NSDataFromID(id)}
 }
 
+// Initializes a data object filled with a given number of bytes copied from a given buffer.
+//
 // NewDataWithBytesLength creates a new [Data].
 func NewDataWithBytesLength(bytes_ unsafe.Pointer, length uint) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewDataWithBytesLength(bytes_ unsafe.Pointer, length uint) *Data {
 	return &Data{inner: raw.NSDataFromID(_id)}
 }
 
+// Initializes a data object filled with a given number of bytes of data from a given buffer.
+//
 // NewDataWithBytesNoCopyLength creates a new [Data].
 func NewDataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
@@ -46,6 +52,8 @@ func NewDataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) *Data {
 	return &Data{inner: raw.NSDataFromID(_id)}
 }
 
+// Initializes a newly allocated data object by adding the given number of bytes from the given buffer.
+//
 // NewDataWithBytesNoCopyLengthFreeWhenDone creates a new [Data].
 func NewDataWithBytesNoCopyLengthFreeWhenDone(bytes_ unsafe.Pointer, length uint, b bool) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
@@ -53,6 +61,8 @@ func NewDataWithBytesNoCopyLengthFreeWhenDone(bytes_ unsafe.Pointer, length uint
 	return &Data{inner: raw.NSDataFromID(_id)}
 }
 
+// Initializes a data object filled with a given number of bytes of data from a given buffer, with a custom deallocator block.
+//
 // NewDataWithBytesNoCopyLengthDeallocator creates a new [Data].
 func NewDataWithBytesNoCopyLengthDeallocator(bytes_ unsafe.Pointer, length uint, deallocator func(unsafe.Pointer, uint)) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
@@ -60,6 +70,8 @@ func NewDataWithBytesNoCopyLengthDeallocator(bytes_ unsafe.Pointer, length uint,
 	return &Data{inner: raw.NSDataFromID(_id)}
 }
 
+// Initializes a data object with the content of the file at a given path.
+//
 // NewDataWithContentsOfFileOptionsError creates a new [Data].
 func NewDataWithContentsOfFileOptionsError(path string, readOptionsMask NSDataReadingOptions) (*Data, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
@@ -71,6 +83,8 @@ func NewDataWithContentsOfFileOptionsError(path string, readOptionsMask NSDataRe
 	return &Data{inner: raw.NSDataFromID(_id)}, nil
 }
 
+// Creates a data object from the data at the provided file URL using specific reading options.
+//
 // NewDataWithContentsOfURLOptionsError creates a new [Data].
 func NewDataWithContentsOfURLOptionsError(url string, readOptionsMask NSDataReadingOptions) (*Data, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
@@ -82,6 +96,8 @@ func NewDataWithContentsOfURLOptionsError(url string, readOptionsMask NSDataRead
 	return &Data{inner: raw.NSDataFromID(_id)}, nil
 }
 
+// Initializes a data object with the content of the file at a given path.
+//
 // NewDataWithContentsOfFile creates a new [Data].
 func NewDataWithContentsOfFile(path string) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
@@ -89,6 +105,8 @@ func NewDataWithContentsOfFile(path string) *Data {
 	return &Data{inner: raw.NSDataFromID(_id)}
 }
 
+// Creates a data object from the data at the specified file URL, or returns nil if the system can’t create one.
+//
 // NewDataWithContentsOfURL creates a new [Data].
 func NewDataWithContentsOfURL(url string) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
@@ -96,6 +114,8 @@ func NewDataWithContentsOfURL(url string) *Data {
 	return &Data{inner: raw.NSDataFromID(_id)}
 }
 
+// Initializes a data object with the contents of another data object.
+//
 // NewDataWithData creates a new [Data].
 func NewDataWithData(data *raw.NSData) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
@@ -103,6 +123,8 @@ func NewDataWithData(data *raw.NSData) *Data {
 	return &Data{inner: raw.NSDataFromID(_id)}
 }
 
+// Initializes a data object with the given Base64 encoded string.
+//
 // NewDataWithBase64EncodedStringOptions creates a new [Data].
 func NewDataWithBase64EncodedStringOptions(base64String string, options NSDataBase64DecodingOptions) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
@@ -110,6 +132,8 @@ func NewDataWithBase64EncodedStringOptions(base64String string, options NSDataBa
 	return &Data{inner: raw.NSDataFromID(_id)}
 }
 
+// Initializes a data object with the given Base64 encoded data.
+//
 // NewDataWithBase64EncodedDataOptions creates a new [Data].
 func NewDataWithBase64EncodedDataOptions(base64Data *raw.NSData, options NSDataBase64DecodingOptions) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
@@ -117,6 +141,8 @@ func NewDataWithBase64EncodedDataOptions(base64Data *raw.NSData, options NSDataB
 	return &Data{inner: raw.NSDataFromID(_id)}
 }
 
+// Initializes a data object with the contents of the mapped file specified by a given path.
+//
 // NewDataWithContentsOfMappedFile creates a new [Data].
 func NewDataWithContentsOfMappedFile(path string) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
@@ -124,6 +150,8 @@ func NewDataWithContentsOfMappedFile(path string) *Data {
 	return &Data{inner: raw.NSDataFromID(_id)}
 }
 
+// Initializes a data object initialized with the given Base64 encoded string.
+//
 // NewDataWithBase64Encoding creates a new [Data].
 func NewDataWithBase64Encoding(base64String string) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
@@ -147,21 +175,29 @@ func (x *Data) Bytes() unsafe.Pointer {
 	return x.inner.Bytes()
 }
 
+// Copies a number of bytes from the start of the data object into a given buffer.
+//
 // GetBytesLength calls the underlying GetBytesLength.
 func (x *Data) GetBytesLength(buffer unsafe.Pointer, length uint) {
 	x.inner.GetBytesLength(buffer, length)
 }
 
+// Copies a range of bytes from the data object into a given buffer.
+//
 // GetBytesRange calls the underlying GetBytesRange.
 func (x *Data) GetBytesRange(buffer unsafe.Pointer, range_ raw.NSRange) {
 	x.inner.GetBytesRange(buffer, range_)
 }
 
+// Returns a Boolean value indicating whether this data object is the same as another.
+//
 // IsEqualToData calls the underlying IsEqualToData.
 func (x *Data) IsEqualToData(other *raw.NSData) bool {
 	return x.inner.IsEqualToData(other)
 }
 
+// Returns a new data object containing the data object’s bytes that fall within the limits specified by a given range.
+//
 // SubdataWithRange calls the underlying SubdataWithRange.
 func (x *Data) SubdataWithRange(range_ raw.NSRange) *Data {
 	_r := x.inner.SubdataWithRange(range_)
@@ -171,36 +207,50 @@ func (x *Data) SubdataWithRange(range_ raw.NSRange) *Data {
 	return &Data{inner: _r}
 }
 
+// Writes the data object’s bytes to the file specified by a given path.
+//
 // WriteToFileAtomically calls the underlying WriteToFileAtomically.
 func (x *Data) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
 	return x.inner.WriteToFileAtomically(foundation.NSStringStringWithUTF8String(path), useAuxiliaryFile)
 }
 
+// Writes the data object’s bytes to the location specified by a given URL.
+//
 // WriteToURLAtomically calls the underlying WriteToURLAtomically.
 func (x *Data) WriteToURLAtomically(url string, atomically bool) bool {
 	return x.inner.WriteToURLAtomically(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), atomically)
 }
 
+// Writes the data object’s bytes to the file specified by a given path.
+//
 // WriteToFileOptionsError calls the underlying WriteToFileOptionsError.
 func (x *Data) WriteToFileOptionsError(path string, writeOptionsMask NSDataWritingOptions) (bool, error) {
 	return x.inner.WriteToFileOptionsError(foundation.NSStringStringWithUTF8String(path), raw.NSDataWritingOptions(writeOptionsMask))
 }
 
+// Writes the data object’s bytes to the location specified by a given URL.
+//
 // WriteToURLOptionsError calls the underlying WriteToURLOptionsError.
 func (x *Data) WriteToURLOptionsError(url string, writeOptionsMask NSDataWritingOptions) (bool, error) {
 	return x.inner.WriteToURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSDataWritingOptions(writeOptionsMask))
 }
 
+// Finds and returns the range of the first occurrence of the given data, within the given range, subject to given options.
+//
 // RangeOfDataOptionsRange calls the underlying RangeOfDataOptionsRange.
 func (x *Data) RangeOfDataOptionsRange(dataToFind *raw.NSData, mask NSDataSearchOptions, searchRange raw.NSRange) raw.NSRange {
 	return x.inner.RangeOfDataOptionsRange(dataToFind, raw.NSDataSearchOptions(mask), searchRange)
 }
 
+// Enumerates each range of bytes in the data object using a block.
+//
 // EnumerateByteRangesUsing calls the underlying EnumerateByteRangesUsing.
 func (x *Data) EnumerateByteRangesUsing(block objc.Block) {
 	x.inner.EnumerateByteRangesUsing(block)
 }
 
+// Creates a Base64 encoded string from the string using the given options.
+//
 // Base64EncodedStringWithOptions calls the underlying Base64EncodedStringWithOptions.
 func (x *Data) Base64EncodedStringWithOptions(options NSDataBase64EncodingOptions) *String {
 	_r := x.inner.Base64EncodedStringWithOptions(raw.NSDataBase64EncodingOptions(options))
@@ -210,6 +260,8 @@ func (x *Data) Base64EncodedStringWithOptions(options NSDataBase64EncodingOption
 	return &String{inner: _r}
 }
 
+// Creates a Base64, UTF-8 encoded data object from the string using the given options.
+//
 // Base64EncodedDataWithOptions calls the underlying Base64EncodedDataWithOptions.
 func (x *Data) Base64EncodedDataWithOptions(options NSDataBase64EncodingOptions) *Data {
 	_r := x.inner.Base64EncodedDataWithOptions(raw.NSDataBase64EncodingOptions(options))
@@ -219,6 +271,8 @@ func (x *Data) Base64EncodedDataWithOptions(options NSDataBase64EncodingOptions)
 	return &Data{inner: _r}
 }
 
+// Returns a new data object by decompressing data object’s bytes.
+//
 // DecompressedDataUsingAlgorithmError calls the underlying DecompressedDataUsingAlgorithmError.
 func (x *Data) DecompressedDataUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (*Data, error) {
 	_r, _err := x.inner.DecompressedDataUsingAlgorithmError(raw.NSDataCompressionAlgorithm(algorithm))
@@ -231,6 +285,8 @@ func (x *Data) DecompressedDataUsingAlgorithmError(algorithm NSDataCompressionAl
 	return &Data{inner: _r}, nil
 }
 
+// Returns a new data object by compressing the data object’s bytes.
+//
 // CompressedDataUsingAlgorithmError calls the underlying CompressedDataUsingAlgorithmError.
 func (x *Data) CompressedDataUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (*Data, error) {
 	_r, _err := x.inner.CompressedDataUsingAlgorithmError(raw.NSDataCompressionAlgorithm(algorithm))
@@ -243,11 +299,15 @@ func (x *Data) CompressedDataUsingAlgorithmError(algorithm NSDataCompressionAlgo
 	return &Data{inner: _r}, nil
 }
 
+// Copies a data object’s contents into a given buffer.
+//
 // GetBytes calls the underlying GetBytes.
 func (x *Data) GetBytes(buffer unsafe.Pointer) {
 	x.inner.GetBytes(buffer)
 }
 
+// Initializes a Base64 encoded string from the string.
+//
 // Base64Encoding calls the underlying Base64Encoding.
 func (x *Data) Base64Encoding() *String {
 	_r := x.inner.Base64Encoding()

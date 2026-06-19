@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specifier that indicates every object in a collection matching a condition.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nswhosespecifier
 type NSWhoseSpecifier struct {
 	NSScriptObjectSpecifier
@@ -48,6 +50,7 @@ func (o *NSWhoseSpecifier) InitWithCoder(inCoder *NSCoder) *NSWhoseSpecifier {
 	return NSWhoseSpecifierFromID(_ret)
 }
 
+// Returns an NSWhoseSpecifier object initialized with the given attributes.
 func (o *NSWhoseSpecifier) InitWithContainerClassDescriptionContainerSpecifierKeyTest(classDesc *NSScriptClassDescription, container *NSScriptObjectSpecifier, property *NSString, test *NSScriptWhoseTest) *NSWhoseSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWhoseSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyTest, classDesc.Ptr(), container.Ptr(), property.Ptr(), test.Ptr())
 	if _ret != 0 {

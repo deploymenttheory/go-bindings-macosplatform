@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that represents a communication channel.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsport
 type NSPort struct {
 	NSObject
@@ -40,6 +42,7 @@ func NSPortFromID(id objc.ID) *NSPort {
 	return o
 }
 
+// Creates and returns a new NSPort object capable of both sending and receiving messages.
 func NSPortPort() *NSPort {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPort), _nSPortSelPort)
 	if _ret != 0 {
@@ -70,20 +73,22 @@ func (o *NSPort) RemoveFromRunLoopForMode(runLoop *NSRunLoop, mode *NSString) {
 }
 
 func (o *NSPort) SendBeforeDateComponentsFromReserved(limitDate *NSDate, components *NSMutableArray[objc.ID], receivePort *NSPort, headerSpaceReserved uint) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPortSelSendBeforeDateComponentsFromReserved, limitDate.Ptr(), components, receivePort.Ptr(), headerSpaceReserved)
+	_ret := objc.Send[bool](o.Ptr(), _nSPortSelSendBeforeDateComponentsFromReserved, limitDate.Ptr(), components.Ptr(), receivePort.Ptr(), headerSpaceReserved)
 	return _ret
 }
 
 func (o *NSPort) SendBeforeDateMsgidComponentsFromReserved(limitDate *NSDate, msgID uint, components *NSMutableArray[objc.ID], receivePort *NSPort, headerSpaceReserved uint) bool {
-	_ret := objc.Send[bool](o.Ptr(), _nSPortSelSendBeforeDateMsgidComponentsFromReserved, limitDate.Ptr(), msgID, components, receivePort.Ptr(), headerSpaceReserved)
+	_ret := objc.Send[bool](o.Ptr(), _nSPortSelSendBeforeDateMsgidComponentsFromReserved, limitDate.Ptr(), msgID, components.Ptr(), receivePort.Ptr(), headerSpaceReserved)
 	return _ret
 }
 
+// Adds the receiver to the list of ports monitored by a given run loop for the given input mode.
 // Deprecated: Use NSXPCConnection instead
 func (o *NSPort) AddConnectionToRunLoopForMode(conn *NSConnection, runLoop *NSRunLoop, mode *NSString) {
 	o.Ptr().Send(_nSPortSelAddConnectionToRunLoopForMode, conn.Ptr(), runLoop.Ptr(), mode.Ptr())
 }
 
+// Removes the receiver from the list of ports monitored by runLoop in the given input mode, mode.
 // Deprecated: Use NSXPCConnection instead
 func (o *NSPort) RemoveConnectionFromRunLoopForMode(conn *NSConnection, runLoop *NSRunLoop, mode *NSString) {
 	o.Ptr().Send(_nSPortSelRemoveConnectionFromRunLoopForMode, conn.Ptr(), runLoop.Ptr(), mode.Ptr())

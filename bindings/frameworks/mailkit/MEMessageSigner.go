@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains details about the person who signed a message.
+//
 // Apple documentation: https://developer.apple.com/documentation/mailkit/memessagesigner
 type MEMessageSigner struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func MEMessageSignerFromID(id objc.ID) *MEMessageSigner {
 	return o
 }
 
+// Creates a new message signer object that contains the email addresses of the signers, a label, and context data.
 func (o *MEMessageSigner) InitWithEmailAddressesSignatureLabelContext(emailAddresses *foundation.NSArray[*MEEmailAddress], label *foundation.NSString, context_ *foundation.NSData) *MEMessageSigner {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSignerSelInitWithEmailAddressesSignatureLabelContext, emailAddresses.Ptr(), label.Ptr(), context_.Ptr())
 	if _ret != 0 {

@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object containing section elements and layout information for a single level of curation.
+//
 // ProjectSectionContent wraps [raw.PHProjectSectionContent] with a fluent Go API.
 type ProjectSectionContent struct {
 	inner *raw.PHProjectSectionContent

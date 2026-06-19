@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A continuous gesture recognizer that tracks two trackpad touches moving opposite each other in a circular motion.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsrotationgesturerecognizer
 type NSRotationGestureRecognizer struct {
 	NSGestureRecognizer

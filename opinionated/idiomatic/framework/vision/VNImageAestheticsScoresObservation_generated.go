@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the overall score of aesthetic attributes for an image.
+//
 // ImageAestheticsScoresObservation wraps [raw.VNImageAestheticsScoresObservation] with a fluent Go API.
 type ImageAestheticsScoresObservation struct {
 	inner *raw.VNImageAestheticsScoresObservation

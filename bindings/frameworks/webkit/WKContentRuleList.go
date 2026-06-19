@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A compiled list of rules to apply to web content.
+//
 // Apple documentation: https://developer.apple.com/documentation/webkit/wkcontentrulelist
 type WKContentRuleList struct {
 	foundation.NSObject

@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of options affecting the creation of a new Photos asset from underlying resources.
+//
 // AssetResourceCreationOptions wraps [raw.PHAssetResourceCreationOptions] with a fluent Go API.
 type AssetResourceCreationOptions struct {
 	inner *raw.PHAssetResourceCreationOptions
@@ -38,6 +40,8 @@ func NewAssetResourceCreationOptions() *AssetResourceCreationOptions {
 	return &AssetResourceCreationOptions{inner: raw.PHAssetResourceCreationOptionsFromID(_id)}
 }
 
+// The filename for the asset resource being created.
+//
 // WithOriginalFilename sets the originalFilename property and returns the receiver for chaining.
 func (x *AssetResourceCreationOptions) WithOriginalFilename(originalFilename string) *AssetResourceCreationOptions {
 	x.inner.SetOriginalFilename(foundation.NSStringStringWithUTF8String(originalFilename))
@@ -52,12 +56,16 @@ func (x *AssetResourceCreationOptions) WithContentType(contentType *uniformtypei
 	return x
 }
 
+// The uniform type identifier for the resource.
+//
 // WithUniformTypeIdentifier sets the uniformTypeIdentifier property and returns the receiver for chaining.
 func (x *AssetResourceCreationOptions) WithUniformTypeIdentifier(uniformTypeIdentifier string) *AssetResourceCreationOptions {
 	x.inner.SetUniformTypeIdentifier(foundation.NSStringStringWithUTF8String(uniformTypeIdentifier))
 	return x
 }
 
+// A Boolean value that determines whether Photos moves or duplicates files when creating an asset resource.
+//
 // WithShouldMoveFile sets the shouldMoveFile property and returns the receiver for chaining.
 func (x *AssetResourceCreationOptions) WithShouldMoveFile(shouldMoveFile bool) *AssetResourceCreationOptions {
 	x.inner.SetShouldMoveFile(shouldMoveFile)

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The Cocoa interface to speech recognition in macOS.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsspeechrecognizer
 type NSSpeechRecognizer struct {
 	foundation.NSObject
@@ -42,6 +44,7 @@ func NSSpeechRecognizerFromID(id objc.ID) *NSSpeechRecognizer {
 	return o
 }
 
+// Initializes and returns an instance of the NSSpeechRecognizer class.
 func (o *NSSpeechRecognizer) Init() *NSSpeechRecognizer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpeechRecognizerSelInit)
 	if _ret != 0 {
@@ -50,10 +53,12 @@ func (o *NSSpeechRecognizer) Init() *NSSpeechRecognizer {
 	return NSSpeechRecognizerFromID(_ret)
 }
 
+// Tells the speech recognition engine to begin listening for commands.
 func (o *NSSpeechRecognizer) StartListening() {
 	o.Ptr().Send(_nSSpeechRecognizerSelStartListening)
 }
 
+// Tells the speech recognition engine to suspend listening for commands.
 func (o *NSSpeechRecognizer) StopListening() {
 	o.Ptr().Send(_nSSpeechRecognizerSelStopListening)
 }
@@ -68,12 +73,15 @@ func (o *NSSpeechRecognizer) SetDelegate(delegate NSSpeechRecognizerDelegate) {
 }
 
 func (o *NSSpeechRecognizer) Commands() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSSpeechRecognizerSelCommands)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpeechRecognizerSelCommands)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSSpeechRecognizer) SetCommands(commands *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_nSSpeechRecognizerSelSetCommands, commands)
+	o.Ptr().Send(_nSSpeechRecognizerSelSetCommands, commands.Ptr())
 }
 
 func (o *NSSpeechRecognizer) DisplayedCommandsTitle() *foundation.NSString {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A credential that results from a successful single sign-on (SSO) authentication.
+//
 // Apple documentation: https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignoncredential
 type ASAuthorizationSingleSignOnCredential struct {
 	foundation.NSObject
@@ -64,8 +66,11 @@ func (o *ASAuthorizationSingleSignOnCredential) IdentityToken() *foundation.NSDa
 
 // @abstract This value will contain a list of scopes for which the user provided authorization.  These may contain a subset of the requested scopes on @see ASAuthorizationOpenIDRequest.  The application should query this value to identify which scopes were returned as it maybe different from ones requested.
 func (o *ASAuthorizationSingleSignOnCredential) AuthorizedScopes() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aSAuthorizationSingleSignOnCredentialSelAuthorizedScopes)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSingleSignOnCredentialSelAuthorizedScopes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @abstract The complete AuthenticationServices extension response with the additional outputs used by the specific technology used by the Authorization Server instance and AuthenticationServices Extension. @note for some operations all properties can be null and the response will indicate just successful result of the operation.
@@ -79,6 +84,9 @@ func (o *ASAuthorizationSingleSignOnCredential) AuthenticatedResponse() *foundat
 
 // @abstract Private SecKeys returned from the AuthenticationServices extension.
 func (o *ASAuthorizationSingleSignOnCredential) PrivateKeys() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _aSAuthorizationSingleSignOnCredentialSelPrivateKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSingleSignOnCredentialSelPrivateKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }

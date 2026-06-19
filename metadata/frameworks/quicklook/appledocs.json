@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "framework": "QuickLook",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "QLPreviewPDFStyle": {
+      "doc": "A value you use to configure the appearance of previews for PDF files.",
+      "url": "https://developer.apple.com/documentation/quicklook/qlpreviewpdfstyle",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a PDF style instance that configures the layout of previews for PDF files.",
+          "url": "https://developer.apple.com/documentation/quicklook/qlpreviewpdfstyle/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a PDF style instance that configures the layout of previews for PDF files.",
+          "url": "https://developer.apple.com/documentation/quicklook/qlpreviewpdfstyle/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The raw value that represents the layout of previews for PDF files.",
+          "url": "https://developer.apple.com/documentation/quicklook/qlpreviewpdfstyle/rawvalue"
+        }
+      }
+    }
+  }
+}

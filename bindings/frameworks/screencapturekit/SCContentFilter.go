@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance that filters the content a stream captures.
+//
 // Apple documentation: https://developer.apple.com/documentation/screencapturekit/sccontentfilter
 type SCContentFilter struct {
 	foundation.NSObject
@@ -44,7 +46,7 @@ func SCContentFilterFromID(id objc.ID) *SCContentFilter {
 	return o
 }
 
-// @abstract initWithDesktopIndependentWindow: @param window the independent SCWindow you wish to capture @discussion this method will create a SCContentFilter that captures just the independent window passed in.
+// Creates a filter that captures only the specified window.
 func (o *SCContentFilter) InitWithDesktopIndependentWindow(window *SCWindow) *SCContentFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentFilterSelInitWithDesktopIndependentWindow, window.Ptr())
 	if _ret != 0 {
@@ -53,7 +55,7 @@ func (o *SCContentFilter) InitWithDesktopIndependentWindow(window *SCWindow) *SC
 	return SCContentFilterFromID(_ret)
 }
 
-// @abstract initWithDisplay:excludingWindows @param display the SCDisplay you wish to capture @param excluded the SCWindow(s) you wish to exclude from the passed in SCDisplay @discussion This method will create a SCContentFilter that captures the SCDisplay, excluding the passed in excluded SCWindow(s). The desktop background and dock will be included with this content filter.
+// Creates a filter that captures the contents of a display, excluding the specified windows.
 func (o *SCContentFilter) InitWithDisplayExcludingWindows(display *SCDisplay, excluded *foundation.NSArray[*SCWindow]) *SCContentFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentFilterSelInitWithDisplayExcludingWindows, display.Ptr(), excluded.Ptr())
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func (o *SCContentFilter) InitWithDisplayExcludingWindows(display *SCDisplay, ex
 	return SCContentFilterFromID(_ret)
 }
 
-// @abstract initWithDisplay:includingWindows @param display the SCDisplay you wish to capture @param includedWindows a set of SCWindows you wish to capture @discussion This method will create a SCContentFilter that captures a group of SCWindows. The desktop background and dock will be excluded with this content filter.
+// Creates a filter that captures only specific windows from a display.
 func (o *SCContentFilter) InitWithDisplayIncludingWindows(display *SCDisplay, includedWindows *foundation.NSArray[*SCWindow]) *SCContentFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentFilterSelInitWithDisplayIncludingWindows, display.Ptr(), includedWindows.Ptr())
 	if _ret != 0 {
@@ -71,7 +73,7 @@ func (o *SCContentFilter) InitWithDisplayIncludingWindows(display *SCDisplay, in
 	return SCContentFilterFromID(_ret)
 }
 
-// @abstract initWithDisplay:includingApplications:exceptingWindows @param display the SCDisplay you wish to capture @param applications the NSSet of SCRunningApplications that you wish to capture @param exceptingWindows the NSSet of SCWindows that you wish to be an exception to the filter @discussion This method creates a SCContentFilter that captures all windows owned by the passed in SCRunningApplications. Any windows that are an exception to the filter will not be shown if their owning application is in the provided list and will be shown otherwise. The desktop background and dock will be excluded with this content filter.
+// Creates a filter that captures a display, including only windows of the specified apps.
 func (o *SCContentFilter) InitWithDisplayIncludingApplicationsExceptingWindows(display *SCDisplay, applications *foundation.NSArray[*SCRunningApplication], exceptingWindows *foundation.NSArray[*SCWindow]) *SCContentFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentFilterSelInitWithDisplayIncludingApplicationsExceptingWindows, display.Ptr(), applications.Ptr(), exceptingWindows.Ptr())
 	if _ret != 0 {
@@ -80,7 +82,7 @@ func (o *SCContentFilter) InitWithDisplayIncludingApplicationsExceptingWindows(d
 	return SCContentFilterFromID(_ret)
 }
 
-// @abstract initWithDisplay:excludingApplications:exceptingWindows @param display the SCDisplay you wish to capture @param applications the NSSet of SCRunningApplications that you do not wish to capture @param exceptingWindows the NSSet of SCWindows that you wish to be an exception to the filter @discussion This method creates a SCContentFilter that captures all windows not owned by the passed in SCRunningApplications. Any windows that are an exception to the filter will be shown if their owning application is in the provided list and will not be shown otherwise. The desktop background and dock will be included with this content filter.
+// Creates a filter that captures a display, excluding windows of the specified apps.
 func (o *SCContentFilter) InitWithDisplayExcludingApplicationsExceptingWindows(display *SCDisplay, applications *foundation.NSArray[*SCRunningApplication], exceptingWindows *foundation.NSArray[*SCWindow]) *SCContentFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentFilterSelInitWithDisplayExcludingApplicationsExceptingWindows, display.Ptr(), applications.Ptr(), exceptingWindows.Ptr())
 	if _ret != 0 {

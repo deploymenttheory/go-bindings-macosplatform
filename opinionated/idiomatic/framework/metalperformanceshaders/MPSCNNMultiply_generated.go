@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A multiply operator.
+//
 // CNNMultiply wraps [raw.MPSCNNMultiply] with a fluent Go API.
 type CNNMultiply struct {
 	inner *raw.MPSCNNMultiply
@@ -220,7 +222,7 @@ func (x *CNNMultiply) WithDestinationImageAllocator(destinationImageAllocator mp
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *CNNMultiply) WithOptions(options mpscore.MPSKernelOptions) *CNNMultiply {
@@ -228,7 +230,7 @@ func (x *CNNMultiply) WithOptions(options mpscore.MPSKernelOptions) *CNNMultiply
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNMultiply) WithLabel(label string) *CNNMultiply {

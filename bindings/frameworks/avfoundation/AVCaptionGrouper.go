@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that analyzes the temporal overlaps of caption objects to create caption groups for each span of concurrent captions.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcaptiongrouper
 type AVCaptionGrouper struct {
 	foundation.NSObject
@@ -32,10 +34,12 @@ func AVCaptionGrouperFromID(id objc.ID) *AVCaptionGrouper {
 	return o
 }
 
+// Adds a caption to the pending group.
 func (o *AVCaptionGrouper) AddCaption(input *AVCaption) {
 	o.Ptr().Send(_aVCaptionGrouperSelAddCaption, input.Ptr())
 }
 
+// Creates caption groups for the captions you enqueue up to the time.
 func (o *AVCaptionGrouper) FlushAddedCaptionsIntoGroupsUpToTime(upToTime coremedia.CMTime) *foundation.NSArray[*AVCaptionGroup] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionGrouperSelFlushAddedCaptionsIntoGroupsUpToTime, upToTime)
 	if _ret != 0 {

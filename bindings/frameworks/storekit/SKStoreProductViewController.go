@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view controller that provides a page where customers can purchase media from the App Store.
+//
 // Apple documentation: https://developer.apple.com/documentation/storekit/skstoreproductviewcontroller
 type SKStoreProductViewController struct {
 	appkit.NSViewController
@@ -35,6 +37,7 @@ func SKStoreProductViewControllerFromID(id objc.ID) *SKStoreProductViewControlle
 	return o
 }
 
+// Loads a new product screen to display.
 func (o *SKStoreProductViewController) LoadProductWithParametersCompletionBlock(parameters *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(bool, unsafe.Pointer)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -43,7 +46,7 @@ func (o *SKStoreProductViewController) LoadProductWithParametersCompletionBlock(
 		})
 		defer __block_block.Release()
 	}
-	o.Ptr().Send(_sKStoreProductViewControllerSelLoadProductWithParametersCompletionBlock, parameters, __block_block)
+	o.Ptr().Send(_sKStoreProductViewControllerSelLoadProductWithParametersCompletionBlock, parameters.Ptr(), __block_block)
 }
 
 func (o *SKStoreProductViewController) Delegate() SKStoreProductViewControllerDelegate {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A parameter group object represents a group of related audio unit parameters.
+//
 // Apple documentation: https://developer.apple.com/documentation/audiotoolbox/auparametergroup
 type AUParameterGroup struct {
 	AUParameterNode

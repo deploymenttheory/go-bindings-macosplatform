@@ -13,7 +13,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Movie-wide information required by the rendering session.
+// A structure for movie-wide attributes required for proper rendering.
 //
 // Apple documentation: https://developer.apple.com/documentation/cinematic/cnrenderingsessionattributes
 type CNRenderingSessionAttributes struct {
@@ -36,7 +36,7 @@ func CNRenderingSessionAttributesFromID(id objc.ID) *CNRenderingSessionAttribute
 	return o
 }
 
-// Load rendering session attributes from an asset asynchronously.
+// Loads the rendering session attributes from an asset asynchronously.
 func CNRenderingSessionAttributesLoadFromAssetCompletionHandler(asset *avfoundation.AVAsset, completionHandler func(*CNRenderingSessionAttributes, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

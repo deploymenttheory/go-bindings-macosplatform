@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing metrics about network transfers.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxnetworktransfermetric
 type MXNetworkTransferMetric struct {
 	MXMetric
@@ -35,24 +37,36 @@ func MXNetworkTransferMetricFromID(id objc.ID) *MXNetworkTransferMetric {
 
 // @property      cumulativeWifiUpload @abstract      Cumulative amount of data uploaded over WiFi. @discussion    Dimensioned as NSUnitInformationStorage.
 func (o *MXNetworkTransferMetric) CumulativeWifiUpload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXNetworkTransferMetricSelCumulativeWifiUpload)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXNetworkTransferMetricSelCumulativeWifiUpload)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitInformationStorage](_ret)
 }
 
 // @property      cumulativeWifiDownload @abstract      Cumulative amount of data downloaded over WiFi. @discussion    Dimensioned as NSUnitInformationStorage.
 func (o *MXNetworkTransferMetric) CumulativeWifiDownload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXNetworkTransferMetricSelCumulativeWifiDownload)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXNetworkTransferMetricSelCumulativeWifiDownload)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitInformationStorage](_ret)
 }
 
 // @property      cumulativeCellularUpload @abstract      Cumulative amount of data uploaded over cellular networks. @discussion    This data is radio access technology agnostic. @discussion    Dimensioned as NSUnitInformationStorage.
 func (o *MXNetworkTransferMetric) CumulativeCellularUpload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXNetworkTransferMetricSelCumulativeCellularUpload)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXNetworkTransferMetricSelCumulativeCellularUpload)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitInformationStorage](_ret)
 }
 
 // @property      cumulativeCellularDownload @abstract      Cumulative amount of data downloaded over cellular networks. @discussion    This data is radio access technology agnostic. @discussion    Dimensioned as NSUnitInformationStorage.
 func (o *MXNetworkTransferMetric) CumulativeCellularDownload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXNetworkTransferMetricSelCumulativeCellularDownload)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXNetworkTransferMetricSelCumulativeCellularDownload)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnitInformationStorage](_ret)
 }

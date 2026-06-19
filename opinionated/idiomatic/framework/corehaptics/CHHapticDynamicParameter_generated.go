@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A value that you send to a haptic pattern player to alter a property value during playback.
+//
 // HapticDynamicParameter wraps [raw.CHHapticDynamicParameter] with a fluent Go API.
 type HapticDynamicParameter struct {
 	inner *raw.CHHapticDynamicParameter
@@ -31,7 +33,7 @@ func HapticDynamicParameterFromID(id objc.ID) *HapticDynamicParameter {
 	return &HapticDynamicParameter{inner: raw.CHHapticDynamicParameterFromID(id)}
 }
 
-// @method initWithParameterID:value:relativeTime @abstract Initialize a CHHapticDynamicParameter with a parameter ID, value, and relative time. @param parameterID The CHHapticDynamicParameterID for the desired parameter change. @param value The value for that parameter. @param time The time at which this parameter should be applied, relative to the start time of the pattern.
+// Creates a dynamic parameter from its ID, value, and start time.
 //
 // NewHapticDynamicParameterWithParameterIDValueRelativeTime creates a new [HapticDynamicParameter].
 func NewHapticDynamicParameterWithParameterIDValueRelativeTime(parameterID *foundation.NSString, value float32, time_ float64) *HapticDynamicParameter {
@@ -40,7 +42,7 @@ func NewHapticDynamicParameterWithParameterIDValueRelativeTime(parameterID *foun
 	return &HapticDynamicParameter{inner: raw.CHHapticDynamicParameterFromID(_id)}
 }
 
-// @property value The value of the parameter.
+// The value of the dynamic parameter.
 //
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *HapticDynamicParameter) WithValue(value float32) *HapticDynamicParameter {
@@ -48,7 +50,7 @@ func (x *HapticDynamicParameter) WithValue(value float32) *HapticDynamicParamete
 	return x
 }
 
-// @property relativeTime The time at which the parameter should be applied, relative to the start time for the pattern.
+// The time at which this dynamic parameter is applied, relative to the start time of the pattern.
 //
 // WithRelativeTime sets the relativeTime property and returns the receiver for chaining.
 func (x *HapticDynamicParameter) WithRelativeTime(relativeTime float64) *HapticDynamicParameter {

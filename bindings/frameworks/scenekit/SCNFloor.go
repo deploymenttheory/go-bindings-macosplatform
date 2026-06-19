@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A plane that can optionally display a reflection of the scene above it.
+//
 // Apple documentation: https://developer.apple.com/documentation/scenekit/scnfloor
 type SCNFloor struct {
 	SCNGeometry
@@ -43,7 +45,7 @@ func SCNFloorFromID(id objc.ID) *SCNFloor {
 	return o
 }
 
-// @method floor @abstract Creates and returns a floor. @discussion A floor is an infinite plane.
+// Creates a floor geometry.
 func SCNFloorFloor() *SCNFloor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNFloor), _sCNFloorSelFloor)
 	if _ret != 0 {

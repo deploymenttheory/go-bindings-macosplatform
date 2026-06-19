@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable video composition subclass.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmutablevideocomposition
 type AVMutableVideoComposition struct {
 	AVVideoComposition
@@ -53,7 +55,7 @@ func AVMutableVideoCompositionFromID(id objc.ID) *AVMutableVideoComposition {
 	return o
 }
 
-// Returns a new instance of AVMutableVideoComposition. The returned AVMutableVideoComposition will have a frameDuration of kCMTimeZero, a renderSize of {0.0, 0.0}, a nil array of instructions, and a nil animationTool.
+// Creates a new mutable video composition.
 func AVMutableVideoCompositionVideoComposition() *AVMutableVideoComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableVideoComposition), _aVMutableVideoCompositionSelVideoComposition)
 	if _ret != 0 {
@@ -62,7 +64,7 @@ func AVMutableVideoCompositionVideoComposition() *AVMutableVideoComposition {
 	return AVMutableVideoCompositionFromID(_ret)
 }
 
-// Returns a new instance of AVMutableVideoComposition with values and instructions suitable for presenting the video tracks of the specified asset according to its temporal and geometric properties and those of its tracks. The returned AVMutableVideoComposition will have instructions that respect the spatial properties and timeRanges of the specified asset's video tracks. The client can set sourceTrackIDForFrameTiming to kCMPersistentTrackID_Invalid and frameDuration to an appropriate value in order to specify the maximum output frame rate independent of the source track timing. It will also have the following values for its properties: - If the asset has exactly one video track, the original timing of the source video track will be used. If the asset has more than one video track, and the nominal frame rate of any of video tracks is known, the reciprocal of the greatest known nominalFrameRate will be used as the value of frameDuration. Otherwise, a default framerate of 30fps is used. - If the specified asset is an instance of AVComposition, the renderSize will be set to the naturalSize of the AVComposition; otherwise the renderSize will be set to a value that encompasses all of the asset's video tracks. - A renderScale of 1.0. - A nil animationTool. If the specified asset has no video tracks, this method will return an AVMutableVideoComposition instance with an empty collection of instructions. - Parameter asset: An instance of AVAsset. For best performance, ensure that the duration and tracks properties of the asset are already loaded before invoking this method. - Returns: An instance of AVMutableVideoComposition.
+// Creates a mutable video composition with the specified asset properties.
 // Deprecated: Use videoCompositionWithPropertiesOfAsset:completionHandler: instead
 func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAsset(asset *AVAsset) *AVMutableVideoComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableVideoComposition), _aVMutableVideoCompositionSelVideoCompositionWithPropertiesOfAsset, asset.Ptr())
@@ -72,7 +74,7 @@ func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAsset(asset *AVAss
 	return AVMutableVideoCompositionFromID(_ret)
 }
 
-// Vends a new instance of AVMutableVideoComposition with values and instructions suitable for presenting the video tracks of the specified asset according to its temporal and geometric properties and those of its tracks. The new AVMutableVideoComposition will have instructions that respect the spatial properties and timeRanges of the specified asset's video tracks. The client can set sourceTrackIDForFrameTiming to kCMPersistentTrackID_Invalid and frameDuration to an appropriate value in order to specify the maximum output frame rate independent of the source track timing. It will also have the following values for its properties: - If the asset has exactly one video track, the original timing of the source video track will be used. If the asset has more than one video track, and the nominal frame rate of any of video tracks is known, the reciprocal of the greatest known nominalFrameRate will be used as the value of frameDuration. Otherwise, a default framerate of 30fps is used. - If the specified asset is an instance of AVComposition, the renderSize will be set to the naturalSize of the AVComposition; otherwise the renderSize will be set to a value that encompasses all of the asset's video tracks. - A renderScale of 1.0. - A nil animationTool. If the specified asset has no video tracks, this method will return an AVMutableVideoComposition instance with an empty collection of instructions. - Parameter asset: An instance of AVAsset. - Parameter completionHandler: A block that is invoked when the new video composition has finished being created. If the `videoComposition` parameter is nil, the `error` parameter describes the failure that occurred.
+// Returns a new video composition that’s configured to present the video tracks of the specified asset.
 func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAssetCompletionHandler(asset *AVAsset, completionHandler func(*AVMutableVideoComposition, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -87,7 +89,7 @@ func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAssetCompletionHan
 	objc.ID(_clsAVMutableVideoComposition).Send(_aVMutableVideoCompositionSelVideoCompositionWithPropertiesOfAssetCompletionHandler, asset.Ptr(), __block_completionHandler)
 }
 
-// Returns a new instance of AVMutableVideoComposition with values and instructions suitable for presenting the video tracks of the specified asset according to its temporal and geometric properties and those of its tracks, and also overrides default properties with those from a prototypeInstruction. Also see videoCompositionWithPropertiesOfAsset:. The returned AVVideoComposition will have instructions that respect the spatial properties and timeRanges of the specified asset's video tracks. Anything not pertaining to spatial layout and timing, such as background color for their composition or post-processing behaviors, is eligible to be specified via a prototype instruction. Example: To add a background color, ```objc myPrototypeInstruction = [[AVMutableVideoCompositionInstruction alloc] init]; myPrototypeInstruction.backgroundColor = myCGColorRef; // Do not use constant CGColorRef colors here. myVideoComposition = [AVVideoComposition videoCompositionWithPropertiesOfAsset:myAsset prototypeInstruction:myPrototypeInstruction]; ``` - Parameter asset: An instance of AVAsset. For best performance, ensure that the duration and tracks properties of the asset are already loaded before invoking this method. - Parameter prototypeInstruction: Custom instructions that the client can choose to override. - Returns: An instance of AVMutableVideoComposition.
+// Creates a mutable video composition with the specified asset properties and a prototype video composition instruction.
 // Deprecated: Use videoCompositionWithPropertiesOfAsset:prototypeInstruction:completionHandler: instead
 func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAssetPrototypeInstruction(asset *AVAsset, prototypeInstruction *AVVideoCompositionInstruction) *AVMutableVideoComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableVideoComposition), _aVMutableVideoCompositionSelVideoCompositionWithPropertiesOfAssetPrototypeInstruction, asset.Ptr(), prototypeInstruction.Ptr())
@@ -97,7 +99,7 @@ func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAssetPrototypeInst
 	return AVMutableVideoCompositionFromID(_ret)
 }
 
-// Vends a new instance of AVMutableVideoComposition with values and instructions suitable for presenting the video tracks of the specified asset according to its temporal and geometric properties and those of its tracks, and also overrides default properties with those from a prototypeInstruction. Also see videoCompositionWithPropertiesOfAsset:completionHandler:. The new AVMutableVideoComposition will have instructions that respect the spatial properties and timeRanges of the specified asset's video tracks. Anything not pertaining to spatial layout and timing, such as background color for their composition or post-processing behaviors, is eligible to be specified via a prototype instruction. Example: To add a background color, ```objc myPrototypeInstruction = [[AVMutableVideoCompositionInstruction alloc] init]; myPrototypeInstruction.backgroundColor = myCGColorRef; // Do not use constant CGColorRef colors here. myVideoComposition = [AVVideoComposition videoCompositionWithPropertiesOfAsset:myAsset prototypeInstruction:myPrototypeInstruction completionHandler:^(AVMutableVideoComposition * _Nullable myVideoComposition, NSError * _Nullable error) { if (myVideoComposition != nil) { // use myVideoComposition } else { // handle error } }]; ``` - Parameter asset: An instance of AVAsset. - Parameter prototypeInstruction: Custom instructions that the client can choose to override. - Parameter completionHandler: A block that is invoked when the new video composition has finished being created. If the `videoComposition` parameter is nil, the `error` parameter describes the failure that occurred.
+// Returns a new mutable video composition with the specified asset properties and a prototype video composition instruction.
 func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAssetPrototypeInstructionCompletionHandler(asset *AVAsset, prototypeInstruction *AVVideoCompositionInstruction, completionHandler func(*AVMutableVideoComposition, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -141,11 +143,11 @@ func (o *AVMutableVideoComposition) SetAnimationTool(animationTool *AVVideoCompo
 }
 
 func (o *AVMutableVideoComposition) SetSourceSampleDataTrackIDs(sourceSampleDataTrackIDs *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_aVMutableVideoCompositionSelSetSourceSampleDataTrackIDs, sourceSampleDataTrackIDs)
+	o.Ptr().Send(_aVMutableVideoCompositionSelSetSourceSampleDataTrackIDs, sourceSampleDataTrackIDs.Ptr())
 }
 
 func (o *AVMutableVideoComposition) SetOutputBufferDescription(outputBufferDescription *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_aVMutableVideoCompositionSelSetOutputBufferDescription, outputBufferDescription)
+	o.Ptr().Send(_aVMutableVideoCompositionSelSetOutputBufferDescription, outputBufferDescription.Ptr())
 }
 
 func (o *AVMutableVideoComposition) SetColorPrimaries(colorPrimaries *foundation.NSString) {
@@ -164,7 +166,7 @@ func (o *AVMutableVideoComposition) SetPerFrameHDRDisplayMetadataPolicy(perFrame
 	o.Ptr().Send(_aVMutableVideoCompositionSelSetPerFrameHDRDisplayMetadataPolicy, perFrameHDRDisplayMetadataPolicy.Ptr())
 }
 
-// Returns a new instance of AVMutableVideoComposition with values and instructions that will apply the specified handler block to video frames represented as instances of CIImage. The returned AVMutableVideoComposition will cause the specified handler block to be called to filter each frame of the asset's first enabled video track. The handler block should use the properties of the provided AVAsynchronousCIImageFilteringRequest and respond using finishWithImage:context: with a "filtered" new CIImage (or the provided source image for no affect). In the event of an error, respond to the request using finishWithError:. The error can be observed via AVPlayerItemFailedToPlayToEndTimeNotification, see AVPlayerItemFailedToPlayToEndTimeErrorKey in notification payload. The client can set sourceTrackIDForFrameTiming to kCMPersistentTrackID_Invalid and frameDuration to an appropriate value in order to specify the maximum output frame rate independent of the source track timing. The video composition will also have the following values for its properties: - The original timing of the asset's first enabled video track will be used. - A renderSize that encompasses the asset's first enabled video track respecting the track's preferredTransform. - A renderScale of 1.0. The default CIContext has the following properties: - iOS: Device RGB color space - macOS: sRGB color space Example usage: ```objc playerItem.videoComposition = [AVMutableVideoComposition videoCompositionWithAsset:srcAsset applyingCIFiltersWithHandler: ^(AVAsynchronousCIImageFilteringRequest *request) { NSError *err = nil; CIImage *filtered = myRenderer(request, &err); if (filtered) [request finishWithImage:filtered context:nil]; else [request finishWithError:err]; }]; ``` - Parameter asset: An instance of AVAsset. For best performance, ensure that the duration and tracks properties of the asset are already loaded before invoking this method. - Returns: An instance of AVMutableVideoComposition.
+// Creates a mutable video composition configured to apply Core Image filters to each video frame of the specified asset.
 // Deprecated: Use videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler: instead
 func AVMutableVideoCompositionVideoCompositionWithAssetApplyingCIFiltersWithHandler(asset *AVAsset, applier func(*AVAsynchronousCIImageFilteringRequest)) *AVMutableVideoComposition {
 	var __block_applier objc.Block
@@ -184,7 +186,7 @@ func AVMutableVideoCompositionVideoCompositionWithAssetApplyingCIFiltersWithHand
 	return AVMutableVideoCompositionFromID(_ret)
 }
 
-// Vends a new instance of AVMutableVideoComposition with values and instructions that will apply the specified handler block to video frames represented as instances of CIImage. The new AVMutableVideoComposition will cause the specified handler block to be called to filter each frame of the asset's first enabled video track. The handler block should use the properties of the provided AVAsynchronousCIImageFilteringRequest and respond using finishWithImage:context: with a "filtered" new CIImage (or the provided source image for no affect). In the event of an error, respond to the request using finishWithError:. The error can be observed via AVPlayerItemFailedToPlayToEndTimeNotification, see AVPlayerItemFailedToPlayToEndTimeErrorKey in notification payload. The client can set sourceTrackIDForFrameTiming to kCMPersistentTrackID_Invalid and frameDuration to an appropriate value in order to specify the maximum output frame rate independent of the source track timing. The video composition will also have the following values for its properties: - The original timing of the asset's first enabled video track will be used. - A renderSize that encompasses the asset's first enabled video track respecting the track's preferredTransform. - A renderScale of 1.0. The default CIContext has the following properties: - iOS: Device RGB color space - macOS: sRGB color space Example usage: ```objc [AVMutableVideoComposition videoCompositionWithAsset:srcAsset applyingCIFiltersWithHandler: ^(AVAsynchronousCIImageFilteringRequest *request) { NSError *err = nil; CIImage *filtered = myRenderer(request, &err); if (filtered) [request finishWithImage:filtered context:nil]; else [request finishWithError:err]; } completionHandler: ^(AVMutableVideoComposition * _Nullable videoComposition, NSError * _Nullable error) { if (videoComposition != nil) { playerItem.videoComposition = videoComposition else { // handle error }]; ``` - Parameter asset: An instance of AVAsset. - Parameter completionHandler: A block that is invoked when the new video composition has finished being created. If the `videoComposition` parameter is nil, the `error` parameter describes the failure that occurred.
+// Returns a new video composition that’s configured to apply Core Image filters to each video frame of the specified asset.
 func AVMutableVideoCompositionVideoCompositionWithAssetApplyingCIFiltersWithHandlerCompletionHandler(asset *AVAsset, applier func(*AVAsynchronousCIImageFilteringRequest), completionHandler func(*AVMutableVideoComposition, unsafe.Pointer)) {
 	var __block_applier objc.Block
 	if applier != nil {

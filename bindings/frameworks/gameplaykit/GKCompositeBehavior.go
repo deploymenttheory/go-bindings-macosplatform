@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A set of behaviors, each of which is a set of goals, that together influence the movement of an agent.
+//
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkcompositebehavior
 type GKCompositeBehavior struct {
 	GKBehavior
@@ -36,7 +38,7 @@ func GKCompositeBehaviorFromID(id objc.ID) *GKCompositeBehavior {
 	return o
 }
 
-// Creates a behavior with an array of sub-behaviors
+// Creates a composite behavior from the specified individual behaviors.
 func GKCompositeBehaviorBehaviorWithBehaviors(behaviors *foundation.NSArray[*GKBehavior]) *GKCompositeBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKCompositeBehavior), _gKCompositeBehaviorSelBehaviorWithBehaviors, behaviors.Ptr())
 	if _ret != 0 {
@@ -45,32 +47,32 @@ func GKCompositeBehaviorBehaviorWithBehaviors(behaviors *foundation.NSArray[*GKB
 	return GKCompositeBehaviorFromID(_ret)
 }
 
-// Creates a behavior with two associated arrays of sub-behaviors and weights
+// Creates a behavior with the specified behaviors and weights.
 func GKCompositeBehaviorBehaviorWithBehaviorsAndWeights(behaviors *foundation.NSArray[*GKBehavior], weights *foundation.NSArray[*foundation.NSNumber]) *GKCompositeBehavior {
-	_ret := objc.Send[objc.ID](objc.ID(_clsGKCompositeBehavior), _gKCompositeBehaviorSelBehaviorWithBehaviorsAndWeights, behaviors.Ptr(), weights)
+	_ret := objc.Send[objc.ID](objc.ID(_clsGKCompositeBehavior), _gKCompositeBehaviorSelBehaviorWithBehaviorsAndWeights, behaviors.Ptr(), weights.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return GKCompositeBehaviorFromID(_ret)
 }
 
-// Adds a new sub-behavior or changes the weight of the existing sub-behavior in this behavior. If the sub-behavior  does not exist in this behavior, it is added. @param weight the weight for this goal @param behavior the sub-behavior who's weight to change
+// Sets the weight for the specified individual behavior’s influence on agents, adding that behavior to the composite behavior if it is not already present.
 func (o *GKCompositeBehavior) SetWeightForBehavior(weight float32, behavior *GKBehavior) {
 	o.Ptr().Send(_gKCompositeBehaviorSelSetWeightForBehavior, weight, behavior.Ptr())
 }
 
-// Gets the current weight for a given sub-behavior. @return the weight of the sub-behavior, or 0 if there is no such sub-behavior on this behavior
+// Returns the weight for the specified individual behavior’s influence on agents.
 func (o *GKCompositeBehavior) WeightForBehavior(behavior *GKBehavior) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _gKCompositeBehaviorSelWeightForBehavior, behavior.Ptr())
 	return _ret
 }
 
-// Remove the indicated sub-behavior from this behavior. @param behavior the sub-behavior to be removed
+// Removes the specified individual behavior from the composite behavior.
 func (o *GKCompositeBehavior) RemoveBehavior(behavior *GKBehavior) {
 	o.Ptr().Send(_gKCompositeBehaviorSelRemoveBehavior, behavior.Ptr())
 }
 
-// Removes all the sub-behavior on the behavior.
+// Removes all individual behaviors from the composite behavior.
 func (o *GKCompositeBehavior) RemoveAllBehaviors() {
 	o.Ptr().Send(_gKCompositeBehaviorSelRemoveAllBehaviors)
 }

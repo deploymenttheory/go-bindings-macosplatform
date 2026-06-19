@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mechanism for displaying text or images in a view object without the overhead of a full NSView subclass.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscell
 type NSCell struct {
 	foundation.NSObject
@@ -192,6 +194,7 @@ func (o *NSCell) Init() *NSCell {
 	return NSCellFromID(_ret)
 }
 
+// Returns an NSCell object initialized with the specified string and set to have the cell’s default menu.
 func (o *NSCell) InitTextCell(string_ *foundation.NSString) *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelInitTextCell, string_.Ptr())
 	if _ret != 0 {
@@ -200,6 +203,7 @@ func (o *NSCell) InitTextCell(string_ *foundation.NSString) *NSCell {
 	return NSCellFromID(_ret)
 }
 
+// Returns an NSCell object initialized with the specified image and set to have the cell’s default menu.
 func (o *NSCell) InitImageCell(image *NSImage) *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelInitImageCell, image.Ptr())
 	if _ret != 0 {
@@ -216,59 +220,72 @@ func (o *NSCell) InitWithCoder(coder *foundation.NSCoder) *NSCell {
 	return NSCellFromID(_ret)
 }
 
+// Sets the conditions on which the receiver sends action messages to its target.
 func (o *NSCell) SendActionOn(mask NSEventMask) int {
 	_ret := objc.Send[int](o.Ptr(), _nSCellSelSendActionOn, mask)
 	return _ret
 }
 
+// Compares the string values of the receiver another cell, disregarding case.
 func (o *NSCell) Compare(otherCell objc.ID) foundation.NSComparisonResult {
 	_ret := objc.Send[foundation.NSComparisonResult](o.Ptr(), _nSCellSelCompare, otherCell)
 	return _ret
 }
 
+// Sets the value of the receiver’s cell to an integer value obtained from the specified object.
 func (o *NSCell) TakeIntValueFrom(sender objc.ID) {
 	o.Ptr().Send(_nSCellSelTakeIntValueFrom, sender)
 }
 
+// Sets the value of the receiver’s cell to a single-precision floating-point value obtained from the specified object.
 func (o *NSCell) TakeFloatValueFrom(sender objc.ID) {
 	o.Ptr().Send(_nSCellSelTakeFloatValueFrom, sender)
 }
 
+// Sets the value of the receiver’s cell to a double-precision floating-point value obtained from the specified object.
 func (o *NSCell) TakeDoubleValueFrom(sender objc.ID) {
 	o.Ptr().Send(_nSCellSelTakeDoubleValueFrom, sender)
 }
 
+// Sets the value of the receiver’s cell to the string value obtained from the specified object.
 func (o *NSCell) TakeStringValueFrom(sender objc.ID) {
 	o.Ptr().Send(_nSCellSelTakeStringValueFrom, sender)
 }
 
+// Sets the value of the receiver’s cell to the object value obtained from the specified object.
 func (o *NSCell) TakeObjectValueFrom(sender objc.ID) {
 	o.Ptr().Send(_nSCellSelTakeObjectValueFrom, sender)
 }
 
+// Sets the value of the receiver’s cell to an integer value obtained from the specified object.
 func (o *NSCell) TakeIntegerValueFrom(sender objc.ID) {
 	o.Ptr().Send(_nSCellSelTakeIntegerValueFrom, sender)
 }
 
+// Returns the value for the specified cell attribute.
 func (o *NSCell) CellAttribute(parameter NSCellAttribute) int {
 	_ret := objc.Send[int](o.Ptr(), _nSCellSelCellAttribute, parameter)
 	return _ret
 }
 
+// Sets the value for the specified cell attribute.
 func (o *NSCell) SetCellAttributeTo(parameter NSCellAttribute, value int) {
 	o.Ptr().Send(_nSCellSelSetCellAttributeTo, parameter, value)
 }
 
+// Returns the rectangle in which the receiver draws its image.
 func (o *NSCell) ImageRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCellSelImageRectForBounds, rect)
 	return _ret
 }
 
+// Returns the rectangle in which the receiver draws its title text.
 func (o *NSCell) TitleRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCellSelTitleRectForBounds, rect)
 	return _ret
 }
 
+// Returns the rectangle within which the receiver draws itself
 func (o *NSCell) DrawingRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCellSelDrawingRectForBounds, rect)
 	return _ret
@@ -282,11 +299,13 @@ func NSCell_bulletStringForStringBulletCharacter(string_ *foundation.NSString, b
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns the minimum size needed to display the receiver, constraining it to the specified rectangle.
 func (o *NSCell) CellSizeForBounds(rect corefoundation.CGRect) corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _nSCellSelCellSizeForBounds, rect)
 	return _ret
 }
 
+// Returns the color the receiver uses when drawing the selection highlight.
 func (o *NSCell) HighlightColorWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelHighlightColorWithFrameInView, cellFrame, controlView.Ptr())
 	if _ret != 0 {
@@ -295,10 +314,12 @@ func (o *NSCell) HighlightColorWithFrameInView(cellFrame corefoundation.CGRect, 
 	return NSColorFromID(_ret)
 }
 
+// Recalculates the cell geometry.
 func (o *NSCell) CalcDrawInfo(rect corefoundation.CGRect) {
 	o.Ptr().Send(_nSCellSelCalcDrawInfo, rect)
 }
 
+// Configures the textual and background attributes of the receiver’s field editor.
 func (o *NSCell) SetUpFieldEditorAttributes(textObj *NSText) *NSText {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelSetUpFieldEditorAttributes, textObj.Ptr())
 	if _ret != 0 {
@@ -307,57 +328,70 @@ func (o *NSCell) SetUpFieldEditorAttributes(textObj *NSText) *NSText {
 	return NSTextFromID(_ret)
 }
 
+// Draws the interior portion of the receiver, which includes the image or text portion but does not include the border.
 func (o *NSCell) DrawInteriorWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) {
 	o.Ptr().Send(_nSCellSelDrawInteriorWithFrameInView, cellFrame, controlView.Ptr())
 }
 
+// Draws the receiver’s border and then draws the interior of the cell.
 func (o *NSCell) DrawWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) {
 	o.Ptr().Send(_nSCellSelDrawWithFrameInView, cellFrame, controlView.Ptr())
 }
 
+// Redraws the receiver with the specified highlight setting.
 func (o *NSCell) HighlightWithFrameInView(flag bool, cellFrame corefoundation.CGRect, controlView *NSView) {
 	o.Ptr().Send(_nSCellSelHighlightWithFrameInView, flag, cellFrame, controlView.Ptr())
 }
 
+// Returns the initial delay and repeat values for continuous sending of action messages to target objects.
 func (o *NSCell) GetPeriodicDelayInterval(delay *float32, interval *float32) {
 	o.Ptr().Send(_nSCellSelGetPeriodicDelayInterval, delay, interval)
 }
 
+// Begins tracking mouse events within the receiver.
 func (o *NSCell) StartTrackingAtInView(startPoint corefoundation.CGPoint, controlView *NSView) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCellSelStartTrackingAtInView, startPoint, controlView.Ptr())
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether mouse tracking should continue in the receiving cell.
 func (o *NSCell) ContinueTrackingAtInView(lastPoint corefoundation.CGPoint, currentPoint corefoundation.CGPoint, controlView *NSView) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCellSelContinueTrackingAtInView, lastPoint, currentPoint, controlView.Ptr())
 	return _ret
 }
 
+// Stops tracking mouse events within the receiver.
 func (o *NSCell) StopTrackingAtInViewMouseIsUp(lastPoint corefoundation.CGPoint, stopPoint corefoundation.CGPoint, controlView *NSView, flag bool) {
 	o.Ptr().Send(_nSCellSelStopTrackingAtInViewMouseIsUp, lastPoint, stopPoint, controlView.Ptr(), flag)
 }
 
+// Initiates the mouse tracking behavior in a cell.
 func (o *NSCell) TrackMouseInRectOfViewUntilMouseUp(event *NSEvent, cellFrame corefoundation.CGRect, controlView *NSView, flag bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCellSelTrackMouseInRectOfViewUntilMouseUp, event.Ptr(), cellFrame, controlView.Ptr(), flag)
 	return _ret
 }
 
+// Begins editing of the receiver’s text using the specified field editor.
 func (o *NSCell) EditWithFrameInViewEditorDelegateEvent(rect corefoundation.CGRect, controlView *NSView, textObj *NSText, delegate objc.ID, event *NSEvent) {
 	o.Ptr().Send(_nSCellSelEditWithFrameInViewEditorDelegateEvent, rect, controlView.Ptr(), textObj.Ptr(), delegate, event.Ptr())
 }
 
+// Selects the specified text range in the cell’s field editor.
 func (o *NSCell) SelectWithFrameInViewEditorDelegateStartLength(rect corefoundation.CGRect, controlView *NSView, textObj *NSText, delegate objc.ID, selStart int, selLength int) {
 	o.Ptr().Send(_nSCellSelSelectWithFrameInViewEditorDelegateStartLength, rect, controlView.Ptr(), textObj.Ptr(), delegate, selStart, selLength)
 }
 
+// Ends the editing of text in the receiver using the specified field editor.
 func (o *NSCell) EndEditing(textObj *NSText) {
 	o.Ptr().Send(_nSCellSelEndEditing, textObj.Ptr())
 }
 
+// Sets the receiver to show the I-beam cursor while it tracks the mouse.
 func (o *NSCell) ResetCursorRectInView(cellFrame corefoundation.CGRect, controlView *NSView) {
 	o.Ptr().Send(_nSCellSelResetCursorRectInView, cellFrame, controlView.Ptr())
 }
 
+// Returns the menu associated with the cell and related to the specified event and frame.
 func (o *NSCell) MenuForEventInRectOfView(event *NSEvent, cellFrame corefoundation.CGRect, view *NSView) *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelMenuForEventInRectOfView, event.Ptr(), cellFrame, view.Ptr())
 	if _ret != 0 {
@@ -366,6 +400,7 @@ func (o *NSCell) MenuForEventInRectOfView(event *NSEvent, cellFrame corefoundati
 	return NSMenuFromID(_ret)
 }
 
+// Returns a custom field editor for editing in the view.
 func (o *NSCell) FieldEditorForView(controlView *NSView) *NSTextView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelFieldEditorForView, controlView.Ptr())
 	if _ret != 0 {
@@ -374,6 +409,7 @@ func (o *NSCell) FieldEditorForView(controlView *NSView) *NSTextView {
 	return NSTextViewFromID(_ret)
 }
 
+// Generates dragging image components with the specified frame in the view.
 func (o *NSCell) DraggingImageComponentsWithFrameInView(frame corefoundation.CGRect, view *NSView) *foundation.NSArray[*NSDraggingImageComponent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelDraggingImageComponentsWithFrameInView, frame, view.Ptr())
 	if _ret != 0 {
@@ -768,14 +804,17 @@ func (o *NSCell) SetUsesSingleLineMode(usesSingleLineMode bool) {
 	o.Ptr().Send(_nSCellSelSetUsesSingleLineMode, usesSingleLineMode)
 }
 
+// Simulates a single mouse click on the receiver.
 func (o *NSCell) PerformClick(sender objc.ID) {
 	o.Ptr().Send(_nSCellSelPerformClick, sender)
 }
 
+// Draws the focus ring for the control.
 func (o *NSCell) DrawFocusRingMaskWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) {
 	o.Ptr().Send(_nSCellSelDrawFocusRingMaskWithFrameInView, cellFrame, controlView.Ptr())
 }
 
+// Returns the bounds of the focus ring mask.
 func (o *NSCell) FocusRingMaskBoundsForFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCellSelFocusRingMaskBoundsForFrameInView, cellFrame, controlView.Ptr())
 	return _ret
@@ -853,6 +892,7 @@ func (o *NSCell) SetImportsGraphics(importsGraphics bool) {
 	o.Ptr().Send(_nSCellSelSetImportsGraphics, importsGraphics)
 }
 
+// Changes cell’s state to the next value in the sequence.
 func (o *NSCell) SetNextState() {
 	o.Ptr().Send(_nSCellSelSetNextState)
 }
@@ -871,16 +911,19 @@ func (o *NSCell) NextState() int {
 	return _ret
 }
 
+// Returns hit testing information for the receiver.
 func (o *NSCell) HitTestForEventInRectOfView(event *NSEvent, cellFrame corefoundation.CGRect, controlView *NSView) NSCellHitResult {
 	_ret := objc.Send[NSCellHitResult](o.Ptr(), _nSCellSelHitTestForEventInRectOfView, event.Ptr(), cellFrame, controlView.Ptr())
 	return _ret
 }
 
+// Returns the expansion cell frame for the receiver.
 func (o *NSCell) ExpansionFrameWithFrameInView(cellFrame corefoundation.CGRect, view *NSView) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSCellSelExpansionFrameWithFrameInView, cellFrame, view.Ptr())
 	return _ret
 }
 
+// Instructs the receiver to draw in an expansion frame.
 func (o *NSCell) DrawWithExpansionFrameInView(cellFrame corefoundation.CGRect, view *NSView) {
 	o.Ptr().Send(_nSCellSelDrawWithExpansionFrameInView, cellFrame, view.Ptr())
 }
@@ -899,39 +942,46 @@ func (o *NSCell) InteriorBackgroundStyle() NSBackgroundStyle {
 	return _ret
 }
 
+// Returns the type of data the user can type into the receiver.
 // Deprecated: since macOS 10.0.
 func (o *NSCell) EntryType() int {
 	_ret := objc.Send[int](o.Ptr(), _nSCellSelEntryType)
 	return _ret
 }
 
+// Sets how numeric data is formatted in the receiver and places restrictions on acceptable input.
 // Deprecated: since macOS 10.0.
 func (o *NSCell) SetEntryType(type_ int) {
 	o.Ptr().Send(_nSCellSelSetEntryType, type_)
 }
 
+// Returns whether a string representing a numeric or date value is formatted in a suitable way for the cell’s entry type.
 // Deprecated: since macOS 10.0.
 func (o *NSCell) IsEntryAcceptable(string_ *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCellSelIsEntryAcceptable, string_.Ptr())
 	return _ret
 }
 
+// Sets the auto-ranging and floating point number format of the receiver’s cell.
 // Deprecated: since macOS 10.0.
 func (o *NSCell) SetFloatingPointFormatLeftRight(autoRange bool, leftDigits uint, rightDigits uint) {
 	o.Ptr().Send(_nSCellSelSetFloatingPointFormatLeftRight, autoRange, leftDigits, rightDigits)
 }
 
+// Sets the character of the receiver’s title to be used as a mnemonic character.
 // Deprecated: since macOS 10.8.
 func (o *NSCell) SetMnemonicLocation(location uint) {
 	o.Ptr().Send(_nSCellSelSetMnemonicLocation, location)
 }
 
+// Returns the position of the underlined mnemonic character in the receiver’s title.
 // Deprecated: since macOS 10.8.
 func (o *NSCell) MnemonicLocation() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSCellSelMnemonicLocation)
 	return _ret
 }
 
+// Returns the character in the receiver’s title that appears underlined for use as a mnemonic.
 // Deprecated: since macOS 10.8.
 func (o *NSCell) Mnemonic() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelMnemonic)
@@ -941,6 +991,7 @@ func (o *NSCell) Mnemonic() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Sets the title of the receiver with one character in the string denoted as an access key.
 // Deprecated: since macOS 10.8.
 func (o *NSCell) SetTitleWithMnemonic(stringWithAmpersand *foundation.NSString) {
 	o.Ptr().Send(_nSCellSelSetTitleWithMnemonic, stringWithAmpersand.Ptr())

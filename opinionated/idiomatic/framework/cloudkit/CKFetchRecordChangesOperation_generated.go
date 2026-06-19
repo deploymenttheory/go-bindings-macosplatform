@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An operation that reports on the changed and deleted records in the specified record zone.
+//
 // FetchRecordChangesOperation wraps [raw.CKFetchRecordChangesOperation] with a fluent Go API.
 type FetchRecordChangesOperation struct {
 	inner *raw.CKFetchRecordChangesOperation
@@ -39,7 +41,7 @@ func NewFetchRecordChangesOperation() *FetchRecordChangesOperation {
 	return &FetchRecordChangesOperation{inner: raw.CKFetchRecordChangesOperationFromID(_id)}
 }
 
-// Creates an operation for fetching changes in the specified record zone. - Parameters: - recordZoneID: The zone that contains the records you want to fetch. You can fetch changes in a custom zone. CloudKit doesn't support syncing the default zone. - previousServerChangeToken: The change token from a previous fetch operation. This is the token that the system passes to your “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ handler during a previous fetch operation. Use this token to limit the returned data to only those changes that occur after that fetch request. If you specify `nil` for this parameter, the operation object fetches all records and their contents. - Returns: An initialized operation object. When initializing the operation object, use the token from a previous fetch request if you have one. You can archive tokens and write them to disk for later use. The returned operation object retrieves all changed fields of the record, including any assets in those fields. If you want to minimize the amount of data that returns even further, configure the “CKFetchRecordChangesOperation/desiredKeys“ property with the subset of keys that have values you want to fetch. After initializing the operation, associate at least one progress block with the operation object (excluding the completion block) to process the results.
+// Creates an operation for fetching changes in the specified record zone.
 //
 // NewFetchRecordChangesOperationWithRecordZoneIDPreviousServerChangeToken creates a new [FetchRecordChangesOperation].
 func NewFetchRecordChangesOperationWithRecordZoneIDPreviousServerChangeToken(recordZoneID *raw.CKRecordZoneID, previousServerChangeToken *raw.CKServerChangeToken) *FetchRecordChangesOperation {
@@ -48,7 +50,7 @@ func NewFetchRecordChangesOperationWithRecordZoneIDPreviousServerChangeToken(rec
 	return &FetchRecordChangesOperation{inner: raw.CKFetchRecordChangesOperationFromID(_id)}
 }
 
-// The ID of the record zone with the records you want to fetch. Typically, you set the value of this property when you initialize the operation object. If you intend to change the record zone, update the value before executing the operation or submitting it to a queue.
+// The ID of the record zone with the records you want to fetch.
 //
 // WithRecordZoneID sets the recordZoneID property and returns the receiver for chaining.
 func (x *FetchRecordChangesOperation) WithRecordZoneID(recordZoneID *RecordZoneID) *FetchRecordChangesOperation {
@@ -56,7 +58,7 @@ func (x *FetchRecordChangesOperation) WithRecordZoneID(recordZoneID *RecordZoneI
 	return x
 }
 
-// The token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. The token passes as a parameter to your “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes that occur after the previous fetch request. Tokens are opaque data objects that you can write to disk safely and reuse later. Typically, you set the value of this property when you initialize the operation object. If you intend to change the record zone, update the value of the property before executing the operation or submitting it to a queue.
+// The token that identifies the starting point for retrieving changes.
 //
 // WithPreviousServerChangeToken sets the previousServerChangeToken property and returns the receiver for chaining.
 func (x *FetchRecordChangesOperation) WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchRecordChangesOperation {
@@ -64,7 +66,7 @@ func (x *FetchRecordChangesOperation) WithPreviousServerChangeToken(previousServ
 	return x
 }
 
-// The maximum number of changed records to report with this operation object. Use this property to limit the number of results in situations where you expect the number of changed records to be large. The default value is 0, which causes the server to return an appropriate number of results using dynamic conditions. When the number of returned results exceeds the results limit, the operation object sets the “CKFetchRecordChangesOperation/moreComing“ property to <doc://com.apple.documentation/documentation/swift/true> before executing the block in the “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ property. In your block, check the value of that property, and if it's <doc://com.apple.documentation/documentation/swift/true>, create a new “CKFetchRecordChangesOperation“ object to fetch more results.
+// The maximum number of changed records to report with this operation object.
 //
 // WithResultsLimit sets the resultsLimit property and returns the receiver for chaining.
 func (x *FetchRecordChangesOperation) WithResultsLimit(resultsLimit uint) *FetchRecordChangesOperation {
@@ -72,7 +74,7 @@ func (x *FetchRecordChangesOperation) WithResultsLimit(resultsLimit uint) *Fetch
 	return x
 }
 
-// The fields to fetch for the requested records. Use this property to limit the amount of data that the system retrieves for each record during the fetch operation. This property contains an array of strings, each of which contains the name of a field from the target records. When you retrieve a record, the returned records only include fields with names that match one of the keys in this property. The default value is `nil`, which causes the system to fetch all keys of the record. Because you can fetch records of different types, configure the array to include the merged set of all field names for the requested records and at least one field name from each record type. If you intend to specify the desired set of keys, set the value of this property before executing the operation or submitting it to a queue.
+// The fields to fetch for the requested records.
 //
 // WithDesiredKeys sets the collection, converting the Go slice to an NSArray.
 func (x *FetchRecordChangesOperation) WithDesiredKeys(items ...*foundation.NSString) *FetchRecordChangesOperation {
@@ -95,7 +97,7 @@ func (x *FetchRecordChangesOperation) WithDesiredKeys(items ...*foundation.NSStr
 	return x
 }
 
-// The block to execute with the contents of a changed record. The block returns no value and takes the following parameters: - term `record`: The changed record. If you specify a value for the “CKFetchRecordChangesOperation/desiredKeys“ property, the record only contains the fields in the “CKFetchRecordChangesOperation/desiredKeys“ property. The operation object executes this block once for each record in the zone with changes since the previous fetch request. Each time the block executes, it executes serially with respect to the other progress blocks of the operation. If no records change, the block doesn't execute. If you intend to use this block to process results, set it before executing the operation or submitting it to a queue.
+// The block to execute with the contents of a changed record.
 //
 // WithRecordChangedBlock sets the recordChangedBlock property and returns the receiver for chaining.
 func (x *FetchRecordChangesOperation) WithRecordChangedBlock(recordChangedBlock func(*raw.CKRecord)) *FetchRecordChangesOperation {
@@ -103,7 +105,7 @@ func (x *FetchRecordChangesOperation) WithRecordChangedBlock(recordChangedBlock 
 	return x
 }
 
-// The block to execute with the ID of a deleted record. The block returns no value and takes the following parameters: - term `recordID`: The ID of the deleted record. The operation object executes this block once for each record the server deletes in the record zone after the previous fetch request. Each time the block executes, it executes serially with respect to the other progress blocks of the operation. If there aren't any deleted records, this block doesn't execute. If you intend to use this block to process results, set it before executing the operation or submitting it to a queue.
+// The block to execute with the ID of a deleted record.
 //
 // WithRecordWithIDWasDeletedBlock sets the recordWithIDWasDeletedBlock property and returns the receiver for chaining.
 func (x *FetchRecordChangesOperation) WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(*raw.CKRecordID)) *FetchRecordChangesOperation {
@@ -111,7 +113,7 @@ func (x *FetchRecordChangesOperation) WithRecordWithIDWasDeletedBlock(recordWith
 	return x
 }
 
-// The block to execute when the system finishes processing all changes. The block returns no value and takes the following parameters: - term `serverChangeToken`: The new change token from the server. You can store this token locally and use it during subsequent fetch operations to limit the results to records that the system changes after executing the operation. - term `clientChangeToken`: The most recent client change token from the device. If the change token isn't the most recent change token you provided, the server might not have received the associated changes. - term `operationError`: An error object that contains information about a problem, or `nil` if the system successfully retrieves the changes. When implementing this block, check the “CKFetchRecordChangesOperation/moreComing“ property of the operation object to verify that the server was able to deliver all results. If that property is <doc://com.apple.documentation/documentation/swift/true>, you must create another operation object using the value in the `serverChangeToken` parameter to fetch any remaining changes. The operation object executes this block only once at the conclusion of the operation. It executes after all individual change blocks, but before the operation's completion block. The block executes serially with respect to the other progress blocks of the operation. If you intend to use this block to process results, set it before executing the operation or submitting the operation object to a queue.
+// The block to execute when the system finishes processing all changes.
 //
 // WithFetchRecordChangesCompletionBlock sets the fetchRecordChangesCompletionBlock property and returns the receiver for chaining.
 func (x *FetchRecordChangesOperation) WithFetchRecordChangesCompletionBlock(fetchRecordChangesCompletionBlock func(*raw.CKServerChangeToken, *foundation.NSData, unsafe.Pointer)) *FetchRecordChangesOperation {
@@ -119,7 +121,7 @@ func (x *FetchRecordChangesOperation) WithFetchRecordChangesCompletionBlock(fetc
 	return x
 }
 
-// The database that the operation uses. For operations that you execute in a custom queue, use this property to specify the target database. Setting the database also sets the corresponding container, which it inherits from “CKOperation“. If this property's value is `nil`, the operation targets the user's private database. The default value is `nil`.
+// The database that the operation uses.
 //
 // WithDatabase sets the database property and returns the receiver for chaining.
 func (x *FetchRecordChangesOperation) WithDatabase(database *Database) *FetchRecordChangesOperation {
@@ -127,7 +129,7 @@ func (x *FetchRecordChangesOperation) WithDatabase(database *Database) *FetchRec
 	return x
 }
 
-// The operation's configuration.
+// The operation’s configuration.
 //
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *FetchRecordChangesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordChangesOperation {
@@ -135,7 +137,7 @@ func (x *FetchRecordChangesOperation) WithConfiguration(configuration *Operation
 	return x
 }
 
-// The operation's group.
+// The operation’s group.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *FetchRecordChangesOperation) WithGroup(group *OperationGroup) *FetchRecordChangesOperation {
@@ -143,7 +145,7 @@ func (x *FetchRecordChangesOperation) WithGroup(group *OperationGroup) *FetchRec
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *FetchRecordChangesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordChangesOperation {
@@ -167,7 +169,7 @@ func (x *FetchRecordChangesOperation) WithAllowsCellularAccess(allowsCellularAcc
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A Boolean value that indicates whether the operation is long-lived.
 //
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *FetchRecordChangesOperation) WithLongLived(longLived bool) *FetchRecordChangesOperation {

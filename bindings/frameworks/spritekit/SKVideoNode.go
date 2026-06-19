@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A graphical element that plays video content.
+//
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skvideonode
 type SKVideoNode struct {
 	SKNode
@@ -48,7 +50,7 @@ func SKVideoNodeFromID(id objc.ID) *SKVideoNode {
 	return o
 }
 
-// Create a video node from an AVPlayer. You can use the AVPlayer to control playback.
+// Creates and initializes a video node using an existing video player object.
 func SKVideoNodeVideoNodeWithAVPlayer(player *avfoundation.AVPlayer) *SKVideoNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithAVPlayer, player.Ptr())
 	if _ret != 0 {
@@ -57,7 +59,7 @@ func SKVideoNodeVideoNodeWithAVPlayer(player *avfoundation.AVPlayer) *SKVideoNod
 	return SKVideoNodeFromID(_ret)
 }
 
-// Create a video node from a file.
+// Creates and initializes a new video node using a video file stored in the app bundle.
 // Deprecated: since macOS 10.11.
 func SKVideoNodeVideoNodeWithVideoFileNamed(videoFile *foundation.NSString) *SKVideoNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithVideoFileNamed, videoFile.Ptr())
@@ -67,6 +69,7 @@ func SKVideoNodeVideoNodeWithVideoFileNamed(videoFile *foundation.NSString) *SKV
 	return SKVideoNodeFromID(_ret)
 }
 
+// Creates and initializes a new video node using a video file stored in the app bundle.
 func SKVideoNodeVideoNodeWithFileNamed(videoFile *foundation.NSString) *SKVideoNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithFileNamed, videoFile.Ptr())
 	if _ret != 0 {
@@ -75,7 +78,7 @@ func SKVideoNodeVideoNodeWithFileNamed(videoFile *foundation.NSString) *SKVideoN
 	return SKVideoNodeFromID(_ret)
 }
 
-// Create a video node from a URL.
+// Creates and initializes a video node using a URL that points to a video file.
 // Deprecated: since macOS 10.11.
 func SKVideoNodeVideoNodeWithVideoURL(videoURL *foundation.NSURL) *SKVideoNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithVideoURL, videoURL.Ptr())
@@ -85,6 +88,7 @@ func SKVideoNodeVideoNodeWithVideoURL(videoURL *foundation.NSURL) *SKVideoNode {
 	return SKVideoNodeFromID(_ret)
 }
 
+// Creates and initializes a video node using a URL that points to a video file.
 func SKVideoNodeVideoNodeWithURL(videoURL *foundation.NSURL) *SKVideoNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithURL, videoURL.Ptr())
 	if _ret != 0 {
@@ -93,7 +97,7 @@ func SKVideoNodeVideoNodeWithURL(videoURL *foundation.NSURL) *SKVideoNode {
 	return SKVideoNodeFromID(_ret)
 }
 
-// Designated Initializer. Initialize a video node from an AVPlayer. You can use the AVPlayer to control playback.
+// Initializes a video node using an existing AVPlayer object.
 func (o *SKVideoNode) InitWithAVPlayer(player *avfoundation.AVPlayer) *SKVideoNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithAVPlayer, player.Ptr())
 	if _ret != 0 {
@@ -102,7 +106,7 @@ func (o *SKVideoNode) InitWithAVPlayer(player *avfoundation.AVPlayer) *SKVideoNo
 	return SKVideoNodeFromID(_ret)
 }
 
-// Initialize a video node from a file.
+// Initializes a video node using a video file stored in the app bundle.
 // Deprecated: since macOS 10.10.
 func (o *SKVideoNode) InitWithVideoFileNamed(videoFile *foundation.NSString) *SKVideoNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithVideoFileNamed, videoFile.Ptr())
@@ -112,6 +116,7 @@ func (o *SKVideoNode) InitWithVideoFileNamed(videoFile *foundation.NSString) *SK
 	return SKVideoNodeFromID(_ret)
 }
 
+// Initializes a video node using a video file stored in the app bundle.
 func (o *SKVideoNode) InitWithFileNamed(videoFile *foundation.NSString) *SKVideoNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithFileNamed, videoFile.Ptr())
 	if _ret != 0 {
@@ -120,6 +125,7 @@ func (o *SKVideoNode) InitWithFileNamed(videoFile *foundation.NSString) *SKVideo
 	return SKVideoNodeFromID(_ret)
 }
 
+// Initializes a video node using a URL that points to a video file.
 // Deprecated: since macOS 10.10.
 func (o *SKVideoNode) InitWithVideoURL(url *foundation.NSURL) *SKVideoNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithVideoURL, url.Ptr())
@@ -129,6 +135,7 @@ func (o *SKVideoNode) InitWithVideoURL(url *foundation.NSURL) *SKVideoNode {
 	return SKVideoNodeFromID(_ret)
 }
 
+// Initializes a video node using a URL.
 func (o *SKVideoNode) InitWithURL(url *foundation.NSURL) *SKVideoNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithURL, url.Ptr())
 	if _ret != 0 {
@@ -137,7 +144,7 @@ func (o *SKVideoNode) InitWithURL(url *foundation.NSURL) *SKVideoNode {
 	return SKVideoNodeFromID(_ret)
 }
 
-// Support coding and decoding via NSKeyedArchiver.
+// Tells you when to initialize a video node that was created from an archive.
 func (o *SKVideoNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKVideoNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithCoder, aDecoder.Ptr())
 	if _ret != 0 {
@@ -146,10 +153,12 @@ func (o *SKVideoNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKVideoNode {
 	return SKVideoNodeFromID(_ret)
 }
 
+// Starts video playback.
 func (o *SKVideoNode) Play() {
 	o.Ptr().Send(_sKVideoNodeSelPlay)
 }
 
+// Pauses video playback.
 func (o *SKVideoNode) Pause() {
 	o.Ptr().Send(_sKVideoNodeSelPause)
 }

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object you use to create and manage a network relay configuration.
+//
 // NERelayManager wraps [raw.NERelayManager] with a fluent Go API.
 type NERelayManager struct {
 	inner *raw.NERelayManager
@@ -39,7 +41,7 @@ func NewNERelayManager() *NERelayManager {
 	return &NERelayManager{inner: raw.NERelayManagerFromID(_id)}
 }
 
-// @property localizedDescription @discussion A string containing a description of the relay.
+// A string that contains the display name of the relay configuration.
 //
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *NERelayManager) WithLocalizedDescription(localizedDescription string) *NERelayManager {
@@ -47,7 +49,7 @@ func (x *NERelayManager) WithLocalizedDescription(localizedDescription string) *
 	return x
 }
 
-// @property enabled @discussion Toggles the enabled status of the relay.
+// A Boolean used to toggle the enabled state of the relay configuration.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *NERelayManager) WithEnabled(enabled bool) *NERelayManager {
@@ -71,7 +73,7 @@ func (x *NERelayManager) WithAllowDNSFailover(allowDNSFailover bool) *NERelayMan
 	return x
 }
 
-// @property relays @discussion An array of relay configurations describing one or more relay hops.
+// An array of one or two relay server configurations. If multiple relays are configured, application traffic routes through both of them in the order they appear in the array.
 //
 // WithRelays sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithRelays(items ...*raw.NERelay) *NERelayManager {
@@ -94,7 +96,7 @@ func (x *NERelayManager) WithRelays(items ...*raw.NERelay) *NERelayManager {
 	return x
 }
 
-// @property matchDomains @discussion An array of strings containing domain names. If this property is non-nil, the relay will be used to access hosts within the specified domains. If this and the match FQDNs property is nil, the relay will be used for all domains.
+// A list of domain strings used to determine which connections will use the relay configuration contained in this object.
 //
 // WithMatchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithMatchDomains(items ...*foundation.NSString) *NERelayManager {
@@ -140,7 +142,7 @@ func (x *NERelayManager) WithMatchFQDNs(items ...*foundation.NSString) *NERelayM
 	return x
 }
 
-// @property excludedDomains @discussion An array of strings containing domain names. If the destination host name of a connection shares a suffix with one of these strings then the relay will not be used.
+// A list of domain strings used to determine which connections won’t use the relay configuration contained in this object.
 //
 // WithExcludedDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithExcludedDomains(items ...*foundation.NSString) *NERelayManager {
@@ -186,7 +188,7 @@ func (x *NERelayManager) WithExcludedFQDNs(items ...*foundation.NSString) *NERel
 	return x
 }
 
-// @property onDemandRules @discussion An array of NEOnDemandRule objects. If nil, the associated relay will always apply. If non-nil, the array describes the networks on which the relay should be used or not.
+// An array of rules you use to determine which networks the relay uses.
 //
 // WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NERelayManager {
@@ -209,7 +211,7 @@ func (x *NERelayManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NER
 	return x
 }
 
-// @method loadFromPreferencesWithCompletionHandler: @discussion This function loads the current relay configuration from the caller's relay preferences. @param completionHandler A block that will be called when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+// Load your relay configuration from the system networking preferences.
 //
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NERelayManager) LoadFromPreferences(ctx context.Context) error {
@@ -229,7 +231,7 @@ func (x *NERelayManager) LoadFromPreferences(ctx context.Context) error {
 	}
 }
 
-// @method removeFromPreferencesWithCompletionHandler: @discussion This function removes the relay configuration from the caller's relay preferences. If the relay is enabled, the relay becomes disabled. @param completionHandler A block that will be called when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
+// Remove your relay configuration from the system networking preferences.
 //
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NERelayManager) RemoveFromPreferences(ctx context.Context) error {
@@ -249,7 +251,7 @@ func (x *NERelayManager) RemoveFromPreferences(ctx context.Context) error {
 	}
 }
 
-// @method saveToPreferencesWithCompletionHandler: @discussion This function saves the relay configuration in the caller's relay preferences. If the relay are enabled, they will become active. @param completionHandler A block that will be called when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
+// Save your relay configuration to the system networking preferences.
 //
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NERelayManager) SaveToPreferences(ctx context.Context) error {
@@ -271,9 +273,25 @@ func (x *NERelayManager) SaveToPreferences(ctx context.Context) error {
 
 // @method getLastClientErrors @discussion This function will get errors that the client detected while using this relay configuration within the specified time period.  Errors will be from the NERelayClientErrorDomain and the NERelayManagerClientErrorNone value will be set for successful connections. @param seconds A NSTimeInterval that specifies how many seconds to report errors for.  The maximum supported value is 24 hours and any larger values will be automatically reduced to 24 hours. @param completionHandler A block that will be called when once the errors have been collected. The NSArray will contain a list of NERelayManagerClientError values detected within the last number of seconds as specified by the "seconds" parameter.  The values will be ordered from the error most recently detected to the oldest.  The error value of NERelayManagerClientErrorNone indicates the last successful use of the relay without error.  The NSArray will be empty if there are no values detected within the specified time period or nil if there was a problem in retrieving the errors.
 //
-// GetLastClientErrorsCompletionHandler calls the underlying GetLastClientErrorsCompletionHandler.
-func (x *NERelayManager) GetLastClientErrorsCompletionHandler(seconds float64, completionHandler objc.Block) {
-	x.inner.GetLastClientErrorsCompletionHandler(seconds, completionHandler)
+// GetLastClientErrors blocks until the operation completes or ctx is cancelled.
+func (x *NERelayManager) GetLastClientErrors(ctx context.Context, seconds float64) (*foundation.NSArray[objc.ID], error) {
+	type _result struct {
+		val *foundation.NSArray[objc.ID]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetLastClientErrorsCompletionHandler(seconds, func(_p0 *foundation.NSArray[objc.ID]) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[objc.ID]
+		return _zero, ctx.Err()
+	}
 }
 
 // @property localizedDescription @discussion A string containing a description of the relay.
@@ -463,7 +481,7 @@ type NERelayManagerable interface {
 	LoadFromPreferences(ctx context.Context) error
 	RemoveFromPreferences(ctx context.Context) error
 	SaveToPreferences(ctx context.Context) error
-	GetLastClientErrorsCompletionHandler(seconds float64, completionHandler objc.Block)
+	GetLastClientErrors(ctx context.Context, seconds float64) (*foundation.NSArray[objc.ID], error)
 	LocalizedDescription() string
 	SetLocalizedDescription(localizedDescription string)
 	IsEnabled() bool

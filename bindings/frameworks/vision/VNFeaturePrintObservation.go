@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An observation that provides the recognized feature print.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vnfeatureprintobservation
 type VNFeaturePrintObservation struct {
 	VNObservation
@@ -35,7 +37,7 @@ func VNFeaturePrintObservationFromID(id objc.ID) *VNFeaturePrintObservation {
 	return o
 }
 
-// @brief Computes the distance between two observations. @discussion The larger the distance the more dissimlar the feature prints are. In case of an error this method returns false with an error describing the error condition, for instance comparing two non-comparable feature prints.
+// Computes the distance between two feature print observations.
 func (o *VNFeaturePrintObservation) ComputeDistanceToFeaturePrintObservationError(outDistance *float32, featurePrint *VNFeaturePrintObservation) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vNFeaturePrintObservationSelComputeDistanceToFeaturePrintObservationError, outDistance, featurePrint.Ptr(), unsafe.Pointer(&_nsErr))

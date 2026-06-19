@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to schedule a local notification, which includes the content of the notification and the trigger conditions for delivery.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/unnotificationrequest
 type UNNotificationRequest struct {
 	foundation.NSObject
@@ -33,6 +35,7 @@ func UNNotificationRequestFromID(id objc.ID) *UNNotificationRequest {
 	return o
 }
 
+// Creates a notification request object that you use to schedule a notification.
 func UNNotificationRequestRequestWithIdentifierContentTrigger(identifier *foundation.NSString, content *UNNotificationContent, trigger *UNNotificationTrigger) *UNNotificationRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationRequest), _uNNotificationRequestSelRequestWithIdentifierContentTrigger, identifier.Ptr(), content.Ptr(), trigger.Ptr())
 	if _ret != 0 {

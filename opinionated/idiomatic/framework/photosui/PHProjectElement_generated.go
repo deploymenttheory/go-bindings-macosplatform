@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The superclass for all element objects.
+//
 // ProjectElement wraps [raw.PHProjectElement] with a fluent Go API.
 type ProjectElement struct {
 	inner *raw.PHProjectElement

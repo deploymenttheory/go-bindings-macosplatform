@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a node in an audio unit’s parameter tree.
+//
 // Apple documentation: https://developer.apple.com/documentation/audiotoolbox/auparameternode
 type AUParameterNode struct {
 	foundation.NSObject
@@ -49,7 +51,7 @@ func AUParameterNodeFromID(id objc.ID) *AUParameterNode {
 	return o
 }
 
-// @method		displayNameWithLength: @brief		A version of displayName possibly abbreviated to the given desired length, in characters. @discussion The default implementation simply returns displayName.
+// Another version of the display name, possibly truncated to a desired length.
 func (o *AUParameterNode) DisplayNameWithLength(maximumLength int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUParameterNodeSelDisplayNameWithLength, maximumLength)
 	if _ret != 0 {
@@ -58,7 +60,7 @@ func (o *AUParameterNode) DisplayNameWithLength(maximumLength int) *foundation.N
 	return foundation.NSStringFromID(_ret)
 }
 
-// @method	tokenByAddingParameterObserver: @brief	Add an observer for a parameter or all parameters in a group/tree. @discussion An audio unit view can use an AUParameterObserver to be notified of changes to a single parameter, or to all parameters in a group/tree. These callbacks are throttled so as to limit the rate of redundant notifications in the case of frequent changes to a single parameter. This block is called in an arbitrary thread context. It is responsible for thread-safety. It must not make any calls to add or remove other observers, including itself; this will deadlock. An audio unit's implementation should interact with the parameter object via implementorValueObserver and implementorValueProvider. Parameter observers are bound to a specific parameter instance. If this parameter is destroyed, e.g. if the parameter tree is re-constructed, the previously set parameter observers will no longer be valid. Clients can observe changes to the parameter tree via KVO. See the discussion of -[AUAudioUnit parameterTree]. @param observer A block to call after the value of a parameter has changed. @return A token which can be passed to removeParameterObserver: or to -[AUParameter setValue:originator:]
+// Adds an observer for a single parameter or all parameters in a group.
 func (o *AUParameterNode) TokenByAddingParameterObserver(observer func(uint64, float32)) unsafe.Pointer {
 	var __block_observer objc.Block
 	if observer != nil {
@@ -71,7 +73,7 @@ func (o *AUParameterNode) TokenByAddingParameterObserver(observer func(uint64, f
 	return _ret
 }
 
-// @method tokenByAddingParameterRecordingObserver: @brief	Add a recording observer for a parameter or all parameters in a group/tree. @discussion This is a variant of tokenByAddingParameterAutomationObserver where the callback receives AURecordedParameterEvents instead of AUParameterAutomationEvents. This will be deprecated in favor of tokenByAddingParameterAutomationObserver in a future release.
+// Adds a recording observer for a single parameter or all parameters in a group.
 func (o *AUParameterNode) TokenByAddingParameterRecordingObserver(observer func(int, *AURecordedParameterEvent)) unsafe.Pointer {
 	var __block_observer objc.Block
 	if observer != nil {
@@ -97,7 +99,7 @@ func (o *AUParameterNode) TokenByAddingParameterAutomationObserver(observer func
 	return _ret
 }
 
-// @method removeParameterObserver: @brief	Remove an observer created with tokenByAddingParameterObserver, tokenByAddingParameterRecordingObserver, or tokenByAddingParameterAutomationObserver. @discussion This call will remove the callback corresponding to the supplied token. Note that this will block until any callbacks currently in flight have completed.
+// Remove a specific parameter observer.
 func (o *AUParameterNode) RemoveParameterObserver(token unsafe.Pointer) {
 	o.Ptr().Send(_aUParameterNodeSelRemoveParameterObserver, token)
 }

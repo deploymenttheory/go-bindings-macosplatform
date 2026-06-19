@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract subclass for creating animations that manipulate the value of layer properties.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartzcore/capropertyanimation
 type CAPropertyAnimation struct {
 	CAAnimation
@@ -38,6 +40,7 @@ func CAPropertyAnimationFromID(id objc.ID) *CAPropertyAnimation {
 	return o
 }
 
+// Creates and returns an CAPropertyAnimation instance for the specified key path.
 func CAPropertyAnimationAnimationWithKeyPath(path *foundation.NSString) *CAPropertyAnimation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAPropertyAnimation), _cAPropertyAnimationSelAnimationWithKeyPath, path.Ptr())
 	if _ret != 0 {

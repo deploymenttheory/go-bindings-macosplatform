@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A formatter that converts between dates and their textual representations.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsdateformatter
 type NSDateFormatter struct {
 	NSFormatter
@@ -549,12 +551,14 @@ func (o *NSDateFormatter) SetDoesRelativeDateFormatting(doesRelativeDateFormatti
 	o.Ptr().Send(_nSDateFormatterSelSetDoesRelativeDateFormatting, doesRelativeDateFormatting)
 }
 
+// Initializes and returns an NSDateFormatter instance that uses the OS X 10.0 formatting behavior and the given date format string in its conversions.
 // Deprecated: Create an NSDateFormatter with `init` and set the dateFormat property instead.
 func (o *NSDateFormatter) InitWithDateFormatAllowNaturalLanguage(format *NSString, flag bool) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateFormatterSelInitWithDateFormatAllowNaturalLanguage, format.Ptr(), flag)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether the receiver attempts to process dates entered as a vernacular string.
 // Deprecated: There is no replacement
 func (o *NSDateFormatter) AllowsNaturalLanguage() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateFormatterSelAllowsNaturalLanguage)

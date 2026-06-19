@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// Cluster Water Heater Management This cluster is used to allow clients to control the operation of a hot water heating appliance so that it can be used with energy management.
+//
 // MTRClusterWaterHeaterManagement wraps [raw.MTRClusterWaterHeaterManagement] with a fluent Go API.
 type MTRClusterWaterHeaterManagement struct {
 	inner *raw.MTRClusterWaterHeaterManagement

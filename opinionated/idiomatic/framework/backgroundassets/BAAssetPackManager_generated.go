@@ -167,7 +167,7 @@ func (x *AssetPackManager) EnsureLocalAvailabilityOfAssetPackRequireLatestVersio
 // Gets the latest asset-pack information from the server, updates outdated asset packs, and removes obsolete asset packs.
 //
 // CheckForUpdatesWithCompletionHandler calls the underlying CheckForUpdatesWithCompletionHandler.
-func (x *AssetPackManager) CheckForUpdatesWithCompletionHandler(completionHandler objc.Block) {
+func (x *AssetPackManager) CheckForUpdatesWithCompletionHandler(completionHandler func(*foundation.NSSet[*foundation.NSString], *foundation.NSSet[*foundation.NSString], unsafe.Pointer)) {
 	x.inner.CheckForUpdatesWithCompletionHandler(completionHandler)
 }
 
@@ -242,7 +242,7 @@ type AssetPackManagerable interface {
 	AssetPackIsAvailableLocallyWithIdentifier(assetPackIdentifier string) bool
 	EnsureLocalAvailabilityOfAssetPack(ctx context.Context, assetPack *raw.BAAssetPack) error
 	EnsureLocalAvailabilityOfAssetPackRequireLatestVersion(ctx context.Context, assetPack *raw.BAAssetPack, shouldUpdate bool) error
-	CheckForUpdatesWithCompletionHandler(completionHandler objc.Block)
+	CheckForUpdatesWithCompletionHandler(completionHandler func(*foundation.NSSet[*foundation.NSString], *foundation.NSSet[*foundation.NSString], unsafe.Pointer))
 	ContentsAtPathSearchingInAssetPackWithIdentifierOptionsError(path string, assetPackIdentifier string, options foundation.NSDataReadingOptions) (*foundation.NSData, error)
 	FileDescriptorForPathSearchingInAssetPackWithIdentifierError(path string, assetPackIdentifier string) (int, error)
 	URLForPathError(path string) (*foundation.NSURL, error)

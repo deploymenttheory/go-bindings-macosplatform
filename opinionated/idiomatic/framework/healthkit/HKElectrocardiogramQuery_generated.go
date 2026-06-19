@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A query that returns the underlying voltage measurements for an electrocardiogram sample.
+//
 // ElectrocardiogramQuery wraps [raw.HKElectrocardiogramQuery] with a fluent Go API.
 type ElectrocardiogramQuery struct {
 	inner *raw.HKElectrocardiogramQuery
@@ -30,7 +32,7 @@ func ElectrocardiogramQueryFromID(id objc.ID) *ElectrocardiogramQuery {
 	return &ElectrocardiogramQuery{inner: raw.HKElectrocardiogramQueryFromID(id)}
 }
 
-// @method        initWithElectrocardiogram:dataHandler: @abstract      Returns a query that will enumerate over voltages recorded across leads in an electrocardiogram. @param         electrocardiogram    The sample for which the lead data will be returned. @param         dataHandler          The block to invoke with results from the query. It will be called once for each voltage measurement. Call [query stop] to stop enumeration, if desired.
+// Creates a new electrocardiogram query object.
 //
 // NewElectrocardiogramQueryWithElectrocardiogramDataHandler creates a new [ElectrocardiogramQuery].
 func NewElectrocardiogramQueryWithElectrocardiogramDataHandler(electrocardiogram *raw.HKElectrocardiogram, dataHandler func(*raw.HKElectrocardiogramQuery, *raw.HKElectrocardiogramVoltageMeasurement, bool, unsafe.Pointer)) *ElectrocardiogramQuery {

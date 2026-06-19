@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A window controller that displays nearby Bluetooth-based MIDI peripherals.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreaudiokit/cabtlemidiwindowcontroller
 type CABTLEMIDIWindowController struct {
 	appkit.NSWindowController

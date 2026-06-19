@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The route information that Apple servers return in response to your request for directions.
+//
 // DirectionsResponse wraps [raw.MKDirectionsResponse] with a fluent Go API.
 type DirectionsResponse struct {
 	inner *raw.MKDirectionsResponse

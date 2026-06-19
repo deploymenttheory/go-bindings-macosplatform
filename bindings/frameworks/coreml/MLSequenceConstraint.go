@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The constraints for a sequence feature.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mlsequenceconstraint
 type MLSequenceConstraint struct {
 	foundation.NSObject

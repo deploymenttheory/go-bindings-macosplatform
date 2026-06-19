@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An instance that represents an app running on a device.
+//
 // RunningApplication wraps [raw.SCRunningApplication] with a fluent Go API.
 type RunningApplication struct {
 	inner *raw.SCRunningApplication

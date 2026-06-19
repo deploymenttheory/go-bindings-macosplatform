@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable object that represents an audiovisual container that conforms to the QuickTime movie file format or a related format like MPEG-4.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmutablemovie
 type AVMutableMovie struct {
 	AVMovie
@@ -58,10 +60,10 @@ func AVMutableMovieFromID(id objc.ID) *AVMutableMovie {
 	return o
 }
 
-// @method			movieWithURL:options:error: @abstract		Creates an AVMutableMovie object from a movie header stored in a QuickTime movie file or ISO base media file. @param			URL An NSURL object that specifies a file containing a movie header. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. @param			outError If an error occurs creating a movie, describes the nature of the failure. @result			An AVMutableMovie object @discussion     By default, the defaultMediaDataStorage property will be nil and each associated AVMutableMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from a file and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
+// Returns a new mutable movie object from a movie header stored in a QuickTime movie file of ISO base media file.
 func AVMutableMovieMovieWithURLOptionsError(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMovie), _aVMutableMovieSelMovieWithURLOptionsError, uRL.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMovie), _aVMutableMovieSelMovieWithURLOptionsError, uRL.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -71,10 +73,10 @@ func AVMutableMovieMovieWithURLOptionsError(uRL *foundation.NSURL, options *foun
 	return AVMutableMovieFromID(_ret), nil
 }
 
-// @method			initWithURL:options:error: @abstract		Creates an AVMutableMovie object from a movie header stored in a QuickTime movie file or ISO base media file. @param			URL An NSURL object that specifies a file containing a movie header. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. @param			outError If an error occurs creating a movie, describes the nature of the failure. @result			An AVMutableMovie object @discussion     By default, the defaultMediaDataStorage property will be nil and each associated AVMutableMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from a file and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
+// Creates a mutable movie object from a movie header stored in a QuickTime movie file of ISO base media file.
 func (o *AVMutableMovie) InitWithURLOptionsError(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelInitWithURLOptionsError, uRL.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelInitWithURLOptionsError, uRL.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -84,10 +86,10 @@ func (o *AVMutableMovie) InitWithURLOptionsError(uRL *foundation.NSURL, options 
 	return AVMutableMovieFromID(_ret), nil
 }
 
-// @method			movieWithData:options:error: @abstract		Creates an AVMutableMovie object from a movie header stored in an NSData object. @param			data An NSData object containing a movie header. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. @param			outError If an error occurs creating a movie, describes the nature of the failure. @result			An AVMutableMovie object @discussion     You can use this method to operate on movie headers that are not stored in files. In general you should avoid loading an entire movie file with its media data into an instance of NSData! By default, the defaultMediaDataStorage property will be nil and each associated AVMutableMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
+// Returns a new mutable movie object from a movie stored in a data object.
 func AVMutableMovieMovieWithDataOptionsError(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMovie), _aVMutableMovieSelMovieWithDataOptionsError, data.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMovie), _aVMutableMovieSelMovieWithDataOptionsError, data.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -97,10 +99,10 @@ func AVMutableMovieMovieWithDataOptionsError(data *foundation.NSData, options *f
 	return AVMutableMovieFromID(_ret), nil
 }
 
-// @method			initWithData:options:error: @abstract		Creates an AVMutableMovie object from a movie header stored in an NSData object. @param			data An NSData object containing a movie header. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. @param			outError If an error occurs creating a movie, describes the nature of the failure. @result			An AVMutableMovie object @discussion     You can use this method to operate on movie headers that are not stored in files. In general you should avoid loading an entire movie file with its media data into an instance of NSData! By default, the defaultMediaDataStorage property will be nil and each associated AVMutableMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
+// Creates a mutable movie object from a movie stored in a data object.
 func (o *AVMutableMovie) InitWithDataOptionsError(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelInitWithDataOptionsError, data.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelInitWithDataOptionsError, data.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -110,10 +112,10 @@ func (o *AVMutableMovie) InitWithDataOptionsError(data *foundation.NSData, optio
 	return AVMutableMovieFromID(_ret), nil
 }
 
-// @method			movieWithSettingsFromMovie:options:error: @abstract		Creates an AVMutableMovie object without tracks (and therefore without media). @param			movie If you wish to transfer settings from an existing movie (including movie userdata and metadata, preferred rate, preferred volume, etc.), pass a reference to an AVMovie object representing that movie. Otherwise pass nil. The userdata and metadata from the source movie may need to be converted if the format of that movie differs from fileType; you may wish to inspect the userdata or metadata of the receiver to ensure that important data was copied. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. Pass nil for default initialization behavior. @param			outError If an error occurs creating a movie, describes the nature of the failure. @result			An AVMutableMovie object @discussion By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
+// Returns a new mutable movie object without tracks.
 func AVMutableMovieMovieWithSettingsFromMovieOptionsError(movie *AVMovie, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMovie), _aVMutableMovieSelMovieWithSettingsFromMovieOptionsError, movie.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableMovie), _aVMutableMovieSelMovieWithSettingsFromMovieOptionsError, movie.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -123,10 +125,10 @@ func AVMutableMovieMovieWithSettingsFromMovieOptionsError(movie *AVMovie, option
 	return AVMutableMovieFromID(_ret), nil
 }
 
-// @method			initWithSettingsFromMovie:options:error: @abstract		Creates an AVMutableMovie object without tracks (and therefore without media). @param			movie If you wish to transfer settings from an existing movie (including movie userdata and metadata, preferred rate, preferred volume, etc.), pass a reference to an AVMovie object representing that movie. Otherwise pass nil. The userdata and metadata from the source movie may need to be converted if the format of that movie differs from fileType; you may wish to inspect the userdata or metadata of the receiver to ensure that important data was copied. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. Pass nil for default initialization behavior. @param			outError If an error occurs creating a movie, describes the nature of the failure. @result			An AVMutableMovie object @discussion By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
+// Creates a mutable movie object without tracks.
 func (o *AVMutableMovie) InitWithSettingsFromMovieOptionsError(movie *AVMovie, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVMutableMovie, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelInitWithSettingsFromMovieOptionsError, movie.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelInitWithSettingsFromMovieOptionsError, movie.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -158,7 +160,7 @@ func (o *AVMutableMovie) SetTimescale(timescale int32) {
 	o.Ptr().Send(_aVMutableMovieSelSetTimescale, timescale)
 }
 
-// @method			insertTimeRange:ofAsset:atTime:copySampleData:error: @abstract		Inserts all the tracks of a timeRange of an asset into a movie. @param			timeRange The time range of the asset to be inserted. @param			asset An AVAsset object indicating the source of the inserted media. Only instances of AVURLAsset and AVComposition are supported. Must not be nil. @param			startTime The time in the target movie at which the media is to be inserted. @param			copySampleData A BOOL value that indicates whether sample data is to be copied from the source to the destination during edits. If YES, the sample data is written to the location specified by the track property mediaDataStorage if non-nil, or else by the movie property defaultMediaDataStorage if non-nil; if both are nil, the method will fail and return NO. If NO, sample data will not be written and sample references to the samples in their original container will be added as necessary. Note that in this case, this method will fail if the source AVAsset is not able to provide sample reference information for the original container. @param			outError If the insertion fails, an NSError object that describes the nature of the failure. @result			A BOOL value that indicates the success of the insertion. @discussion		This method may add new tracks to the target movie to ensure that all tracks of the asset are represented in the inserted timeRange. Existing content at the specified startTime will be pushed out by the duration of timeRange. Note that metadata will not be automatically copied.
+// Inserts all of the tracks in a specified time range of an asset into a movie.
 func (o *AVMutableMovie) InsertTimeRangeOfAssetAtTimeCopySampleDataError(timeRange coremedia.CMTimeRange, asset *AVAsset, startTime coremedia.CMTime, copySampleData bool) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _aVMutableMovieSelInsertTimeRangeOfAssetAtTimeCopySampleDataError, timeRange, asset.Ptr(), startTime, copySampleData, unsafe.Pointer(&_nsErr))
@@ -168,17 +170,17 @@ func (o *AVMutableMovie) InsertTimeRangeOfAssetAtTimeCopySampleDataError(timeRan
 	return _ret, nil
 }
 
-// @method			insertEmptyTimeRange: @abstract		Adds an empty time range to the target movie. @param			timeRange The time range to be made empty. Note that you cannot add empty time ranges to the end of a movie.
+// Adds an empty time range to a movie.
 func (o *AVMutableMovie) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
 	o.Ptr().Send(_aVMutableMovieSelInsertEmptyTimeRange, timeRange)
 }
 
-// @method			removeTimeRange: @abstract		Removes a specified time range from a movie. @param			timeRange The time range to be removed.
+// Removes the specified time range from a movie.
 func (o *AVMutableMovie) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
 	o.Ptr().Send(_aVMutableMovieSelRemoveTimeRange, timeRange)
 }
 
-// @method			scaleTimeRange:toDuration: @abstract		Changes the duration of a time range of a movie. @param			timeRange The time range to be scaled. @param			duration The new duration of the time range.
+// Changes the duration of a time range in a movie.
 func (o *AVMutableMovie) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
 	o.Ptr().Send(_aVMutableMovieSelScaleTimeRangeToDuration, timeRange, duration)
 }
@@ -207,7 +209,7 @@ func (o *AVMutableMovie) SetInterleavingPeriod(interleavingPeriod coremedia.CMTi
 	o.Ptr().Send(_aVMutableMovieSelSetInterleavingPeriod, interleavingPeriod)
 }
 
-// @method			mutableTrackCompatibleWithTrack: @abstract		Provides a reference to a track of a mutable movie into which any time range of an AVAssetTrack can be inserted (via -[AVMutableMovieTrack insertTimeRange:ofTrack:atTime:copySampleData:error:]). @param			track A reference to the AVAssetTrack from which a time range may be inserted. @result			An AVMutableMovieTrack that can accommodate the insertion. If no such track is available, the result is nil. A new track of the same media type as the AVAssetTrack can be created via -addMutableTrackWithMediaType:copySettingsFromTrack:options:, and this new track will be compatible. @discussion		For best performance, the number of tracks in a movie should be kept to a minimum, corresponding to the number for which media data must be presented in parallel. If media data of the same type is to be presented serially, even from multiple assets, a single track of that media type should be used. This method, -mutableTrackCompatibleWithTrack:, can help the client to identify an existing target track for an insertion.
+// Provides a reference to a track from a mutable movie into which you can insert any time range.
 func (o *AVMutableMovie) MutableTrackCompatibleWithTrack(track *AVAssetTrack) *AVMutableMovieTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelMutableTrackCompatibleWithTrack, track.Ptr())
 	if _ret != 0 {
@@ -216,25 +218,25 @@ func (o *AVMutableMovie) MutableTrackCompatibleWithTrack(track *AVAssetTrack) *A
 	return AVMutableMovieTrackFromID(_ret)
 }
 
-// @method			addMutableTrackWithMediaType:copySettingsFromTrack:options: @abstract		Adds an empty track to the target movie. @param			mediaType The media type of the new track (e.g. AVMediaTypeVideo for a video track). @param			track If you wish to transfer settings from an existing track, including width, height, preferred volume, etc., pass a reference to an AVAssetTrack representing that track. Otherwise pass nil. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the new AVMutableMovieTrack object. Pass nil for default initialization behavior. @result			An AVMutableMovieTrack object @discussion		The trackID of the newly added track is a property of the returned instance of AVMutableMovieTrack. This method throws an exception if media type is not equal to the track's media type, or if any option is invalid. Note that metadata will not be automatically copied.
+// Adds an empty track to the target movie.
 func (o *AVMutableMovie) AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions(mediaType *foundation.NSString, track *AVAssetTrack, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMutableMovieTrack {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelAddMutableTrackWithMediaTypeCopySettingsFromTrackOptions, mediaType.Ptr(), track.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelAddMutableTrackWithMediaTypeCopySettingsFromTrackOptions, mediaType.Ptr(), track.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return AVMutableMovieTrackFromID(_ret)
 }
 
-// @method			addMutableTracksCopyingSettingsFromTracks:options: @abstract		Adds one or more empty tracks to the target movie, copying track settings from the source tracks. @param			existingTracks An array of AVAssetTrack objects. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the new AVMutableMovieTrack objects. Pass nil for default initialization behavior. @result			An array of AVMutableMovieTrack objects; the index of a track in this array is the same as the index of its source track in the existingTracks array. @discussion		This method creates one or more empty tracks in the target movie and configures those tracks with settings (such as track userdata and metadata, width, height, and preferred volume) copied from the source tracks in the existingTracks array. Also, properties involving pairs of tracks (such as track references) are copied from the source tracks to the target tracks. This method throws an exception if any option is invalid.
+// Adds one or more empty tracks to the target movie and copies the track settings from the source tracks.
 func (o *AVMutableMovie) AddMutableTracksCopyingSettingsFromTracksOptions(existingTracks *foundation.NSArray[*AVAssetTrack], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*AVMutableMovieTrack] {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelAddMutableTracksCopyingSettingsFromTracksOptions, existingTracks.Ptr(), options)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableMovieSelAddMutableTracksCopyingSettingsFromTracksOptions, existingTracks.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return foundation.NSArrayFromID[*AVMutableMovieTrack](_ret)
 }
 
-// @method			removeTrack: @abstract		Removes a track from the target movie. @param			track The track to be removed.
+// Removes the specified track from the target movie.
 func (o *AVMutableMovie) RemoveTrack(track *AVMovieTrack) {
 	o.Ptr().Send(_aVMutableMovieSelRemoveTrack, track.Ptr())
 }

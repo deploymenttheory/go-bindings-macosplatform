@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A user-friendly description of a geographic coordinate, often containing the name of the place, its address, and other relevant information.
+//
 // Placemark wraps [raw.CLPlacemark] with a fluent Go API.
 type Placemark struct {
 	inner *raw.CLPlacemark
@@ -33,6 +35,8 @@ func PlacemarkFromID(id objc.ID) *Placemark {
 	return &Placemark{inner: raw.CLPlacemarkFromID(id)}
 }
 
+// Initializes and returns a placemark object from another placemark object.
+//
 // NewPlacemarkWithPlacemark creates a new [Placemark].
 func NewPlacemarkWithPlacemark(placemark *raw.CLPlacemark) *Placemark {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLPlacemark")), objc.RegisterName("alloc"))

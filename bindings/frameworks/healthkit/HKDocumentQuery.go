@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A query that returns a snapshot of all matching documents currently saved in the HealthKit store.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkdocumentquery
 type HKDocumentQuery struct {
 	HKQuery
@@ -35,7 +37,7 @@ func HKDocumentQueryFromID(id objc.ID) *HKDocumentQuery {
 	return o
 }
 
-// @method        initWithDocumentType:predicate:limit:sortDescriptors:includeDocumentData:resultsHandler: @abstract      Returns a query that will retrieve HKDocumentSamples matching the given predicate. @param         documentType        The type of document to retreive. @param         predicate           The predicate which documents should match. @param         limit               The maximum number of documents to return.  Pass HKObjectQueryNoLimit for no limit. @param         sortDescriptors     The sort descriptors to use to order the resulting documents. @param         includeDocumentData If true, the document content will be returned with the HKDocumentSample instance. This option can be used to limit the size of the content returned since the content may be large. @param         resultsHandler      The block that will receive query results.  Results will be returned incrementally through several calls to this block.  When there are no more results, the done parameter will be YES and the results array will be empty.  If results is nil, then an error has occurred and the error parameter will be set.  Delivery of results can be stopped by calling HKHealthStore's stopQuery: method. @discussion    Health documents may contain sensitive data that a user may want to control explicitly. HKDocumentSample objects returned by HKSampleQuery and HKAnchoredObjectQuery do not include this data (i.e., the document property is nil).  This query can be used to retrieve fully populated HKDocumentSample instances.  The query will prompt the user to authorize your app to read individual documents.  The query will then return the documents that your app is authorized to read. The user will only be asked to authorize your app to read documents that are new since the last time an HKDocumentQuery was executed.
+// Instantiates and returns a document query.
 func (o *HKDocumentQuery) InitWithDocumentTypePredicateLimitSortDescriptorsIncludeDocumentDataResultsHandler(documentType *HKDocumentType, predicate *foundation.NSPredicate, limit uint, sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor], includeDocumentData bool, resultsHandler func(*HKDocumentQuery, *foundation.NSArray[*HKDocumentSample], bool, unsafe.Pointer)) *HKDocumentQuery {
 	var __block_resultsHandler objc.Block
 	if resultsHandler != nil {
@@ -50,7 +52,7 @@ func (o *HKDocumentQuery) InitWithDocumentTypePredicateLimitSortDescriptorsInclu
 		})
 		defer __block_resultsHandler.Release()
 	}
-	_ret := objc.Send[objc.ID](o.Ptr(), _hKDocumentQuerySelInitWithDocumentTypePredicateLimitSortDescriptorsIncludeDocumentDataResultsHandler, documentType.Ptr(), predicate.Ptr(), limit, sortDescriptors, includeDocumentData, __block_resultsHandler)
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKDocumentQuerySelInitWithDocumentTypePredicateLimitSortDescriptorsIncludeDocumentDataResultsHandler, documentType.Ptr(), predicate.Ptr(), limit, sortDescriptors.Ptr(), includeDocumentData, __block_resultsHandler)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -65,8 +67,11 @@ func (o *HKDocumentQuery) Limit() uint {
 
 // @property      sortDescriptors @abstract      An array of NSSortDescriptors.
 func (o *HKDocumentQuery) SortDescriptors() *foundation.NSArray[*foundation.NSSortDescriptor] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSSortDescriptor]](o.Ptr(), _hKDocumentQuerySelSortDescriptors)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _hKDocumentQuerySelSortDescriptors)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSSortDescriptor](_ret)
 }
 
 // @property      includeDocumentData @abstract      The XML content for documents may be large.  This property can be used to control whether the query returns the XML content for each record.

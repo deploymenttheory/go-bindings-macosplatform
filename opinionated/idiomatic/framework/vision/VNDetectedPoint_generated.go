@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a normalized point in an image, along with a confidence value.
+//
 // DetectedPoint wraps [raw.VNDetectedPoint] with a fluent Go API.
 type DetectedPoint struct {
 	inner *raw.VNDetectedPoint

@@ -114,7 +114,7 @@ func (x *CameraDevice) RequestDeleteFiles(files ...CameraItemProvider) {
 // Deletes files from the camera, with the ability to catch failures and execute a completion block.
 //
 // RequestDeleteFilesDeleteFailedCompletion calls the underlying RequestDeleteFilesDeleteFailedCompletion.
-func (x *CameraDevice) RequestDeleteFilesDeleteFailedCompletion(files *foundation.NSArray[*raw.ICCameraItem], deleteFailed objc.Block, completion objc.Block) *foundation.NSProgress {
+func (x *CameraDevice) RequestDeleteFilesDeleteFailedCompletion(files *foundation.NSArray[*raw.ICCameraItem], deleteFailed func(*foundation.NSDictionary[*foundation.NSString, *raw.ICCameraItem]), completion func(*foundation.NSDictionary[*foundation.NSString, objc.ID], unsafe.Pointer)) *foundation.NSProgress {
 	return x.inner.RequestDeleteFilesDeleteFailedCompletion(files, deleteFailed, completion)
 }
 
@@ -323,7 +323,7 @@ type CameraDeviceable interface {
 	RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo(file *raw.ICCameraFile, options *foundation.NSDictionary[*foundation.NSString, objc.ID], downloadDelegate raw.ICCameraDeviceDownloadDelegate, selector objc.SEL, contextInfo unsafe.Pointer)
 	CancelDownload()
 	RequestDeleteFiles(files ...CameraItemProvider)
-	RequestDeleteFilesDeleteFailedCompletion(files *foundation.NSArray[*raw.ICCameraItem], deleteFailed objc.Block, completion objc.Block) *foundation.NSProgress
+	RequestDeleteFilesDeleteFailedCompletion(files *foundation.NSArray[*raw.ICCameraItem], deleteFailed func(*foundation.NSDictionary[*foundation.NSString, *raw.ICCameraItem]), completion func(*foundation.NSDictionary[*foundation.NSString, objc.ID], unsafe.Pointer)) *foundation.NSProgress
 	CancelDelete()
 	RequestSyncClock()
 	RequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo(fileURL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], uploadDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer)

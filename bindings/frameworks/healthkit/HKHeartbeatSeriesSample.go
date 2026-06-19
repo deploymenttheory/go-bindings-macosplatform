@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sample that represents a series of heartbeats.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkheartbeatseriessample
 type HKHeartbeatSeriesSample struct {
 	HKSeriesSample

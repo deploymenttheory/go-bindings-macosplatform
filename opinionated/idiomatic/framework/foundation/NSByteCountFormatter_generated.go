@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A formatter that converts a byte count value into a localized description that is formatted with the appropriate byte modifier (KB, MB, GB and so on).
+//
 // ByteCountFormatter wraps [raw.NSByteCountFormatter] with a fluent Go API.
 type ByteCountFormatter struct {
 	inner *raw.NSByteCountFormatter

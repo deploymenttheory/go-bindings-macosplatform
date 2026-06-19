@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that implements a multiband equalizer.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiouniteq
 type AVAudioUnitEQ struct {
 	AVAudioUnitEffect
@@ -33,7 +35,7 @@ func AVAudioUnitEQFromID(id objc.ID) *AVAudioUnitEQ {
 	return o
 }
 
-// @method initWithNumberOfBands: @abstract Initialize the EQ with number of bands. @param numberOfBands The number of bands created by the EQ.
+// Creates an audio unit equalizer object with the specified number of bands.
 func (o *AVAudioUnitEQ) InitWithNumberOfBands(numberOfBands uint) *AVAudioUnitEQ {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitEQSelInitWithNumberOfBands, numberOfBands)
 	if _ret != 0 {

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract class that handles the loading of protocol-specific URL data.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsurlprotocol
 type NSURLProtocol struct {
 	NSObject

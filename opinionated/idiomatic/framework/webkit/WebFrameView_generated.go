@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// WebFrameView objects and their subviews display the web content contained in a frame. You never create instances of WebFrameView directly—WebView objects create and manage a hierarchy of WebFrameView objects, one for each frame. WebFrameView objects use a scroll view whose document view conforms to the WebDocumentView protocol.
+//
 // WebFrameView wraps [raw.WebFrameView] with a fluent Go API.
 type WebFrameView struct {
 	inner *raw.WebFrameView
@@ -36,7 +38,7 @@ func NewWebFrameView() *WebFrameView {
 	return &WebFrameView{inner: raw.WebFrameViewFromID(_id)}
 }
 
-// @property allowsScrolling @abstract Whether the WebFrameView allows its document to be scrolled
+// A Boolean that indicates whether the frame view should allow users to scroll.
 //
 // WithAllowsScrolling sets the allowsScrolling property and returns the receiver for chaining.
 func (x *WebFrameView) WithAllowsScrolling(allowsScrolling bool) *WebFrameView {
@@ -44,14 +46,14 @@ func (x *WebFrameView) WithAllowsScrolling(allowsScrolling bool) *WebFrameView {
 	return x
 }
 
-// @method printOperationWithPrintInfo @abstract Creates a print operation set up to print this frame @result A newly created print operation object
+// Returns a print operation object to print this frame.
 //
 // PrintOperationWithPrintInfo calls the underlying PrintOperationWithPrintInfo.
 func (x *WebFrameView) PrintOperationWithPrintInfo(printInfo *appkit.NSPrintInfo) *appkit.NSPrintOperation {
 	return x.inner.PrintOperationWithPrintInfo(printInfo)
 }
 
-// @method printDocumentView @abstract Called by the host application when the WebFrameView returns YES from -documentViewShouldHandlePrint.
+// Prints the receiver.
 //
 // PrintDocumentView calls the underlying PrintDocumentView.
 func (x *WebFrameView) PrintDocumentView() {

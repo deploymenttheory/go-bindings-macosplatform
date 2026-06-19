@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A controller that you use to manage the results of a Core Data fetch request and to display data to the user.
+//
 // Apple documentation: https://developer.apple.com/documentation/coredata/nsfetchedresultscontroller
 type NSFetchedResultsController[ResultType purego.AnyObject] struct {
 	foundation.NSObject
@@ -47,6 +49,7 @@ func NSFetchedResultsControllerFromID[ResultType purego.AnyObject](id objc.ID) *
 	return o
 }
 
+// Returns a fetch request controller initialized using the given arguments.
 func (o *NSFetchedResultsController[ResultType]) InitWithFetchRequestManagedObjectContextSectionNameKeyPathCacheName(fetchRequest *NSFetchRequest[ResultType], context_ *NSManagedObjectContext, sectionNameKeyPath *foundation.NSString, name *foundation.NSString) *NSFetchedResultsController[ResultType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchedResultsControllerSelInitWithFetchRequestManagedObjectContextSectionNameKeyPathCacheName, fetchRequest.Ptr(), context_.Ptr(), sectionNameKeyPath.Ptr(), name.Ptr())
 	if _ret != 0 {
@@ -55,6 +58,7 @@ func (o *NSFetchedResultsController[ResultType]) InitWithFetchRequestManagedObje
 	return NSFetchedResultsControllerFromID[ResultType](_ret)
 }
 
+// Executes the controller’s fetch request.
 func (o *NSFetchedResultsController[ResultType]) PerformFetch() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nSFetchedResultsControllerSelPerformFetch, unsafe.Pointer(&_nsErr))
@@ -64,15 +68,18 @@ func (o *NSFetchedResultsController[ResultType]) PerformFetch() (bool, error) {
 	return _ret, nil
 }
 
+// Deletes the cached section information with the given name.
 func NSFetchedResultsControllerDeleteCacheWithName(name *foundation.NSString) {
 	objc.ID(_clsNSFetchedResultsController).Send(_nSFetchedResultsControllerSelDeleteCacheWithName, name.Ptr())
 }
 
+// Returns the object at the given index path in the fetch results.
 func (o *NSFetchedResultsController[ResultType]) ObjectAtIndexPath(indexPath *foundation.NSIndexPath) ResultType {
 	_ret := objc.Send[ResultType](o.Ptr(), _nSFetchedResultsControllerSelObjectAtIndexPath, indexPath.Ptr())
 	return _ret
 }
 
+// Returns the index path of a given object.
 func (o *NSFetchedResultsController[ResultType]) IndexPathForObject(object ResultType) *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchedResultsControllerSelIndexPathForObject, object)
 	if _ret != 0 {
@@ -81,6 +88,7 @@ func (o *NSFetchedResultsController[ResultType]) IndexPathForObject(object Resul
 	return foundation.NSIndexPathFromID(_ret)
 }
 
+// Returns the corresponding section index entry for a given section name.
 func (o *NSFetchedResultsController[ResultType]) SectionIndexTitleForSectionName(sectionName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchedResultsControllerSelSectionIndexTitleForSectionName, sectionName.Ptr())
 	if _ret != 0 {
@@ -89,6 +97,7 @@ func (o *NSFetchedResultsController[ResultType]) SectionIndexTitleForSectionName
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns the section number for a given section title and index in the section index.
 func (o *NSFetchedResultsController[ResultType]) SectionForSectionIndexTitleAtIndex(title *foundation.NSString, sectionIndex int) int {
 	_ret := objc.Send[int](o.Ptr(), _nSFetchedResultsControllerSelSectionForSectionIndexTitleAtIndex, title.Ptr(), sectionIndex)
 	return _ret
@@ -144,8 +153,11 @@ func (o *NSFetchedResultsController[ResultType]) FetchedObjects() *foundation.NS
 }
 
 func (o *NSFetchedResultsController[ResultType]) SectionIndexTitles() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSFetchedResultsControllerSelSectionIndexTitles)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSFetchedResultsControllerSelSectionIndexTitles)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *NSFetchedResultsController[ResultType]) Sections() *foundation.NSArray[NSFetchedResultsSectionInfo] {

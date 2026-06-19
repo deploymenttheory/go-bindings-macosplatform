@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request to fulfill in your app or Intents extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inintent
 type INIntent struct {
 	foundation.NSObject
@@ -38,10 +40,12 @@ func INIntentFromID(id objc.ID) *INIntent {
 	return o
 }
 
+// Sets the image to use for the specified parameter.
 func (o *INIntent) SetImageForParameterNamed(image *INImage, parameterName *foundation.NSString) {
 	o.Ptr().Send(_iNIntentSelSetImageForParameterNamed, image.Ptr(), parameterName.Ptr())
 }
 
+// Returns the image associated with the specified parameter.
 func (o *INIntent) ImageForParameterNamed(parameterName *foundation.NSString) *INImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNIntentSelImageForParameterNamed, parameterName.Ptr())
 	if _ret != 0 {
@@ -50,6 +54,7 @@ func (o *INIntent) ImageForParameterNamed(parameterName *foundation.NSString) *I
 	return INImageFromID(_ret)
 }
 
+// The most relevant image to display to the user.
 func (o *INIntent) KeyImage() *INImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNIntentSelKeyImage)
 	if _ret != 0 {

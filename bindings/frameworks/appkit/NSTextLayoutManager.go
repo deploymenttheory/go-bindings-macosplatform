@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The primary class that you use to manage text layout and presentation for custom text displays.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nstextlayoutmanager
 type NSTextLayoutManager struct {
 	foundation.NSObject
@@ -72,6 +74,7 @@ func NSTextLayoutManagerFromID(id objc.ID) *NSTextLayoutManager {
 	return o
 }
 
+// Creates a new text layout manager.
 func (o *NSTextLayoutManager) Init() *NSTextLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelInit)
 	if _ret != 0 {
@@ -80,6 +83,7 @@ func (o *NSTextLayoutManager) Init() *NSTextLayoutManager {
 	return NSTextLayoutManagerFromID(_ret)
 }
 
+// Creates a new text layout manager with the coder you provide.
 func (o *NSTextLayoutManager) InitWithCoder(coder *foundation.NSCoder) *NSTextLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -88,22 +92,27 @@ func (o *NSTextLayoutManager) InitWithCoder(coder *foundation.NSCoder) *NSTextLa
 	return NSTextLayoutManagerFromID(_ret)
 }
 
+// Replaces the current text content manager with a new one you provide.
 func (o *NSTextLayoutManager) ReplaceTextContentManager(textContentManager *NSTextContentManager) {
 	o.Ptr().Send(_nSTextLayoutManagerSelReplaceTextContentManager, textContentManager.Ptr())
 }
 
+// Performs the layout for specified text range.
 func (o *NSTextLayoutManager) EnsureLayoutForRange(range_ *NSTextRange) {
 	o.Ptr().Send(_nSTextLayoutManagerSelEnsureLayoutForRange, range_.Ptr())
 }
 
+// Performs the layout for filling the bounds you specify inside the last text container.
 func (o *NSTextLayoutManager) EnsureLayoutForBounds(bounds corefoundation.CGRect) {
 	o.Ptr().Send(_nSTextLayoutManagerSelEnsureLayoutForBounds, bounds)
 }
 
+// Invalidates the layout information for specified text range.
 func (o *NSTextLayoutManager) InvalidateLayoutForRange(range_ *NSTextRange) {
 	o.Ptr().Send(_nSTextLayoutManagerSelInvalidateLayoutForRange, range_.Ptr())
 }
 
+// Returns the text layout fragment at the position you specify in the text container.
 func (o *NSTextLayoutManager) TextLayoutFragmentForPosition(position corefoundation.CGPoint) *NSTextLayoutFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelTextLayoutFragmentForPosition, position)
 	if _ret != 0 {
@@ -112,6 +121,7 @@ func (o *NSTextLayoutManager) TextLayoutFragmentForPosition(position corefoundat
 	return NSTextLayoutFragmentFromID(_ret)
 }
 
+// Returns the text layout fragment from the document at the specified location.
 func (o *NSTextLayoutManager) TextLayoutFragmentForLocation(location NSTextLocation) *NSTextLayoutFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelTextLayoutFragmentForLocation, location)
 	if _ret != 0 {
@@ -120,6 +130,7 @@ func (o *NSTextLayoutManager) TextLayoutFragmentForLocation(location NSTextLocat
 	return NSTextLayoutFragmentFromID(_ret)
 }
 
+// Enumerates the text layout fragments starting at the specified location.
 func (o *NSTextLayoutManager) EnumerateTextLayoutFragmentsFromLocationOptionsUsing(location NSTextLocation, options NSTextLayoutFragmentEnumerationOptions, block func(*NSTextLayoutFragment) bool) NSTextLocation {
 	var __block_block objc.Block
 	if block != nil {
@@ -135,39 +146,67 @@ func (o *NSTextLayoutManager) EnumerateTextLayoutFragmentsFromLocationOptionsUsi
 	return _ret
 }
 
-func (o *NSTextLayoutManager) EnumerateRenderingAttributesFromLocationReverseUsing(location NSTextLocation, reverse bool, block objc.Block) {
-	o.Ptr().Send(_nSTextLayoutManagerSelEnumerateRenderingAttributesFromLocationReverseUsing, location, reverse, block)
+// Enumerates the rendering attributes from a location you specify.
+func (o *NSTextLayoutManager) EnumerateRenderingAttributesFromLocationReverseUsing(location NSTextLocation, reverse bool, block func(*NSTextLayoutManager, *foundation.NSDictionary[*foundation.NSString, objc.ID], *NSTextRange) bool) {
+	var __block_block objc.Block
+	if block != nil {
+		__block_block = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID, blockParam2 objc.ID) bool {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			if blockParam2 != 0 {
+				blockParam2.Send(objc.RegisterName("retain"))
+			}
+			return block(NSTextLayoutManagerFromID(blockParam0), foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](blockParam1), NSTextRangeFromID(blockParam2))
+		})
+		defer __block_block.Release()
+	}
+	o.Ptr().Send(_nSTextLayoutManagerSelEnumerateRenderingAttributesFromLocationReverseUsing, location, reverse, __block_block)
 }
 
+// Sets the rendering attributes for the range you specify.
 func (o *NSTextLayoutManager) SetRenderingAttributesForTextRange(renderingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], textRange *NSTextRange) {
-	o.Ptr().Send(_nSTextLayoutManagerSelSetRenderingAttributesForTextRange, renderingAttributes, textRange.Ptr())
+	o.Ptr().Send(_nSTextLayoutManagerSelSetRenderingAttributesForTextRange, renderingAttributes.Ptr(), textRange.Ptr())
 }
 
+// Sets the rendering attribute for the value and range you specify.
 func (o *NSTextLayoutManager) AddRenderingAttributeValueForTextRange(renderingAttribute *foundation.NSString, value objc.ID, textRange *NSTextRange) {
 	o.Ptr().Send(_nSTextLayoutManagerSelAddRenderingAttributeValueForTextRange, renderingAttribute.Ptr(), value, textRange.Ptr())
 }
 
+// Removes the rendering attribute from the specified text range.
 func (o *NSTextLayoutManager) RemoveRenderingAttributeForTextRange(renderingAttribute *foundation.NSString, textRange *NSTextRange) {
 	o.Ptr().Send(_nSTextLayoutManagerSelRemoveRenderingAttributeForTextRange, renderingAttribute.Ptr(), textRange.Ptr())
 }
 
+// Invalidates the rendering attributes of the specified text range.
 func (o *NSTextLayoutManager) InvalidateRenderingAttributesForTextRange(textRange *NSTextRange) {
 	o.Ptr().Send(_nSTextLayoutManagerSelInvalidateRenderingAttributesForTextRange, textRange.Ptr())
 }
 
+// Returns a dictionary of rendering attributes for rendering a link.
 func (o *NSTextLayoutManager) RenderingAttributesForLinkAtLocation(link objc.ID, location NSTextLocation) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSTextLayoutManagerSelRenderingAttributesForLinkAtLocation, link, location)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutManagerSelRenderingAttributesForLinkAtLocation, link, location)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
+// Enumerates text segments of a specific type and in the text range you provide.
 func (o *NSTextLayoutManager) EnumerateTextSegmentsInRangeTypeOptionsUsing(textRange *NSTextRange, type_ NSTextLayoutManagerSegmentType, options NSTextLayoutManagerSegmentOptions, block objc.Block) {
 	o.Ptr().Send(_nSTextLayoutManagerSelEnumerateTextSegmentsInRangeTypeOptionsUsing, textRange.Ptr(), type_, options, block)
 }
 
+// Replaces content at the location you specify with the text elements string you provide.
 func (o *NSTextLayoutManager) ReplaceContentsInRangeWithTextElements(range_ *NSTextRange, textElements *foundation.NSArray[*NSTextElement]) {
 	o.Ptr().Send(_nSTextLayoutManagerSelReplaceContentsInRangeWithTextElements, range_.Ptr(), textElements.Ptr())
 }
 
+// Replaces content at the location you specify with an attributed string you provide.
 func (o *NSTextLayoutManager) ReplaceContentsInRangeWithAttributedString(range_ *NSTextRange, attributedString *foundation.NSAttributedString) {
 	o.Ptr().Send(_nSTextLayoutManagerSelReplaceContentsInRangeWithAttributedString, range_.Ptr(), attributedString.Ptr())
 }
@@ -310,6 +349,9 @@ func (o *NSTextLayoutManager) SetRenderingAttributesValidator(renderingAttribute
 }
 
 func NSTextLayoutManagerLinkRenderingAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](objc.ID(_clsNSTextLayoutManager), _nSTextLayoutManagerSelLinkRenderingAttributes)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextLayoutManager), _nSTextLayoutManagerSelLinkRenderingAttributes)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }

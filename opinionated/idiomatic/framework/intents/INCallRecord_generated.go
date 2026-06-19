@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The details about a call handled by your app.
+//
 // CallRecord wraps [raw.INCallRecord] with a fluent Go API.
 type CallRecord struct {
 	inner *raw.INCallRecord
@@ -31,6 +33,8 @@ func CallRecordFromID(id objc.ID) *CallRecord {
 	return &CallRecord{inner: raw.INCallRecordFromID(id)}
 }
 
+// Creates a call record with the details about the call.
+//
 // NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenParticipantsNumberOfCallsIsCallerIdBlocked creates a new [CallRecord].
 func NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenParticipantsNumberOfCallsIsCallerIdBlocked(identifier string, dateCreated *foundation.NSDate, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber, participants *foundation.NSArray[*raw.INPerson], numberOfCalls *foundation.NSNumber, isCallerIdBlocked *foundation.NSNumber) *CallRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallRecord")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurat
 	return &CallRecord{inner: raw.INCallRecordFromID(_id)}
 }
 
+// Creates a call record with the details about the call.
+//
 // NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseen creates a new [CallRecord].
 func NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseen(identifier string, dateCreated *foundation.NSDate, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber) *CallRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallRecord")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurat
 	return &CallRecord{inner: raw.INCallRecordFromID(_id)}
 }
 
+// Creates a call record with the details about the call.
+//
 // NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls creates a new [CallRecord].
 func NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls(identifier string, dateCreated *foundation.NSDate, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber, numberOfCalls *foundation.NSNumber) *CallRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallRecord")), objc.RegisterName("alloc"))
@@ -52,6 +60,8 @@ func NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurat
 	return &CallRecord{inner: raw.INCallRecordFromID(_id)}
 }
 
+// Initializes a call record with the details about the call.
+//
 // NewCallRecordWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseen creates a new [CallRecord].
 func NewCallRecordWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseen(identifier string, dateCreated *foundation.NSDate, caller *raw.INPerson, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber) *CallRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallRecord")), objc.RegisterName("alloc"))
@@ -59,6 +69,8 @@ func NewCallRecordWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCal
 	return &CallRecord{inner: raw.INCallRecordFromID(_id)}
 }
 
+// Initializes a call record with the details about the call.
+//
 // NewCallRecordWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls creates a new [CallRecord].
 func NewCallRecordWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls(identifier string, dateCreated *foundation.NSDate, caller *raw.INPerson, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber, numberOfCalls *foundation.NSNumber) *CallRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallRecord")), objc.RegisterName("alloc"))

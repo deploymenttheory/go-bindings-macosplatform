@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for objects that are part of a 3D asset, including meshes, cameras, and lights.
+//
 // Apple documentation: https://developer.apple.com/documentation/modelio/mdlobject
 type MDLObject struct {
 	foundation.NSObject
@@ -51,12 +53,12 @@ func MDLObjectFromID(id objc.ID) *MDLObject {
 	return o
 }
 
-// @method setComponent:forProtocol: @abstract Extensible component support that allows user of ModelIO to customize MDLObjects to fit their format and workflow.
+// Associates a component with the object for the specified protocol.
 func (o *MDLObject) SetComponentForProtocol(component MDLComponent, protocol unsafe.Pointer) {
 	o.Ptr().Send(_mDLObjectSelSetComponentForProtocol, component, protocol)
 }
 
-// @method componentConformingToProtocol: @abstract Extensible component support that allows user of ModelIO to customize MDLObjects to fit their format and workflow.
+// Returns the object’s component for the specified protocol.
 func (o *MDLObject) ComponentConformingToProtocol(protocol unsafe.Pointer) MDLComponent {
 	_ret := objc.Send[MDLComponent](o.Ptr(), _mDLObjectSelComponentConformingToProtocol, protocol)
 	return _ret
@@ -73,7 +75,7 @@ func (o *MDLObject) SetObjectForKeyedSubscript(obj MDLComponent, key unsafe.Poin
 	o.Ptr().Send(_mDLObjectSelSetObjectForKeyedSubscript, obj, key)
 }
 
-// @abstract Return the object at the specified path, or nil if none exists there
+// Returns the child object at the specified path.
 func (o *MDLObject) ObjectAtPath(path *foundation.NSString) *MDLObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLObjectSelObjectAtPath, path.Ptr())
 	if _ret != 0 {
@@ -82,6 +84,7 @@ func (o *MDLObject) ObjectAtPath(path *foundation.NSString) *MDLObject {
 	return MDLObjectFromID(_ret)
 }
 
+// Executes the specified block using each object in this object’s child hierarchy.
 func (o *MDLObject) EnumerateChildObjectsOfClassRootUsingBlockStopPointer(objectClass objc.Class, root *MDLObject, block func(*MDLObject, *bool), stopPointer *bool) {
 	var __block_block objc.Block
 	if block != nil {
@@ -96,12 +99,12 @@ func (o *MDLObject) EnumerateChildObjectsOfClassRootUsingBlockStopPointer(object
 	o.Ptr().Send(_mDLObjectSelEnumerateChildObjectsOfClassRootUsingBlockStopPointer, objectClass, root.Ptr(), __block_block, stopPointer)
 }
 
-// @method addChild: @abstract Short hand for adding a child to the current container component and setting the parent to this object. @discussion  It will create a default container if none exists. If children are explicitly disallowed for an object, then add a container component that throws on addition. @see MDLObjectContainer
+// Adds a child object to this object, creating a container for the object’s children if necessary.
 func (o *MDLObject) AddChild(child *MDLObject) {
 	o.Ptr().Send(_mDLObjectSelAddChild, child.Ptr())
 }
 
-// @method boundingBoxAtTime: @abstract Bounds ob object at the specified time
+// Returns the minimum region entirely enclosing the object’s contents at the specified time sample.
 func (o *MDLObject) BoundingBoxAtTime(time_ float64) MDLAxisAlignedBoundingBox {
 	_ret := objc.Send[MDLAxisAlignedBoundingBox](o.Ptr(), _mDLObjectSelBoundingBoxAtTime, time_)
 	return _ret

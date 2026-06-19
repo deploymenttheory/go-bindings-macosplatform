@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A custom pronoun behavior for use in a specific langauge.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsmorphologycustompronoun
 // Deprecated: Use NSTermOfAddress instead
 type NSMorphologyCustomPronoun struct {
@@ -41,12 +43,14 @@ func NSMorphologyCustomPronounFromID(id objc.ID) *NSMorphologyCustomPronoun {
 	return o
 }
 
+// Returns a Boolean value that indicates whether the given language supports setting custom pronouns.
 // Deprecated: Use NSTermOfAddress instead
 func NSMorphologyCustomPronounIsSupportedForLanguage(language *NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSMorphologyCustomPronoun), _nSMorphologyCustomPronounSelIsSupportedForLanguage, language.Ptr())
 	return _ret
 }
 
+// Returns a collection of the custom pronoun keys required by this language.
 func NSMorphologyCustomPronounRequiredKeysForLanguage(language *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMorphologyCustomPronoun), _nSMorphologyCustomPronounSelRequiredKeysForLanguage, language.Ptr())
 	if _ret != 0 {

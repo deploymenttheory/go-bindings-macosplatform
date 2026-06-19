@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that combines and arranges media from multiple assets into a single composite asset that you can play or process.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcomposition
 type AVComposition struct {
 	AVAsset
@@ -32,6 +34,9 @@ func AVCompositionFromID(id objc.ID) *AVComposition {
 
 // @property       URLAssetInitializationOptions @abstract       Specifies the initialization options for the creation of AVURLAssets by the receiver, e.g. AVURLAssetPreferPreciseDurationAndTimingKey. The default behavior for creation of AVURLAssets by an AVComposition is equivalent to the behavior of +[AVURLAsset URLAssetWithURL:options:] when specifying no initialization options. @discussion AVCompositions create AVURLAssets internally for URLs specified by AVCompositionTrackSegments of AVCompositionTracks, as needed, whenever AVCompositionTrackSegments were originally added to a track via -[AVMutableCompositionTrack setSegments:] rather than by inserting timeranges of already existing AVAssets or AVAssetTracks. The value of URLAssetInitializationOptions can be specified at the time an AVMutableComposition is created via +compositionWithURLAssetInitializationOptions:.
 func (o *AVComposition) URLAssetInitializationOptions() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _aVCompositionSelURLAssetInitializationOptions)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCompositionSelURLAssetInitializationOptions)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }

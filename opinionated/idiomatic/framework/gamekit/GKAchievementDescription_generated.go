@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An object containing the text and artwork used to present an achievement to a player.
+//
 // AchievementDescription wraps [raw.GKAchievementDescription] with a fluent Go API.
 type AchievementDescription struct {
 	inner *raw.GKAchievementDescription
@@ -146,6 +148,8 @@ func (x *AchievementDescription) ActivityProperties() *foundation.NSDictionary[*
 	return x.inner.ActivityProperties()
 }
 
+// Loads the image to display when the player completes the achievement.
+//
 // LoadImage blocks until the operation completes or ctx is cancelled.
 func (x *AchievementDescription) LoadImage(ctx context.Context) (*appkit.NSImage, error) {
 	type _result struct {

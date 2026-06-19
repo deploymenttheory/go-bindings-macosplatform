@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A stream that provides write-only stream functionality.
+//
 // OutputStream wraps [raw.NSOutputStream] with a fluent Go API.
 type OutputStream struct {
 	inner *raw.NSOutputStream

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract base class of the framework’s photo library change requests.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phchangerequest
 type PHChangeRequest struct {
 	foundation.NSObject

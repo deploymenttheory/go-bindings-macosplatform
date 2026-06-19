@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for all motion-related data objects.
+//
 // LogItem wraps [raw.CMLogItem] with a fluent Go API.
 type LogItem struct {
 	inner *raw.CMLogItem

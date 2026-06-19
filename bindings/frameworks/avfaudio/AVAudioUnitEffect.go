@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that processes audio in real time.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiouniteffect
 type AVAudioUnitEffect struct {
 	AVAudioUnit
@@ -31,7 +33,7 @@ func AVAudioUnitEffectFromID(id objc.ID) *AVAudioUnitEffect {
 	return o
 }
 
-// @method initWithAudioComponentDescription: @abstract Create an AVAudioUnitEffect object. @param audioComponentDescription AudioComponentDescription of the audio unit to be instantiated. @discussion The componentType must be one of these types kAudioUnitType_Effect kAudioUnitType_MusicEffect kAudioUnitType_Panner kAudioUnitType_RemoteEffect kAudioUnitType_RemoteMusicEffect
+// Creates an audio unit effect object with the specified description.
 func (o *AVAudioUnitEffect) InitWithAudioComponentDescription(audioComponentDescription objc.ID) *AVAudioUnitEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitEffectSelInitWithAudioComponentDescription, audioComponentDescription)
 	if _ret != 0 {

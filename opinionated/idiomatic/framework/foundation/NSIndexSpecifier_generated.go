@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specifier representing an object in a collection (or container) with an index number.
+//
 // IndexSpecifier wraps [raw.NSIndexSpecifier] with a fluent Go API.
 type IndexSpecifier struct {
 	inner *raw.NSIndexSpecifier
@@ -30,6 +32,8 @@ func IndexSpecifierFromID(id objc.ID) *IndexSpecifier {
 	return &IndexSpecifier{inner: raw.NSIndexSpecifierFromID(id)}
 }
 
+// Initializes an allocated NSIndexSpecifier object with a class description, container specifier, collection key, and object index.
+//
 // NewIndexSpecifierWithContainerClassDescriptionContainerSpecifierKeyIndex creates a new [IndexSpecifier].
 func NewIndexSpecifierWithContainerClassDescriptionContainerSpecifierKeyIndex(classDesc *raw.NSScriptClassDescription, container *raw.NSScriptObjectSpecifier, property string, index int) *IndexSpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSIndexSpecifier")), objc.RegisterName("alloc"))
@@ -37,48 +41,64 @@ func NewIndexSpecifierWithContainerClassDescriptionContainerSpecifierKeyIndex(cl
 	return &IndexSpecifier{inner: raw.NSIndexSpecifierFromID(_id)}
 }
 
+// Sets the value of the receiver’s index property.
+//
 // WithIndex sets the index property and returns the receiver for chaining.
 func (x *IndexSpecifier) WithIndex(index int) *IndexSpecifier {
 	x.inner.SetIndex(index)
 	return x
 }
 
+// Sets the receiver’s child reference.
+//
 // WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
 func (x *IndexSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets the container specifier of the receiver.
+//
 // WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
 func (x *IndexSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
 	return x
 }
 
+// Sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
+//
 // WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
 func (x *IndexSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *IndexSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
 	return x
 }
 
+// Sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
+//
 // WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
 func (x *IndexSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *IndexSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
 	return x
 }
 
+// Sets the key of the receiver.
+//
 // WithKey sets the key property and returns the receiver for chaining.
 func (x *IndexSpecifier) WithKey(key string) *IndexSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetKey(foundation.NSStringStringWithUTF8String(key))
 	return x
 }
 
+// Sets the class description of the receiver’s container specifier to a given specifier.
+//
 // WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
 func (x *IndexSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *IndexSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription.Unwrap())
 	return x
 }
 
+// Sets the value of the evaluation error.
+//
 // WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
 func (x *IndexSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *IndexSpecifier {
 	x.inner.NSScriptObjectSpecifier.SetEvaluationErrorNumber(evaluationErrorNumber)

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A resolution result for the message’s format.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inoutgoingmessagetyperesolutionresult
 type INOutgoingMessageTypeResolutionResult struct {
 	INIntentResolutionResult
@@ -30,6 +32,7 @@ func INOutgoingMessageTypeResolutionResultFromID(id objc.ID) *INOutgoingMessageT
 	return o
 }
 
+// Creates an object with a resolution that involves the successful matching of the specified parameter.
 func INOutgoingMessageTypeResolutionResultSuccessWithResolvedOutgoingMessageType(resolvedOutgoingMessageType INOutgoingMessageType) *INOutgoingMessageTypeResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINOutgoingMessageTypeResolutionResult), _iNOutgoingMessageTypeResolutionResultSelSuccessWithResolvedOutgoingMessageType, resolvedOutgoingMessageType)
 	if _ret != 0 {
@@ -38,6 +41,7 @@ func INOutgoingMessageTypeResolutionResultSuccessWithResolvedOutgoingMessageType
 	return INOutgoingMessageTypeResolutionResultFromID(_ret)
 }
 
+// Creates an object with a resolution that requires the user to confirm the value before proceeding.
 func INOutgoingMessageTypeResolutionResultConfirmationRequiredWithOutgoingMessageTypeToConfirm(outgoingMessageTypeToConfirm INOutgoingMessageType) *INOutgoingMessageTypeResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINOutgoingMessageTypeResolutionResult), _iNOutgoingMessageTypeResolutionResultSelConfirmationRequiredWithOutgoingMessageTypeToConfirm, outgoingMessageTypeToConfirm)
 	if _ret != 0 {

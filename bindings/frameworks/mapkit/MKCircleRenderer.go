@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The visual representation of a circular overlay.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkcirclerenderer
 type MKCircleRenderer struct {
 	MKOverlayPathRenderer
@@ -34,6 +36,7 @@ func MKCircleRendererFromID(id objc.ID) *MKCircleRenderer {
 	return o
 }
 
+// Creates a new overlay view using the specified circle overlay object.
 func (o *MKCircleRenderer) InitWithCircle(circle *MKCircle) *MKCircleRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKCircleRendererSelInitWithCircle, circle.Ptr())
 	if _ret != 0 {

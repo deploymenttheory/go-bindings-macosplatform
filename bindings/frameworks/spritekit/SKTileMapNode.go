@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A SpriteKit node used to render a 2D array of textured sprites. Uses SKTileSet to determine what textures it can use to render. Separate tile map nodes can be layered on top of one another to achieve various effects, such as parallax scrolling.
+// A two-dimensional array of images.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/sktilemapnode
 type SKTileMapNode struct {
@@ -124,7 +124,7 @@ func (o *SKTileMapNode) InitWithTileSetColumnsRowsTileSizeTileGroupLayout(tileSe
 	return SKTileMapNodeFromID(_ret)
 }
 
-// Fill the entire tile map with the provided tile group. @param tileGroup the tile group that will be used to fill the map
+// When creating a tile map node programmatically, this function performs a fill operation with the specified tile group.
 func (o *SKTileMapNode) FillWithTileGroup(tileGroup *SKTileGroup) {
 	o.Ptr().Send(_sKTileMapNodeSelFillWithTileGroup, tileGroup.Ptr())
 }
@@ -152,7 +152,7 @@ func (o *SKTileMapNode) SetTileGroupForColumnRow(tileGroup *SKTileGroup, column 
 	o.Ptr().Send(_sKTileMapNodeSelSetTileGroupForColumnRow, tileGroup.Ptr(), column, row)
 }
 
-// Set the tile group and tile defintion at the specified tile index. When automapping is enabled, it will attempt to resolve the surrounding tiles to allow the specified tile definition to be placed. When automapping is disabled, it will simply place the tile definition and not modify any of the neighboring tiles. @param tileGroup the tile group we want to place in the map @param tileDefinition the tile definition we want to place in the map @param column the column index of the tile @param row the row index of the tile
+// Set the tile group and tile definition at the specified tile index.
 func (o *SKTileMapNode) SetTileGroupAndTileDefinitionForColumnRow(tileGroup *SKTileGroup, tileDefinition *SKTileDefinition, column uint, row uint) {
 	o.Ptr().Send(_sKTileMapNodeSelSetTileGroupAndTileDefinitionForColumnRow, tileGroup.Ptr(), tileDefinition.Ptr(), column, row)
 }
@@ -163,7 +163,7 @@ func (o *SKTileMapNode) TileColumnIndexFromPosition(position corefoundation.CGPo
 	return _ret
 }
 
-// Returns the row index of the tile that lies under the specified position. Returns NSUIntegerMax if the position does not fall within the tile map. @param position the position we want to check against the tile map
+// Returns the tile map node object’s tile row index for the specified position in points.
 func (o *SKTileMapNode) TileRowIndexFromPosition(position corefoundation.CGPoint) uint {
 	_ret := objc.Send[uint](o.Ptr(), _sKTileMapNodeSelTileRowIndexFromPosition, position)
 	return _ret

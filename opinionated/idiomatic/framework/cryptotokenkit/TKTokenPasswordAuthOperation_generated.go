@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A password-based authentication operation.
+//
 // TokenPasswordAuthOperation wraps [raw.TKTokenPasswordAuthOperation] with a fluent Go API.
 type TokenPasswordAuthOperation struct {
 	inner *raw.TKTokenPasswordAuthOperation
@@ -37,7 +39,7 @@ func NewTokenPasswordAuthOperation() *TokenPasswordAuthOperation {
 	return &TokenPasswordAuthOperation{inner: raw.TKTokenPasswordAuthOperationFromID(_id)}
 }
 
-// @discussion Password, which will be filled in by the system when 'finishWithError:' is called.
+// The password to be filled in when the finishWithError: is called.
 //
 // WithPassword sets the password property and returns the receiver for chaining.
 func (x *TokenPasswordAuthOperation) WithPassword(password string) *TokenPasswordAuthOperation {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the detected contours in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vncontoursobservation
 type VNContoursObservation struct {
 	VNObservation
@@ -37,7 +39,7 @@ func VNContoursObservationFromID(id objc.ID) *VNContoursObservation {
 	return o
 }
 
-// @brief Returns the VNContour object at the specified index, irrespective of hierarchy. @param contourIndex The index of the contour to request. Valid values are in the range [0..contourCount-1]. @param error The error returned if the index path is out of range. @return The detected VNContour at the specified index without regard to hierarchy.
+// Retrieves the contour object at the specified index, irrespective of hierarchy.
 func (o *VNContoursObservation) ContourAtIndexError(contourIndex int) (*VNContour, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNContoursObservationSelContourAtIndexError, contourIndex, unsafe.Pointer(&_nsErr))
@@ -50,7 +52,7 @@ func (o *VNContoursObservation) ContourAtIndexError(contourIndex int) (*VNContou
 	return VNContourFromID(_ret), nil
 }
 
-// @brief Returns the VNContour object at the specified index path. @details Use the indexPath property from a VNContour instance to pass to this method. @param indexPath The index path is the heirarchical path to the contour. @param error The error returned if the index path is out of range. @return The VNContour object at the specified index path.
+// Retrieves the contour object at the specified index path.
 func (o *VNContoursObservation) ContourAtIndexPathError(indexPath *foundation.NSIndexPath) (*VNContour, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNContoursObservationSelContourAtIndexPathError, indexPath.Ptr(), unsafe.Pointer(&_nsErr))

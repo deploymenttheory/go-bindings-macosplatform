@@ -9,7 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// Coherent noise is smoothly-changing, semi-random noise.  A given input always produces the same output. A small change in input produces a small change in output.  A large change in input produces a random change in output. This class is not intended to be instantiated.
+// The abstract superclass for procedural noise generators that create coherent noise.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkcoherentnoisesource
 type GKCoherentNoiseSource struct {

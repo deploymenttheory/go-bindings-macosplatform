@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The kind of suggestion to use in a query.
+//
 // Apple documentation: https://developer.apple.com/documentation/corespotlight/cssuggestion
 type CSSuggestion struct {
 	foundation.NSObject
@@ -38,6 +40,7 @@ func (o *CSSuggestion) CompareByRank(other *CSSuggestion) foundation.NSCompariso
 	return _ret
 }
 
+// Compares the suggestion with a second specified suggestion.
 func (o *CSSuggestion) Compare(other *CSSuggestion) foundation.NSComparisonResult {
 	_ret := objc.Send[foundation.NSComparisonResult](o.Ptr(), _cSSuggestionSelCompare, other.Ptr())
 	return _ret

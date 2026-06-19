@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents an audio graph for a live-updating, continuous data series for VoiceOver.
+//
 // Apple documentation: https://developer.apple.com/documentation/accessibility/axliveaudiograph
 type AXLiveAudioGraph struct {
 	foundation.NSObject
@@ -32,12 +34,12 @@ func AXLiveAudioGraphFromID(id objc.ID) *AXLiveAudioGraph {
 	return o
 }
 
-// Begins a live audio graph session.
+// Begins the live audio graph session.
 func AXLiveAudioGraphStart() {
 	objc.ID(_clsAXLiveAudioGraph).Send(_aXLiveAudioGraphSelStart)
 }
 
-// Sets the pitch of the audio graph's tone. This should be a normalized value in the range [0.0, 1.0], where 0 represents the minimum displayable y-axis value for your series and 1 represents the maximum displayable y-axis value for your series.
+// Sets the pitch of the audio graph’s tone.
 func AXLiveAudioGraphUpdateValue(value float64) {
 	objc.ID(_clsAXLiveAudioGraph).Send(_aXLiveAudioGraphSelUpdateValue, value)
 }

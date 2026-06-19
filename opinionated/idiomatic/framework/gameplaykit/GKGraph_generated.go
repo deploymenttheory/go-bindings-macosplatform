@@ -12,7 +12,7 @@ import (
 	"unsafe"
 )
 
-// Representation of a directed graph of GKGraphNodes
+// A collection of nodes that describes the navigability of a game world and provides pathfinding methods to search for routes through that space.
 //
 // Graph wraps [raw.GKGraph] with a fluent Go API.
 type Graph struct {
@@ -34,6 +34,8 @@ func GraphFromID(id objc.ID) *Graph {
 	return &Graph{inner: raw.GKGraphFromID(id)}
 }
 
+// Initializes a graph with the specified list of nodes.
+//
 // NewGraphWithNodes creates a new [Graph].
 func NewGraphWithNodes(nodes ...GraphNodeProvider) *Graph {
 	_ptrs := make([]objc.ID, len(nodes))
@@ -52,14 +54,14 @@ func NewGraphWithNodes(nodes ...GraphNodeProvider) *Graph {
 	return &Graph{inner: raw.GKGraphFromID(_id)}
 }
 
-// Connects the node to this graph via the lowest cost node to reach in this graph @param node the node to connect @param bidirectional should the connection be bidirectional? Otherwise it is one way connected into the graph
+// Adds a node to the graph, connecting it to the node already in the graph for which the connection has the lowest cost.
 //
 // ConnectNodeToLowestCostNodeBidirectional calls the underlying ConnectNodeToLowestCostNodeBidirectional.
 func (x *Graph) ConnectNodeToLowestCostNodeBidirectional(node *raw.GKGraphNode, bidirectional bool) {
 	x.inner.ConnectNodeToLowestCostNodeBidirectional(node, bidirectional)
 }
 
-// Removes nodes from this graph. All connections starting and/or ending with this node are removed. @param nodes an array of nodes to be removed
+// Removes the specified nodes from the graph.
 //
 // RemoveNodes calls the underlying RemoveNodes.
 func (x *Graph) RemoveNodes(nodes ...GraphNodeProvider) {
@@ -77,7 +79,7 @@ func (x *Graph) RemoveNodes(nodes ...GraphNodeProvider) {
 	x.inner.RemoveNodes(_arg0)
 }
 
-// Adds nodes to this graph.  No new connections are added. If the node already exists in this graph this does nothing. @param nodes and array of nodes to be added
+// Adds the specified nodes to the graph.
 //
 // AddNodes calls the underlying AddNodes.
 func (x *Graph) AddNodes(nodes ...GraphNodeProvider) {
@@ -95,7 +97,7 @@ func (x *Graph) AddNodes(nodes ...GraphNodeProvider) {
 	x.inner.AddNodes(_arg0)
 }
 
-// Attempts to find the optimal path between the two nodes indicated. If such a path exists, it is returned in start to end order. If it doesn't exist, the array returned will be empty. Asserts if neither of these nodes are in this graph.  Use [GKGraphNode findPathFromNode:] instead. @param startNode node to start pathing from @param endNode goal node of the pathfinding attempt
+// Computes and returns a sequence of nodes that represents the shortest traversal of the graph between the specified nodes.
 //
 // FindPathFromNodeToNode calls the underlying FindPathFromNodeToNode.
 func (x *Graph) FindPathFromNodeToNode(startNode *raw.GKGraphNode, endNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode] {

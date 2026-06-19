@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An interface that allows a player to invite other players to a turn-based match and automatch to fill any empty slots.
+//
 // TurnBasedMatchmakerViewController wraps [raw.GKTurnBasedMatchmakerViewController] with a fluent Go API.
 type TurnBasedMatchmakerViewController struct {
 	inner *raw.GKTurnBasedMatchmakerViewController
@@ -31,6 +33,8 @@ func TurnBasedMatchmakerViewControllerFromID(id objc.ID) *TurnBasedMatchmakerVie
 	return &TurnBasedMatchmakerViewController{inner: raw.GKTurnBasedMatchmakerViewControllerFromID(id)}
 }
 
+// Creates a matchmaker view controller for the local player to start inviting other players to a turn-based game.
+//
 // NewTurnBasedMatchmakerViewControllerWithMatchRequest creates a new [TurnBasedMatchmakerViewController].
 func NewTurnBasedMatchmakerViewControllerWithMatchRequest(request *raw.GKMatchRequest) *TurnBasedMatchmakerViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKTurnBasedMatchmakerViewController")), objc.RegisterName("alloc"))
@@ -38,19 +42,23 @@ func NewTurnBasedMatchmakerViewControllerWithMatchRequest(request *raw.GKMatchRe
 	return &TurnBasedMatchmakerViewController{inner: raw.GKTurnBasedMatchmakerViewControllerFromID(_id)}
 }
 
+// The object that handles turn-based matchmaker view controller changes.
+//
 // WithTurnBasedMatchmakerDelegate sets the turnBasedMatchmakerDelegate property and returns the receiver for chaining.
 func (x *TurnBasedMatchmakerViewController) WithTurnBasedMatchmakerDelegate(turnBasedMatchmakerDelegate raw.GKTurnBasedMatchmakerViewControllerDelegate) *TurnBasedMatchmakerViewController {
 	x.inner.SetTurnBasedMatchmakerDelegate(turnBasedMatchmakerDelegate)
 	return x
 }
 
+// A Boolean value that determines whether the view controller shows existing matches.
+//
 // WithShowExistingMatches sets the showExistingMatches property and returns the receiver for chaining.
 func (x *TurnBasedMatchmakerViewController) WithShowExistingMatches(showExistingMatches bool) *TurnBasedMatchmakerViewController {
 	x.inner.SetShowExistingMatches(showExistingMatches)
 	return x
 }
 
-// This controls the mode of matchmaking to support in the UI (all, nearby only, automatch only, invite only). Throws an exception if you can not set to the desired mode (due to restrictions)
+// The mode that a multiplayer game uses to find players.
 //
 // WithMatchmakingMode sets the matchmakingMode property and returns the receiver for chaining.
 func (x *TurnBasedMatchmakerViewController) WithMatchmakingMode(matchmakingMode GKMatchmakingMode) *TurnBasedMatchmakerViewController {

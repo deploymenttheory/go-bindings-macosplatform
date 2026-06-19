@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object for specifying the metadata necessary to provision identity documents.
+//
 // Apple documentation: https://developer.apple.com/documentation/passkit/pkaddidentitydocumentmetadata
 type PKAddIdentityDocumentMetadata struct {
 	PKIdentityDocumentMetadata
@@ -31,7 +33,7 @@ func PKAddIdentityDocumentMetadataFromID(id objc.ID) *PKAddIdentityDocumentMetad
 	return o
 }
 
-// Initialize with parameters configured by issuer's server to indicate the specific product instance to provision. - Properties: - provisioningCredentialIdentifier: Identifies this user's instance for provisioning. - sharingInstanceIdentifier: A short lived token to prevent replay-ability. - cardTemplateIdentifier: An identifier for a legacy product on our Apple Pay servers. - preview: Object containing information to represent the pass to provision in our UI. - issuingCountryCode:  identifies the issuing country of the identity document - identityDocumentType: identifies the type of the identity document - preview: Object containing information to represent the pass to provision in our UI.
+// Creates the identity document metadata with parameters that the issuer’s server configures to indicate the specific product instance to provision.
 func (o *PKAddIdentityDocumentMetadata) InitWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview(credentialIdentifier *foundation.NSString, sharingInstanceIdentifier *foundation.NSString, templateIdentifier *foundation.NSString, issuingCountryCode *foundation.NSString, documentType PKAddIdentityDocumentType, preview *PKAddPassMetadataPreview) *PKAddIdentityDocumentMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddIdentityDocumentMetadataSelInitWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview, credentialIdentifier.Ptr(), sharingInstanceIdentifier.Ptr(), templateIdentifier.Ptr(), issuingCountryCode.Ptr(), documentType, preview.Ptr())
 	if _ret != 0 {

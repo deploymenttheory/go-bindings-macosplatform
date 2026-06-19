@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A snapshot of a file at a specific point in time.
+//
 // FileVersion wraps [raw.NSFileVersion] with a fluent Go API.
 type FileVersion struct {
 	inner *raw.NSFileVersion
@@ -36,12 +38,16 @@ func NewFileVersion() *FileVersion {
 	return &FileVersion{inner: raw.NSFileVersionFromID(_id)}
 }
 
+// A Boolean value that indicates if the version object is in conflict or not.
+//
 // WithResolved sets the resolved property and returns the receiver for chaining.
 func (x *FileVersion) WithResolved(resolved bool) *FileVersion {
 	x.inner.SetResolved(resolved)
 	return x
 }
 
+// A Boolean value that specifies whether the system can delete the associated file at some future time.
+//
 // WithDiscardable sets the discardable property and returns the receiver for chaining.
 func (x *FileVersion) WithDiscardable(discardable bool) *FileVersion {
 	x.inner.SetDiscardable(discardable)
@@ -54,6 +60,8 @@ func (x *FileVersion) WithScriptingProperties(scriptingProperties *raw.NSDiction
 	return x
 }
 
+// Replace the contents of the specified file with the contents of the current version’s file.
+//
 // ReplaceItemAtURLOptionsError calls the underlying ReplaceItemAtURLOptionsError.
 func (x *FileVersion) ReplaceItemAtURLOptionsError(url string, options NSFileVersionReplacingOptions) (*URL, error) {
 	_r, _err := x.inner.ReplaceItemAtURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileVersionReplacingOptions(options))
@@ -66,6 +74,8 @@ func (x *FileVersion) ReplaceItemAtURLOptionsError(url string, options NSFileVer
 	return &URL{inner: _r}, nil
 }
 
+// Remove this version object and its associated file from the version store.
+//
 // RemoveAndReturnError returns any validation error.
 func (x *FileVersion) RemoveAndReturnError() error {
 	_, err := x.inner.RemoveAndReturnError()

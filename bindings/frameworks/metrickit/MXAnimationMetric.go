@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing metrics about the responsiveness of animation in the app.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxanimationmetric
 type MXAnimationMetric struct {
 	MXMetric
@@ -33,12 +35,18 @@ func MXAnimationMetricFromID(id objc.ID) *MXAnimationMetric {
 
 // @property      scrollHitchTimeRatio @abstract      Ratio of time the application spent hitching while scrolling. @discussion    Scroll hitches are user perceptible animation issues that occur during scrolling. @discussion    This metric only applies to UIScrollViews. @discussion    Dimensionless.
 func (o *MXAnimationMetric) ScrollHitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnit]](o.Ptr(), _mXAnimationMetricSelScrollHitchTimeRatio)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXAnimationMetricSelScrollHitchTimeRatio)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnit](_ret)
 }
 
 // @property      hitchTimeRatio @abstract      Ratio of time the application spent hitching during tracked animations. @discussion    Hitches are user perceptible frame delays that can occur during animations and scrolling. @discussion    This metric incorporates adjustments that optimize for user perception, and typically will be the most accurate representation of what hitches users experience during app usage. @discussion    This metric is normalized against total animation duration. @discussion    Many animations are tracked by default. You can track additional animations using the -[NSProcessInfo beginActivityWithOptions:reason:] method with the NSActivityAnimationTrackingEnabled option. @discussion    Dimensionless.
 func (o *MXAnimationMetric) HitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit] {
-	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnit]](o.Ptr(), _mXAnimationMetricSelHitchTimeRatio)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXAnimationMetricSelHitchTimeRatio)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSMeasurementFromID[*foundation.NSUnit](_ret)
 }

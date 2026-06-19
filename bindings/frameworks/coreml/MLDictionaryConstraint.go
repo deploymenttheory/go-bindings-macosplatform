@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The constraint on the keys for a dictionary feature.
+//
 // Apple documentation: https://developer.apple.com/documentation/coreml/mldictionaryconstraint
 type MLDictionaryConstraint struct {
 	foundation.NSObject

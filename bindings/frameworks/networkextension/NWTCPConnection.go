@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object to manage a TCP connection, with or without TLS.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/nwtcpconnection
 // Deprecated: Use `nw_connection_t` in Network framework instead, see deprecation notice in <NetworkExtension/NWTCPConnection.h>
 type NWTCPConnection struct {
@@ -47,7 +49,7 @@ func NWTCPConnectionFromID(id objc.ID) *NWTCPConnection {
 	return o
 }
 
-// @method initWithUpgradeForConnection: @discussion This convenience initializer can be used to create a new connection that would only be connected if there exists a better path (as determined by the system) to the destination endpoint of the original connection. It will be initialized using the same destination endpoint and set of parameters from the original connection. If the original connection becomes disconnected or cancelled, the new "upgrade" connection would automatically be considered better. The caller should create an NWTCPConnection and watch for the hasBetterPath property. When this property is YES, the caller should attempt to create a new upgrade connection, with the goal to start transferring data on the new better path as soon as possible to reduce power and potentially monetary cost. When the new upgrade connection becomes connected and when the caller wraps up the previous caller session on the original connection, the caller can start using the new upgrade connection and tear down the original one. @param connection The original connection from which the caller will upgrade @return An initialized NWTCPConnection
+// This convenience initializer can be used to create a new connection that will only be connected if there exists a better path (as determined by the system) to the remote endpoint of the original connection.
 // Deprecated: Use `nw_connection_create` in Network framework instead, see deprecation notice in <NetworkExtension/NWTCPConnection.h>
 func (o *NWTCPConnection) InitWithUpgradeForConnection(connection *NWTCPConnection) *NWTCPConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nWTCPConnectionSelInitWithUpgradeForConnection, connection.Ptr())
@@ -57,13 +59,13 @@ func (o *NWTCPConnection) InitWithUpgradeForConnection(connection *NWTCPConnecti
 	return NWTCPConnectionFromID(_ret)
 }
 
-// @method cancel: @discussion Cancel the connection. This will clean up the resources associated with this object and transition this object to NWTCPConnectionStateCancelled state.
+// Cancel the connection.
 // Deprecated: Use `nw_connection_cancel` in Network framework instead, see deprecation notice in <NetworkExtension/NWTCPConnection.h>
 func (o *NWTCPConnection) Cancel() {
 	o.Ptr().Send(_nWTCPConnectionSelCancel)
 }
 
-// @method readLength:completionHandler: @discussion Read "length" number of bytes. See readMinimumLength:maximumLength:completionHandler: for a complete discussion of the callback behavior. @param length The exact number of bytes the application wants to read @param completion The completion handler to be invoked when there is data to read or an error occurred
+// Read a certain number of bytes on a connection.
 // Deprecated: Use `nw_connection_receive` in Network framework instead, see deprecation notice in <NetworkExtension/NWTCPConnection.h>
 func (o *NWTCPConnection) ReadLengthCompletionHandler(length uint, completion func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_completion objc.Block
@@ -79,7 +81,7 @@ func (o *NWTCPConnection) ReadLengthCompletionHandler(length uint, completion fu
 	o.Ptr().Send(_nWTCPConnectionSelReadLengthCompletionHandler, length, __block_completion)
 }
 
-// @method readMinimumLength:maximumLength:completionHandler: @discussion Read the requested range of bytes. The completion handler will be invoked when: - Exactly "length" number of bytes have been read. 'data' will be non-nil. - Fewer than "length" number of bytes, including 0 bytes, have been read, and the connection's read side has been closed. 'data' might be nil, depending on whether there was any data to be read when the connection's read side was closed. - Some fatal error has occurred, and 'data' will be nil. To know when to schedule a read again, check for the condition whether an error has occurred. For better performance, the caller should pick the effective minimum and maximum lengths. For example, if the caller absolutely needs a specific number of bytes before it can make any progress, use that value as the minimum. The maximum bytes can be the upperbound that the caller wants to read. Typically, the minimum length can be the caller protocol fixed-size header and the maximum length can be the maximum size of the payload or the size of the current read buffer. @param minimum The minimum number of bytes the caller wants to read @param maximum The maximum number of bytes the caller wants to read @param completion The completion handler to be invoked when there is data to read or an error occurred
+// Read the requested range of bytes.
 // Deprecated: Use `nw_connection_receive` in Network framework instead, see deprecation notice in <NetworkExtension/NWTCPConnection.h>
 func (o *NWTCPConnection) ReadMinimumLengthMaximumLengthCompletionHandler(minimum uint, maximum uint, completion func(*foundation.NSData, unsafe.Pointer)) {
 	var __block_completion objc.Block
@@ -95,7 +97,7 @@ func (o *NWTCPConnection) ReadMinimumLengthMaximumLengthCompletionHandler(minimu
 	o.Ptr().Send(_nWTCPConnectionSelReadMinimumLengthMaximumLengthCompletionHandler, minimum, maximum, __block_completion)
 }
 
-// @method write:completionHandler: @discussion Write the given data object content. Callers should wait until the completionHandler is executed before issuing another write. @param data The data object whose content will be written @param completion The completion handler to be invoked when the data content has been written or an error has occurred. If the error is nil, the write succeeded and the caller can write more data.
+// Write the data to the connection.
 // Deprecated: Use `nw_connection_send` in Network framework instead, see deprecation notice in <NetworkExtension/NWTCPConnection.h>
 func (o *NWTCPConnection) WriteCompletionHandler(data *foundation.NSData, completion func(unsafe.Pointer)) {
 	var __block_completion objc.Block
@@ -108,7 +110,7 @@ func (o *NWTCPConnection) WriteCompletionHandler(data *foundation.NSData, comple
 	o.Ptr().Send(_nWTCPConnectionSelWriteCompletionHandler, data.Ptr(), __block_completion)
 }
 
-// @method writeClose: @discussion Close this connection's write side such that further write requests won't succeed. Note that this has the effect of closing the read side of the peer connection. When the connection's read side and write side are closed, the connection is considered disconnected and will transition to the appropriate state.
+// Close the connection for writing.
 // Deprecated: Use `nw_connection_send` in Network framework instead, see deprecation notice in <NetworkExtension/NWTCPConnection.h>
 func (o *NWTCPConnection) WriteClose() {
 	o.Ptr().Send(_nWTCPConnectionSelWriteClose)

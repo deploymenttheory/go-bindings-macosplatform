@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A bar item that provides a system-defined color picker.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscolorpickertouchbaritem
 type NSColorPickerTouchBarItem struct {
 	NSTouchBarItem
@@ -48,7 +50,7 @@ func NSColorPickerTouchBarItemFromID(id objc.ID) *NSColorPickerTouchBarItem {
 	return o
 }
 
-// Creates a bar item containing a button with the standard color picker icon that invokes the color picker.
+// Creates a bar item with the standard color picker icon.
 func NSColorPickerTouchBarItemColorPickerWithIdentifier(identifier *foundation.NSString) *NSColorPickerTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelColorPickerWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -57,7 +59,7 @@ func NSColorPickerTouchBarItemColorPickerWithIdentifier(identifier *foundation.N
 	return NSColorPickerTouchBarItemFromID(_ret)
 }
 
-// Creates a bar item containing a button with the standard text color picker icon that invokes the color picker. Should be used when the item is used for picking text colors.
+// Creates a bar item with the standard text color picker icon.
 func NSColorPickerTouchBarItemTextColorPickerWithIdentifier(identifier *foundation.NSString) *NSColorPickerTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelTextColorPickerWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -66,7 +68,7 @@ func NSColorPickerTouchBarItemTextColorPickerWithIdentifier(identifier *foundati
 	return NSColorPickerTouchBarItemFromID(_ret)
 }
 
-// Creates a bar item containing a button with the standard stroke color picker icon that invokes the color picker. Should be used when the item is used for picking stroke colors.
+// Creates a bar item with the standard stroke color picker icon.
 func NSColorPickerTouchBarItemStrokeColorPickerWithIdentifier(identifier *foundation.NSString) *NSColorPickerTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelStrokeColorPickerWithIdentifier, identifier.Ptr())
 	if _ret != 0 {
@@ -75,6 +77,7 @@ func NSColorPickerTouchBarItemStrokeColorPickerWithIdentifier(identifier *founda
 	return NSColorPickerTouchBarItemFromID(_ret)
 }
 
+// Creates a color picker bar item using the supplied image as its icon.
 func NSColorPickerTouchBarItemColorPickerWithIdentifierButtonImage(identifier *foundation.NSString, image *NSImage) *NSColorPickerTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelColorPickerWithIdentifierButtonImage, identifier.Ptr(), image.Ptr())
 	if _ret != 0 {

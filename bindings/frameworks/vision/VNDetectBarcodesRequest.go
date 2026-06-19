@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A request that detects barcodes in an image.
+//
 // Apple documentation: https://developer.apple.com/documentation/vision/vndetectbarcodesrequest
 type VNDetectBarcodesRequest struct {
 	VNImageBasedRequest
@@ -37,31 +39,40 @@ func VNDetectBarcodesRequestFromID(id objc.ID) *VNDetectBarcodesRequest {
 	return o
 }
 
-// @brief Obtain the collection of barcode symbologies that can be recognized by the request in its current configuration. @discussion    Calling this method could be a potentially expensive operation. @return An array of VNBarcodeSymbology objects describing the symbologies recognized by the request in its current configuration.
+// Returns the barcode symbologies that the request supports.
 func (o *VNDetectBarcodesRequest) SupportedSymbologiesAndReturnError() (*foundation.NSArray[*foundation.NSString], error) {
 	var _nsErr uintptr
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNDetectBarcodesRequestSelSupportedSymbologiesAndReturnError, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNDetectBarcodesRequestSelSupportedSymbologiesAndReturnError, unsafe.Pointer(&_nsErr))
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
-	return _ret, nil
+	return foundation.NSArrayFromID[*foundation.NSString](_ret), nil
 }
 
 // @brief Obtain the collection of barcode symbologies currently recognized by the Vision framework. @discussion	Calling this method could be a potentially expensive operation. @return An array of VNBarcodeSymbology objects describing the symbologies currently supported by the Vision framework.
 // Deprecated: since macOS 12.0.
 func VNDetectBarcodesRequestSupportedSymbologies() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsVNDetectBarcodesRequest), _vNDetectBarcodesRequestSelSupportedSymbologies)
-	return _ret
+	_ret := objc.Send[objc.ID](objc.ID(_clsVNDetectBarcodesRequest), _vNDetectBarcodesRequestSelSupportedSymbologies)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // @discussion The collection of barcode symbologies that are to be detected in the image.  The default is to scan for all possible symbologies. Setting a revision on the request will reset the symbologies to all symbologies for the specified revision.
 func (o *VNDetectBarcodesRequest) Symbologies() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNDetectBarcodesRequestSelSymbologies)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _vNDetectBarcodesRequestSelSymbologies)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *VNDetectBarcodesRequest) SetSymbologies(symbologies *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_vNDetectBarcodesRequestSelSetSymbologies, symbologies)
+	o.Ptr().Send(_vNDetectBarcodesRequestSelSetSymbologies, symbologies.Ptr())
 }
 
 // @discussion An option to coalesce multiple codes if applicable based on the symbology

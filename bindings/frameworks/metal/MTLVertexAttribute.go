@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An instance that represents an attribute of a vertex function.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlvertexattribute
 type MTLVertexAttribute struct {
 	foundation.NSObject

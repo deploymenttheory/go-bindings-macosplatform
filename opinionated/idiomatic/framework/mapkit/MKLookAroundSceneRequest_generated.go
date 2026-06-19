@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A class you use to request a LookAround scene at the location you specify.
+//
 // LookAroundSceneRequest wraps [raw.MKLookAroundSceneRequest] with a fluent Go API.
 type LookAroundSceneRequest struct {
 	inner *raw.MKLookAroundSceneRequest
@@ -30,6 +32,8 @@ func LookAroundSceneRequestFromID(id objc.ID) *LookAroundSceneRequest {
 	return &LookAroundSceneRequest{inner: raw.MKLookAroundSceneRequestFromID(id)}
 }
 
+// Creates a LookAround scene at the specified coordinates.
+//
 // NewLookAroundSceneRequestWithCoordinate creates a new [LookAroundSceneRequest].
 func NewLookAroundSceneRequestWithCoordinate(coordinate unsafe.Pointer) *LookAroundSceneRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLookAroundSceneRequest")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewLookAroundSceneRequestWithCoordinate(coordinate unsafe.Pointer) *LookAro
 	return &LookAroundSceneRequest{inner: raw.MKLookAroundSceneRequestFromID(_id)}
 }
 
+// Creates a LookAround scene with the location described by the specified map item.
+//
 // NewLookAroundSceneRequestWithMapItem creates a new [LookAroundSceneRequest].
 func NewLookAroundSceneRequestWithMapItem(mapItem *raw.MKMapItem) *LookAroundSceneRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLookAroundSceneRequest")), objc.RegisterName("alloc"))
@@ -44,11 +50,15 @@ func NewLookAroundSceneRequestWithMapItem(mapItem *raw.MKMapItem) *LookAroundSce
 	return &LookAroundSceneRequest{inner: raw.MKLookAroundSceneRequestFromID(_id)}
 }
 
+// Requests a LookAround scene and calls the specified completion handler.
+//
 // GetSceneWithCompletionHandler calls the underlying GetSceneWithCompletionHandler.
 func (x *LookAroundSceneRequest) GetSceneWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	x.inner.GetSceneWithCompletionHandler(completionHandler)
 }
 
+// Cancels the pending scene request.
+//
 // Cancel calls the underlying Cancel.
 func (x *LookAroundSceneRequest) Cancel() {
 	x.inner.Cancel()

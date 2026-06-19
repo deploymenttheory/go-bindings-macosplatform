@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mechanism for creating implicit animations and combining scene graph changes into atomic updates.
+//
 // Transaction wraps [raw.SCNTransaction] with a fluent Go API.
 type Transaction struct {
 	inner *raw.SCNTransaction

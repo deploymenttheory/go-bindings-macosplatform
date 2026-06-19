@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// Your game uses the GKFriendRequestComposeViewController class to present a screen that allows the local player to send friend requests to other players.
+//
 // FriendRequestComposeViewController wraps [raw.GKFriendRequestComposeViewController] with a fluent Go API.
 type FriendRequestComposeViewController struct {
 	inner *raw.GKFriendRequestComposeViewController
@@ -39,20 +41,22 @@ func NewFriendRequestComposeViewController() *FriendRequestComposeViewController
 	return &FriendRequestComposeViewController{inner: raw.GKFriendRequestComposeViewControllerFromID(_id)}
 }
 
+// The view controller’s delegate
+//
 // WithComposeViewDelegate sets the composeViewDelegate property and returns the receiver for chaining.
 func (x *FriendRequestComposeViewController) WithComposeViewDelegate(composeViewDelegate raw.GKFriendRequestComposeViewControllerDelegate) *FriendRequestComposeViewController {
 	x.inner.SetComposeViewDelegate(composeViewDelegate)
 	return x
 }
 
-// Specify the message sent to the invitee. A default message will be used if you don't specify one.
+// Sets the text message included in the friend invitation.
 //
 // SetMessage calls the underlying SetMessage.
 func (x *FriendRequestComposeViewController) SetMessage(message string) {
 	x.inner.SetMessage(foundation.NSStringStringWithUTF8String(message))
 }
 
-// Add recipients to the request. If you don't specify at least one recipient before presenting the view, the recipients field will be made firstResponder, to encourage the user to add some. If you add more than maxNumberOfRecipients recipients, these methods will throw an exception.
+// Adds recipients based on their Game Center player identifiers.
 //
 // AddRecipientPlayers calls the underlying AddRecipientPlayers.
 func (x *FriendRequestComposeViewController) AddRecipientPlayers(players ...PlayerProvider) {
@@ -70,11 +74,15 @@ func (x *FriendRequestComposeViewController) AddRecipientPlayers(players ...Play
 	x.inner.AddRecipientPlayers(_arg0)
 }
 
+// Adds recipients based on their Game Center player identifiers.
+//
 // AddRecipientsWithPlayerIDs calls the underlying AddRecipientsWithPlayerIDs.
 func (x *FriendRequestComposeViewController) AddRecipientsWithPlayerIDs(playerIDs *foundation.NSArray[*foundation.NSString]) {
 	x.inner.AddRecipientsWithPlayerIDs(playerIDs)
 }
 
+// Adds recipients based on their email addresses.
+//
 // AddRecipientsWithEmailAddresses calls the underlying AddRecipientsWithEmailAddresses.
 func (x *FriendRequestComposeViewController) AddRecipientsWithEmailAddresses(emailAddresses *foundation.NSArray[*foundation.NSString]) {
 	x.inner.AddRecipientsWithEmailAddresses(emailAddresses)

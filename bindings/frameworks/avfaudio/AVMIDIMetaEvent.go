@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents MIDI meta event messages.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avmidimetaevent
 type AVMIDIMetaEvent struct {
 	AVMusicEvent
@@ -31,7 +33,7 @@ func AVMIDIMetaEventFromID(id objc.ID) *AVMIDIMetaEvent {
 	return o
 }
 
-// @method initWithType:data @abstract Initialize the event with a MIDI Meta-Event type and an NSData. @param type A AVMIDIMetaEventType indicating which type of Meta-Event. @param data An NSData object containing the raw contents of the Meta-Event.
+// Creates an event with a MIDI meta event type and data.
 func (o *AVMIDIMetaEvent) InitWithTypeData(type_ AVMIDIMetaEventType, data *foundation.NSData) *AVMIDIMetaEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIMetaEventSelInitWithTypeData, type_, data.Ptr())
 	if _ret != 0 {

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation that fetches metadata for one or more shares.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckfetchsharemetadataoperation
 type CKFetchShareMetadataOperation struct {
 	CKOperation
@@ -52,9 +54,9 @@ func (o *CKFetchShareMetadataOperation) Init() *CKFetchShareMetadataOperation {
 	return CKFetchShareMetadataOperationFromID(_ret)
 }
 
-// Creates an operation for fetching the metadata for the specified shares. - Parameters: - shareURLs: The URLs of the shares. If you specify `nil`, you must assign a value to the “CKFetchShareMetadataOperation/shareURLs“ property before you execute the operation. After creating the operation, assign a handler to the “CKFetchShareMetadataOperation/fetchShareMetadataCompletionBlock“ property to process the results.
+// Creates an operation for fetching the metadata for the specified shares.
 func (o *CKFetchShareMetadataOperation) InitWithShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL]) *CKFetchShareMetadataOperation {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchShareMetadataOperationSelInitWithShareURLs, shareURLs)
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchShareMetadataOperationSelInitWithShareURLs, shareURLs.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -63,12 +65,15 @@ func (o *CKFetchShareMetadataOperation) InitWithShareURLs(shareURLs *foundation.
 
 // The URLs of the shares to fetch. Use this property to view or change the URLs of the shares to fetch. If you intend to specify or change this property's value, do so before you execute the operation or submit it to a queue.
 func (o *CKFetchShareMetadataOperation) ShareURLs() *foundation.NSArray[*foundation.NSURL] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSURL]](o.Ptr(), _cKFetchShareMetadataOperationSelShareURLs)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchShareMetadataOperationSelShareURLs)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSURL](_ret)
 }
 
 func (o *CKFetchShareMetadataOperation) SetShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL]) {
-	o.Ptr().Send(_cKFetchShareMetadataOperationSelSetShareURLs, shareURLs)
+	o.Ptr().Send(_cKFetchShareMetadataOperationSelSetShareURLs, shareURLs.Ptr())
 }
 
 // A Boolean value that indicates whether to retrieve the root record. For a shared record hierarchy, set this property to <doc://com.apple.documentation/documentation/swift/true> to include the root record in the fetched share metadata. CloudKit ignores this property for a shared record zone because, unlike a shared record hierarchy, it doesn't have a nominated root record. The default value is <doc://com.apple.documentation/documentation/swift/false>.
@@ -83,12 +88,15 @@ func (o *CKFetchShareMetadataOperation) SetShouldFetchRootRecord(shouldFetchRoot
 
 // The fields to return when fetching the root record. For a shared record hierarchy, and when “CKFetchShareMetadataOperation/shouldFetchRootRecord“ is <doc://com.apple.documentation/documentation/swift/true>, set this property to specify which of the root record's fields the operation fetches. Use `nil` to fetch the entire record. CloudKit ignores this property for a shared record zone because, unlike a hierarchy, it doesn't have a nominated root record. The default value is `nil`.
 func (o *CKFetchShareMetadataOperation) RootRecordDesiredKeys() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKFetchShareMetadataOperationSelRootRecordDesiredKeys)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchShareMetadataOperationSelRootRecordDesiredKeys)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 func (o *CKFetchShareMetadataOperation) SetRootRecordDesiredKeys(rootRecordDesiredKeys *foundation.NSArray[*foundation.NSString]) {
-	o.Ptr().Send(_cKFetchShareMetadataOperationSelSetRootRecordDesiredKeys, rootRecordDesiredKeys)
+	o.Ptr().Send(_cKFetchShareMetadataOperationSelSetRootRecordDesiredKeys, rootRecordDesiredKeys.Ptr())
 }
 
 // The closure to execute as the operation fetches individual shares. The closure returns no value and takes the following parameters: - The share's URL. - The share metadata, or `nil` if CloudKit can't fetch the metadata. - If CloudKit can't fetch the share metadata, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each URL in the “CKFetchShareMetadataOperation/shareURLs“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.

@@ -10,7 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract virtual base class for CNN normalization nodes
+// Virtual base class for CNN normalization nodes.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnnormalizationnode
 type MPSCNNNormalizationNode struct {

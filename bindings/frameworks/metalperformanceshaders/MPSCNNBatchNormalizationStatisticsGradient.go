@@ -14,6 +14,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that stores the gradient of the loss function with respect to the batch statistics and batch normalization weights.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpscnnbatchnormalizationstatisticsgradient
 type MPSCNNBatchNormalizationStatisticsGradient struct {
 	mpsneuralnetwork.MPSCNNGradientKernel

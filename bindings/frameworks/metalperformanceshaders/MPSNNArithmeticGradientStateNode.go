@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A representation of the clamp mask used by gradient arithmetic operators.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnarithmeticgradientstatenode
 type MPSNNArithmeticGradientStateNode struct {
 	mpsneuralnetwork.MPSNNBinaryGradientStateNode

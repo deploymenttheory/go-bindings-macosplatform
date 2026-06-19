@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A collection of multiple closed polygon overlays.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkmultipolygon
 type MKMultiPolygon struct {
 	MKShape
@@ -31,6 +33,7 @@ func MKMultiPolygonFromID(id objc.ID) *MKMultiPolygon {
 	return o
 }
 
+// Creates a multipolygon object using the provided polygons.
 func (o *MKMultiPolygon) InitWithPolygons(polygons *foundation.NSArray[*MKPolygon]) *MKMultiPolygon {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMultiPolygonSelInitWithPolygons, polygons.Ptr())
 	if _ret != 0 {

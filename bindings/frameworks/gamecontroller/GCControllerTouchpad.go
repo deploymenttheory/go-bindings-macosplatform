@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A control element that represents a touch event on a touchpad.
+//
 // Apple documentation: https://developer.apple.com/documentation/gamecontroller/gccontrollertouchpad
 type GCControllerTouchpad struct {
 	GCControllerElement
@@ -40,7 +42,7 @@ func GCControllerTouchpadFromID(id objc.ID) *GCControllerTouchpad {
 	return o
 }
 
-// Sets the normalized value for the touchpad's axes, as well as its current touch and button state. @note If the controller's snapshot flag is set to NO, this method has no effect. @see touchSurface @see touchState
+// Sets the input values of a snapshot of a touchpad.
 func (o *GCControllerTouchpad) SetValueForXAxisYAxisTouchDownButtonValue(xAxis float32, yAxis float32, touchDown bool, buttonValue float32) {
 	o.Ptr().Send(_gCControllerTouchpadSelSetValueForXAxisYAxisTouchDownButtonValue, xAxis, yAxis, touchDown, buttonValue)
 }

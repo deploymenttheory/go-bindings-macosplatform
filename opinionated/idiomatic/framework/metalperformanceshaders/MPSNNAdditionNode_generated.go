@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract returns elementwise sum of left + right
+// A representation of an addition operator.
 //
 // NNAdditionNode wraps [raw.MPSNNAdditionNode] with a fluent Go API.
 type NNAdditionNode struct {

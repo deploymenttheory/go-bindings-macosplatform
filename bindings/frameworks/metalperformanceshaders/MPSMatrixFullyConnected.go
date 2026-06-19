@@ -16,6 +16,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A kernel for applying a fully connected neural network layer.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixfullyconnected
 type MPSMatrixFullyConnected struct {
 	mpsmatrix.MPSMatrixBinaryKernel

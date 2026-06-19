@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a client of the extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremediaio/cmioextensionclient
 type CMIOExtensionClient struct {
 	foundation.NSObject

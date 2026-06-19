@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that manages a collection of statistics, representing the results calculated over separate time intervals.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkstatisticscollection
 type HKStatisticsCollection struct {
 	foundation.NSObject
@@ -33,7 +35,7 @@ func HKStatisticsCollectionFromID(id objc.ID) *HKStatisticsCollection {
 	return o
 }
 
-// @method        statisticsForDate: @abstract      Returns the statistics object that this date is inside of @discussion    If there are no samples for the given date, an HKStatistics instance with nil quantities will be returned.
+// Returns the statistics object for the time interval that contains the provided date.
 func (o *HKStatisticsCollection) StatisticsForDate(date *foundation.NSDate) *HKStatistics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsCollectionSelStatisticsForDate, date.Ptr())
 	if _ret != 0 {
@@ -42,7 +44,7 @@ func (o *HKStatisticsCollection) StatisticsForDate(date *foundation.NSDate) *HKS
 	return HKStatisticsFromID(_ret)
 }
 
-// @method        enumerateStatisticsFromDate:toDate:withBlock: @abstract      Enumerates all statistics objects from startDate to endDate. @discussion    Statistics objects will be enumerated in chronological order. If there are no samples for an interval between the start and end date, then the HKStatistics object for that interval will have nil quantities.
+// Enumerates the statistics objects for all the time intervals from the start date until the end date.
 func (o *HKStatisticsCollection) EnumerateStatisticsFromDateToDateWith(startDate *foundation.NSDate, endDate *foundation.NSDate, block func(*HKStatistics, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
@@ -57,7 +59,7 @@ func (o *HKStatisticsCollection) EnumerateStatisticsFromDateToDateWith(startDate
 	o.Ptr().Send(_hKStatisticsCollectionSelEnumerateStatisticsFromDateToDateWith, startDate.Ptr(), endDate.Ptr(), __block_block)
 }
 
-// @method        statistics @abstract      Returns a copy of the populated statistics objects. @discussion    The statistics objects are ordered chronologically.
+// Returns an array of statistics objects representing the populated time intervals covered by the statistics collection query.
 func (o *HKStatisticsCollection) Statistics() *foundation.NSArray[*HKStatistics] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsCollectionSelStatistics)
 	if _ret != 0 {
@@ -66,7 +68,7 @@ func (o *HKStatisticsCollection) Statistics() *foundation.NSArray[*HKStatistics]
 	return foundation.NSArrayFromID[*HKStatistics](_ret)
 }
 
-// @method        sources @abstract      Returns all HKSources found in the contained HKStatistics objects. @discussion    Sources will be empty unless HKStatisticsOptionSeparateBySource is specified in the HKStatisticsCollectionQuery options.
+// Returns a set containing all the sources that had samples matched by the statistics collection query.
 func (o *HKStatisticsCollection) Sources() *foundation.NSSet[*HKSource] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsCollectionSelSources)
 	if _ret != 0 {

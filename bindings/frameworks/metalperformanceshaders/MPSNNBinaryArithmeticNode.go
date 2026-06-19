@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// @abstract virtual base class for basic arithmetic nodes
+// Virtual base class for basic arithmetic nodes.
 //
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnnbinaryarithmeticnode
 type MPSNNBinaryArithmeticNode struct {
@@ -62,7 +62,7 @@ func MPSNNBinaryArithmeticNodeFromID(id objc.ID) *MPSNNBinaryArithmeticNode {
 
 // @abstract create an autoreleased arithemtic node with an array of sources @param  sourceNodes     A valid NSArray containing two sources
 func MPSNNBinaryArithmeticNodeNodeWithSources(sourceNodes *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *MPSNNBinaryArithmeticNode {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNBinaryArithmeticNode), _mPSNNBinaryArithmeticNodeSelNodeWithSources, sourceNodes)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNBinaryArithmeticNode), _mPSNNBinaryArithmeticNodeSelNodeWithSources, sourceNodes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -80,7 +80,7 @@ func MPSNNBinaryArithmeticNodeNodeWithLeftSourceRightSource(left *mpsneuralnetwo
 
 // @abstract init an arithemtic node with an array of sources @param  sourceNodes     A valid NSArray containing two sources
 func (o *MPSNNBinaryArithmeticNode) InitWithSources(sourceNodes *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *MPSNNBinaryArithmeticNode {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNBinaryArithmeticNodeSelInitWithSources, sourceNodes)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNBinaryArithmeticNodeSelInitWithSources, sourceNodes.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -103,8 +103,11 @@ func (o *MPSNNBinaryArithmeticNode) GradientClass() objc.Class {
 
 // @abstract create new arithmetic gradient nodes @discussion Create two new arithmetic gradient nodes - one that computes the gradient for the primary source image and one that computes the gradient for the secondary sourcefrom the inference pass.
 func (o *MPSNNBinaryArithmeticNode) GradientFiltersWithSources(gradientImages *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *foundation.NSArray[*mpsneuralnetwork.MPSNNGradientFilterNode] {
-	_ret := objc.Send[*foundation.NSArray[*mpsneuralnetwork.MPSNNGradientFilterNode]](o.Ptr(), _mPSNNBinaryArithmeticNodeSelGradientFiltersWithSources, gradientImages)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNBinaryArithmeticNodeSelGradientFiltersWithSources, gradientImages.Ptr())
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*mpsneuralnetwork.MPSNNGradientFilterNode](_ret)
 }
 
 func (o *MPSNNBinaryArithmeticNode) PrimaryScale() float32 {

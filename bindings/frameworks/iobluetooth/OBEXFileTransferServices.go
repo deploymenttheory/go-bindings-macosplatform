@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Implements advanced OBEX operations in addition to simple PUT and GET.
+//
 // Apple documentation: https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices
 type OBEXFileTransferServices struct {
 	foundation.NSObject
@@ -50,7 +52,7 @@ func OBEXFileTransferServicesFromID(id objc.ID) *OBEXFileTransferServices {
 	return o
 }
 
-// @method			withOBEXSession: @abstract		Create a new OBEXFileTransferServices object @discussion		This object must be constructed with a valid IOBluetoothOBEXSession. The given IOBluetoothOBEXSession does not need to be connected to the remote server. This module can be manually connected through the connect(void) method. @param			inOBEXSession A valid IOBluetoothOBEXSession @result			A newly created OBEXFileTransferServices object on success, nil on failure
+// Create a new OBEXFileTransferServices object
 func OBEXFileTransferServicesWithOBEXSession(inOBEXSession *IOBluetoothOBEXSession) *OBEXFileTransferServices {
 	_ret := objc.Send[objc.ID](objc.ID(_clsOBEXFileTransferServices), _oBEXFileTransferServicesSelWithOBEXSession, inOBEXSession.Ptr())
 	if _ret != 0 {
@@ -59,7 +61,7 @@ func OBEXFileTransferServicesWithOBEXSession(inOBEXSession *IOBluetoothOBEXSessi
 	return OBEXFileTransferServicesFromID(_ret)
 }
 
-// @method			initWithOBEXSession: @abstract		Create a new OBEXFileTransferServices object @discussion		This object must be constructed with a valid IOBluetoothOBEXSession. The given IOBluetoothOBEXSession does not need to be connected to the remote server. OBEXFileTransferServices can be manually connected through the provided connection methods. @param			inOBEXSession A valid IOBluetoothOBEXSession @result			A newly created OBEXFileTransferServices object on success, nil on failure
+// Create a new OBEXFileTransferServices object
 func (o *OBEXFileTransferServices) InitWithOBEXSession(inOBEXSession *IOBluetoothOBEXSession) *OBEXFileTransferServices {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oBEXFileTransferServicesSelInitWithOBEXSession, inOBEXSession.Ptr())
 	if _ret != 0 {
@@ -68,7 +70,7 @@ func (o *OBEXFileTransferServices) InitWithOBEXSession(inOBEXSession *IOBluetoot
 	return OBEXFileTransferServicesFromID(_ret)
 }
 
-// @method     currentPath @abstract   Get the remote current directory path during an FTP session @discussion This path is changed with each path-specific command called on OBEXFileTransferServices. @result		The current path being browsed over FTP
+// Get the remote current directory path during an FTP session
 func (o *OBEXFileTransferServices) CurrentPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oBEXFileTransferServicesSelCurrentPath)
 	if _ret != 0 {
@@ -77,97 +79,97 @@ func (o *OBEXFileTransferServices) CurrentPath() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-// @method     isBusy @abstract   Get the action state of the module @discussion OBEXFileTransferServices will be considered "busy" when an operation in taking place or has not completed.  Calling abort: on this module will not automatically reset its busy state.  The user will have to wait for the operation to complete or for the current operation to timeout. @result		Success or failure code.
+// Get the action state of the module
 func (o *OBEXFileTransferServices) IsBusy() bool {
 	_ret := objc.Send[bool](o.Ptr(), _oBEXFileTransferServicesSelIsBusy)
 	return _ret
 }
 
-// @method     isConnected @abstract   Get the connected state of this module. @discussion Asks the OBEXSession that was passed to it on creation if it has an open OBEX connection @result		Success or failure code.
+// Get the connected state of this module.
 func (o *OBEXFileTransferServices) IsConnected() bool {
 	_ret := objc.Send[bool](o.Ptr(), _oBEXFileTransferServicesSelIsConnected)
 	return _ret
 }
 
-// @method     connectToFTPService @abstract   Connect to a remote device for FTP operations @discussion If the OBEXSession given to OBEXFileTransferServices on creation is not connected it can be manually connected through this method. @result		kOBEXSuccess, kOBEXSessionBusyError, or kOBEXSessionAlreadyConnectedError, kOBEXNoResourcesError initially.  Further results returned through the fileTransferServicesConnectionComplete: delegate method if initially successful.
+// Connect to a remote device for FTP operations
 func (o *OBEXFileTransferServices) ConnectToFTPService() int32 {
 	_ret := objc.Send[int32](o.Ptr(), _oBEXFileTransferServicesSelConnectToFTPService)
 	return _ret
 }
 
-// @method     connectToObjectPushService @abstract   Connect to a remote device for ObjectPush operations. Most of the FTP functionality of this object will be disabled. @discussion If the OBEXSession given to OBEXFileTransferServices on creation is not connected it can be manually connected through this method. @result		kOBEXSuccess, kOBEXSessionBusyError, or kOBEXSessionAlreadyConnectedError, kOBEXNoResourcesError initially.  Further results returned through the fileTransferServicesConnectionComplete: delegate method if initially successful.
+// Connect to a remote device for ObjectPush operations. Most of the FTP functionality of this object will be disabled.
 func (o *OBEXFileTransferServices) ConnectToObjectPushService() int32 {
 	_ret := objc.Send[int32](o.Ptr(), _oBEXFileTransferServicesSelConnectToObjectPushService)
 	return _ret
 }
 
-// @method     disconnect @abstract   Disconnect from the remote device @discussion The user can manually disconnect the OBEXSession from the remote device if they want to.  OBEXFileTransferServices will disconnect the OBEXSession at release only if it was responsible for opening the connection via a connect method. @result		kOBEXSuccess, kOBEXSessionNotConnectedError, or kOBEXSessionBusyError initially. Further results returned through the fileTransferServicesDisconnectionComplete: delegate method if initially successful.
+// Disconnect from the remote device
 func (o *OBEXFileTransferServices) Disconnect() int32 {
 	_ret := objc.Send[int32](o.Ptr(), _oBEXFileTransferServicesSelDisconnect)
 	return _ret
 }
 
-// @method     changeCurrentFolderRoot @abstract   Asynchronously change to the remote root directory @discussion Equivalent to 'cd ~/' @result		kOBEXSuccess or kOBEXSessionBusyError initially.  Further results returned through the fileTransferServicesPathChangeComplete: delegate method if initially successful.
+// Asynchronously change to the remote root directory
 func (o *OBEXFileTransferServices) ChangeCurrentFolderToRoot() int32 {
 	_ret := objc.Send[int32](o.Ptr(), _oBEXFileTransferServicesSelChangeCurrentFolderToRoot)
 	return _ret
 }
 
-// @method     changeCurrentFolderBackward @abstract   Change to the directory above the current level if not at the root @discussion Equivalent to 'cd ..' only if remote path is not already at root. @result		kOBEXSuccess or kOBEXSessionBusyError initially. Further results returned through the fileTransferServicesPathChangeComplete: delegate method if initially successful.
+// Change to the directory above the current level if not at the root
 func (o *OBEXFileTransferServices) ChangeCurrentFolderBackward() int32 {
 	_ret := objc.Send[int32](o.Ptr(), _oBEXFileTransferServicesSelChangeCurrentFolderBackward)
 	return _ret
 }
 
-// @method     changeCurrentFolderForwardToPath: @abstract   Change the remote path @discussion Equivalent to 'cd dirName'. @param		inDirName The name of the remote folder to be set as current @result		kOBEXSuccess, kOBEXSessionBusyError, or kOBEXBadArgumentError initially. Further results returned through the fileTransferServicesPathChangeComplete: delegate method if initially successful.
+// Change the remote path
 func (o *OBEXFileTransferServices) ChangeCurrentFolderForwardToPath(inDirName *foundation.NSString) int32 {
 	_ret := objc.Send[int32](o.Ptr(), _oBEXFileTransferServicesSelChangeCurrentFolderForwardToPath, inDirName.Ptr())
 	return _ret
 }
 
-// @method     createFolder: @abstract   Create a folder on the remote target @discussion Equivalent to 'mkdir dirName'. @param		inDirName The name of the folder to be created @result		kOBEXSuccess, kOBEXSessionBusyError, or kOBEXBadArgumentError initially. Further results returned through the fileTransferServicesCreateFolderComplete delegate method if initially successful.
+// Create a folder on the remote target
 func (o *OBEXFileTransferServices) CreateFolder(inDirName *foundation.NSString) int32 {
 	_ret := objc.Send[int32](o.Ptr(), _oBEXFileTransferServicesSelCreateFolder, inDirName.Ptr())
 	return _ret
 }
 
-// @method     removeItem: @abstract   Remove a remote item. @discussion Not supported for use on Apple computer targets @param		inItemName The name of the remote item to be removed @result		kOBEXSuccess, kOBEXSessionBusyError, or kOBEXBadArgumentError initially. Further results returned through the fileTransferServicesRemoveItemComplete: delegate method if initially successful.
+// Remove a remote item.
 func (o *OBEXFileTransferServices) RemoveItem(inItemName *foundation.NSString) int32 {
 	_ret := objc.Send[int32](o.Ptr(), _oBEXFileTransferServicesSelRemoveItem, inItemName.Ptr())
 	return _ret
 }
 
-// @method     retrieveFolderListing @abstract   Get a remote directory listing @discussion Equivalent to 'ls'. @result		kOBEXSuccess or kOBEXSessionBusyError initially.  Further results returned through the fileTransferServicesRetrieveFolderListingComplete: delegate method if initially successful.
+// Get a remote directory listing
 func (o *OBEXFileTransferServices) RetrieveFolderListing() int32 {
 	_ret := objc.Send[int32](o.Ptr(), _oBEXFileTransferServicesSelRetrieveFolderListing)
 	return _ret
 }
 
-// @method     sendFile: @abstract   Put a local file to the remote target @discussion Equivalent to 'mv inLocalFilePath remoteCurrentPath'. @param		inLocalPathAndName The name and path of the file to be sent an instance of OBEXFilePut. @result		kOBEXSuccess, kOBEXSessionBusyError, or kOBEXBadArgumentError initially. Further results returned through the fileTransferServicesSendComplete: and fileTransferServicesSendProgress: delegate methods if initially successful.
+// Put a local file to the remote target
 func (o *OBEXFileTransferServices) SendFile(inLocalPathAndName *foundation.NSString) int32 {
 	_ret := objc.Send[int32](o.Ptr(), _oBEXFileTransferServicesSelSendFile, inLocalPathAndName.Ptr())
 	return _ret
 }
 
-// @method     copyRemoteFile:toLocalPath: @abstract   Copy a remote file to a local path @discussion Equivalent to 'cp remotePath/remoteFileName localPathAndName'. @param		inRemoteFileName The name of the remote file to get @param		inLocalPathAndName The path and name of where the received file will go @result		kOBEXSuccess, kOBEXSessionBusyError, or kOBEXBadArgumentError. initially.  Further results returned through the fileTransferServicesGetComplete: and fileTransferServicesGetProgress: delegate methods if initially successful.
+// Copy a remote file to a local path
 func (o *OBEXFileTransferServices) CopyRemoteFileToLocalPath(inRemoteFileName *foundation.NSString, inLocalPathAndName *foundation.NSString) int32 {
 	_ret := objc.Send[int32](o.Ptr(), _oBEXFileTransferServicesSelCopyRemoteFileToLocalPath, inRemoteFileName.Ptr(), inLocalPathAndName.Ptr())
 	return _ret
 }
 
-// @method     sendData:type:name: @abstract   Send data to a remote target @discussion Use this method when you have data to send but no file to read from. @param		inData The data to be sent @param		inType The type of the data to be sent that will be used in the OBEX type header, usually a mime-type.  For example, use "text/x-vCard" when sending vCards. This argument is optional. @param		inName The name of the file that the data can be referenced as. @result		kOBEXSuccess, kOBEXSessionBusyError, or kOBEXBadArgumentError initially. Further results returned through the fileTransferServicesSendComplete: and fileTransferServicesSendProgress: delegate methods if initially successful.
+// Send data to a remote target
 func (o *OBEXFileTransferServices) SendDataTypeName(inData *foundation.NSData, inType *foundation.NSString, inName *foundation.NSString) int32 {
 	_ret := objc.Send[int32](o.Ptr(), _oBEXFileTransferServicesSelSendDataTypeName, inData.Ptr(), inType.Ptr(), inName.Ptr())
 	return _ret
 }
 
-// @method     getDefaultVCard: @abstract   Get the remote default VCard, if it is supported @discussion Some devices such as cellphones and computers support default VCards @param		inLocalPathAndName The path and name of where the received file will go @result		kOBEXSuccess, kOBEXSessionBusyError, or kOBEXBadArgumentError initially.  Further results returned through the fileTransferServicesGetComplete: and fileTransferServicesGetProgress: delegate methods if initially successful.
+// Get the remote default VCard, if it is supported
 func (o *OBEXFileTransferServices) GetDefaultVCard(inLocalPathAndName *foundation.NSString) int32 {
 	_ret := objc.Send[int32](o.Ptr(), _oBEXFileTransferServicesSelGetDefaultVCard, inLocalPathAndName.Ptr())
 	return _ret
 }
 
-// @method     abort @abstract   Abort the current operation @discussion Attempts send an abort request to the remote device.  Returns the OBEXFileTransferServices object to an idle state though the state of the remote device is not guaranteed. @result		kOBEXSuccess, or kOBEXGeneralError if no command is in progress. ABORT commands can only be sent on our turn, meaning we may have to timeout if the target side never responds to the command in progress.  In that case this object will call back with a status of kOBEXTimeoutError and an error. Further results returned through the fileTransferServicesAbortComplete: delegate method if initially successful.
+// Abort the current operation
 func (o *OBEXFileTransferServices) Abort() int32 {
 	_ret := objc.Send[int32](o.Ptr(), _oBEXFileTransferServicesSelAbort)
 	return _ret

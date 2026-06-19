@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An operation that fetches metadata for one or more shares.
+//
 // FetchShareMetadataOperation wraps [raw.CKFetchShareMetadataOperation] with a fluent Go API.
 type FetchShareMetadataOperation struct {
 	inner *raw.CKFetchShareMetadataOperation
@@ -39,7 +41,7 @@ func NewFetchShareMetadataOperation() *FetchShareMetadataOperation {
 	return &FetchShareMetadataOperation{inner: raw.CKFetchShareMetadataOperationFromID(_id)}
 }
 
-// Creates an operation for fetching the metadata for the specified shares. - Parameters: - shareURLs: The URLs of the shares. If you specify `nil`, you must assign a value to the “CKFetchShareMetadataOperation/shareURLs“ property before you execute the operation. After creating the operation, assign a handler to the “CKFetchShareMetadataOperation/fetchShareMetadataCompletionBlock“ property to process the results.
+// Creates an operation for fetching the metadata for the specified shares.
 //
 // NewFetchShareMetadataOperationWithShareURLs creates a new [FetchShareMetadataOperation].
 func NewFetchShareMetadataOperationWithShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL]) *FetchShareMetadataOperation {
@@ -48,7 +50,7 @@ func NewFetchShareMetadataOperationWithShareURLs(shareURLs *foundation.NSArray[*
 	return &FetchShareMetadataOperation{inner: raw.CKFetchShareMetadataOperationFromID(_id)}
 }
 
-// The URLs of the shares to fetch. Use this property to view or change the URLs of the shares to fetch. If you intend to specify or change this property's value, do so before you execute the operation or submit it to a queue.
+// The URLs of the shares to fetch.
 //
 // WithShareURLs sets the collection, converting the Go slice to an NSArray.
 func (x *FetchShareMetadataOperation) WithShareURLs(items ...*foundation.NSURL) *FetchShareMetadataOperation {
@@ -71,7 +73,7 @@ func (x *FetchShareMetadataOperation) WithShareURLs(items ...*foundation.NSURL) 
 	return x
 }
 
-// A Boolean value that indicates whether to retrieve the root record. For a shared record hierarchy, set this property to <doc://com.apple.documentation/documentation/swift/true> to include the root record in the fetched share metadata. CloudKit ignores this property for a shared record zone because, unlike a shared record hierarchy, it doesn't have a nominated root record. The default value is <doc://com.apple.documentation/documentation/swift/false>.
+// A Boolean value that indicates whether to retrieve the root record.
 //
 // WithShouldFetchRootRecord sets the shouldFetchRootRecord property and returns the receiver for chaining.
 func (x *FetchShareMetadataOperation) WithShouldFetchRootRecord(shouldFetchRootRecord bool) *FetchShareMetadataOperation {
@@ -79,7 +81,7 @@ func (x *FetchShareMetadataOperation) WithShouldFetchRootRecord(shouldFetchRootR
 	return x
 }
 
-// The fields to return when fetching the root record. For a shared record hierarchy, and when “CKFetchShareMetadataOperation/shouldFetchRootRecord“ is <doc://com.apple.documentation/documentation/swift/true>, set this property to specify which of the root record's fields the operation fetches. Use `nil` to fetch the entire record. CloudKit ignores this property for a shared record zone because, unlike a hierarchy, it doesn't have a nominated root record. The default value is `nil`.
+// The fields to return when fetching the root record.
 //
 // WithRootRecordDesiredKeys sets the collection, converting the Go slice to an NSArray.
 func (x *FetchShareMetadataOperation) WithRootRecordDesiredKeys(items ...*foundation.NSString) *FetchShareMetadataOperation {
@@ -102,7 +104,7 @@ func (x *FetchShareMetadataOperation) WithRootRecordDesiredKeys(items ...*founda
 	return x
 }
 
-// The closure to execute as the operation fetches individual shares. The closure returns no value and takes the following parameters: - The share's URL. - The share metadata, or `nil` if CloudKit can't fetch the metadata. - If CloudKit can't fetch the share metadata, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each URL in the “CKFetchShareMetadataOperation/shareURLs“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute as the operation fetches individual shares.
 //
 // WithPerShareMetadataBlock sets the perShareMetadataBlock property and returns the receiver for chaining.
 func (x *FetchShareMetadataOperation) WithPerShareMetadataBlock(perShareMetadataBlock func(*foundation.NSURL, *raw.CKShareMetadata, unsafe.Pointer)) *FetchShareMetadataOperation {
@@ -110,7 +112,7 @@ func (x *FetchShareMetadataOperation) WithPerShareMetadataBlock(perShareMetadata
 	return x
 }
 
-// The closure to execute when the operation finishes. The closure returns no value and takes the following parameter: - An error that contains information about a problem, or `nil` if CloudKit successfully fetches the metadatas. The operation executes this closure only once. The closure executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The closure reports an error of type “CKError/Code/partialFailure“ when it can't fetch some of the metadatas. The `userInfo` dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary identify the metadatas that CloudKit can't fetch, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
+// The closure to execute when the operation finishes.
 //
 // WithFetchShareMetadataCompletionBlock sets the fetchShareMetadataCompletionBlock property and returns the receiver for chaining.
 func (x *FetchShareMetadataOperation) WithFetchShareMetadataCompletionBlock(fetchShareMetadataCompletionBlock func(unsafe.Pointer)) *FetchShareMetadataOperation {
@@ -118,7 +120,7 @@ func (x *FetchShareMetadataOperation) WithFetchShareMetadataCompletionBlock(fetc
 	return x
 }
 
-// The operation's configuration.
+// The operation’s configuration.
 //
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *FetchShareMetadataOperation) WithConfiguration(configuration *OperationConfiguration) *FetchShareMetadataOperation {
@@ -126,7 +128,7 @@ func (x *FetchShareMetadataOperation) WithConfiguration(configuration *Operation
 	return x
 }
 
-// The operation's group.
+// The operation’s group.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *FetchShareMetadataOperation) WithGroup(group *OperationGroup) *FetchShareMetadataOperation {
@@ -134,7 +136,7 @@ func (x *FetchShareMetadataOperation) WithGroup(group *OperationGroup) *FetchSha
 	return x
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *FetchShareMetadataOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareMetadataOperation {
@@ -158,7 +160,7 @@ func (x *FetchShareMetadataOperation) WithAllowsCellularAccess(allowsCellularAcc
 	return x
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A Boolean value that indicates whether the operation is long-lived.
 //
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *FetchShareMetadataOperation) WithLongLived(longLived bool) *FetchShareMetadataOperation {

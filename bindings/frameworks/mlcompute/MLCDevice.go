@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the CPU or one or more GPUs the framework uses to execute a neural network.
+//
 // Apple documentation: https://developer.apple.com/documentation/mlcompute/mlcdevice
 type MLCDevice struct {
 	foundation.NSObject
@@ -39,7 +41,7 @@ func MLCDeviceFromID(id objc.ID) *MLCDevice {
 	return o
 }
 
-// @abstract   Creates a device which uses the CPU. @return     A new device.
+// Creates a device that uses the CPU.
 func MLCDeviceCpuDevice() *MLCDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCDevice), _mLCDeviceSelCpuDevice)
 	if _ret != 0 {
@@ -48,7 +50,7 @@ func MLCDeviceCpuDevice() *MLCDevice {
 	return MLCDeviceFromID(_ret)
 }
 
-// @abstract   Creates a device which uses a GPU, if any. @return     A new device, or `nil` if no GPU exists.
+// Creates a device that uses a GPU, if one exists.
 func MLCDeviceGpuDevice() *MLCDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCDevice), _mLCDeviceSelGpuDevice)
 	if _ret != 0 {
@@ -57,7 +59,7 @@ func MLCDeviceGpuDevice() *MLCDevice {
 	return MLCDeviceFromID(_ret)
 }
 
-// @abstract   Creates a device which uses the Apple Neural Engine, if any. @return     A new device, or `nil` if no ANE exists.
+// Creates a device that uses the Apple Neural Engine, if one exists.
 func MLCDeviceAneDevice() *MLCDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCDevice), _mLCDeviceSelAneDevice)
 	if _ret != 0 {
@@ -66,7 +68,7 @@ func MLCDeviceAneDevice() *MLCDevice {
 	return MLCDeviceFromID(_ret)
 }
 
-// @abstract   Create a MLCDevice object @param      type    A device type @return     A new device object
+// Creates a device of the type you specify.
 func MLCDeviceDeviceWithType(type_ MLCDeviceType) *MLCDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCDevice), _mLCDeviceSelDeviceWithType, type_)
 	if _ret != 0 {
@@ -75,7 +77,7 @@ func MLCDeviceDeviceWithType(type_ MLCDeviceType) *MLCDevice {
 	return MLCDeviceFromID(_ret)
 }
 
-// @abstract   Create a MLCDevice object that uses multiple devices if available @param      type    A device type @param      selectsMultipleComputeDevices    A boolean to indicate whether to select multiple compute devices @return     A new device object
+// Creates a device that you can configure to use multiple compute devices.
 func MLCDeviceDeviceWithTypeSelectsMultipleComputeDevices(type_ MLCDeviceType, selectsMultipleComputeDevices bool) *MLCDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCDevice), _mLCDeviceSelDeviceWithTypeSelectsMultipleComputeDevices, type_, selectsMultipleComputeDevices)
 	if _ret != 0 {
@@ -84,9 +86,9 @@ func MLCDeviceDeviceWithTypeSelectsMultipleComputeDevices(type_ MLCDeviceType, s
 	return MLCDeviceFromID(_ret)
 }
 
-// @abstract   Create a MLCDevice object @discussion This method can be used by developers to select specific GPUs @param      gpus    List of Metal devices @return     A new device object
+// Creates a device using the GPUs you specify.
 func MLCDeviceDeviceWithGPUDevices(gpus *foundation.NSArray[metal.MTLDevice]) *MLCDevice {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMLCDevice), _mLCDeviceSelDeviceWithGPUDevices, gpus)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMLCDevice), _mLCDeviceSelDeviceWithGPUDevices, gpus.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -106,6 +108,9 @@ func (o *MLCDevice) ActualDeviceType() MLCDeviceType {
 }
 
 func (o *MLCDevice) GpuDevices() *foundation.NSArray[metal.MTLDevice] {
-	_ret := objc.Send[*foundation.NSArray[metal.MTLDevice]](o.Ptr(), _mLCDeviceSelGpuDevices)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mLCDeviceSelGpuDevices)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[metal.MTLDevice](_ret)
 }

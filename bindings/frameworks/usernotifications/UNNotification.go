@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The data for a local or remote notification the system delivers to your app.
+//
 // Apple documentation: https://developer.apple.com/documentation/usernotifications/unnotification
 type UNNotification struct {
 	foundation.NSObject

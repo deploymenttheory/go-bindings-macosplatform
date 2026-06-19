@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A representation of a node (a file, directory, or symbolic link) in the file system.
+//
 // FileWrapper wraps [raw.NSFileWrapper] with a fluent Go API.
 type FileWrapper struct {
 	inner *raw.NSFileWrapper

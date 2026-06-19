@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The class that defines the parameters for a stencil operation.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphstencilopdescriptor
 type MPSGraphStencilOpDescriptor struct {
 	MPSGraphObject
@@ -50,7 +52,7 @@ func MPSGraphStencilOpDescriptorFromID(id objc.ID) *MPSGraphStencilOpDescriptor 
 	return o
 }
 
-// Creates a stencil operation descriptor with given values. - Parameters: - reductionMode: See `reductionMode` property. - offsets: See `offsets` property. - strides: See `strides` property. - dilationRates: See `dilationRates` property. - explicitPadding: See `explicitPadding` property. - boundaryMode: See `boundaryMode` property. - paddingStyle: See `paddingStyle` property. - paddingConstant: See `paddingConstant` property. - Returns: A valid MPSGraphStencilOpDescriptor object
+// Creates a stencil operation descriptor with given values.
 func MPSGraphStencilOpDescriptorDescriptorWithReductionModeOffsetsStridesDilationRatesExplicitPaddingBoundaryModePaddingStylePaddingConstant(reductionMode MPSGraphReductionMode, offsets unsafe.Pointer, strides unsafe.Pointer, dilationRates unsafe.Pointer, explicitPadding unsafe.Pointer, boundaryMode MPSGraphPaddingMode, paddingStyle MPSGraphPaddingStyle, paddingConstant float32) *MPSGraphStencilOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphStencilOpDescriptor), _mPSGraphStencilOpDescriptorSelDescriptorWithReductionModeOffsetsStridesDilationRatesExplicitPaddingBoundaryModePaddingStylePaddingConstant, reductionMode, offsets, strides, dilationRates, explicitPadding, boundaryMode, paddingStyle, paddingConstant)
 	if _ret != 0 {
@@ -59,7 +61,7 @@ func MPSGraphStencilOpDescriptorDescriptorWithReductionModeOffsetsStridesDilatio
 	return MPSGraphStencilOpDescriptorFromID(_ret)
 }
 
-// Creates a stencil operation descriptor with default values. - Parameters: - offsets: See `offsets` property. - explicitPadding: See `explicitPadding` property. - Returns: A valid MPSGraphStencilOpDescriptor object
+// Creates a stencil operation descriptor with default values.
 func MPSGraphStencilOpDescriptorDescriptorWithOffsetsExplicitPadding(offsets unsafe.Pointer, explicitPadding unsafe.Pointer) *MPSGraphStencilOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphStencilOpDescriptor), _mPSGraphStencilOpDescriptorSelDescriptorWithOffsetsExplicitPadding, offsets, explicitPadding)
 	if _ret != 0 {
@@ -68,7 +70,7 @@ func MPSGraphStencilOpDescriptorDescriptorWithOffsetsExplicitPadding(offsets uns
 	return MPSGraphStencilOpDescriptorFromID(_ret)
 }
 
-// Creates a stencil operation descriptor with default values. - Parameters: - explicitPadding: See `explicitPadding` property. - Returns: A valid MPSGraphStencilOpDescriptor object
+// Creates a stencil operation descriptor with default values.
 func MPSGraphStencilOpDescriptorDescriptorWithExplicitPadding(explicitPadding unsafe.Pointer) *MPSGraphStencilOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphStencilOpDescriptor), _mPSGraphStencilOpDescriptorSelDescriptorWithExplicitPadding, explicitPadding)
 	if _ret != 0 {
@@ -77,7 +79,7 @@ func MPSGraphStencilOpDescriptorDescriptorWithExplicitPadding(explicitPadding un
 	return MPSGraphStencilOpDescriptorFromID(_ret)
 }
 
-// Creates a stencil operation descriptor with default values. - Parameters: - paddingStyle: See `paddingStyle` property. - Returns: A valid MPSGraphStencilOpDescriptor object
+// Creates a stencil operation descriptor with default values.
 func MPSGraphStencilOpDescriptorDescriptorWithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *MPSGraphStencilOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphStencilOpDescriptor), _mPSGraphStencilOpDescriptorSelDescriptorWithPaddingStyle, paddingStyle)
 	if _ret != 0 {

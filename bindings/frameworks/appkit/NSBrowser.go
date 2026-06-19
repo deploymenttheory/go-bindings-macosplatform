@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An interface that displays a hierarchically organized list of data items that can be navigated and selected.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsbrowser
 type NSBrowser struct {
 	NSControl
@@ -148,20 +150,24 @@ func NSBrowserFromID(id objc.ID) *NSBrowser {
 	return o
 }
 
+// Loads column 0; unloads previously loaded columns.
 func (o *NSBrowser) LoadColumnZero() {
 	o.Ptr().Send(_nSBrowserSelLoadColumnZero)
 }
 
+// Returns the item at the specified index path.
 func (o *NSBrowser) ItemAtIndexPath(indexPath *foundation.NSIndexPath) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelItemAtIndexPath, indexPath.Ptr())
 	return _ret
 }
 
+// Returns the item located at the specified row and column.
 func (o *NSBrowser) ItemAtRowInColumn(row int, column int) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelItemAtRowInColumn, row, column)
 	return _ret
 }
 
+// Returns the index path of the item whose children are displayed in the given column.
 func (o *NSBrowser) IndexPathForColumn(column int) *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelIndexPathForColumn, column)
 	if _ret != 0 {
@@ -170,28 +176,34 @@ func (o *NSBrowser) IndexPathForColumn(column int) *foundation.NSIndexPath {
 	return foundation.NSIndexPathFromID(_ret)
 }
 
+// Returns whether the specified item is a leaf item.
 func (o *NSBrowser) IsLeafItem(item objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelIsLeafItem, item)
 	return _ret
 }
 
+// Updates the rows in the column with the specified column index with indexes in the specified set.
 func (o *NSBrowser) ReloadDataForRowIndexesInColumn(rowIndexes *foundation.NSIndexSet, column int) {
 	o.Ptr().Send(_nSBrowserSelReloadDataForRowIndexesInColumn, rowIndexes.Ptr(), column)
 }
 
+// Returns the item that contains the children located in the specified column.
 func (o *NSBrowser) ParentForItemsInColumn(column int) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelParentForItemsInColumn, column)
 	return _ret
 }
 
+// Scrolls the specified row to be visible within the specified column.
 func (o *NSBrowser) ScrollRowToVisibleInColumn(row int, column int) {
 	o.Ptr().Send(_nSBrowserSelScrollRowToVisibleInColumn, row, column)
 }
 
+// Sets the title of the given column.
 func (o *NSBrowser) SetTitleOfColumn(string_ *foundation.NSString, column int) {
 	o.Ptr().Send(_nSBrowserSelSetTitleOfColumn, string_.Ptr(), column)
 }
 
+// Returns the title displayed for the given column.
 func (o *NSBrowser) TitleOfColumn(column int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelTitleOfColumn, column)
 	if _ret != 0 {
@@ -200,11 +212,13 @@ func (o *NSBrowser) TitleOfColumn(column int) *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Sets the path to be displayed by the browser.
 func (o *NSBrowser) SetPath(path *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelSetPath, path.Ptr())
 	return _ret
 }
 
+// Returns a string representing the browser’s current path.
 func (o *NSBrowser) Path() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelPath)
 	if _ret != 0 {
@@ -213,6 +227,7 @@ func (o *NSBrowser) Path() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns a string representing the path from the first column up to, but not including, the column at the given index.
 func (o *NSBrowser) PathToColumn(column int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelPathToColumn, column)
 	if _ret != 0 {
@@ -221,24 +236,29 @@ func (o *NSBrowser) PathToColumn(column int) *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
+// Returns the last (lowest) cell selected in the given column.
 func (o *NSBrowser) SelectedCellInColumn(column int) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectedCellInColumn, column)
 	return _ret
 }
 
+// Selects the cell at the specified row and column index.
 func (o *NSBrowser) SelectRowInColumn(row int, column int) {
 	o.Ptr().Send(_nSBrowserSelSelectRowInColumn, row, column)
 }
 
+// Returns the row index of the selected cell in the specified column.
 func (o *NSBrowser) SelectedRowInColumn(column int) int {
 	_ret := objc.Send[int](o.Ptr(), _nSBrowserSelSelectedRowInColumn, column)
 	return _ret
 }
 
+// Specifies the selected rows in a given column of the browser.
 func (o *NSBrowser) SelectRowIndexesInColumn(indexes *foundation.NSIndexSet, column int) {
 	o.Ptr().Send(_nSBrowserSelSelectRowIndexesInColumn, indexes.Ptr(), column)
 }
 
+// Provides the indexes of the selected rows in a given column of the browser.
 func (o *NSBrowser) SelectedRowIndexesInColumn(column int) *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectedRowIndexesInColumn, column)
 	if _ret != 0 {
@@ -247,126 +267,154 @@ func (o *NSBrowser) SelectedRowIndexesInColumn(column int) *foundation.NSIndexSe
 	return foundation.NSIndexSetFromID(_ret)
 }
 
+// Reloads the given column.
 func (o *NSBrowser) ReloadColumn(column int) {
 	o.Ptr().Send(_nSBrowserSelReloadColumn, column)
 }
 
+// Validates the browser’s visible columns.
 func (o *NSBrowser) ValidateVisibleColumns() {
 	o.Ptr().Send(_nSBrowserSelValidateVisibleColumns)
 }
 
+// Scrolls columns right by the specified number of columns.
 func (o *NSBrowser) ScrollColumnsRightBy(shiftAmount int) {
 	o.Ptr().Send(_nSBrowserSelScrollColumnsRightBy, shiftAmount)
 }
 
+// Scrolls columns left by the specified number of columns.
 func (o *NSBrowser) ScrollColumnsLeftBy(shiftAmount int) {
 	o.Ptr().Send(_nSBrowserSelScrollColumnsLeftBy, shiftAmount)
 }
 
+// Scrolls to make the specified column visible.
 func (o *NSBrowser) ScrollColumnToVisible(column int) {
 	o.Ptr().Send(_nSBrowserSelScrollColumnToVisible, column)
 }
 
+// Adds a column to the right of the last column.
 func (o *NSBrowser) AddColumn() {
 	o.Ptr().Send(_nSBrowserSelAddColumn)
 }
 
+// Loads, if necessary, and returns the cell at the specified row and column location.
 func (o *NSBrowser) LoadedCellAtRowColumn(row int, col int) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelLoadedCellAtRowColumn, row, col)
 	return _ret
 }
 
+// Selects all cells in the last column of the browser.
 func (o *NSBrowser) SelectAll(sender objc.ID) {
 	o.Ptr().Send(_nSBrowserSelSelectAll, sender)
 }
 
+// Adjusts the various subviews of the browser—scrollers, columns, titles, and so on—without redrawing.
 func (o *NSBrowser) Tile() {
 	o.Ptr().Send(_nSBrowserSelTile)
 }
 
+// Responds to (single) mouse clicks in a column of the browser.
 func (o *NSBrowser) DoClick(sender objc.ID) {
 	o.Ptr().Send(_nSBrowserSelDoClick, sender)
 }
 
+// Responds to double clicks in a column of the browser.
 func (o *NSBrowser) DoDoubleClick(sender objc.ID) {
 	o.Ptr().Send(_nSBrowserSelDoDoubleClick, sender)
 }
 
+// Sends the action message to the target.
 func (o *NSBrowser) SendAction() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelSendAction)
 	return _ret
 }
 
+// Returns the bounds of the title frame for the specified column.
 func (o *NSBrowser) TitleFrameOfColumn(column int) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBrowserSelTitleFrameOfColumn, column)
 	return _ret
 }
 
+// Draws the title for the specified column within the given rectangle.
 func (o *NSBrowser) DrawTitleOfColumnInRect(column int, rect corefoundation.CGRect) {
 	o.Ptr().Send(_nSBrowserSelDrawTitleOfColumnInRect, column, rect)
 }
 
+// Returns the rectangle containing the given column.
 func (o *NSBrowser) FrameOfColumn(column int) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBrowserSelFrameOfColumn, column)
 	return _ret
 }
 
+// Returns the rectangle containing the specified column, not including borders.
 func (o *NSBrowser) FrameOfInsideOfColumn(column int) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBrowserSelFrameOfInsideOfColumn, column)
 	return _ret
 }
 
+// Returns the frame of the cell at the specified location, including the expandable arrow.
 func (o *NSBrowser) FrameOfRowInColumn(row int, column int) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSBrowserSelFrameOfRowInColumn, row, column)
 	return _ret
 }
 
+// Gets the row and column coordinates for the specified point, if a cell exists at that point.
 func (o *NSBrowser) GetRowColumnForPoint(row *int64, column *int64, point corefoundation.CGPoint) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelGetRowColumnForPoint, row, column, point)
 	return _ret
 }
 
+// Returns the column width for the width of the given column’s content.
 func (o *NSBrowser) ColumnWidthForColumnContentWidth(columnContentWidth float64) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelColumnWidthForColumnContentWidth, columnContentWidth)
 	return _ret
 }
 
+// Returns the content width for a given column width.
 func (o *NSBrowser) ColumnContentWidthForColumnWidth(columnWidth float64) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelColumnContentWidthForColumnWidth, columnWidth)
 	return _ret
 }
 
+// Sets the width of the specified column.
 func (o *NSBrowser) SetWidthOfColumn(columnWidth float64, columnIndex int) {
 	o.Ptr().Send(_nSBrowserSelSetWidthOfColumn, columnWidth, columnIndex)
 }
 
+// Returns the width of the specified column.
 func (o *NSBrowser) WidthOfColumn(column int) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelWidthOfColumn, column)
 	return _ret
 }
 
+// Immediately retiles the browser’s columns using row heights specified by the browser’s delegate.
 func (o *NSBrowser) NoteHeightOfRowsWithIndexesChangedInColumn(indexSet *foundation.NSIndexSet, columnIndex int) {
 	o.Ptr().Send(_nSBrowserSelNoteHeightOfRowsWithIndexesChangedInColumn, indexSet.Ptr(), columnIndex)
 }
 
+// Sets the default column width for new browser columns that do not otherwise have an initial width from defaults or the browser’s delegate.
 func (o *NSBrowser) SetDefaultColumnWidth(columnWidth float64) {
 	o.Ptr().Send(_nSBrowserSelSetDefaultColumnWidth, columnWidth)
 }
 
+// Returns the default column width of the browser’s columns.
 func (o *NSBrowser) DefaultColumnWidth() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSBrowserSelDefaultColumnWidth)
 	return _ret
 }
 
+// Removes the column configuration data stored under the given name from the application’s user defaults.
 func NSBrowserRemoveSavedColumnsWithAutosaveName(name *foundation.NSString) {
 	objc.ID(_clsNSBrowser).Send(_nSBrowserSelRemoveSavedColumnsWithAutosaveName, name.Ptr())
 }
 
+// Indicates whether the browser can attempt to initiate a drag of the given rows for the given event.
 func (o *NSBrowser) CanDragRowsWithIndexesInColumnWithEvent(rowIndexes *foundation.NSIndexSet, column int, event *NSEvent) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelCanDragRowsWithIndexesInColumnWithEvent, rowIndexes.Ptr(), column, event.Ptr())
 	return _ret
 }
 
+// Provides an image to represent dragged rows during a drag operation on the browser.
 func (o *NSBrowser) DraggingImageForRowsWithIndexesInColumnWithEventOffset(rowIndexes *foundation.NSIndexSet, column int, event *NSEvent, dragImageOffset *corefoundation.CGPoint) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelDraggingImageForRowsWithIndexesInColumnWithEventOffset, rowIndexes.Ptr(), column, event.Ptr(), dragImageOffset)
 	if _ret != 0 {
@@ -375,10 +423,12 @@ func (o *NSBrowser) DraggingImageForRowsWithIndexesInColumnWithEventOffset(rowIn
 	return NSImageFromID(_ret)
 }
 
+// Specifies the drag-operation mask for dragging operations with local or external destinations.
 func (o *NSBrowser) SetDraggingSourceOperationMaskForLocal(mask NSDragOperation, isLocal bool) {
 	o.Ptr().Send(_nSBrowserSelSetDraggingSourceOperationMaskForLocal, mask, isLocal)
 }
 
+// Begins editing the item at the specified path.
 func (o *NSBrowser) EditItemAtIndexPathWithEventSelect(indexPath *foundation.NSIndexPath, event *NSEvent, select_ bool) {
 	o.Ptr().Send(_nSBrowserSelEditItemAtIndexPathWithEventSelect, indexPath.Ptr(), event.Ptr(), select_)
 }
@@ -576,12 +626,15 @@ func (o *NSBrowser) SetSelectionIndexPath(selectionIndexPath *foundation.NSIndex
 }
 
 func (o *NSBrowser) SelectionIndexPaths() *foundation.NSArray[*foundation.NSIndexPath] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSIndexPath]](o.Ptr(), _nSBrowserSelSelectionIndexPaths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectionIndexPaths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSIndexPath](_ret)
 }
 
 func (o *NSBrowser) SetSelectionIndexPaths(selectionIndexPaths *foundation.NSArray[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSBrowserSelSetSelectionIndexPaths, selectionIndexPaths)
+	o.Ptr().Send(_nSBrowserSelSetSelectionIndexPaths, selectionIndexPaths.Ptr())
 }
 
 func (o *NSBrowser) LastColumn() int {
@@ -673,54 +726,64 @@ func (o *NSBrowser) SetBackgroundColor(backgroundColor *NSColor) {
 	o.Ptr().Send(_nSBrowserSelSetBackgroundColor, backgroundColor.Ptr())
 }
 
+// Specifies whether the browser allows navigation using the arrow keys.
 // Deprecated: since macOS 10.6.
 func (o *NSBrowser) SetAcceptsArrowKeys(flag bool) {
 	o.Ptr().Send(_nSBrowserSelSetAcceptsArrowKeys, flag)
 }
 
+// Indicates whether the browser allows navigation using the arrow keys.
 // Deprecated: since macOS 10.6.
 func (o *NSBrowser) AcceptsArrowKeys() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSBrowserSelAcceptsArrowKeys)
 	return _ret
 }
 
+// Updates the browser to display the given column.
 // Deprecated: since macOS 10.3.
 func (o *NSBrowser) DisplayColumn(column int) {
 	o.Ptr().Send(_nSBrowserSelDisplayColumn, column)
 }
 
+// Updates the browser to display all loaded columns.
 // Deprecated: since macOS 10.3.
 func (o *NSBrowser) DisplayAllColumns() {
 	o.Ptr().Send(_nSBrowserSelDisplayAllColumns)
 }
 
+// Scrolls columns left or right based on an NSScroller.
 // Deprecated: since macOS 10.3.
 func (o *NSBrowser) ScrollViaScroller(sender *NSScroller) {
 	o.Ptr().Send(_nSBrowserSelScrollViaScroller, sender.Ptr())
 }
 
+// Updates the horizontal scroller to reflect column positions.
 // Deprecated: since macOS 10.3.
 func (o *NSBrowser) UpdateScroller() {
 	o.Ptr().Send(_nSBrowserSelUpdateScroller)
 }
 
+// Sets the matrix class to be used in the browser’s columns.
 // Deprecated: Use the item based NSBrowser instead
 func (o *NSBrowser) SetMatrixClass(factoryId objc.Class) {
 	o.Ptr().Send(_nSBrowserSelSetMatrixClass, factoryId)
 }
 
+// Returns the matrix class used in the browser’s columns.
 // Deprecated: Use the item based NSBrowser instead
 func (o *NSBrowser) MatrixClass() objc.Class {
 	_ret := objc.Send[objc.Class](o.Ptr(), _nSBrowserSelMatrixClass)
 	return _ret
 }
 
+// Returns the column number in which the given matrix is located.
 // Deprecated: Use the item based NSBrowser instead
 func (o *NSBrowser) ColumnOfMatrix(matrix *NSMatrix) int {
 	_ret := objc.Send[int](o.Ptr(), _nSBrowserSelColumnOfMatrix, matrix.Ptr())
 	return _ret
 }
 
+// Returns the matrix located in the specified column.
 // Deprecated: Use the item based NSBrowser instead
 func (o *NSBrowser) MatrixInColumn(column int) *NSMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelMatrixInColumn, column)

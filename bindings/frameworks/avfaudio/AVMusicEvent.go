@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class for the events you associate with a music track.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avmusicevent
 type AVMusicEvent struct {
 	foundation.NSObject

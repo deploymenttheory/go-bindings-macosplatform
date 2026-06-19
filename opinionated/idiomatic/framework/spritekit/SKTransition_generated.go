@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A transition style from one scene to another.
+// An object used to perform an animated transition to a new scene.
 //
 // Transition wraps [raw.SKTransition] with a fluent Go API.
 type Transition struct {
@@ -37,7 +37,7 @@ func NewTransition() *Transition {
 	return &Transition{inner: raw.SKTransitionFromID(_id)}
 }
 
-// Pause the incoming Scene during the transition, defaults to YES.
+// A Boolean value that determines whether the incoming scene is paused during the transition.
 //
 // WithPausesIncomingScene sets the pausesIncomingScene property and returns the receiver for chaining.
 func (x *Transition) WithPausesIncomingScene(pausesIncomingScene bool) *Transition {
@@ -45,7 +45,7 @@ func (x *Transition) WithPausesIncomingScene(pausesIncomingScene bool) *Transiti
 	return x
 }
 
-// Pause the outgoing Scene during the transition, defaults to YES.
+// A Boolean value that determines whether the outgoing scene is paused during the transition.
 //
 // WithPausesOutgoingScene sets the pausesOutgoingScene property and returns the receiver for chaining.
 func (x *Transition) WithPausesOutgoingScene(pausesOutgoingScene bool) *Transition {

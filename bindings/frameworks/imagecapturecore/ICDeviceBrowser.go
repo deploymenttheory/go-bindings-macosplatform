@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object for finding digital cameras and scanners.
+//
 // Apple documentation: https://developer.apple.com/documentation/imagecapturecore/icdevicebrowser
 type ICDeviceBrowser struct {
 	foundation.NSObject
@@ -41,7 +43,7 @@ func ICDeviceBrowserFromID(id objc.ID) *ICDeviceBrowser {
 	return o
 }
 
-// @method init @abstract This is the designated initializer.
+// Creates an ImageCaptureCore device browser.
 func (o *ICDeviceBrowser) Init() *ICDeviceBrowser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCDeviceBrowserSelInit)
 	if _ret != 0 {
@@ -50,12 +52,12 @@ func (o *ICDeviceBrowser) Init() *ICDeviceBrowser {
 	return ICDeviceBrowserFromID(_ret)
 }
 
-// @method start: @abstract This message tells the receiver to start looking for devices. @discussion Make sure that the receiver's delegate is set prior to sending this message; otherwise this message will be ignored. The messages the delegate can expect to receive are described by ICDeviceBrowserDelegate protocol.
+// Tells the delegate to start looking for devices.
 func (o *ICDeviceBrowser) Start() {
 	o.Ptr().Send(_iCDeviceBrowserSelStart)
 }
 
-// @method stop: @abstract This method tells the receiver to stop looking for devices. @discussion This will free all device instances that are not in use.
+// Tells the delegate to stop looking for devices.
 func (o *ICDeviceBrowser) Stop() {
 	o.Ptr().Send(_iCDeviceBrowserSelStop)
 }

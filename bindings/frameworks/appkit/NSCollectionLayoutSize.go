@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The width and the height of an item in a collection view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionlayoutsize
 type NSCollectionLayoutSize struct {
 	foundation.NSObject
@@ -32,6 +34,7 @@ func NSCollectionLayoutSizeFromID(id objc.ID) *NSCollectionLayoutSize {
 	return o
 }
 
+// Creates a size with the specified width and height dimensions.
 func NSCollectionLayoutSizeSizeWithWidthDimensionHeightDimension(width *NSCollectionLayoutDimension, height *NSCollectionLayoutDimension) *NSCollectionLayoutSize {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSize), _nSCollectionLayoutSizeSelSizeWithWidthDimensionHeightDimension, width.Ptr(), height.Ptr())
 	if _ret != 0 {

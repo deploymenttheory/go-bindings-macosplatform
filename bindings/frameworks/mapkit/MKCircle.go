@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A circular overlay with a configurable radius that you center on a geographic coordinate.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkcircle
 type MKCircle struct {
 	MKShape
@@ -35,6 +37,7 @@ func MKCircleFromID(id objc.ID) *MKCircle {
 	return o
 }
 
+// Creates and returns a circle object using the specified coordinate and radius.
 func MKCircleCircleWithCenterCoordinateRadius(coord unsafe.Pointer, radius unsafe.Pointer) *MKCircle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKCircle), _mKCircleSelCircleWithCenterCoordinateRadius, coord, radius)
 	if _ret != 0 {
@@ -43,6 +46,7 @@ func MKCircleCircleWithCenterCoordinateRadius(coord unsafe.Pointer, radius unsaf
 	return MKCircleFromID(_ret)
 }
 
+// Creates and returns a circle object that derives the circular area from the specified rectangle.
 func MKCircleCircleWithMapRect(mapRect MKMapRect) *MKCircle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKCircle), _mKCircleSelCircleWithMapRect, mapRect)
 	if _ret != 0 {

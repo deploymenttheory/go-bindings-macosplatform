@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes a shared record’s metadata.
+//
 // ShareMetadata wraps [raw.CKShareMetadata] with a fluent Go API.
 type ShareMetadata struct {
 	inner *raw.CKShareMetadata

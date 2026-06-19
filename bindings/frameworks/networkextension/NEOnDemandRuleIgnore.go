@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A VPN On Demand rule that doesn’t change the status of the VPN.
+//
 // Apple documentation: https://developer.apple.com/documentation/networkextension/neondemandruleignore
 type NEOnDemandRuleIgnore struct {
 	NEOnDemandRule

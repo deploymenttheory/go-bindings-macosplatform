@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains metadata about a URL.
+//
 // LinkMetadata wraps [raw.LPLinkMetadata] with a fluent Go API.
 type LinkMetadata struct {
 	inner *raw.LPLinkMetadata
@@ -45,7 +47,7 @@ func (x *LinkMetadata) WithOriginalURL(originalURL string) *LinkMetadata {
 	return x
 }
 
-// The URL that returned the metadata, taking server-side redirects into account. The URL that returns the metadata may differ from the “LPLinkMetadata/originalURL“ to which you sent the metadata request. This can happen if the server redirects the request, for example, when a resource has moved, or when the original URL is a domain alias.
+// The URL that returned the metadata, taking server-side redirects into account.
 //
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *LinkMetadata) WithURL(uRL string) *LinkMetadata {
@@ -77,7 +79,7 @@ func (x *LinkMetadata) WithImageProvider(imageProvider *foundation.NSItemProvide
 	return x
 }
 
-// An object that retrieves data corresponding to a representative video for the URL. The item provider returns a video that <doc://com.apple.documentation/documentation/avfoundation> can play.
+// An object that retrieves data corresponding to a representative video for the URL.
 //
 // WithVideoProvider sets the videoProvider property and returns the receiver for chaining.
 func (x *LinkMetadata) WithVideoProvider(videoProvider *foundation.NSItemProvider) *LinkMetadata {
@@ -85,7 +87,7 @@ func (x *LinkMetadata) WithVideoProvider(videoProvider *foundation.NSItemProvide
 	return x
 }
 
-// A remote URL corresponding to a representative video for the URL. This may reference a remote video file that <doc://com.apple.documentation/documentation/avfoundation> can stream.
+// A remote URL corresponding to a representative video for the URL.
 //
 // WithRemoteVideoURL sets the remoteVideoURL property and returns the receiver for chaining.
 func (x *LinkMetadata) WithRemoteVideoURL(remoteVideoURL string) *LinkMetadata {

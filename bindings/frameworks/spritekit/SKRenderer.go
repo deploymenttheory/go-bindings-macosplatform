@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A renderer for displaying a SpriteKit scene in an existing Metal workflow.
+// An object that renders a scene into a custom Metal rendering pipeline and drives the scene update cycle.
 //
 // Apple documentation: https://developer.apple.com/documentation/spritekit/skrenderer
 type SKRenderer struct {
@@ -53,7 +53,7 @@ func SKRendererFromID(id objc.ID) *SKRenderer {
 	return o
 }
 
-// Creates a renderer with the specified Metal device. @param device A Metal device. @return A new renderer object.
+// Initializes with a specific GPU to render into.
 func SKRendererRendererWithDevice(device metal.MTLDevice) *SKRenderer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRenderer), _sKRendererSelRendererWithDevice, device)
 	if _ret != 0 {

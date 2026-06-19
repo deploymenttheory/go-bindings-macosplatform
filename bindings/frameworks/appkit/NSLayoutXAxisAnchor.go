@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A factory class for creating horizontal layout constraint objects using a fluent API.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nslayoutxaxisanchor
 type NSLayoutXAxisAnchor struct {
 	NSLayoutAnchor[objc.ID]
@@ -32,6 +34,7 @@ func NSLayoutXAxisAnchorFromID(id objc.ID) *NSLayoutXAxisAnchor {
 	return o
 }
 
+// Creates a layout dimension object from two anchors.
 func (o *NSLayoutXAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *NSLayoutXAxisAnchor) *NSLayoutDimension {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutXAxisAnchorSelAnchorWithOffsetToAnchor, otherAnchor.Ptr())
 	if _ret != 0 {
@@ -40,6 +43,7 @@ func (o *NSLayoutXAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *NSLayoutXAxi
 	return NSLayoutDimensionFromID(_ret)
 }
 
+// Returns a constraint that defines by how much the current anchor trails the specified anchor.
 func (o *NSLayoutXAxisAnchor) ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor *NSLayoutXAxisAnchor, multiplier float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutXAxisAnchorSelConstraintEqualToSystemSpacingAfterAnchorMultiplier, anchor.Ptr(), multiplier)
 	if _ret != 0 {
@@ -48,6 +52,7 @@ func (o *NSLayoutXAxisAnchor) ConstraintEqualToSystemSpacingAfterAnchorMultiplie
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines the minimum amount by which the current anchor trails the specified anchor.
 func (o *NSLayoutXAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *NSLayoutXAxisAnchor, multiplier float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutXAxisAnchorSelConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier, anchor.Ptr(), multiplier)
 	if _ret != 0 {
@@ -56,6 +61,7 @@ func (o *NSLayoutXAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingAfterAn
 	return NSLayoutConstraintFromID(_ret)
 }
 
+// Returns a constraint that defines the maximum amount by which the current anchor trails the specified anchor.
 func (o *NSLayoutXAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *NSLayoutXAxisAnchor, multiplier float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutXAxisAnchorSelConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier, anchor.Ptr(), multiplier)
 	if _ret != 0 {

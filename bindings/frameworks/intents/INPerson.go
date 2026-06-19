@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about a person participating in a SiriKit interaction.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inperson
 type INPerson struct {
 	foundation.NSObject
@@ -50,6 +52,7 @@ func INPersonFromID(id objc.ID) *INPerson {
 	return o
 }
 
+// Creates a person with the specified name and contact information.
 func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifier(personHandle *INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName *foundation.NSString, image *INImage, contactIdentifier *foundation.NSString, customIdentifier *foundation.NSString) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifier, personHandle.Ptr(), nameComponents.Ptr(), displayName.Ptr(), image.Ptr(), contactIdentifier.Ptr(), customIdentifier.Ptr())
 	if _ret != 0 {
@@ -58,6 +61,7 @@ func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIden
 	return INPersonFromID(_ret)
 }
 
+// Creates a person with the specified name, contact, and relationship information.
 func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierRelationship(personHandle *INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName *foundation.NSString, image *INImage, contactIdentifier *foundation.NSString, customIdentifier *foundation.NSString, relationship *foundation.NSString) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierRelationship, personHandle.Ptr(), nameComponents.Ptr(), displayName.Ptr(), image.Ptr(), contactIdentifier.Ptr(), customIdentifier.Ptr(), relationship.Ptr())
 	if _ret != 0 {
@@ -66,6 +70,7 @@ func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIden
 	return INPersonFromID(_ret)
 }
 
+// Creates a person with information that indicates whether the person is the user of the device.
 func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMe(personHandle *INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName *foundation.NSString, image *INImage, contactIdentifier *foundation.NSString, customIdentifier *foundation.NSString, isMe bool) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMe, personHandle.Ptr(), nameComponents.Ptr(), displayName.Ptr(), image.Ptr(), contactIdentifier.Ptr(), customIdentifier.Ptr(), isMe)
 	if _ret != 0 {
@@ -74,6 +79,7 @@ func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIden
 	return INPersonFromID(_ret)
 }
 
+// Creates a person that includes required metadata for messaging intents.
 func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMeSuggestionType(personHandle *INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName *foundation.NSString, image *INImage, contactIdentifier *foundation.NSString, customIdentifier *foundation.NSString, isMe bool, suggestionType INPersonSuggestionType) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMeSuggestionType, personHandle.Ptr(), nameComponents.Ptr(), displayName.Ptr(), image.Ptr(), contactIdentifier.Ptr(), customIdentifier.Ptr(), isMe, suggestionType)
 	if _ret != 0 {
@@ -82,6 +88,7 @@ func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIden
 	return INPersonFromID(_ret)
 }
 
+// Creates a person with information Siri can use to suggestion the person at appropriate times.
 func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsContactSuggestionSuggestionType(personHandle *INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName *foundation.NSString, image *INImage, contactIdentifier *foundation.NSString, customIdentifier *foundation.NSString, isContactSuggestion bool, suggestionType INPersonSuggestionType) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsContactSuggestionSuggestionType, personHandle.Ptr(), nameComponents.Ptr(), displayName.Ptr(), image.Ptr(), contactIdentifier.Ptr(), customIdentifier.Ptr(), isContactSuggestion, suggestionType)
 	if _ret != 0 {
@@ -151,6 +158,7 @@ func (o *INPerson) IsContactSuggestion() bool {
 	return _ret
 }
 
+// Creates a person with the specified name, contact, and alias information.
 func (o *INPerson) InitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierAliasesSuggestionType(personHandle *INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName *foundation.NSString, image *INImage, contactIdentifier *foundation.NSString, customIdentifier *foundation.NSString, aliases *foundation.NSArray[*INPersonHandle], suggestionType INPersonSuggestionType) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierAliasesSuggestionType, personHandle.Ptr(), nameComponents.Ptr(), displayName.Ptr(), image.Ptr(), contactIdentifier.Ptr(), customIdentifier.Ptr(), aliases.Ptr(), suggestionType)
 	if _ret != 0 {
@@ -177,6 +185,7 @@ func (o *INPerson) IsMe() bool {
 	return _ret
 }
 
+// Creates a person object with the specified display name and contact information.
 // Deprecated: Use the designated initializer instead
 func (o *INPerson) InitWithHandleNameComponentsContactIdentifier(handle *foundation.NSString, nameComponents *foundation.NSPersonNameComponents, contactIdentifier *foundation.NSString) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithHandleNameComponentsContactIdentifier, handle.Ptr(), nameComponents.Ptr(), contactIdentifier.Ptr())
@@ -186,6 +195,7 @@ func (o *INPerson) InitWithHandleNameComponentsContactIdentifier(handle *foundat
 	return INPersonFromID(_ret)
 }
 
+// Creates a person object with the specified display name and contact information.
 // Deprecated: Use the designated initializer instead
 func (o *INPerson) InitWithHandleDisplayNameContactIdentifier(handle *foundation.NSString, displayName *foundation.NSString, contactIdentifier *foundation.NSString) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithHandleDisplayNameContactIdentifier, handle.Ptr(), displayName.Ptr(), contactIdentifier.Ptr())
@@ -195,6 +205,7 @@ func (o *INPerson) InitWithHandleDisplayNameContactIdentifier(handle *foundation
 	return INPersonFromID(_ret)
 }
 
+// Creates a person object with the specified name and contact information.
 // Deprecated: Use the designated initializer instead
 func (o *INPerson) InitWithHandleNameComponentsDisplayNameImageContactIdentifier(handle *foundation.NSString, nameComponents *foundation.NSPersonNameComponents, displayName *foundation.NSString, image *INImage, contactIdentifier *foundation.NSString) *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonSelInitWithHandleNameComponentsDisplayNameImageContactIdentifier, handle.Ptr(), nameComponents.Ptr(), displayName.Ptr(), image.Ptr(), contactIdentifier.Ptr())

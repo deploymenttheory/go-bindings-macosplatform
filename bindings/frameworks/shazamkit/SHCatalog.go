@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An abstract base class for storing reference signatures and their associated metadata.
+//
 // Apple documentation: https://developer.apple.com/documentation/shazamkit/shcatalog
 type SHCatalog struct {
 	foundation.NSObject

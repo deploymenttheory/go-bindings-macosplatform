@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Configuration parameters for a DNS proxy.
+//
 // NEDNSProxyProviderProtocol wraps [raw.NEDNSProxyProviderProtocol] with a fluent Go API.
 type NEDNSProxyProviderProtocol struct {
 	inner *raw.NEDNSProxyProviderProtocol
@@ -37,7 +39,7 @@ func NewNEDNSProxyProviderProtocol() *NEDNSProxyProviderProtocol {
 	return &NEDNSProxyProviderProtocol{inner: raw.NEDNSProxyProviderProtocolFromID(_id)}
 }
 
-// @property providerConfiguration @discussion A dictionary containing NEDNSProxyProvider vendor-specific configuration parameters. This dictionary is passed as-is to NEDNSProxyProviders when a DNS proxy is started.
+// A dictionary containing vendor-specific configuration parameters for a proxy provider.
 //
 // WithProviderConfiguration sets the providerConfiguration property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NEDNSProxyProviderProtocol {
@@ -45,7 +47,7 @@ func (x *NEDNSProxyProviderProtocol) WithProviderConfiguration(providerConfigura
 	return x
 }
 
-// @property providerBundleIdentifier @discussion A string containing the bundle identifier of the NEDNSProxyProvider to be used by this configuration.
+// A string containing the bundle identifier of the proxy provider to be used by this configuration.
 //
 // WithProviderBundleIdentifier sets the providerBundleIdentifier property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithProviderBundleIdentifier(providerBundleIdentifier string) *NEDNSProxyProviderProtocol {
@@ -53,7 +55,7 @@ func (x *NEDNSProxyProviderProtocol) WithProviderBundleIdentifier(providerBundle
 	return x
 }
 
-// @property serverAddress @discussion The VPN server. Depending on the protocol, may be an IP address, host name, or URL.
+// The address of the VPN server.
 //
 // WithServerAddress sets the serverAddress property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithServerAddress(serverAddress string) *NEDNSProxyProviderProtocol {
@@ -61,7 +63,7 @@ func (x *NEDNSProxyProviderProtocol) WithServerAddress(serverAddress string) *NE
 	return x
 }
 
-// @property username @discussion The username component of the VPN authentication credential.
+// The user name component of the tunneling protocol authentication credential.
 //
 // WithUsername sets the username property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithUsername(username string) *NEDNSProxyProviderProtocol {
@@ -69,7 +71,7 @@ func (x *NEDNSProxyProviderProtocol) WithUsername(username string) *NEDNSProxyPr
 	return x
 }
 
-// @property passwordReference @discussion The password component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassGenericPassword class.
+// A persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
 //
 // WithPasswordReference sets the passwordReference property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithPasswordReference(passwordReference *foundation.NSData) *NEDNSProxyProviderProtocol {
@@ -77,7 +79,7 @@ func (x *NEDNSProxyProviderProtocol) WithPasswordReference(passwordReference *fo
 	return x
 }
 
-// @property identityReference @discussion The certificate and private key component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassIdentity class.
+// A persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
 //
 // WithIdentityReference sets the identityReference property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithIdentityReference(identityReference *foundation.NSData) *NEDNSProxyProviderProtocol {
@@ -85,7 +87,7 @@ func (x *NEDNSProxyProviderProtocol) WithIdentityReference(identityReference *fo
 	return x
 }
 
-// @property identityData @discussion The PKCS12 data for the VPN authentication identity. The value is a NSData in PKCS12 format.
+// The certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
 //
 // WithIdentityData sets the identityData property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithIdentityData(identityData *foundation.NSData) *NEDNSProxyProviderProtocol {
@@ -93,7 +95,7 @@ func (x *NEDNSProxyProviderProtocol) WithIdentityData(identityData *foundation.N
 	return x
 }
 
-// @property identityDataPassword @discussion The password to be used to decrypt the PKCS12 identity data.
+// The password for the PKCS12 tunneling protocol authentication credentials.
 //
 // WithIdentityDataPassword sets the identityDataPassword property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithIdentityDataPassword(identityDataPassword string) *NEDNSProxyProviderProtocol {
@@ -101,7 +103,7 @@ func (x *NEDNSProxyProviderProtocol) WithIdentityDataPassword(identityDataPasswo
 	return x
 }
 
-// @property disconnectOnSleep @discussion If YES, the VPN connection will be disconnected when the device goes to sleep. The default is NO.
+// A Boolean value that indicates whether the VPN disconnects when the device sleeps.
 //
 // WithDisconnectOnSleep sets the disconnectOnSleep property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithDisconnectOnSleep(disconnectOnSleep bool) *NEDNSProxyProviderProtocol {
@@ -109,7 +111,7 @@ func (x *NEDNSProxyProviderProtocol) WithDisconnectOnSleep(disconnectOnSleep boo
 	return x
 }
 
-// @property proxySettings @discussion An NEProxySettings object containing the proxy settings to use for connections routed through the tunnel.
+// The proxy settings to use for HTTP and HTTPS connections that route through the VPN.
 //
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithProxySettings(proxySettings *NEProxySettings) *NEDNSProxyProviderProtocol {
@@ -117,7 +119,7 @@ func (x *NEDNSProxyProviderProtocol) WithProxySettings(proxySettings *NEProxySet
 	return x
 }
 
-// @property includeAllNetworks @discussion If this property is set to YES then all network traffic is routed through the tunnel, with some exclusions. Several of the exclusions can be controlled with the excludeLocalNetworks, excludeCellularServices, excludeAPNs and excludeDeviceCommunication properties. See the documentation for those properties. The following traffic is always excluded from the tunnel: - Traffic necessary for connecting and maintaining the device's network connection, such as DHCP. - Traffic necessary for connecting to captive networks. - Certain cellular services traffic that is not routable over the internet and is instead directly routed to the cellular network. See the excludeCellularServices property for more details. - Network communication with a companion device such as a watchOS device. The default value of this property is NO.
+// A Boolean value that indicates whether the system sends most network traffic over the tunnel.
 //
 // WithIncludeAllNetworks sets the includeAllNetworks property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithIncludeAllNetworks(includeAllNetworks bool) *NEDNSProxyProviderProtocol {
@@ -125,7 +127,7 @@ func (x *NEDNSProxyProviderProtocol) WithIncludeAllNetworks(includeAllNetworks b
 	return x
 }
 
-// @property excludeLocalNetworks @discussion If YES, all traffic destined for local networks will be excluded from the tunnel. The default is NO on macOS and YES on iOS.
+// A Boolean value that indicates whether the system excludes all traffic destined for local networks from the tunnel.
 //
 // WithExcludeLocalNetworks sets the excludeLocalNetworks property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEDNSProxyProviderProtocol {
@@ -133,7 +135,7 @@ func (x *NEDNSProxyProviderProtocol) WithExcludeLocalNetworks(excludeLocalNetwor
 	return x
 }
 
-// @property excludeCellularServices @discussion If includeAllNetworks is set to YES and this property is set to YES, then internet-routable network traffic for cellular services (VoLTE, Wi-Fi Calling, IMS, MMS, Visual Voicemail, etc.) is excluded from the tunnel. Note that some cellular carriers route cellular services traffic directly to the carrier network, bypassing the internet. Such cellular services traffic is always excluded from the tunnel. The default value of this property is YES.
+// A Boolean value that indicates whether the system excludes all cellular services network traffic from the tunnel.
 //
 // WithExcludeCellularServices sets the excludeCellularServices property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithExcludeCellularServices(excludeCellularServices bool) *NEDNSProxyProviderProtocol {
@@ -141,7 +143,7 @@ func (x *NEDNSProxyProviderProtocol) WithExcludeCellularServices(excludeCellular
 	return x
 }
 
-// @property excludeAPNs @discussion If includeAllNetworks is set to YES and this property is set to YES, then network traffic for the Apple Push Notification service (APNs) is excluded from the tunnel. The default value of this property is YES.
+// A Boolean value that indicates whether the system excludes all APNs network traffic from the tunnel.
 //
 // WithExcludeAPNs sets the excludeAPNs property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithExcludeAPNs(excludeAPNs bool) *NEDNSProxyProviderProtocol {
@@ -157,7 +159,7 @@ func (x *NEDNSProxyProviderProtocol) WithExcludeDeviceCommunication(excludeDevic
 	return x
 }
 
-// @property enforceRoutes @discussion If YES, route rules for this tunnel will take precendence over any locally-defined routes. The default is NO.
+// A Boolean value that indicates whether route rules for the tunnel take precedence over any locally defined routes.
 //
 // WithEnforceRoutes sets the enforceRoutes property and returns the receiver for chaining.
 func (x *NEDNSProxyProviderProtocol) WithEnforceRoutes(enforceRoutes bool) *NEDNSProxyProviderProtocol {

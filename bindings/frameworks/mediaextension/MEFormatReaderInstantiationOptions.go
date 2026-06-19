@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains options to pass to a format reader extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/mediaextension/meformatreaderinstantiationoptions
 type MEFormatReaderInstantiationOptions struct {
 	foundation.NSObject

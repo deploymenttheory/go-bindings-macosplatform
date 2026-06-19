@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that contains the Markdown formatting for blocks of text, like paragraphs, lists, code blocks, and parts of tables.
+//
 // PresentationIntent wraps [raw.NSPresentationIntent] with a fluent Go API.
 type PresentationIntent struct {
 	inner *raw.NSPresentationIntent
@@ -42,7 +44,7 @@ func (x *PresentationIntent) WithScriptingProperties(scriptingProperties *raw.NS
 	return x
 }
 
-// Returns `YES` if this intent is equivalent to the other presentation intent. Equivalence is the same as equality except that identity is not taken into account.
+// Returns a Boolean value that indicates whether the current intent is equivalent to the specified intent.
 //
 // IsEquivalentToPresentationIntent calls the underlying IsEquivalentToPresentationIntent.
 func (x *PresentationIntent) IsEquivalentToPresentationIntent(other *raw.NSPresentationIntent) bool {

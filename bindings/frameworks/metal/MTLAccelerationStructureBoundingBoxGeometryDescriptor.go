@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a list of bounding boxes to turn into an acceleration structure.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlaccelerationstructureboundingboxgeometrydescriptor
 type MTLAccelerationStructureBoundingBoxGeometryDescriptor struct {
 	MTLAccelerationStructureGeometryDescriptor
@@ -37,6 +39,7 @@ func MTLAccelerationStructureBoundingBoxGeometryDescriptorFromID(id objc.ID) *MT
 	return o
 }
 
+// Creates a new bounding box descriptor.
 func MTLAccelerationStructureBoundingBoxGeometryDescriptorDescriptor() *MTLAccelerationStructureBoundingBoxGeometryDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLAccelerationStructureBoundingBoxGeometryDescriptor), _mTLAccelerationStructureBoundingBoxGeometryDescriptorSelDescriptor)
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract superclass for analysis results.
+//
 // Observation wraps [raw.VNObservation] with a fluent Go API.
 type Observation struct {
 	inner *raw.VNObservation

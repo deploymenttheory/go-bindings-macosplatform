@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A PDFDestination object describes a point on a PDF page.
+//
 // Apple documentation: https://developer.apple.com/documentation/pdfkit/pdfdestination
 type PDFDestination struct {
 	foundation.NSObject
@@ -36,6 +38,7 @@ func PDFDestinationFromID(id objc.ID) *PDFDestination {
 	return o
 }
 
+// Initializes the destination.
 func (o *PDFDestination) InitWithPageAtPoint(page *PDFPage, point corefoundation.CGPoint) *PDFDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDestinationSelInitWithPageAtPoint, page.Ptr(), point)
 	if _ret != 0 {
@@ -44,6 +47,7 @@ func (o *PDFDestination) InitWithPageAtPoint(page *PDFPage, point corefoundation
 	return PDFDestinationFromID(_ret)
 }
 
+// Returns a comparison result that indicates the location of the destination in the document, relative to the current position.
 func (o *PDFDestination) Compare(destination *PDFDestination) foundation.NSComparisonResult {
 	_ret := objc.Send[foundation.NSComparisonResult](o.Ptr(), _pDFDestinationSelCompare, destination.Ptr())
 	return _ret

@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A layer for training recurrent neural networks on Metal Performance Shaders matrices.
+//
 // RNNMatrixTrainingLayer wraps [raw.MPSRNNMatrixTrainingLayer] with a fluent Go API.
 type RNNMatrixTrainingLayer struct {
 	inner *raw.MPSRNNMatrixTrainingLayer
@@ -84,7 +86,7 @@ func (x *RNNMatrixTrainingLayer) WithAccumulateWeightGradients(accumulateWeightG
 	return x
 }
 
-// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+// The set of options used to run the kernel.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *RNNMatrixTrainingLayer) WithOptions(options mpscore.MPSKernelOptions) *RNNMatrixTrainingLayer {
@@ -92,7 +94,7 @@ func (x *RNNMatrixTrainingLayer) WithOptions(options mpscore.MPSKernelOptions) *
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// The string that identifies the kernel.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *RNNMatrixTrainingLayer) WithLabel(label string) *RNNMatrixTrainingLayer {

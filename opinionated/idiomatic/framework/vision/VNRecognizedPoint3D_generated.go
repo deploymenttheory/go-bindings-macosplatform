@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A 3D point that includes an identifier to the point.
+//
 // RecognizedPoint3D wraps [raw.VNRecognizedPoint3D] with a fluent Go API.
 type RecognizedPoint3D struct {
 	inner *raw.VNRecognizedPoint3D

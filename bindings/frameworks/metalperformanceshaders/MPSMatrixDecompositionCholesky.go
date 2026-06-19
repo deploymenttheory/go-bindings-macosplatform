@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A kernel for computing the Cholesky factorization of a matrix.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsmatrixdecompositioncholesky
 type MPSMatrixDecompositionCholesky struct {
 	mpsmatrix.MPSMatrixUnaryKernel

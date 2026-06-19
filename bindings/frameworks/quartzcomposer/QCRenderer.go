@@ -64,12 +64,12 @@ func (o *QCRenderer) InitWithOpenGLContextPixelFormatFile(context_ *appkit.NSOpe
 }
 
 func (o *QCRenderer) RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCRendererSelRenderAtTimeArguments, time_, arguments)
+	_ret := objc.Send[bool](o.Ptr(), _qCRendererSelRenderAtTimeArguments, time_, arguments.Ptr())
 	return _ret
 }
 
 func (o *QCRenderer) RenderingTimeForTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) float64 {
-	_ret := objc.Send[float64](o.Ptr(), _qCRendererSelRenderingTimeForTimeArguments, time_, arguments)
+	_ret := objc.Send[float64](o.Ptr(), _qCRendererSelRenderingTimeForTimeArguments, time_, arguments.Ptr())
 	return _ret
 }
 

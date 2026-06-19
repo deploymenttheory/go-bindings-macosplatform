@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An animation of an app’s views, limited to changes in frame location and size, and to fade-in and fade-out effects.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsviewanimation
 type NSViewAnimation struct {
 	NSAnimation
@@ -32,8 +34,9 @@ func NSViewAnimationFromID(id objc.ID) *NSViewAnimation {
 	return o
 }
 
+// Returns an NSViewAnimation object initialized with the supplied information.
 func (o *NSViewAnimation) InitWithViewAnimations(viewAnimations *foundation.NSArray[objc.ID]) *NSViewAnimation {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewAnimationSelInitWithViewAnimations, viewAnimations)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewAnimationSelInitWithViewAnimations, viewAnimations.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -41,10 +44,13 @@ func (o *NSViewAnimation) InitWithViewAnimations(viewAnimations *foundation.NSAr
 }
 
 func (o *NSViewAnimation) ViewAnimations() *foundation.NSArray[objc.ID] {
-	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSViewAnimationSelViewAnimations)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewAnimationSelViewAnimations)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSViewAnimation) SetViewAnimations(viewAnimations *foundation.NSArray[objc.ID]) {
-	o.Ptr().Send(_nSViewAnimationSelSetViewAnimations, viewAnimations)
+	o.Ptr().Send(_nSViewAnimationSelSetViewAnimations, viewAnimations.Ptr())
 }

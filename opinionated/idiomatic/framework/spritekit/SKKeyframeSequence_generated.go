@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that performs interpolation between values specified at different times (keyframes).
+//
 // KeyframeSequence wraps [raw.SKKeyframeSequence] with a fluent Go API.
 type KeyframeSequence struct {
 	inner *raw.SKKeyframeSequence
@@ -30,6 +32,8 @@ func KeyframeSequenceFromID(id objc.ID) *KeyframeSequence {
 	return &KeyframeSequence{inner: raw.SKKeyframeSequenceFromID(id)}
 }
 
+// Initializes a keyframe sequence with an initial set of values and times.
+//
 // NewKeyframeSequenceWithKeyframeValuesTimes creates a new [KeyframeSequence].
 func NewKeyframeSequenceWithKeyframeValuesTimes(values *foundation.NSArray[objc.ID], times *foundation.NSArray[*foundation.NSNumber]) *KeyframeSequence {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKKeyframeSequence")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewKeyframeSequenceWithKeyframeValuesTimes(values *foundation.NSArray[objc.
 	return &KeyframeSequence{inner: raw.SKKeyframeSequenceFromID(_id)}
 }
 
+// Initializes a new keyframe sequence.
+//
 // NewKeyframeSequenceWithCapacity creates a new [KeyframeSequence].
 func NewKeyframeSequenceWithCapacity(numItems uint) *KeyframeSequence {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKKeyframeSequence")), objc.RegisterName("alloc"))
@@ -53,63 +59,87 @@ func NewKeyframeSequenceWithCoder(aDecoder *foundation.NSCoder) *KeyframeSequenc
 	return &KeyframeSequence{inner: raw.SKKeyframeSequenceFromID(_id)}
 }
 
+// The mode used to determine how values for times between the keyframes are calculated.
+//
 // WithInterpolationMode sets the interpolationMode property and returns the receiver for chaining.
 func (x *KeyframeSequence) WithInterpolationMode(interpolationMode SKInterpolationMode) *KeyframeSequence {
 	x.inner.SetInterpolationMode(raw.SKInterpolationMode(interpolationMode))
 	return x
 }
 
+// The mode used to determine how the keyframe sequence repeats.
+//
 // WithRepeatMode sets the repeatMode property and returns the receiver for chaining.
 func (x *KeyframeSequence) WithRepeatMode(repeatMode SKRepeatMode) *KeyframeSequence {
 	x.inner.SetRepeatMode(raw.SKRepeatMode(repeatMode))
 	return x
 }
 
+// The number of keyframes in the sequence.
+//
 // Count calls the underlying Count.
 func (x *KeyframeSequence) Count() uint {
 	return x.inner.Count()
 }
 
+// Adds a keyframe to the sequence.
+//
 // AddKeyframeValueTime calls the underlying AddKeyframeValueTime.
 func (x *KeyframeSequence) AddKeyframeValueTime(value objc.ID, time_ float64) {
 	x.inner.AddKeyframeValueTime(value, time_)
 }
 
+// Removes the last value in the sequence.
+//
 // RemoveLastKeyframe calls the underlying RemoveLastKeyframe.
 func (x *KeyframeSequence) RemoveLastKeyframe() {
 	x.inner.RemoveLastKeyframe()
 }
 
+// Removes a keyframe from the sequence.
+//
 // RemoveKeyframeAtIndex calls the underlying RemoveKeyframeAtIndex.
 func (x *KeyframeSequence) RemoveKeyframeAtIndex(index uint) {
 	x.inner.RemoveKeyframeAtIndex(index)
 }
 
+// Changes the value for a specific keyframe.
+//
 // SetKeyframeValueForIndex calls the underlying SetKeyframeValueForIndex.
 func (x *KeyframeSequence) SetKeyframeValueForIndex(value objc.ID, index uint) {
 	x.inner.SetKeyframeValueForIndex(value, index)
 }
 
+// Changes the time for a specific keyframe.
+//
 // SetKeyframeTimeForIndex calls the underlying SetKeyframeTimeForIndex.
 func (x *KeyframeSequence) SetKeyframeTimeForIndex(time_ float64, index uint) {
 	x.inner.SetKeyframeTimeForIndex(time_, index)
 }
 
+// Replaces a keyframe in the sequence with a new keyframe.
+//
 // SetKeyframeValueTimeForIndex calls the underlying SetKeyframeValueTimeForIndex.
 func (x *KeyframeSequence) SetKeyframeValueTimeForIndex(value objc.ID, time_ float64, index uint) {
 	x.inner.SetKeyframeValueTimeForIndex(value, time_, index)
 }
 
+// Gets the value for a keyframe in the sequence.
+//
 // GetKeyframeValueForIndex calls the underlying GetKeyframeValueForIndex.
 func (x *KeyframeSequence) GetKeyframeValueForIndex(index uint) objc.ID {
 	return x.inner.GetKeyframeValueForIndex(index)
 }
 
+// Gets the time for a keyframe in the sequence.
+//
 // GetKeyframeTimeForIndex calls the underlying GetKeyframeTimeForIndex.
 func (x *KeyframeSequence) GetKeyframeTimeForIndex(index uint) float64 {
 	return x.inner.GetKeyframeTimeForIndex(index)
 }
 
+// Calculates the sample at a particular time.
+//
 // SampleAtTime calls the underlying SampleAtTime.
 func (x *KeyframeSequence) SampleAtTime(time_ float64) objc.ID {
 	return x.inner.SampleAtTime(time_)

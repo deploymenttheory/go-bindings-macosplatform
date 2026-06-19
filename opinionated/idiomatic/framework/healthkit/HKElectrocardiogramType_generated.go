@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that identifies samples containing electrocardiogram data.
+//
 // ElectrocardiogramType wraps [raw.HKElectrocardiogramType] with a fluent Go API.
 type ElectrocardiogramType struct {
 	inner *raw.HKElectrocardiogramType

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An operation that creates an authentication token for use with CloudKit web services.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/ckfetchwebauthtokenoperation
 type CKFetchWebAuthTokenOperation struct {
 	CKDatabaseOperation
@@ -37,7 +39,7 @@ func CKFetchWebAuthTokenOperationFromID(id objc.ID) *CKFetchWebAuthTokenOperatio
 	return o
 }
 
-// Creates an empty fetch operation. You must set “CKFetchWebAuthTokenOperation/apiToken“ before you execute the operation or add it to a queue.
+// Creates an empty fetch operation.
 func (o *CKFetchWebAuthTokenOperation) Init() *CKFetchWebAuthTokenOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchWebAuthTokenOperationSelInit)
 	if _ret != 0 {
@@ -46,7 +48,7 @@ func (o *CKFetchWebAuthTokenOperation) Init() *CKFetchWebAuthTokenOperation {
 	return CKFetchWebAuthTokenOperationFromID(_ret)
 }
 
-// Creates a fetch operation for the specified API token. - Parameters: - APIToken: The API token that allows access to an app's container.
+// Creates a fetch operation for the specified API token.
 func (o *CKFetchWebAuthTokenOperation) InitWithAPIToken(aPIToken *foundation.NSString) *CKFetchWebAuthTokenOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchWebAuthTokenOperationSelInitWithAPIToken, aPIToken.Ptr())
 	if _ret != 0 {

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a participant in a coordinated playback session.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avcoordinatedplaybackparticipant
 type AVCoordinatedPlaybackParticipant struct {
 	foundation.NSObject
@@ -34,8 +36,11 @@ func AVCoordinatedPlaybackParticipantFromID(id objc.ID) *AVCoordinatedPlaybackPa
 
 // The reason, if any, this participant is currently not participating in coordinated playback.
 func (o *AVCoordinatedPlaybackParticipant) SuspensionReasons() *foundation.NSArray[*foundation.NSString] {
-	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVCoordinatedPlaybackParticipantSelSuspensionReasons)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVCoordinatedPlaybackParticipantSelSuspensionReasons)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[*foundation.NSString](_ret)
 }
 
 // YES if the participant is ready to play.

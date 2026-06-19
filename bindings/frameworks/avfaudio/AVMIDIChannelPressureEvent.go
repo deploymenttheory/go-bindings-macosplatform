@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a MIDI channel pressure message.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avmidichannelpressureevent
 type AVMIDIChannelPressureEvent struct {
 	AVMIDIChannelEvent
@@ -31,7 +33,7 @@ func AVMIDIChannelPressureEventFromID(id objc.ID) *AVMIDIChannelPressureEvent {
 	return o
 }
 
-// @method initWithChannel:pressure: @abstract Initialize the event with a channel and a pressure value. @param channel The MIDI channel for the message.  Range: 0-15. @param pressure The MIDI channel pressure.  Range: 0-127.
+// Creates a pressure event with a channel and pressure value.
 func (o *AVMIDIChannelPressureEvent) InitWithChannelPressure(channel uint, pressure uint) *AVMIDIChannelPressureEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIChannelPressureEventSelInitWithChannelPressure, channel, pressure)
 	if _ret != 0 {

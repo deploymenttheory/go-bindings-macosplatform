@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains both input and output parameters that the super-resolution processor needs to run on a frame.
+//
 // Apple documentation: https://developer.apple.com/documentation/videotoolbox/vtsuperresolutionscalerparameters
 type VTSuperResolutionScalerParameters struct {
 	foundation.NSObject
@@ -36,7 +38,7 @@ func VTSuperResolutionScalerParametersFromID(id objc.ID) *VTSuperResolutionScale
 	return o
 }
 
-// Creates a new super-resolution scaler parameters instance. Returns `nil` if `sourceFrame` or `destinationFrame` is `nil`, or if `sourceFrame` and reference frames have different pixel formats. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - previousFrame: The previous source frame in presentation time order. For the first frame you can set this to `nil`. - previousOutputFrame: The previous output frame in presentation time order. For the first frame you can set this to `nil`. - opticalFlow: Optional `VTFrameProcessorOpticalFlow` object that contains forward and backward optical flow between the `sourceFrame` and `previousFrame`. You only need this if optical flow is pre-computed. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTSuperResolutionScalerParametersSubmissionMode“. - destinationFrame: User-allocated pixel buffer that receives the results.
+// Creates a new super-resolution scaler parameters instance.
 func (o *VTSuperResolutionScalerParameters) InitWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame(sourceFrame *VTFrameProcessorFrame, previousFrame *VTFrameProcessorFrame, previousOutputFrame *VTFrameProcessorFrame, opticalFlow *VTFrameProcessorOpticalFlow, submissionMode VTSuperResolutionScalerParametersSubmissionMode, destinationFrame *VTFrameProcessorFrame) *VTSuperResolutionScalerParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTSuperResolutionScalerParametersSelInitWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame, sourceFrame.Ptr(), previousFrame.Ptr(), previousOutputFrame.Ptr(), opticalFlow.Ptr(), submissionMode, destinationFrame.Ptr())
 	if _ret != 0 {

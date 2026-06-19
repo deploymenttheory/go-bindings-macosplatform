@@ -38,6 +38,8 @@ func NewAnswerCallIntentWithAudioRouteCallIdentifier(audioRoute INCallAudioRoute
 	return &AnswerCallIntent{inner: raw.INAnswerCallIntentFromID(_id)}
 }
 
+// The intent’s display name.
+//
 // WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
 func (x *AnswerCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *AnswerCallIntent {
 	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A representation of the user interaction for secure PIN change verification on a Smart Card reader.
+//
 // SmartCardUserInteractionForSecurePINVerification wraps [raw.TKSmartCardUserInteractionForSecurePINVerification] with a fluent Go API.
 type SmartCardUserInteractionForSecurePINVerification struct {
 	inner *raw.TKSmartCardUserInteractionForSecurePINVerification
@@ -39,7 +41,7 @@ func NewSmartCardUserInteractionForSecurePINVerification() *SmartCardUserInterac
 	return &SmartCardUserInteractionForSecurePINVerification{inner: raw.TKSmartCardUserInteractionForSecurePINVerificationFromID(_id)}
 }
 
-// Bitmask specifying condition(s) under which PIN entry should be considered complete. @note Default value: TKSmartCardPINCompletionKey
+// The conditions under which PIN entry should be considered complete.
 //
 // WithPINCompletion sets the pINCompletion property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithPINCompletion(pINCompletion TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINVerification {
@@ -47,7 +49,7 @@ func (x *SmartCardUserInteractionForSecurePINVerification) WithPINCompletion(pIN
 	return x
 }
 
-// List of message indices referring to a predefined message table. It is used to specify the type and number of messages displayed during the PIN operation. @discussion If nil, the reader does not display any message (reader specific). Typically, PIN verification takes 1 message, PIN modification 1-3 messages. @note Default value: nil
+// A list of message indices referring to a predefined message table, used to specify the type and number of messages displayed during the PIN operation. nil by default.
 //
 // WithPINMessageIndices sets the collection, converting the Go slice to an NSArray.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForSecurePINVerification {
@@ -70,7 +72,7 @@ func (x *SmartCardUserInteractionForSecurePINVerification) WithPINMessageIndices
 	return x
 }
 
-// Locale defining the language of displayed messages. If set to nil, the user's current locale is used. @note Default value: the user's current locale
+// The locale for the displayed messages. If nil, the user’s current locale is used. By default, this value is the current locale of the system.
 //
 // WithLocale sets the locale property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForSecurePINVerification {
@@ -78,7 +80,7 @@ func (x *SmartCardUserInteractionForSecurePINVerification) WithLocale(locale *fo
 	return x
 }
 
-// SW1SW2 result code.
+// The SW1-SW2 status bytes.
 //
 // WithResultSW sets the resultSW property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINVerification {
@@ -86,7 +88,7 @@ func (x *SmartCardUserInteractionForSecurePINVerification) WithResultSW(resultSW
 	return x
 }
 
-// Optional block of returned data (without SW1SW2 bytes).
+// The returned data without SW1-SW2 bytes, if any.
 //
 // WithResultData sets the resultData property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithResultData(resultData *foundation.NSData) *SmartCardUserInteractionForSecurePINVerification {
@@ -94,7 +96,7 @@ func (x *SmartCardUserInteractionForSecurePINVerification) WithResultData(result
 	return x
 }
 
-// Delegate for state observing of the interaction.
+// The delegate for observing events that occur during the user interaction.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteractionForSecurePINVerification {
@@ -102,7 +104,7 @@ func (x *SmartCardUserInteractionForSecurePINVerification) WithDelegate(delegate
 	return x
 }
 
-// Initial interaction timeout. If set to 0, the reader-defined default timeout is used. @note Default value: 0
+// The timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
 //
 // WithInitialTimeout sets the initialTimeout property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForSecurePINVerification {
@@ -110,7 +112,7 @@ func (x *SmartCardUserInteractionForSecurePINVerification) WithInitialTimeout(in
 	return x
 }
 
-// Timeout after the first key stroke. If set to 0, the reader-defined default timeout is used. @note Default value: 0
+// The timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
 //
 // WithInteractionTimeout sets the interactionTimeout property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForSecurePINVerification {

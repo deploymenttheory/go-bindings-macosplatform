@@ -12,7 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// A tree data structure where each level has 8 children that subdivide a given space into the eight octants. Stores arbitrary NSObject elements via points and boxes.
+// A data structure for organizing objects based on their locations in a three-dimensional space.
 //
 // Apple documentation: https://developer.apple.com/documentation/gameplaykit/gkoctree
 type GKOctree[ElementType purego.AnyObject] struct {
@@ -41,7 +41,7 @@ func GKOctreeFromID[ElementType purego.AnyObject](id objc.ID) *GKOctree[ElementT
 	return o
 }
 
-// Creates a octree with a given bounding box and minimum allowed cell size @param box the bounding box of this octree.  all elements bounding boxes must be within this space. @param minCellSize the minimum allowed cell size.  The octree will not create octants that have a width,height or depth smaller than this size.
+// Creates an octree with the specified dimensions.
 func GKOctreeOctreeWithBoundingBoxMinimumCellSize(box GKBox, minCellSize float32) *GKOctree[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKOctree), _gKOctreeSelOctreeWithBoundingBoxMinimumCellSize, box, minCellSize)
 	if _ret != 0 {
@@ -50,6 +50,7 @@ func GKOctreeOctreeWithBoundingBoxMinimumCellSize(box GKBox, minCellSize float32
 	return GKOctreeFromID[objc.ID](_ret)
 }
 
+// Initializes an octree with the specified dimensions.
 func (o *GKOctree[ElementType]) InitWithBoundingBoxMinimumCellSize(box GKBox, minCellSize float32) *GKOctree[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKOctreeSelInitWithBoundingBoxMinimumCellSize, box, minCellSize)
 	if _ret != 0 {
@@ -58,7 +59,7 @@ func (o *GKOctree[ElementType]) InitWithBoundingBoxMinimumCellSize(box GKBox, mi
 	return GKOctreeFromID[ElementType](_ret)
 }
 
-// Adds an NSObject to this octree with a given point. This element will always reside in the leaf node its point is in. @param element the element to be stored @param point the point associated with the element you want to store @return the node the element was added to
+// Adds an object to the tree corresponding to the specified point in 3D space.
 func (o *GKOctree[ElementType]) AddElementWithPoint(element ElementType, point unsafe.Pointer) *GKOctreeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKOctreeSelAddElementWithPoint, element, point)
 	if _ret != 0 {
@@ -67,7 +68,7 @@ func (o *GKOctree[ElementType]) AddElementWithPoint(element ElementType, point u
 	return GKOctreeNodeFromID(_ret)
 }
 
-// Adds an NSObject to this octtree with a given axis-aligned box This element will reside in the lowest node that it's box fits in completely. @param element the element to be stored @param box the box associated with the element to be stored @return the node that the element was added to
+// Adds an object to the tree corresponding to the specified volume of 3D space.
 func (o *GKOctree[ElementType]) AddElementWithBox(element ElementType, box GKBox) *GKOctreeNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKOctreeSelAddElementWithBox, element, box)
 	if _ret != 0 {
@@ -76,7 +77,7 @@ func (o *GKOctree[ElementType]) AddElementWithBox(element ElementType, box GKBox
 	return GKOctreeNodeFromID(_ret)
 }
 
-// Returns all of the elements in the node this point would be placed in @param point the point to query @return an NSArray of all the element found at the node this point would be placed in
+// Returns all objects whose corresponding locations overlap the specified point.
 func (o *GKOctree[ElementType]) ElementsAtPoint(point unsafe.Pointer) *foundation.NSArray[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKOctreeSelElementsAtPoint, point)
 	if _ret != 0 {
@@ -85,7 +86,7 @@ func (o *GKOctree[ElementType]) ElementsAtPoint(point unsafe.Pointer) *foundatio
 	return foundation.NSArrayFromID[ElementType](_ret)
 }
 
-// Returns all of the elements that resides in nodes which intersect the given box @param box the box tha specifies which elements you would like to retrieve @return an NSArray of all the elements in all of the nodes that intersect the given box
+// Returns all objects whose corresponding locations overlap the specified volume.
 func (o *GKOctree[ElementType]) ElementsInBox(box GKBox) *foundation.NSArray[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKOctreeSelElementsInBox, box)
 	if _ret != 0 {
@@ -94,13 +95,13 @@ func (o *GKOctree[ElementType]) ElementsInBox(box GKBox) *foundation.NSArray[Ele
 	return foundation.NSArrayFromID[ElementType](_ret)
 }
 
-// Removes the given NSObject from this octree Note that this is an exhaustive search and is can be slow for larger trees. Cache the relevant GKOctreeNode and use removeElement:WithNode: for better performance. @param element the element to be removed @return returns YES if the data was removed, NO otherwise
+// Searches for the specified object and removes it from the tree.
 func (o *GKOctree[ElementType]) RemoveElement(element ElementType) bool {
 	_ret := objc.Send[bool](o.Ptr(), _gKOctreeSelRemoveElement, element)
 	return _ret
 }
 
-// Removes the given NSObject from the given node Note that this is not an exhaustive search and is faster than removeData: @param element the element to be removed @param node the node in which this data resides @return returns YES if the element was removed, NO otherwise
+// Removes the specified object from the tree, using a reference to its containing node.
 func (o *GKOctree[ElementType]) RemoveElementWithNode(element ElementType, node *GKOctreeNode) bool {
 	_ret := objc.Send[bool](o.Ptr(), _gKOctreeSelRemoveElementWithNode, element, node.Ptr())
 	return _ret

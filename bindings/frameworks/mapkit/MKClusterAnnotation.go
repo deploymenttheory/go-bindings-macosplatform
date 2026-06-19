@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An annotation that groups two or more distinct annotations into a single entity.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkclusterannotation
 type MKClusterAnnotation struct {
 	foundation.NSObject
@@ -35,6 +37,7 @@ func MKClusterAnnotationFromID(id objc.ID) *MKClusterAnnotation {
 	return o
 }
 
+// Creates a cluster annotation with the specified individual annotations.
 func (o *MKClusterAnnotation) InitWithMemberAnnotations(memberAnnotations *foundation.NSArray[MKAnnotation]) *MKClusterAnnotation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKClusterAnnotationSelInitWithMemberAnnotations, memberAnnotations.Ptr())
 	if _ret != 0 {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The information that describes an airport.
+//
 // Airport wraps [raw.INAirport] with a fluent Go API.
 type Airport struct {
 	inner *raw.INAirport
@@ -31,6 +33,8 @@ func AirportFromID(id objc.ID) *Airport {
 	return &Airport{inner: raw.INAirportFromID(id)}
 }
 
+// Creates a new airport object with the specified contents and attributes.
+//
 // NewAirportWithNameIataCodeIcaoCode creates a new [Airport].
 func NewAirportWithNameIataCodeIcaoCode(name string, iataCode string, icaoCode string) *Airport {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INAirport")), objc.RegisterName("alloc"))

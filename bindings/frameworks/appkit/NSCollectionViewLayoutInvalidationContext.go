@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that identifies the portions of your layout that need to be updated.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionviewlayoutinvalidationcontext
 type NSCollectionViewLayoutInvalidationContext struct {
 	foundation.NSObject
@@ -42,16 +44,19 @@ func NSCollectionViewLayoutInvalidationContextFromID(id objc.ID) *NSCollectionVi
 	return o
 }
 
+// Marks the specified items as invalid so that their layout information can be updated.
 func (o *NSCollectionViewLayoutInvalidationContext) InvalidateItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelInvalidateItemsAtIndexPaths, indexPaths)
+	o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelInvalidateItemsAtIndexPaths, indexPaths.Ptr())
 }
 
+// Marks the specified supplementary views as invalid so that their layout information can be updated.
 func (o *NSCollectionViewLayoutInvalidationContext) InvalidateSupplementaryElementsOfKindAtIndexPaths(elementKind *foundation.NSString, indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelInvalidateSupplementaryElementsOfKindAtIndexPaths, elementKind.Ptr(), indexPaths)
+	o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelInvalidateSupplementaryElementsOfKindAtIndexPaths, elementKind.Ptr(), indexPaths.Ptr())
 }
 
+// Marks the specified decoration views as invalid so that their layout information can be updated.
 func (o *NSCollectionViewLayoutInvalidationContext) InvalidateDecorationElementsOfKindAtIndexPaths(elementKind *foundation.NSString, indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
-	o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelInvalidateDecorationElementsOfKindAtIndexPaths, elementKind.Ptr(), indexPaths)
+	o.Ptr().Send(_nSCollectionViewLayoutInvalidationContextSelInvalidateDecorationElementsOfKindAtIndexPaths, elementKind.Ptr(), indexPaths.Ptr())
 }
 
 func (o *NSCollectionViewLayoutInvalidationContext) InvalidateEverything() bool {
@@ -65,18 +70,27 @@ func (o *NSCollectionViewLayoutInvalidationContext) InvalidateDataSourceCounts()
 }
 
 func (o *NSCollectionViewLayoutInvalidationContext) InvalidatedItemIndexPaths() *foundation.NSSet[*foundation.NSIndexPath] {
-	_ret := objc.Send[*foundation.NSSet[*foundation.NSIndexPath]](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidatedItemIndexPaths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidatedItemIndexPaths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSSetFromID[*foundation.NSIndexPath](_ret)
 }
 
 func (o *NSCollectionViewLayoutInvalidationContext) InvalidatedSupplementaryIndexPaths() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidatedSupplementaryIndexPaths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidatedSupplementaryIndexPaths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSCollectionViewLayoutInvalidationContext) InvalidatedDecorationIndexPaths() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidatedDecorationIndexPaths)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutInvalidationContextSelInvalidatedDecorationIndexPaths)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](_ret)
 }
 
 func (o *NSCollectionViewLayoutInvalidationContext) ContentOffsetAdjustment() corefoundation.CGPoint {

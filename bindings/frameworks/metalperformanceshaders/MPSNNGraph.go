@@ -15,6 +15,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An optimized representation of a graph of neural network image and filter nodes.
+//
 // Apple documentation: https://developer.apple.com/documentation/metalperformanceshaders/mpsnngraph
 type MPSNNGraph struct {
 	mpscore.MPSKernel
@@ -79,7 +81,7 @@ func MPSNNGraphGraphWithDeviceResultImageResultImageIsNeeded(device metal.MTLDev
 
 // @abstract   Initialize a MPSNNGraph object on a device starting with resultImage working backward @discussion The MPSNNGraph constructor will start with the indicated result images, and look to see what MPSNNFilterNode produced them, then look to its dependencies and so forth to reveal the subsection of the graph necessary to compute the image. This variant is provided to support graphs and subgraphs with multiple image outputs. @param      device      The MTLDevice on which to run the graph @param      resultImages The MPSNNImageNodes corresponding to the last images in the graph. The first image in the array will be returned from the -encode method LHS. The rest will be included in the list of intermediate images. @param      areResultsNeeded  An array of BOOL values with count equal to resultImages.count. If NO is passed for a given image, the image itself is marked unneeded and might be skipped. The graph will prune this branch back to the first requred filter. A filter is required if it generates a needed result image, or is needed to update training parameters. @result     A new MPSNNGraph.
 func (o *MPSNNGraph) InitWithDeviceResultImagesResultsAreNeeded(device metal.MTLDevice, resultImages *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode], areResultsNeeded *bool) *MPSNNGraph {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGraphSelInitWithDeviceResultImagesResultsAreNeeded, device, resultImages, areResultsNeeded)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGraphSelInitWithDeviceResultImagesResultsAreNeeded, device, resultImages.Ptr(), areResultsNeeded)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -87,7 +89,7 @@ func (o *MPSNNGraph) InitWithDeviceResultImagesResultsAreNeeded(device metal.MTL
 }
 
 func MPSNNGraphGraphWithDeviceResultImagesResultsAreNeeded(device metal.MTLDevice, resultImages *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode], areResultsNeeded *bool) *MPSNNGraph {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNGraph), _mPSNNGraphSelGraphWithDeviceResultImagesResultsAreNeeded, device, resultImages, areResultsNeeded)
+	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNGraph), _mPSNNGraphSelGraphWithDeviceResultImagesResultsAreNeeded, device, resultImages.Ptr(), areResultsNeeded)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -126,7 +128,7 @@ func (o *MPSNNGraph) ReloadFromDataSources() {
 
 // @abstract       Encode the graph to a MTLCommandBuffer @param          commandBuffer       The command buffer. If the command buffer is a MPSCommandBuffer, the work will be committed to Metal in small pieces so that the CPU-side latency is much reduced. @param          sourceImages        A list of MPSImages to use as the source images for the graph. These should be in the same order as the list returned from MPSNNGraph.sourceImageHandles. The images may be image arrays. Typically, this is only one or two images such as a .JPG decoded into a MPSImage*.  If the sourceImages are MPSTemporaryImages, the graph will decrement the readCount by 1, even if the graph actually reads an image multiple times. @param          sourceStates        A list of MPSState objects to use as state for a graph. These should be in the same order as the list returned from MPSNNGraph.sourceStateHandles. May be nil, if there is no source state. If the sourceStates are temporary, the graph will decrement the readCount by 1, even if the graph actually reads the state multiple times. @param      intermediateImages      An optional NSMutableArray to receive any MPSImage objects exported as part of its operation. These are only the images that were tagged with MPSNNImageNode.exportFromGraph = YES. The identity of the states is given by -resultStateHandles.  If temporary, each intermediateImage will have a readCount of 1.  If the result was tagged exportFromGraph = YES, it will be here too, with a readCount of 2. To be able to access the images from outside the graph on the CPU, your application must also set MPSNNImageNode.synchronizeResource = YES, and MPSNNImageNode.imageAllocator = [MPSImage defaultAllocator]; The defaultAllocator creates a permanent image that can be read with readBytes. @param      destinationStates       An optional NSMutableArray to receive any MPSState objects created as part of its operation. The identity of the states is given by -resultStateHandles. @result     A MPSImage or MPSTemporaryImage allocated per the destinationImageAllocator containing the output of the graph. It will be automatically released when commandBuffer completes.
 func (o *MPSNNGraph) EncodeToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[*mpscore.MPSImage], sourceStates *foundation.NSArray[*mpscore.MPSState], intermediateImages *foundation.NSMutableArray[*mpscore.MPSImage], destinationStates *foundation.NSMutableArray[*mpscore.MPSState]) *mpscore.MPSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGraphSelEncodeToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates, commandBuffer, sourceImages, sourceStates, intermediateImages, destinationStates)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGraphSelEncodeToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates, commandBuffer, sourceImages.Ptr(), sourceStates.Ptr(), intermediateImages.Ptr(), destinationStates.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -135,13 +137,13 @@ func (o *MPSNNGraph) EncodeToCommandBufferSourceImagesSourceStatesIntermediateIm
 
 // @abstract       Encode the graph to a MTLCommandBuffer @discussion     This interface is like the other except that it operates on a batch of images all at once.  In addition, you may specify whether the result is needed. @param          commandBuffer       The command buffer. If the command buffer is a MPSCommandBuffer, the work will be committed to Metal in small pieces so that the CPU-side latency is much reduced. @param          sourceImages        A list of MPSImages to use as the source images for the graph. These should be in the same order as the list returned from MPSNNGraph.sourceImageHandles. The images may be image arrays. Typically, this is only one or two images such as a .JPG decoded into a MPSImage*.  If the sourceImages are MPSTemporaryImages, the graph will decrement the readCount by 1, even if the graph actually reads an image multiple times. @param          sourceStates        A list of MPSState objects to use as state for a graph. These should be in the same order as the list returned from MPSNNGraph.sourceStateHandles. May be nil, if there is no source state. If the sourceStates are temporary, the graph will decrement the readCount by 1, even if the graph actually reads the state multiple times. @param      intermediateImages      An optional NSMutableArray to receive any MPSImage objects exported as part of its operation. These are only the images that were tagged with MPSNNImageNode.exportFromGraph = YES. The identity of the states is given by -resultStateHandles.  If temporary, each intermediateImage will have a readCount of 1.  If the result was tagged exportFromGraph = YES, it will be here too, with a readCount of 2. To be able to access the images from outside the graph on the CPU, your application must also set MPSNNImageNode.synchronizeResource = YES, and MPSNNImageNode.imageAllocator = [MPSImage defaultAllocator]; The defaultAllocator creates a permanent image that can be read with readBytes. @param      destinationStates       An optional NSMutableArray to receive any MPSState objects created as part of its operation. The identity of the states is given by -resultStateHandles. @result     A MPSImageBatch or MPSTemporaryImageBatch allocated per the destinationImageAllocator containing the output of the graph. It will be automatically released when commandBuffer completes. If resultIsNeeded == NO, then this will return nil.
 func (o *MPSNNGraph) EncodeBatchToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[objc.ID], sourceStates *foundation.NSArray[objc.ID], intermediateImages *foundation.NSMutableArray[objc.ID], destinationStates *foundation.NSMutableArray[objc.ID]) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mPSNNGraphSelEncodeBatchToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates, commandBuffer, sourceImages, sourceStates, intermediateImages, destinationStates)
+	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mPSNNGraphSelEncodeBatchToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates, commandBuffer, sourceImages.Ptr(), sourceStates.Ptr(), intermediateImages.Ptr(), destinationStates.Ptr())
 	return _ret
 }
 
 // @abstract       Encode the graph to a MTLCommandBuffer @discussion     IMPORTANT:  Please use [MTLCommandBuffer addCompletedHandler:] to determine when this work is done. Use CPU time that would have been spent waiting for the GPU to encode the next command buffer and commit it too.  That way, the work for the next command buffer is ready to go the moment the GPU is done. This will keep the GPU busy and running at top speed. Those who ignore this advice and use [MTLCommandBuffer waitUntilCompleted] instead will likely cause their code to slow down by a factor of two or more. The CPU clock spins down while it waits for the GPU. When the GPU completes, the CPU runs slowly for a while until it spins up. The GPU has to wait for the CPU to  encode more work (at low clock), giving it plenty of time to spin its own clock down. In typical CNN graph usage, neither may ever reach maximum clock frequency, causing slow down far beyond what otherwise would be expected from simple failure to schedule CPU and GPU work concurrently. Regrattably, it is probable that every performance benchmark you see on the net will be based on [MTLCommandBuffer waitUntilCompleted]. @param          commandBuffer       The command buffer. If the command buffer is a MPSCommandBuffer, the work will be committed to Metal in small pieces so that the CPU-side latency is much reduced. @param          sourceImages        A list of MPSImages to use as the source images for the graph. These should be in the same order as the list returned from MPSNNGraph.sourceImageHandles. @result     A MPSImage or MPSTemporaryImage allocated per the destinationImageAllocator containing the output of the graph. It will be automatically released when commandBuffer completes.  It can be nil if resultImageIsNeeded == NO
 func (o *MPSNNGraph) EncodeToCommandBufferSourceImages(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[*mpscore.MPSImage]) *mpscore.MPSImage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGraphSelEncodeToCommandBufferSourceImages, commandBuffer, sourceImages)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGraphSelEncodeToCommandBufferSourceImages, commandBuffer, sourceImages.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -150,7 +152,7 @@ func (o *MPSNNGraph) EncodeToCommandBufferSourceImages(commandBuffer metal.MTLCo
 
 // @abstract Convenience method to encode a batch of images
 func (o *MPSNNGraph) EncodeBatchToCommandBufferSourceImagesSourceStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[objc.ID], sourceStates *foundation.NSArray[objc.ID]) unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mPSNNGraphSelEncodeBatchToCommandBufferSourceImagesSourceStates, commandBuffer, sourceImages, sourceStates)
+	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mPSNNGraphSelEncodeBatchToCommandBufferSourceImagesSourceStates, commandBuffer, sourceImages.Ptr(), sourceStates.Ptr())
 	return _ret
 }
 
@@ -166,7 +168,7 @@ func (o *MPSNNGraph) ExecuteAsyncWithSourceImagesCompletionHandler(sourceImages 
 		})
 		defer __block_handler.Release()
 	}
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGraphSelExecuteAsyncWithSourceImagesCompletionHandler, sourceImages, __block_handler)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGraphSelExecuteAsyncWithSourceImagesCompletionHandler, sourceImages.Ptr(), __block_handler)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -187,26 +189,38 @@ func (o *MPSNNGraph) ReadCountForSourceStateAtIndex(index uint) uint {
 
 // @abstract   Get a list of identifiers for source images needed to calculate the result image
 func (o *MPSNNGraph) SourceImageHandles() *foundation.NSArray[mpsneuralnetwork.MPSHandle] {
-	_ret := objc.Send[*foundation.NSArray[mpsneuralnetwork.MPSHandle]](o.Ptr(), _mPSNNGraphSelSourceImageHandles)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGraphSelSourceImageHandles)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[mpsneuralnetwork.MPSHandle](_ret)
 }
 
 // @abstract   Get a list of identifiers for source state objects needed to calculate the result image @discussion Not guaranteed to be in the same order as resultStateHandles
 func (o *MPSNNGraph) SourceStateHandles() *foundation.NSArray[mpsneuralnetwork.MPSHandle] {
-	_ret := objc.Send[*foundation.NSArray[mpsneuralnetwork.MPSHandle]](o.Ptr(), _mPSNNGraphSelSourceStateHandles)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGraphSelSourceStateHandles)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[mpsneuralnetwork.MPSHandle](_ret)
 }
 
 // @abstract   Get a list of identifiers for intermediate images objects produced by the graph
 func (o *MPSNNGraph) IntermediateImageHandles() *foundation.NSArray[mpsneuralnetwork.MPSHandle] {
-	_ret := objc.Send[*foundation.NSArray[mpsneuralnetwork.MPSHandle]](o.Ptr(), _mPSNNGraphSelIntermediateImageHandles)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGraphSelIntermediateImageHandles)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[mpsneuralnetwork.MPSHandle](_ret)
 }
 
 // @abstract   Get a list of identifiers for result state objects produced by the graph @discussion Not guaranteed to be in the same order as sourceStateHandles
 func (o *MPSNNGraph) ResultStateHandles() *foundation.NSArray[mpsneuralnetwork.MPSHandle] {
-	_ret := objc.Send[*foundation.NSArray[mpsneuralnetwork.MPSHandle]](o.Ptr(), _mPSNNGraphSelResultStateHandles)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGraphSelResultStateHandles)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSArrayFromID[mpsneuralnetwork.MPSHandle](_ret)
 }
 
 // @abstract   Get a handle for the graph result image

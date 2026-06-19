@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A sample type used to create queries for documents.
+//
 // Apple documentation: https://developer.apple.com/documentation/healthkit/hkdocumenttype
 type HKDocumentType struct {
 	HKSampleType

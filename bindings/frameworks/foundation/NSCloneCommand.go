@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A command that clones one or more scriptable objects.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsclonecommand
 type NSCloneCommand struct {
 	NSScriptCommand

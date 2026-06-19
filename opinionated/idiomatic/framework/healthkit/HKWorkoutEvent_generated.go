@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing an important event during a workout.
+//
 // WorkoutEvent wraps [raw.HKWorkoutEvent] with a fluent Go API.
 type WorkoutEvent struct {
 	inner *raw.HKWorkoutEvent

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a pairing of a source and destination.
+//
 // Apple documentation: https://developer.apple.com/documentation/coremidi/midinetworksession
 type MIDINetworkSession struct {
 	foundation.NSObject
@@ -45,6 +47,7 @@ func MIDINetworkSessionFromID(id objc.ID) *MIDINetworkSession {
 	return o
 }
 
+// Returns the default singleton session.
 func MIDINetworkSessionDefaultSession() *MIDINetworkSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMIDINetworkSession), _mIDINetworkSessionSelDefaultSession)
 	if _ret != 0 {
@@ -53,6 +56,7 @@ func MIDINetworkSessionDefaultSession() *MIDINetworkSession {
 	return MIDINetworkSessionFromID(_ret)
 }
 
+// Returns the array of network hosts.
 func (o *MIDINetworkSession) Contacts() *foundation.NSSet[*MIDINetworkHost] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDINetworkSessionSelContacts)
 	if _ret != 0 {
@@ -61,16 +65,19 @@ func (o *MIDINetworkSession) Contacts() *foundation.NSSet[*MIDINetworkHost] {
 	return foundation.NSSetFromID[*MIDINetworkHost](_ret)
 }
 
+// Adds a host as a contact.
 func (o *MIDINetworkSession) AddContact(contact *MIDINetworkHost) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mIDINetworkSessionSelAddContact, contact.Ptr())
 	return _ret
 }
 
+// Removes a host as a contact.
 func (o *MIDINetworkSession) RemoveContact(contact *MIDINetworkHost) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mIDINetworkSessionSelRemoveContact, contact.Ptr())
 	return _ret
 }
 
+// Returns the session’s set of MIDI network connections.
 func (o *MIDINetworkSession) Connections() *foundation.NSSet[*MIDINetworkConnection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDINetworkSessionSelConnections)
 	if _ret != 0 {
@@ -79,21 +86,25 @@ func (o *MIDINetworkSession) Connections() *foundation.NSSet[*MIDINetworkConnect
 	return foundation.NSSetFromID[*MIDINetworkConnection](_ret)
 }
 
+// Adds a new connection to this session.
 func (o *MIDINetworkSession) AddConnection(connection *MIDINetworkConnection) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mIDINetworkSessionSelAddConnection, connection.Ptr())
 	return _ret
 }
 
+// Removes a connection from this session.
 func (o *MIDINetworkSession) RemoveConnection(connection *MIDINetworkConnection) bool {
 	_ret := objc.Send[bool](o.Ptr(), _mIDINetworkSessionSelRemoveConnection, connection.Ptr())
 	return _ret
 }
 
+// Returns the session’s source endpoint.
 func (o *MIDINetworkSession) SourceEndpoint() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mIDINetworkSessionSelSourceEndpoint)
 	return _ret
 }
 
+// Returns the session’s destination endpoint.
 func (o *MIDINetworkSession) DestinationEndpoint() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mIDINetworkSessionSelDestinationEndpoint)
 	return _ret

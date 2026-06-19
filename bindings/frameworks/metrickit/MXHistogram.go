@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object representing a histogram of data values of the same type of unit.
+//
 // Apple documentation: https://developer.apple.com/documentation/metrickit/mxhistogram
 type MXHistogram[UnitType purego.AnyObject] struct {
 	foundation.NSObject
@@ -39,6 +41,9 @@ func (o *MXHistogram[UnitType]) TotalBucketCount() uint {
 
 // @property      bucketEnumerator @abstract      An NSEnumerator that can be used to enumerate the buckets of this histogram.
 func (o *MXHistogram[UnitType]) BucketEnumerator() *foundation.NSEnumerator[objc.ID] {
-	_ret := objc.Send[*foundation.NSEnumerator[objc.ID]](o.Ptr(), _mXHistogramSelBucketEnumerator)
-	return _ret
+	_ret := objc.Send[objc.ID](o.Ptr(), _mXHistogramSelBucketEnumerator)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSEnumeratorFromID[objc.ID](_ret)
 }

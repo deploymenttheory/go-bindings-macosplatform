@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An inflection rule that uses a morphology instance to determine how to inflect attribued strings.
+//
 // InflectionRuleExplicit wraps [raw.NSInflectionRuleExplicit] with a fluent Go API.
 type InflectionRuleExplicit struct {
 	inner *raw.NSInflectionRuleExplicit
@@ -29,6 +31,8 @@ func InflectionRuleExplicitFromID(id objc.ID) *InflectionRuleExplicit {
 	return &InflectionRuleExplicit{inner: raw.NSInflectionRuleExplicitFromID(id)}
 }
 
+// Creates an inflection rule with the given morphology.
+//
 // NewInflectionRuleExplicitWithMorphology creates a new [InflectionRuleExplicit].
 func NewInflectionRuleExplicitWithMorphology(morphology *raw.NSMorphology) *InflectionRuleExplicit {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSInflectionRuleExplicit")), objc.RegisterName("alloc"))

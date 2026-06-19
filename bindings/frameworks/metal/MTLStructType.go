@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A description of a structure.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlstructtype
 type MTLStructType struct {
 	MTLType
@@ -31,6 +33,7 @@ func MTLStructTypeFromID(id objc.ID) *MTLStructType {
 	return o
 }
 
+// Provides a representation of a struct member.
 func (o *MTLStructType) MemberByName(name *foundation.NSString) *MTLStructMember {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLStructTypeSelMemberByName, name.Ptr())
 	if _ret != 0 {

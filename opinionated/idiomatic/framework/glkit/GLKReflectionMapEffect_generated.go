@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A lighting and shading system that supports reflection mapping for use in shader-based OpenGL rendering.
+//
 // ReflectionMapEffect wraps [raw.GLKReflectionMapEffect] with a fluent Go API.
 type ReflectionMapEffect struct {
 	inner *raw.GLKReflectionMapEffect
@@ -37,30 +39,40 @@ func NewReflectionMapEffect() *ReflectionMapEffect {
 	return &ReflectionMapEffect{inner: raw.GLKReflectionMapEffectFromID(_id)}
 }
 
+// A Boolean value that indicates whether or not to use the color vertex attribute when calculating the light’s interaction with the material.
+//
 // WithColorMaterialEnabled sets the colorMaterialEnabled property and returns the receiver for chaining.
 func (x *ReflectionMapEffect) WithColorMaterialEnabled(colorMaterialEnabled uint8) *ReflectionMapEffect {
 	x.inner.GLKBaseEffect.SetColorMaterialEnabled(colorMaterialEnabled)
 	return x
 }
 
+// A Boolean value that indicates whether lighting is calculated for both sides of a primitive.
+//
 // WithLightModelTwoSided sets the lightModelTwoSided property and returns the receiver for chaining.
 func (x *ReflectionMapEffect) WithLightModelTwoSided(lightModelTwoSided uint8) *ReflectionMapEffect {
 	x.inner.GLKBaseEffect.SetLightModelTwoSided(lightModelTwoSided)
 	return x
 }
 
+// A Boolean value that indicates whether or not to use the constant color.
+//
 // WithUseConstantColor sets the useConstantColor property and returns the receiver for chaining.
 func (x *ReflectionMapEffect) WithUseConstantColor(useConstantColor uint8) *ReflectionMapEffect {
 	x.inner.GLKBaseEffect.SetUseConstantColor(useConstantColor)
 	return x
 }
 
+// The strategy the effect uses to calculate light values at each fragment. See GLKLightingType.
+//
 // WithLightingType sets the lightingType property and returns the receiver for chaining.
 func (x *ReflectionMapEffect) WithLightingType(lightingType GLKLightingType) *ReflectionMapEffect {
 	x.inner.GLKBaseEffect.SetLightingType(raw.GLKLightingType(lightingType))
 	return x
 }
 
+// The order in which textures are applied to rendered primitives.
+//
 // WithTextureOrder sets the collection, converting the Go slice to an NSArray.
 func (x *ReflectionMapEffect) WithTextureOrder(items ...*raw.GLKEffectPropertyTexture) *ReflectionMapEffect {
 	if len(items) == 0 {
@@ -82,6 +94,8 @@ func (x *ReflectionMapEffect) WithTextureOrder(items ...*raw.GLKEffectPropertyTe
 	return x
 }
 
+// A string used to name your effect.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ReflectionMapEffect) WithLabel(label string) *ReflectionMapEffect {
 	x.inner.GLKBaseEffect.SetLabel(foundation.NSStringStringWithUTF8String(label))

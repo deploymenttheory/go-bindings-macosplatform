@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract superclass for lens specifications.
+//
 // LensSpecification wraps [raw.HKLensSpecification] with a fluent Go API.
 type LensSpecification struct {
 	inner *raw.HKLensSpecification

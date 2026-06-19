@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A mutable video composition instruction subclass.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfoundation/avmutablevideocompositioninstruction
 type AVMutableVideoCompositionInstruction struct {
 	AVVideoCompositionInstruction
@@ -39,7 +41,7 @@ func AVMutableVideoCompositionInstructionFromID(id objc.ID) *AVMutableVideoCompo
 	return o
 }
 
-// Returns a new instance of AVMutableVideoCompositionInstruction. The returned AVMutableVideoCompositionInstruction will have a timeRange of kCMTimeRangeInvalid, a NULL backgroundColor, and a nil array of layerInstructions.
+// Returns a new mutable video composition instruction.
 func AVMutableVideoCompositionInstructionVideoCompositionInstruction() *AVMutableVideoCompositionInstruction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableVideoCompositionInstruction), _aVMutableVideoCompositionInstructionSelVideoCompositionInstruction)
 	if _ret != 0 {
@@ -71,5 +73,5 @@ func (o *AVMutableVideoCompositionInstruction) SetEnablePostProcessing(enablePos
 }
 
 func (o *AVMutableVideoCompositionInstruction) SetRequiredSourceSampleDataTrackIDs(requiredSourceSampleDataTrackIDs *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_aVMutableVideoCompositionInstructionSelSetRequiredSourceSampleDataTrackIDs, requiredSourceSampleDataTrackIDs)
+	o.Ptr().Send(_aVMutableVideoCompositionInstructionSelSetRequiredSourceSampleDataTrackIDs, requiredSourceSampleDataTrackIDs.Ptr())
 }

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configurable annotation that shows the user’s location using the default MapKit style.
+//
 // Apple documentation: https://developer.apple.com/documentation/mapkit/mkuserlocationview
 type MKUserLocationView struct {
 	MKAnnotationView

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that represents a request to the App Store.
+//
 // Request wraps [raw.SKRequest] with a fluent Go API.
 type Request struct {
 	inner *raw.SKRequest
@@ -35,17 +37,23 @@ func NewRequest() *Request {
 	return &Request{inner: raw.SKRequestFromID(_id)}
 }
 
+// The delegate of the request object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Request) WithDelegate(delegate raw.SKRequestDelegate) *Request {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Cancels a previously started request.
+//
 // Cancel calls the underlying Cancel.
 func (x *Request) Cancel() {
 	x.inner.Cancel()
 }
 
+// Sends the request to the Apple App Store.
+//
 // Start calls the underlying Start.
 func (x *Request) Start() {
 	x.inner.Start()

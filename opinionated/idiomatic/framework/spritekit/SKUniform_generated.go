@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A container for uniform shader data.
+//
 // Uniform wraps [raw.SKUniform] with a fluent Go API.
 type Uniform struct {
 	inner *raw.SKUniform
@@ -32,6 +34,8 @@ func UniformFromID(id objc.ID) *Uniform {
 	return &Uniform{inner: raw.SKUniformFromID(id)}
 }
 
+// Initializes a new uniform object.
+//
 // NewUniformWithName creates a new [Uniform].
 func NewUniformWithName(name string) *Uniform {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewUniformWithName(name string) *Uniform {
 	return &Uniform{inner: raw.SKUniformFromID(_id)}
 }
 
+// Initializes a new uniform object that holds a reference to a texture.
+//
 // NewUniformWithNameTexture creates a new [Uniform].
 func NewUniformWithNameTexture(name string, texture *raw.SKTexture) *Uniform {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
@@ -46,6 +52,8 @@ func NewUniformWithNameTexture(name string, texture *raw.SKTexture) *Uniform {
 	return &Uniform{inner: raw.SKUniformFromID(_id)}
 }
 
+// Initializes a new uniform object that holds a floating-point number.
+//
 // NewUniformWithNameFloat creates a new [Uniform].
 func NewUniformWithNameFloat(name string, value float32) *Uniform {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
@@ -95,6 +103,8 @@ func NewUniformWithNameMatrixFloat4x4(name string, value unsafe.Pointer) *Unifor
 	return &Uniform{inner: raw.SKUniformFromID(_id)}
 }
 
+// Initializes a new uniform object that holds a vector of two floating-point numbers.
+//
 // NewUniformWithNameFloatVector2 creates a new [Uniform].
 func NewUniformWithNameFloatVector2(name string, value unsafe.Pointer) *Uniform {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
@@ -102,6 +112,8 @@ func NewUniformWithNameFloatVector2(name string, value unsafe.Pointer) *Uniform 
 	return &Uniform{inner: raw.SKUniformFromID(_id)}
 }
 
+// Creates and initializes a new uniform object that holds a vector of three floating-point numbers.
+//
 // NewUniformWithNameFloatVector3 creates a new [Uniform].
 func NewUniformWithNameFloatVector3(name string, value unsafe.Pointer) *Uniform {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
@@ -109,6 +121,8 @@ func NewUniformWithNameFloatVector3(name string, value unsafe.Pointer) *Uniform 
 	return &Uniform{inner: raw.SKUniformFromID(_id)}
 }
 
+// Initializes a new uniform object that holds a vector of four floating-point numbers.
+//
 // NewUniformWithNameFloatVector4 creates a new [Uniform].
 func NewUniformWithNameFloatVector4(name string, value unsafe.Pointer) *Uniform {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
@@ -116,6 +130,8 @@ func NewUniformWithNameFloatVector4(name string, value unsafe.Pointer) *Uniform 
 	return &Uniform{inner: raw.SKUniformFromID(_id)}
 }
 
+// Initializes a new uniform object that holds a 2 x 2 matrix of floating-point numbers.
+//
 // NewUniformWithNameFloatMatrix2 creates a new [Uniform].
 func NewUniformWithNameFloatMatrix2(name string, value unsafe.Pointer) *Uniform {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
@@ -123,6 +139,8 @@ func NewUniformWithNameFloatMatrix2(name string, value unsafe.Pointer) *Uniform 
 	return &Uniform{inner: raw.SKUniformFromID(_id)}
 }
 
+// Initializes a new uniform object that holds a 3 x 3 matrix of floating-point numbers.
+//
 // NewUniformWithNameFloatMatrix3 creates a new [Uniform].
 func NewUniformWithNameFloatMatrix3(name string, value unsafe.Pointer) *Uniform {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
@@ -130,6 +148,8 @@ func NewUniformWithNameFloatMatrix3(name string, value unsafe.Pointer) *Uniform 
 	return &Uniform{inner: raw.SKUniformFromID(_id)}
 }
 
+// Initializes a new uniform object that holds a 4 x 4 matrix of floating-point numbers.
+//
 // NewUniformWithNameFloatMatrix4 creates a new [Uniform].
 func NewUniformWithNameFloatMatrix4(name string, value unsafe.Pointer) *Uniform {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKUniform")), objc.RegisterName("alloc"))
@@ -137,12 +157,16 @@ func NewUniformWithNameFloatMatrix4(name string, value unsafe.Pointer) *Uniform 
 	return &Uniform{inner: raw.SKUniformFromID(_id)}
 }
 
+// The receiver’s value as a SpriteKit texture.
+//
 // WithTextureValue sets the textureValue property and returns the receiver for chaining.
 func (x *Uniform) WithTextureValue(textureValue TextureProvider) *Uniform {
 	x.inner.SetTextureValue(textureValue.asTexture())
 	return x
 }
 
+// The receiver’s value as a floating-point value.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *Uniform) WithFloatValue(floatValue float32) *Uniform {
 	x.inner.SetFloatValue(floatValue)

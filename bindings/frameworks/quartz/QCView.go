@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The QCView class is a custom NSView class that loads, plays, and controls Quartz Composer compositions. It is an autonomous view that is driven by an internal timer running on the main thread.
+//
 // Apple documentation: https://developer.apple.com/documentation/quartz/qcview
 type QCView struct {
 	appkit.NSView
@@ -54,16 +56,19 @@ func QCViewFromID(id objc.ID) *QCView {
 	return o
 }
 
+// Loads the composition file located at the specified path.
 func (o *QCView) LoadCompositionFromFile(path *foundation.NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _qCViewSelLoadCompositionFromFile, path.Ptr())
 	return _ret
 }
 
+// Loads a QCComposition object into the view.
 func (o *QCView) LoadComposition(composition *QCComposition) bool {
 	_ret := objc.Send[bool](o.Ptr(), _qCViewSelLoadComposition, composition.Ptr())
 	return _ret
 }
 
+// Returns the composition loaded in the view.
 func (o *QCView) LoadedComposition() *QCComposition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelLoadedComposition)
 	if _ret != 0 {
@@ -72,23 +77,28 @@ func (o *QCView) LoadedComposition() *QCComposition {
 	return QCCompositionFromID(_ret)
 }
 
+// Unloads the composition from the view.
 func (o *QCView) UnloadComposition() {
 	o.Ptr().Send(_qCViewSelUnloadComposition)
 }
 
+// Sets whether the composition that is in the view starts rendering automatically when the view is put on the screen.
 func (o *QCView) SetAutostartsRendering(flag bool) {
 	o.Ptr().Send(_qCViewSelSetAutostartsRendering, flag)
 }
 
+// Checks whether the view is set to start rendering automatically.
 func (o *QCView) AutostartsRendering() bool {
 	_ret := objc.Send[bool](o.Ptr(), _qCViewSelAutostartsRendering)
 	return _ret
 }
 
+// Sets the color used to erase the view.
 func (o *QCView) SetEraseColor(color *appkit.NSColor) {
 	o.Ptr().Send(_qCViewSelSetEraseColor, color.Ptr())
 }
 
+// Retrieves the current color used to erase the view.
 func (o *QCView) EraseColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelEraseColor)
 	if _ret != 0 {
@@ -97,60 +107,73 @@ func (o *QCView) EraseColor() *appkit.NSColor {
 	return appkit.NSColorFromID(_ret)
 }
 
+// Sets the mask used to filter which types of events are forwarded from the view to the composition during rendering.
 func (o *QCView) SetEventForwardingMask(mask uint) {
 	o.Ptr().Send(_qCViewSelSetEventForwardingMask, mask)
 }
 
+// Retrieves the mask used to filter which types of events are forwarded from the view to the composition during rendering.
 func (o *QCView) EventForwardingMask() uint {
 	_ret := objc.Send[uint](o.Ptr(), _qCViewSelEventForwardingMask)
 	return _ret
 }
 
+// Sets the maximum rendering frame rate.
 func (o *QCView) SetMaxRenderingFrameRate(maxFPS float32) {
 	o.Ptr().Send(_qCViewSelSetMaxRenderingFrameRate, maxFPS)
 }
 
+// Returns the maximum frame rate for rendering.
 func (o *QCView) MaxRenderingFrameRate() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _qCViewSelMaxRenderingFrameRate)
 	return _ret
 }
 
+// Clears the view using the current erase color.
 func (o *QCView) Erase() {
 	o.Ptr().Send(_qCViewSelErase)
 }
 
+// Starts rendering the composition that is in the view.
 func (o *QCView) StartRendering() bool {
 	_ret := objc.Send[bool](o.Ptr(), _qCViewSelStartRendering)
 	return _ret
 }
 
+// Overrides to perform your custom operations prior to or after rendering a frame of a composition.
 func (o *QCView) RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	_ret := objc.Send[bool](o.Ptr(), _qCViewSelRenderAtTimeArguments, time_, arguments)
+	_ret := objc.Send[bool](o.Ptr(), _qCViewSelRenderAtTimeArguments, time_, arguments.Ptr())
 	return _ret
 }
 
+// Pauses rendering in the view.
 func (o *QCView) PauseRendering() {
 	o.Ptr().Send(_qCViewSelPauseRendering)
 }
 
+// Returns whether or not the rendering in the view is paused.
 func (o *QCView) IsPausedRendering() bool {
 	_ret := objc.Send[bool](o.Ptr(), _qCViewSelIsPausedRendering)
 	return _ret
 }
 
+// Resumes rendering a paused composition.
 func (o *QCView) ResumeRendering() {
 	o.Ptr().Send(_qCViewSelResumeRendering)
 }
 
+// Stops rendering the composition that is in the view.
 func (o *QCView) StopRendering() {
 	o.Ptr().Send(_qCViewSelStopRendering)
 }
 
+// Checks whether a composition is rendering in the view.
 func (o *QCView) IsRendering() bool {
 	_ret := objc.Send[bool](o.Ptr(), _qCViewSelIsRendering)
 	return _ret
 }
 
+// Returns an NSImage object of the current image in the view.
 func (o *QCView) SnapshotImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelSnapshotImage)
 	if _ret != 0 {
@@ -159,11 +182,13 @@ func (o *QCView) SnapshotImage() *appkit.NSImage {
 	return appkit.NSImageFromID(_ret)
 }
 
+// Returns the current image in the view as an image object of the provided image type.
 func (o *QCView) CreateSnapshotImageOfType(type_ *foundation.NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelCreateSnapshotImageOfType, type_.Ptr())
 	return _ret
 }
 
+// Returns the OpenGL context used by the view.
 func (o *QCView) OpenGLContext() *appkit.NSOpenGLContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelOpenGLContext)
 	if _ret != 0 {
@@ -172,6 +197,7 @@ func (o *QCView) OpenGLContext() *appkit.NSOpenGLContext {
 	return appkit.NSOpenGLContextFromID(_ret)
 }
 
+// Returns the OpenGL pixel format used by the view.
 func (o *QCView) OpenGLPixelFormat() *appkit.NSOpenGLPixelFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelOpenGLPixelFormat)
 	if _ret != 0 {

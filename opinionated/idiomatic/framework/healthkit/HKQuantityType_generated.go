@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that identifies samples that store numerical values.
+//
 // QuantityType wraps [raw.HKQuantityType] with a fluent Go API.
 type QuantityType struct {
 	inner *raw.HKQuantityType
@@ -35,7 +37,7 @@ func NewQuantityType() *QuantityType {
 	return &QuantityType{inner: raw.HKQuantityTypeFromID(_id)}
 }
 
-// @method        isCompatibleWithUnit: @abstract      Returns YES if the type of HKQuantitySample represented by the receiver can be created with quantities of the given unit.
+// Returns a Boolean value that indicates whether the quantity type is compatible with the given unit.
 //
 // IsCompatibleWithUnit calls the underlying IsCompatibleWithUnit.
 func (x *QuantityType) IsCompatibleWithUnit(unit *raw.HKUnit) bool {

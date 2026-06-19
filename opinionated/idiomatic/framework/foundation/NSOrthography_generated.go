@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of the linguistic content of natural language text, typically used for spelling and grammar checking.
+//
 // Orthography wraps [raw.NSOrthography] with a fluent Go API.
 type Orthography struct {
 	inner *raw.NSOrthography
@@ -31,6 +33,8 @@ func OrthographyFromID(id objc.ID) *Orthography {
 	return &Orthography{inner: raw.NSOrthographyFromID(id)}
 }
 
+// Creates an orthography object with the specified dominant script and language map.
+//
 // NewOrthographyWithDominantScriptLanguageMap creates a new [Orthography].
 func NewOrthographyWithDominantScriptLanguageMap(script string, map_ purego.IDer) *Orthography {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrthography")), objc.RegisterName("alloc"))
@@ -65,11 +69,15 @@ func (x *Orthography) LanguageMap() *raw.NSDictionary[*raw.NSString, objc.ID] {
 	return x.inner.LanguageMap()
 }
 
+// Returns the list of languages for the specified script.
+//
 // LanguagesForScript calls the underlying LanguagesForScript.
 func (x *Orthography) LanguagesForScript(script string) *raw.NSArray[*raw.NSString] {
 	return x.inner.LanguagesForScript(foundation.NSStringStringWithUTF8String(script))
 }
 
+// Returns the dominant language for the specified script.
+//
 // DominantLanguageForScript calls the underlying DominantLanguageForScript.
 func (x *Orthography) DominantLanguageForScript(script string) *String {
 	_r := x.inner.DominantLanguageForScript(foundation.NSStringStringWithUTF8String(script))

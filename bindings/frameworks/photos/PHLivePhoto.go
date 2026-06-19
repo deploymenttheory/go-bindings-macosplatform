@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A displayable representation of a Live Photo—a picture that includes motion and sound from the moments just before and after its capture.
+//
 // Apple documentation: https://developer.apple.com/documentation/photos/phlivephoto
 type PHLivePhoto struct {
 	foundation.NSObject
@@ -34,12 +36,26 @@ func PHLivePhotoFromID(id objc.ID) *PHLivePhoto {
 	return o
 }
 
-func PHLivePhotoRequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler(fileURLs *foundation.NSArray[*foundation.NSURL], image *appkit.NSImage, targetSize corefoundation.CGSize, contentMode PHImageContentMode, resultHandler objc.Block) int32 {
-	_ret := objc.Send[int32](objc.ID(_clsPHLivePhoto), _pHLivePhotoSelRequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler, fileURLs, image.Ptr(), targetSize, contentMode, resultHandler)
+// Asynchronously loads a Live Photo from the specified resource files.
+func PHLivePhotoRequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler(fileURLs *foundation.NSArray[*foundation.NSURL], image *appkit.NSImage, targetSize corefoundation.CGSize, contentMode PHImageContentMode, resultHandler func(*PHLivePhoto, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
+	var __block_resultHandler objc.Block
+	if resultHandler != nil {
+		__block_resultHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID) {
+			if blockParam0 != 0 {
+				blockParam0.Send(objc.RegisterName("retain"))
+			}
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			resultHandler(PHLivePhotoFromID(blockParam0), foundation.NSDictionaryFromID[objc.ID, objc.ID](blockParam1))
+		})
+		defer __block_resultHandler.Release()
+	}
+	_ret := objc.Send[int32](objc.ID(_clsPHLivePhoto), _pHLivePhotoSelRequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler, fileURLs.Ptr(), image.Ptr(), targetSize, contentMode, __block_resultHandler)
 	return _ret
 }
 
-// Cancels the loading of a PHLivePhoto. The request's completion handler will be called.
+// Cancels an asynchronous request
 func PHLivePhotoCancelLivePhotoRequestWithRequestID(requestID int32) {
 	objc.ID(_clsPHLivePhoto).Send(_pHLivePhotoSelCancelLivePhotoRequestWithRequestID, requestID)
 }

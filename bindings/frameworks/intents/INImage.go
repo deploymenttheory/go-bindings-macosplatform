@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Image data inside an Intents extension or Intents UI extension.
+//
 // Apple documentation: https://developer.apple.com/documentation/intents/inimage
 type INImage struct {
 	foundation.NSObject
@@ -30,6 +32,7 @@ func INImageFromID(id objc.ID) *INImage {
 	return o
 }
 
+// Creates an image object from an image file in the extension’s bundle.
 func INImageImageNamed(name *foundation.NSString) *INImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINImage), _iNImageSelImageNamed, name.Ptr())
 	if _ret != 0 {

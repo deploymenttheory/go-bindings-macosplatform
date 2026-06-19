@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes the deletion of an individual record.
+//
 // Apple documentation: https://developer.apple.com/documentation/cloudkit/cksyncenginefetchedrecorddeletion
 type CKSyncEngineFetchedRecordDeletion struct {
 	foundation.NSObject

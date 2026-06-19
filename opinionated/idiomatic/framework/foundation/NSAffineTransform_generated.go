@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A graphics coordinate transformation.
+//
 // AffineTransform wraps [raw.NSAffineTransform] with a fluent Go API.
 type AffineTransform struct {
 	inner *raw.NSAffineTransform
@@ -36,6 +38,8 @@ func NewAffineTransform() *AffineTransform {
 	return &AffineTransform{inner: raw.NSAffineTransformFromID(_id)}
 }
 
+// Initializes the receiver’s matrix using another transform object.
+//
 // NewAffineTransformWithTransform creates a new [AffineTransform].
 func NewAffineTransformWithTransform(transform *raw.NSAffineTransform) *AffineTransform {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAffineTransform")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewAffineTransformWithTransform(transform *raw.NSAffineTransform) *AffineTr
 	return &AffineTransform{inner: raw.NSAffineTransformFromID(_id)}
 }
 
+// The matrix coefficients stored as the transformation matrix.
+//
 // WithTransformStruct sets the transformStruct property and returns the receiver for chaining.
 func (x *AffineTransform) WithTransformStruct(transformStruct raw.NSAffineTransformStruct) *AffineTransform {
 	x.inner.SetTransformStruct(transformStruct)
@@ -55,51 +61,71 @@ func (x *AffineTransform) WithScriptingProperties(scriptingProperties *raw.NSDic
 	return x
 }
 
+// Applies the specified translation factors to the receiver’s transformation matrix.
+//
 // TranslateXByYBy calls the underlying TranslateXByYBy.
 func (x *AffineTransform) TranslateXByYBy(deltaX float64, deltaY float64) {
 	x.inner.TranslateXByYBy(deltaX, deltaY)
 }
 
+// Applies a rotation factor (measured in degrees) to the receiver’s transformation matrix.
+//
 // RotateByDegrees calls the underlying RotateByDegrees.
 func (x *AffineTransform) RotateByDegrees(angle float64) {
 	x.inner.RotateByDegrees(angle)
 }
 
+// Applies a rotation factor (measured in radians) to the receiver’s transformation matrix.
+//
 // RotateByRadians calls the underlying RotateByRadians.
 func (x *AffineTransform) RotateByRadians(angle float64) {
 	x.inner.RotateByRadians(angle)
 }
 
+// Applies the specified scaling factor along both x and y axes to the receiver’s transformation matrix.
+//
 // ScaleBy calls the underlying ScaleBy.
 func (x *AffineTransform) ScaleBy(scale float64) {
 	x.inner.ScaleBy(scale)
 }
 
+// Applies scaling factors to each axis of the receiver’s transformation matrix.
+//
 // ScaleXByYBy calls the underlying ScaleXByYBy.
 func (x *AffineTransform) ScaleXByYBy(scaleX float64, scaleY float64) {
 	x.inner.ScaleXByYBy(scaleX, scaleY)
 }
 
+// Replaces the receiver’s matrix with its inverse matrix.
+//
 // Invert calls the underlying Invert.
 func (x *AffineTransform) Invert() {
 	x.inner.Invert()
 }
 
+// Appends the specified matrix to the receiver’s matrix.
+//
 // AppendTransform calls the underlying AppendTransform.
 func (x *AffineTransform) AppendTransform(transform *raw.NSAffineTransform) {
 	x.inner.AppendTransform(transform)
 }
 
+// Prepends the specified matrix to the receiver’s matrix.
+//
 // PrependTransform calls the underlying PrependTransform.
 func (x *AffineTransform) PrependTransform(transform *raw.NSAffineTransform) {
 	x.inner.PrependTransform(transform)
 }
 
+// Applies the receiver’s transform to the specified point and returns the result.
+//
 // TransformPoint calls the underlying TransformPoint.
 func (x *AffineTransform) TransformPoint(aPoint corefoundation.CGPoint) corefoundation.CGPoint {
 	return x.inner.TransformPoint(aPoint)
 }
 
+// Applies the receiver’s transform to the specified size and returns the results.
+//
 // TransformSize calls the underlying TransformSize.
 func (x *AffineTransform) TransformSize(aSize corefoundation.CGSize) corefoundation.CGSize {
 	return x.inner.TransformSize(aSize)

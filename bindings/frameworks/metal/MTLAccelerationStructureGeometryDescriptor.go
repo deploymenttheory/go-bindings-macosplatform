@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class for descriptors that contain geometry data to convert into a ray-tracing acceleration structure.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlaccelerationstructuregeometrydescriptor
 type MTLAccelerationStructureGeometryDescriptor struct {
 	foundation.NSObject

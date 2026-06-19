@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A rule for filters that combines a rule to match network traffic and an action to take when the rule matches.
+//
 // NEFilterRule wraps [raw.NEFilterRule] with a fluent Go API.
 type NEFilterRule struct {
 	inner *raw.NEFilterRule
@@ -29,7 +31,7 @@ func NEFilterRuleFromID(id objc.ID) *NEFilterRule {
 	return &NEFilterRule{inner: raw.NEFilterRuleFromID(id)}
 }
 
-// @method initWithNetworkRule:action: @discussion Initialize a newly-allocated NEFilterRule object @param networkRule A NENetworkRule object that defines the network traffic characteristics that this rule matches. @param action The action to take when this rule matches.
+// Creates a new filter rule from a network rule and an action to take when network traffic matches.
 //
 // NewNEFilterRuleWithNetworkRuleAction creates a new [NEFilterRule].
 func NewNEFilterRuleWithNetworkRuleAction(networkRule *raw.NENetworkRule, action NEFilterAction) *NEFilterRule {

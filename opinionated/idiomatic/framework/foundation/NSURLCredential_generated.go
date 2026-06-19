@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An authentication credential consisting of information specific to the type of credential and the type of persistent storage to use, if any.
+//
 // URLCredential wraps [raw.NSURLCredential] with a fluent Go API.
 type URLCredential struct {
 	inner *raw.NSURLCredential

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Measurements of the Earth’s magnetic field relative to the device.
+//
 // MagnetometerData wraps [raw.CMMagnetometerData] with a fluent Go API.
 type MagnetometerData struct {
 	inner *raw.CMMagnetometerData

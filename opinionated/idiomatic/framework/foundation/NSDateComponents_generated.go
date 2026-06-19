@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that specifies a date or time in terms of units (such as year, month, day, hour, and minute) to be evaluated in a calendar system and time zone.
+//
 // DateComponents wraps [raw.NSDateComponents] with a fluent Go API.
 type DateComponents struct {
 	inner *raw.NSDateComponents
@@ -35,108 +37,144 @@ func NewDateComponents() *DateComponents {
 	return &DateComponents{inner: raw.NSDateComponentsFromID(_id)}
 }
 
+// The calendar used to interpret the date components.
+//
 // WithCalendar sets the calendar property and returns the receiver for chaining.
 func (x *DateComponents) WithCalendar(calendar *Calendar) *DateComponents {
 	x.inner.SetCalendar(calendar.Unwrap())
 	return x
 }
 
+// The time zone used to interpret the date components.
+//
 // WithTimeZone sets the timeZone property and returns the receiver for chaining.
 func (x *DateComponents) WithTimeZone(timeZone *TimeZone) *DateComponents {
 	x.inner.SetTimeZone(timeZone.Unwrap())
 	return x
 }
 
+// The number of eras.
+//
 // WithEra sets the era property and returns the receiver for chaining.
 func (x *DateComponents) WithEra(era int) *DateComponents {
 	x.inner.SetEra(era)
 	return x
 }
 
+// The number of years.
+//
 // WithYear sets the year property and returns the receiver for chaining.
 func (x *DateComponents) WithYear(year int) *DateComponents {
 	x.inner.SetYear(year)
 	return x
 }
 
+// The number of months.
+//
 // WithMonth sets the month property and returns the receiver for chaining.
 func (x *DateComponents) WithMonth(month int) *DateComponents {
 	x.inner.SetMonth(month)
 	return x
 }
 
+// The number of days.
+//
 // WithDay sets the day property and returns the receiver for chaining.
 func (x *DateComponents) WithDay(day int) *DateComponents {
 	x.inner.SetDay(day)
 	return x
 }
 
+// The number of hour units for the receiver.
+//
 // WithHour sets the hour property and returns the receiver for chaining.
 func (x *DateComponents) WithHour(hour int) *DateComponents {
 	x.inner.SetHour(hour)
 	return x
 }
 
+// The number of minute units for the receiver.
+//
 // WithMinute sets the minute property and returns the receiver for chaining.
 func (x *DateComponents) WithMinute(minute int) *DateComponents {
 	x.inner.SetMinute(minute)
 	return x
 }
 
+// The number of second units for the receiver.
+//
 // WithSecond sets the second property and returns the receiver for chaining.
 func (x *DateComponents) WithSecond(second int) *DateComponents {
 	x.inner.SetSecond(second)
 	return x
 }
 
+// The number of nanosecond units for the receiver.
+//
 // WithNanosecond sets the nanosecond property and returns the receiver for chaining.
 func (x *DateComponents) WithNanosecond(nanosecond int) *DateComponents {
 	x.inner.SetNanosecond(nanosecond)
 	return x
 }
 
+// The number of the weekdays.
+//
 // WithWeekday sets the weekday property and returns the receiver for chaining.
 func (x *DateComponents) WithWeekday(weekday int) *DateComponents {
 	x.inner.SetWeekday(weekday)
 	return x
 }
 
+// The ordinal number of weekdays.
+//
 // WithWeekdayOrdinal sets the weekdayOrdinal property and returns the receiver for chaining.
 func (x *DateComponents) WithWeekdayOrdinal(weekdayOrdinal int) *DateComponents {
 	x.inner.SetWeekdayOrdinal(weekdayOrdinal)
 	return x
 }
 
+// The number of quarters.
+//
 // WithQuarter sets the quarter property and returns the receiver for chaining.
 func (x *DateComponents) WithQuarter(quarter int) *DateComponents {
 	x.inner.SetQuarter(quarter)
 	return x
 }
 
+// The week number of the months.
+//
 // WithWeekOfMonth sets the weekOfMonth property and returns the receiver for chaining.
 func (x *DateComponents) WithWeekOfMonth(weekOfMonth int) *DateComponents {
 	x.inner.SetWeekOfMonth(weekOfMonth)
 	return x
 }
 
+// The ISO 8601 week date of the year.
+//
 // WithWeekOfYear sets the weekOfYear property and returns the receiver for chaining.
 func (x *DateComponents) WithWeekOfYear(weekOfYear int) *DateComponents {
 	x.inner.SetWeekOfYear(weekOfYear)
 	return x
 }
 
+// The ISO 8601 week-numbering year.
+//
 // WithYearForWeekOfYear sets the yearForWeekOfYear property and returns the receiver for chaining.
 func (x *DateComponents) WithYearForWeekOfYear(yearForWeekOfYear int) *DateComponents {
 	x.inner.SetYearForWeekOfYear(yearForWeekOfYear)
 	return x
 }
 
+// The day of the year value of the date components.
+//
 // WithDayOfYear sets the dayOfYear property and returns the receiver for chaining.
 func (x *DateComponents) WithDayOfYear(dayOfYear int) *DateComponents {
 	x.inner.SetDayOfYear(dayOfYear)
 	return x
 }
 
+// A Boolean value that indicates whether the month is a leap month.
+//
 // WithLeapMonth sets the leapMonth property and returns the receiver for chaining.
 func (x *DateComponents) WithLeapMonth(leapMonth bool) *DateComponents {
 	x.inner.SetLeapMonth(leapMonth)
@@ -155,26 +193,36 @@ func (x *DateComponents) WithScriptingProperties(scriptingProperties *raw.NSDict
 	return x
 }
 
+// Returns the number of weeks.
+//
 // Week calls the underlying Week.
 func (x *DateComponents) Week() int {
 	return x.inner.Week()
 }
 
+// Sets the number of weeks.
+//
 // SetWeek calls the underlying SetWeek.
 func (x *DateComponents) SetWeek(v int) {
 	x.inner.SetWeek(v)
 }
 
+// Sets a value for a given calendar unit.
+//
 // SetValueForComponent calls the underlying SetValueForComponent.
 func (x *DateComponents) SetValueForComponent(value int, unit NSCalendarUnit) {
 	x.inner.SetValueForComponent(value, raw.NSCalendarUnit(unit))
 }
 
+// Returns the value for a given calendar unit.
+//
 // ValueForComponent calls the underlying ValueForComponent.
 func (x *DateComponents) ValueForComponent(unit NSCalendarUnit) int {
 	return x.inner.ValueForComponent(raw.NSCalendarUnit(unit))
 }
 
+// Returns a Boolean value that indicates whether the current combination of properties represents a date which exists in the specified calendar.
+//
 // IsValidDateInCalendar calls the underlying IsValidDateInCalendar.
 func (x *DateComponents) IsValidDateInCalendar(calendar *raw.NSCalendar) bool {
 	return x.inner.IsValidDateInCalendar(calendar)

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Information about the arguments of a graphics function.
+//
 // Apple documentation: https://developer.apple.com/documentation/metal/mtlrenderpipelinereflection
 type MTLRenderPipelineReflection struct {
 	foundation.NSObject

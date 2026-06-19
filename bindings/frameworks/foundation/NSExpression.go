@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An expression for use in a comparison predicate.
+//
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsexpression
 type NSExpression struct {
 	NSObject
@@ -63,14 +65,16 @@ func NSExpressionFromID(id objc.ID) *NSExpression {
 	return o
 }
 
+// Creates the expression with the specified expression format and array of arguments.
 func NSExpressionExpressionWithFormatArgumentArray(expressionFormat *NSString, arguments *NSArray[objc.ID]) *NSExpression {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionWithFormatArgumentArray, expressionFormat.Ptr(), arguments)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionWithFormatArgumentArray, expressionFormat.Ptr(), arguments.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSExpressionFromID(_ret)
 }
 
+// Creates the expression with the specified expression arguments.
 func NSExpressionExpressionWithFormat(expressionFormat *NSString) *NSExpression {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionWithFormat, expressionFormat.Ptr())
 	if _ret != 0 {
@@ -79,6 +83,7 @@ func NSExpressionExpressionWithFormat(expressionFormat *NSString) *NSExpression 
 	return NSExpressionFromID(_ret)
 }
 
+// Creates the expression with the specified expression format and arguments list.
 func NSExpressionExpressionWithFormatArguments(expressionFormat *NSString, argList string) *NSExpression {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionWithFormatArguments, expressionFormat.Ptr(), argList)
 	if _ret != 0 {
@@ -87,6 +92,7 @@ func NSExpressionExpressionWithFormatArguments(expressionFormat *NSString, argLi
 	return NSExpressionFromID(_ret)
 }
 
+// Creates an expression that represents a specified constant value.
 func NSExpressionExpressionForConstantValue(obj objc.ID) *NSExpression {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForConstantValue, obj)
 	if _ret != 0 {
@@ -95,6 +101,7 @@ func NSExpressionExpressionForConstantValue(obj objc.ID) *NSExpression {
 	return NSExpressionFromID(_ret)
 }
 
+// Creates an expression that represents the object you’re evaluating.
 func NSExpressionExpressionForEvaluatedObject() *NSExpression {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForEvaluatedObject)
 	if _ret != 0 {
@@ -103,6 +110,7 @@ func NSExpressionExpressionForEvaluatedObject() *NSExpression {
 	return NSExpressionFromID(_ret)
 }
 
+// Creates an expression that extracts a value from the variable bindings dictionary for a specified key.
 func NSExpressionExpressionForVariable(string_ *NSString) *NSExpression {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForVariable, string_.Ptr())
 	if _ret != 0 {
@@ -111,6 +119,7 @@ func NSExpressionExpressionForVariable(string_ *NSString) *NSExpression {
 	return NSExpressionFromID(_ret)
 }
 
+// Creates an expression that invokes the value function with a specified key path.
 func NSExpressionExpressionForKeyPath(keyPath *NSString) *NSExpression {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForKeyPath, keyPath.Ptr())
 	if _ret != 0 {
@@ -119,14 +128,16 @@ func NSExpressionExpressionForKeyPath(keyPath *NSString) *NSExpression {
 	return NSExpressionFromID(_ret)
 }
 
+// Creates an expression that invokes one of the predefined functions.
 func NSExpressionExpressionForFunctionArguments(name *NSString, parameters *NSArray[objc.ID]) *NSExpression {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForFunctionArguments, name.Ptr(), parameters)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForFunctionArguments, name.Ptr(), parameters.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSExpressionFromID(_ret)
 }
 
+// Creates an aggregate expression for a specified collection.
 func NSExpressionExpressionForAggregate(subexpressions *NSArray[*NSExpression]) *NSExpression {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForAggregate, subexpressions.Ptr())
 	if _ret != 0 {
@@ -135,6 +146,7 @@ func NSExpressionExpressionForAggregate(subexpressions *NSArray[*NSExpression]) 
 	return NSExpressionFromID(_ret)
 }
 
+// Creates an expression object that represents the union of a specified set and collection.
 func NSExpressionExpressionForUnionSetWith(left *NSExpression, right *NSExpression) *NSExpression {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForUnionSetWith, left.Ptr(), right.Ptr())
 	if _ret != 0 {
@@ -143,6 +155,7 @@ func NSExpressionExpressionForUnionSetWith(left *NSExpression, right *NSExpressi
 	return NSExpressionFromID(_ret)
 }
 
+// Creates an expression object that represents the intersection of a specified set and collection.
 func NSExpressionExpressionForIntersectSetWith(left *NSExpression, right *NSExpression) *NSExpression {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForIntersectSetWith, left.Ptr(), right.Ptr())
 	if _ret != 0 {
@@ -151,6 +164,7 @@ func NSExpressionExpressionForIntersectSetWith(left *NSExpression, right *NSExpr
 	return NSExpressionFromID(_ret)
 }
 
+// Creates an expression object that represents the subtraction of a specified collection from a specified set.
 func NSExpressionExpressionForMinusSetWith(left *NSExpression, right *NSExpression) *NSExpression {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForMinusSetWith, left.Ptr(), right.Ptr())
 	if _ret != 0 {
@@ -159,6 +173,7 @@ func NSExpressionExpressionForMinusSetWith(left *NSExpression, right *NSExpressi
 	return NSExpressionFromID(_ret)
 }
 
+// Creates an expression that filters a collection by storing elements in the collection in a specified variable and keeping the elements that the qualifier returns as true.
 func NSExpressionExpressionForSubqueryUsingIteratorVariablePredicate(expression *NSExpression, variable *NSString, predicate *NSPredicate) *NSExpression {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForSubqueryUsingIteratorVariablePredicate, expression.Ptr(), variable.Ptr(), predicate.Ptr())
 	if _ret != 0 {
@@ -167,14 +182,16 @@ func NSExpressionExpressionForSubqueryUsingIteratorVariablePredicate(expression 
 	return NSExpressionFromID(_ret)
 }
 
+// Creates an expression that returns the result of invoking a selector with a specified name using specified arguments.
 func NSExpressionExpressionForFunctionSelectorNameArguments(target *NSExpression, name *NSString, parameters *NSArray[objc.ID]) *NSExpression {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForFunctionSelectorNameArguments, target.Ptr(), name.Ptr(), parameters)
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForFunctionSelectorNameArguments, target.Ptr(), name.Ptr(), parameters.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSExpressionFromID(_ret)
 }
 
+// Creates an expression that represents any key for a Spotlight query.
 func NSExpressionExpressionForAnyKey() *NSExpression {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForAnyKey)
 	if _ret != 0 {
@@ -183,14 +200,29 @@ func NSExpressionExpressionForAnyKey() *NSExpression {
 	return NSExpressionFromID(_ret)
 }
 
-func NSExpressionExpressionForBlockArguments(block objc.Block, arguments *NSArray[*NSExpression]) *NSExpression {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForBlockArguments, block, arguments.Ptr())
+// Creates an expression object that uses the block for evaluating objects.
+func NSExpressionExpressionForBlockArguments(block func(objc.ID, *NSArray[*NSExpression], *NSMutableDictionary[objc.ID, objc.ID]) objc.ID, arguments *NSArray[*NSExpression]) *NSExpression {
+	var __block_block objc.Block
+	if block != nil {
+		__block_block = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 objc.ID, blockParam2 objc.ID) objc.ID {
+			if blockParam1 != 0 {
+				blockParam1.Send(objc.RegisterName("retain"))
+			}
+			if blockParam2 != 0 {
+				blockParam2.Send(objc.RegisterName("retain"))
+			}
+			return block(blockParam0, NSArrayFromID[*NSExpression](blockParam1), NSMutableDictionaryFromID[objc.ID, objc.ID](blockParam2))
+		})
+		defer __block_block.Release()
+	}
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForBlockArguments, __block_block, arguments.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
 	return NSExpressionFromID(_ret)
 }
 
+// Creates an expression that returns a result, depending on the value of predicate.
 func NSExpressionExpressionForConditionalTrueExpressionFalseExpression(predicate *NSPredicate, trueExpression *NSExpression, falseExpression *NSExpression) *NSExpression {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSExpression), _nSExpressionSelExpressionForConditionalTrueExpressionFalseExpression, predicate.Ptr(), trueExpression.Ptr(), falseExpression.Ptr())
 	if _ret != 0 {
@@ -199,6 +231,7 @@ func NSExpressionExpressionForConditionalTrueExpressionFalseExpression(predicate
 	return NSExpressionFromID(_ret)
 }
 
+// Creates the expression with the specified expression type.
 func (o *NSExpression) InitWithExpressionType(type_ NSExpressionType) *NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelInitWithExpressionType, type_)
 	if _ret != 0 {
@@ -207,6 +240,7 @@ func (o *NSExpression) InitWithExpressionType(type_ NSExpressionType) *NSExpress
 	return NSExpressionFromID(_ret)
 }
 
+// Creates an expression by decoding from the coder you specify.
 func (o *NSExpression) InitWithCoder(coder *NSCoder) *NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelInitWithCoder, coder.Ptr())
 	if _ret != 0 {
@@ -215,11 +249,13 @@ func (o *NSExpression) InitWithCoder(coder *NSCoder) *NSExpression {
 	return NSExpressionFromID(_ret)
 }
 
+// Evaluates an expression using a specified object and context.
 func (o *NSExpression) ExpressionValueWithObjectContext(object objc.ID, context_ *NSMutableDictionary[objc.ID, objc.ID]) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelExpressionValueWithObjectContext, object, context_)
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSExpressionSelExpressionValueWithObjectContext, object, context_.Ptr())
 	return _ret
 }
 
+// Forces a securely decoded expression to allow evaluation.
 func (o *NSExpression) AllowEvaluation() {
 	o.Ptr().Send(_nSExpressionSelAllowEvaluation)
 }

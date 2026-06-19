@@ -62,6 +62,7 @@ func (e CNCinematicErrorCode) String() string {
 	}
 }
 
+// The type of object detected, such as face, torso, cat, dog and so on.
 type CNDetectionType int64
 
 const (
@@ -110,6 +111,7 @@ func (e CNDetectionType) String() string {
 	}
 }
 
+// The rendering quality, such as thumbnail, preview, export and so on.
 type CNRenderingQuality int64
 
 const (

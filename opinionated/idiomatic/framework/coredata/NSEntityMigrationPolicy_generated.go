@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A policy instance that customizes the migration process for an entity mapping.
+//
 // EntityMigrationPolicy wraps [raw.NSEntityMigrationPolicy] with a fluent Go API.
 type EntityMigrationPolicy struct {
 	inner *raw.NSEntityMigrationPolicy
@@ -35,36 +37,50 @@ func NewEntityMigrationPolicy() *EntityMigrationPolicy {
 	return &EntityMigrationPolicy{inner: raw.NSEntityMigrationPolicyFromID(_id)}
 }
 
+// Sets up state information before the start of a given entity mapping.
+//
 // BeginEntityMappingManagerError calls the underlying BeginEntityMappingManagerError.
 func (x *EntityMigrationPolicy) BeginEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
 	return x.inner.BeginEntityMappingManagerError(mapping, manager)
 }
 
+// Creates the destination instance(s) for a given source instance.
+//
 // CreateDestinationInstancesForSourceInstanceEntityMappingManagerError calls the underlying CreateDestinationInstancesForSourceInstanceEntityMappingManagerError.
 func (x *EntityMigrationPolicy) CreateDestinationInstancesForSourceInstanceEntityMappingManagerError(sInstance *raw.NSManagedObject, mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
 	return x.inner.CreateDestinationInstancesForSourceInstanceEntityMappingManagerError(sInstance, mapping, manager)
 }
 
+// Indicates the end of the instance creation stage for the specified entity mapping, and the precursor to the next migration stage.
+//
 // EndInstanceCreationForEntityMappingManagerError calls the underlying EndInstanceCreationForEntityMappingManagerError.
 func (x *EntityMigrationPolicy) EndInstanceCreationForEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
 	return x.inner.EndInstanceCreationForEntityMappingManagerError(mapping, manager)
 }
 
+// Constructs the relationships between the newly-created destination instances.
+//
 // CreateRelationshipsForDestinationInstanceEntityMappingManagerError calls the underlying CreateRelationshipsForDestinationInstanceEntityMappingManagerError.
 func (x *EntityMigrationPolicy) CreateRelationshipsForDestinationInstanceEntityMappingManagerError(dInstance *raw.NSManagedObject, mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
 	return x.inner.CreateRelationshipsForDestinationInstanceEntityMappingManagerError(dInstance, mapping, manager)
 }
 
+// Indicates the end of the relationship creation stage for the specified entity mapping.
+//
 // EndRelationshipCreationForEntityMappingManagerError calls the underlying EndRelationshipCreationForEntityMappingManagerError.
 func (x *EntityMigrationPolicy) EndRelationshipCreationForEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
 	return x.inner.EndRelationshipCreationForEntityMappingManagerError(mapping, manager)
 }
 
+// Provides the option to perform custom validation on migrated objects during the validation stage of the entity migration policy.
+//
 // PerformCustomValidationForEntityMappingManagerError calls the underlying PerformCustomValidationForEntityMappingManagerError.
 func (x *EntityMigrationPolicy) PerformCustomValidationForEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
 	return x.inner.PerformCustomValidationForEntityMappingManagerError(mapping, manager)
 }
 
+// Performs cleanup at the end of the migration, from any phase of the mapping.
+//
 // EndEntityMappingManagerError calls the underlying EndEntityMappingManagerError.
 func (x *EntityMigrationPolicy) EndEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
 	return x.inner.EndEntityMappingManagerError(mapping, manager)

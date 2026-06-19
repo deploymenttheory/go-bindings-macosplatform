@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A vector allocated on GPU private memory.
+//
 // TemporaryVector wraps [raw.MPSTemporaryVector] with a fluent Go API.
 type TemporaryVector struct {
 	inner *raw.MPSTemporaryVector

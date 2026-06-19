@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A dynamic ordered collection of objects.
+//
 // MutableArray wraps [raw.NSMutableArray] with a fluent Go API.
 type MutableArray struct {
 	inner *raw.NSMutableArray[objc.ID]
@@ -37,6 +39,8 @@ func NewMutableArray() *MutableArray {
 	return &MutableArray{inner: raw.NSMutableArrayFromID[objc.ID](_id)}
 }
 
+// Returns an array, initialized with enough memory to initially hold a given number of objects.
+//
 // NewMutableArrayWithCapacity creates a new [MutableArray].
 func NewMutableArrayWithCapacity(numItems uint) *MutableArray {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")), objc.RegisterName("alloc"))
@@ -51,6 +55,8 @@ func NewMutableArrayWithCoder(coder *raw.NSCoder) *MutableArray {
 	return &MutableArray{inner: raw.NSMutableArrayFromID[objc.ID](_id)}
 }
 
+// Initializes a newly allocated mutable array with the contents of the file specified by a given path
+//
 // NewMutableArrayWithContentsOfFile creates a new [MutableArray].
 func NewMutableArrayWithContentsOfFile(path string) *MutableArray {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")), objc.RegisterName("alloc"))
@@ -58,6 +64,8 @@ func NewMutableArrayWithContentsOfFile(path string) *MutableArray {
 	return &MutableArray{inner: raw.NSMutableArrayFromID[objc.ID](_id)}
 }
 
+// Initialized a newly allocated mutable array with the contents of the location specified by a given URL.
+//
 // NewMutableArrayWithContentsOfURL creates a new [MutableArray].
 func NewMutableArrayWithContentsOfURL(url string) *MutableArray {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")), objc.RegisterName("alloc"))
@@ -71,131 +79,183 @@ func (x *MutableArray) WithScriptingProperties(scriptingProperties *raw.NSDictio
 	return x
 }
 
+// Inserts a given object at the end of the array.
+//
 // AddObject calls the underlying AddObject.
 func (x *MutableArray) AddObject(anObject objc.ID) {
 	x.inner.AddObject(anObject)
 }
 
+// Inserts a given object into the array’s contents at a given index.
+//
 // InsertObjectAtIndex calls the underlying InsertObjectAtIndex.
 func (x *MutableArray) InsertObjectAtIndex(anObject objc.ID, index uint) {
 	x.inner.InsertObjectAtIndex(anObject, index)
 }
 
+// Removes the object with the highest-valued index in the array
+//
 // RemoveLastObject calls the underlying RemoveLastObject.
 func (x *MutableArray) RemoveLastObject() {
 	x.inner.RemoveLastObject()
 }
 
+// Removes the object at index .
+//
 // RemoveObjectAtIndex calls the underlying RemoveObjectAtIndex.
 func (x *MutableArray) RemoveObjectAtIndex(index uint) {
 	x.inner.RemoveObjectAtIndex(index)
 }
 
+// Replaces the object at index with anObject.
+//
 // ReplaceObjectAtIndexWithObject calls the underlying ReplaceObjectAtIndexWithObject.
 func (x *MutableArray) ReplaceObjectAtIndexWithObject(index uint, anObject objc.ID) {
 	x.inner.ReplaceObjectAtIndexWithObject(index, anObject)
 }
 
+// Adds the objects contained in another given array to the end of the receiving array’s content.
+//
 // AddObjectsFromArray calls the underlying AddObjectsFromArray.
 func (x *MutableArray) AddObjectsFromArray(otherArray *raw.NSArray[objc.ID]) {
 	x.inner.AddObjectsFromArray(otherArray)
 }
 
+// Exchanges the objects in the array at given indexes.
+//
 // ExchangeObjectAtIndexWithObjectAtIndex calls the underlying ExchangeObjectAtIndexWithObjectAtIndex.
 func (x *MutableArray) ExchangeObjectAtIndexWithObjectAtIndex(idx1 uint, idx2 uint) {
 	x.inner.ExchangeObjectAtIndexWithObjectAtIndex(idx1, idx2)
 }
 
+// Empties the array of all its elements.
+//
 // RemoveAllObjects calls the underlying RemoveAllObjects.
 func (x *MutableArray) RemoveAllObjects() {
 	x.inner.RemoveAllObjects()
 }
 
+// Removes all occurrences within a specified range in the array of a given object.
+//
 // RemoveObjectInRange calls the underlying RemoveObjectInRange.
 func (x *MutableArray) RemoveObjectInRange(anObject objc.ID, range_ raw.NSRange) {
 	x.inner.RemoveObjectInRange(anObject, range_)
 }
 
+// Removes all occurrences in the array of a given object.
+//
 // RemoveObject calls the underlying RemoveObject.
 func (x *MutableArray) RemoveObject(anObject objc.ID) {
 	x.inner.RemoveObject(anObject)
 }
 
+// Removes all occurrences of anObject within the specified range in the array.
+//
 // RemoveObjectIdenticalToInRange calls the underlying RemoveObjectIdenticalToInRange.
 func (x *MutableArray) RemoveObjectIdenticalToInRange(anObject objc.ID, range_ raw.NSRange) {
 	x.inner.RemoveObjectIdenticalToInRange(anObject, range_)
 }
 
+// Removes all occurrences of a given object in the array.
+//
 // RemoveObjectIdenticalTo calls the underlying RemoveObjectIdenticalTo.
 func (x *MutableArray) RemoveObjectIdenticalTo(anObject objc.ID) {
 	x.inner.RemoveObjectIdenticalTo(anObject)
 }
 
+// Removes the specified number of objects from the array, beginning at the specified index.
+//
 // RemoveObjectsFromIndicesNumIndices calls the underlying RemoveObjectsFromIndicesNumIndices.
 func (x *MutableArray) RemoveObjectsFromIndicesNumIndices(indices *uint, cnt uint) {
 	x.inner.RemoveObjectsFromIndicesNumIndices(indices, cnt)
 }
 
+// Removes from the receiving array the objects in another given array.
+//
 // RemoveObjectsInArray calls the underlying RemoveObjectsInArray.
 func (x *MutableArray) RemoveObjectsInArray(otherArray *raw.NSArray[objc.ID]) {
 	x.inner.RemoveObjectsInArray(otherArray)
 }
 
+// Removes from the array each of the objects within a given range.
+//
 // RemoveObjectsInRange calls the underlying RemoveObjectsInRange.
 func (x *MutableArray) RemoveObjectsInRange(range_ raw.NSRange) {
 	x.inner.RemoveObjectsInRange(range_)
 }
 
+// Replaces the objects in the receiving array specified by one given range with the objects in another array specified by another range.
+//
 // ReplaceObjectsInRangeWithObjectsFromArrayRange calls the underlying ReplaceObjectsInRangeWithObjectsFromArrayRange.
 func (x *MutableArray) ReplaceObjectsInRangeWithObjectsFromArrayRange(range_ raw.NSRange, otherArray *raw.NSArray[objc.ID], otherRange raw.NSRange) {
 	x.inner.ReplaceObjectsInRangeWithObjectsFromArrayRange(range_, otherArray, otherRange)
 }
 
+// Replaces the objects in the receiving array specified by a given range with all of the objects from a given array.
+//
 // ReplaceObjectsInRangeWithObjectsFromArray calls the underlying ReplaceObjectsInRangeWithObjectsFromArray.
 func (x *MutableArray) ReplaceObjectsInRangeWithObjectsFromArray(range_ raw.NSRange, otherArray *raw.NSArray[objc.ID]) {
 	x.inner.ReplaceObjectsInRangeWithObjectsFromArray(range_, otherArray)
 }
 
+// Sets the receiving array’s elements to those in another given array.
+//
 // SetArray calls the underlying SetArray.
 func (x *MutableArray) SetArray(otherArray *raw.NSArray[objc.ID]) {
 	x.inner.SetArray(otherArray)
 }
 
+// Sorts the receiver in ascending order as defined by the comparison function compare.
+//
 // SortUsingFunctionContext calls the underlying SortUsingFunctionContext.
 func (x *MutableArray) SortUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer) {
 	x.inner.SortUsingFunctionContext(compare, context_)
 }
 
+// Sorts the receiver in ascending order, as determined by the comparison method specified by a given selector.
+//
 // SortUsingSelector calls the underlying SortUsingSelector.
 func (x *MutableArray) SortUsingSelector(comparator objc.SEL) {
 	x.inner.SortUsingSelector(comparator)
 }
 
+// Inserts the objects in the provided array into the receiving array at the specified indexes.
+//
 // InsertObjectsAtIndexes calls the underlying InsertObjectsAtIndexes.
 func (x *MutableArray) InsertObjectsAtIndexes(objects *raw.NSArray[objc.ID], indexes *raw.NSIndexSet) {
 	x.inner.InsertObjectsAtIndexes(objects, indexes)
 }
 
+// Removes the objects at the specified indexes from the array.
+//
 // RemoveObjectsAtIndexes calls the underlying RemoveObjectsAtIndexes.
 func (x *MutableArray) RemoveObjectsAtIndexes(indexes *raw.NSIndexSet) {
 	x.inner.RemoveObjectsAtIndexes(indexes)
 }
 
+// Replaces the objects in the receiving array at locations specified with the objects from a given array.
+//
 // ReplaceObjectsAtIndexesWithObjects calls the underlying ReplaceObjectsAtIndexesWithObjects.
 func (x *MutableArray) ReplaceObjectsAtIndexesWithObjects(indexes *raw.NSIndexSet, objects *raw.NSArray[objc.ID]) {
 	x.inner.ReplaceObjectsAtIndexesWithObjects(indexes, objects)
 }
 
+// Replaces the object at the index with the new object, possibly adding the object.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *MutableArray) SetObjectAtIndexedSubscript(obj objc.ID, idx uint) {
 	x.inner.SetObjectAtIndexedSubscript(obj, idx)
 }
 
+// Sorts the receiver in ascending order using the comparison method specified by a given NSComparator block.
+//
 // SortUsingComparator calls the underlying SortUsingComparator.
 func (x *MutableArray) SortUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) {
 	x.inner.SortUsingComparator(func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
+// Sorts the receiver in ascending order using the specified options and the comparison method specified by a given NSComparator block.
+//
 // SortWithOptionsUsingComparator calls the underlying SortWithOptionsUsingComparator.
 func (x *MutableArray) SortWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) {
 	x.inner.SortWithOptionsUsingComparator(raw.NSSortOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
@@ -206,11 +266,15 @@ func (x *MutableArray) ApplyDifference(difference *raw.NSOrderedCollectionDiffer
 	x.inner.ApplyDifference(difference)
 }
 
+// Sorts the receiver using a given array of sort descriptors.
+//
 // SortUsingDescriptors calls the underlying SortUsingDescriptors.
 func (x *MutableArray) SortUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor]) {
 	x.inner.SortUsingDescriptors(sortDescriptors)
 }
 
+// Evaluates a given predicate against the array’s content and leaves only objects that match.
+//
 // FilterUsingPredicate calls the underlying FilterUsingPredicate.
 func (x *MutableArray) FilterUsingPredicate(predicate *raw.NSPredicate) {
 	x.inner.FilterUsingPredicate(predicate)

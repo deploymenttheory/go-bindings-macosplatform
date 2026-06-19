@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that uses a row-and-column format to display hierarchical data like directories and files that can be expanded and collapsed.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nsoutlineview
 type NSOutlineView struct {
 	NSTableView
@@ -64,102 +66,124 @@ func NSOutlineViewFromID(id objc.ID) *NSOutlineView {
 	return o
 }
 
+// Returns a Boolean value that indicates whether a given item is expandable.
 func (o *NSOutlineView) IsExpandable(item objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelIsExpandable, item)
 	return _ret
 }
 
+// Returns the number of children for the specified parent item.
 func (o *NSOutlineView) NumberOfChildrenOfItem(item objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _nSOutlineViewSelNumberOfChildrenOfItem, item)
 	return _ret
 }
 
+// Returns the specified child of an item.
 func (o *NSOutlineView) ChildOfItem(index int, item objc.ID) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutlineViewSelChildOfItem, index, item)
 	return _ret
 }
 
+// Expands a specified item and, optionally, its children.
 func (o *NSOutlineView) ExpandItemExpandChildren(item objc.ID, expandChildren bool) {
 	o.Ptr().Send(_nSOutlineViewSelExpandItemExpandChildren, item, expandChildren)
 }
 
+// Expands a given item.
 func (o *NSOutlineView) ExpandItem(item objc.ID) {
 	o.Ptr().Send(_nSOutlineViewSelExpandItem, item)
 }
 
+// Collapses a given item and, optionally, its children.
 func (o *NSOutlineView) CollapseItemCollapseChildren(item objc.ID, collapseChildren bool) {
 	o.Ptr().Send(_nSOutlineViewSelCollapseItemCollapseChildren, item, collapseChildren)
 }
 
+// Collapses a given item.
 func (o *NSOutlineView) CollapseItem(item objc.ID) {
 	o.Ptr().Send(_nSOutlineViewSelCollapseItem, item)
 }
 
+// Reloads a given item and, optionally, its children.
 func (o *NSOutlineView) ReloadItemReloadChildren(item objc.ID, reloadChildren bool) {
 	o.Ptr().Send(_nSOutlineViewSelReloadItemReloadChildren, item, reloadChildren)
 }
 
+// Reloads and redisplays the data for the given item.
 func (o *NSOutlineView) ReloadItem(item objc.ID) {
 	o.Ptr().Send(_nSOutlineViewSelReloadItem, item)
 }
 
+// Returns the parent for a given item.
 func (o *NSOutlineView) ParentForItem(item objc.ID) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutlineViewSelParentForItem, item)
 	return _ret
 }
 
+// Returns the child index of the specified item within its parent.
 func (o *NSOutlineView) ChildIndexForItem(item objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _nSOutlineViewSelChildIndexForItem, item)
 	return _ret
 }
 
+// Returns the item associated with a given row.
 func (o *NSOutlineView) ItemAtRow(row int) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutlineViewSelItemAtRow, row)
 	return _ret
 }
 
+// Returns the row associated with a given item.
 func (o *NSOutlineView) RowForItem(item objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _nSOutlineViewSelRowForItem, item)
 	return _ret
 }
 
+// Returns the indentation level for a given item.
 func (o *NSOutlineView) LevelForItem(item objc.ID) int {
 	_ret := objc.Send[int](o.Ptr(), _nSOutlineViewSelLevelForItem, item)
 	return _ret
 }
 
+// Returns the indentation level for a given row.
 func (o *NSOutlineView) LevelForRow(row int) int {
 	_ret := objc.Send[int](o.Ptr(), _nSOutlineViewSelLevelForRow, row)
 	return _ret
 }
 
+// Returns a Boolean value that indicates whether a given item is expanded.
 func (o *NSOutlineView) IsItemExpanded(item objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelIsItemExpanded, item)
 	return _ret
 }
 
+// Returns the frame of the outline cell for a given row.
 func (o *NSOutlineView) FrameOfOutlineCellAtRow(row int) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSOutlineViewSelFrameOfOutlineCellAtRow, row)
 	return _ret
 }
 
+// Used to “retarget” a proposed drop.
 func (o *NSOutlineView) SetDropItemDropChildIndex(item objc.ID, index int) {
 	o.Ptr().Send(_nSOutlineViewSelSetDropItemDropChildIndex, item, index)
 }
 
+// Returns a Boolean value that indicates whether auto-expanded items should return to their original collapsed state.
 func (o *NSOutlineView) ShouldCollapseAutoExpandedItemsForDeposited(deposited bool) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSOutlineViewSelShouldCollapseAutoExpandedItemsForDeposited, deposited)
 	return _ret
 }
 
+// Inserts new items at the given indexes in the given parent with the specified optional animations.
 func (o *NSOutlineView) InsertItemsAtIndexesInParentWithAnimation(indexes *foundation.NSIndexSet, parent objc.ID, animationOptions NSTableViewAnimationOptions) {
 	o.Ptr().Send(_nSOutlineViewSelInsertItemsAtIndexesInParentWithAnimation, indexes.Ptr(), parent, animationOptions)
 }
 
+// Removes items at the given indexes in the given parent with the specified optional animations.
 func (o *NSOutlineView) RemoveItemsAtIndexesInParentWithAnimation(indexes *foundation.NSIndexSet, parent objc.ID, animationOptions NSTableViewAnimationOptions) {
 	o.Ptr().Send(_nSOutlineViewSelRemoveItemsAtIndexesInParentWithAnimation, indexes.Ptr(), parent, animationOptions)
 }
 
+// Moves an item at a given index in the given parent to a new index in a new parent.
 func (o *NSOutlineView) MoveItemAtIndexInParentToIndexInParent(fromIndex int, oldParent objc.ID, toIndex int, newParent objc.ID) {
 	o.Ptr().Send(_nSOutlineViewSelMoveItemAtIndexInParentToIndexInParent, fromIndex, oldParent, toIndex, newParent)
 }

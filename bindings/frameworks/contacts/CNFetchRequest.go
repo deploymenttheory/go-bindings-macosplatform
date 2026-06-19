@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for contact fetch requests.
+//
 // Apple documentation: https://developer.apple.com/documentation/contacts/cnfetchrequest
 type CNFetchRequest struct {
 	foundation.NSObject

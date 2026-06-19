@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that implements custom behaviors when changing from one layout to another in a collection view.
+//
 // Apple documentation: https://developer.apple.com/documentation/appkit/nscollectionviewtransitionlayout
 type NSCollectionViewTransitionLayout struct {
 	NSCollectionViewLayout
@@ -36,6 +38,7 @@ func NSCollectionViewTransitionLayoutFromID(id objc.ID) *NSCollectionViewTransit
 	return o
 }
 
+// Initializes and returns the transition layout object.
 func (o *NSCollectionViewTransitionLayout) InitWithCurrentLayoutNextLayout(currentLayout *NSCollectionViewLayout, newLayout *NSCollectionViewLayout) *NSCollectionViewTransitionLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewTransitionLayoutSelInitWithCurrentLayoutNextLayout, currentLayout.Ptr(), newLayout.Ptr())
 	if _ret != 0 {
@@ -44,10 +47,12 @@ func (o *NSCollectionViewTransitionLayout) InitWithCurrentLayoutNextLayout(curre
 	return NSCollectionViewTransitionLayoutFromID(_ret)
 }
 
+// Sets the value of a key whose value you use during the animation.
 func (o *NSCollectionViewTransitionLayout) UpdateValueForAnimatedKey(value float64, key *foundation.NSString) {
 	o.Ptr().Send(_nSCollectionViewTransitionLayoutSelUpdateValueForAnimatedKey, value, key.Ptr())
 }
 
+// Returns the most recently set value for the specified key.
 func (o *NSCollectionViewTransitionLayout) ValueForAnimatedKey(key *foundation.NSString) float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSCollectionViewTransitionLayoutSelValueForAnimatedKey, key.Ptr())
 	return _ret

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that connects to the system’s audio output.
+//
 // Apple documentation: https://developer.apple.com/documentation/avfaudio/avaudiooutputnode
 type AVAudioOutputNode struct {
 	AVAudioIONode
