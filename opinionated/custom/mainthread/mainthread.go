@@ -25,6 +25,7 @@ package mainthread
 
 import (
 	"sync"
+	"unsafe"
 
 	"github.com/ebitengine/purego"
 )
@@ -36,6 +37,11 @@ var (
 	dispatchSyncF func(queue, ctx uintptr, work uintptr)
 	pthreadMainNp func() int32
 	trampoline    uintptr
+
+	// CoreFoundation run-loop symbols, resolved in load(), used by
+	// PumpMainRunLoop.
+	cfRunLoopRunInMode    func(mode uintptr, seconds float64, returnAfterSourceHandled bool) int32
+	kCFRunLoopDefaultMode uintptr
 
 	pendingMu sync.Mutex
 	pending   = make(map[uintptr]func())
@@ -57,6 +63,26 @@ func load() {
 	purego.RegisterLibFunc(&dispatchSyncF, libSystem, "dispatch_sync_f")
 	purego.RegisterLibFunc(&pthreadMainNp, libSystem, "pthread_main_np")
 	trampoline = purego.NewCallback(runPending)
+
+	// CoreFoundation run-loop, for PumpMainRunLoop. kCFRunLoopDefaultMode is a
+	// `const CFStringRef` variable, so the dlsym address must be dereferenced
+	// once to obtain the CFStringRef value (unlike _dispatch_main_q, whose
+	// address is the queue itself).
+	cf, err := purego.Dlopen("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation", purego.RTLD_GLOBAL|purego.RTLD_LAZY)
+	if err != nil {
+		panic("mainthread: dlopen CoreFoundation: " + err.Error())
+	}
+	modeSym, err := purego.Dlsym(cf, "kCFRunLoopDefaultMode")
+	if err != nil {
+		panic("mainthread: dlsym kCFRunLoopDefaultMode: " + err.Error())
+	}
+	// Dereference the symbol address to read the CFStringRef it holds. The
+	// indirection through &p turns the C address into an unsafe.Pointer without
+	// a direct uintptr→Pointer conversion, which `go vet` rejects.
+	var p unsafe.Pointer
+	*(*uintptr)(unsafe.Pointer(&p)) = modeSym
+	kCFRunLoopDefaultMode = *(*uintptr)(p)
+	purego.RegisterLibFunc(&cfRunLoopRunInMode, cf, "CFRunLoopRunInMode")
 }
 
 // runPending is the dispatch_function_t target: it looks up and runs the Go
@@ -101,4 +127,22 @@ func Do(fn func()) {
 	// dispatch_sync_f blocks the calling thread until the work item has run
 	// on the main queue, so fn's effects are visible when Do returns.
 	dispatchSyncF(mainQueue, key, trampoline)
+}
+
+// PumpMainRunLoop services the main thread's Core Foundation run loop for up to
+// seconds, draining any pending main-queue work (such as functions queued by Do
+// from other goroutines) before returning. It must be called on the main
+// thread.
+//
+// Use it when a program drives the main thread itself — e.g. running background
+// work on goroutines while periodically pumping the run loop — instead of
+// handing the thread to AppKit's [NSApplication run] or dispatch_main. A small
+// interval (e.g. 0.05) polled in a loop keeps Do responsive while the caller
+// checks for completion.
+func PumpMainRunLoop(seconds float64) {
+	loadOnce.Do(load)
+	// returnAfterSourceHandled=false: run the loop for the full interval,
+	// servicing as many queued items as arrive rather than returning after the
+	// first.
+	cfRunLoopRunInMode(kCFRunLoopDefaultMode, seconds, false)
 }
