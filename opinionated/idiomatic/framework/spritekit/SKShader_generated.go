@@ -61,7 +61,10 @@ func (x *Shader) WithSource(source string) *Shader {
 // WithUniforms sets the collection, converting the Go slice to an NSArray.
 func (x *Shader) WithUniforms(items ...*raw.SKUniform) *Shader {
 	if len(items) == 0 {
-		x.inner.SetUniforms(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetUniforms(foundation.NSArrayFromID[*raw.SKUniform](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -79,7 +82,10 @@ func (x *Shader) WithUniforms(items ...*raw.SKUniform) *Shader {
 // WithAttributes sets the collection, converting the Go slice to an NSArray.
 func (x *Shader) WithAttributes(items ...*raw.SKAttribute) *Shader {
 	if len(items) == 0 {
-		x.inner.SetAttributes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAttributes(foundation.NSArrayFromID[*raw.SKAttribute](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

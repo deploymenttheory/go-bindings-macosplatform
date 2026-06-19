@@ -82,7 +82,10 @@ func (x *CaptureSlider) WithLocalizedValueFormat(localizedValueFormat string) *C
 // WithProminentValues sets the collection, converting the Go slice to an NSArray.
 func (x *CaptureSlider) WithProminentValues(items ...*foundation.NSNumber) *CaptureSlider {
 	if len(items) == 0 {
-		x.inner.SetProminentValues(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetProminentValues(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

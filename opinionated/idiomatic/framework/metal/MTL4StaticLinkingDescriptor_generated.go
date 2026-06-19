@@ -45,7 +45,10 @@ func NewMTL4StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
 // WithFunctionDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MTL4StaticLinkingDescriptor) WithFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StaticLinkingDescriptor {
 	if len(items) == 0 {
-		x.inner.SetFunctionDescriptors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetFunctionDescriptors(foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -65,7 +68,10 @@ func (x *MTL4StaticLinkingDescriptor) WithFunctionDescriptors(items ...MTL4Funct
 // WithPrivateFunctionDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MTL4StaticLinkingDescriptor) WithPrivateFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StaticLinkingDescriptor {
 	if len(items) == 0 {
-		x.inner.SetPrivateFunctionDescriptors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPrivateFunctionDescriptors(foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -110,6 +116,8 @@ func (x *MTL4StaticLinkingDescriptor) SetFunctionDescriptors(functionDescriptors
 	var _arg0 *foundation.NSArray[*raw.MTL4FunctionDescriptor]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetFunctionDescriptors(_arg0)
@@ -137,6 +145,8 @@ func (x *MTL4StaticLinkingDescriptor) SetPrivateFunctionDescriptors(privateFunct
 	var _arg0 *foundation.NSArray[*raw.MTL4FunctionDescriptor]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetPrivateFunctionDescriptors(_arg0)

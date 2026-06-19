@@ -77,7 +77,10 @@ func (x *VirtualMachineConfiguration) WithPlatform(platform PlatformConfiguratio
 // WithAudioDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithAudioDevices(items ...AudioDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
-		x.inner.SetAudioDevices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAudioDevices(foundation.NSArrayFromID[*raw.VZAudioDeviceConfiguration](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -97,7 +100,10 @@ func (x *VirtualMachineConfiguration) WithAudioDevices(items ...AudioDeviceConfi
 // WithConsoleDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithConsoleDevices(items ...ConsoleDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
-		x.inner.SetConsoleDevices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetConsoleDevices(foundation.NSArrayFromID[*raw.VZConsoleDeviceConfiguration](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -117,7 +123,10 @@ func (x *VirtualMachineConfiguration) WithConsoleDevices(items ...ConsoleDeviceC
 // WithDirectorySharingDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithDirectorySharingDevices(items ...DirectorySharingDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
-		x.inner.SetDirectorySharingDevices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetDirectorySharingDevices(foundation.NSArrayFromID[*raw.VZDirectorySharingDeviceConfiguration](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -137,7 +146,10 @@ func (x *VirtualMachineConfiguration) WithDirectorySharingDevices(items ...Direc
 // WithEntropyDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithEntropyDevices(items ...EntropyDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
-		x.inner.SetEntropyDevices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetEntropyDevices(foundation.NSArrayFromID[*raw.VZEntropyDeviceConfiguration](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -157,7 +169,10 @@ func (x *VirtualMachineConfiguration) WithEntropyDevices(items ...EntropyDeviceC
 // WithMemoryBalloonDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithMemoryBalloonDevices(items ...MemoryBalloonDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
-		x.inner.SetMemoryBalloonDevices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetMemoryBalloonDevices(foundation.NSArrayFromID[*raw.VZMemoryBalloonDeviceConfiguration](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -177,7 +192,10 @@ func (x *VirtualMachineConfiguration) WithMemoryBalloonDevices(items ...MemoryBa
 // WithNetworkDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithNetworkDevices(items ...NetworkDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
-		x.inner.SetNetworkDevices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetNetworkDevices(foundation.NSArrayFromID[*raw.VZNetworkDeviceConfiguration](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -197,7 +215,10 @@ func (x *VirtualMachineConfiguration) WithNetworkDevices(items ...NetworkDeviceC
 // WithSerialPorts sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithSerialPorts(items ...SerialPortConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
-		x.inner.SetSerialPorts(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSerialPorts(foundation.NSArrayFromID[*raw.VZSerialPortConfiguration](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -217,7 +238,10 @@ func (x *VirtualMachineConfiguration) WithSerialPorts(items ...SerialPortConfigu
 // WithSocketDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithSocketDevices(items ...SocketDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
-		x.inner.SetSocketDevices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSocketDevices(foundation.NSArrayFromID[*raw.VZSocketDeviceConfiguration](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -237,7 +261,10 @@ func (x *VirtualMachineConfiguration) WithSocketDevices(items ...SocketDeviceCon
 // WithStorageDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithStorageDevices(items ...StorageDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
-		x.inner.SetStorageDevices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetStorageDevices(foundation.NSArrayFromID[*raw.VZStorageDeviceConfiguration](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -257,7 +284,10 @@ func (x *VirtualMachineConfiguration) WithStorageDevices(items ...StorageDeviceC
 // WithKeyboards sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithKeyboards(items ...KeyboardConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
-		x.inner.SetKeyboards(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetKeyboards(foundation.NSArrayFromID[*raw.VZKeyboardConfiguration](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -277,7 +307,10 @@ func (x *VirtualMachineConfiguration) WithKeyboards(items ...KeyboardConfigurati
 // WithPointingDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithPointingDevices(items ...PointingDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
-		x.inner.SetPointingDevices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPointingDevices(foundation.NSArrayFromID[*raw.VZPointingDeviceConfiguration](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -297,7 +330,10 @@ func (x *VirtualMachineConfiguration) WithPointingDevices(items ...PointingDevic
 // WithGraphicsDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithGraphicsDevices(items ...GraphicsDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
-		x.inner.SetGraphicsDevices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetGraphicsDevices(foundation.NSArrayFromID[*raw.VZGraphicsDeviceConfiguration](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -317,7 +353,10 @@ func (x *VirtualMachineConfiguration) WithGraphicsDevices(items ...GraphicsDevic
 // WithUsbControllers sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithUsbControllers(items ...USBControllerConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
-		x.inner.SetUsbControllers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetUsbControllers(foundation.NSArrayFromID[*raw.VZUSBControllerConfiguration](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -410,6 +449,8 @@ func (x *VirtualMachineConfiguration) SetAudioDevices(audioDevices ...AudioDevic
 	var _arg0 *foundation.NSArray[*raw.VZAudioDeviceConfiguration]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.VZAudioDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.VZAudioDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetAudioDevices(_arg0)
@@ -437,6 +478,8 @@ func (x *VirtualMachineConfiguration) SetConsoleDevices(consoleDevices ...Consol
 	var _arg0 *foundation.NSArray[*raw.VZConsoleDeviceConfiguration]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.VZConsoleDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.VZConsoleDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetConsoleDevices(_arg0)
@@ -464,6 +507,8 @@ func (x *VirtualMachineConfiguration) SetDirectorySharingDevices(directorySharin
 	var _arg0 *foundation.NSArray[*raw.VZDirectorySharingDeviceConfiguration]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.VZDirectorySharingDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.VZDirectorySharingDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetDirectorySharingDevices(_arg0)
@@ -491,6 +536,8 @@ func (x *VirtualMachineConfiguration) SetEntropyDevices(entropyDevices ...Entrop
 	var _arg0 *foundation.NSArray[*raw.VZEntropyDeviceConfiguration]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.VZEntropyDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.VZEntropyDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetEntropyDevices(_arg0)
@@ -518,6 +565,8 @@ func (x *VirtualMachineConfiguration) SetMemoryBalloonDevices(memoryBalloonDevic
 	var _arg0 *foundation.NSArray[*raw.VZMemoryBalloonDeviceConfiguration]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.VZMemoryBalloonDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.VZMemoryBalloonDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetMemoryBalloonDevices(_arg0)
@@ -545,6 +594,8 @@ func (x *VirtualMachineConfiguration) SetNetworkDevices(networkDevices ...Networ
 	var _arg0 *foundation.NSArray[*raw.VZNetworkDeviceConfiguration]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.VZNetworkDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.VZNetworkDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetNetworkDevices(_arg0)
@@ -572,6 +623,8 @@ func (x *VirtualMachineConfiguration) SetSerialPorts(serialPorts ...SerialPortCo
 	var _arg0 *foundation.NSArray[*raw.VZSerialPortConfiguration]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.VZSerialPortConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.VZSerialPortConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetSerialPorts(_arg0)
@@ -599,6 +652,8 @@ func (x *VirtualMachineConfiguration) SetSocketDevices(socketDevices ...SocketDe
 	var _arg0 *foundation.NSArray[*raw.VZSocketDeviceConfiguration]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.VZSocketDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.VZSocketDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetSocketDevices(_arg0)
@@ -626,6 +681,8 @@ func (x *VirtualMachineConfiguration) SetStorageDevices(storageDevices ...Storag
 	var _arg0 *foundation.NSArray[*raw.VZStorageDeviceConfiguration]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.VZStorageDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.VZStorageDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetStorageDevices(_arg0)
@@ -653,6 +710,8 @@ func (x *VirtualMachineConfiguration) SetKeyboards(keyboards ...KeyboardConfigur
 	var _arg0 *foundation.NSArray[*raw.VZKeyboardConfiguration]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.VZKeyboardConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.VZKeyboardConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetKeyboards(_arg0)
@@ -680,6 +739,8 @@ func (x *VirtualMachineConfiguration) SetPointingDevices(pointingDevices ...Poin
 	var _arg0 *foundation.NSArray[*raw.VZPointingDeviceConfiguration]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.VZPointingDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.VZPointingDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetPointingDevices(_arg0)
@@ -707,6 +768,8 @@ func (x *VirtualMachineConfiguration) SetGraphicsDevices(graphicsDevices ...Grap
 	var _arg0 *foundation.NSArray[*raw.VZGraphicsDeviceConfiguration]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.VZGraphicsDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.VZGraphicsDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetGraphicsDevices(_arg0)
@@ -734,6 +797,8 @@ func (x *VirtualMachineConfiguration) SetUsbControllers(usbControllers ...USBCon
 	var _arg0 *foundation.NSArray[*raw.VZUSBControllerConfiguration]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.VZUSBControllerConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.VZUSBControllerConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetUsbControllers(_arg0)

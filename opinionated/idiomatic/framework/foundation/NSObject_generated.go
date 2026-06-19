@@ -132,6 +132,8 @@ func (x *Object) PerformSelectorWithObjectAfterDelayInModes(aSelector objc.SEL, 
 	var _arg3 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg3 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg3 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.PerformSelectorWithObjectAfterDelayInModes(aSelector, anArgument, delay, _arg3)
@@ -256,6 +258,8 @@ func (x *Object) DictionaryWithValuesForKeys(keys ...StringProvider) *raw.NSDict
 	var _arg0 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.DictionaryWithValuesForKeys(_arg0)
@@ -397,6 +401,8 @@ func (x *Object) PerformSelectorOnMainThreadWithObjectWaitUntilDoneModes(aSelect
 	var _arg3 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg3 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg3 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.PerformSelectorOnMainThreadWithObjectWaitUntilDoneModes(aSelector, arg, wait, _arg3)
@@ -416,6 +422,8 @@ func (x *Object) PerformSelectorOnThreadWithObjectWaitUntilDoneModes(aSelector o
 	var _arg4 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg4 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg4 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.PerformSelectorOnThreadWithObjectWaitUntilDoneModes(aSelector, thr, arg, wait, _arg4)

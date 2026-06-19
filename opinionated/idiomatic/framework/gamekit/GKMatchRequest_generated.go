@@ -75,7 +75,10 @@ func (x *MatchRequest) WithPlayerAttributes(playerAttributes uint32) *MatchReque
 // WithRecipients sets the collection, converting the Go slice to an NSArray.
 func (x *MatchRequest) WithRecipients(items ...PlayerProvider) *MatchRequest {
 	if len(items) == 0 {
-		x.inner.SetRecipients(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRecipients(foundation.NSArrayFromID[*raw.GKPlayer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -135,7 +138,10 @@ func (x *MatchRequest) WithInviteeResponseHandler(inviteeResponseHandler func(*f
 // WithPlayersToInvite sets the collection, converting the Go slice to an NSArray.
 func (x *MatchRequest) WithPlayersToInvite(items ...*foundation.NSString) *MatchRequest {
 	if len(items) == 0 {
-		x.inner.SetPlayersToInvite(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPlayersToInvite(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -236,6 +242,8 @@ func (x *MatchRequest) SetRecipients(recipients ...PlayerProvider) {
 	var _arg0 *foundation.NSArray[*raw.GKPlayer]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.GKPlayer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.GKPlayer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetRecipients(_arg0)

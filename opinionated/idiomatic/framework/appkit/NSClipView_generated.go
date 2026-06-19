@@ -101,7 +101,10 @@ func (x *ClipView) WithCopiesOnScroll(copiesOnScroll bool) *ClipView {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *ClipView) WithSubviews(items ...ViewProvider) *ClipView {
 	if len(items) == 0 {
-		x.inner.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -251,7 +254,10 @@ func (x *ClipView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool)
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ClipView) WithBackgroundFilters(items ...*coreimage.CIFilter) *ClipView {
 	if len(items) == 0 {
-		x.inner.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -275,7 +281,10 @@ func (x *ClipView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) 
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ClipView) WithContentFilters(items ...*coreimage.CIFilter) *ClipView {
 	if len(items) == 0 {
-		x.inner.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -341,7 +350,10 @@ func (x *ClipView) WithFocusRingType(focusRingType NSFocusRingType) *ClipView {
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *ClipView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ClipView {
 	if len(items) == 0 {
-		x.inner.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

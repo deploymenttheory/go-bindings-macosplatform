@@ -45,7 +45,10 @@ func NewNETransparentProxyNetworkSettings() *NETransparentProxyNetworkSettings {
 // WithIncludedNetworkRules sets the collection, converting the Go slice to an NSArray.
 func (x *NETransparentProxyNetworkSettings) WithIncludedNetworkRules(items ...*raw.NENetworkRule) *NETransparentProxyNetworkSettings {
 	if len(items) == 0 {
-		x.inner.SetIncludedNetworkRules(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetIncludedNetworkRules(foundation.NSArrayFromID[*raw.NENetworkRule](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -65,7 +68,10 @@ func (x *NETransparentProxyNetworkSettings) WithIncludedNetworkRules(items ...*r
 // WithExcludedNetworkRules sets the collection, converting the Go slice to an NSArray.
 func (x *NETransparentProxyNetworkSettings) WithExcludedNetworkRules(items ...*raw.NENetworkRule) *NETransparentProxyNetworkSettings {
 	if len(items) == 0 {
-		x.inner.SetExcludedNetworkRules(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetExcludedNetworkRules(foundation.NSArrayFromID[*raw.NENetworkRule](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

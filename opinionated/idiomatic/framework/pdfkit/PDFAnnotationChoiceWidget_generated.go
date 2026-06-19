@@ -133,7 +133,10 @@ func (x *AnnotationChoiceWidget) WithIconType(iconType PDFTextAnnotationIconType
 // WithQuadrilateralPoints sets the collection, converting the Go slice to an NSArray.
 func (x *AnnotationChoiceWidget) WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationChoiceWidget {
 	if len(items) == 0 {
-		x.inner.PDFAnnotation.SetQuadrilateralPoints(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.PDFAnnotation.SetQuadrilateralPoints(foundation.NSArrayFromID[*foundation.NSValue](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -217,7 +220,10 @@ func (x *AnnotationChoiceWidget) WithListChoice(listChoice bool) *AnnotationChoi
 // WithChoices sets the collection, converting the Go slice to an NSArray.
 func (x *AnnotationChoiceWidget) WithChoices(items ...*foundation.NSString) *AnnotationChoiceWidget {
 	if len(items) == 0 {
-		x.inner.PDFAnnotation.SetChoices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.PDFAnnotation.SetChoices(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -235,7 +241,10 @@ func (x *AnnotationChoiceWidget) WithChoices(items ...*foundation.NSString) *Ann
 // WithValues sets the collection, converting the Go slice to an NSArray.
 func (x *AnnotationChoiceWidget) WithValues(items ...*foundation.NSString) *AnnotationChoiceWidget {
 	if len(items) == 0 {
-		x.inner.PDFAnnotation.SetValues(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.PDFAnnotation.SetValues(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

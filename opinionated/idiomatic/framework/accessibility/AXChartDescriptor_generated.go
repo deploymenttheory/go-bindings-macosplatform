@@ -116,7 +116,10 @@ func (x *ChartDescriptor) WithContentFrame(contentFrame corefoundation.CGRect) *
 // WithSeries sets the collection, converting the Go slice to an NSArray.
 func (x *ChartDescriptor) WithSeries(items ...*raw.AXDataSeriesDescriptor) *ChartDescriptor {
 	if len(items) == 0 {
-		x.inner.SetSeries(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSeries(foundation.NSArrayFromID[*raw.AXDataSeriesDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -277,6 +280,8 @@ func (x *ChartDescriptor) SetAdditionalAxes(additionalAxes ...purego.IDer) {
 	var _arg0 *foundation.NSArray[raw.AXDataAxisDescriptor]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.AXDataAxisDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.AXDataAxisDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetAdditionalAxes(_arg0)

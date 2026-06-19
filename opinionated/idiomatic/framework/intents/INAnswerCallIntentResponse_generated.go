@@ -42,7 +42,10 @@ func NewAnswerCallIntentResponseWithCodeUserActivity(code INAnswerCallIntentResp
 // WithCallRecords sets the collection, converting the Go slice to an NSArray.
 func (x *AnswerCallIntentResponse) WithCallRecords(items ...*raw.INCallRecord) *AnswerCallIntentResponse {
 	if len(items) == 0 {
-		x.inner.SetCallRecords(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCallRecords(foundation.NSArrayFromID[*raw.INCallRecord](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

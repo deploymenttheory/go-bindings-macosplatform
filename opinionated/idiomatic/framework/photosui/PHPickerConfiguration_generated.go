@@ -86,7 +86,10 @@ func (x *PickerConfiguration) WithFilter(filter *PickerFilter) *PickerConfigurat
 // WithPreselectedAssetIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *PickerConfiguration) WithPreselectedAssetIdentifiers(items ...*foundation.NSString) *PickerConfiguration {
 	if len(items) == 0 {
-		x.inner.SetPreselectedAssetIdentifiers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPreselectedAssetIdentifiers(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

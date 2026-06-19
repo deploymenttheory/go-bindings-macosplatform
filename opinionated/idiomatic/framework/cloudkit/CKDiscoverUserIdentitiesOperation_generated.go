@@ -55,7 +55,10 @@ func NewDiscoverUserIdentitiesOperationWithUserIdentityLookupInfos(userIdentityL
 // WithUserIdentityLookupInfos sets the collection, converting the Go slice to an NSArray.
 func (x *DiscoverUserIdentitiesOperation) WithUserIdentityLookupInfos(items ...*raw.CKUserIdentityLookupInfo) *DiscoverUserIdentitiesOperation {
 	if len(items) == 0 {
-		x.inner.SetUserIdentityLookupInfos(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetUserIdentityLookupInfos(foundation.NSArrayFromID[*raw.CKUserIdentityLookupInfo](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

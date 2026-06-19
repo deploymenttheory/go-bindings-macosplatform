@@ -81,7 +81,10 @@ func (x *DataSeriesDescriptor) WithIsContinuous(isContinuous bool) *DataSeriesDe
 // WithDataPoints sets the collection, converting the Go slice to an NSArray.
 func (x *DataSeriesDescriptor) WithDataPoints(items ...*raw.AXDataPoint) *DataSeriesDescriptor {
 	if len(items) == 0 {
-		x.inner.SetDataPoints(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetDataPoints(foundation.NSArrayFromID[*raw.AXDataPoint](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

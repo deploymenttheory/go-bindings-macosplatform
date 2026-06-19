@@ -273,6 +273,8 @@ func (x *MapView) AddAnnotations(annotations ...purego.IDer) {
 	var _arg0 *foundation.NSArray[raw.MKAnnotation]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MKAnnotation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MKAnnotation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.AddAnnotations(_arg0)
@@ -292,6 +294,8 @@ func (x *MapView) RemoveAnnotations(annotations ...purego.IDer) {
 	var _arg0 *foundation.NSArray[raw.MKAnnotation]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MKAnnotation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MKAnnotation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.RemoveAnnotations(_arg0)
@@ -652,6 +656,8 @@ func (x *MapView) SetSelectedAnnotations(selectedAnnotations ...purego.IDer) {
 	var _arg0 *foundation.NSArray[raw.MKAnnotation]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MKAnnotation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MKAnnotation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetSelectedAnnotations(_arg0)
@@ -686,6 +692,8 @@ func (x *MapView) RemoveOverlays(overlays ...purego.IDer) {
 	var _arg0 *foundation.NSArray[raw.MKOverlay]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MKOverlay](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MKOverlay](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.RemoveOverlays(_arg0)
@@ -739,6 +747,8 @@ func (x *MapView) AddOverlays(overlays ...purego.IDer) {
 	var _arg0 *foundation.NSArray[raw.MKOverlay]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MKOverlay](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MKOverlay](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.AddOverlays(_arg0)

@@ -46,7 +46,10 @@ func (x *UserNotificationCenter) WithDelegate(delegate raw.NSUserNotificationCen
 // WithScheduledNotifications sets the collection, converting the Go slice to an NSArray.
 func (x *UserNotificationCenter) WithScheduledNotifications(items ...*raw.NSUserNotification) *UserNotificationCenter {
 	if len(items) == 0 {
-		x.inner.SetScheduledNotifications(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetScheduledNotifications(raw.NSArrayFromID[*raw.NSUserNotification](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

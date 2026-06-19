@@ -47,7 +47,10 @@ func NewAccelerationStructureMotionTriangleGeometryDescriptor() *AccelerationStr
 // WithVertexBuffers sets the collection, converting the Go slice to an NSArray.
 func (x *AccelerationStructureMotionTriangleGeometryDescriptor) WithVertexBuffers(items ...*raw.MTLMotionKeyframeData) *AccelerationStructureMotionTriangleGeometryDescriptor {
 	if len(items) == 0 {
-		x.inner.SetVertexBuffers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetVertexBuffers(foundation.NSArrayFromID[*raw.MTLMotionKeyframeData](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

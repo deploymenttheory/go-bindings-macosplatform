@@ -130,7 +130,10 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithServerNonceClaimN
 // WithCustomNonceRequestValues sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomNonceRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration {
 	if len(items) == 0 {
-		x.inner.SetCustomNonceRequestValues(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCustomNonceRequestValues(foundation.NSArrayFromID[*foundation.NSURLQueryItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -190,7 +193,10 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomRequestJWTP
 // WithCustomLoginRequestValues sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomLoginRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration {
 	if len(items) == 0 {
-		x.inner.SetCustomLoginRequestValues(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCustomLoginRequestValues(foundation.NSArrayFromID[*foundation.NSURLQueryItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -234,7 +240,10 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithGroupResponseClai
 // WithKerberosTicketMappings sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithKerberosTicketMappings(items ...*raw.ASAuthorizationProviderExtensionKerberosMapping) *AuthorizationProviderExtensionLoginConfiguration {
 	if len(items) == 0 {
-		x.inner.SetKerberosTicketMappings(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetKerberosTicketMappings(foundation.NSArrayFromID[*raw.ASAuthorizationProviderExtensionKerberosMapping](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -262,7 +271,10 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithRefreshEndpointUR
 // WithCustomRefreshRequestValues sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomRefreshRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration {
 	if len(items) == 0 {
-		x.inner.SetCustomRefreshRequestValues(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCustomRefreshRequestValues(foundation.NSArrayFromID[*foundation.NSURLQueryItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -330,7 +342,10 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithFederationPredica
 // WithCustomFederationUserPreauthenticationRequestValues sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomFederationUserPreauthenticationRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration {
 	if len(items) == 0 {
-		x.inner.SetCustomFederationUserPreauthenticationRequestValues(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCustomFederationUserPreauthenticationRequestValues(foundation.NSArrayFromID[*foundation.NSURLQueryItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -390,7 +405,10 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithKeyEndpointURL(ke
 // WithCustomKeyExchangeRequestValues sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomKeyExchangeRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration {
 	if len(items) == 0 {
-		x.inner.SetCustomKeyExchangeRequestValues(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCustomKeyExchangeRequestValues(foundation.NSArrayFromID[*foundation.NSURLQueryItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -410,7 +428,10 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomKeyExchange
 // WithCustomKeyRequestValues sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomKeyRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration {
 	if len(items) == 0 {
-		x.inner.SetCustomKeyRequestValues(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCustomKeyRequestValues(foundation.NSArrayFromID[*foundation.NSURLQueryItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

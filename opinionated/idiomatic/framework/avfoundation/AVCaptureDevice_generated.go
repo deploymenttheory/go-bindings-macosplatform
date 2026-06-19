@@ -87,7 +87,10 @@ func (x *CaptureDevice) WithActiveInputSource(activeInputSource *CaptureDeviceIn
 // WithFallbackPrimaryConstituentDevices sets the collection, converting the Go slice to an NSArray.
 func (x *CaptureDevice) WithFallbackPrimaryConstituentDevices(items ...*raw.AVCaptureDevice) *CaptureDevice {
 	if len(items) == 0 {
-		x.inner.SetFallbackPrimaryConstituentDevices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetFallbackPrimaryConstituentDevices(foundation.NSArrayFromID[*raw.AVCaptureDevice](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

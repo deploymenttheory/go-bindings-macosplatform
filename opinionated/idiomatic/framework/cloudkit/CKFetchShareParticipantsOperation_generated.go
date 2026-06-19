@@ -55,7 +55,10 @@ func NewFetchShareParticipantsOperationWithUserIdentityLookupInfos(userIdentityL
 // WithUserIdentityLookupInfos sets the collection, converting the Go slice to an NSArray.
 func (x *FetchShareParticipantsOperation) WithUserIdentityLookupInfos(items ...*raw.CKUserIdentityLookupInfo) *FetchShareParticipantsOperation {
 	if len(items) == 0 {
-		x.inner.SetUserIdentityLookupInfos(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetUserIdentityLookupInfos(foundation.NSArrayFromID[*raw.CKUserIdentityLookupInfo](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

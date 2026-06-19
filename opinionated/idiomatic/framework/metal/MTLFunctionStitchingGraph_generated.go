@@ -45,6 +45,8 @@ func NewFunctionStitchingGraphWithFunctionNameNodesOutputNodeAttributes(function
 	var _arg3 *foundation.NSArray[raw.MTLFunctionStitchingAttribute]
 	if len(_ptrs) > 0 {
 		_arg3 = foundation.NSArrayFromID[raw.MTLFunctionStitchingAttribute](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg3 = foundation.NSArrayFromID[raw.MTLFunctionStitchingAttribute](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFunctionStitchingGraph")), objc.RegisterName("alloc"))
@@ -65,7 +67,10 @@ func (x *FunctionStitchingGraph) WithFunctionName(functionName string) *Function
 // WithNodes sets the collection, converting the Go slice to an NSArray.
 func (x *FunctionStitchingGraph) WithNodes(items ...*raw.MTLFunctionStitchingFunctionNode) *FunctionStitchingGraph {
 	if len(items) == 0 {
-		x.inner.SetNodes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetNodes(foundation.NSArrayFromID[*raw.MTLFunctionStitchingFunctionNode](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -146,6 +151,8 @@ func (x *FunctionStitchingGraph) SetAttributes(attributes ...purego.IDer) {
 	var _arg0 *foundation.NSArray[raw.MTLFunctionStitchingAttribute]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTLFunctionStitchingAttribute](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTLFunctionStitchingAttribute](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetAttributes(_arg0)

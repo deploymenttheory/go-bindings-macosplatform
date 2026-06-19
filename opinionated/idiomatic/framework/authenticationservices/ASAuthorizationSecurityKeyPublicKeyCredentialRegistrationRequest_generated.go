@@ -49,7 +49,10 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest() *Author
 // WithCredentialParameters sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithCredentialParameters(items ...*raw.ASAuthorizationPublicKeyCredentialParameters) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
 	if len(items) == 0 {
-		x.inner.SetCredentialParameters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCredentialParameters(foundation.NSArrayFromID[*raw.ASAuthorizationPublicKeyCredentialParameters](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -69,7 +72,10 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithCre
 // WithExcludedCredentials sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithExcludedCredentials(items ...*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
 	if len(items) == 0 {
-		x.inner.SetExcludedCredentials(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetExcludedCredentials(foundation.NSArrayFromID[*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

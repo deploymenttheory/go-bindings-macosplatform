@@ -134,7 +134,10 @@ func (x *TriangleAccelerationStructure) WithPolygonCount(polygonCount uint) *Tri
 // WithPolygonBuffers sets the collection, converting the Go slice to an NSArray.
 func (x *TriangleAccelerationStructure) WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *TriangleAccelerationStructure {
 	if len(items) == 0 {
-		x.inner.MPSPolygonAccelerationStructure.SetPolygonBuffers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.MPSPolygonAccelerationStructure.SetPolygonBuffers(foundation.NSArrayFromID[*raw.MPSPolygonBuffer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

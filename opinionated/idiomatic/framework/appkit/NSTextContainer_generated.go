@@ -123,7 +123,10 @@ func (x *TextContainer) WithLayoutManager(layoutManager *LayoutManager) *TextCon
 // WithExclusionPaths sets the collection, converting the Go slice to an NSArray.
 func (x *TextContainer) WithExclusionPaths(items ...*raw.NSBezierPath) *TextContainer {
 	if len(items) == 0 {
-		x.inner.SetExclusionPaths(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetExclusionPaths(foundation.NSArrayFromID[*raw.NSBezierPath](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

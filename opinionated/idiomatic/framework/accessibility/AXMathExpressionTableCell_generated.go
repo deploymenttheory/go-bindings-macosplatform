@@ -41,6 +41,8 @@ func NewMathExpressionTableCellWithExpressions(expressions ...MathExpressionProv
 	var _arg0 *foundation.NSArray[*raw.AXMathExpression]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.AXMathExpression](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.AXMathExpression](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXMathExpressionTableCell")), objc.RegisterName("alloc"))

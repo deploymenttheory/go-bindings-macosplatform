@@ -45,7 +45,10 @@ func NewAccelerationStructureMotionCurveGeometryDescriptor() *AccelerationStruct
 // WithControlPointBuffers sets the collection, converting the Go slice to an NSArray.
 func (x *AccelerationStructureMotionCurveGeometryDescriptor) WithControlPointBuffers(items ...*raw.MTLMotionKeyframeData) *AccelerationStructureMotionCurveGeometryDescriptor {
 	if len(items) == 0 {
-		x.inner.SetControlPointBuffers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetControlPointBuffers(foundation.NSArrayFromID[*raw.MTLMotionKeyframeData](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -89,7 +92,10 @@ func (x *AccelerationStructureMotionCurveGeometryDescriptor) WithControlPointFor
 // WithRadiusBuffers sets the collection, converting the Go slice to an NSArray.
 func (x *AccelerationStructureMotionCurveGeometryDescriptor) WithRadiusBuffers(items ...*raw.MTLMotionKeyframeData) *AccelerationStructureMotionCurveGeometryDescriptor {
 	if len(items) == 0 {
-		x.inner.SetRadiusBuffers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRadiusBuffers(foundation.NSArrayFromID[*raw.MTLMotionKeyframeData](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

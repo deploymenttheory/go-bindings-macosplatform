@@ -53,7 +53,10 @@ func NewModifyRecordZonesOperationWithRecordZonesToSaveRecordZoneIDsToDelete(rec
 // WithRecordZonesToSave sets the collection, converting the Go slice to an NSArray.
 func (x *ModifyRecordZonesOperation) WithRecordZonesToSave(items ...*raw.CKRecordZone) *ModifyRecordZonesOperation {
 	if len(items) == 0 {
-		x.inner.SetRecordZonesToSave(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRecordZonesToSave(foundation.NSArrayFromID[*raw.CKRecordZone](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -73,7 +76,10 @@ func (x *ModifyRecordZonesOperation) WithRecordZonesToSave(items ...*raw.CKRecor
 // WithRecordZoneIDsToDelete sets the collection, converting the Go slice to an NSArray.
 func (x *ModifyRecordZonesOperation) WithRecordZoneIDsToDelete(items ...*raw.CKRecordZoneID) *ModifyRecordZonesOperation {
 	if len(items) == 0 {
-		x.inner.SetRecordZoneIDsToDelete(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRecordZoneIDsToDelete(foundation.NSArrayFromID[*raw.CKRecordZoneID](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

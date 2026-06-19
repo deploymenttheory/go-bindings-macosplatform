@@ -60,7 +60,10 @@ func (x *FetchRequest) WithPredicate(predicate *foundation.NSPredicate) *FetchRe
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *FetchRequest) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *FetchRequest {
 	if len(items) == 0 {
-		x.inner.SetSortDescriptors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSortDescriptors(foundation.NSArrayFromID[*foundation.NSSortDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -108,7 +111,10 @@ func (x *FetchRequest) WithReturnsObjectsAsFaults(returnsObjectsAsFaults bool) *
 // WithRelationshipKeyPathsForPrefetching sets the collection, converting the Go slice to an NSArray.
 func (x *FetchRequest) WithRelationshipKeyPathsForPrefetching(items ...*foundation.NSString) *FetchRequest {
 	if len(items) == 0 {
-		x.inner.SetRelationshipKeyPathsForPrefetching(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRelationshipKeyPathsForPrefetching(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -162,7 +168,10 @@ func (x *FetchRequest) WithHavingPredicate(havingPredicate *foundation.NSPredica
 // WithAffectedStores sets the collection, converting the Go slice to an NSArray.
 func (x *FetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *FetchRequest {
 	if len(items) == 0 {
-		x.inner.NSPersistentStoreRequest.SetAffectedStores(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSPersistentStoreRequest.SetAffectedStores(foundation.NSArrayFromID[*raw.NSPersistentStore](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

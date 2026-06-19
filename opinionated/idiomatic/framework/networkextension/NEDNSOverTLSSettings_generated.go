@@ -59,7 +59,10 @@ func (x *NEDNSOverTLSSettings) WithIdentityReference(identityReference *foundati
 // WithSearchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSOverTLSSettings) WithSearchDomains(items ...*foundation.NSString) *NEDNSOverTLSSettings {
 	if len(items) == 0 {
-		x.inner.NEDNSSettings.SetSearchDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NEDNSSettings.SetSearchDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -87,7 +90,10 @@ func (x *NEDNSOverTLSSettings) WithDomainName(domainName string) *NEDNSOverTLSSe
 // WithMatchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSOverTLSSettings) WithMatchDomains(items ...*foundation.NSString) *NEDNSOverTLSSettings {
 	if len(items) == 0 {
-		x.inner.NEDNSSettings.SetMatchDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NEDNSSettings.SetMatchDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

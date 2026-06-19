@@ -47,7 +47,10 @@ func NewViewAnimationWithViewAnimations(viewAnimations *foundation.NSArray[objc.
 // WithViewAnimations sets the collection, converting the Go slice to an NSArray.
 func (x *ViewAnimation) WithViewAnimations(items ...*foundation.NSDictionary[*foundation.NSString, objc.ID]) *ViewAnimation {
 	if len(items) == 0 {
-		x.inner.SetViewAnimations(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetViewAnimations(foundation.NSArrayFromID[objc.ID](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -115,7 +118,10 @@ func (x *ViewAnimation) WithDelegate(delegate raw.NSAnimationDelegate) *ViewAnim
 // WithProgressMarks sets the collection, converting the Go slice to an NSArray.
 func (x *ViewAnimation) WithProgressMarks(items ...*foundation.NSNumber) *ViewAnimation {
 	if len(items) == 0 {
-		x.inner.NSAnimation.SetProgressMarks(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSAnimation.SetProgressMarks(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

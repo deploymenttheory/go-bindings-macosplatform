@@ -46,7 +46,10 @@ func NewUMPMutableEndpointWithNameDeviceInfoProductInstanceIDMIDIProtocolDestina
 // WithMutableFunctionBlocks sets the collection, converting the Go slice to an NSArray.
 func (x *UMPMutableEndpoint) WithMutableFunctionBlocks(items ...*raw.MIDIUMPMutableFunctionBlock) *UMPMutableEndpoint {
 	if len(items) == 0 {
-		x.inner.SetMutableFunctionBlocks(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetMutableFunctionBlocks(foundation.NSArrayFromID[*raw.MIDIUMPMutableFunctionBlock](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -66,7 +69,10 @@ func (x *UMPMutableEndpoint) WithMutableFunctionBlocks(items ...*raw.MIDIUMPMuta
 // WithFunctionBlocks sets the collection, converting the Go slice to an NSArray.
 func (x *UMPMutableEndpoint) WithFunctionBlocks(items ...UMPFunctionBlockProvider) *UMPMutableEndpoint {
 	if len(items) == 0 {
-		x.inner.MIDIUMPEndpoint.SetFunctionBlocks(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.MIDIUMPEndpoint.SetFunctionBlocks(foundation.NSArrayFromID[*raw.MIDIUMPFunctionBlock](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

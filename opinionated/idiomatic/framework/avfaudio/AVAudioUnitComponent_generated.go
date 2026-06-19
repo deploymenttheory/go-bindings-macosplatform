@@ -44,7 +44,10 @@ func NewAudioUnitComponent() *AudioUnitComponent {
 // WithUserTagNames sets the collection, converting the Go slice to an NSArray.
 func (x *AudioUnitComponent) WithUserTagNames(items ...*foundation.NSString) *AudioUnitComponent {
 	if len(items) == 0 {
-		x.inner.SetUserTagNames(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetUserTagNames(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

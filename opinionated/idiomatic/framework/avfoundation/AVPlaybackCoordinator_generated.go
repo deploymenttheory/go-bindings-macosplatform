@@ -46,7 +46,10 @@ func NewPlaybackCoordinator() *PlaybackCoordinator {
 // WithSuspensionReasonsThatTriggerWaiting sets the collection, converting the Go slice to an NSArray.
 func (x *PlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...*foundation.NSString) *PlaybackCoordinator {
 	if len(items) == 0 {
-		x.inner.SetSuspensionReasonsThatTriggerWaiting(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSuspensionReasonsThatTriggerWaiting(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

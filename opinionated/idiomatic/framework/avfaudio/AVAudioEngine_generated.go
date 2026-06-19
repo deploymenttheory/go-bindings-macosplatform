@@ -234,6 +234,8 @@ func (x *AudioEngine) DisconnectMIDIFromNodes(sourceNode *raw.AVAudioNode, desti
 	var _arg1 *foundation.NSArray[*raw.AVAudioNode]
 	if len(_ptrs) > 0 {
 		_arg1 = foundation.NSArrayFromID[*raw.AVAudioNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = foundation.NSArrayFromID[*raw.AVAudioNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.DisconnectMIDIFromNodes(sourceNode, _arg1)

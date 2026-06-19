@@ -171,7 +171,10 @@ func (x *Animation) WithAnimationDidStop(animationDidStop func(*raw.SCNAnimation
 // WithAnimationEvents sets the collection, converting the Go slice to an NSArray.
 func (x *Animation) WithAnimationEvents(items ...*raw.SCNAnimationEvent) *Animation {
 	if len(items) == 0 {
-		x.inner.SetAnimationEvents(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAnimationEvents(foundation.NSArrayFromID[*raw.SCNAnimationEvent](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

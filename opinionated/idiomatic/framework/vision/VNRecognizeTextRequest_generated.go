@@ -44,7 +44,10 @@ func NewRecognizeTextRequest() *RecognizeTextRequest {
 // WithRecognitionLanguages sets the collection, converting the Go slice to an NSArray.
 func (x *RecognizeTextRequest) WithRecognitionLanguages(items ...*foundation.NSString) *RecognizeTextRequest {
 	if len(items) == 0 {
-		x.inner.SetRecognitionLanguages(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRecognitionLanguages(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -64,7 +67,10 @@ func (x *RecognizeTextRequest) WithRecognitionLanguages(items ...*foundation.NSS
 // WithCustomWords sets the collection, converting the Go slice to an NSArray.
 func (x *RecognizeTextRequest) WithCustomWords(items ...*foundation.NSString) *RecognizeTextRequest {
 	if len(items) == 0 {
-		x.inner.SetCustomWords(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCustomWords(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

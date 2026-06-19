@@ -72,6 +72,8 @@ func (x *Graph) RunWithFeedsTargetTensorsTargetOperations(feeds unsafe.Pointer, 
 	var _arg2 *foundation.NSArray[*raw.MPSGraphOperation]
 	if len(_ptrs) > 0 {
 		_arg2 = foundation.NSArrayFromID[*raw.MPSGraphOperation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg2 = foundation.NSArrayFromID[*raw.MPSGraphOperation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.RunWithFeedsTargetTensorsTargetOperations(feeds, targetTensors, _arg2)
@@ -88,6 +90,8 @@ func (x *Graph) RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations(command
 	var _arg3 *foundation.NSArray[*raw.MPSGraphOperation]
 	if len(_ptrs) > 0 {
 		_arg3 = foundation.NSArrayFromID[*raw.MPSGraphOperation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg3 = foundation.NSArrayFromID[*raw.MPSGraphOperation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations(commandQueue, feeds, targetTensors, _arg3)

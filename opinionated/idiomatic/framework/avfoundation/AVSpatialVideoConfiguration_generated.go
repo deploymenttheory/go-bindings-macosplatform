@@ -51,7 +51,10 @@ func NewSpatialVideoConfigurationWithFormatDescription(formatDescription unsafe.
 // WithCameraCalibrationDataLensCollection sets the collection, converting the Go slice to an NSArray.
 func (x *SpatialVideoConfiguration) WithCameraCalibrationDataLensCollection(items ...*foundation.NSDictionary[*foundation.NSString, objc.ID]) *SpatialVideoConfiguration {
 	if len(items) == 0 {
-		x.inner.SetCameraCalibrationDataLensCollection(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCameraCalibrationDataLensCollection(foundation.NSArrayFromID[objc.ID](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

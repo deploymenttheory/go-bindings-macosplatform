@@ -56,7 +56,10 @@ func (x *TileGroupRule) WithAdjacency(adjacency SKTileAdjacencyMask) *TileGroupR
 // WithTileDefinitions sets the collection, converting the Go slice to an NSArray.
 func (x *TileGroupRule) WithTileDefinitions(items ...*raw.SKTileDefinition) *TileGroupRule {
 	if len(items) == 0 {
-		x.inner.SetTileDefinitions(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTileDefinitions(foundation.NSArrayFromID[*raw.SKTileDefinition](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

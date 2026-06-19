@@ -65,6 +65,8 @@ func (x *RuleSystem) AddRulesFromArray(rules ...RuleProvider) {
 	var _arg0 *foundation.NSArray[*raw.GKRule]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.GKRule](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.GKRule](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.AddRulesFromArray(_arg0)

@@ -46,7 +46,10 @@ func NewNEDNSSettingsWithServers(servers *foundation.NSArray[*foundation.NSStrin
 // WithSearchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSSettings) WithSearchDomains(items ...*foundation.NSString) *NEDNSSettings {
 	if len(items) == 0 {
-		x.inner.SetSearchDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSearchDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -74,7 +77,10 @@ func (x *NEDNSSettings) WithDomainName(domainName string) *NEDNSSettings {
 // WithMatchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSSettings) WithMatchDomains(items ...*foundation.NSString) *NEDNSSettings {
 	if len(items) == 0 {
-		x.inner.SetMatchDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetMatchDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -48,7 +48,10 @@ func (x *FetchIndexDescription) WithName(name string) *FetchIndexDescription {
 // WithElements sets the collection, converting the Go slice to an NSArray.
 func (x *FetchIndexDescription) WithElements(items ...*raw.NSFetchIndexElementDescription) *FetchIndexDescription {
 	if len(items) == 0 {
-		x.inner.SetElements(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetElements(foundation.NSArrayFromID[*raw.NSFetchIndexElementDescription](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

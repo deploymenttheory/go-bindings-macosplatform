@@ -53,7 +53,10 @@ func (x *ContentSharingPickerConfiguration) WithAllowedPickerModes(allowedPicker
 // WithExcludedWindowIDs sets the collection, converting the Go slice to an NSArray.
 func (x *ContentSharingPickerConfiguration) WithExcludedWindowIDs(items ...*foundation.NSNumber) *ContentSharingPickerConfiguration {
 	if len(items) == 0 {
-		x.inner.SetExcludedWindowIDs(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetExcludedWindowIDs(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -73,7 +76,10 @@ func (x *ContentSharingPickerConfiguration) WithExcludedWindowIDs(items ...*foun
 // WithExcludedBundleIDs sets the collection, converting the Go slice to an NSArray.
 func (x *ContentSharingPickerConfiguration) WithExcludedBundleIDs(items ...*foundation.NSString) *ContentSharingPickerConfiguration {
 	if len(items) == 0 {
-		x.inner.SetExcludedBundleIDs(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetExcludedBundleIDs(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -59,6 +59,8 @@ func (x *MetadataItem) ValuesForAttributes(keys ...StringProvider) *raw.NSDictio
 	var _arg0 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.ValuesForAttributes(_arg0)

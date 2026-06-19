@@ -53,7 +53,10 @@ func NewShareRequestAccessOperationWithShareURLs(shareURLs *foundation.NSArray[*
 // WithShareURLs sets the collection, converting the Go slice to an NSArray.
 func (x *ShareRequestAccessOperation) WithShareURLs(items ...*foundation.NSURL) *ShareRequestAccessOperation {
 	if len(items) == 0 {
-		x.inner.SetShareURLs(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetShareURLs(foundation.NSArrayFromID[*foundation.NSURL](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

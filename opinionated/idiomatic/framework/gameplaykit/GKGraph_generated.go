@@ -43,6 +43,8 @@ func NewGraphWithNodes(nodes ...GraphNodeProvider) *Graph {
 	var _arg0 *foundation.NSArray[*raw.GKGraphNode]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGraph")), objc.RegisterName("alloc"))
@@ -68,6 +70,8 @@ func (x *Graph) RemoveNodes(nodes ...GraphNodeProvider) {
 	var _arg0 *foundation.NSArray[*raw.GKGraphNode]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.RemoveNodes(_arg0)
@@ -84,6 +88,8 @@ func (x *Graph) AddNodes(nodes ...GraphNodeProvider) {
 	var _arg0 *foundation.NSArray[*raw.GKGraphNode]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.AddNodes(_arg0)

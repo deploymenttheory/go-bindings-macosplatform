@@ -59,7 +59,10 @@ func (x *UndoManager) WithLevelsOfUndo(levelsOfUndo uint) *UndoManager {
 // WithRunLoopModes sets the collection, converting the Go slice to an NSArray.
 func (x *UndoManager) WithRunLoopModes(items ...StringProvider) *UndoManager {
 	if len(items) == 0 {
-		x.inner.SetRunLoopModes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRunLoopModes(raw.NSArrayFromID[*raw.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -281,6 +284,8 @@ func (x *UndoManager) SetRunLoopModes(runLoopModes ...StringProvider) {
 	var _arg0 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetRunLoopModes(_arg0)

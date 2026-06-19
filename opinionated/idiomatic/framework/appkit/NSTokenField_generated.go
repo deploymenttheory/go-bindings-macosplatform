@@ -201,7 +201,10 @@ func (x *TokenField) WithAllowsWritingToolsAffordance(allowsWritingToolsAffordan
 // WithPlaceholderStrings sets the collection, converting the Go slice to an NSArray.
 func (x *TokenField) WithPlaceholderStrings(items ...*foundation.NSString) *TokenField {
 	if len(items) == 0 {
-		x.inner.NSTextField.SetPlaceholderStrings(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.SetPlaceholderStrings(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -219,7 +222,10 @@ func (x *TokenField) WithPlaceholderStrings(items ...*foundation.NSString) *Toke
 // WithPlaceholderAttributedStrings sets the collection, converting the Go slice to an NSArray.
 func (x *TokenField) WithPlaceholderAttributedStrings(items ...*foundation.NSAttributedString) *TokenField {
 	if len(items) == 0 {
-		x.inner.NSTextField.SetPlaceholderAttributedStrings(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.SetPlaceholderAttributedStrings(foundation.NSArrayFromID[*foundation.NSAttributedString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -467,7 +473,10 @@ func (x *TokenField) WithCell(cell CellProvider) *TokenField {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *TokenField) WithSubviews(items ...ViewProvider) *TokenField {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -617,7 +626,10 @@ func (x *TokenField) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters boo
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *TokenField) WithBackgroundFilters(items ...*coreimage.CIFilter) *TokenField {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -641,7 +653,10 @@ func (x *TokenField) WithCompositingFilter(compositingFilter *coreimage.CIFilter
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *TokenField) WithContentFilters(items ...*coreimage.CIFilter) *TokenField {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -707,7 +722,10 @@ func (x *TokenField) WithFocusRingType(focusRingType NSFocusRingType) *TokenFiel
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *TokenField) WithGestureRecognizers(items ...GestureRecognizerProvider) *TokenField {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

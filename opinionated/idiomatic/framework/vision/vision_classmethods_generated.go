@@ -142,6 +142,8 @@ func BoundingCircleForPointsError(points ...PointProvider) (*Circle, error) {
 	var _arg0 *foundation.NSArray[*raw.VNPoint]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.VNPoint](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.VNPoint](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r, _err := raw.VNGeometryUtilsBoundingCircleForPointsError(_arg0)

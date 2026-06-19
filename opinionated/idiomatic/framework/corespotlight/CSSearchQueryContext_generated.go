@@ -45,7 +45,10 @@ func NewSearchQueryContext() *SearchQueryContext {
 // WithFetchAttributes sets the collection, converting the Go slice to an NSArray.
 func (x *SearchQueryContext) WithFetchAttributes(items ...*foundation.NSString) *SearchQueryContext {
 	if len(items) == 0 {
-		x.inner.SetFetchAttributes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetFetchAttributes(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -65,7 +68,10 @@ func (x *SearchQueryContext) WithFetchAttributes(items ...*foundation.NSString) 
 // WithFilterQueries sets the collection, converting the Go slice to an NSArray.
 func (x *SearchQueryContext) WithFilterQueries(items ...*foundation.NSString) *SearchQueryContext {
 	if len(items) == 0 {
-		x.inner.SetFilterQueries(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetFilterQueries(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

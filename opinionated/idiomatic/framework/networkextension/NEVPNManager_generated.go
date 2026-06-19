@@ -44,7 +44,10 @@ func NewNEVPNManager() *NEVPNManager {
 // WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
 func (x *NEVPNManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEVPNManager {
 	if len(items) == 0 {
-		x.inner.SetOnDemandRules(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetOnDemandRules(foundation.NSArrayFromID[*raw.NEOnDemandRule](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -188,6 +191,8 @@ func (x *NEVPNManager) SetOnDemandRules(onDemandRules ...NEOnDemandRuleProvider)
 	var _arg0 *foundation.NSArray[*raw.NEOnDemandRule]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.NEOnDemandRule](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.NEOnDemandRule](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetOnDemandRules(_arg0)

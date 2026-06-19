@@ -50,7 +50,10 @@ func NewPersistentContainerWithNameManagedObjectModel(name string, model *raw.NS
 // WithPersistentStoreDescriptions sets the collection, converting the Go slice to an NSArray.
 func (x *PersistentContainer) WithPersistentStoreDescriptions(items ...*raw.NSPersistentStoreDescription) *PersistentContainer {
 	if len(items) == 0 {
-		x.inner.SetPersistentStoreDescriptions(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPersistentStoreDescriptions(foundation.NSArrayFromID[*raw.NSPersistentStoreDescription](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

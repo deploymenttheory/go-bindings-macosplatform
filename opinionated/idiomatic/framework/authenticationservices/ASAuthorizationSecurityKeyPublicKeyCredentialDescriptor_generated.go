@@ -50,7 +50,10 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTra
 // WithTransports sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) WithTransports(items ...*foundation.NSString) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 	if len(items) == 0 {
-		x.inner.SetTransports(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTransports(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

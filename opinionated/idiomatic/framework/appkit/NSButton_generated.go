@@ -442,7 +442,10 @@ func (x *Button) WithCell(cell CellProvider) *Button {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *Button) WithSubviews(items ...ViewProvider) *Button {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -592,7 +595,10 @@ func (x *Button) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *Button) WithBackgroundFilters(items ...*coreimage.CIFilter) *Button {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -616,7 +622,10 @@ func (x *Button) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *B
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *Button) WithContentFilters(items ...*coreimage.CIFilter) *Button {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -682,7 +691,10 @@ func (x *Button) WithFocusRingType(focusRingType NSFocusRingType) *Button {
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *Button) WithGestureRecognizers(items ...GestureRecognizerProvider) *Button {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

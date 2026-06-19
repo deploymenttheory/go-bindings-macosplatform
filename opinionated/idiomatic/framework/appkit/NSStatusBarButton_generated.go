@@ -449,7 +449,10 @@ func (x *StatusBarButton) WithCell(cell CellProvider) *StatusBarButton {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *StatusBarButton) WithSubviews(items ...ViewProvider) *StatusBarButton {
 	if len(items) == 0 {
-		x.inner.NSButton.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSButton.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -599,7 +602,10 @@ func (x *StatusBarButton) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilter
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *StatusBarButton) WithBackgroundFilters(items ...*coreimage.CIFilter) *StatusBarButton {
 	if len(items) == 0 {
-		x.inner.NSButton.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSButton.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -623,7 +629,10 @@ func (x *StatusBarButton) WithCompositingFilter(compositingFilter *coreimage.CIF
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *StatusBarButton) WithContentFilters(items ...*coreimage.CIFilter) *StatusBarButton {
 	if len(items) == 0 {
-		x.inner.NSButton.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSButton.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -689,7 +698,10 @@ func (x *StatusBarButton) WithFocusRingType(focusRingType NSFocusRingType) *Stat
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *StatusBarButton) WithGestureRecognizers(items ...GestureRecognizerProvider) *StatusBarButton {
 	if len(items) == 0 {
-		x.inner.NSButton.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSButton.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

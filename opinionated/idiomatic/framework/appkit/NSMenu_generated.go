@@ -72,7 +72,10 @@ func (x *Menu) WithSupermenu(supermenu *Menu) *Menu {
 // WithItemArray sets the collection, converting the Go slice to an NSArray.
 func (x *Menu) WithItemArray(items ...*raw.NSMenuItem) *Menu {
 	if len(items) == 0 {
-		x.inner.SetItemArray(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetItemArray(foundation.NSArrayFromID[*raw.NSMenuItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -170,7 +173,10 @@ func (x *Menu) WithSelectionMode(selectionMode NSMenuSelectionMode) *Menu {
 // WithSelectedItems sets the collection, converting the Go slice to an NSArray.
 func (x *Menu) WithSelectedItems(items ...*raw.NSMenuItem) *Menu {
 	if len(items) == 0 {
-		x.inner.SetSelectedItems(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSelectedItems(foundation.NSArrayFromID[*raw.NSMenuItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

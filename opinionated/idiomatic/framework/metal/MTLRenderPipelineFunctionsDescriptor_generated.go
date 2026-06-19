@@ -58,6 +58,8 @@ func (x *RenderPipelineFunctionsDescriptor) SetVertexAdditionalBinaryFunctions(v
 	var _arg0 *foundation.NSArray[raw.MTLFunction]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTLFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTLFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetVertexAdditionalBinaryFunctions(_arg0)
@@ -79,6 +81,8 @@ func (x *RenderPipelineFunctionsDescriptor) SetFragmentAdditionalBinaryFunctions
 	var _arg0 *foundation.NSArray[raw.MTLFunction]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTLFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTLFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetFragmentAdditionalBinaryFunctions(_arg0)
@@ -100,6 +104,8 @@ func (x *RenderPipelineFunctionsDescriptor) SetTileAdditionalBinaryFunctions(til
 	var _arg0 *foundation.NSArray[raw.MTLFunction]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTLFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTLFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetTileAdditionalBinaryFunctions(_arg0)

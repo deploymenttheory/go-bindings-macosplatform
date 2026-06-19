@@ -82,7 +82,10 @@ func (x *DataPoint) WithYValue(yValue *DataPointValue) *DataPoint {
 // WithAdditionalValues sets the collection, converting the Go slice to an NSArray.
 func (x *DataPoint) WithAdditionalValues(items ...*raw.AXDataPointValue) *DataPoint {
 	if len(items) == 0 {
-		x.inner.SetAdditionalValues(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAdditionalValues(foundation.NSArrayFromID[*raw.AXDataPointValue](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

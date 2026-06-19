@@ -43,7 +43,10 @@ func NewMutableServiceWithTypePrimary(uUID *raw.CBUUID, isPrimary bool) *Mutable
 // WithIncludedServices sets the collection, converting the Go slice to an NSArray.
 func (x *MutableService) WithIncludedServices(items ...ServiceProvider) *MutableService {
 	if len(items) == 0 {
-		x.inner.SetIncludedServices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetIncludedServices(foundation.NSArrayFromID[*raw.CBService](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -61,7 +64,10 @@ func (x *MutableService) WithIncludedServices(items ...ServiceProvider) *Mutable
 // WithCharacteristics sets the collection, converting the Go slice to an NSArray.
 func (x *MutableService) WithCharacteristics(items ...CharacteristicProvider) *MutableService {
 	if len(items) == 0 {
-		x.inner.SetCharacteristics(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCharacteristics(foundation.NSArrayFromID[*raw.CBCharacteristic](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -85,6 +91,8 @@ func (x *MutableService) SetIncludedServices(includedServices ...ServiceProvider
 	var _arg0 *foundation.NSArray[*raw.CBService]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.CBService](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.CBService](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetIncludedServices(_arg0)
@@ -99,6 +107,8 @@ func (x *MutableService) SetCharacteristics(characteristics ...CharacteristicPro
 	var _arg0 *foundation.NSArray[*raw.CBCharacteristic]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.CBCharacteristic](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.CBCharacteristic](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetCharacteristics(_arg0)

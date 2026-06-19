@@ -77,7 +77,10 @@ func (x *ChangeHistoryFetchRequest) WithIncludeGroupChanges(includeGroupChanges 
 // WithExcludedTransactionAuthors sets the collection, converting the Go slice to an NSArray.
 func (x *ChangeHistoryFetchRequest) WithExcludedTransactionAuthors(items ...*foundation.NSString) *ChangeHistoryFetchRequest {
 	if len(items) == 0 {
-		x.inner.SetExcludedTransactionAuthors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetExcludedTransactionAuthors(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -120,6 +123,8 @@ func (x *ChangeHistoryFetchRequest) SetAdditionalContactKeyDescriptors(additiona
 	var _arg0 *foundation.NSArray[raw.CNKeyDescriptor]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetAdditionalContactKeyDescriptors(_arg0)

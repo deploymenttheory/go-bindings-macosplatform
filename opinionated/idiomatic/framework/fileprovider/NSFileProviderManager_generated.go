@@ -347,6 +347,8 @@ func (x *FileProviderManager) RunTestingOperationsError(operations ...purego.IDe
 	var _arg0 *foundation.NSArray[raw.NSFileProviderTestingOperation]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.NSFileProviderTestingOperation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.NSFileProviderTestingOperation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.RunTestingOperationsError(_arg0)

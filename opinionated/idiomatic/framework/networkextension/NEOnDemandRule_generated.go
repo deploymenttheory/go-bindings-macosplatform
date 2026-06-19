@@ -43,7 +43,10 @@ func NewNEOnDemandRule() *NEOnDemandRule {
 // WithDNSSearchDomainMatch sets the collection, converting the Go slice to an NSArray.
 func (x *NEOnDemandRule) WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRule {
 	if len(items) == 0 {
-		x.inner.SetDNSSearchDomainMatch(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetDNSSearchDomainMatch(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -63,7 +66,10 @@ func (x *NEOnDemandRule) WithDNSSearchDomainMatch(items ...*foundation.NSString)
 // WithDNSServerAddressMatch sets the collection, converting the Go slice to an NSArray.
 func (x *NEOnDemandRule) WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRule {
 	if len(items) == 0 {
-		x.inner.SetDNSServerAddressMatch(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetDNSServerAddressMatch(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -91,7 +97,10 @@ func (x *NEOnDemandRule) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRul
 // WithSSIDMatch sets the collection, converting the Go slice to an NSArray.
 func (x *NEOnDemandRule) WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRule {
 	if len(items) == 0 {
-		x.inner.SetSSIDMatch(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSSIDMatch(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -159,7 +159,10 @@ func (x *Mesh) WithVertexCount(vertexCount uint) *Mesh {
 // WithSubmeshes sets the collection, converting the Go slice to an NSMutableArray.
 func (x *Mesh) WithSubmeshes(items ...*raw.MDLSubmesh) *Mesh {
 	if len(items) == 0 {
-		x.inner.SetSubmeshes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSubmeshes(foundation.NSMutableArrayFromID[*raw.MDLSubmesh](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -287,6 +290,8 @@ func (x *Mesh) SetVertexBuffers(vertexBuffers ...purego.IDer) {
 	var _arg0 *foundation.NSArray[raw.MDLMeshBuffer]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MDLMeshBuffer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MDLMeshBuffer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetVertexBuffers(_arg0)

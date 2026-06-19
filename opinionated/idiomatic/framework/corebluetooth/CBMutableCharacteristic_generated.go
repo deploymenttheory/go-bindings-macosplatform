@@ -64,7 +64,10 @@ func (x *MutableCharacteristic) WithValue(value *foundation.NSData) *MutableChar
 // WithDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MutableCharacteristic) WithDescriptors(items ...DescriptorProvider) *MutableCharacteristic {
 	if len(items) == 0 {
-		x.inner.SetDescriptors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetDescriptors(foundation.NSArrayFromID[*raw.CBDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -123,6 +126,8 @@ func (x *MutableCharacteristic) SetDescriptors(descriptors ...DescriptorProvider
 	var _arg0 *foundation.NSArray[*raw.CBDescriptor]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.CBDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.CBDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetDescriptors(_arg0)

@@ -103,6 +103,8 @@ func (x *LinguisticTagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ raw.NS
 	var _arg4 *raw.NSArray[*raw.NSValue]
 	if len(_ptrs) > 0 {
 		_arg4 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg4 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.TagsInRangeUnitSchemeOptionsTokenRanges(range_, raw.NSLinguisticTaggerUnit(unit), scheme, raw.NSLinguisticTaggerOptions(options), _arg4)
@@ -131,6 +133,8 @@ func (x *LinguisticTagger) TagsInRangeSchemeOptionsTokenRanges(range_ raw.NSRang
 	var _arg3 *raw.NSArray[*raw.NSValue]
 	if len(_ptrs) > 0 {
 		_arg3 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg3 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.TagsInRangeSchemeOptionsTokenRanges(range_, foundation.NSStringStringWithUTF8String(tagScheme), raw.NSLinguisticTaggerOptions(opts), _arg3)
@@ -145,6 +149,8 @@ func (x *LinguisticTagger) PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScore
 	var _arg4 *raw.NSArray[*raw.NSValue]
 	if len(_ptrs) > 0 {
 		_arg4 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg4 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex, foundation.NSStringStringWithUTF8String(tagScheme), tokenRange, sentenceRange, _arg4)

@@ -57,7 +57,10 @@ func NewTileGroupWithRules(rules *foundation.NSArray[*raw.SKTileGroupRule]) *Til
 // WithRules sets the collection, converting the Go slice to an NSArray.
 func (x *TileGroup) WithRules(items ...*raw.SKTileGroupRule) *TileGroup {
 	if len(items) == 0 {
-		x.inner.SetRules(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRules(foundation.NSArrayFromID[*raw.SKTileGroupRule](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

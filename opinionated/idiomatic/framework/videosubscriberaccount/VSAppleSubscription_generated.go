@@ -48,7 +48,10 @@ func (x *VSAppleSubscription) WithCustomerID(customerID string) *VSAppleSubscrip
 // WithProductCodes sets the collection, converting the Go slice to an NSArray.
 func (x *VSAppleSubscription) WithProductCodes(items ...*foundation.NSString) *VSAppleSubscription {
 	if len(items) == 0 {
-		x.inner.SetProductCodes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetProductCodes(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

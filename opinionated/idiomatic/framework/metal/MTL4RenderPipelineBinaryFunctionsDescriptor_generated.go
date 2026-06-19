@@ -65,6 +65,8 @@ func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetVertexAdditionalBinaryF
 	var _arg0 *foundation.NSArray[raw.MTL4BinaryFunction]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetVertexAdditionalBinaryFunctions(_arg0)
@@ -86,6 +88,8 @@ func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetFragmentAdditionalBinar
 	var _arg0 *foundation.NSArray[raw.MTL4BinaryFunction]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetFragmentAdditionalBinaryFunctions(_arg0)
@@ -107,6 +111,8 @@ func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetTileAdditionalBinaryFun
 	var _arg0 *foundation.NSArray[raw.MTL4BinaryFunction]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetTileAdditionalBinaryFunctions(_arg0)
@@ -128,6 +134,8 @@ func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetObjectAdditionalBinaryF
 	var _arg0 *foundation.NSArray[raw.MTL4BinaryFunction]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetObjectAdditionalBinaryFunctions(_arg0)
@@ -149,6 +157,8 @@ func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetMeshAdditionalBinaryFun
 	var _arg0 *foundation.NSArray[raw.MTL4BinaryFunction]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetMeshAdditionalBinaryFunctions(_arg0)

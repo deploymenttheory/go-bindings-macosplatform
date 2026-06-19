@@ -45,7 +45,10 @@ func NewNEOnDemandRuleEvaluateConnection() *NEOnDemandRuleEvaluateConnection {
 // WithConnectionRules sets the collection, converting the Go slice to an NSArray.
 func (x *NEOnDemandRuleEvaluateConnection) WithConnectionRules(items ...*raw.NEEvaluateConnectionRule) *NEOnDemandRuleEvaluateConnection {
 	if len(items) == 0 {
-		x.inner.SetConnectionRules(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetConnectionRules(foundation.NSArrayFromID[*raw.NEEvaluateConnectionRule](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -65,7 +68,10 @@ func (x *NEOnDemandRuleEvaluateConnection) WithConnectionRules(items ...*raw.NEE
 // WithDNSSearchDomainMatch sets the collection, converting the Go slice to an NSArray.
 func (x *NEOnDemandRuleEvaluateConnection) WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRuleEvaluateConnection {
 	if len(items) == 0 {
-		x.inner.NEOnDemandRule.SetDNSSearchDomainMatch(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NEOnDemandRule.SetDNSSearchDomainMatch(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -85,7 +91,10 @@ func (x *NEOnDemandRuleEvaluateConnection) WithDNSSearchDomainMatch(items ...*fo
 // WithDNSServerAddressMatch sets the collection, converting the Go slice to an NSArray.
 func (x *NEOnDemandRuleEvaluateConnection) WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRuleEvaluateConnection {
 	if len(items) == 0 {
-		x.inner.NEOnDemandRule.SetDNSServerAddressMatch(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NEOnDemandRule.SetDNSServerAddressMatch(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -113,7 +122,10 @@ func (x *NEOnDemandRuleEvaluateConnection) WithInterfaceTypeMatch(interfaceTypeM
 // WithSSIDMatch sets the collection, converting the Go slice to an NSArray.
 func (x *NEOnDemandRuleEvaluateConnection) WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRuleEvaluateConnection {
 	if len(items) == 0 {
-		x.inner.NEOnDemandRule.SetSSIDMatch(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NEOnDemandRule.SetSSIDMatch(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

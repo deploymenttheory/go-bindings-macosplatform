@@ -70,7 +70,10 @@ func (x *TreeController) WithLeafKeyPath(leafKeyPath string) *TreeController {
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *TreeController) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *TreeController {
 	if len(items) == 0 {
-		x.inner.SetSortDescriptors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSortDescriptors(foundation.NSArrayFromID[*foundation.NSSortDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -122,7 +125,10 @@ func (x *TreeController) WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleVa
 // WithSelectionIndexPaths sets the collection, converting the Go slice to an NSArray.
 func (x *TreeController) WithSelectionIndexPaths(items ...*foundation.NSIndexPath) *TreeController {
 	if len(items) == 0 {
-		x.inner.SetSelectionIndexPaths(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSelectionIndexPaths(foundation.NSArrayFromID[*foundation.NSIndexPath](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -119,7 +119,10 @@ func (x *OpenPanel) WithDirectoryURL(directoryURL string) *OpenPanel {
 // WithAllowedContentTypes sets the collection, converting the Go slice to an NSArray.
 func (x *OpenPanel) WithAllowedContentTypes(items ...*uniformtypeidentifiers.UTType) *OpenPanel {
 	if len(items) == 0 {
-		x.inner.NSSavePanel.SetAllowedContentTypes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSSavePanel.SetAllowedContentTypes(foundation.NSArrayFromID[*uniformtypeidentifiers.UTType](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -243,7 +246,10 @@ func (x *OpenPanel) WithShowsTagField(showsTagField bool) *OpenPanel {
 // WithTagNames sets the collection, converting the Go slice to an NSArray.
 func (x *OpenPanel) WithTagNames(items ...*foundation.NSString) *OpenPanel {
 	if len(items) == 0 {
-		x.inner.NSSavePanel.SetTagNames(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSSavePanel.SetTagNames(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -271,7 +277,10 @@ func (x *OpenPanel) WithShowsContentTypes(showsContentTypes bool) *OpenPanel {
 // WithAllowedFileTypes sets the collection, converting the Go slice to an NSArray.
 func (x *OpenPanel) WithAllowedFileTypes(items ...*foundation.NSString) *OpenPanel {
 	if len(items) == 0 {
-		x.inner.NSSavePanel.SetAllowedFileTypes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSSavePanel.SetAllowedFileTypes(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -355,7 +364,10 @@ func (x *OpenPanel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *OpenPan
 // WithTitlebarAccessoryViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *OpenPanel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *OpenPanel {
 	if len(items) == 0 {
-		x.inner.NSSavePanel.NSPanel.NSWindow.SetTitlebarAccessoryViewControllers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSSavePanel.NSPanel.NSWindow.SetTitlebarAccessoryViewControllers(foundation.NSArrayFromID[*raw.NSTitlebarAccessoryViewController](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

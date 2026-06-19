@@ -61,7 +61,10 @@ func (x *BackgroundExtensionView) WithAutomaticallyPlacesContentView(automatical
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *BackgroundExtensionView) WithSubviews(items ...ViewProvider) *BackgroundExtensionView {
 	if len(items) == 0 {
-		x.inner.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -211,7 +214,10 @@ func (x *BackgroundExtensionView) WithLayerUsesCoreImageFilters(layerUsesCoreIma
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *BackgroundExtensionView) WithBackgroundFilters(items ...*coreimage.CIFilter) *BackgroundExtensionView {
 	if len(items) == 0 {
-		x.inner.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -235,7 +241,10 @@ func (x *BackgroundExtensionView) WithCompositingFilter(compositingFilter *corei
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *BackgroundExtensionView) WithContentFilters(items ...*coreimage.CIFilter) *BackgroundExtensionView {
 	if len(items) == 0 {
-		x.inner.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -301,7 +310,10 @@ func (x *BackgroundExtensionView) WithFocusRingType(focusRingType NSFocusRingTyp
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *BackgroundExtensionView) WithGestureRecognizers(items ...GestureRecognizerProvider) *BackgroundExtensionView {
 	if len(items) == 0 {
-		x.inner.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -179,7 +179,10 @@ func (x *AVB17221Entity) WithCurrentConfigurationIndex(currentConfigurationIndex
 // WithMacAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *AVB17221Entity) WithMacAddresses(items ...*raw.AVBMACAddress) *AVB17221Entity {
 	if len(items) == 0 {
-		x.inner.SetMacAddresses(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetMacAddresses(foundation.NSArrayFromID[*raw.AVBMACAddress](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -44,7 +44,10 @@ func NewMutableFontCollection() *MutableFontCollection {
 // WithQueryDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MutableFontCollection) WithQueryDescriptors(items ...*raw.NSFontDescriptor) *MutableFontCollection {
 	if len(items) == 0 {
-		x.inner.SetQueryDescriptors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetQueryDescriptors(foundation.NSArrayFromID[*raw.NSFontDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -64,7 +67,10 @@ func (x *MutableFontCollection) WithQueryDescriptors(items ...*raw.NSFontDescrip
 // WithExclusionDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MutableFontCollection) WithExclusionDescriptors(items ...*raw.NSFontDescriptor) *MutableFontCollection {
 	if len(items) == 0 {
-		x.inner.SetExclusionDescriptors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetExclusionDescriptors(foundation.NSArrayFromID[*raw.NSFontDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

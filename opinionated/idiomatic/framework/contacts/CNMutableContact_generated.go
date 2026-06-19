@@ -180,7 +180,10 @@ func (x *MutableContact) WithImageData(imageData *foundation.NSData) *MutableCon
 // WithPhoneNumbers sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithPhoneNumbers(items ...*raw.CNLabeledValue[*raw.CNPhoneNumber]) *MutableContact {
 	if len(items) == 0 {
-		x.inner.SetPhoneNumbers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPhoneNumbers(foundation.NSArrayFromID[objc.ID](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -200,7 +203,10 @@ func (x *MutableContact) WithPhoneNumbers(items ...*raw.CNLabeledValue[*raw.CNPh
 // WithEmailAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithEmailAddresses(items ...*raw.CNLabeledValue[*foundation.NSString]) *MutableContact {
 	if len(items) == 0 {
-		x.inner.SetEmailAddresses(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetEmailAddresses(foundation.NSArrayFromID[objc.ID](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -220,7 +226,10 @@ func (x *MutableContact) WithEmailAddresses(items ...*raw.CNLabeledValue[*founda
 // WithPostalAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithPostalAddresses(items ...*raw.CNLabeledValue[*raw.CNPostalAddress]) *MutableContact {
 	if len(items) == 0 {
-		x.inner.SetPostalAddresses(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPostalAddresses(foundation.NSArrayFromID[objc.ID](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -240,7 +249,10 @@ func (x *MutableContact) WithPostalAddresses(items ...*raw.CNLabeledValue[*raw.C
 // WithUrlAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithUrlAddresses(items ...*raw.CNLabeledValue[*foundation.NSString]) *MutableContact {
 	if len(items) == 0 {
-		x.inner.SetUrlAddresses(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetUrlAddresses(foundation.NSArrayFromID[objc.ID](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -260,7 +272,10 @@ func (x *MutableContact) WithUrlAddresses(items ...*raw.CNLabeledValue[*foundati
 // WithContactRelations sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithContactRelations(items ...*raw.CNLabeledValue[*raw.CNContactRelation]) *MutableContact {
 	if len(items) == 0 {
-		x.inner.SetContactRelations(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetContactRelations(foundation.NSArrayFromID[objc.ID](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -280,7 +295,10 @@ func (x *MutableContact) WithContactRelations(items ...*raw.CNLabeledValue[*raw.
 // WithSocialProfiles sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithSocialProfiles(items ...*raw.CNLabeledValue[*raw.CNSocialProfile]) *MutableContact {
 	if len(items) == 0 {
-		x.inner.SetSocialProfiles(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSocialProfiles(foundation.NSArrayFromID[objc.ID](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -300,7 +318,10 @@ func (x *MutableContact) WithSocialProfiles(items ...*raw.CNLabeledValue[*raw.CN
 // WithInstantMessageAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithInstantMessageAddresses(items ...*raw.CNLabeledValue[*raw.CNInstantMessageAddress]) *MutableContact {
 	if len(items) == 0 {
-		x.inner.SetInstantMessageAddresses(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetInstantMessageAddresses(foundation.NSArrayFromID[objc.ID](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -336,7 +357,10 @@ func (x *MutableContact) WithNonGregorianBirthday(nonGregorianBirthday *foundati
 // WithDates sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithDates(items ...*raw.CNLabeledValue[*foundation.NSDateComponents]) *MutableContact {
 	if len(items) == 0 {
-		x.inner.SetDates(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetDates(foundation.NSArrayFromID[objc.ID](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

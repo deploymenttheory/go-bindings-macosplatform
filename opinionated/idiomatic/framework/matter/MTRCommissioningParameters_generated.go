@@ -123,7 +123,10 @@ func (x *MTRCommissioningParameters) WithReadEndpointInformation(readEndpointInf
 // WithExtraAttributesToRead sets the collection, converting the Go slice to an NSArray.
 func (x *MTRCommissioningParameters) WithExtraAttributesToRead(items ...*raw.MTRAttributeRequestPath) *MTRCommissioningParameters {
 	if len(items) == 0 {
-		x.inner.SetExtraAttributesToRead(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetExtraAttributesToRead(foundation.NSArrayFromID[*raw.MTRAttributeRequestPath](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -54,7 +54,10 @@ func (x *PaymentRequestShippingMethodUpdate) WithStatus(status PKPaymentAuthoriz
 // WithPaymentSummaryItems sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequestShippingMethodUpdate) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestShippingMethodUpdate {
 	if len(items) == 0 {
-		x.inner.PKPaymentRequestUpdate.SetPaymentSummaryItems(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.PKPaymentRequestUpdate.SetPaymentSummaryItems(foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -74,7 +77,10 @@ func (x *PaymentRequestShippingMethodUpdate) WithPaymentSummaryItems(items ...Pa
 // WithShippingMethods sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequestShippingMethodUpdate) WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequestShippingMethodUpdate {
 	if len(items) == 0 {
-		x.inner.PKPaymentRequestUpdate.SetShippingMethods(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.PKPaymentRequestUpdate.SetShippingMethods(foundation.NSArrayFromID[*raw.PKShippingMethod](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -94,7 +100,10 @@ func (x *PaymentRequestShippingMethodUpdate) WithShippingMethods(items ...*raw.P
 // WithMultiTokenContexts sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequestShippingMethodUpdate) WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequestShippingMethodUpdate {
 	if len(items) == 0 {
-		x.inner.PKPaymentRequestUpdate.SetMultiTokenContexts(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.PKPaymentRequestUpdate.SetMultiTokenContexts(foundation.NSArrayFromID[*raw.PKPaymentTokenContext](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

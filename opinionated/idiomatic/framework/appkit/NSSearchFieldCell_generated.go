@@ -94,7 +94,10 @@ func (x *SearchFieldCell) WithMaximumRecents(maximumRecents int) *SearchFieldCel
 // WithRecentSearches sets the collection, converting the Go slice to an NSArray.
 func (x *SearchFieldCell) WithRecentSearches(items ...*foundation.NSString) *SearchFieldCell {
 	if len(items) == 0 {
-		x.inner.SetRecentSearches(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRecentSearches(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -178,7 +181,10 @@ func (x *SearchFieldCell) WithPlaceholderAttributedString(placeholderAttributedS
 // WithAllowedInputSourceLocales sets the collection, converting the Go slice to an NSArray.
 func (x *SearchFieldCell) WithAllowedInputSourceLocales(items ...*foundation.NSString) *SearchFieldCell {
 	if len(items) == 0 {
-		x.inner.NSTextFieldCell.SetAllowedInputSourceLocales(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextFieldCell.SetAllowedInputSourceLocales(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

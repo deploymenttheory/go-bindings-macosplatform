@@ -62,7 +62,10 @@ func (x *TouchBar) WithCustomizationIdentifier(customizationIdentifier *foundati
 // WithCustomizationAllowedItemIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *TouchBar) WithCustomizationAllowedItemIdentifiers(items ...*foundation.NSString) *TouchBar {
 	if len(items) == 0 {
-		x.inner.SetCustomizationAllowedItemIdentifiers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCustomizationAllowedItemIdentifiers(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -82,7 +85,10 @@ func (x *TouchBar) WithCustomizationAllowedItemIdentifiers(items ...*foundation.
 // WithCustomizationRequiredItemIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *TouchBar) WithCustomizationRequiredItemIdentifiers(items ...*foundation.NSString) *TouchBar {
 	if len(items) == 0 {
-		x.inner.SetCustomizationRequiredItemIdentifiers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCustomizationRequiredItemIdentifiers(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -102,7 +108,10 @@ func (x *TouchBar) WithCustomizationRequiredItemIdentifiers(items ...*foundation
 // WithDefaultItemIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *TouchBar) WithDefaultItemIdentifiers(items ...*foundation.NSString) *TouchBar {
 	if len(items) == 0 {
-		x.inner.SetDefaultItemIdentifiers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetDefaultItemIdentifiers(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

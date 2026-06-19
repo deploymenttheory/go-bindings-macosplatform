@@ -53,7 +53,10 @@ func NewModifyRecordsOperationWithRecordsToSaveRecordIDsToDelete(records *founda
 // WithRecordsToSave sets the collection, converting the Go slice to an NSArray.
 func (x *ModifyRecordsOperation) WithRecordsToSave(items ...RecordProvider) *ModifyRecordsOperation {
 	if len(items) == 0 {
-		x.inner.SetRecordsToSave(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRecordsToSave(foundation.NSArrayFromID[*raw.CKRecord](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -73,7 +76,10 @@ func (x *ModifyRecordsOperation) WithRecordsToSave(items ...RecordProvider) *Mod
 // WithRecordIDsToDelete sets the collection, converting the Go slice to an NSArray.
 func (x *ModifyRecordsOperation) WithRecordIDsToDelete(items ...*raw.CKRecordID) *ModifyRecordsOperation {
 	if len(items) == 0 {
-		x.inner.SetRecordIDsToDelete(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRecordIDsToDelete(foundation.NSArrayFromID[*raw.CKRecordID](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -246,6 +252,8 @@ func (x *ModifyRecordsOperation) SetRecordsToSave(recordsToSave ...RecordProvide
 	var _arg0 *foundation.NSArray[*raw.CKRecord]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.CKRecord](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.CKRecord](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetRecordsToSave(_arg0)

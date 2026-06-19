@@ -85,7 +85,10 @@ func (x *AudioUnitBus) WithContextPresentationLatency(contextPresentationLatency
 // WithSupportedChannelCounts sets the collection, converting the Go slice to an NSArray.
 func (x *AudioUnitBus) WithSupportedChannelCounts(items ...*foundation.NSNumber) *AudioUnitBus {
 	if len(items) == 0 {
-		x.inner.SetSupportedChannelCounts(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSupportedChannelCounts(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

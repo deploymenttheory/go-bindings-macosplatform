@@ -52,7 +52,10 @@ func (x *ExtensionItem) WithAttributedContentText(attributedContentText Attribut
 // WithAttachments sets the collection, converting the Go slice to an NSArray.
 func (x *ExtensionItem) WithAttachments(items ...*raw.NSItemProvider) *ExtensionItem {
 	if len(items) == 0 {
-		x.inner.SetAttachments(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAttachments(raw.NSArrayFromID[*raw.NSItemProvider](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

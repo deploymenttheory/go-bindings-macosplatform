@@ -54,6 +54,8 @@ func (x *MTL4CompilerTaskOptions) SetLookupArchives(lookupArchives ...purego.IDe
 	var _arg0 *foundation.NSArray[raw.MTL4Archive]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTL4Archive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTL4Archive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetLookupArchives(_arg0)

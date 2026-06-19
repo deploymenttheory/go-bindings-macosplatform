@@ -83,7 +83,10 @@ func NewBatchInsertRequestWithEntityNameManagedObjectHandler(entityName string, 
 // WithObjectsToInsert sets the collection, converting the Go slice to an NSArray.
 func (x *BatchInsertRequest) WithObjectsToInsert(items ...*foundation.NSDictionary[*foundation.NSString, objc.ID]) *BatchInsertRequest {
 	if len(items) == 0 {
-		x.inner.SetObjectsToInsert(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetObjectsToInsert(foundation.NSArrayFromID[objc.ID](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -119,7 +122,10 @@ func (x *BatchInsertRequest) WithResultType(resultType NSBatchInsertRequestResul
 // WithAffectedStores sets the collection, converting the Go slice to an NSArray.
 func (x *BatchInsertRequest) WithAffectedStores(items ...PersistentStoreProvider) *BatchInsertRequest {
 	if len(items) == 0 {
-		x.inner.NSPersistentStoreRequest.SetAffectedStores(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSPersistentStoreRequest.SetAffectedStores(foundation.NSArrayFromID[*raw.NSPersistentStore](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

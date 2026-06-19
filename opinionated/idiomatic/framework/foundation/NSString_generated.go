@@ -875,6 +875,8 @@ func (x *String) StringsByAppendingPaths(paths ...StringProvider) *raw.NSArray[*
 	var _arg0 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.StringsByAppendingPaths(_arg0)
@@ -889,6 +891,8 @@ func (x *String) CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(
 	var _arg3 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg3 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg3 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(foundation.NSStringStringWithUTF8String(outputName), flag, outputArray, _arg3)
@@ -1037,6 +1041,8 @@ func (x *String) LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_
 	var _arg4 *raw.NSArray[*raw.NSValue]
 	if len(_ptrs) > 0 {
 		_arg4 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg4 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_, scheme, raw.NSLinguisticTaggerOptions(options), orthography, _arg4)

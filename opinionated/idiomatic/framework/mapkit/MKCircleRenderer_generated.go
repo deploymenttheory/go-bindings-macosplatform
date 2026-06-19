@@ -97,7 +97,10 @@ func (x *CircleRenderer) WithLineDashPhase(lineDashPhase float64) *CircleRendere
 // WithLineDashPattern sets the collection, converting the Go slice to an NSArray.
 func (x *CircleRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *CircleRenderer {
 	if len(items) == 0 {
-		x.inner.MKOverlayPathRenderer.SetLineDashPattern(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.MKOverlayPathRenderer.SetLineDashPattern(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

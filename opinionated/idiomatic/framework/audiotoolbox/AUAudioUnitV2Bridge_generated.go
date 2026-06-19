@@ -166,7 +166,10 @@ func (x *AudioUnitV2Bridge) WithContextName(contextName string) *AudioUnitV2Brid
 // WithChannelMap sets the collection, converting the Go slice to an NSArray.
 func (x *AudioUnitV2Bridge) WithChannelMap(items ...*foundation.NSNumber) *AudioUnitV2Bridge {
 	if len(items) == 0 {
-		x.inner.AUAudioUnit.SetChannelMap(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.AUAudioUnit.SetChannelMap(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

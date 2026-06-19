@@ -518,7 +518,10 @@ func (x *EmitterNode) WithReachConstraints(reachConstraints *ReachConstraints) *
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *EmitterNode) WithConstraints(items ...*raw.SKConstraint) *EmitterNode {
 	if len(items) == 0 {
-		x.inner.SKNode.SetConstraints(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SKNode.SetConstraints(foundation.NSArrayFromID[*raw.SKConstraint](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

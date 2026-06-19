@@ -61,7 +61,10 @@ func (x *TextStorage) WithTextStorageObserver(textStorageObserver raw.NSTextStor
 // WithAttributeRuns sets the collection, converting the Go slice to an NSArray.
 func (x *TextStorage) WithAttributeRuns(items ...*raw.NSTextStorage) *TextStorage {
 	if len(items) == 0 {
-		x.inner.SetAttributeRuns(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAttributeRuns(foundation.NSArrayFromID[*raw.NSTextStorage](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -81,7 +84,10 @@ func (x *TextStorage) WithAttributeRuns(items ...*raw.NSTextStorage) *TextStorag
 // WithParagraphs sets the collection, converting the Go slice to an NSArray.
 func (x *TextStorage) WithParagraphs(items ...*raw.NSTextStorage) *TextStorage {
 	if len(items) == 0 {
-		x.inner.SetParagraphs(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetParagraphs(foundation.NSArrayFromID[*raw.NSTextStorage](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -101,7 +107,10 @@ func (x *TextStorage) WithParagraphs(items ...*raw.NSTextStorage) *TextStorage {
 // WithWords sets the collection, converting the Go slice to an NSArray.
 func (x *TextStorage) WithWords(items ...*raw.NSTextStorage) *TextStorage {
 	if len(items) == 0 {
-		x.inner.SetWords(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetWords(foundation.NSArrayFromID[*raw.NSTextStorage](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -121,7 +130,10 @@ func (x *TextStorage) WithWords(items ...*raw.NSTextStorage) *TextStorage {
 // WithCharacters sets the collection, converting the Go slice to an NSArray.
 func (x *TextStorage) WithCharacters(items ...*raw.NSTextStorage) *TextStorage {
 	if len(items) == 0 {
-		x.inner.SetCharacters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCharacters(foundation.NSArrayFromID[*raw.NSTextStorage](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

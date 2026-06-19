@@ -375,6 +375,8 @@ func PreferredLocalizationsFromArray(localizationsArray ...StringProvider) *raw.
 	var _arg0 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return raw.NSBundlePreferredLocalizationsFromArray(_arg0)
@@ -389,6 +391,8 @@ func PreferredLocalizationsFromArrayForPreferences(localizationsArray *raw.NSArr
 	var _arg1 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg1 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return raw.NSBundlePreferredLocalizationsFromArrayForPreferences(localizationsArray, _arg1)
@@ -779,6 +783,8 @@ func AndPredicateWithSubpredicates(subpredicates ...PredicateProvider) *Compound
 	var _arg0 *raw.NSArray[*raw.NSPredicate]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSPredicate](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSPredicate](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.NSCompoundPredicateAndPredicateWithSubpredicates(_arg0)
@@ -797,6 +803,8 @@ func OrPredicateWithSubpredicates(subpredicates ...PredicateProvider) *CompoundP
 	var _arg0 *raw.NSArray[*raw.NSPredicate]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSPredicate](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSPredicate](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.NSCompoundPredicateOrPredicateWithSubpredicates(_arg0)
@@ -1284,6 +1292,8 @@ func DictionaryWithObjectsForKeys(objects *raw.NSArray[objc.ID], keys ...purego.
 	var _arg1 *raw.NSArray[raw.NSCopying]
 	if len(_ptrs) > 0 {
 		_arg1 = raw.NSArrayFromID[raw.NSCopying](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = raw.NSArrayFromID[raw.NSCopying](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return raw.NSDictionaryDictionaryWithObjectsForKeys(objects, _arg1)
@@ -1303,6 +1313,8 @@ func SharedKeySetForKeys(keys ...purego.IDer) objc.ID {
 	var _arg0 *raw.NSArray[raw.NSCopying]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[raw.NSCopying](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[raw.NSCopying](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return raw.NSDictionarySharedKeySetForKeys(_arg0)
@@ -2145,6 +2157,8 @@ func TagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges(string_ string, r
 	var _arg6 *raw.NSArray[*raw.NSValue]
 	if len(_ptrs) > 0 {
 		_arg6 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg6 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return raw.NSLinguisticTaggerTagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges(foundation.NSStringStringWithUTF8String(string_), range_, raw.NSLinguisticTaggerUnit(unit), scheme, raw.NSLinguisticTaggerOptions(options), orthography, _arg6)
@@ -2164,6 +2178,8 @@ func LocalizedStringByJoiningStrings(strings_ ...StringProvider) *String {
 	var _arg0 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.NSListFormatterLocalizedStringByJoiningStrings(_arg0)
@@ -3968,6 +3984,8 @@ func PathWithComponents(components ...StringProvider) *String {
 	var _arg0 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.NSStringPathWithComponents(_arg0)
@@ -3995,6 +4013,8 @@ func LaunchedTaskWithLaunchPathArguments(path string, arguments ...StringProvide
 	var _arg1 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg1 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.NSTaskLaunchedTaskWithLaunchPathArguments(foundation.NSStringStringWithUTF8String(path), _arg1)
@@ -4157,6 +4177,8 @@ func CorrectionCheckingResultWithRangeReplacementStringAlternativeStrings(range_
 	var _arg2 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg2 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg2 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.NSTextCheckingResultCorrectionCheckingResultWithRangeReplacementStringAlternativeStrings(range_, foundation.NSStringStringWithUTF8String(replacementString), _arg2)
@@ -4589,6 +4611,8 @@ func FileURLWithPathComponents(components ...StringProvider) *URL {
 	var _arg0 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.NSURLFileURLWithPathComponents(_arg0)
@@ -7062,6 +7086,8 @@ func ElementWithNameChildrenAttributes(name string, children *raw.NSArray[*raw.N
 	var _arg2 *raw.NSArray[*raw.NSXMLNode]
 	if len(_ptrs) > 0 {
 		_arg2 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg2 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return raw.NSXMLNodeElementWithNameChildrenAttributes(foundation.NSStringStringWithUTF8String(name), children, _arg2)

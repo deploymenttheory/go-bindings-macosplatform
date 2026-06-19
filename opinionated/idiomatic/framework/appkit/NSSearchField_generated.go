@@ -48,7 +48,10 @@ func NewSearchField() *SearchField {
 // WithRecentSearches sets the collection, converting the Go slice to an NSArray.
 func (x *SearchField) WithRecentSearches(items ...*foundation.NSString) *SearchField {
 	if len(items) == 0 {
-		x.inner.SetRecentSearches(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRecentSearches(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -246,7 +249,10 @@ func (x *SearchField) WithAllowsWritingToolsAffordance(allowsWritingToolsAfforda
 // WithPlaceholderStrings sets the collection, converting the Go slice to an NSArray.
 func (x *SearchField) WithPlaceholderStrings(items ...*foundation.NSString) *SearchField {
 	if len(items) == 0 {
-		x.inner.NSTextField.SetPlaceholderStrings(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.SetPlaceholderStrings(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -264,7 +270,10 @@ func (x *SearchField) WithPlaceholderStrings(items ...*foundation.NSString) *Sea
 // WithPlaceholderAttributedStrings sets the collection, converting the Go slice to an NSArray.
 func (x *SearchField) WithPlaceholderAttributedStrings(items ...*foundation.NSAttributedString) *SearchField {
 	if len(items) == 0 {
-		x.inner.NSTextField.SetPlaceholderAttributedStrings(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.SetPlaceholderAttributedStrings(foundation.NSArrayFromID[*foundation.NSAttributedString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -512,7 +521,10 @@ func (x *SearchField) WithCell(cell CellProvider) *SearchField {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *SearchField) WithSubviews(items ...ViewProvider) *SearchField {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -662,7 +674,10 @@ func (x *SearchField) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bo
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *SearchField) WithBackgroundFilters(items ...*coreimage.CIFilter) *SearchField {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -686,7 +701,10 @@ func (x *SearchField) WithCompositingFilter(compositingFilter *coreimage.CIFilte
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *SearchField) WithContentFilters(items ...*coreimage.CIFilter) *SearchField {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -752,7 +770,10 @@ func (x *SearchField) WithFocusRingType(focusRingType NSFocusRingType) *SearchFi
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *SearchField) WithGestureRecognizers(items ...GestureRecognizerProvider) *SearchField {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

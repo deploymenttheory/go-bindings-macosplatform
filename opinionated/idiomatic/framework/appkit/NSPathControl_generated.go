@@ -52,7 +52,10 @@ func (x *PathControl) WithEditable(editable bool) *PathControl {
 // WithAllowedTypes sets the collection, converting the Go slice to an NSArray.
 func (x *PathControl) WithAllowedTypes(items ...*foundation.NSString) *PathControl {
 	if len(items) == 0 {
-		x.inner.SetAllowedTypes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAllowedTypes(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -106,7 +109,10 @@ func (x *PathControl) WithPathStyle(pathStyle NSPathStyle) *PathControl {
 // WithPathItems sets the collection, converting the Go slice to an NSArray.
 func (x *PathControl) WithPathItems(items ...*raw.NSPathControlItem) *PathControl {
 	if len(items) == 0 {
-		x.inner.SetPathItems(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPathItems(foundation.NSArrayFromID[*raw.NSPathControlItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -330,7 +336,10 @@ func (x *PathControl) WithCell(cell CellProvider) *PathControl {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *PathControl) WithSubviews(items ...ViewProvider) *PathControl {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -480,7 +489,10 @@ func (x *PathControl) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bo
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *PathControl) WithBackgroundFilters(items ...*coreimage.CIFilter) *PathControl {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -504,7 +516,10 @@ func (x *PathControl) WithCompositingFilter(compositingFilter *coreimage.CIFilte
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *PathControl) WithContentFilters(items ...*coreimage.CIFilter) *PathControl {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -570,7 +585,10 @@ func (x *PathControl) WithFocusRingType(focusRingType NSFocusRingType) *PathCont
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *PathControl) WithGestureRecognizers(items ...GestureRecognizerProvider) *PathControl {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -97,7 +97,10 @@ func (x *GridView) WithColumnSpacing(columnSpacing float64) *GridView {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *GridView) WithSubviews(items ...ViewProvider) *GridView {
 	if len(items) == 0 {
-		x.inner.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -247,7 +250,10 @@ func (x *GridView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool)
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *GridView) WithBackgroundFilters(items ...*coreimage.CIFilter) *GridView {
 	if len(items) == 0 {
-		x.inner.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -271,7 +277,10 @@ func (x *GridView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) 
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *GridView) WithContentFilters(items ...*coreimage.CIFilter) *GridView {
 	if len(items) == 0 {
-		x.inner.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -337,7 +346,10 @@ func (x *GridView) WithFocusRingType(focusRingType NSFocusRingType) *GridView {
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *GridView) WithGestureRecognizers(items ...GestureRecognizerProvider) *GridView {
 	if len(items) == 0 {
-		x.inner.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -521,6 +533,8 @@ func (x *GridView) AddRowWithViews(views ...ViewProvider) *GridRow {
 	var _arg0 *foundation.NSArray[*raw.NSView]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := x.inner.AddRowWithViews(_arg0)
@@ -541,6 +555,8 @@ func (x *GridView) InsertRowAtIndexWithViews(index int, views ...ViewProvider) *
 	var _arg1 *foundation.NSArray[*raw.NSView]
 	if len(_ptrs) > 0 {
 		_arg1 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := x.inner.InsertRowAtIndexWithViews(index, _arg1)
@@ -575,6 +591,8 @@ func (x *GridView) AddColumnWithViews(views ...ViewProvider) *GridColumn {
 	var _arg0 *foundation.NSArray[*raw.NSView]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := x.inner.AddColumnWithViews(_arg0)
@@ -595,6 +613,8 @@ func (x *GridView) InsertColumnAtIndexWithViews(index int, views ...ViewProvider
 	var _arg1 *foundation.NSArray[*raw.NSView]
 	if len(_ptrs) > 0 {
 		_arg1 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := x.inner.InsertColumnAtIndexWithViews(index, _arg1)

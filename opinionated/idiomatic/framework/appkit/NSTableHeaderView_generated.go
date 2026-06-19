@@ -53,7 +53,10 @@ func (x *TableHeaderView) WithTableView(tableView TableViewProvider) *TableHeade
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *TableHeaderView) WithSubviews(items ...ViewProvider) *TableHeaderView {
 	if len(items) == 0 {
-		x.inner.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -203,7 +206,10 @@ func (x *TableHeaderView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilter
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *TableHeaderView) WithBackgroundFilters(items ...*coreimage.CIFilter) *TableHeaderView {
 	if len(items) == 0 {
-		x.inner.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -227,7 +233,10 @@ func (x *TableHeaderView) WithCompositingFilter(compositingFilter *coreimage.CIF
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *TableHeaderView) WithContentFilters(items ...*coreimage.CIFilter) *TableHeaderView {
 	if len(items) == 0 {
-		x.inner.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -293,7 +302,10 @@ func (x *TableHeaderView) WithFocusRingType(focusRingType NSFocusRingType) *Tabl
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *TableHeaderView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TableHeaderView {
 	if len(items) == 0 {
-		x.inner.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

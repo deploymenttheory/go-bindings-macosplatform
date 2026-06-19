@@ -106,7 +106,10 @@ func (x *Floor) WithName(name string) *Floor {
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Floor) WithMaterials(items ...*raw.SCNMaterial) *Floor {
 	if len(items) == 0 {
-		x.inner.SCNGeometry.SetMaterials(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SCNGeometry.SetMaterials(foundation.NSArrayFromID[*raw.SCNMaterial](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -134,7 +137,10 @@ func (x *Floor) WithFirstMaterial(firstMaterial *Material) *Floor {
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Floor) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Floor {
 	if len(items) == 0 {
-		x.inner.SCNGeometry.SetLevelsOfDetail(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SCNGeometry.SetLevelsOfDetail(foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

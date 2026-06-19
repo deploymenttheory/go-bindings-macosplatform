@@ -44,7 +44,10 @@ func NewMutableAudioMix() *MutableAudioMix {
 // WithInputParameters sets the collection, converting the Go slice to an NSArray.
 func (x *MutableAudioMix) WithInputParameters(items ...AudioMixInputParametersProvider) *MutableAudioMix {
 	if len(items) == 0 {
-		x.inner.SetInputParameters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetInputParameters(foundation.NSArrayFromID[*raw.AVAudioMixInputParameters](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -68,6 +71,8 @@ func (x *MutableAudioMix) SetInputParameters(inputParameters ...AudioMixInputPar
 	var _arg0 *foundation.NSArray[*raw.AVAudioMixInputParameters]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.AVAudioMixInputParameters](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.AVAudioMixInputParameters](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetInputParameters(_arg0)

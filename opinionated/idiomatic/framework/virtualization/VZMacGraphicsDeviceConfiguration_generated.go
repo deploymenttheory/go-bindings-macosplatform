@@ -47,7 +47,10 @@ func NewMacGraphicsDeviceConfiguration() *MacGraphicsDeviceConfiguration {
 // WithDisplays sets the collection, converting the Go slice to an NSArray.
 func (x *MacGraphicsDeviceConfiguration) WithDisplays(items ...*raw.VZMacGraphicsDisplayConfiguration) *MacGraphicsDeviceConfiguration {
 	if len(items) == 0 {
-		x.inner.SetDisplays(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetDisplays(foundation.NSArrayFromID[*raw.VZMacGraphicsDisplayConfiguration](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

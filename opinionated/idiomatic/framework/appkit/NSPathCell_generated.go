@@ -62,7 +62,10 @@ func (x *PathCell) WithURL(uRL string) *PathCell {
 // WithAllowedTypes sets the collection, converting the Go slice to an NSArray.
 func (x *PathCell) WithAllowedTypes(items ...*foundation.NSString) *PathCell {
 	if len(items) == 0 {
-		x.inner.SetAllowedTypes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAllowedTypes(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -90,7 +93,10 @@ func (x *PathCell) WithDelegate(delegate raw.NSPathCellDelegate) *PathCell {
 // WithPathComponentCells sets the collection, converting the Go slice to an NSArray.
 func (x *PathCell) WithPathComponentCells(items ...*raw.NSPathComponentCell) *PathCell {
 	if len(items) == 0 {
-		x.inner.SetPathComponentCells(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPathComponentCells(foundation.NSArrayFromID[*raw.NSPathComponentCell](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

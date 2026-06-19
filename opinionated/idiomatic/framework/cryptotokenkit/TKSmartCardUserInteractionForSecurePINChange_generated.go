@@ -60,7 +60,10 @@ func (x *SmartCardUserInteractionForSecurePINChange) WithPINCompletion(pINComple
 // WithPINMessageIndices sets the collection, converting the Go slice to an NSArray.
 func (x *SmartCardUserInteractionForSecurePINChange) WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForSecurePINChange {
 	if len(items) == 0 {
-		x.inner.TKSmartCardUserInteractionForPINOperation.SetPINMessageIndices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.TKSmartCardUserInteractionForPINOperation.SetPINMessageIndices(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

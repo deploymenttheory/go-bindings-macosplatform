@@ -86,7 +86,10 @@ func NewXMLElementWithKindOptions(kind NSXMLNodeKind, options NSXMLNodeOptions) 
 // WithAttributes sets the collection, converting the Go slice to an NSArray.
 func (x *XMLElement) WithAttributes(items ...XMLNodeProvider) *XMLElement {
 	if len(items) == 0 {
-		x.inner.SetAttributes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAttributes(raw.NSArrayFromID[*raw.NSXMLNode](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -106,7 +109,10 @@ func (x *XMLElement) WithAttributes(items ...XMLNodeProvider) *XMLElement {
 // WithNamespaces sets the collection, converting the Go slice to an NSArray.
 func (x *XMLElement) WithNamespaces(items ...XMLNodeProvider) *XMLElement {
 	if len(items) == 0 {
-		x.inner.SetNamespaces(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetNamespaces(raw.NSArrayFromID[*raw.NSXMLNode](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -295,6 +301,8 @@ func (x *XMLElement) SetChildren(children ...XMLNodeProvider) {
 	var _arg0 *raw.NSArray[*raw.NSXMLNode]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetChildren(_arg0)
@@ -343,6 +351,8 @@ func (x *XMLElement) SetAttributes(attributes ...XMLNodeProvider) {
 	var _arg0 *raw.NSArray[*raw.NSXMLNode]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetAttributes(_arg0)
@@ -370,6 +380,8 @@ func (x *XMLElement) SetNamespaces(namespaces ...XMLNodeProvider) {
 	var _arg0 *raw.NSArray[*raw.NSXMLNode]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetNamespaces(_arg0)

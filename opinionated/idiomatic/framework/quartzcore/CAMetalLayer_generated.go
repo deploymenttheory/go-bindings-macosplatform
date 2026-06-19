@@ -162,7 +162,10 @@ func (x *MetalLayer) WithGeometryFlipped(geometryFlipped bool) *MetalLayer {
 // WithSublayers sets the collection, converting the Go slice to an NSArray.
 func (x *MetalLayer) WithSublayers(items ...LayerProvider) *MetalLayer {
 	if len(items) == 0 {
-		x.inner.CALayer.SetSublayers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.CALayer.SetSublayers(foundation.NSArrayFromID[*raw.CALayer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -414,7 +417,10 @@ func (x *MetalLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID])
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *MetalLayer) WithConstraints(items ...*raw.CAConstraint) *MetalLayer {
 	if len(items) == 0 {
-		x.inner.CALayer.SetConstraints(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.CALayer.SetConstraints(foundation.NSArrayFromID[*raw.CAConstraint](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -42,7 +42,10 @@ func NewNETransparentProxyManager() *NETransparentProxyManager {
 // WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
 func (x *NETransparentProxyManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NETransparentProxyManager {
 	if len(items) == 0 {
-		x.inner.NEVPNManager.SetOnDemandRules(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NEVPNManager.SetOnDemandRules(foundation.NSArrayFromID[*raw.NEOnDemandRule](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

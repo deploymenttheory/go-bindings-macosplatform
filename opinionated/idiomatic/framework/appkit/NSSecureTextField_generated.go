@@ -177,7 +177,10 @@ func (x *SecureTextField) WithAllowsWritingToolsAffordance(allowsWritingToolsAff
 // WithPlaceholderStrings sets the collection, converting the Go slice to an NSArray.
 func (x *SecureTextField) WithPlaceholderStrings(items ...*foundation.NSString) *SecureTextField {
 	if len(items) == 0 {
-		x.inner.NSTextField.SetPlaceholderStrings(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.SetPlaceholderStrings(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -195,7 +198,10 @@ func (x *SecureTextField) WithPlaceholderStrings(items ...*foundation.NSString) 
 // WithPlaceholderAttributedStrings sets the collection, converting the Go slice to an NSArray.
 func (x *SecureTextField) WithPlaceholderAttributedStrings(items ...*foundation.NSAttributedString) *SecureTextField {
 	if len(items) == 0 {
-		x.inner.NSTextField.SetPlaceholderAttributedStrings(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.SetPlaceholderAttributedStrings(foundation.NSArrayFromID[*foundation.NSAttributedString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -443,7 +449,10 @@ func (x *SecureTextField) WithCell(cell CellProvider) *SecureTextField {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *SecureTextField) WithSubviews(items ...ViewProvider) *SecureTextField {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -593,7 +602,10 @@ func (x *SecureTextField) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilter
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *SecureTextField) WithBackgroundFilters(items ...*coreimage.CIFilter) *SecureTextField {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -617,7 +629,10 @@ func (x *SecureTextField) WithCompositingFilter(compositingFilter *coreimage.CIF
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *SecureTextField) WithContentFilters(items ...*coreimage.CIFilter) *SecureTextField {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -683,7 +698,10 @@ func (x *SecureTextField) WithFocusRingType(focusRingType NSFocusRingType) *Secu
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *SecureTextField) WithGestureRecognizers(items ...GestureRecognizerProvider) *SecureTextField {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

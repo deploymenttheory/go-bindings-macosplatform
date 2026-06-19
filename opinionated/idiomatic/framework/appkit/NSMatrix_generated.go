@@ -393,7 +393,10 @@ func (x *Matrix) WithCell(cell CellProvider) *Matrix {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *Matrix) WithSubviews(items ...ViewProvider) *Matrix {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -543,7 +546,10 @@ func (x *Matrix) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *Matrix) WithBackgroundFilters(items ...*coreimage.CIFilter) *Matrix {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -567,7 +573,10 @@ func (x *Matrix) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *M
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *Matrix) WithContentFilters(items ...*coreimage.CIFilter) *Matrix {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -633,7 +642,10 @@ func (x *Matrix) WithFocusRingType(focusRingType NSFocusRingType) *Matrix {
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *Matrix) WithGestureRecognizers(items ...GestureRecognizerProvider) *Matrix {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -907,6 +919,8 @@ func (x *Matrix) AddRowWithCells(newCells ...CellProvider) {
 	var _arg0 *foundation.NSArray[*raw.NSCell]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.NSCell](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.NSCell](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.AddRowWithCells(_arg0)
@@ -930,6 +944,8 @@ func (x *Matrix) InsertRowWithCells(row int, newCells ...CellProvider) {
 	var _arg1 *foundation.NSArray[*raw.NSCell]
 	if len(_ptrs) > 0 {
 		_arg1 = foundation.NSArrayFromID[*raw.NSCell](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = foundation.NSArrayFromID[*raw.NSCell](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.InsertRowWithCells(row, _arg1)
@@ -960,6 +976,8 @@ func (x *Matrix) AddColumnWithCells(newCells ...CellProvider) {
 	var _arg0 *foundation.NSArray[*raw.NSCell]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.NSCell](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.NSCell](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.AddColumnWithCells(_arg0)
@@ -983,6 +1001,8 @@ func (x *Matrix) InsertColumnWithCells(column int, newCells ...CellProvider) {
 	var _arg1 *foundation.NSArray[*raw.NSCell]
 	if len(_ptrs) > 0 {
 		_arg1 = foundation.NSArrayFromID[*raw.NSCell](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = foundation.NSArrayFromID[*raw.NSCell](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.InsertColumnWithCells(column, _arg1)

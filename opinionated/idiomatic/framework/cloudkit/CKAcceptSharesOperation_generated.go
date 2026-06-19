@@ -53,7 +53,10 @@ func NewAcceptSharesOperationWithShareMetadatas(shareMetadatas *foundation.NSArr
 // WithShareMetadatas sets the collection, converting the Go slice to an NSArray.
 func (x *AcceptSharesOperation) WithShareMetadatas(items ...*raw.CKShareMetadata) *AcceptSharesOperation {
 	if len(items) == 0 {
-		x.inner.SetShareMetadatas(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetShareMetadatas(foundation.NSArrayFromID[*raw.CKShareMetadata](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

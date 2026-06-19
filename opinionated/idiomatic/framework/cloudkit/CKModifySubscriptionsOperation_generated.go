@@ -53,7 +53,10 @@ func NewModifySubscriptionsOperationWithSubscriptionsToSaveSubscriptionIDsToDele
 // WithSubscriptionsToSave sets the collection, converting the Go slice to an NSArray.
 func (x *ModifySubscriptionsOperation) WithSubscriptionsToSave(items ...SubscriptionProvider) *ModifySubscriptionsOperation {
 	if len(items) == 0 {
-		x.inner.SetSubscriptionsToSave(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSubscriptionsToSave(foundation.NSArrayFromID[*raw.CKSubscription](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -73,7 +76,10 @@ func (x *ModifySubscriptionsOperation) WithSubscriptionsToSave(items ...Subscrip
 // WithSubscriptionIDsToDelete sets the collection, converting the Go slice to an NSArray.
 func (x *ModifySubscriptionsOperation) WithSubscriptionIDsToDelete(items ...*foundation.NSString) *ModifySubscriptionsOperation {
 	if len(items) == 0 {
-		x.inner.SetSubscriptionIDsToDelete(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSubscriptionIDsToDelete(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -206,6 +212,8 @@ func (x *ModifySubscriptionsOperation) SetSubscriptionsToSave(subscriptionsToSav
 	var _arg0 *foundation.NSArray[*raw.CKSubscription]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.CKSubscription](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.CKSubscription](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetSubscriptionsToSave(_arg0)

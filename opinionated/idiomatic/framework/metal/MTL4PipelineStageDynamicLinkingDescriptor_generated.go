@@ -78,6 +78,8 @@ func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetBinaryLinkedFunctions(bin
 	var _arg0 *foundation.NSArray[raw.MTL4BinaryFunction]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetBinaryLinkedFunctions(_arg0)
@@ -99,6 +101,8 @@ func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetPreloadedLibraries(preloa
 	var _arg0 *foundation.NSArray[raw.MTLDynamicLibrary]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetPreloadedLibraries(_arg0)

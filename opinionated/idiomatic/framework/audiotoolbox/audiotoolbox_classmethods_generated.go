@@ -62,6 +62,8 @@ func CreateGroupWithIdentifierNameChildren(identifier string, name string, child
 	var _arg2 *foundation.NSArray[*raw.AUParameterNode]
 	if len(_ptrs) > 0 {
 		_arg2 = foundation.NSArrayFromID[*raw.AUParameterNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg2 = foundation.NSArrayFromID[*raw.AUParameterNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.AUParameterTreeCreateGroupWithIdentifierNameChildren(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(name), _arg2)
@@ -80,6 +82,8 @@ func CreateGroupTemplate(children ...ParameterNodeProvider) *ParameterGroup {
 	var _arg0 *foundation.NSArray[*raw.AUParameterNode]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.AUParameterNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.AUParameterNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.AUParameterTreeCreateGroupTemplate(_arg0)
@@ -107,6 +111,8 @@ func CreateTreeWithChildren(children ...ParameterNodeProvider) *ParameterTree {
 	var _arg0 *foundation.NSArray[*raw.AUParameterNode]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.AUParameterNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.AUParameterNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.AUParameterTreeCreateTreeWithChildren(_arg0)

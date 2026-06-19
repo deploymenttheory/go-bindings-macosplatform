@@ -100,7 +100,10 @@ func (x *TextView) WithUsesAdaptiveColorMappingForDarkAppearance(usesAdaptiveCol
 // WithSelectedRanges sets the collection, converting the Go slice to an NSArray.
 func (x *TextView) WithSelectedRanges(items ...*foundation.NSValue) *TextView {
 	if len(items) == 0 {
-		x.inner.SetSelectedRanges(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSelectedRanges(foundation.NSArrayFromID[*foundation.NSValue](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -262,7 +265,10 @@ func (x *TextView) WithRulerVisible(rulerVisible bool) *TextView {
 // WithAllowedInputSourceLocales sets the collection, converting the Go slice to an NSArray.
 func (x *TextView) WithAllowedInputSourceLocales(items ...*foundation.NSString) *TextView {
 	if len(items) == 0 {
-		x.inner.SetAllowedInputSourceLocales(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAllowedInputSourceLocales(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -566,7 +572,10 @@ func (x *TextView) WithVerticallyResizable(verticallyResizable bool) *TextView {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *TextView) WithSubviews(items ...ViewProvider) *TextView {
 	if len(items) == 0 {
-		x.inner.NSText.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSText.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -716,7 +725,10 @@ func (x *TextView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool)
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *TextView) WithBackgroundFilters(items ...*coreimage.CIFilter) *TextView {
 	if len(items) == 0 {
-		x.inner.NSText.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSText.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -740,7 +752,10 @@ func (x *TextView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) 
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *TextView) WithContentFilters(items ...*coreimage.CIFilter) *TextView {
 	if len(items) == 0 {
-		x.inner.NSText.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSText.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -806,7 +821,10 @@ func (x *TextView) WithFocusRingType(focusRingType NSFocusRingType) *TextView {
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *TextView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TextView {
 	if len(items) == 0 {
-		x.inner.NSText.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSText.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

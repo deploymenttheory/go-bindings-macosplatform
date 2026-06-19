@@ -120,7 +120,10 @@ func (x *Reminder) WithTimeZone(timeZone *foundation.NSTimeZone) *Reminder {
 // WithAlarms sets the collection, converting the Go slice to an NSArray.
 func (x *Reminder) WithAlarms(items ...*raw.EKAlarm) *Reminder {
 	if len(items) == 0 {
-		x.inner.EKCalendarItem.SetAlarms(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.EKCalendarItem.SetAlarms(foundation.NSArrayFromID[*raw.EKAlarm](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -140,7 +143,10 @@ func (x *Reminder) WithAlarms(items ...*raw.EKAlarm) *Reminder {
 // WithRecurrenceRules sets the collection, converting the Go slice to an NSArray.
 func (x *Reminder) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Reminder {
 	if len(items) == 0 {
-		x.inner.EKCalendarItem.SetRecurrenceRules(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.EKCalendarItem.SetRecurrenceRules(foundation.NSArrayFromID[*raw.EKRecurrenceRule](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

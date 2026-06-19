@@ -77,7 +77,10 @@ func (x *EntityMapping) WithDestinationEntityVersionHash(destinationEntityVersio
 // WithAttributeMappings sets the collection, converting the Go slice to an NSArray.
 func (x *EntityMapping) WithAttributeMappings(items ...*raw.NSPropertyMapping) *EntityMapping {
 	if len(items) == 0 {
-		x.inner.SetAttributeMappings(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAttributeMappings(foundation.NSArrayFromID[*raw.NSPropertyMapping](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -95,7 +98,10 @@ func (x *EntityMapping) WithAttributeMappings(items ...*raw.NSPropertyMapping) *
 // WithRelationshipMappings sets the collection, converting the Go slice to an NSArray.
 func (x *EntityMapping) WithRelationshipMappings(items ...*raw.NSPropertyMapping) *EntityMapping {
 	if len(items) == 0 {
-		x.inner.SetRelationshipMappings(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRelationshipMappings(foundation.NSArrayFromID[*raw.NSPropertyMapping](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

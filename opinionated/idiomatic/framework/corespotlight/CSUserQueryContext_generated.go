@@ -84,7 +84,10 @@ func (x *UserQueryContext) WithMaxRankedResultCount(maxRankedResultCount int) *U
 // WithFetchAttributes sets the collection, converting the Go slice to an NSArray.
 func (x *UserQueryContext) WithFetchAttributes(items ...*foundation.NSString) *UserQueryContext {
 	if len(items) == 0 {
-		x.inner.CSSearchQueryContext.SetFetchAttributes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.CSSearchQueryContext.SetFetchAttributes(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -104,7 +107,10 @@ func (x *UserQueryContext) WithFetchAttributes(items ...*foundation.NSString) *U
 // WithFilterQueries sets the collection, converting the Go slice to an NSArray.
 func (x *UserQueryContext) WithFilterQueries(items ...*foundation.NSString) *UserQueryContext {
 	if len(items) == 0 {
-		x.inner.CSSearchQueryContext.SetFilterQueries(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.CSSearchQueryContext.SetFilterQueries(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
