@@ -7,6 +7,7 @@ package avfaudio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -33,9 +34,9 @@ func AUPresetEventFromID(id objc.ID) *AUPresetEvent {
 // @method initWithScope:element:dictionary @abstract Initialize the event with the scope, element, and dictionary for the preset. @param scope The audio unit scope for the parameter (see AudioUnitScope).  This should always be set to Global. @param element The element index within the scope (see AudioUnitElement).  This should usually be set to 0. @param presetDictionary An NSDictionary containing the preset.  The audio unit will expect this to be a dictionary structured as an appropriate audio unit preset. @discussion The dictionary passed to this initializer will be copied and is not editable once the event is created.
 //
 // NewAUPresetEventWithScopeElementDictionary creates a new [AUPresetEvent].
-func NewAUPresetEventWithScopeElementDictionary(scope uint, element uint, presetDictionary *foundation.NSDictionary[objc.ID, objc.ID]) *AUPresetEvent {
+func NewAUPresetEventWithScopeElementDictionary(scope uint, element uint, presetDictionary purego.IDer) *AUPresetEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAUPresetEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScope:element:dictionary:"), scope, element, presetDictionary.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScope:element:dictionary:"), scope, element, presetDictionary.ID())
 	return &AUPresetEvent{inner: raw.AVAUPresetEventFromID(_id)}
 }
 

@@ -36,9 +36,9 @@ func NearbyServiceAdvertiserFromID(id objc.ID) *NearbyServiceAdvertiser {
 // Initializes an advertiser object.
 //
 // NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType creates a new [NearbyServiceAdvertiser].
-func NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType(myPeerID *raw.MCPeerID, info *foundation.NSDictionary[*foundation.NSString, *foundation.NSString], serviceType string) *NearbyServiceAdvertiser {
+func NewNearbyServiceAdvertiserWithPeerDiscoveryInfoServiceType(myPeerID *raw.MCPeerID, info purego.IDer, serviceType string) *NearbyServiceAdvertiser {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCNearbyServiceAdvertiser")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPeer:discoveryInfo:serviceType:"), myPeerID.Ptr(), info.Ptr(), foundation.NSStringStringWithUTF8String(serviceType).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPeer:discoveryInfo:serviceType:"), myPeerID.Ptr(), info.ID(), foundation.NSStringStringWithUTF8String(serviceType).Ptr())
 	return &NearbyServiceAdvertiser{inner: raw.MCNearbyServiceAdvertiserFromID(_id)}
 }
 

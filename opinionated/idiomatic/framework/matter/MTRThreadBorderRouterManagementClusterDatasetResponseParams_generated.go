@@ -39,10 +39,10 @@ func MTRThreadBorderRouterManagementClusterDatasetResponseParamsFromID(id objc.I
 // Initialize an MTRThreadBorderRouterManagementClusterDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 //
 // NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValueError creates a new [MTRThreadBorderRouterManagementClusterDatasetResponseParams].
-func NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
+func NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThreadBorderRouterManagementClusterDatasetResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

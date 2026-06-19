@@ -38,9 +38,9 @@ func AssetReaderVideoCompositionOutputFromID(id objc.ID) *AssetReaderVideoCompos
 // Creates an object that reads composited video frames from the specified video tracks.
 //
 // NewAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings creates a new [AssetReaderVideoCompositionOutput].
-func NewAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings(videoTracks *foundation.NSArray[*raw.AVAssetTrack], videoSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AssetReaderVideoCompositionOutput {
+func NewAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings(videoTracks *foundation.NSArray[*raw.AVAssetTrack], videoSettings purego.IDer) *AssetReaderVideoCompositionOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetReaderVideoCompositionOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVideoTracks:videoSettings:"), videoTracks.Ptr(), videoSettings.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVideoTracks:videoSettings:"), videoTracks.Ptr(), videoSettings.ID())
 	return &AssetReaderVideoCompositionOutput{inner: raw.AVAssetReaderVideoCompositionOutputFromID(_id)}
 }
 

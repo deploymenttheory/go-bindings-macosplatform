@@ -7,6 +7,7 @@ package foundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,9 +32,9 @@ func ScriptClassDescriptionFromID(id objc.ID) *ScriptClassDescription {
 }
 
 // NewScriptClassDescriptionWithSuiteNameClassNameDictionary creates a new [ScriptClassDescription].
-func NewScriptClassDescriptionWithSuiteNameClassNameDictionary(suiteName string, className string, classDeclaration *raw.NSDictionary[objc.ID, objc.ID]) *ScriptClassDescription {
+func NewScriptClassDescriptionWithSuiteNameClassNameDictionary(suiteName string, className string, classDeclaration purego.IDer) *ScriptClassDescription {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScriptClassDescription")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSuiteName:className:dictionary:"), foundation.NSStringStringWithUTF8String(suiteName).Ptr(), foundation.NSStringStringWithUTF8String(className).Ptr(), classDeclaration.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSuiteName:className:dictionary:"), foundation.NSStringStringWithUTF8String(suiteName).Ptr(), foundation.NSStringStringWithUTF8String(className).Ptr(), classDeclaration.ID())
 	return &ScriptClassDescription{inner: raw.NSScriptClassDescriptionFromID(_id)}
 }
 

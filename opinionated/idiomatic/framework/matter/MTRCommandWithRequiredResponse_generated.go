@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,9 +32,9 @@ func MTRCommandWithRequiredResponseFromID(id objc.ID) *MTRCommandWithRequiredRes
 }
 
 // NewMTRCommandWithRequiredResponseWithPathCommandFieldsRequiredResponse creates a new [MTRCommandWithRequiredResponse].
-func NewMTRCommandWithRequiredResponseWithPathCommandFieldsRequiredResponse(path *raw.MTRCommandPath, commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID], requiredResponse *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *MTRCommandWithRequiredResponse {
+func NewMTRCommandWithRequiredResponseWithPathCommandFieldsRequiredResponse(path *raw.MTRCommandPath, commandFields purego.IDer, requiredResponse purego.IDer) *MTRCommandWithRequiredResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRCommandWithRequiredResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:commandFields:requiredResponse:"), path.Ptr(), commandFields.Ptr(), requiredResponse.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:commandFields:requiredResponse:"), path.Ptr(), commandFields.ID(), requiredResponse.ID())
 	return &MTRCommandWithRequiredResponse{inner: raw.MTRCommandWithRequiredResponseFromID(_id)}
 }
 

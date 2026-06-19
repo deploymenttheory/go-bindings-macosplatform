@@ -36,9 +36,9 @@ func ContentKeySpecifierFromID(id objc.ID) *ContentKeySpecifier {
 // Creates a content key specifier.
 //
 // NewContentKeySpecifierForKeySystemIdentifierOptions creates a new [ContentKeySpecifier].
-func NewContentKeySpecifierForKeySystemIdentifierOptions(keySystem *foundation.NSString, contentKeyIdentifier objc.ID, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ContentKeySpecifier {
+func NewContentKeySpecifierForKeySystemIdentifierOptions(keySystem *foundation.NSString, contentKeyIdentifier objc.ID, options purego.IDer) *ContentKeySpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVContentKeySpecifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForKeySystem:identifier:options:"), keySystem.Ptr(), contentKeyIdentifier, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForKeySystem:identifier:options:"), keySystem.Ptr(), contentKeyIdentifier, options.ID())
 	return &ContentKeySpecifier{inner: raw.AVContentKeySpecifierFromID(_id)}
 }
 

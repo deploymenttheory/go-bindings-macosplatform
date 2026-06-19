@@ -44,9 +44,9 @@ func NewFileWrapperWithURLOptionsError(url string, options NSFileWrapperReadingO
 }
 
 // NewFileWrapperDirectoryWithFileWrappers creates a new [FileWrapper].
-func NewFileWrapperDirectoryWithFileWrappers(childrenByPreferredName *raw.NSDictionary[*raw.NSString, *raw.NSFileWrapper]) *FileWrapper {
+func NewFileWrapperDirectoryWithFileWrappers(childrenByPreferredName purego.IDer) *FileWrapper {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileWrapper")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initDirectoryWithFileWrappers:"), childrenByPreferredName.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initDirectoryWithFileWrappers:"), childrenByPreferredName.ID())
 	return &FileWrapper{inner: raw.NSFileWrapperFromID(_id)}
 }
 

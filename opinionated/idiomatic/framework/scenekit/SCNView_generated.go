@@ -7,8 +7,8 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -36,9 +36,9 @@ func ViewFromID(id objc.ID) *View {
 // @method initWithFrame:options: @abstract Initializes and returns a newly allocated SCNView object with a specified frame rectangle. @param frame The frame rectangle for the created view object. @param options An optional dictionary. See "View initialization options" above.
 //
 // NewViewWithFrameOptions creates a new [View].
-func NewViewWithFrameOptions(frame corefoundation.CGRect, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *View {
+func NewViewWithFrameOptions(frame corefoundation.CGRect, options purego.IDer) *View {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:options:"), frame, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:options:"), frame, options.ID())
 	return &View{inner: raw.SCNViewFromID(_id)}
 }
 

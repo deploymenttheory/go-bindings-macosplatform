@@ -7,6 +7,7 @@ package medialibrary
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/medialibrary"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,9 +32,9 @@ func MediaLibraryFromID(id objc.ID) *MediaLibrary {
 }
 
 // NewMediaLibraryWithOptions creates a new [MediaLibrary].
-func NewMediaLibraryWithOptions(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MediaLibrary {
+func NewMediaLibraryWithOptions(options purego.IDer) *MediaLibrary {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLMediaLibrary")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), options.ID())
 	return &MediaLibrary{inner: raw.MLMediaLibraryFromID(_id)}
 }
 

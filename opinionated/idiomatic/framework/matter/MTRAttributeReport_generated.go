@@ -5,7 +5,6 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -35,10 +34,10 @@ func MTRAttributeReportFromID(id objc.ID) *MTRAttributeReport {
 // Initialize an MTRAttributeReport with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not an attribute response. Will set the value property to nil and the error property to non-nil, even if the schema for the value is not known, if the response-value is an error, not data. Will return nil and hand out an error if the response-value is data in the following cases: * The response is for a cluster/attribute combination for which the schema is unknown and hence the type of the data is not known. * The data does not match the known schema.
 //
 // NewMTRAttributeReportWithResponseValueError creates a new [MTRAttributeReport].
-func NewMTRAttributeReportWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRAttributeReport, error) {
+func NewMTRAttributeReportWithResponseValueError(responseValue purego.IDer) (*MTRAttributeReport, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAttributeReport")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

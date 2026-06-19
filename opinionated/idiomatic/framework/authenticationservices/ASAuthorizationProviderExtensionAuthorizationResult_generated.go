@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,9 +38,9 @@ func AuthorizationProviderExtensionAuthorizationResultFromID(id objc.ID) *Author
 // Initializes an authorization with tokens stored in HTTP headers.
 //
 // NewAuthorizationProviderExtensionAuthorizationResultWithHTTPAuthorizationHeaders creates a new [AuthorizationProviderExtensionAuthorizationResult].
-func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPAuthorizationHeaders(httpAuthorizationHeaders *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *AuthorizationProviderExtensionAuthorizationResult {
+func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPAuthorizationHeaders(httpAuthorizationHeaders purego.IDer) *AuthorizationProviderExtensionAuthorizationResult {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationProviderExtensionAuthorizationResult")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHTTPAuthorizationHeaders:"), httpAuthorizationHeaders.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHTTPAuthorizationHeaders:"), httpAuthorizationHeaders.ID())
 	return &AuthorizationProviderExtensionAuthorizationResult{inner: raw.ASAuthorizationProviderExtensionAuthorizationResultFromID(_id)}
 }
 

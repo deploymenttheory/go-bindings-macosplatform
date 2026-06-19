@@ -37,9 +37,9 @@ func IOBluetoothSDPServiceRecordFromID(id objc.ID) *IOBluetoothSDPServiceRecord 
 // Returns an initialized IOBluetoothSDPServiceRecord * with the attributes specified in the provided service dictionary. Provide a pointer to an IOBlueotothDevice if you wish to associate the record to a specific IOBluetoothDevice.
 //
 // NewIOBluetoothSDPServiceRecordWithServiceDictionaryDevice creates a new [IOBluetoothSDPServiceRecord].
-func NewIOBluetoothSDPServiceRecordWithServiceDictionaryDevice(serviceDict *foundation.NSDictionary[objc.ID, objc.ID], device *raw.IOBluetoothDevice) *IOBluetoothSDPServiceRecord {
+func NewIOBluetoothSDPServiceRecordWithServiceDictionaryDevice(serviceDict purego.IDer, device *raw.IOBluetoothDevice) *IOBluetoothSDPServiceRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothSDPServiceRecord")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceDictionary:device:"), serviceDict.Ptr(), device.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceDictionary:device:"), serviceDict.ID(), device.Ptr())
 	return &IOBluetoothSDPServiceRecord{inner: raw.IOBluetoothSDPServiceRecordFromID(_id)}
 }
 

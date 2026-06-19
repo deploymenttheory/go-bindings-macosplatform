@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -89,9 +90,9 @@ func NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout(format AVA
 // @method initWithSettings: @abstract Initialize using a settings dictionary. @discussion See AVAudioSettings.h. Note that many settings dictionary elements pertain to encoder settings, not the basic format, and will be ignored. Returns nil if a format cannot be constructed with the provided settings, e.g. when: - AVNumberOfChannelsKey specifies more than 2 channels, but AVChannelLayoutKey hasn't been specified or the layout does not match - AVLinearPCMBitDepthKey for linear PCM format specifies less than 8 or greater than 32 bits - values for the keys are not of the expected types
 //
 // NewAudioFormatWithSettings creates a new [AudioFormat].
-func NewAudioFormatWithSettings(settings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudioFormat {
+func NewAudioFormatWithSettings(settings purego.IDer) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFormat")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSettings:"), settings.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSettings:"), settings.ID())
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 

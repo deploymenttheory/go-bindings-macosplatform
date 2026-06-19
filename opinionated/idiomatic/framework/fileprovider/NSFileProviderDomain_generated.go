@@ -45,9 +45,9 @@ func NewFileProviderDomainWithIdentifierDisplayName(identifier *foundation.NSStr
 // Creates a new file provider domain with the specified URL and display name.
 //
 // NewFileProviderDomainWithDisplayNameUserInfoVolumeURL creates a new [FileProviderDomain].
-func NewFileProviderDomainWithDisplayNameUserInfoVolumeURL(displayName string, userInfo *foundation.NSDictionary[objc.ID, objc.ID], volumeURL string) *FileProviderDomain {
+func NewFileProviderDomainWithDisplayNameUserInfoVolumeURL(displayName string, userInfo purego.IDer, volumeURL string) *FileProviderDomain {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderDomain")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:userInfo:volumeURL:"), foundation.NSStringStringWithUTF8String(displayName).Ptr(), userInfo.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(volumeURL)).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:userInfo:volumeURL:"), foundation.NSStringStringWithUTF8String(displayName).Ptr(), userInfo.ID(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(volumeURL)).Ptr())
 	return &FileProviderDomain{inner: raw.NSFileProviderDomainFromID(_id)}
 }
 

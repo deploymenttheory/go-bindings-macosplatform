@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -52,9 +53,9 @@ func NewNoiseWithNoiseSource(noiseSource *raw.GKNoiseSource) *Noise {
 // Initializes a noise with the specified noise source and parameters. @param noiseSource The noise source to use to initially populate the 3D noise space. @param gradientColors The color gradient to use for this noise in 'value : color' pairs.
 //
 // NewNoiseWithNoiseSourceGradientColors creates a new [Noise].
-func NewNoiseWithNoiseSourceGradientColors(noiseSource *raw.GKNoiseSource, gradientColors *foundation.NSDictionary[*foundation.NSNumber, *appkit.NSColor]) *Noise {
+func NewNoiseWithNoiseSourceGradientColors(noiseSource *raw.GKNoiseSource, gradientColors purego.IDer) *Noise {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKNoise")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNoiseSource:gradientColors:"), noiseSource.Ptr(), gradientColors.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNoiseSource:gradientColors:"), noiseSource.Ptr(), gradientColors.ID())
 	return &Noise{inner: raw.GKNoiseFromID(_id)}
 }
 

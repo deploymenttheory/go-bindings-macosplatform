@@ -7,6 +7,7 @@ package storekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,9 +32,9 @@ func ReceiptRefreshRequestFromID(id objc.ID) *ReceiptRefreshRequest {
 }
 
 // NewReceiptRefreshRequestWithReceiptProperties creates a new [ReceiptRefreshRequest].
-func NewReceiptRefreshRequestWithReceiptProperties(properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ReceiptRefreshRequest {
+func NewReceiptRefreshRequestWithReceiptProperties(properties purego.IDer) *ReceiptRefreshRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKReceiptRefreshRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReceiptProperties:"), properties.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReceiptProperties:"), properties.ID())
 	return &ReceiptRefreshRequest{inner: raw.SKReceiptRefreshRequestFromID(_id)}
 }
 

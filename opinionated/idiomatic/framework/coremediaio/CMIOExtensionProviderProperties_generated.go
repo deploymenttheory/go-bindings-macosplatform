@@ -34,9 +34,9 @@ func ExtensionProviderPropertiesFromID(id objc.ID) *ExtensionProviderProperties 
 // @method initWithDictionary: @abstract Initialize a provider properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionProviderProperties instance.
 //
 // NewExtensionProviderPropertiesWithDictionary creates a new [ExtensionProviderProperties].
-func NewExtensionProviderPropertiesWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionProviderProperties {
+func NewExtensionProviderPropertiesWithDictionary(propertiesDictionary purego.IDer) *ExtensionProviderProperties {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionProviderProperties")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), propertiesDictionary.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), propertiesDictionary.ID())
 	return &ExtensionProviderProperties{inner: raw.CMIOExtensionProviderPropertiesFromID(_id)}
 }
 

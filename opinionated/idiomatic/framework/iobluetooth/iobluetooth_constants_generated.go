@@ -147,3 +147,143 @@ func KFTSListingTypeKey() objc.ID { return purego.CFConstant(raw.KFTSListingType
 // @const			kFTSListingSizeKey @abstract		Int value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.
 // KFTSListingSizeKey returns the value of the CoreFoundation reference constant kFTSListingSizeKey as an objc.ID.
 func KFTSListingSizeKey() objc.ID { return purego.CFConstant(raw.KFTSListingSizeKey()) }
+
+// IOBluetoothHostControllerPoweredOnNotification returns the string constant IOBluetoothHostControllerPoweredOnNotification as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHostControllerPoweredOnNotification() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHostControllerPoweredOnNotification())
+}
+
+// IOBluetoothHostControllerPoweredOffNotification returns the string constant IOBluetoothHostControllerPoweredOffNotification as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHostControllerPoweredOffNotification() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHostControllerPoweredOffNotification())
+}
+
+// IOBluetoothL2CAPChannelPublishedNotification returns the string constant IOBluetoothL2CAPChannelPublishedNotification as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothL2CAPChannelPublishedNotification() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothL2CAPChannelPublishedNotification())
+}
+
+// IOBluetoothL2CAPChannelTerminatedNotification returns the string constant IOBluetoothL2CAPChannelTerminatedNotification as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothL2CAPChannelTerminatedNotification() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothL2CAPChannelTerminatedNotification())
+}
+
+// IOBluetoothHandsFreeIndicatorService returns the string constant IOBluetoothHandsFreeIndicatorService as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHandsFreeIndicatorService() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHandsFreeIndicatorService())
+}
+
+// IOBluetoothHandsFreeIndicatorCall returns the string constant IOBluetoothHandsFreeIndicatorCall as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHandsFreeIndicatorCall() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHandsFreeIndicatorCall())
+}
+
+// IOBluetoothHandsFreeIndicatorCallSetup returns the string constant IOBluetoothHandsFreeIndicatorCallSetup as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHandsFreeIndicatorCallSetup() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHandsFreeIndicatorCallSetup())
+}
+
+// IOBluetoothHandsFreeIndicatorCallHeld returns the string constant IOBluetoothHandsFreeIndicatorCallHeld as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHandsFreeIndicatorCallHeld() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHandsFreeIndicatorCallHeld())
+}
+
+// IOBluetoothHandsFreeIndicatorSignal returns the string constant IOBluetoothHandsFreeIndicatorSignal as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHandsFreeIndicatorSignal() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHandsFreeIndicatorSignal())
+}
+
+// IOBluetoothHandsFreeIndicatorRoam returns the string constant IOBluetoothHandsFreeIndicatorRoam as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHandsFreeIndicatorRoam() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHandsFreeIndicatorRoam())
+}
+
+// IOBluetoothHandsFreeIndicatorBattChg returns the string constant IOBluetoothHandsFreeIndicatorBattChg as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHandsFreeIndicatorBattChg() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHandsFreeIndicatorBattChg())
+}
+
+// IOBluetoothHandsFreeCallIndex returns the string constant IOBluetoothHandsFreeCallIndex as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHandsFreeCallIndex() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHandsFreeCallIndex())
+}
+
+// IOBluetoothHandsFreeCallDirection returns the string constant IOBluetoothHandsFreeCallDirection as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHandsFreeCallDirection() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHandsFreeCallDirection())
+}
+
+// IOBluetoothHandsFreeCallStatus returns the string constant IOBluetoothHandsFreeCallStatus as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHandsFreeCallStatus() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHandsFreeCallStatus())
+}
+
+// IOBluetoothHandsFreeCallMode returns the string constant IOBluetoothHandsFreeCallMode as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHandsFreeCallMode() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHandsFreeCallMode())
+}
+
+// IOBluetoothHandsFreeCallMultiparty returns the string constant IOBluetoothHandsFreeCallMultiparty as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHandsFreeCallMultiparty() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHandsFreeCallMultiparty())
+}
+
+// IOBluetoothHandsFreeCallNumber returns the string constant IOBluetoothHandsFreeCallNumber as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHandsFreeCallNumber() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHandsFreeCallNumber())
+}
+
+// IOBluetoothHandsFreeCallType returns the string constant IOBluetoothHandsFreeCallType as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHandsFreeCallType() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHandsFreeCallType())
+}
+
+// IOBluetoothHandsFreeCallName returns the string constant IOBluetoothHandsFreeCallName as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothHandsFreeCallName() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothHandsFreeCallName())
+}
+
+// IOBluetoothPDUServicCenterAddress returns the string constant IOBluetoothPDUServicCenterAddress as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothPDUServicCenterAddress() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothPDUServicCenterAddress())
+}
+
+// IOBluetoothPDUServiceCenterAddressType returns the string constant IOBluetoothPDUServiceCenterAddressType as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothPDUServiceCenterAddressType() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothPDUServiceCenterAddressType())
+}
+
+// IOBluetoothPDUType returns the string constant IOBluetoothPDUType as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothPDUType() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothPDUType())
+}
+
+// IOBluetoothPDUOriginatingAddress returns the string constant IOBluetoothPDUOriginatingAddress as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothPDUOriginatingAddress() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothPDUOriginatingAddress())
+}
+
+// IOBluetoothPDUOriginatingAddressType returns the string constant IOBluetoothPDUOriginatingAddressType as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothPDUOriginatingAddressType() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothPDUOriginatingAddressType())
+}
+
+// IOBluetoothPDUProtocolID returns the string constant IOBluetoothPDUProtocolID as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothPDUProtocolID() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothPDUProtocolID())
+}
+
+// IOBluetoothPDUTimestamp returns the string constant IOBluetoothPDUTimestamp as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothPDUTimestamp() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothPDUTimestamp())
+}
+
+// IOBluetoothPDUEncoding returns the string constant IOBluetoothPDUEncoding as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothPDUEncoding() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothPDUEncoding())
+}
+
+// IOBluetoothPDUUserData returns the string constant IOBluetoothPDUUserData as an objc.ID, for use as a dictionary key or selector argument.
+func IOBluetoothPDUUserData() objc.ID {
+	return purego.CFConstant(raw.IOBluetoothPDUUserData())
+}

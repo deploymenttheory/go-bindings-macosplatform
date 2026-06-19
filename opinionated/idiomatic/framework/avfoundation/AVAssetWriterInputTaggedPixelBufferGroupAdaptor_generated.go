@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -39,9 +40,9 @@ func AssetWriterInputTaggedPixelBufferGroupAdaptorFromID(id objc.ID) *AssetWrite
 // Creates an object that appends tagged buffer groups to an asset writer input.
 //
 // NewAssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourcePixelBufferAttributes creates a new [AssetWriterInputTaggedPixelBufferGroupAdaptor].
-func NewAssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourcePixelBufferAttributes(input *raw.AVAssetWriterInput, sourcePixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AssetWriterInputTaggedPixelBufferGroupAdaptor {
+func NewAssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourcePixelBufferAttributes(input *raw.AVAssetWriterInput, sourcePixelBufferAttributes purego.IDer) *AssetWriterInputTaggedPixelBufferGroupAdaptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetWriterInputTaggedPixelBufferGroupAdaptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:sourcePixelBufferAttributes:"), input.Ptr(), sourcePixelBufferAttributes.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:sourcePixelBufferAttributes:"), input.Ptr(), sourcePixelBufferAttributes.ID())
 	return &AssetWriterInputTaggedPixelBufferGroupAdaptor{inner: raw.AVAssetWriterInputTaggedPixelBufferGroupAdaptorFromID(_id)}
 }
 

@@ -37,10 +37,10 @@ func DictionaryFeatureProviderFromID(id objc.ID) *DictionaryFeatureProvider {
 // Creates the feature provider based on a dictionary.
 //
 // NewDictionaryFeatureProviderWithDictionaryError creates a new [DictionaryFeatureProvider].
-func NewDictionaryFeatureProviderWithDictionaryError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*DictionaryFeatureProvider, error) {
+func NewDictionaryFeatureProviderWithDictionaryError(dictionary purego.IDer) (*DictionaryFeatureProvider, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLDictionaryFeatureProvider")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), dictionary.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), dictionary.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

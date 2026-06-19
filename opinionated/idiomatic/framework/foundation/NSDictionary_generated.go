@@ -74,16 +74,16 @@ func NewDictionaryWithObjectsAndKeys(firstObject objc.ID) *Dictionary {
 }
 
 // NewDictionaryWithDictionary creates a new [Dictionary].
-func NewDictionaryWithDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID]) *Dictionary {
+func NewDictionaryWithDictionary(otherDictionary purego.IDer) *Dictionary {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDictionary")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), otherDictionary.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), otherDictionary.ID())
 	return &Dictionary{inner: raw.NSDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 
 // NewDictionaryWithDictionaryCopyItems creates a new [Dictionary].
-func NewDictionaryWithDictionaryCopyItems(otherDictionary *raw.NSDictionary[objc.ID, objc.ID], flag bool) *Dictionary {
+func NewDictionaryWithDictionaryCopyItems(otherDictionary purego.IDer, flag bool) *Dictionary {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDictionary")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:copyItems:"), otherDictionary.Ptr(), flag)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:copyItems:"), otherDictionary.ID(), flag)
 	return &Dictionary{inner: raw.NSDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 

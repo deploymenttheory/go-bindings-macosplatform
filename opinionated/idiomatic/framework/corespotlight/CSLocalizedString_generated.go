@@ -6,7 +6,6 @@ package corespotlight
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,9 +35,9 @@ func LocalizedStringFromID(id objc.ID) *LocalizedString {
 // Initializes a CSLocalizedString object with the specified dictionary of localized strings.
 //
 // NewLocalizedStringWithLocalizedStrings creates a new [LocalizedString].
-func NewLocalizedStringWithLocalizedStrings(localizedStrings *foundation.NSDictionary[objc.ID, objc.ID]) *LocalizedString {
+func NewLocalizedStringWithLocalizedStrings(localizedStrings purego.IDer) *LocalizedString {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSLocalizedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedStrings:"), localizedStrings.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedStrings:"), localizedStrings.ID())
 	return &LocalizedString{inner: raw.CSLocalizedStringFromID(_id)}
 }
 

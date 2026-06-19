@@ -44,9 +44,9 @@ func NewPrintInfo() *PrintInfo {
 // Returns a printing information object initialized with the parameters in the specified dictionary.
 //
 // NewPrintInfoWithDictionary creates a new [PrintInfo].
-func NewPrintInfoWithDictionary(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PrintInfo {
+func NewPrintInfoWithDictionary(attributes purego.IDer) *PrintInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPrintInfo")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), attributes.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), attributes.ID())
 	return &PrintInfo{inner: raw.NSPrintInfoFromID(_id)}
 }
 

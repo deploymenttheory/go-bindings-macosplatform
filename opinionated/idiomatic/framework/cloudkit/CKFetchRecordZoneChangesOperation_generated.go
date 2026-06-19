@@ -44,18 +44,18 @@ func NewFetchRecordZoneChangesOperation() *FetchRecordZoneChangesOperation {
 // Creates an operation for fetching record zone changes. - Parameters: - recordZoneIDs: The IDs of the record zones that you want to query for changes. You can specify `nil` for this parameter. - configurationsByRecordZoneID: A dictionary that maps record zone IDs to their corresponding configurations. You can specify `nil` for this parameter. CloudKit configures the operation for retrieving all of the record zones that you specify. If you want to reduce the amount of data that CloudKit returns, provide zone configurations for each record zone.
 //
 // NewFetchRecordZoneChangesOperationWithRecordZoneIDsConfigurationsByRecordZoneID creates a new [FetchRecordZoneChangesOperation].
-func NewFetchRecordZoneChangesOperationWithRecordZoneIDsConfigurationsByRecordZoneID(recordZoneIDs *foundation.NSArray[*raw.CKRecordZoneID], configurationsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesConfiguration]) *FetchRecordZoneChangesOperation {
+func NewFetchRecordZoneChangesOperationWithRecordZoneIDsConfigurationsByRecordZoneID(recordZoneIDs *foundation.NSArray[*raw.CKRecordZoneID], configurationsByRecordZoneID purego.IDer) *FetchRecordZoneChangesOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKFetchRecordZoneChangesOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZoneIDs:configurationsByRecordZoneID:"), recordZoneIDs.Ptr(), configurationsByRecordZoneID.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZoneIDs:configurationsByRecordZoneID:"), recordZoneIDs.Ptr(), configurationsByRecordZoneID.ID())
 	return &FetchRecordZoneChangesOperation{inner: raw.CKFetchRecordZoneChangesOperationFromID(_id)}
 }
 
 // Creates an operation for fetching record zone changes. @DeprecationSummary { Use “CKFetchRecordZoneChangesOperation/init(recordZoneIDs:configurationsByRecordZoneID:)“ instead. } - Parameters: - recordZoneIDs: The IDs of the record zones that you want to query for changes. - optionsByRecordZoneID: A dictionary that maps record zone IDs to their corresponding options. You can specify `nil` for this parameter. CloudKit configures the operation for retrieving all of the record zones that you specify. If you want to reduce the amount of data that CloudKit returns, provide zone options for each record zone.
 //
 // NewFetchRecordZoneChangesOperationWithRecordZoneIDsOptionsByRecordZoneID creates a new [FetchRecordZoneChangesOperation].
-func NewFetchRecordZoneChangesOperationWithRecordZoneIDsOptionsByRecordZoneID(recordZoneIDs *foundation.NSArray[*raw.CKRecordZoneID], optionsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesOptions]) *FetchRecordZoneChangesOperation {
+func NewFetchRecordZoneChangesOperationWithRecordZoneIDsOptionsByRecordZoneID(recordZoneIDs *foundation.NSArray[*raw.CKRecordZoneID], optionsByRecordZoneID purego.IDer) *FetchRecordZoneChangesOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKFetchRecordZoneChangesOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZoneIDs:optionsByRecordZoneID:"), recordZoneIDs.Ptr(), optionsByRecordZoneID.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZoneIDs:optionsByRecordZoneID:"), recordZoneIDs.Ptr(), optionsByRecordZoneID.ID())
 	return &FetchRecordZoneChangesOperation{inner: raw.CKFetchRecordZoneChangesOperationFromID(_id)}
 }
 

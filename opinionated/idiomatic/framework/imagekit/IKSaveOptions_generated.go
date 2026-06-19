@@ -35,9 +35,9 @@ func SaveOptionsFromID(id objc.ID) *SaveOptions {
 // @method initWithImageProperties:imageUTType: @abstract Initializes IKSaveOptions with metadata and UTType.
 //
 // NewSaveOptionsWithImagePropertiesImageUTType creates a new [SaveOptions].
-func NewSaveOptionsWithImagePropertiesImageUTType(imageProperties *foundation.NSDictionary[objc.ID, objc.ID], imageUTType string) *SaveOptions {
+func NewSaveOptionsWithImagePropertiesImageUTType(imageProperties purego.IDer, imageUTType string) *SaveOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IKSaveOptions")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageProperties:imageUTType:"), imageProperties.Ptr(), foundation.NSStringStringWithUTF8String(imageUTType).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageProperties:imageUTType:"), imageProperties.ID(), foundation.NSStringStringWithUTF8String(imageUTType).Ptr())
 	return &SaveOptions{inner: raw.IKSaveOptionsFromID(_id)}
 }
 

@@ -54,16 +54,16 @@ func NewScriptWithSourceFromURLLanguageInstanceUsingStorageOptions(source string
 }
 
 // NewScriptWithContentsOfURLError creates a new [Script].
-func NewScriptWithContentsOfURLError(url string, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Script {
+func NewScriptWithContentsOfURLError(url string, errorInfo purego.IDer) *Script {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("OSAScript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), errorInfo.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), errorInfo.ID())
 	return &Script{inner: raw.OSAScriptFromID(_id)}
 }
 
 // NewScriptWithContentsOfURLLanguageError creates a new [Script].
-func NewScriptWithContentsOfURLLanguageError(url string, language *raw.OSALanguage, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Script {
+func NewScriptWithContentsOfURLLanguageError(url string, language *raw.OSALanguage, errorInfo purego.IDer) *Script {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("OSAScript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:language:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), language.Ptr(), errorInfo.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:language:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), language.Ptr(), errorInfo.ID())
 	return &Script{inner: raw.OSAScriptFromID(_id)}
 }
 
@@ -79,9 +79,9 @@ func NewScriptWithContentsOfURLLanguageInstanceUsingStorageOptionsError(url stri
 }
 
 // NewScriptWithCompiledDataError creates a new [Script].
-func NewScriptWithCompiledDataError(data *foundation.NSData, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Script {
+func NewScriptWithCompiledDataError(data *foundation.NSData, errorInfo purego.IDer) *Script {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("OSAScript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompiledData:error:"), data.Ptr(), errorInfo.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompiledData:error:"), data.Ptr(), errorInfo.ID())
 	return &Script{inner: raw.OSAScriptFromID(_id)}
 }
 

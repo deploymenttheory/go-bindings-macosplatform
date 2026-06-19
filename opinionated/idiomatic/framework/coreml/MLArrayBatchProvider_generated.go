@@ -57,10 +57,10 @@ func NewArrayBatchProviderWithFeatureProviderArray(array ...purego.IDer) *ArrayB
 // Creates a batch provider based on feature names and their associated arrays of data.
 //
 // NewArrayBatchProviderWithDictionaryError creates a new [ArrayBatchProvider].
-func NewArrayBatchProviderWithDictionaryError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*ArrayBatchProvider, error) {
+func NewArrayBatchProviderWithDictionaryError(dictionary purego.IDer) (*ArrayBatchProvider, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLArrayBatchProvider")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), dictionary.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), dictionary.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

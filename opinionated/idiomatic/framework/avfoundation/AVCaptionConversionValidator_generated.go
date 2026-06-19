@@ -38,9 +38,9 @@ func CaptionConversionValidatorFromID(id objc.ID) *CaptionConversionValidator {
 // Creates an object that validates captions for a conversion operation.
 //
 // NewCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings creates a new [CaptionConversionValidator].
-func NewCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings(captions *foundation.NSArray[*raw.AVCaption], timeRange coremedia.CMTimeRange, conversionSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptionConversionValidator {
+func NewCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings(captions *foundation.NSArray[*raw.AVCaption], timeRange coremedia.CMTimeRange, conversionSettings purego.IDer) *CaptionConversionValidator {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionConversionValidator")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCaptions:timeRange:conversionSettings:"), captions.Ptr(), timeRange, conversionSettings.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCaptions:timeRange:conversionSettings:"), captions.Ptr(), timeRange, conversionSettings.ID())
 	return &CaptionConversionValidator{inner: raw.AVCaptionConversionValidatorFromID(_id)}
 }
 

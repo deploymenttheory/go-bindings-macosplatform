@@ -7,6 +7,7 @@ package foundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,9 +32,9 @@ func AppleScriptFromID(id objc.ID) *AppleScript {
 }
 
 // NewAppleScriptWithContentsOfURLError creates a new [AppleScript].
-func NewAppleScriptWithContentsOfURLError(url string, errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleScript {
+func NewAppleScriptWithContentsOfURLError(url string, errorInfo purego.IDer) *AppleScript {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAppleScript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), errorInfo.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), errorInfo.ID())
 	return &AppleScript{inner: raw.NSAppleScriptFromID(_id)}
 }
 

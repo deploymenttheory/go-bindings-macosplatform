@@ -8,6 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -32,9 +33,9 @@ func ProgressFromID(id objc.ID) *Progress {
 }
 
 // NewProgressWithParentUserInfo creates a new [Progress].
-func NewProgressWithParentUserInfo(parentProgressOrNil *raw.NSProgress, userInfoOrNil *raw.NSDictionary[*raw.NSString, objc.ID]) *Progress {
+func NewProgressWithParentUserInfo(parentProgressOrNil *raw.NSProgress, userInfoOrNil purego.IDer) *Progress {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSProgress")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParent:userInfo:"), parentProgressOrNil.Ptr(), userInfoOrNil.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParent:userInfo:"), parentProgressOrNil.Ptr(), userInfoOrNil.ID())
 	return &Progress{inner: raw.NSProgressFromID(_id)}
 }
 

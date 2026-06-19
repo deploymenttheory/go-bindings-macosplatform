@@ -5,8 +5,8 @@
 package scriptingbridge
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scriptingbridge"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -42,9 +42,9 @@ func NewObject() *Object {
 // Returns an instance of an SBObject subclass initialized with the specified properties.
 //
 // NewObjectWithProperties creates a new [Object].
-func NewObjectWithProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) *Object {
+func NewObjectWithProperties(properties purego.IDer) *Object {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SBObject")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProperties:"), properties.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProperties:"), properties.ID())
 	return &Object{inner: raw.SBObjectFromID(_id)}
 }
 
@@ -60,9 +60,9 @@ func NewObjectWithData(data objc.ID) *Object {
 // Returns an instance of an SBObject subclass initialized with the specified properties and data and added to the designated element array.
 //
 // NewObjectWithElementCodePropertiesData creates a new [Object].
-func NewObjectWithElementCodePropertiesData(code uint, properties *foundation.NSDictionary[*foundation.NSString, objc.ID], data objc.ID) *Object {
+func NewObjectWithElementCodePropertiesData(code uint, properties purego.IDer, data objc.ID) *Object {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SBObject")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElementCode:properties:data:"), code, properties.Ptr(), data)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElementCode:properties:data:"), code, properties.ID(), data)
 	return &Object{inner: raw.SBObjectFromID(_id)}
 }
 

@@ -50,16 +50,16 @@ func NewImageWithCGImage(image unsafe.Pointer) *Image {
 // Initializes an image object with a Quartz 2D image, using the specified options.
 //
 // NewImageWithCGImageOptions creates a new [Image].
-func NewImageWithCGImageOptions(image unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+func NewImageWithCGImageOptions(image unsafe.Pointer, options purego.IDer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:options:"), image, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:options:"), image, options.ID())
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
 // NewImageWithCGImageSourceIndexOptions creates a new [Image].
-func NewImageWithCGImageSourceIndexOptions(source unsafe.Pointer, index uint, dict *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+func NewImageWithCGImageSourceIndexOptions(source unsafe.Pointer, index uint, dict purego.IDer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImageSource:index:options:"), source, index, dict.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImageSource:index:options:"), source, index, dict.ID())
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
@@ -75,9 +75,9 @@ func NewImageWithCGLayer(layer unsafe.Pointer) *Image {
 // Initializes an image object from the contents supplied by a CGLayer object, using the specified options.
 //
 // NewImageWithCGLayerOptions creates a new [Image].
-func NewImageWithCGLayerOptions(layer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+func NewImageWithCGLayerOptions(layer unsafe.Pointer, options purego.IDer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLayer:options:"), layer, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLayer:options:"), layer, options.ID())
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
@@ -93,9 +93,9 @@ func NewImageWithData(data *foundation.NSData) *Image {
 // Initializes an image object with the supplied image data, using the specified options.
 //
 // NewImageWithDataOptions creates a new [Image].
-func NewImageWithDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+func NewImageWithDataOptions(data *foundation.NSData, options purego.IDer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), data.Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), data.Ptr(), options.ID())
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
@@ -120,18 +120,18 @@ func NewImageWithTextureSizeFlippedColorSpace(name uint, size corefoundation.CGS
 // Initializes an image object with data supplied by an OpenGL texture.
 //
 // NewImageWithTextureSizeFlippedOptions creates a new [Image].
-func NewImageWithTextureSizeFlippedOptions(name uint, size corefoundation.CGSize, flipped bool, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+func NewImageWithTextureSizeFlippedOptions(name uint, size corefoundation.CGSize, flipped bool, options purego.IDer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:size:flipped:options:"), name, size, flipped, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:size:flipped:options:"), name, size, flipped, options.ID())
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
 // Initializes an image object with data supplied by a Metal texture.
 //
 // NewImageWithMTLTextureOptions creates a new [Image].
-func NewImageWithMTLTextureOptions(texture metal.MTLTexture, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+func NewImageWithMTLTextureOptions(texture metal.MTLTexture, options purego.IDer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMTLTexture:options:"), texture, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMTLTexture:options:"), texture, options.ID())
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
@@ -147,9 +147,9 @@ func NewImageWithContentsOfURL(url string) *Image {
 // Initializes an image object by reading an image from a URL, using the specified options.
 //
 // NewImageWithContentsOfURLOptions creates a new [Image].
-func NewImageWithContentsOfURLOptions(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+func NewImageWithContentsOfURLOptions(url string, options purego.IDer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), options.ID())
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
@@ -165,18 +165,18 @@ func NewImageWithIOSurface(surface unsafe.Pointer) *Image {
 // Initializes, using the specified options, an image with the contents of an IOSurface.
 //
 // NewImageWithIOSurfaceOptions creates a new [Image].
-func NewImageWithIOSurfaceOptions(surface unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+func NewImageWithIOSurfaceOptions(surface unsafe.Pointer, options purego.IDer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:options:"), surface, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:options:"), surface, options.ID())
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
 // Initializes, using the specified format and options, an image with the contents of a specific data plane in an IOSurface.
 //
 // NewImageWithIOSurfacePlaneFormatOptions creates a new [Image].
-func NewImageWithIOSurfacePlaneFormatOptions(surface unsafe.Pointer, plane uint, format int, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+func NewImageWithIOSurfacePlaneFormatOptions(surface unsafe.Pointer, plane uint, format int, options purego.IDer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:plane:format:options:"), surface, plane, format, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:plane:format:options:"), surface, plane, format, options.ID())
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
@@ -192,9 +192,9 @@ func NewImageWithCVImageBuffer(imageBuffer unsafe.Pointer) *Image {
 // Initializes an image object from the contents of a Core Video image buffer, using the specified options.
 //
 // NewImageWithCVImageBufferOptions creates a new [Image].
-func NewImageWithCVImageBufferOptions(imageBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+func NewImageWithCVImageBufferOptions(imageBuffer unsafe.Pointer, options purego.IDer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCVImageBuffer:options:"), imageBuffer, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCVImageBuffer:options:"), imageBuffer, options.ID())
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
@@ -210,9 +210,9 @@ func NewImageWithCVPixelBuffer(pixelBuffer unsafe.Pointer) *Image {
 // Initializes an image object from the contents of a Core Video pixel buffer using the specified options.
 //
 // NewImageWithCVPixelBufferOptions creates a new [Image].
-func NewImageWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+func NewImageWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options purego.IDer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCVPixelBuffer:options:"), pixelBuffer, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCVPixelBuffer:options:"), pixelBuffer, options.ID())
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
@@ -226,9 +226,9 @@ func NewImageWithColor(color *raw.CIColor) *Image {
 }
 
 // NewImageWithDepthDataOptions creates a new [Image].
-func NewImageWithDepthDataOptions(data *avfoundation.AVDepthData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+func NewImageWithDepthDataOptions(data *avfoundation.AVDepthData, options purego.IDer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDepthData:options:"), data.Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDepthData:options:"), data.Ptr(), options.ID())
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
@@ -240,9 +240,9 @@ func NewImageWithDepthData(data *avfoundation.AVDepthData) *Image {
 }
 
 // NewImageWithPortaitEffectsMatteOptions creates a new [Image].
-func NewImageWithPortaitEffectsMatteOptions(matte *avfoundation.AVPortraitEffectsMatte, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+func NewImageWithPortaitEffectsMatteOptions(matte *avfoundation.AVPortraitEffectsMatte, options purego.IDer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPortaitEffectsMatte:options:"), matte.Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPortaitEffectsMatte:options:"), matte.Ptr(), options.ID())
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
@@ -254,9 +254,9 @@ func NewImageWithPortaitEffectsMatte(matte *avfoundation.AVPortraitEffectsMatte)
 }
 
 // NewImageWithSemanticSegmentationMatteOptions creates a new [Image].
-func NewImageWithSemanticSegmentationMatteOptions(matte *avfoundation.AVSemanticSegmentationMatte, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+func NewImageWithSemanticSegmentationMatteOptions(matte *avfoundation.AVSemanticSegmentationMatte, options purego.IDer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSemanticSegmentationMatte:options:"), matte.Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSemanticSegmentationMatte:options:"), matte.Ptr(), options.ID())
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
@@ -270,9 +270,9 @@ func NewImageWithSemanticSegmentationMatte(matte *avfoundation.AVSemanticSegment
 // Initializes an image object based on pixels from an image provider object.
 //
 // NewImageWithImageProviderSizeFormatColorSpaceOptions creates a new [Image].
-func NewImageWithImageProviderSizeFormatColorSpaceOptions(provider objc.ID, width uint, height uint, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+func NewImageWithImageProviderSizeFormatColorSpaceOptions(provider objc.ID, width uint, height uint, format int, colorSpace unsafe.Pointer, options purego.IDer) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageProvider:size::format:colorSpace:options:"), provider, width, height, format, colorSpace, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageProvider:size::format:colorSpace:options:"), provider, width, height, format, colorSpace, options.ID())
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 

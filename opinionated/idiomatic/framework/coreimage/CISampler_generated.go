@@ -7,7 +7,7 @@ package coreimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,9 +54,9 @@ func NewSamplerWithImageKeysAndValues(im *raw.CIImage, key0 objc.ID) *Sampler {
 // Initializes the sampler with an image object using options specified in a dictionary.
 //
 // NewSamplerWithImageOptions creates a new [Sampler].
-func NewSamplerWithImageOptions(im *raw.CIImage, dict *foundation.NSDictionary[objc.ID, objc.ID]) *Sampler {
+func NewSamplerWithImageOptions(im *raw.CIImage, dict purego.IDer) *Sampler {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CISampler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:options:"), im.Ptr(), dict.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:options:"), im.Ptr(), dict.ID())
 	return &Sampler{inner: raw.CISamplerFromID(_id)}
 }
 

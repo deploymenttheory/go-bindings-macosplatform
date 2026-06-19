@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,9 +36,9 @@ func TextTabFromID(id objc.ID) *TextTab {
 // Initializes a text tab with the specified text alignment, location, and options.
 //
 // NewTextTabWithTextAlignmentLocationOptions creates a new [TextTab].
-func NewTextTabWithTextAlignmentLocationOptions(alignment NSTextAlignment, loc float64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextTab {
+func NewTextTabWithTextAlignmentLocationOptions(alignment NSTextAlignment, loc float64, options purego.IDer) *TextTab {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextTab")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextAlignment:location:options:"), raw.NSTextAlignment(alignment), loc, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextAlignment:location:options:"), raw.NSTextAlignment(alignment), loc, options.ID())
 	return &TextTab{inner: raw.NSTextTabFromID(_id)}
 }
 

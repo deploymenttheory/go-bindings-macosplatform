@@ -33,9 +33,9 @@ func ScriptCommandDescriptionFromID(id objc.ID) *ScriptCommandDescription {
 }
 
 // NewScriptCommandDescriptionWithSuiteNameCommandNameDictionary creates a new [ScriptCommandDescription].
-func NewScriptCommandDescriptionWithSuiteNameCommandNameDictionary(suiteName string, commandName string, commandDeclaration *raw.NSDictionary[objc.ID, objc.ID]) *ScriptCommandDescription {
+func NewScriptCommandDescriptionWithSuiteNameCommandNameDictionary(suiteName string, commandName string, commandDeclaration purego.IDer) *ScriptCommandDescription {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScriptCommandDescription")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSuiteName:commandName:dictionary:"), foundation.NSStringStringWithUTF8String(suiteName).Ptr(), foundation.NSStringStringWithUTF8String(commandName).Ptr(), commandDeclaration.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSuiteName:commandName:dictionary:"), foundation.NSStringStringWithUTF8String(suiteName).Ptr(), foundation.NSStringStringWithUTF8String(commandName).Ptr(), commandDeclaration.ID())
 	return &ScriptCommandDescription{inner: raw.NSScriptCommandDescriptionFromID(_id)}
 }
 

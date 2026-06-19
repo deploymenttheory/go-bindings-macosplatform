@@ -32,9 +32,9 @@ func PersistentStoreFromID(id objc.ID) *PersistentStore {
 }
 
 // NewPersistentStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions creates a new [PersistentStore].
-func NewPersistentStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions(root *raw.NSPersistentStoreCoordinator, name string, url string, options *foundation.NSDictionary[objc.ID, objc.ID]) *PersistentStore {
+func NewPersistentStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions(root *raw.NSPersistentStoreCoordinator, name string, url string, options purego.IDer) *PersistentStore {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentStore")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersistentStoreCoordinator:configurationName:URL:options:"), root.Ptr(), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersistentStoreCoordinator:configurationName:URL:options:"), root.Ptr(), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), options.ID())
 	return &PersistentStore{inner: raw.NSPersistentStoreFromID(_id)}
 }
 

@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,9 +36,9 @@ func TextListElementFromID(id objc.ID) *TextListElement {
 // Creates a text list element with the parent, list elements, nesting level, and marker attributes you provide.
 //
 // NewTextListElementWithParentElementTextListContentsMarkerAttributesChildElements creates a new [TextListElement].
-func NewTextListElementWithParentElementTextListContentsMarkerAttributesChildElements(parent *raw.NSTextListElement, textList *raw.NSTextList, contents *foundation.NSAttributedString, markerAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], children *foundation.NSArray[*raw.NSTextListElement]) *TextListElement {
+func NewTextListElementWithParentElementTextListContentsMarkerAttributesChildElements(parent *raw.NSTextListElement, textList *raw.NSTextList, contents *foundation.NSAttributedString, markerAttributes purego.IDer, children *foundation.NSArray[*raw.NSTextListElement]) *TextListElement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextListElement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParentElement:textList:contents:markerAttributes:childElements:"), parent.Ptr(), textList.Ptr(), contents.Ptr(), markerAttributes.Ptr(), children.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParentElement:textList:contents:markerAttributes:childElements:"), parent.Ptr(), textList.Ptr(), contents.Ptr(), markerAttributes.ID(), children.Ptr())
 	return &TextListElement{inner: raw.NSTextListElementFromID(_id)}
 }
 

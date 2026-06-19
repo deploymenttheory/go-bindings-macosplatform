@@ -5,7 +5,6 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -39,10 +38,10 @@ func MTRRVCOperationalStateClusterOperationalCommandResponseParamsFromID(id objc
 // Initialize an MTRRVCOperationalStateClusterOperationalCommandResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 //
 // NewMTRRVCOperationalStateClusterOperationalCommandResponseParamsWithResponseValueError creates a new [MTRRVCOperationalStateClusterOperationalCommandResponseParams].
-func NewMTRRVCOperationalStateClusterOperationalCommandResponseParamsWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRRVCOperationalStateClusterOperationalCommandResponseParams, error) {
+func NewMTRRVCOperationalStateClusterOperationalCommandResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRRVCOperationalStateClusterOperationalCommandResponseParams, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRRVCOperationalStateClusterOperationalCommandResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

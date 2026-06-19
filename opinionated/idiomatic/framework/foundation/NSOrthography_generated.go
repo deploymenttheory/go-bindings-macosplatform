@@ -32,9 +32,9 @@ func OrthographyFromID(id objc.ID) *Orthography {
 }
 
 // NewOrthographyWithDominantScriptLanguageMap creates a new [Orthography].
-func NewOrthographyWithDominantScriptLanguageMap(script string, map_ *raw.NSDictionary[*raw.NSString, objc.ID]) *Orthography {
+func NewOrthographyWithDominantScriptLanguageMap(script string, map_ purego.IDer) *Orthography {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrthography")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDominantScript:languageMap:"), foundation.NSStringStringWithUTF8String(script).Ptr(), map_.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDominantScript:languageMap:"), foundation.NSStringStringWithUTF8String(script).Ptr(), map_.ID())
 	return &Orthography{inner: raw.NSOrthographyFromID(_id)}
 }
 

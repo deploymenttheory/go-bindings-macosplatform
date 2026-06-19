@@ -6,7 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,9 +35,9 @@ func CaptionFormatConformerFromID(id objc.ID) *CaptionFormatConformer {
 // Creates a new object with format conversion settings.
 //
 // NewCaptionFormatConformerWithConversionSettings creates a new [CaptionFormatConformer].
-func NewCaptionFormatConformerWithConversionSettings(conversionSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptionFormatConformer {
+func NewCaptionFormatConformerWithConversionSettings(conversionSettings purego.IDer) *CaptionFormatConformer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionFormatConformer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConversionSettings:"), conversionSettings.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConversionSettings:"), conversionSettings.ID())
 	return &CaptionFormatConformer{inner: raw.AVCaptionFormatConformerFromID(_id)}
 }
 

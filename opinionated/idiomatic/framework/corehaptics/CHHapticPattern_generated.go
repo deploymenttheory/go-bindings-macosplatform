@@ -61,10 +61,10 @@ func NewHapticPatternWithEventsParameterCurvesError(events *foundation.NSArray[*
 // @method initWithDictionary:error @abstract Initialize a new CHHapticPattern using the passed-in NSDictionary. @param patternDict NSDictionary containing a pattern property list.
 //
 // NewHapticPatternWithDictionaryError creates a new [HapticPattern].
-func NewHapticPatternWithDictionaryError(patternDict *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*HapticPattern, error) {
+func NewHapticPatternWithDictionaryError(patternDict purego.IDer) (*HapticPattern, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticPattern")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), patternDict.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), patternDict.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

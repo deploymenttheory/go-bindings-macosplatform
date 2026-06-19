@@ -37,10 +37,10 @@ func MTRGroupsClusterRemoveGroupResponseParamsFromID(id objc.ID) *MTRGroupsClust
 // Initialize an MTRGroupsClusterRemoveGroupResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 //
 // NewMTRGroupsClusterRemoveGroupResponseParamsWithResponseValueError creates a new [MTRGroupsClusterRemoveGroupResponseParams].
-func NewMTRGroupsClusterRemoveGroupResponseParamsWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRGroupsClusterRemoveGroupResponseParams, error) {
+func NewMTRGroupsClusterRemoveGroupResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRGroupsClusterRemoveGroupResponseParams, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGroupsClusterRemoveGroupResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

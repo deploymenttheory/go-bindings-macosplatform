@@ -37,9 +37,9 @@ func URLAssetFromID(id objc.ID) *URLAsset {
 // Creates an asset that models the media resource at the specified URL.
 //
 // NewURLAssetWithURLOptions creates a new [URLAsset].
-func NewURLAssetWithURLOptions(uRL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *URLAsset {
+func NewURLAssetWithURLOptions(uRL string, options purego.IDer) *URLAsset {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVURLAsset")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), options.ID())
 	return &URLAsset{inner: raw.AVURLAssetFromID(_id)}
 }
 

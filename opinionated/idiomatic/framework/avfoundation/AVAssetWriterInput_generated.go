@@ -40,18 +40,18 @@ func AssetWriterInputFromID(id objc.ID) *AssetWriterInput {
 // Creates an input to append sample buffers of the specified type to the output file.
 //
 // NewAssetWriterInputWithMediaTypeOutputSettings creates a new [AssetWriterInput].
-func NewAssetWriterInputWithMediaTypeOutputSettings(mediaType *foundation.NSString, outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AssetWriterInput {
+func NewAssetWriterInputWithMediaTypeOutputSettings(mediaType *foundation.NSString, outputSettings purego.IDer) *AssetWriterInput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetWriterInput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMediaType:outputSettings:"), mediaType.Ptr(), outputSettings.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMediaType:outputSettings:"), mediaType.Ptr(), outputSettings.ID())
 	return &AssetWriterInput{inner: raw.AVAssetWriterInputFromID(_id)}
 }
 
 // Creates an input that appends sample buffers of the specified type and format hint to the output file.
 //
 // NewAssetWriterInputWithMediaTypeOutputSettingsSourceFormatHint creates a new [AssetWriterInput].
-func NewAssetWriterInputWithMediaTypeOutputSettingsSourceFormatHint(mediaType *foundation.NSString, outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], sourceFormatHint unsafe.Pointer) *AssetWriterInput {
+func NewAssetWriterInputWithMediaTypeOutputSettingsSourceFormatHint(mediaType *foundation.NSString, outputSettings purego.IDer, sourceFormatHint unsafe.Pointer) *AssetWriterInput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetWriterInput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMediaType:outputSettings:sourceFormatHint:"), mediaType.Ptr(), outputSettings.Ptr(), sourceFormatHint)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMediaType:outputSettings:sourceFormatHint:"), mediaType.Ptr(), outputSettings.ID(), sourceFormatHint)
 	return &AssetWriterInput{inner: raw.AVAssetWriterInputFromID(_id)}
 }
 

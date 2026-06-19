@@ -7,6 +7,7 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,9 +36,9 @@ func GroupPresetFromID(id objc.ID) *GroupPreset {
 // Creates a group preset with the designated engine, settings, and fade parameters.
 //
 // NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset creates a new [GroupPreset].
-func NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset(engine *raw.PHASEEngine, settings *foundation.NSDictionary[*foundation.NSString, *raw.PHASEGroupPresetSetting], timeToTarget float64, timeToReset float64) *GroupPreset {
+func NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset(engine *raw.PHASEEngine, settings purego.IDer, timeToTarget float64, timeToReset float64) *GroupPreset {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEGroupPreset")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:settings:timeToTarget:timeToReset:"), engine.Ptr(), settings.Ptr(), timeToTarget, timeToReset)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:settings:timeToTarget:timeToReset:"), engine.Ptr(), settings.ID(), timeToTarget, timeToReset)
 	return &GroupPreset{inner: raw.PHASEGroupPresetFromID(_id)}
 }
 

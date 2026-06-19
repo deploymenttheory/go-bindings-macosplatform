@@ -34,9 +34,9 @@ func ExtensionDevicePropertiesFromID(id objc.ID) *ExtensionDeviceProperties {
 // @method initWithDictionary: @abstract Initialize a device properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionDeviceProperties instance.
 //
 // NewExtensionDevicePropertiesWithDictionary creates a new [ExtensionDeviceProperties].
-func NewExtensionDevicePropertiesWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionDeviceProperties {
+func NewExtensionDevicePropertiesWithDictionary(propertiesDictionary purego.IDer) *ExtensionDeviceProperties {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionDeviceProperties")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), propertiesDictionary.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), propertiesDictionary.ID())
 	return &ExtensionDeviceProperties{inner: raw.CMIOExtensionDevicePropertiesFromID(_id)}
 }
 

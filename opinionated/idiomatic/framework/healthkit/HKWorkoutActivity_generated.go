@@ -34,9 +34,9 @@ func WorkoutActivityFromID(id objc.ID) *WorkoutActivity {
 // @method        initWithWorkoutConfiguration:startDate:endDate:metadata: @abstract      Initialize a new HKWorkoutActivity with the specified values. @param     workoutConfiguration    The configuration object describing the workout activity. @param     startDate               The point in time when the workout activity was started. @param     endDate                 The point in time when the workout activity was ended. @param     metadata                Metadata for the workout activity. (Optional)
 //
 // NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata creates a new [WorkoutActivity].
-func NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata(workoutConfiguration *raw.HKWorkoutConfiguration, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *WorkoutActivity {
+func NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata(workoutConfiguration *raw.HKWorkoutConfiguration, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata purego.IDer) *WorkoutActivity {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutActivity")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWorkoutConfiguration:startDate:endDate:metadata:"), workoutConfiguration.Ptr(), startDate.Ptr(), endDate.Ptr(), metadata.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWorkoutConfiguration:startDate:endDate:metadata:"), workoutConfiguration.Ptr(), startDate.Ptr(), endDate.Ptr(), metadata.ID())
 	return &WorkoutActivity{inner: raw.HKWorkoutActivityFromID(_id)}
 }
 

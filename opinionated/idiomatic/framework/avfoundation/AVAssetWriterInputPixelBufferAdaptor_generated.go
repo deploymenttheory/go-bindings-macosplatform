@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -39,9 +40,9 @@ func AssetWriterInputPixelBufferAdaptorFromID(id objc.ID) *AssetWriterInputPixel
 // Creates a new pixel buffer adaptor to receive pixel buffers for writing to the output file.
 //
 // NewAssetWriterInputPixelBufferAdaptorWithAssetWriterInputSourcePixelBufferAttributes creates a new [AssetWriterInputPixelBufferAdaptor].
-func NewAssetWriterInputPixelBufferAdaptorWithAssetWriterInputSourcePixelBufferAttributes(input *raw.AVAssetWriterInput, sourcePixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AssetWriterInputPixelBufferAdaptor {
+func NewAssetWriterInputPixelBufferAdaptorWithAssetWriterInputSourcePixelBufferAttributes(input *raw.AVAssetWriterInput, sourcePixelBufferAttributes purego.IDer) *AssetWriterInputPixelBufferAdaptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetWriterInputPixelBufferAdaptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:sourcePixelBufferAttributes:"), input.Ptr(), sourcePixelBufferAttributes.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:sourcePixelBufferAttributes:"), input.Ptr(), sourcePixelBufferAttributes.ID())
 	return &AssetWriterInputPixelBufferAdaptor{inner: raw.AVAssetWriterInputPixelBufferAdaptorFromID(_id)}
 }
 

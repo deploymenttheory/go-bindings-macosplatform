@@ -6,6 +6,7 @@ package foundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,9 +42,9 @@ func NewCachedURLResponseWithResponseData(response *raw.NSURLResponse, data *raw
 // @method initWithResponse:data:userInfo:storagePolicy: @abstract Initializes an NSCachedURLResponse with the given response, data, user-info dictionary, and storage policy. @param response a NSURLResponse object. @param data an NSData object representing the URL content corresponding to the given response. @param userInfo a dictionary user-specified information to be stored with the NSCachedURLResponse. @param storagePolicy an NSURLCacheStoragePolicy constant. @result an initialized NSCachedURLResponse.
 //
 // NewCachedURLResponseWithResponseDataUserInfoStoragePolicy creates a new [CachedURLResponse].
-func NewCachedURLResponseWithResponseDataUserInfoStoragePolicy(response *raw.NSURLResponse, data *raw.NSData, userInfo *raw.NSDictionary[objc.ID, objc.ID], storagePolicy NSURLCacheStoragePolicy) *CachedURLResponse {
+func NewCachedURLResponseWithResponseDataUserInfoStoragePolicy(response *raw.NSURLResponse, data *raw.NSData, userInfo purego.IDer, storagePolicy NSURLCacheStoragePolicy) *CachedURLResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCachedURLResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponse:data:userInfo:storagePolicy:"), response.Ptr(), data.Ptr(), userInfo.Ptr(), raw.NSURLCacheStoragePolicy(storagePolicy))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponse:data:userInfo:storagePolicy:"), response.Ptr(), data.Ptr(), userInfo.ID(), raw.NSURLCacheStoragePolicy(storagePolicy))
 	return &CachedURLResponse{inner: raw.NSCachedURLResponseFromID(_id)}
 }
 

@@ -37,9 +37,9 @@ func IKSaveOptionsFromID(id objc.ID) *IKSaveOptions {
 // Initializes a save options accessory pane for the provided image properties and uniform type identifier.
 //
 // NewIKSaveOptionsWithImagePropertiesImageUTType creates a new [IKSaveOptions].
-func NewIKSaveOptionsWithImagePropertiesImageUTType(imageProperties *foundation.NSDictionary[objc.ID, objc.ID], imageUTType string) *IKSaveOptions {
+func NewIKSaveOptionsWithImagePropertiesImageUTType(imageProperties purego.IDer, imageUTType string) *IKSaveOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IKSaveOptions")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageProperties:imageUTType:"), imageProperties.Ptr(), foundation.NSStringStringWithUTF8String(imageUTType).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageProperties:imageUTType:"), imageProperties.ID(), foundation.NSStringStringWithUTF8String(imageUTType).Ptr())
 	return &IKSaveOptions{inner: raw.IKSaveOptionsFromID(_id)}
 }
 

@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,9 +32,9 @@ func MergeConflictFromID(id objc.ID) *MergeConflict {
 }
 
 // NewMergeConflictWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapshot creates a new [MergeConflict].
-func NewMergeConflictWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapshot(srcObject *raw.NSManagedObject, newvers uint, oldvers uint, cachesnap *foundation.NSDictionary[*foundation.NSString, objc.ID], persnap *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MergeConflict {
+func NewMergeConflictWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapshot(srcObject *raw.NSManagedObject, newvers uint, oldvers uint, cachesnap purego.IDer, persnap purego.IDer) *MergeConflict {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMergeConflict")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:newVersion:oldVersion:cachedSnapshot:persistedSnapshot:"), srcObject.Ptr(), newvers, oldvers, cachesnap.Ptr(), persnap.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:newVersion:oldVersion:cachedSnapshot:persistedSnapshot:"), srcObject.Ptr(), newvers, oldvers, cachesnap.ID(), persnap.ID())
 	return &MergeConflict{inner: raw.NSMergeConflictFromID(_id)}
 }
 

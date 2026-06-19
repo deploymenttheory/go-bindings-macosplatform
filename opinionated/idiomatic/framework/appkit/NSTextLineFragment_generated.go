@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -55,9 +56,9 @@ func NewTextLineFragmentWithCoder(aDecoder *foundation.NSCoder) *TextLineFragmen
 // Creates a new line fragment using the string, attributes, and range you provide.
 //
 // NewTextLineFragmentWithStringAttributesRange creates a new [TextLineFragment].
-func NewTextLineFragmentWithStringAttributesRange(string_ string, attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], range_ foundation.NSRange) *TextLineFragment {
+func NewTextLineFragmentWithStringAttributesRange(string_ string, attributes purego.IDer, range_ foundation.NSRange) *TextLineFragment {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextLineFragment")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:attributes:range:"), foundation.NSStringStringWithUTF8String(string_).Ptr(), attributes.Ptr(), range_)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:attributes:range:"), foundation.NSStringStringWithUTF8String(string_).Ptr(), attributes.ID(), range_)
 	return &TextLineFragment{inner: raw.NSTextLineFragmentFromID(_id)}
 }
 

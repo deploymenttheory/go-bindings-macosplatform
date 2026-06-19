@@ -273,3 +273,42 @@ func KMIDIPropertyAssociatedEndpoint() objc.ID {
 func KMIDIDriverPropertyUsesSerial() objc.ID {
 	return purego.CFConstant(raw.KMIDIDriverPropertyUsesSerial())
 }
+
+// MIDINetworkBonjourServiceType returns the string constant MIDINetworkBonjourServiceType as an objc.ID, for use as a dictionary key or selector argument.
+func MIDINetworkBonjourServiceType() objc.ID {
+	return purego.CFConstant(raw.MIDINetworkBonjourServiceType())
+}
+
+// MIDINetworkNotificationContactsDidChange returns the string constant MIDINetworkNotificationContactsDidChange as an objc.ID, for use as a dictionary key or selector argument.
+func MIDINetworkNotificationContactsDidChange() objc.ID {
+	return purego.CFConstant(raw.MIDINetworkNotificationContactsDidChange())
+}
+
+// MIDINetworkNotificationSessionDidChange returns the string constant MIDINetworkNotificationSessionDidChange as an objc.ID, for use as a dictionary key or selector argument.
+func MIDINetworkNotificationSessionDidChange() objc.ID {
+	return purego.CFConstant(raw.MIDINetworkNotificationSessionDidChange())
+}
+
+// @constant      MIDIUMPEndpointObjectKey @brief         Value is a MIDIUMPEndpoint
+// MIDIUMPEndpointObjectKey returns the string constant MIDIUMPEndpointObjectKey as an objc.ID, for use as a dictionary key or selector argument.
+func MIDIUMPEndpointObjectKey() objc.ID {
+	return purego.CFConstant(raw.MIDIUMPEndpointObjectKey())
+}
+
+// @constant      MIDIUMPFunctionBlockObjectKey @brief         Value is a MIDIUMPFunctionBlock
+// MIDIUMPFunctionBlockObjectKey returns the string constant MIDIUMPFunctionBlockObjectKey as an objc.ID, for use as a dictionary key or selector argument.
+func MIDIUMPFunctionBlockObjectKey() objc.ID {
+	return purego.CFConstant(raw.MIDIUMPFunctionBlockObjectKey())
+}
+
+// @constant		MIDICIDeviceObjectKey @brief			Value is an MIDIUMPEndpoint.
+// MIDICIDeviceObjectKey returns the string constant MIDICIDeviceObjectKey as an objc.ID, for use as a dictionary key or selector argument.
+func MIDICIDeviceObjectKey() objc.ID {
+	return purego.CFConstant(raw.MIDICIDeviceObjectKey())
+}
+
+// @constant		MIDICIProfileObjectKey @brief			Value is an MIDIUMPCIProfile
+// MIDICIProfileObjectKey returns the string constant MIDICIProfileObjectKey as an objc.ID, for use as a dictionary key or selector argument.
+func MIDICIProfileObjectKey() objc.ID {
+	return purego.CFConstant(raw.MIDICIProfileObjectKey())
+}
